@@ -1,0 +1,295 @@
+{
+  "version": 1,
+  "scope": [
+    "lem-ip-tcc-residual-derivative-comparison",
+    "thm-ip-tcc-local-minimum-norm-identifiability",
+    "cex-ip-smooth-map-fails-tcc",
+    "ex-ip-local-tcc-neighborhood"
+  ],
+  "contracts": {
+    "lem-ip-tcc-residual-derivative-comparison": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-ip-tangential-cone-condition",
+          "source_section": "Definition",
+          "quote": "the **local tangential cone condition at $x$ on radius $\\delta$ with constant $\\eta$** holds if $0\\le\\eta<1$ and $$\\|F(x+h)-F(x)-F'(x)h\\|_Y\\le\\eta\\,\\|F(x+h)-F(x)\\|_Y\\qquad(\\|h\\|_X\\le\\delta).$$",
+          "uses": ["1.1", "2.1"]
+        },
+        {
+          "fact": "F2",
+          "source": "cor-inner-product-induces-a-norm",
+          "source_section": "Statement",
+          "quote": "\\|u+v\\|\\le\\|u\\|+\\|v\\|",
+          "uses": ["1.1", "2.1"]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "upper-derivative-residual-bound",
+          "claim": "The TCC remainder bound and triangle inequality give the upper comparison of derivative and data residuals.",
+          "step": "1.1",
+          "inputs": ["F1", "F2"]
+        },
+        {
+          "id": "lower-derivative-residual-bound",
+          "claim": "Writing the data residual as derivative image plus linearization error and rearranging gives the lower comparison bound.",
+          "step": "2.1",
+          "inputs": ["F1", "F2", "step 1.1"]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {"case": "empty", "status": "not_applicable", "reason": "The implication assumes a specified base point and an admissible increment in its ball."},
+        {"case": "zero", "status": "checked", "evidence": "At h=0 both residuals vanish, so steps 1.1 and 2.1 give equality."},
+        {"case": "one", "status": "checked", "evidence": "The endpoint eta=0 is allowed and the estimates in steps 1.1 and 2.1 remain valid; eta=1 is excluded by the statement."},
+        {"case": "degenerate", "status": "checked", "evidence": "If the data residual vanishes, step 1.1 forces the derivative image to vanish as well."},
+        {"case": "endpoints", "status": "checked", "evidence": "The TCC and conclusion both include increments with norm exactly delta, as stated and used in steps 1.1 and 2.1."},
+        {"case": "nonempty-choice", "status": "checked", "evidence": "The proof fixes an arbitrary admissible h and makes no selection; steps 1.1 and 2.1 use no choice axiom."},
+        {"case": "iff-forward", "status": "not_applicable", "reason": "The lemma is a pair of inequalities, not an equivalence."},
+        {"case": "iff-reverse", "status": "not_applicable", "reason": "The lemma is a pair of inequalities, not an equivalence."}
+      ]
+    },
+    "thm-ip-tcc-local-minimum-norm-identifiability": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "lem-ip-tcc-residual-derivative-comparison",
+          "source_section": "Statement",
+          "quote": "(1-\\eta)\\,\\|F(x+h)-F(x)\\|_Y\\le\\|F'(x)h\\|_Y\\le(1+\\eta)\\,\\|F(x+h)-F(x)\\|_Y.",
+          "uses": ["1.1"]
+        },
+        {
+          "fact": "F2",
+          "source": "def-kernel-and-image-of-a-linear-map",
+          "source_section": "Definition",
+          "quote": "\\ker T:=\\{v\\in V:T(v)=0_W\\}",
+          "uses": ["1.1"]
+        },
+        {
+          "fact": "F3",
+          "source": "def-orthogonality-and-orthogonal-complement",
+          "source_section": "Definition",
+          "quote": "S^\\perp:=\\{\\,v\\in V : \\langle v,s\\rangle=0 \\text{ for every } s\\in S\\,\\}",
+          "uses": ["2.1"]
+        },
+        {
+          "fact": "F4",
+          "source": "lem-pythagorean-theorem-and-finite-orthogonal-sums",
+          "source_section": "Statement",
+          "quote": "\\Bigl\\|\\sum_{j=1}^{n}x_j\\Bigr\\|^2=\\sum_{j=1}^{n}\\|x_j\\|^2",
+          "uses": ["2.1"]
+        },
+        {
+          "fact": "F5",
+          "source": "cor-inner-product-induces-a-norm",
+          "source_section": "Statement",
+          "quote": "with induced length $\\|v\\|=\\sqrt{\\langle v,v\\rangle}$. Then $\\|v\\|\\ge0$ with $\\|v\\|=0$ exactly for $v=0$",
+          "uses": ["2.1"]
+        },
+        {
+          "fact": "A1",
+          "source": "def-ip-x0-minimum-norm-solution",
+          "source_section": "Definition",
+          "quote": "A point $x^\\dagger\\in U$ is an **$x_0$-minimum-norm solution** of $F(x)=y$ on $U$ if $F(x^\\dagger)=y$ and $$\\|x^\\dagger-x_0\\|\\le\\|x-x_0\\|\\qquad\\text{for every }x\\in U\\text{ with }F(x)=y.$$",
+          "uses": ["2.1"]
+        },
+        {
+          "fact": "A2",
+          "source": "def-ip-tangential-cone-condition",
+          "source_section": "Definition",
+          "quote": "the **local tangential cone condition at $x$ on radius $\\delta$ with constant $\\eta$** holds if $0\\le\\eta<1$ and $$\\|F(x+h)-F(x)-F'(x)h\\|_Y\\le\\eta\\,\\|F(x+h)-F(x)\\|_Y\\qquad(\\|h\\|_X\\le\\delta).$$",
+          "uses": ["1.1"]
+        },
+        {
+          "fact": "A3",
+          "source": "def-orthogonality-and-orthogonal-complement",
+          "source_section": "Definition",
+          "quote": "S^\\perp:=\\{\\,v\\in V : \\langle v,s\\rangle=0 \\text{ for every } s\\in S\\,\\}",
+          "uses": ["2.1"]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "local-solution-difference-in-linearized-kernel",
+          "claim": "Any distinct exact solution in the TCC ball differs from x-dagger by a nonzero vector in the derivative kernel.",
+          "step": "1.1",
+          "inputs": ["A2", "F1", "F2"]
+        },
+        {
+          "id": "strictly-larger-local-solution-distance",
+          "claim": "Orthogonality and Pythagoras make every distinct local solution strictly farther from x0, proving uniqueness of the local minimum-norm solution.",
+          "step": "2.1",
+          "inputs": ["step 1.1", "A1", "A3", "F3", "F4", "F5"]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {"case": "empty", "status": "not_applicable", "reason": "The theorem assumes a supplied exact solution x-dagger, so an empty exact-solution set is excluded."},
+        {"case": "zero", "status": "checked", "evidence": "If x0=x-dagger, step 2.1 still gives a strict positive distance for every distinct local solution."},
+        {"case": "one", "status": "checked", "evidence": "At eta=0 the comparison in step 1.1 remains valid; the excluded endpoint eta=1 is not admitted by the TCC hypothesis."},
+        {"case": "degenerate", "status": "checked", "evidence": "If the derivative kernel is {0}, step 1.1 rules out any distinct local exact solution; otherwise step 2.1 gives its strictly larger distance."},
+        {"case": "endpoints", "status": "checked", "evidence": "The closed ball includes norm delta, and step 1.1 applies the TCC comparison to that boundary increment."},
+        {"case": "nonempty-choice", "status": "checked", "evidence": "Step 1.1 fixes an arbitrary local solution; it does not select a family of solutions or use choice."},
+        {"case": "iff-forward", "status": "not_applicable", "reason": "The theorem is a one-way local uniqueness implication, not an equivalence."},
+        {"case": "iff-reverse", "status": "not_applicable", "reason": "The theorem is a one-way local uniqueness implication, not an equivalence."}
+      ]
+    },
+    "cex-ip-smooth-map-fails-tcc": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-euclidean-inner-product",
+          "source_section": "Definition",
+          "quote": "The **Euclidean inner product** of $x, y \\in \\mathbb{R}^{n}$ is the real number",
+          "uses": ["1.1"]
+        },
+        {
+          "fact": "F2",
+          "source": "thm-cauchy-schwarz-and-the-euclidean-norm",
+          "source_section": "Statement",
+          "quote": "$\\lVert\\cdot\\rVert_2$ is a norm on $\\mathbb{R}^{n}$",
+          "uses": ["1.1"]
+        },
+        {
+          "fact": "F3",
+          "source": "thm-reals-cauchy-complete",
+          "source_section": "Statement",
+          "quote": "Every Cauchy sequence of real numbers ([[def-real-limit]]) converges to a real number.",
+          "uses": ["1.1"]
+        },
+        {
+          "fact": "F4",
+          "source": "def-real-and-complex-inner-product-space",
+          "source_section": "Definition",
+          "quote": "**real** or **complex inner-product space**",
+          "uses": ["1.1"]
+        },
+        {
+          "fact": "F4",
+          "source": "def-hilbert-space",
+          "source_section": "Definition",
+          "quote": "A **real Hilbert space** is a real inner-product space $H",
+          "uses": ["1.1"]
+        },
+        {
+          "fact": "F5",
+          "source": "def-frechet-derivative-between-banach-spaces",
+          "source_section": "Definition",
+          "quote": "Then $f$ is **Fréchet differentiable at $x$** when there is $T \\in \\mathcal B(X,Y)$ with",
+          "uses": ["1.1"]
+        },
+        {
+          "fact": "F6",
+          "source": "def-ip-tangential-cone-condition",
+          "source_section": "Definition",
+          "quote": "the **local tangential cone condition at $x$ on radius $\\delta$ with constant $\\eta$** holds if $0\\le\\eta<1$ and $$\\|F(x+h)-F(x)-F'(x)h\\|_Y\\le\\eta\\,\\|F(x+h)-F(x)\\|_Y\\qquad(\\|h\\|_X\\le\\delta).$$",
+          "uses": ["2.1"]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "smooth-witness-and-zero-derivative",
+          "claim": "The one-dimensional Euclidean space is a real Hilbert space and the polynomial witness is smooth with derivative zero at zero.",
+          "step": "1.1",
+          "inputs": ["F1", "F2", "F3", "F4", "F5"]
+        },
+        {
+          "id": "no-tcc-constant-below-one",
+          "claim": "A nonzero increment in every positive-radius ball forces eta to be at least one.",
+          "step": "2.1",
+          "inputs": ["F6"]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {"case": "empty", "status": "not_applicable", "reason": "The counterexample uses the nonempty real line as its domain."},
+        {"case": "zero", "status": "checked", "evidence": "At h=0 the TCC inequality is equality; step 2.1 uses a nonzero h to refute every radius."},
+        {"case": "one", "status": "checked", "evidence": "Step 2.1 shows eta must satisfy eta>=1, exactly the threshold excluded by the definition."},
+        {"case": "degenerate", "status": "checked", "evidence": "The derivative is zero at the basepoint by step 1.1, while every nonzero increment has positive residual h-squared."},
+        {"case": "endpoints", "status": "checked", "evidence": "Step 2.1 chooses h=delta/2, an interior point of the closed TCC ball for every delta>0."},
+        {"case": "nonempty-choice", "status": "checked", "evidence": "Step 2.1 constructs the witness increment explicitly as delta/2; no choice principle is used."},
+        {"case": "iff-forward", "status": "not_applicable", "reason": "The item refutes a universal implication and contains no equivalence."},
+        {"case": "iff-reverse", "status": "not_applicable", "reason": "The item refutes a universal implication and contains no equivalence."}
+      ]
+    },
+    "ex-ip-local-tcc-neighborhood": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-euclidean-inner-product",
+          "source_section": "Definition",
+          "quote": "The **Euclidean inner product** of $x, y \\in \\mathbb{R}^{n}$ is the real number",
+          "uses": ["2.1"]
+        },
+        {
+          "fact": "F2",
+          "source": "thm-cauchy-schwarz-and-the-euclidean-norm",
+          "source_section": "Statement",
+          "quote": "$\\lVert\\cdot\\rVert_2$ is a norm on $\\mathbb{R}^{n}$",
+          "uses": ["2.1"]
+        },
+        {
+          "fact": "F3",
+          "source": "thm-reals-cauchy-complete",
+          "source_section": "Statement",
+          "quote": "Every Cauchy sequence of real numbers ([[def-real-limit]]) converges to a real number.",
+          "uses": ["2.1"]
+        },
+        {
+          "fact": "F3",
+          "source": "def-real-and-complex-inner-product-space",
+          "source_section": "Definition",
+          "quote": "**real** or **complex inner-product space**",
+          "uses": ["2.1"]
+        },
+        {
+          "fact": "F3",
+          "source": "def-hilbert-space",
+          "source_section": "Definition",
+          "quote": "A **real Hilbert space** is a real inner-product space $H",
+          "uses": ["2.1"]
+        },
+        {
+          "fact": "F4",
+          "source": "def-frechet-derivative-between-banach-spaces",
+          "source_section": "Definition",
+          "quote": "Then $f$ is **Fréchet differentiable at $x$** when there is $T \\in \\mathcal B(X,Y)$ with",
+          "uses": ["1.1"]
+        },
+        {
+          "fact": "F5",
+          "source": "def-ip-tangential-cone-condition",
+          "source_section": "Definition",
+          "quote": "the **local tangential cone condition at $x$ on radius $\\delta$ with constant $\\eta$** holds if $0\\le\\eta<1$ and $$\\|F(x+h)-F(x)-F'(x)h\\|_Y\\le\\eta\\,\\|F(x+h)-F(x)\\|_Y\\qquad(\\|h\\|_X\\le\\delta).$$",
+          "uses": ["2.1"]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "derivative-at-the-basepoint",
+          "claim": "At x-dagger=1 the derivative of t+t-squared is multiplication by 3.",
+          "step": "1.1",
+          "inputs": ["F4"]
+        },
+        {
+          "id": "local-cone-ratio-bound",
+          "claim": "On the closed radius-one-quarter ball the linearization remainder is at most one-eleventh of the data difference, and hence at most eta times that difference.",
+          "step": "2.1",
+          "inputs": ["F1", "F2", "F3", "F5"]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {"case": "empty", "status": "not_applicable", "reason": "The example uses the nonempty real-line domain."},
+        {"case": "zero", "status": "checked", "evidence": "Step 2.1 checks h=0 separately, where both sides of the TCC inequality vanish."},
+        {"case": "one", "status": "checked", "evidence": "The chosen eta=1/10 lies strictly below one, as required by the definition and verified in step 2.1."},
+        {"case": "degenerate", "status": "checked", "evidence": "Step 1.1 gives the nonzero derivative 3 at the basepoint; the only vanishing data increment considered at the basepoint is h=0."},
+        {"case": "endpoints", "status": "checked", "evidence": "At |h|=1/4, step 2.1 bounds the ratio by 1/11<1/10, so the closed-ball boundary is included."},
+        {"case": "nonempty-choice", "status": "checked", "evidence": "Step 2.1 handles every real h in the interval directly and uses no choice principle."},
+        {"case": "iff-forward", "status": "not_applicable", "reason": "The example verifies a one-way inequality, not an equivalence."},
+        {"case": "iff-reverse", "status": "not_applicable", "reason": "The example verifies a one-way inequality, not an equivalence."}
+      ]
+    }
+  }
+}

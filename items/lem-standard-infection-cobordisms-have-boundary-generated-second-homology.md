@@ -13,6 +13,11 @@ proof_strategy: direct
 provenance:
   statement: literature-derived
   proof: ai-generated
+verification:
+  judge:
+    model: "gpt-6-luna"
+    verdict: pass
+    date: 2026-10-22
 sources:
   references:
     - title: Cha, Amenable L2-theoretic methods and knot concordance

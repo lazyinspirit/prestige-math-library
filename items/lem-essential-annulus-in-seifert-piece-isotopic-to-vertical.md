@@ -53,7 +53,7 @@ For an arbitrary smooth boundary-preimage annulus with the same disk-obstruction
 
 [F2] A proper two-sided horizontal annulus in an orientable Seifert piece admits a smooth refibering that makes that very annulus vertical; the underlying manifold is $T^2\times I$ or the orientable twisted Klein-bottle interval bundle ([[lem-horizontal-annuli-in-orientable-seifert-pieces-admit-vertical-refiberings]], Statement).
 
-[F3] [[def-incompressibility-seifert-fibration-and-jsj-system]] defines vertical and horizontal surfaces and exceptional fibers.
+[F3] Vertical surfaces are unions of regular fibers and horizontal surfaces are transverse to every fiber ([[lem-essential-surface-in-seifert-piece-is-vertical-or-horizontal]], Statement). Regular and exceptional fibers are defined in [[def-incompressibility-seifert-fibration-and-jsj-system]], Definition.
 
 [F4] A compact connected orientable Seifert piece with nonempty boundary is irreducible ([[lem-orientable-seifert-pieces-with-boundary-are-irreducible]], Statement).
 

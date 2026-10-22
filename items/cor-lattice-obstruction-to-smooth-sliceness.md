@@ -1,4 +1,9 @@
 ---
+verification:
+  judge:
+    model: "gpt-6-luna"
+    verdict: pass
+    date: 2026-10-22
 id: cor-lattice-obstruction-to-smooth-sliceness
 kind: corollary
 title: Failure of a full-rank standard lattice embedding obstructs smooth sliceness under the gluing hypotheses

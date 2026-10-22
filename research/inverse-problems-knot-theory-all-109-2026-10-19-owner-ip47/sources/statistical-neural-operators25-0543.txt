@@ -1,0 +1,7340 @@
+PDF PAGE 1
+Journal of Machine Learning Research 27 (2026) 1-82
+Submitted 3/25; Revised 1/26; Published 5/26
+Statistical Learning Theory for Neural Operators
+Niklas Reinhardt
+niklas.reinhardt@iwr.uni-heidelberg.de
+Interdisziplin¨ares Zentrum f¨ur wissenschaftliches Rechnen
+Universit¨at Heidelberg
+Im Neuenheimer Feld 205, 69120 Heidelberg, Germany
+Sven Wang
+sven.wang@epfl.ch
+Institute of Mathematics
+´Ecole Polytechnique F´ed´erale de Lausanne (EPFL)
+Station 8, CH-1015 Lausanne, Switzerland
+Jakob Zech
+jakob.zech@uni-heidelberg.de
+Interdisziplin¨ares Zentrum f¨ur wissenschaftliches Rechnen
+Universit¨at Heidelberg
+Im Neuenheimer Feld 205, 69120 Heidelberg, Germany
+Editor: Benjamin Guedj
+Abstract
+We present statistical convergence results for the learning of (possibly) non-linear mappings
+in infinite-dimensional spaces. Specifically, given a map G0 : X →Y between two separable
+Hilbert spaces, we analyze the problem of recovering G0 from n ∈N noisy input-output
+pairs (xi, yi)n
+i=1 with yi = G0(xi) + εi; here the xi ∈X represent randomly drawn “de-
+sign” points, and the εi are assumed to be either i.i.d. white noise processes or subgaussian
+random variables in Y. We provide general convergence results for least-squares-type em-
+pirical risk minimizers over compact regression classes G ⊆L∞(X, Y), in terms of their
+approximation properties and metric entropy bounds, which are derived using empirical
+process techniques. This generalizes classical results from finite-dimensional nonparamet-
+ric regression to an infinite-dimensional setting. As a concrete application, we study an
+encoder-decoder based neural operator architecture termed FrameNet. Assuming G0 to be
+holomorphic, we prove algebraic (in the sample size n) convergence rates in this setting,
+thereby overcoming the curse of dimensionality. To illustrate the wide applicability, as
+a prototypical example we discuss the learning of the non-linear solution operator to a
+parametric elliptic partial differential equation.
+Keywords:
+nonparametric estimation, neural networks, operator learning, minimax con-
+vergence rates, empirical risk minimization, partial differential equations
+1. Introduction
+Learning non-linear relationships of high- and infinite-dimensional data is a fundamental
+problem in modern statistics and machine learning. In recent years, “Operator Learning”
+has emerged as a powerful tool for analyzing and approximating mappings G0 between
+infinite-dimensional spaces (Li et al., 2020; Hesthaven and Ubbiali, 2018; Bhattacharya
+et al., 2021; Lu et al., 2021; Raonic et al., 2023; Anandkumar et al., 2019; Owhadi and
+Yoo, 2019; Nelsen and Stuart, 2024; Kovachki et al., 2024b). The primary motivation for
+©2026 Niklas Reinhardt, Sven Wang and Jakob Zech.
+License: CC-BY 4.0, see https://creativecommons.org/licenses/by/4.0/. Attribution requirements are provided
+at http://jmlr.org/papers/v27/25-0543.html.
+
+PDF PAGE 2
+Reinhardt, Wang and Zech
+considering truly infinite-dimensional data stems from applications in the natural sciences,
+where inputs and outputs of operators are elements in function spaces. For instance, G0
+could be the operator relating an initial condition x of a dynamical system to the state
+G0(x) of the system after a certain time, or a coefficient-to-solution map of a parametric
+partial differential equation (PDE).
+For finite-dimensional inputs and outputs, nonparametric regression is the standard
+framework for inferring general, non-linear relationships. There, one aims to reconstruct
+some “ground truth” G0 : Rd →Rm, d, m ∈N, from noisy data (xi, yi) ∈Rd × Rm,
+i = 1, . . . , n, generated via yi = G0(xi) + εi, where xi are called the “design points” and
+εi are typically independent and identically distributed (i.i.d.)
+noise variables.
+In the
+framework of empirical risk minimization (ERM), one chooses a suitable function class G
+of mappings from Rd to Rm and some loss function L : Rm × Rm →R measuring the
+discrepancy between predictions G(xi) and the data yi. Statistical estimation is achieved
+by minimizing
+ˆGn ∈arg min
+G∈G
+Jn(G),
+Jn(G) := 1
+n
+n
+X
+i=1
+L(G(xi), yi),
+(1.1)
+assuming that minimizers exist. In the finite-dimensional setting, statistically optimal con-
+vergence rates for such estimators were established for least-squares, maximum likelihood,
+and more generally “minimum contrast” estimators (van de Geer, 2000; Barron et al., 1999;
+Birg´e and Massart, 1993); see also Schmidt-Hieber (2020a) where such results are shown for
+ERMs over neural network classes. However, as is well-known, both—approximation rates
+(DeVore et al., 1989; DeVore and Lorentz, 1993) as well as statistical convergence rates
+(van de Geer, 2000; Gin´e and Nickl, 2016) over classical smoothness classes—deteriorate
+exponentially in terms of the dimension d. This renders computations practically infeasible
+for large d. This phenomenon is referred to as the curse of dimensionality, see also Section
+4.1 ahead.
+The framework for operator learning considered in this paper can be viewed as a direct
+extension of (1.1) to infinite dimensions. Given Hilbert spaces X and Y, and a mapping
+G0 : X →Y, the goal is to reconstruct G0 from “training data” (xi, yi) ∈X × Y with
+yi = G0(xi) + εi,
+where the regression class G is a suitable set of measurable mappings between X and Y
+and εi are centered noise variables, see Section 2 for details. This “supervised learning”
+setting underlies popular methods such as the PCA-Net (Hesthaven and Ubbiali, 2018;
+Bhattacharya et al., 2021).
+We also mention the framework of “physics-informed learning” which is common in
+operator learning (relevant e.g. for the DeepONet Lu et al. 2021), but which is not considered
+in the present manuscript. Here, information on the ground truth G0 is not known in the
+form of input-output pairs, but instead is implicitly described via
+N(x, G0(x)) = 0,
+where N : X × Y →Z for a third vector space Z. Typically, N(x, ·) encodes a family of
+differential operators parametrized by x which represent the underlying physical model. In
+2
+
+PDF PAGE 3
+Statistical Learning Theory for Neural Operators
+this case, the loss to minimize is a residual of the form Pn
+i=1 ∥N(xi, G(xi))∥2
+Z, thus leading to
+an “unsupervised learning problem”. The two cases, supervised and unsupervised learning,
+can also be combined. Various different (neural network based) architectures (i.e. regression
+classes G) have been proposed in recent years for the purpose of supervised or unsupervised
+operator learning.
+1.1 Outline and Contributions
+We provide statistical convergence results for operator learning which do not suffer from
+the curse of dimensionality, and which can be applied to prototypical problems in the PDE
+literature. We first develop our theory in an abstract setting for ERMs over classes of map-
+pings between separable Hilbert spaces, and later apply our theory to concrete examples.
+In doing so, we build upon and synthesize influential proof techniques from nonparametric
+statistics, in particular M-estimation (van de Geer, 2001; Nickl et al., 2020), approximation
+theory for parametric PDEs (Cohen et al., 2011; Cohen and DeVore, 2015; Herrmann et al.,
+2024), and empirical process theory (Talagrand, 2005; Dirksen, 2015).
+To illustrate the scope of our contributions, we start by stating a convergence result for
+the elliptic “Darcy flow” problem on the d-dimensional torus. This is a standard example
+in PDE driven forward and inverse problems (Babuˇska et al., 2010; Chkifa et al., 2015b;
+Cliffe et al., 2011; Schwab and Stuart, 2012; Stuart, 2010; Nickl, 2023; Nickl et al., 2020).
+We aim for an informal exposition here, with full details given in Section 4: Denote by Td
+the d-dimensional torus, fix a smooth source function f : Td →(0, ∞) and let amin > 0. For
+a sufficiently smooth and uniformly positive conductivity a : Td →R, denote by G0(a) the
+unique solution of the elliptic PDE
+−∇· (a∇u) = f on Td
+and
+Z
+Td u(x)dx = 0.
+(1.2)
+Now let γ be some probability distribution on L2(Td) such that
+supp(γ) ⊆
+
+a ∈Hs(Td) : inf
+x∈Td a(x) ≥amin, ∥a∥Hs(Td) ≤R
+	
+,
+(1.3)
+for some R > 0, s > 2d + 1. Suppose we observe noisy input-output pairs (ai, yi)n
+i=1 given
+by yi = G0(ai) + εi, where the εi are independent L2(Td)-Gaussian white noise processes
+(Section 2). The operator G0 can then be learned from this data as stated in the next
+theorem (for details see Section 4.2); it regards empirical risk minimizers ˆGn over the so-
+called FrameNet GFN, which corresponds to a neural network based class of measurable
+mappings X →Y (Section 3). Formally, ˆGn is defined as a minimizer of the least squares
+objective
+ˆGn ∈arg min
+G∈GFN
+1
+n
+n
+X
+i=1
+∥yi −G(ai)∥2
+L2(Td),
+(1.4)
+although a suitable modification is required to make this mathematically rigorous (Section
+2.1).
+Theorem 1 (Informal) Consider the operator G0 from the Darcy problem on the d-di-
+mensional torus Td (d ≥2), and suppose that γ satisfies (1.3) for some s > 3d/2 + 1 and
+amin > 0. Fix τ > 0 (arbitrarily small).
+3
+
+PDF PAGE 4
+Reinhardt, Wang and Zech
+Then there exists a constant C such that for each n ∈N there exists a FrameNet class
+GFN(n) and any empirical risk minimizer ˆGn in (1.4) satisfies1
+EG0
+Z
+∥ˆGn(a) −G0(a)∥2
+L2(Td)dγ(a)
+
+≤Cn−2s+2−3d
+2s+2−d +τ.
+(1.5)
+The most significant feature of the above statement is that, although G0 maps between
+infinite-dimensional spaces, the convergence rate in (1.5) is algebraic in n. Thus, it does
+not suffer from a curse of dimensionality with respect to the operator input a. The strong
+dependence on the spatial dimension d remains, but this reflects a curse of dimensionality
+that is generally unavoidable due to finite spatial smoothness, e.g., DeVore et al. (1989).
+Moreover, for infinitely smooth input data (s →∞), the convergence rate gets arbitrarily
+close to n−1. The classes GFN, whose existence is postulated by the theorem, can be precisely
+characterized in terms of the sparsity, depth, width and other network class parameters,
+which are chosen in terms of the statistical sample size n. We also note that the regularity
+assumption s > 3d/2 + 1 was made here for convenience and can be weakened to s > 3d/2,
+see Theorem 27 and Remark 28 below.
+To achieve Theorem 1 and several other related results, we build our theory in multiple
+steps. In Section 2, a general regression framework for mappings between Hilbert spaces is
+considered. Our first main result, Theorem 5, gives a non-asymptotic concentration upper
+bound on the empirical risk between ˆGn and G0, with respect to the design points ai. The
+upper bound is quantified in terms of the metric entropy of the “regression class” G and
+the best approximation of G0 from G. Theorem 6 strengthens this statement to L2(γ)-loss,
+for the case of random design points ai ∼γ. These results provide an operator learning
+analogue to classical convergence rates in nonparametric regression. The proofs rely on
+probabilistic generic chaining techniques (Talagrand, 2014; Dirksen, 2015) and “slicing” ar-
+guments as introduced in van de Geer (2001), which we generalize to the current setting. We
+also note our proofs contrast existing nonparametric statistical analyses of neural networks
+(Schmidt-Hieber, 2020a) for real-valued regression, where generic chaining techniques were
+not required for obtaining optimal rates (up to log-factors).
+In the second part of this work, we apply our statistical results to the specific deep
+operator network class GFN termed “FrameNet” and introduced in Herrmann et al. (2024).
+Together with their underlying decoder-encoder structure and feedforward neural network
+structure, FrameNet classes are defined in Section 3. These classes are known to satisfy
+good approximation properties for holomorphic operators, a property which is fulfilled for
+the Darcy problem (1.2) and more broadly a wide range of PDE based problems (Cohen
+et al., 2010, 2011; Cohen and DeVore, 2015; Jerez-Hanckes et al., 2017; Harbrecht et al.,
+2016; Henr´ıquez and Schwab, 2021; Hiptmair et al., 2018; Spence and Wunsch, 2023; Cohen
+et al., 2018). In Section 3, we identify such operator holomorphy as a key regularity property
+which allows to derive “dimension-free” statistical convergence rates. By extending approx-
+imation theoretic results from Herrmann et al. (2024), see Theorem 18 below, as well as
+establishing metric entropy bounds for GFN based on Schmidt-Hieber (2020a), we obtain al-
+gebraic convergence results for ERMs over FrameNet classes, for reconstructing holomorphic
+operators G0. Specifically, Theorem 23 bounds the L2-risk E[∥ˆGn −G0∥2
+L2(γ)] ≲n−κ/(κ+1),
+1. Here and in the following EG0 denotes the expectation w.r.t. the random data (xi, yi)i generated by the
+ground truth G0. Similarly, we write PG0 for corresponding probabilities.
+4
+
+PDF PAGE 5
+Statistical Learning Theory for Neural Operators
+General Theory
+Holomorphic Operators
+Applications
+Theorem 6
+L2-bound
+Theorem 5
+Empirical Bound
+Lemma 31
+Chaining
+Lemma 30
+Basic Ineq.
+[VDG00],
+[Dir15]
+Theorem 23
+Sample Complexity
+Theorem 18
+Approximation
+[CDS11],
+[HSZ24]
+Lemma 20
+Entropy
+[SH20]
+Theorems 1, 27
+Darcy Flow
+[HSZ24]
+Theorem 26
+Finite-Dim
+Figure 1: Dependency diagram of the main theorems, lemmas and references in this work.
+where κ > 0 denotes the approximation rate established in Herrmann et al. (2024). We
+treat the case of ReLU and RePU (Li, 2020) activation functions for both sparse and fully-
+connected architectures.
+In Section 4, we illustrate the usefulness of our general theory in two concrete settings.
+First, we show how our theory recovers well-known minimax-optimal convergence rates for
+real-valued regression (i.e., Y = R) on d-dimensional domains. This proves that our abstract
+results from Section 2 cannot be improved in general, although matching lower bounds are
+yet unknown in the infinite-dimensional setting. Thereafter, Section 4.2 demonstrates how
+our theory can be used to yield the first algebraic convergence rates for a non-linear operator
+arising from PDEs—see in particular Theorem 27 and Remark 28, which underlie Theorem
+1. Figure 1 summarizes the dependencies between the main theorems, lemmas and key
+references underlying the results in this work.
+1.2 Existing Results
+The approximation of mappings between infinite-dimensional spaces has been studied ex-
+tensively in the context of Uncertainty Quantification, where G0 corresponds to the solution
+operator of a parameter dependent PDE. Various methodologies have been proposed and
+analyzed for this task, including for example compressed sensing (Doostan and Owhadi,
+2011; Rauhut and Schwab, 2017), sparse-grid interpolation (Chkifa et al., 2013; Nobile
+et al., 2008), least-squares (Cohen et al., 2017; Chkifa et al., 2015a), and reduced basis
+methods (Quarteroni et al., 2016; Hesthaven et al., 2016). Recently, neural network ap-
+proaches have become increasingly popular for this task as they provide a highly expressive
+and fast to evaluate parametrization of high-dimensional functions. These attributes make
+them particularly useful for learning surrogates in scientific applications (Hesthaven and
+Ubbiali, 2018; Lu et al., 2021; Li et al., 2020; Bhattacharya et al., 2021; Anandkumar et al.,
+5
+
+PDF PAGE 6
+Reinhardt, Wang and Zech
+2019; O’Leary-Roseberry et al., 2022; O’Leary-Roseberry et al., 2024; Becker et al., 2024;
+Cicci et al., 2022; Dal Santo et al., 2020; Kr¨opfl et al., 2022).
+Approximation Theory for Neural Operators. First theoretical results on operator learning
+focused on the approximation error, establishing the existence of neural network archi-
+tectures capable of approximating G0 up to a certain accuracy, with the error decreasing
+algebraic in terms of the number of learnable network parameters. For example, the works
+Schwab and Zech (2019); Kutyniok et al. (2022); Schwab and Zech (2023) showed that neu-
+ral networks have sufficient expressivity to efficiently approximate certain (holomorphic)
+mappings G0. Such results are based on the observation that the smoothness of G0 im-
+plies the image of this operator to have moderate n-widths, i.e. to be well approximated
+in moderate-dimensional linear subspaces (Dung et al., 2023; Cohen et al., 2010, 2011; Co-
+hen and DeVore, 2015; Hoang and Schwab, 2014; Bachmayr et al., 2017). Specifically for
+DeepONets (Lu et al., 2021), such a result was obtained in Lanthaler et al. (2022), and for
+the presently considered architecture in Herrmann et al. (2024). Moreover, Schwab et al.
+(2025) provided a statement of this type for Lipschitz continuous operators by exploiting
+so-called superexpressivity of certain classes of neural networks.
+Statistical Theory for Neural Operators. The analysis of sample complexity has received
+less attention so far. In Lanthaler (2023), the authors analyzed in particular the error of
+PCA encoders and decoders used for PCA-Net, but did not analyze the statistical error for
+the full operator. The work de Hoop et al. (2023) provides such a result for the estimation
+of linear and diagonalizable mappings from noisy data; for lower bounds see for example
+Chagny et al. (2025).
+For other work on “functional regression”, see, e.g., Greven and
+Scheipl (2017); Morris and Carroll (2006).
+An analysis for nonparametric regression of
+nonlinear mappings from noisy data in infinite dimensions was provided in Liu et al. (2024).
+There, the authors considered Lipschitz continuous mappings G0, and proved consistency
+in the large data limit. Additionally they give convergence results, which, however, are
+subject to the curse of dimensionality. This is due to their very general assumption on the
+smoothness of G0: It was shown very early (Mhaskar and Hahm, 1997), that the nonlinear
+n-width of Lipschitz operators in L2 decays only logarithmically, i.e. the number of (exact)
+data points needed for the reconstruction of the functional is exponential in the desired
+accuracy. Recently, Kovachki et al. (2024a) generalized these results and showed a generic
+curse of dimensionality for the reconstruction of Lipschitz operators and Ck-operators from
+exact data. Moreover, the authors show that under the existence of some intrinsic low-
+dimensionality allowing for fast approximation, also the dependence on the data complexity
+improves.
+Concerning the case of noisy and holomorphic operators, we also refer to the recent
+works Adcock et al. (2025, 2024) who consider a setup similar to ours, and, unlike us, treat
+the more general case of Banach space valued functions. The authors derive upper bounds
+and concentration inequalities for the L2-error, and lower bounds for the approximation
+error, in terms of a neural network based architecture. Key differences to our work include
+in particular that the results of Adcock et al. (2025, 2024) do not address convergence in
+the noise-polluted large data limit n →∞, nor do they directly yield convergence rates for
+concrete PDE models; the latter typically requires to exploit PDE regularity theory to show
+holomorphy in spaces of higher spatial regularity, leading to a multilevel decomposition of
+the operator. Moreover, the generalization results in these works either focus on linearly
+6
+
+PDF PAGE 7
+Statistical Learning Theory for Neural Operators
+parametrized models (Adcock et al., 2025, 2024), or are restricted to specific subsets of min-
+imizers (Adcock et al., 2024, Theorem 3.2). Our analysis aims to fill this gap by providing
+generalization bounds for arbitrary minimizers and nonlinear parameter dependence, as is
+standard for neural networks.
+M-Estimation in Nonparametric Regression. Convergence theory of M-estimators and (pe-
+nalized) empirical risk minimizers was investigated around the 2000s in foundational works
+(van de Geer, 2000; van de Geer, 2001; Birg´e and Massart, 1993; Barron et al., 1999). These
+works build on concentration inequalities for empirical processes using “chaining” techniques
+which date back to seminal contributions, see Talagrand (2014); Gin´e and Nickl (2016)
+and references therein.
+These techniques are known to produce minimax-optimal rates
+n−2s/(2s+d) for ERMs over s-smooth Sobolev, H¨older and more generally, Besov smoothness
+classes of real-valued functions on bounded d-dimensional Euclidean domains. The analysis
+of neural-network based ERMs was initiated by the work Schmidt-Hieber (2020a), which
+considered regression over (compositional) H¨older classes on finite-dimensional domains,
+and was followed by several other works such as Suzuki (2019). We also mention Nickl
+et al. (2020); Nickl and Wang (2024); Agapiou and Wang (2024) which analyze ERMs in
+non-linear elliptic PDE-based inverse problems such as the “Darcy” flow problem studied
+here.
+The present Hilbert space setting falls outside the scope of such classical theory
+for scalar-valued functions. However, the derivation of our concentration inequalities for
+ERMs does build upon the same probabilistic empirical process machinery laid out above
+(Talagrand, 2014; Dirksen, 2015).
+1.3 Notation
+We write N = {1, 2 . . . } and N0 = {0, 1, 2, . . . }. We write an ≲bn, an ≳bn for real sequences
+(an)n∈N, (bn)n∈N if an is respectively upper or lower bounded by a positive multiplicative
+constant which does not depend on n (but may well depend on other ambient parameters
+which we make explicit whenever confusion may arise). By an ≃bn, we mean that both
+an ≲bn and an ≳bn.
+For a pseudometric space (T, d) and any δ > 0, let N(T, d, δ) be the δ-covering number
+of T, i.e. the minimal number of open δ-balls in d needed to cover T. We denote the metric
+entropy of T by
+H(T, d, δ) = log N(T, d, δ).
+Given a Borel probability measure γ on X and a subset D ⊆X, we define the norms
+∥G∥2
+L2(X,γ;Y) :=
+Z
+X
+∥G(x)∥2
+Y dγ(x),
+∥G∥∞,D := sup
+x∈D
+∥G(x)∥Y
+and also write ∥· ∥L2(γ) and ∥· ∥∞if the underlying spaces are clear from context. The
+space of real-valued, square summable sequences indexed over N is denoted by ℓ2(N). The
+complexification of a real Hilbert space H is denoted by HC (Kirwan, 1997; Mu˜noz et al.,
+1999).
+7
+
+PDF PAGE 8
+Reinhardt, Wang and Zech
+2. Regression in Hilbert Spaces
+In the following we formalize a regression framework for mappings between Hilbert spaces.
+2.1 Problem Formulation
+Throughout, let X and Y denote two separable (real) Hilbert spaces with respective inner
+products ⟨·, ·⟩X, ⟨·, ·⟩Y and suppose
+G0 : X →Y
+is some non-linear (Borel measurable) operator which we aim to reconstruct. The observed
+data are assumed to be noisy “input-output pairs” (xi, yi)n
+i=1 ∈(X × Y)n given by
+xi
+iid
+∼γ,
+i = 1, . . . , n,
+(2.1a)
+and
+yi = G0(xi) + σεi,
+i = 1, . . . , n,
+(2.1b)
+where σ > 0 denotes a scalar “noise level”, εi are independent random noise variables and
+γ is a probability distribution on X. The xi ∈X are also referred to as the “design points”,
+and we write x = (x1, ..., xn) ∈Xn. We will both derive results which are conditional on the
+design x, as well as results for random design. To avoid confusions, we will use the notations
+Px
+G0, Ex
+G0 to denote probabilities and expectations under the distribution (2.1) with fixed
+design x, and we use PG0, EG0 to denote probabilities and expectations with random design
+xi ∼γ.
+Remark 2 In practice, we will often deal with scenarios in which G0 is only defined on
+some measurable subset V ⊂X, see e.g. the solution operator for the Darcy flow in Section
+4.2.1. In this case, our results from Section 2.2 can be applied to any measurable extension
+of G0 onto X. To apply the sample complexity results from Section 3.4 the extension addi-
+tionally needs to be holomorphic in an open set containing V, see Assumption 2 and Section
+3 for the precise setup and statement.
+White Noise Model. We shall treat two different assumptions on the noise, the first being
+that the (εi)n
+i=1 in (2.1) are independent copies of a Y-white noise process. Recall that
+for any given separable Hilbert space Y, the Y-Gaussian white noise process is defined as
+the mean-zero Gaussian process WY = (WY(y) : y ∈Y) indexed by Y with “iso-normal”
+covariance structure
+WY(y) ∼N(0, ∥y∥2
+Y),
+Cov(WY(y), WY(y′)) = ⟨y, y′⟩Y,
+for all y, y′ ∈Y.
+It is well-known that WY does not take values in Y unless dim(Y) < ∞, but is interpreted as
+a stochastic process indexed by Y, see Gin´e and Nickl (2016, p.19) for details. Nevertheless,
+we slightly abuse notation and use the common notation ⟨WY, y⟩Y := WY(y).
+Under this assumption, conditionally on xi we interpret each observation yi in (2.1) as
+a realisation of a Gaussian process (yi(f) : f ∈Y) with
+E[yi(f)] = ⟨G0(xi), f⟩Y,
+Cov(yi(f), yi(f′)) = ⟨f, f′⟩Y,
+and we shall again use the notation ⟨yi, f⟩Y to denote yi(f) (see also Tsybakov 2009; Gin´e
+and Nickl 2016; Nickl et al. 2020 where this common viewpoint is explained in detail).
+8
+
+PDF PAGE 9
+Statistical Learning Theory for Neural Operators
+Example 1 Let O ⊆Rd be a bounded, smooth domain. Then, for Y = L2(O), one can show
+that draws of an L2(O)-white noise process a.s. take values in negative Sobolev spaces H−κ
+for κ > d/2 (Nickl, 2020; Castillo and Nickl, 2013).
+Sub-Gaussian Noise Model. The second setting we consider is that of sub-Gaussian noise.
+We say that a random vector X taking values in Y is sub-Gaussian with parameter η > 0
+if E[X] = 0 and
+P(∥X∥Y ≥t) ≤2 exp
+
+−t2
+2η2
+
+,
+for all t ≥0.
+In the sub-Gaussian noise model, we assume that (εi)n
+i=1 in (2.1) are independent sub-
+Gaussian variables in Y with parameter η = 1.
+2.1.1 Empirical Risk Minimization
+Let G be a class of (measurable) operators G ∋G : X →Y. We would like to study classical
+empirical risk minimizers of least-squares type over G. Specifically, given regression data
+(xi, yi)n
+i=1, consider the empirical risk
+˜In(G) := 1
+n
+n
+X
+i=1
+yi −G(xi)
+2
+Y,
+˜In : G →[0, ∞].
+(2.2)
+However, this functional takes finite values almost surely only in the sub-Gaussian noise
+model. In the white noise model, since yi /∈Y, it holds ˜In(G) = ∞almost surely—we
+thus consider a modified definition of least-squares type estimators which is common in the
+literature on regression with white noise (Nickl et al., 2020; Gin´e and Nickl, 2016). Instead
+of (2.2), we consider
+In(G) = 1
+n
+n
+X
+i=1
+−2⟨G(xi), yi⟩Y +
+G(xi)
+2
+Y,
+In : G →R,
+(2.3)
+which takes finite values a.s. also in the white noise model. Note that the latter objective
+function can be obtained from (2.2) by formally subtracting the term n−1 Pn
+i=1 ∥yi∥2
+Y which
+exhibits no dependency on G. Therefore in the sub-Gaussian noise model the minimization
+of ˜In and In are equivalent which is why we consider (2.3) in the following. We will denote
+minimizers of In(G) by ˆGn.
+Our assumptions on the class G in the ensuing theorems will ensure that a measurable
+choice of minimizers ˆGn of In exists, see Theorem 5 (i). However, the ERM ˆGn will in
+general not be unique, since we do not impose convexity on G. The reason is that our main
+application, the NN-based FrameNet class GFN, is non-convex.
+Remark 3 (Connection to maximum likelihood) In the white noise model, it follows
+from the Cameron-Martin theorem (see for example Gin´e and Nickl 2016, Theorem 2.6.13)
+that −nIn(G)/(2σ2) constitutes the negative log-likelihood of the (dominated) statistical
+model arising from (2.1) with white noise. In this case ˆGn can also be interpreted as a
+(nonparametric) maximum likelihood estimator over the class G.
+9
+
+PDF PAGE 10
+Reinhardt, Wang and Zech
+Remark 4 Consider nonparametric regression of an unknown function f : O →R for
+some bounded, smooth domain O. Here, it is well-known that the observation white noise
+error model, where data is given by Y = f + σW (with W a L2(O)-white noise process)
+is asymptotically equivalent in a Le Cam-sense to an observation model with m “equally
+spaced” (random or deterministic) observation points throughout O,
+Yi = f(zi) + ηi,
+i = 1, ..., m,
+with i.i.d. N(0, 1) errors, where the equivalence holds for σ ≍1/√m, see Reiß (2008).
+Therefore, our observation model (2.1) may be viewed as a simplified proxy.
+2.2 General Convergence Results
+Let G be a class of operators mapping from X to Y. For any fixed x = (x1, ..., xn) ∈Xn and
+(Borel) measurable map G : X →Y, we denote the empirical seminorm induced by x with
+∥G∥2
+n = 1
+n
+n
+X
+i=1
+∥G(xi)∥2
+Y.
+(2.4)
+For any element G∗∈G and δ > 0, define the localized classes
+G∗
+n(δ) =
+
+G ∈G : ∥G −G∗∥n ≤δ
+	
+,
+and denote its metric entropy integral by
+J(δ) = J(G∗
+n(δ), ∥· ∥n) :=
+Z δ
+0
+H
+1
+2 (G∗
+n(δ), ∥· ∥n, ρ)dρ.
+(2.5)
+The following result provides a general convergence theorem for empirical risk minimizers
+with high probability, which relates the empirical risk of ERMs over some operator class G
+to the metric entropy of G. It can be viewed as a generalisation of classical convergence
+results for sieved M-estimators (van de Geer, 2000) to Hilbert space valued functions. The
+proof can be found in Appendix B.1.
+Theorem 5 For some measurable G0 : X →Y, let the data (xi, yi)n
+i=1 arise from (2.1)
+either with white noise or with sub-Gaussian noise. Let G be a class of measurable maps
+from X →Y, let G∗∈G, and let x = (x1, ..., xn) ∈Xn be such that the following holds.
+(a) There exists a constant C > 0 s.t. G is compact with respect to some norm ∥· ∥
+satisfying ∥· ∥n ≤C∥· ∥.
+(b) There exists Ψn : (0, ∞) →[0, ∞) s.t. Ψn(δ) ≥J(G∗
+n(δ), ∥· ∥n) for all δ > 0 and
+δ 7→Ψn(δ)
+δ2
+is non-increasing for δ ∈(0, ∞).
+Then the following holds.
+(i) Minimizers ˆGn of the empirical risk (2.3) exist, and there is a measurable selection
+(with respect to the data (xi, yi)n
+i=1) of such a minimizer.
+10
+
+PDF PAGE 11
+Statistical Learning Theory for Neural Operators
+(ii) Fix any measurable selection ˆGn from part (i). Then there exists a universal constant
+CCh > 0 (see Lemma 32) such that for any G∗∈G as above, any positive sequence
+(δn)n∈N satisfying
+√nδ2
+n ≥32CchσΨn(δn),
+(2.6)
+and for any
+Rn ≥max
+n
+δn, 4Cchσ
+√n ,
+√
+2∥G∗−G0∥n
+o
+,
+it holds that
+Px
+G0
+ ∥ˆGn −G0∥n ≥Rn
+
+≤2 exp
+
+−
+nR2
+n
+16C2
+chσ2
+
+.
+(2.7)
+The lower bound for Rn in (ii), which determines the convergence rate of ∥ˆGn −G0∥n, is
+typically optimized by balancing the “stochastic term” δn and the empirical approximation
+error ∥G∗−G0∥n, see, e.g., Theorem 23 below. Note that Theorem 5 gives a convergence
+rate with respect to the empirical seminorm ∥· ∥n. Therefore, when the design points x
+are random, the norm itself is also random, and the assumptions (a) and (b) in Theorem
+5 have to be understood conditional on possible realizations of x. Theorem 6 below will
+give a corresponding concentration inequality on the ∥· ∥L2(γ)-error under the assumption
+of i.i.d. random design xi ∼γ. In this setting, a sufficient condition for (b) to be satisfied
+almost surely is to take Ψn as an upper bound for the entropy integral with uniform entropy
+H(G, ∥· ∥∞,supp(γ), δ).
+The compactness of G in part (a) is needed for the existence of the ERM ˆGn in (2.3).
+The existence result for ˆGn (see for example Nickl 2007, Proposition 5) requires compact
+metric spaces, which is why we assume compactness w.r.t. a norm ∥· ∥stronger than the
+empirical seminorm ∥· ∥n.
+In particular, compactness implies separability of G with respect to ∥·∥n, which in turn
+is needed to guarantee the measurability of certain suprema of empirical processes ranging
+over G. See the proof of Theorem 5 below, in particular (B.4) and (B.6). The technical
+growth restriction in (b) on the function Ψn(δ) (i.e., our upper bound for the entropy
+integral) is required for the “peeling device” in (B.4). In particular, this assumption is
+satisfied in case that H(G, ∥· ∥∞, δ) ≲δ−α for any 0 < α < 2, see Corollary 8 below for
+details.
+Theorem 5 provides a concentration inequality for the empirical seminorm ∥ˆGn −G0∥n.
+Under the assumption of randomly chosen design points xi ∼γ, xi ∈X, this statement can
+be extended to a convergence result for the L2(γ)-norm. To this end, we also need slightly
+stronger technical assumptions on the class G with respect to the ∥· ∥∞,supp(γ)-norm.
+Assumption 1 For some probability measure γ on X, assume x = (x1, . . . , xn) arise
+from i.i.d. draws xi ∼γ.
+Let G be a class of measurable maps X →Y, G∗∈G and
+∥G0∥∞,supp(γ) < ∞. Suppose
+(a) G is compact with respect to ∥· ∥∞,supp(γ),
+11
+
+PDF PAGE 12
+Reinhardt, Wang and Zech
+(b) There exists a (deterministic) upper bound Ψn : (0, ∞) →[0, ∞) such that for a.e. x ∼
+γn, it holds Ψn(δ) ≥J(G∗
+n(δ), ∥· ∥n) for all δ > 0 and
+δ 7→Ψn(δ)
+δ2
+is non-increasing for δ ∈(0, ∞).
+(2.8)
+Note that Assumption 1 is strictly stronger than assumptions (a) and (b) in Theorem 5,
+since ∥·∥∞,supp(γ) is stronger than ∥·∥n and Ψn in (2.8) does not depend on x. In particular,
+Assumption 1 implies the existence of a measurable ERM ˆGn by Theorem 5 (i).
+The uniform ∥· ∥∞,supp(γ) assumptions are used to control the concentration of the
+empirical seminorm ∥· ∥n around the “population norm”∥· ∥L2(γ), see Lemma 33 and also
+Lemma 34 below. Let us write F = {G −G0 : G ∈G}. As an immediate consequence of
+Assumption 1, there exists some MF < ∞such that
+sup
+F∈F
+∥F∥∞,supp(γ) = sup
+G∈G
+∥G −G0∥∞,supp(γ) ≤MF .
+(2.9)
+We can now state our main concentration inequality for the convergence of ∥ˆGn −G0∥L2(γ),
+which in particular provides a bound for the mean squared error EG0[∥ˆGn −G0∥2
+L2(γ)] as
+well. The proof of Theorem 6 can be found in Appendix B.2.
+Theorem 6 (L2(γ)-Concentration under Random Design) Consider the nonparame-
+tric regression model (2.1) either with white noise or with sub-Gaussian noise and any mea-
+surable empirical risk minimizer ˆGn from (2.3). Suppose that G0, G, G∗, γ and Ψn(·) are
+such that Assumption 1 holds. Then there exists some universal constant C > 0 such that
+for any positive sequences (δn)n∈N and (˜δn)n∈N with
+√nδ2
+n ≥CσΨn(δn)
+and
+n˜δ2
+n ≥CM2
+F H(G, ∥· ∥∞,supp(γ), ˜δn),
+(2.10)
+all G∗∈G as above and all
+Rn ≥C max
+
+δn, ˜δn, ∥G∗−G0∥∞,supp(γ), σ + MF
+√n
+
+(2.11)
+we have,
+PG0
+
+∥ˆGn −G0∥L2(γ) ≥Rn
+
+≤2 exp
+
+−
+nR2
+n
+C2(σ2 + M2
+F )
+
+.
+(2.12)
+To keep the presentation simple, we have left the numerical constants in the preceding
+theorem implicit.
+However, they can be made explicit, see the proof for details.
+The
+following bound on the mean squared error is obtained upon integration of the concentration
+inequalities from Theorem 5 and Lemma 33.
+Note that directly integrating the L2(γ)-
+concentration, cf. (2.12), gives an approximation term in the uniform norm ∥· ∥∞,supp(γ)
+(following 2.11), which has weaker convergence properties in general, see Theorem 18. For
+the proof of Corollary 7, see Appendix B.3.
+12
+
+PDF PAGE 13
+Statistical Learning Theory for Neural Operators
+Corollary 7 (L2(γ)-Mean Squared Error) Consider the setting of Theorem 6 and as-
+sume in addition that Assumption 1 is fulfilled for all G∗∈G (with the same Ψn). Then,
+for some universal constant C > 0 and all n ∈N,
+EG0
+h
+∥ˆGn −G0∥2
+L2(γ)
+i
+≤C
+
+δ2
+n + ˜δ2
+n + σ2 + M2
+F
+n
+
++ 8 inf
+G∗∈G∥G∗−G0∥2
+L2(γ).
+(2.13)
+To demonstrate the typical use-cases of our abstract results, we summarize in the fol-
+lowing corollary the rates which can be obtained under algebraic approximation properties
+of G and two concrete scalings of the metric entropy of G. These correspond to the typical
+entropy bounds satisfied by (i) some fixed n-independent, infinite-dimensional regression
+class, and (ii) an N-dimensional approximation class, where N is chosen in terms of n. In
+the following corollary, ≲refers to an inequality involving a constant independent of n, N
+and δ. For a proof of Corollary 8, see Appendix B.4.
+Corollary 8 Consider the setting of Corollary 7. Let G = G(N), N ∈N, be a sequence
+of regression classes2 such that infG∗∈G(N)∥G∗−G0∥2
+L2(γ) ≲N−β for some β > 0 and all
+N ∈N. Denote the entropy by H(N, δ) := H(G(N), ∥· ∥∞,supp(γ), δ).
+(i) If H(N, δ) ≲δ−α for some 0 < α < 2, then for all n ∈N and all N = N(n) =
+⌈n
+2
+(2+α)β ⌉, it holds
+EG0
+h
+∥ˆGn −G0∥2
+L2(γ)
+i
+≲n−
+2
+2+α .
+(ii) If H(N, δ) ≲N log(δ−1), then for all n ∈N, n ≥2 and all N(n) = ⌈n
+1
+β+1 ⌉, it holds
+EG0
+h
+∥ˆGn −G0∥2
+L2(γ)
+i
+≲log(n) n−
+β
+β+1 .
+Remark 9 (Effective smoothness) In classical nonparametric regression over s-smooth
+function classes on [0, 1]d, the entropy assumption H(N, δ) ≲δ−α from part (i) is fulfilled
+for α = d/s, which yields the minimax-optimal rate n−
+2s
+2s+d , see Section 4.1 for details.
+Since the rate only depends on α (or equivalently α−1), we can think of α−1 = s/d as the
+“effective smoothness” of the statistical model at hand.
+The sub-Gaussian noise model poses a more restrictive regularity assumption on εi than
+the assumption of white noise. It is possible to get L2(γ)-convergence for sub-Gaussian
+noise in the case the entropy integral J(δ) in (2.5) is not finite, such that Assumption 1 (b)
+does not hold. The details are shown in the next theorem, its proof is deferred to Appendix
+B.5.
+Theorem 10 Consider the nonparametric regression model (2.1) with sub-Gaussian noise
+and the empirical risk from (2.3). Let Assumption 1 (a) hold, that means suppose that
+2. We may think of N as the number of parameters of G, e.g. the size of the FrameNet class GFN in Section
+3 below.
+13
+
+PDF PAGE 14
+Reinhardt, Wang and Zech
+∥G0∥∞,supp(γ) < ∞and G is compact with respect to ∥· ∥∞,supp(γ). Then there exists some
+universal constant C1 > 0, such that for any positive sequences (δn)n∈N and (˜δn)n∈N with
+nδ4
+n ≥C2
+1σ2M2
+F H
+
+δ2
+n
+8σ2 + δ2n
+
+and
+n˜δ2
+n ≥6M2
+F H(G, ∥· ∥∞,supp(γ), ˜δn),
+(2.14)
+all G∗∈G and all
+Rn ≥max
+
+δn, ˜δn, ∥G∗−G0∥∞,supp(γ), MF
+√n
+
+,
+we have
+PG0
+
+∥ˆGn −G0∥L2(γ) ≥Rn
+
+≤4 exp
+
+−
+nR4
+n
+C2
+1σ2(1 + M2
+F )
+
++ 2 exp
+
+−nR2
+n
+C2
+1M2
+F
+
+.(2.15)
+Furthermore, for all n ∈N there exists a universal constant C2 > 0 such that
+EG0
+h
+∥ˆGn −G0∥2
+L2(γ)
+i
+≤C2
+
+δ2
+n + ˜δ2
+n + (1 + σ)(1 + M2
+F )
+√n
++ inf
+G∗∈G∥G∗−G0∥2
+L2(γ)
+
+. (2.16)
+Remark 11 Consider α ≥2 in Corollary 8 (i). Then J(δ) in (2.5) is not necessarily finite,
+and hence Assumption 1 (b) need not be satisfied. Therefore Theorem 6 cannot be applied.
+In the sub-Gaussian noise case, we may still use the L2(γ)-bound in (2.16) however. Similar
+to the proof of Corollary 8, it can then be shown that δ2
+n ≲n−
+1
+2+α and ˜δ2
+n ≲n−
+2
+2+α satisfy
+(2.14). This yields
+EG0
+h
+∥ˆGn −G0∥2
+L2(γ)
+i
+≲n−
+1
+2+α ,
+i.e. half the convergence rate of the “chaining regime” considered in Corollary 8.
+3. Learning Holomorphic Operators with FrameNet
+In this section we first recall the NN-based operator class FrameNet from Herrmann et al.
+(2024, Section 2), see Sections 3.1 and 3.2. This will provide the regression class GFN over
+which to estimate G0. Similar to for example PCA-Net (Hesthaven and Ubbiali, 2018),
+FrameNet consists of mappings
+G = DY ◦g ◦EX,
+(3.1)
+for a linear encoder EX : X →ℓ2(N), a linear decoder DY : ℓ2(N) →Y, and a coefficient
+map ℓ2(N) →ℓ2(N). The encoder maps an x ∈X to its coefficients in some representation
+system of X. Conversely, the decoder builds a y ∈Y out of a coefficient series in ℓ2(N).
+These representation systems consist of frames that are fixed a priori. The coefficient map
+g is represented by a feedforward neural network, that will be trained by ERM.
+Subsequently, in Sections 3.3-3.4, we apply our analysis to the learning of holomorphic
+operators G0 : X →Y.
+For such mappings, the FrameNet architecture was shown in
+Herrmann et al. (2024) to be capable of overcoming the curse of dimensionality in terms
+of the approximation error. We generalize this property to the case of bounded network
+parameters in Subsection 3.3 and furthermore show metric entropy bounds. This allows
+us to prove that FrameNet can overcome the curse of dimensionality in the learning of
+holomorphic operators, both in terms of the approximation capability and in terms of sample
+complexity.
+14
+
+PDF PAGE 15
+Statistical Learning Theory for Neural Operators
+3.1 Representation Systems
+We briefly recall basic definitions and properties of frames. For more details see for instance
+Christensen (2016).
+3.1.1 Frames
+Definition 12 A family Ψ = {ψj : j ∈N} ⊂X is called a frame of X, if the analysis
+operator
+TΨ : X →ℓ2(N),
+v 7→
+ ⟨v, ψj⟩X
+
+j∈N
+is bounded and boundedly invertible between X and range(F) ⊂ℓ2(N).
+Every orthonormal basis of X is trivially a frame.
+Since Definition 12 merely requires
+bounded invertibility on the range of TΨ, TΨ need not be surjective, and in particular Ψ
+need not consist of linearly independent vectors. The frame bounds of Ψ are defined as
+ΛΨ := ∥TΨ∥X→ℓ2 = sup
+0̸=v∈X
+∥TΨv∥ℓ2
+∥v∥X
+,
+λΨ :=
+inf
+0̸=v∈X
+∥TΨv∥ℓ2
+∥v∥X
+,
+(3.2)
+the synthesis operator T ′
+Ψ as
+T ′
+Ψ : ℓ2(N) →X,
+ vi
+
+i∈N 7→vTΨ :=
+X
+i∈N
+viψi,
+and finally the frame operator as QΨ := T ′
+ΨTΨ : X →X.
+The frame operator QΨ is
+boundedly invertible, self-adjoint and positive, see Christensen (2016, Lemma 5.1.5). The
+family ˜Ψ := Q−1
+Ψ Ψ is a frame of X, called the (canonical) dual frame of X. The analysis
+operator of the dual frame is ˜TΨ := TΨ(T ′
+ΨTΨ)−1 and its frame bounds are λ−1
+Ψ
+and Λ−1
+Ψ .
+Definition 13 A family Ψ = {ψj : j ∈N} ⊂X is called a Riesz basis of X if there exists
+a bounded, bijective operator A : X →X and an orthonormal basis (ej)j∈N with ψj = Aej
+for all j ∈N.
+A Riesz basis is a frame Ψ which is also a basis. Equivalently, a Riesz basis is a frame with
+ker(T ′
+Ψ) = 0 and therefore range(TΨ) = ℓ2(N). Moreover, the dual frame ˜Ψ of a Riesz basis
+is also a Riesz basis (Christensen, 2016, Section 5).
+3.1.2 Encoder and Decoder
+Throughout the rest of this paper we fix frames and their duals on X, Y and denote them
+by
+ΨX = (ψj)j∈N,
+˜ΨX = ( ˜ψj)j∈N,
+ΨY = (ηj)j∈N,
+˜ΨY = (˜ηj)j∈N.
+The corresponding analysis operators are TΨX, T˜ΨX, TΨY and T˜ΨY.
+We then introduce
+encoder and decoder maps via
+EX := TΨX =
+(
+X →ℓ2(N),
+x 7→(⟨x, ˜ψj⟩X)j∈N,
+DY := T ′
+ΨY =
+(
+ℓ2(N) →Y,
+(yj)j∈N 7→P
+j∈N yjηj.
+(3.3)
+In case ΨX and ΨY are Riesz bases, the mappings in (3.3) are boundedly invertible.
+15
+
+PDF PAGE 16
+Reinhardt, Wang and Zech
+3.1.3 Smoothness Scales
+The encoder mapping EX : X →ℓ2(N) maps an element to its coefficients in the frame
+representation. For computational purposes, this coefficient sequence must be truncated, as
+only finitely many coefficients can be considered. Consequently, it is essential to control the
+error resulting from discarding higher-order frame coefficients. To formalize this we next
+introduce scales of subspaces of X, Y, whose elements exhibit a certain coefficient decay.
+Definition 14 Let θ = (θj)j∈N be a strictly positive, monotonically decreasing sequence
+such that θ1+ε ∈ℓ1(N) for all ε > 0.
+For all r, t ≥0 we introduce the subspaces Xr ⊂X and Yt ⊂Y via
+Xr := {x ∈X : ∥x∥Xr < ∞}
+and
+Yt := {y ∈Y : ∥y∥Yt < ∞}
+where
+∥x∥2
+Xr :=
+X
+j∈N
+⟨x, ˜ψj⟩2
+Xθ−2r
+j
+and
+∥y∥2
+Yt :=
+X
+j∈N
+⟨y, ˜ηj⟩2
+Yθ−2t
+j
+.
+For every r ≥0, Xr is a Hilbert space (Herrmann et al., 2024, Lemma 1).
+3.2 FrameNet
+In this subsection we recall the FrameNet architecture from Herrmann et al. (2024, Section
+2). We start by formally introducing feedforward neural networks (NNs) following Opschoor
+et al. (2022a); Herrmann et al. (2024).
+3.2.1 Feedforward Neural Networks
+Definition 15 A function f : Rp0 →RpL+1 is called a neural network, if there exist σ :
+R →R, integers p1, . . . , pL+1 ∈N, L ∈N and real numbers wl
+i,j, bl
+j ∈R such that for all
+x = (xi)p0
+i=1 ∈Rp0
+z1
+j = σ
+ p0
+X
+i=1
+w1
+i,jxi + b1
+j
+
+,
+j = 1, . . . , p1,
+(3.4a)
+zl+1
+j
+= σ
+ pl
+X
+i=1
+wl+1
+i,j zl
+i + bl+1
+j
+
+,
+l = 1, . . . , L −1,
+j = 1, . . . , pl+1,
+f(x) = (zL+1
+j
+)pL+1
+j=1 =
+ pL
+X
+i=1
+wL+1
+i,j zL
+i + bL+1
+j
+pL+1
+j=1
+.
+(3.4b)
+We call σ the activation function, L the depth, p := maxl=0,...,L+1 pl the width, wl
+i,j ∈R
+the weights, and bl
+j ∈R the biases of the NN.
+While different NNs can realize the same function, for simplicity we refer to a function
+f : Rp0 →RpL+1 as an NN of type (3.4), if it allows for (at least) one such representation.
+Additionally, our analysis will require some further terminology: For a NN f : Rp0 →RpL+1
+as in (3.4) its
+16
+
+PDF PAGE 17
+Statistical Learning Theory for Neural Operators
+• size is the number of nonzero parameters
+size(f) := |{(i, j, l) : wl
+i,j ̸= 0}| + |{(j, l) : bl
+j ̸= 0}|,
+• maximum of parameters is
+mpar(f) := max
+n
+max
+i,j,l |wl
+i,j|, max
+j,l |bl
+j|
+o
+,
+• maximum range on Ω⊆Rp0 is
+mranΩ(f) := sup
+x∈Ω
+f(x)
+
+2 = sup
+x∈Ω
+
+
+pL+1
+X
+j=1
+ zL+1
+j
+(x)
+2
+
+
+1
+2
+.
+Throughout, for q ∈N, q ≥1, we consider the activation function
+σq(x) := max{0, x}q,
+x ∈R.
+For q = 1, σ1 is the rectified linear unit (ReLU), for q ≥2, σq is called rectified power unit
+(RePU).
+Remark 16 Definition 15 introduces a NN as a function f : Rp0 →RpL+1. Throughout,
+we also understand the realization of a NN as a map f : ℓ2(N) →ℓ2(N) via extension by
+zeros. This is equivalent to suitably padding the weight matrices (wl
+i,j)i,j and bias vectors
+(bl
+j)j in Definition 15 for l ∈{0, L + 1} with infinitely many zeros, see Herrmann et al.
+(2024, Remark 13).
+3.2.2 The FrameNet Class
+By definition of frames, the encoding operator EX : X →ℓ2(N) in (3.3) is injective, and the
+decoding operator DY : ℓ2(N) →Y is surjective. Thus for every mapping G : X →Y, there
+exists a coefficient map g : ℓ2(N) →ℓ2(N) such that
+G = DY ◦g ◦EX.
+This motivates the introduction of the following function class.
+Given σ : R →R, positive integers L, p, s ∈N, and reals M, B ∈R, let
+gFN(σ, L, p, s, M, B) :=
+
+g : Rp0 →RpL+1 is NN with activation function σ s.t.
+depth(g) ≤L, width(g) ≤p, size(g) ≤s,
+mpar(g) ≤M, mran[−1,1]p0(g) ≤B, p0, pL+1 ≤p
+	
+.
+Instead of directly considering (3.1), for our analysis, contrary to Herrmann et al. (2024),
+with θ from Definition 14, fixed R > 0, and U := [−1, 1]N, it will be convenient to introduce
+the linear scaling
+Sr :=
+(
+×j∈N[−Rθr
+j, Rθr
+j] →U
+(xj)j∈N 7→
+  xj
+Rθr
+j
+
+j∈N.
+(3.5)
+The FrameNet class then consists of all operators
+GFN(σ, L, p, s, M, B) :=
+
+G = DY ◦g ◦Sr ◦EX : g ∈gFN(σ, L, p, s, M, B)
+	
+.
+(3.6)
+17
+
+PDF PAGE 18
+Reinhardt, Wang and Zech
+3.3 Approximation of Holomorphic Operators
+Our statistical theory established in Section 2 shows that sample complexity depends on
+(i) the approximation quality of G w.r.t G0, cf. the term infG∗∈G ∥G∗−G0∥L2(γ) in (2.13),
+(ii) the metric entropy of G, cf. the terms δ2
+n and ˜δ2
+n in (2.13).
+In this subsection we give results for both the approximation quality and the metric entropy
+of the FrameNet class GFN.
+3.3.1 Setting
+Let us start by making the assumptions on G0 and the sampling measure γ on X more
+precise. Denote in the following U := [−1, 1]N, let r > 1
+2, R > 0, and let the frames (ψj)j∈N,
+(ηj)j∈N be as in Section 3, and (θj)j∈N as in Definition 14. Then
+σr
+R :=
+(
+U →X,
+y 7→R P
+j∈N θr
+jyjψj
+(3.7)
+yields a well-defined map, since by construction (yjθr
+j)j∈N ∈ℓ2(N) for every y ∈U, and
+(ψj)j∈N is a frame. Next, we introduce the “cubes”
+Cr
+R(X) =
+
+a ∈X : sup
+j∈N
+θ−r
+j |⟨a, ˜ψj⟩X| ≤R
+
+.
+(3.8)
+Observe that with σr
+R(U) := {σr
+R(y) : y ∈U}, clearly
+Cr
+R(X) ⊆σr
+R(U),
+but equality holds in general only if the (ψj)j∈N form a Riesz basis (Herrmann et al., 2024,
+Remark 10).
+Example 2 Let X = R, r = 1, R = 1, θ1 = 3/2 and θ2 = 1/2.
+Consider the frame
+Ψ = {1, 1} (which is not a basis) with dual analogue ˜Ψ˜Ψ˜Ψ = {1/2, 1/2}. Then with U = [−1, 1]2
+C1
+1(R) = [−1, 1] ⊊[−2, 2] = {θ1y1ψ1 + θ2y2ψ2 : y ∈U}.
+The holomorphy assumption on G0 can now be formulated as follows (Herrmann et al.,
+2024, Assumption 1). Recall that for a real Hilbert space X, we denote by XC its complex-
+ification.
+Assumption 2 For some r > 1, R > 0, t > 0, CG0 < ∞there exists an open set OC ⊂XC
+containing σr
+R(U), such that
+(a) supa∈OC∥G0(a)∥(YC)t ≤CG0, and G0 : OC →YC is holomorphic,
+(b) γ is a probability measure on X with supp(γ) ⊆Cr
+R(X).
+The assumption requires G0 to be holomorphic on a superset of σr
+R(U). The probability
+measure γ is allowed to have support on Cr
+R(X) which is potentially smaller than σr
+R(U).
+In particular, G0 is then holomorphic on a superset of the support of γ.
+18
+
+PDF PAGE 19
+Statistical Learning Theory for Neural Operators
+Example 3 Denote by λ the Lebesgue measure. Then π := ⊗j∈N λ
+2 is the uniform probability
+measure on U = [−1, 1]N, and
+γ := (σr
+R)♯π
+(3.9)
+defines a probability measure on X with support σr
+R(U).
+If ΨX
+ΨX
+ΨX is a Riesz basis, then
+supp(γ) = Cr
+R(X), so that supp(γ) ⊆Cr
+R(X) as required in Assumption 2.
+We emphasize that Assumption 2 does not require ΨX to be a Riesz basis, and all results
+below remain valid for general frames. However, the Riesz basis property yields sharper
+rates when combined with the specific choice of γ from Example 3.
+3.3.2 Approximation Theory
+Theorem 1 in Herrmann et al. (2024) establishes a convergence rate for approximating
+G0 within GFN (with unbounded weights), in terms of the number of trainable network
+parameters.
+Our main results on sample complexity depend on bounds on the metric
+entropy, which require bounded network weights. To address this, we now extend Herrmann
+et al. (2024, Theorem 1) to FrameNet architectures with bounded weights, as introduced in
+Section 3.
+Similar to Schwab and Zech (2019); Opschoor et al. (2022b); Herrmann et al. (2024),
+the analysis builds on polynomial chaos expansions (Xiu and Karniadakis, 2002). Denote
+by (Lj)j∈N the univariate Legendre polynomials normalized such that 1
+2
+R 1
+−1 Lj(x)2 dx = 1
+for all j ∈N. Then (see Abramowitz and Stegun 1948, Chapter 22)
+sup
+x∈[−1,1]
+|Lj(x)| ≤
+p
+2j + 1
+∀j ∈N0.
+(3.10)
+Next, let F be the set of infinite-dimensional multiindices with finite support, i.e.
+F :=
+n
+(νj)j∈N0 ∈NN
+0 : | supp ν| < ∞
+o
+,
+(3.11)
+where supp ν := {j : νj ̸= 0}. For finite sets of multiindices Λ ⊆F, their effective dimension
+and maximal order is defined as
+d(Λ) := sup{| supp ν| : ν ∈Λ}
+and
+m(Λ) := sup{|ν| : ν ∈Λ},
+where |ν| := P
+j∈N νj. Moreover, with U := [−1, 1]N for all y ∈U and ν ∈F, we let Lν(y) :=
+Q
+j∈N Lνj(yj) be the corresponding multivariate Legendre polynomial. This infinite product
+is well-defined, since for all but finitely many j holds νj = 0 so that Lνj ≡1. The next
+Proposition gives an approximation result for multivariate Legendre polynomials. It is an
+extension of Opschoor et al. (2022a, Proposition 2.13) to the case of bounded network
+parameters. The proof is provided in Appendix D.1.
+Proposition 17 (σ1-NN approximation of Lν) Let δ ∈(0, 1/2) and Λ ⊂F be finite.
+Then there exists a σ1-NN fΛ,δ, such that its outputs {˜Lν,δ}ν∈Λ satisfy
+∀ν ∈Λ :
+sup
+y∈U
+|Lν(y) −˜Lν,δ(y)| ≤δ.
+(3.12)
+19
+
+PDF PAGE 20
+Reinhardt, Wang and Zech
+Furthermore, there exists a constant C > 0 independent of Λ, d(Λ), m(Λ) and δ such that
+depth(fΛ,δ) ≤C
+h
+log(d(Λ))d(Λ) log(m(Λ))m(Λ) + m(Λ)2 + log(δ−1)
+ log(d(Λ)) + m(Λ)
+i
+width
+ fΛ,δ
+
+≤C|Λ|d(Λ)
+size
+ fΛ,δ
+
+≤C
+h
+|Λ|d(Λ)2 log
+ m(Λ)
+
++ m(Λ)3d(Λ)2 + log
+ δ−1 m(Λ)2 + |Λ|
+
+d(Λ)
+i
+mpar
+ fΛ,δ
+
+≤1.
+A similar result holds for RePU neural networks, see Proposition 51. Given q ∈N, and
+N ∈N, we introduce the two FrameNet classes
+Gsp
+FN(σq, N) := GFN(σq, widthN, depthN, sizeN, M, B),
+Gfull
+FN(σq, N) := GFN(σq, widthN, depthN, ∞, M, B)
+(3.14a)
+where for certain constants CL, Cp, Cs, M, B ≥1 (to be determined later)
+depthN = max{1, ⌈CL log(N)⌉},
+widthN = ⌈CpN⌉,
+sizeN = ⌈CsN⌉, (3.14b)
+and ⌈x⌉denotes the smallest integer larger or equal to x ∈R.
+We emphasize that Gsp
+FN(σq, N) corresponds to a sparsely connected architecture, where-
+as Gfull
+FN(σq, N) represents a fully connected architecture (because there is no constraint on
+its size). In particular, since every linear transformation in between activation functions
+has at most widthN + width2
+N parameters, we have
+size(Gfull
+FN(σq, N)) ≤(depthN + 1)(widthN + width2
+N) = O(log(N)N2)
+as N →∞.
+(3.15)
+Thus Gfull
+FN(σq, N) can essentially be quadratically larger than Gsp
+FN(σq, N).
+The proof of Theorem 18 below, given in Appendix D.3, crucially uses Proposition 17 to
+construct FrameNets that approximate the multivariate Legendre polynomials correspond-
+ing to the ’most relevant’ Legendre coefficients of G0. Hereby Assumption 2 guarantees
+sufficient decay of the Legendre coefficients by using that algebraic decay in the input
+space, see Assumption 2 (b), is inherited by the Legendre coefficients of the output (see
+Theorem 54 and 55) if the respective operator is holomorphic, see Assumption 2 (a).
+Theorem 18 is an extension of Herrmann et al. (2024, Theorems 1 and 2) to the case of
+bounded network parameters.
+Theorem 18 (Sparse network approximation) Let G0, γ satisfy Assumption 2 with
+r > 1, t > 0. Let q ≥1 be an integer and fix τ > 0 (arbitrarily small).
+(i) There exists C > 0 s.t. for all N ∈N
+inf
+G∈Gsp
+FN(σq,N)
+G −G0
+2
+∞,supp(γ)
+
+≤CN−2 min{r−1,t}+τ.
+(ii) Let ΨX be a Riesz basis and let γ be as in (3.9). Then there exists C > 0 s.t. for all
+N ∈N
+inf
+G∈Gsp
+FN(σq,N)
+hG −G0
+2
+L2(γ)
+i
+≤CN−2 min{r−1
+2 ,t}+τ.
+20
+
+PDF PAGE 21
+Statistical Learning Theory for Neural Operators
+Remark 19 Theorem 18 provides an approximation rate for Gsp
+FN(σq, N) in terms of N.
+Since Gfull
+FN(σq, N) ⊇Gsp
+FN(σq, N), trivially the statement remains true for Gfull
+FN(σq, N). How-
+ever, as the size of Gfull
+FN(σq, N) can be quadratically larger by (3.15), the convergence rate
+in terms of network size is essentially halved for the fully connected architecture.
+3.3.3 Entropy Bounds for FrameNet
+In the following we bound the metric entropy (see 1.3) of FrameNets for ReLU activation
+functions. Recall that ΛΨY is the frame constant in (3.2). The proof of Lemma 20 is given
+in Appendix D.4.
+Lemma 20 (see Schmidt-Hieber 2020a, Lemma 5) Let L, p, s, M, B ≥1, σr
+R be as
+in (3.7) and U = [−1, 1]N. Then GFN = GFN(σ1, L, p, s, M, B) is compact with respect to
+∥· ∥∞,σr
+R(U) and ∥· ∥n. Furthermore, GFN satisfies for all δ > 0
+H(GFN, ∥· ∥∞,σr
+R(U), δ) ≤(s + 1) log
+
+2L+6ΛΨYL2ML+1pL+4 max{1, δ−1}
+
+.
+(3.16)
+In particular there exist constants CSP
+H , CFC
+H
+> 0 such that for the sparse and fully-connected
+FrameNet classes from (3.14) it holds
+H(Gsp
+FN(σ1, N), ∥· ∥∞,σr
+R(U), δ) ≤CSP
+H N
+ 1 + log(N)2 + log
+ max
+
+1, δ−1	
+H(Gfull
+FN(σ1, N), ∥· ∥∞,σr
+R(U), δ) ≤CFC
+H N2  1 + log(N)3 + log
+ max
+
+1, δ−1	
+for all δ > 0.
+Remark 21 The entropy bound is independent of the constant B bounding the maximum
+range of the network, see Subsection 3.2.
+However, B < ∞will be necessary to apply
+Theorem 6.
+For RePU activation, as mentioned before, the metric entropy bounds exhibit a worse
+dependency on the network parameters, due to the lack of global Lipschitz continuity of σq
+if q ≥2. The proof of Lemma 22 is given in Appendix D.5.
+Lemma 22 Let q ∈N, q ≥2, and L, p, s, M, B ≥1, σr
+R be as in (3.7) and U =
+[−1, 1]N. Then GFN = GFN(σq, L, p, s, M, B) is compact with respect to ∥· ∥∞,σr
+R(U) and
+∥· ∥n. Furthermore, GFN satisfies for all δ > 0
+H(GFN, ∥· ∥∞,σr
+R(U), δ) ≤(s + 1) log
+
+ΛΨYLqL+q(2pM)4q2L+2 max{1, δ−1}
+
+.
+(3.17)
+Consider the constant CL from (3.14). Then there exists CSP
+H , CFC
+H
+> 0 such that
+H(Gsp
+FN(σq, N), ∥· ∥∞,σr
+R(U), δ) ≤CSP
+H N1+2CL log(q)  1 + log(N)2 + log
+ max
+
+1, δ−1	
+H(Gfull
+FN(σq, N), ∥· ∥∞,σr
+R(U), δ) ≤CFC
+H N2+2CL log(q)  1 + log(N)2 + log
+ max
+
+1, δ−1	
+for all δ > 0.
+21
+
+PDF PAGE 22
+Reinhardt, Wang and Zech
+3.4 Statistical Theory
+Using our statistical results from Theorem 6 and Corollaries 7-8 as well as the approximation
+result from Theorem 18, we can bound EG0[∥ˆGn −G0∥2
+L2(γ)] solely in terms of the statistical
+sample size n. This is formalized in the next two theorems, for ReLU and RePU activation.
+Our result distinguishes between the sparse and fully connected architectures Gsp
+FN(σq, N)
+and Gfull
+FN(σq, N) in (3.14). In practice, fully connected architectures are often preferred, due
+to their simpler implementation, and because training sparse NN architectures can run into
+problems like “bad” local minima, see for example Evci et al. (2019). Our theoretical upper
+bounds are sharper for sparse architectures; this is because the additional free parameters
+in the fully connected architecture increase the entropy of this class, but do not yield better
+approximation properties in our proofs.
+Theorem 23 (ERM for white noise and ReLU) Let G0 : X →Y and γ satisfy As-
+sumption 2 for some r > 1, t > 0. Fix τ > 0 (arbitrarily small) and set (cp. Example
+3)
+κ :=
+(
+2 min{r −1
+2, t}
+if ΨX is a Riesz basis and γ = (σr
+R)#π,
+2 min{r −1, t}
+otherwise.
+For every n ∈N, let (xi, yi)n
+i=1 be data generated by (2.1) either in the white noise model
+or in the sub-Gaussian noise model. Then there exist constants CL, Cp, Cs, M, B ≥1 in
+(3.14) and C > 0 (all independent of n) such that
+(i) Sparse FrameNet: with N = N(n) = ⌈n
+1
+κ+1 ⌉and G = Gsp
+FN(σ1, N), there exists a
+measurable choice of an ERM ˆGn of (2.3). Any such ˆGn satisfies
+EG0[∥ˆGn −G0∥2
+L2(γ)] ≤Cn−
+κ
+κ+1 +τ,
+(3.18)
+(ii) Fully connected FrameNet: with N = N(n) = ⌈n
+1
+κ+2 ⌉and G = Gfull
+FN(σ1, N), there
+exists a measurable choice of an ERM ˆGn of (2.3). Any such ˆGn satisfies
+EG0[∥ˆGn −G0∥2
+L2(γ)] ≤Cn−
+κ
+κ+2 +τ.
+(3.19)
+Proof The proof follows directly from the entropy bounds in Lemma 20 and Corollary 8
+(ii): First, Lemma 20 in particular verifies Assumption 1 for all G∗∈G, which is required
+for Corollary 8. Applying the corollary with β = κ + τ and absorbing the logarithmic term
+into τ then gives (3.18). With β = κ/2 + τ we obtain (3.19). Note that crucially MF , see
+(2.9), does not depend on N, because ∥G0∥∞,supp γ < ∞and GFN is universally bounded
+by the N-independent constant B, see (3.6).
+Remark 24 Consider the sparse FrameNet class from above. Similar to the proof of Corol-
+lary 8 (ii), one can show that the sequences
+(δn)n∈N ,
+(˜δn)n∈N,
+δn = ˜δn = N log(N)2(1 + log(n))/n
+22
+
+PDF PAGE 23
+Statistical Learning Theory for Neural Operators
+satisfy the entropy conditions (2.10) for the sparse FrameNet class Gsp
+FN(σ1, N). By choosing
+N = ⌈n1/(κ+1)⌉to balance the approximation term in (2.11), Theorem 6 gives the following
+high probability bound for ∥ˆGn −G0∥L2(γ): For all τ > 0 there exists a constant C > 0 such
+that for all n ∈N and all Rn ≥Cn−κ/(κ+1)+τ it holds
+PG0
+
+∥ˆGn −G0∥L2(γ) ≥Rn
+
+≤2 exp
+ 
+−
+nR2
+n
+C2  σ2 + M2
+F
+
+!
+.
+Similar high-probability bounds hold for the fully connected FrameNet class and the RePU
+activation function.
+Theorem 25 (ERM for white noise and RePU) Consider the setting of Theorem 23
+and let q ∈N, q ≥2. There exist constants CL, Cp, Cs, M, B ≥1 in (3.14) and C > 0 (all
+independent of N) such that
+(i) Sparse FrameNet: with N = N(n) = ⌈n
+1
+κ+1+4CL log(q) ⌉and G = Gsp
+FN(σq, N), there
+exists a measurable choice of an ERM ˆGn of (2.3). Any such ˆGn satisfies
+EG0[∥ˆGn −G0∥2
+L2(γ)] ≤Cn−
+κ
+κ+1+4CL log(q)+τ.
+(3.20)
+(ii) Fully connected FrameNet: with N = N(n) = ⌈n
+1
+κ+2+4CL log(q) ⌉, G = Gfull
+FN(σq, N),
+there exists a measurable choice of ERM ˆGn of (2.3). Any such ˆGn satisfies
+EG0[∥ˆGn −G0∥2
+L2(γ)] ≤Cn−
+κ
+κ+2+4CL log(q)+τ.
+(3.21)
+Proof
+Similar to the proof of Theorem 23, the proof of Theorem 25 follows from the
+entropy bounds in Lemma 22 and Corollary 8 (ii) with β = κ/(1+2CL log(q))+τ for (3.20)
+and β = κ/(2 + 2CL log(q)) + τ/2 for (3.21). Again the logarithmic term is absorbed into
+τ.
+A few remarks are in order. In the RePU case the activation function σq(x) = max{0, x}q
+has no global Lipschitz condition for q ≥2. As a result, the entropy bounds obtained for the
+corresponding FrameNet class are larger than for ReLU. This leads to worse convergence
+rates. Moreover, for the RePU case, the convergence rate depends on the constant CL in
+(3.14b). The proof of Theorem 18 shows that CL depends on the decay properties of the
+Legendre coefficients (cνi,j)i,j∈N of the function G0 ◦σr
+R, i.e. CL depends on G0 (see (D.23)
+and (D.24) in Theorem 54). Explicit bounds on CL are possible, see Zech (2018, Lemma
+1.4.15).
+4. Applications
+We now present two applications of our results. First, in finite dimensional regression, our
+analysis recovers well-known minimax-optimal rates for standard smoothness classes. This
+indicates that our main statistical result in Theorem 6 is in general optimal. However, we do
+not claim optimality specifically for the approximation of holomorphic operators discussed
+in Section 3.
+Second, for an infinite dimensional problem we address the learning of a
+solution operator to a parameter dependent PDE.
+23
+
+PDF PAGE 24
+Reinhardt, Wang and Zech
+4.1 Finite Dimensional Regression
+Let d ∈N and X = Rd, Y = R. Moreover, let D ⊆Rd be a bounded, open, smooth domain,
+and G0 : D →R a ground-truth regression function. Suppose that
+xi
+iid
+∼γ
+and
+εi
+iid
+∼N(0, 1)
+∀i ∈N
+are independent samples for some probability measure γ on D, and let
+yi = G0(xi) + εi
+∀i ∈N.
+Given a regression class G of measurable mappings from D →R, the least-squares problem
+is to determine
+ˆGn ∈arg min
+G∈G
+n
+X
+i=1
+−2G(xi)yi + G(xi)2 = arg min
+G∈G
+n
+X
+i=1
+|G(xi) −yi|2.
+(4.2)
+For s ≥0, it is well-known that the minimax-optimal rate of recovering a ground-truth
+function G0 in s-smooth function classes, such as the Sobolev space Hs(D) or the Besov
+space Bs
+∞,∞(D) (see Edmunds and Triebel 1996 for definitions), equals n−
+2s
+2s+d (Gin´e and
+Nickl, 2016; van de Geer, 2000).
+Denote now by Gs
+R the ball of radius R > 0 around the origin in either Hs(D) or
+Bs
+∞,∞(D). Then,
+H(Gs
+R, ∥· ∥∞,supp(γ), δ) ≃
+R
+δ
+d/s
+∀δ ∈(0, 1),
+which holds for all s > 0 if Gs
+R is the ball in Bs
+∞,∞(D), and for all s > d/2 in case Gs
+R is
+the ball in Hs(D), see Triebel (1995, Theorem 4.10.3). Corollary 8 (i) (with α = d/s <
+2) then directly yields the following theorem. It recovers the minimax optimal rate for
+nonparametric least squares/maximum likelihood estimators.
+Theorem 26 Let R > 0 and s > d/2. Then, there exists C > 0 such that for all G0 ∈Gs
+R,
+the estimator ˆGn in (4.2) with G = Gs
+R and data as in (4.1) satisfies
+EG0
+
+∥ˆGn −G0∥2
+L2(D)
+
+≤Cn−
+2
+2+α = Cn−
+2s
+2s+d
+∀n ∈N.
+4.2 Parametric Darcy Flow
+As a second application we apply Theorem 23 to the solution operator of the diffusion
+equation, extending the discussion of approximation errors in Herrmann et al. (2024, Section
+7.1).
+4.2.1 Setup
+We recall the setup from Herrmann et al. (2024, Sections 7.1.1, 7.1.2).
+Let d ∈N, and denote by Td ≃[0, 1]d the d-dimensional torus. In the following, all
+function spaces on Td are understood to be one-periodic in each variable. Fix ¯a ∈L∞(Td)
+and f ∈H−1(Td)/R such that for some constant amin > 0
+ess inf
+x∈Td (¯a(x) + a(x)) > amin.
+(4.3)
+24
+
+PDF PAGE 25
+Statistical Learning Theory for Neural Operators
+We consider the ground truth G0 : a 7→u, mapping a ∈L∞(Td) to the solution u ∈H1(Td)
+of
+−∇· ((¯a + a)∇u) = f on Td
+and
+Z
+Td u(x) dx = 0.
+(4.4)
+Then G0 : {a ∈L∞(Td) : (4.3) holds} →H1(Td) is well-defined.
+To represent a and u, we use Fourier expansions on Td. Denote for j ∈N0 and j ∈Nd
+0,
+d ≥2,
+ξ0 := 1,
+ξ2j(x) :=
+√
+2 cos(2πjx),
+ξ2j−1(x) :=
+√
+2 sin(2πjx),
+ξj(x1, . . . , xd) :=
+d
+Y
+k=1
+ξjk(xk).
+Then for r ≥0, {max{1, |j|}rξj : j ∈Nd
+0} forms an ONB of Hr(Td) equipped with inner
+product
+⟨u, v⟩Hr(Td) :=
+X
+j∈Nd
+0
+⟨u, ξj⟩L2⟨v, ξj⟩L2 max {1, |j|}2r .
+In the following, fix r0, t0 ≥0 and set
+X := Hr0(Td),
+ψj := max{1, |j|}−r0ξj,
+Y := Ht0(Td),
+ηj := max{1, |j|}−t0ξj,
+(4.5)
+so that ΨX := (ψj)j∈Nd
+0, ΨY := (ηj)j∈Nd
+0 form ONBs of X, Y respectively. The encoder EX
+and decoder DY are now as in (3.3). Direct calculation shows Xr = Hr0+rd and Yt = Ht0+td
+for r, t ≥0; for more details see Herrmann et al. (2024, Section 7.1.2).
+4.2.2 Sample Complexity
+We now analyze the sample complexity for learning the PDE solution operator G0 in Section
+4.2.1. For a proof of Theorem 27, see Appendix E.1.
+Theorem 27 Let d ∈N, d ≥2, s > 3d
+2 and t0 ∈[0, 1]. Fix τ1 > 0, τ2 ∈(0, min{s−3d
+2 , τ1d
+8 })
+(both arbitrarily small), and set
+r0 =
+(
+d
+2 + τ2
+if s ∈(3d
+2 , 2d + 1 −t0]
+s+t0−1
+2
+if s > 2d + 1 −t0.
+Moreover let f ∈C∞(Td), and let
+(a) ground truth: G0 : a 7→u be given through (4.4),
+(b) representation system: EX, DY be as in (3.3) with the orthonormal basis in (4.5),
+and r0, t0 from above,
+(c) data: γ be the measure defined in (3.7) and (3.9) with r =
+s−r0
+d
+such that ¯a + a
+satisfies (4.3) for all a ∈supp(γ), and let (xi, yi)n
+i=1 be generated by (2.1) with the
+additive white noise model or the sub-Gaussian noise model,
+25
+
+PDF PAGE 26
+Reinhardt, Wang and Zech
+(d) regression class: G = Gsp
+FN(σ1, N) be the n-dependent sparse FrameNet architecture
+in (3.14) with N(n) = ⌈n
+1
+κ+1 ⌉.
+Then there exists a constant C > 0 such that for all n ∈N there exists a measurable
+ERM ˆGn ∈Gsp
+FN(σ1, N(n)) in (2.3), and any such ˆGn satisfies
+EG0[∥ˆGn −G0∥2
+L2(Hr0(Td),γ;Ht0(Td))] ≤Cn−
+κ
+κ+1 +τ1
+(4.6)
+where
+κ =
+(
+2 min
+ s
+d −1, 1−t0
+d
+	
+if s ∈(3d
+2 , 2d + 1 −t0],
+s+1−t0
+d
+−1
+if s > 2d + 1 −t0.
+(4.7)
+Remark 28 Consider the setting of Theorem 27, and let supp(γ) ⊆Cr
+R(X).
+A slight
+modification of the proof of Theorem 27 similar to Herrmann et al. (2024), using the ap-
+proximation bound in Theorem 18 (i) instead of (ii), then yields
+EG0[∥ˆGn −G0∥2
+L2(Hr0(Td),γ;Ht0(Td))] ≤Cn−
+κ
+κ+1 +τ1
+(4.8)
+where for some (small) τ2 > 0
+(r0, κ) =
+(
+(d
+2 + τ2, 2s
+d −3)
+if s ∈(3d
+2 , 3d
+2 + 1 −t0]
+(
+s+t0−d
+2 −1
+2
+, s+1−t0
+d
+−3
+2)
+if s > 3d
+2 + 1 −t0.
+Since
+BR(Hs(Td)) = BR(Xr) = {x ∈X : ∥x∥Xr ≤R} =
+
+
+x ∈X :
+X
+j∈N
+⟨x, ˜ψj⟩2
+Xθ−2r
+j
+≤R2
+
+
+
+⊆
+(
+a ∈X : sup
+j∈N
+θ−r
+j |⟨a, ˜ψj⟩X| ≤R
+)
+= Cr
+R(X),
+in particular, (4.8) holds for any γ with supp(γ) ⊆BR(Hs(Td)). This shows Theorem 1.
+Similar rates can also be obtained for this PDE model on a convex, polygonal domain
+D ⊂T2 with Dirichlet boundary conditions. The argument uses the Riesz basis constructed
+in Davydov and Stevenson (2005), but is otherwise similar to the torus, for details see
+Herrmann et al. (2024, Section 7.2). Moreover, using the RePU activation function, (4.6)
+holds with convergence rate κ/(κ + 1 + 4CL log(q)), where κ is from (4.7) and CL from
+(3.14b). The proof is similar to Theorem 27 using Theorem 25 instead of Theorem 23.
+Finally, rates for the fully-connected class Gfull
+FN(σq, N) can be established using Theorems
+23 (ii) and 25 (ii).
+5. Conclusions
+In this work, we established convergence theorems for empirical risk minimization to learn
+mappings G0 between infinite dimensional Hilbert spaces. Our setting assumes given data
+26
+
+PDF PAGE 27
+Statistical Learning Theory for Neural Operators
+in the form of n input-output pairs, with an additive noise model. We discuss both the case
+of Gaussian white noise and sub-Gaussian noise. Our main statistical result, Theorem 6,
+bounds the mean-squared L2-error E[∥ˆGn −G0∥2
+L2(γ)] in terms of the approximation error,
+and algebraic rates in n depending only on the metric entropy of G. This provides a general
+framework to study operator learning from the perspective of sample complexity.
+In the second part of this work, we applied our statistical results to a specific oper-
+ator learning architecture from Herrmann et al. (2024), termed FrameNet. As our main
+application, we showed that holomorphic operators G0 can be learned with NN-based sur-
+rogates without suffering from the curse of dimensionality, cf. Theorem 23. Such results
+have wide applicability, as the required holomorphy assumption is well-established in the
+literature, and has been verified for a variety of models including for example general el-
+liptic PDEs (Cohen et al., 2010, 2011; Cohen and DeVore, 2015; Harbrecht et al., 2016),
+Maxwell’s equations (Jerez-Hanckes et al., 2017), the Calderon projector (Henr´ıquez and
+Schwab, 2021), the Helmholtz equation (Hiptmair et al., 2018; Spence and Wunsch, 2023)
+and also nonlinear PDEs such as the Navier-Stokes equations (Cohen et al., 2018).
+The main observation model considered in this work is white noise, which can be un-
+derstood as an idealization of taking (equally spaced, noisy) point evaluations, see Remark
+4. Our measurement model hence represents the process of gathering real-world data from
+physical systems rather than data generated from approximate solutions of PDEs, in which
+case the numerical error can be made arbitrarily small. Covering noise-free data with our
+statistical framework is left for future research.
+Extending our results from Hilbert spaces to Banach spaces seems non-trivial. The white
+noise model is not well-defined in Banach spaces and would need to be replaced. Moreover,
+bounding the empirical risk in Theorem 5 uses the Hilbert space structure in an essential
+way: both the basic inequality (Lemma 30) and the chaining Lemma (Lemma 32) rely on
+the presence of an inner product and would need to be adapted in a Banach space setting.
+We have also not discussed the training procedure for finding an empirical risk minimizer.
+The underlying optimization problem is in general non-convex and hence algorithms can
+typically only approximate the global minimizer up to some tolerance. However, we believe
+that large parts of our analysis extend straightforwardly to such approximate minimizers
+with the tolerance appearing as an additional additive term in the mean squared error
+bound. Full details are left for future work.
+Acknowledgments
+SW and JZ gratefully acknowledge support from the German Research Foundation (DFG)
+within the Priority Programme SPP 2298, Theoretical Foundations of Deep Learning (pro-
+ject number 543965776).
+27
+
+PDF PAGE 28
+Reinhardt, Wang and Zech
+Appendix A. Auxiliary Probabilistic Lemmas
+We recall the classical Bernstein inequality.
+Lemma 29 (Bernstein’s inequality) Let X1, . . . , Xn be independent, centered RVs with
+finite second moments E[X2
+i ] < ∞and uniform bound |Xi| ≤M for i = 1, . . . , n. Then it
+holds
+P
+ 
+n
+X
+i=1
+Xi
+ ≥t
+!
+≤2 exp
+ 
+−
+t2
+2 Pn
+i=1 E[X2
+i ] + 2
+3Mt
+!
+,
+t ≥0.
+For a proof of Bernstein’s inequality, see Pollard (1984, page 193).
+Lemma 30 (Basic Inequality) Let εi, i = 1, . . . , n be i.i.d. white noise or sub-Gaussian
+noise. Then it holds for all G∗∈G
+∥ˆGn −G0∥2
+n ≤∥G∗−G0∥2
+n + 2σ
+n
+n
+X
+i=1
+⟨εi, ˆGn(xi) −G∗(xi)⟩Y.
+Proof Let G∗∈G be arbitrary. Using the definition of ˆGn from (2.3), it holds
+∥ˆGn −G0∥2
+n
+= 1
+n
+n
+X
+i=1
+∥ˆGn(xi)∥2
+Y −2⟨G0(xi), ˆGn(xi)⟩Y + ∥G0(xi)∥2
+Y
+= 1
+n
+n
+X
+i=1
+∥ˆGn(xi)∥2
+Y −2⟨G0(xi) + σεi, ˆGn(xi)⟩Y + 2σ⟨εi, ˆGn(xi)⟩Y + ∥G0(xi)∥2
+Y
+≤1
+n
+n
+X
+i=1
+∥G∗(xi)∥2
+Y −2⟨G0(xi) + σεi, G∗(xi)⟩Y + 2σ⟨εi, ˆGn(xi)⟩Y + ∥G0(xi)∥2
+Y
+= 1
+n
+n
+X
+i=1
+∥G∗(xi)∥2
+Y −2⟨G0(xi), G∗(xi)⟩Y + ∥G0(xi)∥2
+Y + 2σ⟨εi, ˆGn(xi) −G∗(xi)⟩Y
+= ∥G∗−G0∥2
+n + 2σ
+n
+n
+X
+i=1
+⟨εi, ˆGn(xi) −G∗(xi)⟩Y,
+which shows the claim.
+Next, we state a generic chaining result from Dirksen (2015, Theorem 3.2), originally derived
+for finite index sets, for countable index sets T. We restrict ourselves to the case of real-
+valued stochastic processes.
+Lemma 31 Let T be a countable index set and d : T × T →[0, ∞) a pseudometric. Fur-
+thermore, let (Xt)t∈T be an R-valued stochastic process such that for some α > 0 and all
+s, t ∈T,
+P (|Xt −Xs| ≥ud(t, s)) ≤2 exp (−uα) ,
+u ≥0.
+(A.1)
+28
+
+PDF PAGE 29
+Statistical Learning Theory for Neural Operators
+Then, there exists a constant M > 0 depending only on α, such that for all t0 ∈T it holds
+that
+P
+ 
+sup
+t∈T
+|Xt −Xt0| ≥M
+ 
+Jα(T, d) + u sup
+s,t∈T
+d(s, t)
+!!
+≤exp
+
+−uα
+α
+
+,
+u ≥1,
+where Jα denotes the metric entropy integral
+Jα(T, d) =
+Z ∞
+0
+(log N(T, d, u))
+1
+α du.
+Proof
+Since T is countable, we can write T = {tj : j ∈N}.
+Using this, we define
+Tn = {tj : j ≤n} for n ∈N. Since Tn is finite (Dirksen, 2015, Theorem 3.2, Eq. 3.2 and its
+proof) gives ˜
+M > 0 s.t.
+
+E
+
+sup
+t∈Tn
+|Xt −Xt0|p
+ 1
+p
+≤˜
+M
+ 
+Jα(Tn, d) + sup
+s,t∈Tn
+d(s, t)p
+1
+α
+!
+(A.2)
+for all p ≥1, t0 ∈T and n ∈N. In (A.2), we used Dirksen (2015, Eq. (2.3)) to upper bound
+the γα-functionals by the respective metric entropy integrals Jα. The monotone convergence
+theorem shows (A.2) for T in the limit n →∞. Applying Dirksen (2015, Lemma A.1) then
+gives the claim with M = exp(α−1) ˜
+M.
+We now use Lemma 31 to establish the following concentration bound, which is tailored
+towards the empirical processes appearing in our proofs, cf. Lemma 30. Note that this
+lemma can be viewed as a generalization of the key chaining Lemma 3.12 in Nickl and
+Wang (2024) to Y-valued regression functions; the proof follows along the same lines.
+Lemma 32 (Chaining Lemma) Let X, Y be separable Hilbert spaces, and suppose Θ is a
+(possibly uncountable) set parametrizing a class of maps
+H = {hθ : X →Y, θ ∈Θ} .
+Consider an empirical process of the form
+Zn(θ) = 1
+n
+n
+X
+i=1
+⟨hθ(xi), εi⟩Y,
+where x1, . . . , xn ∈X are fixed elements and εi, . . . , εn are either (i) i.i.d. Gaussian white
+noise processes indexed by Y, or (ii) i.i.d. sub-Gaussian random variables in Y with param-
+eter 1.
+Recall the empirical seminorm ∥· ∥n. Suppose that
+sup
+θ∈Θ
+∥hθ∥n =: U < ∞,
+(A.3)
+and define the metric entropy integral
+J(H, dn) =
+Z U
+0
+p
+log N(H, dn, τ) dτ,
+dn(θ, θ′) = ∥hθ −hθ′∥n.
+29
+
+PDF PAGE 30
+Reinhardt, Wang and Zech
+Let the space (Θ, dn) be separable.
+Then supθ∈Θ Zn(θ) is measurable and there exists a
+universal constant CCh > 0 such that for all δ > 0 with
+√nδ ≥CChJ(H, dn),
+(A.4)
+it holds
+P
+
+sup
+θ∈Θ
+|Zn(θ)| ≥δ
+
+≤exp
+
+−8nδ2
+C2
+ChU2
+
+.
+Proof In both cases, we will apply Dirksen (2015, Theorem 3.2), which we stated in Lemma
+31.
+White noise case. Let θ, θ′ ∈Θ be arbitrary. Since εi, i = 1, . . . , n are independent
+white noise processes, we have Zn(θ) −Zn(θ′) ∼N(0, n−1∥hθ −hθ′∥2
+n), i.e. the increments
+of Zn are normal (recall that x is regarded as fixed here). Thus,
+P
+ |Zn(θ) −Zn(θ′)| ≥t
+
+≤2 exp
+ −nt2/(2∥hθ −hθ′∥2
+n)
+
+,
+t ≥0,
+and
+P
+ 
+Zn(θ) −Zn(θ′)
+ ≥
+√
+2tdn(θ, θ′)
+√n
+!
+≤2 exp
+
+−dn(θ, θ′)2t2
+∥hθ −hθ′∥2n
+
+= 2 exp
+ −t2
+,
+t ≥0,
+(A.5)
+which verifies the assumption (A.1) for α = 2 and ¯dn :=
+√
+2dn/√n.
+Eq. (A.5) shows that the process Zn(θ) is sub-Gaussian with respect to the pseudometric
+¯dn(θ, θ′) =
+√
+2∥hθ −hθ′∥n/√n. Therefore Gin´e and Nickl (2016, Theorem 2.3.7 (a)) yields
+that Zn(θ) is sample bounded and uniformly sample continuous. Since (Θ, dn) is separable,
+so is (Θ, ¯dn). Thus it holds
+sup
+θ∈Θ
+Zn(θ) = sup
+θ∈Θ0
+Zn(θ)
+a.s.,
+(A.6)
+where Θ0 ⊂Θ denotes a countable, dense subset. The right hand side of (A.6) is measurable
+as a countable supremum. Therefore also the left hand side supθ∈Θ Zn(θ) is measurable.
+Applying Lemma 31 (to the countable set Θ0) and using (A.6) gives that for some universal
+constant M and all θ† ∈Θ,
+P
+
+sup
+θ∈Θ
+|Zn(θ) −Zn(θ†)| ≥M
+
+J(H, ¯dn) + tU
+√n
+
+≤exp
+
+−t2
+2
+
+,
+t ≥1.
+Due to (A.3) it holds N(H, dn, δ) = 1 for all δ ≥U, and thus
+N(H, ¯dn, τ) = N(H, dn, √nτ/
+√
+2) = 1
+∀τ ≥
+√
+2U
+√n .
+30
+
+PDF PAGE 31
+Statistical Learning Theory for Neural Operators
+Substituting ρ = √nτ/
+√
+2 we get
+J(H, ¯dn) =
+Z √
+2U/√n
+0
+q
+log N(H, ¯dn, τ) dτ
+=
+√
+2
+√n
+Z U
+0
+s
+log N
+
+H, ¯dn,
+√
+2ρ
+√n
+
+dρ
+=
+√
+2
+√n
+Z U
+0
+p
+log N(H, dn, ρ) dρ =
+√
+2J(H, dn)
+√n
+and therefore
+P
+ 
+sup
+θ∈Θ
+|Zn(θ) −Zn(θ†)| ≥
+√
+2M
+√n (J(H, dn) + tU)
+!
+≤exp
+
+−t2
+2
+
+,
+t ≥1.
+(A.7)
+Since Zn(θ†) ∼N(0, n−1∥hθ†∥2
+n), it holds for all θ† ∈Θ
+P
+
+|Zn(θ†)| ≥MtU
+√n
+
+≤exp
+ 
+−M2U2t2
+2∥hθ†∥2n
+!
+≤exp
+
+−M2t2
+2
+
+,
+t ≥0.
+(A.8)
+Combining (A.7) and (A.8) yields for t ≥1
+P
+
+sup
+θ∈Θ
+|Zn(θ)| ≥3M
+√n (J(H, dn) + tU)
+
+≤P
+ 
+sup
+θ∈Θ
+|Zn(θ) −Zn(θ†)| ≥
+√
+2M
+√n (J(H, dn) + tU)
+!
++ P
+
+|Zn(θ†)| ≥M
+√n (J(H, dn) + tU)
+
+≤exp
+−t2
+2
+
++ P
+
+|Zn(θ†)| ≥MtU
+√n
+
+≤exp
+−t2
+2
+
++ exp
+−M2t2
+2
+
+= 2 exp
+−t2
+2
+
+,
+where we assumed without loss of generality that M ≥1. Substitute δ = 3M/√n (J(H, dn)
++tU), i.e. t = (√nδ/3M −J(H, dn))/U. Because N(H, dn, τ) ≥2 for τ ≤U/2, we have that
+J(H, dn) ≥U/2
+p
+log(2) > U/4. Therefore √nδ ≥15MJ(H, dn) := CChJ(H, dn) implies
+t ≥1 and thus
+P
+
+sup
+θ∈Θ
+|Zn(θ)| ≥δ
+
+≤2 exp
+ 
+−(√nδ/(3M) −J(H, dn))2
+2U2
+!
+≤2 exp
+
+−8nδ2
+C2
+ChU2
+
+,(A.9)
+which gives the claim for the white noise case.
+31
+
+PDF PAGE 32
+Reinhardt, Wang and Zech
+Sub-Gaussian case. For θ, θ′ ∈Θ it holds
+Zn(θ) −Zn(θ′) = 1
+n
+n
+X
+i=1
+⟨εi, hθ(xi) −hθ′(xi)⟩Y.
+Since the centered RVs n−1⟨εi, hθ(xi) −hθ′(xi)⟩Y are i.i.d. sub-Gaussian with parameter
+n−1∥hθ(xi) −hθ′(xi)∥Y, the ‘generalized’ Hoeffding inequality for sub-Gaussian variables
+(see Vershynin 2018, Theorem 2.6.2) implies that for some universal constant c > 0 the
+increment Zn(θ) −Zn(θ′) is sub-Gaussian with parameter c∥hθ −hθ′∥n/√n. Therefore
+P
+ 
+Zn(θ) −Zn(θ′)
+ ≥
+√
+2tc
+√n dn(θ, θ′)
+!
+≤2 exp
+ −t2
+,
+t ≥0.
+From here on, the proof is similar to the white noise case and we obtain (A.9) by absorbing
+c into CCh.
+The following Lemma uses the ’peeling device’ proof technique as developed in van de Geer
+(2000, Section 5) and is a generalization of van de Geer (2000, Lemma 5.13).
+Lemma 33 Let xi
+iid
+∼γ and consider the entropy H(δ) = H(G, ∥·∥∞,supp(γ), δ). Let (˜δn)n∈N
+be a positive sequence with
+n˜δ2
+n ≥6M2
+F H(˜δn).
+Then for R ≥max{8˜δn, 18MF /√n}, it holds that
+P
+
+∥ˆGn −G0∥L2(γ) ≥R, ∥ˆGn −G0∥L2(γ) ≥2∥ˆGn −G0∥n
+
+≤2 exp
+
+−nR2
+320M2
+F
+
+.
+Proof In the following we write ∥· ∥∞= ∥· ∥∞,supp(γ). Let F = {G −G0 : G ∈G}. Then
+for R ≥0 it holds that
+PG0
+
+∥ˆGn −G0∥L2(γ) ≥R, ∥ˆGn −G0∥L2(γ) ≥2∥ˆGn −G0∥n
+
+≤PG0
+ 
+sup
+F∈F , ∥F∥L2(γ)≥R
+∥F∥L2(γ) ≥2∥F∥n
+!
+.
+(A.10)
+For s ∈N, we define F s = {F ∈F : sR ≤∥F∥L2(γ) ≤(s + 1)R}. As a union of disjoint
+events, it holds
+PG0
+ 
+sup
+F∈F , ∥F∥L2(γ)≥R
+∥F∥L2(γ) ≥2∥F∥n
+!
+=
+∞
+X
+s=1
+PG0
+
+sup
+F∈F s
+∥F∥L2(γ) ≥2∥F∥n
+
+≤
+∞
+X
+s=1
+PG0
+
+sup
+F∈F s
+∥F∥L2(γ) −∥F∥n
+ ≥sR
+2
+
+,
+where we used for F ∈F s and s ∈N
+∥F∥L2(γ) ≥2∥F∥n =⇒∥F∥L2(γ) −∥F∥n ≥∥F∥L2(γ)
+2
+≥sR
+2 .
+32
+
+PDF PAGE 33
+Statistical Learning Theory for Neural Operators
+Now consider some covering F ∗
+s = {Fs,j}N
+j=1 with N = N(F s, ∥·∥∞, R/8). Thus for arbitrary
+s ∈N and F ∈F s there exists Fs,j ∈F ∗
+s s.t. ∥F −Fs,j∥∞≤R/8. We get
+∥F∥L2(γ) −∥F∥n
+ ≤
+∥F∥L2(γ) −∥Fs,j∥L2(γ)
+ +
+∥Fs,j∥L2(γ) −∥Fs,j∥n
+
++ |∥Fs,j∥n −∥F∥n|
+≤R
+4 +
+∥Fs,j∥L2(γ) −∥Fs,j∥n
+ .
+Therefore
+∞
+X
+s=1
+PG0
+
+sup
+F∈F s
+∥F∥L2(γ) −∥F∥n
+ ≥sR
+2
+
+≤
+∞
+X
+s=1
+PG0
+
+max
+j=1,...,N
+∥Fs,j∥L2(γ) −∥Fs,j∥n
+ ≥sR
+4
+
+≤
+∞
+X
+s=1
+N(F s, ∥· ∥∞, R/8) max
+j=1,...,N PG0
+∥Fs,j∥L2(γ) −∥Fs,j∥n
+ ≥sR
+4
+
+,
+(A.11)
+where we used sR/2 −R/4 ≥sR/4 for s ∈N. Since Fs,j ∈F s, we have ∥Fs,j∥L2(γ) ≥sR
+and therefore
+∥Fs,j∥L2(γ) −∥Fs,j∥n
+ =
+∥Fs,j∥2
+L2(γ) −∥Fs,j∥2
+n
+
+∥Fs,j∥L2(γ) + ∥Fs,j∥n
+≤1
+sR
+∥Fs,j∥2
+L2(γ) −∥Fs,j∥2
+n
+ .
+Inserting into (A.11) gives
+∞
+X
+s=1
+N(F s, ∥· ∥∞, R/8) max
+j=1,...,N PG0
+∥Fs,j∥L2(γ) −∥Fs,j∥n
+ ≥sR
+4
+
+≤
+∞
+X
+s=1
+N(F s, ∥· ∥∞, R/8) max
+j=1,...,N PG0
+∥Fs,j∥2
+L2(γ) −∥Fs,j∥2
+n
+ ≥s2R2
+4
+
+.
+Define the variables
+Yi = 1
+n
+
+∥Fs,j∥2
+L2(γ) −∥Fs,j(xi)∥2
+Y
+
+,
+i = 1, . . . , n.
+33
+
+PDF PAGE 34
+Reinhardt, Wang and Zech
+It holds for all i = 1, . . . , n
+E[Yi] = 0,
+|Yi| ≤2M2
+F
+n
+,
+E[Y 2
+i ] = 1
+n2 E
+
+∥Fs,j∥2
+L2(γ) −∥Fs,j(xi)∥2
+Y
+2
+= 1
+n2 E
+h
+∥Fs,j∥4
+L2(γ) −2∥Fs,j∥2
+L2(γ)∥Fs,j(xi)∥2
+Y + ∥Fs,j(xi)∥4
+Y
+i
+= 1
+n2 E
+
+∥Fs,j(xi)∥4
+Y
+
+−∥Fs,j∥4
+L2(γ)
+≤M2
+F
+n2 ∥Fs,j∥2
+L2(γ).
+Applying Bernstein’s inequality (Lemma 29) for the variables Yi yields
+∞
+X
+s=1
+N(F s, ∥· ∥∞, R/8) max
+j=1,...,N PG0
+∥Fs,j∥2
+L2(γ) −∥Fs,j∥2
+n
+ ≥s2R2
+4
+
+≤
+∞
+X
+s=1
+N(F s, ∥· ∥∞, R/8) max
+j=1,...,N exp
+ 
+−
+ns4R4
+32M2
+F (∥Fs,j∥2
+L2(γ) + s2R2
+6 )
+!
+≤
+∞
+X
+s=1
+exp
+
+H(F s, ∥· ∥∞, R/8) −ns2R2
+160M2
+F
+
+,
+where we used ∥Fs,j∥2
+L2(γ) ≤(s + 1)2R2 ≤4s2R2 for all j = 1, . . . , N and s ∈N, since
+Fj,s ∈F s.
+Since H(δ)/δ2 is non-increasing in δ and R ≥8˜δn, we have
+ns2R2
+160M2
+F
+≥
+n
+3M2
+F
+R
+8
+2
+≥2H(G, ∥· ∥∞, R/8) ≥2H(F s, ∥· ∥∞, R/8).
+Therefore we get
+∞
+X
+s=1
+exp
+
+H(F s, ∥· ∥∞, R/8) −ns2R2
+160M2
+F
+
+≤
+∞
+X
+s=1
+exp
+
+−ns2R2
+320M2
+F
+
+≤
+∞
+X
+s=1
+1
+s2 exp
+
+−nR2
+320M2
+F
+
+< 2 exp
+
+−nR2
+320M2
+F
+
+.
+(A.12)
+Note that for x, y ≥1, we have exp(−xy) ≤exp(−y)/x. Applying this in the case x = s2 ≥1
+and y = nR2/(320M2
+F ) ≥1 for R ≥18MF /√n, together with P∞
+s=1 1/s2 = π2/6 < 2, gives
+(A.12). Combining (A.10)–(A.12) shows the claim.
+In the case of sub-Gaussian noise, standard bounds on the maximum of sub-Gaussian RVs
+suffice to bound the generalisation error.
+34
+
+PDF PAGE 35
+Statistical Learning Theory for Neural Operators
+Lemma 34 Consider the sub-Gaussian noise model, i.e. suppose ∥εi∥Y are i.i.d. sub-Gaus-
+sian with parameter 1.
+Abbreviate H(δ) = H(G, ∥· ∥∞,supp(γ), δ).
+Then there exists a
+universal constant C > 0 s.t. for all positive sequences (δn)n∈N with
+nδ4
+n ≥C2σ2M2
+F H
+
+δ2
+n
+8σ2 + δ2n
+
+,
+all G∗∈G and R ≥max{δn,
+√
+2∥G∗−G0∥n}, it holds for every x = (x1, ..., xn) ∈Xn
+Px
+G0
+
+∥ˆGn −G0∥n ≥R
+
+≤4 exp
+
+−
+nR4
+C2σ2(1 + M2
+F )
+
+.
+(A.13)
+Proof In the following we write ∥· ∥∞= ∥· ∥∞,supp(γ). For R2 ≥2∥G∗−G0∥2
+n, we use the
+basic inequality (Lemma 30) to obtain
+Px
+G0
+
+∥ˆGn −G0∥2
+n ≥R2
+≤Px
+G0
+
+∥ˆGn −G0∥2
+n −∥G∗−G0∥2
+n ≥R2
+2
+
+.
+≤Px
+G0
+ 
+1
+n
+n
+X
+i=1
+⟨εi, ˆGn(xi) −G∗(xi)⟩Y
+ ≥R2
+4σ
+!
+.
+(A.14)
+For R > 0, let G∗= {G−G∗, G ∈G} and (Gj)N
+j=1 with N = N(G∗, ∥·∥∞, R2/(8σE[∥εi∥Y]+
+R2)) denote a minimal ∥· ∥∞-cover of G∗.
+It holds for R > 0
+Px
+G0
+ 
+1
+n
+n
+X
+i=1
+⟨εi, ˆGn(xi) −G∗(xi)⟩Y
+ ≥R2
+4σ
+!
+≤Px
+G0
+ 
+sup
+G∈G
+
+1
+n
+n
+X
+i=1
+⟨εi, G(xi) −G∗(xi)⟩Y
+ ≥R2
+4σ
+!
+≤Px
+G0
+ 
+sup
+G∈G
+
+1
+n
+n
+X
+i=1
+⟨εi, G(xi) −G∗(xi) −Gj∗(xi)⟩Y
+ + max
+j=1,...N
+
+1
+n
+n
+X
+i=1
+⟨εi, Gj(xi)⟩Y
+ ≥R2
+4σ
+!
+≤Px
+G0
+ 
+sup
+G∈G
+
+1
+n
+n
+X
+i=1
+⟨εi, G(xi) −G∗(xi) −Gj∗(xi)⟩Y
+ ≥R2
+8σ
+!
+|
+{z
+}
+(i)
++ Px
+G0
+ 
+max
+j=1,...N
+
+1
+n
+n
+X
+i=1
+⟨εi, Gj(xi)⟩Y
+ ≥R2
+8σ
+!
+|
+{z
+}
+(ii)
+.
+35
+
+PDF PAGE 36
+Reinhardt, Wang and Zech
+We estimate the terms (i) and (ii) separately. For (i), use ∥G−G∗−Gj∗∥∞≤R2/(8σE[∥εi∥Y]
++ R2) for all G ∈G and estimate
+Px
+G0
+ 
+sup
+G∈G
+
+1
+n
+n
+X
+i=1
+⟨εi, G(xi) −G∗(xi) −Gj∗(xi)⟩Y
+ ≥R2
+8σ
+!
+≤Px
+G0
+ 
+1
+n
+n
+X
+i=1
+∥εi∥Y
+R2
+8σE[∥εi∥Y] + R2
+ ≥R2
+8σ
+!
+≤Px
+G0
+ 
+1
+n
+n
+X
+i=1
+∥εi∥Y −E[∥εi∥Y]
+ ≥R2
+8σ
+!
+≤2 exp
+
+−nR4
+C2σ2
+
+,
+where we used the Hoeffding inequality for sub-Gaussian random variables from Vershynin
+(2018, Theorem 2.6.2).
+For (ii), it holds
+Px
+G0
+ 
+max
+j=1,...N
+
+1
+n
+n
+X
+i=1
+⟨εi, Gj(xi)⟩Y
+ ≥R2
+8σ
+!
+≤N
+max
+j=1,...N Px
+G0
+ 
+1
+n
+n
+X
+i=1
+⟨εi, Gj(xi)⟩Y
+ ≥R2
+8σ
+!
+≤2N exp
+
+−
+2nR4
+C2σ2M2
+F
+
+≤2 exp
+
+H
+
+R2
+8σ2 + R2
+
+−
+2nR4
+C2σ2M2
+F
+
+,
+where we used E[∥εi∥Y] ≤σ (Cauchy–Schwarz) and Vershynin (2018, Theorem 2.6.2) for
+Yi = n−1⟨εi, Gj(xi)⟩Y, i = 1, . . . , n.
+Since H(δ)/δ2 is non-increasing, also H(δ/(8σ2 + δ))/δ2 is non-increasing and thus it
+holds for R ≥δn
+nR4
+C2σ2M2
+F
+≥H
+
+R2
+8σ2 + R2
+
+.
+This gives for R ≥δn
+(ii) ≤2 exp
+
+−
+nR4
+C2σ2M2
+F
+
+.
+(A.15)
+Combining (A.14)–(A.15) gives the result.
+Appendix B. Proofs of Section 2
+B.1 Proof of Theorem 5
+B.1.1 Existence and Measurability of ˆGn
+White noise case. For i = 1, . . . , n, denote the probability space of the RVs xi and the
+white noise processes εi as (Ω, Σ, P). Furthermore, equip the Hilbert spaces X and Y with
+36
+
+PDF PAGE 37
+Statistical Learning Theory for Neural Operators
+Borel σ-algebras BX and BY and the space G with the Borel σ-algebra BG. Then, there
+exists an orthonormal basis (ψj)j∈N of Y and i.i.d. Gaussian variables Zj ∼N(0, 1) s.t.
+εi : Ω× Y →R,
+εi(ω, y) =
+∞
+X
+j=1
+⟨y, ψj⟩YZj(ω)
+for i = 1, . . . , n, see also Gin´e and Nickl (2016, Example 2.1.11)
+Recall the noise level σ > 0. For i = 1, . . . , n, we define
+ui : Ω× G →R,
+ui(ω, G) = 2σεi (ω, G(xi(ω))) + 2⟨G0(xi(ω)), G(xi(ω))⟩Y −∥G(xi(ω))∥2
+Y.
+(B.1)
+We aim to apply Nickl (2007, Proposition 5) to u := 1/n Pn
+i=1 ui in order to get existence
+and measurability of ˆGn in (2.3).
+Per assumption, the metric space (G, ∥· ∥) is compact. We show that ui from (B.1)
+is measurable in the first component and continuous in the second component for all i =
+1, . . . , n. Then Nickl (2007, Proposition 5) shows the claim. Consider an arbitrary G ∈G.
+We show that ui(. , G) is (Σ, BR)-measurable, where BR is the Borel σ-algebra in R.
+The RVs xi are (Σ, BX)-measurable by definition. The maps G and G0 are assumed
+to be (BX, BY)-measurable. Furthermore, because of their continuity, the scalar product
+⟨. , .⟩Y is (BY, BR)-measurable in both components and also the norm ∥. ∥Y is (BY, BR)-
+measurable. Therefore, since the composition of measurable functions is measurable, the
+latter two summands in (B.1) are (Σ, BR)-measurable.
+Proceeding with the first summand, the RVs Zj are (Σ, BR)-measurable by definition
+for all j ∈N. Therefore the products ⟨. , ψj⟩YZj are (Σ ⊗BY, BR)-measurable for all j ∈N.
+Thus εi is, as the pointwise limit, (Σ ⊗BY, BR)-measurable. Then, as the composition of
+measurable functions, the first summand in (B.1) is (Σ, BR)-measurable. Therefore ui( . , G),
+i = 1, . . . , n, and thus u( . , G) is (Σ, BR)-measurable for all G ∈G.
+We proceed and show that u(ω, . ) is continuous w.r.t. ∥· ∥. Therefore choose G, G′ ∈G
+and ω ∈Ω. Then it holds for i = 1, . . . , n and xi = xi(ω)
+ui(ω, G) −ui(ω, G′)
+ ≤2σ
+εi
+ ω, G(xi) −G′(xi)
+ + 2
+⟨G0(xi), G(xi) −G′(xi)⟩Y
+
++
+∥G(xi)∥Y −∥G′(xi)∥Y
+ ∥G(xi)∥Y + ∥G′(xi)∥Y
+
+≤2σ
+εi
+ ω, G(xi) −G′(xi)
+
++ √n
+ 2∥G0(xi)∥Y + ∥G(xi)∥Y + ∥G′(xi)∥Y
+
+∥G −G′∥n
+≤2σ
+εi
+ ω, G(xi) −G′(xi)
+
++ C√n
+ 2∥G0(xi)∥Y + ∥G(xi)∥Y + ∥G′(xi)∥Y
+
+∥G −G′∥, (B.2)
+where we used that ∥G(xi) −G′(xi)∥Y ≤√n∥G −G′∥n for i = 1, . . . , n and ∥· ∥n ≤C∥· ∥at
+the last inequality. Furthermore, Gin´e and Nickl (2016, page 40 and Proposition 2.3.7(a))
+yields that the white noise processes εi are a.s. sample dεi-continuous w.r.t. their intrinsic
+37
+
+PDF PAGE 38
+Reinhardt, Wang and Zech
+pseudometrics dεi : Y × Y →R, dεi(y, y′) = E[⟨εi, y −y′⟩2
+Y]1/2 = ∥y −y′∥Y. Since for all G,
+G′ ∈G we have
+∥G(xi) −G′(xi)∥Y ≤√n∥G −G′∥n ≤C√n∥G −G′∥,
+the white noise processes are also a.s. sample d-continuous, where d is the metric induced
+by ∥·∥.
+Together with (B.2) this shows that there exists a null-set Ω0 ⊂Ωsuch that for all
+ω ∈Ω\Ω0, u(ω, .) is continuous w.r.t. ∥·∥. Now we choose versions ˜xi and ˜εi s.t. u(ω, .) = 0
+for all ω ∈Ω0. Then G 7→u(ω, G) : (G, ∥· ∥) →R is continuous for all ω ∈Ω. Applying
+Nickl (2007, Proposition 5) gives an (Σ, BG)-measurable MLSE ˆGn in (2.3) with the desired
+minimization property.
+Sub-Gaussian case.
+For i = 1, . . . , n, consider the functions ui from (B.1).
+The
+measurability of ui( . , G), i = 1, . . . , n follows from the measurability of the scalar product
+⟨. , .⟩Y, the norm ∥· ∥Y, G0 and all G ∈G.
+Note that in contrast to the white noise
+case, εi are RVs in Y for all i = 1, . . . , n and therefore measurable without any further
+investigation. Also, since εi(ω) ∈Y for all ω, Cauchy–Schwarz immediately shows that
+ui(ω, .) and therefore u(ω, .) is continuous w.r.t. ∥· ∥for all ω ∈Ω\Ω0. Choosing versions
+˜xi and ˜εi and applying Nickl (2007, Proposition 5) as above gives the existence of an
+(Σ, BG)-measurable LSE ˆGn in (2.3) and therefore finishes the proof.
+B.1.2 Concentration Inequality for ˆGn
+The proof follows ideas developed in van de Geer (2000, Section 10.3) as well as Nickl and
+Wang (2024), where generic chaining bounds from Dirksen (2015) were used to bound the
+relevant empirical processes appearing below.
+Slicing argument. Recall the definition (2.4) of the empirical norm. For R2
+n ≥2∥G∗−G0∥2
+n,
+we have
+Px
+G0
+ ∥ˆGn −G0∥2
+n ≥R2
+n
+
+≤Px
+G0
+ 2
+ ∥ˆGn −G0∥2
+n −∥G∗−G0∥2
+n
+
+≥R2
+n
+
+.
+(B.3)
+As a union of disjoint events, it holds
+Px
+G0
+ 2
+ ∥ˆGn −G0∥2
+n −∥G∗−G0∥2
+n
+
+≥R2
+n
+
+=
+∞
+X
+s=0
+Px
+G0
+
+22sR2
+n ≤2
+ ∥ˆGn −G0∥2
+n −∥G∗−G0∥2
+n
+
+< 22s+2R2
+n
+
+.
+Applying the basic inequality (Lemma 30) and defining the empirical process (XG : G ∈G)
+indexed by the operator class G as
+XG = 1
+n
+n
+X
+i=1
+⟨εi, G(xi) −G∗(xi)⟩Y,
+38
+
+PDF PAGE 39
+Statistical Learning Theory for Neural Operators
+gives
+∞
+X
+s=0
+Px
+G0
+
+22sR2
+n ≤2
+ ∥ˆGn −G0∥2
+n −∥G∗−G0∥2
+n
+
+< 22s+2R2
+n
+
+≤
+∞
+X
+s=0
+Px
+G0
+X ˆGn
+ ≥22s−2R2
+n
+σ
+, ∥ˆGn −G0∥2
+n −∥G∗−G0∥2
+n < 22s+1R2
+n
+
+≤
+∞
+X
+s=0
+Px
+G0
+
+sup
+G∈G∗n(2s+3/2Rn)
+XG
+ ≥22s−2R2
+n
+σ
+
+.
+(B.4)
+In (B.4), we additionally used that if 2∥G∗−G0∥2
+n ≤R2
+n and
+∥ˆGn −G0∥2
+n −∥G∗−G0∥2
+n
+ < 22s+1R2
+n
+then ∥ˆGn −G0∥2
+n ≤22s+1R2
+n + R2
+n/2 and thus
+∥ˆGn −G∗∥2
+n ≤2
+ ∥ˆGn −G0∥2
+n + ∥G∗−G0∥2
+n
+
+≤22s+2R2
+n + 2R2
+n ≤22s+3R2
+n.
+Concentration inequality for each slice. We wish to apply Lemma 32 to bound the proba-
+bilities in (B.4). Let CCh be the generic constant from this lemma and let δn satisfy (2.6).
+Then, due to δ 7→Ψn(δ)/δ2 being non-increasing, (2.6) gives for all Rn ≥δn and s ∈N0
+√n(22s+3R2
+n) ≥32CChσΨn(2s+3/2Rn)
+so that with Θ := G∗
+n(2s+3/2Rn)
+√n22s−2R2
+n
+σ
+≥CChΨn(2s+3/2Rn) ≥CChJ(Θ, ∥· ∥n).
+(B.5)
+With hG := G −G∗and H := {hG : G ∈Θ} we have J(Θ, ∥· ∥n) = J(H, ∥· ∥n) and thus
+(B.5) verifies assumption (A.4) of Lemma 32 for δ = 22s−2R2
+n/σ.
+Furthermore, since Θ = G∗
+n(2s+3/2Rn) ⊂G for s ∈N0, Rn > 0 and (G, ∥· ∥n) is
+compact, the space (Θ, ∥· ∥n) is separable, which verifies the last assumption of Lemma 32.
+Applying this lemma with U = 2s+3/2Rn shows that the (uncountable) suprema in (B.4)
+are measurable and that for all Rn ≥δn,
+∞
+X
+s=0
+Px
+G0
+
+sup
+G∈G∗n(2s+3/2Rn)
+XG
+ ≥22s−2R2
+n
+σ
+
+≤
+∞
+X
+s=0
+exp
+
+−
+8n24s−4R4
+n
+C2
+Chσ222s+3R2n
+
+≤
+∞
+X
+s=0
+exp
+
+−22s−4nR2
+n
+C2
+Chσ2
+
+≤
+∞
+X
+s=0
+2−2s exp
+
+−
+nR2
+n
+16C2
+Chσ2
+
+< 2 exp
+
+−
+nR2
+n
+16C2
+Chσ2
+
+.
+(B.6)
+In (B.6) we additionally used exp(−xy) ≤exp(−x)/y, which holds for all x, y ≥1, i.e. for
+Rn ≥4CChσ/√n. Combining (B.3)–(B.4) and (B.6) gives (2.7) and therefore shows the
+claim.
+39
+
+PDF PAGE 40
+Reinhardt, Wang and Zech
+B.2 Proof of Theorem 6
+We use the concentration inequality from Theorem 5 for the empirical error and combine it
+with a key concentration result for the empirical norm around the L2(γ)-norm, proved in
+Lemma 33. For any R > 0,
+PG0
+
+∥ˆGn −G0∥L2(γ) ≥R
+
+≤PG0
+
+∥ˆGn −G0∥n ≥R
+2
+
+(B.7)
++PG0
+
+∥ˆGn −G0∥L2(γ) ≥R, ∥ˆGn −G0∥L2(γ) ≥2∥ˆGn −G0∥n
+
+.
+Now suppose that Rn satisfies
+Rn ≥2 max
+
+δn, 4˜δn,
+√
+2∥G∗−G0∥∞,supp(γ), 4Cchσ
+√n , 9MF
+√n
+
+.
+This is implied by (2.11) for an appropriate choice of C. In particular, Rn ≥2
+√
+2∥G∗−G0∥n
+for all x ∈Xn. Since Theorem 5 holds for γn-almost every x ∈Xn, taking expectations over
+x ∼γn gives
+PG0
+
+∥ˆGn −G0∥n ≥Rn
+2
+
+≤2 exp
+
+−
+nR2
+n
+64C2
+Chσ2
+
+.
+(B.8)
+Furthermore, Lemma 33 gives
+PG0
+
+∥ˆGn −G0∥L2(γ) ≥Rn, ∥ˆGn −G0∥L2(γ) ≥2∥ˆGn −G0∥n
+
+≤2 exp
+
+−nR2
+n
+320M2
+F
+
+,
+(B.9)
+since we have assumed Rn ≥max{8˜δn, 18MF /√n}.
+Combining (B.8) and (B.9) shows
+(2.12) for some C.
+B.3 Proof of Corollary 7
+It remains to show (2.13). We use (B.7) to estimate
+EG0
+
+∥ˆGn −G0∥2
+L2(γ)
+
+(B.10)
+=
+Z ∞
+0
+PG0
+
+∥ˆGn −G0∥L2(γ) ≥
+p
+Rn
+
+dRn
+≤
+Z ∞
+0
+Z
+Xn Px
+G0
+
+∥ˆGn −G0∥n ≥
+√Rn
+2
+
+dγ(x) dRn
++
+Z ∞
+0
+PG0
+
+∥ˆGn −G0∥L2(γ) ≥
+p
+Rn, ∥ˆGn −G0∥L2(γ) ≥2∥ˆGn −G0∥n
+
+dRn.
+40
+
+PDF PAGE 41
+Statistical Learning Theory for Neural Operators
+For G∗∈G set Rn,1 = 2 max{δn,
+√
+2∥G∗−G0∥n, 4CChσ
+√n }, where CCh is from Lemma 32.
+Then Theorem 5 gives
+Z ∞
+0
+Z
+Xn Px
+G0
+
+∥ˆGn −G0∥n ≥
+√Rn
+2
+
+dγ(x) dRn
+≤
+Z
+Xn R2
+n,1 dγ(x) + 2
+Z ∞
+R2
+n,1
+exp
+
+−
+nRn
+64C2
+Chσ2
+
+dRn
+≤4δ2
+n + 8∥G∗−G0∥2
+L2(γ) + 16C2
+Chσ2
+n
++ 2
+Z ∞
+R2
+n,1
+exp
+
+−
+nRn
+64C2
+Chσ2
+
+dRn
+≤4δ2
+n + 8∥G∗−G0∥2
+L2(γ) + 80C2
+Chσ2
+n
+.
+Lemma 33 gives with Rn,2 = max{8˜δn, 18MF /√n}
+Z ∞
+0
+PG0
+
+∥ˆGn −G0∥L2(γ) ≥
+p
+Rn, ∥ˆGn −G0∥L2(γ) ≥2∥ˆGn −G0∥n
+
+dRn
+≤R2
+n,2 + 2
+Z ∞
+R2
+n,1
+exp
+
+−nRn
+320M2
+F
+
+dRn
+≤64˜δ2
+n + 964M2
+F
+n
+.
+(B.11)
+Combining (B.10)–(B.11) and taking an infimum over G∗∈G shows (2.13) for some C and
+thus finishes the proof of Corollary 7.
+B.4 Proof of Corollary 8
+We construct sequences (δn)n∈N and (˜δn)n∈N satisfying (2.10) and balance the approxima-
+tion term and the entropy terms in (2.12) by choosing N(n) appropriately.
+Proof of (i): Choosing ˜δ2
+n ≃n−2/(2+α) immediately shows the second part of (2.10). For
+J(δ) from (2.5) it holds
+J(δ) ≤
+Z δ
+0
+p
+H(ρ, N) dρ ≲δ1−α/2 =: Ψn(δ).
+Hence δ2
+n ≃n−2/(2+α) satisfies the first part of (2.10). Therefore Corollary 7 shows
+EG0
+h
+∥ˆGn −G0∥2
+L2(γ)
+i
+≲N−β + n−
+2
+2+α .
+Choosing N = ⌈n
+2
+(2+α)β ⌉gives the claim.
+Proof of (ii): Choosing ˜δ2
+n ≃N(1+log(n))/n shows in particular log(n) ≳log(˜δ−1
+n ), which
+in turn shows that ˜δn satisfies the second part of (2.10). For J(δ) from (2.5) it holds
+J(δ) ≲
+Z δ
+0
+p
+H(ρ, N) dρ ≲
+√
+Nδ
+ 1 + log(δ−1)
+
+=: Ψn(δ).
+Hence δ2
+n ≃N(1 + log(n))/n satisfies the first part of (2.10). Therefore Corollary 7 shows
+EG0
+h
+∥ˆGn −G0∥2
+L2(γ)
+i
+≲N−β + N(1 + log(n))
+n
+.
+Choosing N(n) = ⌈n
+1
+β+1 ⌉for all n ≥1 gives the claim.
+41
+
+PDF PAGE 42
+Reinhardt, Wang and Zech
+B.5 Proof of Theorem 10
+The concentration inequality (2.15) follows immediately from (B.7), (B.9) (which holds for
+sub-Gaussian noise) and (A.13) from Lemma 34. Application of Lemma 34 yields
+Z ∞
+0
+Z
+Xn Px
+G0
+ 
+∥ˆGn −G0∥n ≥
+√
+δ
+2
+!
+dγ(x) dδ
+≤4δ2
+n + 8∥G∗−G0∥2
+L2(γ) + 4
+Z ∞
+0
+exp
+
+−
+nδ2
+16C2
+1σ2(1 + M2
+F )
+
+dδ
+≤4δ2
+n + 8∥G∗−G0∥2
+L2(γ) + 16C1σ(1 + MF )
+rπ
+n.
+Using (B.10) and (B.11), and minimizing over G∗∈G gives the bound on the mean-squared
+error (2.16) for some C2.
+Appendix C. Neural Network Theory
+In this section we recap elementary operations and approximation theory for neural net-
+works, based on Petersen and Voigtlaender (2018). For a NN f : Rp0 →RpL+1 (see Definition
+15) we denote by sizein(f) and sizeout(f) the number of nonzero weights and biases of the
+first and last layer respectively.
+C.1 Operations on Neural Networks
+In this subsection, we recap elementary operations on NNs. We start with the parallelization
+of two NNs following Opschoor et al. (2022a, Section 2.2.1).
+Definition 35 (Parallelization) Let q ∈N, q ≥2 and σ ∈{σ1, σq}. Let f and g be two
+σ-NNs realizing the functions f and g with the same depth L. Furthermore, define the input
+dimensions of f and g as nf and ng and the output dimensions as mf and mg.3 Then there
+exists a σ-NN (f, g), called the parallelization of f and g, which simultaneously realizes f
+and g, i.e.
+(f, g) : Rnf × Rng →Rmf × Rmg : (x, ˜x) 7→(f(x), g(˜x)).
+It holds
+size ((f, g)) = size(f) + size(g),
+depth ((f, g)) = depth(f) = depth(g),
+width ((f, g)) = width(f) + width(g),
+mpar ((f, g)) = max {mpar(f), mpar(g)} ,
+(C.1)
+mranΩ((f, g))2 = mranΩ(f)2 + mranΩ(g)2.
+3. Using the syntax from (3.4a)–(3.4b), it holds nf = p0(f), ng = p0(g), mf = pL+1(f) and mg = pL+1(g).
+42
+
+PDF PAGE 43
+Statistical Learning Theory for Neural Operators
+Let N ∈N, N ≥3.
+We extend Definition 35 to parallelize N σ-neural networks fi,
+i = 1, . . . N with equal depth and denote the resulting σ-NN as ({fi}N
+i=1). It holds that
+size
+
+{fi}N
+i=1
+
+=
+N
+X
+i=1
+size(fi),
+(C.2)
+sizein
+
+{fi}N
+i=1
+
+=
+N
+X
+i=1
+sizein(fi),
+sizeout
+
+{fi}N
+i=1
+
+=
+N
+X
+i=1
+sizeout(fi),
+depth
+
+{fi}N
+i=1
+
+= depth(f1),
+width
+
+{fi}N
+i=1
+
+=
+N
+X
+i=1
+width(fi),
+(C.3)
+mpar
+
+{fi}N
+i=1
+
+=
+max
+i=1,...,N mpar(fi),
+mranΩ
+
+{fi}N
+i=1
+2
+=
+N
+X
+i=1
+mranΩ(fi)2.
+Next, we recall the concatenation of NNs, see Petersen and Voigtlaender (2018, Defini-
+tion 2.2).
+Lemma 36 (Concatenation) Let q ∈N, q ≥2 and σ ∈{σ1, σq}. Let f and g be two
+σ-NNs. Furthermore, let the output dimension mg of g equal the input dimension nf of f.
+Then there exists a σ-NN f •g realizing the composition f ◦g : x 7→f(g(x)) of the functions
+f and g. It holds
+depth (f • g) = depth(f) + depth(g),
+width (f • g) = max{width(f), width(g)},
+mranΩ(f • g) = mrang(Ω) (f) .
+There is no simple control over the size and the weight bound of the concatenation f • g
+in Definition 36. The reason is that the network f • g multiplies network weights and biases
+of the NNs f and g at layer l = depth(g)+1 (for details see Petersen and Voigtlaender 2018,
+Definition 2.2). In the following we use sparse concatenation to get control over the size and
+the weights. We first introduce the realization of the identity map and separate the analysis
+for the σ1- and σq-case. The following lemma is proven in Petersen and Voigtlaender (2018,
+Remark 2.4).
+Lemma 37 (σ1-realization of identity map) Let d ∈N and L ∈N. Then there exists
+a σ1-identity network IdRd of depth L, which exactly realizes the identity map IdRd : Rd →
+Rd, x 7→x. It holds
+size (IdRd) ≤2d(L + 1),
+(C.4)
+width (IdRd) ≤2d,
+(C.5)
+mpar (IdRd) ≤1.
+43
+
+PDF PAGE 44
+Reinhardt, Wang and Zech
+We proceed with the analogous result for the RePU activation function. The following
+lemma follows from the construction in Li (2020, Theorem 2.5 part 2) with a parallelization
+argument.
+Lemma 38 (σq-realization of identity map) Let q ∈N with q ≥2. Further let d ∈N
+and L ∈N be arbitrary. Then there exists a σq-NN IdRd of depth L, which exactly realizes
+the identity map IdRd. It holds
+size(IdRd) ≤CqdL,
+(C.6)
+width(IdRd) ≤Cqd,
+mpar(IdRd) ≤Cq,
+where Cq is independent of d (but does depend on q).
+We next define the sparse concatenation of two NNs, see Petersen and Voigtlaender
+(2018, Definition 2.5).
+Definition 39 (σ1-sparse concatenation) Let f and g be two σ1-NNs. Furthermore, let
+the output dimension mg of g equal the input dimension nf of f. Then there exists a σ1-NN
+f ◦g with
+f ◦g := f • IdRmg
+•g
+realizing the composition f ◦g : x 7→f(g(x)) of the functions f and g.4 It holds
+size(f ◦g) ≤size(g) + sizeout(g) + sizein(f) + size(f) ≤2size(f) + 2size(g), (C.7)
+sizein(f ◦g) ≤
+(
+sizein(g)
+depth(g) ≥1,
+2sizein(g)
+depth(g) = 0,
+sizeout(f ◦g) ≤
+(
+sizeout(f)
+depth(f) ≥1,
+2sizeout(f)
+depth(f) = 0,
+(C.8)
+depth(f ◦g) = depth(f) + depth(g) + 1,
+(C.9)
+width(f ◦g) ≤2 max{width(f), width(g)},
+(C.10)
+mpar(f ◦g) ≤max {mpar(f), mpar(g)} ,
+(C.11)
+mranΩ(f ◦g) = Bg(Ω) (f) .
+(C.12)
+Proof
+The bounds in (C.9), (C.10) and (C.12) follow from Definition 37 with the NN
+calculus from Definition 36. The bounds on the sizes in (C.7)–(C.8) and the weight and
+bias bound (C.11) follow from the specific structure of the σ1-identity network, see Petersen
+and Voigtlaender (2018, Remark 2.6).
+We proceed with the sparse concatenation of σq-NNs.
+4. The symbol ◦does mean either the functional concatenation of f and g or the sparse concatenation of
+the NN f and g (which realizes the function f ◦g).
+44
+
+PDF PAGE 45
+Statistical Learning Theory for Neural Operators
+Definition 40 (σq-sparse concatenation) Let q ∈N with q ≥2. Let f and g be two
+σq-NNs. Furthermore, let the output dimension mg of g equal the input dimension nf of f.
+Then there exists a σq-NN f ◦g with
+f ◦g := f • IdRmg
+•g
+realizing the composition f ◦g : x 7→f(g(x)) of the functions f and g. It holds
+size(f ◦g) ≤size(g) + (Cq −1)sizeout(g) + (Cq −1)sizein(f) + size(f)
+≤Cqsize(f) + Cqsize(g),
+(C.13)
+sizein(f ◦g) ≤
+(
+sizein(g)
+depth(g) ≥1,
+Cqsizein(g)
+depth(g) = 0,
+sizeout(f ◦g) ≤
+(
+sizeout(f)
+depth(f) ≥1,
+Cqsizeout(f)
+depth(f) = 0,
+(C.14)
+depth(f ◦g) = depth(f) + depth(g) + 1,
+(C.15)
+width(f ◦g) ≤Cq max{width(f), width(g)},
+(C.16)
+mpar(f ◦g) ≤Cq max {mpar(f), mpar(g)} ,
+(C.17)
+mranΩ(f ◦g) = Bg(Ω) (f)
+(C.18)
+with a constant Cq > 1 depending only on q.
+Proof
+The bounds in (C.15), (C.16) and (C.18) follow from Definition 38 with the NN
+calculus from Definition 36. The bounds on the sizes in (C.13)–(C.14) and the weight and
+bias bound in (C.17) hold because of the specific structure of the σq-identity network IdRn,
+see Li (2020, Eq. 2.57).
+Definitions 39 and 40 show that one can control the size, as well as the weights and biases
+of the concatenation of two NN by inserting one additional identity layer between the two
+networks.
+We end this subsection by introducing summation and scalar multiplication
+networks.
+Definition 41 (Summation networks) Let q ∈N, q ≥2, σ ∈{σ1, σq} and d, m ∈N.
+Then there exists a σ-NN Σm such that for x1, . . . , xm ∈Rd
+Σm(x1, . . . , xm) =
+m
+X
+i=1
+xi,
+with depth(Σm) = 0, width(Σm) = md, size(Σm) = md and mpar(Σm) = 1.
+Proof Set w1 = (1d, . . . , 1d) and b1 = 0 with the d × d identity matrices 1d.
+Definition 42 (Scalar multiplication networks) Let q ∈N, q ≥2 and σ ∈{σ1, σq}.
+Let α ∈R and d ∈N. Then there exists a σ-NN SMα with
+SMα(x) = αx,
+x ∈Rd.
+45
+
+PDF PAGE 46
+Reinhardt, Wang and Zech
+Furthermore, there exists a constant Cq only depending on q such that
+depth (SMα) ≤Cq max{1, log(|α|)},
+width (SMα) ≤Cqd,
+size (SMα) ≤Cqd max{1, log(|α|)},
+mpar (SMα) ≤Cq.
+Proof
+For the proof of the σ1-case, see Elbrachter et al. (2021, Lemma A.1). We prove
+the RePU case in the following.
+Without loss of generality we can choose α > 1. For α < 0 we set SMα = −SM−α. For
+0 < α < 1 we set SMα = α IdRd, where we directly multiply the weights and biases of the
+identity network (with depth L = 1) with α.
+Therefore let α > 1. Let K be the maximum integer smaller than log2(α), and set
+˜α = 2−K+1α < 1. Furthermore, set A1 = (IdRd, IdRd) and A2 = Σ2 with the one-layered
+identity network IdRd and the summation network Σ2 from Definition 41. We notice that
+A2 • A1x = 2x
+∀x ∈Rd.
+Using the bounds for Σ2 from Definition 41 and IdRd from Definition 38, we have depth(A2 •
+A1) = 1, width(A2 • A1) ≤Cqd, size(A2 • A1) ≤Cqd and mpar(A2 • A1) ≤Cq. Setting
+A2k+1 = A1, A2k+2 = A2 for k = 1, . . . , K and A2K+3 = ˜α IdRd, we get
+A2K+3 ◦A2K+2 • A2K+1 ◦A2K • A2K−1 ◦. . . .. ◦A2 • A1x = αx
+∀x ∈Rd.
+Applying the σq-NN calculus for concatenation (Definition 36) and sparse concatenation
+(Definition 40) gives the desired bounds for SMα.
+C.2 Neural Network Approximation Theory
+In this subsection, we summarize approximation results for ReLU and RePU neural net-
+works. In recent years, the expressivity and approximation properties of neural network
+architectures have been extensively studied in the literature (Mhaskar, 1996; Pinkus, 1999;
+Yarotsky, 2017; Poggio et al., 2017; Petersen and Voigtlaender, 2018; Elbrachter et al., 2021;
+Opschoor et al., 2022a; De Ryck et al., 2021). However, with few exceptions (Schmidt-
+Hieber, 2020a; De Ryck et al., 2021; Elbrachter et al., 2021), most of these works do not
+provide bounds on the size of the weights, which are crucial for controlling the entropy.
+Therefore, we revisit some of these arguments to provide complete proofs of our results.
+We start with the well-known result that ReLU-NNs can approximate the multiplication
+map exponentially fast. The following proposition was shown in Elbrachter et al. (2021,
+Proposition III.3).
+Proposition 43 (σ1-NN approximation of multiplication) Let D ∈R, D ≥1 and
+δ ∈(0, 1/2). Then there exists a σ1-NN ˜×δ,D : [−D, D]2 →R satisfying
+sup
+x,y∈[−D,D]
+˜×δ,D(x, y) −xy
+ ≤δ.
+46
+
+PDF PAGE 47
+Statistical Learning Theory for Neural Operators
+Furthermore, there exists a constant C, independent of D and δ, such that
+depth
+ ˜×δ,D
+
+≤C
+ log(D) + log
+ δ−1
+,
+(C.19)
+width
+ ˜×δ,D
+
+≤5,
+(C.20)
+size
+ ˜×δ,D
+
+≤C
+ log(D) + log
+ δ−1
+,
+(C.21)
+mpar
+ ˜×δ,D
+
+≤1.
+(C.22)
+The next proposition shows that the multiplication map can be exactly realized by a
+σq-NN, which follows directly from Li (2020, Theorem 2.5 and Eq. 2.59).
+Proposition 44 (σq-NN approximation of multiplication) Let q ∈N, q ≥2. There
+exists a σq-NN ˜× : R2 →R with depth(˜×) = 1 exactly realizing the multiplication of two
+numbers, i.e.
+˜×(x, y) = xy
+∀x, y ∈R.
+We can extend the above results to the multiplication of N numbers, see Opschoor et al.
+(2022a, Proposition 2.6).
+Proposition 45 (σ1-NN multiplication of N numbers) Let N ∈N with N ≥2. Fur-
+thermore, let D ∈R, D ≥1 and δ ∈(0, 1/2). Then there exists a σ1-NN eQ
+δ,D: [−D, D]N →
+R such that
+sup
+(yi)N
+i=1∈[−D,D]N
+
+N
+Y
+j=1
+yj −f
+Y
+δ,D(y1, . . . , yN)
+
+≤δ.
+(C.23)
+Furthermore, there exists a constant C independent of N, δ and D such that
+depth
+f
+Y
+δ,D
+
+≤C log(N)
+ log(N) + N log(D) + log
+ δ−1
+,
+width
+f
+Y
+δ,D
+
+≤5N,
+(C.24)
+size
+f
+Y
+δ,D
+
+≤CN
+ log(N) + N log(D) + log
+ δ−1
+,
+(C.25)
+mpar
+f
+Y
+δ,D
+
+≤1.
+Proof Analogous to Opschoor et al. (2022a, Proposition 2.6) we construct eQ
+δ,D as a binary
+tree of ˜×.,.-networks from Proposition 43. We modify the proof of Opschoor et al. (2022a)
+to get a construction with bounded weights.
+Define ˜N := min{2k : k ∈N, 2k ≥N}.
+We now consider the multiplication of ˜N
+numbers with yN+1, . . . , y ˜
+N := 1. This can be implemented by a zero-layer network with
+w1
+i,j =
+(
+1
+i = j ≤N,
+0
+otherwise,
+b1
+j =
+(
+0
+j ≤N,
+1
+N < j ≤˜N.
+47
+
+PDF PAGE 48
+Reinhardt, Wang and Zech
+For l = 0, . . . , log2 ˜N −1 we define the mapping Rl
+Rl : [−Dl, Dl]
+˜
+N
+2l 7→[−Dl+1, Dl+1]
+˜
+N
+2l+1 ,
+Rl(yl
+1, . . . , yl
+2log2( ˜
+N)−l) :=
+
+˜×δ′,Dl(yl
+1, yl
+2), . . . , ˜×δ′,Dl(yl
+2log2( ˜
+N)−l−1, yl
+2log2( ˜
+N)−l)
+
+(C.26)
+with δ′ := δ/( ˜N2D2 ˜
+N) and Dl := 2lD2l. We now set
+f
+Y
+δ,D := Rlog2( ˜
+N)−1 ◦· · · ◦R0.
+(C.27)
+Eq. (C.27) shows that the map Rl describes the multiplications on level l of the binary tree
+eQ
+δ,D. In order for (C.27) to be well-defined, we have to show that the outputs of the NN
+Rl are admissible inputs for the NN Rl+1.
+We therefore denote with yl
+j, j = 1, . . . , 2log2( ˜
+N)−l, l = 1, . . . , log2( ˜N) −1, the output of
+the network Rl−1 ◦· · · ◦R0 applied to the input y0
+k = yk, k = 1, . . . , ˜N. Then we have to
+show |yl
+j| ≤Dl for l = 0, . . . , log2( ˜N) −1 and j = 1, . . . , 2log2( ˜
+N)−l. We will show this claim
+by induction. For l = 0 it holds |yl
+j| ≤D = D0. Now assume |yl
+j| ≤Dl for arbitrary but
+fixed l ∈{0, . . . , log2( ˜N) −2} and all j = 1, . . . , 2log2( ˜
+N)−l. Then it holds
+|yl+1
+j
+| = |˜×δ′,Dl(yl
+2j−1, yl
+2j)|
+= |yl
+2j−1 · yl
+2j + δ′| ≤D2
+l +
+δ′
+|{z}
+≤1≤D2
+l
+≤2D2
+l = Dl+1
+for all j = 1, . . . , 2log2( ˜
+N)−(l+1), which shows the claim. We proceed by showing the error
+bound in (C.23). Therefore define
+zl
+j :=
+2l
+Y
+k=1
+yk+2l(j−1)
+for l = 0, . . . , log2( ˜N) and j = 1, . . . , 2log2( ˜
+N)−l. The quantites zl
+j describe the exact com-
+putations up to level l of the binary tree, i.e. the output of level l −1, if one uses standard
+multiplication instead of the multiplication networks ˜× in the first l −1 levels. We now
+prove
+|yl
+j −zl
+j| ≤4lD2l+1δ′,
+j = 1, . . . , 2log2( ˜
+N)−l
+(C.28)
+by induction over l = 0, . . . , log2 ˜N. Inserting l = log2( ˜N) then shows the error bound in
+(C.23) using the definition of δ′.
+48
+
+PDF PAGE 49
+Statistical Learning Theory for Neural Operators
+We have y0
+j = yj = z0
+j for j = 1, . . . , ˜N, therefore (C.28) holds for l = 0. Now assume
+(C.28) for arbitrary but fixed l ∈{0, . . . , log2( ˜N) −1}. For j = 1, . . . , 2log2( ˜
+N)−(l+1) it holds
+|yl+1
+j
+−zl+1
+j
+| =
+˜×Dl,δ′(yl
+2j−1, yl
+2j) −zl
+2j−1zl
+2j
+
+=
+yl
+2j−1yl
+2j + δ′ −zl
+2j−1zl
+2j
+
+=
+(yl
+2j−1 −zl
+2j−1 + zl
+2j−1) · (yl
+2j −zl
+2j + zl
+2j) + δ′ −zl
+2j−1zl
+2j
+
+=
+(yl
+2j−1 −zl
+2j−1) · (yl
+2j −zl
+2j) + (yl
+2j−1 −zl
+2j−1)zl
+2j
++ (yl
+2j −zl
+2j)zl
+2j−1 + δ′
+≤
+yl
+2j−1 −zl
+2j−1
+
+|
+{z
+}
+use(C.28)
+·
+yl
+2j −zl
+2j
+
+|
+{z
+}
+≤1
++
+yl
+2j−1 −zl
+2j−1
+
+|
+{z
+}
+use(C.28)
+·
+zl
+2j
+
+|{z}
+≤D2l
++
+yl
+2j −zl
+2j
+
+|
+{z
+}
+use(C.28)
+·
+zl
+2j−1
+
+| {z }
+≤D2l
++|δ′|
+≤δ′ 
+4lD2l+1 
+1 + 2D2l
++ 1
+
+≤4 4lD2l+1D2l+1δ′ ≤4l+1D2l+2δ′,
+which shows (C.28) for l + 1 and therefore the claim.
+We proceed by calculating the depth of eQ
+δ,D. Since eQ
+δ,D concatenates the maps ˜×δ′,Dl,
+we can repeatedly use (C.9) and get
+depth
+f
+Y
+δ,D
+
+≤
+log2( ˜
+N)−1
+X
+j=0
+depth
+ ˜×δ′,Dj
+
++ log2( ˜N) −1.
+We use the depth bound for ˜× from (C.19) and calculate
+depth
+f
+Y
+δ,D
+
+≤C
+log2( ˜
+N)−1
+X
+j=0
+log
+ Djδ′−1
++ log2( ˜N)
+= C
+log2( ˜
+N)−1
+X
+j=0
+log
+
+2jD2jδ′−1
++ log2( ˜N)
+= C log
+
+
+log2( ˜
+N)−1
+Y
+j=0
+2jD2jδ′−1
+
++ log2( ˜N)
+≤C log
+
+2
+log2( ˜
+N)·(log2( ˜
+N)−1)
+2
+D2log2( ˜
+N)  δ′−log2( ˜
+N)
+
++ log2( ˜N)
+≤C log
+
+2(log2( ˜
+N))
+2
+D
+˜
+N ˜N2 log2( ˜
+N)D2 ˜
+N log2( ˜
+N)δ−log2( ˜
+N)
++ log2( ˜N)
+≤C log
+
+2(log2( ˜
+N)
+2 ˜N2 log2( ˜
+N)D3 ˜
+N log2( ˜
+N)δ−log2( ˜
+N)
++ log2( ˜N)
+≤C log(N)
+ log(N) + N log(D) + log
+ δ−1
+.
+(C.29)
+49
+
+PDF PAGE 50
+Reinhardt, Wang and Zech
+The constant C changes from line to line in (C.29).
+For a bound on the width we use the fact that eQ
+δ,D is a parallelization of at most
+˜N/2 ≤N networks ˜×δ′,Dl in each layer l ∈{1, . . . , log2( ˜N)}. With (C.3) and the width
+bound of ˜× in (C.20) it holds
+width
+f
+Y
+δ,Dl
+
+≤N width
+ ˜×δ′,Dl
+
+≤5N.
+For a bound on the size size( eQ
+δ,D) we observe that level l, l = 0, . . . , log2( ˜N) −1, of the
+binary tree ˜Q consists of 2log2( ˜
+N)−l−1 product networks ˜×δ′,Dl. We calculate
+size
+f
+Y
+δ,D
+
+≤
+log2( ˜
+N)−1
+X
+l=0
+2log2( ˜
+N)−l−1  sin
+ ˜×δ′,Dl
+
++ sout
+ ˜×δ′,Dl
+
++ size
+ ˜×δ′,Dl
+
+≤
+log2( ˜
+N)−1
+X
+l=0
+2log2( ˜
+N)−l−13C log
+ Dlδ′−1
+≤C
+log2( ˜
+N)−1
+X
+l=0
+2log2( ˜
+N)−l−1 log
+
+2lD2l ˜N2D2 ˜
+Nδ−1
+≤C
+log2( ˜
+N)−1
+X
+l=0
+2log2( ˜
+N)−l−1 
+l + 2l log(D) + log
+
+˜N
+
++ ˜N log(D) + log
+ δ−1
+≤C
+
+˜N log2( ˜N) + ˜N log2( ˜N) log(D) + ˜N log( ˜N) + ˜N2 log(D) + ˜N log
+ δ−1
+≤CN
+ log(N) + N log(D) + log
+ δ−1
+.
+(C.30)
+In (C.30) we used (C.7) to bound the size of a sparse concatenation and (C.21) for the size
+of the product network ˜×δ,D.
+For the bound on the weights and biases, we get mpar( eQ
+δ,D) ≤1 because of mpar(˜×δ,D)
+≤1, see (C.22), and the NN calculus for sparse concatenation in (C.11) and parallelization
+in (C.1).
+We continue with the RePU-case.
+Proposition 46 (σq-NN of multiplication of N numbers) Let N, q ∈N with N, q ≥
+2. Then there exists a σq-NN eQ: RN →R such that
+f
+Y
+(y1, . . . , yN) =
+N
+Y
+j=1
+yj.
+50
+
+PDF PAGE 51
+Statistical Learning Theory for Neural Operators
+Furthermore, there exists a constant Cq independent of N such that
+depth
+f
+Y
+δ,D
+
+≤Cq log(N),
+(C.31)
+width
+f
+Y
+δ,D
+
+≤CqN,
+(C.32)
+size
+f
+Y
+δ,D
+
+≤CqN,
+(C.33)
+mpar
+f
+Y
+δ,D
+
+≤Cq.
+(C.34)
+Proof
+The construction is similar to the ReLU case. We define ˜Q as a binary tree of
+product networks ˜×, see (C.26) and (C.27). The binary tree has a maximum of 2N binary
+networks ˜×, a maximum height of log2(2N) and a maximum width of N. Therefore (C.31)–
+(C.34) follow with the NN calculus rules from Definition 40.
+We proceed and state the approximation results for univariate polynomials. We start
+with the ReLU case.
+The following proposition was shown in Elbrachter et al. (2021,
+Proposition III.5).
+Proposition 47 (σ1-NN approximation of polynomials) Let m ∈N and a = (ai)m
+i=0
+∈Rm+1. Further let D ∈R, D ≥1 and δ ∈(0, 1/2). Define a∞= max{1, ∥a∥∞}. Then
+there exists a σ1-NN ˜pδ,D : [−D, D] →R satisfying
+sup
+x∈[−D,D]
+˜pδ,D(x) −
+m
+X
+i=0
+aixi
+ ≤δ.
+Furthermore, there exists a constant C independent of m, ai, D and δ such that
+depth(˜pδ,D) ≤Cm
+ m log (D) + log
+ δ−1
++ log(m) + log(a∞)
+
+,
+width (˜pδ,D) ≤9,
+size (˜pδ,D) ≤Cm
+ m log (D) + log
+ δ−1
++ log(m) + log(a∞)
+
+,
+mpar (˜pδ,D) ≤1.
+In the RePU-case we get the well-known result that polynomials can be exactly realized
+by σq-NNs, see Li et al. (2019).
+Proposition 48 (σq-NN realization of polynomials) Let m, q ∈N, q ≥2 and a =
+(ai)m
+i=0 ∈Rm+1. Set a∞= max{1, maxi=0,...,m ai}. Then there exists a σq-NN ˜p : R →R
+satisfying
+˜p(x) =
+m
+X
+i=0
+aixi
+∀x ∈R.
+51
+
+PDF PAGE 52
+Reinhardt, Wang and Zech
+Furthermore, there exists a constant Cq only depending on q such that
+depth(˜p) ≤Cq (log(a∞) + m) ,
+width (˜p) ≤Cq,
+size (˜p) ≤Cq (log(a∞) + m) ,
+mpar (˜p) ≤Cq.
+Proof We use Horner’s method for polynomial evaluation and write
+m
+X
+i=0
+aixi = a∞
+ a0
+a∞
++ x
+ a1
+a∞
++ · · · + x
+am−1
+a∞
++ x am
+a∞
+
+. . .
+
+.
+(C.35)
+Following (C.35), we build ˜p via
+˜p = SMa∞◦Σ2
+ a0
+a∞
+, ˜×
+
+IdR, Σ2
+ a1
+a∞
+, . . . , SMama−1
+∞(IdR)
+
+. . .
+
+.
+The bounds for ˜p follow from the respective bounds for Σ2 from Definition 41, IdR from
+Lemma 38 and SMα from Definition 42.
+We now use Propositions 47 and 48 to get an approximation result for univariate Leg-
+endre polynomials.
+Corollary 49 (σ1-NN approximation of Lj) Let j ∈N0 and δ ∈(0, 1/2). Then there
+exists a σ1-NN ˜Lj,δ : [−1, 1] →R with
+sup
+x∈[−1,1]
+|˜Lj,δ(x) −Lj(x)| ≤δ.
+Furthermore, there exists a constant C such that it holds
+depth
+
+˜Lj,δ
+
+≤Cj
+ j + log(δ−1)
+
+,
+(C.36)
+width
+
+˜Lj,δ
+
+≤9,
+(C.37)
+size
+
+˜Lj,δ
+
+≤Cj
+ j + log
+ δ−1
+,
+(C.38)
+mpar
+
+˜Lj,δ
+
+≤1.
+Proof
+For j ∈N, l ∈N0, l ≤j, denote the coefficients of Lj with cj
+l .
+In Opschoor
+et al. (2020, Eq. (4.17)) the bound Pj
+l=0 |cj
+l | ≤4j is derived. With cj = (cj
+l )j
+l=0 it holds
+∥cj∥∞≤Pj
+l=0 |cj
+l | ≤4j. The result now follows with Proposition 47.
+We continue with the σq-case.
+52
+
+PDF PAGE 53
+Statistical Learning Theory for Neural Operators
+Corollary 50 (σq-NN approximation of Lj) Let j ∈N0. Then there exists a σq-NN
+˜Lj : R →R with
+˜Lj(x) = Lj(x)
+∀x ∈R.
+Furthermore, there exists a constant Cq only depending on q such that it holds
+depth
+
+˜Lj
+
+≤Cqj,
+(C.39)
+width
+
+˜Lj
+
+≤Cq,
+(C.40)
+size
+
+˜Lj
+
+≤Cqj,
+(C.41)
+mpar
+
+˜Lj
+
+≤Cq.
+Proof The bounds follow similar to the σ1-case using Proposition 48.
+Appendix D. Proofs of Section 3
+D.1 Proof of Proposition 17
+We proceed analogously to the proof of Opschoor et al. (2022a, Proposition 2.13).
+We
+define fΛ,δ as a composition of two subnetworks, fΛ,δ := f(1)
+Λ,δ ◦f(2)
+Λ,δ. Corollary 49 ensures the
+existence of (arbitrarily good) σ1-NN approximations of univariate Legendre polynomials.
+All relevant approximations are evaluated, in parallel, by subnetwork f(2)
+Λ,δ, i.e.
+f(2)
+Λ,δ(y) :=
+n
+IdR ◦˜Lνj,δ′(yj)
+o
+(j,νj)∈T
+
+,
+(D.1)
+where we used
+T :=
+
+(j, νj) ∈N2 : ν ∈Λ, j ∈suppν
+	
+,
+(D.2)
+δ′ := (2d(Λ))−1 (2m(Λ) + 2)−d(Λ)+1 δ
+and y = (yj)(j,νj)∈T . In (D.1) the big round brackets denote a parallelization and we use the
+identity networks to synchronize the depth. The subnetwork f(1)
+Λ,δ takes the output of f(2)
+Λ,δ as
+input and computes, in parallel, tensorized Legendre polynomials using the multiplication
+networks eQ
+.,. introduced in Proposition 45. With Mν := 2|ν|1 + 2 we define
+f(1)
+Λ,δ
+ (zk)k≤|T|
+
+= f(1)
+Λ,δ
+
+f(2)
+Λ,δ(y)
+
+:=
+
+IdR ◦f
+Y
+δ/2,Mν
+n
+IdR ◦˜Lνj,δ′(yj)
+o
+j∈suppν
+
+ν∈Λ
+
+.
+(D.3)
+The multiplication networks in (D.3) are well-defined, since
+sup
+yj∈[−1,1]
+|˜Lνj,δ′(yj)| ≤2νj + 2 ≤2|ν|1 + 2 = Mν,
+(D.4)
+53
+
+PDF PAGE 54
+Reinhardt, Wang and Zech
+where we used (3.10) and δ′ < 1.
+We will first show the error bound in (3.12).
+Let ν ∈Λ be arbitrary.
+We use the
+shorthand notation ∥· ∥:= ∥· ∥L∞([−1,1]|T |) and calculate
+Lν −˜Lν,δ
+
+≤
+
+Lν −
+Y
+j∈suppν
+˜Lνj,δ′
+
++
+
+Y
+j∈suppν
+˜Lνj,δ′ −f
+Y
+δ/2,Mν
+n
+˜Lνj,δ′
+o
+j∈suppν
+
+≤
+X
+k∈suppν
+
+Y
+j∈suppν:
+j<k
+˜Lνj,δ′
+
+·
+Lνk −˜Lνk,δ′
+ ·
+
+Y
+j∈suppν:
+j>k
+Lνj
+
++ δ
+2
+≤d(Λ)Md(Λ)−1
+ν
+δ′ + δ
+2 ≤
+
+Mν
+2m(Λ) + 2
+d(Λ)−1 δ
+2 + δ
+2 ≤δ,
+where we used (D.4), Mν ≤2m(Λ) + 2 and the definition of δ′.
+We proceed and calculate the depth L of fΛ,δ.
+Since fΛ,δ = f(1)
+Λ,δ ◦f(2)
+Λ,δ, it holds
+depth(fΛ,δ) ≤depth(f(1)
+Λ,δ) + depth(f(2)
+Λ,δ) + 1, see (C.9).
+We start with a depth bound
+of f(2)
+Λ,δ. Denoting by C a universal multiplicative constant that is allowed to change from
+line to line, it holds that
+depth
+
+f(2)
+Λ,δ
+
+= 1 +
+max
+ν∈Λ
+j∈suppν
+depth
+
+˜Lνj,δ′
+
+≤C
+max
+ν∈Λ
+j∈suppν
+νj
+ νj + log
+ δ′−1
+≤Cm(Λ)
+ m(Λ) + log
+ δ′−1
+≤Cm(Λ)
+ log (d(Λ)) + d(Λ) log (m(Λ)) + m(Λ) + log
+ δ−1
+≤Cm(Λ)
+ log (d(Λ)) + d(Λ) log (m(Λ)) + m(Λ) + log
+ δ−1
+.
+(D.5)
+In (D.5) we used the depth bound for univariate Legendre polynomials, (C.36), at the first
+inequality. Furthermore, we used νj ≤m(Λ). For the depth of f(1)
+Λ,δ it holds
+depth
+
+f(1)
+Λ,δ
+
+= 1 + max
+ν∈Λ depth
+f
+Y
+δ/2,Mν
+
+≤1 + C max
+ν∈Λ log (| supp ν|)
+ log (| supp ν|) + | supp ν| log (Mν) + log
+ δ−1
+≤1 + C log (d(Λ))
+ log (d(Λ)) + d(Λ) log (m(Λ)) + log
+ δ−1
+,
+(D.6)
+where we used | supp ν| ≤d(Λ) for all ν ∈Λ, Mν ≤4m(Λ) and the depth bound for σ1-
+multiplication networks from Proposition 45. Combining the two depth bounds (D.5) and
+54
+
+PDF PAGE 55
+Statistical Learning Theory for Neural Operators
+(D.6), we get
+depth (fΛ,δ) = 1 + depth
+
+f(1)
+Λ,δ
+
++ depth
+
+f(2)
+Λ,δ
+
+≤Cm(Λ)
+ log (d(Λ)) + d(Λ) log (m(Λ)) + m(Λ) + log
+ δ−1
++ C log (d(Λ))
+ log (d(Λ)) + d(Λ) log (m(Λ)) + log
+ δ−1
+≤C
+h
+log(d(Λ))d(Λ) log(m(Λ))m(Λ) + m(Λ)2 + log(δ−1)
+ log(d(Λ)) + m(Λ)
+i
+.
+For the width width(fΛ,δ) we use width(fΛ,δ) ≤2 max{width(f(1)
+Λ,δ), width(f(2)
+Λ,δ)}, see (C.10).
+This leaves us to calculate width(f(2)
+Λ,δ) and width(f(1)
+Λ,δ). It holds
+width
+
+f(2)
+Λ,δ
+
+≤
+X
+(j,νj)∈T
+width
+
+IdR ◦˜Lνj,δ′
+
+≤2
+X
+(j,νj)∈T
+width
+
+˜Lνj,δ′
+
+≤18|T|,
+(D.7)
+where we used (C.5) for the width of the σ1-identity network and (C.37) for the width of
+˜Lνj,δ′. For width(f(1)
+Λ,δ) it holds
+width
+
+f(1)
+Λ,δ
+
+≤
+X
+ν∈Λ
+width
+
+IdR ◦f
+Y
+δ/2,Mν
+
+≤2
+X
+ν∈Λ
+width
+f
+Y
+δ/2,Mν
+
+≤
+X
+ν∈Λ
+10d(Λ) = 10|Λ|d(Λ),
+(D.8)
+again using (C.5) and (C.24) for the width of the multiplication network eQ. Combining
+(D.7) and (D.8) gives
+width (fΛ,δ) ≤36|Λ|d(Λ),
+where |T| ≤|Λ|d(Λ) was used.
+To estimate size(fΛ,δ), we use (C.7) and find size(fΛ,δ) ≤2size(f(1)
+Λ,δ) + 2size(f(2)
+Λ,δ). We
+calculate
+size
+
+f(2)
+Λ,δ
+
+= size
+n
+IdR ◦˜Lνj,δ′(yj)
+o
+(j,νj)∈T
+
+=
+X
+(j,νj)∈T
+size
+
+IdR ◦˜Lνj,δ′(yj)
+
+≤2m(Λ)d(Λ) max
+(j,νj)∈T
+
+size (IdR) + size
+
+˜Lνj,δ′(yj)
+
+≤10m(Λ)d(Λ) max
+(j,νj)∈T size
+
+˜Lνj,δ′(yj)
+
+≤Cd(Λ)m(Λ)2  m(Λ) + log
+ δ′−1
+≤Cd(Λ)m(Λ)2  log (d(Λ)) + d(Λ) log (m(Λ)) + m(Λ) + log
+ δ−1
+. (D.9)
+55
+
+PDF PAGE 56
+Reinhardt, Wang and Zech
+In (D.9) we used the NN calculus rules for the sizes of a sparse concatenation in (C.7) and
+a parallelization in (C.2). Furthermore, we used |T| ≤m(Λ)d(Λ) at the first equality and
+size (IdR) ≤4 max
+(j,νj)∈T depth
+
+˜Lνj,δ′(yj)
+
+≤4 max
+(j,νj)∈T size
+
+˜Lνj,δ′(yj)
+
+,
+(D.10)
+which follows from (C.4). At the third inequality in (D.9) we used the size bound for the
+univariate Legendre polynomials from (C.38).
+For size(f(1)
+Λ,δ) it holds
+size
+
+f(1)
+Λ,δ
+
+=
+X
+ν∈Λ
+size
+
+IdR ◦f
+Y
+δ/2,Mν
+
+≤2
+X
+ν∈Λ
+
+size(IdR) + size
+f
+Y
+δ/2,Mν
+
+≤10|Λ| max
+ν∈Λ size
+f
+Y
+δ/2,Mν
+
+≤C|Λ| max
+ν∈Λ | supp ν|
+ log (| supp ν|) + | supp ν| log(Mν) + log
+ δ−1
+≤C|Λ|d(Λ)
+ log (d(Λ)) + d(Λ) log(m(Λ)) + log
+ δ−1
+.
+(D.11)
+In (D.11), we used the size bound for ˜Q from (C.25) and the argument from (D.10). Ad-
+ditionally we used Mν = 2|ν|1 + 2 ≤4m(Λ). Combining (D.9) and (D.11) shows the size
+bound for fΛ,δ.
+The network fΛ,δ consists of sparse concatenations and parallelizations of the networks
+˜Q and ˜Lj. Because we have mpar( ˜Q) ≤1 and mpar(˜Lj) ≤1, the NN calculus rules (C.11)
+and (C.1) yield mpar(fΛ,δ) ≤1. This finishes the proof.
+D.2 RePU-Realization of Tensorized Legendre Polynomials
+We show a result analogous to Proposition 17 for the RePU-realization of tensorized Legen-
+dre polynomials. The construction is similar to Opschoor et al. (2022a, Proposition 2.13).
+Proposition 51 (σq-NN approximation of Lν) Consider the setting of Proposition 17.
+Let q ∈N, q ≥2. Then there exists a σq-NN fΛ such that the outputs {˜Lν}ν∈Λ of fΛ satisfy
+∀ν ∈Λ, ∀y ∈U :
+˜Lν(y) = Lν(y).
+Furthermore, there exists a constant Cq > 0 depending only on q such that
+depth
+ fΛ
+
+≤Cq
+
+m(Λ) + log
+ d(Λ)
+
+,
+width
+ fΛ
+
+≤Cq|Λ|d(Λ),
+size
+ fΛ,δ
+
+≤Cqd(Λ)
+
+|Λ| + m(Λ)2
+
+,
+mpar
+ fΛ,δ
+
+≤Cq.
+56
+
+PDF PAGE 57
+Statistical Learning Theory for Neural Operators
+Proof Similar to the proof of Proposition 17 we define fΛ as a composition of two subnet-
+works f(1)
+Λ
+and f(2)
+Λ . It holds
+f(2)
+Λ (y) :=
+n
+IdR ◦˜Lνj(yj)
+o
+(j,νj)∈T
+
+and
+f(1)
+Λ
+ (zk)k≤|T|
+
+= f(1)
+Λ
+
+f(2)
+Λ (y)
+
+:=
+
+IdR ◦f
+Y n
+IdR ◦˜Lνj(yj)
+o
+j∈suppν
+
+ν∈Λ
+
+with T from (D.2) and y = (yj)(j,νj)∈T . Furthermore, we use the σq-NNs ˜Lj from Corollary
+50 and ˜Q from Proposition 46. The calculations are similar to the proof of Proposition 17.
+It holds
+depth
+
+f(2)
+Λ
+
+= 1 +
+max
+ν∈Λ
+j∈suppν
+depth
+
+˜Lνj
+
+≤Cq
+max
+ν∈Λ
+j∈suppν
+νj ≤Cqm(Λ).
+(D.12)
+In (D.12) we used the depth bound for univariate Legendre polynomials, (C.39). Further-
+more, we used νj ≤m(Λ) for all ν ∈Λ and j ∈supp ν. For the depth of f(1)
+Λ
+it holds
+depth
+
+f(1)
+Λ
+
+= 1 + max
+ν∈Λ depth
+f
+Y
+≤1 + Cq max
+ν∈Λ log (| supp ν|)
+≤1 + Cq log (d(Λ)) ,
+(D.13)
+where we used | supp ν| ≤d(Λ) for all ν ∈Λ and the depth bound for σq-multiplication
+networks from Proposition 46. Combining the two depth bounds from (D.12) and (D.13),
+we get
+depth(fΛ) ≤Cq (m(Λ) + log(d(Λ))) .
+For the width width(fΛ) we calculate
+width
+
+f(2)
+Λ
+
+=
+X
+(j,νj)∈T
+width
+
+IdR ◦˜Lνj
+
+≤Cq
+X
+(j,νj)∈T
+width
+
+˜Lνj
+
+≤Cq|T|, (D.14)
+where we used (C.16) for the width of a σq-sparse concatenation and (C.40) for the width
+of ˜Lνj. For width(f(1)
+Λ ) it holds
+width
+
+f(1)
+Λ
+
+≤
+X
+ν∈Λ
+width
+
+IdR ◦f
+Y
+≤Cq
+X
+ν∈Λ
+width
+f
+Y
+≤Cq
+X
+ν∈Λ
+d(Λ) = Cq|Λ|d(Λ)
+(D.15)
+using (C.16) and (C.32) for the width of the multiplication network eQ. Combining (D.14)
+and (D.15) gives
+width (fΛ) ≤Cq|Λ|d(Λ),
+57
+
+PDF PAGE 58
+Reinhardt, Wang and Zech
+where |T| ≤|Λ|d(Λ) was used.
+To estimate size(fΛ), we use (C.13) and find size(fΛ) ≤Cq(size(f(1)
+Λ ) + size(f(2)
+Λ )). We
+calculate
+size
+
+f(2)
+Λ
+
+= size
+n
+IdR ◦˜Lνj(yj)
+o
+(j,νj)∈T
+
+=
+X
+(j,νj)∈T
+size
+
+IdR ◦˜Lνj(yj)
+
+≤Cqm(Λ)d(Λ) max
+(j,νj)∈T
+
+size (IdR) + size
+
+˜Lνj(yj)
+
+≤Cqm(Λ)d(Λ) max
+(j,νj)∈T size
+
+˜Lνj(yj)
+
+≤Cqd(Λ)m(Λ)2.
+(D.16)
+In (D.16) we used |T| ≤m(Λ)d at the first inequality and
+size (IdR) ≤Cq max
+(j,νj)∈T depth
+
+˜Lνj(yj)
+
+≤Cq max
+(j,νj)∈T size
+
+˜Lνj(yj)
+
+,
+(D.17)
+which follows from (C.6). At the third inequality in (D.16) we used the size bound for the
+univariate Legendre polynomials from (C.41).
+For size(f(1)
+Λ ) it holds
+size
+
+f(1)
+Λ
+
+=
+X
+ν∈Λ
+size
+
+IdR ◦f
+Y
+≤Cq
+X
+ν∈Λ
+
+size(IdR) + size
+f
+Y
+≤Cq|Λ| max
+ν∈Λ size
+f
+Y
+≤Cq|Λ| max
+ν∈Λ | supp ν|
+≤Cq|Λ|d(Λ).
+(D.18)
+In (D.18) we used the size bound for ˜Q from (C.33) and the argument from (D.17). Com-
+bining (D.16) and (D.18) shows the size bound for fΛ.
+The network fΛ consists of sparse concatenations and parallelizations of the networks
+˜Q and ˜Lj. Because we have mpar( ˜Q) ≤Cq and mpar(˜Lj) ≤Cq, the NN calculus rules
+(C.17) and (C.1) yield mpar(fΛ) ≤Cq. This finishes the proof.
+D.3 Proof of Theorem 18
+The following two theorems are similar to Herrmann et al. (2024, Theorem 5) and will be
+required for the proof of Theorem 18.
+58
+
+PDF PAGE 59
+Statistical Learning Theory for Neural Operators
+Theorem 52 For N, q ∈N, consider the sparse FrameNet class Gsp
+FN(σq, N). Let Assump-
+tion 2 be satisfied with r > 1 and t > 0. Fix τ > 0 (arbitrary small). Then there exists a
+constant C > 0 independent of N, such that there exists ΓN ∈Gsp
+FN(σq, N) with
+sup
+a∈Cr
+R(X)
+∥ΓN(a) −G0(a)∥Y ≤CN−min{r−1,t}+τ.
+(D.19)
+Theorem 53 Consider the setting of Theorem 52. Let ΨX be a Riesz basis. Additionally,
+let γ be as in (3.9). Fix τ > 0 (arbitrary small). Then there exists a constant C > 0
+independent of N, such that there exists ΓN ∈Gsp
+FN(σq, N) with
+∥ΓN −G0∥L2(Cr
+R(X),γ;Y) ≤CN−min{r−1
+2 ,t}+τ.
+(D.20)
+We first show that Theorems 52 and 53 imply Theorem 18.
+Proof [Proof of Theorem 18] First consider the setting of Theorem 52. Let τ > 0. Then
+there exists a constant C independent of N and a FrameNet ΓN ∈Gsp
+FN(σq, N) such that
+for all N ∈N
+∥ΓN −G0∥2
+∞,supp(γ) ≤
+sup
+a∈Cr
+R(X)
+∥ΓN(a) −G0(a)∥2
+Y ≤CN−2 min{r−1,t}+τ,
+where we used (D.19) with τ/2 and supp(γ) ⊆Cr
+R(X) by Assumption 2.
+Now consider the setting of Theorem 53. Let τ > 0. Then there exists a constant C
+independent of N and a FrameNet Gsp
+FN(σq, N) with
+∥ΓN −G0∥2
+L2(γ) ≤∥ΓN −G0∥2
+L2(Cr
+R(X),γ;Y) ≤CN−2 min{r−1
+2 ,t}+τ,
+where we used supp(γ) ⊂Cr
+R(X) (Assumption 2) and (D.20) with τ/2.
+We are left to prove Theorems 52 and 53. We need some auxiliary results.
+D.3.1 Auxiliary Results
+For r > 1, R > 0, U = [−1, 1]N and σr
+R from (3.7) we define
+u : U →Y,
+u(y) := (G0 ◦σr
+R)(y).
+For the proofs of Theorems 52 and 53 we do a Y-valued tensorized Legendre expansion of u
+in the frame (ηjLν(y))j,ν of L2(U, π; Y), which reads
+u(y) = G0(σr
+R(y)) =
+X
+j∈N
+X
+ν∈F
+cν,jηjLν(y)
+(D.21)
+with Legendre coefficients
+cν,j :=
+Z
+U
+Lν(y) ⟨u(y), ˜ηj⟩Y dπ(y).
+(D.22)
+Our aim is to construct the network ΓN out of the tensorized Legendre polynomials with
+the “most important” contributions to the expansion. This contribution is quantified via
+59
+
+PDF PAGE 60
+Reinhardt, Wang and Zech
+the Legendre coefficients cν,j in (D.22). We therefore have to examine bounds on cν,j and
+analyze their respective structure. Therefore consider the following order relation on multi-
+indices in F from (3.11). For µ,ν ∈F we write µ ≤ν if and only if µj ≤νj for all j ∈N.
+We call a set Λ ⊂F downward closed if and only if ν ∈F implies µ ∈F for all µ ≤ν.
+Furthermore, for ν ∈F, define
+ων :=
+∞
+Y
+j=1
+(1 + 2νj).
+The following theorem is a special case of Zech (2018, Theorem 2.2.10). The formulation is
+similar to Herrmann et al. (2024, Theorem 4).
+Theorem 54 (Herrmann et al. 2024, Theorem 4) Let Assumption 2 be satisfied with
+r > 1 and t > 0. Fix τ > 0, p ∈(1
+r, 1] and t′ ∈[0, t]. Consider F from (3.11), and let
+π = ⊗j∈N λ
+2 be the infinite product (probability) measure on U = [−1, 1]N, where λ denotes
+the Lebesgue measure on [−1, 1]. Then there exists C > 0 and a sequence (aν)ν∈F ∈ℓp(F)
+of positive numbers such that
+(i) for each ν ∈F
+ωτ
+ν
+
+Z
+U
+Lν(y)u(y) dπ(y)
+
+Yt′ ≤Caν,
+(ii) there exists an enumeration (νiνiνi)i∈N of F such that (aνi
+νi
+νi)i∈N is monotonically decreasing,
+the set ΛN := {νiνiνi : i ≤N} ⊆F is downward closed for each N ∈N, and additionally
+m(ΛN) :=
+max
+i=1,...,N |νiνiνi| = O (log(|ΛN|)) ,
+(D.23)
+d(ΛN) :=
+max
+i=1,...,N | suppνiνiνi| = o (log(|ΛN|))
+(D.24)
+for N →∞,
+(iii) the following expansion holds with absolute and uniform convergence:
+∀y ∈U :
+u(y) =
+X
+ν∈F
+Lν(y)
+Z
+U
+Lν(x)u(x) dπ(x) ∈Yt′.
+The following proposition reformulates Theorem 54 (i) into a bound for cν,j. It was
+shown in Herrmann et al. (2024, Proposition 2). Recall that θj denote the weights to define
+the spaces Yt′, t′ > 0, see Definition 14.
+Proposition 55 (Herrmann et al. 2024, Proposition 2) Consider the setting of The-
+orem 54. Then for each ν ∈F
+ω2τ
+ν
+X
+j∈N
+θ−2t′
+j
+c2
+ν,j ≤C2a2
+ν.
+Proposition 55 gives decay of the coefficients cν,j in both j and ν. Since θj = O(j−1+τ)
+for all τ > 0 we have c2
+ν,j = O(j−1−2t′+˜τ) for ˜τ < 2τt′ and every ν ∈ΛN. Furthermore,
+since (aν)ν∈F ∈ℓp(F) the Legendre coefficients cν,j decay algebraically in ν. We continue
+with a technical lemma, which was shown in Herrmann et al. (2024, Lemma 4).
+60
+
+PDF PAGE 61
+Statistical Learning Theory for Neural Operators
+Lemma 56 (Herrmann et al. 2024, Lemma 4) Let α > 1, β > 0 and assume two
+sequences (ai)i∈N and (dj)j∈N in R with ai ≲i−α and dj ≲j−β for all i, j ∈N. Additionally
+assume that (dj)j∈Nis monotonically decreasing. Suppose that there exists a constant C < ∞
+such that the sequence (ci,j)i,j∈N satisfies
+∀i ∈N :
+X
+j∈N
+c2
+i,jd−2
+j
+≤C2a2
+i .
+Then for every τ > 0
+(i) for all N ∈N there exists (mi)i∈N ⊆NN
+0 monotonically decreasing s.t. P
+i∈N mi ≤N
+and
+X
+i∈N
+
+X
+j>mi
+c2
+i,j
+
+
+1
+2
+≲N−min{α−1,β}+τ,
+(ii) for all N ∈N there exists (mi)i∈N ⊆NN
+0 monotonically decreasing s.t. P
+i∈N mi ≤N
+and
+
+X
+i∈N
+X
+j>mi
+c2
+i,j
+
+
+1
+2
+≲N−min{α−1
+2 ,β}+τ.
+In the following, we use Lemma 56 to get a decay property for the Legendre coefficients
+cνi
+νi
+νi,j with the enumeration νiνiνi of ΛN from Theorem 54. The sequence m = (mi)i∈N quantifies
+which coefficients of the Legendre expansion are “important” and are therefore used to define
+the surrogate ΓN.
+We first show that Theorem 54 yields sufficient decay on the Legendre coefficients cνi
+νi
+νi,j
+s.t. the assumptions of Lemma 56 are satisfied.
+Lemma 57 Consider the setting of Theorem 54. Let ˜τ > 0 such that 1/p > r −˜τ/2. Then
+the assumptions of Lemma 56 are fulfilled for α = r −˜τ/2, β = t −˜τ/2, ai = aνi
+νi
+νi, dj = θt′
+j
+and ci,j = ω1/2
+νi
+νi
+νi cνi
+νi
+νi,j for i, j ∈N.
+Proof Proposition 55 with τ = 1
+2 gives
+ω
+1
+2νi
+νi
+νi
+
+X
+j∈N
+θ−2t′
+j
+c2
+νi
+νi
+νi,j
+
+
+1
+2
+= O(aνi
+νi
+νi) = O
+
+i−r+ ˜τ
+2
+
+.
+(D.25)
+The last equality in (D.25) holds because iap
+νi
+νi
+νi ≤P
+j∈N ap
+νj
+νj
+νj < ∞(since aνi
+νi
+νi is monotonically
+decreasing) implies aνi
+νi
+νi = O(i−1/p) = O(i−r+˜τ/2). Since (θt′
+j )j∈N ∈ℓ1/(t−˜τ/2) (see Definition
+14) it holds
+θt′
+j = O(j−t+˜τ/2)
+with the same argument.
+61
+
+PDF PAGE 62
+Reinhardt, Wang and Zech
+D.3.2 Proofs of Theorems 52 and 53
+The proof of Theorems 52 and 53 is similar to Herrmann et al. (2024, Sections 4.2-4.4,
+Proofs of Theorems 1,2 and 5).
+Proof [Proof of Theorem 52] Let (aν)ν∈F be the enumeration (νiνiνi)i∈N from Theorem 54,
+where we use the case τ = 1
+2. Therefore (aνi
+νi
+νi)i∈N is monotonically decreasing and belongs
+to ℓp with p ∈(1
+r, 1]. We further fix ˜τ > 0 and demand 1
+p > r −˜τ
+2. Fix ˜N ∈N and set
+Λ ˜
+N := {νjνjνj : j ≤˜N} ⊂F, which is downward closed by Theorem 54. Now we approximate
+the tensorized Legendre polynomials Lν on the index set Λ ˜
+N. Let ρ ∈(0, 1
+2). In the ReLU
+case, Proposition 17 gives a NN fΛ ˜
+N,ρ with outputs {˜Lν,ρ}ν∈Λ ˜
+N s.t.
+sup
+y∈U
+max
+ν∈Λ ˜
+N
+Lν(y) −˜Lν,ρ(y)
+ ≤ρ.
+Using |Λ ˜
+N| = ˜N, (D.23) and (D.24), it holds for ˜N ≥2
+depth(fΛ ˜
+N,ρ) = O
+
+log( ˜N)2 log(log( ˜N))2 + log( ˜N) log
+ ρ−1
+,
+width(fΛ ˜
+N,ρ) = O( ˜N log( ˜N)),
+size(fΛ ˜
+N,ρ) = O
+
+˜N log( ˜N)2 log(log( ˜N)) + ˜N log( ˜N) log
+ ρ−1
+,
+mpar(fΛ ˜
+N,ρ) = 1.
+The constants hidden in O( . ) are independent of ˜N and ρ. For ˜N ∈N, set the accuracy
+ρ := ˜N−min{r−1
+2 ,t}. Then it holds
+depth(fΛ ˜
+N,ρ) = O
+
+log( ˜N)2 log(log( ˜N))2
+,
+size(fΛ ˜
+N,ρ) = O
+
+˜N log( ˜N)2 log(log( ˜N))
+
+.
+Proposition 51 shows that the ReLU bounds also hold for the RePU-case.
+By Lemma 57 the assumptions of Lemma 56 are satisfied. Applying Lemma 56 (i) with
+α := r −˜τ/2 and β := t −˜τ/2 gives a sequence (mi)i∈N ⊂NN
+0 such that P
+i∈N mi ≤˜N and
+X
+i∈N
+ω
+1
+2νi
+νi
+νi
+
+X
+j>mi
+c2
+νi
+νi
+νi,j
+
+
+1
+2
+≤C ˜N−min{r−1,t}+˜τ.
+(D.26)
+We now define
+
+˜γ ˜
+N,j
+
+:=
+X
+{i∈N:mi≥j}
+˜Lνi
+νi
+νi,ρ(y)cνi
+νi
+νi,j
+(D.27)
+62
+
+PDF PAGE 63
+Statistical Learning Theory for Neural Operators
+for j ∈N, where empty sums are set to zero. Recall the uniform distribution π on U =
+[−1, 1]N, see Example 3. With ˜γ ˜
+N = (˜γ ˜
+N,j)j∈N it holds
+∥G0 ◦σr
+R(y) −DY ◦˜γ ˜
+N(y)∥Y =
+
+X
+i,j∈N
+cνi
+νi
+νi,jLνi
+νi
+νi(y)ηj −
+X
+i∈N
+X
+j≤mi
+cνi
+νi
+νi,j ˜Lνi
+νi
+νi,ρ(y)ηj
+
+Y
+≤
+
+X
+i∈N
+Lνi
+νi
+νi(y)
+X
+j>mi
+cνi
+νi
+νi,jηj
+
+Y
++
+
+X
+i∈N
+(Lνi
+νi
+νi(y) −˜Lνi
+νi
+νi,ρ(y))
+X
+j≤mi
+cνi
+νi
+νi,jηj
+
+Y
+≤ΛΨY
+X
+i∈N
+∥Lνi
+νi
+νi∥∞,π
+|
+{z
+}
+≤ω
+1
+2
+νi
+νi
+νi
+
+X
+j>mi
+c2
+νi
+νi
+νi,j
+
+
+1
+2
++ ΛΨYρ
+X
+i∈N
+
+X
+j≤mi
+c2
+νi
+νi
+νi,j
+
+
+1
+2
+≤˜CΛΨY ˜N−min{r−1,t}+˜τ + ˜CΛΨYρ ≤˜C ˜N−min{r−1,t}+˜τ
+(D.28)
+for all y ∈U. In (D.28) we used the definition of DY, (D.27) and (D.21) at the first equality.
+Furthermore, we used (D.26), the definition of ρ and
+X
+i∈N
+
+X
+j≤mi
+c2
+νi
+νi
+νi,j
+
+
+1
+2
+≤
+X
+i∈N
+
+X
+j∈N
+c2
+νi
+νi
+νi,j
+
+
+1
+2
+≤˜C
+X
+i∈N
+ω
+1
+2νi
+νi
+νi
+
+X
+j∈N
+θ−2t′
+j
+c2
+νi
+νi
+νi,j
+
+
+1
+2
+≤˜C
+X
+i∈N
+aνi
+νi
+νi ≤˜C
+X
+i∈N
+i−r+˜τ/2 ≤˜C
+(D.29)
+at the second-to-last inequality. We changed the constants ˜C from line to line in (D.28)
+and (D.29). The last line of (D.28) shows why the RePU-case does not improve the approx-
+imation property qualitatively. In the RePU-case, Proposition 51 gives a σq-NN fΛ exactly
+realizing the tensorized Legendre polynomials, i.e. the case ρ = 0 from above. Therefore
+the second summand in the last line of (D.28) vanishes. This does not improve the approx-
+imation rate due to the first summand. This part depends on the summability properties
+of the Legendre coefficients cνi
+νi
+νi,j following Assumption 2 and is therefore independent of the
+activation function σ.
+Now we argue similarly to Herrmann et al. (2024, Proof of Theorem 1). Consider the
+scaling Sr from (3.5). It holds
+Sr ◦EX(a) ∈U
+∀a ∈Cr
+R(X),
+(D.30)
+63
+
+PDF PAGE 64
+Reinhardt, Wang and Zech
+because of (3.8) and (3.5). We define ˜Γ ˜
+N := DY ◦˜γ ˜
+N ◦Sr ◦EX and calculate
+sup
+a∈Cr
+R(X)
+G0(a) −˜Γ ˜
+N(a)
+
+Y =
+sup
+a∈Cr
+R(X)
+G0(a) −DY ◦˜γ ˜
+N ◦Sr ◦EX(a)
+
+Y
+=
+sup
+{y∈U: σr
+R(y)∈Cr
+R(X)}
+G0 ◦σr
+R(y) −DY ◦˜γ ˜
+N ◦Sr ◦EX ◦σr
+R(y)
+
+Y
+≤sup
+y∈U
+G0 ◦σr
+R(y) −DY ◦˜γ ˜
+N(y)
+
+Y ≤˜C ˜N−min{r−1,t}+˜τ,
+(D.31)
+where we used (D.30) and (D.28).
+In order to finish the proof of Theorem 52, we relate ˜N to N and show ΓN := ˜Γ ˜
+N ∈
+Gsp
+FN(σq, N), i.e. we show that the approximation networks we constructed have the desired
+sparse structure. We simultaneously prove the ReLU- and RePU-case.
+In order to analyze the NNs ˜γ ˜
+N from (D.27), we specify its structure. We set nj =
+|{mi ≥j}| and define
+˜γ ˜
+N =
+ 
+Σnj
+n
+IdR ◦SMcνi
+νi
+νi,j ◦˜Lνi
+νi
+νi,ρ
+o
+mi≥j
+
+j∈N
+!
+.
+(D.32)
+The round brackets in (D.32) denote a parallelization. The networks SMcνi
+νi
+νi,j denote the
+scalar multiplication networks from Definition 42. Furthermore, Σnj denotes the summa-
+tion network from Definition 41 and we use the identity networks IdR from Lemma 37 or
+38 to synchronize the depth. Using the respective bounds for the summation and scalar
+multiplication networks and the NN calculus for parallelization and sparse concatenation
+we get
+depth(˜γ ˜
+N) ≤2 +
+max
+i,j∈N2, mi≥j
+
+depth
+
+˜Lνi
+νi
+νi,ρ
+
++ depth
+
+SMcνi
+νi
+νi,j
+
++ max
+j∈N depth
+ Σnj
+
+≤3 + O(log( ˜N)2 log(log( ˜N))) +
+max
+i,j∈N2, mi≥j Cq log (|cνi
+νi
+νi,j|) + 0
+= O(log( ˜N)2 log(log( ˜N))),
+(D.33)
+width(˜γ ˜
+N) ≤max
+(X
+j∈N
+X
+mi≥j
+width
+
+˜Lνi
+νi
+νi,ρ
+
+,
+X
+j∈N
+X
+mi≥j
+width
+
+SMcνi
+νi
+νi,j
+
+,
+X
+j∈N
+X
+mi≥j
+width (IdR) ,
+X
+j∈N
+width
+ Σnj
+
+)
+≤Cq max
+
+
+O( ˜N log( ˜N)),
+X
+j∈N
+X
+mi≥j
+Cq,
+X
+j∈N
+nj
+
+
+= O( ˜N log( ˜N)),
+64
+
+PDF PAGE 65
+Statistical Learning Theory for Neural Operators
+as well as
+size(˜γ ˜
+N) ≤Cq
+X
+j∈N
+X
+mi≥j
+
+size
+
+˜Lνi
+νi
+νi,ρ
+
++ size
+
+SMcνi
+νi
+νi,j
+
++ size (IdR)
+
++ Cq
+X
+j∈N
+size
+ Σnj
+
+= O
+
+˜N log( ˜N)2 log(log( ˜N))
+
++
+X
+j∈N
+
+
+
+X
+mi≥j
+Cq log (|cνi
+νi
+νi,j|)
+
++ Cqnj
+
+
+≤O
+
+˜N log( ˜N)2 log(log( ˜N))
+
++ Cq
+X
+j∈N
+X
+mi≥j
+1
+= O
+
+˜N log( ˜N)2 log(log( ˜N))
+
+,
+(D.34)
+mpar(˜γ ˜
+N) ≤Cq.
+In (D.33)–(D.34) we used log (|cνi
+νi
+νi,j|) ≤Cq for all i, j ∈N independent of n. Furthermore,
+we used
+X
+j∈N
+nj =
+X
+j∈N
+X
+mi≥j
+1 =
+X
+i∈N
+X
+j≤mi
+1 =
+X
+i∈N
+mi ≤˜N.
+To get rid of the logarithmic terms, we define N = N( ˜N) := max{1, ˜N log( ˜N)3} and obtain
+a NN γN = ˜γ ˜
+N with
+depth(γN) = O(log(N)),
+width(γN) = O(N),
+size(γN) = N,
+mpar(γN) ≤Cq
+and error less than
+˜C ˜N−min{r−1,t}+˜τ = ˜C ˜N−κ ≤˜C(3κ/˜τ)3κN−κ+˜τ := CN−min{r−1,t}+τ.
+(D.35)
+Per definition depth(γN) = O(log(N)) and width(γN) = O(N) yields constants ˜CL, ˜Cp and
+N1, N2 ∈N s.t.
+depth(γN) ≤˜CL max{1, log(N)},
+N ≥N1,
+width(γN) ≤˜CpN,
+N ≥N2.
+Setting CL = max{ ˜CL, maxN=2,...,N1−1 depth(γN)/ log(2)} and
+Cp = max{ ˜Cp, maxN=1,...,N2−1 width(γN)} shows
+depth(γN) ≤CL log(N),
+N ∈N,
+width(γN) ≤CpN,
+N ∈N.
+In order to show ΓN := DY ◦γN ◦Sr ◦EX ∈Gsp
+FN(σq, N), we are left to show that the
+maximum Euclidean norm ∥· ∥2 of γN in U is independent of N. It holds for all y ∈U that
+65
+
+PDF PAGE 66
+Reinhardt, Wang and Zech
+DX ◦S−1
+r (y) ∈Cr
+R(X). We get
+sup
+y∈U
+∥γN(y)∥2 = sup
+y∈U
+∥EY ◦ΓN ◦DX ◦S−1
+r (y)∥2
+≤ΛΨY
+sup
+a∈Cr
+R(X)
+∥ΓN(a)∥Y
+= ΛΨY
+sup
+a∈Cr
+R(X)
+∥ΓN(a) −G0(a) + G0(a)∥Y
+≤ΛΨY
+sup
+a∈Cr
+R(X)
+(∥ΓN(a) −G0(a)∥Y + c∥G0(a)∥Yt)
+≤ΛΨY(C + cCG0) =: B,
+(D.36)
+where ΛΨY denotes the upper frame bound of ΨY and c = θt
+0, see Definition 14. In (D.36)
+we used Assumption 2 and the approximation error from (D.35). Thus ΓN ∈Gsp
+FN(σq, N)
+for all N ∈N, where we set Cs = 1. Using supp(γ) ⊂Cr
+R(X), see Assumption 2, in (D.31)
+finalizes the proof of Theorem 52.
+Proof [Proof of Theorem 53] By Lemma 57 the assumptions of Lemma 56 are satisfied.
+Applying Lemma 56 (ii) with α := r −˜τ/2 and β := t −˜τ/2 gives a sequence (mi)i∈N ⊂NN
+0
+such that P
+i∈N mi ≤˜N and
+
+X
+i∈N
+ων i
+X
+j>mi
+c2
+νi
+νi
+νi,j
+
+
+1
+2
+≤˜C ˜N−min{r−1
+2 ,t}+˜τ.
+(D.37)
+Define ˜γ ˜
+N = (˜γ ˜
+N,j)j∈N for all y ∈U with ˜γ ˜
+N,j as in (D.27). Then it holds
+∥G0 ◦σr
+R −DY ◦˜γ ˜
+N∥L2(U,π;Y) ≤
+
+X
+i∈N
+X
+j>mi
+cνi
+νi
+νi,jLνi
+νi
+νiηj
+
+L2(U,π;Y)
++
+
+X
+i∈N
+X
+j≤mi
+cνi
+νi
+νi,jηj
+
+Lνi
+νi
+νi −˜Lνi
+νi
+νi,ρ
+
+
+L2(U,π;Y)
+≤ΛΨY
+
+
+
+X
+i∈N
+∥Lνi
+νi
+νi∥2
+∞,π
+|
+{z
+}
+≤ωνi
+νi
+νi
+X
+j>mi
+c2
+νi
+νi
+νi,j
+
+
+
+1
+2
++ ΛΨYρ
+
+X
+i∈N
+X
+j≤mi
+c2
+νi
+νi
+νi,j
+
+
+1
+2
+≤˜CΛΨY ˜N−min{r−1
+2 ,t}+˜τ + ˜CΛΨYρ ≤˜C ˜N−min{r−1
+2 ,t}+˜τ.
+(D.38)
+In (D.38) we used the definition of DY, (D.27) and (D.21) at the first inequality. Additionally
+we used that (Lνηj)ν,j is a frame of L2(U, π; Y) at the second inequality. Finally we used
+(D.37), the definition of ρ and an argument similar to (D.29) at the second-to-last inequality.
+Note that again we changed the constants ˜C from line to line in (D.38).
+Since ΨX is a Riesz basis, we have (see Section 3.1.2 and 3.5)
+Cr
+R(X) = {σr
+R(y), y ∈U}
+and
+EX ◦σr
+R(y) = S−1
+r (y).
+(D.39)
+66
+
+PDF PAGE 67
+Statistical Learning Theory for Neural Operators
+With ˜Γ ˜
+N := DY ◦˜γ ˜
+N ◦Sr ◦EX we calculate
+˜Γ ˜
+N −G0
+
+L2(Cr
+R(X),(σr
+R)#π;Y) =
+DY ◦˜γ ˜
+N ◦Sr ◦EX −G0
+
+L2(Cr
+R(X),(σr
+R)#π;Y)
+=
+DY ◦˜γ ˜
+N ◦Sr ◦EX ◦σr
+R −G0 ◦σr
+R
+
+L2(U,π;Y)
+=
+DY ◦˜γ ˜
+N −G0 ◦σr
+R
+
+L2(U,π;Y) ≤˜C ˜N−min{r−1
+2 ,t}+τ,
+where we used (D.39) and (D.38). Defining N = N( ˜N) := max{1, ˜N log( ˜N)3} we can pro-
+ceed similar to the proof of Theorem 52 from (D.31) on. The reason this works is that
+the NNs ˜γ ˜
+N are defined in the same way in the L2- and the L∞-case (only the sequence m
+changes, but not its properties). This shows ΓN := ˜Γ ˜
+N ∈Gsp
+FN(σq, N) for all N ∈N and
+thus finishes the proof of Theorem 53.
+D.4 Proof of Lemma 20
+The arguments in the following proof are based on entropy bounds for feedforward neural
+network classes, first established in Schmidt-Hieber (2020a, Proof of Lemma 5).
+Define the supremum norm ∥· ∥∞,∞on gFN as
+∥g∥∞,∞:= sup
+y∈Rp0 ∥g(y)∥∞,
+g ∈gFN,
+(D.40)
+where ∥·∥∞denotes the maximum norm in Rn. Then Petersen et al. (2021, Proposition 3.5)
+shows that (gFN, ∥·∥∞,∞) is compact. Since the map i : gFN →GFN, g →G = DY ◦g ◦EX is
+linear, also (GFN, ∥·∥∞,supp(γ)) and hence (GFN, ∥·∥n) is compact. We now show the entropy
+bounds for GFN.
+Step 1. Recall depth(g) ≤L, depth(g) ≤p, size(g) ≤s and mpar(g) ≤M for g ∈gFN.
+We first estimate the entropy H(GFN, ∥·∥∞,supp(γ), δ) against the respective entropy of gFN.
+For G, G′ ∈GFN and g, g′ ∈GFN with G = DY ◦g ◦Sr ◦EX, G′ = DY ◦g′ ◦Sr ◦EX, it holds
+∥G −G′∥∞,σr
+R(U) =
+sup
+x∈σr
+R(U)
+∥DY ◦g ◦Sr ◦EX(x) −DY ◦g′ ◦Sr ◦EX(x)∥Y
+≤ΛΨY sup
+y∈U
+∥g(y) −g′(y)∥2 ≤ΛΨY
+√p∥g −g′∥∞,∞,
+(D.41)
+where we used σr
+R = DX ◦S−1
+r
+and ∥· ∥∞,∞from (D.40). Furthermore, we used ∥g(u)∥2 ≤
+√p∥g∥∞for all g ∈gFN, since NNs g ∈gFN have width(g) ≤p. Then (D.41) yields
+H(GFN, ∥· ∥∞,σr
+R(U), δ) ≤H
+
+gFN, ∥· ∥∞,∞,
+δ
+ΛΨY
+√p
+
+.
+(D.42)
+Step 2. It remains to bound H(gFN, ∥·∥∞,∞, δ) = log(N(gFN, ∥·∥∞,∞, δ)). To this end
+we follow the proof and notation of Schmidt-Hieber (2020a, Lemma 5). For l = 1, . . . L + 1,
+define the matrices Wl = (wl
+i,j)i,j ∈Rpl−1×pl and the vectors Bl = (bl
+j)j ∈Rpl. Furthermore,
+define
+σBl : Rpl →Rpl,
+σBl(x) = σ1(x + Bl) = max{0, x + Bl},
+l = 1, . . . L,
+σBL+1 : RpL+1 →RpL+1,
+σBL+1(x) = x + BL+1.
+(D.43)
+67
+
+PDF PAGE 68
+Reinhardt, Wang and Zech
+Then we can write a NN g ∈gFN as a functional composition of σBl and Wl, i.e.
+g : Rp0 →RpL+1,
+g(x) = σBL+1WL+1σBl . . . W2σB1W1x.
+For k ∈{1, . . . , L + 1} we define the functions
+A+
+k g : Rp0 →Rpk,
+A+
+k g(x) = σBkWk . . . σB1W1x,
+A−
+k g : Rpk−1 →RpL+1,
+A−
+k g(x) = σBL+1WL+1 . . . σBkWkx.
+(D.44)
+Furthermore, set A+
+0 g = IdRp0 and A−
+L+2g = IdRpL+1. For all 1 ≤l ≤L + 1 holds
+∥σBl(x)∥∞≤∥x∥∞+ M
+∥W l(x)∥∞≤∥W l∥∞∥x∥∞≤Mp∥x∥∞.
+We claim that for k ∈{1, . . . , L + 1}
+sup
+x∈[−1,1]p0
+∥A+
+k g(x)∥∞≤(M(p + 1))k
+and proceed by induction. The case k = 0 is trivial. To go from k −1 to k we compute
+sup
+x∈[−1,1]p0
+∥A+
+k x∥∞=
+sup
+x∈[−1,1]p0
+∥σBkWk(σBk−1Wk−1 · · · σB1W1x)∥∞
+≤
+sup
+x∈[−(M(p+1))k−1,(M(p+1))k−1]pk−1 ∥σBkW kx∥∞
+≤(Mp(M(p + 1))k−1 + M) ≤(M(p + 1))k,
+(D.45)
+as claimed.
+Moreover, for l = 1, . . . , L + 1, Wl : (Rpl−1, ∥· ∥∞) →(Rpl, ∥· ∥∞) is Lipschitz with
+constant Mp and σBl : (Rpl, ∥· ∥∞) →(Rpl, ∥· ∥∞) is Lipschitz with constant 1. Thus we
+can estimate the Lipschitz constant of A−
+k g for k = 1, . . . , L + 1. It holds
+A−
+k g(x) −A−
+k g(y)
+
+∞=
+σBL+1WL+1 . . . σBkWkx −σBL+1WL+1 . . . σBkWky
+
+∞
+≤Mp
+σBLWL . . . σBkWkx −σBLWL . . . σBkWky
+
+∞
+≤· · · ≤(Mp)L+2−k ∥x −y∥∞
+for x, y ∈Rpk−1.
+(D.46)
+Now let g, g∗∈gFN be two NN such that |wl
+i,j −wl,∗
+i,j| < ε and |bl
+i −bl,∗
+i | < ε for all i ≤pl+1,
+j ≤pl, l ≤L + 1. Then
+∥g −g∗∥∞,∞≤
+L+1
+X
+k=1
+A−
+k+1gσBkWkA+
+k−1g∗−A−
+k+1gσB∗
+kW ∗
+k A+
+k−1g∗
+∞,∞
+≤
+L+1
+X
+k=1
+(Mp)L+1−k σBkWkA+
+k−1g∗−σB∗
+kW ∗
+k A+
+k−1g∗
+∞,∞
+≤
+L+1
+X
+k=1
+(Mp)L+1−k (Wk −W ∗
+k )A+
+k−1g∗
+∞,∞+ ∥Bk −B∗
+k∥∞
+
+≤ε
+L+1
+X
+k=1
+(Mp)L+1−k 
+pMk−1(p + 1)k−1 + 1
+
+< ε(L + 1)ML(p + 1)L+1,
+(D.47)
+68
+
+PDF PAGE 69
+Statistical Learning Theory for Neural Operators
+where we used (D.45), (D.46) and M ≥1. The total number of weight and biases is less
+than (L + 1)(p2 + p). Therefore there are at most
+(L + 1)(p2 + p)
+s
+
+≤((L + 1)(p2 + p))s
+combinations to pick s nonzero parameters. Since all parameters are bounded by M, we
+choose ε = δ/((L + 1)ML(p + 1)L+1) and obtain the covering bound for all δ > 0
+N(gFN, ∥· ∥∞,∞, δ) ≤max
+(
+1,
+s
+X
+s∗=1
+ 2Mϵ−1(L + 1)(p2 + p)
+s∗
+)
+≤max
+(
+1,
+s
+X
+s∗=1
+ 2δ−1(L + 1)ML+1(p + 1)L+1(L + 1)(p2 + p)
+s∗
+)
+≤max
+(
+1,
+s
+X
+s∗=1
+ 2δ−1(L + 1)2ML+1(p + 1)L+3s∗
+)
+≤
+ 2L+6L2ML+1pL+3 max
+
+1, δ−1	s+1 ,
+(D.48)
+where we used L ≥1 and p ≥1 at the last inequality. Eqs. (D.48) and (D.42) show (3.16).
+Applying (3.16) to the sparse FrameNet class Gsp
+FN(σ1, N) gives
+H
+ Gsp
+FN(σ1, N), ∥· ∥∞,σr
+R(U), δ
+
+≤(sizeN + 1) log
+
+2depthN+6ΛΨYdepth2
+NMdepthN+1widthdepthN+4
+N
+max
+
+1, δ−1	
+≤(CsN + 1)
+× log
+
+2CL log(N)+6ΛΨY(CL log(N))2MCL log(N)+1(CpN)CL log(N)+4 max
+
+1, δ−1	
+≤CSP
+H N
+ 1 + log(N)2 + log
+ max
+
+1, δ−1	
+,
+N ∈N,
+δ > 0,
+(D.49)
+where we defined
+CSP
+H = 2Cs
+
+(CL + 6) log(2) + log(ΛΨY) + C2
+L+
++ (CL + 1) log(M) + (CL + 4)(log(Cp) + 1)
+
+.
+Applying (3.16) to the fully connected FrameNet class Gfull
+FN(σ1, N) gives
+H
+ Gfull
+FN(σ1, N), ∥· ∥∞,σr
+R(U), δ
+
+≤(sFC(N) + 1) log
+
+2depthN+6ΛΨYdepth2
+NMdepthN+1widthdepthN+4
+N
+max
+
+1, δ−1	
+≤
+ (depthN + 1)
+ width2
+N + widthN
+
++ 1
+
+× log
+
+2CL log(N)+6ΛΨY(CL log(N))2MCL log(N)+1(CpN)CL log(N)+4 max
+
+1, δ−1	
+≤
+ (CL log(N) + 1)
+ C2
+pN2 + CpN
+
++ 1
+
+× log
+
+2CL log(N)+6ΛΨY(CL log(N))2MCL log(N)+1(CpN)CL log(N)+4 max
+
+1, δ−1	
+≤CFC
+H N2  1 + log(N)3 + log
+ max
+
+1, δ−1	
+,
+N ∈N,
+(D.50)
+69
+
+PDF PAGE 70
+Reinhardt, Wang and Zech
+where we defined
+CFC
+H
+= 8CLC2
+p
+
+(CL + 6) log(2) + log(ΛΨY) + C2
+L+
++ (CL + 1) log(M) + (CL + 4)(log(Cp) + 1)
+
+.
+Equations (D.49) and (D.50) finish the proof of Lemma 20.
+D.5 Proof of Lemma 22
+The following proof is a modification of Schmidt-Hieber (2020a, Proof of Lemma 5) to the
+case where the activation function is not globally, but only locally Lipschitz continuous.
+The compactness of (G, ∥· ∥∞,supp(γ)) follows similarly to the ReLU case since Petersen
+et al. (2021, Proposition 3.5) holds for any continuous activation function.
+Let q ∈N, q ≥2 and let σq : R →R, σq(x) = max{0, x}q denote the RePU activation
+function. Recall depth(g) ≤L, width(g) ≤p, size(g) ≤s and mpar(g) ≤M for g ∈gFN.
+We argue analogously to the ReLU-case in Lemma 20 and bound the entropy of the NN
+class gFN(σq, L, p, s, M, B). Recall the definitions of σBl, A+
+k g and A−
+k g from (D.43)-(D.44).
+Similar to (D.45) it holds that
+∥A+
+k g∥∞,∞=
+sup
+x∈[−1,1]p0
+∥A+
+k g(x)∥∞
+≤
+sup
+x∈[−M(p+1),M(p+1)]p1
+σBkWkσBk−1 . . . W2σqx
+
+∞
+≤
+sup
+x∈[−Mq(p+1)q,Mq(p+1)q]p1
+σBkWkσBk−1 . . . W2x
+
+∞
+≤· · · ≤(M(p + 1))
+Pk
+j=1 qj ≤(M(p + 1))qk+1 ,
+where we used M ≥1.
+In the RePU-case, A−
+k g is only locally Lipschitz: Since |σq(x)′| ≤q|x|q−1 it holds
+|σq(x) −σq(y)| ≤q max{|x|, |y|}q−1|x −y|
+∀x, y ∈R.
+Therefore for k = 1, . . . , L + 1 and x, y ∈Rpk−1, ∥x∥∞, ∥y∥∞≤C, we get
+A−
+k g(x) −A−
+k g(y)
+
+∞
+=
+σBL+1WL+1σBL . . . Wkx −σBL+1WL+1σBL . . . Wky
+
+∞
+≤Mp
+σBLWLσBL−1 . . . Wkx −σBLWLσBL−1 . . . Wky
+
+∞
+≤Mpq
+ 
+sup
+∥x∥∞≤C
+WLσBL−1 . . . Wkx
+
+∞
+!q−1
+×
+WLσBL−1 . . . Wkx −WLσBL−1 . . . Wky
+
+∞
+≤(Mpq)L+2−k
+ 
+sup
+∥x∥∞≤C
+WLσBL−1 . . . Wkx
+
+∞
+!q−1
+×
+ 
+sup
+∥x∥∞≤C
+WL−1σBL−2 . . . Wkx
+
+∞
+!q−1
+× · · · ×
+ 
+sup
+∥x∥∞≤C
+∥Wkx∥∞
+!q−1
+∥x −y∥∞.
+70
+
+PDF PAGE 71
+Statistical Learning Theory for Neural Operators
+Using
+sup
+∥x∥∞≤C
+WjσBj−1 . . . Wkx
+
+∞≤
+sup
+∥x∥∞≤(M(p+1)C)q
+WjσBj−1 . . . Wk+1x
+
+∞
+≤
+sup
+∥x∥∞≤(M(p+1))q+q2Cq2
+WjσBj−1 . . . Wk+2x
+
+∞
+≤· · · ≤
+sup
+∥x∥∞≤(M(p+1))
+Pj−k
+l=1 qlCqj−k
+∥Wjx∥∞
+≤(M(p + 1))
+Pj−k
+l=0 ql Cqj−k ≤(M(p + 1)C)qj−k+1
+for j = k, . . . , L and C, M ≥1, we get
+A−
+k g(x) −A−
+k g(y)
+
+∞≤(Mpq)L+2−k
+L
+Y
+j=k
+
+M(p + 1) ˆC
+qj−k+1
+∥x −y∥∞
+(D.51)
+≤(Mpq)L+2−k 
+M(p + 1) ˆC
+qL+2−k
+∥x −y∥∞,
+x, y ∈Rpk−1.
+Now we proceed similarly to (D.47). Let g, g∗∈gFN be two NN such that |wl
+i,j −wl,∗
+i,j| < ε
+and |bl
+i −bl,∗
+i | < ε for all i ≤pl+1, j ≤pl, l ≤L + 1.
+Then with A+
+0 g = IdRp0 and
+A−
+L+2g = IdRpL+1 we estimate
+∥g −g∗∥∞,∞
+≤
+L+1
+X
+k=1
+A−
+k+1gσBkWkA+
+k−1g∗−A−
+k+1gσB∗
+kW ∗
+k A+
+k−1g∗
+∞,∞
+≤
+L+1
+X
+k=1
+(Mpq)L+1−k 
+M(p + 1) (M(p + 1))qk+1qL+1−k
+σBkWkA+
+k−1g∗−σB∗
+kW ∗
+k A+
+k−1g∗
+∞,∞
+≤
+L+1
+X
+k=1
+(Mpq)L+1−k 
+M(p + 1) (M(p + 1))qk+1qL+1−k
+(Wk −W ∗
+k )A+
+k−1g∗
+∞,∞+ ∥Bk −B∗
+k∥∞,∞
+
+q
+
+M(p + 1)
+A+
+k−1g∗
+∞,∞
+q−1
+≤2ε
+L+1
+X
+k=1
+(Mpq)L+2−k 
+M(p + 1) (M(p + 1))qk+1qL+1−k A+
+k−1g∗
+∞,∞
+
+M(p + 1)
+A+
+k−1g∗
+∞,∞
+q−1
+≤2ε(L + 1) (M(p + 1)q)L+q 
+M(p + 1) (M(p + 1))qL+2qL 
+(M(p + 1))qL+1q
+< εLqL+q (2pM)4q2L+2  2M√p(p2 + p)(L + 1)
+−1 .
+(D.52)
+In (D.52) we used the Lipschitz bound (D.51) with
+C = max
+n
+1, ∥σBkWkA+
+k−1g∗∥∞,∞, ∥σB∗
+kW ∗
+k A+
+k−1g∗∥∞,∞
+o
+≤(M(p + 1))qk+1 ,
+71
+
+PDF PAGE 72
+Reinhardt, Wang and Zech
+and p ≥1, L ≥1, q ≥2 at the last inequality.
+As in the proof of Lemma 20, there are
+(L + 1)(p2 + p)
+s
+
+≤((L + 1)(p2 + p))s
+combinations to pick s nonzero weights and biases. Since all parameters are bounded by
+M, we choose
+ε = 2M√p(p2 + p)(L + 1)δ
+LqL+q (2pM)4q2L+2
+and obtain the covering bound
+N(gFN, ∥· ∥∞,∞, δ) ≤max
+(
+1,
+s
+X
+s∗=1
+ 2Mϵ−1(L + 1)(p2 + p)
+s∗
+)
+≤max
+(
+1,
+s
+X
+s∗=1
+
+LqL+q (2pM)4q2L+2 (√pδ)−1s∗)
+≤
+
+LqL+q (2pM)4q2L+2 √p−1 max
+
+1, δ−1	s+1
+.
+(D.53)
+Eqs. (D.53) and (D.42) show (3.17).
+Applying (3.17) to the sparse FrameNet class Gsp
+FN(σq, N) gives
+H
+ Gsp
+FN(σq, N), ∥· ∥∞,σr
+R(U), δ
+
+≤(sSP (N) + 1) log
+
+ΛΨYdepthNqdepthN+q (2widthNM)4q2depthN +2 max
+
+1, δ−1	
+≤(CsN + 1) log
+
+ΛΨYCL log(N)qCL log(N)+q (2CpNM)4q2CL log(N)+2 max
+
+1, δ−1	
+≤CSP
+H N1+2CL log(q)  1 + log(N) + log
+ max
+
+1, δ−1	
+,
+(D.54)
+where we set
+CSP
+H = 2Cs
+ log(ΛΨY) + CL + (CL + q) log(q) + 4q2 (log(2CpM) + 1)
+
+.
+Applying (3.17) to the fully connected FrameNet class Gfull
+FN(σq, N) gives the entropy
+bound
+H
+ Gfull
+FN(σq, N), ∥· ∥∞,σr
+R(U), δ
+
+≤(sFC(N) + 1) log
+
+ΛΨYdepthNqdepthN+q (2widthNM)4q2depthN +2 max
+
+1, δ−1	
+≤
+ (depthN + 1)
+ width2
+N + widthN
+
++ 1
+
+× log
+
+ΛΨYdepthNqdepthN+q (2widthNM)4q2depthN +2 max
+
+1, δ−1	
+≤
+ (CL log(N) + 1)
+ C2
+pN2 + CpN
+
++ 1
+
+× log
+
+ΛΨYCL log(N)qCL log(N)+q (2CpNM)4q2CL log(N)+2 max
+
+1, δ−1	
+≤CFC
+H N2+2CL log(q)  1 + log(N)2 + log
+ max
+
+1, δ−1	
+,
+(D.55)
+72
+
+PDF PAGE 73
+Statistical Learning Theory for Neural Operators
+where we set
+CFC
+H
+=8CsC2
+p
+
+log(ΛΨY) + CL + (CL + q) log(q) + 4q2 (log(2CpM) + 1)
+
+.
+Equations (D.54) and (D.55) finish the proof of Lemma 22.
+Appendix E. Proofs of Section 4
+E.1 Proof of Theorem 27
+In Herrmann et al. (2024, Proof of Proposition 3, Step 1), the holomorphy in Assumption
+2 is verified for X, Y in (4.5) with r0 > d/2 and t ∈[0, (1 + r0 −d/2 −t0)/d). Moreover,
+γ = (σr
+R)#π in particular shows supp(γ) ⊆Cr
+R(X) and hence verifies the second part of
+Assumption 2. Substituting s = r0+rd, i.e. r = s−r0
+d , and taking t = (1+r0−d/2−t0)/d−τ
+with some small τ, Theorem 23 (i) then gives
+EG0[∥ˆGn −G0∥2
+L2(γ)] ≤Cn−
+κ
+κ+1 +τ,
+where
+κ = 2 min
+s −r0
+d
+−1
+2, 1 + r0 −d
+2 −t0
+d
+
+−τ
+for all r0 > d/2 and t0 ∈[0, 1].
+From here on the proof is essentially the same as Herrmann et al. (2024, Proof of Propo-
+sition 3, Step 2); the only difference is that while Herrmann et al. (2024) uses the uniform
+bound in Theorem 18 (i), we require the L2-bound in Theorem 18 (ii). For completeness,
+we repeat the argument. The constraint r > 1 implies s > r0 + d on s. We now choose
+r0 > d
+2 in order to maximize the convergence rate. Solving
+s −r0
+d
+−1
+2 = 1 + r0 −d
+2 −t0
+d
+for r0 gives
+r0 = s + t0 −1
+2
+.
+(E.1)
+The constraint r0 > d
+2 implies the constraint s > d + 1 −t0.
+We look at two cases separately. First, if s ∈(3d
+2 , 2d + 1 −t0], we set r0 := d
+2 + τ2, where
+we choose τ2 > 0 s.t. τ2 < s −3d/2 which guarantees s > r0 + d. For τ < τ2/d, we obtain
+the convergence rate
+κ = 2 min
+ns −d
+2 −τ2
+d
+−1
+2, 1 + d
+2 + τ2 −d
+2 −t0
+d
+o
+−τ ≥2 min
+ns
+d −1 −2τ2
+d , 1 −t0
+d
+o
+.
+In the case s > 2d + 1 −t0, define r0 as in (E.1). The constraint s > r0 + d amounts to
+s > s + t0 −1
+2
++ d
+⇔
+s > 2d + t0 −1,
+which holds since s > 2d + 1 −t0 ≥2d + t0 −1 for all t0 ∈[0, 1]. In this case we get the
+convergence rate
+κ = 2s −r0
+d
+−1 −τ = s + 1 −t0
+d
+−1 −τ.
+Choosing τ1 > 8τ2/d > 8τ shows (4.6) and finishes the proof of Theorem 27.
+73
+
+PDF PAGE 74
+Reinhardt, Wang and Zech
+References
+Milton Abramowitz and Irene A Stegun. Handbook of mathematical functions with formulas,
+graphs, and mathematical tables, volume 55. US Government printing office, 1948.
+Ben Adcock, Nick Dexter, and Sebastian Moraga. Optimal deep learning of holomorphic
+operators between banach spaces. Advances in Neural Information Processing Systems,
+37:27725–27789, 2024.
+Ben Adcock, Simone Brugiapaglia, Nick Dexter, and Sebastian Moraga.
+Near-optimal
+learning of banach-valued, high-dimensional functions via deep neural networks. Neu-
+ral Networks, 181:106761, 2025.
+ISSN 0893-6080.
+doi:
+https://doi.org/10.1016/j.
+neunet.2024.106761.
+URL https://www.sciencedirect.com/science/article/pii/
+S0893608024006853.
+Sergios Agapiou and Sven Wang. Laplace priors and spatial inhomogeneity in bayesian
+inverse problems. Bernoulli, 30(2):878–910, 2024.
+Anima Anandkumar, Kamyar Azizzadenesheli, Kaushik Bhattacharya, Nikola Kovachki,
+Zongyi Li, Burigede Liu, and Andrew Stuart. Neural operator: Graph kernel network
+for partial differential equations. In ICLR 2020 Workshop on Integration of Deep Neural
+Models and Differential Equations, 2019.
+URL https://openreview.net/forum?id=
+fg2ZFmXFO3.
+Ivo Babuˇska, Fabio Nobile, and Ra´ul Tempone. A stochastic collocation method for elliptic
+partial differential equations with random input data. SIAM Rev., 52(2):317–355, 2010.
+ISSN 0036-1445,1095-7200. doi: 10.1137/100786356. URL https://doi.org/10.1137/
+100786356.
+Markus Bachmayr, Albert Cohen, Ronald DeVore, and Giovanni Migliorati. Sparse polyno-
+mial approximation of parametric elliptic PDEs. Part II: Lognormal coefficients. ESAIM
+Math. Model. Numer. Anal., 51(1):341–363, 2017.
+ISSN 2822-7840,2804-7214.
+doi:
+10.1051/m2an/2016051. URL https://doi.org/10.1051/m2an/2016051.
+Andrew Barron, Lucien Birg´e, and Pascal Massart. Risk bounds for model selection via
+penalization. Probability theory and related fields, 113:301–413, 1999.
+Sebastian Becker, Arnulf Jentzen, Marvin S M¨uller, and Philippe von Wurstemberger.
+Learning the random variables in monte carlo simulations with stochastic gradient de-
+scent: Machine learning for parametric pdes and financial derivative pricing. Mathemat-
+ical Finance, 34(1):90–150, 2024.
+Kaushik Bhattacharya, Bamdad Hosseini, Nikola B. Kovachki, and Andrew M. Stuart.
+Model reduction and neural networks for parametric PDEs. SMAI J. Comput. Math., 7:
+121–157, 2021.
+Lucien Birg´e and Pascal Massart. Rates of convergence for minimum contrast estimators.
+Probability Theory and Related Fields, 97:113–150, 1993.
+74
+
+PDF PAGE 75
+Statistical Learning Theory for Neural Operators
+Isma¨el Castillo and Richard Nickl. Nonparametric bernstein–von mises theorems in gaussian
+white noise.
+The Annals of Statistics, 41(4), 2013.
+ISSN 0090-5364.
+doi: 10.1214/
+13-AOS1133.
+Ga¨elle Chagny, Anouar Meynaoui, and Angelina Roche. Adaptive nonparametric estimation
+in the functional linear model with functional output. Electronic Journal of Statistics, 19
+(1):2990–3039, 2025.
+Abdellah Chkifa, Albert Cohen, Ronald DeVore, and Christoph Schwab. Sparse adaptive
+Taylor approximation algorithms for parametric and stochastic elliptic PDEs. ESAIM
+Math. Model. Numer. Anal., 47(1):253–280, 2013. ISSN 0764-583X. doi: 10.1051/m2an/
+2012027. URL https://doi.org/10.1051/m2an/2012027.
+Abdellah Chkifa, Albert Cohen, Giovanni Migliorati, Fabio Nobile, and Raul Tempone.
+Discrete least squares polynomial approximation with random evaluations—application
+to parametric and stochastic elliptic PDEs. ESAIM Math. Model. Numer. Anal., 49(3):
+815–837, 2015a. ISSN 0764-583X. doi: 10.1051/m2an/2014050. URL https://doi.org/
+10.1051/m2an/2014050.
+Abdellah Chkifa, Albert Cohen, and Christoph Schwab. Breaking the curse of dimension-
+ality in sparse polynomial approximation of parametric PDEs. J. Math. Pures Appl. (9),
+103(2):400–428, 2015b. ISSN 0021-7824,1776-3371. doi: 10.1016/j.matpur.2014.04.009.
+URL https://doi.org/10.1016/j.matpur.2014.04.009.
+Ole Christensen. An Introduction to Frames and Riesz Bases [recurso electr´onico]. Applied
+and Numerical Harmonic Analysis. Birkhauser, Cham, second edition, 2016. ISBN 978-
+3-319-25613-9.
+Ludovica Cicci, Stefania Fresca, and Andrea Manzoni. Deep-hyromnet: A deep learning-
+based operator approximation for hyper-reduction of nonlinear parametrized pdes. Jour-
+nal of Scientific Computing, 93(2):57, 2022.
+K. A. Cliffe, M. B. Giles, R. Scheichl, and A. L. Teckentrup.
+Multilevel Monte Carlo
+methods and applications to elliptic PDEs with random coefficients. Comput. Vis. Sci.,
+14(1):3–15, 2011.
+ISSN 1432-9360,1433-0369.
+doi: 10.1007/s00791-011-0160-x.
+URL
+https://doi.org/10.1007/s00791-011-0160-x.
+Albert Cohen and Ronald DeVore. Approximation of high-dimensional parametric PDEs.
+Acta Numer., 24:1–159, 2015. ISSN 0962-4929. doi: 10.1017/S0962492915000033. URL
+https://doi.org/10.1017/S0962492915000033.
+Albert Cohen, Ronald DeVore, and Christoph Schwab. Convergence rates of best N-term
+Galerkin approximations for a class of elliptic sPDEs. Found. Comput. Math., 10(6):
+615–646, 2010. ISSN 1615-3375. doi: 10.1007/s10208-010-9072-2. URL http://dx.doi.
+org/10.1007/s10208-010-9072-2.
+Albert Cohen, Ronald Devore, and Christoph Schwab. Analytic regularity and polynomial
+approximation of parametric and stochastic elliptic PDE’s. Anal. Appl. (Singap.), 9(1):
+75
+
+PDF PAGE 76
+Reinhardt, Wang and Zech
+11–47, 2011. ISSN 0219-5305. doi: 10.1142/S0219530511001728. URL http://dx.doi.
+org/10.1142/S0219530511001728.
+Albert Cohen, Giovanni Migliorati, and Fabio Nobile. Discrete least-squares approxima-
+tions over optimized downward closed polynomial spaces in arbitrary dimension. Constr.
+Approx., 45(3):497–519, 2017. ISSN 0176-4276. doi: 10.1007/s00365-017-9364-8. URL
+https://doi.org/10.1007/s00365-017-9364-8.
+Albert Cohen, Christoph Schwab, and Jakob Zech. Shape holomorphy of the stationary
+navier-stokes equations. SIAM J. Math. Analysis, 50(2):1720–1752, 2018. doi: https:
+//doi.org/10.1137/16M1099406.
+Niccol`o Dal Santo, Simone Deparis, and Luca Pegolotti. Data driven approximation of
+parametrized pdes by reduced basis and neural networks.
+Journal of Computational
+Physics, 416:109550, 2020.
+Oleg Davydov and Rob Stevenson.
+Hierarchical riesz bases for hs(ω), 1 < s < 5/2.
+Constructive Approximation, 22(3):365–394, 2005.
+ISSN 1432-0940.
+doi:
+10.1007/
+s00365-004-0593-2.
+Maarten V. de Hoop, Nikola B. Kovachki, Nicholas H. Nelsen, and Andrew M. Stuart.
+Convergence rates for learning linear operators from noisy data. SIAM/ASA Journal
+on Uncertainty Quantification, 11(2):480–513, 2023. doi: 10.1137/21M1442942. URL
+https://doi.org/10.1137/21M1442942.
+Tim De Ryck, Samuel Lanthaler, and Siddhartha Mishra. On the approximation of functions
+by tanh neural networks. Neural Networks, 143:732–750, 2021.
+R. DeVore, R. Howard, and C. Micchelli. Optimal nonlinear approximation. Manuscripta
+mathematica, 63(4):469–478, 1989. URL http://eudml.org/doc/155392.
+R.A. DeVore and G.G. Lorentz. Constructive Approximation. Grundlehren der mathema-
+tischen Wissenschaften. Springer Berlin Heidelberg, 1993. ISBN 9783540506270. URL
+https://books.google.de/books?id=cDqNW6k7_ZwC.
+Sjoerd Dirksen. Tail bounds via generic chaining. Electronic Journal of Probability, 20,
+2015. ISSN 1083-6489. doi: 10.1214/EJP.v20-3760.
+Alireza Doostan and Houman Owhadi.
+A non-adapted sparse approximation of pdes
+with stochastic inputs.
+Journal of Computational Physics, 230(8):3015–3034, 2011.
+ISSN 0021-9991.
+doi: https://doi.org/10.1016/j.jcp.2011.01.002.
+URL https://www.
+sciencedirect.com/science/article/pii/S0021999111000106.
+Dinh Dung, Van Kien Nguyen, Christoph Schwab, and Jakob Zech. Analyticity and sparsity
+in uncertainty quantification for PDEs with Gaussian random field inputs, volume 2334
+of Lecture Notes in Mathematics. Springer, Cham, 2023. ISBN 978-3-031-38383-0. doi:
+10.1007/978-3-031-38384-7. URL https://doi.org/10.1007/978-3-031-38384-7.
+76
+
+PDF PAGE 77
+Statistical Learning Theory for Neural Operators
+D. E. Edmunds and H. Triebel. Function spaces, entropy numbers, differential operators,
+volume 120 of Cambridge Tracts in Mathematics. Cambridge University Press, Cam-
+bridge, 1996. ISBN 0-521-56036-5. doi: 10.1017/CBO9780511662201.
+Dennis Elbrachter, Dmytro Perekrestenko, Philipp Grohs, and Helmut Bolcskei. Deep neural
+network approximation theory. IEEE Transactions on Information Theory, 67(5):2581–
+2623, 2021. ISSN 0018-9448. doi: 10.1109/TIT.2021.3062161.
+Utku Evci, Fabian Pedregosa, Aidan Gomez, and Erich Elsen. The difficulty of training
+sparse neural networks. arXiv preprint arXiv:1906.10732, 2019.
+Evarist Gin´e and Richard Nickl. Mathematical foundations of infinite-dimensional statis-
+tical models. Cambridge Series in Statistical and Probabilistic Mathematics. Cambridge
+University Press, New York, 2016.
+Evarist Gin´e and Richard Nickl. Mathematical foundations of infinite-dimensional statis-
+tical models. Cambridge series in statistical and probabilistic mathematics. Cambridge
+University Press, New York (NY), 2016. ISBN 1107043166.
+Sonja Greven and Fabian Scheipl. A general framework for functional regression modelling.
+Statistical Modelling, 17(1-2):1–35, 2017.
+Helmut Harbrecht, Michael Peters, and Markus Siebenmorgen. Analysis of the domain map-
+ping method for elliptic diffusion problems on random domains. Numerische Mathematik,
+134(4):823–856, 2016.
+Fernando Henr´ıquez and Christoph Schwab. Shape holomorphy of the calder´on projector
+for the laplacian in r 2. Integral Equations and Operator Theory, 93(4):43, 2021.
+Lukas Herrmann, Christoph Schwab, and Jakob Zech. Neural and spectral operator sur-
+rogates: unified construction and expression rate bounds. Advances in Computational
+Mathematics, 50(4):1–43, 2024. ISSN 1019-7168. doi: 10.1007/s10444-024-10171-2. URL
+https://link.springer.com/article/10.1007/s10444-024-10171-2.
+Jan S. Hesthaven, Gianluigi Rozza, and Benjamin Stamm. Certified reduced basis methods
+for parametrized partial differential equations. SpringerBriefs in Mathematics. Springer,
+Cham; BCAM Basque Center for Applied Mathematics, Bilbao, 2016.
+ISBN 978-
+3-319-22469-5.
+doi:
+10.1007/978-3-319-22470-1.
+URL https://doi.org/10.1007/
+978-3-319-22470-1. BCAM SpringerBriefs.
+J.S. Hesthaven and S. Ubbiali. Non-intrusive reduced order modeling of nonlinear prob-
+lems using neural networks.
+Journal of Computational Physics, 363:55–78, 2018.
+ISSN 0021-9991.
+doi: https://doi.org/10.1016/j.jcp.2018.02.037.
+URL https://www.
+sciencedirect.com/science/article/pii/S0021999118301190.
+R. Hiptmair, L. Scarabosio, C. Schillings, and Ch. Schwab. Large deformation shape un-
+certainty quantification in acoustic scattering. Advances in Computational Mathemat-
+ics, 44(5):1475–1518, 10 2018. ISSN 1572-9044. doi: 10.1007/s10444-018-9594-8. URL
+https://doi.org/10.1007/s10444-018-9594-8.
+77
+
+PDF PAGE 78
+Reinhardt, Wang and Zech
+Viet Ha Hoang and Christoph Schwab. N-term wiener chaos approximation rates for elliptic
+pdes with lognormal gaussian random inputs.
+Mathematical Models and Methods in
+Applied Sciences, 24(04):797–826, 2014. doi: 10.1142/S0218202513500681. URL https:
+//doi.org/10.1142/S0218202513500681.
+Carlos Jerez-Hanckes, Christoph Schwab, and Jakob Zech. Electromagnetic wave scattering
+by random surfaces: shape holomorphy. Math. Models Methods Appl. Sci., 27(12):2229–
+2259, 2017. ISSN 0218-2025. doi: 10.1142/S0218202517500439. URL https://doi.org/
+10.1142/S0218202517500439.
+Padraig Kirwan. Complexifications of multilinear and polynomial mappings. PhD thesis,
+University College Dublin, 1997. Ph.D. thesis, National University of Ireland, Galway.
+Nikola B Kovachki, Samuel Lanthaler, and Hrushikesh Mhaskar. Data complexity estimates
+for operator learning. arXiv preprint arXiv:2405.15992, 2024a.
+Nikola B Kovachki, Samuel Lanthaler, and Andrew M Stuart. Operator learning: Algo-
+rithms and analysis. Handbook of Numerical Analysis, 25:419–467, 2024b.
+Fabian Kr¨opfl, Roland Maier, and Daniel Peterseim. Operator compression with deep neural
+networks. Advances in Continuous and Discrete Models, 2022(1):29, 2022.
+Gitta Kutyniok, Philipp Petersen, Mones Raslan, and Reinhold Schneider. A theoretical
+analysis of deep neural networks and parametric PDEs. Constr. Approx., 55(1):73–125,
+2022. ISSN 0176-4276,1432-0940. doi: 10.1007/s00365-021-09551-4. URL https://doi.
+org/10.1007/s00365-021-09551-4.
+Samuel Lanthaler. Operator learning with pca-net: upper and lower complexity bounds.
+Journal of Machine Learning Research, 24(318):1–67, 2023.
+URL http://jmlr.org/
+papers/v24/23-0478.html.
+Samuel Lanthaler, Siddhartha Mishra, and George E. Karniadakis.
+Error estimates for
+deeponets: a deep learning framework in infinite dimensions. Transactions of Mathematics
+and Its Applications, 6(1), 2022. doi: 10.1093/imatrm/tnac001.
+Bo Li. Better approximations of high dimensional smooth functions by deep neural networks
+with rectified power units. Communications in Computational Physics, 27(2):379–411,
+2020. ISSN 1815-2406. doi: 10.4208/cicp.OA-2019-0168.
+Bo Li, Shanshan Tang, and Haijun Yu. Powernet: Efficient representations of polynomials
+and smooth functions by deep neural networks with rectified power units. arXiv preprint
+arXiv:1909.05136, 2019.
+Zongyi Li, Nikola Kovachki, Kamyar Azizzadenesheli, Burigede Liu, Kaushik Bhattacharya,
+Andrew Stuart, and Anima Anandkumar. Fourier neural operator for parametric partial
+differential equations. arXiv preprint arXiv:2010.08895, 2020.
+Hao Liu, Haizhao Yang, Minshuo Chen, Tuo Zhao, and Wenjing Liao. Deep nonparametric
+estimation of operators between infinite dimensional spaces. Journal of Machine Learning
+Research, 25(24):1–67, 2024.
+78
+
+PDF PAGE 79
+Statistical Learning Theory for Neural Operators
+Lu Lu, Pengzhan Jin, Guofei Pang, Zhongqiang Zhang, and George Em Karniadakis. Learn-
+ing nonlinear operators via deeponet based on the universal approximation theorem of
+operators.
+Nature Machine Intelligence, 3(3):218–229, 3 2021.
+ISSN 2522-5839.
+doi:
+10.1038/s42256-021-00302-5. URL https://doi.org/10.1038/s42256-021-00302-5.
+H. N. Mhaskar and N. Hahm. Neural networks for functional approximation and system
+identification. Neural computation, 9(1):143–159, 1997. ISSN 0899-7667. doi: 10.1162/
+neco.1997.9.1.143.
+Hrushikesh N Mhaskar. Neural networks for optimal approximation of smooth and analytic
+functions. Neural computation, 8(1):164–177, 1996.
+Jeffrey S Morris and Raymond J Carroll. Wavelet-based functional mixed models. Journal
+of the Royal Statistical Society Series B: Statistical Methodology, 68(2):179–199, 2006.
+Gustavo A. Mu˜noz, Yannis Sarantopoulos, and Andrew Tonge. Complexifications of real
+Banach spaces, polynomials and multilinear maps. Studia Math., 134(1):1–33, 1999. ISSN
+0039-3223.
+Nicholas H Nelsen and Andrew M Stuart. Operator learning using random features: A tool
+for scientific computing. SIAM Review, 66(3):535–571, 2024.
+R. Nickl, S. van de Geer, and S. Wang.
+Convergence rates for penalised least squares
+estimators in PDE-constrained regression problems. SIAM J. Uncert. Quant., 8, 2020.
+Richard Nickl. Donsker-type theorems for nonparametric maximum likelihood estimators.
+Probability Theory and Related Fields, 138(3-4), 2007. ISSN 0178-8051. doi: 10.1007/
+s00440-006-0031-4.
+Richard Nickl. Bernstein–von mises theorems for statistical inverse problems i: Schr¨odinger
+equation. Journal of the European Mathematical Society, 22(8):2697–2750, 2020. ISSN
+1435-9855. doi: 10.4171/JEMS/975.
+Richard Nickl. Bayesian Non-linear Statistical Inverse Problems. EMS press, 2023.
+Richard Nickl and Sven Wang. On polynomial-time computation of high-dimensional pos-
+terior measures by Langevin-type algorithms.
+Journal of the European Mathematical
+Society, 2024.
+F. Nobile, R. Tempone, and C. G. Webster. A sparse grid stochastic collocation method
+for partial differential equations with random input data. SIAM Journal on Numerical
+Analysis, 46(5):2309–2345, 2008. doi: 10.1137/060663660. URL https://doi.org/10.
+1137/060663660.
+Thomas O’Leary-Roseberry, Peng Chen, Umberto Villa, and Omar Ghattas. Derivative-
+informed neural operator: An efficient framework for high-dimensional parametric deriva-
+tive learning.
+Journal of Computational Physics, 496:112555, 2024.
+ISSN 0021-9991.
+doi:
+https://doi.org/10.1016/j.jcp.2023.112555.
+URL https://www.sciencedirect.
+com/science/article/pii/S0021999123006502.
+79
+
+PDF PAGE 80
+Reinhardt, Wang and Zech
+J. A. A. Opschoor, Ch. Schwab, and J. Zech. Exponential relu dnn expression of holomorphic
+maps in high dimension. Constructive Approximation, 55(1):537–582, 2022a. ISSN 1432-
+0940. doi: 10.1007/s00365-021-09542-5. URL https://link.springer.com/article/
+10.1007/s00365-021-09542-5#citeas.
+Joost A. A. Opschoor, Philipp C. Petersen, and Christoph Schwab. Deep relu networks
+and high-order finite element methods. Analysis and Applications, 18(05):715–770, 2020.
+ISSN 0219-5305. doi: gjh43n.
+Joost A. A. Opschoor, Christoph Schwab, and Jakob Zech. Deep learning in high dimension:
+ReLU neural network expression for Bayesian PDE inversion. In Optimization and control
+for partial differential equations—uncertainty quantification, open and closed-loop control,
+and shape optimization, volume 29 of Radon Ser. Comput. Appl. Math., pages 419–462.
+De Gruyter, Berlin, 2022b. ISBN 978-3-11-069596-0. doi: 10.1515/9783110695984-015.
+URL https://doi.org/10.1515/9783110695984-015.
+Houman Owhadi and Gene Ryan Yoo. Kernel flows: From learning kernels from data into
+the abyss. Journal of Computational Physics, 389:22–47, 2019.
+Thomas O’Leary-Roseberry, Umberto Villa, Peng Chen, and Omar Ghattas. Derivative-
+informed projected neural networks for high-dimensional parametric maps governed by
+pdes.
+Computer Methods in Applied Mechanics and Engineering, 388:114199, 2022.
+ISSN 0045-7825. doi: https://doi.org/10.1016/j.cma.2021.114199. URL https://www.
+sciencedirect.com/science/article/pii/S0045782521005302.
+Philipp Petersen and Felix Voigtlaender. Optimal approximation of piecewise smooth func-
+tions using deep relu neural networks. Neural networks : the official journal of the Inter-
+national Neural Network Society, 108:296–330, 2018. doi: 10.1016/j.neunet.2018.08.019.
+Philipp Petersen, Mones Raslan, and Felix Voigtlaender. Topological properties of the set
+of functions generated by neural networks of fixed size. Foundations of Computational
+Mathematics, 21(2):375–444, 2021. ISSN 1615-3375. doi: 10.1007/s10208-020-09461-0.
+URL https://link.springer.com/article/10.1007/s10208-020-09461-0.
+Allan Pinkus. Approximation theory of the MLP model in neural networks. In Acta nu-
+merica, 1999, volume 8 of Acta Numer., pages 143–195. Cambridge Univ. Press, Cam-
+bridge, 1999.
+ISBN 0-521-77088-2.
+doi: 10.1017/S0962492900002919.
+URL https:
+//doi.org/10.1017/S0962492900002919.
+Tomaso Poggio, Hrushikesh Mhaskar, Lorenzo Rosasco, Brando Miranda, and Qianli Liao.
+Why and when can deep-but not shallow-networks avoid the curse of dimensionality: a
+review. International Journal of Automation and Computing, 14(5):503–519, 2017.
+David Pollard. Convergence of Stochastic Processes. Springer New York, New York, NY,
+1984. ISBN 978-1-4612-9758-1. doi: 10.1007/978-1-4612-5254-2.
+Alfio Quarteroni, Andrea Manzoni, and Federico Negri. Reduced basis methods for par-
+tial differential equations, volume 92 of Unitext.
+Springer, Cham, 2016.
+ISBN 978-
+3-319-15430-5.
+doi:
+10.1007/978-3-319-15431-2.
+URL https://doi.org/10.1007/
+978-3-319-15431-2. An introduction, La Matematica per il 3+2.
+80
+
+PDF PAGE 81
+Statistical Learning Theory for Neural Operators
+Bogdan Raonic, Roberto Molinaro, Tobias Rohner, Siddhartha Mishra, and Emmanuel
+de Bezenac. Convolutional neural operators. In ICLR 2023 Workshop on Physics for
+Machine Learning, 2023.
+Holger Rauhut and Christoph Schwab. Compressive sensing Petrov-Galerkin approximation
+of high-dimensional parametric operator equations. Math. Comp., 86(304):661–700, 2017.
+ISSN 0025-5718. doi: 10.1090/mcom/3113. URL http://dx.doi.org/10.1090/mcom/
+3113. Report 2014-14, Seminar for Applied Mathematics, ETH Z¨urich.
+Markus Reiß. Asymptotic equivalence for nonparametric regression with multivariate and
+random design. Ann. Statist., 36(4):1957–1982, 2008. ISSN 0090-5364. doi: 10.1214/
+07-AOS525. URL http://dx.doi.org/10.1214/07-AOS525.
+Johannes Schmidt-Hieber.
+Supplement to “nonparametric regression using deep neural
+networks with relu activation function”. The Annals of Statistics, 48(4), 2020a. ISSN
+0090-5364. doi: 10.1214/19-AOS1875SUPP.
+Johannes Schmidt-Hieber. Nonparametric regression using deep neural networks with ReLU
+activation function. The Annals of Statistics, 48(4), 2020b. doi: 10.1214/19-aos1875. URL
+https://doi.org/10.1214%2F19-aos1875.
+C. Schwab and A. M. Stuart. Sparse deterministic approximation of Bayesian inverse prob-
+lems. Inverse Problems, 28(4):045003, 32, 2012. ISSN 0266-5611,1361-6420. doi: 10.1088/
+0266-5611/28/4/045003. URL https://doi.org/10.1088/0266-5611/28/4/045003.
+Christoph Schwab and Jakob Zech. Deep learning in high dimension: neural network ex-
+pression rates for generalized polynomial chaos expansions in UQ. Anal. Appl. (Singap.),
+17(1):19–55, 2019. ISSN 0219-5305,1793-6861. doi: 10.1142/S0219530518500203. URL
+https://doi.org/10.1142/S0219530518500203.
+Christoph Schwab and Jakob Zech.
+Deep learning in high dimension: neural network
+expression rates for analytic functions in L2(Rd, γd). SIAM/ASA J. Uncertain. Quantif.,
+11(1):199–234, 2023. ISSN 2166-2525. doi: 10.1137/21M1462738. URL https://doi.
+org/10.1137/21M1462738.
+Christoph Schwab, Andreas Stein, and Jakob Zech. Deep operator network approximation
+rates for lipschitz operators. Analysis and Applications, pages 1–41, 2025. doi: 10.1142/
+S0219530525500307. URL https://doi.org/10.1142/S0219530525500307.
+Euan A Spence and Jared Wunsch. Wavenumber-explicit parametric holomorphy of helm-
+holtz solutions in the context of uncertainty quantification. SIAM/ASA Journal on Un-
+certainty Quantification, 11(2):567–590, 2023.
+Andrew M. Stuart. Inverse problems: a Bayesian perspective. Acta Numer., 19:451–559,
+2010. ISSN 0962-4929. doi: 10.1017/S0962492910000061.
+Taiji Suzuki. Adaptivity of deep relu network for learning in besov and mixed smooth besov
+spaces: optimal rate and curse of dimensionality. In he 7th International Conference on
+Learning Representations (ICLR2019), volume 7, 2019.
+81
+
+PDF PAGE 82
+Reinhardt, Wang and Zech
+Michel Talagrand. The generic chaining: Upper and lower bounds for stochastic processes.
+Springer, Berlin and New York, 2005. ISBN 3-540-24518-9. doi: 10.1007/3-540-27499-5.
+Michel Talagrand. Upper and lower bounds for stochastic processes, volume 60. Springer,
+2014.
+Hans Triebel. Interpolation theory, function spaces, differential operators. Barth, Heidelberg
+and Leipzig, 2., rev. and enl. ed. edition, 1995. ISBN 3335004205.
+Alexandre B Tsybakov. Introduction to Nonparametric Estimation. Springer series in statis-
+tics. Springer, Dordrecht, 2009.
+doi: 10.1007/b13794.
+URL https://cds.cern.ch/
+record/1315296.
+Sara van de Geer. Empirical Processes in M-Estimation. Cambridge U. Press, 2000.
+Sara van de Geer. Least squares estimation with complexity penalties. Mathematical Meth-
+ods of statistics, 10(3):355, 2001.
+Sara A. van de Geer. Applications of empirical process theory. Cambridge series in statistical
+and probabilistic mathematics. Cambridge University Press, Cambridge, digitally printed
+version edition, 2000. ISBN 052165002X.
+Roman Vershynin. High-dimensional probability: An introduction with applications in data
+science, volume 47 of Cambridge series in statistical and probabilistic mathematics. Cam-
+bridge University Press, Cambridge, United Kingdom and New York, NY, 2018. ISBN
+1108415199.
+Dongbin Xiu and George Em Karniadakis.
+The wiener–askey polynomial chaos for
+stochastic differential equations.
+SIAM Journal on Scientific Computing, 24(2):619–
+644, 2002.
+doi:
+10.1137/S1064827501387826.
+URL https://doi.org/10.1137/
+S1064827501387826.
+Dmitry Yarotsky. Error bounds for approximations with deep relu networks. Neural net-
+works : the official journal of the International Neural Network Society, 94:103–114, 2017.
+doi: 10.1016/j.neunet.2017.07.002.
+Jakob Zech.
+Sparse-Grid Approximation of High-Dimensional Parametric PDEs.
+PhD
+thesis, ETH Zurich, 2018.
+82

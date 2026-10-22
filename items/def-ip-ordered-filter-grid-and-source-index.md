@@ -73,4 +73,4 @@ The geometric lower bound $v_m\ge v_0\theta_1^m$ makes this index finite.
 
 ## Remarks
 
-The source class agrees with the earlier singular-value convention because its multiplier at a singular value $s_j$ is $\psi(s_j)=\varphi(s_j^2)=\varphi(\lambda_j)$. The variance function is finite for every fixed $\alpha>0$: the filter bound gives $q_\alpha(\lambda_j)\le C_q'/\alpha$ and $\sum_j\lambda_j<\infty$.
+The source class agrees with the earlier singular-value convention because its multiplier at a singular value $s_j$ is $\psi(s_j)=\varphi(s_j^2)=\varphi(\lambda_j)$. The variance function is finite for every fixed $\alpha\in\mathcal A$: the filter bound gives $q_\alpha(\lambda_j)\le C_q'/\alpha$ and $\sum_j\lambda_j<\infty$.

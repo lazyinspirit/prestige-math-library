@@ -1,0 +1,931 @@
+{
+  "version": 1,
+  "scope": [
+    "def-ip-differential-range-invariance",
+    "def-ip-relaxed-range-invariance-objective",
+    "ex-ip-partial-observation-range-invariance-without-tcc",
+    "ex-ip-relaxed-variable-requires-penalty",
+    "lem-ip-joint-range-invariance-vsc-estimate",
+    "lem-ip-frozen-newton-one-step-error-recursion",
+    "thm-ip-joint-regularization-rate-under-range-invariance",
+    "thm-ip-frozen-newton-rate-under-range-invariance",
+    "rem-ip-eit-conductivity-rate-source-reconciliation"
+  ],
+  "contracts": {
+    "def-ip-differential-range-invariance": {
+      "citations": [],
+      "derivations": [],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "A definition does not prove a claim."
+        },
+        {
+          "case": "zero",
+          "status": "not_applicable",
+          "reason": "A definition does not prove a claim."
+        },
+        {
+          "case": "one",
+          "status": "not_applicable",
+          "reason": "A definition does not prove a claim."
+        },
+        {
+          "case": "degenerate",
+          "status": "not_applicable",
+          "reason": "A definition does not prove a claim."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "A definition does not prove a claim."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "A definition does not prove a claim."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "A definition does not prove a claim."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "A definition does not prove a claim."
+        }
+      ],
+      "finite_smoke": []
+    },
+    "def-ip-relaxed-range-invariance-objective": {
+      "citations": [],
+      "derivations": [],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "A definition does not prove a claim."
+        },
+        {
+          "case": "zero",
+          "status": "not_applicable",
+          "reason": "A definition does not prove a claim."
+        },
+        {
+          "case": "one",
+          "status": "not_applicable",
+          "reason": "A definition does not prove a claim."
+        },
+        {
+          "case": "degenerate",
+          "status": "not_applicable",
+          "reason": "A definition does not prove a claim."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "A definition does not prove a claim."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "A definition does not prove a claim."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "A definition does not prove a claim."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "A definition does not prove a claim."
+        }
+      ],
+      "finite_smoke": []
+    },
+    "ex-ip-partial-observation-range-invariance-without-tcc": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-ip-differential-range-invariance",
+          "source_section": "Definition",
+          "quote": "$$F(x)-F(x_0)=Kr(x)\\qquad(x\\in U).$$",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "def-ip-tangential-cone-condition",
+          "source_section": "Definition",
+          "quote": "the **local tangential cone condition at $x$ on radius $\\delta$ with constant $\\eta$** holds if $0\\le\\eta<1$",
+          "uses": [
+            "2.2"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "bi-lipschitz-coordinate",
+          "claim": "The scalar coordinate is strictly increasing with upper and lower derivative bounds, so the range coordinate and its inverse are Lipschitz.",
+          "step": "1.1",
+          "inputs": [
+            "given",
+            "calculus"
+          ]
+        },
+        {
+          "id": "factorization",
+          "claim": "The constructed bounded linear K and map r satisfy the range factorization on all of U.",
+          "step": "2.1",
+          "inputs": [
+            "F1",
+            "step 1.1"
+          ]
+        },
+        {
+          "id": "tcc-failure",
+          "claim": "At the radius-five boundary witness, the Taylor remainder is strictly larger than the data residual, contradicting every allowed eta.",
+          "step": "2.2",
+          "inputs": [
+            "F2",
+            "given",
+            "step 1.1"
+          ]
+        },
+        {
+          "id": "nonidentifiability",
+          "claim": "The observation is constant along the t-axis, so range invariance does not imply identification.",
+          "step": "3.1",
+          "inputs": [
+            "given",
+            "step 2.1"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The item assumes the named spaces and a supplied exact point, so the empty object case is excluded."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "At h=0 both the TCC remainder and residual vanish; the strict counterexample in step 2.2 uses h=(5,0)."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "The witness in step 2.2 has remainder strictly greater than residual, so even eta approaching the excluded value 1 cannot satisfy the condition."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Step 3.1 exhibits the unobserved t-axis and the resulting nonidentifiable fiber."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "The increment h=(5,0) has norm exactly 5, and step 2.2 uses the closed-ball endpoint."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Steps 1.1\u20133.1 use explicit formulas and a fixed witness; no choice principle is used."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The item proves a one-way claim or inequality, not an equivalence."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The item proves a one-way claim or inequality, not an equivalence."
+        }
+      ],
+      "finite_smoke": []
+    },
+    "ex-ip-relaxed-variable-requires-penalty": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-ip-differential-range-invariance",
+          "source_section": "Definition",
+          "quote": "$$F(x)-F(x_0)=Kr(x)\\qquad(x\\in U).$$",
+          "uses": [
+            "1.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "range-factorization",
+          "claim": "The explicitly defined K and identity coordinate map factor the relaxed observation.",
+          "step": "1.1",
+          "inputs": [
+            "F1",
+            "given"
+          ]
+        },
+        {
+          "id": "unpenalized-fiber",
+          "claim": "Every pair (c,y-c) has zero objective and the objective is nonnegative, so unpenalized exact fits are nonunique.",
+          "step": "1.2",
+          "inputs": [
+            "given"
+          ]
+        },
+        {
+          "id": "penalized-unique-minimizer",
+          "claim": "Both nonnegative penalized objective terms must vanish at a minimizer, forcing z=0 and c=y.",
+          "step": "2.1",
+          "inputs": [
+            "given"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The item assumes the named spaces and a supplied exact point, so the empty object case is excluded."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "For y=0, the same argument in steps 2.1 and 3.1 gives an unpenalized line of fits and the unique penalized pair (0,0)."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "The penalty coefficient is any fixed lambda>0; step 2.1 fails at lambda=0, which is exactly the unpenalized case from step 1.2."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Step 2.1 gives a full one-dimensional exact-fit fiber for every y."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "The variables range over all real c,z, so there is no finite-domain endpoint; steps 2.1\u20133.1 cover all real y."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "The minimizing pairs and uniqueness are characterized directly in steps 2.1 and 3.1; no choice principle is used."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The item proves a one-way claim or inequality, not an equivalence."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The item proves a one-way claim or inequality, not an equivalence."
+        }
+      ],
+      "finite_smoke": []
+    },
+    "lem-ip-joint-range-invariance-vsc-estimate": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-ip-differential-range-invariance",
+          "source_section": "Definition",
+          "quote": "$$F(x)-F(x_0)=Kr(x)\\qquad(x\\in U).$$",
+          "uses": [
+            "1.1",
+            "2.2"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "def-ip-relaxed-range-invariance-objective",
+          "source_section": "Definition",
+          "quote": "$$\\mathcal J_{\\alpha,\\beta}^\\delta(\\widehat r,x):=\\|K\\widehat r+F(x_0)-y^\\delta\\|_Y^p+\\alpha\\mathcal R(\\widehat r)+\\beta Q(r(x),\\widehat r)^p+\\|Px\\|_X^p",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "def-ip-banach-convex-subgradient-and-dual-pairing",
+          "source_section": "Definition",
+          "quote": "$$\\partial R(x):=\\{\\xi\\in X^*:R(z)\\ge R(x)+\\langle\\xi,z-x\\rangle_{X^*,X}\\text{ for every }z\\in X\\}.$$",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "def-ip-bregman-distance",
+          "source_section": "Definition",
+          "quote": "$$D_R^{\\xi^\\dagger}(x,x^\\dagger):=R(x)-R(x^\\dagger)-\\langle\\xi^\\dagger,x-x^\\dagger\\rangle_{X^*,X}.$$",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "def-ip-variational-source-condition",
+          "source_section": "Definition",
+          "quote": "$$-\\langle\\xi^\\dagger,x-x^\\dagger\\rangle_{X^*,X}\\le\\beta D_R^{\\xi^\\dagger}(x,x^\\dagger)+\\psi\\!\\left(\\|F(x)-F(x^\\dagger)\\|_Y^p\\right)\\qquad(x\\in L_{R_0}).$$",
+          "uses": [
+            "2.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "objective-comparison",
+          "claim": "Comparison with the exact pair and the noise triangle inequality controls the data, coupling, projection, and regularizer terms.",
+          "step": "1.1",
+          "inputs": [
+            "A2",
+            "F1",
+            "F2"
+          ]
+        },
+        {
+          "id": "vsc-bregman-substitution",
+          "claim": "The Bregman identity and VSC convert the regularizer difference into the Bregman error minus the source index.",
+          "step": "2.1",
+          "inputs": [
+            "A1",
+            "F3",
+            "F4",
+            "F5",
+            "step 1.1"
+          ]
+        },
+        {
+          "id": "range-residual-control",
+          "claim": "Lipschitz continuity and the projection-coupling bound control the VSC data residual by C_* times the scalar residual.",
+          "step": "2.2",
+          "inputs": [
+            "A3",
+            "F1",
+            "step 1.1"
+          ]
+        },
+        {
+          "id": "claimed-scalar-inequality",
+          "claim": "Substituting the residual comparison into the objective and VSC bounds yields the stated scalar inequality.",
+          "step": "3.1",
+          "inputs": [
+            "step 2.1",
+            "step 2.2"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The item assumes the named spaces and a supplied exact point, so the empty object case is excluded."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "The displayed algebra in step 1.1 remains valid when the noise and tolerance vanish; the statement itself assumes positive delta."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "The allowed endpoint b=0 is covered in step 2.1; b=1 is excluded because the Bregman coefficient 1-b would vanish."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "If K=0, the range-data terms vanish and the comparison steps 1.1\u20133.1 remain valid with the stated nonnegative constants."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "The power inequalities used in steps 1.1 and 3.1 include p=1, where the convex power estimate is equality."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Steps 1.1\u20134.1 use the supplied approximate minimizer and exact solution without selecting additional points."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The item proves a one-way claim or inequality, not an equivalence."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The item proves a one-way claim or inequality, not an equivalence."
+        }
+      ],
+      "finite_smoke": []
+    },
+    "lem-ip-frozen-newton-one-step-error-recursion": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-ip-differential-range-invariance",
+          "source_section": "Definition",
+          "quote": "$$F(x)-F(x_0)=Kr(x)\\qquad(x\\in U).$$",
+          "uses": [
+            "1.1",
+            "1.3",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "def-ip-relaxed-range-invariance-objective",
+          "source_section": "Definition",
+          "quote": "$$\\mathcal J_n^\\delta(\\widehat r,x):=\\|K\\widehat r+F(x_0)-y^\\delta\\|_Y^p+\\alpha_n\\mathcal R(\\widehat r)+\\beta_n Q\\big(r(x_n)+r'(x_n)(x-x_n),\\widehat r\\big)^p+\\|Px\\|_X^p.$$",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "def-ip-banach-convex-subgradient-and-dual-pairing",
+          "source_section": "Definition",
+          "quote": "$$\\partial R(x):=\\{\\xi\\in X^*:R(z)\\ge R(x)+\\langle\\xi,z-x\\rangle_{X^*,X}\\text{ for every }z\\in X\\}.$$",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "def-ip-bregman-distance",
+          "source_section": "Definition",
+          "quote": "$$D_R^{\\xi^\\dagger}(x,x^\\dagger):=R(x)-R(x^\\dagger)-\\langle\\xi^\\dagger,x-x^\\dagger\\rangle_{X^*,X}.$$",
+          "uses": [
+            "1.3",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "def-ip-variational-source-condition",
+          "source_section": "Definition",
+          "quote": "$$-\\langle\\xi^\\dagger,x-x^\\dagger\\rangle_{X^*,X}\\le\\beta D_R^{\\xi^\\dagger}(x,x^\\dagger)+\\psi\\!\\left(\\|F(x)-F(x^\\dagger)\\|_Y^p\\right)\\qquad(x\\in L_{R_0}).$$",
+          "uses": [
+            "1.3",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F6",
+          "source": "lem-ip-index-function-young-conjugate-bound",
+          "source_section": "Statement",
+          "quote": "$$e\\le\\frac1{c_2}\\left(\\frac d\\alpha+H\\!\\left(\\frac{c_1}{C_3\\alpha}\\right)\\right),\\qquad r\\le\\frac2{c_1}\\left(d+\\alpha H\\!\\left(\\frac{c_1}{2C_3\\alpha}\\right)\\right).$$",
+          "uses": [
+            "3.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "exact-competitor",
+          "claim": "Approximate minimality against the exact pair yields the data and regularizer comparison with the noise and linearized competitor remainder.",
+          "step": "1.1",
+          "inputs": [
+            "A1",
+            "F1",
+            "F2"
+          ]
+        },
+        {
+          "id": "proxy-to-true-range",
+          "claim": "Two triangle-power inequalities and the Taylor bound give a lower estimate for the affine-proxy coupling in terms of current range and relaxed-variable errors.",
+          "step": "1.2",
+          "inputs": [
+            "given"
+          ]
+        },
+        {
+          "id": "vsc-and-penalty",
+          "claim": "The projected range factorization, VSC, penalty lower bound, and subadditivity control the regularizer difference.",
+          "step": "1.3",
+          "inputs": [
+            "A1",
+            "F1",
+            "F4",
+            "F5",
+            "given"
+          ]
+        },
+        {
+          "id": "absorb-compatibility",
+          "claim": "The compatibility inequality and beta-alpha choice absorb the relaxed-range error into the regularizer margin.",
+          "step": "2.1",
+          "inputs": [
+            "step 1.1",
+            "step 1.2",
+            "step 1.3",
+            "A1",
+            "F1",
+            "F3",
+            "F4",
+            "F5",
+            "given"
+          ]
+        },
+        {
+          "id": "scalar-conjugate-bound",
+          "claim": "After scaling, the corrected scalar inequality is discharged by the index-function lemma.",
+          "step": "3.1",
+          "inputs": [
+            "step 2.1",
+            "F6",
+            "given"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The item assumes the named spaces and a supplied exact point, so the empty object case is excluded."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Setting delta and eta to zero in step 1.1 preserves the comparison inequality; no division by either noise quantity is used."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "The endpoint p=1 is admitted; then lambda=1 and the positive-t condition is 1-c_tcr>0, as used in steps 1.2 and 5.1."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "The case K=0 is covered by the constants in steps 3.1 and 5.1; the max defining Cbar remains positive."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "The Taylor remainder condition is required on all pairs in U, so steps 1.1\u20134.1 include iterates on the boundary of U."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "The proof uses only the specified approximate step and exact comparator; no choice principle is used. This is verified in step 1.1."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The item proves a one-way claim or inequality, not an equivalence."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The item proves a one-way claim or inequality, not an equivalence."
+        }
+      ],
+      "finite_smoke": []
+    },
+    "thm-ip-joint-regularization-rate-under-range-invariance": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "lem-ip-joint-range-invariance-vsc-estimate",
+          "source_section": "Statement",
+          "quote": "$$s_\\delta+(1-b)\\alpha e_\\delta\\le d_\\delta+\\alpha\\psi(C_*s_\\delta).$$",
+          "uses": [
+            "1.1",
+            "1.2"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "lem-ip-index-function-young-conjugate-bound",
+          "source_section": "Statement",
+          "quote": "$$e\\le\\frac1{c_2}\\left(\\frac d\\alpha+H\\!\\left(\\frac{c_1}{C_3\\alpha}\\right)\\right),\\qquad r\\le\\frac2{c_1}\\left(d+\\alpha H\\!\\left(\\frac{c_1}{2C_3\\alpha}\\right)\\right).$$",
+          "uses": [
+            "1.1",
+            "1.2"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "def-ip-differential-range-invariance",
+          "source_section": "Definition",
+          "quote": "$$F(x)-F(x_0)=Kr(x)\\qquad(x\\in U).$$",
+          "uses": [
+            "2.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "bregman-index-rate",
+          "claim": "The first scalar conjugate estimate and lower parameter coupling yield the Bregman rate.",
+          "step": "1.1",
+          "inputs": [
+            "A1",
+            "F1",
+            "F2"
+          ]
+        },
+        {
+          "id": "residual-index-rate",
+          "claim": "The second scalar conjugate estimate and upper parameter coupling yield scalar errors of order delta^p.",
+          "step": "1.2",
+          "inputs": [
+            "A1",
+            "A2",
+            "F1",
+            "F2"
+          ]
+        },
+        {
+          "id": "extract-residuals",
+          "claim": "The scalar error components give the individual range, projection, coupling, and noisy-data residual rates.",
+          "step": "2.1",
+          "inputs": [
+            "F3",
+            "step 1.2"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The item assumes the named spaces and a supplied exact point, so the empty object case is excluded."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "The estimates in steps 1.1 and 1.2 are uniform as delta tends to zero under the stated parameter coupling."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "The parameter beta is fixed and positive, so step 2.1 can divide by beta; beta=0 is excluded by the Statement."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "If K=0, the K-range residual component in step 2.1 is identically zero while the other nonnegative components remain controlled."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "The base range-invariance and estimate hypotheses allow p=1; the scalar bounds in steps 1.1 and 1.2 include this endpoint."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "The proof applies the supplied scalar lemma to the given approximate reconstruction and makes no additional selection. This is verified in step 1.1."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The item proves a one-way claim or inequality, not an equivalence."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The item proves a one-way claim or inequality, not an equivalence."
+        }
+      ],
+      "finite_smoke": []
+    },
+    "thm-ip-frozen-newton-rate-under-range-invariance": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "lem-ip-frozen-newton-one-step-error-recursion",
+          "source_section": "Statement",
+          "quote": "$$S_{n+1}+\\alpha_nE_{n+1}\\le d_n+\\alpha_n\\psi(\\overline C S_{n+1}).$$",
+          "uses": [
+            "1.1",
+            "3.1",
+            "4.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-recurrence",
+          "claim": "The one-step conjugate bound and noise/tolerance schedules give a contractive scalar error recursion.",
+          "step": "1.1",
+          "inputs": [
+            "A1",
+            "A2",
+            "F1",
+            "given"
+          ]
+        },
+        {
+          "id": "geometric-sum",
+          "claim": "The source-growth condition and q C_H<1 bound the iterated error by h_N.",
+          "step": "2.1",
+          "inputs": [
+            "A3",
+            "A4",
+            "step 1.1"
+          ]
+        },
+        {
+          "id": "stopping-residual",
+          "claim": "The bounded crossing condition and previous-error estimate bound d_N and then S_N by delta^p.",
+          "step": "3.1",
+          "inputs": [
+            "A1",
+            "A2",
+            "A3",
+            "F1",
+            "step 2.1"
+          ]
+        },
+        {
+          "id": "output-rate",
+          "claim": "The definitions of E_N,S_N yield the range, projection, data, and source-index rates.",
+          "step": "4.1",
+          "inputs": [
+            "F1",
+            "step 2.1",
+            "step 3.1",
+            "given"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The item assumes the named spaces and a supplied exact point, so the empty object case is excluded."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "The stopping construction is for positive delta; the recurrence in step 1.1 remains algebraically valid at zero noise but no finite stopping claim is made there."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "The strict endpoint q C_H=1 is excluded; step 2.1 uses the convergent geometric sum 1/(1-q C_H)."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "If q=0, the same recurrence in step 1.1 reduces to a one-step bound and the geometric sum in step 2.1 still holds."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "The crossing inequalities in A1 include rho_N=tau delta^p and rho_N=M tau delta^p; steps 1.1 and 3.1 use non-strict bounds."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "The index N is specified by the bounded-crossing assumption and no additional minimizer or subsequence is selected. This is verified in step 1.1."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The item proves a one-way claim or inequality, not an equivalence."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The item proves a one-way claim or inequality, not an equivalence."
+        }
+      ],
+      "finite_smoke": []
+    },
+    "rem-ip-eit-conductivity-rate-source-reconciliation": {
+      "citations": [
+        {
+          "fact": "F3",
+          "source": "def-ip-bregman-distance",
+          "source_section": "Definition",
+          "quote": "$$D_R^{\\xi^\\dagger}(x,x^\\dagger):=R(x)-R(x^\\dagger)-\\langle\\xi^\\dagger,x-x^\\dagger\\rangle_{X^*,X}.$$",
+          "uses": [
+            "1.2",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "thm-ip-joint-regularization-rate-under-range-invariance",
+          "source_section": "Statement",
+          "quote": "$$c_-\\delta^p\\le\\alpha(\\delta)\\rho_\\delta\\le c_+\\delta^p,\\qquad H\\!\\left(\\frac{1}{2C_*\\alpha(\\delta)}\\right)\\le C_H\\rho_\\delta.$$",
+          "uses": [
+            "1.3",
+            "2.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "vsc-exponent-conflict",
+          "claim": "Substitution p=2 in the full thesis formula gives denominator s2-1, not the denominator printed in Kaltenbacher Theorem 10.",
+          "step": "1.1",
+          "inputs": [
+            "F1",
+            "F2",
+            "algebra"
+          ]
+        },
+        {
+          "id": "quadratic-bregman-norm-loss",
+          "claim": "Expanding the quadratic penalty identifies Bregman distance with half the squared norm error, so taking square roots halves the log exponent.",
+          "step": "1.2",
+          "inputs": [
+            "F3",
+            "F5",
+            "algebra"
+          ]
+        },
+        {
+          "id": "pure-power-parameter-conflict",
+          "claim": "The log conjugate has order (log q)^(-nu), making every pure-power alpha schedule in the stated range fail the two-sided delta^2 balance.",
+          "step": "1.3",
+          "inputs": [
+            "F4",
+            "F5",
+            "F6",
+            "algebra"
+          ]
+        },
+        {
+          "id": "missing-eit-interface",
+          "claim": "The inspected current library suppliers do not provide the N-to-D sequence map, augmented Taylor bound, or full Besov-to-VSC proof required for a verified specialization.",
+          "step": "2.1",
+          "inputs": [
+            "F1",
+            "F2",
+            "F3",
+            "F4",
+            "F5",
+            "F6",
+            "given"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The item assumes the named spaces and a supplied exact point, so the empty object case is excluded."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "The logarithmic asymptotics are evaluated as delta tends to zero through positive noise levels in step 1.3."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "The item Statement specifies s2>s1, so the smoothness interval excludes the equality case where denominators s2-1 and s1-1 could coincide."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "The exponent comparison in step 1.1 uses s2>s1 and is not asserted at a zero Besov gap."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "The listed s1,s2 intervals are open as in the source; steps 1.1, 1.2, and 1.3 apply to each interior pair."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Steps 1.1\u20134.1 use fixed published source statements and explicit algebra, with no choice principle. This is verified in step 1.1."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The item proves a one-way claim or inequality, not an equivalence."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The item proves a one-way claim or inequality, not an equivalence."
+        }
+      ],
+      "finite_smoke": []
+    }
+  }
+}

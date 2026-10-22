@@ -14,6 +14,11 @@ axiom_use: "Choice-free: the algebra is a quotient of a monoid algebra by the di
 provenance:
   statement: literature-derived
   proof: not-applicable
+verification:
+  judge:
+    model: "gpt-6-luna"
+    verdict: pass
+    date: 2026-10-22
 sources:
   references:
     - title: "Frederick M. Goodman and Holly Hauschild, Affine Birman–Wenzl–Murakami Algebras and Tangles in the Solid Torus, §§2.2–2.3 and Definition 2.6"

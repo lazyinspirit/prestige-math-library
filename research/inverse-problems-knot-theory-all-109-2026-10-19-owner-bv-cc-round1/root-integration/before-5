@@ -1,0 +1,53 @@
+---
+id: lem-ip-l1-sequence-compactness-by-cell-averages
+kind: lemma
+title: Sequence compactness in L1 by finite cell averages
+status: draft
+origin: pipeline
+pipeline_run: inverse-problems-knot-theory-all-109-2026-10-19
+deps:
+  - def-countable-choice
+  - thm-tonelli-and-fubini-for-completed-product-measures
+  - thm-euclidean-lebesgue-measure-is-the-completion-of-the-product-of-lebesgue-measures
+  - def-l-p-space-as-a-quotient-by-null-functions
+  - thm-tonelli-theorem-for-sigma-finite-product-spaces
+  - thm-lebesgue-outer-measure-and-measurability-are-translation-invariant
+proof_strategy: direct
+provenance:
+  statement: literature-derived
+  proof: ai-altered
+sources:
+  references:
+    - title: Glaucio Terra, Introduction to Geometric Measure Theory, Theorems 1.80 and 7.49
+      url: https://www.ime.usp.br/~glaucio/mat6704/textos/GMTLecureNotes.pdf
+---
+
+## Statement
+
+Assume Countable Choice. Let $(v_k)$ be a sequence in real $L^1(\mathbb R^n)$, with $\sup_k\|v_k\|_1<\infty$, all zero almost everywhere outside one bounded set. If $\lim_{r\downarrow0}\sup_{k,\ |h|\le r}\|v_k(\cdot+h)-v_k\|_1=0$, then a subsequence converges in $L^1(\mathbb R^n)$. This assertion does not require Dependent Choice.
+
+## Statement references
+
+[[def-l-p-space-as-a-quotient-by-null-functions|The L1 equivalence classes.]]
+
+## Facts & Assumptions
+
+**Given:** The sequence and uniform translation continuity in the Statement; write $M=\sup_k\|v_k\|_1$.
+
+[A1] Countable Choice allows choosing measurable representatives for a countable sequence of $L^1$ classes. ([[def-countable-choice]])
+
+[F1] Tonelli applies to nonnegative functions on completed Euclidean products and to sums of such functions. ([[thm-tonelli-theorem-for-sigma-finite-product-spaces]], [[thm-tonelli-and-fubini-for-completed-product-measures]], [[thm-euclidean-lebesgue-measure-is-the-completion-of-the-product-of-lebesgue-measures]])
+
+[F2] Translation preserves Lebesgue measure. ([[thm-lebesgue-outer-measure-and-measurability-are-translation-invariant]])
+
+## Proof
+
+**Given:** The hypotheses above.
+
+1.1 For $\delta>0$, tile $\mathbb R^n$ by the half-open cubes $Q=\delta(z+[0,1)^n)$, $z\in\mathbb Z^n$, and let $A_\delta v$ equal $\delta^{-n}\int_Qv$ on $Q$. The triangle inequality, followed by [F1] and the substitution $y=x+h$ using [F2], gives $\|v-A_\delta v\|_1\le\delta^{-n}\sum_Q\int_Q\int_Q|v(x)-v(y)|\,dy\,dx\le\delta^{-n}\int_{[-\delta,\delta]^n}\|v(\cdot+h)-v\|_1\,dh$. Thus, writing $\omega(r)=\sup_{k,|h|\le r}\|v_k(\cdot+h)-v_k\|_1$, one has $\sup_k\|v_k-A_\delta v_k\|_1\le2^n\omega(\sqrt n\delta)\to0$ as $\delta\downarrow0$. [F1, F2, given, construct, algebra]
+
+1.2 For each $m\ge1$, only finitely many cubes of side $2^{-m}$ meet a fixed ball containing the common supports; all other cell averages vanish. Enumerate all these cells at all levels by first increasing $m$ and then lexicographic order of their integer coordinates. Each cell-average coefficient $a_j(k)$ is a bounded real sequence, with bound $M$ divided by that cell's volume. There is a deterministically defined nested sequence of infinite subsets $S_m\subseteq\mathbb N$. Set $S_0=\mathbb N$. At stage $m$, partition the bounded ranges of the first $m$ coefficients into finitely many half-open dyadic bins of width $2^{-m}$, adding an endpoint bin if necessary. Among the finitely many vector bins containing infinitely many indices in $S_{m-1}$, take the lexicographically first; let $S_m$ be exactly that infinite set of indices. The finite pigeonhole principle guarantees existence and the specified order gives uniqueness. Ordinary recursion therefore defines $(S_m)$ without an instance of dependent choice. Take $k_m$ to be the least member of $S_m$ larger than $k_{m-1}$. For fixed $j$ and $m\ge j$, all later indices lie in $S_m$, so their $j$th coefficients differ by at most $2^{-m}$. Consequently every coefficient converges and, at each fixed cell level $\ell$, $(A_{2^{-\ell}}v_{k_m})_m$ is Cauchy in $L^1$, being a finite weighted sum of these coefficients. [given, construct]
+
+2.1 Given $\varepsilon>0$, choose a cell level $\ell$ for which $2^n\omega(\sqrt n2^{-\ell})<\varepsilon/3$, using step 1.1. For sufficiently large $a,b$, step 1.2 gives $\|A_{2^{-\ell}}v_{k_a}-A_{2^{-\ell}}v_{k_b}\|_1<\varepsilon/3$. The two approximation errors from step 1.1 then show $\|v_{k_a}-v_{k_b}\|_1<\varepsilon$. Thus the subsequence is Cauchy. [step 1.1, step 1.2, choose, algebra]
+
+3.1 For completeness at exactly the stated axiom strength, choose representatives of this countable sequence by [A1]. Select a further subsequence $g_j$ with $\|g_{j+1}-g_j\|_1<2^{-j}$, always choosing the least sufficiently late index, which exists by the Cauchy property. By [F1], $\sum_j|g_{j+1}-g_j|$ is integrable and finite almost everywhere. Hence $g_j$ has a measurable almost-everywhere limit $g$; moreover $|g|\le|g_1|+\sum_j|g_{j+1}-g_j|$, so $g\in L^1$, and $\|g-g_j\|_1\le\sum_{i\ge j}2^{-i}\to0$. The original Cauchy subsequence also converges to this $L^1$ class by the triangle inequality. This proves the assertion using only [A1]. [A1, F1, step 2.1, construct, algebra] ∎

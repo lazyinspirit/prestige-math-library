@@ -20,6 +20,11 @@ provenance:
   statement: literature-derived
   proof: ai-altered
 axiom_use: The model inherits AC through the Gaussian product prior; no stronger choice principle is asserted.
+verification:
+  judge:
+    model: "gpt-6-luna"
+    verdict: pass
+    date: 2026-10-22
 sources:
   references:
     - title: "Botond Szabó, A. W. van der Vaart, and J. H. van Zanten, Frequentist coverage of adaptive nonparametric Bayesian credible sets, Annals of Statistics 43(4) (2015)"

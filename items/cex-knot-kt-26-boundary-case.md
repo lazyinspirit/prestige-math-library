@@ -20,6 +20,11 @@ provenance:
   proof: ai-altered
 generation:
   role: counterexample
+verification:
+  judge:
+    model: "gpt-6-luna"
+    verdict: pass
+    date: 2026-10-22
 sources:
   references:
     - title: Michael H. Freedman, The topology of four-dimensional manifolds

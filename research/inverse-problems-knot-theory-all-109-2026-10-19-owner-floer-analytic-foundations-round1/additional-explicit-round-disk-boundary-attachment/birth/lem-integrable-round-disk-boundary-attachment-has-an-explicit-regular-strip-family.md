@@ -1,0 +1,67 @@
+---
+id: lem-integrable-round-disk-boundary-attachment-has-an-explicit-regular-strip-family
+kind: lemma
+title: "A round disk boundary attachment has an explicit regular strip family"
+status: draft
+origin: pipeline
+pipeline_run: inverse-problems-knot-theory-all-109-2026-10-19
+deps: [def-countable-choice, thm-proper-round-disk-component-boundary-degeneration-count-is-one, lem-balanced-attaching-cuts-admit-round-component-complex-models, lem-diagonal-strip-cauchy-riemann-fredholm-index, lem-strip-fredholm-index-agrees-in-higher-sobolev-spaces, lem-transverse-linear-strip-cauchy-riemann-isomorphism, lem-higher-sobolev-strip-map-charts-and-cauchy-riemann-section, lem-countable-choice-quantitative-newton-correction-and-smooth-zero-chart]
+dependency_level: 14
+justified_by: []
+aliases: []
+proof_strategy: direct
+provenance:
+  statement: literature-derived
+  proof: ai-altered
+sources:
+  references:
+    - title: "Ozsvath and Szabo, Holomorphic disks, link invariants and the multi-variable Alexander polynomial"
+      url: "https://arxiv.org/abs/math/0512286"
+      locator: "Boundary-degeneration attachment geometry; the exact integrable one-disk-component family and its actual linearized regularity are proved by the displayed elementary formula"
+---
+
+## Statement
+
+Assume Countable Choice. Use the proper one-boundary-component disk $A$, standard integrable structure and whole-image product chart of the round disk count theorem. Let $x$ be an actual transverse generator of two disjoint attaching systems, with $A$ bounded by $\gamma_i$ in the first system. Use the balanced round-component construction so that the second-system arc through $x_i$ is radial in the round disk coordinate near that boundary point and all inactive crossing lines are orthogonal. Let $\chi$ take $\overline A$ to the closed unit disk and $x_i$ to one, and put $W=i(1-\chi)/(1+\chi)$, taking $A$ to the upper half-plane and $x_i$ to zero.
+
+For all sufficiently small $\epsilon>0$ there is an actual smooth finite-energy standard holomorphic strip $u_\epsilon:\mathbb R\times[0,1]\to\operatorname{Sym}^m(\Sigma)$ with both ends $x$, first-system boundary at $t=0$, second-system boundary at $t=1$, and actual domain $A$. Its inactive coordinates are the other $x_j$, and its active coordinate is exactly
+$$W(u_\epsilon(s,t))=-\frac{\epsilon}{\sinh(\pi(s+it)/2)}.$$
+The pole at $(s,t)=(0,0)$ is interpreted in the smooth target coordinate $\chi$, where the value is $-1$.
+
+Every $u_\epsilon$ has surjective actual fixed-end linearization of real index two before translation. Its kernel is precisely the span of $\partial_su_\epsilon$ and $\partial_\epsilon u_\epsilon$. These assertions hold at every Sobolev order and at weights $0\le\delta<\pi/2$. The two parameters consisting of translation and $\epsilon$ give the full local regular zero chart at each positive $\epsilon$.
+
+As $\epsilon\downarrow0$, the strip converges smoothly to the constant strip $x$ away from $(0,0)$. In the source rescaling $s+it=(2\epsilon/\pi)\zeta$ it converges smoothly on compact subsets of the closed upper half-plane to the disk $W=-1/\zeta$, with its smooth target value at $\zeta=0$ and node at infinity. That disk is the unique orbit of the unit-domain disk in the count theorem. The strip energies equal its energy, so this degeneration loses no energy.
+
+This is an exact integrable boundary-attachment family with proved local regularity. It does not yet assert that every strip approaching this nodal limit lies in this family, that the family persists uniformly down to $\epsilon=0$ for perturbed structures, or that arbitrary boundary components reduce to this case.
+
+## Statement references
+
+[[def-countable-choice]]
+
+[[thm-proper-round-disk-component-boundary-degeneration-count-is-one]]
+
+[[lem-diagonal-strip-cauchy-riemann-fredholm-index]]
+
+## Facts & Assumptions
+
+**Given:** The actual integrable round disk component, transverse generator and prescribed radial crossing model. All other node coordinates lie a positive distance from $\overline A$, as proved in the round disk count theorem.
+
+[F1] [[thm-proper-round-disk-component-boundary-degeneration-count-is-one]] constructs the actual whole-image ordered product chart, classifies its unit disk orbit and proves its regular node-fixed index two. [[lem-balanced-attaching-cuts-admit-round-component-complex-models]] makes the crossings radial in the logarithmic round-boundary coordinate, with inactive product lines $\mathbb R,i\mathbb R$.
+
+[F2] [[lem-diagonal-strip-cauchy-riemann-fredholm-index]] proves that $D_0+B$ on the fixed product-line domain, with bounded real-linear coefficient tending to real diagonal limits $b_\pm$, has actual index given by the floor differences and unchanged weighted index below the limiting spectral gap. [[lem-strip-fredholm-index-agrees-in-higher-sobolev-spaces]] gives actual higher realization, kernel, cokernel and index agreement for the smooth bounded-derivative class. [[lem-transverse-linear-strip-cauchy-riemann-isomorphism]] proves the zero kernel of the whole scalar $D_0$ strip with real and imaginary boundary lines, including small weights.
+
+[F3] [[lem-higher-sobolev-strip-map-charts-and-cauchy-riemann-section]] supplies actual fixed-end $H^3$ map charts and smooth $H^2$ section. [[lem-countable-choice-quantitative-newton-correction-and-smooth-zero-chart]] gives the actual finite-dimensional zero chart of a surjective Fredholm derivative. Local reflected holomorphic extension used below follows directly by matching first derivatives across a real-valued boundary: for $f_y=i f_x$, reflection $f(z)\mapsto\overline{f(\overline z)}$ has the same tangential and normal derivatives, hence is $C^1$ and satisfies the Cauchy–Riemann equations there.
+
+## Proof
+
+1.1 Write $z=s+it$ and define the active coordinate by the formula in the Statement. In the globally regular disk coordinate it is $$\chi_\epsilon(z)=\frac{i\sinh(\pi z/2)+\epsilon}{i\sinh(\pi z/2)-\epsilon}.$$ Its denominator cannot vanish on $0\le t\le1$: the imaginary part of $\sinh(\pi z/2)$ is $\cosh(\pi s/2)\sin(\pi t/2)\ge0$, whereas denominator zero would require $\sinh(\pi z/2)=-i\epsilon$. Thus this is a genuine holomorphic coordinate map, smooth at $z=0$ with value $-1$. On $t=0$, $W$ is real except for its regular target infinity there, so $\chi$ is on the circle $\gamma_i$. On $t=1$ it is $$W=i\epsilon/\cosh(\pi s/2),\qquad \chi=\frac{1-\epsilon/\cosh(\pi s/2)}{1+\epsilon/\cosh(\pi s/2)}.$$ For small positive $\epsilon$ this lies on the actual radial second-system germ near $x_i$. The remaining constant coordinates lie on both corresponding curves. As $s\to\pm\infty$ every derivative of $\chi_\epsilon-1$ decays at rate $\pi/2$, so the strip has the actual ends $x$ and finite energy. It is standard holomorphic in the whole-image chart of [F1]. [F1, given, construct, algebra]
+
+2.1 Its interior image is exactly $A$ minus the radial slit corresponding to $[0,i\epsilon]$ in $W$. To verify this, $E=e^{\pi z}$ maps the strip biholomorphically to the upper half-plane, and the real fractional linear map $$\zeta=-\epsilon(E+1)/(E-1)$$ has positive determinant $2\epsilon$, hence is another upper-half-plane coordinate. In it $W^2=\zeta^2-\epsilon^2$ and the branch is chosen with $\operatorname{Im}W>0$. The map $\zeta\mapsto W$ is a bijection from the upper half-plane to its complement of the vertical slit $[0,i\epsilon]$. Indeed for any $W$ above the real axis outside that slit, $\zeta^2=W^2+\epsilon^2$ has exactly one root with positive imaginary part; when $W$ is on the imaginary axis above the slit this root is purely positive imaginary, and otherwise the nonreal square has one root in each half-plane. Points on the removed slit would have only real roots. The derivative is nonzero in the interior, so these inverse formulas are holomorphic locally and give the biholomorphism. Therefore every point of every full Heegaard region inside $A$ has one preimage, and points outside $A$ have none; the slit is part of the actual second boundary curve. This proves the asserted domain. Conformal invariance of two-dimensional Dirichlet energy and deletion of a measure-zero slit show that $E_g(u_\epsilon)$ is exactly the energy of the compact disk map $a\mapsto a+\sum_{j\ne i}x_j$ on $A$, independent of $\epsilon$. This uses the fixed target metric and does not assume it is the product metric. [F1, step 1.1, construct, algebra]
+
+3.1 Compute the actual Fredholm index in the smooth whole-image $\chi$ frame. The active differential operator is $D_0$, its lower boundary line is $i\chi_\epsilon(s,0)\mathbb R$, and its upper boundary line is $\mathbb R$ because the second arc is radial. Let $\phi(s)$ be the smooth angle lift of the lower line starting at $\pi/2$. The lower circle is traversed once positively: $W(s,0)$ runs from $0^+$ through $+\infty$, then $-\infty$, to $0^-$, and $\chi=(i-W)/(i+W)$ therefore turns from argument zero to $2\pi$. Hence $\phi_-=\pi/2$, $\phi_+=5\pi/2$, with all derivatives of its difference from these limits exponentially decaying. Put $a(s)=-\phi(s)-\pi/2$ and $$U(s,t)=e^{i\phi(s)}e^{ia(s)t}.$$ It carries the fixed lower/upper lines $\mathbb R,i\mathbb R$ to the actual lower/upper lines. It and its inverse are bounded on every stated Sobolev and weighted space, since all derivatives are bounded. Direct differentiation gives $$U^{-1}D_0U=D_0-a(s)+i\phi'(s)(1-t).$$ The real limiting coefficients are $b_-=\pi$ and $b_+=3\pi$, so [F2] at fixed angle $\theta_0=\pi/2$ gives active index $\lfloor-1/2\rfloor-\lfloor-5/2\rfloor=2$ and gap $\pi/2$. Its proof needs only convergence of these zeroth-order limits, not compact support of $\phi'$. The inactive components have $D_0$ with the actual fixed transverse lines and index zero. Thus the full operator has real index two in every claimed realization by [F2]. [F1, F2, step 1.1, step 2.1, construct, algebra]
+
+4.1 The actual kernel has dimension exactly two. Every kernel section is smooth up to finite physical boundary points by [F2]. In the active $W$ frame it is holomorphic, real on the lower boundary and imaginary on the upper boundary. The frame changes only at $z=0$, where $W$ has a simple pole. Since $dW/d\chi$ has a double pole at $\chi=-1$ and $\chi_\epsilon+1$ has a simple zero at $z=0$, the kernel coordinate $\xi_W=(dW/d\chi)\xi_\chi$ has at most a double pole there. Multiply by $z^2$ and apply the real-boundary reflection in [F3]; the result is holomorphic across that edge. Its Laurent principal coefficients are real because its values on the real axis are real. The two actual family derivatives have precisely independent principal parts $$\partial_sW=\frac{2\epsilon}{\pi z^2}+O(1),\qquad \partial_\epsilon W=-\frac2{\pi z}+O(z).$$ Subtract their real linear combination to cancel both negative coefficients of any kernel section. The remainder extends smoothly across $z=0$, has the same real/imaginary boundary lines, and belongs globally to the ordinary or weighted $H^1$ strip space: at the ends $dW/d\chi$ is smooth and bounded, and both subtracted sections decay at rate $\pi/2$. The whole-strip isomorphism in [F2] forces that remainder to be zero. The same isomorphism makes every inactive kernel component zero. Thus the full kernel is exactly $\operatorname{span}_{\mathbb R}\{\partial_su_\epsilon,\partial_\epsilon u_\epsilon\}$. These sections are independent by their pole orders, so the kernel dimension equals the index two in step3.1. The cokernel is zero, proving actual surjectivity in every claimed realization. [F2, F3, step 1.1, step 3.1, construct, algebra]
+
+5.1 For each fixed positive $\epsilon$, the map $(b,e)\mapsto u_e(s-b,t)$ is smooth into the actual fixed-end $H^3$ chart for $b$ small and $e$ in a compact interval of positive parameters about $\epsilon$. The displayed regular $\chi$ formula and its exponential ends bound all source and parameter derivatives there, justifying differentiability in the Sobolev norm. Its two derivatives span the actual kernel by step4.1. The regular zero chart in [F3] is two-dimensional, so the finite-dimensional inverse theorem identifies this parameter map with the full local zero chart near $u_\epsilon$. In particular quotienting by translation leaves $e$ as a local coordinate. This is a local assertion at positive $e$, not a uniform neighborhood theorem at zero. [F3, step 1.1, step 4.1, construct]
+
+6.1 Away from $z=0$ the regular formula in step1.1 tends with all derivatives to the constant node tuple as $\epsilon\to0$. In the source rescaling $z=(2\epsilon/\pi)\zeta$, divide numerator and denominator of that same regular formula by $\epsilon$ to obtain the smooth compact limit $$\chi_{\mathrm{bub}}(\zeta)=\frac{i\zeta+1}{i\zeta-1},\qquad W_{\mathrm{bub}}(\zeta)=-1/\zeta.$$ The denominator $i\zeta-1$ has its zero at $-i$, outside the closed upper half-plane. Thus convergence is smooth on all its finite compact subsets, including $\zeta=0$ in the regular target chart. This disk parametrizes $A$ biholomorphically and has node infinity at $x$, hence is exactly the orbit in [F1]. Step2.1 shows its energy equals every strip energy, while the constant base has zero energy. Therefore the displayed degeneration loses no energy. All claims concern actual exact solutions and actual linearized operators; the boundary-limit exhaustion and perturbation assertions excluded from the Statement remain separate proof obligations. [F1, step 1.1, step 2.1, step 5.1, construct, algebra] ∎

@@ -9,13 +9,16 @@ dependency_level: 0
 deps:
   - def-the-categorical-trace-of-a-morphism-into-the-double-dual
   - thm-a-braided-rigid-category-has-a-drinfeld-morphism
+  - def-twist-and-ribbon-structure
+  - def-left-dual-and-right-dual-object
   - def-braid-group-by-the-artin-presentation
   - def-symmetric-group
-justified_by: []
-proof_strategy: direct
+justified_by:
+  - thm-ribbon-evaluation-from-colored-braid-word-procedure-properties
+proof_strategy: not-applicable
 provenance:
   statement: ai-altered
-  proof: ai-altered
+  proof: not-applicable
 sources:
   references:
     - title: "V. G. Turaev, Quantum Invariants of Knots and 3-Manifolds, Chapter I, Theorem 2.5 and §§3–4"
@@ -26,16 +29,18 @@ sources:
 
 ## Definition
 
-An **effective field** is a field whose elements have finite encodings and whose exact addition, subtraction, multiplication, equality test, and inversion of nonzero elements are terminating procedures. Input a finite-dimensional strict matrix realization of a $k$-linear ribbon category with $\operatorname{End}(\mathbf1)=k$, finite-dimensional color objects with fixed bases, exact matrices for every braiding and inverse braiding used, the evaluation and coevaluation maps for the closure, the twist matrices, and the matrix $J_W$ of the ribbon-induced pivotal comparison $j_W=u_W\circ\theta_W:W\to W^{\vee\vee}$ for $W=V_{a_1}\otimes\cdots\otimes V_{a_n}$, where $u_W$ is the Drinfeld morphism. Also input a finite braid word $\beta$ on $n\ge1$ strands and the top color tuple $(a_1,\ldots,a_n)$. The matrices are assumed to satisfy the stated ribbon-category axioms; an implementation does not infer those axioms from arbitrary matrices.
+An **effective field** is a field whose elements have finite encodings and whose exact addition, subtraction, multiplication, equality test, and inversion of nonzero elements are terminating procedures. Input a finite-dimensional strict matrix realization over an effective field $k$ of a $k$-linear ribbon category with $\operatorname{End}(\mathbf1)=k$, finite-dimensional color objects with fixed bases, exact matrices for every braiding and inverse braiding used, the evaluation and coevaluation maps for the closure, the twist matrices, and the matrix $J_W$ of the ribbon-induced pivotal comparison $j_W=u_W\circ\theta_W:W\to W^{\vee\vee}$ for $W=V_{a_1}\otimes\cdots\otimes V_{a_n}$, where $u_W$ is the Drinfeld morphism. Also input a finite braid word $\beta$ on $n\ge1$ strands and the top color tuple $(a_1,\ldots,a_n)$. The matrices are assumed to satisfy the stated ribbon-category axioms; an implementation does not infer those axioms from arbitrary matrices.
 
 Use the strand-position permutation homomorphism $\pi:B_n\to\operatorname{Sym}(\{1,\ldots,n\})$ given by $\pi(\sigma_i)=(i\ i+1)$. Read the braid letters in composition order, updating the current color tuple at each crossing by swapping its adjacent colors. For a positive letter $\sigma_i$, use the matrix of
 $$1\otimes\cdots\otimes c_{V_{a_i},V_{a_{i+1}}}\otimes\cdots\otimes1,$$
-and for a negative letter use its inverse. Let the blackboard-framed closure join the bottom and top endpoint at each position by the identity pairing. Reject the input if the final color tuple differs from the initial tuple: the tuple records the colors at the paired endpoints, so equality is exactly the condition that the closure carries a consistent color on every component. Starting with the identity matrix, multiply the typed crossing matrices in word order to obtain $M_\beta:W\to W$, then return the finite matrix contraction
+and for a negative letter $\sigma_i^{-1}$ use $1\otimes\cdots\otimes c_{V_{a_{i+1}},V_{a_i}}^{-1}\otimes\cdots\otimes1$, whose source adjacent factors are $V_{a_i}\otimes V_{a_{i+1}}$. Here the subscripts always refer to the current tuple before the swap. Let the blackboard-framed closure join the bottom and top endpoint at each position by the identity pairing. Reject the input if the final color tuple differs from the initial tuple: the tuple records the colors at the paired endpoints, so equality is exactly the condition that the closure carries a consistent color on every component. Starting with the identity matrix, multiply the typed crossing matrices in word order to obtain $M_\beta:W\to W$, then return the finite matrix contraction
 $$\operatorname{ev}_{W^\vee}\bigl((J_WM_\beta)\otimes1_{W^\vee}\bigr)\operatorname{coev}_W\in k.$$
 In ordinary dual-basis coordinates this contraction is the matrix trace $\operatorname{Tr}(J_WM_\beta)$.
-This is the exact ribbon evaluation of the blackboard-framed colored braid closure in the given matrix realization. No algorithm is asserted for arbitrary abstract ribbon categories without effective finite matrix data.
+No algorithm is asserted for arbitrary abstract ribbon categories without effective finite matrix data.
 
 ## Definition references
+
+[[thm-ribbon-evaluation-from-colored-braid-word-procedure-properties|Correctness and termination of this procedure]]
 
 [[def-colored-framed-knot-evaluation-from-ribbon-category|Colored framed-link value]]
 
@@ -43,7 +48,11 @@ This is the exact ribbon evaluation of the blackboard-framed colored braid closu
 
 [[def-the-categorical-trace-of-a-morphism-into-the-double-dual|Categorical trace contraction]]
 
-[[thm-a-braided-rigid-category-has-a-drinfeld-morphism|Drinfeld morphism and ribbon pivotal comparison]]
+[[thm-a-braided-rigid-category-has-a-drinfeld-morphism|Drinfeld morphism and its tensor relation]]
+
+[[def-twist-and-ribbon-structure|Balancing and ribbon dual compatibility]]
+
+[[def-left-dual-and-right-dual-object|Duality maps and snake identities]]
 
 [[def-braid-group-by-the-artin-presentation|Artin braid words]]
 
@@ -59,22 +68,14 @@ This is the exact ribbon evaluation of the blackboard-framed colored braid closu
 
 [F1] For $f:W\to W^{\vee\vee}$, the left categorical trace is the composite $\operatorname{ev}_{W^\vee}(f\otimes1_{W^\vee})\operatorname{coev}_W$ ([[def-the-categorical-trace-of-a-morphism-into-the-double-dual]]).
 
-[F2] In a braided rigid category the Drinfeld morphism $u_W:W\to W^{\vee\vee}$ is natural, and a ribbon twist induces the pivotal comparison $j_W=u_W\circ\theta_W$ ([[thm-a-braided-rigid-category-has-a-drinfeld-morphism]]).
+[F2] The Drinfeld morphism $u_W:W\to W^{\vee\vee}$ is a natural isomorphism defined by the displayed evaluation/braiding/coevaluation composite, and satisfies $d_{Y,Z}(u_Y\otimes u_Z)=u_{Y\otimes Z}c_{Z,Y}c_{Y,Z}$ ([[thm-a-braided-rigid-category-has-a-drinfeld-morphism]]).
 
-[F3] Each supplied crossing matrix is the morphism $c_{V_{a_i},V_{a_{i+1}}}$ or its inverse between the stated adjacent tensor factors, and the matrices satisfy the ribbon-category axioms by the input condition.
+[F3] For current adjacent colors $A,B$, the supplied positive crossing is $c_{A,B}:A\otimes B\to B\otimes A$ and the negative crossing is $c_{B,A}^{-1}:A\otimes B\to B\otimes A$. The matrices satisfy the ribbon-category axioms by the input condition.
 
 [F4] For $n\ge2$, $B_n$ is generated by $\sigma_1,\ldots,\sigma_{n-1}$ with the Artin braid and distant-commutativity relations, and $B_1$ is trivial ([[def-braid-group-by-the-artin-presentation]]).
 
 [F5] $\operatorname{Sym}(\{1,\ldots,n\})$ is the group of bijections of the strand-label set under composition, and $(i\ i+1)$ is the transposition interchanging $i$ and $i+1$ ([[def-symmetric-group]]).
 
-## Proof
+[F6] The twist is natural and satisfies $\theta_{Y\otimes Z}=(\theta_Y\otimes\theta_Z)c_{Z,Y}c_{Y,Z}$ and ribbon dual compatibility ([[def-twist-and-ribbon-structure]]).
 
-**Proof technique:** direct.
-
-**Given:** The valid input data in the Algorithm.
-
-1.1 If $n=1$, there are no generators and $B_1$ is trivial, so $\pi$ is its unique homomorphism. If $n\ge2$, put $s_i=(i\ i+1)\in\operatorname{Sym}(\{1,\ldots,n\})$. For $|i-j|>1$, $s_i$ and $s_j$ have disjoint supports and commute. For adjacent indices, both $s_i s_{i+1}s_i$ and $s_{i+1}s_i s_{i+1}$ equal $(i\ i+2)$, so the assignment $\sigma_i\mapsto s_i$ sends every Artin relator to the identity and [F4] gives the homomorphism $\pi$. At each position $i$, the positive matrix has source tensor factors $V_{a_i}\otimes V_{a_{i+1}}$ and target factors $V_{a_{i+1}}\otimes V_{a_i}$ by [F3]; the negative matrix is its typed inverse. Updating the color tuple by this same swap tracks the colors at the endpoints of each successive letter. The closure arcs pair equal strand positions, so the final tuple equals the initial tuple exactly when every paired endpoint has the same color; in that case the composite has source and target $W$ and the closure contraction is defined. [F3, F4, F5, given, algebra]
-
-2.1 Induct on the number of letters already read. Before the first letter the running matrix is the identity action of the empty word. Each update composes with precisely the corresponding local braiding or inverse, so the induction hypothesis gives the action of the longer prefix. After the finite word is exhausted the result is $M_\beta$, the morphism represented by the input colored braid. [F3, F4, step 1.1, induction]
-
-3.1 For a color-preserving tuple, the word composite is an endomorphism $M_\beta:W\to W$. Cut the finite blackboard-framed closure at a common level outside the braid rectangle. Its nested lower identity pairings are $\operatorname{coev}_W$, and its upper pairings are $\operatorname{ev}_{W^\vee}$ following the supplied pivotal comparison $J_W=j_W:W\to W^{\vee\vee}$. Inserting the braid word between these maps gives the finite closure composite $\operatorname{ev}_{W^\vee}((J_WM_\beta)\otimes1_{W^\vee})\operatorname{coev}_W$. By [F1] this is $\operatorname{Tr}_L(J_WM_\beta)$, whose finite matrix contraction is exactly the returned scalar. With standard dual bases, inserting $\operatorname{coev}_W=\sum_i e_i\otimes e_i^*$ and the canonical dual evaluation gives $\sum_i(J_WM_\beta)_{ii}$, the ordinary matrix trace. This argument evaluates only the given finite braid and its cup/cap word; it does not require constructing an evaluator on arbitrary framed graphs. Each of the finitely many letter updates and the final contraction uses finitely many exact field operations, so effectiveness proves termination. [F1, F2, step 2.1, given, construct] ∎
+[F7] The chosen evaluation and coevaluation maps satisfy the two snake identities ([[def-left-dual-and-right-dual-object]]).

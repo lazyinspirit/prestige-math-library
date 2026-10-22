@@ -19,6 +19,11 @@ axiom_use: "The general-three-manifold curvature identity is an explicitly impor
 provenance:
   statement: literature-derived
   proof: not-supplied
+verification:
+  judge:
+    model: "gpt-6-luna"
+    verdict: pass
+    date: 2026-10-22
 sources:
   references:
     - title: "Ozsvath and Szabo, Holomorphic disks and topological invariants for closed three-manifolds"

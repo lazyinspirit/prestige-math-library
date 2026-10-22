@@ -10,6 +10,8 @@ deps:
   - def-pl-embedding-and-subpolyhedron
   - def-simplicial-subcomplex-star-closure-and-link
   - lem-two-finite-linear-subdivisions-have-a-common-simplicial-refinement
+  - lem-intersections-of-finite-linear-complexes-form-a-convex-cell-complex
+  - lem-finite-convex-cell-complexes-admit-compatible-triangulations
 justified_by: []
 aliases: []
 proof_strategy: direct
@@ -33,7 +35,7 @@ Let $Q$ be a compact piecewise-linear polyhedron with a fixed finite linear tria
 
 [[def-simplicial-subcomplex-star-closure-and-link]] — a subcomplex is closed under taking faces.
 
-[[lem-two-finite-linear-subdivisions-have-a-common-simplicial-refinement]] — finite linear triangulations of the same polyhedron have a common refinement.
+[[lem-two-finite-linear-subdivisions-have-a-common-simplicial-refinement]] — common refinement for subdivisions of a fixed finite Euclidean complex; the intersection-cell construction below handles the two given linear triangulations directly.
 
 ## Facts & Assumptions
 
@@ -41,7 +43,7 @@ Let $Q$ be a compact piecewise-linear polyhedron with a fixed finite linear tria
 
 [F1] [[def-pl-embedding-and-subpolyhedron]]: $f(P)$ is a subcomplex in some finite linear triangulation $T_0$ of $Q$.
 
-[F2] [[lem-two-finite-linear-subdivisions-have-a-common-simplicial-refinement]]: two finite linear triangulations of the same polyhedron have a common finite linear refinement.
+[F2] [[lem-intersections-of-finite-linear-complexes-form-a-convex-cell-complex]] forms a finite convex intersection-cell complex from two finite linear simplicial complexes in one Euclidean space with the same underlying polyhedron. [[lem-finite-convex-cell-complexes-admit-compatible-triangulations]] gives it a compatible finite linear simplicial triangulation. These are the construction used in the narrower [[lem-two-finite-linear-subdivisions-have-a-common-simplicial-refinement]].
 
 [F3] [[def-simplicial-subcomplex-star-closure-and-link]]: a subcomplex is closed under taking faces.
 
@@ -49,5 +51,5 @@ Let $Q$ be a compact piecewise-linear polyhedron with a fixed finite linear tria
 
 1.1 By [F1], choose a finite linear triangulation $T_0$ of $Q$ in which $f(P)$ is a subcomplex. [given, F1, construct]
 
-2.1 Apply [F2] to $T$ and $T_0$ to obtain a common finite linear refinement $T'$. It is a subdivision of $T$, and it refines every simplex of the subcomplex representing $f(P)$; therefore the simplices of $T'$ contained in $f(P)$ form a subcomplex by [F3], with realization exactly $f(P)$. [given, F2, F3, step 1.1, construct] ∎
+2.1 Regard $T$ and $T_0$ as finite linear complexes on the same embedded polyhedron $Q$. Form all nonempty cells $\sigma\cap\tau$ for $\sigma\in T$ and $\tau\in T_0$, together with their faces. By [F2] these form a finite convex cell complex covering $Q$, and a compatible finite simplicial triangulation $T'$ of that cell complex exists. Each simplex of $T'$ lies in a cell contained in a simplex of $T$ and a simplex of $T_0$, so $T'$ is a common linear refinement. In particular it is a subdivision of $T$. Every simplex of the subcomplex representing $f(P)$ is a union of these refined simplices; thus the simplices of $T'$ contained in $f(P)$ have realization exactly $f(P)$ and form a subcomplex by [F3]. [given, F2, F3, step 1.1, construct] ∎
 

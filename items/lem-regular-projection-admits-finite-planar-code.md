@@ -47,7 +47,7 @@ Assume the Axiom of Countable Choice. Every smooth oriented knot in $S^3$ has an
 
 [A1] The Axiom of Countable Choice, written $\mathrm{AC}_\omega$. [[def-countable-choice]]
 
-[F1] Under $\mathrm{AC}_\omega$, the knot can be moved off infinity and projected regularly; the projection has finitely many transverse double points and no triple points. [[lem-every-oriented-link-admits-a-regular-projection]]
+[F1] Under $\mathrm{AC}_\omega$, a smooth oriented link contained in $\mathbb R^3$ admits a regular orthogonal projection; the projection has finitely many transverse double points and no triple points. [[lem-every-oriented-link-admits-a-regular-projection]]
 
 [F2] A finite planar code records a rational polygonal path for every edge, exact incidence and over/under data, transverse crossing vertices, and one oriented component. [[def-knot-planar-code]]
 
@@ -60,7 +60,7 @@ Assume the Axiom of Countable Choice. Every smooth oriented knot in $S^3$ has an
 **Given:** AC$_\omega$ and a smooth oriented knot $K\subset S^3$.
 
 
-1.1 Apply [F1] and list the finitely many crossings of the resulting projection. Around each crossing choose a closed disk meeting the image in exactly two transverse arcs, with all such disks pairwise disjoint. Subdivide the remaining compact arcs into finitely many subarcs contained in planar coordinate disks where each arc is a graph over a line interval and where nonincident pieces are separated. Compactness and finiteness give a positive minimum for the separations between the disjoint pieces. [A1, F1, F3, given, construct]
+1.1 A smooth embedded circle has empty interior in $S^3$: in every submanifold chart it is a coordinate line, which contains no open three-dimensional ball. Choose $p\in S^3\setminus K$. Choose an orientation-preserving rotation $R\in SO(4)$ carrying $p$ to the fixed point at infinity; a rotation path from the identity to $R$ restricts to an ambient isotopy of $S^3$. Thus $R(K)$ misses infinity, and stereographic coordinates regard it as a compact smooth oriented knot in $\mathbb R^3$. Apply [F1] to this representative and list the finitely many crossings of the resulting projection. Around each crossing choose a closed disk meeting the image in exactly two transverse arcs, with all such disks pairwise disjoint. Subdivide the remaining compact arcs into finitely many subarcs contained in planar coordinate disks where each arc is a graph over a line interval and where nonincident pieces are separated. Compactness and finiteness give a positive minimum for the separations between the disjoint pieces. [A1, F1, F3, given, construct]
 
 2.1 In each crossing disk, choose a nearby rational point $q$ and move the crossing there by a small planar isotopy supported in that disk. Choose two linearly independent rational direction vectors close to the two tangent directions there. Small rational multiples in both signs give four rational endpoints about $q$, in the same cyclic order as the branch germs. Replace the branches near $q$ by the two straight diameters through these endpoints, joining back inside the corresponding four disjoint sectors; this is a small isotopy of the crossing. Outside these disks, approximate each graph arc from step 1.1 by a sufficiently fine polygonal graph and perturb its finitely many vertices to rational coordinates. Choose all perturbations smaller than one third of the positive separation bound, so distinct nonincident pieces remain disjoint and every adjacent segment stays in its graph chart. [F2, step 1.1, construct]
 

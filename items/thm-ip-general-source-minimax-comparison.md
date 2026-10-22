@@ -48,7 +48,7 @@ sources:
 ## Statement
 
 Assume Countable Choice. Fix $\epsilon>0$, $Q\ge0$, a nonincreasing sequence $s_j>0$ with $s_j\to0$, and a nondecreasing sequence $a_j>0$. Observe $Z_j=\theta_j+\epsilon s_j^{-1}\xi_j$ for $j\ge1$, where the $\xi_j$ are independent standard normal variables, and let the unknown parameter range over
-$$\Theta_a(Q)=\left\{\theta\in\ell^2(\mathbb N,\mathbb R):\sum_{j\ge1}a_j^2\theta_j^2\le Q^2\right\}.$$
+$$\Theta_a(Q)=\left\{\theta\in\ell^2(\mathbb N_{>0},\mathbb R):\sum_{j\ge1}a_j^2\theta_j^2\le Q^2\right\}.$$
 Let $R_*(\epsilon)$ be the square root of the minimax expected squared $\ell^2$ error over all measurable deterministic or randomized estimators from the product Borel data space to $\ell^2$, and put
 $$R_{\rm cut}(\epsilon)=\left[\inf_{D\in\mathbb N_0}\left\{\frac{Q^2}{a_{D+1}^2}+\epsilon^2\sum_{j=1}^{D}s_j^{-2}\right\}\right]^{1/2},\qquad\mathbb N_0=\{0,1,2,\ldots\}.$$
 Then $R_*(\epsilon)\le R_{\rm cut}(\epsilon)\le2.2R_*(\epsilon)$.
@@ -71,7 +71,7 @@ Then $R_*(\epsilon)\le R_{\rm cut}(\epsilon)\le2.2R_*(\epsilon)$.
 
 [A1] [[def-countable-choice]]: Countable Choice is assumed by the compact SVD and complete-basis coordinate identification used by the Gaussian sequence model.
 
-[F1] [[def-ip-gaussian-sequence-inverse-model]]: $Z_j=\theta_j+\epsilon s_j^{-1}\xi_j$ for independent standard normal coordinates, with parameter $\theta\in\ell^2(\mathbb N,\mathbb R)$ and data in the product Borel space $\mathbb R^\mathbb N$.
+[F1] [[def-ip-gaussian-sequence-inverse-model]]: $Z_j=\theta_j+\epsilon s_j^{-1}\xi_j$ for independent standard normal coordinates, with parameter $\theta\in\ell^2(\mathbb N_{>0},\mathbb R)$ and data in the product Borel space $\mathbb R^{\mathbb N_{>0}}$.
 
 [F2] [[def-ip-statistical-ellipsoid-class]]: $\Theta_a(Q)=\{\theta\in\ell^2:\sum_{j\ge1}a_j^2\theta_j^2\le Q^2\}$, where $0<a_1\le a_2\le\cdots$; no divergence assumption on $a_j$ is made.
 
@@ -114,7 +114,7 @@ Then $R_*(\epsilon)\le R_{\rm cut}(\epsilon)\le2.2R_*(\epsilon)$.
 
 3.1 Fix $r\in\mathcal C$ and $m\ge N+1$, and truncate $r$ after coordinate $m$; the truncation remains feasible. The segment from $r^*$ to this finite-support truncation is feasible, and its finite sum $J$ is maximized at its $r^*$ endpoint. Its right derivative there is therefore nonpositive. Since $P=\{1,\ldots,D\}$ by step 2.1, coordinates $j>D$ are strictly below their caps at $r^*$ and contribute their direction increments; coordinates $j\le D$ with $r_j^*>\tau_j^2$ contribute zero, while those with $r_j^*=\tau_j^2$ contribute $\min(r_j-\tau_j^2,0)$. Consequently $\sum_{D<j\le m}(r_j-r_j^*)+\sum_{\{j\le D:r_j^*=\tau_j^2\}}\min(r_j-\tau_j^2,0)\le0$. Letting $m\to\infty$ is legitimate because $\sum r_j$ and $\sum r_j^*$ converge. Rearranging gives $\sum_{j>D}r_j\le\sum_{j>D}r_j^*+\sum_{\{j\le D:r_j^*=\tau_j^2\}}(\tau_j^2-r_j)_+\le\sum_{j>D}r_j^*+\sum_{j=1}^{D}\tau_j^2$. [step 1.2, step 2.1, F2, algebra]
 
-3.2 The randomized rule is a parameter-independent kernel from the data by [F6], so conditioning on its action does not alter the posterior established in step 2.2. For each active coordinate, the conditional squared error is its posterior variance plus a nonnegative squared displacement from the posterior mean. Thus every rule's prior-averaged risk is at least the sum of the scalar Bayes risks. Each scalar prior is supported at $\pm\min\{\sqrt{r_j^*},\tau_j\}$, so [F5] bounds that sum below by $\sum_{j\le N+1}\min(r_j^*,\tau_j^2)/\sqrt{2e}=J_*/\sqrt{2e}$. The supremum risk dominates the supported prior average; taking the minimax infimum gives $R_*(\epsilon)^2\ge J_*/\sqrt{2e}$. [given, F1, F2, F5, F6, step 1.3, step 2.2, algebra]
+3.2 For fixed observed data, the randomized rule draws its action from the parameter-independent kernel in [F6]; thus additionally conditioning on that action leaves the posterior from step 2.2 unchanged. For each active coordinate, conditional on the data and action, squared error averaged over this posterior is its posterior variance plus a nonnegative squared displacement from the posterior mean. Averaging over the action kernel and then over the data preserves the posterior-variance lower bound. Thus every rule's prior-averaged risk is at least the sum of the scalar Bayes risks. Each scalar prior is supported at $\pm\min\{\sqrt{r_j^*},\tau_j\}$, so [F5] bounds that sum below by $\sum_{j\le N+1}\min(r_j^*,\tau_j^2)/\sqrt{2e}=J_*/\sqrt{2e}$. The supremum risk dominates the supported prior average; taking the minimax infimum gives $R_*(\epsilon)^2\ge J_*/\sqrt{2e}$. [given, F1, F2, F5, F6, step 1.3, step 2.2, algebra]
 
 4.1 For any $\theta\in\Theta_a(Q)$, the sequence $r_j=\theta_j^2$ belongs to $\mathcal C$. Step 3.1 bounds its omitted squared norm. The cutoff risk is that tail plus the retained variance by [F4], so at the cutoff $D$ from step 2.1 its worst-case risk is at most $\sum_{j>D}r_j^*+2\sum_{j\le D}\tau_j^2\le2J_*$. Therefore $R_{\rm cut}(\epsilon)^2\le2J_*$. [given, F2, F3, F4, step 2.1, step 3.1, algebra]
 

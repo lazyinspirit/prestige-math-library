@@ -18,6 +18,11 @@ provenance:
   statement: literature-derived
   proof: ai-altered
 axiom_use: The Axiom of Choice is used only through the published Lindeberg–Feller theorem. The finite row-moment and Lindeberg estimates are choice-free.
+verification:
+  judge:
+    model: "gpt-6-luna"
+    verdict: pass
+    date: 2026-10-22
 sources:
   references:
     - title: "Yuri I. Ingster, Theofanis Sapatinas and Irina A. Suslina, Minimax signal detection in ill-posed inverse problems, §4.1, equations (4.2)–(4.3)"

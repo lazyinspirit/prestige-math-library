@@ -1,0 +1,236 @@
+--- a/tools/step5-workflow.mjs
++++ b/tools/step5-workflow.mjs
+@@ -1,4 +1,5 @@
+ #!/usr/bin/env node
++import {loadPnpClassificationMigration,isPnpClassificationMigration,supportingPnpClassificationHistory,pnpHistoricalCertificate,pnpCurrentNativeReviews,PNP_OLD,PNP_CURRENT} from './step5-pnp-classification-migration.mjs';
+ import {loadSuccessorUncertaintyContinuation,successorSchedulingView} from './step5-successor-uncertainty-continuation.mjs';
+ import {loadUnit3NeedleCompletion,completedNeedleReport,completedNeedleReportView,NEEDLE_ID,NEEDLE_LABEL} from './step5-unit3-needle-completion.mjs';
+ // Round-based Step 5. Mathematical workers write evidence; only the controller
+@@ -22,6 +23,7 @@
+ import { supportingSiblingContractHistory } from './step5-sibling-contract-history.mjs';
+ import { loadInitialMetadataHistory, loadRepeatMetadataHistory, initialMetadataSupportingHistory } from './step5-initial-metadata-history.mjs';
+ import { loadOwnerCurrentRepairs } from './step5-owner-current-repairs.mjs';
++import {loadOwnerFactAlertRepairs,isOwnerFactAlertRepairs,ownerFactAlertRepairPath} from './step5-owner-fact-alert-repairs.mjs';
+ import { createdMaintenanceBasis } from './step5-created-maintenance-cert.mjs';
+ import { verdictIsCurrent } from './judge-currency.mjs';
+ import { gateDiagnostics } from './step5-gate-diagnostics.mjs';
+@@ -208,6 +210,7 @@
+ // This run's recovery binds exact historical bytes to unchanged native reports;
+ // it supplies no current-source review or gate coverage.
+ function supportingMetadataHistory(history,path,expected) {
++  const classification=supportingPnpClassificationHistory(history,path,expected);if(classification)return classification;
+   const reclassification=supportingReclassificationHistory(history,path,expected);if(reclassification)return reclassification;
+   const siblings = supportingSiblingContractHistory(history,path,expected); if (siblings) return siblings;
+   const quotes = supportingQuoteHistory(history,path,expected);
+@@ -547,7 +550,8 @@
+   requireValue(pack.run===run&&pack.phase===phase&&pack.round===round&&digest(pack)===inputHash,'empty adjudication input identity or hash mismatch');
+   requireValue(emptyAdjudicationAssignment(pack,unit),`not an empty batch adjudication assignment: ${unit}`);
+   const frontier=read(join(workflowDir(root,run),'frontier.json'));validateFrontier(frontier);
+-  const slots=phase==='initial'?null:originalSlotView(root,run,{frontier});
++  const currentSlots=phase==='initial'?null:originalSlotView(root,run,{frontier});
++  const slots=currentSlots&&pack.frontier_ids.includes(PNP_OLD)&&currentSlots.classification?{...currentSlots,currentIds:currentSlots.currentIds.map(id=>id===PNP_CURRENT?PNP_OLD:id),currentId:id=>id===PNP_OLD?PNP_OLD:currentSlots.currentId(id)}:currentSlots;
+   requireValue(frontier.run===run&&JSON.stringify(slots?.currentIds??frontier.ids)===JSON.stringify(pack.frontier_ids)
+     &&JSON.stringify(frontier.batches.map(row=>String(row.id)))===JSON.stringify(pack.units),'empty adjudication frontier binding mismatch');
+   const owners=new Map(frontier.batches.flatMap(row=>row.items.map(id=>[slots?.currentId(id)??id,String(row.id)])));
+@@ -1138,8 +1142,10 @@
+   return {pack_sha256:digest(pack),resolved,evidence,path,[supplierRepairSeal]:true};
+ }
+ 
+-export function validateReports(pack,reports,now,{root=null,ownerSupplement=null,currentRepairs=null,operationalSupplement=null,supplierRepairs=null,publishedMaintenance=null,reclassification=null}={}) {
++export function validateReports(pack,reports,now,{root=null,ownerSupplement=null,currentRepairs=null,operationalSupplement=null,supplierRepairs=null,publishedMaintenance=null,reclassification=null,factAlertRepairs=null,classificationMigration=null}={}) {
+   const errors=[],decisions=[],reviews=[],createdItems=[],creatorById=new Map();
++  requireValue(!classificationMigration||(root&&isPnpClassificationMigration(classificationMigration,pack,now)),'classification migration requires exact guarded receipt/current integration');
++  if(classificationMigration)now={...now,...classificationMigration.historicalGuards,[PNP_OLD]:classificationMigration.before_guard};
+   requireValue(!reclassification||(root&&isOriginalSlotReclassification(reclassification,pack,now)),
+     'original-slot history must pass exact guarded loading and integration currency');
+   // Only old physical review validation sees this archived post. Never expose
+@@ -1155,8 +1161,9 @@
+     &&supplierRepairs.pack_sha256===digest(pack)),'unvalidated supplier repair supplement');
+   requireValue(!currentRepairs||(root&&currentRepairs[ownerSupplementSeal]===true
+     &&currentRepairs.pack_sha256===digest(pack)),'unvalidated current-root repair supplement');
++  requireValue(!factAlertRepairs||(root&&isOwnerFactAlertRepairs(factAlertRepairs)&&factAlertRepairs.pack_sha256===digest(pack)),'unvalidated Facts-only outside-alert repair');
+   const ownerReviews=new Map(),ownerDecisions=new Map();
+-  for(const row of [...(ownerSupplement?.reviews??[]),...(currentRepairs?.reviews??[])]){
++  for(const row of [...(ownerSupplement?.reviews??[]),...(currentRepairs?.reviews??[]),...(factAlertRepairs?.reviews??[])]){
+     requireValue(!reclassification||row.id!==reclassification.original_id,'root review cannot replace historical u21 review');
+     requireValue(!ownerReviews.has(row.id)||digest(ownerReviews.get(row.id))===digest(row),'conflicting coexisting current root reviews');ownerReviews.set(row.id,row);
+   }
+@@ -1214,7 +1221,7 @@
+   }
+   for(const id of Object.keys(pack.before))if((!scoped||scoped.has(id))&&!now[id])errors.push(`unlicensed deletion ${id}`);
+   for(const id of creatorById.keys())if(!changed.includes(id))errors.push(`claimed creation without new item ${id}`);
+-  for(const row of decisions)if(['confirmed_fatal','confirmed_nonfatal'].includes(row.outcome)&&!changed.includes(row.id)&&supplierRepairs?.resolved.get(key(row))!==digest(row))errors.push(`confirmed defect not repaired ${row.id}`);
++  for(const row of decisions)if(['confirmed_fatal','confirmed_nonfatal'].includes(row.outcome)&&!changed.includes(row.id)&&supplierRepairs?.resolved.get(key(row))!==digest(row)&&!(classificationMigration&&row.id===PNP_OLD&&row.outcome==='confirmed_nonfatal'))errors.push(`confirmed defect not repaired ${row.id}`);
+   for(const row of reviews)if(['repaired','authored'].includes(row.disposition)&&!changed.includes(row.id))errors.push(`claimed repair or authorship without change ${row.id}`);
+   if(createdItems.length&&root){
+     try{
+@@ -1389,6 +1396,7 @@
+   const metadataHistory=phase==='initial'&&round===1?loadInitialMetadataHistory(root,run,{current:true}):phase==='repeat'?loadRepeatMetadataHistory(root,run,round,{current:true}):null;
+   const publishedMaintenance=phase==='initial'&&round===1?loadInitialPublishedMaintenance(root,run,{current:true}):null;
+   const reclassification=phase==='initial'&&round===1?loadOriginalSlotReclassification(root,run,{current:true}):null;
++  const classificationMigration=phase==='repeat'&&round===1?loadPnpClassificationMigration(root,run,{current:true}):null;
+   // Validate original reviews against exact historical source bytes only.
+   // The collection's post snapshot below always describes actual current bytes.
+   if(metadataHistory)Object.assign(reported,metadataHistory.historicalGuards);
+@@ -1399,6 +1407,8 @@
+     ...loadOwnerCurrentRepairs(root,pack,reports,current,items,read(currentRepairPath),{matchesReview:review=>reviewContexts(items).matches(review,current)}),
+     [ownerSupplementSeal]:true,
+   }:null;
++  const factPath=ownerFactAlertRepairPath(root,run);
++  const factAlertRepairs=phase==='repeat'&&round===1&&existsSync(factPath)?loadOwnerFactAlertRepairs(root,pack,reports,current,items,read(factPath),{matchesReview:review=>reviewContexts(items).matches(review,current)}):null;
+   const operationalSupplement=loadOperationalSupplement(root,pack,reports,current);
+   const supplierRepairs=loadSupplierRepairs(root,pack,reports,current,items);
+   if(deferImpactClosure) {
+@@ -1408,16 +1418,19 @@
+     const assigned=new Set([...Object.values(pack.assignments).flat(),...reports.flatMap(report=>(report.created_items??[]).map(row=>row.id))]);
+     for(const row of reports.flatMap(report=>report.reviews??[]))if(assigned.has(row.id)&&/^[a-f0-9]{64}$/.test(row.post_sha256??''))reported[row.id]=row.post_sha256;
+   }
+-  const result=validateReports(pack,reports,reported,{root,ownerSupplement,currentRepairs,operationalSupplement,supplierRepairs,publishedMaintenance,reclassification});
++  const result=validateReports(pack,reports,reported,{root,ownerSupplement,currentRepairs,operationalSupplement,supplierRepairs,publishedMaintenance,reclassification,factAlertRepairs,classificationMigration});
+   if(result.errors.length)throw Error(result.errors.join('\n'));
++  if(classificationMigration)result.changed=[...new Set([...result.changed,...classificationMigration.targets])];
+   const evidence={...(pack.input_evidence??{}),[packPath(root,run,phase,round)]:digest(readFileSync(packPath(root,run,phase,round),'utf8'))};
+   if(needleCompletion)Object.assign(evidence,completedNeedleReport(needleCompletion,{current:true}).evidence);
+-  Object.assign(evidence,ownerSupplement?.evidence??{},currentRepairs?.evidence??{},operationalSupplement?.evidence??{},supplierRepairs?.evidence??{},metadataHistory?.evidence??{},publishedMaintenance?.evidence??{},reclassification?.evidence??{});
++  Object.assign(evidence,ownerSupplement?.evidence??{},currentRepairs?.evidence??{},operationalSupplement?.evidence??{},supplierRepairs?.evidence??{},metadataHistory?.evidence??{},publishedMaintenance?.evidence??{},reclassification?.evidence??{},classificationMigration?.evidence??{});
+   for(const [p,h]of Object.entries(withdrawal?.evidence??{})){requireValue(!evidence[p]||evidence[p]===h,'withdrawal evidence collision');evidence[p]=h;}
+   if(needleCompletion)Object.assign(evidence,frozenSupportingEvidence(root,run,completedNeedleReport(needleCompletion).report.supporting_evidence??{}));
++  if(factAlertRepairs)for(const [path,hash]of Object.entries(factAlertRepairs.evidence)){requireValue(!evidence[path]||evidence[path]===hash,'Facts-only repair evidence collision');evidence[path]=hash;}
+   verifyEvidence(evidence);
+   const creationAuthors=new Map();
+   const currentSlot=reclassification??loadOriginalSlotReclassification(root,run);
++  const currentClassification=classificationMigration??loadPnpClassificationMigration(root,run);
+   for(const unit of pack.units) {
+     const p=workerReport(root,run,phase,round,unit); evidence[p]=digest(readFileSync(p,'utf8'));
+     if(pack.gateRoutingVersion===1){
+@@ -1459,7 +1472,7 @@
+         &&!expected.some(([model,effort])=>receipt.model===model&&receipt.provider_effort===effort))
+       throw Error(`worker did not succeed with an authorized identity: ${dispatch}`);
+     evidence[dispatch]=digest(readFileSync(dispatch,'utf8'));
+-    if(currentSlot&&role==='alpha-repair'&&pack.assignments[unit]?.includes(currentSlot.current_id)){
++    if(role==='alpha-repair'&&((currentSlot&&pack.assignments[unit]?.includes(currentSlot.current_id))||currentClassification?.targets.some(id=>pack.assignments[unit]?.includes(id)))){
+       const attempt=dispatch.replace(/\.result\.json$/,`.attempt-${receipt.attempt}.result.json`);
+       requireValue(readFileSync(attempt,'utf8')===readFileSync(dispatch,'utf8'),'reclassified example native attempt changed');
+       for(const file of [attempt,resolve(root,receipt.prompt??''),resolve(root,receipt.log??'')]){
+@@ -1483,6 +1496,15 @@
+     receipt.reviews=receipt.reviews.filter(row=>row.id!==original_id);
+     receipt.historical_original_slot_changes=receipt.changed.filter(id=>id===original_id);
+     receipt.changed=[...new Set(receipt.changed.map(id=>id===original_id?current_id:id))];
++  }
++  if(classificationMigration){
++    receipt.pnp_classification_migration={path:classificationMigration.path,original_id:PNP_OLD,current_id:PNP_CURRENT,original_outcome:'confirmed_nonfatal',repairer_identity:'/root',native_execution_coverage_adopted:false,current_review_granted:false};
++    receipt.pnp_classification_current_review_targets=[...classificationMigration.targets];
++    receipt.historical_pnp_classification_reviews=receipt.reviews.filter(row=>row.id===PNP_OLD);
++    requireValue(digest(receipt.historical_pnp_classification_reviews)===digest([classificationMigration.historical_review]),'historical nonfatal native49 physical review changed');
++    receipt.reviews=receipt.reviews.filter(row=>row.id!==PNP_OLD&&!classificationMigration.targets.includes(row.id));
++    receipt.changed=receipt.changed.filter(id=>id!==PNP_OLD);
++    receipt.downstream=[...new Set([...receipt.downstream,...classificationMigration.consumer_ids])];
+   }
+   if(needleCompletion)receipt.unit3_needle_completion={path:needleCompletion.path,supplier:needleCompletion.row.supplier,original_report_unchanged:true,consumer_pending:[...needleCompletion.consumers]};
+   if(withdrawal){
+@@ -1539,8 +1561,15 @@
+       root_interface_changes:currentRepairs.root_interface_changes,examined_ids:[...currentRepairs.ids],
+       native_execution_coverage_adopted:false,native_finding_synthesized:false};
+   }
++  if(factAlertRepairs){
++    receipt.owner_fact_alert_repairs={path:factAlertRepairs.path,id:factAlertRepairs.id,native_origin:factAlertRepairs.native_origin,consumer_checks:factAlertRepairs.consumer_checks,root_interface_changes:[],native_review_credit_granted:false};
++    receipt.root_fact_alert_reviews=factAlertRepairs.reviews;
++    receipt.owner_fact_alert_current_review_targets=[...factAlertRepairs.ids];
++    receipt.reviews=receipt.reviews.filter(review=>!factAlertRepairs.ids.has(review.id));
++  }
+   receipt.restated=restatedIds(pack,result.changed,statementHashes(root,run));
+   if(reclassification)receipt.restated=[...new Set(receipt.restated.map(id=>id===reclassification.original_id?reclassification.current_id:id))];
++  if(classificationMigration)receipt.restated=[...new Set([...receipt.restated.filter(id=>id!==PNP_OLD&&!classificationMigration.targets.includes(id)),PNP_CURRENT])];
+   const afterStatements=statementHashes(root,run);
+   receipt.statement_events=receipt.restated.filter(id=>pack.before_statements?.[id]||!pack.before[id]).map(id=>({id,before_statement_sha256:pack.before_statements?.[id]??statementHash(''),after_statement_sha256:afterStatements[id]}));
+   if(reclassification){
+@@ -1550,6 +1579,10 @@
+       before_guard:reclassification.before_guard,after_guard:current[reclassification.current_id],
+       before_statement_sha256:reclassification.entry.before_statement_sha256,
+       after_statement_sha256:reclassification.entry.after_statement_sha256,receipt:reclassification.path});
++  }
++  if(classificationMigration){
++    receipt.statement_events=receipt.statement_events.filter(event=>event.id!==PNP_CURRENT);
++    receipt.statement_events.push({kind:'owner-pnp-classification-migration',id:PNP_CURRENT,original_id:PNP_OLD,current_id:PNP_CURRENT,before_guard:classificationMigration.before_guard,after_guard:current[PNP_CURRENT],before_statement_sha256:statementHash(classificationMigration.before_source),after_statement_sha256:afterStatements[PNP_CURRENT],receipt:classificationMigration.path,native_execution_coverage_adopted:false});
+   }
+   if(pack.before_statements&&!receipt.restated.length&&!pack.seeds?.length)receipt.downstream=[];
+   const frontier=gateFrontier(root,run);
+@@ -2232,6 +2265,8 @@
+   const path=packPath(root,run,phase,round);
+   if(existsSync(path)){
+     const saved=read(path);
++    const classification=loadPnpClassificationMigration(root,run,{current:true});
++    if(classification&&phase==='impact-repeat'&&round===1)requireValue(classification.targets.every(id=>Object.values(saved.assignments).flat().filter(x=>x===id).length===1)&&Object.entries(classification.evidence).every(([p,h])=>saved.input_evidence?.[p]===h),'saved5.6pack omits algorithm/consumer migration review');
+     if(phase==='impact-initial'&&round===1){
+       checkFrozenReaderConcernInput(root,run,saved);
+       checkFrozenInitialScopeFindingInput(root,run,saved);
+@@ -2258,15 +2293,28 @@
+   const {seeds,impacts}=scope;
+   const concerns=phase==='impact-initial'&&round===1?loadReaderConcerns(root,run):null;
+   const scopeFindings=phase==='impact-initial'&&round===1?loadInitialScopeFindings(root,run):null;
+-  const targets=[...new Set([...scope.targets,...(concerns?.entries??[]).map(row=>row.id),...(scopeFindings?.entries??[]).map(row=>row.id),...(result.metadata_history_current_review_targets??[]),...(result.original_slot_current_review_targets??[])])];
++  const targets=[...new Set([...scope.targets,...(concerns?.entries??[]).map(row=>row.id),...(scopeFindings?.entries??[]).map(row=>row.id),...(result.metadata_history_current_review_targets??[]),...(result.original_slot_current_review_targets??[]),...(result.owner_fact_alert_current_review_targets??[]),...(result.pnp_classification_current_review_targets??[])])];
+   // Deterministic disjoint lanes run concurrently; shared metadata edits lock.
+   // Closure requeues reviews invalidated by a concurrent supplier repair.
+   const assignments={'1':[],'2':[],'3':[]};
+   // Preserve explicit dependency cycles for the dependency gate to judge.
+   const {order,cycles}=orderImpacts(items,targets);
+   order.forEach((id,index)=>assignments[String(Math.min(2,Math.floor(index/Math.max(1,Math.ceil(order.length/3))))+1)].push(id));
++  if(result.pnp_classification_migration){
++    const lane=Object.keys(assignments).find(unit=>assignments[unit].includes(PNP_CURRENT));
++    requireValue(lane,'missing native algorithm owner lane');
++    const family=new Set(result.pnp_classification_current_review_targets);
++    for(const unit of Object.keys(assignments))assignments[unit]=order.filter(id=>unit===lane?(assignments[unit].includes(id)||family.has(id)):(assignments[unit].includes(id)&&!family.has(id)));
++  }
+   const identity=libraryIdentity(root,run);
+   const pack={version:2,run,phase,round,repair_scope:'frontier',frontier_ids:[...scope.frontier].sort(),consumer_maintenance:scope.maintenance,units:['1','2','3'],assignments,before:hashes(root,run),before_statements:statementHashes(root,run),before_aliases:Object.fromEntries(identity.aliases),home_pages:manifestHomes(root,run),impacts,seeds,failures:null,gateAssignments:{},cycles:[...new Set(cycles)],ledger_updates:result.ledger_updates??[]};
++  if(result.owner_fact_alert_current_review_targets){pack.owner_fact_alert_current_review_targets=[...result.owner_fact_alert_current_review_targets];pack.owner_fact_alert_repairs=result.owner_fact_alert_repairs;}
++  if(result.pnp_classification_migration){
++    pack.pnp_classification_migration=result.pnp_classification_migration;
++    pack.pnp_classification_current_review_targets=[...result.pnp_classification_current_review_targets];
++    pack.input_evidence={...result.evidence};
++    const collection=join(workflowDir(root,run),`${source}-${round}-collected.json`);pack.input_evidence[collection]=digest(readFileSync(collection,'utf8'));
++  }
+   if(result.original_slot_reclassification){
+     pack.original_slot_reclassification=result.original_slot_reclassification;
+     pack.original_slot_current_review_targets=[...result.original_slot_current_review_targets];
+@@ -2343,7 +2391,14 @@
+   bindOwnerRepairGuidance(root,pack);frozen(path,pack);writeTasks(root,pack,'repair');return pack;
+ }
+ 
++function verifyPnpClassificationCertificate(root,run,certificate,{current=false}={}){
++  const transition=loadPnpClassificationMigration(root,run,{current:true});if(!transition)return;
++  if(!current&&pnpHistoricalCertificate(transition,certificate))return;
++  requireValue(certificate.items.filter(row=>row.id===PNP_CURRENT).length===1&&!certificate.items.some(row=>row.id===PNP_OLD)&&!(certificate.creations??[]).some(row=>row.id===PNP_CURRENT)&&Object.entries(transition.evidence).every(([p,h])=>certificate.evidence?.[p]===h),'certificate omits current algorithm subject/history');
++  const reviews=pnpCurrentNativeReviews(root,run,certificate,{current});requireValue(reviews.length===5,'certificate lacks genuine current algorithm and affectedconsumer native reviews');
++}
+ function verifyOriginalSlotCertificate(root,run,certificate,{current=false}={}){
++  verifyPnpClassificationCertificate(root,run,certificate,{current});
+   const transition=loadOriginalSlotReclassification(root,run,{current:true});if(!transition)return;
+   requireValue(certificate.items.filter(row=>row.id===transition.current_id).length===1
+     &&!certificate.items.some(row=>row.id===transition.original_id)
+@@ -2417,6 +2472,10 @@
+   // native owner review can supply current certification for this target.
+   for(const id of sourceResult?.metadata_history_current_review_targets??[])
+     requireValue(result.reviews.some(row=>row.id===id&&row.post_sha256===current[id]),`missing current native metadata-target review: ${id}`);
++  for(const id of sourceResult?.owner_fact_alert_current_review_targets??[])
++    requireValue(result.reviews.some(row=>row.id===id&&row.post_sha256===current[id]),`missing current native Facts-only outside-alert review: ${id}`);
++  for(const id of sourceResult?.pnp_classification_current_review_targets??[])
++    requireValue(result.reviews.some(row=>row.id===id&&row.post_sha256===current[id]),`missing fresh native classification-target review: ${id}`);
+   for(const id of sourceResult?.original_slot_current_review_targets??[])
+     requireValue(result.reviews.some(row=>row.id===id&&row.post_sha256===current[id]),`missing current native reclassified-example review: ${id}`);
+   const publishedBaseline=initialPublishedBaselineExclusions(root,run);
+@@ -2494,6 +2553,13 @@
+   const dir=workflowDir(root,run), path=join(dir,`judge-${round}.json`);
+   if(existsSync(path)){
+     const saved=read(path),transition=loadOriginalSlotReclassification(root,run,{current:true});
++    const classification=loadPnpClassificationMigration(root,run,{current:true});
++    if(classification){
++      const cert=verifyWave(root,run,{contextHasher});verifyPnpClassificationCertificate(root,run,cert,{current:true});
++      requireValue(saved.certification_sha256===cert.sha256,'cached Sol judgment belongs to pre-migration certification');
++      const now=contextHasher(root,[PNP_CURRENT]).get(PNP_CURRENT),rows=saved.verdicts.filter(row=>row.id===PNP_CURRENT&&row.model===MODELS.sol61.id&&typeof row.keep==='boolean'&&row.item_sha256===now?.item_sha256&&row.context_sha256===now?.context_sha256);
++      requireValue(rows.length===1&&lines(join(root,'research',`${run}-judge.jsonl`)).some(row=>digest(row)===digest(rows[0])),'cached Sol judgment lacks current algorithm ledger verdict');
++    }
+     if(transition){
+       const cert=verifyWave(root,run,{contextHasher});verifyOriginalSlotCertificate(root,run,cert,{current:true});
+       requireValue(saved.version===2&&saved.run===run&&saved.round===round&&saved.certification_sha256===cert.sha256,

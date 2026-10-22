@@ -30,6 +30,10 @@ sources:
       locator: "§1, Reidemeister theorem and the local 3-coloring discussion."
 verification:
   precheck: pass
+  judge:
+    model: "gpt-6-luna"
+    verdict: pass
+    date: 2026-10-22
 ---
 
 ## Statement

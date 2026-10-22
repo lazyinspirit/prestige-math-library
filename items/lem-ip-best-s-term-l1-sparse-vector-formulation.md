@@ -38,7 +38,7 @@ and this sparse-vector minimum is attained.
 
 [[def-p-norms-on-rn|Finite-dimensional one-norm]]
 
-[[lem-finite-sum-laws|Splitting a finite sum over disjoint coordinate sets]]
+[[lem-finite-sum-laws|Termwise monotonicity of finite sums]]
 
 [Foucart and Rauhut, *A Mathematical Introduction to Compressive Sensing*, §2.1 Definition 2.2, printed p. 42](https://www.mat.uniroma2.it/~speleers/cime2024/material/book_rauhut.pdf)
 
@@ -52,9 +52,10 @@ and this sparse-vector minimum is attained.
 
 [F2] [[def-p-norms-on-rn]]: $\|x-z\|_1=\sum_{j=1}^n|x_j-z_j|$.
 
-[F3] [[lem-finite-sum-laws]]: finite sums of nonnegative terms are nonnegative and split over disjoint coordinate sets.
+[F3] [[lem-finite-sum-laws]], clause 4: finite sums preserve termwise inequalities, and a finite sum of nonnegative terms is nonnegative.
 
 ## Proof
-1.1 Let $z$ be any vector with $|\operatorname{supp}(z)|\le s$, and put $T=\operatorname{supp}(z)$. For every $j\in T^c$, $z_j=0$, so $|x_j-z_j|=|x_j|$. The terms over $T$ are nonnegative; splitting the finite sum by [F2,F3] gives $\|x-z\|_1=\sum_{j\in T}|x_j-z_j|+\sum_{j\in T^c}|x_j|\ge\|x_{T^c}\|_1\ge\sigma_s(x)_1,$ where the final inequality follows from [F1] because $|T|\le s$. Thus every admissible sparse vector has error at least $\sigma_s(x)_1$. [given, F1, F2, F3, algebra]
+
+1.1 Let $z$ be any vector with $|\operatorname{supp}(z)|\le s$, and put $T=\operatorname{supp}(z)$. For every $j\in T^c$, $z_j=0$, so $|x_j-z_j|=|(x_{T^c})_j|$. For every $j\in T$, $|(x_{T^c})_j|=0\le|x_j-z_j|$. Thus [F2,F3], applied in the original coordinate order, give $\|x-z\|_1=\sum_{j=1}^n|x_j-z_j|\ge\sum_{j=1}^n|(x_{T^c})_j|=\|x_{T^c}\|_1\ge\sigma_s(x)_1$, where the final inequality follows from [F1] because $|T|\le s$. Thus every admissible sparse vector has error at least $\sigma_s(x)_1$. [given, F1, F2, F3, algebra]
 
 2.1 By [F1], choose a minimizing set $T_0\subseteq[n]$ with $|T_0|\le s$. Define $z_0=(x_{T_0})$, equal to $x$ on $T_0$ and zero on $T_0^c$. Define $z_0$ coordinatewise by $(z_0)_j=x_j$ for $j\in T_0$ and $(z_0)_j=0$ otherwise. Then $\operatorname{supp}(z_0)\subseteq T_0$, so it is admissible, and direct coordinate summation gives $\|x-z_0\|_1=\|x_{T_0^c}\|_1=\sigma_s(x)_1.$ Together with step 1.1 this proves equality and attainment. The proof chooses one witness from a finite nonempty set and uses no choice axiom. [given, F1, F2, step 1.1, choose, algebra] ∎

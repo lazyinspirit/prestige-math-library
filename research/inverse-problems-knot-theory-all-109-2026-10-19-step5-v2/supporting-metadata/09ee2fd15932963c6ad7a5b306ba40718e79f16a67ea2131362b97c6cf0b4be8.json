@@ -1,0 +1,754 @@
+{
+  "version": 1,
+  "scope": [
+    "ex-ip-discrete-grid-l-curve-parameter-choice",
+    "def-ip-noise-level-free-parameter-rule",
+    "thm-ip-bakushinskii-veto",
+    "cex-ip-noise-underestimation-truncated-svd",
+    "ex-ip-stable-restricted-class-bakushinskii"
+  ],
+  "contracts": {
+    "def-ip-noise-level-free-parameter-rule": {
+      "citations": [],
+      "derivations": [],
+      "routine_steps": [],
+      "finite_checks": [],
+      "finite_smoke": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The reconstruction family is indexed by ALL α>0, and a Hilbert data space Y contains0. Neither index set is empty; no minimizer from an empty candidate set is selected.",
+          "template_review": {
+            "upheld": true,
+            "by": "/root",
+            "reason": "The reconstruction family is indexed by ALL α>0, and a Hilbert data space Y contains0. Neither index set is empty; no minimizer from an empty candidate set is selected.",
+            "item_sha256": "3c98c71e6a81104cfd4dc1496da6e6b44b11db9aca675d8fcc86923293ee6440",
+            "row_sha256": "34baf4ff62641396dd4f3d9e7e9a25f86c7f3ad0efb5b92da2e2a6b190a60882",
+            "role": "root-adopted actual delegated owner-focused FIRST; not native Alpha",
+            "delegated_reviewer": "/root/top_stable_normal_bundle",
+            "delegated_review_sources": [
+              {
+                "file": "research/inverse-problems-knot-theory-all-109-2026-10-19-supervision-20261020/step2-supervision/battery1-boundary/lane-12/proposal.json",
+                "field": "rows",
+                "index": 380
+              }
+            ],
+            "root_adoption_record": "research/inverse-problems-knot-theory-all-109-2026-10-19-supervision-20261020/step2-supervision/battery1-boundary/lane-12/root-final-adoption.json"
+          },
+          "reviewed": {
+            "upheld": true,
+            "by": "/root",
+            "reason": "The reconstruction family is indexed by ALL α>0, and a Hilbert data space Y contains0. Neither index set is empty; no minimizer from an empty candidate set is selected.",
+            "role": "root-adopted owner-focused FIRST; not native Alpha",
+            "delegated_reviewer": "/root/top_stable_normal_bundle",
+            "delegated_review_sources": [
+              {
+                "file": "research/inverse-problems-knot-theory-all-109-2026-10-19-supervision-20261020/step2-supervision/battery1-boundary/lane-12/proposal.json",
+                "field": "rows",
+                "index": 380
+              }
+            ],
+            "root_adoption_record": "research/inverse-problems-knot-theory-all-109-2026-10-19-supervision-20261020/step2-supervision/battery1-boundary/lane-12/root-final-adoption.json"
+          }
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "The Definition includes z=0 in the data domain and requires the output alpha(z) to remain positive."
+        },
+        {
+          "case": "one",
+          "status": "not_applicable",
+          "reason": "The definition makes no one-dimensional parameter-space assertion."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "The Definition requires alpha(z)>0 for every observed datum, including z=0."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "The definition asserts no limit or endpoint behavior of the parameter family."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "The definition takes a given function alpha and asserts no existence-by-choice result."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The definition states no equivalence."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The definition states no equivalence."
+        }
+      ]
+    },
+    "thm-ip-bakushinskii-veto": {
+      "citations": [
+        {
+          "fact": "A1",
+          "source": "def-countable-choice",
+          "source_section": "Definition",
+          "quote": "The **Axiom of Countable Choice**, written $\\mathrm{AC}_\\omega$, is the following\nstatement.\n\n> For every family $(X_n)_{n \\in \\mathbb{N}}$ of nonempty sets indexed by\n> $\\mathbb{N}$ there is a function $f$ with domain $\\mathbb{N}$ such that\n> $f(n) \\in X_n$ for every $n \\in \\mathbb{N}$.\n\nEquivalently, in the vocabulary of Choice function: every at most\ncountable family of nonempty sets has a choice function.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F1",
+          "source": "def-ip-compact-linear-inverse-model",
+          "source_section": "Definition",
+          "quote": "Let $X,Y$ be real or complex Hilbert spaces over the same scalar field, and let\n$K:X\\to Y$ be a compact linear operator. The associated compact linear inverse\nmodel has parameter space $X$, data space $Y$, forward map $K$, and admissible\ntruth class $X$: for a true parameter $x^\\dagger\\in X$, the exact datum is\n$y=Kx^\\dagger\\in Y$. Given an exact datum $y\\in Y$, solving this inverse\nproblem means finding a parameter $x\\in X$ such that $Kx=y$. No injectivity,\nsurjectivity, or closed-range assumption is included in the model.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "def-ip-unbounded-hilbert-moore-penrose-inverse",
+          "source_section": "Definition",
+          "quote": "Assume the Axiom of Countable Choice. Let $X$ and $Y$ be real or complex Hilbert\nspaces over the same scalar field, and let $K:X\\to Y$ be a bounded linear\noperator. Write $R(K):=\\{Kx:x\\in X\\}$ for its range,\n$N(K):=\\{x\\in X:Kx=0\\}$ for its kernel, and\n$M^\\perp:=\\{z:\\langle z,m\\rangle=0\\text{ for every }m\\in M\\}$ for the\northogonal complement of a subspace $M$. The kernel $N(K)$ is closed, so the\nrestriction\n$$\\widetilde K:=K|_{N(K)^\\perp}:N(K)^\\perp\\to R(K)$$\nis a linear bijection. Define the Hilbert-space Moore–Penrose inverse $K^\\dagger$\nto have domain\n$$D(K^\\dagger):=R(K)\\oplus R(K)^\\perp$$\nand, for the unique decomposition $y=r+z$ with $r\\in R(K)$ and\n$z\\in R(K)^\\perp$, set\n$$K^\\dagger y:=\\widetilde K^{-1}r.$$\nThus $K^\\dagger y$ is the unique minimum-norm solution of $Kx=r$, and the\northogonal-range component is mapped to zero. Boundedness of $K^\\dagger$ on\nthis domain is not part of the definition.",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "def-ip-noise-level-free-parameter-rule",
+          "source_section": "Definition",
+          "quote": "Fix a compact Hilbert inverse model $K:X\\to Y$ and a family of reconstruction\nmaps $(R_\\alpha)_{\\alpha>0}$, with each $R_\\alpha:Y\\to X$, both held fixed. A\ndeterministic parameter-choice rule is a function\n$\\alpha:Y\\to(0,\\infty)$. It is **noise-level-free** (also called **heuristic**)\nwhen the value $\\alpha(z)$ for an observed datum $z\\in Y$ uses only $K$, the\nfixed family, and $z$; it does not take the exact datum or a noise bound\n$\\delta$ as input. Here $\\delta\\ge0$ is a valid noise bound for $z$ and an\nexact datum $y$ when $\\|z-y\\|_Y\\le\\delta$. The resulting reconstruction is\n$R_{\\alpha(z)}z$.",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "Fix $y\\in D(K^\\dagger)$ and put $T(y):=R_{\\alpha(y)}y$. By [F3], this vector is independent of $\\delta$. Since $y$ itself satisfies $\\|y-y\\|_Y=0\\le\\delta$ for every $\\delta>0$, the supremum defining $E_y(\\delta)$ gives $\\|T(y)-K^\\dagger y\\|_X\\le E_y(\\delta)$ for every $\\delta>0$. Letting $\\delta\\downarrow0$ proves $T(y)=K^\\dagger y$.",
+          "step": "1.1",
+          "inputs": [
+            "given",
+            "A1",
+            "F1",
+            "F2",
+            "F3",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "Fix $y\\in D(K^\\dagger)$ and $\\varepsilon>0$. By the assumed limit choose $r>0$ such that $E_y(r)<\\varepsilon$. For any $z\\in D(K^\\dagger)$ with $\\|z-y\\|_Y\\le r$, step 1.1 applied to $z$ gives $R_{\\alpha(z)}z=K^\\dagger z$, while $z$ belongs to the ball in $E_y(r)$. Hence $\\|K^\\dagger z-K^\\dagger y\\|_X\\le E_y(r)<\\varepsilon$. This is continuity of $K^\\dagger$ at the arbitrary point $y$ in its subspace domain, contradicting the hypothesis.",
+          "step": "2.1",
+          "inputs": [
+            "given",
+            "step 1.1",
+            "F2",
+            "F3",
+            "choose",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "finite_checks": [],
+      "finite_smoke": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The Moore–Penrose domain contains zero, and the theorem assumes a discontinuous inverse; no empty-domain case is possible."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Step 1.1 applies to every exact datum, including y=0."
+        },
+        {
+          "case": "one",
+          "status": "not_applicable",
+          "reason": "The statement asserts no one-dimensional singular-system classification; discontinuity is an explicit hypothesis."
+        },
+        {
+          "case": "degenerate",
+          "status": "not_applicable",
+          "reason": "A degenerate continuous inverse cannot satisfy the theorem's discontinuity hypothesis."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Steps 1.1 and 2.1 use every positive delta and the limit as delta decreases to zero."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "The statement records Countable Choice in A1; the continuity argument itself makes no sequence selection."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The theorem is an implication and states no equivalence."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The theorem is an implication and states no equivalence."
+        }
+      ],
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "alpha-batch-5",
+        "notes": "Independently read steps 1.1–2.1 and all four actual cited dependencies, including the Moore–Penrose construction proof and Countable Choice. The fixed data-only T(y) is bounded in error by E_y(delta) for every positive delta, hence equals K†y. Applying this identity to any nearby domain point and the limit at the fixed y gives epsilon-radius continuity; no uniformity over exact data or choice of a sequence is needed. Zero noise is admitted inside every positive ball, suprema may initially be infinite but the assumed limit makes them small locally, and no continuity/linearity of R_alpha is used. Clason Definition 4.4 and complete Theorem 4.8 proof/discussion, PDF pp.34,37–38, and Sherry §3.2.3 complete Theorem 3.12 proof, PDF p.34, agree. No diagram. The same source-author typo as the routed findings was discovered and corrected in this owned risk carrier; mathematical statement, proof, dependencies and provenance classifications unchanged."
+      }
+    },
+    "ex-ip-discrete-grid-l-curve-parameter-choice": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "alg-discrete-l-curve-parameter-choice",
+          "source_section": "Definition",
+          "quote": "Input a real matrix $A\\in\\mathbb R^{m\\times n}$, data $b\\in\\mathbb R^m$,\nand a strictly increasing finite grid $0<\\lambda_1<\\cdots<\\lambda_q$ with\n$q\\ge3$. For each grid point, compute the unique Tikhonov minimizer\n$$x_j=(A^TA+\\lambda_j I)^{-1}A^Tb,$$\nand the residual $r_j=\\|Ax_j-b\\|$ and solution norm $s_j=\\|x_j\\|$.\nDiscard any index with $r_j=0$ or $s_j=0$. If fewer than three indices\nremain, return failure status `insufficient-valid-points`.\n\nFor consecutive retained indices $i_0<i_1<i_2$, set\n$p_k=(\\log r_{i_k},\\log s_{i_k})\\in\\mathbb R^2$, $u=p_1-p_0$,\nand $v=p_2-p_1$. Define their discrete curvature by\n$$\\kappa=\\begin{cases} \\dfrac{2|\\det(u,v)|}{\\|u\\|\\,\\|v\\|\\,\\|u+v\\|},&\\|u\\|\\,\\|v\\|\\,\\|u+v\\|>0,\\\\ 0,&\\text{otherwise}. \\end{cases}$$\nAssign this curvature to the middle retained index. Among the resulting\n$q'-2$ values, return the original grid parameter whose curvature is largest;\nif there is a tie, return the tied parameter with the smallest original index.\nNo uniform-grid spacing is assumed in log parameter. This is a finite-grid\nheuristic and carries no universal optimality claim.\n\nThe output is either a selected $\\lambda_j$ with its discrete curvature and\nindex, or the stated failure status. Every step uses a finite loop over the\ninput grid.",
+          "uses": [
+            "1.1",
+            "2.1",
+            "3.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "Since $A=I_2$, the formula in [F1] gives $x_\\lambda=(1+\\lambda)^{-1}e_1$, residual norm $r_\\lambda=\\|Ax_\\lambda-b\\|_2=\\lambda/(1+\\lambda)$, and solution norm $s_\\lambda=\\|x_\\lambda\\|_2=1/(1+\\lambda)$. At the three grid values, $(r_\\lambda,s_\\lambda)$ equals $(1/10,9/10)$, $(1/2,1/2)$, and $(9/10,1/10)$, respectively. All retained points are valid because both coordinates are positive.",
+          "step": "1.1",
+          "inputs": [
+            "given",
+            "F1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "Their log-log points are $p_0=(-\\log 10,\\log(9/10))$, $p_1=(-\\log 2,-\\log 2)$, and $p_2=(\\log(9/10),-\\log 10)$. Thus $u=p_1-p_0=(\\log 5,-\\log(9/5))$ and $v=p_2-p_1=(\\log(9/5),-\\log 5)$. Their determinant is $-\\log^2 5+\\log^2(9/5)\\ne0$ because $5>9/5>1$; moreover $\\|u\\|_2=\\|v\\|_2>0$ and $u+v=(\\log9,-\\log9)\\ne0$. The algorithm's curvature is therefore well-defined and positive.",
+          "step": "2.1",
+          "inputs": [
+            "step 1.1",
+            "F1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "claim": "There are exactly three retained grid indices, so the only consecutive triple is $(1,2,3)$ and its curvature is assigned to index $2$. This is the only candidate for the maximum, so the selector returns $\\lambda_2=1$; no tie-break is needed. The computation supplies no claim about any grid outside this input.",
+          "step": "3.1",
+          "inputs": [
+            "given",
+            "step 2.1",
+            "F1",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "finite_checks": [
+        {
+          "case": "A=I2, b=e1, grid (1/9,1,9)",
+          "calculation": "Residuals are (1/10,1/2,9/10), solution norms are (9/10,1/2,1/10), and the sole curvature triple has nonzero determinant.",
+          "result": "The algorithm returns the middle grid parameter lambda=1."
+        }
+      ],
+      "finite_smoke": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The example supplies a nonempty grid of exactly three positive parameters."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Step 1.1 computes strictly positive residual and solution norms at every supplied grid value."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Step 3.1 handles the single curvature candidate arising from exactly three valid grid points."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Step 2.1 shows the curvature numerator and all denominator factors are nonzero."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Step 3.1 identifies the middle index and states that the smallest-index tie-break is not invoked."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "The grid is finite and the selector is deterministic; no choice principle is used."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The example makes no equivalence claim."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The example makes no equivalence claim."
+        }
+      ]
+    },
+    "cex-ip-noise-underestimation-truncated-svd": {
+      "citations": [
+        {
+          "fact": "A1",
+          "source": "def-countable-choice",
+          "source_section": "Definition",
+          "quote": "The **Axiom of Countable Choice**, written $\\mathrm{AC}_\\omega$, is the following\nstatement.\n\n> For every family $(X_n)_{n \\in \\mathbb{N}}$ of nonempty sets indexed by\n> $\\mathbb{N}$ there is a function $f$ with domain $\\mathbb{N}$ such that\n> $f(n) \\in X_n$ for every $n \\in \\mathbb{N}$.\n\nEquivalently, in the vocabulary of Choice function: every at most\ncountable family of nonempty sets has a choice function.",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F1",
+          "source": "def-square-summable-family-on-an-arbitrary-index-set",
+          "source_section": "Definition",
+          "quote": "Throughout, $\\mathbb F$ is $\\mathbb R$ or $\\mathbb C$ and families are indexed by\nan arbitrary set $I$, with no enumeration or countability assumed. Finite real lists use [[def-finite-sum]], and sums over finite subsets use [[def-finite-sum-in-a-commutative-monoid]] in the additive monoid of the scalar field. Disjoint splitting is [[lem-finite-sum-reindexing-and-fubini]], and scalar modulus estimates use [[lem-complex-conjugation-and-modulus-laws]]; all suprema and infima of real sets below are\ntaken in the complete ordered field $\\mathbb R$\n([[def-complete-ordered-field]]) or in $[0,+\\infty]\\subseteq\\overline{\\mathbb R}$\n([[def-extended-reals]], [[lem-extended-reals-complete]]).\n\n**Sums of nonnegative families.** Let $(c_i)_{i\\in I}$ be a family of\nnonnegative reals and let $\\operatorname{Fin}(I)$ be the set of finite subsets of\n$I$, ordered by inclusion. Define\n\n$$\\sum_{i\\in I}c_i:=\\sup\\Bigl\\{\\sum_{i\\in F}c_i \\;:\\; F\\in\\operatorname{Fin}(I)\\Bigr\\}\\in[0,+\\infty] .$$\n\nThe set of finite subsums is nonempty, since $\\varnothing$ contributes the empty\nsum $0$, so the supremum exists in $[0,+\\infty]$; it is a real number exactly\nwhen the finite subsums are bounded above in $\\mathbb R$, and $+\\infty$\notherwise. For finite $I$ the finite subsum at $I$ is the largest of all finite\nsubsums, because all terms are nonnegative, so the definition agrees with the\nfinite sum; in particular $\\sum_{i\\in I}c_i=0$ when every $c_i$ is $0$, and\n$I=\\varnothing$ gives the empty sum $0$.\n\n**Splitting identity and small tails.** Fix a finite $F\\subseteq I$. Every\nfinite $G\\subseteq I$ splits as the disjoint union $(G\\cap F)\\cup(G\\setminus F)$,\nso $\\sum_{i\\in G}c_i=\\sum_{i\\in G\\cap F}c_i+\\sum_{i\\in G\\setminus F}c_i\\le\\sum_{i\\in F}c_i+\\sum_{i\\in I\\setminus F}c_i$;\nconversely the finite $G$ with $F\\subseteq G$ satisfy\n$\\sum_{i\\in G}c_i=\\sum_{i\\in F}c_i+\\sum_{i\\in G\\setminus F}c_i$. Taking suprema,\nwith the constant $\\sum_{i\\in F}c_i$ passing through the supremum,\n\n$$\\sum_{i\\in I}c_i=\\sum_{i\\in F}c_i+\\sum_{i\\in I\\setminus F}c_i . \\qquad (1)$$\n\nConsequently, if $S:=\\sum_{i\\in I}c_i$ is finite, then for every real\n$\\varepsilon>0$ there is a finite $F\\subseteq I$ with\n$\\sum_{i\\in I\\setminus F}c_i<\\varepsilon$: the finite subsums form a nonempty\nbounded-above set with supremum $S$, so by the epsilon characterisation of the\nsupremum ([[lem-sup-epsilon]]) some finite $F$ has\n$S-\\varepsilon<\\sum_{i\\in F}c_i$, and (1) gives\n$\\sum_{i\\in I\\setminus F}c_i=S-\\sum_{i\\in F}c_i<\\varepsilon$. Such an $F$ is\ncalled a **tail-control set** for $\\varepsilon$.\n\n**Sums of scalar families.** Now let $(a_i)_{i\\in I}$ be a family in $\\mathbb F$\nand put $s_F:=\\sum_{i\\in F}a_i$ for finite $F\\subseteq I$. The set\n$\\operatorname{Fin}(I)$ with inclusion is a directed preorder: it is nonempty and\n$F\\cup G$ is a common upper bound of $F$ and $G$\n([[def-directed-set-and-net]]). Hence $(s_F)_{F\\in\\operatorname{Fin}(I)}$ is a\nnet in $\\mathbb F$, the **finite-subset net** of the family, and the family is\n**summable** when this net converges\n([[def-net-convergence-and-cluster-point]]). The scalar metric is the usual real metric or [[def-complex-metric-convergence-and-continuity]]. These metric spaces are Hausdorff by [[thm-metric-hausdorff-separation]]. A net in $\\mathbb F$ has at most one limit\n([[thm-hausdorff-iff-net-limits-are-unique]]), so for a summable family the\nlimit is unique and we write $\\sum_{i\\in I}a_i:=\\lim_F s_F$ for it. The family is\n**absolutely summable** when $\\sum_{i\\in I}|a_i|<+\\infty$ in the sense above.\n\n**Every absolutely summable family is summable, in ZF.** Assume\n$S:=\\sum_{i\\in I}|a_i|$ is finite and put $S_F:=\\sum_{i\\in F}|a_i|$ for finite\n$F$. For finite $F,G\\subseteq I$ the triangle inequality for finite sums and the\nfact that a finite subsum is at most the whole nonnegative sum give\n\n$$|s_F-s_G|\\le\\sum_{i\\in F\\triangle G}|a_i|\\le S-S_{F\\cap G} . \\qquad (2)$$\n\nNow fix a real $\\varepsilon>0$, let $F_0$ be a tail-control set for\n$\\varepsilon$, and let $F,G\\supseteq F_0$ be finite. Then $F\\cap G\\supseteq F_0$,\nso $S-S_{F\\cap G}\\le S-S_{F_0}<\\varepsilon$ and (2) gives\n$|s_F-s_G|<\\varepsilon$.\n\nFirst suppose $\\mathbb F=\\mathbb R$. For each finite $F$ define\n$A_F:=\\inf\\{s_G : G\\supseteq F\\}$ and $B_F:=\\sup\\{s_G : G\\supseteq F\\}$ over\nfinite $G$. Both are real numbers, because $|s_G|\\le S_G\\le S$, so the two sets\nare nonempty and bounded, and $A_F\\le B_F$. If $H\\supseteq F$ then\n$A_H\\ge A_F$ and $B_H\\le B_F$. Let $L:=\\sup_FA_F$ and $U:=\\inf_FB_F$.\nSince $A_F\\le s_{F\\cup H}\\le B_H$ for all finite $F,H$, we get $L\\le U$.\nMoreover, the preceding estimate holds for every pair $F,G\\supseteq F_0$;\ntaking the supremum over $F$ and the infimum over $G$ gives\n$B_{F_0}-A_{F_0}\\le\\varepsilon$. Hence\n$0\\le U-L\\le B_{F_0}-A_{F_0}\\le\\varepsilon$ for every $\\varepsilon>0$, so\n$L=U=:s$. If $F\\supseteq F_0$, then both $s_F$ and $s$ lie in\n$[A_{F_0},B_{F_0}]$, and therefore $|s_F-s|\\le\\varepsilon$.\n\nIf $\\mathbb F=\\mathbb C$, apply the real argument just proved to the families\n$(\\operatorname{Re}a_i)$ and $(\\operatorname{Im}a_i)$. They are absolutely\nsummable because $|\\operatorname{Re}a_i|,|\\operatorname{Im}a_i|\\le|a_i|$.\nTheir finite-subset nets converge to real numbers $r$ and $t$, respectively,\nso $s_F\\to r+it$ in $\\mathbb C$. Thus every absolutely summable real or complex\nfamily is summable. **No choice principle is used**: the construction uses only\ntwo-sided suprema in $\\mathbb R$.\n\n**Linearity and absolute value.** If $(a_i)$ and $(b_i)$ are absolutely\nsummable and $\\lambda\\in\\mathbb F$, then so are $(a_i+b_i)$ and\n$(\\lambda a_i)$, and\n\n$$\\sum_{i\\in I}(a_i+b_i)=\\sum_{i\\in I}a_i+\\sum_{i\\in I}b_i,\\qquad \\sum_{i\\in I}\\lambda a_i=\\lambda\\sum_{i\\in I}a_i,\\qquad \\Bigl|\\sum_{i\\in I}a_i\\Bigr|\\le\\sum_{i\\in I}|a_i| ,$$\n\nbecause the corresponding identities hold for every finite subsum, both sides\nare limits of the corresponding finite-subset nets, and addition, scalar\nmultiplication and the modulus are continuous. The splitting identity (1)\nlikewise passes to absolutely summable scalar families:\n$\\sum_{i\\in I}a_i=\\sum_{i\\in F}a_i+\\sum_{i\\in I\\setminus F}a_i$ for every finite\n$F$, because finite subsums over sets containing $F$ converge to the left-hand\nside and equal the finite sum over $F$ plus the finite subsum of the tail, whose\nnet converges to the tail sum.\n\n**The finite-dimensional Cauchy-Schwarz inequality.** Let $(u_k)_{0\\le k<m}$ and $(v_k)_{0\\le k<m}$ be scalar lists, for $m\\in\\mathbb N$ and let $t\\in\\mathbb R$. Every term of\n$\\sum_{k<m}(|u_k|-t|v_k|)^2$ is nonnegative, so for all real $t$\n\n$$0\\le\\sum_{k<m}|u_k|^2-2t\\sum_{k<m}|u_k||v_k|+t^2\\sum_{k<m}|v_k|^2 .$$\n\nIf $\\sum_{k<m}|v_k|^2>0$, substituting\n$t=\\bigl(\\sum_{k<m}|u_k||v_k|\\bigr)/\\bigl(\\sum_{k<m}|v_k|^2\\bigr)$ gives\n$\\bigl(\\sum_{k<m}|u_k||v_k|\\bigr)^2\\le\\bigl(\\sum_{k<m}|u_k|^2\\bigr)\\bigl(\\sum_{k<m}|v_k|^2\\bigr)$;\nif $\\sum_{k<m}|v_k|^2=0$ then every $v_k=0$ and both sides are $0$. In either case\n$\\sum_{k<m}|u_k||v_k|\\le\\bigl(\\sum_{k<m}|u_k|^2\\bigr)^{1/2}\\bigl(\\sum_{k<m}|v_k|^2\\bigr)^{1/2}$\nafter taking square roots, and applying the modulus inequality for finite sums\nto $u_k\\overline{v_k}$ also gives\n\n$$\\Bigl|\\sum_{k<m}u_k\\overline{v_k}\\Bigr|\\le\\Bigl(\\sum_{k<m}|u_k|^2\\Bigr)^{1/2}\\Bigl(\\sum_{k<m}|v_k|^2\\Bigr)^{1/2} . \\qquad (3)$$\n\n**The space $\\ell^2(I)$.** For a family $a=(a_i)_{i\\in I}$ in $\\mathbb F$ define\n$Q(a):=\\sum_{i\\in I}|a_i|^2$. If $Q(a)$ is finite, set $\\|a\\|_2:=\\sqrt{Q(a)}$, using the nonnegative real square root of [[thm-of-square-roots]]; if $Q(a)=+\\infty$, set $\\|a\\|_2:=+\\infty$. This is a case definition, not exponentiation of an extended real. Let\n\n$$\\ell^2(I,\\mathbb F):=\\{\\,a=(a_i)_{i\\in I} : \\|a\\|_2<+\\infty\\,\\}.$$\n\nThe set $\\ell^2(I,\\mathbb F)$ is a vector space over $\\mathbb F$: it contains the\nzero family, is closed under scalar multiplication because\n$\\|\\lambda a\\|_2=|\\lambda|\\,\\|a\\|_2$, and is closed under addition because (3)\napplied to finite subsums gives $\\|a+b\\|_2\\le\\|a\\|_2+\\|b\\|_2<+\\infty$. The same\ninequality is the triangle inequality for $\\|\\cdot\\|_2$, which is moreover\nnonnegative, vanishes only for the zero family (an arbitrary sum of nonnegative\nterms with supremum $0$ has every term $0$) and satisfies\n$\\|\\lambda a\\|_2=|\\lambda|\\,\\|a\\|_2$; thus $\\|\\cdot\\|_2$ is a norm on\n$\\ell^2(I,\\mathbb F)$. Finally the **pairing**\n$\\langle a,b\\rangle:=\\sum_{i\\in I}a_i\\overline{b_i}$ is well defined on\n$\\ell^2(I,\\mathbb F)\\times\\ell^2(I,\\mathbb F)$, because\n$|a_i\\overline{b_i}|=|a_i||b_i|$ has finite nonnegative sum by (3); it is linear\nin the first variable, conjugate symmetric, positive definite, and satisfies\n$\\langle a,a\\rangle=\\|a\\|_2^2$, all by the corresponding finite identities and\nthe linearity of the sum. Consequently $\\ell^2(I,\\mathbb F)$ is an inner-product\nspace, and $e_i\\in\\ell^2(I,\\mathbb F)$ denotes the family that is $1$ at $i$ and\n$0$ elsewhere. **Nothing here asserts that $\\ell^2(I,\\mathbb F)$ is complete**;\nthat follows later, from an orthonormal basis of a Hilbert space.",
+          "uses": [
+            "1.1",
+            "3.1",
+            "4.1"
+          ],
+          "reviewed": {
+            "upheld": true,
+            "by": "step5-v2-gate-r1-u1",
+            "reason": "The source explicitly defines Q(x) as the arbitrary-family square sum and the norm as its square root. The positive-index real specialization used in steps 1.1, 3.1 and 4.1 is valid; binary vector addition does not restrict the number of coordinates."
+          }
+        },
+        {
+          "fact": "F14",
+          "source": "def-square-summable-family-on-an-arbitrary-index-set",
+          "source_section": "Definition",
+          "quote": "Throughout, $\\mathbb F$ is $\\mathbb R$ or $\\mathbb C$ and families are indexed by\nan arbitrary set $I$, with no enumeration or countability assumed. Finite real lists use [[def-finite-sum]], and sums over finite subsets use [[def-finite-sum-in-a-commutative-monoid]] in the additive monoid of the scalar field. Disjoint splitting is [[lem-finite-sum-reindexing-and-fubini]], and scalar modulus estimates use [[lem-complex-conjugation-and-modulus-laws]]; all suprema and infima of real sets below are\ntaken in the complete ordered field $\\mathbb R$\n([[def-complete-ordered-field]]) or in $[0,+\\infty]\\subseteq\\overline{\\mathbb R}$\n([[def-extended-reals]], [[lem-extended-reals-complete]]).\n\n**Sums of nonnegative families.** Let $(c_i)_{i\\in I}$ be a family of\nnonnegative reals and let $\\operatorname{Fin}(I)$ be the set of finite subsets of\n$I$, ordered by inclusion. Define\n\n$$\\sum_{i\\in I}c_i:=\\sup\\Bigl\\{\\sum_{i\\in F}c_i \\;:\\; F\\in\\operatorname{Fin}(I)\\Bigr\\}\\in[0,+\\infty] .$$\n\nThe set of finite subsums is nonempty, since $\\varnothing$ contributes the empty\nsum $0$, so the supremum exists in $[0,+\\infty]$; it is a real number exactly\nwhen the finite subsums are bounded above in $\\mathbb R$, and $+\\infty$\notherwise. For finite $I$ the finite subsum at $I$ is the largest of all finite\nsubsums, because all terms are nonnegative, so the definition agrees with the\nfinite sum; in particular $\\sum_{i\\in I}c_i=0$ when every $c_i$ is $0$, and\n$I=\\varnothing$ gives the empty sum $0$.\n\n**Splitting identity and small tails.** Fix a finite $F\\subseteq I$. Every\nfinite $G\\subseteq I$ splits as the disjoint union $(G\\cap F)\\cup(G\\setminus F)$,\nso $\\sum_{i\\in G}c_i=\\sum_{i\\in G\\cap F}c_i+\\sum_{i\\in G\\setminus F}c_i\\le\\sum_{i\\in F}c_i+\\sum_{i\\in I\\setminus F}c_i$;\nconversely the finite $G$ with $F\\subseteq G$ satisfy\n$\\sum_{i\\in G}c_i=\\sum_{i\\in F}c_i+\\sum_{i\\in G\\setminus F}c_i$. Taking suprema,\nwith the constant $\\sum_{i\\in F}c_i$ passing through the supremum,\n\n$$\\sum_{i\\in I}c_i=\\sum_{i\\in F}c_i+\\sum_{i\\in I\\setminus F}c_i . \\qquad (1)$$\n\nConsequently, if $S:=\\sum_{i\\in I}c_i$ is finite, then for every real\n$\\varepsilon>0$ there is a finite $F\\subseteq I$ with\n$\\sum_{i\\in I\\setminus F}c_i<\\varepsilon$: the finite subsums form a nonempty\nbounded-above set with supremum $S$, so by the epsilon characterisation of the\nsupremum ([[lem-sup-epsilon]]) some finite $F$ has\n$S-\\varepsilon<\\sum_{i\\in F}c_i$, and (1) gives\n$\\sum_{i\\in I\\setminus F}c_i=S-\\sum_{i\\in F}c_i<\\varepsilon$. Such an $F$ is\ncalled a **tail-control set** for $\\varepsilon$.\n\n**Sums of scalar families.** Now let $(a_i)_{i\\in I}$ be a family in $\\mathbb F$\nand put $s_F:=\\sum_{i\\in F}a_i$ for finite $F\\subseteq I$. The set\n$\\operatorname{Fin}(I)$ with inclusion is a directed preorder: it is nonempty and\n$F\\cup G$ is a common upper bound of $F$ and $G$\n([[def-directed-set-and-net]]). Hence $(s_F)_{F\\in\\operatorname{Fin}(I)}$ is a\nnet in $\\mathbb F$, the **finite-subset net** of the family, and the family is\n**summable** when this net converges\n([[def-net-convergence-and-cluster-point]]). The scalar metric is the usual real metric or [[def-complex-metric-convergence-and-continuity]]. These metric spaces are Hausdorff by [[thm-metric-hausdorff-separation]]. A net in $\\mathbb F$ has at most one limit\n([[thm-hausdorff-iff-net-limits-are-unique]]), so for a summable family the\nlimit is unique and we write $\\sum_{i\\in I}a_i:=\\lim_F s_F$ for it. The family is\n**absolutely summable** when $\\sum_{i\\in I}|a_i|<+\\infty$ in the sense above.\n\n**Every absolutely summable family is summable, in ZF.** Assume\n$S:=\\sum_{i\\in I}|a_i|$ is finite and put $S_F:=\\sum_{i\\in F}|a_i|$ for finite\n$F$. For finite $F,G\\subseteq I$ the triangle inequality for finite sums and the\nfact that a finite subsum is at most the whole nonnegative sum give\n\n$$|s_F-s_G|\\le\\sum_{i\\in F\\triangle G}|a_i|\\le S-S_{F\\cap G} . \\qquad (2)$$\n\nNow fix a real $\\varepsilon>0$, let $F_0$ be a tail-control set for\n$\\varepsilon$, and let $F,G\\supseteq F_0$ be finite. Then $F\\cap G\\supseteq F_0$,\nso $S-S_{F\\cap G}\\le S-S_{F_0}<\\varepsilon$ and (2) gives\n$|s_F-s_G|<\\varepsilon$.\n\nFirst suppose $\\mathbb F=\\mathbb R$. For each finite $F$ define\n$A_F:=\\inf\\{s_G : G\\supseteq F\\}$ and $B_F:=\\sup\\{s_G : G\\supseteq F\\}$ over\nfinite $G$. Both are real numbers, because $|s_G|\\le S_G\\le S$, so the two sets\nare nonempty and bounded, and $A_F\\le B_F$. If $H\\supseteq F$ then\n$A_H\\ge A_F$ and $B_H\\le B_F$. Let $L:=\\sup_FA_F$ and $U:=\\inf_FB_F$.\nSince $A_F\\le s_{F\\cup H}\\le B_H$ for all finite $F,H$, we get $L\\le U$.\nMoreover, the preceding estimate holds for every pair $F,G\\supseteq F_0$;\ntaking the supremum over $F$ and the infimum over $G$ gives\n$B_{F_0}-A_{F_0}\\le\\varepsilon$. Hence\n$0\\le U-L\\le B_{F_0}-A_{F_0}\\le\\varepsilon$ for every $\\varepsilon>0$, so\n$L=U=:s$. If $F\\supseteq F_0$, then both $s_F$ and $s$ lie in\n$[A_{F_0},B_{F_0}]$, and therefore $|s_F-s|\\le\\varepsilon$.\n\nIf $\\mathbb F=\\mathbb C$, apply the real argument just proved to the families\n$(\\operatorname{Re}a_i)$ and $(\\operatorname{Im}a_i)$. They are absolutely\nsummable because $|\\operatorname{Re}a_i|,|\\operatorname{Im}a_i|\\le|a_i|$.\nTheir finite-subset nets converge to real numbers $r$ and $t$, respectively,\nso $s_F\\to r+it$ in $\\mathbb C$. Thus every absolutely summable real or complex\nfamily is summable. **No choice principle is used**: the construction uses only\ntwo-sided suprema in $\\mathbb R$.\n\n**Linearity and absolute value.** If $(a_i)$ and $(b_i)$ are absolutely\nsummable and $\\lambda\\in\\mathbb F$, then so are $(a_i+b_i)$ and\n$(\\lambda a_i)$, and\n\n$$\\sum_{i\\in I}(a_i+b_i)=\\sum_{i\\in I}a_i+\\sum_{i\\in I}b_i,\\qquad \\sum_{i\\in I}\\lambda a_i=\\lambda\\sum_{i\\in I}a_i,\\qquad \\Bigl|\\sum_{i\\in I}a_i\\Bigr|\\le\\sum_{i\\in I}|a_i| ,$$\n\nbecause the corresponding identities hold for every finite subsum, both sides\nare limits of the corresponding finite-subset nets, and addition, scalar\nmultiplication and the modulus are continuous. The splitting identity (1)\nlikewise passes to absolutely summable scalar families:\n$\\sum_{i\\in I}a_i=\\sum_{i\\in F}a_i+\\sum_{i\\in I\\setminus F}a_i$ for every finite\n$F$, because finite subsums over sets containing $F$ converge to the left-hand\nside and equal the finite sum over $F$ plus the finite subsum of the tail, whose\nnet converges to the tail sum.\n\n**The finite-dimensional Cauchy-Schwarz inequality.** Let $(u_k)_{0\\le k<m}$ and $(v_k)_{0\\le k<m}$ be scalar lists, for $m\\in\\mathbb N$ and let $t\\in\\mathbb R$. Every term of\n$\\sum_{k<m}(|u_k|-t|v_k|)^2$ is nonnegative, so for all real $t$\n\n$$0\\le\\sum_{k<m}|u_k|^2-2t\\sum_{k<m}|u_k||v_k|+t^2\\sum_{k<m}|v_k|^2 .$$\n\nIf $\\sum_{k<m}|v_k|^2>0$, substituting\n$t=\\bigl(\\sum_{k<m}|u_k||v_k|\\bigr)/\\bigl(\\sum_{k<m}|v_k|^2\\bigr)$ gives\n$\\bigl(\\sum_{k<m}|u_k||v_k|\\bigr)^2\\le\\bigl(\\sum_{k<m}|u_k|^2\\bigr)\\bigl(\\sum_{k<m}|v_k|^2\\bigr)$;\nif $\\sum_{k<m}|v_k|^2=0$ then every $v_k=0$ and both sides are $0$. In either case\n$\\sum_{k<m}|u_k||v_k|\\le\\bigl(\\sum_{k<m}|u_k|^2\\bigr)^{1/2}\\bigl(\\sum_{k<m}|v_k|^2\\bigr)^{1/2}$\nafter taking square roots, and applying the modulus inequality for finite sums\nto $u_k\\overline{v_k}$ also gives\n\n$$\\Bigl|\\sum_{k<m}u_k\\overline{v_k}\\Bigr|\\le\\Bigl(\\sum_{k<m}|u_k|^2\\Bigr)^{1/2}\\Bigl(\\sum_{k<m}|v_k|^2\\Bigr)^{1/2} . \\qquad (3)$$\n\n**The space $\\ell^2(I)$.** For a family $a=(a_i)_{i\\in I}$ in $\\mathbb F$ define\n$Q(a):=\\sum_{i\\in I}|a_i|^2$. If $Q(a)$ is finite, set $\\|a\\|_2:=\\sqrt{Q(a)}$, using the nonnegative real square root of [[thm-of-square-roots]]; if $Q(a)=+\\infty$, set $\\|a\\|_2:=+\\infty$. This is a case definition, not exponentiation of an extended real. Let\n\n$$\\ell^2(I,\\mathbb F):=\\{\\,a=(a_i)_{i\\in I} : \\|a\\|_2<+\\infty\\,\\}.$$\n\nThe set $\\ell^2(I,\\mathbb F)$ is a vector space over $\\mathbb F$: it contains the\nzero family, is closed under scalar multiplication because\n$\\|\\lambda a\\|_2=|\\lambda|\\,\\|a\\|_2$, and is closed under addition because (3)\napplied to finite subsums gives $\\|a+b\\|_2\\le\\|a\\|_2+\\|b\\|_2<+\\infty$. The same\ninequality is the triangle inequality for $\\|\\cdot\\|_2$, which is moreover\nnonnegative, vanishes only for the zero family (an arbitrary sum of nonnegative\nterms with supremum $0$ has every term $0$) and satisfies\n$\\|\\lambda a\\|_2=|\\lambda|\\,\\|a\\|_2$; thus $\\|\\cdot\\|_2$ is a norm on\n$\\ell^2(I,\\mathbb F)$. Finally the **pairing**\n$\\langle a,b\\rangle:=\\sum_{i\\in I}a_i\\overline{b_i}$ is well defined on\n$\\ell^2(I,\\mathbb F)\\times\\ell^2(I,\\mathbb F)$, because\n$|a_i\\overline{b_i}|=|a_i||b_i|$ has finite nonnegative sum by (3); it is linear\nin the first variable, conjugate symmetric, positive definite, and satisfies\n$\\langle a,a\\rangle=\\|a\\|_2^2$, all by the corresponding finite identities and\nthe linearity of the sum. Consequently $\\ell^2(I,\\mathbb F)$ is an inner-product\nspace, and $e_i\\in\\ell^2(I,\\mathbb F)$ denotes the family that is $1$ at $i$ and\n$0$ elsewhere. **Nothing here asserts that $\\ell^2(I,\\mathbb F)$ is complete**;\nthat follows later, from an orthonormal basis of a Hilbert space.",
+          "uses": [
+            "1.1",
+            "3.1",
+            "4.1"
+          ],
+          "reviewed": {
+            "upheld": true,
+            "by": "step5-v2-gate-r1-u1",
+            "reason": "The source explicitly defines e_i for every member of its arbitrary index set. Each coordinate vector here is the positive-index real specialization of that definition, and the independent coordinates justify the finite-rank and noise witnesses without an arity extension."
+          }
+        },
+        {
+          "fact": "F2",
+          "source": "lem-square-summable-sequences-form-a-hilbert-space",
+          "source_section": "Statement",
+          "quote": "The real sequence space\n$$\\ell^2(\\mathbb N,\\mathbb R)=\\left\\{x=(x_n):\\sum_{n\\in\\mathbb N}|x_n|^2<\\infty\\right\\},$$\nwith its canonical inner product and norm from\n[[def-square-summable-family-on-an-arbitrary-index-set]], is complete and\ntherefore is a real Hilbert space.",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "def-bounded-linear-operator",
+          "source_section": "Definition",
+          "quote": "Let $X$ and $Y$ be normed spaces over the same scalar field $\\mathbb K\\in\\{\\mathbb R,\\mathbb C\\}$, read in\nthe real case from [[def-norm-and-normed-space]] and in the complex case from\n[[def-complex-norm-and-complex-normed-space]]. A $\\mathbb K$-linear map\n$T:X\\to Y$ ([[def-linear-map]]) is a **bounded linear operator** when there is a\nreal constant $C \\ge 0$ such that\n\n$$\\|Tx\\| \\le C\\|x\\| \\qquad \\text{for all } x \\in X.$$\n\nAny such $C$ is called a **bound** for $T$.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "def-operator-norm",
+          "source_section": "Definition",
+          "quote": "Let $X$ and $Y$ be normed spaces over the same scalar field, and let\n$T:X\\to Y$ be bounded in the sense of [[def-bounded-linear-operator]]. The\n**operator norm** of $T$ is\n\n$$\\|T\\| := \\sup\\{\\|Tx\\| : x \\in X,\\ \\|x\\| \\le 1\\}.$$\n\nThe set on the right contains $0$ and every bound $C$ for $T$ bounds it\nabove. Thus its finite real supremum exists by the proved least-upper-bound\nproperty of the library's real field ([[cor-cauchy-reals-lub-complete]]).\nIn particular every number strictly below the supremum is exceeded by a\nmember of this set; otherwise it would be a smaller upper bound. No choice\nprinciple is used for this assertion.\n\nThe same number is the least bound of $T$:\n\n$$\\|T\\| = \\inf\\{C \\ge 0 : \\|Tx\\| \\le C\\|x\\| \\text{ for all } x \\in X\\}.$$\n\nIf $X \\ne \\{0\\}$, positive homogeneity also gives\n\n$$\\|T\\| = \\sup\\{\\|Tx\\| : \\|x\\| = 1\\}.$$\n\nWhen $X = \\{0\\}$, the unit sphere is empty and the unit-ball supremum is $0$,\nso $\\|T\\| = 0$.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "def-linear-basis",
+          "source_section": "Definition",
+          "quote": "Let $V$ be a vector space over a field $F$ ([[def-vector-space]]).\n\nA subset $B \\subseteq V$ is a **basis of $V$** when\n\n- **(B1)** $B$ is linearly independent ([[def-linear-independence]]), and\n- **(B2)** $B$ spans $V$, that is $\\operatorname{span}(B) = V$\n  ([[def-linear-combination-and-span]], which is where the words *spans* and\n  *spanning set* are fixed; they are not redefined here).\n\n**The empty set is a basis of the zero space, and of nothing else.**\n$\\varnothing$ is linearly independent ([[def-linear-independence]]) and\n$\\operatorname{span}(\\varnothing) = \\{0_V\\}$\n([[lem-span-is-the-set-of-linear-combinations]]), so $\\varnothing$ is a basis of\n$V$ exactly when $V = \\{0_V\\}$. This is the case $n = 0$ from which every\ninduction on this page starts, and it is a genuine case rather than a convention.\n\n### Ordered bases\n\nAn **ordered basis of $V$** is a finite list $v : n \\to V$, with $n \\in\n\\mathbb{N}$ and $n = \\{0, \\dots, n-1\\}$ the von Neumann natural\n([[def-natural-numbers]], [[lem-nat-order-is-membership]]), such that $v$ is\ninjective ([[def-injection-surjection-bijection]]) and its image $v[n]$ is a\nbasis of $V$.\n\nBy claim 6 of [[lem-independent-list-is-injective]], a list is linearly\nindependent exactly when it is injective with linearly independent image, so an\nordered basis is equally described as a **linearly independent list $v : n \\to V$\nwith $\\operatorname{span}(v[n]) = V$**: the injectivity does not have to be\nimposed separately. The empty list is the ordered basis of the zero space.\n\nAn ordered basis is a list, so it carries an order; a basis is a set, so it does\nnot. Reordering an ordered basis gives a different ordered basis with the same\nimage, and the coordinates of\n[[thm-unique-coordinates-with-respect-to-an-ordered-basis]] are attached to the\nlist, not to the set.\n\n### Bases of a linear subspace\n\nLet $U$ be a linear subspace of $V$ ([[def-linear-subspace]]), which is itself a\nvector space over $F$, with the addition, the zero vector and the scalar\nmultiplication of $V$ restricted to $U$. For $A \\subseteq U$ the two readings of\n\"$A$ is a basis\" — computed inside $U$, or computed inside $V$ — agree, so the\nphrase needs no disambiguation below.\n\n- **Independence agrees.** The finite sums $\\sum_{i<n}\\lambda_i a_i$ of a list\n  $a : n \\to U$ are given by the same recursion in $U$ as in $V$\n  ([[def-monoid-finite-product]]), the base value $0_V$ and the operation $+$\n  being literally those of $V$ ([[def-linear-subspace]]). So a list into $U$ has\n  the same sums whichever space it is read in, and the vanishing condition of\n  [[def-linear-independence]] is the same condition in both.\n- **The span agrees.** A subset of $U$ is a linear subspace of $U$ exactly when it\n  is a linear subspace of $V$, conditions (W1), (W2), (W3) being the same\n  conditions in either reading. Now $\\operatorname{span}_V(A) \\subseteq U$, since\n  $U$ is a linear subspace of $V$ containing $A$ and the span is contained in\n  every such subspace; so $\\operatorname{span}_V(A)$ is a linear subspace of $U$\n  containing $A$, whence $\\operatorname{span}_U(A) \\subseteq \\operatorname{span}_V(A)$.\n  Conversely $\\operatorname{span}_U(A)$ is a linear subspace of $V$ containing\n  $A$, whence $\\operatorname{span}_V(A) \\subseteq \\operatorname{span}_U(A)$. The\n  two are therefore equal, and we write $\\operatorname{span}(A)$ for both.\n\nConsequently $A \\subseteq U$ is a basis of the vector space $U$ if and only if\n$A$ is linearly independent as a subset of $V$ and $\\operatorname{span}(A) = U$.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F6",
+          "source": "lem-finite-rank-operators-are-compact",
+          "source_section": "Statement",
+          "quote": "Let $X$ and $Y$ be normed spaces over the same scalar field and let\n$T:X\\to Y$ be a bounded linear operator\n([[def-bounded-linear-operator]]) whose range $T(X)$ admits an ordered basis of\nfinite length ([[def-linear-basis]]). Then $T$ is compact\n([[def-compact-linear-operator]]).",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F7",
+          "source": "def-banach-space",
+          "source_section": "Definition",
+          "quote": "Let $V$ be a normed space over $\\mathbb K\\in\\{\\mathbb R,\\mathbb C\\}$, in the sense of [[def-norm-and-normed-space]] for $\\mathbb R$ and [[def-complex-norm-and-complex-normed-space]] for $\\mathbb C$, with\ninduced metric $d(x,y)=\\|x-y\\|$ (in the complex case supplied by [[lem-complex-norm-realification-is-a-real-norm]]). Then $V$ is a **Banach space** when this\nmetric space is complete in the sense of [[def-complete-metric-space]].\n\nEquivalently: every Cauchy sequence in $V$ for the norm metric converges to a\npoint of $V$.",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F8",
+          "source": "thm-norm-limit-of-compact-operators-is-compact",
+          "source_section": "Statement",
+          "quote": "Assume the Axiom of Countable Choice ([[def-countable-choice]]). Let $X$ be a\nnormed space, let $Y$ be a Banach space ([[def-banach-space]]), and let\n$T_n:X\\to Y$, $n\\in\\mathbb N$, be compact operators\n([[def-compact-linear-operator]]) with $\\|T_n-T\\|\\to0$ for a bounded linear\noperator $T:X\\to Y$ ([[def-bounded-linear-operator]],\n[[def-operator-norm]], [[def-metric-convergence]]). Then $T$ is compact.",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F9",
+          "source": "def-compact-linear-operator",
+          "source_section": "Definition",
+          "quote": "Let $X$ and $Y$ be normed spaces over the same scalar field $\\mathbb K$, read in\nthe real case from [[def-norm-and-normed-space]] and in the complex case from\n[[def-complex-norm-and-complex-normed-space]]. A linear map $T:X\\to Y$\n([[def-linear-map]]) is a **compact operator** when the image of every bounded\nsubset of $X$ ([[def-metric-bounded-diameter]]) has compact closure in $Y$\n([[def-metric-compactness]]); explicitly, for every bounded $A\\subseteq X$ the\nclosure $\\overline{T(A)}$ in $Y$ is a compact subset of $Y$. The set of compact\noperators $X\\to Y$ is written $\\mathcal K(X,Y)$. The metric used here is $d(x,y)=\\|x-y\\|$, supplied over $\\mathbb R$ by [[def-norm-and-normed-space]] and over $\\mathbb C$ by [[lem-complex-norm-realification-is-a-real-norm]].\n\n**The closed unit ball suffices.** Put\n$\\overline B_X:=\\{x\\in X:\\|x\\|\\le 1\\}$\n([[def-metric-ball]]). Then $T$ is compact if and only if\n$\\overline{T(\\overline B_X)}$ is a compact subset of $Y$.\n\nIndeed, if $T$ is compact then $\\overline B_X$ is bounded, because\n$\\overline B_X\\subseteq B(0,2)$ while $B(0,2)$ is bounded and a subset of a\nbounded set is bounded, so $T(\\overline B_X)$ has compact closure. Conversely\nassume $\\overline{T(\\overline B_X)}$ compact and let $A\\subseteq X$ be bounded.\nIf $A=\\varnothing$ then $T(A)=\\varnothing$, whose closure is empty and hence\ncompact. Otherwise $A\\subseteq B(x_0,r)$ for some $x_0\\in X$ and real $r>0$, so\nevery $x\\in A$ satisfies $\\|x\\|\\le\\|x_0\\|+r=:R$; if $R>0$ then\n$A\\subseteq R\\,\\overline B_X$ and if $R=0$ then $A\\subseteq\\{0\\}$, so in either\ncase $T(A)\\subseteq R\\,\\overline{T(\\overline B_X)}$. Scalar multiplication by\n$R$ is continuous ([[lem-vector-operations-are-continuous-in-a-normed-space]]),\nso $R\\,\\overline{T(\\overline B_X)}$ is a compact subset of $Y$\n([[thm-compactness-under-continuous-maps]]), hence closed\n([[thm-compact-subset-is-closed-and-bounded]]); therefore\n$\\overline{T(A)}\\subseteq R\\,\\overline{T(\\overline B_X)}$ is a closed subset of a\ncompact set, hence compact, and $T$ is compact.\n\n**A compact operator is bounded.** If $T$ is compact then the compact set\n$\\overline{T(\\overline B_X)}$ is bounded\n([[thm-compact-subset-is-closed-and-bounded]]), so there is a real $C\\ge0$ with\n$\\|Tx\\|\\le C$ for every $x\\in\\overline B_X$ and hence $\\|Tx\\|\\le C\\|x\\|$ for\nevery $x\\in X$; thus $T$ is a bounded linear operator\n([[def-bounded-linear-operator]]). This is a consequence of compactness, not a\nhypothesis of the definition.",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F10",
+          "source": "def-ip-compact-linear-inverse-model",
+          "source_section": "Definition",
+          "quote": "Let $X,Y$ be real or complex Hilbert spaces over the same scalar field, and let\n$K:X\\to Y$ be a compact linear operator. The associated compact linear inverse\nmodel has parameter space $X$, data space $Y$, forward map $K$, and admissible\ntruth class $X$: for a true parameter $x^\\dagger\\in X$, the exact datum is\n$y=Kx^\\dagger\\in Y$. Given an exact datum $y\\in Y$, solving this inverse\nproblem means finding a parameter $x\\in X$ such that $Kx=y$. No injectivity,\nsurjectivity, or closed-range assumption is included in the model.",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F11",
+          "source": "def-ip-unbounded-hilbert-moore-penrose-inverse",
+          "source_section": "Definition",
+          "quote": "Assume the Axiom of Countable Choice. Let $X$ and $Y$ be real or complex Hilbert\nspaces over the same scalar field, and let $K:X\\to Y$ be a bounded linear\noperator. Write $R(K):=\\{Kx:x\\in X\\}$ for its range,\n$N(K):=\\{x\\in X:Kx=0\\}$ for its kernel, and\n$M^\\perp:=\\{z:\\langle z,m\\rangle=0\\text{ for every }m\\in M\\}$ for the\northogonal complement of a subspace $M$. The kernel $N(K)$ is closed, so the\nrestriction\n$$\\widetilde K:=K|_{N(K)^\\perp}:N(K)^\\perp\\to R(K)$$\nis a linear bijection. Define the Hilbert-space Moore–Penrose inverse $K^\\dagger$\nto have domain\n$$D(K^\\dagger):=R(K)\\oplus R(K)^\\perp$$\nand, for the unique decomposition $y=r+z$ with $r\\in R(K)$ and\n$z\\in R(K)^\\perp$, set\n$$K^\\dagger y:=\\widetilde K^{-1}r.$$\nThus $K^\\dagger y$ is the unique minimum-norm solution of $Kx=r$, and the\northogonal-range component is mapped to zero. Boundedness of $K^\\dagger$ on\nthis domain is not part of the definition.",
+          "uses": [
+            "3.1",
+            "4.1"
+          ]
+        },
+        {
+          "fact": "F12",
+          "source": "def-ip-noise-level-free-parameter-rule",
+          "source_section": "Definition",
+          "quote": "Fix a compact Hilbert inverse model $K:X\\to Y$ and a family of reconstruction\nmaps $(R_\\alpha)_{\\alpha>0}$, with each $R_\\alpha:Y\\to X$, both held fixed. A\ndeterministic parameter-choice rule is a function\n$\\alpha:Y\\to(0,\\infty)$. It is **noise-level-free** (also called **heuristic**)\nwhen the value $\\alpha(z)$ for an observed datum $z\\in Y$ uses only $K$, the\nfixed family, and $z$; it does not take the exact datum or a noise bound\n$\\delta$ as input. Here $\\delta\\ge0$ is a valid noise bound for $z$ and an\nexact datum $y$ when $\\|z-y\\|_Y\\le\\delta$. The resulting reconstruction is\n$R_{\\alpha(z)}z$.",
+          "uses": [
+            "4.1"
+          ]
+        },
+        {
+          "fact": "F13",
+          "source": "def-linear-map",
+          "source_section": "Definition",
+          "quote": "Let $V$ and $W$ be vector spaces over the same field $F$. A function\n$T:V\\to W$ is **linear** when\n\n$$T(au+bv)=aT(u)+bT(v)$$\n\nfor all $a,b\\in F$ and $u,v\\in V$. Such a function is a **linear map**, or\n**linear transformation**.",
+          "uses": [
+            "1.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "Coordinatewise linearity gives $K$ and every $K_N$ as linear maps by [F13]. For every $x\\in\\ell^2$, [F1] gives $\\|Kx\\|_2^2=\\sum_{j\\ge1}j^{-2}|x_j|^2\\le\\|x\\|_2^2$ and $\\|K_Nx\\|_2^2\\le\\|x\\|_2^2$, so [F3] makes both bounded linear operators. For $\\|x\\|_2\\le1$, [F1] also gives $\\|(K-K_N)x\\|_2^2=\\sum_{j>N}j^{-2}|x_j|^2\\le(N+1)^{-2}$. Hence [F4] gives $\\|K-K_N\\|\\le1/(N+1)$. The range of $K_N$ is exactly the span of $e_1,\\ldots,e_N$: its outputs are supported in these coordinates, and $K_N(je_j)=e_j$ for each $j\\le N$ by [F14]. These vectors form an ordered basis by [F5], so each $K_N$ has finite rank.",
+          "step": "1.1",
+          "inputs": [
+            "F1",
+            "F3",
+            "F4",
+            "F5",
+            "F13",
+            "F14"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "By [F6], every $K_N$ is compact in the sense of [F9]. By [F2] and [F7], the codomain $\\ell^2$ is Banach; [A1] supplies the Countable Choice hypothesis of [F8]. Since $\\|K-K_N\\|\\to0$ by step 1.1, [F8] implies that $K$ is compact and hence satisfies the compact-model interface [F10].",
+          "step": "2.1",
+          "inputs": [
+            "A1",
+            "step 1.1",
+            "F2",
+            "F6",
+            "F7",
+            "F8",
+            "F9",
+            "F10"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "claim": "The coordinate formula makes $K$ injective. If $y=Kx$, then $x_j=jy_j$ and $(jy_j)_{j\\ge1}\\in\\ell^2$; conversely, whenever $(jy_j)_{j\\ge1}\\in\\ell^2$, taking $x_j=jy_j$ gives $Kx=y$. Thus $R(K)=\\{y:(jy_j)_{j\\ge1}\\in\\ell^2\\}$. Each $e_j/j=K e_j$ lies in $R(K)$, and these vectors are linearly independent because they have distinct nonzero coordinates by [F14]; hence $R(K)$ is infinite-dimensional. Any vector in $R(K)^\\perp$ has every coordinate zero, so $R(K)^\\perp=\\{0\\}$ and $D(K^\\dagger)=R(K)$. By [F11], $K^\\dagger y=(jy_j)_{j\\ge1}$. For each fixed $\\alpha>0$, $R_\\alpha$ is bounded since its sum has finitely many terms and $\\|R_\\alpha y\\|_2^2\\le\\lfloor1/\\alpha\\rfloor^2\\|y\\|_2^2$. For $y\\in D(K^\\dagger)$, $R_\\alpha y$ is the initial truncation of the square-summable sequence $K^\\dagger y$, so as $\\alpha\\downarrow0$ these truncations converge in $\\ell^2$ to $K^\\dagger y$. The stated family is therefore pointwise regularizing.",
+          "step": "3.1",
+          "inputs": [
+            "step 2.1",
+            "F1",
+            "F11",
+            "F14",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-4-1",
+          "claim": "The rule $\\alpha$ is positive and depends only on $z$, so it is noise-level-free by [F12]. Take exact datum $y=0$ and noisy datum $z_j=e_j/j=K e_j$. By [F1] and [F14], $\\delta_j=\\|z_j-y\\|_2=1/j\\to0$, while $\\alpha(z_j)=1/j^2$ and $\\lfloor1/\\alpha(z_j)\\rfloor=j^2$. Therefore $R_{\\alpha(z_j)}z_j=e_j$, whereas $K^\\dagger y=0$, and the reconstruction error is $1$ for every $j$. The claimed worst-case limit fails at $y=0$, since its supremum is at least $1$ along the null sequence $\\delta_j$.",
+          "step": "4.1",
+          "inputs": [
+            "given",
+            "F1",
+            "F11",
+            "F12",
+            "F14",
+            "step 3.1",
+            "construct",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "finite_checks": [
+        {
+          "case": "j=1",
+          "calculation": "delta_1=1, alpha(z_1)=1, floor(1/alpha)=1, and R_alpha(z_1)=e_1.",
+          "result": "The error from exact datum zero is 1."
+        },
+        {
+          "case": "j=2",
+          "calculation": "delta_2=1/2, alpha(z_2)=1/4, floor(1/alpha)=4, and R_alpha(z_2)=e_2.",
+          "result": "The error from exact datum zero is 1."
+        }
+      ],
+      "finite_smoke": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "The Statement defines the empty truncated sum when floor(1/alpha)=0, and step 3.1 gives a finite bounded output for each alpha."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Step 4.1 tests the exact zero datum and the rule's value alpha(0)=1."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Step 4.1 includes j=1, for which the cutoff returns e_1 and the error is 1."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Step 3.1 identifies infinitely many linearly independent range vectors e_j/j."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Step 4.1 gives delta_j=1/j and error 1 along a sequence tending to zero."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "A1 is explicit and is used in step 2.1 for the norm-limit compactness supplier."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The counterexample refutes a convergence claim and makes no equivalence."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The counterexample refutes a convergence claim and makes no equivalence."
+        }
+      ],
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "alpha-batch-5",
+        "notes": "Read all four authored counterexample steps and all 14 actual dependencies. Checked bounded coordinate formulas, finite ordered basis of each K_N range, norm tail bound 1/(N+1), completeness of real ell2 and Countable Choice in compact norm-limit supplier. The range is exactly {y:(jy_j) in ell2}; coordinate tests force range orthogonal complement zero, giving the stated pseudoinverse. Each R_alpha is a bounded finite truncation, including the empty truncation when alpha>1; tails of K†y converge. Alpha(0)=1 and alpha(z)=min(1,||z||²)>0 for nonzero z cover all data. For j>=1, z_j=e_j/j, delta_j=1/j, alpha(z_j)=1/j² and cutoff j² includes coordinate j, so error at exact zero equals one and E_0(delta_j)>=1. The original finding is a real citation misattribution, confirmed fatal under citation-accuracy rules and repaired to Ferdia Sherry in metadata/reference label, with manifest synchronized. Source title page and §3.2.3 read; general context is Clason Theorem 4.8 and Sherry Theorem 3.12, not attribution of this constructed example. No statement/proof/interface change or diagram."
+      }
+    },
+    "ex-ip-stable-restricted-class-bakushinskii": {
+      "citations": [
+        {
+          "fact": "A1",
+          "source": "def-countable-choice",
+          "source_section": "Definition",
+          "quote": "The **Axiom of Countable Choice**, written $\\mathrm{AC}_\\omega$, is the following\nstatement.\n\n> For every family $(X_n)_{n \\in \\mathbb{N}}$ of nonempty sets indexed by\n> $\\mathbb{N}$ there is a function $f$ with domain $\\mathbb{N}$ such that\n> $f(n) \\in X_n$ for every $n \\in \\mathbb{N}$.\n\nEquivalently, in the vocabulary of Choice function: every at most\ncountable family of nonempty sets has a choice function.",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F1",
+          "source": "def-ip-compact-linear-inverse-model",
+          "source_section": "Definition",
+          "quote": "Let $X,Y$ be real or complex Hilbert spaces over the same scalar field, and let\n$K:X\\to Y$ be a compact linear operator. The associated compact linear inverse\nmodel has parameter space $X$, data space $Y$, forward map $K$, and admissible\ntruth class $X$: for a true parameter $x^\\dagger\\in X$, the exact datum is\n$y=Kx^\\dagger\\in Y$. Given an exact datum $y\\in Y$, solving this inverse\nproblem means finding a parameter $x\\in X$ such that $Kx=y$. No injectivity,\nsurjectivity, or closed-range assumption is included in the model.",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "thm-singular-value-decomposition-for-compact-operators",
+          "source_section": "Statement",
+          "quote": "Assume the Axiom of Countable Choice ([[def-countable-choice]]). Let $H$ and\n$K$ be real or complex Hilbert spaces ([[def-hilbert-space]]), let\n$T\\in\\mathcal B(H,K)$ be a compact operator\n([[def-compact-linear-operator]]), let $|T|$ and the singular values $s_n(T)$ be\nas in the absolute-value definition\n([[def-absolute-value-and-singular-values-of-a-compact-operator]]). Let\n$J=\\{1,2,3,\\ldots\\}$ when $\\operatorname{ran}T$ is infinite-dimensional. When\n$\\operatorname{ran}T$ is finite-dimensional, put\n$r:=\\dim\\operatorname{ran}T\\in\\mathbb N$ ([[def-dimension]]) and let\n$J=\\{1,\\dots,r\\}$, interpreted as $\\varnothing$ when $r=0$. Thus $J$ indexes\nexactly the positive singular values counted with multiplicity, which we write\nas $(s_j)_{j\\in J}$ in nonincreasing order. Then:\n\n1. there are orthonormal families $(e_j)_{j\\in J}$ in $(\\ker T)^\\perp$ and\n   $(f_j)_{j\\in J}$ in $\\overline{\\operatorname{ran}T}$, indexed by exactly $J$,\n   with $|T|e_j=s_je_j$ and $f_j=s_j^{-1}Te_j$ for every $j\\in J$;\n2. for every $x\\in H$ the series converges in norm and\n   $$Tx=\\sum_{j\\in J}s_j\\langle x,e_j\\rangle f_j,$$\n   and its finite partial sums\n   $T_n:=\\sum_{j\\le n}s_j\\langle\\cdot,e_j\\rangle f_j$ satisfy\n   $\\|T-T_n\\|\\le s_{n+1}$ for every $n$ with $n+1\\in J$ (and $T_n=T$ for\n   $n\\ge r$ when $r<+\\infty$);\n3. the linear map $U$ defined on the span of $\\{e_j:j\\in J\\}$ by $Ue_j:=f_j$,\n   extended by continuity to $(\\ker T)^\\perp$ and by zero on $\\ker T$, is a\n   **partial isometry** with\n   $$T=U|T|,\\qquad U^*U=P_{(\\ker T)^\\perp},\\qquad U^*U\\text{ is the orthogonal projection onto }(\\ker T)^\\perp,$$\n   and $UU^*$ the orthogonal projection onto $\\overline{\\operatorname{ran}T}$;\n4. the zero-padded sequence $(s_n(T))_{n\\ge1}$ is *not* used to index the\n   orthonormal systems: the systems carry exactly the index set $J$ of the\n   positive singular values, and the terms $s_n(T)=0$ beyond the rank in the\n   finite-rank case are numerical padding only.",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "def-ip-unbounded-hilbert-moore-penrose-inverse",
+          "source_section": "Definition",
+          "quote": "Assume the Axiom of Countable Choice. Let $X$ and $Y$ be real or complex Hilbert\nspaces over the same scalar field, and let $K:X\\to Y$ be a bounded linear\noperator. Write $R(K):=\\{Kx:x\\in X\\}$ for its range,\n$N(K):=\\{x\\in X:Kx=0\\}$ for its kernel, and\n$M^\\perp:=\\{z:\\langle z,m\\rangle=0\\text{ for every }m\\in M\\}$ for the\northogonal complement of a subspace $M$. The kernel $N(K)$ is closed, so the\nrestriction\n$$\\widetilde K:=K|_{N(K)^\\perp}:N(K)^\\perp\\to R(K)$$\nis a linear bijection. Define the Hilbert-space Moore–Penrose inverse $K^\\dagger$\nto have domain\n$$D(K^\\dagger):=R(K)\\oplus R(K)^\\perp$$\nand, for the unique decomposition $y=r+z$ with $r\\in R(K)$ and\n$z\\in R(K)^\\perp$, set\n$$K^\\dagger y:=\\widetilde K^{-1}r.$$\nThus $K^\\dagger y$ is the unique minimum-norm solution of $Kx=r$, and the\northogonal-range component is mapped to zero. Boundedness of $K^\\dagger$ on\nthis domain is not part of the definition.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "def-ip-power-source-set",
+          "source_section": "Definition",
+          "quote": "Assume Countable Choice. Let $K:X\\to Y$ be compact between real or complex Hilbert spaces over the same scalar field and let $\\nu,\\rho>0$. The power source ball is $X_{\\nu,\\rho}(K):=\\{|K|^\\nu w:w\\in X,\\ \\|w\\|_X\\le\\rho\\}$, where $|K|^\\nu=(K^*K)^{\\nu/2}$ is defined by compact spectral calculus. It lies in $N(K)^\\perp$ and consists of minimum-norm representatives of the exact data $Kx$. In the convention $S=K^*K$ this is the source condition $x=S^{\\nu/2}w$.",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "def-ip-centered-modulus-of-continuity",
+          "source_section": "Definition",
+          "quote": "For a compact operator $K:X\\to Y$ between real or complex Hilbert spaces over the same scalar field, write $N(K):=\\{x\\in X:Kx=0\\}$. For a set $M$ with $0\\in M\\subseteq N(K)^\\perp$ and $\\delta\\ge0$, define $\\varepsilon_K(M,\\delta):=\\sup\\{\\|x\\|_X:x\\in M,\\ \\|Kx\\|_Y\\le\\delta\\}\\in[0,+\\infty]$.",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F6",
+          "source": "thm-ip-source-ball-modulus-of-continuity",
+          "source_section": "Statement",
+          "quote": "Assume Countable Choice. Let $K:X\\to Y$ be compact between real or complex Hilbert spaces over the same scalar field and $\\nu,\\rho>0$. For every $\\delta\\ge0$, $\\varepsilon_K(X_{\\nu,\\rho}(K),\\delta)\\le\\delta^{\\nu/(\\nu+1)}\\rho^{1/(\\nu+1)}$. For every positive singular value $s_j$ with right singular vector $v_j$, equality holds at $\\delta_j=\\rho s_j^{\\nu+1}$, witnessed by $x_j=\\rho s_j^\\nu v_j$. If $K$ has infinite rank, these $\\delta_j$ form a null sequence; if $K$ has finite positive rank, equality is asserted only at its finitely many positive singular values; if $K=0$, the source ball and modulus are $\\{0\\}$ and $0$.",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F7",
+          "source": "thm-ip-bakushinskii-veto",
+          "source_section": "Statement",
+          "quote": "Assume Countable Choice. Let $K:X\\to Y$ be a compact linear operator between\nreal or complex Hilbert spaces over one scalar field, with Hilbert-space\nMoore–Penrose inverse $K^\\dagger:D(K^\\dagger)\\to X$. Suppose $K^\\dagger$ is\ndiscontinuous on $D(K^\\dagger)$ with its norm inherited from $Y$. Let\n$(R_\\alpha)_{\\alpha>0}$ be maps $Y\\to X$ such that\n$R_\\alpha y\\to K^\\dagger y$ for every $y\\in D(K^\\dagger)$ as\n$\\alpha\\downarrow0$, and let $\\alpha:Y\\to(0,\\infty)$ be a deterministic\nnoise-level-free rule. For each exact datum $y\\in D(K^\\dagger)$ and\n$\\delta>0$, set $E_y(\\delta):=\\sup\\{\\|R_{\\alpha(z)}z-K^\\dagger y\\|_X:z\\in Y,\\ \\|z-y\\|_Y\\le\\delta\\}$.\nIf $E_y(\\delta)\\to0$ as $\\delta\\downarrow0$ for every $y\\in D(K^\\dagger)$,\nthen $K^\\dagger$ is continuous on $D(K^\\dagger).$ Thus, when $K^\\dagger$ is\ndiscontinuous, no such noise-level-free rule yields worst-case convergence\nover each exact datum's full admissible error balls. The limit is required\nseparately for each exact datum, not uniformly over $y$. This veto does not\nexclude convergence on restricted solution or error classes, stochastic noise\nmodels, or finite-dimensional problems.",
+          "uses": [
+            "2.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "By [F6] with $\\nu=1$, the equality radii $\\delta_j=\\rho s_j^2$ form a null sequence; since $\\rho>0$, $s_j\\to0$. Put $y_j:=Kv_j=s_ju_j$. Then $\\|y_j\\|_Y=s_j\\to0$ by [F2]. Since $v_j\\in N(K)^\\perp$, [F3] gives $K^\\dagger y_j=v_j$, whose norm is $1$. Thus $K^\\dagger$ is discontinuous at $0$ on its domain.",
+          "step": "1.1",
+          "inputs": [
+            "given",
+            "A1",
+            "F1",
+            "F2",
+            "F3",
+            "F6",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "By [F4]–[F6] with $\\nu=1$, $\\varepsilon_K(M_\\rho,\\delta)\\le\\delta^{1/2}\\rho^{1/2}$, and for each $j$, $x_j=|K|(\\rho v_j)=\\rho s_jv_j$ lies in $M_\\rho$, has $\\|Kx_j\\|_Y=\\rho s_j^2=\\delta_j$, and has $\\|x_j\\|_X=\\rho s_j=\\sqrt{\\rho\\delta_j}$. This attains the bound. Since $\\delta_j\\to0$ by [F6], the upper bound tends to zero as $\\delta\\downarrow0$. The estimate is restricted to $M_\\rho$ and does not assert the universal convergence condition in [F7].",
+          "step": "2.1",
+          "inputs": [
+            "given",
+            "step 1.1",
+            "A1",
+            "F1",
+            "F2",
+            "F4",
+            "F5",
+            "F6",
+            "F7",
+            "construct",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "finite_checks": [
+        {
+          "case": "one singular direction with s=1 and rho=2",
+          "calculation": "At delta=rho*s^2=2, the witness x=rho*s*v has norm 2 and data norm 2; the upper bound sqrt(rho*delta) is also 2.",
+          "result": "The singular-direction equality formula is consistent in this finite one-coordinate model."
+        }
+      ],
+      "finite_smoke": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The example assumes infinite rank, so its positive singular system is not empty."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "The Statement and step 2.1 include delta=0; the source-ball modulus bound is then zero."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Step 2.1 applies to every positive singular direction, including a chosen single direction."
+        },
+        {
+          "case": "degenerate",
+          "status": "not_applicable",
+          "reason": "The zero and finite-rank cases are excluded by the infinite-rank hypothesis."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Steps 1.1 and 2.1 handle the null sequence delta_j and the full delta>=0 range."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "A1 records Countable Choice for the singular-system supplier used in steps 1.1–2.1."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The example states a conditional modulus bound and makes no equivalence claim."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The example states a conditional modulus bound and makes no equivalence claim."
+        }
+      ],
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "alpha-batch-5",
+        "notes": "Independently read both verification steps, all eight direct supplier statements, the actual source-ball theorem proof, SVD proof, Moore–Penrose construction, and source-set/minimum-norm/interpolation/spectral-multiplier prerequisites needed for their use. Countable Choice is retained for the singular system and orthogonal decomposition. Infinite rank supplies positive s_j tending to zero, so Kv_j=s_j u_j tends to zero while K†Kv_j=v_j has norm one. The source-ball theorem with nu=1 gives epsilon<=sqrt(rho delta) for all delta>=0, including delta=0 where the minimum-norm source condition excludes nonzero kernel elements. Witness w_j=rho v_j has norm rho, x_j=rho s_j v_j has norm rho s_j and data norm rho s_j², so equality at delta_j is exact and delta_j tends to zero for rho>0. Empty/zero/finite-rank operators are excluded by the infinite-rank hypothesis; complex and real singular-direction norms agree. Clason Theorems 4.11–4.12, PDF p.40, support the upper bound and witness, with the local supplier explicitly preserving finite-rank and zero qualifications. This is a centered source-restricted modulus, not a convergence assertion for every noisy datum. No defects, changes or diagrams."
+      }
+    }
+  }
+}

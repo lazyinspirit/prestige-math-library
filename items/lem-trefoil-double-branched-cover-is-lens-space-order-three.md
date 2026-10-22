@@ -7,6 +7,7 @@ origin: pipeline
 pipeline_run: inverse-problems-knot-theory-all-109-2026-10-19
 dependency_level: 4
 deps:
+  - def-axiom-of-choice
   - def-double-branched-cover-of-an-oriented-link
   - lem-double-branched-cover-of-an-oriented-link-well-defined
   - lem-double-cover-of-two-arc-rational-tangle-is-solid-torus
@@ -26,7 +27,7 @@ sources:
 
 ## Statement
 
-Let $T$ be either oriented trefoil in $S^3$. Its double branched cover $\Sigma(T)$ is diffeomorphic, up to orientation reversal, to the lens space $L(3,1)$ in the convention in which $L(p,q)$ is the $p/q$ filling of the standard unknot exterior. In particular, $\pi_1(\Sigma(T))$ is cyclic of order three.
+Assume the Axiom of Choice. Let $T$ be either oriented trefoil in $S^3$. Its double branched cover $\Sigma(T)$ is diffeomorphic, up to orientation reversal, to the lens space $L(3,1)$ in the convention in which $L(p,q)$ is the $p/q$ filling of the standard unknot exterior. In particular, $\pi_1(\Sigma(T))$ is cyclic of order three.
 
 ## Statement references
 
@@ -38,7 +39,7 @@ Let $T$ be either oriented trefoil in $S^3$. Its double branched cover $\Sigma(T
 
 ## Facts & Assumptions
 
-**Given:** The closure of the two-strand braid $\sigma_1^k$, $k=3$ or $k=-3$, with the given knot orientation; the cover conventions of the statement. Circle coordinates below are taken modulo $2\pi$, and the page parameter $u$ modulo one.
+**Given:** AC and the closure of the two-strand braid $\sigma_1^k$, $k=3$ or $k=-3$, with the given knot orientation; the cover conventions of the statement. Circle coordinates below are taken modulo $2\pi$, and the page parameter $u$ modulo one.
 
 [F1] [[def-double-branched-cover-of-an-oriented-link]] and [[lem-double-branched-cover-of-an-oriented-link-well-defined]] give the meridian-character cover and its simple branched extension, and invariance under the chosen oriented link isotopies.
 
@@ -51,6 +52,7 @@ Let $T$ be either oriented trefoil in $S^3$. Its double branched cover $\Sigma(T
 [F5] [[thm-seifert-van-kampen]] identifies the fundamental group of a two-solid-torus union as the pushout of its boundary inclusion maps. Thickening the two pieces by collars gives its required open connected cover.
 
 ## Proof
+
 
 1.1 **The covered disk pages and their binding fillings.** Use the standard disk open book of $S^3$ about the braid axis $U$: its complement of a small axis neighborhood is $D^2\times S^1$, and the closed two-strand braid meets each disk in two points. This description is explicit in $S^3\subset\mathbb C^2$: the axis is $\{z_1=0\}$ and the page parameter is $u=\arg z_1/(2\pi)$; the disk page is parametrized by $z_2$, with $z_1$ having the remaining modulus and chosen argument. Cut the page parameter at zero. The two moving points over the resulting interval are a braid isotopy of the twice-marked disk. Its double branched cover is the corresponding annular product by the same square-coordinate and sheet-gluing construction as [F2]. On gluing the ends, the annular monodromy is the boundary-fixed lift of the braid mapping class, hence $T^k$ by [F3]. There is no extra deck map: the page-parameter loop near the axis bounds a small meridian disk in its neighborhood disjoint from the branch link, and has trivial meridian character. Moreover the axis itself links the two-strand braid twice, so its mod-two character is zero as well. Thus the cover of its solid-torus neighborhood consists of two ordinary copies, one for each annular boundary. In each copy the meridian is the loop $u$ at a fixed boundary-page point. Consequently the whole branched cover is exactly the annular mapping torus with both boundary tori filled along these page-parameter meridians. The local branched models retain the smooth structures. [F1, F2, F3, given, construct]
 

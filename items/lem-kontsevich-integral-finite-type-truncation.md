@@ -27,7 +27,7 @@ sources:
 
 ## Statement
 
-Assume countable choice, and let $I_m(K)$ be the degree-$m$ homogeneous coefficient of the normalized unframed Kontsevich series $I(K)$ of a smooth oriented knot type $K$. For $n\ge0$, put $I_{\le n}(K)=\sum_{m=0}^{n}I_m(K)$. A function on knot types is of type at most $n$ when its alternating resolution sum on every $(n+1)$-singular knot is zero. Then $I_{\le n}$ is a type-at-most-$n$ invariant with values in the sum of the unframed degree-$m$ chord-diagram modules for $0\le m\le n$. For every $n$-singular knot with chord diagram $D$, its $n$-fold finite difference satisfies $D_n I_{\le n}(K)=D$. In particular, the degree-$n$ symbol is the identity on rational chord diagrams after extending scalars to $\mathbb C$; no rational-coefficient claim is made about $I_m(K)$.
+Assume countable choice, and let $I_m(K)$ be the degree-$m$ homogeneous coefficient of the normalized unframed Kontsevich series $I(K)$ of a smooth oriented knot type $K$. For $n\ge0$, put $I_{\le n}(K)=\sum_{m=0}^{n}I_m(K)$. A function on knot types is of type at most $n$ when its alternating resolution sum on every $(n+1)$-singular knot is zero. Then $I_{\le n}$ is a type-at-most-$n$ invariant with values in the complexified direct sum $\bigoplus_{m=0}^{n}(\mathcal A_m^{\mathrm{un}}\otimes_{\mathbb Q}\mathbb C)$ of the rational unframed degree-$m$ chord-diagram modules. For every $n$-singular knot with chord diagram $D$, its $n$-fold finite difference satisfies $D_n I_{\le n}(K)=D$. In particular, the degree-$n$ symbol is the identity on rational chord diagrams after extending scalars to $\mathbb C$; no rational-coefficient claim is made about $I_m(K)$.
 
 ## Statement references
 

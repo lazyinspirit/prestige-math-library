@@ -11,6 +11,7 @@ deps:
   - def-signature-of-a-closed-oriented-four-k-manifold
   - lem-l2-cellular-duality-and-weak-exactness
   - lem-von-neumann-inertia-and-coisotropic-reduction
+  - thm-topological-finite-projective-l2-duality-and-boundary-gluing
 justified_by: []
 aliases: []
 landmark: false
@@ -51,7 +52,7 @@ sign_Γ^(2)(X)=sign_Γ^(2)(W₀,ψ₀)−sign_Γ^(2)(W₁,ψ₁).
 
 **Given:** The manifolds, common entire boundary, matching coefficient maps and gluing in the Statement. The full AC convention is the standing convention of the signature definition.
 
-[F1] Signatures are positive-minus-negative spectral traces of the coefficient intersection forms; orientation reversal negates these forms. [[def-integral-half-solutions-strebel-and-l2-signatures]] [[def-signature-of-a-closed-oriented-four-k-manifold]]
+[F1] Signatures are positive-minus-negative spectral traces of the coefficient intersection forms; orientation reversal negates these forms. For arbitrary discrete targets use the finite-projective signature, which agrees with the countable-image signature by its coset-block construction. [[thm-topological-finite-projective-l2-duality-and-boundary-gluing]] [[def-integral-half-solutions-strebel-and-l2-signatures]] [[def-signature-of-a-closed-oriented-four-k-manifold]]
 
 [F2] Finite cellular reduced homology satisfies weak pair and Mayer–Vietoris exactness, bounded Poincaré–Lefschetz duality, and the cap boundary and intersection identities. The closed middle intersection operator is invertible. [[lem-l2-cellular-duality-and-weak-exactness]]
 

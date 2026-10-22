@@ -49,7 +49,7 @@ $$\Delta_K^\#(t)=1+\operatorname{Arf}(K)\frac{(1+t)^2}{t}.$$
 
 **Given:** Full AC, an oriented knot, a genus-$g$ Seifert surface, and its positive-push Seifert matrix $V$.
 
-[A1] Full AC supplies the Seifert pairing and Alexander conventions. [[def-axiom-of-choice]]
+[A1] Full AC is the choice-function axiom assumed by the Seifert-pairing and Alexander suppliers. [[def-axiom-of-choice]]
 
 [F1] $V-V^T$ is the standard integral symplectic intersection matrix in a handle basis, and changes of integral symplectic basis preserve the Arf value. [[lem-seifert-matrix-skew-part-is-surface-intersection]], [[lem-arf-quadratic-enhancement-from-seifert-form]]
 

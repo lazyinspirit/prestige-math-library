@@ -30,7 +30,7 @@ sources:
 
 ## Definition
 
-Assume the Axiom of Choice and Countable Choice. Let $d\ge2$, let $\Omega\subset(0,1)^d$ be nonempty, bounded, connected and $C^\infty$, and let $\gamma\in X_d(R)$ be a real conductivity. Write $M=\partial\Omega$, let $dS$ be surface measure, and set
+Assume the Axiom of Choice and Countable Choice. Let $d\ge2$, let $\Omega\subset(0,1)^d$ be nonempty, bounded, connected and $C^\infty$, fix an open domain $\Omega'\Subset\Omega$ and real parameters $m>0$, $M\ge\max\{1,m\}$, $R>0$ and $0<\alpha<1$ defining $X_d(R)$, and let $\gamma\in X_d(R)$ be a real conductivity. Write $M=\partial\Omega$, let $dS$ be surface measure, and set
 $$L^2_0(M)=\left\{f\in L^2(M):\int_M f\,dS=0\right\},\qquad P_0f=f-|M|^{-1}\int_Mf\,dS.$$
 The mean-zero Neumann-to-Dirichlet operator $\mathscr R_\gamma:L^2_0(M)\to L^2_0(M)$ sends $f$ to the mean-zero boundary trace of the weak solution of $\nabla\cdot(\gamma\nabla u)=0$ with outward conormal flux $f$, as defined by the weak Neumann problem. Let $-\Delta_M$ be the nonnegative Laplace–Beltrami operator on the compact boundary manifold, with eigenpairs $(e_j,\lambda_j)$ on $L^2_0(M)$ from its spectral resolution. For $\tau=1/2$ when $d=2$ and any fixed $\tau>0$ when $d\ge3$, put
 $$r_d:=\frac{d-1}{2}-1+\tau,\qquad C_M^{r_d/2}e_j=(1+\lambda_j)^{-r_d/2}e_j.$$

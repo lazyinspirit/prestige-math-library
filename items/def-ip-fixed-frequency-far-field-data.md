@@ -38,6 +38,10 @@ sources:
       locator: "§11.1.1, Definition 11.1, printed p. 119: L1 Fourier transform; rescale the frequency by 2π to match the library convention"
 verification:
   precheck: n/a
+  judge:
+    model: "gpt-6-luna"
+    verdict: pass
+    date: 2026-10-22
 ---
 
 ## Definition

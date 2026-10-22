@@ -35,7 +35,7 @@ sources:
 
 ## Statement
 
-Assume the Axiom of Countable Choice. Let $X$ be a compact connected oriented smooth $4$-manifold with nonempty boundary and good fundamental group $G=\pi_1(X)$. Let $f_1,\ldots,f_n:(D^2,S^1)\looparrowright(X,\partial X)$ be proper generic immersed disks with pairwise disjoint embedded boundary circles. Suppose they admit framed immersed algebraically dual spheres $g_1,\ldots,g_n$ with $\lambda(f_i,g_j)=\delta_{ij}$, $\lambda(g_i,g_j)=0$, and $\mu(g_i)=0$, and suppose $\lambda(f_i,f_j)=0$ for $i\ne j$ and $\mu(f_i)=0$ for all $i$, in the equivariant intersection conventions of the disk-embedding data definition. Then the disks are homotopic rel boundary, preserving the boundary framings, to pairwise disjoint locally flat properly embedded disks in $X$.
+Assume the Axiom of Countable Choice. Let $X$ be a compact connected oriented smooth $4$-manifold with nonempty boundary and good fundamental group $G=\pi_1(X)$. Let $f_1,\ldots,f_n:(D^2,S^1)\looparrowright(X,\partial X)$ be proper generic immersed disks with pairwise disjoint embedded boundary circles, each supplied with a prescribed normal-microbundle framing along its boundary, not required to extend over the disk. Suppose they admit framed immersed algebraically dual spheres $g_1,\ldots,g_n$ with $\lambda(f_i,g_j)=\delta_{ij}$, $\lambda(g_i,g_j)=0$, and $\mu(g_i)=0$, and suppose $\lambda(f_i,f_j)=0$ for $i\ne j$ and $\mu(f_i)=0$ for all $i$, in the equivariant intersection conventions of the disk-embedding data definition. Then the disks are homotopic rel boundary, preserving the boundary framings, to pairwise disjoint locally flat properly embedded disks in $X$.
 
 ## Statement references
 

@@ -21,6 +21,11 @@ axiom_use: The standing full AC convention is retained. All index arguments
 provenance:
   statement: literature-derived
   proof: ai-generated
+verification:
+  judge:
+    model: "gpt-6-luna"
+    verdict: pass
+    date: 2026-10-22
 sources:
   references:
     - title: Cochran, Orr and Teichner, Structure in the classical knot concordance

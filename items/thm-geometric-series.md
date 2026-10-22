@@ -7,7 +7,7 @@ origin: session
 provenance:
   statement: literature-derived
   proof: ai-altered
-deps: [def-series, lem-power-difference-factorisation, lem-geometric-sequence-null, lem-nth-term-test, def-integer-power, thm-algebra-of-limits, def-finite-sum, lem-of-abs-value, lem-power-monotone, thm-induction-principle, def-real-limit, cor-of-one-positive]
+deps: [def-series, lem-power-difference-factorisation, lem-geometric-sequence-null, lem-nth-term-test, def-integer-power, thm-algebra-of-limits, def-finite-sum, lem-of-abs-value, lem-power-monotone, thm-induction-principle, def-real-limit, cor-of-one-positive, lem-power-laws]
 justified_by: []
 aliases: []
 landmark: true
@@ -66,6 +66,8 @@ $1$. Which starting index is meant has to be said, and it is said here.
 
 [L8] Notation of [[def-finite-sum]]: $\sum_{k=0}^{n-1} x_k$ is $\sum_{k<n} x_k$, and the empty sum $\sum_{k<0} x_k$ is $0$.
 
+[L9] Integer-power laws: $(ab)^k=a^kb^k$ for natural $k$; if $a\ne0$, then $a^k\ne0$ and $a^{-k}=(a^k)^{-1}$, with $a^0=1$ at $k=0$. ([[lem-power-laws]], [[def-integer-power]]).
+
 ## Proof
 
 **Proof technique:** cases.
@@ -92,7 +94,9 @@ $1$. Which starting index is meant has to be said, and it is said here.
 
 4.2 In the case $|r| \ge 1$ the sequence $(r^k)$ does not converge to $0$, since the rational tolerance $\varepsilon = 1$ admits no index $K$ with $|r^k - 0| < 1$ for all $k \ge K$; so by the term test $\sum r^k$ diverges, which is claim 2. [step 3.2, L7]
 
-5.1 The two cases $|r| < 1$ and $|r| \ge 1$ exhaust the possibilities, since the order on $\mathbb{R}$ is total, so claims 1 and 2 together cover every real $r$. [step 4.1, step 4.2, cases-exhaustive] ∎
+4.3 For the stated special case, $(1/2)^0=2^0=1$. For every natural $k\ge1$, [L9] gives $2^k(1/2)^k=(2(1/2))^k=1^k=1$, so $(1/2)^k=(2^k)^{-1}=2^{-k}$. Applying step 4.1 at $r=1/2$ gives $\sum_{k=0}^{\infty}2^{-k}=\sum_{k=0}^{\infty}(1/2)^k=1/(1-1/2)=2$. The partial sums starting at $k=1$ are the corresponding partial sums starting at $k=0$ minus their first term $2^0=1$; [L3] therefore gives $\sum_{k=1}^{\infty}2^{-k}=2-1=1$. [L3, L5, L8, L9, step 4.1, algebra]
+
+5.1 The two cases $|r| < 1$ and $|r| \ge 1$ exhaust the possibilities, since the order on $\mathbb{R}$ is total, so claims 1 and 2 together cover every real $r$; step 4.3 proves the two stated special sums and their starting indices. [step 4.1, step 4.2, step 4.3, cases-exhaustive] ∎
 
 ## Remarks
 

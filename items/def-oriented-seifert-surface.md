@@ -18,6 +18,10 @@ provenance:
   proof: not-applicable
 verification:
   precheck: n/a
+  judge:
+    model: "gpt-6-luna"
+    verdict: pass
+    date: 2026-10-22
 sources:
   references:
     - title: "Danny Calegari, Introduction to Knot Theory, §3.1, pp.21–22"

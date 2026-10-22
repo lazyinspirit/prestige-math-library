@@ -22,6 +22,11 @@ axiom_use: "ACω is the explicit background assumption of the library's smooth s
 provenance:
   statement: literature-derived
   proof: ai-altered
+verification:
+  judge:
+    model: "gpt-6-luna"
+    verdict: pass
+    date: 2026-10-22
 sources:
   references:
     - title: "Arunima Ray, Slice Knots and Knot Concordance, Winter Braids Lecture Notes 8"

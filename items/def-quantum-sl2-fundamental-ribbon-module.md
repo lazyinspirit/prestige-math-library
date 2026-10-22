@@ -18,6 +18,11 @@ proof_strategy: direct
 provenance:
   statement: literature-derived
   proof: ai-altered
+verification:
+  judge:
+    model: "gpt-6-luna"
+    verdict: pass
+    date: 2026-10-22
 sources:
   references:
     - title: "Julien Korinman, Finite presentations for stated skein algebras and lattice gauge field theory, Algebraic & Geometric Topology 23 (2023), §2.1, subsection “Relation with Uqsl2 and Oq[SL2]”, printed pp. 1256–1257 (PDF pp. 10–11)"

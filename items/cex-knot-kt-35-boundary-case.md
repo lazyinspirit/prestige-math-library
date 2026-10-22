@@ -14,6 +14,11 @@ deps:
   - thm-vassiliev-invariant-induces-weight-system
 justified_by: []
 dependency_level: 9
+verification:
+  judge:
+    model: "gpt-6-luna"
+    verdict: pass
+    date: 2026-10-22
 sources:
   references:
     - title: The Fundamental Theorem of Vassiliev Invariants, §1.1

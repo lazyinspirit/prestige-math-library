@@ -8,6 +8,8 @@ pipeline_run: inverse-problems-knot-theory-all-109-2026-10-19
 deps:
   - def-integral-framed-link-surgery-diagram
   - def-kirby-moves-on-integral-framed-links
+  - thm-knot-exterior-homology-and-longitude
+  - cor-homology-of-spheres
   - def-axiom-of-choice
 justified_by: []
 proof_strategy: direct
@@ -19,6 +21,9 @@ sources:
     - title: "Justin Roberts, Kirby calculus in manifolds with boundary"
       url: "https://arxiv.org/pdf/math/9812086"
       locator: "p. 1, O3 in S3; pp. 2–4, the framed meridian-pair move. The finite O1/O2 reduction is proved locally below."
+    - title: "Nikolai Saveliev, Lectures on the Topology of 3-Manifolds"
+      url: "https://poisson.phc.dm.unipi.it/~camponovo/libri/3mani.pdf"
+      locator: "§3.2, framing rule (3.1), printed p. 46; Proposition 3.2 and Figures 3.10–3.12, pp. 47–48; Proposition 3.3 and complete proof, p. 53. The explicit odd/even final deletions are proved below."
     - title: "Robion Kirby, A Calculus for Framed Links in S3"
       url: "https://math.berkeley.edu/~kirby/papers/Kirby%20-%20A%20calculus%20for%20framed%20links%20in%20S%5E3%20-%20MR0467753.pdf"
       locator: "pp. 35–36, operations and the band-framing formula; p. 53, Remark 4."
@@ -43,13 +48,17 @@ Assume the Axiom of Choice. Let $L$ be a finite integral framed link in the stan
 
 [A1] [[def-axiom-of-choice]] is the hypothesis of the framed-link interface. All choices and move lists below are finite.
 
-[F1] [[def-integral-framed-link-surgery-diagram]]: each component has its positive meridian and preferred longitude, and integer framing $a$ is represented by the parallel of class $[\lambda]+a[\mu]$. The peripheral-homology result referenced by this definition gives $H_1(E_X;\mathbb Z)=\mathbb Z[\mu_X]$ for each component exterior.
+[F1] [[def-integral-framed-link-surgery-diagram]]: each component has its positive meridian and preferred longitude, and integer framing $a$ is represented by the parallel of class $[\lambda]+a[\mu]$.
 
-[F2] [[def-kirby-moves-on-integral-framed-links]]: a slide is a band sum with the specified framed parallel; its full normal framing is carried across the band. Only a split signed-unit-framed unknot may be deleted directly.
+[F2] [[def-kirby-moves-on-integral-framed-links]]: a slide is a band sum with the specified framed parallel; its full normal framing is carried across the band. The auxiliary parallel may be oriented to make the band-sum orientation extend that of the moving component; this does not reorient the stationary component. Only a split signed-unit-framed unknot may be deleted directly.
+
+[F3] [[thm-knot-exterior-homology-and-longitude]]: with the chosen oriented product tubular data and countable choice, $H_1(E_X;\mathbb Z)=\mathbb Z[\mu_X]$; the preferred longitude maps to zero, and $([\mu_X],[\lambda_X])$ is a basis of the boundary-torus homology. Full AC supplies countable choice as explained in [F1].
+
+[F4] [[cor-homology-of-spheres]] gives $H_1(S^3;\mathbb Z)=H_2(S^3;\mathbb Z)=0$.
 
 ## Proof
 
-1.1 **Framing bookkeeping from bands.** For disjoint oriented components $X,Y$, write $\operatorname{lk}(X,Y)$ for the coefficient of $[Y]$ in $H_1(E_X;\mathbb Z)=\mathbb Z[\mu_X]$, using the positive meridian convention in [F1]. A parallel representing integer framing $a$ has class $[\lambda_X]+a[\mu_X]$, so its linking with $X$ is $a$. This linking number is symmetric: choose transverse 2-chains bounding $X$ and $Y$ in $S^3$ (they exist since $H_1(S^3)=0$); the boundary formula for their intersection 1-chain gives $\operatorname{lk}(X,Y)=\operatorname{lk}(Y,X)$. For oriented components $A,B$ with framings $a,b$ and linking number $l$, a slide of $A$ over the signed parallel $sB$, $s=\pm1$, has framing $a+b+2sl$. Indeed the band sum and its framing parallel are homologous, in the complement of the other curve, to the sums of the corresponding old parallels; additivity gives the two cross-linkings $sl,sl$. Its linking with a third component $C$ is $\operatorname{lk}(A,C)+s\operatorname{lk}(B,C)$, because the band sum represents $[A]+s[B]$ in the complement of $C$. These are consequences of the actual parallel-and-band construction, not permissions to replace a geometric link by a matrix. We use bands with no added full twist; an existing twist of any component is carried with its strip. [given, F1, F2, construct]
+1.1 **Framing bookkeeping from bands.** For disjoint oriented components $X,Y$, write $\operatorname{lk}(X,Y)$ for the coefficient of $[Y]$ in $H_1(E_X;\mathbb Z)=\mathbb Z[\mu_X]$, using the positive meridian convention in [F1] and the homology calculation in [F3]. A parallel representing integer framing $a$ has class $[\lambda_X]+a[\mu_X]$, so its linking with $X$ is $a$. This linking number is symmetric: by [F4], choose transverse oriented 2-chains $A,B$ in $S^3$ with boundaries $X,Y$. Intersection with $A$ defines a homomorphism on $H_1(E_X)$ because its boundary lies outside $E_X$, and it takes the value $+1$ on the positive meridian. By [F3], its value on $Y$ is therefore the meridian coefficient defining $\operatorname{lk}(X,Y)$; likewise intersection with $B$ computes $\operatorname{lk}(Y,X)$. The boundary formula for the intersection 1-chain $A\cap B$ equates these two counts, since its total signed boundary count is zero. For oriented components $A,B$ with framings $a,b$ and linking number $l$, a slide of $A$ over the signed parallel $sB$, $s=\pm1$, has framing $a+b+2sl$. Indeed the band sum and its framing parallel are homologous, in the complement of the other curve, to the sums of the corresponding old parallels; additivity gives the two cross-linkings $sl,sl$. Its linking with a third component $C$ is $\operatorname{lk}(A,C)+s\operatorname{lk}(B,C)$, because the band sum represents $[A]+s[B]$ in the complement of $C$. These are consequences of the actual parallel-and-band construction, not permissions to replace a geometric link by a matrix. We use bands with no added full twist; an existing twist of any component is carried with its strip. [given, F1, F2, F3, F4, construct]
 
 2.1 **The zero-meridian crossing operation.** A slide over $U$ can switch a crossing of a selected strand with the strand of $K$ encircled by $U$. Here is the local construction. Take the disk of $U$ transverse to the latter strand, and take a thin band from the selected strand to a disk-parallel copy of $U$. Put the interior of the band off the disk and all the link. In a cross-section perpendicular to the encircled strand, the band sum replaces a short detour on one side of the origin by that detour followed by one signed circuit about the origin. Round its two band corners. The result is the detour on the other side: the region between the circuit with its return segment and this detour is a disk in the punctured cross-section, so pushing across its product with the short strand interval is an ambient isotopy relative to the ends. Thus precisely the chosen crossing changes. Use the opposite band side for the opposite crossing. The disk-parallel framing of $U$ has no twist, so the strip is the transported framing of this operation, including any change of self-linking prescribed by step 1.1. The operation is valid when the selected strand is another part of $K$: use distinct disjoint short arcs as the two band ends. The encircled arc is unchanged, so $U$ remains its small zero-framed meridian. To use a different arc, move this meridian along a thin tubular neighbourhood of $K$; a meridional disk slides along the product tube, so this is an isotopy of $U$ in the complement of $K\cup L$, with its disk framing. The bands and their corners have smooth rounded product neighbourhoods; the disk pushes extend by a cutoff in those neighbourhoods to smooth orientation-preserving ambient isotopies. [given, F2, step 1.1, construct]
 

@@ -33,6 +33,10 @@ sources:
       locator: "Odd/even pairing and signed DT examples, lines 4–76"
 verification:
   precheck: n/a
+  judge:
+    model: "gpt-6-luna"
+    verdict: pass
+    date: 2026-10-22
 dependency_level: 1
 ---
 

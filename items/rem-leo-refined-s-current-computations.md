@@ -19,6 +19,10 @@ provenance:
   proof: ai-altered
 verification:
   precheck: n/a
+  judge:
+    model: "gpt-6-luna"
+    verdict: pass
+    date: 2026-10-22
 sources:
   references:
     - title: Nathan Dunfield, Robert Lipshitz, and Dirk Schütz, Local equivalence and

@@ -17,6 +17,11 @@ generation:
   role: example
 axiom_use: No additional choice axiom is used; the laws, finite predictors and
   explicit constructions are supplied.
+verification:
+  judge:
+    model: "gpt-6-luna"
+    verdict: pass
+    date: 2026-10-22
 sources:
   references:
     - title: Benjamin A. Burns and Sara Fridovich-Keil, When, why, and how do

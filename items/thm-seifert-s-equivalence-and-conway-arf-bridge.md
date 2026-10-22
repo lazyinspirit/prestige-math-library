@@ -52,11 +52,11 @@ $$\operatorname{Arf}(K)\equiv a_2(\nabla_K)\pmod2.$$
 
 **Given:** Full AC and a smooth oriented knot $K\subset S^3$.
 
-[A1] Full AC supplies the Alexander and Seifert-pairing conventions. [[def-axiom-of-choice]]
+[A1] Full AC is the choice-function axiom assumed by the Alexander and Seifert-pairing suppliers. [[def-axiom-of-choice]]
 
-[F1] Any two spanning-surface Seifert matrices are S-equivalent. [[lem-seifert-matrices-of-a-knot-are-s-equivalent]]
+[F1] Any two spanning-surface Seifert matrices are S-equivalent, with the congruences and enlargement matrices displayed in the S-equivalence definition. [[lem-seifert-matrices-of-a-knot-are-s-equivalent]], [[def-seifert-s-equivalence-and-conway-normalization]]
 
-[F2] The quadratic enhancement is well-defined, has basis-independent Arf value, and each enlargement orthogonally adds a hyperbolic plane up to isometry; hence its stable isometry class and Arf value are unchanged. [[lem-arf-quadratic-enhancement-from-seifert-form]]
+[F2] The quadratic enhancement is well-defined, its polarization is nondegenerate, and its basis-independent Arf value is unchanged by either elementary enlargement. [[lem-arf-quadratic-enhancement-from-seifert-form]]
 
 [F3] The normalized Conway determinant is independent of surface and basis and has the declared skein normalization. [[lem-conway-polynomial-from-seifert-determinant]]
 
@@ -66,7 +66,7 @@ $$\operatorname{Arf}(K)\equiv a_2(\nabla_K)\pmod2.$$
 
 ## Proof
 
-1.1 By [F1], matrices from any two spanning surfaces are connected by congruences and elementary enlargements. Congruence transports the quadratic form by an isometry, while the explicit hyperbolic-pair splitting in [F2] preserves its stable isometry class and Arf value through each enlargement or reduction. Composing these finitely many operations proves independence of the stable class and the Arf value from surface and basis. The unstabilized quadratic spaces themselves can have different dimensions: a disk for the unknot has dimension zero, whereas attaching an ordinary tube gives a genus-one spanning surface with a two-dimensional hyperbolic enhancement. Thus stable isometry is the required surface-independent assertion. [A1, F1, F2, given]
+1.1 By [F1], matrices from any two spanning surfaces are connected by congruences and elementary enlargements. Congruence transports $q(x)=x^TVx\pmod2$ by an isometry. For an enlargement, write $W$ for the old quadratic space and $u,v$ for the two new basis vectors in the displayed order. The matrices in [F1] give $q(v)=0$, $B(u,v)=1$, and $B(v,W)=0$, where $B$ is the polarization. By its nondegeneracy on $W$ from [F2], there is $w\in W$ with $B(w,x)=B(u,x)$ for every $x\in W$. Then $u'=u+w$ is orthogonal to $W$ and still pairs to $1$ with $v$. Put $u''=u'+q(u')v$. The refinement identity gives $q(u'')=q(u')+q(u')B(u',v)=0$; also $B(u'',v)=1$ and $u'',v$ are orthogonal to $W$. Their span has quadratic form $q(su''+tv)=st$, proving that the enlarged space is $W$ orthogonally summed with a hyperbolic plane. Reductions reverse this stable isometry. Composing the finite sequence proves independence of the stable class, and [F2] gives independence of the Arf value. The unstabilized spaces can have different dimensions: the unknot disk has dimension zero, while a tubed disk has a two-dimensional hyperbolic enhancement. [A1, F1, F2, given, algebra]
 
 2.1 Write $\nabla_K(z)=1+a_2z^2+a_4z^4+\cdots$. For a knot the matrix size is $2g$, so $\Theta_K(u^{-1})=\det(uV-u^{-1}V^T)=\det(uV^T-u^{-1}V)=(-1)^{2g}\Theta_K(u)=\Theta_K(u)$, using transposition and even size. Since replacing $u$ by $u^{-1}$ sends $z=u-u^{-1}$ to $-z$, and substitution into the Laurent polynomial ring is injective (the highest Laurent power of a nonzero polynomial in $z$ cannot cancel), this identity gives $\nabla_K(z)=\nabla_K(-z)$ and hence all odd coefficients vanish. Set $u^2=t$. Then $z^2=(u-u^{-1})^2=t+t^{-1}-2\equiv(1+t)^2/t\pmod{(2,(1+t)^4)}$, and $z^4$ is divisible by $(1+t)^4$ in that quotient. Hence [F4] gives $$\Delta_K^\#(t)\equiv1+a_2(\nabla_K)(1+t)^2/t\pmod{(2,(1+t)^4)}.$$ Comparing with [F5], and using that $(1+t)^2/t$ is nonzero modulo $(1+t)^4$, yields $a_2(\nabla_K)\equiv\operatorname{Arf}(K)\pmod2$. [F3, F4, F5, step 1.1, algebra] ∎
 

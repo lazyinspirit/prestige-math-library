@@ -1,0 +1,156 @@
+[
+  {
+    "order": 3084,
+    "id": "numerical-pde-inversion-and-adjoint-error-control",
+    "kind": "A",
+    "category": "inverse-problems",
+    "title": "PDE-constrained inversion and adjoint error control",
+    "companion": "numerical-pde-inversion-and-adjoint-error-control-examples",
+    "requires": [
+      "nonlinear-inverse-problems-and-tangential-cone-conditions",
+      "nonlinear-tikhonov-existence-and-stability",
+      "operator-approximation-and-regularization-error",
+      "finite-element-pde-constrained-optimization",
+      "discrete-continuous-and-pde-adjoint-sensitivities",
+      "finite-element-meshes-and-interpolation",
+      "hilbert-space-geometry-and-riesz-representation"
+    ],
+    "items": [
+      {
+        "id": "def-ip-pde-solver-admissibility-contract",
+        "kind": "definition",
+        "title": "Finite-element PDE solver admissibility and certificate contract",
+        "deps": [
+          "def-ip-nonlinear-forward-map",
+          "def-ip-nonlinear-tikhonov-functional",
+          "def-matching-affine-simplicial-meshes",
+          "def-reference-finite-element-and-unisolvent-dofs",
+          "def-euclidean-inner-product",
+          "thm-riesz-representation-in-finite-dimensions"
+        ],
+        "dependency_level": 2
+      },
+      {
+        "id": "lem-ip-finite-element-reduced-gradient-from-discrete-adjoint",
+        "kind": "lemma",
+        "title": "The finite-element discrete adjoint gives the reduced gradient",
+        "deps": [
+          "def-ip-pde-solver-admissibility-contract",
+          "def-euclidean-inner-product",
+          "thm-riesz-representation-in-finite-dimensions",
+          "thm-chain-rule-for-total-derivatives"
+        ],
+        "dependency_level": 3
+      },
+      {
+        "id": "lem-ip-linear-finite-element-solve-residual-controls-state-error",
+        "kind": "lemma",
+        "title": "Certified inverse bounds turn finite-element solve residuals into state and adjoint error bounds",
+        "deps": [
+          "def-ip-pde-solver-admissibility-contract",
+          "def-euclidean-inner-product",
+          "def-operator-norm"
+        ],
+        "dependency_level": 3
+      },
+      {
+        "id": "prop-ip-discrete-adjoint-gradient-and-residual-status",
+        "kind": "proposition",
+        "title": "Certified discrete-adjoint residuals give sound finite statuses",
+        "deps": [
+          "def-ip-pde-solver-admissibility-contract",
+          "lem-ip-finite-element-reduced-gradient-from-discrete-adjoint",
+          "lem-ip-linear-finite-element-solve-residual-controls-state-error",
+          "def-euclidean-inner-product",
+          "def-operator-norm",
+          "thm-nearest-point-in-a-nonempty-closed-convex-set",
+          "lem-projection-onto-closed-convex-set-is-nonexpansive",
+          "thm-cauchy-schwarz-and-the-euclidean-norm"
+        ],
+        "dependency_level": 4
+      },
+      {
+        "id": "alg-ip-finite-element-pde-tikhonov",
+        "kind": "algorithm",
+        "title": "Finite-budget finite-element PDE Tikhonov inversion",
+        "deps": [
+          "def-ip-pde-solver-admissibility-contract",
+          "lem-ip-finite-element-reduced-gradient-from-discrete-adjoint",
+          "def-ip-nonlinear-tikhonov-functional",
+          "prop-ip-discrete-adjoint-gradient-and-residual-status"
+        ],
+        "dependency_level": 5
+      },
+      {
+        "id": "thm-ip-finite-element-pde-tikhonov-status-soundness-and-termination",
+        "kind": "theorem",
+        "title": "Finite-element PDE Tikhonov statuses are sound and terminate",
+        "deps": [
+          "alg-ip-finite-element-pde-tikhonov",
+          "prop-ip-discrete-adjoint-gradient-and-residual-status",
+          "def-ip-pde-solver-admissibility-contract"
+        ],
+        "dependency_level": 6
+      }
+    ]
+  },
+  {
+    "order": 3085,
+    "id": "numerical-pde-inversion-and-adjoint-error-control-examples",
+    "kind": "B",
+    "category": "inverse-problems",
+    "title": "PDE-constrained inversion and adjoint error control — Examples and Counterexamples",
+    "companion": "numerical-pde-inversion-and-adjoint-error-control",
+    "requires": [
+      "numerical-pde-inversion-and-adjoint-error-control"
+    ],
+    "items": [
+      {
+        "id": "ex-ip-pde-cfl-invalid-iterate",
+        "kind": "example",
+        "title": "A CFL-violating finite-element iterate is rejected before inversion",
+        "deps": [
+          "alg-ip-finite-element-pde-tikhonov",
+          "thm-ip-finite-element-pde-tikhonov-status-soundness-and-termination",
+          "def-ip-pde-solver-admissibility-contract",
+          "def-matching-affine-simplicial-meshes",
+          "def-reference-finite-element-and-unisolvent-dofs"
+        ],
+        "dependency_level": 7
+      },
+      {
+        "id": "cex-ip-pde-biased-under-solved-adjoint-gradient",
+        "kind": "counterexample",
+        "title": "An unchecked under-solved adjoint can reverse the reduced gradient",
+        "deps": [
+          "alg-ip-finite-element-pde-tikhonov",
+          "thm-ip-finite-element-pde-tikhonov-status-soundness-and-termination",
+          "def-ip-pde-solver-admissibility-contract",
+          "lem-ip-finite-element-reduced-gradient-from-discrete-adjoint",
+          "prop-ip-discrete-adjoint-gradient-and-residual-status"
+        ],
+        "dependency_level": 7
+      },
+      {
+        "id": "ex-ip-finite-element-mesh-error-at-zero-solve-residual",
+        "kind": "example",
+        "title": "A zero algebraic solve residual leaves a separate finite-element model error",
+        "deps": [
+          "alg-ip-finite-element-pde-tikhonov",
+          "thm-ip-finite-element-pde-tikhonov-status-soundness-and-termination",
+          "def-ip-pde-solver-admissibility-contract",
+          "def-matching-affine-simplicial-meshes",
+          "def-reference-finite-element-and-unisolvent-dofs",
+          "def-ip-nonlinear-tikhonov-functional",
+          "lem-ip-finite-element-reduced-gradient-from-discrete-adjoint",
+          "def-countable-choice",
+          "def-linear-elliptic-pde-constrained-control-problem",
+          "thm-linear-elliptic-control-state-and-adjoint-wellposedness",
+          "thm-zero-boundary-piecewise-polynomials-in-w10p",
+          "thm-cauchy-schwarz-in-an-inner-product-space"
+        ],
+        "dependency_level": 7
+      }
+    ]
+  }
+]

@@ -1,7 +1,7 @@
 ---
 id: thm-ip-hilbert-schmidt-operator-admits-square-integrable-kernel
 kind: theorem
-title: Hilbert–Schmidt operators on a compact boundary have square-integrable kernels
+title: Mean-zero Hilbert–Schmidt operators on a compact boundary have square-integrable kernels
 status: draft
 origin: pipeline
 pipeline_run: inverse-problems-knot-theory-all-109-2026-10-19

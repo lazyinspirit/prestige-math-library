@@ -28,6 +28,10 @@ sources:
       locator: "§2.2, PDF pp. 6–9."
 verification:
   precheck: n/a
+  judge:
+    model: "gpt-6-luna"
+    verdict: pass
+    date: 2026-10-22
 ---
 
 ## Definition

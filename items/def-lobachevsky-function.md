@@ -20,6 +20,10 @@ sources:
       locator: "Definition 9.2, printed p.174"
 verification:
   precheck: n/a
+  judge:
+    model: "gpt-6-luna"
+    verdict: pass
+    date: 2026-10-22
 ---
 
 ## Definition

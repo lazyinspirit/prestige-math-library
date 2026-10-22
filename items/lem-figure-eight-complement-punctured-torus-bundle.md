@@ -26,6 +26,10 @@ sources:
       locator: "§3.1, Figure 3.2 and printed p.27; Appendix B, Figure B.1 and printed pp.142–143"
 verification:
   precheck: pending
+  judge:
+    model: "gpt-6-luna"
+    verdict: pass
+    date: 2026-10-22
 ---
 
 ## Statement

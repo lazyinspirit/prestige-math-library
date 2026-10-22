@@ -36,7 +36,7 @@ sources:
 
 ## Statement
 
-For a connected regular link diagram $D$ with $c$ crossings, the Laurent-polynomial span of its Kauffman bracket is at most $4c$. If $D$ is reduced and alternating, then changing any one crossing from the all-$A$ state or the all-$B$ state merges two distinct state circles, both extreme coefficients are nonzero, and the bracket span is exactly $4c$. The span of a nonzero Laurent polynomial is its largest exponent minus its smallest exponent.
+For a nonempty connected regular link diagram $D$ with $c$ crossings, the Laurent-polynomial span of its Kauffman bracket is at most $4c$. If $D$ is reduced and alternating, then changing any one crossing from the all-$A$ state or the all-$B$ state merges two distinct state circles, both extreme coefficients are nonzero, and the bracket span is exactly $4c$. The span of a nonzero Laurent polynomial is its largest exponent minus its smallest exponent.
 
 ## Statement references
 
@@ -46,9 +46,9 @@ For a connected regular link diagram $D$ with $c$ crossings, the Laurent-polynom
 
 ## Facts & Assumptions
 
-**Given:** A connected regular link diagram $D$ with $c$ crossings, with all-$A$ and all-$B$ smoothing states as defined by the bracket convention.
+**Given:** A nonempty connected regular link diagram $D$ with $c$ crossings, with all-$A$ and all-$B$ smoothing states as defined by the bracket convention.
 
-[F1] The bracket is the finite sum $\langle D\rangle=\sum_S A^{a(S)-b(S)}\delta^{|S|-1}$ with $\delta=-A^2-A^{-2}$; its states are choices of one smoothing at each crossing ([[def-kauffman-bracket-smoothing-and-loop-value]]).
+[F1] The bracket is defined here only for nonempty diagrams; the empty diagram is outside its domain. For such diagrams it is the finite sum $\langle D\rangle=\sum_S A^{a(S)-b(S)}\delta^{|S|-1}$ with $\delta=-A^2-A^{-2}$; its states are choices of one smoothing at each crossing ([[def-kauffman-bracket-smoothing-and-loop-value]]).
 
 [F2] In a connected alternating diagram, successive crossing visits along every component alternate between over and under, and reducedness means no projection region has a crossing more than once on its boundary ([[def-reduced-alternating-link-diagram]]).
 
@@ -65,9 +65,9 @@ For a connected regular link diagram $D$ with $c$ crossings, the Laurent-polynom
 [F8] **External input, exact use:** For a $k$-component link, the normalized bracket has value $(-2)^{k-1}$ at $A=1$. Kauffman identifies the normalized bracket with the Jones polynomial under $t=A^{-4}$ ([§2, Theorems 2.6 and 2.8](https://www.maths.ed.ac.uk/~v1ranick/papers/kauffmanjones.pdf)); Murasugi proves the value from the skein relation and unlink formula ([Chapter 11, Propositions 11.1.1 and 11.2.6](https://webhomes.maths.ed.ac.uk/~v1ranick/papers/murasug3.pdf)), using the finite crossing-change reduction of [Chapter 4, Proposition 4.4.1](https://webhomes.maths.ed.ac.uk/~v1ranick/papers/murasug3.pdf). These precise results and arguments were read; no source-wide audit is asserted.
 
 ## Proof
-1.1 Let $\mu$ be the number of components represented by $D$. By [F8],
-$$(-A^3)^{-\operatorname{wr}(D)}\langle D\rangle\big|_{A=1}=(-2)^{\mu-1}\ne0.$$
-The writhe-normalizing factor is a Laurent monomial and hence a unit, so $\langle D\rangle$ is nonzero and its span is defined. Now let $s_A$ and $s_B$ be the numbers of circles in the all-$A$ and all-$B$ states. If a state has $j$ $B$-smoothings, then its weight factor is $A^{c-2j}$. A single smoothing change is a band surgery and changes the circle count by exactly $1$ or $-1$, so a state with $k$ circles has $k\le s_A+j$. Since the highest degree of $\delta^{k-1}$ is $2(k-1)$, every state term has degree at most $c-2j+2(k-1)\le c+2(s_A-1)$. Reversing $A$ and $B$ gives minimum degree at least $-c-2(s_B-1)$. Hence $\operatorname{span}_A\langle D\rangle\le2c+2(s_A+s_B-2)$. [given, F1, F8, construct]
+
+
+1.1 Let $\mu$ be the number of components represented by $D$. By [F8], $$(-A^3)^{-\operatorname{wr}(D)}\langle D\rangle\big|_{A=1}=(-2)^{\mu-1}\ne0.$$ The writhe-normalizing factor is a Laurent monomial and hence a unit, so $\langle D\rangle$ is nonzero and its span is defined. Now let $s_A$ and $s_B$ be the numbers of circles in the all-$A$ and all-$B$ states. If a state has $j$ $B$-smoothings, then its weight factor is $A^{c-2j}$. A single smoothing change is a band surgery and changes the circle count by exactly $1$ or $-1$, so a state with $k$ circles has $k\le s_A+j$. Since the highest degree of $\delta^{k-1}$ is $2(k-1)$, every state term has degree at most $c-2j+2(k-1)\le c+2(s_A-1)$. Reversing $A$ and $B$ gives minimum degree at least $-c-2(s_B-1)$. Hence $\operatorname{span}_A\langle D\rangle\le2c+2(s_A+s_B-2)$. [given, F1, F8, construct]
 
 1.2 If $c>0$, the connected projection has finite disk faces. To see this, thicken a spanning tree to a disk, then add the remaining edge strips one at a time. The core of each added edge lies in one complementary disk and is a properly embedded arc there. Its strip cuts that disk along the arc; after rounding corners, the two new boundary curves are smooth Jordan curves, and [F7] makes their closed sides disks. At each stage the new edge lies in one old region and splits it into exactly the two regions adjacent to the new edge, so these disk complements correspond one-to-one to the projection regions. Thus each complementary region has a disk core disjoint from the graph. Now suppose $D$ is reduced and alternating. Color its regions by [F3]. At one crossing choose the color name so the $A$-smoothing follows the two black sectors. Moving along a projection arc to the next crossing, alternation switches which branch is over; the chart definition of the $A$-smoothing therefore continues to follow the same color. Connectedness propagates this choice to every crossing. Thus the all-$A$ state circles trace the black disk cores and the all-$B$ circles trace the white disk cores. Embed the black Tait graph by placing vertices in black cores and drawing each crossing edge through its crossing disk; its complementary faces are precisely the white disk cores. Hence it is connected by [F6], has $c$ edges, $s_A$ vertices, and $s_B$ faces by [F4]. Euler's formula [F5] gives $s_A-c+s_B=2$. [given, F2, F3, F4, F5, F6, F7, construct]
 

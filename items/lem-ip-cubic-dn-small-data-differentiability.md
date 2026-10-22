@@ -58,7 +58,7 @@ has a unique solution in a fixed small $H^s(M)$ ball. The parameter map $\epsilo
 
 [F2] [[lem-ip-conductivity-map-wellposedness]]: on each compact connected component with nonempty boundary, $\|w\|_{L^2}\leq C_{P,j}\|\nabla w\|_{L^2}$ for zero-trace $w$. Compactness and local connectedness give finitely many components, so the maximum of these constants gives the inequality on $M$.
 
-[F3] [[lem-ip-smooth-manifold-elliptic-nonresonant-regularity]]: the zero Dirichlet operator $-\Delta_g$ is invertible; for integer $k\geq0$, zero-trace $F\in H^k$ gives $u\in H^{k+2}$ with $\|u\|_{H^{k+2}}\leq C_k\|F\|_{H^k}$.
+[F3] [[lem-ip-smooth-manifold-elliptic-nonresonant-regularity]]: once the weak Dirichlet kernel is trivial, $-\Delta_g$ has a unique zero-boundary solution for every forcing $F\in L^2(M)$. For integer $k\geq0$ and arbitrary $F\in H^k(M)$, that solution belongs to $H^{k+2}(M)$ with $\|u\|_{H^{k+2}}\leq C_k\|F\|_{H^k}$; no trace condition is imposed on $F$.
 
 [F4] For $n\geq2$, [[cor-sobolev-algebra-above-the-critical-index]] gives the Banach-algebra bound for integer $s$ with $2s>n$ on bounded smooth chart domains; finite localization gives it on $M$. For $n=1$, the one-dimensional fundamental theorem of calculus gives $\|z\|_{L^\infty}\le C\|z\|_{H^1}$ on bounded intervals. Apply this to derivatives through order $s-1$ and use the product rule to bound each derivative of $uv$ through order $s$ in $L^2$; this gives the same algebra bound on each chart and hence on $M$.
 

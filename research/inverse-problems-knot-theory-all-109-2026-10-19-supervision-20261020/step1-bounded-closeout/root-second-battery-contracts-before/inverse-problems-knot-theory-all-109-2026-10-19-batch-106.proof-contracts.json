@@ -1,0 +1,868 @@
+{
+  "version": 1,
+  "scope": [
+    "lem-jones-vassiliev-basis-decomposition",
+    "def-jones-vassiliev-coefficient-vectors",
+    "rem-jones-polynomial-unknot-detection-status",
+    "ex-knot-kt-51-worked-cases",
+    "cex-knot-kt-51-boundary-case"
+  ],
+  "contracts": {
+    "lem-jones-vassiliev-basis-decomposition": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-polynomial-ring-over-a-commutative-ring",
+          "source_section": "Definition",
+          "quote": "The **polynomial ring** $R[x]$ is the set of all finitely supported functions $a\\colon\\mathbb N\\to R$.",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "thm-polynomial-ring-is-a-commutative-ring",
+          "source_section": "Statement",
+          "quote": "For every commutative ring $R$, the coefficientwise addition and convolution multiplication of [[def-polynomial-ring-over-a-commutative-ring]] make $R[x]$ a commutative ring.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "def-generated-and-principal-ideals",
+          "source_section": "Definition",
+          "quote": "For $S\\subseteq R$, define $(S)$ to be the intersection of all two-sided ideals of $R$ containing $S$.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "def-quotient-ring",
+          "source_section": "Definition",
+          "quote": "The quotient ring $R/I$ with $(r+I)(s+I)=rs+I$.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "thm-monic-polynomial-division",
+          "source_section": "Statement",
+          "quote": "Let $R$ be a commutative ring and let $g\\in R[x]$ be monic. For every $f\\in R[x]$ there are unique $q,r\\in R[x]$ such that $$ f=qg+r,\\qquad r=0\\ \\text{or}\\ \\deg r<\\deg g. $$",
+          "uses": [
+            "1.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "Let Q=R[X]/(G). By [F2] and [F3], this is a quotient ring. Since G is monic of degree two, [F4] gives every class in Q a representative a(p)+b(p)X of degree at most one in X. If two such representatives define the same class, their difference is a multiple of G and has degree less than two; uniqueness in [F4] forces the difference to be zero. Thus this representative is unique.",
+          "step": "1.1",
+          "inputs": [
+            "given",
+            "F1",
+            "F2",
+            "F3",
+            "F4",
+            "construct"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "In Q, the relation X^2-pX-1=0 gives X(X-p)=1, so X is invertible with inverse X-p. The homomorphism Q→Z[x,x^{-1}] sending p↦x-x^{-1} and X↦x respects G=0. Conversely, sending x↦X defines a homomorphism Z[x,x^{-1}]→Q because X^{-1}=X-p. The composites fix the generators p,X and x, respectively, so these homomorphisms are inverse. The unique representatives from step 1.1 therefore give the asserted unique Laurent decomposition.",
+          "step": "2.1",
+          "inputs": [
+            "given",
+            "F1",
+            "step 1.1",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The item has no empty-object boundary in its stated domain."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "The zero Laurent polynomial has the unique decomposition a=b=0 by steps 1.1–2.1."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "The constant Laurent polynomial 1 has decomposition a=1, b=0 by the unique representative in step 1.1."
+        },
+        {
+          "case": "degenerate",
+          "status": "not_applicable",
+          "reason": "No degenerate parameter or limiting case is part of the statement."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "The objects are closed knots or algebraic rings; there are no free boundary endpoints."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Steps 1.1–2.1 use finite polynomial and quotient operations only; no family is selected."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The claim is not an if-and-only-if assertion."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The claim is not an if-and-only-if assertion."
+        }
+      ],
+      "axioms": [],
+      "finite_checks": [],
+      "finite_smoke": [],
+      "risk_review": {
+        "status": "clear",
+        "notes": "The local quotient identification supplies the exact existence and uniqueness used by the coefficient definition."
+      },
+      "proof_status": "complete-local-proof",
+      "proof_status_evidence": "Both the monic-remainder representation and the inverse Laurent-ring maps are derived in the two numbered steps.",
+      "unresolved_suppliers": [],
+      "unresolved_assumptions": []
+    },
+    "def-jones-vassiliev-coefficient-vectors": {
+      "citations": [],
+      "derivations": [],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The item has no empty-object boundary in its stated domain."
+        },
+        {
+          "case": "zero",
+          "status": "not_applicable",
+          "reason": "The item has no zero-valued parameter boundary."
+        },
+        {
+          "case": "one",
+          "status": "not_applicable",
+          "reason": "The item has no one-valued parameter boundary."
+        },
+        {
+          "case": "degenerate",
+          "status": "not_applicable",
+          "reason": "No degenerate parameter or limiting case is part of the statement."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "The objects are closed knots or algebraic rings; there are no free boundary endpoints."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "No arbitrary family selection is part of the argument."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The claim is not an if-and-only-if assertion."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The claim is not an if-and-only-if assertion."
+        }
+      ],
+      "axioms": [
+        {
+          "axiom": "AC",
+          "supplier": "def-axiom-of-choice",
+          "facts": [],
+          "uses": [
+            "Jones invariant normalization"
+          ],
+          "declared_in_frontmatter": "Full AC is required by the library Jones-invariance supplier. The coefficient decomposition itself is a finite, choice-free algebraic construction."
+        }
+      ],
+      "finite_checks": [],
+      "finite_smoke": [],
+      "risk_review": {
+        "status": "clear",
+        "notes": "The unique Laurent decomposition is proved by lem-jones-vassiliev-basis-decomposition; no finite-type property is asserted."
+      },
+      "proof_status": "not-applicable",
+      "proof_status_evidence": "Definition only; the cited local lemma establishes the unique coefficient decomposition.",
+      "unresolved_suppliers": [],
+      "unresolved_assumptions": []
+    },
+    "rem-jones-polynomial-unknot-detection-status": {
+      "citations": [],
+      "derivations": [],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The item has no empty-object boundary in its stated domain."
+        },
+        {
+          "case": "zero",
+          "status": "not_applicable",
+          "reason": "The item has no zero-valued parameter boundary."
+        },
+        {
+          "case": "one",
+          "status": "not_applicable",
+          "reason": "The item has no one-valued parameter boundary."
+        },
+        {
+          "case": "degenerate",
+          "status": "not_applicable",
+          "reason": "No degenerate parameter or limiting case is part of the statement."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "The objects are closed knots or algebraic rings; there are no free boundary endpoints."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "No arbitrary family selection is part of the argument."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The claim is not an if-and-only-if assertion."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The claim is not an if-and-only-if assertion."
+        }
+      ],
+      "axioms": [
+        {
+          "axiom": "AC",
+          "supplier": "def-axiom-of-choice",
+          "facts": [],
+          "uses": [
+            "library Jones normalization in the reported formulation"
+          ],
+          "declared_in_frontmatter": "The library Jones normalization uses full AC; the crossing-number convention declares AC_omega. The finite-type terminology concerns unframed knots, whose singular-knot definition is choice-free."
+        },
+        {
+          "axiom": "AC_omega",
+          "supplier": "def-countable-choice",
+          "facts": [],
+          "uses": [
+            "crossing-number notation c(K)"
+          ],
+          "declared_in_frontmatter": "The library Jones normalization uses full AC; the crossing-number convention declares AC_omega. The finite-type terminology concerns unframed knots, whose singular-knot definition is choice-free."
+        }
+      ],
+      "finite_checks": [],
+      "finite_smoke": [],
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "/root (recorded-scope metadata reconciliation only)",
+        "notes": "Prior blocker metadata is superseded only at the exact accepted scope linked in owner_metadata_note. Explicit imported inputs and source reading limits remain as recorded. No fresh mathematical audit or native readiness is asserted.",
+        "historical_review_metadata": {
+          "notes": "The status wording and source report are complete, but the batch-99 ordinary/enhanced A-polynomial dependency closure has backward justified_by edges reported by scoped depcheck. The direct definition bodies are present; the transitive dependency graph requires owner reconciliation."
+        }
+      },
+      "proof_status": "not-applicable",
+      "proof_status_evidence": "Historical metadata hold superseded at the exact accepted whole-original scope cited in owner_metadata_note; established imported dependencies remain explicit; no new proof review or native readiness credit.",
+      "unresolved_suppliers": [
+        {
+          "id": "def-knot-a-polynomial",
+          "status": "dependency-graph-open",
+          "required_interface": "ordinary reduced boundary-image curve and Laurent polynomial up to ±M^aL^b, recording the abelian factor; current body is present, but its justified_by links to lem-knot-boundary-eigenvalue-locus-defined-over-q and lem-laurent-algebraic-curve-has-principal-equation fail the forward dependency check"
+        },
+        {
+          "id": "def-enhanced-a-polynomial",
+          "status": "dependency-graph-open",
+          "required_interface": "separate irreducible-character component definition and ordinary-polynomial relation; current body is present, but its justified_by edge to def-knot-a-polynomial fails the forward dependency check"
+        }
+      ],
+      "unresolved_assumptions": [
+        "The transitive supplier def-sl-two-character-variety-and-peripheral-eigenvalues also has a backward justified_by edge to thm-invariant-ring-finite-generation-and-affine-categorical-quotient; the batch-99 dependency chain is open pending owner reconciliation.",
+        "The source’s diagram-level reductions in Proposition 5.12, especially exceptional-state collapse, smoothing proxy, and two-machine locality, remain unverified here; the item states this limitation and does not claim theorem acceptance.",
+        "Do not infer a Jones-detection theorem from the unverified Carmi–Cohen v1 claim."
+      ],
+      "owner_metadata_note": {
+        "accepted_scope": "Retained complete nonlogical formulation/source-status scope from original target metadata. No claim of solving Jones unknot detection or fresh exhaustive status search. Upstream justification/page metadata holds remain separate.",
+        "accepted_scope_evidence": [
+          "research/inverse-problems-knot-theory-all-109-2026-10-19-math-resolution-map.json"
+        ],
+        "source_boundary": {
+          "sources": {
+            "references": [
+              {
+                "title": "Avishy Carmi and Eliahu Cohen, On trivial Jones–Vassiliev polynomials, arXiv:2606.22410v1, submitted 2026-06-21",
+                "url": "https://arxiv.org/pdf/2606.22410v1"
+              },
+              {
+                "title": "Justin Roberts, Knots Knotes, §4.4.8",
+                "url": "https://webhomes.maths.ed.ac.uk/~v1ranick/papers/knotes.pdf"
+              },
+              {
+                "title": "Louis H. Kauffman, Combinatorial Knot Theory and the Jones Polynomial, arXiv:2204.12104v2, §2",
+                "url": "https://arxiv.org/pdf/2204.12104v2"
+              }
+            ]
+          },
+          "provenance": {
+            "statement": "literature-derived",
+            "proof": "not-applicable"
+          },
+          "axiom_use": "The library Jones normalization uses full AC; the crossing-number convention declares AC_omega. The finite-type terminology concerns unframed knots, whose singular-knot definition is choice-free.",
+          "import_fields": {},
+          "declared_source_remarks": null
+        },
+        "historical_preimage": "research/inverse-problems-knot-theory-all-109-2026-10-19-supervision-20261020/step1-bounded-closeout/contract-final-before/research/inverse-problems-knot-theory-all-109-2026-10-19-batch-106.proof-contracts.json",
+        "new_math_acceptance": false
+      }
+    },
+    "ex-knot-kt-51-worked-cases": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-kauffman-bracket-smoothing-and-loop-value",
+          "source_section": "Definition",
+          "quote": "Set $$\\delta:=-A^2-A^{-2}$$ and define the **Kauffman bracket** of $D$ by $$\\langle D\\rangle:=\\sum_{S:C(D)\\to\\{A,B\\}} A^{a(S)-b(S)}\\delta^{|S|-1}\\in\\mathbb Z[A^{\\pm1}].$$",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "lem-kauffman-smoothing-operators-for-braid-crossings",
+          "source_section": "Statement",
+          "quote": "Then the positive crossing has bracket operator $A I+A^{-1}e_i$, and the negative crossing has bracket operator $A^{-1}I+A e_i$.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "def-temperley-lieb-closure-trace-and-partial-trace",
+          "source_section": "Definition",
+          "quote": "For a basis diagram $D:n\\to n$, close each top endpoint to the corresponding bottom endpoint outside the rectangle and let $c(D)$ be the number of circles in the resulting finite graph. Define $$\\operatorname{Tr}_n(D)=\\delta^{c(D)}$$",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "def-temperley-lieb-diagram-category",
+          "source_section": "Definition",
+          "quote": "Each component is a path joining two exterior boundary points or a closed cycle. Remove every cycle and multiply the remaining exterior matching by $\\delta^c$, where $c$ is the number of removed cycles.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "def-temperley-lieb-diagram-category",
+          "source_section": "Definition",
+          "quote": "For $1\\le i<n$, let $d_i\\in M_R(n,n)$ be the diagram with a cap joining top points $i,i+1$, a cup joining bottom points $i,i+1$, and vertical through strands at every other position.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "lem-temperley-lieb-generators-satisfy-local-relations",
+          "source_section": "Statement",
+          "quote": "d_i^2=\\delta d_i\\ (1\\le i<n)",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "def-elementary-geometric-half-twist",
+          "source_section": "Definition",
+          "quote": "and the endpoint permutation is the transposition of $i$ and $i+1$",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "def-closure-of-a-geometric-braid",
+          "source_section": "Definition",
+          "quote": "In particular the number of components equals the number of cycles of $\\pi$.",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F6",
+          "source": "def-oriented-crossing-sign-writhe-and-blackboard-framing",
+          "source_section": "Definition",
+          "quote": "This convention makes the positive geometric Artin half twist positive.",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F7",
+          "source": "thm-bracket-state-sum-matches-library-jones-specialization",
+          "source_section": "Statement",
+          "quote": "With $A=t^{-1/4}$, these values satisfy $$V_K(t)=f_K(t^{-1/4}).$$",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F8",
+          "source": "def-temperley-lieb-quotient-and-jones-specialization",
+          "source_section": "Definition",
+          "quote": "Then $V$ is an invariant of nonempty oriented links with $V(\\text{unknot})=1",
+          "uses": [
+            "5.1"
+          ]
+        },
+        {
+          "fact": "F9",
+          "source": "def-jones-vassiliev-coefficient-vectors",
+          "source_section": "Definition",
+          "quote": "The **Jones–Vassiliev coefficient vector of order $q$** is $$f_q(K):=(a_q(K),b_q(K))^{\\mathsf T},$$",
+          "uses": [
+            "3.1",
+            "4.1"
+          ]
+        },
+        {
+          "fact": "F9",
+          "source": "lem-jones-vassiliev-basis-decomposition",
+          "source_section": "Statement",
+          "quote": "Every Laurent polynomial $P(x)\\in\\mathbb Z[x,x^{-1}]$ has a unique expression $$P(x)=a(p)+b(p)x$$ with $a,b\\in\\mathbb Z[p]",
+          "uses": [
+            "3.1",
+            "4.1"
+          ]
+        },
+        {
+          "fact": "F10",
+          "source": "def-crossing-number-of-link",
+          "source_section": "Definition",
+          "quote": "Assume $\\mathrm{AC}_\\omega$. Let $K$ be an unoriented link type in $S^3$. Its **crossing number** $c(K)$ is the least element of $$\\{\\,n\\in\\mathbb N:\\text{some regular diagram of }K\\text{ has exactly }n\\text{ crossings}\\,\\}.$$",
+          "uses": [
+            "5.1"
+          ]
+        },
+        {
+          "fact": "A1",
+          "source": "def-axiom-of-choice",
+          "source_section": "Definition",
+          "quote": "Every family of nonempty sets has a choice function",
+          "uses": [
+            "2.1",
+            "5.1"
+          ]
+        },
+        {
+          "fact": "A2",
+          "source": "def-countable-choice",
+          "source_section": "Definition",
+          "quote": "The **Axiom of Countable Choice**, written $\\mathrm{AC}_\\omega$, is the following statement.",
+          "uses": [
+            "5.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "For a state with k B-smoothings, [F2] gives a stack of k copies of e1 and 3-k copies of I. If k=0, the closure has two circles by [F3]. If k≥1, repeated use of e1^2=δe1 from [F4] and the one-circle closure of e1 in [F3] gives exactly k circles. There are binomial(3,k) choices, so [F1] gives the complete grouped state sum with rows (0,1,2,A^3δ), (1,3,1,3A), (2,3,2,3A^{-1}δ), (3,1,3,A^{-3}δ^2).",
+          "step": "1.1",
+          "inputs": [
+            "given",
+            "F1",
+            "F2",
+            "F3",
+            "F4",
+            "construct"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "Substituting δ=-A^2-A^{-2} into the grouped sum gives <T>=A^3δ+3A+3A^{-1}δ+A^{-3}δ^2=A^{-7}-A^{-3}-A^5. By [F5] the closure is one knot component, and [F6] gives writhe 3. Thus f_T(A)=(-A^3)^{-3}<T>=A^{-4}+A^{-12}-A^{-16}; under [A1], [F7] identifies this with V_T(t)=t+t^3-t^4.",
+          "step": "2.1",
+          "inputs": [
+            "A1",
+            "F5",
+            "F6",
+            "F7",
+            "step 1.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "claim": "Write x^n=A_n(p)+B_n(p)x. From x^2=px+1, multiplication by x gives A_{n+1}=B_n and B_{n+1}=A_n+pB_n. Starting with x^0=1 and x^1=x yields the complete recurrence table through n=8 displayed in the item, including x^2, x^6, and x^8.",
+          "step": "3.1",
+          "inputs": [
+            "given",
+            "F9",
+            "step 2.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-4-1",
+          "claim": "Combining the rows for n=2,6,8 gives a(p)=1-3p^2-4p^4-p^6 and b(p)=-6p^3-5p^5-p^7. Uniqueness in [F9] therefore gives f_2(T)=(-3,0)^T≠0.",
+          "step": "4.1",
+          "inputs": [
+            "F9",
+            "step 2.1",
+            "step 3.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-5-1",
+          "claim": "The computed Jones polynomial is not 1. Under [A1], [F8] gives V_U=1 and invariance under ambient isotopy, so T is nontrivial. The displayed braid has three crossings, so under [A2] and [F10] its crossing-number set contains 3 and c(T)≤3. This example verifies a nonzero coefficient at order 2 for this single knot; the general bound and unknot-detection claim in the Example section are only reported from the source and are not used as premises.",
+          "step": "5.1",
+          "inputs": [
+            "given",
+            "A1",
+            "A2",
+            "F8",
+            "F10",
+            "step 2.1",
+            "step 4.1"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The item has no empty-object boundary in its stated domain."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "The recurrence includes x^0=1 and the expansion computation in steps 3.1–4.1."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "The closure-cycle count and Jones normalization in step 2.1 verify that the diagram has one knot component."
+        },
+        {
+          "case": "degenerate",
+          "status": "not_applicable",
+          "reason": "No degenerate parameter or limiting case is part of the statement."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "The objects are closed knots or algebraic rings; there are no free boundary endpoints."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Steps 1.1 and 3.1 enumerate finitely many states and recurrence rows and perform deterministic algebra; the Jones and crossing-number interfaces carry their stated choice assumptions."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The claim is not an if-and-only-if assertion."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The claim is not an if-and-only-if assertion."
+        }
+      ],
+      "axioms": [
+        {
+          "axiom": "AC",
+          "supplier": "def-axiom-of-choice",
+          "facts": [
+            "A1"
+          ],
+          "uses": [
+            "1.2",
+            "3.1"
+          ],
+          "declared_in_frontmatter": "Full AC is used through the Jones-invariance supplier; AC_omega is the declared crossing-number hypothesis. The finite state and Laurent-reduction calculations are choice-free."
+        },
+        {
+          "axiom": "AC_omega",
+          "supplier": "def-countable-choice",
+          "facts": [
+            "A2"
+          ],
+          "uses": [
+            "3.1"
+          ],
+          "declared_in_frontmatter": "Full AC is used through the Jones-invariance supplier; AC_omega is the declared crossing-number hypothesis. The finite state and Laurent-reduction calculations are choice-free."
+        }
+      ],
+      "finite_checks": [
+        {
+          "name": "positive-trefoil-eight-state-sum",
+          "method": "Exact finite Temperley–Lieb pairing enumeration",
+          "anchor_steps": [
+            "1.1",
+            "2.1"
+          ],
+          "input": {
+            "crossings": 3,
+            "states": 8,
+            "grouped_rows": [
+              {
+                "b_smoothings": 0,
+                "states": 1,
+                "circles": 2,
+                "contribution": "A^3 delta"
+              },
+              {
+                "b_smoothings": 1,
+                "states": 3,
+                "circles": 1,
+                "contribution": "3A"
+              },
+              {
+                "b_smoothings": 2,
+                "states": 3,
+                "circles": 2,
+                "contribution": "3A^-1 delta"
+              },
+              {
+                "b_smoothings": 3,
+                "states": 1,
+                "circles": 3,
+                "contribution": "A^-3 delta^2"
+              }
+            ]
+          },
+          "calculation": "The rows sum to A^3 delta+3A+3A^-1 delta+A^-3 delta^2=A^-7-A^-3-A^5. Writhe 3 gives t+t^3-t^4.",
+          "result": {
+            "bracket": "A^-7-A^-3-A^5",
+            "Jones": "t+t^3-t^4",
+            "f2": "(-3,0)^T"
+          }
+        },
+        {
+          "name": "trefoil-jvp-laurent-recurrence",
+          "method": "Exact recurrence from x^2=px+1",
+          "anchor_steps": [
+            "3.1",
+            "4.1"
+          ],
+          "input": {
+            "powers": [
+              2,
+              6,
+              8
+            ],
+            "recurrence": "A_(n+1)=B_n; B_(n+1)=A_n+pB_n"
+          },
+          "calculation": "V_T(x)=x^2+x^6-x^8=1-3p^2-4p^4-p^6+x(-6p^3-5p^5-p^7).",
+          "result": {
+            "coefficient_order_2": "(-3,0)^T",
+            "nonzero": true
+          }
+        }
+      ],
+      "finite_smoke": [],
+      "risk_review": {
+        "status": "clear",
+        "notes": "The local finite calculation is complete; the general Carmi–Cohen proof is reported without acceptance."
+      },
+      "proof_status": "complete-local-proof",
+      "proof_status_evidence": "The eight finite smoothing states, normalization, Laurent recurrence, and coefficient extraction are mapped to exact supplier excerpts and proof steps.",
+      "unresolved_suppliers": [],
+      "unresolved_assumptions": []
+    },
+    "cex-knot-kt-51-boundary-case": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-jones-vassiliev-coefficient-vectors",
+          "source_section": "Definition",
+          "quote": "$V_U(x)=1$ for the unknot $U",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "def-crossing-number-of-link",
+          "source_section": "Definition",
+          "quote": "Assume $\\mathrm{AC}_\\omega$. Let $K$ be an unoriented link type in $S^3$. Its **crossing number** $c(K)$ is the least element of $$\\{\\,n\\in\\mathbb N:\\text{some regular diagram of }K\\text{ has exactly }n\\text{ crossings}\\,\\}.$$",
+          "uses": [
+            "1.2"
+          ]
+        },
+        {
+          "fact": "A1",
+          "source": "def-axiom-of-choice",
+          "source_section": "Definition",
+          "quote": "Every family of nonempty sets has a choice function",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "A2",
+          "source": "def-countable-choice",
+          "source_section": "Definition",
+          "quote": "The **Axiom of Countable Choice**, written $\\mathrm{AC}_\\omega$, is the following statement.",
+          "uses": [
+            "1.2"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "Under [A1], V_U(x)=1 by [F1]. Its unique coefficient expansion is a_0(U)=1, b_0(U)=0, and a_q(U)=b_q(U)=0 for every q≥1. Thus f_q(U)=(0,0)^T for every positive order.",
+          "step": "1.1",
+          "inputs": [
+            "given",
+            "A1",
+            "F1",
+            "construct",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-1-2",
+          "claim": "The displayed diagram has zero crossings, so under [A2] the set in [F2] contains 0; all crossing counts are nonnegative. Hence c(U)=0, and there is no integer q satisfying 2≤q≤3c(U)=0.",
+          "step": "1.2",
+          "inputs": [
+            "given",
+            "A2",
+            "F2",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "The proposed universal statement includes U, but steps 1.1 and 1.2 show that no required nonzero vector or admissible order exists for it. Therefore the statement is false.",
+          "step": "2.1",
+          "inputs": [
+            "given",
+            "step 1.1",
+            "step 1.2"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The item has no empty-object boundary in its stated domain."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Step 1.2 checks the zero-crossing unknot and the empty order interval."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "The given input is the one-component unknot; step 1.1 uses its normalized Jones value."
+        },
+        {
+          "case": "degenerate",
+          "status": "not_applicable",
+          "reason": "No degenerate parameter or limiting case is part of the statement."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "The objects are closed knots or algebraic rings; there are no free boundary endpoints."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Steps 1.1–1.2 use the given unknot and its explicit crossing-free diagram without arbitrary selection."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The claim is not an if-and-only-if assertion."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The claim is not an if-and-only-if assertion."
+        }
+      ],
+      "axioms": [
+        {
+          "axiom": "AC",
+          "supplier": "def-axiom-of-choice",
+          "facts": [
+            "A1"
+          ],
+          "uses": [
+            "1.1"
+          ],
+          "declared_in_frontmatter": "Full AC is used through the Jones-invariance supplier; AC_omega is the declared crossing-number hypothesis. The unknot expansion and empty coefficient range are choice-free."
+        },
+        {
+          "axiom": "AC_omega",
+          "supplier": "def-countable-choice",
+          "facts": [
+            "A2"
+          ],
+          "uses": [
+            "1.2"
+          ],
+          "declared_in_frontmatter": "Full AC is used through the Jones-invariance supplier; AC_omega is the declared crossing-number hypothesis. The unknot expansion and empty coefficient range are choice-free."
+        }
+      ],
+      "finite_checks": [
+        {
+          "name": "unknot-jvp-coefficient-boundary",
+          "method": "Exact constant-polynomial expansion",
+          "anchor_steps": [
+            "1.1",
+            "1.2"
+          ],
+          "input": {
+            "Jones_polynomial": "1",
+            "crossing_number": 0
+          },
+          "calculation": "The unique expansion is f_0=(1,0)^T and f_q=(0,0)^T for q≥1; no integer lies in [2,3c(U)]=[2,0].",
+          "result": {
+            "positive_coefficients_zero": true,
+            "interval_empty": true
+          }
+        }
+      ],
+      "finite_smoke": [],
+      "risk_review": {
+        "status": "clear",
+        "notes": "This refutes only the false universal extension to the unknot; it does not assert that the source's nontrivial-knot theorem is false."
+      },
+      "proof_status": "complete-local-proof",
+      "proof_status_evidence": "The coefficient expansion and crossing-number boundary are checked directly for the explicit unknot.",
+      "unresolved_suppliers": [],
+      "unresolved_assumptions": []
+    }
+  }
+}

@@ -44,7 +44,7 @@ be the quotient of the horoball $t\ge1$. If $A$ is the Euclidean area of a funda
 
 ## Proof
 
-1.1 Let $Q$ be a fundamental parallelogram of area $A$. Integrating the density from [F1] over $Q\times[1,\infty)$ gives $\operatorname{Vol}(C)=\int_Q\int_1^\infty t^{-3}\,dt\,dx\,dy=A[1/(2t^2)]_1^\infty=A/2$. The improper integral converges because $t^{-3}$ is integrable on $[1,\infty)$. [given, F1, algebra]
+1.1 Let $Q$ be a fundamental parallelogram of area $A$. Integrating the density from [F1] over $Q\times[1,\infty)$ gives $\operatorname{Vol}(C)=\int_Q\int_1^\infty t^{-3}\,dt\,dx\,dy=A[-1/(2t^2)]_1^\infty=A/2$. The improper integral converges because $t^{-3}$ is integrable on $[1,\infty)$. [given, F1, algebra]
 
 2.1 Along any piecewise smooth path with height coordinate $t$, its hyperbolic length is at least $\int |dt|/t$, since the metric contains the term $dt^2/t^2$. A path escaping the end has $t\to\infty$, so this lower bound diverges as $\log t$. Thus the end is at infinite distance and is complete toward its ideal end. [given, F1, algebra] ∎
 

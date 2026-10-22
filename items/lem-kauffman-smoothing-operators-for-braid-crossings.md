@@ -17,6 +17,11 @@ axiom_use: The local crossing calculation is finite and choice-free.
 provenance:
   statement: literature-derived
   proof: ai-altered
+verification:
+  judge:
+    model: "gpt-6-luna"
+    verdict: pass
+    date: 2026-10-22
 sources:
   references:
     - title: Louis H. Kauffman, New Invariants in the Theory of Knots, Astérisque

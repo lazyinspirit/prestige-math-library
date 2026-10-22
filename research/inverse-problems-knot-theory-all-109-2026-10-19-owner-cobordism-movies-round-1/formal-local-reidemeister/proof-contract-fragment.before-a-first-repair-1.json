@@ -1,0 +1,683 @@
+{
+  "version": 1,
+  "scope": [
+    "lem-barnatan-formal-inverse-boundary-crossings",
+    "lem-barnatan-formal-kink-retractions",
+    "lem-barnatan-cochain-cones-preserve-strong-retracts",
+    "lem-barnatan-formal-third-reidemeister-equivalence"
+  ],
+  "contracts": {
+    "lem-barnatan-formal-inverse-boundary-crossings": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-barnatan-open-tangle-cobordism-complexes",
+          "source_section": "Definition",
+          "quote": "Fix a based closed disk $D$ and a finite even subset $B\\subset\\partial D$. A smoothing is a compact smooth one-manifold in $D$, with boundary precisely $B$ and fixed radial collars there; it may contain circles. A morphism from $P$ to $Q$ is a compact orientable, not separately oriented, smooth surface with corners in $D\\times[0,1]$, with bottom $P$, top $Q$, side boundary $B\\times[0,1]$ and fixed product collars. Identify surfaces by ambient isotopy relative to these boundary collars. Take free abelian morphism groups, compose by stacking, and impose the following relations in every surrounding surface: a sphere component is zero; a torus component may be deleted with factor $2$; and $C_{12}+C_{34}=C_{13}+C_{24}$, where $C_{ij}$ attaches a tube between disk patches $i,j$ among four disjoint patches in a ball. Denote the resulting category by $\\mathcal C(B)$.\n\nFor a surface $C$ set $\\deg C=\\chi(C)-|B|/2$. Permit formal shifts $P\\{a\\}$, with a surface of degree $e$ having degree $e+b-a$ as a map $P\\{a\\}\\to Q\\{b\\}$. Take finite direct sums with matrices of morphisms. A complex is a bounded cochain complex in this additive category, whose differential has internal degree zero. A chain map has cochain degree zero; all homotopies have cochain degree $-1$. Unless specified otherwise, maps and homotopies have internal degree zero. Two chain maps are homotopic when $f-g=dh+hd$. Write $K(B)$ for the category with these complexes as objects and chain maps modulo homotopy as morphisms. Call a complex simple if its invertible endomorphisms in $K(B)$ of internal degree zero are exactly the two maps $\\pm\\operatorname{id}$ (allowing coincidence when the object is zero).\n\nA planar template is a disk with finitely many numbered input disks removed and a properly embedded one-manifold of arcs and circles in the remainder, meeting each boundary in its prescribed marked points. It acts on smoothings by insertion, and on surfaces by insertion in the template crossed with $[0,1]$. Extend by multilinearity to finite sums. For ordered complexes $C_1,\\ldots,C_s$ its totalization has term $\\bigoplus_{r_1+\\cdots+r_s=r}D(C_1^{r_1},\\ldots,C_s^{r_s})$, with shifts added, and differential $\\sum_i(-1)^{r_1+\\cdots+r_{i-1}}D(1,\\ldots,d_i,\\ldots,1)$ on that summand. For homogeneous maps $f_i$ of cochain degrees $a_i$, use the sign $(-1)^{\\sum_i a_i\\sum_{j<i}r_j}$ on $D(f_1,\\ldots,f_s)$, evaluated on the input summand of degrees $(r_j)$; this is the usual tensor sign convention, independently of the internal grading.",
+          "uses": [
+            "1.1",
+            "2.1",
+            "2.2",
+            "3.2",
+            "5.1",
+            "6.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "lem-barnatan-open-pairings-have-scalar-degree-zero-endomorphisms",
+          "source_section": "Statement",
+          "quote": "Assume countable choice. In the open Bar-Natan category, let $P$ be a smoothing consisting of $k$ arcs and no circles, including $k=0$. The map $\\mathbb Z\\to\\operatorname{End}^0(P)$ sending $n$ to $n\\operatorname{id}_P$ is an isomorphism of rings. Consequently the one-term complex $P$, with any common grading shift, is simple.",
+          "uses": [
+            "1.1",
+            "5.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "lem-barnatan-planar-homotopies-and-conditional-boundary-crossing-simplicity",
+          "source_section": "Statement",
+          "quote": "In the open Bar-Natan categories, planar totalization defines operations on bounded complexes and on their homotopy categories, preserving internal degrees and homotopy equivalences. Simplicity is invariant under an internal degree zero chain homotopy equivalence. In particular let $A$ and $B$ be the operations of adjoining a fixed boundary crossing complex and its proposed inverse, each using precisely two adjacent boundary legs. Suppose local internal degree zero chain homotopy equivalences of their two possible composites with the straight two-strand identity complex have been supplied. Then a complex $C$ is simple if and only if $A(C)$ is simple. This is a conditional assertion about these local inverse equivalences; it does not assert Reidemeister invariance or provide crossing complexes or their inverse maps.",
+          "uses": [
+            "6.1"
+          ]
+        },
+        {
+          "fact": "A1",
+          "source": "def-countable-choice",
+          "source_section": "Definition",
+          "quote": "The **Axiom of Countable Choice**, written $\\mathrm{AC}_\\omega$, is the following\nstatement.\n\n> For every family $(X_n)_{n \\in \\mathbb{N}}$ of nonempty sets indexed by\n> $\\mathbb{N}$ there is a function $f$ with domain $\\mathbb{N}$ such that\n> $f(n) \\in X_n$ for every $n \\in \\mathbb{N}$.\n\nEquivalently, in the vocabulary of [[def-choice-function]]: every at most\ncountable family of nonempty sets ([[def-countable]]) has a choice function.",
+          "uses": [
+            "1.1",
+            "5.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "Write $Z=E\\sqcup O$, where $O$ is a small circle between the two arcs of $E$, and name those arcs $a$ (bottom) and $b$ (top). Let $u:E\\to Z$ create $O$ by a disjoint disk and let $e:Z\\to E$ kill it by a disjoint disk. Let $\\Delta_b:E\\to Z$ split $O$ from arc $b$, and let $m_a:Z\\to E$ merge $O$ into arc $a$. Each is a single saddle, with product curtains on the untouched pieces. These surfaces have fixed standard unknotted bands inside the rectangle. The relations needed are $eu=0$, $m_a u=1_E$, $e\\Delta_b=1_E$ and $ts=m_a\\Delta_b$. For the first, birth followed by death is a disjoint sphere and S applies. In each of the next two, the new disk and its adjacent saddle cancel to a curtain disk while the other arc stays a curtain; these are disk systems and [F2] makes the identification relative to the prescribed collars. For the last, take the two disjoint crossing disks of an RII bigon: the two saddle bands attach to the original smoothing in those separate disks. Attaching the first then the second, or the second then the first, gives the same banded surface by interchanging their time coordinates in the disjoint disks. The two routes are respectively $ts$ and $m_a\\Delta_b$. Equivalently both give a tube between the two $E$ curtain disks. This identifies actual embedded surfaces, not merely their abstract topological types.",
+          "step": "1.1",
+          "inputs": [
+            "F1",
+            "F2",
+            "A1",
+            "construct"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "The remaining identity in $\\operatorname{End}(Z)$ is $\\Delta_b e+u m_a=1_Z+u t s e$. To see its exact four-tube instance, start with the two $E$ curtains, a disk capping the incoming $O$, and a disjoint disk creating the outgoing $O$. There are four distinct disk sheets, named $a,b,c,d$ respectively; put one patch on each in the standard local ball between the curtains and the cap/cup disks. Tubes inside this ball are unknotted and join the indicated patches. Joining $a$ to $b$ gives $u t s e$ by step 1.1; joining $c$ to $d$ gives the annular $O$ curtain together with the $E$ curtains, hence $1_Z$. Joining $a$ to $c$ gives $u m_a$ (merge the incoming circle into the bottom arc, then create the outgoing circle). Joining $b$ to $d$ gives $\\Delta_b e$ (cap the incoming circle, then split the outgoing one from the top arc). These identifications follow by moving each tube along its incident disk sheet into the indicated saddle position, within the same ball and its product collars. There are no crossings or additional tubes in this model. The relation $C_{ab}+C_{cd}=C_{ac}+C_{bd}$ is therefore exactly the claimed identity.",
+          "step": "2.1",
+          "inputs": [
+            "F1",
+            "step 1.1",
+            "construct"
+          ]
+        },
+        {
+          "id": "step-2-2",
+          "claim": "Enumerate the factors of $K_+K_-$ in that order, and enumerate the degree-zero summands as $(I,Z)$. Planar stacking gives $II=I$, $IE=EI=E$ and $EE=Z$. The signed total cube is $C^{-1}=E\\{-1\\}$, $C^0=I\\oplus Z$, $C^1=E\\{1\\}$, with $d^{-1}=\\binom{s}{\\Delta_b}$ and $d^0=(t,-m_a)$. Indeed in multidegrees $(0,-1)$ the first-factor differential gives $\\Delta_b$ and the second-factor differential gives $s$ with sign $(-1)^0$; in degree zero, the $(0,0)$ summand gives $t$ and the $(1,-1)$ summand gives $-m_a$ with sign $(-1)^1$. The equality $d^0d^{-1}=ts-m_a\\Delta_b=0$ is step 1.1. These are the actual two-crossing cube maps, not a separately chosen complex with an unverified differential.",
+          "step": "2.2",
+          "inputs": [
+            "F1",
+            "step 1.1",
+            "construct",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "claim": "Define $F:I\\to C$, $G:C\\to I$ and a cochain-degree $-1$ endomorphism $H$ of $C$ by $F^0=\\binom{1_I}{ut}$, $G^0=(1_I,-se)$, $H^0=(0,e):C^0\\to C^{-1}$ and $H^1=\\binom{0}{-u}:C^1\\to C^0$, all other components being zero. Every product is typed: $ut:I\\to Z$, $se:Z\\to I$, $e:Z\\to E$ and $u:E\\to Z$. Then $dF=t-m_a ut=0$ and $Gd=s-se\\Delta_b=0$, so $F,G$ are chain maps. Moreover $GF=1_I-seut=1_I$ because $eu=0$.",
+          "step": "3.1",
+          "inputs": [
+            "step 1.1",
+            "step 2.2",
+            "construct",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-3-2",
+          "claim": "For the opposite physical stacking $K_-K_+$, enumerate its factors in that physical order. Replace $\\Delta_b,m_a$ by $\\Delta_a,m_b$, since the new circle now splits from the bottom arc and merges into the top arc. The underlying three terms and shifts are unchanged. With summands again ordered $(I,Z)$, the actual tensor signs give $\\widetilde d^{-1}=\\binom{s}{-\\Delta_a}$ and $\\widetilde d^0=(t,m_b)$: the differential in the second factor at multidegree $(-1,0)$ has sign $(-1)^{-1}=-1$, while the first-factor differential on the $Z$ summand has sign $+1$. Set $J^{-1}=J^1=1_E$ and $J^0=\\operatorname{diag}(1_I,-1_Z)$. This changes these matrices to $\\binom{s}{\\Delta_a}$ and $(t,-m_b)$. It is exactly the tensor permutation sign $(-1)^{pq}$ for interchanging a factor of degree $p=-1$ with one of degree $q=1$ on the $Z$ summand; all other summands have sign $+1$.",
+          "step": "3.2",
+          "inputs": [
+            "F1",
+            "step 2.2",
+            "construct",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-4-1",
+          "claim": "On $C^{-1}$, $dH+Hd=H^0d^{-1}=e\\Delta_b=1$. On $C^1$ it equals $d^0H^1=m_a u=1$. On $C^0$ its matrix is $\\begin{pmatrix}0&se\\\\-ut&\\Delta_b e+u m_a\\end{pmatrix}$, whereas $1-FG=\\begin{pmatrix}0&se\\\\-ut&1_Z+utse\\end{pmatrix}$. Step 2.1 identifies the bottom-right entries; all other entries are displayed and identical. Thus $1_C-FG=dH+Hd$ in every degree. The side conditions are $HF=eut=0$, $GH=seu=0$ and $H^2=-eu=0$, again by S. Hence this is a strong deformation retraction, including these three side conditions.",
+          "step": "4.1",
+          "inputs": [
+            "step 1.1",
+            "step 2.1",
+            "step 3.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-5-1",
+          "claim": "The surface identities for this stacking are $eu=0$, $m_bu=1_E$, $e\\Delta_a=1_E$, $ts=m_b\\Delta_a$ and $\\Delta_a e+u m_b=1_Z+utse$. Their proofs are the same explicitly specified surfaces with $a,b$ exchanged: the birth and adjacent merge cancel on arc $b$, the adjacent split and death cancel on arc $a$, the two crossing bands commute in their disjoint disks, and four-tube joins $a,b$ and $c,d$ on one side and $b,c$ and $a,d$ on the other. Thus the maps for the actual, unaltered reverse-order cube are $\\widetilde F^0=\\binom{1_I}{-ut}$, $\\widetilde G^0=(1_I,se)$, $\\widetilde H^0=(0,-e)$ and $\\widetilde H^1=\\binom{0}{u}$. They are obtained by $J^{-1}F$, $GJ$ and $J^{-1}HJ$. Directly, $\\widetilde G\\widetilde F=1-seut=1$, while the middle matrix of $\\widetilde d\\widetilde H+\\widetilde H\\widetilde d$ is $\\begin{pmatrix}0&-se\\\\ut&\\Delta_a e+u m_b\\end{pmatrix}$, equal to $1-\\widetilde F\\widetilde G$ by the displayed four-tube identity; the two extreme components are $e\\Delta_a=1$ and $m_bu=1$. Each reverse-order side condition again contains the factor $eu$ and vanishes.",
+          "step": "5.1",
+          "inputs": [
+            "F1",
+            "F2",
+            "A1",
+            "step 1.1",
+            "step 2.1",
+            "step 4.1",
+            "step 3.2",
+            "construct",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-6-1",
+          "claim": "Each elementary saddle has internal degree $-1$, and a circle birth or death has degree $+1$: relative to the two identity curtains, a saddle lowers Euler characteristic by one and a birth or death adds a disk. The cube shifts are $-1,0,1$, so every displayed differential has internal degree zero. Both $ut$ and $se$ have degree zero. As a map $Z\\{0\\}\\to E\\{-1\\}$, $e$ has shifted degree $1-1=0$; as a map $E\\{1\\}\\to Z\\{0\\}$, $u$ has degree $1-1=0$. Hence both pairs $F,G$ and both homotopies $H$, as well as $J$, have internal degree zero. Insert all these equations into any planar surrounding complex using [F3]; the homotopy insertion includes the cochain tensor sign from that supplier. The two actual inverse crossing equivalences just established discharge both hypotheses of its boundary-crossing simplicity assertion. Thus adjoining $K_+$ or $K_-$ preserves simplicity in both directions, as claimed.",
+          "step": "6.1",
+          "inputs": [
+            "F1",
+            "F3",
+            "step 4.1",
+            "step 5.1",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "Statement allows insertion into empty or nonempty surrounding templates."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Step 1.1 explicitly kills eu by the sphere relation."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Steps 3.1 and 4.1 prove GF=1 and I−FG=dH+Hd."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Step 2.1 is the exact four-tube instance with named patches."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Statement fixes collars; all local surfaces are supported in the designated rectangle."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Statement assumes countable choice only through the disk-system supplier."
+        },
+        {
+          "case": "iff-forward",
+          "status": "checked",
+          "evidence": "Step 6.1 applies the conditional simplicity mechanism to the proved inverse crossings."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "checked",
+          "evidence": "Step 5.1 supplies the reverse physical crossing order with explicit tensor signs."
+        }
+      ]
+    },
+    "lem-barnatan-formal-kink-retractions": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-barnatan-open-tangle-cobordism-complexes",
+          "source_section": "Definition",
+          "quote": "Fix a based closed disk $D$ and a finite even subset $B\\subset\\partial D$. A smoothing is a compact smooth one-manifold in $D$, with boundary precisely $B$ and fixed radial collars there; it may contain circles. A morphism from $P$ to $Q$ is a compact orientable, not separately oriented, smooth surface with corners in $D\\times[0,1]$, with bottom $P$, top $Q$, side boundary $B\\times[0,1]$ and fixed product collars. Identify surfaces by ambient isotopy relative to these boundary collars. Take free abelian morphism groups, compose by stacking, and impose the following relations in every surrounding surface: a sphere component is zero; a torus component may be deleted with factor $2$; and $C_{12}+C_{34}=C_{13}+C_{24}$, where $C_{ij}$ attaches a tube between disk patches $i,j$ among four disjoint patches in a ball. Denote the resulting category by $\\mathcal C(B)$.\n\nFor a surface $C$ set $\\deg C=\\chi(C)-|B|/2$. Permit formal shifts $P\\{a\\}$, with a surface of degree $e$ having degree $e+b-a$ as a map $P\\{a\\}\\to Q\\{b\\}$. Take finite direct sums with matrices of morphisms. A complex is a bounded cochain complex in this additive category, whose differential has internal degree zero. A chain map has cochain degree zero; all homotopies have cochain degree $-1$. Unless specified otherwise, maps and homotopies have internal degree zero. Two chain maps are homotopic when $f-g=dh+hd$. Write $K(B)$ for the category with these complexes as objects and chain maps modulo homotopy as morphisms. Call a complex simple if its invertible endomorphisms in $K(B)$ of internal degree zero are exactly the two maps $\\pm\\operatorname{id}$ (allowing coincidence when the object is zero).\n\nA planar template is a disk with finitely many numbered input disks removed and a properly embedded one-manifold of arcs and circles in the remainder, meeting each boundary in its prescribed marked points. It acts on smoothings by insertion, and on surfaces by insertion in the template crossed with $[0,1]$. Extend by multilinearity to finite sums. For ordered complexes $C_1,\\ldots,C_s$ its totalization has term $\\bigoplus_{r_1+\\cdots+r_s=r}D(C_1^{r_1},\\ldots,C_s^{r_s})$, with shifts added, and differential $\\sum_i(-1)^{r_1+\\cdots+r_{i-1}}D(1,\\ldots,d_i,\\ldots,1)$ on that summand. For homogeneous maps $f_i$ of cochain degrees $a_i$, use the sign $(-1)^{\\sum_i a_i\\sum_{j<i}r_j}$ on $D(f_1,\\ldots,f_s)$, evaluated on the input summand of degrees $(r_j)$; this is the usual tensor sign convention, independently of the internal grading.",
+          "uses": [
+            "1.1",
+            "2.1",
+            "4.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "lem-barnatan-open-pairings-have-scalar-degree-zero-endomorphisms",
+          "source_section": "Statement",
+          "quote": "Assume countable choice. In the open Bar-Natan category, let $P$ be a smoothing consisting of $k$ arcs and no circles, including $k=0$. The map $\\mathbb Z\\to\\operatorname{End}^0(P)$ sending $n$ to $n\\operatorname{id}_P$ is an isomorphism of rings. Consequently the one-term complex $P$, with any common grading shift, is simple.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "lem-barnatan-planar-homotopies-and-conditional-boundary-crossing-simplicity",
+          "source_section": "Statement",
+          "quote": "In the open Bar-Natan categories, planar totalization defines operations on bounded complexes and on their homotopy categories, preserving internal degrees and homotopy equivalences. Simplicity is invariant under an internal degree zero chain homotopy equivalence. In particular let $A$ and $B$ be the operations of adjoining a fixed boundary crossing complex and its proposed inverse, each using precisely two adjacent boundary legs. Suppose local internal degree zero chain homotopy equivalences of their two possible composites with the straight two-strand identity complex have been supplied. Then a complex $C$ is simple if and only if $A(C)$ is simple. This is a conditional assertion about these local inverse equivalences; it does not assert Reidemeister invariance or provide crossing complexes or their inverse maps.",
+          "uses": [
+            "4.1"
+          ]
+        },
+        {
+          "fact": "A1",
+          "source": "def-countable-choice",
+          "source_section": "Definition",
+          "quote": "The **Axiom of Countable Choice**, written $\\mathrm{AC}_\\omega$, is the following\nstatement.\n\n> For every family $(X_n)_{n \\in \\mathbb{N}}$ of nonempty sets indexed by\n> $\\mathbb{N}$ there is a function $f$ with domain $\\mathbb{N}$ such that\n> $f(n) \\in X_n$ for every $n \\in \\mathbb{N}$.\n\nEquivalently, in the vocabulary of [[def-choice-function]]: every at most\ncountable family of nonempty sets ([[def-countable]]) has a choice function.",
+          "uses": [
+            "1.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "Let $u:P\\to Z$ be a circle birth and $e:Z\\to P$ a circle death, both with the identity curtain on $P$. Let $v:P\\to Z$ be the curtain disjoint from a once-punctured torus creating $O$, and let $w:Z\\to P$ be its time reverse. Choose the handle on this punctured torus to be the standard unknotted handle in the local cylinder. Then $eu=0$, $ev=2\\,1_P$ and $wu=2\\,1_P$ by S and T: the first closes the birth disk to a sphere, and the other two close the punctured torus to a torus. Also $mu=1_P$ and $e\\Delta=1_P$: the birth disk with its adjacent merge, or the split with its adjacent death, is a proper disk, and [F2] identifies it with the arc curtain relative to the collars. Finally $mv=m\\Delta$ and $w\\Delta=m\\Delta$. For $mv$, move the two feet of the handle on the punctured-torus birth along its disk sheet and through the merging band onto the arc curtain. This gives the arc curtain with the same one unknotted handle as split followed by merge, $m\\Delta$. The path lies in the product neighbourhood of the birth disk, merging band and the arc, so it misses the boundary collars and creates no crossings. Time reversal gives $w\\Delta=m\\Delta$. Thus all these are identities of the specified embedded surfaces or direct S/T reductions.",
+          "step": "1.1",
+          "inputs": [
+            "F1",
+            "F2",
+            "A1",
+            "construct"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "In $\\operatorname{End}(Z)$ the required four-tube identity is $ve+um=\\Delta e+1_Z$. Start from the arc curtain $A$, a disk $C$ capping the incoming circle, and a disk $D$ creating the outgoing circle. Put patches $1,2$ on $D$, patch $3$ on $A$ and patch $4$ on $C$, in one standard local ball. Attaching a tube between $1,2$ makes the punctured-torus birth, giving $ve$. The tube $3,4$ joins the incoming cap to the arc curtain and gives $um$. The tube $1,3$ joins the outgoing cup to the arc curtain and gives $\\Delta e$. The tube $2,4$ joins the incoming cap and outgoing cup to the circle annulus, giving $1_Z$. These descriptions use the same unknotted tube arcs; moving each tube along its incident disk sheets gives the stated saddle surfaces. Therefore $C_{12}+C_{34}=C_{13}+C_{24}$ is precisely the claimed identity. Reversing time, including the order of compositions, gives the second identity $uw+\\Delta e=um+1_Z$.",
+          "step": "2.1",
+          "inputs": [
+            "F1",
+            "step 1.1",
+            "construct"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "claim": "For $C_+$ define $F_+:P\\to C_+$ by $F_+^0=v-\\Delta$, define $G_+:C_+\\to P$ by $G_+^0=e$, and define $H_+^1=u:C_+^1\\to C_+^0$, all other components zero. Then $dF_+=mv-m\\Delta=0$; $G_+$ is a chain map because its only nonzero component has target the one-term complex at degree zero and $C_+$ has no term in degree $-1$. The composite is $G_+F_+=ev-e\\Delta=2\\,1_P-1_P=1_P$. On degree one, $dH_++H_+d=mu=1$, which equals $1-F_+G_+$ there. On degree zero, $1-F_+G_+=1_Z-ve+\\Delta e=um=H_+d$ by step 2.1. Thus $1-F_+G_+=dH_++H_+d$ in both degrees. Moreover $H_+F_+=0$ by cochain degrees, $G_+H_+=eu=0$ by S, and $H_+^2=0$ by cochain degrees.",
+          "step": "3.1",
+          "inputs": [
+            "step 1.1",
+            "step 2.1",
+            "construct",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-3-2",
+          "claim": "For $C_-$ define $F_-^0=u:P\\to Z$, $G_-^0=w-m:Z\\to P$ and $H_-^0=e:C_-^0\\to C_-^{-1}$, all other components zero. The chain-map equation for $G_-$ is $G_-d=w\\Delta-m\\Delta=0$, while $F_-$ is automatically a chain map since $C_-$ has no term in degree one. Their composite is $G_-F_-=wu-mu=2\\,1_P-1_P=1_P$. On degree $-1$, $dH_-+H_-d=e\\Delta=1$; on degree zero, $1-F_-G_-=1_Z-uw+um=\\Delta e=dH_-$ by the time-reversed identity in step 2.1. Also $H_-F_-=eu=0$ by S, $G_-H_-=0$ by cochain degrees, and $H_-^2=0$ by cochain degrees. Thus this is the second strong deformation retraction, with all side conditions.",
+          "step": "3.2",
+          "inputs": [
+            "step 1.1",
+            "step 2.1",
+            "construct",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-4-1",
+          "claim": "The saddles $m,\\Delta$ have internal degree $-1$; $u,e$ have degree $+1$; and $v,w$ have degree $-1$, since their circle component is a once-punctured torus of Euler characteristic $-1$, while the unchanged arc contributes its identity curtain. Thus $F_+^0$ has shifted degree $-1+1=0$, $G_+^0$ has $1-1=0$, and $H_+^1$ has $1+1-2=0$. On the negative kink, $F_-^0$ has $1-1=0$, $G_-^0$ has $-1+1=0$, and $H_-^0$ has $1-2+1=0$. Both differentials have degree zero after their displayed shifts. No division by two or other change of coefficient ring was made: the exact coefficient $2-1$ in both composites is essential. Insert the maps, homotopies and inverse equations by [F3], including its homotopy tensor sign. This proves the claimed degree zero retractions in every planar surrounding complex.",
+          "step": "4.1",
+          "inputs": [
+            "F1",
+            "F3",
+            "step 3.1",
+            "step 3.2",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "Statement permits an arbitrary planar surrounding complex, including an otherwise empty template."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Step 1.1 explicitly imposes eu=0 by the sphere relation."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Step 3.1 computes GF=2−1=1 for the positive kink."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Step 2.1 records the exact four-tube assignment with two patches on one disk."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Statement requires the fixed product collars of the open category."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Statement assumes countable choice through the disk-system supplier only."
+        },
+        {
+          "case": "iff-forward",
+          "status": "checked",
+          "evidence": "Step 3.1 proves the positive kink retraction and both inverse equations."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "checked",
+          "evidence": "Step 3.2 proves the negative kink retraction and both inverse equations."
+        }
+      ]
+    },
+    "lem-barnatan-cochain-cones-preserve-strong-retracts": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-barnatan-open-tangle-cobordism-complexes",
+          "source_section": "Definition",
+          "quote": "Fix a based closed disk $D$ and a finite even subset $B\\subset\\partial D$. A smoothing is a compact smooth one-manifold in $D$, with boundary precisely $B$ and fixed radial collars there; it may contain circles. A morphism from $P$ to $Q$ is a compact orientable, not separately oriented, smooth surface with corners in $D\\times[0,1]$, with bottom $P$, top $Q$, side boundary $B\\times[0,1]$ and fixed product collars. Identify surfaces by ambient isotopy relative to these boundary collars. Take free abelian morphism groups, compose by stacking, and impose the following relations in every surrounding surface: a sphere component is zero; a torus component may be deleted with factor $2$; and $C_{12}+C_{34}=C_{13}+C_{24}$, where $C_{ij}$ attaches a tube between disk patches $i,j$ among four disjoint patches in a ball. Denote the resulting category by $\\mathcal C(B)$.\n\nFor a surface $C$ set $\\deg C=\\chi(C)-|B|/2$. Permit formal shifts $P\\{a\\}$, with a surface of degree $e$ having degree $e+b-a$ as a map $P\\{a\\}\\to Q\\{b\\}$. Take finite direct sums with matrices of morphisms. A complex is a bounded cochain complex in this additive category, whose differential has internal degree zero. A chain map has cochain degree zero; all homotopies have cochain degree $-1$. Unless specified otherwise, maps and homotopies have internal degree zero. Two chain maps are homotopic when $f-g=dh+hd$. Write $K(B)$ for the category with these complexes as objects and chain maps modulo homotopy as morphisms. Call a complex simple if its invertible endomorphisms in $K(B)$ of internal degree zero are exactly the two maps $\\pm\\operatorname{id}$ (allowing coincidence when the object is zero).\n\nA planar template is a disk with finitely many numbered input disks removed and a properly embedded one-manifold of arcs and circles in the remainder, meeting each boundary in its prescribed marked points. It acts on smoothings by insertion, and on surfaces by insertion in the template crossed with $[0,1]$. Extend by multilinearity to finite sums. For ordered complexes $C_1,\\ldots,C_s$ its totalization has term $\\bigoplus_{r_1+\\cdots+r_s=r}D(C_1^{r_1},\\ldots,C_s^{r_s})$, with shifts added, and differential $\\sum_i(-1)^{r_1+\\cdots+r_{i-1}}D(1,\\ldots,d_i,\\ldots,1)$ on that summand. For homogeneous maps $f_i$ of cochain degrees $a_i$, use the sign $(-1)^{\\sum_i a_i\\sum_{j<i}r_j}$ on $D(f_1,\\ldots,f_s)$, evaluated on the input summand of degrees $(r_j)$; this is the usual tensor sign convention, independently of the internal grading.",
+          "uses": [
+            "1.1",
+            "2.1",
+            "2.2",
+            "4.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "On $U^n\\oplus V^{n-1}$ the square of $D_f$ has diagonal entries $d_U^2,d_V^2$ and bottom-left entry $fd_U-d_Vf$, so $D_f^2=0$. The same computation applies to $fi$ and $pf$ because $i,p$ are chain maps. The indicated direct sums are finite and bounded, and every entry has the specified internal degree, so all three $T$ constructions are complexes in [F1].",
+          "step": "1.1",
+          "inputs": [
+            "F1",
+            "given",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "For a retract of the source set $I=\\begin{pmatrix}i&0\\\\0&1_V\\end{pmatrix}:T(fi)\\to T(f)$, $P=\\begin{pmatrix}p&0\\\\-fh&1_V\\end{pmatrix}:T(f)\\to T(fi)$ and $H=\\begin{pmatrix}h&0\\\\0&0\\end{pmatrix}$ on $T(f)$. Here $fh:U^n\\to V^{n-1}$ is correctly typed, and $H$ has cochain degree $-1$. The diagonal chain-map equations follow from those for $i,p$. For the lower-left entry of $D_{fi}P=PD_f$ the required equality is $fip+d_Vfh=f-fhd_U$, which follows by multiplying $1-ip=d_Uh+hd_U$ by $f$ and using $fd_U=d_Vf$. The lower-left equation for $I$ is simply $fi=fi$. Thus both block maps are chain maps.",
+          "step": "2.1",
+          "inputs": [
+            "F1",
+            "given",
+            "step 1.1",
+            "construct",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-2",
+          "claim": "For a retract of the target set $I=\\begin{pmatrix}1_U&0\\\\hf&i\\end{pmatrix}:T(pf)\\to T(f)$, $P=\\begin{pmatrix}1_U&0\\\\0&p\\end{pmatrix}:T(f)\\to T(pf)$ and $H=\\begin{pmatrix}0&0\\\\0&-h\\end{pmatrix}$ on $T(f)$. Now $hf:U^n\\to V^{n-1}$ is correctly typed. For $I$, the lower-left chain-map equation is $f-d_Vhf=hfd_U+ipf$, which follows from $1-ip=d_Vh+hd_V$ and $d_Vf=fd_U$. For $P$, that equation is exactly $pf=pf$, and the remaining blocks use the chain-map equations for $i,p$. Thus both block maps are chain maps.",
+          "step": "2.2",
+          "inputs": [
+            "F1",
+            "given",
+            "step 1.1",
+            "construct",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "claim": "The product $PI$ is $\\begin{pmatrix}pi&0\\\\-fhi&1\\end{pmatrix}=1$ by $pi=1$ and $hi=0$. Also $1-IP=\\begin{pmatrix}1-ip&0\\\\fh&0\\end{pmatrix}=D_fH+HD_f$ by the given retract equation. Finally $HI=0$, $PH=0$ and $H^2=0$ follow respectively from $hi=0$, from $ph=0$ together with $h^2=0$, and from $h^2=0$. These are the full strong-retract equations for the source case.",
+          "step": "3.1",
+          "inputs": [
+            "given",
+            "step 2.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-4-1",
+          "claim": "The product $PI=\\begin{pmatrix}1&0\\\\phf&pi\\end{pmatrix}=1$. Moreover $1-IP=\\begin{pmatrix}0&0\\\\-hf&1-ip\\end{pmatrix}=D_fH+HD_f$. The equations $HI=PH=H^2=0$ follow from $h^2=hi=ph=0$, with precisely the displayed minus sign on $H$'s target block. All equations are finite matrix addition and composition, valid in the additive category of [F1], and every entry has internal degree zero. This proves both assertions without any exactness premise.",
+          "step": "4.1",
+          "inputs": [
+            "F1",
+            "given",
+            "step 2.2",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "Statement permits zero or empty bounded complexes."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Step 1.1 verifies the cone differential, including f=0."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Step 1.1 applies unchanged to one-term source or target complexes."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Steps 3.1 and 4.1 use the exact side conditions, including a zero homotopy."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Statement specifies the cochain indices on every block source and target."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Statement requires specified finite additive data and adds no choice principle."
+        },
+        {
+          "case": "iff-forward",
+          "status": "checked",
+          "evidence": "Steps 2.1 and 3.1 prove the source retraction with its inverse equations."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "checked",
+          "evidence": "Steps 2.2 and 4.1 prove the target retraction with its inverse equations."
+        }
+      ]
+    },
+    "lem-barnatan-formal-third-reidemeister-equivalence": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-barnatan-open-tangle-cobordism-complexes",
+          "source_section": "Definition",
+          "quote": "Fix a based closed disk $D$ and a finite even subset $B\\subset\\partial D$. A smoothing is a compact smooth one-manifold in $D$, with boundary precisely $B$ and fixed radial collars there; it may contain circles. A morphism from $P$ to $Q$ is a compact orientable, not separately oriented, smooth surface with corners in $D\\times[0,1]$, with bottom $P$, top $Q$, side boundary $B\\times[0,1]$ and fixed product collars. Identify surfaces by ambient isotopy relative to these boundary collars. Take free abelian morphism groups, compose by stacking, and impose the following relations in every surrounding surface: a sphere component is zero; a torus component may be deleted with factor $2$; and $C_{12}+C_{34}=C_{13}+C_{24}$, where $C_{ij}$ attaches a tube between disk patches $i,j$ among four disjoint patches in a ball. Denote the resulting category by $\\mathcal C(B)$.\n\nFor a surface $C$ set $\\deg C=\\chi(C)-|B|/2$. Permit formal shifts $P\\{a\\}$, with a surface of degree $e$ having degree $e+b-a$ as a map $P\\{a\\}\\to Q\\{b\\}$. Take finite direct sums with matrices of morphisms. A complex is a bounded cochain complex in this additive category, whose differential has internal degree zero. A chain map has cochain degree zero; all homotopies have cochain degree $-1$. Unless specified otherwise, maps and homotopies have internal degree zero. Two chain maps are homotopic when $f-g=dh+hd$. Write $K(B)$ for the category with these complexes as objects and chain maps modulo homotopy as morphisms. Call a complex simple if its invertible endomorphisms in $K(B)$ of internal degree zero are exactly the two maps $\\pm\\operatorname{id}$ (allowing coincidence when the object is zero).\n\nA planar template is a disk with finitely many numbered input disks removed and a properly embedded one-manifold of arcs and circles in the remainder, meeting each boundary in its prescribed marked points. It acts on smoothings by insertion, and on surfaces by insertion in the template crossed with $[0,1]$. Extend by multilinearity to finite sums. For ordered complexes $C_1,\\ldots,C_s$ its totalization has term $\\bigoplus_{r_1+\\cdots+r_s=r}D(C_1^{r_1},\\ldots,C_s^{r_s})$, with shifts added, and differential $\\sum_i(-1)^{r_1+\\cdots+r_{i-1}}D(1,\\ldots,d_i,\\ldots,1)$ on that summand. For homogeneous maps $f_i$ of cochain degrees $a_i$, use the sign $(-1)^{\\sum_i a_i\\sum_{j<i}r_j}$ on $D(f_1,\\ldots,f_s)$, evaluated on the input summand of degrees $(r_j)$; this is the usual tensor sign convention, independently of the internal grading.",
+          "uses": [
+            "1.1",
+            "2.1",
+            "2.2",
+            "3.1",
+            "5.1",
+            "7.1",
+            "8.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "lem-barnatan-formal-inverse-boundary-crossings",
+          "source_section": "Statement",
+          "quote": "Assume countable choice. In the open Bar-Natan category on four boundary points of a rectangle, let $I$ be the vertical two-strand identity pairing and let $E$ be the pairing consisting of a top cap and bottom cup. Let $t:I\\to E$ and $s:E\\to I$ be the elementary saddle surfaces. Define the formal crossing complexes $K_+=(I\\{1\\}\\xrightarrow{t}E\\{2\\})$, in cochain degrees $0,1$, and $K_-=(E\\{-2\\}\\xrightarrow{s}I\\{-1\\})$, in degrees $-1,0$. Then both planar stackings $K_+K_-$ and $K_-K_+$ have explicit internal degree zero strong deformation retractions onto the one-term complex $I$ in degree zero, with no grading shift. All maps and homotopies can be inserted into an arbitrary planar surrounding complex. Consequently adjoining either of these crossing complexes preserves simplicity in both directions.",
+          "uses": [
+            "2.1",
+            "4.1",
+            "5.1",
+            "7.1",
+            "8.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "lem-barnatan-cochain-cones-preserve-strong-retracts",
+          "source_section": "Statement",
+          "quote": "Let $f:U\\to V$ be an internal degree zero chain map between bounded cochain complexes in the additive open Bar-Natan category. Define $T(f)^n=U^n\\oplus V^{n-1}$ and $D_f=\\begin{pmatrix}d_U&0\\\\f&-d_V\\end{pmatrix}$. Suppose chain maps $i:Q\\to U$, $p:U\\to Q$ and $h:U^n\\to U^{n-1}$ have internal degree zero and satisfy $pi=1_Q$, $1_U-ip=d_Uh+hd_U$, $hi=ph=h^2=0$. Then $T(f)$ strongly retracts onto $T(fi)$ by the explicit block maps given below. Likewise, if $i:Q\\to V$, $p:V\\to Q$ and $h:V^n\\to V^{n-1}$ satisfy the corresponding equations on $V$, then $T(f)$ strongly retracts onto $T(pf)$. All block maps and homotopies have internal degree zero; no abelian-category or exactness assumption is needed.",
+          "uses": [
+            "6.1",
+            "7.1",
+            "8.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "lem-barnatan-open-pairings-have-scalar-degree-zero-endomorphisms",
+          "source_section": "Statement",
+          "quote": "Assume countable choice. In the open Bar-Natan category, let $P$ be a smoothing consisting of $k$ arcs and no circles, including $k=0$. The map $\\mathbb Z\\to\\operatorname{End}^0(P)$ sending $n$ to $n\\operatorname{id}_P$ is an isomorphism of rings. Consequently the one-term complex $P$, with any common grading shift, is simple.",
+          "uses": [
+            "4.1"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "lem-barnatan-planar-homotopies-and-conditional-boundary-crossing-simplicity",
+          "source_section": "Statement",
+          "quote": "In the open Bar-Natan categories, planar totalization defines operations on bounded complexes and on their homotopy categories, preserving internal degrees and homotopy equivalences. Simplicity is invariant under an internal degree zero chain homotopy equivalence. In particular let $A$ and $B$ be the operations of adjoining a fixed boundary crossing complex and its proposed inverse, each using precisely two adjacent boundary legs. Suppose local internal degree zero chain homotopy equivalences of their two possible composites with the straight two-strand identity complex have been supplied. Then a complex $C$ is simple if and only if $A(C)$ is simple. This is a conditional assertion about these local inverse equivalences; it does not assert Reidemeister invariance or provide crossing complexes or their inverse maps.",
+          "uses": [
+            "8.1"
+          ]
+        },
+        {
+          "fact": "A1",
+          "source": "def-countable-choice",
+          "source_section": "Definition",
+          "quote": "The **Axiom of Countable Choice**, written $\\mathrm{AC}_\\omega$, is the following\nstatement.\n\n> For every family $(X_n)_{n \\in \\mathbb{N}}$ of nonempty sets indexed by\n> $\\mathbb{N}$ there is a function $f$ with domain $\\mathbb{N}$ such that\n> $f(n) \\in X_n$ for every $n \\in \\mathbb{N}$.\n\nEquivalently, in the vocabulary of [[def-choice-function]]: every at most\ncountable family of nonempty sets ([[def-countable]]) has a choice function.",
+          "uses": [
+            "4.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "First take overpassing order $c>a>b$. The specified curves have exactly three transverse crossings: $r=a\\cap b$, $p=c\\cap b$ and $q=c\\cap a$. In the left diagram $p$ is the upper-right crossing and $q$ the upper-left crossing. Order the crossings $(r,p,q)$. Use the following five pairings: $A=(16)(25)(34)$, $B=(12)(34)(56)$, $C=(16)(23)(45)$, $D=(14)(23)(56)$ and $P=(12)(36)(45)$. The left smoothing table, with rows indexed by $(p,q)$ and columns by $r$, is $00:(C,A)$, $01:(P,B)$, $10:(C\\sqcup O,C)$ and $11:(C,D)$. Here $O$ is one interior circle. To verify the table directly, at the left crossing $q$ the $0$ smoothing connects endpoint $1$ to the branch towards $6$; at $p$, the $0$ smoothing connects endpoint $2$ to the branch of $c$ travelling towards $q$. At $r$, its $0$ smoothing connects the two upper diagonal branches and its other pair joins the branches towards $4,5$. Hence the all-zero state is $(16)(23)(45)$. Flipping $q$ alone reconnects $16,23$ into $12,36$, giving $P$; flipping $p$ alone cuts a circle from the path joining $2,3$; flipping $r$ alone reconnects $23,45$ into $25,34$, giving $A$. With $r=1$, flipping $q$ then joins the pairs to give $B$, flipping $p$ removes the just-described circle to give $C$, and flipping both gives $D$. With $r=0$, flipping $p,q$ merges that circle into the other arc and returns $C$. These traces specify the actual crossing disks and the saddle bands at their flips.",
+          "step": "1.1",
+          "inputs": [
+            "F1",
+            "given",
+            "construct"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "Let $U_L$ be the $r=0$ raw face, in degrees $0,1,2$, and $W_L$ the $r=1$ raw face. Their terms are $U_L=(C\\to(P\\oplus(C\\sqcup O))\\{1\\}\\to C\\{2\\})$ and $W_L=(A\\to(B\\oplus C)\\{1\\}\\to D\\{2\\})$. In the first expression the initial $C$ has shift zero. Write the differentials of $W_L$ as $\\binom{x}{y}$ and $(z,-w)$, where $x:A\\to B$, $y:A\\to C$, $z:B\\to D$ and $w:C\\to D$ are the elementary saddles specified by the crossing disks. The $r=0$ face is the RII face of [F2], with its rectangle rotated so that its straight pairing is $(12)(36)$ and with the unused arc $45$ carried as an identity curtain: its local inclusion is $i_L=\\binom{1_P}{ut}:Q\\to U_L$, where $Q$ is the one-term complex $P\\{1\\}$ in degree one and $t:P\\to C$ reconnects the arcs $12,36$ into $16,23$. Its differential is $\\binom{s}{\\Delta}$ followed by $(t,-m)$, with exactly the two-crossing cube signs of [F2]. The local RII bigon and its extra arc are visible also from the first column of the table: $C,P,C\\sqcup O,C$. Thus [F2] supplies a strong retract $(i_L,p_L,h_L)$ of this actual face onto $Q$.",
+          "step": "2.1",
+          "inputs": [
+            "F1",
+            "F2",
+            "step 1.1",
+            "construct",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-2",
+          "claim": "The second geometric variant, with overpassing order $c>b>a$, is obtained by reflecting the first across the vertical diameter. This sends $a$ to $b$, preserves each upward or downward bow of $c$, and changes the crossing between the diagonals to $b$ over $a$, exactly as required. At every crossing reflection changes a right turn into a left turn, so it interchanges its $0$ and $1$ smoothings. It follows that its actual raw cube is the reflected, time-reversed-surface dual of the first cube with all three bits complemented. A vertex of old degree $s$ becomes degree $3-s$ and has shift $3-s$, obtained from its dual shift $-s$ by adding three. For a new edge in coordinate $j$, the old edge sign is $(-1)^{j-1-\\sum_{k<j}v_k}$ instead of the required $(-1)^{\\sum_{k<j}v_k}$. Conjugating by the vertex sign $\\sigma(v)=(-1)^{\\sum_j(j-1)v_j}=(-1)^p$ corrects this ratio on every edge. Thus this is an explicit signed cube identification, not a conclusion from cone algebra alone.",
+          "step": "2.2",
+          "inputs": [
+            "F1",
+            "step 1.1",
+            "construct",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "claim": "The distinguished saddle defines a chain map $f_L:U_L\\to W_L\\{1\\}$. Its four unshifted components, in the state order of step 1.1, are the saddle $C\\to A$ reconnecting $23,45$, the saddle $\\alpha:P\\to B$ reconnecting $36,45$, the merge $m_{45}:C\\sqcup O\\to C$ joining the circle to arc $45$, and the saddle $C\\to D$ reconnecting $16,45$. These are all flips in the same distinguished disk $r$, disjoint from disks $p,q$. Moving two saddles past one another in their disjoint crossing cylinders proves the chain-map equation on each edge; their positive geometric composites agree, and the cube signs on the two faces agree. Ordering $r$ first makes its edge sign $+1$ and multiplies every remaining edge in the $r=1$ face by $-1$. Consequently the full raw cube is precisely $T(f_L)$, with source $U_L$ and target $W_L\\{1\\}$, not an unsigned or abelian replacement. Each entry of $f_L$ has internal degree zero after the extra target shift one.",
+          "step": "3.1",
+          "inputs": [
+            "F1",
+            "step 1.1",
+            "step 2.1",
+            "construct",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-4-1",
+          "claim": "The residual map $\\rho_L=f_Li_L:Q\\to W_L\\{1\\}$ has only its degree-one component, equal to $\\binom{\\alpha}{\\beta}$, where $\\beta:P\\to C$ reconnects $12,36$. Indeed the first component is $\\alpha 1_P$; the second is $m_{45}ut=t=\\beta$, because the born circle immediately merges into arc $45$, cancelling the birth and merge as in [F2]. The remaining saddle band is the band joining the top arc $12$ to the middle arc $36$, with the bottom arc untouched; it has neither a surviving circle nor an additional tube. The other component joins the middle and bottom arcs, with the top arc untouched. Thus both residual entries are specified embedded elementary saddles. For completeness $z\\alpha=w\\beta$: each side starts with the three $P$ curtain disks, attaches the two indicated untwisted bands to connect them into one disk, and has boundary the alternating cycle of $P$ and $D$. These proper disk surfaces are identified relative to their collars by [F4]. This also verifies the residual chain-map equation directly.",
+          "step": "4.1",
+          "inputs": [
+            "F2",
+            "F4",
+            "A1",
+            "step 2.1",
+            "step 3.1",
+            "construct"
+          ]
+        },
+        {
+          "id": "step-5-1",
+          "claim": "Rotate the left diagram by $180$ degrees to obtain the right one, transporting its crossing names and disk orientations. The endpoint action is $(1\\,4)(2\\,5)(3\\,6)$. It fixes $A,D,P$ and exchanges $B,C$. The right $r=0$ face therefore has states $B,P,B\\sqcup O,B$ and has its own transported retract onto the same $Q$. Its $r=1$ face $W_R$ has states $A,C,B,D$, with degree-one summands ordered $(C,B)$. The map $S:W_R\\to W_L$ identifies the pairing objects by planar isotopy, exchanges these two middle summands, is $1_A$ in degree zero, and is $-1_D$ in degree two. The initial column is unchanged; the last row, after the middle exchange, is $(-z,w)$ instead of $(z,-w)$, and the extra sign on $D$ corrects it. This is precisely the cube permutation sign for interchanging the two remaining crossing coordinates, whose only nontrivial vertex sign is at $(p,q)=(1,1)$. Thus $S$ is an internal degree zero chain isomorphism. The two residual saddles are now $(\\beta,\\alpha)$ before this exchange, and $S\\rho_R=(\\alpha,\\beta)=\\rho_L$. The equality includes the actual bands: rotation exchanges the top-middle and middle-bottom windows in $P$, and the summand exchange puts each back at its specified window.",
+          "step": "5.1",
+          "inputs": [
+            "F1",
+            "F2",
+            "step 1.1",
+            "step 2.1",
+            "step 4.1",
+            "construct",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-6-1",
+          "claim": "Apply the source retract of [F3] to $T(f_L)$ and $T(f_R)$, using the actual $(i,p,h)$ in their RII faces. Let $I_L,P_L,H_L$ and $I_R,P_R,H_R$ be its displayed block maps. Let $S_T=\\operatorname{diag}(1_Q,S)$ identify their residual cones. Then $\\Phi=I_R S_T^{-1}P_L$ and $\\Psi=I_LS_TP_R$ are explicit chain maps between the full left and right cubes. Every entry is a finite sum of the already specified local surfaces. The equations $P_LI_L=P_RI_R=1$ imply $\\Psi\\Phi=I_LP_L=1-dH_L-H_Ld$ and $\\Phi\\Psi=I_RP_R=1-dH_R-H_Rd$. The common residual cone, with the degree-one summands ordered $(A,P)$, is $(A\\oplus P)\\{1\\}\\to(B\\oplus C)\\{2\\}\\to D\\{3\\}$ in degrees $1,2,3$, with matrices $\\begin{pmatrix}-x&\\alpha\\\\-y&\\beta\\end{pmatrix}$ and $(-z,w)$. This displays the actual remaining maps after the reduction, including their signs.",
+          "step": "6.1",
+          "inputs": [
+            "F3",
+            "step 3.1",
+            "step 4.1",
+            "step 5.1",
+            "construct",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-7-1",
+          "claim": "Under that identification the old $r=0$ face becomes the new $r=1$ face: the RII retract is now on the target of the distinguished saddle map. Its target retract data are the reflected duals $i'=p^\\vee$, $p'=i^\\vee$, $h'=h^\\vee$, conjugated by the stated vertex signs. They satisfy $p'i'=1$, $1-i'p'=dh'+h'd$, $h'i'=p'h'=(h')^2=0$, since these are respectively the duals of $pi=1$, $1-ip=dh+hd$ and $ph=hi=h^2=0$. Use the target-case blocks of [F3]: $I=\\begin{pmatrix}1&0\\\\h'f&i'\\end{pmatrix}$, $P=\\operatorname{diag}(1,p')$, $H=\\operatorname{diag}(0,-h')$. They give the two target reductions onto the reflected dual of the same residual complex. Its residual arrow is the reflected dual row of $\\binom{\\alpha}{\\beta}$, with the vertex signs just computed. Therefore the same residual identification and these target-case blocks give explicit inverse equivalences for the second actual RIII variant. All local surface identities persist because reflection and reversal preserve embedded-surface isotopies and S, T and four-tube.",
+          "step": "7.1",
+          "inputs": [
+            "F1",
+            "F2",
+            "F3",
+            "step 6.1",
+            "step 2.2",
+            "construct",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-8-1",
+          "claim": "Each saddle has unshifted internal degree $-1$, so raising the vertex shift by one makes all raw cube differentials degree zero. The RII maps and homotopies of [F2], their transported versions, the two cone reductions of [F3], and $S$ consequently all have internal degree zero. For any fixed orientations of $a,b,c$, corresponding crossings on the two sides involve the same ordered pair of oriented strands with the same overpassing choice, so they have the same signs and the same counts $n_+,n_-$. Applying the common cochain translation $-n_-$ and internal shift $n_+-2n_-$ therefore preserves the displayed equivalences. Reflection reverses the crossing signs, exchanging $n_+,n_-$; the second normalized cube is exactly the reflected cochain dual of the first normalized cube, since $3-s-n_+=n_--s$ and $3-s+n_--2n_+=-s-n_++2n_-$. Thus the second-variant degree bookkeeping in step 2.2 also agrees with the normalized complexes. Finally insert the finite maps and homotopies by [F5], with its homotopy tensor signs. This proves the asserted local equivalences and their planar extensions.",
+          "step": "8.1",
+          "inputs": [
+            "F1",
+            "F2",
+            "F3",
+            "F5",
+            "step 6.1",
+            "step 7.1",
+            "algebra",
+            "step 2.2"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "Step 8.1 permits insertion in an otherwise empty planar surrounding."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Step 2.1 uses the actual RII retraction, whose sphere terms vanish in the supplier."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Step 3.1 isolates exactly one distinguished crossing and its four saddle entries."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Statement takes h strictly between zero and one half, giving three transverse crossings; step 1.1 identifies them."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Step 1.1 traces all six fixed endpoint labels; step 8.1 retains the fixed orientations and crossing signs."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Statement assumes countable choice through the smooth disk-system and RII suppliers; step 4.1 records its actual use."
+        },
+        {
+          "case": "iff-forward",
+          "status": "checked",
+          "evidence": "Step 6.1 displays comparison maps and both inverse homotopy equations for the first variant."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "checked",
+          "evidence": "Step 7.1 proves the second actual variant by the target cone blocks after the signed dual-cube identification in step 2.2."
+        }
+      ]
+    }
+  }
+}

@@ -1,7 +1,7 @@
 ---
 id: lem-maximal-abelian-cover-link-exterior-retraction
 kind: lemma
-title: "The maximal abelian cover retracts to a compact link exterior"
+title: "The maximal abelian cover retracts onto the cover over the compact link exterior"
 status: draft
 origin: pipeline
 pipeline_run: inverse-problems-knot-theory-all-109-2026-10-19

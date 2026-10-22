@@ -1,4 +1,9 @@
 ---
+verification:
+  judge:
+    model: "gpt-6-luna"
+    verdict: pass
+    date: 2026-10-22
 id: ex-ip-calibrated-posterior-sample
 kind: example
 title: An exact posterior sample need not minimize point risk

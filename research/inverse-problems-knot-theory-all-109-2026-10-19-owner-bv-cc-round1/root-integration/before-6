@@ -1,0 +1,67 @@
+---
+id: lem-ip-lipschitz-graph-area-and-calculus-under-countable-choice
+kind: lemma
+title: Lipschitz graph area and calculus under Countable Choice
+status: draft
+origin: pipeline
+pipeline_run: inverse-problems-knot-theory-all-109-2026-10-19
+deps:
+  - def-countable-choice
+  - thm-dominated-convergence
+  - thm-monotone-convergence-for-the-integral
+  - thm-c1-lipschitz-ac-bv-hierarchy
+  - thm-absolutely-continuous-functions-have-integrable-derivatives
+  - thm-tonelli-and-fubini-for-completed-product-measures
+  - thm-euclidean-lebesgue-measure-is-the-completion-of-the-product-of-lebesgue-measures
+  - thm-lebesgue-differentiation-theorem-for-locally-integrable-functions-on-r-n
+  - thm-linear-change-of-variables-for-lebesgue-measure
+  - thm-hausdorff-n-measure-is-proportional-to-lebesgue-measure
+  - thm-hausdorff-measure-under-lipschitz-maps
+  - cor-hausdorff-measure-under-similarities
+proof_strategy: direct
+provenance:
+  statement: literature-derived
+  proof: ai-altered
+sources:
+  references:
+    - title: Glaucio Terra, Introduction to Geometric Measure Theory, Rademacher Section 5.1.2 and area Section 5.2
+      url: https://www.ime.usp.br/~glaucio/mat6704/textos/GMTLecureNotes.pdf
+---
+
+## Statement
+
+Assume Countable Choice. Let $m\ge1$, let $Q\subseteq\mathbb R^m$ be open, and let $h:Q\to\mathbb R$ be locally Lipschitz. Then $h$ is differentiable almost everywhere, its partial derivatives are measurable and are its weak derivatives. On every open region where $h$ is $L$-Lipschitz, $|Dh|\le L$ almost everywhere. Let $H^m$ denote the repository's unnormalised Hausdorff measure, put $c_m=H^m((0,1]^m)$, and write $\sigma_m=c_m^{-1}H^m$ also on Euclidean spaces containing $m$-dimensional subsets. The graph map $F(y)=(y,h(y))$ satisfies, for every nonnegative Borel $a$,
+$$\int_{F(Q)}a(x)\,d\sigma_m(x)=\int_Qa(F(y))\sqrt{1+|Dh(y)|^2}\,dy.$$
+For the epigraph $G=\{(y,z):y\in Q,\ z>h(y)\}$, a smooth vector field compactly supported away from the chart sides satisfies
+$$\int_G\operatorname{div}\phi\,dx=\int_Q\phi(y,h(y))\cdot(Dh(y),-1)\,dy.$$
+Thus its outward normal is $(Dh,-1)/\sqrt{1+|Dh|^2}$ almost everywhere. The sign reverses for a subgraph. The graph surface measure is locally finite and Radon on $F(Q)$ with its relative topology, and its null sets coincide with graph images of Lebesgue-null subsets of the base.
+
+## Statement references
+
+[[thm-hausdorff-n-measure-is-proportional-to-lebesgue-measure|The positive finite normalization constant c-m.]]
+
+## Facts & Assumptions
+
+**Given:** Countable Choice and the locally Lipschitz graph in the Statement.
+
+[F1] A Lipschitz interval function is absolutely continuous and has a derivative almost everywhere; these conclusions assume at most Countable Choice. ([[thm-c1-lipschitz-ac-bv-hierarchy]], [[thm-absolutely-continuous-functions-have-integrable-derivatives]])
+
+[F2] Completed Euclidean Fubini and Tonelli hold under Countable Choice. ([[thm-tonelli-and-fubini-for-completed-product-measures]], [[thm-euclidean-lebesgue-measure-is-the-completion-of-the-product-of-lebesgue-measures]])
+
+[F3] Lebesgue differentiation of locally integrable functions holds under Countable Choice. ([[thm-lebesgue-differentiation-theorem-for-locally-integrable-functions-on-r-n]])
+
+[F4] Hausdorff measure on an $m$-plane, divided by $c_m$, is Euclidean $m$-volume; isometries preserve it and $K$-Lipschitz maps increase it by at most $K^m$. Invertible linear maps scale Euclidean volume by the absolute determinant. ([[thm-hausdorff-n-measure-is-proportional-to-lebesgue-measure]], [[cor-hausdorff-measure-under-similarities]], [[thm-hausdorff-measure-under-lipschitz-maps]], [[thm-linear-change-of-variables-for-lebesgue-measure]])
+
+## Proof
+
+**Given:** The graph in the Statement. All local arguments take place in a box compactly contained in a region on which $h$ is Lipschitz.
+
+1.1 We first need the integral identity for Lipschitz interval functions without invoking the stronger published general absolutely continuous FTC. If $b$ is $L$-Lipschitz on $[a,d]$, extend it constantly past the endpoints. Its difference quotients are bounded by $L$ and converge to $b'$ almost everywhere by [F1]. For any $a\le s<t\le d$, dominated convergence gives $$\int_s^t b'(r)\,dr=\lim_{\epsilon\downarrow0}\frac1\epsilon\left(\int_t^{t+\epsilon}b(r)\,dr-\int_s^{s+\epsilon}b(r)\,dr\right)=b(t)-b(s).$$ Coordinate difference quotients of $h$ are measurable; [F1] and [F2] show their limits $g_i$ exist almost everywhere, with $|g_i|\le L$. Define them to be zero on the exceptional sets. Applying the preceding identity and one-dimensional integration by parts on each line, then [F2], gives $\int h\partial_i\eta=-\int g_i\eta$ for smooth compactly supported $\eta$. The same line identities hold for every coordinate line of $h$, outside the appropriate line-null exceptional set of derivatives. [F1, F2, given, construct]
+
+2.1 For a cube $C$ of side $2r$ and a Lipschitz $w$, join $x$ to $y$ by the $m$ coordinate segments replacing their coordinates in order. Step 1.1 bounds $|w(x)-w(y)|$ by the sum of the line integrals of $|\partial_iw|$. Integrate in $x,y\in C$. For coordinate $i$, the unused coordinates contribute $(2r)^{m-1}$, while the measure of endpoint pairs whose interval contains a fixed coordinate value is at most $(2r)^2$. Thus, after division by $|C|$, the triangle inequality yields $$\int_C|w-w_C|\le 2r\sum_{i=1}^m\int_C|\partial_iw|,$$ where $w_C$ is its mean. Outside a null set, $g=(g_i)$ has strong Lebesgue points: apply [F3] to its coordinates and to $|g-q|$ for every rational vector $q$, then approximate $g(x)$ by such $q$. The countable union of the exceptional null sets is null under Countable Choice. Ball differentiation also gives cube differentiation by the fixed volume comparison. At such a point $x$, set $p=g(x)$ and $w(y)=h(y)-h(x)-p\cdot(y-x)$. The displayed inequality gives $\int_{C(x,r)}|w-w_C|=o(r^{m+1})$. As $w(x)=0$ and $w$ has a fixed Lipschitz bound, a mean with $|w_C|\ge\epsilon r$ would give $|w-w_C|\ge\epsilon r/2$ on a cube of side proportional to $r$ centered at $x$, contradicting this estimate. Thus $w_C=o(r)$. If $|w(y)|\ge\epsilon r$ at some $y$ in the half cube, the Lipschitz bound gives the same contradiction on a cube of side proportional to $r$ centered at $y$. Hence $\sup_{C(x,r/2)}|w|=o(r)$, proving differentiability with derivative $p$. Difference quotients then give $|p|\le L$. Countably many rational boxes cover $Q$, so the assertion is global. [F2, F3, step 1.1, algebra]
+
+3.1 We prove the area identity first for bounded Borel base sets within one $L$-Lipschitz box. On the differentiability set, for any $0<\epsilon<1/4$, form countably many Borel pieces on each of which $Dh$ lies within $\epsilon$ of a fixed rational vector $p$, the differentiability remainder is at most $\epsilon|z-y|$ whenever $|z-y|<1/k$, and the points lie in one cube of diameter less than $1/k$. Such pieces cover the differentiability set: the remainder condition follows from differentiability, can be tested on countably many rational $z$ by continuity, and is measurable; use increasing integers $k$ and a rational-vector enumeration. Subtract earlier pieces to make them disjoint. For two points $y,z$ of a single piece $E$, set $A_pv=(v,p\cdot v)$. Then $|F(z)-F(y)-A_p(z-y)|\le2\epsilon|z-y|\le2\epsilon|A_p(z-y)|$. Consequently $F\circ A_p^{-1}:A_p(E)\to F(E)$ is at most $(1+2\epsilon)$-Lipschitz, and its inverse is at most $(1-2\epsilon)^{-1}$-Lipschitz. The sets $F(E)$ are Borel because $F$ is a homeomorphism from $Q$ onto its graph. [step 2.1, construct, algebra]
+
+4.1 Choose an orthonormal coordinate system on the range plane of $A_p$. Its square coordinate matrix has determinant of absolute value $J_p=\sqrt{\det(A_p^TA_p)}=\sqrt{1+|p|^2}$. Thus [F4] gives $\sigma_m(A_p(E))=J_p|E|$. Apply [F4] to the two maps in step 3.1 to obtain $$(1-2\epsilon)^mJ_p|E|\le\sigma_m(F(E))\le(1+2\epsilon)^mJ_p|E|.$$ The function $p\mapsto\sqrt{1+|p|^2}$ is $1$-Lipschitz, so $|J_p-\sqrt{1+|Dh(y)|^2}|\le\epsilon$ on $E$. The excluded base-null set has graph image of zero $\sigma_m$ by [F4], since $F$ is Lipschitz. Sum the displayed inequalities over the disjoint pieces, using $|p|\le L+\epsilon$. The difference between $\sigma_m(F(B))$ and $\int_B\sqrt{1+|Dh|^2}$ is bounded by $C_{m,L}\epsilon|B|$. Letting $\epsilon\downarrow0$ proves equality. Exhaustion and countable localization extend it to arbitrary Borel $B\subseteq Q$; indicator functions, simple functions and monotone convergence prove the asserted integral formula. [F2, F4, step 3.1, algebra]
+
+5.1 For a compactly supported smooth scalar $b$ in the chart, vertical integration gives $\int_G\partial_zb=-\int_Qb(y,h(y))\,dy$. For a horizontal coordinate put $B_i(y)=\int_{h(y)}^\infty b(y,z)\,dz$. This is Lipschitz and compactly supported in $Q$; step 2.1 and ordinary differentiation of the smooth integral give $\partial_iB_i=\int_{h(y)}^\infty\partial_i b\,dz-b(y,h(y))g_i$ almost everywhere. Its weak derivative integrates to zero by step 1.1 and [F2]. Apply these identities to the components of $\phi$ and sum. Step 4.1 converts the resulting flux into the unit-normal formula. The graph measure is a graph pushforward of the locally bounded measurable density $\sqrt{1+|Dh|^2}\,dy$; compact and open approximation in the base show it is locally Radon on the graph with its relative topology. The density is between $1$ and $\sqrt{1+L^2}$ on every local box, which also proves the null-set assertion. [F2, step 1.1, step 2.1, step 4.1, algebra] ∎

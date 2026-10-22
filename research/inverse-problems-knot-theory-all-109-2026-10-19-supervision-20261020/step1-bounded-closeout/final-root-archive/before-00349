@@ -1,0 +1,542 @@
+[
+  {
+    "order": 3016,
+    "id": "minimax-testing-and-detection-rates",
+    "kind": "A",
+    "category": "inverse-problems",
+    "title": "Minimax signal detection and separation rates",
+    "companion": "minimax-testing-and-detection-rates-examples",
+    "requires": [
+      "statistical-inverse-experiments-and-white-noise",
+      "gaussian-sequence-models-and-risk-decomposition",
+      "minimax-lower-bounds-and-information-theoretic-methods",
+      "cost-constrained-gaussian-and-feedback-channels",
+      "outward-rounded-interval-and-ball-arithmetic"
+    ],
+    "items": [
+      {
+        "id": "lem-ip-weighted-chi-square-triangular-array-limit",
+        "kind": "lemma",
+        "title": "Weighted chi-square triangular-array limit",
+        "statement": "Assume the Axiom of Choice. For each $n$, let $G_{n,1},\\ldots,G_{n,m_n}$ be independent standard normal random variables, and let $w_{n,j}\\ge0$ satisfy $2\\sum_{j=1}^{m_n}w_{n,j}^2=1$. If $\\max_{1\\le j\\le m_n}w_{n,j}\\to0$, then\n$$T_n=\\sum_{j=1}^{m_n}w_{n,j}(G_{n,j}^2-1)$$\nhas mean zero and variance one for every $n$ and converges in distribution to $N(0,1)$.",
+        "deps": [
+          "def-axiom-of-choice",
+          "def-standard-normal-and-normal-laws",
+          "lem-standard-normal-fourth-moment",
+          "thm-lindeberg-feller-central-limit-theorem-sufficiency",
+          "thm-dominated-convergence"
+        ],
+        "dependency_level": 0,
+        "justified_by": [],
+        "proof_strategy": "direct",
+        "sources": {
+          "references": [
+            {
+              "title": "Yuri I. Ingster, Theofanis Sapatinas and Irina A. Suslina, Minimax signal detection in ill-posed inverse problems, §4.1, equations (4.2)–(4.3)",
+              "url": "https://arxiv.org/pdf/1001.1853"
+            },
+            {
+              "title": "Evarist Giné and Richard Nickl, Mathematical Foundations of Infinite-Dimensional Statistical Models, §6.2.3",
+              "url": "https://www.statslab.cam.ac.uk/~rn289/Site/__files/FULLPDF.pdf"
+            }
+          ]
+        },
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "axiom_use": "The Axiom of Choice is used only through the published Lindeberg–Feller theorem. The finite row-moment and Lindeberg estimates are choice-free."
+      },
+      {
+        "id": "lem-ip-sparse-gaussian-extremal-profile",
+        "kind": "lemma",
+        "title": "Sparse Gaussian scalar certificate and extremal profile",
+        "deps": [
+          "def-real-exponential-function-and-e",
+          "def-hyperbolic-functions",
+          "lem-exponential-series-has-infinite-radius",
+          "thm-termwise-differentiation-of-a-real-power-series",
+          "thm-hyperbolic-identities-and-derivatives",
+          "thm-real-power-laws",
+          "thm-real-power-continuity-and-derivatives",
+          "thm-intermediate-value",
+          "lem-continuous-functions-riemann-integrable",
+          "thm-cauchy-schwarz-finite"
+        ],
+        "proof_strategy": "direct",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Yuri I. Ingster and Irina A. Suslina, Minimax nonparametric hypothesis testing for ellipsoids and Besov bodies, ESAIM Probability and Statistics 4 (2000), pp. 87–100",
+              "url": "https://www.numdam.org/article/PS_2000__4__53_0.pdf"
+            }
+          ]
+        },
+        "statement": "Let $0<q<2$, $\\alpha,\\beta>0$, $s=\\alpha+\\beta$, $L=qs-2\\beta>0$, and $\\kappa=L/(2-q)$. For $z>0$ define\n$$a(z)=\\frac{z^2\\sinh(z^2)-q(\\cosh(z^2)-1)}{(2-q)z^2},\\qquad b(z)=\\frac{z^2\\sinh(z^2)-2(\\cosh(z^2)-1)}{(2-q)z^q},\\qquad \\phi(z)=\\frac{b(z)}{a(z)}.$$\nBoth $a$ and $b$ are positive, and for every $v\\in\\mathbb R$,\n$$\\cosh(zv)-1\\ge a(z)v^2-b(z)|v|^q,$$\nwith equality at $v=0,z,-z$. The function $\\phi:(0,\\infty)\\to(0,\\infty)$ is continuous and strictly increasing onto its target. Put\n$$z(x)=\\phi^{-1}(x^L),\\qquad \\psi(z)=\\frac1{2a(z)},\\qquad d(x)=x^{2\\beta}\\psi(z(x))\\quad(x>0).$$\nFor $C=[6(2-q)]^{1/(6-q)}$, its endpoint asymptotics are\n$$z(x)\\sim Cx^{L/(6-q)},\\quad \\psi(z)\\sim z^{-2}\\ (z\\downarrow0),\\quad d(x)\\sim C^{-2}x^{2\\beta-2L/(6-q)}\\quad(x\\downarrow0),$$\n$$z(x)\\sim x^\\kappa,\\quad \\psi(z)\\sim(2-q)e^{-z^2}\\ (z\\to\\infty),\\quad d(x)\\sim(2-q)x^{2\\beta}e^{-z(x)^2}\\quad(x\\to\\infty).$$\nThere is a constant $C_1$ depending only on the parameters such that\n$$\\psi(z)z^2\\le C_1,\\quad \\psi(z)(e^{z^2}-1)\\le C_1\\quad(z>0),\\qquad \\psi(z)^2(e^{z^2}-1)\\le C_1e^{-z^2}\\quad(z\\ge1).$$\nThe following improper integrals are finite and positive:\n$$c_0=\\int_0^\\infty d(x)^2(\\cosh(z(x)^2)-1)\\,dx,\\quad c_1=\\int_0^\\infty d(x)z(x)^2x^{2\\beta}\\,dx,\\quad c_2=\\int_0^\\infty d(x)z(x)^qx^{qs}\\,dx,$$\n$$M_1=\\int_0^\\infty x^{4\\beta}d(x)z(x)^4\\,dx,\\qquad M_2=\\int_0^\\infty x^{2qs}d(x)z(x)^{2q}\\,dx,$$\nand $c_0=(c_1-c_2)/2$.\n\nFor positive real $n,h_0$, set $z_i=z(i/n)$ and $h_i=h_0d(i/n)$. Then $\\sum_i h_i<\\infty$, and for every finite real vector $(v_i)_{i\\le m}$,\n$$\\sum_{i\\le m}h_i(\\cosh(z_iv_i)-1)\\ge\\frac{h_0}2\\left(n^{-2\\beta}\\sum_{i\\le m}i^{2\\beta}v_i^2-n^{-qs}\\sum_{i\\le m}i^{qs}|v_i|^q\\right).$$\nAs $n\\to\\infty$, the Riemann sums of the five displayed integral integrands, divided by $n$, converge to their respective integrals. In particular,\n$$\\sum_i h_i^2(\\cosh(z_i^2)-1)\\sim c_0h_0^2n,\\quad \\sum_i i^{2\\beta}h_iz_i^2\\sim c_1h_0n^{2\\beta+1},\\quad \\sum_i i^{qs}h_iz_i^q\\sim c_2h_0n^{qs+1},$$\n$$\\sum_i i^{4\\beta}h_iz_i^4\\sim M_1h_0n^{4\\beta+1},\\qquad \\sum_i i^{2qs}h_iz_i^{2q}\\sim M_2h_0n^{2qs+1}.$$\n\nLet $\\varepsilon>0$, $r>0$, and define the relaxed extremal value\n$$J_\\varepsilon(r)=\\inf\\left\\{\\sum_{i\\ge1}g_i^2(\\cosh(w_i^2)-1):\\ 0\\le g_i\\le1,\\ w_i\\ge0,\\ \\sum_i i^{2\\beta}g_iw_i^2\\ge r^2\\varepsilon^{-2},\\ \\sum_i i^{qs}g_iw_i^q\\le\\varepsilon^{-q}\\right\\}.$$\nChoose $n,h_0>0$ by\n$$c_1h_0n^{2\\beta+1}=r^2\\varepsilon^{-2},\\qquad c_2h_0n^{qs+1}=\\varepsilon^{-q},\\qquad U^2=c_0h_0^2n.$$\nWhenever $\\varepsilon\\downarrow0$, $r\\to0$, $n\\to\\infty$, and $h_0\\to0$, one has $J_\\varepsilon(r)\\sim U^2$. Writing\n$$A=2\\alpha+1/q-1/2,\\qquad B=2s+1/q,\\qquad D=\\alpha+\\beta(1-2/q)=L/q,$$\nthis gives\n$$\\sqrt{J_\\varepsilon(r)}\\sim c\\varepsilon^{-A/D}r^{B/D},\\qquad c=\\frac{\\sqrt{c_0}}{c_1}\\left(\\frac{c_1}{c_2}\\right)^{-(2\\beta+1/2)/L}>0.$$\nThe sufficient condition $n\\to\\infty$, $h_0\\to0$ is equivalent to\n$$r=o(\\varepsilon^{a_c}),\\qquad a_c=\\frac{q\\alpha+1-q/2}{q(\\alpha+\\beta)+1}.$$\nThe free coefficients $h_i$ need not be at most one. The upper bound on $J_\\varepsilon$ is realized asymptotically by finitely supported feasible pairs, constructed by truncating the profile to compact coordinate windows and adjusting $n,h_0$. No probability statement or unrestricted all-radius power asymptotic is asserted.",
+        "dependency_level": 0
+      },
+      {
+        "id": "lem-ip-finite-independent-array-fourth-moment-normal-limit",
+        "kind": "lemma",
+        "title": "A finite-array normal limit from vanishing fourth moments",
+        "deps": [
+          "def-countable-choice",
+          "thm-sigma-finite-product-measure-exists-is-rectangular-and-is-unique",
+          "thm-independent-random-elements-have-product-joint-law",
+          "thm-fubini-theorem-for-l-one-on-sigma-finite-product-spaces",
+          "thm-c-one-change-of-variables-for-nonnegative-lebesgue-measurable-functions",
+          "lem-taylor-lagrange-remainder-from-mean-value"
+        ],
+        "proof_strategy": "direct",
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-generated"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Rick Durrett, Probability: Theory and Examples, Version 5 (11 January 2019), section 3.4.2",
+              "url": "https://sites.math.duke.edu/~rtd/PTE/PTE5_011119.pdf",
+              "locator": "Classical comparison: Theorem 3.4.10 and proof, printed pp.148–149 (PDF pp.156–157), and Lyapunov Exercise 3.4.12, printed p.152 (PDF p.160). The present supplied-normal-law/Countable-Choice formulation is an adaptation proved independently by finite smooth Gaussian replacement below; no full-Choice CLT is imported as a logical supplier."
+            }
+          ]
+        },
+        "statement": "Assume Countable Choice, and suppose the probability law with density\n$\\phi(t)=(2\\pi)^{-1/2}e^{-t^2/2}$ is supplied. Write\n$\\Phi(t)=\\int_{-\\infty}^t\\phi(s)\\,ds$; normalization is part of the given\nprobability-law hypothesis. For each positive integer $n$, let\n$X_{n,1},\\ldots,X_{n,k_n}$ be independent centered real random variables,\nwhere $k_n$ is finite and each variable has a finite fourth moment. Different\nrows need not share a probability space. Suppose\n\n$$\\sum_{j=1}^{k_n}\\mathbb E X_{n,j}^2\\longrightarrow v\\in(0,\\infty), \\qquad \\sum_{j=1}^{k_n}\\mathbb E X_{n,j}^4\\longrightarrow0.$$\n\nThen, for $S_n=\\sum_jX_{n,j}$,\n\n$$\\sup_{t\\in\\mathbb R}\\left|\\mathbb P(S_n\\le t)-\\Phi(t/\\sqrt v)\\right| \\longrightarrow0.$$\n\nThe same conclusion applies to any specified sequence of finite arrays\nsatisfying these two limits; no identical-distribution hypothesis is needed.",
+        "dependency_level": 0
+      },
+      {
+        "id": "def-ip-minimax-detection-risk-and-separation",
+        "kind": "definition",
+        "title": "Minimax detection risk and separation rate",
+        "statement": "Assume Countable Choice and use the Gaussian sequence inverse model with singular values $s_j>0$, inverse-noise weights $\\sigma_j=s_j^{-1}$, and parameter coordinates $\\theta=(\\theta_j)\\in\\ell^2$. Let $a=(a_j)$ be a positive nondecreasing sequence with $a_j\\to\\infty$, and let $\\sigma=(\\sigma_j)$ be a positive nondecreasing sequence with $\\sigma_j\\to\\infty$. For $\\varepsilon>0$, put $\\eta_j=\\theta_j/\\sigma_j$ and observe $Y_j=Z_j/\\sigma_j=\\eta_j+\\varepsilon\\xi_j$, where $Z$ is the normalized observation in the Gaussian sequence inverse model and the $\\xi_j$ are independent standard normal random variables. For $0<q\\le2$ and $r>0$, define\n$$\\Theta_q(r)=\\left\\{\\eta\\in\\mathbb R^{\\mathbb N}:(\\sigma_j\\eta_j)_{j\\ge1}\\in\\ell^2,\\ \\sum_{j=1}^{\\infty}|a_j\\sigma_j\\eta_j|^q\\le1,\\ \\sum_{j=1}^{\\infty}\\sigma_j^2\\eta_j^2\\ge r^2\\right\\}.$$\nTest $H_0:\\eta=0$ against $H_1:\\eta\\in\\Theta_q(r)$ by a product-Borel measurable randomized test $\\psi:\\mathbb R^{\\mathbb N}\\to[0,1]$, where $\\psi(y)$ is the rejection probability. Its type-I error and maximal type-II error are\n$$\\alpha_\\varepsilon(\\psi)=\\mathbb E_{\\varepsilon,0}\\psi,\\qquad \\beta_\\varepsilon(\\Theta_q(r),\\psi)=\\sup_{\\eta\\in\\Theta_q(r)}\\mathbb E_{\\varepsilon,\\eta}(1-\\psi).$$\nWhen $\\Theta_q(r)=\\varnothing$, define $\\beta_\\varepsilon(\\Theta_q(r),\\psi)=\\beta_\\varepsilon(\\Theta_q(r),\\alpha)=\\gamma_\\varepsilon(\\Theta_q(r))=0$, the convention that no type-II error occurs when no alternative is possible. For $\\alpha\\in(0,1)$ define\n$$\\beta_\\varepsilon(\\Theta_q(r),\\alpha)=\\inf_{\\psi:\\,\\alpha_\\varepsilon(\\psi)\\le\\alpha}\\beta_\\varepsilon(\\Theta_q(r),\\psi),\\qquad \\gamma_\\varepsilon(\\Theta_q(r))=\\inf_\\psi\\{\\alpha_\\varepsilon(\\psi)+\\beta_\\varepsilon(\\Theta_q(r),\\psi)\\}.$$\nA positive family $r_\\varepsilon^*\\to0$ is a minimax separation rate if $\\gamma_\\varepsilon(\\Theta_q(r_\\varepsilon))\\to1$ and $\\beta_\\varepsilon(\\Theta_q(r_\\varepsilon),\\alpha)\\to1-\\alpha$ for every $\\alpha\\in(0,1)$ whenever $r_\\varepsilon/r_\\varepsilon^*\\to0$, while $\\gamma_\\varepsilon(\\Theta_q(r_\\varepsilon))\\to0$ and $\\beta_\\varepsilon(\\Theta_q(r_\\varepsilon),\\alpha)\\to0$ for every $\\alpha\\in(0,1)$ whenever $r_\\varepsilon/r_\\varepsilon^*\\to\\infty$.",
+        "deps": [
+          "def-ip-gaussian-sequence-inverse-model",
+          "def-countable-choice",
+          "def-finite-hypothesis-testing-beta"
+        ],
+        "dependency_level": 3,
+        "justified_by": [],
+        "sources": {
+          "references": [
+            {
+              "title": "Yuri I. Ingster, Theofanis Sapatinas and Irina A. Suslina, Minimax signal detection in ill-posed inverse problems, §2, PDF pp. 4–6",
+              "url": "https://arxiv.org/pdf/1001.1853"
+            },
+            {
+              "title": "Evarist Giné and Richard Nickl, Mathematical Foundations of Infinite-Dimensional Statistical Models, §6.2.1 and §6.2.3",
+              "url": "https://www.statslab.cam.ac.uk/~rn289/Site/__files/FULLPDF.pdf"
+            }
+          ]
+        },
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "not-applicable"
+        },
+        "axiom_use": "Countable Choice is inherited from the Gaussian sequence inverse model. The experiment and minimax risks require no additional choice."
+      },
+      {
+        "id": "lem-ip-q2-ellipsoid-extremal-profile-exists-for-small-r",
+        "kind": "lemma",
+        "title": "Existence of a finite q=2 ellipsoid extremal profile for small radius",
+        "statement": "Assume the minimax detection-risk definition with $q=2$, and let $a_j$ and $\\sigma_j$ be positive nondecreasing sequences tending to infinity. There is a constant $r_0>0$ such that for every $r\\in(0,r_0)$ there exist $A,z_0>0$ with finite nonempty $S=\\{j:Aa_j^2<1\\}$ for which\n$$\\widetilde\\eta_j^2=z_0^2\\sigma_j^2(1-Aa_j^2)_+$$\nsatisfies\n$$\\sum_{j\\ge1}\\sigma_j^2\\widetilde\\eta_j^2=r^2,\\qquad \\sum_{j\\ge1}a_j^2\\sigma_j^2\\widetilde\\eta_j^2=1.$$",
+        "deps": [
+          "def-ip-minimax-detection-risk-and-separation"
+        ],
+        "dependency_level": 4,
+        "justified_by": [],
+        "proof_strategy": "direct",
+        "sources": {
+          "references": [
+            {
+              "title": "Yuri I. Ingster, Theofanis Sapatinas and Irina A. Suslina, Minimax signal detection in ill-posed inverse problems, §4.1, Remark 4.1",
+              "url": "https://arxiv.org/pdf/1001.1853"
+            },
+            {
+              "title": "Evarist Giné and Richard Nickl, Mathematical Foundations of Infinite-Dimensional Statistical Models, §6.2.3",
+              "url": "https://www.statslab.cam.ac.uk/~rn289/Site/__files/FULLPDF.pdf"
+            }
+          ]
+        },
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        }
+      },
+      {
+        "id": "lem-ip-q2-ellipsoid-extremal-profile-is-minimizer",
+        "kind": "lemma",
+        "title": "The q=2 ellipsoid extremal profile minimizes the fourth-power objective",
+        "statement": "Assume the minimax detection-risk definition, $q=2$, and positive nondecreasing sequences $a_j$ and $\\sigma_j$ with $a_j\\to\\infty$. Let $A,z_0>0$ and suppose $S=\\{j:Aa_j^2<1\\}$ is finite and nonempty. Define $\\widetilde\\eta_j^2=z_0^2\\sigma_j^2(1-Aa_j^2)_+$ and assume\n$$\\sum_{j\\ge1}\\sigma_j^2\\widetilde\\eta_j^2=r^2,\\qquad \\sum_{j\\ge1}a_j^2\\sigma_j^2\\widetilde\\eta_j^2=1.$$\nThen $\\widetilde\\eta\\in\\Theta_2(r)$ and minimizes $\\sum_{j\\ge1}\\eta_j^4$ over $\\Theta_2(r)$; the nonnegative minimizer is unique.",
+        "deps": [
+          "def-ip-minimax-detection-risk-and-separation"
+        ],
+        "dependency_level": 4,
+        "justified_by": [],
+        "proof_strategy": "direct",
+        "sources": {
+          "references": [
+            {
+              "title": "Yuri I. Ingster, Theofanis Sapatinas and Irina A. Suslina, Minimax signal detection in ill-posed inverse problems, §4.1, equations (4.4)–(4.8)",
+              "url": "https://arxiv.org/pdf/1001.1853"
+            },
+            {
+              "title": "Clément Marteau and Theofanis Sapatinas, A unified treatment for non-asymptotic and asymptotic approaches to minimax signal detection, §3.1",
+              "url": "https://arxiv.org/pdf/1406.5387"
+            }
+          ]
+        },
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        }
+      },
+      {
+        "id": "lem-ip-gaussian-product-mixture-testing-bound",
+        "kind": "lemma",
+        "title": "Symmetric Gaussian product-mixture testing bound",
+        "statement": "Assume Countable Choice. In the Gaussian sequence detection experiment, let $v\\in\\Theta_q(r)$ have finite support $J$ and put\n$$u(v)^2=\\frac{1}{2\\varepsilon^4}\\sum_{j\\in J}v_j^4.$$\nLet $\\pi_v$ be the uniform probability law on the finite family of mean sequences whose $j$th coordinate is independently $+v_j$ or $-v_j$ for $j\\in J$ and is zero off $J$, and let $P_{\\pi_v}$ be the corresponding mixture sampling law. Then its likelihood ratio with respect to the null law is\n$$L_v=\\frac{dP_{\\pi_v}}{dP_{\\varepsilon,0}}=\\prod_{j\\in J}\\exp\\!\\left(-\\frac{v_j^2}{2\\varepsilon^2}\\right)\\cosh\\!\\left(\\frac{v_jY_j}{\\varepsilon^2}\\right),$$\nit satisfies\n$$\\mathbb E_{\\varepsilon,0}L_v^2=\\prod_{j\\in J}\\cosh\\!\\left(\\frac{v_j^2}{\\varepsilon^2}\\right),\\qquad \\mathbb E_{\\varepsilon,0}(L_v-1)^2\\le \\exp(u(v)^2)-1,$$\nand the minimax risks obey\n$$\\gamma_\\varepsilon(\\Theta_q(r))\\ge1-\\frac12\\sqrt{\\exp(u(v)^2)-1},\\qquad \\beta_\\varepsilon(\\Theta_q(r),\\alpha)\\ge1-\\alpha-\\frac12\\sqrt{\\exp(u(v)^2)-1}$$\nfor every $\\alpha\\in(0,1)$.",
+        "deps": [
+          "def-ip-gaussian-sequence-inverse-model",
+          "thm-ip-white-noise-spectral-sequence-representation",
+          "def-ip-minimax-detection-risk-and-separation",
+          "def-total-variation-distance-for-probability-laws",
+          "thm-independent-random-elements-have-product-joint-law",
+          "lem-finite-measure-uniqueness-on-a-pi-system",
+          "lem-normal-density-has-total-mass-one",
+          "thm-c-one-change-of-variables-for-nonnegative-lebesgue-measurable-functions",
+          "def-countable-choice"
+        ],
+        "dependency_level": 4,
+        "justified_by": [],
+        "proof_strategy": "direct",
+        "sources": {
+          "references": [
+            {
+              "title": "Yuri I. Ingster, Theofanis Sapatinas and Irina A. Suslina, Minimax signal detection in ill-posed inverse problems, §4.1, PDF pp. 6–7",
+              "url": "https://arxiv.org/pdf/1001.1853"
+            },
+            {
+              "title": "Evarist Giné and Richard Nickl, Mathematical Foundations of Infinite-Dimensional Statistical Models, §6.2.3, PDF pp. 506–508",
+              "url": "https://www.statslab.cam.ac.uk/~rn289/Site/__files/FULLPDF.pdf"
+            }
+          ]
+        },
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "axiom_use": "Countable Choice is inherited from the Gaussian sequence inverse model and the change-of-variables supplier. The finite sign prior and likelihood-ratio computations use no additional choice principle."
+      },
+      {
+        "id": "thm-ip-sparse-detection-regime-split",
+        "kind": "theorem",
+        "title": "Sparse q<2 detection regime split",
+        "statement": "Assume Countable Choice and the minimax detection-risk definition with $0<q<2$, $a_j=j^\\alpha$, $\\sigma_j=j^\\beta$, and $\\alpha,\\beta>0$. Let $r_\\varepsilon\\to0$ as $\\varepsilon\\downarrow0$, and put\n$$\\lambda=\\frac{\\alpha+\\beta}{2}-\\frac{\\beta}{q}.$$\nFor $\\lambda>0$, put $A=2\\alpha+1/q-1/2$, $B=2(\\alpha+\\beta)+1/q$, and $D=\\alpha+\\beta(1-2/q)>0$. Choose any $\\delta_\\varepsilon>0$ with $\\delta_\\varepsilon\\to0$ and $\\delta_\\varepsilon\\log\\varepsilon^{-1}\\to\\infty$, set $\\widetilde r_\\varepsilon=r_\\varepsilon(1-\\delta_\\varepsilon)$, and define\n$$u_\\varepsilon^2=2\\inf\\left\\{\\sum_{j\\ge1}h_j^2\\sinh^2(z_j^2/2):\\ 0\\le h_j\\le1,\\ z_j\\ge0,\\ \\sum_{j\\ge1}j^{2\\beta}h_jz_j^2\\ge\\frac{\\widetilde r_\\varepsilon^2}{\\varepsilon^2},\\ \\sum_{j\\ge1}j^{q(\\alpha+\\beta)}h_jz_j^q\\le\\frac1{\\varepsilon^q}\\right\\}.$$\nFor each fixed significance level $\\ell\\in(0,1)$, the sharp errors have Gaussian form\n$$\\beta_\\varepsilon(\\Theta_q(r_\\varepsilon),\\ell)=\\Phi(H_\\ell-u_\\varepsilon)+o(1),\\qquad \\gamma_\\varepsilon(\\Theta_q(r_\\varepsilon))=2\\Phi(-u_\\varepsilon/2)+o(1),$$\nwhere $\\Phi(t)=(2\\pi)^{-1/2}\\int_{-\\infty}^t e^{-x^2/2}\\,dx$ and $H_\\ell$ is its $(1-\\ell)$-quantile. Moreover, if $r_\\varepsilon=o(\\varepsilon^{a_c})$ with $a_c=(q\\alpha+1-q/2)/(q(\\alpha+\\beta)+1)$, then\n$$u_\\varepsilon\\sim c_{\\alpha,\\beta,q}\\,\\varepsilon^{-A/D}r_\\varepsilon^{B/D}$$\nfor a constant $c_{\\alpha,\\beta,q}>0$. Without this additional restriction on $r_\\varepsilon$, the sharp error formulas above remain valid for every $r_\\varepsilon\\to0$, and a minimax separation rate is\n$$r_\\varepsilon^*=\\varepsilon^{A/B}.$$\nIf $\\lambda\\le0$, for the same fixed significance level $\\ell\\in(0,1)$ put $n_\\varepsilon=r_\\varepsilon^{-1/\\alpha}$ and $D_\\varepsilon=n_\\varepsilon^{-\\beta}r_\\varepsilon/\\varepsilon-\\sqrt{2\\log n_\\varepsilon}$. Then the sharp errors have degenerate form\n$$\\beta_\\varepsilon(\\Theta_q(r_\\varepsilon),\\ell)=(1-\\ell)\\Phi(-D_\\varepsilon)+o(1),\\qquad \\gamma_\\varepsilon(\\Theta_q(r_\\varepsilon))=\\Phi(-D_\\varepsilon)+o(1),$$\nand a sharp separation-rate normalization is\n$$r_\\varepsilon^*=\\Lambda\\,\\varepsilon^{\\alpha/(\\alpha+\\beta)}(\\log\\varepsilon^{-1})^{\\alpha/[2(\\alpha+\\beta)]},\\qquad \\Lambda=\\left(\\frac{2}{\\alpha+\\beta}\\right)^{\\alpha/[2(\\alpha+\\beta)]}.$$\nThus the sparse boundary $\\lambda=0$ belongs to the degenerate regime, and the two regimes have different separation rates.\n\nThe deterministic globalized score-and-maximum family and the finite maximum tests constructed in the proof are asymptotically minimax in the Gaussian and degenerate regimes, respectively; the significance tests include deterministic randomization to satisfy the exact level constraint.",
+        "deps": [
+          "def-ip-minimax-detection-risk-and-separation",
+          "lem-ip-sparse-gaussian-extremal-profile",
+          "lem-ip-finite-independent-array-fourth-moment-normal-limit",
+          "def-countable-choice",
+          "def-ip-isonormal-white-noise-experiment",
+          "thm-c-one-change-of-variables-for-nonnegative-lebesgue-measurable-functions",
+          "thm-chebyshev-markov-inequality-for-the-integral",
+          "thm-independent-random-elements-have-product-joint-law",
+          "thm-factorization-of-expectations-for-independent-variables",
+          "thm-sigma-finite-product-measure-exists-is-rectangular-and-is-unique",
+          "thm-monotone-convergence-for-the-integral",
+          "thm-dominated-convergence",
+          "lem-finite-measure-uniqueness-on-a-pi-system",
+          "lem-taylor-lagrange-remainder-from-mean-value"
+        ],
+        "dependency_level": 4,
+        "justified_by": [],
+        "proof_strategy": "direct",
+        "sources": {
+          "references": [
+            {
+              "title": "Yuri I. Ingster, Theofanis Sapatinas and Irina A. Suslina, Minimax signal detection in ill-posed inverse problems, §4.7, Theorem 4.7, PDF pp. 18–19",
+              "url": "https://arxiv.org/pdf/1001.1853"
+            },
+            {
+              "title": "Yuri I. Ingster and Irina A. Suslina, Nonparametric Goodness-of-Fit Testing Under Gaussian Models, Chapters 4 and 6, bibliographic context only; not used as an unread proof premise",
+              "url": "https://link.springer.com/book/10.1007/978-0-387-21580-8"
+            }
+          ]
+        },
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "axiom_use": "Countable Choice is inherited from the sequence model and the normal-density change-of-variables supplier. The proved finite-support mixture calculations and the lambda-nonpositive maximum test use no additional choice."
+      },
+      {
+        "id": "thm-ip-ellipsoid-detection-boundary",
+        "kind": "theorem",
+        "title": "q=2 Gaussian-sequence ellipsoid detection boundary",
+        "statement": "Assume Countable Choice and the minimax detection-risk definition with $q=2$. For each $\\varepsilon$, suppose $\\Theta_2(r_\\varepsilon)$ is nonempty and has a finite-support fourth-power minimizer $\\widetilde\\eta_\\varepsilon$ with profile $\\widetilde\\eta_{\\varepsilon,j}^2=z_0^2\\sigma_j^2(1-Aa_j^2)_+$ as in the extremal-profile lemma. Put\n$$u_\\varepsilon^2=\\frac{1}{2\\varepsilon^4}\\sum_j\\widetilde\\eta_{\\varepsilon,j}^4,\\qquad w_{\\varepsilon,j}=\\frac{\\widetilde\\eta_{\\varepsilon,j}^2}{\\sqrt{2\\sum_j\\widetilde\\eta_{\\varepsilon,j}^4}},\\qquad w_{\\varepsilon,0}=\\max_jw_{\\varepsilon,j},$$\nand define\n$$T_\\varepsilon=\\sum_jw_{\\varepsilon,j}\\bigl((Y_j/\\varepsilon)^2-1\\bigr),\\qquad \\psi_{\\varepsilon,H}=\\mathbf1_{\\{T_\\varepsilon>H\\}}.$$\nIf $u_\\varepsilon\\to0$, then $\\gamma_\\varepsilon(\\Theta_2(r_\\varepsilon))\\to1$ and $\\beta_\\varepsilon(\\Theta_2(r_\\varepsilon),\\alpha)\\to1-\\alpha$ for every $\\alpha\\in(0,1)$. If $u_\\varepsilon\\to\\infty$, then for every fixed $c\\in(0,1)$ the tests $\\psi_{\\varepsilon,cu_\\varepsilon}$ have total error tending to zero.\n\nFor the extremal profile, define the finite sums\n$$J_1=\\sum_j\\sigma_j^4(1-Aa_j^2)_+,\\quad J_2=A\\sum_ja_j^2\\sigma_j^4(1-Aa_j^2)_+,\\quad J_0=\\sum_j\\sigma_j^4(1-Aa_j^2)_+^2.$$\nThe active constraints imply\n$$r_\\varepsilon^2=A\\frac{J_1}{J_2},\\qquad u_\\varepsilon^2=\\left(\\frac{r_\\varepsilon}{\\varepsilon}\\right)^4\\frac{J_0}{2J_1^2}.$$",
+        "deps": [
+          "def-ip-minimax-detection-risk-and-separation",
+          "def-ip-isonormal-white-noise-experiment",
+          "lem-ip-gaussian-product-mixture-testing-bound",
+          "lem-ip-q2-ellipsoid-extremal-profile-is-minimizer",
+          "def-countable-choice",
+          "lem-standard-normal-fourth-moment",
+          "thm-chebyshev-markov-inequality-for-the-integral"
+        ],
+        "dependency_level": 5,
+        "justified_by": [],
+        "proof_strategy": "direct",
+        "sources": {
+          "references": [
+            {
+              "title": "Yuri I. Ingster, Theofanis Sapatinas and Irina A. Suslina, Minimax signal detection in ill-posed inverse problems, §2 and §4.1, PDF pp. 4–7",
+              "url": "https://arxiv.org/pdf/1001.1853"
+            },
+            {
+              "title": "Evarist Giné and Richard Nickl, Mathematical Foundations of Infinite-Dimensional Statistical Models, §6.2.3, PDF pp. 506–508",
+              "url": "https://www.statslab.cam.ac.uk/~rn289/Site/__files/FULLPDF.pdf"
+            },
+            {
+              "title": "Clément Marteau and Theofanis Sapatinas, A unified treatment for non-asymptotic and asymptotic approaches to minimax signal detection, §§3.1–3.2",
+              "url": "https://arxiv.org/pdf/1406.5387"
+            }
+          ]
+        },
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "axiom_use": "Countable Choice is inherited from the Gaussian sequence inverse model. The two rate-dichotomy branches use only finite likelihood ratios and second-moment bounds; no further choice axiom is used."
+      },
+      {
+        "id": "cor-ip-ellipsoid-sharp-gaussian-testing-asymptotics",
+        "kind": "corollary",
+        "title": "Sharp Gaussian asymptotics under a vanishing largest weight",
+        "statement": "Assume the $q=2$ ellipsoid detection-boundary theorem, Countable Choice, and the Axiom of Choice. Along a sequence for which $u_\\varepsilon$ is bounded above and bounded away from zero and $w_{\\varepsilon,0}\\to0$, the minimax level-$\\alpha$ type-II error and minimax total error satisfy\n$$\\beta_\\varepsilon(\\Theta_2(r_\\varepsilon),\\alpha)=\\Phi(H_\\alpha-u_\\varepsilon)+o(1),\\qquad \\gamma_\\varepsilon(\\Theta_2(r_\\varepsilon))=2\\Phi(-u_\\varepsilon/2)+o(1),$$\nwhere $\\Phi$ is the standard normal distribution function and $H_\\alpha$ is defined by $\\Phi(H_\\alpha)=1-\\alpha$. Let $c_{\\varepsilon,\\alpha}=\\inf\\{t:\\mathbb P_{\\varepsilon,0}(T_\\varepsilon\\le t)\\ge1-\\alpha\\}$; then $\\mathbb P_{\\varepsilon,0}(T_\\varepsilon>c_{\\varepsilon,\\alpha})\\le\\alpha$ and $c_{\\varepsilon,\\alpha}\\to H_\\alpha$. The weighted tests with thresholds $c_{\\varepsilon,\\alpha}$ and $u_\\varepsilon/2$ attain these asymptotics, while the uncalibrated threshold $H_\\alpha$ has asymptotic size $\\alpha$. The vanishing-largest-weight condition is required for this Gaussian sharp branch.",
+        "strategy": "Combine the weighted chi-square central limit, a uniform bounded-mean alternative limit, and the local asymptotic normality of the finite symmetric product-mixture likelihood ratio.",
+        "deps": [
+          "thm-ip-ellipsoid-detection-boundary",
+          "lem-ip-weighted-chi-square-triangular-array-limit",
+          "lem-ip-gaussian-product-mixture-testing-bound",
+          "thm-slutsky-for-real-random-variables",
+          "thm-portmanteau-theorem",
+          "thm-chebyshev-markov-inequality-for-the-integral",
+          "lem-standard-normal-fourth-moment",
+          "def-axiom-of-choice",
+          "def-countable-choice",
+          "def-ip-isonormal-white-noise-experiment"
+        ],
+        "dependency_level": 6,
+        "justified_by": [],
+        "proof_strategy": "direct",
+        "sources": {
+          "references": [
+            {
+              "title": "Yuri I. Ingster, Theofanis Sapatinas and Irina A. Suslina, Minimax signal detection in ill-posed inverse problems, Theorem 4.1 and the discussion after equation (4.3), PDF pp. 6–7",
+              "url": "https://arxiv.org/pdf/1001.1853"
+            },
+            {
+              "title": "Evarist Giné and Richard Nickl, Mathematical Foundations of Infinite-Dimensional Statistical Models, §6.2.3, PDF pp. 506–508",
+              "url": "https://www.statslab.cam.ac.uk/~rn289/Site/__files/FULLPDF.pdf"
+            },
+            {
+              "title": "Clément Marteau and Theofanis Sapatinas, A unified treatment for non-asymptotic and asymptotic approaches to minimax signal detection, §§3.1–3.2",
+              "url": "https://arxiv.org/pdf/1406.5387"
+            }
+          ]
+        },
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "axiom_use": "Countable Choice is inherited from the sequence model. AC is used only through the published Lindeberg–Feller theorem in the weighted chi-square limit; the finite likelihood-ratio expansion and asymptotic testing inequalities are choice-free."
+      }
+    ]
+  },
+  {
+    "order": 3017,
+    "id": "minimax-testing-and-detection-rates-examples",
+    "kind": "B",
+    "category": "inverse-problems",
+    "title": "Minimax signal detection and separation rates — Examples and Counterexamples",
+    "companion": "minimax-testing-and-detection-rates",
+    "requires": [
+      "minimax-testing-and-detection-rates"
+    ],
+    "items": [
+      {
+        "id": "ex-ip-sparse-detection-lambda-zero-boundary",
+        "kind": "example",
+        "title": "The lambda-zero sparse detection boundary",
+        "statement": "Take $q=1$, $\\alpha=\\beta=1$, $a_j=j$, and $\\sigma_j=j$ in the Gaussian sequence detection experiment. Then the sparse boundary parameter is $\\lambda=0$, the source-normalized constant is $\\Lambda=1$, and a minimax separation rate has order\n$$r_\\varepsilon^*\\asymp\\varepsilon^{1/2}(\\log\\varepsilon^{-1})^{1/4}\\qquad(\\varepsilon\\downarrow0).$$",
+        "deps": [
+          "def-ip-minimax-detection-risk-and-separation",
+          "thm-factorization-of-expectations-for-independent-variables",
+          "lem-finite-measure-uniqueness-on-a-pi-system",
+          "def-ip-isonormal-white-noise-experiment",
+          "thm-c-one-change-of-variables-for-nonnegative-lebesgue-measurable-functions",
+          "thm-chebyshev-markov-inequality-for-the-integral",
+          "def-countable-choice"
+        ],
+        "dependency_level": 4,
+        "justified_by": [],
+        "proof_strategy": "direct",
+        "sources": {
+          "references": [
+            {
+              "title": "Yuri I. Ingster, Theofanis Sapatinas and Irina A. Suslina, Minimax signal detection in ill-posed inverse problems, §4.7, Theorem 4.7, PDF pp. 18–19",
+              "url": "https://arxiv.org/pdf/1001.1853"
+            },
+            {
+              "title": "Evarist Giné and Richard Nickl, Mathematical Foundations of Infinite-Dimensional Statistical Models, §6.2.3, PDF pp. 506–508",
+              "url": "https://www.statslab.cam.ac.uk/~rn289/Site/__files/FULLPDF.pdf"
+            }
+          ]
+        },
+        "provenance": {
+          "statement": "ai-generated",
+          "proof": "ai-generated"
+        },
+        "generation": {
+          "role": "example"
+        }
+      },
+      {
+        "id": "ex-ip-mildly-illposed-sobolev-detection-rate",
+        "kind": "example",
+        "title": "Mildly ill-posed Sobolev q=2 detection rate",
+        "statement": "Assume $\\alpha,\\beta>0$, $q=2$, $a_j=j^\\alpha$, and $\\sigma_j=j^\\beta$ in the Gaussian sequence detection experiment. The minimax separation rate over $\\Theta_2(r)$ has order\n$$r_\\varepsilon^*\\asymp\\varepsilon^{4\\alpha/(4\\alpha+4\\beta+1)}.$$",
+        "deps": [
+          "thm-ip-ellipsoid-detection-boundary",
+          "lem-ip-q2-ellipsoid-extremal-profile-exists-for-small-r",
+          "lem-ip-q2-ellipsoid-extremal-profile-is-minimizer"
+        ],
+        "dependency_level": 6,
+        "justified_by": [],
+        "proof_strategy": "direct",
+        "sources": {
+          "references": [
+            {
+              "title": "Yuri I. Ingster, Theofanis Sapatinas and Irina A. Suslina, Minimax signal detection in ill-posed inverse problems, Theorem 4.2, PDF pp. 12–13",
+              "url": "https://arxiv.org/pdf/1001.1853"
+            },
+            {
+              "title": "Evarist Giné and Richard Nickl, Mathematical Foundations of Infinite-Dimensional Statistical Models, §6.2.3",
+              "url": "https://www.statslab.cam.ac.uk/~rn289/Site/__files/FULLPDF.pdf"
+            }
+          ]
+        },
+        "provenance": {
+          "statement": "ai-generated",
+          "proof": "ai-generated"
+        },
+        "generation": {
+          "role": "example"
+        }
+      },
+      {
+        "id": "ex-ip-mildly-illposed-analytic-detection-rate",
+        "kind": "example",
+        "title": "Mildly ill-posed analytic q=2 detection rate",
+        "statement": "Assume $\\alpha,\\beta>0$, $q=2$, $a_j=e^{\\alpha j}$, and $\\sigma_j=j^\\beta$ in the Gaussian sequence detection experiment. The minimax separation rate over $\\Theta_2(r)$ has order\n$$r_\\varepsilon^*\\asymp\\varepsilon(\\log\\varepsilon^{-1})^{\\beta+1/4}.$$",
+        "deps": [
+          "thm-ip-ellipsoid-detection-boundary",
+          "lem-ip-q2-ellipsoid-extremal-profile-exists-for-small-r",
+          "lem-ip-q2-ellipsoid-extremal-profile-is-minimizer"
+        ],
+        "dependency_level": 6,
+        "justified_by": [],
+        "proof_strategy": "direct",
+        "sources": {
+          "references": [
+            {
+              "title": "Yuri I. Ingster, Theofanis Sapatinas and Irina A. Suslina, Minimax signal detection in ill-posed inverse problems, Theorem 4.5, PDF p. 14",
+              "url": "https://arxiv.org/pdf/1001.1853"
+            },
+            {
+              "title": "Evarist Giné and Richard Nickl, Mathematical Foundations of Infinite-Dimensional Statistical Models, §6.2.3",
+              "url": "https://www.statslab.cam.ac.uk/~rn289/Site/__files/FULLPDF.pdf"
+            }
+          ]
+        },
+        "provenance": {
+          "statement": "ai-generated",
+          "proof": "ai-generated"
+        },
+        "generation": {
+          "role": "example"
+        }
+      },
+      {
+        "id": "ex-ip-severely-illposed-sobolev-detection-rate",
+        "kind": "example",
+        "title": "Severely ill-posed Sobolev q=2 detection rate",
+        "statement": "Assume $\\alpha,\\beta>0$, $q=2$, $a_j=j^\\alpha$, and $\\sigma_j=e^{\\beta j}$ in the Gaussian sequence detection experiment. A minimax separation rate over $\\Theta_2(r)$ is\n$$r_\\varepsilon^*\\asymp\\left(\\frac{\\log\\varepsilon^{-1}}{\\beta}\\right)^{-\\alpha}.$$",
+        "deps": [
+          "thm-ip-ellipsoid-detection-boundary",
+          "lem-ip-q2-ellipsoid-extremal-profile-exists-for-small-r",
+          "lem-ip-q2-ellipsoid-extremal-profile-is-minimizer"
+        ],
+        "dependency_level": 6,
+        "justified_by": [],
+        "proof_strategy": "direct",
+        "sources": {
+          "references": [
+            {
+              "title": "Yuri I. Ingster, Theofanis Sapatinas and Irina A. Suslina, Minimax signal detection in ill-posed inverse problems, Theorem 4.4 and equation (4.5), PDF pp. 13–14",
+              "url": "https://arxiv.org/pdf/1001.1853"
+            },
+            {
+              "title": "Evarist Giné and Richard Nickl, Mathematical Foundations of Infinite-Dimensional Statistical Models, §6.2.3",
+              "url": "https://www.statslab.cam.ac.uk/~rn289/Site/__files/FULLPDF.pdf"
+            }
+          ]
+        },
+        "provenance": {
+          "statement": "ai-generated",
+          "proof": "ai-generated"
+        },
+        "generation": {
+          "role": "example"
+        }
+      },
+      {
+        "id": "ex-ip-severely-illposed-analytic-detection-rate",
+        "kind": "example",
+        "title": "Severely ill-posed analytic q=2 detection rate",
+        "statement": "Assume $\\alpha,\\beta>0$, $q=2$, $a_j=e^{\\alpha j}$, and $\\sigma_j=e^{\\beta j}$ in the Gaussian sequence detection experiment. A minimax separation rate over $\\Theta_2(r)$ is\n$$r_\\varepsilon^*\\asymp\\varepsilon^{\\alpha/(\\alpha+\\beta)}.$$",
+        "deps": [
+          "thm-ip-ellipsoid-detection-boundary",
+          "lem-ip-q2-ellipsoid-extremal-profile-exists-for-small-r",
+          "lem-ip-q2-ellipsoid-extremal-profile-is-minimizer"
+        ],
+        "dependency_level": 6,
+        "justified_by": [],
+        "proof_strategy": "direct",
+        "sources": {
+          "references": [
+            {
+              "title": "Yuri I. Ingster, Theofanis Sapatinas and Irina A. Suslina, Minimax signal detection in ill-posed inverse problems, Theorem 4.3 and equation (4.4), PDF p. 13",
+              "url": "https://arxiv.org/pdf/1001.1853"
+            },
+            {
+              "title": "Evarist Giné and Richard Nickl, Mathematical Foundations of Infinite-Dimensional Statistical Models, §6.2.3",
+              "url": "https://www.statslab.cam.ac.uk/~rn289/Site/__files/FULLPDF.pdf"
+            }
+          ]
+        },
+        "provenance": {
+          "statement": "ai-generated",
+          "proof": "ai-generated"
+        },
+        "generation": {
+          "role": "example"
+        }
+      }
+    ]
+  }
+]

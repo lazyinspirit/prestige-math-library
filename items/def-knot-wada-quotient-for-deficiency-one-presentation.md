@@ -36,6 +36,10 @@ sources:
       locator: "Complete lecture notes, printed pp. 4 and 7; based chain torsion and change-of-basis convention."
 verification:
   precheck: n/a
+  judge:
+    model: "gpt-6-luna"
+    verdict: pass
+    date: 2026-10-22
 ---
 
 ## Definition

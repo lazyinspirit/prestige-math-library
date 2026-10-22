@@ -33,7 +33,7 @@ dependency_level: 3
 
 Let $R$ be an analytic double-fibration transform, and fix a relation point $(z_0,\zeta_0;x_0,\xi_0)$ at which $d\pi_L$ is injective. For distributions $u$ supported in a sufficiently small neighborhood of $x_0$, data Gaussian exponential regularity at $(z_0,\zeta_0)$ implies object Gaussian exponential regularity at $(x_0,\xi_0)$.
 
-More precisely, for data parameters $v=(q,p)$ near that point on the local embedded image $V$ of $\pi_L$, write $\chi(v)=(X(v),\Xi(v))$ for the paired object covector. The transpose localized data Gaussian has the form
+More precisely, for data parameters $v=(q,p)$ near that point on the local embedded image $V$ of $\pi_L$, write $\chi(v)=(X(v),\Xi(v))$ for the paired object covector. Writing $T_\lambda(x,v)$ for the transpose localized data Gaussian, define the phase-normalized kernel $K_\lambda(x,v)=e^{-i\lambda q\cdot p}T_\lambda(x,v)$. It has the form
 $$
 K_\lambda(x,v)=\lambda^{-d/2}e^{i\lambda\psi(x,v)}A(x,v;\lambda)+E_\lambda(x,v), \qquad d=\dim Z-\dim X,
 $$

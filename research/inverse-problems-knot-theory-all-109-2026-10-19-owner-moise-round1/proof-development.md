@@ -1,0 +1,13 @@
+# Topological three-manifold triangulation: exact remaining obligation
+
+This development does not claim a proof of Moise's theorem and is not a logical supplier.
+
+The compactness tail is elementary and complete: suppose a compact space M is homeomorphic to the realization of a locally finite simplicial complex K. For every point x of |K|, local finiteness gives an open neighborhood U_x meeting only finitely many simplices. Compactness gives finitely many such neighborhoods covering |K|. Every nonempty simplex has a point in this cover and therefore is one of the finitely many simplices met by one of those finitely many neighborhoods. Hence K has finitely many simplices. No infinite choice is used: compactness supplies a finite subcover of the existing family of all suitable neighborhoods, and all later selections are finite. This proves only that locally finite triangulation implies finite triangulation in the compact case.
+
+The unsupplied core remains: construct a locally finite triangulation of every Hausdorff second countable topological three-manifold, including boundary, with boundary a subcomplex. A proof that begins by taking a smooth atlas or taking mutually compatible PL coordinate charts assumes the missing conclusion. Finite topological chart covers alone do not give compatible overlaps; triangulating each chart separately and asserting a common subdivision assumes the three-dimensional approximation/taming theorem.
+
+For the prime-decomposition consumer, a finite combinatorial triangulation supports a PL proof. If its actual proof uses smooth transversality, an additional compatible smoothing construction is required; a mere topological finite CW model does not supply this. Locally flat embedded spheres must be distinguished from wild spheres. A triangulation of the ambient manifold alone does not imply that every topologically embedded sphere is PL or smooth. A proof transferring the definition of irreducibility between categories needs the appropriate locally flat sphere taming/smoothing statement or a definition consistently made in the chosen compatible PL/smooth category and its justified invariance.
+
+The original manuscript's phrase every embedded sphere is not literally valid in the unrestricted topological embedding sense, owing to wild spheres even in S3. This was reported to the prime-decomposition owner; that owner controls the existing Statement.
+
+The smooth knot-exterior recognition consumer has a narrower route: start with the existing proved smooth finite triangulation theorem and require its actual compatible triangulation. This does not prove the topological three-manifold bridge or compatibility of an arbitrary unrelated abstract triangulation.

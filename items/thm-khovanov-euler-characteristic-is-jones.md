@@ -1,7 +1,7 @@
 ---
 id: thm-khovanov-euler-characteristic-is-jones
 kind: theorem
-title: Khovanov Euler characteristics equal the Jones polynomial
+title: Reduced and unreduced Khovanov Euler characteristics and the Jones polynomial
 status: draft
 origin: pipeline
 pipeline_run: inverse-problems-knot-theory-all-109-2026-10-19

@@ -1,0 +1,730 @@
+[
+  {
+    "order": 3090,
+    "id": "neural-operator-eit-inverse-map",
+    "kind": "A",
+    "category": "inverse-problems",
+    "title": "Noise-robust neural-operator approximation for EIT",
+    "companion": "neural-operator-eit-inverse-map-examples",
+    "requires": [
+      "eit-logarithmic-stability-and-conductivity-classes",
+      "learned-reconstruction-targets-and-risk",
+      "compact-self-adjoint-hilbert-schmidt-and-trace-class-operators"
+    ],
+    "items": [
+      {
+        "id": "lem-ip-boundary-chart-lifting-and-fourier-projection",
+        "kind": "lemma",
+        "title": "Boundary chart lifting and compact-uniform Fourier projections",
+        "deps": [
+          "def-countable-choice",
+          "lem-surface-integral-is-independent-of-c-one-boundary-charts",
+          "thm-c-one-change-of-variables-for-nonnegative-lebesgue-measurable-functions",
+          "thm-fubini-theorem-for-l-one-on-sigma-finite-product-spaces",
+          "thm-fourier-basis-and-parseval-on-the-n-torus",
+          "thm-smooth-partitions-of-unity-exist-on-manifolds"
+        ],
+        "dependency_level": 0,
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Maarten V. de Hoop, Nikola B. Kovachki, Matti Lassas and Nicholas H. Nelsen, Extension and neural operator approximation of the electrical impedance tomography inverse map",
+              "url": "https://arxiv.org/pdf/2511.20361",
+              "locator": "§4.3, equations (4.6)–(4.14), Lemma 4.7 and its proof, printed pp. 19–22."
+            },
+            {
+              "title": "M. Xu, Math 205B notes from a course by R. Mazzeo",
+              "url": "https://math.berkeley.edu/~moorxu/oldsite/notes/205b/205bmain.pdf",
+              "locator": "Theorem 9.3, compact Hausdorff topology and finite subcover arguments."
+            }
+          ]
+        },
+        "proof_strategy": "direct",
+        "statement": "Assume Countable Choice. Let $d\\ge2$, let $\\Omega\\subset(0,1)^d$ be a nonempty bounded connected domain with $C^\\infty$ boundary, and put $M=\\partial\\Omega\\times\\partial\\Omega$ and $n=2d-2$. Give $M$ its product surface measure and choose a cube $D=(1/4,3/4)^n$ whose closure lies in $(0,1)^n$. Define $H^1(M)$ as the completion of smooth functions in the norm $\\|h\\|_{H^1(M)}^2=\\int_M(|h|^2+|\\nabla_Mh|^2)\\,dS$; use the corresponding periodic $H^1$ norm on $\\mathbb T^n$. There are a finite family of smooth bi-Lipschitz charts $(U_j,\\phi_j)$ for $\\partial\\Omega$, with $\\phi_j(U_j)\\Subset(1/4,3/4)^{d-1}$, and smooth functions $\\psi_j$ supported compactly in $U_j$ with $\\sum_j\\psi_j^2=1$. They induce bounded linear maps\n$$G:L^2(M)\\to\\bigoplus_{j,k=1}^J L^2(\\mathbb T^n),\\qquad L:\\bigoplus_{j,k=1}^J L^2(\\mathbb T^n)\\to L^2(M)$$\nsuch that $LG=I_{L^2(M)}$. If $P_N$ is the orthogonal Fourier projection onto modes $\\ell\\in\\mathbb Z^n$ with $\\|\\ell\\|_\\infty\\le N$, applied componentwise, then for every compact $C\\subset L^2(M)$,\n$$\\sup_{h\\in C}\\|P_NGh-Gh\\|_{\\oplus L^2(\\mathbb T^n)}\\longrightarrow0\\qquad(N\\to\\infty).$$\nThe same maps are bounded between $H^1(M)$ and the direct-sum $H^1$ space, and there is $C_1<\\infty$ such that\n$$\\|(I-P_N)Gh\\|_{\\oplus L^2(\\mathbb T^n)}\\le C_1(1+N)^{-1}\\|h\\|_{H^1(M)}\\qquad(h\\in H^1(M),\\ N\\ge0).$$\n\nThe maps and their left-inverse relation have the commutative diagram\n\n```tikz\n\\begin{tikzpicture}[>=stealth,node distance=2.4cm]\n  \\node[draw,rounded corners,align=center] (m) {$L^2(M)$};\n  \\node[draw,rounded corners,align=center,right of=m] (local) {$\\bigoplus_{j,k}L^2(\\mathbb T^n)$};\n  \\node[draw,rounded corners,align=center,below of=local] (out) {$L^2(M)$};\n  \\draw[->] (m) -- node[above] {$G$} (local);\n  \\draw[->] (local) -- node[right] {$L$} (out);\n  \\draw[->] (m) -- node[left] {$I$} (out);\n\\end{tikzpicture}\n```\n\nHere $G$ localizes and pulls back by every chart pair, while $L$ multiplies by the same square-partition weights and sums the zero-extended chart components. The diagram records $LG=I$; the proof below establishes the identity by direct calculation."
+      },
+      {
+        "id": "lem-ip-finite-dimensional-neural-universal-approximation",
+        "kind": "lemma",
+        "title": "Finite-dimensional universal approximation by smooth nonpolynomial activations",
+        "deps": [
+          "thm-real-stone-weierstrass-general"
+        ],
+        "dependency_level": 0,
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Leshno, Lin, Pinkus and Schocken, Multilayer Feedforward Networks With a Non-Polynomial Activation Function Can Approximate Any Function",
+              "url": "https://archive.nyu.edu/bitstream/2451/14329/1/IS-92-13.pdf",
+              "locator": "Theorem 1 proof, smooth-activation finite-difference step."
+            },
+            {
+              "title": "M. Xu, Math 205B notes from a course by R. Mazzeo",
+              "url": "https://math.berkeley.edu/~moorxu/oldsite/notes/205b/205bmain.pdf",
+              "locator": "Theorem 9.3, Stone–Weierstrass theorem on compact Hausdorff spaces."
+            },
+            {
+              "title": "E. Carlen, Notes on Topology and the Stone-Weierstrass Theorem",
+              "url": "https://sites.math.rutgers.edu/~carlen/502S13/Topology502.pdf",
+              "locator": "§1.6, Theorem 1.26 and Lemmas 1.27–1.28 with full proof, printed pp. 15–18."
+            }
+          ]
+        },
+        "proof_strategy": "direct",
+        "statement": "Let $n\\ge1$ and let $\\sigma\\in C^\\infty(\\mathbb R)$ be globally Lipschitz and not a polynomial. For a compact set $K\\subset\\mathbb R^n$, let $\\mathcal N_{\\sigma,n}(K)$ be the restrictions to $K$ of functions\n$$x\\longmapsto c_0+\\sum_{j=1}^{J}c_j\\sigma(a_j\\cdot x+b_j),$$\nwhere $J\\ge0$, $c_0,c_j,b_j\\in\\mathbb R$ and $a_j\\in\\mathbb R^n$. Then $\\mathcal N_{\\sigma,n}(K)$ is uniformly dense in $C(K,\\mathbb R)$."
+      },
+      {
+        "id": "lem-ip-concave-modulus-hilbert-ball-intersection",
+        "kind": "lemma",
+        "title": "Concave-modulus intersection of Hilbert balls",
+        "deps": [
+          "def-axiom-of-choice",
+          "thm-projection-onto-a-nonempty-closed-convex-set",
+          "thm-hilbert-projection-variational-characterization"
+        ],
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-generated"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Yoav Benyamini and Joram Lindenstrauss, Geometric Nonlinear Functional Analysis, Volume 1",
+              "url": "https://doi.org/10.1090/coll/048",
+              "locator": "Chapter 1, complete Proposition 1.13, Proposition 1.13′ and Lemma 1.14 proofs, printed pp.18–21; public OCR reading copy https://www.scribd.com/document/671784162/Analisis-Funcional-Beyamini-Lindenstrauss."
+            },
+            {
+              "title": "F. Grünbaum and E. H. Zarantonello, On the extension of uniformly continuous mappings",
+              "url": "https://doi.org/10.1307/mmj/1028999906",
+              "locator": "Original attribution in Benyamini–Lindenstrauss Chapter 1 historical notes, printed p.33. The original article was identified but its full PDF was not retrieved; the complete argument below is local."
+            }
+          ]
+        },
+        "proof_strategy": "direct",
+        "statement": "Assume the Axiom of Choice. Let $H_1,H_2$ be real Hilbert spaces, let $I$ be any set, let $x\\in H_1$, and let $(x_i)_{i\\in I}\\subset H_1$ and $(y_i)_{i\\in I}\\subset H_2$. Let $\\omega:[0,\\infty)\\to[0,\\infty)$ be continuous, nondecreasing and concave, with $\\omega(0)=0$. If\n$$\\|y_i-y_j\\|\\le\\omega(\\|x_i-x_j\\|)\\qquad(i,j\\in I),$$\nthen\n$$\\bigcap_{i\\in I}\\overline B\\bigl(y_i,\\omega(\\|x_i-x\\|)\\bigr)\\ne\\varnothing.$$\nThe intersection over an empty index set means all of $H_2$.",
+        "dependency_level": 0
+      },
+      {
+        "id": "lem-ip-boundary-spectral-counting-and-sobolev-scale",
+        "kind": "lemma",
+        "title": "Boundary spectral counting and Sobolev scale",
+        "deps": [
+          "def-axiom-of-choice",
+          "def-countable-choice",
+          "lem-ip-boundary-chart-lifting-and-fourier-projection",
+          "thm-lax-milgram",
+          "thm-spectral-theorem-for-compact-self-adjoint-operators",
+          "thm-fourier-basis-and-parseval-on-the-n-torus"
+        ],
+        "dependency_level": 1,
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Maarten V. de Hoop, Nikola B. Kovachki, Matti Lassas and Nicholas H. Nelsen, Extension and neural operator approximation of the electrical impedance tomography inverse map",
+              "url": "https://arxiv.org/pdf/2511.20361",
+              "locator": "§2.3, boundary spectral smoothing exponent and eigenvalue summability, printed pp. 9–11."
+            }
+          ]
+        },
+        "proof_strategy": "direct",
+        "statement": "Assume the Axiom of Choice and Countable Choice. Let $d\\ge2$, let $\\Omega\\subset(0,1)^d$ be nonempty, bounded, connected and $C^\\infty$, put $M=\\partial\\Omega$, and set $n=d-1$. Define $H^1(M)$ as the completion of smooth functions in the norm $\\|u\\|_{H^1(M)}^2=\\int_M(|u|^2+|\\nabla_Mu|^2)\\,dS$. Define $-\\Delta_M$ by its weak form: $-\\Delta_Mu=f$ when $u\\in H^1(M)$, $f\\in L^2(M)$, and $\\int_M\\nabla_Mu\\cdot\\overline{\\nabla_Mv}\\,dS=\\langle f,v\\rangle_{L^2}$ for every $v\\in H^1(M)$. Then the nonnegative Laplace–Beltrami operator $-\\Delta_M$ on $L^2(M)$ has an orthonormal eigenbasis $(e_j)_{j\\ge0}$ with eigenvalues $0\\le\\lambda_0\\le\\lambda_1\\le\\cdots$ repeated with multiplicity and tending to infinity. Its counting function satisfies\n$$N_M(\\Lambda):=\\#\\{j:\\lambda_j\\le\\Lambda\\}\\le C_M(1+\\Lambda)^{n/2}\\qquad(\\Lambda\\ge0).$$\nFor $s\\ge0$, define the spectral Sobolev space and norm by\n$$H^s_{\\Delta}(M)=\\left\\{f=\\sum_j c_je_j:\\sum_j(1+\\lambda_j)^s|c_j|^2<\\infty\\right\\},\\qquad \\|f\\|_{H^s_\\Delta}^2=\\sum_j(1+\\lambda_j)^s|c_j|^2.$$\nAt $s=1$, this norm equals the quadratic-form norm $\\int_M(|f|^2+|\\nabla_Mf|^2)\\,dS$. In particular, for every $\\tau>0$,\n$$\\sum_j(1+\\lambda_j)^{-n/2-\\tau}<\\infty.$$\n\nThe compact-resolvent construction factors through the compact embedding:\n\n```tikz\n\\begin{tikzpicture}[>=stealth,node distance=2.5cm]\n  \\node[draw,rounded corners] (l2a) {$L^2(M)$};\n  \\node[draw,rounded corners,right of=l2a] (h1) {$H^1(M)$};\n  \\node[draw,rounded corners,right of=h1] (l2b) {$L^2(M)$};\n  \\draw[->] (l2a) -- node[above] {$\\widetilde K$} (h1);\n  \\draw[->] (h1) -- node[above] {$J$ (compact)} (l2b);\n  \\draw[->,bend right=30] (l2a) to node[below] {$K=J\\widetilde K$} (l2b);\n\\end{tikzpicture}\n```\n\nHere $\\widetilde K$ is the weak resolvent map and $J$ is the compact inclusion; the lower arrow is their composition."
+      },
+      {
+        "id": "def-ip-generalized-fourier-neural-operator",
+        "kind": "definition",
+        "title": "Generalized Fourier neural operator on a compact manifold",
+        "deps": [
+          "lem-ip-boundary-chart-lifting-and-fourier-projection"
+        ],
+        "dependency_level": 1,
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "not-applicable"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Maarten V. de Hoop, Nikola B. Kovachki, Matti Lassas and Nicholas H. Nelsen, Extension and neural operator approximation of the electrical impedance tomography inverse map",
+              "url": "https://arxiv.org/pdf/2511.20361",
+              "locator": "§2.4 and §4.4, equations (2.14)–(2.17) and (4.15)–(4.18), printed pp. 12–13 and 30–31."
+            },
+            {
+              "title": "Nikola Kovachki et al., Neural Operator: Learning Maps Between Function Spaces",
+              "url": "https://www.jmlr.org/papers/volume24/21-1524/21-1524.pdf",
+              "locator": "§4.4, Fourier neural-operator architecture, Fourier multiplier, finite mode cutoff and real-valued conjugate-symmetry convention, printed pp. 20–23."
+            }
+          ]
+        },
+        "proof_strategy": "direct",
+        "statement": "Let $M\\subset\\mathbb R^{d_a}$ be a compact smooth manifold of dimension $n\\ge d$, let $\\Omega\\subset(0,1)^d$ be a bounded domain, and let $\\sigma\\in C^\\infty(\\mathbb R)$ be globally Lipschitz and nonpolynomial. Fix finite input and output channel dimensions. A generalized Fourier neural operator is a map $\\Psi:L^2(M;\\mathbb R^{d_{in}})\\to L^2(\\Omega;\\mathbb R^{d_{out}})$ of the form\n$$\\Psi=Q\\circ R\\circ F\\circ L_L\\circ\\cdots\\circ L_1\\circ E\\circ S.$$\nHere $S$ is a pointwise finite-dimensional affine network, $S(h)(x)=s(x,h(x))$; $E$ is a continuous linear chart-lifting map from manifold functions to multichannel functions on $\\mathbb T^n$; each $L_\\ell$ acts on periodic channel fields by a fixed matrix channel map plus a continuous periodic channel bias $b_\\ell(x)$ and a finite Fourier-multiplier convolution, followed coordinatewise by $\\sigma$; $F:L^2(\\mathbb T^n;\\mathbb R^{c})\\to L^2(\\mathbb T^d;\\mathbb R^{r})$ is a continuous linear dimension-reduction layer\n$$ (Fv)(x_1,\\ldots,x_d)=\\int_{\\mathbb T^{n-d}}K(z)v(x_1,\\ldots,x_d,z)\\,dz,$$\nwith a finite-dimensional matrix kernel $K$; $R$ is restriction of periodic fields to $\\Omega$; and $Q$ is a pointwise finite-dimensional output network. For the EIT boundary manifold $M=\\partial\\Omega\\times\\partial\\Omega$, the chart-lifting map $E$ may be taken to be the map $G$ of the chart-lifting lemma, with its finite chart-pair array treated as input channels. The finite Fourier multiplier at a layer is $\\widehat{\\mathcal K v}(k)=R_k\\widehat v(k)$ for finitely many $k\\in\\mathbb Z^n$, with real-valued outputs enforced by conjugate-symmetric coefficients. When $n=d$, take $c=r$ and $K=I_c$ on the one-point probability space $\\mathbb T^0$, so $F$ is the identity layer.\n\nThis is an architecture definition only. It asserts no approximation, training, statistical, discretization, or computational-cost guarantee."
+      },
+      {
+        "id": "lem-ip-fno-torus-compact-universality",
+        "kind": "lemma",
+        "title": "Fourier neural operators approximate continuous maps uniformly on compact torus sets",
+        "deps": [
+          "def-countable-choice",
+          "def-ip-generalized-fourier-neural-operator",
+          "lem-ip-finite-dimensional-neural-universal-approximation",
+          "thm-fourier-basis-and-parseval-on-the-n-torus"
+        ],
+        "dependency_level": 2,
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Nikola Kovachki, Zongyi Li, Burigede Liu, Kamyar Azizzadenesheli, Kaushik Bhattacharya, Andrew Stuart and Anima Anandkumar, On Universal Approximation and Error Bounds for Fourier Neural Operators",
+              "url": "https://jmlr.org/papers/volume22/21-0806/21-0806.pdf",
+              "locator": "Theorem 5 and complete proof in Appendix D.1–D.4, including Fourier truncation and coefficient extraction/reconstruction."
+            },
+            {
+              "title": "Nikola Kovachki et al., Neural Operator: Learning Maps Between Function Spaces",
+              "url": "https://arxiv.org/pdf/2108.08481",
+              "locator": "§4.4, the periodic Fourier multiplier layer, real-valued conjugate-symmetry convention and output reconstruction, printed pp. 20–23."
+            }
+          ]
+        },
+        "proof_strategy": "direct",
+        "statement": "Assume Countable Choice. Let $n\\ge1$, let $a,b\\ge1$, and let $\\sigma\\in C^\\infty(\\mathbb R)$ be globally Lipschitz and nonpolynomial. Let $T:L^2(\\mathbb T^n;\\mathbb R^a)\\to L^2(\\mathbb T^n;\\mathbb R^b)$ be continuous, let $C$ be a compact subset of the input space, and let $\\varepsilon>0$. Then a finite Fourier neural operator on $\\mathbb T^n$, with finitely many channels and layers, finite Fourier multipliers, continuous periodic bias functions, coordinatewise activation $\\sigma$, and a final pointwise affine output map, satisfies\n$$\\sup_{f\\in C}\\|T(f)-\\Phi(f)\\|_{L^2(\\mathbb T^n;\\mathbb R^b)}<\\varepsilon.$$"
+      },
+      {
+        "id": "thm-ip-hilbert-schmidt-operator-admits-square-integrable-kernel",
+        "kind": "theorem",
+        "title": "Mean-zero Hilbert–Schmidt operators on a compact boundary have square-integrable kernels",
+        "deps": [
+          "def-axiom-of-choice",
+          "def-countable-choice",
+          "lem-ip-boundary-spectral-counting-and-sobolev-scale",
+          "thm-fubini-theorem-for-l-one-on-sigma-finite-product-spaces",
+          "thm-l-two-kernels-give-hilbert-schmidt-operators"
+        ],
+        "dependency_level": 2,
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Maarten V. de Hoop, Nikola B. Kovachki, Matti Lassas and Nicholas H. Nelsen, Extension and neural operator approximation of the electrical impedance tomography inverse map",
+              "url": "https://arxiv.org/pdf/2511.20361",
+              "locator": "Lemma 3.6 and its proof, identification of Hilbert–Schmidt operators with square-integrable kernels, printed pp. 15–16."
+            }
+          ]
+        },
+        "proof_strategy": "direct",
+        "statement": "Assume the Axiom of Choice and Countable Choice. Let $M=\\partial\\Omega$ be the compact smooth boundary in the boundary spectral setting, let $P_0$ be projection onto $L^2_0(M)$, and let $T:L^2_0(M)\\to L^2_0(M)$ be Hilbert–Schmidt. Extend $T$ to $\\widetilde T:L^2(M)\\to L^2(M)$ by $\\widetilde T=\\iota_0TP_0$, where $\\iota_0$ is inclusion. Then there is a unique $\\kappa_T\\in L^2(M\\times M)$ such that\n$$\\widetilde T f(x)=\\int_M\\kappa_T(x,y)f(y)\\,dS_y\\quad\\text{for almost every }x\\text{ and every }f\\in L^2(M),$$\nand\n$$\\|\\kappa_T\\|_{L^2(M\\times M)}=\\|T\\|_{\\mathrm{HS}}.$$\nThe kernel has zero mean in each variable: $\\int_M\\kappa_T(x,y)\\,dS_y=0$ for almost every $x$, and $\\int_M\\kappa_T(x,y)\\,dS_x=0$ for almost every $y$."
+      },
+      {
+        "id": "thm-ip-generalized-fno-uniform-approximation-on-compact-sets",
+        "kind": "theorem",
+        "title": "Generalized FNO approximation on compact sets",
+        "deps": [
+          "def-countable-choice",
+          "def-ip-generalized-fourier-neural-operator",
+          "lem-ip-boundary-chart-lifting-and-fourier-projection",
+          "lem-ip-finite-dimensional-neural-universal-approximation",
+          "lem-ip-fno-torus-compact-universality"
+        ],
+        "dependency_level": 3,
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Maarten V. de Hoop, Nikola B. Kovachki, Matti Lassas and Nicholas H. Nelsen, Extension and neural operator approximation of the electrical impedance tomography inverse map",
+              "url": "https://arxiv.org/pdf/2511.20361",
+              "locator": "§4.4, Theorem 4.8 and its complete proof, printed pp. 23–25."
+            },
+            {
+              "title": "Nikola Kovachki et al., On Universal Approximation and Error Bounds for Fourier Neural Operators",
+              "url": "https://jmlr.org/papers/volume22/21-0806/21-0806.pdf",
+              "locator": "Theorem 5 and complete proof in Appendix D.1–D.4."
+            }
+          ]
+        },
+        "proof_strategy": "direct",
+        "statement": "Assume Countable Choice. Let $M=\\partial\\Omega\\times\\partial\\Omega$ for a nonempty bounded smooth domain $\\Omega\\subset(0,1)^d$, $d\\ge2$, and let $a,b\\in\\mathbb N$ be positive finite channel dimensions. If $T:L^2(M;\\mathbb R^a)\\to L^2(\\Omega;\\mathbb R^b)$ is continuous, then for every compact set $C\\subset L^2(M;\\mathbb R^a)$ and every $\\varepsilon>0$, there exists a generalized Fourier neural operator $\\Psi:L^2(M;\\mathbb R^a)\\to L^2(\\Omega;\\mathbb R^b)$ using a fixed smooth globally Lipschitz nonpolynomial activation and the boundary charts of the statement such that\n$$\\sup_{h\\in C}\\|T(h)-\\Psi(h)\\|_{L^2(\\Omega;\\mathbb R^b)}<\\varepsilon.$$"
+      },
+      {
+        "id": "lem-ip-mean-zero-neumann-problem-wellposedness",
+        "kind": "lemma",
+        "title": "Mean-zero weak Neumann problem for uniformly elliptic conductivities",
+        "deps": [
+          "def-axiom-of-choice",
+          "def-countable-choice",
+          "def-ip-calderon-admissible-conductivity-class",
+          "def-surface-integral-on-a-compact-c-one-hypersurface",
+          "lem-ip-calderon-boundary-trace-quotient-identification",
+          "lem-surface-integral-is-independent-of-c-one-boundary-charts",
+          "thm-extension-theorem-for-bounded-smooth-domains",
+          "thm-lax-milgram",
+          "thm-poincare-wirtinger-on-bounded-connected-extension-domains"
+        ],
+        "dependency_level": 3,
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Luca Rondi, On the regularization of the inverse conductivity problem with discontinuous conductivities",
+              "url": "https://www.aimsciences.org/article/doi/10.3934/ipi.2008.2.397",
+              "locator": "§2.1, weak Neumann problem and boundary dual formulation."
+            },
+            {
+              "title": "Richard S. Laugesen, Linear Analysis and Partial Differential Equations",
+              "url": "https://publish.illinois.edu/rlaugesen/files/2023/07/554-Lectures.pdf",
+              "locator": "Theorem 3.29 (Poincaré inequality) and Theorem 4.12 (Lax–Milgram), printed pp. 78–79 and 98–99."
+            }
+          ]
+        },
+        "proof_strategy": "direct",
+        "statement": "Assume the Axiom of Choice and Countable Choice. Let $d\\ge2$, let $\\Omega\\subset(0,1)^d$ be nonempty, bounded, connected and $C^1$, and let $\\gamma\\in L^\\infty(\\Omega;\\mathbb R)$ satisfy $0<m\\le\\gamma\\le M<\\infty$ almost everywhere. Let $\\mathcal D(\\Omega)=H^1(\\Omega;\\mathbb C)/H_0^1(\\Omega;\\mathbb C)$ be the complex trace quotient and write $\\dot{\\mathcal D}=\\mathcal D(\\Omega)/\\mathbb C\\mathbf1$. Let $\\dot{\\mathcal D}^{*}$ denote the continuous conjugate-linear dual of $\\dot{\\mathcal D}$. For each $F\\in\\dot{\\mathcal D}^{*}$ there is a unique weak solution class $[u]\\in H^1(\\Omega;\\mathbb C)/\\mathbb C\\mathbf1$ satisfying\n$$\\int_\\Omega\\gamma\\nabla u\\cdot\\overline{\\nabla v}\\,dx=F([\\operatorname{Tr}v])\\qquad(v\\in H^1(\\Omega)).$$\nThe resulting solution operator $\\mathscr R_\\gamma:\\dot{\\mathcal D}^{*}\\to\\dot{\\mathcal D}$ is bounded. Its unique representative whose boundary trace has surface mean zero solves the same weak equation. In particular, for $f\\in L^2(\\partial\\Omega)$ with $\\int_{\\partial\\Omega}f\\,dS=0$, the functional $F_f([g])=\\int_{\\partial\\Omega}f\\overline g\\,dS$ is admissible and defines the mean-zero Neumann-to-Dirichlet map on mean-zero $L^2$ fluxes."
+      },
+      {
+        "id": "def-ip-mean-zero-ntd-and-smoothed-kernel-observation",
+        "kind": "definition",
+        "title": "Mean-zero NtD map and smoothed kernel observation",
+        "deps": [
+          "def-axiom-of-choice",
+          "def-countable-choice",
+          "def-ip-calderon-admissible-conductivity-class",
+          "def-surface-integral-on-a-compact-c-one-hypersurface",
+          "lem-ip-boundary-spectral-counting-and-sobolev-scale",
+          "lem-ip-mean-zero-neumann-problem-wellposedness",
+          "lem-surface-integral-is-independent-of-c-one-boundary-charts"
+        ],
+        "dependency_level": 4,
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "not-applicable"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Maarten V. de Hoop, Nikola B. Kovachki, Matti Lassas and Nicholas H. Nelsen, Extension and neural operator approximation of the electrical impedance tomography inverse map",
+              "url": "https://arxiv.org/pdf/2511.20361",
+              "locator": "Definition 1 and §2.3, mean-zero NtD map and the dimension-dependent smoothing exponent, printed pp. 9–11."
+            },
+            {
+              "title": "Pedro Caro, Andoni García and Juan Manuel Reyes, Stability of the Calderón problem for less regular conductivities",
+              "url": "https://arxiv.org/pdf/1205.2487",
+              "locator": "§1 defines the weak Dirichlet-to-Neumann map on trace spaces and states its C^{1,ε} stability theorem; it does not state the Neumann-to-Dirichlet convention defined here."
+            }
+          ]
+        },
+        "proof_strategy": "direct",
+        "statement": "Assume the Axiom of Choice and Countable Choice. Let $d\\ge2$, let $\\Omega\\subset(0,1)^d$ be nonempty, bounded, connected and $C^\\infty$, fix an open domain $\\Omega'\\Subset\\Omega$ and real parameters $m>0$, $M\\ge\\max\\{1,m\\}$, $R>0$ and $0<\\alpha<1$ defining $X_d(R)$, and let $\\gamma\\in X_d(R)$ be a real conductivity. Write $M=\\partial\\Omega$, let $dS$ be surface measure, and set\n$$L^2_0(M)=\\left\\{f\\in L^2(M):\\int_M f\\,dS=0\\right\\},\\qquad P_0f=f-|M|^{-1}\\int_Mf\\,dS.$$\nThe mean-zero Neumann-to-Dirichlet operator $\\mathscr R_\\gamma:L^2_0(M)\\to L^2_0(M)$ sends $f$ to the mean-zero boundary trace of the weak solution of $\\nabla\\cdot(\\gamma\\nabla u)=0$ with outward conormal flux $f$, as defined by the weak Neumann problem. Let $-\\Delta_M$ be the nonnegative Laplace–Beltrami operator on the compact boundary manifold, with eigenpairs $(e_j,\\lambda_j)$ on $L^2_0(M)$ from its spectral resolution. For $\\tau=1/2$ when $d=2$ and any fixed $\\tau>0$ when $d\\ge3$, put\n$$r_d:=\\frac{d-1}{2}-1+\\tau,\\qquad C_M^{r_d/2}e_j=(1+\\lambda_j)^{-r_d/2}e_j.$$\nThe smoothed observation is the bounded operator $A_\\gamma:=\\mathscr R_\\gamma C_M^{r_d/2}:L^2_0(M)\\to L^2_0(M)$. Its extension to all of $L^2(M)$ is $\\widetilde A_\\gamma f=\\iota_0A_\\gamma(P_0f)$, where $\\iota_0:L^2_0(M)\\hookrightarrow L^2(M)$ is inclusion. Thus its integral kernel, when it exists in $L^2(M\\times M)$, is fixed to have zero mean in each variable. No assertion of a kernel's existence or Hilbert–Schmidt regularity is part of this definition."
+      },
+      {
+        "id": "lem-ip-meyers-higher-integrability-for-interior-conductivity-solutions",
+        "kind": "lemma",
+        "title": "Uniform interior higher integrability for conductivity solutions",
+        "deps": [
+          "def-axiom-of-choice",
+          "def-countable-choice",
+          "lem-hilbert-and-riesz-transforms-are-calderon-zygmund-operators",
+          "thm-calderon-zygmund-singular-integrals-are-bounded-on-lp",
+          "thm-riesz-thorin-interpolation",
+          "thm-plancherel",
+          "thm-young-convolution-inequality",
+          "def-laplace-fundamental-solution-with-positive-minus-laplacian-sign",
+          "thm-minus-laplacian-of-the-fundamental-solution-is-dirac",
+          "thm-sobolev-embedding-on-bounded-extension-domains-for-p-less-than-n",
+          "thm-critical-sobolev-embedding-into-every-finite-lq",
+          "thm-extension-theorem-for-bounded-smooth-domains",
+          "thm-poincare-wirtinger-on-bounded-connected-extension-domains",
+          "lem-ip-mean-zero-neumann-problem-wellposedness"
+        ],
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-generated"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "N. G. Meyers, An Lp-estimate for the gradient of solutions of second order elliptic divergence equations",
+              "url": "https://www.numdam.org/item/ASNSP_1963_3_17_3_189_0.pdf",
+              "locator": "Classical higher-integrability theorem; the local proof below uses the whole-space projection perturbation argument, not an imported theorem."
+            }
+          ]
+        },
+        "proof_strategy": "direct",
+        "statement": "Assume the Axiom of Choice and Countable Choice. Let $d\\ge2$, let $\\Omega$ be a bounded connected smooth domain, let $U\\Subset\\Omega$ be open, and fix $0<m\\le M<\\infty$. There are $p\\in(2,4)$ and $C<\\infty$, depending only on $d,m,M,\\Omega,U$, such that every real measurable $\\gamma$ with $m\\le\\gamma\\le M$ and every weak solution $u\\in H^1(\\Omega)$ of $\\operatorname{div}(\\gamma\\nabla u)=0$ satisfy\n$$\\|\\nabla u\\|_{L^p(U)}\\le C\\|\\nabla u\\|_{L^2(\\Omega)}.$$\nIn particular, for a weak Neumann solution with quotient flux $F\\in\\dot{\\mathcal D}^{*}$, the right side is at most $C\\|F\\|_{\\dot{\\mathcal D}^{*}}$, uniformly in $\\gamma$.",
+        "dependency_level": 4
+      },
+      {
+        "id": "lem-ip-ntd-boundary-smoothing-for-fixed-background-collar",
+        "kind": "lemma",
+        "title": "Uniform NtD estimates from a fixed harmonic boundary collar",
+        "deps": [
+          "def-axiom-of-choice",
+          "def-countable-choice",
+          "def-ip-mean-zero-ntd-and-smoothed-kernel-observation",
+          "lem-ip-mean-zero-neumann-problem-wellposedness",
+          "lem-ip-calderon-boundary-trace-quotient-identification",
+          "lem-ip-boundary-spectral-counting-and-sobolev-scale",
+          "lem-ip-boundary-chart-lifting-and-fourier-projection",
+          "thm-difference-quotient-characterisation-of-w-one-p-for-p-greater-than-one",
+          "thm-interior-h-k-plus-two-elliptic-regularity",
+          "thm-plancherel"
+        ],
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-generated"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "de Hoop, Kovachki, Lassas and Nelsen, Extension and neural operator approximation of the electrical impedance tomography inverse map",
+              "url": "https://arxiv.org/pdf/2511.20361",
+              "locator": "Lemma 3.4 and its complete Appendix A proof, PDF pp.16,53–58. The proof below uses a collar Rellich identity and a symmetric matrix argument."
+            }
+          ]
+        },
+        "proof_strategy": "direct",
+        "statement": "Assume the Axiom of Choice and Countable Choice. Let $\\Omega$ be a bounded connected smooth domain, let $\\Omega'\\Subset\\Omega$, let $0<m\\le1\\le M<\\infty$, and let $m\\le\\gamma\\le M$ be measurable with $\\gamma=1$ outside $\\Omega'$. Put $M_\\partial=\\partial\\Omega$ and give the NtD maps their total-boundary-mean-zero representatives. The spectral space $H^{1/2}_\\Delta(M_\\partial)$ is equivalent to the chart trace space $H^{1/2}(M_\\partial)$, including their quotients by constants and mean-zero duals. Uniformly in $\\gamma$,\n$$\\|\\mathscr R_\\gamma f\\|_{H^1_\\Delta(M_\\partial)}\\le C\\|f\\|_{L^2(M_\\partial)}\\quad\\left(\\int_{M_\\partial}f=0\\right).$$\nFor every integer $q\\ge0$ there is $C_q$ such that\n$$\\|(\\mathscr R_\\gamma-\\mathscr R_1)F\\|_{H^q_\\Delta(M_\\partial)}\\le C_q\\|F\\|_{H^{-1/2}_\\Delta(M_\\partial)}$$\nfor every mean-zero weak Neumann flux $F$. If $w_j=1+\\lambda_j$ and $(e_j)$ is any orthonormal boundary Laplace–Beltrami basis on the total-mean-zero subspace, the matrix $b_{ij}=\\langle(\\mathscr R_\\gamma-\\mathscr R_{\\gamma_0})e_j,e_i\\rangle$ of any two such conductivities satisfies, for every $L>0$,\n$$|b_{ij}|\\le C_L(w_iw_j)^{-L}.$$\nThe constants depend only on the displayed fixed data and $q$ or $L$. More generally, any $v\\in H^1$ harmonic with zero weak normal derivative on a fixed smooth boundary collar has $\\|v|_{M_\\partial}\\|_{H^q_\\Delta}\\le C_q\\|v\\|_{H^1(\\text{collar})}$ for every integer $q\\ge0$, using a fixed smaller collar for the boundary estimate.",
+        "dependency_level": 5
+      },
+      {
+        "id": "lem-ip-ntd-smoothing-and-hilbert-schmidt-kernel-bound",
+        "kind": "lemma",
+        "title": "NtD smoothing and Hilbert–Schmidt kernel bounds",
+        "deps": [
+          "def-axiom-of-choice",
+          "def-countable-choice",
+          "def-ip-calderon-weak-dn-map-for-bounded-conductivities",
+          "def-ip-mean-zero-ntd-and-smoothed-kernel-observation",
+          "lem-ip-calderon-rough-dn-map-wellposedness",
+          "lem-ip-boundary-spectral-counting-and-sobolev-scale",
+          "thm-ip-hilbert-schmidt-operator-admits-square-integrable-kernel",
+          "thm-l-two-kernels-give-hilbert-schmidt-operators",
+          "lem-ip-ntd-boundary-smoothing-for-fixed-background-collar",
+          "thm-spectral-theorem-for-compact-self-adjoint-operators"
+        ],
+        "dependency_level": 6,
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Maarten V. de Hoop, Nikola B. Kovachki, Matti Lassas and Nicholas H. Nelsen, Extension and neural operator approximation of the electrical impedance tomography inverse map",
+              "url": "https://arxiv.org/pdf/2511.20361",
+              "locator": "Lemma 3.4, PDF p.16; Lemma 3.5 and proof, PDF pp.16–18; Lemma 3.6 and kernel Definition 1, PDF pp.18–19; Lemma 3.7, PDF p.21; complete fixed-collar proof in Appendix A, PDF pp.53–58, in the actual 80-page version."
+            },
+            {
+              "title": "Luca Rondi, On the regularization of the inverse conductivity problem with discontinuous conductivities",
+              "url": "https://www.aimsciences.org/article/doi/10.3934/ipi.2008.2.397",
+              "locator": "Theorem 4.2 and Remark 4.5, printed pp.405–406 (PDF pp.9–10): contextual forward NtD continuity, with Lambda denoting the NtD map; the local stronger kernel continuity is proved separately."
+            }
+          ]
+        },
+        "proof_strategy": "direct",
+        "statement": "Assume the Axiom of Choice and Countable Choice, let $d\\ge2$, let $\\Omega\\subset(0,1)^d$ be nonempty, bounded, connected and $C^\\infty$, and let $\\gamma\\in X_d(R)$. Write $M=\\partial\\Omega$, $n=d-1$, and let $A_\\gamma$ and $\\widetilde A_\\gamma$ be the mean-zero smoothed NtD observation and its extension from the preceding definition. Then $\\widetilde A_\\gamma$ is Hilbert–Schmidt on $L^2(M)$ and has a unique zero-mean-in-each-variable kernel $\\kappa_\\gamma\\in L^2(M\\times M)$, with\n$$\\|\\kappa_\\gamma\\|_{L^2(M\\times M)}=\\|\\widetilde A_\\gamma\\|_{\\mathrm{HS}}.$$\nThe Hilbert–Schmidt norms are uniformly bounded over $X_d(R)$. Moreover, there is $C<\\infty$, depending only on the fixed class and domain, such that\n$$\\|\\dot\\Lambda_\\gamma-\\dot\\Lambda_{\\gamma_0}\\|_{\\mathcal L(\\dot{\\mathcal D},\\dot{\\mathcal D}^{*})}\\le C\\|\\kappa_\\gamma-\\kappa_{\\gamma_0}\\|_{L^2(M\\times M)}^{1/2}\\qquad(\\gamma,\\gamma_0\\in X_d(R)).$$"
+      },
+      {
+        "id": "lem-ip-interior-neumann-modes-and-kernel-forward-continuity",
+        "kind": "lemma",
+        "title": "Interior decay of Neumann modes and kernel forward continuity",
+        "deps": [
+          "def-axiom-of-choice",
+          "def-countable-choice",
+          "lem-ip-ntd-boundary-smoothing-for-fixed-background-collar",
+          "lem-ip-meyers-higher-integrability-for-interior-conductivity-solutions",
+          "lem-ip-mean-zero-neumann-problem-wellposedness",
+          "lem-ip-boundary-spectral-counting-and-sobolev-scale",
+          "thm-lax-milgram"
+        ],
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-generated"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Luca Rondi, On the regularization of the inverse conductivity problem with discontinuous conductivities",
+              "url": "https://www.aimsciences.org/data/article/export-pdf?id=7c8383c4-b707-45b0-982e-e57301ee9e2f",
+              "locator": "Full Theorem 4.2 proof and Remark 4.5, printed pp.405–406; the fixed-collar spectral argument below supplies the stronger kernel-norm conclusion locally."
+            }
+          ]
+        },
+        "proof_strategy": "direct",
+        "statement": "Assume the Axiom of Choice and Countable Choice. Fix a smooth bounded connected domain $\\Omega$, an open $\\Omega'\\Subset\\Omega$, and $0<m\\le1\\le M<\\infty$. Let $\\gamma,\\gamma_0$ range over all measurable conductivities between $m$ and $M$ equal to one outside $\\Omega'$. Let $(e_j,\\lambda_j)$ be the mean-zero boundary spectral basis and put $w_j=1+\\lambda_j$. There is $p\\in(2,4)$ such that for every $L>0$,\n$$\\|\\nabla u_{\\gamma,e_j}\\|_{L^p(\\Omega')}\\le C_Lw_j^{-L}.$$\nPut $q=p/(p-2)>2$. For any fixed smoothing exponent $r\\ge0$, the difference $(\\mathscr R_\\gamma-\\mathscr R_{\\gamma_0})(1-\\Delta_{\\partial\\Omega})^{-r/2}$, extended to kill constants, is Hilbert–Schmidt and satisfies\n$$\\| (\\mathscr R_\\gamma-\\mathscr R_{\\gamma_0})(1-\\Delta_{\\partial\\Omega})^{-r/2}\\|_{\\mathrm{HS}}\\le C_r\\|\\gamma-\\gamma_0\\|_{L^q(\\Omega)}.$$\nIt also satisfies the same bound with the coefficient $L^\\infty$ norm in place of $L^q$. Constants depend only on the displayed fixed geometry, ellipticity and exponents.",
+        "dependency_level": 6
+      },
+      {
+        "id": "lem-ip-eit-forward-continuity-and-class-compactness",
+        "kind": "lemma",
+        "title": "EIT forward continuity and compactness of conductivity classes",
+        "deps": [
+          "def-axiom-of-choice",
+          "def-countable-choice",
+          "def-ip-calderon-admissible-conductivity-class",
+          "def-ip-spatial-bv-and-distributional-tv",
+          "lem-ip-bv-test-field-characterization-and-lsc",
+          "def-ip-mean-zero-ntd-and-smoothed-kernel-observation",
+          "lem-ip-calderon-rough-dn-map-wellposedness",
+          "lem-ip-bv-translation-modulus-for-conductivity",
+          "lem-ip-ntd-smoothing-and-hilbert-schmidt-kernel-bound",
+          "thm-frechet-kolmogorov-compactness-criterion-in-lp",
+          "lem-bounded-support-makes-frechet-kolmogorov-tail-control-automatic",
+          "cor-real-and-euclidean-vector-valued-ascoli-arzela",
+          "lem-ip-interior-neumann-modes-and-kernel-forward-continuity"
+        ],
+        "dependency_level": 7,
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Maarten V. de Hoop, Nikola B. Kovachki, Matti Lassas and Nicholas H. Nelsen, Extension and neural operator approximation of the electrical impedance tomography inverse map",
+              "url": "https://arxiv.org/pdf/2511.20361",
+              "locator": "Corollary 4.3, PDF p.24; Lemma 4.4, PDF pp.25–26; Lemma 4.5 and Corollary 4.6 with their proofs, PDF pp.26–27, in the actual 80-page version."
+            },
+            {
+              "title": "Luca Rondi, On the regularization of the inverse conductivity problem with discontinuous conductivities",
+              "url": "https://www.aimsciences.org/article/doi/10.3934/ipi.2008.2.397",
+              "locator": "Theorem 4.2 and Remark 4.5, contextual forward NtD continuity in an $L^q$ coefficient norm via Meyers higher integrability, printed pp.405–406 (PDF pp.9–10); this paper denotes the NtD map by Lambda."
+            }
+          ]
+        },
+        "proof_strategy": "direct",
+        "statement": "Assume the Axiom of Choice and Countable Choice. Let $d\\ge2$, let $\\Omega\\subset(0,1)^d$ be nonempty, bounded, connected and $C^\\infty$, let $\\Omega'\\Subset\\Omega$, and fix $m>0$, $M\\ge\\max\\{1,m\\}$, $R>0$ and $0<\\alpha<1$. Let $X_d(R)$ be the BV conductivity class for $d=2$ and the bounded $C^{1,\\alpha}$ class for $d\\ge3$, with the same ellipticity and background collar in both cases. Then $X_2(R)$ is compact in $L^1(\\Omega)$ and each $X_d(R)$ for $d\\ge3$ is compact in $C^1(\\overline\\Omega)$. In dimension two there is an exponent $q>2$ and a constant $C$ such that\n$$\\|\\kappa_\\gamma-\\kappa_{\\gamma_0}\\|_{L^2(\\partial\\Omega\\times\\partial\\Omega)}\\le C\\|\\gamma-\\gamma_0\\|_{L^q(\\Omega)}\\qquad(\\gamma,\\gamma_0\\in X_2(R));$$\nfor $d\\ge3$ the same kernel map is continuous in the $C^1(\\overline\\Omega)$ topology. Consequently the exact kernel image $\\{\\kappa_\\gamma:\\gamma\\in X_d(R)\\}$ is compact in $L^2(\\partial\\Omega\\times\\partial\\Omega)$."
+      },
+      {
+        "id": "thm-ip-hilbert-map-extension-with-concave-modulus",
+        "kind": "theorem",
+        "title": "Hilbert-valued extension with a concave modulus",
+        "deps": [
+          "def-axiom-of-choice",
+          "def-countable-choice",
+          "lem-ip-ntd-smoothing-and-hilbert-schmidt-kernel-bound",
+          "thm-ip-calderon-logarithmic-l2-stability",
+          "lem-ip-concave-modulus-hilbert-ball-intersection",
+          "thm-zorn"
+        ],
+        "dependency_level": 9,
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Yoav Benyamini and Joram Lindenstrauss, Geometric Nonlinear Functional Analysis, Volume 1",
+              "url": "https://doi.org/10.1090/coll/048",
+              "locator": "Chapter 1, Theorem 1.12 and Proposition 1.13, pp. 18–21: same-concave-modulus extension between Hilbert spaces."
+            },
+            {
+              "title": "Maarten V. de Hoop, Nikola B. Kovachki, Matti Lassas and Nicholas H. Nelsen, Extension and neural operator approximation of the electrical impedance tomography inverse map",
+              "url": "https://arxiv.org/pdf/2511.20361",
+              "locator": "Proposition 3.8 and Theorem 3.9, PDF pp.21–22, in the actual 80-page version."
+            }
+          ]
+        },
+        "proof_strategy": "direct",
+        "statement": "Assume the Axiom of Choice. Let $H_1,H_2$ be real Hilbert spaces, let $A\\subseteq H_1$, and let $g:A\\to H_2$. If a continuous, nondecreasing, concave function $\\omega_\\star:[0,\\infty)\\to[0,\\infty)$ satisfies $\\omega_\\star(0)=0$ and\n$$\\|g(x)-g(y)\\|_{H_2}\\le\\omega_\\star(\\|x-y\\|_{H_1})\\qquad(x,y\\in A),$$\nthen the Hilbert-valued same-modulus extension theorem asserts that there is $\\widetilde g:H_1\\to H_2$ extending $g$ and satisfying the same inequality for every $x,y\\in H_1$.\n\nFor the EIT inverse map, take the kernel input space to be $L^2(\\partial\\Omega\\times\\partial\\Omega;\\mathbb C)$ viewed as a real Hilbert space with its usual complex $L^2$ norm. If IP-45 gives $\\|\\gamma-\\gamma_0\\|_2\\le C_0[\\log(1/\\min\\{\\delta,t_0\\})]^{-\\rho}$ for $\\delta=\\|\\dot\\Lambda_\\gamma-\\dot\\Lambda_{\\gamma_0}\\|$, and the NTD kernel estimate transfers $\\delta\\le C_1\\|\\kappa_\\gamma-\\kappa_{\\gamma_0}\\|_2^{1/2}$, then after decreasing $t_0$ and, if necessary, enlarging $C_0$ the concave modulus\n$$\\omega_\\star(0)=0,\\qquad \\omega_\\star(s)=C_0\\left[\\log\\!\\left(\\frac1{\\min\\{C_1\\sqrt{s},t_0\\}}\\right)\\right]^{-\\rho}\\quad(s>0)$$\nis an admissible modulus for that inverse map and can be extended by the Hilbert same-modulus theorem to the whole underlying real Hilbert space of complex-valued kernels."
+      },
+      {
+        "id": "lem-ip-stable-extension-of-the-eit-inverse-map",
+        "kind": "lemma",
+        "title": "Stable extension of the EIT inverse map",
+        "deps": [
+          "def-axiom-of-choice",
+          "def-countable-choice",
+          "lem-ip-ntd-smoothing-and-hilbert-schmidt-kernel-bound",
+          "def-ip-mean-zero-ntd-and-smoothed-kernel-observation",
+          "thm-ip-calderon-logarithmic-l2-stability",
+          "thm-ip-hilbert-map-extension-with-concave-modulus"
+        ],
+        "dependency_level": 10,
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Maarten V. de Hoop, Nikola B. Kovachki, Matti Lassas and Nicholas H. Nelsen, Extension and neural operator approximation of the electrical impedance tomography inverse map",
+              "url": "https://arxiv.org/pdf/2511.20361",
+              "locator": "Propositions 3.8 and 3.9, exact-data inverse map and stable Hilbert extension, printed pp. 16–18."
+            }
+          ]
+        },
+        "proof_strategy": "direct",
+        "statement": "Assume the Axiom of Choice and Countable Choice, and let $X_d(R)$, $\\kappa_\\gamma$ and the concave modulus $\\omega_\\star$ be as in the mean-zero NTD observation and Hilbert extension statements. Regard $L^2(\\partial\\Omega\\times\\partial\\Omega;\\mathbb C)$ as a real Hilbert space with its complex $L^2$ norm. The exact-data inverse map\n$$\\Psi^\\star:\\{\\kappa_\\gamma:\\gamma\\in X_d(R)\\}\\to L^2(\\Omega;\\mathbb R),\\qquad \\Psi^\\star(\\kappa_\\gamma)=\\gamma,$$\nis well-defined and satisfies\n$$\\|\\Psi^\\star(\\kappa_\\gamma)-\\Psi^\\star(\\kappa_{\\gamma_0})\\|_{L^2(\\Omega;\\mathbb R)}\\le\\omega_\\star(\\|\\kappa_\\gamma-\\kappa_{\\gamma_0}\\|_{L^2(\\partial\\Omega\\times\\partial\\Omega;\\mathbb C)}).$$\nConsequently the Hilbert-valued extension from the preceding theorem agrees with $\\Psi^\\star$ on the exact kernel image and retains this stability bound on the whole underlying real Hilbert space of complex-valued kernels. Each exact NtD kernel is real-valued, but the extension domain includes all complex-valued kernels."
+      },
+      {
+        "id": "thm-ip-eit-fno-noise-robust-existence",
+        "kind": "theorem",
+        "title": "Noise-robust existence of generalized FNO approximants for EIT",
+        "deps": [
+          "def-axiom-of-choice",
+          "def-countable-choice",
+          "def-ip-mean-zero-ntd-and-smoothed-kernel-observation",
+          "lem-ip-ntd-smoothing-and-hilbert-schmidt-kernel-bound",
+          "lem-ip-eit-forward-continuity-and-class-compactness",
+          "thm-ip-hilbert-map-extension-with-concave-modulus",
+          "thm-ip-generalized-fno-uniform-approximation-on-compact-sets",
+          "lem-ip-stable-extension-of-the-eit-inverse-map"
+        ],
+        "dependency_level": 11,
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Maarten V. de Hoop, Nikola B. Kovachki, Matti Lassas and Nicholas H. Nelsen, Extension and neural operator approximation of the electrical impedance tomography inverse map",
+              "url": "https://arxiv.org/pdf/2511.20361",
+              "locator": "Theorem 4.8 and its complete proof, §4.4, printed pp. 23–25."
+            }
+          ]
+        },
+        "proof_strategy": "direct",
+        "statement": "Assume the Axiom of Choice and Countable Choice. Let $d\\ge2$, let $\\Omega\\subset(0,1)^d$ be nonempty, bounded, connected and $C^\\infty$, let $\\Omega'\\Subset\\Omega$, and fix the ellipticity, collar and regularity parameters defining $X_d(R)$. Let $M=\\partial\\Omega$, let $K\\subset L^2(M\\times M;\\mathbb C)$ be compact, and for $\\delta\\ge0$ put $K_\\delta=\\{\\eta\\in K:\\|\\eta\\|_{L^2(M\\times M;\\mathbb C)}\\le\\delta\\}$. Let $\\kappa_\\gamma$ be the zero-mean-in-each-variable kernel of the dimension-dependently smoothed mean-zero NtD observation for $\\gamma\\in X_d(R)$. Regard $L^2(M\\times M;\\mathbb C)$ as a real Hilbert space and let $\\mathfrak R f=(\\operatorname{Re}f,\\operatorname{Im}f)$ be its isometric realification into $L^2(M\\times M;\\mathbb R^2)$. Let $\\widetilde\\Psi^\\star:L^2(M\\times M;\\mathbb C)\\to L^2(\\Omega;\\mathbb R)$ extend the exact-data inverse map and satisfy\n$$\\|\\widetilde\\Psi^\\star(f)-\\widetilde\\Psi^\\star(g)\\|_{L^2(\\Omega;\\mathbb R)}\\le C_\\star\\omega_\\star(\\|f-g\\|_{L^2(M\\times M;\\mathbb C)}),$$\nwhere $\\omega_\\star$ is continuous, nondecreasing and concave with $\\omega_\\star(0)=0$. Then for every $\\varepsilon>0$ there exists a generalized Fourier neural operator $\\Phi:L^2(M\\times M;\\mathbb R^2)\\to L^2(\\Omega;\\mathbb R)$ with two real input channels such that, on complex inputs, $\\Psi(f):=\\Phi(\\mathfrak R f)$ satisfies\n$$\\sup_{\\gamma\\in X_d(R),\\,\\eta\\in K_\\delta}\\|\\gamma-\\Psi(\\kappa_\\gamma+\\eta)\\|_{L^2(\\Omega;\\mathbb R)}\\le\\varepsilon+C_\\star\\omega_\\star(\\delta).$$\nThis is an existence statement for continuum NtD kernels and compact noise sets; it makes no training, finite-sample, network-size, finite-element, electrode-matrix or calibration guarantee."
+      },
+      {
+        "id": "op-ip-finite-sample-generalization-of-neural-inverse-maps",
+        "kind": "open-problem",
+        "title": "Finite-sample generalization of learned inverse maps",
+        "deps": [
+          "def-axiom-of-choice",
+          "def-countable-choice",
+          "def-ip-calderon-admissible-conductivity-class",
+          "def-ip-generalized-fourier-neural-operator",
+          "def-ip-inverse-risk-under-train-and-test-laws",
+          "def-ip-mean-zero-ntd-and-smoothed-kernel-observation",
+          "lem-ip-finite-dimensional-neural-universal-approximation",
+          "thm-ip-eit-fno-noise-robust-existence"
+        ],
+        "dependency_level": 12,
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "not-applicable"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Maarten V. de Hoop, Nikola B. Kovachki, Matti Lassas and Nicholas H. Nelsen, Extension and neural operator approximation of the electrical impedance tomography inverse map",
+              "url": "https://arxiv.org/pdf/2511.20361",
+              "locator": "Theorem 4.8 and §5 numerical experiments, printed pp. 31–34 and 37–45: continuum existence theorem versus finite training and test sets."
+            },
+            {
+              "title": "Niklas Reinhardt, Sven Wang and Jakob Zech, Statistical Learning Theory for Neural Operators",
+              "url": "https://www.jmlr.org/papers/volume27/25-0543/25-0543.pdf",
+              "locator": "Theorems 5–6, 23 and 27, PDF pp. 10–12 and 22–26: ERM concentration under random design and additive white or sub-Gaussian output noise; algebraic FrameNet rates for holomorphic operators, including parametric Darcy flow."
+            },
+            {
+              "title": "Nikola Kovachki et al., On Universal Approximation and Error Bounds for Fourier Neural Operators",
+              "url": "https://jmlr.org/papers/volume22/21-0806/21-0806.pdf",
+              "locator": "Theorem 5 and statistical approximation discussion; no EIT finite-sample risk theorem."
+            },
+            {
+              "title": "Nikola B. Kovachki, Samuel Lanthaler and Hrushikesh Mhaskar, Data Complexity Estimates for Operator Learning",
+              "url": "https://arxiv.org/pdf/2405.15992",
+              "locator": "Theorem 3.3 and proof, Propositions 3.8–3.9 and Appendix E, PDF pp.13–16 and 32–43: existing continuum-FNO learning and entropy estimates under quantitative approximation-class assumptions."
+            },
+            {
+              "title": "Philipp Grohs, Samuel Lanthaler and Margaret Trautner, Theory-to-Practice Gap for Neural Networks and Neural Operators",
+              "url": "https://arxiv.org/pdf/2503.18219",
+              "locator": "Theorems 3.20 and 3.22, Lemma 3.21, approximation-space hypotheses and Appendix B.6, PDF pp.23–28 and 40–41: sampling lower bounds for specified ReLU neural-operator classes and input measures."
+            }
+          ]
+        },
+        "statement": "Fix $d\\ge2$, a bounded connected smooth domain $\\Omega\\subset(0,1)^d$, a fixed collar $\\Omega'\\Subset\\Omega$, an admissible conductivity class $X_d(R)$ with fixed ellipticity and regularity parameters, a compact perturbation set $K\\subset L^2(\\partial\\Omega\\times\\partial\\Omega;\\mathbb C)$, and a threshold $\\delta\\ge0$. Let $K_\\delta=\\{\\eta\\in K:\\|\\eta\\|_2\\le\\delta\\}$ and\n$$\\mathcal Z=\\{(\\kappa_\\gamma+\\eta,\\gamma):\\gamma\\in X_d(R),\\ \\eta\\in K_\\delta\\}$$\nin $\\mathcal H\\times\\mathcal Y$, where $\\mathcal H=L^2(\\partial\\Omega\\times\\partial\\Omega;\\mathbb C)$ is viewed as a real Hilbert space, $\\mathcal Y=L^2(\\Omega;\\mathbb R)$, and $\\mathfrak R f=(\\operatorname{Re}f,\\operatorname{Im}f)\\in L^2(\\partial\\Omega\\times\\partial\\Omega;\\mathbb R^2)$ is the isometric realification. Assume the Axiom of Choice and Countable Choice. Fix an extension $\\widetilde\\Psi^\\star:\\mathcal H\\to\\mathcal Y$ of the exact-data inverse, so $\\widetilde\\Psi^\\star(\\kappa_\\gamma)=\\gamma$, and fix $C_\\star>0$ and a continuous nondecreasing concave modulus $\\omega_\\star:[0,\\infty)\\to[0,\\infty)$ with $\\omega_\\star(0)=0$ such that\n$$\\|\\widetilde\\Psi^\\star(f)-\\widetilde\\Psi^\\star(g)\\|_{\\mathcal Y}\\le C_\\star\\omega_\\star(\\|f-g\\|_{\\mathcal H})\\qquad(f,g\\in\\mathcal H).$$\nThese extension data are fixed independently of the architecture budgets, sample size and joint law. Assume $\\mathcal Z$ is nonempty and compact, and set $X=\\{x\\in\\mathcal H:(x,y)\\in\\mathcal Z\\text{ for some }y\\in\\mathcal Y\\}$. Fix a smooth globally Lipschitz nonpolynomial activation $\\sigma_0$.\n\nChoose once and for all a finite smooth boundary chart family and square partition of unity as in the boundary chart-lifting lemma. For every positive finite channel count $c$, let $G_c$ be the componentwise application of this same scalar chart construction, so $G_c:L^2(\\partial\\Omega\\times\\partial\\Omega;\\mathbb R^c)\\to L^2(\\mathbb T^n;\\mathbb R^{J^2c})$ for its fixed number $J^2$ of chart pairs. Each pointwise lift $S_0$ receives the two realified input channels; if its output has $c$ channels, take $E=G_c$. The family $(G_c)$, the chart weights and the output restriction $R$ to $\\Omega$ are fixed and have no trainable parameters; $c$ is already part of the counted finite architecture index, not an additional scalar parameter. Write $n=2d-2$. The dimension-reduction layer $F$ has a matrix-valued kernel on $\\mathbb T^{n-d}$; if $n=d$, take $F$ to be the identity. For each integer $s\\ge1$ and $B>0$, define $\\mathcal F_{s,B}\\subset C(X,\\mathcal Y)$ as the restrictions to $X$ of maps $x\\mapsto\\Phi(\\mathfrak R x)$, where $\\Phi$ is a generalized Fourier neural operator with the following finite parameterization:\n\n1. The pointwise lift $S_0$ and output network $Q$ are fully connected finite-dimensional networks. At each point they receive the fixed ambient coordinate and the current real field vector; hidden affine layers are followed coordinatewise by $\\sigma_0$, and the final layer is affine. Their depths, hidden widths and all variable output channel widths are at most $s$; the final output of $Q$ is the single real target channel.\n2. The Fourier-operator stack has at most $s$ layers and at most $s$ channels in each layer. Each channel matrix is a trainable real matrix. Each Fourier multiplier has matrix coefficients $R_{\\ell,k}$ supported on $\\|k\\|_\\infty\\le s$, with $R_{\\ell,-k}=\\overline{R_{\\ell,k}}$ so real fields remain real. Each coordinate bias $b_\\ell$ is a real trigonometric polynomial on $\\mathbb T^n$ supported on the same finite mode range.\n3. The dimension-reduction kernel is a real matrix-valued trigonometric polynomial\n$$K(z)=\\sum_{\\|k\\|_\\infty\\le s}K_ke^{2\\pi i k\\cdot z},\\qquad K_{-k}=\\overline{K_k},$$\nwith coefficients of the dimensions required by the adjacent channel counts.\n4. The number of independent trainable real scalar coefficients in all pointwise networks, channel matrices, Fourier multipliers, coordinate biases, and dimension-reduction kernels together is at most $s$. For complex Fourier coefficients, independent real and imaginary parts are counted separately, subject to conjugate symmetry. Every trainable real scalar coefficient has absolute value at most $B$. The fixed activation, chart maps, partition weights, realification, restriction, and Fourier basis are not trainable parameters.\n\nFor each fixed $s$, only finitely many architecture index tuples occur; equip their disjoint union of bounded real parameter boxes with its Borel structure, and give $\\mathcal F_{s,B}$ the Borel sigma-algebra induced by the supremum norm on $C(X,\\mathcal Y)$. Consider only $s,B$ for which this class is nonempty and $\\sup_{\\Psi\\in\\mathcal F_{s,B},\\,x\\in X}\\|\\Psi(x)\\|_{\\mathcal Y}<\\infty$. For $z=(x,y)\\in\\mathcal Z$ and $\\Psi\\in\\mathcal F_{s,B}$, define $\\ell(z,\\Psi)=\\|\\Psi(x)-y\\|_{\\mathcal Y}^2$. For a Borel probability law $P$ on $\\mathcal Z$, put $R_P(\\Psi)=\\mathbb E_{Z\\sim P}\\ell(Z,\\Psi)$ and $\\widehat R_N(\\Psi)=N^{-1}\\sum_{i=1}^N\\ell(Z_i,\\Psi)$ for iid $Z_i\\sim P$. Determine the minimax excess-risk behavior\n$$\\mathfrak R_N(s,B):=\\inf_{\\widehat\\Psi_N}\\sup_{P\\in\\mathcal P(\\mathcal Z)}\\mathbb E_{P^N}\\left[R_P(\\widehat\\Psi_N)-\\inf_{\\Psi\\in\\mathcal F_{s,B}}R_P(\\Psi)\\right],$$\nwhere $\\mathcal P(\\mathcal Z)$ is the set of Borel probability laws on $\\mathcal Z$ and the infimum is over Borel learners $\\widehat\\Psi_N:\\mathcal Z^N\\to\\mathcal F_{s,B}$. Characterize growth regimes $s=s_N$, $B=B_N$ in which estimation and continuum approximation errors can be balanced while retaining the deterministic noise term $C_\\star\\omega_\\star(\\delta)$."
+      }
+    ]
+  },
+  {
+    "order": 3091,
+    "id": "neural-operator-eit-inverse-map-examples",
+    "kind": "B",
+    "category": "inverse-problems",
+    "title": "Noise-robust neural-operator approximation for EIT — Examples and Counterexamples",
+    "companion": "neural-operator-eit-inverse-map",
+    "requires": [
+      "neural-operator-eit-inverse-map"
+    ],
+    "items": [
+      {
+        "id": "ex-ip-finite-sample-outside-uniform-bv-bound",
+        "kind": "example",
+        "title": "Finite samples outside a uniform BV bound",
+        "deps": [
+          "def-ip-calderon-admissible-conductivity-class",
+          "def-ip-spatial-bv-and-distributional-tv",
+          "lem-ip-bv-test-field-characterization-and-lsc"
+        ],
+        "dependency_level": 3,
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Maarten V. de Hoop, Nikola B. Kovachki, Matti Lassas and Nicholas H. Nelsen, Extension and neural operator approximation of the electrical impedance tomography inverse map",
+              "url": "https://arxiv.org/pdf/2511.20361",
+              "locator": "§5, finite random conductivity samples and the stated limitation of the uniform BV class, printed pp. 25–28."
+            },
+            {
+              "title": "Gláucio Terra, Introduction to Geometric Measure Theory — Lecture Notes, version 1.6",
+              "url": "https://www.ime.usp.br/~glaucio/mat6704/textos/GMTLecureNotes.pdf",
+              "locator": "§7.1, Definition 7.12, Proposition 7.16, Lemma 7.17 and Theorem 7.18 with complete proof, printed pp. 233–238: Gauss–Green and perimeter measure for Lipschitz domains."
+            }
+          ]
+        },
+        "proof_strategy": "direct",
+        "statement": "Let $\\Omega=B((1/2,1/2),1/4)\\subset(0,1)^2$, let $\\Omega'=B((1/2,1/2),1/8)$, and fix $m=1/2$, $M=3/2$, and contrast $a=1/4$. For every integer $N\\ge1$, put $q=\\lceil\\sqrt N\\rceil$, choose $N$ distinct cell centers from the $q\\times q$ grid in $[7/16,9/16]^2$, set $r_N=1/(32q)$, and define $\\gamma_N=1+a\\mathbf1_{E_N}$, where $E_N$ is the union of the radius-$r_N$ disks about those centers. Then every $\\gamma_N$ is a real, uniformly elliptic, individually finite-BV conductivity equal to $1$ outside $\\Omega'$, but $TV(\\gamma_N;\\Omega)\\ge(\\pi a/32)\\sqrt N$. Hence the family has no common finite BV bound $R$ and is not contained in any one class $X_2(R)$ as $N$ varies. This is a non-applicability example for a fixed uniform BV theorem, not a counterexample to its conclusion for members of that class."
+      },
+      {
+        "id": "ex-ip-eit-fno-continuum-vs-finite-element-experiment",
+        "kind": "example",
+        "title": "Continuum approximation theorem versus finite-element experiments",
+        "deps": [
+          "thm-ip-eit-fno-noise-robust-existence"
+        ],
+        "dependency_level": 12,
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Maarten V. de Hoop, Nikola B. Kovachki, Matti Lassas and Nicholas H. Nelsen, Extension and neural operator approximation of the electrical impedance tomography inverse map",
+              "url": "https://arxiv.org/pdf/2511.20361",
+              "locator": "Theorem 4.8, §5 numerical experiments and Appendix C, printed pp. 31–34 and 37–45; Appendix C starts on printed p. 61."
+            }
+          ]
+        },
+        "proof_strategy": "direct",
+        "statement": "Let $\\mathcal H=L^2(\\partial\\Omega\\times\\partial\\Omega)$ and $\\mathcal Y=L^2(\\Omega)$ for a bounded smooth EIT domain. Given any nonempty finite sample set $S=\\{x_1,\\ldots,x_N\\}\\subset\\mathcal H$, any $x_*\\in\\mathcal H\\setminus S$, and any $y_*\\in\\mathcal Y\\setminus\\{0\\}$, there are continuous maps $F_0,F_1:\\mathcal H\\to\\mathcal Y$ that agree at every sample input and differ by $y_*$ at $x_*$. Therefore exact fit on finitely many inputs alone cannot identify an arbitrary continuous inverse map. A continuum FNO approximation theorem concerns the full $L^2$ kernel input and $L^2$ conductivity output on a compact set; a finite-element experiment reports a finite discretization and finite train/test sample. Neither finite-data fit nor a discretized operator matrix supplies the continuum theorem's uniform bound or a statistical generalization guarantee."
+      }
+    ]
+  }
+]

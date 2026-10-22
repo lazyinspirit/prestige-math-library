@@ -1,0 +1,67 @@
+---
+id: lem-ip-one-sided-analytic-support-continuation
+kind: lemma
+title: "One-sided support forces its analytic conormal wavefront"
+status: draft
+origin: pipeline
+pipeline_run: inverse-problems-knot-theory-all-109-2026-10-19
+deps:
+  - def-ip-distributions-conormal-kernels-and-cotangent-relation
+  - def-ip-analytic-wavefront-fbi-transform
+  - lem-ip-analytic-cutoff-sequence-and-fbi-invariance
+  - def-real-analytic-germ-in-several-variables
+  - def-support-of-a-distribution
+  - lem-ip-flat-one-sided-analytic-support
+  - thm-euclidean-inverse-function-theorem
+dependency_level: 3
+provenance:
+  statement: literature-derived
+  proof: ai-altered
+sources:
+  references:
+    - title: "Marco Mazzucchelli, Mikko Salo, and Leo Tzou, A general support theorem for analytic double fibration transforms"
+      url: "https://users.jyu.fi/~salomi/pub/MazzucchelliSaloTzou2023.pdf"
+      locator: "§6.1, Theorem 6.1, printed pp. 42–43; the proof is referred to Hörmander."
+    - title: "Johannes Sjöstrand, Singularités analytiques microlocales"
+      url: "https://www.numdam.org/item/AST_1982__95__R3_0.pdf"
+      locator: "§8, Theorems 8.2–8.3 and the complete flat-hyperplane proof, printed pp. 52–58."
+proof_strategy: direct
+---
+
+## Statement
+
+Let $X$ be a real-analytic manifold, let $x_0\in X$, and let $\Sigma$ be a $C^2$ hypersurface through $x_0$, meaning that in a smooth local chart it is the graph of a $C^2$ function with nonzero conormal $\nu_0\in T^*_{x_0}X$. Let $f\in\mathcal D'(X)$ vanish on one side of $\Sigma$ in a neighborhood of $x_0$, meaning that in such a chart its restriction is zero on either the strict epigraph or strict subgraph of that defining function. If either $(x_0,\nu_0)\notin\operatorname{WF}_A(f)$ or $(x_0,-\nu_0)\notin\operatorname{WF}_A(f)$, then $f=0$ in a neighborhood of $x_0$.
+
+## Statement references
+
+[[def-ip-analytic-wavefront-fbi-transform|Gaussian FBI definition of analytic wavefront]]
+
+[[def-ip-distributions-conormal-kernels-and-cotangent-relation|Distribution support and local pairing]]
+
+[[lem-ip-analytic-cutoff-sequence-and-fbi-invariance|Cutoff and chart/packet invariance]]
+
+[[def-support-of-a-distribution|Distribution support]]
+
+## Facts & Assumptions
+
+**Given:** The real-analytic manifold $X$, a $C^2$ hypersurface $\Sigma$ through $x_0$, a distribution $f$, one-sided vanishing, and the stated analytic-wavefront hypothesis.
+
+[F1] [[def-ip-distributions-conormal-kernels-and-cotangent-relation]]: distributions are continuous functionals on compactly supported smooth densities, so localization to a chart is defined.
+
+[F2] [[def-support-of-a-distribution]]: the support is the complement of the largest open set on which the distribution vanishes.
+
+[F3] [[lem-ip-flat-one-sided-analytic-support]]: a distribution supported in a closed half-space at a support point has both oriented normal covectors in its Gaussian analytic wavefront set.
+
+[F5] [[thm-euclidean-inverse-function-theorem]] supplies the local inverse used to put the $C^2$ hypersurface in graph form; differentiating the inverse identity preserves its $C^2$ regularity.
+
+[F4] [[lem-ip-analytic-cutoff-sequence-and-fbi-invariance]]: analytic coordinate changes preserve the Gaussian criterion with its cotangent transformation.
+
+## Proof
+
+**Given:** The data in the statement.
+
+1.1 Work in an analytic ambient chart centered at $x_0$. The hypersurface remains $C^2$ in that chart, since changing from its given smooth chart is a smooth diffeomorphism. A real linear coordinate change makes its tangent plane nonvertical. The $C^2$ implicit graph theorem then writes it as $x_n=\psi(x')$, with $\psi$ of class $C^2$: the inverse of a $C^2$ map with invertible derivative is $C^2$, by differentiating the identity for its inverse twice. Translate to have $\psi(0)=0$. Shrink to a convex $x'$ ball on which $\|D^2\psi\|\le 2C$. Taylor's integral formula gives $ q_-(x'):=D\psi(0)x'-C|x'|^2\le\psi(x')\le D\psi(0)x'+C|x'|^2=:q_+(x'). $ Both supporting quadratics are real analytic and have the same differential as $\psi$ at $0$. [F1, F5, given, algebra, construct]
+
+2.1 Suppose first that $f$ vanishes on the strict subgraph of $\psi$. Its local support lies in $x_n\ge\psi(x')$, hence in $x_n\ge q_-(x')$. The analytic shear $(x',x_n)\mapsto(x',x_n-q_-(x'))$ has analytic inverse $(y',y_n)\mapsto(y',y_n+q_-(y'))$, determinant $1$, and sends this latter closed side into $y_n\ge0$. If instead $f$ vanishes on the strict epigraph, its support lies in $x_n\le\psi(x')\le q_+(x')$ and use the corresponding analytic shear with $q_+$. In either case the pulled-back normal $dy_n$ at $0$ is $dx_n-D\psi(0)dx'$, a nonzero scalar multiple of the supplied conormal $\nu_0$. This flattens an analytic supporting quadratic; it does not flatten the original $C^2$ graph analytically. [F1, F2, step 1.1, algebra, construct]
+
+3.1 If $f$ already vanishes near $x_0$, there is nothing to prove. Otherwise $x_0\in\operatorname{supp}f$ by [F2]. Localize inside the chart. Under the appropriate shear, [F3] then puts both $dy_n$ and $-dy_n$ in the analytic wavefront set at the origin. By [F4] these are exactly both conormal orientations at $x_0$, up to positive frequency scaling. Either absence hypothesis in the statement contradicts this conclusion. Thus $f=0$ near $x_0$. Every construction used finite-dimensional coordinates and explicit quadratics; it introduces no choice assumption. [F2, F3, F4, step 2.1, given, algebra] ∎

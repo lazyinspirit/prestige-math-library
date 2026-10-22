@@ -1,0 +1,2083 @@
+PDF PAGE 1
+INTRODUCTION TO KNOT THEORY
+DANNY CALEGARI
+Abstract. These notes are based on an undergraduate course taught at the University
+of Chicago Center in Paris in Spring 2025.
+Contents
+1.
+Introduction
+1
+2.
+Surfaces
+9
+3.
+Seifert surfaces and homology
+21
+4.
+The knot group
+30
+5.
+Skein theory
+38
+6.
+Acknowledgments
+48
+References
+48
+1. Introduction
+1.1. What is a knot? I propose as a starting point a sort of slogan: a knot is a tangled
+filament. Untangling this definition requires us to expand or gloss the terms (tangled,
+filament) recursively into terms simple enough to test against our intuition. In place of
+the term ‘tangled’ we might substitute ‘entwined’, ‘twisted’, ‘coiled’, ‘snarled’, ‘muddled’
+etc. Some of these terms suggest the result of performing specific geometric operations
+(twining, twisting, coiling) that implicitly take place in an ambient (three dimensional)
+space, while others suggest an idea of topological complexity which might take the form
+of an obstruction to an (as yet) undefined notion of elementary simplification. In place of
+the term ‘filament’ we might substitute ‘fiber’, ‘thread’ or ‘strand’ — what is apparently
+important here is the one dimensionality of a filament (especially when combined with the
+three dimensionality of its ambient embedding).
+Our slogan reveals (or, anyway, suggests) two important aspects of knothood:
+(1) it involves the ways that one dimensional objects can be embedded in three dimen-
+sional space; and
+(2) it involves a calculus of local topological operations that create complexity or reduce
+it.
+A different starting point, arising from the intuition that knots are geometric objects of
+some sort, would be to draw some pictures and then try to figure out what we have drawn:
+Date: May 6, 2025.
+1
+
+
+PDF PAGE 2
+2
+DANNY CALEGARI
+is this a knot?
+what about this?
+or this?
+Of the three diagrams in this figure the one on the left certainly seems more ‘snarled’
+or ‘muddled’ than the other two, which are progressively less so. We are likely to intuit
+some kind of topological distinction between the first figure and the third figure. On the
+other hand, our intuition easily fills in these discrete images with a continuous family of
+deformations, in which the rightmost ‘end’ (in the first figure) is pulled through a loop and
+then up and to the left around the strand emanating from the leftmost ‘end’; this sense
+of continuous interpolation is at odds with our sense that the first and third picture are
+topologically distinct.
+The ‘trouble’ here may be traced to the special role of the ‘ends’ of the strand; if they are
+allowed to freely move through space it is hard to see where any combinatorial or discrete
+notion of knottedness may reside. This trouble may be resolved by taking the two free
+ends of a strand and joining them up, so that our knot is topologically an embedded circle
+in space. Hence
+this is a knot
+. . . but so is this!
+These definitely look different, and indeed they are, in a sense that will take us a little
+while to make precise. The diagram on the left ‘is’ the right handed trefoil, while the
+diagram on the right ‘is’ the unknot. The word ‘is’ is in quotes because the diagram on
+the left is not a knot; it is a picture of a knot. This Magritte-like distinction goes in fact
+right to the heart of what knot theory is all about.
+Consider the following sequence of diagrams:
+The diagrams at the extreme left and right certainly look different, at a glance. But the
+intermediate diagrams show how one may take the leftmost strand of the left diagram and
+pull it behind and to the right of the other strands in order to transform the first diagram
+into the last one.
+This is not a problem to be remedied: the leftmost and rightmost diagrams are both
+pictures of the ‘same’ knot, ‘the’ right handed trefoil. Our geometric intuition tells us
+that the intermediate steps represent moves that may be accomplished by a continuous
+deformation of a knot in three dimensional space, even if this ends up producing a decisive
+change in the diagrammatic representation of the knot.
+
+
+PDF PAGE 3
+INTRODUCTION TO KNOT THEORY
+3
+A knot then is an equivalence class of embedded circles in 3-dimensional space, where
+two circles are equivalent (i.e. represent the same knot) if they may be interpolated by
+a ‘suitable’ continuous family of embedded circles. The embedded circles themselves are
+representatives of the knot; our language in the sequel will not always make this distinction
+precise, but we should make sure we always understand it is there.
+Why do I say ‘suitable’ continuous family? Why don’t we define two embedded circles to
+be equivalent (i.e. to define the same knot) if they may be interpolated by any continuous
+family of embedded circles? Consider the following sequence of diagrams:
+It is hard to dispute that this is a continuous family of embedded circles that interpolates
+between the right handed trefoil (on the left) and the unknot (on the right).
+All the
+‘knottedness’ has been shrunk down to a point and disappeared. If transformations such
+as these are permitted, one suspects that any two knots will turn out to be equivalent, and
+knot theory will become trivial.
+So: some kinds of continuous deformations are allowed, and some are not. To decide
+which are which we must now (unavoidably, I think) become slightly more formal and
+technical.
+One loose end we should tie up first is the question of what exactly is the 3-dimensional
+space in which our knots are embedded. One natural choice is to work in R3, ordinary 3-
+dimensional Euclidean space. This will do for now, although at some point it will be more
+natural to work in the compact space S3, which may be thought of as the set of unit vectors
+in R4 or more abstractly as a space obtained from R3 by adding a single compactifying
+point ‘at infinity’.
+Now that we have decided where our knots are embedded we need to be more careful
+about what exactly we mean by an embedding and what we mean by a continuous family.
+In order to avoid certain pathologies it makes sense to restrict attention to knots of finite
+combinatorial complexity (whatever that means). An example of the kind of pathology we
+do not allow is this (figure adapted from an original by Alberto Verjovsky):
+This object is an embedding of a circle in R3. It may be obtained by an infinite recursive
+construction very similar to the construction of the (middle third) Cantor set. It is an
+
+
+PDF PAGE 4
+4
+DANNY CALEGARI
+example of what is known as a wild knot. Wild knots and their theory are very interesting,
+but we do not study them here; we shall rule them out by fiat.
+One way to do this is to restrict attention to smooth knots — i.e. knots with represen-
+tatives that are the images of a smooth map f : S1 →R3 — i.e. the coordinate functions
+are continuous with continuous derivatives of all orders — which is both a topological
+embedding (i.e. injective) and an immersion (i.e. the vector f ′ is nowhere zero). And we
+may now say that two smooth knot representatives are equivalent if they are the images of
+smooth maps f0, f1 : S1 →R3 for which there is a smooth map F : S1 × [0, 1] →R3 for
+which the factors ft := F(·, t) : S1 →R3 are all themselves smooth knot representatives.
+This rules out the phenomenon observed in the figure above: although each knot in the
+family is the image of a smooth map S1 →R3, the second derivatives of these maps must
+necessarily blow up as the ‘knotted’ part shrinks to a point, and therefore the family of
+embedded circles cannot be parameterized by a smooth S1 × [0, 1] →R3.
+Example 1.1. The unknot is the equivalence class of smooth knots represented by some
+(any) round circle in R3 (exercise: these are all equivalent).
+Example 1.2. For p, q coprime integers the (p, q)-torus knot is the knot represented by the
+map f : S1 →R3 with coordinates f(θ) = (r cos(pθ), r sin(pθ), −sin(qθ)) for r = 2+cos(qθ)
+and θ ∈S1 = R/2πZ. The example p = 2, q = −3 gives the right-handed trefoil.
+Another way to achieve a similar result is to restrict attention to polygonal knots — i.e.
+knots with representatives which are the union of a finite sequence of straight edges (the
+meaning of ‘straight’ here implicitly uses the linear structure of R3). And we may now say
+that two polygonal knot representatives are equivalent if one is obtained from the other by
+a finite sequence of combinatorial moves of two kinds:
+(1) subdivision of an edge (or its inverse); or
+(2) pushing an edge across a disjoint triangle (or its inverse).
+The meaning of the first (subdivision) move should be clear. The second move means: we
+take an edge σ of a polygonal circle C which is simultaneously an edge of a triangle ∆that
+is disjoint from C except along σ ⊂∂∆. We may then replace C with the new polygonal
+circle C′ defined by C′ := (C −σ) ∪(∂∆−σ). I.e.:
+If we need to refer to the second move by name we shall call it a ‘Delta move’ (but we
+shall rarely do this). Note that the Delta move increases the number of edges by one. Note
+too that subdivision is really just a special case of the Delta move for a degenerate triangle.
+Which method shall we adopt? Formally we shall adopt the second method: a knot will
+be an equivalence class of embedded polygonal circle in R3, where two polygonal circles are
+
+
+PDF PAGE 5
+INTRODUCTION TO KNOT THEORY
+5
+equivalent if one may be obtained from the other by a finite sequence of subdivision or
+Delta moves or their inverses.
+On the other hand, any polygonal knot may be approximated by a smooth knot, and
+any polygonal equivalence achieved by subdivision and Delta move may be approximated
+by a smooth interpolating family of smooth knots.
+Conversely, smooth knots may be
+approximated by polygonal knots, and if F : S1 × [0, 1] →R3 is a smooth family, we
+may subdivide S1 × [0, 1] into a fine polygonal mesh which corresponds to a sequence of
+subdivisions and Delta moves relating two polygonal approximations of f0(S1) and f1(S1).
+Thus we shall feel free (though we have not at all rigorously proved the claims of this
+paragraph!!) to work either with smooth or polygonal representatives of knots, and to use
+either smooth or polygonal equivalence relations between representatives to prove theorems
+about knots, whichever is most convenient.
+1.2. Knot diagrams and Reidemeister’s Theorem. At this point we need to confront
+a rather important issue: what exactly are these pictures we have been drawing up to now,
+and what exactly is their relationship to circles (smooth, polygonal or otherwise) in R3?
+An embedded polygonal circle C in R3 may be projected orthogonally to a plane R2.
+Let π : R3 →R2 denote the projection. We consider projections that satisfy some nonde-
+generacy conditions:
+(1) distinct vertices of C map to distinct points of R2 (in particular, no edge of C is
+perpendicular to R2);
+(2) if e is an edge and v is a vertex of C disjoint from e then π(v) is disjoint from π(e);
+and
+(3) no point of C is in the image of 3 distinct points of C.
+The three kinds of degeneracy are exhibited in this figure:
+Exercise 1.3. Show that for any embedded polygonal circle C in R3 the set of orthogonal
+projections satisfying the nondegeneracy conditions is open and nonempty (in what?)
+The nondegeneracy conditions imply that the projected circle π(C) is in general position:
+it crosses itself transversely at only finitely many points, and there are no triple points.
+Since each self-intersection point of π(C) has exactly two preimages on distinct edges of C
+we record the information of which edge is ‘above’ the other (this is indicated pictorially
+by omitting a small part of the ‘lower’ edge). This data — an immersed polygonal circle
+π(C) together with crossing data — is a (polygonal) knot diagram.
+
+
+PDF PAGE 6
+6
+DANNY CALEGARI
+We shall be a little bit careless about the polygonal structure of π(C) and admit the
+possibility that a sequence of distinct consecutive edges of C may project to parallel seg-
+ments in π(C) that appear (in the diagram) as a single polygonal edge. With this caveat
+the following is true:
+Exercise 1.4. Show that a polygonal knot diagram determines a unique equivalence class
+of polygonal knot.
+Now, let’s suppose that C and C′ are polygonal knots related by a finite sequence of
+subdivision and Delta moves or their inverses, and let’s further suppose that π(C) and
+π(C′) are valid knot diagrams. What is the relationship between π(C) and π(C′)? The
+answer is given by the following theorem of Reidemeister:
+Theorem 1.5 (Reidemeister). The diagrams π(C) and π(C′) determine equivalent classes
+of polygonal knots if and only if π(C′) may be obtained from π(C) by a finite sequence of
+intermediate diagrams which either do not change the topology of the diagram (we say they
+are achieved by planar isotopy) or one of the following three moves or their inverses:
+(1) the first Reidemeister move creates one new crossing and a new ‘monogon’ comple-
+mentary region;
+(2) the second Reidemeister move creates two new crossings and a new ‘bigon’ comple-
+mentary region; and
+(3) the third Reidemeister move ‘pushes’ an overcrossing strand over a crossing of two
+lower strands;
+The following three figures (plus obvious variations obtained by reflection or rotation) il-
+lustrate these moves:
+Exercise 1.6. Prove Reidemeister’s theorem! The figures above will give you a strong hint
+how to do this. Suppose we want to accomplish a Delta move. A priori the projection of
+the triangle ∆to R2 may intersect many different segments and crossings of the projection.
+
+
+PDF PAGE 7
+INTRODUCTION TO KNOT THEORY
+7
+But if we subdivide ∆sufficiently finely, we may arrange that the projection of each triangle
+in the subdivision (and hence the change to the diagram associated to a Delta move) has
+bounded combinatorial complexity falling into finitely many cases that may be enumerated.
+One can also define knot diagrams and Reidemeister moves in the smooth world. There
+are the same three combinatorial moves (plus planar isotopy) and in practice we tend
+to draw smooth knot diagrams because they look nicer.
+The ‘smooth’ version of the
+Reidemeister moves is illustrated in the following figure:
+Reidemeister’s Theorem ‘reduces’ knot theory to a calculus of immersed circles in the
+plane with crossing data together with a finite set of combinatorial transformations between
+such circles.
+Exercise 1.7. What are the analog of the nondegeneracy conditions for smooth embedded
+circles in R3?
+1.3. Knot invariants. We now have a workable definition: a knot is an equivalence class
+of (polygonal or smooth) embedded circle in R3 up to the relation of (polygonal or smooth)
+equivalence. Nondegenerate projection to a plane sets up a bijection between knots and
+equivalence classes of knot diagrams up to the relation generated by planar isotopy and
+Reidemeister moves.
+Now that we know what knots are, and have at least two rather distinct ways of talking
+about them, we may start to do knot theory. The most basic question one might ask is
+simply: what knots are there? It is not clear at the outset what counts as an answer. The
+class of all knots forms a (nonempty!) set, and we can ask how many elements there are
+in this set. There are evidently only countably many equivalence classes of (polygonal)
+knot diagrams, so there are countably many knots; but are there finitely many or infinitely
+many? Are there more than one? Can we enumerate them? How would we get started
+addressing such questions?
+Since the definition of knots depends on a rather opaque equivalence relation we might
+want to focus our initial attention there, and ask: given two knot representatives, how can
+we tell whether they represent the same knot? Or: how can we tell whether they represent
+different knots?
+Let’s let K denote the set of all knots, and D the set of all knot diagrams. Let ∼be the
+equivalence relation on D generated by planar isotopy and Reidemeister moves, so that
+there is a bijection K →D/ ∼. A knot invariant is a function x : D →X which is constant
+on the equivalence classes of ∼. It thereby induces a function which by abuse of notation
+we denote x : K →X, and if we have knots K1, K2 with x(K1) ̸= x(K2) we can deduce
+that K1 ̸= K2.
+Let’s consider some examples.
+Example 1.8 (Knot type). The simplest invariant is just the map D →K that takes a
+diagram to its underlying knot type. This map inverts the bijection K →D/ ∼, a fact
+
+
+PDF PAGE 8
+8
+DANNY CALEGARI
+which is equivalent to Reidemeister’s Theorem. While in principle this invariant is the
+most powerful (in the sense that any knot invariant may be obtained as a factor of this
+one) it is essentially useless as a tool for calculation, since it just hands our knot back to
+us with no more information.
+Example 1.9 (Crossing number). Suppose we have a numerical function f on D which takes
+values in a well-ordered set. Then we may define a knot invariant by D →minD′∼D f(D).
+For example, there is an invariant c : D →N which counts the number of crossings
+in a diagram. The crossing number of a knot K (denoted c(K)) is then the minimum
+number of crossings in any diagram representing K. At first glance an invariant of this
+kind might seem useless, since there is no apparent way to calculate it. One thing that is
+easy to compute is an upper bound: c(K) ≤c(D) for any diagram D representing K. In
+particular, c(K) = 0 for the unknot.
+Example 1.10 (3-colorings). A segment of a diagram D is an arc of the diagram running
+between two consecutive undercrossings. Other arcs of the diagram may cross under a
+segment, but no arc may cross over it (by definition).
+If you draw a diagram D, the
+segments are the continuous strokes that may be made without lifting the pen (or chalk
+as the case may be). Note that if c(D) > 0 (i.e. there is at least one crossing) then D has
+c(D) segments.
+Let’s fix three distinct colors (for the sake of argument, let the colors be red, green and
+blue). A 3-coloring of a diagram D is an assignment of one of the colors to each segment
+so that at each crossing, the three segments that meet at the crossing either all have the
+same color, or they all have different colors. Let τ3(D) denote the number of 3-colorings
+of a diagram D.
+Proposition 1.11. τ3(D) is a knot invariant. In other words, if D ∼D′ then τ3(D) = τ3(D′).
+Proof. Changing a diagram by planar isotopy does not change the number of 3-colorings.
+Thus to prove the proposition it suffices to show that τ3(D) = τ3(D′) whenever D and
+D′ differ by a single Reidemeister move. This may be verified by a finite calculation; two
+diagrams that differ only in the region associated to a move may be colored the same way
+outside this region, and inside this region a coloring of one diagram determines a coloring
+of the other. For example:
+□
+Let’s compute τ3 for some simple knots.
+Some trial and error shows that the unknot and the figure 8 knot admit only monochro-
+matic colorings, so τ3 = 3 for both of those. The right handed trefoil however admits a
+non-monochromatic coloring, and in fact τ3 = 9. In particular: the right-handed trefoil is
+not equivalent to the unknot !
+
+
+PDF PAGE 9
+INTRODUCTION TO KNOT THEORY
+9
+What about the unknot and the figure 8 knot? Are they equivalent? The question
+cannot be decided by τ3 alone; the invariant is not powerful enough to distinguish them.
+Of course, at this point as far as we know, this might be because the knots are actually
+equivalent; this turns out not to be the case, but we must work harder to show it.
+Exercise 1.12. Show that τ3(K) is always a power of 3.
+In general, what does τ3 tell us about a knot? We are not yet in a position to answer
+this question in full generality. Nevertheless we can relate τ3 in a useful way to crossing
+number c(D). If c(D) = 0 or 1 then there is only one segment, and evidently τ3(D) = 3.
+Suppose c(D) > 0 so that c(D) is equal to the number of segments of D. Each segment
+may be colored in at most 3 ways, so τ3(D) ≤3c(D). In fact it is not hard to see that if
+c(D) ≥2 then τ3(D) ≤3c(D)−1. For, in this case there is at least one crossing at which
+at least two different segments meet. Either exactly two segments meet there (in which
+case both segments must necessarily have the same color) or three segments meet there
+(in which case the color of two of them uniquely determines the third). In either case the
+3-coloring condition imposes at least one ‘constraint’ on the choice of colors, so that the
+number of 3-colorings is at most 3c(D)−1. Since this inequality holds for every diagram, and
+since τ3 is a knot invariant, it follows that c(K) ≥1 + log3 τ3(K) providing τ3(K) > 3.
+For the unknot this tells us nothing new, since we already know c(K) = 0 in this case;
+and for the figure 8 knot it tells us nothing at all. But for the right handed trefoil it gives
+the inequality c(K) ≥3 which, together with the inequality c(K) ≤3 (which may be
+deduced by exhibiting the standard diagram) shows that in fact c(K) = 3.
+Determining the crossing number of a knot in general is a difficult problem. The extent
+to which we can make progress on this problem in the sequel will give us a rough estimate
+of the power of our methods.
+The crossing number of the unknot is 0. Are there any other knots with crossing number
+0? It seems unlikely. But to prove it we must develop some machinery, and this is the
+purpose of the next section.
+2. Surfaces
+2.1. The Jordan Curve Theorem. In fact there is only one knot with crossing number
+zero — the unknot. This will follow from two facts. The first is a topological characteri-
+zation of the unknot.
+Proposition 2.1. An embedded circle in R3 is the unknot if and only if it bounds an
+embedded disk.
+Proof. The unknot is represented by a round circle C which certainly bounds an embedded
+disk D. If C′ is any other representative then C and C′ are related by smooth equivalence;
+we claim that this implies that C′ also bounds an embedded disk D′. Imagine that the
+
+
+PDF PAGE 10
+10
+DANNY CALEGARI
+space R3 −C outside C is filled with a malleable rubber, which may stretch indefinitely
+but does not tear or rip. As we move C around via the track of the smooth equivalence,
+the space outside compresses to avoid the space that C moves into, and stretches to fill
+the void it leaves. The disk D is also carried along by this process, and at the end of the
+process it gives a new embedded disk D′ in R3 −C′ as claimed. This proves one direction
+of the proposition: every representative of the unknot bounds an embedded disk.
+To prove the other direction, suppose C is a smooth circle bounding a smooth embedded
+disk D.
+To say that D ‘is’ a disk is to say that there is a smooth parameterization
+f : D2 →D where D2 is the ‘standard’ unit disk in R2, and where the Jacobian df of f
+is injective on the tangent space at every point of D2 (this just means that D looks like a
+flat plane to first order near every point). In particular, if α ⊂D2 is a very small round
+circle centered at 0 then f(α) is close (to first order) to a very small ellipse contained in
+a plane in R3. Such an ellipse is evidently equivalent to the unknot (by a family of affine
+transformations). On the other hand, α and ∂D2 may be interpolated by a 1-parameter
+family of concentric round circles in D2, and the images of these circles under f is a smooth
+equivalence between C and f(α). Hence C represents the unknot, as claimed.
+□
+Exercise 2.2. Give a careful proof that a smooth equivalence from C to C′ in R3 extends
+to a diffeomorphism (i.e. a smooth, smoothly invertible map) from R3 to itself taking C to
+C′. In fancy language, what you are doing is extending an ambient isotopy of a subspace
+to a diffeomorphism of the ambient space.
+The second fact is rather more substantial
+Theorem 2.3 (Jordan Curve Theorem). Every embedded circle in R2 bounds an embedded
+disk in R2.
+Let us first see that these facts imply the desired result.
+Proposition 2.4. Any knot with crossing number 0 is the unknot.
+Proof. Let K be a knot which has a diagram D with crossing number 0.
+This means
+there is a representative C in R3 with an orthogonal projection π : C →R2 which is an
+embedding onto its image. But then π(C) itself is an embedded circle, and C is (smoothly)
+equivalent to π(C) by a family of circles obtained by pushing each point of C at constant
+speed to its image in π(C). Now by the Jordan Curve Theorem 2.3 the circle π(C) bounds
+an embedded disk in R2 and hence also in R3; thus by Proposition 2.1 the circle π(C) is
+the unknot and therefore so is K.
+□
+We shall now give the proof of the Jordan Curve Theorem 2.3.
+Proof. We give a proof for polygonal circles, which are rather convenient for inductive
+arguments. The proof has two parts: first we show that a polygonal circle C in R2 induces
+a decomposition of R2 −C into two pieces, one compact (the ‘inside’) and one noncompact
+(the ‘outside’); and second we show that the compact piece is a disk.
+A tubular neighborhood N(C) of C is an annulus; the circle C certainly divides N(C)
+into two (thinner) annular components. If X is the result of cutting R2 open along the curve
+C then X is itself a (not necessarily connected) surface, with two boundary components
+which correspond to the two sides of C in N(C). Each component of X must contain
+
+
+PDF PAGE 11
+INTRODUCTION TO KNOT THEORY
+11
+at least one boundary component. This is because any point in R2 may be joined to C
+by a path, and some subset of this path joins any given point of X to a boundary point.
+It follows that R2 −C has at most two pieces; we now show that it has at least two
+by exhibiting a nonconstant function ϕ from R2 −C to {0, 1} which is constant on each
+component.
+Since C is compact, it is contained inside a ball of finite radius centered at the origin;
+without loss of generality, suppose it is contained inside the closed ball of radius 1/2. Any
+two points outside this ball may be connected by a path outside this ball. Thus X has a
+unique noncompact component, which we will henceforth call the outside.
+Let ℓbe a nearly horizontal line segment which is not parallel to any edge of C, and for
+any point p ∈R2 −C let ℓp be the unique segment parallel to ℓjoining p to some point p′
+with x-coordinate −1. By hypothesis ℓp ∩C is finite. At each point q ∈ℓp ∩C we compute
+an index i(q) which is either 0 or 1 as follows. Since (by hypothesis) q is necessarily an
+isolated point of ℓp ∩C the two ‘sides’ of C near q may either be above ℓp or below it. If
+they are both on the same side the index i(q) is 0; otherwise it is 1 (notice that i(q) = 0 is
+only possible if q is a vertex of C). Now: define ϕ(q) to be equal to the sum P
+q∈ℓp∩C i(q)
+mod 2.
+This figure shows an example for which p (on the right) is joined to p′ (on the left) by a
+segment ℓp which intersects C at seven points, all with index 1. Hence ϕ(p) = 1.
+We claim ϕ is locally constant. Evidently it does not change if we slide p a little bit
+along the segment ℓp in either direction, since ℓp ∩C is constant. If we slide p slightly up
+or down, each point q of intersection of ℓp ∩C of index 1 slides up or down to a new point
+of intersection of index 1. If q is a point of intersection of ℓp ∩C of index 0, with the two
+sides of C near q on the positive side of ℓp (say), then sliding p up splits q open into two
+points of intersection each of index 1, whereas sliding p down eliminates the intersection q
+altogether. In either case the total value of ϕ does not change.
+The function ϕ takes the value 0 on any point p with x coordinate −1, since in this case
+p = p′ and ℓp is a degenerate segments that does not intersect C at all. Thus ϕ = 0 on
+
+
+PDF PAGE 12
+12
+DANNY CALEGARI
+the entire outside component. On the other hand, it is easy to produce some point p with
+ϕ(p) = 1 (just construct any segment parallel to ℓthat intersects C once in a point with
+index 1, and observe that the value of ϕ is different at the two endpoints). The set of all
+points in R2 −C with ϕ = 1 is therefore nonempty, and since none of these points is in
+the outside component, there must be at least two components, and therefore exactly two.
+This completes the first part of the proof.
+Now let’s prove that the compact component P (the ‘inside’) is topologically a disk. We
+prove this by induction on the number of vertices (this is a place where it is especially
+convenient to work with polygons rather than smooth circles). Any polygonal circle must
+have at least 3 vertices; if it has exactly 3 it is the boundary of a triangle, so that P is
+certainly a disk in this case.
+Now suppose C has at least 4 vertices. We orient the circle C ‘positively’, so that as we
+move around C in the positive direction the inside (i.e. P) is always to the left. Pick a
+vertex v ∈C at which P has an acute angle and let v+ and v−be the two vertices adjacent
+to v so that the three vertices v−, v, v+ span a triangle ∆. If ∆is contained in P we may
+push P across ∆by a Delta move, reducing the number of vertices. Otherwise there must
+be some vertex w of C inside ∆(possibly on the edge joining v+ to v−) and therefore there
+must be some ‘highest’ vertex w in ∆so that the segment σ joining w to v is contained in
+the interior of P.
+But now we may cut P along σ; this produces two polygonal circles C1 and C2, each with
+fewer vertices (to see this, observe that the orientation on C near w must be as indicated
+in the figure, since σ is ‘to the left’ of C at either end) and each of these must bound a
+compact region P1 and P2 respectively.
+Evidently P = P1 ∪σ P2. Since each of the Ci has fewer vertices than C, the regions Pi
+are both disks. Since P is obtained by gluing these disks along segments in their boundary,
+it is a disk too. The proof follows.
+□
+2.2. The Classification of Surfaces. A surface is a space that looks locally 2-dimensional;
+i.e. every point has a little open neighborhood which is topologically equivalent to the open
+unit disk in the plane. One usually throws in some technical terms like ‘countable basis’
+and ‘Hausdorff’ (if you know what those words mean); but we will soon narrow our focus
+so that these conditions hold automatically.
+We shall be interested in surfaces that are compact and triangulated. In other words,
+they are obtained from a finite collection of triangles by gluing edges together in pairs. We
+shall eventually also allow surfaces with boundary (obtained by leaving some of the edges
+
+
+PDF PAGE 13
+INTRODUCTION TO KNOT THEORY
+13
+free and unglued) but for now let’s focus on closed surfaces: those that are compact and
+without boundary.
+We would also like to focus on oriented surfaces. What does this mean? We will take
+it for granted that we understand what it means to orient a triangle, and that a triangle
+may be oriented in two distinct ways, e.g. by choosing which of the two ‘sides’ of it is the
+‘top’ and which is the ‘bottom’. An oriented triangle induces orientations on the boundary
+edges, so that for each positively oriented edge on the boundary, the interior of the triangle
+lies to the left of the edge. In other words, the oriented boundary of the triangle goes
+anticlockwise around the interior.
+Exercise 2.5. Make sense of what it means to say that ‘the interior of the triangle lies to
+the left of an oriented boundary edge’. More precisely: explain how making sense of the
+word ‘left’ here is tantamount to choosing an orientation on the triangle.
+When we glue up oriented triangles ∆1 and ∆2 along edges ei ⊂∂∆i by some identifi-
+cation f : e1 →e2, in order to get an oriented surface the identification f must reverse the
+orientations of the edges. This is because in the glued up surface S the triangle ∆1 will be
+to the left of the glued up edge in one orientation, while ∆2 will be to the left in the other
+orientation.
+After performing gluings along all pairs of edges, the resulting surface may be thought of
+as a finite combinatorial object, which is specified by the finite amount of data consisting
+of the list of triangles, and the choice of pairing of edges. One might say the surface is a
+special kind of two-dimensional simplicial complex, for which every point is in the interior
+of a unique triangle, edge or vertex.
+Definition 2.6 (Euler characteristic). Let P be a two-dimensional simplicial complex.
+The Euler characteristic of P, denoted χ(P), is the alternating sum
+χ(P) := #triangles −#edges + #vertices
+A triangulation of a surface may be refined by a finite sequence of subdivisions, at every
+step subdividing either an edge or a triangle.
+It is clear that the Euler characteristic does not change under refinement. Furthermore,
+it turns out that any two triangulations of a compact surface have a common refinement.
+To see this let S be the surface, and τ1, τ2 the triangulations. Wiggle the edges of τ2 so that
+
+
+PDF PAGE 14
+14
+DANNY CALEGARI
+they are transverse to the edges of τ1, so that the union of the edges cuts up the surface into
+finitely many regions bounded by polygonal circles. Each one of these regions is contained
+in a triangle of either of the original triangulations, and is therefore topologically a disk (by
+the Jordan Curve Theorem 2.3) and may therefore be subdivided into triangles by coning
+the boundary to some point in the interior, producing a new triangulation τ whose edges
+‘contain’ the edges of both τ1 and τ2.
+Exercise 2.7. Show that τ as above admits a common refinement with either of τ1 or τ2.
+We may conclude that the Euler characteristic is a topological invariant of a compact
+surface, and henceforth we will write χ(S), to emphasize that it is independent of the
+choice of a triangulation.
+Let us now state our first version of the Classification of Surfaces:
+Theorem 2.8 (Classification of Closed Oriented Surfaces). Let S be a closed oriented
+connected surface. Then χ(S) = 2 −2g for some non-negative integer g called the genus of
+S. This may take any non-negative value, and any two closed oriented connected surfaces
+with the same genus are topologically equivalent.
+Example 2.9 (The 2-sphere). The 2-sphere S2 may be triangulated by subdividing the
+equator into three segments, and then thinking of both the northern and the southern
+hemispheres as triangles for which these three segments are the boundary edges. Thus
+χ(S2) = 2 −3 + 3 = 2.
+Example 2.10 (The torus). The torus T may be obtained from a square by identifying
+opposite sides by translation. As such it admits an obvious triangulation (inherited from
+a triangulation of a square) with two triangles, three edges and one vertex. Thus χ(T) =
+2 −3 + 1 = 0.
+
+
+PDF PAGE 15
+INTRODUCTION TO KNOT THEORY
+15
+Example 2.11 (Connect sum). Suppose S1 and S2 are two closed, oriented, connected sur-
+faces. We may build a new surface called the connect sum of S1 and S2, and denoted S1#S2,
+by removing the interior of a closed disk from each surface and gluing the resulting bound-
+ary circles (oriented as the boundaries of oriented surfaces) by an orientation-reversing
+identification.
+As triangulated surfaces this may be accomplished by removing the interiors of a single
+triangle from each of S1 and S2 and gluing the exposed edges. Removing two triangles
+reduces χ by 2; identifying two boundary circles by gluing identifies three pairs of edges
+and three pairs of vertices, and therefore it does not change χ. Thus χ(S1#S2) = χ(S1) +
+χ(S2) −2. In particular, by taking the connect sum of a torus with itself g times we may
+obtain a closed oriented connected surface with χ = 2 −2g.
+Exercise 2.12. Show that the result of connect sum is well-defined (i.e. the result does
+not depend topologically on what the disks are that are removed or how the gluing is done),
+and that # defines an associative and commutative operation on topological equivalence
+classes of closed oriented connected surfaces, with S2 as an identity element.
+The main point of Exercise 2.12 is to show that there is only one way (topologically) to
+remove the interior of a closed disk from a connected surface. We may use this observation
+to deduce the classification of compact oriented surfaces from the classification of closed
+ones:
+Theorem 2.13 (Classification of Compact Oriented Surfaces). Let S be a compact oriented
+connected surface with b boundary components. Then χ(S) = 2 −2g −b for some non-
+negative integer g (the genus), and S is obtained from a closed oriented surface S′ of genus
+g by removing the interiors of b disjoint closed disks. The numbers g and b may take any
+non-negative values, and any two compact oriented connected surfaces with the same genus
+and number of boundary components are topologically equivalent.
+Proof. If S is a compact surface with b boundary components then we may obtain a closed
+surface S′ by attaching a disk to each of these b boundary components. If S is oriented, so
+is S′; and if S is connected, so is S′. By Theorem 2.8 the surface S′ is classified by its genus
+g, and therefore S is classified by the genus g and the number b of boundary components.
+If S′ is triangulated, we may obtain S by removing the interiors of b disjoint triangles; thus
+χ(S) = χ(S′) −b = 2 −2g −b.
+□
+
+
+PDF PAGE 16
+16
+DANNY CALEGARI
+Theorem 2.8 is a powerful theorem. Before we prove it, we shall give a sense of its power
+by using it to give a quick new proof of the Jordan Curve Theorem.
+Proof. Let C be a circle in R2. Now, R2 is not compact, but we may ‘compactify’ it by
+adding a point ‘at infinity’ to obtain S2. The inverse of this operation is stereographic
+projection: if we think of S2 as the round sphere in R3 and n ∈S2 as the north pole,
+for every other point p ∈S2 there is a unique straight line ℓp containing n and p, and
+this line intersects the x–y plane at a unique point π(p). The map π : S2 −n →R2 is a
+diffeomorphism.
+Thus the Jordan Curve Theorem will follow from a stronger claim: if C is a circle in
+S2, it divides it into two regions, both of which are disks. To prove this, cut open S2
+along the circle C to obtain a compact oriented surface Σ. Gluing two boundary circles
+does not change χ so χ(Σ) = 2. The surface Σ has two boundary components, and as we
+argued earlier, each component of Σ must contain at least one boundary component; hence
+Σ consists of at most two components. Let Σ′ be obtained from Σ by attaching a disk to
+each boundary component. Then Σ′ is closed and oriented, and χ(Σ′) = 4. Since Σ′ has at
+most two components, and by Theorem 2.8 each of these has Euler characteristic at most
+2, it must have exactly two components each with χ = 2 and therefore each a sphere. Thus
+Σ has two components, each with one boundary component and χ = 1, which are therefore
+both disks.
+□
+Let us now give the proof of Theorem 2.8.
+Proof. Let Σ be a closed, oriented, connected surface. We assume Σ is triangulated; i.e.
+it is obtained by gluing together the edges of finitely many triangles. The first step is to
+
+
+PDF PAGE 17
+INTRODUCTION TO KNOT THEORY
+17
+show that Σ may be obtained from a single (planar) polygon with an even number of edges
+by gluing these edges in pairs.
+In the triangulated surface Σ we obtain a graph Γ which is the dual of the 1-skeleton of
+the triangulation τ of Σ. This means that Γ has one vertex in each triangle of τ, and one
+edge that crosses each edge of τ. Since Σ is connected so is Γ. We may therefore choose a
+maximal tree T ⊂Γ that contains all the vertices. The edges of τ ‘dual’ to the edges of T
+correspond to a subset of the pairs edges of our original collection of triangles; if we glue
+up these pairs of edges (and only these) we obtain a polygon P (exercise: prove this!)
+Since Σ is oriented, so is P and therefore so are the edges of ∂P, and these edges are
+glued together in pairs by orientation reversing identifications. The number of edges of P
+is positive and even. If it equals 2 there is only one possibility and the result of gluing
+these edges together is a sphere.
+Otherwise P can be cut up into some positive number n of triangles by adding n −1
+new interior edges, and hence
+χ(Σ) = 1 −1
+2#edges of P + #vertices after gluing
+Lemma 2.14. We may modify P so that either P has only two edges (and therefore
+Σ = S2) or so that after gluing up edges, Σ has only one vertex.
+Proof. The gluing determines a surjective (typically many to one) map from the vertices of
+P to the vertices of Σ. For each vertex v of Σ the multiplicity is the number of vertices of
+P that map to it by the gluing. Order the vertices of Σ v1, v2, · · · , vk in decreasing order
+of multiplicity.
+If any vertex vi has multiplicity 1 this means there is a unique vertex wi of P that maps
+to it under the gluing. But this means that the two edges of P adjacent to wi are glued
+to each other, and either P has only two edges, or else we can just glue these two edges
+together to get a simpler polygon P ′ with two fewer edges than P.
+If no vertex vi has multiplicity 1 then no two adjacent edges of P are glued together.
+Suppose there are at least two vertices in Σ. Choose three consecutive vertices p, q, r in
+
+
+PDF PAGE 18
+18
+DANNY CALEGARI
+∂P which map to v1, vi, vj respectively where i ̸= 1 but we are indifferent about whether
+j = 1 or not. Let e be the edge qr and let e′ be the edge of P that is glued to e. We may
+cut off a triangle ∆of P spanned by p, q, r and attach this triangle to P by gluing e to e′.
+This produces a new polygon P ′ with the same number of edges as P.
+The net result of this operation is to reduce the multiplicity of vi by 1 and to increase
+the multiplicity of v1 by 1. Thus after finitely many operations of this kind we may arrange
+for some vertex of Σ to have multiplicity 1, and then we may simplify P as above. The
+lemma follows by induction.
+□
+If Σ = S2 we are done.
+Otherwise we may perform the modification of P as in
+Lemma 2.14 so that the gluing produces only one vertex in Σ.
+For such a gluing we
+have
+χ(Σ) = 2 −1
+2#edges of P
+In particular either Σ = 2 or χ(Σ) < 2. We claim that in the latter case that we may write
+Σ = Σ′#T for some closed oriented surface Σ′. Since χ(Σ′) = χ(Σ) + 2 and (as we have
+just shown) χ(Σ′) ≤2, it will follow by induction that Σ is obtained from S2 by connect
+summing g times with T for some non-negative integer g. This will prove the theorem.
+Let’s prove the claim. We somehow need to find a way to exhibit Σ as Σ′#T. This is
+evidently the same as finding a compact subsurface K of Σ which is diffeomorphic to T
+with a disk removed. Where shall we find such a K? Since after gluing there is only one
+vertex in Σ, it follows that we never glue adjacent edges of P. Let’s realize P geometrically
+as a convex regular polygon in the plane, and for each pair of edges e and e′ which are
+glued, let’s draw a straight chord ce across P joining the midpoints of e and e′.
+Suppose these chords were all disjoint. Then we could find an ‘innermost’ chord — i.e.
+some chord ce which splits P into two pieces P ±, one of which (say P +) contains no other
+chord. But this is impossible: since the edges e and e′ are not adjacent, both P + and
+P −must contain at least one entire edge, which means they must contain the chord that
+
+
+PDF PAGE 19
+INTRODUCTION TO KNOT THEORY
+19
+lands at that edge. It follows that the chords are not all disjoint, and therefore (since they
+are straight line segments in a convex polygon) there are chords e1 and e2 that intersect
+transversely in exactly one point.
+Each chord is glued up to an embedded circle in Σ, and a neighborhood of a chord is
+glued up to an embedded annulus. Let K be the union of these two annular neighborhoods
+of e1 and e2. Then K is topologically a torus with a disk removed!
+Thus we have proved the claim, and therefore Σ = Σ′#T for some new surface Σ′ with
+χ(Σ′) = χ(Σ) + 2. Since we have already shown the Euler characteristic of any closed
+oriented connected surface is ≤2 with equality if and only if it is the sphere, the theorem
+follows.
+□
+It is worth examining the logic of the proof. Once we have shown that Σ is obtained
+by gluing up the edges of a polygon P in pairs we could skip directly to the last step and
+argue that either some pair of adjacent edges are identified (in which case either Σ = S2
+or P can be simplified, reducing the number of edges by 2) or there are a pair of chords
+that intersect transversely, and therefore Σ = Σ′#T 2 for some Σ′. In other words: either
+Σ = S2 or Σ is obtained from some other surface by connect sum with a torus. Why
+doesn’t this complete the proof? The trouble is that it does not rule out the possibility
+
+
+PDF PAGE 20
+20
+DANNY CALEGARI
+that we can keep writing
+Σ = Σ′#T 2 = Σ′′#T 2#T 2 = Σ′′′#T 2#T 2#T 2 = · · ·
+indefinitely in a process that never terminates. To show that this process terminates we
+must either be careful about keeping track of the complexity of some polygon P ′ that glues
+up to Σ′, relating it to that of P (which is rather fiddly), or to show a priori (e.g. as in
+Lemma 2.14) that χ(Σ) ≤2 for any closed oriented connected surface.
+Corollary 2.15. There are only finitely many knots with crossing number n, for any non-
+negative integer n.
+Proof. This is because there are only finitely many diagrams (up to topological equivalence)
+for any n. Suppose D is a diagram with n > 0 crossings which we think of as drawn on S2.
+Ignoring the data of the crossings, the diagram can be thought of as an immersed circle in
+the plane, which in turn is a graph Γ with n 4-valent vertices and therefore 2n edges. A
+thickened neighborhood of Γ is a compact oriented surface Σ with χ = −n (as we shall see
+in the next exercise) and b boundary components. Each boundary component is a circle,
+and therefore by the Jordan Curve Theorem bounds a disk (in S2) in the complement of
+Σ. In particular, b = 2 + n. Each complementary disk can be thought of as a polygon
+with edges on Γ, and each edge of Γ is obtained by gluing two edges of two complementary
+polygons. Thus we may reconstruct the diagram topologically (up to the ambiguity of
+the crossings) from b polygons with 4n edges in total by gluing the edges in pairs. Each
+crossing may be resolved in two possible ways. Thus there is a (computable, but rather
+messy and not very good) bound on the number of possibilities in terms of n.
+□
+Exercise 2.16. Suppose Γ is a graph embedded in a surface.
+Let Σ be a thickened
+neighborhood of Γ. Show that χ(Σ) = #vertices(Γ) −#edges(Γ).
+Corollary 2.17. There are no knots with crossing number 1 or 2. The only knots with
+crossing number 3 are the right handed trefoil and the left handed trefoil (its mirror image).
+Proof. One may enumerate the diagrams with one or two crossings; each of them may have
+some crossing eliminated by a Reidemeister 1 move; thus they all represent unknots and
+their crossing number is 0 after all.
+If D is a diagram with 3 crossings there are 5 complementary polygons with a total of 12
+edges. A polygon with one edge (a ‘monogon’) may be removed by a Reidemeister 1 move.
+Thus if D is of minimal complexity each complementary polygon has at least 2 edges and
+at most 3 (since there are only 3 crossings). Thus the only possibility is that there are two
+triangles and three bigons.
+There are two possible arrangements of these polygons (actually they are equivalent in
+S2) and for each arrangement, there are eight ways to choose the three crossings. For each
+
+
+PDF PAGE 21
+INTRODUCTION TO KNOT THEORY
+21
+arrangement, two choices of crossings give rise to the right handed and left handed trefoil
+respectively, and every other choice gives rise to a diagram that may be simplified by a
+Reidemeister 2 move. We have already seen that the crossing number for either trefoil is
+3.
+□
+The right handed and left handed trefoil are in fact different knots, though we shall not
+be able to prove this for some time yet.
+3. Seifert surfaces and homology
+3.1. Genus. We begin with a definition:
+Definition 3.1 (Seifert surface). If K is a knot, the genus of K (denoted g(K)) is the
+least genus of a compact oriented connected surface Σ embedded in R3 whose boundary is
+(a representative of) K.
+Any compact oriented connected surface Σ embedded in R3 with boundary (a repre-
+sentative of) K is called a Seifert surface for K. If C is a representative of K which is
+equal to ∂Σ for some Seifert surface Σ, and C′ is equivalent to C, then by Exercise 2.2 the
+ambient isotopy taking C to C′ carries Σ to another Seifert surface Σ′ in R3, topologically
+equivalent to Σ, whose boundary is C′. Thus the genus may be computed (in principle)
+from any representative of K.
+On the other hand we have no a priori reason to believe that such a surface exists at all,
+and in fact we shall not rigorously prove this until we give Seifert’s algorithm in § 3.2. For
+now let us take it on faith that g(K) is a well-defined non-negative integer for all knots K.
+The surfaces are oriented, hence two sided; the two sides are indicated by different colors.
+Both surfaces have χ = −1 and are therefore of genus 1. The surface on the left bounds a
+left handed trefoil; a genus 1 Seifert surface for a right handed trefoil may be obtained by
+mirror image.
+Exercise 3.2. Show that both surfaces in this figure have genus 1. What is the knot on
+the right?
+Proposition 3.3. For any knot K the genus g(K) is zero if and only if K is the unknot.
+Proof. A genus 0 surface with one boundary component is a disk; thus this is a restatement
+of Proposition 2.1.
+□
+An upper bound on g(K) may be obtained by exhibiting any Seifert surface for K. Hence
+we obtain the following corollary:
+Corollary 3.4. The genus of the right (or left) handed trefoil is 1.
+
+
+PDF PAGE 22
+22
+DANNY CALEGARI
+The genus of the figure 8 knot is also 1. We have already proved the upper bound though
+you may not have noticed it; a lower bound will follow once we (eventually) prove that the
+figure 8 knot is different from the unknot.
+Although genus is in general rather difficult to compute, it does behave very well under
+an important operation on knots called connect sum. Actually, this operation is defined on
+oriented knots, and is defined as follows.
+Definition 3.5 (Connect sum). Let K1 and K2 be oriented knots. Put representatives
+of them in disjoint 3-balls B1 and B2 in S3 and join them by an embedded arc α which
+intersects the knots only at its endpoints and intersects the boundary spheres of each of
+the Bis transversely in only one point.
+Thicken α to a thin rectangle R with two thin edges on the Ki oriented compatibly with
+the orientation of the knots. Let ∂R−be the interiors of these two thin edges of ∂R that
+lie in the Ki, and ∂R+ the other two edges which run between them. Then K1#K2 is the
+(oriented!) knot formed by
+K1#K2 =
+ (K1 ∪K2) −∂R−
+∪∂R+
+Exercise 3.6. Show that the oriented knot type K1#K2 does not depend on the choice of
+arc α or how it is thickened to a rectangle. Deduce that the operation # gives rise to an
+associative, commutative operation on oriented knot types, with the unknot as an identity
+element.
+(Hint: if α appears knotted, shrink down one of the balls B1 to almost a point so that
+α looks like it has a free end. Using this free end, ‘unknot’ the part of α outside B1. Then
+expand B1 and shrink down B2 and ‘unknot’ the part of α outside B2.)
+Magicians like to do a trick where they tie two knots together in a rope, then pull the
+rope tight so that the knots ‘cancel’ and vanish. This is impossible! If we join up the
+free ends of the rope, the result of tieing two knots K1 and K2 side by side is to produce
+K1#K2. So we are trying to find nontrivial knots K1 and K2 for which the connect sum
+is the unknot. That this cannot be done follows from the:
+Theorem 3.7 (Additivity of genus). Let K1 and K2 be two oriented knots. Then
+g(K1#K2) = g(K1) + g(K2)
+In particular, K1#K2 is the unknot if and only if both K1 and K2 are.
+Proof. Let K1 and K2 be contained in disjoint 3-balls B1, B2.
+For each i let Σi be a
+minimal genus Seifert surface for Ki.
+We may radially shrink Σi (and Ki) until it is
+entirely contained in Bi, and then connect up ∂Σ1 to ∂Σ2 by a thin rectangle R with core
+
+
+PDF PAGE 23
+INTRODUCTION TO KNOT THEORY
+23
+an arc α running between the two knots. The surface Σ := Σ1∪R∪Σ2 is compact, oriented,
+connected and has ∂Σ = K1#K2. Furthermore, g(Σ) = g(Σ1) + g(Σ2). It follows that
+g(K1#K2) ≤g(K1) + g(K2).
+Conversely, let’s suppose Σ is a least genus Seifert surface for K1#K2, and let S = ∂B1
+be the boundary of the 3-ball that contains K1 (for concreteness). Wiggle Σ so that it is
+transverse to S; i.e. at every point of intersection the tangent planes to S and to Σ are
+not equal. Then the intersection S ∩Σ is a smooth compact 1-manifold X, with boundary
+on the intersection S ∩∂Σ. Now, S intersects the arc α at only one point, and therefore
+S ∩∂Σ consists of two points. It follows that X contains a single compact arc β joining
+these two points, and every other component of X is a circle.
+Suppose X does contain some circle component. Then it contains some circle component
+γ which is innermost on S — i.e. which bounds a disk D on one side of S −γ that does
+not contain any other component of X (we are implicitly using the Jordan Curve Theorem
+here).
+How does γ look with respect to Σ? We may cut Σ along γ to produce a new surface
+Σ′ with two new boundary components γ+ and γ−(corresponding to the two sides of
+a neighborhood of γ in Σ) and then sew in two disjoint disks D+ and D−along these
+boundary components obtained by pushing D slightly to either side. This produces a new
+compact, oriented embedded surface Σ′′ with ∂Σ′′ = ∂Σ = K1#K2 and χ(Σ′′) = χ(Σ) + 2.
+Since each component of Σ′ must contain at least one of γ± it follows that Σ′, and
+therefore also Σ′′, has at most two components. If Σ′′ were connected it would be a Seifert
+surface for K1#K2 with g(Σ′′) = g(Σ) −1, contrary to the fact that Σ is a Seifert surface
+of least genus. Thus Σ′′ must have exactly two components Σ∗and F, where Σ∗is the
+unique component with boundary. Since F is closed, oriented and connected, and since
+χ(Σ∗) + χ(F) = χ(Σ) + 2 it follows from the minimality of Σ that F is a sphere, and
+g(Σ∗) = g(Σ). Thus we have found a new Seifert surface Σ∗for K1#K2 with minimal
+genus, but with one fewer circle of intersection with S.
+Thus, after finitely many modifications of this kind, we may obtain a new Seifert surface
+for K1#K2 which we relabel Σ, that intersects S in a single compact arc β.
+Cutting
+Σ along β gives two disjoint surfaces Σ1 and Σ2 that evidently are Seifert surfaces for
+(representatives of) K1 and K2 respectively, and satisfy g(Σ1) + g(Σ2) = g(Σ). It follows
+that g(K1) + g(K2) ≤g(K1#K2). Combining this with our earlier inequality, the theorem
+follows.
+□
+Corollary 3.8. There are infinitely many knots.
+Proof. The result of connect summing a trefoil with itself n times gives rise to a knot with
+genus n.
+□
+
+
+PDF PAGE 24
+24
+DANNY CALEGARI
+Let us formalize the procedure by which we obtained Σ′′ from Σ.
+Definition 3.9. Let Σ be a compact oriented surface in R3 and let γ be an embedded
+loop in Σ that bounds a properly embedded disk D with interior in R3 −Σ. Let Σ′′ be the
+compact oriented surface in R3 with ∂Σ′′ = ∂Σ obtained by cutting out a neighborhood
+of γ and gluing in two parallel disjoint copies of D to the resulting boundary components.
+Then we say D is a compressing disk and Σ′′ is obtained from Σ by compression.
+Any surface may be compressed: if γ is a loop in Σ bounding a disk E ⊂Σ then we
+may push the interior of E off Σ to the positive side (say) to obtain a compressing disk D
+with interior in R3 −Σ and with ∂D = ∂E. One component of Σ is (a slight perturbation
+of) the 2-sphere D ∪E, and the other component has the same genus as Σ. A surface Σ
+is said to be incompressible if for every compressing disk D the boundary circle γ = ∂D
+bounds a disk E in Σ, and to be compressible otherwise.
+We may reformulate a key argument from Theorem 3.7 in terms of this language:
+Proposition 3.10. Let Σ be a minimal genus Seifert surface for a knot K. Then Σ is
+incompressible.
+Proof. Suppose Σ is compressible, and D is a compressing disk for which γ = ∂D does not
+bound a disk in Σ, and let Σ′′ be the result of compression. As in the proof of Theorem 3.7
+we have χ(Σ′′) = χ(Σ) + 2 so either Σ′′ is connected, in which case it is a Seifert surface of
+genus less than Σ (contrary to hypothesis) or Σ′′ has two components Σ∗and F where Σ∗
+is a Seifert surface and F is closed, oriented and connected. Since g(Σ) ≤g(Σ∗) it follows
+that g(Σ) = g(Σ∗) and χ(F) = 2 so that F is a sphere. By the Jordan Curve Theorem,
+this sphere is decomposed by (a perturbation of) γ into two disks; one is (a perturbation
+of) D, and the other is (a perturbation of) a subsurface E of Σ bounded by γ, contrary to
+the choice of D. It follows that Σ is not compressible after all.
+□
+We close this subsection with a parenthetical remark that a cheap way to obtain Corol-
+lary 3.8 without appealing to genus is to use 3-colorings. If K1 and K2 are knots represented
+by disjoint diagrams D1 and D2 in R2, and α is an embedded arc in R2 joining segments
+of D1 and D2 without creating any new crossings, then for any fixed 3-coloring of D1, the
+colorings of the segments at the endpoints of α agree for exactly 1/3 of the colorings of
+D2. It follows that τ3(K1#K2) ≥τ3(K1) · τ3(K2)/3. In particular, if K is any knot and
+K′ is any other knot with a non-monochromatic 3-coloring (for instance a trefoil) then
+τ3(K#K′) > τ3(K).
+3.2. Seifert’s algorithm. Every knot admits a Seifert surface. We shall give a construc-
+tive proof of this due to Seifert, in the form of an algorithm that associates an oriented
+surface to any oriented knot diagram.
+The first step is to take the oriented diagram D and resolve the crossings, replacing a
+neighborhood of each crossing with a pair of disjoint oriented arcs in the unique manner
+compatible with the orientation.
+
+
+PDF PAGE 25
+INTRODUCTION TO KNOT THEORY
+25
+The result is to replace the original oriented diagram D with a family of oriented disjoint
+circles in the plane.
+Each circle in the plane bounds a unique disk region by the Jordan Curve Theorem.
+We build a surface which is the disjoint union of copies of these disk regions, oriented
+compatibly with the orientations of the circles, so that ‘positively’ oriented disks have a
+boundary circle that winds anticlockwise around them, and ‘negatively’ oriented disks have
+a boundary circle that winds clockwise around them. Some of these circles might be nested,
+in which case we put innermost disks ‘in front’ of the others.
+Finally we glue back a twisted disk for each original crossing, connecting up the disks to
+form a Seifert surface Σ for K (when the two disks being connected are nested, the twisted
+disk is ‘folded’):
+For example, the Seifert surface for the diagram of the knot 76 from Rolfsen’s tables [8]
+is shown below:
+
+
+PDF PAGE 26
+26
+DANNY CALEGARI
+What is the genus of Σ? We may estimate an upper bound as follows. After resolving
+all the crossings our surface consists of a finite union of disks; each disk has χ = 1 so this
+surface has χ = n where n is the number of circle components. Attaching each twisted
+disk reduces the Euler characteristic by 1, and we attach c(D) disks, one for each crossing.
+It follows that χ(Σ) ≥1 −c(D). Since Σ has one boundary component, χ(Σ) = 1 −2g(Σ)
+and therefore g(Σ) ≤c(D)/2 and g(K) ≤c(K)/2.
+In our example n = 4 and c(D) = 7 so χ(Σ) = −3 and g(Σ) = 2. In fact, this is the
+genus of the knot 76, though we do not yet have the tools to prove it.
+3.3. Linking number. A link is an equivalence class of smooth (or polygonal) disjoint
+embedded circles in R2 up to smooth (or polygonal) equivalence. A knot is a special case of
+a link with one component. For each n the n-component unlink is represented by n disjoint
+unknots, each unknot embedded in a separate 3-ball disjoint from the others.
+Links, just like knots, are represented by diagrams, and two diagrams represent the same
+link if they are related by Reidemeister moves. A link is oriented if each of its components
+is separately oriented; thus a link with n components admits 2n distinct orientations.
+Definition 3.11 (Linking number). Let L be an oriented link with 2 components K1 and
+K2. The linking number of the two components, denoted ℓ(K1, K2), may be computed
+from any diagram by counting the number of positive overcrossings of K1 over K2 minus
+the number of negative overcrossings of K1 over K2:
+Proposition 3.12. Linking number is an invariant; i.e. it does not depend on the choice
+of diagram representing a link. Furthermore it is symmetric: ℓ(K1, K2) = ℓ(K2, K1) and
+changes sign if the orientation of one of the components of a link is reversed.
+Proof. Changing the orientation of one of the components changes a positive overcrossing
+into a negative overcrossing and vice versa, proving the third claim.
+To show that linking number is an invariant, we must just check that it does not change
+under a Reidemeister move.
+Reidemeister 1 creates (or removes) a crossing, but this
+crossing necessarily involves a single component, and can’t contribute to linking number.
+Thus we just need to check invariant under Reidemeister 2 and Reidemeister 3, which is
+straightforward and left as an exercise.
+Once we know that linking number is an invariant, consider what happens to a diagram
+when we take a link and ‘rotate it’ through 180 degrees about the horizontal axis contained
+in the plane of the projection. The effect is to ‘reflect’ the diagram in this axis and at the
+same time to change overcrossings to undercrossings and vice versa.
+Thus, under this
+transformation, each positive crossing of K1 over K2 is changed into a positive crossing of
+K2 over K1 and vice versa. The identity ℓ(K1, K2) = ℓ(K2, K1) follows.
+□
+
+
+PDF PAGE 27
+INTRODUCTION TO KNOT THEORY
+27
+We would now like to relate linking number to Seifert surfaces. Let L be an oriented
+link with 2 components K′ and K. Fix disjoint oriented representative circles C′ and C
+and let Σ be any Seifert surface with boundary C. Wiggle C′ to be transverse to Σ.
+Define the signed intersection number of C′ and Σ to be the number of intersections of
+C′ with Σ counted with a positive sign when C′ crosses through Σ from the negative to
+the positive side, and counted with a negative sign when C′ crosses through Σ from the
+positive to the negative side.
+Theorem 3.13 (Linking number is intersection number). With notation as above, the
+signed intersection number of C′ and Σ is equal to the linking number ℓ(K′, K). In par-
+ticular, it does not depend on the choice of representatives C′, C or the choice of Seifert
+surface Σ.
+The proof of this theorem will follow after we develop some machinery. Roughly speaking,
+we establish the following three facts:
+(1) we shall associate to any oriented embedded circle C in R3 the free Abelian group
+of additive invariants which consists of functions from oriented circles in R3 −C to
+Z, and which satisfies a certain additivity axiom (to be described below);
+(2) we shall show that linking number with C, and signed intersection number with Σ
+are both additive invariants; and
+(3) we shall show that as an abstract group, the group of additive invariants is isomor-
+phic to Z, generated by the function that takes the value 1 on a particular knot (an
+oriented meridian for C).
+The proof will then be completed by showing that ℓ(·, C) and signed intersection number
+with Σ are both equal to 1 for a meridian, and therefore they are equal for any embedded
+oriented circle C′ in R3 −C.
+Let us now define the Abelian group of additive invariants. Fix a representative C of
+the knot K. The group consists of functions f from (smooth or polygonal) circles C′ in
+R3 −C to Z which are
+(1) invariant: a function f is invariant if it is constant on (smooth or polygonal)
+equivalence classes of knots in R3 −C; and
+(2) additive: for any two disjoint oriented circles C1, C2 which are almost parallel but
+oppositely oriented along a pair of segments, we may obtain a new oriented knot C3
+by cutting out the pair of segments and inserting a new pair of oriented segments
+as so:
+(Let us refer to this in the sequel as the ‘rewiring’ move). A function f is additive
+if for any triple of knots C1, C2, C3 related as above we have f(C1)+f(C2) = f(C3).
+An example of a triple of knots C1, C2, C3 related by the rewiring move described above
+is illustrated in the following figure. For any additive invariant f ∈A one must have
+f(C1) + f(C2) = f(C3).
+
+
+PDF PAGE 28
+28
+DANNY CALEGARI
+We now prove two lemmas, which show that ℓ(·, C) and signed intersection number with
+Σ are both additive invariants.
+Lemma 3.14. Linking number with C is an additive invariant.
+Proof. We have already shown that linking number (as computed e.g. from a diagram) is
+an invariant since it does not change under Reidemeister moves. If C1, C2, C3 are three
+circles related by the rewiring move, then after replacing the circles by equivalent circles we
+may assume that the rewiring takes place somewhere in the diagram away from crossings
+with C. In particular, C1 ∪C2 has the same overcrossings of C (with the same signs) as
+C3, so ℓ(C1, C) + ℓ(C2, C) = ℓ(C3, C).
+□
+Lemma 3.15. Signed intersection number with Σ is an additive invariant.
+Proof. Let us first show that signed intersection number is an invariant. Let C′ and C′′ be
+two oriented circles in R3−C that intersect Σ transversely. To say that C′ and C′′ represent
+the same knot type in R3 −C means that there is a smooth map g : S1 × [0, 1] →R3 −C
+for which the (oriented) image g(S1 × 0) = C′ and g(S1 × 1) = C′′. We may wiggle the
+map g so that it intersects Σ transversely; in other words, we may arrange that g−1(Σ) is a
+system X of embedded circles and properly embedded arcs in S1 × [0, 1]. The orientations
+on Σ and on S1 × [0, 1] determine orientations on the components of X; there are several
+ways to do this, and we leave it as an exercise to the reader.
+As the oriented boundary of the oriented surface S1 × [0, 1] the orientations on S1 × 0
+and on S1 × 1 respectively disagree and agree with the orientations on C′ and C′′ induced
+by g. It follows that the signed intersection number of C′′ with Σ is the signed intersection
+number of X with S1 × 1, whereas the signed intersection number of C′ with Σ is the
+negative of the signed intersection number of X with S1 ×0. Thus to prove that the signed
+intersection numbers with Σ are the same for C′ and C′′ it suffices to show that the signed
+intersection number of X with ∂(S1 × [0, 1]) is zero. But the circle components of X do
+not intersect ∂(S1 × [0, 1]) at all, whereas each proper arc intersects it twice, with opposite
+sign. The claim follows.
+
+
+PDF PAGE 29
+INTRODUCTION TO KNOT THEORY
+29
+Once we know that signed intersection number is an invariant, it is easy to show that
+it is additive. Let C1, C2, C3 be three circles related by the rewiring move. After replacing
+these circles by equivalent circles we may assume (as in the proof of Lemma 3.14) that the
+rewiring takes place away from Σ. In particular, C1 ∪C2 has the same intersections of Σ
+(with the same signs) as C3, and we are done.
+□
+Exercise 3.16. Let A and B be two oriented surfaces in R3 that intersect transversely in a
+system X of arcs and circles. Show how the orientations on A and B determine orientations
+on the components of X.
+Let C be an oriented embedded circle in R3. A meridian µ for C is a tiny unknotted
+oriented circle µ that bounds a tiny flat disk that intersects C transversely in one point,
+as in the figure.
+Proposition 3.17. Let C be an oriented embedded circle in R3. Let ϕ be any additive
+invariant of oriented circles in R3 −C. Then ϕ is determined by its value on any meridian
+µ for C.
+Proof. It is easy to show directly from the definition that any additive invariant must vanish
+on an unknot (i.e. a circle that bounds an embedded disk in R3 −C), and that changing
+the orientation of an oriented circle multiplies the value of any additive invariant by −1.
+Let C′ be any oriented circle in R3 −C and consider a diagram for C and C′. Fix an
+overcrossing of C′ over C (if any) and let C′′ be the oriented circle obtained from C′ by
+changing that overcrossing to an undercrossing. Then C′ and C′′ are related by a rewiring
+move in which the third circle is a meridian ν, so that ϕ(C′) = ϕ(ν) + ϕ(C′′).
+Since ν is a meridian, by sliding it around C we may exhibit an equivalence to µ which
+is either orientation-preserving if the overcrossing was positive, or orientation-reversing if
+the overcrossing was negative. Thus ϕ(C′) = ϕ(C′′)±ϕ(µ), where the sign of the ϕ(µ) term
+is the sign of the overcrossing. By induction we obtain ϕ(C′) = ϕ(C∗) + P ±ϕ(µ) where
+the sum is taken over all overcrossings of C′ over C, and where C∗has no overcrossings
+over C. But if C∗has no overcrossings over C we may perform a sequence of Reidemeister
+moves (pushing C∗to one side from below) so that C∗has no crossings with C at all.
+If C∗and C∗∗are related by a self-crossing change of C∗then arguing as above ϕ(C∗) =
+ϕ(λ) + ϕ(C∗∗) where now λ is a meridian for C∗. But a meridian for C∗is unknotted in
+R3 −C and therefore ϕ(λ) = 0 and hence ϕ(C∗) = ϕ(C∗∗). In other words, we may change
+
+
+PDF PAGE 30
+30
+DANNY CALEGARI
+all the self-crossings of C∗without affecting ϕ. But then we can change C∗to an unknot
+in R3 −C and therefore conclude that ϕ(C∗) = 0. Hence ϕ(C′) = P ±ϕ(µ) and the value
+of ϕ on C′ is completely determined by the value on µ.
+□
+Exercise 3.18. Let C be an oriented circle and let ϕ be an additive invariant on circles
+in R3 −C. Show that ϕ vanishes on unknots (that bound disks in R3 −C), and if C′ and
+C′′ are the same circle with opposite orientations, then ϕ(C′′) = −ϕ(C′). (Hint: show that
+there is a rewiring move in which all three circles are unknots; and if C′ and C′′ are the
+same circle with opposite orientations, show there is a rewiring move involving C′, C′′ and
+an unknot).
+At this point the proof of Theorem 3.13 follows almost immediately:
+Proof. To prove the theorem it suffices to prove it when C′ = µ, an oriented meridian for
+C. An oriented meridian has exactly one positive overcrossing in a diagram, so ℓ(µ, C) = 1.
+On the other hand, an oriented meridian also has exactly one positive intersection with
+any Seifert surface Σ. The proof follows.
+□
+4. The knot group
+4.1. A return to coloring. Recall that we defined a 3-coloring of a diagram D to be an
+assignment of one of three colors to each of the segments of D so that at each crossing, the
+colors assigned to the three segments that meet at the crossing are either all the same or
+all different.
+If we are drawing an actual diagram on paper, then we know what we mean by using
+different colors to draw the segments of the diagram.
+But if we want to abstract the
+mathematical essence of what a coloring ‘is’, then it is easy to see that it is nothing more
+than a map of sets: a map from the set of segments to some fixed 3 element set, and
+subject to certain local conditions. As Tolstoy might say, all 3 element sets are alike —
+they are all interchangable qua sets — but if we consider 3 element sets endowed with extra
+structure then it becomes possible to express the coloring conditions (all colors the same
+or all colors different) in more meaningful terms.
+Let’s take the three ‘colors’ to be elements of the Abelian group Z/3Z of integers modulo
+3; in other words, each segment ei of the diagram D gets assigned an element xi ∈Z/3Z.
+Then the coloring condition at each crossing (involving segments ei, ej, ek) becomes the
+algebraic condition xi + xj + xk = 0 mod 3.
+Since Z/3Z is a field, and the coloring
+conditions are linear, the set of 3-colorings gets the structure of a (finite dimensional)
+vector space over Z/3Z. In particular, the cardinality of this set is a power of 3.
+Once we frame things in this way we can start to fiddle with some of the parameters
+and see what happens. Let’s try to replace the field Z/3Z with another field Z/pZ for a
+different prime p. Suppose e is a segment in a diagram D colored by some x ∈Z/pZ. If
+
+
+PDF PAGE 31
+INTRODUCTION TO KNOT THEORY
+31
+we perform Reidemeister 1 in the middle of the segment e we get a new diagram D′ with
+one new crossing at which three segments meet. In any coloring of D′ which agrees with
+that of D outside the region in which we have performed the move, the three segments
+meeting at the new crossing must all have the same coloring, and therefore we get the
+equation 3x = 0. Since x was arbitrary this implies that x = 0 unless p = 3. Our attempt
+to generalize 3-colorings to p-colorings has fallen at the first hurdle.
+Let’s take a step back. We changed the parameter 3 to the parameter p but we kept
+the same algebraic equation xi + xj + xk = 0. Are we free to change the equation? The
+equation xi + xj + xk = 0 is symmetric in the three variables corresponding to the three
+segments meeting at a crossing. But at a crossing the diagram is not symmetric in the
+three segments: one segment (e.g. ei) crosses over, while the other two (ej, ek) may be
+interchanged by a (local) 180 degree rotation. Thus we are compelled to look for equations
+which are symmetric in xj and xk but not necessarily in all 3 variables. Arguing as above,
+the only linear equation of this form which is compatible with Reidemeister 1 (up to
+multiplication by a scalar) is xj + xk = 2xi.
+Now the situation is much better. Define τp(D) to be the number of functions from
+segments of D to Z/pZ satisfying xj + xk = 2xi at every crossing where xi corresponds to
+the overcrossing segment. Let’s verify that τp(D) = τp(D′) whenever D and D′ differ by a
+single Reidemeister move. We have already considered Reidemeister 1. Reidemeister 2 is
+indicated in the following figure:
+In the second figure we have one new variable xk. The coloring equations both impose
+the relation xk = 2xi−xj; thus every solution of the coloring equations for the first diagram
+corresponds to a unique solution of the coloring equations for the second diagram.
+In a similar way we can consider the effect of Reidemeister 3:
+In the diagram on the left the equations xl + xm = 2xi and xm + xn = 2xk give the
+relation xl −xn = 2(xi −xk) whereas on the right xl + x′
+m = 2xj and x′
+m + xn = 2xi yield
+xl −xn = 2(xj −xi). Thus compatibility of the colorings requires xi −xk = xj −xi or
+xj+xk = 2xi which is true in either diagram because of the ‘common’ overcrossing. In other
+
+
+PDF PAGE 32
+32
+DANNY CALEGARI
+words: each diagram imposes the same linear conditions on the variables xi, xj, xk, xl, xn,
+and any valid solution to these conditions uniquely determines either xm := 2xi −xl (on
+the left) or x′
+m := 2xj −xl (on the right).
+We conclude that τp(D) = τp(D′) whenever D and D′ differ by a single Reidemeister
+move, and therefore τp(K) is a well-defined invariant of the underlying knot K.
+This
+invariant counts the number of elements in a vector space over Z/pZ and is therefore a
+power of p; thus we obtain the same information by tracking the dimension of the space of
+p-colorings. We denote this np(K) and observe that np(K) = logp τp(K).
+Example 4.1 (p = 2). For p = 2 the coloring equations reduce to xj = xk whenever
+segments ej, ek meet at an underpass. Evidently this implies that the only valid 2-colorings
+are monochromatic; i.e. n2(K) = 1 for every K.
+Let’s consider a specific knot. This figure shows (a diagram of) the knot 73 from Rolfsen’s
+tables [8]. There are 7 crossings and hence 7 segments that we color x1, · · · , x7 as in the
+figure. The coloring conditions can be expressed in the form Ax = 0 where x is a vector
+with entries xi, and where A is a 7 × 7 matrix whose rows give the linear conditions
+associated to the 7 crossings.
+From the figure we can read off the matrix entries
+
+
+
+
+
+
+
+
+
+−2
+1
+1
+0
+0
+0
+0
+1
+0
+−2
+1
+0
+0
+0
+0
+0
+1
+−2
+1
+0
+0
+1
+0
+0
+0
+−2
+0
+1
+0
+−2
+0
+1
+0
+1
+0
+0
+0
+0
+0
+1
+1
+−2
+0
+1
+0
+0
+0
+−2
+1
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+x1
+x2
+x3
+x4
+x5
+x6
+x7
+
+
+
+
+
+
+
+
+
+=
+
+
+
+
+
+
+
+
+
+0
+0
+0
+0
+0
+0
+0
+
+
+
+
+
+
+
+
+
+The sum of all column vectors is the zero vector; this is equivalent to the fact that mono-
+chrome colorings are always valid, and the analogous fact is true for every diagram of every
+knot. In this particular case it is also true that the sum of all row vectors is the zero vector,
+so by Gaussian elimination (i.e. row and column operations) we may reduce to the upper
+6 × 6 block which has determinant 13. In particular, we deduce that np(73) = 1 if p ̸= 13
+and n13(73) = 2.
+It should be clear that a similar situation holds for any knot. We can always express
+the coloring conditions in the form Ax = 0 for A a c × c matrix (where c is the crossing
+
+
+PDF PAGE 33
+INTRODUCTION TO KNOT THEORY
+33
+number). The columns sum to zero (because monochromatic colorings are always valid),
+and therefore by row and column operations we can eliminate the last row and column,
+and reduce to a (c −1) × (c −1) submatrix with determinant ∆.
+Lemma 4.2. ∆is odd; in particular, it is nonzero.
+Proof. If ∆were even, the rank of the reduction of the coloring matrix A over Z/2Z
+would be at most c −2 and therefore the space of solutions over Z/2Z would be at least
+2 dimensional. In particular, we could find a nonconstant solution over Z/2Z, contrary to
+Example 4.1.
+□
+Since ∆is nonzero, we can compute the rank of the kernel of A over Z/pZ for any p by
+counting the numbher of times p occurs as a factor of ∆, and adding 1. We denote this
+number by νp(∆), so that we arrive at the formula np = 1 + νp(∆). Changing the ordering
+of the variables will multiply ∆by ±1. Thus the information contained in all np for all
+primes p is exactly equivalent to knowledge of the positive integer |∆|; i.e. |∆| is a knot
+invariant called the determinant of the knot, which is exactly as powerful as the collection
+of all knot invariants np together.
+If K is an oriented knot we can push the idea of colorings even further. At an overcrossing
+where ei is the overcrossing segment and ej, ek are the undercrossing segments we may use
+the orientation on ei to distinguish between ej on the left and ek on the right. Then we
+may look for a linear equation in xi, xj, xk which is now no longer symmetric in any pair of
+variables. Up to scale we may choose coefficients −1 and t for xk and xj respectively where
+t represents a formal variable whose properties we shall examine shortly. Compatibility
+with Reidemeister 1 forces the coefficient of xi to be (1−t); thus we are led to the coloring
+condition
+txj −xk + (1 −t)xi = 0
+(note that this specializes to our previous symmetric coloring condition for unoriented
+knots when t = −1).
+For each oriented diagram D and for each unknown t we may compute the dimension
+nt(D) of the space of colorings as above, and check that nt(D) = nt(D′) whenever D and D′
+are related by a Reidemeister diagram; if we are careful this can be done while remaining
+agnostic about the field in which our colors take values. The only caveat is that we must
+insist that t ̸= 0.
+Exercise 4.3. Show that if t ̸= 0 the dimensions nt(D) = nt(D′) whenever D and D′ are
+oriented diagrams related by a single Reidemeister move.
+As before, if D is an oriented diagram with c crossings, the coloring condition can be
+expressed as a linear matrix equation Ax = 0 where now A is a matrix whose entries are in
+{0, −1, t, (1 −t)}. The columns still sum to 0 so we may eliminate a row and a column by
+Gaussian elimination, and take the determinant of the remaining (c −1) × (c −1) block.
+This determinant is now a polynomial in t with integer coefficients. This polynomial is
+called the Alexander polynomial of K, and by abuse of notation we write it ∆(t) or ∆K(t)
+if we want to emphasize that it depends on the underlying knot K. We may recover our
+previous invariants by specializing to t = −1.
+Let’s look at some examples. For the right handed trefoil we have
+
+
+PDF PAGE 34
+34
+DANNY CALEGARI
+From the figure we can read off the matrix entries
+
+
+1 −t
+t
+−1
+−1
+1 −t
+t
+t
+−1
+1 −t
+
+
+
+
+x1
+x2
+x3
+
+=
+
+
+0
+0
+0
+
+
+so that ∆(t) = t2 −t + 1. Note that ∆(−1) = 3 reflecting the existence of a nontrivial
+3-coloring for the trefoil.
+For the figure 8 knot we have
+From the figure we can read off the matrix entries
+
+
+
+
+1 −t
+t
+−1
+0
+−1
+0
+1 −t
+t
+−1
+t
+0
+1 −t
+0
+1 −t
+−1
+t
+
+
+
+
+
+
+
+
+x1
+x2
+x3
+x4
+
+
+
+=
+
+
+
+
+0
+0
+0
+0
+
+
+
+
+so that ∆(t) = t2 −3t + 1. Since ∆(−1) = 5 there is a nontrivial 5-coloring for the figure
+8 knot (can you find one?)
+4.2. The knot group. We now show how to associate a group to an oriented knot. Recall
+that a finite presentation of a group is given by a finite list of generators g1, g2, · · · , gn
+together with a finite list of relations r1, r2, · · · , rm which are each finite words in the
+generators and their inverses. If G is the group defined by this presentation we write
+G := ⟨g1, · · · , gn | r1, · · · , rm⟩
+Different presentations may give rise to isomorphic groups. There are a small number of
+operations on group presentations, called Tietze transformations, that give rise to isomor-
+phic groups; and conversely any two presentations that give rise to isomorphic groups are
+related by a finite number of Tietze transformations. These operations are:
+
+
+PDF PAGE 35
+INTRODUCTION TO KNOT THEORY
+35
+(1) adding a new relation r that is a consequence of the other relations; and
+(2) adding a new generator g together with a new relator of the form g = w where w
+is a word in the existing generators gi and their inverses;
+together with their inverses. In the sequel we shall only use the (easy) fact that these
+transformations give rise to isomorphic groups.
+Now let D be an oriented knot diagram. We associate to the diagram a finite presentation
+of a group by taking one generator gi for each oriented segment ei, and at each crossing
+we add the relation gigjg−1
+i g−1
+k
+(which can also be expressed in the form gigjg−1
+i
+= gk).
+Note that although we need the orientation on the overcrossing segment to decide which
+undercrossing segment is to the left and which is to the right, we do not need the orientation
+on the undercrossing segments to express the relation. Note too that in the group defined
+by this presentation, all the generators are conjugate to each other; in particular, they pick
+out a distinguished conjugacy class.
+Let’s consider the effect of Reidemeister moves.
+Reidemeister 1 introduces a new generator gj and a new relation gigig−1
+i
+= gj which
+simplifies to gi = gj. Thus diagrams related by Reidemeister 1 give rise to presentations
+related by a Tietze transformation.
+Reidemeister 2 introduces two new generators gk and gl, and two new relations gjgig−1
+j
+=
+gk and gjglg−1
+j
+= gk which may be rewritten as g−1
+j gkgj = gl. Thus diagrams related by
+Reidemeister 2 give rise to presentations related by two Tietze transformations (adding the
+generator gk and the first relation; and then adding the second generator gl and the second
+rewritten relation).
+Finally let’s consider Reidemeister 3.
+In the left diagram, we have relations r1 := giglg−1
+i g−1
+m and r2 := gkgmg−1
+k g−1
+n . These
+two relations imply the relation r′ := gkgiglg−1
+i g−1
+k g−1
+n .
+On the other hand, r1 and r′
+together imply r2.
+We may therefore add the relation r′ and remove r2 by successive
+Tietze transformations. But then we may rewrite r1 in the form giglg−1
+i
+= gm and use this
+to eliminate both the relation r1 and the generator gm.
+
+
+PDF PAGE 36
+36
+DANNY CALEGARI
+Similarly in the right diagram, we have relations s1 := gjglg−1
+j g−1
+m′ and s2 := gigm′g−1
+i g−1
+n .
+As before these relations imply a new relation s′ := gigjglg−1
+j g−1
+i g−1
+n , and s1 and s′ together
+imply s2. We may therefore replace the relation s2 by s′, and then eliminate the generator
+gm′ and the relation s1.
+On the other hand, in both diagrams we have the relation t : gigjg−1
+i g−1
+k
+or equivalently
+gigj = gkgi. Evidently r′ and t together imply s′, and conversely s′ and t together imply r′.
+We may therefore (by applying two successive Tietze transformations) replace r′ by s′ and
+transform the presentation for the left diagram into the presentation for the right diagram.
+In conclusion: diagrams related by Reidemeister moves give rise to isomorphic groups.
+If one is careful, one can check that the natural isomorphisms associated to Tietze trans-
+formations carry the distinguished conjugacy class represented by the generators in one
+presentation to the distinguished conjugacy class represented by the generators in the
+other. In particular we can associate to each oriented knot K a group G(K) called the
+knot group together with a distinguished conjugacy class γ(K), up to isomorphism.
+The knot group is an extremely powerful invariant. For instance, G(K) is isomorphic to
+Z if and only if K is the unknot. The trouble is that it can be very difficult to decide whether
+two finite presentations give rise to isomorphic groups. In fact, it turns out that there is no
+algorithm which will always decide, given as input two group presentations, whether they
+give rise to isomorphic groups. On the other hand, from a group presentation one can at
+least write down simpler invariants which can be more easily compared.
+One easily computed invariant of a group is its abelianization, the quotient group ob-
+tained by adding as new relations that each pair of generators commutes. From the form of
+G(K) one sees that in the abelianization Gab the relations in G coming from the crossings
+simplify to say that a pair of generators are equal. Thus Gab is isomorphic to the (additive)
+group Z, with the distinguished conjugacy class γ mapping to the generator 1.
+A more useful invariant may be obtained by fixing a finite group H and a conjugacy
+class α and then counting homomorphisms from G to H sending γ into α. As an example,
+let H be the dihedral group Dp, the group of symmetries of a regular p-gon where p is an
+odd prime.
+Let r be (anticlockwise) rotation through angle 2π/p, so that r has order p. Label the
+sides 0 through p −1 in order, and let si be the reflection in the perpendicular bisector
+of side i. Thus the 2p elements of H are ri and si for i = 0, 1, · · · , p −1. Each si has
+order 2, and they are all conjugate to each other: risjr−i = si+j. They satisfy the relation
+sjsi = r2(j−i) (remember that composition of group elements corresponds to composition
+of symmetries, so the symmetry gh means first do h and then g).
+How many homomorphisms are there from G(K) to Dp sending γ to the conjugacy class
+of the si? Fix a diagram D for K and consider the presentation associated to the diagram.
+Each oriented edge gives rise to a generator gi which must map to some sxi for xi ∈Z/pZ.
+
+
+PDF PAGE 37
+INTRODUCTION TO KNOT THEORY
+37
+At a crossing the relation gigjg−1
+i g−1
+k
+imposes the condition sxisxj = sxksxi or equivalently
+2(xi −xj) = 2(xk −xi) which simplifies to xj + xk = 2xi. In other words, homomorphisms
+from G to Dp sending γ to the conjugacy classes of si are the same things as p-colorings!
+4.3. Solvable representations and the Alexander Polynomial. Let H denote the
+group of 2 × 2 complex matrices with determinant 1 of the form ( z
+w
+0 z−1 ) for z ∈C∗and
+for each t ∈C∗and each choice of square root t1/2 let Ht1/2 denote the set of matrices for
+which z = t1/2. We compute:
+
+z
+w
+0
+z−1
+ 
+t1/2
+α
+0
+t−1/2
+ 
+z−1
+−w
+0
+z
+
+=
+
+t1/2
+z2α + zw(t−1/2 −t1/2)
+0
+t−1/2
+
+It follows that the Ht1/2 form a single conjugacy class when t ̸= 1, while each of H±1 −id
+form a single conjugacy class when t1/2 = ±1.
+Fix a knot K, and let’s consider representations from G(K) to H sending the conjugacy
+class of γ into Ht1/2. When t = 1 the set H1 forms an Abelian group, isomorphic to C
+with its additive structure, so any representation from G(K) sending the generators into
+H1 must map entirely into H1 and must therefore factor through the abelianization Z, so
+that every generator actually maps to the same matrix in H1, and the choice of this matrix
+is arbitrary (a similar story holds for H−1).
+Now let’s consider the case t ̸= 1. If we fix a diagram, each generator gi maps to a
+matrix for which the upper off-diagonal entry is a complex number xi. Then the product
+gigjg−1
+i
+maps to
+
+t1/2
+xi
+0
+t−1/2
+ 
+t1/2
+xj
+0
+t−1/2
+ 
+t−1/2
+−xi
+0
+t1/2
+
+=
+
+t1/2
+txj + (1 −t)xi
+0
+t−1/2
+
+and therefore the relation gigjg−1
+i g−1
+k
+is equivalent to the relation txj + (1 −t)xi −xk = 0,
+which is precisely the t-coloring condition for oriented knots! In other words: roots of the
+Alexander polynomial are the t for which there are nonabelian representations G →H
+sending the conjugacy class of the generators into Ht1/2.
+
+
+PDF PAGE 38
+38
+DANNY CALEGARI
+With the aid of some group theory and commutative algebra we can recast the discussion
+above more directly in terms of the algebraic structure of the group G.
+The group H is 2-step solvable; this means that it admits a surjective homomorphism
+to an Abelian group for which the kernel is also Abelian. The surjective homomorphism
+H →C∗takes a matrix to its upper left entry; and the kernel is the subgroup H1, which
+is isomorphic to the additive group C.
+The knot group G is typically not 2-step solvable (in fact, it is rarely solvable at all).
+But any homomorphism from G to any 2-step solvable group factors through a maximal
+2-step solvable quotient of G. Thus the information encoded in the Alexander polynomial
+may be obtained directly by an analysis of the structure of this 2-step solvable quotient.
+We have already seen that there is a maximal Abelian quotient of G, namely Gab = Z.
+The kernel is the commutator subgroup, usually denoted G′. Now, G′ is typically not
+Abelian, but it admits a map to its own abelianization (G′)ab with kernel (G′)′ which is
+usually denoted G(2). Although in general a normal subgroup of a normal subgroup is not
+necessarily normal in the bigger group, the subgroup G(2) is normal in G. We may therefore
+form the 2-step solvable quotient G/G(2) which maps to Z with kernel the Abelian group
+(G′)ab.
+Let’s write the Abelian group (G′)ab as A. The generator 1 of Z is in the image of some
+g ∈G/G(2), and conjugation by g induces an automorphism t : A →A. We may therefore
+think of A as a Z[t, t−1]-module.
+It turns out that A is finitely generated as a Z[t, t−1]-module, and that for any presenta-
+tion, there are always at least as many relations s as generators r. The ideal generated by
+the r × r minors of the presentation matrix is independent of choices, and called the fitting
+ideal. Alexander [1] showed that for any knot K there is always a square presentation
+matrix, so that the fitting ideal is principal, and a generator for this ideal (normalized by
+multiplication by a suitable unit t±n so that it has no terms with negative exponent, and
+has a nonzero constant term) is the Alexander polynomial ∆K(t).
+5. Skein theory
+5.1. Kauffman bracket. Up till now we have made extensive use of a diagrammatic
+calculus in which we perform local moves on a diagram (Reidemeister moves) which do not
+change the underlying knot type. Skein theory studies the universal relations that hold
+between different knots or links which are themselves related by a different set of local
+moves on a diagram.
+Perhaps the simplest example of a move of the kind we mean is resolving a crossing.
+There are two distinct ways to do this, indicated in the figure.
+As with Reidemeister moves, a resolution is meant to indicate the effect of a change to
+a diagram supported in a small region; the part of the diagram not drawn in the figure is
+supposed to be unchanged before and after the operation.
+
+
+PDF PAGE 39
+INTRODUCTION TO KNOT THEORY
+39
+If D is a knot or link diagram, and if D+ and D−are obtained by making the first and
+second crossing resolutions indicated as above, then we can ask what is the relationship
+between D, D+ and D−. A skein relation is a universal relationship that holds — whatever
+D is and whatever crossing of D we resolved — between (the values of some invariant
+evaluated on) D, D+ and D−.
+One particularly beautiful and important example is the Kauffman bracket. It is an in-
+variant of a diagram taking values in the set of Laurent polynomials Z[A, A−1] in a variable
+that by convention is usually denoted A. In other words, to any (topological equivalence
+class of) diagram D it associates a Laurent polynomial denoted ⟨D⟩∈Z[A, A−1].
+The Kauffman bracket satisfies the following 3 axioms:
+(1) for any diagram D and for any other two diagrams D+, D−related by resolving any
+single crossing of D as above, we have the relation ⟨D⟩= A⟨D+⟩+ A−1⟨D−⟩. Or
+in more pictorial language:
+(2) if D is any diagram, and D′ is obtained from D by adding any single disjoint
+unknotted circle to the diagram, then ⟨D′⟩= (−A2 −A−2)⟨D⟩; and
+(3) if D is the unknot then ⟨D⟩= 1.
+Exercise 5.1. Show that the Kauffman bracket is well-defined! In other words: show that
+it can be computed recursively by a finite application of the axioms, and that any two ways
+of computing it will give the same answer.
+Let’s compute some examples.
+Example 5.2 (unlinks). Let D be any diagram that consists of n disjoint unknotted circles
+(i.e. there are no crossings at all). Then ⟨D⟩= (−A2 −A−2)n−1.
+Notice that for fixed n all these diagrams represent the same link (the unlink on n
+components) but there are many inequivalent diagrams (essentially: the number of rooted
+trees with n + 1 vertices).
+Example 5.3 (Reidemeister 1). Consider the following calculation:
+The Kauffman bracket is not invariant under Reidemeister 1! Likewise:
+
+
+PDF PAGE 40
+40
+DANNY CALEGARI
+Exercise 5.4. If D is any diagram, and D′ is obtained from D by doing a positive (resp.
+negative) Reidemeister 1 move, then ⟨D′⟩= −A3⟨D⟩(resp. ⟨D′⟩= −A−3⟨D⟩).
+Example 5.5 (Left handed trefoil). Let’s compute the bracket for one of the standard
+diagrams for the left-handed trefoil. Resolving the top crossing gives two diagrams, one of
+an unknot with two positive Reidemeister 1 moves applied to it, and one of a Hopf link.
+Resolving the left crossing for the Hopf link gives two unknots, one with a positive
+Reidemeister 1 move applied, and one with a negative Reidemeister 1 move applied.
+Putting this together, we see that
+⟨LH trefoil diagram⟩= A7 + A−1(−A4 −A−4) = A7 −A3 −A−5
+Proposition 5.6. The Kauffman bracket is invariant under Reidemeister 2 and Reide-
+meister 3.
+Proof. This is an easy calculation. First we resolve the 2 crossings in a bigon in all four
+possible ways to obtain four terms. Three of these cancel, leaving the fourth term and
+proving invariance under Reidemeister 2.
+To prove invariance under Reidemeister 3, resolve the uppermost overcrossing (in one of
+the figures). Then use invariance under Reidemeister 2 to symmetrize the figures. ‘Unre-
+solving’ the crossings in the two figures gives the result.
+□
+Thus: the Kauffman bracket is invariant under Reidemeister 2 and Reidemeister 3, and
+under Reidemeister 1 it is multiplied by −A±3. In order to arrive at a link invariant one
+may ‘correct’ the Kauffman bracket using another invariant of diagrams known as the
+writhe.
+Recall that we defined the linking number of two oriented links by counting overcrossings
+of one component over the other, with sign. If we try to define a ‘self-linking’ number of a
+
+
+PDF PAGE 41
+INTRODUCTION TO KNOT THEORY
+41
+single oriented diagram D of a knot by counting all overcrossings (with sign) we obtain an
+(integer-valued) invariant of a diagram called the writhe, and denoted w(D). Changing the
+orientations of both components of an oriented 2-component link does not change linking
+number; likewise, changing the orientation of an oriented diagram of a knot does not change
+the writhe.
+The writhe is invariant under Reidemeister 2 and 3, just as linking number is, and
+with the same proof. However, it is not invariant under Reidemeister 1: doing a positive
+Reidemeister 1 move increases the writhe by 1, and doing a negative Reidemeister 1 move
+decreases it by 1.
+Corollary 5.7. Let D be a knot diagram. Then fD(A) := (−A3)−w(D)⟨D⟩is invariant
+under all three Reidemeister moves, and is therefore a knot invariant.
+Example 5.8 (Trefoils). Taking the mirror image of a knot interchanges the roles of A and
+A−1. The writhe of the left handed trefoil is −3, so its invariant is −A16+A12+A4 whereas
+the right handed trefoil has invariant −A−16 + A−12 + A−4. These are different! We have
+finally managed to show that the left and right handed trefoils are different knots!
+5.2. Alternating knots and links. The Kauffman bracket is not an invariant, but the
+span of the bracket — the difference between the highest and lowest powers of A that
+appear — is an invariant. In fact, the span of the bracket is an invariant of an unoriented
+link, even though the writhe of an unoriented link is not well-defined.
+We shall shortly establish an inequality relating span and crossing number; what is
+remarkable about this inequality is that it is sharp for the class of so-called alternating
+knots and links.
+But first, let’s express the Kauffman bracket in a slightly different way.
+Definition 5.9. For D a knot or link diagram, a state s of D is a function from the
+crossings of D to {−1, 1}.
+In particular, for a diagram with c crossings there are 2c different states.
+If D is a
+diagram and s is a state, we denote by s(D) the diagram obtained from D by performing a
+resolution at each crossing p of D according to the sign of s: a positive resolution if s(p) = 1
+and a negative resolution if s(p) = −1. Thus, s(D) is a disjoint union of some number of
+unknotted components; we denote this number by |s(D)|. There is also a function from
+states to integers: if s is a state, we let h(s) := P
+p s(p) where the sum is taken over the
+crossings of D.
+
+
+PDF PAGE 42
+42
+DANNY CALEGARI
+Lemma 5.10. If D is a diagram, the Kauffman bracket is given by the formula
+⟨D⟩=
+X
+s
+Ah(s)(−A2 −A−2)|s(D)|−1
+where the sum is taken over all states s of D.
+The proof is immediate from the inductive definition of the bracket (compare with ex-
+ercise 5.1).
+If D is any diagram, let s+ be the state which sends every crossing to 1, and let s−be
+the state which sends every crossing to −1.
+Proposition 5.11. Let D be a diagram. Then
+(1) if s and s′ are states which differ at exactly one crossing, then |s(D)| and |s′(D)|
+differ by exactly 1; and
+(2) if H and L are the highest and lowest powers of A appearing in ⟨D⟩, then there are
+inequalities
+H ≤c + 2(|s+(D)| −1) and L ≥−c −2(|s−(D)| −1)
+Proof. Let s and s′ be two states that differ at exactly one crossing. There are two combi-
+natorial possibilities for how the components of s(D) and s′(D) that meet at the crossing
+are connected to two pairs of edges (a third possibility is excluded because it would force
+the components to intersect). These possibilities are illustrated in the figure from which
+one can see that changing the crossing in either case changes the number of components
+by 1. This proves the first claim.
+or
+Lemma 5.10 gives a formula for the bracket as a sum of terms, one for each state of
+D. For any state s, the biggest power of A that appears in the term associated to s is
+h(s) + 2(|s(D)| −1). If s′ is obtained from s′ by changing the value at one crossing from 1
+to −1 then h(s′) = h(s)−2 and |s′(D)| ≤|s(D)|+1. It follows that the biggest power that
+appears in any term appears in the term associated to the state s+, and the smallest power
+that appears in any term appears in the term associated to the state s−. This proves the
+second claim.
+□
+By Proposition 5.11 we obtain for any diagram an inequality span = H −L ≤2c +
+2(|s+(D)| + |s−(D)| −2). Our next task is to bound |s+(D)| + |s−(D)| in terms of the
+crossing number.
+In full generality this is impossible, since (for example) a standard
+diagram of an unlink on n components has span 2n −2 and no crossings at all! We must
+therefore restrict attention to diagrams with a particular property.
+Definition 5.12. A diagram is said to be connected if the underlying projection (consisting
+of an immersed circle for each component) is a connected subset of the plane.
+
+
+PDF PAGE 43
+INTRODUCTION TO KNOT THEORY
+43
+Any diagram can be converted into a connected diagram by applying a series of Reide-
+meister 2 moves, which does not affect the bracket but increases the crossing number by a
+multiple of 2.
+Definition 5.13. A link is said to be split if there are disjoint 3-balls so that we can put
+some (but not all) components in one of the 3-balls and the rest in the other.
+Exercise 5.14. Show that a link is split if and only if it admits a diagram which is not
+connected.
+Evidently, every diagram for a knot is connected.
+Proposition 5.15. For any connected diagram D there is an inequality |s+(D)|+|s−(D)| ≤
+c + 2.
+Proof. Let’s imagine the diagrams s−(D) and s+(D) lying on two parallel planes in R3,
+the diagram for s+(D) on a slightly higher plane. We may interpolate between these two
+diagrams by inserting a little saddle at each crossing of D that runs between the negative
+and the positive resolution, together with product rectangles that join up the rest of the
+diagrams. This builds a compact oriented connected surface Σ with |s+(D)| + |s−(D)|
+boundary components, and therefore χ(Σ) ≤2 −(|s+(D)| + |s−(D)|). On the other hand,
+each saddle contributes −1 to χ(Σ) and therefore χ(Σ) = −c. The proposition follows.
+□
+Corollary 5.16. Suppose that L is a non-split link. Then the span of the Kauffman bracket
+of (any diagram for) L satisfies span ≤4c(L).
+Proof. For any diagram D representing L we have H −L ≤2c + 2(|s+(D)| + |s−(D)| −2)
+by Proposition 5.11. On the other hand |s+(D)| + |s−(D)| ≤c + 2 by Proposition 5.15. It
+follows that span⟨D⟩= H −L ≤4c.
+□
+When is equality achieved? By examining the arguments above it is clear that a sufficient
+condition for equality span = 4c is that the following two conditions hold:
+(1) for each state s obtained from s+ (resp. s−) by changing one crossing, |s(D)| =
+|s+(D)| −1 (resp. |s(D)| = |s−(D)| −1); and
+(2) there is equality |s+(D)| + |s−(D)| = c + 2.
+We shall show that both these conditions hold for the class of alternating links.
+Definition 5.17. A diagram D is alternating if, as we move along each component in any
+direction, the crossings alternate between overcrossings and undercrossings. A diagram is
+reduced if there is no complementary region which meets the same crossing more than once.
+In other words, the diagram is alternating if successive crossings on every component
+look like this:
+and the diagram is reduced if it doesn’t have two connected subsets joined to each other
+at a single crossing like this:
+
+
+PDF PAGE 44
+44
+DANNY CALEGARI
+Any diagram for a knot or link with minimal crossing number must be reduced. For, if
+a diagram D is not reduced, so that there is a crossing p separating pieces D1, D2 of D,
+we may take one piece (e.g. D2) and ‘flip it over’ at p to produce a new diagram with one
+fewer crossing.
+We are now in a position to define the class of alternating links:
+Definition 5.18. A link is alternating if it has a diagram which is connected, reduced and
+alternating.
+The trefoil and figure 8 knots are alternating knots. In fact, every knot with fewer than 8
+crossings is alternating! It is a theorem of Menasco that an alternating link is non-split; in
+particular, every diagram for an alternating link is connected (of course, this is immediate
+for alternating knots since no knot can ever be split).
+We are now in a position to prove the main theorem we have been building up to:
+Theorem 5.19. Let L be an alternating link, and let D be any connected, reduced and
+alternating diagram for L. Then span = 4c(D) and consequently span = 4c(L).
+Proof. Let D be any connected, reduced and alternating diagram for L. We have already
+shown span ≤4c(D). As pointed out earlier, to prove equality it suffices to establish the
+following two properties:
+(1) for each state s obtained from s+ (resp. s−) by changing one crossing, |s(D)| =
+|s+(D)| −1 (resp. |s(D)| = |s−(D)| −1); and
+(2) there is equality |s+(D)| + |s−(D)| = c + 2.
+
+
+PDF PAGE 45
+INTRODUCTION TO KNOT THEORY
+45
+Since D is connected and alternating, we may color the complementary components red
+and blue so that around the boundary of each red region the overcrossings go anticlockwise,
+while around the boundary of each blue region the overcrossings go clockwise.
+Once we have done this, it is easy to see that when we resolve all the crossings positively
+the components of s+(D) become the boundaries of the red regions, whereas when we
+resolve all the crossings negatively the components of s−(D) become the boundaries of the
+blue regions. The fact that the diagram is connected implies that each complementary
+region is a disk (except the outside region, which is an annulus) so that the total number
+of complementary regions is equal to c + 2 and we have proved the second property.
+Furthermore, if s is obtained from s+ by changing one crossing, at this crossing two
+distinct red regions are catecornered (the fact that the regions are distinct follows from the
+fact that the diagram is reduced !) and therefore changing this crossing connects up the
+two boundary circles into a single circle of s(D). Hence |s(D)| = |s+(D)| −1 (and we may
+argue likewise for s−) and we have proved the first property.
+It follows as in the proof of Proposition 5.11 that the highest power of A that appears
+in any term in the formula for the bracket appears only in the term associated to s+(D),
+and the lowest power appears only in the term associated to s−(D). Thus the inequalities
+in Proposition 5.11 are equalities. Since we have just shown |s+(D)| + |s−(D)| = c + 2 the
+theorem is proved.
+□
+This theorem was proved by Louis Kauffman in the paper [6] in which he introduced
+his bracket, and independently (using similar combinatorial ideas) by Kunio Murasugi and
+Morwen Thistlethwaite.
+A remarkable corollary of this theorem is that for an alternating knot or link, any
+reduced alternating diagram has the minimal crossing number (amongst all diagrams) and
+in particular, any two such diagrams have the same number of crossings!
+Kauffman’s
+bracket is powerful indeed!
+5.3. HOMFLY. Suppose D is an oriented link diagram, and p is a crossing. Only one
+resolution of the crossing is compatible with the orientation; this gives rise to a new diagram
+D0 with one fewer crossing. However, there are two oriented diagrams that give rise to
+D0 by resolving one crossing: D, and the diagram obtained from D by changing the
+overcrossing at p into an undercrossing. Thus we are led to consider triples of oriented
+diagrams D+, D−, D0 that are related by the following local modification:
+We may (try to!) define a (Laurent) polynomial invariant P of oriented diagrams that
+is invariant under Reidemeister moves (and therefore defines an invariant of oriented links)
+and that satisfies a skein relation of the form
+xP(L+) + yP(L−) + zP(L0)
+
+
+PDF PAGE 46
+46
+DANNY CALEGARI
+for suitable variables x, y, z and where L+, L−, L0 are the oriented links represented by any
+three diagrams of the form D+, D−, D0 as above. Since the skein relation is linear in P we
+may normalize the invariant P (if one exists) by setting P(unknot) = 1. Furthermore, since
+it is homogeneous in x, y, z we may eliminate one of the variables and get an equivalent
+skein relation. One common normalization is:
+αP(L+) −α−1P(L−) = zP(L0)
+so that we are looking for a two-variable Laurent polynomial invariant P in α and z.
+Leaving aside the question of existence for the moment, we can at least prove uniqueness:
+Proposition 5.20. There is at most one polynomial invariant P of oriented links with
+P(unknot) = 1 that satisfies the skein relation αP(L+) −α−1P(L−) = zP(L0).
+Proof. The following figure shows that P = z−1(α−α−1) for the unlink on two components.
+A similar computation lets us determine the value of P on the unlink with any number of
+components.
+Now if L is an oriented link represented by a diagram D we claim that there is another
+diagram D′ obtained from D by changing some number of crossings, that represents the
+unlink. First of all, we may change the crossings so that one component of L is ‘underneath’
+all the others; thus the claim will follow by induction for links if we can prove it for knots.
+A knot diagram D is obtained from an immersed circle γ in the plane by making a
+choice of crossing at each self-intersection of γ. Given γ, pick a point p on γ which is not a
+self-intersection, and then let ˆγ be a path in R3 whose z coordinate is steadily increasing,
+and whose projection starts and ends at p and traces once over γ. We may close up ˆγ to
+a knot K by joining the two points that project to p by a vertical arc δ, and we may then
+perturb ˆγ slightly so that its projection is very close to γ; in particular, it is represented
+by a diagram D′ obtained from D by changing some of the crossings.
+We claim K is an unknot. To see this, observe that K is the union of two arcs ˆγ and
+δ, on each of which the z coordinate is steadily increasing (at least if we orient the arcs
+appropriately). We may therefore join points on δ and ˆγ with the same z coordinate by a
+straight horizontal line segment, and then observe that the union of these segments sweeps
+out an embedded disk in R3 with boundary K. Thus K bounds a disk, and is therefore
+the unknot. The claim is proved.
+It follows that for each oriented link type L we may associate a complexity, which consists
+of a pair of non-negative integers (c, n) where c is the crossing number of L, and where n
+is the minimum, over all diagrams for L with crossing number c, of the number of crossing
+changes needed to change L into an unlink. We order the set of possible values of the
+complexity lexicographically: (c1, n1) is less than (c2, n2) if and only if either c1 < c2, or
+c1 = c2 and n1 < n2. The set of values of the complexity is evidently well-ordered with
+(unique) minimum (0, 0) represented only by unlinks.
+Now, if L is any link, and if D is a diagram for L realizing the minimal complexity, we
+may change some crossing of D to obtain a new diagram D′ of strictly lower complexity.
+
+
+PDF PAGE 47
+INTRODUCTION TO KNOT THEORY
+47
+If D+, D−, D0 are the three diagrams associated to this crossing, then the skein relation
+computes P(L) in terms of the values of P on links of strictly lower complexity. Since P
+is determined on unlinks, this proves that P is determined on L, and we are done.
+□
+If one is careful, one can associate in a systematic way to each oriented diagram D, a
+specific sequence of crossing changes that assign (inductively) a specific value P(D) to D
+via the skein relation. Then one can try to prove that this polynomial invariant of oriented
+diagrams is invariant under Reidemeister moves. Rather remarkably, this procedure works,
+so that there really is a (2-variable) polynomial invariant P of oriented links satisfying the
+skein relation. It was discovered independently and at virtually the same time by six people
+(four working in two groups of two), and is therefore named the HOMFLY polynomial after
+the initials of their surnames.
+Two specializations of this polynomial are particularly interesting.
+Example 5.21 (Alexander polynomial). Taking α = 1 and z = t1/2 −t−1/2 gives rise to
+the Alexander polynomial! Thus we may compute the Alexander polynomial via the skein
+relation
+∆L+(t) −∆L−(t) = (t1/2 −t−1/2)∆L0(t)
+Since performing a resolution of a crossing changes the parity of the number of components
+by 1, only integer powers of t appear for knots. Notice too that this gives a polynomial
+invariant for oriented links, which may be computed in terms of t-colorings, just like the
+Alexander polynomial.
+This skein relation definition of the Alexander polynomial has a curious history.
+It
+was first discovered by Alexander, and appeared in his paper [1] towards the end, in a
+section titled ‘miscellaneous theorems’, but it seems to have been largely forgotten. It
+was rediscovered by Conway [2] in the 1960s, who introduced the term ‘skein relation’
+(Conway’s version uses z in place of t1/2 −t−1/2; with this normalization one talks about
+the ‘Conway polynomial’.)
+Example 5.22 (Jones polynomial). Taking α = t−1 and z = t1/2 −t−1/2 gives rise to the
+Jones polynomial V , which may (therefore) be computed via the skein relation
+t−1VL+(t) −tVL−(t) = (t1/2 −t−1/2)VL0(t)
+The Jones polynomial is equivalent to the polynomial invariant fD(A) = (−A3)−w(D)⟨D⟩
+of an oriented link via the substitution A = t−1/4.
+Exercise 5.23. Prove that the invariant VL(t) obtained from fD(A) = (−A3)−w(D)⟨D⟩via
+the substitution A = t−1/4 does indeed satisfy the skein relation
+t−1VL+(t) −tVL−(t) = (t1/2 −t−1/2)VL0(t)
+In fact, the exposition in these notes gets the history round the wrong way.
+Jones
+discovered his invariant in 1984 out of his work in the theory of operator algebras [5]. The
+fact that this work gave rise to an invariant of knots came as a complete surprise to Jones
+and to everyone else; and its discovery led to a revolution in knot theory. Kauffman’s
+definition of the bracket emerged soon after as a way to clarify the meaning of the Jones
+polynomial (and to give a simple proof of its invariance), and once people understood
+
+
+PDF PAGE 48
+48
+DANNY CALEGARI
+that skein relations could give rise to more than one polynomial invariant, the HOMFLY
+polynomial was discovered very quickly.
+In the 40 years since the discovery of the Jones polynomial, knot theory has developed
+into a remarkably deep and sophisticated subject, with significant applications to theoret-
+ical physics, the biology of DNA, and many other fields.
+Mathematically speaking, the theory of irreducible representations of the knot group
+into SL(2, C) turns out to be intimately connected to hyperbolic geometry, and the ge-
+ometrization conjecture of Thurston (proved as it applies to knots and links by Thurston,
+and in full generality by Perelman).
+Polynomial invariants such as HOMFLY are subsumed under the auspices of Khovanov
+Homology (which sheds light on exotic smooth structures on 4-manifolds) and Heegaard
+Floer Homology (which has its foundations in symplectic topology and Gromov’s theory
+of pseudo-holomorphic curves, and which is by now connected to many different aspects of
+3 and 4-manifold topology).
+6. Acknowledgments
+While producing these notes I consulted (with their generous permission) notes taken
+by Juliet Oliver and Parth Wokhlu during the course I taught at the University of Chicago
+Center in Paris from March 31 to April 17 2025. I have also borrowed liberally from the
+resources listed in the bibliography (especially [7]).
+References
+[1] J. W. Alexander, Topological invariants of knots and links, Trans. AMS 30 (1928), 275–306
+[2] John Conway, An enumeration of knots and links, and some of their algebraic properties, Computa-
+tional Problems in Abstract Algebra, 329–358. Pergamon, N.Y. 1967.
+[3] Ralph Fox, A quick trip through knot theory, in Fort, M.K. (editor) Proceedings of the University of
+Georgia Topology Institute, 120–167. Prentice-Hall, Englewood Cliffs. N. J. 1961.
+[4] P. Freyd, D. Yetter, J. Hoste, W. Lickorish, K. Millett, A. Ocneanu, A New Polynomial Invariant of
+Knots and Links, Bull. AMS 12 (1985), no. 2, 239–246
+[5] Vaughan Jones, A polynomial invariant for knots via von Neumann algebras, Bull. AMS 12 (1985),
+no. 1, 103–111
+[6] Louis Kauffman, State models and the Jones polynomial, Topology 26 (1987), no. 3, 395–407
+[7] Justin
+Roberts,
+Knots
+Knotes,
+online
+notes,
+https://mathweb.ucsd.edu/~justin/
+Roberts-Knotes-Jan2015.pdf
+[8] Dale Rolfsen, Knots and Links, Publish or Perish, Houston Texas, 1976.
+University of Chicago, Chicago, Ill 60637 USA
+Email address: dannyc@math.uchicago.edu

@@ -1,0 +1,1042 @@
+# K99-109 literal interfaces; NO PROOFS
+Edges 68; consumers 40; suppliers 38
+
+SUPPLIER alg-seifert-surface-from-diagram
+Assume the Axiom of Countable Choice. Let $D$ be a finite regular oriented link diagram with exactly one component, and let $c$ be its number of crossings. Perform the following construction in its projection sphere $S^2$.
+
+1. Choose a point $q\in S^2$ outside the finite diagram. In pairwise disjoint small disks about the crossings, replace each crossing by the unique noncrossing smoothing compatible with the strand orientations. Let the resulting oriented circles be the Seifert circles and let $s$ be their number.
+2. For each Seifert circle $C$, take the closure of the component of $S^2\setminus C$ that does not contain $q$. Under the stated choice axiom, each such region is an embedded compact disk. The finite family of disk regions is nested or disjoint. Orient each disk to induce the given orientation of its boundary circle, then place nested disks at distinct nearby heights ordered by inclusion; the resulting disk interiors are pairwise disjoint in $S^3$.
+3. For every original crossing, attach one rectangular band along short boundary intervals on the two smoothing arcs. A half-twist means a single $180$-degree turn of the band across the crossing neighborhood. Choose its direction, endpoint orientations, and over/under order to match the original crossing.
+4. Return the finite disk-and-band construction data together with $(s,c)$.
+
+The returned data are a finite attached two-dimensional complex. This algorithm's definition alone does not assert that the resulting image is embedded, is a surface, is connected, or has the original knot as boundary; the separate correctness lemma establishes those properties.
+
+SUPPLIER def-admissible-pointed-heegaard-floer-data
+Work in the smooth category inherited from the oriented-link convention. In particular, an embedded bridge witness disk means the image of a smooth rank-two embedding of a planar disk, with ordinary smooth boundary or smooth transverse corners at its two marked endpoints; smoothness at a boundary or corner means local smooth extension in its charts. Witness parametrizations can be chosen for the finite disk families. This category convention does not require the knot arcs to meet the Heegaard surface transversely: tangential smooth crossings remain permitted.
+
+Let $K\subset S^3$ be a smooth oriented knot. Let $\Sigma$ be a closed oriented surface of genus $h$, let $k\ge1$, and put $m=h+k-1$. A **handlebody** is a compact three-manifold that is a regular neighborhood of a finite connected graph. A **$2k$-pointed Heegaard diagram for $S^3$** consists of a splitting $S^3=U_{\alpha}\cup_{\Sigma}U_{\beta}$ into handlebodies, two systems $\boldsymbol\alpha=(\alpha_1,\ldots,\alpha_m)$ and $\boldsymbol\beta=(\beta_1,\ldots,\beta_m)$ of pairwise disjoint simple closed curves on $\Sigma$ that bound pairwise disjoint properly embedded disks in $U_{\alpha}$ and $U_{\beta}$, respectively, cutting each handlebody into exactly $k$ three-balls, and two ordered sets of distinct points $\mathbf w=(w_1,\ldots,w_k)$ and $\mathbf z=(z_1,\ldots,z_k)$ disjoint from the curves. Curves from different systems intersect transversely in finitely many points. Each component of $\Sigma\setminus\boldsymbol\alpha$ and of $\Sigma\setminus\boldsymbol\beta$ contains exactly one $w$-point and exactly one $z$-point. The diagram also includes trivial arc systems in the two handlebodies: the $\alpha$-arcs join $w_i$ to $z_i$, and the $\beta$-arcs join $z_i$ to $w_{i-1}$, with indices modulo $k$. Each system is disjoint from its compression disks and is simultaneously boundary parallel: its arcs cobound pairwise disjoint embedded disks with arcs in the corresponding components of the attaching-system complement on $\Sigma$. Thus each ball obtained by compression contains one unknotted arc. Together the arcs form an oriented knot, oriented from $w_i$ to $z_i$ in $U_{\alpha}$ and from $z_i$ to $w_{i-1}$ in $U_{\beta}$. The diagram is **compatible with $K$** when this knot is orientation-preservingly ambient isotopic to $K$. For a grid diagram, compatibility uses the row and column orientation fixed in the grid definition, with $w$-points at $O$ and $z$-points at $X$. For a grid representing one knot, the basepoint pairs can be numbered cyclically in reverse order of travel along the oriented knot so that $w_i,z_i$ lie in the same component $A_i$ of $\Sigma\setminus\boldsymbol\alpha$ and $w_i,z_{i+1}$ lie in the same component $B_i$ of $\Sigma\setminus\boldsymbol\beta$.
+
+Comparisons of these embedded diagrams allow **orientation-preserving diagram isomorphisms**: an orientation-preserving diffeomorphism of $S^3$ carrying the two handlebodies, their oriented Heegaard surface, the two attaching systems, the ordered $w,z$ points, and the two simultaneously boundary-parallel arc systems to the corresponding data. Equivalently one may specify the surface isomorphism together with its compatible collared extensions over both handlebodies carrying those arcs. The attaching systems are carried as systems; reordering their curve factors induces the corresponding product identification. Comparisons also allow **arc normalizations in the fixed splitting**: a smooth isotopy of the represented oriented knot, supported near the ordered marks and fixing each mark, during which every open connecting arc stays in its original handlebody and the two simultaneous boundary-parallel witness systems are retained or replaced by embedded witnesses for those same arcs. The surface, attaching curves, marked points and compression disks stay fixed. Such a normalization may replace a tangential marked crossing by a transverse one; the original data are not required to have neat arcs. This is a change of knot representative relative to the fixed surface, not a diagram isomorphism carrying both objects. Analytic and assigned grading data depending on the fixed surface diagram can be kept identical; the corresponding generator and disk-count identification is then the identity. Existence of normalizations with the required witnesses is a separate geometric assertion, not part of this definition. Such a comparison transports the represented oriented knot and any specified Seifert surface as well. For analytic data, it transports $j$, the surface area form, all chosen divisor neighborhoods and $J_t$ by the induced symmetric-product diffeomorphism. The comparison maps on generators and disk classes are their pushforwards under this map; compatibility with the count differential is a mathematical property to be proved. No identity action is part of this convention, even when the ambient diffeomorphism is isotopic to the identity.
+
+The $m$-fold symmetric product $\operatorname{Sym}^{m}(\Sigma)=\Sigma^m/S_m$ is the space of unordered $m$-tuples of points of $\Sigma$, where $S_m$ permutes coordinates. Let $q:\Sigma^m\to\operatorname{Sym}^{m}(\Sigma)$ be the quotient map. The product tori are the images $\mathbb T_{\alpha}=q(\alpha_1\times\cdots\times\alpha_m)$ and $\mathbb T_{\beta}=q(\beta_1\times\cdots\times\beta_m)$. Their intersection points are the generators. A **Whitney disk class** $\phi\in\pi_2(\mathbf x,\mathbf y)$ is a relative homotopy class of maps from a disk to $\operatorname{Sym}^{m}(\Sigma)$ whose two boundary arcs lie on $\mathbb T_{\alpha}$ and $\mathbb T_{\beta}$ and whose endpoints are $\mathbf x$ and $\mathbf y$. Its domain is the integral two-chain of complementary regions with coefficients equal to local multiplicities. Write $n_{w_i}(\phi)$ and $n_{z_i}(\phi)$ for its local multiplicities at the marked points. An almost complex structure $J$ on $\operatorname{Sym}^{m}(\Sigma)$ is a smooth endomorphism of the tangent bundle with $J^2=-1$. Fix a complex structure $j$ and an area form on $\Sigma$. For $m>0$, choose a smooth path $\mathbb J=(J_t)_{t\in[0,1]}$ of nearly symmetric almost complex structures, constant near $t=0,1$: each $J_t$ agrees with the induced integrable structure $\operatorname{Sym}^{m}(j)$ on a fixed neighborhood of the diagonal and of every divisor $\{p\}+\operatorname{Sym}^{m-1}(\Sigma)$ for a chosen interior point $p$ of every complementary region, including every marked point, and tames the form descended from the product area form off that neighborhood. The path is a sufficiently small perturbation in this class. For $m=0$ the symmetric product is a point. Local multiplicities are intersection numbers with these divisors; positivity is a mathematical property to be proved, not an additional choice of disk counts. A $\mathbb J$-holomorphic strip representative is a smooth map $u:\mathbb R\times[0,1]\to\operatorname{Sym}^{m}(\Sigma)$ satisfying $\partial_{\tau}u+J_t(u)\partial_tu=0$, with $u(\tau,0)\in\mathbb T_{\alpha}$, $u(\tau,1)\in\mathbb T_{\beta}$, and limits $\mathbf x,\mathbf y$ as $\tau\to-\infty,+\infty$. Translation in $\tau$ defines an $\mathbb R$-action. The Maslov index $\mu(\phi)$ is the Fredholm index of the linearized Cauchy–Riemann operator at a representative of $\phi$; the relative Maslov grading convention is $M(\mathbf x)-M(\mathbf y)=\mu(\phi)-2\sum_{i=1}^{k}n_{w_i}(\phi)$, up to one overall additive constant.
+
+A **periodic domain** is an integral two-chain in the complementary regions whose boundary is an integral sum of full $\alpha$- and $\beta$-curves; its local multiplicity at a marked point is the coefficient of the containing region. The pointed diagram is **admissible** when every nonzero periodic domain with $n_{w_i}=0$ for all $i$ has at least one positive and at least one negative region coefficient. A path $\mathbb J$ is **regular for a set of disk classes** when the linearized Cauchy–Riemann operator at every holomorphic-strip representative in those classes is surjective. For a path regular on the classes used, let $\mathcal M_{\mathbb J}(\phi)$ be the space of strip representatives. If, for each generator $\mathbf x$, only finitely many pairs $(\mathbf y,\phi)$ with $\mathcal M_{\mathbb J}(\phi)\ne\varnothing$, $\mu(\phi)=1$, and $n_{w_i}(\phi)\ge0$ for every $i$ occur, and each quotient is finite, the multipointed full filtered minus module is the free module over $\mathbb F_2[U_1,\ldots,U_k]$ generated by $\mathbb T_{\alpha}\cap\mathbb T_{\beta}$, with differential
+$$\partial^-\mathbf x=\sum_{\mathbf y}\sum_{\substack{\phi\in\pi_2(\mathbf x,\mathbf y),\;\mathcal M_{\mathbb J}(\phi)\ne\varnothing\\\mu(\phi)=1,\; n_{w_i}(\phi)\ge0\ \forall i}}\#_2\bigl(\mathcal M_{\mathbb J}(\phi)/\mathbb R\bigr)\,U_1^{n_{w_1}(\phi)}\cdots U_k^{n_{w_k}(\phi)}\mathbf y.$$
+Here $\#_2$ is the count modulo two of the zero-dimensional quotient when it is finite. Quotienting by all $U_i$ leaves the fully blocked multipointed chain complex (the hat chain complex when $k=1$), with terms only from classes satisfying $n_{w_i}=0$ for every $i$; its Alexander-filtered associated-graded complex further retains only classes with every $n_{z_i}=0$. The relative Alexander grading convention is $A(\mathbf x)-A(\mathbf y)=\sum_i n_{z_i}(\phi)-\sum_i n_{w_i}(\phi)$, with an overall additive constant. Each $U_i$ lowers Maslov grading by two and Alexander filtration by one. In a grid diagram, $\Sigma=T^2$, $h=1$, $k=n$, and $m=n$; the horizontal circles are the $\alpha$-curves, the vertical circles are the $\beta$-curves, and the $w$-points and $z$-points are the $O$- and $X$-markings respectively.
+
+SUPPLIER def-based-string-link-and-labeled-link-peripheral-system
+Let $D^2$ be the oriented closed disk and give $C=D^2\times[0,1]$ the product orientation. An $r$-component string link is an ordered family of pairwise disjoint smooth proper embeddings $\tau_i:[0,1]\to C$, for $1\le i\le r$, with fixed distinct endpoints $\tau_i(0)=(p_i,0)$ and $\tau_i(1)=(p_i,1)$ and fixed product collars at the endpoints. Orient each interval from bottom to top. The exterior $X_\tau$ is obtained by removing the relative interiors of chosen pairwise disjoint product tubes around the intervals. The bottom and top punctured disks $P_-$ and $P_+$ are the copies of $D^2$ with the interiors of the endpoint tube disks removed.
+
+Choose a basepoint on the outer boundary of $P_-$, a path in the side boundary of $C$ to the corresponding top basepoint, and basing paths from these points to the component meridians. Each end inclusion, with the chosen connecting path for the top end, induces a based homomorphism $\iota_\pm:\pi_1(P_\pm)\to\pi_1(X_\tau)$. For each string component choose a parallel path on its tube boundary from the bottom endpoint to the top endpoint, and choose access paths that close it to a based loop using the fixed side connector. The resulting element of $\pi_1(X_\tau)$ is its based string-link longitude; the parallel and access paths are part of the peripheral datum. The positively oriented boundaries of the endpoint tube disks are the designated meridian loops. Stacking two string links means rescaling them into the lower and upper halves of $C$ and identifying their matching endpoint collars; closure joins each top endpoint to the matching bottom endpoint outside $C$ and retains the component labels.
+
+For a nonempty labeled oriented link $L=K_1\cup\cdots\cup K_r$ in the oriented three-sphere, choose pairwise disjoint closed product tubes $N(K_i)$, put $E_L=S^3\setminus\operatorname{int}\bigl(\bigcup_iN(K_i)\bigr)$, and write $T_i=\partial N(K_i)$. A positive meridian $\mu_i$ is the oriented boundary of a normal disk, with the disk orientation fixed by the rule that the oriented tangent of $K_i$ followed by the disk orientation gives the ambient orientation. A degree-one parallel is a simple closed curve on $T_i$ whose projection to $K_i$ has degree $+1$. A based longitude is the class of such a parallel transported to the common basepoint by a specified path. When the positive meridians form a basis of $H_1(E_L;\mathbb Z)$, the self-meridian coordinate of a longitude is its coefficient on $[\mu_i]$. A preferred zero-self-meridian longitude is a chosen degree-one parallel whose self-meridian coordinate is zero. The choice, when it exists, is part of the peripheral datum; this definition asserts neither existence nor uniqueness. Changing a common basing path conjugates the peripheral group elements simultaneously.
+
+SUPPLIER def-knot-exterior
+Assume countable choice, as required for the smooth normal-bundle structure in the tubular-neighbourhood interface. Let $K:S^1\to S^3$ be a smooth oriented knot, let $\nu(K)=TS^3|_K/TK$ be its quotient normal bundle, and let $\Phi:\Omega\to S^3$ be a tubular-neighbourhood map from an open neighbourhood $\Omega$ of the zero section in $\nu(K)$ that restricts to the inclusion of $K$. Choose a radius $\epsilon>0$ whose closed disk subbundle $D_\epsilon\nu(K)$ is contained in $\Omega$, and set $N(K)=\Phi(D_\epsilon\nu(K))$. The **exterior** of this chosen tube is
+$$
+E_K:=S^3\setminus\operatorname{int}_{S^3}N(K).
+$$
+Retain its boundary $T_K:=\partial E_K=\partial N(K)$, orient $E_K$ by restriction of the fixed orientation of $S^3$, and orient $T_K$ as the boundary of $E_K$. The choice of tubular map and radius is part of the input to this definition.
+
+SUPPLIER def-knot-meridian-and-preferred-longitude
+Assume countable choice as in the chosen tubular-neighbourhood data. Let $K$ be a smooth oriented knot with chosen exterior $E_K$ and boundary torus $T_K=\partial E_K$, and let $p:T_K\to K$ be the projection of the chosen normal-disk tube. Orient each normal disk so that its positive tangent direction followed by its oriented normal basis agrees with the orientation of $S^3$. A **meridian** $\mu$ is the oriented boundary of one such normal disk. A **degree-one parallel curve** is a simple closed curve $\lambda$ in $T_K$ for which $p|_\lambda:\lambda\to K$ has degree $+1$. A **preferred longitude** is a degree-one parallel curve satisfying $i_*[\lambda]=0$ in $H_1(E_K;\mathbb Z)$, where $i:T_K\hookrightarrow E_K$ is inclusion. This is a condition on a curve; this definition alone asserts neither existence nor uniqueness. Reversing the orientation of $K$ reverses the orientations of both $\mu$ and any degree-one parallel curve. If a subgroup $P\le\pi_1(E_K,x)$ is specified using a path from $x$ to $T_K$, record it only up to replacing it by $gPg^{-1}$ for $g\in\pi_1(E_K,x)$.
+
+SUPPLIER def-lee-deformed-khovanov-complex
+Let $D$ be a finite regular oriented link diagram in the standard oriented $3$-sphere. Use the oriented Khovanov resolution cube, crossing order, signs, and shifts fixed in the integral Khovanov construction. Over $\mathbb Q$, replace its circle algebra by $A_L=\mathbb Q[X]/(X^2-1)$, with $\deg_q(1)=1$ and $\deg_q(X)=-1$, and structure maps
+$$
+\eta_L(1)=1,\quad \epsilon_L(1)=0,\quad \epsilon_L(X)=1,
+$$
+$$
+m_L(1\otimes1)=1,\quad m_L(1\otimes X)=m_L(X\otimes1)=X,\quad m_L(X\otimes X)=1,
+$$
+$$
+\Delta_L(1)=1\otimes X+X\otimes1,\quad \Delta_L(X)=1\otimes1+X\otimes X.
+$$
+For a resolution state $v$ with $k(v)$ circles, assign $A_L^{\otimes k(v)}$ and cohomological degree $i(v)=|v|-n_-$. On a tensor basis element whose circle labels are $a_1,\ldots,a_{k(v)}\in\{1,X\}$, set
+$$
+q(v;a_1,\ldots,a_{k(v)})=|v|+n_+-2n_-+\sum_{j=1}^{k(v)}\deg_q(a_j).
+$$
+The differential is the signed sum of the edge maps $m_L$ and $\Delta_L$. The resulting finite cochain complex is the **Lee-deformed Khovanov complex** $C_L(D;\mathbb Q)$. Its decreasing quantum filtration $F^pC_L(D;\mathbb Q)$ is spanned by basis elements of quantum degree at least $p$. Its homology with the induced filtration is the Lee homology of the diagram. The diagram-level definition does not by itself assert invariance under changing $D$.
+
+The two equal composites in the diagram below are the Frobenius compatibility maps used on merge-split faces. The drawing names maps only; the proof checks the equality on the basis $\{1,X\}^{\otimes2}$.
+
+```tikzcd
+A_L\otimes A_L \arrow[r,"m_L"] \arrow[d,"\Delta_L\otimes\mathrm{id}"'] & A_L \arrow[d,"\Delta_L"] \\
+A_L\otimes A_L\otimes A_L \arrow[r,"\mathrm{id}\otimes m_L"'] & A_L\otimes A_L
+```
+
+SUPPLIER def-lens-space-surgery-orientation-convention
+Assume $\mathrm{AC}_\omega$. An oriented lens space is an oriented closed $3$-manifold obtained by gluing two solid tori by an orientation-reversing boundary homeomorphism. For coprime integers $p>0$ and $q$, let $L(p,q)$ denote the oriented union of the exterior of the unknot in the oriented $3$-sphere and a solid torus whose meridian is identified with the slope $p[\mu_U]+q[\lambda_U]$ on the unknot exterior. Thus this library uses the convention $L(p,q)=E_U(p/q)$; no symbol $L(0,q)$ is assigned.
+
+SUPPLIER def-locally-flat-proper-surface-and-concordance-collars
+Let $X$ be a four-dimensional manifold with boundary and let $W$ be a compact surface with boundary. An embedding $e:(W,\partial W)\to(X,\partial X)$ is proper when $e^{-1}(\partial X)=\partial W$. It is locally flat at an interior point of $W$ when there are neighborhoods of the point and its image and a homeomorphism of pairs from those neighborhoods to $(\mathbb R^4,\mathbb R^2)$, with the standard linear plane $\mathbb R^2\subset\mathbb R^4$. It is locally flat at a boundary point when there are such neighborhoods and a homeomorphism of pairs to $(\mathbb R^4_+,\mathbb R^2_+)$, where $\mathbb R^4_+=\{x_4\geq0\}$ and $\mathbb R^2_+=\{x_2=x_3=0,\ x_4\geq0\}$; the line $\partial\mathbb R^2_+$ lies in $\partial\mathbb R^4_+$. A collar of a boundary circle of $W$ is an embedding of that circle times $[0,\varepsilon)$ into $W$ that is the identity on the circle at parameter $0$; a concordance collar is required to agree with the corresponding product collar of the ambient end. A smooth proper surface has the analogous smooth charts and collars, which are also topological locally flat charts.
+
+SUPPLIER def-oriented-crossing-sign-writhe-and-blackboard-framing
+Assume $\mathrm{AC}_\omega$ for the smooth normal-bundle structure used in the
+framing clause. For a knot component $K$, its normal bundle is the fibrewise
+quotient $\nu K=TS^3|_K/TK$, and a normal section is a smooth section of this
+bundle.
+
+Let $D$ be a regular oriented link diagram in a projection plane $P$ of an
+oriented $3$-sphere, after moving the link off the point at infinity. Fix the
+unit viewing normal $n$ pointing toward the viewer. Orient $P$ by the rule that
+an ordered basis $(u,v)$ of $P$ is positive exactly when $(n,u,v)$ is a positive
+basis of the ambient $3$-space. At a crossing $c$, let $v_{\rm over}$ and
+$v_{\rm under}$ be the nonzero projected tangent vectors following the
+orientations of the overpassing and underpassing strands. Define
+$$\operatorname{sgn}(c):=\operatorname{sgn}\det_P(v_{\rm over},v_{\rm under})\in\{+1,-1\}.$$
+Reversing the orientation of $P$ reverses every crossing sign.
+
+This convention makes the positive geometric Artin half twist positive. In
+the braid chart $(x,y,t)$ with ambient orientation $(x,y,t)$, view along $+y$;
+the induced positive orientation of the $(x,t)$ projection plane is the ordered
+basis $(\partial_t,\partial_x)$. For the positive half twist, label $i$ moves
+from $x=-h$ to $x=h$ below the midpoint, while label $i+1$ moves from $x=h$ to
+$x=-h$ above it, with $h>0$. Thus the over and under projected tangent vectors
+in coordinates $(t,x)$ are $(1,-2h)$ and $(1,2h)$, whose determinant is
+$4h>0$.
+
+The **writhe** of $D$ is
+$$\operatorname{wr}(D):=\sum_{c\text{ a crossing of }D}\operatorname{sgn}(c).$$
+For a link component $K_i$, its **self-writhe**
+$\operatorname{wr}_i(D)$ is the sum over crossings whose two branches belong to
+$K_i$; the total writhe also includes all mixed crossings between distinct
+components.
+
+The **blackboard framing** of a component of $D$ is the homotopy class of the
+normal section represented by the positive quarter-turn in $P$ of the projected
+oriented tangent. The projection is an immersion, so this vector never
+vanishes; it is perpendicular to the projected tangent, hence also to the
+spatial tangent, and therefore represents a nonzero normal section of the
+component in the ambient $3$-sphere.
+
+```tikz
+\begin{tikzpicture}[scale=0.8,>=stealth]
+  \draw[->] (-1,0) -- (1,0) node[right] {$v_{\rm over}$};
+  \draw[->] (0,-1) -- (0,1) node[above] {$v_{\rm under}$};
+  \node[above left] at (0,0) {$+1$};
+\end{tikzpicture}
+```
+
+In the displayed local chart, the over tangent is the positive horizontal
+vector and the under tangent is the positive vertical vector, so the determinant
+is $+1$. This figure illustrates the determinant rule only; no proof below
+depends on a picture.
+
+SUPPLIER def-pl-embedding-and-subpolyhedron
+Let $P$ and $Q$ be compact piecewise-linear polyhedra. A **piecewise-linear map** $f:P\to Q$ is a map that is simplicial after suitable finite subdivisions of triangulations of $P$ and $Q$. A **subpolyhedron** $A$ of $Q$ is a subset represented by the realization of a subcomplex in some finite linear triangulation of $Q$. A map $f:P\to Q$ is a **piecewise-linear embedding** if it is piecewise-linear, its image $f(P)$ is a subpolyhedron of $Q$, and $f:P\to f(P)$ is a piecewise-linear homeomorphism. A finite simplicial triangulation of a closed piecewise-linear $n$-manifold is **combinatorial** if the link of every $k$-simplex is a piecewise-linear sphere of dimension $n-k-1$. Thus in a closed combinatorial $3$-manifold every triangular face has link $S^0$ and is incident to exactly two tetrahedra.
+
+SUPPLIER lem-complete-curvature-minus-one-manifolds-are-kleinian-quotients
+Assume AC. Every nonempty connected oriented complete Riemannian three-manifold of constant sectional curvature $-1$ is isometric to $\Gamma\backslash\mathbb H^3$ for a discrete torsion-free subgroup $\Gamma\le\mathrm{PSL}_2(\mathbb C)$. The covering is a universal Riemannian covering and identifies $\Gamma$ with the fundamental group up to the usual basepoint conjugacies. Its completeness and quotient presentation are conclusions from the stated metric hypotheses. The orientation-preserving isometry group of the model is $\mathrm{PSL}_2(\mathbb C)$ with its usual Möbius boundary action.
+
+SUPPLIER lem-explicit-unknot-and-figure-eight-oriented-wirtinger-codes
+There are the following explicit valid finite planar codes, with the standard right/up orientation of the plane and positive based meridians using compatible common upper-collar access paths.
+
+The counterclockwise square with vertices $(0,0),(1,0),(1,1),(0,1)$ is a crossing-free unknot code. It has one under-arc and gives $\pi_1(S^3\setminus U)=\langle x\mid\ \rangle\cong\mathbb Z$, with $x$ the positive meridian.
+
+An oriented figure-eight code has crossings $C_1,C_2,C_3,C_4$. The letters $O,U$ mean over and under, and $i,o$ mean incoming and outgoing. Its integer plane-drawing certificate is
+
+| $r$ | $C_r$ | $rOi$ | $rOo$ | $rUi$ | $rUo$ |
+|---|---|---|---|---|---|
+| $1$ | $(-423,0)$ | $(-627,102)$ | $(-363,-30)$ | $(-363,30)$ | $(-627,-102)$ |
+| $2$ | $(0,-9)$ | $(-33,-6)$ | $(99,-18)$ | $(-99,-18)$ | $(33,-6)$ |
+| $3$ | $(0,9)$ | $(33,6)$ | $(-99,18)$ | $(99,18)$ | $(-33,6)$ |
+| $4$ | $(423,0)$ | $(627,-102)$ | $(363,30)$ | $(363,-30)$ | $(627,102)$ |
+
+The complete cyclic visit list is $$1O,\ 2U,\ 3O,\ 1U,\ 4O,\ 3U,\ 2O,\ 4U.$$ For every successive pair $rB,sD$ in this list, including the last-to-first pair, use the three straight segments of the route $C_r\to rBo\to sDi\to C_s$. At each crossing pair $rOi$ with $rOo$, and $rUi$ with $rUo$; the first pair is over. Smooth the degree-two bends in disjoint small disks. The cyclic orders at crossings are the counterclockwise lists $(rOo,rUi,rOi,rUo)$ for $r=1,4$ and $(rOo,rUo,rOi,rUi)$ for $r=2,3$.
+
+Label the under-arcs $x_1:U4\to U2$, $x_2:U2\to U1$, $x_3:U1\to U3$, $x_4:U3\to U4$. In each oriented over-branch chart, let $L$ denote its left under-side (target of the positive in-plane normal), and $R$ its right under-side (source). The exact crossing table is
+
+| crossing | over | $L$ (target) | $R$ (source) | under traversal | $\operatorname{sign}\det(\text{over},\text{under})$ |
+|---|---|---|---|---|---|
+| $R_1$ | $x_1$ | $x_2$ | $x_3$ | target to source | $-1$ |
+| $R_2$ | $x_4$ | $x_2$ | $x_1$ | source to target | $+1$ |
+| $R_3$ | $x_2$ | $x_4$ | $x_3$ | source to target | $+1$ |
+| $R_4$ | $x_3$ | $x_4$ | $x_1$ | target to source | $-1$ |
+
+Thus its actual positive-meridian presentation is $$\pi_1(S^3\setminus 4_1)=\langle x_1,x_2,x_3,x_4\mid x_1x_2=x_3x_1,\ x_1x_4=x_4x_2,\ x_3x_2=x_2x_4,\ x_3x_4=x_1x_3\rangle.$$ The last relation follows from the first three. Starting on $x_1$, the underpasses occur at $R_2,R_1,R_3,R_4$, and the self-writhe is zero. All drawing data, validations and algebra in this statement are finite and use no choice axiom.
+
+SUPPLIER lem-knot-exterior-h1-is-generated-by-meridian
+Let $K\subset S^3$ be a smooth oriented knot with a chosen closed product
+tubular neighborhood $N(K)$, exterior $E_K=S^3\setminus\operatorname{int}N(K)$,
+and positive meridian $\mu_K$. Then
+$$H_1(E_K;\mathbb Z)=\mathbb Z[\mu_K].$$
+The assertion uses integral singular homology and the stated tube convention.
+
+SUPPLIER lem-knot-genus-zero-iff-unknot
+Assume the Axiom of Countable Choice. For every smooth oriented knot $K$ in $S^3$, its Seifert genus is zero if and only if $K$ is ambient isotopic through orientation-preserving diffeomorphisms to the standard unknot.
+
+SUPPLIER lem-knot-normal-circle-bundle-trivialization
+For every smooth oriented embedding $K:S^1\to S^3$, let $\nu_K=K^*TS^3/dK(TS^1)$ be the quotient normal bundle. Orient its two-dimensional fibres so that a positive tangent to $K$ followed by a positive basis of the normal fibre gives the fixed orientation of $S^3$. Then $\nu_K$ admits a smooth orientation-preserving bundle isomorphism $\nu_K\cong K\times\mathbb R^2$.
+
+SUPPLIER lem-lee-cobordism-filtration-genus-bound
+Assume the Axiom of Countable Choice. Let $S\subset S^3\times[0,1]$ be a connected compact oriented smoothly properly embedded surface of genus $g$, with product collars and oriented boundary $(-K_0\times\{0\})\sqcup(K_1\times\{1\})$ for oriented knots $K_0,K_1$ in the standard three-sphere. A **finite movie** for $S$ is a finite ordered sequence of regular-level link diagrams whose changes are planar isotopies, oriented Reidemeister moves, births, saddles or deaths. Such a movie defines a map on rational Lee homology that preserves the induced decreasing filtration with degree $\chi(S)=-2g$. The map is an isomorphism; consequently
+$$
+|s(K_1)-s(K_0)|\le 2g.
+$$
+
+SUPPLIER lem-link-peripheral-longitude-word-from-diagram
+Let the diagram be either a based regular string-link
+diagram in $D^2\times[0,1]$ or a finite regular oriented diagram of a nonempty
+labeled closed link. In string-link mode, choose the product-tube parallel to
+be the blackboard push-off determined by the projected tangent, carried
+through the fixed endpoint collars. Choose one initial strand on each
+component. For the literal diagram word below first use compatible common-upper-collar accesses to all positive strand meridians and the induced endpoint accesses for the parallel; a common change of the complement base path is allowed. Arbitrary independent access paths and other degree-one parallels remain allowed, with their exact correction formula specified below. Traverse component $K_j$ in its orientation
+(from bottom to top for a string link and once around for a closed link). At
+each undercrossing $c$ of $K_j$, let $o(c)$ be the over-strand, and set
+$\epsilon_c=+1$ if the traversal goes from the source side to the target side
+of the over-strand's positive in-plane normal, and $\epsilon_c=-1$ if it goes
+from target to source. If the undercrossings in traversal order are
+$c_1,\ldots,c_s$, define
+$$W_j(D)=x_{o(c_1)}^{\epsilon_{c_1}}\cdots x_{o(c_s)}^{\epsilon_{c_s}}.$$
+For a string link, this word represents its based longitude. For a closed
+link, it represents the blackboard parallel in $\pi_1(E_L)$. The preferred
+zero-self-meridian longitude in the closed-link case is represented by
+$$\lambda_j(D)=x_j^{-\operatorname{wr}_j(D)}W_j(D),$$
+where $x_j$ is the initial meridian on $K_j$ and $\operatorname{wr}_j(D)$ is
+the sum of crossing signs at self-crossings of $K_j$.
+
+For the arbitrary-choice branch, write $a_e$ for the compatible access to the chosen meridian circle of strand $e$ and $a_e'$ for the actual access, after recording any endpoint-on-the-circle connectors. Put $g_e=a_e'a_e^{-1}$ and $y_e=g_e x_e g_e^{-1}$. The compatible word expressed in these actual meridians is
+$$\widehat W_j=\prod_{c\text{ in traversal order}}g_{o(c)}^{-1}y_{o(c)}^{\epsilon_c}g_{o(c)}=W_j.$$
+Let $a_0,a_1$ be the compatible accesses to the initial and terminal points of the blackboard parallel, with the fixed side connector included in $a_1$ for a string link. For a closed component these are the same access. Record actual accesses $a_0',a_1'$ and put $h_0=a_0'a_0^{-1}$, $h_1=a_1'a_1^{-1}$. For a chosen parallel $\beta'$ with the same endpoint coordinates as the blackboard parallel $\beta$, let $k\in\mathbb Z$ be its relative meridian winding, so $\beta'\simeq\mu_0^k\beta$ on the tube. A closed degree-one parallel is included; then $h_0=h_1=h$. Its actual based class is exactly
+$$h_0x_j^k\widehat W_jh_1^{-1}.$$
+For a closed component its self-meridian coordinate is $k+\operatorname{wr}_j(D)$, and its preferred zero-self-meridian correction is
+$$h\,x_j^{-\operatorname{wr}_j(D)}\widehat W_j\,h^{-1}.$$
+Thus arbitrary changes are retained as explicit transport and winding factors; independent access choices are not silently assumed to give the literal uncorrected product in the $y_e$.
+
+SUPPLIER lem-link-wirtinger-crossing-ball-cover
+Let $D$ be a finite regular oriented diagram of a nonempty labeled link, with
+$n\geq1$ crossings and at least one underpassing point on each component. Fix a
+smooth height realization $L_D=\{(\gamma(s),\eta(s))\}\subset\mathbb R^2\times[-1,0]$
+such that $\eta(s)=-1$ exactly at the $n$ underpassing points and
+$\eta(s)>-1$ elsewhere; at each crossing the overpassing point has height
+strictly greater than $-1$. Put
+$$A=(\mathbb R^2\times[-1,\infty))\cup\{\infty\},\quad B=(\mathbb R^2\times(-\infty,-1])\cup\{\infty\},\quad \Sigma=(\mathbb R^2\times\{-1\})\cup\{\infty\},$$
+and write $X=S^3\setminus L_D$, $A_L=A\cap X$, $B_L=B\cap X$,
+and $\Sigma_L=\Sigma\cap X$. Also put
+$A_L^\circ=((\mathbb R^2\times(-1,\infty))\cup\{\infty\})\cap X$.
+Then $\Sigma_L$ is a path-connected sphere
+with $n$ punctures, $A_L\cup B_L=X$, and $A_L\cap B_L=\Sigma_L$. There are
+path-connected open sets $U,V\subset X$ such that $X=U\cup V$, $U$ deformation
+retracts onto $A_L$, $V$ deformation retracts onto $B_L$, and $U\cap V$
+deformation retracts onto $\Sigma_L$. The set $B_L$ is contractible. The small
+circles in $\Sigma_L$ around the $n$ punctures normally generate
+$\pi_1(\Sigma_L)$, and they still normally generate after any one circle is
+omitted. The inclusion $A_L^\circ\hookrightarrow A_L$ is a homotopy
+equivalence. Radial retraction in each chosen product tube identifies
+$\pi_1(X)$ with the fundamental group of the chosen link exterior.
+
+SUPPLIER lem-link-wirtinger-local-meridian-conjugacy
+At an oriented crossing let $o$ be the over-strand. Orient the projection plane
+by the rule that $(v_1,v_2)$ is a positive basis exactly when the ordered triple
+$(n,v_1,v_2)$ is positive in the ambient three-space, where $n$ is the viewing
+normal. Let $n_o$ be the positive in-plane normal characterized by the condition
+that $(v_o,n_o)$ is positive in this plane. Call the under-side from
+which $n_o$ points the source $s$, and the side toward which it points the
+target $t$. Use a common basepoint above the diagram and paths in the upper
+collar to the positive meridians $m_o,m_s,m_t$. Then
+$$m_t=m_o^{-1}m_sm_o.$$
+Equivalently, the crossing relator is
+$m_o^{-1}m_sm_om_t^{-1}=1$. Reversing the direction of the under-strand
+does not change the side-based equation.
+
+SUPPLIER lem-linking-number-even-sum-and-reidemeister-invariance
+Assume the Axiom of Countable Choice. Let $D$ be a regular oriented diagram
+of a two-component oriented link in $S^3$, with components $K_1,K_2$. Write
+$$S(D):=\sum_{c\text{ between }K_1\text{ and }K_2}\operatorname{sgn}(c).$$
+Then $S(D)$ is even, and
+$$\operatorname{lk}_D(K_1,K_2):=\frac{S(D)}2\in\mathbb Z$$
+is unchanged by planar isotopy and by each oriented Reidemeister move of types
+I, II, and III. Thus it has the same value on any two regular diagrams of
+ambient-isotopic oriented links. It is symmetric in $K_1,K_2$; reversing exactly
+one component changes its sign, and reversing both components leaves it
+unchanged.
+
+SUPPLIER lem-maximal-abelian-cover-link-exterior-retraction
+Assume the Axiom of Choice and the data in the definition of the maximal-abelian-cover Alexander module for a nonempty oriented smooth link $L$. Let $i:E_L\hookrightarrow X_L$ be the inclusion of the compact exterior into the open complement, and let $p:X_L^{\mathrm{ab}}\to X_L$ be the maximal abelian cover. Then $E_L$ is a strong deformation retract of $X_L$, the restricted covering $p^{-1}(E_L)\to E_L$ is the connected maximal abelian cover of $E_L$, and the lifted deformation retract is equivariant under the deck group. The inclusion identifies $H_1(E_L;\mathbb Z)$ with $H_1(X_L;\mathbb Z)$ and preserves the positive-meridian classes. In particular, inclusion induces a $\Lambda_r$-module isomorphism
+
+$$
+H_1(p^{-1}(E_L);\mathbb Z)\cong A_L.
+$$
+
+SUPPLIER lem-parametrized-pl-balls-absorb-standard-boundary-windows
+Here a parametrized PL ball means a finite polyhedron supplied with a piecewise linear homeomorphism, with piecewise linear inverse, to a convex polyhedral ball of the stated dimension. All subpolyhedra and maps in the following assertions are finite.
+
+(a) Let $B_1,B_2$ be parametrized PL three-balls and $D_i\subset\partial B_i$ parametrized PL two-disks. Every PL homeomorphism $f:D_1\to D_2$ extends to a PL homeomorphism $B_1\to B_2$.
+
+(b) The space obtained by gluing two parametrized PL three-balls along parametrized PL two-disks in their boundaries, by a specified PL homeomorphism, is a parametrized PL three-ball.
+
+(c) Let $B$ and $A\subset B$ be parametrized PL three-balls, with $A\ne B$. Suppose $A\cap\partial B=\partial A\cap\partial B=D$ is a parametrized PL two-disk and $A\setminus D\subset\operatorname{Int}B$. Impose the following standard boundary-window condition at $C=\partial D$: every point of $C$ has a PL coordinate neighborhood in which
+$$B=\{(u,v,w):w\ge0\},\qquad A=\{(u,v,w):w\ge0,\ v\le0\},\qquad D=\{w=0,\ v\le0\}.$$
+The equalities are understood after intersection with the coordinate neighborhood, and $C$ corresponds to $v=w=0$. Then $Q=\overline{B\setminus A}$, with closure in $B$, is a parametrized PL three-ball.
+
+No assertion about a sphere in an arbitrary PL three-manifold is assumed. In (c) the closure of the set difference is essential: $B\setminus\operatorname{Int}_{\mathbb R^3}A$ would retain the interior of the contact disk as an extra sheet. These statements introduce no choice hypothesis.
+
+SUPPLIER lem-pl-embedded-polyhedron-admits-compatible-subcomplex-triangulation
+Let $Q$ be a compact piecewise-linear polyhedron with a fixed finite linear triangulation $T$. If $f:P\to Q$ is a piecewise-linear embedding of a compact piecewise-linear polyhedron, then some finite subdivision $T'$ of $T$ contains $f(P)$ as the realization of a subcomplex.
+
+SUPPLIER lem-seifert-bands-embedded-orientable-boundary-correct
+Assume the Axiom of Countable Choice. Let $D$ be a finite regular oriented diagram of a single knot, and let the Seifert algorithm supply its finite disk-and-band construction data. These disks and bands can be realized in $S^3$ as a connected compact smooth oriented embedded surface $F$ with exactly one boundary component, whose oriented boundary is the knot represented by $D$. The bands can be chosen mutually disjoint and disjoint from disk interiors except at their attaching intervals.
+
+SUPPLIER lem-seifert-matrix-skew-part-is-surface-intersection
+Assume the Axiom of Choice. Let $K$ be a smooth oriented embedded circle in the oriented standard three-sphere, let $F$ be a connected compact smooth oriented embedded surface with boundary $K$, and let $a_1,\ldots,a_{2g}$ be any ordered integral basis of $H_1(F;\mathbb Z)$ with Seifert matrix $V_{ij}=\operatorname{lk}(a_i^+,a_j)$. Let $J_F$ be the matrix of the algebraic intersection form on $F$, with a transverse intersection of oriented curves $u,v$ counted positively exactly when their ordered tangent vectors form a positive basis of $TF$. Then $V-V^T=J_F$. The matrix $J_F$ is skew-symmetric and unimodular; when $a_1,\ldots,a_{2g}$ is a standard handle basis, it is a direct sum of blocks $\begin{psmallmatrix}0&1\\-1&0\end{psmallmatrix}$.
+
+SUPPLIER lem-seifert-pairing-well-defined
+Assume the Axiom of Choice. Let $K$ be a smooth oriented embedded circle in the oriented standard three-sphere, let $F$ be a connected compact smooth oriented embedded surface with boundary $K$, and let $a_1,\ldots,a_{2g}$ be the ordered integral basis and positive normal push-off convention used to define the Seifert matrix $V$ above. Every class of $H_1(F;\mathbb Z)$ has a representative that is a finite integral sum of pairwise disjoint smooth oriented embedded circles in $F$. For such representatives $x$ and $y$, the sum of the pairwise linking numbers between the positive push-off of $x$ and $y$ depends only on $[x]$ and $[y]$, is independent of the sufficiently small positive push-off, and equals the bilinear extension of $V_{ij}=\operatorname{lk}(a_i^+,a_j)$. The linking number of two disjoint oriented circle components is symmetric. In particular, the Seifert pairing is a well-defined bilinear map $H_1(F;\mathbb Z)\times H_1(F;\mathbb Z)\to\mathbb Z$.
+
+SUPPLIER lem-smooth-jordan-disk-boundary-maps-extend-to-diffeomorphisms
+Assume the Axiom of Countable Choice. The bounded region of a smooth embedded
+circle in the oriented plane, together with its boundary, is a smooth manifold
+with boundary diffeomorphic to the closed standard disk. Let $D_0,D_1$ be two
+such closed regions. Every orientation-preserving smooth boundary
+diffeomorphism $b:\partial D_0\to\partial D_1$ extends to an
+orientation-preserving diffeomorphism $B:D_0\to D_1$. More precisely, for
+specified smooth inward collars $c_i:\partial D_i\times[0,\epsilon)\to D_i$
+with $c_i(p,0)=p$, the extension may be required to satisfy
+$B(c_0(p,r))=c_1(b(p),r)$ for every sufficiently small $r\ge0$. In addition, given interior points $p_i\in D_i$ and an orientation-preserving smooth diffeomorphism $q$ from a neighborhood of $p_0$ onto a neighborhood of $p_1$, the extension can agree with $q$ near $p_0$ while retaining the prescribed boundary collars.
+
+SUPPLIER lem-string-link-exterior-homology-and-meridian-maps
+Use integral homology. Let $L=K_1\cup\cdots\cup K_r$ be a nonempty labeled oriented smooth link in $S^3$ with chosen pairwise disjoint product tubes and exterior $E_L$. Then $H_1(E_L;\mathbb Z)\cong\mathbb Z^r$, with the positive meridians as its ordered basis. Each boundary torus $T_i$ has a product basis consisting of its positive meridian and a degree-one section. There is a unique degree-one class on $T_i$ whose image has zero $i$th meridian coordinate; this class is primitive and has a simple closed representative.
+
+Let $\tau$ be an $r$-component string link with chosen disjoint product tubes in $D^2\times[0,1]$, exterior $X_\tau$, and bottom and top punctured disks $P_-$ and $P_+$. Then each $\pi_1(P_\pm)$ is free of rank $r$. Positive endpoint meridians with the compatible accesses transported from a point-punctured-disk spine form an ordered free basis. For arbitrary independently chosen access paths, the corresponding meridian is $c_i m_i c_i^{-1}$, where $m_i$ is the compatible-stem meridian and $c_i$ is the recorded access-path difference; these conjugates need not be a free basis. In particular $H_1(P_\pm;\mathbb Z)\cong\mathbb Z^r$, and $H_2(P_\pm;\mathbb Z)=0$. The exterior satisfies $H_1(X_\tau;\mathbb Z)\cong\mathbb Z^r$ and $H_2(X_\tau;\mathbb Z)=0$. Each end inclusion sends its ordered positive meridian basis to the ordered positive meridian basis of $H_1(X_\tau;\mathbb Z)$. Consequently both induced homomorphisms on $H_1$ are isomorphisms and both induced homomorphisms on $H_2$ are surjective.
+
+SUPPLIER thm-finite-pl-schoenflies-in-dimension-three
+A supplied finite PL embedding of the standard PL two-sphere in $\mathbb R^3$ bounds a compact parametrized PL three-ball; its two complementary components are the bounded ball interior and a connected unbounded exterior. A supplied finite PL embedding of the standard PL two-sphere in the standard PL three-sphere bounds two parametrized PL three-balls, and a PL homeomorphism of that three-sphere carries it to the common boundary in a standard double of a convex three-ball. All parameters and homeomorphisms are finite PL on the compact spaces in question. No choice hypothesis is introduced.
+
+This is a PL assertion in already supplied standard PL ambient spaces. It does not assert triangulability of arbitrary topological three-manifolds or tame arbitrary wild sphere embeddings.
+
+SUPPLIER thm-knot-exterior-homology-and-longitude
+Assume the Axiom of Choice. Let $K:S^1\to S^3$ be a smooth oriented embedding and write its quotient normal bundle as $\nu_K=K^*TS^3/dK(TS^1)$. Choose an orientation-preserving trivialization $\nu_K\cong S^1\times\mathbb R^2$ and a tubular map $\Phi:\Omega\to S^3$, meaning a smooth embedding from an open neighbourhood $\Omega\subseteq\nu_K$ of the zero section onto an open neighbourhood of $K(S^1)$ with $\Phi(s,0)=K(s)$, such that in these product coordinates $\Omega$ contains $S^1\times D^2_{2\epsilon}$ for some $\epsilon>0$. Here $D^2_r=\{z\in\mathbb R^2:\|z\|\le r\}$. Set $N(K)=\Phi(S^1\times D^2_\epsilon)$, $E_K=S^3\setminus\operatorname{int}N(K)$, $T_K=\partial E_K$, and let $i:T_K\hookrightarrow E_K$ be inclusion, $p:T_K\to S^1$ the product projection, and $\mu$ the positive boundary of a normal disk, using the normal-plane orientation determined by the orientations of $K$ and $S^3$. A class is primitive if it is not $m$ times another class for any integer $|m|>1$. Then $H_1(E_K;\mathbb Z)\cong\mathbb Z$ is generated by $[\mu]$. The kernel of $i_*:H_1(T_K;\mathbb Z)\to H_1(E_K;\mathbb Z)$ is a primitive rank-one direct summand generated by a unique class $[\lambda]$ with $p_*[\lambda]=1\in H_1(S^1;\mathbb Z)$. It has a simple closed representative, is the preferred longitude, and $([\mu],[\lambda])$ is a basis of $H_1(T_K;\mathbb Z)$.
+
+SUPPLIER thm-linking-number-equals-signed-intersection
+Assume the Axiom of Choice. Let $K$ and $J$ be disjoint oriented smooth
+embedded circles in the oriented three-sphere, and let $\Sigma$ be a compact
+oriented smooth surface embedded in the three-sphere with boundary $K$, whose
+outward-normal-first boundary orientation is the specified orientation of $K$.
+Here outward-normal-first means that an outward-pointing normal followed by a
+positive boundary tangent gives the orientation of $\Sigma$. Assume
+$J$ is transverse to $\Sigma$, and fix a regular oriented diagram $D$ of
+$J\cup K$. Let $\eta$ be a positively oriented meridian of $K$ and let
+$m\in\mathbb Z$ be the unique integer such that
+$[J]=m[\eta]$ in $H_1(S^3\setminus K;\mathbb Z)$. Define the topological
+linking number by $\operatorname{lk}(J,K):=m$. Let
+$\operatorname{lk}_D(J,K)$ be the half-sum of the signs of the mixed crossings
+of $D$. Orient the normal line of $\Sigma$ by the ambient orientation. A point
+of $J\cap\Sigma$ has sign $+1$ if the oriented curve $J$ crosses from the
+negative side of $\Sigma$ to its positive side, and sign $-1$ for the reverse
+passage. Then
+$$\operatorname{lk}_D(J,K)=\operatorname{lk}(J,K)=\sum_{p\in J\cap\Sigma}\operatorname{sign}_\Sigma(p).$$
+The statement is conditional on a supplied spanning surface and regular
+diagram; it asserts no surface- or diagram-existence theorem.
+
+SUPPLIER thm-oriented-linking-number-scan-terminates-and-is-correct
+Assume the Axiom of Countable Choice. On every finite regular oriented diagram
+with exactly two components, the crossing-scan algorithm halts after one
+iteration per crossing and returns the integer half-sum of the mixed crossing
+signs. On an input with any other number of components it returns
+`invalid-input` after the finite component-count check.
+
+SUPPLIER thm-rasmussen-s-bounds-smooth-four-ball-genus
+Assume the Axiom of Countable Choice. For every smooth oriented knot $K$ in the standard oriented three-sphere,
+$$
+|s(K)|\le 2g_4^{\mathrm{sm}}(K),
+$$
+where $g_4^{\mathrm{sm}}(K)$ is the minimum genus of a connected compact orientable smooth properly embedded surface in the standard four-ball with oriented boundary $K$.
+
+SUPPLIER thm-seifert-determinant-is-the-knot-alexander-polynomial
+Assume the full Axiom of Choice. Let $K\subset S^3$ be a smooth oriented knot, and let $F\subset S^3$ be a connected compact smooth oriented embedded surface whose oriented boundary is $K$, with $\chi(F)=1-2g$. Choose an ordered integral basis $a_1,\ldots,a_{2g}$ of $H_1(F;\mathbb Z)$ and use the positive normal convention $V_{ij}=\operatorname{lk}(a_i^+,a_j)$. Let $A_K$ be the first homology of the infinite cyclic cover of $S^3\setminus K$ classified by total linking, with $t$ acting by the positive-meridian deck transformation. Let $\Delta_K(t)$ be the generator of the zeroth elementary ideal $E_0(A_K)$ in $\Lambda=\mathbb Z[t^{\pm1}]$, and write $p\doteq q$ when $p$ and $q$ differ by a unit $\pm t^k$ of $\Lambda$. Then for every such $F$ and basis,
+
+$$\det(V-tV^T)\doteq\Delta_K(t).$$
+
+The determinant is $1$ for the empty $0\times0$ matrix when $g=0$. This formula concerns the polynomial $\Delta_K$; the existing knot-normalized fraction $D_K=\Delta_K/(1-t)$ is a separate invariant.
+
+SUPPLIER thm-seifert-matrix-presents-knot-alexander-module
+Assume the Axiom of Choice. Let $K$ be a smooth oriented knot in the oriented standard three-sphere, let $F$ be a connected compact smooth oriented embedded surface with boundary orientation equal to that of $K$, let $g$ satisfy $\chi(F)=1-2g$, and choose an ordered integral basis $a_1,\ldots,a_{2g}$ of $H_1(F;\mathbb Z)$. Use the positive normal convention $(n,u,v)>0$ and define $V_{ij}=\operatorname{lk}(a_i^+,a_j)$. Let $A_K=H_1(\widetilde X_K;\mathbb Z)$ be the one-variable Alexander module of the knot complement $X_K=S^3\setminus K$, where the cover is classified by the total-linking homomorphism and $t$ acts by the deck transformation corresponding to the positive meridian. Then there is an isomorphism of $\Lambda=\mathbb Z[t^{\pm1}]$-modules
+$$
+A_K\cong\operatorname{coker}\bigl(V-tV^T:\Lambda^{2g}\to\Lambda^{2g}\bigr).
+$$
+
+SUPPLIER thm-seifert-surface-from-diagram-procedure-properties
+Assume the Axiom of Countable Choice. For every finite regular oriented diagram with exactly one component, the Seifert diagram procedure terminates after one finite smoothing scan and one finite band-record scan. It returns exactly one disk record for each Seifert circle and exactly one band record for each original crossing. Termination alone asserts no embeddedness, boundary equality, or genus minimality.
+
+SUPPLIER thm-thurston-hyperbolic-dehn-filling
+Assume the Axiom of Choice. Let $M$ be the interior of a compact connected orientable three-manifold with $k\ge1$ torus cusps and a complete finite-volume hyperbolic metric. Choose an ordered peripheral basis on each cusp. For cusp $i$, let the generalized filling parameter sphere be $S_i=\mathbb R^2\cup\{\infty\}$, with $\infty$ denoting the complete cusp and primitive integral pairs modulo sign denoting ordinary slopes. There is a neighborhood $U$ of $(\infty,\ldots,\infty)$ in $\prod_{i=1}^k S_i$ such that every tuple in $U$ whose finite coordinates are primitive integral slopes determines a complete finite-volume hyperbolic metric on the corresponding ordinary Dehn filling; coordinates equal to $\infty$ remain unfilled complete cusps. Consequently, one may choose neighborhoods $U_i$ of $\infty$ with $\prod_i U_i\subseteq U$, and only finitely many primitive integral pairs at each cusp lie outside $U_i$. Thus every simultaneous filling whose slopes all lie in their respective $U_i$ is hyperbolic. Nonprimitive ray parameters may describe cone or orbifold completions but are not ordinary smooth fillings. No universal numeric length threshold or universal bound on the number of exceptional slopes is asserted.
+
+SUPPLIER thm-torus-knot-alexander-and-genus-formulas
+Assume the full Axiom of Choice. Let $p,q$ be coprime nonzero integers, let $K=T(p,q)$, and put $a=|p|$, $b=|q|$. For $\Lambda=\mathbb Z[t^{\pm1}]$, define
+$$\delta_{a,b}(t)=\frac{(t^{ab}-1)(t-1)}{(t^a-1)(t^b-1)}.$$
+Then $\delta_{a,b}(t)$ is a polynomial in $\mathbb Z[t]$, the Alexander polynomial $\Delta_K$ defined as a generator of the zeroth elementary ideal of the positive-meridian infinite-cyclic-cover module satisfies $\Delta_K(t)\doteq\delta_{a,b}(t)$, and the knot genus is $g(K)=(a-1)(b-1)/2$. Here $f\doteq g$ means $f=\pm t^k g$ for some integer $k$.
+
+CONSUMER alg-truncated-milnor-invariants-from-based-diagram
+Supplier edges: def-based-string-link-and-labeled-link-peripheral-system, lem-link-peripheral-longitude-word-from-diagram, lem-link-wirtinger-local-meridian-conjugacy
+Literal claim:
+Assume AC. The input is either (a) a based $r$-component string-link diagram
+with its endpoint collars and product-tube parallels equal to the diagram's
+blackboard push-offs, or (b) a based finite regular
+diagram of a closed $r$-component labeled oriented link with chosen product
+tubes, one initial strand on each component, and a common basepoint and access
+paths. The finite input records its compatible common-upper-collar reference accesses. In the compatible branch the actual accesses are these, up to a common base-path change, and the parallels are the blackboard parallels already specified. In the arbitrary-choice branch it additionally records finite words in the compatible strand meridians for each access difference $g_e$, the parallel endpoint differences $h_{0,j},h_{1,j}$, and its relative meridian winding $k_j$. These are word certificates for the chosen paths, part of the supplied based-word data; no evaluation of an unencoded smooth path is claimed. In closed-link mode the preferred longitude uses its own recorded access $h_j$, which may differ from the initial-meridian access $g_j$. Arbitrary parallels are allowed in this branch, with the recorded $k_j$. The input also includes a maximum index length $N\geq2$. The output is
+the integer coefficients $\mu_\tau(I)$ in string-link mode, or the based
+coefficients $\mu_L^b(I)$, their lower indeterminacy data $\Delta_I^b$, and
+residues $\bar\mu_L^b(I)$ in closed-link mode, for every index sequence $I$
+with $2\leq |I|\leq N$.
+
+Set $d=N-1$ and work in the truncated noncommutative ring
+$$R_d=\mathbb Z\langle X_1,\ldots,X_r\rangle/\mathfrak m^{d+1},$$
+where $\mathfrak m$ is the ideal generated by the letters. Carry out the
+following finite procedure.
+
+1. Verify the finite crossing, orientation, over/under, and component data. If
+   a closed-link component has no underpassing point, insert a small type-I
+   curl on that component in a disk meeting no other component and record the
+   resulting based diagram. Give every strand $a$ the component label $j(a)$.
+
+2. First compute in the compatible reference root symbols $x_j$, irrespective of the actual access choices. For every strand $a$, initialize its meridian series by
+   $Y_a^{(1)}=1+X_{j(a)}$. For each degree $\ell=2,\ldots,d$, copy every
+   $Y_a^{(\ell-1)}$ into the constant and lower-degree part of
+   $Y_a^{(\ell)}$, with new degree-$\ell$ terms initially zero, and reset each
+   chosen root strand to $1+X_j$. Then do one pass over each component in its
+   oriented order. In closed-link mode start at the chosen initial strand and
+   omit the final undercrossing back to that strand; in string-link mode start
+   at the bottom endpoint and use every undercrossing through to the top
+   endpoint. At an undercrossing with over-strand $o$ and source and target
+   under-arcs $s,t$, use the already available $Y_o^{(\ell-1)}$ and the
+   current $Y_s^{(\ell)}$ to set
+   $$Y_t^{(\ell)}=\operatorname{trunc}_{\ell}\bigl((Y_o^{(\ell-1)})^{-1} Y_s^{(\ell)}Y_o^{(\ell-1)}\bigr)$$
+   when the traversal is source-to-target, and set
+   $$Y_s^{(\ell)}=\operatorname{trunc}_{\ell}\bigl(Y_o^{(\ell-1)} Y_t^{(\ell)}(Y_o^{(\ell-1)})^{-1}\bigr)$$
+   when it is target-to-source. Here $\operatorname{trunc}_{\ell}$ discards
+   monomials of degree greater than $\ell$, and every inverse is the finite
+   geometric series in the nilpotent ideal of $R_d$.
+
+3. For each component $j$, traverse its undercrossings in order and form
+   $W_j=\prod_c (Y_{o(c)}^{(d)})^{\epsilon_c}$, where the factors are in
+   traversal order and $\epsilon_c=+1$ for source-to-target and $-1$ for
+   target-to-source. In string-link mode set $\Lambda_j=W_j$. In closed-link
+   mode set
+   $$\Lambda_j=(1+X_j)^{-\operatorname{wr}_j(D)}W_j,$$
+   where $\operatorname{wr}_j(D)$ is the sum of the determinant signs at
+   self-crossings of component $j$.
+
+4. In the arbitrary-choice branch evaluate each supplied transport word by the strand series from step 2. Write $G_e$ for the resulting unit series, and $H_{0,j},H_{1,j}$ for the endpoint transport series. In string-link mode replace the compatible $\Lambda_j=W_j$ by
+   $$H_{0,j}(1+X_j)^{k_j}W_jH_{1,j}^{-1}.$$
+   In closed-link mode replace the compatible preferred series by
+   $$H_j(1+X_j)^{-\operatorname{wr}_j(D)}W_jH_j^{-1},$$
+   where $H_j=H_{0,j}=H_{1,j}$ is the actual longitude access difference, independently of the initial-meridian difference $G_j$. The arbitrary parallel winding cancels in the preferred correction. All powers and inverses are finite truncated operations. To express this result in the actual component-meridian symbols, form
+   $$G_j(1+X_j)G_j^{-1}=1+X_j+R_j(X),\qquad \deg R_j\ge2.$$
+   With new letters $V_j$, initialize $Z_j^{(1)}=V_j$ and iterate
+   $$Z_j^{(s+1)}=\operatorname{trunc}_d\bigl(V_j-R_j(Z^{(s)})\bigr),\qquad 1\le s<d.$$
+   Substitute $X_j=Z_j^{(d)}(V)$ in the corrected longitude series. This is its expansion in the chosen actual meridians. For the compatible branch this step is the identity. Rename the final letters $V_j$ as $X_j$.
+
+5. For every $I=(i_1,\ldots,i_k,j)$ with $1\leq k\leq d$, read the coefficient
+   of $X_{i_1}\cdots X_{i_k}$ in $\Lambda_j$. In string-link mode return this
+   integer. In closed-link mode, also compute the gcd of the coefficients for
+   all proper subsequences of cyclic permutations of $I$ of lengths at least
+   two, with empty gcd equal to zero, and return the corresponding residue
+   class.
+
+All scans, including the supplied transport words and the $d-1$ inverse-substitution iterations, are over finite crossing, strand, degree, and index sets. The
+procedure makes no polynomial-time claim. If a finite-input validation fails,
+return `invalid-input`.
+Relevant declared Facts:
+(No named supplier use in literal Facts; declared-context edge only at this scope.)
+
+CONSUMER cex-pairwise-linking-does-not-classify-links
+Supplier edges: def-based-string-link-and-labeled-link-peripheral-system
+Literal claim:
+
+Relevant declared Facts:
+**Given:** The Borromean and unlink diagrams with the labels and orientations in the counterexample statement.
+
+[F2] Every component of the three-component unlink bounds a disk disjoint from the other components, so its pairwise linking numbers and its based longitude words are zero and trivial, respectively. [[def-based-string-link-and-labeled-link-peripheral-system]]
+
+CONSUMER cex-zero-trace-does-not-force-concordance
+Supplier edges: lem-lee-cobordism-filtration-genus-bound
+Literal claim:
+
+Relevant declared Facts:
+**Given:** Countable choice, the Conway knot $C$ and the explicit alternate knot $Q$ below.
+
+[F3] [[lem-lee-cobordism-filtration-genus-bound]] gives $|s(K_1)-s(K_0)|\le2g$ for an actual smoothly properly embedded oriented genus-$g$ cobordism with product collars.
+
+CONSUMER def-hat-heegaard-floer-complex-of-a-closed-three-manifold
+Supplier edges: def-admissible-pointed-heegaard-floer-data
+Literal claim:
+Let $Y$ be a closed connected oriented smooth three-manifold. A pointed genus-$g$ Heegaard diagram for $Y$ consists of an embedded splitting $Y=U_\alpha\cup_\Sigma U_\beta$, where $\Sigma=\partial U_\alpha$ is a closed oriented genus-$g$ surface and each $U$ is a handlebody, meaning a regular neighborhood of a finite connected graph; ordered systems $\boldsymbol\alpha=(\alpha_1,\ldots,\alpha_g)$ and $\boldsymbol\beta=(\beta_1,\ldots,\beta_g)$ of pairwise disjoint smooth simple closed curves bounding specified disjoint proper compression disks in the respective handlebodies, each disk system cutting its handlebody into one ball; and one point $z$ off the curves. Opposite-system curves meet transversely in finitely many points. This is closed-manifold data; it includes neither a knot nor a second marked point.
+
+Write $q:\Sigma^g\to\operatorname{Sym}^g(\Sigma)=\Sigma^g/S_g$ for the permutation quotient. The product tori are the images
+$$T_\alpha=q(\alpha_1\times\cdots\times\alpha_g),\qquad T_\beta=q(\beta_1\times\cdots\times\beta_g).$$
+The group $S_g$ acts on the ambient product, rather than on a fixed ordered product of distinct attaching circles. A generator is an intersection $x\in T_\alpha\cap T_\beta$; equivalently it selects one intersection point on each curve of each system. There are finitely many generators. For $g=0$ the symmetric product and both empty products are one point, with the empty generator.
+
+A Whitney class $\phi\in\pi_2(x,y)$ is a relative homotopy class of maps of a closed disk with two marked boundary points into the symmetric product, taking its two boundary arcs into $T_\alpha,T_\beta$ and its marked points to $x,y$. Its domain is the integral two-chain of complementary regions; its coefficient at an interior point $p$ is the intersection multiplicity $n_p(\phi)$ with $\{p\}+\operatorname{Sym}^{g-1}(\Sigma)$. In particular $n_z(\phi)$ is the basepoint coefficient. A periodic domain is an integral region two-chain whose boundary is an integral sum of full attaching circles. The domain of a class $\psi\in\pi_2(x,x)$ is periodic. Such a class is normalized when $n_z(\psi)=0$. Write $\mu(\phi)$ for the real Fredholm index of the disk linearization, before quotienting longitudinal translation; well-definedness and its topological index formula are properties to be proved in the analytic and index theory.
+
+For a periodic domain P, cap its full attaching-circle boundary with the specified compression disks, using the boundary multiplicities and orientations, to obtain the integral class $H(P)\in H_2(Y;\mathbb Z)$. A Spin-c structure $\mathfrak s$ is a lift of the oriented tangent frame bundle through $\operatorname{Spin}^c(3)\to SO(3)$; $c_1(\mathfrak s)$ is the first Chern class of its determinant line, with determinant character $[s,u]\mapsto u^2$. **Weak admissibility in the specified Spin-c sector $\mathfrak s$** means that EVERY nonzero integral periodic domain P with $n_z(P)=0$ and $\langle c_1(\mathfrak s),H(P)\rangle=0$ has both positive and negative region coefficients. This condition is imposed even when the sector has no diagram generators. It is a condition on domains and the intended sector, not only on periodic classes based at existing generators.
+
+The ordinary sector module $\widehat{CF}(\mathcal H,\mathfrak s)$ uses generators with Morse Spin-c label $\mathfrak s_z(x)=\mathfrak s$. The label is defined by compatible handle Morse data: replace the gradient in disjoint tubes around the generator's index-one/index-two trajectories and the basepoint's index-zero/index-three trajectory by nonsingular fields, and take the Spin-c lift of their oriented perpendicular planes. Its actual construction, independence properties and periodic-index formula are obligations of the Spin-c and index theory. In particular the equality between the index of a REALIZED normalized periodic class based at x and the Chern evaluation in $\mathfrak s_z(x)$ is not assumed as its own proof. A realized-generator test alone is not substituted for the stated domain condition.
+
+An **admissible diagram for the full single-diagram hat module** satisfies this sector condition for EVERY Spin-c structure on Y, including the sectors with no generators. The full module below uses all generators and hence all intended sectors; an empty sector contributes a zero summand but is not omitted from the admissibility test. Equivalently this full-diagram condition is global weak admissibility: every nonzero periodic domain with $n_z=0$ has both signs. The equivalence uses the actual zero-Chern Spin-c sector constructed from complete Heegaard data in [[lem-complete-heegaard-data-have-a-zero-chern-spin-c-sector]]; it is not inferred from a generator existing in that sector. For a SINGLE specified sector, ordinary weak admissibility remains the stated Chern-kernel condition and need not imply global weakness. No assertion of the full group from a diagram tested only at its represented sectors is made.
+
+For $g>0$ choose a complex structure $j$ and positive area form on $\Sigma$. Analytic data include a smooth path $J_t$ on the symmetric product, constant on actual neighborhoods of $t=0,1$. On a fixed neighborhood of the diagonal and the point-divisors for a chosen interior point of every complementary region, including $z$, it agrees with the integrable structure $\operatorname{Sym}^g(j)$; away from that neighborhood it is tame for the form descended from the product surface area form. The path is chosen in a sufficiently small nearly symmetric class. Product-integrable normal forms near the finitely many transverse generators may be included among its specified auxiliary choices. Existence of such choices and of the regular perturbations needed below remains a mathematical obligation. A holomorphic strip is an actual smooth finite-Dirichlet-energy map $u:\mathbb R\times[0,1]\to\operatorname{Sym}^g(\Sigma)$ satisfying
+$$u_s+J_t(u)u_t=0,\qquad u(s,0)\in T_\alpha,\quad u(s,1)\in T_\beta,$$
+with uniform generator limits at both longitudinal ends. The space in class $\phi$ is $\mathcal M_J(\phi)$, and translation in $s$ acts on it. Regular means that its actual linearized operator is surjective at the solutions being counted. Local multiplicity positivity, Fredholmness, the class index and compactness are results to be proved, not choices of which maps to count.
+
+The hat diagram-level module $\widehat{CF}(\mathcal H;\mathbb F_2)$ is free over $\mathbb F_2$ on the generators. For regular data for which the displayed quotient sets are finite and, for each $x$, only finitely many nonempty pairs $(y,\phi)$ occur, its candidate count operator is
+$$\widehat\partial x=\sum_y\ \sum_{\substack{\phi\in\pi_2(x,y)\\\mu(\phi)=1,\ n_z(\phi)=0}}\#_2\bigl(\mathcal M_J(\phi)/\mathbb R\bigr)y.$$
+Here $\#_2$ is parity of an actual finite zero-dimensional quotient. For $g=0$ the operator is zero on the empty generator. That the required regular finite counts exist, that $\widehat\partial^2=0$, and that its homology is invariant under changing pointed admissible diagrams and auxiliary choices are separate analytic and move theorems. Once these hold, the common homology is denoted $\widehat{HF}(Y;\mathbb F_2)$. No filtered chain-homotopy invariant, integral orientations or absolute grading is asserted by this definition.
+
+Comparisons of embedded diagrams permit orientation-preserving isomorphisms carrying $Y$, its two handlebodies, their oriented surface, the attaching systems and $z$ to the specified counterparts, equivalently compatible collared extensions of the surface map. Curve-factor reordering gives the corresponding product identification. Analytic data are transported by the induced symmetric-product map, including $j$, the area form, protected neighborhoods and $J_t$. The intended count identification is the actual pushforward of generators and disk classes with these transported data; its compatibility with the operator requires proof. An ambient isotopy is not assumed to act as the identity. Comparison of independently chosen perturbations likewise requires the continuation theorem.
+Relevant declared Facts:
+(No named supplier use in literal Facts; declared-context edge only at this scope.)
+
+CONSUMER def-lower-central-series-and-magnus-expansion-for-links
+Supplier edges: def-based-string-link-and-labeled-link-peripheral-system
+Literal claim:
+For any group $G$, define its lower-central series by $\Gamma_1G=G$ and
+$\Gamma_{q+1}G=[G,\Gamma_qG]$, where $[G,H]$ is the subgroup generated by
+$ghg^{-1}h^{-1}$ for $g\in G$ and $h\in H$. For $r\ge1$, let
+$F_r=\langle x_1,\ldots,x_r\rangle$ be the free group on the formal meridian
+symbols $x_i$, with the free-group convention of its stated generators.
+
+Let $\mathcal A_r=\mathbb Z\langle\!\langle X_1,\ldots,X_r\rangle\!\rangle$
+be the ring of formal integer sums $\sum_w a_wX_w$ over all finite words $w$
+in the letters $X_i$, with multiplication given by concatenation of words.
+This is the degree-complete ring for the word-length filtration; a series with
+invertible constant coefficient is a unit, with inverse determined recursively
+degree by degree.
+Filter it by total degree (word length), and let $\mathfrak m$ be the ideal of
+series with zero constant term.
+The Magnus expansion is the group homomorphism
+$$
+E:F_r\longrightarrow
+\mathbb Z\langle\!\langle X_1,\ldots,X_r\rangle\!\rangle^\times,
+\qquad E(x_i)=1+X_i.
+$$
+It sends $x_i^{-1}$ to $(1+X_i)^{-1}=\sum_{k\ge0}(-1)^kX_i^k$. For an
+integer $d\ge0$, calculations through degree $d$ use the truncated ring
+$R_d=\mathbb Z\langle X_1,\ldots,X_r\rangle/\mathfrak m^{d+1}$. As a
+$\mathbb Z$-module it has the finite monomial basis of words of length at most
+$d$. In $R_d$, the inverse of $1+A$ for $A\in\mathfrak m$ is the finite sum
+$1-A+A^2-\cdots+(-A)^d$.
+
+For a based string link, $x_1,\ldots,x_r$ may be used as formal symbols
+corresponding to the positive bottom-end meridians. No freeness or
+lower-central quotient isomorphism is asserted here; those properties require
+separate proofs.
+Relevant declared Facts:
+(No named supplier use in literal Facts; declared-context edge only at this scope.)
+
+CONSUMER def-milnor-integer-and-residue-invariants
+Supplier edges: def-based-string-link-and-labeled-link-peripheral-system, lem-string-link-exterior-homology-and-meridian-maps
+Literal claim:
+Assume AC for the string-link quotient branch. Use the closed-link residue
+definition one finite maximum index length at a time, so its based word-lift
+data are finite.
+
+Let $\tau$ be a based $r$-component string link with bottom meridian symbol group
+$F_r=\langle x_1,\ldots,x_r\rangle$, exterior group $G=\pi_1(X_\tau)$, and
+based string-link longitudes $\lambda_1,\ldots,\lambda_r$. With compatible stem accesses this free group identifies the full endpoint fundamental group. For arbitrary independently based meridians, use instead its meridian map on each finite nilpotent quotient, which is still an isomorphism by the end-identification theorem; no full-group free-basis assertion is made. Longitudes retain their specified parallel and access data. For a multi-index
+$I=(i_1,\ldots,i_k,j)$ with $k\geq1$ and each index in $\{1,\ldots,r\}$,
+let $w_{j,k}\in F_r/\Gamma_{k+1}F_r$ be the unique class whose image under
+the bottom-end nilpotent isomorphism is the class of $\lambda_j$ in
+$G/\Gamma_{k+1}G$. Define the integer coefficient
+$$\mu_\tau(I)=[X_{i_1}\cdots X_{i_k}]\,E(w_{j,k})\in\mathbb Z,$$
+where the bracket means the coefficient of that word in the finite Magnus
+expansion through degree $k$. The commutator-degree lemma makes this coefficient
+independent of the representative of $w_{j,k}$.
+
+For a closed labeled link $L$, choose a common basing and its preferred
+zero-self-meridian longitudes. For every component $j$ and every finite
+$q\geq2$, choose a lift $w_{j,q}\in F_r/\Gamma_qF_r$ of the class of its
+longitude in $G/\Gamma_qG$, where $G=\pi_1(E_L)$ and $F_r$ is free on the
+component meridian symbols. Such lifts exist because those meridians generate
+every finite nilpotent quotient. For $I=(i_1,\ldots,i_k,j)$, define the based
+coefficient $\mu_L^b(I)$ by taking the coefficient of
+$X_{i_1}\cdots X_{i_k}$ in $E(w_{j,k+1})$ through degree $k$. Let
+$\Delta_I^b$ be the nonnegative greatest common divisor of the finite set of
+all $\mu_L^b(J)$ for sequences $J$ of lengths from $2$ to $|I|-1$ that occur
+as subsequences of cyclic permutations of $I$. The gcd of an empty set is $0$.
+Define the based residue candidate
+$$\bar\mu_L^b(I):=\mu_L^b(I)\pmod{\Delta_I^b}\in \mathbb Z/\Delta_I^b\mathbb Z,$$
+with $\mathbb Z/0\mathbb Z=\mathbb Z$. Independence of the basing and word
+lifts is not part of this definition; it is a separate theorem. A based
+Borromean example with $I=(1,2,3)$ uses this convention.
+Relevant declared Facts:
+(No named supplier use in literal Facts; declared-context edge only at this scope.)
+
+CONSUMER def-smooth-zero-trace
+Supplier edges: def-knot-exterior, def-knot-meridian-and-preferred-longitude
+Literal claim:
+Let $K\subset S^3$ be a smooth oriented knot with a chosen tubular neighborhood
+and preferred longitude $\lambda_K$. Its smooth zero-trace $X_0(K)$ is the
+compact smooth $4$-manifold obtained from $B^4$ by attaching a single $2$-handle
+$D^2\times D^2$ to $\partial B^4=S^3$ along $K$, using the framing whose
+parallel curve represents $\lambda_K$; corners are rounded.
+Relevant declared Facts:
+**Given:** A smooth oriented knot $K\subset S^3$, a chosen tubular neighborhood,
+and its preferred longitude.
+
+[F1] [[def-knot-meridian-and-preferred-longitude]]: the preferred longitude is
+the degree-one peripheral curve whose class is zero in the first homology of
+the knot exterior.
+
+CONSUMER ex-borromean-link-milnor-triple-invariant
+Supplier edges: def-based-string-link-and-labeled-link-peripheral-system, lem-link-peripheral-longitude-word-from-diagram, lem-link-wirtinger-local-meridian-conjugacy
+Literal claim:
+
+Relevant declared Facts:
+**Given:** The based string link, the stated braid diagram, and its product-tube basing.
+
+[F2] The based string-link longitude is the ordered product of the over-meridians encountered at its undercrossings, with exponent determined by source-to-target direction. [[lem-link-peripheral-longitude-word-from-diagram]]
+
+CONSUMER ex-knot-kt-47-worked-cases
+Supplier edges: def-oriented-crossing-sign-writhe-and-blackboard-framing
+Literal claim:
+
+Relevant declared Facts:
+**Given:** The based signed Gauss word $-1,+3,-2,+1,-3,+2$, the sign vector $(+1,+1,+1)$, and the page's normalized dart and face conventions.
+
+[F2] [[def-oriented-crossing-sign-writhe-and-blackboard-framing]]: the algebraic sign is $\operatorname{sgn}\det(v_{\rm over},v_{\rm under})$, and the positive Artin half twist has sign $+1$.
+
+CONSUMER lem-baldwin-sivek-instanton-surgery-and-newton-polygon-inputs
+Supplier edges: thm-thurston-hyperbolic-dehn-filling
+Literal claim:
+Assume full AC and let $K\subset S^3$ be a knot. The input package required by the Baldwin–Sivek thin-knot and infinitely-many-abelian-surgeries arguments consists of the following conclusions with their stated hypotheses: (i) a nontrivial $\mathrm{SU}(2)$-averse knot has a unique rational accumulation slope and either it or its mirror is an instanton L-space knot; (ii) a nontrivial instanton L-space knot is fibered and its symmetrized Alexander polynomial has coefficients in $\{-1,0,1\}$ with nonzero coefficients alternating in sign; (iii) the L-space satellite restrictions and the pattern/companion surgery-transfer statements exclude the satellite cases used in §§3–5; and (iv) the hyperbolic Dehn-filling theorem and the knot-exterior JSJ classification reduce the remaining cases to torus knots. This carrier records the exact imported result interfaces and does not assert that these conclusions have been proved locally.
+Relevant declared Facts:
+**Given:** Full AC and the full original input-package scope. The finite representation/pillowcase argument below is retained. Its gauge-theoretic premises are explicit external inputs, not locally reconstructed instanton proofs.
+
+CONSUMER lem-conway-seifert-surface-and-matrix
+Supplier edges: alg-seifert-surface-from-diagram, lem-seifert-bands-embedded-orientable-boundary-correct, lem-seifert-pairing-well-defined, thm-linking-number-equals-signed-intersection, thm-seifert-surface-from-diagram-procedure-properties
+Literal claim:
+Assume the Axiom of Choice. For the oriented Conway diagram $C$ fixed on the
+preceding item, the Seifert smoothing and band construction yields a connected
+embedded Seifert surface with a basis for its first homology whose
+positive-push-off Seifert matrix is
+$$V=\begin{pmatrix} -1&0&0&0&0&0&0&0\\ -1&-1&0&0&0&0&0&0\\ -1&-1&0&0&1&0&0&0\\ 0&0&-1&1&0&1&-1&1\\ 0&0&0&0&1&0&0&0\\ 0&0&0&0&0&1&0&0\\ -1&-1&1&0&1&0&0&0\\ 0&0&-1&0&0&1&0&1 \end{pmatrix}.$$
+Relevant declared Facts:
+**Given:** Full AC, the Conway diagram fixed by the preceding item, and the
+positive-push-off convention for Seifert matrices.
+
+[F2] [[alg-seifert-surface-from-diagram]] and [[thm-seifert-surface-from-diagram-procedure-properties]] supply the finite disk-and-band data. [[lem-seifert-bands-embedded-orientable-boundary-correct]] proves that these data realize a connected embedded oriented surface with the specified knot boundary.
+
+[F4] The Seifert pairing is bilinear on integral homology classes, so a basis change by an integral unimodular matrix $P$ replaces $B$ by $P^TBP$. [[lem-seifert-pairing-well-defined]]
+
+[F5] Linking is the signed intersection number, equivalently the signed mixed-crossing count with the positive-meridian orientation. [[thm-linking-number-equals-signed-intersection]]
+
+CONSUMER lem-embedded-projective-planes-meet-the-one-skeleton-of-a-finite-three-triangulation
+Supplier edges: lem-parametrized-pl-balls-absorb-standard-boundary-windows
+Literal claim:
+Let $T$ be a finite simplicial triangulation of a compact PL three-manifold $M$. Every PL embedded projective plane in $\operatorname{Int}M$ meets $T^{(1)}$. The manifold may be nonorientable and may contain projective planes. No irreducibility or choice hypothesis is imposed.
+
+More precisely, every compact subset of $\operatorname{Int}M\setminus T^{(1)}$ lies in the interior of an explicitly parametrized finite thickening of the dual graph, built from convex three-ball vertex pieces and standard disk-prism edge pieces. An embedded projective plane in such a thickening would lift into a parametrized finite tree of these balls, contradicting its nonorientability.
+Relevant declared Facts:
+**Given:** The finite triangulation and a hypothetical embedded projective plane $S$ missing its one-skeleton and lying in $\operatorname{Int}M$.
+
+[F2] Two parametrized finite PL three-balls glued along marked parametrized boundary disks by a given PL map form a parametrized PL three-ball. Consequently a finite tree of such pieces is a parametrized ball, by successively deleting a leaf and applying that assertion to its one attaching window. Prisms with convex disk bases are themselves parametrized balls. ([[lem-parametrized-pl-balls-absorb-standard-boundary-windows]])
+
+CONSUMER lem-equal-normal-vectors-have-ambient-cell-homeomorphisms-and-disk-copy-products
+Supplier edges: lem-parametrized-pl-balls-absorb-standard-boundary-windows, thm-finite-pl-schoenflies-in-dimension-three
+Literal claim:
+Two embedded normal surfaces with the same normal vector in a finite simplicial triangulation are carried to one another by a finite PL homeomorphism of the ambient manifold preserving every simplex setwise.
+
+Consequently, if $D_0,D_1$ are disjoint connected normal disks with the same vector, they cobound a parametrized PL product $D^2\times[0,1]$. Its two end disks are $D_0,D_1$, its vertical boundary is in $\partial M$, and it contains no original triangulation vertex. Its interval fibers remain in their original ambient simplex. The assertion concerns the supplied PL triangulation, not an arbitrary topological marking or a smooth extension problem.
+Relevant declared Facts:
+**Given:** The finite triangulation and the two equal-vector normal surfaces, or the two disks in the consequence.
+
+[F2] Finite simple polygonal curves in a polygonal disk or standard polyhedral sphere separate it into the stated disk regions, and prescribed PL boundary maps extend over parametrized polygonal disks. ([[thm-polygonal-jordan-curve]], [[thm-simple-polygon-admits-a-triangulation]], [[lem-parametrized-pl-balls-absorb-standard-boundary-windows]])
+
+[F3] A finite PL embedding of a parametrized sphere in standard $\mathbb R^3$ bounds a parametrized PL ball. Prescribed maps of parametrized ball boundaries extend over the balls by coning compatible boundary triangulations in their convex models. ([[thm-finite-pl-schoenflies-in-dimension-three]], [[lem-parametrized-pl-balls-absorb-standard-boundary-windows]])
+
+CONSUMER lem-figure-eight-character-and-longitude-traces
+Supplier edges: lem-explicit-unknot-and-figure-eight-oriented-wirtinger-codes
+Literal claim:
+Assume full AC and let $K=J(2,-2)$ be the figure-eight knot. Use the two-bridge group presentation $\pi_1(E_K)=\langle u,v\mid v w=w u\rangle$, where $w=uv^{-1}u^{-1}v$, and take $\mu=u$. On the one-dimensional irreducible character component, define $x(\chi)=\operatorname{tr}(\rho(u))=\operatorname{tr}(\rho(v))$ and $y(\chi)=\operatorname{tr}(\rho(uv))$. Then
+$$2x^2+y^2-x^2y-y-1=0,$$
+and the preferred-longitude trace is $\operatorname{tr}(\rho(\lambda))=x^4-5x^2+2$. The displayed curve equation is irreducible over $\mathbb C$, and $x$ is nonconstant on it.
+Relevant declared Facts:
+**Given:** Full AC, the standard figure-eight knot, its positive meridian and preferred longitude, and the two-bridge group presentation in the Statement.
+
+[F1] The four-crossing figure-eight code gives a one-component Wirtinger presentation ([[lem-explicit-unknot-and-figure-eight-oriented-wirtinger-codes]]; [[thm-knot-wirtinger-presentation-correctness]]).
+
+CONSUMER lem-figure-eight-two-meridian-presentation-and-preferred-longitude-word
+Supplier edges: lem-explicit-unknot-and-figure-eight-oriented-wirtinger-codes, lem-link-peripheral-longitude-word-from-diagram
+Literal claim:
+Assume full AC and use the standard oriented four-crossing figure-eight code of the explicit oriented Wirtinger-code lemma, with its positive based under-arc meridians $x_1,x_2,x_3,x_4$ and compatible diagram access paths. Put $u=x_1$, $v=x_2$, and $w=uv^{-1}u^{-1}v$. Then $$\pi_1(E_{4_1})=\langle u,v\mid vw=wu\rangle,$$ with $u$ a positive meridian. In this presentation $$X_3=uvu^{-1},\qquad X_4=v^{-1}uvu^{-1}v=w^{-1}v$$ are the old $x_3,x_4$. The preferred longitude based compatibly with $u$ is represented by $$\lambda=X_4u^{-1}vX_3^{-1}.$$ In particular its trace in any representation is the trace of this explicit word. The formula does not identify a zero-homology centralizing word as a longitude without the diagram-parallel calculation.
+Relevant declared Facts:
+**Given:** The stated oriented figure-eight code, compatible positive based diagram meridians, and the selected initial strand $x_1$.
+
+[F1] [[lem-explicit-unknot-and-figure-eight-oriented-wirtinger-codes]] gives $R_1:x_1x_2=x_3x_1$, $R_2:x_1x_4=x_4x_2$, $R_3:x_3x_2=x_2x_4$, and $R_4:x_3x_4=x_1x_3$. Its full proof shows $R_4$ follows from the first three. Its actual oriented under-arc cycle is $x_1\to x_2$ at $R_2$, $x_2\to x_3$ at $R_1$, $x_3\to x_4$ at $R_3$, $x_4\to x_1$ at $R_4$; the local coordinate charts specify the source and target sides and positive crossing signs.
+
+[F2] [[lem-link-peripheral-longitude-word-from-diagram]] proves that a positive component traversal contributes the over-meridian with exponent $+1$ for source-to-target underpasses and exponent $-1$ for target-to-source. Their ordered product is the based blackboard parallel; multiplying by the initial meridian to minus the self-writhe gives its preferred zero-self-linking longitude.
+
+CONSUMER lem-heegaard-floer-correction-terms-lens-space-lp1
+Supplier edges: def-lens-space-surgery-orientation-convention
+Literal claim:
+Use the Ozsvath–Szabo orientation convention $L(p,1)$ given by positive $p$-surgery on the unknot and label its Spin$^c$ structures by $i\in\mathbb Z/p\mathbb Z$, represented by $0\le i<p$. For every integer $p\ge1$,
+$$d(L(p,1),i)=\frac{(2i-p)^2-p}{4p}.$$
+For the opposite orientation the correction terms are negated, with the conjugate Spin$^c$ label understood.
+Relevant declared Facts:
+[F3] [[lem-heegaard-floer-correction-term-heegaard-invariance]] identifies the correction term as the bottom degree of the infinity image. The convention in the statement is [[def-lens-space-surgery-orientation-convention]].
+
+CONSUMER lem-link-diagram-upper-region-free-meridians
+Supplier edges: def-based-string-link-and-labeled-link-peripheral-system, lem-link-wirtinger-crossing-ball-cover
+Literal claim:
+Assume countable choice.
+
+Let $D$ be a finite regular oriented diagram of a nonempty labeled link with
+$n\geq1$ crossings. Fix a smooth height realization
+$L_D=\{(\gamma(s),\eta(s))\}\subset\mathbb R^2\times[-1,0]$ such that
+$\eta(s)=-1$ exactly at the $n$ underpassing points and $\eta(s)>-1$
+elsewhere, and assume each component has at least one underpassing point. Put
+$$M=(\mathbb R^2\times(-1,\infty))\setminus L_D.$$
+Cut every component parameter circle at its underpassing points; the resulting
+$n$ open intervals are the strands. For each strand interval $I_j$, its
+vertical sheet is
+$$D_j=\{(\gamma(s),z):s\in I_j,\ -1<z<\eta(s)\}\subset M.$$
+Set $Z=M\setminus\bigcup_{j=1}^nD_j$. Choose a common basepoint in $Z$, and
+for each strand choose a positive meridian circle meeting only its own sheet
+once, with its access path in $Z$. Then $\pi_1(M)$ is free on these based
+positive meridians $x_1,\ldots,x_n$. The inclusion $M\hookrightarrow A_L$
+also induces an isomorphism on fundamental groups.
+Relevant declared Facts:
+**Given:** The diagram, height realization, product-tube data, and based positive meridians specified in the statement.
+
+[F1] The inclusion of the upper half-space with its point at infinity into $A_L$ is a homotopy equivalence by the variable-width level-sphere collar. [[lem-link-wirtinger-crossing-ball-cover]]
+
+[F5] A positive meridian is the oriented boundary of a normal disk, with orientation fixed by the link tangent followed by disk orientation. [[def-based-string-link-and-labeled-link-peripheral-system]]
+
+CONSUMER lem-link-nilpotent-peripheral-presentation-from-diagram
+Supplier edges: def-based-string-link-and-labeled-link-peripheral-system, lem-link-peripheral-longitude-word-from-diagram, lem-link-wirtinger-local-meridian-conjugacy
+Literal claim:
+Assume AC. Let a nonempty labeled oriented closed link have a based regular diagram with an underpass on every component. Choose an initial arc on each component, its positive meridian $x_i$, and the common upper basing. Put $F=\langle x_1,\ldots,x_r\rangle$ and $G=\pi_1(E_L)$. For every $q\ge2$ there are explicit words $l_{i,q}\in F$ representing the preferred longitudes in $G/\Gamma_qG$ such that the meridian map identifies
+$$G/\Gamma_qG\cong F/\langle\!\langle\Gamma_qF,[x_i,l_{i,q}]\ (1\le i\le r)\rangle\!\rangle.$$
+The words can be chosen coherently through each finite degree. They are obtained through the $(q-1)$st approximation of the crossing-conjugation recursion, initialized by component meridians and using the preceding approximation for every over-arc. In particular this describes the kernel, rather than merely the surjectivity, of the component-meridian map. Quotienting further by commutators of arbitrary conjugates of each component meridian adds exactly those commutators to this presentation.
+Relevant declared Facts:
+**Given:** Full AC, the finite based diagram, and $q\ge2$.
+
+[F1] The strand generators and crossing relations give the exterior group, with relation $a_t=o^{-1}a_so$ in source-to-target order and its solved inverse in the other direction. [[thm-link-wirtinger-presentation-correctness]], [[lem-link-wirtinger-local-meridian-conjugacy]]
+
+[F2] The product of signed over-meridians in component traversal order is its blackboard parallel; multiplying by the initial meridian to minus the self-writhe gives its preferred longitude. [[lem-link-peripheral-longitude-word-from-diagram]]
+
+CONSUMER lem-link-nilpotent-quotient-generated-by-component-meridians
+Supplier edges: def-based-string-link-and-labeled-link-peripheral-system, lem-string-link-exterior-homology-and-meridian-maps
+Literal claim:
+Let $L=K_1\cup\cdots\cup K_r$ be a nonempty labeled oriented link in $S^3$,
+let $G=\pi_1(E_L)$, and choose one based positive meridian $m_i\in G$ for each
+component. For every integer $q\geq1$, the homomorphism from the free group
+$F_r=\langle x_1,\ldots,x_r\rangle$ defined by $x_i\mapsto m_i$ induces a
+surjection
+$$F_r\longrightarrow G/\Gamma_qG.$$
+Relevant declared Facts:
+**Given:** The link, its chosen product tubes, and based component meridians.
+
+[F1] The positive component meridians form a basis of $H_1(E_L;\mathbb Z)$. [[lem-string-link-exterior-homology-and-meridian-maps]]
+
+CONSUMER lem-meridian-disk-criterion-for-unknot-exterior
+Supplier edges: lem-knot-genus-zero-iff-unknot
+Literal claim:
+Assume countable choice. Let $K:S^1\to S^3$ be a smooth oriented knot with a supplied product tubular neighborhood, and let $E_K$ be its compact exterior with peripheral torus $T_K$, fibre meridian $\mu$, and the unique degree-one generator $[\lambda]$ of the kernel of $H_1(T_K;\mathbb Z)\to H_1(E_K;\mathbb Z)$ supplied by the product-tube Mayer–Vietoris calculation. Then $K$ is ambient isotopic in the smooth category to the standard unknot if and only if $E_K$ contains a properly embedded piecewise-linear disk $D$ whose boundary is not null-homotopic in $T_K$. Every such disk has $[\partial D]=[\lambda]$ or $-[\lambda]$ and has odd mod-two intersection with the original marked meridian $\mu$.
+Relevant declared Facts:
+**Given:** Countable choice, the smooth oriented knot, its supplied product tube, and the exterior and marked peripheral data in the Statement.
+
+[F4] A smooth knot bounds a smooth embedded disk exactly when it has genus zero, and genus zero is equivalent under countable choice to smooth ambient isotopy to the oriented unknot. ([[lem-knot-genus-zero-iff-unknot]])
+
+CONSUMER lem-milnor-basing-indeterminacy-and-self-crossing-scope
+Supplier edges: def-based-string-link-and-labeled-link-peripheral-system, lem-link-wirtinger-local-meridian-conjugacy
+Literal claim:
+Assume AC. Let $L$ be a nonempty labeled oriented link in $S^3$, let
+$I=(i_1,\ldots,i_k,j)$ have length at least two, and let $b,b'$ be any two
+based meridian-longitude word systems used in the preceding definition. Then
+the based residue candidates $\bar\mu_L^b(I)$ and $\bar\mu_L^{b'}(I)$ agree
+under the canonical identification of their residue groups. If $L$ and $L'$ are
+related by a finite sequence of self-crossing changes, the same residue is
+preserved whenever the entries of $I$ are pairwise distinct. No invariance for
+repeated-index sequences under self-crossing changes is asserted.
+Relevant declared Facts:
+**Given:** Full AC, the closed-link peripheral system, and finite based word-lift data through the length of $I$.
+
+[F3] The side-based meridian relation at a crossing is fixed by the local crossing chart. [[lem-link-wirtinger-local-meridian-conjugacy]]
+
+CONSUMER lem-no-closed-nonorientable-pl-surface-in-s-three
+Supplier edges: def-pl-embedding-and-subpolyhedron, lem-pl-embedded-polyhedron-admits-compatible-subcomplex-triangulation
+Literal claim:
+No closed nonorientable piecewise-linear surface embeds in the standard oriented piecewise-linear three-sphere $S^3$.
+Relevant declared Facts:
+**Given:** A closed PL surface $F$ embedded in the standard oriented PL $3$-sphere.
+
+[F6] [[lem-pl-embedded-polyhedron-admits-compatible-subcomplex-triangulation]]: a finite subdivision of the ambient triangulation contains $F$ as a subcomplex.
+
+[F9] [[def-oriented-link-in-s-three-and-ambient-isotopy]] and [[def-pl-embedding-and-subpolyhedron]]: the ambient is the standard oriented PL $3$-sphere. The finite triangulation in [F6] is a subdivision of its standard combinatorial triangulation, so every triangular face has link $S^0$ and exactly two tetrahedral cofaces.
+
+CONSUMER lem-os-disk-and-polygon-analytic-foundations
+Supplier edges: def-admissible-pointed-heegaard-floer-data
+Literal claim:
+Assume ACω. Let a finite pointed Heegaard multidiagram have actual complete handlebody disk systems for closed oriented three-manifolds, with a basepoint in every one-system cut component. Ordered polygons use distinct labeled, pairwise transverse attaching systems; when an operation repeats a geometric system, use its separately labeled small transverse auxiliary copies. For the full hat operations impose global weak multidiagram admissibility: every nonzero full-curve multiperiodic domain vanishing at all basepoints has both signs. For operations in a specified total Spin-c family, ordinary weak admissibility is also allowed: every nonzero formal periodic domain difference in the capped Spin-c kernel, normalized at every mark and with Chern evaluation zero, has both signs. The same formal sector condition is imposed on each relevant boundary pair, including intended sectors with no generators. In this ordinary weak branch all basepoint multiplicities are fixed to zero, the required arities and compact auxiliary parameter families are finite, and counts use the corresponding fixed actual index bands. Strict all-mark normalized strong admissibility is a further allowed branch; it is not substituted for ordinary weakness. For a single diagram the full-module admissibility convention tests all intended Spin-c sectors, including empty sectors, and implies the required global weak domain condition.
+
+In positive symmetric rank choose, among the auxiliary data, an arbitrarily small pointed Hamiltonian representative with no triple product-torus intersection, following its pair generators and transporting its domains, actual Spin-c labels and admissibility. Fix that representative. Compatible generic source-dependent perturbations, coherent over the required conformal faces and auxiliary parameter families, then make the disk and polygon spaces entering the hat differential, continuation, handleslide, stabilization and surgery operations regular with their actual expected dimensions. The common protected tensor and arbitrary constant product-angle end charts can be prescribed, and coherent perturbations can be arbitrarily small about a supplied compatible reference model. Auxiliary polygon and anchored-continuation parameter families here keep the autonomous end paths fixed and regular on the required energy budget; regular compatible parameter-boundary data may be retained. No slice-regularity assertion is made for arbitrary parameter-varying autonomous end paths. This does not assert regularity by almost-complex variations alone on an arbitrary fixed triple, or invariance under the preliminary curve choice.
+
+Dimensions include every allowed conformal and auxiliary family parameter. Quotient only actual source automorphisms: longitudinal translation acts freely on autonomous nonconstant two-ended strips; an anchored source-dependent continuation strip and a three-marked triangle have no translation quotient. Every total zero-dimensional space used in a mod-two count is finite, across all its literal realized classes and with its specified labels. The one-dimensional spaces entering the chain-map, composition and homotopy identities compactify to actual compact one-manifolds. At fixed data their boundaries are precisely the matching rigid polygon–polygon conformal splittings and strip–polygon breakings. In an auxiliary family the broken configurations are the rigid joint fiber configurations at one common parameter, together with the prescribed parameter-boundary strata; they need not be products of individually rigid parameterized polygon spaces. Every such broken end has an exhaustive gluing collar. For the zero-basepoint operations no nonconstant sphere or one-torus boundary disk survives; thus the specified boundary-degeneration terms vanish, and there is no further escape or uncontrolled periodic-domain end. Boundary parity gives the differential square-zero identity and the polygon chain-map, composition and homotopy identities.
+
+At symmetric rank zero retain the original empty systems and use the point target directly: the differential is zero, the matching constant triangle is counted once, higher rigid operations vanish, and the conformal and parameter boundary identities are the actual source-space identities. No triple-torus exclusion or free translation quotient is imposed on that point map.
+
+This is the analytic count theorem. It does not construct a subordinate surgery diagram, prove that a named top generator is a cycle, identify the homology of a surgery total complex with a filling, or prove Heegaard-move invariance. Those remain duties of the respective operation constructions.
+Relevant declared Facts:
+**Given:** The actual finite pointed multidiagram, complete cut systems, the stated operation-specific domain admissibility, any fixed total Spin-c label, finite required arities and auxiliary parameter spaces, and the zero-basepoint hat count convention.
+
+CONSUMER lem-piccirillo-knot-lee-computations
+Supplier edges: def-lee-deformed-khovanov-complex
+Literal claim:
+Assume countable choice. Over $\mathbb Q$, the Rasmussen invariants of the
+oriented Conway knot $C$ and its Piccirillo partner $K_P$ are
+$$s(C)=0,\qquad s(K_P)=2.$$
+The calculation is the finite Lee-filtered Khovanov calculation on the two
+specified diagrams, including the rational Khovanov ranks and the surviving
+Lee filtration levels needed to determine these values.
+Relevant declared Facts:
+**Given:** Countable choice and the two oriented diagrams fixed in the
+Definition.
+
+[F6] The rational Lee operations are $m(1,1)=1$, $m(1,X)=m(X,1)=X$, $m(X,X)=1$, $\Delta(1)=1\otimes X+X\otimes1$, $\Delta(X)=X\otimes X+1\otimes1$, with circle degrees $\deg1=1$, $\deg X=-1$ and the stated normalized state shifts. [[def-lee-deformed-khovanov-complex]]
+
+CONSUMER lem-presentation-complex-computes-twisted-first-homology-and-peripheral-cycles
+Supplier edges: lem-maximal-abelian-cover-link-exterior-retraction
+Literal claim:
+Assume full AC. Let $(Y,y)$ be a path-connected, locally path-connected, semilocally simply connected based space, and fix an isomorphism
+$$\langle x_1,\ldots,x_n\mid r_1,\ldots,r_m\rangle\ \cong\ \Gamma=\pi_1(Y,y)$$
+from a finite presentation. Let $P$ be its presentation $2$-complex, with its one vertex $p$. Choose based loops in $Y$ representing the specified generators. They extend, after choosing fillings of the finitely many relators, to a based map $f:P\to Y$ inducing the specified isomorphism. No CW structure on $Y$ is required. For every left $\mathbb Z[\Gamma]$-module $A$, interpreted as the base fibre of a local system with $g a=T_{\bar g}a$ in the first-loop-first convention, this map induces an isomorphism
+$$H_1(P;f^*\mathcal A)\ \xrightarrow{\ \cong\ }\ H_1(Y;\mathcal A).$$
+This assertion does not require $Y$ or its universal cover to be aspherical and does not assert that $P$ is a spine or a homotopy-equivalent model of $Y$.
+
+There is the following explicit finite-chain form. Give universal-cover chains the right action $c\cdot g=T_{g^{-1}}c$, and choose the lifted presentation vertex $e_0$ and generator edges $e_j$ starting there. For a word $w$ in the generators and their inverses, let each positive letter $x_j$ after prefix $q$ contribute $e_j\cdot q^{-1}$, and each negative letter $x_j^{-1}$ after prefix $q$ contribute $-e_j\cdot(qx_j^{-1})^{-1}$. Denote the sum by $c_w$. Then
+$$\partial c_w=e_0\cdot w^{-1}-e_0.$$
+If $u\in A$ is fixed by $w$, the tensor $c_w\otimes u$ is a cycle. Under the displayed isomorphism its class is the class of the actual based loop in $Y$ represented by $w$, with initial coefficient $u$; it is independent of the word representative and the relator fillings of $f$.
+
+In particular let $j:(T^2,*)\to(Y,y)$ be a based torus map with ordered based loops $(\lambda,\mu)$, choose words $w_\lambda,w_\mu$ for their images, and let $u$ be fixed by both. The two finite cycles $c_{w_\lambda}\otimes u,c_{w_\mu}\otimes u$ compute the images of the actual torus classes in precisely this order. If $A$ is a finite-dimensional vector space over a field $F$, the presentation complex gives finite matrices $B:C_2\to C_1$, $C:C_1\to C_0$ and these two cycle columns $U$, with $CB=CU=0$. The actual kernel of the two peripheral classes mapping into $H_1(Y;\mathcal A)$ is exactly
+$$\ker\{F^2\xrightarrow{U}\ker C/\operatorname{im}B\}.$$
+Thus a one-dimensional image of those two actual peripheral classes is equivalent to $\operatorname{rank}_F(B\mid U)=\operatorname{rank}_FB+1$. All matrix entries are finite sums of matrices for generator words and their inverses. For the left coefficient action $\operatorname{Ad}\rho$ of an $SL_2$ representation they are polynomial in the representation entries and in the chosen vector $u$. For a torus restriction with $\operatorname{tr}(\rho(\mu))^2\ne4$, one may take $u=\rho(\mu)-\tfrac12\operatorname{tr}(\rho(\mu))I$ in characteristic different from $2$; the two torus classes are then a basis. This applies, in particular, to an actual compact smooth knot exterior and its based peripheral torus map. No existence of a generic representation family or generic exterior rank is inferred.
+Relevant declared Facts:
+**Given:** Full AC, the based space and specified finite presentation, the coefficient module in the stated convention, and the torus/field/adjoint data when those clauses are invoked.
+
+[F7] The actual compact smooth knot exterior is path-connected: the open complement is path-connected by the local Alexander-duality calculation in [[lem-the-complement-of-an-oriented-link-is-a-connected-smooth-three-manifold]], Proof1.3–2.1, and retracts onto the chosen compact exterior by the explicit radial formula in [[lem-maximal-abelian-cover-link-exterior-retraction]], Proof1.1. We use only these proved connectedness/retraction portions; the former carrier's separate quoted finite-triangulation input is not used. Boundary tube charts make the compact exterior a smooth manifold with boundary.
+
+CONSUMER lem-torus-knot-enhanced-a-polynomial
+Supplier edges: lem-explicit-unknot-and-figure-eight-oriented-wirtinger-codes
+Literal claim:
+Assume full AC and let $a>b\ge2$ be coprime positive integers. With the meridian-longitude and exponent conventions used for the enhanced A-polynomial, the enhanced A-polynomial of $T_{a,b}$ is, up to multiplication by a Laurent unit,
+$$\widetilde A_{T_{a,b}}(M,L)=\begin{cases}1+M^{2a}L,&b=2,\\-1+M^{2ab}L^2,&b>2.\end{cases}$$
+If $K$ is the unknot, then $\widetilde A_K=1$. The nontrivial torus-knot Newton polygon is therefore a line segment whose slope in the $(a,b)\mapsto M^bL^a$ convention is $ab$.
+Relevant declared Facts:
+**Given:** Full AC, the oriented positive coprime torus knot and original meridian-longitude and Newton-coordinate conventions.
+
+[F3] The crossing-free unknot has group $\mathbb Z$, by the actual one-generator, no-relator calculation in [[lem-explicit-unknot-and-figure-eight-oriented-wirtinger-codes]].
+
+CONSUMER thm-baldwin-sivek-infinitely-many-abelian-surgeries-characterize-torus-knots
+Supplier edges: lem-complete-curvature-minus-one-manifolds-are-kleinian-quotients, thm-knot-exterior-homology-and-longitude, thm-seifert-determinant-is-the-knot-alexander-polynomial, thm-seifert-matrix-presents-knot-alexander-module, thm-thurston-hyperbolic-dehn-filling, thm-torus-knot-alexander-and-genus-formulas
+Literal claim:
+Assume full AC. A smooth knot $K\subset S^3$ admits infinitely many distinct rational $SL_2(\mathbb C)$-abelian Dehn surgeries if and only if $K$ is a torus knot, with the unknot included as a torus knot with one parameter of absolute value one.
+Relevant declared Facts:
+**Given:** Full AC, the actual marked knots and primitive rational filling convention. The completed local operations and the explicitly imported full converse are distinguished below; the original full Statement is not narrowed.
+
+[F1] The signed torus group has central $h=x^a=y^b$ and preferred longitude $\lambda=h\mu^{-ab}$. A knot meridian normally generates its group. Exterior homology is generated by that meridian, with preferred longitude zero. [[thm-torus-knot-group-presentation]] [[lem-satellite-peripheral-representations-transfer-thinness]] [[thm-knot-exterior-homology-and-longitude]]
+
+[F3] A supplied complete finite-volume hyperbolic knot metric has complete closed smooth hyperbolic fillings at all but finitely many primitive slopes. The complete metric has a universal $\mathbb H^3$ cover and faithful projective holonomy. For a CLOSED oriented smooth such manifold the actual complete-Heegaard Spin frame cover supplies a faithful SL2 lift. Finite-sheet covers of compact spaces are compact. [[thm-thurston-hyperbolic-dehn-filling]] [[lem-complete-curvature-minus-one-manifolds-are-kleinian-quotients]] [[lem-closed-oriented-hyperbolic-holonomy-has-a-faithful-sl2-lift]] [[thm-compactness-is-invariant-under-finite-sheeted-coverings]]
+
+[F5] Positive-meridian Alexander modules have square Seifert presentations and determinant orders. Mayer–Vietoris applies to the actual collared satellite cover. Signed torus polynomials have the explicit symmetric absolute-parameter formula. [[thm-seifert-matrix-presents-knot-alexander-module]] [[thm-seifert-determinant-is-the-knot-alexander-polynomial]] [[thm-mayer-vietoris-sequence-in-singular-homology]] [[thm-torus-knot-alexander-and-genus-formulas]]
+
+CONSUMER thm-ccgls-newton-edge-slope-is-boundary-slope
+Supplier edges: lem-knot-normal-circle-bundle-trivialization
+Literal claim:
+Assume full AC and let $K\subset S^3$ be a nontrivial smooth knot. Form the Newton polygon of the ordinary A-polynomial using the exponent convention that the lattice point $(a,b)$ represents the monomial $M^bL^a$, so edge slopes are measured in the preferred meridian-longitude convention. Every finite rational slope or infinite slope of an edge of this Newton polygon is a boundary slope of an incompressible, boundary-incompressible, orientable surface in the knot exterior. This statement does not assert that the realizing surface is non-fibered or that the slope is strict.
+Relevant declared Facts:
+**Given:** Full AC, the nontrivial smooth knot with its chosen compact exterior and peripheral marking, and the stated Newton edge.
+
+[F1] The exterior is compact orientable and irreducible, with no proper compressing disk. Full AC supplies the countable choice needed by its smooth Schoenflies branch. Its tube is a smooth $S^1\times D^2$ product by the normal-circle frame supplier, so the boundary is the marked smooth torus. It is connected: join two distinct exterior points by an embedded spherical arc, perturb it relative to its endpoints to be transverse to the knot, and use $1+1<3$ to conclude it misses the knot. Radial projection of nonzero tube fibers to their boundary fixes the exterior and retracts that arc to an exterior path; equal endpoints need the constant path. [[lem-knot-exterior-is-irreducible]] [[lem-nontrivial-knot-exterior-boundary-incompressible]] [[lem-knot-normal-circle-bundle-trivialization]] [[lem-choice-free-relative-transversality-for-a-compact-smooth-embedding]]
+
+CONSUMER thm-conway-knot-topologically-slice-not-smoothly-slice
+Supplier edges: def-locally-flat-proper-surface-and-concordance-collars, thm-rasmussen-s-bounds-smooth-four-ball-genus
+Literal claim:
+Assume the Axiom of Choice. The Conway knot $C$ bounds a locally flat proper
+disk in the standard $B^4$, but it bounds no smooth proper disk there.
+Relevant declared Facts:
+**Given:** Full AC and the Conway knot $C$ fixed above.
+
+[F3] [[def-locally-flat-proper-surface-and-concordance-collars]] fixes the proper local-flatness and boundary-collar conclusion.
+
+[F6] [[thm-rasmussen-s-bounds-smooth-four-ball-genus]]: under countable choice, $|s(K)|\le2g_4^{\mathrm{sm}}(K)$, with its collared properly embedded cobordism hypotheses satisfied by an actual smooth slice disk.
+
+CONSUMER thm-dualizable-handle-link-has-two-knot-trace-descriptions
+Supplier edges: lem-linking-number-even-sum-and-reidemeister-invariance, thm-oriented-linking-number-scan-terminates-and-is-correct
+Literal claim:
+Assume countable choice. Let $(B,G,R)$ be a dualizable framed handle link and
+let $X(B,G,R)$ be its associated handlebody. There are finite sequences of
+handle slides and cancellations, first sliding $G$ over $B$ and cancelling
+the $1$-handle $R$ with the $2$-handle $B$, and then using the reversed roles,
+that leave single $0$-framed attaching knots $K_G$ and $K_B$, respectively.
+There are diffeomorphisms
+$$
+X(B,G,R)\cong X_0(K_G)\cong X_0(K_B).
+$$
+Relevant declared Facts:
+**Given:** Countable choice and a dualizable framed handle link $(B,G,R)$.
+
+[F4] [[lem-linking-number-even-sum-and-reidemeister-invariance]]: the
+half-sum of mixed crossing signs is invariant under regular diagram changes
+and is symmetric in the two components.
+
+[F6] [[thm-oriented-linking-number-scan-terminates-and-is-correct]]: the
+half-sum is the meridian-coordinate linking number; in particular, a
+preferred-longitude pushoff has linking number zero.
+
+CONSUMER thm-enhanced-a-polynomial-newton-edge-is-strict-boundary-slope
+Supplier edges: lem-knot-normal-circle-bundle-trivialization
+Literal claim:
+Assume full AC and let $K\subset S^3$ be a nontrivial knot. Every finite rational or infinite slope of an edge of the Newton polygon of the enhanced A-polynomial is a strict boundary slope of $K$: it is realized by an incompressible, boundary-incompressible, orientable surface in the exterior which is not a fiber of any exterior fibration over $S^1$.
+Relevant declared Facts:
+**Given:** Full AC, the nontrivial smooth knot with its chosen compact exterior and peripheral marking, and the stated Newton edge.
+
+[F1] The exterior is compact orientable and irreducible, with no proper compressing disk. Full AC supplies the countable choice needed by its smooth Schoenflies branch. Its tube is a smooth $S^1\times D^2$ product by the normal-circle frame supplier, so the boundary is the marked smooth torus. It is connected: join two distinct exterior points by an embedded spherical arc, perturb it relative to its endpoints to be transverse to the knot, and use $1+1<3$ to conclude it misses the knot. Radial projection of nonzero tube fibers to their boundary fixes the exterior and retracts that arc to an exterior path; equal endpoints need the constant path. [[lem-knot-exterior-is-irreducible]] [[lem-nontrivial-knot-exterior-boundary-incompressible]] [[lem-knot-normal-circle-bundle-trivialization]] [[lem-choice-free-relative-transversality-for-a-compact-smooth-embedding]]
+
+CONSUMER thm-enhanced-a-polynomial-newton-polygon-detects-torus-knots
+Supplier edges: thm-thurston-hyperbolic-dehn-filling
+Literal claim:
+Assume full AC and let $K\subset S^3$ be a smooth knot. For a nonzero Laurent polynomial $f(M,L)$, its Newton polygon is the convex hull in $\mathbb R^2$ of exponent pairs $(a,b)$ for which the coefficient of $M^bL^a$ is nonzero. The enhanced A-polynomial is **thin** when this polygon is contained in an affine line; the constant polynomial $1$ has a one-point Newton polygon and is thin. Then the enhanced A-polynomial of $K$ is thin if and only if $K$ is a torus knot, including the unknot.
+Relevant declared Facts:
+**Given:** Full AC and the smooth knot in the Statement. The accepted local torus, hyperbolic and conditional satellite arguments are retained. The remaining established classification is imported explicitly in [E1].
+
+CONSUMER thm-knot-slice-iff-zero-trace-embeds-in-s-four
+Supplier edges: def-knot-meridian-and-preferred-longitude
+Literal claim:
+Let $K\subset S^3$ be a smooth oriented knot with a chosen tubular neighborhood
+and preferred longitude. Call $K$ smoothly slice when it bounds a smooth
+properly embedded disk in the standard $B^4$, with a product collar at its
+boundary. Then $K$ is smoothly slice if and only if the compact smooth
+$4$-manifold $X_0(K)$, formed using that preferred-longitude framing, admits a
+smooth codimension-zero embedding into the standard $S^4$.
+Relevant declared Facts:
+**Given:** A smooth oriented knot $K\subset S^3$ with its fixed tubular
+neighborhood and preferred longitude; the standard decomposition
+$S^4=B_1\cup_{S^3}B_2$ into two $4$-balls; and the zero-trace convention.
+The tube and peripheral curve are fixed data throughout; no choice principle
+is used to select a family of them.
+
+[F2] [[def-knot-meridian-and-preferred-longitude]]: the preferred longitude is
+the degree-one peripheral class whose image in $H_1(E_K;\mathbb Z)$ is zero.
+
+CONSUMER thm-link-wirtinger-presentation-correctness
+Supplier edges: lem-link-wirtinger-crossing-ball-cover, lem-link-wirtinger-local-meridian-conjugacy
+Literal claim:
+Assume countable choice.
+
+Let $D$ be a finite regular oriented diagram of a nonempty labeled link, after
+inserting a small type-I curl on any component that has no underpassing point.
+Let $x_1,\ldots,x_n$ be the positive meridians of the strands between
+successive underpassing points, with the compatible common-upper-collar accesses of the local crossing rule. At a crossing $c$, write $o(c)$ for the
+over-strand and $s(c),t(c)$ for the source and target under-sides defined using
+the positive in-plane normal to the over-strand. Set
+$$r_c=x_{o(c)}^{-1}x_{s(c)}x_{o(c)}x_{t(c)}^{-1}.$$
+Then the assignment of each generator to its based positive meridian induces
+an isomorphism
+$$\langle x_1,\ldots,x_n\mid r_c\ (c\text{ a crossing})\rangle \cong \pi_1(E_L).$$
+Any one crossing relator may be omitted without changing the represented
+group. The theorem makes no claim that all relators are independent.
+
+Arbitrary independently based positive strand meridians remain recorded: if $g_e$ is the access difference for strand $e$, its actual class is $y_e=g_ex_eg_e^{-1}$ in this reference presentation. This gives their exact group elements without claiming that the independently conjugated $y_e$ themselves freely generate the upper region or give the displayed uncorrected presentation. A common access change conjugates every generator and preserves the displayed presentation map.
+Relevant declared Facts:
+**Given:** The link diagram, its labels, crossing conventions, and common based meridian paths.
+
+[F1] The complement has an open cover whose upper piece is generated freely by the strand meridians, whose lower piece is contractible, and whose overlap is a punctured sphere with crossing circles normally generating its fundamental group even after one is omitted. [[lem-link-wirtinger-crossing-ball-cover]], [[lem-link-diagram-upper-region-free-meridians]]
+
+[F3] Under the upper-region meridian basis, the image of a small puncture circle at crossing $c$ is conjugate to $r_c$ or $r_c^{-1}$; these have the same normal closure. [[lem-link-wirtinger-local-meridian-conjugacy]]
+
+CONSUMER thm-milnor-invariants-isotopy-and-link-homotopy-scope
+Supplier edges: def-based-string-link-and-labeled-link-peripheral-system
+Literal claim:
+Assume AC. Every integer Milnor coefficient of a based string link is invariant
+under smooth isotopy through string links fixing the endpoint collars. For
+closed labeled oriented links, the residue candidate $\bar\mu_L(I)$ is invariant
+under ambient isotopy. A link-homotopy is a finite sequence of ambient isotopies
+and local crossing changes in which the two branches at every crossing change
+belong to the same component. Under link-homotopy, $\bar\mu_L(I)$ is invariant
+when the entries of $I$ are pairwise distinct. No invariance for repeated-index
+sequences under link-homotopy is asserted.
+Relevant declared Facts:
+**Given:** Full AC, the based peripheral data, and the definitions of the integer and residue coefficients.
+
+[F3] Ambient isotopy of oriented links carries exteriors, positive meridians, and peripheral tori to the corresponding data. [[def-oriented-link-in-s-three-and-ambient-isotopy]], [[def-based-string-link-and-labeled-link-peripheral-system]]
+
+CONSUMER thm-schubert-bridge-connected-sum
+Supplier edges: lem-knot-exterior-h1-is-generated-by-meridian
+Literal claim:
+Assume the Axiom of Countable Choice. For any two smooth oriented knots $K$ and $J$ in $S^3$, the bridge number of their oriented connected sum satisfies
+$$b(K\#J)=b(K)+b(J)-1.$$
+Relevant declared Facts:
+**Given:** AC$_\omega$ and smooth oriented knots $K,J\subset S^3$.
+
+[F4] A knot exterior has $H_1(E;\mathbb Z)=\mathbb Z[\mu]$. [[lem-knot-exterior-h1-is-generated-by-meridian]]
+
+CONSUMER thm-string-link-nilpotent-peripheral-identifications
+Supplier edges: def-based-string-link-and-labeled-link-peripheral-system, lem-string-link-exterior-homology-and-meridian-maps
+Literal claim:
+Assume AC. Let $\tau$ be an $r$-component based string link with $r\geq1$,
+exterior $X_\tau$, and endpoint punctured disks $P_-,P_+$. Use compatible jointly transported stem accesses for the positive
+endpoint meridians to identify $\pi_1(P_-)$ and $\pi_1(P_+)$ with the free
+group $F_r=\langle x_1,\ldots,x_r\rangle$, and let
+$\iota_\pm:\pi_1(P_\pm)\to\pi_1(X_\tau)$ be the based end homomorphisms,
+including the chosen top connecting path. For every integer $q\geq1$, each
+induced map
+$$\iota_{\pm,q}:F_r/\Gamma_qF_r\longrightarrow \pi_1(X_\tau)/\Gamma_q\pi_1(X_\tau)$$
+is an isomorphism. Their composite
+$\iota_{-,q}^{-1}\iota_{+,q}$ is the based nilpotent comparison of the labeled
+top and bottom peripheral systems.
+
+Arbitrary independently based positive endpoint meridians are retained as well: the map from the free symbol group $F_r$ sending $x_i$ to that chosen meridian need not identify the full fundamental group, but its composites with the end maps still induce the displayed isomorphisms on every finite lower-central quotient. Their inverse/composite is the comparison for those exact choices, and the conjugating access differences are part of the data.
+Relevant declared Facts:
+**Given:** Full AC and the based string-link data in the statement.
+
+[F1] Each endpoint group is free of rank $r$, with the compatible positive meridian basis; independently based meridians are the recorded conjugates and give the same homology basis. The exterior inclusion maps are isomorphisms on $H_1$ and epimorphisms on $H_2$. [[lem-string-link-exterior-homology-and-meridian-maps]]
+
+CONSUMER thm-truncated-milnor-computation-terminates-and-is-correct
+Supplier edges: lem-link-peripheral-longitude-word-from-diagram, lem-link-wirtinger-local-meridian-conjugacy
+Literal claim:
+Assume AC and let the based diagram, peripheral data, and maximum index length
+$N\geq2$ satisfy the input conditions of the preceding algorithm. Put
+$d=N-1$. The algorithm terminates after finitely many diagram, degree, and
+monomial operations. In string-link mode, its output for each $I$ with
+$2\leq|I|\leq N$ equals the integer coefficient of the based longitude in the
+bottom-end quotient $F_r/\Gamma_{|I|}F_r$. In closed-link mode, its output
+equals the based coefficient, gcd indeterminacy, and residue candidate defined
+from the chosen peripheral word lifts. It makes no polynomial-time claim.
+Relevant declared Facts:
+**Given:** Full AC and a valid based diagram input with finite maximum length $N$.
+
+[F2] Crossing meridians satisfy the stated source-to-target conjugation relation, and the link group is presented by these relations. [[lem-link-wirtinger-local-meridian-conjugacy]], [[thm-link-wirtinger-presentation-correctness]]
+
+[F3] For compatible accesses the literal diagram word is the blackboard parallel, with its self-writhe correction giving the closed preferred longitude. For arbitrary accesses the exact formulas are $h_0x_j^kW_jh_1^{-1}$ for a string link and $h_jx_j^{-\operatorname{wr}_j}W_jh_j^{-1}$ for the closed preferred longitude. The access-word inputs record those differences. [[lem-link-peripheral-longitude-word-from-diagram]]
+
+CONSUMER thm-unknotting-number-at-least-half-levine-tristram-signature
+Supplier edges: lem-seifert-matrix-skew-part-is-surface-intersection
+Literal claim:
+Assume full AC. For every smooth oriented knot $K$, the classical signature $\sigma_{-1}(K)$ of the positive-push Seifert form is independent of the chosen connected spanning surface and integral basis, and it satisfies
+$$|\sigma_{-1}(K)|\le 2u(K).$$
+Zero eigenvalues are omitted when computing the signature of a Hermitian matrix.
+Relevant declared Facts:
+**Given:** Full AC and a smooth oriented knot $K$.
+
+[F5] The skew part $V-V^T$ is the unimodular intersection pairing of a knot Seifert surface. [[lem-seifert-matrix-skew-part-is-surface-intersection]]
+
+CONSUMER thm-valid-code-reconstructs-the-declared-link-diagram
+Supplier edges: lem-smooth-jordan-disk-boundary-maps-extend-to-diffeomorphisms
+Literal claim:
+Assume the Axiom of Countable Choice. For every valid connected one-component
+oriented code with a selected outer face, the reconstruction procedure
+produces a regular oriented diagram representing that code. Any two such
+diagrams with the same code differ only by crossing and edge relabeling and
+are planar isotopic. The normalized planar-diagram code of a diagram with $c$
+crossings appears among the candidates enumerated at bound $c$. This statement
+concerns diagrams and their finite codes; it does not identify distinct codes
+that may represent the same knot type. The finite realization and enumeration
+claims are choice-free; $\mathrm{AC}_\omega$ is assumed only for the smooth
+ambient-isotopy uniqueness clause.
+Relevant declared Facts:
+**Given:** The Axiom of Countable Choice and a valid connected one-component oriented code with $c$ crossings and a selected outer face.
+
+[L1] [[lem-smooth-jordan-disk-boundary-maps-extend-to-diffeomorphisms]]: under Countable Choice, a smooth embedded circle bounds a smooth disk, and an orientation-preserving boundary diffeomorphism extends across such disks with any prescribed matching boundary collars and any prescribed positive interior diffeomorphism germ.

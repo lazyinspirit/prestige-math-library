@@ -1,0 +1,157 @@
+{
+  "run": "inverse-problems-knot-theory-all-109-2026-10-19",
+  "phase": "repeat",
+  "round": 1,
+  "unit": "40",
+  "input_sha256": "2977e83be17ed702b0dea9a73b8fc44b265bd72b9fdf4934a89063f5b6e65967",
+  "decisions": [
+    {
+      "id": "lem-ip-gaussian-beam-null-bicharacteristic",
+      "model": "gpt-6.1-sol",
+      "context_sha256": "e9ed2677c8174a142514659971423cf0927dddcda93b4c2268a6f95350c5ea37",
+      "outcome": "confirmed_fatal",
+      "defect_type": "logic",
+      "reason": "The energy-correction sentence claims a small correction from temporal vanishing alone. An approximate beam compactly supported in the interior of Q has zero initial and boundary data, so uniqueness forces its exact corrected solution to be zero and its correction to equal minus the beam, contradicting positive limiting mass and a small energy norm. Repaired by explicitly requiring both endpoint cutoff neighborhoods disjoint from Q, exactly as proof step 8.1 requires.",
+      "uncertain": false,
+      "source_urls": [
+        "https://www.math.purdue.edu/~stefanop/publications/real_principal_type.pdf"
+      ],
+      "familiar": false
+    },
+    {
+      "id": "ex-ip-40-finite-time-invisible-perturbation",
+      "model": "gpt-6.1-sol",
+      "context_sha256": "6968f04e3b81e55e60ca46252d95addf441af9932b6fe5adb02a2bdc7df0c9e0",
+      "outcome": "false_positive",
+      "reason": "The cited energy theorem already supplies the supposedly missing classical regularity in proof step 4.1. For smooth lifted forcing zero near the initial time, its differentiated zero-data energy solutions identify all time derivatives by uniqueness. The local elliptic estimates and embedding give smoothness on the closed cylinder; time reversal gives terminal solvability. The DN definition explicitly cites that step in Well-definedness. The example therefore legitimately applies the classical Green identity twice and boundary-test separation.",
+      "uncertain": false,
+      "source_urls": [],
+      "familiar": true
+    }
+  ],
+  "reviews": [
+    {
+      "id": "lem-ip-gaussian-beam-null-bicharacteristic",
+      "disposition": "repaired",
+      "post_sha256": "fd23bb42f01336ecba9ce4dd0c6640934f8388352cc1482cb5dd3ea822d58bc2",
+      "review_context_sha256": "fdbfc5cdccb1c130ca6b972ea8738b5050c0d17965be2ecaacb59d99eb984d0e",
+      "reason": "Checked the eight-step branchwise construction, Riccati invariants, transport hierarchy, Gaussian normalization and mixed-term estimates. The only repaired clause makes both endpoint cutoff neighborhoods disjoint from Q before the stated energy correction, matching proof step 8.1; the L1_tL2_x residual bound then gives the claimed small energy norm. The sole direct consumer already assumes this exclusion and separate temporal vanishing.",
+      "uncertain": false,
+      "source_urls": [
+        "https://www.math.purdue.edu/~stefanop/publications/real_principal_type.pdf"
+      ],
+      "familiar": false
+    },
+    {
+      "id": "ex-ip-40-finite-time-invisible-perturbation",
+      "disposition": "unaffected",
+      "post_sha256": "8b62f8782601cdac34fc20b03277182dfd1a6c4d9107a6a91aa537ee22ee3114",
+      "review_context_sha256": "b78ee5221df1f9d25edda46931e59d3210a673a7636f77e66825f545ee034015",
+      "reason": "The local energy theorem proof step 4.1 differentiates the lifted zero-data problem in time, uses uniqueness to identify every derivative, and applies the spectrum-and-regularity lemma to bootstrap all spatial orders and smoothness. Thus the DN definition has its classical solutions. Finite propagation kills one interior factor at every time because delta>T/2; subtracting the equal-q2 Green identity cancels the terminal term and smooth tests separate the L2 forward traces. Countable Choice is already in the Example; the carrier is unchanged.",
+      "uncertain": false,
+      "source_urls": [],
+      "familiar": true
+    }
+  ],
+  "created_items": [],
+  "downstream": [
+    "ex-ip-40-ray-limit-error-accounting"
+  ],
+  "ledger_updates": [
+    {
+      "ledger": "canonical-defect-ledger",
+      "action": "record-fixed-finding",
+      "id": "lem-ip-gaussian-beam-null-bicharacteristic",
+      "location": "statement",
+      "defect_type": "logic",
+      "outcome": "confirmed_fatal",
+      "disposition": "fixed",
+      "reason": "The energy-correction sentence claims a small correction from temporal vanishing alone. An approximate beam compactly supported in the interior of Q has zero initial and boundary data, so uniqueness forces its exact corrected solution to be zero and its correction to equal minus the beam, contradicting positive limiting mass and a small energy norm. Repaired by explicitly requiring both endpoint cutoff neighborhoods disjoint from Q, exactly as proof step 8.1 requires.",
+      "uncertain": false,
+      "source_urls": [
+        "https://www.math.purdue.edu/~stefanop/publications/real_principal_type.pdf"
+      ],
+      "familiar": false
+    },
+    {
+      "ledger": "canonical-defect-ledger",
+      "action": "record-false-positive",
+      "id": "ex-ip-40-finite-time-invisible-perturbation",
+      "location": "statement",
+      "outcome": "false_positive",
+      "disposition": "false_positive",
+      "reason": "The cited energy theorem already supplies the supposedly missing classical regularity in proof step 4.1. For smooth lifted forcing zero near the initial time, its differentiated zero-data energy solutions identify all time derivatives by uniqueness. The local elliptic estimates and embedding give smoothness on the closed cylinder; time reversal gives terminal solvability. The DN definition explicitly cites that step in Well-definedness. The example therefore legitimately applies the classical Green identity twice and boundary-test separation.",
+      "uncertain": false,
+      "source_urls": [],
+      "familiar": true
+    }
+  ],
+  "gate_resolutions": [],
+  "repair_notes": {
+    "status": "assigned_repair_complete",
+    "item": "lem-ip-gaussian-beam-null-bicharacteristic",
+    "repair": "Added the endpoint-cutoff-neighborhood exclusion from Q to the energy-correction sentence, matching existing proof step 8.1. No proof, dependency, choice assumption, status or other conclusion changes.",
+    "consumer_reviews": [
+      {
+        "id": "ex-ip-40-ray-limit-error-accounting",
+        "path": "items/ex-ip-40-ray-limit-error-accounting.md",
+        "affected_use": "Its Example wave-application paragraph requires the two endpoint cutoff neighborhoods outside the measurement cylinder and separate temporal vanishing, then invokes the beam residual and zero-boundary energy correction.",
+        "disposition": "unchanged_sound",
+        "reason": "The consumer already explicitly assumes both conditions now stated by the supplier; its generic three-term L2 product estimate is independent of endpoint placement. No consumer statement changes and no further hop is triggered.",
+        "source_excerpt": "The beams must satisfy the following additional supplier conditions: the observed ray has a compact embedded phase-space extension with immersed base projection; its two endpoint cutoff neighborhoods lie outside the measurement cylinder; and the approximate forward beam vanishes near $t=0$, while the approximate terminal beam vanishes near $t=T$.",
+        "invalidated_claim": "None: the existing consumer already supplies the missing endpoint-exclusion hypothesis.",
+        "minimality": "No consumer edit is necessary; the generic product estimate uses only its stated L2 bounds, and the wave specialization already imposes both endpoint exclusion and temporal vanishing."
+      }
+    ],
+    "page_review": "Both owning pages contain frontmatter only, retain page_layout: compact-v1 and unchanged inventories. The beam is listed only on the A page; the sole item consumer is on its B companion. No assigned TikZ/tikzcd or other diagram is present or required by these analytic proofs.",
+    "source_reading": "Consulted the author-hosted Oksanen–Salo–Stefanov–Uhlmann paper: Theorem 3.1, the no-cusp construction discussion, conjugation formula, phase/transport construction passages, and complete Step 6 endpoint-residual argument. This is focused source reading, not a claim to have read its entire proof or the full article. Local eight-step beam argument was checked directly.",
+    "checks": [
+      {
+        "command": "node tools/tsx-run.mjs tools/precheck.mts items/lem-ip-gaussian-beam-null-bicharacteristic.md items/ex-ip-40-finite-time-invisible-perturbation.md --json",
+        "exit_code": 0,
+        "result": "2 checked, 0 failing"
+      },
+      {
+        "command": "node tools/rendercheck.mjs items/lem-ip-gaussian-beam-null-bicharacteristic.md items/ex-ip-40-finite-time-invisible-perturbation.md --json",
+        "exit_code": 0,
+        "result": "2 checked; no errors or warnings"
+      },
+      {
+        "command": "node tools/proof-contract.mjs research/inverse-problems-knot-theory-all-109-2026-10-19-batch-40.proof-contracts.json --strict --items lem-ip-gaussian-beam-null-bicharacteristic,ex-ip-40-finite-time-invisible-perturbation --json",
+        "exit_code": 0,
+        "result": "Both assigned items checked; no errors or warnings"
+      },
+      {
+        "command": "node tools/proof-layout.mjs items/lem-ip-gaussian-beam-null-bicharacteristic.md",
+        "exit_code": 0,
+        "result": "1 item, 8 steps, 0 defects"
+      },
+      {
+        "command": "git diff --check -- items/lem-ip-gaussian-beam-null-bicharacteristic.md research/inverse-problems-knot-theory-all-109-2026-10-19-batch-40.pages.json research/inverse-problems-knot-theory-all-109-2026-10-19-step5-v2/step5-v2-repeat-r1-u40.json",
+        "exit_code": 0,
+        "result": "No whitespace errors"
+      },
+      {
+        "command": "Read-only report consistency checks using itemHashGuard and statementHash",
+        "exit_code": 0,
+        "result": "Exact frozen identity and tuple coverage; current review guards; one-clause-only source repair; frozen before Statement recovered; unchanged example guard; exact consumer snippet verified"
+      }
+    ],
+    "unresolved_obligations": [],
+    "invisibility_review": "Read the complete current energy proof, including the smooth-boundary-data bootstrap in step 4.1, the complete local spectrum/elliptic-regularity proof and embedding, DN Definition and Well-definedness, finite-propagation argument, Green identity and boundary-test separation. No external regularity import or new prerequisite was needed. The Step-4 presentation concern is already resolved by the current initial words Assume Countable Choice.",
+    "repair_complete": true,
+    "interface_comparison": {
+      "id": "lem-ip-gaussian-beam-null-bicharacteristic",
+      "before_guard_sha256": "9b14d9b74840834f547774c5da1d861099a698279f39ba1d7cda45b107a28565",
+      "before_statement_sha256": "4657ff3fa816d8256308f96f62e1a04a58a059ee5f10481cf4934cbd205e128d",
+      "after_statement_sha256": "1103d33473fbe6237d8fb31b1ba634cb043a618e370e5288a0f7f45244815d86",
+      "evidence": "Reversing exactly the added endpoint-exclusion clause recovers both frozen assignment hashes. The original Statement changes; proof and all other item bytes remain identical to the assignment."
+    },
+    "metadata_integration": "Acquired step5-shared-write-lock as step5-v2-repeat-r1-u40, reread the current owning manifest, replaced only the missing condition in the beam statement mirror, parsed and checked the replacement, and released the lock. The proof contract needs no edit because proof steps and citations are unchanged.",
+    "published_ledger": "No published-ledger update is proposed: both assigned carriers and the sole direct item consumer are draft; no published or outside consumer was found for this interface event.",
+    "next_action": "Engine-owned collection, affected frontier-owner routing, certification and current rejudgment remain owed. This report does not independently review its own repair or close the round."
+  },
+  "supporting_evidence": {
+    "research/inverse-problems-knot-theory-all-109-2026-10-19-batch-40.pages.json": "079250fb8b16c74be089a51340695213e67187d49f7e5a1c29d965ec8c98977f"
+  }
+}

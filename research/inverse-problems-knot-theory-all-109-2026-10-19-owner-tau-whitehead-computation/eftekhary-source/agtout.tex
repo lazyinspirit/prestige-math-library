@@ -1,0 +1,199 @@
+%%%
+%%%  This is agtout.tex.  
+%%%
+%%%  This the version of  gtoutput.tex  intended to finish formatting
+%%%  papers published in Algebriac & Geometric Topology and stored in the
+%%%  arXiv.   All versions of  gtoutput.tex  are copyright 
+%%%  GT Publications and are to be used _only_ for formatting
+%%%  the officially published version of ABT or G&T papers.
+%%%
+%%%
+%%%                                             Colin Rourke  27.102000
+%%%
+%%%  To create header file  head.xxx  comment out the first \endinput
+
+%  test for latex or plain tex
+\def\ifplaintex{\expandafter\ifx\csname documentclass\endcsname\relax}
+
+\def\gtp{{\mathsurround=0pt\it $\cal G\mskip-2mu$eometry \&\ 
+$\cal T\!\!$opology $\cal P\!$ublications}}  % GT publications
+
+\def\Addressesr{\bigskip
+{\small \parskip 0pt \leftskip 0pt \rightskip 0pt plus 1fil \def\\{\par}
+\sl\theaddress\par
+\medskip
+\rm Email:\stdspace\tt\theemail\hfill\rm Received:\qua\receiveddate \par}}
+
+
+\def\recd{{\small Received:\qua\receiveddate\ifx\reviseddate\relax
+\else\qquad Revised:\qua\reviseddate\fi\par}} 
+
+%  define the various new ingredients of the title page and the data
+%  output files
+
+\def\lognumber#1{\def\thelognumber{#1}}
+\def\volumenumber#1{\def\thevolumenumber{#1}}
+\def\volumeyear#1{\def\thevolumeyear{#1}}
+\def\papernumber#1{\def\thepapernumber{#1}}
+\def\pagenumbers#1#2{\def\startpage{#1}\def\finishpage{#2}}
+\def\published#1{\def\publishdate{#1}}
+\def\proposed#1{\def\theproposer{#1}}
+\def\seconded#1{\def\theseconders{#1}}
+\def\received#1{\def\receiveddate{#1}}
+\def\revised#1{\def\reviseddate{#1}}
+\def\accepted#1{\def\accepteddate{#1}}
+\def\asciititle#1{\def\theasciititle{#1}}
+\def\covertitle#1{\def\thecovertitle{#1}}
+\def\asciiauthors#1{\def\theasciiauthors{#1}}
+\def\asciiaddress#1{\def\theasciiaddress{#1}}
+\def\asciiemail#1{\def\theasciiemail{#1}}
+\def\asciiurl#1{\def\theasciiurl{#1}}
+\def\coverauthors#1{\def\thecoverauthors{#1}}
+\long\def\asciiabstract#1{\long\def\theasciiabstract{#1}}
+\def\asciikeywords#1{\def\theasciikeywords{#1}}
+\def\isbn#1{\def\theisbn{#1}}
+\def\erratum#1{\def\theerratum{non-empty}\def\erratumnumber{#1}}
+
+%  initialise
+
+\let\\\par\let\thelognumber\relax\let\thevolumenumber\relax
+\let\thepapernumber\relax\let\thevolumeyear\relax\let\startpage\relax
+\let\finishpage\relax\let\publishdate\relax\let\receiveddate\relax
+\let\reviseddate\relax\let\accepteddate\relax\let\theasciititle\relax
+\let\thecovertitle\relax\let\theasciiauthors\relax\let\theasciiaddress\relax
+\let\theasciiabstract\relax\let\theasciikeywords\relax
+\let\theproposer\relax\let\theseconders\relax\let\theisbn\relax
+\let\thecoverauthors\relax\let\theerratum\relax\let\theasciiemail\relax
+\let\theasciiurl\relax
+
+
+
+%%%% fonts for AGT logo:
+
+\ifplaintex
+\font\logobig=cmssbx10 scaled 3836
+\font\logomed=cmssbx10 scaled 2557
+\else
+\font\logobig=cmssbx10 scaled 4200
+\font\logomed=cmssbx10 scaled 2800
+\fi
+
+\long\def\makeagttitle{   %%% start of definition of \makeagttitle
+\count0=\startpage
+\agt\hfill      %   Journal title (top left) 
+%   logo (top right)
+\hbox to 45truept{\vbox to 0pt{\vglue -13truept{\logomed A\kern -.37em{\logobig 
+T}\kern -.38em G}\vss}\hss}
+%
+\break
+{\small Volume \thevolumenumber\ (\thevolumeyear)
+\startpage--\finishpage\nl
+Published: \publishdate}
+
+\vglue .25truein
+
+% title
+{\parskip=0pt\leftskip 0pt plus
+1fil\def\\{\par\smallskip}{\Large\bf\thetitle}\par\medskip} \vglue
+0.05truein
+
+% authors :
+%
+{\parskip=0pt\leftskip 0pt plus 1fil\def\\{\par}{\sc\theauthors}
+\par\medskip}%
+ 
+\vglue 0.03truein 
+
+%  abstract and classification numbers:
+
+{\small\leftskip 25truept\rightskip 25truept{\bf Abstract}\stdspace\theabstract
+
+{\bf AMS Classification}\stdspace\theprimaryclass
+\ifx\thesecondaryclass\relax\else; \thesecondaryclass\fi\par
+{\bf Keywords}\stdspace \thekeywords\par}\vglue 7truept
+
+}   %%%% end of definition of \makeagttitle
+
+\ifplaintex
+%  get print centerpage:
+\hoffset 14truemm
+\voffset 31truemm
+%  fonts for headline and footline
+\font\phead=cmsl9 scaled 950
+\font\pnum=cmbx10 scaled 913
+\font\pfoot=cmsl9 scaled 950
+%  headline and footline
+\headline{\vbox to 0pt{\vskip -4.5mm\line{\small\phead\ifnum
+\count0=\startpage ISSN 1472-2739 (on-line) 1472-2747 (printed)
+\hfill {\pnum\folio}\else\ifodd\count0\def\\{ }% 
+\ifx\theshorttitle\relax\thetitle\else\theshorttitle\fi\hfill{\pnum\folio}
+\else\def\\{ and }{\pnum\folio}\hfill\ifx\theshortauthors\relax\theauthors
+\else\theshortauthors\fi\fi\fi}\vss}}
+\footline{\vbox to 0pt{\vglue 0mm\line{\small\pfoot\ifnum\count0=\startpage
+\copyright\ \gtp\hfill\else
+\agt, Volume \thevolumenumber\ (\thevolumeyear)\hfill\fi}\vss}}
+\else
+%  get print centerpage:
+\headsep 23pt
+\footskip 35pt
+\hoffset -4truemm
+\voffset 12.5truemm
+%  fonts for headline and footline
+\font\lhead=cmsl9 scaled 1050
+\font\lnum=cmbx10 
+\font\lfoot=cmsl9 scaled 1050
+\makeatletter
+%  headline and footline
+\def\@oddhead{{\small\lhead\ifnum\count0=\startpage ISSN 1472-2739 
+(on-line) 1472-2747 (printed)\hfill {\lnum\number\count0}\else\ifodd\count0
+\def\\{ }\ifx\theshorttitle\relax \thetitle \else\theshorttitle\fi\hfill
+{\lnum\number\count0}\else\def\\{ and }{\lnum\number\count0}
+\hfill\ifx\theshortauthors\relax 
+\theauthors\else\theshortauthors\fi\fi\fi}}\def\@evenhead{\@oddhead}
+\def\@oddfoot{\small\lfoot\ifnum\count0=\startpage\copyright\ \gtp\hfill\else
+\agt, Volume \thevolumenumber\ (\thevolumeyear)\hfill\fi}
+\def\@evenfoot{\@oddfoot}
+\makeatother
+\fi
+%  force \makeagttitle
+\let\maketitlepage\makeagttitle
+\let\makeshorttitle\maketitlepage
+\let\maketitle\maketitlepage
+
+\endinput  %%%comment out to create xxx header file
+
+
+\newwrite\gtoutfile
+\long\gdef\makeheadfile{  %%% start of definition of \makeheadfile
+{\def\\{, }\def\s{ }
+\immediate\openout\gtoutfile head.xxx
+\immediate\write\gtoutfile{Proxy-for: \ifx\theasciiauthors\relax
+\theauthors\else\theasciiauthors\fi\s<\ifx\theasciiemail\relax\theemail\else\theasciiemail\fi>}
+\immediate\write\gtoutfile{\noexpand\\}
+\immediate\write\gtoutfile{Authors: \ifx\theasciiauthors\relax
+\theauthors\else\theasciiauthors\fi}
+{\def\\{ }\immediate\write\gtoutfile{Title: \ifx\theasciititle\relax
+\thetitle\else\theasciititle\fi}}
+\immediate\write\gtoutfile{Subj-class: GT or SG, GR etc}
+\immediate\write\gtoutfile{MSC-class: \theprimaryclass\ifx\thesecondaryclass\relax\else, \thesecondaryclass\fi}
+\immediate\write\gtoutfile{Journal-ref: Algebr. Geom. Topol. \thevolumenumber\s
+(\thevolumeyear) \startpage-\finishpage}
+\immediate\write\gtoutfile{Comments: Published by Algebraic and
+Geometric Topology at}
+\immediate\write\gtoutfile{\s\s\s  http://www.maths.warwick.ac.uk/agt/AGTVol\thevolumenumber/agt-\thevolumenumber-\thepapernumber.abs.html}
+\immediate\write\gtoutfile{\noexpand\\}
+\immediate\write\gtoutfile{}
+\ifx\theasciiabstract\relax
+\immediate\write\gtoutfile{\theabstract}\else
+\immediate\write\gtoutfile{\theasciiabstract}\fi
+\immediate\write\gtoutfile{}
+\immediate\write\gtoutfile{\noexpand\\}
+\immediate\write\gtoutfile{}
+\immediate\closeout\gtoutfile}}  %%% end of definition of \makeheadfile
+
+
+\def\maketitlepage{\makeagttitle\makeheadfile}
+\let\makeshorttitle\maketitlepage
+\let\maketitle\maketitlepage
+
+\endinput   

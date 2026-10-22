@@ -1,0 +1,1 @@
+Rejected exploratory clasp port wiring: spherical Euler characteristic zero, not a planar knot diagram. Never use these files as knot-admission evidence. Exact corrected planar port wiring is in ../whitehead-cable-clasp-code.py and current diagram certificates.

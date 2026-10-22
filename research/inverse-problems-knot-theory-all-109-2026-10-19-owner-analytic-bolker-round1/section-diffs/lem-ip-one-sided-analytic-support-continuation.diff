@@ -1,0 +1,42 @@
+--- research/inverse-problems-knot-theory-all-109-2026-10-19-owner-analytic-bolker-round1/before/lem-ip-one-sided-analytic-support-continuation.md
++++ items/lem-ip-one-sided-analytic-support-continuation.md
+@@ -11,6 +11,8 @@
+   - lem-ip-analytic-cutoff-sequence-and-fbi-invariance
+   - def-real-analytic-germ-in-several-variables
+   - def-support-of-a-distribution
++  - lem-ip-flat-one-sided-analytic-support
++  - thm-euclidean-inverse-function-theorem
+ dependency_level: 3
+ provenance:
+   statement: literature-derived
+@@ -48,21 +50,18 @@
+ 
+ [F2] [[def-support-of-a-distribution]]: the support is the complement of the largest open set on which the distribution vanishes.
+ 
++[F3] [[lem-ip-flat-one-sided-analytic-support]]: a distribution supported in a closed half-space at a support point has both oriented normal covectors in its Gaussian analytic wavefront set.
++
++[F5] [[thm-euclidean-inverse-function-theorem]] supplies the local inverse used to put the $C^2$ hypersurface in graph form; differentiating the inverse identity preserves its $C^2$ regularity.
++
++[F4] [[lem-ip-analytic-cutoff-sequence-and-fbi-invariance]]: analytic coordinate changes preserve the Gaussian criterion with its cotangent transformation.
++
+ ## Proof
+ 
+ **Given:** The data in the statement.
+ 
+-The following steps prove the geometric reduction to a one-sided support-conormal assertion; they do not prove that analytic assertion.
++1.1 Work in an analytic ambient chart centered at $x_0$. The hypersurface remains $C^2$ in that chart, since changing from its given smooth chart is a smooth diffeomorphism. A real linear coordinate change makes its tangent plane nonvertical. The $C^2$ implicit graph theorem then writes it as $x_n=\psi(x')$, with $\psi$ of class $C^2$: the inverse of a $C^2$ map with invertible derivative is $C^2$, by differentiating the identity for its inverse twice. Translate to have $\psi(0)=0$. Shrink to a convex $x'$ ball on which $\|D^2\psi\|\le 2C$. Taylor's integral formula gives $ q_-(x'):=D\psi(0)x'-C|x'|^2\le\psi(x')\le D\psi(0)x'+C|x'|^2=:q_+(x'). $ Both supporting quadratics are real analytic and have the same differential as $\psi$ at $0$. [F1, F5, given, algebra, construct]
+ 
+-1.1 If $f=0$ on some neighborhood of $x_0$, the conclusion already holds. Otherwise every neighborhood of $x_0$ meets $\operatorname{supp}f$, so $x_0\in\operatorname{supp}f$ by [F2]. [given, F2]
++2.1 Suppose first that $f$ vanishes on the strict subgraph of $\psi$. Its local support lies in $x_n\ge\psi(x')$, hence in $x_n\ge q_-(x')$. The analytic shear $(x',x_n)\mapsto(x',x_n-q_-(x'))$ has analytic inverse $(y',y_n)\mapsto(y',y_n+q_-(y'))$, determinant $1$, and sends this latter closed side into $y_n\ge0$. If instead $f$ vanishes on the strict epigraph, its support lies in $x_n\le\psi(x')\le q_+(x')$ and use the corresponding analytic shear with $q_+$. In either case the pulled-back normal $dy_n$ at $0$ is $dx_n-D\psi(0)dx'$, a nonzero scalar multiple of the supplied conormal $\nu_0$. This flattens an analytic supporting quadratic; it does not flatten the original $C^2$ graph analytically. [F1, F2, step 1.1, algebra, construct]
+ 
+-1.2 Choose a smooth chart in which $\Sigma=\{x_n=\psi(x')\}$, with $\psi$ of class $C^2$, and shrink it so the side on which $f$ vanishes is, for example, $x_n<\psi(x')$. Then the localized support is contained in the closed epigraph $x_n\ge\psi(x')$, and the graph conormal $dx_n-D\psi(x_0')\,dx'$ is a supporting conormal at the contact point. Reversing the inequality reverses this conormal and does not change the alternative in the statement. This proves the geometric reduction; the analytic support-conormal implication remains open in this carrier. [F1, F2, given] ∎
+-
+-## Unresolved supplier check
+-
+-The required one-sided support-conormal implication is not proved by steps 1.1–1.2. The full $C^2$ hypersurface claim is preserved above.
+-
+-- Exact gap: prove that if a distribution is supported in the closure of one side of a $C^2$ graph and the contact point is in its support, then at least the corresponding oriented conormal belongs to $\operatorname{WF}_A(f)$, using the Gaussian FBI definition on a real-analytic manifold.
+-- Source status: MST §6.1, Theorem 6.1 states the full $C^2$ conclusion but sends its proof to Hörmander. Sjöstrand §8 proves the flat-hyperplane support theorem by a Gaussian FBI maximum-principle argument; the inspected proof does not establish the $C^2$ graph case or justify flattening it by an analytic coordinate change.
+-- Affected claim: this lemma, and therefore thm-ip-local-support-from-one-sided-vanishing.
+-- Proposed supplier and placement: a local C²-graph FBI/Laplace support estimate on the A page, immediately before this lemma, with a proof that controls the nonlinear graph error and both orientations. This supplier is not asserted or invented here.
++3.1 If $f$ already vanishes near $x_0$, there is nothing to prove. Otherwise $x_0\in\operatorname{supp}f$ by [F2]. Localize inside the chart. Under the appropriate shear, [F3] then puts both $dy_n$ and $-dy_n$ in the analytic wavefront set at the origin. By [F4] these are exactly both conormal orientations at $x_0$, up to positive frequency scaling. Either absence hypothesis in the statement contradicts this conclusion. Thus $f=0$ near $x_0$. Every construction used finite-dimensional coordinates and explicit quadratics; it introduces no choice assumption. [F2, F3, F4, step 2.1, given, algebra] ∎

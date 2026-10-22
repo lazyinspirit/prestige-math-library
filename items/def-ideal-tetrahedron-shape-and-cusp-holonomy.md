@@ -31,7 +31,7 @@ Use the upper half-space model
 $$\mathbb H^3=\{(x+iy,t):x,y\in\mathbb R,\ t>0\},\qquad ds^2=t^{-2}(dx^2+dy^2+dt^2),$$
 whose ideal boundary is $\mathbb C\cup\{\infty\}$. An oriented ideal tetrahedron in normalized position has ideal vertices $0,1,\infty,z$, where $\operatorname{Im}z>0$. Its three edge-shape parameters are
 $$z,\qquad z'=\frac1{1-z},\qquad z''=\frac{z-1}{z},$$
-each assigned to one pair of opposite edges; the parameter at a corner of a truncated ideal vertex triangle is the parameter of the incident edge. For an oriented path $\gamma$ in a triangulated torus link of ideal vertices, its cusp multiplier $H(\gamma)$ is the product of the corner parameters encountered along $\gamma$, using the parameter when the path cuts off that corner on its left and its reciprocal when it cuts off the corner on its right.
+Assign $z$ to the edges $0\infty$ and $1z$, $z'$ to $1\infty$ and $0z$, and $z''$ to $z\infty$ and $01$. The parameter at a corner of a truncated ideal vertex triangle is the parameter of the incident edge. In a triangulated oriented torus link of ideal vertices, use oriented normal paths: paths avoiding link vertices, transverse to link edges, and meeting each triangle in arcs joining distinct sides, each cutting off one corner. Represent a loop by such a path before computing its cusp multiplier. For a chosen normal path $\gamma$, its cusp multiplier $H(\gamma)$ is the product of the corner parameters it cuts off, using the parameter when the corner is on its left and its reciprocal when the corner is on its right.
 
 ## Definition references
 

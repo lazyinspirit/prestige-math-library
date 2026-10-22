@@ -14,6 +14,11 @@ axiom_use: "No choice principle is used; the properties are finite local or grap
 provenance:
   statement: literature-derived
   proof: ai-altered
+verification:
+  judge:
+    model: "gpt-6-luna"
+    verdict: pass
+    date: 2026-10-22
 sources:
   references:
     - title: "Danny Calegari, Introduction to Knot Theory, Definition 5.17, printed pp. 43–44"

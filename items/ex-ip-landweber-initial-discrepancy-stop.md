@@ -1,4 +1,9 @@
 ---
+verification:
+  judge:
+    model: "gpt-6-luna"
+    verdict: pass
+    date: 2026-10-22
 id: ex-ip-landweber-initial-discrepancy-stop
 kind: example
 title: The initial residual can already meet the discrepancy threshold

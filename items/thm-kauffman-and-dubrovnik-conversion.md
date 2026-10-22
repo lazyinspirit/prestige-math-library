@@ -17,7 +17,7 @@ deps:
 proof_strategy: direct
 axiom_use: "Assumes AC through the Alexander/Markov representation theorem; the parameter, curl, and smoothing calculations are finite and choice-free."
 provenance:
-  statement: literature-derived
+  statement: ai-altered
   proof: ai-altered
 sources:
   references:
@@ -34,9 +34,9 @@ sources:
 
 ## Statement
 
-Assume the Axiom of Choice. Let $K$ be a nonempty oriented link with determinant writhe $w(K)$ and component count $c(K)$, and let $Q_K$ be the value returned by the BMW braid-closure algorithm for any finite signed braid word representing $K$. Then $Q_K$ is independent of the chosen braid and
-$$Q_K=F_K(ia,-iz)=-(-1)^{c(K)}a^{-w(K)}D_K(a,z),$$
-equivalently,
+Assume the Axiom of Choice. Fix any nonempty oriented regular link diagram $K$, with determinant writhe $w(K)$ and component count $c(K)$. Let $Q_K(A,Z)\in T_K$ denote the value returned by the BMW braid-closure algorithm for any finite signed braid word whose closure represents the oriented link represented by $K$. The quantities $D_K$ and $L_K$ below are evaluated on this fixed diagram; $F_K$ and $Q_K$ depend only on its ambient oriented link type. Then $Q_K$ is independent of the chosen braid and
+$$Q_K(A,Z)=F_K(A,Z)=-i^{w(K)}(-1)^{c(K)}A^{-w(K)}D_K(-iA,iZ),$$
+with the inverse conversion
 $$D_K(a,z)=-i^{-w(K)}(-1)^{c(K)}L_K(ia,-iz),\qquad i^2=-1.$$
 The proof covers the unknot, positive and negative curls, and both self-crossing split and mixed-crossing merge smoothing cases under the stated universal coefficient relation, without dividing by $z$.
 
@@ -60,7 +60,7 @@ The proof covers the unknot, positive and negative curls, and both self-crossing
 
 ## Facts & Assumptions
 
-**Given:** AC, a nonempty oriented link, the BMW trace computation from a braid representative, and the declared Dubrovnik/Kauffman conventions.
+**Given:** AC, a fixed nonempty oriented regular link diagram, the BMW trace computation from a braid representative, and the declared Dubrovnik/Kauffman conventions.
 
 [A1] The Axiom of Choice, used for the closed-braid representation and Markov equivalence theorems ([[def-axiom-of-choice]]).
 
@@ -75,8 +75,9 @@ The proof covers the unknot, positive and negative curls, and both self-crossing
 ## Proof
 
 
-1.1 Since $K$ is nonempty, [A1] and Alexander's theorem give a finite braid representative. For every such representative, [F4] identifies the algorithm's output with its corrected BMW trace value, and [F1] shows that value is independent of the representative and equals $F_K(ia,-iz)$. [A1, F1, F4, given]
 
-1.2 By [F2], $$F_K(ia,-iz)=(ia)^{-w}L_K(ia,-iz) =(ia)^{-w}\bigl(-i^w(-1)^cD_K(a,z)\bigr) =-(-1)^c a^{-w}D_K(a,z).$$ Rearranging the same identity gives the displayed inverse conversion formula in the statement. [F2, algebra]
+1.1 Since $K$ is nonempty, [A1] and Alexander's theorem give a finite braid representative. Write $Q^{\mathrm{old}}(\beta)=-(-1)^c a^{-w}d^{n-1}\tau_n(\beta)$. By [F4], the algorithm returns $\varphi(Q^{\mathrm{old}}(\beta))$: indeed $\varphi(a^{-w})=i^w A^{-w}$. By [F1], $Q^{\mathrm{old}}(\beta)$ is independent of the braid representative and equals $F_K(ia,-iz)$. Applying the ring homomorphism $\varphi$, with $a=-iA,z=iZ$, gives $Q_K(A,Z)=F_K(A,Z)$ and preserves independence. [A1, F1, F4, given]
 
-2.1 The boundary cases agree with this formula: for the unknot, $c=1,w=0,D=1$, so $Q=1$; a positive curl changes $(w,D)$ to $(w+1,aD)$, leaving $a^{-w}D$ unchanged, and a negative curl changes them to $(w-1,a^{-1}D)$ with the same result. At a self-crossing, the oriented smoothing splits one component and the other smoothing keeps the component count. At a mixed crossing, both smoothing pairings merge the two incident components; orienting the non-oriented smoothing by reversing one incident whole component gives the modulo-four writhe phase established from the even mixed-crossing sums in [F2]. Thus the sum/difference skein conversions cover both local component changes, and no coefficient is divided by $z$. [F2, F3, step 1.2, algebra] ∎
+2.1 By [F2], $L_K(ia,-iz)=-i^w(-1)^cD_K(a,z)$. Substitute $a=-iA,z=iZ$ and multiply by $A^{-w}$ to obtain $$F_K(A,Z)=-i^w(-1)^c A^{-w}D_K(-iA,iZ).$$ Together with step 1.1 this is the stated algorithm identity. The unsubstituted [F2] is exactly the displayed inverse conversion. [F2, step 1.1, algebra]
+
+3.1 The boundary cases agree with this formula: for the unknot, $c=1,w=0,D=1$, so $Q_K(A,Z)=1$; a positive curl changes $(w,D)$ to $(w+1,aD)$, leaving $a^{-w}D$ unchanged, and a negative curl changes them to $(w-1,a^{-1}D)$ with the same result. After substitution, the positive-curl multiplier in $i^w A^{-w}D_K(-iA,iZ)$ is $i A^{-1}(-iA)=1$, and the negative-curl multiplier is $i^{-1}A(-iA)^{-1}=1$. At a self-crossing, the oriented smoothing splits one component and the other smoothing keeps the component count. At a mixed crossing, both smoothing pairings merge the two incident components; orienting the non-oriented smoothing by reversing one incident whole component gives the modulo-four writhe phase established from the even mixed-crossing sums in [F2]. Thus the sum/difference skein conversions cover both local component changes, and no coefficient is divided by $z$. [F2, F3, step 2.1, algebra] ∎

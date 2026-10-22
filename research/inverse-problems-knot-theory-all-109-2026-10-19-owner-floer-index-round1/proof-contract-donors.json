@@ -1,0 +1,267 @@
+{
+  "version": 1,
+  "scope": [
+    "lem-diagonal-strip-cauchy-riemann-fredholm-index",
+    "lem-scalar-totally-real-strip-boundary-winding-index"
+  ],
+  "contracts": {
+    "lem-diagonal-strip-cauchy-riemann-fredholm-index": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "lem-transverse-linear-strip-cauchy-riemann-isomorphism",
+          "source_section": "Statement",
+          "quote": "Assume Countable Choice. Fix $m\\ge1$ and angles $0<\\theta_j<\\pi$ for $1\\le j\\le m$. On the strip $S=\\mathbb R\\times[0,1]$ impose the real product-plane boundary conditions $u(s,0)\\in\\mathbb R^m$ and $u(s,1)\\in\\prod_j e^{i\\theta_j}\\mathbb R$. Let $H^1_\\theta$ be the completion of smooth maps satisfying these conditions and compactly supported in the $s$ direction, for the norm\n$$\\|u\\|_{H^1}^2=\\|u\\|_2^2+\\|u_s\\|_2^2+\\|u_t\\|_2^2.$$\nThe real linear operator $D=\\partial_s+i\\partial_t$ extends to an isomorphism $H^1_\\theta\\to L^2(S;\\mathbb C^m)$. Put $\\gamma=\\min_j\\{\\theta_j,\\pi-\\theta_j\\}>0$. Its inverse satisfies\n$$\\|D^{-1}f\\|_2\\le\\gamma^{-1}\\|f\\|_2,\\qquad \\|D^{-1}f\\|_{H^1}\\le\\sqrt{\\gamma^{-2}+5}\\,\\|f\\|_2.$$\nFor $0\\le\\delta<\\gamma$, set $w(s)=e^{\\delta|s|}$, $H^1_{\\theta,\\delta}=\\{u:wu\\in H^1_\\theta\\}$ with norm $\\|wu\\|_{H^1}$, and $L^2_\\delta=\\{f:wf\\in L^2\\}$ with norm $\\|wf\\|_2$. Then $D:H^1_{\\theta,\\delta}\\to L^2_\\delta$ is an isomorphism and\n$$\\|D^{-1}f\\|_{H^1_{\\theta,\\delta}}\\le\\frac{\\sqrt{\\gamma^{-2}+5}}{1-\\delta/\\gamma}\\,\\|f\\|_{L^2_\\delta},\\qquad \\|wD^{-1}f\\|_2\\le\\frac{\\|wf\\|_2}{\\gamma-\\delta}.$$\nThese are estimates for the constant linear asymptotic model. They make no assertion about nonlinear strip decay, a variable-coefficient operator, or its Maslov index.",
+          "uses": [
+            "1.2",
+            "2.2",
+            "4.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "lem-variable-zero-order-strip-cauchy-riemann-fredholm",
+          "source_section": "Statement",
+          "quote": "Assume Countable Choice. On $S=\\mathbb R\\times[0,1]$ use the real Hilbert domain $H^1_\\theta$ with product-line boundary conditions at angles $0<\\theta_j<\\pi$: it is the $H^1$ completion of smooth maps compactly supported in the first coordinate and satisfying $u(s,0)\\in\\mathbb R^m$, $u(s,1)\\in\\prod_j e^{i\\theta_j}\\mathbb R$. Let $B(s,t)$ be a bounded measurable real linear endomorphism of $\\mathbb C^m$. Suppose there are real diagonal constant matrices $B_\\pm=\\operatorname{diag}(b_{\\pm,1},\\ldots,b_{\\pm,m})$ such that\n$$\\underset{\\pm s>R,\\ 0<t<1}{\\operatorname{ess\\,sup}}\\|B(s,t)-B_\\pm\\|\\longrightarrow0\\quad(R\\longrightarrow\\infty),$$\nand $\\theta_j-b_{\\pm,j}\\notin\\pi\\mathbb Z$ for every $j$ and each sign. Then\n$$T=\\partial_s+i\\partial_t+B(s,t):H^1_\\theta\\longrightarrow L^2(S;\\mathbb C^m)$$\nis bounded and Fredholm over $\\mathbb R$: its kernel and cokernel are finite dimensional and its range is closed. There are bounded left and right parametrices whose errors are operator-norm limits of finite-rank operators. No index value or identification with a Maslov index is asserted.",
+          "uses": [
+            "1.1",
+            "1.2",
+            "2.1",
+            "2.2",
+            "4.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "def-fredholm-operator-cokernel-and-index",
+          "source_section": "Definition",
+          "quote": "Let $X$ and $Y$ be Banach spaces over the same scalar field $\\mathbb F$\n([[def-banach-space]]) and let $T:X\\to Y$ be a bounded linear operator\n([[def-bounded-linear-operator]]). Then $T$ is a **Fredholm operator** when\nall three of the following hold:\n\n1. $\\ker T$ is finite dimensional, that is, admits an ordered basis of finite\n   length ([[def-linear-basis]], [[def-dimension]]);\n2. $\\operatorname{ran}T$ is a closed subspace of $Y$\n   ([[def-linear-subspace]]);\n3. the **cokernel** $\\operatorname{coker}T:=Y/\\operatorname{ran}T$ is finite\n   dimensional ([[def-quotient-vector-space-coset-notation]],\n   [[def-dimension]]).\n\nHere the cokernel is the algebraic quotient vector space; it also carries the\nquotient seminorm of [[def-quotient-seminorm]], which is a norm when the range\nis closed ([[thm-quotient-seminorm-is-a-norm-iff-subspace-is-closed]]), but the dimension in clause 3 is the vector-space dimension of the\nquotient and does not depend on that norm.\n\nFor a Fredholm operator $T$ the **index** of $T$ is the integer\n\n$$\\operatorname{ind}T:=\\dim_{\\mathbb F}\\ker T-\\dim_{\\mathbb F}\\operatorname{coker}T$$\n\nHere subtraction is in $\\mathbb Z$, not in $\\mathbb N$: write $a=\\dim_{\\mathbb F}\\ker T$ and $b=\\dim_{\\mathbb F}\\operatorname{coker}T$ and identify a natural $n$ with $[(n,0)]$. Precisely,\n\n$$\\operatorname{ind}T=[(a,b)]=[(a,0)]+(-[(b,0)])\\in\\mathbb Z$$\n\nby [[def-integers]] and [[def-int-operations]]. Both dimensions are natural numbers, so this class is defined even when $a<b$; the index may be positive, negative or zero.\n\n**Two remarks on the definition.** The closedness of the range is listed\nexplicitly as a hypothesis of the definition rather than extracted from the\nother clauses. And no property of the index is asserted here; additivity,\nlocal constancy and invariance under compact perturbations are separate\ntheorems.",
+          "uses": [
+            "1.1",
+            "2.2",
+            "3.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1.1",
+          "step": "1.1",
+          "claim": "**A local index calculation for perturbations.** Fix any operator $A:X\\to Y$ in [F2]. Write $K=\\ker A$, $Z=K^\\perp$, $R=\\operatorname{ran}A$ and $C=R^\\perp$. These orthogonal decompositions exist under the choice hypothesis by [F2]; $K,C$ are finite dimensional. The restriction $A_Z:Z\\to R$ is bijective: subtracting the kernel projection from a preimage proves surjectivity, and injectivity follows from $Z\\cap K=0$. The bound in [F2] makes its inverse bounded, with norm at most $c_A^{-1}$. For a bounded perturbation $E:X\\to Y$ of norm less than $c_A$, order the source as $Z\\oplus K$ and target as $R\\oplus C$. The first block $L=A_Z+E_{RZ}$ is invertible by the norm-convergent Neumann series for $1+A_Z^{-1}E_{RZ}$. The full matrix is $\\begin{pmatrix}L&E_{RK}\\\\E_{CZ}&E_{CK}\\end{pmatrix}$. The invertible source change $(z,k)\\mapsto(z+L^{-1}E_{RK}k,k)$ and target change $(r,c)\\mapsto(r,c-E_{CZ}L^{-1}r)$ reduce it to $\\operatorname{diag}(L,F)$, where $F=E_{CK}-E_{CZ}L^{-1}E_{RK}:K\\to C$. Its kernel and cokernel are those of this finite-dimensional $F$. Rank-nullity gives $\\dim\\ker F-\\dim(C/\\operatorname{ran}F)=\\dim K-\\dim C$. Thus every sufficiently small bounded perturbation has the same index as $A$, with an explicit finite-dimensional proof.",
+          "inputs": [
+            "F2",
+            "F3",
+            "given",
+            "construct",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-1.2",
+          "step": "1.2",
+          "claim": "**The step operator's kernel.** For the diagonal step operator $D+B^0$ from the Statement, [F1] diagonalizes the operator on the real modes. Put $\\lambda_- =\\pi n-\\theta_j+b_{-,j}$ and $\\lambda_+=\\pi n-\\theta_j+b_{+,j}$ for one mode. A weak solution of $a'+\\lambda(s)a=0$ equals $c e^{-\\lambda_-s}$ on $s<0$ and $c e^{-\\lambda_+s}$ on $s>0$. Indeed multiplication by the smooth integrating factor on either half-line leaves a distribution with zero derivative, hence a constant; a distribution annihilating derivatives is constant because every compactly supported smooth test of integral zero is the derivative of another such test. The constants agree at zero, since a jump would contribute a point mass to $a'$ whereas $-\\lambda(s)a$ is locally integrable. This solution is in $L^2(\\mathbb R)$ precisely when $\\lambda_-<0<\\lambda_+$, or $c=0$. In the nonzero case its derivative is bounded in absolute value by $\\max\\{|\\lambda_-|,|\\lambda_+|\\}|a|$, so it is in $H^1$ and gives a vector in $X$. Only finitely many $(j,n)$ can have this sign pattern, as $m$ is finite and $\\pi n$ tends to the respective infinities. Orthogonality of the modes gives exactly one independent real generator per such pair, and no other kernel vectors.",
+          "inputs": [
+            "F1",
+            "F2",
+            "construct",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2.1",
+          "step": "2.1",
+          "claim": "**Reduction to a diagonal step operator.** Let $B^0$ be the step function in the Statement and set $B^r=(1-r)B+rB^0$ for $0\\le r\\le1$. Every $B^r$ has exactly the same diagonal limits and nondegeneracy; hence $T_r=D+B^r$ is Fredholm by [F2]. Also $\\|T_r-T_q\\|_{X\\to Y}\\le |r-q|\\|B^0-B\\|_\\infty$, so this is a norm-continuous path. At each parameter, step 1.1 makes its integer index locally constant. A locally constant function on the connected interval $[0,1]$ is constant: the inverse image of one value and its complement would otherwise be two disjoint nonempty open subsets. Consequently $\\operatorname{ind}T=\\operatorname{ind}(D+B^0)$. No compact-perturbation or general Banach open-mapping theorem is used.",
+          "inputs": [
+            "F2",
+            "step 1.1",
+            "construct",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2.2",
+          "step": "2.2",
+          "claim": "**The step operator's cokernel.** Since its range is closed, the orthogonal projection in [F2] identifies the cokernel with the vectors $g\\in Y$ orthogonal to its range. Test this orthogonality on $a(s)e_{j,n}(t)$ with $a$ real, smooth and compactly supported. For the real modal coefficient $g_{j,n}$ it says $\\int g_{j,n}(a'+\\lambda(s)a)=0$, equivalently $-g'_{j,n}+\\lambda(s)g_{j,n}=0$ in distributions. The integrating-factor argument of step 1.2 gives $g_{j,n}(s)=c e^{\\lambda_-s}$ on $s<0$ and $c e^{\\lambda_+s}$ on $s>0$, with one common constant. It is in $L^2$ precisely when $\\lambda_->0>\\lambda_+$, or $c=0$. There are finitely many such pairs. Conversely each of these coefficient functions is orthogonal to the image of every smooth finite modal sum, by integration by parts in $s$. Such sums are dense in $X$ by [F1], and the operator is bounded, so it is orthogonal to the whole range. Thus these are exactly the claimed real cokernel generators.",
+          "inputs": [
+            "F1",
+            "F2",
+            "F3",
+            "step 1.2",
+            "algebra",
+            "construct"
+          ]
+        },
+        {
+          "id": "step-3.1",
+          "step": "3.1",
+          "claim": "**Counting the signs.** For one $(j,n)$, its contribution to kernel dimension minus cokernel dimension is $\\mathbf1_{\\lambda_{-,j,n}<0}-\\mathbf1_{\\lambda_{+,j,n}<0}$. The two indicators agree for all sufficiently large positive or negative $n$. Since neither limiting eigenvalue vanishes, $\\lambda_{\\pm,j,n}<0$ is exactly $n<(\\theta_j-b_{\\pm,j})/\\pi$, whose threshold is not an integer. Summing the finite difference of these two integer half-lines gives $\\lfloor(\\theta_j-b_{-,j})/\\pi\\rfloor-\\lfloor(\\theta_j-b_{+,j})/\\pi\\rfloor$. Summing over the finitely many components, and using the preceding kernel, cokernel and continuation calculations and [F3], proves the displayed index formula for the original real-linear $B$ as well as the step model. The calculation allows either index sign and zero index, including the constant case $B_-=B_+$.",
+          "inputs": [
+            "F3",
+            "step 2.1",
+            "step 1.2",
+            "step 2.2",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-4.1",
+          "step": "4.1",
+          "claim": "**Fixed-end weights.** For $w=e^{\\delta|s|}$, the weak product rule gives $wT(w^{-1}v)=Dv+(B-\\delta\\operatorname{sign}(s))v$. This identity follows by splitting integration by parts into the two half-strips; there is no point mass at zero because $w$ is continuous. Multiplication by $w$ identifies the specified weighted spaces isometrically with $X,Y$, and the new diagonal limits are $b_{-,j}+\\delta$ and $b_{+,j}-\\delta$. The minimum limiting spectral gap is positive: for each of finitely many nonintegral thresholds its distance to the integer lattice is positive. Under the bound on $\\delta$, none of the corresponding limiting modal eigenvalues changes sign. Hence the new operator satisfies [F2] and its two floor terms in step 3.1 are unchanged. The weighted index is therefore the same. These arguments prove the stated fixed-end operator result; no geometric bundle or Maslov identification has entered the proof.",
+          "inputs": [
+            "F1",
+            "F2",
+            "step 3.1",
+            "construct",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "Statement assumes at least one scalar component and a nonempty full strip."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Statement and proof: The sign-count paragraph explicitly allows zero index and equal end matrices."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Statement and proof: The modal kernel and cokernel paragraphs compute one real generator per sign-changing scalar mode."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Statement and proof: Statement excludes zero limiting eigenvalues; the floor calculation uses that exact nonintegrality and the weighted paragraph retains the spectral gap."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Statement and proof: Statement and the fixed-end weighted paragraph prescribe both end limits and the two real boundary planes; no translation quotient is taken."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Statement and proof: The local Schur-complement paragraph uses only the Countable-Choice Hilbert projections and lower bound proved in its actual local supplier."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "Statement is an index calculation, not a biconditional."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "Statement is an index calculation, not a biconditional."
+        }
+      ]
+    },
+    "lem-scalar-totally-real-strip-boundary-winding-index": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "lem-diagonal-strip-cauchy-riemann-fredholm-index",
+          "source_section": "Statement",
+          "quote": "Assume Countable Choice. Let $m\\ge1$ and $0<\\theta_j<\\pi$. Let $X=H^1_\\theta$ be the real Hilbert completion, in the norm $(\\|u\\|_2^2+\\|u_s\\|_2^2+\\|u_t\\|_2^2)^{1/2}$, of smooth maps on $\\mathbb R_s\\times[0,1]_t$ compactly supported in $s$ and satisfying $u(s,0)\\in\\mathbb R^m$, $u(s,1)\\in\\prod_j e^{i\\theta_j}\\mathbb R$. Put $Y=L^2(\\mathbb R\\times[0,1];\\mathbb C^m)$, regarded as a real Hilbert space. Suppose $B(s,t)$ is an essentially bounded measurable real linear endomorphism and has real diagonal limits $B_\\pm=\\operatorname{diag}(b_{\\pm,j})$ uniformly in essential supremum as $s\\to\\pm\\infty$, with $\\theta_j-b_{\\pm,j}\\notin\\pi\\mathbb Z$. Then the bounded Fredholm operator\n$$T=\\partial_s+i\\partial_t+B:X\\longrightarrow Y$$\nhas real index\n$$\\operatorname{ind}_{\\mathbb R}T=\\sum_{j=1}^m\\left(\\left\\lfloor\\frac{\\theta_j-b_{-,j}}\\pi\\right\\rfloor-\\left\\lfloor\\frac{\\theta_j-b_{+,j}}\\pi\\right\\rfloor\\right).$$\nFor the diagonal step function $B^0(s)=B_-$ for $s<0$ and $B_+$ for $s\\ge0$, the kernel has one real generator for every $(j,n)\\in\\{1,\\ldots,m\\}\\times\\mathbb Z$ with $\\lambda_{-,j,n}<0<\\lambda_{+,j,n}$, and the cokernel has one for every pair with $\\lambda_{-,j,n}>0>\\lambda_{+,j,n}$, where $\\lambda_{\\pm,j,n}=\\pi n-\\theta_j+b_{\\pm,j}$.\n\nThe same index holds on the two-sided weighted spaces $X_\\delta=\\{u:e^{\\delta|s|}u\\in X\\}$ and $Y_\\delta=\\{f:e^{\\delta|s|}f\\in Y\\}$ whenever $0\\le\\delta<\\min_{j,\\pm,n}|\\lambda_{\\pm,j,n}|$. This is an index theorem for this specified strip operator and product-line domain; it does not identify the pullback operator of a general geometric strip or assert a Heegaard-domain Maslov formula.",
+          "uses": [
+            "3.1",
+            "4.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1.1",
+          "step": "1.1",
+          "claim": "**The gauge and its exact domains.** Choose the unique $\\theta_0\\in(0,\\pi)$ representing $\\vartheta_-$ modulo $\\pi$ and put $a(s)=\\vartheta(s)-\\theta_0$, $U(s,t)=e^{ia(s)t}$. The functions $a,a'$ are bounded, with $a'$ compactly supported. Multiplication by $U$ is an invertible real linear map of smooth maps compactly supported in $s$. At $t=0$ it is the identity, and at $t=1$ it sends $e^{i\\theta_0}\\mathbb R$ to $e^{i\\vartheta(s)}\\mathbb R$. Its two derivatives are $U_s=i a'(s)tU$ and $U_t=i a(s)U$. Therefore the product rule gives a constant $C$ with $\\|Uv\\|_{H^1}\\le C\\|v\\|_{H^1}$, and the same bound holds for $U^{-1}$ with possibly a different $C$. These maps extend by completion to mutually inverse bounded maps $H^1_{\\theta_0}\\leftrightarrow X_\\vartheta$. They are also unitary on the real $L^2$ target. This proves the precise domain identification, including the variable boundary, without assuming any prior boundary-trivialization theorem.",
+          "inputs": [
+            "given",
+            "construct",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2.1",
+          "step": "2.1",
+          "claim": "**Conjugate the operator, retaining both zeroth-order terms.** For a smooth compactly supported $v$ in the fixed-line domain, direct differentiation gives $U^{-1}\\mathcal D(Uv)=\\partial_s v+i\\partial_t v+Bv$, where $B=-a(s)+i a'(s)t+U^{-1}A(s,t)U$. The term $-a$ comes from $iU_t=-aU$, and the term $i a't$ comes from $U_s$; both signs are therefore fixed by the specified Cauchy\u2013Riemann convention. The last term is a real linear endomorphism even if $A$ is not complex linear. It is bounded and tends uniformly to zero, because $U$ is pointwise unitary. Since $a'$ vanishes on the ends, the limits of $B$ are the real scalar constants $b_\\pm=-(\\vartheta_\\pm-\\theta_0)$. In particular $\\theta_0-b_\\pm=\\vartheta_\\pm\\notin\\pi\\mathbb Z$. The identity extends to the completions by the bounds of step 1.1 and boundedness of each displayed first- and zeroth-order term.",
+          "inputs": [
+            "step 1.1",
+            "construct",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-3.1",
+          "step": "3.1",
+          "claim": "**Index and endpoint normalization.** Apply [F1] to the operator in step 2.1. Its real index is $\\lfloor(\\theta_0-b_-)/\\pi\\rfloor-\\lfloor(\\theta_0-b_+)/\\pi\\rfloor=\\lfloor\\vartheta_-/\\pi\\rfloor-\\lfloor\\vartheta_+/\\pi\\rfloor$. The bounded source and target isomorphisms of step 1.1 identify kernels and ranges and induce an isomorphism of cokernels, so this is the index of $\\mathcal D$ too. Changing the global lift by one constant integer multiple of $\\pi$ adds the same integer to both floor terms and does not alter their difference. If the end lines coincide, their given lift difference is $k\\pi$ and the result is exactly $-k$. This agrees with boundary orientation: for $ds\\wedge dt$, the outward-normal-first convention gives tangent $+\\partial_s$ on $t=0$ and $-\\partial_s$ on $t=1$, so a lift increasing by $k\\pi$ along increasing $s$ on the upper edge makes $-k$ turns in the unoriented-line circle along its oriented traversal. No translation direction has been removed from the operator's domain or index.",
+          "inputs": [
+            "F1",
+            "step 1.1",
+            "step 2.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-4.1",
+          "step": "4.1",
+          "claim": "**Weights and the product version.** The gauge $U$ commutes with scalar multiplication by $w=e^{\\delta|s|}$, and its bounded derivative estimates in step 1.1 apply to $w v$ as well. Thus it identifies the weighted variable-line domain and target with the weighted fixed-line spaces. The fixed-line limiting eigenvalues are $\\pi n-\\theta_0+b_\\pm=\\pi n-\\vartheta_\\pm$, whose minimum absolute value is exactly the distance stated in the claim. The weighted conclusion follows from [F1]. For finitely many components use $U=\\operatorname{diag}(e^{i(\\vartheta_j(s)-\\theta_{0,j})t})$, with $\\theta_{0,j}\\in(0,\\pi)$ the residue of $\\vartheta_{j,-}$. The same differentiation gives real diagonal limits $b_{\\pm,j}=-(\\vartheta_{j,\\pm}-\\theta_{0,j})$ even when $A$ mixes the components and their conjugates. Apply the full real-linear version of [F1] and sum its floor differences. This proves every asserted framed strip formula under precisely Countable Choice; no general geometric Maslov identification is presumed.",
+          "inputs": [
+            "F1",
+            "step 1.1",
+            "step 2.1",
+            "step 3.1",
+            "construct",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "Statement assumes at least one scalar component and a nonempty full strip."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Statement and proof: The index-and-endpoint paragraph includes constant lifts or zero winding, giving index zero."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Statement and proof: Statement starts with one scalar component and then proves the finite product extension."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Statement and proof: Statement requires transverse end lines; the exact-gauge paragraph proves both zeroth-order terms and gives real diagonal limits even for real-linear A."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Statement and proof: The gauge-and-domains and weights paragraphs identify the exact defining completions at both ends, before any translation quotient."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Statement and proof: The given scalar lifts determine every gauge explicitly; Statement assumes only the Countable-Choice fixed-line supplier."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "Statement is an index calculation, not a biconditional."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "Statement is an index calculation, not a biconditional."
+        }
+      ]
+    }
+  }
+}

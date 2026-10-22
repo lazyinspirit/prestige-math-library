@@ -1,0 +1,52 @@
+---
+id: lem-boundary-energy-regularity-for-totally-real-strips
+kind: lemma
+title: "Boundary small-energy gradient control along a compact totally real submanifold"
+status: draft
+origin: pipeline
+pipeline_run: inverse-problems-knot-theory-all-109-2026-10-19
+deps: [def-countable-choice, lem-interior-energy-regularity-for-smooth-almost-complex-strips, lem-heinz-half-disk-boundary-mean-value-estimate]
+dependency_level: 2
+justified_by: []
+aliases: []
+proof_strategy: direct
+provenance:
+  statement: literature-derived
+  proof: ai-altered
+sources:
+  references:
+    - title: "Dusa McDuff and Dietmar Salamon, J-holomorphic Curves and Symplectic Topology, mean value inequalities with totally real boundary conditions"
+      url: "https://bookstore.ams.org/coll-52"
+---
+
+## Statement
+
+Assume Countable Choice. Let $X$ be a compact smooth manifold without boundary, with a background Riemannian metric $g_0$, and let $L\subset X$ be a compact embedded submanifold without boundary of half its real dimension. Let $J(s,t,x)$ be a smooth uniformly $C^2$ bounded family of almost complex structures for parameters in a neighborhood of a closed upper half-disk. Suppose $J(s,0,x)=J_b(x)$ for $x\in L$, independently of $s$, where $TL\cap J_bTL=0$.
+
+There is a smooth Riemannian metric $g$ on $X$, depending only on $g_0,L,J_b$, such that $J_b$ is orthogonal and $J_bTL$ is perpendicular to $TL$ along $L$. For this metric there are constants $r_0,\varepsilon_0>0$ depending only on the geometric data and uniform family bounds with the following property. If $0<r\le r_0$ and a smooth map $u:\overline B_r^+\to X$ solves $u_s+J(s,t,u)u_t=0$, maps the flat edge into $L$, and satisfies $E=\int_{B_r^+}e_g<\varepsilon_0$, then
+$$|du(0,0)|_g^2\le\frac{32}{\pi r^2}E,\qquad \sup_{B_{r/2}^+}|du|_g^2\le\frac{128}{\pi r^2}E,$$
+where $e_g=(|u_s|_g^2+|u_t|_g^2)/2$. Uniformly equivalent estimates with constants depending on the data hold for $g_0$. No assumption that the whole image lies in one coordinate chart is made.
+
+## Statement references
+
+[[def-countable-choice]]
+
+## Facts & Assumptions
+
+**Given:** Countable Choice, the compact target and submanifold, background metric, boundary structure, family, and smooth map in the statement.
+
+[F1] For any fixed smooth target metric, uniformly bounded $C^2$ almost complex data give constants $A,B\ge0$ with $\Delta e\ge-Ae^2-Be$ for actual smooth solutions, by [[lem-interior-energy-regularity-for-smooth-almost-complex-strips]].
+
+[F2] A nonnegative density on a half-disk satisfying $\Delta e\ge-Ae^2-Be$ and $-e_t\le ce^{3/2}+de$ has $e(0,0)\le16E/(\pi r^2)$ if $Br^2\le1/4$, $dr\le1/16$, and $E<\pi/(8\max\{16A,4096c^2,1\})$, by [[lem-heinz-half-disk-boundary-mean-value-estimate]]. Its proof retains the exact reflected boundary measure and establishes the weighted maximum bound used below.
+
+## Proof
+
+1.1 Along $L$ the direct sum $TX|_L=TL\oplus J_bTL$ is smooth, by the dimension and total-reality assumptions. Write vectors uniquely as $a+J_bb$ with $a,b\in TL$, and put $$g_L(a+J_bb,c+J_bd)=g_0(a,c)+g_0(b,d).$$ This is a smooth positive definite form, and $J_b(a+J_bb)=-b+J_ba$ shows that it is $J_b$ orthogonal and that the two summands are perpendicular. Extend this form to a global smooth metric as follows. In adapted submanifold charts, extend its matrix coefficients constantly in the normal coordinates, shrinking each chart to keep positivity. Choose finitely many smaller charts covering compact $L$, with nonnegative smooth bumps $\eta_i$ supported in the larger charts and positive on the smaller ones; each bump is constructed in Euclidean coordinates. Let $\psi=\sum_i\eta_i$ and choose a smooth $\chi$ equal to one near $L$ and supported where $\psi>0$. Such a $\chi$ is a scalar smooth function of $\psi$, since $\psi$ has a positive minimum on $L$. If $g_i$ are the local extensions, set $$g=(1-\chi)g_0+\sum_i\frac{\chi\eta_i}{\psi}g_i,$$ extending the summands by zero away from their supports. This is a smooth convex combination of positive metrics and agrees with $g_L$ on $L$. Only finitely many charts and bumps are chosen. [given, construct, algebra]
+
+2.1 Use the pullback Levi-Civita connection of $g$. On the flat edge put $v=u_s\in TL$, so $u_t=J_bv$ and $e_g=|v|_g^2$. Since $J(s,0,x)$ is fixed in $s$ on $L$, $\partial_sJ=0$ there. Moreover $\nabla_vJ$ is skew-adjoint at the edge: the identity $\langle Ja,b\rangle+\langle a,Jb\rangle=0$ holds along $L$ for arbitrary ambient vectors, and differentiating it in the tangent direction $v$ using metric compatibility gives that assertion. In particular $\langle(\nabla_vJ)v,v\rangle=0$. Torsion-freeness and differentiation of $u_t=Jv$ give $$\nabla_tu_s=\nabla_su_t=(\partial_sJ+\nabla_vJ)v+J\nabla_su_s.$$ Hence $\langle\nabla_tu_s,v\rangle=\langle J\nabla_su_s,v\rangle$ on the edge. [step 1.1, given, algebra]
+
+3.1 Differentiate the actual density in the normal coordinate $t$. The product rule gives $$\nabla_tu_t=(\partial_tJ+\nabla_{u_t}J)v+J\nabla_tu_s.$$ Since $J_b$ is orthogonal on every ambient vector along $L$, the two terms containing $\nabla_tu_s$ in $(e_g)_t$ combine to $2\langle\nabla_tu_s,v\rangle$. The tangential component of $\nabla_su_s$ lies in $TL$ and contributes zero after application of $J_b$ and pairing with $v$. Its normal component is the second fundamental form $\mathrm{II}_L(v,v)$. Thus the exact boundary identity is $$ (e_g)_t=2\langle J_b\mathrm{II}_L(v,v),v\rangle+\langle(\partial_tJ+\nabla_{J_bv}J)v,J_bv\rangle.$$ The second fundamental form is uniformly bounded because $L$ is compact, and the family derivatives are uniformly bounded. Since $|J_bv|=|v|$ and $e_g=|v|^2$ here, this proves $|(e_g)_t|\le c e_g^{3/2}+de_g$ for some constants $c,d\ge0$ depending only on the specified data. No uncontrolled tangential second derivative remains. [step 1.1, step 2.1, algebra]
+
+4.1 Apply [F1] with the fixed metric $g$ of step 1.1. Uniform $C^2$ bounds persist for this metric because on the compact target it and its connections differ from the fixed background data by bounded smooth tensors. We obtain $\Delta e_g\ge-Ae_g^2-Be_g$ throughout the half-disk. Choose $$r_0=\min\left\{\frac1{2\sqrt{\max\{B,1\}}},\frac1{16\max\{d,1\}}\right\},\qquad \varepsilon_0=\frac{\pi}{8\max\{16A,4096c^2,1\}}.$$ Steps 3.1 and 4.1 verify all differential and size hypotheses of [F2]. Its conclusion and $|du|^2=2e_g$ prove the claimed boundary-center inequality. [F1, F2, step 1.1, step 3.1, algebra]
+
+5.1 For completeness the stronger maximum assertion follows from the proved weighted maximum in [F2], not from an assumption of smooth reflection. In that proof the even reflected density $\widehat e$ has a maximum of $(r-|z|)^2\widehat e(z)$ at $z_0$, with $M=\widehat e(z_0)$ and $\ell=(r-|z_0|)/2$. Its small-energy argument proves $M\ell^2\le4E/\pi$. Consequently $(r-|z|)^2\widehat e(z)\le4M\ell^2\le16E/\pi$ for every $z$ in the full disk. On $|z|\le r/2$, this gives $e_g(z)\le64E/(\pi r^2)$ and hence the asserted bound for $|du|^2$. Finally compactness of $X$ supplies uniform positive comparison constants between $g$ and $g_0$ on all tangent spaces; applying these both to the energy integral and the pointwise derivative yields the corresponding $g_0$ estimates. All arguments are global in the target. [F2, step 1.1, step 4.1, algebra] ∎

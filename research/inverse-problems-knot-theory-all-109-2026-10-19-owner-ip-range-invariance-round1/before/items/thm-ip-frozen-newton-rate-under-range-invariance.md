@@ -1,0 +1,98 @@
+---
+id: thm-ip-frozen-newton-rate-under-range-invariance
+kind: theorem
+title: Frozen Newton rates under differential range invariance
+status: draft
+origin: pipeline
+pipeline_run: inverse-problems-knot-theory-all-109-2026-10-19
+dependency_level: 6
+deps:
+  - def-ip-differential-range-invariance
+  - def-ip-relaxed-range-invariance-objective
+  - def-ip-banach-convex-subgradient-and-dual-pairing
+  - def-ip-bregman-distance
+  - def-ip-variational-source-condition
+  - lem-ip-index-function-young-conjugate-bound
+  - lem-ip-frozen-newton-one-step-error-recursion
+justified_by: []
+aliases: []
+proof_strategy: direct
+provenance:
+  statement: literature-derived
+  proof: ai-altered
+sources:
+  references:
+    - title: "Barbara Kaltenbacher, Convergence rates under a range invariance condition with application to electrical impedance tomography, Theorem 7, equations (2.31)–(2.41)"
+      url: "https://arxiv.org/pdf/2403.18704"
+    - title: "Frederic Weidling, Variational Source Conditions and Conditional Stability Estimates for Inverse Problems in PDEs, Theorem 2.20"
+      url: "https://univerlag.uni-goettingen.de/bitstream/handle/3/isbn-978-3-86395-411-6/weidling.pdf?sequence=1"
+    - title: "Christian Clason, Regularization of Inverse Problems, Theorem 10.7"
+      url: "https://arxiv.org/pdf/2001.00617v2"
+---
+
+## Statement
+
+Assume the structural hypotheses of the frozen Newton one-step error lemma hold with fixed constants and notation. Let the initial pair be $(\widehat r_0,x_0)\in\widetilde U\times U$, where $x_0$ is the basepoint from the range-invariance factorization. At step $n\ge1$, freeze the objective at the previous iterate $x_{n-1}$, use parameters $\alpha_n$ and $\beta_n=c_{\beta\alpha}\alpha_n$, and let $(\widehat r_n,x_n)$ satisfy the resulting approximate-minimum inequality. Let $E_n$ and $S_n$ be the error and residual quantities from the one-step lemma for this step, with its input iterate relabeled $x_{n-1}$ and output iterate relabeled $x_n$. Define $E_0:=\frac{c_{\beta\alpha}}{C_\psi}\bigl(\lambda\|\widehat r_0-r(x^\dagger)\|_Z^p+t\|r(x_0)-r(x^\dagger)\|_Z^p\bigr)$. The parameter sequence $(\alpha_n)_{n\ge1}$ and the associated $h_n,\rho_n$ are fixed independently of $\delta$. Write
+
+$$H(q):=\sup_{s\ge0}(\psi(s)-qs),\quad h_n:=H\!\left(\frac{1}{2\overline C\alpha_n}\right),\quad \rho_n:=\alpha_n h_n,\quad q:=\frac{v}{t},$$
+
+where $t,v,\overline C$ are as in that lemma. Let $\alpha_n>0$ decrease strictly to zero, suppose $h_n$ is finite and positive, $\rho_n$ decreases strictly to zero, and assume for some $C_H\ge1$ that
+
+$$h_n\le C_Hh_{n+1}\quad(n\ge1),\qquad qC_H<1.$$
+
+Assume each step through $N$ satisfies the one-step lemma, has tolerance $\eta_n\le C_\eta\rho_n$, and the initial error $E_0$ is finite. Assume also that for every sufficiently small $\delta>0$ there is an index $N=N(\delta)\ge2$ such that
+
+$$\rho_N\ge\tau\delta^p,\qquad \rho_N\le M\tau\delta^p,\qquad \rho_n\ge\tau\delta^p\quad(1\le n\le N),$$
+
+for constants $\tau,M>0$ independent of $\delta$. This bounded crossing condition is satisfied, for example, if $N$ is the last index with $\rho_N\ge\tau\delta^p$ and $\rho_n/\rho_{n+1}\le M$ for all $n$.
+
+Then the stopping iterate $(\widehat r_N,x_N)$ satisfies
+
+$$E_N=O(h_N),\qquad S_N=O(\delta^p),$$
+
+and therefore
+
+$$\|\widehat r_N-r(x^\dagger)\|_Z^p+\|r(x_N)-r(x^\dagger)\|_Z^p=O(h_N),$$
+
+$$\|K(\widehat r_N-r(x^\dagger))\|_Y=O(\delta),\qquad \|Px_N\|_X=O(\delta),\qquad \|K\widehat r_N+F(x_0)-y^\delta\|_Y=O(\delta).$$
+
+If $\Phi(a):=aH(1/(2\overline C a))$ has a strictly increasing inverse $\phi$ on the relevant range, then
+
+$$h_N\le H\!\left(\frac{1}{2\overline C\,\phi(M\tau\delta^p)}\right),$$
+
+which gives the corresponding source-index rate for the range-variable and nonlinear-range errors.
+
+## Statement references
+
+[[lem-ip-frozen-newton-one-step-error-recursion|Frozen-step error and residual inequality]]
+
+[Barbara Kaltenbacher, *Convergence rates under a range invariance condition with application to electrical impedance tomography*, Theorem 7 and equations (2.31)–(2.41)](https://arxiv.org/pdf/2403.18704)
+
+[Frederic Weidling, *Variational Source Conditions and Conditional Stability Estimates for Inverse Problems in PDEs*, Theorem 2.20](https://univerlag.uni-goettingen.de/bitstream/handle/3/isbn-978-3-86395-411-6/weidling.pdf?sequence=1)
+
+[Christian Clason, *Regularization of Inverse Problems*, Theorem 10.7](https://imsc.uni-graz.at/clason/preprints/InverseNotes.pdf)
+
+## Facts & Assumptions
+
+**Given:** For every $n\le N$, the frozen step satisfies the one-step lemma with fixed $C_\psi$, $c_{\beta\alpha}$, $t$, $v$, $\overline C$, and source function $\psi$.
+
+[A1] $\rho_n=\alpha_nh_n\ge\tau\delta^p$ for $1\le n\le N$ and $\rho_N\le M\tau\delta^p$.
+
+[A2] The tolerances satisfy $\eta_n\le C_\eta\alpha_nh_n$.
+
+[A3] $h_n\le C_Hh_{n+1}$ and $qC_H<1$.
+
+[A4] $E_0<\infty$ is independent of $\delta$.
+
+[F1] [[lem-ip-frozen-newton-one-step-error-recursion]]: $E_n\le d_n/\alpha_n+H(1/(\overline C\alpha_n))$ and $S_n\le2(d_n+\alpha_nh_n)$, where $d_n=(c_{\beta\alpha}/C_\psi)\alpha_nv\|r(x_{n-1})-r(x^\dagger)\|^p+(2\delta^p+\eta_n)/C_\psi$.
+
+## Proof
+
+1.1 Since $S_n\ge0$ and $H$ is nonincreasing in its positive argument, [F1] and the definitions of $h_n$ and $\overline C$ give $E_n\le d_n/\alpha_n+h_n$. The first term in $d_n/\alpha_n$ that contains the previous nonlinear-range error is at most $qE_{n-1}$, because $E_{n-1}$ contains $(c_{\beta\alpha}/C_\psi)t\|r(x_{n-1})-r(x^\dagger)\|^p$ and $q=v/t$. Also, $\delta^p/\alpha_n\le h_n/\tau$ follows from [A1], and $\eta_n/\alpha_n\le C_\eta h_n$ follows from [A2]. Therefore $E_n\le qE_{n-1}+\widehat C h_n$, where $\widehat C=2/(\tau C_\psi)+C_\eta/C_\psi+1$. [A1, A2, F1, given, algebra]
+
+2.1 Iterating the recurrence from step 1.1 gives $E_N\le q^NE_0+\widehat C\sum_{j=1}^{N}q^{N-j}h_j$. For $1\le j\le N$, repeated use of [A3] yields $h_j\le C_H^{N-j}h_N$, so the sum is at most $h_N\sum_{k=0}^{N-1}(qC_H)^k\le h_N/(1-qC_H)$. Also $h_1\le C_H^{N-1}h_N$, so $q^NE_0\le(E_0/h_1)C_H^{-1}(qC_H)^Nh_N=O(h_N)$, with constant independent of $\delta$. The same estimate holds with $N$ replaced by any $k\le N$, so $E_k=O(h_k)$ throughout the stopped segment. Thus $E_N=O(h_N)$. [A3, A4, step 1.1, algebra]
+
+3.1 The definition of $d_N$, the inequality $(c_{\beta\alpha}/C_\psi)v\|r(x_{N-1})-r(x^\dagger)\|^p\le qE_{N-1}$, and step 2.1 with $k=N-1$ show that $d_N=O(\alpha_Nh_{N-1}+\delta^p+\eta_N)$. By [A3], $h_{N-1}\le C_Hh_N$; by [A1]–[A2], $\alpha_Nh_N=\rho_N\le M\tau\delta^p$ and $\eta_N\le C_\eta\rho_N=O(\delta^p)$. Therefore $d_N=O(\delta^p)$, and the residual estimate in [F1] gives $S_N=O(\delta^p)$. [A1, A2, A3, F1, step 2.1, algebra]
+
+4.1 Since $E_N$ is a positive constant multiple of $\lambda\|\widehat r_N-r(x^\dagger)\|^p+t\|r(x_N)-r(x^\dagger)\|^p$, its bound controls both displayed range errors. Each nonnegative summand of $S_N$ is at most $S_N$, giving the two $O(\delta)$ estimates. Finally, $K\widehat r_N+F(x_0)-y^\delta=K(\widehat r_N-r(x^\dagger))+(F(x^\dagger)-y^\delta)$, so the data residual is $O(\delta)$. If $\Phi$ is strictly increasing, $\rho_N=\Phi(\alpha_N)\le M\tau\delta^p$ gives $\alpha_N\le\phi(M\tau\delta^p)$; monotonicity of $H$ then gives the stated index bound for $h_N$. [F1, given, step 2.1, step 3.1] ∎
+

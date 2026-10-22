@@ -1,0 +1,581 @@
+{
+  "version": 1,
+  "scope": [
+    "ex-ip-exact-adaptive-credible-coverage-by-posterior-null-deletion",
+    "ex-ip-inverse-coordinate-credible-interval-undercoverage",
+    "cex-ip-empirical-bayes-coverage-fails-for-sparse-gap-truth"
+  ],
+  "contracts": {
+    "ex-ip-inverse-coordinate-credible-interval-undercoverage": {
+      "citations": [
+        {
+          "fact": "A1",
+          "source": "def-axiom-of-choice",
+          "source_section": "Definition",
+          "quote": "The **Axiom of Choice** (AC) is the following statement.\n\n> Every family of nonempty sets has a choice function\n> (Choice function).\n\nWritten out: for every set $\\mathcal{F}$ all of whose members are nonempty,\nthere exists a function $g$ with domain $\\mathcal{F}$ satisfying $g(S) \\in S$ for\nall $S \\in \\mathcal{F}$.\n\nAn equivalent formulation is that a product of nonempty sets is nonempty: if\n$X_i \\ne \\emptyset$ for every $i \\in I$, then $\\prod_{i \\in I} X_i \\ne \\emptyset$.\nHere $\\prod_{i \\in I} X_i$ is the set of functions $f$ with domain $I$ such that\n$f(i) \\in X_i$ for every $i \\in I$; when a family of nonempty sets is indexed by\nitself, such an $f$ is precisely a choice function for it.",
+          "uses": [
+            "1.1",
+            "1.2"
+          ]
+        },
+        {
+          "fact": "F1",
+          "source": "def-ip-credible-set-and-frequency-coverage",
+          "source_section": "Definition",
+          "quote": "Let $(\\Theta,\\mathcal T)$ be a measurable parameter space and, for each integer $n\\ge1$, let $\\mathcal E_n=((\\mathsf Y_n,\\mathcal Y_n),(P_{\\theta,n})_{\\theta\\in\\Theta})$ be a statistical experiment. Let $\\Pi_{0,n}$ be a proper prior on $(\\Theta,\\mathcal T)$ and let $y\\mapsto\\Pi_n(\\cdot\\mid y)$ be a supplied posterior probability kernel under the associated prior-predictive law. For $0<\\gamma<1$, a data-indexed set rule $C_n:\\mathsf Y_n\\to\\mathcal P(\\Theta)$ is a posterior credible set at level $1-\\gamma$ if its membership graph $\\{(y,\\theta):\\theta\\in C_n(y)\\}$ is in $\\mathcal Y_n\\otimes\\mathcal T$ and $\\Pi_n(C_n(y)\\mid y)\\ge1-\\gamma$ for every $y$ in its declared data domain. At a fixed truth $\\theta\\in\\Theta$, its frequentist coverage is $c_n(\\theta):=P_{\\theta,n}\\{y:\\theta\\in C_n(y)\\}$. For a truth class $\\mathcal T_n\\subseteq\\Theta$, the rule is asymptotically honest at level $1-\\gamma$ on $\\mathcal T_n$ if $\\liminf_{n\\to\\infty}\\inf_{\\theta\\in\\mathcal T_n}c_n(\\theta)\\ge1-\\gamma$, and it is asymptotically exactly calibrated there if $\\sup_{\\theta\\in\\mathcal T_n}|c_n(\\theta)-(1-\\gamma)|\\to0$.",
+          "uses": [
+            "1.3",
+            "2.1",
+            "2.2"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "def-standard-normal-and-normal-laws",
+          "source_section": "Definition",
+          "quote": "Assume AC. Define $\\gamma(E)=\\int_E e^{-x^2/2}/\\sqrt{2\\pi}\\,dx$ for Borel E in $\\mathbb R$. By The standard normal density has total mass one and The indefinite integral of a nonnegative measurable function is a measure, gamma is a probability measure; denote it $N(0,1)$. For $m\\in\\mathbb R$ and $\\sigma\\ge0$, define $N(m,\\sigma^2)$ as the law of $x\\mapsto m+\\sigma x$ on $(\\mathbb R,\\mathcal B,\\gamma)$. This affine map is continuous: for $\\sigma$>0 choose $\\delta$=$\\varepsilon$/$\\sigma$, and for $\\sigma$=0 it is constant. Its inverse images of opens are open, so it is Borel measurable. The law of a random element is a probability measure makes its pushforward a probability. When $\\sigma$=0, the preimage of E is all of R if m belongs to E and empty otherwise, so $N(m,0)=\\delta_m$ in The Dirac set function at a point.",
+          "uses": [
+            "1.1",
+            "1.2",
+            "1.3",
+            "2.2",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "thm-intermediate-value",
+          "source_section": "Statement",
+          "quote": "Let $a, b \\in \\mathbb{R}$ with $a \\le b$, let $f : [a,b] \\to \\mathbb{R}$ be\ncontinuous on the closed bounded interval $[a,b]$ (Intervals of $\\mathbb{R}$: the nine order-convex forms, nondegeneracy, and length,\nContinuity of $f : A \\to \\mathbb{R}$ at a point of $A$ and on $A$: the $\\varepsilon$-$\\delta$ condition, its agreement with $\\lim_{x \\to c} f(x) = f(c)$ at a limit point, and continuity at an isolated point), and let $y \\in \\mathbb{R}$ satisfy\n\n$$f(a) \\le y \\le f(b) \\qquad \\text{or} \\qquad f(b) \\le y \\le f(a) .$$\n\nThen there is $c \\in [a,b]$ with $f(c) = y$.",
+          "uses": [
+            "1.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "step": "1.1",
+          "claim": "Under [A1], the standard normal probability law of [F2] is supplied. Its density φ is positive and symmetric and integrates to one, so Φ is continuous and strictly increasing, with Φ(0)=1/2 and Φ(y)→1 as y→∞. Choose B>0 with Φ(B)>0.975. By [F3] on [0,B], there is a unique z>0 with Φ(z)=0.975.",
+          "inputs": [
+            "A1",
+            "F2",
+            "F3",
+            "given",
+            "choose"
+          ]
+        },
+        {
+          "id": "step-1-2",
+          "step": "1.2",
+          "claim": "The prior density times likelihood is proportional to $\\exp\\{-\\tfrac12[\\theta^2+(Y-\\theta)^2]\\}=\\exp\\{-(\\theta-Y/2)^2\\}$ times a factor independent of $\\theta$. Normalization gives posterior law $N(Y/2,1/2)$.",
+          "inputs": [
+            "A1",
+            "F2",
+            "given",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-1-3",
+          "step": "1.3",
+          "claim": "Under the fixed truth $\\theta_*=2r+1$, write $Y=\\theta_*+Z$. The event $\\theta_*\\in I(Y)$ is equivalent to $|Z-\\theta_*|\\le2r$, hence to $1\\le Z\\le4r+1$.",
+          "inputs": [
+            "F1",
+            "F2",
+            "given",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "step": "2.1",
+          "claim": "The interval membership graph is $\\{(Y,\\theta):|\\theta-Y/2|\\le r\\}$, the inverse image of the closed interval $[-r,r]$ under a continuous map. It is closed, hence Borel, so the sampling membership event is measurable.",
+          "inputs": [
+            "F1",
+            "given",
+            "step 1.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-2",
+          "step": "2.2",
+          "claim": "Under that posterior, $(\\theta-Y/2)/\\sqrt{1/2}$ is standard normal. The interval radius $r=z/\\sqrt2$ therefore gives posterior mass $\\Phi(z)-\\Phi(-z)=0.975-0.025=0.95$ for every observed $Y$.",
+          "inputs": [
+            "F1",
+            "F2",
+            "given",
+            "step 1.1",
+            "step 1.2",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "step": "3.1",
+          "claim": "Since the standard normal density is positive and symmetric, $P(1\\le Z\\le4r+1)<P(Z\\ge0)=1/2<0.95$. Thus the interval has posterior mass $0.95$ but frequentist coverage below $0.95$ at $\\theta_*$.",
+          "inputs": [
+            "F2",
+            "step 2.2",
+            "step 1.3",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "finite_checks": [],
+      "finite_smoke": [
+        {
+          "check": "normal-normal-finite-n-posterior",
+          "asserts": "The posterior is $N(Y/2,1/2)$"
+        }
+      ],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The scalar parameter and data spaces are nonempty."
+        },
+        {
+          "case": "zero",
+          "status": "not_applicable",
+          "reason": "No zero-noise, zero-variance, or zero-truth boundary is asserted."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "The example uses one observation, prior variance 1, likelihood variance 1, and posterior variance 1/2."
+        },
+        {
+          "case": "degenerate",
+          "status": "not_applicable",
+          "reason": "The posterior variance is strictly positive; no degenerate prior is used."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "No limiting or interval-endpoint case is claimed."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Step 1.1: AC is explicitly assumed for the supplied standard-normal probability law; no further choice is used."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The example is not an iff statement."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The example is not an iff statement."
+        }
+      ],
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "alpha-batch-21",
+        "notes": "Read all six current Verification steps and exact normal-law, normal-normalization, credibility and intermediate-value suppliers. Phi is continuous, strictly increasing and tends to one; Phi(0)=1/2 and a finite B with Phi(B)>0.975 make the IVT witness unique and positive. Completing the square yields mean Y/2 and variance 1/2. The closed membership graph is Borel; posterior mass is 0.975-0.025=0.95. At the fixed truth theta*=2r+1, membership is exactly 1<=Z<=4r+1 and its probability is strictly less than 1/2, hence 0.95. No degenerate variance, missing endpoint or truth/prior quantifier interchange occurs; AC is inherited only. Accept the reader dependency/F3/step-1.1 repair and synchronize the page manifest dependency. No Statement or Example change and no consumer interface change. No diagrams present. Finite numeric smoke evidence is illustrative only; the analytic inequalities establish the result."
+      }
+    },
+    "cex-ip-empirical-bayes-coverage-fails-for-sparse-gap-truth": {
+      "citations": [
+        {
+          "fact": "A1",
+          "source": "def-axiom-of-choice",
+          "source_section": "Definition",
+          "quote": "The **Axiom of Choice** (AC) is the following statement.\n\n> Every family of nonempty sets has a choice function\n> (Choice function).\n\nWritten out: for every set $\\mathcal{F}$ all of whose members are nonempty,\nthere exists a function $g$ with domain $\\mathcal{F}$ satisfying $g(S) \\in S$ for\nall $S \\in \\mathcal{F}$.\n\nAn equivalent formulation is that a product of nonempty sets is nonempty: if\n$X_i \\ne \\emptyset$ for every $i \\in I$, then $\\prod_{i \\in I} X_i \\ne \\emptyset$.\nHere $\\prod_{i \\in I} X_i$ is the set of functions $f$ with domain $I$ such that\n$f(i) \\in X_i$ for every $i \\in I$; when a family of nonempty sets is indexed by\nitself, such an $f$ is precisely a choice function for it.",
+          "uses": [
+            "2.2"
+          ]
+        },
+        {
+          "fact": "F1",
+          "source": "def-gaussian-sequence-hyperrectangle-class",
+          "source_section": "Definition",
+          "quote": "Write $\\mathbb N_+=\\{1,2,\\ldots\\}$. Let $\\ell^2(\\mathbb N_+,\\mathbb R)$ be the real square-summable sequence space\nfrom [[def-square-summable-family-on-an-arbitrary-index-set]]. For $\\beta>0$\nand $M>0$, the **Gaussian-sequence hyperrectangle** of smoothness index\n$\\beta$ and radius $M$ is\n$$\\Theta_\\beta(M):= \\left\\{\\theta\\in\\ell^2(\\mathbb N_+,\\mathbb R): \\sup_{i\\ge1}i^{1+2\\beta}\\theta_i^2\\le M\\right\\}.$$\nThe definition uses a coordinatewise weighted bound. It is distinct from the\nSobolev ellipsoid $\\{\\theta:\\sum_i i^{2\\beta}\\theta_i^2\\le M\\}$.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "def-polished-tail-class-for-gaussian-sequence",
+          "source_section": "Definition",
+          "quote": "Let $\\ell^2(\\mathbb N,\\mathbb R)$ be the real square-summable sequence space\nfrom [[def-square-summable-family-on-an-arbitrary-index-set]]. Fix\n$L_0\\ge1$, an integer $N_0\\ge1$, and $\\rho\\ge2$. The **polished-tail class**\n$\\Theta_{\\mathrm{pt}}(L_0,N_0,\\rho)$ consists of the sequences\n$\\theta\\in\\ell^2(\\mathbb N,\\mathbb R)$ such that for every integer\n$N\\ge N_0$,\n$$\\sum_{i=N}^{\\infty}\\theta_i^2 \\le L_0\\sum_{i=N}^{\\lfloor\\rho N\\rfloor}\\theta_i^2.$$\nThus each tail's total squared mass is controlled by the mass in the finite\nblock from $N$ through $\\lfloor\\rho N\\rfloor$. The condition concerns block\nenergy; it is not a coordinatewise upper or lower bound.",
+          "uses": [
+            "2.1",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "cex-sparse-gap-truth-causes-empirical-bayes-credible-set-undercoverage",
+          "source_section": "Statement refuted",
+          "quote": "The adaptive empirical-Bayes credible balls have nonvanishing frequentist\ncoverage uniformly over every truth in a hyperrectangle $\\Theta_\\beta(M)$.\n\n**Explicit sparse-gap construction.**\n\nUse [[def-adaptive-empirical-bayes-gaussian-sequence-procedure]], assume AC,\nand fix $\\beta>0$, $p\\ge0$, $C\\ge1$, $\\gamma\\in(0,1)$ and a finite\n$A>\\beta$. Run the procedure with the fixed cap $A_n=A$ and\n$C^{-2}i^{-2p}\\le\\kappa_i^2\\le C^2i^{-2p}$. Choose\n$0<M\\le(1984C^8)^{-1}$. Put $s=1+2\\beta+2p$, $\\rho_j=2^j$,\n$n_1=2$, and\n$$n_{j+1}=\\left\\lceil(2\\rho_{j+1}^2)^s n_j\\right\\rceil,\\qquad N_j=n_j^{1/s}.$$\nDefine the fixed nonnegative truth by\n$$\\theta_{0,i}^2=\\begin{cases}0,&N_j/\\rho_j<i\\le N_j\\text{ for some }j,\\\\0,&2N_j<i\\le\\rho_jN_j\\text{ for some }j,\\\\Mi^{-1-2\\beta},&\\text{otherwise}.\\end{cases}$$\nThen $\\theta_{0,1}=0$ and $\\theta_0\\in\\Theta_\\beta(M)$. For every\ndeterministic nonnegative inflation sequence for which there exist\n$K_L\\in(0,\\infty)$ and $j_0\\in\\mathbb N$ such that, for every $j\\ge j_0$,\n$$L_{n_j}\\le K_L\\sqrt M\\,\\rho_j^{(1+2p)/(8+8\\beta+8p)}$$\none has\n$$P_{\\theta_0}^{(n_j)}\\{\\theta_0\\in\\widehat C_{n_j}(L_{n_j})\\}\\longrightarrow0.$$\nThe finitely many indices with $n_j<3$ are irrelevant. In particular,\nfor every $\\beta>0$ this gives a counterexample for any fixed cap\n$A>\\beta$, including constant inflation factors.",
+          "uses": [
+            "2.2"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "thm-adaptive-empirical-bayes-credible-ball-conservative-coverage-on-polished-tails",
+          "source_section": "Statement",
+          "quote": "Use the Gaussian sequence procedure of\n[[def-adaptive-empirical-bayes-gaussian-sequence-procedure]] with fixed\n$p\\ge0$, $C\\ge1$, $A>0$, and\n$C^{-2}i^{-2p}\\le\\kappa_i^2\\le C^2i^{-2p}$. Fix $L_0\\ge1$, $N_0\\ge1$,\n$\\rho\\ge2$, and $\\gamma\\in(0,1)$. Assume that\n$\\theta_0\\in\\Theta_{\\mathrm{pt}}(L_0,N_0,\\rho)$ and\n$\\theta_{0,1}=0$. Then there is a finite inflation constant $L>0$,\ndepending only on the fixed model and class parameters, such that\n$$\\inf_{\\substack{\\theta_0\\in\\Theta_{\\mathrm{pt}}(L_0,N_0,\\rho)\\\\ \\theta_{0,1}=0}} P_{\\theta_0}^{(n)}\\{\\theta_0\\in\\widehat C_n(L)\\} \\longrightarrow1.$$\nThis is conservative frequentist coverage tending to one, not exact\nasymptotic coverage $1-\\gamma$. The source also allows a sequence of caps\n$A_n>0$ satisfying, for all sufficiently large $n$,\n$$A_n\\le \\frac{\\sqrt{\\log n}}{4\\sqrt{\\log(\\rho\\vee e)}}.$$\nIn that case there is a constant $K_{\\mathrm{infl}}>0$, depending only on the\nfixed model and class parameters and not on $n$, such that the same coverage\nconclusion holds for any deterministic inflation sequence satisfying\n$$L_n\\ge K_{\\mathrm{infl}}(3\\rho^{3(1+2p)})^{A_n}$$\nfor all sufficiently large $n$.",
+          "uses": [
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "def-adaptive-empirical-bayes-gaussian-sequence-procedure",
+          "source_section": "Definition",
+          "quote": "Assume AC. Fix $n\\ge3$, $p\\ge0$, $C\\ge1$, $\\gamma\\in(0,1)$,\nan inflation factor $L\\ge0$, and a finite $A_n>0$. Let\n$(\\kappa_i)_{i\\ge1}$ be known nonzero real numbers satisfying\n$$C^{-2}i^{-2p}\\le\\kappa_i^2\\le C^2i^{-2p}.$$\nFor a true parameter $\\theta_0\\in\\ell^2(\\mathbb N,\\mathbb R)$, the observation\nsequence is\n$$X_i=\\kappa_i\\theta_{0,i}+n^{-1/2}Z_i,\\qquad i\\ge1,$$\nwhere $(Z_i)_{i\\ge1}$ are independent $N(0,1)$ random variables. The\ncorresponding sampling law is denoted $P_{\\theta_0}^{(n)}$.\n\nFor $0<\\alpha\\le A_n$, let\n$$\\Pi_\\alpha=\\bigotimes_{i\\ge1}N(0,i^{-1-2\\alpha}).$$\nIts coordinate posterior rule is the product of\n$$N\\!\\left(\\widehat\\theta_{n,\\alpha,i}(x), v_{n,\\alpha,i}\\right),\\qquad \\widehat\\theta_{n,\\alpha,i}(x)= \\frac{n\\kappa_i x_i}{i^{1+2\\alpha}+n\\kappa_i^2},\\qquad v_{n,\\alpha,i}=\\frac{1}{i^{1+2\\alpha}+n\\kappa_i^2}.$$\nFor $\\alpha>0$, the marginal log likelihood relative to the reference law\n$\\bigotimes_{i\\ge1}N(0,n^{-1})$ is\n$$\\ell_n(\\alpha;x)=-\\frac12\\sum_{i=1}^{\\infty} \\left[ \\log\\!\\left(1+\\frac{n\\kappa_i^2}{i^{1+2\\alpha}}\\right) -\\frac{n^2\\kappa_i^2x_i^2}{i^{1+2\\alpha}+n\\kappa_i^2} \\right].$$\nFor maximization, use this same source score series at every\n$\\alpha\\in[0,A_n]$, with the sum taken in increasing coordinate order.\nChoose a Borel data domain $D_n\\subseteq\\mathbb R^{\\mathbb N}$ such that\nthe series converges to a finite value for every $x\\in D_n$ and every\n$\\alpha\\in[0,A_n]$, and $\\alpha\\mapsto\\ell_n(\\alpha;x)$ is upper\nsemicontinuous there. For each truth under consideration assume\n$P_{\\theta_0}^{(n)}(D_n)=1$. Also assume a Borel-measurable selector\n$x\\mapsto\\widehat\\alpha_n(x)$ on $D_n$ is supplied, with\n$\\widehat\\alpha_n(x)\\in\\operatorname*{arg\\,max}_{0\\le\\alpha\\le A_n}\n\\ell_n(\\alpha;x)$.\nThese domain, endpoint-score and selector conditions are explicit procedure\nhypotheses; no arbitrary score value at $\\alpha=0$ is added. At\n$\\widehat\\alpha_n>0$, let $r_{n,\\gamma}(\\widehat\\alpha_n)$ be the\n$1-\\gamma$ quantile of the centered posterior $\\ell^2$ norm and use the\nposterior mean given above. Define the empirical-Bayes set by\n$$\\widehat C_n(L;x)= \\begin{cases} \\{\\theta\\in\\ell^2: \\|\\theta-\\widehat\\theta_{n,\\widehat\\alpha_n(x)}(x)\\|_2 \\le Lr_{n,\\gamma}(\\widehat\\alpha_n(x))\\},& \\widehat\\alpha_n(x)>0,\\\\ \\ell^2,&\\widehat\\alpha_n(x)=0. \\end{cases}$$\nUse the source convention $r_{n,\\gamma}(0)=+\\infty$ for the second branch;\nno posterior probability on $\\ell^2$ is asserted at $\\alpha=0$. A separate\nlocal lemma verifies the coordinate posterior and evidence formulas for\n$\\alpha>0$.",
+          "uses": [
+            "2.2"
+          ]
+        },
+        {
+          "fact": "F6",
+          "source": "def-ip-credible-set-and-frequency-coverage",
+          "source_section": "Definition",
+          "quote": "Let $(\\Theta,\\mathcal T)$ be a measurable parameter space and, for each integer $n\\ge1$, let $\\mathcal E_n=((\\mathsf Y_n,\\mathcal Y_n),(P_{\\theta,n})_{\\theta\\in\\Theta})$ be a statistical experiment. Let $\\Pi_{0,n}$ be a proper prior on $(\\Theta,\\mathcal T)$ and let $y\\mapsto\\Pi_n(\\cdot\\mid y)$ be a supplied posterior probability kernel under the associated prior-predictive law. For $0<\\gamma<1$, a data-indexed set rule $C_n:\\mathsf Y_n\\to\\mathcal P(\\Theta)$ is a posterior credible set at level $1-\\gamma$ if its membership graph $\\{(y,\\theta):\\theta\\in C_n(y)\\}$ is in $\\mathcal Y_n\\otimes\\mathcal T$ and $\\Pi_n(C_n(y)\\mid y)\\ge1-\\gamma$ for every $y$ in its declared data domain. At a fixed truth $\\theta\\in\\Theta$, its frequentist coverage is $c_n(\\theta):=P_{\\theta,n}\\{y:\\theta\\in C_n(y)\\}$. For a truth class $\\mathcal T_n\\subseteq\\Theta$, the rule is asymptotically honest at level $1-\\gamma$ on $\\mathcal T_n$ if $\\liminf_{n\\to\\infty}\\inf_{\\theta\\in\\mathcal T_n}c_n(\\theta)\\ge1-\\gamma$, and it is asymptotically exactly calibrated there if $\\sup_{\\theta\\in\\mathcal T_n}|c_n(\\theta)-(1-\\gamma)|\\to0$.",
+          "uses": [
+            "2.2"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "step": "1.1",
+          "claim": "Every squared coordinate is either zero or $Mi^{-1-2\\beta}$, so $\\sup_i i^{1+2\\beta}\\theta_{0,i}^2\\le M$ and $\\sum_i\\theta_{0,i}^2\\le M\\sum_i i^{-1-2\\beta}<\\infty$. Also $N_1=2^{1/s}\\in(1,2)$ and $\\rho_1=2$, hence $N_1/\\rho_1<1\\le N_1$ and the first zero gap contains $i=1$. Thus $\\theta_0\\in\\Theta_\\beta(M)$ and $\\theta_{0,1}=0$.",
+          "inputs": [
+            "F1",
+            "given",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "step": "2.1",
+          "claim": "Fix any polished-tail parameters $L_0\\ge1$, integer $N_0\\ge1$, and $\\rho_*\\ge2$. The recursion gives $N_j/\\rho_j\\ge2\\rho_jN_{j-1}>\\rho_{j-1}N_{j-1}$, so every earlier gap ends below $N_j/\\rho_j$. Also $N'_j=\\lfloor2N_j\\rfloor+1\\le2N_j+1$; because $N_j\\to\\infty$ and $\\rho_j\\to\\infty$, for all sufficiently large $j$ we have $N'_j\\ge N_0$ and $\\rho_*(2N_j+1)\\le\\rho_jN_j$, whence $\\lfloor\\rho_*N'_j\\rfloor\\le\\rho_jN_j$. Since $N'_j>2N_j$, the block $[N'_j,\\lfloor\\rho_*N'_j\\rfloor]$ lies in the current zero gap $(2N_j,\\rho_jN_j]$. For all sufficiently large $j$, $i_j=\\lfloor\\rho_jN_j\\rfloor+1\\le\\rho_jN_j+1<4\\rho_jN_j\\le N_{j+1}/\\rho_{j+1}$, so $i_j$ is before the next first gap; applying the same separation at later indices puts all still later gaps farther right. Since $\\rho_jN_j>2N_j+1\\ge N'_j$ eventually, $i_j>N'_j$; earlier gaps end below $N_j/\\rho_j<i_j$. Hence $i_j$ lies outside every zero gap and is in the tail from $N'_j$, with $\\theta_{0,i_j}^2=Mi_j^{-1-2\\beta}>0$. The block sum is zero while that tail is positive, violating [F2]. Thus $\\theta_0$ is outside every fixed polished-tail class.",
+          "inputs": [
+            "F2",
+            "given",
+            "step 1.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-2",
+          "step": "2.2",
+          "claim": "For a fixed $L\\ge1$, take $L_{n_j}=L$ and $K_L=L/\\sqrt M$. Since $(1+2p)/(8+8\\beta+8p)>0$ and $\\rho_j\\ge1$, we have $L_{n_j}=L\\le K_L\\sqrt M\\,\\rho_j^{(1+2p)/(8+8\\beta+8p)}$ for every $j$. Applying [F3] gives $P_{\\theta_0}^{(n_j)}\\{\\theta_0\\in\\widehat C_{n_j}(L)\\}\\to0$. By [F6] this is the frequentist coverage at the fixed truth; because $\\theta_0\\in\\Theta_\\beta(M)$ by step 1.1, the infimum coverage over that hyperrectangle cannot have lower limit at least $1-\\gamma$.",
+          "inputs": [
+            "A1",
+            "F3",
+            "F5",
+            "F6",
+            "given",
+            "step 1.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "step": "3.1",
+          "claim": "The positive coverage statement [F4] has the additional polished-tail hypothesis, which fails for $\\theta_0$ by step 2.1. Thus the sparse-gap undercoverage does not contradict the polished-tail theorem; it refutes only the broader fixed-inflation claim over the full hyperrectangle.",
+          "inputs": [
+            "F2",
+            "F4",
+            "step 2.1",
+            "step 2.2",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "finite_checks": [],
+      "finite_smoke": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The sequence space and hyperrectangle include nonempty parameter sets."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Step 1.1: the construction places coordinate 1 in the first zero gap, so theta_0,1=0 as required by the positive theorem."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Step 1.1: the first coordinate is placed in the first zero gap; all other coordinates obey the weighted hyperrectangle bound."
+        },
+        {
+          "case": "degenerate",
+          "status": "not_applicable",
+          "reason": "The prior is nondegenerate for positive alpha; no degenerate-prior case is asserted."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Statement refuted states 0<M<=(1984 C^8)^(-1), A>beta, gamma in (0,1), and every fixed L>=1."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Statement refuted assumes AC explicitly; the Gaussian product prior uses this declared choice branch."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The refuted statement is not an iff claim."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The refuted statement is not an iff claim."
+        }
+      ],
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "alpha-batch-21",
+        "notes": "Independently checked every local step and the complete published sparse-gap supplier, posterior formula, one-sided bracket and marginal-score proofs. Recursion separates all gaps; the first coordinate is zero, beta>0 makes the truth square-summable, and a positive coordinate after each arbitrarily long zero block defeats every fixed polished-tail inequality. For each fixed L>=1, K_L=L/sqrt(M) meets the exact inflation exponent because M>0 and p>=0. Thus the same fixed truth gives subsequence coverage zero, forcing the hyperrectangle infimum liminf to zero. A>beta and the small-M bound match the supplier; the alpha=0 whole-space branch is excluded on its asymptotic bracket event. The positive polished-tail theorem requires the excluded polished-tail hypothesis and promises conservative rather than exact coverage. Checked primary source arXiv:1310.4489v5 Theorems 3.1 and 3.6 and complete section 9; local endpoint conventions and explicit small-M constants are justified by the local proof rather than attributed verbatim to the paper. No mathematical defect or diagram obligation found; finite smoke checks cannot establish this asymptotic result."
+      }
+    },
+    "ex-ip-exact-adaptive-credible-coverage-by-posterior-null-deletion": {
+      "citations": [
+        {
+          "fact": "A1",
+          "source": "def-axiom-of-choice",
+          "source_section": "Definition",
+          "quote": "The **Axiom of Choice** (AC) is the following statement.\n\n> Every family of nonempty sets has a choice function\n> (Choice function).\n\nWritten out: for every set $\\mathcal{F}$ all of whose members are nonempty,\nthere exists a function $g$ with domain $\\mathcal{F}$ satisfying $g(S) \\in S$ for\nall $S \\in \\mathcal{F}$.\n\nAn equivalent formulation is that a product of nonempty sets is nonempty: if\n$X_i \\ne \\emptyset$ for every $i \\in I$, then $\\prod_{i \\in I} X_i \\ne \\emptyset$.\nHere $\\prod_{i \\in I} X_i$ is the set of functions $f$ with domain $I$ such that\n$f(i) \\in X_i$ for every $i \\in I$; when a family of nonempty sets is indexed by\nitself, such an $f$ is precisely a choice function for it.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "A1",
+          "source": "def-countable-choice",
+          "source_section": "Definition",
+          "quote": "The **Axiom of Countable Choice**, written $\\mathrm{AC}_\\omega$, is the following\nstatement.\n\n> For every family $(X_n)_{n \\in \\mathbb{N}}$ of nonempty sets indexed by\n> $\\mathbb{N}$ there is a function $f$ with domain $\\mathbb{N}$ such that\n> $f(n) \\in X_n$ for every $n \\in \\mathbb{N}$.\n\nEquivalently, in the vocabulary of Choice function: every at most\ncountable family of nonempty sets has a choice function.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F1",
+          "source": "def-adaptive-empirical-bayes-gaussian-sequence-procedure",
+          "source_section": "Definition",
+          "quote": "Assume AC. Fix $n\\ge3$, $p\\ge0$, $C\\ge1$, $\\gamma\\in(0,1)$,\nan inflation factor $L\\ge0$, and a finite $A_n>0$. Let\n$(\\kappa_i)_{i\\ge1}$ be known nonzero real numbers satisfying\n$$C^{-2}i^{-2p}\\le\\kappa_i^2\\le C^2i^{-2p}.$$\nFor a true parameter $\\theta_0\\in\\ell^2(\\mathbb N,\\mathbb R)$, the observation\nsequence is\n$$X_i=\\kappa_i\\theta_{0,i}+n^{-1/2}Z_i,\\qquad i\\ge1,$$\nwhere $(Z_i)_{i\\ge1}$ are independent $N(0,1)$ random variables. The\ncorresponding sampling law is denoted $P_{\\theta_0}^{(n)}$.\n\nFor $0<\\alpha\\le A_n$, let\n$$\\Pi_\\alpha=\\bigotimes_{i\\ge1}N(0,i^{-1-2\\alpha}).$$\nIts coordinate posterior rule is the product of\n$$N\\!\\left(\\widehat\\theta_{n,\\alpha,i}(x), v_{n,\\alpha,i}\\right),\\qquad \\widehat\\theta_{n,\\alpha,i}(x)= \\frac{n\\kappa_i x_i}{i^{1+2\\alpha}+n\\kappa_i^2},\\qquad v_{n,\\alpha,i}=\\frac{1}{i^{1+2\\alpha}+n\\kappa_i^2}.$$\nFor $\\alpha>0$, the marginal log likelihood relative to the reference law\n$\\bigotimes_{i\\ge1}N(0,n^{-1})$ is\n$$\\ell_n(\\alpha;x)=-\\frac12\\sum_{i=1}^{\\infty} \\left[ \\log\\!\\left(1+\\frac{n\\kappa_i^2}{i^{1+2\\alpha}}\\right) -\\frac{n^2\\kappa_i^2x_i^2}{i^{1+2\\alpha}+n\\kappa_i^2} \\right].$$\nFor maximization, use this same source score series at every\n$\\alpha\\in[0,A_n]$, with the sum taken in increasing coordinate order.\nChoose a Borel data domain $D_n\\subseteq\\mathbb R^{\\mathbb N}$ such that\nthe series converges to a finite value for every $x\\in D_n$ and every\n$\\alpha\\in[0,A_n]$, and $\\alpha\\mapsto\\ell_n(\\alpha;x)$ is upper\nsemicontinuous there. For each truth under consideration assume\n$P_{\\theta_0}^{(n)}(D_n)=1$. Also assume a Borel-measurable selector\n$x\\mapsto\\widehat\\alpha_n(x)$ on $D_n$ is supplied, with\n$\\widehat\\alpha_n(x)\\in\\operatorname*{arg\\,max}_{0\\le\\alpha\\le A_n}\n\\ell_n(\\alpha;x)$.\nThese domain, endpoint-score and selector conditions are explicit procedure\nhypotheses; no arbitrary score value at $\\alpha=0$ is added. At\n$\\widehat\\alpha_n>0$, let $r_{n,\\gamma}(\\widehat\\alpha_n)$ be the\n$1-\\gamma$ quantile of the centered posterior $\\ell^2$ norm and use the\nposterior mean given above. Define the empirical-Bayes set by\n$$\\widehat C_n(L;x)= \\begin{cases} \\{\\theta\\in\\ell^2: \\|\\theta-\\widehat\\theta_{n,\\widehat\\alpha_n(x)}(x)\\|_2 \\le Lr_{n,\\gamma}(\\widehat\\alpha_n(x))\\},& \\widehat\\alpha_n(x)>0,\\\\ \\ell^2,&\\widehat\\alpha_n(x)=0. \\end{cases}$$\nUse the source convention $r_{n,\\gamma}(0)=+\\infty$ for the second branch;\nno posterior probability on $\\ell^2$ is asserted at $\\alpha=0$. A separate\nlocal lemma verifies the coordinate posterior and evidence formulas for\n$\\alpha>0$.",
+          "uses": [
+            "1.2",
+            "2.2",
+            "3.1",
+            "3.2"
+          ]
+        },
+        {
+          "fact": "F1",
+          "source": "lem-gaussian-sequence-empirical-bayes-posterior-formula",
+          "source_section": "Statement",
+          "quote": "Assume AC. Fix $n\\ge1$, $p\\ge0$, $C\\ge1$, a sequence\n$C^{-2}i^{-2p}\\le\\kappa_i^2\\le C^2i^{-2p}$, a truth\n$\\theta_0\\in\\ell^2(\\mathbb N_+,\\mathbb R)$, where $\\mathbb N_+=\\{1,2,\\ldots\\}$,\nand $0<\\alpha<\\infty$. Consider the prior\n$\\Pi_\\alpha=\\bigotimes_{i\\ge1}N(0,i^{-1-2\\alpha})$ and observations\n$X_i=\\kappa_i\\theta_{0,i}+n^{-1/2}Z_i$, where the $Z_i$ are independent\n$N(0,1)$. Denote their sampling law by $P_{\\theta_0}^{(n)}$ and write\n$\\ell^2=\\ell^2(\\mathbb N_+,\\mathbb R)$ throughout this lemma. For\n$n\\ge3$ and $0<\\alpha\\le A_n$, these are the model and prior in\n[[def-adaptive-empirical-bayes-gaussian-sequence-procedure]]; the present\nfixed-$\\alpha$ calculation requires no maximization domain or selector. Put\n$r=1+2\\alpha$. Then the product prior is supported on $\\ell^2$, and its\nposterior kernel under the prior-predictive law $Q_{n,\\alpha}$ is the product\nof the coordinate laws\n$$N\\!\\left( \\frac{n\\kappa_i x_i}{i^r+n\\kappa_i^2}, \\frac{1}{i^r+n\\kappa_i^2} \\right),\\qquad i\\ge1,$$\nFor $P_{\\theta_0}^{(n)}$-almost every observation $x$, this same kernel is\nsupported on $\\ell^2$, and its posterior mean belongs to $\\ell^2$.\n\nLet $Q_{n,\\alpha}$ be the prior-predictive law of $X$ under this prior and\nlet $Q_{n,0}=\\bigotimes_{i\\ge1}N(0,n^{-1})$. Then $Q_{n,\\alpha}\\ll Q_{n,0}$\nand\n$$\\log\\frac{dQ_{n,\\alpha}}{dQ_{n,0}}(x) =-\\frac12\\sum_{i=1}^{\\infty} \\left[ \\log\\!\\left(1+\\frac{n\\kappa_i^2}{i^r}\\right) -\\frac{n^2\\kappa_i^2x_i^2}{i^r+n\\kappa_i^2} \\right] =\\ell_n(\\alpha;x).$$\nThe density identity and absolute convergence hold $Q_{n,0}$-almost surely.\nThe same displayed score series also converges absolutely\n$P_{\\theta_0}^{(n)}$-almost surely; this latter assertion does not identify a\nversion of the Radon–Nikodym derivative under $P_{\\theta_0}^{(n)}$.",
+          "uses": [
+            "1.2",
+            "2.2",
+            "3.1",
+            "3.2"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "thm-adaptive-empirical-bayes-credible-ball-conservative-coverage-on-polished-tails",
+          "source_section": "Statement",
+          "quote": "Use the Gaussian sequence procedure of\n[[def-adaptive-empirical-bayes-gaussian-sequence-procedure]] with fixed\n$p\\ge0$, $C\\ge1$, $A>0$, and\n$C^{-2}i^{-2p}\\le\\kappa_i^2\\le C^2i^{-2p}$. Fix $L_0\\ge1$, $N_0\\ge1$,\n$\\rho\\ge2$, and $\\gamma\\in(0,1)$. Assume that\n$\\theta_0\\in\\Theta_{\\mathrm{pt}}(L_0,N_0,\\rho)$ and\n$\\theta_{0,1}=0$. Then there is a finite inflation constant $L>0$,\ndepending only on the fixed model and class parameters, such that\n$$\\inf_{\\substack{\\theta_0\\in\\Theta_{\\mathrm{pt}}(L_0,N_0,\\rho)\\\\ \\theta_{0,1}=0}} P_{\\theta_0}^{(n)}\\{\\theta_0\\in\\widehat C_n(L)\\} \\longrightarrow1.$$\nThis is conservative frequentist coverage tending to one, not exact\nasymptotic coverage $1-\\gamma$. The source also allows a sequence of caps\n$A_n>0$ satisfying, for all sufficiently large $n$,\n$$A_n\\le \\frac{\\sqrt{\\log n}}{4\\sqrt{\\log(\\rho\\vee e)}}.$$\nIn that case there is a constant $K_{\\mathrm{infl}}>0$, depending only on the\nfixed model and class parameters and not on $n$, such that the same coverage\nconclusion holds for any deterministic inflation sequence satisfying\n$$L_n\\ge K_{\\mathrm{infl}}(3\\rho^{3(1+2p)})^{A_n}$$\nfor all sufficiently large $n$.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "lem-empirical-bayes-maximizer-bracket-on-polished-tails",
+          "source_section": "Statement",
+          "quote": "Use the inverse Gaussian sequence procedure of\n[[def-adaptive-empirical-bayes-gaussian-sequence-procedure]] with fixed\n$p\\ge0$, $C\\ge1$, $A>0$, and $\\kappa_i^2\\in[C^{-2}i^{-2p},C^2i^{-2p}]$.\nFix $L_0\\ge1$, $N_0\\ge1$, and $\\rho\\ge2$. Let\n$\\theta_0\\in\\Theta_{\\mathrm{pt}}(L_0,N_0,\\rho)$ with $\\theta_{0,1}=0$.\nFor $n\\ge3$ and $\\alpha\\in[0,A]$, put\n$$N_{n,\\alpha}=n^{1/(1+2\\alpha+2p)},\\qquad h_n(\\alpha;\\theta_0)= \\frac{1+2\\alpha+2p}{N_{n,\\alpha}\\log n} \\sum_{i=1}^{\\infty} \\frac{n^2 i^{1+2\\alpha}(\\log i)\\theta_{0,i}^2} {(i^{1+2\\alpha+2p}+n)^2}.$$\nDefine\n$$\\underline\\alpha_n= \\inf\\{\\alpha\\in[0,A]:h_n(\\alpha;\\theta_0)\\ge(16C^8)^{-1}\\}, \\qquad \\overline\\alpha_n= \\sup\\{\\alpha\\in[0,A]:h_n(\\alpha;\\theta_0)\\le8C^8\\},$$\nwith the source conventions $\\inf\\varnothing=A$ and $\\sup\\varnothing=0$.\nThen the source bracket result is\n$$\\inf_{\\theta_0\\in\\Theta_{\\mathrm{pt}}(L_0,N_0,\\rho),\\,\\theta_{0,1}=0} P_{\\theta_0}^{(n)} \\bigl(\\underline\\alpha_n\\le\\widehat\\alpha_n\\le\\overline\\alpha_n\\bigr) \\longrightarrow1.$$\nMore generally, the same conclusion holds with $A=A_n$ whenever\n$$0<A_n\\le\\frac{\\sqrt{\\log n}}{4\\sqrt{\\log(\\rho\\vee e)}}$$\nfor all sufficiently large $n$. Uniformly in the polished-tail class, for all sufficiently large $n$,\n$$\\frac{n^{-2\\underline\\alpha_n/(1+2\\underline\\alpha_n+2p)}}{n^{-2\\overline\\alpha_n/(1+2\\overline\\alpha_n+2p)}}\\le\\left[128C^{16}\\{4+36L_0\\rho^{1+2A_n}\\}\\right]^{1+2p}.$$\nIn particular, for fixed $A$ the two rates are uniformly comparable. The lower bracket alone is valid uniformly over arbitrary $\\theta_0\\in\\ell^2$, using the same definition of $\\underline\\alpha_n$ and the same procedure/domain hypotheses:\n$$\\inf_{\\theta_0\\in\\ell^2}P_{\\theta_0}^{(n)}(\\underline\\alpha_n\\le\\widehat\\alpha_n)\\longrightarrow1.$$",
+          "uses": [
+            "1.3",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "lem-uniform-empirical-bayes-marginal-score-bound",
+          "source_section": "Statement",
+          "quote": "Use the defined inverse Gaussian sequence procedure with fixed $p,C,L_0,N_0,\\rho$ and $0<A=A_n\\le\\sqrt{\\log n}/(4\\sqrt{\\log(\\rho\\vee e)})$ for all sufficiently large $n$. Write\n$$r_\\alpha=1+2\\alpha+2p,\\quad s_\\alpha=1+2\\alpha,\\quad N_\\alpha=n^{1/r_\\alpha},\\quad V_\\alpha=N_\\alpha\\log N_\\alpha,\\quad f_\\alpha(i)=\\frac{n^2i^{s_\\alpha}\\log i}{(i^{r_\\alpha}+n)^2},\\quad S_\\alpha=\\sum_i f_\\alpha(i)\\theta_i^2,\\quad h_\\alpha=S_\\alpha/V_\\alpha.$$\nThe likelihood has a continuous derivative $M_n$ on $[0,A]$, with the derivative at zero interpreted from the right. Let $Q_n=M_n-E_\\theta M_n$. Uniformly over $\\theta\\in\\Theta_{\\rm pt}(L_0,N_0,\\rho)$,\n$$E_\\theta\\sup_{0\\le\\alpha\\le A}\\frac{|Q_n(\\alpha)|}{V_\\alpha(1+h_\\alpha)}\\le\\frac{K\\{1+A L_0\\rho^{1+2A}\\log n\\}}{\\sqrt{N_A}}\\longrightarrow0.$$\nFor all sufficiently large $n$, all $0\\le a\\le b\\le A$, and every such truth,\n$$h_a\\le(4+36L_0\\rho^{1+2b})\\frac{N_b}{N_a}h_b.$$\nFor every $\\theta\\in\\ell^2$, the expectation satisfies\n$$\\frac{E_\\theta M_n(\\alpha)}{V_\\alpha}\\ge\\frac1{8C^4}-C^4h_\\alpha,\\qquad \\frac{E_\\theta M_n(\\alpha)}{V_\\alpha}\\le3C^4-C^{-4}h_\\alpha.$$\nFinally, for arbitrary $\\theta\\in\\ell^2$ and every deterministic interval $[0,c]\\subseteq[0,A]$ on which $h_\\alpha\\le H$, where $H$ is fixed, one has\n$$E_\\theta\\sup_{0\\le\\alpha\\le c}\\frac{|Q_n(\\alpha)|}{V_\\alpha}\\le\\frac{K_H(1+A\\log n)}{\\sqrt{N_A}}\\longrightarrow0.$$\nConstants do not depend on $n,A,\\theta$. Fixed finite $A$ is allowed by the eventual cap.",
+          "uses": [
+            "1.3",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "def-ip-credible-set-and-frequency-coverage",
+          "source_section": "Definition",
+          "quote": "Let $(\\Theta,\\mathcal T)$ be a measurable parameter space and, for each integer $n\\ge1$, let $\\mathcal E_n=((\\mathsf Y_n,\\mathcal Y_n),(P_{\\theta,n})_{\\theta\\in\\Theta})$ be a statistical experiment. Let $\\Pi_{0,n}$ be a proper prior on $(\\Theta,\\mathcal T)$ and let $y\\mapsto\\Pi_n(\\cdot\\mid y)$ be a supplied posterior probability kernel under the associated prior-predictive law. For $0<\\gamma<1$, a data-indexed set rule $C_n:\\mathsf Y_n\\to\\mathcal P(\\Theta)$ is a posterior credible set at level $1-\\gamma$ if its membership graph $\\{(y,\\theta):\\theta\\in C_n(y)\\}$ is in $\\mathcal Y_n\\otimes\\mathcal T$ and $\\Pi_n(C_n(y)\\mid y)\\ge1-\\gamma$ for every $y$ in its declared data domain. At a fixed truth $\\theta\\in\\Theta$, its frequentist coverage is $c_n(\\theta):=P_{\\theta,n}\\{y:\\theta\\in C_n(y)\\}$. For a truth class $\\mathcal T_n\\subseteq\\Theta$, the rule is asymptotically honest at level $1-\\gamma$ on $\\mathcal T_n$ if $\\liminf_{n\\to\\infty}\\inf_{\\theta\\in\\mathcal T_n}c_n(\\theta)\\ge1-\\gamma$, and it is asymptotically exactly calibrated there if $\\sup_{\\theta\\in\\mathcal T_n}|c_n(\\theta)-(1-\\gamma)|\\to0$.",
+          "uses": [
+            "2.2",
+            "4.1"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "def-polished-tail-class-for-gaussian-sequence",
+          "source_section": "Definition",
+          "quote": "Let $\\ell^2(\\mathbb N,\\mathbb R)$ be the real square-summable sequence space\nfrom [[def-square-summable-family-on-an-arbitrary-index-set]]. Fix\n$L_0\\ge1$, an integer $N_0\\ge1$, and $\\rho\\ge2$. The **polished-tail class**\n$\\Theta_{\\mathrm{pt}}(L_0,N_0,\\rho)$ consists of the sequences\n$\\theta\\in\\ell^2(\\mathbb N,\\mathbb R)$ such that for every integer\n$N\\ge N_0$,\n$$\\sum_{i=N}^{\\infty}\\theta_i^2 \\le L_0\\sum_{i=N}^{\\lfloor\\rho N\\rfloor}\\theta_i^2.$$\nThus each tail's total squared mass is controlled by the mass in the finite\nblock from $N$ through $\\lfloor\\rho N\\rfloor$. The condition concerns block\nenergy; it is not a coordinatewise upper or lower bound.",
+          "uses": [
+            "1.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "step": "1.1",
+          "claim": "Fix the inflation $L\\ge1$ in [F2], depending only on the known constants. Let $B_n=\\widehat C_n(L)$, including its whole-space zero-selector branch. With $U=\\bigcup_{\\beta\\in[\\beta_-,\\beta_+]}\\mathcal G_\\beta$, [F2] gives $\\epsilon_n:=\\sup_{\\theta\\in U}P_\\theta^{(n)}\\{\\theta\\notin B_n\\}\\to0$. This is uniform because $U$ is a subset of the single polished-tail class in that theorem. This step claims conservative coverage only.",
+          "inputs": [
+            "A1",
+            "F2",
+            "F5",
+            "given"
+          ]
+        },
+        {
+          "id": "step-1-2",
+          "step": "1.2",
+          "claim": "The random positive-selector posterior is supported on $\\ell^2$ on a single Borel domain, not merely on a separate almost-sure domain for each fixed hyperparameter. Indeed intersect the supplied score domain with $$T_n=\\left\\{x:\\sum_i n^2\\kappa_i^2x_i^2/i^2<\\infty\\right\\}.$$ For every square-summable truth the expectation of this nonnegative sum is $$n^2\\sum_i\\kappa_i^4\\theta_i^2/i^2+n\\sum_i\\kappa_i^2/i^2<\\infty.$$ Thus $T_n$ is Borel and has probability one under every such truth. For every $x\\in T_n$ and every $a\\ge0$, the squared posterior mean is bounded by that same sum, since $i^{1+2a}+n\\kappa_i^2\\ge i$. For every $a>0$ the variance trace is finite. Hence all positive-parameter posterior laws at these data are supported on $\\ell^2$, including the selected law. Extend the selector by zero and use the whole space outside this common declared domain. This changes none of the sampling probabilities and asserts no posterior on the zero branch.",
+          "inputs": [
+            "F1",
+            "given",
+            "construct"
+          ]
+        },
+        {
+          "id": "step-1-3",
+          "step": "1.3",
+          "claim": "We verify the diameter rate uniformly in $\\beta$, rather than import a pointwise Sobolev assertion. Write $q_a=1+2a+2p$, $N_a=n^{1/q_a}$, and $d=\\beta-a\\ge0$. In the score $h_n(a;\\theta)$ of [F3], put $e_i=i^{2\\beta}\\theta_i^2$, so $\\sum_i e_i\\le R^2$. For $i\\le N_a$, the multiplier of $e_i$ is at most $$\\frac{i^{1-2d}\\log i}{N_a\\log N_a}\\le N_a^{-\\min(1,2d)}.$$ If $1-2d\\ge0$, bound both powers and logarithms by their values at $N_a$; otherwise use $i^{1-2d}\\le1$. For $i>N_a$, the multiplier is at most $$\\frac{N_a^{2q_a}}{N_a\\log N_a}i^{-1-2a-4p-2\\beta}\\log i\\le N_a^{-2d}.$$ The last function of $i$ is decreasing for $i\\ge N_a$ once $n$ is uniformly large, since its negative power has exponent at least $1+4p$. Both ranges therefore give $$h_n(a;\\theta)\\le R^2N_a^{-\\min(1,2(\\beta-a))}.$$ These bounds hold simultaneously for $0\\le a\\le\\beta$, every $\\beta$ in the fixed compact interval, and every $\\theta\\in\\Theta_\\beta(R)$.",
+          "inputs": [
+            "F3",
+            "given",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "step": "2.1",
+          "claim": "Choose a fixed $D>0$ with $R^2\\exp\\{-2D/(1+2\\beta_++2p)\\}<t$. For all sufficiently large $n$, put $a_{n,\\beta}=\\beta-D/\\log n\\ge\\beta_-/2$. For every $0\\le a\\le a_{n,\\beta}$, step 1.3 makes $h_n(a;\\theta)<t$: here $\\min(1,2(\\beta-a))\\log N_a\\ge2D/(1+2\\beta_++2p)$ when $\\log n\\ge2D$. Consequently $\\underline\\alpha_n\\ge a_{n,\\beta}$, including the empty-threshold convention $\\underline\\alpha_n=A$. The uniform lower bracket [F3] yields $$\\sup_{\\beta,\\theta\\in\\mathcal G_\\beta}P_\\theta^{(n)}\\{\\widehat\\alpha_n<a_{n,\\beta}\\}\\longrightarrow0.$$ In particular $\\delta_n:=\\sup_{\\theta\\in U}P_\\theta^{(n)}\\{\\widehat\\alpha_n=0\\}\\to0$.",
+          "inputs": [
+            "F3",
+            "step 1.3",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-2",
+          "step": "2.2",
+          "claim": "Put $H=\\{u\\in\\ell^2:u_1=0\\}$, $Z_n=\\{\\widehat\\alpha_n=0\\}$ and $E_n=\\{\\sqrt nX_1\\le\\Phi^{-1}(1-\\gamma)\\}$. Define $$C_n=\\begin{cases}\\ell^2,&Z_n,\\\\B_n,&Z_n^c\\cap E_n,\\\\B_n\\setminus H,&Z_n^c\\cap E_n^c.\\end{cases}$$ For $n<3$ one may use $\\ell^2$. The positive-selector posterior's first-coordinate variance is $(1+n\\kappa_1^2)^{-1}>0$, so it assigns $H$ mass zero for every data point of the declared domain, even though the hyperparameter is data-selected. Since $L\\ge1$, $B_n$ has posterior mass at least $1-\\gamma$; deleting $H$ preserves that mass. On $Z_n$ the specified whole-space convention is retained.",
+          "inputs": [
+            "F1",
+            "F4",
+            "step 1.2",
+            "construct"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "step": "3.1",
+          "claim": "Uniformly for $a\\in[\\beta_-/2,A]$, split the posterior variance trace at $N_a$. Below that cutoff use $v_i(a)\\le C^2i^{2p}/n$; above it use $v_i(a)\\le i^{-1-2a}$. Summation and an integral comparison give $$\\sum_i v_i(a)\\le K n^{-2a/q_a},$$ where $K$ depends only on the fixed constants (the tail factor $1/(2a)$ is uniformly bounded). Markov's inequality applied to the centered posterior squared norm bounds its $(1-\\gamma)$ norm quantile by $\\sqrt{K/\\gamma}\\,n^{-a/q_a}$. The variances, hence the norm quantile, decrease with $a$ by coupling all centered coordinates with the same standard normals. On the event of step 2.1, the selected radius is therefore at most $\\sqrt{K/\\gamma}\\,n^{-a_{n,\\beta}/q_{a_{n,\\beta}}}$. The derivative of $a/q_a$ is $(1+2p)/q_a^2\\le1/(1+2p)$, so this is at most $K' n^{-\\beta/(1+2\\beta+2p)}$ with one $K'$ for the full compact $\\beta$ interval. Thus outside an event of uniformly vanishing probability, $\\operatorname{diam}(B_n)\\le2LK'n^{-\\beta/(1+2\\beta+2p)}$. This includes the uniformly negligible infinite-diameter zero-selector branch.",
+          "inputs": [
+            "F1",
+            "step 2.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-3-2",
+          "step": "3.2",
+          "claim": "This is one rule independent of $\\theta$ and $\\beta$. Its graph is Borel: the coordinate posterior means and selector are Borel, and the squared norm is the limit of its finite coordinate sums. For completeness, on a fixed countable standard-normal product space the map $(a,z)\\mapsto\\sum_i v_i(a)z_i^2$ is nonnegative Borel. Integrating its threshold indicators gives a Borel distribution function in $(a,s)$. Its quantile is Borel, by taking the infimum of positive rational radii whose distribution function is at least $1-\\gamma$; right continuity ensures this quantile has the required posterior mass. The centered norm has a positive finite quantile: it is finite by its finite second moment and has no atom at zero because its first coordinate is nondegenerate. Thus the radius is positive. Deleting the closed codimension-one hyperplane leaves a dense subset of any positive-radius ball: perturb a point toward the center if necessary and then a sufficiently small amount along the first coordinate. Hence $B_n\\setminus H$ has the same diameter $2Lr_{n,\\gamma}(\\widehat\\alpha_n)$ as $B_n$. Diameter is consequently an extended Borel random variable, equal to this expression off $Z_n$ and infinity on $Z_n$.",
+          "inputs": [
+            "F1",
+            "step 1.2",
+            "step 2.2",
+            "construct"
+          ]
+        },
+        {
+          "id": "step-4-1",
+          "step": "4.1",
+          "claim": "Every allowed truth lies in $H$ and has $P_\\theta^{(n)}(E_n)=1-\\gamma$ exactly, since $\\theta_1=0$. Its coverage equals $$P_\\theta(Z_n)+P_\\theta(Z_n^c\\cap E_n\\cap\\{\\theta\\in B_n\\}).$$ Subtracting $P_\\theta(E_n)$ leaves $$P_\\theta(Z_n\\cap E_n^c)-P_\\theta(Z_n^c\\cap E_n\\cap\\{\\theta\\notin B_n\\}).$$ Its absolute value is at most $\\delta_n+\\epsilon_n\\to0$ uniformly over both suprema in the question. No independence among $E_n$, the selector and $B_n$ is used. Also $C_n\\subseteq B_n$ on every branch, so step 3.1 proves the requested diameter statement, in fact with limiting supremum zero for one sufficiently large fixed diameter constant. The nonzero lower norm bound $m$ is retained and needs no additional argument. This answers the unchanged unrestricted existence question affirmatively. It does not identify the constructed sets as balls or attribute this null-deletion construction to the cited literature.",
+          "inputs": [
+            "F4",
+            "step 1.1",
+            "step 2.1",
+            "step 3.1",
+            "step 2.2",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "finite_checks": [],
+      "finite_smoke": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "Example and Verification: Every G_beta is assumed nonempty; empty diameter convention retained, while constructed positive-radius balls and their hyperplane deletions are nonempty. See 2.2–3.2."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Example and Verification: Selector zero gives exactly ell 2, asserts no ell 2 posterior, and has uniformly vanishing probability by 2.1. Zero coordinates and finite initial n are explicit."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Example and Verification: Coordinate 1 gives the exact Gaussian event and posterior-null hyperplane; variance is positive on every positive-selector branch. See 2.2 and 4.1."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Example and Verification: H 0-posterior degeneracy is excluded by positive coordinate 1 variance; supplied positive-alpha trace is finite. No posterior is asserted at 0."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Example and Verification: Closed beta interval and finite cap A remain unchanged. beta-D/log n lies above beta-/2 uniformly for sufficiently large n, and below beta+<A."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Example and Verification: AC and CC retained; the selector is supplied. Constants L,D are fixed from known class/model constants, never selected by unknown beta or truth."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "Not an iff claim; the affirmative construction proves all stated existence requirements."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "Not an iff claim; no converse is asserted."
+        }
+      ],
+      "risk_review": {
+        "status": "checked",
+        "notes": "Current owner read complete Example and Verification, archived original question and actual F1-F5 suppliers. Independently checked the two-region multiplier bound, uniform lower selector bracket, trace/quantile bound, common Borel support domain, graph and diameter measurability, and exact coverage subtraction without independence. All original constants, zero-selector branch, truth classes and quantified targets retained. Numerical smoke tests would not prove these uniform asymptotic claims. The original Example is byte-for-byte preserved; Verification clarifies its explicit positive-coordinate model. Adopted normative precheck phase ordering and checked the resulting references."
+      }
+    }
+  }
+}

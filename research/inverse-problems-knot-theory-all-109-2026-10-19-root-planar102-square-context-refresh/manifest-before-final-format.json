@@ -1,0 +1,387 @@
+[
+  {
+    "order": 3200,
+    "id": "planar-diagram-codes-and-knot-table-enumeration",
+    "kind": "A",
+    "category": "knot-theory",
+    "title": "Planar-diagram codes and knot-table enumeration",
+    "companion": "planar-diagram-codes-and-knot-table-enumeration-examples",
+    "requires": [
+      "wirtinger-presentations-and-knot-groups",
+      "crossing-signs-writhe-and-linking-number",
+      "smooth-surgery-traces-and-handle-trading"
+    ],
+    "items": [
+      {
+        "id": "lem-connected-plane-multigraph-euler-formula",
+        "kind": "lemma",
+        "title": "Euler formula for connected plane multigraphs",
+        "statement": "Every finite nonempty connected polygonal plane multigraph, allowing loops and parallel edges, satisfies V-E+F=2; the zero-edge connected case is included.",
+        "deps": [
+          "def-plane-graph-face-and-boundary",
+          "thm-euler-formula-for-connected-plane-graphs"
+        ],
+        "dependency_level": 0,
+        "strategy": "Subdivide each loop and each parallel edge twice using fresh vertices. The point-set drawing and faces stay fixed, while the resulting graph is finite, simple, connected, and plane; compare its vertex and edge counts with the original.",
+        "axiom_base": "Choice-free finite subdivision argument.",
+        "sources": {
+          "references": [
+            {
+              "title": "R. Diestel, Graph Theory, 6th ed., Theorem 4.2.9",
+              "url": "https://www.math.uni-hamburg.de/home/diestel/books/graph.theory/preview/Ch4.pdf",
+              "locator": "Chapter 4, §4.2, Theorem 4.2.9, pp. 101–102"
+            }
+          ]
+        },
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-generated"
+        }
+      },
+      {
+        "id": "def-planar-diagram-gauss-and-dowker-codes",
+        "kind": "definition",
+        "title": "Planar-diagram, Gauss, and signed Dowker–Thistlethwaite codes",
+        "statement": "Defines normalized Gauss, signed Dowker–Thistlethwaite, and oriented planar-diagram codes, including incidence, sign, parity, face, outer-face, and crossingless-orientation conditions.",
+        "deps": [
+          "def-oriented-crossing-sign-writhe-and-blackboard-framing",
+          "def-regular-oriented-link-diagram"
+        ],
+        "dependency_level": 1,
+        "strategy": "Define the three finite encodings and fix their normalization and sign conventions explicitly. Keep the signed DT code knot-specific and distinguish local syntactic validity from spherical realizability.",
+        "axiom_base": "Choice-free finite data definitions.",
+        "sources": {
+          "references": [
+            {
+              "title": "Erickson, Planar Graphs, Computational Topology lecture notes, 2023, sections Rotation Systems and Formalities and Trivialities",
+              "url": "https://jeffe.web.engr.illinois.edu/teaching/comptop/2023/notes/09-planar-graphs.html"
+            },
+            {
+              "title": "Knot Atlas, Gauss Codes and Planar Diagrams manuals",
+              "url": "https://katlas.org/wiki/Gauss_Codes"
+            },
+            {
+              "title": "Knot Atlas, DT (Dowker–Thistlethwaite) Codes manual",
+              "url": "https://www.math.toronto.edu/~drorbn/private/KAtlas/Manual/DTCode.html"
+            }
+          ]
+        },
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "not-applicable"
+        }
+      },
+      {
+        "id": "lem-planar-diagram-code-realizability-and-face-validation",
+        "kind": "lemma",
+        "title": "Realizability and face validation for planar-diagram codes",
+        "statement": "A nonempty connected oriented four-valent rotation-system code with valid strand, overpass, and crossing-sign data is realizable on the sphere exactly when its face permutation satisfies Euler characteristic two; a distinguished face specifies the plane model, and the two oriented crossingless codes are handled separately.",
+        "deps": [
+          "def-planar-diagram-gauss-and-dowker-codes",
+          "lem-connected-plane-multigraph-euler-formula",
+          "lem-finite-polygonal-disk-and-collar-surgery",
+          "def-regular-oriented-link-diagram"
+        ],
+        "dependency_level": 2,
+        "strategy": "Construct a polygonal sphere embedding from a spanning tree, then add the remaining paired edges. Each edge changes the face-cycle count by one; the Euler equality forces each step to split one face. Cap crossing disks and edge bands and lift the overpass data.",
+        "axiom_base": "Finite rotation-system realization and face-count argument are choice-free; the planned Countable Choice dependency is under review because the local construction does not use it.",
+        "sources": {
+          "references": [
+            {
+              "title": "Hass, Lagarias, and Pippenger, The Computational Complexity of Knot and Link Problems, 1999, section 1",
+              "url": "https://arxiv.org/pdf/math/9807016"
+            },
+            {
+              "title": "Erickson, Planar Graphs, Computational Topology lecture notes, 2023, sections Rotation Systems and Formalities and Trivialities",
+              "url": "https://jeffe.web.engr.illinois.edu/teaching/comptop/2023/notes/09-planar-graphs.html"
+            },
+            {
+              "title": "Jeff Erickson, Simple Polygons, Computational Topology, Chapter 1 (2013), §§1.2, 1.4, 1.6",
+              "url": "https://jeffe.cs.illinois.edu/teaching/comptop/2017/chapters/01-simple-polygons.pdf",
+              "locator": "Jordan Polygon Theorem proof, triangulation proof, and PL disk parametrization, web text lines 132–220, 284–365, 452–569"
+            }
+          ]
+        },
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-generated"
+        }
+      },
+      {
+        "id": "alg-planar-code-validation-and-diagram-reconstruction",
+        "kind": "algorithm",
+        "title": "Planar-code validation and diagram reconstruction",
+        "statement": "Checks a finite oriented planar-diagram code in a fixed order, returns the first specific invalid-code reason, or constructs its decorated plane diagram and face data.",
+        "deps": [
+          "def-planar-diagram-gauss-and-dowker-codes",
+          "lem-planar-diagram-code-realizability-and-face-validation"
+        ],
+        "dependency_level": 3,
+        "strategy": "Scan incidence and orientation records, construct the rotation and edge-pairing permutations, check each crossing and component condition, count face cycles, test Euler characteristic two, then build crossing disks and edge bands.",
+        "axiom_base": "Choice-free finite scans and constructions.",
+        "sources": {
+          "references": [
+            {
+              "title": "Hass, Lagarias, and Pippenger, The Computational Complexity of Knot and Link Problems, 1999, sections 1 and 7",
+              "url": "https://arxiv.org/pdf/math/9807016"
+            },
+            {
+              "title": "Erickson, Planar Graphs, Computational Topology lecture notes, 2023, sections Rotation Systems and Formalities and Trivialities",
+              "url": "https://jeffe.web.engr.illinois.edu/teaching/comptop/2023/notes/09-planar-graphs.html"
+            }
+          ]
+        },
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "not-applicable"
+        }
+      },
+      {
+        "id": "alg-enumerate-diagrams-up-to-crossing-bound",
+        "kind": "algorithm",
+        "title": "Enumerate diagrams up to a crossing bound",
+        "statement": "Given a nonnegative crossing bound, enumerates normalized connected one-component diagram codes through the bound, including both oriented crossingless codes, and returns reconstructed diagram candidates rather than knot types.",
+        "deps": [
+          "def-planar-diagram-gauss-and-dowker-codes",
+          "alg-planar-code-validation-and-diagram-reconstruction"
+        ],
+        "dependency_level": 4,
+        "strategy": "For each crossing count in the finite range, enumerate every normalized pairing, crossing rotation, orientation, overpass assignment, and outer-face selector; retain exactly the inputs accepted by the validator.",
+        "axiom_base": "Choice-free finite enumeration.",
+        "sources": {
+          "references": [
+            {
+              "title": "Hass, Lagarias, and Pippenger, The Computational Complexity of Knot and Link Problems, 1999, sections 1 and 7",
+              "url": "https://arxiv.org/pdf/math/9807016"
+            },
+            {
+              "title": "Erickson, Planar Graphs, Computational Topology lecture notes, 2023, sections Rotation Systems and Formalities and Trivialities",
+              "url": "https://jeffe.web.engr.illinois.edu/teaching/comptop/2023/notes/09-planar-graphs.html"
+            }
+          ]
+        },
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "not-applicable"
+        }
+      },
+      {
+        "id": "thm-planar-code-validation-and-diagram-reconstruction-procedure-properties",
+        "kind": "theorem",
+        "title": "Planar-code validation and reconstruction procedure properties",
+        "statement": "For every admissible encoded input of the planar-code validation algorithm, the finite procedure terminates, rejects exactly the listed syntax and realizability failures, and otherwise returns the prescribed reconstructed diagram and face data.",
+        "deps": [
+          "def-planar-diagram-gauss-and-dowker-codes",
+          "alg-planar-code-validation-and-diagram-reconstruction",
+          "lem-planar-diagram-code-realizability-and-face-validation"
+        ],
+        "dependency_level": 4,
+        "strategy": "Bound every scan by the finite code size, prove each rejection branch matches its named failed predicate, and use the realizability lemma for the final acceptance branch.",
+        "axiom_base": "Choice-free finite procedure proof.",
+        "sources": {
+          "references": [
+            {
+              "title": "Hass, Lagarias, and Pippenger, The Computational Complexity of Knot and Link Problems, 1999, section 1",
+              "url": "https://arxiv.org/pdf/math/9807016"
+            },
+            {
+              "title": "Erickson, Planar Graphs, Computational Topology lecture notes, 2023, sections Rotation Systems and Formalities and Trivialities",
+              "url": "https://jeffe.web.engr.illinois.edu/teaching/comptop/2023/notes/09-planar-graphs.html"
+            }
+          ]
+        },
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-generated"
+        }
+      },
+      {
+        "id": "thm-enumerate-diagrams-up-to-crossing-bound-procedure-properties",
+        "kind": "theorem",
+        "title": "Enumeration up to a crossing bound procedure properties",
+        "statement": "For every nonnegative crossing bound, the finite enumeration procedure terminates and returns exactly the reconstructed candidates represented by its normalized connected knot-diagram codes up to that bound.",
+        "deps": [
+          "def-planar-diagram-gauss-and-dowker-codes",
+          "alg-enumerate-diagrams-up-to-crossing-bound",
+          "thm-planar-code-validation-and-diagram-reconstruction-procedure-properties"
+        ],
+        "dependency_level": 5,
+        "strategy": "Count the finite code space at each crossing count, use the strict bound to make the outer loop finite, and apply the validator procedure theorem to every candidate.",
+        "axiom_base": "Choice-free finite enumeration proof.",
+        "sources": {
+          "references": [
+            {
+              "title": "Hass, Lagarias, and Pippenger, The Computational Complexity of Knot and Link Problems, 1999, sections 1 and 7",
+              "url": "https://arxiv.org/pdf/math/9807016"
+            },
+            {
+              "title": "Erickson, Planar Graphs, Computational Topology lecture notes, 2023, sections Rotation Systems and Formalities and Trivialities",
+              "url": "https://jeffe.web.engr.illinois.edu/teaching/comptop/2023/notes/09-planar-graphs.html"
+            }
+          ]
+        },
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-generated"
+        }
+      },
+      {
+        "id": "lem-smooth-jordan-disk-boundary-maps-extend-to-diffeomorphisms",
+        "kind": "lemma",
+        "title": "Smooth Jordan disks and extension of prescribed boundary collars",
+        "deps": [
+          "def-countable-choice",
+          "lem-choice-free-smooth-inverse-function-theorem-in-euclidean-space",
+          "thm-polygonal-jordan-curve",
+          "thm-simple-polygon-admits-a-triangulation",
+          "thm-euler-formula-for-connected-plane-graphs",
+          "lem-boundary-connected-sum-with-a-disk-does-not-change-the-diffeomorphism-type",
+          "lem-isotopy-extension-for-a-compact-source-with-boundary"
+        ],
+        "statement": "Assume the Axiom of Countable Choice. The bounded region of a smooth embedded\ncircle in the oriented plane, together with its boundary, is a smooth manifold\nwith boundary diffeomorphic to the closed standard disk. Let $D_0,D_1$ be two\nsuch closed regions. Every orientation-preserving smooth boundary\ndiffeomorphism $b:\\partial D_0\\to\\partial D_1$ extends to an\norientation-preserving diffeomorphism $B:D_0\\to D_1$. More precisely, for\nspecified smooth inward collars $c_i:\\partial D_i\\times[0,\\epsilon)\\to D_i$\nwith $c_i(p,0)=p$, the extension may be required to satisfy\n$B(c_0(p,r))=c_1(b(p),r)$ for every sufficiently small $r\\ge0$. In addition, given interior points $p_i\\in D_i$ and an orientation-preserving smooth diffeomorphism $q$ from a neighborhood of $p_0$ onto a neighborhood of $p_1$, the extension can agree with $q$ near $p_0$ while retaining the prescribed boundary collars.",
+        "proof_strategy": "direct",
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-generated"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "C. T. C. Wall, Differential Topology, Theorem 2.4.2 and Sections 2.6–2.7",
+              "url": "https://www.math.auckland.ac.nz/~hekmati/Books/Wall.pdf",
+              "locator": "Theorem 2.4.2, printed pp.50–51 (PDF pp.58–59); corner straightening and gluing, printed pp.59–67 (PDF pp.67–75), especially Proposition 2.7.6, printed pp.66–67: boundary sum with a disk preserves the diffeomorphism type. The smooth Jordan reduction and prescribed collar/interior germ constructions are proved locally here."
+            }
+          ]
+        },
+        "dependency_level": 0
+      },
+      {
+        "id": "thm-valid-code-reconstructs-the-declared-link-diagram",
+        "kind": "theorem",
+        "title": "Valid codes reconstruct the declared link diagram",
+        "statement": "Assume the Axiom of Countable Choice. For every valid connected one-component\noriented code with a selected outer face, the reconstruction procedure\nproduces a regular oriented diagram representing that code. Any two such\ndiagrams with the same code differ only by crossing and edge relabeling and\nare planar isotopic. The normalized planar-diagram code of a diagram with $c$\ncrossings appears among the candidates enumerated at bound $c$. This statement\nconcerns diagrams and their finite codes; it does not identify distinct codes\nthat may represent the same knot type. The finite realization and enumeration\nclaims are choice-free; $\\mathrm{AC}_\\omega$ is assumed only for the smooth\nambient-isotopy uniqueness clause.",
+        "deps": [
+          "def-planar-diagram-gauss-and-dowker-codes",
+          "lem-planar-diagram-code-realizability-and-face-validation",
+          "thm-planar-code-validation-and-diagram-reconstruction-procedure-properties",
+          "alg-enumerate-diagrams-up-to-crossing-bound",
+          "thm-enumerate-diagrams-up-to-crossing-bound-procedure-properties",
+          "lem-smooth-jordan-disk-boundary-maps-extend-to-diffeomorphisms",
+          "lem-choice-free-smooth-inverse-function-theorem-in-euclidean-space",
+          "thm-fundamental-theorem-on-flows",
+          "def-countable-choice",
+          "def-planar-isotopy-of-link-diagrams"
+        ],
+        "dependency_level": 6,
+        "strategy": "Construct smooth graph neighborhoods, extend over complementary Jordan disks with exact collars and identity germ at infinity, then apply the explicit global plane rescaling isotopy.",
+        "axiom_base": "Finite realization and enumeration are choice-free. Smooth uniqueness uses Countable Choice through the new disk/collar/germ extension helper and its exact published smooth suppliers.",
+        "sources": {
+          "references": [
+            {
+              "title": "Jeff Erickson, Planar Graphs, Computational Topology lecture notes (2023)",
+              "url": "https://jeffe.web.engr.illinois.edu/teaching/comptop/2023/notes/09-planar-graphs.html",
+              "locator": "Rotation Systems and Formalities and Trivialities, lines 49–72"
+            },
+            {
+              "title": "Joel Hass, Jeffrey C. Lagarias, and Nicholas Pippenger, The Computational Complexity of Knot and Link Problems, Journal of the ACM 46 (1999), section 1",
+              "url": "https://arxiv.org/pdf/math/9807016",
+              "locator": "§1 Introduction, finite link-diagram representation, web text lines 102–121"
+            }
+          ]
+        },
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-generated"
+        },
+        "proof_strategy": "direct"
+      }
+    ]
+  },
+  {
+    "order": 3201,
+    "id": "planar-diagram-codes-and-knot-table-enumeration-examples",
+    "kind": "B",
+    "category": "knot-theory",
+    "title": "Planar-diagram codes and knot-table enumeration — Examples and Counterexamples",
+    "companion": "planar-diagram-codes-and-knot-table-enumeration",
+    "requires": [
+      "planar-diagram-codes-and-knot-table-enumeration"
+    ],
+    "items": [
+      {
+        "id": "cex-knot-kt-47-boundary-case",
+        "kind": "counterexample",
+        "title": "A crossing label occurring once is invalid",
+        "statement": "The one-entry word -1 with declared crossing count 1 has its only label present but violates the required two-visit condition and is rejected before graph or face tests.",
+        "deps": [
+          "def-planar-diagram-gauss-and-dowker-codes",
+          "alg-planar-code-validation-and-diagram-reconstruction",
+          "thm-planar-code-validation-and-diagram-reconstruction-procedure-properties"
+        ],
+        "dependency_level": 5,
+        "strategy": "Use the one-entry word with label 1, count its visits, and identify the validator's first failed crossing-incidence test.",
+        "axiom_base": "Choice-free finite counterexample.",
+        "sources": {
+          "references": [
+            {
+              "title": "Knot Atlas, Gauss Codes manual",
+              "url": "https://katlas.org/wiki/Gauss_Codes"
+            },
+            {
+              "title": "Hass, Lagarias, and Pippenger, The Computational Complexity of Knot and Link Problems, 1999, section 1",
+              "url": "https://arxiv.org/pdf/math/9807016"
+            }
+          ]
+        },
+        "provenance": {
+          "statement": "ai-generated",
+          "proof": "ai-generated"
+        },
+        "generation": {
+          "role": "counterexample"
+        }
+      },
+      {
+        "id": "ex-knot-kt-47-worked-cases",
+        "kind": "example",
+        "title": "Trefoil Gauss traversal and rotation reconstruction",
+        "statement": "The based signed Gauss word -1,3,-2,1,-3,2 with crossing signs (+1,+1,+1) gives the right trefoil; its normalized PD rows, five face cycles, selected outer face, and bound-three enumeration inclusion are checked explicitly.",
+        "deps": [
+          "def-planar-diagram-gauss-and-dowker-codes",
+          "def-oriented-crossing-sign-writhe-and-blackboard-framing",
+          "lem-planar-diagram-code-realizability-and-face-validation",
+          "alg-planar-code-validation-and-diagram-reconstruction",
+          "thm-planar-code-validation-and-diagram-reconstruction-procedure-properties",
+          "alg-enumerate-diagrams-up-to-crossing-bound",
+          "thm-enumerate-diagrams-up-to-crossing-bound-procedure-properties"
+        ],
+        "dependency_level": 6,
+        "strategy": "Trace the six signed visits, verify the edge and crossing incidences, compute the face permutation and Euler characteristic, select the outer face, and verify the finite enumerator includes the normalized code at bound three.",
+        "axiom_base": "The finite code and enumeration checks are choice-free; the reconstruction up to smooth planar isotopy inherits Countable Choice from the theorem supplier.",
+        "sources": {
+          "references": [
+            {
+              "title": "Knot Atlas, Gauss Codes manual",
+              "url": "https://katlas.org/wiki/Gauss_Codes",
+              "locator": "Gauss-code definition and trefoil code, lines 65–80"
+            },
+            {
+              "title": "C. Fish, Codes, Links and Racks, University of Warwick thesis (2001), Chapter 5, §5.2.1",
+              "url": "https://wrap.warwick.ac.uk/id/eprint/136332/1/WRAP_Theses_Fish_2001.pdf",
+              "locator": "Signed Gauss code definition and right-trefoil code, printed pp. 67–68, PDF lines 1569–1605"
+            },
+            {
+              "title": "Jeff Erickson, Planar Graphs, Computational Topology lecture notes (2023)",
+              "url": "https://jeffe.web.engr.illinois.edu/teaching/comptop/2023/notes/09-planar-graphs.html",
+              "locator": "Rotation Systems and Formalities and Trivialities, lines 49–72"
+            }
+          ]
+        },
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-generated"
+        }
+      }
+    ]
+  }
+]

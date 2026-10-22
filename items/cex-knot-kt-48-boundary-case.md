@@ -37,6 +37,10 @@ sources:
       locator: "§2.3, move sequences and unbounded crossing excursions; §3.3, 3-coloring counts."
 verification:
   precheck: pass
+  judge:
+    model: "gpt-6-luna"
+    verdict: pass
+    date: 2026-10-22
 ---
 
 ## Statement refuted

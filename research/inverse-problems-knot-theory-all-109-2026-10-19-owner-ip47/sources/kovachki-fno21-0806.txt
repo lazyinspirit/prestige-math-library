@@ -1,0 +1,5167 @@
+PDF PAGE 1
+Journal of Machine Learning Research 22 (2021) 1-76
+Submitted 7/21; Revised 10/21; Published 11/21
+On Universal Approximation and Error Bounds
+for Fourier Neural Operators
+Nikola Kovachki
+nkovachki@caltech.edu
+Computing and Mathematical Sciences
+California Institute of Technology
+Pasadena, California 91125, USA
+Samuel Lanthaler
+samuel.lanthaler@math.ethz.ch
+Seminar for Applied Mathematics
+Eidgen¨ossische Technische Hochschule Z¨urich (ETH Z¨urich)
+R¨amistrasse 101, 8092 Z¨urich, Switzerland
+Siddhartha Mishra
+siddhartha.mishra@math.ethz.ch
+Seminar for Applied Mathematics
+Eidgen¨ossische Technische Hochschule Z¨urich (ETH Z¨urich)
+R¨amistrasse 101, 8092 Z¨urich, Switzerland
+Editor: Michael Mahoney
+Abstract
+Fourier neural operators (FNOs) have recently been proposed as an eﬀective framework
+for learning operators that map between inﬁnite-dimensional spaces. We prove that FNOs
+are universal, in the sense that they can approximate any continuous operator to desired
+accuracy. Moreover, we suggest a mechanism by which FNOs can approximate operators
+associated with PDEs eﬃciently. Explicit error bounds are derived to show that the size of
+the FNO, approximating operators associated with a Darcy type elliptic PDE and with the
+incompressible Navier-Stokes equations of ﬂuid dynamics, only increases sub (log)-linearly
+in terms of the reciprocal of the error. Thus, FNOs are shown to eﬃciently approximate
+operators arising in a large class of PDEs.
+Keywords: operator learning, universal approximation, error bounds, complexity bounds,
+Darcy ﬂow, incompressible Navier-Stokes
+1. Introduction
+Deep neural networks have been extremely successful in diverse ﬁelds of science and engi-
+neering including image classiﬁcation, speech recognition, natural language understanding,
+autonomous systems, game intelligence and protein folding, see LeCun et al. (2015) and ref-
+erences therein. Moreover, deep neural networks are being increasingly used successfully in
+scientiﬁc computing, particular in simulating physical and engineering systems modeled by
+partial diﬀerential equations (PDEs). Examples include the use of physics informed neural
+networks for solving forward and inverse problems for PDEs (Raissi and Karniadakis, 2018;
+Raissi et al., 2019; Mishra and Molinaro, 2020a,b) and supervised learning algorithms for
+high-dimensional parabolic PDEs (E et al., 2017) and parametric elliptic (Kutyniok et al.,
+2021; Schwab and Zech, 2019) and hyperbolic (Lye et al., 2020, 2021) PDEs, among others.
+c⃝2021 Nikola Kovachki and Samuel Lanthaler and Siddhartha Mishra.
+License: CC-BY 4.0, see https://creativecommons.org/licenses/by/4.0/. Attribution requirements are provided
+at http://jmlr.org/papers/v22/21-0806.html.
+
+PDF PAGE 2
+Kovachki, Lanthaler and Mishra
+The success of deep neural networks at a wide variety of learning tasks can be attributed
+to a conﬂuence of several factors such as the availability of massive labeled data sets, the
+design of novel architectures and training algorithms as well as the abundance of high-end
+computing platforms such as GPUs (Goodfellow et al., 2016). Still, it is fair to surmise that
+this ediﬁce of success partly rests on the foundation of universal approximation (Barron,
+1993; Cybenko, 1989; Hornik et al., 1989), i.e., the ability of neural networks to approximate
+any continuous (even measurable) function, mapping a ﬁnite-dimensional input space into
+another ﬁnite-dimensional output space, to arbitrary accuracy.
+However, many interesting learning tasks entail learning operators, i.e., mappings be-
+tween an inﬁnite-dimensional input Banach space and (possibly) an inﬁnite-dimensional
+output space.
+A prototypical example in scientiﬁc computing is provided by nonlinear
+operators that map the initial datum into the (time series of) solution of a nonlinear time-
+dependent PDE such as the Navier-Stokes equations of ﬂuid dynamics. A priori, it is unclear
+if neural networks can be successfully employed for learning such operators from data, given
+that their universality only pertains to ﬁnite-dimensional functions.
+The ﬁrst successful use of neural networks in the context of such operator learning was
+provided in Chen and Chen (1995), where the authors proposed a novel neural network based
+learning architecture, which they termed as operator networks and proved that these opera-
+tor networks possess a surprising universal approximation property for inﬁnite-dimensional
+nonlinear operators. Operator networks are based on two diﬀerent neural networks, a branch
+net and a trunk net, which are trained concurrently to learn from data. More recently, Lu
+et al. (2021) have proposed using deep, instead of shallow, neural networks in both the
+trunk and branch net and have christened the resulting architecture as a DeepOnet. In a
+recent article (Lanthaler et al., 2021), the universal approximation property of DeepOnets
+was extended, making it completely analogous to universal approximation results for ﬁnite-
+dimensional functions by neural networks. Lanthaler et al. (2021) were also able to show
+that DeepOnets can break the curse of dimensionality for a large variety of PDE learning
+tasks. Hence, in spite of the underlying inﬁnite-dimensional setting, DeepOnets are capable
+of approximating a large variety of nonlinear operators eﬃciently. This is further validated
+by the success of DeepOnets in many interesting examples in scientiﬁc computing, see Mao
+et al. (2021); Cai et al. (2021); Lin et al. (2021) and references therein.
+An alternative operator learning framework is provided by the concept of neural oper-
+ators, ﬁrst proposed in Li et al. (2020a). Just as canonical artiﬁcial neural networks are a
+concatenated composition of multiple hidden layers, with each hidden layer composing an
+aﬃne function with a scalar nonlinear activation function, neural operators also compose
+multiple hidden layers, with each hidden layer composing an aﬃne operator with a local,
+scalar nonlinear activation operator. The inﬁnite-dimensional setup is reﬂected in the fact
+that the aﬃne operator can be signiﬁcantly more general than in the ﬁnite-dimensional case,
+where it is represented by a weight matrix and bias vector. On the other hand, for neural
+operators, one can even use non-local linear operators, such as those deﬁned in terms of an
+integral kernel. The evaluation of such integral kernels can be performed either with graph
+kernel networks (Li et al., 2020a) or with multipole expansions (Li et al., 2020b).
+More recently, Li et al. (2021) have proposed using convolution-based integral kernels
+within neural operators.
+Such kernels can be eﬃciently evaluated in the Fourier space,
+leading to the resulting neural operators being termed as Fourier Neural Operators (FNOs).
+2
+
+PDF PAGE 3
+Fourier Neural Operators
+Li et al. (2021) discuss the advantages, in terms of computational eﬃciency, of FNOs over
+the other neural operators mentioned above. Moreover, they present several convincing
+numerical experiments to demonstrate that FNOs can very eﬃciently approximate a variety
+of operators that arise in simulating PDEs.
+However, the theoretical basis for neural operators has not yet been properly investi-
+gated. In particular, it is unclear if neural operators such as FNOs are universal, i.e., if they
+can approximate a large class of nonlinear inﬁnite-dimensional operators. Moreover in this
+inﬁnite-dimensional setting, universality does not suﬃce to indicate computational viability
+or eﬃciency as the size of the underlying neural networks might grow exponentially with
+respect to increasing accuracy, see discussion in Lanthaler et al. (2021) on this issue. Hence
+in addition to universality, it is natural to ask if neural operators can eﬃciently approximate
+a large class of operators, such as those arising in the simulation of parametric PDEs.
+The investigation of these questions is the main rationale for the current paper. We
+focus our attention here on FNOs as they appear to be the most promising of the neural
+operator based operator learning frameworks. Our main result in this paper is to show that
+FNOs are universal in possessing the ability to approximate a very large class of continuous
+nonlinear operators. This result highlights the potential of FNOs for operator learning.
+As argued before, a universality result is only a ﬁrst step and by itself, does not consti-
+tute evidence for eﬃcient approximation by FNOs. In fact, we show that in the worst case,
+the network size might grow exponentially with respect to accuracy, when approximating
+general operators. Hence, there is a need to derive explicit bounds on the network size
+in terms of the desired error tolerance. In this context, we consider a concrete computa-
+tional realization of FNOs, that we term as pseudospectral FNO or Ψ-FNO (for short). In
+addition to proving universality for Ψ-FNOs, we will suggest a mechanism through which
+Ψ-FNOs can approximate operators arising from PDEs, eﬃciently. We also derive explicit
+error bounds for this architecture in approximating PDEs, for two widely used prototypical
+examples of PDEs i.e, a Darcy type elliptic equation and the incompressible Navier-Stokes
+equations of ﬂuid dynamics. In particular, we prove that the size of Ψ-FNOs in approximat-
+ing the underlying operators for both these PDEs, under suitable hypotheses, only scales
+polynomially (log-linearly) in the error. Thus, FNOs can approximate these operators ef-
+ﬁciently and these results validate some of the computational ﬁndings of Li et al. (2021).
+Together, these results constitute the ﬁrst theoretical justiﬁcation for the use of FNOs.
+The rest of the paper is organized as follows: in Section 2, we introduce FNOs and
+state the universality result. We also introduce Ψ-FNOs in this section. In Section 3, we
+show that Ψ-FNOs can eﬃciently approximate operators, stemming from the Darcy-type
+elliptic equation as well as the incompressible Navier-Stokes equations. In Section 4, we
+compare FNOs with DeepOnets and the results of the article are discussed in Section 5. The
+mathematical notation, used in this paper, is summarized in Appendix A and we present
+all the technical details and proofs in other appendices.
+2. Approximation by Fourier Neural Operators
+In this section, we present Fourier Neural Operators (FNOs) and discuss their approximation
+of a class of nonlinear operators speciﬁed below:
+3
+
+PDF PAGE 4
+Kovachki, Lanthaler and Mishra
+2.1 Setting for Operator Learning
+Setting 1 We ﬁx a spatial dimension d ∈N, and denote by D ⊂Rd a domain in Rd. We
+consider the approximation of operators G : A(D; Rda) →U(D; Rdu), a 7→u := G(a), where
+the input a ∈A(D; Rda), da ∈N, is a function a : D →Rda with da components, and
+the output u ∈U(D; Rdu), du ∈N, is a function u : D →Rdu with du components. Here
+A(D; Rda) and U(D; Rdu) are Banach spaces (or suitable subsets of Banach spaces). Typical
+examples of A and U include the space of continuous functions C(D; Rdu), or Sobolev spaces
+Hs(D; Rdu) of order s ≥0 (see Appendix B for deﬁnitions.).
+Concrete examples for operators G, involving solution operators of PDEs, are given in
+Section 3.
+2.2 Neural Operators
+With the above Setting 1 and as deﬁned in Li et al. (2020a), a neural operator N :
+A(D; Rda) →U(D; Rdu), a 7→N(a) is a mapping of the form
+N(a) = Q ◦LL ◦LL−1 ◦· · · ◦L1 ◦R(a),
+for a given depth L ∈N, where R : A(D; Rda) →U(D; Rdv), dv ≥du, is a lifting operator
+(acting locally), of the form
+R(a)(x) = Ra(x),
+R ∈Rdv×da,
+(1)
+and Q : U(D; Rdv) →U(D; Rdu) is a local projection operator, of the form
+Q(v)(x) = Qv(x),
+Q ∈Rdu×dv.
+(2)
+Remark 2 In practice, it has been found that improved results can be obtained if the simple
+linear lifting and projection operators R (1) and Q (2) are replaced instead by non-linear
+mappings of the form
+eR(a)(x) = eR(a(x), x),
+eQ(v)(x) = eQ(v(x), x),
+where eR : Rda ×D →Rdv and eQ : Rdv ×D →Rdu are neural networks with activation func-
+tion σ. Our error estimates will rely on the (more restrictive) linear choice of lifting and
+projection operators, given by (1), (2). The linear choice has the theoretical beneﬁt of ensur-
+ing compositionality, i.e. that a composition of neural operators can again be represented
+by a neural operator (cf.
+Lemma 46).
+Despite this technical distinction, we emphasize
+that all of our error and complexity estimates continue to hold also for neural operators
+with non-linear lifting and projections, since linear operators can always be approximated
+by non-linear ones (cp. Lemma 42). In fact, in the non-linear case, our results imply that
+eQ, eR can be chosen to be shallow networks.
+In analogy with canonical ﬁnite-dimensional neural networks, Li et al. (2020a) deﬁne the
+layers L1, . . . , LL to be non-linear operator layers, Lℓ: U(D; Rdv) →U(D; Rdv), v 7→Lℓ(v),
+of the form
+Lℓ(v)(x) = σ
+
+Wℓv(x) + bℓ(x) +
+ K(a; θℓ)v
+
+(x)
+
+,
+∀x ∈D.
+4
+
+PDF PAGE 5
+Fourier Neural Operators
+Here, the weight matrix Wℓ∈Rdv×dv and bias bℓ(x) ∈U(D; Rdv) deﬁne an aﬃne pointwise
+mapping Wℓv(x)+bℓ(x). The richness of linear operators in the inﬁnite-dimensional setting
+can partly be realized by deﬁning the following non-local linear operator,
+K : A × Θ →L
+
+U(D; Rdv), U(D; Rdv)
+
+,
+that maps the input ﬁeld a and a parameter θ ∈Θ in the parameter-set Θ to a bounded
+linear operator K(a, θ) : U(D; Rdv) →U(D; Rdv), and the non-linear activation function
+σ : R →R is applied component-wise. As proposed in Li et al. (2020a), the linear operators
+K(a, θ) are integral operators of the form
+ K(a; θ)v
+
+(x) =
+ˆ
+D
+κθ(x, y; a(x), a(y))v(y) dy,
+∀x ∈D.
+(3)
+Here, the integral kernel κθ : R2(d+da) →Rdv×dv is a neural network parametrized by θ ∈Θ.
+Speciﬁc examples of the integral kernel (3) include those evaluated with a graph kernel
+network as in Li et al. (2020a) or with a multipole expansion in Li et al. (2020b). The
+explicit dependence on the input a of each kernel turns this construction into a RNN-like
+architecture where the single input is turned into a sequence simply by repetition across
+the layers. While we do not theoretically study the eﬀect of this architectural choice, it
+was empirically shown in Li et al. (2020a) that it leads to more eﬃcient approximation on
+certain problems.
+2.3 Fourier Neural Operators
+As deﬁned in (Li et al., 2021), Fourier Neural operators (FNOs) are a special case of general
+neural operators (3), in which the kernel κθ(x, y; a(x), a(y)) is of the form κθ = κθ(x −y).
+In this case, (3) can be written as a convolution
+ K(θ)v
+
+(x) =
+ˆ
+D
+κθ(x −y)v(y) dy,
+∀x ∈D.
+(4)
+For concreteness, we consider the periodic domain D = Td (which we identify with the
+standard torus Td = [0, 2π]d), although non-periodic, rectangular domains D can also be
+handled in a straightforward manner.
+Given this periodic framework, the convolution operator in (4) can be computed using
+the Fourier transform F and the inverse Fourier transform F−1 (see Appendix B, equations
+40 and 41 for notation and deﬁnitions), resulting in the following equivalent representation
+of the kernel (3),
+(K(θ)v)(x) = F−1
+Pθ(k) · F(v)(k)
+
+(x),
+∀x ∈Td.
+(5)
+Here, Pθ(k) ∈Cdv×dv is a full matrix indexed by k ∈Zd, and is related to the integral kernel
+κθ(x) in (4) via the Fourier transform, Pθ(k) = F(κθ)(k). Note that we must impose that
+Pθ(−k) = Pθ(k)† coincides with the Hermitian transpose for all k ∈Zd, to ensure that the
+image function (K(θ)v)(x) is a real-valued function for real-valued v(x). Consequently, the
+5
+
+PDF PAGE 6
+Kovachki, Lanthaler and Mishra
+form of Fourier neural operators (FNOs) for the periodic domain Td is that of a mapping
+N : A(D; Rda) →U(D; Rdu), of the form
+N(a) := Q ◦LL ◦LL−1 ◦· · · ◦L1 ◦R(a),
+(6)
+where the lifting and projection operators R and Q are given by (1) and (2), respectively,
+and where the non-linear layers Lℓare of the form
+Lℓ(v)(x) = σ
+
+Wℓv(x) + bℓ(x) + F−1
+Pℓ(k) · F(v)(k)
+
+(x)
+
+.
+(7)
+Here, Wℓ∈Rdv×dv and bℓ(x) deﬁne a pointwise aﬃne mapping (corresponding to weights
+and biases), and Pℓ: Zd →Cdv×dv deﬁnes the coeﬃcients of a non-local, linear mapping
+via the Fourier transform.
+Remark 3 The simplest example for a FNO, as deﬁned by (6),(4) is as follows; let Φ :
+Rda →Rdu be a conventional ﬁnite-dimensional neural network with activation function
+σ. We can associate to Φ the mapping N : L2(Td; Rda) →L2(Td; Rdu), given by a(x) 7→
+Φ(a(x)). We easily observe that N is a FNO as we can write it in the form
+N(a)(x) = Φ(a(x)) = Q ◦LL ◦· · · ◦L1 ◦R(a(x)),
+where R(y) = Ry with R ∈Rdv×da, and each layer Lℓis of the form Lℓ(y) = σ(Wℓy+bℓ) for
+some Wℓ∈Rdv×dv, bℓ∈Rdv, with Q being an aﬃne output layer of the form Q(y) = Qy +q
+with Q ∈Rdu×dv, q ∈Rdu. Replacing the input y by a function v(x), these layers clearly
+are a special case of the FNO lifting layer (1), the non-linear layers (7) (with Pℓ≡0 and
+constant bias bℓ(x) ≡bℓ), and the projection layer (2). Thus, any ﬁnite-dimensional neural
+network can be identiﬁed with a FNO as deﬁned above.
+For the remainder of this work, we make the following assumption,
+Assumption 4 (Activation function) Unless explicitly stated otherwise, the activation
+function σ : R →R in (7) is assumed to be non-polynomial, (globally) Lipschitz continuous
+and σ ∈C∞.
+2.4 Universal Approximation by FNOs
+Next, we will show that FNOs (6) are universal, i.e., given a large class of operators, as
+deﬁned in Setting 1, one can ﬁnd an FNO that approximates it to desired accuracy. To be
+more precise, we have the following theorem.
+Theorem 5 (Universal approximation) Let s, s′ ≥0. Let G : Hs(Td; Rda) →Hs′(Td; Rdu)
+be a continuous operator. Let K ⊂Hs(Td; Rda) be a compact subset. Then for any ϵ > 0,
+there exists a FNO N : Hs(Td; Rda) →Hs′(Td; Rdu), of the form (6), continuous as an
+operator Hs →Hs′, such that
+sup
+a∈K
+∥G(a) −N(a)∥Hs′ ≤ϵ.
+6
+
+PDF PAGE 7
+Fourier Neural Operators
+Proof [Sketch of proof] The detailed proof of this universal approximation theorem is
+provided in Appendix D.4 and we outline it here. For notational simplicity, we set da =
+du = 1, and ﬁrst observe the following lemma, proved in Appendix D.1:
+Lemma 6 Assume that the universal approximation Theorem 5 holds for s′ = 0. Then it
+holds for arbitrary s′ ≥0.
+The main objective is thus to prove Theorem 5 for the special case s′ = 0; i.e. given a
+continuous operator G : Hs(Td) →L2(Td), K ⊂Hs(Td) compact, and ϵ > 0, we wish to
+construct a FNO N : Hs(Td) →L2(Td), such that supa∈K ∥G(a) −N(a)∥L2 ≤ϵ.
+To this end, we start by deﬁning the following operator,
+GN : Hs(Td) →L2(Td),
+GN(a) := PNG(PNa),
+(8)
+with PN being the orthogonal Fourier projection operator, deﬁned in Appendix B (45).
+Thus, GN can be thought of loosely as the Fourier projection of the continuous operator G.
+Next, we can show that for any given ϵ > 0, there exists N ∈N, such that
+∥G(a) −GN(a)∥L2 ≤ϵ,
+∀a ∈K.
+(9)
+Thus, the proof boils down to ﬁnding a FNO (6) that can approximate the operator GN to
+any desired accuracy.
+To this end, we introduce a set of Fourier wavenumbers k ∈KN, by
+KN :=
+n
+k ∈Zd  |k|∞≤N
+o
+,
+(10)
+and deﬁne a Fourier conjugate or Fourier dual operator of the form bGN : CKN →CKN ,
+bGN(bak) := FN
+ GN
+ Re
+ F−1
+N (bak)
+
+,
+(11)
+such that the identity
+GN(a) = F−1
+N ◦bGN ◦FN(PNa),
+(12)
+holds for all real-valued a ∈L2(Td). Here, FN is the discrete Fourier transform and F−1
+N
+is the discrete inverse Fourier transform, with both being deﬁned in Appendix B (52) and
+(53), respectively.
+The next steps in the proof are to leverage the natural decomposition of the projec-
+tion GN in (12) in terms of the discrete Fourier transform FN ◦PN, the discrete inverse
+Fourier transform F−1
+N
+and the Fourier conjugate operator bGN and approximate each of
+these operators by Fourier neural operators.
+We start by denoting,
+R2KN =
+ R2KN (≃CKN ),
+(13)
+as the set consisting of coeﬃcients {(v1,k, v2,k)}k∈KN , where v1,k, v2,k ∈R are indexed by the
+wavenumber k ∈KN, i.e. such that |k|∞≤N, and we interpret the operator FN ◦PN as
+a mapping FN ◦PN : a 7→{(Re(bak), Im(bak))}|k|≤N, with input a ∈L2(Td) and the output
+{Re(bak), Im(bak)}|k|≤N ∈R2KN is viewed as a constant function in L2(Td; R2KN ).
+The
+approximation of this operator is a straightforward consequence of the following Lemma,
+proved in Appendix D.2,
+7
+
+PDF PAGE 8
+Kovachki, Lanthaler and Mishra
+Lemma 7 Let B > 0 and N ∈N be given. For all ϵ > 0, there exists a FNO N : L2(Td) →
+L2(T d; R2KN ), v 7→{N(v)ℓ,k}, with constant output functions (constant as a function of
+x ∈Td), and such that
+∥Re(bvk) −N(v)1,k∥L∞≤ϵ
+∥Im(bvk) −N(v)2,k∥L∞≤ϵ
+)
+∀k ∈Zd, |k|∞≤N,
+for all ∥v∥L2 ≤B, and where bvk ∈C denotes the k-th Fourier coeﬃcient of v.
+In the next step, we approximate the (discrete) inverse Fourier transform F−1
+N
+by an
+FNO. We recall that FNOs act on functions rather than on constants. Therefore, to connect
+F−1
+N
+and FNOs, we are going to interpret the mapping
+F−1
+N : [−R, R]2KN ⊂R2KN →L2(Td),
+as a mapping
+F−1
+N :
+(
+L2(Td; [−R, R]2KN ) →L2(Td),
+{Re(bvk), Im(bvk)}|k|≤N 7→v(x),
+where the input {Re(bvk), Im(bvk)}|k|≤N ∈[−R, R]2KN is identiﬁed with a constant function
+in L2(Td; [−R, R]2KN ). The existence of a FNO of the form (6) that can approximate (73)
+to desired accuracy is a consequence of the following lemma, proved in Appendix D.3,
+Lemma 8 Let B > 0 and N ∈N be given.
+For all ϵ > 0, there exists a FNO N :
+L2(Td; R2KN ) →L2(Td), such that for any v ∈L2
+N(Td) with ∥v∥L2 ≤B, we have
+∥v −N (w)∥L2 ≤ϵ,
+where w(x) := {(Re(bvk), Im(bvk))}k∈KN , i.e. w ∈L2(Td; R2KN ) is a constant function col-
+lecting the real and imaginary parts of the Fourier coeﬃcients bvk of v.
+Finally, by setting bK := FN(PNK) ⊂CKN as the (compact) image of K under the continu-
+ous mapping FN ◦PN : L2(Td) →CKN and identifying CKN ≃R2KN , where bv1,k := Re(bvk)
+and bv2,k := Im(bvk) for k ∈KN, we can view bGN as a continuous mapping
+bGN : bK ⊂R2KN →R2KN ,
+on a compact subset. Hence, by the universal approximation theorem for ﬁnite-dimensional
+neural networks (Barron, 1993; Hornik et al., 1989), one can readily show that there exists
+an FNO, with only local weights (see Remark 3), which will approximate this continuous
+mapping bGN on compact subsets to desired accuracy.
+Hence, each of the component operators of the decomposition (12) can be approximated
+to desired accuracy by FNOs and the universal approximation theorem follows by compos-
+ing these FNOs and estimating the resulting error, with details provided in Appendix D.4.
+In the following theorem, we will show that the universal approximation theorem 5 can
+be extended to include operators mapping function spaces, which are deﬁned with respect
+8
+
+PDF PAGE 9
+Fourier Neural Operators
+to arbitrary Lipschitz regular domains D ⊂Rd. In fact, even the Lipschitz condition on the
+domain can be relaxed further to include all locally uniform domains using ideas from Rogers
+(2006); we will, however, not pursue this for simplicity of the exposition. We show that one
+can construct a periodic extension of the input function and a FNO so that the restriction
+of the FNO’s periodic output to the domain of interest provides a suitable approximation
+to any continuous operator.
+Theorem 9 Let s, s′ ≥0 and let Ω⊂Rd be a domain with Lipschitz boundary, and such
+that the closure Ω⊂(0, 2π)d. Let G : Hs(Ω; Rda) →Hs′(Ω; Rdu) be a continuous operator.
+Let K ⊂Hs(Ω; Rda) be a compact subset. Then there exists a continuous, linear operator
+E : Hs(Ω; Rda) →Hs(Td; Rda) such that E(a)|Ω= a for all a ∈Hs(Ω; Rda). Furthermore,
+for any ϵ > 0, there exists a FNO N : Hs(Td; Rda) →Hs′(Td; Rdu) of the form (6), such
+that
+sup
+a∈K
+∥G(a) −N ◦E(a)|Ω∥Hs′ ≤ϵ.
+Proof Since, by assumption, the closure Ωis contained in the open set (0, 2π)d, we have
+that dist(Ω, ∂[0, 2π]d) > 0. Hence the conclusion of Lemma 41 in Appendix B follows with
+the hypercube B = [0, 2π]d; in particular, there exists a continuous, linear operator E :
+Hs(Ω; Rda) →Hs([0, 2π]d; Rda) such that E(a)|Ω= a and E(a) is periodic on [0, 2π]d for all
+a ∈Hs(Ω; Rda). Therefore E : Hs(Ω; Rda) →Hs(Td; Rda). Similarly, we can construct an
+extension operator E′ : Hs′(Ω; Rdu) →Hs′(Td; Rdu) on Hs′.
+We can then associate to G : Hs(Ω; Rda) →Hs′(Ω; Rdu) another continuous operator
+G : Hs(Td; Rda) →Hs′(Td; Rdu), by deﬁning G(a) := E′◦G◦R(a). Here R(a) := a|Ωdenotes
+the restriction to Ωwhich is clearly linear and continuous. By the continuity of E, we have
+that K′ := E(K) is compact in Hs(Td; Rda). By the universal approximation theorem 5,
+for any ϵ > 0, there exists a FNO N : Hs(Td; Rda) →Hs′(Td; Rdu), such that
+sup
+a′∈K′ ∥G(a′) −N(a′)∥Hs′ ≤ϵ.
+But then, using the fact that R◦E = Id, R◦E′ = Id, the mapping R◦N ◦E : Hs(Ω; Rda) →
+Hs′(Ω; Rdu), given by a 7→N ◦E(a)|Ω, satisﬁes
+sup
+a∈K
+∥G(a) −N ◦E(a)|Ω∥Hs′ = sup
+a∈K
+∥R ◦E′ ◦G ◦R ◦E(a) −R ◦N ◦E(a)∥Hs′
+= sup
+a∈K
+∥R ◦G ◦E(a) −R ◦N ◦E(a)∥Hs′
+≤sup
+a∈K
+∥G ◦E(a) −N ◦E(a)∥Hs′
+= sup
+a′∈K′ ∥G(a′) −N(a′)∥Hs′
+≤ϵ.
+9
+
+PDF PAGE 10
+Kovachki, Lanthaler and Mishra
+Remark 10 Similar ideas as in Theorem 9 have been pursued in the design of numerical
+algorithms for solving PDEs and usually go by the name of Fourier continuations (Bruno
+and Lyon, 2010; Lyon and Bruno, 2010). A major challenge for these methods is designing
+a suitable periodic function whose restriction gives the solution of interest. Theorem 9 shows
+that FNOs are expressive enough to automatically learn such a representation. It should be
+noted that Theorem 9 does not suggest a way of computing the extension operator E and
+designing suitable methods remains an interesting direction for computational research.
+2.5 Ψ-Fourier Neural Operators
+In practice, one needs to compute the FNO, of form (6), both during training as well as
+for the evaluation of the neural operator. Thus, given any input function a, one should be
+able to readily calculate the FNO N(a), requiring the eﬃcient computation of the Fourier
+transform F (40) and the inverse Fourier transform F−1 (41). In general, this is not possible
+as evaluating the Fourier transform (40) entails computing an integral exactly. Therefore,
+approximations are necessary to realize the action of FNOs on functions. Following Li et al.
+(2021), one can eﬃciently approximate the Fourier transform and its inverse by the discrete
+Fourier transform (52) and the discrete inverse Fourier transform (53), respectively. This
+amounts to performing a pseudo(Ψ)-spectral Fourier projection between successive layers
+of the FNO and leading to the following precise deﬁnition,
+Deﬁnition 11 (Ψ-FNO) A Ψ-FNO (or Ψ-spectral FNO) is a mapping
+N ∗: A(Td; Rda) →U(Td; Rdu),
+a 7→N ∗(a),
+of the form
+N ∗(a) = Q ◦IN ◦LL ◦IN ◦· · · ◦L1 ◦IN ◦R(a),
+(14)
+where IN denotes the pseudo-spectral Fourier projection onto trigonometric polynomials
+of degree N ∈N (49), the lifting operator R : A(Td; Rda) →U(Td; Rdv), the projection
+Q : U(Td; Rdv) →U(Td; Rdu) are deﬁned as in (1), (2), and the non-linear layers Lℓ, for
+ℓ= 1, . . . , N, are of the form
+Lℓ(v)(x) = σ
+
+Wℓv(x) + bℓ(x) + F−1
+Pℓ(k) · F(v)(k)
+
+(x)
+
+.
+Here, Wℓ∈Rdv×dv and bℓ(x) ∈U(Td; Rdv) deﬁne a pointwise aﬃne mapping v 7→Wℓv(x)+
+bℓ(x), and the coeﬃcients Pℓ(k) ∈Rdv×dv (k ∈KN) deﬁne a (non-local) convolution operator
+via the Fourier transform.
+Note that a Ψ-FNO N ∗is uniquely deﬁned, as an operator, by its restriction to the
+ﬁnite-dimensional subspace L2
+N(Td; Rda) ⊂A(Td; Rda) (see Appendix B for the deﬁnition
+of L2
+N). Furthermore, we have that the image Im(N) ⊂L2
+N(Td; Rdu). To indicate that a
+Ψ-FNO is of the form (14), for some N ∈N, we shall thus more simply say that “N ∗:
+L2
+N(Td; Rda) →L2
+N(Td; Rdu) is a Ψ-FNO”.
+At the level of numerical implementation, a Ψ-FNO can be naturally identiﬁed with a
+ﬁnite-dimensional mapping
+e
+N ∗: Rda×JN →Rdu×JN ,
+a 7→e
+N ∗(a),
+10
+
+PDF PAGE 11
+Fourier Neural Operators
+with input a = {aj}j∈JN ∈Rda×JN corresponding to the point-values aj = a(xj) on the
+grid {xj}j∈JN , and JN := {0, . . . , 2N}d. Here, e
+N ∗is of the form
+e
+N ∗(a) = eQ ◦eLL ◦eLL−1 ◦· · · ◦eL1 ◦eR(a),
+(15)
+where the lifting operator eR : Rda×JN →Rdv×JN , a 7→eR(a), the projection eQ : Rdv×JN →
+Rdu×JN , v 7→eQ(v), are given by
+eR(a) = {Raj}j∈JN ,
+(R ∈Rdv×da),
+eQ(v) = {Qvj}j∈JN ,
+(Q ∈Rdu×dv),
+and the non-linear layers eLℓ, for ℓ= 1, . . . , N, are of the form
+eLℓ(v)j = σ
+
+Wℓvj + bℓ,j + F−1
+N
+
+Pℓ(k) · FN(v)(k)
+
+j
+
+(16)
+for j ∈JN. Here, Wℓ∈Rdv×dv, bℓ,j = bℓ(xj) ∈Rdv×JN deﬁnes a pointwise aﬃne mapping
+Wℓvj +bℓ,j, the coeﬃcients Pℓ(k) ∈Cdv×dv (k ∈KN) satisfy the Hermitian conjugacy condi-
+tion Pℓ(−k) = Pℓ(k)† and deﬁne a (non-local) convolution operator via the discrete Fourier
+transform, and the non-linear activation function σ : R →R is extended componentwise to
+a function Rdv×JN →Rdv×JN . Comparing N ∗with the corresponding discretization e
+N ∗, it
+is easy to see that, for a ∈A(Td; Rda) and denoting a := (a(xj))j∈JN ∈Rda×JN , we have
+e
+N ∗(a)j = N ∗(a)(xj),
+∀j ∈JN.
+In particular, this implies that N ∗(a)(x) can in practice be computed for any x ∈Td via
+the Fourier interpolation of the grid values e
+N ∗(a). In contrast to general FNOs, Ψ-FNOs
+therefore allow for eﬃcient numerical implementation. Furthermore, the discrete (inverse)
+Fourier transforms in each hidden layer in (16) can be very eﬃciently computed using the
+fast Fourier transform (FFT).
+The above discussion also leads to a very natural deﬁnition of the size of a Ψ-FNO
+below:
+Deﬁnition 12 (Depth, lift and size) The depth of a Ψ-FNO N ∗: L2
+N(Td; Rda) →
+L2
+N(Td; Rdu) (cp. Deﬁnition 11), is deﬁned by depth(N ∗) := L. We refer to the dimension
+dv, as the lifting dimension of N ∗, denoted lift(N ∗) := dv. We deﬁne the size of a
+Ψ-FNO N ∗as the total number of degrees of freedom in its numerical implementation e
+N ∗
+(cp. equation 15). A simple calculation shows that
+size(N ∗) = dudv
+|{z}
+size(Q)
++L
+ d2
+v + dv|JN| + d2
+v|JN|
+
+|
+{z
+}
+size(Lℓ)
++ dadv
+|{z}
+size(R)
+.
+The precise size of a Ψ-FNO will not be of any particular relevance for our asymptotic
+complexity estimates. Instead, we will usually content ourselves with the simple estimate
+size(N ∗) ≲Ld2
+vNd,
+where we assume that max(da, du) ≤dv.
+11
+
+PDF PAGE 12
+Kovachki, Lanthaler and Mishra
+Given our discussion, it is natural to ask whether any FNO N = Q◦LL◦LL−1◦· · ·◦L1◦R
+can be approximated to arbitrary accuracy by an associated Ψ-FNO N ∗: L2
+N →L2
+N,
+N ∗= Q ◦IN ◦LL ◦IN ◦· · · ◦L1 ◦IN ◦R,
+for suﬃciently large N ∈N? An aﬃrmative answer can be given for a natural class of FNOs
+of ﬁnite width, deﬁned as follows.
+Deﬁnition 13 A FNO N : A(Td; Rda) →U(Td; Rdu) is said to be of ﬁnite width, if N
+is a composition N = Q ◦LL ◦· · · ◦L1 ◦R, with layers Lℓof the form (7), and for which
+there exists a “width” w ∈N, such that the Fourier multiplier Pℓ(k) ≡0, for |k|∞> w.
+We can now state the following theorem, which shows that Ψ-FNOs N ∗provide an
+arbitrarily close approximation of a given FNO N:
+Theorem 14 Assume that the activation function σ ∈Cm is globally Lipschitz continuous.
+Let N : Hs(Td; Rda) →L2(Td; Rdu) be a FNO of ﬁnite width, with s > d/2. and assume
+that m > s. Then for any ϵ, B > 0, there exists N ∈N and a Ψ-FNO N ∗: L2
+N(Td; Rda) →
+L2
+N(Td; Rdu), such that
+sup
+∥a∥Hs≤B
+∥N(a) −N ∗(a)∥L2 ≤ϵ.
+For the proof, we refer to Appendix D.5. In particular, the last theorem implies an
+extension of the universal approximation theorem 5 to Ψ-FNOs, provided that the input
+functions have suﬃcient regularity for the pseudo-spectral projection (49) to be well-deﬁned:
+Theorem 15 (Universal approximation for Ψ-FNOs) Let s > d/2, and let s′ ≥0.
+Let G : Hs(Td; Rda) →Hs′(Td; Rdu) be a continuous operator. And let K ⊂Hs(Td; Rda) be a
+compact subset. Then for any ϵ > 0, there exists N ∈N and a Ψ-FNO N ∗: L2
+N(Td; Rda) →
+L2
+N(Td; Rdu), such that
+sup
+a∈K
+∥G(a) −N ∗(a)∥Hs′ ≤ϵ.
+Proof Similar to the proof of the universal approximation theorem for FNOs, we again
+note that the general case s′ ≥0 can be deduced from the statement of Theorem 15 for the
+special case s′ = 0. This is the content of the following lemma, whose proof is provided in
+Appendix D.6:
+Lemma 16 Assume that Theorem 15 holds for s′ = 0. Then it holds for arbitrary s′ ≥0.
+The special case s′ = 0 follows immediately from Theorem 14 and the observation that
+the FNO approximation constructed in the proof of the universal approximation theorem
+for FNOs, Theorem 5, has ﬁnite width.
+Remark 17 The form of the universal approximation theorem 5 stated above shows that
+any continuous operator G : Hs →Hs′, s ≥d/2, can be approximated to arbitrary accuracy
+by a Ψ-FNO, on a given compact subset K ⊂Hs. In practical applications, the parameters
+12
+
+PDF PAGE 13
+Fourier Neural Operators
+of neural networks are usually trained from data, i.e.
+based on the minimization of an
+empirical loss of the form
+1
+M
+M
+X
+m=1
+∥N ∗(am) −G(am)∥2
+Hs′,
+(17)
+where a1, . . . , aM ∼µ are (iid) samples from a probability measure µ ∈P(Hs) on the input
+function space. The empirical loss is a discretization of the following continuous quantity:
+ˆ
+Hs ∥N ∗(a) −G(a)∥2
+Hs′ dµ(a).
+(18)
+The form of the continuous loss (18) might suggest to measure the distance between N ∗
+and G in the L2
+µ(Hs; Hs′)-metric (the square root of equation 18), rather than the sup-
+norm. This L2
+µ-approach has been followed in recent work on DeepONets by Lanthaler et al.
+(2021), to explain some observations of the numerical experiments of Lu et al. (2021). In
+the present work, we focus instead on the sup-norm over compact subsets K ⊂Hs:
+sup
+a∈K
+∥N ∗(a) −G(a)∥Hs′.
+(19)
+Clearly, if the support of µ is a compact subset, with supp(µ) = K, then our sup-estimates
+immediately imply corresponding bounds on the L2
+µ-distance, since the sup-norm is a con-
+siderably stronger distance-measure than the L2
+µ-norm. On the other hand, the restriction
+to compact subsets K ⊂Hs does not allow for popular choices of the probability measure µ,
+such as Gaussian measures. Furthermore, the sup-estimates do not allow for discontinuous
+operators G.
+Expanding on the last remark, we would like to point out that the universal approxi-
+mation theorem, Theorem 15, combined with a technical cut-oﬀargument, can be used to
+prove a corresponding universal approximation theorem in the L2
+µ-norm, following an idea
+in Lanthaler et al. (2021). We state this extension without proof:
+Theorem 18 Assume that the activation function σ ∈C∞(R) is strictly monotonically
+increasing and satisﬁes limx→−∞σ(x) > −∞. Let µ ∈P(Hs(Td; Rda)) be a probability
+measure. Let G : Hs(Td; Rda) →Hs′(Td; Rdu) be a µ-measurable operator, for s ≥d/2,
+s′ ≥0, and assume that
+´
+Hs ∥G(a)∥2
+Hs′ dµ(a) < ∞.
+Then, for any ϵ > 0, there exists
+N ∈N, and a Ψ-FNO N ∗: L2
+N(Td; Rda) →L2
+N(Td; Rdu), such that
+ˆ
+Hs ∥G(a) −N ∗(a)∥2
+Hs′ dµ(a)
+1/2
+≤ϵ.
+Theorem 18 removes the compactness assumption from the support of µ, and allows
+for discontinuous operators G—albeit at the expense of measuring the distance in the less
+informative L2
+µ-norm.
+Before moving on to a detailed discussion of the structure of Ψ-FNOs in the next section,
+which will form the basis of our quantitative estimates for two concrete model problems
+in the remainder of this work, we would like to provide a ﬁnal remark on the diﬀerences
+between the sup-estimates which form the focus of the present work and similar L2
+µ-estimates
+derived in Lanthaler et al. (2021):
+13
+
+PDF PAGE 14
+Kovachki, Lanthaler and Mishra
+Remark 19 A beneﬁt of the sup-estimates in the present work is that they are independent
+of the precise properties of the input measure µ, depending only on its topological support.
+This independence of the details of the input measure may make the estimates more readily
+applicable to a wide range of possible training distributions µ (with compact support) than
+similar results in Lanthaler et al. (2021), which depend on the ﬁner properties of µ, such
+as the decay rates of the eigenvalues of the covariance operator of µ. On the other hand,
+taking into account the ﬁne properties of µ in Lanthaler et al. (2021) has allowed to explain
+certain empirical observations by Lu et al. (2021), such as the exponential decay of the
+encoding error as a function of the number of sensor points used for the DeepONet encoding
+of the input function. As shown in Lanthaler et al. (2021), the explanation of this empirical
+ﬁnding depends crucially on the ﬁne properties of the input measure µ, and in particular the
+decay of the eigenvalues, which cannot generally be derived by considering only the operator
+G together with the topological support, supp(µ), of µ.
+In the remainder of this work, our goal will be to derive quantitative error and complexity
+estimates for two concrete non-linear operators, arising from the stationary Darcy equations
+and Navier-Stokes equations, respectively. To avoid additional technical diﬃculties, these
+results will be derived for input functions a ∈K, taken from a suitable compact subset
+K ⊂Hs. Given the discussion of Remarks 17, 19, we will thus focus on deriving estimates
+in the sup-norm over K.
+2.5.1 Structure and Properties of Ψ-FNOs
+We conclude this section by pointing out some aspects of the structure of Ψ-FNOs (14)
+that will be relevant in the following. To start with, we can simplify Ψ-FNOs by viewing
+them in terms of two types of layers. which we will refer to as σ- and F-layers, respec-
+tively. A σ-layer L∗of a Ψ-FNO is a local, non-linear layer of the form L∗(v)(x) =
+INσ (AINv(x) + b), or, in the numerical implementation (cp. equation 16)
+eL∗(v)j = σ (Avj + bj) ,
+∀j ∈JN,
+with A ∈Rdv×dv, and bj ∈RJN×dv deﬁning an aﬃne mapping. A F-layer L∗of a Ψ-FNO
+is a non-local, linear layer of the form L∗(v)(x) = F−1(P(k) · F(INv)(k))(x), which in a
+practical implementation corresponds to
+eL∗(v)j = F−1
+N
+
+P(k) · FN(v)(k)
+
+j,
+∀j ∈JN,
+where P : KN →Cdv×dv is a collection of complex weights, with P(−k) = P(k)† the
+Hermitian transpose of P(k), and FN (F−1
+N ) denotes the discrete (inverse) Fourier transform.
+The main point of these deﬁnitions is that each Ψ-FNO can be decomposed into a ﬁnite
+number of σ-layers and F-layers, and that the converse is also true; i.e. any composition of
+σ-layers and F-layers can be represented by a Ψ-FNO. These statements are made precise
+in a series of technical Lemmas, which are stated and proved in Appendix D.7.
+3. Approximation of PDEs by Ψ-FNOs
+We have shown in the previous section that FNOs (6) as well as their computational re-
+alizations (Ψ-FNOs, see equation 14) are universal, i.e., they approximate any continuous
+14
+
+PDF PAGE 15
+Fourier Neural Operators
+operator, deﬁned in the Setting 1, to desired accuracy. However, as repeatedly discussed in
+the introduction, universality alone does not suﬃce to claim that FNOs can approximate
+operators eﬃciently. In particular, it could happen that the size of the FNO is unfeasibly
+large to ensure a given accuracy of the approximation. In fact, the following result implies
+that (Ψ-)FNOs provides ineﬃcient approximations in certain cases, where the underlying
+output functions are very rough:
+Theorem 20 Let G : A(Td; Rda) →Hs′(Td; Rdu) be an operator deﬁned on an arbitrary
+function space A, and let K ⊂A(Td; Rda) be a compact set. Then any Ψ-FNO approxima-
+tion N ∗: L2
+N →L2
+N satisﬁes the following lower bound
+sup
+a∈K
+∥N ∗(a) −G(a)∥Hs′ ≥sup
+a∈K
+∥(1 −PN)G(a)∥Hs′.
+Proof The proof is almost trivial: Since N ∗(a) ∈L2
+N, then for any a ∈A, we have
+∥N ∗(a) −G(a)∥Hs′ ≥inf
+u∈L2
+N
+∥u −G(a)∥Hs′ = ∥PNG(a) −G(a)∥Hs′.
+Remark 21 In particular, the last Theorem 20 implies that if the image G(K) contains
+functions whose Fourier series converges only at a logarithmic rate log(N)−1, then the size
+of any Ψ-FNO achieving an approximation accuracy ϵ must scale exponentially, size(N ∗) ≳
+exp(N). A concrete example is provided by the Ψ-FNO approximation of the identity oper-
+ator G = Id : Hs(T) →Hs(T) (s ≥0), on
+K :=
+
+a ∈Hs(T)
+ with Fourier coeﬀ.: |bak| ≤
+1
+|k|s+1/2 log(1 + k), k ∈Z
+
+.
+Thus, one reason for the potentially large sizes and consequently the ineﬃcient approxima-
+tion due to FNOs lies in the roughness of output functions. In the following remark, we
+point out an independent reason why the operators constructed in our proof of the universal
+approximation theorem may not yield an eﬃcient approximation:
+Remark 22 We observe from the proof of Theorem 5 that the desired FNO, approximating
+the operator G, is constructed as NIFT◦b
+N ◦NFT, with NFT, NIFT approximating the Fourier
+and Inverse Fourier transforms, respectively, whereas b
+N : R2KN →R2KN is a canonical
+ﬁnite-dimensional neural network approximation of the “Fourier conjugate operator” (11):
+bGN : R2KN →R2KN . We note that N herein has to be chosen suﬃciently large in order to
+yield the desired error tolerance of ϵ. By Theorems 40, 20, this depends on the smoothness
+of the input and output spaces, i.e., if the input (output) a ∈K ⊂Hs (G(a) ∈Hs′), for
+some s, s′ > 0, then we need to choose N such that N−s, N−s′ ∼ϵ. For simplicity, we
+assume s = s′. Further assuming that the mapping G is Lipschitz continuous, implies that
+the Fourier conjugate operator bG is also Lipschitz continuous as a mapping from R2KN
+to R2KN . Hence, neural network approximation results, such as those of Yarotsky (2017)
+for ReLU activations or De Ryck et al. (2021) for tanh activations, yield that the size of
+15
+
+PDF PAGE 16
+Kovachki, Lanthaler and Mishra
+the approximating neural network b
+N scales as size( b
+N) ≳ϵ−D, where D is the dimension
+of the domain of bGN. The crucial observation is that, in the present case, the dimension
+D = |KN| ∼Nd ∼ϵ−d/s, is not ﬁxed. Therefore, this yields an estimate
+size( b
+N) ≳ϵ−ϵ−d/s.
+(20)
+This scaling represents a super-exponential growth in the size of the FNO N, with respect
+to the error ϵ, incurred in approximating the underlying operator G.
+Given the above remarks, we infer that in the worst case, a FNO approximating a
+generic Lipschitz continuous operator G might require extremely large sizes to achieve the
+desired accuracy, making it unfeasible in practice. The same holds for Ψ-FNOs of the form
+(14).
+This super-exponential growth appears as a form of curse of dimensionality, i.e.,
+exponential growth of complexity (measured here in the size of the FNO), with respect to
+the error.
+Hence, it is reasonable to ask how these extremely pessimistic complexity bounds on
+FNOs (Ψ-FNOs), can be reconciled to their robust numerical performance for approximating
+PDEs, as reported in Li et al. (2021). The rest of the section investigates this fundamental
+question.
+The starting point of our explanation for the robustness of FNOs in approximating PDEs
+is the observation that operators which arise in the context of PDEs have a special structure
+and are not merely generic continuous operators mapping one inﬁnite-dimensional function
+space to another. To see this, we point out that many time-dependent PDEs arising in
+physics can be written in the general abstract form,
+∂tu + ∇· F(u, ∇u) = 0,
+(21)
+where for any (t, x) ∈[0, T] × D ⊂Rd, u(t, x) ∈Rdu is a vector of physical quantities,
+describing e.g. density, velocity or temperature of a ﬂuid or other material at a given point
+x ∈D in the domain D and at time t ∈[0, T]. Equation (21) describes the general form
+of a conservation law for the physical quantities u with a ﬂux function F(u, ∇u), which is
+typically non-linear, and can e.g. represent advection or diﬀusion terms. The ﬂux function
+F(u, ∇u) may also depend on u in a non-local manner. For example, for the incompressible
+Navier-Stokes equations in Rd,
+u(x, t) = (u1(x, t), . . . , ud(x, t)) ∈Rd,
+represent the ﬂuid velocity at (x, t), and the ﬂux is deﬁned by
+F(u, ∇u) = −u ⊗u −p + ν∇u,
+where p = p(u) depends on u in a non-local manner:
+p = R : (u ⊗u),
+R := (−∆)−1(∇⊗∇),
+where R is a (non-local) operator closely related to the Riesz transform.
+16
+
+PDF PAGE 17
+Fourier Neural Operators
+A popular numerical method for time-dependent PDEs, of the form (21), particularly
+on periodic domains D = Td, is the pseudo-spectral method (Canuto et al., 2007), wherein
+(21) is discretized as,
+∂tuN + ∇· INF(uN, ∇uN) = 0,
+(22)
+where uN ∈L2
+N is a trigonometric polynomial of degree ≤N.
+The resulting system of ODEs (22) can be further discretized in time using a time-
+marching scheme. For simplicity, the forward Euler discretization with time step τ leads
+to,
+un+1
+N
+= un
+N −τ∇· INF(un
+N, ∇un
+N).
+(23)
+One might prove that the system (23) provides a convergent approximation for the underly-
+ing time-dependent PDE (21) for many diﬀerent choices of the ﬂux F. In order to connect
+the approximation (23) with FNOs, we decompose the right hand side of (23) as,
+un
+N
+R
+7−→
+(
+un
+N
+un
+N
+)
+F
+7−→
+(
+un
+N
+∇un
+N
+)
+σ7→. . .
+σ7→
+(
+un
+N
+F σ
+N(un
+N, ∇un
+N)
+)
+F
+7−→
+(
+un
+N
+∇· F σ
+N(un
+N, ∇un
+N)
+)
+7−→un
+N −τ∇· F σ
+N(un
+N, ∇un
+N).
+Here, R is the lifting operator and σ, F are the σ- and F-layers, respectively, of a Ψ-
+FNO, that are deﬁned in Section 2.5.1. The above representation suggests that the Fourier
+F-layers of a Ψ-FNO allow us to take exact derivatives, and a composition of σ-layers
+of a Ψ-FNO allows us to approximate continuous functions to any desired accuracy (via
+the standard universal approximation theorem for ﬁnite-dimensional neural networks); in
+particular, a composition of σ-layers can provide an approximation
+(u, ∇u) 7→F σ
+N(u, ∇u) ≈INF(u, ∇u).
+Thus, by a suitable composition of σ- and F-layers, Ψ-FNOs can emulate pseudo-spectral
+methods, providing a mechanism by which such neural operators can approximate solution
+operators for a large class of PDEs, eﬃciently.
+We will make this intuition precise in the following. However, instead of considering a
+generic abstract form of PDEs, we focus on two PDEs, often encountered in physics, which
+serve as prototypes for a wide variety of PDEs. We note that pseudo-spectral methods have a
+long and successful history in the numerical approximation of PDEs (Gottlieb and Orszag,
+1977).
+Unfortunately, for the particular applications of the current work, the required
+detailed convergence estimates are not available in the literature, and therefore we include
+an extended discussion of suitable pseudo-spectral methods for the considered PDEs, as
+well as a detailed analysis of their convergence in the appendices. We start with an elliptic
+PDE below.
+17
+
+PDF PAGE 18
+Kovachki, Lanthaler and Mishra
+3.1 Stationary Darcy Flow
+We consider the elliptic PDE of the form,
+−∇· (a∇u) = f.
+(24)
+Here, u ∈H1(Td), can correspond to the steady-state pressure for a ﬂuid, ﬂowing according
+to the Darcy’s law, in a porous medium with the positive coeﬃcient a ∈L∞(Td), denoting
+the rock permeability.
+Another model for (24) is that of a diﬀusion equation, with u
+modeling the temperature and a the thermal conductivity of the medium.
+For simplicity, we assume periodic boundary conditions on Td, and we impose that
+´
+Td f dx =
+´
+Td u dx = 0. Employing a suitable rescaling, we will furthermore assume that a
+can be written in the form:
+a = 1 + ea,
+ea ∈Hs(Td), s > d/2.
+We note that the assumption s > d/2 ensures that ∥ea∥L∞< ∞, via the Sobolev embedding
+Hs(Td),→L∞(Td) (cp. Theorem 39). To ensure that (24) is well-posed, we assume the
+following coercivity condition: There exists λ > 0, such that 1 + ea ≥λ. In fact, we shall
+assume the slightly stronger condition that
+∥ea∥L∞≤C∥ea∥Hs ≤1 −λ,
+(25)
+where C is the norm of the embedding Hs(Td),→L∞(Td). The condition (25) clearly implies
+the λ-coercivity of (24).
+The underlying operator G : L∞(Td) →H1(Td), maps a coeﬃcient a ∈L∞(Td) to the
+solution u ∈H1(Td) of (24). Our aim is to learn this operator eﬃciently using a Ψ-FNO.
+To this end, we will follow the program discussed above and ﬁrst present a pseudo-spectral
+method that approximates the Darcy ﬂow PDE (24) accurately. Then, this pseudo-spectral
+method will be emulated by a suitable Ψ-FNO.
+3.1.1
+A Fourier-Galerkin Approximation of (24)
+We ﬁx N ∈N and assume that the coeﬃcient ﬁeld and right-hand side a = 1 + ea, f ∈
+Hs(Td), for some s > d/2, such that the pseudo-spectral projections INea and INf are
+well-deﬁned. We can now deﬁne a Fourier-Galerkin approximation of (24) as the (unique)
+solution uN ∈L2
+N(Td), with
+´
+uN dx = 0, and such that
+−˙PN∇· (aN∇uN) = fN,
+(26)
+where we set aN := 1 + eaN and
+(
+eaN := ˙PNI2Nea,
+fN := ˙PNI2Nf.
+(27)
+See notation for PN, ˙PN and IN in Appendix B. We observe from (27) that eaN and fN
+are obtained by ﬁrst carrying out a pseudo-spectral projection of ea, f on the regular grid
+{xj}j∈J2N (with 2N grid points in each direction), yielding a representation of the form
+I2Nea =
+X
+|k|≤2N
+bakei⟨k,x⟩,
+I2Nf =
+X
+|k|≤2N
+bfkei⟨k,x⟩,
+18
+
+PDF PAGE 19
+Fourier Neural Operators
+for coeﬃcients bak, bfk ∈C, and then projecting these expressions onto ˙L2
+N(Td):
+˙PNI2Nea =
+X
+0<|k|≤N
+bakei⟨k,x⟩,
+˙PNI2Nf =
+X
+0<|k|≤N
+bfkei⟨k,x⟩.
+The reason for this particular choice of the projection (27) lies in the fact that the mapping
+L2
+N(Td) × L2
+N(Td) →L2
+N(Td),
+(aN, uN) 7→−PN∇· (aN∇uN) ,
+can be exactly represented by a pseudo-spectral method on {xj}j∈J2N , i.e., on a denser grid
+of 2N grid points in each direction. Indeed, it is easy to see that if aN, uN ∈L2
+N, then ∇uN ∈
+L2
+N, and the values ∇uN(xj) can be computed exactly via the discrete Fourier transform
+from the values uN(xj), j ∈J2N. Since the product aN∇uN ∈L2
+2N is a trigonometric
+polynomial of degree ≤2N, the Fourier coeﬃcients of aN∇uN can also be recovered from
+knowledge of the point-values aN(xj)∇uN(xj) at the grid points xj ∈J2N. Finally, since
+the divergence and projection PN can be evaluated exactly via discrete Fourier transforms,
+we conclude that the mapping (aN, uN) 7→−PN∇· (aN∇uN) can be computed based on
+knowledge of the grid values aN(xj), and uN(xj). The above procedure of computing a
+product of two trigonometric polynomials of degree ≤N exactly, based on the point-values
+on a ﬁner grid of size 2N + 1 in each direction is well-known in the context of pseudo-
+spectral methods, and is usually referred in the numerical analysis literature as de-aliasing
+(cf. section 3.4.2 of the textbook by Canuto et al. (2007)).
+In order to computationally realize the Fourier-Galerkin method (26), we are going to
+recast it as a ﬁxed point problem uN = FN(uN; aN, fN), where FN( · ; aN, fN) : L2
+N(Td) →
+L2
+N(Td) is deﬁned by
+FN(uN; aN, fN) = ˙PN(−∆)−1∇· (eaN∇uN) + (−∆)−1fN.
+(28)
+In Lemma 48 Appendix E, we show that the map (28) is a contraction and can be eﬃciently
+realized by a Picard type ﬁxed-point iteration scheme. This leads to the following algorithm
+for realizing the Fourier-Galerkin method (26) computationally,
+Algorithm 23 (Approximate solution of Darcy equation)
+Input:
+N ∈N, a ∈Hs(Td), f ∈˙Hk−1(Td), with s > d/2 + k > d, k ∈N, k ≥1.
+Output:
+uN ∈H1
+N(Td), such that uN ≈u, where u ∈H1(Td) solves (24) with
+coeﬃcient ﬁeld a and right-hand side f.
+1. Compute pseudo-spectral projections eaN, fN ∈L2
+N(Td), deﬁned via the values on “de-
+aliased” grid {xj}j∈J2N (cp. equation 27):
+(
+eaN := ˙PNI2N(a −1),
+fN := ˙PNI2Nf
+)
+∈L2
+N(Td).
+2. Set
+K :=
+&
+log
+ λ−1N−k
+log (1 −λ/2)
+'
+.
+19
+
+PDF PAGE 20
+Kovachki, Lanthaler and Mishra
+3. Set u0
+N := 0 ∈L2
+N(Td).
+4. For k = 1, 2, . . . , K: compute
+uk
+N := ˙PN(−∆)−1∇·
+
+eaN∇uk−1
+N
+
++ (−∆)−1fN.
+5. Set uN := uK
+N.
+We have the following theorem on the convergence of the Algorithm 23,
+Theorem 24 Let u be the unique solution of (24). Let k ∈N be given, with k > d/2+1, and
+assume that the coeﬃcient a ∈Hs(Td) for s > d/2+k satisﬁes the coercivity condition (25).
+Assume furthermore that f ∈Hk−1(Td). Then there exists N0 = N0(s, d, ∥a∥Hs, λ) ∈N,
+such that for any integer N ≥N0, there exists a unique solution of the discretized elliptic
+equation (26), and there exists a constant C = C(s, d, λ, ∥a∥Hs, ∥f∥Hk−1) > 0, such that
+∥u −uN∥H1 ≤CN−k,
+where uN is the output of Algorithm 23.
+The proof of Theorem 24 relies only on standard techniques of numerical analysis and
+is presented in Appendix E.1.
+3.1.2 Ψ-FNO Approximation of the Darcy Equations
+We will emulate the pseudo-spectral ﬁxed point Algorithm 23 by a Ψ-FNO, allowing us to
+derive approximation bounds. We consider the following setting,
+Setting 25 Let s ≥d/2 + k + δ for some k ∈N, δ ∈(0, 1) be a given Sobolev regularity
+parameter, and let λ ∈(0, 1) be a (coercivity) constant. Denote by As
+λ(Td) ⊂Hs(Td) the
+set of λ-coercive coeﬃcients a ∈Hs(Td) of the form a = 1 + ea, and such that
+∥a∥Hs ≤λ−1,
+∥ea∥L∞≤C∥ea∥Hd/2+δ ≤1 −λ.
+Here C > 0 denotes the norm of the embedding Hd/2+δ(Td),→L∞(Td). We consider the
+operator G : As
+λ(Td) →˙H1(Td), a 7→u, where u solves the Darcy equation
+−∇· (a∇u) = f,
+ 
+Td u(x) dx = 0,
+on the periodic torus Td, with right-hand side f ∈˙Hk−1.
+With this setting in place, we can now state our main FNO approximation theorem for
+the solution operator G : As
+λ(Td) →H1(Td) of the Darcy problem:
+Theorem 26 Assume Setting 25, and assume that the activation function σ is non-linear
+and σ ∈C3(R). Then there exists a constant C = C(s, λ, d) > 0, such that for any N ∈N,
+there exists a Ψ-FNO N : As
+λ(Td) →H1(Td), such that
+sup
+a∈As
+λ
+∥G(a) −N(a)∥H1(Td) ≤CN−k
+20
+
+PDF PAGE 21
+Fourier Neural Operators
+and
+depth(N) ≤C log(N),
+lift(N) = dv ≤C.
+In particular, we have
+size(N) ≲Nd log(N).
+The proof of this theorem, presented in Appendix E.3, relies crucially on the eﬃcient ap-
+proximation of quadratic nonlinearities by shallow neural networks with smooth activation
+functions, see Lemma 50 in Appendix E for the precise statement and proof.
+Remark 27 To achieve a FNO approximation error of order ϵ for the Darcy problem,
+Theorem 26 shows that a Ψ-FNO N with
+size(N) ≲
+1
+ϵ
+d/k
+log(ϵ−1),
+depth(N) ≲log(ϵ−1),
+(29)
+is suﬃcient. Furthermore, the lifting dimension dv can be kept uniformly bounded, inde-
+pendently of ϵ. In particular, for k > d, the required total size of the Ψ-FNO scales sub
+log-linearly in the approximation accuracy ϵ, indicating that Ψ-FNOs may provide a very
+eﬃcient approximation to the solution operator of the Darcy problem, in this case.
+As a concrete example for illustrating the approximation of Darcy equations by FNOs, we
+consider the following example.
+Example 1 A possible model for coeﬃcients a with a typical length scale ℓ> 0, is to assume
+an expansion of a = a(x; Y ) in terms of random variables Y = (Y1, Y2, . . . ) ∈[−1, 1]N (not
+necessarily i.i.d.), of the following form, similar to the ansatz in (Schwab and Zech, 2019):
+a(x; Y ) = 1 +
+X
+k∈Zd\{0}
+bkYkei⟨k,x⟩,
+where we assume that the coeﬃcients bk satisfy a decay condition of the form |bk| ≤
+Cb exp(−ℓ|k|) for a constant Cb > 0. We also assume that a(x; Y ) satisfy the coercivity
+condition
+∥a( · ; Y ) −1∥L∞≤C∥a( · ; Y ) −1∥Hd/2+δ(Td) ≤1 −λ,
+for some δ, λ ∈(0, 1), and that the source term f ∈C∞(Td). Under these assumptions, we
+have a ∈Hs for any s > 0, and hence it follows from Theorem 26 that for any r ∈N, there
+exists a constant C = C(r, ℓ, ∥f∥Ck, δ), with the following property (cp. also Remark 27):
+For any ϵ > 0, there exists a Ψ-FNO N, such that
+sup
+Y ∈[−1,1]N ∥G(a( · , Y )) −N(a( · , Y ))∥H1 < ϵ,
+and
+size(N) ≤Cϵ−1/r,
+depth(N) ≤C log(ϵ−1).
+(30)
+The complexity bounds (29) and (30) suggest that the size of a Ψ-FNO approximating the
+operator G stemming from the Darcy equations, scales only sub-linearly (or even better) in
+the desired accuracy ϵ. This should be contrasted with the fact that the size of a Ψ-FNO
+for a generic Lipschitz operator grows super-exponentially in the desired error (20). Thus,
+we are able to show that a Ψ-FNO can approximate this PDE solution operator much more
+eﬃciently than it might a generic inﬁnite-dimensional operator.
+21
+
+PDF PAGE 22
+Kovachki, Lanthaler and Mishra
+3.2 Incompressible Navier-Stokes Equations
+The motion of a viscous, incompressible Newtonian ﬂuid is modeled by the incompressible
+Navier-Stokes equations,
+(
+∂tu + u · ∇u + ∇p = ν∆u,
+div(u) = 0, u(t = 0) = u0,
+(31)
+Here, u ∈Rd is the ﬂuid velocity and p ∈R is the pressure of the ﬂuid, acting as a Lagrange
+multiplier to enforce the divergence-free constraint div(u) = 0. The initial ﬂuid velocity
+is denoted by u0. For simplicity, we assume periodic boundary conditions in the domain
+Td. The viscosity is denoted by ν ≥0 and we would like to state that the subsequent
+analysis also applies for ν = 0, where (31) reduces to the incompressible Euler equations
+modeling an ideal ﬂuid. For deﬁniteness, we recall the following well-known theorem for
+the well-posedness of the Navier-Stokes equations (31),
+Theorem 28 (see e.g. Thm 3.4 of Majda and Bertozzi (2001)) Let r > d/2 + 2.
+For any u0 ∈Hr, there exists T > 0 and a unique classical solution of the Navier-Stokes
+equations (31), such that u ∈C([0, T]; Hr) ∩C1([0, T]; Hr−2) with u(t = 0) = u0.
+It is well known that in two space dimensions d = 2, the time interval for existence of solu-
+tions [0, T] can be extended to any ﬁnite T as long as u0 ∈Hr, whereas the corresponding
+ﬁnite-time well-posedness result for three space-dimensions is an outstanding open problem
+(Majda and Bertozzi, 2001).
+We recall that if the initial data u0 of (31) belongs to ˙L2(Td; Rd), i.e. if
+ˆ
+Td u0(x) dx = 0,
+then we also have that the corresponding solution u(x, t) ∈˙L2(Td; Rd) (reﬂecting momentum
+conservation).
+Next, we introduce the Leray-projection operator P : L2(Td; Rd) →
+˙L2(Td; div), as the L2-orthogonal projection onto the subspace ˙L2(Td; div) ⊂˙L2(Td; Rd),
+consisting of divergence-free vector ﬁelds; i.e.
+we have u ∈˙L2(Td; div) if, and only if,
+u ∈˙L2(Td; Rd) and
+ˆ
+Td u(x) · ∇φ(x) dx = 0,
+∀φ ∈C∞(Td).
+In terms of Fourier series, the Leray projection P : ˙L2(Td; Rd) →˙L2(Td; div) is explicitly
+given by
+P
+
+X
+k∈Zd
+bukei⟨k,x⟩
+
+=
+X
+k∈Zd\{0}
+
+1 −k ⊗k
+|k|2
+
+bukei⟨k,x⟩.
+(32)
+In terms of the Leray projection P, we can now equivalently write the incompressible
+Navier-Stokes equations (31) as the following equation on the Hilbert space ˙L2(Td; div) as,
+(
+∂tu = −P (u · ∇u) + ν∆u,
+u(t = 0) = u0.
+(33)
+22
+
+PDF PAGE 23
+Fourier Neural Operators
+Given this background, our main objective in this section is to construct a Ψ-FNO that
+will approximate the operator G which maps the initial data u0 to the solution u( · , T) (at
+the ﬁnal time T) of the incompressible Navier-Stokes equations (31), (33). To this end, we
+will follow the general program outlined at the beginning of this section and introduce a
+suitable pseudo-spectral method for approximating the Navier-Stokes equations. Then, we
+construct a Ψ-FNO that can eﬃciently emulate this pseudo-spectral method.
+3.2.1 A Fully-Discrete Ψ-spectral Approximation of the Navier-Stokes
+Equations (31)
+The form of the Leray-projected Navier-Stokes equations (33) naturally suggests the fol-
+lowing fully-discrete approximation of (31):
+
+
+
+un+1
+N
+−un
+N
+τ
++ PN
+ un
+N · ∇un+1
+N
+
+= ν∆un+1
+N
+,
+u0
+N = INu(t = 0).
+(34)
+Here, we ﬁx N ∈N and introduce the space, ˙L2
+N(Td; div) := ˙L2(Td; div) ∩˙L2
+N(Td; Rd).
+We ﬁx a time-step τ > 0 and let un
+N ∈˙L2
+N(Td; div), for all n = 0, . . . , nT , with nT such
+that τnT = T. Moreover, we use the following ﬁnite-dimensional Leray-Fourier projection
+operator PN : ˙L2(Td; Rd) →˙L2
+N(Td; div) in analogy with (32):
+PN
+
+X
+k∈Zd
+bukei⟨k,x⟩
+
+:=
+X
+0<|k|∞≤N
+
+1 −k ⊗k
+|k|2
+
+bukei⟨k,x⟩,
+(35)
+to complete the description of the scheme (34).
+We observe that the scheme (34) is implicit i.e., at each time step n, one has to solve
+an operator equation to compute the velocity ﬁeld un+1
+N
+at the next time step. Thus, one
+needs to show the solvability of this operator equation in order to ensure that the scheme
+(34) is well-deﬁned. Under the following CFL condition for choosing a small enough time
+step τ,
+τ∥un
+N∥L∞N ≤1
+2,
+(36)
+we prove in Appendix F.1 that the scheme (34) is well-deﬁned.
+Next, in practice, one has to numerically approximate the solutions of the implicit
+equation (34) for evaluating the velocity ﬁeld un+1
+N
+, at the next time-step. We choose to
+do so by recasting the solution of the implicit equation (34) to ﬁnding a ﬁxed point for the
+mapping,
+wN 7→F(wN) := (1 −ντ∆)−1un
+N −τ(1 −ντ∆)−1PN(un
+N · ∇wN).
+(37)
+In Appendix F.1 Lemma 54, we show that a standard Picard-type iteration converges to a
+ﬁxed point for the map (37). This suggests the following numerical algorithm for approxi-
+mating strong solutions of the incompressible Navier-Stokes equations (31),
+23
+
+PDF PAGE 24
+Kovachki, Lanthaler and Mishra
+Algorithm 29 (Pseudo-spectral approximation of the Navier-Stokes equations (31))
+Input:
+U > 0, N ∈N, T > 0, a time-step τ > 0, such that nT = T/τ ∈N, and
+τUNd/2+1 ≤1
+2e, initial data u0
+N ∈L2
+N(Td; div), such that ∥u0
+N∥L2 ≤U.
+Output:
+unT
+N ∈L2
+N(Td; div) an approximation of the solution unT
+N ≈u(t = T) of
+(31) at time t = T.
+1. Set
+κ0 :=
+&
+log
+ T 2/τ 2
+log(2)
+'
+∈N.
+2. For n = 0, . . . , nT −1:
+(a) Set wn,0
+N
+:= 0,
+(b) For k = 1, . . . , κ0: Compute
+wn,k
+N
+:= (1 −ντ∆)−1un
+N −τ(1 −ντ∆)−1PN
+
+un
+N · ∇wn,k−1
+N
+
+,
+(c) Set un+1
+N
+:= wn,κ0
+N
+,
+The convergence of the Algorithm 29, together with a convergence rate, to the strong
+solution of the Navier-Stokes equations is summarized in the following theorem,
+Theorem 30 Let U, T > 0.
+Consider the Navier-Stokes equations on Td, for d ≥2.
+Assume that r ≥d/2 + 2, and let u ∈C([0, T]; Hr) ∩C1([0, T]; Hr−2) be a solution of
+the Navier-Stokes equations (31), such that ∥u∥L2 ≤U. Choose a time-step τ, such that
+τUNd/2+1 ≤(2e)−1. There exists a constant
+C = C(T, d, r, ∥u∥Ct(Hrx), ∥u∥C1
+t (Hr−2
+x
+)) > 0,
+such that with u0
+N := INu(0), and for the sequence u1
+N, . . . , unT
+N ∈L2
+N(Td; div) generated by
+Algorithm 29, we have
+max
+n=0,...,nT ∥un
+N −u(tn)∥L2 ≤C
+ τ + N−r
+,
+where nT τ = T. In particular, choosing τ ∼N−r, we have
+max
+n=0,...,nT ∥un
+N −u(tn)∥L2 ≤CN−r,
+with nT ∼Nr (and enlarging the constant C > 0 by a constant factor).
+The proof of this theorem relies on several techniques from numerical analysis and is pre-
+sented in detail in Appendix F.2.
+24
+
+PDF PAGE 25
+Fourier Neural Operators
+3.2.2 Approximation of Algorithm 29 by Ψ-FNOs
+Next, we are going to construct a Ψ-FNO of the form (14), which can eﬃciently emulate
+the pseudo-spectral Algorithm 29. To this end, we have the following result (proved in
+Appendix F.3) on the eﬃcient approximation of the non-linear term in the Navier-Stokes
+equations by FNOs,
+Lemma 31 Assume that the activation function σ ∈C3 is three times continuously diﬀer-
+entiable and non-linear. There exists a constant C > 0, such that for any N ∈N, and for
+any ϵ, B > 0, there exists a Ψ-FNO N : L2
+2N(Td; Rd) × L2
+2N(Td; Rd) →L2
+2N(Td; Rd), with
+depth(N), lift(N) = dv ≤C,
+such that we have
+∥PN (uN · ∇wN) −N(uN, wN)∥L2
+N ≤ϵ,
+for all trigonometric polynomials uN, wN ∈L2
+N(Td; Rd) ⊂L2
+2N(Td; Rd) of degree |k|∞≤N,
+satisfying the bound ∥uN∥L2, ∥wN∥L2 ≤B.
+Thus, from the preceding Lemma, we have that the nonlinearities in Algorithm 29 can be
+eﬃciently approximated by Ψ-FNOs. This paves the way for the following theorem on the
+emulation of the pseudo-spectral Algorithm 29 by Ψ-FNOs,
+Theorem 32 Let U, T > 0 and viscosity ν ≥0. Consider the Navier-Stokes equations on
+Td, for d ≥2. Assume that r ≥d/2 + 2, and let V ⊂C([0, T]; Hr) ∩C1([0, T]; Hr−2) be a
+set of solutions of the Navier-Stokes equations (31), such that supu∈V ∥u∥L2 ≤U, and
+U := sup
+u∈V
+n
+∥u∥Ct(Hrx) + ∥u∥C1
+t (Hr−2
+x
+)
+o
+< ∞.
+For t ∈[0, T], denote Vt := {u(t) | u ∈V}. Let G : V0 →VT denote the solution operator of
+(31), mapping initial data u0 = u(t = 0), to the solution u(T) at t = T of the incompressible
+Navier-Stokes equations. There exists a constant
+C = C(d, r, U, U, T) > 0,
+such that for N ∈N there exists a Ψ-FNO N : L2
+N(Td; Rd) →L2
+N(Td; Rd), such that
+sup
+u∈V0
+∥G(u) −N(u)∥L2 ≤CN−r,
+and such that
+depth(N) ≤CNr log(N),
+lift(N) = dv ≤C.
+The proof of this theorem is provided in Appendix F.3.
+Remark 33 It is straightforward to observe from Theorem 32 that the size of a Ψ-FNO to
+achieve a desired error tolerance of ϵ > 0, scales (neglecting log-terms) as
+size(N) ≤Cϵ−(1+ d
+r),
+(38)
+25
+
+PDF PAGE 26
+Kovachki, Lanthaler and Mishra
+Given that we need r ≥d/2 + 2, we observe from (38) that the size of the Ψ-FNO approxi-
+mating the initial data to solution operator G for the Navier-Stokes equations (31) scales at
+most sub-quadratically with respect to the error tolerance ϵ for the physically relevant val-
+ues d = 2, 3. This polynomial scaling should be compared with the super-exponential growth
+(see Remark 22) of the size of FNOs in approximating a generic Lipschitz-continuous op-
+erator. Thus, we are able to demonstrate that Ψ-FNOs can approximate the solutions of
+Navier-Stokes equations far more eﬃciently than what the universal approximation theorem
+15 suggests.
+Remark 34 From the convergence theorem 30, we observe that the underlying scheme (34)
+is ﬁrst-order in time. This low accuracy of the scheme necessitates a large number of time
+steps and aﬀects the overall complexity. We describe a second-order accurate time discretized
+version of the pseudo-spectral method for approximating the Navier-Stokes equations (31) in
+Appendix F.4 and in complete analogy with Theorem 32 (see Theorem 58 in Appendix F.4),
+we can construct a Ψ-FNO to emulate this second-order in time pseudo-spectral scheme,
+resulting in a Ψ-FNO of
+size(N) ≤Cϵ−( 1
+2 + d
+r),
+(39)
+to obtain a desired accuracy of ϵ. Thus, we can obtain a more eﬃcient approximation of the
+underlying operator than Ψ-FNO emulating the ﬁrst-order time scheme (34). In particular
+for r ≥2d, we obtain that the size of a Ψ-FNO only grows sub-linearly in terms of the
+desired accuracy, making this FNO approximation comparable in complexity to the FNO
+approximation of the Darcy equation (see equation 29).
+4. Comparison of FNOs with DeepOnets
+In this section, we will compare Ψ-FNOs with another operator learning framework, namely
+DeepOnets of Chen and Chen (1995); Lu et al. (2021), deﬁned as follows:
+Deﬁnition 35 Fix m, p ∈N. A DeepOnet D with output dimension p and sensor points
+x1, . . . , xm ∈Td is a mapping D : C(Td; Rda) →C(Td; Rdv) of the form
+D(a)(x) =
+p
+X
+k=1
+βk(a(x1), . . . , a(xp))τk(x),
+where β : Rm×da →Rp×du, α 7→β(α) = (β1(α), . . . , βp(α)), and τ : Rd 7→Rp, x 7→τ(x) =
+(τ1(x), . . . , τp(x)) are (ordinary) neural networks. We refer to β and τ as the branch and
+trunk nets, respectively.
+In the following theorem (proved in Appendix G), we show that a Ψ-FNO can naturally be
+viewed as a DeepOnet with a speciﬁc choice of the branch and trunk-nets; where the trunk
+net is ﬁxed to represent a trigonometric basis, and the branch net is constrained by a speciﬁc
+choice of hidden layer architecture, which provides a more parsimonious representation
+compared to a canonical DeepOnet implementation based on dense layers.
+26
+
+PDF PAGE 27
+Fourier Neural Operators
+Theorem 36 (DeepOnet approximation of Ψ-FNOs) Let N : L2
+N(Td; Rda) →L2
+N(Td; Rdu)
+be a Ψ-FNO, and ﬁx B > 0. For any ϵ > 0, there exists p ∈N and a DeepOnet (β, τ), with
+branch net β, trunk net τ, and sensor points {xj}j∈JN , such that
+sup
+∥a∥L∞≤B
+sup
+y∈Td
+N(a)(y) −
+p
+X
+k=1
+βk(a)τk(y)
+ ≤ϵ,
+where the ﬁrst supremum is taken over all a ∈C(Td), such that ∥a∥L∞≤B. Furthermore,
+we have
+width(β) ∼lift(N)Nd = dvNd,
+depth(β) = depth(N),
+and the trunk net τ deﬁnes a mapping τ : Rd →RKN , which approximates an (arbitrary)
+orthonormal trigonometric basis {ek}k∈KN with span{ek}k∈KN = span{ei⟨k,x⟩}k∈KN , such
+that
+max
+k∈KN ∥ek −τk∥L∞≤ϵ/B,
+where
+B := (2N + 1)d
+ 
+sup
+∥a∥L∞≤B
+∥N(a)∥L2
+!
+.
+Remark 37 We note that due to the particular architecture of Ψ−Fourier neural operators,
+the total size of a Ψ-FNO N is upper bounded by
+size(N) ≲depth(N)d2
+vNd.
+In contrast, since β and τ in the DeepOnet approximation of Theorem 36 are conventional
+(dense) deep neural networks, the total number of degrees of freedom (i.e. the total number
+of weights and biases) is given, in general, by
+size(β) ∼depth(β)width(β)2 ∼depth(N)d2
+vN2d,
+and size(τ) ∼depth(τ)width(τ)2. So that in particular, comparing the sizes of the Ψ-FNO
+and the corresponding (fully connected) DeepOnet approximation, we have
+size(N)
+size(β, τ) ≲N−d.
+In particular, this indicates that the Ψ-FNO provides a more parsimonious approximation
+of the underlying operator than the DeepOnet “emulator” constructed in Theorem 36, with
+size(N) ≪size(β, τ).
+Before summarizing and discussing the main results of this work in the next section,
+we would like to make a ﬁnal remark on the diﬀerent deﬁnition of “size” employed in the
+present work, compared to related work such as Lanthaler et al. (2021):
+Remark 38 In the approximation theory of neural networks, especially in the context of
+fully connected neural networks, it is customary to deﬁne the “size” of a neural network
+as the number of non-zero weights needed to approximate a given function (or operator) to
+27
+
+PDF PAGE 28
+Kovachki, Lanthaler and Mishra
+accuracy ϵ. As a consequence, approximation estimates often depend crucially on consider-
+able additional sparsity, which may be present in a particular construction in the proof of
+such results. We would like to emphasize that due to the special (constrained) architecture
+of Ψ-FNOs considered in the present work, our results do not depend on such additional
+sparsity properties. Instead, the size of our neural networks is measured in terms of the
+total number of weights and biases (be they zero or not). This is another indication of the
+potential parsimony of FNOs over other architectures, such as DeepONets.
+5. Summary and Discussion
+Many learning tasks, particularly, but not exclusively, in scientiﬁc computing, are naturally
+formulated as learning operators mapping one inﬁnite-dimensional space to another. Neural
+operators have recently been proposed as a framework for operator learning. A particular
+form, the so-called Fourier Neural Operators (FNOs) (6), have been shown to be eﬃcient
+in approximating a wide variety of operators that arise in PDEs (Li et al., 2021). Our main
+aim in this paper was to analyze FNOs and Ψ-FNOs (14), which is a concrete computational
+realization of FNOs. To this end, we have presented the following results,
+• We showed in Theorem 5 and Theorem 15 that FNOs (resp. Ψ-FNOs) are universal,
+i.e., they can approximate any continuous operator to desired accuracy. Our proof
+relies heavily on the ability of FNOs to approximate the Fourier transform and its
+inverse, together with the neural network approximation of the ﬁnite-dimensional
+Fourier conjugate operator (11). Thus, FNOs have the same universal approximation
+property as canonical neural networks for ﬁnite-dimensional functions and DeepOnets
+for operators (Lanthaler et al., 2021). This universality result paves the way for the
+widespread use of FNOs in the context of operator learning.
+• However as stated in Remark 22, in the worst case, the size of a FNO can grow
+super-exponentially in terms of the desired error for approximating a general Lipschitz
+continuous operator. This might inhibit the use of FNOs. On the other hand, we
+argue in the beginning of Section 3 that Ψ-FNOs, which are a concrete computational
+realization of FNOs, can approximate the nonlinearities and diﬀerential operators
+that deﬁne PDEs, very eﬃciently. Hence, one can think of Ψ-FNOs as a new form of
+pseudo-spectral methods for PDEs, which in practice are adapted to, and optimized
+based on the given training data. Thus, one can expect that Ψ-FNOs can approximate
+PDEs eﬃciently.
+• We consider two widely used prototypical PDEs, namely the elliptic PDE (24) that
+arises in a stationary Darcy ﬂow and the well-known incompressible Navier-Stokes
+equations for ﬂuid dynamics. For both these PDEs, we prove rigorously that there
+exists a Ψ-FNO which can approximate the underlying nonlinear operators eﬃciently,
+as we can show that the size of the Ψ-FNO only needs to grow polynomially in terms
+of the error. In fact, we show that the size grows sub-linearly in terms of the error.
+Thus, FNOs can approximate these widely used PDEs eﬃciently, corroborating the
+empirical results presented in Li et al. (2021).
+28
+
+PDF PAGE 29
+Fourier Neural Operators
+Hence, our analysis provides very strong theoretical evidence that FNOs are an eﬀective
+framework for operator learning. Moreover, we also compare FNOs to an alternative oper-
+ator learning framework, that of DeepOnets (Lu et al., 2021) and show that Ψ-FNOs can
+be thought of a special case of DeepOnets with a trunk net approximating trigonometric
+functions and sensor points being equi-distributed Cartesian grid points. Given its special
+architecture, we argue that a Ψ-FNO can allow for a more parsimonious representation of
+operators than a DeepOnet, enabling a cheaper approximation of certain operators.
+The comparison with DeepOnets also brings out some obvious limitations of FNOs.
+In particular, FNOs are eﬃcient on rectangular domains as the Ψ-FNO can be evaluated
+eﬃciently with FFT. Although one can use FNOs for operators deﬁned on arbitrary domains
+using suitable extension and restriction operators (see Theorem 9), it is unclear if these
+operators can be realized computationally in an eﬃcient manner. Moreover, FNOs ﬁx the
+trigonometric basis as the trunk net in the underlying DeepOnet (see Theorem 36). On the
+other hand, a general DeepOnet can learn trunk nets from the data during training, allowing
+the possibility of learning a more suitable representation from data. These considerations
+call for a more thorough computational comparison between DeepOnets and FNOs, and
+possibly other operator learning frameworks such as the one from Bhattacharya et al. (2021).
+Similarly, extending the analysis of this article to other neural operators can be readily
+envisaged. The use of FNOs for more general operators, particularly those arising in non-
+scientiﬁc computing settings, such as images, text and speech, also needs to be investigated.
+29
+
+PDF PAGE 30
+Kovachki, Lanthaler and Mishra
+Appendix A. Glossary of Mathematical Notation
+Symbol
+Description
+Page
+σ
+activation function
+Td
+periodic torus, identiﬁed with [0, 2π]d
+d
+spatial dimension of domain
+p. 4
+da, du, dv
+number of components of input, output and lifting
+p. 4
+A(D; Rda)
+input function space
+p. 4
+U(D; Rdu)
+output function space
+p. 4
+F, F−1
+Fourier transform and inverse Fourier transform
+p. 31
+FN, F−1
+N
+discrete Fourier transform and inverse
+p. 33
+{xj}j∈JN
+regular periodic grid, xj = 2πj/(2N + 1)
+p. 33
+JN
+grid point indices, JN = {0, . . . , 2N}d
+p. 33
+KN
+Fourier wavenumbers KN =
+
+k ∈Zd  |k|∞≤N
+	
+R
+lifting operator
+p. 4
+Lℓ
+neural operator layer
+p. 6
+Q
+projection operator
+p. 4
+F-layer
+linear, non-local layer; v(x) 7→F−1(PFv)(x)
+p. 14
+σ-layer
+non-linear, local layer; v(x) 7→σ(Wv(x) + b(x))
+p. 14
+Banach spaces
+L2
+Space of square-integrable functions
+˙L2
+˙L2 ⊂L2 square-integrable functions with zero mean
+p. 31
+L2
+N
+L2
+N ⊂L2 trigonometric polynomials of degree ≤N
+p. 31
+˙L2
+N
+˙L2
+N = ˙L2 ∩L2
+N trigonometric polynomials with zero mean
+p. 31
+Hs
+Sobolev space of smoothness s, with norm ∥· ∥Hs
+p. 31
+˙Hs
+Sobolev space with zero mean, with norm ∥· ∥˙Hs
+p. 31
+Projection operators
+PN
+L2-orthogonal Fourier projection PN : L2 →L2
+N
+p. 31
+˙PN
+Fourier projection ˙PN : L2 →˙L2
+N with zero mean
+p. 32
+IN
+Pseudo-spectral Fourier projection, i.e. trigonometric interpola-
+tion on regular grid {xj}j∈JN
+p. 32
+P
+Leray projection onto divergence-free vector ﬁelds
+p. 22
+PN
+Leray projection followed by projection PN; PN = PN ◦P
+p. 23
+Appendix B. Notation and Technical Preliminaries
+In this section, we introduce frequently used notation in the article main text and recall
+some essential facts about Fourier analysis.
+In the main text, our focus is functions deﬁned on the periodic torus Td, identiﬁed
+as Td = [0, 2π]d. Following standard practice, we denote by L2(Td) the space of square-
+integrable functions. For any such function v ∈L2(Td), we can deﬁne the Fourier Transform
+30
+
+PDF PAGE 31
+Fourier Neural Operators
+as,
+F(v)(k) :=
+1
+(2π)d
+ˆ
+Td v(x)e−i⟨k,x⟩dx,
+∀k ∈Zd.
+(40)
+For any k ∈Zd, the k-th Fourier coeﬃcient of v is denoted by bvk = F(v)(k).
+Given a set of Fourier coeﬃcients {bvk}k∈Zd, the inverse Fourier Transform is deﬁned
+as,
+F−1(bv)(x) :=
+X
+k∈Zd
+bvkei⟨k,x⟩,
+∀x ∈Td.
+(41)
+Using the Fourier transform (40) and for s ≥0, one can denote by Hs(Td) the Sobolev
+space of functions v ∈L2(Td), with Fourier coeﬃcients {bvk}k∈Zd, having a ﬁnite Hs-norm:
+∥v∥2
+Hs := (2π)d
+2
+X
+k∈Zd
+(1 + |k|2s)|bvk|2 < ∞.
+(42)
+Note that with this deﬁnition, we have from Parseval’s identity, that ∥v∥H0 = ∥v∥L2, so
+that H0(Td) = L2(Td).
+We also introduce the corresponding homogeneous Sobolev spaces
+˙Hs(Td) (and
+˙L2(Td) := ˙H0(Td)), consisting of functions v(x) ∈Hs(Td) and with zero mean
+ﬄ
+Td v(x) dx =
+bv0 = 0, and with norm
+∥v∥˙Hs :=
+
+(2π)d
+X
+k∈Zd\{0}
+|k|2s|bvk|2
+
+
+1/2
+.
+(43)
+Given N ∈N, throughout this work, we will denote by L2
+N(Td), the space of trigono-
+metric polynomials vN : Td →R, of the form
+vN(x) =
+X
+|k|∞≤N
+ckei⟨x,k⟩,
+(44)
+where the summation is over all k = (k1, . . . , kd) ∈Zd such that
+|k|∞:= max
+i=1,...,d |ki| ≤N.
+The space L2
+N(Td) is viewed as a normed vector space with norm ∥· ∥L2. Similarly, for
+s ≥0, we denote by Hs
+N(Td) the normed vector space of trigonometric polynomials vN of
+degree ≤N, with norm ∥· ∥Hs.
+We note that in order to ensure that vN(x) ∈R is real-valued for all x ∈Td, the
+coeﬃcients ck ∈C must satisfy the relations c−k = ck for all |k|∞≤N, and where ck
+denotes the complex conjugate of ck.
+We denote by
+PN : L2(Td) →L2
+N(Td),
+v 7→PNv,
+(45)
+31
+
+PDF PAGE 32
+Kovachki, Lanthaler and Mishra
+the L2-orthogonal projection onto L2
+N(Td); or more explicitly,
+PN
+
+X
+k∈Zd
+ckei⟨k,x⟩
+
+=
+X
+|k|∞≤N
+ckei⟨k,x⟩,
+∀(ck)k∈Zd ∈ℓ2(Zd).
+In fact, the mapping PN deﬁnes a projection Hs(Td) →Hs
+N(Td) for any s ≥0. We have
+the following spectral approximation estimate: Let s > 0 be given. There exists a constant
+C = C(s, d) > 0, such that for any v ∈Hs(Td), we have
+∥v −PNv∥Hς ≤CN−(s−ς)∥v∥Hs,
+for any ς ∈[0, s].
+(46)
+We also deﬁne a natural projection
+˙PN : L2(Td) →˙L2
+N(Td),
+(47)
+by removing the mean, i.e. ˙PNv = PNv −
+ﬄ
+Td v(x) dx, or equivalently:
+˙PN
+
+X
+k∈Zd
+ckei⟨k,x⟩
+
+=
+X
+0<|k|∞≤N
+ckei⟨k,x⟩,
+∀(ck)k∈Zd ∈ℓ2(Zd).
+Furthermore, we denote by by
+IN : C(Td) 7→L2
+N(Td),
+u 7→INu,
+(48)
+the pseudo-spectral projection onto L2
+N(Td); we recall that the pseudo-spectral pro-
+jection INv of a continuous function v is deﬁned as the unique trigonometric polynomial
+INv ∈L2
+N(Td), such that
+INv(xj) = v(xj),
+∀j ∈JN,
+(49)
+where {xj}j∈JN denotes the set of all regular grid points xj ∈Zd of the form xj = 2πj/(2N+
+1) ∈Td, j ∈Zd (cp. equation 50).
+We also recall the following embedding theorem for the Sobolev spaces Hs(Td):
+Theorem 39 (Sobolev embedding) Let d ∈N. For any s > d/2, we have a compact
+embedding Hs(Td),→C(Td) into the space of continuous functions. In particular, there exists
+a constant C = C(s, d) > 0, such that
+∥v∥L∞≤C∥v∥Hs,
+∀v ∈Hs(Td).
+The Sobolev embedding theorem implies in particular that the pseudo-spectral projection
+IN is well-deﬁned as an operator IN : Hs(Td) →L2
+N(Td) for s > d/2. In the following theo-
+rem, we recall a well-known approximation error estimate for the pseudo-spectral projection
+IN:
+32
+
+PDF PAGE 33
+Fourier Neural Operators
+Theorem 40 (Pseudo-spectral approximation estimate) Let d ∈N. For any s >
+d/2 and N ∈N, the spectral interpolation operator IN : Hs(Td) →L2
+N(Td) is well-deﬁned.
+Furthermore, there exists a constant C = C(s, d) > 0, such that the following approximation
+error estimate holds
+∥(1 −IN)v∥Hς ≤CN−(s−ς)∥v∥Hs,
+∀v ∈Hs(Td),
+for any ς ∈[0, s].
+Finally, for N ∈N, we ﬁx a regular grid {xj}j∈JN of values
+xj =
+2πj
+2N + 1,
+(50)
+where the index j ∈JN belong to the index set
+JN := {0, . . . , 2N}d.
+(51)
+Recall the set of Fourier wave numbers (10) and we deﬁne the discrete Fourier transform
+FN : RJN →CKN by
+FN(v)(k) :=
+1
+(2N + 1)d
+X
+j∈JN
+vje−2πi⟨j,k⟩/N,
+(52)
+with inverse F−1
+N : CKN →RJN ,
+F−1
+N (bv)(j) :=
+X
+k∈KN
+bvke2πi⟨j,k⟩/N.
+(53)
+Lemma 41 (Periodic extension operator) Let Ω⊂Rd be a bounded, Lipschitz do-
+main. There exists a continuous, linear operator E : W m,p(Ω) →W m,p(B) for any m ≥0
+and 1 ≤p ≤∞where B ⋐Rd is a hypercube with Ω⊂B such that, for any u ∈W m,p(Ω),
+1. E(u)|Ω= u,
+2. E(u) is periodic on B (including its derivatives).
+Proof By (Stein, 1970, Chapter 6, Theorem 5), there exists a continuous, linear operator
+eE : W m,p(Ω) →W m,p(Rd) such that eE(u)|Ω= u for any u ∈W m,p(Ω). Let Φ ∈C∞(Rd) be
+a mapping whose zeroth level set deﬁnes a curve ∂Ω′ such that Ω⊂Ω′ and dist(∂Ω′, ∂Ω) > 0
+where Ω′ is a bounded domain with boundary ∂Ω′. Furthermore, suppose that the ﬁrst level
+set of Φ deﬁnes a curve ∂Λ such that Ω′ ⊂Λ and dist(∂Λ, ∂Ω′) > 0 where, again, Λ is a
+bounded domain with boundary ∂Λ. For example, we may take Φ(x) = x2
+1 + · · · + x2
+d −r
+for some r > 0 large enough then Ω′ is d-ball of radius √r enclosing Ω, and Λ is a d-ball of
+radius √1 + r clearly enclosing Ω′. We will now follow the approach of (Boyd, 2005) and
+construct a windowing function ρ ∈C∞
+c (Rd). In particular, we deﬁne
+ρ(x) = H
+ 1 −2Φ(x)
+
+,
+∀x ∈Rd
+33
+
+PDF PAGE 34
+Kovachki, Lanthaler and Mishra
+where
+H(t) = 1
+2
+ 1 + S(t)
+
+,
+∀t ∈R
+and
+S(t) =
+
+
+
+
+
+
+
+−1,
+t < −1
+erf
+
+t
+√
+1−t2
+
+,
+−1 ≤t ≤1
+1,
+t > 1
+,
+∀t ∈R
+with erf, the Gauss error function,
+erf(t) =
+2
+√π
+ˆ t
+0
+e−z2 dz,
+∀t ∈R.
+Deﬁne B ⋐Rd to be a large enough d-cube such that Λ ⊂B and dist(∂Λ, ∂B) > 0. It is
+easy to check that ρ ∈C∞
+c (Rd) and we have that ρ|Ω= ρ|Ω′ = 1 and ρ|B\Λ = 0 with ρ and
+all of its derivatives vanishing on ∂Λ. Furthermore,
+∥ρ∥Cm(B) < ∞
+for any m ≥0. We can thus deﬁne E : W m,p(Ω) →W m,p(B) by
+E(u) = ρeE(u),
+∀u ∈W m,p(Ω).
+By Leibniz’s rule and the generalized triangle inequality, there exists a constant C1 =
+C1(d, m, p) > 0 (independent of p in the case p = ∞) such that
+∥E(u)∥W m,p(B) ≤C1∥ρ∥Cm(B)∥eE(u)∥W m,p(B).
+Since eE is bounded, there is a constant C2 > 0 such that
+∥E(u)∥W m,p(B) ≤C1∥ρ∥Cm(B)∥eE(u)∥W m,p(B)
+≤C1∥ρ∥Cm(B)∥eE(u)∥W m,p(Rd)
+≤C1C2∥ρ∥Cm(B)∥u∥W m,p(Ω)
+hence E is a continuous, linear operator. Since ρ|Ω= 1, we immediately have E(u)|Ω=
+eE(u)|Ω= u. Since supp(∂αρ) ⊆Λ for any multi-index 0 ≤|α| ≤m, we conclude that
+∂αE(u)|B\Λ = 0 hence E(u) is periodic on B as desired.
+Appendix C. Non-Linear Lifting and Projection Operators
+Lemma 42 Assume that the activation function σ ∈C2 is non-linear and that ∥σ∥C2(R) <
+∞. Let N : L2(D; Rda) →L2(D; Rdu) be a neural operator of the form N = Q ◦LL ◦
+· · · ◦L1 ◦R, with Lipschitz continuous layers Lℓ: L2(D; Rdv) →L2(D; Rdv), and with
+linear lifting/projection operators R, Q of the form (1) and (2), respectively.
+For any
+K ⊂L2(D; Rdv) compact and ϵ > 0, there exist neural networks bR : Rda × D →Rdv,
+34
+
+PDF PAGE 35
+Fourier Neural Operators
+bQ : Rdv × D →Rdu with a single hidden layer and width( bR), width( bQ) ≤2dv, such that the
+mapping b
+N : A(D; Rda) →U(D; Rdu) deﬁned by
+b
+N(a) := bQ ◦LL ◦· · · ◦L1 ◦bR(a),
+where R(a)(x) := bR(a(x), x), Q(v) := bQ(v(x), x), approximates N to order ϵ:
+sup
+a∈K
+∥N(a) −b
+N(a)∥L2 ≤ϵ.
+Proof We recall that, by our deﬁnition of a neural operator, we have R(a)(x) = Ra(x),
+Q(v)(x) = Qv(x), where R ∈Rdv×da, Q ∈Rdu×dv. By assumption on the non-linearity of
+σ, there exists z0 ∈R, such that σ′(z0) ̸= 0. For any h > 0, we now deﬁne
+
+
+
+
+
+
+
+bQh(v, x) := σ(z0 + hQv) −σ(z0 −hQv)
+2hσ′(z0)
+,
+bRh(a, x) := σ(z0 + hRa) −σ(z0 −hRa)
+2hσ′(z0)
+.
+We remark that in the above expressions, the addition of z0 ∈R and hQv ∈Rdu, hRa ∈Rdv
+is carried out componentwise, as is the evaluation of σ.
+Since the interior layers L1, . . . , LL are ﬁxed, we introduce the short-hand notation
+L := LL ◦· · · ◦L1. By assumption on the activation function and the layers, we have that
+L : L2(D; Rdv) →L2(D; Rdv) is a Lipschitz continuous mapping. Our goal is to show that
+for any K ⊂L2 compact and ϵ > 0, there exists a suﬃciently small h > 0, such that
+sup
+a∈K
+∥N(a) −b
+Nh(a)∥L2 ≤ϵ,
+where b
+Nh(a) := bQh ◦L ◦bRh(a). To this end, we note that for any a ∈K, we have
+∥N(a) −b
+Nh(a)∥L2 = ∥Q ◦L ◦R(a) −bQh ◦L ◦bRh(a)∥L2
+≤∥Q ◦L ◦R(a) −bQh ◦L ◦R(a)∥L2
++ ∥bQh ◦L ◦R(a) −bQh ◦L ◦bRh(a)∥L2.
+Introducing eK := L ◦R(K), we note that eK ⊂L2 is compact, and
+sup
+a∈K
+∥N(a) −b
+Nh(a)∥L2 ≤sup
+v∈e
+K
+∥Q(v) −bQh(v)∥L2
++ Lip( bQh)Lip(L) sup
+a∈K
+∥R(a) −bRh(a)∥L2.
+The proof of this lemma thus follows form the following three claims:
+Claim 1: There exists C > 0, independent of h, such that Lip( bQh) ≤C for all h > 0.
+Claim 2: For any ϵ > 0 and eK ⊂L2 compact, there exists h > 0, such that
+sup
+v∈e
+K
+∥bQh(v) −Q(v)∥L2 ≤ϵ.
+35
+
+PDF PAGE 36
+Kovachki, Lanthaler and Mishra
+Claim 3: For any ϵ > 0 and K ⊂L2 compact, there exists h > 0, such that
+sup
+a∈K
+∥bRh(a) −R(a)∥L2 ≤ϵ.
+Clearly, the only diﬀerence between Claims 2 and 3 is notational, hence it suﬃces show
+Claims 1 and 2 to conclude the proof of the present lemma.
+Proof of Claim 1: We note that for any v(x), v′(x) ∈Rdv, we have
+| bQh(v(x), x) −bQh(v′(x), x)| ≤
+1
+2h|σ′(z0)|2Lip(σ)|hQ(v(x) −v′(x))|
+(54)
+≤Lip(σ)∥Q∥
+|σ′(z0)|
+|v(x) −v′(x)|,
+(55)
+where | · | denotes the Euclidean norm and ∥Q∥denotes the operator norm of Q. Hence, it
+follows that for any v, v′ ∈L2(D; Rdv), we have
+∥bQh(v) −bQh(v′)∥L2 ≤Lip(σ)∥Q∥
+|σ′(z0)|
+∥v −v′∥L2,
+and thus,
+Lip( bQh) ≤Lip(σ)∥Q∥
+|σ′(z0)|
+,
+is bounded independently of h > 0.
+Proof of Claim 2: It follows form Taylor expansion that bQh(v(x), x) = Qv(x)+hR(h; Qv(x)),
+where the remainder R satisﬁes a uniform bound
+|R(h; Qv(x))| ≤C∥σ∥C2
+|σ′(z0)| |Qv(x)|2,
+∀h ∈(0, 1], v(x) ∈Rdv.
+In particular, considering the L2-norm of the left-hand side and assuming x 7→v(x) to be
+bounded, we conclude that there exists a constant C = C(σ, ∥Q∥) > 0, depending only on the
+activation function σ and the (Euclidean) operator norm ∥Q∥of Q : (Rdv, | · |) →(Rdu, | · |),
+such that
+∥bQh(v) −Q(v)∥L2 = ∥R(h; Qv)∥L2 ≤C∥v∥L∞∥v∥L2,
+∀v ∈L2 ∩L∞.
+(56)
+Next, for M > 0 we introduce a cut-oﬀoperator pM : L2 →L2 ∩L∞, by
+pM(v(x)) :=
+(
+v(x),
+(|v(x)| ≤M),
+0,
+(|v(x)| > M).
+Since eK ⊂L2 is compact, it follows that
+lim
+M→∞sup
+v∈e
+K
+∥v −pM(v)∥L2 = 0.
+We can thus choose M > 0 suﬃciently large, such that
+sup
+v∈e
+K
+∥v −pM(v)∥L2 ≤
+ϵ
+2
+
+suph∈(0,1] Lip( bQh) + Lip(Q)
+,
+36
+
+PDF PAGE 37
+Fourier Neural Operators
+where we note that suph∈(0,1] Lip( bQh) < ∞, by Claim 1. Furthermore, and again by com-
+pactness of eK ⊂L2, there exists a constant f
+M > 0, such that
+sup
+v∈e
+K
+∥v∥L2 ≤f
+M.
+With this f
+M, our choice of M and the estimate (56) on the remainder R, it follows that for
+any v ∈eK:
+∥bQh(v) −Q(v)∥L2 ≤∥bQh(v) −bQh(pM(v))∥L2
++ ∥bQh(pM(v)) −Q(pM(v))∥L2
++ ∥Q(pM(v)) −Q(v)∥L2
+≤
+
+Lip( bQh) + Lip(Q)
+
+∥v −pM(v)∥L2
++ Ch∥pM(v)∥L∞∥pM(v)∥L2
+≤ϵ/2 + CM f
+Mh.
+Finally, choosing h = ϵ/(2CM f
+M) implies that
+sup
+v∈e
+K
+∥bQh(v) −Q(v)∥L2 ≤ϵ.
+This concludes the proof.
+Appendix D. Proofs and Technical Details for Section 2
+D.1
+Proof of Lemma 6
+The proof of Lemma 6 will rely on the following technical lemma:
+Lemma 43 Let s′ ≥0, N ∈N be given.
+Let K ⊂Hs′ be compact, and assume that
+σ ∈Cm, where m > s′ is integer. Then for any ϵ > 0, there exists a single-layer FNO
+L : Hs′ →Hs′, such that
+sup
+v∈K
+∥PNv −L(v)∥Hs′ ≤ϵ.
+Proof [Proof of Lemma 43] First, we note that the Fourier projection PN : Hs′ →Hs′ is a
+continuous operator, and hence the image PNK ⊂Hs′ is compact. Furthermore, PN maps
+into a ﬁnite-dimensional subspace of Hs′, spanned by smooth (trigonometric) functions. Due
+to the norm-equivalence on ﬁnite-dimensional spaces, there thus exists C0 = C0(N, K) > 0,
+such that
+sup
+v∈K
+∥PNv∥L∞≤C0,
+sup
+v∈K
+∥PNv∥Hm ≤C0.
+(57)
+37
+
+PDF PAGE 38
+Kovachki, Lanthaler and Mishra
+Let x0 ∈R be such that σ′(x0) ̸= 0. We deﬁne, for h > 0,
+ψh(x) := σ(x0 + hx) −σ(x0 −hx)
+2hσ′(x0)
+.
+(58)
+One readily shows that ψh ∈Cm, and that there exists a constant C1 = C1(σ, C0) > 0, such
+that
+∥ψh∥Cm([−C0,C0]) ≤C1,
+∀h ∈(0, 1].
+(59)
+Furthermore, by Taylor expansion, we have
+|ψh(x) −x| ≤Ch,
+∀x ∈[−C0, C0], ∀h ∈(0, 1].
+(60)
+By the composition rule for Sobolev functions, we have that ψh◦PNv ∈Hm, for PNv ∈Hm,
+and there exists a constant C2 = C2(C1, C0) > 0, such that
+∥ψh(PNv)∥Hm ≤C2,
+∀v ∈K.
+(61)
+We ﬁnally observe that the mapping v 7→Lh(v) := ψh(PNv) can be represented by a
+single-layer FNO, and by (61), we have
+∥Lh(v)∥Hm ≤C2,
+∀v ∈K.
+(62)
+From the interpolation inequality between Sobolev spaces, it follows that
+∥Lh(v) −PNv∥Hs′ ≤∥Lh(v) −PNv∥θ
+L2∥Lh(v) −PNv∥1−θ
+Hm,
+where θ = 1−s′/m > 0. By (62) and (57), the second factor can be bounded independently
+of h > 0. By (60) and (57), we have
+∥Lh(v) −PNv∥L2 = ∥ψh(PNv) −PNv∥L2 ≤Ch,
+for a constant C > 0, independent of h and v ∈K. We conclude that
+∥Lh(v) −PNv∥Hs′ ≤Chθ →0,
+as h →0, for some constant C > 0, independent of h. This proves the claim.
+We can now prove:
+Proof [Proof of Lemma 6] Let G : Hs →Hs′ be a continuous operator, and let K ⊂Hs be
+compact. We assume that FNOs are universal approximators of operators Hs →L2, and
+we wish to show that for any ϵ > 0, there exists a FNO approximation of G : Hs →Hs′ to
+accuracy ϵ. We ﬁrst note that by the compactness of G(K) ⊂Hs′, there exists N ∈N, such
+that
+sup
+a∈K
+∥G(a) −PNG(a)∥Hs′ ≤ϵ/2.
+(63)
+38
+
+PDF PAGE 39
+Fourier Neural Operators
+Fix δ > 0 for the moment. A suitable choice of δ will be speciﬁed at the end of this proof.
+By assumption on the universal approximation of operators Hs →L2, there exists a FNO
+e
+N : Hs →L2, continuous as an operator Hs →L2, such that
+sup
+a∈K
+∥PNG(a) −e
+N(a)∥L2 ≤δ.
+(64)
+One diﬃculty in the present construction is that there is no guarantee that e
+N deﬁnes a
+mapping Hs →Hs′, and indeed for s′ > s this is not generally the case. We circumvent
+this issue by composing with an additional FNO layer eL : L2 →Hs′. By Lemma 43, there
+exists a single-layer FNO v 7→eL(v), satisfying the identity
+eL(v) = eL(PNv),
+(65)
+for all v, and deﬁning a continuous operator Hs′ →Hs′, such that
+sup
+v∈K′ ∥PNv −eL(v)∥Hs′ ≤δ,
+(66)
+where K′ := PN e
+N(K) ⊂Hs′ is a compact subset of Hs′.1 Next, we deﬁne a new FNO by
+the composition N := eL ◦e
+N : Hs →Hs′. N is a continuous operator Hs →Hs′, since it
+can be written as the composition
+Hs
+e
+N
+−→L2 PN
+−→Hs′
+e
+L
+−→Hs′,
+of continuous operators. We observe that for any a ∈K, we have the following bound:
+∥PNG(a) −N(a)∥Hs′ ≤∥PNG(a) −PN e
+N(a)∥Hs′ + ∥PN e
+N(a) −N(a)∥Hs′
+≤CNs′∥PNG(a) −e
+N(a)∥L2 + ∥PN e
+N(a) −eL(PN e
+N(a))∥Hs′,
+having made use of the inequality ∥PNv∥Hs′ ≤CNs′∥PNv∥L2 for a constant C = C(Td, s′) >
+0 independent of N, and the fact that N(a) = eL( e
+N(a)) = eL(PN e
+N(a)) (cp. equation 65).
+Using (64), we can estimate
+CNs′∥PNG(a) −e
+N(a)∥L2 ≤CNs′δ.
+The bound (66) implies that ∥PN e
+N(a) −eL(PN e
+N(a))∥Hs′ = ∥PNv −eL(v)∥Hs′
+(66)
+↓
+≤δ, with
+v := PNN(a) ∈K′. We thus obtain
+∥PNG(a) −N(a)∥Hs′ ≤(CNs′ + 1)δ,
+(67)
+where C = C(Td, s′) > 0 is independent of δ. Since δ > 0 was arbitrary, we can ensure that
+(CNs′ + 1)δ ≤ϵ/2. From this estimate, and the bound (63), we conclude that there exists
+1. We note that N(K) ⊂L2 is compact as the continuous image of K, and that PN : L2 →Hs′ deﬁnes a
+continuous mapping for ﬁxed N ∈N.
+39
+
+PDF PAGE 40
+Kovachki, Lanthaler and Mishra
+a FNO N : Hs →Hs′, such that
+sup
+a∈K
+∥G(a) −N(a)∥Hs′ ≤sup
+a∈K
+∥G(a) −PNG(a)∥Hs′
++ sup
+a∈K
+∥PNG(a) −N(a)∥Hs′
+≤ϵ,
+This concludes our proof.
+D.2 Proof of Lemma 7
+Proof Step 1: In this ﬁrst step, for any ϵ > 0, we will construct a FNO
+N1 : L2(Td; R) →L2(Td; R2KN ),
+such that
+(
+∥N1(v)1,k −PNv(x) cos(⟨k, x⟩)∥L∞< ϵ,
+∥N1(v)2,k −PNv(x) sin(⟨k, x⟩)∥L∞< ϵ,
+∀k ∈KN.
+(68)
+To see how to construct such N1, we ﬁrst deﬁne a lifting
+R1 : L2(Td; R) →L2(Td; R4KN ),
+v(x) 7→bw(x),
+where bw(x) := {(v(x), 0, v(x), 0)}k∈KN ∈R4KN for any x ∈Td. In the following, we will
+identify R4KN ≃Rdv, with dv = 4|KN|. Next, we deﬁne the inner part of the ﬁrst FNO
+layer (i.e. the matrix W, multiplier P, bias b(x) in (7)), such that P(k) ≡1|k|≤N1dv×dv
+either vanishes (for |k| > N) or is the unit matrix (for |k| ≤N), W ≡0 is zero and the bias
+function b(x) := {(0, b2,k(x), 0, b4,k(x))}k∈KN , b2,k(x) = cos(⟨k, x⟩), b4,k(x) = sin(⟨k, x⟩),
+such that
+bL1(bv)(x) := W bw(x) + b(x) + F−1(PF bw)(x)
+=
+ PN bw1,k(x), cos(⟨k, x⟩), PN bw3,k(x), sin(⟨k, x⟩)
+	
+k∈KN .
+Next, we recall that by assumption, we have ∥v∥L2 ≤B, and by construction, we have
+bw1,k(x) = bw3,k(x) = v(x), implying that
+∥PN bw1,k∥L∞= ∥PN bw3,k∥L∞= ∥PNv∥L∞≤C∥PNv∥L2 ≤CB,
+where C = C(N) ∝Nd/2 is a constant depending on N. By the universal approximation
+theorem for (ordinary) neural networks, there exists a neural network
+b
+N : [−CB, CB] × [−1, 1] × [−CB, CB] × [−1, 1] →R2
+with activation function σ, such that max(a,b,c,d) | b
+N(a, b, c, d) −(ab, cd)| < ϵ, and where
+the maximum is taken over all a, c ∈[−CB, CB], b, d ∈[−1, 1]. But then, the point-wise
+mapping
+N1 = b
+N ◦bL ◦R1 :
+(
+L2(Td; R) →L2(Td; R2KN ),
+v(x) 7→ew(x) := bL1(R1(v))(x) 7→b
+N( ew(x)),
+40
+
+PDF PAGE 41
+Fourier Neural Operators
+satisﬁes (68), and N1 can be represented by a FNO (cp. Remark 3). Step 2: By the last
+step, we have ∥N1(v)1,k−PNv(x) cos(⟨k, x⟩)∥L∞< ϵ and ∥N1(v)2,k−PNv(x) sin(⟨k, x⟩)∥L∞<
+ϵ for all v ∈L2(Td) with ∥v∥L2 ≤B. We next note that, since
+PNv(x) =
+X
+|k|∞≤N
+bvkei⟨k,x⟩,
+and since v(x) is real-valued, the Fourier coeﬃcients bvk satisfy bv−k = bvk, where bvk denotes
+the complex conjugate of bvk, and
+ 
+Td PNv(x) cos(⟨k, x⟩) dx = Re(bvk),
+ 
+Td PNv(x) sin(⟨k, x⟩) dx = −Im(bvk),
+In particular, this implies that the 0-th Fourier modes of PNv(x) cos(⟨k, x⟩), and PNv(x) sin(⟨k, x⟩),
+respectively, are given by
+F
+h
+PNv cos(⟨k, · ⟩)
+i
+(0) = Re(bvk),
+F
+h
+PNv sin(⟨k, · ⟩)
+i
+(0) = −Im(bvk),
+and, as a consequence, we have with the Fourier multiplier
+δ0(k′) =
+(
+1,
+(k′ = 0)
+0,
+(k′ ̸= 0),
+∀k′ ∈Zd,
+and with w(x) := N1(v)(x) ∈L2(Td; R2KN ), written as w(x) = {(w1,k(x), w2,k(x))}k∈KN ,
+that
+F−1
+δ0(k′)F(w1,k)(k′)
+
+(x) −Re(bvk)
+
+L∞< ϵ,
+F−1
+δ0(k′)F(w2,k)(k′)
+
+(x) + Im(bvk)
+
+L∞< ϵ,
+for all v ∈L2(Td) with ∥v∥L2 ≤B. We use this observation to deﬁne a suitable FNO layer;
+with local matrix W = 0, bias b(x) = 0 and a Fourier multiplier matrix P : Zd →Cdv×dv,
+k′ 7→P(k′) (where dv = 2|KN|, and Cdv ≃C2KN ), with entries
+[P(k′)](ℓ,k),(eℓ,ek) := δ0(k′) {δℓ=1(ℓ) −δℓ=2(ℓ)} 1dv×dv.
+With this deﬁnition of the Fourier multiplier P, we deﬁne bL2 : L2(Td; R2KN ) →L2(Td; R2KN ),
+by
+bL2(w) := Ww(x) + b(x) + F−1
+PFw
+
+(x).
+Then, by construction, we have for any v ∈L2(Td) with ∥v∥L2 ≤B that the output
+w := bL2(N1(v)), w(x) = {(w1,k(x), w2,k(x))}k∈KN , satisﬁes
+(
+∥w1,k(x) −Re(bvk)∥L∞< ϵ,
+∥w2,k(x) −Im(bvk)∥L∞< ϵ.
+We also note that bL2 outputs only constant functions, by construction. This is almost the
+desired result, except for the fact that the composition bL2 ◦N1 does not deﬁne a FNO, since
+41
+
+PDF PAGE 42
+Kovachki, Lanthaler and Mishra
+the linear layer bL2 is missing the non-linearity σ. This can be rectiﬁed by composition with
+a suitable (ordinary) σ-neural network e
+N, which approximates the identity: Indeed, the last
+estimate implies in particular that |wℓ,k| ≤|bvk| + ϵ ≤B + ϵ for all ℓ, k. By the (ordinary)
+universal approximation theorem, there exists a neural network e
+N : R2KN →R2KN , such
+that
+∥e
+N(w) −w∥ℓ∞< ϵ,
+∀w ∈R2KN , ∥w∥ℓ∞≤B + ϵ.
+Then the composition N2 := e
+N ◦bL2 : L2(Td; R2KN ) →L2(Td; R2KN ), given by w(x) 7→
+e
+N
+
+bL2(w)(x)
+
+, does deﬁne a FNO.
+Step 3: We ﬁnally observe that since both N1 and N2 can be represented by FNOs,
+then also their composition
+N := N2 ◦N1 : L2(Td) →L2(Td; R2KN ),
+can be represented by a FNO with depth(N) = depth(N1)+depth(N2), lift(N) = maxj=1,2 lift(Nj).
+Furthermore, the mapping v 7→N(v) maps to constant functions, and for any v ∈L2(Td),
+∥v∥L2 ≤B, we have
+(
+∥Re(bvk) −N(v)1,k∥L∞< 2ϵ,
+∥Im(bvk) −N(v)2,k∥L∞< 2ϵ.
+Since ϵ > 0 was arbitrary, the claim follows.
+D.3 Proof of Lemma 8
+Proof Step 1: We ﬁrst construct a FNO N1 : L2(Td; R2KN ) →L2(Td; R2KN ), such that
+
+
+
+
+
+∥N1(w)1,k −PNw1,k(x) cos(⟨k, x⟩)∥L∞<
+
+2|KN||Td|1/2−1
+ϵ,
+∥N1(w)2,k −PNw2,k(x) sin(⟨k, x⟩)∥L∞<
+
+2|KN||Td|1/2−1
+ϵ,
+(69)
+for all w(x) = (w1,k(x), w2,k(x)), such that ∥w1,k∥L∞, ∥w2,k∥L∞≤B, for all k ∈KN. Here
+|Td| = (2π)d denotes the Lebesgue measure of Td and |KN| = (2N + 1)d the number of
+elements of KN.
+To construct such N1, we ﬁrst deﬁne a lifting R : L2(Td; R2KN ) →L2(Td; R4KN ),
+{(w1,k(x), w2,k(x))}k∈KN 7→{(w1,k(x), 0, w2,k(x), 0)}k∈KN , followed by a linear layer L :
+L2(Td; R4KN ) →L2(Td; R4KN ), which only introduces a bias (setting W ≡0, b(x) =
+{(0, cos(⟨k, x⟩), 0, sin(⟨k, x⟩))}k∈KN , P ≡0), to yield
+L ◦R(w) = {(w1,k(x), cos(⟨k, x⟩), w2,k(x), sin(⟨k, x⟩))}k∈KN ,
+for all w ∈L2(Td; R2KN ). There exists an ordinary neural network b
+N : [−B, B] × [−1, 1] ×
+[−B, B] × [−1, 1] →R2, such that maxa,b,c,d | b
+N(a, b, c, d) −(ab, cd)| < (2|KN||Td|1/2)−1ϵ,
+where the maximum is taken over a, c ∈[−B, B] and b, d ∈[−1, 1]. Since, by assumption,
+we have ∥w1,k∥L∞, ∥w2,k∥L∞≤B for the inputs of interest, we conclude that N1(w) :=
+b
+N ◦L ◦R(w) satisﬁes (69). Furthermore, by Lemma 44 and Lemma 46, N1 is represented
+by a FNO.
+42
+
+PDF PAGE 43
+Fourier Neural Operators
+Step 2: We deﬁne a projection Q (cp. the deﬁnition of neural operators, equation 2),
+mapping w(x) ∈L2(Td); R2KN ) to a scalar-valued function, by
+Q : L2(Td; R2KN ) →L2(Td),
+w(x) 7→
+X
+k∈KN
+(w1,k(x) −w2,k(x)) .
+Then N := Q ◦N1 : L2(Td; R2KN ) →L2(Td) is an FNO, and for any v ∈L2
+N(Td), and
+w = {(Re(bvk), Im(bvk))}k∈KN deﬁned as in the statement of this lemma, we have
+∥v −N(w)∥L2 =
+
+v −
+X
+k∈KN
+
+N1(w)1,k −N1(w)2,k
+
+
+L2
+≤
+X
+k∈KN
+∥N1(w)1,k −Re(bvk) cos(⟨k, x⟩)∥L2
++
+X
+k∈KN
+∥N1(w)2,k −Im(bvk) sin(⟨k, x⟩)∥L2
+≤
+X
+k∈KN
+∥N1(w)1,k −Re(bvk) cos(⟨k, x⟩)∥L2
++
+X
+k∈KN
+∥N1(w)2,k −Im(bvk) sin(⟨k, x⟩)∥L2
+≤|KN||Td|1/2 max
+k∈KN ∥N1(w)1,k −w1,k cos(⟨k, x⟩)∥L∞
+|KN||Td|1/2 max
+k∈KN ∥N1(w)2,k −w2,k sin(⟨k, x⟩)∥L∞
+< ϵ.
+D.4 Proof of the Universal Approximation Theorem 5
+As mentioned in the sketch of the proof of Theorem 5, we only need to consider the special
+case s′ = 0, due to Lemma 6; i.e. given a continuous operator G : Hs(Td) →L2(Td),
+K ⊂Hs(Td) compact, and ϵ > 0, we wish to construct a FNO N : Hs(Td) →L2(Td), such
+that supa∈K ∥G(a) −N(a)∥L2 ≤ϵ.
+Throughout this proof, we set da = du = 1 for notational convenience. The general
+case with da, du > 1 follows analogously. For N ∈N, let PN denote the orthogonal Fourier
+projection (45).
+First, we note that since K ⊂Hs(Td) is compact, one can prove by
+elementary arguments that the set eK given by
+eK := K ∪
+[
+N∈N
+PNK,
+is compact. Since G is continuous, its restriction to eK is uniformly continuous, i.e. there
+exists a modulus of continuity ω : [0, ∞) →[0, ∞), such that
+∥G(a) −G(a′)∥L2 ≤ω
+ ∥a −a′∥Hs
+,
+∀a, a′ ∈eK.
+43
+
+PDF PAGE 44
+Kovachki, Lanthaler and Mishra
+From the deﬁnition of the projection GN (8), we have,
+∥G(a) −GN(a)∥L2 ≤∥G(a) −PNG(a)∥L2 + ∥PNG(a) −PNG(PNa)∥L2
+≤∥G(a) −PNG(a)∥L2 + ∥G(a) −G(PNa)∥L2
+≤
+sup
+v∈G( e
+K)
+∥(1 −PN)v∥L2 + ω
+ 
+sup
+a∈e
+K
+∥(1 −PN)a∥Hσ
+!
+.
+(70)
+Since eK is compact, also the image G( eK) is compact leading to,
+lim sup
+N→∞
+sup
+u∈G( e
+K)
+∥(1 −PN)v∥L2 = 0 = lim sup
+N→∞
+sup
+a∈e
+K
+∥(1 −PN)a∥Hs.
+In particular, there exists N ∈N, such that
+∥G(a) −GN(a)∥L2 ≤ϵ,
+∀a ∈K ⊂eK.
+(71)
+In the remainder of this proof, we will construct an FNO approximation of GN. In fact, we
+note that GN deﬁnes a continuous operator GN : L2(Td) →L2(Td), via a 7→PNG(PNa),
+and the compact set K remains compact also as a subset of L2(Td). We will show that
+there exists a FNO N : L2(Td) →L2(Td), such that
+sup
+a∈K
+∥GN(a) −N(a)∥L2 < ϵ.
+Then the restriction of N to Hs(Td) ⊂L2(Td) provides an approximation of G, such that
+sup
+a∈K
+∥G(a) −N(a)∥L2 < 2ϵ.
+Since ϵ > 0 was arbitrary, the claim follows from this.
+As outlined in the sketch, our proof for the existence of a FNO approximating GN relies
+on the decomposition (12), which in turn is deﬁned via the Fourier conjugate operator bGN
+(11). Our aim is to show that each operator in the decomposition (12) can be approximated
+by FNOs to desired accuracy. To this end, let ϵ > 0 be given, and choose RK, R b
+K, R bG > 0,
+such that
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+K ⊂BRK(0) := {∥u∥L2 ≤RK} ⊂L2(Td),
+FN ◦PN (BRK(0)) ⊂
+
+−R b
+K
+2 , R b
+K
+2
+2KN
+,
+bGN
+ [−R b
+K, R b
+K]2KN 
+⊂
+
+−
+R bG
+2 ,
+R bG
+2
+2KN
+.
+(72)
+The reason for introducing RK, R b
+K, R bG lies in the fact that in order to approximate GN by
+a composition of FNOs, we need to ensure that each FNO in this composition maps its own
+domain into the domain of the next FNO. The FNO approximations of the individual steps
+in the composition GN = F−1
+N ◦bGN ◦(FN ◦PN) are constructed below:
+44
+
+PDF PAGE 45
+Fourier Neural Operators
+FNO approximation of F−1
+N : We start with our construction of a FNO approximation
+of the last step in the composition. To this end, we are going to interpret the mapping
+F−1
+N : [−R, R]2KN ⊂R2KN →L2(Td),
+as a mapping
+F−1
+N :
+(
+L2(Td; [−R, R]2KN ) →L2(Td),
+{Re(bvk), Im(bvk)}|k|≤N 7→v(x),
+(73)
+where the input {Re(bvk), Im(bvk)}|k|≤N ∈[−R, R]2KN is identiﬁed with a constant function
+in L2(Td; [−R, R]2KN ) (for non-constant input function v(x), we apply F−1
+N
+to the constant
+function x 7→
+ﬄ
+Td v(ξ) dξ to deﬁne the mapping in equation 73 for general inputs).
+By
+Lemma 8, the mapping (73) can be approximated to any desired accuracy by an FNO
+NIFT : L2(Td; R2KN ) →L2(Td), such that
+∥NIFT(bv) −F−1
+N (bv)∥L2 ≤ϵ/3,
+(74)
+for all constant input functions bv ∈L2(Td; [−R, R]2KN ).
+FNO approximation of bGN: We view the Fourier conjugate operator bGN (11) as a
+continuous mapping
+bGN : [−R b
+K, R b
+K]2KN ⊂R2KN →R2KN .
+Since [−R b
+K, R b
+K]2KN is compact, there exists a ﬁnite-dimensional canonical neural network
+b
+N : R2KN →R2KN , such that
+sup
+bv∈[−R b
+K,R b
+K]2KN
+∥bGN(bv) −b
+N(bv)∥ℓ2 ≤ϵ/3.
+(75)
+Furthermore, by (72), we have
+bGN
+ [−R b
+K, R b
+K]2KN 
+⊂
+
+−
+R bG
+2 ,
+R bG
+2
+2KN
+.
+Therefore, by choosing a neural network approximation b
+N with suﬃciently high accuracy,
+we can also ensure that
+b
+N
+ [−R b
+K, R b
+K]2KN 
+⊂
+h
+−R bG, R bG
+i2KN ,
+in addition to (75). Finally, we note that for v ∈L2(Td; R2KN ), the corresponding mapping
+b
+N : L2(Td; R2KN ) →L2(Td; R2KN ),
+v(x) 7→b
+N(v(x)),
+is in fact an FNO, with only local layers of the form
+vℓ(x) 7→σ (Aℓvℓ(x) + bℓ) ,
+(Aℓ∈Rdv×dv, bℓ∈Rdv),
+45
+
+PDF PAGE 46
+Kovachki, Lanthaler and Mishra
+and where dv := 2|KN|, i.e. a FNO for which all Pℓ≡0 (cp. Remark 3). We shall thus
+identify b
+N with this particular FNO, in the following.
+FNO approximation of FN ◦PN: Finally, we can similarly interpret
+FN ◦PN : BRK(0) ⊂L2(Td) →R2KN ,
+as a mapping
+FN ◦PN :
+(
+BRK(0) →L2(Td; R2KN ),
+v 7→{Re(bvk), Im(bvk)}|k|≤N,
+(76)
+where the output {Re(bvk), Im(bvk)}|k|≤N ∈R2KN is a constant function in L2(Td; R2KN ).
+By Lemma 7, the mapping (76) can be approximated to any desired accuracy by an FNO
+NFT : BRK(0) →L2(Td; R2KN ) (with constant output functions). In particular, denoting
+Lip( b
+N) the Lipschitz constant of the FNO constructed in the previous step, we can ensure
+that
+Lip( b
+N) ∥FNPNv −NFT(v)∥ℓ2 ≤ϵ/3,
+∀v ∈BRK(0),
+(77)
+and furthermore, since by (72), we have
+FN ◦PN(BRK(0)) ⊂
+
+−R b
+K
+2 , R b
+K
+2
+2KN
+,
+we can in addition ensure that
+NFT (BRK(0)) ⊂
+
+−R b
+K, R b
+K
+2KN .
+Error estimate for resulting FNO approximation: We now deﬁne a FNO N(a) :=
+NIFT ◦b
+N ◦NFT(a), where the right-hand side terms have been constructed above. We note
+that
+sup
+K
+∥GN −N∥L2
+≤
+sup
+BRK (0)
+F−1
+N ◦bGN ◦FN ◦PN −NIFT ◦b
+N ◦NFT
+
+L2
+≤
+sup
+BRK (0)
+F−1
+N ◦bGN ◦FN ◦PN −F−1
+N ◦b
+N ◦NFT
+
+L2
++
+sup
+BRK (0)
+F−1
+N ◦b
+N ◦NFT −NIFT ◦b
+N ◦NFT
+
+L2
+≤
+sup
+BRK (0)
+ bGN ◦FN ◦PN −b
+N ◦NFT
+
+L2
++
+sup
+b
+N(NFT(BRK (0)))
+F−1
+N −NIFT
+
+L2
+=: (I) + (II).
+46
+
+PDF PAGE 47
+Fourier Neural Operators
+For the second term (II), we note that
+b
+N (NFT (BRK(0))) ⊂b
+N
+ [−R b
+K, R b
+K]2KN 
+⊂
+h
+−R bG, R bG
+i2KN ,
+and hence, by (74), we can bound
+(II) ≤
+sup
+[−R b
+G,R b
+G]
+2KN
+F−1
+N −NIFT
+
+L2 ≤ϵ/3.
+To estimate the ﬁrst term (I), we note that
+(I) =
+sup
+BRK (0)
+ bGN ◦FN ◦PN −b
+N ◦NFT
+
+L2
+≤
+sup
+BRK (0)
+ bGN ◦FN ◦PN −b
+N ◦FN ◦PN
+
+L2
++
+sup
+BRK (0)
+ b
+N ◦FN ◦PN −b
+N ◦NFT
+
+L2
+=: (Ia) + (Ib).
+To estimate (Ia), we note that
+FN (PN (BRK(0))) ⊂
+
+−R b
+K, R b
+K
+2KN ,
+and hence
+(Ia) ≤
+sup
+[−R b
+K,R b
+K]
+2KN
+ bGN −b
+N
+
+L2 ≤ϵ/3,
+by (75). Finally, to estimate (Ib), we note that
+(Ib) ≤Lip( b
+N)
+sup
+BRK (0)
+∥FN ◦PN −NFT∥L2 ≤ϵ/3,
+by (77). Combining these estimates, we conclude that
+sup
+a∈K
+∥GN(a) −N(a)∥L2 ≤ϵ,
+This shows that the continuous operator GN can be approximated by a FNO N to any
+desired accuracy ϵ > 0, and together with (9) concludes our proof of the universal approxi-
+mation theorem 5 for the special case s′ = 0. The general case with s′ ≥0 now follows from
+Lemma 6.
+D.5 Proof of Theorem 14
+Proof The proof involves 4 steps.
+Step 1:
+We may wlog assume that all biases bℓ(x) ∈C∞.
+47
+
+PDF PAGE 48
+Kovachki, Lanthaler and Mishra
+Indeed, it is easy to see that under the ﬁnite width assumption and for Lipschitz continuous
+σ, each layer Lℓdeﬁnes a Lipschitz continuous mapping L2 →L2. Replacing bℓ(x) by it’s
+δ-molliﬁcation bδ
+ℓ(x) we obtain a new layer Lδ
+ℓ, i.e.
+Lδ
+ℓ(v) = σ
+
+Wℓv(x) + bδ
+ℓ(x) + F−1 (PℓFv) (x)
+
+.
+Then we have
+∥Lℓ(v) −Lδ
+ℓ(v)∥L2 ≲Lip(σ),ℓ∥bℓ−bδ
+ℓ∥L2 →0,
+(78)
+and uniformly in δ > 0, we have
+∥Lδ
+ℓ(v) −Lδ
+ℓ(v′)∥L2 ≲Lip(σ),ℓ∥v −v′∥L2.
+(79)
+In particular, this implies that Lip(Lδ
+ℓ) ≤C(Lip(σ), ℓ) is uniformly bounded in δ ≥0. Thus,
+there exists M ≥1, such that Lip(Q) ≤M and Lip(Lδ
+ℓ) ≤M, for all ℓ= 1, . . . , L and δ > 0.
+Properties (78) and (79) are suﬃcient to show that with a suﬃciently small choice of δ > 0,
+we have
+sup
+∥a∥Hs≤B
+∥N(a) −N δ(a)∥L2 ≤ϵ,
+(80)
+where N δ := Q ◦Lδ
+L ◦· · · ◦Lδ
+1 ◦R: To see this, we introduce N δ
+ℓ:= Q ◦Lδ
+L ◦. . . Lδ
+ℓ+1 ◦Lℓ◦
+· · · ◦L1 ◦R, and we note that for any a ∈L2, we have
+∥N δ
+ℓ(a) −N δ
+ℓ−1(a)∥L2 ≤Lip(Q ◦Lδ
+L ◦· · · ◦Lδ
+ℓ+1)∥Lℓ(a′) −Lδ
+ℓ(a′)∥L2,
+where a′ := Lℓ−1 ◦· · · ◦L1 ◦R(a). Using the uniform Lipschitz bound M and the estimate
+(78), we obtain
+∥N δ
+ℓ(a) −N δ
+ℓ−1(a)∥L2 ≤M
+L∥bℓ−bδ
+ℓ∥L2.
+It now follows from the telescoping sum N(a)−N δ(a) = N δ
+L(a)−N δ
+0 (a) = PL
+ℓ=1
+ N δ
+ℓ(a) −N δ
+ℓ−1(a)
+
+that
+∥N(a) −N δ(a)∥L2 ≤
+L
+X
+ℓ=1
+∥N δ
+ℓ(a) −N δ
+ℓ−1(a)∥L2
+≤M
+L
+L
+X
+ℓ=1
+∥bℓ−bδ
+ℓ∥L2.
+Since the bound on the right-hand side is independent of a, and since limδ→0 ∥bℓ−bδ
+ℓ∥L2 = 0,
+choosing δ > 0 suﬃciently small, we obtain (80).
+Step 2:
+Using Step 1, we will assume wlog that all biases are smooth, in the following.
+Given a ∈Hs, let aℓ:= Lℓ◦. . . L1 ◦R(a). We claim that there exists a constant B′ > 0,
+depending only on B, the activation function σ and the biases bℓ(x), such that ∥aℓ∥Hs ≤B′,
+provided that ∥a∥Hs ≤B and ℓ= 1, . . . , L.
+48
+
+PDF PAGE 49
+Fourier Neural Operators
+Indeed, it is a well-known fact that if v ∈Hs, s > d/2, and if σ ∈C⌊s⌋+1 (satisﬁed by
+assumption), then σ ◦v ∈Hs.2 In fact, there exists a monotonically increasing function Cσ,
+such that ∥σ ◦v∥Hs ≤Cσ(∥v∥Hs). The claimed existence of B′ now follows immediately
+from this result on compositions with σ, and the observation that the linear part of each
+layer deﬁne a continuous (bounded, aﬃne) mapping Hs →Hs, due to the ﬁnite width
+assumption, and the assumption that bℓ∈C∞⊂Hs.
+Step 3:
+Let ς1, ς2 be given such that s ≥ς1 > ς2 > d/2. Each layer deﬁnes a H¨older
+continuous mapping Lℓ: Dℓ⊂Hς1 →Hς2, with H¨older exponent α = 1 −ς2/s, and where
+Dℓdenotes the image of the set {∥a∥Hs ≤B} under the previous ℓ−1 layers.
+By Step 2, we have that ∥Lℓ(v)∥Hs ≤B′ for all v ∈Dℓ. Furthermore, as observed in
+Step 1, (79), Lℓ: L2 →L2 is Lipschitz continuous. It follows that for any v ∈Dℓ, we have,
+by the interpolation inequality, that
+∥Lℓ(v) −Lℓ(v′)∥Hς2 ≲∥Lℓ(v) −Lℓ(v′)∥1−ς2/s
+L2
+∥Lℓ(v) −Lℓ(v′)∥ς2/s
+Hs
+≲ς2,B′ ∥Lℓ(v) −Lℓ(v′)∥α
+L2
+≲ς2,B′,σ,ℓ∥v −v′∥α
+L2
+≲∥v −v′∥α
+Hς1.
+Step 4:
+We use Steps 1-3 to conclude that for a suﬃciently large choice of N ∈N, the
+Ψ-FNO N ∗: L2
+N →L2
+N, given by
+N ∗(a) := Q ◦IN ◦LL ◦IN ◦LL−1 ◦IN ◦· · · ◦L1 ◦IN ◦R,
+satisﬁes
+sup
+∥a∥Hs≤B
+∥N(a) −N ∗(a)∥L2 ≤ϵ.
+In the following, we will denote by L∗
+ℓ:= IN ◦Lℓ◦IN the “pseudo-spectral projection”
+of the layer Lℓ, and we observe that
+N ∗= Q ◦L∗
+L ◦· · · ◦L∗
+1 ◦R.
+Fix a sequence s = ς0 > ς1 > ς2 > · · · > ςL > d/2. By Step 3, we may view the ℓ-th layer
+Lℓas a H¨older continuous mapping Lℓ: Hςℓ−1 →Hςℓ. Furthermore, since ςℓ> d/2 for all
+ℓ, we also have that IN : Hςℓ→Hςℓis a bounded linear operator, with operator norm that
+is uniformly bounded in N. In particular, this implies that there exists a constant C ≥1,
+independent of N, such that, for all a, a′ ∈Dℓ:
+∥L∗
+ℓ(a) −L∗
+ℓ(a′)∥Hςℓ= ∥INLℓ(INa) −INLℓ(INa′)∥Hςℓ
+≤∥IN∥∥Lℓ∥C1−ςℓ/s∥IN∥1−ςℓ/s∥a −a′∥1−ςℓ/s
+Hςℓ−1
+≤C∥a −a′∥1−ςℓ/s
+Hςℓ−1 .
+2. This is well-known in the integer case s ∈N, but remains true also for fractional Sobolev spaces (Brezis
+and Mironescu, 2001).
+49
+
+PDF PAGE 50
+Kovachki, Lanthaler and Mishra
+We now introduce N ∗
+ℓ:= Q ◦L∗
+L ◦· · · ◦L∗
+ℓ+1 ◦Lℓ◦. . . L1 ◦R, for any ℓ= 0, . . . , L. Then,
+N(a) −N ∗(a) = PL
+ℓ=1
+ N ∗
+ℓ(a) −N ∗
+ℓ−1(a)
+
+, and using the H¨older regularity of the L∗
+ℓ, we
+obtain
+∥N ∗
+ℓ(a) −N ∗
+ℓ−1(a)∥L2 ≤∥N ∗
+ℓ(a) −N ∗
+ℓ−1(a)∥HςL
+≤Lip(Q)C
+L∥L∗
+ℓ(a′) −L∗
+ℓ(a′)∥βℓ
+Hςℓ,
+where a′ := Lℓ−1 ◦. . . L1 ◦R(a) belongs to Dℓ⊂{a′ ∈Hs | ∥a′∥Hs ≤B′} (cp. Step 3), and
+βℓ:= QL
+k=ℓ+1
+ 1 −ςk
+s
+
+is the H¨older exponent of the composition of the layers L∗
+L◦· · ·◦L∗
+ℓ+1 :
+Hςℓ+1 →HςL. To estimate the last diﬀerence, we recall that if ∥a∥Hs ≤B, then ∥a′∥Hs ≤B′,
+by Step 2. In particular, it follows from the uniform H¨older continuity of the layers Lℓ,
+established in Step 3 and the pseudo-spectral approximation estimate, that
+∥Lℓ(a′) −L∗
+ℓ(a′)∥Hςℓ= ∥Lℓ(a′) −INLℓ(INa′)∥Hςℓ
+≤∥Lℓ(a′) −INLℓ(a′)∥Hςℓ+ ∥IN∥∥Lℓ(a′) −Lℓ(INa′)∥Hςℓ
+≲
+B′
+N−(s−ςℓ) + ∥a′ −INa′∥1−ςℓ/s
+Hςℓ−1
+≲
+B′
+N−(s−ςℓ) +
+
+B′
+N−(s−ςℓ−1)
+(1−ςℓ/s)
+,
+where the implied constant is independent of N. In particular, we have
+lim
+N→∞sup
+a′∈Dℓ
+∥Lℓ(a′) −L∗
+ℓ(a′)∥Hςℓ= lim
+N→∞sup
+a′∈Dℓ
+∥Lℓ(a′) −Lℓ(INa′)∥Hςℓ= 0,
+for all ℓ= 1, . . . , L. Choosing N suﬃciently large, we can thus ensure that
+sup
+∥a∥Hs≤B
+∥N(a) −N ∗(a)∥L2 ≤
+L
+X
+ℓ=1
+sup
+∥a∥Hs≤B
+∥N ∗
+ℓ(a) −N ∗
+ℓ−1(a)∥L2
+≤Lip(Q)C
+L
+L
+X
+ℓ=1
+sup
+a′∈Dℓ
+∥Lℓ(a′) −L∗
+ℓ(a′)∥βℓ
+Hςℓ
+≤ϵ.
+This concludes the proof.
+D.6
+Proof of Lemma 16
+Proof Let ϵ > 0 be given. Let G : Hs →Hs′ be continuous operator, and K ⊂Hs a
+compact subset. We wish to show that there exists N0 ∈N, such that for any N ≥N0,
+there exists a Ψ-FNO N ∗: L2
+N →L2
+N such that
+sup
+a∈K
+∥G(a) −N ∗(a)∥Hs′ ≤ϵ.
+(81)
+50
+
+PDF PAGE 51
+Fourier Neural Operators
+Choose M ∈N, such that
+sup
+a∈K
+∥PMG(a) −G(a)∥Hs′ ≤ϵ/2.
+(82)
+Fix δ > 0 for the moment. We will specify a suitable choice of δ = δ(M, s′, Td, ϵ) > 0 at the
+end of this proof. We emphasize that δ will depend only on parameters already introduced
+at this point of the proof. By assumption of the validity of the universal approximation
+theorem for Ψ-FNOs for s′ = 0, we can choose e
+N0 = e
+N0(G, K, δ) ∈N, depending on G, K
+and δ, such that for any N ≥e
+N0, there exists a Ψ-FNO e
+N ∗: L2
+N →L2
+N, such that
+sup
+a∈K
+∥G(a) −e
+N ∗(a)∥L2 ≤δ.
+We deﬁne N0 := max( e
+N0, M). By our choice of e
+N0 and M, the constant N0 depends only on
+the underlying operator G, the compact set K and the parameter δ > 0. Let N ≥N0. We
+claim that if δ = δ(M, s′, Td, ϵ) > 0 is been chosen suﬃciently small, then for any N ≥N0,
+there exists a Ψ-FNO N ∗: L2
+N →L2
+N satisfying (81).
+To see this, let N ≥N0, and let e
+N ∗: L2
+N →L2
+N be a Ψ-FNO such that supa∈K ∥G(a) −
+e
+N ∗(a)∥L2 ≤δ. Then we have
+sup
+a∈K
+∥PMG(a) −PM e
+N ∗(a)∥Hs′ ≤CMs′δ,
+(83)
+where C = C(Td, s′) > 0 is independent of M, N and δ. Let m ∈N be the smallest natural
+number strictly bigger than s′ and d/2, i.e. m > max(s′, d/2). Let
+K′ := e
+N ∗(K) ⊂L2
+N,
+(84)
+be the compact image of K ⊂Hs under the (continuous) mapping e
+N ∗: Hs →L2
+N. We note
+that since L2
+N is a ﬁnite-dimensional space, the L2-norm is equivalent to the Hm-norm on
+L2
+N. This implies that K′ ⊂Hm is also compact when considered as a subset of Hm, with
+respect to norm ∥· ∥Hm. By Lemma 43, there exists a single-layer FNO L : Hm →Hm,
+such that
+sup
+v∈K′ ∥PMv −L(v)∥Hm ≤δ.
+(85)
+We deﬁne a Ψ-FNO N ∗: L2
+N →L2
+N by the following composition
+N ∗:= IN ◦L ◦IN ◦e
+N ∗= IN ◦L ◦e
+N ∗,
+where IN is the pseudo-spectral projection operator. We note that, since N ≥N0 ≥M, we
+have INPM = PM, and recall that for m > d/2, the mapping IN : Hm →Hm is continuous,
+with an operator norm that can be bounded independently of N. Hence, we can estimate,
+for any a ∈K,
+∥PM e
+N ∗(a) −N ∗(a)∥Hs′ = ∥IN ◦PM e
+N ∗(a) −IN ◦L ◦e
+N ∗(a)∥Hs′
+(m>s′)
+↓
+≤∥IN ◦PM e
+N ∗(a) −IN ◦L ◦e
+N ∗(a)∥Hm
+≤C∥PMv −L(v)∥Hm,
+51
+
+PDF PAGE 52
+Kovachki, Lanthaler and Mishra
+where C = C(Td, m) > 0 is independent of M and N, and where v := e
+N ∗(a) ∈K′, with
+K′ = e
+N ∗(K) deﬁned in (84). From (85), we conclude that
+sup
+a∈K
+∥PM e
+N ∗(a) −N ∗(a)∥Hs′ ≤Cδ,
+(86)
+where C = C(Td, m) > 0 is independent of M, N and δ. In fact, since m is deﬁned as the
+smallest integer > max(s′, d/2), the above constant only depends on s′ and the dimension
+d of the domain, i.e. we have C = C(Td, s′, d). Combining (82), (83) and (86), we ﬁnd that
+for N ≥N0 and for any δ > 0, there exists a Ψ-FNO N ∗: L2
+N →L2
+N, such that
+sup
+a∈K
+∥G(a) −N ∗(a)∥Hs′ ≤ϵ/2 + C(1 + Ms′)δ,
+where C = C(Td, s′, d) > 0 is a constant independent of δ.
+Thus, if we choose δ =
+δ(M, s′, d, Td, ϵ) > 0 at the beginning of this proof suﬃciently small to ensure that
+C(1 + Ms′)δ ≤ϵ/2,
+then we conclude that for any N ≥N0, there exists a Ψ-FNO N ∗: L2
+N →L2
+N, such that
+sup
+a∈K
+∥G(a) −N ∗(a)∥Hs′ ≤ϵ.
+This concludes the proof.
+D.7 Technical Results on the Structure of Ψ-FNOs
+Recall Section 2.5.1 where we introduced σ layers and F-layers and claimed that Ψ-FNOs
+can be decomposed in terms of these layers. We have the following series of lemmas, which
+make this observation precise.
+Lemma 44 Let Φ : Rda →Rdu be a (ordinary) neural network with activation function σ.
+For any N ∈N, the mapping
+N ∗: L2
+N(Td; Rda) →L2
+N(Td; Rdu),
+a(x) 7→N ∗(a)(x) := INΦ(a(x)),
+can be represented by a Ψ-FNO, with
+depth(N ∗) = depth(Φ),
+lift(N ∗) = width(Φ).
+The proof is straight-forward and completely analogous to the same statement for FNOs
+in Remark 3. We also note the following lemma, which allows us in practice to replace F-
+layers by proper FNO layers:
+Lemma 45 (Linear approximation lemma) Assume that the activation function σ ∈
+C2 is twice continuously diﬀerentiable and non-constant. Let L∗be a linear Ψ-FNO layer
+of the form
+L∗: L2
+N(Td; Rdv) →L2
+N(Td; Rdv), L∗(vN) := WvN(xj) + bj + F−1
+N (PFNvN)j.
+52
+
+PDF PAGE 53
+Fourier Neural Operators
+There exists a constant C > 0, independent of N, such that for any ϵ, B > 0, there exists
+a Ψ-FNO N ∗: L2
+N(Td; Rdv) →L2
+N(Td; Rdv), such that
+sup
+∥vN∥L2≤B
+∥N ∗(vN) −L∗(vN)∥L2 ≤ϵ,
+and
+depth(N ∗) ≤C,
+lift(N ∗) = dv ≤C.
+Proof This follows from the observation that, by assumption, there exists x0 ∈R, such
+that σ′(x0) ̸= 0. By Taylor expansion, we have
+σ(x0 + hy) −σ(x0 −hy)
+hσ′(x0)
+= y + R(h, y),
+where |R(h, y)| ≤CB
+2h for any y ∈[−B, B] and 0 < h ≤1. Replacing y by the output of
+the linear layer bL, and choosing B suﬃciently large, we obtain with
+N ∗
+h(vn) := σ(x0 + hL∗(vN)) −σ(x0 −hL∗(vN))
+hσ′(x0)
+,
+that
+∥L∗(vN) −N ∗
+h(vN)∥L2 = O(h),
+uniformly for all vN ∈L2
+N(Td; Rdv), such that ∥vN∥L2 ≤B, and for 0 < h ≤1. In particular,
+choosing h = h(ϵ) > 0 suﬃciently small, we can ensure that
+∥L∗(vN) −N ∗
+h(vN)∥L2 ≤ϵ,
+for all vn ∈L2
+N(Td; Rdv), such that ∥vN∥L2 ≤B. The proof is concluded by observing that
+the mapping vN 7→N ∗
+h(vN) deﬁnes a Ψ-FNO, and that the size (depth, lift) is uniformly
+bounded in h.
+According to Lemma 44, any composition of σ-layers can be identiﬁed with a Ψ-FNO.
+Lemma 45 shows that we can approximate F-layers to arbitrary accuracy with a Ψ-FNO
+of uniformly bounded size. In the following lemma, we record the simple fact that a com-
+position of Ψ-FNOs is again representable by a Ψ-FNO:
+Lemma 46 (Composition Lemma) For p ∈N, let N ∗
+1 , . . . , N ∗
+p be Ψ-FNOs, deﬁned
+with respect to the same grid {xj}j∈JN , and deﬁning operators N ∗
+k : L2
+N(Td; Rdk−1) →
+L2
+N(Td; Rdk) for d0, . . . , dp ∈N, such that the composition N ∗
+p ◦. . . N ∗
+1 : L2
+N(Td; Rd0) →
+L2
+N(Td; Rdp) is well-deﬁned. Then there exists a Ψ-FNO N ∗: L2
+N(Td; Rd0) →L2
+N(Td; Rdp),
+such that N ∗= N ∗
+p ◦· · ·◦N ∗
+1 , and such that depth(N ∗) ≤Pp
+k=1 depth(N ∗
+k ), and lift(N ∗) ≤
+maxk=1,...,p lift(N ∗
+k ).
+The proof of the previous lemma is straight-forward, and only requires a padding of each
+layer with zeros to achieve a uniform lifting dimension dv across all layers. The following
+lemma will be central for our approximation and complexity estimates:
+53
+
+PDF PAGE 54
+Kovachki, Lanthaler and Mishra
+Lemma 47 (Replacement Lemma) Assume that σ is Lipschitz continuous. For p ∈N,
+let e
+N1, . . . , e
+Np be continuous operators e
+Nk : L2
+N(Td; Rdk−1) →L2
+N(Td; Rdk) for d0, . . . , dp ∈
+N, such that the composition e
+N := e
+Np◦· · ·◦e
+N1 : L2
+N(Td; Rd0) →L2
+N(Td; Rdp) is well-deﬁned.
+Assume that there exist constants Dk, Lk > 0, k = 1, . . . , p, such that for any ϵ, M > 0,
+there exists a Ψ-FNO N ∗
+k : L2
+N(Td; Rdk−1) →L2
+N(Td; Rdk), such that
+sup
+∥u∥L2≤M
+∥e
+Nk(u) −N ∗
+k (u)∥L2
+N ≤ϵ,
+and depth(N ∗
+k ) ≤Dk, lift(N ∗
+k ) ≤Lk. Then for any ϵ > 0 and M > 0, there exists a Ψ-FNO
+N ∗: L2
+N(Td; Rd0) →L2
+N(Td; Rdp), such that
+sup
+∥u∥L2≤M
+∥e
+N(u) −N ∗(u)∥L2
+N ≤ϵ,
+and depth(N ∗) ≤Pp
+k=1 Dk, and lift(N ∗) ≤maxk=1,...,p Lk.
+Proof We prove the statement by induction on p ∈N. We start the induction at p = 2:
+Let ϵ > 0 and M > 0 be given, and let e
+N1, e
+N2 satisfy the hypotheses of this lemma. Since
+BM(0) ⊂L2
+N(Td; Rd0), the closed ball of radius M, is compact in the ﬁnite-dimensional
+space L2
+N(Td; Rd0), and since e
+N1 is continuous, it follows that the image e
+N1(BM(0)) is
+also compact; in particular, there exists M1 > 0, such that e
+N1(BM(0)) ⊂BM1(0). By
+assumption, there exists a Ψ-FNO N ∗
+2 : L2
+N(Td; Rd1) →L2
+N(Td; Rd2), such that
+sup
+∥u∥L2≤2M1
+∥e
+N2(u) −N ∗
+2 (u)∥L2
+N ≤ϵ/2.
+We note that (for Lipschitz continuous σ) e
+N2 is Lipschitz continuous on B2M1(0) ⊂L2
+N. Let
+Lip( e
+N2) denote the corresponding Lipschitz constant. By assumption on e
+N1, there exists a
+Ψ-FNO N ∗
+1 : L2
+N(Td; Rd0) →L2
+N(Td; Rd1), such that
+sup
+∥u∥L2≤M
+∥e
+N1(u) −N ∗
+1 (u)∥L2
+N ≤min
+ 
+ϵ
+2Lip( e
+N2)
+, M1
+!
+.
+Note that this estimate implies in particular that
+∥N ∗
+1 (u)∥L2 ≤∥e
+N1(u) −N ∗
+1 (u)∥L2 + ∥e
+N1(u)∥L2 ≤2M1.
+Thus, we can estimate
+sup
+∥u∥L2≤M
+∥e
+N2 ◦e
+N1(u) −N ∗
+2 ◦N ∗
+1 (u)∥L2
+≤
+sup
+∥u∥L2≤M
+∥e
+N2 ◦e
+N1(u) −e
+N2 ◦N ∗
+1 (u)∥L2
++
+sup
+∥u∥L2≤M
+∥e
+N2 ◦N ∗
+1 (u) −N ∗
+2 ◦N ∗
+1 (u)∥L2
+≤Lip( e
+N2)
+sup
+∥u∥L2≤M
+∥e
+N1(u) −N ∗
+1 (u)∥L2
++
+sup
+∥v∥≤2M1
+∥e
+N2(v) −N ∗
+2 (v)∥L2
+< ϵ.
+54
+
+PDF PAGE 55
+Fourier Neural Operators
+The estimate on the depth and lift is immediate (cp. Lemma 46). This proves the base
+case p = 2 of the induction.
+Let now p > 2, and assume that the claim holds for the composition of p −1 operators.
+Given e
+N1, . . . , e
+Np as in the statement of the lemma, we can apply the induction hypothesis
+for the composition of p −1 operators, to see that the two continuous operators b
+N1 := e
+N1
+and b
+N2 := ( e
+Np ◦· · ·◦e
+N2) fulﬁll all assumptions of the lemma (with p = 2), and with depths
+and lifts of the approximating FNOs given by bD1 = D1, bL1 = L1, and bD2 = Pp
+k=2 Dk,
+bL2 = maxk=2,...,p Lk. The proof of the induction step now follows from the base case (with
+p = 2) already considered above.
+Appendix E. Technical Results and Proofs for Section 3.1
+In this section, we collect some technical results and proofs for the material in Section 3.1
+of the main text. We start with the following Lemma on the contraction property of the
+map (28).
+Lemma 48 Let k ∈N, k > d/2 + 1, and let s > d/2 + k be given.
+Assume that the
+coeﬃcient a ∈Hs(Td) satisﬁes the λ-coercivity condition (25) for some λ ∈(0, 1), and
+that the right-hand side of the stationary Darcy equation (24) belongs to the Sobolev space
+f ∈Hk−1. Then there exists N0 = N0(s, d, ∥a∥Hs, λ) ∈N, such that for any N ≥N0, we
+have aN ≥λ/2 and the mapping FN deﬁned by (28) is a contraction, with
+Lip
+
+FN : ˙H1 →˙H1
+≤1 −λ
+2 .
+Proof As uN 7→FN(uN) is an aﬃne mapping, we can express the Lipschitz constant in
+terms of the following supremum
+Lip
+
+FN : ˙H1 →˙H1
+=
+sup
+uN∈˙H1\{0}
+ ˙PN(−∆)−1∇· (eaN∇uN)
+ ˙H1
+∥uN∥˙H1
+.
+We now observe that
+ ˙PN(−∆)−1∇· (eaN∇uN)
+ ˙H1 ≤
+(−∆)−1∇· (eaN∇uN)
+ ˙H1
+= ∥eaN∇uN∥L2
+≤∥eaN∥L∞∥uN∥˙H1,
+for all uN ∈˙H1
+N(Td). To ﬁnish the proof, we note that
+∥eaN∥L∞≤∥ea∥L∞+ ∥ea −eaN∥L∞,
+where the ﬁrst term is bounded by 1 −λ by the coercivity assumption. By our deﬁnition
+of eaN (cp. equation 27), we have
+∥ea −eaN∥L∞≤
+ea −˙PNea
+
+L∞+
+ ˙PNea −˙PNI2Nea
+
+L∞.
+55
+
+PDF PAGE 56
+Kovachki, Lanthaler and Mishra
+But by the spectral/pseudo-spectral approximation estimates, we now have
+ea −˙PNea
+
+L∞≲d,δ
+ea −˙PNea
+
+Hd/2+δ
+≲s,d,δ N−(s−d/2−δ)∥a∥Hs,
+and
+ ˙PNea −˙PNI2Nea
+
+L∞≲d,δ
+ ˙PNea −˙PNI2Nea
+
+Hd/2+δ
+≤∥ea −I2Nea∥Hd/2+δ
+≲s,d,δ N−(s−d/2−δ)∥a∥Hs.
+To be deﬁnite, let us choose δ := (s −d/2)/2. In particular, it follows that there exists a
+constant C = C(s, d), and N0 = N0(s, d, ∥a∥Hs, λ) ∈N, such that
+∥ea −eaN∥L∞≤λ
+2 ,
+for N ≥N0, and hence aN = 1 + eaN ≥1 + ea −λ/2 ≥λ/2, and
+Lip(FN) ≤∥eaN∥L∞≤∥ea∥L∞+ ∥ea −eaN∥L∞≤1 −λ
+2 ,
+for all N ≥N0. The claim follows.
+Next, we provide the detailed proof of Theorem 24 which guarantees convergence of the
+Algorithm 23 to the solutions of the Darcy equation (24).
+E.1 Proof of Theorem 24
+Proof Choose N0 ∈N as in Lemma 48.
+Step 1:
+Well-posedness and error estimate of the FG approximation (26).
+We consider the bilinear form B : ˙H1
+N × ˙H1
+N →R, given by
+B(uN, wN) :=
+ˆ
+Td aN(x)∇uN(x) · ∇wN(x) dx.
+We note that uN solves (26), if and only if,
+B(uN, wN) = ⟨fN, wN⟩L2,
+(87)
+for all wN ∈˙H1
+N. By Lemma 48, we have aN ≥λ/2 for all N ≥N0, and hence
+B(wN, wN) ≥λ/2∥wN∥2
+˙H1.
+Thus, B is a coercive bilinear form. The existence and uniqueness of a solution u∗
+N ∈˙H1
+N
+of (87) follows from this for any right-hand side fN. Furthermore, we have the estimate
+∥u∗
+N∥2
+H1 ≤2∥u∗
+N∥2
+˙H1 ≤4
+λB(u∗
+N, u∗
+N) = 4
+λ⟨u∗
+N, fN⟩L2 ≤4
+λ∥u∗
+N∥H1∥fN∥H−1,
+56
+
+PDF PAGE 57
+Fourier Neural Operators
+and thus, ∥u∗
+N∥H1 ≤4λ−1∥fN∥H−1.
+It is also straightforward to show that by inductive diﬀerentiation of (24), one can also
+obtain higher-order estimates for k ∈N, k ≥1 for the (non-discretized) elliptic equation
+(24), of the form:
+∥u∥Hk+1 ≤C∥f∥Hk−1,
+(88)
+where C = C(k, d, ∥a∥Ck) > 0.
+To prove the claimed error estimate, we note that if u solves (24), then PNu ∈
+˙H1
+N
+solves
+−PN∇· (aN∇PNu) = PNf + PN∇· ((a −aN)∇PNu)
++ PN∇· (a∇(1 −PN)u).
+It thus follows that wN = PNu −u∗
+N solves
+−PN∇· (aN∇wN) = (PNf −fN) + PN∇· ((a −aN)∇PNu)
++ PN∇· (a∇(1 −PN)u)
+=: (I) + (II) + (III).
+The stability estimate then implies that ∥wN∥H1 ≤4λ−1∥(I) + (II) + (III)∥H−1, can be
+bounded in terms of the H−1-norm of the right-hand side. We can now estimate
+∥(I)∥H−1 = ∥(PNf −fN)∥H−1
+≤∥(1 −PN)f∥H−1 + ∥f −fN∥H−1 ≲d,s N−k∥f∥Hk−1.
+The last inequality follows from the fact that f ∈Hk−1(Td), for k −1 > d/2, and the
+(pseudo-)spectral approximation estimate. For the second term, we ﬁx a small δ > 0, and
+obtain
+∥(II)∥H−1 ≤∥(a −aN)∇PNu∥L2
+≲d ∥a −aN∥L∞∥u∥H1
+≲d,δ,λ ∥a −aN∥Hd/2+δ∥f∥H−1,
+where we have used the embedding Hd/2+δ,→L∞in the last step. Assuming that δ > 0 is
+chosen suﬃciently small, so that s ≥d/2 + δ, we can then estimate
+∥(II)∥H−1 ≲s,d λ−1N−(s−d/2−δ)∥a∥Hs∥f∥H−1.
+Finally, the third term can be bounded as follows:
+∥(III)∥H−1 ≲d ∥a∇(1 −PN)u∥L2
+≲d ∥a∥L∞∥(1 −PN)u∥H1
+≲s,d N−k∥a∥Hs∥u∥Hk+1
+≲s,d,λ,k,∥a∥Ck N−k∥a∥Hs∥f∥Hk−1.
+57
+
+PDF PAGE 58
+Kovachki, Lanthaler and Mishra
+In the last step, we used the higher regularity estimate (88). We note that for this step
+we assume that a ∈Hs, s > d/2 + k, so that we have an embedding Hs,→Ck. Under this
+condition, we can further estimate (II) by
+∥(II)∥H−1 ≲s,d N−(s−d/2−δ)λ−1∥a∥Hs∥f∥H−1
+≲s,d,λ,∥a∥Hs,∥f∥H−1 N−k.
+Combining the above estimates for (I), (II) and (III), we conclude that for any s ∈R and
+k ∈N satisfying s > d/2 + k, we have
+∥wN∥H1 = ∥u∗
+N −PNu∥H1 ≤CN−k,
+provided that a ∈Hs, f ∈Hk−1, where C = C (s, d, λ, k, ∥a∥Hs, ∥f∥Hk−1) > 0 is indepen-
+dent of N.
+The proof is now ﬁnished by observing that
+∥u −u∗
+N∥2
+H1 = ∥(1 −PN)u∥2
+H1 + ∥PNu −u∗
+N∥2
+H1,
+and that, by the higher-regularity estimate (88), we have
+∥(1 −PN)u∥H1 ≲k,d N−k∥u∥Hk+1 ≲s,k,d,λ,∥a∥Hs,∥f∥Hk−1 N−k.
+Thus, it follows that there exists a constant C = C(s, k, d, λ, ∥a∥Hs, ∥f∥Hk−1) > 0, such
+that
+∥u −u∗
+N∥H1 ≤CN−k,
+(89)
+where u∗
+N is the solution of the Fourier-Galerkin discretization (26).
+Step 2:
+Picard iteration estimate.
+The output of Algorithm 23 is obtained by Picard iteration, i.e. by K-fold application
+of the mapping FN :
+˙H1
+N →
+˙H1
+N, yielding a recursively deﬁned sequence u0
+N := 0, and
+uk
+N = FN(uk−1
+N
+), for k = 1, . . . , K. Since FN is a contraction with Lip(FN) ≤1 −λ/2 for
+N ≥N0, by Lemma 48, and since u∗
+N is the unique ﬁxed point of FN, this implies that
+∥uK
+N −u∗
+N∥˙H1 ≤(1 −λ/2)K∥u∗
+N∥˙H1.
+Using the deﬁnition of H1, ˙H1, and the regularity estimate (88), we can further estimate
+∥uK
+N −u∗
+N∥H1 ≤2∥uK
+N −u∗
+N∥˙H1 ≤8λ−1(1 −λ/2)K∥fN∥H−1.
+By deﬁnition of K, we have
+K ≥log(λN−k)
+log(1 −λ/2),
+and hence (1 −λ/2)K ≤λN−k. This yields
+∥uK
+N −u∗
+N∥H1 ≤8N−k∥fN∥H−1.
+58
+
+PDF PAGE 59
+Fourier Neural Operators
+Combining Steps 1 and 2, implies that there exists a constant C > 0, depending on s,
+k, d, λ, ∥a∥Hs and ∥f∥Hk−1) > 0, such that
+∥u −uN∥H1 ≤CN−k,
+for all N ≥N0, where uN := uK
+N is the output of Algorithm 23. This is the claimed esti-
+mate.
+E.2 Neural Network Approximation of Quadratic Non-Linearities
+Our next aim is to prove Theorem 26. As stated in the main text, the proof relies crucially
+on the following Lemmas, which show that neural networks can eﬃciently approximate
+certain quadratic non-linearities. We start with the following result,
+Lemma 49 Let σ ∈C3 be a activation function.
+Let d ∈N.
+There exists a constant
+C = C(d) > 0, such that for any ϵ > 0 and B > 0, there exists
+1. a neural network Φ1 : R2 →R, such that
+sup
+|a|,|b|≤B
+|Φ1(a, b) −ab| ≤ϵ,
+and width(Φ1) ≤C, depth(Φ1) ≤C,
+2. a neural network Φ2 : R × Rd →Rd, such that
+sup
+|a|,∥v∥ℓ2≤B
+|Φ2(a, v) −av| ≤ϵ,
+and width(Φ2) ≤C, depth(Φ2) ≤C,
+3. a neural network Φ3 : Rd × Rd×d →Rd, such that
+sup
+∥v∥ℓ2,∥U∥ℓ2→ℓ2≤B
+|Φ3(v, U) −v · U| ≤ϵ,
+and width(Φ3) ≤C, depth(Φ3) ≤C.
+Proof Points (2) and (3) easily follow from (1), by parallelizing multiple networks Φ1. To
+see the ﬁrst claim (1), we note that the quadratic function y 7→y2 can be approximated for
+y ∈[−B, B], B > 0, to arbitrary precision by ﬁnite diﬀerences
+y2 = σ(x + hy) −2σ(x) + σ(x −hy)
+h2σ(2)(x)
+|
+{z
+}
+sqh(y)
++R(h; y),
+where we assume that x is chosen so that the second derivative σ(2)(x) ̸= 0, and |R(h, y)| ≤
+Ch for all y ∈[−B, B], and C = C(B). Finally, following (Yarotsky, 2017), we observe that
+the product ab of two numbers a, b can be expressed in the form
+ab = 1
+2
+ (a + b)2 −a2 −b2
+= 1
+2 (sqh(a + b) −sqh(a) −sqh(b)) + eR(h; a, b),
+59
+
+PDF PAGE 60
+Kovachki, Lanthaler and Mishra
+where eR is related to R, and there exists a constant C = C(B), such that | eR(h; a, b)| ≤Ch,
+for all a, b ∈[−B, B]. Since sqh is a neural network of ﬁnite width and depth (independent
+of h), and since the last expression
+Φh(a, b) := 1
+2 (sqh(a + b) −sqh(a) −sqh(b)) ,
+is simply a linear combination of sqh, we conclude that b
+Nh is a neural network of uniformly
+bounded width and depth (uniform in h), and for suﬃciently small h > 0, we have
+sup
+a,b∈[−B,B]
+|Φh(a, b) −ab| ≤ϵ.
+This concludes the proof.
+Using the above lemma, one can prove the following result,
+Lemma 50 Assume that the activation function σ ∈C3 is three times continuously diﬀer-
+entiable and non-linear. There exists a constant C > 0, such that for any N ∈N, and for
+any ϵ, B > 0, there exists a Ψ-FNO N ∗: L2
+2N(Td; R) × L2
+2N(Td; R) →L2
+2N(Td; R), with
+depth(N ∗), lift(N ∗) = dv ≤C,
+such that we have
+∥PN (aN∇uN) −N ∗(aN, uN)∥L2
+N ≤ϵ,
+for all trigonometric polynomials aN, uN ∈L2
+N(Td; R) ⊂L2
+2N(Td; R) of degree |k|∞≤N,
+satisfying the bound ∥aN∥L2, ∥uN∥L2 ≤B.
+Proof First, we observe that there exists a linear FNO layer L∗: L2
+2N →L2
+2N, with a
+suitable choice of the Fourier multiplier matrix P, such that
+L∗(uN) = F−1
+2N(PF(uN)) = F−1
+2N
+
+
+X
+|k|∞≤2N
+ikbukei⟨k,x⟩
+
+= ∇uN,
+is satisﬁed exactly for all uN ∈L2
+2N(Td; R).
+We also note that if ∥uN∥L2 ≤B, then
+∥∇uN∥L2 ≤NB. By the fact that all norms are equivalent on the ﬁnite-dimensional space
+L2
+2N(Td; Rd×d), there exists a constant C′ > 0 (depending on N), such that
+sup
+x∈Td ∥∇uN(x)∥ℓ2 ≤C′∥∇uN∥L2 ≤C′NB,
+whenever ∥uN∥L2 ≤B. We similarly see that by norm equivalence on L2
+2N(Td; R), there
+exists a constant C′′ > 0 (depending on N), such that we also have
+sup
+x∈Td |aN(x)| ≤C′′∥aN∥L2 ≤C′′B,
+for any ∥aN∥L2 ≤B. Let B := max(C′NB, C′′B). By Lemma 49, there exists an ordi-
+nary neural network Φ : R × Rd →Rd with width(Φ), depth(Φ) ≤C(d) (with C = C(d)
+independent of N), such that
+sup
+|a|,∥v∥ℓ2≤B
+∥Φ(a, v) −av∥ℓ2 ≤ϵ.
+60
+
+PDF PAGE 61
+Fourier Neural Operators
+By Lemmas 44, 45 and the composition lemma 46, the composition
+(aN, uN) 7→(aN, L∗(uN)) = (aN, ∇uN) 7→Φ(aN, ∇uN),
+can be represented by a Ψ-FNO e
+N ∗: L2
+2N(Td; R2) →L2
+2N(Td; Rd), and by construction, we
+have
+sup
+x∈Td ∥aN(x)∇uN(x) −e
+N ∗(aN, uN)(x)∥ℓ2 ≤ϵ,
+(90)
+for all aN, uN ∈L2
+2N, with ∥aN∥L2, ∥uN∥L2 ≤B. Furthermore, since L∗is a linear layer,
+and Φ is an ordinary neural network with width(Φ), depth(Φ) ≤C = C(d), we in fact
+conclude that for some new constant C = C(d) > 0, we have
+depth( e
+N ∗) ≤C,
+lift( e
+N ∗) = dv ≤C.
+Finally, we note that the projection PN : L2
+2N →L2
+2N onto Fourier modes with wavenumbers
+|k|∞≤N can again be represented exactly by a linear Ψ-FNO layer bL∗, and by Lemmas
+45, 46, there exists a Ψ-FNO N ∗: L2
+2N(Td; R2) →L2
+2N(Td; Rd), such that ∥N ∗(aN, uN) −
+bL∗◦e
+N ∗(aN, uN)∥L2 ≤ϵ, for all ∥aN∥L2, ∥uN∥L2 ≤B, and such that
+depth(N ∗) ≤C,
+lift(N ∗) = dv ≤C,
+where C = C(d) > 0 depends only on d. Combining this with (90), we conclude that N ∗
+satisﬁes
+∥PN(aN∇uN) −N ∗(aN, uN)∥L2 ≤∥bL∗◦e
+N ∗(aN, uN) −N ∗(aN, uN)∥L2
++ ∥PN(aN∇uN) −bL∗◦e
+N ∗(aN, uN)∥L2
+= ∥bL∗◦e
+N ∗(aN, uN) −N ∗(aN, uN)∥L2
++ ∥PN(aN∇uN) −PN e
+N ∗(aN, uN)∥L2
+≤ϵ + ∥aN∇uN −e
+N ∗(aN, uN)∥L2
+≤ϵ + |Td|1/2 sup
+x∈Td ∥aN(x)∇uN(x) −e
+N ∗(aN, uN)(x)∥ℓ2
+≤
+
+1 + (2π)d/2
+ϵ,
+for all ∥aN∥L2, ∥uN∥L2 ≤B. Since ϵ > 0 was arbitrary, the claim follows.
+E.3 Proof of Theorem 26
+The stage is now set for the proof of Theorem 26 in the following,
+Proof [Proof of Theorem 26] Since the claim is an asymptotic statement, it suﬃces to
+consider N ≥N0, where N0 is the constant of Lemma 48. Indeed, the exceptional cases
+N < N0 can be handled by suitably enlarging the constant C. We will thus assume that
+N ≥N0, and f ∈˙Hk−1 are given. We ﬁx FN := (−∆)fN ∈L2
+N(Td) for the rest of this
+proof, where fN := ˙PNI2Nf is deﬁned as in Algorithm 23.
+61
+
+PDF PAGE 62
+Kovachki, Lanthaler and Mishra
+We deﬁne two operators b
+N1, b
+N2 as follows: We let
+b
+N1 : L2
+2N(Td; R2) →L2
+2N(Td; R × Rd),
+b
+N1(a, u) := (a, PN(a∇u)),
+and deﬁne b
+N2 : L2
+2N(Td; R × Rd) →L2
+2N(Td; R2) by
+b
+N2(a, U) :=
+
+a, ˙PN(−∆)−1∇· U + FN
+
+.
+In terms of b
+N1, b
+N2, Algorithm 23, which deﬁnes a mapping a 7→uN = b
+N(a), can be written
+in the form
+b
+N(a) = bQ ◦b
+N2 ◦b
+N1 ◦· · · ◦b
+N2 ◦b
+N1
+|
+{z
+}
+K-fold composition
+◦bR(a),
+where bR(a) := (a, 0), bQ(a, u) := u and where K ≲log(N). By the composition lemma 46,
+to prove the claim of this theorem, it therefore suﬃces to show the following
+Claim: For any B > 0, there exists C > 0, such that for any ϵ > 0, there exist Ψ-FNOs
+N ∗
+1 and N ∗
+2 , with depth(N ∗
+1 ), depth(N ∗
+2 ), lift(N ∗
+1 ), lift(N ∗
+2 ) ≤C, and such that
+∥b
+N1(u) −N ∗
+1 (u)∥L2, ∥b
+N2(u) −N ∗
+2 (u)∥L2 ≤ϵ,
+for all u ∈L2
+2N(Td) with bounded norm ∥u∥L2 ≤B.
+For b
+N1, the claim follows from Lemma 50. For b
+N2, we note that b
+N2 can be represented
+exactly by a linear FNO layer with W =
+1
+0
+0
+0
+
+, bias bj = (0, FN(xj)), and with Fourier
+multiplier matrix P(k) =
+0
+0
+0
+eP(k)
+
+, where eP(k) := 1[|k|∞≤N]
+ikT
+|k|2 , so that
+b
+N2(v)j = b
+N2(v)(xj) = Wvj + bj + F−1
+N (PFNv)j,
+for vj = (a(xj), U(xj)). The claim for b
+N2 thus follows from the linear approximation lemma
+45.
+Appendix F. Technical Results and Proofs from Section 3.2
+F.1 Properties of the Pseudo-Spectral Scheme (34)
+Our ﬁrst aim is to show that the implicit operator equation that deﬁnes the scheme (34).
+To this end, we have following lemmas,
+Lemma 51 If v ∈L2
+N(Td; Rd) and τ∥v∥L∞N ≤1
+2, then we have
+∥τPN(v · ∇w)∥L2 ≤1
+2∥w∥L2,
+for all w ∈L2
+N(Td; Rd). In particular, this estimate holds provided that
+τ∥v∥L2Nd/2+1 ≤1
+2.
+62
+
+PDF PAGE 63
+Fourier Neural Operators
+Proof We ﬁrst note that for any v ∈L2
+N, we have
+τ∥v∥L∞N ≤τ∥v∥L2Nd/2+1 ≤1
+2.
+The claim is now an immediate consequence of the fact that
+∥τPN(v · ∇w)∥L2 ≤∥τv · ∇w∥L2
+≤τ∥v∥L∞∥∇w∥L2
+≤τ∥v∥L∞N∥w∥L2,
+for any w ∈L2
+N(Td; Rd).
+We can now state the following lemma on the well-posedness:
+Lemma 52 Let U > 0. If ∥un
+N∥L2 ≤U for n = 0, . . . , nT , and if the CFL condition
+τUNd/2+1 ≤1
+2,
+(91)
+is satisﬁed, then the recursion (34) is well-deﬁned.
+Proof The recursion (34) can be written in the form
+Tnun+1
+N
+= un,
+(92)
+where the operator Tn : ˙L2
+N(Td; div) →˙L2
+N(Td; div) is given by
+TnwN := wN + τPN (un
+N · ∇wN) −ντ∆wN.
+The claimed well-posedness of the recursion follows from the fact that, under the CFL
+assumption (91), the operator Tn is invertible: Indeed, by Lemma 51, this implies that for
+any wN ∈L2
+N(Td; div), we have
+∥τPN (un
+N · ∇wN) ∥L2 ≤1
+2∥wN∥L2.
+But then, we have for any wN ∈L2
+N(Td; div), that
+∥TnwN∥L2 ≥∥(1 −τν∆)wN∥L2 −∥τPN (un
+N · ∇wN) ∥L2
+N
+≥∥wN∥L2 −1
+2∥wN∥L2
+= 1
+2∥wN∥L2,
+where, in the ﬁrst step, we have used the fact that −τν∆is a non-negative operator. In par-
+ticular, the estimate ∥TnwN∥L2 ≥1
+2∥wN∥L2 implies that Tn : L2
+N(Td; div) →L2
+N(Td; div) is
+injective. Since L2
+N(Td; div) is ﬁnite-dimensional, we conclude that Tn is actually invertible,
+and hence the recursion (34) is well-deﬁned, i.e. it can be solved for un+1
+N
+, given un
+N.
+By Lemma 52, to prove the well-posedness of the scheme (34), it remains to be shown
+that with a suitable choice of the time-step τ, we have a uniform L2-energy bound of the
+form ∥un
+N∥L2 ≤U, for some U > 0. This is the content of the following lemma:
+63
+
+PDF PAGE 64
+Kovachki, Lanthaler and Mishra
+Lemma 53 Assume that ∥u0
+N∥L2 ≤U, then the ﬁrst-order scheme (34) is well-deﬁned
+for any time-step satisfying the CFL condition τUNd/2+1 ≤1
+2, and we have ∥un
+N∥L2 ≤
+∥u0
+N∥L2 ≤U for all n = 0, . . . , nT .
+Proof We show inductively that if ∥un
+N∥L2 ≤U, then ∥un+1
+N
+∥L2 ≤∥un
+N∥L2 ≤U. The
+well-posedness then follows from Lemma 52. To see that ∥un+1
+N
+∥L2 ≤∥un
+N∥L2, we integrate
+(34) against un+1
+N
+, to ﬁnd
+∥un+1
+N
+∥2
+L2 = ⟨un+1
+N
+, un
+N⟩−τ
+
+un+1
+N
+, PN
+ un
+N · ∇un+1
+N
+
+−ντ∥∇un+1
+N
+∥2
+L2
+= ⟨un+1
+N
+, un
+N⟩−τ
+
+un+1
+N
+, un
+N · ∇un+1
+N
+
+|
+{z
+}
+=0
+−ντ∥∇un+1
+N
+∥2
+L2
+≤
+⟨un+1
+N
+, un
+N⟩
+ ≤∥un+1
+N
+∥L2∥un
+N∥L2.
+This proves the claim.
+Next, we have the following Lemma on the convergence of the iterations in Algorithm 29,
+Lemma 54 Given ∥un
+N∥L2 ≤U, assume that the CFL condition τUNd/2+1 ≤1
+2 is satisﬁed.
+Deﬁne a recursive sequence wn,k
+N
+∈˙L2
+N(Td; div), k ∈N, by wn,0
+N
+:= 0, and wn,k+1
+N
+:=
+F(wn,k
+N ), where F is deﬁned by (37). Then, we have ∥un+1
+N
+−wn,k
+N ∥L2 ≤2−k∥un
+N∥L2, for
+k ∈N, and ∥wn,k
+N ∥L2 ≤(1 + 2−k)∥un
+N∥L2.
+Proof By Lemma 51, and the fact that (1 −ντ∆)−1 is a contraction, it follows that
+Lip(F) ≤1
+2. By Picard iteration, and recalling that un+1
+N
+is the unique ﬁxed point of the
+recursion wn,k
+N
+(k ∈N), it immediately follows that
+∥un+1
+N
+−wn,k
+N ∥L2 ≤1
+2k ∥un+1
+N
+−wn,0
+N ∥L2 ≤∥un
+N∥L2
+2k
+.
+The last step is a consequence of the a priori L2-bound ∥un+1
+N
+∥L2 ≤∥un
+N∥L2 proven in
+Lemma 53. In particular, this estimate implies that
+∥wn,k
+N ∥L2 ≤∥un+1
+N
+∥L2 + ∥wn,k
+N −un+1
+N
+∥L2 ≤(1 + 2−k)∥un
+N∥L2.
+Remark 55 Note that as a consequence of Lemma 54, we recursively ﬁnd that
+∥un+1
+N
+∥L2 = ∥wn,κ0
+N
+∥L2 ≤(1 + 2−κ0)∥un
+N∥L2 ≤
+
+1 + τ 2
+T 2
+
+∥un
+N∥L2
+≤· · · ≤
+
+1 + τ 2
+T 2
+n
+∥u0
+N∥L2 ≤exp
+ τ
+T
+
+U ≤eU,
+for n = 0, . . . , nT . In particular, this ensures that the CFL condition (91) is satisﬁed for
+all un
+N, generated by Algorithm 29.
+Finally, we provide the proof of the convergence Theorem 30.
+64
+
+PDF PAGE 65
+Fourier Neural Operators
+F.2 Proof of Theorem 30
+In this appendix, we provide a detailed proof of the convergence estimate of Theorem 30,
+for the ﬁrst-order scheme deﬁned by Algorithm 29.
+To this end, let u(t) be an exact solution of (31), satisfying the assumptions of Theorem
+30, and let u0
+N, . . . , unT
+N
+denote the sequence generated by Algorithm 29.
+For any n =
+0, . . . , nT −1, we denote by un+1,∗
+N
+the solution of a single time-step with the semi-implicit
+scheme (34), starting from un
+N, i.e. satisfying
+un+1,∗
+N
+−un
+N
+τ
++ PN
+
+un
+N · ∇un+1,∗
+N
+
+= ν∆un+1,∗
+N
+.
+(93)
+We recall that by Lemma 54 and Remark 55, we have a uniform bound ∥un
+N∥L2 ≤eU.
+Since by assumption, the time-step τeUNd/2+1 ≤1
+2 satisﬁes the relevant CFL condition, it
+follows that a unique solution un+1,∗
+N
+exists for all n. We also recall that by Lemma 54, and
+by our choice of the number of iteration steps κ in Algorithm 29, we have
+∥un+1,∗
+N
+−un+1
+N
+∥L2 ≤2−keU ≤Cτ 2,
+where C > 0 depends only on U and the ﬁnal time T.
+Our ﬁrst goal is to derive an estimate on the magniﬁcation of the approximation error
+due to a single timestep un
+N 7→un+1
+N
+. Let u(t) be the exact solution of (31). Observing that
+∥un+1
+N
+−u(tn+1)∥L2 ≤∥un+1
+N
+−un+1,∗
+N
+∥L2 + ∥un+1,∗
+N
+−u(tn+1)∥L2
+≤Cτ 2 + ∥un+1,∗
+N
+−u(tn+1)∥L2,
+(94)
+we only need to consider the error introduced by a single time-step un
+N 7→un+1,∗
+N
+of the
+semi-implicit scheme (34). To this end, we can write
+u(tn+1) −u(tn)
+τ
++ PN
+ u(tn) · ∇u(tn+1)
+
+= ν∆u(tn+1) + En,
+where En collects all error terms:
+En = En
+τ + En
+NL + En
+P + En
+ν ,
+where
+En
+τ = u(tn+1) −u(tn)
+τ
+−∂tu(tn),
+En
+NL = P
+ u(tn) · ∇
+ u(tn+1) −u(tn)
+
+,
+En
+P = (1 −PN) (u(tn) · ∇u(tn)) ,
+En
+ν = −ν∆
+ u(tn+1) −u(tn)
+
+.
+Subtracting (93), and introducing the short-hand notation en := u(tn) −un
+N, en+1 :=
+u(tn+1) −un,∗
+N , we ﬁnd
+en+1 −en
+τ
+= −PN
+ en · ∇u(tn+1)
+
+−PN
+ un
+N · ∇en+1
++ ν∆en+1 + En.
+65
+
+PDF PAGE 66
+Kovachki, Lanthaler and Mishra
+Next, integrate against en+1
+N
+:= PNen+1 to ﬁnd
+1
+2τ
+ ∥en+1
+N
+∥2
+L2 + ∥en+1
+N
+−en
+N∥2
+L2 −∥en
+N∥2
+L2
+
+≤∥en∥L2∥∇u∥L∞
+t,x∥en+1
+N
+∥L2 −⟨PN(un
+N · ∇en+1), en+1⟩−ν∥∇en+1∥2
+L2 + ⟨En, en+1⟩.
+We note that
+⟨PN(un
+N · ∇en+1), en+1⟩= ⟨PN(un
+N · ∇en+1), en+1⟩
+= ⟨un
+N · ∇en+1, en+1⟩−⟨(1 −PN)un
+N · ∇en+1, en+1⟩
+= 0 −⟨un
+N · ∇en+1, (1 −PN)en+1⟩
+= −⟨un
+N · ∇en+1, (1 −PN)u(tn+1)⟩
+= ⟨en+1, un
+N · ∇(1 −PN)u(tn+1)⟩
+= −⟨en+1, en · ∇(1 −PN)u(tn+1)⟩
++ ⟨en+1, u(tn) · ∇(1 −PN)u(tn+1)⟩
+(95)
+We now note that we can rewrite the last term as follows:
+⟨en+1, u(tn) · ∇(1 −PN)u(tn+1)⟩=
+
+(1 −PN)
+ en+1 ⊗u(tn)
+
+, ∇u(tn+1)
+
+Using the fact that
+(1 −PN)
+ en+1 ⊗u(tn)
+
+= (1 −PN)
+ (1 −PN/2)en+1 ⊗(1 −PN/2)u(tn)
+
+,
+it then follows that we have
+⟨PN(un
+N · ∇en+1), en+1⟩= −⟨en+1, en · ∇(1 −PN)u(tn+1)⟩
+
+(1 −PN)
+ en+1 ⊗u(tn)
+
+, ∇u(tn+1)
+
+≤∥en+1∥L2∥en∥L2∥(1 −PN)∇u(tn+1)∥L∞
++ ∥en+1∥L2∥(1 −PN/2)u(tn)∥L2∥(1 −PN)∇u(tn+1)∥L∞.
+For r > d/2+1, we have a continuous embedding Hr,→W 1,∞, and an inequality of the form
+∥(1 −PN/2)u(tn)∥L2 ≲r,d
+1
+Nr ∥u(tn)∥Hr.
+Hence we can estimate
+⟨PN(un
+N · ∇en+1), en+1⟩≲r,d ∥en+1∥L2∥en∥L2∥u(tn)∥Hr
++ ∥en+1∥L2 ∥u(tn)∥2
+Hr
+N2r
+.
+Estimating the products on the right-hand side using the inequality ab ≤ϵa2+ 1
+4ϵb2 with
+suitable ϵ > 0, it follows that there exists a constant C > 0 (independent of ν > 0, N and
+n), such that
+∥en+1∥2
+L2 ≤
+
+1 + Cτ∥u∥2
+Ct(Hrx)
+
+∥en∥2
+L2 −ν∥∇en+1∥2
+L2
++ CτN−2r∥u∥4
+Ct(Hrx) + Cτ|⟨En, en+1⟩|.
+(96)
+66
+
+PDF PAGE 67
+Fourier Neural Operators
+F.2.1 Time-Differencing Error
+We note that
+⟨En
+τ , en+1⟩= 1
+τ
+ˆ tn+1
+tn
+ˆ t
+tn
+
+∂2
+t u(s), en+1
+ds dt
+= 1
+τ
+ˆ tn+1
+tn
+ˆ t
+tn
+
+−P {∂tu(s) · ∇u(s) + u(s) · ∇∂tu(s)} , en+1
+ds dt
++ 1
+τ
+ˆ tn+1
+tn
+ˆ t
+tn
+
+ν∆u(s), en+1
+ds dt
+=: (I)τ + (II)τ.
+The ﬁrst term can be bounded from above by
+(I)τ ≲τ
+
+∥u∥C1
+t (L2x)∥u∥Ct(W 1,∞
+x
+) + ∥u∥Ct(L∞
+x )∥u∥C1
+t (H1x)
+
+∥en+1∥L2
+≲r,d τ∥u∥C1
+t (Hr−2)∥u∥Ct(Hr)∥en+1∥L2,
+provided that r > d/2+2 ≥3 (the last bound is automatic for d ≥2). For the second term,
+we derive the bound
+(II)τ ≲τν∥u∥Ct(H1x)∥∇en+1∥L2.
+Thus, for any ϵ > 0 (to be speciﬁed later), we have for some constant C = C(r, d) > 0:
+|⟨En
+τ , en+1⟩| ≤ϵ
+ ∥en+1∥L2 + ν∥∇en+1∥L2
+
++ Cτ 2
+ϵ
+
+∥u∥2
+C1
+t (Hr−2)∥u∥2
+Ct(Hr) + ν∥u∥2
+Ct(H1x)
+
+.
+(97)
+F.2.2 Non-Linear Time-Differencing Error
+For the error associated with En
+NL, we simply estimate (for ϵ > 0 to be determined later)
+|⟨En
+NL, en+1⟩| ≤ϵ∥en+1∥2
+L2 + ϵ−1∥En
+NL∥2
+L2,
+and we observe that
+∥En
+NL∥L2 ≤τ∥u∥Ct(L∞
+x )∥u∥C1
+t (H1x) ≤τ∥u∥Ct(Hrx)∥u∥C1
+t (Hr−2
+x
+),
+assuming that r > d/2 + 2 ≥3. This yields
+|⟨En
+NL, en+1⟩| ≤ϵ∥en+1∥2
+L2 + τ 2
+ϵ ∥u∥2
+Ct(Hrx)∥u∥2
+C1
+t (Hr−2
+x
+)
+(98)
+F.2.3 Nonlinear Projection Error
+Again, we estimate the error En
+P using the simple estimate
+|⟨En
+P , en+1⟩| ≤ϵ∥en+1∥2
+L2 + ϵ−1∥En
+P ∥2
+L2,
+67
+
+PDF PAGE 68
+Kovachki, Lanthaler and Mishra
+with ϵ > 0 to be speciﬁed later. We furthermore note that
+(1 −PN)
+
+u(tn) · ∇u(tn+1)
+	
+= (1 −PN)
+
+(1 −PN/2)u(tn) · (1 −PN/2)∇u(tn+1)
+	
+,
+which implies that
+∥En
+P ∥L2 ≤∥(1 −PN/2)u(tn)∥L2∥(1 −PN/2)∇u(tn+1)∥L∞≲r,d N−r∥u∥2
+Ct(Hr).
+In the last step, we have used the fact that ∥(1 −PN/2)v∥L2 ≲r,d N−r∥v∥Hr for r ≥0, and
+that by Sobolev embedding
+∥(1 −PN/2)∇u(tn+1)∥L∞≲d ∥(1 −PN/2)u(tn+1)∥Hr ≤∥u∥Ct(Hrx),
+for any r > d/2 + 1. Thus, there exists C = C(d, r) > 0, such that
+|⟨En
+P , en+1⟩| ≤ϵ∥en+1∥2
+L2 +
+C
+ϵN2r ∥u∥2
+Ct(Hrx).
+(99)
+F.2.4 Viscosity Error
+Finally, we note that
+|⟨En
+ν , en+1⟩| ≤ν∥∇(u(tn+1) −u(tn))∥L2∥∇en+1∥L2
+≤νϵ∥∇en+1∥2
+L2 + ντ 2
+ϵ ∥u∥2
+C1
+t (H1x)
+≤νϵ∥∇en+1∥2
+L2 + ντ 2
+ϵ ∥u∥2
+C1
+t (Hr−2
+x
+),
+(100)
+for any r > d/2 + 2 ≥3.
+F.2.5 The Final Stability Estimate
+Choosing ϵ = 1/4, it follows from (97), (98), (99) and (100), that the total error term
+⟨En, en+1⟩can be estimated by
+|⟨En, en+1⟩| ≤∥en+1∥2
+L2 + ν∥∇en+1∥2
+L2 + C∗ τ 2 + N−2r
+.
+(101)
+for some constant C∗> 0, depending only on r > d/2 + 2, the spatial dimension d and the
+norms ∥u∥Ct(Hr), ∥u∥C1
+t (Hr) of the exact solution u.
+Substitution of the error estimate (101) in (96) ﬁnally yields
+(1 −τ)∥en+1∥2
+L2 ≤(1 + C∗τ) ∥en∥2
+L2 + τC∗ τ 2 + N−2r
+,
+where the constant C∗depends only on r ≥d/2 + 2, the dimension d and the norms
+∥u∥Ct(Hrx) and ∥u∥C1
+t (Hr−2
+x
+). Assuming that τ ≤1/2, dividing by (1 −τ), and noting that
+1 + C∗τ
+1 −τ
+= 1 + τ
+
+C∗+ (1 + C∗τ)
+1 −τ
+
+≤1 + τ2 (C∗+ 1) ,
+and
+C∗
+1 −τ ≤2C∗,
+68
+
+PDF PAGE 69
+Fourier Neural Operators
+we can clearly absorb the additional factor of (1 −τ)−1 by increasing the constant C∗, if
+necessary.
+From this, we conclude that for a time-step τ ≤1/2 satisfying the CFL condition (91),
+there exists a constant C∗= C∗(r, d, ∥u∥Ct(Hrx), ∥u∥C1
+t (Hr−2
+x
+)) > 0, such that
+∥un+1,∗
+N
+−u(tn+1)∥2
+L2 ≤(1 + C∗τ) ∥un
+N −u(tn)∥2
+L2 + τC∗ τ 2 + N−2r
+.
+(102)
+In fact, recalling also that ∥un+1
+N
+−un+1,∗
+N
+∥L2 ≤Cτ 2 by (94), we ﬁnd that an inequality of
+the form (102) remains true with un+1,∗
+N
+replaced by un+1
+N
+. Indeed, we have
+∥un+1
+N
+−u(tn+1)∥2
+L2 ≤∥un+1,∗
+N
+−u(tn+1)∥2
+L2 + 2Cτ 2∥un+1,∗
+N
+−u(tn+1)∥L2 + C2τ 4
+≤(1 + ϵ) ∥un+1,∗
+N
+−u(tn+1)∥2
+L2 + C2(1 + 4ϵ−1)τ 4
+(ϵ:=τ)
+↓= (1 + τ) ∥un+1,∗
+N
+−u(tn+1)∥2
+L2 + C2(1 + 4τ −1)τ 4
+≤(1 + C∗τ) ∥un
+N −u(tn)∥2
+L2 + τC∗ τ 2 + N−2r
+,
+(103)
+where the last estimate follows from (102), and C∗has been suitably enlarged (but still only
+depends on r, d, ∥u∥Ct(Hrx), ∥u∥C1
+t (Hr−2
+x
+)). In particular, denoting En := ∥un
+N −u(tn)∥2
+L2, we
+have obtained
+En+1 ≤(1 + C∗τ)En + τC∗ τ 2 + N−2r
+,
+and from Gronwall’s inequality it now follows that
+En ≤eC∗T 
+E0 + C∗T
+ τ 2 + N−2r
+.
+We note that E0 = ∥(1 −˙PNI2N)u(t = 0)∥2
+L2 ≤N−2r∥u∥2
+Hr. And hence, we ﬁnally ﬁnd, for
+n = 0, . . . , nT , that
+∥un
+N −u(tn)∥L2 =
+√
+En ≤C
+ τ + N−r
+,
+(104)
+where C > 0 depends only on T, r, d, ∥u∥Ct(Hrx) and ∥u∥C1
+t (Hr−2
+x
+).
+F.3 Proof of Theorem 32
+In this appendix, we provide a proof for Theorem 32. At this proof relies on Lemma 31, we
+prove this lemma below.
+Proof [Proof of Lemma 31] The proof of Lemma 31 is almost identical to the proof of
+Lemma 50; where in the present case, we replace aN →uN and refer to Lemma 49 point
+(3), rather than point (2). The only main diﬀerence being that in the last step of the proof,
+the projection PN is now replaced by the Leray projection PN. However, also for PN, we
+observe that PN : L2
+2N(Td; Rd) →L2
+2N(Td; Rd) can again be represented exactly by a linear
+Ψ-FNO layer. Thus, replacing the linear Ψ-FNO layer bL∗which represents PN in the proof
+of Lemma 50 by a layer representing PN, an almost identical argument also applies in this
+case, and yields for any ϵ, B > 0, a Ψ-FNO N ∗: L2
+2N(Td; Rd) →L2
+2N(Td; Rd), such that
+∥PN(uN · ∇uN) −N ∗(uN)∥L2 ≤ϵ,
+69
+
+PDF PAGE 70
+Kovachki, Lanthaler and Mishra
+for all ∥uN∥L2 ≤B, with
+depth(N ∗), lift(N ∗) = dv ≤C,
+where C = C(d).
+Proof [Proof of Theorem 32] Given N ∈N, choose τ ∼N−r, such that the CFL condition
+τNd/2+1U ≤1
+2 is satisﬁed. This is possible, since r ≥d/2 + 2, by assumption. It then
+follows that nT ∼Nr, and we note that Algorithm 29 can be written as the composition of
+O(nT log(nT )) = O(Nr log(N)) mappings of the form
+b
+N1(un
+N, wn,k
+N ) :=
+"
+un
+N
+(1 −ντ∆)−1un
+N −τ(1 −ντ∆)−1PN
+
+un
+N · ∇wn,k
+N
+
+#
+,
+where ∥un
+N∥L2, ∥wn,k
+N ∥L2 ≤2U for all k, n. Applying the replacement lemma, Lemma 47,
+the claim will thus follow if we can show that there exists a constant C > 0 independent of
+N, such that for any ϵ > 0, there exists a Ψ-FNO N ∗
+1 : L2
+2N(Td; div) →L2
+2N(Td; div), such
+that ∥N ∗
+1 (uN, wN) −b
+N1(uN, wN)∥L2 ≤ϵ, and
+N ∼Cϵ−1/r,
+depth(N ∗
+1 ) ≤C,
+lift(N ∗
+1 ) ≤C.
+This is immediate for the approximation of the ﬁrst component of b
+N1.
+For the second
+component, we note that we can write it as a composition:
+un
+N
+wn
+N
+
+7→
+"
+un
+N
+PN
+
+un
+N · ∇wn,k
+N
+
+#
+7→(1 −ντ∆)−1 n
+un
+N −τPN
+
+un
+N · ∇wn,k
+N
+o
+.
+To ﬁnish the proof, we note that the ﬁrst mapping can be approximated to arbitrary accu-
+racy ϵ > 0 with a Ψ-FNO of uniformly bounded depth and lift, by Lemma 31. The second
+mapping can be represented exactly by a linear FNO layer. Thus, N ∗
+1 can be obtained as
+the composition of a Ψ-FNO approximating the quadratic non-linearity, and a linear FNO
+layer, implying the claimed complexity estimate.
+F.4 A Second-Order in Time Accurate Pseudo-Spectral Method for
+Approximating the Navier-Stokes Equation (31) and its Emulation by
+Ψ-FNOs
+Our aim is to describe a second-order accurate (in time) version of the pseudo-spectral
+scheme (34). To this end, we propose the following scheme,
+un+1
+N
+−un
+N
+τ
++ PN
+3
+2un −1
+2un−1
+
+· ∇1
+2
+
+un+1 + un
+= ν∆1
+2
+
+un+1 + un
+,
+(105)
+In contrast to the ﬁrst-order method (34) of the last section, to start the scheme (34), we now
+require two starting values u0
+N ≈u(t0) and u1
+N ≈u(t1). Given initial data u0 ∈˙Hr(Td; div),
+r ≥d/2, we propose to deﬁne u0
+N := INu0, where IN denotes the pseudo-spectral projection,
+70
+
+PDF PAGE 71
+Fourier Neural Operators
+and to generate u1
+N by the ﬁrst-order accurate Algorithm 29 applied on the time-interval
+[0, τ], with reduced time-step of size ∼τ 2.
+As in the case of (34), one needs to solve an implicit operator equation in the time
+update for (105).
+Analogously, we will use a ﬁxed point iteration to approximate this
+implicit equation, resulting in the following algorithm,
+Algorithm 56 (Second-order in time approximation of (31))
+Input:
+U > 0, N ∈N, T > 0, ν ≥0, a time-step τ > 0, such that nT = T/τ ∈N,
+and τUNd/2+1 ≤
+1
+2e, initial data u0
+N ∈L2
+N(Td; div), such that ∥u0
+N∥L2 ≤
+U.
+Output:
+unT
+N
+∈L2
+N(Td; div) an approximation of the solution ST (u0
+N) of (31) at
+time t = T.
+1. Set
+κ :=
+&
+log
+ T 3/τ 3
+log(2)
+'
+∈N.
+2. Compute u1
+N ≈u(t1) by applying Algorithm 29 on the time-interval [0, τ], with nT
+steps and with time-step τ ′ = τ/nT .
+3. For n = 1, . . . , nT −1:
+(a) Set wn,0
+N
+:= 0,
+(b) For k = 1, . . . , κ0: Given the values un−1
+N
+, un
+N from the previous steps, compute
+wn,k
+N
+:= F n
+2 (wn,k−1
+N
+),
+(c) Set un+1
+N
+:= wn,κ0
+N
+,
+Next, we have the following convergence theorem for the Algorithm 56,
+Theorem 57 Let U, T > 0.
+Consider the Navier-Stokes equations on Td, for d ≥2.
+Assume that r ≥d + 2, and let u ∈C([0, T]; Hr) ∩C1([0, T]; Hr−2) ∩C2([0, T]; H1) be a
+solution of the Navier-Stokes equations (31), such that ∥u∥L2 ≤U. Choose a time-step τ,
+such that τUNd/2+1 ≤(2e)−1. There exists a constant
+C = C(T, d, r, ∥u∥Ct(Hrx), ∥u∥C1
+t (Hr−2
+x
+), ∥u∥C2
+t (H1x)) > 0,
+such that with u0
+N := INu(0), if ∥u(t1) −u1
+N∥L2 ≤δ, and for the sequence u2
+N, . . . , unT
+N ∈
+L2
+N(Td; div) generated by Algorithm 29, we have
+max
+n=0,...,nT ∥un
+N −u(tn)∥L2 ≤C
+ δ + τ 2 + N−r
+,
+where nT τ = T. In particular, choosing a suitable time-step τ ∼N−r/2, and assuming that
+δ ≤CN−r, we have
+max
+n=0,...,nT ∥un
+N −u(tn)∥L2 ≤3CN−r,
+with nT ∼Nr/2.
+71
+
+PDF PAGE 72
+Kovachki, Lanthaler and Mishra
+The proof uses very similar techniques as the proof of Theorem 30 and we omit it here.
+Finally and in complete analogy with the proof of Theorem 32, one can prove the
+following Theorem for the approximation of scheme (105) with a Ψ-FNO,
+Theorem 58 Let U, T > 0 and viscosity ν ≥0. Consider the Navier-Stokes equations
+on Td, for d ≥2. Assume that r ≥d + 2, and let V ⊂C([0, T]; Hr) ∩C1([0, T]; Hr−2) ∩
+C2([0, T]; H1) be a set of solutions of the Navier-Stokes equations (31), such that supu∈V ∥u∥L2 ≤
+U, and
+U := sup
+u∈V
+n
+∥u∥Ct(Hrx) + ∥u∥C1
+t (Hr−2
+x
+) + ∥u∥C2
+t (H1x)
+o
+.
+For t ∈[0, T], denote Vt := {u(t) | u ∈V}. Let G : V0 →VT denote the solution operator of
+(31), mapping initial data u0 = u(t = 0), to the solution u(T) at t = T of the incompressible
+Navier-Stokes equations. Then there exists a constant
+C = C(d, r, U, U, T) > 0,
+such that for any N ∈N there exists a Ψ-FNO N ∗: L2
+2N(Td; Rd) →L2
+2N(Td; Rd), such that
+sup
+u∈V0
+∥G(u) −N ∗(u)∥L2 ≤CN−r,
+and such that
+depth(N ∗) ≤CNr/2 log(N),
+lift(N ∗) = dv ≤C.
+Appendix G. Proof of Theorem 36
+Proof First, we note that each layer
+v(xj) 7→σ
+ Wv(xj) + bj + F−1
+N (PFNv)
+
+,
+is simply the composition of
+• an aﬃne mapping Rdv×JN →Rdv×JN , and
+• a componentwise application of the activation function σ.
+In particular, the Ψ-FNO N ∗, interpreted as a mapping
+RJN×da →RJN×dv →· · · →RJN×dv →RJN×du,
+can be represented by an ordinary neural network eβ : RJN×da →RJN×du, with
+width(eβ) = |JN|dv ∼Nddv,
+depth(eβ) = depth(N).
+In fact, by suitably modifying the linear output layer of eβ, we can map the grid val-
+ues encoded in the output eβj(a) = N(a)(xj) to the corresponding coeﬃcients in a (real)
+trigonometric basis {ek}k∈KN with span{ek}k∈KN = span{ei⟨k,x⟩}k∈KN ; i.e. by modifying
+the linear output layer of eβ (and re-indexing the components of the output), we obtain
+another neural network β : RJN×da →RKN×du, such that
+N(a)(xj) =
+X
+k∈KN
+βk(a)ek(xj),
+∀j ∈JN.
+(106)
+72
+
+PDF PAGE 73
+Fourier Neural Operators
+Since eβ and β only diﬀer in their output layers, we clearly have
+width(β) = width(eβ) ∼dvNd,
+depth(β) = depth(eβ) = depth(N).
+Since {ek}k∈KN has the same span as {ei⟨k,x⟩}k∈KN , it follows form (106), that
+N(a)(x) =
+X
+k∈KN
+βk(a)ek(x),
+∀x ∈Td.
+To prove the claim, it thus suﬃces to observe that there exists a neural network
+τ : Rd →RKN ,
+x 7→{τk(x)}k∈KN ,
+such that the DeepOnet deﬁned by (β, τ) satisﬁes
+sup
+∥a∥L∞≤B
+sup
+x∈Td
+
+N(a)(x) −
+X
+k∈KN
+βk(a)τk(x)
+
+=
+sup
+∥a∥L∞≤B
+sup
+x∈Td
+
+X
+k∈KN
+βk(a) [ek(x) −τk(x)]
+
+≤(2N + 1)d
+ 
+sup
+∥a∥L∞≤B
+max
+k∈KN |βk(a)|
+!
+sup
+x∈Td max
+k∈KN |ek(x) −τk(x)|
+≤(2N + 1)d
+ 
+sup
+∥a∥L∞≤B
+∥N(a)∥L2
+!
+sup
+x∈Td max
+k∈KN |ek(x) −τk(x)|
+= B sup
+x∈Td max
+k∈KN |ek(x) −τk(x)| .
+References
+Andrew R. Barron.
+Universal approximation bounds for superpositions of a sigmoidal
+function. IEEE Trans. Inform. Theory., 39(3):930–945, 1993.
+Kaushik Bhattacharya, Bamdad Hosseini, Nikola B. Kovachki, and Andrew M. Stu-
+art.
+Model reduction and neural networks for parametric PDEs.
+The SMAI jour-
+nal of computational mathematics, 7:121–157, 2021.
+doi: 10.5802/smai-jcm.74.
+URL
+https://smai-jcm.centre-mersenne.org/articles/10.5802/smai-jcm.74/.
+John P. Boyd. Fourier embedded domain methods: Extending a function deﬁned on an
+irregular region to a rectangle so that the extension is spatially periodic and C inﬁnity.
+Appl. Math. Comput., 161(2):591–597, 2005.
+Haim Brezis and Petru Mironescu. Composition in fractional Sobolev spaces. Discrete &
+Continuous Dynamical Systems-A, 7(2):241, 2001.
+73
+
+PDF PAGE 74
+Kovachki, Lanthaler and Mishra
+Oscar P. Bruno and Mark Lyon.
+High-order unconditionally stable FC-AD solvers for
+general smooth domains I. Basic elements. Journal of Computational Physics, 229(6):
+2009–2033, 2010.
+Shengze Cai, Zhicheng Wang, Lu Lu, Tamer A Zaki, and George Em Karniadakis.
+DeepM&Mnet: Inferring the electroconvection multiphysics ﬁelds based on operator ap-
+proximation by neural networks. Journal of Computational Physics, 436:110296, 2021.
+Claudio Canuto, M YousuﬀHussaini, Alﬁo Quarteroni, and Thomas A Zang.
+Spectral
+methods: fundamentals in single domains. Springer Science & Business Media, 2007.
+Tianping Chen and Hong Chen. Universal approximation to nonlinear operators by neural
+networks with arbitrary activation functions and its application to dynamical systems.
+IEEE Transactions on Neural Networks, 6(4):911–917, 1995.
+George Cybenko. Approximations by superpositions of sigmoidal functions. Approximation
+theory and its applications, 9(3):17–28, 1989.
+Tim De Ryck, Samuel Lanthaler, and Siddhartha Mishra. On the approximation of functions
+by tanh neural networks. Neural Networks, 143:732–750, 2021. ISSN 0893-6080. doi:
+https://doi.org/10.1016/j.neunet.2021.08.015. URL https://www.sciencedirect.com/
+science/article/pii/S0893608021003208.
+Weinan E, Jiequn Han, and Arnulf Jentzen. Deep learning-based numerical methods for
+high-dimensional parabolic partial diﬀerential equations and backward stochastic diﬀer-
+ential equations. Communications in Mathematics and Statistics, 5(4):349–380, 2017.
+Ian Goodfellow, Yoshua Bengio, and Aaron Courville. Deep learning. MIT press, 2016.
+David Gottlieb and Steven A Orszag. Numerical analysis of spectral methods: theory and
+applications, volume 26. Siam, 1977.
+Kurt Hornik, Maxwell Stinchcombe, and Halbert White. Multilayer feedforward networks
+are universal approximators. Neural networks, 2(5):359–366, 1989.
+Gitta Kutyniok, Philipp Petersen, Mones Raslan, and Reinhold Schneider. A theoretical
+analysis of deep neural networks and parametric PDEs. Constructive Approximation,
+pages 1–53, 2021.
+Samuel Lanthaler, Siddhartha Mishra, and George Em Karniadakis. Error estimates for
+DeepOnets: A deep learning framework in inﬁnite dimensions, 2021.
+URL https://
+arxiv.org/abs/2102.09618. Preprint, available from arXiv:2102.09618.
+Yann LeCun, Yoshua Bengio, and Geoﬀrey Hinton.
+Deep learning.
+Nature, 521(7553):
+436–444, 2015.
+Zongyi Li, Nikola B Kovachki, Kamyar Azizzadenesheli, Burigede Liu, Kaushik Bhat-
+tacharya, Andrew M Stuart, and Anima Anandkumar. Neural operator: Graph kernel
+network for partial diﬀerential equations. CoRR, abs/2003.03485, 2020a.
+74
+
+PDF PAGE 75
+Fourier Neural Operators
+Zongyi Li, Nikola B Kovachki, Kamyar Azizzadenesheli, Burigede Liu, Andrew M Stu-
+art, Kaushik Bhattacharya, and Anima Anandkumar. Multipole graph neural operator
+for parametric partial diﬀerential equations. In H. Larochelle, M. Ranzato, R. Hadsell,
+M. F. Balcan, and H. Lin, editors, Advances in Neural Information Processing Systems
+(NeurIPS), volume 33, pages 6755–6766. Curran Associates, Inc., 2020b.
+Zongyi Li, Nikola Borislavov Kovachki, Kamyar Azizzadenesheli, Burigede Liu, Kaushik
+Bhattacharya, Andrew Stuart, and Anima Anandkumar.
+Fourier neural operator for
+parametric partial diﬀerential equations. In International Conference on Learning Rep-
+resentations, 2021. URL https://openreview.net/forum?id=c8P9NQVtmnO.
+Chensen Lin, Zhen Li, Lu Lu, Shengze Cai, Martin Maxey, and George Em Karniadakis.
+Operator learning for predicting multiscale bubble growth dynamics.
+The Journal of
+Chemical Physics, 154(10):104118, 2021.
+Lu Lu, Pengzhan Jin, Guofei Pang, and George Em Karniadakis. Learning nonlinear op-
+erators via DeepONet based on the universal approximation theorem of operators. Nat
+Mach Intell, 3:218–229, 2021.
+Kjetil O Lye, Siddhartha Mishra, and Deep Ray. Deep learning observables in computational
+ﬂuid dynamics. Journal of Computational Physics, page 109339, 2020.
+Kjetil O Lye, Siddhartha Mishra, Deep Ray, and Praveen Chandrashekar. Iterative sur-
+rogate model optimization (ismo): An active learning algorithm for pde constrained op-
+timization with deep neural networks.
+Computer Methods in Applied Mechanics and
+Engineering, 374:113575, 2021.
+Mark Lyon and Oscar P. Bruno.
+High-order unconditionally stable FC-AD solvers for
+general smooth domains II. Elliptic, parabolic and hyperbolic PDEs; theoretical consid-
+erations. Journal of Computational Physics, 229(9):3358–3381, 2010.
+Andrew J. Majda and Andrea L. Bertozzi.
+Vorticity and Incompressible Flow.
+Cam-
+bridge Texts in Applied Mathematics. Cambridge University Press, 2001. doi: 10.1017/
+CBO9780511613203.
+Zhiping Mao, Lu Lu, Olaf Marxen, Tamer A Zaki, and George Em Karniadakis.
+Deepm&mnet for hypersonics:
+Predicting the coupled ﬂow and ﬁnite-rate chemistry
+behind a normal shock using neural-network approximation of operators.
+Journal of
+Computational Physics, 447:110698, 2021.
+S. Mishra and R. Molinaro. Estimates on the generalization error of physics informed neural
+networks (PINNs) for approximating PDEs. Preprint, available from arXiv:2006:16144v1,
+2020a.
+S. Mishra and R. Molinaro. Estimates on the generalization error of physics informed neural
+networks (PINNs) for approximating PDEs II: A class of inverse problems. Preprint,
+available from arXiv:2007:01138v1, 2020b.
+75
+
+PDF PAGE 76
+Kovachki, Lanthaler and Mishra
+M. Raissi, P. Perdikaris, and G. E. Karniadakis. Physics-informed neural networks: A deep
+learning framework for solving forward and inverse problems involving nonlinear partial
+diﬀerential equations. Journal of Computational Physics, 378:686–707, 2019.
+Maziar Raissi and George Em Karniadakis. Hidden physics models: Machine learning of
+nonlinear partial diﬀerential equations. Journal of Computational Physics, 357:125–141,
+2018.
+Luke G. Rogers. Degree-independent Sobolev extension on locally uniform domains. Journal
+of Functional Analysis, 235(2):619–665, 2006.
+Christoph Schwab and Jakob Zech. Deep learning in high dimension: Neural network expres-
+sion rates for generalized polynomial chaos expansions in UQ. Analysis and Applications,
+17(01):19–55, 2019.
+Elias M. Stein. Singular Integrals and Diﬀerentiability Properties of Functions. Princeton
+University Press, 1970.
+Dmitry Yarotsky.
+Error bounds for approximations with deep ReLU networks.
+Neural
+Networks, 94:103–114, 2017.
+76

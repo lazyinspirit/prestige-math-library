@@ -4,7 +4,7 @@
   "batch": "49",
   "scope": [
     "lem-ip-tweedie-mmse-jacobian-and-prox-potential",
-    "def-ip-pnp-ista-with-denoiser",
+    "alg-ip-pnp-ista-with-denoiser",
     "thm-ip-exact-mmse-pnp-ista-stationarity",
     "rem-ip-arbitrary-denoiser-has-no-inherited-objective",
     "ex-ip-scalar-mmse-exact-denoiser",
@@ -435,7 +435,7 @@
         "notes": "Read all ten proof steps and F1-F19 supplier statements. Positive Gaussian level sets normalize a Borel probability; weighted polynomial bounds give moments even for a heavy-tailed prior, and simple approximation/MCT give the density integration identity. Every coordinate-word derivative has a compact-uniform integrable bound. Replaced the unlicensed oblique-line MVT by differentiable coordinate restrictions on a compact box, proving continuity without assuming total differentiability. Posterior risk expansion and quotient differentiation give covariance/Tweedie identities; strictly positive density transfers null sets, and non-hyperplane support gives SPD. MVT gives injectivity; choice-free IFT patches the unique inverse on the open image. The radial derivative t v^T JD v proves a unique global minimum, with infinite objective off the image. No convexity, coercivity, finite prior moment or arbitrary choice is assumed. Reader measure/norm fact-use changes retained; refuter finding confirmed nonfatal and repaired. Statements unchanged."
       }
     },
-    "def-ip-pnp-ista-with-denoiser": {
+    "alg-ip-pnp-ista-with-denoiser": {
       "citations": [],
       "derivations": [],
       "routine_steps": [],
@@ -543,9 +543,9 @@
         },
         {
           "fact": "F2",
-          "source": "def-ip-pnp-ista-with-denoiser",
+          "source": "alg-ip-pnp-ista-with-denoiser",
           "source_section": "Definition",
-          "quote": "Let $n\\ge1$, $\\sigma,\\gamma>0$, let $g:\\mathbb R^n\\to\\mathbb R$ be continuously differentiable, let $\\widetilde D_\\sigma:\\mathbb R^n\\to\\mathbb R^n$ be a deterministic denoiser map, and choose $x_0\\in\\mathbb R^n$. Define\n$$z_t=x_{t-1}-\\gamma\\nabla g(x_{t-1}),\\qquad x_t=\\widetilde D_\\sigma(z_t)\\quad(t=1,2,\\ldots).$$\nThe output is the sequence $(x_t)_{t\\ge0}$. This definition imposes no convexity, proximal representation, exact-MMSE identity, or convergence property on $\\widetilde D_\\sigma$.\n\nThe diagram depicts the data flow for one update; the displayed recurrence, not the diagram, defines the iteration.\n\n~~~tikz\n\\begin{tikzpicture}[x=1.3cm,y=0.9cm,>=stealth]\n  \\node at (0,0) (old) {$x_{t-1}$};\n  \\node at (3,0) (grad) {$z_t=x_{t-1}-\\gamma\\nabla g(x_{t-1})$};\n  \\node at (7,0) (den) {$x_t=\\widetilde D_\\sigma(z_t)$};\n  \\draw[->] (old) -- (grad);\n  \\draw[->] (grad) -- (den);\n\\end{tikzpicture}\n~~~",
+          "quote": "Let $n\\ge1$, $\\sigma,\\gamma>0$, let $g:\\mathbb R^n\\to\\mathbb R$ be continuously differentiable, let $\\widetilde D_\\sigma:\\mathbb R^n\\to\\mathbb R^n$ be a supplied deterministic map used in the denoising step, and choose $x_0\\in\\mathbb R^n$. Define\n$$z_t=x_{t-1}-\\gamma\\nabla g(x_{t-1}),\\qquad x_t=\\widetilde D_\\sigma(z_t)\\quad(t=1,2,\\ldots).$$\nThe output is the sequence $(x_t)_{t\\ge0}$. This definition imposes no convexity, proximal representation, exact-MMSE identity, or convergence property on $\\widetilde D_\\sigma$.\n\nHere “denoiser” names the role of the plug-in map; Borel measurability and training under a signal-corruption law, as in the learned-estimator interface, are not assumed.\n\nThe diagram depicts the data flow for one update; the displayed recurrence, not the diagram, defines the iteration.\n\n~~~tikz\n\\begin{tikzpicture}[x=1.3cm,y=0.9cm,>=stealth]\n  \\node at (0,0) (old) {$x_{t-1}$};\n  \\node at (3,0) (grad) {$z_t=x_{t-1}-\\gamma\\nabla g(x_{t-1})$};\n  \\node at (7,0) (den) {$x_t=\\widetilde D_\\sigma(z_t)$};\n  \\draw[->] (old) -- (grad);\n  \\draw[->] (grad) -- (den);\n\\end{tikzpicture}\n~~~",
           "uses": [
             "2.1"
           ]
@@ -778,9 +778,9 @@
         },
         {
           "fact": "F2",
-          "source": "def-ip-pnp-ista-with-denoiser",
+          "source": "alg-ip-pnp-ista-with-denoiser",
           "source_section": "Definition",
-          "quote": "Let $n\\ge1$, $\\sigma,\\gamma>0$, let $g:\\mathbb R^n\\to\\mathbb R$ be continuously differentiable, let $\\widetilde D_\\sigma:\\mathbb R^n\\to\\mathbb R^n$ be a deterministic denoiser map, and choose $x_0\\in\\mathbb R^n$. Define\n$$z_t=x_{t-1}-\\gamma\\nabla g(x_{t-1}),\\qquad x_t=\\widetilde D_\\sigma(z_t)\\quad(t=1,2,\\ldots).$$\nThe output is the sequence $(x_t)_{t\\ge0}$. This definition imposes no convexity, proximal representation, exact-MMSE identity, or convergence property on $\\widetilde D_\\sigma$.\n\nThe diagram depicts the data flow for one update; the displayed recurrence, not the diagram, defines the iteration.\n\n~~~tikz\n\\begin{tikzpicture}[x=1.3cm,y=0.9cm,>=stealth]\n  \\node at (0,0) (old) {$x_{t-1}$};\n  \\node at (3,0) (grad) {$z_t=x_{t-1}-\\gamma\\nabla g(x_{t-1})$};\n  \\node at (7,0) (den) {$x_t=\\widetilde D_\\sigma(z_t)$};\n  \\draw[->] (old) -- (grad);\n  \\draw[->] (grad) -- (den);\n\\end{tikzpicture}\n~~~",
+          "quote": "Let $n\\ge1$, $\\sigma,\\gamma>0$, let $g:\\mathbb R^n\\to\\mathbb R$ be continuously differentiable, let $\\widetilde D_\\sigma:\\mathbb R^n\\to\\mathbb R^n$ be a supplied deterministic map used in the denoising step, and choose $x_0\\in\\mathbb R^n$. Define\n$$z_t=x_{t-1}-\\gamma\\nabla g(x_{t-1}),\\qquad x_t=\\widetilde D_\\sigma(z_t)\\quad(t=1,2,\\ldots).$$\nThe output is the sequence $(x_t)_{t\\ge0}$. This definition imposes no convexity, proximal representation, exact-MMSE identity, or convergence property on $\\widetilde D_\\sigma$.\n\nHere “denoiser” names the role of the plug-in map; Borel measurability and training under a signal-corruption law, as in the learned-estimator interface, are not assumed.\n\nThe diagram depicts the data flow for one update; the displayed recurrence, not the diagram, defines the iteration.\n\n~~~tikz\n\\begin{tikzpicture}[x=1.3cm,y=0.9cm,>=stealth]\n  \\node at (0,0) (old) {$x_{t-1}$};\n  \\node at (3,0) (grad) {$z_t=x_{t-1}-\\gamma\\nabla g(x_{t-1})$};\n  \\node at (7,0) (den) {$x_t=\\widetilde D_\\sigma(z_t)$};\n  \\draw[->] (old) -- (grad);\n  \\draw[->] (grad) -- (den);\n\\end{tikzpicture}\n~~~",
           "uses": [
             "2.1"
           ]
@@ -1097,9 +1097,9 @@
         },
         {
           "fact": "F3",
-          "source": "def-ip-pnp-ista-with-denoiser",
+          "source": "alg-ip-pnp-ista-with-denoiser",
           "source_section": "Definition",
-          "quote": "Let $n\\ge1$, $\\sigma,\\gamma>0$, let $g:\\mathbb R^n\\to\\mathbb R$ be continuously differentiable, let $\\widetilde D_\\sigma:\\mathbb R^n\\to\\mathbb R^n$ be a deterministic denoiser map, and choose $x_0\\in\\mathbb R^n$. Define\n$$z_t=x_{t-1}-\\gamma\\nabla g(x_{t-1}),\\qquad x_t=\\widetilde D_\\sigma(z_t)\\quad(t=1,2,\\ldots).$$\nThe output is the sequence $(x_t)_{t\\ge0}$. This definition imposes no convexity, proximal representation, exact-MMSE identity, or convergence property on $\\widetilde D_\\sigma$.\n\nThe diagram depicts the data flow for one update; the displayed recurrence, not the diagram, defines the iteration.\n\n~~~tikz\n\\begin{tikzpicture}[x=1.3cm,y=0.9cm,>=stealth]\n  \\node at (0,0) (old) {$x_{t-1}$};\n  \\node at (3,0) (grad) {$z_t=x_{t-1}-\\gamma\\nabla g(x_{t-1})$};\n  \\node at (7,0) (den) {$x_t=\\widetilde D_\\sigma(z_t)$};\n  \\draw[->] (old) -- (grad);\n  \\draw[->] (grad) -- (den);\n\\end{tikzpicture}\n~~~",
+          "quote": "Let $n\\ge1$, $\\sigma,\\gamma>0$, let $g:\\mathbb R^n\\to\\mathbb R$ be continuously differentiable, let $\\widetilde D_\\sigma:\\mathbb R^n\\to\\mathbb R^n$ be a supplied deterministic map used in the denoising step, and choose $x_0\\in\\mathbb R^n$. Define\n$$z_t=x_{t-1}-\\gamma\\nabla g(x_{t-1}),\\qquad x_t=\\widetilde D_\\sigma(z_t)\\quad(t=1,2,\\ldots).$$\nThe output is the sequence $(x_t)_{t\\ge0}$. This definition imposes no convexity, proximal representation, exact-MMSE identity, or convergence property on $\\widetilde D_\\sigma$.\n\nHere “denoiser” names the role of the plug-in map; Borel measurability and training under a signal-corruption law, as in the learned-estimator interface, are not assumed.\n\nThe diagram depicts the data flow for one update; the displayed recurrence, not the diagram, defines the iteration.\n\n~~~tikz\n\\begin{tikzpicture}[x=1.3cm,y=0.9cm,>=stealth]\n  \\node at (0,0) (old) {$x_{t-1}$};\n  \\node at (3,0) (grad) {$z_t=x_{t-1}-\\gamma\\nabla g(x_{t-1})$};\n  \\node at (7,0) (den) {$x_t=\\widetilde D_\\sigma(z_t)$};\n  \\draw[->] (old) -- (grad);\n  \\draw[->] (grad) -- (den);\n\\end{tikzpicture}\n~~~",
           "uses": [
             "1.1"
           ]
@@ -1107,7 +1107,7 @@
       ],
       "derivations": [
         {
-          "id": "step-1.1",
+          "id": "step-1-1",
           "claim": "Since $\\nabla g(x)=x-\\varepsilon$, [F3] gives $z_1=\\varepsilon/2$, $x_1=\\varepsilon^2/4$, and $z_2=x_1-\\frac12(x_1-\\varepsilon)=\\varepsilon^2/8+\\varepsilon/2=(\\varepsilon+2)^2/8-1/2$. Thus $z_2\\ge-1/2$ almost surely.",
           "step": "1.1",
           "inputs": [
@@ -1117,7 +1117,7 @@
           ]
         },
         {
-          "id": "step-2.1",
+          "id": "step-2-1",
           "claim": "The event $-1/2<\\varepsilon<1/2$ has positive probability by [A1, F1] and gives $-7/32<z_2<9/32$. The event $-5/2<\\varepsilon<-3/2$ also has positive probability and gives $-1/2\\le z_2<-15/32$. These disjoint output intervals show that $z_2$ is not almost surely constant.",
           "step": "2.1",
           "inputs": [
@@ -1129,7 +1129,7 @@
           ]
         },
         {
-          "id": "step-3.1",
+          "id": "step-3-1",
           "claim": "A nondegenerate Gaussian law has positive probability below $-1/2$ by [A1, F2], whereas $z_2$ has none by step 1.1; a degenerate Gaussian is a point mass, whereas step 2.1 shows $z_2$ is not. Therefore $z_2$ is not Gaussian and the universal iterative-AWGN claim is false.",
           "step": "3.1",
           "inputs": [
@@ -1422,7 +1422,7 @@
       "disposition": "The local Dσ is explicitly qualified as the analytic posterior-mean plug-in map; it is proved smooth (hence Borel), and no fitting or training guarantee is claimed.",
       "affected_claims": [
         "lem-ip-tweedie-mmse-jacobian-and-prox-potential",
-        "def-ip-pnp-ista-with-denoiser",
+        "alg-ip-pnp-ista-with-denoiser",
         "thm-ip-exact-mmse-pnp-ista-stationarity",
         "rem-ip-arbitrary-denoiser-has-no-inherited-objective",
         "ex-ip-scalar-mmse-exact-denoiser",

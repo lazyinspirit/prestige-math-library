@@ -1,4 +1,9 @@
 ---
+verification:
+  judge:
+    model: "gpt-6-luna"
+    verdict: pass
+    date: 2026-10-22
 id: ex-knot-kt-26-worked-cases
 kind: example
 title: E8 as the lattice input to a conditional sliceness obstruction

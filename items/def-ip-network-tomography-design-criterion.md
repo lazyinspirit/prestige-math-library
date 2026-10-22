@@ -17,10 +17,10 @@ sources:
   references:
     - title: "B. Xi, G. Michailidis, and V. N. Nair, Estimating Network Loss Rates Using Active Tomography, Journal of the American Statistical Association 101 (2006), 1430–1448"
       url: "https://www.stat.purdue.edu/~xbw/research/xi_tomo_jasa1206.pdf"
-      locator: "§3.2, Proposition 1, PDF p. 4 (printed p. 1434)"
+      locator: "§3.2, Proposition 1, PDF p. 5 (printed p. 1434)"
     - title: "E. Lawrence, G. Michailidis, and V. N. Nair, Statistical Inverse Problems in Active Network Tomography, IMS Lecture Notes–Monograph Series 54 (2007), 24–44"
       url: "https://arxiv.org/pdf/0708.1079"
-      locator: "§3.1, PDF pp. 4–5 (printed pp. 28–29)"
+      locator: "§3.1, PDF pp. 5–6 (printed pp. 28–29)"
 ---
 
 ## Definition

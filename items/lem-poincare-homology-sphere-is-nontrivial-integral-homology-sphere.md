@@ -31,6 +31,10 @@ sources:
       locator: "§§1–2, pp.1–2; the binary icosahedral subgroup of the unit quaternions, its order and presentation, its free left action, and the quotient covering"
 verification:
   precheck: pass
+  judge:
+    model: "gpt-6-luna"
+    verdict: pass
+    date: 2026-10-22
 ---
 
 ## Statement

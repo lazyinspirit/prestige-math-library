@@ -11,6 +11,8 @@ deps:
   - def-ip-misfit-evidence-and-posterior-law
   - def-ip-prior-on-a-forward-domain
   - def-banach-space
+  - lem-complex-norm-realification-is-a-real-norm
+  - def-banach-gaussian-covariance-operator-and-rkhs
   - def-borel-probability-law-on-a-polish-space
   - def-separable-space
   - thm-finite-and-countable-subadditivity-of-measures
@@ -35,7 +37,7 @@ axiom_use: "The global strong-mode definition is choice-free; AC is assumed only
 
 Let $B$ be a separable Banach space with norm $\|\cdot\|_B$, and let $\Pi$ be a Borel probability measure on $B$. For $z\in B$ and $r>0$, write $\overline B_B(z,r)=\{u\in B:\|u-z\|_B\le r\}$ and $m_r(z)=\Pi(\overline B_B(z,r))$. A **strong small-ball MAP** is a point $z\in B$ for which
 $$ \frac{m_r(z)}{\sup_{x\in B}m_r(x)}\longrightarrow1\qquad(r\downarrow0). $$
-Assume AC for the covariance-induced Cameron–Martin notation. If $\Pi$ is a posterior law formed by weighting a centered Gaussian prior $\Pi_0$ on $B$, let $C\ell=\int_B\ell(u)u\,\Pi_0(du)$ be its covariance operator and let $E$ be the completion of $B^*/\ker C$ with inner product $\langle[\ell],[m]\rangle_E=m(C\ell)$; the canonical injection $i:E\to B$ extends $[\ell]\mapsto C\ell$. A **Cameron–Martin ratio mode** is a point $ih\in iE$ such that, for every $k\in E$, the denominator is positive for all sufficiently small $r$ and
+Assume AC for the covariance-induced Cameron–Martin notation. In this Gaussian branch, regard $B$ as a real Banach space, restricting scalars if $B$ is complex; $B^*$ denotes its continuous real dual, and Gaussianity is tested against these real functionals. The norm, Borel sets, and balls are unchanged by this restriction. If $\Pi$ is a posterior law formed by weighting a centered Borel Gaussian prior $\Pi_0$ on $B$, let $C\ell=\int_B\ell(u)u\,\Pi_0(du)$ be its covariance operator and let $E$ be the completion of $B^*/\ker C$ with inner product $\langle[\ell],[m]\rangle_E=m(C\ell)$; the canonical injection $i:E\to B$ extends $[\ell]\mapsto C\ell$. A **Cameron–Martin ratio mode** is a point $ih\in iE$ such that, for every $k\in E$, the denominator is positive for all sufficiently small $r$ and
 $$ \lim_{r\downarrow0}\frac{m_r(ih)}{m_r(ik)} $$
 exists and is at least $1$. This pairwise comparison over fixed Cameron–Martin centers does not assert the global strong small-ball MAP condition.
 
@@ -58,3 +60,5 @@ For every $r>0$, $\sup_{x\in B}m_r(x)>0$: a countable dense subset gives a count
 [[def-borel-probability-law-on-a-polish-space|a Borel probability is a probability measure on the Borel sigma-algebra]]
 
 [[def-banach-space|a Banach space is complete in its norm metric]]
+
+[[lem-complex-norm-realification-is-a-real-norm|restriction to real scalars preserves the norm and metric of a complex Banach space]]

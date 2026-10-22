@@ -19,6 +19,11 @@ axiom_use: The representation, local-system, and peripheral conventions inherit 
 provenance:
   statement: ai-altered
   proof: not-applicable
+verification:
+  judge:
+    model: "gpt-6-luna"
+    verdict: pass
+    date: 2026-10-22
 sources:
   references:
     - title: Léo Bénard, François Florens, and Adrien Rodau, A slope invariant and the A-polynomial of knots, §3.1

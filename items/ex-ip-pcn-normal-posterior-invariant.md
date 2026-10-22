@@ -33,7 +33,7 @@ sources:
 
 ## Example
 
-Let $H=\mathbb R$, give the unknown parameter $u$ the prior law
+Assume the Axiom of Choice. Let $H=\mathbb R$, give the unknown parameter $u$ the prior law
 $\mu_0=N(0,1)$, and observe one datum $Y=0$ from the model
 $Y\mid u\sim N(u,1)$. The Gaussian conjugate update gives posterior
 $\mu=N(0,1/2)$. Use the potential $\Phi(u)=u^2/2$ in the pCN algorithm. For
@@ -54,7 +54,7 @@ $\beta\in[0,1]$.
 
 ## Facts & Assumptions
 
-**Given:** The one-observation normal model and pCN rule in the Example.
+**Given:** The Axiom of Choice, the one-observation normal model and pCN rule in the Example.
 
 [F1] For prior $N(\mu_0,\tau_0^2)$ and one observation from $N(u,\sigma^2)$, the posterior mean is $(\tau_0^{-2}+\sigma^{-2})^{-1}(\mu_0/\tau_0^2+y/\sigma^2)$ and the posterior variance is $(\tau_0^{-2}+\sigma^{-2})^{-1}$; evidence is finite and positive. [[thm-normal-normal-conjugate-update]]
 
@@ -66,7 +66,7 @@ $\beta\in[0,1]$.
 
 ## Proof
 
-**Given:** The model has prior $N(0,1)$, observation variance $1$, datum $y=0$, and potential $\Phi(u)=u^2/2$.
+**Given:** The Axiom of Choice, prior $N(0,1)$, observation variance $1$, datum $y=0$, and potential $\Phi(u)=u^2/2$.
 
 1.1 Apply [F1] with $\mu_0=0$, $\tau_0^2=1$, $\sigma^2=1$, $n=1$, and $y=0$. The posterior variance is $(1+1)^{-1}=1/2$, and its mean is $(1+1)^{-1}(0+0)=0$. The evidence is finite and positive, so the posterior is the proper law $N(0,1/2)$. [F1, given, algebra]
 
@@ -75,4 +75,3 @@ $\beta\in[0,1]$.
 3.1 For the proposal in [F3], $$\Phi(u)-\Phi(v)=\frac{u^2-v^2}{2},$$ so the stated acceptance probability is precisely the algorithm's pCN acceptance rule for this target. [F3, step 2.1, given, algebra]
 
 4.1 Step 1.1 identifies the normalized target, and step 3.1 identifies the kernel as the pCN accept-reject kernel for that target. Applying [F4] proves that $N(0,1/2)$ is invariant for every $\beta\in[0,1]$. [F4, step 1.1, step 3.1, given] ∎
-

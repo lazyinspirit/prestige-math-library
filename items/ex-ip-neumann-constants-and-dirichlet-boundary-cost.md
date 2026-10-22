@@ -20,6 +20,11 @@ provenance:
   proof: ai-altered
 generation:
   role: example
+verification:
+  judge:
+    model: "gpt-6-luna"
+    verdict: pass
+    date: 2026-10-22
 sources:
   references:
     - title: "José A. Iglesias, Gwenael Mercier, and Otmar Scherzer, A note on convergence of total variation regularized linear inverse problems, Inverse Problems 34 (2018), 055011"

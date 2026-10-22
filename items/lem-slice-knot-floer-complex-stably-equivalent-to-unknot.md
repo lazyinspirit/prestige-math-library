@@ -36,7 +36,7 @@ sources:
 
 ## Statement
 
-Let $K\subset S^3$ be a smooth oriented knot smoothly concordant to the unknot. Then there are finite-rank free $\mathbb F_2[U,U^{-1}]$ bifiltered chain complexes $A$ and $B$, each having zero total homology, such that
+Assume the Axiom of Countable Choice. Let $K\subset S^3$ be a smooth oriented knot smoothly concordant to the unknot. Then there are finite-rank free $\mathbb F_2[U,U^{-1}]$ bifiltered chain complexes $A$ and $B$, each having zero total homology, such that
 $$ \mathrm{CFK}^{\infty}(K)\oplus A\simeq \Lambda\oplus B, $$
 where $\Lambda=\mathbb F_2[U,U^{-1}]$ is the normalized unknot complex with zero differential and generator in Maslov grading and both filtration coordinates zero, and $\simeq$ is a Maslov-graded filtered chain homotopy equivalence whose maps and homotopies do not increase either filtration. The acyclic summands are acyclic only after the filtrations are forgotten; no acyclicity of their associated-graded complexes is asserted.
 

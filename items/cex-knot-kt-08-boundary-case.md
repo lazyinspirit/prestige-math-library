@@ -14,6 +14,11 @@ provenance:
   proof: ai-generated
 generation:
   role: counterexample
+verification:
+  judge:
+    model: "gpt-6-luna"
+    verdict: pass
+    date: 2026-10-22
 sources:
   references:
     - title: "Józef H. Przytycki, 3-coloring and other elementary invariants of knots, §2, arXiv:math/0608172, pp. 10–11"

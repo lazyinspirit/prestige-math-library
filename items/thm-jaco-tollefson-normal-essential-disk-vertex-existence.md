@@ -18,6 +18,9 @@ provenance:
   proof: ai-generated
 sources:
   references:
+    - title: Allen Hatcher, Notes on Basic 3-Manifold Topology
+      url: https://pi.math.cornell.edu/~hatcher/3M/3Mfds.pdf
+      locator: "External input: the PL Loop Theorem, Theorem 3.1, §3.1, printed pp.56–59; complete tower and disk-surgery argument consulted, including the nonorientable case. No local proof of this additional input is claimed."
     - title: Joel Hass, Jeffrey C. Lagarias, and Nicholas Pippenger, The Computational
         Complexity of Knot and Link Problems, Journal of the ACM 46 (1999)
       url: https://www.math.ucdavis.edu/~hass/Research/Papers/Complexity/hlp.pdf
@@ -60,8 +63,10 @@ Let $M$ be a compact triangulated piecewise-linear $3$-manifold with nonempty bo
 
 [F2] A least-weight essential normal disk with lexicographically least vector has primitive vector on an extreme ray of the original full Haken cone. Its proof handles both original two-copy summand alternatives and all proper exchanges without irreducibility, orientability, sphere-separation or projective-plane hypotheses. [[thm-least-weight-lexicographic-essential-normal-disks-are-vertex-disks]]
 
+[F3] **External input (PL Loop Theorem).** For a triangulated PL three-manifold, not necessarily orientable, a continuous map $(D^2,\partial D^2)\to(M,\partial M)$ with essential boundary implies existence of a proper PL embedded disk with essential boundary. This is the PL form of [Hatcher, Theorem 3.1 and its finite tower/surgery proof, pp.56–59](https://pi.math.cornell.edu/~hatcher/3M/3Mfds.pdf); no relative approximation of a wild embedded disk is asserted.
+
 ## Proof
 
-1.1 Normalize the supplied essential disk by [F1]. Choose the least positive edge weight among essential normal disks and then minimize the finitely many coordinates successively at that weight. This uses only natural-number minima, not a choice principle. [given, F1, construct]
+1.1 Regard the supplied disk inclusion as a continuous map of pairs and apply [F3]. This supplies an essential proper PL disk, without asserting that it is the original disk. Normalize that disk by [F1]. Choose the least positive edge weight among essential normal disks and then minimize the finitely many coordinates successively at that weight. This uses only natural-number minima, not a choice principle. [given, F1, F3, construct]
 
 2.1 The selected disk satisfies [F2]. It is essential and normal in the same original triangulation, and its normal vector is primitive and lies on an extreme ray of the Haken cone. These are exactly the required conclusions for arbitrary compact PL input. [given, F2, step 1.1, construct] ∎

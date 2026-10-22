@@ -40,9 +40,9 @@ $$v_3=3\Lambda(\pi/3) =\frac{3\sqrt3}{4}\sum_{k=0}^{\infty} \left(\frac1{(3k+1)^
 
 **Given:** A regular positively oriented ideal tetrahedron in $\mathbb H^3$.
 
-[F1] [[def-ideal-tetrahedron-shape-and-cusp-holonomy]] specifies the upper half-space model; a normalized tetrahedron with vertices $0,1,\infty,\omega$, $\omega=e^{i\pi/3}$, is regular.
+[F1] [[def-ideal-tetrahedron-shape-and-cusp-holonomy]] specifies the upper half-space model and normalized vertices $0,1,\infty,z$ with $\operatorname{Im}z>0$.
 
-[F2] [[lem-ideal-tetrahedron-shape-parameter-relations]] proves that this tetrahedron has all dihedral angles $\pi/3$.
+[F2] [[lem-ideal-tetrahedron-shape-parameter-relations]] proves that the parameter arguments are the dihedral angles and that $z=\omega=e^{i\pi/3}$ gives all six angles $\pi/3$, hence a regular tetrahedron.
 
 [F3] [[lem-ideal-orthoscheme-volume]] gives $\operatorname{Vol}(\mathcal O_\zeta)=\frac12\Lambda(\zeta)$ for the explicit region $\mathcal O_\zeta$ in upper half-space.
 

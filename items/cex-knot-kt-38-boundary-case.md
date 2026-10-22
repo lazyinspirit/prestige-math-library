@@ -16,7 +16,7 @@ dependency_level: 13
 justified_by: []
 aliases: []
 proof_strategy: direct
-axiom_use: AC_omega is inherited from the s and tau definitions; the numerical contradiction is finite arithmetic.
+axiom_use: AC_omega is inherited from the diagram-independent s definition and the joint Whitehead-value computation; the finite tau threshold definition and numerical contradiction use no choice axiom.
 provenance:
   statement: literature-derived
   proof: ai-altered
@@ -52,7 +52,7 @@ Assume the Axiom of Countable Choice. The universal identity $s(K)=2\tau(K)$ for
 
 [F1] The worked example proves the values $s(D_+(T_{2,3},2))=2$ and $\tau(D_+(T_{2,3},2))=0$ in the Hedden–Ording twist convention ([[ex-knot-kt-38-worked-cases]], [[lem-knot-kt41-whitehead-double-values]]).
 
-[A1] $\mathrm{AC}_\omega$ is the axiom branch inherited from the knot-invariant definitions and the worked example ([[def-countable-choice]]).
+[A1] $\mathrm{AC}_\omega$ is inherited from the diagram-independent $s$ definition and the joint Whitehead-value computation; the finite filtered threshold defining $\tau$ introduces no choice assumption ([[def-countable-choice]], [[def-rasmussen-s-invariant]], [[lem-knot-kt41-whitehead-double-values]]).
 
 [L1] The joint numerical lemma proves both the exact Lee value and the normalized full filtered knot Floer threshold for this actual Whitehead double. [[lem-knot-kt41-whitehead-double-values]]
 

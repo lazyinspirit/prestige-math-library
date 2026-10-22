@@ -1,0 +1,1225 @@
+[
+  {
+    "order": 3116,
+    "id": "connected-sums-and-prime-decomposition",
+    "kind": "A",
+    "category": "knot-theory",
+    "title": "Connected sums and prime decomposition",
+    "companion": "connected-sums-and-prime-decomposition-examples",
+    "requires": [
+      "knot-exteriors-and-peripheral-systems",
+      "seifert-surfaces-and-knot-genus",
+      "vanishing-cycles-novikov-and-taut-foliations",
+      "isotopy-extension-and-embedding-theory-beyond-whitney"
+    ],
+    "items": [
+      {
+        "id": "def-knot-connected-sum-and-prime-knot",
+        "kind": "definition",
+        "dependency_level": 0,
+        "deps": [
+          "def-oriented-link-in-s-three-and-ambient-isotopy"
+        ],
+        "title": "Oriented connected sum and prime knot",
+        "proof_strategy": "not-applicable",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "not-applicable"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Burde and Zieschang, Knots, 2nd revised and extended edition",
+              "url": "https://www.maths.ed.ac.uk/~v1ranick/papers/burdzies.pdf",
+              "locator": "Chapter 7, §§7.1–7.3, printed pp.91–93"
+            },
+            {
+              "title": "Stefan Friedl, Introduction to Knots and Links, 2024 lecture notes",
+              "url": "https://friedl.app.uni-regensburg.de/papers/2024_knot-theory-final.pdf",
+              "locator": "Proposition 2.14, printed pp.24–25"
+            }
+          ]
+        },
+        "statement": "Fix a coordinate orientation-reversing reflection $r:S^3\\to S^3$ for the mirror convention. Let $K$ and $J$ be smooth oriented knots in the standard oriented three-sphere. A connected-sum datum consists of one smoothly embedded closed three-ball around a short subarc of $K$ and one around a short subarc of $J$, each meeting its knot in a single trivial properly embedded arc, together with the fixed standard orientation-reversing boundary identification of the two standard oriented ball boundaries that joins the oriented arcs into one circle. Choose this standard map once in the standard two-ball model so that it commutes with $r$ and an orientation-preserving half-turn interchanging the two balls preserves the joining convention. Here a trivial arc is an embedded interval in a ball that is carried by an orientation-preserving diffeomorphism of ball-arc pairs to a straight diameter. Remove the interiors of the two balls and glue the remaining boundary spheres using this fixed identification; the resulting oriented knot in the standard oriented three-sphere is a connected sum of $K$ and $J$, denoted $K\\#J$ for the specified datum.\n\nThe **standard unknot** is the oriented unit circle in a fixed coordinate two-plane of $S^3\\subset\\mathbb R^4$. A knot is **nontrivial** if it is not ambient isotopic through orientation-preserving diffeomorphisms of $S^3$ to the standard unknot. A nontrivial knot is **prime** if it has no connected-sum presentation whose two summand knots are both nontrivial."
+      },
+      {
+        "id": "lem-relative-transversality-for-embedded-surfaces",
+        "kind": "lemma",
+        "dependency_level": 0,
+        "deps": [
+          "def-countable-choice",
+          "lem-a-tubular-target-produces-a-submersive-finite-dimensional-perturbation-family",
+          "thm-parametric-transversality",
+          "thm-collar-neighborhood-theorem",
+          "thm-isotopy-extension",
+          "thm-euclidean-inverse-function-theorem",
+          "def-a-smooth-map-transverse-to-an-embedded-submanifold",
+          "thm-every-smooth-manifold-admits-a-riemannian-metric"
+        ],
+        "title": "Relative transversality for an embedded surface with fixed boundary",
+        "proof_strategy": "direct",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Marco Gualtieri, Topology I: Smooth Manifolds, Part 10 and cumulative notes",
+              "url": "https://www.math.toronto.edu/mgualt/courses/17-1300/docs/17-1300-notes.pdf",
+              "locator": "§3.4, Corollaries 3.27–3.28 and Theorem 3.29, printed pp.35–37; the local proof supplies the cutoff and embedding-isotopy details"
+            }
+          ]
+        },
+        "statement": "Assume the Axiom of Countable Choice. Let $F$ be a compact smooth surface with boundary, let $M$ be a smooth three-manifold without boundary, and let $S\\subset M$ be a closed embedded smooth surface. If $i:F\\to M$ is a smooth embedding whose boundary restriction $i|_{\\partial F}$ is transverse to $S$, then there is a smooth isotopy $i_t:F\\to M$ through embeddings, fixed on a neighbourhood of $\\partial F$, such that $i_1(F)$ is transverse to $S$."
+      },
+      {
+        "id": "lem-smooth-ball-windows-and-boundary-disk-absorption",
+        "kind": "lemma",
+        "title": "Smooth ball windows and absorption along a boundary disk",
+        "deps": [
+          "def-countable-choice",
+          "lem-isotopy-extension-for-a-compact-source-with-boundary"
+        ],
+        "proof_strategy": "direct",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Allen Hatcher, Notes on Basic 3-Manifold Topology",
+              "url": "https://pi.math.cornell.edu/~hatcher/3M/3M.pdf",
+              "locator": "Chapter 1, Lemma 1.3 and its proof, printed p.3"
+            }
+          ]
+        },
+        "statement": "Assume countable choice. For $n=2$ or $3$, a smoothly embedded closed $n$-ball in a connected boundaryless smooth $n$-manifold can be carried to a sufficiently small coordinate round ball by a smooth ambient isotopy. Consequently, a smooth closed disk in the boundary of a smooth $3$-ball is a standard disk window: the pair consisting of the ball and that disk is diffeomorphic to a round ball with a hemispherical boundary disk. Attaching a smooth $3$-ball to a smooth manifold along one such disk window does not change the diffeomorphism type, after smoothing the corner. The same conclusion holds in reverse, when a ball meeting the boundary in one disk is removed; the diffeomorphism is supported near the attached or removed ball and its attaching collar.",
+        "dependency_level": 0
+      },
+      {
+        "id": "lem-bounded-euclidean-homeomorphism-has-compactly-supported-local-model",
+        "kind": "lemma",
+        "title": "A bounded Euclidean homeomorphism has a compactly supported local model",
+        "deps": [
+          "def-homeomorphism-and-open-maps",
+          "def-homotopy-relative-and-path-homotopy"
+        ],
+        "proof_strategy": "direct",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "A. J. S. Hamilton, The triangulation of 3-manifolds, Quarterly Journal of Mathematics Oxford (2) 27 (1976), 63–70",
+              "url": "https://www.maths.ed.ac.uk/~v1ranick/papers/hamiltontri.pdf",
+              "locator": "Printed pp.65,67–68: bounded universal-cover homeomorphism, compactification and Alexander isotopy; the present lemma isolates the Euclidean case"
+            }
+          ]
+        },
+        "statement": "Let $n\\ge1$, let $f:\\mathbb R^n\\to\\mathbb R^n$ be a homeomorphism, and suppose there is a finite constant $C\\ge0$ such that $\\lVert f(x)-x\\rVert\\le C$ for every $x$. For every compact subset $K\\subset\\mathbb R^n$, there are an open neighborhood $U$ of $K$, a closed Euclidean ball $B$ centered at the origin, and an ambient isotopy $G_t$ of $\\mathbb R^n$, $0\\le t\\le1$, such that $G_0$ is the identity, every $G_t$ is the identity outside $B$, and $G_1|_U=f|_U$. In particular, if $f$ is piecewise linear on a neighborhood of $K$, the final map is piecewise linear on some neighborhood of $K$. No global piecewise linearity of the isotopy or its final map is asserted.",
+        "dependency_level": 0
+      },
+      {
+        "id": "lem-finite-subpolyhedra-have-compact-pl-manifold-neighborhoods",
+        "kind": "lemma",
+        "title": "Compact manifold neighborhoods of a finite subpolyhedron",
+        "deps": [
+          "lem-finite-convex-cell-complexes-admit-compatible-triangulations",
+          "thm-barycentric-subdivision-realizes-homeomorphically",
+          "lem-mesh-of-iterated-simplicial-barycentric-subdivision-tends-to-zero",
+          "thm-lebesgue-number-lemma"
+        ],
+        "proof_strategy": "direct",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Allen Hatcher, Notes on Basic 3-Manifold Topology",
+              "url": "https://pi.math.cornell.edu/~hatcher/3M/3M.pdf",
+              "locator": "§3.1, proof of Theorem 3.1, printed p.45: compact manifold neighborhoods of the finite image subcomplex in the covering tower"
+            },
+            {
+              "title": "C. P. Rourke and B. J. Sanderson, Introduction to Piecewise-Linear Topology",
+              "url": "https://webhomes.maths.ed.ac.uk/~v1ranick/papers/rsplx.pdf",
+              "locator": "Chapter 3, regular neighborhoods; the proof here gives a barycentric level-set construction directly"
+            }
+          ]
+        },
+        "statement": "Let $M$ be a compact piecewise linear three-manifold, possibly with boundary, equipped with a finite triangulation in which the boundary is a subcomplex and simplex links have the standard sphere or ball forms. Let $P$ be a subcomplex and let $W$ be any relatively open neighborhood of $|P|$ in $M$. There is a compact piecewise linear three-manifold $V\\subset W$, with $|P|\\subset\\operatorname{Int}_M V$, such that $V$ strongly deformation retracts onto $|P|$. It has a finite triangulation extending a subdivision of $P$. Its trace $V\\cap\\partial M$ is a compact piecewise linear subsurface of $\\partial M$, and its remaining frontier is a properly embedded piecewise linear surface; these surfaces meet along their common boundary. The trace may be empty. If $|P|$ is connected, $V$ is connected.",
+        "dependency_level": 0
+      },
+      {
+        "id": "lem-no-twofold-cover-forces-spherical-boundary-in-finite-pl-three-manifold",
+        "kind": "lemma",
+        "title": "The finite covering-tower endpoint has spherical boundary",
+        "deps": [
+          "thm-cellular-homology-computes-singular-homology",
+          "thm-relative-cellular-homology-computes-relative-singular-homology",
+          "thm-long-exact-sequence-of-a-pair-in-singular-homology",
+          "lem-finite-triangulated-surface-reduces-to-a-one-polygon-schema",
+          "lem-polygonal-schema-reduction-moves",
+          "lem-finite-polygonal-disk-and-collar-surgery"
+        ],
+        "proof_strategy": "direct",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Allen Hatcher, Notes on Basic 3-Manifold Topology",
+              "url": "https://pi.math.cornell.edu/~hatcher/3M/3M.pdf",
+              "locator": "§3.1, proof of Theorem 3.1, printed p.46: the last twofold-cover tower stage has spherical boundary"
+            },
+            {
+              "title": "C. P. Rourke and B. J. Sanderson, Introduction to Piecewise-Linear Topology",
+              "url": "https://webhomes.maths.ed.ac.uk/~v1ranick/papers/rsplx.pdf",
+              "locator": "Chapter 2, final exercises, printed p.27, dual cells; the finite dual-chain calculation is supplied explicitly here"
+            }
+          ]
+        },
+        "statement": "Let $V$ be a compact connected orientable piecewise linear three-manifold with a finite compatible triangulation $K$, with boundary a subcomplex, and with every simplex link a standard piecewise linear sphere or ball of the appropriate dimension. If $V$ has no connected twofold covering space, every connected component of $\\partial V$ is piecewise linearly homeomorphic to the standard two-sphere. This conclusion uses only finite simplicial and cellular calculations and has no choice hypothesis.",
+        "dependency_level": 0
+      },
+      {
+        "id": "lem-two-sheeted-pl-disk-immersion-has-essential-embedded-disk",
+        "kind": "lemma",
+        "title": "Eliminating double curves of a two-sheeted polygonal disk",
+        "deps": [
+          "lem-finite-polygonal-disk-and-collar-surgery",
+          "def-based-loops-and-fundamental-group",
+          "def-normal-subgroup"
+        ],
+        "proof_strategy": "direct",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Allen Hatcher, Notes on Basic 3-Manifold Topology",
+              "url": "https://pi.math.cornell.edu/~hatcher/3M/3M.pdf",
+              "locator": "§3.1, proof of Theorem 3.1, printed pp.46–48, double-circle and double-arc elimination; the present statement is the orientable PL special case"
+            }
+          ]
+        },
+        "statement": "Let $M$ be an orientable piecewise linear three-manifold with boundary, let $F$ be a connected subsurface of its boundary, and let $N$ be a normal subgroup of $\\pi_1(F)$. Suppose $f:D\\to M$ is a proper piecewise linear immersion of a finite polygonal disk, with $f(\\partial D)\\subset F$, having only regular double curves and with no point having more than two inverse images. More precisely, the double-value set is a finite disjoint union of circles in the interior and arcs properly ending in the boundary; near a double value the two sheets are transverse planes, or transverse half-planes at an endpoint, and there are no other singularities. If the boundary loop of $f$ does not represent an element of $N$, then there is a properly embedded piecewise linear disk in $M$ whose boundary lies in $F$ and does not represent an element of $N$.\n\nMembership in $N$ for an unbased boundary loop is interpreted after joining it to a fixed basepoint in $F$. It is independent of that joining path because $N$ is normal. The disk produced need not have the same boundary as $f$.",
+        "dependency_level": 0
+      },
+      {
+        "id": "lem-finite-polyhedral-slabs-without-vertex-levels-are-pl-products",
+        "kind": "lemma",
+        "title": "Finite polyhedral slabs without vertex levels have piecewise linear product parameters",
+        "deps": [
+          "lem-finite-convex-cell-complexes-admit-compatible-triangulations"
+        ],
+        "proof_strategy": "direct",
+        "provenance": {
+          "statement": "ai-original",
+          "proof": "ai-original"
+        },
+        "sources": {
+          "references": []
+        },
+        "statement": "Let $\\mathcal K$ be a finite convex polyhedral cell complex with compact cells (convex polytopes) in $\\mathbb R^m$, let $P$ be its underlying polyhedron, and let $\\ell:\\mathbb R^m\\to\\mathbb R$ be affine. Suppose $a<b$ and no vertex of $\\mathcal K$ has height in $[a,b]$. Set $P_t=P\\cap\\ell^{-1}(t)$ and $P_{[a,b]}=P\\cap\\ell^{-1}([a,b])$. Then there is a piecewise linear homeomorphism\n$$H:P_a\\times[a,b]\\longrightarrow P_{[a,b]}$$\nwith piecewise linear inverse, $H(x,a)=x$ and $\\ell(H(x,t))=t$. For every cell $C$ of $\\mathcal K$ meeting the slab it maps $(C\\cap P_a)\\times[a,b]$ onto $C\\cap P_{[a,b]}$. In particular any union of cells and all their intersections receive compatible product parameters. The construction is finite and introduces no choice hypothesis. If $P_a$ is empty, both sides are empty.",
+        "dependency_level": 0
+      },
+      {
+        "id": "lem-regular-polyhedral-surface-cones-have-height-preserving-pl-straightenings",
+        "kind": "lemma",
+        "title": "Regular polyhedral surface cones have height-preserving piecewise linear straightenings",
+        "deps": [
+          "lem-finite-polygonal-disk-and-collar-surgery",
+          "lem-finite-convex-cell-complexes-admit-compatible-triangulations"
+        ],
+        "proof_strategy": "direct",
+        "provenance": {
+          "statement": "ai-original",
+          "proof": "ai-original"
+        },
+        "sources": {
+          "references": []
+        },
+        "statement": "In this statement, finite PL means affine on finitely many convex polyhedral pieces, which may be unbounded; on every bounded subpolyhedron compatible finite simplicial subdivisions give the usual PL interpretation. Let $S\\subset\\mathbb R^2\\times\\mathbb R$ be a finite polyhedral cone with vertex $0$ whose intersection with a small centered polyhedral sphere is a simple polygonal circle. Write $z$ for the last coordinate. Suppose this circle meets $z=0$ in exactly two points, each a crossing from $z>0$ to $z<0$, and neither lies on a segment contained in $z=0$. Equivalently, the positive and negative parts of the circle are each one open arc and its zero set is their two endpoints. Then there is a finite piecewise linear homeomorphism $H:\\mathbb R^3\\to\\mathbb R^3$, with piecewise linear inverse, such that\n$$z(H(x,y,z))=z,\\qquad H(S)=\\{(x,0,z):x,z\\in\\mathbb R\\}.$$\nIt fixes the origin. Its restriction to $z=0$ is a homogeneous PL plane homeomorphism sending the two rays of $S\\cap\\{z=0\\}$ to the two rays of the $x$-axis.\n\nConsequently a polyhedral surface in linear three-space at a vertex having this regular height-link condition has a local PL straightening preserving its affine height. This is a local regular-vertex result, not a straightening of arbitrary PL two-spheres. No choice hypothesis is introduced.",
+        "dependency_level": 0
+      },
+      {
+        "id": "def-pl-embedding-and-subpolyhedron",
+        "kind": "definition",
+        "title": "PL embeddings and subpolyhedra",
+        "deps": [
+          "def-simplicial-subcomplex-star-closure-and-link"
+        ],
+        "dependency_level": 0,
+        "justified_by": [],
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "not-applicable"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "C. P. Rourke and B. J. Sanderson, Introduction to Piecewise-Linear Topology",
+              "url": "https://webhomes.maths.ed.ac.uk/~v1ranick/papers/rsplx.pdf",
+              "locator": "§§1.4, 1.7, PL maps and embeddings; §2.11–2.14, triangulations and common subdivisions, web text lines 177–229 and 482–514."
+            }
+          ]
+        },
+        "strategy": "not-applicable",
+        "statement": "Let $P$ and $Q$ be compact piecewise-linear polyhedra. A **piecewise-linear map** $f:P\\to Q$ is a map that is simplicial after suitable finite subdivisions of triangulations of $P$ and $Q$. A **subpolyhedron** $A$ of $Q$ is a subset represented by the realization of a subcomplex in some finite linear triangulation of $Q$. A map $f:P\\to Q$ is a **piecewise-linear embedding** if it is piecewise-linear, its image $f(P)$ is a subpolyhedron of $Q$, and $f:P\\to f(P)$ is a piecewise-linear homeomorphism. A finite simplicial triangulation of a closed piecewise-linear $n$-manifold is **combinatorial** if the link of every $k$-simplex is a piecewise-linear sphere of dimension $n-k-1$. Thus in a closed combinatorial $3$-manifold every triangular face has link $S^0$ and is incident to exactly two tetrahedra.",
+        "proof_strategy": "not-applicable"
+      },
+      {
+        "id": "lem-knot-connected-sum-well-defined",
+        "kind": "lemma",
+        "dependency_level": 1,
+        "deps": [
+          "def-knot-connected-sum-and-prime-knot",
+          "def-oriented-link-in-s-three-and-ambient-isotopy",
+          "def-countable-choice",
+          "thm-isotopy-extension"
+        ],
+        "title": "The oriented connected sum is independent of its local choices",
+        "proof_strategy": "direct",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Burde and Zieschang, Knots, 2nd revised and extended edition",
+              "url": "https://www.maths.ed.ac.uk/~v1ranick/papers/burdzies.pdf",
+              "locator": "Chapter 7, §§7.1–7.3, printed pp.91–93"
+            },
+            {
+              "title": "Stefan Friedl, Introduction to Knots and Links, 2024 lecture notes",
+              "url": "https://friedl.app.uni-regensburg.de/papers/2024_knot-theory-final.pdf",
+              "locator": "Proposition 2.14, printed pp.24–25"
+            }
+          ]
+        },
+        "statement": "Assume the Axiom of Countable Choice. For two smooth oriented knots, changing either representative by oriented ambient isotopy, changing the sufficiently small coordinate ball and trivial subarc used for either knot, or changing the positive local frame used to identify that ball with the standard oriented ball does not change the oriented ambient-isotopy class of the connected-sum knot, when the boundary gluing map is the fixed standard orientation-reversing map from the definition."
+      },
+      {
+        "id": "lem-capped-elementary-height-spheres-bound-smooth-balls",
+        "kind": "lemma",
+        "title": "Capped elementary height pieces bound smooth balls",
+        "deps": [
+          "def-countable-choice",
+          "lem-smooth-ball-windows-and-boundary-disk-absorption",
+          "lem-finite-chart-surface-normal-forms-supply-jordan-disks-and-torsion-free-groups",
+          "lem-finite-c2-surface-carriers-have-smooth-normal-forms-and-relative-cap-approximations",
+          "thm-morse-lemma",
+          "thm-isotopy-extension"
+        ],
+        "proof_strategy": "direct",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Allen Hatcher, Notes on Basic 3-Manifold Topology",
+              "url": "https://pi.math.cornell.edu/~hatcher/3M/3M.pdf",
+              "locator": "Chapter 1, Lemma 1.2 and its proof, printed pp.2–3; all seven capped models"
+            }
+          ]
+        },
+        "statement": "Assume countable choice. Let a smoothly embedded surface in a horizontal slab of $\\mathbb R^3$ have regular boundary on the two boundary planes and have at most one critical point of the height function, a nondegenerate one. Cut off its regular end collars and cap every resulting boundary circle by its planar disk, at slightly separated heights when disks are nested, rounding the seams. Every connected component of the resulting closed surface that is a sphere bounds a smoothly embedded standard $3$-ball. This includes the caps obtained by successively doing innermost horizontal-disk surgeries on a smooth sphere at finitely many regular levels separating all its critical values.",
+        "dependency_level": 1
+      },
+      {
+        "id": "lem-pl-embedded-polyhedron-admits-compatible-subcomplex-triangulation",
+        "kind": "lemma",
+        "title": "A PL embedded polyhedron becomes a subcomplex after subdivision",
+        "deps": [
+          "def-pl-embedding-and-subpolyhedron",
+          "def-simplicial-subcomplex-star-closure-and-link",
+          "lem-two-finite-linear-subdivisions-have-a-common-simplicial-refinement"
+        ],
+        "dependency_level": 1,
+        "justified_by": [],
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-generated"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "C. P. Rourke and B. J. Sanderson, Introduction to Piecewise-Linear Topology",
+              "url": "https://webhomes.maths.ed.ac.uk/~v1ranick/papers/rsplx.pdf",
+              "locator": "§2.11–2.14, triangulations, common subdivisions and simplicialization of PL maps, web text lines 482–514."
+            }
+          ]
+        },
+        "strategy": "direct",
+        "statement": "Let $Q$ be a compact piecewise-linear polyhedron with a fixed finite linear triangulation $T$. If $f:P\\to Q$ is a piecewise-linear embedding of a compact piecewise-linear polyhedron, then some finite subdivision $T'$ of $T$ contains $f(P)$ as the realization of a subcomplex.",
+        "proof_strategy": "direct"
+      },
+      {
+        "id": "lem-mirroring-preserves-primality-of-a-knot",
+        "kind": "lemma",
+        "dependency_level": 2,
+        "deps": [
+          "def-knot-connected-sum-and-prime-knot",
+          "lem-knot-connected-sum-well-defined",
+          "def-countable-choice"
+        ],
+        "title": "Mirroring preserves primeness of an oriented knot",
+        "proof_strategy": "direct",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Burde and Zieschang, Knots, 2nd revised and extended edition",
+              "url": "https://www.maths.ed.ac.uk/~v1ranick/papers/burdzies.pdf",
+              "locator": "Chapter 7, §§7.1–7.3 and Definition 7.6, printed pp.91–94"
+            }
+          ]
+        },
+        "statement": "Assume the Axiom of Countable Choice. If a smooth oriented knot $K$ is nontrivial and prime, then its mirror image under the fixed reflection from the connected-sum convention, with the image orientation, is also nontrivial and prime."
+      },
+      {
+        "id": "thm-oriented-knot-connected-sum-is-a-commutative-monoid",
+        "kind": "theorem",
+        "dependency_level": 2,
+        "deps": [
+          "def-knot-connected-sum-and-prime-knot",
+          "lem-knot-connected-sum-well-defined",
+          "def-oriented-link-in-s-three-and-ambient-isotopy",
+          "def-countable-choice"
+        ],
+        "title": "Oriented knot connected sum is a commutative monoid",
+        "proof_strategy": "direct",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Burde and Zieschang, Knots, 2nd revised and extended edition",
+              "url": "https://www.maths.ed.ac.uk/~v1ranick/papers/burdzies.pdf",
+              "locator": "Chapter 7, Lemma 7.3 and surrounding construction, printed pp.92–93"
+            },
+            {
+              "title": "Stefan Friedl, Introduction to Knots and Links, 2024 lecture notes",
+              "url": "https://friedl.app.uni-regensburg.de/papers/2024_knot-theory-final.pdf",
+              "locator": "Proposition 2.14, printed pp.24–25"
+            }
+          ]
+        },
+        "statement": "Assume the Axiom of Countable Choice. On oriented ambient-isotopy classes of smooth knots in $S^3$, the connected-sum operation is associative and commutative, and the standard unknot is a two-sided identity. Here “commutative monoid” means a set with an associative binary operation, a two-sided identity, and equality after interchanging the two inputs."
+      },
+      {
+        "id": "lem-knot-reverse-mirror-connected-sum-is-ribbon",
+        "kind": "lemma",
+        "dependency_level": 2,
+        "deps": [
+          "def-knot-connected-sum-and-prime-knot",
+          "lem-knot-connected-sum-well-defined",
+          "thm-parametric-transversality",
+          "thm-isotopy-extension",
+          "def-countable-choice"
+        ],
+        "forward_refs": [
+          "def-ribbon-disk-and-ribbon-knot"
+        ],
+        "title": "The trefoil sum with its reverse mirror is ribbon",
+        "proof_strategy": "direct",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Charles Livingston, A Survey of Classical Knot Concordance, arXiv:math/0307077v4",
+              "url": "https://arxiv.org/pdf/math/0307077v4",
+              "locator": "§2.1, Definition 2.3, printed p.4; radial Morse function with no interior local maxima"
+            },
+            {
+              "title": "Brendan Owens and Frank Swenton, An Algorithm to Find Ribbon Disks for Alternating Knots",
+              "url": "https://eprints.gla.ac.uk/287761/1/287761.pdf",
+              "locator": "Definition 2.5 and Proposition 4.2, printed pp.10 and 21–22"
+            },
+            {
+              "title": "Brendan Owens and Frank Swenton, An Algorithm to Find Ribbon Disks for Alternating Knots",
+              "url": "https://arxiv.org/pdf/2102.11778",
+              "locator": "Proposition 4.2; algorithm produces a band sequence for $-L\\#L$ when $L$ is nonsplit alternating"
+            }
+          ]
+        },
+        "statement": "Assume AC$_\\omega$. Let $T$ be the standard right-handed trefoil, let $T^*$ be its image under the fixed orientation-reversing reflection of the connected-sum convention, and let $-T^*$ denote reversal of the image knot's orientation. Then $T\\#(-T^*)$ bounds a smooth ribbon disk in $B^4$."
+      },
+      {
+        "id": "thm-smooth-schoenflies-for-embedded-two-sphere-in-s-three",
+        "kind": "theorem",
+        "title": "Smooth Schoenflies for an embedded two-sphere in the three-sphere",
+        "deps": [
+          "def-countable-choice",
+          "lem-smooth-ball-windows-and-boundary-disk-absorption",
+          "lem-capped-elementary-height-spheres-bound-smooth-balls",
+          "lem-finite-chart-surface-normal-forms-supply-jordan-disks-and-torsion-free-groups",
+          "lem-finite-c2-surface-carriers-have-smooth-normal-forms-and-relative-cap-approximations",
+          "thm-generic-height-functions-on-an-embedded-compact-manifold-are-morse",
+          "lem-finitely-many-critical-values-can-be-separated-locally",
+          "thm-isotopy-extension"
+        ],
+        "proof_strategy": "direct",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Allen Hatcher, Notes on Basic 3-Manifold Topology",
+              "url": "https://pi.math.cornell.edu/~hatcher/3M/3M.pdf",
+              "locator": "Chapter 1, Theorem 1.1 and Lemmas 1.2–1.3, printed pp.1–3"
+            }
+          ]
+        },
+        "statement": "Assume countable choice. Let $S\\subset S^3$ be the image of a smooth embedding of the standard $S^2$. There is a smooth ambient isotopy $H_t:S^3\\to S^3$, with $H_0=\\operatorname{id}$, such that $H_1(S)$ is the standard equatorial sphere $E$. In particular $S^3\\setminus S$ has exactly two components. Their closures $B_+$ and $B_-$ are smoothly embedded standard closed $3$-balls with common boundary $S$. If $D_+$ and $D_-$ denote the standard closed hemispheres bounded by $E$, the labels can be chosen so that the restrictions $H_1:B_\\pm\\to D_\\pm$ are diffeomorphisms with the same boundary restriction $H_1|_S:S\\to E$. Thus the ball identifications are compatible on their boundary and on a common two-sided collar of that boundary.",
+        "dependency_level": 2
+      },
+      {
+        "id": "lem-compact-locally-collared-pl-subpolyhedron-has-pl-collar",
+        "kind": "lemma",
+        "title": "A compact locally collared polyhedron has a piecewise linear collar",
+        "deps": [
+          "lem-finite-convex-cell-complexes-admit-compatible-triangulations",
+          "lem-pl-embedded-polyhedron-admits-compatible-subcomplex-triangulation"
+        ],
+        "proof_strategy": "direct",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "C. P. Rourke and B. J. Sanderson, Introduction to Piecewise-Linear Topology",
+              "url": "https://webhomes.maths.ed.ac.uk/~v1ranick/papers/rsplx.pdf",
+              "locator": "Theorem 2.25 and Corollary 2.26, printed pp.24–26; complete finite local-push proof"
+            }
+          ]
+        },
+        "statement": "Let $P$ be a compact subpolyhedron of a polyhedron $Q$. Suppose $P$ is locally piecewise linearly collared in $Q$: each point has a product neighborhood in which $P$ is the bottom of a piecewise linear product with $[0,1)$. Then there is a piecewise linear embedding $c:P\\times[0,1]\\to Q$ with $c(x,0)=x$ such that $c(P\\times[0,1))$ is an open neighborhood of $P$ in $Q$. In particular the boundary of every compact piecewise linear manifold has such a collar.",
+        "dependency_level": 2
+      },
+      {
+        "id": "thm-prime-decomposition-of-compact-orientable-three-manifold",
+        "kind": "theorem",
+        "dependency_level": 3,
+        "deps": [
+          "thm-finite-triangulation-of-compact-three-manifold",
+          "thm-smooth-schoenflies-for-embedded-two-sphere-in-s-three"
+        ],
+        "title": "Prime decomposition of compact connected orientable three-manifolds",
+        "proof_strategy": "direct",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Allen Hatcher, Notes on Basic 3-Manifold Topology",
+              "url": "https://pi.math.cornell.edu/~hatcher/3M/3Mdoublepage.pdf",
+              "locator": "§1.1, Proposition 1.4 and Theorem 1.5, printed pp.4–8"
+            },
+            {
+              "title": "Burde and Zieschang, Knots, 2nd revised and extended edition",
+              "url": "https://www.maths.ed.ac.uk/~v1ranick/papers/burdzies.pdf",
+              "locator": "Chapter 7, §§7.14–7.18, printed pp.96–98, for the separate knot-specific boundary"
+            }
+          ]
+        },
+        "statement": "Let $M$ be a compact connected orientable three-manifold, possibly with boundary. For manifolds, connected sum means deleting the interiors of embedded three-balls and gluing their boundary spheres by an orientation-reversing identification. A prime factor is a connected orientable three-manifold that is not a connected sum of two factors other than $S^3$. Then $M$ is a connected sum of finitely many prime factors, and the factors are unique up to order and insertion or deletion of $S^3$ factors. The factor $S^1\\times S^2$ is prime but is not irreducible; irreducibility means every embedded $2$-sphere bounds a $3$-ball."
+      },
+      {
+        "id": "lem-knot-decomposing-sphere-realizes-connected-sum",
+        "kind": "lemma",
+        "dependency_level": 3,
+        "deps": [
+          "def-knot-connected-sum-and-prime-knot",
+          "lem-knot-connected-sum-well-defined",
+          "thm-smooth-schoenflies-for-embedded-two-sphere-in-s-three",
+          "def-countable-choice"
+        ],
+        "title": "A decomposing sphere realizes a connected sum of knots",
+        "proof_strategy": "direct",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Burde and Zieschang, Knots, 2nd revised and extended edition",
+              "url": "https://www.maths.ed.ac.uk/~v1ranick/papers/burdzies.pdf",
+              "locator": "Chapter 7, §§7.14–7.15, printed pp.96–97"
+            },
+            {
+              "title": "Allen Hatcher, Notes on Basic 3-Manifold Topology",
+              "url": "https://pi.math.cornell.edu/~hatcher/3M/3Mdoublepage.pdf",
+              "locator": "§1.1, Theorem 1.1, printed pp.1–3"
+            }
+          ]
+        },
+        "statement": "Assume the Axiom of Countable Choice. Let $K$ be a smooth oriented knot in $S^3$, and let $S\\subset S^3$ be a smoothly embedded sphere transverse to $K$ in exactly two points. Cutting along $S$ gives two properly embedded arcs; cap each arc by an orientation-compatible simple arc on $S$, pushed slightly into the corresponding boundary collar to obtain oriented knots $K_1$ and $K_2$. Then the oriented isotopy class of $K$ is the connected sum $K_1\\#K_2$."
+      },
+      {
+        "id": "thm-loop-theorem-for-finitely-triangulated-orientable-pl-three-manifolds",
+        "kind": "theorem",
+        "title": "The loop theorem for finitely triangulated orientable PL three-manifolds",
+        "deps": [
+          "thm-finite-simplicial-approximation-for-maps-of-pairs",
+          "thm-covering-space-lifting-criterion",
+          "lem-finite-polygonal-disk-and-collar-surgery",
+          "lem-finite-subpolyhedra-have-compact-pl-manifold-neighborhoods",
+          "lem-compact-locally-collared-pl-subpolyhedron-has-pl-collar",
+          "lem-two-sheeted-pl-disk-immersion-has-essential-embedded-disk",
+          "lem-no-twofold-cover-forces-spherical-boundary-in-finite-pl-three-manifold"
+        ],
+        "proof_strategy": "direct",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Allen Hatcher, Notes on Basic 3-Manifold Topology",
+              "url": "https://pi.math.cornell.edu/~hatcher/3M/3M.pdf",
+              "locator": "§3.1, Theorem 3.1 and its full twofold-cover tower proof, printed pp.45–48"
+            },
+            {
+              "title": "C. P. Rourke and B. J. Sanderson, Introduction to Piecewise-Linear Topology",
+              "url": "https://webhomes.maths.ed.ac.uk/~v1ranick/papers/rsplx.pdf",
+              "locator": "Chapter 5, Theorem 5.3 and its complete finite vertex-push/chart-induction proof, printed pp.60–63; the proof below uses paired charts for a free involution"
+            }
+          ]
+        },
+        "statement": "Let $M$ be a compact connected orientable piecewise linear three-manifold with a given finite compatible manifold triangulation and with boundary a subcomplex. Let $F\\subset\\partial M$ be a connected compact piecewise linear subsurface and $N\\trianglelefteq\\pi_1(F)$ a normal subgroup. Suppose there is a continuous map $f:(D^2,\\partial D^2)\\to(M,F)$ whose boundary lies in the relative interior of $F$ and has class outside $N$. Then there is a properly embedded piecewise linear disk in $M$, with boundary in the relative interior of $F$, whose boundary class is outside $N$.\n\nIn particular, if a connected boundary component has noninjective induced fundamental-group map into $M$, it contains an essential simple closed curve bounding a properly embedded piecewise linear disk in $M$. Boundary classes outside $N$ are understood up to conjugation by a basepath in $F$.",
+        "dependency_level": 3
+      },
+      {
+        "id": "lem-parametrized-pl-balls-absorb-standard-boundary-windows",
+        "kind": "lemma",
+        "title": "Parametrized piecewise linear balls absorb standard boundary windows",
+        "deps": [
+          "lem-finite-polygonal-disk-and-collar-surgery",
+          "lem-finite-convex-cell-complexes-admit-compatible-triangulations",
+          "lem-pl-embedded-polyhedron-admits-compatible-subcomplex-triangulation",
+          "lem-compact-locally-collared-pl-subpolyhedron-has-pl-collar"
+        ],
+        "proof_strategy": "direct",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "J. W. Alexander, On the subdivision of 3-space by a polyhedron",
+              "url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC1085499/",
+              "locator": "PNAS 10 (1924), pp.6–8; fundamental lemma on p.6. The finite PL parameter constructions below supply the needed restricted ball-window lemma directly."
+            },
+            {
+              "title": "C. P. Rourke and B. J. Sanderson, Introduction to Piecewise-Linear Topology",
+              "url": "https://webhomes.maths.ed.ac.uk/~v1ranick/papers/rsplx.pdf",
+              "locator": "Theorem 2.25 and Corollary 2.26, pp.24–26, for the locally collared to collared construction proved by the listed supplier."
+            }
+          ]
+        },
+        "statement": "Here a parametrized PL ball means a finite polyhedron supplied with a piecewise linear homeomorphism, with piecewise linear inverse, to a convex polyhedral ball of the stated dimension. All subpolyhedra and maps in the following assertions are finite.\n\n(a) Let $B_1,B_2$ be parametrized PL three-balls and $D_i\\subset\\partial B_i$ parametrized PL two-disks. Every PL homeomorphism $f:D_1\\to D_2$ extends to a PL homeomorphism $B_1\\to B_2$.\n\n(b) The space obtained by gluing two parametrized PL three-balls along parametrized PL two-disks in their boundaries, by a specified PL homeomorphism, is a parametrized PL three-ball.\n\n(c) Let $B$ and $A\\subset B$ be parametrized PL three-balls, with $A\\ne B$. Suppose $A\\cap\\partial B=\\partial A\\cap\\partial B=D$ is a parametrized PL two-disk and $A\\setminus D\\subset\\operatorname{Int}B$. Impose the following standard boundary-window condition at $C=\\partial D$: every point of $C$ has a PL coordinate neighborhood in which\n$$B=\\{(u,v,w):w\\ge0\\},\\qquad A=\\{(u,v,w):w\\ge0,\\ v\\le0\\},\\qquad D=\\{w=0,\\ v\\le0\\}.$$\nThe equalities are understood after intersection with the coordinate neighborhood, and $C$ corresponds to $v=w=0$. Then $Q=\\overline{B\\setminus A}$, with closure in $B$, is a parametrized PL three-ball.\n\nNo assertion about a sphere in an arbitrary PL three-manifold is assumed. In (c) the closure of the set difference is essential: $B\\setminus\\operatorname{Int}_{\\mathbb R^3}A$ would retain the interior of the contact disk as an extra sheet. These statements introduce no choice hypothesis.",
+        "dependency_level": 3
+      },
+      {
+        "id": "lem-finite-pl-level-collars-give-global-band-products",
+        "kind": "lemma",
+        "title": "Finite piecewise linear level collars give global band products",
+        "deps": [
+          "lem-compact-locally-collared-pl-subpolyhedron-has-pl-collar",
+          "lem-finite-convex-cell-complexes-admit-compatible-triangulations",
+          "lem-pl-embedded-polyhedron-admits-compatible-subcomplex-triangulation"
+        ],
+        "proof_strategy": "direct",
+        "provenance": {
+          "statement": "ai-original",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "C. P. Rourke and B. J. Sanderson, Introduction to Piecewise-Linear Topology",
+              "url": "https://webhomes.maths.ed.ac.uk/~v1ranick/papers/rsplx.pdf",
+              "locator": "Printed pp.57–59, 4.21–4.24; full extending-collars, collar-leveling, and finite interval-pasting proofs. The precise height-band formulation below is proved directly."
+            }
+          ]
+        },
+        "statement": "Let $P$ be a compact finite polyhedron and $h:P\\to[a,b]$ a surjective PL function, where $a<b$. Write $X_t=h^{-1}(t)$, $P_{\\ge t}=h^{-1}([t,b])$ and $P_{\\le t}=h^{-1}([a,t])$. Suppose, for every $t<b$, $X_t$ is locally PL collared in $P_{\\ge t}$ and, for every $t>a$, it is locally PL collared in $P_{\\le t}$. Local collars here have open half-product images, including at boundary points of the fiber. Then there is a PL homeomorphism with PL inverse\n$$H:X_a\\times[a,b]\\longrightarrow P,\\qquad H(x,a)=x,\\qquad h(H(x,t))=t.$$\nThe construction is finite and introduces no choice hypothesis. In particular this conclusion holds when each point has a local PL height-product chart, with the appropriate one-sided chart at the end levels.",
+        "dependency_level": 3
+      },
+      {
+        "id": "lem-knot-genus-invariant-under-mirror-and-reversal",
+        "kind": "lemma",
+        "dependency_level": 4,
+        "deps": [
+          "def-oriented-seifert-surface-and-knot-genus",
+          "lem-finite-chart-surface-normal-forms-supply-jordan-disks-and-torsion-free-groups",
+          "def-countable-choice"
+        ],
+        "title": "Knot genus is invariant under mirroring and reversal",
+        "proof_strategy": "direct",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Burde and Zieschang, Knots, 2nd revised and extended edition",
+              "url": "https://www.maths.ed.ac.uk/~v1ranick/papers/burdzies.pdf",
+              "locator": "Chapter 7, §§7.1–7.3, printed pp.91–93"
+            }
+          ]
+        },
+        "statement": "Assume the Axiom of Countable Choice. Let $K$ be a smooth oriented knot in $S^3$, and let $r:S^3\\to S^3$ be an orientation-reversing reflection. Give $r(K)$ the image orientation, and let $-K$ denote reversal of the knot orientation. Then $g(K)=g(r(K))=g(-K)=g(-r(K))$."
+      },
+      {
+        "id": "lem-knot-genus-zero-iff-unknot",
+        "kind": "lemma",
+        "dependency_level": 4,
+        "deps": [
+          "def-knot-connected-sum-and-prime-knot",
+          "def-oriented-seifert-surface-and-knot-genus",
+          "def-countable-choice",
+          "lem-finite-chart-surface-normal-forms-supply-jordan-disks-and-torsion-free-groups",
+          "thm-isotopy-extension",
+          "lem-finite-c2-surface-carriers-have-smooth-normal-forms-and-relative-cap-approximations"
+        ],
+        "title": "A knot has genus zero exactly when it is the unknot",
+        "proof_strategy": "direct",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Burde and Zieschang, Knots, 2nd revised and extended edition",
+              "url": "https://www.maths.ed.ac.uk/~v1ranick/papers/burdzies.pdf",
+              "locator": "Chapter 7, §§7.4–7.7, printed pp.93–94"
+            },
+            {
+              "title": "Stefan Friedl, Introduction to Knots and Links, 2024 lecture notes",
+              "url": "https://friedl.app.uni-regensburg.de/papers/2024_knot-theory-final.pdf",
+              "locator": "Chapter 11, Proposition 11.7, printed pp.160–162; source explicitly leaves smooth ball details to the reader"
+            }
+          ]
+        },
+        "statement": "Assume the Axiom of Countable Choice. For every smooth oriented knot $K$ in $S^3$, its Seifert genus is zero if and only if $K$ is ambient isotopic through orientation-preserving diffeomorphisms to the standard unknot."
+      },
+      {
+        "id": "thm-knot-genus-additive-under-connected-sum",
+        "kind": "theorem",
+        "dependency_level": 4,
+        "deps": [
+          "def-knot-connected-sum-and-prime-knot",
+          "lem-knot-connected-sum-well-defined",
+          "lem-knot-decomposing-sphere-realizes-connected-sum",
+          "def-oriented-seifert-surface-and-knot-genus",
+          "def-countable-choice",
+          "lem-relative-transversality-for-embedded-surfaces",
+          "lem-finite-chart-surface-normal-forms-supply-jordan-disks-and-torsion-free-groups",
+          "thm-higher-dimensional-spheres-are-simply-connected"
+        ],
+        "title": "Knot genus is additive under connected sum",
+        "proof_strategy": "direct",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Burde and Zieschang, Knots, 2nd revised and extended edition",
+              "url": "https://www.maths.ed.ac.uk/~v1ranick/papers/burdzies.pdf",
+              "locator": "Chapter 7, Proposition 7.4, printed pp.93–94"
+            },
+            {
+              "title": "Stefan Friedl, Introduction to Knots and Links, 2024 lecture notes",
+              "url": "https://friedl.app.uni-regensburg.de/papers/2024_knot-theory-final.pdf",
+              "locator": "Chapter 11, Proposition 11.8 and §11.5, printed pp.162–168"
+            },
+            {
+              "title": "Alessia Cattabriga and Stefano Francaviglia, Knot Theory and Applications: Lecture Notes",
+              "url": "https://poisson.phc.dm.unipi.it/~camponovo/libri/knot.pdf",
+              "locator": "§4.3, Theorem 4.3.6, printed pp.21–23"
+            }
+          ]
+        },
+        "statement": "Assume the Axiom of Countable Choice. For any smooth oriented knots $K,J\\subset S^3$, the Seifert genus of their oriented connected sum satisfies $g(K\\#J)=g(K)+g(J)$."
+      },
+      {
+        "id": "lem-simply-connected-pl-end-has-spherical-compact-neighborhoods",
+        "kind": "lemma",
+        "title": "A simply connected PL end has compact cores with one spherical frontier",
+        "deps": [
+          "thm-loop-theorem-for-finitely-triangulated-orientable-pl-three-manifolds",
+          "lem-finite-subpolyhedra-have-compact-pl-manifold-neighborhoods",
+          "lem-compact-locally-collared-pl-subpolyhedron-has-pl-collar",
+          "lem-finite-polygonal-disk-and-collar-surgery",
+          "lem-finite-triangulated-surface-reduces-to-a-one-polygon-schema",
+          "lem-polygonal-schema-reduction-moves",
+          "thm-finite-simplicial-approximation-for-maps-of-pairs"
+        ],
+        "proof_strategy": "direct",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "A. J. S. Hamilton, The triangulation of 3-manifolds, Quarterly Journal of Mathematics Oxford (2) 27 (1976), 63–70",
+              "url": "https://www.maths.ed.ac.uk/~v1ranick/papers/hamiltontri.pdf",
+              "locator": "Lemma 2, printed pp.64–65, the compact-neighborhood conclusion attributed there to Wall; the compression proof is supplied locally here"
+            },
+            {
+              "title": "Allen Hatcher, Notes on Basic 3-Manifold Topology",
+              "url": "https://pi.math.cornell.edu/~hatcher/3M/3M.pdf",
+              "locator": "§3.1, Corollary 3.3, printed p.48, the innermost-preimage-circle reduction to a boundary loop theorem"
+            }
+          ]
+        },
+        "statement": "Let $X$ be a connected noncompact orientable piecewise linear three-manifold with compact boundary and a given locally finite compatible manifold triangulation. Assume the following precise one-end and simple-connectivity conditions:\n\n1. If $C$ is a compact connected codimension-zero PL submanifold containing $\\partial X$, exactly one component of $X\\setminus\\operatorname{Int}_X C$ has noncompact closure.\n2. For every compact subset $A\\subset X$, there is a compact subset $C\\supset A$ such that every loop in $X\\setminus C$ is nullhomotopic in $X\\setminus A$.\n\nThen every compact subset $A\\subset X$ lies in the relative interior of a compact connected codimension-zero PL submanifold $K\\subset X$ whose boundary is the disjoint union of $\\partial X$ and one PL two-sphere in $\\operatorname{Int}X$. The construction is finite and introduces no choice hypothesis. No assertion that $K$ itself is a ball is made.",
+        "dependency_level": 4
+      },
+      {
+        "id": "lem-no-saddle-polyhedral-two-spheres-bound-parametrized-pl-balls",
+        "kind": "lemma",
+        "title": "Polyhedral two-spheres without height saddles bound parametrized piecewise linear balls",
+        "deps": [
+          "lem-finite-polygonal-disk-and-collar-surgery",
+          "lem-finite-convex-cell-complexes-admit-compatible-triangulations",
+          "lem-pl-embedded-polyhedron-admits-compatible-subcomplex-triangulation",
+          "lem-parametrized-pl-balls-absorb-standard-boundary-windows",
+          "lem-regular-polyhedral-surface-cones-have-height-preserving-pl-straightenings",
+          "lem-finite-pl-level-collars-give-global-band-products"
+        ],
+        "proof_strategy": "direct",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "J. W. Alexander, On the subdivision of 3-space by a polyhedron",
+              "url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC1085499/",
+              "locator": "PNAS 10 (1924), pp.6–8, especially the zero-critical-loop base case on p.7. The finite PL parameter construction below replaces the source's potential-coordinate construction."
+            }
+          ]
+        },
+        "statement": "Let $S\\subset\\mathbb R^3$ be a finite linearly embedded triangulated two-sphere and $h$ an affine height function taking distinct values on its vertices. Assume there is exactly one minimum vertex $v_-$, exactly one maximum vertex $v_+$, and every other vertex has the following regular height link: its small centered polyhedral link circle meets the horizontal plane through that vertex in exactly two crossing points, with its positive and negative parts each one open arc. Then $S$ is the boundary of a compact finite polyhedron $Q\\subset\\mathbb R^3$ admitting a finite PL homeomorphism, with PL inverse, to a convex three-ball. The set $Q$ is the closure of the bounded side of $S$, and the other side is connected and unbounded. No choice hypothesis or general three-dimensional Schoenflies theorem is assumed.",
+        "dependency_level": 4
+      },
+      {
+        "id": "lem-three-disk-pl-severing-reassembles-parametrized-balls",
+        "kind": "lemma",
+        "title": "Three-disk piecewise linear severing reassembles parametrized balls",
+        "deps": [
+          "lem-finite-polygonal-disk-and-collar-surgery",
+          "lem-finite-convex-cell-complexes-admit-compatible-triangulations",
+          "lem-pl-embedded-polyhedron-admits-compatible-subcomplex-triangulation",
+          "lem-parametrized-pl-balls-absorb-standard-boundary-windows"
+        ],
+        "proof_strategy": "direct",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "J. W. Alexander, On the subdivision of 3-space by a polyhedron",
+              "url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC1085499/",
+              "locator": "PNAS 10 (1924), p.7, fundamental combinatorial lemma; explicit finite PL proof and boundary-window verification supplied below."
+            }
+          ]
+        },
+        "statement": "Let $E_1,E_2,D\\subset\\mathbb R^3$ be three finite parametrized embedded PL two-disks with common boundary $C$, any two intersecting exactly in $C$. Suppose $E_i\\cup D$ is the boundary of a supplied parametrized embedded PL three-ball $B_i$, for $i=1,2$. Then $E_1\\cup E_2$ bounds a parametrized embedded PL three-ball $B$. More precisely, exactly one of the following three configurations holds:\n\n- $B_1\\cap B_2=D$, and $B=B_1\\cup B_2$;\n- $B_1\\subset B_2$, and $B=\\overline{B_2\\setminus B_1}$;\n- $B_2\\subset B_1$, and $B=\\overline{B_1\\setminus B_2}$.\n\nAll parameters and identifications can be made finite PL. No choice hypothesis or general three-dimensional Schoenflies theorem is required.",
+        "dependency_level": 4
+      },
+      {
+        "id": "lem-knot-decomposing-sphere-systems-cut-and-paste",
+        "kind": "lemma",
+        "dependency_level": 5,
+        "deps": [
+          "lem-knot-decomposing-sphere-realizes-connected-sum",
+          "thm-smooth-schoenflies-for-embedded-two-sphere-in-s-three",
+          "def-knot-connected-sum-and-prime-knot",
+          "thm-oriented-knot-connected-sum-is-a-commutative-monoid",
+          "lem-relative-transversality-for-embedded-surfaces",
+          "thm-isotopy-extension",
+          "thm-knot-genus-additive-under-connected-sum",
+          "lem-knot-genus-zero-iff-unknot",
+          "def-countable-choice"
+        ],
+        "title": "Cut and paste of decomposing sphere systems preserves prime factors",
+        "proof_strategy": "direct",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Burde and Zieschang, Knots, 2nd revised and extended edition",
+              "url": "https://www.maths.ed.ac.uk/~v1ranick/papers/burdzies.pdf",
+              "locator": "Chapter 7, §§7.14–7.18, printed pp.96–98; especially Lemma 7.17 and the full text accompanying Figures 7.7–7.8"
+            },
+            {
+              "title": "Stefan Friedl, Introduction to Knots and Links, 2024 lecture notes",
+              "url": "https://friedl.app.uni-regensburg.de/papers/2024_knot-theory-final.pdf",
+              "locator": "Chapter 11 §§11.4–11.5, printed pp.162–168; uniqueness explicitly deferred to Schubert"
+            }
+          ]
+        },
+        "statement": "Assume the Axiom of Countable Choice. Let $K$ be a smooth oriented knot and let $\\mathcal S$ and $\\mathcal S'$ be finite systems of pairwise disjoint smooth spheres in $S^3$, each sphere meeting $K$ transversely in two points, such that every knot obtained by capping the arcs cut off by the system is prime. Put the systems in transverse general position. The standard innermost-disk replacements and the replacement of a maximal factor ball across a disjoint sphere preserve the unordered list of capped prime knot isotopy classes."
+      },
+      {
+        "id": "lem-right-trefoil-has-genus-one",
+        "kind": "lemma",
+        "dependency_level": 5,
+        "deps": [
+          "def-oriented-seifert-surface-and-knot-genus",
+          "def-seifert-smoothing-and-seifert-circles-of-an-oriented-link-diagram",
+          "alg-seifert-surface-from-diagram",
+          "lem-seifert-bands-embedded-orientable-boundary-correct",
+          "thm-seifert-algorithm-boundary-euler-and-genus",
+          "lem-finite-c2-surface-carriers-have-smooth-normal-forms-and-relative-cap-approximations",
+          "lem-the-trefoil-does-not-bound-a-smooth-proper-disk-in-the-four-ball",
+          "def-countable-choice",
+          "def-axiom-of-choice",
+          "thm-choice-implies-dependent-implies-countable-choice",
+          "thm-collar-neighborhood-theorem",
+          "lem-finite-chart-surface-normal-forms-supply-jordan-disks-and-torsion-free-groups"
+        ],
+        "title": "The right trefoil has genus one",
+        "proof_strategy": "direct",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Danny Calegari, Introduction to Knot Theory",
+              "url": "https://math.uchicago.edu/~dannyc/notes/knot_theory.pdf",
+              "locator": "§§3.1–3.2, printed pp.21–26; trefoil genus discussion"
+            },
+            {
+              "title": "Local trefoil nonsliceness proof in the published library",
+              "url": "https://www.i-repository.net/contents/osakacu/sugaku/111F0000002-00302-8.pdf",
+              "locator": "Fox–Milnor, Theorem 2, source motivation for the separately proved local adapter"
+            }
+          ]
+        },
+        "statement": "Assume the full Axiom of Choice. For the standard right-handed trefoil in $S^3$, the minimum genus among its connected compact smooth oriented spanning surfaces is exactly $1$."
+      },
+      {
+        "id": "lem-pl-height-product-caps-replace-by-one-extremum",
+        "kind": "lemma",
+        "title": "Piecewise linear height-product caps can be replaced by one extremum",
+        "deps": [
+          "lem-finite-polygonal-disk-and-collar-surgery",
+          "lem-finite-convex-cell-complexes-admit-compatible-triangulations",
+          "lem-parametrized-pl-balls-absorb-standard-boundary-windows",
+          "lem-three-disk-pl-severing-reassembles-parametrized-balls"
+        ],
+        "proof_strategy": "direct",
+        "provenance": {
+          "statement": "ai-original",
+          "proof": "ai-original"
+        },
+        "sources": {
+          "references": []
+        },
+        "statement": "Let $D$ be a finite parametrized PL two-disk and let $J:D\\times[0,1]\\to\\mathbb R^3$ be a finite PL embedding with $h(J(x,t))=t$ for an affine height $h$. Put $Z=J(D\\times[0,1])$, $C=J(\\partial D\\times\\{1\\})$ and $F=J((D\\times\\{0\\})\\cup(\\partial D\\times[0,1]))$. Let $E$ be a finite parametrized embedded PL two-disk with boundary $C$ and $E\\cap Z=C$.\n\nThere exists a finite embedded parametrized PL disk $G\\subset Z$ with boundary $C$, $G\\cap F=C$, such that its height has exactly one interior extremum, a minimum, and every other point of $G\\setminus C$ has a regular height-product chart. The set $F\\cup G$ bounds a supplied parametrized PL three-ball. Consequently, if $E\\cup G$ bounds a parametrized PL three-ball, then $E\\cup F$ does as well. The reversed-height assertion replaces a maximum cap. No choice hypothesis is introduced.",
+        "dependency_level": 5
+      },
+      {
+        "id": "lem-pointed-flat-pl-caps-admit-saddle-free-replacements",
+        "kind": "lemma",
+        "title": "Pointed flat piecewise linear caps admit saddle-free replacements",
+        "deps": [
+          "lem-finite-polygonal-disk-and-collar-surgery",
+          "lem-finite-convex-cell-complexes-admit-compatible-triangulations",
+          "lem-pl-embedded-polyhedron-admits-compatible-subcomplex-triangulation",
+          "lem-three-disk-pl-severing-reassembles-parametrized-balls"
+        ],
+        "proof_strategy": "direct",
+        "provenance": {
+          "statement": "ai-original",
+          "proof": "ai-original"
+        },
+        "sources": {
+          "references": []
+        },
+        "statement": "Let $Z$ be a supplied finite parametrized embedded PL three-ball with a nonnegative affine height $h$, and let $Z_0$ be a convex three-dimensional polytope with an affine height $h_0$. Assume $D=h^{-1}(0)\\cap Z$ and $D_0=h_0^{-1}(0)\\cap Z_0$ are boundary disks. Suppose a supplied PL boundary homeomorphism $j:\\partial Z\\to\\partial Z_0$ preserves height and maps $D$ onto $D_0$. Let $Q_0$ be a vertex of the polygonal face $D_0$. Assume the faces of $Z_0$ other than $D_0$ are partitioned into one triangular side face $G_0$ meeting $D_0$ exactly at $Q_0$, a top face $T_0$ at positive constant height, and the remaining side faces. Put $Q=j^{-1}(Q_0)$.\n\nFor some arbitrarily short positive height range there is a parametrized PL disk $A\\subset\\partial Z$ containing $D$, meeting $j^{-1}(G_0)$ exactly at $Q$, and a parametrized PL disk $A'\\subset Z$ with $A\\cap A'=\\partial A=\\partial A'$, such that $A\\cup A'$ bounds a supplied parametrized PL three-ball. On the boundary obtained by replacing $A$ by $A'$, every new interior point away from $Q$ has a regular local height-product chart; no positive-height saddle is introduced. The new cap meets height zero exactly at $Q$. Consequently, whenever the replaced disk lies in an embedded PL sphere whose remaining disk misses the constructed ball except along the common boundary, and the sphere after replacement bounds a supplied PL ball, the original sphere also bounds one. No choice hypothesis is introduced.",
+        "dependency_level": 5
+      },
+      {
+        "id": "thm-schubert-prime-decomposition-for-knots",
+        "kind": "theorem",
+        "dependency_level": 6,
+        "deps": [
+          "def-oriented-seifert-surface-and-knot-genus",
+          "thm-knot-genus-additive-under-connected-sum",
+          "lem-knot-genus-zero-iff-unknot",
+          "def-knot-connected-sum-and-prime-knot",
+          "lem-knot-decomposing-sphere-realizes-connected-sum",
+          "lem-knot-decomposing-sphere-systems-cut-and-paste",
+          "thm-oriented-knot-connected-sum-is-a-commutative-monoid",
+          "def-countable-choice"
+        ],
+        "title": "Existence and uniqueness of prime decomposition for oriented knots",
+        "proof_strategy": "direct",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Burde and Zieschang, Knots, 2nd revised and extended edition",
+              "url": "https://www.maths.ed.ac.uk/~v1ranick/papers/burdzies.pdf",
+              "locator": "Chapter 7, Theorem 7.12 and §§7.14–7.18, printed pp.96–98"
+            },
+            {
+              "title": "Danny Calegari, Introduction to Knot Theory",
+              "url": "https://math.uchicago.edu/~dannyc/notes/knot_theory.pdf",
+              "locator": "§3.1, Theorem 3.7, printed pp.21–26; existence and genus additivity"
+            },
+            {
+              "title": "Stefan Friedl, Introduction to Knots and Links, 2024 lecture notes",
+              "url": "https://friedl.app.uni-regensburg.de/papers/2024_knot-theory-final.pdf",
+              "locator": "Chapter 11 §§11.4–11.5, printed pp.162–168; uniqueness deferred to Schubert"
+            }
+          ]
+        },
+        "statement": "Assume the Axiom of Countable Choice. Every nontrivial smooth oriented knot in $S^3$ is ambient isotopic to a finite connected sum of prime knots, and the prime factors are unique up to permutation and orientation-preserving ambient isotopy of the oriented factors."
+      },
+      {
+        "id": "lem-right-trefoil-is-prime",
+        "kind": "lemma",
+        "dependency_level": 6,
+        "deps": [
+          "def-knot-connected-sum-and-prime-knot",
+          "lem-knot-genus-zero-iff-unknot",
+          "thm-knot-genus-additive-under-connected-sum",
+          "lem-right-trefoil-has-genus-one",
+          "def-axiom-of-choice",
+          "def-countable-choice",
+          "thm-choice-implies-dependent-implies-countable-choice"
+        ],
+        "title": "The right trefoil is prime",
+        "proof_strategy": "direct",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Burde and Zieschang, Knots, 2nd revised and extended edition",
+              "url": "https://www.maths.ed.ac.uk/~v1ranick/papers/burdzies.pdf",
+              "locator": "Chapter 7, Corollary 7.7, printed p.94"
+            },
+            {
+              "title": "The right-trefoil genus-one proof in this batch",
+              "url": "https://www.maths.ed.ac.uk/~v1ranick/papers/burdzies.pdf",
+              "locator": "Theorem 7.4 together with the local exact-genus argument"
+            }
+          ]
+        },
+        "statement": "Assume full AC. The standard right-handed trefoil is a prime oriented knot."
+      },
+      {
+        "id": "lem-innermost-critical-height-loops-admit-strict-pl-cap-reduction",
+        "kind": "lemma",
+        "title": "Innermost critical height loops admit strict piecewise linear cap reduction",
+        "deps": [
+          "lem-finite-polygonal-disk-and-collar-surgery",
+          "lem-finite-convex-cell-complexes-admit-compatible-triangulations",
+          "lem-pl-embedded-polyhedron-admits-compatible-subcomplex-triangulation",
+          "lem-finite-pl-level-collars-give-global-band-products",
+          "lem-pl-height-product-caps-replace-by-one-extremum",
+          "lem-pointed-flat-pl-caps-admit-saddle-free-replacements",
+          "lem-three-disk-pl-severing-reassembles-parametrized-balls"
+        ],
+        "proof_strategy": "direct",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "J. W. Alexander, On the subdivision of 3-space by a polyhedron",
+              "url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC1085499/",
+              "locator": "PNAS 10 (1924), pp.7–8, both critical cap cases; finite pointed layer, relative boundary model and ball-transfer constructions supplied explicitly below."
+            }
+          ]
+        },
+        "statement": "Let $S\\subset\\mathbb R^3$ be the image of a supplied finite PL embedding of the standard PL two-sphere. Choose an affine height $h$ distinct on the vertices of a linear triangulation of $S$. At a vertex $v$ with both lower and upper incident directions, let $r_v$ be the number of positive arcs of its small link circle; it is also the number of negative arcs. Call $v$ a saddle when $r_v\\ge2$. Its horizontal section consists of $r_v$ simple loops meeting only at $v$, together with finitely many disjoint regular circles. Let $n(S,h)$ be the sum of the numbers of all these loops, including the regular circles, over the distinct saddle heights.\n\nIf $n(S,h)>0$, there are two supplied finite PL embedded two-spheres $S'_1,S'_2$, with generic affine heights $h_1,h_2$, for which\n$$n(S'_1,h_1)+n(S'_2,h_2)\\le n(S,h)-1.$$\nMoreover supplied parametrized PL balls bounded by $S'_1,S'_2$ give, by explicit finite PL constructions, a parametrized PL ball bounded by $S$. No general three-dimensional Schoenflies theorem or choice hypothesis is used.",
+        "dependency_level": 6
+      },
+      {
+        "id": "thm-finite-pl-schoenflies-in-dimension-three",
+        "kind": "theorem",
+        "title": "Finite piecewise linear Schoenflies in dimension three",
+        "deps": [
+          "lem-no-saddle-polyhedral-two-spheres-bound-parametrized-pl-balls",
+          "lem-innermost-critical-height-loops-admit-strict-pl-cap-reduction",
+          "lem-parametrized-pl-balls-absorb-standard-boundary-windows",
+          "lem-finite-convex-cell-complexes-admit-compatible-triangulations"
+        ],
+        "proof_strategy": "strong-induction",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "J. W. Alexander, On the subdivision of 3-space by a polyhedron",
+              "url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC1085499/",
+              "locator": "PNAS 10 (1924), pp.6–8, full genus-zero height induction. Listed local suppliers give finite PL base, both cap constructions, strict complexity descent and ball reassembly."
+            }
+          ]
+        },
+        "statement": "A supplied finite PL embedding of the standard PL two-sphere in $\\mathbb R^3$ bounds a compact parametrized PL three-ball; its two complementary components are the bounded ball interior and a connected unbounded exterior. A supplied finite PL embedding of the standard PL two-sphere in the standard PL three-sphere bounds two parametrized PL three-balls, and a PL homeomorphism of that three-sphere carries it to the common boundary in a standard double of a convex three-ball. All parameters and homeomorphisms are finite PL on the compact spaces in question. No choice hypothesis is introduced.\n\nThis is a PL assertion in already supplied standard PL ambient spaces. It does not assert triangulability of arbitrary topological three-manifolds or tame arbitrary wild sphere embeddings.",
+        "dependency_level": 7
+      }
+    ]
+  },
+  {
+    "order": 3117,
+    "id": "connected-sums-and-prime-decomposition-examples",
+    "kind": "B",
+    "category": "knot-theory",
+    "title": "Connected sums and prime decomposition — Examples and Counterexamples",
+    "companion": "connected-sums-and-prime-decomposition",
+    "requires": [
+      "connected-sums-and-prime-decomposition"
+    ],
+    "items": [
+      {
+        "id": "ex-knot-kt-05-worked-cases",
+        "kind": "example",
+        "dependency_level": 6,
+        "deps": [
+          "thm-knot-genus-additive-under-connected-sum",
+          "lem-right-trefoil-has-genus-one",
+          "lem-knot-genus-invariant-under-mirror-and-reversal",
+          "lem-knot-reverse-mirror-connected-sum-is-ribbon",
+          "def-countable-choice",
+          "def-axiom-of-choice",
+          "thm-choice-implies-dependent-implies-countable-choice"
+        ],
+        "title": "Connected-sum genus and ribbon examples",
+        "proof_strategy": "direct",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Charles Livingston, A Survey of Classical Knot Concordance, arXiv:math/0307077v4",
+              "url": "https://arxiv.org/pdf/math/0307077v4",
+              "locator": "§2.1, Definition 2.3, printed p.4; radial Morse function with no interior local maxima"
+            },
+            {
+              "title": "Burde and Zieschang, Knots, 2nd revised and extended edition",
+              "url": "https://www.maths.ed.ac.uk/~v1ranick/papers/burdzies.pdf",
+              "locator": "Chapter 7, Proposition 7.4, printed pp.93–94"
+            },
+            {
+              "title": "Brendan Owens and Frank Swenton, An Algorithm to Find Ribbon Disks for Alternating Knots",
+              "url": "https://eprints.gla.ac.uk/287761/1/287761.pdf",
+              "locator": "Proposition 4.2, printed pp.21–22"
+            }
+          ]
+        },
+        "statement": "Assume full AC. Let $T$ be the standard right-handed trefoil, let $T^*$ be its image under a fixed orientation-reversing reflection of $S^3$, and let $-T^*$ denote reversal of that image's knot orientation. Then $g(T\\#T)=2$ and $g(T\\#(-T^*))=2$. The knot $T\\#(-T^*)$ bounds a smooth ribbon disk in $B^4$, meaning a smooth properly embedded disk whose radial-height function has no interior local maxima; in particular it bounds a smooth properly embedded disk and is smoothly slice."
+      },
+      {
+        "id": "cex-knot-kt-05-boundary-case",
+        "kind": "counterexample",
+        "dependency_level": 7,
+        "deps": [
+          "def-knot-connected-sum-and-prime-knot",
+          "thm-schubert-prime-decomposition-for-knots",
+          "lem-right-trefoil-is-prime",
+          "lem-mirroring-preserves-primality-of-a-knot",
+          "def-axiom-of-choice",
+          "def-countable-choice",
+          "thm-choice-implies-dependent-implies-countable-choice"
+        ],
+        "forward_refs": [
+          "def-knot-seifert-pairing-and-matrix",
+          "thm-seifert-matrix-presents-knot-alexander-module",
+          "lem-seifert-matrix-s-equivalence-under-isotopy",
+          "thm-seifert-determinant-is-the-knot-alexander-polynomial",
+          "cor-alexander-polynomial-multiplies-under-connected-sum",
+          "def-levine-tristram-hermitian-form-and-signature",
+          "lem-seifert-stabilization-preserves-levine-tristram-signature",
+          "def-knot-arf-invariant-from-seifert-form",
+          "def-seifert-s-equivalence-and-conway-normalization"
+        ],
+        "title": "The Alexander polynomial does not determine the prime knot summands",
+        "proof_strategy": "direct",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Burde and Zieschang, Knots, 2nd revised and extended edition",
+              "url": "https://www.maths.ed.ac.uk/~v1ranick/papers/burdzies.pdf",
+              "locator": "Chapter 7, §§7.6–7.7 and §15.4, printed pp.94 and 254; granny and square knots"
+            },
+            {
+              "title": "Stefan Friedl, Introduction to Knots and Links, 2024 lecture notes",
+              "url": "https://friedl.app.uni-regensburg.de/papers/2024_knot-theory-final.pdf",
+              "locator": "Chapter 11, §11.5, printed pp.166–168; connected-sum prime decomposition context"
+            }
+          ]
+        },
+        "statement": "Assume the full Axiom of Choice. For an oriented Seifert surface $F\\subset S^3$ with boundary $K$ and ordered basis $a_1,\\ldots,a_{2g}$ of $H_1(F;\\mathbb Z)$, let $V$ be the Seifert matrix with entries $V_{ij}=\\operatorname{lk}(a_i^+,a_j)$. Here $\\operatorname{lk}$ is the integer linking number of disjoint oriented cycles in $S^3$, and $a_i^+$ is a small push-off in the positive normal direction, chosen so that the positive normal followed by the oriented basis of $F$ gives the orientation of $S^3$. Use the standard knot-invariant conventions $\\Delta_K(t)=\\det(V-tV^T)$ up to units $\\pm t^k$ and $\\sigma_{-1}(K)=\\operatorname{sign}(2(V+V^T))$, where the matrix sign is the number of positive eigenvalues minus the number of negative eigenvalues; independence of the chosen surface and basis is part of the Seifert-form invariance theorems. Let $T$ be the standard right-handed trefoil, let $T^*$ be its image under a fixed orientation-reversing reflection of $S^3$, and let $-T^*$ be that image with reversed knot orientation. Define $G=T\\#T$ and $Q=T\\#(-T^*)$. Then $\\Delta_G(t)\\doteq\\Delta_Q(t)\\doteq(t^2-t+1)^2$, and $|\\sigma_{-1}(G)|=4$ while $\\sigma_{-1}(Q)=0$. The oriented prime-factor multisets of $G$ and $Q$ are different. Thus equality of Alexander polynomials does not determine the prime knot summands."
+      }
+    ]
+  }
+]

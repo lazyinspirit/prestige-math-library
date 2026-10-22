@@ -8,6 +8,7 @@ pipeline_run: inverse-problems-knot-theory-all-109-2026-10-19
 deps:
   - def-countable-choice
   - def-generic-movie-of-an-oriented-knot-cobordism
+  - lem-smooth-link-cobordisms-admit-finite-generic-movies
   - def-khovanov-frobenius-algebra-and-cube-of-resolutions
   - def-barnatan-open-tangle-cobordism-complexes
   - lem-barnatan-formal-kink-retractions
@@ -43,11 +44,13 @@ Assume countable choice and fix a generic movie $M$ of a smooth oriented surface
 
 ## Definition references
 
-[[def-generic-movie-of-an-oriented-knot-cobordism|Generic movie conventions]]
+[[lem-smooth-link-cobordisms-admit-finite-generic-movies|Finite generic movies for oriented link cobordisms, including empty ends]]
+
+[[def-generic-movie-of-an-oriented-knot-cobordism|The knot-endpoint specialization of the movie conventions]]
 
 [[def-khovanov-frobenius-algebra-and-cube-of-resolutions|The unit, counit, multiplication, and comultiplication]]
 
-[[def-barnatan-open-tangle-cobordism-complexes|Formal cubes, planar insertion and shifts]]
+[[def-barnatan-open-tangle-cobordism-complexes|Open formal surfaces, signed planar insertion and shifts]]
 
 [[lem-barnatan-formal-kink-retractions|The specified kink maps]]
 

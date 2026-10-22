@@ -1,0 +1,93 @@
+# New compact product local isotopy input in dimensions four and five
+
+This note supplies new whole-compact-manifold coverage. The previously accepted finite-two-complex TOP4 provider is frozen: its proof, acceptance record, hashes, and supplier proofs were not reread or checked for this extension. No canonical or native evidence is changed here.
+
+The primary construction used below is Edwards–Kirby, *Deformations of spaces of imbeddings*, Annals93 (1971), §8, printed84–87 (the explicit alternative to its first proof), together with elementary finite product handles. The new application is the precise use of local contractibility in Siebenmann, *Approximating cellular maps by homeomorphisms*, Topology11 (1972), printed285,290–292, supplied primary PDF15,20–22 in ../renewed-cellular-approximation/primary-pages/. Siebenmann uses small isotopies of the whole compact B^s×T^r, including dimension5, not merely a finite two-complex in dimension4. That new coverage is proved here.
+
+## Exact new contract
+
+Let M=B^s×T^r with s+r=m∈{4,5}, s,r≥0, where B^s is the closed standard ball, B^0 a point, and T^r=(R/8Z)^r. Fix any metric on this compact space. For every ε>0 there exists δ>0 with these properties.
+
+1. If q:M→M is a self-homeomorphism with sup d(q(x),x)<δ and q fixes ∂M pointwise, it admits an isotopy q_t of self-homeomorphisms from q to identity, with sup d(q_t(x),x)<ε for every t and q_t|∂M=id. If q was identity on a boundary neighborhood, the isotopy retains the identity germ: there is a single smaller open collar on which every q_t is identity. In particular the assertion applies when q is already identity on a specified collar, and the retained collar can be chosen inside it.
+
+2. If r≥1 and q has the boundary germ id_{∂B^s}×φ×id_{T^{r−1}}, with φ a circle homeomorphism, the same conclusion holds through maps whose boundary germ remains a product of this form. The product circle germ follows an explicit small isotopy from φ to identity; after that stage it is identity on a common open collar. When s=0 there is no boundary condition and clause1 applies directly. A nonidentity product germ cannot be literally constant throughout an isotopy ending at identity; the conclusion preserves its product form and supplies its specified deformation.
+
+For the carrier's k+n=5, k≥1, take (s,r)=(k−1,n+1) in dimension5 and (s,r)=(k−1,n) in dimension4. The entire compact M is corrected. No hypothesis that M is a finite two-complex, no arbitrary TOP-manifold triangulation, no smoothing of a TOP five-cobordism, and no prior isotopy of q are used. Smallness alone creates the isotopy. A preliminary homotopy-to-identity restriction on covering lifts is therefore harmless but unnecessary for this input.
+
+## Boundary collar insertion: pointwise boundary to a common fixed germ
+
+This step is needed because a boundary-adjustment map may initially fix only ∂M. Assume s≥1. Use the explicit product collar c:A×[0,1]→M, A=∂M, obtained from the radial collar of B^s times T^r; its parameter increases inward. The collar occupies a proper outer shell, leaving an inner core. Put a_t=t/2 and let
+
+γ_t:M∖c(A×[0,a_t))→M
+
+be identity outside c(A×[0,1]) and in that collar send c(z,v) to c(z,(v−a_t)/(1−a_t)), a_t≤v≤1. This is a homeomorphism of the truncated compact manifold onto M. Its inverse is defined on all M and sends c(z,w) to c(z,a_t+(1−a_t)w). Define Q_t to be identity on c(A×[0,a_t]) and γ_t^{-1}qγ_t elsewhere.
+
+The two formulas agree on the common frontier because γ_t sends it to A and q fixes A pointwise. On each side they are homeomorphisms, and the inverse is given by the same formulas with q^{-1}; hence Q_t is a self-homeomorphism. Q_0=q and Q_1 is identity on the fixed collar c(A×[0,1/2]). Joint continuity follows from the displayed formulas away from the frontier. At the frontier, points and their γ_t-images approach the boundary, where q is identity, so the formulas have the same limit, uniformly in z by compactness of A. This also proves continuity at t=0; the inserted collars shrink to A. Thus Q_t is an isotopy.
+
+Here smallness is quantitative without any differentiability of q. The inverses γ_t^{-1}:M→M form a continuous family on compact I×M and so are uniformly equicontinuous. For x outside the inserted collar, set y=γ_t(x). Then
+
+d(Q_t(x),x)=d(γ_t^{-1}q(y),γ_t^{-1}y),
+
+which tends uniformly to zero with sup d(q,id); inside the inserted collar the displacement is zero. Consequently the whole collar-insertion isotopy is arbitrarily small for q sufficiently small.
+
+If q was identity on c(A×[0,b)) for some b≤1, the insertion stage preserves this entire subcollar: for v≥a_t its rescaled parameter (v−a_t)/(1−a_t) is ≤v, so q fixes γ_t(c(z,v)) whenever v<b; points inside the inserted collar are fixed by definition. The later stage will retain a smaller common collar. No collar-straightening theorem is being assumed: these explicit maps are that straightening.
+
+## The elementary local block deformation, now including dimension five
+
+We give the dimension-neutral construction needed for all handle indices, rather than infer dimension5 from an accepted dimension4 proof. Let p+v=m∈{4,5}. An attaching chart has shape B^p×4B^v⊂B^p×R^v. Let f be an embedding of this block sufficiently close to inclusion and identity on an open collar of ∂B^p×4B^v. “Boundary respecting” means f^{-1}(∂B^p×R^v)=∂B^p×4B^v; it does not mean inverse images of compact sets are compact. We create a homeomorphism G of B^p×R^v with compact support, agreeing with f on a smaller inner block, and then contract G by the Alexander formula.
+
+If v≥1, construct an explicit shell embedding α:(−6,6)×T^{v−1}→int4B^v, equal to inclusion on the central parameter patch2B^v. Start with an interval for v=1. To pass from a shell in R^v to the next dimension, put its compact sub-shell in the positive first-coordinate halfspace, and rotate it about the codimension-two boundary axis in R^{v+1}. Nonzero radius and angle give the inverse coordinates, so this appends one circle and remains an embedding. We can start with smooth rotations. At a chosen parameter point normalize its value and derivative by a target affine map. On a sufficiently small parameter box the resulting α is C^1-close to identity. The extension Ψ(x)=x+χ(x)(α(x)−x), with χ supported in twice that box, has derivative uniformly close to identity and a perturbation with Lipschitz constant<1. It is injective, proper and onto, hence a diffeomorphism. Replacing α by Ψ^{-1}α makes the central patch exactly flat. A radial change in the parameter patch, identity outside3B^v, followed by the inverse target rescaling enlarges that flat patch to2B^v. Finally a radial embedding R^v→int4B^v fixed on2B^v compresses the rest. All these operations are fixed Euclidean constructions, independent of f. In particular the dimension5 case requires a T^4 shell in R^5 constructed by rotation, not a punctured T^5 immersion.
+
+Multiply α by B^p and, for f close enough, conjugate to
+
+u=α^{-1}fα:B^p×[−4,5]×T^{v−1}→B^p×(−6,6)×T^{v−1}.
+
+Let λ translate the displayed real coordinate by−8. Let w:R→R be the increasing piecewise linear map equal to z+8 for z≤−11/3, equal to z for z≥14/3, and affine from [−11/3,14/3] onto [13/3,14/3]. Write ω=w×id and W=λω^{-1}λ^{-1}. Thus W is translation−8 below−11/3 and identity above−10/3. On S=Wu(B^p×[−4,5]×T^{v−1}) define
+
+R=(λu)ω(λu)^{-1} on T=λu(B^p×[−4,5]×T^{v−1}), and R=id on the rest of S.
+
+Here is the verification that these formulas really define the required embedding. For u sufficiently close to inclusion, each u(t)-level lies in a small horizontal slab around t. Near the bottom level−4, W=λ, so S and T share the same lower boundary and the same inward collar. The upper boundary of S, u(5), lies near height5, disjoint from T, whose top λu(5) lies near−3. In the connected interior of T, membership in int S is open and closed: an interior limit could leave only through the boundary of S, and its lower/side boundaries are boundaries of T while its upper boundary is in the disjoint slab. The common inward collar makes this membership nonempty. Thus T⊂S. Side boundaries in the B^p factor are standard because the attaching collar is fixed. On T, conjugation by λu takes its parameter interval[−4,5] monotonically onto[4,5]. Near the upper end the map is identity on a whole collar, so it glues to the identity on S∖T. Its image inside T is disjoint from that fixed complement. Therefore R is an embedding of S.
+
+Set b=RWu restricted to B^p×[−4,4]×T^{v−1}. On [−2,2] both modifications are identity, so b=u there. At its lower end b(−4)=λu(4), since w(−4)=4, while b(4)=u(4). Thus identifying these two ends by λ gives a map F of B^p×T^v to itself. To check injectivity, the image interior is the strip above λu(4) and below u(4), with its two supplied boundary bicollars. The same open-and-closed argument in cylinder interiors gives these sides globally in the relevant slabs. The translated strip is below λu(4), so adjacent strip interiors are disjoint; the inverse translate handles the upper neighbor. Larger translates are disjoint by their horizontal slab bounds. At the seam the two supplied collars occupy opposite sides and glue to a genuine neighborhood. F is therefore an injective local homeomorphism, boundary respecting and onto: its image is open and closed in the connected compact target. It fixes the attaching collar and agrees with f wherever the input point and its f-image both lie in the central2B^v patch.
+
+Lift F to the unique homeomorphism \widetilde F of B^p×R^v close to identity on a fundamental region. Local inverses of the circle covering supply this lift when F is sufficiently close to identity. The lift commutes with period translations, has bounded displacement, fixes the attaching collar and is uniformly close to identity everywhere. Extend it by identity outside B^p×R^v in R^m. Let γ:int3B^m→R^m be radial expansion fixed on2B^m, with radial factor≥1. Conjugate the extended lift by γ inside3B^m and set identity outside. Bounded displacement guarantees continuity at the outside boundary, for both map and inverse. Since expansion takes the complement of B^p outward, the extended lift fixes it, and the conjugate restricts to a homeomorphism G of B^p×R^v. Its support is contained in B^p×3B^v, it retains the attaching collar, and G=f on B^p×B^v for f close enough. These constructions depend continuously on f at inclusion and give G=id when f=id.
+
+Extend G by identity to R^m. The explicit Alexander isotopy is A_0=id and A_t(x)=tG(x/t) for t>0, with inverse tG^{-1}(x/t). Its support shrinks inside t(B^p×3B^v), so both maps converge uniformly to identity at t=0. It preserves the attaching collar: a point sufficiently near ∂B^p is taken outward by x↦x/t, either into the fixed collar or outside B^p. The path A_t^{-1}f starts at f and ends at identity on the inner block.
+
+For sufficiently close f the support lies inside f(B^p×4B^v): at an interior target point of the smaller block, the straight homotopy from f to inclusion misses that point on the outside boundary, so the local degree stays one. The fixed attaching collar treats the side boundary. Thus each step is postcomposition with an ambient homeomorphism supported in the current embedding image and leaves that image unchanged. It is stationary on the outside frontier and glues to the unmodified map outside the chart. Use the inner2B^v variant when a neighborhood of the smaller handle is to become fixed.
+
+If v=0, the boundary-fixed embedding B^m→B^m is a homeomorphism: its interior image is open, and closed in the connected interior by compactness and the fixed boundary. Apply the Alexander formula directly. This treats the top-index handle, whose interior is not assumed already fixed.
+
+Finally all formulas are continuous at f=id, uniformly on their fixed compact supports and time intervals. Hence for any η>0 an input neighborhood can be chosen on which the entire local deformation has displacement<η. This is the actual small-isotopy creation step in both dimensions. No annulus theorem, smoothing theorem, or supplied isotopy has entered it.
+
+## Finite whole-manifold assembly on B^s×T^r
+
+For s≥1 first perform collar insertion. We now have a fixed open identity collar of width1/2. Keep the smaller closed collar D=c(A×[0,1/3]) fixed, and perform all subsequent modifications away from a still smaller open neighborhood of it. There is no boundary when s=0.
+
+The product M has a finite explicit standard piecewise linear handle decomposition, relative to this collar when it is present. This is geometry of the specified standard product, not a triangulation of an arbitrary TOP manifold. One way to construct it is to give every circle one0-handle and one1-handle, take products, and round the product corners. For the disk factor relative to its boundary collar, the remaining disk is its single index-s handle. The product handles have indices s+j for the j choices of circle1-handles; for s=0 their indices are j. To see the handle form, a product of handles B^{a}×B^{b} and B^{c}×B^{d} has core B^{a+c} and normal factor B^{b+d}; after rounding the corners the two attaching pieces (∂B^a×B^c)∪(B^a×∂B^c) are precisely ∂B^{a+c}. The untouched factors give its normal disk. Taking the products in increasing index gives the stated finite decomposition. The construction uses only finite cubes, interval collars, products and corner rounding; there are 2^r circle-product handles. It can equivalently be obtained from the standard finite cubical triangulation of this product by derived blocks, where a p-simplex times its dual normal block is B^p×B^{m−p}.
+
+Each attaching block has a product thickening B^p×R^{m−p} inside the standard product. Its intersection with earlier compact handles is its attaching face; enlarge the already fixed neighborhoods slightly and shrink the remaining thickening. Reparameterizing the normal coordinate puts ∂B^p×4B^{m−p} into the fixed attaching collar. Actual support is disjoint from all earlier fixed compact handles: where an apparent contact occurs at an attaching face, the local map is identity on a whole collar. The local construction above therefore makes a neighborhood of the next handle fixed while retaining neighborhoods of every earlier handle and of D. All supports lie in the interior of M and outside the retained boundary collar. The finite product thickening is a standard handle chart of this explicitly constructed PL product, requiring no TOP normal-bundle theorem.
+
+Starting with the current homeomorphism, restrict it in each such chart. It is identity on a neighborhood of the attaching region and, if sufficiently close to identity, maps the smaller chart into its prescribed thickening. Apply the local block deformation and extend by the unchanged map outside. Every stage is composition with ambient homeomorphisms, so remains a self-homeomorphism of M. At the end every handle, as well as the original collar, has a fixed neighborhood. These finitely many neighborhoods cover the whole compact M, hence the endpoint is identity on all M, not only on a skeleton or a finite two-complex.
+
+There is a single input δ controlling the full construction. Every local step is continuous at inclusion, fixes inclusion, and has a prescribed finite chart and compact support. First choose an acceptable displacement neighborhood for the last step, then choose the preceding output neighborhoods small enough to land in the next admissible input neighborhood, working backwards through the finite list. Shrink once more so all intermediate paths lie in the ε-neighborhood of identity. Equivalently the finite composition, with finitely reparameterized time intervals, is continuous at identity uniformly in time. Collar insertion is likewise uniformly small by the explicit equicontinuity estimate above. This proves clause1, including the case of merely pointwise boundary fixation. All resulting maps fix a common smaller collar whenever there was an input identity germ; indeed after insertion the retained collar is fixed for every remaining stage. For s=0 the same finite handle proof directly treats the entire torus.
+
+## Removing the circle-product germ
+
+Suppose s≥1,r≥1 and q has the germ id×φ×id near ∂M. Smallness makes φ orientation preserving and gives its unique small lift \widetilde φ(z)=z+a(z), with a8-periodic and uniformly small. The formula
+
+\widetilde φ_t(z)=(1−t)\widetilde φ(z)+tz
+
+is strictly increasing, 8-equivariant and onto, so descends to an isotopy φ_t of circle homeomorphisms from φ to identity. Its displacement is bounded by sup|a|, as is that of its inverse. Define the global product P_t=id_{B^s}×φ_t×id_{T^{r−1}}, and set
+
+q_t=P_t P_0^{-1}q.
+
+This starts at q, ends at P_0^{-1}q, and on the whole original product-germ neighborhood equals P_t. The endpoint is identity there. The displacement added by P_tP_0^{-1} is at most sup|a| in the standard product metric; uniform equivalence of metrics on compact M gives arbitrary prescribed smallness in the chosen metric. Apply clause1 to that endpoint, keeping a smaller common collar fixed. Concatenation proves clause2. This does not assume a general small torus map already comes with an isotopy: it constructs the required circle isotopy explicitly and constructs the remaining whole-manifold isotopy by the preceding blocks.
+
+## Scope, choices, and carrier use
+
+Only finite products, a finite number of standard handles, and finite choices of neighborhoods and tolerances are used. No new full AC assumption or countable assembly is introduced. Neither this lemma nor its proof smooths W^5; it concerns only the already standard compact product B^s×T^r. Any use of its isotopy to deduce a product cobordism remains the carrier's separate invariant/covering argument.
+
+For the wrapped five-dimensional homeomorphism, first use the explicit circle-germ normalization and then clause1. For the four-dimensional boundary-adjustment map, use clause1 directly; if only boundary points are fixed, the displayed γ_t formula supplies the missing fixed collar. These auxiliary boundary germs are handle-product collars. The carrier must keep the original outer-end/K germs protected by confining these operations to the standard compact auxiliary handle model as in its construction. This lemma does not independently identify those original protected regions with the model's boundary.
+
+This is new local mathematical authoring, not native execution, certification, canonical acceptance or a gate result. It awaits one independent consolidated first review and, if necessary, one focused repair/final pass.

@@ -33,7 +33,7 @@ sources:
 
 ## Example
 
-Assume Countable Choice. Let $X=Y=\mathbb R$, let $A x=ax$ for a fixed $a>0$, and let the exact datum be $y=ax^\dagger$ with $x^\dagger\ne0$ and noise bound $\delta=0$. Choose $N\ge1$ and $0<\omega a^2<1$. The exact Landweber prefix starts at $x_0=0$ and uses $x_{k+1}=x_k+\omega a(y-ax_k)$ through its finite budget $N$. For a learned finite-depth architecture with zero initialization, identity update blocks, and layer parameters $\widetilde\omega_0,\ldots,\widetilde\omega_{N-1}$, the updates are $\widetilde x_{k+1}=\widetilde x_k+\widetilde\omega_k a(y-a\widetilde x_k)$. If every $\widetilde\omega_k=\omega$, the two depth-$N$ outputs coincide; otherwise the learned output is the finite composition determined by its own layer parameters.
+Assume Countable Choice. Let $X=Y=\mathbb R$, let $A x=ax$ for a fixed $a>0$, and let the exact datum be $y=ax^\dagger$ with $x^\dagger\ne0$ and noise bound $\delta=0$. Choose a discrepancy factor $\tau>1$, $N\ge1$, and $0<\omega a^2<1$. The exact Landweber prefix starts at $x_0=0$ and uses $x_{k+1}=x_k+\omega a(y-ax_k)$ through its finite budget $N$. For a learned finite-depth architecture with zero initialization, identity update blocks, and layer parameters $\widetilde\omega_0,\ldots,\widetilde\omega_{N-1}$, the updates are $\widetilde x_{k+1}=\widetilde x_k+\widetilde\omega_k a(y-a\widetilde x_k)$. If every $\widetilde\omega_k=\omega$, the two depth-$N$ outputs coincide; otherwise the learned output is the finite composition determined by its own layer parameters.
 
 ## Example references
 
@@ -49,9 +49,9 @@ Assume Countable Choice. Let $X=Y=\mathbb R$, let $A x=ax$ for a fixed $a>0$, an
 
 ## Facts & Assumptions
 
-**Given:** Countable Choice, $a>0$, $x^\dagger\ne0$, $y=ax^\dagger$, noise bound $\delta=0$, $N\ge1$, $0<\omega a^2<1$, and the stated scalar exact and learned recurrences.
+**Given:** Countable Choice, $a>0$, $x^\dagger\ne0$, $y=ax^\dagger$, noise bound $\delta=0$, discrepancy factor $\tau>1$, $N\ge1$, $0<\omega a^2<1$, and the stated scalar exact and learned recurrences.
 
-[F1] [[alg-landweber-iteration-with-discrepancy-stopping]]: under Countable Choice, the path starts at $x_0=0$, uses $x_{k+1}=x_k+\omega A^*(y-Ax_k)$, and the finite procedure returns at its first discrepancy stop or at budget $N$.
+[F1] [[alg-landweber-iteration-with-discrepancy-stopping]]: under Countable Choice, the path starts at $x_0=0$, uses $x_{k+1}=x_k+\omega A^*(y-Ax_k)$, and, with supplied discrepancy factor $\tau>1$, the finite procedure returns at its first residual test $\|y-Ax_k\|\le\tau\delta$ or at budget $N$.
 
 [F2] [[def-ip-unrolled-regularization-architecture]]: the deployed unrolled map is a finite composition of its declared update maps with fixed layer parameters.
 
@@ -63,8 +63,8 @@ Assume Countable Choice. Let $X=Y=\mathbb R$, let $A x=ax$ for a fixed $a>0$, an
 
 **Proof technique:** direct.
 
-1.1 The scalar map $A:\mathbb R\to\mathbb R$, $x\mapsto ax$, is nonzero and compact because $a>0$ and the space is finite-dimensional. For every $x$, $\|Ax\|_2=a|x|$, so $\|A\|=a$. For every $u,v\in\mathbb R$, $\langle Au,v\rangle=auv=\langle u,av\rangle$, hence $A^*$ is also multiplication by $a$. With [A1], $0<\omega a^2<1$ implies the supplier's condition $0<\omega<2/\|A\|^2$. The initialization and scalar update formulas are continuous, hence Borel by [F3], so they satisfy [F2]'s estimator-domain condition. Thus [F1] gives the exact recurrence and its finite-budget stopping rule for this instance. [A1, F1, F2, F3, given, algebra]
+1.1 The scalar map $A:\mathbb R\to\mathbb R$, $x\mapsto ax$, is nonzero and compact because $a>0$ and the space is finite-dimensional. For every $x$, $\|Ax\|_2=a|x|$, so $\|A\|=a$. For every $u,v\in\mathbb R$, $\langle Au,v\rangle=auv=\langle u,av\rangle$, hence $A^*$ is also multiplication by $a$. With [A1], $0<\omega a^2<1$ implies the supplier's condition $0<\omega<2/\|A\|^2$. The initialization and scalar update formulas are continuous, hence Borel by [F3], so they satisfy [F2]'s estimator-domain condition. Together with the supplied $\tau>1$ and noise bound $\delta=0$, these verify every input condition of [F1], which gives the exact recurrence and its finite-budget stopping rule for this instance. [A1, F1, F2, F3, given, algebra]
 
-1.2 Substituting $y=ax^\dagger$ gives $x_{k+1}-x^\dagger=(1-\omega a^2)(x_k-x^\dagger)$. Starting from $x_0=0$, induction gives $x_k=x^\dagger[1-(1-\omega a^2)^k]$ for every $0\le k\le N$, in particular $x_N=x^\dagger[1-(1-\omega a^2)^N]$. Hence $|y-ax_k|=a|x^\dagger|(1-\omega a^2)^k>0$ for every such finite $k$. Since the noise bound is $\delta=0$, no earlier discrepancy stop occurs and the procedure returns this value at budget exhaustion. [F1, given, algebra]
+1.2 Substituting $y=ax^\dagger$ gives $x_{k+1}-x^\dagger=(1-\omega a^2)(x_k-x^\dagger)$. Starting from $x_0=0$, induction gives $x_k=x^\dagger[1-(1-\omega a^2)^k]$ for every $0\le k\le N$, in particular $x_N=x^\dagger[1-(1-\omega a^2)^N]$. Hence $|y-ax_k|=a|x^\dagger|(1-\omega a^2)^k>0$ for every such finite $k$. Since $\tau\delta=0$, the discrepancy test fails even at $k=N$, so no earlier discrepancy stop occurs and the procedure returns this value at budget exhaustion. [F1, given, algebra]
 
 2.1 For the learned architecture, $\widetilde x_0=0$ and its displayed recurrence give $\widetilde x_{k+1}-x^\dagger=(1-\widetilde\omega_k a^2)(\widetilde x_k-x^\dagger)$. Starting with $\widetilde x_0-x^\dagger=-x^\dagger$, repeated substitution yields $\widetilde x_N-x^\dagger=-x^\dagger\prod_{k=0}^{N-1}(1-\widetilde\omega_k a^2)$, or $\widetilde x_N=x^\dagger[1-\prod_{k=0}^{N-1}(1-\widetilde\omega_k a^2)]$. The fixed-parameter updates are continuous and Borel by [F3], so this is an admissible finite point map. If all layer parameters equal $\omega$, the formula is the exact Landweber value in step 1.2; for other parameters it is the finite composition specified by [F2]. [F2, F3, given, step 1.2, algebra] ∎

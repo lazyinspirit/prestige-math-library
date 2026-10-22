@@ -14,6 +14,11 @@ provenance:
   proof: ai-generated
 generation:
   role: counterexample
+verification:
+  judge:
+    model: "gpt-6-luna"
+    verdict: pass
+    date: 2026-10-22
 sources:
   references:
     - title: "Ciprian Manolescu, From Knots to Four-Manifolds, §2"

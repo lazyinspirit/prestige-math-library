@@ -7,7 +7,7 @@ origin: pipeline
 pipeline_run: inverse-problems-knot-theory-all-109-2026-10-19
 dependency_level: 5
 deps:
-  - def-ip-pnp-ista-with-denoiser
+  - alg-ip-pnp-ista-with-denoiser
   - def-axiom-of-choice
   - def-standard-normal-and-normal-laws
   - lem-normal-location-scale-density
@@ -39,7 +39,7 @@ Assume the Axiom of Choice. Let $\varepsilon$ have the standard normal law, let 
 
 ## Statement references
 
-[[def-ip-pnp-ista-with-denoiser]]
+[[alg-ip-pnp-ista-with-denoiser]]
 
 [[def-standard-normal-and-normal-laws]]
 
@@ -53,7 +53,7 @@ Assume the Axiom of Choice. Let $\varepsilon$ have the standard normal law, let 
 
 [F2] [[lem-normal-location-scale-density]]: under AC, every positive-variance normal law has a strictly positive Lebesgue density on all of $\mathbb R$; a zero-variance normal law is a point mass.
 
-[F3] [[def-ip-pnp-ista-with-denoiser]]: the gradient step is $z_t=x_{t-1}-\gamma\nabla g(x_{t-1})$ and the next iterate is $x_t=\widetilde D_\sigma(z_t)$.
+[F3] [[alg-ip-pnp-ista-with-denoiser]]: the gradient step is $z_t=x_{t-1}-\gamma\nabla g(x_{t-1})$ and the next iterate is $x_t=\widetilde D_\sigma(z_t)$.
 
 ## Counterexample
 

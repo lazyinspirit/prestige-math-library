@@ -25,8 +25,8 @@ sources:
 
 ## Definition
 
-Let $Q\in[0,\infty)$ and let $a=(a_j)_{j\in\mathbb N}$ be a nondecreasing sequence of positive real numbers, so $0<a_1\le a_2\le\cdots$. The statistical ellipsoid of radius $Q$ and weights $a$ in the Gaussian sequence inverse model is
-$$\Theta_a(Q)=\left\{\theta\in\ell^2(\mathbb N,\mathbb R):\sum_{j=1}^{\infty}a_j^2\theta_j^2\le Q^2\right\}.$$
+Let $Q\in[0,\infty)$ and let $a=(a_j)_{j\in\mathbb N_{>0}}$ be a nondecreasing sequence of positive real numbers, so $0<a_1\le a_2\le\cdots$. The statistical ellipsoid of radius $Q$ and weights $a$ in the Gaussian sequence inverse model is
+$$\Theta_a(Q)=\left\{\theta\in\ell^2(\mathbb N_{>0},\mathbb R):\sum_{j=1}^{\infty}a_j^2\theta_j^2\le Q^2\right\}.$$
 No assumption that $a_j\to\infty$ is included. In particular, this definition does not assert that the ellipsoid is compact in $\ell^2$.
 
 ## Definition references

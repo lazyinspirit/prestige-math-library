@@ -31,6 +31,10 @@ sources:
       url: "https://www.mathc.rwth-aachen.de/~rauhut/files/circulant-independent.pdf"
 verification:
   precheck: n/a
+  judge:
+    model: "gpt-6-luna"
+    verdict: pass
+    date: 2026-10-22
 ---
 
 ## Definition

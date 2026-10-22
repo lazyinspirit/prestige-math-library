@@ -27,6 +27,10 @@ sources:
       locator: "Theorem 3.44 and Corollary 3.45, pp. 254-256"
 verification:
   precheck: n/a
+  judge:
+    model: "gpt-6-luna"
+    verdict: pass
+    date: 2026-10-22
 ---
 
 ## Definition

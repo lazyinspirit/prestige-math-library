@@ -1,0 +1,135 @@
+---
+id: alg-planar-code-validation-and-diagram-reconstruction
+kind: algorithm
+title: "Planar-code validation and diagram reconstruction"
+status: draft
+origin: pipeline
+pipeline_run: inverse-problems-knot-theory-all-109-2026-10-19
+deps:
+  - def-planar-diagram-gauss-and-dowker-codes
+  - lem-planar-diagram-code-realizability-and-face-validation
+justified_by: []
+aliases: []
+proof_strategy: not-applicable
+provenance:
+  statement: ai-altered
+  proof: not-applicable
+sources:
+  references:
+    - title: "Joel Hass, Jeffrey C. Lagarias, and Nicholas Pippenger, The Computational Complexity of Knot and Link Problems, Journal of the ACM 46 (1999), section 1"
+      url: "https://arxiv.org/pdf/math/9807016"
+      locator: "§1 Introduction, finite link-diagram representation, web text lines 102–121"
+    - title: "Jeff Erickson, Planar Graphs, Computational Topology lecture notes (2023)"
+      url: "https://jeffe.web.engr.illinois.edu/teaching/comptop/2023/notes/09-planar-graphs.html"
+      locator: "Rotation Systems and Formalities and Trivialities, lines 49–72"
+verification:
+  precheck: n/a
+---
+
+## Definition
+
+**Input:** A finite tagged Gauss code, signed Dowker–Thistlethwaite code, or
+oriented planar-diagram code in the conventions of this page. The crossing
+count $c$ is a nonnegative integer. When $c>0$, the code includes the finite
+crossing labels, edge-end incidences, strand arrows, over/under data, crossing
+signs, and a distinguished outer face. When $c=0$, the only admissible input
+for this procedure is the one-component crossingless code specified in the
+code definition.
+
+**Output:** Either `Invalid(reason, witness)`, where `reason` is the first
+failed check below and `witness` identifies the offending field, label, or
+crossing, or `Valid(diagram, components, faces, outerFace)`. Here `diagram` is
+a finite gluing record consisting of one crossing disk per vertex, one
+rectangular edge band for each pair of darts under $\alpha$, and one cap disk
+per cycle of the face permutation. Each band is attached at its recorded dart ports, and each
+crossing disk records its clockwise order, strand orientations, over/under
+pair, and sign. `components` lists the oriented link cycles, `faces` lists the
+face-permutation cycles, and `outerFace` is the selected cycle. The gluing
+record represents a polygonal spherical diagram; deleting a point in its
+selected face gives the plane model. The procedure tests realizability of
+this code only; it does not compare the represented link with another code.
+
+**Instructions:**
+
+1. Read the tag and crossing count. If the tag is unknown or $c$ is not a
+   nonnegative integer, return `invalid-header` with that field.
+
+2. If $c=0$, accept only one empty Gauss component word, the empty signed-DT
+   code, or the single `Loop[1]` PD record, each with exactly one orientation
+   marker, `ccw` or `cw`. Return
+   `invalid-crossingless-code` otherwise. For an accepted input return the
+   standard circle with the marked orientation, one component, its two sphere
+   faces, and the `outside` face selector. Do not run crossing-graph tests.
+
+3. For a Gauss code with $c>0$, reject an empty component word. Check that
+   every label lies in $\{1,\ldots,c\}$, occurs exactly twice in total, and
+   occurs once with each over/under sign. Check that its separate crossing-sign
+   vector has length $c$ and entries in $\{+1,-1\}$. Return
+   `invalid-crossing-label` for the first out-of-range label,
+   `invalid-crossing-visit-count` with the label and its over/under counts for
+   any visit failure, or `invalid-crossing-sign-vector` with the first bad
+   position. Turn successive visits on each component word into directed edge
+   labels, including each cyclic last-to-first edge, numbering these segments
+   in the listed component order and then in traversal order, and form the
+   crossing records from the over/under visits and the stored crossing signs.
+
+4. For a signed DT code, check that its pairing list and sign vector each have
+   length $c$, each pairing value has absolute value in
+   $\{2,4,\ldots,2c\}$, every such absolute value occurs once, and every sign
+   is $+1$ or $-1$. Return `invalid-dt-pairing` with the first bad index for a
+   pairing failure, or `invalid-crossing-sign-vector` with the first bad
+   position for a sign failure. The odd visit $2j-1$ is crossing $j$; if
+   $d_j>0$ it is the over-visit and if $d_j<0$ it is the under-visit. At the
+   even visit paired with $2j-1$, use crossing label $j$ and the opposite
+   over/under sign. Decode visits in order $1,\ldots,2c$ into the corresponding
+   signed Gauss word and continue with step 3.
+
+5. For a PD code, check that there are exactly $c$ crossing records and four
+   dart occurrences at each record. Return `invalid-crossing-record` with the
+   first bad record otherwise. Use the edge labels and arrows in the records
+   to form the paired-dart involution, crossing rotations, over/under pairs,
+   and crossing signs.
+
+6. In every nonempty encoding, check that each edge label has exactly two
+   occurrences, one incoming and one outgoing; each crossing has exactly four
+   incident darts; the opposite pairs are exactly one over-strand and one
+   under-strand; each strand has one incoming and one outgoing end; and the
+   cyclic order matches the stored crossing sign. Return, in that order,
+   `invalid-edge-incidence`, `invalid-crossing-valence`,
+   `invalid-over-under-pair`, `invalid-strand-orientation`, or
+   `invalid-crossing-sign-order`, with the first offending label or crossing.
+
+7. Starting at each as-yet unvisited outgoing dart, cross its edge by $\alpha$
+   to the incoming dart at the other endpoint and continue through the
+   opposite dart of that same strand. Stop only when the starting outgoing
+   dart is reached. If an end is missing, a dart repeats before that return, or
+   any dart remains uncovered after all cycles are traced, return
+   `invalid-component-closure` with the first such dart. Then test the crossing
+   graph for connectedness; if it is disconnected, return
+   `disconnected-crossing-graph`.
+
+8. Compute $\phi=\alpha\circ\sigma$ on all darts by finite table lookup and
+   list its cycles. Put $V=c$, $E=|D|/2$, and $F=$ the number of cycles. If
+   $V-E+F\ne2$, return `non-spherical-face-count` with $(V,E,F)$. If the
+   supplied outer-face identifier is not one of these cycles, return
+   `invalid-outer-face` with that identifier.
+
+9. For a passing code, choose the lexicographically first spanning tree in the
+   finite edge ordering. Root it at the least crossing label and attach its
+   tree bands in increasing distance from that root, using the recorded cyclic
+   gaps. Then attach the remaining edge bands in increasing edge-label order.
+   Use the distinguished face for the plane projection, replace each crossing
+   disk by its prescribed transverse crossing, attach one cap disk along each
+   face cycle, and lift the over-strand above the under-strand. Return this
+   finite gluing record, the directed components, the face cycles, and the
+   outer-face identifier.
+
+## Definition references
+
+[[def-planar-diagram-gauss-and-dowker-codes]] — exact accepted input formats, signs, and face permutation.
+
+[[lem-planar-diagram-code-realizability-and-face-validation]] — the spherical realization criterion used at steps 8–9.
+
+[Hass–Lagarias–Pippenger, §1](https://arxiv.org/pdf/math/9807016) — finite link-diagram graph input.
+
+[Erickson, “Planar Graphs”](https://jeffe.web.engr.illinois.edu/teaching/comptop/2023/notes/09-planar-graphs.html) — permutation-based face computation and outer-face convention.

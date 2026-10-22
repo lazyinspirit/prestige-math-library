@@ -1,0 +1,73 @@
+{
+  "version": 1,
+  "run": "inverse-problems-knot-theory-all-109-2026-10-19",
+  "batch": "55",
+  "round": 0,
+  "reviewed_items": [
+    "def-ip-discrete-linear-input-state-output-experiment",
+    "alg-ip-exact-block-hankel-realization",
+    "thm-ip-finite-observability-identifies-initial-state",
+    "thm-ip-state-similarity-preserves-input-output-data",
+    "thm-ip-hankel-realization-recovers-controllable-observable-system",
+    "cex-ip-continuous-time-frequency-aliasing",
+    "ex-ip-similar-state-space-realizations-same-data",
+    "ex-ip-unobservable-state-mode",
+    "ex-ip-forward-euler-observation-model-error",
+    "ex-ip-small-hankel-singular-value-amplifies-realization-perturbation"
+  ],
+  "reviewed_pages": [
+    "dynamic-data-identifiability-and-system-realization",
+    "dynamic-data-identifiability-and-system-realization-examples"
+  ],
+  "decision": "repair",
+  "reason": "Reviewed the complete assigned pages and items against the approved IP-55 design and current plan row, and checked the actual direct supplier statements and proofs, including the batch-4 error-budget definition. Inventories and page prerequisites match the plan; no outside consumer repair was identified. Repairs are needed for extra Countable Choice restrictions, one unresolved exact-backend success condition, and a misplaced reference section.",
+  "findings": [
+    {
+      "id": "thm-ip-finite-observability-identifies-initial-state",
+      "type": "scope",
+      "reason": "The approved finite-dimensional design does not require Countable Choice. The cited SVD supplier states and proves the finite-dimensional result without that premise, and this proof uses only finite-dimensional facts. Remove the extra premise, def-countable-choice dependency, and matching axiom-use entry; the same restriction appears in the algorithm, Hankel theorem, and two examples."
+    },
+    {
+      "id": "alg-ip-exact-block-hankel-realization",
+      "type": "scope",
+      "reason": "The approved exact-real procedure specifies a single finite SVD and pseudoinverse call, with no Countable Choice premise. Remove the extra assumption, dependency, reference, and axiom-use entry; check the Hankel theorem and small-singular-value example as consumers."
+    },
+    {
+      "id": "thm-ip-hankel-realization-recovers-controllable-observable-system",
+      "type": "prerequisite",
+      "reason": "The theorem guarantees algorithm success, but the algorithm also permits failed-solve when a routine fails. Existence of an SVD and pseudoinverses alone does not establish that a permitted backend completes and passes verification. Clarify that the exact-operation model guarantees this, or state the smallest missing condition: successful exact rank, SVD, and pseudoinverse calls with checks passed."
+    },
+    {
+      "id": "cex-ip-continuous-time-frequency-aliasing",
+      "type": "local",
+      "reason": "The trailing generic References section violates the required immediate reference heading. Move its supplier link into Statement references after the complete Statement refuted section, retaining the necessary supplier link in Facts & Assumptions."
+    }
+  ],
+  "consumer_checks": [
+    {
+      "id": "ex-ip-unobservable-state-mode",
+      "decision": "repair",
+      "reason": "It is the direct consumer of the observability theorem and repeats the unnecessary Countable Choice assumption, dependency, and axiom-use entry. Remove these with the supplier repair; its example and rank calculation are otherwise sound."
+    },
+    {
+      "id": "thm-ip-hankel-realization-recovers-controllable-observable-system",
+      "decision": "repair",
+      "reason": "It consumes the algorithm Definition and repeats the unnecessary Countable Choice restriction. Remove that restriction with the supplier repair and align its success conclusion with the clarified exact-backend contract."
+    },
+    {
+      "id": "ex-ip-small-hankel-singular-value-amplifies-realization-perturbation",
+      "decision": "repair",
+      "reason": "It consumes both the algorithm and Hankel theorem, repeats the unnecessary Countable Choice restriction, and relies on guaranteed success in both scalar cases. Align its assumptions and proof with the repairs; the scalar perturbation calculations are otherwise sound."
+    },
+    {
+      "id": "dynamic-data-identifiability-and-system-realization",
+      "decision": "accept",
+      "reason": "Its item inventory is unchanged by the proposed interface repairs; the page is correctly frontmatter-only."
+    },
+    {
+      "id": "dynamic-data-identifiability-and-system-realization-examples",
+      "decision": "accept",
+      "reason": "Its examples inventory remains valid after the proposed example repairs; the page is correctly frontmatter-only."
+    }
+  ]
+}

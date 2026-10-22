@@ -29,20 +29,22 @@ The formula obtained by omitting the leading minus sign,
 $$D_K(a,z)=i^{-w(K)}(-1)^{c(K)}L_K(ia,-iz),\qquad i^2=-1,$$
 is false: on the one-component unknot it gives $D=-1$, while the declared Dubrovnik normalization gives $D=1$.
 
-The circle below depicts the one-component test link; the numerical refutation follows from its declared writhe, component count, and normalization.
-
-\begin{center}
-\begin{tikzpicture}[baseline=-0.5ex,scale=0.75,line width=0.8pt]
-\draw (0,0) circle (0.8);
-\node at (0,-1.15) {$U$};
-\end{tikzpicture}
-\end{center}
-
 ## Statement references
 
 [[def-kauffman-regular-isotopy-and-dubrovnik-conventions|Unknot normalization and conversion convention]]
 
 [Kauffman, *An Invariant of Regular Isotopy* (1990), §VII](https://homepages.math.uic.edu/~kauffman/IRH.pdf)
+
+## Diagram
+
+The circle below depicts the one-component test link; the numerical refutation follows from its declared writhe, component count, and normalization.
+
+```tikz
+\begin{tikzpicture}[baseline=-0.5ex,scale=0.75,line width=0.8pt]
+\draw (0,0) circle (0.8);
+\node at (0,-1.15) {$U$};
+\end{tikzpicture}
+```
 
 ## Facts & Assumptions
 
@@ -51,6 +53,7 @@ The circle below depicts the one-component test link; the numerical refutation f
 [F1] The unknot has $w=0$, $c=1$, $D=1$, and $L=1$ under the stated normalization ([[def-kauffman-regular-isotopy-and-dubrovnik-conventions]]).
 
 ## Refutation
+
 
 1.1 Apply the proposed false formula to the unknot from [F1]. Since $i^{-w}=i^0=1$ and $(-1)^c=(-1)^1=-1$, it assigns $D=1\cdot(-1)\cdot1=-1$. This contradicts the declared value $D=1$ in [F1]. [F1, algebra]
 

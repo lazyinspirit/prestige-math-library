@@ -1,0 +1,27 @@
+# Proper annulus tube: final focused cycle
+
+This is the second and final focused review–repair cycle for the relative proper pair-tube escalation. It preserves the original TOP consumer claim. Only off-canonical research was written.
+
+The first cycle established a pair-adapted tube about every compact **interior** segment of an intrinsic spanning core. Its pair-chart-supported isotopy extension and finite intrinsic endpoint-pushing arguments remain valid. They do not give endpoint product matching or a standard complement for a proper tube.
+
+## Testing the relative one-handle route
+
+A thin annulus strip has only a relative one-handle when both short endpoint intervals are retained. This is useful intrinsic information. However, its ambient attaching data are germs of homeomorphisms of a four-dimensional pair, rather than already fiber-preserving maps of a fixed normal disk. The finite chart construction has not converted these germs to normal-disk transitions. Declaring the interval base contractible trivializes a bundle only after a bundle has actually been constructed; it does not establish the needed reduction of pair-chart transitions.
+
+Doubling both endpoint collars replaces the ambient product by S³ × S¹. The doubled spanning core projects with degree one to the second factor. Consequently it cannot lie in a single contractible chart. The complete elementary diagnostic is `ex-doubling-a-spanning-arc-does-not-put-it-in-one-chart.md`. Cutting that circle in a known endpoint collar allows an interior segment to be covered by the proved one-chart construction, but restores two attaching germs at the cut. It does not identify them with the prescribed endpoint product data. Doubling only one end still leaves a proper arc and an endpoint obligation.
+
+A second shortcut would truncate an interior chart by the prescribed collar hypersurfaces, assuming that those hypersurfaces are graphs in the chart's longitudinal coordinate. This inference fails even for an explicitly isotopically trivial pair chart fixing the core pointwise. The complete diagnostic `ex-core-fixed-pair-charts-need-not-make-transverse-sections-graphs.md` constructs a radius-preserving planar angular oscillation, crossed with two fixed normal coordinates. Both map and inverse are continuous; the oscillation makes the transverse projection fold arbitrarily close to the core. Thus core straightening, local flatness, and a supplied collar alone do not justify that graph claim. This example does not prohibit a separately proved normalization isotopy.
+
+## Actual handle-lemma source
+
+I visually read the corrected Kirby–Siebenmann scan `/tmp/pair-ks.pdf`, PDF pages 5–7, including the full displayed Codimension 2 Handle Lemma 4.1 on PDF page 7. Its pairwise open embedding has source Rᵏ × (Rⁿ⁺²,Rⁿ), with m=k+n; the isotopy is to fix the core, the specified outer region, and the complement of a compact set. Its dimension hypothesis excludes ambient dimension m+2=4. For the proposed strip handle, k=1 and n=1, hence m=2 and ambient dimension four. The displayed theorem therefore does not apply merely because the handle index is one. The lemma's subsequent proof uses the torus/handle diagram; no complete dimension-four, index-one special proof has been extracted from it here.
+
+Source: Kirby and Siebenmann, *Normal bundles for codimension 2 locally flat imbeddings*, https://math.berkeley.edu/~kirby/papers/Kirby%20and%20Siebenmann%20-%20Normal%20bundles%20for%20codimension%202%20locally%20flat%20imbeddings%20-%20MR0400237.pdf . The local PDF SHA-256 is `d410fadcff02234c8f78bc1bcd2fb1268719b069112a35d1d6af356ca94e1bf1`. The previous cycle's source record remains unchanged; in particular the erroneous all-dimensional 1970 normal-bundle proof and the superseded arXiv relative-annulus outline are not suppliers.
+
+## Exact remaining supplier
+
+The first missing geometric operation is **relative normalization of the two attaching pair-neighborhood germs**: for a locally flat annulus in S³ × I with its specified smooth product collars at both ends, construct a pair-adapted proper product neighborhood of a spanning strip agreeing with those collars. The construction must also permit the entire chosen ambient tube to be carried to a standard product ball tube by an ambient homeomorphism respecting the end collars, or explicitly identify the tube complement with B³ × I with the required end identifications. An arc-image straightening alone supplies neither assertion.
+
+A sufficient, more local bridge would be an ambient isotopy relative the two given end collars making the annulus smooth on a neighborhood of some proper spanning arc and compatible with those collar structures. Together with the owner's smooth tube and normalization modules, this would supply the missing interface. No claim is made here that this restricted relative bridge is equivalent to a full surface normal-bundle theorem or to the general Relative Annulus Conjecture.
+
+The two diagnostics are complete checked examples, independently read by the parent. The parent found no mathematical defect and requested the explicit intermediate-value dependency in the nongraph example; that dependency and its betweenness justification were added. Full proper pair-tube existence and complement normalization remain unproved locally. There is no third repair cycle, canonical write, native transition, or consumer-closure claim in this record.

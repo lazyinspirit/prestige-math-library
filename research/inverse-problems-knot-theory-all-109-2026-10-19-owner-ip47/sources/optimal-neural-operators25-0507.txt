@@ -1,0 +1,7587 @@
+PDF PAGE 1
+Journal of Machine Learning Research 27 (2026) 1-78
+Submitted 3/25; Revised 4/26; Published 7/26
+Optimal Convergence Rates for Neural Operators
+Mike Nguyen
+mike.nguyen@tu-braunschweig.de
+Technical University of Braunschweig
+Nicole M¨ucke
+nicole.muecke@tu-braunschweig.de
+Technical University of Braunschweig
+Editor: Bharath Sriperumbudur
+Abstract
+We introduce the neural tangent kernel (NTK) regime for two-layer neural operators and
+analyze their generalization properties. For early-stopped gradient descent (GD), we derive
+fast convergence rates that are known to be minimax optimal within the framework of non-
+parametric regression in reproducing kernel Hilbert spaces (RKHS). We provide bounds
+on the number of hidden neurons and the number of second-stage samples necessary for
+generalization. To justify our NTK regime, we additionally show that any operator ap-
+proximable by a neural operator can also be approximated by an operator from the RKHS.
+A key application of neural operators is learning surrogate maps for the solution operators
+of partial differential equations (PDEs). We consider the standard Poisson equation to
+illustrate our theoretical findings with simulations.
+Keywords:
+neural operators, early stopping, gradient descent
+1. Introduction
+Operator learning has emerged as a transformative methodology in machine learning, focus-
+ing on learning mappings between spaces of functions. This approach is particularly power-
+ful for surrogate modeling tasks in fields like uncertainty quantification, inverse problems,
+and design optimization, where the goal often involves approximating complex operators,
+such as the solution operator of partial differential equations (PDEs).
+Learning linear operators. A classical field where learning linear operators arises is
+functional data analysis (FDA), particularly in functional linear regression with functional
+responses, also known as function-to-function regression. FDA focuses on understanding
+and modeling data best described as functions rather than discrete points.
+Unlike tra-
+ditional data, where observations might be scalar or vector-valued, functional data are
+represented by smooth curves, surfaces, or other continuous objects. These functions are
+typically observed over a continuum, such as time, space, or wavelength, and are inher-
+ently infinite-dimensional (Febrero-Bande et al., 2024; Morris, 2015). The model can be
+seen as a generalization of multivariate regression, where the regression coefficient is now
+an unknown operator. A standard approach to this problem involves applying Tikhonov
+regularization (see Benatia et al. (2017)), with classical rates of convergence resembling a
+typical bias-variance trade-off.
+©2026 Mike Nguyen and Nicole M¨ucke.
+License: CC-BY 4.0, see https://creativecommons.org/licenses/by/4.0/. Attribution requirements are provided
+at http://jmlr.org/papers/v27/25-0507.html.
+
+PDF PAGE 2
+Nguyen and M¨ucke
+The framework of learning operators extends naturally to nonparametric approaches, such
+as conditional mean embeddings (CMEs) in reproducing kernel Hilbert spaces (RKHS).
+In these settings, the goal is to represent conditional distributions as operators acting on
+functions, enabling the integration of probabilistic modeling with functional data analysis
+(Klebanov et al., 2020; Park and Muandet, 2020; Gr¨unew¨alder et al., 2012). Conditional
+mean embeddings generalize the idea of representing conditional expectations as operators
+in RKHS, bridging the gap between statistical learning of distributions and operator learn-
+ing. In Li et al. (2022) classical Tikhonov regularization has also been analyzed in this
+setting, and optimal convergence rates have been established.
+These approaches have inspired further research, as highlighted in Mollenhauer et al. (2022),
+where the problem of learning linear operators is placed into the broader framework of super-
+vised learning in random design and analyzed through the family of spectral regularization
+methods, encompassing the earlier examples as special cases. This line of work is advanced
+in Meunier et al. (2024) and Li et al. (2024), which establish upper bounds for the finite-
+sample risk of general vector-valued spectral algorithms. These results are applicable to
+both well-specified and misspecified scenarios, where the true regression function may lie
+outside the hypothesis space, and achieve minimax optimality across various regimes.
+Learning non-linear operators.
+The extension of linear techniques for operator
+learning into non-linear contexts has been realized through innovative approaches incorpo-
+rating neural networks, enabling greater flexibility and efficiency in handling complex func-
+tional relationships. In Shimizu et al. (2024), the authors introduce a method that integrates
+deep learning into CME by leveraging an end-to-end neural network (NN) optimization
+framework. The approach replaces the computationally expensive Gram matrix inversion
+required in traditional CME methods with a kernel-based objective, significantly improving
+scalability and computational efficiency. For non-linear function-on-function regression, Rao
+and Reimherr (2023) proposes a novel framework featuring a continuous hidden layer with
+continuous neurons to model functional responses.
+Two strategies, function-on-function
+direct neural networks and function-on-function basis neural networks, are developed to en-
+hance flexibility in modeling complex functional relationships. While demonstrating strong
+empirical performance through simulations and real data applications, this method lacks
+theoretical learning guarantees. Shi et al. (2025) presents a functional deep neural network
+architecture with a fully data-dependent dimension reduction strategy. The architecture
+comprises three steps: a kernel embedding for integral transformation using a smooth, data-
+driven kernel; a projection step using eigenfunction bases for dimension reduction; and a
+deep ReLU network for prediction. This approach is accompanied by theoretical analy-
+ses, including approximation and generalization error bounds, providing robust theoretical
+support for the method. These developments highlight the significant advancements in non-
+linear operator learning, driven by neural network-based frameworks that blend theoretical
+rigor with practical flexibility and scalability. Another key application area for learning non-
+linear operators mapping between function spaces is solving partial differential equations
+(PDEs), where the solution operators that connect initial or boundary conditions to the
+PDE’s solution are of particular interest (Boull´e and Townsend, 2023). Understanding and
+approximating these operators is essential, as they encapsulate the underlying dynamics of
+the system being studied (Gonon et al., 2024; Tarantola, 2005).
+2
+
+PDF PAGE 3
+Optimal Convergence Rates for Neural Operators
+Traditional approaches for approximating operators, especially for solving PDEs, have been
+well-established for decades. Techniques such as the Finite Element Method (FEM), Fi-
+nite Difference Method (FDM), and Finite Volume Method (FVM) are classical methods
+employed to estimate these operators (Hughes, 2003). These methods discretize the prob-
+lem space into manageable subdomains, enabling numerical approximations of the solu-
+tion. While highly effective, they have notable limitations. A primary drawback is their
+computational cost, which increases exponentially with the problem’s dimensionality, a phe-
+nomenon known as the curse of dimensionality. Additionally, these methods require detailed
+discretization of the underlying function space, which can be challenging to achieve for high-
+dimensional or complex geometries. Another significant challenge arises when dealing with
+inverse problems or noisy data, where classical methods often struggle with stability and
+robustness (Strang and Fix, 1973).
+As a result, there has been a growing interest in novel operator estimation techniques
+that incorporate machine learning, and more specifically, neural networks.
+Neural net-
+works offer the capability to learn complex patterns and relationships from data, making
+them well-suited for operator learning tasks that might be intractable via traditional meth-
+ods Goodfellow et al. (2016). A particularly intriguing development is the emergence of
+neural network-based operator learning techniques, which can be broadly categorized into
+”encoder/decoder” architectures and neural operators. Both categories of methods have
+demonstrated remarkable success in operator learning, showcasing their ability to handle
+high-dimensional inputs, complex geometries, and noisy data.
+Encoder/Decoder Operators. This framework typically involves three key stages:
+encoding the input function into a finite-dimensional parameter space, mapping these pa-
+rameters using neural network architectures, and subsequently decoding the parameters
+back into a functional representation. The encoding phase often employs parameteriza-
+tion techniques where the function is projected onto a lower-dimensional basis, allowing
+for computationally feasible manipulation. Spectral Neural Operators represent a promi-
+nent example utilize transformations such as Fourier or wavelet transforms to convert input
+functions into spectral coefficients, delivering notable robustness and efficiency, particularly
+in scenarios featuring periodic behaviors Fanaskov and Oseledets (2024). In parallel, PCA
+Operators utilize Principal Component Analysis to transform input functions into scores
+corresponding to principal components. This transformation highlights significant variance
+patterns within the data, thereby facilitating effective learning and retention of crucial func-
+tional characteristics Lanthaler (2023); Kovachki et al. (2024c). Further notable examples
+include the DeepONet architecture, which comprises a branch network that encodes the
+discrete input function space and a trunk network that encodes the domain of the out-
+put functions Lu et al. (2021). Additionally, the application of Variational Autoencoders
+Kingma and Welling (2022) and Convolutional Neural Networks (CNNs) is prominent; the
+latter utilizes encoder-decoder architectures for addressing image-to-image translation prob-
+lems, where the translation can be interpreted as an operator task Badrinarayanan et al.
+(2017).
+Neural Operators. On the other hand, neural operators constitute an innovative ex-
+tension of classical neural networks designed to directly learn mappings between function
+spaces. The architecture of neural operators resembles that of traditional neural networks
+3
+
+PDF PAGE 4
+Nguyen and M¨ucke
+but with a crucial distinction: each layer incorporates a kernel integral operator to lever-
+age the entire functional information. This design enables them to effectively process and
+map the complex relationships inherent in function spaces. One prominent example is the
+Fourier Neural Operator (FNO), which employs fast Fourier transforms to model the kernel
+integral transformations central to many operators related to partial differential equations
+(PDEs). This approach offers a robust framework capable of efficiently managing high-
+dimensional input spaces with reduced computational complexity (Li et al., 2021; Qin et al.,
+2024; Kovachki et al., 2023). Another example is given by Low-Rank Neural Operators,
+which simplify computations by approximating the kernel integral operators with low-rank
+representations, thus reducing the computational complexity while retaining essential in-
+formation (Kovachki et al., 2023). Physics-Informed Neural Operators (PINOs) integrate
+physical laws and constraints directly into the learning process via modified loss functions,
+which helps in ensuring that the learned mappings adhere to known physical principles.
+This hybrid approach combines data-driven methodologies with theoretical insights, en-
+hancing the model’s generalization capabilities across diverse scenarios from fluid dynamics
+to material sciences and many others (Wang et al., 2021; Raissi et al., 2019). Graph Neu-
+ral Operators extend the neural operator framework to graph-structured data, efficiently
+capturing spatial and topological information intrinsic to many real-world problems. By
+adapting neural operators to graph settings, these models skillfully navigate complex data
+relationships, making them suitable for applications in network analysis and beyond, see
+e.g. (Li et al., 2020; Kovachki et al., 2023; Sharma et al., 2024).
+Contribution.
+We aim to learn potential non-linear operators, mapping between
+normed function spaces.
+We cast this problem into the framework of supervised learn-
+ing and focus on neural operators that encompass all the aforementioned examples. We
+assume our first-stage data are functions from some possibly infinite dimensional normed
+space, drawn independently and identically from some unknown probability distribution.
+Since we deal with infinite dimensional objects, further discretization is necessary for any
+practical implementation.
+We suppose that some evaluations of the data functions are
+available, which we call the second-stage samples, see Section 2. Our primary objective is
+to establish fast convergence rates for the mean squared error. Following the paradigm in
+Kovachki et al. (2024b), we investigate the data complexity of learning non-linear operators
+within the framework of the vector-valued neural tangent kernel (vvNTK). In doing so,
+we meticulously account for the precise number of neurons and the second-stage samples
+required to achieve these rates. To attain fast convergence rates, however, it is necessary
+to restrict the class of operators to be estimated. More precisely, we impose an a priori
+smoothness assumption defined in terms of powers of the integral operator associated with
+the vvNTK, commonly referred to as a H¨older source condition in classical RKHS methods.
+Specifically, we limit our scope to learning operators that reside in the range of powers of
+the integral operator, with the well-specified case included. To justify this assumption, we
+demonstrate that any operator approximable by a neural operator can also be approximated
+by an operator from the vvRKHS. Additionally, we derive convergence rates that account
+for the assumed eigenvalue decay of the associated vvNTK integral operator. Our bounds
+match those from traditional nonparametric methods in RKHS, which are known to be
+minimax optimal; see also Nguyen and M¨ucke (2023).
+4
+
+PDF PAGE 5
+Optimal Convergence Rates for Neural Operators
+Organization. The rest of the paper is organized as follows. In Section 2, we present
+our setting and review relevant results on learning with kernels, and learning with random
+features. In Section 3, we present and discuss our main results. Finally, numerical exper-
+iments are presented in Section 4. A conclusion in Section 5 summarizes our results and
+highlights open research directions. All proofs are deferred to the Appendices.
+2. Setup
+In this section we provide the mathematical framework for our analysis. We let X ⊆Rdx
+be the input space of our function spaces. The unknown data probability measure on the
+input data space X is denoted by ρx. Further we let U be the function input space, mapping
+from X →Y ⊂Rdy and V be the function target space, mapping from X →˜Y ⊂R, to be
+specified in Assumption 4. The unknown data distribution on the data space W = U × V
+is denoted by µ, while the marginal distribution on U is denoted as µu and the regular
+conditional distribution on V given u ∈U is denoted by µ(·|u), see e.g. Shao (2003). Given
+an operator G : U →V we further define the expected risk as
+E(G) := Eµ[∥G(u) −v∥2
+L2(ρx)] .
+(1)
+It is known that the global minimizer of E over the set of all measurable operators is given
+by the regression operator G∗, defined as
+G∗(u) :=
+Z
+V
+v(.)µ(dv|u).
+(2)
+2.1 Two-Layer Neural Operator
+Hypotheses class. The hypothesis class considered in this paper is given by the follow-
+ing set of two-layer neural operators FM: Let M ∈N be the network width. Given an
+activation function σ : R →R acting componentwise1, some continuous operator A : U →
+L2(X, ρx; Rdk), and a bias function c : X →Rdb, we consider the class FM = FM(σ, A, c),
+defined by
+FM :=
+
+Gθ : U →V | (Gθu)(x) =
+1
+√
+M
+⟨a, σ (B1(Au)(x) + B2u(x) + B3c(x))⟩2 ,
+θ = (a, B1, B2, B3) ∈RM × RM×dk × RM×dy × RM×db
+o
+,
+(3)
+where we denote with ⟨. , .⟩2 the euclidean inner product. Setting ˜d = dk + dy + db and
+Θ = RM × RM× ˜d, we condense all parameters in
+θ = (a, B1, B2, B3) = (a, B) ∈Θ
+B = (B1, B2, B3) ∈RM× ˜d,
+1. If v ∈Rk, then σ(v) = (σ(v1), ..., σ(vk))T .
+5
+
+PDF PAGE 6
+Nguyen and M¨ucke
+Figure 1: Depiction of the architecture of our operator class.
+and equip the parameter space Θ with the norm ∥· ∥Θ, defined by
+∥θ∥2
+Θ = ∥a∥2
+2 + ∥B∥2
+F ,
+(4)
+for any θ ∈Θ.
+In our operator class (3), we first apply an operator transformation B1A(u), where B1
+defines a matrix and typically, A defines a kernel integral operator. Depending on the choice
+of A, our operator class covers a wide range of practically well-studied neural operators,
+such as Fourier Neural Operators, Graph Neural Operators, and Low-rank Neural Operators
+(Kovachki et al., 2023; Huang et al., 2024; Kovachki et al., 2024c). The kernel integral
+operation A(u), can be seen as an intuitive extension of matrix multiplication in traditional
+neural networks to an infinite-dimensional setting. Inspired by Residual Neural Networks,
+the second transformation, B2u( .) with B2 ∈RM×dy is just a matrix multiplication and
+keeps information of the original input u( .). The final component, B3c( .) with c : X →Rdb
+defines the bias. Unlike standard neural networks, the bias here is typically not a constant
+but a function. This function can be a linear transformation or a shallow neural network
+with trainable parameters. However, to keep our proofs succinct, we assume that c is given
+and instead multiply the bias with a trainable matrix B3 ∈RM×db, see Figure 1. Examples
+are provided in Example 2.
+In practice, one typically wraps the neural operator between a lifting operator L and a
+projection operator P, forming P ◦Gθ ◦L. Here L and P act pointwise, meaning L(u)(x) =
+L(u(x)), and they are typically defined via linear transformations or shallow neural networks
+(Kovachki et al., 2023). However, to keep the proofs concise, we assume in our work that
+L and P are the identity operators.
+Note that our operator class requires the function spaces U and V to have the same
+input space X ⊂Rdx. However, if their input spaces differ, they are typically uplifted to
+a common higher-dimensional space (Kovachki et al., 2023). For example, let U contain
+functions mapping from ˜
+X and V contain functions mapping from X , for dim( ˜
+X) ̸= dim(X).
+In this case, one could consider the operator class
+FM
+:=
+n
+Gθ : U →V | (Gθu)(x) =
+1
+√
+M ⟨a, σ (B1A(u)(x) + B2u(ξx) + B3c(x))⟩
+o
+,
+for a lifting or projection map ξ : X →˜
+X. This generalization can be easily adapted to our
+analytical results.
+6
+
+PDF PAGE 7
+Optimal Convergence Rates for Neural Operators
+Activation Function. For the activation function σ, we impose the following assump-
+tions.
+Assumption 1 (Activation Function)
+1. Smoothness: The activation function σ :
+R →R is at least two times continuously differentiable with ∥σ′∥∞≤Cσ′, ∥σ′′∥∞≤
+Cσ′′, for some Cσ′, Cσ′′ > 0. In addition, we assume that the second derivative σ′′ is
+Lσ′′−Lipschitz continuous.
+2. Linear growth: For any u ∈R we assume that |σ(u)| ≤1 + |u|.
+The first condition requires the activation function to be sufficiently smooth: it must
+be twice continuously differentiable, with both the first and second derivatives uniformly
+bounded. In addition, we assume that the second derivative is Lipschitz continuous. To-
+gether, these assumptions ensure that the network output depends smoothly and stably on
+both its inputs and parameters.
+The second condition restricts the growth of the activation function. Requiring at most
+linear growth prevents the network outputs from exploding for large inputs and guarantees
+that all quantities appearing in our analysis remain integrable. This condition is mild and
+is satisfied by many commonly used smooth activations or their standard smooth approxi-
+mations, see Example 1.
+The regularity assumptions on the activation function σ are satisfied by many stan-
+dard smooth activations, including tanh, sigmoid, softplus, and smoothed ReLU variants.
+The standard ReLU(u) = max{u, 0} and ReLUk(u) = max{u, 0}k activations do not sat-
+isfy Assumption 1 due to their lack of second-order smoothness. However, they can be
+approximated arbitrarily well by smooth activations within our admissible class. Such ap-
+proximations are commonly used in theoretical analyses of neural networks (Pinkus, 1999).
+Example 1 (Activations)
+1. Smooth bounded activation. An admissible activation
+is the hyperbolic tangent σ(u) = tanh(u). It is real analytic on R and thus C∞(R),
+with bounded derivatives of all orders. Moreover, it satisfies |σ(u)| ≤1 ≤1 + |u| for all
+u ∈R.
+2. The softplus activation σβ(u) = β−1 log(1 + eβu) has bounded derivative and the
+second derivative is
+√
+3/18 · β2-Lipschitz continuous for any β > 0.
+We show that the linear growth condition is also satisfied: Since σβ(u) ≥0, it suffices
+to upper bound σβ(u). For u ≥0, we use 1 + eβu ≤2eβu to obtain
+σβ(u) = 1
+β log
+ 1 + eβu
+≤1
+β log
+ 2eβu
+= u + log 2
+β
+.
+For u ≤0, we have eβu ≤1, hence
+σβ(u) ≤1
+β log(1 + 1) = log 2
+β
+.
+7
+
+PDF PAGE 8
+Nguyen and M¨ucke
+If β ≥log 2, then log 2
+β
+≤1, and therefore
+σβ(u) ≤
+(
+u + 1,
+u ≥0,
+1,
+u ≤0,
+so that |σβ(u)| ≤1 + |u| for all u ∈R. Finally, softplus converges uniformly on R to
+ReLU as β →∞with rate O(1/β). One can also show that
+∥σβ −ReLU∥Lp(R) →0,
+as β →∞, for any 1 ≤p ≤∞.
+3. Another example is a quadratic (Huber-type) smoothed ReLU defined by
+σε(t) =
+
+
+
+
+
+0,
+t ≤−ε,
+(t+ε)2
+4ε
+,
+|t| ≤ε,
+t,
+t ≥ε,
+which belongs to C2(R), has bounded first derivative and Lipschitz continuous second
+derivative. The Huber-type smoothed ReLU converges pointwise and uniformly on com-
+pact sets to the ReLU activation as the smoothing parameter tends to zero.
+4. Mollified ReLU. Let ρ ∈C∞
+c (R) be a standard mollifier, i.e., ρ ≥0,
+R
+R ρ(t) dt = 1,
+and supp(ρ) ⊂[−1, 1]. For ε > 0, define the scaled mollifier
+ρε(t) := 1
+ερ
+ t
+ε
+
+,
+and the mollified ReLU activation by
+σε(u) := (ReLU ∗ρε)(u) =
+Z
+R
+max(u −s, 0) ρε(s) ds.
+Then σε ∈C∞(R), has bounded first derivative and Lipschitz continuous second deriva-
+tive, satisfies the linear growth bound |σε(u)| ≤1 + |u|, and converges uniformly on
+compact sets to the ReLU activation as ε →0.
+Example 2 (Operator classes) A common choice for the transformation B1 · Au in our
+neural operator architecture is a kernel integral operator of the form
+B1 · (Au)(x) =
+Z
+D
+k(˜x, x)u(˜x) d˜x,
+(5)
+where k : D × D →RdM×dy and D ⊆X.
+Different variants of neural operators are
+distinguished by how the integral operator (5) is approximated.
+In the literature, various parameterizations of k(y, ·) have been proposed, ranging from
+neural networks to low-rank tensor approximations and spectral representations Kovachki
+et al. (2024a); Li et al. (2020). In the following, we focus on two representative instances
+introduced in Kovachki et al. (2024a).
+8
+
+PDF PAGE 9
+Optimal Convergence Rates for Neural Operators
+1. Graph Neural Operators (GNO). In the GNO framework, the integral in (5) is
+approximated by a Monte Carlo-type quadrature using a finite set of sampling points
+Bx ⊂D. Specifically, for a given bounded kernel k : D × D →Rdk×dy, the operator is
+approximated as
+(Au)(x) =
+1
+|Bx|
+X
+xi∈Bx
+k(xi, x)u(xi),
+where Bx is typically selected either randomly from the second-stage sampling points
+or based on a local neighborhood of x—for instance, a ball B(x, r) or a fixed number
+of nearest neighbors. This discretization reduces the continuous integral to a sum over
+local graph edges and can be naturally implemented using message-passing graph neural
+networks (GNNs); see (Kovachki et al., 2024a, Section 4.1) and Li et al. (2020).
+2. Fourier Neural Operators (FNO). Arguably the most widely used class of neural
+operators is Fourier Neural Operators (FNOs), due to their computational efficiency
+and the ease with which the action of the kernel k can be learned in frequency space.
+This is made possible under the assumptions that the domain D is a periodic rectangular
+box, typically D = [0, 1]dx, and that the kernel depends only on the relative position,
+i.e., k(x, y) = κ(x −y).
+Under these assumptions, the operator (5) becomes a convolution and can be expressed
+via the Fourier transform:
+Z
+D
+k(˜x, x)u(˜x) d˜x = F−1 (F(k) · F(u)) (x),
+(6)
+where F : L2(D; Cd) →ℓ(Zdx; Cd) and F−1 denote the Fourier transform and its
+inverse. The kernel is thus fully represented in frequency space, allowing its action to
+be encoded via a collection of learned spectral multipliers.
+Concretely, the Fourier transform of u is approximated as
+( ˆF(u))l =
+X
+˜x∈˜D
+u(˜x) e−2πi l·˜x ∈Cdy,
+and the integral in (6) is then approximated by
+Z
+D
+k(˜x, x)u(˜x) d˜x ≈
+X
+l∈Z
+Rl ·
+
+X
+˜x∈˜D
+u(˜x) e2πi l·(x−˜x)
+
+,
+(7)
+where:
+• Z ⊂Zdx is a fixed set of discrete spatial frequencies (Fourier modes),
+• ˜D is a uniform discretization of D,
+• Rl = (F(k))l ∈CM×dy are trainable spectral weights for each frequency l, capturing
+the action of the kernel k in Fourier space.
+9
+
+PDF PAGE 10
+Nguyen and M¨ucke
+We refer to (Kovachki et al., 2024a, Section 4.4) for a detailed discussion on the se-
+lection of Z and ˜D and for numerical illustrations. Approximation theory and further
+insights into FNOs can be found in Kovachki et al. (2021).
+The spectral approximation in (7) is directly captured by our model by setting
+B1 = R := (R1, . . . , Rdk) ∈CM×dk,
+dk := dy · |Z|,
+and defining the lifted representation
+((Au)(x)) := (V1,1(x), . . . , Vdy,1(x), V1,2(x), . . . , Vdy,|Z|(x)) ∈Cdk,
+where
+Vk,l(x) :=
+X
+˜x∈˜D
+uk(˜x) e2πi l·(x−˜x).
+3. CNN-/local-convolution-type example. Let X ⊂Rdx and let ψ1, . . . , ψdk ∈L1(Rdx)
+be compactly supported filters. Define
+(Au)(x) :=
+ (ψ1 ∗u)(x), . . . , (ψdk ∗u)(x)
+
+∈Rdk,
+where ∗denotes convolution, or on a discrete grid the corresponding local convolution
+sum. Further, let
+c(x) := (1, x) ∈R1+dx
+encode a constant channel together with positional information.
+Then A represents
+a bank of local convolutional feature extractors, as commonly used in CNN-based en-
+coder/decoder architectures for operator learning and image-to-image maps.
+Empirical risk minimization. Our goal is to minimize the expected risk (1) over the
+set FM, i.e.
+min
+Gθ∈FM E(Gθ) .
+Here, the distributions µ, µU and ρx are known only through nU i.i.d. samples
+((u1, v1), ..., (unU, vnU)) ∈(U × V)nU, evaluated at nX points (x1, . . . xnX) ∈X nX . Hence, we
+seek a solution for the empirical risk minimization problem
+min
+Gθ∈FM
+ˆE(Gθ) ,
+ˆE(Gθ) = 1
+nU
+nU
+X
+j=1
+∥Gθ(uj) −vj∥2
+nX ,
+where ∥.∥nX denotes the empirical norm, defined as ∥f∥2
+nX :=
+1
+nX
+PnX
+j=1 |f(xj)|2.
+Gradient Descent and Initialization. We aim at analyzing the generalization prop-
+erties of gradient descent, whose basic iterations are given by
+θj
+t+1 = θj
+t −α∂θj ˆE(Gθt)
+= θj
+t −α
+nU
+nU
+X
+i=1
+⟨(Gθt(ui) −vi), ∂θjGθt(ui)⟩nX ,
+(8)
+10
+
+PDF PAGE 11
+Optimal Convergence Rates for Neural Operators
+with α > 0 being the stepsize, for some initialization θ0 ∈Θ and
+⟨u, u′⟩nX :=
+1
+nX
+PnX
+i=1 u(xi)u′(xi) denotes the empirical inner product.
+As in Nguyen and M¨ucke (2023); Nitanda and Suzuki (2020), we assume a symmetric
+initialization.
+The parameters for the output layer are initialized as a(0)
+m
+= τ for m ∈
+{1, . . . , M/2} and a(0)
+m
+= −τ for m ∈{M/2 + 1, . . . , M}, for some τ > 0. Let π0 be a
+uniform distribution on the sphere S
+˜d−1
+1
+= {b ∈R ˜d | ∥b∥2 = 1} ⊂R ˜d. The parameters for
+the input layer are initialized as b(0)
+m = b(0)
+m+M/2 for m ∈{1, . . . , M/2}, where (b(0)
+m )M/2
+m=1 are
+independently drawn from the distribution π0. The aim of the symmetric initialization is
+to make an initial operator Gθ0 ≡0, where θ0 =
+ a(0), B(0)
+. Note that this symmetric
+trick does not have an impact on the limiting NTK, see Zhang et al. (2020), and is just for
+theoretical simplicity. Indeed, we can relax the symmetric initialization by slightly changing
+our source condition in Assumption 5 to
+G∗−Gθ0 = Lr
+∞H∗,
+(9)
+for some H∗∈L2(U, µu), satisfying ∥H∗∥L2(µu) ≤R. The proofs can then be easily adapted.
+2.2 Operator valued Neural Tangent Kernel (NTK)
+In the more classical setting of nonparametric regression with neural networks, NTK-based
+techniques have been studied extensively (Nguyen and M¨ucke, 2023; Bietti and Mairal,
+2019; Chen et al., 2020; Golikov et al., 2022; Xu et al., 2024).
+Complementary to this
+line of work, recent results have also analyzed the generalization of gradient descent via
+algorithmic stability for shallow neural networks in Euclidean domains; see, e.g.,Wang et al.
+(2025). We extend these perspectives to the setting of operator learning, which naturally
+leads to a vector-valued kernel. We therefore recall the definitions and properties of vector-
+valued kernels. For further background on vector-valued kernels and their RKHSs, we refer
+to Carmeli et al. (2005, 2008).
+Definition 2
+1. For two function spaces U, V we denote by F(U, V) the vector space of
+operators F : U →V and by C(U, V) the subspace of continuous operators. L(U, V)
+denotes the space of linear operators from U →V and L(V) denotes the space of bounded
+linear operators from V →V.
+2. Given a topological space U and a separable Hilbert space V, a map K : U ×U −→L(V)
+is called a V-reproducing kernel on U if
+N
+X
+i,j=1
+⟨K (ui, uj) vj, vi⟩V ≥0
+for any u1, . . . , uN in U, v1, . . . , vN in V and N ≥1.
+3. Given u ∈U, Ku : V →F(U; V) denotes the linear operator whose action on a vector
+v ∈V is the function Kuv ∈F(U, V) defined by
+(Kuv) (u′) = K(u′, u)v
+u′ ∈U.
+11
+
+PDF PAGE 12
+Nguyen and M¨ucke
+Given a V-reproducing kernel K, there is a unique Hilbert space HK ⊂F(U; V) satis-
+fying
+Ku ∈L (V, HK)
+∀u ∈U
+F(u) = K∗
+uF
+∀u ∈U, F ∈HK,
+where K∗
+u : HK →V is the adjoint of Ku. Note that from the second property we
+have that K(u, t) = K∗
+uKt. The space HK is called the reproducing kernel Hilbert space
+associated with K, given by
+HK = span {Kuv | u ∈U, v ∈V} .
+4. A reproducing kernel K : U ×U →L(V) is called Mercer if HK is a subspace of C(U; V).
+The connection between kernel methods and standard neural networks is established via
+the NTK, see Jacot et al. (2018); Lee et al. (2019). For standard fully connected neural
+networks, the feature map of the NTK is defined via the gradient of the neural network at
+initialization. Similarly, we can define a feature map for neural operators by
+ΦM : U →L(L2(X, ρx), Θ)
+u 7→ΦM(u) := ΦM
+u
+with
+ΦM
+u (v) := ∇θ ⟨Gθ0(u), v⟩L2(ρx) .
+For fixed u ∈U, the map ΦM
+u : L2(X, ρx) →Θ ≃RP satisfies
+ΦM
+u (v) = ∇θ⟨Gθ0(u), v⟩L2(ρx) =
+ ⟨∂θpGθ0(u), v⟩L2(ρx)
+P
+p=1.
+With the Euclidean inner product on RP , its adjoint (ΦM
+u )∗: Θ →L2(X, ρx) is
+(ΦM
+u )∗(θ) =
+P
+X
+p=1
+θp ∂pGθ0(u),
+θ = (θ1, . . . , θP )⊤∈RP .
+This allows us to define an L2(X, ρx)-reproducing kernel in the sense of Definition 2, for
+any u, u′ ∈U via
+KM(u, u′) = (ΦM
+u )∗ΦM
+u′ =
+P
+X
+p=1
+∂pGθ0(u) ⊗∂pGθ0(u′)
+= 1
+M
+M
+X
+m=1
+σ
+D
+b(0)
+m , J(u)
+E
+⊗σ
+D
+b(0)
+m , J(u′)
+E
++
+τ 2
+M
+M
+X
+m=1
+˜d
+X
+j=1
+σ′ D
+b(0)
+m , J(u)
+E
+J(u)(j) ⊗σ′ D
+b(0)
+m , J(u′)
+E
+J(u′)(j),
+where we use for the parameter matrix at initialization the notation B(0) = (b(0)
+1 , . . . , b(0)
+M )⊤∈
+RM× ˜d, P = M · ( ˜d + 1) denotes the number of parameters and for any u ∈U we set J(u) ∈
+12
+
+PDF PAGE 13
+Optimal Convergence Rates for Neural Operators
+F(X, Rdk+dy+db) with J(u)(x) := (A(u)(x), u(x), c(x))⊤. Further we define the tensor prod-
+uct ⊗with respect to the L2(ρx) inner product ⟨. , .⟩L2(ρx) by (u ⊗v)(f) := ⟨v , f⟩L2(ρx)u.
+From Example 4 in Carmeli et al. (2008), we deduce that the corresponding vector-
+valued RKHS is
+HM =
+
+
+H ∈F(U; L2(X, ρx)) | Hu =
+P
+X
+p=1
+θp · ∂θpGθ0(u), ∥θ∥2 < ∞
+
+
+
+=
+n
+H ∈F(U; L2(X, ρx)) | (Hu)(x) = ⟨∇θ(Gθ0u)(x), θ⟩2, θ ∈RP, x ∈X
+o
+,
+where we set ∇θ(Gθ0u)(x) = (∂θ1(Gθ0u)(x), ..., ∂θP (Gθ0u)(x)) ∈RP .
+Given the Assumptions 1 and 4 we have for all u ∈U,
+∥J(u)(x)∥1 :=
+˜d
+X
+j=1
+|(J(u)(x))(j)| ≤1
+and for all M,
+sup
+u,u′∈U
+∥KM(u, u′)∥≤4 + τ 2∥σ′∥2
+∞:= κ2.
+(10)
+Further we have that ∇θGθ0(.) : U →L2(X, ρx; RP ) is continuous and therefore KM is
+Mercer.
+In the following result we show that for all u, u′ ∈U , KM(u, u′) converges for M →∞
+to K∞(u, u′) ∈C(L2(ρx), L2(ρx)) in Hilbert-Schmidt norm, with
+K∞(u, u′) = Eθ0
+h
+σ
+D
+b(0), J(u)
+E
+⊗σ
+D
+b(0), J(u′)
+Ei
++
+τ 2
+˜d
+X
+j=1
+Eθ0
+h
+σ′ D
+b(0), J(u)
+E
+J(u)(j) ⊗σ′ D
+b(0), J(u′)
+E
+J(u′)(j)i
+.
+The proof is provided in Appendix E.2.
+Proposition 3 Given the Assumptions 1, 4 we have for any u, u′ ∈U with probability at
+least 1 −δ, where δ ∈(0, 1),
+∥KM(u, u′) −K∞(u, u′)∥HS ≤4κ2
+√
+M
+log 2
+δ .
+3. Main Results
+In this section we state all of our results and give an outline of the proof.
+13
+
+PDF PAGE 14
+Nguyen and M¨ucke
+3.1 Assumptions and Main Results
+In this section we formulate our assumptions and state our main results.
+Assumption 4 (Data distribution and Operator class)
+1. We assume that the in-
+put space U is a Banach space of functions mapping from X to Y, and is continuously
+embedded2 into L2(X, ρx; Rdy).
+2. The output space V is a separable Hilbert space of functions that is continuously embed-
+ded in L2(X, ρx; R).
+3. Furthermore, we assume that U, V, the operator A : U →F(X, Rdk), and the bias
+function c : X →Rdb are bounded. That is, for any (u, v) ∈supp(µ) and any x ∈
+supp(ρx), we have |v(x)| ≤1 and
+∥J(u)(x)∥1 ≤1,
+where
+J(u)(x) := (A(u)(x), u(x), c(x))⊤∈R
+˜d.
+This assumption fixes the functional framework in which the operator learning problem
+and its associated NTK are well posed. Inputs are modeled as elements of a Banach space
+U of functions on the domain X (for instance C(X, Y)), reflecting the infinite-dimensional
+nature of operator learning problems arising, for example, in PDE-based applications. The
+output space V is assumed to be a separable Hilbert space that is continuously embedded
+into L2(X, ρx), which ensures that inner products, losses, and kernel evaluations are well
+defined with respect to the data distribution.
+The uniform boundedness assumptions on the input and output functions, as well as
+on the auxiliary operator A and the bias function c, play a crucial role in guaranteeing
+stability of the model and of the induced NTK. In particular, requiring uniform bounds on
+the combined feature vector J(u)(x), which aggregates operator evaluations, input values,
+and bias terms, ensures that the network outputs, their parameter derivatives, and the
+resulting kernel remain uniformly controlled over the support of the data distribution. These
+conditions prevent blow-up phenomena and ensure that the NTK limit exists as a well-
+defined, bounded operator-valued kernel on U. Note that, if the input is uniformly bounded,
+that is,
+∥u(x)∥1 ≤Cu
+for all x ∈X,
+then the operator classes discussed in Example 2 are uniformly bounded as well, in the
+sense that
+∥A(u)(x)∥1 ≤CA
+for all x ∈X.
+Consequently, J(u)(x) remains bounded, provided that the bias term is bounded.
+2. Continuous embedding means that there exists a continuous injection ι : U ,→L2(X, ρx) such that each
+u ∈U can be identified with an element of L2(X, ρx), and there exists a constant C > 0 such that
+∥u∥L2(ρx) ≤C∥u∥U for all u ∈U.
+14
+
+PDF PAGE 15
+Optimal Convergence Rates for Neural Operators
+Finally, we impose these assumptions on the input and output spaces to facilitate the
+application of the theory of random feature approximation for vector-valued kernels as
+developed in Nguyen and M¨ucke (2023).
+Rates of convergence. In the following, we establish fast convergence rates for the
+excess risk and thus need to impose refined a priori assumptions in terms of a source
+condition and eigenvalue decay.
+We let
+L∞: L2(U, µu; V) →L2(U, µu; V)
+G 7→
+Z
+U
+K∞(u, ·)G(u)µu(du)
+denote the kernel integral operator associated to the NTK K∞. Here the integral is defined
+in the sense of Bochner integration (see, e.g., Dashti and Stuart (2015), Sec. A.2). Note that
+L∞is bounded and self-adjoint. Moreover, it is compact and thus has discrete spectrum
+{µj}j, with µj →0 as j →∞. By our assumptions, L∞is of trace-class, i.e., has summable
+eigenvalues (see e.g. Steinwart and Christmann (2008)).
+Assumption 5 (Source Condition) We assume 3
+G∗= Lr
+∞H∗,
+(11)
+for some H∗∈L2(U, µu), satisfying ∥H∗∥L2(µu) ≤R with R > 0, r ≥0.
+This assumption characterizes the hypothesis space and relates to the regularity of
+the regression operator G∗.
+The bigger r is, the smaller the hypothesis space is, the
+stronger the assumption is, and the easier the learning problem is, as Lr1
+∞
+ L2(U, µu; V)
+
+⊆
+Lr2
+∞
+ L2(U, µu; V)
+
+if r1 ≥r2. Note that G∗∈H∞holds for all r ≥1
+2, in fact we have
+ran(L
+1
+2∞) = H∞(see e.g. Steinwart and Christmann (2008)). The next assumption relates
+to the capacity of the hypothesis space.
+Assumption 6 (Effective Dimension) For any λ > 0 we assume
+NL∞(λ) := tr
+ L∞(L∞+ λI)−1
+≤cbλ−b,
+(12)
+for some b ∈[0, 1] and cb > 0.
+The number NL∞(λ) is called effective dimension or degrees of freedom Caponnetto and
+De Vito (2007). It is related to covering/entropy number conditions, see Steinwart and
+Christmann (2008). The condition (12) is naturally satisfied with b = 1, since L∞is a trace
+class operator which implies that its eigenvalues {µi}i satisfy µi ≲i−1. Moreover, if the
+eigenvalues of L∞satisfy a polynomial decaying condition µi ∼i−c for some c > 1, or if
+L∞is of finite rank, then the condition (12) holds with b = 1/c, or with b = 0. The case
+3. Note that the power of L∞is defined via its SVD: Lr
+∞:= P∞
+j=1 µr
+j⟨ϕj, ·⟩ϕj.
+15
+
+PDF PAGE 16
+Nguyen and M¨ucke
+b = 1 is referred to as the capacity independent case. A smaller b allows deriving faster
+convergence rates for the studied algorithms.
+Our next general result establishes an upper bound for the excess risk in terms of the
+stopping time T and the number of neurons M of our gradient descent algorithm (8), under
+the assumption that the weights remain in a vicinity of the initialization. The proof is
+outlined in Section 3.2 and further detailed in Appendix B.
+Dependence of r and b on the architecture.
+The parameters r in the source condi-
+tion and b in the effective-dimension assumption are not free constants independent of the
+architecture. They are determined by the spectral properties of the kernel integral operator
+L∞, and therefore depend implicitly on the choice of activation σ, the operator A, the bias
+function c, and the input distribution µu. In the present paper we work at this abstract
+level, as is standard in RKHS learning theory. A more explicit characterization of how
+architectural choices translate into concrete values of r and b for general neural operators
+appears to be open and is left for future work, see also Remark 12.
+Theorem 7 Suppose Assumptions 1, 4, 5 and 6 are satisfied. Assume further that α ∈
+(0, κ−2), 2r + b > 1, nU ≥n0 := e
+2r+b
+2r+b−1 ,
+3 ≤T ≤Cn
+1
+2r+b
+U
+,
+M ≥˜CB6
+τ log2(nU)T 2r∨1 ,
+nX ≥˜CB2
+τT 2r log2(T),
+and
+∀t ∈[T] :
+∥θt −θ0∥Θ ≤Bτ ,
+(13)
+for some Bτ ≥1 + τ. Then we have with probability at least 1 −δ,
+∥GθT −G∗∥L2(µu) ≤¯C T −r log3(2/δ) ,
+(14)
+with C, ˜C, ¯C > 0 independent of nU, nX, M, T, Bτ.
+Finally, the above result directly leads to rates of convergence for operator learning in
+the vvNTK regime.
+Corollary 8 Suppose all assumptions of Theorem 7 are satisfied. Choosing TnU = n
+1
+2r+b
+U
+gives with probability at least 1 −δ
+∥GθTnU −G∗∥L2(µu) ≤¯C log3(2/δ) ·
+ 1
+nU
+
+r
+2r+b
+,
+for some ¯C > 0.
+We comment on the above result.
+Theorem 7 provides an upper bound for the excess
+risk in estimating nonlinear operators using a shallow neural operator network trained
+with gradient descent.
+The risk bound is expressed in terms of the stopping time and
+16
+
+PDF PAGE 17
+Optimal Convergence Rates for Neural Operators
+demonstrates that gradient descent is, in fact, a descent algorithm, decreasing the risk at
+each step with high probability, provided the algorithm is stopped early. We also specify
+the minimum number of neurons required to achieve this bound, which depends on our a
+priori assumptions about the model (source condition and eigenvalue decay). Notably, in the
+misspecified case r ∈(0, 1/2), this minimum number increases and matches the results found
+in Nguyen and M¨ucke (2023) for nonparametric regression in the NTK regime. In addition,
+our result provides a minimum number of second stage samples from the discretization to
+achieve this bound.
+We can reformulate Theorem 7 to obtain the sample complexity required to achieve a
+certain ε-accuracy. On order for the excess risk to have accuracy of ε > 0, the algorithm
+requires O(ε−2r+b
+r ) first stage samples and O(ε−2 log2(ε−1/r)) second stage samples.
+Choosing T = O(n
+1
+2r+b
+U
+) in Theorem 7 leads to the convergence rate O(n
+−
+r
+2r+b
+U
+), which
+is known to be minimax optimal in the RKHS framework Caponnetto and De Vito (2007);
+Blanchard and M¨ucke (2017).
+For the well-specified case b = 1, r = 1
+2, where we can only assume that G∗∈H∞, we
+obtain from Theorem 7:
+∥GθTn −G∗∥L2(µu) = O
+
+n−1
+4
+
+.
+Note that in this case we only need M ≥O
+ √nU log2 nU
+
+many neurons and
+nX ≥O
+ √nU log2 nU
+
+many second stage samples.
+In the kernel learning framework, the assumption 2r + b > 1 refers to easy learning
+problems and if 2r + b ≤1 one speaks of hard learning problems Pillaud-Vivien et al.
+(2018). In this paper we only investigate easy learning problems and leave the question,
+how many neurons M and second stage samples are needed to obtain optimal rates in hard
+learning problems Lin et al. (2020), open for future work.
+We finally want to point out that all bounds given in Theorem 7 and Corollary 8 require
+the iterates θt to stay close to the initialization. We show below in Theorem 9 that this
+assumption is indeed satisfied.
+The weights barely move. Our next result shows that the assumption (13) is indeed
+satisfied and the weights remain in a vicinity of the initialization θ0. The proof is provided
+in Appendix C.
+Theorem 9 (Bound for the Weights) Suppose the Assumptions 1, 4, 5 and 6 are sat-
+isfied. Let δ ∈(0, 1] and T ≥3 and M ≥M0, nU, nX ≥n0, where M0, n0 are defined in (69).
+With probability at least 1 −10δ it holds
+∀t ∈[T] :
+∥θt −θ0∥Θ ≤Bτ ,
+where
+Bτ := max
+
+1 + τ, C⋄log(T)T max{0,
+1
+2 −r} · Bδ
+ 1
+αT
+
+,
+17
+
+PDF PAGE 18
+Nguyen and M¨ucke
+where C⋄> 0 depends on r, κ, α and is defined in (60), and with
+Bδ
+ 1
+αT
+
+:= 1 + 10κ
+p
+NL∞((αT)−1)
+ r
+αT
+nU
++
+r
+αT
+nX
+!
+log3/2
+12
+δ
+
+.
+Corollary 10 (Refined Bounds) Suppose the assumptions of Theorem 9 are satisfied.
+Let T = cn
+1
+2r+b
+U
+, 2r + b > 1.
+1. Let r ≥1
+2 and nU ≥n0, for some n0 ∈N depending on δ, r, b. With probability at least
+1 −δ
+Bτ(δ, T) ≤CR,r,κ,α log(T) ,
+(15)
+if
+M ≥Cκ,α,r,σ,∥L∞∥˜d2 log4(T)T 2r log2( ˜d/δ) ,
+nX ≥Cα,b,κ,∥L∞∥T 1+b log3(1/δ)
+2. Let r < 1
+2. With probability at least 1 −δ ,
+Bτ(δ, T) ≤CR,r,κ,α,b log(T)T 1−2r.
+This holds if we choose
+M ≥Cκ,α,r,σ,∥L∞∥˜d2 log4(T)T 5−8r log2( ˜d/δ),
+nX ≥Cα,b,κ,∥L∞∥T 2r+b log3(1/δ).
+For some constants c, CR,r,κ,α,b, Cκ,α,r,σ,∥L∞∥, Cα,b,κ,∥L∞∥> 0.
+If we incorporate the above worst-case bound on the weights into our main result,
+Theorem 7, and combine the resulting constraints on M and nX, we obtain the following
+corollary.
+Corollary 11 Suppose that the assumptions of Theorem 9 are satisfied. Let α ∈(0, κ−2),
+assume that 2r + b > 1, and let nU ≥n0 := e
+2r+b
+2r+b−1 . Set
+T = c n
+1
+2r+b
+U
+.
+Then, with probability at least 1 −δ, it holds that
+∥GθT −G∗∥L2(µu) ≤C n
+−
+r
+2r+b
+U
+log3
+2
+δ
+
+.
+(16)
+This bound is valid provided that the following conditions hold:
+18
+
+PDF PAGE 19
+Optimal Convergence Rates for Neural Operators
+1. Case r ≥1
+2:
+M ≥˜C ˜d2 log6(T) T 2r log2
+ ˜d
+δ
+!
+,
+nX ≥˜C log2(T) T (1+b)∨2r log3
+1
+δ
+
+.
+2. Case r < 1
+2:
+M ≥˜C ˜d2 log6(T) T 7−12r log2
+ ˜d
+δ
+!
+,
+nX ≥˜C log2(T) T (2r+b)∨(2−2r) log3
+1
+δ
+
+.
+Here c, C, ˜C > 0 are constants independent of nU, nX, M, T, Bτ, and ˜d.
+Remark 12 (Analysis of NTK Spectrum.) It is known that a certain eigenvalue decay
+of the kernel integral operator L∞implies a bound on the effective dimension. Thus, as-
+sumptions on the decay of the effective dimension directly relate to the approximation ability
+of the underlying RKHS, induced by the NTK.
+Meanwhile, there are some results known that shed light on the RKHS of standard neural
+networks, that are induced by specific NTKs and activation functions (Bietti and Mairal,
+2019), Geifman et al. (2020), Chen and Xu (2020), Bietti and Bach (2020),Fan and Wang
+(2020). For neural operators, however, the RKHS has not yet been explored, at least to the
+best of our knowledge. We hope to build on the existing results for neural networks in future
+research to gain a deeper understanding of the RKHS in the context of neural operators.
+However, the approximation properties of neural operators are well-studied (Huang et al.,
+2024; Schwab and Zech, 2021; Marcati and Schwab, 2023; Kovachki et al., 2021, 2024c).
+For example, Kovachki et al. (2024c) show that all continuous operators can be arbitrar-
+ily well approximated by neural operators with a non-polynomial and continuous activation
+function.
+3.2 Outline of Proof
+Our proof is based on a suitable error decomposition. To this end, we further introduce
+additional linearized iterates in HM:
+F M
+t+1(u) = F M
+t (u) −α
+nU
+nU
+X
+j=1
+ℓ′(F M
+t (uj), vj)KM(uj, u) ,
+(17)
+Ht(u)(x) = ⟨∇(Gθ0(u)(x)), θt −θ0⟩Θ ,
+(18)
+with initialization F M
+0
+= H0 = 0.
+The iterative algorithm of F M
+t
+is known as kernel
+gradient descent (KGD) with respect to the kernel KM and Ht describes a linear Taylor
+approximation of the neural Operator around θ0. We may split
+∥GθT −G∗∥L2(µu) ≤∥GθT −SMHT ∥L2(µu) + ∥SM(HT −F M
+T )∥L2(µu) + ∥SMF M
+T −G∗∥L2(µu) ,
+(19)
+19
+
+PDF PAGE 20
+Nguyen and M¨ucke
+where SM : HM ,→L2(U, µu) is the inclusion of HM into L2(U, µu). The first error in (19)
+describes an Taylor approximation error. More precisely we use a Taylor expansion in θt
+around the initialization θ0. For any x ∈X and t ∈[T], we have
+Gθt(u)(x) = Gθ0(u)(x) + SM ⟨∇(Gθ0(u)(x)), θt −θ0⟩Θ + r(θt,θ0)(u)(x)
+= SMHt(u)(x) + r(θt,θ0)(u)(x) .
+(20)
+Here, r(θt,θ0)(x) denotes the Taylor remainder and can be uniformly bounded by
+∥GθT −SMHT ∥L2(µu) ≤∥r(θt,θ0)∥∞≲Bτ
+∥θt −θ0∥2
+Θ
+√
+M
+,
+as Proposition 25 shows. This requires the iterates {θt}t∈[T] to stay close to the initialization
+θ0, i.e.
+sup
+t∈[T]
+∥θt −θ0∥Θ ≤Bτ ,
+with high probability, for some Bτ < ∞.
+We show in Theorem 9 that this is satisfied
+for sufficiently many neurons. The second error term in (19) depends on the number of
+neurons M and on the number of second stage samples nX, see Theorem 18. More precisely,
+we obtained
+∥SM(HT −F M
+T )∥L2(µu) ≲log(T)B3
+τ
+
+1
+√
+M
++
+1
+√nX
+
+,
+Nguyen and M¨ucke (2023) considered a similar error term, but for neural networks instead of
+operators. We used improved spectral regularisation inequalities to obtain rates for second
+stage samples and a shorter, more concise proof than in Nguyen and M¨ucke (2023). The
+last error term in (19) describes the generalization error of KGD. Applying the results of
+Nguyen and M¨ucke (2023), we obtain that, with high probability,
+∥SMF M
+T −G∗∥L2(µu) ≲T −r,
+provided that the number of random features satisfies
+M ≳log(nU) T 2r.
+See Proposition 19 for a precise statement. As a result, we arrive at an overall bound of
+Theorem 7
+∥GθT −G∗∥L2(µu) ≲log(T)B3
+τ
+
+1
+√
+M
++
+1
+√nX
+
++ T −r .
+(21)
+Remark 13 As shown in (21), the number of neurons M and the sample size nU must be
+chosen of order larger than
+O(T 2r) = O
+ n
+2r
+2r+b
+U
+
+in order to ensure that the approximation error between the neural operator GθT and the
+random feature method F M
+T
+attains the optimal learning rate of kernel estimators. At first
+glance, it may seem nonintuitive that smoother target functions (i.e., larger values of the
+20
+
+PDF PAGE 21
+Optimal Convergence Rates for Neural Operators
+smoothness parameter r) require a larger number of neurons, or equivalently random fea-
+tures M, to achieve optimal rates, since smoothness is often associated with easier learning
+problems. The key reason is that the optimal learning rate itself depends explicitly on r. To
+make this effect explicit, note that the kernel estimator admits the closed-form representation
+F M
+T
+= bS∗
+M ϕT
+  bSM bS∗
+M
+
+v,
+where
+ϕT (x) := α
+T−1
+X
+j=0
+(1 −αx)j
+denotes the spectral filter associated with gradient descent (cf. Nguyen and M¨ucke (2023))
+and v = (v1, . . . vnU) ∈VnU. Moreover, for each fixed x ∈(0, α−1), one has ϕT (x) →x−1
+as T →∞. Consequently, for large n and large T, and in a low-noise regime in which
+vi ≈G∗(ui), the estimator satisfies
+SMF M
+T
+≈LMϕT (LM) G∗,
+and can therefore be interpreted as a (regularized) projection of G∗onto the image of LM.
+In order to achieve the optimal rate, this projection must be sufficiently close to G∗in the
+L2-norm, that is, it must intersect the ball
+Br :=
+
+F ∈L2(U, µu) : ∥G∗−F∥2 ≤n
+−
+2r
+2r+b
+U
+	
+.
+As r increases, the radius of this ball shrinks, making the approximation requirement in-
+creasingly restrictive.
+Consequently, the image Im(LM)—and hence the random feature
+RKHS HM— must grow accordingly to ensure that this intersection remains nonempty.
+Since the size of HM increases with M, this provides a natural explanation for why a larger
+number of random features is required to learn smoother target functions at the optimal rate;
+see also Figure 2.
+H
+HM
+F M
+t
+Br
+G∗
+Figure 2: Geometric illustration of the approximation requirement for random feature
+methods.
+The ball Br around the target function G∗shrinks as the smooth-
+ness parameter r increases. To attain the optimal learning rate, the RKHS HM
+must be sufficiently rich to intersect Br.
+21
+
+PDF PAGE 22
+Nguyen and M¨ucke
+4. Numerical Illustration
+In this section we support our theoretical investigation that in the well-specified case, the
+optimal generalization properties can be achieved with a neural operator comprising only
+M = O(√nU) neurons and nX = O(√nU) second stage samples (see Theorem 7). Remarkably,
+the empirical evidence presented in Figure 4 and 5 aligns with this theoretical prediction.
+More precisely we considered the one dimensional Poisson problem,
+−∆v = u
+in (0, 1)
+v = 0
+on {0, 1}.
+We aim to estimate the solution operator that maps the input function u to the solution
+v. In the one-dimensional case with zero boundary conditions, the analytical form of the
+solution operator is straightforward to obtain. Specifically, we have:
+v(x) =
+Z 1
+0
+G(x, y)u(y)dy,
+with G(x, y) = 1
+2(x + y −|x −y|) −xy. Therefore, we randomly sampled 800 polynomials
+ui and computed their analytical solutions vi. These functions {ui, vi}400
+i=1 were then used
+as training data to train our neural operator using GD, and a symmetric initialization
+(2.1). The test set {ui, vi}800
+i=401 was used for evaluation. As shown in Figures 6 and 7, after
+reaching nX = M = T = √nU = 20, there is no further significant improvement in the neural
+operator’s performance.
+The empirical efficiency of neural operators (NOs) has been demonstrated in numerous
+works through extensive numerical simulations. Importantly, these studies consider signifi-
+cantly more complex problem settings than the one-dimensional linear example investigated
+in this paper.
+A setting closely related to our NTK-based perspective is presented in Nelsen and
+Stuart (2024). The authors provide detailed simulation studies on the direct training of
+operator-valued random feature kernel estimators.
+In particular, their experiments also
+analyze the influence of the number of random features on the approximation accuracy.
+The learned object is the solution operator associated with PDEs such as the Burgers
+equation and the Darcy flow equation. These simulations offer valuable insight into the
+statistical–computational trade-offs in random feature–based operator learning.
+A broader comparative overview is provided in Gonon et al. (2024), where extensive
+numerical experiments benchmark different learning-based approaches for approximating
+solution operators. The comparison includes Fourier Neural Operators (FNOs), convolu-
+tional neural networks (CNNs), and DeepONets, as well as classical numerical schemes such
+as finite difference methods (FDM) and finite element methods (FEM). The experiments
+span a variety of nonlinear PDEs, including the Allen–Cahn equation and reaction–diffusion
+systems, highlighting both accuracy and computational efficiency across methods.
+In Kovachki et al. (2024a), multiple classes of neural operators—such as Fourier Neural
+Operators (FNOs), Graph Neural Operators (GNOs), and low-rank neural operators—are
+compared across a broad range of experimental settings. These experiments investigate
+22
+
+PDF PAGE 23
+Optimal Convergence Rates for Neural Operators
+multi-layer architectures and analyze both predictive performance and computational com-
+plexity. The study provides a systematic comparison of architectural choices within the
+neural operator framework.
+Further large-scale numerical experiments with Fourier Neural Operators (FNOs) have
+demonstrated their capability to handle complex and high-dimensional tasks.
+Notably,
+FNOs have been successfully applied to global weather forecasting at high spatial resolu-
+tion (Pathak et al., 2022), as well as to more challenging differential equations with complex
+geometries (Lowery et al., 2024; Li et al., 2021). These studies highlight the scalability and
+robustness of neural operators in multidimensional and real-world scientific computing set-
+tings, reinforcing their practical relevance for learning solution operators across diverse
+applications.
+Figure 3: A random realization of a polynomial u, its solution v and the estimator NO(u).
+Figure 4: The logarithmic test-error for
+different choices of neurons M
+and iterations T and fixed nX =
+50.
+Figure 5: The logarithmic test-error for
+different choices of nX and iter-
+ations T and fixed M = 50.
+23
+
+PDF PAGE 24
+Nguyen and M¨ucke
+Figure 6: The
+test-error
+for
+different
+choices of M and fixed T = 50
+and nx = 50.
+Figure 7: The
+test-error
+for
+different
+choices of nX and fixed T = 50
+and M = 50.
+5. Conclusion
+In this work, we studied two-layer neural operators in the neural tangent kernel regime
+and established optimal convergence rates for operator learning under standard source-
+condition and effective-dimension assumptions. Our analysis combines tools from vector-
+valued RKHS theory, random feature approximation, and the analysis of shallow neural
+networks, and extends these techniques to the setting of learning operators between function
+spaces.
+In particular, we derived high-probability excess-risk bounds for early-stopped
+gradient descent, together with explicit requirements on the number of neurons and second-
+stage samples needed to achieve these rates.
+A central motivation for this framework is the learning of solution operators of partial
+differential equations. Neural operators provide a flexible and scalable alternative to clas-
+sical discretization-based methods, especially in settings where repeated evaluations of a
+solution map are required. Our results give theoretical support for this approach in the
+NTK regime and show that, under suitable assumptions, neural operators achieve the same
+minimax-optimal rates known from classical nonparametric learning in RKHS.
+At the same time, several important questions remain open.
+First, our analysis is
+restricted to easy learning problems, that is, to the regime 2r + b > 1.
+Extending the
+theory to hard learning problems and understanding the corresponding requirements on
+the number of neurons M and second-stage samples is an interesting direction for future
+work. Second, while our rates are expressed in terms of the source-condition parameter r
+and the effective-dimension parameter b, a more explicit understanding of these quantities
+requires a deeper analysis of the limiting neural tangent kernel K∞and its associated
+kernel integral operator. In particular, the spectral properties of the NTK and the resulting
+structure of the induced vector-valued RKHS for neural operators are, to the best of our
+knowledge, still largely open.
+24
+
+PDF PAGE 25
+Optimal Convergence Rates for Neural Operators
+We hope that the present work provides a useful first step toward a learning-theoretic
+understanding of neural operators and that it motivates further research on their approx-
+imation properties, induced RKHS structure, and statistical-computational trade-offs in
+more general settings.
+Glossary
+U
+The function input space, mapping from
+X →Y ⊂Rdy.
+5
+V
+The function target space, mapping from X →˜Y ⊂R.
+5
+µ
+Probability measure on U × V.
+5
+X
+Input space of our function spaces.
+5
+ρx
+Probability measure on the input data space X.
+5
+E
+Mean squared error, E(G) := Eµ[∥G(u) −v∥2
+L2(ρx).
+5
+G∗
+Target operator, G∗:=
+R
+V v(.)µ(dv|u).
+5
+M
+The width of the neural operators.
+5
+P
+Number of all trainable parameters.
+12
+σ
+The activation function acting point-wise from
+R →R.
+7
+FM
+Class of neural operators.
+5
+nU
+Number of samples drawn from µ.
+10
+nX
+Number of samples drawn from ρx.
+10
+∥.∥nX
+Empirical norm, ∥f∥2
+nX :=
+1
+nX
+PnX
+j=1 |f(xj)|2.
+10
+⟨u, u′⟩nX
+Empirical inner product
+⟨u, u′⟩nX :=
+1
+nX
+PnX
+i=1 u(xi)u′(xi).
+11
+⟨. , .⟩2
+Euclidean inner product.
+5
+∥· ∥Θ
+Norm of the parameter space Θ, ∥θ∥2
+Θ = ∥a∥2
+2 + ∥B∥2
+F .
+6
+J(u) ∈F(X, Rdk+dy+db)
+J(u)(x) := (A(u)(x), u(x), c(x))⊤.
+12
+⟨. , .⟩L2(ρx)
+L2(X, ρx)−inner product.
+13
+⊗
+Tensor product (u ⊗v)(f) := u · ⟨v , f⟩L2(ρx).
+13
+25
+
+PDF PAGE 26
+Nguyen and M¨ucke
+Appendix A. Preliminaries
+For our analysis we need some further notation. We define
+L2(U, µu) := L2 U, µu; L2(X, ρx)
+
+,
+equipped with the norm
+∥G∥2
+L2(µu) :=
+Z
+U
+∥G(u)∥2
+L2(ρx) µu(du).
+For each M ∈N ∪{∞}, we denote by
+SM : HM ,→L2(U, µu)
+the canonical inclusion operator of HM into L2(U, µu).
+The adjoint operator S∗
+M : L2(U, µu) −→HM is identified as
+S∗
+MG =
+Z
+U
+KM,uG(u)µu(du) ,
+where KM,u denotes the element of HM equal to the function t 7→KM(u, t). The covariance
+operator ΣM : HM −→HM and the kernel integral operator LM : L2(U, µu) →L2(U, µu)
+are given by
+ΣMG := S∗
+MSMG =
+Z
+U
+KM,uG(u)µu(du) ,
+(22)
+LMG := SMS∗
+MG =
+Z
+U
+KM,uG(u)µu(du) ,
+(23)
+which can be shown to be positive, self-adjoint, trace class (and hence is compact). The
+empirical versions of these operators are given by
+bSM : HM −→VnU,
+
+bSMG
+
+j = K∗
+M,ujG,
+bS∗
+M : VnU −→HM,
+bS∗
+Mv = 1
+nU
+nU
+X
+j=1
+KM,ujvj,
+bΣM := bS∗
+M bSM : HM −→HM,
+bΣM = 1
+nU
+nU
+X
+j=1
+KM,ujK∗
+M,uj,
+where VnU is equipped with the norm ∥v∥2
+VnU :=
+1
+nU
+PnU
+i=1 ∥vi∥2
+L2(ρx) . We introduce the
+following definitions similar to Definition 2 of Rudi and Rosasco (2017):
+ZM : Θ →HM,
+(ZMθ) (·) = ∇Gθ0(·)⊤θ,
+Z∗
+M : HM →Θ,
+Z∗
+MG =
+Z
+U
+Z
+X
+∇Gθ0(u)(x)G(u)(x)dρx(x)dµu(u),
+26
+
+PDF PAGE 27
+Optimal Convergence Rates for Neural Operators
+b
+ZM : Θ →
+
+RnU×nX ,
+1
+√nUnX
+∥· ∥F
+
+,
+
+b
+ZMθ
+
+i,j = ∇Gθ0(ui)(xj)⊤θ,
+b
+Z∗
+M :
+
+RnU×nX ,
+1
+√nUnX
+∥· ∥F
+
+→Θ,
+b
+Z∗
+Ma =
+1
+nUnX
+nU
+X
+i=1
+nX
+X
+j=1
+∇Gθ0(ui)(xj)ai,j,
+CM : Θ →Θ,
+CM =
+Z
+U
+Z
+X
+∇Gθ0(u)(x)∇Gθ0(u)(x)⊤dρx(x)dµu(u),
+(24)
+bCM : Θ →Θ,
+bCM =
+1
+nUnX
+nU
+X
+i=1
+nX
+X
+j=1
+∇Gθ0(ui)(xj)∇Gθ0(ui)(xj)⊤.
+(25)
+Remark 14 Note that CM and bCM are self-adjoint and positive operators, with spectrum
+in [0, κ2] and we further have CM = Z∗
+MZM, bCM = b
+Z∗
+M b
+ZM, ΣM = ZMZ∗
+M.
+Appendix B. Error Bounds
+B.1 Error Decomposition
+Recall the error decomposition from Section 3.2:
+∥GθT −G∗∥L2(µu) ≤∥GθT −SMHT ∥L2(µu)
+|
+{z
+}
+I
++ ∥SM(HT −F M
+T )∥L2(µu)
+|
+{z
+}
+II
++ ∥SMF M
+T −G∗∥L2(µu)
+|
+{z
+}
+III
+.
+(26)
+This section is devoted to bounding each term on the right hand side of (26). To this
+end, we need the following assumption:
+Assumption 15 Let T ∈N. Assume we have
+∀t ∈[T] :
+∥θt −θ0∥Θ ≤Bτ ,
+(27)
+for some constant Bτ ≥1 + τ.
+We will show in Section C that this assumption is satisfied with high probability, if M
+is sufficiently large.
+B.2 Bounding I
+In this section we provide an estimate of the first error term ∥GθT −SMHT ∥L2(µu) in (26).
+27
+
+PDF PAGE 28
+Nguyen and M¨ucke
+Proposition 16 Suppose that Assumption 15 is satisfied.
+∥GθT −SMHT ∥L2(µu) ≤
+˜C∇G(Bτ)B2
+τ
+√
+M
+,
+with ˜C∇G(Bτ) := 4 max {∥σ′∥∞, ∥σ′′∥∞} Bτ.
+Proof [Proposition 16] From Assumption 15 and Proposition 25 we immediately obtain for
+all x ∈X, u ∈U
+|GθT (u)(x) −SMHT (u)(x)| = |r(θ0,θT )(u)(x)|
+≤C∇G(Bτ)
+√
+M
+∥θT −θ0∥2
+Θ
+≤C∇G(Bτ)B2
+τ
+√
+M
+,
+(28)
+with C∇G(Bτ) := 2 max {∥σ′∥∞, ∥σ′′∥∞} max {1, Bτ + τ}. Moreover, since Bτ ≥τ + 1, we
+obtain
+C∇G(Bτ) = 2 max
+
+∥σ′∥∞, ∥σ′′∥∞
+	
+(Bτ + τ) ≤4 max
+
+∥σ′∥∞, ∥σ′′∥∞
+	
+Bτ =: ˜C∇G(Bτ).
+B.3 Bounding II
+In this section we estimate the second term ∥SM(HT −F M
+T )∥L2(µu) in (26). A short calcu-
+lation proves the following recursion:
+Lemma 17 Let t ∈N, M ∈N. Define ˆut := Ht −F M
+t
+∈HM. Then (ˆut)t follows the
+recursion ˆu0 = 0 and
+ˆut+1 = (Id −αbΣM)ˆut −αZM ˆξ(1)
+t
+−αZM ˆξ(2)
+t
+−α bS∗
+M ˆξ(3)
+t
+= α
+t−1
+X
+s=0
+(Id −αbΣM)s 
+ZM ˆξ(1)
+t−s + ZM ˆξ(2)
+t−s + bS∗
+M ˆξ(3)
+t−s
+
+,
+where
+ˆξ(1)
+t
+=
+1
+nUnX
+nU
+X
+i=1
+nX
+X
+j=1
+(Gθt(ui)(xj) −vi(xj)) (∇Gθt(ui)(xj) −∇Gθ0(ui)(xj)) ∈Θ ,
+ˆξ(2)
+t
+= 1
+nU
+nU
+X
+i=1
+(ˆsi −si) ∈Θ ,
+ˆξ(3)
+t
+= ¯r(θ0,θt) ∈VnU ,
+with ¯r(θ0,θt) =
+ r(θ0,θt)(u1), . . . , r(θ0,θt)(unU)
+
+and
+ˆsi , si ∈Θ , ˆs(m)
+i
+:= ⟨(Gθt(ui) −vi), ∂mGθ0(ui)⟩nX , s(m)
+i
+:= ⟨(Gθt(ui) −vi), ∂mGθ0(ui)⟩L2(ρx)
+.
+28
+
+PDF PAGE 29
+Optimal Convergence Rates for Neural Operators
+Proof [Lemma 17] Plugging in Ht the recursive definition of θt leads to
+Ht+1 = ⟨∇Gθ0(u), θt+1 −θ0⟩Θ
+= Ht −αZM ˆξ(1)
+t
+−αZM ˆξ(2)
+t
+−α bS∗
+M ˆξ(3)
+t
+−α
+n
+n
+X
+i=1
+KM(ui, .)(Ht(ui) −vi).
+(29)
+Here we used the fact that Gθ0 ≡0. Therefore, applying a Taylor expansion again yields
+Gθt = Ht + r(θ0,θt). Combining the above recursive formula of Ht with the recursive def-
+inition of F M
+t
+results in the first equation of the statement. The second equation can be
+derived by iterating the first equation t times.
+Theorem 18 Let δ ∈(0, 1], α < 1/κ2. Suppose Assumptions 1, 15, are satisfied. Let
+M ≥M0 := (8 ˜dκ2β∞αT)∨8κ4∥L∞∥−1 log2 2
+δ with β∞= log 4κ2(NL∞(αT)+1)
+δ∥L∞∥
+. Then we have
+with probability at least 1 −δ,
+∀t ∈[T] :
+∥SM ˆut∥L2(µu) ≤4ξ(M, nX, Bτ, κ) (log(T) + 6) ,
+where ut := Ht −F M
+t
+and
+ξ(M, nX, Bτ, κ, δ)
+:=
+C∇G(Bτ)Bτ
+√
+M
+
+κBτ + C∇G(Bτ)
+√
+M
+B2
+τ + 1
+
++ 4κ2 (Bτ + 1)
+√nX
+log
+16
+δ
+
++ (2κ + 1)C∇G(Bτ)B2
+τ
+√
+M
+
+.
+Here, the constant C∇G(Bτ) is defined in Proposition 26. If we further assume
+M ≥MII := max{M0, M1}
+with
+M1 := 48C∇G(Bτ)2B4
+τκT 2r (log(T) + 6)2 and nX ≥32κ4 (Bτ + 1)2 T 2r (log(T) + 6)2 log
+16
+δ
+
+,
+we have
+∀t ∈[T] :
+∥SM ˆut∥L2(µu) ≤1
+T r .
+Proof [Theorem 18] Applying (Nguyen and M¨ucke, 2023, Proposition A.15) gives (for
+λ := (αT)−1 and M ≥(8 ˜dκ2β∞αT) ∨8κ4∥L∞∥−1 log2 2
+δ) with probability at least 1 −δ
+∥SM ˆut∥L2(µu) = ∥Σ
+1
+2
+M ˆut∥HM ≤2 ∥bΣ
+1
+2
+M ˆut∥HM + 2 ∥ˆut∥HM
+√
+αT
+,
+(30)
+29
+
+PDF PAGE 30
+Nguyen and M¨ucke
+Let a ∈{0, 1/2}. Using Lemma 17, we find for any t ∈[T],
+∥bΣa
+M ˆut+1∥HM = α
+
+t−1
+X
+s=0
+bΣa
+M(Id −αbΣM)s 
+ZM ˆξ(1)
+t−s + ZM ˆξ(2)
+t−s + bS∗
+M ˆξ(3)
+t−s
+
+HM
+≤α1−a
+T−1
+X
+s=0
+∥(αbΣM)a(Id −αbΣM)sZM ˆξ(1)
+T−s∥HM +
+α1−a
+T−1
+X
+s=0
+∥(αbΣM)a(Id −αbΣM)sZM ˆξ(2)
+T−s∥HM +
+α1−a
+T−1
+X
+s=0
+∥(αbΣM)a(Id −αbΣM)s bS∗
+M ˆξ(3)
+T−s∥HM .
+(31)
+From Proposition 33 we further obtain with probability at least 1 −δ,
+∥bΣa
+M ˆut+1∥HM ≤α1−a
+ 2ηa+ 1
+2 (T)
+√α
++ 2ηa(T)
+√
+αT
+!
+max
+s≤T
+
+∥ˆξ(1)
+s ∥Θ + ∥ˆξ(2)
+s ∥Θ + ∥ξ(3)
+s ∥VnU
+
+,
+(32)
+where ηa was defined in Lemma 31.
+Bounding ∥ˆξ(1)
+t
+∥Θ: We have
+∥ˆξ(1)
+t
+∥Θ =
+
+1
+nUnX
+nU
+X
+i=1
+nX
+X
+j=1
+(Gθt(ui)(xj) −vi(xj)) (∇Gθt(ui)(xj) −∇Gθ0(ui)(xj))
+
+Θ
+≤
+1
+nUnX
+nU
+X
+i=1
+nX
+X
+j=1
+|Gθt(ui)(xj) −vi(xj)| ∥∇Gθt(ui)(xj) −∇Gθ0(ui)(xj)∥Θ .
+From the Assumption 4 we have |vi(xj)| ≤1 and from Proposition 26 we have
+|Gθt(u)(x)| ≤κ∥θt −θ0∥Θ + C∇G(Bτ)
+√
+M
+∥θt −θ0∥2
+Θ,
+with C∇G(Bτ) := 2 max {∥σ′∥∞, ∥σ′′∥∞} max {1, Bτ + τ} . Using these bounds we obtain
+∥ˆξ(1)
+t
+∥Θ ≤
+
+κ∥θt −θ0∥Θ + C∇G(Bτ)
+√
+M
+∥θt −θ0∥2
+Θ + 1
+
+sup
+x∈X,u∈U
+∥∇Gθt(u)(x) −∇Gθ0(u)(x)∥Θ
+≤
+
+κ∥θt −θ0∥Θ + C∇G(Bτ)
+√
+M
+∥θt −θ0∥2
+Θ + 1
+ C∇G(Bτ)
+√
+M
+∥θt −θ0∥Θ
+
+≤C∇G(Bτ)Bτ
+√
+M
+
+κBτ + C∇G(Bτ)
+√
+M
+B2
+τ + 1
+
+,
+where we used Proposition 24 for the second inequality.
+30
+
+PDF PAGE 31
+Optimal Convergence Rates for Neural Operators
+Bounding ∥ˆξ(2)
+t
+∥Θ: By definition of ˆξ(2)
+t
+we have
+ˆξ(2)
+t
+
+Θ =
+
+1
+nUnX
+nU
+X
+i=1
+nX
+X
+j=1
+∇Gθ0(ui)(xj)(Gθt(ui)(xj) −vi(xj))
+(33)
+−Eρx∇Gθ0(ui)(x)(Gθt(ui)(x) −vi(x))
+
+Θ
+,
+(34)
+≤
+
+1
+nUnX
+nU
+X
+i=1
+nX
+X
+j=1
+∇Gθ0(ui)(xj)vi(xj) −Eρx∇Gθ0(ui)(x)vi(x)
+
+Θ
++,
+(35)
+
+1
+nUnX
+nU
+X
+i=1
+nX
+X
+j=1
+∇Gθ0(ui)(xj)Gθt(ui)(xj) −Eρx∇Gθ0(ui)(x)Gθt(ui)(x)
+
+Θ
+(36)
+:= I + II.
+(37)
+For I we set Wj :=
+1
+nU
+PnU
+i=1 ∇Gθ0(ui)(xj)vi(xj). Note that ∥Wj∥2 ≤κ2 := B, E∥Wj∥2
+2 ≤
+κ4 := V 2. Therefore we have from Proposition 41 with probability at least 1 −δ,
+I ≤4κ2
+√nX
+log
+4
+δ
+
+.
+For II, we cannot directly apply Proposition 41, since the summands involve θt, which
+means they are no longer independent. However from Proposition 49 we have that with
+probability at least 1 −δ,
+II ≤4κ2
+√nX
+log
+4
+δ
+
+∥θt −θ0∥Θ + 2κC∇G(Bτ)
+√
+M
+∥θt −θ0∥2
+Θ.
+Therefore we have,
+ˆξ(2)
+t
+
+Θ ≤4κ2
+√nX
+log
+4
+δ
+
+(∥θt −θ0∥Θ + 1) + 2κC∇G(Bτ)
+√
+M
+∥θt −θ0∥2
+Θ
+(38)
+≤4κ2 (Bτ + 1)
+√nX
+log
+4
+δ
+
++ 2κC∇G(Bτ)B2
+τ
+√
+M
+.
+(39)
+Bounding ∥ξ(3)
+t
+∥VnU :
+Using Proposition 25 we have
+ξ(3)
+t
+
+VnU =
+v
+u
+u
+t 1
+nU
+nU
+X
+i=1
+∥r(θt,θ0)(u)∥2
+L2(ρx) ≤C∇G(Bτ)B2
+τ
+√
+M
+.
+To sum up:
+31
+
+PDF PAGE 32
+Nguyen and M¨ucke
+Plugging the bounds of the errors ξ(i)
+t , i ∈{1, 2, 3} into 32 leads to
+∥bΣa
+M ˆuT+1∥HM ≤α1−a
+ 2ηa+ 1
+2 (T)
+√α
++ 2ηa(T)
+√
+αT
+!
+max
+s≤T
+
+∥ˆξ(1)
+s ∥Θ + ∥ˆξ(2)
+s ∥Θ + ∥ξ(3)
+s ∥VnU
+
+(40)
+≤α1−a
+ 2ηa+ 1
+2 (T)
+√α
++ 2ηa(T)
+√
+αT
+!
+· ξ(M, nX, Bτ, κ, δ),
+(41)
+with
+ξ(M, nX, Bτ, κ, δ) :=
+ 
+C∇G(Bτ)Bτ
+√
+M
+
+κBτ + C∇G(Bτ)
+√
+M
+B2
+τ + 1
+
++ 4κ2 (Bτ + 1)
+√nX
+log
+4
+δ
+
++ (2κ + 1)C∇G(Bτ)B2
+τ
+√
+M
+!
+.
+Plugging (40) into (30) gives,
+∥SM ˆuT ∥L2(µu) ≤2 ∥bΣ
+1
+2
+M ˆuT ∥HM + 2 ∥ˆuT ∥HM
+√
+αT
+≤4ξ(M, nX, Bτ, κ, δ)
+
+η1(T) + η1/2(T)
+√
+T
++ η1/2(T)
+√
+T
++ η0(T)
+T
+
+= 4ξ(M, nX, Bτ, κ, δ) (log(T) + 6) .
+Note that, to derive this final bound we conditioned on four events, where each of the
+events holds true with probability at least 1−δ. By Proposition 34, we therefore obtain the
+last inequality holds with probability at least 1−4δ. Redefining δ = 4δ proves the claim.
+B.4 Bounding III
+For bounding the last term in our error decomposition we use the results obtained in Nguyen
+and M¨ucke (2023).
+Proposition 19 (Theorem A.4. in Nguyen and M¨ucke (2023)) Suppose Assumptions
+1, 5, 4 and 6 are satisfied.
+Let δ ∈(0, 1], α < 1/κ2, T ≤C1n
+1
+2r+b
+U
+, 2r + b > 1 and
+nU ≥n0 := e
+2r+b
+2r+b−1 . With probability at least 1 −δ, we have
+∥SMF M
+T −G∗∥L2(µu) ≤C2 log3(2/δ) T −r ,
+provided that
+M ≥MIII(T, r) := C3 log(nU) ·
+
+
+
+
+
+T
+: r ∈
+ 0, 1
+2
+
+T 1+b(2r−1)
+: r ∈
+1
+2, 1
+
+T 2r
+: r ∈(1, ∞)
+,
+(42)
+where the constants C1, C2, C3 > 0 do not depend on nU, nX, δ, M, T.
+32
+
+PDF PAGE 33
+Optimal Convergence Rates for Neural Operators
+Remark 20 In Theorem A.4. of Nguyen and M¨ucke (2023), different assumptions on nU
+were proposed, however in the proof of Theorem 3.5 from Nguyen and M¨ucke (2023), it was
+shown that T ≤C1n
+1
+2r+b
+U
+is enough to guarantee the bound of 19.
+B.5 Proof of Main Result
+Proof [Theorem 7] Following the error decomposition of (26) and using the bounds of
+Proposition 16, 18, 19 we obtain with probability at least 1 −δ,
+∥GθT −G∗∥L2(µu) ≤C∇G(Bτ)B2
+τ
+√
+M
++ T −r + C2 log3(2/δ) T −r
+(43)
+≤C log3(2/δ) T −r .
+(44)
+Collecting the restrictions on the number of neurons and samples from the above Propo-
+sitions, we obtain the final lower bounds T ≤C1n
+1
+2r+b
+U
+, 2r + b > 1 and nU ≥n0 := e
+2r+b
+2r+b−1 ,
+nX ≥32κ2 (Bτ + 1) T 2r (log(T) + 6) log
+  16
+δ
+
+.
+M ≥M0(T, δ, ˜d, r, b, α, Bτ) := max {MII, MIII} ,
+(45)
+with MII, MIII defined in 18 and 42.
+Appendix C. Bounds on the Weights
+C.1 Proof of main result: The weights barely move
+Proof [Theorem 9] We prove this by induction over T ∈N. Assume that the claim holds
+for T ∈N. We show that this implies the claim for T + 1, for all T ∈N.
+A short calculation, similar to (29), shows that the weights (θt)t follow the recursion
+θT+1 −θ0 = α
+T
+X
+t=0
+(Id −α bCM)t(ζ(1)
+T−t + ζ(2)
+T−t + ζ(3)
+T−t + ζ(4)
+T−t + ζ(5)
+T−t) ,
+with
+ζ(1)
+s
+=
+1
+nUnX
+nU
+X
+i=1
+nX
+X
+j=1
+(Gθs(ui)(xj) −G∗(ui)(xj)) (∇Gθs(ui)(xj) −∇Gθ0(ui)(xj)) ,
+ζ(2)
+s
+=
+1
+nUnX
+nU
+X
+i=1
+nX
+X
+j=1
+(G∗(ui)(xj) −vi(xj))(∇Gθs(ui)(xj) −∇Gθ0(ui)(xj)) ,
+ζ(3)
+s
+= b
+Z∗
+M ¯r(θ0,θs),
+(¯r(θ0,θs))i,j := r(θ0,θs)(ui)(xj)
+ζ(4)
+s
+= b
+Z∗
+Mv −Z∗
+MG∗,
+vi,j := vi(xj)
+ζ(5)
+s
+= Z∗
+MG∗.
+33
+
+PDF PAGE 34
+Nguyen and M¨ucke
+Hence,
+∥θT+1 −θ0∥Θ ≤α
+T
+X
+t=0
+(Id −α bCM)tζ(1)
+T−t
+
+Θ + α
+T
+X
+t=0
+(Id −α bCM)tζ(2)
+T−t
+
+Θ
++ α
+T
+X
+t=0
+(Id −α bCM)tζ(3)
+T−t
+
+Θ + α
+T
+X
+t=0
+(Id −α bCM)tζ(4)
+T−t
+
+Θ
++ α
+T
+X
+t=0
+(Id −α bCM)tζ(5)
+T−t
+
+Θ .
+Bounding α PT
+t=0
+(Id −α bCM)tζ(1)
+T−t
+
+Θ.
+First, note that
+α
+T
+X
+t=0
+(Id −α bCM)tζ(1)
+T−t
+
+Θ ≤α
+T
+X
+t=0
+(Id −α bCM)T−t · ∥ζ(1)
+t
+∥Θ
+≤α
+T
+X
+t=0
+∥ζ(1)
+t
+∥Θ .
+Note that we already bounded ζ(1)
+t
+in the proof of Theorem 18. However, to bound the
+weights, we need a more refined bound. To this end, let
+T ≤Cα,r,κn
+1
+2r+b
+U
+,
+nX ≥T 2 max{0, 1
+2 −r},
+M ≥MIII,
+where MIII is defined in Proposition 19. From Proposition 22, we obtain with probability
+of at least 1 −δ,
+α
+T
+X
+t=0
+∥ζ(1)
+t
+∥Θ
+≤Cα,κ,r · Cσ′ ·
+TB5
+τ + T 1+˜νB3
+τ
+M
++
+B2
+τ
+√
+M
+·
+
+ηr(T) +
+T log(T)
+√nU
++ T log(T)
+√nX
+
+log
+3
+2
+12
+δ
+
+≤2 Cα,κ,r · Cσ′ ·
+TB5
+τ
+M
++
+B2
+τ
+√
+M
+·
+
+ηr(T) +
+T log(T)
+√nU
++ T log(T)
+√nX
+
+log
+3
+2
+12
+δ
+
+,
+for some Cα,κ,r > 0 and where we set ˜ν = max{0, 1
+2−r}, Cσ′ := max{∥σ′∥∞, ∥σ′∥2
+∞, ∥σ′′∥∞, ∥σ′′∥2
+∞}.
+For the last inequality we used T ˜ν ≤Bτ by definition of Bτ and the quantity ηr(T) is defined
+in Lemma 31.
+If we let
+nU ≥Cα,r,κ,bT 2r+b,
+(46)
+nX ≥T 2 max{0, 1
+2 −r},
+(47)
+M ≥max{MIII, Mα,σ′,r},
+(48)
+M · nU ≥˜Cα,κ,r · ˜Cσ′ · B2
+τ T 2 log2(T) log3(12/δ),
+(49)
+M · nX ≥˜Cα,κ,r · ˜Cσ′ · B2
+τ T 2 log2(T) log3(12/δ),
+(50)
+34
+
+PDF PAGE 35
+Optimal Convergence Rates for Neural Operators
+for some ˜Cα,κ,r > 0, and where
+Cσ′ := max{∥σ′∥∞, ∥σ′∥2
+∞, ∥σ′′∥∞, ∥σ′′∥2
+∞},
+Mα,σ′,r := ˜Cα,κ,r · Cσ′ · max{TB4
+τ, ηr(T)2Bτ},
+we obtain
+α
+T
+X
+t=0
+∥ζ(1)
+t
+∥Θ ≤Bτ/5 .
+Bounding α PT
+t=0
+(Id −α bCM)tζ(2)
+T−t
+
+Θ.
+From Lemma 23, we obtain with probability at least 1 −δ,
+max
+t∈[T] ∥ζ(2)
+t
+∥Θ ≤
+˜d B2
+τ · Cσ′,σ′′
+√nU · M
+q
+log(4 ˜d2/δ),
+with Cσ′,σ′′ = 334 · max{∥σ′∥∞, ∥σ′′∥∞} · max{Lσ′, Lσ′′}. Hence,
+α
+T
+X
+t=0
+(Id −α bCM)tζ(2)
+T−t
+
+Θ ≤α
+T
+X
+t=0
+(Id −α bCM)T−t · ∥ζ(2)
+t
+∥Θ
+≤αT ˜d B2
+τ · Cσ′,σ′′
+√nU · M
+q
+log(4 ˜d2/δ)
+≤1
+5Bτ,
+(51)
+provided that
+M · nU ≥25α2 B2
+τ ˜d2 C2
+σ′,σ′′ T 2 log(4 ˜d2/δ).
+(52)
+Bounding α PT
+t=0
+(Id −α bCM)tζ(3)
+T−t
+
+Θ.
+Recall that with probability at least 1 −δ/5, for all t ∈[T],
+∥θt −θ0∥Θ ≤Bτ .
+Since C∇G(Bτ) ≤4 max {∥σ′∥∞, ∥σ′′∥∞} Bτ, we obtain from Proposition 33 and Propo-
+sition 25,
+α
+T
+X
+t=0
+(Id −α bCM)tζ(3)
+T−t
+
+Θ = α
+T
+X
+t=0
+(Id −α bCM)T−tζ(3)
+t
+
+Θ
+≤
+√α
+√nUnX
+T
+X
+t=0
+(Id −α bCM)T−t(√α b
+Z∗
+M)
+ · ∥¯r(θ0,θs)∥F
+≤2
+√
+αT
+√nUnX
+· max
+s∈[T] ∥¯r(θ0,θs)∥F
+≤8 · max
+
+∥σ′∥∞, ∥σ′′∥∞
+	
+· B3
+τ ·
+r
+αT
+M
+≤1
+5 Bτ ,
+(53)
+35
+
+PDF PAGE 36
+Nguyen and M¨ucke
+provided that M ≥M(ζ(3)), with
+M(ζ(3)) = 1600 · α · max
+
+∥σ′∥∞, ∥σ′′∥∞
+	
+· B4
+τ T .
+(54)
+Bounding α PT
+t=0
+(Id −α bCM)tζ(4)
+T−t
+
+Θ. We write
+α
+T
+X
+t=0
+(Id −α bCM)tζ(4)
+T−t
+
+Θ = α
+T
+X
+t=0
+(Id −α bCM)t( b
+Z∗
+Mv −Z∗
+MG∗)
+
+Θ
+≤α
+T
+X
+t=0
+(Id −α bCM)t bC1/2
+M,λ
+ · ∥bC−1/2
+M,λ C1/2
+M,λ∥
+·
+C−1/2
+M,λ
+
+b
+Z∗
+My −Z∗
+MG∗
+Θ .
+(55)
+For the first term, we obtain from (94),
+α
+T
+X
+t=0
+(Id −α bCM)t bC1/2
+M,λ
+ ≤√α
+T
+X
+t=0
+(Id −α bCM)t(α bCM)1/2 + α
+√
+λ
+T
+X
+t=0
+(Id −α bCM)t
+≤2
+√
+αT +
+√
+λ · (αT)
+= 4
+√
+αT ,
+(56)
+if we take λ = 1/(αT).
+For the second term, we obtain from Proposition 45, with probability at least 1−δ with
+λ = 1/(αT),
+∥bC−1/2
+M,λ C1/2
+M,λ∥≤2 ,
+(57)
+if
+M ≥Cκ log2(1/δ),
+nU ≥CκT log(T) log2 (1/δ) ,
+nX ≥CκT log(T) log2 (1/δ) ,
+for some Cκ > 0.
+For the third term, we apply Proposition 48 with λ = 1/(αT) with probability of at
+least 1 −δ,
+C−1/2
+M,λ
+
+b
+Z∗
+Mv −Z∗
+MG∗
+≤2
+
+κ
+√
+αT
+ 1
+nU
++ 1
+nX
+
++ 5
+p
+NL∞((αT)−1)
+ 1
+√nU
++
+1
+√nX
+
+log3/2
+12
+δ
+
+,
+if
+M ≥Cα,κ ˜dT log(T) log(1/δ),
+and
+nU ≥Cα,κT log2 (12/δ) ,
+nX ≥Cα,κT log2 (12/δ) ,
+36
+
+PDF PAGE 37
+Optimal Convergence Rates for Neural Operators
+for some Cα,κ > 0.
+The above choices for nU and nX imply
+2κ
+√
+αT
+ 1
+nU
++ 1
+nX
+
+log3/2
+12
+δ
+
+≤
+4ακ
+Cα,κ
+√
+αT
+.
+Hence,
+C−1/2
+M,λ
+
+b
+Z∗
+Mv −Z∗
+MG∗
+≤
+4ακ
+Cα,κ
+√
+αT
++ 10
+p
+NL∞((αT)−1)
+ 1
+√nU
++
+1
+√nX
+
+· log3/2
+12
+δ
+
+.
+(58)
+Combining (56), (57), and (58) with (55) and recalling the definitions of Bτ and Bδ
+  1
+αT
+
+from Theorem 9, we find with probability of at least 1 −3δ
+α
+T
+X
+t=0
+(Id −α bCM)tζ(4)
+T−t
+
+Θ
+≤8
+√
+αT
+ 
+4ακ
+Cα,κ
+√
+αT
++ 10
+p
+NL∞((αT)−1)
+ 1
+√nU
++
+1
+√nX
+
+log3/2
+12
+δ
+!
+≤256α max{1, κ}
+Cα,κ
+· Bδ
+ 1
+αT
+
+≤256α max{1, κ}
+Cα,κ
+· log(T) · T max{0,
+1
+2 −r} · Bδ
+ 1
+αT
+
+≤Bτ/5 ,
+(59)
+where the constant in the definition of Bτ is set to
+C⋄:= max
+
+CR,r,κ,α, 1280α max{1, κ}
+Cα,κ
+, 1
+
+,
+(60)
+with CR,r,κ,α > 0 defined in (68).
+For the bound (59) to hold, we need to assume
+M ≥M(ζ(4)) := Cα,κ ˜d T log(T) log2(1/δ),
+(61)
+nU ≥nU(ζ(4)) := Cα,κ T log(T) log2 (12/δ) ,
+(62)
+nX ≥nX(ζ(4)) := Cα,κ T log(T) log2 (12/δ) ,
+(63)
+for some for some Cα,κ > 0.
+Bounding α PT
+t=0
+(Id −α bCM)tζ(5)
+T−t
+
+Θ.
+37
+
+PDF PAGE 38
+Nguyen and M¨ucke
+We have
+α
+T
+X
+t=0
+(Id −α bCM)tζ(5)
+T−t
+
+Θ = α
+T
+X
+t=0
+(Id −α bCM)tZ∗
+MG∗
+Θ
+≤α
+T
+X
+t=0
+(Id −α bCM)t bCM,λ
+ ·
+ bC−1
+M,λCM,λ
+
+·
+C−1
+M,λZ∗
+ML
+1
+2
+M,λ
+ ·
+L
+−1
+2
+M,λL
+1
+2
+∞,λ
+ ·
+L
+−1
+2
+∞,λG∗
+
+L2(µu)
+.
+For the first term we obtain
+α
+T
+X
+t=0
+(Id −α bCM)t bCM,λ
+
+Θ ≤
+T
+X
+t=0
+(Id −α bCM)t(α bCM)
+
+Θ + αλ ·
+T
+X
+t=0
+(Id −α bCM)t
+Θ
+≤2 log(T) + λ(αT)
+≤3 log(T) ,
+if we again let λ = 1/(αT) and since T ≥3 by assumption.
+By Proposition 47, with probability at least 1 −4δ
+ bC−1
+M,λCM,λ
+
+≤2
+ 
+κ2
+αT
+nU
++ αT
+nX
+
++ 5κ
+p
+NL∞((αT)−1)
+ r
+αT
+nU
++
+r
+αT
+nX
+!!
+log3/2
+12
+δ
+
+.
+if
+M ≥M(ζ(4)),
+(64)
+nU ≥max{4ακ2, Cα,κ}T log2(12/δ),
+(65)
+nX ≥max{4ακ2, Cα,κ}T log2(12/δ),
+(66)
+where M(ζ(4)) is defined in (61) and where Cα,κ > 0 comes from Proposition 47. The given
+choices of nU and nX imply
+αT
+nU
++ αT
+nX
+
+· log3/2
+12
+δ
+
+≤
+1
+2κ2 .
+Hence,
+ bC−1
+M,λCM,λ
+ ≤Bδ
+ 1
+αT
+
+,
+where Bδ
+  1
+αT
+
+is defined in Theorem 9.
+From Proposition 35 we obtain almost surely
+∥C−1
+M,λZ∗
+ML
+1
+2
+M,λ∥≤2 .
+38
+
+PDF PAGE 39
+Optimal Convergence Rates for Neural Operators
+Furthermore, (Nguyen and M¨ucke, 2023, Proposition A.14) gives with Probability of at
+least 1 −δ
+∥L
+−1
+2
+M,λL
+1
+2
+∞,λ∥≤2 .
+By Assumption 5 and Proposition 37,
+L
+−1
+2
+∞,λG∗
+
+L2(µu)
+≤Rκr(αT)max{0, 1
+2 −r}.
+Combining the previous bounds gives for λ = 1/(αT) with probability at least 1 −5δ
+α
+T
+X
+t=0
+(Id −α bCM)tζ(5)
+T−t
+
+Θ ≤12Rκr log(T)(αT)max{0, 1
+2 −r} · Bδ
+ 1
+αT
+
+= 1
+5CR,r,κ,α log(T)T max{0, 1
+2 −r} · Bδ
+ 1
+αT
+
+≤Bτ
+5 ,
+(67)
+where we set
+CR,r,κ,α := 60Rκrαmax{0, 1
+2 −r}.
+(68)
+Collecting everything. Finally, combining the bounds of all error terms and plugging
+in λ = 1/(αT) gives with probability at least 1 −10δ, for all t ∈[T + 1]
+∥θt −θ0∥Θ ≤Bτ,
+provided that
+M · nU ≥˜Cα,κ,rB2
+τ T 2 · max{ ˜Cσ′ log2(T) log3(12/δ), ˜d2C2
+σ′,σ′′ log(4 ˜d2/δ)},
+(69)
+M · nX ≥˜Cα,κ,r · ˜Cσ′ · B2
+τ T 2 log2(T) log3(12/δ),
+(70)
+with
+˜Cσ′ := max{Cσ′, C2
+σ′},
+Cσ′ := max{∥σ′∥∞, ∥σ′∥2
+∞, ∥σ′′∥∞, ∥σ′′∥2
+∞},
+Cσ′,σ′′ := 334 · max{∥σ′∥∞, ∥σ′′∥∞} · max{Lσ′, Lσ′′},
+and
+nU ≥max
+n
+˜Cα,κ T log(T) log2 (12/δ) , Cα,r,κ,bT 2r+bo
+,
+(71)
+nX ≥˜Cα,κ T log(T) log2 (12/δ) .
+(72)
+Furthermore, we need
+M ≥max{MIII, Mα,σ′,r, M(ζ(3)), M(ζ(4))},
+(73)
+39
+
+PDF PAGE 40
+Nguyen and M¨ucke
+where MIII is defined in Proposition 19 and
+Mα,σ′,r := ˜Cα,κ,r · ˜Cσ′ · max{TB4
+τ, ηr(T)2Bτ},
+M(ζ(3)) = 1600 · α · max
+
+∥σ′∥∞, ∥σ′′∥∞
+	
+· T B4
+τ,
+M(ζ(4)) := Cα,κ ˜d T log(T) log2(1/δ).
+Proof [Corollary 10]
+Recall that we assume
+T = cn
+1
+2r+b
+U
+.
+We first verify that the assumptions of Theorem 9 are satisfied for this choice of T.
+According to the constraints in (69) and (71), it is required that
+nU ≥Cα,κ,∥L∞∥,r,b,σ′,σ′′ · max
+n
+T 2r+b, T log(T) log2(1/δ)
+o
+,
+for some constant Cα,κ,∥L∞∥,r,b,σ′,σ′′ > 0.
+It is therefore sufficient that
+nU ≥Cα,κ,∥L∞∥,r,b,σ′,σ′′T 2r+b,
+provided that nU ≥n1(δ) is large enough so that
+Tn1 log(Tn1) log2
+1
+δ
+
+≤T 2r+b
+n1
+.
+Hence, if
+c ≤C−1
+α,κ,∥L∞∥,r,b,σ′,σ′′
+our choice of T satisfies the required assumption on nU. Now we can prove the statement.
+1. Let r > 1
+2. A short calculation shows that
+Bδ
+ 1
+αT
+
+= 1 + 10κ
+p
+NL∞((αT)−1)
+ r
+αT
+nU
++
+r
+αT
+nX
+!
+log3/2
+12
+δ
+
+≤1 + Cα,b,κ
+
+
+s
+T 1+b
+nU
++
+s
+T 1+b
+nX
+
+log3/2
+12
+δ
+
+≤1 + Cα,b,κ
+
+n
+1−2r
+4r+2b
+U
++
+s
+T 1+b
+nX
+
+log3/2
+12
+δ
+
+≤2
+if we let c ≤1 and
+nU ≥n2 :=
+
+2Cα,b,κ log3/2
+12
+δ
+ 4r+2b
+2r−1
+,
+nX ≥
+
+2Cα,b,κ log3/2
+12
+δ
+2
+T 1+b.
+40
+
+PDF PAGE 41
+Optimal Convergence Rates for Neural Operators
+Hence, Bτ(δ, T) ≤CR,r,κ,α log(T).
+For r = 1
+2 we similarly obtain Bδ(T) ≤2 if we let c ≤Cα,κ,b,δ be small enough.
+We finally bound the number of neurons that are required for achieving this rate from
+Theorem 9. According to the constraints in (69) and (71), it is required that
+M ≥Cκ,α,r,σ′,σ′′,∥L∞∥· max
+(
+log(T)T 2r, B4
+τT, B2
+τ T ˜d2 log( ˜d/δ), ˜dT log(T) log2(1/δ)
+)
+.
+Bounding the maximum gives that it is enough if
+M ≥CR,κ,α,r,σ′,σ′′,∥L∞∥˜d2 log4(T)T 2r log2( ˜d/δ) ,
+for some CR,κ,α,r,σ′,σ′′,∥L∞∥> 0. Similar we obtain for number of second stage samples
+that are required,
+nX ≥Cα,b,κ,∥L∞∥· max
+(
+T log(T)2 log2(1/δ), T 1+b log3(1/δ)
+)
+Bounding the maximum gives that it is enough if
+nX ≥Cα,b,κ,∥L∞∥T 1+b log3(1/δ),
+if nU ≥n3(δ) is large enough so that
+log2(Tn3)Tn3 ≤T 1+b
+n3
+holds true.
+2. If r < 1
+2, then similar as before we have
+Bδ(αT) ≤Cα,b,κT
+1
+2 −r
+for some Cα,b,κ > 0, if c ≤log−3(1/δ) and c−1T 2r+b ≤nX. Hence, Bτ(T) ≤CR,r,κ,α,b log(T)T 1−2r.
+A lower bound for the number of neurons follows the same way as in the other case:
+M ≥Cκ,α,r,σ,∥L∞∥˜d2 log4(T)T 5−8r log2( ˜d/δ),
+nX ≥Cα,b,κ,∥L∞∥T 2r+b log3(1/δ).
+To sum up the statement holds true if we set
+c := min
+n
+1, C−1
+α,κ,∥L∞∥,r,b,σ′,σ′′, Cα,κ,b,δ
+o
+,
+n ≥n0 := max{n1, n2, n3}.
+41
+
+PDF PAGE 42
+Nguyen and M¨ucke
+C.2 Error bounds for the weights
+In this section, we derive some error bounds that are necessary to prove our main results
+about the weights in Section C.1.
+Lemma 21 (Nguyen and M¨ucke (2023)) Let
+F ∗
+t := S∗
+Mϕt(LM)G∗∈HM ,
+(74)
+where ϕt denotes the spectral regularization function associated to gradient descent , see e.g.
+Blanchard and M¨ucke (2017). Then
+∥F ∗
+t ∥HM ≤C′
+κ,α tmax{0, 1
+2 −r} ,
+for some C′
+κ,α < ∞.
+Proposition 22 For all t ∈[T], let ∥θt −θ0∥≤Bτ, and
+T ≤Cα,r,κn
+1
+2r+b
+U
+,
+nX ≥T 2 max{0, 1
+2 −r},
+M ≥MIII,
+where MIII is defined in Proposition 19. Set ˜ν = max{0, 1
+2 −r}. We have with probability
+of at least 1 −δ,
+α
+T
+X
+t=0
+∥ζ(1)
+t
+∥Θ ≤
+Cα,κ,r · Cσ′ ·
+TB5
+τ + T 1+˜νB3
+τ
+M
++
+B2
+τ
+√
+M
+·
+
+ηr(T) +
+T log(T)
+√nU
++ T log(T)
+√nX
+
+log
+3
+2
+12
+δ
+
+,
+for some Cα,κ,r > 0 and where we set Cσ′ := max{∥σ′∥∞, ∥σ′∥2
+∞, ∥σ′′∥∞, ∥σ′′∥2
+∞}.
+The
+quantity ηr(T) is defined in Lemma 31.
+Proof [Proposition 22] By using once again a Taylor expansion we obtain for t ∈[T],
+ζ(1)
+t
+
+Θ =
+
+1
+nUnX
+nU
+X
+i=1
+nX
+X
+j=1
+(Gθt(ui)(xj) −G∗(ui)(xj)) (∇Gθt(ui)(xj) −∇Gθ0(ui)(xj))
+
+Θ
+≤
+
+1
+nUnX
+nU
+X
+i=1
+nX
+X
+j=1
+r(θt,θ0)(ui)(xj) (∇Gθt(ui)(xj) −∇Gθ0(ui)(xj))
+
+Θ
++
+
+1
+nUnX
+nU
+X
+i=1
+nX
+X
+j=1
+(Ht(ui)(xj) −F ∗
+t (ui)(xj)) (∇Gθt(ui)(xj) −∇Gθ0(ui)(xj))
+
+Θ
++
+
+1
+nUnX
+nU
+X
+i=1
+nX
+X
+j=1
+(F ∗
+t (ui)(xj) −G∗(ui)(xj)) (∇Gθt(ui)(xj) −∇Gθ0(ui)(xj))
+
+Θ
+=: It + IIt + IIIt ,
+(75)
+42
+
+PDF PAGE 43
+Optimal Convergence Rates for Neural Operators
+where F ∗
+t was defined in (74).
+Bound It : By using Proposition 24 and Proposition 25, we obtain for t ∈[T]
+It ≤C∇G(Bτ)2
+M
+∥θt −θ0∥3
+Θ ≤C∇G(Bτ)2B3
+τ
+M
+≤16 · max {∥σ′∥∞, ∥σ′′∥∞}2 B5
+τ
+M
+.
+Here, we use that
+C∇G(Bτ) = 2 · max
+
+∥σ′∥∞, ∥σ′′∥∞
+	
+max{1, Bτ + τ} ≤4 · max
+
+∥σ′∥∞, ∥σ′′∥∞
+	
+Bτ,
+following from Assumption 15.
+Bound IIt : Note that F ∗
+t ∈HM, therefore there exist some θ∗
+t such that F ∗
+t (u)(x) =
+⟨∇Gθ0(u)(x), θ∗
+t ⟩and ∥F ∗
+t ∥HM = ∥θ∗
+t ∥Θ (see for example Steinwart and Christmann (2008)
+Theorem 4.21). Using these equations we obtain
+IIt ≤
+1
+nUnX
+nU
+X
+i=1
+nX
+X
+j=1
+∆(ui, xj) · (∥θt −θ0∥Θ + ∥F ∗
+t ∥HM ) ,
+(76)
+with
+∆(ui, xj) :=
+(∇Gθt(ui)(xj) −∇Gθ0(ui)(xj)) (∇Gθ0(ui)(xj))T  .
+By definition of the operator norm and Proposition 24, we have
+∆(ui, xj) = max
+k
+(∇Gθt(ui)(xj) −∇Gθ0(ui)(xj)) (∇Gθ0(ui)(xj))T ek
+
+2
+≤∥∇Gθt(ui)(xj) −∇Gθ0(ui)(xj)∥2
+κ
+√
+M
+≤C∇G(Bτ)κ
+M
+∥θt −θ0∥Θ,
+(77)
+where ek denotes the k-th unit vector in RP . Plugging (77) into (76) and applying Lemma
+21 leads to
+IIt ≤C∇G(Bτ)κ
+M
+∥θt −θ0∥Θ (∥θt −θ0∥Θ + ∥F ∗
+t ∥HM )
+≤C∇G(Bτ)Bτκ
+M
+
+Bτ + C′
+κ,α tmax{0, 1
+2 −r}
+≤4κ max {∥σ′∥∞, ∥σ′′∥∞} B2
+τ
+M
+
+Bτ + C′
+κ,α tmax{0, 1
+2 −r}
+.
+(78)
+Bound IIIt : By Proposition 24 we have
+IIIt =
+
+1
+nUnX
+nU
+X
+i=1
+nX
+X
+j=1
+(F ∗
+t (ui)(xj) −G∗(ui)(xj)) (∇Gθt(ui)(xj) −∇Gθ0(ui)(xj))
+
+Θ
+≤C∇G(Bτ)Bτ
+√
+M
+·
+
+III(i)
+t
++ III(ii)
+t
+
+≤4 max {∥σ′∥∞, ∥σ′′∥∞} B2
+τ
+√
+M
+·
+
+III(i)
+t
++ III(ii)
+t
+
+,
+(79)
+43
+
+PDF PAGE 44
+Nguyen and M¨ucke
+where
+III(i)
+t
+=
+
+1
+nUnX
+nU
+X
+i=1
+nX
+X
+j=1
+|F ∗
+t (ui)(xj) −G∗(ui)(xj)| −E |F ∗
+t (u)(x) −G∗(u)(x)|
+
+,
+III(ii)
+t
+= E |F ∗
+t (u)(x) −G∗(u)(x)| .
+To sum up: If we plug the bounds of It, IIt, IIIt into (75) we get for some Cα,κ > 0
+and by setting ˜ν = max{0, 1
+2 −r},
+α
+T
+X
+t=0
+∥ζ(1)
+t
+∥Θ ≤
+Cα,κ max{∥σ′∥∞, ∥σ′∥2
+∞, ∥σ′′∥∞, ∥σ′′∥2
+∞} ·
+ 
+TB5
+τ + T 1+˜νB3
+τ
+M
++
+B2
+τ
+√
+M
+·
+ T
+X
+t=0
+III(i)
+t
++ III(ii)
+t
+!!
+.
+(80)
+Assume mow that
+T ≤Cα,r,κn
+1
+2r+b
+U
+,
+nX ≥t2 max{0, 1
+2 −r},
+M ≥MIII,
+where MIII is defined in Proposition 19. Applying Proposition 50 gives then for all t ∈[T]
+with probability of at least 1 −δ,
+III(i)
+t
+=
+
+1
+nUnX
+nU
+X
+i=1
+nX
+X
+j=1
+|F ∗
+t (ui)(xj) −G∗(ui)(xj)| −E |F ∗
+t (u)(x) −G∗(u)(x)|
+
+≤˜Cα,κ
+ 1
+√nU
++
+1
+√nX
+
+log3/2
+12
+δ
+
+,
+(81)
+for some ˜Cα,κ > 0. Combining this bound with Proposition 34, we obtain,
+T
+X
+t=0
+III(i)
+t
+≤˜Cα,κ
+T log(T)
+√nU
++ T log(T)
+√nX
+
+log
+12
+δ
+
+.
+(82)
+With the same assumptions as for III(i)
+t
+we have from (Nguyen and M¨ucke, 2023, Propo-
+sition A.1) ( with λ = (αt)−1 )
+III(ii)
+t
+= E |F ∗
+t (u)(x) −G∗(u)(x)| ≤∥SMF ∗
+t −G∗∥L2(µu) ≤Cα,r t−r ,
+T
+X
+t=0
+III(ii)
+t
+≤Cα,r ηr(T) ,
+(83)
+for some Cα,r > 0 and where we used Jensen inequality in the first equation. Plugging (83)
+and (82) into (80), implies
+44
+
+PDF PAGE 45
+Optimal Convergence Rates for Neural Operators
+α
+T
+X
+t=0
+∥ζ(1)
+t
+∥Θ ≤
+Cα,κ,r · Cσ′ ·
+TB5
+τ + T 1+˜νB3
+τ
+M
++
+B2
+τ
+√
+M
+·
+
+ηr(T) +
+T log(T)
+√nU
++ T log(T)
+√nX
+
+log
+3
+2
+12
+δ
+
+,
+for some Cα,κ,r > 0 and where we set Cσ′ := max{∥σ′∥∞, ∥σ′∥2
+∞, ∥σ′′∥∞, ∥σ′′∥2
+∞}.
+Proposition 23 For all t ∈[T] and some T ∈N, let ∥θt−θ0∥≤Bτ. Then, with probability
+of at least 1 −δ,
+max
+t∈[T] ∥ζ(2)
+t
+∥Θ ≤
+˜d B2
+τ · Cσ′,σ′′
+√nU · M
+q
+log(4 ˜d2/δ),
+with Cσ′,σ′′ = 334 · max{∥σ′∥∞, ∥σ′′∥∞} · max{Lσ′, Lσ′′}. Here, Lσ′ and Lσ′′ denote the
+Lipschitz constants of σ′ and σ′′, respectively.
+Proof [Proposition 23] We start with the following decomposition for any t ∈[T],
+∥ζ(2)
+t
+∥Θ =
+
+1
+nUnX
+nU
+X
+i=1
+nX
+X
+j=1
+(G∗(ui)(xj) −vi(xj))(∇Gθs(ui)(xj) −∇Gθ0(ui)(xj))
+
+Θ
+=
+"
+1
+M
+M
+X
+m=1
+
+
+1
+nUnX
+nU
+X
+i=1
+nX
+X
+j=1
+(G∗(ui)(xj) −vi(xj))
+
+σ((b(t)
+m )⊤J(ui)(xj)) −σ((b(0)
+m )⊤J(ui)(xj)))
+
+
+
+2
++
+1
+M
+M
+X
+m=1
+˜d
+X
+k=1
+ 
+1
+nUnX
+nU
+X
+i=1
+nX
+X
+j=1
+(G∗(ui)(xj) −vi(xj))
+·
+
+a(t)
+m σ′((b(t)
+m )⊤J(ui)(xj))J(ui)(xj)(k) −a(0)
+m σ′((b(0)
+m )⊤J(ui)(xj))J(ui)(xj)(k)
+!2# 1
+2
+=:
+√
+I + II
+(84)
+We will now bound I and II separately.
+45
+
+PDF PAGE 46
+Nguyen and M¨ucke
+I) Using the mean-value theorem for b(t)
+m we obtain for some ˜bm on the line between b(t)
+m
+and b(0)
+m :
+I = 1
+M
+M
+X
+m=1
+
+
+1
+nUnX
+nU
+X
+i=1
+nX
+X
+j=1
+(G∗(ui)(xj) −vi(xj))
+
+σ((b(t)
+m )⊤J(ui)(xj)) −σ((b(0)
+m )⊤J(ui)(xj)))
+
+
+
+2
+= 1
+M
+M
+X
+m=1
+
+
+1
+nUnX
+nU
+X
+i=1
+nX
+X
+j=1
+(G∗(ui)(xj) −vi(xj))σ′(˜b⊤
+mJ(ui)(xj))
+D
+b(t)
+m −b(0)
+m , J(ui)(xj)
+E
+
+
+2
+≤1
+M
+M
+X
+m=1
+b(t)
+m −b(0)
+m
+
+2
+2
+
+1
+nUnX
+nU
+X
+i=1
+nX
+X
+j=1
+(G∗(ui)(xj) −vi(xj))σ′(˜b⊤
+mJ(ui)(xj))J(ui)(xj)
+
+2
+2
+≤1
+M ∥θt −θ0∥2
+Θ
+sup
+∥b∥2≤CBτ
+
+1
+nUnX
+nU
+X
+i=1
+nX
+X
+j=1
+(G∗(ui)(xj) −vi(xj))σ′(b⊤J(ui)(xj))J(ui)(xj)
+
+2
+2
+≤B2
+τ
+M
+˜d
+X
+k=1
+sup
+∥b∥2≤CBτ
+
+
+1
+nUnX
+nU
+X
+i=1
+nX
+X
+j=1
+(G∗(ui)(xj) −vi(xj))σ′(b⊤J(ui)(xj))J(ui)(xj)(k)
+
+
+2
+,
+with CBτ := Bτ + 1. For the penultimate inequality we used that maxi∈[M],t∈[T]{|a(i)
+t
+−
+a(i)
+0 |, ∥b(i)
+t
+−b(i)
+0 ∥2} ≤Bτ and therefore
+max
+i∈[M]{|˜a(i)|, ∥˜b(i)∥2} ≤max
+i∈[M]{|a(i)
+t
+−a(i)
+0 | + |a(i)
+0 |, ∥b(i)
+t
+−b(i)
+0 ∥2 + ∥b(i)
+0 ∥2} ≤Bτ + 1.
+(85)
+II) Similarly, we obtain with (85) and the Cauchy-Schwarz inequality
+46
+
+PDF PAGE 47
+Optimal Convergence Rates for Neural Operators
+II = 1
+M
+M
+X
+m=1
+˜d
+X
+k=1
+ 
+1
+nUnX
+nU
+X
+i=1
+nX
+X
+j=1
+(G∗(ui)(xj) −vi(xj))
+·
+
+a(t)
+m σ′((b(t)
+m )⊤J(ui)(xj))J(ui)(xj)(k) −a(0)
+m σ′((b(0)
+m )⊤J(ui)(xj))J(ui)(xj)(k)
+!2
+≤2
+M
+M
+X
+m=1
+˜d
+X
+k=1
+
+
+1
+nUnX
+nU
+X
+i=1
+nX
+X
+j=1
+(G∗(ui)(xj) −vi(xj))
+
+a(t)
+m −a(0)
+m
+
+σ′((b(t)
+m )⊤J(ui)(xj))J(ui)(xj)(k)
+
+
+2
++
+2
+M
+M
+X
+m=1
+˜d
+X
+k=1
+ 
+1
+nUnX
+nU
+X
+i=1
+nX
+X
+j=1
+(G∗(ui)(xj) −vi(xj))a(0)
+m
+·
+
+σ′((b(t)
+m )⊤J(ui)(xj))J(ui)(xj)(k) −σ′((b(0)
+m )⊤J(ui)(xj))J(ui)(xj)(k)!2
+≤2B2
+τ
+M
+˜d
+X
+k=1
+sup
+∥b∥2≤CBτ
+
+
+1
+nUnX
+nU
+X
+i=1
+nX
+X
+j=1
+(G∗(ui)(xj) −vi(xj))σ′(b⊤J(ui)(xj))J(ui)(xj)(k)
+
+
+2
++
+2
+M
+M
+X
+m=1
+˜d
+X
+k=1
+ 
+1
+nUnX
+nU
+X
+i=1
+nX
+X
+j=1
+(G∗(ui)(xj) −vi(xj))
+·
+
+σ′((b(t)
+m )⊤J(ui)(xj))J(ui)(xj)(k) −σ′((b(0)
+m )⊤J(ui)(xj))J(ui)(xj)(k)!2
+.
+(86)
+For the second sum (86) we use again the mean-value theorem to obtain
+2
+M
+M
+X
+m=1
+˜d
+X
+k=1
+ 
+1
+nUnX
+nU
+X
+i=1
+nX
+X
+j=1
+(G∗(ui)(xj) −vi(xj))
+·
+
+σ′((b(t)
+m )⊤J(ui)(xj))J(ui)(xj)(k) −σ′((b(0)
+m )⊤J(ui)(xj))J(ui)(xj)(k)!2
+≤2
+M
+M
+X
+m=1
+˜d
+X
+k=1
+
+
+1
+nUnX
+nU
+X
+i=1
+nX
+X
+j=1
+(G∗(ui)(xj) −vi(xj))σ′′(˜b⊤
+mJ(ui)(xj))
+D
+b(t)
+m −b(0)
+m , J(ui)(xj)
+E
+J(ui)(xj)(k)
+
+
+2
+≤2
+M
+M
+X
+m=1
+b(t)
+m −b(0)
+m
+
+2
+2
+˜d
+X
+k=1
+
+1
+nUnX
+nU
+X
+i=1
+nX
+X
+j=1
+(G∗(ui)(xj) −vi(xj))σ′′(˜b⊤
+mJ(ui)(xj)) J(ui)(xj)J(ui)(xj)(k)
+
+2
+2
+≤2B2
+τ
+M
+˜d
+X
+k,l=1
+sup
+∥b∥2≤CBτ
+
+
+1
+nUnX
+nU
+X
+i=1
+nX
+X
+j=1
+(G∗(ui)(xj) −vi(xj))σ′′(b⊤J(ui)(xj))J(ui)(xj)(k)J(ui)(xj)(l)
+
+
+2
+.
+47
+
+PDF PAGE 48
+Nguyen and M¨ucke
+To sum up, we obtain by plugging the bounds of I and II into (84),
+max
+t∈[T] ∥ζ(2)
+t
+∥Θ ≤Bτ
+√
+M
+"
+3
+˜d
+X
+k=1
+sup
+∥b∥2≤CBτ
+
+
+1
+nUnX
+nU
+X
+i=1
+nX
+X
+j=1
+(G∗(ui)(xj) −vi(xj))σ′(b⊤J(ui)(xj))J(ui)(xj)(k)
+
+
+2
++
+2
+˜d
+X
+k,l=1
+sup
+∥b∥2≤CBτ
+
+
+1
+nUnX
+nU
+X
+i=1
+nX
+X
+j=1
+(G∗(ui)(xj) −vi(xj))σ′′(b⊤J(ui)(xj))J(ui)(xj)(k)J(ui)(xj)(l)
+
+
+2# 1
+2
+.
+(87)
+Setting z = (u, v) ∈Z := U × V we define for all k, l ∈[ ˜d],
+hk,j(z) = (G∗(u)(xj) −v(xj))J(u)(xj)(k),
+hk,l,j(z) = (G∗(u)(xj) −v(xj))J(u)(xj)(k)J(u)(xj)(l),
+and the following events,
+Ek :=
+
+
+
+sup
+∥b∥2≤CBτ
+
+1
+nUnX
+nU
+X
+i=1
+nX
+X
+j=1
+hk,j(zi)σ′(b⊤J(ui)(xj))
+
+≤24∥σ′∥∞
+√nU
+ 
+2CBτ Lσ′ +
+r
+log 2
+δ
+!
+
+,
+Ek,l :=
+
+
+
+sup
+∥b∥2≤CBτ
+
+1
+nUnX
+nU
+X
+i=1
+nX
+X
+j=1
+hk,l,j(zi)σ′′(b⊤J(ui)(xj))
+
+≤24∥σ′′∥∞
+√nU
+ 
+2CBτ Lσ′′ +
+r
+log 2
+δ
+!
+
+.
+Here, Lσ′, Lσ′′ denote the Lipschitz constants of σ′ and σ′′, respectively, and CBτ = Bτ + 1.
+We aim at applying Proposition 29 for bounding the probabilities. To this end, note that
+∥hk,j∥∞≤2 and ∥hk,l,j∥∞≤2, so Ch = 2. Moreover,
+Eµ[hk,j(z)σ′(b⊤x)] = Eµ[hk,l,j(z)σ′′(b⊤x)] = 0.
+As a result, the events Ek, Ek,l occur with probability of at least 1 −δ.
+Finally, we obtain from Proposition 34 together with (87), that with probability of at
+least 1 −δ
+max
+t∈[T] ∥ζ(2)
+t
+∥Θ ≤
+√
+3 ˜dBτ
+√
+M
+24 max{∥σ′∥∞, ∥σ′′∥∞}
+√nU
+
+4CBτ max{Lσ′, Lσ′′} + 2
+s
+log 2( ˜d2 + ˜d)
+δ
+
+
+≤
+˜d B2
+τ · Cσ′,σ′′
+√nU · M
+q
+log(4 ˜d2/δ),
+with Cσ′,σ′′ = 334 · max{∥σ′∥∞, ∥σ′′∥∞} · max{Lσ′, Lσ′′}. This proves the claim.
+48
+
+PDF PAGE 49
+Optimal Convergence Rates for Neural Operators
+Appendix D. Technical Inequalities
+D.1 Lipschitz Bounds
+In this section we provide some technical inequalities. We start proving that the gradient
+of our neural operator is pointewisely Lipschitz-continuous on a ball around θ0 which we
+define as
+Qθ0(R) := {θ = (a, B) ∈Θ : ∥θ −θ0∥Θ ≤R} .
+Moreover, for u ∈U we define
+∥u∥∞:=
+sup
+x∈supp(ρX)
+∥u(x)∥2.
+Proposition 24 Suppose that Assumptions 1 and 4 are satisfied. Let u ∈U with ∥u∥∞≤1.
+Then, for any x ∈X and any θ, ˜θ ∈Qθ0(R),
+∇Gθ(u)(x) −∇G˜θ(u)(x)
+
+Θ ≤C∇G(R)
+√
+M
+∥θ −˜θ∥Θ.
+Here, the constant C∇G(R) is given by
+C∇G(R) := 2 max
+
+∥σ′∥∞, ∥σ′′∥∞
+	
+max {1, R + τ} .
+(88)
+Proof [Proposition 24] Recall the definition of our operator class
+FM
+:=
+n
+Gθ : U →V | Gθ(u) =
+1
+√
+M
+PM
+m=1 amσ (⟨bm, J(u)⟩) ,
+θ = (a, B) ∈RM × RM×(dk+dy+db)	
+.
+The partial derivatives are given by
+∂amGθ(u)(x) =
+1
+√
+M
+σ (⟨bm, J(u)(x)⟩) ,
+∂bj
+mGθ(u)(x) = am
+√
+M
+σ′ (⟨bm, J(u)(x)⟩) (J(u)(x))(j)).
+Denoting further ∇Gθ(u) = (∂aGθ(u), ∂BGθ(u))
+∂aGθ(u) = (∂a1Gθ(u), . . . , ∂aM Gθ(u)) ∈RM,
+∂BGθ(u) =
+
+∂bj
+mGθ(u)(x)
+
+m,j ∈RM×(dk+dy+db)
+we then have for any u ∈U, x ∈supp(ρX),
+∂aGθ(u)(x) −∂˜aG˜θ(u)(x)
+2
+2 =
+M
+X
+m=1
+ ∂amGθ(u)(x) −∂˜amG˜θ(u)(x)
+2
+= 1
+M
+M
+X
+m=1
+
+σ(⟨bm, J(u)(x)⟩) −σ(⟨˜bm, J(u)(x)⟩)
+2
+≤∥σ′∥2
+∞
+M
+M
+X
+m=1
+bm −˜bm
+
+2
+2 ∥J(u)(x)∥2
+2
+≤∥σ′∥2
+∞
+M
+∥B −˜B∥2
+F ,
+49
+
+PDF PAGE 50
+Nguyen and M¨ucke
+where we used the assumption ∥J(u)(x)∥2 ≤∥J(u)(x)∥1 ≤1. In addition,
+∂BGθ(u)(x) −∂˜BG˜θ(u)(x)
+2
+2 =
+M
+X
+m=1
+dk+dy+db
+X
+j=1
+
+∂bmGθ(u)(x) −∂˜bmG˜θ(u)(x)
+2
+= 1
+M
+M
+X
+m=1
+dk+dy+db
+X
+j=1
+
+amσ′(⟨bm, J(u)(x)⟩)(J(u)(x))(j)) −˜aMσ′(⟨˜bm, J(u)(x)⟩)(J(u)(x))(j))
+2
+≤(I) + (II)
+where
+(I) = 2
+M
+M
+X
+m=1
+dk+dy+db
+X
+j=1
+(am −˜am)2  σ′ ⟨bm, J(u)(x)⟩
+2 ((J(u)(x))(j))2 ≤2∥σ′∥2
+∞
+M
+∥a −˜a∥2
+2
+and where
+(II) = 2
+M
+M
+X
+m=1
+dk+dy+db
+X
+j=1
+(˜am −a0,m)2 
+σ′(⟨bm, J(u)(x)⟩) −σ′(⟨˜bm, J(u)(x)⟩)
+2
+((J(u)(x))(j)))2
++ 2
+M
+M
+X
+m=1
+dk+dy+db
+X
+j=1
+a2
+0,m
+
+σ′(⟨bm, J(u)(x)⟩) −σ′(⟨˜bm, J(u)(x)⟩)
+2
+((J(u)(x))(j)))2
+≤2R2∥σ′′∥2
+∞
+M
+M
+X
+m=1
+dk+dy+db
+X
+j=1
+
+⟨bm −˜bm, J(u)(x)⟩
+2
+((J(u)(x))(j)))2
++ 2τ 2∥σ′′∥2
+∞
+M
+M
+X
+m=1
+dk+dy+db
+X
+j=1
+
+⟨bm −˜bm, J(u)(x)⟩
+2
+((J(u)(x))(j)))2
+≤2∥σ′′∥2
+∞(R2 + τ 2)
+M
+∥B −˜B∥2
+F .
+Finally,
+∇Gθ(u)(x) −∇g˜θ(u)(x)
+2
+Θ =
+∂aGθ(u)(x) −∂˜aG˜θ(u)(x)
+2
+2 +
+∂BGθ(u)(x) −∂˜BG˜θ(u)(x)
+2
+F
+≤∥σ′∥2
+∞
+M
+∥B −˜B∥2
+F + 2∥σ′∥2
+∞
+M
+∥a −˜a∥2
+2 + 2∥σ′′∥2
+∞(R2 + τ 2)
+M
+∥B −˜B∥2
+F
+≤4∥σ′∥2
+∞
+M
+max
+
+1, R2 + τ 2	 
+∥a −˜a∥2
+2 + ∥B −˜B∥2
+F
+
+≤C∇G(R)2
+M
+∥θ −˜θ∥2
+Θ,
+where we set C∇G(R) = 2 max {∥σ′∥∞, ∥σ′′∥∞} max {1, R + τ}.
+50
+
+PDF PAGE 51
+Optimal Convergence Rates for Neural Operators
+Proposition 25 Suppose Assumption 1 holds and that θ, ¯θ ∈Qθ0(R). For all x ∈X and
+u ∈U, denote by r(θ,¯θ)(u)(x) the remainder term of the Taylor expansion from
+Gθ(u)(x) −G¯θ(u)(x) =
+
+∇G¯θ(u)(x), θ −¯θ
+
+Θ + r(θ,¯θ)(u)(x).
+Then,
+1. |r(θ,¯θ)(u)(x)| ≤C∇G(R)
+√
+M
+∥θ −¯θ∥2
+Θ,
+2.
+
+∇Gθ(u)(x) −∇G¯θ(u)(x), θ −¯θ
+
+Θ ≤C∇G(R)
+√
+M
+∥θ −¯θ∥2
+Θ,
+where C∇G(R) is defined in Proposition 24.
+Proof [Proposition 25]
+1. Recall that the remainder term r(θ,¯θ) of the Taylor expansion is given by
+r(θ,¯θ)(u)(x) =
+ θ −¯θ
+T ∇2G˜θ(u)(x)
+ θ −¯θ
+
+,
+where ∇2G˜θ(u)(x) denotes the Hessian matrix evaluated at some ˜θ on the line between
+θ and ¯θ. Note that the remainder term can be bounded by the Lipschitz constant L of
+the gradients i.e. for any v ∈Θ we have,
+∇2G˜θ(u)(x)v = lim
+h→0
+∇G˜θ+hv(u)(x) −∇G˜θ(u)(x)
+h
+≤lim
+h→0
+∥∇G˜θ+hv(x) −∇G˜θ(u)(x)∥2
+|h|
+≤lim
+h→0 L |h|∥v∥2
+|h|
+≤L ∥v∥.
+Proposition 24 shows that for the set Qθ0(R) this Lipschitz constant is given by L =
+C∇G/
+√
+M. Therefore by setting v = θ −¯θ we obtain for the remainder term,
+|r(θ,¯θ)(u)(x)| ≤C∇G(R)
+√
+M
+∥θ −¯θ∥2
+Θ.
+2. Using again Proposition 24 together with Cauchy - Schwarz inequality, we obtain for
+the second inequality,
+
+∇Gθ(u)(x) −∇G¯θ(u)(x), θ −¯θ
+
+Θ ≤C∇G(R)
+√
+M
+∥θ −¯θ∥2
+Θ.
+51
+
+PDF PAGE 52
+Nguyen and M¨ucke
+Proposition 26 Suppose the Assumptions 1, 4 hold and that θ ∈Qθ0(R). Then, for any
+u ∈U, x ∈X, we have
+|Gθ(u)(x) −Gθ0(u)(x)| ≤κ · ∥θ −θ0∥Θ + C∇G(R)
+√
+M
+∥θ −θ0∥2
+Θ,
+where κ > 0 is the constant from (10).
+Proof [Proposition 26]
+By Assumption 4, for any (u, v) ∈supp(µ) and any x ∈supp(ρx), we have
+∥J(u)(x)∥1 ≤1.
+We compute the squared gradient norm at initialization θ0:
+∥∇Gθ0(u)(x)∥2
+Θ =
+P
+X
+p=1
+ ∂p(Gθ0(u)(x))
+2
+= 1
+M
+M
+X
+m=1
+σ
+D
+b(0)
+m , J(u)(x)
+E2
++ τ 2
+M
+M
+X
+m=1
+˜d
+X
+j=1
+σ′D
+b(0)
+m , J(u)(x)
+E2  J(u)(x)(j)2.
+(89)
+Using ∥J(u)(x)∥1 ≤1 and the Assumption 1, we obtain
+∥∇Gθ0(u)(x)∥2
+Θ ≤4 + τ 2∥σ′∥2
+∞= κ2.
+Using this bound together with Proposition 25, we obtain
+Gθ(u)(x) −Gθ0(u)(x) = ⟨∇Gθ0(u)(x), θ −θ0⟩Θ + r(θ,θ0)(u)(x)
+≤κ ∥θ −θ0∥Θ + C∇G(R)
+√
+M
+∥θ −θ0∥2
+Θ.
+D.2 Uniform Bounds in Hilbert Spaces
+In this section we recall uniform convergence bounds for functions with values in a real
+separable Hilbert space.
+Proposition 27 Let G be a family of functions mapping from Z := U × V to [−C, C].
+Then, for any δ > 0, with probability at least 1 −δ over the draw of an i.i.d. sample S of
+size nU, the following holds
+52
+
+PDF PAGE 53
+Optimal Convergence Rates for Neural Operators
+sup
+g∈G
+
+1
+nU
+n
+X
+i=1
+g (zi) −E[g(z)]
+ ≤8C bℜS(G) + 12C
+s
+log 2
+δ
+2nU
+,
+where
+bℜS(G) := Er sup
+g∈G
+1
+nU
+nU
+X
+i=1
+g(xi)ri
+(90)
+denotes the empirical Rademacher complexity of the class G with ri being iid rademacher
+variables.
+Proof [Proposition 27] The proof can be found in Mohri et al. (2018).
+Proposition 28 Let ˜σ : R →R be Lipschitz continuous with Lipschitz constant c˜σ. Let
+further hj : Z = U × V →R, j = 1, ..., nX, and define
+GC = {g : B ˜d(C) × Z →R : g(b, z) = 1
+nX
+nX
+X
+j=1
+hj(z)˜σ(⟨b, J(u)(xj)⟩)},
+where B ˜d(C) denotes the closed ball of radius C in R ˜d. Provided the Assumptions 4 and 1
+we have
+bℜS(GC) ≤CChc˜σ
+√nU
+,
+with Ch := maxj∈[nX] ∥hj∥∞.
+Proof [Proposition 28] By definition of bℜS(GC) we have,
+bℜS(GC) = 1
+nU
+Er
+"
+sup
+∥b∥2≤C
+nU
+X
+i=1
+g (b, zi) ri
+#
+= 1
+nU
+Er1,...,rnU −1
+"
+ErnU
+"
+sup
+∥a∥2≤C
+qnU−1(b) + g (b, znU) rnU
+##
+,
+where qnU−1(b) = PnU−1
+i=1 g (b, zi) ri. By definition of the supremum, for any ϵ > 0, there
+exist ∥b1∥2, ∥b2∥2 ≤C such that
+qnU−1 (b1) + g(b1, znU) ≥(1 −ϵ)
+"
+sup
+∥b∥2≤C
+qnU−1(b) + g (b, znU)
+#
+and qnU−1 (b2) −g (b2, znU) ≥(1 −ϵ)
+"
+sup
+∥b∥2≤C
+qnU−1(b) −g (b, znU)
+#
+.
+53
+
+PDF PAGE 54
+Nguyen and M¨ucke
+Thus by definition of ErnU ,
+(1 −ϵ)ErnU
+"
+sup
+∥b∥2≤C
+qnU−1(b) + rnUg(b, znU)
+#
+=(1 −ϵ)
+"
+1
+2
+sup
+∥b∥2≤C
+[qnU−1(b) + g(b, znU)] + 1
+2
+sup
+∥b∥2≤C
+[qnU−1(b) −g(b, znU)]
+#
+≤1
+2 [qnU−1 (b1) + g(b1, znU)] + 1
+2 [qnU−1 (b2) −g(b2, znU)] .
+Now set snU = sgn ˜g(znU, b1 −b2) with ˜g(z, b) :=
+1
+nX
+PnX
+j=1 hj(z)⟨b, J(u)(xj)⟩(note that
+snU is independent of rnU). Then, the previous inequality implies together with the Lipschitz
+property:
+(1 −ϵ)ErnU
+"
+sup
+∥b∥2≤C
+qnU−1(b) + rnUg(b, znU)
+#
+≤1
+2 [qnU−1 (b1) + qnU−1 (b2) + cσsnU ˜g(znU, b1 −b2)]
+≤1
+2
+sup
+∥b∥2≤C
+[qnU−1(b) + cσsnU ˜g(znU, b)] + 1
+2
+sup
+∥b∥2≤C
+[qnU−1(b) −cσsnU ˜g(znU, b)]
+= 1
+2
+sup
+∥b∥2≤C
+[qnU−1(b) + cσ˜g(znU, b)] + 1
+2
+sup
+∥b∥2≤C
+[qnU−1(b) −cσ˜g(znU, b)]
+= Ern
+"
+sup
+∥b∥2≤C
+qnU−1(b) + rnUcσ˜g(znU, b)
+#
+.
+Therefore, we proved
+(1 −ϵ)Er
+"
+sup
+∥b∥2≤C
+qnU(b)
+#
+≤ErnU
+"
+sup
+∥b∥2≤C
+qnU−1(b) + rnUcσ˜g(znU, b)
+#
+.
+(91)
+54
+
+PDF PAGE 55
+Optimal Convergence Rates for Neural Operators
+Proceeding in the same way for all other qi with i ≤nU −1 leads to
+(1 −ϵ)nU 1
+nU
+Er
+"
+sup
+∥b∥2≤C
+nU
+X
+i=1
+g (b, zi) ri
+#
+≤1
+nU
+Er
+"
+sup
+∥b∥2≤C
+nU
+X
+i=1
+ricσ˜g(zi, b)
+#
+= c˜σ
+nU
+Er
+
+sup
+∥b∥2≤C
+*
+b,
+nU
+X
+i=1
+ri
+1
+nX
+nX
+X
+j=1
+hj(z)J(u)(xj)
++
+
+≤Cc˜σ
+nU
+Er
+
+
+
+nU
+X
+i=1
+ri
+1
+nX
+nX
+X
+j=1
+hj(z)J(u)(xj)
+
+2
+
+
+≤Cc˜σ
+nU
+v
+u
+u
+u
+t
+˜d
+X
+k=1
+Er
+
+
+nU
+X
+i=1
+ri
+1
+nX
+nX
+X
+j=1
+hj(z)J(u)(xj)(k)
+
+
+2
+= Cc˜σ
+nU
+v
+u
+u
+u
+t
+˜d
+X
+k=1
+nU
+X
+i=1
+
+1
+nX
+nX
+X
+j=1
+hj(z)J(u)(xj)(k)
+
+
+2
+≤CChc˜σ
+nU
+v
+u
+u
+u
+t 1
+nX
+nX
+X
+j=1
+nU
+X
+i=1
+˜d
+X
+k=1
+ J(u)(xj)(k)2
+≤CChc˜σ
+√nU
+.
+Hence, we obtain for ϵ →0
+1
+nU
+Er
+"
+sup
+∥b∥2≤C
+nU
+X
+i=1
+g (b, zi) ri
+#
+≤CChc˜σ
+√nU
+.
+Proposition 29 Let ˜σ : R →R be Lipschitz continuous with Lipschitz constant c˜σ. Let
+further hj : Z = U × V →R, j = 1, ..., nX, such that
+E[hj(z)˜σ(b⊤J(u)(x))] = 0
+for any ∥b∥2 ≤CB and maxj∈[nX] ∥hj∥∞≤Ch. Then, we have with probability of at least
+1 −δ,
+sup
+∥b∥2≤CB
+
+1
+nUnX
+nU
+X
+i=1
+nX
+X
+j=1
+hj(zi)˜σ(b⊤J(ui)(xj))
+
+≤12Ch∥˜σ∥∞
+√nU
+ 
+CBc˜σCh +
+r
+log 2
+δ
+!
+.
+55
+
+PDF PAGE 56
+Nguyen and M¨ucke
+Proof [Proposition 29] From Proposition 27 we have with probability 1 −δ
+sup
+∥b∥2≤CB
+
+1
+nUnX
+nU
+X
+i=1
+nX
+X
+j=1
+hj(zi)˜σ(b⊤J(ui)(xj))
+
+≤8Ch∥˜σ∥∞bℜS(GCB) + 12Ch∥˜σ∥∞
+s
+log 2
+δ
+2nU
+,
+(92)
+where bℜS(GCB) denotes the empirical Rademacher complexity defined in (90) and the func-
+tion class GCB is defined as
+GCB =
+
+
+g : B ˜d(CB) × Z →R : g(b, z) =
+nX
+X
+j=1
+hj(zi)˜σ(b⊤J(ui)(xj))
+
+
+.
+From Proposition 28 we have
+bℜS(GCB) ≤CBc˜σCh
+√nU
+.
+Plugging this inequality into (92) proves the claim.
+D.3 Elementary Inequalities
+Lemma 30 The function f(x) = (1 −x)jxr for j, r > 0 has a global maximum on [0, 1] at
+r
+r+j . Therefore we have supx∈[0,1] f(x) ≤
+
+r
+r+j
+r
+.
+Proof [Lemma 30] If f(x) is continuous and has a maximum, then log f(x) will at the same
+point because log x is a monotonically increasing function.
+ln f(x) = r log x + j log(1 −x)
+⇒d ln f(x)
+d x
+= r
+x −
+j
+1 −x
+⇒d2 ln f(x)
+d x2
+= −r
+x2 −
+j
+(1 −x)2 .
+The second derivative is obviously less than zero everywhere, and the first derivative is
+equal zero at
+r
+r+j . Therefore it is a global maximum.
+Lemma 31 Let v ≥0, t ∈N. Then
+t
+X
+i=1
+i−v ≤ηv(t)
+with ηv(t) :=
+
+
+
+
+
+v
+v−1
+v > 1
+1 + log(t)
+v = 1
+t1−v
+1−v
+v ∈[0, 1)
+56
+
+PDF PAGE 57
+Optimal Convergence Rates for Neural Operators
+Proof [Lemma 31] We will only prove the first case v > 1. The other cases can be bounded
+with the same arguments. Since
+i−v ≤
+Z i
+i−1
+x−vdx
+we have for v > 1,
+t
+X
+i=1
+i−v ≤1 +
+Z t
+1
+x−vdx ≤
+v
+v −1.
+Lemma 32 Let a ≥b ≥0. Then we have
+T−1
+X
+s=1
+1
+sa
+1
+(T −s)b ≤2a
+T a ηb(T −1) + 2b
+T b ηa(T −1).
+Proof [Lemma 32] For any t ∈[T] we have
+T−1
+X
+s=1
+1
+sa
+1
+(T −s)b =
+T−1
+X
+s=t+1
+1
+sa
+1
+(T −s)b +
+t
+X
+s=1
+1
+sa
+1
+(T −s)b
+≤1
+ta
+T−1
+X
+s=t+1
+1
+(T −s)b +
+1
+(T −t)b
+t
+X
+s=1
+1
+sa
+≤1
+ta
+T−1
+X
+s=1
+1
+sb +
+1
+(T −t)b
+T−1
+X
+s=1
+1
+sa
+≤1
+ta ηb(T −1) +
+1
+(T −t)b ηa(T −1).
+Setting t = T/2 the result follows.
+Proposition 33 For T ∈N, a ∈{0, 1
+2}, α ∈(0, 1
+κ2 ] we have,
+i)
+T−1
+X
+s=0
+∥(αbΣM)a(Id −αbΣM)s∥≤ηa(T),
+ii)
+T−1
+X
+s=0
+∥(αbΣM)a(Id −αbΣM)s bS∗
+M∥≤ηa+ 1
+2 (T)/√α,
+iii)
+T−1
+X
+s=0
+(Id −α bCM)s(√α b
+Z∗
+M)
+ ≤η 1
+2 (T) = 2
+√
+T.
+57
+
+PDF PAGE 58
+Nguyen and M¨ucke
+Further we have for any M ≥8 ˜d κ2β∞T ∨8κ4∥L∞∥−1 log2 2
+δ with β∞= log 4κ2(NL∞(T)+1)
+δ∥L∞∥
+, ˜d := dk + dy + db that with probability at least 1 −δ/2,
+iv)
+T−1
+X
+s=0
+∥(αbΣM)a(Id −αbΣM)sZM∥≤
+2ηa+ 1
+2 (T)
+√α
++ 2ηa(T)
+√
+αT
+,
+Proof [Proposition 33] Note that the spectrum of αbΣM is contained in [0, 1], therefore by
+Lemma 30 we have for any r ≥0,
+∥(αbΣM)r(Id −αbΣM)s∥= sup
+x∈[0,1]
+(1 −x)sxr ≤
+
+r
+r + s
+r
+,
+(93)
+where we use the convention (0/0)0 := 1.
+From (93) and Lemma 31 we further obtain for any r ∈[0, 1]
+T−1
+X
+s=0
+∥(αbΣM)r(Id −αbΣM)s∥≤
+T−1
+X
+s=0
+
+r
+r + s
+r
+(94)
+≤
+T
+X
+s=1
+1
+s
+r
+≤ηr(T).
+(95)
+This already proves part i). For part ii) we have from (93) Lemma 31
+T−1
+X
+s=0
+∥(Id −αbΣM)s bS∗
+M∥
+=
+T−1
+X
+s=0
+q
+∥(αbΣM)2a+1(Id −αbΣM)2s∥/α
+≤
+1
+√α
+T−1
+X
+s=0
+s
+2a + 1
+2a + 1 + 2s
+2a+1
+≤
+1
+√α
+T
+X
+s=1
+1
+s
+a+ 1
+2
+≤ηa+ 1
+2 (T)/√α.
+Similar as in part ii) we have for iii) we have from (93) Lemma 31
+T−1
+X
+s=0
+∥(Id −α bCM)s(√α b
+Z∗
+M)∥
+=
+T−1
+X
+s=0
+q
+∥(Id −α bCM)2s(√α bCM)∥
+≤
+1
+√α
+T−1
+X
+s=0
+s
+1
+1 + 2s
+
+≤
+T
+X
+s=0
+1
+s
+ 1
+2
+≤η 1
+2 (T).
+58
+
+PDF PAGE 59
+Optimal Convergence Rates for Neural Operators
+For part iv) we have with probability at least 1 −δ/2
+T−1
+X
+s=0
+∥(αbΣM)a(Id −αbΣM)sZM∥
+≤
+1
+√α
+T−1
+X
+s=0
+∥(αbΣM)a(Id −αbΣM)s(αbΣM,λ)
+1
+2 ∥∥bΣ
+−1
+2
+M,λΣ
+1
+2
+M,λ∥∥Σ
+−1
+2
+M,λZM∥
+≤
+2ηa+ 1
+2 (T)
+√α
++ 2ηa(T)
+√
+αT
+,
+where we used in the second inequality (94), (Nguyen and M¨ucke, 2023, Proposition A.15)
+(for λ := (αT)−1) and 35.
+Proposition 34 For i = 1, ..., k, let δi ∈(0, 1) and let Ei be events with probability of at
+least 1 −δi. Set
+E :=
+k\
+i=1
+Ei.
+If P(A|E) ≥1 −δ for some event A, then
+P(A) ≥(1 −δ)
+ 
+1 −
+k
+X
+i=1
+δi
+!
+.
+Proof [Proposition 34] We write
+P(A) ≥
+Z
+E
+P(A|ω)dP(ω)
+≥(1 −δ)P(E)
+= (1 −δ)
+ 
+1 −P
+ k[
+i=1
+(Ω/Ei)
+!!
+≥(1 −δ)
+ 
+1 −
+k
+X
+i=1
+δi
+!
+.
+Appendix E. Operator Bounds and Concentration Inequalities
+E.1 Operator Bounds
+Proposition 35
+59
+
+PDF PAGE 60
+Nguyen and M¨ucke
+a) For any λ > 0 we have
+ bC
+−1
+2
+M,λ b
+Z∗
+M
+ ≤1,
+Σ
+−1
+2
+M,λZM
+ ≤1,
+b) For any λ > 0 we have
+∥C−1
+M,λZ∗
+ML
+1
+2
+M,λ∥≤2.
+Proof The bound of b) can be found in Rudi and Rosasco (2017) (see proof of lemma 3).
+For a) we have
+ bC
+−1
+2
+M,λ b
+Z∗
+M
+
+2
+=
+( b
+Z∗
+M b
+ZM + λ)−1/2 b
+Z∗
+M
+
+2
+=
+( b
+Z∗
+M b
+ZM + λ)−1/2 b
+Z∗
+M b
+ZM( b
+Z∗
+M b
+ZM + λ)−1/2
+=
+ b
+Z∗
+M b
+ZM( b
+Z∗
+M b
+ZM + λ)−1 ≤1.
+The second inequality follows the same way where we used that ΣM = ZMZ∗
+M.
+Proposition 36 Let H be a separable Hilbert space and let A and B be two bounded self-
+adjoint positive linear operators on H and λ > 0. Then
+A
+−1
+2
+λ B
+1
+2
+λ
+ ≤(1 −c)−1
+2 ,
+A
+1
+2
+λB
+−1
+2
+λ
+ ≤(1 + c)
+1
+2
+with
+c =
+B
+−1
+2
+λ
+(A −B)B
+−1
+2
+λ
+ .
+Proposition 37 For r ≥0 we have
+L
+−1
+2
+∞,λLr
+∞
+ ≤κrλ−( 1
+2 −r)+.
+Proof For r ≥1/2 we have
+L
+−1
+2
+∞,λLr
+∞
+ ≤κr−1/2. For r < 1/2 we have
+L
+−1
+2
+∞,λLr
+∞
+ = max
+i∈N
+
+µr
+i
+(µi + λ)1/2
+ ≤λr−1/2
+since
+
+µr
+i
+(µi + λ)1/2
+ ≤
+(
+λr−1/2
+λ ≥µi
+µr−1/2
+i
+µi ≥λ
+≤λr−1/2.
+60
+
+PDF PAGE 61
+Optimal Convergence Rates for Neural Operators
+Proposition 38 Let B1, B2 be two non-negative self-adjoint operators on some Hilbert
+space with ∥Bj∥≤a, j = 1, 2, for some non-negative a.
+(i) If 0 ≤r ≤1, then
+∥Br
+1 −Br
+2∥≤∥B1 −B2∥r ,
+for some Cr < ∞.
+(ii) If r > 1, then
+∥Br
+1 −Br
+2∥≤Ca,r ∥B1 −B2∥,
+for some Ca,r < ∞.
+Proof See for example Aleksandrov and Peller (2009), Blanchard and M¨ucke (2017) (Propo-
+sition B.1.)
+E.2 Concentration Inequalities
+In this subsection we generalize Bernstein type inequalities for double sums and apply them
+to our operators from section A. The first inequality was first established for matrices by
+Tropp (2011). For the general case including operators the proof can for example be found
+in Lin and Cevher (2018) (see Lemma 26):
+Proposition 39 Let ξ1, · · · , ξm be a sequence of independently and identically distributed
+selfadjoint Hilbert-Schmidt operators on a separable Hilbert space. Assume that ∥ξ1∥≤B/2
+almost surely for some B > 0. Let V be a positive trace-class operator such that E
+
+ξ2
+1
+
+≼V.
+Then with probability at least 1 −δ, (δ ∈]0, 1[), there holds
+
+1
+m
+m
+X
+i=1
+ξi −E[ξ]
+ ≤2Bβ
+3m +
+r
+2∥V∥β
+m
+,
+β = log 4 tr V
+∥V∥δ .
+Corollary 40 Let X1, · · · , Xm and Y1, . . . Yn be independent sequences of independently
+and identically distributed random variables such that f(Xi, Yj) defines a selfadjoint Hilbert-
+Schmidt operator on a separable Hilbert space H, for some function f : X × Y →F(H, H).
+Assume that ∥f(X1, Y1)∥≤B/2 almost surely for some B > 0. Let for any (x, y) ∈X × Y,
+f(x, y)2 and V be positive trace-class operators such that E
+
+f(X, Y )2
+≼V . Then with
+probability at least 1 −2δ, there holds
+
+1
+mn
+m
+X
+i=1
+n
+X
+j=1
+f(Xi, Yj) −Ef(X, Y )
+
+≤2B ˜β
+3n + 2Bβ
+3m +
+s
+2B∥˜V∥˜β
+n
++
+r
+2∥V∥β
+m
+,
+with β := log 4 tr V
+∥V∥δ , ˜β := log 4 tr ˜V
+∥˜V∥δ and ˜V := 1
+m
+Pm
+i=1 EY f(Xi, Y ) .
+61
+
+PDF PAGE 62
+Nguyen and M¨ucke
+Proof We start by proving that the following events hold true with probability 1 −δ,
+A :=
+
+
+
+
+1
+mn
+m
+X
+i=1
+n
+X
+j=1
+f(Xi, Yj) −EY f(Xi, Y )
+
+≤2B ˜β
+3n +
+s
+2B∥˜V∥˜β
+n
+
+
+,
+(96)
+B :=
+(
+1
+m
+m
+X
+i=1
+EY f(Xi, Y ) −Ef(X, Y )
+ ≤2Bβ
+3m +
+r
+2∥V∥β
+m
+)
+.
+(97)
+Bounding A: Using that Xi, Yj are independent, we can condition on {Xi = xi}m
+i=1 as
+follow,
+P (A) = Eµ⊗m
+x
+[P (A|x1, . . . , xm)] .
+(98)
+We set ξj := 1
+m
+Pm
+i=1 f(xi, Yj). Note that conditioned on {Xi = xi}m
+i=1, where xi is contained
+in the support of µX, we have that ξj are iid w.r.t. µY . By assumption we have ∥ξj∥≤B/2
+and for the second moment we have by Jensen inequality and by assumption, EY [ξ2] ≼
+1
+m
+Pm
+i=1 EY f(xi, Y )2 ≼B 1
+m
+Pm
+i=1 EY f(xi, Y ) := B ˜V.
+From Proposition 39 we therefore have, that with probability (over µ⊗n
+Y ) at least 1 −δ,
+
+1
+mn
+m
+X
+i=1
+n
+X
+j=1
+f(xi, Yj) −EY f(xi, Y )
+
+≤2B ˜β
+3n +
+s
+2B∥˜V∥˜β
+n
+.
+From (98) we therefore have that P(A) ≥1 −δ.
+Bounding B: Again we set ξi = EY [f(Xi, Y )]. By assumption we have ∥ξ∥≤B/2 and
+EXξ2 ≼V. From Proposition 39 we therefore have, that with probability at least 1 −δ, the
+event B holds true.
+To sum up: Using the bounds of event A and B, we therefore have with probability
+at least 1 −2δ,
+
+1
+mn
+m
+X
+i=1
+n
+X
+j=1
+f(Xi, Yj) −Ef(X, Y )
+
+H
+≤
+
+1
+mn
+m
+X
+i=1
+n
+X
+j=1
+f(Xi, Yj) −EY f(Xi, Y )
+
+(99)
++
+
+1
+m
+m
+X
+i=1
+EY f(Xi, Y ) −Ef(X, Y )
+
+(100)
+≤2B ˜β
+3n + 2Bβ
+3m +
+s
+2B∥˜V∥˜β
+n
++
+r
+2∥V∥β
+m
+.
+(101)
+This proves the claim.
+The following concentration result for Hilbert space valued random variables can be
+found in Caponnetto and De Vito (2007).
+62
+
+PDF PAGE 63
+Optimal Convergence Rates for Neural Operators
+Proposition 41 (Bernstein Inequality) Let W1, · · · , Wn be i.i.d random variables in a
+separable Hilbert space H with norm ∥· ∥H. Suppose that there are two positive constants B
+and V such that
+E
+h
+∥W1 −E [W1]∥l
+H
+i
+≤1
+2l!Bl−2V 2,
+∀l ≥2 .
+(102)
+Then for any δ ∈(0, 1], the following holds with probability at least 1 −δ:
+
+1
+n
+n
+X
+k=1
+Wk −E [W1]
+
+H
+≤2
+B
+n + V
+√n
+
+log
+4
+δ
+
+.
+In particular, (102) holds if
+∥W1∥H ≤B/2
+a.s.,
+and
+E
+h
+∥W1∥2
+H
+i
+≤V 2 .
+Corollary 42 Let X1, · · · , Xm and Y1, . . . Yn be independent sequences of independently
+and identically distributed random variables such that f(Xi, Yj) is contained in a separable
+Hilbert space H with norm ∥· ∥H, for some function f : X × Y →H. Suppose that there
+are two positive constants B and V such that
+∥f(X1, Y1)∥H ≤B/2
+a.s.,
+and
+E
+h
+∥f(X1, Y1)∥2
+H
+i
+≤V 2 .
+Then for any δ ∈(0, 1], the following holds with probability at least 1 −δ:
+
+1
+mn
+m
+X
+i=1
+n
+X
+j=1
+f(Xi, Yj) −Ef(X, Y )
+
+H
+≤2
+ 
+B
+m + V
+√m + B
+n +
+r
+Z
+n
+!
+log
+12
+δ
+
+,
+with Z :=
+
+B2
+m + BV
+√m
+
+log
+  12
+δ
+
++ V 2.
+Proof We start by proving that the following events hold true with high probability,
+A :=
+(
+1
+m
+m
+X
+i=1
+EY [∥f(Xi, Y )∥2
+H] −E[∥f(X, Y )∥2
+H]
+ ≤
+B2
+m + BV
+√m
+
+log
+4
+δ
+)
+,
+(103)
+B :=
+
+
+
+
+1
+mn
+m
+X
+i=1
+n
+X
+j=1
+f(Xi, Yj) −EY f(Xi, Y )
+
+H
+≤2
+
+B
+n +
+s
+1
+m
+Pm
+i=1 EY [∥f(Xi, Y )∥2
+H]
+n
+
+log
+4
+δ
+
+
+,
+(104)
+C :=
+
+
+
+
+1
+mn
+m
+X
+i=1
+n
+X
+j=1
+f(Xi, Yj) −EY f(Xi, Y )
+
+H
+≤2
+ 
+B
+n +
+r
+Z
+n
+!
+log
+4
+δ
+
+
+,
+(105)
+D :=
+(
+1
+m
+m
+X
+i=1
+EY f(Xi, Y ) −Ef(X, Y )
+
+H
+≤2
+B
+m + V
+√m
+
+log
+4
+δ
+)
+,
+(106)
+63
+
+PDF PAGE 64
+Nguyen and M¨ucke
+with Z :=
+
+B2
+m + BV
+√m
+
+log
+  4
+δ
+
++ V 2.
+Bounding A: Set Wi = EY [∥f(Xi, Y )∥2
+H].
+Then by assumption |Wi| ≤B2/4 and
+E[|Wi|2] ≤B2V 2
+4
+. From Proposition 41 we therefore have with probability at least 1 −δ,
+
+1
+m
+m
+X
+i=1
+EY [∥f(Xi, Y )∥2
+H] −E[∥f(X, Y )∥2
+H]
+ ≤
+B2
+m + BV
+√m
+
+log
+4
+δ
+
+.
+Bounding B: Using that Xi, Yj are independent, we can condition on {Xi = xi}m
+i=1 as
+follow,
+P (B) = Eµ⊗m
+x
+[P (B|x1, . . . , xm)] .
+(107)
+We set Wj :=
+1
+m
+Pm
+i=1 f(xi, Yj). Note that conditioned on {Xi = xi}m
+i=1 we have that Wj
+are iid w.r.t. µY . By assumption we have ∥Wj∥H ≤B/2 and for the second moment we
+have
+EY [∥W∥2
+H] ≤1
+m
+m
+X
+i=1
+EY [∥f(xi, Y )∥2
+H].
+From Proposition 41 we therefore have, that with probability (over µ⊗n
+y ) at least 1 −δ,
+
+1
+mn
+m
+X
+i=1
+n
+X
+j=1
+f(xi, Yj) −EY f(xi, Y )
+
+H
+≤2
+
+B
+n +
+s
+1
+m
+Pm
+i=1 EY [∥f(xi, Y )∥2
+H]
+n
+
+log
+4
+δ
+
+.
+From (107) we therefore have that P(B) ≥1 −δ.
+Bounding C: Note that P(C|A, B) = 1, since conditioned on A we have by assumption,
+1
+m
+m
+X
+i=1
+EY [∥f(Xi, Y )∥2
+H] ≤
+B2
+m + BV
+√m
+
+log
+4
+δ
+
++ E[∥f(X, Y )∥2
+H]
+≤
+B2
+m + BV
+√m
+
+log
+4
+δ
+
++ V 2,
+and plugging this inequality into the bound of B, leads to the bound of C. By Proposition
+34 we therefore have, P(C) ≥1 −2δ.
+Bounding D: Again we set Wi = EY [∥f(Xi, Y )∥H] and obtain by Proposition 41 with
+probability at least 1 −δ,
+
+1
+m
+m
+X
+i=1
+EY f(Xi, Y ) −Ef(X, Y )
+
+H
+≤2
+B
+m + V
+√m
+
+log
+4
+δ
+
+.
+64
+
+PDF PAGE 65
+Optimal Convergence Rates for Neural Operators
+To sum up: Using the bounds of event C and D, we therefore have with probability
+at least 1 −3δ,
+
+1
+mn
+m
+X
+i=1
+n
+X
+j=1
+f(Xi, Yj) −Ef(X, Y )
+
+H
+≤
+
+1
+mn
+m
+X
+i=1
+n
+X
+j=1
+f(Xi, Yj) −EY f(Xi, Y )
+
+H
+(108)
++
+
+1
+m
+m
+X
+i=1
+EY f(Xi, Y ) −Ef(X, Y )
+
+H
+(109)
+≤2
+ 
+B
+m + V
+√m + B
+n +
+r
+Z
+n
+!
+log
+4
+δ
+
+.
+(110)
+This proves the claim.
+Proposition 43 (Rudi and Rosasco (2017) (Lemma 9)) For any M ≥8κ4∥L∞∥−1 log2 2
+δ
+we have with probability at least 1 −δ
+∥LM∥≥1
+2∥L∞∥.
+Proposition 44 (Nguyen and M¨ucke (2023) Proposition A.18.) For any λ > 0 with
+M ≥8 ˜dκ2Cλ,δ,κ
+λ
+with Cλ,δ,κ := log
+80κ4
+∥L∞∥λδ we have with probability at least 1 −δ
+NLM (λ) ≤4
+
+1 + 2 log 2
+δ
+
+NL∞(λ).
+Proposition 45 For any λ ∈(0, 1], any M ≥8κ4∥L∞∥−1 log2 2
+δ and nU, nX ≥72κ4Cλ,δ,κ(1+∥L∞∥)
+λ
+with Cλ,δ,κ := log
+80κ4
+∥L∞∥λδ, define the following events,
+E1 =
+C
+−1
+2
+M,λ
+
+bCM −CM
+
+C
+−1
+2
+M,λ
+ ≤3/4
+
+,
+(111)
+E2 =
+ bC
+−1
+2
+M,λC
+1
+2
+M,λ
+ ≤2,
+ bC
+1
+2
+M,λC
+−1
+2
+M,λ
+ ≤2
+
+.
+(112)
+Providing Assumption 4 we have that both events holds true with probability at least 1 −3δ.
+Proof E1) Set f(u, x) := C
+−1
+2
+M,λ∇Gθ0(u)(x)∇Gθ0(u)(x)⊤C
+−1
+2
+M,λ. We have ∥f(u, x)∥≤κ2/λ :=
+B and
+Eρx[f(u, x)2] ≼κ2
+λ CMC−1
+M,λ := V.
+65
+
+PDF PAGE 66
+Nguyen and M¨ucke
+From Proposition 40 we have with probability at least 1 −δ,
+C
+−1
+2
+M,λ
+
+bCM −CM
+
+C
+−1
+2
+M,λ
+ ≤2κ2 ˜β
+3λnX
++ 2κ2β
+3λnU
++
+s
+2κ2∥˜V∥˜β
+λnX
++
+s
+2κ2β
+λnU
+,
+(113)
+with β := log 4 tr V
+∥V∥δ , ˜β := log 4 tr ˜V
+∥˜V∥δ and ˜V :=
+1
+nU
+PnU
+i=1 Eρxf(ui, x) and where we used
+∥V∥≤κ2/λ .
+For β we have
+β = log 4 tr V
+∥V∥δ = log
+4 Tr CMC−1
+M,λ
+∥CMC−1
+M,λ∥δ
+= log
+4 Tr CMC−1
+M,λ(∥CM∥+ λ)
+∥CM∥δ
+≤log 4κ2
+λ ∥CM∥+ 4Tr(CM)
+∥CM∥δ
+≤log
+8κ2
+λ∥CM∥δ
+(114)
+≤log
+16κ4
+λ∥L∞∥δ := Cλ,δ,
+(115)
+where we used for the last equation, that we have from Proposition 43,
+∥CM∥= ∥LM∥≥1
+2∥L∞∥.
+(116)
+Now we want to further bound ˜V and ˜β.
+First we set ξi = Eρxf(ui, x). Note that ∥ξ∥≤κ2/λ and
+Eξ2 ≼Ef(u, x)2 ≼V.
+From Proposition 39 and (114) we therefore have with probability at least 1 −δ,
+˜V −CMC−1
+M,λ
+ ≤2κ2Cλ,δ
+3λnU
++ κ
+s
+2Cλ,δ
+λnU
+.
+Now let nU ≥8Cλ,δκ2
+λ
+, then we have
+˜V −CMC−1
+M,λ
+ ≤1 and therefore
+˜V
+ ≤
+˜V −CMC−1
+M,λ
+ + ∥CMC−1
+M,λ∥≤2.
+(117)
+If we assume nU ≥72κ4Cλ,δ∥L∞∥
+λ
+, we instead have
+˜V −CMC−1
+M,λ
+ ≤∥L∞∥
+5κ2 .
+66
+
+PDF PAGE 67
+Optimal Convergence Rates for Neural Operators
+This implies together with the reversed triangle inequality,
+∥˜V∥≥∥CMC−1
+M,λ∥−
+˜V −CMC−1
+M,λ
+
+≥∥CMC−1
+M,λ∥−∥L∞∥
+5κ2
+=
+∥CM∥
+∥CM∥+ λ −∥L∞∥
+5κ2
+≥∥L∞∥
+4κ2
+−∥L∞∥
+5κ2
+≥∥L∞∥
+20κ2 ,
+(118)
+where we used (116) and λ ≤1 ≤κ2 in the last step.
+Plugging (118) into ˜β gives,
+˜β = log 4 tr ˜V
+∥˜V∥δ
+≤log
+80κ4
+∥L∞∥λδ := Cλ,δ,κ.
+(119)
+To sum up we have
+˜V
+ ≤2 and
+˜β, β ≤Cλ,δ,κ. Plugging these bounds into (113) leads to
+C
+−1
+2
+M,λ
+
+bCM −CM
+
+C
+−1
+2
+M,λ
+ ≤2κ2Cλ,δ,κ
+3λnX
++ 2κ2Cλ,δ,κ
+3λnU
++
+s
+4κ2Cλ,δ,κ
+λnX
++
+s
+2κ2Cλ,δ,κ
+λnU
+.
+(120)
+using the assumption nU, nX ≥72κ4Cλ,δ,κ(1+∥L∞∥)
+λ
+, proves the result.
+E2) The result now follows from Proposition 36 and the event E1.
+Related operator-theoretic techniques for regularized least-squares learning in RKHSs
+were developed by Lin, Guo, and Zhou (Lin et al., 2017).
+Proposition 46 For any λ > 0 define the following events,
+E1 =
+(C
+−1
+2
+M,λ
+
+bCM −CM
+
+HS
+(121)
+≤2
+ κ2
+√
+λ
+ 1
+nU
++ 1
+nX
+
++
+p
+25κ2NL∞(L)
+ 1
+√nU
++
+1
+√nX
+
+log3/2
+12
+δ
+ )
+,
+(122)
+E2 =
+ bCM −CM
+
+HS ≤
+
+2κ2
+ 1
+nU
++ 1
+nX
+
++ 4κ2
+ 1
+√nU
++
+1
+√nX
+
+log3/2
+12
+δ
+
+. (123)
+Providing Assumption 4 we have for any δ ∈(0, 1) that each of the above events holds true
+with probability at least 1 −δ .
+Proof
+E1) Set f(ui, xj) := C
+−1
+2
+M,λ∇Gθ0(ui)(xj)∇Gθ0(ui)(xj)⊤. Note that
+∥f(ui, xj)∥HS ≤κ2/
+√
+λ := B
+67
+
+PDF PAGE 68
+Nguyen and M¨ucke
+For the second moment we have,
+E ∥f(u, x)∥2
+HS ≤κ2Tr(C−1
+M,λE
+h
+∇Gθ0(u)(x)∇Gθ0(u)(x)⊤i
+)
+= κ2Tr(CMC−1
+M,λ) = κ2NM(λ),
+where we used for the last equation, that ΣM = ZMZ∗
+M and CM = Z∗
+MZM, so therefore
+NM(λ) = Tr ΣMΣ−1
+M,λ = Tr Z∗
+MΣ−1
+M,λZM = Tr CMC−1
+M,λ.
+(124)
+Further we have by Proposition 44:
+NLM (λ) ≤
+
+1 + 2 log 4
+δ
+
+4NL∞(λ) ≤12 log(4/δ) NL∞(λ) .
+(125)
+From Proposition 42 we therefore have for V 2 := 12κ2 log(4/δ) NL∞(λ)
+C
+−1
+2
+M,λ
+
+bCM −CM
+
+HS
+≤2
+ 
+B
+nU
++
+V
+√nU
++ B
+nX
++
+r
+Z
+nX
+!
+log
+12
+δ
+
+,
+with Z :=
+
+B2
+nU + BV
+√nU
+
+log
+  12
+δ
+
++ V 2.
+Note that if we let nU ≥κ2
+λ log2 (12/δ) we further obtain Z ≤25κ2 log(4/δ) NL∞(λ),
+where we used that log(4/δ) NL∞(λ) ≥1. Therefore we have
+C
+−1
+2
+M,λ
+
+bCM −CM
+
+HS
+≤2
+ κ2
+√
+λ
+ 1
+nU
++ 1
+nX
+
++
+p
+25κ2NL∞(λ)
+ 1
+√nU
++
+1
+√nX
+
+log3/2
+12
+δ
+
+.
+E2) Set f(ui, xj) := ∇Gθ0(ui)(xj)∇Gθ0(ui)(xj)⊤. Note that
+∥f(ui, xj)∥HS ≤κ2 =: B
+For the second moment we have,
+E ∥f(u, x)∥2
+HS ≤κ4 =: V 2
+From Proposition 42 we therefore have
+ bCM −CM
+
+HS ≤2
+ 
+κ2
+nU
++ κ2
+√nU
++ κ2
+nX
++
+r
+Z
+nX
+!
+log
+12
+δ
+
+≤
+
+2κ2
+ 1
+nU
++ 1
+nX
+
++ 4κ2
+ 1
+√nU
++
+1
+√nX
+
+log3/2
+12
+δ
+
+,
+with Z :=
+
+κ4
+nU +
+κ4
+√nU
+
+log
+  12
+δ
+
++ κ4.
+68
+
+PDF PAGE 69
+Optimal Convergence Rates for Neural Operators
+Proposition 47 For any λ ∈(0, 1], any M ≥8κ4∥L∞∥−1 log2 2
+δ and nU, nX ≥72κ4Cλ,δ,κ(1+∥L∞∥)
+λ
+with Cλ,δ,κ := log
+80κ4
+∥L∞∥λδ, we have that with probability at least 1 −4δ,
+ bC−1
+M,λC1
+M,λ
+ ≤2
+κ2
+λ
+ 1
+nU
++ 1
+nX
+
++ 5κ
+p
+NL∞(λ)
+
+1
+√λnU
++
+1
+√λnX
+
+log3/2
+12
+δ
+
+. (126)
+If in addition nU, nX ≥400κ2NL∞(λ)
+λ
+log3   12
+δ
+
+ bC−1
+M,λCM,λ
+ ≤2.
+Proof Using Proposition 46 we obtain with probability at least 1 −3δ,
+ bC−1
+M,λCM,λ
+
+≤
+ bC−1
+M,λ
+
+bCM −CM
+
+HS + 1
+≤
+1
+√
+λ
+ bC
+−1
+2
+M,λC
+1
+2
+M,λ
+
+C
+−1
+2
+M,λ
+
+bCM −CM
+
+HS
++ 1
+≤
+ bC
+−1
+2
+M,λC
+1
+2
+M,λ
+
+ κ2
+√
+λ
+ 1
+nU
++ 1
+nX
+
++ 5
+p
+κ2NL∞(λ)
+
+1
+√λnU
++
+1
+√λnX
+
+log3/2
+12
+δ
+
++ 1.
+(127)
+From Proposition 45 we have with probability at least 1 −δ,
+ bC
+−1
+2
+M,λC
+1
+2
+M,λ
+ ≤2
+(128)
+and therefore
+ bC−1
+M,λC1
+M,λ
+ ≤2
+κ2
+λ
+ 1
+nU
++ 1
+nX
+
++ 5
+p
+κ2NL∞(λ)
+
+1
+√λnU
++
+1
+√λnX
+
+log3/2
+12
+δ
+
+. (129)
+The above inequality therefore holds if we condition on the events ((127), (128)). Using
+Proposition 34 now shows that the above inequality holds with probability at least 1 −4δ .
+If in addition nU, nX ≥400κ2NL∞(λ)
+λ
+log3   12
+δ
+
+we further obtain
+ bC−1
+M,λCM,λ
+ ≤2.
+Proposition 48 Let M ≥8 ˜dκ2Cλ,δ,κ
+λ
+, nU ≥κ2
+λ log2 (12/δ) with Cλ,δ,κ := log
+80κ4
+∥L∞∥λδ. We
+have with probability at least 1 −δ that the following event holds true:
+C−1/2
+M,λ
+
+b
+Z∗
+Mv −Z∗
+MG∗
+≤2
+ κ
+√
+λ
+ 1
+nU
++ 1
+nX
+
++ 5
+p
+NL∞(λ)
+ 1
+√nU
++
+1
+√nX
+
+log3/2
+12
+δ
+
+.
+69
+
+PDF PAGE 70
+Nguyen and M¨ucke
+Proof [Proposition 48]
+By (24) we have
+C−1/2
+M,λ
+
+b
+Z∗
+Mv −Z∗
+MG∗
+2 =
+
+1
+nUnX
+nU
+X
+i=1
+nX
+X
+j=1
+f(zi, xi) −Ef(z, x)
+
+2
+where f(zi, xj) := C−1/2
+M,λ ∇Gθ0(ui)(xj)vi(xj) and zi = (ui, vi).
+Note that by Assumption 4 we have
+∥f(z, x)∥2 ≤
+C−1/2
+M,λ ∇Gθ0(u)(x)
+
+2 ≤
+1
+√
+λ
+sup
+x∈X,u∈U
+∥∇Gθ0(u)(x)∥2 ≤
+κ
+√
+λ
+and
+E∥f(z, x)∥2
+2 ≤
+Z
+U×X
+C−1/2
+M,λ ∇Gθ0(u)(x)
+
+2
+2 := ν.
+Now we need to prove that ν = NM(λ). Note that we have ΣM = ZMZ∗
+M and CM =
+Z∗
+MZM, so
+NM(λ) = Tr ΣMΣ−1
+M,λ = Tr Z∗
+MΣ−1
+M,λZM = Tr CMC−1
+M,λ,
+since Z∗
+MΣ−1
+M,λZM = CMC−1
+M,λ. By the the ciclicity of the trace and the definition of CM, we
+have
+Tr CMC−1
+M,λ =
+Z
+X×U
+Tr
+
+∇Gθ0(u)(x)∇Gθ0(u)(x)⊤C−1
+M,λ
+
+=
+Z
+X×U
+C−1/2
+M,λ ∇Gθ0(u)(x)
+
+2
+2 = ν.
+Further we have by Proposition 44:
+NLM (λ) ≤
+
+1 + 2 log 4
+δ
+
+4NL∞(λ) ≤12 log(4/δ) NL∞(λ) .
+(130)
+So by setting B =
+κ
+√
+λ and V 2 = 12 log(4/δ) NL∞(λ), it follows from Proposition 42, that
+with probability at least 1 −δ ,
+C−1/2
+M,λ
+
+b
+Z∗
+Mv −Z∗
+MG∗
+≤2
+ 
+B
+nU
++
+V
+√nU
++ B
+nX
++
+r
+Z
+nX
+!
+log
+12
+δ
+
+,
+with Z :=
+
+B2
+nU + BV
+√nU
+
+log
+  12
+δ
+
++ V 2. Note that if we let nU ≥κ2
+λ log2 (12/δ) we further
+obtain Z ≤25 log(4/δ) NL∞(λ), where we used that log(4/δ) NL∞(λ) ≥1. Therefore we
+have
+C−1/2
+M,λ
+
+b
+Z∗
+Mv −Z∗
+MG∗
+≤2
+ κ
+√
+λ
+ 1
+nU
++ 1
+nX
+
++
+p
+25NL∞(λ)
+ 1
+√nU
++
+1
+√nX
+
+log3/2
+12
+δ
+
+.
+70
+
+PDF PAGE 71
+Optimal Convergence Rates for Neural Operators
+Proposition 49 Given that θt ∈Qθ0(R) and Assumption 1, we have with probability at
+least 1 −δ,
+
+1
+nUnX
+nU
+X
+i=1
+nX
+X
+j=1
+∇Gθ0(ui)(xj)Gθt(ui)(xj) −Eρx∇Gθ0(ui)(x)Gθt(ui)(x)
+
+Θ
+≤4κ2
+√nX
+log
+4
+δ
+
+∥θt −θ0∥Θ + 2κC∇g(R)
+√
+M
+∥θt −θ0∥2
+Θ.
+Proof [Proposition 49] Using a Taylor expansion in θ0 we have
+Gθt(u)(x)(u)(x) = ⟨∇Gθ0(u)(x), θt −θ0⟩Θ + r(θt,θ0)(u)(x).
+Therefore
+
+1
+nUnX
+nU
+X
+i=1
+nX
+X
+j=1
+∇Gθ0(ui)(xj)Gθt(ui)(xj) −Eρx∇Gθ0(ui)(x)Gθt(ui)(x)
+
+Θ
+(131)
+≤
+
+1
+nUnX
+nU
+X
+i=1
+nX
+X
+j=1
+∇Gθ0(ui)(xj) ⟨∇Gθ0(ui)(xj), θt −θ0⟩Θ −Eρx∇Gθ0(ui)(x) ⟨∇Gθ0(ui)(x), θt −θ0⟩Θ
+
+Θ
+(132)
++
+
+1
+nUnX
+nU
+X
+i=1
+nX
+X
+j=1
+∇Gθ0(ui)(xj)r(θt,θ0)(ui)(xj) −Eρx∇Gθ0(ui)(x)r(θt,θ0)(ui)(x)
+
+Θ
+(133)
+:= I + II.
+(134)
+For I we have
+I ≤
+
+1
+nX
+nX
+X
+j=1
+Wj −EρxWj
+
+HS
+∥θt −θ0∥Θ
+with Wj :=
+1
+nU
+PnU
+i=1 ∇Gθ0(ui)(xj)∇Gθ0(ui)(xj)T . Note that ∥W∥HS ≤κ2, ∥W∥2
+HS ≤κ4.
+Therefore we have from Proposition 41 with probability at least 1 −δ,
+I ≤4κ2
+√nX
+log
+4
+δ
+
+∥θt −θ0∥Θ .
+For II we have from Proposition 25,
+II ≤2κC∇g(R)
+√
+M
+∥θt −θ0∥2
+Θ.
+71
+
+PDF PAGE 72
+Nguyen and M¨ucke
+Proposition 50 Let T ≤Cn
+1
+2r+b
+U
+, 2r + b > 1, nX ≥t2 max{0, 1
+2 −r} and M ≥MIII with
+MIII from Proposition 19 and some C > 0, defined in the proof. With probability at least
+1 −δ, we have for t ∈[T],
+
+1
+nUnX
+nU
+X
+i=1
+nX
+X
+j=1
+|F ∗
+t (ui)(xj) −G∗(ui)(xj)| −E |F ∗
+t (u)(x) −G∗(u)(x)|
+
+≤˜Cα,κ
+ 1
+√nU
++
+1
+√nX
+
+log3/2
+12
+δ
+
+.
+Proof [Proposition 50] First we start with bounding F ∗
+t and G∗. Note that F ∗
+t ∈HM,
+therefore there exist some θ∗
+t such that Ft(u)(x) = ⟨∇Gθ0(u)(x), θ∗
+t ⟩and ∥F ∗
+t ∥HM = ∥θ∗
+t ∥Θ
+(see for example Steinwart and Christmann (2008) Theorem 4.21). Therefore we have from
+Lemma 21
+|Ft(u)(x)| = |⟨∇Gθ0(u)(x), θ∗
+t ⟩| ≤κ∥F ∗
+t ∥HM ≤C′
+κ,α tmax{0, 1
+2 −r}.
+For G∗we have from Assumption 4
+|G∗(u)(x)| ≤
+Z
+V
+|v(x)|ρ(dv|u) ≤1.
+Now set f(ui, xj) := |F ∗
+t (ui)(xj) −G∗(ui)(xj)|.
+Then we have |f(ui, xj)| ≤C′
+κ,α tmax{0, 1
+2 −r} + 1 := Cκ,α tmax{0, 1
+2 −r} := B and from
+(Nguyen and M¨ucke, 2023, Proposition A.1) we have ( with λ = (αt)−1 )
+Ef(u, x)2 = ∥SMF ∗
+t −G∗∥2
+L2(µu) ≤Cα,r t−2r := V 2 ,
+(135)
+for some Cr,α < ∞as long as M ≥MIII, T ≤Cn
+1
+2r+b
+U
+, with C from Theorem 19 .
+From Proposition 42 we therefore have,
+
+1
+nUnX
+nU
+X
+i=1
+nX
+X
+j=1
+|F ∗
+t (ui)(xj) −G∗(ui)(xj)| −E |F ∗
+t (u)(x) −G∗(u)(x)|
+
+≤2
+ 
+B
+nU
++
+V
+√nU
++ B
+nX
++
+r
+Z
+nX
+!
+log
+12
+δ
+
+with Z :=
+
+B2
+nU + BV
+√nU
+
+log
+  12
+δ
+
++ V 2. From T ≤Cα,rn
+1
+2r+b
+U
+for some Cα,r > 0 we further
+have,
+
+1
+nUnX
+nU
+X
+i=1
+nX
+X
+j=1
+|F ∗
+t (ui)(xj) −G∗(ui)(xj)| −E |F ∗
+t (u)(x) −G∗(u)(x)|
+
+≤ˆCα,κ
+ 
+tmax{0, 1
+2 −r}
+nU
++
+1
+tr√nU
++ tmax{0, 1
+2 −r}
+nX
++
+1
+√nX
+!
+log3/2
+12
+δ
+
+≤˜Cα,κ
+ 1
+√nU
++
+1
+√nX
+
+log3/2
+12
+δ
+
+.
+72
+
+PDF PAGE 73
+Optimal Convergence Rates for Neural Operators
+Proof [Proposition 3]
+Recall that
+KM(u, u′) = (ΦM
+u )∗ΦM
+u′ =
+3M
+X
+m=1
+∂mGθ0(u) ⊗∂mGθ0(u′)
+= 1
+M
+M
+X
+m=1
+σ
+D
+b(0)
+m , J(u)
+E
+⊗σ
+D
+b(0)
+m , J(u′)
+E
++
+1
+M
+M
+X
+m=1
+τ 2σ′ D
+b(0)
+m , J(u)
+E
+J(u) ⊗σ′ D
+b(0)
+m , J(u′)
+E
+J(u′),
+We now set
+wm = σ
+D
+b(0)
+m , J(u)
+E
+⊗σ
+D
+b(0)
+m , J(u′)
+E
++
+τ 2σ′ D
+b(0)
+m , J(u)
+E
+J(u) ⊗σ′ D
+b(0)
+m , J(u′)
+E
+J(u′) .
+Note that ∥w1∥HS ≤κ2and E
+h
+∥w1∥2
+HS
+i
+≤κ4. The result now follows from 41.
+References
+A. B. Aleksandrov and V. V. Peller.
+Operator h¨older–zygmund functions, 2009.
+URL
+https://arxiv.org/abs/0907.3049.
+Vijay Badrinarayanan, Alex Kendall, and Roberto Cipolla. Segnet: A deep convolutional
+encoder-decoder architecture for image segmentation.
+IEEE Transactions on Pattern
+Analysis and Machine Intelligence, 39(12):2481–2495, 2017. doi: 10.1109/TPAMI.2016.
+2644615.
+David Benatia, Marine Carrasco, and Jean-Pierre Florens. Functional linear regression with
+functional response. Journal of econometrics, 201(2):269–291, 2017.
+Alberto Bietti and Francis Bach. Deep equals shallow for relu networks in kernel regimes.
+arXiv preprint arXiv:2009.14397, 2020.
+Alberto Bietti and Julien Mairal. On the inductive bias of neural tangent kernels. Advances
+in Neural Information Processing Systems, 32, 2019.
+Gilles Blanchard and Nicole M¨ucke. Optimal rates for regularization of statistical inverse
+learning problems. Foundations of Computational Mathematics, 18:971–1013, 2017.
+Nicolas Boull´e and Alex Townsend. A mathematical guide to operator learning, 2023. URL
+https://arxiv.org/abs/2312.14688.
+73
+
+PDF PAGE 74
+Nguyen and M¨ucke
+A. Caponnetto and Ernesto De Vito. Optimal rates for the regularized least-squares algo-
+rithm. Foundations of Computational Mathematics, 7:331–368, 2007.
+C. Carmeli, E. De Vito, and V. Umanit`a A. Toigo. Vector valued reproducing kernel Hilbert
+spaces and universality, 2008.
+Claudio Carmeli, Ernesto De Vito, and Alessandro Toigo. Reproducing kernel Hilbert spaces
+and mercer theorem, 2005.
+Lin Chen and Sheng Xu. Deep neural tangent kernel and Laplace kernel have the same
+rkhs. arXiv preprint arXiv:2009.10683, 2020.
+Zixiang Chen, Yuan Cao, Quanquan Gu, and Tong Zhang. A generalized neural tangent
+kernel analysis for two-layer neural networks. Advances in Neural Information Processing
+Systems, 33:13363–13373, 2020.
+Masoumeh Dashti and Andrew M. Stuart. The bayesian approach to inverse problems,
+2015. URL https://arxiv.org/abs/1302.6989.
+Zhou Fan and Zhichao Wang. Spectra of the conjugate kernel and neural tangent kernel
+for linear-width neural networks. Advances in neural information processing systems, 33:
+7710–7721, 2020.
+V. Fanaskov and I. Oseledets. Spectral neural operators, 2024. URL https://arxiv.org/
+abs/2205.10573.
+Manuel Febrero-Bande, Manuel Oviedo-de la Fuente, Mohammad Darbalaei, and Morteza
+Amini. Functional regression models with functional response: a new approach and a
+comparative study. Computational Statistics, pages 1–27, 2024.
+Amnon Geifman, Abhay Yadav, Yoni Kasten, Meirav Galun, David Jacobs, and Basri
+Ronen. On the similarity between the Laplace and neural tangent kernels. Advances in
+Neural Information Processing Systems, 33:1451–1461, 2020.
+Eugene Golikov, Eduard Pokonechnyy, and Vladimir Korviakov. Neural tangent kernel: A
+survey. arXiv preprint arXiv:2208.13614, 2022.
+Lukas Gonon, Arnulf Jentzen, Benno Kuckuck, Siyu Liang, Adrian Riekert, and Philippe
+von Wurstemberger. An overview on machine learning methods for partial differential
+equations: from physics informed neural networks to deep operator learning, 2024. URL
+https://arxiv.org/abs/2408.13222.
+Ian Goodfellow, Yoshua Bengio, and Aaron Courville. Deep Learning. MIT Press, 2016.
+Steffen Gr¨unew¨alder, Guy Lever, Luca Baldassarre, Sam Patterson, Arthur Gretton, and
+Massimilano Pontil. Conditional mean embeddings as regressors. In Proceedings of the
+29th International Conference on International Conference on Machine Learning, pages
+1803–1810, 2012.
+Daniel Zhengyu Huang, Nicholas H. Nelsen, and Margaret Trautner. An operator learning
+perspective on parameter-to-observable maps, 2024.
+74
+
+PDF PAGE 75
+Optimal Convergence Rates for Neural Operators
+Thomas JR Hughes. The finite element method: linear static and dynamic finite element
+analysis. Courier Corporation, 2003.
+Arthur Jacot, Cl´ement Hongler, and Franck Gabriel. Neural tangent kernel: Convergence
+and generalization in neural networks. In NeurIPS, 2018.
+Diederik P Kingma and Max Welling. Auto-encoding variational bayes, 2022. URL https:
+//arxiv.org/abs/1312.6114.
+Ilja Klebanov, Ingmar Schuster, and Timothy John Sullivan. A rigorous theory of condi-
+tional mean embeddings. SIAM Journal on Mathematics of Data Science, 2(3):583–606,
+2020.
+Nikola Kovachki, Samuel Lanthaler, and Siddhartha Mishra. On universal approximation
+and error bounds for Fourier neural operators. Journal of Machine Learning Research,
+22(290):1–76, 2021. URL http://jmlr.org/papers/v22/21-0806.html.
+Nikola Kovachki, Zongyi Li, Burigede Liu, Kamyar Azizzadenesheli, Kaushik Bhattacharya,
+Andrew Stuart, and Anima Anandkumar. Neural operator: learning maps between func-
+tion spaces with applications to PDEs, 2024a. ISSN 1532-4435.
+Nikola B. Kovachki, Zong-Yi Li, Burigede Liu, Kamyar Azizzadenesheli, Kaushik Bhat-
+tacharya, Andrew M. Stuart, and Anima Anandkumar. Neural operator: Learning maps
+between function spaces with applications to PDEs. J. Mach. Learn. Res., 24:89:1–89:97,
+2023. URL https://api.semanticscholar.org/CorpusID:259149906.
+Nikola B Kovachki, Samuel Lanthaler, and Hrushikesh Mhaskar. Data complexity estimates
+for operator learning. arXiv preprint arXiv:2405.15992, 2024b.
+Nikola B. Kovachki, Samuel Lanthaler, and Andrew M. Stuart. Operator learning: Algo-
+rithms and analysis, 2024c.
+Samuel Lanthaler. Operator learning with pca-net: upper and lower complexity bounds.
+Journal of Machine Learning Research, 24(318):1–67, 2023.
+URL http://jmlr.org/
+papers/v24/23-0478.html.
+Jaehoon Lee, Lechao Xiao, Samuel Schoenholz, Yasaman Bahri, Roman Novak, Jascha Sohl-
+Dickstein, and Jeffrey Pennington. Wide neural networks of any depth evolve as linear
+models under gradient descent. Advances in neural information processing systems, 32,
+2019.
+Zhu Li, Dimitri Meunier, Mattes Mollenhauer, and Arthur Gretton. Optimal rates for regu-
+larized conditional mean embedding learning. Advances in Neural Information Processing
+Systems, 35:4433–4445, 2022.
+Zhu Li, Dimitri Meunier, Mattes Mollenhauer, and Arthur Gretton.
+Towards optimal
+sobolev norm rates for the vector-valued regularized least-squares algorithm. Journal
+of Machine Learning Research, 25(181):1–51, 2024.
+75
+
+PDF PAGE 76
+Nguyen and M¨ucke
+Zongyi Li, Nikola Kovachki, Kamyar Azizzadenesheli, Burigede Liu, Kaushik Bhattacharya,
+Andrew Stuart, and Anima Anandkumar. Neural operator: Graph kernel network for
+partial differential equations, 2020. URL https://arxiv.org/abs/2003.03485.
+Zongyi Li, Nikola Borislavov Kovachki, Kamyar Azizzadenesheli, Burigede Liu, Kaushik
+Bhattacharya, Andrew Stuart, and Anima Anandkumar.
+Fourier neural operator for
+parametric partial differential equations. In International Conference on Learning Rep-
+resentations, 2021. URL https://openreview.net/forum?id=c8P9NQVtmnO.
+Junhong Lin and Volkan Cevher. Optimal convergence for distributed learning with stochas-
+tic gradient methods and spectral algorithms, 2018.
+URL https://arxiv.org/abs/
+1801.07226.
+Junhong Lin, Alessandro Rudi, Lorenzo Rosasco, and Volkan Cevher. Optimal rates for
+spectral algorithms with least-squares regression over Hilbert spaces. Applied and Com-
+putational Harmonic Analysis, 48(3):868–890, 2020.
+Shao-Bo Lin, Xin Guo, and Ding-Xuan Zhou. Distributed learning with regularized least
+squares. Journal of Machine Learning Research, 18(92):1–31, 2017.
+Matthew Lowery, John Turnage, Zachary Morrow, John D. Jakeman, Akil Narayan, Shan-
+dian Zhe, and Varun Shankar.
+Kernel neural operators (knos) for scalable, memory-
+efficient, geometrically-flexible operator learning, 2024. URL https://arxiv.org/abs/
+2407.00809.
+Lu Lu, Pengzhan Jin, Guofei Pang, Zhongqiang Zhang, and George Karniadakis. Learning
+nonlinear operators via deeponet based on the universal approximation theorem of opera-
+tors. Nature Machine Intelligence, 3:218–229, 03 2021. doi: 10.1038/s42256-021-00302-5.
+Carlo Marcati and Christoph Schwab. Exponential convergence of deep operator networks
+for elliptic partial differential equations. SIAM Journal on Numerical Analysis, 61(3):
+1513–1545, jun 2023. ISSN 1095-7170. doi: 10.1137/21m1465718. URL http://dx.doi.
+org/10.1137/21M1465718.
+Dimitri Meunier, Zikai Shen, Mattes Mollenhauer, Arthur Gretton, and Zhu Li.
+Opti-
+mal rates for vector-valued spectral regularization learning algorithms. arXiv preprint
+arXiv:2405.14778, 2024.
+Mehryar Mohri, Afshin Rostamizadeh, and Ameet Talwalkar.
+Foundations of Machine
+Learning. MIT Press, Cambridge, MA, 2 edition, 2018.
+Mattes Mollenhauer, Nicole M¨ucke, and TJ Sullivan. Learning linear operators: Infinite-
+dimensional regression as a well-behaved non-compact inverse problem. arXiv preprint
+arXiv:2211.08875, 2022.
+Jeffrey S Morris. Functional regression. Annual Review of Statistics and Its Application, 2
+(1):321–359, 2015.
+76
+
+PDF PAGE 77
+Optimal Convergence Rates for Neural Operators
+Nicholas H. Nelsen and Andrew M. Stuart. Operator learning using random features: A
+tool for scientific computing. SIAM Review, 66(3):535–571, May 2024. ISSN 1095-7200.
+doi: 10.1137/24m1648703. URL http://dx.doi.org/10.1137/24M1648703.
+Mike Nguyen and Nicole M¨ucke. Random feature approximation for general spectral meth-
+ods, 2023.
+Mike Nguyen and Nicole M¨ucke. How many neurons do we need? A refined analysis for
+shallow networks trained with gradient descent, 2023. URL https://arxiv.org/abs/
+2309.08044.
+Atsushi Nitanda and Taiji Suzuki. Optimal rates for averaged stochastic gradient descent
+under neural tangent kernel regime. In International Conference on Learning Represen-
+tations. arXiv, 2020.
+Junhyung Park and Krikamol Muandet. A measure-theoretic approach to kernel conditional
+mean embeddings. Advances in neural information processing systems, 33:21247–21259,
+2020.
+Jaideep Pathak, Shashank Subramanian, Peter Harrington, Sanjeev Raja, Ashesh Chat-
+topadhyay, Morteza Mardani, Thorsten Kurth, David Hall, Zongyi Li, Kamyar Aziz-
+zadenesheli, Pedram Hassanzadeh, Karthik Kashinath, and Animashree Anandkumar.
+Fourcastnet: A global data-driven high-resolution weather model using adaptive Fourier
+neural operators. arXiv preprint arXiv:2202.11214, 2022.
+Loucas Pillaud-Vivien, Alessandro Rudi, and Francis Bach. Statistical optimality of stochas-
+tic gradient descent on hard learning problems through multiple passes, 2018.
+Allan Pinkus. Approximation theory of the MLP model in neural networks. Acta numerica,
+8:143–195, 1999. URL https://doi.org/10.1017/S0962492900002919.
+Shaoxiang Qin, Fuyuan Lyu, Wenhui Peng, Dingyang Geng, Ju Wang, Xing Tang, Sylvie
+Leroyer, Naiping Gao, Xue Liu, and Liangzhu Leon Wang. Toward a better understanding
+of Fourier neural operators from a spectral perspective, 2024. URL https://arxiv.org/
+abs/2404.07200.
+M. Raissi, P. Perdikaris, and G.E. Karniadakis.
+Physics-informed neural networks: A
+deep learning framework for solving forward and inverse problems involving nonlinear
+partial differential equations.
+Journal of Computational Physics, 378:686–707, 2019.
+ISSN 0021-9991.
+doi: https://doi.org/10.1016/j.jcp.2018.10.045.
+URL https://www.
+sciencedirect.com/science/article/pii/S0021999118307125.
+Aniruddha Rajendra Rao and Matthew Reimherr. Modern non-linear function-on-function
+regression. Statistics and Computing, 33(6):130, 2023.
+Alessandro Rudi and Lorenzo Rosasco. Generalization properties of learning with random
+features. Advances in neural information processing systems, 30, 2017.
+77
+
+PDF PAGE 78
+Nguyen and M¨ucke
+Christoph Schwab and Jakob Zech.
+Deep learning in high dimension: Neural network
+approximation of analytic functions in l2(Rd, γd), 2021. URL https://arxiv.org/abs/
+2111.07080.
+Jun Shao. Mathematical Statistics. Springer-Verlag New York Inc, 2nd edition, 2003.
+Anil Sharma, Suresh Singh, and Sameer Ratna.
+Graph neural network operators:
+A
+review.
+Multimedia Tools and Applications, 83:23413–23436, 2024.
+doi:
+10.1007/
+s11042-023-16440-4.
+Zhongjie Shi, Jun Fan, Linhao Song, Ding-Xuan Zhou, and Johan A.K. Suykens. Nonlinear
+functional regression by functional deep neural network with kernel embedding. Journal
+of Machine Learning Research, 26(284):1–49, 2025.
+URL http://jmlr.org/papers/
+v26/23-0659.html.
+Eiki Shimizu, Kenji Fukumizu, and Dino Sejdinovic. Neural-kernel conditional mean em-
+beddings. arXiv preprint arXiv:2403.10859, 2024.
+Ingo Steinwart and Andreas Christmann. Support vector machines. Springer Science &
+Business Media, 2008.
+Gilbert Strang and George J. Fix. An Analysis of the Finite Element Method. Prentice
+Hall, 1973.
+Albert Tarantola. Inverse problem theory and methods for model parameter estimation, 01
+2005.
+Joel A. Tropp. User-friendly tail bounds for sums of random matrices. Foundations of
+Computational Mathematics, 12(4):389–434, 2011.
+Puyu Wang, Yunwen Lei, Di Wang, Yiming Ying, and Ding-Xuan Zhou. Generalization
+guarantees of gradient descent for shallow neural networks. Neural Computation, 37(2):
+344–402, 2025.
+Sifan Wang, Hanwen Wang, and Paris Perdikaris. Learning the solution operator of para-
+metric partial differential equations with physics-informed DeepONets. Science Advances,
+7(40):eabi8605, 2021. doi: 10.1126/sciadv.abi8605. URL https://www.science.org/
+doi/abs/10.1126/sciadv.abi8605.
+Xianliang Xu, Ye Li, and Zhongyi Huang. Convergence analysis of wide shallow neural op-
+erators within the framework of neural tangent kernel. arXiv preprint arXiv:2412.05545,
+2024.
+Yaoyu Zhang, Zhi-Qin John Xu, Tao Luo, and Zheng Ma. A type of generalization error
+induced by initialization in deep neural networks. In Mathematical and Scientific Machine
+Learning, pages 144–164. PMLR, 2020.
+78

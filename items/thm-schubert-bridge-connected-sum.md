@@ -58,7 +58,7 @@ $$b(K\#J)=b(K)+b(J)-1.$$
 
 [F2] The connected sum is represented by removing a small trivial ball-arc neighborhood from each summand and gluing the two boundary spheres with the fixed arc-matching convention. [[def-knot-connected-sum-and-prime-knot]]
 
-[F3] The essential-annulus normalization for the fixed bridge pair is [[lem-bridge-sphere-normalization]]. Its two final disk-intersection arcs end on $P\cap S$, away from the knot.
+[F3] The essential-annulus normalization for the fixed bridge pair is [[lem-bridge-sphere-normalization]]. Its two final disk-intersection arcs end on $P\cap S$, away from the knot, and the punctures lie in opposite bridge balls.
 
 [F4] A knot exterior has $H_1(E;\mathbb Z)=\mathbb Z[\mu]$. [[lem-knot-exterior-h1-is-generated-by-meridian]]
 
@@ -82,7 +82,7 @@ $$b(K\#J)=b(K)+b(J)-1.$$
 
 3.2 There is no boundary compression of $A$. If there were, [F5] would give a parallelism to one of the two annuli $A_0$ on the boundary torus between its meridional boundaries. This implies that one factor is the unknot, as can be checked with the markings: write the tube over the corresponding subinterval of the core knot as $D^2\times I$, with side $A_0=\partial D^2\times I$ and end disks the two disks $P\cap N(L)$. Attach the annulus parallelism to this side, retaining its rim collars. It merely enlarges the radial disk coordinate in each $I$-fiber, so the result is a ball with boundary the original $P$ after rounding. Its knot arc is the core $\{0\}\times I$, and it cobounds with an arc on that ball's boundary a disk given by a fixed radial interval times $I$, rounded at its ends. Capping this arc on $P$ produces an unknot. The same construction works for either complementary annulus of the torus; it uses its actual product parameter, not just a homological slope. By [F8] the resulting unknot is one of the given factors, contradicting nontriviality. Thus all hypotheses of [F3] hold for this particular $P$, and we may apply its isotopy and disk changes without changing $(L,S)$ or the specified factors. [F3, F5, F6, F8, step 2.2, construct]
 
-4.1 In the resulting normal form $P\cap S=C$ is one circle disjoint from $L$. The two disks $P_\pm=P\cap B_\pm$ each contain one puncture. Indeed the two disk-intersection arcs of [F3] have their puncture endpoints one on each side, as in that lemma's final normalization. Each $P_\pm$ is a proper disk cutting its bridge ball into two balls: cap it by either of the two disks on $\partial B_\pm$ bounded by its rim, round, and apply [F6]; the side not containing the exterior of $B_\pm$ is the required ball. Their collars give compatible markings. Let $S_1,S_2$ be the disks on $S$ bounded by $C$, labelled by the two sides of $P$, and put $r_i=|L\cap S_i|$. Then $r_1+r_2=2b$. In each original bridge ball exactly one bridge arc crosses $P_\pm$: it is the arc carrying its unique puncture. Its two endpoints on $S$ lie on opposite sides of $C$, because the bridge crosses that separating disk once. Every other bridge arc is wholly on one side. Consequently $r_i$ is odd. [F3, F6, step 3.2, construct, algebra]
+4.1 In the resulting normal form $P\cap S=C$ is one circle disjoint from $L$. The two disks $P_\pm=P\cap B_\pm$ each contain one puncture. This is the opposite-side puncture conclusion in the Statement of [F3], rather than an inference from the existence of two arcs alone. Each $P_\pm$ is a proper disk cutting its bridge ball into two balls: cap it by either of the two disks on $\partial B_\pm$ bounded by its rim, round, and apply [F6]; the side not containing the exterior of $B_\pm$ is the required ball. Their collars give compatible markings. Let $S_1,S_2$ be the disks on $S$ bounded by $C$, labelled by the two sides of $P$, and put $r_i=|L\cap S_i|$. Then $r_1+r_2=2b$. In each original bridge ball exactly one bridge arc crosses $P_\pm$: it is the arc carrying its unique puncture. Its two endpoints on $S$ lie on opposite sides of $C$, because the bridge crosses that separating disk once. Every other bridge arc is wholly on one side. Consequently $r_i$ is odd. [F3, F6, step 3.2, construct, algebra]
 
 5.1 Cap each of the two cut ball-arcs of $L$ by a boundary arc on $P$ running from the upper puncture to the lower puncture and crossing $C$ once, chosen as the two type-I traces joined by an arc of $C$ between their distinct foot endpoints, then rounded slightly in the collar of $C$ so that it crosses $C$ transversely just once. Push the two caps into their respective boundary collars. On each side this cap is a trivial ball-arc meeting the capped bridge sphere $S_i\cup$(cap disk) once. Its upper and lower portions extend the severed bridge arcs. Every uncut bridge disk remains in its original region. Each of the two cut bridge disks is cut along its one trace into two disks; on each side join its disk piece to the narrow cap strip. This is a disk attached along one boundary interval, so gives a spanning disk for the extended upper or lower arc. Choose the cap strips in disjoint small quadrant collars of the traces; other disks miss them, and on a given side all disk pieces were originally disjoint. Thus these are simultaneous disjoint spanning-disk systems. The upper and lower ambient pieces are balls: attach the cap half-balls along the displayed windows on $P_\pm$ and use [F6]. We have therefore constructed actual bridge spheres for the two specified oriented factors, not merely diagrams with a proposed number of bridges. Each has $r_i+1$ knot endpoints on its sphere, the extra endpoint being the single crossing of the cap. It follows that their upper arc counts are $n_i=(r_i+1)/2$, and $n_1+n_2=b+1$. Cap orientation is chosen to close the original oriented arc, so [F8] identifies the factors with $K,J$, up to their harmless interchange. [F3, F6, F8, step 4.1, construct, algebra]
 
@@ -90,19 +90,22 @@ $$b(K\#J)=b(K)+b(J)-1.$$
 
 ## Diagram
 
-The schematic shows the local gluing at one bridge-sphere endpoint. The two selected upper disks join along a boundary strip to one upper disk, and the lower pair joins in the same way. The drawing records only the local count reduction by one; the lower-bound proof does not rely on it.
+This schematic shows the joined upper and lower spanning disks after the connected-sum gluing. The upper bridge has two endpoints on $S$, and the lower bridge has two other endpoints; all unselected bridges and disks are omitted. The narrow shaded strips indicate where the corresponding disk pieces are joined. The bridge counts are proved in step 3.1 independently of this drawing.
 
 ```tikz
 \begin{tikzpicture}[scale=0.9]
-  \draw[dashed] (-4,0)--(4,0) node[right] {$S$};
-  \fill (-1.2,0) circle (2pt);
-  \fill (1.2,0) circle (2pt);
-  \draw[thick] (-1.2,0) .. controls (-1.1,1.2) and (-0.2,1.2) .. (0,0.5);
-  \draw[thick] (1.2,0) .. controls (1.1,1.2) and (0.2,1.2) .. (0,0.5);
-  \draw[thick] (-1.2,0) .. controls (-1.1,-1.2) and (-0.2,-1.2) .. (0,-0.5);
-  \draw[thick] (1.2,0) .. controls (1.1,-1.2) and (0.2,-1.2) .. (0,-0.5);
-  \draw[<->] (-0.5,1.55)--(0.5,1.55) node[midway,above] {glue};
-  \node[above] at (-2,0.8) {one upper arc};
-  \node[above] at (2,0.8) {one upper arc};
+  \fill[blue!10] (-3.4,0) .. controls (-3.3,1.6) and (-0.5,1.6) .. (-0.4,0) -- cycle;
+  \fill[blue!10] (0.4,0) .. controls (0.5,-1.6) and (3.3,-1.6) .. (3.4,0) -- cycle;
+  \fill[orange!30] (-2,0) rectangle (-1.8,1.1);
+  \fill[orange!30] (1.8,0) rectangle (2,-1.1);
+  \draw[dashed] (-3.8,0)--(3.8,0) node[right] {$S$};
+  \draw[thick] (-3.4,0) .. controls (-3.3,1.6) and (-0.5,1.6) .. (-0.4,0);
+  \draw[thick] (0.4,0) .. controls (0.5,-1.6) and (3.3,-1.6) .. (3.4,0);
+  \fill (-3.4,0) circle (2pt);
+  \fill (-0.4,0) circle (2pt);
+  \fill (0.4,0) circle (2pt);
+  \fill (3.4,0) circle (2pt);
+  \node at (-1.9,0.5) {joined upper disk};
+  \node at (1.9,-0.5) {joined lower disk};
 \end{tikzpicture}
 ```

@@ -1,0 +1,98 @@
+{
+  "phase": "repair",
+  "round": 1,
+  "role": "scope-repairer",
+  "label": "scope-repair-4-1",
+  "inventory": {
+    "pages": [
+      "operator-approximation-and-regularization-error",
+      "operator-approximation-and-regularization-error-examples"
+    ],
+    "items": [
+      "def-ip-error-budget-for-computed-inversion",
+      "prop-ip-regularized-output-error-splits-by-source",
+      "ex-ip-mesh-sequence-small-singular-values",
+      "ex-ip-iterative-tikhonov-solve-stopped-with-residual"
+    ],
+    "pairs": [
+      "operator-approximation-and-regularization-error"
+    ]
+  },
+  "simple_loop": true,
+  "write_files": [
+    "items/def-ip-error-budget-for-computed-inversion.md",
+    "items/prop-ip-regularized-output-error-splits-by-source.md",
+    "items/ex-ip-mesh-sequence-small-singular-values.md",
+    "items/ex-ip-iterative-tikhonov-solve-stopped-with-residual.md",
+    "library/inverse-problems/operator-approximation-and-regularization-error.md",
+    "library/inverse-problems/operator-approximation-and-regularization-error-examples.md"
+  ],
+  "write_batches": [
+    "4",
+    "55"
+  ],
+  "consumer_scope": [
+    {
+      "id": "ex-ip-forward-euler-observation-model-error",
+      "path": [
+        "def-ip-error-budget-for-computed-inversion",
+        "ex-ip-forward-euler-observation-model-error"
+      ],
+      "paths": [
+        [
+          "def-ip-error-budget-for-computed-inversion",
+          "ex-ip-forward-euler-observation-model-error"
+        ]
+      ]
+    },
+    {
+      "id": "ex-ip-iterative-tikhonov-solve-stopped-with-residual",
+      "path": [
+        "def-ip-error-budget-for-computed-inversion",
+        "ex-ip-iterative-tikhonov-solve-stopped-with-residual"
+      ],
+      "paths": [
+        [
+          "def-ip-error-budget-for-computed-inversion",
+          "ex-ip-iterative-tikhonov-solve-stopped-with-residual"
+        ]
+      ]
+    },
+    {
+      "id": "ex-ip-mesh-sequence-small-singular-values",
+      "path": [
+        "def-ip-error-budget-for-computed-inversion",
+        "ex-ip-mesh-sequence-small-singular-values"
+      ],
+      "paths": [
+        [
+          "def-ip-error-budget-for-computed-inversion",
+          "ex-ip-mesh-sequence-small-singular-values"
+        ]
+      ]
+    },
+    {
+      "id": "prop-ip-regularized-output-error-splits-by-source",
+      "path": [
+        "def-ip-error-budget-for-computed-inversion",
+        "prop-ip-regularized-output-error-splits-by-source"
+      ],
+      "paths": [
+        [
+          "def-ip-error-budget-for-computed-inversion",
+          "prop-ip-regularized-output-error-splits-by-source"
+        ]
+      ]
+    }
+  ],
+  "before_interfaces": {
+    "def-ip-error-budget-for-computed-inversion": [
+      "## Definition\n\nLet $X,Y$ be real or complex Hilbert spaces over the same scalar field, let\n$A:X\\to Y$ be a compact linear forward map (the closure of $A(B)$ is compact\nin $Y$ for every bounded set $B\\subseteq X$), and let $A_h:X\\to Y$ be a\nbounded linear discretized map with finite-dimensional range. For a datum\n$b\\in Y$, let $\\lambda>0$ be the coefficient of $\\|x\\|_X^2$ in the Tikhonov\nobjective $\\|Ax-b\\|_Y^2+\\lambda\\|x\\|_X^2$. Supply adjoints $A^*:Y\\to X$ and\n$A_h^*:Y\\to X$ satisfying\n$\\langle Ax,y\\rangle_Y=\\langle x,A^*y\\rangle_X$ and\n$\\langle A_hx,y\\rangle_Y=\\langle x,A_h^*y\\rangle_X$, where the inner products\nare linear in their first arguments. Assume the shifted normal operators\n$A^*A+\\lambda I_X$ and $A_h^*A_h+\\lambda I_X$ are bijective, and define\n$$R_\\lambda=(A^*A+\\lambda I_X)^{-1}A^*,\\qquad R_{\\lambda,h}=(A_h^*A_h+\\lambda I_X)^{-1}A_h^*.$$\n\nFor a truth $x^\\dagger\\in X$, data perturbation $e\\in Y$, and $\\delta\\ge0$\nwith $\\|e\\|\\le\\delta$, put\n$$y=Ax^\\dagger,\\qquad y_\\delta=y+e,\\qquad y_{h,\\delta}=A_hx^\\dagger+e,\\qquad d_h=(A-A_h)x^\\dagger=y_\\delta-y_{h,\\delta}.$$\nFor any returned output $\\widetilde x_h\\in X$, define its exact discrete\nnormal-equation residual by\n$$r_{h,h}=(A_h^*A_h+\\lambda I_X)\\widetilde x_h-A_h^*y_{h,\\delta}.$$\nThe five-channel error budget is the ordered tuple\n$(b_{\\mathrm{bias}},b_{\\mathrm{data}},b_{\\mathrm{operator}},b_{\\mathrm{pre}},b_{\\mathrm{solve}})$, where\n$$\\begin{aligned}b_{\\mathrm{bias}}&=x^\\dagger-R_\\lambda y,\\qquad b_{\\mathrm{data}}=R_\\lambda y-R_\\lambda y_\\delta,\\\\b_{\\mathrm{operator}}&=(R_\\lambda-R_{\\lambda,h})y_{h,\\delta},\\qquad b_{\\mathrm{pre}}=R_\\lambda d_h,\\\\b_{\\mathrm{solve}}&=R_{\\lambda,h}y_{h,\\delta}-\\widetilde x_h.\\end{aligned}$$\nThe five entries are, in order, the truth-bias, data-perturbation,\nregularized-operator, pre-inversion, and algebraic-solve error vectors.\nThe scalar total budget is the sum of the five channel norms. The raw\npre-inversion forward residual is $d_h$; its reconstruction contribution is\n$b_{\\mathrm{pre}}$. The operator channel measures the difference between the\nregularized exact and discretized operators. The solve channel measures the\nreturned output's difference from the exact discrete Tikhonov output. The\ndefinition supplies no rate or arithmetic residual certificate."
+    ],
+    "prop-ip-regularized-output-error-splits-by-source": [
+      "## Statement\n\nAssume Countable Choice, meaning every sequence of nonempty sets has a choice\nfunction. Let $X,Y$ be real or complex Hilbert spaces over the same scalar\nfield, let $A:X\\to Y$ be compact and linear (the closure of $A(B)$ is compact\nin $Y$ for every bounded set $B\\subseteq X$), and let $A_h:X\\to Y$ be bounded\nand linear with finite-dimensional range. Let $A^*:Y\\to X$ and $A_h^*:Y\\to X$\nbe their Hilbert adjoints, characterized by\n$\\langle Ax,z\\rangle_Y=\\langle x,A^*z\\rangle_X$ and\n$\\langle A_hx,z\\rangle_Y=\\langle x,A_h^*z\\rangle_X$, with both inner\nproducts linear in the first argument. Let $\\lambda>0$, $x^\\dagger\\in X$,\n$e\\in Y$, $\\delta\\ge0$ with $\\|e\\|_Y\\le\\delta$, and\n$\\widetilde x_h\\in X$. Put\n$$y=Ax^\\dagger,\\qquad y_\\delta=y+e,\\qquad y_{h,\\delta}=A_hx^\\dagger+e,\\qquad d_h=(A-A_h)x^\\dagger=y_\\delta-y_{h,\\delta}.$$\n$$R_\\lambda=(A^*A+\\lambda I_X)^{-1}A^*,\\qquad R_{\\lambda,h}=(A_h^*A_h+\\lambda I_X)^{-1}A_h^*,$$\nwhere $I_X$ is the identity operator on $X$, and\n$$r_{h,h}=(A_h^*A_h+\\lambda I_X)\\widetilde x_h-A_h^*y_{h,\\delta}.$$\nDefine\n$$\\begin{aligned}b_{\\mathrm{bias}}&=x^\\dagger-R_\\lambda y,&b_{\\mathrm{data}}&=R_\\lambda y-R_\\lambda y_\\delta,\\\\b_{\\mathrm{operator}}&=(R_\\lambda-R_{\\lambda,h})y_{h,\\delta},&b_{\\mathrm{pre}}&=R_\\lambda d_h,\\\\b_{\\mathrm{solve}}&=R_{\\lambda,h}y_{h,\\delta}-\\widetilde x_h.\\end{aligned}$$\nThen the exact error identity and its triangle bound are\n$$x^\\dagger-\\widetilde x_h=b_{\\mathrm{bias}}+b_{\\mathrm{data}}+b_{\\mathrm{pre}}+b_{\\mathrm{operator}}+b_{\\mathrm{solve}},$$\n$$\\|x^\\dagger-\\widetilde x_h\\|\\le \\|b_{\\mathrm{bias}}\\|+\\|b_{\\mathrm{data}}\\|+\\|b_{\\mathrm{pre}}\\|+\\|b_{\\mathrm{operator}}\\|+\\|b_{\\mathrm{solve}}\\|,$$\nand the four displayed term estimates give\n$$\\|x^\\dagger-\\widetilde x_h\\|\\le \\|b_{\\mathrm{bias}}\\|+\\frac{\\delta}{2\\sqrt\\lambda}+\\frac{\\|d_h\\|}{2\\sqrt\\lambda}+\\|b_{\\mathrm{operator}}\\|+\\frac{\\|r_{h,h}\\|}{\\lambda}.$$\nIf $\\|R_\\lambda-R_{\\lambda,h}\\|\\le\\eta_{\\lambda,h}$ in the induced operator\nnorm $\\|T\\|=\\sup_{\\|u\\|_X\\le1}\\|Tu\\|_X$, then\n$\\|b_{\\mathrm{operator}}\\|\\le\\eta_{\\lambda,h}\\|y_{h,\\delta}\\|_Y$. If a\nresidual evaluation separately supplies $\\widehat r_{h,h}\\in X$ and\n$\\rho_{h,h}\\ge0$ with\n$\\|\\widehat r_{h,h}-r_{h,h}\\|_X\\le\\rho_{h,h}$, then the final solve term is at\nmost $(\\|\\widehat r_{h,h}\\|_X+\\rho_{h,h})/\\lambda$. These pointwise bounds assert\nno convergence rate as the data, regularization parameter, or discretization\nchanges."
+    ],
+    "ex-ip-mesh-sequence-small-singular-values": [],
+    "ex-ip-iterative-tikhonov-solve-stopped-with-residual": []
+  }
+}

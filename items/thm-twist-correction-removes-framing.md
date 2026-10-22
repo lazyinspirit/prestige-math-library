@@ -9,6 +9,7 @@ dependency_level: 1
 deps:
   - def-colored-framed-knot-evaluation-from-ribbon-category
   - def-ribbon-evaluation-of-an-x-colored-closed-braid
+  - lem-ribbon-trace-equals-the-framed-closure-evaluation
   - lem-scalar-twist-controls-the-two-markov-stabilizations
   - def-absolutely-simple-object
   - def-exponent-sum-and-writhe-of-a-braid
@@ -42,6 +43,8 @@ depends only on the oriented unframed link type of $\widehat\beta$ when every co
 
 [[def-ribbon-evaluation-of-an-x-colored-closed-braid|Ribbon trace on a closed braid]]
 
+[[lem-ribbon-trace-equals-the-framed-closure-evaluation|Equality of the trace and framed-closure value]]
+
 [[lem-scalar-twist-controls-the-two-markov-stabilizations|Exact stabilization scalars and curl convention]]
 
 [[def-absolutely-simple-object|Absolute simplicity and scalar automorphisms]]
@@ -58,7 +61,7 @@ depends only on the oriented unframed link type of $\widehat\beta$ when every co
 
 **Given:** The Axiom of Choice; the $k$-linear ribbon category and absolutely simple color in the Statement; a braid $\beta\in B_n$ with $n\ge1$.
 
-[F1] The braid evaluation is $t_n(\beta)=\operatorname{Tr}_L(j_{X^{\otimes n}}\rho_n(\beta))$, where $j=u\theta$ is the ribbon-induced pivotal comparison ([[def-ribbon-evaluation-of-an-x-colored-closed-braid]]).
+[F1] The algebraic ribbon trace is $\operatorname{Tr}_L(j_{X^{\otimes n}}\rho_n(\beta))$, where $j=u\theta$ is a natural pivotal comparison ([[def-ribbon-evaluation-of-an-x-colored-closed-braid]]). Under countable choice, this equals the blackboard-framed closure value $t_n(\beta)$ used in the Statement ([[lem-ribbon-trace-equals-the-framed-closure-evaluation]]).
 
 [F2] Categorical trace is cyclic: $\operatorname{Tr}_L(ac)=\operatorname{Tr}_L(c^{\vee\vee}a)$ for the stated typed morphisms ([[thm-basic-properties-of-the-categorical-trace]]).
 
@@ -80,7 +83,7 @@ depends only on the oriented unframed link type of $\widehat\beta$ when every co
 
 **Given:** The hypotheses in the Statement and [F1]–[F6], [A1]–[A2].
 
-1.1 Fix $\gamma\in B_n$. Put $j=j_{X^{\otimes n}}$ and $\rho=\rho_n$. By [F1], $t_n(\gamma\beta\gamma^{-1})=\operatorname{Tr}_L(j\rho(\gamma)\rho(\beta)\rho(\gamma)^{-1})$. Apply [F2] with $a=j\rho(\gamma)$ and $c=\rho(\beta)\rho(\gamma)^{-1}$. Naturality of $j$ at $\rho(\gamma)^{-1}$ gives $(\rho(\gamma)^{-1})^{\vee\vee}j=j\rho(\gamma)^{-1}$, and a second use of [F2] then gives $t_n(\gamma\beta\gamma^{-1})=t_n(\beta)$. The exponent sum is also unchanged by [F4], so $J_X$ is invariant under conjugation. [F1, F2, F4, given, algebra]
+1.1 By [F6], the assumed Axiom of Choice supplies countable choice, so [F1]'s closure comparison identifies every $t_n$ in the Statement with the algebraic trace. Fix $\gamma\in B_n$ and put $j=j_{X^{\otimes n}}$, $\rho=\rho_n$. Apply [F2] with $a=j\rho(\gamma)\rho(\beta)$ and $c=\rho(\gamma)^{-1}$ to obtain $t_n(\gamma\beta\gamma^{-1})=\operatorname{Tr}_L((\rho(\gamma)^{-1})^{\vee\vee}j\rho(\gamma)\rho(\beta))$. Naturality of $j$ gives $(\rho(\gamma)^{-1})^{\vee\vee}j=j\rho(\gamma)^{-1}$, so this is $t_n(\beta)$. The exponent sum is unchanged by [F4], hence $J_X$ is invariant under conjugation. [F1, F2, F4, F6, given, algebra]
 
 2.1 For a positive or negative stabilization, [F3] multiplies $t_n$ by $\lambda^{\pm1}$ and [F4] changes $w$ by $\pm1$. Hence $\lambda^{-w(\iota_n\beta\sigma_n^{\pm1})}t_{n+1}(\iota_n\beta\sigma_n^{\pm1})=\lambda^{-w(\beta)\mp1}\lambda^{\pm1}t_n(\beta)=\lambda^{-w(\beta)}t_n(\beta)$. The scalar is available because [A1] makes the invertible twist a unique $\lambda\in k^\times$; the positive sign is fixed by [F3]. Thus $J_X$ is invariant under both stabilizations and their inverses. [F3, F4, A1, step 1.1, algebra]
 

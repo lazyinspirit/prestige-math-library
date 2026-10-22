@@ -20,10 +20,10 @@ sources:
   references:
     - title: "Peter S. Ozsvath, Andras I. Stipsicz, and Zoltan Szabo, Grid Homology for Knots and Links, Exercise 4.4.3"
       url: "https://web.math.princeton.edu/~petero/GridHomologyBook.pdf"
-      locator: "Printed p.72; 2-by-2 and 3-by-3 fully blocked unknot grids"
+      locator: "Printed p.73 (PDF p.78 in the inspected edition), Definition 4.4.2 and Exercise 4.4.3; fully blocked homology and the 2-by-2 and 3-by-3 unknot exercise"
     - title: "Ciprian Manolescu, Peter Ozsvath, and Sucharit Sarkar, A combinatorial description of knot Floer homology, §4"
       url: "https://arxiv.org/pdf/math/0607691"
-      locator: "Printed pp.14–15; grid example calculations and the tilde stable factor statement"
+      locator: "§1, printed pp.3–5 (rectangle differential and Theorem 1.1 stable factor); §4.1, printed pp.19–20 (example calculations). The rank-two calculation here is proved locally"
 ---
 
 ## Statement
@@ -66,6 +66,6 @@ Let $G_2$ be the toroidal $2\times2$ grid whose bottom row has $O$ in its left c
 
 1.1 Starting at the bottom-left $O$, the oriented route follows its row to the bottom-right $X$, then follows that column to the top-right $O$, then that row to the top-left $X$, then that column back to the starting $O$. Thus the link has one component. Its planar projection has no transverse self-intersection: the four segments meet only at these marked turning points, and smoothing the four corners gives a simple closed planar curve, which bounds a disk. Therefore it is an unknot. [F1, given, construct]
 
-1.2 There are exactly two grid states, the two permutations of two columns. For either ordered pair of distinct states, the rectangles from the first state to the second are the bottom-left and top-right cells, each containing one $O$; the reverse rectangles are the bottom-right and top-left cells, each containing one $X$. No such rectangle is counted in tilde mode, and there are no rectangles from a state to itself. Hence the tilde differential is zero. [F1, F2, construct]
+1.2 There are exactly two grid states: $\mathbf x=\{(0,0),(1,1)\}$ and $\mathbf y=\{(0,1),(1,0)\}$, with coordinates read modulo two. The rectangles from $\mathbf x$ to $\mathbf y$ are the bottom-left and top-right cells, each containing one $O$; the rectangles from $\mathbf y$ to $\mathbf x$ are the bottom-right and top-left cells, each containing one $X$. No such rectangle is counted in tilde mode, and there are no rectangles from a state to itself. Hence the tilde differential is zero. [F1, F2, construct]
 
 2.1 The tilde chain group has its two grid states as a basis, and its differential is zero by step 1.2. The chain condition is supplied by [F3], so its homology equals this two-dimensional chain group and has rank two. [F3, step 1.2, algebra] ∎

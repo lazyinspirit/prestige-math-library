@@ -54,15 +54,18 @@ Assume $\mathrm{AC}_\omega$. Every connected reduced alternating diagram $D$ of 
 
 [F3] A connected alternating diagram represents a nonsplit link ([[lem-connected-alternating-link-is-nonsplit]]).
 
-[F4] Every connected reduced alternating diagram has bracket span $4c(D)$, and every connected diagram $E$ has bracket span at most $4c(E)$ ([[lem-connected-diagram-bracket-span-bound-and-alternating-equality]]).
+[F4] Every nonempty connected reduced alternating diagram has bracket span $4c(D)$, and every nonempty connected diagram $E$ has bracket span at most $4c(E)$ ([[lem-connected-diagram-bracket-span-bound-and-alternating-equality]]).
 
-[F5] The normalized bracket is an oriented link invariant under $\mathrm{AC}_\omega$ ([[thm-normalized-bracket-is-an-oriented-link-invariant]]).
+[F5] The normalized bracket is an invariant of nonempty oriented links under $\mathrm{AC}_\omega$; it multiplies the raw bracket by a Laurent monomial ([[thm-normalized-bracket-is-an-oriented-link-invariant]]).
 
 [F6] A reduced alternating diagram is connected and alternating by definition ([[def-reduced-alternating-link-diagram]]).
 
 ## Proof
-1.1 Let $E$ be any regular diagram representing the same underlying unoriented link type as $L$. The link $L$ is nonempty because $D$ is connected, so $E$ is nonempty. If its projection were disconnected, [F2] would make $L$ split, contradicting [F3] applied to $D$ and [F6]. Hence every competing diagram $E$ is connected. Orient each component of $E$ so an ambient isotopy to $L$ preserves its orientation. [given, F2, F3, F6, choose, contradiction]
 
-2.1 By [F4], $\operatorname{span}_A\langle D\rangle=4c(D)$ and $\operatorname{span}_A\langle E\rangle\le4c(E)$. The normalized bracket multiplies each raw bracket by a monomial, which shifts all exponents equally and preserves span. By [A1] and [F5], the normalized bracket values for the oriented diagrams $D$ and $E$ agree. Therefore $4c(D)\le4c(E)$ and $c(D)\le c(E)$. [A1, F4, F5, step 1.1, algebra]
+1.1 If $D$ is empty, it has zero crossings. It is a regular diagram of $L$, so [F1] gives $0\le c(L)\le c(D)=0$, proving the claim in this case without evaluating a bracket. Henceforth $D$ and the represented link $L$ are nonempty. [given, F1, cases]
 
-3.1 The diagram $D$ is one of the regular diagrams in the nonempty crossing-count set of [F1], so $c(L)\le c(D)$. Step 2.1 shows that $c(D)$ is no larger than any member of that set, and therefore $c(D)\le c(L)$. Combining the inequalities proves $c(D)=c(L)$. [F1, step 2.1, choose] ∎
+2.1 Let $E$ be any regular diagram representing the same underlying unoriented link type as $L$. Since $L$ is nonempty, so is $E$. If its projection were disconnected, [F2] would make $L$ split, contradicting [F3] applied to $D$ and [F6]. Hence every competing diagram $E$ is connected. Orient each component of $E$ so an ambient isotopy to $L$ preserves its orientation. [given, F2, F3, F6, step 1.1, choose, contradiction]
+
+3.1 By [F4], $\operatorname{span}_A\langle D\rangle=4c(D)$ and $\operatorname{span}_A\langle E\rangle\le4c(E)$. The normalized bracket multiplies each raw bracket by a monomial, which shifts all exponents equally and preserves span. By [A1] and [F5], the normalized bracket values for the nonempty oriented diagrams $D$ and $E$ agree. Therefore $4c(D)\le4c(E)$ and $c(D)\le c(E)$. [A1, F4, F5, step 2.1, algebra]
+
+4.1 The diagram $D$ is one of the regular diagrams in the nonempty crossing-count set of [F1], so $c(L)\le c(D)$. Step 3.1 shows that $c(D)$ is no larger than any member of that set, and therefore $c(D)\le c(L)$. Combining the inequalities proves $c(D)=c(L)$. [F1, step 3.1, choose] ∎

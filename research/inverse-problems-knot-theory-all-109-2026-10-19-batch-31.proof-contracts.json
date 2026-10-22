@@ -107,7 +107,7 @@
       "derivations": [
         {
           "id": "step-1-1",
-          "claim": "Set $\\lambda:=\\mu-\\nu$. If $K\\subset\\Omega$ is compact and nonempty, then for every sufficiently large $m$, rational inner balls with doubled closures in $\\Omega\\cap\\{x:\\operatorname{dist}(x,K)<1/m\\}$ cover $K$; [F2] gives a finite subcover, and ordering finite rational lists by natural-number codes gives a least such cover. Put the fixed bump [F3] on each selected ball and combine them as $\\eta_m=1-\\prod_j(1-\\psi_{m,j})$. Then $0\\le\\eta_m\\le1$, it equals one on $K$, is supported in the $1/m$-neighborhood of $K$, and $\\eta_m(x)\\to\\mathbf1_K(x)$. Since each $\\eta_m$ is a smooth compactly supported test function, $\\int\\eta_m\\,d\\lambda=0$; dominated convergence [F4] with respect to the finite regular total-variation measure [F1] gives $\\lambda(K)=0$. The empty compact set has measure zero directly.",
+          "claim": "If $\\Omega=\\varnothing$, equality is immediate. If $n=0$ and $\\Omega\\ne\\varnothing$, its singleton indicator is a smooth compactly supported test and determines every measure. Assume henceforth $n\\ge1$. Set $\\lambda:=\\mu-\\nu$. If $K\\subset\\Omega$ is compact and nonempty, then for every sufficiently large $m$, rational inner balls with doubled closures in $\\Omega\\cap\\{x:\\operatorname{dist}(x,K)<1/m\\}$ cover $K$; [F2] gives a finite subcover, and ordering finite rational lists by natural-number codes gives a least such cover. Put the fixed bump [F3] on each selected ball and combine them as $\\eta_m=1-\\prod_j(1-\\psi_{m,j})$. Then $0\\le\\eta_m\\le1$, it equals one on $K$, is supported in the $1/m$-neighborhood of $K$, and $\\eta_m(x)\\to\\mathbf1_K(x)$. Since each $\\eta_m$ is a smooth compactly supported test function, $\\int\\eta_m\\,d\\lambda=0$; dominated convergence [F4] with respect to the finite regular total-variation measure [F1] gives $\\lambda(K)=0$. The empty compact set has measure zero directly.",
           "step": "1.1",
           "inputs": [
             "F1",
@@ -296,10 +296,27 @@
         "status": "complete",
         "reviewer": "alpha-batch-31",
         "notes": "Proof 1.1–2.1: coded finite rational-ball cutoffs converge pointwise to each compact indicator and are dominated by one against finite |mu-nu|. Inner regularity then determines every Borel value; empty compacts and domain give zero. Reviewed regularity/total-variation conventions, not merely equality of distribution names. Current carrier and exact cited local prerequisite statements independently read; reader and refuter report no findings. No repair required."
+      },
+      "step5_repair_notes": {
+        "report": "research/inverse-problems-knot-theory-all-109-2026-10-19-step5-v2/step5-v2-initial-r1-u31.json",
+        "reason": "The all-Borel conclusion is valid: the regular-complex definition expressly uses all-Borel regularity, and even finite Radon regularity upgrades to it. The omitted elementary upgrade is now given explicitly using K=C minus G, with each of two errors below epsilon/2; domination transfers it to the difference variation. Compact smooth tests and dominated convergence then determine all Borel masses. Added empty and singleton-domain cases without changing the Statement.",
+        "independent_review_claimed": false
       }
     },
     "lem-ip-vector-radon-variation-is-radon": {
       "citations": [
+        {
+          "fact": "F1",
+          "source": "def-radon-measure-on-an-lch-space",
+          "source_section": "Definition",
+          "quote": "For this page, a Borel measure $\\mu$ on a locally compact Hausdorff space is\n**Radon** when $\\mu(K)<\\infty$ for every compact $K$, and, for every Borel\n$E$ and every open $U$,\n$$\\mu(E)=\\inf_{E\\subseteq V\\text{ open}}\\mu(V),\\qquad \\mu(U)=\\sup_{K\\subseteq U\\text{ compact}}\\mu(K).$$\nCohn calls this convention regular. It does not assert compact inner\napproximation for arbitrary Borel $E$.",
+          "uses": [
+            "1.1",
+            "2.1",
+            "3.1",
+            "4.1"
+          ]
+        },
         {
           "fact": "F1",
           "source": "def-regular-complex-borel-measure-on-an-lch-space",
@@ -337,7 +354,7 @@
       "derivations": [
         {
           "id": "step-1-1",
-          "claim": "For every Borel $A$ and every countable Borel partition $(A_j)$ of $A$, the Euclidean norm satisfies $|\\mu(A_j)|\\le\\sum_{i=1}^m|\\mu_i(A_j)|$. Summing over $j$ gives $V(A)\\le\\lambda(A)$ for $\\lambda:=\\sum_{i=1}^m|\\mu_i|$, so $V$ is finite and $V(\\Omega)<\\infty$.",
+          "claim": "If $m=0$, the vector measure and $V$ vanish and the zero field gives the asserted supremum. If $\\Omega=\\varnothing$, the conclusion is immediate. If $n=0$ and $\\Omega\\ne\\varnothing$, then $\\Omega$ is a singleton, $V(\\Omega)=|\\mu(\\Omega)|$, and the constant field $\\mu(\\Omega)/|\\mu(\\Omega)|$ attains the supremum when the vector is nonzero (use the zero field otherwise). Assume henceforth $n,m\\ge1$. For every Borel $A$ and every countable Borel partition $(A_j)$ of $A$, the Euclidean norm satisfies $|\\mu(A_j)|\\le\\sum_{i=1}^m|\\mu_i(A_j)|$. Summing over $j$ gives $V(A)\\le\\lambda(A)$ for $\\lambda:=\\sum_{i=1}^m|\\mu_i|$, so $V$ is finite and $V(\\Omega)<\\infty$.",
           "step": "1.1",
           "inputs": [
             "F1",
@@ -395,7 +412,7 @@
         {
           "case": "empty",
           "status": "checked",
-          "evidence": "step 1.1 yields zero variation on the empty set."
+          "evidence": "Proof 1.1 treats empty Omega and the zero-dimensional vector m=0 directly."
         },
         {
           "case": "zero",
@@ -405,7 +422,7 @@
         {
           "case": "one",
           "status": "checked",
-          "evidence": "For m=1 the same partition and norm formula is ordinary scalar total variation;1.1's coordinate domination and4.1's sign directions still apply.",
+          "evidence": "For n=0 and nonempty Omega, 1.1 evaluates the singleton vector mass; its normalized constant vector field attains the supremum, with the zero field when that mass vanishes. The m=1 case remains scalar variation.",
           "template_review": {
             "upheld": true,
             "by": "/root",
@@ -539,6 +556,11 @@
         "status": "complete",
         "reviewer": "alpha-batch-31",
         "notes": "Proof 1.1–4.1: partition variation is dominated by the finite sum of regular coordinate variations; finite near-optimal partitions prove the reverse countable-additivity bound without countable selection. Domination transfers inner/outer regularity. Disjoint compact approximants and disjoint relatively compact open neighborhoods build norm<=1 fields approaching the partition sum; the omitted, tail and cutoff errors total below 3 epsilon. Zero variation uses the zero field. Current carrier and exact cited local prerequisite statements independently read; reader and refuter report no findings. No repair required."
+      },
+      "step5_repair_notes": {
+        "report": "research/inverse-problems-knot-theory-all-109-2026-10-19-step5-v2/step5-v2-initial-r1-u31.json",
+        "reason": "The core partition variation proof is sound, but F1 omitted the elementary upgrade from finite Radon regularity to compact approximation of all Borel sets. Added the explicit C minus G argument and the finite union/intersection argument for the dominating sum lambda. Domination now justifies both approximations in 3.1 and the compact witnesses in 4.1. Countable additivity uses only finitely many near-optimal partitions at a time. Empty vector, empty space and singleton-space cases are explicit; the Statement is unchanged.",
+        "independent_review_claimed": false
       }
     },
     "lem-ip-open-euclidean-locally-finite-smooth-partition": {
@@ -592,7 +614,7 @@
       "derivations": [
         {
           "id": "step-1-1",
-          "claim": "If $\\Omega=\\varnothing$, the empty family proves the claim. Otherwise, for $m\\ge1$ set $K_m=\\{x:|x|\\le m,\\ \\operatorname{dist}(x,\\Omega^c)\\ge1/m\\}$ when $\\Omega\\ne\\mathbb R^n$, and set $K_m=\\overline B(0,m)$ when $\\Omega=\\mathbb R^n$; put $K_m=\\varnothing$ for $m\\le0$. Each $K_m$ is compact by [F1], the sets are nested, $K_m\\subset\\operatorname{int}K_{m+1}$, and their interiors cover $\\Omega$. The compact shells $S_m:=K_m\\setminus\\operatorname{int}K_{m-1}$ cover $\\Omega$ and lie in the open sets $U_m:=\\operatorname{int}K_{m+1}\\setminus K_{m-2}$. The family $(U_m)$ is locally finite: any compact subset of $\\Omega$ lies in some $\\operatorname{int}K_N$ and hence in $K_{m-2}$ for all sufficiently large $m$.",
+          "claim": "If $\\Omega=\\varnothing$, the empty family proves the claim. If $n=0$ and $\\Omega\\ne\\varnothing$, then $\\Omega=\\mathbb R^0$ is a singleton; choose one cover member containing it and the single function $\\eta=1$, which is smooth and compactly supported. Thus assume $n\\ge1$ and $\\Omega\\ne\\varnothing$. For $m\\ge1$ set $K_m=\\{x:|x|\\le m,\\ \\operatorname{dist}(x,\\Omega^c)\\ge1/m\\}$ when $\\Omega\\ne\\mathbb R^n$, and set $K_m=\\overline B(0,m)$ when $\\Omega=\\mathbb R^n$; put $K_m=\\varnothing$ for $m\\le0$. Each $K_m$ is compact by [F1], the sets are nested, $K_m\\subset\\operatorname{int}K_{m+1}$, and their interiors cover $\\Omega$. The compact shells $S_m:=K_m\\setminus\\operatorname{int}K_{m-1}$ cover $\\Omega$ and lie in the open sets $U_m:=\\operatorname{int}K_{m+1}\\setminus K_{m-2}$. The family $(U_m)$ is locally finite: any compact subset of $\\Omega$ lies in some $\\operatorname{int}K_N$ and hence in $K_{m-2}$ for all sufficiently large $m$.",
           "step": "1.1",
           "inputs": [
             "F1",
@@ -654,7 +676,7 @@
         {
           "case": "one",
           "status": "checked",
-          "evidence": "A cover with a single member is permitted; the shell-indexed compact cutoffs may still be many, and their normalized sum is 1 on Omega by 3.1.",
+          "evidence": "Proof 1.1 handles the singleton R^0 with the single compactly supported smooth function eta=1 in any one covering member; for n>=1 the shell construction applies.",
           "template_review": {
             "upheld": true,
             "by": "/root",
@@ -788,6 +810,11 @@
         "status": "complete",
         "reviewer": "alpha-batch-31",
         "notes": "Proof 1.1–3.1: compact exhaustion shells lie in int(K_(m+1)) minus K_(m-2); these collars are locally finite. Least coded finite subcovers by doubled rational balls avoid countable choices of arbitrary bumps; one fixed rescaled bump suffices. Positive locally finite sum can be divided out with compact subordinate supports. Empty and full Euclidean domains are handled. Current carrier and exact cited local prerequisite statements independently read; reader and refuter report no findings. No repair required."
+      },
+      "step5_repair_notes": {
+        "report": "research/inverse-problems-knot-theory-all-109-2026-10-19-step5-v2/step5-v2-initial-r1-u31.json",
+        "reason": "The positive-dimensional shell and rational-ball construction is valid and choice-free, but its cited bump and compactness interfaces require n>=1. Added the missing n=0 singleton construction eta=1 in one covering member, and restricted F1/F3 accurately to n>=1. The original Statement, compact supports, local finiteness and cover subordination are preserved.",
+        "independent_review_claimed": false
       }
     },
     "lem-ip-smooth-compact-support-dense-in-c0": {
@@ -798,7 +825,8 @@
           "source_section": "Statement",
           "quote": "Let $n \\in \\mathbb{N}$ with $n \\ge 1$, let $\\mathbb{R}^n$ be the set of functions\n$n \\to \\mathbb{R}$ and let $d_2$ be the Euclidean metric on it\n($\\mathbb{R}^n$ as the set of functions $n \\to \\mathbb{R}$, and $d_1$, $d_2$, $d_\\infty$ are metrics on it). Then:\n\n1. **Closed boxes are compact.** For reals $a_k \\le b_k$ $(k < n)$ the box\n   $Q = \\{\\, x \\in \\mathbb{R}^n : a_k \\le x_k \\le b_k \\text{ for every } k < n \\,\\}$\n   is a compact subset of $(\\mathbb{R}^n, d_2)$ (Open cover, subcover, compact metric space, and compact subset of a metric space).\n2. **Heine-Borel.** A subset $K \\subseteq \\mathbb{R}^n$ is a compact subset of\n   $(\\mathbb{R}^n, d_2)$ if and only if $K$ is closed in $\\mathbb{R}^n$\n   (The metric topology: a set is open when every one of its points has a ball around it inside the set; closed means open complement) and bounded\n   (Bounded subset, diameter, distance from a point to a set, and distance between two sets in a metric space).\n3. **The real line.** A subset $K \\subseteq \\mathbb{R}$ is a compact subset of\n   $(\\mathbb{R}, d_{\\mathbb{R}})$, the usual metric $d_{\\mathbb{R}}(x,y) = |x-y|$\n   (The absolute value makes $\\mathbb{R}$ a metric space: $d(x,y) = |x-y|$ is a metric, its open balls are the intervals $(x-r, x+r)$, and it is unbounded), if and only if $K$ is closed in\n   $\\mathbb{R}$ and bounded.\n\n**No choice principle is used.** The bisection below halves one coordinate at a\ntime and takes the **left** half whenever the left half still fails to be finitely\ncovered, the right half otherwise: a rule with two outcomes, decided by a\nproperty of the box, not a selection. That is the whole reason the theorem is\navailable in ZF, while the general \"complete and totally bounded implies compact\"\n(A complete, totally bounded metric space is compact, proved from countable choice used exactly once) is not.\n\nThe hypothesis $n \\ge 1$ is inherited from $\\mathbb{R}^n$ as the set of functions $n \\to \\mathbb{R}$, and $d_1$, $d_2$, $d_\\infty$ are metrics on it, which defines\n$\\mathbb{R}^n$ and its metrics only there; the last remark below records what\nhappens at $n = 0$.",
           "uses": [
-            "1.1"
+            "1.1",
+            "2.1"
           ]
         },
         {
@@ -810,21 +838,12 @@
             "1.1",
             "2.1"
           ]
-        },
-        {
-          "fact": "F3",
-          "source": "thm-dominated-convergence",
-          "source_section": "Statement",
-          "quote": "Let $(X,\\mathcal A,\\mu)$ be an arbitrary measure space. All functions below have domain $X$. Let $f$ and $(f_n)$ be measurable complex-valued functions such that\n$f_n\\to f$ almost everywhere and $|f_n|\\le g$ almost everywhere for a single\nnonnegative measurable function $g$ with $\\int g\\,d\\mu<+\\infty$. Then\n$f\\in L^1(\\mu)$,\n$$\\int|f_n-f|\\,d\\mu\\longrightarrow0,$$\nand hence\n$$\\int f_n\\,d\\mu\\longrightarrow\\int f\\,d\\mu.$$",
-          "uses": [
-            "2.1"
-          ]
         }
       ],
       "derivations": [
         {
           "id": "step-1-1",
-          "claim": "Let $f\\in C_0(\\Omega)$ and $\\varepsilon>0$. The set $K:=\\{x\\in\\Omega:|f(x)|\\ge\\varepsilon/3\\}$ is compact by the definition of vanishing at infinity. If $K=\\varnothing$, the zero function approximates $f$ within $\\varepsilon/3$. Otherwise cover $K$ by finitely many inner balls whose doubled closed balls lie in $\\Omega$, using compactness [F1]. Choose the corresponding bumps from [F2] and combine them as $\\chi:=1-\\prod_j(1-\\chi_j)$. Then $\\chi\\in C_c^\\infty(\\Omega)$ and $\\chi=1$ on $K$, so $\\|f-\\chi f\\|_\\infty\\le\\varepsilon/3$.",
+          "claim": "If $\\Omega=\\varnothing$, the zero function suffices. If $n=0$ and $\\Omega\\ne\\varnothing$, then its singleton supports every function and every function is smooth, so take the approximant $f$ itself. Assume $n\\ge1$. Let $f\\in C_0(\\Omega)$ and $\\varepsilon>0$. The set $K:=\\{x\\in\\Omega:|f(x)|\\ge\\varepsilon/3\\}$ is compact by the definition of vanishing at infinity. If $K=\\varnothing$, the zero function approximates $f$ within $\\varepsilon/3$. Otherwise cover $K$ by finitely many inner balls whose doubled closed balls lie in $\\Omega$, using compactness [F1]. Choose the corresponding bumps from [F2] and combine them as $\\chi:=1-\\prod_j(1-\\chi_j)$. Then $\\chi\\in C_c^\\infty(\\Omega)$ and $\\chi=1$ on $K$, so $\\|f-\\chi f\\|_\\infty\\le\\varepsilon/3$.",
           "step": "1.1",
           "inputs": [
             "F1",
@@ -836,14 +855,15 @@
         },
         {
           "id": "step-2-1",
-          "claim": "Extend $g:=\\chi f$ by zero to $\\mathbb R^n$. It is continuous and compactly supported, hence uniformly continuous. Fix a nonnegative smooth bump from [F2], normalize its integral to one, and rescale it as $\\rho_\\delta(x)=\\delta^{-n}\\rho(x/\\delta)$. Then $$\\|g*\\rho_\\delta-g\\|_\\infty\\le\\sup_{|h|\\le\\delta,\\ x\\in\\mathbb R^n}|g(x-h)-g(x)|\\to0.$$ To verify smoothness directly, for every multi-index $\\alpha$ set $$G_\\alpha(x):=\\int_{\\mathbb R^n}g(y)\\,\\partial^\\alpha\\rho_\\delta(x-y)\\,dy.$$ On each compact neighborhood of $x$, these integrands and their coordinate difference quotients are dominated by $C|g|\\mathbf1_K$ for a common compact set $K$ and finite constant $C$, since the kernel derivatives have compact support and are bounded. Dominated convergence [F3] gives continuity of each $G_\\alpha$ and $\\partial_jG_\\alpha=G_{\\alpha+e_j}$ for every coordinate $j$. Induction on $|\\alpha|$ therefore gives $g*\\rho_\\delta=G_0\\in C^\\infty(\\mathbb R^n)$. For sufficiently small $\\delta$, its support remains in $\\Omega$ because $\\operatorname{supp}g$ is compactly contained there. Taking the uniform error below $2\\varepsilon/3$ and restricting to $\\Omega$ gives an element of $C_c^\\infty(\\Omega)$ within $\\varepsilon$ of $f$.",
+          "claim": "Put $g=\\chi f$ and $L=\\operatorname{supp}g\\Subset\\Omega$. If $L=\\varnothing$, take the zero approximant. Otherwise, for each $x\\in L$, continuity gives $r_x>0$ such that $\\overline B(x,2r_x)\\subset\\Omega$ and $|g(y)-g(x)|<\\varepsilon/3$ on $B(x,2r_x)$. Finitely many inner balls $B(x_j,r_j)$ cover $L$. By [F2], let $\\psi_j$ be nonnegative smooth bumps equal to one on those inner balls and supported in their doubled balls. The sum $s=\\sum_j\\psi_j$ is positive on a neighborhood of $L$. Repeating the finite cutoff construction of step 1.1 inside the open set $\\{s>0\\}$ gives $\\zeta\\in C_c^\\infty(\\{s>0\\})$ with $0\\le\\zeta\\le1$ and $\\zeta=1$ on $L$. Define $a=\\zeta\\,s^{-1}\\sum_j g(x_j)\\psi_j$ on $\\{s>0\\}$ and extend it by zero. Its compact support lies in $\\Omega$, and the extension is smooth because $\\operatorname{supp}\\zeta\\Subset\\{s>0\\}$. Where $s>0$, the weighted average differs from $g(y)$ by at most $\\varepsilon/3$, since each nonzero weight has $|g(x_j)-g(y)|<\\varepsilon/3$. Also $\\zeta g=g$ everywhere, because $\\zeta=1$ on $\\operatorname{supp}g$. Therefore $\\|a-g\\|_\\infty\\le\\varepsilon/3$, and step 1.1 gives $\\|a-f\\|_\\infty\\le2\\varepsilon/3<\\varepsilon$. This uses only finitely many balls, bumps and sampled values, with no integration or infinite selection.",
           "step": "2.1",
           "inputs": [
+            "F1",
             "F2",
-            "F3",
             "step 1.1",
-            "given",
-            "construct"
+            "choose",
+            "construct",
+            "algebra"
           ]
         }
       ],
@@ -879,7 +899,7 @@
         {
           "case": "one",
           "status": "checked",
-          "evidence": "A single covering ball is allowed in 1.1; its one bump is chi. The argument is for arbitrary open subsets of R^n, not a claim restricted to one-dimensional Omega. Read: Statement; Proof 1.1–2.1.",
+          "evidence": "Proof 1.1 handles R^0 exactly with f itself; in higher dimensions a finite family of covering balls is permitted.",
           "template_review": {
             "upheld": true,
             "by": "/root",
@@ -901,7 +921,7 @@
         {
           "case": "degenerate",
           "status": "checked",
-          "evidence": "Omega may be unbounded; vanishing at infinity makes the chosen level set K compact, and convolution support stays in Omega after choosing delta below its positive boundary separation. Read: Statement; Proof 1.1–2.1.",
+          "evidence": "Unbounded Omega is allowed: the level set in 1.1 and support of chi f in 2.1 are compact. The finite bump average uses only these compact sets.",
           "template_review": {
             "upheld": true,
             "by": "/root",
@@ -923,7 +943,7 @@
         {
           "case": "endpoints",
           "status": "checked",
-          "evidence": "Compact support of chi f lies strictly inside Omega, so zero extension is continuous and small-kernel convolution has no boundary spill. No boundary trace value is prescribed. Read: Statement; Proof 1.1–2.1.",
+          "evidence": "In 2.1 the support of zeta is compactly contained in the open positive-denominator set {s>0} inside Omega, so extension of the smooth quotient by zero is smooth and has compact support in Omega.",
           "template_review": {
             "upheld": true,
             "by": "/root",
@@ -945,7 +965,7 @@
         {
           "case": "nonempty-choice",
           "status": "checked",
-          "evidence": "Only a finite subcover of one compact level set and one sufficiently small mollification scale are chosen for each f,epsilon; the proof states no infinite-family choice principle. Read: Statement; Proof 1.1–2.1.",
+          "evidence": "For each fixed f and epsilon, 1.1 and 2.1 choose only two finite ball covers, finitely many bumps and finitely many sampled values. No integration, countable choice or simultaneous infinitely many selections occurs.",
           "template_review": {
             "upheld": true,
             "by": "/root",
@@ -1013,6 +1033,11 @@
         "status": "complete",
         "reviewer": "alpha-batch-31",
         "notes": "Proof 1.1–2.1: the epsilon/3 level set is compact in Omega, finite bump products give a cutoff, and zero extension is continuous and uniformly continuous with compact support. Normalized nonnegative bump convolution converges uniformly; dominated difference quotients justify every derivative. Small support enlargement stays in Omega. Empty level set uses zero directly. Current carrier and exact cited local prerequisite statements independently read; reader and refuter report no findings. No repair required."
+      },
+      "step5_repair_notes": {
+        "report": "research/inverse-problems-knot-theory-all-109-2026-10-19-step5-v2/step5-v2-initial-r1-u31.json",
+        "reason": "Added the n=0 singleton case while preserving the Statement. Also repaired the Step-4 concern: the old unqualified Lebesgue convolution argument relied on measure interfaces requiring Countable Choice. A finite bump-weighted average of sampled values now approximates the compactly supported cutoff function uniformly; a second finite cutoff keeps the denominator positive on its support. The error is at most 2epsilon/3, uses no integration and no countable choice, and preserves complex as well as real C0 functions.",
+        "independent_review_claimed": false
       }
     },
     "lem-ip-lw-integral-inequality": {
@@ -1024,7 +1049,44 @@
           "quote": "Let $(X,\\mathcal A,\\mu)$ and $(Y,\\mathcal B,\\nu)$ be sigma-finite measure\nspaces, and let $f : X \\times Y \\to [0,\\infty]$ be product-measurable. Then\n$x \\mapsto \\int_Y f_x\\,d\\nu$ and $y \\mapsto \\int_X f^y\\,d\\mu$ are measurable,\nand\n\n$$\\int_{X \\times Y} f\\,d(\\mu \\times \\nu) = \\int_X \\left(\\int_Y f_x\\,d\\nu\\right)d\\mu = \\int_Y \\left(\\int_X f^y\\,d\\mu\\right)d\\nu.$$",
           "uses": [
             "1.1",
-            "1.2"
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F1",
+          "source": "thm-euclidean-lebesgue-measure-is-the-completion-of-the-product-of-lebesgue-measures",
+          "source_section": "Statement",
+          "quote": "Assume the Axiom of Countable Choice ([[def-countable-choice]]). Let\n$m,n \\ge 1$. Under the identification\n$$\\mathbb R^{m+n}=\\mathbb R^m \\times \\mathbb R^n,$$\nthe Lebesgue measure $\\lambda_{m+n}$ is the completion of the product measure\n$\\lambda_m \\times \\lambda_n$.",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "cor-lebesgue-sigma-algebra-is-the-completion-of-borel-lebesgue-measure",
+          "source_section": "Statement",
+          "quote": "Let $n \\ge 1$ and **assume the Axiom of Countable Choice**\n([[def-countable-choice]]). Write $\\beta_n$ for the restriction of $\\lambda_n$ to\nthe Borel sigma-algebra $\\mathcal{B}(\\mathbb{R}^n)$\n([[def-borel-sigma-algebra]]). Then $\\mathcal{L}(\\mathbb{R}^n)$ is exactly the\ncompletion domain of $(\\mathbb{R}^n, \\mathcal{B}(\\mathbb{R}^n), \\beta_n)$\n([[def-completion-of-a-measure-space]]), and $\\lambda_n$ is the completed measure\nthere. Explicitly,\n\n$$E \\in \\mathcal{L}(\\mathbb{R}^n) \\iff E = A\\cup N \\text{ for some } A, Z \\in \\mathcal{B}(\\mathbb{R}^n) \\text{ with } N \\subseteq Z \\text{ and } \\beta_n(Z) = 0,$$\n\nand then $\\lambda_n(E) = \\beta_n(A)$.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "thm-completion-measurable-functions-have-base-measurable-representatives",
+          "source_section": "Statement",
+          "quote": "Assume the Axiom of Countable Choice. Let $(X,\\mathcal{A}_0,\\mu)$ be a measure space and let\n$(X,\\overline{\\mathcal{A}_0},\\overline{\\mu})$ be its completion. If\n$f : X \\to \\overline{\\mathbb{R}}$ is measurable with respect to\n$\\overline{\\mathcal{A}_0}$, then there is an $\\mathcal{A}_0$-measurable function\n$g : X \\to \\overline{\\mathbb{R}}$ such that $f=g$ almost everywhere.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "A2",
+          "source": "def-countable-choice",
+          "source_section": "Definition",
+          "quote": "The **Axiom of Countable Choice**, written $\\mathrm{AC}_\\omega$, is the following\nstatement.\n\n> For every family $(X_n)_{n \\in \\mathbb{N}}$ of nonempty sets indexed by\n> $\\mathbb{N}$ there is a function $f$ with domain $\\mathbb{N}$ such that\n> $f(n) \\in X_n$ for every $n \\in \\mathbb{N}$.\n\nEquivalently, in the vocabulary of Choice function: every at most\ncountable family of nonempty sets has a choice function.",
+          "uses": [
+            "1.1"
           ]
         },
         {
@@ -1033,41 +1095,44 @@
           "source_section": "Statement",
           "quote": "Let $(X,\\mathcal A,\\mu)$ be a measure space, let $p,q\\in[1,\\infty]$ be\nconjugate exponents, and let $f,g$ be measurable real-valued functions.\n\n1. If $1\\le p<\\infty$ and $q<\\infty$ with $f\\in\\mathcal L^p(\\mu)$ and\n   $g\\in\\mathcal L^q(\\mu)$, then\n   $$\\int |fg|\\,d\\mu\\le\\|f\\|_p\\|g\\|_q.$$\n2. If $p=1$ and $q=\\infty$ with $f\\in\\mathcal L^1(\\mu)$ and\n   $g\\in L^\\infty(\\mu)$, then\n   $$\\int |fg|\\,d\\mu\\le\\|f\\|_1\\|g\\|_\\infty.$$\n3. If $p=\\infty$ and $q=1$ with $f\\in L^\\infty(\\mu)$ and\n   $g\\in\\mathcal L^1(\\mu)$, then\n   $$\\int |fg|\\,d\\mu\\le\\|f\\|_\\infty\\|g\\|_1.$$\n\nIn every case the right-hand side is finite, so $fg$ is integrable.",
           "uses": [
-            "1.2"
+            "2.1"
           ]
         }
       ],
       "derivations": [
         {
           "id": "step-1-1",
-          "claim": "For $n=2$, Tonelli [F1] factors the left side as $(\\int_{\\mathbb R}g_1)(\\int_{\\mathbb R}g_2)$, which is the right side.",
+          "claim": "First replace the $g_i$ by their Borel representatives from [F3], setting each representative to zero on its Borel set of nonfinite or negative values. The exceptional sets lie in Borel null sets $N_i$. Their coordinate lifts are null in $\\mathbb R^n$: intersect $N_i\\times\\mathbb R$ with slabs $N_i\\times[-k,k]$, $k\\ge1$, and apply the product rectangle formula in [F1], then take their countable union and permute coordinates. Completeness in [F1] therefore makes the original product Lebesgue-measurable with the same integral as the Borel product; the right-hand integrals are unchanged as well. We may henceforth assume all inputs Borel. For $n=2$, Tonelli [F1] factors the left side as $(\\int_{\\mathbb R}g_1)(\\int_{\\mathbb R}g_2)$, which is the right side.",
           "step": "1.1",
           "inputs": [
+            "A2",
             "F1",
+            "F3",
             "given",
             "base"
           ]
         },
         {
-          "id": "step-1-2",
-          "claim": "For $n\\ge3$, assume [A1]. For $i<n$ define $h_i(x_1,\\ldots,\\widehat{x_i},\\ldots,x_{n-1}):=\\int_\\mathbb R g_i(x_1,\\ldots,\\widehat{x_i},\\ldots,x_{n-1},x_n)\\,dx_n$. Tonelli [F1] makes each $h_i$ integrable. Applying Hölder [F2] in $x_n$ to the first $n-1$ factors and then Tonelli gives an upper bound for the left side of $\\int_{\\mathbb R^{n-1}}g_n(x')^{1/(n-1)}\\prod_{i<n}h_i(\\widehat{x_i}')^{1/(n-1)}\\,dx'$. Set $H(x'):=\\prod_{i<n}h_i(\\widehat{x_i}')^{1/(n-2)}$. Hölder in $x'$ with exponents $(n-1)/(n-2)$ and $n-1$ bounds this by $(\\int H)^{(n-2)/(n-1)}(\\int g_n)^{1/(n-1)}$. The induction hypothesis [A1] bounds $\\int H\\le\\prod_{i<n}(\\int h_i)^{1/(n-2)}$, while Tonelli gives $\\int h_i=\\int g_i$. Substitution yields the claimed product bound in dimension $n$.",
-          "step": "1.2",
+          "id": "step-2-1",
+          "claim": "For $n\\ge3$, assume [A1]. For $i<n$ define $h_i(x_1,\\ldots,\\widehat{x_i},\\ldots,x_{n-1}):=\\int_\\mathbb R g_i(x_1,\\ldots,\\widehat{x_i},\\ldots,x_{n-1},x_n)\\,dx_n$. Apply Tonelli [F1] using the Borel sigma-algebras: each $h_i$ is Borel and integrable, possibly infinite on a Borel null set. Set it to zero there. The lifted exceptional sets in $\\mathbb R^{n-1}$ are null by the slab argument of step 1.1. Consequently all the following sectional inequalities hold almost everywhere, and the modified $h_i$ are admissible finite inputs for [A1]. Applying Hölder [F2] in $x_n$ to the first $n-1$ factors and then Tonelli gives an upper bound for the left side of $\\int_{\\mathbb R^{n-1}}g_n(x')^{1/(n-1)}\\prod_{i<n}h_i(\\widehat{x_i}')^{1/(n-1)}\\,dx'$. Set $H(x'):=\\prod_{i<n}h_i(\\widehat{x_i}')^{1/(n-2)}$. Hölder in $x'$ with exponents $(n-1)/(n-2)$ and $n-1$ bounds this by $(\\int H)^{(n-2)/(n-1)}(\\int g_n)^{1/(n-1)}$. The induction hypothesis [A1] bounds $\\int H\\le\\prod_{i<n}(\\int h_i)^{1/(n-2)}$, while Tonelli gives $\\int h_i=\\int g_i$. Substitution yields the claimed product bound in dimension $n$.",
+          "step": "2.1",
           "inputs": [
             "A1",
             "F1",
             "F2",
+            "step 1.1",
             "given",
             "IH"
           ]
         },
         {
-          "id": "step-2-1",
-          "claim": "Induction from the base case [step 1.1] through step 1.2 proves the inequality for every integer $n\\ge2$.",
-          "step": "2.1",
+          "id": "step-3-1",
+          "claim": "Induction from the base case [step 1.1] through step 2.1 proves the inequality for every integer $n\\ge2$.",
+          "step": "3.1",
           "inputs": [
             "step 1.1",
-            "step 1.2",
-            "discharge-induction: step 1.2"
+            "step 2.1",
+            "discharge-induction: step 2.1"
           ]
         }
       ],
@@ -1108,7 +1173,8 @@
               }
             ],
             "root_adoption_record": "research/inverse-problems-knot-theory-all-109-2026-10-19-supervision-20261020/step2-supervision/battery1-boundary/lane-2/root-final-adoption.json"
-          }
+          },
+          "evidence": ""
         },
         {
           "case": "zero",
@@ -1152,7 +1218,8 @@
               }
             ],
             "root_adoption_record": "research/inverse-problems-knot-theory-all-109-2026-10-19-supervision-20261020/step2-supervision/battery1-boundary/lane-2/root-final-adoption.json"
-          }
+          },
+          "evidence": ""
         },
         {
           "case": "degenerate",
@@ -1162,7 +1229,7 @@
         {
           "case": "endpoints",
           "status": "checked",
-          "evidence": "The least admissible dimension n=2is the separate exact Tonelli factorization in 1.1, before the n−2exponent in 1.2is introduced.",
+          "evidence": "The least admissible dimension n=2is the separate exact Tonelli factorization in 1.1, before the n−2exponent in 2.1is introduced.",
           "template_review": {
             "upheld": true,
             "by": "/root",
@@ -1184,7 +1251,7 @@
         {
           "case": "nonempty-choice",
           "status": "checked",
-          "evidence": "The h_i in 1.2are defined by explicit integrals for finitely many indices; the proof makes no selection of norming functions or maximizers. [Owner-focused FIRST reviewed location: Complete Statement/Facts and induction proof1.1–2.1.]",
+          "evidence": "Countable Choice is assumed explicitly and used by the completion/Borel-representative and Euclidean product suppliers in 1.1. Only finitely many input representatives are selected after applying those suppliers. In 2.1 the h_i are explicit sectional integrals, set to zero on their Borel infinite-value null sets.",
           "template_review": {
             "upheld": true,
             "by": "/root",
@@ -1223,7 +1290,8 @@
               }
             ],
             "root_adoption_record": "research/inverse-problems-knot-theory-all-109-2026-10-19-supervision-20261020/step2-supervision/battery1-boundary/lane-2/root-final-adoption.json"
-          }
+          },
+          "evidence": ""
         },
         {
           "case": "iff-reverse",
@@ -1245,13 +1313,19 @@
               }
             ],
             "root_adoption_record": "research/inverse-problems-knot-theory-all-109-2026-10-19-supervision-20261020/step2-supervision/battery1-boundary/lane-2/root-final-adoption.json"
-          }
+          },
+          "evidence": ""
         }
       ],
       "risk_review": {
         "status": "complete",
         "reviewer": "alpha-batch-31",
         "notes": "Proof 1.1–2.1: n=2 factors by Tonelli. Integrating x_n applies (n-1)-factor Holder; outer Holder exponents (n-1)/(n-2), n-1 and dimension n-1 induction yield each integral to exponent 1/(n-1). Null factors give zero a.e.; sectional integrals can be defined arbitrarily on exceptional null sets. No infinite RHS occurs since the inputs are integrable. Current carrier and exact cited local prerequisite statements independently read; reader and refuter report no findings. No repair required."
+      },
+      "step5_repair_notes": {
+        "report": "research/inverse-problems-knot-theory-all-109-2026-10-19-step5-v2/step5-v2-initial-r1-u31.json",
+        "reason": "Ordinary Tonelli does not justify coordinate lifts of arbitrary Lebesgue-measurable inputs. The repair uses Borel representatives, proves lifted exceptional sets null by bounded slabs, identifies product and Euclidean integrals, and treats infinite sectional integrals on null sets before induction. Countable Choice is now explicit because the actual completion suppliers require it. Tao Example 1.7.13 and Theorems 1.7.15–1.7.18 were read for the product/completion distinction; the local suppliers specify the Choice scope.",
+        "independent_review_claimed": false
       }
     },
     "lem-ip-unit-vector-density-has-scalar-variation": {
@@ -1268,45 +1342,9 @@
         },
         {
           "fact": "F2",
-          "source": "def-radon-measure-on-an-lch-space",
-          "source_section": "Definition",
-          "quote": "For this page, a Borel measure $\\mu$ on a locally compact Hausdorff space is\n**Radon** when $\\mu(K)<\\infty$ for every compact $K$, and, for every Borel\n$E$ and every open $U$,\n$$\\mu(E)=\\inf_{E\\subseteq V\\text{ open}}\\mu(V),\\qquad \\mu(U)=\\sup_{K\\subseteq U\\text{ compact}}\\mu(K).$$\nCohn calls this convention regular. It does not assert compact inner\napproximation for arbitrary Borel $E$.",
-          "uses": [
-            "2.1"
-          ]
-        },
-        {
-          "fact": "F3",
-          "source": "thm-total-variation-is-a-measure",
-          "source_section": "Statement",
-          "quote": "Let $\\nu$ be a signed measure or a complex measure on $(X,\\mathcal A)$. Then\n$|\\nu|$ is a measure on $(X,\\mathcal A)$.",
-          "uses": [
-            "1.1"
-          ]
-        },
-        {
-          "fact": "F3",
           "source": "thm-dominated-convergence",
           "source_section": "Statement",
           "quote": "Let $(X,\\mathcal A,\\mu)$ be an arbitrary measure space. All functions below have domain $X$. Let $f$ and $(f_n)$ be measurable complex-valued functions such that\n$f_n\\to f$ almost everywhere and $|f_n|\\le g$ almost everywhere for a single\nnonnegative measurable function $g$ with $\\int g\\,d\\mu<+\\infty$. Then\n$f\\in L^1(\\mu)$,\n$$\\int|f_n-f|\\,d\\mu\\longrightarrow0,$$\nand hence\n$$\\int f_n\\,d\\mu\\longrightarrow\\int f\\,d\\mu.$$",
-          "uses": [
-            "1.1"
-          ]
-        },
-        {
-          "fact": "F3",
-          "source": "def-radon-measure-on-an-lch-space",
-          "source_section": "Definition",
-          "quote": "For this page, a Borel measure $\\mu$ on a locally compact Hausdorff space is\n**Radon** when $\\mu(K)<\\infty$ for every compact $K$, and, for every Borel\n$E$ and every open $U$,\n$$\\mu(E)=\\inf_{E\\subseteq V\\text{ open}}\\mu(V),\\qquad \\mu(U)=\\sup_{K\\subseteq U\\text{ compact}}\\mu(K).$$\nCohn calls this convention regular. It does not assert compact inner\napproximation for arbitrary Borel $E$.",
-          "uses": [
-            "1.1"
-          ]
-        },
-        {
-          "fact": "F3",
-          "source": "def-regular-complex-borel-measure-on-an-lch-space",
-          "source_section": "Definition",
-          "quote": "Let $X$ be a locally compact Hausdorff space. A complex Borel measure $\\mu$\non $X$ is **regular** if its total variation\n$|\\mu|$ is a regular Borel measure in the preceding, all-Borel sense. This\ntotal-variation convention is the one that controls $|\\int f\\,d\\mu|$ and the\nnorm in the $C_0$ representation theorem.",
           "uses": [
             "1.1"
           ]
@@ -1315,29 +1353,30 @@
       "derivations": [
         {
           "id": "step-1-1",
-          "claim": "By [F3], the coordinate measures of $\\mu$ are finite signed Radon measures, as required before applying [F1]. For any countable Borel partition $(A_j)$ of a Borel set $A$, the triangle inequality for vector integrals gives $\\sum_j|\\mu(A_j)|\\le\\sum_j\\int_{A_j}|\\nu|\\,d\\lambda=\\lambda(A)$. Thus $|\\mu|(A)\\le\\lambda(A)$.",
+          "claim": "The coordinate measures are well-defined by [F2]. For every countable Borel partition $(A_j)$ of a Borel set $A$, the triangle inequality for vector integrals gives $\\sum_j|\\mu(A_j)|\\le\\sum_j\\int_{A_j}|\\nu|\\,d\\lambda=\\lambda(A)$. Taking the supremum in the definition [F1] gives $V(A)\\le\\lambda(A)$.",
           "step": "1.1",
           "inputs": [
             "F1",
-            "F3",
+            "F2",
             "given",
             "algebra"
           ]
         },
         {
           "id": "step-2-1",
-          "claim": "If $\\lambda(X)=0$, step 1.1 already gives $|\\mu|(X)=0$. Otherwise fix $0<\\varepsilon<1$ and also choose it small enough that $\\varepsilon<\\lambda(X)$. By [F2] choose compact $K\\subset X$ with $\\lambda(X\\setminus K)<\\varepsilon$; then $K$ is nonempty. Uniform continuity of $\\nu$ on $K$ gives a finite Borel partition $K=\\bigsqcup_{j=1}^N A_j$ such that $|\\nu(x)-\\nu(y)|<\\varepsilon$ for all $x,y\\in A_j$. Choose $x_j\\in A_j$ for each nonempty part. Then $$|\\mu(A_j)|\\ge\\nu(x_j)\\cdot\\mu(A_j)=\\int_{A_j}\\nu(x_j)\\cdot\\nu(x)\\,d\\lambda(x)\\ge(1-\\varepsilon^2/2)\\lambda(A_j),$$ since $\\nu(x_j)\\cdot\\nu(x)=1-\\tfrac12|\\nu(x_j)-\\nu(x)|^2$. The partition of $X$ consisting of these $A_j$ and $X\\setminus K$ therefore gives $|\\mu|(X)\\ge(1-\\varepsilon^2/2)\\lambda(K)\\ge(1-\\varepsilon^2/2)(\\lambda(X)-\\varepsilon)$. Letting $\\varepsilon\\downarrow0$ and using step 1.1 proves $|\\mu|(X)=\\lambda(X)$. Applying the same argument to each Borel subset with the restricted measure proves equality on every Borel set.",
+          "claim": "Fix a Borel $A$ and $0<\\varepsilon<1$. Partition the unit sphere in $\\mathbb R^m$ into finitely many Borel pieces $C_j$ of diameter below $\\varepsilon$, by intersecting it with a sufficiently fine finite grid of half-open boxes in $[-1,1]^m$ (including the outer faces). Choose a unit vector $e_j$ in each nonempty piece, requiring only finite choice. The sets $A_j=A\\cap\\nu^{-1}(C_j)$ are a finite Borel partition of $A$, since $\\nu$ is continuous. For $x\\in A_j$, $e_j\\cdot\\nu(x)=1-\\tfrac12|e_j-\\nu(x)|^2\\ge1-\\varepsilon^2/2$. Thus $|\\mu(A_j)|\\ge e_j\\cdot\\mu(A_j)\\ge(1-\\varepsilon^2/2)\\lambda(A_j)$. Adding empty parts gives an admissible countable partition in [F1], so $V(A)\\ge(1-\\varepsilon^2/2)\\lambda(A)$. Letting $\\varepsilon\\downarrow0$ and using step 1.1 proves $V(A)=\\lambda(A)$ for every Borel $A$, including zero-mass sets.",
           "step": "2.1",
           "inputs": [
             "F1",
-            "F2",
             "step 1.1",
-            "choose"
+            "choose",
+            "construct",
+            "algebra"
           ]
         },
         {
           "id": "step-3-1",
-          "claim": "The preceding equality on all Borel subsets is precisely equality of the two positive measures $|\\mu|$ and $\\lambda$.",
+          "claim": "Consequently the partition set function is the positive Radon measure $\\lambda$ itself. This proves $|\\mu|=\\lambda$ on the stated space without any Euclidean-domain assumption or restriction of $A$ to an open set.",
           "step": "3.1",
           "inputs": [
             "step 2.1"
@@ -1349,7 +1388,7 @@
         {
           "case": "empty",
           "status": "checked",
-          "evidence": "A continuous unit-vector density against a finite positive Radon measure has variation equal to that measure. If X is empty, lambda and the vector integral are zero measures;1.1 gives variation0.",
+          "evidence": "For empty X every Borel mass is zero; the bounds in 1.1 and 2.1 hold directly.",
           "template_review": {
             "upheld": true,
             "by": "/root",
@@ -1371,12 +1410,12 @@
         {
           "case": "zero",
           "status": "checked",
-          "evidence": "step 2.1 handles λ(X)=0 using step 1.1."
+          "evidence": "For lambda(A)=0, 1.1 gives V(A)=0, including lambda(X)=0; 2.1 never divides by any mass."
         },
         {
           "case": "one",
           "status": "checked",
-          "evidence": "A continuous unit-vector density against a finite positive Radon measure has variation equal to that measure. A single nonempty partition part is allowed;2.1 only selects points from the finitely many nonempty parts.",
+          "evidence": "For each Borel A, 2.1 uses finitely many nonempty sphere pieces; representatives are chosen on the sphere, not from points of A.",
           "template_review": {
             "upheld": true,
             "by": "/root",
@@ -1398,7 +1437,7 @@
         {
           "case": "degenerate",
           "status": "checked",
-          "evidence": "A continuous unit-vector density against a finite positive Radon measure has variation equal to that measure. The zero-mass case lambda(X)=0 is separated at2.1 before choosing epsilon<lambda(X) or a nonempty compact K. [Owner-focused FIRST reviewed location: Read the current complete claim/Definition and the listed relevant numbered rows: Statement; Proof 1.1–3.1. This is boundary-case reading, not an entire-proof or accepted-supplier audit.]",
+          "evidence": "Proof 2.1 works on arbitrary Borel A directly using inverse images of sphere pieces. It does not treat A as a locally compact space or invoke the Euclidean supplier on X.",
           "template_review": {
             "upheld": true,
             "by": "/root",
@@ -1420,7 +1459,7 @@
         {
           "case": "endpoints",
           "status": "checked",
-          "evidence": "A continuous unit-vector density against a finite positive Radon measure has variation equal to that measure. The limiting epsilon↓0 in 2.1 compares lower and upper masses; the unit norm assumption supplies the identity1-|nu(x)-nu(y)|²/2.",
+          "evidence": "For every epsilon in (0,1), 2.1 gives (1-epsilon^2/2)lambda(A)<=V(A)<=lambda(A). Finite lambda(A) permits the limit epsilon down to zero.",
           "template_review": {
             "upheld": true,
             "by": "/root",
@@ -1442,7 +1481,7 @@
         {
           "case": "nonempty-choice",
           "status": "checked",
-          "evidence": "A continuous unit-vector density against a finite positive Radon measure has variation equal to that measure. Only finitely many representatives x_j are chosen from nonempty partition parts of the fixed compact K. [Owner-focused FIRST reviewed location: Read the current complete claim/Definition and the listed relevant numbered rows: Statement; Proof 1.1–3.1. This is boundary-case reading, not an entire-proof or accepted-supplier audit.]",
+          "evidence": "The finite grid in 2.1 is explicit; only finitely many unit representatives in its nonempty sphere cells are selected. No Countable Choice is required.",
           "template_review": {
             "upheld": true,
             "by": "/root",
@@ -1510,6 +1549,11 @@
         "status": "complete",
         "reviewer": "alpha-batch-31",
         "notes": "Facts F3 and Proof 1.1–3.1: dominated convergence constructs coordinate measures and domination transfers finite all-Borel regularity. Partition triangle inequality gives |mu|<=lambda; compact finite small-oscillation partitions of the continuous unit field give the reverse mass bound. Restrictions lambda|A remain finite regular measures on X, so the same compact approximation proves equality for all Borel A; no assumption that a Borel subset itself is locally compact is needed. Zero mass is explicit. Current proof and exact suppliers independently read; no reader/refuter finding or repair."
+      },
+      "step5_repair_notes": {
+        "report": "research/inverse-problems-knot-theory-all-109-2026-10-19-step5-v2/step5-v2-initial-r1-u31.json",
+        "reason": "F3 and 1.1 explicitly applied the vector-Radon theorem outside its Euclidean domain. The repaired argument defines partition variation on X and proves equality on each Borel A directly. A finite grid partitions the unit sphere into small Borel pieces; projecting the integral of each inverse-image piece onto a unit representative gives V(A)>=(1-epsilon^2/2)lambda(A), while the triangle inequality gives V(A)<=lambda(A). Letting epsilon vanish proves the full claim and measure property, with only finite choice and no Euclidean-domain application.",
+        "independent_review_claimed": false
       }
     },
     "lem-ip-bv-zero-gradient-constant-on-connected-domain": {
@@ -1627,7 +1671,7 @@
       "derivations": [
         {
           "id": "step-1-1",
-          "claim": "Let $B\\Subset\\Omega$ be any open ball and choose concentric balls $B\\Subset B'\\Subset B''\\Subset\\Omega$. By [F1] take $\\chi\\in C_c^\\infty(B'')$ equal to one on $B'$, and extend $w:=\\chi u$ by zero to $\\mathbb R^n$. For sufficiently small $\\varepsilon$, every mollifier centered at a point of $B$ is supported in $B'$. For such a point $x$, differentiating the convolution gives $\\partial_i(w*\\rho_\\varepsilon)(x)=-\\int_{B'}u(y)\\partial_{y_i}\\rho_\\varepsilon(x-y)\\,dy=0$ by the distributional identity [F2]. Thus $w*\\rho_\\varepsilon$ is constant on the convex ball $B$ by the one-dimensional fundamental theorem along each segment.",
+          "claim": "If $\\Omega=\\varnothing$, choose $c=0$. If $n=0$ and $\\Omega\\ne\\varnothing$, then $\\Omega=\\mathbb R^0$ is a singleton and its function $u$ is constant. Henceforth assume $n\\ge1$ and $\\Omega\\ne\\varnothing$. Let $B\\Subset\\Omega$ be any open ball and choose concentric balls $B\\Subset B'\\Subset B''\\Subset\\Omega$. By [F1] take $\\chi\\in C_c^\\infty(B'')$ equal to one on $B'$, and extend $w:=\\chi u$ by zero to $\\mathbb R^n$. For sufficiently small $\\varepsilon$, every mollifier centered at a point of $B$ is supported in $B'$. For such a point $x$, differentiating the convolution gives $\\partial_i(w*\\rho_\\varepsilon)(x)=-\\int_{B'}u(y)\\partial_{y_i}\\rho_\\varepsilon(x-y)\\,dy=0$ by the distributional identity [F2]. Thus $w*\\rho_\\varepsilon$ is constant on the convex ball $B$ by the one-dimensional fundamental theorem along each segment.",
           "step": "1.1",
           "inputs": [
             "A1",
@@ -1652,7 +1696,7 @@
         },
         {
           "id": "step-3-1",
-          "claim": "If $\\Omega=\\varnothing$, any constant satisfies the conclusion. Otherwise fix one ball and let $c$ be its almost-everywhere value. Let $S$ be the set of points of $\\Omega$ having a neighborhood on which $u=c$ almost everywhere. It is nonempty and open. If $x\\in\\overline S\\cap\\Omega$, choose a ball $B\\Subset\\Omega$ containing $x$ and a point of $S$; step 2.1 makes $u$ almost everywhere constant on $B$, and its positive-measure intersection with a neighborhood from $S$ forces that constant to be $c$. Thus $x\\in S$, so $S$ is relatively closed. Connectedness [F5] gives $S=\\Omega$. By the countable rational base [F6], choose a countable cover of $\\Omega$ by rational balls contained in these neighborhoods; the union of their exceptional null sets is null, hence $u=c$ almost everywhere on all of $\\Omega$.",
+          "claim": "If $\\Omega=\\varnothing$, any constant satisfies the conclusion. Otherwise fix one ball and let $c$ be its almost-everywhere value. Let $S$ be the set of points of $\\Omega$ having a neighborhood on which $u=c$ almost everywhere. It is nonempty and open. If $x\\in\\overline S\\cap\\Omega$, choose a ball $B\\Subset\\Omega$ containing $x$ and a point of $S$; step 2.1 makes $u$ almost everywhere constant on $B$, and its positive-measure intersection with a neighborhood from $S$ forces that constant to be $c$. Thus $x\\in S$, so $S$ is relatively closed. Connectedness [F5] gives $S=\\Omega$. By the countable rational base [F6], choose a countable cover of $\\Omega$ by rational balls contained in these neighborhoods; the union of their exceptional null sets is null, hence $u=c$ almost everywhere on all of $\\Omega$. The constants $c_j$ and $c_B$ may be complex; completeness of $\\mathbb C$ justifies their limits. When $u$ is real almost everywhere on a nonempty domain, its a.e. constant $c$ is real because each ball has positive measure.",
           "step": "3.1",
           "inputs": [
             "F5",
@@ -1673,12 +1717,12 @@
         {
           "case": "zero",
           "status": "checked",
-          "evidence": "The zero function has zero distributional gradient and gives local constants0 in steps 1.1–2.1, hence c=0 on any nonempty connected Omega in step 3.1."
+          "evidence": "Proof 1.1 handles the empty domain with c=0. Proof 3.1 retains a real constant for real u; the complex example u=i has constant c=i."
         },
         {
           "case": "one",
           "status": "checked",
-          "evidence": "For n=1, balls are intervals and the zero derivative of the mollified scalar curve makes it constant by the same segment FTC in step 1.1. No n>=2 restriction is used."
+          "evidence": "Proof 1.1 handles R^0 as a singleton; positive-dimensional ball arguments begin only at n>=1."
         },
         {
           "case": "degenerate",
@@ -1754,6 +1798,11 @@
         "status": "complete",
         "reviewer": "alpha-batch-31",
         "notes": "Proof 1.1–3.1: cutoff mollification has zero classical gradient only on an interior ball; L1 convergence makes its constants Cauchy. Positive-measure ball overlaps identify constants; connectedness and a countable base globalize the a.e. identity. Empty domain explicitly allowed. CC covers the mollifier suppliers and countable null unions. Current carrier and exact cited local prerequisite statements independently read; reader and refuter report no findings. No repair required."
+      },
+      "step5_repair_notes": {
+        "report": "research/inverse-problems-knot-theory-all-109-2026-10-19-step5-v2/step5-v2-initial-r1-u31.json",
+        "reason": "The original real constant conclusion is false for u=i on R under the complex distribution interface. The repair proves constancy in C and retains the real constant conclusion for real u. Mollification constants converge in C; positive-measure ball overlaps and a countable base globalize them. Empty and zero-dimensional domains are handled directly. The three direct item consumers use real BV or real L2 functions, so their actual uses remain valid.",
+        "independent_review_claimed": false
       }
     },
     "lem-ip-bv-test-field-characterization-and-lsc": {
@@ -2054,7 +2103,7 @@
       "derivations": [
         {
           "id": "step-1-1",
-          "claim": "By [F6], take a countable locally finite nonnegative smooth partition of unity $(\\eta_j)$ on $\\Omega$, with each $\\eta_j$ compactly supported in $\\Omega$.",
+          "claim": "If $\\Omega=\\varnothing$, take the zero sequence. If $n=0$ and $\\Omega\\ne\\varnothing$, its singleton supports $u$ itself, which is smooth, has zero gradient and variation, and gives the required constant sequence. Assume henceforth $n\\ge1$. By [F6], take a countable locally finite nonnegative smooth partition of unity $(\\eta_j)_{j\\ge1}$ on $\\Omega$, with each $\\eta_j$ compactly supported in $\\Omega$.",
           "step": "1.1",
           "inputs": [
             "F6",
@@ -2064,7 +2113,7 @@
         },
         {
           "id": "step-2-1",
-          "claim": "Extend each $w_j:=\\eta_j u$ by zero to $\\mathbb R^n$. Fix a nonnegative unit-mass smooth bump $\\rho$ and its rescalings $\\rho_\\varepsilon$. For each $j$, the approximate-identity property [F2] gives $w_j*\\rho_\\varepsilon\\to w_j$ in $L^1$, and also $(u\\nabla\\eta_j)*\\rho_\\varepsilon\\to u\\nabla\\eta_j$ in $L^1$. Choose the least nonnegative integer $m_j$ for which $\\varepsilon_j:=2^{-m_j}$ is small enough that $\\varepsilon_j<2^{-j}$, the convolution supports remain in $\\Omega$, and $\\|w_j*\\rho_{\\varepsilon_j}-w_j\\|_1+\\|(u\\nabla\\eta_j)*\\rho_{\\varepsilon_j}-u\\nabla\\eta_j\\|_1<2^{-j}\\delta$. Set $u_\\delta:=\\sum_j w_j*\\rho_{\\varepsilon_j}$. This sum is locally finite: for a compact $C\\Subset\\Omega$, choose $r>0$ so its closed $r$-neighborhood $C_r$ is compactly contained in $\\Omega$. For all sufficiently large $j$, $\\varepsilon_j<r$; if the thickened support of $w_j$ meets $C$, then $\\operatorname{supp}\\eta_j$ meets $C_r$, and local finiteness of $(\\eta_j)$ leaves only finitely many such indices. Thus $u_\\delta$ is smooth by [F3]. Summing the first error terms and using $\\sum_j\\eta_j=1$ gives $\\|u_\\delta-u\\|_{L^1(\\Omega)}<\\delta$.",
+          "claim": "Fix $\\delta>0$. Extend each $w_j:=\\eta_j u$ by zero to $\\mathbb R^n$. Fix a nonnegative unit-mass smooth bump $\\rho$ and its rescalings $\\rho_\\varepsilon$. For each $j$, the approximate-identity property [F2] gives $w_j*\\rho_\\varepsilon\\to w_j$ in $L^1$, and also $(u\\nabla\\eta_j)*\\rho_\\varepsilon\\to u\\nabla\\eta_j$ in $L^1$. Choose the least nonnegative integer $m_j$ for which $\\varepsilon_j:=2^{-m_j}$ is small enough that $\\varepsilon_j<2^{-j}$, the convolution supports remain in $\\Omega$, and $\\|w_j*\\rho_{\\varepsilon_j}-w_j\\|_1+\\|(u\\nabla\\eta_j)*\\rho_{\\varepsilon_j}-u\\nabla\\eta_j\\|_1<2^{-j}\\delta$. Set $u_\\delta:=\\sum_j w_j*\\rho_{\\varepsilon_j}$. This sum is locally finite: for a compact $C\\Subset\\Omega$, choose $r>0$ so its closed $r$-neighborhood $C_r$ is compactly contained in $\\Omega$. For all sufficiently large $j$, $\\varepsilon_j<r$; if the thickened support of $w_j$ meets $C$, then $\\operatorname{supp}\\eta_j$ meets $C_r$, and local finiteness of $(\\eta_j)$ leaves only finitely many such indices. Thus $u_\\delta$ is smooth by [F3]. Summing the first error terms and using $\\sum_j\\eta_j=1$ gives $\\|u_\\delta-u\\|_{L^1(\\Omega)}<\\delta$.",
           "step": "2.1",
           "inputs": [
             "A1",
@@ -2078,7 +2127,7 @@
         },
         {
           "id": "step-3-1",
-          "claim": "The product rule follows by testing against $C_c^\\infty$: $D(\\eta_j u)=\\eta_jDu+u\\nabla\\eta_j\\,dx$. Convolution commutes with distributional derivatives by the defining test pairing and Fubini [F4]. Since $\\sum_j\\eta_j=1$, local finiteness gives $\\sum_j u\\nabla\\eta_j=0$. Therefore $\\nabla u_\\delta=\\sum_j (\\eta_jDu)*\\rho_{\\varepsilon_j}+\\sum_j\\big((u\\nabla\\eta_j)*\\rho_{\\varepsilon_j}-u\\nabla\\eta_j\\big)$. For the first sum, $| (\\eta_jDu)*\\rho_{\\varepsilon_j}|\\le(\\eta_j|Du|)*\\rho_{\\varepsilon_j}$ pointwise, so Tonelli and $\\sum_j\\eta_j=1$ bound its $L^1$ norm by $|Du|(\\Omega)$. The second sum has $L^1$ norm below $\\delta$ by the choices in step 2.1. Hence $\\int_\\Omega|\\nabla u_\\delta|\\,dx\\le TV(u;\\Omega)+\\delta$.",
+          "claim": "The product rule follows by testing against $C_c^\\infty$: $D(\\eta_j u)=\\eta_jDu+u\\nabla\\eta_j\\,dx$. Convolution commutes with distributional derivatives by the defining test pairing and Tonelli [F4] applied to positive and negative parts. These interchanges are product-measurable: each localized $L^1$ density depends only on its own integration variable, and all remaining kernel and smooth test factors are Borel on the product. Absolute integrability follows from the compact supports, the $L^1$ density norms and the finite coordinate variations. Thus [F4] applies before making the interchange. Since $\\sum_j\\eta_j=1$, local finiteness gives $\\sum_j u\\nabla\\eta_j=0$. Therefore $\\nabla u_\\delta=\\sum_j (\\eta_jDu)*\\rho_{\\varepsilon_j}+\\sum_j\\big((u\\nabla\\eta_j)*\\rho_{\\varepsilon_j}-u\\nabla\\eta_j\\big)$. For the first sum, $| (\\eta_jDu)*\\rho_{\\varepsilon_j}|\\le(\\eta_j|Du|)*\\rho_{\\varepsilon_j}$ pointwise, so Tonelli and $\\sum_j\\eta_j=1$ bound its $L^1$ norm by $|Du|(\\Omega)$. The second sum has $L^1$ norm below $\\delta$ by the choices in step 2.1. Hence $\\int_\\Omega|\\nabla u_\\delta|\\,dx\\le TV(u;\\Omega)+\\delta$.",
           "step": "3.1",
           "inputs": [
             "F1",
@@ -2089,7 +2138,7 @@
         },
         {
           "id": "step-4-1",
-          "claim": "Take $\\delta_k=1/k$ and set $u_k=u_{\\delta_k}$. Step 2.1 gives $u_k\\to u$ in $L^1$, while step 3.1 gives $\\limsup_k\\int_\\Omega|\\nabla u_k|\\,dx\\le TV(u;\\Omega)$. For each $k$, integration by parts against compactly supported smooth tests identifies $D u_k=\\nabla u_k\\,dx$. Since $\\nabla u_k$ is continuous and integrable by step 3.1, [F8] gives $u_k\\in BV(\\Omega)$ and $TV(u_k;\\Omega)=\\int_\\Omega|\\nabla u_k|\\,dx$. The choice-free lower-semicontinuity clause of [F5], now applied to $u_k,u\\in BV(\\Omega)$, gives the reverse inequality. Thus the variations converge. For $\\Omega=\\mathbb R^n$, choose a smooth cutoff $\\chi_R$ equal to one on $B(0,R)$, supported in $B(0,2R)$, and satisfying $|\\nabla\\chi_R|\\le C/R$, using [F7]. Since each $u_{1/(2k)}$ and its gradient are integrable, choose $R_k$ so its $L^1$ tail, gradient tail, and $C\\|u_{1/(2k)}\\|_1/R_k$ are all below $1/k$. The products $\\chi_{R_k}u_{1/(2k)}$ are compactly supported and smooth, converge to $u$ in $L^1$, and have gradient integrals bounded above by $TV(u;\\mathbb R^n)+O(1/k)$; [F8] puts them in $BV(\\mathbb R^n)$ and lower semicontinuity gives convergence of their variations as well.",
+          "claim": "Take $\\delta_k=1/(k+1)$ for $k\\in\\mathbb N$ and set $u_k=u_{\\delta_k}$. Step 2.1 gives $u_k\\to u$ in $L^1$, while step 3.1 gives $\\limsup_k\\int_\\Omega|\\nabla u_k|\\,dx\\le TV(u;\\Omega)$. For each $k$, integration by parts against compactly supported smooth tests identifies $D u_k=\\nabla u_k\\,dx$. Since $\\nabla u_k$ is continuous and integrable by step 3.1, [F8] gives $u_k\\in BV(\\Omega)$ and $TV(u_k;\\Omega)=\\int_\\Omega|\\nabla u_k|\\,dx$. The choice-free lower-semicontinuity clause of [F5], now applied to $u_k,u\\in BV(\\Omega)$, gives the reverse inequality. Thus the variations converge. For $\\Omega=\\mathbb R^n$, choose a smooth cutoff $\\chi_R$ equal to one on $B(0,R)$, supported in $B(0,2R)$, and satisfying $|\\nabla\\chi_R|\\le C/R$, using [F7]. Since each $u_{1/(2(k+1))}$ and its gradient are integrable, choose $R_k$ so its $L^1$ tail, gradient tail, and $C\\|u_{1/(2(k+1))}\\|_1/R_k$ are all below $1/(k+1)$. The products $\\chi_{R_k}u_{1/(2(k+1))}$ are compactly supported and smooth, converge to $u$ in $L^1$, and have gradient integrals bounded above by $TV(u;\\mathbb R^n)+O(1/(k+1))$; [F8] puts them in $BV(\\mathbb R^n)$ and lower semicontinuity gives convergence of their variations as well.",
           "step": "4.1",
           "inputs": [
             "A1",
@@ -2108,7 +2157,7 @@
         {
           "case": "empty",
           "status": "checked",
-          "evidence": "If Omega=empty, the partition of unity from F6 is the empty family; the sum in step 2.1 is the zero smooth function and all approximation/variation errors in steps 3.1–4.1 are zero."
+          "evidence": "Proof 1.1 takes the zero sequence on empty Omega and the constant sequence u on singleton Omega=R^0; all variations vanish."
         },
         {
           "case": "zero",
@@ -2128,7 +2177,7 @@
         {
           "case": "endpoints",
           "status": "checked",
-          "evidence": "On a proper open Omega the approximants in the Statement are C-infinity(Omega), not compactly supported there; step 2.1 keeps each localized convolution inside Omega. Compact support is imposed only for full-space approximants by the large-radius cutoff in step 4.1."
+          "evidence": "Proof 4.1 uses delta_k=1/(k+1) and u_{1/(2(k+1))} for k in N including zero. Proof 1.1 enumerates the locally finite partition by j>=1 so sum 2^(-j)=1. Only in full space are final approximants made compactly supported."
         },
         {
           "case": "nonempty-choice",
@@ -2177,6 +2226,11 @@
         "status": "complete",
         "reviewer": "alpha-batch-31",
         "notes": "Proof 1.1–4.1: compact locally finite partition and least dyadic radii keep the convolved sum locally finite and in Omega. Both eta_j u and u grad eta_j approximation errors are summable. Testing proves the product rule, and subtraction of the unregularized sum u grad eta_j=0 leaves variation at most TV(u)+delta. F8 establishes the smooth density is Radon with the right variation before lower semicontinuity is used. Full-space cutoff errors vanish through integrable tails and the C/R gradient estimate; no compact-support assertion is made on a general open domain. Zero and empty cases obey the same estimates. Current carrier, earlier supplier proofs and cited external supplier statements independently reviewed; reader/refuter findings are empty. No repair required."
+      },
+      "step5_repair_notes": {
+        "report": "research/inverse-problems-knot-theory-all-109-2026-10-19-step5-v2/step5-v2-initial-r1-u31.json",
+        "reason": "The k=0 terms 1/k and 1/(2k) were undefined. Replaced them by 1/(k+1) and 1/(2(k+1)), and made the partition enumeration j>=1 so the 2^(-j) error weights sum to one. Also specified delta>0, handled empty/singleton domains, and justified the product-measurable absolute-integrable interchanges using positive and negative Tonelli. Local finiteness, the product-rule cancellation, the variation bound and lower semicontinuity still prove the unchanged strict approximation and full-space compact-support claims.",
+        "independent_review_claimed": false
       }
     },
     "lem-ip-bv-smooth-coarea": {
@@ -5133,7 +5187,7 @@
           "fact": "F3",
           "source": "lem-ip-bv-zero-gradient-constant-on-connected-domain",
           "source_section": "Statement",
-          "quote": "Assume Countable Choice. Let $\\Omega\\subseteq\\mathbb R^n$ be open and connected. If $u\\in L^1_{\\mathrm{loc}}(\\Omega)$ satisfies $\\partial_i u=0$ as a distribution for every coordinate $i$, then there is a constant $c\\in\\mathbb R$ such that $u=c$ almost everywhere on $\\Omega$.",
+          "quote": "Assume Countable Choice. Let $\\Omega\\subseteq\\mathbb R^n$ be open and connected. If $u\\in L^1_{\\mathrm{loc}}(\\Omega)$ satisfies $\\partial_i u=0$ as a distribution for every coordinate $i$, then there is a constant $c\\in\\mathbb C$ such that $u=c$ almost everywhere on $\\Omega$. If $u$ is real-valued almost everywhere, $c$ may be chosen in $\\mathbb R$.",
           "uses": [
             "2.1"
           ]

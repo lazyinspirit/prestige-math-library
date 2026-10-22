@@ -13,6 +13,11 @@ proof_strategy: not-applicable
 provenance:
   statement: literature-derived
   proof: not-applicable
+verification:
+  judge:
+    model: "gpt-6-luna"
+    verdict: pass
+    date: 2026-10-22
 sources:
   references:
     - title: "Dror Bar-Natan, Khovanov's homology for tangles and cobordisms, §§3–4 and 7"

@@ -82,7 +82,8 @@ Let $d\ge1$, $m\ge0$, $[m]=\{1,\ldots,m\}$ with $[0]=\varnothing$, and let $\Phi
 ## Proof
 
 
-1.1 Assume $\mathcal I_\Phi([x])=\mathcal I_\Phi([z])$. At every label $i$, equality of the intensity coordinates gives $\langle a_i,x\rangle^2=\langle a_i,z\rangle^2$. [given, F1]
+
+1.1 To prove that the complement property implies injectivity, assume the complement property [F3] and suppose $\mathcal I_\Phi([x])=\mathcal I_\Phi([z])$. At every label $i$, equality of the intensity coordinates gives $\langle a_i,x\rangle^2=\langle a_i,z\rangle^2$. [given, F1, F3]
 
 2.1 Factoring the difference of squares over $\mathbb R$ yields $(\langle a_i,x-z\rangle)(\langle a_i,x+z\rangle)=0$ for every $i\in[m]$. This factorization also holds when $x=0$, $z=0$, or $a_i=0$; no nonzero-signal or nonzero-measurement hypothesis is used. [step 1.1, F4, F8, algebra]
 
@@ -90,7 +91,7 @@ Let $d\ge1$, $m\ge0$, $[m]=\{1,\ldots,m\}$ with $[0]=\varnothing$, and let $\Phi
 
 4.1 By the complement property [F3], either $\operatorname{span}(\Phi_S)=\mathbb R^d$ or $\operatorname{span}(\Phi_{[m]\setminus S})=\mathbb R^d$. In the first case step 3.1 makes $x-z$ orthogonal to every vector of $\mathbb R^d$, hence to itself; positive definiteness [F4] gives $x-z=0$. In the second case it gives $x+z=0$. Thus $[x]=[z]$ by [F2], proving injectivity. [step 3.1, F2, F3, F4, F5, algebra]
 
-5.1 The forward implication is proved in step 4.1. For the converse, suppose the complement property fails; then some $S\subseteq[m]$ has the proper subspaces $U=\operatorname{span}(\Phi_S)$ and $V=\operatorname{span}(\Phi_{[m]\setminus S})$. We prove that every proper subspace $W\le\mathbb R^d$ has a nonzero orthogonal vector. Let $r=\dim W<d$ by [F6], choose a basis $w_0,\ldots,w_{r-1}$ of $W$, and define $L_W:\mathbb R^d\to\mathbb R^r$ by $L_W(x)=(\langle x,w_j\rangle)_{j<r}$. Bilinearity makes $L_W$ linear. Its kernel is $W^\perp$: vanishing against the basis implies vanishing against every vector of $W$ because the basis spans $W$ and [F5] expresses each span vector as a finite linear combination; the converse is immediate. By [F7], the image is a subspace of $\mathbb R^r$, so [F6] gives $\operatorname{rank}L_W=\dim(\operatorname{im}L_W)\le r$. Rank-nullity [F7] and $\dim\mathbb R^d=d$ then give $\dim W^\perp=\dim\ker L_W=d-\operatorname{rank}L_W\ge d-r>0$. By [F6] a zero subspace has dimension zero, so $W^\perp$ contains a nonzero vector. Apply this argument to $U$ and $V$ and choose nonzero $u\in U^\perp$ and $v\in V^\perp$. [given, F5, F6, F7, A1, construct, choose]
+5.1 Step 4.1 proves that the complement property implies injectivity. For injectivity implying the complement property, argue contrapositively and suppose the complement property fails; then some $S\subseteq[m]$ has the proper subspaces $U=\operatorname{span}(\Phi_S)$ and $V=\operatorname{span}(\Phi_{[m]\setminus S})$. We prove that every proper subspace $W\le\mathbb R^d$ has a nonzero orthogonal vector. Let $r=\dim W<d$ by [F6], choose a basis $w_0,\ldots,w_{r-1}$ of $W$, and define $L_W:\mathbb R^d\to\mathbb R^r$ by $L_W(x)=(\langle x,w_j\rangle)_{j<r}$. Bilinearity makes $L_W$ linear. Its kernel is $W^\perp$: vanishing against the basis implies vanishing against every vector of $W$ because the basis spans $W$ and [F5] expresses each span vector as a finite linear combination; the converse is immediate. By [F7], the image is a subspace of $\mathbb R^r$, so [F6] gives $\operatorname{rank}L_W=\dim(\operatorname{im}L_W)\le r$. Rank-nullity [F7] and $\dim\mathbb R^d=d$ then give $\dim W^\perp=\dim\ker L_W=d-\operatorname{rank}L_W\ge d-r>0$. By [F6] a zero subspace has dimension zero, so $W^\perp$ contains a nonzero vector. Apply this argument to $U$ and $V$ and choose nonzero $u\in U^\perp$ and $v\in V^\perp$. [given, F5, F6, F7, A1, construct, choose]
 
 6.1 Set $x=u+v$ and $z=u-v$. Since $v\ne0$, $x=z$ would imply $2v=0$, impossible by [F8]; since $u\ne0$, $x=-z$ would imply $2u=0$, also impossible. Hence $[x]\ne[z]$ by [F2]. [step 5.1, F2, F8, algebra]
 
@@ -99,4 +100,3 @@ Let $d\ge1$, $m\ge0$, $[m]=\{1,\ldots,m\}$ with $[0]=\varnothing$, and let $\Phi
 7.1 When $m=0$, the only partition has both sides empty, and both spans equal $\{0\}\ne\mathbb R^d$ by [F5] and $d\ge1$. The complement property fails, while steps 5.1–6.2 give distinct global-sign classes with the same unique empty data. Thus the zero-measurement case is included. [F2, F5, F6, F7, step 5.1, step 6.1, step 6.2]
 
 8.1 Steps 6.1 and 6.2 give distinct quotient classes with the same intensity data, so $\mathcal I_\Phi$ is not injective. Together with step 4.1 and the definition of phase retrieval [F1], this proves the stated equivalence. [step 4.1, step 6.1, step 6.2, F1, algebra] ∎
-

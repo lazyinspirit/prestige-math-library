@@ -1,0 +1,110 @@
+{
+  "version": 1,
+  "run": "inverse-problems-knot-theory-all-109-2026-10-19",
+  "batch": "24",
+  "round": 0,
+  "reviewed_items": [
+    "lem-ip-gronwall-with-integrable-coefficient",
+    "lem-ip-lipschitz-ode-triangular-flow-and-c1-density",
+    "thm-ip-exact-triangular-transport-disintegrates-to-posterior",
+    "alg-ip-conditional-flow-matching",
+    "op-ip-function-space-flow-matching-error-theory",
+    "ex-ip-cfm-low-imh-acceptance-with-accurate-means",
+    "ex-ip-likelihood-free-conditional-flow-matching"
+  ],
+  "reviewed_pages": [
+    "conditional-flow-matching-for-inverse-posteriors",
+    "conditional-flow-matching-for-inverse-posteriors-examples"
+  ],
+  "decision": "repair",
+  "reason": "Request one consolidated local repair for the proof, procedure, prerequisite, and reference defects. A separate published-supplier proof-scope concern is reported; the assigned flow use can be justified locally.",
+  "findings": [
+    {
+      "id": "lem-ip-gronwall-with-integrable-coefficient:proof-step-2.1",
+      "type": "local",
+      "reason": "Step 2.1 infers C'=ell and V'=ell*u from F3, which states the reverse FTC direction for absolutely continuous functions; F2 only gives absolute continuity of the primitives. Add and use the already-declared L1 FTC supplier for both derivatives."
+    },
+    {
+      "id": "lem-ip-lipschitz-ode-triangular-flow-and-c1-density:proof-step-5.1",
+      "type": "local",
+      "reason": "Step 4.2 proves invertibility only for terminal T_y, while Step 5.1 needs A_y(t) invertible for every t. Establish the reverse-flow argument on each [0,t]; also explicitly use F8 for the determinant chain rule and F5 for differentiating the integral of tr(B)."
+    },
+    {
+      "id": "thm-c1-dependence-of-solutions-on-initial-data",
+      "type": "outside-batch",
+      "reason": "Its proof Step 1.1 assumes the ODE domain D is open, but its Statement only says D is a subset. The assigned use is lem-ip-lipschitz-ode-triangular-flow-and-c1-density, Fact F7/Proof 4.2; here fixing y gives [0,T] x R^d, so a compact state tube lies in-domain and the use can be justified locally. Owner review of the broader supplier scope is warranted; downstream assigned users are the exact-transport theorem, algorithm, open problem, and likelihood-free example."
+    },
+    {
+      "id": "thm-ip-exact-triangular-transport-disintegrates-to-posterior:AC-flow-prerequisite",
+      "type": "prerequisite",
+      "reason": "The Statement assumes AC, but Fact F7 and Proof 4.1 apply the ODE lemma under DC and countable choice. Add thm-choice-implies-dependent-implies-countable-choice as an explicit dependency and identify this bridge in the facts."
+    },
+    {
+      "id": "alg-ip-conditional-flow-matching:procedure",
+      "type": "local",
+      "reason": "The Definition leaves the optimizer and solver calls unspecified: 'minimize' and 'give each to a declared solver' do not define an executable procedure. Specify their callable inputs/contracts, initialization, loop and stopping-test order, and output/status behavior while retaining the finite-budget and non-exactness caveats."
+    },
+    {
+      "id": "alg-ip-conditional-flow-matching:source-reference",
+      "type": "local",
+      "reason": "The sources entry labels arXiv:2302.00482 as Lipman et al., Flow Matching for Generative Modeling, but that primary PDF is Tong et al., Improving and Generalizing Flow-Based Generative Models with Minibatch Optimal Transport. The Lipman paper is arXiv:2210.02747; align the bibliography with the intended source. The Definition references already label the Tong link."
+    },
+    {
+      "id": "op-ip-function-space-flow-matching-error-theory:global-moment",
+      "type": "prerequisite",
+      "reason": "Finite second moments of Pi^y only for y in K do not ensure X1 is globally square-integrable under the prior-predictive law pi, which may place mass outside K. The global v*, training sample, and squared risks require integral ||x1||^2 d pi < infinity; add this condition or explicitly restrict the training law."
+    },
+    {
+      "id": "op-ip-function-space-flow-matching-error-theory:source-reference",
+      "type": "local",
+      "reason": "The JMLR URL is correct, but the source entry gives the wrong authors and title. The paper is by Jannis Chemseddine, Paul Hagemann, Gabriele Steidl, and Christian Wald, titled Conditional Wasserstein Distances with Applications in Bayesian OT Flow Matching."
+    },
+    {
+      "id": "ex-ip-likelihood-free-conditional-flow-matching:MH-prerequisites",
+      "type": "prerequisite",
+      "reason": "The MH supplier requires a proper target and finite-valued target/proposal densities. This item does not require a dominated likelihood, 0 < Z_y < infinity, or a finite-valued q_y version. State these admissibility conditions and the independent proposal kernel Q_y(x,dz)=q_y(z)d-lambda; also add the AC-to-DC/countable-choice bridge required by its ODE supplier."
+    },
+    {
+      "id": "ex-ip-likelihood-free-conditional-flow-matching:exact-transport-scope",
+      "type": "local",
+      "reason": "Fact F5 and Verification 2.1 omit the exact-transport theorem's pi_Y-almost-everywhere qualification. Since the example discusses a fixed query datum, restrict that implication to the full-measure set or add a stated condition supporting extension to that datum."
+    }
+  ],
+  "consumer_checks": [
+    {
+      "id": "lem-ip-lipschitz-ode-triangular-flow-and-c1-density",
+      "decision": "repair",
+      "reason": "Its use of the Gronwall estimate is sound; the C1 proof needs the intermediate-time invertibility and differentiation details in the finding."
+    },
+    {
+      "id": "thm-ip-exact-triangular-transport-disintegrates-to-posterior",
+      "decision": "repair",
+      "reason": "The rectangle-disintegration argument is sound and its ODE use needs only the flow clause; add the explicit AC-to-DC/countable-choice bridge."
+    },
+    {
+      "id": "alg-ip-conditional-flow-matching",
+      "decision": "repair",
+      "reason": "The flow and exactness supplier uses are compatible with the stated caveats; the optimizer/solver procedure and source entry need the local repairs above."
+    },
+    {
+      "id": "op-ip-function-space-flow-matching-error-theory",
+      "decision": "repair",
+      "reason": "Its CFM-consumer claim is compatible with the proposed algorithm clarification; the global prior-predictive moment condition and bibliography need repair."
+    },
+    {
+      "id": "ex-ip-likelihood-free-conditional-flow-matching",
+      "decision": "repair",
+      "reason": "The sample-interface limitation is sound; its fixed-datum exact-transport qualifier and density-based MH admissibility conditions need repair."
+    },
+    {
+      "id": "conditional-flow-matching-for-inverse-posteriors",
+      "decision": "accept",
+      "reason": "The A page is frontmatter-only and its inventory remains consistent with the requested item repairs."
+    },
+    {
+      "id": "conditional-flow-matching-for-inverse-posteriors-examples",
+      "decision": "accept",
+      "reason": "The B page is frontmatter-only and lists the examples without a narrative claim affected by the repairs."
+    }
+  ]
+}

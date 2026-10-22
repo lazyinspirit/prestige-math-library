@@ -1,0 +1,55 @@
+---
+id: thm-chosen-leaf-packet-triangles-have-triangular-transfer
+kind: theorem
+title: Chosen leaf-packet triangles have actual triangular transfer
+status: draft
+origin: session
+pipeline_run: inverse-problems-knot-theory-all-109-2026-10-19
+deps:
+  - thm-offcurve-split-birth-and-death-have-actual-triangular-counts
+  - thm-implicit-function-theorem-for-banach-spaces
+proof_strategy: direct
+provenance:
+  statement: literature-derived
+  proof: ai-altered
+sources:
+  references:
+    - title: Zemke, Graph cobordisms and Heegaard Floer homology
+      url: https://arxiv.org/pdf/1512.01184
+      locator: Complete Lemma6.8 and Theorem6.7 proof, PDF37–41; reconstructed for the chosen leaf packet below
+---
+
+## Statement
+
+Supply an actual good ordinary band triple $(\Sigma,\alpha',\alpha,\beta,\mathbf w)$, a chosen auxiliary cycle $\Theta$, and its finite positive formal-triangle inventories in the specified sectors through index one. Its actual triangle map with input $\Theta$ is $F$. All $z$ weights have been forgotten for this statement. No colored triangle identity is claimed.
+
+At a mark-free point in the common exterior, insert the chosen leaf sphere packet. Its curves are $\alpha_s$, a sufficiently small Hamiltonian translate $\alpha'_s$, and $\beta_0$. Each pair meets twice. All three disk interiors contain the new $w$; the connected-sum point $p_0$ lies outside all three disks. The translate is supported in the leaf disk and keeps the intersections with $\beta_0$ transverse. The auxiliary input is the actual top $\theta^+_{\alpha'\alpha}$, so the full input is $\Theta\otimes\theta^+_{\alpha'\alpha}$, supplied as an actual cycle. There are two empty bigons in the auxiliary pair. On both other paired ends use the compatible off-curve leaf-packet data and label intersections by ordinary top and bottom.
+
+For sufficiently stretched regular data the ACTUAL triangle map has the form
+$$F_B=\begin{pmatrix}F&K\\0&F\end{pmatrix}.$$
+Here $K$ is unrestricted and finite; this statement does not assert $F\otimes I$. Consequently the chosen top inclusions and bottom extractions satisfy $F_B B=B F$ and $E F_B=F E$ as actual maps. The diagonal coefficients retain every old $w$ weight and acquire no new $w$ weight. This is a separate three-ended count, not an inference from the strip matrix.
+
+## Facts & Assumptions
+
+**Given:** The actual chosen triple, good paired ends, supplied top cycle, and finite positive formal triangle domains on the old triple. Use genuine source-dependent regular tensors on the core fixed at those ends. Existing good-polygon compactness and transversality are supplied at this scope, not extended from a two-ended result. The local three-circle placement is the sphere obtained by a small generic Hamiltonian displacement of $\alpha_s$; equivalently it is the usual three overlapping disk boundaries, with no triple intersection, new $w$ in the triple overlap and $p_0$ outside their union.
+
+[F1] The actual constrained off-curve local strip-return parity, its empty-strip cancellation, and normal gluing are supplied by [[thm-offcurve-split-birth-and-death-have-actual-triangular-counts]]. Only that newly authored local operation is used. No repaired provider is reviewed here.
+
+[F2] Use the complemented implicit theorem [[thm-implicit-function-theorem-for-banach-spaces]].
+
+## Proof
+
+1.1 **Actual local index and a uniform finite inventory.** Write $x,y,z$ for the local auxiliary, input and output intersections and put $d(v)=0$ at a pair's top and $d(v)=1$ at its bottom. For the sphere triangle set $s=n_{w_{\rm new}}$, $k=n_{p_0}$ and $\delta=-d(x)-d(y)+d(z)$. Its index is
+$$\mu_0=\delta+2s+2k.$$
+To verify it, start with the small empty triangle at the three top corners, whose index and $s,k,\delta$ are all zero. Splicing a bigon at either incoming corner changes the right side by minus its endpoint degree change plus twice its marking multiplicities; at the outgoing corner the endpoint term has the opposite sign. These are exactly the disk index changes. The twelve adjacent bigons generate the differences between the sphere triangle classes by successively adjusting the six corner jumps and then the constant domain, so this check proves the formula on every class. Equivalently, for its eight region coefficients $m_j$ the cylindrical Euler/corner formula gives $\mu_0=(\sum_{j=1}^8m_j-1)/2$; this agrees on the same small triangle and on every bigon addition. Target connected sum subtracts $2k$, hence
+$$\mu_B=\ell_{\rm old}+\delta+2s.$$
+Here $x$ is the auxiliary top, so $\delta=0,1,-1$ on diagonal, top-to-bottom and bottom-to-top entries respectively. For total index at most one the old formal index is at most two. Its finite positive-domain inventory fixes $k$ and bounds its index below; the formula bounds $s$. The eight-coefficient identity bounds every nonnegative local coefficient. This supplies actual domain and energy bounds independent of neck length; no unproved preservation of a strong-admissibility criterion is invoked. [given, construct, algebra]
+
+2.1 **Exclusion and the exact diagonal limiting problem.** A total-index-zero top-to-bottom triangle would have old index $-1-2s<0$, impossible for supplied regular old triangles, including broken configurations: a nonconstant strip uses at least one index and a boundary degeneration at least two. Thus this entry is empty for all sufficiently long necks. For a diagonal triangle the same equation forces $s=0$ and old index zero. The old limit is a single regular index-zero triangle. No nonconstant strip can split off; no nonconstant boundary or closed component can occur without leaving a negative-index principal triangle. At generic incidence the $k$ intersections with $p$ are simple and have distinct physical values in the triangle. The tube then consists of $k$ once-covered cylinders. The local piece must match their divisor, has index $2k$, and has zero new-mark multiplicity. Its constrained expected dimension is zero. If a local subcomponent used strictly less index, or had a singularity, subtracting the real $2k$ matching conditions would give negative dimension. Thus it is a full embedded local triangle. Constant ghosts are excluded as follows: after trimming and smoothing ghost nodes, a ghost has no puncture or unpunctured boundary and at most one attachment to the embedded principal pieces. Stability requires positive genus. But the index/Euler relation for a triangle gluing requires $\chi_B=\chi_{\rm old}+\chi_0-2k$; an extra positive-genus ghost lowers this by at least two. Therefore no such ghost survives. These are actual three-ended limits. [given, step 1.1, construct]
+
+3.1 **The constrained TRIANGLE-return count is one.** Fix a generic divisor of $k$ distinct interior points of the physical triangle. Sum all local classes with $s=0$, that divisor, and the specified diagonal endpoints. Move those points along a generic path, eventually far down one chosen cylindrical input end, with successive translation gaps tending to infinity. Consider the resulting one-dimensional constrained moduli. At a finite path parameter a possible boundary double point would collapse a boundary arc whose two ends lie on the SAME labeled edge. The physical boundary coordinate is monotone on that edge. The intervening source arc must therefore project constantly, producing a boundary-degeneration component. Every nonconstant sphere-packet boundary domain covers either $p_0$ or the new $w$. The latter is excluded by $s=0$; the former cannot cover the prescribed divisor while it stays away from the boundary. Thus no boundary-double-point end survives. Interior singularities lower dimension by two and are absent. The only remaining finite-path break is an index-one strip with $k=s=0$, followed or preceded by the constrained triangle. In each of the three local paired ends those strips are precisely the two empty bigons, with equal weight one, so these ends cancel in pairs. This is cancellation, not a false assertion that the end is impossible.
+At the infinite end of the divisor path, the limit is the unique small empty triangle for these endpoints and $k$ separated local index-two strip returns, one per prescribed root. There is exactly one positive empty small-triangle class in each of the two diagonal cases; it has a single conformal representative. Separation and the index formula exclude additional positive-index pieces. The actual constrained strip-return parity is one by [F1]. Root matching glues each separated configuration, so this end has parity $1\cdot1^k=1$. Counting ends therefore gives local constrained triangle parity one at the initial divisor. All local representatives have $s=0$ and no new ordinary weight. The argument works for both diagonal endpoint choices. [F1, step 1.1, step 2.1, construct, algebra]
+
+4.1 **Actual operator matching and exhaustion.** Retain the $2k$ real root coordinates of the old and local triangle and impose their difference as a finite matching block. The old index-zero curve is regular; on the local side use generic domain-dependent tensors, fixed on the cylindrical paired ends, to make this constrained problem regular. At the separated-return end this is the actual strip-root response of [F1] together with the regular small triangle; its matching operator is onto. Between those ends the generic one-parameter problem used in step 3.1 has the same regular collars. On the infinite-dimensional normal complements, the actual old/local Cauchy–Riemann operators have bounded right inverses. Along the plumbing cylinders retain their constant root modes in the finite block; the complementary Fourier spectrum has a positive gap. Matching these finite modes first, logarithmic cutoff patching has error $O(1/L)$ plus exponentially decaying tails. The onto finite block and a Neumann series produce a right inverse; quadratic Sobolev estimates and [F2] produce the unique nearby glued curve. Conversely the finite inventories of step 1.1 and the complete limits of step 2.1 place every diagonal sequence into one of these contraction slices. Uniqueness exhausts the count. Thus the local parity computed in step 3.1 multiplies EACH actual old triangle coefficient by one, with unchanged old $w$ monomial. Top-to-bottom remains empty by step 2.1. All remaining classes have finite actual counts and form $K$; no geometric simplification of them is needed. [F1, F2, step 1.1, step 2.1, step 3.1, construct, algebra]
+
+5.1 **The precise transport consequence.** With the supplied top input fixed, the actual map is therefore $F_B=\left(\begin{smallmatrix}F&K\\0&F\end{smallmatrix}\right)$. Its first column is $BF$ and its bottom row is $FE$, which proves the two stated identities. Good end and polygon compactifications supply the chain-map equation with this actual auxiliary cycle. The proof asserts neither that the upper entry vanishes nor a full tensor-product triangle formula. It supplies exactly the chosen leaf-packet comparison required to move birth/death past this chosen triangle operation. [given, step 2.1, step 3.1, step 4.1, algebra] ∎

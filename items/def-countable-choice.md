@@ -39,7 +39,7 @@ statement.
 > $f(n) \in X_n$ for every $n \in \mathbb{N}$.
 
 Equivalently, in the vocabulary of Choice function: every at most
-countable family of nonempty sets (Finite, countably infinite, countable, uncountable) has a choice function.
+countable family of nonempty sets has a choice function.
 
 ## Definition references
 

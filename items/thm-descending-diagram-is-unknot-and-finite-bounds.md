@@ -10,6 +10,7 @@ deps:
   - def-knot-bridge-position-and-unknotting-number
   - alg-descending-diagram-unknotting-sequence
   - thm-descending-diagram-is-unknot
+  - thm-descending-diagram-unknotting-sequence-procedure-properties
   - def-countable-choice
 justified_by: []
 aliases: []
@@ -29,7 +30,7 @@ sources:
 
 ## Statement
 
-Assume the Axiom of Countable Choice. Let $K$ be a smooth oriented knot and let $D$ be an admissible finite planar code for a regular diagram of a representative of $K$, based at an interior point of an edge. The descending-diagram procedure changes at most $c(D)$ crossings, where $c(D)$ is the number of crossing records in the code, and its output diagram represents the standard unknot. Consequently the set of unknotting-sequence lengths for $K$ is a nonempty subset of $\mathbb N$, so the unknotting number $u(K)$ is finite and satisfies $u(K)\le c(D)$.
+Assume the Axiom of Countable Choice. Let $K$ be a smooth oriented knot and let $D$ be an admissible finite planar code for a regular diagram of a representative of $K$, based at an interior point of an edge. After moving the basepoint slightly forward within the same edge to avoid bends if necessary, the descending-diagram procedure changes at most $c(D)$ crossings, where $c(D)$ is the number of crossing records in the code, and its output diagram represents the standard unknot. Consequently the set of unknotting-sequence lengths for $K$ is a nonempty subset of $\mathbb N$, so the unknotting number $u(K)$ is finite and satisfies $u(K)\le c(D)$.
 
 ## Statement references
 
@@ -43,7 +44,7 @@ Assume the Axiom of Countable Choice. Let $K$ be a smooth oriented knot and let 
 
 [A1] The Axiom of Countable Choice, written $\mathrm{AC}_\omega$. [[def-countable-choice]]
 
-[F1] The algorithm scans the finite crossing set once and returns the list of crossings whose first encounter is under, together with the updated code. [[alg-descending-diagram-unknotting-sequence]]
+[F1] After moving an edge-interior bend basepoint slightly forward within the same edge if necessary, the algorithm terminates, changes at most one crossing per crossing record and returns an admissible updated code; the adjustment does not change crossing encounter order or the output. [[alg-descending-diagram-unknotting-sequence]], [[thm-descending-diagram-unknotting-sequence-procedure-properties]]
 
 [F2] A code whose first encounter at every crossing is an overpass represents the standard unknot. [[thm-descending-diagram-is-unknot]]
 
@@ -54,7 +55,7 @@ Assume the Axiom of Countable Choice. Let $K$ be a smooth oriented knot and let 
 **Given:** $\mathrm{AC}_\omega$, a knot $K$, and an admissible finite code $D$ for a regular diagram of a representative of $K$, with a basepoint in an edge interior.
 
 
-1.1 Apply [F1] to $D$. Since $D$ has $c(D)$ crossing records, the algorithm terminates after that finite scan and returns at most $c(D)$ crossing changes. [A1, F1, given, algebra]
+1.1 Make the basepoint adjustment in [F1] if necessary, then apply the procedure to $D$. Since $D$ has $c(D)$ crossing records, the algorithm terminates after that finite scan and returns at most $c(D)$ crossing changes. [A1, F1, given, algebra]
 
 2.1 After those changes every crossing is first encountered as an overpass, so [F2] says the updated code represents the standard unknot. It follows from [F3] that the returned list witnesses $u(K)\le c(D)$. In particular the set defining $u(K)$ is nonempty and its minimum is finite. [F2, F3, step 1.1, algebra] ∎
 

@@ -1,0 +1,78 @@
+---
+id: lem-conway-polynomial-from-seifert-determinant
+kind: lemma
+title: "Seifert determinant constructs the normalized Conway polynomial"
+status: draft
+origin: pipeline
+pipeline_run: inverse-problems-knot-theory-all-109-2026-10-19
+dependency_level: 16
+deps:
+  - def-seifert-s-equivalence-and-conway-normalization
+  - def-link-seifert-pairing-and-matrix
+  - def-seifert-surface-arc-surgery
+  - lem-seifert-surfaces-of-same-link-are-related-by-arc-surgeries
+  - def-oriented-link-in-s-three-and-ambient-isotopy
+  - def-regular-oriented-link-diagram
+  - lem-every-oriented-link-admits-a-regular-projection
+  - def-seifert-smoothing-and-seifert-circles-of-an-oriented-link-diagram
+  - lem-finite-chart-surface-normal-forms-supply-jordan-disks-and-torsion-free-groups
+  - def-oriented-crossing-sign-writhe-and-blackboard-framing
+  - def-countable-choice
+  - thm-choice-implies-dependent-implies-countable-choice
+  - def-axiom-of-choice
+justified_by: []
+aliases: []
+proof_strategy: direct
+provenance:
+  statement: literature-derived
+  proof: ai-generated
+sources:
+  references:
+    - title: "W. B. Raymond Lickorish, An Introduction to Knot Theory, Graduate Texts in Mathematics 175, Springer (1997)"
+      url: "https://link.springer.com/chapter/10.1007/978-1-4612-0691-0_9"
+      locator: "Printed Chapter 8, Definition 8.1 and Theorem 8.2, printed pp. 79–81; complete argument read in full-text PDF copy; publisher chapter record inspected."
+    - title: "Anthony Conway, The Levine–Tristram signature: a survey, Matrix Annals 2016 (arXiv:1903.04477)"
+      url: "https://arxiv.org/pdf/1903.04477"
+      locator: "§2.1, printed pp. 3–4: Hermitian form convention; §3, printed p. 9: averaged signature at roots. Complete 26-page PDF read."
+---
+## Statement
+
+Assume full AC. Every nonempty smooth oriented link $L\subset S^3$ bounds a connected compact smooth oriented embedded surface. If $F$ is any such surface with Seifert matrix $V$, and $u$ is a formal Laurent variable, then
+$$D_L(u)=\det(uV-u^{-1}V^T)$$
+is independent of the surface and integral basis, belongs to $\mathbb Z[u-u^{-1}]$, equals $1$ for the unknot, and satisfies
+$$D_{L_+}(u)-D_{L_-}(u)=(u-u^{-1})D_{L_0}(u)$$
+for every oriented skein triple. Thus $D_L(u)=\nabla_L(u-u^{-1})$ for the unique Conway polynomial normalized by $\nabla_U=1$ and $\nabla_+-\nabla_-=z\nabla_0$.
+
+## Statement references
+
+[[def-seifert-s-equivalence-and-conway-normalization|The normalized Conway convention and Alexander substitution]]
+
+[[def-link-seifert-pairing-and-matrix|The positive-push Seifert matrix for links]]
+
+## Facts & Assumptions
+
+**Given:** Full AC, a nonempty oriented link, the positive crossing convention, and a connected spanning surface with its Seifert matrix.
+
+[A1] Full AC implies the countable-choice hypotheses for regular projection, Jordan disks, and the Seifert construction. [[def-axiom-of-choice]], [[thm-choice-implies-dependent-implies-countable-choice]], [[def-countable-choice]]
+
+[F1] A regular oriented diagram has finitely many crossings; oriented smoothing yields finitely many disjoint circles, each bounding a disk in the projection sphere. [[def-regular-oriented-link-diagram]], [[lem-every-oriented-link-admits-a-regular-projection]], [[def-seifert-smoothing-and-seifert-circles-of-an-oriented-link-diagram]], [[lem-finite-chart-surface-normal-forms-supply-jordan-disks-and-torsion-free-groups]]
+
+[F2] The positive-push matrix is $V_{ij}=\operatorname{lk}(a_i^+,a_j)$ on integral homology classes. [[def-link-seifert-pairing-and-matrix]]
+
+[F3] Same-boundary surfaces are connected by finitely many isotopies and embedded arc surgeries; at a surgery the new matrix is one of the two rank-two enlargements. [[lem-seifert-surfaces-of-same-link-are-related-by-arc-surgeries]], [[def-seifert-surface-arc-surgery]]
+
+[F4] The positive crossing is the right-handed half-twist in the declared diagram convention. [[def-oriented-crossing-sign-writhe-and-blackboard-framing]]
+
+## Proof
+
+1.1 Choose a regular diagram by [F1]. Smooth every crossing in the orientation-compatible way. Cap each resulting Seifert circle by its disk on the side away from a chosen point at infinity; when disks are nested, place them at distinct nearby heights in nesting order. In disjoint crossing balls attach one half-twisted band for each original crossing, with twist and endpoint orientation chosen to reproduce the given over-under crossing. The disks are disjoint after the height separation, the bands lie in disjoint crossing balls, and their attaching intervals are pairwise disjoint. Hence their union is an embedded oriented surface, and at each crossing the band boundary restores the original two strands. If it has more than one connected component, each component has nonempty boundary, so its second cohomology vanishes by the compact-surface normal form. Alexander duality makes the complement of their union connected. Choose an arc in this complement between interior points of two components and perturb it to an embedded arc; a small product neighbourhood replaces one disk in each component by a lateral annulus, joining the components without changing $L$. The orientation extends by choosing the tube framing. Repeating this finite operation leaves one connected surface with boundary $L$. [A1, F1, given, construct]
+
+2.1 An ambient isotopy preserves the positive normal and linking coefficient, so a transported basis has the same matrix; rechoosing basis gives $V\mapsto P^TVP$ with $P\in GL_m(\mathbb Z)$, multiplying the determinant by $(\det P)^2=1$. For an enlargement $E_0$ the matrix $uE_0-u^{-1}E_0^T$ has the old block $M=uV-u^{-1}V^T$ and new $2\times2$ diagonal block
+$$D_0=\begin{pmatrix}z(u-u^{-1})&-u^{-1}\\u&0\end{pmatrix},$$
+while its old-to-new block has second column zero. For $E_1$ the corresponding block is
+$$D_1=\begin{pmatrix}z(u-u^{-1})&u\\-u^{-1}&0\end{pmatrix},$$
+again with zero second old-to-new column. Both $D_i$ have determinant $1$ and $(D_i^{-1})_{11}=0$. The block determinant formula therefore gives determinant $\det M$ for either enlargement; reductions reverse the equality. By [F3], the determinant is independent of $F$ and basis. [F2, F3, step 1.1, determinant expansion]
+
+3.1 For a skein triple, first construct a connected surface $F_0$ for $L_0$ by step 1.1. Add to it the single local band that changes the smoothing into $L_+$ or $L_-$. The resulting two Seifert matrices have common upper-left block $V_0$, common off-diagonal row and column, and last diagonal entries $N_+$ and $N_-$ with $N_+-N_-=1$: the positive half-twist adds one positive self-linking of the band core relative to the negative half-twist, by [F4]. In $uV-u^{-1}V^T$ only the final diagonal entry differs, by $(u-u^{-1})(N_+-N_-)=u-u^{-1}$. The determinant is linear in that entry, and its cofactor is precisely $\det(uV_0-u^{-1}V_0^T)$. Hence $D_{L_+}-D_{L_-}=(u-u^{-1})D_{L_0}$. [F2, F4, step 2.1, local crossing calculation]
+
+4.1 For the unknot use a disk, whose matrix is empty and whose determinant is $1$. For an $r$-component unlink with $r>1$, add a Reidemeister-I curl to one component. The positive and negative curl choices are both isotopic to the same unlink, while the oriented smoothing is the $(r+1)$-component unlink. The skein relation gives $(u-u^{-1})D_{U_{r+1}}=0$, so $D_{U_{r+1}}=0$ because the Laurent polynomial ring is a domain; starting with $D_{U_1}=1$ establishes all unlink base values. Fix a diagram with basepoints and an order of its components. A crossing is bad if its first encountered branch in the resulting ordered traversal is under. Induct on the pair (crossing count, number of bad crossings), ordered lexicographically. Switching a selected bad crossing lowers the second entry without changing the crossing count; smoothing lowers the first. Repeated switches turn the diagram into a descending diagram, which is an unlink: pull each component off in its traversal order, since its first branch at every crossing lies over the later branch. The skein relation and unlink values therefore express $D_L$ inductively as a polynomial in $z=u-u^{-1}$ with integer coefficients. The same induction shows uniqueness for any invariant satisfying the unknot value and skein relation, since the same curl argument forces every multi-component unlink value to be zero. For a descending diagram, cut each component at its basepoint and lift the first encountered arc above every later arc; component order puts earlier components above later ones. Remove the resulting disjoint descending arcs one at a time by isotopy, leaving disjoint simple circles, so the link is the unlink. This proves the determinant gives exactly the normalized Conway polynomial. [step 1.1, step 2.1, step 3.1, induction, algebra] ∎

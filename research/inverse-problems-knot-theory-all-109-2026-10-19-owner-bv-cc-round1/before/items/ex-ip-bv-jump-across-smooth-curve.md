@@ -1,0 +1,71 @@
+---
+id: ex-ip-bv-jump-across-smooth-curve
+kind: example
+title: A smooth-curve jump has perimeter total variation
+status: draft
+origin: pipeline
+deps:
+  - def-countable-choice
+  - def-ip-spatial-bv-and-distributional-tv
+  - lem-ip-bv-test-field-characterization-and-lsc
+  - lem-surface-integral-is-independent-of-c-one-boundary-charts
+  - lem-smooth-bump-between-concentric-euclidean-balls
+  - thm-bounded-riemann-integrable-functions-are-lebesgue-measurable-and-have-the-same-integral
+  - thm-continuous-implies-integrable
+  - thm-fubini-theorem-for-l-one-on-sigma-finite-product-spaces
+  - thm-ftc-second-part
+  - thm-lebesgue-measure-is-a-radon-measure-on-rn
+proof_strategy: direct
+provenance:
+  statement: literature-derived
+  proof: ai-altered
+sources:
+  references:
+    - title: "Piotr Rybka, The space in variational and evolution problems — Lecture Notes in Mathematical Sciences 15"
+      url: "https://www.ms.u-tokyo.ac.jp/publication/docs/lecturenotes15-rybka.pdf"
+    - title: "Gláucio Terra, Introduction to Geometric Measure Theory — Lecture Notes, version 1.6"
+      url: "https://www.ime.usp.br/~glaucio/mat6704/textos/GMTLecureNotes.pdf"
+pipeline_run: inverse-problems-knot-theory-all-109-2026-10-19
+---
+
+## Example
+
+Assume Countable Choice. For the unit disk $B:=\{x\in\mathbb R^2:|x|<1\}$, its indicator belongs to $BV(\mathbb R^2)$, its distributional derivative is $D\chi_B=-\nu\,\mathcal H^1|_{\partial B}$ where $\nu(x)=x$ is the outward unit normal, and $TV(\chi_B;\mathbb R^2)=P(B;\mathbb R^2)=2\pi$.
+
+## Example references
+
+[[def-ip-spatial-bv-and-distributional-tv|The definition of distributional derivative and spatial total variation.]]
+
+[[lem-ip-bv-test-field-characterization-and-lsc|The choice-free test-field characterization of spatial total variation.]]
+
+## Facts & Assumptions
+
+**Given:** Countable Choice, the open unit disk $B\subset\mathbb R^2$, and the distributional derivative convention for spatial BV.
+
+[A1] Countable Choice is used for Lebesgue Fubini and the Riemann-to-Lebesgue integral comparison. ([[def-countable-choice]])
+
+[F1] For a scalar $v\in L^1(\Omega)$, the distributional derivative satisfies $\langle D_i v,\phi\rangle=-\int_\Omega v\,\partial_i\phi\,dx$. ([[def-ip-spatial-bv-and-distributional-tv]])
+
+[F2] For a BV function, its total variation equals the supremum of the integrals against compactly supported smooth vector fields with pointwise norm at most one; this clause is choice-free. ([[lem-ip-bv-test-field-characterization-and-lsc]])
+
+[F3] A smooth radial cutoff can equal one near a prescribed radius and vanish outside a slightly larger annulus. ([[lem-smooth-bump-between-concentric-euclidean-balls]])
+
+[F4] Fubini's theorem for integrable functions on sigma-finite product measure spaces identifies the disk integral with its coordinate-slice integrals. ([[thm-fubini-theorem-for-l-one-on-sigma-finite-product-spaces]])
+
+[F5] Countable Choice makes Lebesgue measure on $\mathbb R^2$ a Radon measure finite on the bounded disk. ([[thm-lebesgue-measure-is-a-radon-measure-on-rn]])
+
+[F6] A bounded Riemann-integrable function on a compact interval has the same Lebesgue and Riemann integrals under Countable Choice. ([[thm-bounded-riemann-integrable-functions-are-lebesgue-measurable-and-have-the-same-integral]])
+
+[F7] A continuous derivative is Riemann integrable and its interval integral is the endpoint difference. ([[thm-continuous-implies-integrable]], [[thm-ftc-second-part]])
+
+[F8] On a smooth graph, arclength has density $\sqrt{1+|Dh|^2}$ in graph coordinates. ([[lem-surface-integral-is-independent-of-c-one-boundary-charts]])
+
+## Verification
+
+**Given:** Countable Choice, the unit disk $B$, and a smooth compactly supported vector field $\phi=(\phi_1,\phi_2)$.
+
+1.1 Extend $\partial_1\phi_1$ by zero outside $B$. It is integrable because it is bounded and supported in a finite-measure disk [F5]. Fubini [F4] expresses its integral as the integral over $y\in(-1,1)$ of the slice integrals over $[-a(y),a(y)]$, where $a(y)=\sqrt{1-y^2}$. Each slice integrand is continuous, so [F6] identifies its Lebesgue integral with its Riemann integral, and [F7] evaluates that integral as $\phi_1(a(y),y)-\phi_1(-a(y),y)$. In the right graph $x=a(y)$, [F8] gives $d\mathcal H^1=dy/a(y)$ and $\nu_1=a(y)$; in the left graph $x=-a(y)$, it gives $d\mathcal H^1=dy/a(y)$ and $\nu_1=-a(y)$. Thus the slice difference equals $\int_{\partial B}\phi_1\nu_1\,d\mathcal H^1$. The same argument with the coordinates exchanged gives the second component, hence $\int_B\operatorname{div}\phi\,dx=\int_{\partial B}\phi\cdot\nu\,d\mathcal H^1$. [A1, F4, F5, F6, F7, F8, given]
+
+2.1 By the distributional derivative convention [F1], step 1.1 yields $D\chi_B=-\nu\mathcal H^1|_{\partial B}$. The circle has finite arclength, so this is a finite vector Radon measure and $\chi_B\in BV(\mathbb R^2)$. [F1, step 1.1, given]
+
+3.1 The parametrization $\theta\mapsto(\cos\theta,\sin\theta)$ has speed one on $[0,2\pi]$, so $\mathcal H^1(\partial B)=2\pi$. For every admissible test field, step 1.1 gives $$\int_B\operatorname{div}\phi\,dx=\int_{\partial B}\phi\cdot\nu\,d\mathcal H^1\le2\pi.$$ Choose a smooth radial cutoff $q$ supported in $(1/2,3/2)$, with $0\le q\le1$ and $q(1)=1$, and set $\phi(x)=q(|x|)x/|x|$ on that annulus and zero outside. By [F3] this is smooth, compactly supported and has norm at most one; on $\partial B$ it equals $\nu$. Its flux is $2\pi$. The supremum in [F2] is therefore exactly $2\pi$, proving the asserted total variation and perimeter. [F2, F3, step 1.1, step 2.1, given, construct] ∎

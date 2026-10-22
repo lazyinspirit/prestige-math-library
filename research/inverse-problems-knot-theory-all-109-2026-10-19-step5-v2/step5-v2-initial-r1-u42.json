@@ -1,0 +1,302 @@
+{
+  "run": "inverse-problems-knot-theory-all-109-2026-10-19",
+  "phase": "initial",
+  "round": 1,
+  "unit": "42",
+  "input_sha256": "c872603b0f7c95c42125928ec1ced19e672caec5508e4ce625685b74e981d23d",
+  "decisions": [
+    {
+      "id": "def-ip-anisotropic-conductivity-dirichlet-to-neumann-map",
+      "model": "gpt-6-luna",
+      "context_sha256": "53a042d3c9315f04ad48e1c546558971a975823db1714f1fb22494fbda762563",
+      "outcome": "confirmed_nonfatal",
+      "reason": "The trace-quotient lemma assumes nonempty boundary, so its unqualified attribution did not cover the empty open set. This is a citation-scope defect, not a failure of the quotient or DN map: both Sobolev spaces on the empty set are zero, and the existing fixed-atlas definition explicitly sets its empty-boundary space to zero. Split these cases without excluding any original admissible domain.",
+      "uncertain": false,
+      "source_urls": [],
+      "familiar": true
+    },
+    {
+      "id": "lem-ip-anisotropic-conductivity-map-wellposedness",
+      "model": "gpt-6-luna",
+      "context_sha256": "4097ff64d1b1fbd604a4ecc6484eb0b63fc84cac504060597c29411853752809",
+      "outcome": "confirmed_nonfatal",
+      "reason": "Step 4.1 used scalar-conductivity notation gamma|grad W|^2 for a matrix coefficient without declaring a quadratic-form convention. Its intended scalar energy expansion is valid by symmetry and the weak equation, so this is a notation defect, not a missing existence or boundedness argument. Replaced all three energies by (gamma grad w) dot grad w and retained the original estimate and bilinearity proof.",
+      "uncertain": false,
+      "source_urls": [],
+      "familiar": true
+    },
+    {
+      "id": "thm-ip-boundary-fixing-diffeomorphism-preserves-dn-map",
+      "model": "gpt-6-luna",
+      "context_sha256": "bedf06e37ff54ce2bdfae61dd2a61be9b113600980c97d6a5e50387bdf39bc51",
+      "outcome": "confirmed_nonfatal",
+      "reason": "F1 overstated what the candidate definition itself establishes. The needed existence and uniqueness result was already stated in F2, listed in deps, and used explicitly in step 3.1, so this is an inaccurate fact attribution rather than an unsupported theorem. F1 now defines the candidate pairing conditionally and attributes well-posedness to F2.",
+      "uncertain": false,
+      "source_urls": [],
+      "familiar": true
+    }
+  ],
+  "reviews": [
+    {
+      "id": "def-ip-anisotropic-conductivity-dirichlet-to-neumann-map",
+      "disposition": "repaired",
+      "post_sha256": "c5791ed8c293a52fd7f104de7b081c7425913f4cd2ae69482b8e9263b9163998",
+      "review_context_sha256": "144d91eaf5bd02d1f77f5efa3997ed2ab734fa196c9b0ea43cafe7982a045d99",
+      "reason": "Checked the full quotient/energy candidate, AC and CC, symmetric ellipticity, and justified_by separation. A nonempty bounded open subset of Euclidean space has nonempty boundary, so the existing trace-quotient lemma applies there. For the empty set the Sobolev quotient and fixed-atlas boundary space are both zero; the energy is zero. Added the explicit empty-case convention supplier and preserved all hypotheses and claims.",
+      "uncertain": false,
+      "source_urls": [],
+      "familiar": true
+    },
+    {
+      "id": "lem-ip-anisotropic-conductivity-map-wellposedness",
+      "disposition": "repaired",
+      "post_sha256": "78ec98510b5c7749d55f55c07a04456dd78cc51cf6a52b3ed0d9417ef498b892",
+      "review_context_sha256": "a5d063721e00ee8296bdce289f37825a78d0d17e66b1df590984b30dafb61de8",
+      "reason": "Checked the exact Poincare, completeness and real Lax-Milgram hypotheses. The gradient norm is Hilbert on H1_0, the matrix form is bounded and coercive, and one lift yields a solution. Testing differences proves uniqueness and representative independence. Symmetry and the weak equation remove the energy cross term; infima over lifts yield ||grad u|| <= sqrt(C/c)||f|| and the stated bilinear bound. The empty set is the zero-space case. Corrected all matrix quadratic forms and kept the Statement unchanged.",
+      "uncertain": false,
+      "source_urls": [],
+      "familiar": true
+    },
+    {
+      "id": "thm-ip-boundary-fixing-diffeomorphism-preserves-dn-map",
+      "disposition": "repaired",
+      "post_sha256": "d156ca241bbfee0a67c657181eb4ca79c4e9bdc2b294b34ac4cf108fbb6235a1",
+      "review_context_sha256": "ec845ebe9bf99a94a4a554d06bba5eb5a2d328363b8979b0ce7ebb272c670441",
+      "reason": "Checked ellipticity of DF gamma DF^T/J, the H1 composition bounds, smooth-density extension of the chain and energy identities, and transport of the H1_0 weak tests. Equal L2 traces give equal quotient classes by the now-explicit trace-kernel supplier, and F2 supplies unique solutions. The inverse tensor and absolute-Jacobian density calculations prove the Riemannian energy identity without orientability; compactly supported tests prove harmonicity and bijectivity fixes zero-extended patch data. Corrected F1 attribution and AC/CC accounting. Statement unchanged.",
+      "uncertain": false,
+      "source_urls": [],
+      "familiar": true
+    }
+  ],
+  "created_items": [],
+  "downstream": [
+    "lem-ip-anisotropic-conductivity-map-wellposedness",
+    "thm-ip-boundary-fixing-diffeomorphism-preserves-dn-map",
+    "ex-ip-anisotropic-boundary-fixing-gauge-example"
+  ],
+  "ledger_updates": [
+    {
+      "ledger": "canonical-defect-ledger",
+      "path": "research/defect-ledger.jsonl",
+      "action": "record-fixed-finding",
+      "id": "def-ip-anisotropic-conductivity-dirichlet-to-neumann-map",
+      "severity": "nonfatal",
+      "status": "fixed",
+      "finding": "The trace-quotient lemma assumes nonempty boundary, so its unqualified attribution did not cover the empty open set. This is a citation-scope defect, not a failure of the quotient or DN map: both Sobolev spaces on the empty set are zero, and the existing fixed-atlas definition explicitly sets its empty-boundary space to zero. Split these cases without excluding any original admissible domain.",
+      "evidence_report": "research/inverse-problems-knot-theory-all-109-2026-10-19-step5-v2/step5-v2-initial-r1-u42.json",
+      "uncertain": false,
+      "source_urls": [],
+      "familiar": true
+    },
+    {
+      "ledger": "canonical-defect-ledger",
+      "path": "research/defect-ledger.jsonl",
+      "action": "record-fixed-finding",
+      "id": "lem-ip-anisotropic-conductivity-map-wellposedness",
+      "severity": "nonfatal",
+      "status": "fixed",
+      "finding": "Step 4.1 used scalar-conductivity notation gamma|grad W|^2 for a matrix coefficient without declaring a quadratic-form convention. Its intended scalar energy expansion is valid by symmetry and the weak equation, so this is a notation defect, not a missing existence or boundedness argument. Replaced all three energies by (gamma grad w) dot grad w and retained the original estimate and bilinearity proof.",
+      "evidence_report": "research/inverse-problems-knot-theory-all-109-2026-10-19-step5-v2/step5-v2-initial-r1-u42.json",
+      "uncertain": false,
+      "source_urls": [],
+      "familiar": true
+    },
+    {
+      "ledger": "canonical-defect-ledger",
+      "path": "research/defect-ledger.jsonl",
+      "action": "record-fixed-finding",
+      "id": "thm-ip-boundary-fixing-diffeomorphism-preserves-dn-map",
+      "severity": "nonfatal",
+      "status": "fixed",
+      "finding": "F1 overstated what the candidate definition itself establishes. The needed existence and uniqueness result was already stated in F2, listed in deps, and used explicitly in step 3.1, so this is an inaccurate fact attribution rather than an unsupported theorem. F1 now defines the candidate pairing conditionally and attributes well-posedness to F2.",
+      "evidence_report": "research/inverse-problems-knot-theory-all-109-2026-10-19-step5-v2/step5-v2-initial-r1-u42.json",
+      "uncertain": false,
+      "source_urls": [],
+      "familiar": true
+    },
+    {
+      "ledger": "canonical-defect-ledger",
+      "path": "research/defect-ledger.jsonl",
+      "action": "record-fixed-finding",
+      "id": "thm-ip-boundary-fixing-diffeomorphism-preserves-dn-map",
+      "locus": "Facts F6 and Proof 2.1, used by 3.1 and 4.1",
+      "severity": "nonfatal",
+      "status": "fixed",
+      "finding": "Equality of L2 traces needed the explicit kernel T=H1_0 result to identify quotient classes.",
+      "correction": "Added the existing trace-kernel theorem to deps and F6, and made the quotient inference explicit in step 2.1.",
+      "evidence_report": "research/inverse-problems-knot-theory-all-109-2026-10-19-step5-v2/step5-v2-initial-r1-u42.json",
+      "uncertain": false,
+      "source_urls": [],
+      "familiar": true
+    },
+    {
+      "ledger": "canonical-defect-ledger",
+      "path": "research/defect-ledger.jsonl",
+      "action": "record-fixed-finding",
+      "id": "thm-ip-boundary-fixing-diffeomorphism-preserves-dn-map",
+      "locus": "Choice accounting",
+      "severity": "nonfatal",
+      "status": "fixed",
+      "finding": "The integrated Riemannian proof uses the CC change-of-variables supplier, contrary to the old choice-free claim.",
+      "correction": "Restricted choice-free accounting to the pointwise tensor calculation and recorded CC for the integrated argument.",
+      "evidence_report": "research/inverse-problems-knot-theory-all-109-2026-10-19-step5-v2/step5-v2-initial-r1-u42.json",
+      "uncertain": false,
+      "source_urls": [],
+      "familiar": true
+    },
+    {
+      "ledger": "published-consumer-ledger",
+      "path": "research/published-consumer-supplier-ledger.md",
+      "action": "record-consumer-examination",
+      "supplier": "def-ip-anisotropic-conductivity-dirichlet-to-neumann-map",
+      "consumers": [
+        "lem-ip-anisotropic-conductivity-map-wellposedness",
+        "thm-ip-boundary-fixing-diffeomorphism-preserves-dn-map",
+        "ex-ip-anisotropic-boundary-fixing-gauge-example"
+      ],
+      "published_consumers": [],
+      "finding": "The definition now separates the nonempty trace-lemma application from the empty-boundary zero-space convention. All direct item consumers are draft original-frontier items and retain sound uses; no published item or outside-frontier consumer was identified by the dependency/reference search. No published repair or maintenance request is required.",
+      "uncertain": false,
+      "source_urls": [],
+      "familiar": true
+    }
+  ],
+  "gate_resolutions": [],
+  "repair_notes": {
+    "status": "assigned_repair_complete",
+    "completed_items": [
+      "def-ip-anisotropic-conductivity-dirichlet-to-neumann-map",
+      "lem-ip-anisotropic-conductivity-map-wellposedness",
+      "thm-ip-boundary-fixing-diffeomorphism-preserves-dn-map"
+    ],
+    "conventions": "Real H1 quotient classes; symmetric uniformly positive-definite matrix coefficients; AC with CC supplied by AC. Empty domains remain admissible.",
+    "sources_consulted": [
+      "items/lem-ip-euclidean-trace-quotient-is-h12.md: Statement and complete proof",
+      "items/def-ip-sobolev-spaces-on-compact-riemannian-domain.md: Definition, empty-boundary convention",
+      "items/def-ip-conductivity-dirichlet-to-neumann-map.md: Definition and verification",
+      "items/thm-poincare-inequality-for-w-one-p-zero.md: complete Statement, slab-domain p=2 case",
+      "items/thm-sobolev-spaces-are-banach-spaces.md: complete Statement including empty-open-set case",
+      "items/thm-lax-milgram.md: complete Statement, real Hilbert bilinear specialization",
+      "items/thm-kernel-of-the-trace-is-w-one-p-zero.md: complete Statement, bounded smooth domain and p=2",
+      "items/thm-lp-trace-operator-on-a-bounded-c-one-domain.md: complete Statement, bounded H1 to L2 trace",
+      "items/thm-smooth-up-to-the-boundary-density-on-smooth-domains.md: complete Statement, AC and p=2",
+      "items/thm-c-one-change-of-variables-for-nonnegative-lebesgue-measurable-functions.md: complete Statement, CC and nonnegative measurable integrands",
+      "items/thm-chain-rule-for-total-derivatives.md: complete Statement",
+      "items/def-riemannian-volume-density.md: complete Definition, absolute Jacobian density convention",
+      "items/def-pullback-riemannian-metric.md: complete Definition",
+      "items/ex-ip-anisotropic-boundary-fixing-gauge-example.md: complete carrier, direct use of the definition on the nonempty unit ball"
+    ],
+    "source_reading_limits": "No external sources consulted; these quotient, energy and change-of-variables arguments are familiar.",
+    "downstream_examination": [
+      {
+        "id": "lem-ip-anisotropic-conductivity-map-wellposedness",
+        "affected_use": "Statement, F1, and steps 1.1, 2.1, 3.2, 4.1 use the boundary quotient and energy candidate. The split trace citation changes neither quotient nor admissible domains.",
+        "disposition": "sound under definition change; assigned full review and repair completed without Statement change",
+        "path": "items/lem-ip-anisotropic-conductivity-map-wellposedness.md",
+        "supplier": "def-ip-anisotropic-conductivity-dirichlet-to-neumann-map",
+        "route": "frontier",
+        "invalidated_claim": "None: the original quotient, weak-solution conditions and energy form are unchanged; the trace justification now distinguishes the empty case.",
+        "minimality": "No consumer Statement or Definition change is needed; propagation stops at this hop."
+      },
+      {
+        "id": "thm-ip-boundary-fixing-diffeomorphism-preserves-dn-map",
+        "affected_use": "Statement, F1, and steps 3.1 and 4.1 use the weak energy form on a bounded smooth domain. This nonempty domain satisfies the unchanged trace-quotient hypotheses.",
+        "disposition": "sound under definition change; assigned full review and repair completed without Statement change",
+        "path": "items/thm-ip-boundary-fixing-diffeomorphism-preserves-dn-map.md",
+        "supplier": "def-ip-anisotropic-conductivity-dirichlet-to-neumann-map",
+        "route": "frontier",
+        "invalidated_claim": "None: the original quotient, weak-solution conditions and energy form are unchanged; the trace justification now distinguishes the empty case.",
+        "minimality": "No consumer Statement or Definition change is needed; propagation stops at this hop."
+      },
+      {
+        "id": "ex-ip-anisotropic-boundary-fixing-gauge-example",
+        "affected_use": "Example, F2, and Verification 4.1 use the boundary energy map on the nonempty unit ball B^n. The definition still supplies exactly the same quotient and energy form.",
+        "disposition": "sound; unchanged statement, so propagation stops",
+        "path": "items/ex-ip-anisotropic-boundary-fixing-gauge-example.md",
+        "supplier": "def-ip-anisotropic-conductivity-dirichlet-to-neumann-map",
+        "route": "frontier",
+        "invalidated_claim": "None: the original quotient, weak-solution conditions and energy form are unchanged; the trace justification now distinguishes the empty case.",
+        "minimality": "No consumer Statement or Definition change is needed; propagation stops at this hop."
+      }
+    ],
+    "page_interface": "The two owning pages are frontmatter-only compact-v1 and retain the same item inventories. No diagrams occur in the assigned items or are needed for these analytic identities.",
+    "unresolved_obligations": [],
+    "validation_results": [
+      {
+        "command": "node tools/tsx-run.mjs tools/precheck.mts items/def-ip-anisotropic-conductivity-dirichlet-to-neumann-map.md items/lem-ip-anisotropic-conductivity-map-wellposedness.md items/thm-ip-boundary-fixing-diffeomorphism-preserves-dn-map.md --json",
+        "exit_code": 0,
+        "result": "3 files; 2 proof-bearing items passed; definition not-applicable; 0 failures."
+      },
+      {
+        "command": "node tools/rendercheck.mjs items/def-ip-anisotropic-conductivity-dirichlet-to-neumann-map.md items/lem-ip-anisotropic-conductivity-map-wellposedness.md items/thm-ip-boundary-fixing-diffeomorphism-preserves-dn-map.md --json",
+        "exit_code": 0,
+        "result": "3 checked; no errors or warnings."
+      },
+      {
+        "command": "node tools/proof-contract.mjs research/inverse-problems-knot-theory-all-109-2026-10-19-batch-42.proof-contracts.json --strict --items def-ip-anisotropic-conductivity-dirichlet-to-neumann-map,lem-ip-anisotropic-conductivity-map-wellposedness,thm-ip-boundary-fixing-diffeomorphism-preserves-dn-map --json",
+        "exit_code": 0,
+        "result": "All three assigned contracts checked; ok:true; no errors or warnings."
+      },
+      {
+        "command": "node tools/manifest-deps.mjs research/inverse-problems-knot-theory-all-109-2026-10-19-batch-42.pages.json",
+        "exit_code": 0,
+        "result": "6 item entries; 0 missing dependency arrays; 0 errors."
+      },
+      {
+        "command": "node tools/proof-layout.mjs items/def-ip-anisotropic-conductivity-dirichlet-to-neumann-map.md items/lem-ip-anisotropic-conductivity-map-wellposedness.md items/thm-ip-boundary-fixing-diffeomorphism-preserves-dn-map.md",
+        "exit_code": 0,
+        "result": "Final batched check after all item edits: 3 items, 12 steps, 0 defects."
+      },
+      {
+        "command": "git diff --check -- items/def-ip-anisotropic-conductivity-dirichlet-to-neumann-map.md items/lem-ip-anisotropic-conductivity-map-wellposedness.md items/thm-ip-boundary-fixing-diffeomorphism-preserves-dn-map.md research/inverse-problems-knot-theory-all-109-2026-10-19-batch-42.pages.json research/inverse-problems-knot-theory-all-109-2026-10-19-batch-42.proof-contracts.json",
+        "exit_code": 0,
+        "result": "No whitespace errors."
+      },
+      {
+        "command": "Direct original/current claim-section comparison and hyperlink scan",
+        "exit_code": 0,
+        "result": "Only Definition changed; lemma/theorem Statements unchanged; all three complete claim sections contain no hyperlinks."
+      },
+      {
+        "command": "Current itemHashGuard comparison against all three recorded reviews",
+        "exit_code": 0,
+        "result": "All three post_sha256 guards match the current item carriers."
+      },
+      {
+        "command": "Assigned manifest claim/dependency mirrors compared directly with current item sections and deps",
+        "exit_code": 0,
+        "result": "All three selected item mirrors match exactly."
+      }
+    ],
+    "additional_confirmed_nonfatal_findings": [
+      {
+        "id": "thm-ip-boundary-fixing-diffeomorphism-preserves-dn-map",
+        "locus": "Facts F6 and Proof 2.1, used by 3.1 and 4.1",
+        "finding": "Equality of L2 traces needed the explicit kernel T=H1_0 result to identify quotient classes.",
+        "repair": "Added the existing trace-kernel theorem to deps and F6, and made the quotient inference explicit in step 2.1."
+      },
+      {
+        "id": "thm-ip-boundary-fixing-diffeomorphism-preserves-dn-map",
+        "locus": "Choice accounting",
+        "finding": "The integrated Riemannian proof uses the CC change-of-variables supplier, contrary to the old choice-free claim.",
+        "repair": "Restricted choice-free accounting to the pointwise tensor calculation and recorded CC for the integrated argument."
+      }
+    ],
+    "repair_complete": true,
+    "classification": "All three exact rejected tuples are confirmed_nonfatal. Each defect is repaired; zero confirmed-fatal findings and no unresolved mathematics. These repair reviews are not independent reviews of the repairs.",
+    "metadata_repairs": {
+      "contracts": "Regenerated citations and derivations only for the three assigned entries; updated the definition source_exact, empty-case boundary evidence and definition review; added explicitly non-independent Step-5 repair notes while retaining earlier risk-review history.",
+      "manifest": "Updated only the three assigned item mirrors: the definition clause and its new fixed-atlas convention dependency, and the theorem trace-kernel dependency. Item kinds, page inventories, publication status and dependency levels remain unchanged.",
+      "locking": "Shared metadata edited only after successful acquire; reread current carriers, updated assigned rows, passed strict selected contract check and manifest dependency check, then released step5-v2-initial-r1-u42."
+    },
+    "statement_comparison": {
+      "def-ip-anisotropic-conductivity-dirichlet-to-neumann-map": "Definition changed by an explicit empty/nonempty case split; no admissible domain, conductivity, boundary class or conclusion removed.",
+      "lem-ip-anisotropic-conductivity-map-wellposedness": "Statement byte-for-byte unchanged.",
+      "thm-ip-boundary-fixing-diffeomorphism-preserves-dn-map": "Statement byte-for-byte unchanged."
+    }
+  },
+  "supporting_evidence": {
+    "research/inverse-problems-knot-theory-all-109-2026-10-19-batch-42.proof-contracts.json": "864388b4cfa19948eca1373dfaaed2f01dd3b63cece7ff0dd47cdca46f5bc12d",
+    "research/inverse-problems-knot-theory-all-109-2026-10-19-batch-42.pages.json": "7faa1cc4d13675a015c103ddfd71329c920fe31fc7448b547af48775a6c5ac30"
+  }
+}

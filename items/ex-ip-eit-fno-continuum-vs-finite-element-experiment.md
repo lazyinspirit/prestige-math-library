@@ -16,7 +16,7 @@ sources:
   references:
     - title: "Maarten V. de Hoop, Nikola B. Kovachki, Matti Lassas and Nicholas H. Nelsen, Extension and neural operator approximation of the electrical impedance tomography inverse map"
       url: "https://arxiv.org/pdf/2511.20361"
-      locator: "Theorem 4.8, §5 numerical experiments and Appendix C, printed pp. 23–30 and 37–39."
+      locator: "Theorem 4.8, §5 numerical experiments and Appendix C, printed pp. 31–34 and 37–45; Appendix C starts on printed p. 61."
 ---
 
 ## Example
@@ -33,7 +33,7 @@ Let $\mathcal H=L^2(\partial\Omega\times\partial\Omega)$ and $\mathcal Y=L^2(\Om
 
 **Given:** a nonempty finite $S\subset\mathcal H$, a point $x_*\notin S$, and $y_*\ne0$ in $\mathcal Y$.
 
-[F1] The planned continuum theorem takes inputs in $L^2(\partial\Omega\times\partial\Omega)$, outputs in $L^2(\Omega)$ and states a uniform existence bound on a compact continuum input set; it does not assert a training or finite-sample risk guarantee. ([[thm-ip-eit-fno-noise-robust-existence]])
+[F1] The continuum theorem takes inputs in $L^2(\partial\Omega\times\partial\Omega)$ and outputs in $L^2(\Omega)$, and bounds the reconstruction error for every $\gamma\in X_d(R)$ and $\eta\in K_\delta$, where $K_\delta=\{\eta\in K:\|\eta\|_2\le\delta\}$ for compact $K$. Step 1.1 of its proof shows that these inputs form the compact sum $\{\kappa_\gamma:\gamma\in X_d(R)\}+K_\delta$. The theorem asserts no training or finite-sample risk guarantee. ([[thm-ip-eit-fno-noise-robust-existence]])
 
 ## Proof
 

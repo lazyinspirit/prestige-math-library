@@ -1,0 +1,3668 @@
+PDF PAGE 1
+arXiv:2405.15992v2  [cs.LG]  17 Oct 2024
+DATA COMPLEXITY ESTIMATES
+FOR OPERATOR LEARNING
+A PREPRINT
+Nikola B. Kovachki, Samuel Lanthaler, Hrushikesh Mhaskar
+October 21, 2024
+ABSTRACT
+Operator learning has emerged as a new paradigm for the data-driven approxima-
+tion of nonlinear operators. Despite its empirical success, the theoretical under-
+pinnings governing the conditions for efﬁcient operator learning remain incom-
+plete. The present work develops theory to study the data complexity of operator
+learning, complementing existing research on the parametric complexity. We in-
+vestigate the fundamental question: How many input/output samples are needed
+in operator learning to achieve a desired accuracy ǫ? This question is addressed
+from the point of view of n-widths, and this work makes two key contributions.
+The ﬁrst contribution is to derive lower bounds on n-widths for general classes of
+Lipschitz and Fr´echet differentiable operators. These bounds rigorously demon-
+strate a “curse of data-complexity”, revealing that learning on such general classes
+requires a sample size exponential in the inverse of the desired accuracy ǫ. The
+second contribution of this work is to show that “parametric efﬁciency” implies
+“data efﬁciency”; using the Fourier neural operator (FNO) as a case study, we
+show rigorously that on a narrower class of operators, efﬁciently approximated
+by FNO in terms of the number of tunable parameters, efﬁcient operator learning
+is attainable in data complexity as well. Speciﬁcally, we show that if only an al-
+gebraically increasing number of tunable parameters is needed to reach a desired
+approximation accuracy, then an algebraically bounded number of data samples is
+also sufﬁcient to achieve the same accuracy.
+1
+Introduction
+In recent years, operator learning has emerged as a new paradigm for the data-driven approximation
+of operators arising in engineering and the physical sciences. Popular operator learning frameworks
+build on deep neural networks, suitably generalized to inﬁnite dimensions. They approximate non-
+linear operators, mapping input functions to output functions. Such operators abound in scientiﬁc
+computing and are often associated with the solution operator of an underlying partial differential
+equation (PDE), e.g. mapping initial conditions, boundary data, or coefﬁcient ﬁelds to the solu-
+tion of the PDE. In these applications, operator learning frameworks have shown great potential as
+surrogate models, achieving signiﬁcant gains in computational efﬁciency over traditional numerical
+methods. Since they are data-driven, these methods can also be used to approximate operators for
+which a mathematical description in terms of a PDE is incomplete or not available.
+While there is an increasing body of empirical evidence demonstrating the practical efﬁcacy of oper-
+ator learning frameworks, our theoretical understanding of these methods is still far from complete.
+There are several papers studying operator learning from an approximation theoretic perspective,
+aiming to bound the total number of parameters (model size) required to approximate a given op-
+erator, or general classes of operators, to a desired approximation accuracy. For a recent review,
+we refer to [22]. We highlight work on holomorphic operators, which represent a general class of
+
+PDF PAGE 2
+Data Complexity Estimates for Operator Learning
+A PREPRINT
+operators for which efﬁcient quantitative error and complexity estimates can be derived. Approxi-
+mation theoretic results for holomorphic operators build on the inﬂuential work by Cohen, DeVore
+and Schwab [9, 10], including further developments in [38, 36, 39, 18, 32, 25, 39]. Under suit-
+able conditions, these results allow one to prove that ReLU deep operator networks (DeepONet)
+approximating holomorphic operators can achieve convergence rates that decay algebraically in the
+number of tunable parameters of the architecture. Algebraic convergence rates have also been ob-
+tained for operator Barron spaces, which are discussed in the recent paper [20], and a related context
+of operator reproducing kernel Hilbert spaces (RKHS) [35, 26].
+The previously mentioned results are restricted to either holomorphic operators or operators belong-
+ing to a Barron/RKHS space. Another general and natural class of non-linear operators are general
+Lipschitz continuous operators. Upper error and complexity bounds for the approximation of such
+operators have been considered e.g. in [8, 30, 14, 15, 37]. Recently, lower complexity bounds,
+identifying limitations of operator learning have also been obtained [27, 23]. In particular, it has
+been shown that operator learning on general classes of Lipschitz continuous and Fr´echet differen-
+tiable operators generally suffers from a “curse of parametric complexity”; These results show that
+there exist Fr´echet differentiable operators of any given smoothness k, for which the approximation
+to a desired uniform accuracy ǫ requires models with a number of parameters that is exponential,
+≳exp(cǫ−γ) in the inverse of the accuracy. This exponential “curse” appears as a scaling limit of the
+well-known curse of dimensionality encountered in high-dimensional approximation problems and
+applies to popular operator learning frameworks such as DeepONets, the Fourier neural operator,
+or PCA-Net [31, 28, 8]. In this context, we mention relevant work [37], where “hyperexpressive”
+(non-standard) neural networks are shown to overcome this curse when the complexity is measured
+by the number of tunable (real-valued) parameters. However, even with these non-standard archi-
+tectures, the curse re-appears when accounting for the number of bits required to represent the real
+parameters to sufﬁcient precision on computational hardware [24].
+The complementary question of the data-complexity of operator learning has received considerably
+less attention in the literature. The sample complexity of operator learning for holomorphicoperators
+has been studied in [5, 4, 3]. It has been shown that, for this class of operators, approximation to
+accuracy ǫ can be achieved with a number of samples that only scales algebraically in ǫ−1.
+For general classes of Lipschitz continuous operators, we mention the early work by [33]. This
+work derives matching upper and lower bounds on the continuous non-linear n-widths of spaces
+of non-linear Lipschitz functionals deﬁned on L2-spaces, showing that such n-widths only decay
+logarithmically, as log(n)−λ for ﬁxed λ depending on the speciﬁc assumptions.
+Another paper of note is [30]. In this work, non-asymptotic upper bounds for the generalization
+error of empirical risk minimizers on suitable classes of operator networks are derived, achieving
+logarithmic decay rates that qualitatively match the n-width bounds of [33]. In a related direction,
+the authors of [19] provide estimates on the Rademacher complexity of FNO, allowing generaliza-
+tion error estimates to be derived. We ﬁnally mention the recent work [34], where a connection is
+made between the number of available samples and the required size of the DeepONet reconstruction
+dimension.
+The general curse of parametric complexity identiﬁed in [27, 24], and the n-width estimates derived
+in the speciﬁc setting of [33] suggest that operator learning on general classes of operators might
+suffer from an analogous “curse of sample complexity”, potentially requiring an exponential number
+of samples to achieve a desired approximation accuracy. A general theory which would imply such
+a curse of data-complexity has so far been outstanding. Furthermore, the empirically observed
+efﬁciency of operator learning for concrete problems raises the question how such a theoretical
+exponential lower bound on the sample complexity of operator learning can be reconciled with
+practical observations.
+The results of the present paper shed new light on these fundamental questions. We develop lower
+and upper bounds on the sample complexity of operator learning. Our main contributions are out-
+lined as follows.
+Lower bounds.
+We prove that operator learning on general classes of operators, such as Lipschitz
+operators or continuously differentiable operators possessing k bounded Fr´echet derivatives, suffers
+from a curse of sample complexity; in the following prototypical settings we prove that approx-
+2
+
+PDF PAGE 3
+Data Complexity Estimates for Operator Learning
+A PREPRINT
+imation of such operators requires an exponential number of samples in a minimax sense that is
+independent of the reconstruction algorithm. We demonstrate such bounds for:
+1. uniform approximation of operators over common compact sets of input functions, deﬁned
+by a smoothness constraint,
+2. approximation in a Bochner Lp-norm with respect to input functions drawn from a Gaus-
+sian measure with algebraically decaying covariance spectrum.
+Upper bounds.
+Taking the Fourier neural operator (FNO) as a case study, we prove that on a
+narrower class of operators, efﬁciently approximated by FNO in terms of the required model size, the
+data complexity of operator learning is similarly benign; speciﬁcally, we introduce suitable spaces
+of operators Aγ inspired by related work in ﬁnite dimensions [17, 7, 1], and show that a number
+of samples that grows at most algebraically in the inverse of the desired approximation error ǫ−1
+sufﬁces for approximation of operators in Aγ. These results hold in the root mean square sense with
+respect to a probability measure µ of input functions.
+1.1
+Outline
+In section 2, we provide a detailed overview of our lower data complexity bounds, including a sketch
+of their proofs. Complete details of the proofs of these lower data complexity bounds can be found in
+Appendix C for the ﬁnite-dimensional setting and Appendix D in the inﬁnite-dimensional setting. A
+summary of our upper bounds for FNO are presented in section 3, with further details in Appendix
+E. Conclusions are presented in section 4. A short summary of notation followed in this paper,
+including a review of the notion of Fr´echet differentiability studied in the ﬁrst part, is included in
+Appendix A.
+2
+Lower data complexity bounds
+In the present section, we provide an overview of our results on lower data complexity bounds.
+To promote readability, we will only outline the proofs of these results, and refer the reader to the
+appendices for detailed derivations. Before stating our main results, we recall two notions of n-
+widths, which provide a measure of the complexity of a space of functions/operators, and on which
+our theoretical lower bounds are based.
+2.1
+Two notions of n-widths
+We recall two different notions of n-widths which will be the primary objects of study throughout
+the ﬁrst part of present work. Let (X, ∥· ∥X) be a normed vector space and let K ⊂X be a subset.
+Deﬁne the encoder En : X →Rn to be any mapping such that En|K is continuous in the topology
+of X. Let the decoder Dn : Rn →X be any mapping. Following [12], we deﬁne the continuous,
+nonlinear n-width of K in X by
+dn(K)X :=
+inf
+En,Dn sup
+f∈K
+∥f −(Dn ◦En)(f)∥X.
+Suppose now that X is a real-valued, Banach function space, in the sense of [6, Deﬁnition 1.3],
+over a topological measure space (Ω, µ). Suppose that there exists a unique, linear injection ι :
+K →C(Ω) such that f = ιf µ-almost everywhere. Let Zn = {z1, . . . , zn} ⊂Ωbe any set
+of points. We may then deﬁne, for any f ∈K, the functional δZn : K →Rn by δZn(f) =
+ (ιf)(z1), . . . (ιf)(zn)
+
+. We deﬁne the sampling, nonlinear n-width of K in X by
+sn(K)X :=
+inf
+Zn,Dn sup
+f∈K
+∥f −(Dn ◦δZn)(f)∥X.
+Note that, in general, δZn will not be continuous in the topology of X. A special case when con-
+tinuity holds is X = C(Ω). Another such case is when Y ֒→X is another Banach space which
+compactly embeds into X and for which δZn : Y →Rn is continuous. Then for any bounded set
+K ⊂Y , Lemma B.2 in Appendix B shows that the map δZn|K is continuous in X. In both of these
+cases, we obtain
+sn(K)X ≥dn(K)X.
+3
+
+PDF PAGE 4
+Data Complexity Estimates for Operator Learning
+A PREPRINT
+A particularly important case which we will often consider is X = Lp
+µ(Ω) the Lebesgue space and
+Y = W k,q
+µ (Ω) the Sobolev space with K = U(Y ) the unit ball of Y . In this setting, whenever Y
+embeds continuously in C(Ω) and compactly into X, the above lower bound holds.
+2.2
+Bounds for function spaces
+In this section, we consider Banach function spaces deﬁned over the measure space Ω= [0, 1]d
+equipped with the Lebesgue measure or Ω= Rd equipped with a Gaussian measure. The ﬁnite-
+dimensional results of this section prepare our later extension to the inﬁnite-dimensional context of
+operator learning considered in section 2.3. Here, we establish lower bounds for the continuous,
+non-linear n-width dn and the sampling n-width sn of the unit ball of Ck(Ω) or W k,q(Ω) in Lp(Ω)
+and of the unit ball of Ck(Ω) in C(Ω). For dn, with Ω= [0, 1]d, such results have ﬁrst been derived
+in [12]; for our application to operator learning, it will be crucial to carefully track and control the
+dependency of these estimates on the dimension d. Direct application of the proof techniques in [12]
+appears to lead to an exponential dependence of these constants on d. This is too pessimistic for our
+purposes, where, informally speaking, we consider the limit d →∞. We therefore present modiﬁed
+proofs for the results of [12] which give algebraic dependence on d.
+2.2.1
+Lower n-width bounds for Ω= [0, 1]d
+The following theorem summarizes our sampling width estimate for the unit balls in the function
+spaces W k,q(Ω) and Ck(Ω), with approximation error measured in the Lp-norm. We note that the
+sampling width is deﬁned via point-evaluation; to apply this notion to spaces W k,q(Ω), we impose
+that k > d/q if q > 1 or k ≥d if q = 1, which ensures point-evaluation is well-deﬁned by the
+Sobolev embedding W k,q(Ω)֒→C(Ω) [2]. Note that here and throughout the rest of this work, we
+denote by U(E), the unit ball of any normed space E; see Appendix A for further details on notation.
+Theorem 2.1. Let Ω= [0, 1]d. Let K = U
+ W k,q(Ω)
+
+for any 1 ≤q ≤∞with k > d/q if q > 1 or
+k ≥d if q = 1, or let K = U
+ Ck(Ω)
+
+with q = ∞and k ∈N. Let 1 ≤p ≤∞then there exists a
+constant Q = Q(k, q) > 0 such that, for any n ∈N,
+sn(K)Lp ≥Q
+
+1 + d
+kp
+−k
+d−k/qn−k/d.
+The following theorem summarizes the corresponding non-linear n-width estimates. These hold
+only under the restriction p ≥q, but are true for a more general class of continuous encoders than
+the encoding by sample evaluation considered in the previous Theorem 2.1.
+Theorem 2.2. Let K = U
+ W k,q(Ω)
+
+for any 1 ≤q ≤∞or K = U
+ Ck(Ω)
+
+with q = ∞. Let
+p ≥q then there exists a constant Q = Q(k, q) > 0 such that, for any n ∈N,
+dn(K)Lp ≥Q
+
+1 + d
+kp
+−k
+d−k/qn−k/d.
+Remark 2.3. In Theorems 2.1 and 2.1, the constant is independent of the dimension d only in the
+case p = q = ∞. Furthermore, by considering this special case in each proof, we verify that the
+same lower bounds holds for U
+ Ck(Ω)
+
+in C(Ω).
+Remark 2.4. It has been claimed, for example in [13], that dn has been asymptotically determined
+for all p, q pairs, referring to [12]. We could not verify the required estimates in the case q > p
+by using the proof techniques from [12]. In fact, this problem has only recently been settled by
+the contemporaneous work [40]. However, the proof of [40] yields a constant with an exponential
+dependence on the dimension d. Since the case q > p (the speciﬁc setting where q = ∞, p < ∞
+to be precise) is of particular relevance to operator learning, we circumvent this issue by instead
+establishing lower bounds on the sampling widths sn in Theorem 2.1. Our estimate is valid for any
+p, q pair, and the constant has an algebraic dependence on the dimension d.
+4
+
+PDF PAGE 5
+Data Complexity Estimates for Operator Learning
+A PREPRINT
+2.2.2
+Overview of the proofs of Theorems 2.1 and 2.2
+The proofs of Theorems 2.1 and 2.2 follows along similar lines. The ﬁrst step, detailed in Appendix
+C.1, is to partition the unit cube [0, 1]d = Sn
+j=1 Qj into n = md subcubes of side-length 1/m,
+for ﬁxed m ∈N. We next construct a suitable family of n bump functions φγ,j, j = 1, . . . , md
+supported in distinct cubes Qj of the partition. This approach is mostly analogous to [12], and the
+lower n−k/d bound follows by considering functions of the form
+f(x) = J
+n
+X
+j=1
+αjφγ,j(x),
+for carefully chosen scaling J > 0, |αj| ≤1 and n = md ∈N.
+Our main technical improvement over [12] is the introduction of a free parameter γ ∈(0, 1). This
+parameter controls the extent of the set {φγ,j = 1} ⊂Qj, with φγ,j →1Qj as γ →1. The choice of
+γ = γ(d) can then be optimized to control the ratio of ∥φγ,j∥Lp ∼γd/p to ∥φγ,j∥Ck ∼(1 −γ)−k,
+resulting in the following d-dependency of the constant
+C = Q
+
+1 + d
+kp
+−k
+d−k/q
+which holds both in Theorems 2.1 and 2.2. We note that a ﬁxed choice, such as γ = 1/2 as in [12],
+would give the same asymptotics in n, but would lead to a constant C with exponential dependency
+on d. We refer to Appendix C.1 for the details of the required argument.
+Remark 2.5. The argument used to prove Theorem 2.2 does not achieve the same lower bound for
+the case q > p. Tracing through the proof given in the appendix, we note that (C.7) leads to
+n
+X
+j=1
+|αj|q ≤
+
+
+n
+X
+j=1
+|αj|p
+
+
+q/p
+≤nq/pγdq/p∥f∥q
+p.
+Then (C.8) implies
+∥f∥W k,q ≲n(k/d)+(q−p)/p
+and therefore
+dn(K)Lp ≳n−(k/d)−(q−p)/p
+and the expression on the right-hand side appears to overcome the curse of dimensionality, decaying
+at least as fast as n−(q−p)/p even in the limit d →∞. This inadequacy stems from using the
+Bernstein width to lower bound dn as proposed in [12]. We refer to the recent work [40] for a new
+proof technique which overcomes this challenge.
+2.2.3
+Lower n-width bounds for Gaussian measures on Ω= Rd
+In this section, we consider Ω= Rd but measure the approximation error in weighted Lp
+ρd-norms,
+where ρd denotes the standard Gaussian density on Rd. The following theorem provides estimates
+on the sampling widths.
+Theorem 2.6. Let K = U
+ W k,q
+ρd (Rd)
+
+∩C(Rd) for any 1 ≤q ≤∞or K = U
+ Ck(Rd)
+
+with
+q = ∞. Let 1 ≤p ≤∞then there exists a constant Q = Q(k, q) > 0 such that, for any n ∈N,
+sn(K)Lp
+ρd ≥Q
+
+1 + d
+kp
+−k
+d−k/qn−k/d.
+The following theorem summarizes estimates on the continuous non-linear n-widths in the weighted
+Lp
+ρd setting.
+Theorem 2.7. Let K = U
+ W k,q
+ρd (Rd)
+
+for any 1 ≤q ≤∞or K = U
+ Ck(Rd)
+
+with q = ∞. Let
+p ≥q then there exists a constant Q = Q(k, q) > 0 such that, for any n ∈N,
+dn(K)Lp
+ρd ≥Q
+
+1 + d
+kp
+−k
+d−k/qn−k/d.
+5
+
+PDF PAGE 6
+Data Complexity Estimates for Operator Learning
+A PREPRINT
+2.2.4
+Overview of the proof of Theorems 2.6 and 2.7
+Detailed proofs of Theorems 2.6 and 2.7 are given in Appendix C.2. The main difference with the
+case of Ω= [0, 1]d is that the partition has to be modiﬁed so that the union of the support of all
+functions becomes Rd instead of [0, 1]d. We achieve this by deﬁning an invertible transport map
+between the standard Gaussian measure on Rd and the uniform measure on [0, 1]d. In particular, we
+deﬁne ξ : R →(0, 1) by
+ξ(x) =
+ˆ x
+−∞
+ρ1(y) dy,
+to be the cumulative distribution function of ρ1. We use x 7→ξ(x), applied to each variable
+x1, . . . , xd, to deﬁne a measure-theoretic isomorphism between Lp([0, 1]d) and Lp
+ρd(Rd). After
+this transformation, the ideas mirror the estimates for Ω= [0, 1]d and are again based on a partition
+of the domain. The main difference in the present case are some additional technical complica-
+tions arising due to the fact that derivatives now have to be applied to a composition of the bump
+functions φγ,j ◦ξ introduced in the previous section, and relevant change-of-variables mapping ξ.
+Importantly, the transformation y 7→ξ−1(y) “stretches” the domain, implying that gradients are
+generally reduced when passing from φγ,j to φγ,j ◦ξ. This fact is the basis of our argument; we
+refer the reader to Appendix C.2 for the technical details.
+2.3
+Bounds for spaces of operators
+We will now consider the case when the goal is to approximate operators G belonging to some class
+of operators U and inputs are taken from an inﬁnite dimensional, separable Banach space X.
+Reconstruction error norms.
+We will restrict our attention to the following two approximation
+theoretic settings.
+In the ﬁrst setting, we ﬁx a compact set K ⊂X and the aim is to approximate an operator G :
+K →R, uniformly over K. Thus, we study approximation in spaces of non-linear functionals
+C(K) = C(K; R), and the approximation error of an encoder/decoder pair (E, D) is measured by
+∥G −D ◦E(G)∥C(K) = sup
+u∈K
+|G(u) −D ◦E(G)(u)|.
+In the second setting, we ﬁx a Gaussian measure µ ∈P(X) and we are interested in approxi-
+mating operators G : X →R with respect to the norm Lp
+µ(X). The approximation error of an
+encoder/decoder pair (E, D) is measured by
+∥G −D ◦E(G)∥Lp
+µ(X ) = Eu∼µ
+h
+|G(u) −D ◦E(G)(u)|pi1/p
+.
+A class of Ck operators.
+To deﬁne the relevant sampling and nonlinear n-widths, we need to
+specify a class of operators U ⊂C(K) or U ⊂Lp
+µ(X), respectively. In the following discussion, we
+consider the relevant class to consist of k-times Fr´echet differentiable operators. We summarize the
+main points here; additional discussion can be found in Appendix A. Given K ⊂X, we denote by
+Ck(K) := {G|K : K →R | G ∈Ck(X)},
+the set of “trace-operators” which is obtained by restricting to K the set of k-times Fr´echet differ-
+entiable operators in Ck(X). Here Ck(X) is deﬁned as the set of operators that possess globally,
+uniformly bounded derivatives. We will establish lower bounds on the sampling n-with and the non-
+linear n-width for the unit ball U = U
+ Ck(K)
+
+. According to our convention, U(Ck(K)) consists
+of all nonlinear operators G : K ⊂X →R possessing an extension G : X →R with
+∥G∥Ck(X ) = max
+0≤ℓ≤k sup
+u∈X
+∥dℓG(u)∥≤1.
+Assumptions on K
+In order to quantify the effect of working in the inﬁnite dimensional setting,
+we must ensure that the set K is large enough. Note that if K ∼= [0, 1]d then Ck(K) ∼= Ck([0, 1]d)
+and the results of subsection 2.2.1 apply. Therefore K cannot be isomorphic to any ﬁnite dimensional
+space and must be truly inﬁnite dimensional for any new interesting effect to be observed. Following
+[27], we make this notion precise by requiring that K contain hypercubes of any dimension with
+algebraically decaying side-length. These hypercubes can be naturally related to smoothness classes
+when X is a Banach function space.
+6
+
+PDF PAGE 7
+Data Complexity Estimates for Operator Learning
+A PREPRINT
+Bounded Bi-orthogonal System.
+For any n
+∈
+N, we say that a sequence of elements
+φ1, . . . , φn ∈X and a sequence of dual elements φ∗
+1, . . . , φ∗
+n ∈X ∗form a bi-orthogonal M-
+bounded system, if for all j, k ∈[n], we have ∥φj∥X ≤1, φ∗
+k(φj) = δkj, and ∥φ∗
+j∥X ∗≤M.
+Hypercubes.
+We say that a set K ⊆X contains α-hypercubes of arbitrary dimension with decay
+rate α > 0, if there exist constants M, c > 0, such that for any n ∈N, there exists a bi-orthogonal
+M-bounded system with elements φ1, . . . , φn ∈Ωsuch that
+
+cn−α
+n
+X
+j=1
+yjφj : y1, . . . , yn ∈[0, 1]
+
+⊆K.
+The next proposition shows that prototypical compact sets on function spaces which are deﬁned
+by a smoothness constraint, contain α-hypercubes in the above sense. We focus here on Lp-based
+Sobolev functions W s,p and continuously differentiable input functions in Cs. Extension of this
+observation to other spaces, such as Besov spaces, is also possible.
+Proposition 2.8. Let D ⊂Rd be a compact Lipschitz domain and ﬁx s ∈N>0, p ∈[1, ∞). If
+K = U
+ W s,p(D)
+
+viewed as a subset of X = Lp(D) then K contains an α-hypercube with decay
+rate α = s/d + 1. If K = U
+ Cs(D)
+
+viewed as a subset of X = C(D), then K contains an
+α-hypercube with decay rate α = s/d.
+The details of the proof of Proposition 2.8 are given in Appendix D.0.1.
+Remark 2.9. The decay rate for K = U
+ W s,p(D)
+
+could potentially be improved to α = s/d, based
+on a wavelet characterization of Sobolev spaces. We do not pursue this reﬁnement here, contending
+ourselves with the rate α = s/d + 1 which is derived based on an elementary argument involving
+Fourier series.
+2.3.1
+Sample Complexity of Operator Learning on Compact Sets
+We ﬁrst consider the following setting. Given a class of non-linear, k-times Fr´echet differentiable,
+functionals G : K ⊂X →R, with K compact, we aim to approximate any such G from data pairs
+{uj, G(uj)} uniformly over K, i.e. with respect to the uniform norm
+∥G∥C(K) := sup
+u∈K
+|G(u)|.
+(2.1)
+More precisely, we aim to approximate G ∈U
+ Ck(K)
+
+, belonging to the unit ball of Ck(K),
+uniformly over the compact set K. In this setting we can prove the following result on the sample-
+complexity in a minimax sense.
+Theorem 2.10. Suppose K ⊆X contains α-hypercubes of arbitrary dimension and let U =
+U
+ Ck(K)
+
+for some k ∈N. Then there exists a constant R = R(k, α, K) > 0 such that
+sn(U)C(K) ≥dn(U)C(K) ≥R
+ log(n)
+−(α+1)k.
+(2.2)
+Theorem 2.10 shows that operator learning of Ck-operators, with respect to the supremum norm on
+input functions, generally requires a number of samples n ≳exp(cǫ−λ) scaling exponentially in the
+desired approximation accuracy ǫ.
+Proof. (Proof of Theorem 2.10)
+The proof relies on the following lemma, which we prove in detail in Appendix D.0.2:
+Lemma 2.11. Suppose K ⊆X contains α-hypercubes of arbitrary dimension with decay rate α > 0.
+Then for any k, d ∈N, there exists a linear embedding ιd : Ck
+0 ([0, 1]d)֒→Ck(K) such that, for all
+f ∈Ck
+0 ([0, 1]d),
+∥ιdf∥Ck(K) ≤Rd(α+1)k∥f∥Ck([0,1]d),
+7
+
+PDF PAGE 8
+Data Complexity Estimates for Operator Learning
+A PREPRINT
+for some constant R = R(k, K) > 0, and
+∥ιdf∥C(K) ≥∥f∥C([0,1]d).
+Furthermore, there exists a continuous, linear mapping hd : [0, 1]d →K such that, for all f ∈
+Ck
+0 ([0, 1]d) and y ∈[0, 1]d,
+f(y) =
+ ιdf
+ hd(y)
+
+.
+Lemma 2.11 allows us to “embed” a ﬁnite-dimensional approximation problem in the inﬁnite-
+dimensional approximation problem of Theorem 2.10. This allows us to use the lower bounds on
+the continuous non-linear n-widths of Theorem 2.2 combined with an optimally chosen embedded
+dimension d to prove Theorem 2.10.
+Recall that U = U(Ck(K)). Assuming Lemma 2.11, we will now derive (2.2). The inequality
+sn(U)C(K) ≥dn(U)C(K) follows directly by continuity of the delta functionals. Let En : C(K) →
+Rn be an arbitrary mapping such that En|U is continuous and Dn : Rn →C(K) be an arbitrary
+mapping. Let ιd : Ck
+0 ([0, 1]d) →C(K) and hd : [0, 1]d →K be the mappings from Lemma 2.11.
+For any f ∈Ck
+0 ([0, 1]d), deﬁne eEn : Ck
+0 ([0, 1]d) →Rn by eEn(f) = En(ιdf). Furthermore, for
+any w ∈Rn, deﬁne eDn : Rn →C([0, 1]d) by eDn(w) = Dn(w)(hd(·)). From these deﬁnitions, it
+immediately follows that
+( eDn ◦eEn)(f)(y) = (Dn ◦En)(ιdf)(hd(y))
+for any f ∈Ck
+0 ([0, 1]d) and y ∈[0, 1]d. Thus, by Lemma 2.11, we ﬁnd
+|f(y) −( eDn ◦eEn)(f)(y)| = |(ιdf)(hd(y)) −(Dn ◦En)(ιdf)(hd(y))|.
+Denote Bk,d
+0
+= U
+ Ck
+0 ([0, 1]d)
+
+then
+sup
+f∈Bk,d
+0
+sup
+y∈[0,1]d |f(y) −( eDn ◦eEn)(f)(y)| ≤
+sup
+F∈ιd(Bk,d
+0
+)
+sup
+u∈K
+|F(y) −(Dn ◦En)(F)(y)|
+follows by the inclusion hd([0, 1]d) ⊆K. Note that, for any F ∈ιd(Bk,d
+0 ), there exists f ∈Bk,d
+0
+such that F = ιdf. Then by Lemma 2.11, we have
+∥F∥Ck(K) ≤Rd(α+1)k∥f∥Ck([0,1]d) ≤Rd(α+1)k
+for some constant R = R(k, K) > 0. It follows that ιd
+ Bk,d
+0
+
+⊆ρU with ρ = Rd(α+1)k. Therefore
+sup
+f∈Bk,d
+0
+sup
+y∈[0,1]d |f(y) −( eDn ◦eEn)(f)(y)| ≤sup
+F∈ρU
+sup
+u∈K
+|F(y) −(Dn ◦En)(F)(y)|.
+Taking the inﬁmum over all En, Dn, we ﬁnd
+inf
+En,Dn sup
+f∈Bk,d
+0
+sup
+y∈[0,1]d |f(y) −( eDn ◦eEn)(f)(y)| ≤ρdn(U)C(K).
+Since eEn, eDn are speciﬁc instances of encoder, decoder pairs build from En, Dn, we ﬁnd
+dn
+ Bk,d
+0
+
+C([0,1]d) ≤
+inf
+En,Dn sup
+f∈Bk,d
+0
+sup
+y∈[0,1]d |f(y) −( eDn ◦eEn)(f)(y)|
+and therefore
+dn(U)C(K) ≥ρ−1dn
+ Bk,d
+0
+
+C([0,1]d).
+Note that Theorem 2.2 holds for Bk,d
+0
+with the same proof, therefore
+dn(U)C(K) ≥Rd−(α+1)kn−k/d
+where we have re-deﬁned R to absorb the relevant constant. The above inequality holds for any
+d ∈N, we can therefore optimize by choosing d = k(α + 1)−1 log(n) to obtain,
+dn(U)C(K) ≥R
+ log(n)
+−(α+1)k,
+where we have, again, similarly re-deﬁned R. This is the claimed lower bound on the operator
+learning n-width.
+8
+
+PDF PAGE 9
+Data Complexity Estimates for Operator Learning
+A PREPRINT
+2.3.2
+Sample Complexity of Operator Learning in Expectation
+Theorem 2.10 exhibits an exponential lower bound on the sample complexity of operator learning
+in the setting where the goal is to approximate operators uniformly over a compact set K. One may
+wonder whether more benign bounds could be achieved if the approximation error was measured in
+a mean squared distance, or a more general Lp
+µ distance with respect to a measure µ, instead of the
+uniform C(K)-norm (2.1).
+The next theorem shows that the fundamental curse of data-complexity persists even with respect to
+a weaker Lp
+µ norm. To this end, we next consider a Gaussian measure µ on a Banach function space
+X, with at most algebraically decreasing eigenvalues, λj ≳j−α, of the covariance operator. We
+measure the approximation error with respect to the Lp
+µ-norm,
+∥G∥Lp
+µ := Eu∼µ[|G(u)|p]1/p.
+(2.3)
+The following theorem shows that the sampling n-width scales only logarithmically in the number
+of samples n.
+Theorem 2.12. Assume the setting described above and let U = U
+ Ck(X)
+
+for some k ∈N. Then,
+for any 1 ≤p < ∞, there exists a constant R = R(k, p, α, K) > 0 such that
+sn(U)Lp
+µ(X ) ≥R
+ log(n)
+−(α+3)k.
+(2.4)
+Remark 2.13. We note that the above theorem provides a lower bound only on the sampling width
+sn(U). We have not managed to derive a similar lower bound on the continuous non-linear n-
+widths dn(U) in this setting. Our tightest bound exhibits a scaling of the form n−1/p log(n)−λ (cp.
+Theorem D.2 in Appendix D.0.3).
+Theorem 2.12 shows that operator learning of Ck-operators, in the Lp
+µ-norm with respect to random
+input functions drawn from a Gaussian measure µ, generally requires a number of samples n ≳
+exp(cǫ−λ) scaling exponentially in the desired approximation accuracy ǫ.
+The proof of Theorem 2.12 is similar to the proof of Theorem 2.10, relying on the ﬁnite-dimensional
+lower bound implied by 2.6 instead of 2.2. We refer to Appendix D.0.3 for additional details.
+3
+Upper data complexity bounds
+In the previous section, we derived lower bounds on the sampling widths and non-linear n-widths of
+spaces of operators characterized merely by their Ck-regularity. In particular, we show that, in this
+generality, operator learning suffers from a curse of data-complexity, generally requiring a number
+of data pairs which is exponential in the inverse of the desired accuracy ǫ.
+The present section will discuss a setting where more benign bounds on the data-complexity are
+possible, in the context of operator learning. The purpose of this section is to show that parameter-
+efﬁciency implies data-efﬁciency. More precisely, we aim to derive “efﬁcient” upper bounds on the
+amount of data required to approximate a given operator, when we restrict attention to only those
+operators that allow for approximation by a class of neural operators with moderate model size.
+Here, we posit that efﬁcient data-complexity bounds should require a number of data pairs, n ≲
+ǫ−1/λ, which scales at most algebraically with the desired accuracy ǫ, for some ﬁxed λ > 0. The
+parameter λ is the convergence rate in terms of available data-pairs, since the error then decays as
+ǫ ≲n−λ. Similarly, we posit that an operator allows for efﬁcient approximation by a class of neural
+operators Ψ, if the required model size to achieve given accuracy ǫ scales at most algebraically with
+respect to ǫ, i.e. size(Ψ) ≲ǫ−1/γ. Here, γ corresponds to the theoretically achievable approximation
+rate in terms of model size. We aim to quantify the relation between the model convergence rate γ
+and the data convergence rate λ.
+Setting.
+Rather than trying to propose a completely general theory, we will develop these ideas for
+the special case of Fourier neural operators (FNO), approximating a relevant class of operators,
+G : K ⊂L2(D) →L2(D),
+9
+
+PDF PAGE 10
+Data Complexity Estimates for Operator Learning
+A PREPRINT
+mapping square-integrableinput functions in a set K ⊂L2(D) to square-integrableoutput functions.
+For simplicity and due to certain restrictions of the FNO architecture, the underlying domain D =
+[0, 1]d is taken to be the unit cube in d spatial dimensions where typically d ∈{1, 2, 3}. Even
+though we restrict attention to this particular class of neural operators, we point out that the ideas
+that will be developed are much more general, and can readily be adapted to other frameworks, such
+as DeepONets [31], PCA-Net [8], and variants of these frameworks.
+As will be explained in further detail in the subsequent sections, we will consider the following
+setting. We assume we are given:
+(1) A compact set K ⊂L2(D) of input functions on D = [0, 1]d,
+(2) A probability measure µ ∈P(L2(D)), supported on K, i.e.
+supp(µ) ⊂K,
+(3) An operator G ∈Aγ belonging to a class of operators to be speciﬁed below.
+The question to be addressed is how many data pairs {uj, G(uj)}n
+j=1 are needed to approximate G
+to a prescribed accuracy ǫ?
+In the following, we will ﬁrst review the FNO architecture, then deﬁne relevant spaces Aγ consist-
+ing of operators G that are “efﬁciently approximated” by FNO, and ﬁnally proceed to estimate the
+sampling widths and nonlinear n-widths of these spaces.
+3.0.1
+Fourier neural operator (FNO)
+Fourier neural operator is an operator learning framework proposed in [29]. We ﬁrst recall the notion
+of Fourier neural operators.
+Architecture
+Let Z = Z(D; Rdin) and W = W(D; Rdout) be two Banach function spaces, con-
+sisting of functions u : D →Rdin and w : D →Rdout, respectively. A Fourier neural operator
+(FNO) deﬁnes a nonlinear operator
+Ψ : Z(D; Rdin) →W(D; Rdout),
+mapping between these spaces. By deﬁnition of the FNO architecture, such Ψ takes the form
+Ψ(u; θ) = Q ◦LL ◦· · · ◦L1 ◦P(u).
+(3.1)
+where P : u(x) 7→Pu(x) is a linear, lifting layer, Q : v(x) 7→Qv(x) is a linear, projection
+layer, and the Lℓ: V(D; Rdc) →V(D; Rdc) are the hidden layers, mapping between hidden states
+v 7→Lℓ(v) ∈V(D; Rdc). The hidden states are vector-valued functions with dc components,
+v : D →Rdc, belonging to a Banach function space V(D; Rdc). Here, the “channel width” dc is a
+hyperparameter of the architecture. Each hidden layer Lℓis of the form
+Lℓ(v)(x) := σ
+ Wv(x) + Kv(x) + b(x)
+
+where W ∈Rdc×dc is a matrix multiplying v(x) pointwise. K is a non-local operator of the form
+v(x) 7→(Kv)(x) := F−1  bPkFv(k)
+
+(x),
+with F (and F−1) the Fourier transform (and its inverse). The matrix bPk ∈Cdc×dc is a tunable
+Fourier multiplier indexed by k ∈Zd. It is assumed that bPk ≡0 for |k|ℓ∞≥κ, i.e. for wavenumbers
+k above a speciﬁed Fourier cut-off parameter κ. This Fourier cut-off κ is a second hyperparameter
+of the FNO architecture. We collect the values for different k ∈Zd, |k|ℓ∞< κ, in a tensor bP =
+{ bPk}|k|ℓ∞<κ ∈C(2κ−1)d×dc×dc, which acts on the Fourier coefﬁcients bv(k) = F(v)(k), by
+( bP bv)(k)i :=
+dc
+X
+j=1
+bPk,ijbv(k),
+(k ∈Zd, |k|ℓ∞< κ).
+Finally, the bias functions are assumed to be of the form
+b(x) =
+X
+|k|ℓ∞<κ
+bbkeikx,
+bbk ∈Cdc.
+The resulting FNO architecture depends on the channel width dc, Fourier cut-off parameter κ and
+depth L.
+10
+
+PDF PAGE 11
+Data Complexity Estimates for Operator Learning
+A PREPRINT
+symbol
+meaning
+dc
+channel width
+κ
+Fourier cut-off
+L
+depth
+dθ
+total number of parameters
+B
+parameter bound, ∥θ∥ℓ∞≤B
+Σm
+FNOs obeying hyper-parameter bound (3.3)
+Aγ
+operators approximated by FNO at rate γ, cp. (3.4)
+U(Aγ)
+unit ball in Aγ, cp. (3.5)
+Table 1: Summary of (hyper-)parameters of the FNO architecture and sets of operators deﬁned by
+FNO. This notation is used throughout the text.
+Remark 3.1. Following the theoretical work in [21], we assume the lifting and projection layers to
+be linear. We note that in practical applications, P is often replaced by a shallow neural network,
+resulting in a mapping u(x) 7→P(x, u(x)). Furthermore, the biases b(x) are often chosen to be
+constant in practice; extension of our results to this alternative setting is straightforward, but will not
+be considered here for simplicity of the exposition and to make our discussion consistent with the
+analysis of [21].
+We collect all tunable parameters in a vector θ ∈Rdθ. Any parameter θ ∈Rdθ can be decomposed
+layer-wise, as
+θ = (θL+1, θL, . . . , θ1, θ0),
+where
+θℓ=
+n
+W (ℓ)
+ij , bP (ℓ)
+k,ij,bb(ℓ)
+k
+ i, j = 1, . . . , dc, |k| < κ, k ∈Zdo
+,
+collects the parameters of the ℓ-th hidden layer, for 1 ≤ℓ≤L.
+We denote by θ0
+=
+{Pij | i, j = 1, . . . , dc} the parameters of the projection P and by θL+1 = {Qij | i, j = 1, . . . , dc}
+the parameters of lifting Q. Assuming that din, dout ≤dc, the dimension of θ ∈Rdθ is upper
+bounded by
+dθ ≤dcdin + L(dc
+2 + (2κ)ddc
+2 + 2κdc) + dcdout ≤5(2κ)dLdc
+2.
+(3.2)
+Consistent with practical implementations, we will assume throughout that the hidden channel di-
+mension of the FNO is at least as large as both the input and output dimensions din, dout. We include
+a list of hyperparameters in Table 1 to aid clarify notation.
+3.0.2
+FNO approximation spaces
+In this section, the goal is to introduce certain spaces of operators Aγ that are efﬁciently approxi-
+mated by FNO, at rate γ > 0. Roughly speaking, the space Aγ is the most natural alternative to
+the space of Ck-differentiable operators in the context of operator learning with FNO. In contrast
+to the approximation of operators G ∈Ck, which is not tractable in general, the approximation of
+operators G ∈Aγ is tractable by deﬁnition. Thus, Aγ can be interpreted as a space of operators that
+allow, in principle, for efﬁcient approximation by FNO. Our discussion is inspired by [17], where
+similar spaces are deﬁned for ﬁnite-dimensional neural networks.
+Deﬁnition of Aγ.
+We ﬁrst deﬁne a set of operators Σm as the set of all FNOs with Fourier cut-off
+κ, hidden channel dimension dc, depth L and uniform weight bound ∥θ∥∞≤B, satisfying the
+bounds:
+κd, dc, L ≤m,
+B ≤exp(m).
+(3.3)
+Given the sets Σm deﬁned by (3.3), we next deﬁne Aγ as the set of all continuous operators G :
+K ⊂L2(D) →L2(D), which can be approximated by FNOs at approximation rate γ > 0. More
+precisely, by deﬁnition we let G ∈Aγ if, and only if, G ∈C
+ K; L2(D)
+
+and if there exists a constant
+CG ≥0, such that
+inf
+Ψ∈Σm ∥G −Ψ∥C(K;L2(D)) ≤CGm−γ,
+∀m ∈N,
+(3.4)
+11
+
+PDF PAGE 12
+Data Complexity Estimates for Operator Learning
+A PREPRINT
+where we recall that
+∥Ψ −G∥C(K;L2(D)) := sup
+u∈K
+∥Ψ(u) −G(u)∥L2(D).
+We will deﬁne the following quantity on Aγ:
+|G|Aγ := sup
+m∈N
+
+mγ
+inf
+Ψ∈Σm ∥G −Ψ∥C(K;L2(D))
+
+.
+This quantity can be loosely thought of as a pseudo-seminorm. Technically, the homogeneity condi-
+tion only holds approximately, so it is not a true pseud-seminorm (see [17] for extended discussion
+in the ﬁnite-dimensional case). On the space Aγ we introduce the following quantity, which we
+loosely think of as the corresponding “pseudo-norm”:
+∥G∥Aγ := ∥G∥C(K;L2(D)) + |G|Aγ.
+The class Aγ is arguably the relevant class of operators G, for which meaningful approximation
+theory for the FNO architecture can be developed. We will denote by U(Aγ) the unit ball in Aγ, i.e.
+U(Aγ) := {G ∈Aγ | ∥G∥Aγ ≤1}.
+(3.5)
+Our ultimate aim is to derive upper bounds on the data-complexity of operator learning with FNO
+over this set.
+Remark 3.2. Our understanding of the class Aγ introduced above is still very limited. In particular,
+we are far from a useful characterization of Aγ or even subsets thereof. Nevertheless, in speciﬁc
+settings, it is known that solution operators of certain PDEs, such as the solution operator of the
+Navier-Stokes equations, and the solution operator of the Darcy ﬂow problem, belong to some Aγ
+(cp. [21, Thm. 26 and Thm. 28]). These results can likely be generalized to many other PDE
+solution operators. At present, it remains unclear to which extent a general theory, including a
+(partial) characterization of the condition G ∈Aγ, can be achieved even in the context of PDE
+solution operators.
+Given the last Remark 3.2, we will not attempt to further characterize Aγ. Our goal in the following
+is instead to take Aγ (or the unit ball U(Aγ)) as our deﬁnition of the relevant set of operators of
+interest, and investigate only the data-complexity of operator learning in this class. Note that the
+deﬁnition of Aγ is completely independent of any data; a priori, assuming that G ∈Aγ only guaran-
+tees the existence of good approximations, but does not guarantee that good approximations can be
+found from data pairs {uj, G(uj)}n
+j=1.
+Approximation theoretic setting.
+As already mentioned above, we will be interested in the ap-
+proximation of continuous operators G : K ⊂L2(D) →L2(D), belonging to Aγ. Throughout this
+discussion, we will ﬁx a probability measure µ ∈P
+ L2(D)
+
+, with support supp(µ) ⊂K. Our
+notion of “efﬁciency”, to be made precise below, will be related to approximation of the underlying
+operator G ∈Aγ with respect to the Bochner L2
+µ-norm:
+∥Ψ −G∥L2µ := Eu∼µ
+h
+∥Ψ(u) −G(u)∥2
+L2(D)
+i1/2
+.
+Measuring the error in the L2
+µ-norm is motivated by the practical application of FNOs, which are
+usually optimized by minimizing a mean-squared error (MSE) over an input distribution. In the
+following discussion, we ﬁx the compact set K and the probability measure µ with supp(µ) ⊂K.
+An important ingredient of our analysis will be the interplay between the spaces C
+ K; L2(D)
+
+and
+L2
+µ
+ K; L2(D)
+
+.
+3.0.3
+Data-complexity bound for FNO
+In the ﬁrst part of this work, we have shown that any deterministic, query-based algorithm needs
+an exponential number of queries to approximate arbitrary k-times continuously differentiable op-
+erators in the unit ball in Ck(K; Y) even for Y = R. The goal of this section is to derive upper
+data-complexity bounds when the unit ball in Ck is replaced by the set of efﬁciently approximated
+operators U(Aγ) of the last section.
+12
+
+PDF PAGE 13
+Data Complexity Estimates for Operator Learning
+A PREPRINT
+Main result.
+We ﬁrst state our main result, and then outline the general strategy to derive this
+result. After this outline, we will proceed to provide the details of our derivation. Throughout the
+following discussion, we continue to denote by K ⊂L2(D) the compact set of inputs, and by µ be
+the probability measure on L2(D) with supp(µ) ⊂K. Our main result is the following bound on
+the data-complexity of operator learning on U(Aγ).
+Theorem 3.3. There exists a constant C = C(d, K, γ) > 0 with the following property: For any
+n ∈N, there exist evaluation points u1, . . . , un ∈L2(D) deﬁning an encoder C
+ K; L2(D)
+
+→
+[L2(D)]n by sampling, and an associated decoder Dn : [L2(D)]n →Σm ⊂C
+ K; L2(D)
+
+for
+some m ∈N, such that
+sup
+G∈U(Aγ)
+∥G −Dn
+ G(u1), . . . , G(un)
+
+∥2
+L2µ ≤Cn−
+1
+2(1+λ) ,
+where λ := 8γ−1 depends only on γ.
+Remark 3.4. To prove Theorem 3.3, the decoder Dn will be identiﬁed explicitly; it is obtained via
+empirical risk minimization. We will refer to this map as the ERM decoder. In our proof, we will
+furthermore show that suitable evaluation points u1, . . . , un can be obtained as i.i.d. samples from
+µ.
+Remark 3.5. It may be of further interest whether it is possible to obtain similar approximation rates
+when measuring the error as a uniform error over K, rather than in the L2
+µ-norm with respect to a
+measure µ. In particular, whether one can achieve an upper bound of the form,
+sup
+G∈U(Aγ)
+∥G −Dn
+ G(u1), . . . , G(un)
+
+∥C(K;L2(D)) ≲n−1/2(1+λ)?
+Unfortunately, there is little hope to achieve such error rates in the sup-norm; indeed, this uni-
+form approximation problem has been shown to suffer from a curse of dimensionality in a ﬁnite-
+dimensional setting [17, Thm. 1.1], requiring n ≳ǫ−d samples to achieve accuracy ǫ in d dimen-
+sions (see also [7, 1]). In the present inﬁnite-dimensional case, which roughly corresponds to the
+scaling limit d →∞, we can therefore not expect to achieve any algebraic rates.
+If we restrict attention to the subspace Aγ
+0 ⊂Aγ consisting of operators G with constant-valued
+output functions, then we can identify U(Aγ
+0) canonically with a set of functionals G : K →R. In
+this case, the encoding G 7→(G(u1), . . . , G(un)) takes values in Rn, and we immediately obtain the
+following theorem as a simple consequence of Theorem 3.3.
+Corollary 3.6. There exists a constant C = C(d, K, γ) > 0, such that for any n ∈N, there exist
+evaluation points u1, . . . , un ∈L2(D), and ERM decoder Dn : Rn →Σm ⊂C(K; R) for some
+m ∈N, such that
+sup
+G∈U(Aγ)
+∥G −Dn(G(u1), . . . , G(un))∥L2µ ≤Cn−
+1
+2(1+λ) ,
+where λ = 8γ−1 depends only on γ. In particular, the sampling n-width sn and continuous non-
+linear n-width dn of K = U(Aγ
+0) are upper bounded by
+dn(K) ≤sn(K) ≲n−
+1
+2(1+λ) .
+It is interesting to note that, even in the limit γ →∞, we only reach the asymptotic Monte-Carlo
+rate ∼n−1/2. Thus, there is an absolute bound on the achievable data-complexity rate, even when
+the convergence rate γ (in terms of FNO model size) is arbitrarily high. This observation of a limited
+rate, even when γ →∞, is consistent with the rigorous theory-to-practice gap proved in [17] for
+ReLU neural networks, which indicates that this is a fundamental limitation and not a deﬁcit of our
+analysis. The extension of this theory-to-practice gap to the operator learning setting is the subject
+of upcoming work [16].
+13
+
+PDF PAGE 14
+Data Complexity Estimates for Operator Learning
+A PREPRINT
+3.0.4
+Outline of the proof of Theorem 3.3
+We next outline the elements of the proof of Theorem 3.3. Our proof is based on an error estimate for
+minimizers of the empirical risk over a relevant subset Σ′
+m ⊂Σm in the FNO model classes. First,
+we will brieﬂy review the deﬁnition of the empirical risk minimizer (ERM). Next, we will provide
+a general estimate that bounds the error of the ERM over Σ′
+m in terms of the metric entropy of Σm.
+Finally, we will estimate the metric entropy of Σm, resulting in the claimed bound of Theorem 3.3.
+We now proceed to explain this argument in further detail, with certain technical proofs delegated to
+the appendices.
+Deﬁnition of the subset Σ′
+m ⊂Σm.
+We deﬁne a subset Σ′
+m ⊂Σm by
+Σ′
+m :=
+
+Ψ ∈Σm
+ ∥Ψ∥C(K;L2(D)) ≤2
+	
+.
+We note that for any G ∈U(Aγ), if Ψ ∈Σm satisﬁes
+∥Ψ −G∥C(K;L2(D)) ≤m−γ|G|Aγ ≤m−γ,
+then, since ∥G∥C(K;L2(D)) ≤∥G∥Aγ ≤1 and m ≥1, γ > 0, we have
+∥Ψ∥C(K;L2(D)) ≤∥G∥C(K;L2(D)) + ∥Ψ −G∥C(K;L2(D)) ≤2,
+and hence such Ψ necessarily belongs to Σ′
+m. In particular, U(Aγ) is well approximated by the
+relevant subset Σ′
+m ⊂Σm, at the same rate γ > 0, i.e.
+inf
+Ψ∈Σ′m
+∥G −Ψ∥C(K;L2(D)) ≤|G|Aγm−γ,
+∀G ∈U(Aγ).
+Empirical risk minimizer (ERM).
+To derive the claimed upper bound on the data-complexity,
+we consider the minimization of the empirical risk functional,
+bL(Ψ; G) := 1
+n
+n
+X
+j=1
+∥Ψ(uj) −G(uj)∥2
+L2(D),
+(3.6)
+for certain samples u1, . . . , un ∈K and a given G ∈U(Aγ). Given the discussion of the previ-
+ous paragraph, we restrict our search over the subset Σ′
+m ⊂Σm, consisting of FNOs with bound
+∥Ψ∥C(K;L2(D)) ≤2, i.e. we consider empirical risk minimizers,
+ΨG ∈argmin
+Ψ∈Σ′m
+bL(Ψ; G).
+(3.7)
+We will denote by
+L(Ψ; G) := Eu∼µ
+h
+∥ΨG(u) −G(u)∥2
+L2(D)
+i
+,
+(3.8)
+the “population risk” over the probability measure µ. We note that minimizers of the empirical risk
+functional (3.6) exist in view of the following remark.
+Remark 3.7. The sets Σm ⊂C
+ K; L2(D)
+
+, i.e. the model class of FNOs satisfying the bounds
+(3.3), are compact.
+In fact, we will show in Lemma E.6 that, for any ﬁxed FNO architec-
+ture Ψ(θ) = Ψ( · ; θ) depending on parameters θ ∈Rdθ, the parameter-to-operator mapping
+[−B, B]dθ →C
+ K; L2(D)
+
+, θ 7→Ψ( · ; θ) is Lipschitz continuous. Hence, the image of the
+compact set [−B, B]dθ under this continuous mapping is itself compact in C
+ K; L2(D)
+
+. The
+constraint (3.3) in our deﬁnition of Σm allows only ﬁnitely many different architectures for a given
+m; say Ψj( · ; θ), with θ ∈Rdθj and j = 1, . . . , J. Thus,
+Σm =
+J[
+j=1
+Ψj
+
+[−B, B]dθj
+
+⊂C
+ K; L2(D)
+
+⊂L2
+µ
+ K; L2(D)
+
+is compact in both C
+ K; L2(D)
+
+and L2
+µ
+ K; L2(D)
+
+, being a ﬁnite union of compact sets.
+14
+
+PDF PAGE 15
+Data Complexity Estimates for Operator Learning
+A PREPRINT
+Error estimate for ERM.
+The intuition behind our estimates for the empirical risk minimizer is
+that for sufﬁciently large n, and for independent and identically distributed samples u1, . . . , un ∼µ,
+the empirical risk (3.6) should be a good approximation of the population risk (3.8), and in turn, the
+minimizer of (3.6) should be an almost minimizer of (3.8). The ﬁrst step in our derivation is to
+make this intuition precise and show that it implies the upper data-complexity bound of the next
+proposition.
+Proposition 3.8. Let γ > 0, and ﬁx ǫ ∈(0, 1]. Assume that m ≥(2/ǫ)1/γ is an integer. Let n ∈N
+be such that
+n ≥ǫ−1 log
+ 2N(Σm, ǫ)2
+.
+Then there exist ﬁxed evaluation points u1, . . . , un ∈L2(D), such that for any given G ∈U(Aγ),
+the empirical risk minimizer ΨG ∈Σ′
+m in (3.7), satisﬁes
+sup
+G∈U(Aγ)
+∥ΨG −G∥2
+L2(µ) ≤145ǫ.
+The detailed proof of Proposition 3.8 is given in Section E.0.1.
+Metric entropy estimate for Σm.
+Assuming Proposition 3.8, the main missing ingredient in our
+proof of Theorem 3.3 is to estimate the metric entropy of Σm. This is the subject of the next
+proposition and its corollary.
+Proposition 3.9 (FNO covering number estimate). Let FNOκ,dc,L,B denote the set of FNOs on a
+d-dimensional domain Ω= [0, 1]d, with Fourier cut-off κ, hidden channel dimension dc, depth L
+and uniform weight bound ∥θ∥∞≤B. Assume that dc ≥din, dout and B ≥1. Then there exists
+a constant C = C(d) > 0, depending on the dimension of the underlying domain, but independent
+of the hyper-parameters κ, dc, L, B, such that the metric entropy of FNO = FNOκ,dc,L,B is upper
+bounded by,
+log N(FNO, ǫ)C(K;L2(D)) ≤CκdL2dc
+2 log
+BLdcκ
+ǫ
+
+.
+We provide the details of the proof of Proposition 3.9 in Appendix E.0.2. The following corollary
+follows from the upper bounds (3.3).
+Corollary 3.10. Let K ⊂L2(D) be compact. Let Σm ⊂C
+ K; L2(D)
+
+denote the set of FNOs.
+Then there exists a constant C = C(K, d) > 0, such that, for all ǫ > 0,
+log N(Σm, ǫ)C(K;L2(D)) ≤Cm7 log(mǫ−1).
+Proof of Theorem 3.3.
+Given the results of Proposition 3.8 and Corollary 3.10, we can now prove
+Theorem 3.3.
+Proof. (Proof of Theorem 3.3) Let ǫ ∈(0, 1] be given, and let us choose an integer m ≥(2/ǫ)1/γ;
+in fact, we make the speciﬁc choice,
+m :=
+l
+(2/ǫ)1/γm
+,
+so that m ∼(2/ǫ)1/γ. Proposition 3.8 shows that for any n ∈N with
+n ≥ǫ−1 log
+ 2N(Σm, ǫ)2
+,
+(3.9)
+there exist samples u1, . . . , un ∈L2(D), such that the corresponding ERM decoder,
+Dn :
+ G(u1), . . . , G(un)
+
+7→ΨG,
+deﬁned by minimization of the empirical risk over Σ′
+m, satisﬁes
+sup
+G∈U(Aγ)
+∥G −Dn
+ G(u1), . . . , G(un)
+
+∥2
+L2
+µ ≤145ǫ.
+(3.10)
+15
+
+PDF PAGE 16
+Data Complexity Estimates for Operator Learning
+A PREPRINT
+As a consequence of Corollary 3.10, and the fact that ǫ−1 ∼mγ, there exists a constant C =
+C(d, K, γ) > 0, such that
+log
+ 2N(Σm, ǫ)2
+≤Cm7 log(m).
+In particular, it follows that
+ǫ−1 log
+ 2N(Σm, ǫ)2
+≲mγ+7 log(m) ∼ǫ−1−7γ−1 log(ǫ−1) ≲ǫ−1−8γ−1,
+with an implied constant C = C(d, K, γ) depending only on d, K and γ. Let us summarize the
+resulting bound:
+ǫ−1 log(2N(Σm, ǫ)2) ≤Cǫ−(1+8γ−1),
+(3.11)
+with constant C = C(d, K, γ). In particular, it follows from (3.11) that for the speciﬁc choice
+n :=
+l
+Cǫ−(1+8γ−1)m
+≥ǫ−1 log(2N(Σm, ǫ)2),
+the bound (3.9) is satisﬁed, and hence, by (3.10), n samples sufﬁce to achieve approximation accu-
+racy,
+sup
+G∈U(Aγ)
+∥G −Dn
+ G(u1), . . . , G(un)
+
+∥2
+L2
+µ ≤145ǫ.
+The implied constant in the asymptotic relation only depends on d, K, γ. In particular, upon esti-
+mating ǫ in terms of n ∼ǫ−(1+8γ−1), we conclude that there exists a constant C = C(d, K, γ) > 0,
+such that
+sup
+G∈U(Aγ)
+∥G −Dn
+ G(u1), . . . , G(un)
+
+∥2
+L2
+µ ≤Cn
+−
+1
+1+8γ−1 ,
+or equivalently, upon introducing λ := 8γ−1 and taking the square-root of both sides,
+sup
+G∈U(Aγ)
+∥G −Dn
+ G(u1), . . . , G(un)
+
+∥L2µ ≤Cn−
+1
+2(1+λ) .
+This is the claimed upper bound.
+4
+Conclusion
+Operator learning is rapidly emerging as a new paradigm to complement traditional numerical
+solvers in scientiﬁc computing. While empirical evidence demonstrates the practical efﬁcacy of
+operator learning frameworks, a complete theoretical explanation of this empirical observation is
+still outstanding. Several papers have studied operator learning from an approximation theoretic
+perspective, with the goal of bounding the total number of parameters (model size). The comple-
+mentary question of the data-complexity of operator learning has received considerably less attention
+in the literature.
+In this paper, we have studied the sample complexity of operator learning in three main settings:
+(1) uniform approximation of Fr´echet differentiable operators, (2) approximation of Fr´echet differ-
+entiable operators in the Lp
+µ-norm and, (3) the sample complexity of operator learning in spaces of
+operators which theoretically allow for efﬁcient approximation by FNO at moderate model size.
+Our results in the settings (1) and (2) show rigorously that operator learning on general classes of
+Fr´echet differentiable operators suffers from a “curse of sample complexity”, requiring an expo-
+nential number of samples to achieve a desired approximation accuracy. In particular, this result
+implies that existing bounds on the generalization error which suffer from such an exponential curse
+of dimensionality, as derived in [30], are essentially optimal. Our complexity estimates generalize
+well-known bounds to the inﬁnite-dimensional context and complement the notion of the “curse of
+parametric complexity” from [27, 23] to establish a similar curse for the sample complexity. These
+exponential lower bounds on the complexity of operator learning strongly suggest that a theory of
+operator learning should be developed on spaces of operators that are considerably smaller than the
+set of bounded Fr´echet (or Lipschitz) operators. As a consequence of these lower bounds, we argue
+that the empirically observed efﬁciency of operator learning for concrete problems cannot be ex-
+plained by general arguments based on notions of operator smoothness such as Lipschitz continuity
+or Fr´echet differentiability.
+16
+
+PDF PAGE 17
+Data Complexity Estimates for Operator Learning
+A PREPRINT
+In the second part of this paper, we study the sample complexity of operator learning on sets of
+operators which theoretically allow for efﬁcient approximation, requiring only a modest number
+of tunable parameters, growing at most algebraically in the inverse of the desired approximation
+accuracy ǫ. To illustrate the main ideas, we take the Fourier neural operator (FNO) as a case study,
+and propose a rigorous deﬁnition of the relevant approximation spaces Aγ. For these spaces, we
+prove that a number of samples which grows at most algebraically in the inverse of the desired
+approximation error ǫ is sufﬁcient for operator learning. These results hold in the root mean square
+sense with respect to a probability measure µ of input functions supported on a compact set.
+While we restrict attention to a speciﬁc setting to derive efﬁcient upper sample complexity bounds
+in the second part of this work, we expect the basic ideas outlined in present work to apply to many
+other operator learning frameworks. We hope these results will motivate future investigations of
+the relevant approximation spaces Aγ and provide a new point of view on the practical successes of
+operator learning.
+Acknowledgment
+NBK is grateful to the Nvidia Corporation for support through full time employment. SL acknowl-
+edges funding from the Swiss National Science Foundation through Postdoc.Mobility grant P500PT-
+206737.
+References
+[1] A. Abdeljawad and P. Grohs. Sampling complexity of deep approximation spaces, 2023.
+[2] R. Adams and J. Fournier. Sobolev Spaces. Elsevier Science, 2003.
+[3] B. Adcock, N. Dexter, and S. Moraga. Optimal approximation of inﬁnite-dimensional holo-
+morphic functions ii: recovery from iid pointwise samples. arXiv preprint arXiv:2310.16940,
+2023.
+[4] B. Adcock, N. Dexter, and S. Moraga. Optimal approximation of inﬁnite-dimensional holo-
+morphic functions. Calcolo, 61(1):12, 2024.
+[5] M. Bachmayr and A. Cohen. Kolmogorov widths and low-rank approximations of parametric
+elliptic pdes. Mathematics of Computation, 86(304):701–724, 2017.
+[6] C. Bennett and R. Sharpley. Interpolation of Operators. Elsevier Science, 1988.
+[7] J. Berner, P. Grohs, and F. Voigtlaender. Learning relu networks to high uniform accuracy is
+intractable. In The Eleventh International Conference on Learning Representations, 2022.
+[8] K. Bhattacharya, B. Hosseini, N. B. Kovachki, and A. M. Stuart. Model Reduction And Neural
+Networks For Parametric PDEs. The SMAI journal of computational mathematics, 7:121–157,
+2021.
+[9] A. Cohen, R. DeVore, and C. Schwab. Convergence rates of best n-term galerkin approxima-
+tions for a class of elliptic spdes. Foundations of Computational Mathematics, 10(6):615–646,
+2010.
+[10] A. Cohen, R. Devore, and C. Schwab. Analytic regularity and polynomial approximation of
+parametric and stochastic elliptic pde’s. Analysis and Applications, 9(01):11–47, 2011.
+[11] F. Cucker and S. Smale. On the mathematical foundations of learning. Bulletin of the American
+Mathematical Society, 39(1):1–49, 2002.
+[12] R. A. DeVore, R. Howard, and C. Micchelli. Optimal nonlinear approximation. Manuscripta
+mathematica, 63:469–478, 1989.
+[13] R. A. DeVore, G. Kyriazis, D. Leviatan, and V. M. Tikhomirov. Wavelet compression and
+nonlinearn-widths. Advances in Computational Mathematics, 1:197–214, 1993.
+[14] N. R. Franco, S. Fresca, A. Manzoni, and P. Zunino. Approximation bounds for convolutional
+neural networks in operator learning. Neural Networks, 161:129–141, 2023.
+[15] L. Galimberti, A. Kratsios, and G. Livieri. Designing universal causal deep learning models:
+The case of inﬁnite-dimensional dynamical systems from stochastic analysis, 2023.
+17
+
+PDF PAGE 18
+Data Complexity Estimates for Operator Learning
+A PREPRINT
+[16] P. Grohs, S. Lanthaler, and M. Trautner. Theory-to-practice gap for neural networks and neural
+operators. In preparation, 2024.
+[17] P. Grohs and F. Voigtlaender. Proof of the theory-to-practice gap in deep learning via sampling
+complexity bounds for neural network approximation spaces. Foundations of Computational
+Mathematics, pages 1–59, 2023.
+[18] L. Herrmann, C. Schwab, and J. Zech. Neural and gpc operator surrogates: construction and
+expression rate bounds, 2022.
+[19] T. Kim and M. Kang. Bounding the rademacher complexity of fourier neural operators. Ma-
+chine Learning, pages 1–32, 2024.
+[20] Y. Korolev. Two-layer neural networks with values in a banach space. SIAM Journal on
+Mathematical Analysis, 54(6):6358–6389, 2022.
+[21] N. Kovachki, S. Lanthaler, and S. Mishra. On universal approximation and error bounds for
+fourier neural operators. Journal of Machine Learning Research, 22(290):1–76, 2021.
+[22] N. B. Kovachki, S. Lanthaler, and A. M. Stuart. Operator learning: Algorithms and analysis.
+Handbook of Numerical Analysis. Elsevier, 2024.
+[23] S. Lanthaler. Operator learning with pca-net: upper and lower complexity bounds. Journal of
+Machine Learning Research, 24(318):1–67, 2023.
+[24] S. Lanthaler. Operator learning of lipschitz operators: An information-theoretic perspective,
+2024.
+[25] S. Lanthaler, S. Mishra, and G. E. Karniadakis.
+Error estimates for DeepONets: A deep
+learning framework in inﬁnite dimensions. Transactions of Mathematics and Its Applications,
+6(1):tnac001, 2022.
+[26] S. Lanthaler and N. H. Nelsen. Error bounds for learning with vector-valued random features.
+In Thirty-seventh Conference on Neural Information Processing Systems, 2023.
+[27] S. Lanthaler and A. M. Stuart. The parametric complexity of operator learning, 2024.
+[28] Z. Li, N. Kovachki, K. Azizzadenesheli, B. Liu, K. Bhattacharya, A. Stuart, and A. Anand-
+kumar.
+Fourier neural operator for parametric partial differential equations.
+ICLR 2021;
+arXiv:2010.08895, 2020.
+[29] Z. Li, N. B. Kovachki, K. Azizzadenesheli, B. Liu, K. Bhattacharya, A. Stuart, and A. Anand-
+kumar. Fourier neural operator for parametric partial differential equations. In International
+Conference on Learning Representations, 2021.
+[30] H. Liu, H. Yang, M. Chen, T. Zhao, and W. Liao. Deep nonparametric estimation of operators
+between inﬁnite dimensional spaces. Journal of Machine Learning Research, 25(24):1–67,
+2024.
+[31] L. Lu, P. Jin, and G. E. Karniadakis. Deeponet: Learning nonlinear operators for identify-
+ing differential equations based on the universal approximation theorem of operators. arXiv
+preprint arXiv:1910.03193, 2019.
+[32] C. Marcati and C. Schwab. Exponential convergence of deep operator networks for elliptic
+partial differential equations. SIAM Journal on Numerical Analysis, 61(3):1513–1545, 2023.
+[33] H. N. Mhaskar and N. Hahm. Neural networks for functional approximation and system iden-
+tiﬁcation. Neural Computation, 9(1):143–159, 1997.
+[34] A. Mukherjee and A. Roy. Size lowerbounds for deep operator networks, 2023.
+[35] N. H. Nelsen and A. M. Stuart. The random feature model for input-output maps between
+banach spaces. SIAM Journal on Scientiﬁc Computing, 43(5):A3212–A3243, 2021.
+[36] J. A. Opschoor, C. Schwab, and J. Zech. Exponential relu dnn expression of holomorphic maps
+in high dimension. Constructive Approximation, 55(1):537–582, 2022.
+[37] C. Schwab, A. Stein, and J. Zech. Deep operator network approximation rates for lipschitz
+operators. arXiv preprint arXiv:2307.09835, 2023.
+[38] C. Schwab and J. Zech. Deep learning in high dimension: Neural network expression rates for
+generalized polynomial chaos expansions in UQ. Analysis and Applications, 17(01):19–55,
+2019.
+18
+
+PDF PAGE 19
+Data Complexity Estimates for Operator Learning
+A PREPRINT
+[39] C. Schwab and J. Zech. Deep learning in high dimension: Neural network expression rates for
+analytic functions in l2(Rd, γd). SIAM/ASA Journal on Uncertainty Quantiﬁcation, 11(1):199–
+234, 2023.
+[40] J. W. Siegel. Sharp lower bounds on the manifold widths of sobolev and besov spaces. arXiv
+preprint arXiv:2402.04407, 2024.
+[41] M. J. Wainwright. High-dimensional statistics: A non-asymptotic viewpoint, volume 48. Cam-
+bridge university press, 2019.
+A
+Spaces and sets of differentiable functionals
+Ck(Ω)-spaces in ﬁnite-dimension.
+Let Ω⊆Rd for some d ∈N>0 be a set. We denote by
+C0(Ω; R) = C(Ω; R) = C(Ω) the set of continuous, bounded functions on Ωtaking values in R.
+We equip C(Ω) with the norm
+∥f∥∞= sup
+x∈Ω
+|f(x)|,
+f ∈C(Ω)
+which makes it a Banach space. For any k ∈N>0, we denote by Ck(Ω; R) = Ck(Ω) the set of
+bounded, k-times continuously differentiable functions on Ωtaking values in R. We equip Ck(Ω)
+with the norm
+∥f∥Ck =
+max
+0≤|ν|1≤k ∥Dνf∥∞,
+f ∈Ck(Ω)
+which makes it a Banach space. We denote by ν ∈Nd any multi-index and by | · |p the p-th order
+Euclidean norm. Dν denotes the partial derivative operator with respect to the multi-index ν. We
+write C∞(Ω; R) = C∞(Ω) for the set of inﬁnitely differentiable functions on Ωtaking values in
+R and similarly C∞
+c (Ω; R) = C∞
+c (Ω) for the subset of C∞(Ω) containing all compactly supported
+functions. Furthermore, we denote by C0(Ω) ⊂C(Ω), the subset of functions which decay to zero
+at ∂Ω.
+Fr´echet differentiable functionals.
+When X is an inﬁnite-dimensional Banach space, we say that
+a non-linear functional G : X →R is Fr´echet differentiable, if for any u ∈X, there exists a bounded
+linear functional dG(u) : X →R, such that
+dG(u)[v] = lim
+δ→0
+G(u + δv) −G(u)
+δ
+,
+∀v ∈X.
+Furthermore, we will say that G is continuously Fr´echet differentiable, if G is Fr´echet differentiable,
+and the differential X →L(X; R), u 7→dG(u) is continuous as a mapping from X into the space
+of bounded linear functionals L(X; R), equipped with the operator norm,
+∥dG(u)∥:= sup
+v̸=0
+|dG(u)[v]|
+∥v∥
+.
+Higher-order differentiability is deﬁned analogously. For example, we say that G is twice Fr´echet
+differentiable, if G is Fr´echet differentiable, and dG : X →L(X; R) is differentiable; i.e. if there
+exists a bounded linear operator d2G(u) : X 7→L(X; R), such that
+d2G(u)[v] = lim
+δ→0
+dG(u + δv) −dG(u)
+δ
+,
+∀v ∈X.
+Upon identifying linear operators X →L(X; R) in the canonical way with bounded bi-linear maps
+in L(X × X; R), i.e. using the isomorphism,
+L(X; L(X; R)) ≃L(X × X; R),
+we can interpret d2G(u) : X × X →R as a bilinear operator. We say that G is twice continuously
+differentiable if u 7→d2G(u) is continuous. Proceeding iteratively, the k-th Fr´echet derivative G
+is deﬁned analogously. In particular, the k-th Fr´echet differential is given by a bounded k-linear
+operator,
+dkG(u) : X × · · · × X
+|
+{z
+}
+k times
+→R,
+19
+
+PDF PAGE 20
+Data Complexity Estimates for Operator Learning
+A PREPRINT
+with norm
+∥dkG(u)∥=
+sup
+v1,...,vk̸=0
+|dkG(u)[v1, . . . , vk]|
+∥v1∥. . . ∥vk∥
+.
+Consistent with the ﬁnite-dimensional case, we introduce the spaces Ck(X) consisting of k-times
+Fr´echet differentiable functionals G : X →R, with bounded derivatives, i.e. such that the quantity
+∥G∥Ck(X ) := max
+0≤ℓ≤k sup
+u∈X
+∥dℓG(u)∥< ∞.
+The unit ball U(Ck(X)) is deﬁned as the set of G ∈Ck(X) such that ∥G∥Ck(X ) ≤1.
+Ck(K) trace-functionals for K ⊂X compact.
+If K ⊂X is a compact set, then we will denote
+by
+Ck(K) := {G|K | G ∈Ck(X)},
+the restriction to K of functionals belonging to Ck(X). Similarly, we denote by
+U(Ck(K)) := {G|K | G ∈U(Ck(X))},
+the corresponding “unit ball”. We emphasize that derivatives are usually not well-deﬁned for func-
+tionals G : K →R, when K ⊂X is compact, and hence, we effectively work with a set of trace-
+functionals, i.e. nonlinear functionals possessing an extension to all of X with globally bounded
+Ck-norm. We also emphasize that we only use U(Ck(K)) to deﬁne a set of Fr´echet differentiable
+operators of interest. When studying the approximation of functionals G ∈U(Ck(K)) on a compact
+set of inputs u ∈K, we will only consider the uniform norm ∥G∥C(K) = supu∈K |G(u)|, under
+which C(K) = C0(K) is itself a Banach space and never norms involving higher-order derivatives.
+B
+Continuity of linear maps over pre-compact sets
+We will show that over pre-compact sets, all norms are essentially equivalent which will allows us
+to lower bound the sampling width by the non-linear width for many useful situations. Consider
+two normed vectors spaces (X, ∥· ∥X) and (Y, ∥· ∥Y ) and suppose that Y compactly embeds in X.
+Then we have the following results.
+Lemma B.1. Let K ⊂Y be a bounded set. Then K is pre-compact in X and there exists a constant
+C = C(K) > 0 such that
+∥f∥Y ≤C∥f∥X,
+∀f ∈K.
+Proof. Pre-compactness of K follows immediately by the compact embedding Y ֒→X. Since K
+is bounded, there exists some constant C1 > 0 such that
+K ⊆eK := {f ∈Y : ∥f∥Y ≤C1}.
+Consider ∂eK = {f ∈Y : ∥f∥Y = C1}. Since this is a closed and bounded set in Y , it is compact
+in X. Therefore ∥· ∥X is uniformly continuous on ∂eK. Since 0 /∈∂eK, there exists a constant
+C2 > 0 such that C2 ≤∥f∥X for all f ∈∂eK. It follows that
+sup
+f∈∂e
+K
+∥f∥Y
+∥f∥X
+≤C1
+C2
+and, in particular,
+∥f∥Y ≤C1
+C2
+∥f∥X,
+∀f ∈∂eK.
+Now let f ∈eK and assume that f ̸= 0, noting that the desired inequality for the case f = 0 follows
+trivially since ∥0∥Y = ∥0∥X = 0. Deﬁne g := C1f/∥f∥Y then clearly g ∈∂eK hence
+∥g∥Y ≤C1
+C2
+∥g∥X.
+20
+
+PDF PAGE 21
+Data Complexity Estimates for Operator Learning
+A PREPRINT
+Plugging in the deﬁnition of g implies
+∥f∥Y ≤C1
+C2
+∥f∥X.
+Since f was arbitrary and K ⊆eK, the result follows.
+Lemma B.2. Let K ⊂Y be a bounded set and let E : Y →Rn be a continuous, linear map. Then
+there exists a constant C = C(E, K) > 0 such that
+|E(f) −E(g)| ≤C∥f −g∥X,
+∀f, g ∈K.
+In particular, E|K is continuous in X.
+Proof. Let f, g ∈K. Since E is continuous and linear, there exists a constant C1 > 0 such that
+|E(f) −E(g)| ≤C1∥f −g∥Y .
+Deﬁne eK := {f −g ∈Y : f, g ∈K}. The triangle inequality implies that eK is bounded since K
+is bounded. Therefore Lemma B.1 implies that there exists a constant C2 > 0 such that
+∥f −g∥Y ≤C2∥f −g∥X.
+Hence,
+|E(f) −E(g)| ≤C1C2∥f −g∥X
+as desired.
+C
+Bounds in ﬁnite dimension
+C.1
+Lower bounds over the Cube
+C.1.1
+Partition of the Cube
+Let Ω= [0, 1]d. We deﬁne the bump function ϕ : R →R by
+ϕ(x) :=
+(
+e−
+1
+1−x2 ,
+−1 < x < 1
+0,
+otherwise.
+For any 0 < γ < 1, consider the following family of functions σγ : R →R deﬁned as
+σγ(x) :=
+
+
+
+
+
+
+
+
+
+
+
+
+
+0,
+x ≤0,
+e · ϕ
+ 2
+1−γ x −1
+
+,
+0 < x < 1
+2(1 −γ),
+1,
+1
+2(1 −γ) ≤x ≤1
+2(1 + γ),
+e · ϕ
+ 2
+1−γ x −γ−1
+1−γ
+
+,
+1
+2(1 + γ) < x < 1,
+0,
+x ≥1.
+The non-constant terms are simply shifts and a re-scaling of the bump function so that it is supported
+on [0, 1 −γ] or [γ, 1] respectively and so that it takes the value one at the midpoint of its support.
+It is easy to check that σγ is supported on [0, 1], σγ ≡1 on
+ 1
+2(1 −γ), 1
+2(1 + γ)
+
+, and σγ ≤1 on
+[0, 1]. Furthermore, due to well known differentiability properties of the bump function, we have
+σγ ∈C∞
+c (R). For any l ∈N, denote by σ(l)
+γ the l-th derivative of σγ with the convention σ(0)
+γ
+:= σγ.
+We can ﬁnd constants βl > 0 such that
+sup
+x∈R
+|σ(l)
+γ (x)| ≤
+βl
+(1 −γ)l
+where β0 = 1 and, generally, βl depends only on l and not γ. Deﬁne φγ : Rd →R as
+φγ(x) :=
+d
+Y
+j=1
+σγ(xj),
+x ∈Rd.
+21
+
+PDF PAGE 22
+Data Complexity Estimates for Operator Learning
+A PREPRINT
+It is easy to see that φγ is supported on Ω, φγ ≡1 on
+ 1
+2(1 −γ), 1
+2(1 + γ)
+d, and φγ ≤1 on Ω. Let
+ν ∈Nd be a multi-index with |ν|1 = k. Then
+∥Dνφγ∥∞= sup
+x∈Ω
+|Dνφγ(x)|
+≤
+d
+Y
+j=1
+sup
+x∈Ω
+|σ(νj)
+γ
+(xj)|
+≤
+Y
+νj̸=0
+βνj
+(1 −γ)νj
+≤
+1
+(1 −γ)k max
+p∈Pk,k p(β1, . . . , βk)
+:=
+Γ(k)
+(1 −γ)k
+where Pk,k denotes the set of all monomials of k variables with at most degree k and leading coef-
+ﬁcient one. The constant Γ depends only on k since the cardinality of Pk,k depends only on k, but
+not on d or γ. In particular, we ﬁnd that, for any k ∈N, there exists a constant Γ = Γ(k) > 0 such
+that
+∥Dνφγ∥∞≤
+Γ
+(1 −γ)k ,
+0 ≤|ν|1 ≤k.
+(C.1)
+Let m ∈N and uniformly subdivide Ωinto cubes of side-length 1/m. There are n := md such
+cubes, which we denote Q1, . . . , Qn each with volume 1/md = n−1. For any j ∈[n], deﬁne,
+qj := 1
+2
+1 −n
+ˆ
+Qj
+x dx
+which is the vector difference between the center of mass of Ωand Qj. We now deﬁne the functions
+φγ,j ∈C∞
+c (Rd) by φγ,j(x) := φγ
+ m(x + qj)
+
+for any x ∈Rd. In particular, each φγ,j is φγ with
+its support shifted from Ωto Qj. Furthermore, from (C.1), we ﬁnd that, for any k ∈N and j ∈[n],
+∥Dνφγ,j∥∞≤Γm|ν|1
+(1 −γ)k ,
+0 ≤|ν|1 ≤k.
+(C.2)
+It is also useful to estimate the Lp-norms of these functions, in particular, we have
+∥φγ,j∥p
+p =
+ˆ
+Qj
+|φγ,j(x)|p dx
+= m−d
+ˆ
+Ω
+|φγ(x)|p dx
+≥m−d
+ˆ
+Ω∩{φγ≡1}
+1 dx
+= n−1γd.
+(C.3)
+C.1.2
+Proof of Theorem 2.1
+Proof. Step 1: First we consider the case q = ∞with K = U
+ W k,∞(Ω)
+
+or K = U
+ Ck(Ω)
+
+. Let
+f = J
+2n
+X
+j=1
+αjφγ,j
+where αj ∈{−1, 1} and J is chosen such that ∥f∥Ck = ∥f∥W k,∞≤1 so that f ∈K. We will ﬁrst
+estimate J. Using the fact that the φγ,j(s) have disjoint supports along with (C.2), we ﬁnd
+∥f∥Ck =
+max
+0≤|ν|1≤k ∥Dνf∥∞
+= J
+max
+0≤|ν|1≤k max
+j∈[2n] ∥Dνφγ,j∥∞
+≤JΓnk/d
+(1 −γ)k .
+22
+
+PDF PAGE 23
+Data Complexity Estimates for Operator Learning
+A PREPRINT
+If p < ∞, we choose γ = d/(kp + d), which gives
+(1 −γ)−k =
+
+1 + d
+kp
+k
+.
+If p = ∞, any choice of γ will do, so we simply pick γ = 1/2 and set
+T =
+
+
+
+
+1 + d
+kp
+k
+,
+1 ≤p < ∞,
+2k,
+p = ∞.
+We then have
+∥f∥Ck ≤JT Γnk/d.
+Now suppose q < ∞with K = U
+ W k,q(Ω)
+
+. Similarly, we have
+∥f∥q
+W k,q =
+X
+0≤|ν|1≤k
+∥Dνf∥q
+q
+≤
+X
+0≤|ν|1≤k
+∥Dνf∥q
+∞
+≤Jq(k + 1)dkT qΓqnkq/d
+where the estimate on the sum follows as
+X
+0≤|ν|1≤k
+1 =
+k
+X
+j=0
+d −1 + j
+d −1
+
+≤(k + 1)
+d −1 + k
+d −1
+
+= (k + 1)k + d −1
+k
+· k + d −2
+k −1
+· · · d
+1
+≤(k + 1)dk.
+(C.4)
+In particular,
+∥f∥W k,q ≤J(k + 1)1/qT Γdk/qnk/d.
+Therefore letting J =
+ (k + 1)1/qT Γdk/qnk/d−1, for any 1 ≤q ≤∞implies f ∈K.
+Step 2: Now let Yn = {y1, . . . , yn} ⊂Ωbe an arbitrary set of points. Let l : [n] →[2n] be such
+that yj ∈supp φγ,l(j) for any j ∈[n]. Since the cubes Qj overlap on their boundaries, the choice
+of l might not be unique, however, since the φγ,j(s) are identically zero on these boundaries any
+arbitrary choice will do. In particular, we have that
+f(yj) = Jαl(j)φγ,l(j)(yj).
+Deﬁne, for any j ∈[2n],
+βj =
+αj,
+j ∈l([n]),
+−αj,
+otherwise
+and set
+g = J
+2n
+X
+j=1
+βjφγ,j.
+Clearly g ∈K. Furthermore, for each j ∈[n], we have g(yj) = f(yj) and, in particular,
+δYn(g) = δYn(f).
+Therefore
+f −g =
+ f −(Dn ◦δYn)(f)
+
+−(g −(Dn ◦δYn)(g)
+
+hence
+∥f −g∥p ≤∥f −(Dn ◦δYn)(f)∥p + ∥g −(Dn ◦δYn)(g)∥p.
+23
+
+PDF PAGE 24
+Data Complexity Estimates for Operator Learning
+A PREPRINT
+It follows that
+max
+
+∥f −(Dn ◦δYn)(f)∥p, ∥g −(Dn ◦δYn)(g)∥p
+	
+≥1
+2∥f −g∥p
+and therefore
+sn(K)Lp ≥1
+2∥f −g∥p.
+Step 3: It remains to estimate the difference between f and g. Suppose ﬁrst p = ∞then we have
+∥f −g∥∞= 2J max
+j∈[2n],
+j /∈l([n])
+∥φγ,j∥∞= 2J.
+If p < ∞, we have from (C.3),
+∥f −g∥p
+p = 2pJp
+X
+j∈[2n],
+j /∈l([n])
+∥φγ,j∥p
+p
+≥2pJpn−1γdn
+= 2pJpγd
+since the sum must have at least n elements in the case |l([n])| = n. Our choice γ = d/(kp + d),
+gives
+γd/p =
+
+1 + kp
+d
+d/p
+≥ek.
+Putting this together by using the deﬁnition of T , we have, for any 1 ≤p, q ≤∞,
+1
+2∥f −g∥p ≥2−k(k + 1)−1/qΓ−1
+
+1 + d
+kp
+−k
+d−k/qn−k/d
+as desired.
+C.1.3
+Proof of Theorem 2.2
+Proof. Deﬁne Xn := span{φγ,1, . . . , φγ,n} and let f ∈Xn. In particular,
+f =
+n
+X
+j=1
+αjφγ,j
+for some α1, . . . , αn ∈R. Suppose ﬁrst that p = q = ∞. Since the φγ,j(s) have disjoint support,
+∥f∥∞= max
+j∈[n] |αj|.
+Then, using (C.2), we ﬁnd
+∥f∥Ck =
+max
+0≤|ν|1≤k ∥Dνf∥∞
+=
+max
+0≤|ν|1≤k max
+j∈[n] |αj|∥Dνφγ,j∥∞
+≤
+Γnk/d
+(1 −γ)k max
+1≤j≤n |αj|
+= 2kΓnk/d∥f∥∞
+(C.5)
+with the choice γ = 1/2. Suppose now that q < ∞. Consider ﬁrst, the case p = ∞. We have
+∥f∥q
+∞=
+
+max
+j∈[n] |αj|
+q
+≥n−1
+n
+X
+j=1
+|αj|q.
+(C.6)
+24
+
+PDF PAGE 25
+Data Complexity Estimates for Operator Learning
+A PREPRINT
+On the other hand, when p < ∞, using (C.3), we ﬁnd
+∥f∥p
+p =
+ˆ
+Ω
+
+n
+X
+j=1
+αjφγ,j(x)
+
+p
+dx
+=
+n
+X
+l=1
+ˆ
+Ql
+
+n
+X
+j=1
+αjφγ,j(x)
+
+p
+dx
+=
+n
+X
+l=1
+ˆ
+Ql
+|αlφγ,l(x)|p dx
+=
+n
+X
+l=1
+|αl|p
+ˆ
+Ql
+|φγ,l(x)|p dx
+≥n−1γd
+n
+X
+j=1
+|αj|p.
+(C.7)
+If p > q, by H¨older’s inequality,
+∥f∥p
+p ≥n−1γdn1−p/q
+
+
+n
+X
+j=1
+|αj|q
+
+
+p/q
+.
+Therefore, for p ≥q, we ﬁnd
+∥f∥q
+p ≥n−1γdq/p
+n
+X
+j=1
+|αj|q.
+Notice that, due to (C.6), the above inequality also holds for the case p = ∞. Using this along with
+(C.2) and (C.4), we have
+∥f∥W k,q =
+
+
+X
+0≤|ν|1≤k
+n
+X
+j=1
+ˆ
+Qj
+|αj|q|Dνφγ,j(x)|q dx
+
+
+1/q
+≤
+
+
+X
+0≤|ν|1≤k
+Γqm|ν|1q
+(1 −γ)kq n−1
+n
+X
+j=1
+|αj|q
+
+
+1/q
+≤
+
+
+X
+0≤|ν|1≤k
+Γqm|ν|1q
+(1 −γ)kqγdq/p ∥f∥q
+p
+
+
+1/q
+≤Γ(k + 1)1/qγ−d/p(1 −γ)−kdk/qnk/d∥f∥p
+(C.8)
+When p = ∞, we choose γ = 1/2 and obtain,
+∥f∥W k,q ≤2kΓ(k + 1)1/qdk/qnk/d∥f∥p.
+(C.9)
+When p < ∞, choosing γ = d/(kp + d) yields
+(1 −γ)−k =
+
+1 + d
+kp
+k
+,
+γ−d/p =
+
+1 + kp
+d
+d/p
+≤ek,
+and therefore
+∥f∥W k,q ≤Γek(k + 1)1/q
+
+1 + d
+kp
+k
+dk/qnk/d
+|
+{z
+}
+:=J
+∥f∥p.
+Since J is greater than the constants appearing in (C.5) and (C.9), we have shown that {f ∈Xn :
+∥f∥p ≤J−1} ⊆K for all relevant choices of p and q. The result therefore follows by [12, Theorem
+3.1].
+25
+
+PDF PAGE 26
+Data Complexity Estimates for Operator Learning
+A PREPRINT
+C.2
+Lower bounds over Weighted Euclidean Space
+C.2.1
+Gaussian Partition of Euclidean Space
+We now modify the partition deﬁned in section C.1.1 so that that union of the support of all functions
+becomes Rd instead of [0, 1]d. Let ρd denote the density of the standard d-dimensional Gaussian
+measure, dropping the subscript when d = 1. Deﬁne ξ : R →(0, 1) by
+ξ(x) =
+ˆ x
+−∞
+ρ(y) dy
+to be the cumulative distribution function of ρ. It is easy to see that ξ ∈C∞
+b (R) and is a home-
+omorphism of R into (0, 1). In particular, ξ−1 : (0, 1) →R exists and is continuous. Deﬁne
+ξd : Rd →(0, 1)d by ξd(x)j = ξ(xj) for any j ∈[d] and notice that ξ−1
+d
+: (0, 1)d →Rd is
+given as ξ−1
+d (x)j = ξ−1(xj). The mapping ξd is the Knothe-Rosenblatt rearrangement between the
+standard Gaussian on Rd and the uniform measure on [0, 1]d which is simply the Lebesgue measure.
+In particular, (ξd)♯ρd(x) dx = dx. Deﬁne the family of functions eφγ,j(x) = φγ,j(ξd(x)) for any
+j ∈[n] and notice that eφγ,j is supported on ξ−1
+d (Qj) := Ej. Each cube Qj ⊂[0, 1]d is stretched to
+the hyper-rectangle Ej ⊂Rd whose volume under the standard Gaussian equals the volume of Qj
+under the Lebesgue measure. Since the Qj(s) are disjoint, the functions eφγ,j have disjoint supports
+whose union makes up Rd.
+Notice ﬁrst that,
+eφγ,j(x) = φγ
+ m(ξd(x) + qj)
+
+=
+d
+Y
+l=1
+σγ
+ m(ξ(xl) + qjl)
+
+.
+Let ν ∈Nd be a multi-index with |ν|1 = k. We have, by Fa`a di Bruno’s formula,
+Dν eφγ,j(x) =
+d
+Y
+l=1
+∂νl
+∂xνl
+l
+σγ
+ m(ξ(xl) + qjl)
+
+=
+d
+Y
+l=1
+X
+π∈Πνl
+σ(|π|)
+γ
+ m(ξ(xl) + qjl)
+ Y
+B∈π
+mξ(|B|)(xl)
+where Πνl is the set of partitions of the set {1, . . . , νl} with the convention that Π0 = {∅}. For
+example,
+Π3 =
+
+{1, 2, 3}
+	
+,
+
+{1}, {2}, {3}
+	
+,
+
+{1, 2}, {3}
+	
+,
+
+{1, 3}, {2}
+	
+,
+
+{3, 2}, {1}
+		
+.
+It follows, again by Fa`a di Bruno’s formula, that
+Dνφγ,j(x) =
+d
+Y
+l=1
+X
+π∈Πνl
+σ(|π|)
+γ
+ m(xl + qjl)
+ Y
+B∈π
+m
+hence, since ξ ∈C∞
+b (R), there exists a constant H = H(ξ, k) > 0 such that
+(Dν eφγ,j)(x)
+ ≤H
+(Dνφγ,j)
+ ξd(x)
+.
+(C.10)
+It then follows from (C.2) that
+∥Dν eφj,γ∥∞≤HΓm|ν|1
+(1 −γ)|ν|1 ,
+0 ≤|ν|1 ≤k.
+(C.11)
+26
+
+PDF PAGE 27
+Data Complexity Estimates for Operator Learning
+A PREPRINT
+Furthermore, by the change of variables formula, we ﬁnd
+∥eφγ,j∥p
+Lp
+ρd =
+ˆ
+Ej
+|eφγ,j(x)|pρd(x) dx
+=
+ˆ
+Ej
+φγ,j
+ ξd(x)
+pρd(x) dx
+=
+ˆ
+ξd(Ej)
+|φγ,j(x)|p(ξd)♯ρd(x) dx
+=
+ˆ
+Qj
+|φγ,j(x)|p dx
+≥n−1γd
+(C.12)
+where the last line follows from (C.3).
+C.2.2
+Proof of Theorem 2.6
+Proof. The case p = ∞, follows precisely as Theorem 2.1. Suppose p < ∞and deﬁne
+f = J
+2n
+X
+j=1
+αj eφγ,j
+for some αj ∈{−1, 1} and constant J such that ∥f∥W k,q ≤1. Due to (C.11), for q = ∞, the same
+calculation as in Theorem 2.1 holds. When q < ∞, we have
+∥f∥q
+W k,q
+ρd =
+X
+0≤|ν|1≤k
+∥Dνf∥q
+Lq
+ρd
+= Jq
+X
+0≤|ν|1≤k
+2n
+X
+j=1
+ˆ
+Ej
+|Dν eφγ,j(x)|qρd(x) dx
+≤JqHq
+X
+0≤|ν|1≤k
+2n
+X
+j=1
+ˆ
+Ej
+Dνφγ,j
+ ξd(x)
+qρd(x) dx
+= JqHq
+X
+0≤|ν|1≤k
+Dν
+2n
+X
+j=1
+φγ,j
+q
+q
+≤JqHq
+X
+0≤|ν|1≤k
+Dν
+2n
+X
+j=1
+φγ,j
+q
+∞
+≤Jq(k + 1)HqΓq
+
+1 + d
+kp
+kq
+dkΓqnkq/d
+which follows by (C.10) and the change of variables formula similarly to (C.12). In particular, we
+ﬁnd that
+J = (k + 1)−1/qH−1Γ−1
+
+1 + d
+kp
+−k
+d−k/qn−k/d
+implies f ∈K. By a similar construction of the function g as in Theorem 2.1, we ﬁnd that, we need
+only to estimate
+∥f −g∥p
+Lp
+ρd = 2pJp
+X
+j∈[2n],
+j /∈l([n])
+∥eφγ,j∥p
+Lp
+ρd
+≥2pJpn−1γdn
+= 2pJpγd
+which follows by (C.12) and therefore the results follows as in Theorem 2.1.
+27
+
+PDF PAGE 28
+Data Complexity Estimates for Operator Learning
+A PREPRINT
+C.2.3
+Proof of Theorem 2.7
+Proof. Deﬁne Xn := span {eφγ,1, . . . , eφγ,n} and let f ∈Xn. The result follows as in Theorem 2.2;
+we need to only modify the estimates (C.7) and (C.8). For (C.7), we have
+∥f∥p
+Lp
+ρd =
+n
+X
+l=1
+|αl|p
+ˆ
+Ej
+|eφγ,j(x)|pρd(x) dx
+≥n−1γd
+n
+X
+j=1
+|αj|p
+(C.13)
+which follows by (C.12). For (C.8), we have
+∥f∥W k,q
+ρd =
+
+
+X
+0≤|ν|1≤k
+n
+X
+j=1
+ˆ
+Ej
+|αj|q|Dν eφγ,j(x)|qρd(x) dx
+
+
+1/q
+≤
+
+
+X
+0≤|ν|1≤k
+Hq
+n
+X
+j=1
+ˆ
+Qj
+|αj|q|Dνφγ,j(x)|q dx
+
+
+1/q
+≤HΓ(k + 1)1/qγ−d/p(1 −γ)−kdk/qnk/d∥f∥Lp
+ρd
+(C.14)
+which follows by (C.11), the change of variables formula, (C.13), and (C.8). The result therefore
+follows as in Theorem 2.2.
+D
+Lower Bounds in Inﬁnite Dimensions
+D.0.1
+Proof of Proposition 2.8
+Proof. By deﬁnition, a domain D has non-empty interior. In particular, D contains a d-dimensional
+cube. Furthermore, since D is compact, it is also contained in a d-dimensional cube. Upon rescaling
+D, we will wlog assume that [0, 1]d ⊂D ⊂[−N, N]d, for suitably chosen N ∈N, in the following
+(a rescaling of D only affects the implicit constants in our estimates, but not the decay rate α).
+Case I: Lp-norm (K = U(W s,p(D))): Assuming that [0, 1]d ⊂Ω⊂[−N, N]d, we ﬁrst show that
+U(W s,p(D)) contains α-hypercubes of arbitrary dimension n for α = s/d + 1.
+To see this, for given n, we consider φj, j = 1, . . . , n the n lowest-order 1-periodic trigonometric
+(sine/cosine) basis functions, all of degree at most m, where m is minimal such that n ≤md. We
+note that for 1-periodic functions, we have the norm equivalence,
+∥f∥W s,p([0,1]d) ≤∥f∥W s,p(D) ≤∥f∥W s,p([−N,N]d) ≤C∥f∥W s,p([0,1]d),
+where C = C(N, d) ≥0 is a ﬁxed constant, only depending on the dimension d and on the domain
+D. For coefﬁcients α1, . . . , αn ∈R, and using the above norm equivalence for f = Pn
+j=1 αjφj, it
+now follows from Bernstein’s inequality that
+
+n
+X
+j=1
+αjφj
+
+W s,p
+≤Cms
+
+n
+X
+j=1
+αjφj
+
+Lp
+,
+where C = C(D, s) only depends on the underlying domain D and s. Bounding the term on the
+right-hand side via the triangle inequality, and taking into account that 2−dmd ≤n, by choice of m,
+it follows that
+
+n
+X
+j=1
+αjφj
+
+W s,p
+≤Cmsn max
+j
+|αj| ≤Cn(s/d)+1 max
+j
+|αj|,
+where C = C(D, s, d) is independent of n. In particular, this implies that the set of functions,
+f =
+1
+Cn(s/d)+1
+n
+X
+j=1
+αjφj,
+|αj| ≤1,
+28
+
+PDF PAGE 29
+Data Complexity Estimates for Operator Learning
+A PREPRINT
+satisﬁes ∥f∥W s,p ≤1, i.e. f ∈U(W s,p(D)). We also note that ∥φj∥Lp(D) ≤C∥φj∥Lp([0,1]d) ≤
+M0 is uniformly bounded by a constant M0 that depends on Ωand d, but that does not depend on n.
+Since φj are orthonormal in L2([0, 1]d), we can deﬁne dual elements φ∗
+j by
+φ∗
+j(f) =
+ˆ
+[0,1]d φj(x)f(x) dx.
+And we note that φ∗
+k(φj) = δkj for j, k = 1, . . . , n and ∥φ∗
+j∥(Lp(D))∗= ∥φj∥Lq([0,1]d) ≤M is
+uniformly bounded by a constant M > 0, which depends on D and d but is independent of n.
+The bi-orthogonal system {(φj, φ∗
+j)} thus satisﬁes all the assumptions for our deﬁnition of an α-
+hypercube, except for the uniform bound ∥φj∥Lp(D) ≤1. Since ∥φj∥Lp(D) ≤M0, this is readily
+ﬁxed by considering instead the bi-orthogonal system {(eφj, eφ∗
+j)} := {(M −1
+0 φj, M0φ∗
+j)}.
+Case II: supremum norm (K = U(Cs(D))): Assuming without loss of generality that [0, 1]d ⊂D,
+we next show that U(Cs(D)) contains α-hypercubes of arbitrary dimension n for α = s/d.
+Given n ∈N, choose m ∈N minimal such that n ≤md, and consider the partition of the unit
+cube [0, 1]d = Smd
+j=1 Qj and bump functions φj := φγ,j|γ=1/2 constructed in C.1.1. We recall
+that, by construction, each bump function has support supp(φj) ⊂Qj, and the Qj are (essentially)
+non-overlapping. Furthermore, we have
+∥Dνφj∥L∞≤Cm|ν|,
+with an absolute constant C, independent of m. We also note that, by choice of m, we have cmd ≤
+n ≤md, for a ﬁxed constant c > 0 (e.g. c = 2−d).
+For coefﬁcients α1, . . . , αn ∈R, and f = J Pn
+j=1 αjφj, we have supp(f) ⊂[0, 1]d and we obtain,
+∥f∥Cs = J max
+|ν|≤s max
+x∈[0,1]d |Dνf(x)|
+= J max
+|ν|≤s max
+x∈[0,1]d
+
+max
+j=1,...,n |αj||Dνφj(x)|
+
+≤CJms max
+j
+|αj|.
+where C = C(d, s, D) only depends on d, s and D. In particular, using the fact that ms ≤cns/d
+with c = 2−d, it follows that there exists a constant C = C(d, s, D) > 0, such that any f of the
+form
+f =
+1
+Cns/d
+n
+X
+j=1
+αjφj,
+|αj| ≤1,
+satisﬁes ∥f∥Cs ≤1, i.e. f ∈U(Cs(D)). We can readily identify a bi-orthogonal system φ∗
+k by
+noting that by construction of our bump functions {φj}, for any k = 1, . . . , n there exists xk ∈Ω,
+such that φj(xk) = δjk. Therefore the functionals φ∗
+j := δxj obtained by point-evaluation at xj
+deﬁne a bi-orthogonal system, with ∥φ∗
+j∥= 1.
+D.0.2
+Proof of Lemma 2.11
+Proof. Fix d ∈N. By assumption, K contains a hypercube of the form
+
+
+
+c
+dα
+d
+X
+j=1
+yjφj : y1, . . . , yd ∈[0, 1]
+
+
+⊂K,
+where φ1, . . . , φn possesses a dual basis φ∗
+1, . . . φ∗
+n with ∥φ∗
+j∥Ω∗≤M, and M > 0 is independent
+of d.
+For any f ∈Ck
+0 ([0, 1]d), we will continue to denote by f its zero-extension to all of Rd. Note that
+this extension is in Ck(Rd) with the same norm. Deﬁne ιd : Ck
+0 ([0, 1]d) →Ck(K), by
+ιd(f)(u) := f
+ c−1dαφ∗
+1(u), . . . , c−1dαφ∗
+d(u)
+
+.
+(D.1)
+29
+
+PDF PAGE 30
+Data Complexity Estimates for Operator Learning
+A PREPRINT
+Deﬁne hd : [0, 1]d →K by
+hd(y) := c
+dα
+d
+X
+j=1
+yjφj.
+Continuity of hd follows immediately since
+∥hd(y) −hd(y′)∥Ω≤R1|y −y′|1,
+∀y, y′ ∈[0, 1]d
+for some constant R1 > 0. Note that, by construction,
+c−1dαφ∗
+j
+ hd(y)
+
+= yj,
+j = 1, . . . , d.
+By deﬁnition of ιdf and hd, we thus ﬁnd, for any y ∈[0, 1]d,
+(ιdf)
+ hd(y)
+
+= f
+
+c−1dαφ∗
+1
+ hd(y)
+
+, . . . , c−1dαφ∗
+d
+ hd(y)
+
+= f(y).
+From the inclusion hd
+ [0, 1]d
+⊆K, we obtain
+∥ιdf∥C(K) = sup
+u∈K
+|ιdf(u)| ≥
+sup
+y∈[0,1]d |ιdf
+ hd(y)
+
+| =
+sup
+y∈[0,1]d |f(y)| = ∥f∥C([0,1]d)
+which proves the asserted lower bound. We now establish the upper bound. To that end, ﬁx u ∈K,
+and let w =
+ c−1dαφ∗
+1(u), . . . , c−1dαφ∗
+d(u)
+
+. The ℓ-th total derivative Dℓιdf of ιdf, where ℓ≤k,
+is given by
+(Dℓιdf)(u)(v1, . . . , vℓ) =
+d
+X
+j1,...,jℓ=1
+∂ℓf(w)
+∂xj1 . . . ∂xjℓ
+ℓ
+Y
+s=1
+c−1dαφ∗
+js(vs)
+for any v1, . . . , vℓ∈Ω. Hence,
+(Dℓιdf)(u)(v1, . . . , vℓ)
+ ≤c−lM ldαl
+d
+X
+j1,...,jℓ=1
+
+∂ℓf(w)
+∂xj1 . . . ∂xjℓ
+ .
+By deﬁnition, we have
+
+∂ℓf(w)
+∂xj1 . . . ∂xjℓ
+ ≤∥f∥Ck(Rd) = ∥f∥Ck([0,1]d).
+Since the sum over j1, . . . , jℓhas dℓterms, there is a constant R = R(k, K) > 1 such that
+∥(Dℓιdf)(u)∥Ωℓ→R ≤dαℓdℓM ℓRℓ
+2∥f∥Ck([0,1]d) ≤Rd(α+1)k∥f∥Ck([0,1]d).
+It follows that
+∥ιdf∥Ck(K) = max
+1≤ℓ≤k sup
+u∈K
+max
+
+|ιdf(u)|, ∥(Dℓιdf)(u)∥Ωℓ→R
+	
+≤Rd(α+1)k∥f∥Ck([0,1]d),
+as desired.
+D.0.3
+Proof of Theorem 2.12
+The proof of Theorem 2.12 is analogous to the proof of Theorem 2.10, except that Lemma 2.11 is
+replaced by the following lemma:
+Lemma D.1. Let X be a Banach space with a bounded, bi-orthogonal system and let µ be a non-
+degenerate, Radon, Gaussian measure on X with trace-class covariance operator Γ : X →X.
+Denote by λ1 ≥λ2 ≥. . . the eigenvalues of Γ, ordered by their multiplicities and suppose that
+there exists some α > 0 such that
+p
+λj ≍j−α for all j ∈N. Then, for any k, d ∈N, there exists
+a linear embedding ιd : Ck(Rd)֒→Ck(X) and a constant R = R(k, X) > 0, such that, for any
+f ∈Ck(Rd),
+∥ιdf∥Ck(X ) ≤Cdk(α+2)∥f∥Ck(Rd)
+and, for any 1 ≤p < ∞,
+∥ιdf∥Lp
+µ(X ) = ∥f∥Lp
+ρd(Rd).
+30
+
+PDF PAGE 31
+Data Complexity Estimates for Operator Learning
+A PREPRINT
+Proof. Deﬁne Φ∗
+d : X →Rd by Φ∗
+d = (φ∗
+1, . . . , φ∗
+d). By deﬁnition, (Φ∗
+d)♯µ = N(0, Γd) for some
+positive deﬁnite Γd ∈Rd×d whose eigenvalues satisfy the same bound as those of Γ. Therefore,
+(Γ−1/2
+d
+Φ∗
+d)♯µ = N(0, Id). For any f ∈Ck(Rd) deﬁne ιd : Ck(Rd) →Ck(X) by f 7→f ◦
+Γ−1/2
+d
+Φ∗
+d. By the change of variables formula,
+∥ιdf∥p
+Lp
+µ(X ) =
+ˆ
+X
+|f
+ Γ−1/2
+d
+Φ∗
+d(u)
+
+|pdµ(u)
+=
+ˆ
+Rd |f(x)|pd(Γ−1/2
+d
+Φ∗
+d)♯µ(x)
+= ∥f∥p
+Lp
+ρd(Rd)
+which establishes the second result. To prove the claimed upper-bound, note that the l-th total
+derivative of ιdf is the l-linear mapping
+(Dlιdf)(u)(v1, . . . , vl) =
+d
+X
+j1,...,jℓ=1
+∂ℓf(y)
+∂xj1 . . . ∂xjℓ
+lY
+s=1
+⟨(Γ−1/2
+d
+)js, Φ∗
+d(vs)⟩
+for any u ∈X and v1, . . . , vl ∈X where y = Γ−1/2
+d
+Φ∗
+d(u). For any ∥v1∥X ≤1, . . . , ∥vl∥X ≤1,
+we have
+lY
+s=1
+⟨(Γ−1/2
+d
+)js, Φ∗
+d(vs)⟩≤
+lY
+s=1
+|(Γ−1/2
+d
+)js|2|Φ∗
+d(vs)|2
+≤dl/2M l
+lY
+s=1
+|(Γ−1/2
+d
+)js|1
+≤dl/2M l|Γ−1/2
+d
+|l
+∞
+≤dlM l|Γ−1/2
+d
+|l
+2
+≤M ldl+αl
+where we have absorbed the constant from the eigenvalue bounds of Γd into M. It follows that
+∥Dlιdf∥C(X ) ≤M ldl(α+2)∥f∥Ck(Rd)
+and therefore
+∥ιdf∥Ck(X ) ≤M kdk(α+2)∥f∥Ck(Rd)
+as desired.
+Theorem D.2. Assume the setting of Lemma D.1. Let U := U(Ck(X)). Then there exists a constant
+C = C(k, α) > 0 such that
+dn(U)Lp
+µ(X ) ≥Cn−1
+p log(n)−k(α+3).
+(D.2)
+Proof. A slightly sub-optimal choice of γ in the proof of Theorem 2.7, gives the bound
+dn(U(Ck(Rd)))Lp
+ρd (Rd) ≥Cd−kn−k
+d −1
+p .
+Combining with Lemma D.1, and arguing as in the proof of Theorem 2.10, we obtain
+dn(U)Lp
+µ(X ) ≥Cd−k(α+3)n−k
+d −1
+p ,
+(D.3)
+with C > 0 independent of d. Optimizing over d yields the choice d ≈log(n)/(α + 3) and the
+result follows upon substitution into the above equation.
+E
+Data-efﬁcient Upper Bounds
+The proof of Theorem 3.3 in the main text rests on the quantitative bounds from Proposition 3.8 and
+Proposition 3.9, whose derivation is ﬁnally detailed in the following two subsections.
+31
+
+PDF PAGE 32
+Data Complexity Estimates for Operator Learning
+A PREPRINT
+E.0.1
+Proof of Proposition 3.8
+The proof of Proposition 3.8 follows a well-known strategy in statistical learning theory; we now
+proceed to the proof, but relegate several technical intermediate results, summarized as lemmas, to
+the appendices as indicated below.
+Proof. (Proof of Proposition 3.8) Let G ∈U(Aγ) be given. And let u1, . . . , un ∈L2(D) be arbitrary
+input functions for the moment – a good choice of these input functions will be determined later. By
+assumption ΨG is an empirical risk minimizer, i.e. it minimizes
+bL(ΨG; G) = min
+Ψ∈Σ′m
+bL(Ψ; G).
+Our aim is to estimate ∥ΨG −G∥L2
+µ, or equivalently, to estimate the population risk,
+L(ΨG; G) = Eu∼µ
+h
+∥ΨG(u) −G(u)∥2
+L2(D)
+i
+= ∥ΨG −G∥2
+L2µ.
+If u1, . . . , un ∼µ are iid randomly drawn with law µ, we can think of bL as a Monte-Carlo estimate
+of L.
+Following a well-known strategy from statistical learning theory, our ﬁrst step in estimating the
+population risk L(ΨG; G) is to split this risk into an approximation error contribution and an esti-
+mation error contribution. Upon bounding the approximation error based on the assumption that
+G ∈U(Aγ), this results in the following lemma, whose detailed proof can be found in Appendix
+E.2:
+Lemma E.1. Let G ∈U(Aγ) and m ∈N be given. Let ΨG ∈Σ′
+m denote the empirical risk
+minimizer. Then,
+L(ΨG; G) ≤m−2γ + 2
+sup
+G∈U(Aγ),Ψ∈Σ′m
+[L(Ψ; G) −bL(Ψ; G)].
+(E.1)
+In (E.1), the ﬁrst term on the right bounds the approximation error, while the second term bounds
+the estimation error, which arises due to the ﬁnite number of samples.
+To bound the estimation error contribution, we will follow some ideas of [11, Proof of Theorem C∗].
+To this end, we ﬁrst note that for any ﬁxed pair (Ψ, G) ∈Σ′
+m × U(Aγ), we have a uniform bound
+sup
+u∈K
+∥Ψ(u) −G(u)∥L2(D) = ∥Ψ −G∥C(K;L2(D))
+≤∥Ψ∥C(K;L2(D)) + ∥G∥C(K;L2(D))
+≤3.
+(E.2)
+For iid samples u1, . . . , un ∼µ, we now deﬁne iid random variables
+Yj := ∥Ψ(uj) −G(uj)∥2
+L2(D).
+Note that the random variables satisfy 0 ≤Yj ≤9, and in particular, the Yj are non-negative.
+Therefore, by Bernstein’s inequality [41, Prop. 2.14, in particular (2.23)], we obtain that for any
+β > 0:
+Prob
+h
+L(Ψ; G) −bL(Ψ; G) ≥β
+i
+= Prob
+
+E[Yj] −1
+n
+n
+X
+j=1
+Yj ≥β
+
+
+(E.3)
+≤exp
+ 
+−
+β2n
+2
+n
+Pn
+j=1 E[Y 2
+j ]
+!
+,
+(E.4)
+where, by (E.2), we can estimate
+1
+n
+n
+X
+j=1
+E[Y 2
+j ] ≤9E∥Ψ −G∥2 = 9L(Ψ; G).
+32
+
+PDF PAGE 33
+Data Complexity Estimates for Operator Learning
+A PREPRINT
+Replacing β by the product α (L(Ψ; G) + ρ) for α, ρ > 0 (we note that the quantity L(Ψ; G) is
+independent of the samples and not random), this implies that
+Prob
+"
+L(Ψ; G) −bL(Ψ; G)
+L(Ψ; G) + ρ
+≥α
+#
+≤exp
+
+−α2n(L(Ψ; G) + ρ)2
+18L(Ψ; G)
+
+.
+Using the trivial inequality (L(Ψ; G) + ρ)2 ≥2ρL(Ψ; G), this in turn implies
+Prob
+"
+L(Ψ; G) −bL(Ψ; G)
+L(Ψ; G) + ρ
+≥α
+#
+≤exp
+
+−α2nρ
+9
+
+,
+(E.5)
+for any ﬁxed pair (Ψ, G) ∈Σ′
+m × U(Aγ). For future reference, we note this bound in the following
+lemma:
+Lemma E.2. Let (Ψ, G) ∈Σ′
+m × U(Aγ), and L(Ψ, G) = Eu∼µ∥Ψ(u) −G(u)∥2
+L2 the population
+risk, and bL(Ψ, G) = 1
+n
+Pn
+j=1 ∥Ψ(uj)−G(uj)∥2
+L2 the empirical risk. If the samples u1, . . . , un ∼µ
+are chosen iid, then for any ρ, α > 0 and n ∈N, we have
+Prob
+"
+L(Ψ; G) −bL(Ψ; G)
+L(Ψ; G) + ρ
+≥α
+#
+≤exp
+
+−α2nρ
+9
+
+.
+(E.6)
+A similar bound can be derived for the supremum over all pairs (Ψ, G) ∈Σ′
+m × U(Aγ), via simple
+a union bound argument. This is summarized in the next lemma, with proof detailed in Appendix
+E.3. The bound below also makes a speciﬁc choice for ρ ∝α−1ǫ:
+Lemma E.3. Let ǫ > 0, α ∈(0, 1]. Denote H = Σ′
+m × U(Aγ). Then
+Prob
+"
+sup
+(Ψ,G)∈H
+L(Ψ; G) −bL(Ψ; G)
+L(Ψ; G) + 72α−1ǫ ≥α
+#
+≤NH,ǫ exp (−2αnǫ) .
+(E.7)
+Here NH,ǫ can be thought of as bounding the covering number of H, and for m ≥(2/ǫ)1/γ, we can
+estimate
+NH,ǫ ≤N (Σm, ǫ)2 ,
+(E.8)
+where N (Σm, ǫ) denotes the ǫ-covering number of Σm with respect to the C(K; L2(D))-norm.
+The last lemma implies the following corollary, also proved in Appendix E.3:
+Corollary E.4. Fix δ ∈(0, 1]. Let ǫ > 0 be given, and let m ≥(2/ǫ)1/γ be integer. If
+n ≥ǫ−1 log(δ−1N(Σm, ǫ)2),
+then with probability at least 1 −δ in the random samples u1, . . . , un ∼µ, we have
+L(Ψ; G) ≤2 bL(Ψ; G) + 144ǫ,
+(E.9)
+uniformly for all (Ψ, G) ∈Σ′
+m × U(Aγ).
+Given Corollary E.4, the claim of Proposition 3.8 now follows by setting Ψ = ΨG in (E.9), and
+noting that ΨG minimizes the ﬁrst term on the right over all possible choices Ψ ∈Σm, and hence:
+L(ΨG; G) ≤2 bL(ΨG; G) + 144ǫ
+≤2 inf
+Ψ∈Σm
+bL(Ψ; G) + 144ǫ
+≤2 inf
+Ψ∈Σm ∥Ψ −G∥2
+C(K;L2(D)) + 144ǫ
+≤2m−2γ + 144ǫ.
+By assumption, we have m−2γ ≤(ǫ/2)2 ≤ǫ/2, and hence,
+L(ΨG; G) ≤145ǫ.
+This concludes our proof of Proposition 3.8.
+33
+
+PDF PAGE 34
+Data Complexity Estimates for Operator Learning
+A PREPRINT
+E.0.2
+Proof of Proposition 3.9
+Our proof of Proposition 3.9 relies on several lemmas. We will provide a proof of Proposition 3.9
+and Corollary 3.10 here, and refer the reader to Appendix E.4 for the detailed proofs of the lemmas.
+Proof. (Poof of Proposition 3.9)
+Given a FNO architecture Ψ( · ; θ) with ﬁxed hyper-parameters dc, κ and L, our goal is to bound
+the covering number of the set FNO ⊂C(K; L2(D)) of operators that can be represented by
+this architecture. To this end, we note that this set is the image under the mapping [−B, B]dθ →
+C(K; L2(D)), θ 7→Ψ( · ; θ), from parameters θ to corresponding operator Ψ( · ; θ). This simple
+observation is relevant in view of the following elementary lemma (cp. Appendix E.4.1 for a proof):
+Lemma E.5. If F : [−B, B]d →Y is a Lipschitz continuous mapping into a Banach space Y , then
+N(F([−B, B]d); ǫ) ≤N([−B, B]d; ǫ/Lip(F)).
+In parameter space, estimates for the covering number of a cube [−B, B]d ⊂Rd are well-known.
+In particular, the covering number of the hypercube [−B, B]d with respect to the ℓ∞-norm, | · |∞, is
+bounded by,
+N([−B, B]d, ǫ)| · |∞≤
+2B
+ǫ
+d
+.
+(E.10)
+This follows by covering the cube [−B, B]d by sub-cubes with side-length ǫ in each direction. Since
+2B/ǫ intervals of length ǫ cover [−B, B], we require at most (2B/ǫ)d sub-cubes to cover [−B, B]d.
+In order to apply Lemma E.5 and (E.10) to obtain an estimate of the covering number of the space
+of FNOs represented by each Ψ( · ; θ) introduced above, it remains to bound the Lipschitz constant
+of the mapping θ 7→Ψ( · , θ). This is the subject of the following lemma:
+Lemma E.6. Let K ⊂L2(D) be a compact set. Let
+M := max
+u∈K ∥u∥L2(D) < ∞.
+The Lipschitz constant of the mapping [−B, B]dθ →C(K; L2(D)), θ 7→Ψ( · ; θ) is bounded by
+Lip (θ 7→Ψ( · ; θ)) ≤(L + 2)(2dcB)L+2 
+M + (2κ)d/2
+.
+For a proof of this lemma, we refer to Appendix E.4.2 (cp. Proposition E.15). Combining Lemma
+E.5 with (E.10) and Lemma E.6, it now follows that
+N(FNO, ǫ)C(K;L2(D)) ≤N
+
+[−B, B]dθ,
+ǫ
+Lip(θ 7→Ψ( · ; θ))
+
+≤
+2BLip(θ 7→Ψ( · ; θ))
+ǫ
+dθ
+.
+We also recall that, by (3.2),
+dθ ≤5(2κ)dLdc
+2.
+Taking logarithms in the above bound on N(FNO, ǫ), it now follows that there exists a constant
+C = C(d, M) > 0, depending only on the dimension of the function domain Ω, and the norm
+bound M over the compact set K, such that
+log N(FNO, ǫ)C(K;L2(D)) ≤CκdL2dc
+2 log
+dcκLB
+ǫ
+
+.
+This completes our proof of Proposition 3.9.
+We next deduce Corollary 3.10 from Proposition 3.9.
+34
+
+PDF PAGE 35
+Data Complexity Estimates for Operator Learning
+A PREPRINT
+Proof. (Proof of Corollary 3.10) For ℓ= 1, . . . , m, let Σ(ℓ)
+m denote the set of FNOs with dc ≤m,
+κd ≤m, parameter bound ∥θ∥∞≤B := exp(m) and depth ℓ. One readily veriﬁes that
+Σm = Σ(1)
+m ∪· · · ∪Σ(m)
+m ,
+(E.11)
+and any operator Ψ ∈Σ(ℓ)
+m can be represented by a speciﬁc choice of the parameters in the FNO
+architecture Ψℓ( · ; θℓ) of depth ℓ, with dc = m, κd = m, and with θℓ∈Rdθℓsatisfying parameter
+bound ∥θℓ∥∞≤B.
+By Proposition 3.9, we have
+N(Σ(ℓ)
+m , ǫ) ≲κdL2dc
+2 log
+dcκLB
+ǫ
+
+≲m5 log
+m3em
+ǫ
+
+≲m6 log(mǫ−1),
+with an implied constant that only depends on d and M = maxu∈K ∥u∥L2(D).
+From (E.11), it thus follows that
+N(Σm, ǫ) ≤
+m
+X
+ℓ=1
+N(Σ(ℓ)
+m , ǫ) ≤Cm7 log(mǫ−1),
+with a constant C = C(d, K) > 0. This is the claimed estimate on the metric entropy of Σm, and
+concludes our proof of Proposition 3.9.
+E.1
+Estimates for the empirical risk minimizer
+The proof of Proposition 3.8 uses the following lemma
+Lemma E.7. Let ǫ > 0 be given. The covering number of U(Aγ), with respect to the ∥· ∥L2µ norm,
+is bounded by
+N(U(Aγ), 2ǫ) ≤N(Σm, ǫ),
+(E.12)
+for m ≥ǫ−1/γ.
+Proof. (Proof of Lemma E.7) Choose m as in the statement of the lemma. Let N = N(Σm, ǫ/2) be
+the ǫ-covering number of Σm, and let Ψ1, . . . , ΨN be the centers of such a covering. By deﬁnition
+of U(Aγ), for any G ∈U(Aγ), we have
+inf
+Ψ∈Σm ∥G −Ψ∥C(K;L2(D)) ≤m−γ ≤ǫ.
+By compactness of Σm (cp. Remark 3.7), the inﬁmum on the left is actually attained and thus, there
+exists Ψ⋆∈Σm, such that
+∥G −Ψ⋆∥C(K;L2(D)) ≤ǫ.
+Since the Ψ1, . . . , ΨN determine an open ǫ-covering of Σm, it follows that
+min
+j=1,...,N ∥G −Ψj∥C(K;L2(D)) ≤∥G −Ψ⋆∥C(K;L2(D)) +
+min
+j=1,...,N ∥Ψ⋆−Ψj∥C(K;L2(D))
+< ǫ + ǫ = 2ǫ.
+Hence, the N = N(Σm, ǫ) balls of radius ǫ with centers Ψ1, . . . , ΨN cover U(Aγ), implying that
+N(U(Aγ), 2ǫ) ≤N(Σm, ǫ).
+35
+
+PDF PAGE 36
+Data Complexity Estimates for Operator Learning
+A PREPRINT
+E.2
+Proof of Lemma E.1
+Proof. (Proof of Lemma E.1) We ﬁrst observe that for any G ∈U(Aγ), the empirical risk minimizer
+ΨG in (3.7) satisﬁes
+L(ΨG; G) = bL(ΨG; G) + [L(ΨG; G) −bL(ΨG; G)]
+≤bL(ΨG; G) + sup
+G,Ψ
+L(Ψ; G) −bL(Ψ; G)
+ ,
+where the supremum is taken over all G ∈U(Aγ), and Ψ ∈Σ′
+m. Since ΨG is a minimizer of bL, we
+have bL(ΨG; G) ≤bL(Ψ′; G) for any Ψ′ ∈Σ′
+m. Fixing arbitrary Ψ′ for the moment, it follows that
+bL(ΨG; G) ≤bL(Ψ′; G) ≤L(Ψ′; G) + sup
+G,Ψ
+L(Ψ; G) −bL(Ψ; G)
+ ,
+and hence
+L(ΨG; G) ≤L(Ψ′; G) + 2 sup
+G,Ψ
+L(Ψ; G) −bL(Ψ; G)
+ .
+Since Ψ′ was arbitrary, we can ﬁnally take the inﬁmum over all Ψ′ ∈Σ′
+m on the right, to obtain
+L(ΨG; G) ≤
+inf
+Ψ′∈Σ′m
+L(Ψ′; G) + 2 sup
+G,Ψ
+L(Ψ; G) −bL(Ψ; G)
+ .
+The ﬁrst term represents the best-approximation of G with respect to the (squared) L2
+µ-norm. The
+second term is the generalization error. Since G ∈U(Aγ) belongs to the approximation space, we
+have
+inf
+Ψ′∈Σ′m
+L(Ψ′; G) ≡
+inf
+Ψ′∈Σ′m
+∥G −Ψ′∥2
+L2
+µ ≤m−2γ.
+In particular, this implies that
+L(ΨG; G) ≤m−2γ + 2
+sup
+G∈U(Aγ),Ψ∈Σ′m
+[L(Ψ; G) −bL(Ψ; G)],
+(E.13)
+where we recalled that the supremum on the right is over all G ∈U(Aγ) and Ψ ∈Σ′
+m.
+E.3
+Proof of Lemma E.3
+Our derivation of the upper bound on the esimation error will require the following simple result:
+Lemma E.8. For any Ψ, Ψ′ ∈Σ′
+m and G, G′ ∈U(Aγ), and any choice of samples u1, . . . , un, we
+have
+| bL(Ψ; G) −bL(Ψ′, G′)| ≤6
+ ∥Ψ −Ψ′∥C(K;L2(D)) + ∥G −G′∥C(K;L2(D))
+
+,
+and
+|L(Ψ; G) −L(Ψ′, G′)| ≤6
+ ∥Ψ −Ψ′∥C(K;L2(D)) + ∥G −G′∥C(K;L2(D))
+
+.
+Proof. We ﬁrst note that |a2 −b2| ≤2 max(a, b)|a −b|. By deﬁnition, we have for any (Ψ, G) ∈
+Σ′
+m × U(Aγ), the bounds
+∥Ψ(uj) −G(uj)∥L2(D) ≤∥Ψ∥C(K;L2(D)) + ∥G∥C(K;L2(D)) ≤3.
+We now apply the above bounds, for each index j individually, with
+a = ∥Ψ(uj) −G(uj)∥L2(D),
+b = ∥Ψ′(uj) −G′(uj)∥L2(D),
+to obtain
+| bL(Ψ; G) −bL(Ψ′, G′)| ≤1
+n
+n
+X
+j=1
+∥Ψ(uj) −G(uj)∥2
+L2(D) −∥Ψ′(uj) −G′(uj)∥2
+L2(D)
+
+= 6
+n
+n
+X
+j=1
+∥Ψ(uj) −G(uj)∥L2(D) −∥Ψ′(uj) −G′(uj)∥L2(D)
+ .
+36
+
+PDF PAGE 37
+Data Complexity Estimates for Operator Learning
+A PREPRINT
+The claimed bound on bL then follows from the triangle inequality,
+∥Ψ(uj)−G(uj)∥L2(D) −∥Ψ′(uj) −G′(uj)∥L2(D)
+
+≤∥{Ψ(uj) −G(uj)} −{Ψ′(uj) −G′(uj)} ∥L2(D)
+≤∥Ψ(uj) −Ψ′(uj)∥L2(D) + ∥G(uj) −G′(uj)∥L2(D)
+≤∥Ψ −Ψ′∥C(K;L2(D)) + ∥G −G′∥C(K;L2(D)).
+The bound on L follows from the simple observation that L(Ψ; G) = E bL(Ψ; G) is the expectation
+over the random samples, and hence
+|L(Ψ; G) −L(Ψ′; G′)| =
+E bL(Ψ; G) −E bL(Ψ′; G′)
+
+≤E
+ bL(Ψ; G) −bL(Ψ′; G′)
+
+≤6
+ ∥Ψ −Ψ′∥C(K;L2(D)) + ∥G −G′∥C(K;L2(D))
+
+.
+Lemma E.9. Let ǫ > 0, and deﬁne
+f(a, b) := (a −b)+
+a + ǫ
+,
+∀a, b ≥0.
+Then f is globally Lipschitz continuous, and
+sup
+a,b
+|∂af(a, b)| ≤1
+ǫ ,
+sup
+a,b
+|∂bf(a, b)| ≤1
+ǫ ,
+almost everywhere.
+Proof. This is a simple calculation. We provide the details for completeness. Clearly, f is identically
+zero on the set {0 ≤a < b}. On the other hand, on {0 ≤b ≤a}, we have
+|∂af| =
+1
+a + ǫ
+b + ǫ
+a + ǫ ≤1
+ǫ ,
+|∂bf| =
+
+−1
+a + ǫ
+ ≤1
+ǫ .
+Proof. (Proof of Lemma E.3) We recall that the empirical risk
+bL(Ψ; G) = 1
+n
+n
+X
+j=1
+∥G(uj) −Ψ(uj)∥2
+L2(D),
+depends on the choice of u1, . . . , un. We choose them iid u1, . . . , un ∼µ drawn from the probabil-
+ity measure µ.
+Let Ψ1, . . . , ΨN be a ǫ-cover of Σ′
+m ⊂Σm with N = N(Σ′
+m, ǫ). Let G1, . . . , GM be a 2ǫ-cover
+of U(Aγ) with M = N(U(Aγ), 2ǫ). Then, we note that for any pair (Ψ, G) ∈Σ′
+m × U(Aγ), there
+exists k ∈[N] and ℓ∈[M], such that
+∥Ψ(u) −Ψk(u)∥C(K;L2(D)) ≤ǫ,
+∥G(u) −Gℓ(u)∥C(K;L2(D)) ≤2ǫ.
+(E.14)
+Let f(a, b) be the function introduced in Lemma E.9, so that
+L(Ψ; G) −bL(Ψ; G)
+L(Ψ; G) + s
+≤f(L(Ψ; G), bL(Ψ; G))
+≤f(L(Ψk; Gℓ), bL(Ψk; Gℓ))
++ ∥∂af∥L∞|L(Ψ; G) −L(Ψk; Gℓ)|
++ ∥∂bf∥L∞
+ bL(Ψ; G) −bL(Ψk; Gℓ)
+ .
+37
+
+PDF PAGE 38
+Data Complexity Estimates for Operator Learning
+A PREPRINT
+By the estimate of Lemma E.8 and E.9, and by making a speciﬁc choice of k, ℓdepending on (Ψ, G),
+we can estimate each of the second term by,
+∥∂af∥L∞|L(Ψ; G) −L(Ψk; Gℓ)| ≤6
+s
+ ∥Ψ −Ψk∥C(K;L2(D)) + ∥G −Gℓ∥C(K;L2(D))
+
+≤18ǫ
+s ,
+and similarly for the last term. We now ﬁnd
+L(Ψ; G) −bL(Ψ; G)
+L(Ψ; G) + s
+≤
+ L(Ψk; Gℓ) −bL(Ψk; Gℓ)
+
++
+L(Ψk; Gℓ) + s
++ 36ǫ
+s .
+We can now bound the ﬁrst term on the right by the maximum over all possible choices k ∈[N] and
+ℓ∈[M], and then take the supremum over all (Ψ, G) ∈H := Σ′
+m × U(Aγ) on the left, to ﬁnd
+sup
+(Ψ,G)∈H
+L(Ψ; G) −bL(Ψ; G)
+L(Ψ; G) + s
+≤
+max
+k∈[N],ℓ∈[M]
+ L(Ψk; Gℓ) −bL(Ψk; Gℓ)
+
++
+L(Ψk; Gℓ) + s
++ 36ǫ
+s .
+Let us now make the choice s = 72ǫ/α, so that the above bound implies the following inclusion of
+sets:
+(
+sup
+(Ψ,G)∈H
+L(Ψ; G) −bL(Ψ; G)
+L(Ψ; G) + s
+≥α
+)
+⊂
+(
+max
+k∈[N],ℓ∈[M]
+L(Ψ; G) −bL(Ψ; G)
+L(Ψ; G) + s
+≥α
+2
+)
+.
+And hence,
+Prob
+"
+sup
+(Ψ,G)∈H
+L(Ψ; G) −bL(Ψ; G)
+L(Ψ; G) + s
+≥α
+#
+≤Prob
+"
+max
+k∈[N],ℓ∈[M]
+L(Ψk; Gℓ) −bL(Ψk; Gℓ)
+L(Ψk; Gℓ) + s
+≥α
+2
+#
+≤NM
+max
+k∈[N],ℓ∈[M] Prob
+"
+L(Ψk; Gℓ) −bL(Ψk; Gℓ)
+L(Ψk; Gℓ) + s
+≥α
+2
+#
+.
+Where we use a union bound to pass to the third line. The last probability can be estimated by
+Bernstein’s inequality (E.3), yielding
+Prob
+"
+sup
+(Ψ,G)∈H
+L(Ψ; G) −bL(Ψ; G)
+L(Ψ; G) + s
+≥α
+#
+≤NM exp
+
+−α2ns
+36
+
+= NM exp (−2αnǫ) .
+We also recall that N = N(Σ′
+m, ǫ) and M = N(U(Aγ), 2ǫ). Since Σ′
+m ⊂Σm implies N(Σ′
+m, ǫ) ≤
+N(Σm, ǫ), the above estimate proves the claimed inequality of Lemma E.3 with constant
+NH,ǫ = N(Σm, ǫ)N(U(Aγ), 2ǫ),
+for arbitrary ǫ > 0 and m ∈N. If we assume, in addition, that m ≥(2/ǫ)1/γ, then Lemma E.7
+implies that
+N(U(Aγ), 2ǫ) ≤N(Σm, ǫ).
+And hence, we have
+Prob
+"
+sup
+(Ψ,G)∈H
+L(Ψ; G) −bL(Ψ; G)
+L(Ψ; G) + s
+≥α
+#
+≤NH,ǫ exp (−2αnǫ) ,
+with NH,ǫ ≤N(Σm, ǫ)2, whenever m ≥(2/ǫ)1/γ, and where we recall that we chose s = 72ǫ/α.
+We next prove Corollary E.4.
+38
+
+PDF PAGE 39
+Data Complexity Estimates for Operator Learning
+A PREPRINT
+Proof. (Proof of Corollary E.4) Given m ∈N, deﬁne ǫ = 2m−γ, so that by Lemma E.3, we have
+NH,ǫ ≤N(Σm, ǫ)2.
+We now note that
+N(Σm, ǫ)2 exp
+
+−ǫ2n
+92
+
+= exp
+
+−ǫ2n
+92 + log N(Σm, ǫ)2
+
+.
+The right hand side is ≤δ, if
+ǫ2n
+92 ≥log
+ N(Σm, ǫ)2/δ
+
+,
+or equivalently,
+n ≥81ǫ−2 log
+ N(Σm, ǫ)2/δ
+
+.
+Thus, by Lemma E.3, we ﬁnd that for such choice of n:
+Prob
+"
+sup
+(Ψ,G)∈H
+h
+L(Ψ; G) −bL(Ψ; G)
+i
+≥37ǫ
+#
+≤NH,ǫ exp
+
+−ǫ2n
+92
+
+≤δ.
+E.4
+Entropy estimates
+Proposition 3.8 relates the amount of data that is needed to approximate operators G ∈U(Aγ) to the
+complexity of the family {Σm}, as measured by the growth of the metric entropy log N(Σm, ǫ).
+Remark E.10. If H(Σm, ǫ) ≲ǫ−α grows at most algebraically, and n ∼ǫ−1−α, then Proposition
+3.8 leads to a data-complexity bound,
+Eu∼µ
+
+∥ΨG(u) −G(u)∥2
+≲n−1/(2+α),
+where the exponent 1/(2 + α) lies in the interval (0, 1/2]. In particular, this shows that algebraic
+data-complexity rates are obtained in this case. This should be contrasted with the logarithmic lower
+bound (2.4), requiring an exponential amount of data n to achieve a similar accuracy.
+E.4.1
+Proof of Lemma E.5
+Proof. (Proof of Lemma E.5) Fix ǫ > 0. Let δ = ǫ/Lip(F), and let Bδ(u1), . . . , Bδ(uN) be a
+δ-covering of K. We claim that,
+F(K) ⊂
+N
+[
+k=1
+Bǫ(F(uk)).
+To see why, let v ∈F(K) be given. We aim to show that v ∈Bǫ(F(uk)) for some k ∈{1, . . . , N}.
+Since v ∈F(K), there exists u ∈K, such that v = F(u). By the choice of u1, . . . , uN, there exists
+an index k, such that ∥u −uk∥< δ, and hence
+∥v −F(uk)∥= ∥F(u) −F(uk)∥≤Lip(F)∥u −uk∥< ǫ,
+by deﬁnition of δ = ǫ/Lip(F). It follows that v ∈Bǫ(F(uk)). Choosing N minimal, it thus follows
+that N(F(K), ǫ) ≤N = N(K, δ) = N(K, ǫ/Lip(F)), as claimed.
+E.4.2
+Bounding the Lipschitz constant of θ 7→Ψ( · ; θ)
+Our next goal in this section is to estimate the Lipschitz constant of the mapping
+[−B, B]dθ 7→C(K; L2(D)),
+θ 7→Ψ( · ; θ),
+(E.15)
+for a ﬁxed FNO architecture Ψ( · ; θ) with parameters θ ∈Rdθ, and with a ﬁxed set of hyperparam-
+eters. We recall that the channel width is denoted dc, the Fourier cut-off by κ, the depth L and we
+have also introduced a parameter bound ∥θ∥ℓ∞≤B.
+To reach our goal of estimating the Lipschitz constant of (E.15), we start by deriving basic estimates
+for the linear parts of the hidden layers. This is the subject of the following lemma:
+39
+
+PDF PAGE 40
+Data Complexity Estimates for Operator Learning
+A PREPRINT
+Lemma E.11. We have the following estimates:
+(1) If W : v(x) 7→Wv(x) is a linear layer, deﬁned by a matrix W ∈Rdc×dc, then
+Lip(W)L2→L2 ≤dc∥W∥∞,
+(E.16)
+where ∥W∥∞:= maxi,j |Wij|.
+(2) If K : v(x) 7→F−1( bPFv) is a (linear) spectral convolution layer, deﬁned by the Fourier
+multiplier bP ∈Cκ×dc×dc, then
+Lip(K)L2→L2 ≤dc∥bP∥∞,
+(E.17)
+where ∥bP∥∞:= maxk,i,j | bPk,i,j|.
+(3) If σ(x) is a Lipschitz continuous activation function, then
+Lip(σ)L2→L2 ≤Lip(σ)R→R.
+(E.18)
+(4) If b(x) = P
+|k|<κ bbkeikx is a bias function, then
+∥b∥L2 ≤dc
+1/2(2κ)d/2∥bb∥∞,
+(E.19)
+where ∥bb∥∞= maxk |bbk|.
+Proof. The claimed estimates are elementary. To see (E.16), we note that
+∥Wv∥2
+ℓ2 =
+d
+X
+i=1
+
+d
+X
+j=1
+Wijvj
+
+2
+≤
+d
+X
+i=1
+d
+X
+j=1
+|Wij|2
+d
+X
+j=1
+|vj|2 ≤d2∥W∥2
+∞∥v∥2
+ℓ2.
+Similarly, (E.17) follows from,
+∥Kv∥2
+L2 = ∥bPbv∥2
+ℓ2 =
+X
+|k|<κ
+∥bPkbv(k)∥2
+ℓ2
+≤
+X
+|k|<κ
+dc
+2∥bPk∥2
+∞∥bv(k)∥2
+ℓ2
+≤dc
+2∥bP∥2
+∞
+X
+|k|<κ
+∥bv(k)∥2
+ℓ2
+= dc
+2∥bP∥2
+∞∥v∥2
+L2.
+Estimate (E.18) is immediate, while (E.19) follows from,
+∥b∥2
+L2 =
+X
+|k|<κ
+∥bb(k)∥2
+ℓ2 ≤
+X
+|k|<κ
+dc∥bb(k)∥2
+∞≤(2κ)ddc∥bb∥2
+∞.
+The next lemma, immediate from Lemma E.11, summarizes the relevant Lipschitz estimate for a
+hidden layer:
+Lemma E.12. Let Lℓ(v; θℓ) = σ (Wv + Kv + b) be a hidden FNO layer, with concatenated param-
+eters θℓ= (W, bP,bb), satisfying the size bound
+∥W∥∞, ∥bP∥∞, ∥bb∥∞≤B,
+and with Lipschitz continuous activation function σ, s.t. Lip(σ)R→R ≤1. Then Lℓ: L2(D) →
+L2(D) is a Lipschitz operator with,
+Lip(v 7→Lℓ(v; θℓ)) ≤2dcB.
+(E.20)
+40
+
+PDF PAGE 41
+Data Complexity Estimates for Operator Learning
+A PREPRINT
+The previous corollary estimates the Lipschitz constant of the mapping v 7→Lℓ(v; θℓ) for ﬁxed θ
+satisfying the bound ∥θℓ∥ℓ∞≤B. The next Lemma provides a similar estimate for the mapping
+θℓ7→Lℓ(v; θℓ) for ﬁxed v.
+Lemma E.13. Let Lℓ(v; θℓ) = σ (Wv + Kv + b) denote a hidden FNO layer, with 1-Lipschitz
+continuous activation σ, and depending on the concatenated parameters θℓ= (W, bP,bb). Then, for
+any v ∈L2(D), we have the bound,
+Lip(θℓ7→L(v; θℓ)) ≤3dc(2κ)d/2 max(1, ∥v∥L2).
+Proof. Let v ∈L2(D) be arbitrary, consider two parameter vectors θℓ, θ′
+ℓ, and let us denote
+Lℓ(v; θℓ) = σ(Wv + Kv + b),
+Lℓ(v; θ′
+ℓ) = σ(W ′v + K′v + b′).
+We note that, by the estimates in E.11:
+∥Lℓ(v; θℓ) −Lℓ(v; θ′
+ℓ)∥≤Lip(σ)(∥W −W ′∥L2→L2∥v∥L2
++ ∥K −K′∥L2→L2∥v∥L2 + ∥b −b′∥L2)
+≤dc∥W −W ′∥∞∥v∥L2 + dc∥bP −bP ′∥∞∥v∥L2
++ dc
+1/2(2κ)d/2∥bb −bb′∥∞
+≤dc(2κ)d/2(3 max(1, ∥v∥L2))∥θ −θ′∥∞.
+In addition to the Lipschitz constant of all layers, we also need a bound on the output of hidden
+states of the FNO. This is provided in the next lemma:
+Lemma E.14. Ψ FNO of depth L, with 1-Lipschitz activation σ, such that σ(0) = 0. Assume that
+∥θ∥ℓ∞≤B for some constant B ≥1. Then
+∥Ψ(u)∥L2(D) ≤(2dcB)L+2 
+∥u∥L2(D) + (2κ)d/2
+,
+∀u ∈L2(D).
+Proof. Recall that the FNO Ψ : L2(D) →L2(D) is of the form
+Ψ = Q ◦LL ◦· · · ◦L1 ◦P.
+For ℓ= 1, . . . , L + 1, we introduce the notation
+L≤ℓ:= Lℓ◦· · · ◦L1 ◦P,
+and deﬁne L≤0(u) := Pu. We will estimate ∥L≤ℓ(u)∥recursively, making use of our bound on
+Lip(v 7→Lℓ(v)) in Lemma E.12. To this end, ﬁx u ∈L2(D), and denote Mℓ:= ∥L≤ℓ(u)∥L2(D).
+Then, writing Lℓ(v) := σ(Wv + Kv + b), we obtain
+Mℓ= ∥L≤ℓ(u)∥L2(D)
+= ∥Lℓ(L≤ℓ−1(u)) ∥L2(D)
+= ∥Lℓ(L≤ℓ−1(u)) −Lℓ(0)∥L2(D) + ∥Lℓ(0)∥L2(D)
+≤Lip(Lℓ)∥L≤ℓ−1(u) −0∥L2(D) + ∥σ(b( · ))∥L2(D)
+≤Lip(Lℓ)∥L≤ℓ−1(u)∥L2(D) + Lip(σ)∥b( · )∥L2(D)
+≤(2dcB)∥L≤ℓ−1(u)∥L2(D) + dc
+1/2(2κ)d/2B,
+where we made use of (E.20) and (E.19) to pass to the last line. Thus, we have the following
+recursion:
+Mℓ≤C0Mℓ−1 + C1,
+41
+
+PDF PAGE 42
+Data Complexity Estimates for Operator Learning
+A PREPRINT
+with C0 := 2dcB and C1 := dc
+1/2(2κ)d/2B. This recursion implies that
+Mℓ≤C0Mℓ−1 + C1
+≤C2
+0Mℓ−2 + C0C1 + C1
+≤. . .
+≤Cℓ
+0M0 + C1
+ℓ−1
+X
+k=0
+Ck
+0
+= Cℓ
+0M0 + C1
+Cℓ
+0 −1
+C0 −1.
+For C0 = 2dcB ≥2, we have
+Cℓ
+0 −1
+C0 −1 ≤Cℓ
+0.
+Furthermore, by deﬁnition of M0 and from (E.16), we ﬁnd
+M0 = ∥Pu∥L2(D) ≤dc∥P∥∞∥u∥L2(D) ≤dcB∥u∥L2(D).
+Thus, we ﬁnally obtain the upper bound,
+∥L≤ℓ(u)∥L2(D) = Mℓ
+≤(2dcB)ℓ
+dcB∥u∥L2(D) + dc
+1/2(2κ)d/2B
+
+≤(2dcB)ℓ+1 
+∥u∥L2(D) + (2κ)d/2
+.
+(E.21)
+This, in turn, entails
+∥Ψ(u)∥L2(D) = ∥QL≤L(u)∥L2(D) ≤dc∥Q∥∞ML
+≤(2dcB)L+2 
+∥u∥L2(D) + (2κ)d/2
+.
+This is the claimed upper bound.
+Based on the previous lemmas, we can now state a local Lipschitz estimate for FNOs.
+Proposition E.15. Let θ, θ′ ∈Rdθ with ∥θ∥∞, ∥θ′∥∞≤B. Assume that B ≥1 and din, dout ≤dc.
+Assume that the activation σ is Lipschitz and σ(0) = 0. Then, we have
+∥Ψ(u; θ) −Ψ(u, θ′)∥L2 ≤λ(u)∥θ −θ′∥∞,
+where
+λ(u) := (L + 2)(2dcB)L+2(∥u∥+ (2κ)d/2).
+Lemma E.6 is an immediate consequence of Proposition E.15.
+Proof. (Proof of Proposition E.15) We ﬁrst consider two parameter vectors θ, θ′ ∈Rdθ, differing in
+only their ℓ-th component for ℓ∈{1, . . . , L}, and with
+∥θ∥∞, ∥θ′∥∞≤B.
+Notice that, by deﬁnition,
+Ψ( · ; θ) = Q ◦LL ◦· · · ◦L1 ◦P,
+where the ℓ-th hidden layer Lℓ= Lℓ( · ; θℓ) depends only on θℓ. To simplify notation, let us now
+introduce
+L>ℓ:= LL ◦. . . Lℓ+1,
+L<ℓ:= Lℓ−1 ◦· · · ◦L1 ◦P.
+We then have,
+∥Ψ(u; θ) −Ψ(u, θ′)∥L2 ≤∥Q∥Lip(L>ℓ)∥Lℓ(L<ℓ(u); θℓ) −Lℓ(L<ℓ(u); θ′
+ℓ)∥.
+42
+
+PDF PAGE 43
+Data Complexity Estimates for Operator Learning
+A PREPRINT
+We note that ∥Q∥≤dc∥Q∥∞≤dcB, by Lemma E.11. By Lemma E.12, we can bound
+Lip(L>ℓ) ≤
+L
+Y
+k=ℓ+1
+Lip(Lk) ≤(2dcB)L−ℓ.
+Furthermore, Lemma E.13 implies that, with ω := L<ℓ(u),
+∥Lℓ(ω; θℓ) −Lℓ(ω; θ′
+ℓ)∥≤3dc(2κ)d/2 max(1, ∥ω∥L2))∥θ −θ′∥∞.
+Using the following upper bound, from (E.21) in the proof of Lemma E.14,
+∥ω∥L2(D) = ∥L<ℓ(u)∥L2(D) = ∥L≤ℓ−1(u)∥L2(D) ≤(2dcB)ℓ+1(∥u∥+ (2κ)d/2),
+we thus ﬁnd
+∥Lℓ(ω; θℓ) −Lℓ(ω; θ′
+ℓ)∥≤3dc(2κ)d/2(2dcB)ℓ+1(∥u∥+ (2κ)d/2)∥θ −θ′∥∞.
+And ﬁnally,
+∥Ψ(u; θ) −Ψ(u, θ′)∥L2 ≤∥Q∥Lip(L>ℓ)∥Lℓ(L<ℓ(u); θℓ) −Lℓ(L<ℓ(u); θ′
+ℓ)∥
+≤dcB(2dcB)L−ℓ(2dcB)ℓ+1(∥u∥+ (2κ)d/2)∥θ −θ′∥∞
+≤(2dcB)L+2(∥u∥+ (2κ)d/2)∥θ −θ′∥∞.
+It follows that for general θ, θ′ ∈Rdθ with ∥θ∥∞, ∥θ′∥∞≤B, but allowed to differ in θℓ̸= θ′
+ℓfor
+ℓ= 0, . . . , L + 1, we have
+∥Ψ(u; θ) −Ψ(u, θ′)∥L2 ≤λ(u)∥θ −θ′∥∞,
+where
+λ(u) := (L + 2)(2dcB)L+2(∥u∥+ (2κ)d/2).
+This provides the claimed upper bound on the local Lipschitz constant of the mapping Rdθ →
+C(L2(D); L2(D)), θ 7→Ψ( · ; θ).
+43

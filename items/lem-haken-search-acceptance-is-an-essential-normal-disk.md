@@ -32,7 +32,7 @@ sources:
 
 ## Statement
 
-Whenever the Haken branch of the Haken–Jaco–Tollefson search returns a disk-certificate, the associated normal surface is a properly embedded disk with non-null-homotopic boundary in the triangulated knot exterior.
+Whenever the Haken branch of the Haken–Jaco–Tollefson search returns a disk-certificate, the associated normal surface is a properly embedded disk in the triangulated knot exterior whose boundary is non-null-homotopic in the exterior's boundary torus.
 
 ## Statement references
 
@@ -48,11 +48,11 @@ Whenever the Haken branch of the Haken–Jaco–Tollefson search returns a disk-
 
 [F2] [[lem-fundamental-normal-surfaces-are-connected]]: a fundamental normal surface is connected.
 
-[F3] [[lem-normal-disk-candidate-check-characterization]]: an admissible normal vector passes the boundary, Euler-characteristic and meridian tests exactly when its normal surface is a properly embedded disk with essential boundary.
+[F3] [[lem-normal-disk-candidate-check-characterization]]: for an admissible normal vector with connected normal surface, the nonempty-boundary, Euler-characteristic and meridian tests pass exactly when that surface is a properly embedded disk whose boundary is non-null-homotopic in the exterior's boundary torus.
 
 ## Proof
 
-1.1 By [F1], the returned vector satisfies the candidate tests in [F2], including normal matching and quadrilateral admissibility. [given, F1, F2]
+1.1 By [F1], the returned vector satisfies the candidate tests in [F1], including normal matching and quadrilateral admissibility. [given, F1]
 
-2.1 By [F2], the returned fundamental normal surface is connected. The remaining tests in [F1], together with [F3], identify it as a properly embedded disk with non-null-homotopic boundary. [F1, F2, F3, step 1.1, construct] ∎
+2.1 By [F2], the returned fundamental normal surface is connected. The remaining tests in [F1], together with [F3], identify it as a properly embedded disk in the exterior whose boundary is non-null-homotopic in the exterior's boundary torus. [F1, F2, F3, step 1.1, construct] ∎
 

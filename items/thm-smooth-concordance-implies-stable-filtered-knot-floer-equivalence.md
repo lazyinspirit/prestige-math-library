@@ -41,7 +41,7 @@ sources:
 
 ## Statement
 
-Let $K,J\subset S^3$ be smooth oriented knots that cobound a smooth properly embedded annulus in $S^3\times[0,1]$. Then there are finite-rank free $\mathbb F_2[U,U^{-1}]$ bifiltered chain complexes $A$ and $B$ with zero total homology such that
+For the knot-level assertions, assume the Axiom of Countable Choice. Let $K,J\subset S^3$ be smooth oriented knots that cobound a smooth properly embedded annulus in $S^3\times[0,1]$. Then there are finite-rank free $\mathbb F_2[U,U^{-1}]$ bifiltered chain complexes $A$ and $B$ with zero total homology such that
 $$ \mathrm{CFK}^{\infty}(K)\oplus A\simeq\mathrm{CFK}^{\infty}(J)\oplus B, $$
 where $\simeq$ denotes a Maslov-graded chain homotopy equivalence whose maps and chain homotopies do not increase either filtration. The complexes $A$ and $B$ are acyclic after the filtrations are forgotten; they need not be acyclic in either associated-graded complex.
 
@@ -59,7 +59,7 @@ where $\simeq$ denotes a Maslov-graded chain homotopy equivalence whose maps and
 
 ## Facts & Assumptions
 
-**Given:** A smooth annulus concordance from $K$ to $J$, the filtered connected-sum tensor convention, and the normalized knot Floer complex of each boundary knot.
+**Given:** A smooth annulus concordance from $K$ to $J$, the filtered connected-sum tensor convention, and the normalized knot Floer complex of each boundary knot. Countable Choice is assumed for the knot-level constructions and geometric comparisons; finite algebra on the stated supplied complexes and maps requires no further choice.
 
 [F1] [[thm-knot-concordance-is-an-abelian-group]]: the smooth concordance classes form an abelian group with inverse represented by reverse mirror; the smooth proof branch is present and complete. The topological branch is not used.
 

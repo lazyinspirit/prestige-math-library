@@ -1,0 +1,29 @@
+# Actual decorated-region Euler ledger and held cap bridge
+
+This new operation proves the topological Euler ledger of the chosen actual decorated surface. It deliberately separates that ledger from the as-yet unproved identification with the absolute degrees of its holomorphic elementary maps. Fresh full text consulted: Section5.3 and Lemmas7.1–7.2 of https://arxiv.org/abs/1701.03454. In particular that source declares its unlink absolute lifts, and then transports them by Kirby-triangle formulas; the relative neck grades alone do not establish the absolute lifts.
+
+## The actual double and its Euler number
+
+Let R be either region of the actual decorated surface F. Its horizontal boundary is the union of the marked intervals at the two ends. Its other boundary consists of the dividing one-manifold A; allow closed dividing circles. If the incoming and outgoing links have n0 and n1 w marks, they have the same counts of z marks. There are 2n0+2n1 endpoints of A, hence A has n0+n1 interval components; its circle components have Euler characteristic zero. Glue two copies of R along their copies of A, using the boundary orientation reversal and rounding the resulting corners. This is an ACTUAL doubled oriented surface D_A R with horizontal boundary, and finite cellular inclusion-exclusion gives
+$$\chi(D_A R)=2\chi(R)-\chi(A)=2\chi(R)-n_0-n_1.$$
+One may compute the same number by a tangent section: triangulate this doubled surface relative its horizontal boundary, choose the standard cellular field with one index-plus-one zero in each vertex and face disk and one index-minus-one zero in each edge handle, and choose the fixed product section on horizontal collars. Cancellation on paired cell sides leaves its relative Euler number. The sum is the displayed Euler characteristic with the prescribed boundary turning. Thus the half-Euler quantity e(R)=chi(R)-(n0+n1)/2 is a proved geometric number, not a degree declaration.
+
+For a cut through a regular movie level with m w marks, R is obtained from its two pieces by gluing m horizontal intervals. Thus chi(R)=chi(Ra)+chi(Rb)-m. Substituting their endpoint counts shows e(R)=e(Ra)+e(Rb). The half-integers at intermediate multi-links cancel EXACTLY. This proves cumulative Euler additivity without assigning independent invariant absolute gradings to those multi-links.
+
+## Local pieces and the actual endpoint ledger
+
+A product marked strip contributes zero to e. A type-z saddle preserves the w region as product rectangles and attaches one surface one-handle to the z region: its local (e_w,e_z) contribution is (0,-1). A type-w saddle gives (-1,0). A surface birth has a disk divided by one arc into two half-disks, each of Euler characteristic one. Its added single horizontal marked interval contributes one-half subtraction at that end, so the birth contributes (+1/2,+1/2). The reverse death gives the same pair. The tangent-cap birth/death geometry constructed by the tree-region operation ensures both colors actually occur; the monochromatic disk model is not used.
+
+The S-type quasistabilization piece adds a w bigon and no z handle, while adding or removing one endpoint mark in the relevant direction. The same doubled-region count is (+1/2,-1/2). The T-type piece is (-1/2,+1/2). These are topological contributions of the ACTUAL decorated local surfaces. They agree with the relative theta_w/theta_z differences in the actual neck counts, but that agreement is not yet an absolute-degree proof.
+
+For the actual Morse-compatible disk-w-region supplied by character's tree construction, chi(F_w)=1 and chi(F_z)=1-2g. Both endpoint knots are doubly pointed, so n0=n1=1. The cumulative Euler pair is consequently
+$$(e_w,e_z)=(0,-2g),\qquad (e_w-e_z)/2=g.$$
+For an annulus with both regions disks it is (0,0). These identities concern the constructed embedded surface and its dividing set, not just an abstract genus count or a guessed band number. Births, deaths and all added intermediate marks have already canceled in the derivation.
+
+## Exact missing analytic grading bridge
+
+To conclude that the ACTUAL chosen-movie map has these degrees, one must prove its boundary-framing/determinant cap identity: after the common ambient Spin-c part is canceled, its w and z absolute Maslov changes equal e(F_w) and e(F_z), respectively, relative to the original normalized endpoint knot caps. Equivalently, prove that the physical determinant/cap framing of every elementary map realizes the above doubled-region relative Euler number. It is not legitimate simply to rename e as a grading, choose the intermediate shifts to force the result, or cite the desired surface grading theorem.
+
+A candidate route is to prove the w/z determinant constants agree on a chosen band trace and use its actual auxiliary top anchors. In the chosen trace X, capping a homologically trivial beta boundary by beta cut balls gives cap class zero; the remainder lies in the auxiliary boundary with torsion Spin-c. This proves the Chern-zero assertion used in the new admissibility construction. It does NOT by itself identify the physical determinant constant or the normalized auxiliary half-degree origin. Alternatively a planar-band/crossing-circle presentation could transport the actual endpoint Seifert caps and compare the constants by a genuine quadruple class. That transport must be constructed and checked, including its normal framing; the primary source's abstract declaration is not a replacement.
+
+Thus the Euler identity needed for the minimal existence route is now proved and independent of arbitrary-link grading invariance. The actual Maslov/Seifert cap identification, together with the tower-normalized graph-word comparison, remains held. No genus-map degree, stable-slice map or original theorem is claimed by this ledger alone.

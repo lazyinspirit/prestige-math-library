@@ -24,6 +24,10 @@ sources:
       locator: "Rotation Systems and Formalities and Trivialities, lines 49–72"
 verification:
   precheck: n/a
+  judge:
+    model: "gpt-6-luna"
+    verdict: pass
+    date: 2026-10-22
 dependency_level: 3
 ---
 

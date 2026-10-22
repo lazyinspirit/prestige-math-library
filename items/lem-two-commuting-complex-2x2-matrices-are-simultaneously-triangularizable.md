@@ -16,7 +16,7 @@ provenance:
   proof: ai-generated
 sources:
   references:
-    - title: Léo Bénard, François Florens, and Adrien Rodau, A slope invariant and the
+    - title: Léo Bénard, Vincent Florens, and Adrien Rodau, A slope invariant and the
         A-polynomial of knots, §2.2
       url: https://arxiv.org/pdf/2103.14151
     - title: Stephan Tillmann, Varieties associated to 3-manifolds, §§4.2–4.4

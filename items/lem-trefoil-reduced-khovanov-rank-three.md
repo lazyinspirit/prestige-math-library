@@ -17,6 +17,11 @@ axiom_use: "Choice-free finite enumeration and linear algebra over F2."
 provenance:
   statement: literature-derived
   proof: ai-altered
+verification:
+  judge:
+    model: "gpt-6-luna"
+    verdict: pass
+    date: 2026-10-22
 sources:
   references:
     - title: "Ozsváth and Szabó, On the Heegaard Floer homology of branched double-covers, §6"

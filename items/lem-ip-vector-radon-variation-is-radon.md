@@ -27,7 +27,7 @@ Let $\Omega\subseteq\mathbb R^n$ be open and let $\mu=(\mu_1,\ldots,\mu_m)$ have
 
 ## Statement references
 
-[[def-radon-measure-on-an-lch-space|Radon measure means a regular Borel measure finite on compact sets.]]
+[[def-radon-measure-on-an-lch-space|Radon measures are Borel measures finite on compact sets, outer regular on Borel sets, and compactly inner regular on open sets.]]
 
 [[def-regular-complex-borel-measure-on-an-lch-space|Coordinate total variations are regular measures.]]
 
@@ -35,7 +35,7 @@ Let $\Omega\subseteq\mathbb R^n$ be open and let $\mu=(\mu_1,\ldots,\mu_m)$ have
 
 **Given:** An open set $\Omega\subseteq\mathbb R^n$ and a finite tuple of finite signed Radon measures $\mu_i$.
 
-[F1] For each coordinate, $|\mu_i|$ is a finite positive regular measure. ([[def-regular-complex-borel-measure-on-an-lch-space]], [[thm-total-variation-is-a-measure]])
+[F1] For each coordinate, $|\mu_i|$ is a finite positive Radon measure. Finiteness upgrades its open-set compact approximation to all Borel sets: for a finite positive Radon measure $\rho$, Borel $A$ and $\epsilon>0$, choose compact $C\subset\Omega$ with $\rho(\Omega\setminus C)<\epsilon/2$, and open $G\supset\Omega\setminus A$ with $\rho(G\cap A)<\epsilon/2$. Then $C\setminus G$ is compact in $A$ and misses mass below $\epsilon$. Thus each $|\mu_i|$ is regular on all Borel sets. The finite sum $\lambda=\sum_i|\mu_i|$ is also regular: choose a compact subset of $A$ for each coordinate and take their finite union for inner approximation, and intersect their open supersets for outer approximation, allocating error $\epsilon/m$ when $m>0$. ([[def-radon-measure-on-an-lch-space]], [[def-regular-complex-borel-measure-on-an-lch-space]], [[thm-total-variation-is-a-measure]])
 
 [F2] Step 3.1 shows that $V$ is a regular Borel measure, with compact inner approximation on all Borel sets. ([[def-regular-borel-measure-on-an-lch-space]])
 
@@ -43,7 +43,7 @@ Let $\Omega\subseteq\mathbb R^n$ be open and let $\mu=(\mu_1,\ldots,\mu_m)$ have
 
 **Given:** The open set $\Omega$ and finite signed Radon coordinate measures $\mu_i$.
 
-1.1 For every Borel $A$ and every countable Borel partition $(A_j)$ of $A$, the Euclidean norm satisfies $|\mu(A_j)|\le\sum_{i=1}^m|\mu_i(A_j)|$. Summing over $j$ gives $V(A)\le\lambda(A)$ for $\lambda:=\sum_{i=1}^m|\mu_i|$, so $V$ is finite and $V(\Omega)<\infty$. [F1, given, algebra]
+1.1 If $m=0$, the vector measure and $V$ vanish and the zero field gives the asserted supremum. If $\Omega=\varnothing$, the conclusion is immediate. If $n=0$ and $\Omega\ne\varnothing$, then $\Omega$ is a singleton, $V(\Omega)=|\mu(\Omega)|$, and the constant field $\mu(\Omega)/|\mu(\Omega)|$ attains the supremum when the vector is nonzero (use the zero field otherwise). Assume henceforth $n,m\ge1$. For every Borel $A$ and every countable Borel partition $(A_j)$ of $A$, the Euclidean norm satisfies $|\mu(A_j)|\le\sum_{i=1}^m|\mu_i(A_j)|$. Summing over $j$ gives $V(A)\le\lambda(A)$ for $\lambda:=\sum_{i=1}^m|\mu_i|$, so $V$ is finite and $V(\Omega)<\infty$. [F1, given, algebra]
 
 2.1 If $A=\bigsqcup_{k\ge1}E_k$ is a disjoint Borel union, then intersecting any partition of $A$ with each $E_k$ and using countable additivity of each coordinate shows $V(A)\le\sum_kV(E_k)$. Conversely, for fixed $N$ and $\varepsilon>0$, choose for each of the finitely many $k\le N$ a partition of $E_k$ whose sum exceeds $V(E_k)-\varepsilon/N$. Their union, together with $A\setminus\bigcup_{k\le N}E_k$, is a partition of $A$, so $V(A)\ge\sum_{k\le N}V(E_k)-\varepsilon$. Letting $\varepsilon\downarrow0$ and then $N\to\infty$ proves countable additivity. Thus $V$ is a finite positive Borel measure. [F1, step 1.1, given, choose]
 

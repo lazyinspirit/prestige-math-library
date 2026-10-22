@@ -1,7 +1,7 @@
 ---
 id: def-instanton-surgery-triangle-data
 kind: definition
-title: "Admissible instanton surgery-triangle data"
+title: "Candidate instanton surgery-triangle input data"
 status: draft
 origin: pipeline
 pipeline_run: inverse-problems-knot-theory-all-109-2026-10-19

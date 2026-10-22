@@ -36,6 +36,10 @@ sources:
       locator: "§4.3, printed pp. 38–39"
 verification:
   precheck: pass
+  judge:
+    model: "gpt-6-luna"
+    verdict: pass
+    date: 2026-10-22
 ---
 
 ## Statement

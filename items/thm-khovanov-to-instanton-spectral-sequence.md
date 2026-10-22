@@ -18,6 +18,11 @@ axiom_use: "Assumes ACω through reduced Khovanov diagram and basepoint invarian
 provenance:
   statement: literature-derived
   proof: ai-altered
+verification:
+  judge:
+    model: "gpt-6-luna"
+    verdict: pass
+    date: 2026-10-22
 sources:
   references:
     - title: "P. B. Kronheimer and T. S. Mrowka, Khovanov homology is an unknot-detector, Proposition 1.2 and Theorem 8.12"

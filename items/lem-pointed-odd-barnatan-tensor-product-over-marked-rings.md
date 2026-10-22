@@ -26,7 +26,7 @@ dependency_level: 2
 
 ## Statement
 
-Let two finite based knot diagrams be joined along their marked arcs in a planar pointed connected-sum diagram, without new crossings. The odd complexes admit a normalized bigraded right $\mathbb A=\mathbb Z[X]/(X^2)$-linear chain isomorphism
+Let two finite based knot diagrams be joined along their marked arcs in a planar pointed connected-sum diagram, without new crossings. Use odd edge assignments realizing the full prescribed face products, including the zero-composite faces. The odd complexes admit a normalized bigraded right $\mathbb A=\mathbb Z[X]/(X^2)$-linear chain isomorphism
 $$ C_o(D_1)\otimes_{\mathbb A}C_o(D_2)\{-1\}\ \cong\ C_o(D_1\#D_2), $$
 and the Bar–Natan complexes admit the corresponding marked $\mathbb R=\mathbb Z[h,X]/(X^2-hX)$-linear chain isomorphism. In the odd case the induced signs realize the full prescribed face products, so admissible sign comparison applies, including zero-composite faces. The two isomorphisms agree after reduction modulo $2$ and $(2,h)$ under the statewise comparison. Their construction is finite and choice-free.
 
@@ -40,7 +40,7 @@ and the Bar–Natan complexes admit the corresponding marked $\mathbb R=\mathbb 
 
 ## Facts & Assumptions
 
-**Given:** Two marked diagrams and their planar connected-sum joining strip, with all first-diagram crossings ordered before all second-diagram crossings.
+**Given:** Two marked diagrams and their planar connected-sum joining strip, with full prescribed odd face signs and all first-diagram crossings ordered before all second-diagram crossings.
 
 [F1] The odd merge is an exterior quotient, the split is multiplication by a difference on the left, and the right marked action appends the marked generator ([[def-odd-khovanov-barnatan-and-leo-triple]]).
 

@@ -1,0 +1,14 @@
+---
+page: hellinger-posterior-stability-and-discretization
+title: Hellinger stability and posterior discretization
+status: draft
+items:
+  - lem-ip-prior-support-has-full-measure
+  - thm-ip-hellinger-data-stability
+  - thm-ip-posterior-potential-discretization-error
+examples: []
+requires:
+  - bayesian-inverse-likelihoods-and-posterior-propriety
+  - posterior-consistency-and-tests
+page_layout: compact-v1
+---

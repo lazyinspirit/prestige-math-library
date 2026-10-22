@@ -44,7 +44,7 @@ sources:
 
 ## Statement
 
-For every smooth oriented knot $K\subset S^3$, the function $\Upsilon_K:[0,2]\to\mathbb R$ defined by the finite cycle minimax is continuous and piecewise linear with finitely many breakpoints, satisfies $\Upsilon_K(0)=0$ and $\Upsilon_K(t)=\Upsilon_K(2-t)$, and has right derivative $\Upsilon'_K(0+)=-\tau(K)$. For smooth oriented knots $K,J$ and $t\in[0,2]$,
+For the knot-level assertions, assume the Axiom of Countable Choice. For every smooth oriented knot $K\subset S^3$, the function $\Upsilon_K:[0,2]\to\mathbb R$ defined by the finite cycle minimax is continuous and piecewise linear with finitely many breakpoints, satisfies $\Upsilon_K(0)=0$ and $\Upsilon_K(t)=\Upsilon_K(2-t)$, and has right derivative $\Upsilon'_K(0+)=-\tau(K)$. For smooth oriented knots $K,J$ and $t\in[0,2]$,
 $$ \Upsilon_{K\#J}(t)=\Upsilon_K(t)+\Upsilon_J(t),\qquad \Upsilon_{-K}(t)=-\Upsilon_K(t), $$
 where $-K$ is the reverse mirror, the inverse under connected sum in the smooth concordance group. If $g_4^{\mathrm{sm}}(K)$ is the minimum genus of a smooth properly embedded compact connected oriented surface in the four-ball with boundary $K$, then
 $$ |\Upsilon_K(t)|\le t\,g_4^{\mathrm{sm}}(K)\qquad(0\le t\le1). $$
@@ -63,7 +63,7 @@ $$ |\Upsilon_K(t)|\le t\,g_4^{\mathrm{sm}}(K)\qquad(0\le t\le1). $$
 
 ## Facts & Assumptions
 
-**Given:** A smooth oriented knot Floer complex with its finite bifiltered basis, normalized Maslov-zero total-homology generator, and the $F_t$ cycle-minimax convention.
+**Given:** A smooth oriented knot Floer complex with its finite bifiltered basis, normalized Maslov-zero total-homology generator, and the $F_t$ cycle-minimax convention. Countable Choice is assumed for the knot-level constructions and geometric comparisons; finite algebra on the stated supplied complexes and maps requires no further choice.
 
 [F1] [[def-upsilon-function-from-filtered-complex]]: $\nu_t$ is the minimum of $F_t(z)$ over Maslov-zero cycles representing the normalized generator, and $\Upsilon_K(t)=-2\nu_t$; its finite candidate set makes the function piecewise linear.
 

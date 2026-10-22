@@ -35,6 +35,10 @@ sources:
       locator: "Complete 10-page lecture notes, printed pp. 3–5; torsion of based acyclic complexes and finite CW complexes."
 verification:
   precheck: n/a
+  judge:
+    model: "gpt-6-luna"
+    verdict: pass
+    date: 2026-10-22
 ---
 
 ## Definition

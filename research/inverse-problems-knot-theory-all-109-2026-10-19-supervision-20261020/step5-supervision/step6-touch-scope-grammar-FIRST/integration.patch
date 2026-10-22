@@ -1,0 +1,73 @@
+--- a/tools/touchlog.mjs
++++ b/tools/touchlog.mjs
+@@ -68,7 +68,7 @@
+     if (claim.version !== 1 || claim.run !== scopedRun) die('foreign or invalid published touch claim');
+     ids.add(claim.id);
+   }
+-  if (!ids.size || [...ids].some(id => !/^[a-z][a-z0-9-]*$/.test(id ?? '')))
++  if (!ids.size || [...ids].some(id => !/^(?:alg|def|lem|thm|prop|cor|ex|cex|fs|rem|op)-[A-Za-z0-9]+(?:-[A-Za-z0-9]+)*$/.test(id ?? '')))
+     die('empty or invalid final touch scope');
+   return [...ids].sort().map(id => id + '.md');
+ };
+--- a/tools/step6-scoped-tree.mjs
++++ b/tools/step6-scoped-tree.mjs
+@@ -83,7 +83,9 @@
+     return rows;
+   });
+   const manifestItems = manifestPages.flatMap(page => (page.items ?? []).map(item => typeof item === 'string' ? item : item.id));
+-  if (!manifestItems.length || manifestItems.some(id => !/^[a-z]+-[a-z0-9]+(?:-[a-z0-9]+)*$/.test(id ?? '')))
++  const manifestItemId = physics ? /^[a-z]+-[a-z0-9]+(?:-[a-z0-9]+)*$/
++    : /^(?:alg|def|lem|thm|prop|cor|ex|cex|fs|rem|op)-[A-Za-z0-9]+(?:-[A-Za-z0-9]+)*$/;
++  if (!manifestItems.length || manifestItems.some(id => !manifestItemId.test(id ?? '')))
+     throw new Error(`cannot seal readiness: ${run} has no valid populated manifest scope`);
+   // Seal both promised and currently manifested subjects; disagreement is a
+   // native scope gate failure, never grounds for silently dropping either set.
+--- /dev/null
++++ b/tools/touchlog-step6-scope.test.mjs
+@@ -0,0 +1,16 @@
++import test from 'node:test';
++import assert from 'node:assert/strict';
++import {mkdtempSync,mkdirSync,writeFileSync,readFileSync,rmSync} from 'node:fs';
++import {tmpdir} from 'node:os';
++import {join} from 'node:path';
++import {fileURLToPath} from 'node:url';
++import {spawnSync} from 'node:child_process';
++import {itemHashGuard,itemSurfaceHash,shortHash} from './item-hash.mjs';
++const tool=fileURLToPath(new URL('./touchlog.mjs',import.meta.url));
++const mixed=['lem-amenable-D-R-l2-dimension-estimate','lem-hat-CF-genus-one-lens-space-order-three-rank-three'];
++function fixture(t){const root=mkdtempSync(join(tmpdir(),'step6-touch-scope-'));t.after(()=>rmSync(root,{recursive:true,force:true}));const put=(path,value)=>{mkdirSync(join(root,path,'..'),{recursive:true});writeFileSync(join(root,path),typeof value==='string'?value:JSON.stringify(value,null,2)+'\n');};const text=id=>`---\nid: ${id}\nkind: lemma\n---\n\n## Statement\n\nExact ${id}.\n`;for(const id of [...mixed,'lem-case-X','lem-case-x','ex-outside'])put(`items/${id}.md`,text(id));const history={snapshots:[{label:'whole-corpus-baseline',at:'2026-01-01T00:00:00Z',hashes:{'old-native-id':'0123456789ab'},surfaces:{'old-native-id':'0123456789abcdef'},note:'Preserve original historical scope.'}],seeded:[{id:'old-native-id',count:3}]};put('touches.json',history);put('research/demo-batch-1.pages.json',[{id:'page',items:mixed.map(id=>({id}))}]);put('research/demo-step3-published-claims.jsonl',JSON.stringify({version:1,run:'demo',id:'lem-case-X'})+'\n'+JSON.stringify({version:1,run:'demo',id:'lem-case-x'})+'\n');const snap=(extra=[])=>spawnSync(process.execPath,[tool,'snap','touches.json','pre-closeout-v3','--step6-run','demo','--idempotent',...extra],{cwd:root,encoding:'utf8'});return{root,put,history,snap,text,ledger:()=>readFileSync(join(root,'touches.json'),'utf8')};}
++test('Step6 touch endpoint preserves exact case, union scope, histories and idempotent label bytes',t=>{const f=fixture(t),r=f.snap();assert.equal(r.status,0,r.stderr);const led=JSON.parse(f.ledger()),last=led.snapshots.at(-1),ids=[...mixed,'lem-case-X','lem-case-x'].sort();assert.deepEqual(Object.keys(last.hashes),ids);assert.deepEqual(Object.keys(last.surfaces),ids);assert.deepEqual(led.snapshots.slice(0,-1),f.history.snapshots);assert.deepEqual(led.seeded,f.history.seeded);assert.deepEqual(last.scope,{run:'demo',kind:'frontier-and-published-claims'});for(const id of ids){assert.equal(last.hashes[id],shortHash(itemHashGuard(f.text(id))));assert.equal(last.surfaces[id],itemSurfaceHash(f.text(id)).slice(0,16));}assert.notEqual(last.hashes['lem-case-X'],last.hashes['lem-case-x']);assert.ok(!Object.hasOwn(last.hashes,'ex-outside'));const bytes=f.ledger();assert.equal(f.snap().status,0);assert.equal(f.ledger(),bytes);f.put(`items/${mixed[0]}.md`,f.text(mixed[0])+'Changed proof.\n');assert.equal(f.snap().status,2);assert.equal(f.ledger(),bytes);});
++for(const id of ['Lem-name','xyz-name','lem-','lem--name','lem-name-','lem-name_part','lem-name.part','lem-name/part','lem-name space','../lem-name','lem-é'])test(`Step6 touch rejects malformed manifest identity ${id} before ledger write`,t=>{const f=fixture(t),before=f.ledger();f.put('research/demo-batch-1.pages.json',[{id:'page',items:[{id}]}]);const r=f.snap();assert.equal(r.status,2);assert.match(r.stderr,/empty or invalid final touch scope/);assert.equal(f.ledger(),before);});
++for(const claim of [{version:1,run:'foreign',id:'lem-case-X'},{version:2,run:'demo',id:'lem-case-X'},{version:1,run:'demo',id:'lem-../escape'}])test(`Step6 touch rejects foreign or malformed published claim ${JSON.stringify(claim)}`,t=>{const f=fixture(t),before=f.ledger();f.put('research/demo-step3-published-claims.jsonl',JSON.stringify(claim)+'\n');assert.notEqual(f.snap().status,0);assert.equal(f.ledger(),before);});
++test('empty or missing-case source cannot mint a final baseline',t=>{const f=fixture(t),before=f.ledger();f.put('research/demo-batch-1.pages.json',[]);f.put('research/demo-step3-published-claims.jsonl','');assert.equal(f.snap().status,2);assert.equal(f.ledger(),before);f.put('research/demo-batch-1.pages.json',[{id:'page',items:[{id:'lem-case-XX'}]}]);assert.notEqual(f.snap().status,0);assert.equal(f.ledger(),before);});
++test('unscoped historical snapshot still observes the complete corpus',t=>{const f=fixture(t),r=spawnSync(process.execPath,[tool,'snap','touches.json','legacy-whole-corpus'],{cwd:f.root,encoding:'utf8'});assert.equal(r.status,0,r.stderr);const led=JSON.parse(f.ledger());assert.equal(Object.keys(led.snapshots.at(-1).hashes).length,5);assert.ok(led.snapshots.at(-1).hashes['ex-outside']);assert.deepEqual(led.snapshots[0],f.history.snapshots[0]);});
+--- a/tools/step6-scoped-tree.test.mjs
++++ b/tools/step6-scoped-tree.test.mjs
+@@ -89,3 +89,19 @@
+   const before = f.tree(); assert.ok(before.protected_tree_projections.includes(file));
+   update('after'); assert.equal(f.tree().protected_tree_sha256, before.protected_tree_sha256);
+ });
++
++test('readiness manifest identities preserve both canonical mixed-case segments and case-distinct sources',t=>{
++ const f=fixture(t),ids=['lem-amenable-D-R-l2-dimension-estimate','lem-hat-CF-genus-one-lens-space-order-three-rank-three','lem-case-X','lem-case-x'];
++ for(const id of ids)f.put(`items/${id}.md`,`---\nid: ${id}\n---\n## Statement\nExact ${id}.\n`);
++ f.json('research/demo-batch-1.pages.json',[{id:'page',items:ids}]);
++ const result=f.tree({scope:{items:ids.map(id=>({id})),pages:[{id:'page',file:'library/category/page.md'}],pathwayFiles:[]}});
++ for(const id of ids)assert.ok(result.protected_tree_paths.includes(`items/${id}.md`));
++ assert.notEqual(result.protected_tree_rows.find(row=>row.startsWith('items/lem-case-X.md\0')),result.protected_tree_rows.find(row=>row.startsWith('items/lem-case-x.md\0')));
++});
++for(const id of ['Lem-name','xyz-name','lem-','lem--name','lem-name-','lem-name_part','lem-name.part','lem-name/part','lem-name space','../lem-name','lem-é'])test(`readiness rejects malformed manifest identity ${id}`,t=>{
++ const f=fixture(t);f.json('research/demo-batch-1.pages.json',[{id:'page',items:[id]}]);assert.throws(f.tree,/no valid populated manifest scope/);
++});
++
++test('mathematical grammar alignment leaves the shared physics grammar unchanged',t=>{
++ const f=fixture(t),id='eq-energy';f.json('research/math-imports.json',{version:1,source_root:'fixture',files:[]});f.put(`items/${id}.md`,`---\nid: ${id}\n---\nEnergy.\n`);f.json('research/demo-batch-1.pages.json',[{id:'page',items:[id]}]);const scope={items:[{id}],pages:[{id:'page',file:'library/category/page.md'}],pathwayFiles:[]};assert.doesNotThrow(()=>f.tree({scope,physics:true}));assert.throws(()=>f.tree({scope}),/no valid populated manifest scope/);f.json('research/demo-batch-1.pages.json',[{id:'page',items:['eq-Energy']}]);assert.throws(()=>f.tree({scope,physics:true}),/no valid populated manifest scope/);
++});
+--- /dev/null
++++ b/tools/touchlog.md
+@@ -0,0 +1,5 @@
++# Touch snapshots
++
++`touchlog.mjs snap` retains whole-corpus semantics unless `--step6-run RUN` is supplied. The final Step 6 endpoint selects exactly the current run manifests plus that run's existing version-1 published claims. It preserves case-sensitive item IDs and accepts the canonical mathematical kind prefixes with ASCII letters and digits in nonempty hyphen-separated segments, as specified by SCHEMA.md. The Step 6 readiness tree applies the same item grammar. This changes neither source identity, scope membership, migration ownership, nor review credit. Foreign claims, malformed names, missing selected files and empty scope remain blocking.
++
++Historical snapshots and seeded repairs remain intact. A label remains a key: `--idempotent` reuses it only when both mathematical and public-interface hash maps match exactly, without rewriting the ledger. Changed bytes under an existing label still reject. The narrower final endpoint never rewrites an earlier whole-corpus baseline or invents a zero-touch history.

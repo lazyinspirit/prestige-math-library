@@ -1,0 +1,1561 @@
+PAGE 1
+arXiv:1110.5675v1  [math.GT]  25 Oct 2011
+CONSTRUCTING DOUBLY-POINTED HEEGAARD
+DIAGRAMS COMPATIBLE WITH (1,1) KNOTS
+PHILIP ORDING
+Abstract. A (1, 1) knot K in a 3-manifold M is a knot that intersects
+each solid torus of a genus 1 Heegaard splitting of M in a single trivial
+arc. Choi and Ko developed a parameterization of this family of knots
+by a four-tuple of integers, which they call Schubert’s normal form. This
+article presents an algorithm for constructing a doubly-pointed Heegaard
+diagram compatible with K, given a Schubert’s normal form for K. The
+construction, coupled with results of Ozsv´ath and Szab´o, provides a
+practical way to compute knot Floer homology groups for (1, 1) knots.
+The construction uses train tracks, and its method is inspired by the
+work of Goda, Matsuda and Morifuji.
+1. Introduction
+Some objects of 3-dimensional topology can be usefully characterized by
+objects of 2-dimensional topology. A signiﬁcant example is a Heegaard split-
+ting, which is a closed 3-manifold obtained by identifying the boundaries of
+two genus g handlebodies by a homeomorphism. The homeomorphism is
+completely determined by two sets α, β of g curves in the splitting surface
+Σ, and we study the 3-manifold in terms of the Heegaard diagram (Σ, α, β).
+The utility of Heegaard diagrams extends, by a slight modiﬁcation, from
+manifolds to knots in manifolds. By marking two points x, y ∈Σ −α −β in
+a given Heegaard diagram (Σ, α, β) for a 3-manifold M, we specify a unique
+knot K ⊂M. The knot is comprised of the union of the two trivial arcs
+on either side of Σ that join x and y while avoiding meridian disks bounded
+by α, β. We say (Σ, α, β, x, y) is a doubly-pointed Heegaard diagram com-
+patible with K. This article adresses the problem of constructing a genus 1
+doubly-pointed Heegaard diagram which is compatible with a given knot in
+the three-sphere.
+The motivation behind this question comes from the knot Floer homol-
+ogy developed by Ozsv´ath and Szab´o and, independently, Rasmussen. Knot
+Floer homology is a robust invariant; it produces the Alexander polynomial,
+the Seifert genus, ﬁberedness, a concordance invariant, uknot detection, and
+Date: November 20, 2018.
+1991 Mathematics Subject Classiﬁcation. 57M25, 57R58.
+Key words and phrases. (1,1) knot, 1-bridge torus knot, Heegaard diagram, Floer ho-
+mology, train track.
+Research partially supported by a PSC-CUNY grant.
+1
+
+PAGE 2
+2
+PHILIP ORDING
+Σ
+β
+α
+Dβ
+Dα
+tβ
+tα
+Figure 1. A doubly-pointed Heegaard diagram compatible
+with the trefoil
+information about Dehn surgeries on a knot. For an introduction to the the-
+ory, see [OS06]. The basic input for knot Floer homology is a Heegaard knot
+diagram, and Ozsv´ath and Szab´o showed that, in the case of doubly-pointed
+genus 1 Heegaard diagrams, the computation of knot Floer homology is com-
+binatorial. Although Manolescu, Ozsv´ath and Sarkar found a combinatorial
+algorithm to calculate the Floer homology of any knot, the invariants are
+computationally more accessible given a genus 1 doubly-pointed Heegaard
+diagram for a knot as opposed to a multi-point and multi-curve Heegaard
+diagram that are used in the more general setting.
+Goda, Matsuda and Morifuji recognized that the set of knots admitting
+genus 1 doubly-pointed Heegaard diagrams correspond to (g, b) knots with
+g = b = 1 [GMM05]. A (1, 1) knot K in a 3-manifold M is a knot that inter-
+sects each solid torus of a genus 1 Heegaard splitting of M in a single trivial
+arc. The (1, 1) knots form a large family. The torus knots and 2-bridge knots
+are proper subsets of the set of (1, 1) knots, and Fujii has shown that ev-
+ery Laurent polynomial satisfying the properties of an Alexander polynomial
+appears as the Alexander polynomial of some (1, 1) knot [Fuj96]. Goda, Mat-
+suda and Morifuji constructed numerous examples of genus 1 doubly-pointed
+Heegaard diagrams compatible with (1, 1) knots whose Floer homology was
+unknown, including several knots up to 10 crossings and certain pretzels
+[GMM05]. In each example, the attaching circle α remains ﬁxed while β is
+constructed via a sequence of steps beginning from a genus 1 doubly-pointed
+Heegaard diagram compatible with the trivial knot. Each step involves an
+isotopy of one of the trivial arcs and a simultaneous deformation of β, both
+of which are described by careful illustrations. Using Schubert form, a pa-
+rameterization of (1, 1) knots due to Choi and Ko [CK03], we are able to
+generalize Goda, Matsuda and Morifuji’s examples to obtain an algorithm
+
+PAGE 3
+DOUBLY-POINTED HEEGAARD DIAGRAMS COMPATIBLE WITH (1,1) KNOTS
+3
+x
+y
+r
+r
+s
+t
+Figure 2. Schubert form
+which constructs a genus 1 doubly-pointed Heegaard diagram for any (1, 1)
+knot with a given a Schubert form (Theorem 3).
+Rasmussen deﬁned an integer 4-tuple parameterization K(p, q, r, s) of
+genus 1 doubly-pointed Heegaard diagrams [Ras], and Doyle developed a
+computer program based on [GMM05] to compute the knot Floer homology
+groups up to relative Maslov grading for a given 4-tuple [Doy05]. We use
+the complementarity between the (1, 1) knot trivial arcs and Heegaard dia-
+gram attaching circles to deﬁne an integer 4-tuple parameterization of genus
+1 doubly-pointed Heegaard diagrams. Given a diagram resulting from our
+construction, we compute this parameterization, which we call Heegaard
+diagram Schubert form HS(r′, s′, t′, ρ′) (Theorem 4). Using the correspon-
+dence below, which follows by direct inspection, we obtain the Rasmussen
+parameters required for Doyle’s algorithm:
+HS(r′, s′, t′, ρ′) = K(2r′ + s′ + t′, r′, s′, −ρ′
+mod 2r′ + s′ + t′).
+Hedden observed that each step in the construction of Theorem 3 either
+preserves or increases the total rank of the Floer homology [Hed]. In partic-
+ular, the absolute Maslov grading of the generators is unchanged throughout
+the construction of the Heegaard diagram. This continuity in the algorithm
+extends from the absolute grading of the unknot in the ﬁrst step to the
+absolute Maslov grading for the knot whose Heegaard diagram appears in
+the ﬁnal step. This feature makes it possible to take advantage of Doyle’s
+software and calculate the knot Floer homology groups exactly, including
+the absolute Maslov grading. The results of this paper and Doyle’s software
+were employed in [Ord06], to investigate the Floer invariants for satellite
+(1,1) knots.
+The paper is organized as follows. Section 2 summarizes the basic termi-
+nology of Heegaard diagrams, Schubert form, and train tracks, which oﬀer
+a particularly convenient way to characterize curves in a surface. Section
+3 deﬁnes Schubert form in terms of train tracks. In Section 4 we divide
+a (1, 1) knot into increments by which the Heegaard diagram construction
+of Section 5 proceeds. Section 6 computes the Heegaard diagram Schubert
+form. Examples 1–3 demonstrate all results in the simplest nontrivial case,
+the trefoil.
+
+PAGE 4
+4
+PHILIP ORDING
+Acknowledgements. Matthew Hedden brought my attention to the prob-
+lem of constructing Heegaard diagrams compatible with (1, 1) knots, and
+this research beneﬁted from conversations with him, Walter Neumann, Pe-
+ter Ozsv´ath, Jacob Rasmussen, and Saul Schleimer.
+2. Preliminaries
+2.1. Heegaard diagrams. A Heegaard splitting is a closed 3-manifold
+Hα ∪h Hβ obtained by identifying the boundaries of two genus g handle-
+bodies Hα and Hβ by a homeomorphism h : ∂Hβ →∂Hα. Let α ⊂∂Hα
+and β ⊂∂Hβ be sets of g meridional curves of Hα and Hβ, respectively.
+The homeomorphism h is determined (up to isotopy) by the attaching cir-
+cles h(β) ⊂∂Hα, (see, for example, Singer [Sin33]). A Heegaard diagram
+(Σ, α, β) consists of the splitting surface Σ = ∂Hα = ∂Hβ and the curves α
+and h(β) in Σ.
+Given a Heegaard diagram (Σ, α, β) for a 3-manifold M, we specify a
+knot K ⊂M uniquely by marking two points x, y ∈Σ −α −β. To identify
+K, let Dα ⊂Hα be a set of pairwise disjoint properly embedded disks,
+the boundaries of which correspond to the set of meridians α. A properly
+embedded arc γ in a 3-manifold (M, ∂M) is trivial if there is an embedded
+disk D such that ∂D ∩γ = γ and ∂D ∩∂M is the arc ∂D \ int(γ). There
+is a unique (up to isotopy) trivial arc tα ⊂Hα −Dα spanning x, y, since
+the complement of Dα in Hα is homeomorphic to a ball. Deﬁne tβ similarly.
+If the closed curve tα ∪tβ has knot type K, the (Σ, α, β, x, y) is a called a
+doubly-pointed Heegaard diagram compatible with K.
+Figure 1 depicts a genus 1 doubly-pointed Heegaard diagram compatible
+with the trefoil (in the three-sphere).
+2.2. (1,1) knots. Doll deﬁned a knot K in a 3-manifold M to be genus-g
+bridge-b, or, simply (g, b) if there is a genus g Heegaard splitting of M such
+that K intersects each handlebody in b trivial arcs [Dol92]. Call (Hα, tα) ∪h
+(Hβ, tβ) a (1, 1) decomposition of a (1, 1) knot K ⊂M if Hα∪hHβ is a genus
+1 Heegaard splitting of M, tα ⊂Hα and tβ ⊂Hβ are properly embedded
+trivial arcs, and K = tα ∪tβ.
+Choi and Ko [CK03] demonstrated that every (1, 1) knot is represented
+by an integer 4-tuple (r, s, t, ρ), where r, s, and t are non-negative. In their
+presentation, called Schubert’s normal form (or simply Schubert form), they
+isotope the arc tβ of a (1, 1) decomposition into the torus ∂Hα. Then they
+prove that such an arc in the torus is isotopic to an arc in the form depicted
+in Figure 2, where opposite ends of the cylinder are identiﬁed by a
+2πρ
+2r+s+t+1-
+rotation. The parameters r, s, t count the number of strands in each parallel
+class. The arc tα belongs to a “standard” meridian disk of the solid torus
+Hα, as shown in Figure 2. The symbol S(r, s, t, ρ) denotes the knot type of
+tα ∪tβ. Note that Schubert form is not unique; for example, S(0, 0, 2, 2) and
+S(1, 1, 0, −1) are identical trefoils.
+
+PAGE 5
+DOUBLY-POINTED HEEGAARD DIAGRAMS COMPATIBLE WITH (1,1) KNOTS
+5
+2.3. Train tracks. Thurston originally introduced train tracks to study
+geodesic laminations of hyperbolic surfaces [Thu80], but we use the termi-
+nology merely in terms of the combinatorics of doubly-pointed Heegaard
+diagrams in the torus. The following deﬁnitions are drawn from Penner and
+Harer [PH92], and we also rely, in part, on the exposition by Masur, Mosher,
+and Schleimer [MMS].
+A train track with stops (or simply a track) is a graph τ that is properly
+embedded in a surface Σ and satisﬁes the following conditions. Edges of a
+train track, which are called branches, are assumed to be smoothly embed-
+ded, and at each vertex the incident edges are mutually tangent. A vertex
+from which branches emanate in two directions (“incoming” and “outgo-
+ing”) is called a switch, and a stop is a vertex from which branches emanate
+in one direction. Each vertex of a train track is either a switch in the interior
+of Σ or a stop in ∂Σ. There is at most one stop in each boundary component
+of the surface, and the one-sided tangent vector of each branch incident on
+a stop is transverse to ∂Σ. We assume that at each switch exactly three
+branches meet, a pair of small branch ends to one side and one large branch
+end to the other.
+Let B = B(τ) be the set of all branches of a track τ. A tie neighborhood
+N(τ) ⊂Σ of τ is a union of rectangles {Rb : b ∈B}, each of which is foliated
+by vertical intervals, called ties, that are transverse to τ. At each switch, the
+upper and lower thirds of the vertical side of the large branch end rectangle
+is identiﬁed with the two vertical sides of the small branch end rectangles.
+It is required that each component of Σ \ N(τ) has at least one corner and
+the following index has a negative value on the component:
+χ −1
+4# outward-pointing corners + 1
+4# inward-pointing corners,
+where χ is the Euler characteristic. In particular, no branch is homotopic
+to another branch or a boundary component.
+If γ is a curve contained in N(τ) and transverse to the ties, then γ is
+said to be carried by τ, and we write γ ≺τ. A transverse measure w on
+τ is a function which assigns a non-negative number, called a weight, to
+each branch in such a way that the sums of the weights on the incoming
+and outgoing branches at each switch are equal.
+Given an ordering on
+the branch set B = {b1, . . . , bn}, the following notation will be convenient:
+(w1, . . . , wn) := (w(b1), . . . , w(bn)). A collection of curves γ ≺τ deﬁnes a
+transverse measure on τ, wγ(b) := |γ ∩t|, where t is any tie of Rb. We
+call wγ the counting measure of γ on τ. Conversely, to every non-negative
+integer-valued function w on B satisfying the switch condition, there is a
+collection of curves γ ≺τ with w = wγ. An extension of a train track τ is a
+train track σ which contains τ as a subset, and we write τ < σ (we also say
+τ is a subtrack of σ). The support of an arc γ ≺σ is the smallest subtrack
+suppγ < σ that carries γ.
+
+PAGE 6
+6
+PHILIP ORDING
+b1
+b2
+b3
+b1
+b2
+b3
+b1
+b2
+b3
+b1
+b2
+b3
+b1
+b2
+b3
+Figure 3. Train track moves.
+Two measured train tracks (τ, w), (τ ′, w′) are equivalent if they are related
+by a sequence of isotopies and the following local moves. A left splitting or
+right splitting replaces a branch with large ends (a large branch) by a branch
+with small ends (a small branch). Suppose that w is a transverse measure
+on the train track τ before splitting at the branch b1, shown in Figure 3,
+bottom center. If w2 ≥w3 (w2 ≤w3), then w induces a transverse measure
+w′ on the train track τ ′ resulting from the left (right) splitting of τ at b1,
+and w′
+1 equals w2 −w3 (w3 −w2), shown in Figure 3, bottom left (right). A
+slide alters a branch having one large and one small end (a mixed branch)
+according to Figure 3, top. For a slide move, w′
+1 = w2+w3. All other branch
+weights are unchanged. The inverse of a slide is a slide, and the inverse of a
+splitting is called a fold.
+3. Schubert train track
+Let Σ be the closed oriented surface of genus 1.
+Fix once and for all
+an oriented meridian-longitude pair µ, λ ⊂Σ and a point x ∈µ \ λ. Let
+y := µ∩λ. We will represent Σ by the fundamental polygon P = λµλ−1µ−1,
+which is a rectangle with horizontals homologous to λ, oriented from right to
+left, and verticals homologous to µ, oriented from bottom to top. Suppose
+ˆΣ = Σ −Dx −Dy, where Dx, Dy ⊂Σ are small disks whose boundary
+contains x, y, respectively.
+Deﬁnition 1. The Schubert train track σ denotes one of three train tracks
+with stops σ−−, σ−, σ+ in ˆΣ that appear in Figure 4. The boundary com-
+ponent Dx (Dy) and stop x (y) are depicted by the small black (white)
+circle.
+Lemma 1. The trivial arc tβ of a (1, 1) knot with Schubert form S(r, s, t, ρ)
+is carried by σ, where σ is the Schubert train track σ−−if ρ < −r, σ−if
+−r ≤ρ < 0, and σ+ if ρ ≥0. The counting measure w = wtβ of tβ on σ is
+(w1, w2, w3, w4, w5) = (r, s, t, |ρ|, 1).
+
+PAGE 7
+DOUBLY-POINTED HEEGAARD DIAGRAMS COMPATIBLE WITH (1,1) KNOTS
+7
+b1
+b2
+b3
+b4
+b5
+σ−−
+b1
+b2
+b3
+b4
+b5
+σ−
+b1
+b2
+b3
+b4
+b5
+σ+
+Figure 4. Schubert train track.
+Proof. From the deﬁnition of Schubert form S(r, s, t, ρ), it follows that tβ ≺
+θ, where θ is the train track with stops θ−if ρ < 0 and θ+ if ρ ≥0, as shown
+in Figure 5.
+b1
+b2
+b3
+b4
+b5
+θ−
+b1
+b2
+b3
+b4
+b5
+θ+
+Figure 5. Schubert form as measured train track with stops.
+Moreover, the counting measure v = vtβ of tβ on θ is (v1, . . . , v5) =
+(r, s, t, |ρ|, 1). The equivalence of the measured train tracks (θ, v) and (σ, w),
+results from the following sequence of train track moves taking θ to σ.
+b1
+b2
+b3
+b4
+b5
+θ′
+−
+b1
+b2
+b3
+b4
+b5
+θ′′
+−
+b1
+b2
+b3
+b4
+b5
+θ′′′
+−
+Figure 6. Sliding and folding θ.
+First, apply slide moves at the two mixed branches of θ that are adjacent
+to branches b3 and b4. The resulting train track θ′ has a single large branch,
+which, for the case ρ < 0, appears in Figure 6, left.
+Suppose v′ is the
+counting measure of tβ on θ′ induced by v.
+If ρ ≥0, then v′ induces a
+measure v′′ on the left splitting of θ′ at its large branch, and the resulting
+
+PAGE 8
+8
+PHILIP ORDING
+train track is σ+. If ρ < 0, v′ induces v′′ on the right splitting, and the
+resulting train track is θ′′
+−shown in Figure 6, center. Apply slide moves at
+the two branches indicated in the ﬁgure by the large arrows, so that the
+result is θ′′′
+−that is shown in Figure 6, right. If ρ < −r, the measure v′′′ on
+θ′′′
+−, induced by v′′, induces the measure w on the left splitting, which results
+in σ−−. If −r ≤ρ < 0, v′′′ induces the measure w on the right splitting,
+which results in σ−.
+□
+The Schubert train track has ten switches and over a dozen branches,
+yet for tβ ≺σ, a component of tβ \ (µ ∪λ) belongs to one of at most ﬁve
+parallel classes of subarcs in the fundamental polygon P.
+The following
+lemma simpliﬁes σ in a way that will facilitate the parameterization of tβ
+taken up in the next section.
+b1
+b2
+b3
+b4
+b5
+b6
+σ′
+−−
+b2
+b3
+b4
+b1
+b5
+b6
+σ′
+−
+b3
+b2
+b1
+b4
+b5
+b6
+σ′
+0
+b2
+b1
+b4
+b3
+b5
+b6
+σ′
++
+Figure 7. Folded Schubert train track σ′.
+Lemma 2. If trivial arc tβ of a (1, 1) knot with Schubert form S(r, s, t, ρ) is
+carried by σ′, where σ′ is the train track with terminals σ′
+−−if ρ < −2s−r−1,
+σ′
+−if −2r −s −1 ≤ρ < −r, σ′
+0 if −r ≤ρ < t, and σ′
++ if ρ ≥t, as depicted
+in Figure 7. The counting measure w′ = w′
+tβ of tβ on σ′ is (w′
+1, . . . , w′
+6) =
+
+
+
+
+
+
+
+
+
+(r + s, r, 3r + s + t + 1, r, −2r −s −ρ −1, 1)
+if ρ < −2r −s −1,
+(r, −r −ρ −1, r, r + t −ρ, 2r + s + ρ + 1, 1)
+if −2r −s −1 ≤ρ < −r,
+(3r + s + ρ + 1, r, r + ρ, r, t −ρ, 1)
+if −r ≤ρ < t,
+(r, r + t, r, 3r + s + t + 1, ρ −t, 1)
+if ρ ≥t.
+Proof. We show that the measured train tracks (σ, w) and (σ′, w′) are equiv-
+alent. If ρ ≥t, then tβ ≺σ+, according to Lemma 1. Apply a sequence of
+
+PAGE 9
+DOUBLY-POINTED HEEGAARD DIAGRAMS COMPATIBLE WITH (1,1) KNOTS
+9
+slide and fold moves so as to collapse the complementary regions labeled 1
+– 6, in that order, that appear in Figure 8. The resulting traintrack with
+induced branch weights appears in Figure 8, to the right. Split the large
+branch adjacent to the two branches with weights r + t and r + ρ. If ρ ≥t,
+then a left splitting of the branch results in σ′
++, otherwise ρ < t and a right
+splitting yields σ′
+0. The induced measure w′ on σ′ is easily obtained. The
+other cases follow similarly, and they are omitted.
+□
+1
+2
+3
+4
+5
+6
+r
+r + t
+r + ρ
+r
+3r + s + ρ + 1
+3r + s + t + 1
+Figure 8. Folding σ+.
+4. Bridge sequence
+The meridians µ, λ divide tβ into subarcs, which we denote by d1, . . . , dn,
+each of which is properly embedded in the fundamental polygon. Index the
+subarcs according to their order in tβ from y to x. If tβ ≺σ′, then Figure 7
+shows the number n of subarcs is Σ5
+i=1w′
+i, where w′ is the counting measure
+of tβ on σ′.
+Parameterize P by the half-open interval [0, 2n + 4) ⊂R,
+such that p ∈P is integral if and only if p is an endpoint of dk, for some
+i ∈{1, . . . , n} or p is identiﬁed with one of the basepoints x, y in the torus
+Σ. Let s2i−1, s2i denote the endpoints of di, i = 1, . . . , n. The “bridge”
+tβ = d1 ∪· · · ∪dn is uniquely determined (up to isotopy) by the sequence of
+endpoints s1, s3, . . . , s2n−1.
+Deﬁnition 2. The bridge sequence of a (1, 1) knot in Schubert form is the
+sequence of integers (s1, s3, . . . , s2i−1, . . . , s2n−1).
+Let y1, y2, y3, y4 ∈P denote the points homologous to y, and x1, x2 ∈P
+the points homologous to x, the order chosen to agree with the parameteri-
+zation of P. Figure 7 and Lemma 2 determine the integer representatives of
+y1, y2, x1, y3, y4, x2, and they appear in Table 1. The initial and ﬁnal points
+of tβ follow similarly:
+s1
+=
+
+y3
+if ρ < −r,
+y2
+if ρ ≥−r,
+(1)
+s2n
+=
+x2.
+(2)
+The branches b1, . . . , b4 of σ′ are ordered so as to facilitate the statement of
+the following Proposition 1, which computes the bridge sequence explicitely
+
+PAGE 10
+10
+PHILIP ORDING
+Table 1.
+ρ < −r
+ρ ≥−r
+y1
+0
+0
+y2
+−ρ
+2r + ρ + 1
+x1
+2r + s −ρ + 1
+4r + s + ρ + 2
+y3
+4r + s + t −ρ + 2
+6r + s + t + ρ + 3
+y4
+4r + s + t −2ρ + 2
+8r + s + t + 2ρ + 4
+x2
+6r + s + 2t −2ρ + 3
+10r + s + 2t + 2ρ + 5
+in terms of Schubert form. Deﬁne the center pi of branch bi, i = 1, . . . , 4
+to be as in Table 2; that is, pi is a point in {y1, y2, x1, y3, y4, x2} −{s1, s2n}
+that is equidistant in P from the ends of each subarc carried by bi.
+Table 2.
+ρ < −2r −s −1
+−2r −s −1 ≤ρ < −r
+−r ≤ρ < t
+t ≤ρ
+p1
+y2
+y1
+y1
+x1
+p2
+x1
+y2
+x1
+y3
+p3
+y4
+x1
+y3
+y4
+p4
+y1
+y4
+y4
+y1
+Proposition 1. Let S = S(r, s, t, ρ) be the Schubert form of a (1, 1) knot. If
+w′ is the counting measure of tβ on σ′, then the terms of the bridge sequence
+of S are
+s2i−1 = (ψφ)i−1(s1),
+i = 1, . . . , n
+where ψ, φ are permutations given by the cycle notation below:
+φ =
+4
+Y
+i=1
+
+
+w′
+i
+Y
+j=1
+( pi −j
+pi + j )
+
+
+w′
+5
+Y
+k=1
+( p1 −w′
+1 −k
+p2 + w′
+2 + k ),
+ψ =
+y2−y1−1
+Y
+i=1
+( y1 + i
+y4 −i )
+y3−y2−1
+Y
+j=1
+( y4 + j
+y3 −j ),
+and a = a mod 2n + 4.
+Note that the initial term s1 from which the proposition computes the
+bridge sequence is given by (1) and Table 1, hence, the bridge sequence is
+completely speciﬁed by the proposition.
+Proof. The ith term s2i−1 of the bridge sequence corresponds to the initial
+endpoint of the subarc di ⊂tβ. For i < n, the next term, s2i+1, in the bridge
+sequence is the (unique) point in P that is homologous (in Σ) to the ﬁnal
+endpoint s2i of di. We will show that φ transposes the endpoints of di, and
+ψ transposes homologous (integer) pairs in P, hence
+s2i+1 = ψφ(s2i−1),
+
+PAGE 11
+DOUBLY-POINTED HEEGAARD DIAGRAMS COMPATIBLE WITH (1,1) KNOTS
+11
+and the bridge sequence is obtained from s1 by iterating ψφ as claimed.
+Consider φ. There are ﬁve parallel classes of arcs among d1, . . . , dn, and
+they correspond to the branches b1, . . . , b5 of the train track σ′. For i =
+1, . . . , 4, the branch bi is centered on pi, and the endpoints of an arc carried
+by bi lie at a distance j = 1, . . . , w′
+i to either side of pi. Given that P =
+[0, 2n + 4), the two points at distance j from pi are pi ± j, where a = a
+mod 2n + 4. Hence, the 2-cycle ( pi −j
+pi + j ) transposes endpoints of
+arcs carried by the branch bi, i = 1, . . . , 4. As for b5, one end is adjacent
+to the end of b1 preceeding p1 (in P), and the other is adjacent the end
+of b2 succeeding p2. Therefore, one endpoint of an arc carried by b5 is less
+than p1 by w′
+1 −k, and the other is greater than p2 by w′
+2 + k for some
+k = 1, . . . , w′
+5; the permutation (p1 −w′
+1 −k
+p2 + w′
+2 + k) transposes the
+two. Multiplying all the above transpositions results in the permutation φ,
+as required.
+The “gluing” permutation ψ is also a product of disjoint transpositions.
+The two sequences of integers y1 + 1, y1 + 2, . . . , y2 −1 and y3 + 1, y3 +
+2, . . . , y4 −1 are identiﬁed in λ ⊂Σ, in reverse order, and the homologous
+pairs are transposed by cycles ( y1 + i
+y4 −i ), for i = 1, . . . , y2 −y1 −1.
+Similarly, the integer sequences y2 + 1, y2 + 2, . . . , y3 −1 and y4 + 1, y4 +
+2, . . . , y1 −1 are identiﬁed in µ ⊂Σ, in reverse order. The corresponding
+transpositions are ( y2 + j
+y1 −j ), for j = 1, . . . , y3 −y2 −1. (There is no
+single point identiﬁed with one of y1, . . . , y4; they have been excluded from
+the permutation ψ because they are already all identiﬁed with s1.)
+The
+product of the transpositions associated with λ and µ is ψ, as claimed.
+□
+Example 1 (Trefoil bridge sequence). A Schubert form for the trefoil is
+(r, s, t, ρ) = (0, 0, 2, 2). From Lemma 2, we have (w′
+1, . . . , w′
+5) = (0, 2, 0, 3, 0),
+with “centers” given by Table 2: (p1, p2, p3, p4) = (x1, y3, y4, y1). From Table
+1, basepoints y1, y2, x1, y3, y4, x2 take positions 0, 3, 4, 7, 10, 13, respectively,
+hence (p1, p2, p3, p4) = (4, 7, 10, 0). The gluing permutation is
+ψ
+=
+2
+Y
+i=1
+( 0 + i
+10 −i )
+3
+Y
+j=1
+( 10 + j
+7 −j )
+=
+(1 9)(2 8)(11 6)(12 5)(13 4),
+where a = a mod 2n + 4 = a mod 14, since n = Σ5
+i=1w′
+i = 5. There are
+only two branches of positive weight, b2 and b4, and the subarc permutation
+is
+φ
+=
+2
+Y
+j=1
+( 7 −j
+7 + j )
+3
+Y
+j=1
+( 0 −j
+0 + j )
+=
+(6 8)(5 9)(13 1)(12 2)(11 3).
+Since ρ ≥−r, the initial term s1 is y2 = 2r+ρ+1 = 3. Going to the end of
+the ﬁrst subarc, we meet φ(3) = 11, which is homologous to s3 = ψ(11) = 6.
+Thus, the bridge sequence begins 3, 6. Continuing in this way, alternating
+
+PAGE 12
+12
+PHILIP ORDING
+φ and ψ a total of n = 5 times, we obtain the bridge sequence (3, 6, 2, 5, 1).
+See Figure 10.
+5. Attaching sequence
+Let tβ be the bridge of a (1, 1) knot in Schubert form S, whose bridge
+sequence is (s1, s3, . . . , s2n−1).
+By ti
+β, we denote the ith partial bridge
+d1 ∪· · · ∪di, for i = 1, . . . , n. Deﬁne t0
+β := s1. The same parameteriza-
+tion of P developed in the previous section to characterize tβ also serves to
+characterize an oriented attaching circle γ ⊂Σ −ti
+β.
+Deﬁnition 3. Let i be an integer such that 0 ≤i ≤n.
+An attaching
+sequence for ti
+β is a sequence of half-integer points (c1, . . . , cm) in P for
+which there is an oriented simple closed curve γ ⊂Σ −ti
+β with the property
+that γ \P consists of m arcs, and the tail endpoint c′
+j of the jth arc satisﬁes
+the inequality cj −1
+2 < c′
+j < cj + 1
+2 for all j = 1, . . . , m.
+An attaching sequence (c1, . . . , cm) determines the curve γ uniquely (up
+to isotopy), and we will therefore use the attaching sequence to represent
+the curve. Extend the gluing map ψ deﬁned in Proposition 1 to the half
+integers:
+ψ =
+2y2−2y1−1
+Y
+i=1
+
+y1 + i
+2
+y4 −i
+2
+ 2y3−2y2−1
+Y
+j=1
+
+y4 + j
+2
+y3 −j
+2
+
+.
+Finally, we use interval notation (a, b) to denote the clockwise-oriented seg-
+ment in P, from a to b;
+(a, b) =
+
+{x ∈P : a < x < b}
+if a ≤b,
+{x ∈P : b < x or x < a}
+if b < a.
+Proposition 2. Let (s1, s3, . . . , s2n−1) be the bridge sequence of a (1, 1) knot
+in Schubert form S. Suppose γ = (c1, c2, . . . , cm) is an attaching sequence
+for ti
+β. Let a = s2i−1 and b = φ(s2i−1). Deﬁne
+fS,i(γ) = (fS,i(c1), . . . , fS,i(cj), . . . , fS,i(cm)),
+where
+fS,i(cj) =
+
+
+
+cj, ψ(b −1
+2), b + 1
+2,
+if cj ∈(a, b) and ψ(cj+1) ∈(b, a),
+cj, ψ(b + 1
+2), b −1
+2,
+if cj ∈(b, a) and ψ(cj+1) ∈(a, b),
+cj,
+else,
+for j = j mod m, and i = 1, . . . , n. Then fS,i(γ) is an attaching sequence
+for ti+1
+β
+, and the curve represented by fS,i(γ) is isotopic to γ.
+Proof. We will apply a “ﬁnger move” along the subarc of tβ from a to b, and
+then observe that the result has attaching sequence fS,i(γ), as deﬁned.
+Let g1, . . . , gp ⊂γ be arcs, each of which intersects P exactly in its two
+endpoints, one of lies in (a, b) and the other in (b, a). Cut the fundamental
+
+PAGE 13
+DOUBLY-POINTED HEEGAARD DIAGRAMS COMPATIBLE WITH (1,1) KNOTS
+13
+polygon along ti
+β and γ −g1 −· · · −gp. Among the regions remaining, there
+is one, R, that contains a, b.
+Take a simple path in the boundary of R
+that connects a and b, and push it just oﬀthe boundary to obtain an arc u
+isotopic to di+1 = ti+1
+β
+−ti
+β. The arc u is disjoint from ti
+β and intersects γ
+in p points, with one intersection point in each of g1, . . . , gp. Relabeling if
+necessary, index g1, . . . , gp by the order in which u meets them, from b back
+to a.
+s2i+1
+s2i+2
+Uk
+g′
+k
+u
+Figure 9. Finger move.
+For each k = 1, . . . , p, take an ǫ
+k-radius tube Uk around u, where 0 < ǫ ≪
+1. The intersection gk ∩Uk divides Uk into two simply connected regions,
+of which one, call it Dk, is disjoint from gk+1, . . . , gp and contains b. The
+boundary of Dk consists of gk ∩Uk joined with the path ∂Uk ∩Dk. Let g′
+k be
+the path obtained by replacing the subarc (gk ∩Uk) of gk by ∂Uk ∩Dk. The
+curve γ′ obtained by replacing gk by g′
+k in γ for all k = 1, . . . , p, is isotopic
+to γ because gk and g′
+k are isotopic. By construction, γ′ is disjoint from the
+partial bridge ti+1
+β
+= ti
+β ∪u. See Figure 9.
+An arc gk that crosses u from left to right corresponds to cj ∈(a, b) for
+which ψ(cj+1) ∈(b, a). In this case, g′
+k passes around u (at a distance of
+ǫ/k) from left to right; g′
+k is comprised of three arcs whose endpoints are
+cj, w −1
+2;
+ψ(b−1
+2), ψ(b+ 1
+2);
+and b+ 1
+2, ψ(cj+1). Replacing gk by g′
+k, takes
+cj to the three initial points of the above arcs, as required by the ﬁrst case
+in the deﬁnition of fS,i. If gk crosses u from right to left, then the second
+case results. Arcs of γ that do not cross u are unchanged by fS,i and this
+is the content of the third and ﬁnal case. Having demonstrated that in all
+cases the term cj of γ is replaced by fS,i(cj) in γ, the proof is complete.
+□
+Theorem 3. Let K be a (1, 1) knot with (1, 1) decomposition (Hα, tα) ∪h
+(Hβ, tβ) and Schubert form S = S(r, s, t, ρ). Let Σ = ∂Hα and {x, y} =
+∂tα = ∂tβ. Suppose s1, s3, . . . , s2n−1 is the bridge sequence of S. Let
+α
+=
+
+−ρ −1
+2
+if ρ < −r,
+2r + ρ + 1
+2
+if ρ ≥−r.
+
+PAGE 14
+14
+PHILIP ORDING
+Deﬁne β = βn, where
+β0
+=
+
+−ρ + 1
+2
+if ρ < −r,
+2r + ρ + 3
+2
+if ρ ≥−r,
+βi+1
+=
+fS,i(βi),
+for i = 0, . . . , n−1. Then (Σ, α, β, x, y) is a genus 1 doubly-pointed Heegaard
+diagram compatible with K.
+Proof. As deﬁned, α and β0 correspond to the half-integers y2−1
+2 and y2+ 1
+2,
+which belong to λ and µ, respectively. As (one-term) attaching sequences,
+they represent simple closed curves parallel to µ and λ; that is, y2 −1
+2 and
+y2 + 1
+2 are meridian curves for Hα and Hβ, respectively. Thus, (Σ, α, β0)
+is a Heegaard diagram for the S3. By Proposition 2, fS,i(βi) is isotopic to
+βi for all i = 0, . . . , n. Therefore β is isotopic to β0, and (Σ, α, β) is also a
+Heegaard diagram for S3.
+According to Schubert form, the trivial arc tα belongs to the meridian
+disk bounded by µ. Since µ and α are parallel in Σ, we can deﬁne Dα ⊂Hα
+to be the parallel meridian disk with ∂Dα = α, for which Dα ∩tα = ∅.
+From Proposition 2 it follows that the curve βi is disjoint from ti
+β for all
+i = 0, . . . , n.
+Thus β = βn is disjoint from tβ = tn
+β, and any properly
+embedded disk Dβ ⊂Hα with ∂Dβ = β is disjoint from tβ. In conclusion,
+the unique isotopy classes of trivial arcs between x and y in Hα −Dα and
+Hβ−Dβ correspond to tα and tβ, respectively, and (Σ, α, β, x, y) is a doubly-
+pointed Heegaard diagram compatible with K = tα ∪tβ.
+□
+Deﬁnition 4. An attaching sequence c1, . . . , cm for ti
+β is reduced if for all
+j = 1, . . . , m, (cj, ψ(cj+1)) ∩tβ ̸= ∅and (ψ(cj+1), cj) ∩tβ ̸= ∅, where j = j
+mod m. A pair of terms cj, cj+1 that does not meet the above conditions is
+called an inessential pair.
+Lemma 3. Suppose γ is an attaching sequence for ti
+β. If γ′ is the sequence
+obtained by removing every inessential pair from γ, then γ′ is also an at-
+taching sequence for ti
+β, and γ and γ′ are isotopic as curves.
+Proof. Let c1, . . . , cm be the terms of the attaching sequence γ. Suppose
+cj, cj+1 is an inessential pair, for which, say, (cj, ψ(cj+1)) ∩ti
+β = ∅. Then
+dj ∪(cj, ψ(cj+1)) bounds a disk in Σ −ti
+β, where dj ⊂γ is the properly
+embedded subarc with endpoints cj, ψ(cj+1). Among all such disks there is
+an innermost disk whose interior is disjoint from γ. Cancel the inessential
+arc by an isotopy taking it across the disk, thereby removing the points
+of intersection corresponding to the inessential pair. Let γ′ be the result
+of having applied the same isotopy to the next innermost disk, and so on,
+until all inessential arcs are removed. Then γ′ is represented by attaching
+sequence c′ and γ′ is isotopic to γ.
+□
+From now on we assume that an attaching sequence is reduced.
+For
+otherwise we may take any given attaching sequence and successively remove
+
+PAGE 15
+DOUBLY-POINTED HEEGAARD DIAGRAMS COMPATIBLE WITH (1,1) KNOTS
+15
+inessential pairs until it is reduced. By Lemma 3, the result is an attaching
+sequence for the same curve.
+Example 2 (Trefoil attaching sequence). Schubert form, bridge sequence,
+and the permutations φ and ψ were obtained in Example 1 as
+S
+=
+S(0, 0, 2, 2),
+s1, s3, . . . , s2n−1
+=
+3, 6, 2, 5, 1,
+φ
+=
+(6 8)(5 9)(13 1)(12 2)(11 3),
+ψ
+=
+(1 9)(2 8)(11 6)(12 5)(13 4).
+The extended gluing permutation is
+ψ
+=
+(0.5 9.5)(1 9)(1.5 8.5)(2 8)(2.5 7.5)(10.5 6.5)
+(11 6)(11.5 5.5)(12 5)(12.5 4.5)(13 4)(13.5 3.5).
+Given that ρ ≥−r, we have
+α = 2.5,
+β0 = 3.5.
+Therefore α meets P at 2.5 and ψ(2.5) = 7.5. To determine β1 = fS,1(β0),
+note that the ﬁrst bridge arc has endpoints a = s1 = 3 and b = φ(s1) = 11.
+Since β0 meets P at 3.5 and ψ(3.5) = 13.5, which belong to (a, b) and (b, a),
+respectively, fS,1(β0) = fS,1(3.5) = (3.5, ψ(w −.5), w + .5) = (3.5, 6.5, 11.5).
+However, the pair 11.5, 3.5 is inessential since the interval (11.5, ψ(3.5)) =
+(11.5, 13.5) is disjoint from t1
+β, which meets P in the points {0, 3, 7, 10, 11}.
+The reduced attaching sequence of t1
+β is
+β1 = 6.5.
+For the next bridge arc, a = 6 and b = 8.
+Here fS,2(β1) = fS,2(6.5) =
+(6.5, 2.5, 8.5), since 6.5 ∈(a, b) and ψ(6.5) = 10.5 ∈(b, a). This attaching
+sequence is reduced;
+β2 = 6.5, 2.5, 8.5.
+For i = 3, a = 2 and b = 12. Here fS,3(6.5) = 6.5, fS,3(2.5) = (2.5, 5.5, 12.5),
+and fS,3(8.5) = 8.5. The sequence is reduced;
+β3 = 6.5, 2.5, 5.5, 12.5, 8.5.
+The computations for i = 4, 5 follow similarly, and the results are
+β4
+=
+6.5, 2.5, 5.5, 1.5, 9.5, 12.5, 9.5,
+β5
+=
+6.5, 2.5, 5.5, 1.5, 4.5, 13.5, 9.5, 13.5, 9.5.
+See Figure 10.
+
+PAGE 16
+16
+PHILIP ORDING
+0
+3
+7
+10
+t1
+β
+t2
+β
+t3
+β
+t4
+β
+tβ
+α
+α
+β0
+β1
+β2
+β3
+β4
+β
+Figure 10. Attaching circle construction for the trefoil.
+6. Heegaard diagram Schubert form
+Deﬁnition 5. Let σ ⊂ˆΣ be the Schubert train track, and deﬁne α ⊂ˆΣ \ µ
+to be a meridian parallel to µ. Suppose w = wβ is the counting measure
+of a curve β ≺σ, and (w1, . . . , w5) = (r′, s′, t′, ρ′, 0). If (Σ, α, β, x, y) is a
+doubly-pointed Heegaard diagram compatible with a knot K, then we say
+HS(r′, s′, t′, ǫρ′) is a Heegaard diagram Schubert form of K, where the sign
+ǫ = ±1 is positive if σ equals σ+, and negative otherwise.
+We note that Cattabriga and Mulazzani deﬁned an integer 4-tuple pa-
+rameterization K(a, b, c, r) of (1,1) knots in terms of Heegaard diagrams
+and Dunwoody manifolds [CM04].
+Inspection reveals that the Heegaard
+diagram Schubert form HS(r′, s′, t′, ρ′) corresponds to K(r′, s′, t′, ρ′ −s′).
+Deﬁnition 6. The intersection numbers of an attaching sequence γ =
+c1, . . . , cm is a 4-tuple of non-negative integers (a, b, c, d), where
+a
+=
+|{i : y2 ≤ci < y3 and y4 ≤ci+1 < 2y2}|,
+b
+=
+|{i : y2 ≤ci < x1 or x2 ≤ci < 2y2}|,
+c
+=
+|{i : x1 ≤ci < y3 or y4 ≤ci < x2}|,
+d
+=
+|{i : y1 ≤ci < y2 or y3 ≤ci < y4}|,
+and j = j mod m.
+
+PAGE 17
+DOUBLY-POINTED HEEGAARD DIAGRAMS COMPATIBLE WITH (1,1) KNOTS
+17
+Intersection number a counts the number of subarcs of γ that intersect
+P exactly in their endpoints, both of which belong to (y2, y3) And b, c,
+d represent the geometric intersection numbers |γ ∩(y2, x1)|, |γ ∩(x1, y3)|,
+|γ ∩(y1, y2)|, respectively.
+Theorem 4. If (a, b, c, d) are intersection numbers of a reduced attaching
+sequence β for the bridge tβ of a nontrivial (1, 1) knot K in Schubert form
+S(r, s, t, ρ), then a Heegaard diagram Schubert form HS(r′, s′, t′, ρ′) of K is
+provided by one of the following cases:
+i. If s ̸= 0 ̸= t, or 2a ≤b and 2a ≤c, then
+(r′, s′, t′, ρ′) =
+(
+(a, −2a + b, −2a + c, −d)
+if ρ < −r,
+(a, −2a + b, −2a + c, −2a + d)
+if ρ ≥−r.
+ii. If s = 0 < t and 2a > b, then
+(r′, s′, t′, ρ′) =
+(
+(−a + b, −2a + c, 2a −b, 2a −2b −d)
+if ρ < −r,
+(−a + b, −2a + c, 2a −b, −2b + d)
+if ρ ≥−r.
+iii. If s > 0 = t and 2a > c, then
+(r′, s′, t′, ρ′) =
+(
+(−a + c, 2a −c, −2a + b, a −c −d)
+if ρ < −r,
+(−a + c, 2a −c, −2a + b, d)
+if ρ ≥−r.
+iv. If s = 0 = t and 2a > c ≥b, then (r′, s′, t′, ρ′) =
+(
+(−a + c, b −c −b −2a, b −2a, 2a −c −d −b −2a)
+if ρ < −r,
+(−a + c, 2a −c, b −c −2a −c, −b + d + 2a −c)
+if ρ ≥−r,
+where x = x mod b −c.
+v. If s = 0 = t and 2a > b > c, then (r′, s′, t′, ρ′) =
+
+
+
+
+
+(−a + b, −b + c −2a −b, 2a −b, 2a −2b + c −d −2a −b)
+if ρ < −r,
+(−a + b, −b + c −2a −b, 2a −b, −b + d + 2a −b)
+if −r ≤ρ < 0,
+(−a + b, −2a + b, −b + c −−2a + b, −b + d + −2a + b)
+if ρ > 0,
+where x = x mod −b + c.
+Proof. Case i. According to Lemma 4, β ≺σ. The only branch arc of σ
+with boundary in (y2, y3) in the fundamental polygon is b1 (see Figure 4),
+hence
+(3)
+a = w1 = r′,
+where w = wβ is the counting measure of β on σ. Intersection numbers b, c,
+and d equal the sum of w over the branches of σ that are transverse to the
+intervals (y2, x1), (x1, y3), and (y1, y2), respectively. Using the switch condi-
+tions on σ, which determine the value of w on B(σ) in terms of w1, . . . , w5,
+
+PAGE 18
+18
+PHILIP ORDING
+and the deﬁnition of the Heegaard diagram Schubert parameters, we deduce:
+b
+=
+2w1 + w2 = 2r′ + s′,
+(4)
+c
+=
+2w1 + w3 = 2r′ + t′,
+(5)
+d
+=
+
+
+
+
+
+2w1 + w4 = 2r′ + ρ′
+if σ = σ+,
+(w1 −w4) + w1 = 2r′ + ρ′
+if σ = σ−,
+(w4 −w1 −w5) + w1 = −ρ′
+if σ = σ−−.
+(6)
+We obtain the required (r′, s′, t′, ρ′) as the solution to the system of linear
+equations (3)-(6).
+Case ii. Lemma 4 implies that β ≺τ2, where τ2 is deﬁned by Figure
+11. The intersection numbers correspond to a system of linear equations in
+terms of v1, . . . , v5, where v = vβ is the counting measure of β on τ2,
+a
+=
+v1 + v2,
+b
+=
+2v1 + v2,
+c
+=
+2v1 + 2v2 + v3,
+d
+=
+
+
+
+
+
+v2 + v4 −v5
+if ρ < −r,
+2v1 + v2 −v4
+if −r ≤ρ < 0,
+2v1 + 2v2 + v4
+if ρ > 0,
+for which the solution is
+(v1, . . . , v4) =
+
+
+
+
+
+(−a + b, 2a −b, −2a + c, −2a + b + d)
+if ρ < −r,
+(−a + b, 2a −b, −2a + c, b −d)
+if −r ≤ρ < 0,
+(−a + b, 2a −b, −2a + c, −2a + d)
+if ρ > 0.
+Lemma 5 determines the required Heegaard diagram Schubert form from
+the measure v.
+Cases iii-v. These follow from computations similar to Case ii, and they
+are omitted.
+□
+Lemma 4. Let τ −−
+i
+, τ −
+i , τ +
+i
+denote the Schubert train tracks σ−−, σ−,
+σ+, respectively for i = 1 and the train tracks depicted in Figure 11 for
+i = 2, 3, 4, 5. If (a, b, c, d) are intersection numbers of a reduced attaching
+sequence β for the bridge tβ of a non-trivial (1, 1) knot K in Schubert form
+S(r, s, t, ρ), then β ≺τ, where
+τ =
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+τ1
+if s > 0 and t > 0, or 2a ≤b and 2a ≤c,
+τ2
+if s = 0 < t and 2a > b,
+τ3
+if s > 0 = t and 2a > c,
+τ4
+if s = 0 = t and 2a > c ≥b,
+τ5
+if s = 0 = t and 2a > b > c,
+and τi is the train track τ −−
+i
+if ρ < −r, τ −
+i
+if −r ≤ρ < 0, and τ +
+i
+if ρ > 0
+for i = 1, . . . , 5.
+
+PAGE 19
+DOUBLY-POINTED HEEGAARD DIAGRAMS COMPATIBLE WITH (1,1) KNOTS
+19
+b1
+b2
+b3
+b4
+b5
+τ −−
+2
+b1
+b2
+b3
+b4
+b5
+τ −
+2
+b1
+b2
+b3
+b4
+b5
+τ +
+2
+b1
+b2
+b3
+b4
+b5
+τ −−
+3
+b1
+b2
+b3
+b4
+b5
+τ −
+3
+b1
+b2
+b3
+b4
+b5
+τ +
+3
+b1
+b2
+b3
+b4
+b5
+τ −−
+4
+b1
+b2
+b3
+b4
+b5
+τ −
+4
+b1
+b2
+b3
+b4
+b5
+τ +
+4
+b1
+b2
+b3
+b4
+b5
+τ −−
+5
+b1
+b2
+b3
+b4
+b5
+τ −
+5
+b1
+b2
+b3
+b4
+b5
+τ +
+5
+Figure 11. Maximal extensions τ = τ2, τ3, τ4, τ5.
+Proof. Given that β is an attaching sequence for tβ, β determines (up to
+isotopy) an attaching circle (that we denote by β also) that is disjoint from
+tβ. Let N = N(supp tβ) be a tie neighborhood of the support supp tβ < σ.
+Since β ∩tβ = ∅, we may assume that β ∩N consists of properly embedded
+
+PAGE 20
+20
+PHILIP ORDING
+arcs in N, each of which passes between distinct vertical sides of N. Fur-
+thermore, we take β to be transverse to the ties of N since N is comprised
+of rectangles.
+Given that K is a nontrivial knot, the twist parameter ρ is nonzero.
+Suppose ρ > 0.
+If s > 0 and t > 0, then a component of Σ −N is a polygon with at most
+three vertical sides. If an arc of β \ N passes between two vertical sides of
+N that are adjacent to a horizontal side in the frontier of N, then the arc
+is carried by supp tβ. Otherwise there is an boundary arc of ∂ˆΣ separating
+the vertical sides in the frontier of N (this case corresponds to r = 0), and
+the arc is carried by the extension supptβ < σ. In either case β ≺σ.
+If s = 0 < t, then there is a component of σ −N with four vertical sides,
+and there may be an arc of β \ N which is not parallel to a horizontal or
+terminal side. The hypothesis that β is reduced implies, however, that each
+arc of β \(N ∪P) passes between distinct vertical sides of N or components
+of P \ N, which we call passages. Each component of Σ \ (N ∪P) has at
+most three vertical sides or passages. Thus, β is carried by the extension
+supptβ < τ ′ obtained by adding branches between those vertical sides and
+passages not already connected by a horizontal side, provided we join all
+branches incident on a single passage. See Figure 12. Let w = wβ be the
+counting measure of β on τ ′. From the deﬁnition of the intersection numbers
+and the switch conditions, we deduce a = w1, b = w1+w2, and c = 2w1+w3.
+If 2a ≤b (2a > b), then w1 ≤w2 (w1 > w2), and β is carried by the right
+(left) splitting of τ ′ at branch b6.
+The right splitting is equivalent to σ
+whereas the left splitting is the train track τ +
+2 as required.
+b1
+b2
+b3
+b4
+b5
+b6
+τ ′
+b1
+b2
+b3
+b4
+b5
+b6
+τ ′′
+b1
+b2
+b3
+b4
+b5
+b6
+b7
+τ ′′′
+Figure 12. Extensions τ ′, τ ′′, τ ′′′ for ρ > 0.
+If s > 0 = t, a similar argument shows that β is carried by the extension
+supptβ < τ ′′ shown in Figure 12. In this case 2a ≤b. If 2a ≤c, then β is
+carried by σ, which is the left splitting of τ ′′ at b6. Otherwise 2a > c, and β
+is carried by τ +
+3 , which is the right splitting at b6.
+If s = 0 = t, then each component of Σ \ (N ∪P) still has at most three
+vertical sides or passages, and β is carried by the extension τ ′′′ (Figure 12,
+right) which is deﬁned in a manner analogous to τ ′ and τ ′′. If 2a ≤b and
+2a ≤c then β is carried by the track resulting from splitting τ ′′′ right at b6
+
+PAGE 21
+DOUBLY-POINTED HEEGAARD DIAGRAMS COMPATIBLE WITH (1,1) KNOTS
+21
+and left at b7, which is equivalent to σ. If 2a > c ≥b, then a left splitting at
+b6 results in a train track equivalent to τ +
+4 , which carries β. If 2a > b > c,
+then β is carried by the train track obtained by splitting τ ′′′ right at b7,
+which is equivalent to τ +
+5 .
+In the remaining cases, ρ < −r and −r ≤ρ < 0, similar arguments
+demonstrate that β is carried by τ as claimed.
+□
+Lemma 5. If v = vβ is the counting measure of β on the train track τ ̸=
+σ, where β is an attaching circle of a (1, 1) knot K with Schubert form
+S(r, s, t, ρ), then a Heegaard diagram Schubert form HS(r,′ s′, t′, ρ′) for K
+is as follows. Let x denote x mod v2.
+If τ = τ2, then
+(r′, s′, t′, ρ′) =
+(
+(v1, v3, v2, −v1 −v2 −v4)
+if ρ < 0,
+(v1, v3, v2, −2v1 + v4)
+if ρ > 0.
+If τ = τ3, then
+(r′, s′, t′, ρ′) =
+
+
+
+
+
+(v1, v3, v2, −v4 −v3 −v1)
+if ρ < −r,
+(v1, v3, v2, 2v1 + v3 −v4)
+if −r ≤ρ < 0,
+(v1, v3, v2, 2v1 + v3 + v4)
+if ρ ≥−r.
+If τ = τ4, then
+(r′, s′, t′, ρ′) =
+
+
+
+
+
+(v1, v2 −v2 −v3, v2 −v3, −v2 −v3 −v4)
+if ρ < −r,
+(v1, v3, v2 −v3, −v2 + v3 −v4)
+if −r ≤ρ < 0,
+(v1, v3, v2 −v3, v2 + v3 + v4)
+if ρ > 0.
+If τ = τ5, then
+(r′, s′, t′, ρ′) =
+
+
+
+
+
+(v1, v2 −v3, v3, −v3 −v4)
+if ρ < −r,
+(v1, v2 −v3, v3, −v2 + v3 −v4)
+if −r ≤ρ < 0,
+(v1, v2 −v3, v2 −v2 −v3, v2 + v2 −v3 + v4)
+if ρ > 0.
+Proof. Suppose τ = τ2 and ρ > 0. Apply an isotopy sliding the basepoint
+y once around Σ along a circular path parallel to µ and with the same
+orientation as µ. See Figure 13. Split the large branch adjacent to b4, and
+the result is a subtrack of σ on which the counting measure of β takes the
+b1
+b2
+b3
+b4
+b5
+b1
+b2
+b3
+b4
+b5
+b1
+b2
+b3
+b4
+b5
+Figure 13. Isotopy of τ = τ +
+2 .
+
+PAGE 22
+22
+PHILIP ORDING
+values w1 = v1, w2 = v3, w3 = v2, and w4 = v4 −2v1, as required. The same
+isotopy treats cases with ρ < 0.
+If τ = τ3, slide the basepoint y once around Σ along a path parallel to µ
+and against its orientation. The Heegaard diagram Schubert form follows
+by a splitting as in the above case.
+If τ = τ4, then arcs of β carried by b2 wrap v3/v2-times around a meridian
+γ parallel to µ with the same orientation. The case ρ > 0 is shown in Figure
+14, left, where, for sake of clarity, we have isotoped the basepoint y toward
+the center of the fundamental polygon. In this case, if we apply a −⌊v3/v2⌋
+Dehn twist to β along γ, where ⌊x⌋denotes the greatest integer less than or
+equal to x, then the result β′ is carried by the train track τ ′ shown in Figure
+14, center. Since γ is disjoint from α, x, and y, and the twist is integral,
+the doubly-pointed Heegaard diagrams (Σ, α, β, x, y) and (Σ, α, β′, x, y) are
+equivalent; i.e., they represent the same knot in S3. If v′ is the counting
+measure of β′ induced by v, then (v′
+1, . . . , v′
+4) = (v1, v2, v3, v4), where x = x
+mod v2. By isotoping τ ′ into a neighborhood of σ, as shown in Figure 14, we
+obtain the Heegaard diagram Schubert form HS(v′
+1, v′
+3, v′
+2−v′
+3, v′
+2+v′
+3+v′
+4) =
+HS(v1, v3, v2 −v3, v2 + v3 + v4), as required. The case −r ≤ρ < 0 follows
+similarly.
+If ρ < −r, an additional twist is required for Schubert form;
+after a −⌈v3/v2⌉Dehn twist the given Heegaard diagram Schubert form is
+obtained, where ⌈x⌉denotes the smallest integer greater than x.
+b1
+b2
+b3
+b4
+b5
+γ
+b′
+1
+b′
+2
+b′
+3
+b′
+4
+b′
+5
+b′
+1
+b′
+2
+b′
+3
+b′
+4
+b′
+5
+Figure 14. Dehn twist of τ = τ +
+4 along γ.
+If τ = τ5 and ρ < −r (ρ ≥−r), then a positive ⌊v3/v2⌋(⌈v3/v2⌉) Dehn
+twist along γ takes β to a neighborhood of σ. The required Heegaard dia-
+gram Schubert parameters follow by an argument similar to the one applied
+in the τ4 case.
+□
+Example 3 (Trefoil Heegaard diagram Schubert form). From Example 2,
+an attaching sequence for the trefoil with Schubert form S(0, 0, 2, 2) is
+β = (6.5, 2.5, 5.5, 1.5, 4.5, 13.5, 9.5, 13.5, 9.5).
+Given the trefoil basepoints (y1, y2, x1, y3, y4, x2) = (0, 3, 4, 7, 10, 13) from
+Example 1, the intersection numbers of β are (a, b, c, d) = (1, 2, 3, 4). Since
+2a ≤b, 2a ≤c, and ρ ≥−r, a Heegaard diagram Schubert form for the
+trefoil is
+HS(r′, s′, t′, ρ′) = (1, 0, 1, 2).
+
+PAGE 23
+DOUBLY-POINTED HEEGAARD DIAGRAMS COMPATIBLE WITH (1,1) KNOTS
+23
+To verify that this corresponds to a Heegaard diagram compatible with the
+trefoil, notice that an isotopy sliding y in the direction of the path µλ−1
+takes β into the shape of Figure 1.
+References
+[CM04]
+Alessia Cattabriga and Michele Mulazzani. All strongly-cyclic branched cov-
+erings of (1, 1)-knots are Dunwoody manifolds. J. London Math. Soc. (2),
+70(2):512–528, 2004.
+[CK03]
+Doo Ho Choi and Ki Hyoung Ko. Parametrizations of 1-bridge torus knots. J.
+Knot Theory Ramiﬁcations, 12(4):463–491, 2003.
+[Dol92]
+H. Doll. A generalized bridge number for links in 3-manifolds. Math. Ann.,
+294(0025-5831):701–717, 1992.
+[Doy05]
+Gabriel Doyle. solve11knot — a perl program for calculating the knot ﬂoer
+homology of a doubly-pointed genus 1 heegaard knot diagram, 2005.
+[Fuj96]
+Hirozumi Fujii. Geometric indices and the Alexander polynomial of a knot.
+Proc. Amer. Math. Soc., 124(9):2923–2933, 1996.
+[GMM05] Hiroshi Goda, Hiroshi Matsuda, and Takayuki Morifuji. Knot Floer homology
+of (1, 1)-knots. Geom. Dedicata, 112:197–214, 2005.
+[Hed]
+Matthew Hedden. Private communication.
+[MMS]
+Howard Masur, Lee Mosher, and Saul Schleimer. On train track splitting se-
+quences. arXiv:1004.4564v1 [math.GT].
+[Ord06]
+Philip Ording. On knot Floer homology of satellite (1,1) knots. PhD thesis,
+Columbia University, 2006.
+[OS06]
+Peter Ozsv´ath and Zolt´an Szab´o. An introduction to Heegaard Floer homology.
+In Floer homology, gauge theory, and low-dimensional topology, volume 5 of
+Clay Math. Proc., pages 3–27. Amer. Math. Soc., Providence, RI, 2006.
+[PH92]
+R. C. Penner and J. L. Harer. Combinatorics of train tracks, volume 125 of An-
+nals of Mathematics Studies. Princeton University Press, Princeton, NJ, 1992.
+[Ras]
+Jacob
+A.
+Rasmussen.
+Knot
+polynomials
+and
+knot
+homologies.
+arXiv:math/0504045v1 [math.GT].
+[Sin33]
+James Singer. Three-dimensional manifolds and their Heegaard diagrams.
+Trans. Amer. Math. Soc., 35(1):88–111, 1933.
+[Thu80]
+William Thurston. The geometry and topology of three-manifolds. 1980.
+Philip Ording, Department of Mathematics, Medgar Evers College, CUNY.
+E-mail address: pording@mec.cuny.edu

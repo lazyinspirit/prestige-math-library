@@ -17,6 +17,11 @@ axiom_use: The finite polynomial presentation and adjugate inverse formula are
 provenance:
   statement: literature-derived
   proof: ai-generated
+verification:
+  judge:
+    model: "gpt-6-luna"
+    verdict: pass
+    date: 2026-10-22
 sources:
   references:
     - title: Léo Bénard, François Florens, and Adrien Rodau, A slope invariant and the

@@ -15,6 +15,11 @@ axiom_use: The adjugate and trace identities used in the proof are choice-free.
 provenance:
   statement: literature-derived
   proof: ai-generated
+verification:
+  judge:
+    model: "gpt-6-luna"
+    verdict: pass
+    date: 2026-10-22
 sources:
   references:
     - title: Léo Bénard, François Florens, and Adrien Rodau, A slope invariant and the

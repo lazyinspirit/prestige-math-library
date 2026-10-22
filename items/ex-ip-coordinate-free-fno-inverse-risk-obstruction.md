@@ -51,7 +51,7 @@ sources:
 
 Consider the complete original Fourier architecture and diagonal inverse question reproduced below. For every odd integer $m\ge3$, every $N\ge1$, and every admissible bounded parameter class with a measurable empirical minimizer, its risk satisfies
 $$\mathfrak R^{\mathrm{ERM}}_{N,m}(S,B)\ge\frac{R^2(3^p-2^p)^2}{4\,3^{2(p+s)}}>0.$$
-The same bound holds for every measurable learner whose realized predictor belongs to the stated coordinate-free Fourier class, whether or not it minimizes empirical risk. On the other hand, the unrestricted risk tends to zero as $m\to\infty$ for fixed $p,s,R,\sigma>0$, independently of $N$. Thus no growth of $N,S,B$ can make this original architecture attain the vanishing unrestricted risk along an odd-mesh subsequence. This is a partial resolution: no complete joint bounded-class rate, or corresponding fixed positive even-mesh floor, is asserted. The original question is retained verbatim under Original question.
+The same bound holds for every measurable learner whose realized predictor belongs to the stated coordinate-free Fourier class, whether or not it minimizes empirical risk. On the other hand, the unrestricted risk tends to zero as $m\to\infty$ for fixed $p,s,R,\sigma>0$, independently of $N$. Thus no growth of $N,S,B$ can make this original architecture attain the vanishing unrestricted risk along an odd-mesh subsequence. This is a partial resolution: no complete joint bounded-class rate, or corresponding fixed positive even-mesh floor, is asserted. The original question is retained under Original question with explicit positive coordinate indices and empty-class conventions.
 
 ## Example references
 
@@ -67,7 +67,7 @@ The same bound holds for every measurable learner whose realized predictor belon
 
 Let $\mathbb T=\mathbb R/(2\pi\mathbb Z)$ carry normalized Lebesgue measure and fix the real orthonormal Fourier basis
 $$\phi_1(x)=1,\qquad \phi_{2k}(x)=\sqrt2\cos(kx),\qquad \phi_{2k+1}(x)=\sqrt2\sin(kx)\quad(k\ge1).$$
-Use this basis to identify the real Hilbert space $\ell^2(\mathbb N)$ with $L^2(\mathbb T;\mathbb R)$. Fix integers $N,m\ge1$ and parameters $s,p,R,\sigma>0$, and define
+Use this basis to identify the real Hilbert space $\ell^2(\mathbb N_{>0})$ with $L^2(\mathbb T;\mathbb R)$. Fix integers $N,m\ge1$ and parameters $s,p,R,\sigma>0$, and define
 $$\Theta_s(R)=\left\{\theta\in\ell^2:\sum_{j\ge1}j^{2s}\theta_j^2\le R^2\right\},\qquad (A_p\theta)_j=j^{-p}\theta_j,\qquad \mathcal X_p(R)=A_p\Theta_s(R).$$
 The inverse map $G^\dagger:\mathcal X_p(R)\to\ell^2$ is $G^\dagger(A_p\theta)=\theta$. For $m\ge1$, let $P_m$ retain the first $m$ Fourier coefficients and let $I_m:\mathbb R^m\to\ell^2$ append zero coordinates.
 
@@ -77,11 +77,11 @@ Here $\sigma_0$ acts coordinatewise, $W_\ell\in\mathbb R^{c_{\ell+1}\times c_\el
 
 Write $\mathcal P(K)$ for the Borel probability laws on a Borel set $K$. For a Borel probability law $\mu$ on $\Theta_s(R)$, draw independent training truths $\theta_i\sim\mu$ and observations
 $$X_{i,m}=P_mA_p\theta_i+\eta_{i,m},\qquad Y_{i,m}=P_m\theta_i,\qquad \eta_{i,m}\sim N(0,\sigma^2m^{-1}I_m),\quad i=1,\ldots,N,$$
-with all noises independent, and write $D_{N,m}=((X_{i,m},Y_{i,m}))_{i=1}^N$. A selector is Borel into the finite disjoint union of architecture indices and their bounded parameter boxes, and its realized map minimizes the empirical loss. For each $N,m,S,B$, assume there is at least one such selector $\tau$ that, from $D_{N,m}$, returns a minimizer of
+with all noises independent, and write $D_{N,m}=((X_{i,m},Y_{i,m}))_{i=1}^N$. A selector is Borel into the finite disjoint union of architecture indices and their bounded parameter boxes, and its realized map minimizes the empirical loss. For each $N,m,S,B$ with $\mathcal F_{S,B}^{(m)}\ne\varnothing$, assume there is at least one such selector $\tau$ that, from $D_{N,m}$, returns a minimizer of
 $$\frac1N\sum_{i=1}^N\|\Psi(X_{i,m})-Y_{i,m}\|_2^2$$
-over $\Psi\in\mathcal F_{S,B}^{(m)}$; let $\mathcal T_{N,m}(S,B)$ be the set of all such selectors. At test time, draw an independent $\theta\sim\mu$ and $\eta_m\sim N(0,\sigma^2m^{-1}I_m)$, and define
+over $\Psi\in\mathcal F_{S,B}^{(m)}$; let $\mathcal T_{N,m}(S,B)$ be the set of all such selectors, and set it to $\varnothing$ when $\mathcal F_{S,B}^{(m)}=\varnothing$. At test time, draw an independent $\theta\sim\mu$ and $\eta_m\sim N(0,\sigma^2m^{-1}I_m)$, and define
 $$\mathfrak R^{\mathrm{ERM}}_{N,m}(S,B)=\inf_{\tau\in\mathcal T_{N,m}(S,B)}\sup_{\mu\in\mathcal P(\Theta_s(R))}E\left\|I_m\tau(D_{N,m})(P_mA_p\theta+\eta_m)-\theta\right\|_{\ell^2}^2.$$
-Also define $\mathfrak R^{\mathrm{all}}_{N,m}$ by the same infimum over all Borel predictors from $(D_{N,m},X_m)$ to $\mathbb R^m$, with $X_m=P_mA_p\theta+\eta_m$. Determine matching minimax upper and lower rates for $\mathfrak R^{\mathrm{ERM}}_{N,m}(S,B)$ jointly in $N,m,S,B,p,s,R,\sigma$. In particular, characterize the joint growth regimes of $m=m_N$ and $S=S_N$ that separate statistical estimation, neural-operator approximation, and continuum truncation error, and determine when the bounded shared-parameter Fourier architecture attains the unrestricted rate $\mathfrak R^{\mathrm{all}}_{N,m}$.
+Use the convention $\inf\varnothing=+\infty$, so an empty architecture class has infinite ERM risk. Also define $\mathfrak R^{\mathrm{all}}_{N,m}$ by the same infimum over all Borel predictors from $(D_{N,m},X_m)$ to $\mathbb R^m$, with $X_m=P_mA_p\theta+\eta_m$. Determine matching minimax upper and lower rates for $\mathfrak R^{\mathrm{ERM}}_{N,m}(S,B)$ jointly in $N,m,S,B,p,s,R,\sigma$. In particular, characterize the joint growth regimes of $m=m_N$ and $S=S_N$ that separate statistical estimation, neural-operator approximation, and continuum truncation error, and determine when the bounded shared-parameter Fourier architecture attains the unrestricted rate $\mathfrak R^{\mathrm{all}}_{N,m}$.
 
 ## Facts & Assumptions
 

@@ -47,7 +47,7 @@ sources:
 
 ## Statement
 
-Let $\mathcal C_{\mathrm{sm}}$ be the smooth knot concordance group, with addition induced by oriented connected sum and inverse represented by reverse mirror. The function $\epsilon: \mathcal C_{\mathrm{sm}}\to\{-1,0,1\}$ is well-defined and concordance-invariant, but it is not a homomorphism to $\mathbb Z$. The map
+For the knot-level assertions, assume the Axiom of Countable Choice. Let $\mathcal C_{\mathrm{sm}}$ be the smooth knot concordance group, with addition induced by oriented connected sum and inverse represented by reverse mirror. The function $\epsilon: \mathcal C_{\mathrm{sm}}\to\{-1,0,1\}$ is well-defined and concordance-invariant, but it is not a homomorphism to $\mathbb Z$. The map
 $$ \Upsilon:\mathcal C_{\mathrm{sm}}\longrightarrow \mathrm{PL}([0,2],\mathbb R),\qquad [K]\longmapsto\Upsilon_K, $$
 is a group homomorphism, where $\mathrm{PL}([0,2],\mathbb R)$ is the abelian group of continuous piecewise-linear real-valued functions under pointwise addition. For every representative $K$ and $0\le t\le1$, its value satisfies $|\Upsilon_K(t)|\le t\,g_4^{\mathrm{sm}}(K)$.
 
@@ -69,7 +69,7 @@ is a group homomorphism, where $\mathrm{PL}([0,2],\mathbb R)$ is the abelian gro
 
 ## Facts & Assumptions
 
-**Given:** The smooth concordance group, the epsilon invariant, the Upsilon function, and the smooth four-ball genus with the conventions stated above.
+**Given:** The smooth concordance group, the epsilon invariant, the Upsilon function, and the smooth four-ball genus with the conventions stated above. Assume the Axiom of Countable Choice for the supplied geometric knot Floer and concordance/genus interfaces; the ensuing finite deductions require no further choice.
 
 [F1] [[thm-knot-concordance-is-an-abelian-group]]: in the smooth branch, the operation is oriented connected sum, the inverse is reverse mirror, and a class is zero precisely when represented by a smoothly slice knot. The smooth proof branch was inspected; the topological branch is not used.
 

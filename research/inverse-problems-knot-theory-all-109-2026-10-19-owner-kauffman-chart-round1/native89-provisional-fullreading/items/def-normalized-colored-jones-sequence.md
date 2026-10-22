@@ -1,0 +1,112 @@
+---
+id: def-normalized-colored-jones-sequence
+kind: definition
+title: "Normalized colored Jones sequence"
+status: draft
+origin: pipeline
+pipeline_run: inverse-problems-knot-theory-all-109-2026-10-19
+dependency_level: 2
+deps:
+  - def-axiom-of-choice
+  - def-absolutely-simple-object
+  - def-braiding
+  - def-colored-framed-knot-evaluation-from-ribbon-category
+  - def-countable-choice
+  - def-drinfeld-jimbo-quantized-enveloping-algebra
+  - def-left-dual-and-right-dual-object
+  - def-quantum-sl2-fundamental-ribbon-module
+  - def-twist-and-ribbon-structure
+  - thm-the-drinfeld-jimbo-formulas-define-a-hopf-algebra
+  - thm-twist-correction-removes-framing
+justified_by: []
+proof_strategy: direct
+provenance:
+  statement: literature-derived
+  proof: ai-altered
+sources:
+  references:
+    - title: "P. Etingof, S. Gelaki, D. Nikshych, and V. Ostrik, Tensor Categories, §§5.6, 8.3, 8.9–8.10"
+      url: "https://math.mit.edu/~etingof/egnobookfinal.pdf"
+    - title: "Noah Snyder and Peter Tingley, The half-twist for U_q(g) representations, §§3–5"
+      url: "https://msp.org/ant/2009/3-7/ant-v3-n7-p04-p.pdf"
+    - title: "Hitoshi Murakami, An Introduction to the Volume Conjecture, §2.4"
+      url: "https://arxiv.org/pdf/1002.0126"
+    - title: "Kazuo Habiro, On the quantum sl2 invariants of knots and integral homology spheres, §§2.3 and 3.3"
+      url: "https://arxiv.org/pdf/math/0211044"
+---
+
+## Definition
+
+Let $A$ be an indeterminate, put $q=A^4$, $q_K=A^2$, and $q_L=A^{-2}=q_K^{-1}$, and work over $F=\mathbb Q(A)$. For an integer $r$, put
+$$[r]=\frac{q_K^r-q_K^{-r}}{q_K-q_K^{-1}}.$$
+For each integer $N\ge1$, let $V_N$ have basis $v_0,\ldots,v_{N-1}$ and define the $U_{q_L}(\mathfrak{sl}_2)$ action in the library coproduct convention by
+$$K_Lv_j=q_L^{N-1-2j}v_j,\qquad Ev_j=[N-j]v_{j-1},\qquad Fv_j=[j+1]v_{j+1},$$
+where $v_{-1}=v_N=0$. In the universal $R$-matrix formula use $q_K$ and $H v_j=(N-1-2j)v_j$; on $V_N\otimes V_N$ its action is the finite sum
+$$\mathcal R_N=q_K^{H\otimes H/2}\sum_{r=0}^{N-1}q_K^{r(r-1)/2}\frac{(q_K-q_K^{-1})^r}{[r]!}\,E^r\otimes F^r,$$
+and the positive crossing is $c_N=P\mathcal R_N$, where $P(x\otimes y)=y\otimes x$. Equip these matrices with the Kauffman-bracket half-ribbon data: the twist matrix is the scalar $\theta_N=\lambda_N I$ with $\lambda_N=(-1)^{N-1}A^{N^2-1}$, and the pivotal matrix on $V_N$ is $G_N=(-1)^{N-1}\operatorname{diag}(A^{2(N-1-2j)})_{j=0}^{N-1}$. The resulting generic quantum dimension is
+$$d_N=\operatorname{Tr}(G_N)=(-1)^{N-1}\frac{A^{2N}-A^{-2N}}{A^2-A^{-2}}.$$
+Use the contragredient left-dual action from the Hopf antipode and its evaluation and coevaluation maps. The stipulated matrix data are **admissible** when their braiding, inverse braiding, duality maps, pivotal comparison, and twist satisfy the ribbon-category axioms. Assume the Axiom of Choice for the framed-tangle and Markov constructions. For such data, an oriented knot $K\subset S^3$ presented as the closure of an $n$-strand braid $\beta$ has generic normalized value
+$$J_N^{\mathrm{gen}}(K;q)=\lambda_N^{-w(\beta)}\frac{\operatorname{Tr}(G_N^{\otimes n}\rho_N(\beta))}{d_N}\in F,$$
+where $w(\beta)$ is the exponent sum of $\beta$ and $\rho_N(\beta)$ is its braid action. The variable transport to the ordinary Jones convention is $t=q^{-1}=A^{-4}$.
+
+## Definition references
+
+[[def-drinfeld-jimbo-quantized-enveloping-algebra|Drinfeld–Jimbo generators and relations]]
+
+[[thm-the-drinfeld-jimbo-formulas-define-a-hopf-algebra|Library coproduct and antipode convention]]
+
+[[def-quantum-sl2-fundamental-ribbon-module|Kauffman-bracket half-ribbon convention in dimension two]]
+
+[[def-colored-framed-knot-evaluation-from-ribbon-category|Colored framed-link evaluation]]
+
+[[thm-twist-correction-removes-framing|Scalar twist correction under Markov moves]]
+
+[Etingof, Gelaki, Nikshych, and Ostrik, *Tensor Categories*, §§5.6 and 8.3](https://math.mit.edu/~etingof/egnobookfinal.pdf)
+
+[Snyder and Tingley, *The half-twist for $U_q(\mathfrak g)$ representations*, §§3–5](https://msp.org/ant/2009/3-7/ant-v3-n7-p04-p.pdf)
+
+[Murakami, *An Introduction to the Volume Conjecture*, §2.4](https://arxiv.org/pdf/1002.0126)
+
+[Habiro, *On the quantum $\mathfrak{sl}_2$ invariants of knots and integral homology spheres*, §§2.3 and 3.3](https://arxiv.org/pdf/math/0211044)
+
+## Facts & Assumptions
+
+**Given:** An integer $N\ge1$, the Axiom of Choice and Countable Choice, admissible generic module and matrices from the Definition, an oriented knot $K$, and a braid word $\beta$ whose closure represents $K$.
+
+[F1] The library presentation has $K_L E K_L^{-1}=q_L^2E$, $K_L F K_L^{-1}=q_L^{-2}F$, and $EF-FE=(K_L-K_L^{-1})/(q_L-q_L^{-1})$ ([[def-drinfeld-jimbo-quantized-enveloping-algebra]]).
+
+[F2] The library coproduct is $\Delta(E)=E\otimes K_L^{-1}+1\otimes E$ and $\Delta(F)=F\otimes1+K_L\otimes F$ ([[thm-the-drinfeld-jimbo-formulas-define-a-hopf-algebra]]).
+
+[F3] A ribbon category has a braiding, chosen duals, and a twist satisfying the balancing and dual-compatibility identities ([[def-braiding]], [[def-left-dual-and-right-dual-object]], [[def-twist-and-ribbon-structure]]).
+
+[F4] For an absolutely simple color with scalar twist $\lambda I$, the generic framed trace corrected by $\lambda^{-w(\beta)}$ is invariant under oriented unframed Markov equivalence, under the stated Axiom of Choice ([[thm-twist-correction-removes-framing]]).
+
+[F5] The framed colored-link value is the ribbon-tangle evaluation in $\operatorname{End}_{\mathcal C}(\mathbf1)$, and a closed braid is evaluated by the pivotal trace of its braid action ([[def-colored-framed-knot-evaluation-from-ribbon-category]]).
+
+[F6] Absolute simplicity means $\operatorname{End}(V_N)=F I$ ([[def-absolutely-simple-object]]).
+
+[A1] The finite matrices designated admissible in the Definition satisfy the ribbon-category identities and their pivotal trace of the identity is the displayed $d_N$; the standard all-$N$ verification is a prerequisite for using this definition unconditionally ([[def-braiding]], [[def-left-dual-and-right-dual-object]], [[def-twist-and-ribbon-structure]]).
+
+[A2] The Axiom of Choice supplies a choice function for every family of nonempty sets ([[def-axiom-of-choice]]).
+
+[A3] Countable choice supplies a choice function for every sequence of nonempty sets ([[def-countable-choice]]).
+
+## Proof
+
+**Proof technique:** direct.
+
+**Given:** The hypotheses in the Definition and [A1].
+
+1.1 The diagonal weights give $K_L E K_L^{-1}v_j=q_L^2Ev_j$ and $K_L F K_L^{-1}v_j=q_L^{-2}Fv_j$. For the commutator, $EFv_j-FEv_j=([j+1][N-j-1]-[N-j][j])v_j=[N-1-2j]v_j$; the last equality follows by expanding the two quantum-number products over $q_K-q_K^{-1}$. Since $[r]_{q_K}=[r]_{q_L}$, this is $(K_L-K_L^{-1})(q_L-q_L^{-1})^{-1}v_j$. The generators therefore satisfy the defining $mathfrak{sl}_2$ relations. [F1, given, algebra]
+
+1.2 The eigenvalues $q_L^{N-1-2j}$ of $K_L$ are pairwise distinct in $F$. Any module endomorphism is therefore diagonal in the given basis; commuting with $E$, whose successive coefficients $[N-j]$ are nonzero in $F$, forces all diagonal entries to be equal. Thus $\operatorname{End}_{U_{q_L}(\mathfrak{sl}_2)}(V_N)=F I$ and the color is absolutely simple. [F1, given, algebra]
+
+2.1 The displayed sum for $d_N$ is a geometric sum, so $d_N=(-1)^{N-1}[N]$. Its numerator $A^{2N}-A^{-2N}$ is a nonzero Laurent polynomial and its denominator $A^2-A^{-2}$ is nonzero in $F$; hence the generic normalization is defined. Under [A1], $t_N(\beta)=\operatorname{Tr}(G_N^{\otimes n}\rho_N(\beta))$ is the framed colored-link value. [A1, F5, given, algebra]
+
+2.2 By [F4], [A1], and [A2], $\lambda_N^{-w(\beta)}t_N(\beta)$ is unchanged by every conjugation and Markov stabilization, since $V_N$ is absolutely simple and its specified twist scalar is nonzero. Countable choice [A3] supplies the evaluator's hypothesis. Dividing by the fixed nonzero $d_N$ preserves that equality, so the displayed generic value is independent of the braid representative. [A1, A2, A3, F4, F6, step 1.2, step 2.1, given]
+
+3.1 The unknot is represented by the one-strand identity braid, whose exponent sum is zero and whose pivotal trace is $\operatorname{Tr}(G_N)=d_N$. Hence $J_N^{\mathrm{gen}}(\bigcirc;q)=1$. For $N\ge2$, at $q_N=e^{2\pi i/N}$ choose $A_N=e^{\pi i/(2N)}$; then $A_N^4=q_N$ and $A_N^2-A_N^{-2}\ne0$, while $A_N^{2N}-A_N^{-2N}=e^{\pi i}-e^{-\pi i}=0$. Thus $d_N(q_N)=0$: the generic quotient cannot be evaluated there by dividing by $d_N$. [A1, F5, step 2.1, algebra] ∎
+
+## Remarks
+
+This carrier defines and checks the generic rational quotient under the explicit admissibility condition. The KT-36 plan additionally requires a complete proof that this quotient belongs to $\mathbb Z[q,q^{-1}]$ for every knot and color, followed by evaluation of that Laurent polynomial at $q_N$. The inspected Habiro announcement states the integrality formula but defers its proof; no local proof is supplied here. The all-$N$ universal-R and half-ribbon identities also remain a local prerequisite. These gaps are escalated and no root value is obtained by direct division.

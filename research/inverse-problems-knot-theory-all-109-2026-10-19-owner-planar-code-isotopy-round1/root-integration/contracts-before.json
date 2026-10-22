@@ -1,0 +1,1074 @@
+{
+  "version": 1,
+  "scope": [
+    "lem-connected-plane-multigraph-euler-formula",
+    "lem-planar-diagram-code-realizability-and-face-validation",
+    "thm-planar-code-validation-and-diagram-reconstruction-procedure-properties",
+    "thm-enumerate-diagrams-up-to-crossing-bound-procedure-properties",
+    "thm-valid-code-reconstructs-the-declared-link-diagram",
+    "ex-knot-kt-47-worked-cases",
+    "cex-knot-kt-47-boundary-case"
+  ],
+  "contracts": {
+    "lem-connected-plane-multigraph-euler-formula": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-plane-graph-face-and-boundary",
+          "source_section": "Definition",
+          "quote": "A **plane graph** is a finite simple graph ([[def-finite-simple-graph]]) together with distinct points of $\\mathbb R^2$ for its vertices and a polygonal arc ([[def-polygonal-arc-and-polygon]]) for each edge, joining its endpoints, such that an edge interior contains no vertex and two edge arcs meet only at a common endpoint. A finite simple graph is **planar** if it is isomorphic to the abstract graph underlying some plane graph.\n\nA **face** is a region of the complement of the drawing ([[def-plane-region-and-frontier]]). The **boundary subgraph** of a face consists of the vertices and whole edges lying in its frontier; this is a subgraph in the sense of [[def-subgraph-induced-subgraph-and-spanning-subgraph]].",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "thm-euler-formula-for-connected-plane-graphs",
+          "source_section": "Statement",
+          "quote": "If a connected plane graph has vertex, edge and face sets $V,E,F$ ([[def-plane-graph-face-and-boundary]]), then $$|V|-|E|+|F|=2.$$",
+          "uses": [
+            "2.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1.1",
+          "claim": "For each edge $e$ choose two distinct interior points at one-third and two-thirds of its polygonal parametrization, using the finitely many edge parametrizations in the code. Subdivide $e$ at those points into three edges and declare the two points new vertices. If $e$ is a loop at $v$, its replacement is the path $v-x_e-y_e-v$ with three distinct vertices along the loop; it has no loop edge. New vertices are unique to their original edge, so replacement edges from different original edges cannot be parallel, and the three edges replacing one original edge have different endpoint pairs. Thus the subdivided graph $G'$ is simple. Subdivision preserves connectedness and leaves the point-set drawing unchanged, so its faces are exactly those of $G$. With $E$ original edges, $V'=V+2E$ and $E'=3E$, hence $V'-E'=V-E$. If $E=0$, nonempty connectedness forces $V=1$, and the same construction leaves the one-vertex simple plane graph unchanged. By [F1], $G'$ is a connected plane graph in the library's simple-graph convention in either case.",
+          "step": "1.1",
+          "inputs": [
+            "given",
+            "F1",
+            "construct"
+          ]
+        },
+        {
+          "id": "step-2.1",
+          "claim": "Apply [F2] to $G'$. Since $F'=F$ and $V'-E'=V-E$ by step 1.1, the equality $V'-E'+F'=2$ gives $V-E+F=2$.",
+          "step": "2.1",
+          "inputs": [
+            "given",
+            "F2",
+            "step 1.1",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The statement explicitly requires a finite nonempty graph."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Step 1.1 treats E=0: nonempty connectedness forces V=1, and the one-vertex graph remains simple."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Step 1.1 applies subdivision to each edge, including a single-edge graph."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Step 1.1 explicitly removes loops and parallel edges with fresh subdivision vertices."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "The theorem concerns a closed graph drawing and has no free-endpoint condition."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Step 1.1 uses fixed one-third and two-thirds parameter values on each finite edge."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "This item proves Euler counting, not an iff criterion."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "This item proves Euler counting, not an iff criterion."
+        }
+      ],
+      "finite_checks": [
+        {
+          "check": "1.1: For each edge $e$ choose two distinct interior points at one-third and two-thirds of its polygonal parametrization, using the finitely many edge parametrization",
+          "evidence": "Step 1.1."
+        },
+        {
+          "check": "2.1: Apply [F2] to $G'$. Since $F'=F$ and $V'-E'=V-E$ by step 1.1, the equality $V'-E'+F'=2$ gives $V-E+F=2$.",
+          "evidence": "Step 2.1."
+        }
+      ]
+    },
+    "lem-planar-diagram-code-realizability-and-face-validation": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-planar-diagram-gauss-and-dowker-codes",
+          "source_section": "Definition",
+          "quote": "Let $P$ be the projection plane in an oriented $3$-sphere and let $n$ be the\nunit viewing normal pointing toward the viewer. Orient $P$ so that $(u,v)$ is\na positive basis exactly when $(n,u,v)$ is a positive ambient basis. A\n**crossing code** has a\nfinite set $C$ of crossing labels and a finite set $D$ of **darts**, where a\ndart is one directed half-edge incident to a crossing. A fixed-point-free\ninvolution $\\alpha:D\\to D$ pairs the two ends of each edge: $\\alpha^2=\\mathrm{id}$\nand $\\alpha(d)\\ne d$. A vertex map $v:D\\to C$ records the crossing incident to\neach dart. A **rotation system** is the permutation $\\sigma$ whose cycles give\nthe clockwise order of darts at each crossing. Each crossing has four darts;\nthe two over-strand darts and the two under-strand darts are opposite in that\ncyclic order. An arrow on each dart records whether its edge is directed into\nor out of its incident crossing. The pairing $\\alpha$ must join one incoming\nend to one outgoing end. At a crossing, each opposite pair has one incoming\nand one outgoing dart, so following an edge and then the opposite dart defines\nthe oriented link components. A code is **connected** when the graph with\nvertices $C$ and edges the $\\alpha$-pairs is connected.",
+          "uses": [
+            "1.1",
+            "2.2",
+            "3.1",
+            "3.2",
+            "4.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "lem-connected-plane-multigraph-euler-formula",
+          "source_section": "Statement",
+          "quote": "If $V,E,F$ are the numbers of vertices, edges, and faces, respectively, then $$V-E+F=2.$$",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "def-regular-oriented-link-diagram",
+          "source_section": "Definition",
+          "quote": "Let $\\pi\\colon\\mathbb R^3\\to\\mathbb R^2$ be the orthogonal projection forgetting\nthe last coordinate, $\\pi(x_1,x_2,x_3):=(x_1,x_2)$, and let $L\\colon C\\to S^3$ be\nan oriented link contained in $\\mathbb R^3\\subset S^3$\n([[def-oriented-link-in-s-three-and-ambient-isotopy]], so $C$ is a finite\ndisjoint union of oriented circles and $L$ is a smooth embedding).\n\nThe projection $\\pi\\circ L$ is **regular** when:\n\n1. it is an immersion, that is, the projected derivative never vanishes\n   ([[def-immersion-submersion-and-constant-rank-map]]);\n2. its only multiple points are finitely many **double points**, and at every\n   double point the two branches meet transversely: the two projected tangent\n   lines are distinct ([[def-transverse-smooth-maps]]);\n3. there are no triple or higher multiple points: no point of the plane is the\n   image of three or more distinct source points.",
+          "uses": [
+            "3.2"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "lem-finite-polygonal-disk-and-collar-surgery",
+          "source_section": "Statement",
+          "quote": "All arcs and graphs in this lemma are finite and polygonal: their edges have disjoint interiors except at specified shared endpoints. A simple polygon separates the plane into one bounded and one unbounded component; the closure of the bounded component is a disk. A prescribed piecewise-linear homeomorphism between the boundaries of two such disks extends to a piecewise-linear homeomorphism of the disks, with piecewise-linear inverse after finite subdivisions.\n\nA finite embedded arc has a disk neighbourhood made from vertex disks and edge strips. A finite connected plane graph has a compact disk-and-band neighbourhood; filling its bounded complementary boundary circles produces a closed disk. Subdividing an edge does not change these conclusions. Loops use two distinct attachment germs. No ambient-plane extension is asserted.",
+          "uses": [
+            "3.1"
+          ],
+          "proof_excerpt": {
+            "section": "Proof",
+            "step": "6.1",
+            "quote": "6.1 Transfer this recursive diagonal splitting to a strictly convex polygon with the same cyclically ordered corners. At each split the two corresponding corner intervals define convex subpolygons on opposite sides of the same diagonal, so the recursive incidence pattern is identical. Affine maps on corresponding nondegenerate triangles agree on shared edges and are mutually inverse on corresponding cells. They therefore give a bijection with a piecewise-affine inverse. Both maps are continuous: near any point only finitely many closed triangles meet, and continuity on those triangles gives one neighbourhood working for all incident pieces; nonincident compact triangles have positive distance from the point. Thus the closed polygonal region is PL homeomorphic to a convex polygon, hence a disk."
+          }
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1.1",
+          "claim": "**Necessity.** In a spherical realization, remove a point in one face and stereographically project the rest of the sphere to the plane. This gives a connected polygonal plane multigraph with the same crossing vertices, edge pairs, and faces. Tracing a face with its boundary on the same side applies the clockwise successor $\\sigma$ and then the edge reversal $\\alpha$; hence its face cycles are exactly those of $\\phi$, so its face count is $F$. Applying [F2] gives $V-E+F=2$.",
+          "step": "1.1",
+          "inputs": [
+            "given",
+            "F1",
+            "F2"
+          ]
+        },
+        {
+          "id": "step-2.1",
+          "claim": "**A spanning-tree realization.** Assume $V-E+F=2$. Scan the finite edge list, retaining an edge exactly when it joins two distinct current components. Connectedness makes the retained edges a spanning tree $T$: each retained edge reduces the component count by one and cannot create a cycle, and the scan ends with one component. Root $T$ at the least crossing label. Embed that root in a small polygonal disk on the sphere. Visit the other vertices by increasing tree distance from the root, breaking ties by crossing label. For each new vertex, add its tree edge to its already embedded parent, placing the new dart in the prescribed clockwise gap among the parent darts already placed and choosing the new vertex disk in that face. The new vertex has no previously placed tree darts, so its remaining cyclic order can be completed without constraint. Each addition is a leaf edge and creates no crossing. The resulting connected polygonal tree has one face by [F2], because it has $V$ vertices and $V-1$ edges.",
+          "step": "2.1",
+          "inputs": [
+            "given",
+            "F2",
+            "construct"
+          ]
+        },
+        {
+          "id": "step-2.2",
+          "claim": "**Face-cycle change.** There are $r=E-(V-1)$ edges outside $T$. Add them in a fixed finite order by attaching an untwisted rectangular band at the two prescribed dart intervals of the vertex disks. The boundary components of the disk-and-band neighborhood are exactly the cycles of the current face permutation. If a band attaches to one boundary component, it cuts that component into two; if it attaches to two different components, it joins them. This follows by following the two long sides of the rectangle after the two end intervals are glued. Therefore each edge addition changes the face-cycle count by $+1$ or $-1$. The initial count is one and the final count is $F=E-V+2=r+1$, so the sum of the $r$ changes is $r$. Each change is at most $+1$, hence every change is $+1$ and the two attachment intervals lie on one current face.",
+          "step": "2.2",
+          "inputs": [
+            "F1",
+            "given",
+            "step 2.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-3.1",
+          "claim": "**Place the remaining edges.** Maintain the invariant that each complementary cap of the regular neighbourhood is a polygonal disk with a piecewise-linear parametrization by a convex polygon, preserving its boundary port order; [F4] supplies these disk parametrizations. For the next edge, step 2.2 places both attachment intervals on one current cap. In its convex polygon model choose distinct points $p,q$ in the two intervals and an interior point $r$ not on the line through $p,q$. Convexity puts the two segments $[p,r]$ and $[r,q]$ inside the polygon except at their boundary endpoints; because $r$ is off the line $pq$, their union is a simple polygonal crosscut. It cuts the convex polygon into the two regions bounded by this crosscut and the two respective boundary arcs. Each boundary is a simple polygon, so [F4] makes each closure a polygonal disk. Pull the crosscut and the two subdisks back through the stored parametrization; the two sides of the inserted edge band follow the two boundary copies of the crosscut, so the resulting face cycles are exactly the two cycles from step 2.2. Restricting the old parametrization to the two polygonal regions supplies the next face-cap parametrizations. Thus the invariant and prescribed rotations persist at each finite insertion, producing the required spherical embedding.",
+          "step": "3.1",
+          "inputs": [
+            "F1",
+            "F4",
+            "step 2.2",
+            "construct"
+          ]
+        },
+        {
+          "id": "step-3.2",
+          "claim": "**Decorate and lift.** Replace each crossing disk by the standard transverse crossing with the given opposite over/under pairs. The arrow and sign-consistent cyclic-order conditions make the oriented strands and crossing signs agree with the code. Joining the paired edge bands gives closed oriented components because every paired edge has one incoming and one outgoing end and each crossing continues along its opposite strand pair. The result has only the declared finite transverse double points and no triple points, so it is a regular oriented link diagram by [F3]. Lift the over-strand above the under-strand in each of the finitely many disjoint crossing disks, and interpolate heights along the edge bands. Distinct projected branches meet only inside those disks, where the strict height inequality separates them, so the lifted components form an embedded link in $S^3$.",
+          "step": "3.2",
+          "inputs": [
+            "F1",
+            "F3",
+            "step 3.1",
+            "construct"
+          ]
+        },
+        {
+          "id": "step-4.1",
+          "claim": "**Plane model and empty boundary case.** Choose a point in the distinguished face and remove it before stereographic projection; that face is then the unbounded face and all other cyclic data remain fixed. If the crossing set is empty, the admitted one-component code is realized by a round circle oriented according to its `cw` or `ccw` marker, with `outside` as its plane face selector and no dart permutation or Euler test.",
+          "step": "4.1",
+          "inputs": [
+            "given",
+            "F1",
+            "step 3.2",
+            "construct"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "Step 4.1 treats the crossingless one-component code separately."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Step 4.1 realizes the c=0 code by a round circle without face-permutation tests."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Steps 2.1–3.1 apply to a connected graph with one crossing vertex as well."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Steps 2.2–3.1 retain loops and parallel edges through edge bands and disk-face splits."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "The input is a closed link code with no free endpoints."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Step 2.1 chooses a least crossing root and finite edge order, so the construction is choice-free."
+        },
+        {
+          "case": "iff-forward",
+          "status": "checked",
+          "evidence": "Step 1.1 proves necessity of the Euler equality."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "checked",
+          "evidence": "Steps 2.1–3.2 construct a spherical realization from the Euler equality."
+        }
+      ],
+      "finite_checks": [
+        {
+          "check": "1.1: **Necessity.** In a spherical realization, remove a point in one face and stereographically project the rest of the sphere to the plane. This gives a connected ",
+          "evidence": "Step 1.1."
+        },
+        {
+          "check": "2.1: **A spanning-tree realization.** Assume $V-E+F=2$. Scan the finite edge list, retaining an edge exactly when it joins two distinct current components. Connected",
+          "evidence": "Step 2.1."
+        },
+        {
+          "check": "2.2: **Face-cycle change.** There are $r=E-(V-1)$ edges outside $T$. Add them in a fixed finite order by attaching an untwisted rectangular band at the two prescribe",
+          "evidence": "Step 2.2."
+        },
+        {
+          "check": "3.1: **Place the remaining edges.** Maintain the invariant that each complementary cap of the regular neighbourhood is a polygonal disk with a piecewise-linear param",
+          "evidence": "Step 3.1."
+        },
+        {
+          "check": "3.2: **Decorate and lift.** Replace each crossing disk by the standard transverse crossing with the given opposite over/under pairs. The arrow and sign-consistent cy",
+          "evidence": "Step 3.2."
+        },
+        {
+          "check": "4.1: **Plane model and empty boundary case.** Choose a point in the distinguished face and remove it before stereographic projection; that face is then the unbounded",
+          "evidence": "Step 4.1."
+        }
+      ]
+    },
+    "thm-planar-code-validation-and-diagram-reconstruction-procedure-properties": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-planar-diagram-gauss-and-dowker-codes",
+          "source_section": "Definition",
+          "quote": "Each crossing label must occur exactly twice in total, once positively and once negatively.",
+          "uses": [
+            "2.2"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "alg-planar-code-validation-and-diagram-reconstruction",
+          "source_section": "Definition",
+          "quote": "8. Compute $\\phi=\\alpha\\circ\\sigma$ on all darts by finite table lookup and list its cycles. Put $V=c$, $E=|D|/2$, and $F=$ the number of cycles.",
+          "uses": [
+            "1.1",
+            "2.1",
+            "2.2",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "lem-planar-diagram-code-realizability-and-face-validation",
+          "source_section": "Statement",
+          "quote": "then such a realization exists if and only if $V-E+F=2$",
+          "uses": [
+            "2.2",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "def-planar-diagram-gauss-and-dowker-codes",
+          "source_section": "Definition",
+          "quote": "For a nonempty connected crossing graph, let $V=|C|$, $E=|D|/2$, and let\n$F$ be the number of cycles of the face permutation $\\phi=\\alpha\\circ\\sigma$.\nA **spherical code** is a code satisfying $V-E+F=2$. A spherical code becomes a\n**plane code** by distinguishing one face as the outer face and deleting a\npoint in that face from the sphere. The crossingless one-component code is a separate case: its Gauss data are one empty component word, its DT pairing and crossing-sign vector are empty at $c=0$, and its PD data are the single loop `Loop[1]`; every format also carries an orientation marker, `ccw` or `cw`, for the unit circle $S^1=\\{(x,y)\\in\\mathbb R^2:x^2+y^2=1\\}$ in the oriented plane, and the outer-face marker is `outside`. Thus the crossingless code records which direction orients its circle. It has no crossing graph or face-permutation test. Disconnected crossing graphs and disconnected crossingless links are outside this code class.",
+          "uses": [
+            "3.1"
+          ]
+        }
+      ],
+      "derivations": [],
+      "routine_steps": [
+        {
+          "id": "step-1.1",
+          "claim": "The input records are finite. Each label count, vector check, incidence count, and crossing check scans a finite list. Each component traversal marks at least one previously unvisited outgoing dart until it closes or reports a repeated/missing dart; since there are finitely many darts, it makes at most $|D|+1$ such visits. The crossing-connectivity scan uses the finite vertex and edge lists, and the face computation iterates a permutation of finite $D$, so it lists at most $|D|$ face cycles. The spanning-tree selection and disk/band construction use finite edge lists. If $c=0$, the separate branch ends after a finite comparison with its six allowed format-and-orientation combinations. Thus every input reaches a return after finitely many operations.",
+          "step": "1.1",
+          "inputs": [
+            "given",
+            "F2",
+            "construct"
+          ]
+        },
+        {
+          "id": "step-2.1",
+          "claim": "Every `Invalid` return is made immediately after its named predicate fails, and the procedure reaches predicates in the displayed order. Hence the returned reason and witness identify the first failed check. Conversely, if a finite input fails one of the stated checks, the finite scan reaches the first such failure and returns the corresponding invalid record before any later check.",
+          "step": "2.1",
+          "inputs": [
+            "given",
+            "F2",
+            "step 1.1"
+          ]
+        },
+        {
+          "id": "step-2.2",
+          "claim": "Suppose a nonempty input passes the code-format, incidence, valence, strand, over/under, crossing-sign, component, and connectedness checks. Its finite tables then define the fixed-point-free edge involution $\\alpha$, the clockwise crossing rotation $\\sigma$, and the face permutation $\\phi=\\alpha\\circ\\sigma$. The procedure's face scan lists exactly the cycles of this permutation by finite orbit tracing. It accepts the face stage precisely when their count satisfies $V-E+F=2$ and the supplied outer-face identifier names one of those cycles. By [F3], these conditions are necessary and sufficient for the spherical model, and deleting a point in the selected face gives the plane diagram returned in the output record.",
+          "step": "2.2",
+          "inputs": [
+            "given",
+            "F1",
+            "F2",
+            "F3",
+            "step 1.1"
+          ]
+        },
+        {
+          "id": "step-3.1",
+          "claim": "In the crossingless branch, the accepted forms are exactly the six format-and-orientation combinations in [F4], representing its two normalized one-component codes. The local realization in [F3] realizes each marked orientation by a circle with two sphere faces; every other zero-crossing input is rejected by the preceding format comparison. The nonempty and crossingless branches exhaust the possible nonnegative values of $c$, so the procedure terminates and has exactly the stated rejection and acceptance behavior.",
+          "step": "3.1",
+          "inputs": [
+            "given",
+            "F2",
+            "F3",
+            "F4",
+            "step 2.1",
+            "step 2.2"
+          ]
+        }
+      ],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "Step 3.1 checks all zero-crossing encodings in the separate branch."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Step 3.1 verifies the crossingless code output and rejects other c=0 forms."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Step 1.1 gives a finite visit bound for the one-crossing input as a finite special case."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Step 2.2 uses the multigraph criterion, including loops and parallel edges."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "The procedure accepts closed cyclic link codes, not free-endpoint encodings."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Step 1.1 bounds every traversal and construction by finite input lists."
+        },
+        {
+          "case": "iff-forward",
+          "status": "checked",
+          "evidence": "Step 2.2 uses the necessary direction of the face criterion."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "checked",
+          "evidence": "Step 2.2 uses the sufficient direction of the face criterion."
+        }
+      ],
+      "finite_checks": [
+        {
+          "check": "1.1: The input records are finite. Each label count, vector check, incidence count, and crossing check scans a finite list. Each component traversal marks at least o",
+          "evidence": "Step 1.1."
+        },
+        {
+          "check": "2.1: Every `Invalid` return is made immediately after its named predicate fails, and the procedure reaches predicates in the displayed order. Hence the returned reas",
+          "evidence": "Step 2.1."
+        },
+        {
+          "check": "2.2: Suppose a nonempty input passes the code-format, incidence, valence, strand, over/under, crossing-sign, component, and connectedness checks. Its finite tables t",
+          "evidence": "Step 2.2."
+        },
+        {
+          "check": "3.1: In the crossingless branch, the accepted forms are exactly the six format-and-orientation combinations in [F4], representing its two normalized one-component co",
+          "evidence": "Step 3.1."
+        }
+      ]
+    },
+    "thm-enumerate-diagrams-up-to-crossing-bound-procedure-properties": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-planar-diagram-gauss-and-dowker-codes",
+          "source_section": "Definition",
+          "quote": "A **normalized planar-diagram code** with $c>0$ has crossing labels $C=\\{1,\\ldots,c\\}$ and four dart positions $0,1,2,3$ at each crossing, in clockwise order beginning with the outgoing over-dart.",
+          "uses": [
+            "1.1",
+            "2.1",
+            "2.2"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "alg-enumerate-diagrams-up-to-crossing-bound",
+          "source_section": "Definition",
+          "quote": "Enumerate every crossing-sign vector in lexicographic order, with $-1<+1$. The sign determines the incoming and outgoing positions at each crossing by the normalized-code convention.",
+          "uses": [
+            "1.1",
+            "2.1",
+            "2.2"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "thm-planar-code-validation-and-diagram-reconstruction-procedure-properties",
+          "source_section": "Statement",
+          "quote": "For every finite input in the three code formats, the validation and reconstruction procedure terminates.",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "def-planar-diagram-gauss-and-dowker-codes",
+          "source_section": "Definition",
+          "quote": "For a nonempty connected crossing graph, let $V=|C|$, $E=|D|/2$, and let\n$F$ be the number of cycles of the face permutation $\\phi=\\alpha\\circ\\sigma$.\nA **spherical code** is a code satisfying $V-E+F=2$. A spherical code becomes a\n**plane code** by distinguishing one face as the outer face and deleting a\npoint in that face from the sphere. The crossingless one-component code is a separate case: its Gauss data are one empty component word, its DT pairing and crossing-sign vector are empty at $c=0$, and its PD data are the single loop `Loop[1]`; every format also carries an orientation marker, `ccw` or `cw`, for the unit circle $S^1=\\{(x,y)\\in\\mathbb R^2:x^2+y^2=1\\}$ in the oriented plane, and the outer-face marker is `outside`. Thus the crossingless code records which direction orients its circle. It has no crossing graph or face-permutation test. Disconnected crossing graphs and disconnected crossingless links are outside this code class.",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        }
+      ],
+      "derivations": [],
+      "routine_steps": [
+        {
+          "id": "step-1.1",
+          "claim": "Fix $c\\ge1$. There are $2^c$ crossing-sign vectors. Each vector has exactly $2c$ outgoing and $2c$ incoming darts by [F1], so it has $(2c)!$ bijections between them. Every resulting edge involution has $4c$ darts, hence at most $4c$ face cycles because its cycles are nonempty and disjoint. The number of candidate records considered at this $c$ is therefore at most $2^c(2c)!(4c)$. At $c=0$ the two orientation markers in [F4] give exactly two crossingless codes. Summing these finite bounds over $0\\le c\\le N$ proves that all loops and validator calls are finite; each validator call terminates by [F3].",
+          "step": "1.1",
+          "inputs": [
+            "given",
+            "F1",
+            "F2",
+            "F3",
+            "F4",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2.1",
+          "claim": "Every appended record is produced from a normalized code in the finite loops. It is appended only when the validator returns `Valid` and its component tracing has exactly one cycle. By [F3] this code is connected, has the required face count and outer face, and reconstructs the corresponding decorated diagram. Conversely, consider any normalized connected one-component code with $c\\le N$. Its signs occur in the enumerated sign-vector list. Its edge involution pairs each outgoing dart with one incoming dart, so it is one of the enumerated bijections; its selected outer face is one of the enumerated face cycles. Canonical edge labels in [F1] then give exactly that normalized code. The validator returns `Valid` by [F3], and its one component passes the final filter, so the candidate is appended. At $c=0$, each of the two orientation markers in [F4] is among the initial candidates.",
+          "step": "2.1",
+          "inputs": [
+            "given",
+            "F1",
+            "F2",
+            "F3",
+            "F4",
+            "step 1.1"
+          ]
+        },
+        {
+          "id": "step-2.2",
+          "claim": "The procedure's only equivalence-related operation is the fixed label normalization in [F1]. It performs no test between two returned diagrams and removes no candidates on the basis of planar isotopy or ambient isotopy in $S^3$. Thus the exact output is the finite list of reconstructed code candidates, with possible repeated knot types, not a classification of knot types.",
+          "step": "2.2",
+          "inputs": [
+            "given",
+            "F1",
+            "F2",
+            "step 2.1"
+          ]
+        }
+      ],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The procedure returns a crossingless candidate rather than an empty output."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Step 1.1 includes both normalized c=0 orientation-marker codes."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Step 1.1 bounds c=1 by finite sign, pairing, and face sets."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Step 2.1 enumerates all normalized pairings and leaves validity to the validator."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "The normalized codes describe closed knots and have no free endpoints."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Step 1.1 enumerates finite sets in fixed orders."
+        },
+        {
+          "case": "iff-forward",
+          "status": "checked",
+          "evidence": "Step 2.1 proves every returned candidate comes from an accepted code."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "checked",
+          "evidence": "Step 2.1 proves every accepted normalized code within the bound appears."
+        }
+      ],
+      "finite_checks": [
+        {
+          "check": "1.1: Fix $c\\ge1$. There are $2^c$ crossing-sign vectors. Each vector has exactly $2c$ outgoing and $2c$ incoming darts by [F1], so it has $(2c)!$ bijections between ",
+          "evidence": "Step 1.1."
+        },
+        {
+          "check": "2.1: Every appended record is produced from a normalized code in the finite loops. It is appended only when the validator returns `Valid` and its component tracing h",
+          "evidence": "Step 2.1."
+        },
+        {
+          "check": "2.2: The procedure's only equivalence-related operation is the fixed label normalization in [F1]. It performs no test between two returned diagrams and removes no ca",
+          "evidence": "Step 2.2."
+        }
+      ]
+    },
+    "thm-valid-code-reconstructs-the-declared-link-diagram": {
+      "citations": [
+        {
+          "fact": "A1",
+          "source": "def-countable-choice",
+          "source_section": "Definition",
+          "quote": "Equivalently, in the vocabulary of [[def-choice-function]]: every at most countable family of nonempty sets ([[def-countable]]) has a choice function.",
+          "uses": [
+            "3.2"
+          ]
+        },
+        {
+          "fact": "F1",
+          "source": "def-planar-diagram-gauss-and-dowker-codes",
+          "source_section": "Definition",
+          "quote": "For a nonempty connected crossing graph, let $V=|C|$, $E=|D|/2$, and let\n$F$ be the number of cycles of the face permutation $\\phi=\\alpha\\circ\\sigma$.\nA **spherical code** is a code satisfying $V-E+F=2$. A spherical code becomes a\n**plane code** by distinguishing one face as the outer face and deleting a\npoint in that face from the sphere. The crossingless one-component code is a separate case: its Gauss data are one empty component word, its DT pairing and crossing-sign vector are empty at $c=0$, and its PD data are the single loop `Loop[1]`; every format also carries an orientation marker, `ccw` or `cw`, for the unit circle $S^1=\\{(x,y)\\in\\mathbb R^2:x^2+y^2=1\\}$ in the oriented plane, and the outer-face marker is `outside`. Thus the crossingless code records which direction orients its circle. It has no crossing graph or face-permutation test. Disconnected crossing graphs and disconnected crossingless links are outside this code class.\n\nA **normalized planar-diagram code** with $c>0$ has crossing labels\n$C=\\{1,\\ldots,c\\}$ and four dart positions $0,1,2,3$ at each crossing, in\nclockwise order beginning with the outgoing over-dart. The opposite pair\n$(0,2)$ is over and $(1,3)$ is under. For sign $+1$, the clockwise record is\n$(O_{\\rm out},U_{\\rm in},O_{\\rm in},U_{\\rm out})$; for sign $-1$ it is\n$(O_{\\rm out},U_{\\rm out},O_{\\rm in},U_{\\rm in})$. Edge labels are assigned\nby scanning crossings in increasing order and their four dart positions in\norder, giving the next positive integer to the pair containing the first\nnot-yet-labelled dart. The outer face is recorded by its least dart in its\nface cycle. These rules remove arbitrary edge-name and face-name choices;\ndifferent crossing labelings may still represent the same diagram. At $c=0$\na normalized code is the crossingless record with one of the two orientation\nmarkers above.",
+          "uses": [
+            "1.1",
+            "2.1",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "lem-planar-diagram-code-realizability-and-face-validation",
+          "source_section": "Statement",
+          "quote": "For a code with a nonempty connected crossing graph, let $C$ be its finite\ncrossing set, $D$ its darts, $\\alpha$ its fixed-point-free edge-pairing\ninvolution, $\\sigma$ its clockwise crossing rotation, and\n$\\phi=\\alpha\\circ\\sigma$ its face permutation. A **spherical realization**\nmeans a polygonal embedding on the oriented sphere whose vertex rotations and\nedge pairings are exactly $\\sigma$ and $\\alpha$; its faces are the cycles of\n$\\phi$. If every crossing has four darts with the prescribed opposite\nover/under pairs, arrows, and sign-consistent cyclic order, then such a\nrealization exists if and only if $V-E+F=2$, where $V=|C|$, $E=|D|/2$, and\n$F$ is the number of cycles of $\\phi$. Choosing one face as the outer face\nand deleting a point in it gives the corresponding plane realization. The\ncrossingless one-component code is the single circle and is handled\nseparately.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "thm-planar-code-validation-and-diagram-reconstruction-procedure-properties",
+          "source_section": "Statement",
+          "quote": "For every finite input in the three code formats, the validation and\nreconstruction procedure terminates. It returns an invalid-code reason\nexactly when the first failed syntax, incidence, orientation, component,\nconnectedness, face-count, or outer-face condition in its stated order occurs;\notherwise it returns the crossing-disk/edge-band model of the represented\noriented diagram, its oriented components, its face cycles, and its selected\nouter face.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "thm-enumerate-diagrams-up-to-crossing-bound-procedure-properties",
+          "source_section": "Statement",
+          "quote": "For every nonnegative integer $N$, the bounded enumeration procedure\nterminates and returns exactly the reconstructed candidates represented by\nnormalized connected one-component planar-diagram codes with at most $N$\ncrossings. Each returned candidate has a valid spherical face structure and a\nselected outer face. The procedure does not identify candidates that represent\nthe same knot type.",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "def-planar-isotopy-of-link-diagrams",
+          "source_section": "Definition",
+          "quote": "Let $D,D'$ be regular oriented link diagrams\n([[def-regular-oriented-link-diagram]]), regarded as decorated immersed oriented\n$4$-valent planar graphs. Then $D$ and $D'$ are **planar isotopic** when there\nis an orientation-preserving ambient isotopy\n$\\Phi\\colon\\mathbb R^2\\times I\\to\\mathbb R^2$, with $\\Phi_0=\\mathrm{id}$ and\neach $\\Phi_t$ an orientation-preserving diffeomorphism\n([[def-diffeomorphism-and-local-diffeomorphism-of-manifolds]]), such that\n$\\Phi_1$ carries the decorated graph of $D$ to that of $D'$: it maps the image\ncurve of $D$ bijectively onto that of $D'$, carries the over/under datum of\nevery double point to the over/under datum of the corresponding double point,\nand preserves the strand orientations. A **planar isotopy of diagrams** is a\nfamily $D_t=\\Phi_t(D_0)$ for such a jointly smooth ambient isotopy $\\Phi$,\nwith the decorations transported by $\\Phi_t$. The source curves are immersed,\nnot embedded in the plane at their crossings.\n\nPlanar isotopies are admitted as moves in the Reidemeister theorem: they carry\na regular projection between the exceptional times of a general-position\nisotopy of the link, and no crossing of the diagram is created or destroyed\nalong them. They are listed separately from the three local moves\n([[def-oriented-reidemeister-moves]]), of which R1 and R2 create or destroy crossings, while R3 rearranges three\nexisting crossings and preserves their number.\nComposing planar isotopies and composing them with the local moves gives the\nequivalence relation generated by the moves, and every single move below is\nunderstood up to planar isotopy outside its small disk.",
+          "uses": [
+            "3.1",
+            "3.2"
+          ]
+        },
+        {
+          "fact": "L1",
+          "source": "lem-a-smooth-finite-disk-arc-system-isotopy-extends-relative-boundary-and-marked-points",
+          "source_section": "Statement",
+          "quote": "Assume the countable axiom of choice $\\mathrm{AC}_\\omega$. Let\n$D^2=\\overline B_2(0,1)\\subseteq\\mathbb R^2$ be the closed unit disc and let\n$F:[0,1]\\times[0,1]\\to D^2$, $(u,s)\\mapsto F(u,s)$, be a smooth map such that:\n\n1. for every $s\\in[0,1]$ the map $u\\mapsto F(u,s)$ is a smooth embedding of the\n   compact interval $[0,1]$; the endpoints $p_0:=F(0,0)$ and $p_1:=F(1,0)$ lie\n   on $\\partial D^2$ and are fixed, that is $F(0,s)=p_0$ and $F(1,s)=p_1$ for\n   every $s\\in[0,1]$; and the interior of the arc stays inside the disc,\n   $F\\bigl((0,1)\\times[0,1]\\bigr)\\subseteq\\operatorname{int}D^2$;\n2. the isotopy is stationary on collars of its endpoints: there is\n   $\\delta\\in(0,\\tfrac12)$ with $F(u,s)=F(u,0)$ for all\n   $u\\in[0,\\delta]\\cup[1-\\delta,1]$ and all $s\\in[0,1]$;\n3. there are a finite set $P\\subseteq\\operatorname{int}D^2$ and a closed set\n   $C\\subseteq D^2$ whose union is avoided by the moving part,\n   $F\\bigl([\\delta,1-\\delta]\\times[0,1]\\bigr)\\cap(P\\cup C)=\\varnothing$.\n\nThen there is a smooth map $\\Phi:D^2\\times[0,1]\\to D^2$, with\n$\\Phi_s:=\\Phi(-,s)$, such that $\\Phi_0=\\operatorname{id}_{D^2}$, every\n$\\Phi_s$ is a homeomorphism of $D^2$ fixing $\\partial D^2$, $P$ and $C$\npointwise, and\n\n$$\\Phi_s\\bigl(F(u,0)\\bigr)=F(u,s)\\qquad\\text{for all }(u,s)\\in[0,1]\\times[0,1].$$\n\nMoreover, if $F^{(1)},\\dots,F^{(m)}$ are finitely many such data in succession,\nwhere the moving part of the $k$-th datum avoids $P$ and the images of all arcs\nproduced by the earlier stages, then the composite of the corresponding ambient\nisotopies realizes the finite sequence and still fixes $P$ pointwise.",
+          "uses": [
+            "3.2"
+          ]
+        },
+        {
+          "fact": "F6",
+          "source": "lem-a-sphere-homeomorphism-extends-over-the-disk-by-the-alexander-trick",
+          "source_section": "Statement",
+          "quote": "Then $f$ extends to a homeomorphism $F:D^d\\to D^d$ of the closed unit disk",
+          "uses": [
+            "3.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1.1",
+          "claim": "By validity, the code passes every finite check in [F3]. If $c=0$, [F1] gives the one-component crossingless code and its `cw` or `ccw` orientation; [F2] realizes that oriented code as the standard circle with the `outside` face selector. If $c>0$, its one component satisfies the knot-code condition, and the face-count hypothesis in [F2] yields a spherical crossing graph with the prescribed rotations and edge pairings; deleting a point in the selected face gives its plane model. In this nonempty case, replacing each crossing disk by the prescribed transverse crossing and lifting the over-strand gives the decorated regular diagram returned by the procedure.",
+          "step": "1.1",
+          "inputs": [
+            "given",
+            "F1",
+            "F2",
+            "F3"
+          ]
+        },
+        {
+          "id": "step-2.1",
+          "claim": "Relabel the finite crossing set in increasing order and assign edge labels by the canonical scan in [F1]. The selected face is represented by the least dart of its face cycle. These are exactly the normalization rules used by the bounded enumerator. The resulting code has $c$ crossings, so it occurs in the enumerator's finite loops at bound $c$; [F4] then guarantees that its reconstruction is returned.",
+          "step": "2.1",
+          "inputs": [
+            "given",
+            "F1",
+            "F4",
+            "step 1.1"
+          ]
+        },
+        {
+          "id": "step-3.1",
+          "claim": "Suppose $c>0$. The rotation-system data determine the cyclic order at every vertex and the paired edge ends. For two sphere embeddings with those same data, choose matching small vertex disks and edge bands; the cyclic orders and edge pairings give compatible orientation-preserving maps on these pieces, and the maps agree on their glued intervals. Thus they give a homeomorphism of regular neighborhoods carrying the embedded graph and its decorations to the corresponding graph. The boundary components of these neighborhoods correspond to the same cycles of $\\alpha\\circ\\sigma$. Each bounded complementary component of a connected graph neighborhood is a disk; the induced boundary map extends over that disk by [F6]. Choose a sufficiently large circle in the common selected outer face of the two plane drawings. The part of each outer face between its neighborhood boundary and this circle is an annulus. Identify each annulus with $S^1\\times[0,1]$, with the neighborhood boundary at $t=0$ and the common circle at $t=1$. The induced inner boundary map is orientation-preserving, so it has an increasing lift $g:\\mathbb R\\to\\mathbb R$ with $g(x+1)=g(x)+1$. The maps $g_t(x)=(1-t)g(x)+tx$ are increasing lifts of circle homeomorphisms from the inner map to the identity; $(e^{2\\pi ix},t)\\mapsto(e^{2\\pi ig_t(x)},t)$ extends the boundary map across the annulus while fixing the common circle. Extending by the identity outside that circle gives an orientation-preserving plane homeomorphism carrying one decorated embedding to the other and preserving the selected outer face.",
+          "step": "3.1",
+          "inputs": [
+            "F1",
+            "F5",
+            "F6",
+            "construct"
+          ]
+        },
+        {
+          "id": "step-3.2",
+          "claim": "For $c>0$, step 3.1 establishes equivalence only by an ambient homeomorphism. The required conclusion [F5] is a **smooth ambient isotopy**, which requires a smooth path of embeddings (or a smooth disk-arc isotopy) before [L1] can extend it. The rotation-system construction does not supply that path, and the inspected current suppliers do not prove it for connected four-valent graphs with loops, parallel edges, and cut vertices. When $c=0$, the crossingless-circle case is outside the rotation-system argument and its smooth uniqueness is also unproved here. These uniqueness clauses remain escalated; no planar-isotopy conclusion is claimed.",
+          "step": "3.2",
+          "inputs": [
+            "A1",
+            "F5",
+            "L1",
+            "step 3.1"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "Step 1.1 separates c=0 from the nonempty graph case."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Steps 1.1 and 2.1 reconstruct and enumerate c=0; smooth uniqueness remains escalated."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Step 3.1 proves homeomorphism equivalence for c>0; smooth isotopy remains open in step 3.2."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Step 3.1 treats the rotation system; smooth isotopy for loops, parallel edges, and cut vertices remains open in step 3.2."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "The codes represent closed link components, not arcs with free endpoints."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Step 3.2 identifies the AC_omega use through the smooth disk-arc extension hypothesis."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The theorem asserts reconstruction and uniqueness, not an iff criterion."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The theorem asserts reconstruction and uniqueness, not an iff criterion."
+        }
+      ],
+      "finite_checks": [
+        {
+          "check": "1.1: By validity, the code passes every finite check in [F3]. If $c=0$, [F1] gives the one-component crossingless code and its `cw` or `ccw` orientation; [F2] realiz",
+          "evidence": "Step 1.1."
+        },
+        {
+          "check": "2.1: Relabel the finite crossing set in increasing order and assign edge labels by the canonical scan in [F1]. The selected face is represented by the least dart of ",
+          "evidence": "Step 2.1."
+        },
+        {
+          "check": "3.1: Suppose $c>0$. The rotation-system data determine the cyclic order at every vertex and the paired edge ends. For two sphere embeddings with those same data, cho",
+          "evidence": "Step 3.1."
+        },
+        {
+          "check": "3.2: For $c>0$, step 3.1 establishes equivalence only by an ambient homeomorphism. The required conclusion [F5] is a **smooth ambient isotopy**, which requires a smo",
+          "evidence": "Step 3.2."
+        }
+      ],
+      "proof_status": "escalated-incomplete",
+      "unresolved_obligations": [
+        {
+          "claim": "Prove a jointly smooth orientation-preserving ambient isotopy between diagram embeddings with the same finite rotation system, edge pairing, strand orientations, over/under data, and selected outer face; include the c=0 circle case.",
+          "evidence": "Step 3.1 constructs only a plane homeomorphism for c>0. Step 3.2 records that the current disk-arc extension supplier requires a supplied smooth isotopy path and that no inspected supplier constructs it for this scope; the c=0 uniqueness case is also open.",
+          "proposed_supplier": "A complete local A-page lemma on smooth isotopy uniqueness for finite connected oriented four-valent rotation systems with loops, parallel edges, cut vertices, a selected outer face, and the crossingless circle boundary; place it before this theorem.",
+          "decision": "owner-escalation"
+        }
+      ]
+    },
+    "ex-knot-kt-47-worked-cases": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-planar-diagram-gauss-and-dowker-codes",
+          "source_section": "Definition",
+          "quote": "A **Gauss code** for an oriented diagram records, in traversal order on each oriented component, a signed crossing label: $+j$ means the component passes over at crossing $j$, and $-j$ means it passes under.",
+          "uses": [
+            "1.1",
+            "1.2",
+            "2.1",
+            "2.2"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "def-oriented-crossing-sign-writhe-and-blackboard-framing",
+          "source_section": "Definition",
+          "quote": "Define $$\\operatorname{sgn}(c):=\\operatorname{sgn}\\det_P(v_{\\rm over},v_{\\rm under})\\in\\{+1,-1\\}.$$",
+          "uses": [
+            "1.2",
+            "2.2"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "lem-planar-diagram-code-realizability-and-face-validation",
+          "source_section": "Statement",
+          "quote": "then such a realization exists if and only if $V-E+F=2$",
+          "uses": [
+            "2.2"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "thm-planar-code-validation-and-diagram-reconstruction-procedure-properties",
+          "source_section": "Statement",
+          "quote": "It returns an invalid-code reason exactly when the first failed syntax, incidence, orientation, component, connectedness, face-count, or outer-face condition in its stated order occurs; otherwise it returns the crossing-disk/edge-band model of the represented oriented diagram, its oriented components, its face cycles, and its selected outer face.",
+          "uses": [
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "thm-enumerate-diagrams-up-to-crossing-bound-procedure-properties",
+          "source_section": "Statement",
+          "quote": "For every nonnegative integer $N$, the bounded enumeration procedure terminates and returns exactly the reconstructed candidates represented by normalized connected one-component planar-diagram codes with at most $N$ crossings.",
+          "uses": [
+            "3.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1.1",
+          "claim": "The visits of the given word are, in order, under at crossing $1$, over at $3$, under at $2$, over at $1$, under at $3$, and over at $2$. The source code in [F6], started at its fourth visit, is $u1+,o2+,u3+,o1+,u2+,o3+$; exchanging labels $2$ and $3$ gives exactly the stated word and the same positive sign at each crossing. Thus the word is the stated based traversal of the right trefoil.",
+          "step": "1.1",
+          "inputs": [
+            "given",
+            "F1",
+            "F6",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-1.2",
+          "claim": "Let $x_i$ be the directed edge from visit $i$ to visit $i+1$, with indices modulo $6$. Then $x_1$ joins $1:U_{\\rm out}$ to $3:O_{\\rm in}$, $x_2$ joins $3:O_{\\rm out}$ to $2:U_{\\rm in}$, $x_3$ joins $2:U_{\\rm out}$ to $1:O_{\\rm in}$, $x_4$ joins $1:O_{\\rm out}$ to $3:U_{\\rm in}$, $x_5$ joins $3:U_{\\rm out}$ to $2:O_{\\rm in}$, and $x_6$ joins $2:O_{\\rm out}$ to $1:U_{\\rm in}$. At each crossing the sign is positive by the given vector and [F2]. Reading each crossing clockwise from its outgoing over-dart therefore gives $X_1=(x_4,x_6,x_3,x_1)$, $X_2=(x_6,x_2,x_5,x_3)$, and $X_3=(x_2,x_4,x_1,x_5)$. Scanning crossing $1$ then $2$ then $3$ assigns canonical edge names $e_1=x_4,e_2=x_6,e_3=x_3,e_4=x_1,e_5=x_2,e_6=x_5$, yielding the three normalized records in the statement.",
+          "step": "1.2",
+          "inputs": [
+            "given",
+            "F1",
+            "F2",
+            "step 1.1",
+            "construct"
+          ]
+        },
+        {
+          "id": "step-2.1",
+          "claim": "Write $j:e_k$ for the dart labelled by edge $e_k$ at crossing $j$. Applying $\\phi=\\alpha\\circ\\sigma$ gives\n$$\n\\begin{aligned}\n1:e_1&\\mapsto2:e_2\\mapsto3:e_5\\mapsto1:e_1,\\\\\n1:e_2&\\mapsto2:e_3\\mapsto1:e_2,\\\\\n1:e_3&\\mapsto3:e_4\\mapsto2:e_6\\mapsto1:e_3,\\\\\n1:e_4&\\mapsto3:e_1\\mapsto1:e_4,\\\\\n2:e_5&\\mapsto3:e_6\\mapsto2:e_5.\n\\end{aligned}\n$$\nFor example, $1:e_1$ advances clockwise to $1:e_2$, whose paired dart is $2:e_2$. The five displayed cycles are disjoint and contain all twelve darts, so they are exactly the face cycles. Hence $V=3$, $E=6$, $F=5$, and $V-E+F=2$.",
+          "step": "2.1",
+          "inputs": [
+            "given",
+            "F1",
+            "step 1.2",
+            "construct"
+          ]
+        },
+        {
+          "id": "step-2.2",
+          "claim": "Each edge occurs at its two ends once incoming and once outgoing by the six directed segments in step 1.2. Each crossing record has its two opposite oriented strands, the over/under designation, and the positive cyclic order from [F1]–[F2]. Traversing from $1:U_{\\rm out}$ follows $x_1$ to $3:O_{\\rm in}$, then the opposite over-dart follows $x_2$ to $2:U_{\\rm in}$, then follows $x_3$ to $1:O_{\\rm in}$, then $x_4$ to $3:U_{\\rm in}$, then $x_5$ to $2:O_{\\rm in}$, and finally $x_6$ to $1:U_{\\rm in}$; the opposite under-dart there is the starting $1:U_{\\rm out}$. This single cycle covers all six visits, and the edge graph connects crossings $1,2,3$. By [F3], the Euler count gives the spherical realization; choosing $F_0$ yields the selected plane model.",
+          "step": "2.2",
+          "inputs": [
+            "given",
+            "F1",
+            "F2",
+            "F3",
+            "step 1.2",
+            "step 2.1",
+            "construct"
+          ]
+        },
+        {
+          "id": "step-3.1",
+          "claim": "The code therefore passes the validator's ordered checks, and [F4] returns its diagram with these face cycles and outer face. Its normalized crossing signs, edge pairing, and selected cycle occur in the enumerator at $c=3$; the one-cycle component trace passes the knot filter. By [F5], the reconstructed candidate is included at bound $3$.",
+          "step": "3.1",
+          "inputs": [
+            "given",
+            "F4",
+            "F5",
+            "step 2.2"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The worked code has three declared crossings."
+        },
+        {
+          "case": "zero",
+          "status": "not_applicable",
+          "reason": "The worked code has three declared crossings."
+        },
+        {
+          "case": "one",
+          "status": "not_applicable",
+          "reason": "The worked code has three crossings, not one."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Steps 1.2 and 2.1 list the parallel edge pairs and all five face cycles."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "The Gauss traversal is cyclic and describes a closed knot."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "All crossing, edge, and face labels are explicitly finite."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The example verifies one code and does not state an iff criterion."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The example verifies one code and does not state an iff criterion."
+        }
+      ],
+      "finite_checks": [
+        {
+          "check": "1.1: The visits of the given word are, in order, under at crossing $1$, over at $3$, under at $2$, over at $1$, under at $3$, and over at $2$. The source code in [F6",
+          "evidence": "Step 1.1."
+        },
+        {
+          "check": "1.2: Let $x_i$ be the directed edge from visit $i$ to visit $i+1$, with indices modulo $6$. Then $x_1$ joins $1:U_{\\rm out}$ to $3:O_{\\rm in}$, $x_2$ joins $3:O_{\\rm",
+          "evidence": "Step 1.2."
+        },
+        {
+          "check": "2.1: Write $j:e_k$ for the dart labelled by edge $e_k$ at crossing $j$. Applying $\\phi=\\alpha\\circ\\sigma$ gives\n$$\n\\begin{aligned}\n1:e_1&\\mapsto2:e_2\\mapsto3:e_5\\map",
+          "evidence": "Step 2.1."
+        },
+        {
+          "check": "2.2: Each edge occurs at its two ends once incoming and once outgoing by the six directed segments in step 1.2. Each crossing record has its two opposite oriented st",
+          "evidence": "Step 2.2."
+        },
+        {
+          "check": "3.1: The code therefore passes the validator's ordered checks, and [F4] returns its diagram with these face cycles and outer face. Its normalized crossing signs, edg",
+          "evidence": "Step 3.1."
+        }
+      ]
+    },
+    "cex-knot-kt-47-boundary-case": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-planar-diagram-gauss-and-dowker-codes",
+          "source_section": "Definition",
+          "quote": "Each crossing label must occur exactly twice in total, once positively and once negatively.",
+          "uses": [
+            "1.1",
+            "1.2"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "alg-planar-code-validation-and-diagram-reconstruction",
+          "source_section": "Definition",
+          "quote": "For a Gauss code with $c>0$, reject an empty component word. Check that every label lies in $\\{1,\\ldots,c\\}$, occurs exactly twice in total, and occurs once with each over/under sign.",
+          "uses": [
+            "1.2"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "thm-planar-code-validation-and-diagram-reconstruction-procedure-properties",
+          "source_section": "Statement",
+          "quote": "It returns an invalid-code reason exactly when the first failed syntax, incidence, orientation, component, connectedness, face-count, or outer-face condition in its stated order occurs; otherwise it returns the crossing-disk/edge-band model of the represented oriented diagram, its oriented components, its face cycles, and its selected outer face.",
+          "uses": [
+            "1.2"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1.1",
+          "claim": "The only declared label is $1$, which lies in $\\{1\\}$. The word has one entry, and its negative sign makes that entry an under-visit. Hence its visit-count pair is $(0,1)$, not the required $(1,1)$ in [F1].",
+          "step": "1.1",
+          "inputs": [
+            "given",
+            "F1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-1.2",
+          "claim": "The range check passes, so the validator reaches its Gauss visit-count check. By [F2] and [F3] it returns `invalid-crossing-visit-count` with $(0,1)$ before constructing a crossing graph or computing faces. Therefore mere presence of every declared label does not make a signed word a Gauss code.",
+          "step": "1.2",
+          "inputs": [
+            "given",
+            "F1",
+            "F2",
+            "F3",
+            "step 1.1"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The malformed word declares one crossing label."
+        },
+        {
+          "case": "zero",
+          "status": "not_applicable",
+          "reason": "The malformed word declares c=1."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Steps 1.1–1.2 give the exact one-label, one-visit boundary failure."
+        },
+        {
+          "case": "degenerate",
+          "status": "not_applicable",
+          "reason": "No graph is built because the visit-count check fails first."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "The attempted input is a cyclic closed-word code."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "The counterexample uses a single finite label and no choice."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The item refutes label-presence sufficiency and states no iff theorem."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The item refutes label-presence sufficiency and states no iff theorem."
+        }
+      ],
+      "finite_checks": [
+        {
+          "check": "1.1: The only declared label is $1$, which lies in $\\{1\\}$. The word has one entry, and its negative sign makes that entry an under-visit. Hence its visit-count pair",
+          "evidence": "Step 1.1."
+        },
+        {
+          "check": "1.2: The range check passes, so the validator reaches its Gauss visit-count check. By [F2] and [F3] it returns `invalid-crossing-visit-count` with $(0,1)$ before con",
+          "evidence": "Step 1.2."
+        }
+      ]
+    }
+  }
+}

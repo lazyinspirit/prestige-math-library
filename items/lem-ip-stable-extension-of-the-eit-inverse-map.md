@@ -21,7 +21,7 @@ sources:
   references:
     - title: "Maarten V. de Hoop, Nikola B. Kovachki, Matti Lassas and Nicholas H. Nelsen, Extension and neural operator approximation of the electrical impedance tomography inverse map"
       url: "https://arxiv.org/pdf/2511.20361"
-      locator: "Propositions 3.8 and 3.9, exact-data inverse map and stable Hilbert extension, printed pp. 16–18."
+      locator: "Proposition 3.8 and Theorem 3.9, exact-data inverse map and stable Hilbert extension, printed pp. 21–22."
 ---
 
 ## Statement

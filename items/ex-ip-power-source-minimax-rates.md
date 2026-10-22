@@ -57,6 +57,6 @@ Assume Countable Choice. Let $X$ and $Y$ be real Hilbert spaces, let $K:X\to Y$ 
 
 1.1 If $s_j\asymp j^{-1}$, [F1] gives $a_j=s_j^{-1}\asymp j$, so the first formula of [F2] applies with $p=\kappa=1$ and gives $\epsilon^{2/5}$. [given, F1, F2, algebra]
 
-1.2 If $s_j\asymp e^{-j}$, [F1] gives $a_j=s_j^{-1}\asymp e^j$, so the fourth formula of [F2] applies with $p=\kappa=1$ and gives $\epsilon^{1/2}$. [given, F1, F2, algebra]
+1.2 If $s_j\asymp e^{-j}$, [F1] gives $a_j=s_j^{-1}\asymp e^j$, so the second formula of [F2] applies with $p=\kappa=1$ and gives $\epsilon^{1/2}$. [given, F1, F2, algebra]
 
 2.1 By [A1], the compact singular-system coordinate model is interpreted with its stated Countable Choice prerequisite. Both substitutions use the exact coefficient ellipsoid from [F1] and preserve the stated radius $\rho$, so they yield the two source-ball rates in the Example. [given, A1, F1, F2, F3, step 1.1, step 1.2, algebra] ∎

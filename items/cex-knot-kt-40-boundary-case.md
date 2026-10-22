@@ -29,7 +29,7 @@ sources:
 
 ## Statement refuted
 
-Let $\mathcal A=\mathbb Z[X]/(X^2)$ with unit $\eta(1)=1$ and counit $\epsilon(1)=0,\epsilon(X)=1$. On a movie with one unaffected circle, birth a disjoint circle and then cap that same circle by a death. The composite operator is
+The assertion that a birth of a disjoint circle followed by a death of that same circle induces the identity up to an overall sign on an unaffected circle is false. Let $\mathcal A=\mathbb Z[X]/(X^2)$ with unit $\eta(1)=1$ and counit $\epsilon(1)=0,\epsilon(X)=1$. On a movie with one unaffected circle, birth a disjoint circle and then cap that same circle by a death. The composite operator is
 $$
 \mathcal A\xrightarrow{\operatorname{id}_{\mathcal A}\otimes\eta} \mathcal A\otimes\mathcal A\xrightarrow{\operatorname{id}_{\mathcal A}\otimes\epsilon} \mathcal A,
 $$
@@ -63,7 +63,8 @@ The movie is a cylinder on the original circle disjoint union a born-and-capped 
 
 [F1] [[def-khovanov-frobenius-algebra-and-cube-of-resolutions]] gives the unit and counit formulas and the nonzero basis element $1\in\mathcal A$.
 
-## Proof
+## Counterexample
+
 
 1.1 The birth map sends $1\in\mathbb Z$ to $1\in\mathcal A$, and the following death sends this element to $\epsilon(1)=0$. Thus $\epsilon\eta=0:\mathbb Z\to\mathbb Z$. [F1, algebra]
 

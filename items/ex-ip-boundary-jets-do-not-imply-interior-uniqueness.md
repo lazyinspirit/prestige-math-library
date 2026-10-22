@@ -38,7 +38,7 @@ For any $\epsilon\ne0$ with $|\epsilon|\|\psi\|_\infty<1$, the positive conducti
 
 [F1] [[def-ip-conductivity-dirichlet-to-neumann-map]]: an admissible scalar conductivity is smooth and strictly positive on the closure of the domain.
 
-[F2] [[thm-ip-boundary-determination-of-scalar-conductivity]]: equality of full conductivity DN maps implies equality of all boundary-normal jets; the example tests only whether equality of those jets by itself forces interior equality.
+[F2] [[thm-ip-boundary-determination-of-scalar-conductivity]]: in dimensions $n\geq2$, under its Axiom of Choice and Countable Choice hypotheses, equality of full conductivity DN maps implies equality of all boundary-normal jets. This is context only: the bump construction below establishes matching jets directly in every positive dimension, including $n=1$, without using a DN-to-jets implication or asserting equality of DN maps.
 
 ## Proof
 
@@ -46,5 +46,5 @@ For any $\epsilon\ne0$ with $|\epsilon|\|\psi\|_\infty<1$, the positive conducti
 
 1.1 For every integer $m\geq0$, differentiation gives $\frac{d^m}{dt^m}e^{-1/t}=P_m(1/t)e^{-1/t}$ on $t>0$ for a polynomial $P_m$, by induction on $m$. For every polynomial $P$, $P(s)e^{-s}\to0$ as $s\to\infty$; for each power $s^N$, this follows from $e^s\geq s^{N+1}/(N+1)!$. Thus every right derivative tends to zero at $t=0$, so extension by zero to $t\leq0$ is smooth and flat there. Composition with $t=1-4|x|^2$ proves $\psi\in C_c^\infty(B(0,1))$, with compact support in $\overline{B(0,1/2)}$. It is nonzero at $x=0$, and $\|\psi\|_\infty<\infty$. [given, induction, construct, algebra]
 
-2.1 The bound $|\epsilon|\|\psi\|_\infty<1$ gives $\gamma_2(x)\geq1-|\epsilon|\|\psi\|_\infty>0$, so [F1] applies. Since $\psi$ vanishes on a neighborhood of $\partial\Omega$, $\gamma_1$ and $\gamma_2$ agree on that neighborhood and all their boundary derivatives agree. At the origin, $\gamma_2(0)-\gamma_1(0)=\epsilon e^{-1}\ne0$. Thus identical boundary jets do not force interior equality. [F1, F2, step 1.1, given, algebra] ∎
+2.1 The bound $|\epsilon|\|\psi\|_\infty<1$ gives $\gamma_2(x)\geq1-|\epsilon|\|\psi\|_\infty>0$, so it satisfies the positivity condition in [F1]. Since $\psi$ vanishes on a neighborhood of $\partial\Omega$, $\gamma_1$ and $\gamma_2$ agree on that neighborhood and all their boundary derivatives agree. At the origin, $\gamma_2(0)-\gamma_1(0)=\epsilon e^{-1}\ne0$. Thus identical boundary jets do not force interior equality. [F1, step 1.1, given, algebra] ∎
 

@@ -1,0 +1,297 @@
+[
+  {
+    "order": 3040,
+    "id": "function-space-mcmc-and-pcn",
+    "kind": "A",
+    "category": "inverse-problems",
+    "title": "Function-space pCN and invariant posterior kernels",
+    "companion": "function-space-mcmc-and-pcn-examples",
+    "requires": [
+      "function-space-priors-and-random-regularity",
+      "bayesian-inverse-likelihoods-and-posterior-propriety",
+      "general-state-mcmc-kernels-and-reversibility",
+      "mcmc-ergodicity-and-mixing"
+    ],
+    "items": [
+      {
+        "id": "lem-ip-separable-hilbert-borel-laws-determined-by-orthonormal-coordinates",
+        "kind": "lemma",
+        "title": "Borel laws on a separable Hilbert space are determined by basis coordinates",
+        "statement": "Assume the Axiom of Countable Choice. Let $H$ be a real Hilbert space with a finite or countable complete orthonormal basis $(e_j)_{j\\in J}$. For each finite $F\\subseteq J$, define the coordinate map $\\pi_F:H\\to\\mathbb R^F$ by $\\pi_F(x)=(\\langle x,e_j\\rangle)_{j\\in F}$. If $\\nu$ and $\\nu'$ are Borel probability measures on $H$ and $\\nu(\\pi_F^{-1}(B))=\\nu'(\\pi_F^{-1}(B))$ for every finite $F\\subseteq J$ and every Borel $B\\subseteq\\mathbb R^F$, then $\\nu=\\nu'$.",
+        "deps": [
+          "def-borel-sigma-algebra",
+          "def-borel-probability-law-on-a-polish-space",
+          "def-countable",
+          "def-countable-choice",
+          "def-hilbert-space",
+          "def-orthonormal-family-complete-orthonormal-system-and-hilbert-basis",
+          "def-norm-and-normed-space",
+          "def-probability-measure",
+          "def-separable-space",
+          "lem-finite-measure-uniqueness-on-a-pi-system",
+          "lem-q-and-irrationals-dense-r",
+          "cor-inner-product-induces-a-norm",
+          "thm-cauchy-schwarz-in-an-inner-product-space",
+          "thm-parseval-equivalences-for-a-complete-orthonormal-family",
+          "thm-product-of-countable",
+          "thm-rationals-countable"
+        ],
+        "justified_by": [],
+        "forward_refs": [],
+        "dependency_level": 0,
+        "proof_strategy": "direct",
+        "axiom_use": "Countable Choice is used only through the supplied Parseval theorem; the Borel-generation and finite-measure uniqueness arguments use no choice.",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        }
+      },
+      {
+        "id": "alg-ip-prior-preserving-crank-nicolson",
+        "kind": "algorithm",
+        "title": "Prior-preserving Crank–Nicolson sampler",
+        "statement": "Assume the Axiom of Choice. Let $H$ be a separable real Hilbert space, let $\\mu_0$ be a centered Borel Gaussian probability measure on $H$, let $D\\subseteq H$ be Borel with $\\mu_0(D)=1$, and let $\\Phi_D:D\\to(-\\infty,+\\infty]$ be Borel. Assume the evidence $$ Z:=\\int_D e^{-\\Phi_D(u)}\\,\\mu_0(du) $$ satisfies $0<Z<\\infty$. Extend the potential to all of $H$ by setting $\\bar\\Phi(u)=\\Phi_D(u)$ for $u\\in D$ and $\\bar\\Phi(u)=+\\infty$ for $u\\notin D$, and define the target probability $\\mu(du)=Z^{-1}e^{-\\bar\\Phi(u)}\\mu_0(du)$. For a scale $\\beta\\in[0,1]$, write $\\rho=\\sqrt{1-\\beta^2}$. At state $u\\in H$, draw $\\xi\\sim\\mu_0$ independently and propose $v=\\rho u+\\beta\\xi$. Set the acceptance probability to $0$ if either $\\bar\\Phi(u)$ or $\\bar\\Phi(v)$ is $+\\infty$, and otherwise set $$ \\alpha(u,v)=\\min\\{1,\\exp(\\bar\\Phi(u)-\\bar\\Phi(v))\\}. $$ Draw an independent uniform random variable on $[0,1]$ and move to $v$ if it is at most $\\alpha(u,v)$; otherwise remain at $u$. The resulting one-step transition rule is the prior-preserving Crank–Nicolson, or pCN, rule $P_\\beta$. States with infinite potential are absorbing under this total definition; they have $\\mu$-measure zero.",
+        "deps": [
+          "def-axiom-of-choice",
+          "def-borel-gaussian-random-element-on-a-separable-banach-space",
+          "def-ip-misfit-evidence-and-posterior-law",
+          "def-ip-prior-on-a-forward-domain",
+          "def-measure-kernel-and-probability-kernel"
+        ],
+        "justified_by": [
+          "lem-ip-pcn-transition-kernel-is-measurable"
+        ],
+        "forward_refs": [],
+        "dependency_level": 3,
+        "axiom_use": "AC is assumed by the library's centered Borel Gaussian interface. The proposal and acceptance instructions add no further choice use.",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "not-applicable"
+        }
+      },
+      {
+        "id": "lem-ip-pcn-transition-kernel-is-measurable",
+        "kind": "lemma",
+        "title": "The pCN accept-reject procedure defines a probability kernel",
+        "statement": "Under the inputs and instructions of the prior-preserving Crank–Nicolson algorithm, for every $\\beta\\in[0,1]$ its proposal rule is a Borel probability kernel and its accept-reject transition $P_\\beta$ is a Borel probability kernel on $H$.",
+        "deps": [
+          "alg-ip-prior-preserving-crank-nicolson",
+          "def-borel-sigma-algebra",
+          "def-measure-kernel-and-probability-kernel",
+          "def-real-exponential-function-and-e",
+          "thm-arithmetic-and-lattice-operations-preserve-measurability",
+          "thm-composition-with-borel-functions-preserves-measurability",
+          "thm-continuous-preimages-of-borel-sets-are-borel",
+          "thm-indefinite-integral-of-a-nonnegative-function-is-a-measure",
+          "thm-measurability-of-integration-against-a-kernel"
+        ],
+        "justified_by": [],
+        "forward_refs": [],
+        "dependency_level": 4,
+        "proof_strategy": "direct",
+        "axiom_use": "No choice is used to prove kernel measurability or the pointwise probability property once the algorithm inputs are supplied.",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        }
+      },
+      {
+        "id": "lem-ip-pcn-reference-pair-law-is-symmetric",
+        "kind": "lemma",
+        "title": "The pCN Gaussian reference pair law is symmetric",
+        "statement": "Assume the Axiom of Choice. Let $H$ be a separable real Hilbert space and let $\\mu_0$ be a centered Borel Gaussian probability measure on $H$. Let $U$ and $\\xi$ be independent random elements with law $\\mu_0$. For $\\beta\\in[0,1]$, set $\\rho=\\sqrt{1-\\beta^2}$ and $V=\\rho U+\\beta\\xi$. The joint Borel law of $(U,V)$ on $H\\times H$ is unchanged by the coordinate swap $(u,v)\\mapsto(v,u)$.",
+        "deps": [
+          "alg-ip-prior-preserving-crank-nicolson",
+          "def-axiom-of-choice",
+          "def-borel-gaussian-random-element-on-a-separable-banach-space",
+          "def-countable-choice",
+          "def-dual-space-of-a-normed-space",
+          "def-hilbert-space",
+          "def-law-or-distribution-of-a-random-element",
+          "def-moments-variance-and-covariance",
+          "def-independent-random-elements",
+          "def-multivariate-normal-law",
+          "def-separable-space",
+          "def-orthonormal-family-complete-orthonormal-system-and-hilbert-basis",
+          "def-product-sigma-algebra-and-finite-product-sigma-algebras",
+          "def-second-countable-space",
+          "lem-borel-product-of-second-countable-spaces",
+          "lem-characteristic-function-of-a-multivariate-normal-law",
+          "lem-characteristic-function-of-a-normal-law",
+          "lem-characteristic-functions-under-affine-maps-and-independent-sums",
+          "lem-countable-iff-surjection-from-n",
+          "lem-ip-separable-hilbert-borel-laws-determined-by-orthonormal-coordinates",
+          "thm-choice-implies-dependent-implies-countable-choice",
+          "thm-factorization-of-expectations-for-independent-variables",
+          "thm-independent-random-elements-have-product-joint-law",
+          "thm-fernique-integrability-for-separable-banach-gaussian-law",
+          "thm-linearity-of-the-lebesgue-integral-on-l-one",
+          "thm-product-of-countable",
+          "thm-separable-hilbert-space-has-a-countable-orthonormal-basis",
+          "thm-uniqueness-of-a-law-from-its-characteristic-function"
+        ],
+        "justified_by": [],
+        "forward_refs": [],
+        "dependency_level": 4,
+        "proof_strategy": "direct",
+        "axiom_use": "AC is used through the Borel Gaussian and multivariate normal interfaces and implies the Countable Choice needed by the coordinate-law supplier. No stronger choice principle is used.",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        }
+      },
+      {
+        "id": "thm-ip-pcn-small-step-acceptance-under-potential-bounds",
+        "kind": "theorem",
+        "title": "pCN stationary mean acceptance tends to one at small scale",
+        "statement": "Assume the Axiom of Choice. Let $H$ be a separable real Hilbert space and let $\\mu_0$ be a centered Borel Gaussian probability measure on $H$. Let $\\Phi:H\\to[0,\\infty)$ be finite-valued and Borel measurable. Suppose that there are constants $p,K>0$ such that $$0\\le\\Phi(u)\\le K(1+\\|u\\|^p)\\qquad(u\\in H),$$ and for every $R>0$ there is a finite $L_R$ such that $$|\\Phi(u)-\\Phi(v)|\\le L_R\\|u-v\\|\\quad\\text{whenever }\\max\\{\\|u\\|,\\|v\\|\\}<R.$$ Set $Z=\\int_H e^{-\\Phi(u)}\\,\\mu_0(du)$ and $\\mu(du)=Z^{-1}e^{-\\Phi(u)}\\mu_0(du)$. For $\\beta\\in[0,1]$, let $U\\sim\\mu$ and $\\xi\\sim\\mu_0$ be independent, put $V_\\beta=\\sqrt{1-\\beta^2}U+\\beta\\xi$, and define $$\\alpha_\\beta=\\min\\{1,\\exp(\\Phi(U)-\\Phi(V_\\beta))\\}.$$ Then $0<Z<\\infty$, $\\mu$ is a probability measure, and the stationary mean acceptance satisfies $$\\lim_{\\beta\\downarrow0}\\mathbb E[\\alpha_\\beta]=1.$$",
+        "deps": [
+          "alg-ip-prior-preserving-crank-nicolson",
+          "def-axiom-of-choice",
+          "def-borel-gaussian-random-element-on-a-separable-banach-space",
+          "def-hilbert-space",
+          "def-ip-misfit-evidence-and-posterior-law",
+          "def-ip-prior-on-a-forward-domain",
+          "def-separable-space",
+          "def-integral-over-a-measurable-set",
+          "thm-dominated-convergence",
+          "thm-fernique-integrability-for-separable-banach-gaussian-law",
+          "thm-ip-function-space-posterior-propriety",
+          "thm-nonnegative-integral-zero-iff-zero-almost-everywhere"
+        ],
+        "justified_by": [],
+        "forward_refs": [],
+        "dependency_level": 4,
+        "proof_strategy": "direct",
+        "axiom_use": "AC is inherited from the centered Borel Gaussian and pCN interfaces. The posterior-propriety supplier and the limit argument add no further choice use.",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        }
+      },
+      {
+        "id": "thm-ip-pcn-posterior-invariance",
+        "kind": "theorem",
+        "title": "The pCN accept-reject kernel preserves the posterior",
+        "statement": "Assume the Axiom of Choice and the inputs of the prior-preserving Crank–Nicolson algorithm: a separable real Hilbert space $H$, centered Borel Gaussian reference probability $\\mu_0$, full-mass Borel domain $D$, Borel potential $\\Phi_D:D\\to(-\\infty,+\\infty]$, positive finite evidence $Z$, and scale $\\beta\\in[0,1]$. Let $\\mu$ be the normalized target on $H$ obtained by extending $\\Phi_D$ by $+\\infty$ off $D$, and let $P_\\beta$ be the algorithm's accept-reject transition. Then $P_\\beta$ is reversible with respect to $\\mu$: its joint flow $$\\Lambda_\\beta(C):=\\int_H P_\\beta(u,C_u)\\,\\mu(du),\\qquad C_u:=\\{v\\in H:(u,v)\\in C\\},$$ is unchanged by $(u,v)\\mapsto(v,u)$ for every Borel $C\\subseteq H\\times H$. Consequently, $\\mu$ is invariant: $$\\int_H P_\\beta(u,A)\\,\\mu(du)=\\mu(A)\\qquad(A\\in\\mathcal B(H)).$$ This conclusion gives invariance only; it does not assert uniqueness, convergence, mixing, an effective-sample-size bound, mesh-independent cost, or correctness of an approximate forward solver.",
+        "deps": [
+          "alg-ip-prior-preserving-crank-nicolson",
+          "def-axiom-of-choice",
+          "def-general-state-reversibility-by-symmetric-flow-measure",
+          "def-ip-misfit-evidence-and-posterior-law",
+          "def-ip-prior-on-a-forward-domain",
+          "def-law-or-distribution-of-a-random-element",
+          "def-measure-kernel-and-probability-kernel",
+          "def-probability-measure",
+          "def-product-sigma-algebra-and-finite-product-sigma-algebras",
+          "def-independent-random-elements",
+          "lem-borel-product-of-second-countable-spaces",
+          "lem-ip-pcn-reference-pair-law-is-symmetric",
+          "lem-ip-pcn-transition-kernel-is-measurable",
+          "lem-prior-and-model-kernel-define-joint-law",
+          "thm-change-of-variables-for-expectation",
+          "thm-general-state-reversibility-implies-invariance",
+          "thm-independent-random-elements-have-product-joint-law",
+          "thm-rectangle-criterion-for-independent-random-elements",
+          "thm-sigma-finite-product-measure-exists-is-rectangular-and-is-unique"
+        ],
+        "justified_by": [],
+        "forward_refs": [],
+        "dependency_level": 5,
+        "proof_strategy": "direct",
+        "axiom_use": "AC is inherited from the pCN Gaussian-reference algorithm. The symmetric-flow argument uses no further choice principle.",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        }
+      }
+    ]
+  },
+  {
+    "order": 3041,
+    "id": "function-space-mcmc-and-pcn-examples",
+    "kind": "B",
+    "category": "inverse-problems",
+    "title": "Function-space pCN and invariant posterior kernels — Examples and Counterexamples",
+    "companion": "function-space-mcmc-and-pcn",
+    "requires": [
+      "function-space-mcmc-and-pcn"
+    ],
+    "items": [
+      {
+        "id": "cex-ip-infinite-dimensional-random-walk-reverse-flow-singular",
+        "kind": "counterexample",
+        "title": "Infinite-dimensional Gaussian random-walk reverse flow is singular",
+        "statement": "Assume the Axiom of Choice and fix $\\beta\\in(0,1]$. Let $H=\\ell^2(\\mathbb N,\\mathbb R)$ with its canonical basis $(e_j)$. Take mutually independent standard normal variables $(X_j,Y_j)_{j\\ge1}$ and set $$U=\\sum_{j\\ge1}2^{-j/2}X_je_j,\\qquad \\xi=\\sum_{j\\ge1}2^{-j/2}Y_je_j.$$ These series converge almost surely in $H$ and define independent centered Borel Gaussian random elements with the same law $\\mu_0$. Define the Gaussian random-walk proposal $V=U+\\beta\\xi$, its probability kernel $$Q_\\beta(u,B)=\\mu_0(\\{z\\in H:u+\\beta z\\in B\\}),$$ its forward flow $\\eta(du,dv)=\\mu_0(du)Q_\\beta(u,dv)$, and its transpose $\\eta^\\top(C)=\\eta(\\{(u,v):(v,u)\\in C\\})$. Then $\\eta$ and $\\eta^\\top$ are mutually singular: a Borel set $A_\\beta\\subseteq H\\times H$ satisfies $$\\eta(A_\\beta)=1,\\qquad \\eta^\\top(A_\\beta)=0.$$ For the same reference law and scale, the pCN proposal flow is symmetric.",
+        "deps": [
+          "cor-countable-independent-copies-exist",
+          "cor-iid-finite-variance-strong-law",
+          "def-axiom-of-choice",
+          "def-borel-sigma-algebra",
+          "def-countable-choice",
+          "def-dependent-choice",
+          "def-identically-distributed-and-iid-random-variables",
+          "def-independent-random-elements",
+          "def-law-or-distribution-of-a-random-element",
+          "def-measure-kernel-and-probability-kernel",
+          "def-standard-normal-and-normal-laws",
+          "lem-ip-coordinate-vectors-form-a-basis-of-ell-two",
+          "lem-ip-gaussian-series-prior-regularity",
+          "lem-ip-pcn-reference-pair-law-is-symmetric",
+          "lem-ip-separable-hilbert-borel-laws-determined-by-orthonormal-coordinates",
+          "lem-measurable-functions-preserve-independence",
+          "lem-normal-location-scale-mean-and-variance",
+          "lem-standard-normal-fourth-moment",
+          "lem-prior-and-model-kernel-define-joint-law",
+          "thm-arithmetic-and-lattice-operations-preserve-measurability",
+          "thm-change-of-variables-for-expectation",
+          "thm-choice-implies-dependent-implies-countable-choice",
+          "thm-continuous-preimages-of-borel-sets-are-borel",
+          "thm-grouping-independent-sigma-algebras",
+          "thm-independent-random-elements-have-product-joint-law",
+          "thm-measurability-of-integration-against-a-kernel",
+          "thm-factorization-of-expectations-for-independent-variables",
+          "lem-borel-product-of-second-countable-spaces"
+        ],
+        "justified_by": [],
+        "forward_refs": [],
+        "dependency_level": 5,
+        "proof_strategy": "direct",
+        "axiom_use": "AC supplies dependent and countable choice for the iid Gaussian sequence and the Gaussian-series law; the strong-law and separating-event arguments add no choice use.",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "generation": {
+          "role": "counterexample"
+        }
+      },
+      {
+        "id": "ex-ip-pcn-normal-posterior-invariant",
+        "kind": "example",
+        "title": "A Gaussian pCN kernel leaves a normal posterior invariant",
+        "statement": "Let $H=\\mathbb R$, give the unknown parameter $u$ the prior law $\\mu_0=N(0,1)$, and observe one datum $Y=0$ from the model $Y\\mid u\\sim N(u,1)$. The Gaussian conjugate update gives posterior $\\mu=N(0,1/2)$. Use the potential $\\Phi(u)=u^2/2$ in the pCN algorithm. For $\\beta\\in[0,1]$, write $\\rho=\\sqrt{1-\\beta^2}$, propose $v=\\rho u+\\beta\\xi$ with $\\xi\\sim N(0,1)$ independent of the current state, and accept with probability $$\\alpha(u,v)=\\min\\{1,\\exp((u^2-v^2)/2)\\}.$$ The resulting pCN probability kernel leaves $N(0,1/2)$ invariant for every $\\beta\\in[0,1]$.",
+        "deps": [
+          "alg-ip-prior-preserving-crank-nicolson",
+          "def-axiom-of-choice",
+          "def-standard-normal-and-normal-laws",
+          "lem-normal-location-scale-density",
+          "thm-ip-pcn-posterior-invariance",
+          "thm-normal-normal-conjugate-update"
+        ],
+        "justified_by": [],
+        "forward_refs": [],
+        "dependency_level": 6,
+        "proof_strategy": "direct",
+        "axiom_use": "AC is inherited from the normal-law and pCN interfaces; no additional choice is used in the calculation.",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "generation": {
+          "role": "example"
+        }
+      }
+    ]
+  }
+]

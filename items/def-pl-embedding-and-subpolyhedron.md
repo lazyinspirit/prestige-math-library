@@ -14,6 +14,11 @@ proof_strategy: not-applicable
 provenance:
   statement: literature-derived
   proof: not-applicable
+verification:
+  judge:
+    model: "gpt-6-luna"
+    verdict: pass
+    date: 2026-10-22
 sources:
   references:
     - title: "C. P. Rourke and B. J. Sanderson, Introduction to Piecewise-Linear Topology"

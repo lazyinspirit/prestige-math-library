@@ -1,0 +1,63 @@
+---
+id: alg-dihedral-fox-colorings
+kind: algorithm
+title: "Compute dihedral Fox colorings by row reduction"
+status: draft
+origin: pipeline
+pipeline_run: inverse-problems-knot-theory-all-109-2026-10-19
+deps: [def-quandle-and-knot-coloring, lem-dihedral-operation-is-a-quandle, def-regular-oriented-link-diagram]
+justified_by: []
+aliases: []
+proof_strategy: not-applicable
+provenance:
+  statement: literature-derived
+  proof: not-applicable
+sources:
+  references:
+    - title: "Józef H. Przytycki, 3-coloring and other elementary invariants of knots, §2, arXiv:math/0608172, pp. 10–11"
+      url: "https://arxiv.org/pdf/math/0608172"
+    - title: "V. O. Manturov, Knot Theory, Chapter 5, §5.1, printed pp. 49–52"
+      url: "https://varf.ru/rudn/manturov/book.pdf"
+    - title: "J. Scott Carter, A Survey of Quandle Ideas, §2, arXiv:1002.4429v2, pp. 3–8"
+      url: "https://arxiv.org/pdf/1002.4429"
+verification:
+  precheck: n/a
+---
+
+## Definition
+
+Input a finite regular oriented link diagram $D$ with $a$ arcs and $c$ crossings,
+fixed finite orderings of its arcs and crossings, and an odd prime $p$. The algorithm returns the full set
+$\operatorname{Col}_p(D)$ of assignments of residues in $\mathbb F_p$ to the
+arcs satisfying the Fox crossing equations, together with
+$|\operatorname{Col}_p(D)|$.
+
+1. Create one variable $x_j$ for each arc in the supplied order, and process
+   crossings in the supplied order.
+2. At each crossing with overarc $o$ and the two underarcs $i$ and $j$, append
+   the homogeneous linear equation $2x_o-x_i-x_j=0$ over $\mathbb F_p$.
+   At a crossing, add the coefficients of any repeated arc in that row.
+3. Starting with the first column and first unused row, scan columns from left
+   to right. In a column with a nonzero entry in an unused row, choose the
+   first such row, swap it into the next pivot row, divide it by its nonzero
+   pivot, and add multiples of it to every other row to clear that column.
+   Advance the pivot row by one. If the column has no such entry, leave it
+   free and continue to the next column.
+4. After all columns have been processed, assign every free variable
+   independently any value in $\mathbb F_p$ and solve the reduced equations
+   for the pivot variables. Return each resulting assignment once and the
+   number returned.
+
+## Definition references
+
+[[def-quandle-and-knot-coloring]].
+
+[[lem-dihedral-operation-is-a-quandle]].
+
+[[def-regular-oriented-link-diagram]].
+
+[Przytycki, *3-coloring and other elementary invariants of knots*, §2](https://arxiv.org/pdf/math/0608172).
+
+[Manturov, *Knot Theory*, Chapter 5](https://varf.ru/rudn/manturov/book.pdf).
+
+[Carter, *A Survey of Quandle Ideas*](https://arxiv.org/pdf/1002.4429).

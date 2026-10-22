@@ -69,13 +69,14 @@ Each risk is an extended nonnegative integral; deterministic measurable estimato
 
 [F8] [[def-probability-measure]]: $P(\mathsf Y)=1$.
 
-[F9] [[def-nonnegative-lebesgue-integral]] [[prop-the-nonnegative-integral-agrees-with-the-simple-integral]] [[def-integral-of-a-nonnegative-simple-function]]: the constant function $a\mapsto\Delta$ is simple, so its integral under a probability measure $\mu$ is $\Delta\mu(\mathsf Y)=\Delta$.
+[F9] [[def-nonnegative-lebesgue-integral]] [[prop-the-nonnegative-integral-agrees-with-the-simple-integral]] [[def-integral-of-a-nonnegative-simple-function]]: for a probability measure $\mu$ on a measurable space $(S,\mathcal S)$, the constant function $z\mapsto\Delta$ is simple and has integral $\Delta\mu(S)=\Delta$.
 
 [F10] [[lem-procedure-action-law-is-measurable]]: if $a\mapsto g(a)$ is a nonnegative measurable loss section and $\delta$ is a probability kernel, then $y\mapsto\int_Q g(a)\,\delta(y,da)$ is measurable.
 
 [F11] [[def-loss-function-and-risk]]: risk is the outer integral of the kernel-averaged nonnegative measurable loss under the sampling law; a deterministic measurable estimator is included as a point-mass kernel.
 
 ## Proof
+
 
 1.1 By [F2], $q_i=q(x_i)$ are points of $Q$. For every $y\in\mathsf Y$ and $a\in Q$, [F3] gives $\Delta=d_Q(q_0,q_1)\le d_Q(q_0,a)+d_Q(a,q_1)$. Integrating this pointwise inequality against the probability measure $\delta(y,\cdot)$, using nonnegativity in [F4], monotonicity in [F7], total mass one in [F8], the constant integral identity in [F9], symmetry in [F3] to write $d_Q(a,q_1)=d_Q(q_1,a)$, the probability-kernel property in [F5], and additivity in [F6], yields $\Delta\le\int_Q d_Q(q_0,a)\,\delta(y,da)+\int_Q d_Q(q_1,a)\,\delta(y,da)$. The integrands are measurable by Given and nonnegative by [F4]. [given, F2, F3, F4, F5, F6, F7, F8, F9, algebra]
 

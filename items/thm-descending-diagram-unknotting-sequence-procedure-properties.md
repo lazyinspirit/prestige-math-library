@@ -27,7 +27,7 @@ sources:
 
 ## Statement
 
-For every admissible finite planar code of a regular oriented knot diagram and every basepoint in the interior of an edge, the descending-diagram procedure terminates, visits each crossing record once, and returns a finite updated code and a crossing-change list with at most one entry per crossing. The updated code is admissible and its first-encounter branch at each crossing is the overpassing branch. No claim about efficient minimization of $u(K)$ is made.
+For every admissible finite planar code of a regular oriented knot diagram and every basepoint in the interior of an edge, move the basepoint slightly forward along that same edge to a point away from bends if necessary, and then call the descending-diagram procedure. It terminates, visits each crossing record once, and returns a finite updated code and a crossing-change list with at most one entry per crossing. The updated code is admissible and its first-encounter branch at each crossing is the overpassing branch. The output code and crossing-change list are independent of this basepoint adjustment within the edge. No claim about efficient minimization of $u(K)$ is made.
 
 ## Statement references
 
@@ -48,7 +48,7 @@ For every admissible finite planar code of a regular oriented knot diagram and e
 **Given:** The admissible code and basepoint in the statement.
 
 
-1.1 The code has finitely many edges and crossing records by [F1]. Following its coherent half-edge pairings from the basepoint returns to the starting edge after finitely many incidences, so the traversal terminates. It visits each crossing record once at first encounter, giving exactly $c$ processing operations. [F1, given, algebra]
+1.1 The polygonal drawing has finitely many bends. If the basepoint is a bend in the geometric interior of its edge, choose a short forward segment within that edge containing no crossing or other bend and move the basepoint into its interior. The adjusted point satisfies the algorithm's input condition. Moving the point within the same oriented edge crosses no crossing vertex, so it changes neither the cyclic order of crossing encounters nor the first branch reached at any crossing. Thus the adjustment leaves the crossing-change list and updated code independent of its choice. The code has finitely many edges and crossing records by [F1]. Following its coherent half-edge pairings from the basepoint returns to the starting edge after finitely many incidences, so the traversal terminates. It visits each crossing record once at first encounter, giving exactly $c$ processing operations. [F1, F2, given, construct, algebra]
 
 2.1 Each operation either leaves the over/under label unchanged or exchanges the two labels once. It does not change vertices, edges, cyclic orders, branch pairings, orientations, or the rational drawing certificate; hence all validity conditions in [F1] remain satisfied. The resulting list has at most $c$ entries, and every recorded first underpass has become an overpass while first overpasses remain over. [F1, F2, step 1.1, algebra] ∎
 

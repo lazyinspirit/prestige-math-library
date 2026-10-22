@@ -1,0 +1,438 @@
+[
+  {
+    "order": 3128,
+    "id": "cyclic-branched-covers-and-knot-determinants",
+    "kind": "A",
+    "category": "knot-theory",
+    "title": "Cyclic branched covers and knot determinants",
+    "companion": "cyclic-branched-covers-and-knot-determinants-examples",
+    "requires": [
+      "knot-exteriors-and-peripheral-systems",
+      "seifert-matrices-and-the-alexander-module",
+      "alexander-polynomial-from-seifert-matrices"
+    ],
+    "items": [
+      {
+        "id": "lem-square-integer-cokernel-finiteness-and-order",
+        "kind": "lemma",
+        "title": "Finiteness and order of the cokernel of a square integer matrix",
+        "deps": [],
+        "dependency_level": 0,
+        "justified_by": [],
+        "statement": "For a finite square integer matrix A, coker(A) = Z^n/AZ^n is finite if and only if det(A) is nonzero, and then its order is |det(A)|. For the empty 0 by 0 matrix, the determinant is 1 and the cokernel is the trivial group.",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-generated"
+        },
+        "strategy": "Reduce by unimodular integer row and column operations to a diagonal matrix and compute its cokernel."
+      },
+      {
+        "id": "lem-cyclic-cover-linking-form-inverse-matrix",
+        "kind": "lemma",
+        "title": "Inverse-matrix formula for a surgery linking form",
+        "deps": [
+          "def-oriented-link-in-s-three-and-ambient-isotopy",
+          "lem-the-complement-of-an-oriented-link-is-a-connected-smooth-three-manifold",
+          "thm-alexander-duality-for-compact-locally-contractible-subsets-of-a-sphere",
+          "def-one-variable-alexander-module-of-an-oriented-link",
+          "thm-mayer-vietoris-sequence-in-singular-homology",
+          "def-axiom-of-choice"
+        ],
+        "dependency_level": 0,
+        "justified_by": [],
+        "statement": "Assume AC. Let J be an oriented n-component link in S^3 with n>=1, chosen disjoint tubes, positive meridians mu_i and zero-self-linking longitudes lambda_i oriented as J_i. Let X be the compact link exterior; Alexander duality identifies H_1(X;Z) with Z^n on the meridians, and lk(J_i,J_j), for i!=j, is the j-th coordinate of [lambda_i]. Use mu_i dot lambda_i=+1. Give J_i integral framing f_i and fill along delta_i=lambda_i+f_i mu_i. Let A be symmetric with diagonal f_i and off-diagonal entries lk(J_i,J_j), and assume det(A) is nonzero. Orient Y as the boundary of the 4-dimensional surgery handlebody with outward normal first. Then H_1(Y;Z)=Z^n/AZ^n. For torsion classes define lambda_Y([C],[D])=(F dot D)/m mod Z when partial F=mC. For meridian-coordinate representatives x,y, lambda_Y([x],[y])=-x^T A^{-1}y mod Z.",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-generated"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Jozef H. Przytycki and Akira Yasuhara, Linking Numbers in Rational Homology 3-Spheres, Cyclic Branched Covers and Infinite Cyclic Covers",
+              "url": "https://arxiv.org/pdf/math/0111203v1",
+              "locator": "Section 1, printed pp. 4–7, Corollary 1.2; Section 3, printed pp. 12–14, Theorem 3.2"
+            }
+          ]
+        },
+        "strategy": "Use Mayer–Vietoris for the surgery presentation and compare linking before and after filling by the rational inverse of the framed-link matrix."
+      },
+      {
+        "id": "def-cyclic-branched-cover-of-a-knot",
+        "kind": "definition",
+        "title": "Cyclic branched cover of a knot",
+        "deps": [
+          "def-oriented-link-in-s-three-and-ambient-isotopy",
+          "def-knot-exterior",
+          "lem-knot-tubular-exterior-and-boundary",
+          "lem-the-complement-of-an-oriented-link-is-a-connected-smooth-three-manifold",
+          "def-knot-meridian-and-preferred-longitude",
+          "thm-knot-exterior-homology-and-longitude",
+          "prop-the-first-hurewicz-map-in-degree-one-is-abelianization",
+          "def-covering-map-and-evenly-covered-neighbourhoods",
+          "thm-classification-of-connected-covering-spaces",
+          "def-regular-covering",
+          "thm-regular-covering-characterizations",
+          "cor-deck-group-of-a-regular-covering",
+          "def-deck-transformation-and-deck-group",
+          "def-axiom-of-choice"
+        ],
+        "dependency_level": 4,
+        "justified_by": [],
+        "statement": "Assume the Axiom of Choice. Let K be a smooth oriented knot in S^3 with chosen compact exterior E_K and positive meridian mu, and let q be an integer at least 2. The homomorphism pi_1(E_K) -> H_1(E_K; Z) -> Z/q sends mu to 1. Let E_q -> E_K be the connected q-sheeted cover classified by its kernel. Attach a solid torus to the torus boundary of E_q so that the meridian disk boundary is the closed lift of mu^q; the resulting oriented closed 3-manifold is the q-fold cyclic branched cover Sigma_q(K). Its deck transformation extends over the filling, and its quotient map to S^3 is branched along K with local model (z,w) -> (z,w^q).",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "not-applicable"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Dale Rolfsen, Knots and Links",
+              "url": "https://webhomes.maths.ed.ac.uk/~v1ranick/papers/rolfsen.pdf",
+              "locator": "Chapter 10.C, printed pp. 297–300"
+            }
+          ]
+        },
+        "strategy": "Define the exterior cover by the meridian homomorphism and fill its lifted meridian."
+      },
+      {
+        "id": "lem-cyclic-branched-cover-homology-is-alexander-module-coinvariants",
+        "kind": "lemma",
+        "title": "Homology of a cyclic branched cover as Alexander-module coinvariants",
+        "deps": [
+          "def-cyclic-branched-cover-of-a-knot",
+          "lem-knot-tubular-exterior-and-boundary",
+          "def-one-variable-alexander-module-of-an-oriented-link",
+          "prop-the-first-hurewicz-map-in-degree-one-is-abelianization",
+          "thm-classification-of-connected-covering-spaces",
+          "prop-singular-homology-is-invariant-under-deformation-retracts",
+          "thm-mayer-vietoris-sequence-in-singular-homology",
+          "def-axiom-of-choice"
+        ],
+        "dependency_level": 5,
+        "justified_by": [],
+        "statement": "Assume the Axiom of Choice and let K be a smooth oriented knot and q at least 2. If A_K = H_1(X_tilde_K; Z) is the one-variable Alexander module with positive-meridian deck action t, then H_1(Sigma_q(K); Z) is isomorphic as an abelian group to A_K/(t^q - 1)A_K.",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-generated"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Dale Rolfsen, Knots and Links",
+              "url": "https://webhomes.maths.ed.ac.uk/~v1ranick/papers/rolfsen.pdf",
+              "locator": "Chapter 10.C, printed pp. 297–300; cyclic-cover construction and filling"
+            }
+          ]
+        },
+        "strategy": "Abelianize the semidirect product of the infinite-cyclic subgroup by the q-th meridian and then kill the lifted meridian in the filling."
+      },
+      {
+        "id": "lem-branched-cover-surgery-presentation-from-seifert-surface",
+        "kind": "lemma",
+        "title": "Surgery presentation from a Seifert surface",
+        "deps": [
+          "def-cyclic-branched-cover-of-a-knot",
+          "def-oriented-seifert-surface",
+          "def-knot-seifert-pairing-and-matrix",
+          "lem-finite-chart-surface-normal-forms-supply-jordan-disks-and-torsion-free-groups",
+          "def-axiom-of-choice",
+          "thm-choice-implies-dependent-implies-countable-choice",
+          "def-countable-choice",
+          "def-countable-choice-principle-for-foliation-pair"
+        ],
+        "dependency_level": 6,
+        "justified_by": [],
+        "statement": "Assume the Axiom of Choice. Let K bound a connected compact oriented Seifert surface F of genus g, choose a disk-band decomposition of F with one 0-handle and 2g bands, and use its band-core basis a_1,...,a_{2g} to form the positive-push Seifert matrix V. For q at least 2, define M_q(V) to have 2g by 2g diagonal blocks V+V^T, upper adjacent blocks -V^T, lower adjacent blocks -V, and all other blocks zero. Push the interior of F into B^4 while keeping K on S^3, cut B^4 along a thickened copy of F, take q copies, and glue the positive face of copy i to the negative face of copy i+1 by reflection of the normal coordinate for i=1,...,q-1, with no last-to-first gluing. Call the resulting q-fold cyclic branched cover W_q(F). Then W_q(F) has one 0-handle and 2g(q-1) 2-handles whose framed attaching link has linking matrix M_q(V), and its boundary branch cover is Sigma_q(K).",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-generated"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Selman Akbulut and Robion Kirby, Branched Covers of Surfaces in 4-Manifolds",
+              "url": "https://math.berkeley.edu/~kirby/papers/Akbulut%20and%20Kirby%20-%20Branched%20covers%20of%20surfaces%20in%204-manifolds%20-%20MR0593626.pdf",
+              "locator": "Section 2, printed pp. 113–117; cyclic branched cover of B^4 and band-handle construction"
+            },
+            {
+              "title": "Jozef H. Przytycki and Akira Yasuhara, Linking Numbers in Rational Homology 3-Spheres, Cyclic Branched Covers and Infinite Cyclic Covers",
+              "url": "https://arxiv.org/pdf/math/0111203v1",
+              "locator": "Section 3, printed pp. 12–14; block matrix M_{q,V}; its surgery presentation is attributed to Akbulut–Kirby and is proved locally here"
+            }
+          ]
+        },
+        "strategy": "Use the q-copy branched-handle construction and compute each framed-link entry from the two Seifert push-offs."
+      },
+      {
+        "id": "lem-cyclic-branched-cover-seifert-block-matrix",
+        "kind": "lemma",
+        "title": "Seifert block presentation of cyclic branched-cover homology",
+        "deps": [
+          "def-cyclic-branched-cover-of-a-knot",
+          "def-oriented-seifert-surface",
+          "def-knot-seifert-pairing-and-matrix",
+          "lem-branched-cover-surgery-presentation-from-seifert-surface",
+          "thm-poincare-lefschetz-duality",
+          "def-axiom-of-choice",
+          "lem-seifert-pairing-well-defined",
+          "thm-long-exact-sequence-of-a-pair-in-singular-homology"
+        ],
+        "dependency_level": 7,
+        "justified_by": [],
+        "statement": "Assume the Axiom of Choice and the hypotheses of the surgery-presentation lemma. For q at least 2, H_1(Sigma_q(K); Z) is isomorphic to coker(M_q(V)). In particular, for q=2 it is coker(V+V^T).",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-generated"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Dale Rolfsen, Knots and Links",
+              "url": "https://webhomes.maths.ed.ac.uk/~v1ranick/papers/rolfsen.pdf",
+              "locator": "Chapter 8.D, printed pp. 212–214; double-cover matrix and general block presentation"
+            },
+            {
+              "title": "Jozef H. Przytycki and Akira Yasuhara, Linking Numbers in Rational Homology 3-Spheres, Cyclic Branched Covers and Infinite Cyclic Covers",
+              "url": "https://arxiv.org/pdf/math/0111203v1",
+              "locator": "Section 3, printed pp. 12–14; matrix M_{q,V}"
+            }
+          ]
+        },
+        "strategy": "Apply the long exact sequence of the pair (W_q, boundary W_q) and identify its middle map with the handle intersection matrix."
+      },
+      {
+        "id": "lem-double-branched-cover-homology-from-seifert-matrix",
+        "kind": "lemma",
+        "title": "Homology of the double branched cover from a Seifert matrix",
+        "deps": [
+          "def-cyclic-branched-cover-of-a-knot",
+          "def-oriented-seifert-surface",
+          "def-knot-seifert-pairing-and-matrix",
+          "lem-cyclic-branched-cover-seifert-block-matrix",
+          "def-axiom-of-choice"
+        ],
+        "dependency_level": 8,
+        "justified_by": [],
+        "statement": "For a smooth oriented knot K with a connected compact oriented Seifert surface of genus g and positive-push Seifert matrix V, H_1(Sigma_2(K); Z) is isomorphic to coker(V+V^T). For g=0 the matrix is empty and the cokernel is trivial.",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-generated"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Dale Rolfsen, Knots and Links",
+              "url": "https://webhomes.maths.ed.ac.uk/~v1ranick/papers/rolfsen.pdf",
+              "locator": "Chapter 8.D, printed pp. 212–213; proof of the double-cover presentation"
+            },
+            {
+              "title": "Charles Livingston, Seifert Forms and Concordance",
+              "url": "https://arxiv.org/pdf/math/0101035v3",
+              "locator": "Section 3, Theorem 3.1, printed pp. 406–407; formula stated with Fox cited as source"
+            }
+          ]
+        },
+        "strategy": "Specialize the cyclic block presentation to q=2."
+      },
+      {
+        "id": "lem-cyclic-cover-order-root-product-and-rational-sphere-test",
+        "kind": "lemma",
+        "title": "Root-product test for cyclic branched-cover homology",
+        "deps": [
+          "def-cyclic-branched-cover-of-a-knot",
+          "def-oriented-seifert-surface",
+          "def-knot-seifert-pairing-and-matrix",
+          "lem-cyclic-branched-cover-homology-is-alexander-module-coinvariants",
+          "def-alexander-polynomial-from-the-first-elementary-ideal",
+          "thm-seifert-matrix-presents-knot-alexander-module",
+          "thm-seifert-determinant-is-the-knot-alexander-polynomial",
+          "lem-seifert-matrix-skew-part-is-surface-intersection",
+          "lem-square-integer-cokernel-finiteness-and-order",
+          "def-axiom-of-choice"
+        ],
+        "dependency_level": 12,
+        "justified_by": [],
+        "statement": "Assume the Axiom of Choice. Let K be a smooth oriented knot with positive-push Seifert matrix V, Alexander polynomial Delta_K(t), and let q at least 2 with zeta_q a primitive q-th root of unity. Then H_1(Sigma_q(K); Z) is finite if and only if Delta_K(zeta_q^j) is nonzero for every 1 <= j < q; in that case its order is the product over j=1,...,q-1 of |Delta_K(zeta_q^j)|. The same criterion and order hold with Delta_K replaced by det(V-tV^T).",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-generated"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Dale Rolfsen, Knots and Links",
+              "url": "https://webhomes.maths.ed.ac.uk/~v1ranick/papers/rolfsen.pdf",
+              "locator": "Chapter 8.D, printed pp. 212–215; cyclic-cover homology presentations"
+            },
+            {
+              "title": "Charles Livingston, Seifert Forms and Concordance",
+              "url": "https://arxiv.org/pdf/math/0101035v3",
+              "locator": "Section 3, Theorem 3.1, printed pp. 406–407; formula stated with Fox cited as source"
+            },
+            {
+              "title": "Jozef H. Przytycki and Akira Yasuhara, Linking Numbers in Rational Homology 3-Spheres, Cyclic Branched Covers and Infinite Cyclic Covers",
+              "url": "https://arxiv.org/pdf/math/0111203v1",
+              "locator": "Section 3, printed pp. 12–14; block matrix and cyclic-cover linking formula"
+            }
+          ]
+        },
+        "strategy": "Reduce to Alexander-module coinvariants, decompose multiplication by t into q character spaces, and remove the trivial character using V-V^T unimodular."
+      },
+      {
+        "id": "thm-knot-determinant-is-order-of-double-cover-homology",
+        "kind": "theorem",
+        "title": "Knot determinant is the order of double-cover homology",
+        "deps": [
+          "def-cyclic-branched-cover-of-a-knot",
+          "lem-double-branched-cover-homology-from-seifert-matrix",
+          "lem-square-integer-cokernel-finiteness-and-order",
+          "thm-seifert-determinant-is-the-knot-alexander-polynomial",
+          "def-alexander-polynomial-from-the-first-elementary-ideal",
+          "lem-square-seifert-presentation-and-alexander-normalization",
+          "def-axiom-of-choice"
+        ],
+        "dependency_level": 12,
+        "justified_by": [],
+        "statement": "Assume the Axiom of Choice. For a smooth oriented knot K with Alexander polynomial Delta_K(t), H_1(Sigma_2(K); Z) is finite if and only if Delta_K(-1) is nonzero, and then its order is |Delta_K(-1)|. Moreover Delta_K(-1) is always odd, so every knot double branched cover has finite first homology.",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-generated"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Dale Rolfsen, Knots and Links",
+              "url": "https://webhomes.maths.ed.ac.uk/~v1ranick/papers/rolfsen.pdf",
+              "locator": "Chapter 8.D, printed pp. 212–213; double-cover presentation and determinant"
+            },
+            {
+              "title": "Charles Livingston, Seifert Forms and Concordance",
+              "url": "https://arxiv.org/pdf/math/0101035v3",
+              "locator": "Section 3, Theorem 3.1, printed pp. 406–407; formula stated with Fox cited as source"
+            }
+          ]
+        },
+        "strategy": "Specialize the Seifert determinant formula at t=-1 and apply the finite-cokernel determinant criterion."
+      },
+      {
+        "id": "thm-knot-cyclic-cover-order-from-alexander-polynomial",
+        "kind": "theorem",
+        "title": "Cyclic-cover homology order from the Alexander polynomial",
+        "deps": [
+          "def-cyclic-branched-cover-of-a-knot",
+          "def-alexander-polynomial-from-the-first-elementary-ideal",
+          "lem-cyclic-cover-order-root-product-and-rational-sphere-test",
+          "def-axiom-of-choice"
+        ],
+        "dependency_level": 13,
+        "justified_by": [],
+        "statement": "Assume the Axiom of Choice. For every smooth oriented knot K and integer q at least 2, H_1(Sigma_q(K); Z) is finite exactly when Delta_K(zeta_q^j) is nonzero for every 1 <= j < q, and in that case its order is the product over j=1,...,q-1 of |Delta_K(zeta_q^j)|, where zeta_q is any primitive q-th root of unity.",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-generated"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Dale Rolfsen, Knots and Links",
+              "url": "https://webhomes.maths.ed.ac.uk/~v1ranick/papers/rolfsen.pdf",
+              "locator": "Chapter 8.D, printed pp. 212–215"
+            },
+            {
+              "title": "Charles Livingston, Seifert Forms and Concordance",
+              "url": "https://arxiv.org/pdf/math/0101035v3",
+              "locator": "Section 3, Theorem 3.1, printed pp. 406–407; formula stated with Fox cited as source"
+            }
+          ]
+        },
+        "strategy": "Apply the proved root-product lemma to the q-fold cover."
+      }
+    ]
+  },
+  {
+    "order": 3129,
+    "id": "cyclic-branched-covers-and-knot-determinants-examples",
+    "kind": "B",
+    "category": "knot-theory",
+    "title": "Cyclic branched covers and knot determinants — Examples and Counterexamples",
+    "companion": "cyclic-branched-covers-and-knot-determinants",
+    "requires": [
+      "cyclic-branched-covers-and-knot-determinants"
+    ],
+    "items": [
+      {
+        "id": "ex-knot-kt-11-worked-cases",
+        "kind": "example",
+        "title": "Worked cases: double branched covers of the trefoil, figure-eight knot, and unknot",
+        "deps": [
+          "def-cyclic-branched-cover-of-a-knot",
+          "def-oriented-seifert-surface",
+          "def-knot-seifert-pairing-and-matrix",
+          "lem-double-branched-cover-homology-from-seifert-matrix",
+          "lem-square-integer-cokernel-finiteness-and-order",
+          "def-axiom-of-choice"
+        ],
+        "dependency_level": 9,
+        "justified_by": [],
+        "statement": "For the right-handed trefoil and figure-eight knot, take the standard genus-one Seifert surfaces and ordered bases with positive-push matrices [[-1,0],[1,-1]] and [[-1,0],[1,1]], respectively. Their double branched covers have first homology Z/3 and Z/5, respectively. The double branched cover of the unknot is S^3.",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-generated"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Shin’ichi Saeki, Knot Theory Lecture Notes, Chapter 7: Seifert Matrices and Derived Invariants",
+              "url": "https://www2.math.kyushu-u.ac.jp/~saeki/Lee-Lectures.pdf",
+              "locator": "Chapter 7, Examples 7.4–7.5, calculation of Seifert matrices"
+            },
+            {
+              "title": "Dale Rolfsen, Knots and Links",
+              "url": "https://webhomes.maths.ed.ac.uk/~v1ranick/papers/rolfsen.pdf",
+              "locator": "Chapter 8.D, printed pp. 212–213"
+            }
+          ]
+        },
+        "strategy": "Compute V+V^T, reduce each integer matrix to Smith form, and identify the unknot cover by an explicit branched map."
+      },
+      {
+        "id": "cex-knot-kt-11-boundary-case",
+        "kind": "counterexample",
+        "title": "A higher cyclic branched cover can have infinite first homology",
+        "deps": [
+          "def-cyclic-branched-cover-of-a-knot",
+          "def-oriented-seifert-surface",
+          "def-knot-seifert-pairing-and-matrix",
+          "def-alexander-polynomial-from-the-first-elementary-ideal",
+          "thm-seifert-determinant-is-the-knot-alexander-polynomial",
+          "thm-knot-determinant-is-order-of-double-cover-homology",
+          "thm-knot-cyclic-cover-order-from-alexander-polynomial",
+          "lem-square-seifert-presentation-and-alexander-normalization",
+          "def-axiom-of-choice"
+        ],
+        "dependency_level": 14,
+        "justified_by": [],
+        "statement": "Every cyclic branched cover of a smooth oriented knot has finite first homology.",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-generated"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Charles Livingston, Seifert Forms and Concordance",
+              "url": "https://arxiv.org/pdf/math/0101035v3",
+              "locator": "Section 3, Theorem 3.1 and Corollary 3.2, printed pp. 406–407; Theorem 3.1 cites Fox, and the local argument is supplied here"
+            },
+            {
+              "title": "Shin’ichi Saeki, Knot Theory Lecture Notes, Chapter 7: Seifert Matrices and Derived Invariants",
+              "url": "https://www2.math.kyushu-u.ac.jp/~saeki/Lee-Lectures.pdf",
+              "locator": "Chapter 7, Example 7.4; trefoil Seifert matrix"
+            }
+          ]
+        },
+        "strategy": "Refute the universal finiteness claim with the trefoil six-fold cover, while proving that no double-cover determinant can vanish."
+      }
+    ]
+  }
+]

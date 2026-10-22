@@ -42,7 +42,7 @@ Assume full AC. For every $\omega\in S^1\setminus\{1\}$, changing an ordered bas
 
 **Given:** Full AC, an oriented knot Seifert matrix $V$, its two enlargement matrices, and $\omega\in S^1\setminus\{1\}$.
 
-[A1] Full AC supplies the Seifert pairing and surface hypotheses. [[def-axiom-of-choice]]
+[A1] Full AC is the choice-function axiom assumed by the knot-surface and Seifert-pairing suppliers. [[def-axiom-of-choice]]
 
 [F1] A basis change is $V\mapsto P^TVP$ for $P\in GL_{2g}(\mathbb Z)$; knot surfaces are related by isotopies and the two enlargements. [[def-knot-seifert-pairing-and-matrix]], [[lem-seifert-matrices-of-a-knot-are-s-equivalent]], [[def-seifert-matrix-s-equivalence]]
 

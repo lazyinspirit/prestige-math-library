@@ -1,0 +1,33 @@
+---
+page: smooth-and-topological-knot-concordance
+title: Smooth and topological knot concordance
+status: draft
+requires:
+  - seifert-surfaces-and-knot-genus
+  - connected-sums-and-prime-decomposition
+  - crossing-signs-writhe-and-linking-number
+  - seifert-matrices-and-the-alexander-module
+items:
+  - def-abstract-oriented-knot-cobordism
+  - def-locally-flat-proper-surface-and-concordance-collars
+  - lem-rational-isotropic-subspace-saturates-to-integral-metabolizer
+  - thm-locally-flat-codimension-three-arc-unknotting
+  - def-reverse-mirror-of-oriented-knot
+  - def-smooth-knot-concordance
+  - def-locally-flat-pl-knot-concordance
+  - def-locally-flat-topological-knot-concordance
+  - lem-general-knot-reverse-mirror-sum-is-ribbon
+  - lem-smooth-slice-iff-concordant-to-unknot
+  - lem-smooth-and-topological-knot-concordance-is-an-equivalence-relation
+  - lem-knot-concordance-compatible-with-connected-sum
+  - lem-smooth-and-topological-slice-genus-minima-exist
+  - thm-knot-concordance-is-an-abelian-group
+  - def-smooth-and-topological-slice-genus
+  - lem-linking-number-equals-four-dimensional-intersection-number
+  - lem-locally-flat-slice-surface-bounds-seifert-hypersurface
+  - def-metabolic-seifert-form-and-algebraic-knot-concordance
+  - lem-slice-disk-induces-seifert-metabolizer
+examples: []
+order: 3138
+page_layout: compact-v1
+---

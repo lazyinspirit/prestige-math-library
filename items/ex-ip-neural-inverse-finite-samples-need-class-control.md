@@ -1,7 +1,7 @@
 ---
 id: ex-ip-neural-inverse-finite-samples-need-class-control
 kind: example
-title: Finite samples cannot identify every Lipschitz inverse map uniformly
+title: Finite samples cannot identify every Lipschitz function uniformly
 status: draft
 origin: pipeline
 pipeline_run: inverse-problems-knot-theory-all-109-2026-10-19

@@ -32,7 +32,7 @@ sources:
 
 Assume Countable Choice.
 
-Let the real periodic Fourier coefficient space be $X=Y=\mathbb R\oplus\ell^2(\mathbb N;\mathbb R^2)$, with one constant coordinate and cosine–sine coordinate pairs for each positive frequency, and give it the canonical inner product $\langle(c_0,(a_n,b_n)),(d_0,(c_n,d_n))\rangle=c_0d_0+\sum_{n\ge1}(a_nc_n+b_nd_n)$. The interleaving map $(c_0,(a_n,b_n))\mapsto(c_0,a_1,b_1,a_2,b_2,\ldots)$ is an isometry onto real $\ell^2(\mathbb N)$, so this is a real Hilbert space. For a heat time $\bar t>0$, define the periodic heat forward operator by
+Let the real periodic Fourier coefficient space be $X=Y=\mathbb R\oplus\ell^2(\mathbb N_{>0};\mathbb R^2)$, with one constant coordinate and cosine–sine coordinate pairs for each positive frequency, and give it the canonical inner product $\langle(c_0,(a_n,b_n)),(d_0,(c_n,d_n))\rangle=c_0d_0+\sum_{n\ge1}(a_nc_n+b_nd_n)$. The interleaving map $(c_0,(a_n,b_n))\mapsto(c_0,a_1,b_1,a_2,b_2,\ldots)$ places $c_0$ at scalar index $1$, $a_n$ at $2n$, and $b_n$ at $2n+1$, and is an isometry onto real $\ell^2(\mathbb N_{>0})$, so this is a real Hilbert space. For a heat time $\bar t>0$, define the periodic heat forward operator by
 $$
 T_{\bar t}(c_0,(a_n,b_n)_{n\ge1})=(c_0,(e^{-n^2\bar t}a_n,e^{-n^2\bar t}b_n)_{n\ge1}).
 $$
@@ -68,11 +68,11 @@ For the spectral-cutoff candidate sequence $\alpha_n=e^{-2n^2\bar t}$, indexed b
 
 [F6] [[def-ip-ordered-filter-grid-and-source-index]]: An ordered filter is nonnegative, satisfies $0\le\alpha q_\alpha(t)\le C_q'$ and $0\le tq_\alpha(t)\le1$, and increases pointwise as $\alpha$ decreases.
 
-[F7] [[lem-square-summable-sequences-form-a-hilbert-space]]: Real $\ell^2(\mathbb N)$ with its canonical inner product is complete.
+[F7] [[lem-square-summable-sequences-form-a-hilbert-space]]: Real $\ell^2(\mathbb N)$ with its canonical inner product is complete. The shift $z\mapsto(z_{k+1})_{k\ge0}$ is an isometric bijection from $\ell^2(\mathbb N_{>0})$ to that space.
 
 ## Verification
 
-1.1 Interleaving the constant coordinate and cosine–sine pairs is a linear isometry onto real $\ell^2(\mathbb N)$, so [F7] gives the stated real Hilbert structure. The real Fourier modes are orthonormal by taking real and imaginary parts of the character basis in [F1]. On each positive frequency, $\partial_{xx}\cos(nx)=-n^2\cos(nx)$ and $\partial_{xx}\sin(nx)=-n^2\sin(nx)$, so solving $\partial_tu=\partial_{xx}u$ multiplies both coefficients by $e^{-n^2\bar t}$; the constant mode is unchanged. Therefore the operator in the Example is the periodic heat forward map in Fourier coordinates. [given, A1, F1, F7, algebra]
+1.1 Interleaving the constant coordinate and cosine–sine pairs is a linear isometry onto real $\ell^2(\mathbb N_{>0})$, so [F7] gives the stated real Hilbert structure. With normalized Haar measure $dx/(2\pi)$ and characters $e_n(x)=e^{inx}$, use the real modes $1$, $C_n=(e_n+e_{-n})/\sqrt2=\sqrt2\cos(nx)$ and $S_n=(e_n-e_{-n})/(i\sqrt2)=\sqrt2\sin(nx)$ for $n\ge1$. Character orthonormality in [F1] gives their orthonormality. They are complete in real $L^2$: a real function orthogonal to all these modes is orthogonal to every character, hence is zero by [F1]. Thus their coefficient map is an isometry onto the stated coefficient space. The bounded truth lies in $L^2$ and has such coordinates. On each positive frequency, $\partial_{xx}C_n=-n^2C_n$ and $\partial_{xx}S_n=-n^2S_n$, so solving $\partial_tu=\partial_{xx}u$ multiplies both coefficients by $e^{-n^2\bar t}$; the constant mode is unchanged. Therefore the operator in the Example is the periodic heat forward map in normalized Fourier coordinates. [given, A1, F1, F7, algebra]
 
 1.2 Every multiplier of $T_{\bar t}$ is positive, so $T_{\bar t}$ is injective. The positive-frequency multipliers tend to zero, so finite-frequency truncations converge in operator norm and $T_{\bar t}$ is compact. Moreover, $\sum_{n\ge1}2e^{-2n^2\bar t}<\infty$ by comparison with the geometric series $\sum_{n\ge1}2e^{-2n\bar t}$, so the operator is Hilbert–Schmidt. Squaring the multipliers gives the stated eigenvalues of $T_{\bar t}^*T_{\bar t}$. [given, algebra]
 

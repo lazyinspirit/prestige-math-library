@@ -1,0 +1,1464 @@
+{
+  "version": 1,
+  "run": "inverse-problems-knot-theory-all-109-2026-10-19",
+  "batch": "49",
+  "scope": [
+    "lem-ip-tweedie-mmse-jacobian-and-prox-potential",
+    "def-ip-pnp-ista-with-denoiser",
+    "thm-ip-exact-mmse-pnp-ista-stationarity",
+    "rem-ip-arbitrary-denoiser-has-no-inherited-objective",
+    "ex-ip-scalar-mmse-exact-denoiser",
+    "cex-ip-pnp-iterative-awgn-error-model",
+    "ex-ip-approximate-cnn-mmse-denoiser"
+  ],
+  "contracts": {
+    "lem-ip-tweedie-mmse-jacobian-and-prox-potential": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-euclidean-inner-product",
+          "source_section": "Definition",
+          "quote": "Let $n \\in \\mathbb{N}$. A natural number is a von Neumann natural, that is a set,\nand $n = \\{0, 1, \\dots, n-1\\}$ (The natural numbers $\\mathbb{N}$ (von Neumann),\nOn $\\mathbb{N}$ the order is membership: $m < n \\iff m \\in n$), so\n\n$$\\mathbb{R}^{n} \\;=\\; \\{\\, x \\;:\\; x \\text{ is a function } n \\to \\mathbb{R} \\,\\}$$\n\nis the function space of The vector space $F^{X}$ of all functions $X \\to F$ with pointwise operations, and $F^{n}$ as the case $X = n = \\{0, 1, \\dots, n-1\\}$ at $F = \\mathbb{R}$ and $X = n$,\na vector space over $\\mathbb{R}$ under the pointwise operations\n(Vector space over a field). We write $x_k := x(k)$ for $k < n$, and two elements of\n$\\mathbb{R}^{n}$ are equal exactly when they agree at every $k < n$. This is the\nsame set that $\\mathbb{R}^n$ as the set of functions $n \\to \\mathbb{R}$, and $d_1$, $d_2$, $d_\\infty$ are metrics on it calls $\\mathbb{R}^{n}$.\n\nThe **Euclidean inner product** of $x, y \\in \\mathbb{R}^{n}$ is the real number\n\n$$\\langle x, y\\rangle \\;:=\\; \\sum_{k<n} x_k\\,y_k ,$$\n\nthe finite sum of Finite sums and finite products, by recursion applied to the list $k \\mapsto x_k y_k$\n(extended by $0$ beyond $n$, as every finite list in this library is). The\n**Euclidean norm** of $x$ is\n\n$$\\lVert x\\rVert_2 \\;:=\\; \\sqrt{\\langle x, x\\rangle},$$\n\nwhich is defined because $\\langle x,x\\rangle = \\sum_{k<n} x_k^{2} \\ge 0$ (a sum\nof nonnegative terms, Laws of finite sums and finite products clause 4 and\nSquares of nonzero elements are positive, the case $x_k = 0$ giving $x_k^2 = 0$ by\nInteger powers $a^m$) and every nonnegative real has a unique nonnegative square\nroot (Square roots exist: a unique $\\sqrt{a} \\ge 0$ with $(\\sqrt{a})^2 = a$; the positives are $\\{x^2 : x \\neq 0\\}$).\n\n### Both are defined for every $n$, including $n = 0$\n\nAt $n = 0$ the set $\\mathbb{R}^{0}$ has exactly one element, the empty function,\nand it is the zero vector space (The standard list $e : n \\to F^{n}$ with $e_i(i) = 1_F$ and $e_i(j) = 0_F$ for $j \\ne i$ is an ordered basis of $F^{n}$; hence $\\dim_F F^{n} = n$, and $F^{0}$ is the zero space with basis $\\varnothing$ and dimension $0$ clause 5); the sum\nabove is the empty sum, so $\\langle x,y\\rangle = 0$ and $\\lVert x\\rVert_2 = 0$.\n**This is the first place on this page where the two index regimes diverge, and\nthe divergence is deliberate.** The published metrics $d_1$, $d_2$, $d_\\infty$ of\n$\\mathbb{R}^n$ as the set of functions $n \\to \\mathbb{R}$, and $d_1$, $d_2$, $d_\\infty$ are metrics on it are defined only for $n \\ge 1$, because $d_\\infty$ would\notherwise be a maximum over the empty index set; the algebra above needs no such\nrestriction. The boundary in this page runs between the algebra and the metric,\nnot where a reader would guess, and Conventions of this page, the standing $n \\ge 1$ hypothesis, and what is taken up elsewhere in the reading order lists\nexactly which items inherit $n \\ge 1$.\n\n### The algebra of the inner product\n\nFor all $x, y, z \\in \\mathbb{R}^{n}$ and $\\lambda \\in \\mathbb{R}$:\n\n1. **Symmetry.** $\\langle x,y\\rangle = \\langle y,x\\rangle$, since $x_ky_k = y_kx_k$\n   termwise.\n2. **Additivity in the first argument.**\n   $\\langle x + y, z\\rangle = \\langle x,z\\rangle + \\langle y,z\\rangle$: the list\n   $k \\mapsto (x_k+y_k)z_k$ is the termwise sum of $k \\mapsto x_kz_k$ and\n   $k \\mapsto y_kz_k$, so Laws of finite sums and finite products clause 1 applies.\n3. **Homogeneity in the first argument.**\n   $\\langle \\lambda x, y\\rangle = \\lambda\\langle x,y\\rangle$, by\n   Laws of finite sums and finite products clause 2.\n4. **Bilinearity.** Clauses 2 and 3 together with symmetry give the same two laws\n   in the second argument.\n5. **Positive definiteness.** $\\langle x,x\\rangle \\ge 0$, and\n   $\\langle x,x\\rangle = 0$ if and only if $x = 0$. Indeed a vanishing sum of\n   nonnegative terms has every term $0$ (Laws of finite sums and finite products clause 4), so\n   $x_k^{2} = 0$ for every $k < n$, and a nonzero real has a positive square\n   (Squares of nonzero elements are positive), whence $x_k = 0$ for every $k < n$ and $x = 0$.\n6. **Agreement with the published Euclidean metric.** For $n \\ge 1$ and\n   $x, y \\in \\mathbb{R}^{n}$,\n   $\\lVert x - y\\rVert_2 = \\sqrt{\\sum_{k<n}(x_k-y_k)^{2}} = d_2(x,y)$, the two\n   sides being the same expression ($\\mathbb{R}^n$ as the set of functions $n \\to \\mathbb{R}$, and $d_1$, $d_2$, $d_\\infty$ are metrics on it). In particular\n   $\\lVert x\\rVert_2 = d_2(x, 0)$.\n\nThat $\\lVert\\cdot\\rVert_2$ is a norm in the sense of A norm on a real vector space, the induced metric, and the dictionary with the metric axioms\nis proved in Cauchy-Schwarz $\\lvert\\langle x,y\\rangle\\rvert \\le \\lVert x\\rVert_2\\lVert y\\rVert_2$ with its equality case, the triangle inequality for $\\lVert\\cdot\\rVert_2$, the parallelogram law and polarisation, where the triangle\ninequality is obtained from the Cauchy-Schwarz inequality; it is not assumed\nhere.",
+          "uses": [
+            "1.1",
+            "4.1",
+            "5.1",
+            "5.2",
+            "6.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "def-probability-measure",
+          "source_section": "Definition",
+          "quote": "A **probability measure** on a measurable space $(X,\\mathcal A)$ is a measure $\\mathbb P$ with $\\mathbb P(X)=1$ (Measures on sigma-algebras). The triple $(X,\\mathcal A,\\mathbb P)$ is a **probability space** (Measure spaces); $X$ is its sample space and the members of $\\mathcal A$ are its events.",
+          "uses": [
+            "1.1",
+            "2.1",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "thm-differentiation-under-the-integral-sign",
+          "source_section": "Statement",
+          "quote": "Let $I\\subseteq\\mathbb R$ be an open interval and let $f:X\\times I\\to\\mathbb C$\nbe such that:\n\n1. for every $t\\in I$, the function $x\\mapsto f(x,t)$ is integrable;\n2. for almost every $x$, the map $t\\mapsto f(x,t)$ is differentiable on $I$;\n3. for every $t\\in I$, the function\n   $$x\\mapsto \\frac{\\partial f}{\\partial t}(x,t),$$\n   extended by zero where the derivative is undefined, is measurable;\n4. there are a measurable null set $N$ and a nonnegative measurable function\n   $g$ with\n   $$\\int g\\,d\\mu<+\\infty$$\n   and\n   $$\\left|\\frac{\\partial f}{\\partial t}(x,t)\\right|\\le g(x)$$\n   for every $t\\in I$ and every $x\\in X\\setminus N$.\n\nThen\n$$F(t):=\\int f(x,t)\\,d\\mu(x)$$\nis differentiable on $I$, and\n$$F'(t)=\\int \\frac{\\partial f}{\\partial t}(x,t)\\,d\\mu(x),$$\nwith the same zero extension in the last integral.",
+          "uses": [
+            "3.1",
+            "4.1",
+            "4.2"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "thm-dominated-convergence",
+          "source_section": "Statement",
+          "quote": "Let $(X,\\mathcal A,\\mu)$ be an arbitrary measure space. All functions below have domain $X$. Let $f$ and $(f_n)$ be measurable complex-valued functions such that\n$f_n\\to f$ almost everywhere and $|f_n|\\le g$ almost everywhere for a single\nnonnegative measurable function $g$ with $\\int g\\,d\\mu<+\\infty$. Then\n$f\\in L^1(\\mu)$,\n$$\\int|f_n-f|\\,d\\mu\\longrightarrow0,$$\nand hence\n$$\\int f_n\\,d\\mu\\longrightarrow\\int f\\,d\\mu.$$",
+          "uses": [
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "thm-derivative-of-exponential",
+          "source_section": "Statement",
+          "quote": "The real exponential function is $C^\\infty$, and for every $m\\in\\mathbb N$,\n$$\\exp^{(m)}=\\exp.$$\nIn particular $(\\exp)'=\\exp$.",
+          "uses": [
+            "3.1",
+            "4.1",
+            "4.2"
+          ]
+        },
+        {
+          "fact": "F6",
+          "source": "thm-logarithm-derivative-and-integral",
+          "source_section": "Statement",
+          "quote": "For $x>0$, $\\log$ is differentiable and\n$$\\log'(x)=\\frac1x,\\qquad \\log x=\\int_1^x\\frac{dt}{t}.$$",
+          "uses": [
+            "3.1",
+            "4.2"
+          ]
+        },
+        {
+          "fact": "F7",
+          "source": "thm-chain-rule-for-total-derivatives",
+          "source_section": "Statement",
+          "quote": "Let $f:U\\to V\\subseteq\\mathbb R^n$ be totally differentiable at $a\\in U$ and let $g:V\\to\\mathbb R^p$ be totally differentiable at $f(a)$. Then $g\\circ f$ is totally differentiable at $a$ and\n\n$$D(g\\circ f)(a)=Dg(f(a))\\circ Df(a).$$",
+          "uses": [
+            "3.1",
+            "4.1",
+            "4.2",
+            "5.2",
+            "6.1"
+          ]
+        },
+        {
+          "fact": "F8",
+          "source": "thm-algebra-of-derivatives",
+          "source_section": "Statement",
+          "quote": "Let $A \\subseteq \\mathbb{R}$, let $c \\in A$ be a limit point of $A$\n(Limit point, isolated point, adherent point, derived set, and dense subset of $\\mathbb{R}$), let $f, g : A \\to \\mathbb{R}$ be differentiable at $c$\n(The derivative $f'(c) = \\lim_{x \\to c} \\frac{f(x) - f(c)}{x - c}$ of $f : A \\to \\mathbb{R}$ at a point $c \\in A$ that is a limit point of $A$, and differentiability on a set) and let $\\alpha \\in \\mathbb{R}$. Then:\n\n1. $f + g$ is differentiable at $c$ and $(f+g)'(c) = f'(c) + g'(c)$;\n2. $\\alpha f$ is differentiable at $c$ and $(\\alpha f)'(c) = \\alpha f'(c)$;\n3. $fg$ is differentiable at $c$ and $(fg)'(c) = f'(c)g(c) + f(c)g'(c)$;\n4. if $g(c) \\ne 0$ then, writing $A_0 := \\{\\, x \\in A : g(x) \\ne 0 \\,\\}$, the\n   point $c$ lies in $A_0$ and is a limit point of $A_0$, the quotient\n   $(f/g)|_{A_0} : A_0 \\to \\mathbb{R}$, $x \\mapsto f(x)/g(x)$, is differentiable\n   at $c$ as a function on $A_0$, and\n   $$\\bigl((f/g)|_{A_0}\\bigr)'(c) \\;=\\; \\frac{f'(c)\\,g(c) - f(c)\\,g'(c)}{g(c)^{2}} .$$\n\nEach claim asserts two things: that the derivative on the left exists, and that\nit has the stated value. Both are proved.\n\n**Why claim 4 is stated on $A_0$.** The function $f/g$ is not defined where $g$\nvanishes, and $g$ may vanish at points of $A$ far from $c$; restricting to $A_0$\nis forced. That the restriction still has $c$ as a limit point, so that a\nderivative there means anything at all, is not free either, and it is the last\nclaim of If $\\lim_{x \\to c} f(x) = L \\ne 0$ then $|f| > |L|/2$ on a punctured neighbourhood of $c$; in particular if $L > 0$ then $f > L/2 > 0$ there applied to $g$. The hypothesis\nis $g(c) \\ne 0$, not \"$g$ vanishes nowhere\".\n\n**Everything is proved through\nCarathéodory's characterisation: $f$ is differentiable at $c$ if and only if there is $\\varphi : A \\to \\mathbb{R}$, continuous at $c$, with $f(x) - f(c) = \\varphi(x)(x - c)$ for every $x \\in A$, and then $\\varphi$ is unique and $\\varphi(c) = f'(c)$.** No difference quotient is estimated and\nno limit theorem beyond continuity is used, so no choice principle is spent.\nThe four identities are four algebraic rearrangements of an increment, each\nfollowed by a reading of Sums, scalar multiples, products, absolute values, maxima, minima and quotients with nonvanishing denominator of continuous functions are continuous, as are constants, the identity and every polynomial function.",
+          "uses": [
+            "3.1",
+            "4.1"
+          ]
+        },
+        {
+          "fact": "F9",
+          "source": "thm-ck-euclidean-maps-closed-under-algebra-and-composition",
+          "source_section": "Statement",
+          "quote": "Let $k\\in\\mathbb N$. Finite componentwise sums and products of $C^k$ Euclidean maps are $C^k$, and a composite of composable $C^k$ Euclidean maps is $C^k$. Scalar multiples are included among the finite componentwise operations. The assertions remain valid on an empty open domain.",
+          "uses": [
+            "3.1",
+            "4.1",
+            "7.1"
+          ]
+        },
+        {
+          "fact": "F10",
+          "source": "def-ck-euclidean-maps-and-diffeomorphisms",
+          "source_section": "Definition",
+          "quote": "Let $k\\in\\mathbb N$, let $m,q\\ge1$, let $U\\subseteq\\mathbb R^m$ be open, and let $f:U\\to\\mathbb R^q$. A map $f:U\\to\\mathbb R^q$ is of class $C^k$ when each component is of class $C^k$. Each scalar component uses the word-derivative convention of [[def-ck-and-multi-index-notation-in-several-variables]], whose source dimension is positive. The map is **smooth**, or $C^\\infty$, when it is $C^k$ for every $k\\in\\mathbb N$.\n\nLet $n\\ge1$ and let $U,V\\subseteq\\mathbb R^n$ be open. A bijection $f:U\\to V$ is a **$C^k$ diffeomorphism** when both $f$ and $f^{-1}$ are $C^k$. For $k\\ge1$, a **local $C^k$ diffeomorphism at $a\\in U$** is a restriction $f|_P:P\\to Q$ between open neighbourhoods of $a$ and $f(a)$ that is a $C^k$ diffeomorphism. At $k=1$ this agrees with [[def-c-one-map-and-local-inverse]]: continuous first partial derivatives give the required total derivative by [[thm-continuous-partial-derivatives-imply-total-differentiability]], while continuity of the total derivative gives continuity of its matrix entries and hence of the first partial derivatives.",
+          "uses": [
+            "3.1",
+            "7.1"
+          ]
+        },
+        {
+          "fact": "F11",
+          "source": "lem-choice-free-smooth-inverse-function-theorem-in-euclidean-space",
+          "source_section": "Statement",
+          "quote": "In ZF, let $n\\ge1$, let $U\\subseteq\\mathbb R^n$ be open, let $f:U\\to\\mathbb R^n$ be smooth, and let $a\\in U$. If $Df(a)$ is invertible, then there are open neighbourhoods $a\\in V\\subseteq U$ and $f(a)\\in W$ such that $f|_V:V\\to W$ is a diffeomorphism. Writing $g=(f|_V)^{-1}$,\n$$Dg(y)=Df(g(y))^{-1}\\qquad(y\\in W).$$\nNo choice axiom is used.",
+          "uses": [
+            "7.1"
+          ]
+        },
+        {
+          "fact": "F12",
+          "source": "cor-mean-value-theorem",
+          "source_section": "Statement",
+          "quote": "Let $a, b \\in \\mathbb{R}$ with $a < b$ and let $f : [a,b] \\to \\mathbb{R}$ be\ncontinuous on $[a,b]$ (Continuity of $f : A \\to \\mathbb{R}$ at a point of $A$ and on $A$: the $\\varepsilon$-$\\delta$ condition, its agreement with $\\lim_{x \\to c} f(x) = f(c)$ at a limit point, and continuity at an isolated point, Intervals of $\\mathbb{R}$: the nine order-convex forms, nondegeneracy, and length) and\ndifferentiable at every point of $(a,b)$ as a function on $[a,b]$\n(The derivative $f'(c) = \\lim_{x \\to c} \\frac{f(x) - f(c)}{x - c}$ of $f : A \\to \\mathbb{R}$ at a point $c \\in A$ that is a limit point of $A$, and differentiability on a set). Then there is $c \\in (a,b)$ with\n\n$$f(b) - f(a) \\;=\\; f'(c)\\,(b - a) .$$\n\nEquivalently, since $b - a \\ne 0$, there is $c \\in (a,b)$ at which\n$f'(c) = \\bigl(f(b)-f(a)\\bigr)/(b-a)$: the derivative somewhere inside equals\nthe average rate of change across the whole interval.\n\n**Continuity on the closed interval cannot be dropped.** Differentiability at\nevery point of $(a,b)$ alone does not suffice: a function on $[0,1]$,\ndifferentiable at every point of $(0,1)$ with derivative constantly $1$, for\nwhich no $c$ works, is exhibited later on this page as a false statement, and\nthe companion page works the same witness out in full.",
+          "uses": [
+            "3.1",
+            "6.1",
+            "8.1"
+          ]
+        },
+        {
+          "fact": "F13",
+          "source": "def-ck-and-multi-index-notation-in-several-variables",
+          "source_section": "Definition",
+          "quote": "Let $m\\ge1$, let $U\\subseteq\\mathbb R^m$ be open, and let $f:U\\to\\mathbb R$. A **multi-index** is $\\alpha=(\\alpha_0,\\ldots,\\alpha_{m-1})\\in\\mathbb N^m$. Put\n\n$$|\\alpha|:=\\sum_{i<m}\\alpha_i,\\qquad \\alpha!:=\\prod_{i<m}\\alpha_i!,\\qquad h^\\alpha:=\\prod_{i<m}h_i^{\\alpha_i}\\quad(h\\in\\mathbb R^m).$$\n\nHere $|\\alpha|$ and $\\alpha!$ use the natural-number sum and product of Finite sums and finite products of natural numbers, $\\sum_{k<n} a_k$ and $\\prod_{k<n} a_k$ in $\\mathbb{N}$, and $n!$ is the factorial of The factorial $n!$ and the falling factorial $n^{\\underline{k}}$, defined by recursion in $\\mathbb{N}$. By contrast, $h^\\alpha$ is the finite product in $\\mathbb R$ of Finite sums and finite products, by recursion, with the natural exponents interpreted by Integer powers $a^m$. For the zero multi-index $0$, set $D^0f:=f$. For nonzero $\\alpha$, write\n\n$$D^\\alpha f:=\\partial_0^{\\alpha_0}\\cdots\\partial_{m-1}^{\\alpha_{m-1}}f$$\n\nfor this displayed, canonical order whenever it exists. Coordinate partial derivatives have the meaning fixed in Directional derivatives and partial derivatives of a map $U\\subseteq\\mathbb{R}^m\\to\\mathbb{R}^n$.\n\nFor $k\\in\\mathbb N$, $f$ is of class $C^k$ on $U$ when, for every word $(i_1,\\ldots,i_r)$ of coordinate indices with $0\\le r\\le k$, the iterated derivative $\\partial_{i_r}\\cdots\\partial_{i_1}f$ exists and is continuous on $U$; the word of length $0$ denotes $f$. Thus this definition does **not** presuppose that differently ordered derivatives are equal. Equality of their values is a later theorem under these regularity hypotheses.",
+          "uses": [
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F14",
+          "source": "def-measure-with-density",
+          "source_section": "Definition",
+          "quote": "Let $(X,\\mathcal A,\\mu)$ be a measure space and let\n$f:X\\to[0,+\\infty]$ be measurable. The **measure with density $f$ relative\nto $\\mu$** is the measure\n$$f\\,d\\mu:\\mathcal A\\to[0,+\\infty],\\qquad (f\\,d\\mu)(A):=\\int_A f\\,d\\mu,$$\nwhose measure property is supplied by\nThe indefinite integral of a nonnegative measurable function is a measure.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F15",
+          "source": "prop-the-nonnegative-integral-agrees-with-the-simple-integral",
+          "source_section": "Statement",
+          "quote": "If $s$ is a nonnegative simple measurable function, then its nonnegative\nLebesgue integral equals its simple integral:\n$$\\int s\\,d\\mu=\\int_{\\mathrm{simple}} s\\,d\\mu.$$",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F16",
+          "source": "prop-order-and-scalar-rules-for-the-nonnegative-integral",
+          "source_section": "Statement",
+          "quote": "Let $(X,\\mathcal A,\\mu)$ be an arbitrary measure space. Let $f,g:X\\to[0,+\\infty]$ be measurable and let $c\\ge0$.\n\n1. If $f\\le g$, then $\\int f\\,d\\mu\\le\\int g\\,d\\mu$.\n2. If $c>0$, then $\\int cf\\,d\\mu=c\\int f\\,d\\mu$. For $c=0$,\n   the integral of the zero function is $0$. Neither clause forms the\n   undefined extended-real product $0\\cdot(+\\infty)$.",
+          "uses": [
+            "1.1",
+            "2.1",
+            "5.1"
+          ]
+        },
+        {
+          "fact": "F17",
+          "source": "thm-linearity-of-the-lebesgue-integral-on-l-one",
+          "source_section": "Statement",
+          "quote": "The class $L^1(\\mu)$ is a complex vector space, and the Lebesgue integral is\ncomplex-linear on it:\n$$\\int (\\alpha f+\\beta g)\\,d\\mu=\\alpha\\int f\\,d\\mu+\\beta\\int g\\,d\\mu \\qquad(\\alpha,\\beta\\in\\mathbb C,\\ f,g\\in L^1(\\mu)).$$",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F18",
+          "source": "thm-monotone-convergence-for-the-integral",
+          "source_section": "Statement",
+          "quote": "Let $(X,\\mathcal A,\\mu)$ be an arbitrary measure space. Let $f_n:X\\to[0,+\\infty]$ be measurable for every $n\\ge1$, with $0\\le f_1\\le f_2\\le\\cdots$, and suppose $f_n(x)\\uparrow f(x)$ for every $x\\in X$. Then\n$$\\int f_n\\,d\\mu\\uparrow\\int f\\,d\\mu.$$",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F19",
+          "source": "thm-finite-and-countable-subadditivity-of-measures",
+          "source_section": "Statement",
+          "quote": "Let $\\mu$ be a measure and let $(E_k)_{k\\in\\mathbb N}$ be measurable. Then\n\n$$\\mu\\left(\\bigcup_{k\\in\\mathbb N}E_k\\right)\\le\\sum_{k=0}^{\\infty}\\mu(E_k).$$",
+          "uses": [
+            "1.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1.1",
+          "claim": "Since $0<\\rho_\\sigma(z-u)\\le1$, $p_\\sigma(z)\\le1$. For fixed $z$, the measurable sets $E_k=\\{u:\\rho_\\sigma(z-u)\\ge1/k\\}$, $k\\ge1$, cover $\\mathbb R^n$. Their union is $\\mathbb R^n$, so [F19] and [F2] give $1=\\mu(\\mathbb R^n)\\le\\sum_{k\\ge1}\\mu(E_k)$; some $E_k$ therefore has positive $\\mu$-measure, and $p_\\sigma(z)\\ge\\mu(E_k)/k>0$. For $j=1,2$, the function $u\\mapsto\\|u\\|_2^j\\rho_\\sigma(z-u)$ is bounded because a polynomial factor is dominated at infinity by the Gaussian exponential, so its $\\mu$-integral is finite. Put $w_{\\sigma,z}(u)=\\rho_\\sigma(z-u)/p_\\sigma(z)$. This is a nonnegative Borel function. By [F14], $E\\mapsto\\int_Ew_{\\sigma,z}\\,d\\mu$ is a measure; [F16] identifies it with $\\nu_{\\sigma,z}$ and gives total mass $\\int w_{\\sigma,z}\\,d\\mu=p_\\sigma(z)^{-1}p_\\sigma(z)=1$. Hence $\\nu_{\\sigma,z}$ is a probability measure.",
+          "step": "1.1",
+          "inputs": [
+            "given",
+            "F1",
+            "F2",
+            "F14",
+            "F16",
+            "algebra",
+            "F19"
+          ]
+        },
+        {
+          "id": "step-1-2",
+          "claim": "For a nonnegative simple Borel function $\\varphi=\\sum_{j=1}^m a_j\\mathbf1_{A_j}$ on disjoint Borel sets, $\\varphi w_{\\sigma,z}\\in L^1(\\mu)$ because $\\varphi$ is bounded and $w_{\\sigma,z}\\in L^1(\\mu)$ by step 1.1. By [F15] and [F17], $$\\int\\varphi\\,d\\nu_{\\sigma,z}=\\sum_{j=1}^m a_j\\nu_{\\sigma,z}(A_j)=\\int\\varphi w_{\\sigma,z}\\,d\\mu.$$ For arbitrary nonnegative Borel $\\varphi$, set $\\varphi_k(u)=2^{-k}\\lfloor2^k\\min\\{\\varphi(u),k\\}\\rfloor$. These are finite-valued Borel simple functions, increase pointwise, and converge to $\\varphi$. Applying [F18] under $\\nu_{\\sigma,z}$ and $\\mu$ yields $$\\int\\varphi\\,d\\nu_{\\sigma,z}=\\lim_k\\int\\varphi_k\\,d\\nu_{\\sigma,z}=\\lim_k\\int\\varphi_kw_{\\sigma,z}\\,d\\mu=\\int\\varphi w_{\\sigma,z}\\,d\\mu=p_\\sigma(z)^{-1}\\int\\varphi\\rho_\\sigma(z-u)\\,d\\mu.$$ For real Borel $\\varphi$ with $\\int|\\varphi|\\rho_\\sigma(z-u)\\,d\\mu<\\infty$, apply this identity to $\\varphi^+$ and $\\varphi^-$ and use [F17] to obtain the same formula for $\\varphi$. Taking $\\varphi(u)=\\|u\\|_2^2$ and using its weighted bound in step 1.1 proves the finite-second-moment claim; the finite first moment follows from $\\|u\\|_2\\le1+\\|u\\|_2^2$. Thus $D_\\sigma(z)$ is well-defined.",
+          "step": "2.1",
+          "inputs": [
+            "F2",
+            "F15",
+            "F16",
+            "F17",
+            "F18",
+            "step 1.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2.1",
+          "claim": "Let $\\alpha\\in\\mathbb N^n$ be a multi-index as in [F13]. At order zero, $\\partial^\\alpha\\rho_\\sigma=\\rho_\\sigma$. If $\\partial^\\alpha\\rho_\\sigma(w)=P(w)\\rho_\\sigma(w)$ for a polynomial $P$, then [F7] and [F8] give $\\partial_j(P(w)\\rho_\\sigma(w))=(\\partial_jP(w)-w_jP(w)/\\sigma^2)\\rho_\\sigma(w)$, again a polynomial times $\\rho_\\sigma$. Induction on $|\\alpha|$, in any coordinate order, proves the stated form for every finite derivative. On each compact set of $z$ values, both $|\\partial^\\alpha\\rho_\\sigma(z-u)|$ and $|u_i\\partial^\\alpha\\rho_\\sigma(z-u)|$ are bounded uniformly in $u$, since every polynomial times the Gaussian tends to zero at infinity. Apply [F3] coordinate by coordinate to $p_\\sigma$ and to each numerator $N_i(z)=\\int u_i\\rho_\\sigma(z-u)\\,\\mu(du)$; the uniform bounds supply an integrable majorant and [F4] justifies passage of each derivative limit through the integral. The same bounds for derivatives of order $|\\alpha|+1$ give a uniform bound $M$ for the coordinate derivatives of each resulting derivative on any compact box $K$. For $z,w\\in K$, change one coordinate at a time from $z$ to $w$. Each coordinate restriction is differentiable on an open interval containing its segment by [F3], hence continuous on the segment, so [F12] bounds its increment by $M|z_j-w_j|$. Summing gives a difference bound $M\\sum_{j<n}|z_j-w_j|\\le nM\\|z-w\\|_2$; thus each resulting derivative is continuous. Iterating over $\\alpha$ makes $p_\\sigma$ and every $N_i$ smooth. Since $p_\\sigma>0$, the reciprocal $r(s)=1/s$ is smooth on $(0,\\infty)$: its first derivative is $-r(s)^2$ by the difference quotient, and repeated use of [F8] shows every higher derivative is a polynomial in $r$. Thus [F9] makes $D_\\sigma=(N_i/p_\\sigma)_{i<n}$ smooth. Since $r=1/s$ is smooth and [F6] gives $(\\log)'=r$ on $(0,\\infty)$, $\\log$ is smooth there; then [F9] and $p_\\sigma>0$ make $q_\\sigma=-\\log p_\\sigma$ smooth.",
+          "step": "3.1",
+          "inputs": [
+            "F2",
+            "F3",
+            "F4",
+            "F5",
+            "F6",
+            "F7",
+            "F8",
+            "F9",
+            "F10",
+            "F12",
+            "F13",
+            "step 2.1"
+          ]
+        },
+        {
+          "id": "step-3.1",
+          "claim": "For $a\\in\\mathbb R^n$, expand $u-a=(u-D_\\sigma(z))+(D_\\sigma(z)-a)$ and integrate. The cross term vanishes because $\\int(u-D_\\sigma(z))\\,\\nu_{\\sigma,z}(du)=0$, giving $$\\int\\|u-a\\|_2^2\\,\\nu_{\\sigma,z}(du)=\\int\\|u-D_\\sigma(z)\\|_2^2\\,\\nu_{\\sigma,z}(du)+\\|a-D_\\sigma(z)\\|_2^2.$$ Thus $D_\\sigma(z)$ is the unique posterior squared-error minimizer. Differentiating $N_i/p_\\sigma$ using [F3], [F5], [F7], [F8], and [F9] gives $$\\partial_jD_{\\sigma,i}(z)=\\frac1{\\sigma^2}\\left(\\int u_i u_j\\,\\nu_{\\sigma,z}(du)-D_{\\sigma,i}(z)D_{\\sigma,j}(z)\\right),$$ because the terms containing $z_j$ cancel. This is exactly the stated symmetric covariance formula.",
+          "step": "4.1",
+          "inputs": [
+            "F1",
+            "F3",
+            "F5",
+            "F7",
+            "F8",
+            "F9",
+            "step 2.1",
+            "step 3.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-3.2",
+          "claim": "For each coordinate $j$, $\\partial_j\\rho_\\sigma(z-u)=(u_j-z_j)\\rho_\\sigma(z-u)/\\sigma^2$. Differentiating under the integral by [F3] and using step 2.1 gives $\\nabla p_\\sigma(z)=p_\\sigma(z)(D_\\sigma(z)-z)/\\sigma^2$. Since $p_\\sigma(z)>0$, [F6] gives $\\nabla\\log p_\\sigma=\\nabla p_\\sigma/p_\\sigma$, proving both Tweedie identities in the Statement.",
+          "step": "4.2",
+          "inputs": [
+            "F3",
+            "F5",
+            "F6",
+            "F7",
+            "step 2.1",
+            "step 3.1"
+          ]
+        },
+        {
+          "id": "step-4.1",
+          "claim": "For nonzero $v\\in\\mathbb R^n$, $$v^{\\mathsf T}J D_\\sigma(z)v=\\sigma^{-2}\\int\\langle v,u-D_\\sigma(z)\\rangle^2\\,\\nu_{\\sigma,z}(du).$$ If this were zero, then for each $k\\ge1$ the set where $|\\langle v,u-D_\\sigma(z)\\rangle|\\ge1/k$ would have $\\nu_{\\sigma,z}$-measure zero, since the integral is at least $k^{-2}$ times that set's measure by [F16]; their union is the complement of the affine hyperplane $\\{u:\\langle v,u\\rangle=\\langle v,D_\\sigma(z)\\rangle\\}$. Hence that hyperplane has full $\\nu_{\\sigma,z}$-measure. The density $\\rho_\\sigma(z-u)/p_\\sigma(z)$ is strictly positive, so $\\nu_{\\sigma,z}$ and $\\mu$ have the same null sets: if $\\nu_{\\sigma,z}(E)=0$, then for each $k$, [F16] and step 1.1 give $\\mu(E\\cap\\{\\rho_\\sigma(z-u)/p_\\sigma(z)\\ge1/k\\})\\le k\\nu_{\\sigma,z}(E\\cap\\{\\rho_\\sigma(z-u)/p_\\sigma(z)\\ge1/k\\})=0$, and these sets cover $E$. Thus the hyperplane has full $\\mu$-measure, contradicting the hypothesis. Therefore $J D_\\sigma(z)$ is positive definite.",
+          "step": "5.1",
+          "inputs": [
+            "given",
+            "F1",
+            "step 1.1",
+            "step 4.1",
+            "F16"
+          ]
+        },
+        {
+          "id": "step-4.2",
+          "claim": "Fix $z$ and write $$\\Psi_z(u)=\\frac12\\|D_\\sigma(u)-z\\|_2^2-\\frac12\\|D_\\sigma(u)-u\\|_2^2+\\sigma^2q_\\sigma(u).$$ By the definition of $h_{\\sigma,\\gamma}$, this equals $\\frac12\\|D_\\sigma(u)-z\\|_2^2+\\gamma h_{\\sigma,\\gamma}(D_\\sigma(u))$. Differentiate using [F7] and the symmetry of $J D_\\sigma$ from step 4.1: $$\\nabla\\Psi_z(u)=J D_\\sigma(u)(D_\\sigma(u)-z)-(J D_\\sigma(u)-I)(D_\\sigma(u)-u)+\\sigma^2\\nabla q_\\sigma(u)=J D_\\sigma(u)(u-z),$$ where the last equality uses $D_\\sigma(u)-u=-\\sigma^2\\nabla q_\\sigma(u)$ from step 4.2.",
+          "step": "5.2",
+          "inputs": [
+            "F1",
+            "F7",
+            "step 4.1",
+            "step 4.2"
+          ]
+        },
+        {
+          "id": "step-5.1",
+          "claim": "If $z\\ne w$, put $v=w-z$ and $\\psi(t)=\\langle D_\\sigma(z+tv),v\\rangle$ on $[0,1]$. By [F7] and step 5.1, $\\psi'(t)=v^{\\mathsf T}J D_\\sigma(z+tv)v>0$. The mean-value theorem [F12] yields $\\langle D_\\sigma(w)-D_\\sigma(z),w-z\\rangle>0$, so $D_\\sigma(w)\\ne D_\\sigma(z)$ and $D_\\sigma$ is injective.",
+          "step": "6.1",
+          "inputs": [
+            "F1",
+            "F7",
+            "F12",
+            "step 5.1"
+          ]
+        },
+        {
+          "id": "step-6.1",
+          "claim": "At every $z$, the derivative $J D_\\sigma(z)$ is invertible by step 5.1. Apply [F11] at each $z$: every point has an open neighborhood mapped diffeomorphically onto an open neighborhood. Their images cover $X_\\sigma$, so $X_\\sigma$ is open. Injectivity from step 6.1 makes the local inverse maps agree on overlaps, giving the global inverse $D_\\sigma^{-1}:X_\\sigma\\to\\mathbb R^n$, which is smooth. Since $q_\\sigma$ is smooth by step 3.1, the formula in the Statement makes $h_{\\sigma,\\gamma}$ smooth on $X_\\sigma$.",
+          "step": "7.1",
+          "inputs": [
+            "F9",
+            "F10",
+            "F11",
+            "step 3.1",
+            "step 5.1",
+            "step 6.1"
+          ]
+        },
+        {
+          "id": "step-7.1",
+          "claim": "For any $v\\ne0$, let $\\chi(t)=\\Psi_z(z+tv)$ on $[0,1]$. Step 5.2 gives $\\chi'(t)=t\\,v^{\\mathsf T}J D_\\sigma(z+tv)v>0$ for every $t\\in(0,1]$ by step 5.1. By [F12], $\\Psi_z(z+v)>\\Psi_z(z)$. Thus $u=z$ is the unique global minimizer of $\\Psi_z$. Every $x\\in X_\\sigma$ has a unique form $D_\\sigma(u)$ by step 7.1, while $h_{\\sigma,\\gamma}=+\\infty$ outside $X_\\sigma$; consequently $D_\\sigma(z)$ is the unique global minimizer of $\\frac12\\|x-z\\|_2^2+\\gamma h_{\\sigma,\\gamma}(x)$ over all $x\\in\\mathbb R^n$.",
+          "step": "8.1",
+          "inputs": [
+            "F12",
+            "step 5.1",
+            "step 7.1",
+            "step 5.2"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The claim has no empty-set input; it assumes n≥1 and a probability measure on R^n."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "The Statement requires σ,γ>0; step 1.1 proves pσ(z)>0 for every z under those assumptions."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "The Statement allows n=1; its scalar covariance and affine-hyperplane conditions remain meaningful."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "The Statement excludes priors concentrated on an affine hyperplane; step 5.1 proves positive definiteness from that exact hypothesis."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "The Statement defines h as +∞ off the open image and asserts the unique global minimizer for every z."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Step 1.1 uses the countable cover by likelihood level sets to exhibit a positive integral; no choice axiom is used."
+        },
+        {
+          "case": "iff-forward",
+          "status": "checked",
+          "evidence": "Proof 8.1 makes Psi_z strictly increase on every ray out of z; 7.1 parameterizes the entire finite-valued image, so any global prox minimizer must be D_sigma(z).",
+          "template_review": {
+            "upheld": true,
+            "by": "/root",
+            "reason": "Proof 8.1 makes Psi_z strictly increase on every ray out of z; 7.1 parameterizes the entire finite-valued image, so any global prox minimizer must be D_sigma(z).",
+            "item_sha256": "696a91f7bea1ad580713474b43810fb4dc778bcd51a3827781d15ab5c051247f",
+            "row_sha256": "9e6b6bdf23c41bbfb7db5798040adc4d721e9a22c7fa168bfe2cfba1ccc11054",
+            "role": "root-adopted actual delegated owner-focused FIRST; not native Alpha",
+            "delegated_reviewer": "/root/top_free_abelian_torsion",
+            "delegated_review_sources": [
+              {
+                "file": "research/inverse-problems-knot-theory-all-109-2026-10-19-supervision-20261020/step2-supervision/battery1-boundary/lane-6/proposal.json",
+                "field": "rows",
+                "index": 369
+              }
+            ],
+            "root_adoption_record": "research/inverse-problems-knot-theory-all-109-2026-10-19-supervision-20261020/step2-supervision/battery1-boundary/lane-6/root-final-adoption.json"
+          }
+        },
+        {
+          "case": "iff-reverse",
+          "status": "checked",
+          "evidence": "Proof 8.1 shows D_sigma(z) attains the unique global minimum, not merely a stationary point; h=+infinity outside X_sigma excludes additional exterior minimizers.",
+          "template_review": {
+            "upheld": true,
+            "by": "/root",
+            "reason": "Proof 8.1 shows D_sigma(z) attains the unique global minimum, not merely a stationary point; h=+infinity outside X_sigma excludes additional exterior minimizers.",
+            "item_sha256": "696a91f7bea1ad580713474b43810fb4dc778bcd51a3827781d15ab5c051247f",
+            "row_sha256": "52df4a147850fa41ebf25e592cb85d3c8f122a1a2f5cdef1fb37ba276fcd59f2",
+            "role": "root-adopted actual delegated owner-focused FIRST; not native Alpha",
+            "delegated_reviewer": "/root/top_free_abelian_torsion",
+            "delegated_review_sources": [
+              {
+                "file": "research/inverse-problems-knot-theory-all-109-2026-10-19-supervision-20261020/step2-supervision/battery1-boundary/lane-6/proposal.json",
+                "field": "rows",
+                "index": 370
+              }
+            ],
+            "root_adoption_record": "research/inverse-problems-knot-theory-all-109-2026-10-19-supervision-20261020/step2-supervision/battery1-boundary/lane-6/root-final-adoption.json"
+          }
+        }
+      ],
+      "finite_checks": [],
+      "axioms": [],
+      "proof_status": "complete-local-proof",
+      "proof_status_evidence": "The local proof is complete with exact supplier excerpts and all proof steps mapped. Actual IP-46 estimator, train/test-risk, and posterior-mean supplier bodies were inspected. The analytic posterior-mean map is qualified as an ideal plug-in map; the AC/Countable-Choice posterior-mean proposition is not imported. This completion record is not independent approval.",
+      "unresolved_supplier_checks": [],
+      "unresolved_obligations": [],
+      "finite_checks_note": "No registered finite-smoke check applies to this mathematical claim; scalar identities and interval calculations are derived explicitly in the proof steps.",
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "alpha-batch-49",
+        "notes": "Read all ten proof steps and F1-F19 supplier statements. Positive Gaussian level sets normalize a Borel probability; weighted polynomial bounds give moments even for a heavy-tailed prior, and simple approximation/MCT give the density integration identity. Every coordinate-word derivative has a compact-uniform integrable bound. Replaced the unlicensed oblique-line MVT by differentiable coordinate restrictions on a compact box, proving continuity without assuming total differentiability. Posterior risk expansion and quotient differentiation give covariance/Tweedie identities; strictly positive density transfers null sets, and non-hyperplane support gives SPD. MVT gives injectivity; choice-free IFT patches the unique inverse on the open image. The radial derivative t v^T JD v proves a unique global minimum, with infinite objective off the image. No convexity, coercivity, finite prior moment or arbitrary choice is assumed. Reader measure/norm fact-use changes retained; refuter finding confirmed nonfatal and repaired. Statements unchanged."
+      }
+    },
+    "def-ip-pnp-ista-with-denoiser": {
+      "citations": [],
+      "derivations": [],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The definition has no empty input domain; n≥1 and x0 is an element of R^n."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "The Definition explicitly assumes positive σ and γ, so zero parameter values are outside its domain."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "The Definition includes n=1 and defines the first update at t=1."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "The Definition allows any deterministic denoiser, including a constant map, and asserts no nondegeneracy property."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "The Definition fixes x0 and defines every integer update t≥1."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "The Definition takes one given x0 and a deterministic map; all later iterates are uniquely evaluated by recursion."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The recurrence defines an iteration for a supplied deterministic denoiser. The final paragraph explicitly imposes no proximal, MMSE or convergence property; no such iff is available to review.",
+          "template_review": {
+            "upheld": true,
+            "by": "/root",
+            "reason": "Actual assigned-case review: The recurrence defines an iteration for a supplied deterministic denoiser. The final paragraph explicitly imposes no proximal, MMSE or convergence property; no such iff is available to review.",
+            "item_sha256": "26d916d6631045e6ead577c9b1a042cb592f086b9caa1de70658999c86ca46f3",
+            "row_sha256": "8c5955242877a5680198a669c0e2fcfc8d6a6f1b4c36c201e259f577f038fa2f",
+            "role": "root-adopted actual delegated owner-focused FIRST; not native Alpha",
+            "delegated_reviewer": "/root/flyping_bridge",
+            "delegated_review_sources": [
+              {
+                "file": "research/inverse-problems-knot-theory-all-109-2026-10-19-supervision-20261020/step2-supervision/battery1-boundary/lane-2/proposal.json",
+                "field": "rows",
+                "index": 357
+              }
+            ],
+            "root_adoption_record": "research/inverse-problems-knot-theory-all-109-2026-10-19-supervision-20261020/step2-supervision/battery1-boundary/lane-2/root-final-adoption.json"
+          }
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The recurrence defines an iteration for a supplied deterministic denoiser. The final paragraph explicitly imposes no proximal, MMSE or convergence property; no such iff is available to review.",
+          "template_review": {
+            "upheld": true,
+            "by": "/root",
+            "reason": "Actual assigned-case review: The recurrence defines an iteration for a supplied deterministic denoiser. The final paragraph explicitly imposes no proximal, MMSE or convergence property; no such iff is available to review.",
+            "item_sha256": "26d916d6631045e6ead577c9b1a042cb592f086b9caa1de70658999c86ca46f3",
+            "row_sha256": "2d67242414704f7f0a90814fa31dacda89e8b6d05dec89145e8d1b9212454b69",
+            "role": "root-adopted actual delegated owner-focused FIRST; not native Alpha",
+            "delegated_reviewer": "/root/flyping_bridge",
+            "delegated_review_sources": [
+              {
+                "file": "research/inverse-problems-knot-theory-all-109-2026-10-19-supervision-20261020/step2-supervision/battery1-boundary/lane-2/proposal.json",
+                "field": "rows",
+                "index": 358
+              }
+            ],
+            "root_adoption_record": "research/inverse-problems-knot-theory-all-109-2026-10-19-supervision-20261020/step2-supervision/battery1-boundary/lane-2/root-final-adoption.json"
+          }
+        }
+      ],
+      "finite_checks": [],
+      "axioms": [],
+      "proof_status": "not-applicable",
+      "proof_status_evidence": "The finite deterministic recursion is fully defined. Actual IP-46 definitions were inspected; the A page’s posterior-mean prerequisite was also read, and no learning or convergence guarantee is claimed. This completion record is not independent approval.",
+      "unresolved_supplier_checks": [],
+      "unresolved_obligations": [],
+      "finite_checks_note": "No registered finite-smoke check applies to this mathematical claim; scalar identities and interval calculations are derived explicitly in the proof steps.",
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "alpha-batch-49",
+        "notes": "Reviewed full deterministic recurrence, n>=1, sigma,gamma>0, C1 g, arbitrary supplied total map and fixed x0. Finite recursion evaluates uniquely at every t>=1 without choice or convergence assumptions. Diagram now has precisely the two forward data-flow arrows with matching indices. Reader diagram removal is accepted; no mathematical interface changes. Read def-ip-learned-reconstruction-estimator and def-euclidean-inner-product; no training or MMSE conclusion is imported."
+      }
+    },
+    "thm-ip-exact-mmse-pnp-ista-stationarity": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "lem-ip-tweedie-mmse-jacobian-and-prox-potential",
+          "source_section": "Statement",
+          "quote": "Let $n\\ge1$, let $\\mu$ be a Borel probability measure on $\\mathbb R^n$ that is not concentrated on any affine hyperplane, and let $\\sigma,\\gamma>0$. Put\n$$\\rho_\\sigma(w)=\\exp\\!\\left(-\\frac{\\|w\\|_2^2}{2\\sigma^2}\\right),\\qquad p_\\sigma(z)=\\int_{\\mathbb R^n}\\rho_\\sigma(z-u)\\,\\mu(du),$$\nand define the normalized posterior measure and its mean by\n$$\\nu_{\\sigma,z}(E)=\\frac{\\int_E\\rho_\\sigma(z-u)\\,\\mu(du)}{p_\\sigma(z)}\\quad(E\\in\\mathcal B(\\mathbb R^n)),\\qquad D_\\sigma(z)=\\int_{\\mathbb R^n}u\\,\\nu_{\\sigma,z}(du).$$\nThe omitted normalizing constant of the $N(0,\\sigma^2I)$ likelihood is independent of $u$ and cancels in $\\nu_{\\sigma,z}$. Writing $U(u)=u$ for the identity random vector under $\\nu_{\\sigma,z}$, its covariance matrix is\n$$\\operatorname{Cov}_{\\nu_{\\sigma,z}}(U)=\\int_{\\mathbb R^n}(u-D_\\sigma(z))(u-D_\\sigma(z))^{\\mathsf T}\\,\\nu_{\\sigma,z}(du).$$\nThen $p_\\sigma$ is positive and smooth, each $\\nu_{\\sigma,z}$ has finite second moment, and $D_\\sigma(z)$ uniquely minimizes the posterior squared-error risk $a\\mapsto\\int\\|u-a\\|_2^2\\,\\nu_{\\sigma,z}(du)$. Moreover, $D_\\sigma$ is smooth and\n$$J D_\\sigma(z)=\\sigma^{-2}\\operatorname{Cov}_{\\nu_{\\sigma,z}}(U)$$\nis symmetric positive definite. Hence $D_\\sigma$ is injective with open image $X_\\sigma=D_\\sigma(\\mathbb R^n)$ and smooth inverse on $X_\\sigma$. Put $q_\\sigma=-\\log p_\\sigma$ and, for $x\\in X_\\sigma$, define\n$$h_{\\sigma,\\gamma}(x)=-\\frac{\\|x-D_\\sigma^{-1}(x)\\|_2^2}{2\\gamma}+\\frac{\\sigma^2}{\\gamma}q_\\sigma(D_\\sigma^{-1}(x));$$\nset $h_{\\sigma,\\gamma}(x)=+\\infty$ outside $X_\\sigma$. The restriction of $h_{\\sigma,\\gamma}$ to $X_\\sigma$ is smooth. For any extended-real $h:\\mathbb R^n\\to\\mathbb R\\cup\\{+\\infty\\}$, define\n$$\\operatorname{prox}^{\\mathrm{glob}}_{\\gamma h}(z)=\\operatorname*{arg\\,min}_{x\\in\\mathbb R^n}\\left\\{\\frac12\\|x-z\\|_2^2+\\gamma h(x)\\right\\},$$\nwhere the argmin is the set of global minimizers and $h$ need not be convex. Then\n$$D_\\sigma(z)=z+\\sigma^2\\nabla\\log p_\\sigma(z)=z-\\sigma^2\\nabla q_\\sigma(z),\\qquad \\operatorname{prox}^{\\mathrm{glob}}_{\\gamma h_{\\sigma,\\gamma}}(z)=\\{D_\\sigma(z)\\}\\quad(z\\in\\mathbb R^n).$$",
+          "uses": [
+            "2.1",
+            "3.2",
+            "5.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "def-ip-pnp-ista-with-denoiser",
+          "source_section": "Definition",
+          "quote": "Let $n\\ge1$, $\\sigma,\\gamma>0$, let $g:\\mathbb R^n\\to\\mathbb R$ be continuously differentiable, let $\\widetilde D_\\sigma:\\mathbb R^n\\to\\mathbb R^n$ be a deterministic denoiser map, and choose $x_0\\in\\mathbb R^n$. Define\n$$z_t=x_{t-1}-\\gamma\\nabla g(x_{t-1}),\\qquad x_t=\\widetilde D_\\sigma(z_t)\\quad(t=1,2,\\ldots).$$\nThe output is the sequence $(x_t)_{t\\ge0}$. This definition imposes no convexity, proximal representation, exact-MMSE identity, or convergence property on $\\widetilde D_\\sigma$.\n\nThe diagram depicts the data flow for one update; the displayed recurrence, not the diagram, defines the iteration.\n\n~~~tikz\n\\begin{tikzpicture}[x=1.3cm,y=0.9cm,>=stealth]\n  \\node at (0,0) (old) {$x_{t-1}$};\n  \\node at (3,0) (grad) {$z_t=x_{t-1}-\\gamma\\nabla g(x_{t-1})$};\n  \\node at (7,0) (den) {$x_t=\\widetilde D_\\sigma(z_t)$};\n  \\draw[->] (old) -- (grad);\n  \\draw[->] (grad) -- (den);\n\\end{tikzpicture}\n~~~",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "lem-l-smoothness-descent-inequality",
+          "source_section": "Statement",
+          "quote": "Let $f:\\mathbb R^n\\to\\mathbb R$ be continuously differentiable and suppose $\\nabla f$ is Lipschitz with constant $L\\ge0$ in the Euclidean norm. Then\n$$f(y)\\le f(x)+\\langle\\nabla f(x),y-x\\rangle+\\frac{L}{2}\\|y-x\\|_2^2\\qquad(x,y\\in\\mathbb R^n).$$",
+          "uses": [
+            "1.1",
+            "1.2",
+            "4.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "def-lipschitz-holder-contraction",
+          "source_section": "Definition",
+          "quote": "Let $(X,d_X)$ and $(Y,d_Y)$ be metric spaces ([[def-metric-space]]) and let\n$f : X \\to Y$ be a function. Recall that a metric takes nonnegative real values\n([[lem-metric-nonnegativity]]).\n\n- $f$ is **Lipschitz** with **constant** $L$, where $L \\in \\mathbb{R}$ and\n  $L \\ge 0$, if\n  $$d_Y\\big(f(x), f(x')\\big) \\;\\le\\; L \\, d_X(x,x') \\qquad \\text{for all } x, x' \\in X .$$\n  $f$ is *Lipschitz* if it is Lipschitz with some such constant.\n- Let $\\alpha \\in \\mathbb{Q}$ with $0 < \\alpha \\le 1$ ([[def-rat-order]]). $f$ is\n  **$\\alpha$-Hölder** with **constant** $C$, where $C \\in \\mathbb{R}$ and\n  $C \\ge 0$, if\n  $$d_Y\\big(f(x), f(x')\\big) \\;\\le\\; C \\, d_X(x,x')^{\\alpha} \\qquad \\text{for all } x, x' \\in X ,$$\n  the power being the rational power of a nonnegative base\n  ([[def-rational-power]]). $f$ is *$\\alpha$-Hölder* if it is so with some such\n  constant, and *Hölder* if it is $\\alpha$-Hölder for some rational\n  $\\alpha \\in (0,1]$.\n- $f$ is a **contraction** with constant $q$ if it is Lipschitz with constant $q$\n  and $0 \\le q < 1$. The number $q$ is then called a **contraction constant** for\n  $f$.\n\n**The power $d_X(x,x')^{\\alpha}$ is defined at every pair, including $x = x'$.**\nThe base $d_X(x,x')$ is a nonnegative real, and [[def-rational-power]] defines\n$a^{\\alpha}$ for every $a > 0$ and, by its supplementary clause, sets\n$0^{\\alpha} = 0$ for every rational $\\alpha > 0$. Since $\\alpha > 0$ is required\nhere, the displayed inequality at $x = x'$ reads $0 \\le C \\cdot 0$, which holds;\nso no separate clause and no restriction to $x \\ne x'$ is needed. Note that this\ndoes not by itself explain the strict inequality $\\alpha>0$: if one extended the\nformula to $\\alpha=0$ using the convention $0^0=1$ of [[def-integer-power]], the\nequal-point inequality would still be the automatic $0\\le C$. Globally, however,\nthat extension would reduce to the bounded-diameter condition\n$d_Y(f(x),f(x'))\\le C$, outside the standard Hölder range adopted here.\n\n**Why the exponent is rational on this page and why it is at most $1$.** At this\npoint in the reading order only rational powers are available\n([[def-rational-power]]), so $\\alpha$ ranges over the rationals. The upper\nbound $\\alpha \\le 1$ is the standard convention, and it is where the notion is\nuseful: the classical theory reserves the name for $\\alpha \\in (0,1]$, and\nnothing in this library uses an exponent outside that range. No claim is made\nhere about what an exponent $\\alpha > 1$ would do.\n\n**Constants are not unique and are not part of the data.** If $f$ is Lipschitz\nwith constant $L$ it is Lipschitz with every constant $L' \\ge L$, and likewise\nfor Hölder constants; the adjectives above are existential statements. A\n*contraction*, by contrast, requires a constant strictly below $1$, and that is a\nreal restriction: exhibiting the constant is part of exhibiting a contraction, and\na map that shrinks every distance without admitting one uniform constant is not a\ncontraction here.",
+          "uses": [
+            "1.2"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "def-euclidean-inner-product",
+          "source_section": "Definition",
+          "quote": "Let $n \\in \\mathbb{N}$. A natural number is a von Neumann natural, that is a set,\nand $n = \\{0, 1, \\dots, n-1\\}$ (The natural numbers $\\mathbb{N}$ (von Neumann),\nOn $\\mathbb{N}$ the order is membership: $m < n \\iff m \\in n$), so\n\n$$\\mathbb{R}^{n} \\;=\\; \\{\\, x \\;:\\; x \\text{ is a function } n \\to \\mathbb{R} \\,\\}$$\n\nis the function space of The vector space $F^{X}$ of all functions $X \\to F$ with pointwise operations, and $F^{n}$ as the case $X = n = \\{0, 1, \\dots, n-1\\}$ at $F = \\mathbb{R}$ and $X = n$,\na vector space over $\\mathbb{R}$ under the pointwise operations\n(Vector space over a field). We write $x_k := x(k)$ for $k < n$, and two elements of\n$\\mathbb{R}^{n}$ are equal exactly when they agree at every $k < n$. This is the\nsame set that $\\mathbb{R}^n$ as the set of functions $n \\to \\mathbb{R}$, and $d_1$, $d_2$, $d_\\infty$ are metrics on it calls $\\mathbb{R}^{n}$.\n\nThe **Euclidean inner product** of $x, y \\in \\mathbb{R}^{n}$ is the real number\n\n$$\\langle x, y\\rangle \\;:=\\; \\sum_{k<n} x_k\\,y_k ,$$\n\nthe finite sum of Finite sums and finite products, by recursion applied to the list $k \\mapsto x_k y_k$\n(extended by $0$ beyond $n$, as every finite list in this library is). The\n**Euclidean norm** of $x$ is\n\n$$\\lVert x\\rVert_2 \\;:=\\; \\sqrt{\\langle x, x\\rangle},$$\n\nwhich is defined because $\\langle x,x\\rangle = \\sum_{k<n} x_k^{2} \\ge 0$ (a sum\nof nonnegative terms, Laws of finite sums and finite products clause 4 and\nSquares of nonzero elements are positive, the case $x_k = 0$ giving $x_k^2 = 0$ by\nInteger powers $a^m$) and every nonnegative real has a unique nonnegative square\nroot (Square roots exist: a unique $\\sqrt{a} \\ge 0$ with $(\\sqrt{a})^2 = a$; the positives are $\\{x^2 : x \\neq 0\\}$).\n\n### Both are defined for every $n$, including $n = 0$\n\nAt $n = 0$ the set $\\mathbb{R}^{0}$ has exactly one element, the empty function,\nand it is the zero vector space (The standard list $e : n \\to F^{n}$ with $e_i(i) = 1_F$ and $e_i(j) = 0_F$ for $j \\ne i$ is an ordered basis of $F^{n}$; hence $\\dim_F F^{n} = n$, and $F^{0}$ is the zero space with basis $\\varnothing$ and dimension $0$ clause 5); the sum\nabove is the empty sum, so $\\langle x,y\\rangle = 0$ and $\\lVert x\\rVert_2 = 0$.\n**This is the first place on this page where the two index regimes diverge, and\nthe divergence is deliberate.** The published metrics $d_1$, $d_2$, $d_\\infty$ of\n$\\mathbb{R}^n$ as the set of functions $n \\to \\mathbb{R}$, and $d_1$, $d_2$, $d_\\infty$ are metrics on it are defined only for $n \\ge 1$, because $d_\\infty$ would\notherwise be a maximum over the empty index set; the algebra above needs no such\nrestriction. The boundary in this page runs between the algebra and the metric,\nnot where a reader would guess, and Conventions of this page, the standing $n \\ge 1$ hypothesis, and what is taken up elsewhere in the reading order lists\nexactly which items inherit $n \\ge 1$.\n\n### The algebra of the inner product\n\nFor all $x, y, z \\in \\mathbb{R}^{n}$ and $\\lambda \\in \\mathbb{R}$:\n\n1. **Symmetry.** $\\langle x,y\\rangle = \\langle y,x\\rangle$, since $x_ky_k = y_kx_k$\n   termwise.\n2. **Additivity in the first argument.**\n   $\\langle x + y, z\\rangle = \\langle x,z\\rangle + \\langle y,z\\rangle$: the list\n   $k \\mapsto (x_k+y_k)z_k$ is the termwise sum of $k \\mapsto x_kz_k$ and\n   $k \\mapsto y_kz_k$, so Laws of finite sums and finite products clause 1 applies.\n3. **Homogeneity in the first argument.**\n   $\\langle \\lambda x, y\\rangle = \\lambda\\langle x,y\\rangle$, by\n   Laws of finite sums and finite products clause 2.\n4. **Bilinearity.** Clauses 2 and 3 together with symmetry give the same two laws\n   in the second argument.\n5. **Positive definiteness.** $\\langle x,x\\rangle \\ge 0$, and\n   $\\langle x,x\\rangle = 0$ if and only if $x = 0$. Indeed a vanishing sum of\n   nonnegative terms has every term $0$ (Laws of finite sums and finite products clause 4), so\n   $x_k^{2} = 0$ for every $k < n$, and a nonzero real has a positive square\n   (Squares of nonzero elements are positive), whence $x_k = 0$ for every $k < n$ and $x = 0$.\n6. **Agreement with the published Euclidean metric.** For $n \\ge 1$ and\n   $x, y \\in \\mathbb{R}^{n}$,\n   $\\lVert x - y\\rVert_2 = \\sqrt{\\sum_{k<n}(x_k-y_k)^{2}} = d_2(x,y)$, the two\n   sides being the same expression ($\\mathbb{R}^n$ as the set of functions $n \\to \\mathbb{R}$, and $d_1$, $d_2$, $d_\\infty$ are metrics on it). In particular\n   $\\lVert x\\rVert_2 = d_2(x, 0)$.\n\nThat $\\lVert\\cdot\\rVert_2$ is a norm in the sense of A norm on a real vector space, the induced metric, and the dictionary with the metric axioms\nis proved in Cauchy-Schwarz $\\lvert\\langle x,y\\rangle\\rvert \\le \\lVert x\\rVert_2\\lVert y\\rVert_2$ with its equality case, the triangle inequality for $\\lVert\\cdot\\rVert_2$, the parallelogram law and polarisation, where the triangle\ninequality is obtained from the Cauchy-Schwarz inequality; it is not assumed\nhere.",
+          "uses": [
+            "1.1",
+            "1.2",
+            "2.1",
+            "5.1"
+          ]
+        },
+        {
+          "fact": "F6",
+          "source": "thm-cauchy-schwarz-and-the-euclidean-norm",
+          "source_section": "Statement",
+          "quote": "Let $n \\in \\mathbb{N}$ and let $x, y \\in \\mathbb{R}^{n}$, with the Euclidean\ninner product and the Euclidean norm as in The Euclidean inner product $\\langle x,y\\rangle = \\sum_{k<n} x_k y_k$ on $\\mathbb{R}^n$. Then:\n\n1. **Cauchy-Schwarz.**\n   $$\\lvert\\langle x,y\\rangle\\rvert \\;\\le\\; \\lVert x\\rVert_2\\,\\lVert y\\rVert_2 ,$$\n   with equality if and only if there is a pair $(\\lambda,\\mu) \\ne (0,0)$ of\n   reals with $\\lambda x_k = \\mu y_k$ for every $k < n$.\n2. **$\\lVert\\cdot\\rVert_2$ is a norm on $\\mathbb{R}^{n}$**\n   (A norm on a real vector space, the induced metric, and the dictionary with the metric axioms), for **every** $n \\in \\mathbb{N}$; the metric\n   it induces is $d_2$ of $\\mathbb{R}^n$ as the set of functions $n \\to \\mathbb{R}$, and $d_1$, $d_2$, $d_\\infty$ are metrics on it whenever $n \\ge 1$.\n3. **Parallelogram law.**\n   $$\\lVert x+y\\rVert_2^{2} + \\lVert x-y\\rVert_2^{2} \\;=\\; 2\\lVert x\\rVert_2^{2} + 2\\lVert y\\rVert_2^{2} .$$\n4. **Polarisation.**\n   $$\\langle x,y\\rangle \\;=\\; \\tfrac14\\Bigl(\\lVert x+y\\rVert_2^{2} - \\lVert x-y\\rVert_2^{2}\\Bigr),$$\n   so the inner product is recovered from the norm it induces.\n\n**Clause 1 is a citation, not a new proof.** The inequality and its equality case\nare the published The Cauchy-Schwarz inequality for finite sums, stated there for two lists of\nreals; all that happens below is that it is read in the vector notation of\nThe Euclidean inner product $\\langle x,y\\rangle = \\sum_{k<n} x_k y_k$ on $\\mathbb{R}^n$. Re-proving it here would put two proofs of one\nstatement in the library.",
+          "uses": [
+            "1.2"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1.1",
+          "claim": "For a point $s\\in\\mathbb R^n$, define the extended-real quadratic model $\\mu_s(x)=g(s)+\\langle\\nabla g(s),x-s\\rangle+\\frac1{2\\gamma}\\|x-s\\|_2^2+h_{\\sigma,\\gamma}(x)$. By [F3] and $\\gamma\\le1/L$, its smooth part majorizes $g(x)$ and is tight at $x=s$. Adding $h_{\\sigma,\\gamma}$ preserves the majorization; when $h_{\\sigma,\\gamma}(x)=+\\infty$ both objective values are $+\\infty$. Thus $\\mu_s(x)\\ge f(x)$ for every $x$, and $\\mu_s(s)=f(s)$ in extended-real order.",
+          "step": "1.1",
+          "inputs": [
+            "given",
+            "F3",
+            "F5",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-1.2",
+          "claim": "For $t\\ge2$ put $s=x_{t-1}\\in X_\\sigma$ and define $r_t(x)=g(s)+\\langle\\nabla g(s),x-s\\rangle+\\frac1{2\\gamma}\\|x-s\\|_2^2-g(x)$. By [F3], $r_t(x)\\ge0$ for every $x$, $r_t(s)=0$, and $\\nabla r_t(s)=0$. Its gradient is $\\nabla r_t(x)=\\nabla g(s)+(x-s)/\\gamma-\\nabla g(x)$, so the triangle inequality and positive homogeneity [F6], the Lipschitz bound [F4], and the hypothesis on $\\nabla g$ give $\\|\\nabla r_t(x)-\\nabla r_t(y)\\|_2\\le(1/\\gamma+L)\\|x-y\\|_2\\le(2/\\gamma)\\|x-y\\|_2$. On $X_\\sigma$, $\\mu_s-f=r_t$.",
+          "step": "1.2",
+          "inputs": [
+            "F3",
+            "F4",
+            "F5",
+            "given",
+            "algebra",
+            "F6"
+          ]
+        },
+        {
+          "id": "step-2.1",
+          "claim": "Completing the square gives $\\mu_s(x)=\\frac1{2\\gamma}\\|x-(s-\\gamma\\nabla g(s))\\|_2^2+h_{\\sigma,\\gamma}(x)+g(s)-\\frac\\gamma2\\|\\nabla g(s)\\|_2^2$. By [F1] and the exact update in [F2] with $\\widetilde D_\\sigma=D_\\sigma$, $x_t$ is the unique global minimizer of $\\mu_{x_{t-1}}$. Hence $f(x_t)\\le\\mu_{x_{t-1}}(x_t)\\le\\mu_{x_{t-1}}(x_{t-1})=f(x_{t-1})$. Also $x_t\\in X_\\sigma$ for $t\\ge1$, where $h_{\\sigma,\\gamma}$ is finite, so $f(x_t)$ is finite.",
+          "step": "2.1",
+          "inputs": [
+            "F1",
+            "F2",
+            "F5",
+            "step 1.1",
+            "given",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-3.1",
+          "claim": "The sequence $(f(x_t))_{t\\ge1}$ is finite, nonincreasing by step 2.1, and bounded below by $\\inf f\\in\\mathbb R$. It therefore converges: if $\\ell=\\inf_{t\\ge1}f(x_t)$, then for every $\\varepsilon>0$ some $N$ has $f(x_N)<\\ell+\\varepsilon$, and every $t\\ge N$ has $\\ell\\le f(x_t)\\le f(x_N)$.",
+          "step": "3.1",
+          "inputs": [
+            "given",
+            "step 2.1"
+          ]
+        },
+        {
+          "id": "step-3.2",
+          "claim": "Because $x_t$ minimizes $\\mu_s$, step 2.1 and the identity in step 1.2 yield $0\\le r_t(x_t)=\\mu_s(x_t)-f(x_t)\\le f(x_{t-1})-f(x_t)$. Summing from $t=2$ to $N$ gives $\\sum_{t=2}^N r_t(x_t)\\le f(x_1)-f(x_N)\\le f(x_1)-\\inf f$. The nonnegative summands therefore tend to zero.",
+          "step": "3.2",
+          "inputs": [
+            "F1",
+            "step 2.1",
+            "step 1.2",
+            "given",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-4.1",
+          "claim": "Apply [F3] to $r_t$ with gradient Lipschitz constant $2/\\gamma$ and point $x_t$, taking $u_t=x_t-\\frac\\gamma2\\nabla r_t(x_t)$. Then $0\\le r_t(u_t)\\le r_t(x_t)-\\frac\\gamma4\\|\\nabla r_t(x_t)\\|_2^2$. Step 3.2 implies $\\|\\nabla r_t(x_t)\\|_2^2\\le4r_t(x_t)/\\gamma\\to0$.",
+          "step": "4.1",
+          "inputs": [
+            "F3",
+            "step 1.2",
+            "step 3.2",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-5.1",
+          "claim": "For $t\\ge2$, $x_t$ is a global minimizer of $\\mu_s$ and belongs to the open set $X_\\sigma$, where $\\mu_s$ is differentiable. For every direction $v$, the global minimum gives nonnegative directional difference quotients along $v$ and $-v$ for small positive increments; taking limits gives $\\langle\\nabla\\mu_s(x_t),v\\rangle=0$. Thus $\\nabla\\mu_s(x_t)=0$. Since $r_t=\\mu_s-f$ on $X_\\sigma$, $\\nabla r_t(x_t)=-\\nabla f(x_t)$; step 4.1 now proves $\\|\\nabla f(x_t)\\|_2\\to0$.",
+          "step": "5.1",
+          "inputs": [
+            "F1",
+            "F5",
+            "step 1.2",
+            "step 4.1",
+            "choose"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The theorem has no empty-set input; n≥1 and all function domains are R^n."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "The Statement assumes σ>0, L>0 and 0<γ≤1/L, excluding zero parameters."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "The Statement permits n=1; the proof uses only Euclidean smoothness and the local lemma."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "The Statement requires μ not concentrated on any affine hyperplane, so degenerate priors are excluded."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "The Statement includes the upper endpoint γ=1/L through its weak inequality; the claims start at t=1."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "The initial point is arbitrary, and step 5.1 tests both directions for an arbitrary vector without invoking choice."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The exact-MMSE iteration is asymptotically stationary under the listed hypotheses; stationarity is not asserted to imply global optimality or iterate convergence. No additional forward equivalence is a conclusion.",
+          "template_review": {
+            "upheld": true,
+            "by": "/root",
+            "reason": "The exact-MMSE iteration is asymptotically stationary under the listed hypotheses; stationarity is not asserted to imply global optimality or iterate convergence. No additional forward equivalence is a conclusion.",
+            "item_sha256": "fa91a452f8618f152ba04ae80843a01995346a2540de61ab1a7c3f9173f4f3b5",
+            "row_sha256": "1dde4610e3aad88f688e4639cc0fbefd0a6bdb70b225e851e1a9563f5dd8c44a",
+            "role": "root-adopted actual delegated owner-focused FIRST; not native Alpha",
+            "delegated_reviewer": "/root/top_stable_normal_bundle",
+            "delegated_review_sources": [
+              {
+                "file": "research/inverse-problems-knot-theory-all-109-2026-10-19-supervision-20261020/step2-supervision/battery1-boundary/lane-12/proposal.json",
+                "field": "rows",
+                "index": 376
+              }
+            ],
+            "root_adoption_record": "research/inverse-problems-knot-theory-all-109-2026-10-19-supervision-20261020/step2-supervision/battery1-boundary/lane-12/root-final-adoption.json"
+          }
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The exact-MMSE iteration is asymptotically stationary under the listed hypotheses; stationarity is not asserted to imply global optimality or iterate convergence. In particular no reverse implication is authorized.",
+          "template_review": {
+            "upheld": true,
+            "by": "/root",
+            "reason": "The exact-MMSE iteration is asymptotically stationary under the listed hypotheses; stationarity is not asserted to imply global optimality or iterate convergence. In particular no reverse implication is authorized.",
+            "item_sha256": "fa91a452f8618f152ba04ae80843a01995346a2540de61ab1a7c3f9173f4f3b5",
+            "row_sha256": "a7fc3485d32abd316ec55af5cd99f7d50aca963ad31d167a7168739d0342b64f",
+            "role": "root-adopted actual delegated owner-focused FIRST; not native Alpha",
+            "delegated_reviewer": "/root/top_stable_normal_bundle",
+            "delegated_review_sources": [
+              {
+                "file": "research/inverse-problems-knot-theory-all-109-2026-10-19-supervision-20261020/step2-supervision/battery1-boundary/lane-12/proposal.json",
+                "field": "rows",
+                "index": 377
+              }
+            ],
+            "root_adoption_record": "research/inverse-problems-knot-theory-all-109-2026-10-19-supervision-20261020/step2-supervision/battery1-boundary/lane-12/root-final-adoption.json"
+          }
+        }
+      ],
+      "finite_checks": [],
+      "axioms": [],
+      "proof_status": "complete-local-proof",
+      "proof_status_evidence": "The local proof is complete with exact supplier excerpts and all proof steps mapped. Actual IP-46 estimator, train/test-risk, and posterior-mean supplier bodies were inspected. The analytic posterior-mean map is qualified as an ideal plug-in map; the AC/Countable-Choice posterior-mean proposition is not imported. This completion record is not independent approval.",
+      "unresolved_supplier_checks": [],
+      "unresolved_obligations": [],
+      "finite_checks_note": "No registered finite-smoke check applies to this mathematical claim; scalar identities and interval calculations are derived explicitly in the proof steps.",
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "alpha-batch-49",
+        "notes": "Reviewed all seven steps and F1-F6 against their actual suppliers. gamma<=1/L includes equality: majorization still holds, and the nonnegative residual r_t has gradient Lipschitz constant <=2/gamma. Completing the square uses the repaired lemma global minimizer; x_t lies in the open image and has finite objective from t=1, even if f(x0)=+infinity. Telescoping starts at t=2 to avoid infinity subtraction. Finite infimum bounds residual sums; the descent lemma applied on all R^n at x_t-gamma grad r_t/2 gives ||grad r_t||^2<=4r_t/gamma. Interior first-order optimality yields grad f=-grad r_t. No convexity, iterate convergence or trained-network conclusion is claimed. Reader F6 triangle/homogeneity citation is retained; no statement change or added choice."
+      }
+    },
+    "rem-ip-arbitrary-denoiser-has-no-inherited-objective": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "lem-ip-tweedie-mmse-jacobian-and-prox-potential",
+          "source_section": "Statement",
+          "quote": "Let $n\\ge1$, let $\\mu$ be a Borel probability measure on $\\mathbb R^n$ that is not concentrated on any affine hyperplane, and let $\\sigma,\\gamma>0$. Put\n$$\\rho_\\sigma(w)=\\exp\\!\\left(-\\frac{\\|w\\|_2^2}{2\\sigma^2}\\right),\\qquad p_\\sigma(z)=\\int_{\\mathbb R^n}\\rho_\\sigma(z-u)\\,\\mu(du),$$\nand define the normalized posterior measure and its mean by\n$$\\nu_{\\sigma,z}(E)=\\frac{\\int_E\\rho_\\sigma(z-u)\\,\\mu(du)}{p_\\sigma(z)}\\quad(E\\in\\mathcal B(\\mathbb R^n)),\\qquad D_\\sigma(z)=\\int_{\\mathbb R^n}u\\,\\nu_{\\sigma,z}(du).$$\nThe omitted normalizing constant of the $N(0,\\sigma^2I)$ likelihood is independent of $u$ and cancels in $\\nu_{\\sigma,z}$. Writing $U(u)=u$ for the identity random vector under $\\nu_{\\sigma,z}$, its covariance matrix is\n$$\\operatorname{Cov}_{\\nu_{\\sigma,z}}(U)=\\int_{\\mathbb R^n}(u-D_\\sigma(z))(u-D_\\sigma(z))^{\\mathsf T}\\,\\nu_{\\sigma,z}(du).$$\nThen $p_\\sigma$ is positive and smooth, each $\\nu_{\\sigma,z}$ has finite second moment, and $D_\\sigma(z)$ uniquely minimizes the posterior squared-error risk $a\\mapsto\\int\\|u-a\\|_2^2\\,\\nu_{\\sigma,z}(du)$. Moreover, $D_\\sigma$ is smooth and\n$$J D_\\sigma(z)=\\sigma^{-2}\\operatorname{Cov}_{\\nu_{\\sigma,z}}(U)$$\nis symmetric positive definite. Hence $D_\\sigma$ is injective with open image $X_\\sigma=D_\\sigma(\\mathbb R^n)$ and smooth inverse on $X_\\sigma$. Put $q_\\sigma=-\\log p_\\sigma$ and, for $x\\in X_\\sigma$, define\n$$h_{\\sigma,\\gamma}(x)=-\\frac{\\|x-D_\\sigma^{-1}(x)\\|_2^2}{2\\gamma}+\\frac{\\sigma^2}{\\gamma}q_\\sigma(D_\\sigma^{-1}(x));$$\nset $h_{\\sigma,\\gamma}(x)=+\\infty$ outside $X_\\sigma$. The restriction of $h_{\\sigma,\\gamma}$ to $X_\\sigma$ is smooth. For any extended-real $h:\\mathbb R^n\\to\\mathbb R\\cup\\{+\\infty\\}$, define\n$$\\operatorname{prox}^{\\mathrm{glob}}_{\\gamma h}(z)=\\operatorname*{arg\\,min}_{x\\in\\mathbb R^n}\\left\\{\\frac12\\|x-z\\|_2^2+\\gamma h(x)\\right\\},$$\nwhere the argmin is the set of global minimizers and $h$ need not be convex. Then\n$$D_\\sigma(z)=z+\\sigma^2\\nabla\\log p_\\sigma(z)=z-\\sigma^2\\nabla q_\\sigma(z),\\qquad \\operatorname{prox}^{\\mathrm{glob}}_{\\gamma h_{\\sigma,\\gamma}}(z)=\\{D_\\sigma(z)\\}\\quad(z\\in\\mathbb R^n).$$",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "def-ip-pnp-ista-with-denoiser",
+          "source_section": "Definition",
+          "quote": "Let $n\\ge1$, $\\sigma,\\gamma>0$, let $g:\\mathbb R^n\\to\\mathbb R$ be continuously differentiable, let $\\widetilde D_\\sigma:\\mathbb R^n\\to\\mathbb R^n$ be a deterministic denoiser map, and choose $x_0\\in\\mathbb R^n$. Define\n$$z_t=x_{t-1}-\\gamma\\nabla g(x_{t-1}),\\qquad x_t=\\widetilde D_\\sigma(z_t)\\quad(t=1,2,\\ldots).$$\nThe output is the sequence $(x_t)_{t\\ge0}$. This definition imposes no convexity, proximal representation, exact-MMSE identity, or convergence property on $\\widetilde D_\\sigma$.\n\nThe diagram depicts the data flow for one update; the displayed recurrence, not the diagram, defines the iteration.\n\n~~~tikz\n\\begin{tikzpicture}[x=1.3cm,y=0.9cm,>=stealth]\n  \\node at (0,0) (old) {$x_{t-1}$};\n  \\node at (3,0) (grad) {$z_t=x_{t-1}-\\gamma\\nabla g(x_{t-1})$};\n  \\node at (7,0) (den) {$x_t=\\widetilde D_\\sigma(z_t)$};\n  \\draw[->] (old) -- (grad);\n  \\draw[->] (grad) -- (den);\n\\end{tikzpicture}\n~~~",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "def-euclidean-inner-product",
+          "source_section": "Definition",
+          "quote": "Let $n \\in \\mathbb{N}$. A natural number is a von Neumann natural, that is a set,\nand $n = \\{0, 1, \\dots, n-1\\}$ (The natural numbers $\\mathbb{N}$ (von Neumann),\nOn $\\mathbb{N}$ the order is membership: $m < n \\iff m \\in n$), so\n\n$$\\mathbb{R}^{n} \\;=\\; \\{\\, x \\;:\\; x \\text{ is a function } n \\to \\mathbb{R} \\,\\}$$\n\nis the function space of The vector space $F^{X}$ of all functions $X \\to F$ with pointwise operations, and $F^{n}$ as the case $X = n = \\{0, 1, \\dots, n-1\\}$ at $F = \\mathbb{R}$ and $X = n$,\na vector space over $\\mathbb{R}$ under the pointwise operations\n(Vector space over a field). We write $x_k := x(k)$ for $k < n$, and two elements of\n$\\mathbb{R}^{n}$ are equal exactly when they agree at every $k < n$. This is the\nsame set that $\\mathbb{R}^n$ as the set of functions $n \\to \\mathbb{R}$, and $d_1$, $d_2$, $d_\\infty$ are metrics on it calls $\\mathbb{R}^{n}$.\n\nThe **Euclidean inner product** of $x, y \\in \\mathbb{R}^{n}$ is the real number\n\n$$\\langle x, y\\rangle \\;:=\\; \\sum_{k<n} x_k\\,y_k ,$$\n\nthe finite sum of Finite sums and finite products, by recursion applied to the list $k \\mapsto x_k y_k$\n(extended by $0$ beyond $n$, as every finite list in this library is). The\n**Euclidean norm** of $x$ is\n\n$$\\lVert x\\rVert_2 \\;:=\\; \\sqrt{\\langle x, x\\rangle},$$\n\nwhich is defined because $\\langle x,x\\rangle = \\sum_{k<n} x_k^{2} \\ge 0$ (a sum\nof nonnegative terms, Laws of finite sums and finite products clause 4 and\nSquares of nonzero elements are positive, the case $x_k = 0$ giving $x_k^2 = 0$ by\nInteger powers $a^m$) and every nonnegative real has a unique nonnegative square\nroot (Square roots exist: a unique $\\sqrt{a} \\ge 0$ with $(\\sqrt{a})^2 = a$; the positives are $\\{x^2 : x \\neq 0\\}$).\n\n### Both are defined for every $n$, including $n = 0$\n\nAt $n = 0$ the set $\\mathbb{R}^{0}$ has exactly one element, the empty function,\nand it is the zero vector space (The standard list $e : n \\to F^{n}$ with $e_i(i) = 1_F$ and $e_i(j) = 0_F$ for $j \\ne i$ is an ordered basis of $F^{n}$; hence $\\dim_F F^{n} = n$, and $F^{0}$ is the zero space with basis $\\varnothing$ and dimension $0$ clause 5); the sum\nabove is the empty sum, so $\\langle x,y\\rangle = 0$ and $\\lVert x\\rVert_2 = 0$.\n**This is the first place on this page where the two index regimes diverge, and\nthe divergence is deliberate.** The published metrics $d_1$, $d_2$, $d_\\infty$ of\n$\\mathbb{R}^n$ as the set of functions $n \\to \\mathbb{R}$, and $d_1$, $d_2$, $d_\\infty$ are metrics on it are defined only for $n \\ge 1$, because $d_\\infty$ would\notherwise be a maximum over the empty index set; the algebra above needs no such\nrestriction. The boundary in this page runs between the algebra and the metric,\nnot where a reader would guess, and Conventions of this page, the standing $n \\ge 1$ hypothesis, and what is taken up elsewhere in the reading order lists\nexactly which items inherit $n \\ge 1$.\n\n### The algebra of the inner product\n\nFor all $x, y, z \\in \\mathbb{R}^{n}$ and $\\lambda \\in \\mathbb{R}$:\n\n1. **Symmetry.** $\\langle x,y\\rangle = \\langle y,x\\rangle$, since $x_ky_k = y_kx_k$\n   termwise.\n2. **Additivity in the first argument.**\n   $\\langle x + y, z\\rangle = \\langle x,z\\rangle + \\langle y,z\\rangle$: the list\n   $k \\mapsto (x_k+y_k)z_k$ is the termwise sum of $k \\mapsto x_kz_k$ and\n   $k \\mapsto y_kz_k$, so Laws of finite sums and finite products clause 1 applies.\n3. **Homogeneity in the first argument.**\n   $\\langle \\lambda x, y\\rangle = \\lambda\\langle x,y\\rangle$, by\n   Laws of finite sums and finite products clause 2.\n4. **Bilinearity.** Clauses 2 and 3 together with symmetry give the same two laws\n   in the second argument.\n5. **Positive definiteness.** $\\langle x,x\\rangle \\ge 0$, and\n   $\\langle x,x\\rangle = 0$ if and only if $x = 0$. Indeed a vanishing sum of\n   nonnegative terms has every term $0$ (Laws of finite sums and finite products clause 4), so\n   $x_k^{2} = 0$ for every $k < n$, and a nonzero real has a positive square\n   (Squares of nonzero elements are positive), whence $x_k = 0$ for every $k < n$ and $x = 0$.\n6. **Agreement with the published Euclidean metric.** For $n \\ge 1$ and\n   $x, y \\in \\mathbb{R}^{n}$,\n   $\\lVert x - y\\rVert_2 = \\sqrt{\\sum_{k<n}(x_k-y_k)^{2}} = d_2(x,y)$, the two\n   sides being the same expression ($\\mathbb{R}^n$ as the set of functions $n \\to \\mathbb{R}$, and $d_1$, $d_2$, $d_\\infty$ are metrics on it). In particular\n   $\\lVert x\\rVert_2 = d_2(x, 0)$.\n\nThat $\\lVert\\cdot\\rVert_2$ is a norm in the sense of A norm on a real vector space, the induced metric, and the dictionary with the metric axioms\nis proved in Cauchy-Schwarz $\\lvert\\langle x,y\\rangle\\rvert \\le \\lVert x\\rVert_2\\lVert y\\rVert_2$ with its equality case, the triangle inequality for $\\lVert\\cdot\\rVert_2$, the parallelogram law and polarisation, where the triangle\ninequality is obtained from the Cauchy-Schwarz inequality; it is not assumed\nhere.",
+          "uses": [
+            "1.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1.1",
+          "claim": "Suppose an extended-real penalty $h$ that is finite somewhere and nowhere $-\\infty$ had $P(z)=-z$ as a global minimizer of $\\frac12|x-z|^2+\\gamma h(x)$ for every $z$. Its objective has a finite competitor for every input, so each claimed global minimizer has finite value. For distinct $s,t\\in\\mathbb R$, compare the minimizer at input $s$ with competitor $P(t)$ and the minimizer at input $t$ with competitor $P(s)$, then add the inequalities. The finite penalty values cancel and expansion gives $(P(s)-P(t))(s-t)\\ge0$.",
+          "step": "1.1",
+          "inputs": [
+            "given",
+            "F3",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2.1",
+          "claim": "Substituting $P(s)-P(t)=-(s-t)$ into step 1.1 yields $-(s-t)^2\\ge0$, which is false for $s\\ne t$. Thus no such $h$ exists for this map, so the exact-MMSE construction and stationarity result cannot be transferred to an arbitrary denoiser without a separate proof.",
+          "step": "2.1",
+          "inputs": [
+            "F1",
+            "F2",
+            "step 1.1",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The counterexample map has domain and codomain R, neither of which is empty."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "The Remark statement quantifies over γ>0; step 1.1 uses positive γ in the finite-comparison argument."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "The Remark statement gives the scalar map z↦−z and defines its global proximal-selection condition on R."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "The excluded penalty class is stated exactly as finite somewhere and nowhere −∞; step 1.1 uses that finite competitor."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "The Remark quantifies over every real z, and step 1.1 compares any distinct s,t."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Step 1.1 uses arbitrary distinct real inputs; a concrete pair such as 0 and 1 suffices, with no choice axiom."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The example z->-z violates the necessary proximal monotonicity inequality; it is not an iff for all denoisers.",
+          "template_review": {
+            "upheld": true,
+            "by": "/root",
+            "reason": "The example z->-z violates the necessary proximal monotonicity inequality; it is not an iff for all denoisers.",
+            "item_sha256": "bf485540519703a730d81ab3d6e7f79884e11de025db59716a17bcd2720dbd35",
+            "row_sha256": "3b9b6c8ad12b5cecd5d24ecbacf1507cfe70ddeb316e487656b01555f1789544",
+            "role": "root-adopted actual delegated owner-focused FIRST; not native Alpha",
+            "delegated_reviewer": "/root/top_controlled_h_cobordism",
+            "delegated_review_sources": [
+              {
+                "file": "research/inverse-problems-knot-theory-all-109-2026-10-19-supervision-20261020/step2-supervision/battery1-boundary/lane-5/proposal.json",
+                "field": "rows",
+                "index": 375
+              }
+            ],
+            "root_adoption_record": "research/inverse-problems-knot-theory-all-109-2026-10-19-supervision-20261020/step2-supervision/battery1-boundary/lane-5/root-final-adoption.json"
+          }
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "It does not assert that any particular other denoiser lacks a different objective; that converse is explicitly disclaimed.",
+          "template_review": {
+            "upheld": true,
+            "by": "/root",
+            "reason": "It does not assert that any particular other denoiser lacks a different objective; that converse is explicitly disclaimed.",
+            "item_sha256": "bf485540519703a730d81ab3d6e7f79884e11de025db59716a17bcd2720dbd35",
+            "row_sha256": "02375eb691bb7fb15f738ce2e4a8e69c1403aeadbbbce4632ea02bc6c16f0b27",
+            "role": "root-adopted actual delegated owner-focused FIRST; not native Alpha",
+            "delegated_reviewer": "/root/top_controlled_h_cobordism",
+            "delegated_review_sources": [
+              {
+                "file": "research/inverse-problems-knot-theory-all-109-2026-10-19-supervision-20261020/step2-supervision/battery1-boundary/lane-5/proposal.json",
+                "field": "rows",
+                "index": 376
+              }
+            ],
+            "root_adoption_record": "research/inverse-problems-knot-theory-all-109-2026-10-19-supervision-20261020/step2-supervision/battery1-boundary/lane-5/root-final-adoption.json"
+          }
+        }
+      ],
+      "finite_checks": [],
+      "axioms": [],
+      "proof_status": "complete-local-proof",
+      "proof_status_evidence": "The local proof is complete with exact supplier excerpts and all proof steps mapped. Actual IP-46 estimator, train/test-risk, and posterior-mean supplier bodies were inspected. The analytic posterior-mean map is qualified as an ideal plug-in map; the AC/Countable-Choice posterior-mean proposition is not imported. This completion record is not independent approval.",
+      "unresolved_supplier_checks": [],
+      "unresolved_obligations": [],
+      "finite_checks_note": "No registered finite-smoke check applies to this mathematical claim; scalar identities and interval calculations are derived explicitly in the proof steps."
+    },
+    "ex-ip-scalar-mmse-exact-denoiser": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-dirac-measure",
+          "source_section": "Definition",
+          "quote": "Let $\\mathcal A$ be a sigma-algebra on a nonempty set $X$ (Sigma-algebras) and fix $x_0\\in X$. The **Dirac set function at $x_0$** is\n\n$$\\delta_{x_0}(E):=\\begin{cases}1,&x_0\\in E,\\\\0,&x_0\\notin E,\\end{cases}\\qquad E\\in\\mathcal A.$$\n\nThe two branches are exhaustive and disjoint. The fact that this set function is a probability measure is proved in A Dirac set function is a probability measure.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "prop-dirac-measure-is-a-probability-measure",
+          "source_section": "Statement",
+          "quote": "For $x_0\\in X$, the Dirac set function $\\delta_{x_0}$ is a probability measure on every sigma-algebra on $X$.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "thm-exponential-addition-formula",
+          "source_section": "Statement",
+          "quote": "For all real $x,y$,\n$$\\exp(x+y)=\\exp(x)\\exp(y).$$",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "lem-ip-tweedie-mmse-jacobian-and-prox-potential",
+          "source_section": "Statement",
+          "quote": "Let $n\\ge1$, let $\\mu$ be a Borel probability measure on $\\mathbb R^n$ that is not concentrated on any affine hyperplane, and let $\\sigma,\\gamma>0$. Put\n$$\\rho_\\sigma(w)=\\exp\\!\\left(-\\frac{\\|w\\|_2^2}{2\\sigma^2}\\right),\\qquad p_\\sigma(z)=\\int_{\\mathbb R^n}\\rho_\\sigma(z-u)\\,\\mu(du),$$\nand define the normalized posterior measure and its mean by\n$$\\nu_{\\sigma,z}(E)=\\frac{\\int_E\\rho_\\sigma(z-u)\\,\\mu(du)}{p_\\sigma(z)}\\quad(E\\in\\mathcal B(\\mathbb R^n)),\\qquad D_\\sigma(z)=\\int_{\\mathbb R^n}u\\,\\nu_{\\sigma,z}(du).$$\nThe omitted normalizing constant of the $N(0,\\sigma^2I)$ likelihood is independent of $u$ and cancels in $\\nu_{\\sigma,z}$. Writing $U(u)=u$ for the identity random vector under $\\nu_{\\sigma,z}$, its covariance matrix is\n$$\\operatorname{Cov}_{\\nu_{\\sigma,z}}(U)=\\int_{\\mathbb R^n}(u-D_\\sigma(z))(u-D_\\sigma(z))^{\\mathsf T}\\,\\nu_{\\sigma,z}(du).$$\nThen $p_\\sigma$ is positive and smooth, each $\\nu_{\\sigma,z}$ has finite second moment, and $D_\\sigma(z)$ uniquely minimizes the posterior squared-error risk $a\\mapsto\\int\\|u-a\\|_2^2\\,\\nu_{\\sigma,z}(du)$. Moreover, $D_\\sigma$ is smooth and\n$$J D_\\sigma(z)=\\sigma^{-2}\\operatorname{Cov}_{\\nu_{\\sigma,z}}(U)$$\nis symmetric positive definite. Hence $D_\\sigma$ is injective with open image $X_\\sigma=D_\\sigma(\\mathbb R^n)$ and smooth inverse on $X_\\sigma$. Put $q_\\sigma=-\\log p_\\sigma$ and, for $x\\in X_\\sigma$, define\n$$h_{\\sigma,\\gamma}(x)=-\\frac{\\|x-D_\\sigma^{-1}(x)\\|_2^2}{2\\gamma}+\\frac{\\sigma^2}{\\gamma}q_\\sigma(D_\\sigma^{-1}(x));$$\nset $h_{\\sigma,\\gamma}(x)=+\\infty$ outside $X_\\sigma$. The restriction of $h_{\\sigma,\\gamma}$ to $X_\\sigma$ is smooth. For any extended-real $h:\\mathbb R^n\\to\\mathbb R\\cup\\{+\\infty\\}$, define\n$$\\operatorname{prox}^{\\mathrm{glob}}_{\\gamma h}(z)=\\operatorname*{arg\\,min}_{x\\in\\mathbb R^n}\\left\\{\\frac12\\|x-z\\|_2^2+\\gamma h(x)\\right\\},$$\nwhere the argmin is the set of global minimizers and $h$ need not be convex. Then\n$$D_\\sigma(z)=z+\\sigma^2\\nabla\\log p_\\sigma(z)=z-\\sigma^2\\nabla q_\\sigma(z),\\qquad \\operatorname{prox}^{\\mathrm{glob}}_{\\gamma h_{\\sigma,\\gamma}}(z)=\\{D_\\sigma(z)\\}\\quad(z\\in\\mathbb R^n).$$",
+          "uses": [
+            "3.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1.1",
+          "claim": "By [F1]–[F2], $\\mu=\\frac12\\delta_{-a}+\\frac12\\delta_a$ is a probability measure: for pairwise-disjoint Borel sets each of the two atoms occurs in at most one set, and $\\mu(\\mathbb R)=1$. Since $a>0$, its two atoms are distinct and each has positive mass; every affine hyperplane in $\\mathbb R$ is a singleton, so $\\mu$ is not concentrated on any affine hyperplane. The posterior weights at $a$ and $-a$ are proportional to $\\rho_\\sigma(z-a)$ and $\\rho_\\sigma(z+a)$, hence $D_\\sigma(z)=a\\frac{\\rho_\\sigma(z-a)-\\rho_\\sigma(z+a)}{\\rho_\\sigma(z-a)+\\rho_\\sigma(z+a)}$.",
+          "step": "1.1",
+          "inputs": [
+            "F1",
+            "F2",
+            "given",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2.1",
+          "claim": "Factoring $\\exp(-(z^2+a^2)/(2\\sigma^2))$ from numerator and denominator and using [F3] yields $D_\\sigma(z)=a(\\exp(az/\\sigma^2)-\\exp(-az/\\sigma^2))/(\\exp(az/\\sigma^2)+\\exp(-az/\\sigma^2))$, which is the stated hyperbolic-tangent formula.",
+          "step": "2.1",
+          "inputs": [
+            "F3",
+            "step 1.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-3.1",
+          "claim": "Fact [F4] applies to this nondegenerate two-point prior, so the posterior mean is the unique squared-error minimizer and the lemma's $h_{\\sigma,\\gamma}$ makes $D_\\sigma(z)$ the unique global minimizer of the displayed proximal objective for every $z$.",
+          "step": "3.1",
+          "inputs": [
+            "F4",
+            "given",
+            "step 2.1"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The example has scalar input z∈R and a probability prior on two points."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "The Example assumes a,σ,γ>0, excluding zero atom separation, noise scale and proximal step."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "The Example is the n=1 case and explicitly computes the scalar posterior mean."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Step 1.1 proves the atoms ±a are distinct and the prior is not concentrated on a point."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "The Example states the formula and proximal identity for every z∈R, including z=0."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Step 1.1 gives the explicit finite prior ½δ−a+½δa; no selection from an arbitrary family is used."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The two-point prior gives the displayed exact MMSE/proximal minimizer; no converse prior-identification theorem is claimed. The forward-biconditional boundary is inapplicable to this exact claim.",
+          "template_review": {
+            "upheld": true,
+            "by": "/root",
+            "reason": "The two-point prior gives the displayed exact MMSE/proximal minimizer; no converse prior-identification theorem is claimed. The forward-biconditional boundary is inapplicable to this exact claim.",
+            "item_sha256": "925a1396d101c9846aab13b56f796279f7d348da4696ac4705253c8fc99ffcaa",
+            "row_sha256": "46a895f70bb41863e1133fb54b2e1d542e8147a9891cfa37e5cd6304ad6769ac",
+            "role": "root-adopted actual delegated owner-focused FIRST; not native Alpha",
+            "delegated_reviewer": "/root/top_relative_smoothing",
+            "delegated_review_sources": [
+              {
+                "file": "research/inverse-problems-knot-theory-all-109-2026-10-19-supervision-20261020/step2-supervision/battery1-boundary/lane-10/proposal.json",
+                "field": "rows",
+                "index": 359
+              }
+            ],
+            "root_adoption_record": "research/inverse-problems-knot-theory-all-109-2026-10-19-supervision-20261020/step2-supervision/battery1-boundary/lane-10/root-final-adoption.json"
+          }
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The two-point prior gives the displayed exact MMSE/proximal minimizer; no converse prior-identification theorem is claimed. The reverse-biconditional boundary is inapplicable to this exact claim.",
+          "template_review": {
+            "upheld": true,
+            "by": "/root",
+            "reason": "The two-point prior gives the displayed exact MMSE/proximal minimizer; no converse prior-identification theorem is claimed. The reverse-biconditional boundary is inapplicable to this exact claim.",
+            "item_sha256": "925a1396d101c9846aab13b56f796279f7d348da4696ac4705253c8fc99ffcaa",
+            "row_sha256": "d9fc9269c9a4c6af52c66bec2564c8387475d40267ae378ad7df26d5241de9a2",
+            "role": "root-adopted actual delegated owner-focused FIRST; not native Alpha",
+            "delegated_reviewer": "/root/top_relative_smoothing",
+            "delegated_review_sources": [
+              {
+                "file": "research/inverse-problems-knot-theory-all-109-2026-10-19-supervision-20261020/step2-supervision/battery1-boundary/lane-10/proposal.json",
+                "field": "rows",
+                "index": 360
+              }
+            ],
+            "root_adoption_record": "research/inverse-problems-knot-theory-all-109-2026-10-19-supervision-20261020/step2-supervision/battery1-boundary/lane-10/root-final-adoption.json"
+          }
+        }
+      ],
+      "finite_checks": [],
+      "axioms": [],
+      "proof_status": "complete-local-proof",
+      "proof_status_evidence": "The local proof is complete with exact supplier excerpts and all proof steps mapped. Actual IP-46 estimator, train/test-risk, and posterior-mean supplier bodies were inspected. The analytic posterior-mean map is qualified as an ideal plug-in map; the AC/Countable-Choice posterior-mean proposition is not imported. This completion record is not independent approval.",
+      "unresolved_supplier_checks": [],
+      "unresolved_obligations": [],
+      "finite_checks_note": "No registered finite-smoke check applies to this mathematical claim; scalar identities and interval calculations are derived explicitly in the proof steps.",
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "alpha-batch-49",
+        "notes": "Reviewed all three verification steps and F1-F4. Positive a gives two distinct atoms, each of mass 1/2, hence a Borel probability not supported on any scalar affine hyperplane (singleton). Both Gaussian weights are positive for every real input and sigma>0. Factoring their common exponential yields exactly a tanh(az/sigma^2), including zero input and either sign. The repaired local lemma applies with gamma>0 and supplies both unique risk minimization and unique global proximal minimization. a=0 and sigma=0 are excluded explicitly; no finite-prior-moment or choice difficulty arises."
+      }
+    },
+    "cex-ip-pnp-iterative-awgn-error-model": {
+      "citations": [
+        {
+          "fact": "A1",
+          "source": "def-axiom-of-choice",
+          "source_section": "Definition",
+          "quote": "The **Axiom of Choice** (AC) is the following statement.\n\n> Every family of nonempty sets has a choice function\n> (Choice function).\n\nWritten out: for every set $\\mathcal{F}$ all of whose members are nonempty,\nthere exists a function $g$ with domain $\\mathcal{F}$ satisfying $g(S) \\in S$ for\nall $S \\in \\mathcal{F}$.\n\nAn equivalent formulation is that a product of nonempty sets is nonempty: if\n$X_i \\ne \\emptyset$ for every $i \\in I$, then $\\prod_{i \\in I} X_i \\ne \\emptyset$.\nHere $\\prod_{i \\in I} X_i$ is the set of functions $f$ with domain $I$ such that\n$f(i) \\in X_i$ for every $i \\in I$; when a family of nonempty sets is indexed by\nitself, such an $f$ is precisely a choice function for it.",
+          "uses": [
+            "2.1",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F1",
+          "source": "def-standard-normal-and-normal-laws",
+          "source_section": "Definition",
+          "quote": "Assume AC. Define $\\gamma(E)=\\int_E e^{-x^2/2}/\\sqrt{2\\pi}\\,dx$ for Borel E in $\\mathbb R$. By The standard normal density has total mass one and The indefinite integral of a nonnegative measurable function is a measure, gamma is a probability measure; denote it $N(0,1)$. For $m\\in\\mathbb R$ and $\\sigma\\ge0$, define $N(m,\\sigma^2)$ as the law of $x\\mapsto m+\\sigma x$ on $(\\mathbb R,\\mathcal B,\\gamma)$. This affine map is continuous: for $\\sigma$>0 choose $\\delta$=$\\varepsilon$/$\\sigma$, and for $\\sigma$=0 it is constant. Its inverse images of opens are open, so it is Borel measurable. The law of a random element is a probability measure makes its pushforward a probability. When $\\sigma$=0, the preimage of E is all of R if m belongs to E and empty otherwise, so $N(m,0)=\\delta_m$ in The Dirac set function at a point.",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "lem-normal-location-scale-density",
+          "source_section": "Statement",
+          "quote": "Assume AC. For $m\\in\\mathbb R$ and $\\sigma>0$, the normal law $N(m,\\sigma^2)$\nof Standard normal and normal laws has Lebesgue density\n$$g_{m,\\sigma}(y)=\\frac1\\sigma\\frac{e^{-((y-m)/\\sigma)^2/2}}{\\sqrt{2\\pi}}=\\frac1{\\sqrt{2\\pi\\sigma^2}}e^{-(y-m)^2/(2\\sigma^2)}.$$",
+          "uses": [
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "def-ip-pnp-ista-with-denoiser",
+          "source_section": "Definition",
+          "quote": "Let $n\\ge1$, $\\sigma,\\gamma>0$, let $g:\\mathbb R^n\\to\\mathbb R$ be continuously differentiable, let $\\widetilde D_\\sigma:\\mathbb R^n\\to\\mathbb R^n$ be a supplied deterministic map used in the denoising step, and choose $x_0\\in\\mathbb R^n$. Define\n$$z_t=x_{t-1}-\\gamma\\nabla g(x_{t-1}),\\qquad x_t=\\widetilde D_\\sigma(z_t)\\quad(t=1,2,\\ldots).$$\nThe output is the sequence $(x_t)_{t\\ge0}$. This definition imposes no convexity, proximal representation, exact-MMSE identity, or convergence property on $\\widetilde D_\\sigma$.\n\nHere “denoiser” names the role of the plug-in map; Borel measurability and training under a signal-corruption law, as in the learned-estimator interface, are not assumed.\n\nThe diagram depicts the data flow for one update; the displayed recurrence, not the diagram, defines the iteration.\n\n~~~tikz\n\\begin{tikzpicture}[x=1.3cm,y=0.9cm,>=stealth]\n  \\node at (0,0) (old) {$x_{t-1}$};\n  \\node at (3,0) (grad) {$z_t=x_{t-1}-\\gamma\\nabla g(x_{t-1})$};\n  \\node at (7,0) (den) {$x_t=\\widetilde D_\\sigma(z_t)$};\n  \\draw[->] (old) -- (grad);\n  \\draw[->] (grad) -- (den);\n\\end{tikzpicture}\n~~~",
+          "uses": [
+            "1.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "Since $\\nabla g(x)=x-\\varepsilon$, [F3] gives $z_1=\\varepsilon/2$, $x_1=\\varepsilon^2/4$, and $z_2=x_1-\\frac12(x_1-\\varepsilon)=\\varepsilon^2/8+\\varepsilon/2=(\\varepsilon+2)^2/8-1/2$. Thus $z_2\\ge-1/2$ almost surely.",
+          "step": "1.1",
+          "inputs": [
+            "F3",
+            "given",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "The event $-1/2<\\varepsilon<1/2$ has positive probability by [A1, F1] and gives $-7/32<z_2<9/32$. The event $-5/2<\\varepsilon<-3/2$ also has positive probability and gives $-1/2\\le z_2<-15/32$. These disjoint output intervals show that $z_2$ is not almost surely constant.",
+          "step": "2.1",
+          "inputs": [
+            "A1",
+            "F1",
+            "step 1.1",
+            "given",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "claim": "A nondegenerate Gaussian law has positive probability below $-1/2$ by [A1, F2], whereas $z_2$ has none by step 1.1; a degenerate Gaussian is a point mass, whereas step 2.1 shows $z_2$ is not. Therefore $z_2$ is not Gaussian and the universal iterative-AWGN claim is false.",
+          "step": "3.1",
+          "inputs": [
+            "A1",
+            "F2",
+            "step 1.1",
+            "step 2.1"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The probability model is on the nonempty real line."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "The counterexample fixes σ=1, γ=1/2 and a positive-variance standard normal law."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "The false universal claim is refuted at the second input z2; step 3.1 concludes this single witness is non-Gaussian."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Step 3.1 treats both positive-variance Gaussian laws and degenerate Gaussian point masses; step 2.1 excludes a point mass."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Step 1.1 proves z2≥−1/2; equality occurs at ε=−2, while the positive-probability intervals in step 2.1 lie above it."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "The Statement explicitly assumes AC for the standard-normal law; the witness parameters and map are then specified explicitly."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The refuted implication is Gaussian measurement noise forces Gaussian iteration errors; the explicit quadratic denoiser disproves only this universal direction.",
+          "template_review": {
+            "upheld": true,
+            "by": "/root",
+            "reason": "The refuted implication is Gaussian measurement noise forces Gaussian iteration errors; the explicit quadratic denoiser disproves only this universal direction.",
+            "item_sha256": "37300e7fb7046e7b327dbc9db1cbbb1c369c458cff6a95c1073b39f9c7a98a2c",
+            "row_sha256": "a61ec22f17d50ec971df0c25440bdba5c741d70e6dc22ca03ccf556feeec3dbe",
+            "role": "root-adopted actual delegated owner-focused FIRST; not native Alpha",
+            "delegated_reviewer": "/root/top_free_abelian_torsion",
+            "delegated_review_sources": [
+              {
+                "file": "research/inverse-problems-knot-theory-all-109-2026-10-19-supervision-20261020/step2-supervision/battery1-boundary/lane-6/proposal.json",
+                "field": "rows",
+                "index": 355
+              }
+            ],
+            "root_adoption_record": "research/inverse-problems-knot-theory-all-109-2026-10-19-supervision-20261020/step2-supervision/battery1-boundary/lane-6/root-final-adoption.json"
+          }
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "No reverse implication from Gaussian iteration errors to Gaussian measurement noise or linear denoisers is asserted.",
+          "template_review": {
+            "upheld": true,
+            "by": "/root",
+            "reason": "No reverse implication from Gaussian iteration errors to Gaussian measurement noise or linear denoisers is asserted.",
+            "item_sha256": "37300e7fb7046e7b327dbc9db1cbbb1c369c458cff6a95c1073b39f9c7a98a2c",
+            "row_sha256": "0d152633f433f1c85ea97603ea6a7eefe5a27d650545348897e57c29424a9982",
+            "role": "root-adopted actual delegated owner-focused FIRST; not native Alpha",
+            "delegated_reviewer": "/root/top_free_abelian_torsion",
+            "delegated_review_sources": [
+              {
+                "file": "research/inverse-problems-knot-theory-all-109-2026-10-19-supervision-20261020/step2-supervision/battery1-boundary/lane-6/proposal.json",
+                "field": "rows",
+                "index": 356
+              }
+            ],
+            "root_adoption_record": "research/inverse-problems-knot-theory-all-109-2026-10-19-supervision-20261020/step2-supervision/battery1-boundary/lane-6/root-final-adoption.json"
+          }
+        }
+      ],
+      "finite_checks": [],
+      "axioms": [
+        {
+          "axiom": "AC",
+          "supplier": "def-axiom-of-choice",
+          "facts": [
+            "A1"
+          ],
+          "uses": [
+            "2.1",
+            "3.1"
+          ],
+          "declared_in_statement_or_facts": true
+        }
+      ],
+      "proof_status": "complete-local-proof",
+      "proof_status_evidence": "The local proof is complete with exact supplier excerpts and all proof steps mapped. Actual IP-46 estimator, train/test-risk, and posterior-mean supplier bodies were inspected. The analytic posterior-mean map is qualified as an ideal plug-in map; the AC/Countable-Choice posterior-mean proposition is not imported. This completion record is not independent approval.",
+      "unresolved_supplier_checks": [],
+      "unresolved_obligations": [],
+      "finite_checks_note": "No registered finite-smoke check applies to this mathematical claim; scalar identities and interval calculations are derived explicitly in the proof steps.",
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "alpha-batch-49",
+        "notes": "Reviewed all three counterexample steps, F1-F3 and A1. With theta=x0=0, gamma=1/2 and D(z)=z^2, direct substitution gives z2=(epsilon+2)^2/8-1/2. Recomputed endpoints: epsilon in (-1/2,1/2) gives (-7/32,9/32), while epsilon in (-5/2,-3/2) gives [-1/2,-15/32). Both events have positive standard-normal probability and disjoint images, excluding a point mass. The lower bound excludes every positive-variance normal by the strictly positive full-line density. AC is explicitly inherited from both normal-law suppliers. The universal claim is refuted by a total continuous deterministic map; no exact-MMSE hypothesis is needed or claimed."
+      }
+    },
+    "ex-ip-approximate-cnn-mmse-denoiser": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-dirac-measure",
+          "source_section": "Definition",
+          "quote": "Let $\\mathcal A$ be a sigma-algebra on a nonempty set $X$ (Sigma-algebras) and fix $x_0\\in X$. The **Dirac set function at $x_0$** is\n\n$$\\delta_{x_0}(E):=\\begin{cases}1,&x_0\\in E,\\\\0,&x_0\\notin E,\\end{cases}\\qquad E\\in\\mathcal A.$$\n\nThe two branches are exhaustive and disjoint. The fact that this set function is a probability measure is proved in A Dirac set function is a probability measure.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "prop-dirac-measure-is-a-probability-measure",
+          "source_section": "Statement",
+          "quote": "For $x_0\\in X$, the Dirac set function $\\delta_{x_0}$ is a probability measure on every sigma-algebra on $X$.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "thm-exponential-addition-formula",
+          "source_section": "Statement",
+          "quote": "For all real $x,y$,\n$$\\exp(x+y)=\\exp(x)\\exp(y).$$",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "lem-ip-tweedie-mmse-jacobian-and-prox-potential",
+          "source_section": "Statement",
+          "quote": "Let $n\\ge1$, let $\\mu$ be a Borel probability measure on $\\mathbb R^n$ that is not concentrated on any affine hyperplane, and let $\\sigma,\\gamma>0$. Put\n$$\\rho_\\sigma(w)=\\exp\\!\\left(-\\frac{\\|w\\|_2^2}{2\\sigma^2}\\right),\\qquad p_\\sigma(z)=\\int_{\\mathbb R^n}\\rho_\\sigma(z-u)\\,\\mu(du),$$\nand define the normalized posterior measure and its mean by\n$$\\nu_{\\sigma,z}(E)=\\frac{\\int_E\\rho_\\sigma(z-u)\\,\\mu(du)}{p_\\sigma(z)}\\quad(E\\in\\mathcal B(\\mathbb R^n)),\\qquad D_\\sigma(z)=\\int_{\\mathbb R^n}u\\,\\nu_{\\sigma,z}(du).$$\nThe omitted normalizing constant of the $N(0,\\sigma^2I)$ likelihood is independent of $u$ and cancels in $\\nu_{\\sigma,z}$. Writing $U(u)=u$ for the identity random vector under $\\nu_{\\sigma,z}$, its covariance matrix is\n$$\\operatorname{Cov}_{\\nu_{\\sigma,z}}(U)=\\int_{\\mathbb R^n}(u-D_\\sigma(z))(u-D_\\sigma(z))^{\\mathsf T}\\,\\nu_{\\sigma,z}(du).$$\nThen $p_\\sigma$ is positive and smooth, each $\\nu_{\\sigma,z}$ has finite second moment, and $D_\\sigma(z)$ uniquely minimizes the posterior squared-error risk $a\\mapsto\\int\\|u-a\\|_2^2\\,\\nu_{\\sigma,z}(du)$. Moreover, $D_\\sigma$ is smooth and\n$$J D_\\sigma(z)=\\sigma^{-2}\\operatorname{Cov}_{\\nu_{\\sigma,z}}(U)$$\nis symmetric positive definite. Hence $D_\\sigma$ is injective with open image $X_\\sigma=D_\\sigma(\\mathbb R^n)$ and smooth inverse on $X_\\sigma$. Put $q_\\sigma=-\\log p_\\sigma$ and, for $x\\in X_\\sigma$, define\n$$h_{\\sigma,\\gamma}(x)=-\\frac{\\|x-D_\\sigma^{-1}(x)\\|_2^2}{2\\gamma}+\\frac{\\sigma^2}{\\gamma}q_\\sigma(D_\\sigma^{-1}(x));$$\nset $h_{\\sigma,\\gamma}(x)=+\\infty$ outside $X_\\sigma$. The restriction of $h_{\\sigma,\\gamma}$ to $X_\\sigma$ is smooth. For any extended-real $h:\\mathbb R^n\\to\\mathbb R\\cup\\{+\\infty\\}$, define\n$$\\operatorname{prox}^{\\mathrm{glob}}_{\\gamma h}(z)=\\operatorname*{arg\\,min}_{x\\in\\mathbb R^n}\\left\\{\\frac12\\|x-z\\|_2^2+\\gamma h(x)\\right\\},$$\nwhere the argmin is the set of global minimizers and $h$ need not be convex. Then\n$$D_\\sigma(z)=z+\\sigma^2\\nabla\\log p_\\sigma(z)=z-\\sigma^2\\nabla q_\\sigma(z),\\qquad \\operatorname{prox}^{\\mathrm{glob}}_{\\gamma h_{\\sigma,\\gamma}}(z)=\\{D_\\sigma(z)\\}\\quad(z\\in\\mathbb R^n).$$",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "thm-ip-exact-mmse-pnp-ista-stationarity",
+          "source_section": "Statement",
+          "quote": "Let $n\\ge1$, let $\\sigma>0$, and let $\\mu$ be a Borel probability measure on $\\mathbb R^n$ that is not concentrated on any affine hyperplane. Use the analytic Gaussian posterior-mean map $D_\\sigma$ and potential $h_{\\sigma,\\gamma}$ constructed from $\\mu$ in the local lemma. This map is used as the exact MMSE plug-in map; no fitted parameter or training guarantee is assumed. Let $g:\\mathbb R^n\\to\\mathbb R$ be $C^1$ and suppose\n$$\\|\\nabla g(u)-\\nabla g(v)\\|_2\\le L\\|u-v\\|_2\\quad(u,v\\in\\mathbb R^n)$$\nfor some $L>0$. Suppose the extended-real objective $f=g+h_{\\sigma,\\gamma}$ has finite infimum in $\\mathbb R$, fix $0<\\gamma\\le1/L$, and run\n$$x_t=D_\\sigma\\!\\left(x_{t-1}-\\gamma\\nabla g(x_{t-1})\\right)\\quad(t\\ge1)$$\nfrom any $x_0\\in\\mathbb R^n$. Then $x_t\\in X_\\sigma$ and $f(x_t)$ is finite for every $t\\ge1$; $f(x_t)\\le f(x_{t-1})$ in extended-real order for $t\\ge1$; the finite sequence $(f(x_t))_{t\\ge1}$ converges; and $\\|\\nabla f(x_t)\\|_2\\to0$, where $\\nabla f$ is the ordinary gradient of its restriction to the open set $X_\\sigma$. This is a stationarity conclusion only: it asserts no global minimizer, objective rate, iterate convergence, posterior sampling, or trained-network guarantee.",
+          "uses": [
+            "2.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1.1",
+          "claim": "By [F1]–[F2], $\\mu=\\frac12\\delta_{-a}+\\frac12\\delta_a$ is a Borel probability. Because $a>0$, the atoms are distinct, each has positive mass, and every affine hyperplane in $\\mathbb R$ is a singleton, so $\\mu$ is not concentrated on any affine hyperplane. Its posterior mean is $D_\\sigma(z)=a\\frac{\\rho_\\sigma(z-a)-\\rho_\\sigma(z+a)}{\\rho_\\sigma(z-a)+\\rho_\\sigma(z+a)}=a\\tanh(az/\\sigma^2)$, where the second equality follows by factoring the common Gaussian term and using [F3].",
+          "step": "1.1",
+          "inputs": [
+            "F1",
+            "F2",
+            "F3",
+            "F4",
+            "given",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2.1",
+          "claim": "For every $z$, $|\\widetilde D_\\sigma(z)-D_\\sigma(z)|=|b|<\\eta$, so the uniform error is $|b|$. At $z=0$, $D_\\sigma(0)=0$ while $\\widetilde D_\\sigma(0)=b\\ne0$; hence the network is not the exact MMSE map and [F5] does not apply. No conclusion about a different objective follows.",
+          "step": "2.1",
+          "inputs": [
+            "F4",
+            "F5",
+            "given",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The example is a scalar map on R, not an empty-domain construction."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "The Example assumes η>0 and chooses a nonzero bias with |b|<η, so the exact zero-bias map is excluded."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "The Example is explicitly a one-channel, one-pixel scalar input-output map."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Step 1.1 confirms the two-point prior has distinct positive-mass atoms and is not concentrated on a hyperplane."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "The Example gives a uniform error bound for all z∈R and a strict mismatch at the specific input z=0."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Step 2.1 permits the concrete bias b=η/2, so no choice principle is needed."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "A nonzero output bias gives an arbitrarily accurate but inexact CNN denoiser; the example does not characterize every objective or stationary map. The forward-biconditional boundary is inapplicable to this exact claim.",
+          "template_review": {
+            "upheld": true,
+            "by": "/root",
+            "reason": "A nonzero output bias gives an arbitrarily accurate but inexact CNN denoiser; the example does not characterize every objective or stationary map. The forward-biconditional boundary is inapplicable to this exact claim.",
+            "item_sha256": "8f01d8fd00242aeb8a98bcaf67b9102f5697380cdb86aed0c5b8729fa35bc01f",
+            "row_sha256": "aed4039b69c6fae34f3933b6ec6097319d904cab6173d72e6e93fab0038ad757",
+            "role": "root-adopted actual delegated owner-focused FIRST; not native Alpha",
+            "delegated_reviewer": "/root/top_relative_smoothing",
+            "delegated_review_sources": [
+              {
+                "file": "research/inverse-problems-knot-theory-all-109-2026-10-19-supervision-20261020/step2-supervision/battery1-boundary/lane-10/proposal.json",
+                "field": "rows",
+                "index": 357
+              }
+            ],
+            "root_adoption_record": "research/inverse-problems-knot-theory-all-109-2026-10-19-supervision-20261020/step2-supervision/battery1-boundary/lane-10/root-final-adoption.json"
+          }
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "A nonzero output bias gives an arbitrarily accurate but inexact CNN denoiser; the example does not characterize every objective or stationary map. The reverse-biconditional boundary is inapplicable to this exact claim.",
+          "template_review": {
+            "upheld": true,
+            "by": "/root",
+            "reason": "A nonzero output bias gives an arbitrarily accurate but inexact CNN denoiser; the example does not characterize every objective or stationary map. The reverse-biconditional boundary is inapplicable to this exact claim.",
+            "item_sha256": "8f01d8fd00242aeb8a98bcaf67b9102f5697380cdb86aed0c5b8729fa35bc01f",
+            "row_sha256": "ba63ae6ac03083cc41709570a710519ebf304d809cc44bc1a748718f60f3bbeb",
+            "role": "root-adopted actual delegated owner-focused FIRST; not native Alpha",
+            "delegated_reviewer": "/root/top_relative_smoothing",
+            "delegated_review_sources": [
+              {
+                "file": "research/inverse-problems-knot-theory-all-109-2026-10-19-supervision-20261020/step2-supervision/battery1-boundary/lane-10/proposal.json",
+                "field": "rows",
+                "index": 358
+              }
+            ],
+            "root_adoption_record": "research/inverse-problems-knot-theory-all-109-2026-10-19-supervision-20261020/step2-supervision/battery1-boundary/lane-10/root-final-adoption.json"
+          }
+        }
+      ],
+      "finite_checks": [],
+      "axioms": [],
+      "proof_status": "complete-local-proof",
+      "proof_status_evidence": "The local proof is complete with exact supplier excerpts and all proof steps mapped. Actual IP-46 estimator, train/test-risk, and posterior-mean supplier bodies were inspected. The analytic posterior-mean map is qualified as an ideal plug-in map; the AC/Countable-Choice posterior-mean proposition is not imported. This completion record is not independent approval.",
+      "unresolved_supplier_checks": [],
+      "unresolved_obligations": [],
+      "finite_checks_note": "No registered finite-smoke check applies to this mathematical claim; scalar identities and interval calculations are derived explicitly in the proof steps.",
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "alpha-batch-49",
+        "notes": "Reviewed both verification steps, complete Example, F1-F5 and all eight actual dependencies. The two-point prior meets non-hyperplane support; Gaussian weight cancellation gives a tanh(az/sigma^2). Choosing b=eta/2 supplies the nonzero bias without choice. Error equals |b| at every input and the exact map differs at zero. The network diagram correctly composes multiplication by a/sigma^2, tanh, scaling a and bias b. Only failure of the exact map hypothesis for this prior is asserted; no absence of another objective or impossibility of convergence follows. The remark supplier was read completely: finite competing proximal values permit cancellation and imply monotonicity, contradicted by P(z)=-z. No fitted-network empirical guarantee is imported."
+      }
+    }
+  },
+  "supplier_reconciliation": [
+    {
+      "supplier": "def-ip-learned-reconstruction-estimator",
+      "source_file": "items/def-ip-learned-reconstruction-estimator.md",
+      "source_section": "Definition",
+      "quote": "For a real Hilbert signal space $H$, a **denoiser** is a Borel map $D_\\phi:H\\to H$ trained under a specified signal-corruption law and used to transform a corrupted signal into a signal estimate or an update. A denoiser is the exact minimum mean-square error map only when it equals the conditional mean for the specified signal and corruption laws. A **learned prior** is a supplied Borel probability measure $\\rho_\\phi$ on $H$; one construction is the pushforward law $\\rho_\\phi(A)=\\nu(G_\\phi^{-1}(A))$ of a specified probability $\\nu$ under a Borel generator $G_\\phi:Z\\to H$. The law or generator alone is not a data-to-target estimator.",
+      "dependency_level": 3,
+      "status": "body-inspected",
+      "required_hypotheses": "The signal space is a real Hilbert space; the map is Borel and associated with a specified signal-corruption law. The source describes learned denoisers as trained maps and defines exact-MMSE status through equality with the conditional mean.",
+      "axiom_use": "The definition states that no choice axiom is required.",
+      "disposition": "The local Dσ is explicitly qualified as the analytic posterior-mean plug-in map; it is proved smooth (hence Borel), and no fitting or training guarantee is claimed.",
+      "affected_claims": [
+        "lem-ip-tweedie-mmse-jacobian-and-prox-potential",
+        "def-ip-pnp-ista-with-denoiser",
+        "thm-ip-exact-mmse-pnp-ista-stationarity",
+        "rem-ip-arbitrary-denoiser-has-no-inherited-objective",
+        "ex-ip-scalar-mmse-exact-denoiser",
+        "cex-ip-pnp-iterative-awgn-error-model",
+        "ex-ip-approximate-cnn-mmse-denoiser"
+      ]
+    },
+    {
+      "supplier": "def-ip-inverse-risk-under-train-and-test-laws",
+      "source_file": "items/def-ip-inverse-risk-under-train-and-test-laws.md",
+      "source_section": "Definition",
+      "quote": "Let $(\\mathsf Y,\\mathcal Y)$ and $(Q,\\mathcal Q)$ be measurable data and target spaces, with $\\mathcal Q$ the Borel sigma-algebra of the target metric space. Let $P$ be a probability measure on the product space $(\\mathsf Y\\times Q,\\mathcal Y\\otimes\\mathcal Q)$, and let $\\ell:Q\\times Q\\to[0,+\\infty]$ be product-measurable, where $\\ell(t,a)$ is the loss for target $t$ and action $a$. For a Borel point reconstruction rule $g:\\mathsf Y\\to Q$, its risk under $P$ is the extended nonnegative integral\n$$R_P(g):=\\int_{\\mathsf Y\\times Q}\\ell(t,g(y))\\,P(dy,dt).$$\nFor a randomized reconstruction rule given by a probability kernel $K$ from $\\mathsf Y$ to $Q$, define\n$$R_P(K):=\\int_{\\mathsf Y\\times Q}\\!\\left(\\int_Q\\ell(t,a)\\,K(y,da)\\right)P(dy,dt).$$\nThe inner integral is measurable in $(y,t)$ by kernel integration; a deterministic rule is the special case $K_y=\\delta_{g(y)}$. When $P_{\\rm train}$ and $P_{\\rm test}$ are specified joint laws on the same input-target space, the corresponding training-law risk and test-law risk are $R_{P_{\\rm train}}(K)$ and $R_{P_{\\rm test}}(K)$. Either value may be $+\\infty$. This definition imposes no inequality between the two risks: any such comparison requires an additional assumption relating the joint laws or the rule's behavior under them.",
+      "dependency_level": 4,
+      "status": "body-inspected",
+      "required_hypotheses": "The train and test laws are supplied as joint input-target probability laws; risk is the extended nonnegative expected loss. The definition imposes no risk comparison without further assumptions.",
+      "axiom_use": "The definition states that no choice axiom is required.",
+      "disposition": "The complete definition is compatible with IP-49 scope; no train/test-risk comparison is claimed or used as a proof premise.",
+      "affected_claims": [
+        "plug-and-play-mmse-regularization page prerequisite closure; no local proof step uses train/test risk"
+      ]
+    },
+    {
+      "supplier": "prop-ip-posterior-mean-is-square-loss-optimal",
+      "source_file": "items/prop-ip-posterior-mean-is-square-loss-optimal.md",
+      "source_section": "Statement",
+      "quote": "Assume the Axiom of Choice. Let $(\\mathsf Y,\\mathcal Y)$ be a measurable data space, let $H$ be a separable real Hilbert space, and fix a complete orthonormal basis $(e_j)_{j\\in J}$, where $J$ is either finite with its supplied ordering or $J=\\mathbb N$. A complex Hilbert signal space is included by viewing it as a real Hilbert space with inner product the real part of its complex inner product and supplying a real orthonormal basis. Let $\\Pi$ be a probability kernel from $\\mathsf Y$ to $H$ with its norm Borel sigma-algebra. Define\n$$D_2:=\\left\\{y\\in\\mathsf Y:\\int_H\\|h\\|_H^2\\,\\Pi_y(dh)<\\infty\\right\\}.$$\nFor every $y\\in D_2$ and $j\\in J$, define\n$$m_j(y):=\\int_H\\langle h,e_j\\rangle_H\\,\\Pi_y(dh),\\qquad \\mu(y):=\\sum_{j\\in J}m_j(y)e_j,$$\nwhere the last sum is the norm limit of its finite partial sums. Then $D_2\\in\\mathcal Y$, the sum defining $\\mu(y)$ exists for every $y\\in D_2$, and $\\mu:D_2\\to H$ is measurable. For every $y\\in D_2$ and every action $a\\in H$,\n$$\\int_H\\|h-a\\|_H^2\\,\\Pi_y(dh)=\\int_H\\|h-\\mu(y)\\|_H^2\\,\\Pi_y(dh)+\\|a-\\mu(y)\\|_H^2.$$\nThus $\\mu(y)$ is the unique finite-risk action minimizing posterior squared-error risk over all of $H$, and it is a measurable Bayes action rule on $D_2$. The minimization is over the full Hilbert space: the mean need not belong to a nonconvex admissible signal subset, and no perceptual-representativeness claim is made. For a supplied regular conditional law of a square-integrable target $T$ given a random data element $Y$, write $P_Y(B)=P(Y\\in B)$ for the law of $Y$. Then $D_2$ has full $P_Y$-measure. Extend $\\mu$ by zero to a measurable map $\\bar\\mu:\\mathsf Y\\to H$; the coordinates of $\\bar\\mu(Y)$ are versions of $E[\\langle T,e_j\\rangle_H\\mid\\sigma(Y)]$, and $\\bar\\mu(Y)$ is square-integrable. Any square-integrable $H$-valued random variable whose basis coordinates are versions of those same conditional expectations equals $\\bar\\mu(Y)$ almost surely. The RCD's values on $P_Y$-null data sets remain version choices.",
+      "dependency_level": 0,
+      "status": "body-and-proof-inspected",
+      "required_hypotheses": "A separable real Hilbert target with a supplied finite or countable complete orthonormal basis; a supplied probability kernel Π; and finite pointwise posterior second moment on D₂. For the IP-49 posterior, H=Rⁿ, the standard finite basis is supplied, and the local lemma proves finite second moment at every z.",
+      "axiom_use": "The proposition assumes AC and Countable Choice through its scalar L²-projection and Parseval suppliers.",
+      "disposition": "The hypotheses are compatible with each pointwise Gaussian posterior, but the proposition is deliberately not imported: its stronger axiom branch and kernel-valued conclusion are unnecessary because the local lemma proves the pointwise risk identity directly and choice-free.",
+      "affected_claims": [
+        "lem-ip-tweedie-mmse-jacobian-and-prox-potential",
+        "ex-ip-scalar-mmse-exact-denoiser",
+        "ex-ip-approximate-cnn-mmse-denoiser"
+      ]
+    }
+  ]
+}

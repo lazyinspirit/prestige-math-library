@@ -30,6 +30,10 @@ sources:
       url: "https://www.norbertwiener.umd.edu/Education/IMA2015/t4/lecture.pdf"
 verification:
   precheck: n/a
+  judge:
+    model: "gpt-6-luna"
+    verdict: pass
+    date: 2026-10-22
 ---
 
 ## Definition

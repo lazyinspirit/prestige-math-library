@@ -15,7 +15,7 @@ deps:
   - thm-ip-picard-range-criterion-for-compact-operators
 justified_by: []
 proof_strategy: not-applicable
-axiom_use: "Countable Choice is assumed only for the contextual infinite-dimensional Picard statement. The finite matrix instructions themselves use finite data and no choice principle."
+axiom_use: "Countable Choice is inherited from the fixed-frequency data definition, the Born-linearization lemma, and the contextual infinite-dimensional Picard theorem. Given the declared matrix and reduced SVD, the finite filter and residual instructions use no additional choice principle."
 provenance:
   statement: ai-altered
   proof: not-applicable
@@ -63,6 +63,6 @@ This procedure only defines one filtered finite-dimensional Born reconstruction 
 
 [[thm-ip-picard-range-criterion-for-compact-operators|For a compact Hilbert-space map, exact range membership also requires orthogonality to the adjoint kernel and a finite Picard sum.]]
 
-[[def-countable-choice|Countable Choice is the axiom branch of the contextual compact-operator Picard supplier.]]
+[[def-countable-choice|Countable Choice is inherited from the fixed-frequency data, Born-linearization, and contextual Picard suppliers.]]
 
 [[def-fourier-transform-on-l-one-of-rn|The library Fourier transform uses the stated $2\pi$ normalization.]]

@@ -45,7 +45,7 @@ Assume full AC. Let $M$ be a compact connected orientable Seifert-fibered $3$-ma
 
 [F1] An essential smooth boundary-preimage annulus in a Seifert piece can be isotoped through smooth embeddings to a vertical annulus for a given fibration; for neat annuli this is a smooth ambient isotopy, with a fibration change needed only in the exceptional underlying manifolds ([[lem-essential-annulus-in-seifert-piece-isotopic-to-vertical]], Statement).
 
-[F2] [[def-incompressibility-seifert-fibration-and-jsj-system]] defines the base surface, exceptional fibers, and regular-fiber slope.
+[F2] The fibered solid-torus models and regular and exceptional fibers are defined in [[def-incompressibility-seifert-fibration-and-jsj-system]]. On a boundary torus these models give a circle bundle over a circle. Its fibers have a common unoriented isotopy class, called the **regular-fiber slope**: local bundle charts carry fibers to fibers along a base path. A vertical annulus has fiber circles as its boundary. Restricting a proper embedding isotopy to a boundary circle preserves that circle's isotopy class on the boundary torus. These are the conventions used below, not additional definitions asserted by the cited item.
 
 ## Proof
 

@@ -61,9 +61,9 @@ Consequently $\nabla\Phi(q)=\nabla_qJ(q,S(q))-(D_qR(q,S(q)))^Tp$. This is the ex
 
 **Given:** The open set, Euclidean spaces, continuously differentiable residual, observation, and state maps, state identity, invertible state Jacobian, data, reference parameter, positive penalty, and adjoint equation in the Statement.
 
-[F1] The state residual is the identity $R(q,S(q))=0$ on $O$ ([[def-ip-pde-solver-admissibility-contract]]).
+[F1] The hypotheses give the state identity $R(q,S(q))=0$ on $O$.
 
-[F2] The adjoint solves $(D_uR(q,S(q)))^Tp=\nabla_uJ(q,S(q))$ ([[def-ip-pde-solver-admissibility-contract]]).
+[F2] The vector $p$ is defined in the Statement by $(D_uR(q,S(q)))^Tp=\nabla_uJ(q,S(q))$. The assumed invertibility of $D_uR(q,S(q))$ makes this solution unique.
 
 [F3] For continuously differentiable maps between finite-dimensional real Euclidean spaces, the derivative of a composition is the composition of the derivatives ([[thm-chain-rule-for-total-derivatives]]).
 

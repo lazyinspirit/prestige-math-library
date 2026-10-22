@@ -70,7 +70,7 @@ Here $\widetilde K$ is the weak resolvent map and $J$ is the compact inclusion; 
 
 [F4] Fourier characters form an orthonormal basis on $\mathbb T^n$ and Parseval holds. ([[thm-fourier-basis-and-parseval-on-the-n-torus]])
 
-[A1] The Axiom of Choice is used at the compact self-adjoint spectral theorem interface. ([[def-axiom-of-choice]])
+[A1] The stated Axiom of Choice implies Countable Choice, which is the assumption required at the compact self-adjoint spectral theorem interface; no stronger choice principle is used at that interface. ([[def-axiom-of-choice]])
 
 [A2] Countable Choice is used at the chart partition, weak-solution and Hilbert interfaces. ([[def-countable-choice]])
 

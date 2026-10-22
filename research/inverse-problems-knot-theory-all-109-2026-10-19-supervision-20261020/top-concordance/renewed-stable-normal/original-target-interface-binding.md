@@ -1,0 +1,27 @@
+# Exact binding to the original knot-theory targets
+
+No ORIGINAL item is fully closed by the six stable-normal modules plus E, the normal-refurl bridge and S6-proper ALONE. This is not a new conditional helper count or a weakening of an original Statement. It identifies the actual completed geometric interface and its remaining downstream use. For this export only the five original Statement sections were read; their proof bodies, accepted suppliers and validators were not reread/run.
+
+## Completed interface, at Countable Choice
+
+For a closed locally flat N²=S² or T² in an oriented M⁴, with an actual prescribed rank-two normal VECTOR-bundle embedding germ on a neighborhood of a closed collar K⊂N, the construction supplies an actual relative rank-two vector normal tube for N×R⊂M×R. It preserves the prescribed product germ on a smaller neighborhood of K×R, admits a wider fiber-disk domain, and has the identity-near-zero radial restrictions needed to retain that germ. Relative connection transport gives F≅pr_N^*E and hence an actual embedding f:E×R→M×R, fixed on its zero section and on that supplied germ. Radius control makes f on the closed unit-disk bundle ×R proper. This is stabilization in the BASE R direction, not addition of a normal line, and the proof uses ACω.
+
+The six-module first/one-focused-final PASS is adopted in root-six-module-adoption.json. Its formerly missing inputs are bound at these actual receipts: ../root-relative-e-four-file-adoption.json for initial BASE/core pair E and ordinary relative coverage; ../root-normal-refurl-bridge-adoption.json for the two separate NORMAL refurls retaining a compact selected core germ; ../renewed-s6-proper-homotopy-bridge/root-s6-proper-adoption.json for the second proper-homotopy-input split. The consumer bindings in five-dimensional-handle-device.md distinguish these scopes. No original four-dimensional normal-tube theorem was assumed.
+
+## Why this is still intermediate for the original Statements
+
+The map f need not preserve the ambient R coordinate outside the prescribed collar. In particular f(E×{0}) is a four-dimensional neighborhood model in M⁴×R; it has not been shown to lie in M⁴×{0}, and projection to M⁴ need not be an embedding. The height bound and properness do not establish transversality or a product concordance. Thus this result does not supply the actual UNSTABILIZED four-dimensional normal germ needed for a proper locally flat annulus/disk. FQ9.3A desuspension, its genuine controlled five-dimensional input, compatible smoothing/stable tangent-germ data, and the required boundary/framing compatibility remain separate owned steps. No stable tangent-germ concordance between two independently prescribed ambient end smoothings follows from the abstract vector-bundle identification above.
+
+## Original items and unchanged choice assumptions
+
+| Original item ID | Statement choice | What remains beyond this stable input |
+| --- | --- | --- |
+| lem-knot-concordance-compatible-with-connected-sum | ACω | The full locally flat implication needs the actual unstabilized proper annular/local pair geometry, compatible end collars and marked sum construction. A stabilized tube alone does not construct the required concordance. |
+| thm-knot-concordance-is-an-abelian-group | ACω | The full locally flat group conclusion needs the preceding compatibility and the actual geometric identity/inverse/transitivity constructions at their required markings. The stable tube supplies none of these full conclusions by itself. |
+| lem-locally-flat-slice-surface-bounds-seifert-hypersurface | Full AC | The Statement requires an actual locally flat R³⊂B⁴ with the full ambient oriented two-sided product neighborhood and the positive-push side condition. The stable tube of the doubled disk supplies an input toward four-dimensional disk geometry, not that R or its unstabilized product germ. |
+| lem-slice-disk-induces-seifert-metabolizer | Full AC | The full primitive rank-g Seifert-isotropic summand conclusion needs the unstabilized topological geometric supplier and its positive-push compatibility, followed by the already separately owned algebraic argument. No new claim about that argument is made here. |
+| thm-levine-algebraic-concordance-surjection-proof | Full AC | The full smooth/TOP homomorphism and surjectivity Statement needs all actual concordance/metabolic/realization inputs. This stable geometric input alone does not establish well-definedness in the TOP category or the complete Statement. |
+
+For the annular branch N=T² arises by doubling the proper annulus; for the disk branch N=S² arises by doubling the proper disk. This export does not assert an arbitrary-genus extension or directly replace the hypersurface Statement for Σ=F∪D. The already smooth F portion and its matched collars are additional downstream data. Root and the TOP assembly owner retain those exact consumer constructions.
+
+The dependency flow actually earned is: supplied relative stabilized vector tube → (separate FQ9.3A/control/smoothing/marking work) actual four-dimensional annular/disk normal geometry → full original geometric suppliers → original concordance/metabolic/Levine claims. The first arrow is not an identity or an automatic restriction of f. Therefore the original closure contribution of THIS work alone is zero complete original Statements; its concrete contribution is the formerly missing stable normal-vector-tube prerequisite, now with actual input bindings and the original ACω strength.

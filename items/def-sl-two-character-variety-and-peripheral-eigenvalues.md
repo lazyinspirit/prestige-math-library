@@ -19,6 +19,11 @@ axiom_use: The marked preferred longitude is supplied under the full-AC branch o
 provenance:
   statement: literature-derived
   proof: not-applicable
+verification:
+  judge:
+    model: "gpt-6-luna"
+    verdict: pass
+    date: 2026-10-22
 sources:
   references:
     - title: D. Cooper, M. Culler, H. Gillet, D. D. Long, and P. B. Shalen, Plane Curves Associated to Character Varieties of 3-Manifolds, §2

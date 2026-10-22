@@ -15,6 +15,11 @@ axiom_use: "The zero-crossing state calculations are choice-free; invariance sta
 provenance:
   statement: literature-derived
   proof: ai-altered
+verification:
+  judge:
+    model: "gpt-6-luna"
+    verdict: pass
+    date: 2026-10-22
 sources:
   references:
     - title: "Mikhail Khovanov, A categorification of the Jones polynomial, arXiv:math/9908171v2, §§2.2, 4.2, and 7.2"

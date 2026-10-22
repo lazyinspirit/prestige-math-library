@@ -1,0 +1,2396 @@
+{
+  "version": 1,
+  "scope": [
+    "def-kauffman-regular-isotopy-and-dubrovnik-conventions",
+    "def-bmw-dubrovnik-coefficient-extension",
+    "lem-kauffman-dubrovnik-writhe-component-conversion",
+    "lem-bmw-relations-dubrovnik-parameter-dictionary",
+    "def-dubrovnik-tangle-skein-algebra",
+    "lem-bmw-presentation-tangle-evaluation-is-well-defined",
+    "lem-bmw-descending-tangle-spanning",
+    "lem-bmw-closure-pairing-independence",
+    "lem-bmw-markov-trace-stabilization",
+    "lem-bmw-descending-tangle-spanning-and-independence",
+    "alg-kauffman-polynomial-from-bmw-braid-closure",
+    "thm-bmw-markov-trace-gives-dubrovnik-invariant",
+    "thm-kauffman-polynomial-from-bmw-braid-closure-procedure-properties",
+    "thm-kauffman-and-dubrovnik-conversion",
+    "cex-knot-kt-30-boundary-case",
+    "ex-knot-kt-30-worked-cases"
+  ],
+  "contracts": {
+    "def-kauffman-regular-isotopy-and-dubrovnik-conventions": {
+      "citations": [],
+      "derivations": [],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "Definition explicitly normalizes P(empty)=1 and restricts D to nonempty diagrams."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Definition retains z(d-1)=a-a^{-1} in the coefficient ring and explicitly says z is not inverted."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Definition gives D the unknot value 1."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Definition preserves the coefficient relation without inverting z, including the z=0 specialization subject to a=a^{-1}."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "The Definition concerns closed link diagrams, which have no boundary endpoints."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "The Definition makes no existential choice or choice-axiom claim."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The Definition states conventions and no equivalence."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The Definition states conventions and no equivalence."
+        }
+      ],
+      "finite_checks": [
+        {
+          "name": "empty and unknot normalization",
+          "method": "exact stated normalization check",
+          "input": {
+            "diagram": "empty link and one unknot"
+          },
+          "calculation": "P(empty)=1; P(unknot)=d; D(unknot)=d^{-1}d=1.",
+          "expected": {
+            "P_empty": "1",
+            "D_unknot": "1"
+          }
+        },
+        {
+          "name": "un-inverted coefficient boundary",
+          "method": "exact coefficient relation",
+          "input": {
+            "z": 0
+          },
+          "calculation": "The defining relation z(d-1)=a-a^{-1} specializes to a=a^{-1}; no division by z is used.",
+          "expected": {
+            "relation_at_z_zero": "a=a^{-1}"
+          }
+        }
+      ],
+      "finite_smoke": []
+    },
+    "def-bmw-dubrovnik-coefficient-extension": {
+      "citations": [],
+      "derivations": [],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The Definition constructs coefficient rings and makes no empty-link evaluation."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Definition: the extension is a quotient over S without dividing by z; at z=0 its relation reduces to q=q^{-1} while the base relation imposes a=a^{-1}."
+        },
+        {
+          "case": "one",
+          "status": "not_applicable",
+          "reason": "The coefficient-ring Definition has no one-object boundary case."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Definition keeps the z=0 specialization available and introduces no inverse of z."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "Coefficient rings have no tangle endpoints."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "The quotient-ring Definition uses no choices."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "No equivalence is asserted in the Definition."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "No equivalence is asserted in the Definition."
+        }
+      ],
+      "finite_checks": [
+        {
+          "name": "monic quadratic reduction",
+          "method": "exact quotient-ring calculation",
+          "input": {
+            "relation": "q-q^{-1}+z=0"
+          },
+          "calculation": "Multiplication by q gives q^2+zq-1=0; hence q^{-1}=q+z and every polynomial class reduces uniquely to u+vq over S.",
+          "expected": {
+            "S_module_basis": [
+              "1",
+              "q"
+            ],
+            "q_inverse": "q+z"
+          }
+        }
+      ],
+      "finite_smoke": []
+    },
+    "lem-kauffman-dubrovnik-writhe-component-conversion": {
+      "citations": [
+        {
+          "fact": "A1",
+          "source": "def-countable-choice",
+          "source_section": "Definition",
+          "quote": "The **Axiom of Countable Choice**, written $\\mathrm{AC}_\\omega$, is the following\nstatement.\n\n> For every family $(X_n)_{n \\in \\mathbb{N}}$ of nonempty sets indexed by\n> $\\mathbb{N}$ there is a function $f$ with domain $\\mathbb{N}$ such that\n> $f(n) \\in X_n$ for every $n \\in \\mathbb{N}$.\n\nEquivalently, in the vocabulary of [[def-choice-function]]: every at most\ncountable family of nonempty sets ([[def-countable]]) has a choice function.\n\n",
+          "uses": [
+            "1.1",
+            "1.3"
+          ]
+        },
+        {
+          "fact": "F1",
+          "source": "lem-framed-kauffman-link-evaluation",
+          "source_section": "Statement",
+          "quote": "Put $A=\\mathbb Z[a^{\\pm1},s,d^{\\pm1}]/(s(d-1)-(a-a^{-1}))$. This ring is an integral domain and embeds in $\\mathbb Q(i)(a,s)$ by $d\\mapsto1+(a-a^{-1})/s$, where $i^2=-1$. A link diagram means a finite generic immersion of circles in the oriented plane with over/under data at its double points. Regular isotopy is generated by planar isotopy and Reidemeister moves II and III. A positive curl is a one-crossing curl whose oriented self-crossing has sign $+1$; its sign is independent of the direction chosen on its component. There is a unique function $P$ from link diagrams, including the empty diagram, to $A$ with $P(\\varnothing)=1$, unchanged by regular isotopy, satisfying the following local rules: a positive or negative curl multiplies $P$ by $a$ or $a^{-1}$; a disjoint trivial circle multiplies $P$ by $d$; and $P(L_+)-P(L_-)=s(P(L_0)-P(L_\\infty))$. Here in an oriented disk with four cyclically labelled endpoints $1,2,3,4$, $L_+$ connects $1$ to $3$ over the strand from $2$ to $4$, and the two smoothings are chosen so that the oriented smoothing for any orientation making this crossing positive is $L_0$; $L_-$ reverses the crossing and $L_\\infty$ is the other smoothing. Rotating the disk interchanges both differences and preserves the rule. In particular the empty diagram freely generates the quotient of the free $A$-module on closed diagrams by these rules.\n\n",
+          "uses": [
+            "1.2",
+            "1.3",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "def-oriented-crossing-sign-writhe-and-blackboard-framing",
+          "source_section": "Definition",
+          "quote": "Assume $\\mathrm{AC}_\\omega$ for the smooth normal-bundle structure used in the\nframing clause. For a knot component $K$, its normal bundle is the fibrewise\nquotient $\\nu K=TS^3|_K/TK$, and a normal section is a smooth section of this\nbundle.\n\nLet $D$ be a regular oriented link diagram in a projection plane $P$ of an\noriented $3$-sphere, after moving the link off the point at infinity. Fix the\nunit viewing normal $n$ pointing toward the viewer. Orient $P$ by the rule that\nan ordered basis $(u,v)$ of $P$ is positive exactly when $(n,u,v)$ is a positive\nbasis of the ambient $3$-space. At a crossing $c$, let $v_{\\rm over}$ and\n$v_{\\rm under}$ be the nonzero projected tangent vectors following the\norientations of the overpassing and underpassing strands. Define\n$$\\operatorname{sgn}(c):=\\operatorname{sgn}\\det_P(v_{\\rm over},v_{\\rm under})\\in\\{+1,-1\\}.$$\nReversing the orientation of $P$ reverses every crossing sign.\n\nThis convention makes the positive geometric Artin half twist positive. In\nthe braid chart $(x,y,t)$ with ambient orientation $(x,y,t)$, view along $+y$;\nthe induced positive orientation of the $(x,t)$ projection plane is the ordered\nbasis $(\\partial_t,\\partial_x)$. For the positive half twist, label $i$ moves\nfrom $x=-h$ to $x=h$ below the midpoint, while label $i+1$ moves from $x=h$ to\n$x=-h$ above it, with $h>0$. Thus the over and under projected tangent vectors\nin coordinates $(t,x)$ are $(1,-2h)$ and $(1,2h)$, whose determinant is\n$4h>0$.\n\nThe **writhe** of $D$ is\n$$\\operatorname{wr}(D):=\\sum_{c\\text{ a crossing of }D}\\operatorname{sgn}(c).$$\nFor a link component $K_i$, its **self-writhe**\n$\\operatorname{wr}_i(D)$ is the sum over crossings whose two branches belong to\n$K_i$; the total writhe also includes all mixed crossings between distinct\ncomponents.\n\nThe **blackboard framing** of a component of $D$ is the homotopy class of the\nnormal section represented by the positive quarter-turn in $P$ of the projected\noriented tangent. The projection is an immersion, so this vector never\nvanishes; it is perpendicular to the projected tangent, hence also to the\nspatial tangent, and therefore represents a nonzero normal section of the\ncomponent in the ambient $3$-sphere.\n\n```tikz\n\\begin{tikzpicture}[scale=0.8,>=stealth]\n  \\draw[->] (-1,0) -- (1,0) node[right] {$v_{\\rm over}$};\n  \\draw[->] (0,-1) -- (0,1) node[above] {$v_{\\rm under}$};\n  \\node[above left] at (0,0) {$+1$};\n\\end{tikzpicture}\n```\n\nIn the displayed local chart, the over tangent is the positive horizontal\nvector and the under tangent is the positive vertical vector, so the determinant\nis $+1$. This figure illustrates the determinant rule only; no proof below\ndepends on a picture.\n\n",
+          "uses": [
+            "1.1",
+            "2.1",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "lem-linking-number-even-sum-and-reidemeister-invariance",
+          "source_section": "Statement",
+          "quote": "Assume the Axiom of Countable Choice. Let $D$ be a regular oriented diagram\nof a two-component oriented link in $S^3$, with components $K_1,K_2$. Write\n$$S(D):=\\sum_{c\\text{ between }K_1\\text{ and }K_2}\\operatorname{sgn}(c).$$\nThen $S(D)$ is even, and\n$$\\operatorname{lk}_D(K_1,K_2):=\\frac{S(D)}2\\in\\mathbb Z$$\nis unchanged by planar isotopy and by each oriented Reidemeister move of types\nI, II, and III. Thus it has the same value on any two regular diagrams of\nambient-isotopic oriented links. It is symmetric in $K_1,K_2$; reversing exactly\none component changes its sign, and reversing both components leaves it\nunchanged.\n\n",
+          "uses": [
+            "1.1",
+            "1.3"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "def-oriented-reidemeister-moves",
+          "source_section": "Definition",
+          "quote": "An **oriented Reidemeister move** is one of the following local replacements of\na regular oriented link diagram ([[def-regular-oriented-link-diagram]]),\nperformed inside a small closed disk while the diagram outside the disk is left\nunchanged, and understood up to planar isotopy outside the disk\n([[def-planar-isotopy-of-link-diagrams]]). All sign and orientation variants of\neach local picture are included.\n\n**(R1) Kink creation and deletion.** A single strand is replaced by a small\nkink: two arcs crossing once and otherwise disjoint from the strand, with the\nover/under datum of the new crossing as in the picture. The move is allowed in\nboth directions (create or delete the kink) and with both signs of the kink,\nthe sign being the sign of the crossing created. The orientations of the two\nstrands of the kink are the two possible consistent orientations through the\ncrossing, and all of them occur in the move list.\n\n**(R2) Slide of two strands.** Two local arcs belonging to two strands are\nreplaced so that the number of crossings between those strands changes by two\nof opposite signs: the standard picture slides one strand over or under the\nother, creating or deleting the pair of crossings, with the two crossings being\nthe two possible signs in either order. All four orientation patterns of the\ntwo strands at the two crossings are included.\n\n**(R3) Sliding a strand past a crossing.** One strand is moved across an\nexisting crossing of two other strands, so that the crossing of the two other\nstrands passes from one side of the moving strand to the other; the three\ncrossings of the local picture keep their signs and the over/under data are\npreserved. The three strands must have a consistent strict height order:\none is above both others, one below both, and the remaining strand is between\nthem. The cyclic over/under pattern is excluded. Every orientation pattern\nand all six height orders of this standard local picture are included.\n\nA local R2 or R3 picture is **braid-like** when, after a local coordinate\nchange and deformation, all participating strands run in the same positive\nlongitudinal direction. This is a local condition and does not require a\nglobally chosen braid axis. R1 is kept as a separate kink move.\n\nThe strands keep their orientations throughout every move. The union of the\nthree move types, together with planar isotopy, generates the equivalence\nrelation on diagrams used in the Reidemeister equivalence theorem below; the\nmoves are sometimes called R1, R2, R3 as above. Since every move changes the\ndiagram only inside a disk, it has a type and a finite list of local\norientation/sign variants, and each variant is realized by an ambient isotopy\nas the next items show. The complete list of variants is required because the\nMarkov and Alexander constructions below act on oriented diagrams and count\nsigned crossings.\n",
+          "uses": [
+            "1.2",
+            "2.1",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "def-kauffman-regular-isotopy-and-dubrovnik-conventions",
+          "source_section": "Definition",
+          "quote": "Let\n$$R_D=\\mathbb Z[a^{\\pm1},z,d^{\\pm1}]/(z(d-1)-(a-a^{-1})),$$\nwhere $z$ is not inverted. A nonempty unoriented regular link diagram is a\nfinite generic planar projection of one or more circles with only transverse\ndouble crossings and an over/under marking at each crossing. Use the crossing\nchart in which the over-strand runs southwest to northeast. Its $D_0$\nsmoothing joins the two top endpoints and the two bottom endpoints, and its\n$D_\\infty$ smoothing joins the left endpoints and the right endpoints. These\nare respectively the $A$- and $B$-smoothings in the stated chart. A positive\ncurl is a type-I kink whose oriented crossing has determinant sign $+1$; a\nnegative curl has determinant sign $-1$. The sign is unchanged if the\norientation of the whole component is reversed.\n\nThe Dubrovnik regular-isotopy evaluation $P$ is normalized by\n$P(\\varnothing)=1$, $P(K\\sqcup\\bigcirc)=dP(K)$, positive and negative curl\nfactors $a$ and $a^{-1}$, and\n$$P(D_+)-P(D_-)=z\\bigl(P(D_0)-P(D_\\infty)\\bigr).$$\nHere $D_+$ and $D_-$ differ only by switching the displayed crossing. For a\nnonempty oriented link diagram $K$, let $c(K)$ be its number of components and\nlet $w(K)$ be the sum of the determinant crossing signs. Define\n$$D_K(a,z)=d^{-1}P(K),$$\n$$L_K(A,Z)=-i^{w(K)}(-1)^{c(K)}D_K(-iA,iZ),\\qquad i^2=-1,$$\nand\n$$F_K(A,Z)=A^{-w(K)}L_K(A,Z).$$\nThus $D$ has unknot value $1$, and the universal relation defining $R_D$ is\nretained even when $z$ is not invertible. These are conventions and\nnormalizations; ambient-isotopy invariance of $F$ is a separate theorem.\n\n",
+          "uses": [
+            "1.1",
+            "1.2",
+            "1.3",
+            "2.1",
+            "3.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "step": "1.1",
+          "claim": "Reverse the orientation of one component. Its self-crossing signs are unchanged by [F2], while each of its mixed crossing signs is negated. If their sum before reversal is $S$, then $w$ changes by $-2S$. By [F3], $S$ is even, so the writhe changes by a multiple of $4$. Thus $i^w$ is unchanged; $c$ and the unoriented value $D$ are unchanged as well. Therefore the formula defining $L$ is independent of this orientation reversal. Repeating for components proves the stated orientation independence.",
+          "inputs": [
+            "A1",
+            "F2",
+            "F3",
+            "F5",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-1-2",
+          "step": "1.2",
+          "claim": "For a positive curl, $D$ gains a factor $a$ and $w$ increases by $1$; substituting $a_D=-iA$ and $z_D=iZ$ in [F5] shows that $L$ gains the factor $i a_D=A$. For a negative curl, $D$ gains $a^{-1}$ and $w$ decreases by $1$, so $L$ gains $i^{-1}a_D^{-1}=A^{-1}$. Adding a disjoint trivial circle increases $c$ by $1$ and multiplies $D$ by $d$, so the factor $(-1)^c$ makes $L$ acquire the factor $-d$. Set $\\delta_L=-d$. Under $a_D=-iA$ and $z_D=iZ$, the coefficient relation $z_D(d-1)=a_D-a_D^{-1}$ becomes $Z(1-d)=A+A^{-1}$, hence $Z(\\delta_L+1)=A+A^{-1}$. This gives the Kauffman circle rule using the universal relation without inverting $Z$.",
+          "inputs": [
+            "F1",
+            "F4",
+            "F5",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-1-3",
+          "step": "1.3",
+          "claim": "Consider a positive crossing and write $w=w(K_+)$ and $c=c(K_+)$. Switching it gives $w(K_-)=w-2$ and leaves $c$ fixed. Each smoothing deletes that crossing, so before any orientation adjustment its writhe is $w-1$. The orientation-preserving smoothing $K_0$ has $c+1$ components at a self-crossing and $c-1$ at a mixed crossing. The other smoothing $K_\\infty$ has $c$ components at a self-crossing and $c-1$ at a mixed crossing. To orient $K_\\infty$ at a self-crossing, first use the orientation-preserving smoothing to split the original component into two closed components, then join their arcs by the other smoothing and reverse one of the two orientations. This changes signs at exactly the crossings between that component and the other split component or any remaining component; each corresponding mixed crossing sum is even by [F3], so $w(K_\\infty)\\equiv w-1\\pmod4$. At a mixed crossing, reverse one whole incident component in the original diagram. Its writhe changes by minus twice a mixed crossing sum, which is divisible by $4$ by [F3]; this reversal changes the displayed crossing from positive to negative and makes $K_\\infty$ the orientation-preserving smoothing. Removing that negative crossing raises writhe by $1$, so $w(K_\\infty)\\equiv w+1\\pmod4$. By [F5], the phase $-i^w(-1)^c$ multiplying the Dubrovnik value changes by the factor $i$ on $K_0$ and by $-i$ on $K_\\infty$. It also changes sign when the crossing is switched, since $w(K_-)=w-2$. Therefore the Dubrovnik difference skein in [F1] becomes the Kauffman sum skein $L_++L_-=Z(L_0+L_\\infty)$ after substituting $a=-iA$ and $z=iZ$, equivalently $A=ia$ and $Z=-iz$. The calculation uses the positive member $K_+$ of the crossing pair; since the resulting sum-skein is symmetric in $K_+$ and $K_-$, it applies whether the input diagram displays the positive or negative member.",
+          "inputs": [
+            "A1",
+            "F1",
+            "F3",
+            "F5",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "step": "2.1",
+          "claim": "By [F1], $D$ is unchanged under planar isotopy and Reidemeister II and III. The determinant writhe is unchanged under II and III by [F2, F4], so the formula in [F5] gives the corresponding regular-isotopy rules for $L$. The positive and negative curl factors are those computed in step 1.2.",
+          "inputs": [
+            "F1",
+            "F2",
+            "F4",
+            "F5",
+            "step 1.2"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "step": "3.1",
+          "claim": "For a positive type-I move, $$A^{-(w+1)}A L=A^{-w}L;$$ for a negative type-I move, $$A^{-(w-1)}A^{-1}L=A^{-w}L.$$ Moves II and III leave $w$ unchanged, hence also preserve $F$. Therefore $F$ is unchanged by every listed move, while the conversion identity is the defining relation in [F5].",
+          "inputs": [
+            "F2",
+            "F4",
+            "F5",
+            "step 1.2",
+            "step 1.3",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The Statement is explicitly restricted to nonempty oriented link diagrams; P(empty) is not converted by D=P/d."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Step 1.2 derives the transformed circle relation from the universal coefficient relation without inverting Z."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "The Statement quantifies over every nonempty oriented diagram, including one-component diagrams; steps 1.1–5.1 use no lower component bound."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Step 1.2 uses only Z(1-d)=A+A^{-1}; it does not divide by Z."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "The Statement concerns closed link diagrams, not tangles with boundary endpoints."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Step 1.1 records ACω as the hypothesis used for mixed-crossing parity and orientation reversal."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The Statement gives polynomial identities and move invariance, not an iff."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The Statement gives polynomial identities and move invariance, not an iff."
+        }
+      ],
+      "finite_checks": [
+        {
+          "name": "curl and unknot phases",
+          "method": "exact local substitution",
+          "input": {
+            "i_squared": -1,
+            "positive_curl": {
+              "w_change": 1,
+              "D_factor": "a"
+            },
+            "negative_curl": {
+              "w_change": -1,
+              "D_factor": "a^-1"
+            }
+          },
+          "calculation": "The factors i(-ia)=a? Under the item substitution a_D=-iA, the L multipliers are i a_D=A and i^-1 a_D^-1=A^-1; at w=0,c=1,D=1 the displayed leading-minus conversion gives L=1.",
+          "expected": {
+            "positive_L_factor": "A",
+            "negative_L_factor": "A^-1",
+            "unknot": "1"
+          }
+        },
+        {
+          "name": "coefficient relation without variable inversion",
+          "method": "exact symbolic substitution",
+          "input": {
+            "a_D": "-iA",
+            "z_D": "iZ",
+            "i_squared": -1
+          },
+          "calculation": "iZ(d-1)=-i(A+A^-1), so Z(1-d)=A+A^-1. With δ_L=-d this is Z(δ_L+1)=A+A^-1.",
+          "expected": {
+            "circle_relation": "Z(delta_L+1)=A+A^-1"
+          }
+        }
+      ],
+      "finite_smoke": []
+    },
+    "lem-bmw-relations-dubrovnik-parameter-dictionary": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-bmw-algebra-with-fixed-kauffman-skein-convention",
+          "source_section": "Definition",
+          "quote": "Let $R$ be a commutative unital ring, let $q,\\rho\\in R^\\times$, put $z=q-q^{-1}$, and choose $\\delta\\in R$ with $z(\\delta-1)=\\rho-\\rho^{-1}$. For $n\\ge2$, the BMW algebra $BMW_n(R;q,\\rho,\\delta)$ is the unital associative $R$-algebra generated by invertible $g_i$ and elements $e_i$ for $1\\le i<n$, subject to the following relations (an adjacent relation is imposed only when both indices exist):\n\n- braid and distant braid: $g_i g_{i+1}g_i=g_{i+1}g_i g_{i+1}$ and $g_i g_j=g_jg_i$ for $|i-j|\\ge2$;\n- distant cups and caps: $g_i e_j=e_jg_i$ and $e_i e_j=e_j e_i$ for $|i-j|\\ge2$;\n- adjacent cup-cap: $e_i e_{i\\pm1}e_i=e_i$, $g_i g_{i\\pm1}e_i=e_{i\\pm1}e_i$, and $e_i g_{i\\pm1}g_i=e_i e_{i\\pm1}$;\n- Kauffman skein and untwisting: $g_i-g_i^{-1}=z(1-e_i)$, $g_i e_i=e_i g_i=\\rho^{-1}e_i$, and $e_i g_{i\\pm1}e_i=\\rho e_i$;\n- loop: $e_i^2=\\delta e_i$.\n\nFor the boundary ranks, set $BMW_0(R;q,\\rho,\\delta)=BMW_1(R;q,\\rho,\\delta)=R$, with the empty and single straight tangle as their respective units.\n\nIf $z$ is invertible, the parameter relation reads $\\delta=1+(\\rho-\\rho^{-1})/z$. If $z$ is not invertible, the presentation uses the universal coefficient relation $z(\\delta-1)=\\rho-\\rho^{-1}$ and does not divide by $z$. The quotient by the two-sided ideal generated by all $e_i$ is the cup-cap-zero Hecke quotient; this definition does not assert a BMW diagram-basis theorem or a BMW quantum-centralizer theorem.\n",
+          "uses": [
+            "2.1",
+            "3.1",
+            "4.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "def-kauffman-regular-isotopy-and-dubrovnik-conventions",
+          "source_section": "Definition",
+          "quote": "Let\n$$R_D=\\mathbb Z[a^{\\pm1},z,d^{\\pm1}]/(z(d-1)-(a-a^{-1})),$$\nwhere $z$ is not inverted. A nonempty unoriented regular link diagram is a\nfinite generic planar projection of one or more circles with only transverse\ndouble crossings and an over/under marking at each crossing. Use the crossing\nchart in which the over-strand runs southwest to northeast. Its $D_0$\nsmoothing joins the two top endpoints and the two bottom endpoints, and its\n$D_\\infty$ smoothing joins the left endpoints and the right endpoints. These\nare respectively the $A$- and $B$-smoothings in the stated chart. A positive\ncurl is a type-I kink whose oriented crossing has determinant sign $+1$; a\nnegative curl has determinant sign $-1$. The sign is unchanged if the\norientation of the whole component is reversed.\n\nThe Dubrovnik regular-isotopy evaluation $P$ is normalized by\n$P(\\varnothing)=1$, $P(K\\sqcup\\bigcirc)=dP(K)$, positive and negative curl\nfactors $a$ and $a^{-1}$, and\n$$P(D_+)-P(D_-)=z\\bigl(P(D_0)-P(D_\\infty)\\bigr).$$\nHere $D_+$ and $D_-$ differ only by switching the displayed crossing. For a\nnonempty oriented link diagram $K$, let $c(K)$ be its number of components and\nlet $w(K)$ be the sum of the determinant crossing signs. Define\n$$D_K(a,z)=d^{-1}P(K),$$\n$$L_K(A,Z)=-i^{w(K)}(-1)^{c(K)}D_K(-iA,iZ),\\qquad i^2=-1,$$\nand\n$$F_K(A,Z)=A^{-w(K)}L_K(A,Z).$$\nThus $D$ has unknot value $1$, and the universal relation defining $R_D$ is\nretained even when $z$ is not invertible. These are conventions and\nnormalizations; ambient-isotopy invariance of $F$ is a separate theorem.\n\n",
+          "uses": [
+            "2.1",
+            "3.1",
+            "4.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "def-kauffman-bracket-smoothing-and-loop-value",
+          "source_section": "Definition",
+          "quote": "Let $A$ be an indeterminate and let $\\mathbb Z[A^{\\pm1}]$ be the Laurent\npolynomial ring in $A$. A **nonempty unoriented regular link diagram** is the\nfinite planar projection and over/under data of a regular oriented link diagram\nafter its strand arrows are forgotten. Its finite crossing set is denoted\n$C(D)$, and at least one closed component is required. The empty link diagram is\noutside this definition.\n\nAt a crossing use the following local chart: the over-strand runs from the\nsouthwest endpoint to the northeast endpoint and is drawn continuously over the\nunder-strand, which runs from northwest to southeast with a gap at the\nintersection. In this chart the **A-smoothing** joins the two top endpoints and\njoins the two bottom endpoints; the **B-smoothing** joins the two left endpoints\nand joins the two right endpoints. These labels are attached to this displayed\nchart and are transported by orientation-preserving changes of local\ncoordinates.\n\n```tikz\n\\begin{tikzpicture}[scale=0.72, line cap=round, line join=round]\n  \\begin{scope}\n    \\draw[thick] (-1,1)--(-0.14,0.14);\n    \\draw[thick] (0.14,-0.14)--(1,-1);\n    \\draw[very thick] (-1,-1)--(1,1);\n    \\node at (0,-1.45) {crossing};\n  \\end{scope}\n  \\begin{scope}[xshift=3.4cm]\n    \\draw[thick] (-1,1) .. controls (-0.35,0.45) and (0.35,0.45) .. (1,1);\n    \\draw[thick] (-1,-1) .. controls (-0.35,-0.45) and (0.35,-0.45) .. (1,-1);\n    \\node at (0,-1.45) {$A$-smoothing, weight $A$};\n  \\end{scope}\n  \\begin{scope}[xshift=6.8cm]\n    \\draw[thick] (-1,1) .. controls (-0.45,0.35) and (-0.45,-0.35) .. (-1,-1);\n    \\draw[thick] (1,1) .. controls (0.45,0.35) and (0.45,-0.35) .. (1,-1);\n    \\node at (0,-1.45) {$B$-smoothing, weight $A^{-1}$};\n  \\end{scope}\n\\end{tikzpicture}\n```\n\nFor a state $S:C(D)\\to\\{A,B\\}$, let $a(S)$ and $b(S)$ be the numbers of\nA- and B-smoothings, and let $|S|$ be the number of closed circles in the\ncrossingless diagram obtained by performing all smoothings. Set\n$$\\delta:=-A^2-A^{-2}$$\nand define the **Kauffman bracket** of $D$ by\n$$\\langle D\\rangle:=\\sum_{S:C(D)\\to\\{A,B\\}} A^{a(S)-b(S)}\\delta^{|S|-1}\\in\\mathbb Z[A^{\\pm1}].$$\nBecause $D$ is nonempty, every complete smoothing has $|S|\\ge1$, so the loop\nexponent is nonnegative. A crossingless $k$-component unlink with $k\\ge1$ has\nbracket $\\delta^{k-1}$.\n\n",
+          "uses": [
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "def-bmw-dubrovnik-coefficient-extension",
+          "source_section": "Definition",
+          "quote": "Let\n$$S=\\mathbb Z[a^{\\pm1},z,d^{\\pm1}]/(z(d-1)-(a-a^{-1}))$$\nbe the universal Dubrovnik coefficient ring. Define the coefficient extension\n$$T=S[q^{\\pm1}]/(q-q^{-1}+z).$$\nInside $T$ write $z_B=q-q^{-1}$, $z_D=-z_B$, $\\rho=a^{-1}$, and $\\delta=d$. These names specify the intended BMW and Dubrovnik parameter images; the compatibility of their coefficient relations is proved separately.\n\n",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "step": "1.1",
+          "claim": "By [F4], the relation defining $T$ gives $q-q^{-1}=-z$, hence $q^2+zq-1=0$ and $q^{-1}=q+z$. Therefore $T\\cong S[q]/(q^2+zq-1)$. Division by this monic quadratic gives a unique remainder $u+vq$ with $u,v\\in S$, so $T$ is free over $S$ on $1,q$ and the constant inclusion $S\\hookrightarrow T$ is injective.",
+          "inputs": [
+            "F4",
+            "given",
+            "construct",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "step": "2.1",
+          "claim": "By [F1], $z_B(\\delta-1)=\\rho-\\rho^{-1}$. The assignments in [F4] and the statement give $$z_D(d-1)=-(q-q^{-1})(\\delta-1)=-(\\rho-\\rho^{-1}) =\\rho^{-1}-\\rho=a-a^{-1}.$$ Thus the universal Dubrovnik coefficient relation holds in $T$ and agrees with the scalar image of $S$. No element $z_B$ or $z_D$ is inverted.",
+          "inputs": [
+            "F1",
+            "F2",
+            "F4",
+            "step 1.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "step": "3.1",
+          "claim": "By [F1], $$g_i-g_i^{-1}=z_B(1-e_i)=z_D(e_i-1).$$ With $e_i$ the cup-cap smoothing $D_0$ and the identity diagram the through smoothing $D_\\infty$, this is exactly the skein rule in [F2]. The chart in [F3] fixes these two smoothing labels without rotating or reversing the crossing.",
+          "inputs": [
+            "F1",
+            "F2",
+            "F3",
+            "step 2.1"
+          ]
+        },
+        {
+          "id": "step-4-1",
+          "step": "4.1",
+          "claim": "The relation $g_ie_i=e_ig_i=\\rho^{-1}e_i$ gives the curl factor $\\rho^{-1}=a$; the corresponding inverse crossing gives $\\rho=a^{-1}$. The adjacent untwisting relation has factor $\\rho=a^{-1}$, matching the oppositely directed curl, and $e_i^2=\\delta e_i=d e_i$ is the free-circle rule. These substitutions verify each remaining local coefficient in [F2].",
+          "inputs": [
+            "F1",
+            "F2",
+            "step 2.1",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The Lemma concerns coefficient relations and local generators, not an empty-link value."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Step 1.1 reduces T to a monic quadratic extension and step 2.1 verifies the coefficient relation without inverting z."
+        },
+        {
+          "case": "one",
+          "status": "not_applicable",
+          "reason": "No one-object boundary case is asserted for the parameter dictionary."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Step 1.1 gives q^{-1}=q+z, so at z=0 the relation becomes q^{-1}=q and q^2=1 without a division."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "The coefficient dictionary has no tangle endpoints."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "The coefficient calculations are choice-free."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The Lemma asserts parameter compatibility, not an equivalence."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The Lemma asserts parameter compatibility, not an equivalence."
+        }
+      ],
+      "finite_checks": [
+        {
+          "name": "BMW coefficient and skein substitution",
+          "method": "exact symbolic substitution",
+          "input": {
+            "z_B": "-z",
+            "z_D": "-z_B",
+            "rho": "a^-1",
+            "delta": "d"
+          },
+          "calculation": "The BMW coefficient identity z_B(delta-1)=rho-rho^-1 becomes z(d-1)=a-a^-1; and g-g^-1=z_B(1-e)=z_D(e-1), with e=D_0 and 1=D_infinity.",
+          "expected": {
+            "coefficient": "z(d-1)=a-a^-1",
+            "skein": "D_+-D_-=z_D(D_0-D_infinity)"
+          }
+        },
+        {
+          "name": "zero-skein-parameter boundary",
+          "method": "exact quotient-ring calculation",
+          "input": {
+            "z": 0
+          },
+          "calculation": "q^-1=q+z specializes to q^-1=q and q^2=1; the free S-basis {1,q} does not require z^-1.",
+          "expected": {
+            "q_squared": "1",
+            "z_inverse_used": false
+          }
+        }
+      ],
+      "finite_smoke": []
+    },
+    "def-dubrovnik-tangle-skein-algebra": {
+      "citations": [],
+      "derivations": [],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "Definition allows n=0 and gives the zero-strand identity tangle."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Definition at n=0 has no boundary endpoints and the empty tangle is the identity."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Definition at n=1 has one ordered top and one ordered bottom endpoint joined by the straight identity strand."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Definition imposes the local relations over T without dividing by z_D, so the z_D=0 specialization is not excluded."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Definition specifies n ordered top and n ordered bottom endpoints and stacking that fixes the boundary order."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "The monoid-algebra quotient Definition uses no choices."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The Definition makes no equivalence claim."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The Definition makes no equivalence claim."
+        }
+      ],
+      "finite_checks": [
+        {
+          "name": "zero- and one-strand identities",
+          "method": "exact endpoint count",
+          "input": {
+            "n_values": [
+              0,
+              1
+            ]
+          },
+          "calculation": "At n=0 the empty tangle is the identity; at n=1 the unique identity connector is the straight strand.",
+          "expected": {
+            "n0": "empty tangle",
+            "n1": "one straight strand"
+          }
+        }
+      ],
+      "finite_smoke": []
+    },
+    "lem-bmw-presentation-tangle-evaluation-is-well-defined": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-bmw-algebra-with-fixed-kauffman-skein-convention",
+          "source_section": "Definition",
+          "quote": "Let $R$ be a commutative unital ring, let $q,\\rho\\in R^\\times$, put $z=q-q^{-1}$, and choose $\\delta\\in R$ with $z(\\delta-1)=\\rho-\\rho^{-1}$. For $n\\ge2$, the BMW algebra $BMW_n(R;q,\\rho,\\delta)$ is the unital associative $R$-algebra generated by invertible $g_i$ and elements $e_i$ for $1\\le i<n$, subject to the following relations (an adjacent relation is imposed only when both indices exist):\n\n- braid and distant braid: $g_i g_{i+1}g_i=g_{i+1}g_i g_{i+1}$ and $g_i g_j=g_jg_i$ for $|i-j|\\ge2$;\n- distant cups and caps: $g_i e_j=e_jg_i$ and $e_i e_j=e_j e_i$ for $|i-j|\\ge2$;\n- adjacent cup-cap: $e_i e_{i\\pm1}e_i=e_i$, $g_i g_{i\\pm1}e_i=e_{i\\pm1}e_i$, and $e_i g_{i\\pm1}g_i=e_i e_{i\\pm1}$;\n- Kauffman skein and untwisting: $g_i-g_i^{-1}=z(1-e_i)$, $g_i e_i=e_i g_i=\\rho^{-1}e_i$, and $e_i g_{i\\pm1}e_i=\\rho e_i$;\n- loop: $e_i^2=\\delta e_i$.\n\nFor the boundary ranks, set $BMW_0(R;q,\\rho,\\delta)=BMW_1(R;q,\\rho,\\delta)=R$, with the empty and single straight tangle as their respective units.\n\nIf $z$ is invertible, the parameter relation reads $\\delta=1+(\\rho-\\rho^{-1})/z$. If $z$ is not invertible, the presentation uses the universal coefficient relation $z(\\delta-1)=\\rho-\\rho^{-1}$ and does not divide by $z$. The quotient by the two-sided ideal generated by all $e_i$ is the cup-cap-zero Hecke quotient; this definition does not assert a BMW diagram-basis theorem or a BMW quantum-centralizer theorem.\n",
+          "uses": [
+            "1.1",
+            "1.2",
+            "2.1",
+            "2.2",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "lem-bmw-relations-dubrovnik-parameter-dictionary",
+          "source_section": "Statement",
+          "quote": "Let\n$$S=\\mathbb Z[a^{\\pm1},z,d^{\\pm1}]/(z(d-1)-(a-a^{-1}))$$\nbe the Dubrovnik coefficient ring, and let\n$$T=S[q^{\\pm1}]/(q-q^{-1}+z).$$\nIn $T$ put $\\rho=a^{-1}$, $\\delta=d$, and $z_B=q-q^{-1}$. Then the natural\nmap $S\\to T$ is injective and $T$ is a free $S$-module with basis $1,q$.\nMoreover, the BMW coefficient relation\n$$z_B(\\delta-1)=\\rho-\\rho^{-1}$$\nholds, and the substitution $a=\\rho^{-1}$, $z_D=-z_B$, $d=\\delta$ converts\nthe BMW skein, curl, adjacent untwisting, and loop coefficients to the\nDubrovnik relations in the specified chart: $D_+-D_-=z_D(D_0-D_\\infty)$,\nthe curl factors are $a,a^{-1}$, and a disjoint trivial circle contributes\n$d$. Here $D_0$ is cup-cap and $D_\\infty$ is through. No skein parameter is\ndivided out.\n\n",
+          "uses": [
+            "1.2",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "def-kauffman-regular-isotopy-and-dubrovnik-conventions",
+          "source_section": "Definition",
+          "quote": "Let\n$$R_D=\\mathbb Z[a^{\\pm1},z,d^{\\pm1}]/(z(d-1)-(a-a^{-1})),$$\nwhere $z$ is not inverted. A nonempty unoriented regular link diagram is a\nfinite generic planar projection of one or more circles with only transverse\ndouble crossings and an over/under marking at each crossing. Use the crossing\nchart in which the over-strand runs southwest to northeast. Its $D_0$\nsmoothing joins the two top endpoints and the two bottom endpoints, and its\n$D_\\infty$ smoothing joins the left endpoints and the right endpoints. These\nare respectively the $A$- and $B$-smoothings in the stated chart. A positive\ncurl is a type-I kink whose oriented crossing has determinant sign $+1$; a\nnegative curl has determinant sign $-1$. The sign is unchanged if the\norientation of the whole component is reversed.\n\nThe Dubrovnik regular-isotopy evaluation $P$ is normalized by\n$P(\\varnothing)=1$, $P(K\\sqcup\\bigcirc)=dP(K)$, positive and negative curl\nfactors $a$ and $a^{-1}$, and\n$$P(D_+)-P(D_-)=z\\bigl(P(D_0)-P(D_\\infty)\\bigr).$$\nHere $D_+$ and $D_-$ differ only by switching the displayed crossing. For a\nnonempty oriented link diagram $K$, let $c(K)$ be its number of components and\nlet $w(K)$ be the sum of the determinant crossing signs. Define\n$$D_K(a,z)=d^{-1}P(K),$$\n$$L_K(A,Z)=-i^{w(K)}(-1)^{c(K)}D_K(-iA,iZ),\\qquad i^2=-1,$$\nand\n$$F_K(A,Z)=A^{-w(K)}L_K(A,Z).$$\nThus $D$ has unknot value $1$, and the universal relation defining $R_D$ is\nretained even when $z$ is not invertible. These are conventions and\nnormalizations; ambient-isotopy invariance of $F$ is a separate theorem.\n\n",
+          "uses": [
+            "1.2",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "def-kauffman-bracket-smoothing-and-loop-value",
+          "source_section": "Definition",
+          "quote": "Let $A$ be an indeterminate and let $\\mathbb Z[A^{\\pm1}]$ be the Laurent\npolynomial ring in $A$. A **nonempty unoriented regular link diagram** is the\nfinite planar projection and over/under data of a regular oriented link diagram\nafter its strand arrows are forgotten. Its finite crossing set is denoted\n$C(D)$, and at least one closed component is required. The empty link diagram is\noutside this definition.\n\nAt a crossing use the following local chart: the over-strand runs from the\nsouthwest endpoint to the northeast endpoint and is drawn continuously over the\nunder-strand, which runs from northwest to southeast with a gap at the\nintersection. In this chart the **A-smoothing** joins the two top endpoints and\njoins the two bottom endpoints; the **B-smoothing** joins the two left endpoints\nand joins the two right endpoints. These labels are attached to this displayed\nchart and are transported by orientation-preserving changes of local\ncoordinates.\n\n```tikz\n\\begin{tikzpicture}[scale=0.72, line cap=round, line join=round]\n  \\begin{scope}\n    \\draw[thick] (-1,1)--(-0.14,0.14);\n    \\draw[thick] (0.14,-0.14)--(1,-1);\n    \\draw[very thick] (-1,-1)--(1,1);\n    \\node at (0,-1.45) {crossing};\n  \\end{scope}\n  \\begin{scope}[xshift=3.4cm]\n    \\draw[thick] (-1,1) .. controls (-0.35,0.45) and (0.35,0.45) .. (1,1);\n    \\draw[thick] (-1,-1) .. controls (-0.35,-0.45) and (0.35,-0.45) .. (1,-1);\n    \\node at (0,-1.45) {$A$-smoothing, weight $A$};\n  \\end{scope}\n  \\begin{scope}[xshift=6.8cm]\n    \\draw[thick] (-1,1) .. controls (-0.45,0.35) and (-0.45,-0.35) .. (-1,-1);\n    \\draw[thick] (1,1) .. controls (0.45,0.35) and (0.45,-0.35) .. (1,-1);\n    \\node at (0,-1.45) {$B$-smoothing, weight $A^{-1}$};\n  \\end{scope}\n\\end{tikzpicture}\n```\n\nFor a state $S:C(D)\\to\\{A,B\\}$, let $a(S)$ and $b(S)$ be the numbers of\nA- and B-smoothings, and let $|S|$ be the number of closed circles in the\ncrossingless diagram obtained by performing all smoothings. Set\n$$\\delta:=-A^2-A^{-2}$$\nand define the **Kauffman bracket** of $D$ by\n$$\\langle D\\rangle:=\\sum_{S:C(D)\\to\\{A,B\\}} A^{a(S)-b(S)}\\delta^{|S|-1}\\in\\mathbb Z[A^{\\pm1}].$$\nBecause $D$ is nonempty, every complete smoothing has $|S|\\ge1$, so the loop\nexponent is nonnegative. A crossingless $k$-component unlink with $k\\ge1$ has\nbracket $\\delta^{k-1}$.\n\n",
+          "uses": [
+            "1.2"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "def-oriented-crossing-sign-writhe-and-blackboard-framing",
+          "source_section": "Definition",
+          "quote": "Assume $\\mathrm{AC}_\\omega$ for the smooth normal-bundle structure used in the\nframing clause. For a knot component $K$, its normal bundle is the fibrewise\nquotient $\\nu K=TS^3|_K/TK$, and a normal section is a smooth section of this\nbundle.\n\nLet $D$ be a regular oriented link diagram in a projection plane $P$ of an\noriented $3$-sphere, after moving the link off the point at infinity. Fix the\nunit viewing normal $n$ pointing toward the viewer. Orient $P$ by the rule that\nan ordered basis $(u,v)$ of $P$ is positive exactly when $(n,u,v)$ is a positive\nbasis of the ambient $3$-space. At a crossing $c$, let $v_{\\rm over}$ and\n$v_{\\rm under}$ be the nonzero projected tangent vectors following the\norientations of the overpassing and underpassing strands. Define\n$$\\operatorname{sgn}(c):=\\operatorname{sgn}\\det_P(v_{\\rm over},v_{\\rm under})\\in\\{+1,-1\\}.$$\nReversing the orientation of $P$ reverses every crossing sign.\n\nThis convention makes the positive geometric Artin half twist positive. In\nthe braid chart $(x,y,t)$ with ambient orientation $(x,y,t)$, view along $+y$;\nthe induced positive orientation of the $(x,t)$ projection plane is the ordered\nbasis $(\\partial_t,\\partial_x)$. For the positive half twist, label $i$ moves\nfrom $x=-h$ to $x=h$ below the midpoint, while label $i+1$ moves from $x=h$ to\n$x=-h$ above it, with $h>0$. Thus the over and under projected tangent vectors\nin coordinates $(t,x)$ are $(1,-2h)$ and $(1,2h)$, whose determinant is\n$4h>0$.\n\nThe **writhe** of $D$ is\n$$\\operatorname{wr}(D):=\\sum_{c\\text{ a crossing of }D}\\operatorname{sgn}(c).$$\nFor a link component $K_i$, its **self-writhe**\n$\\operatorname{wr}_i(D)$ is the sum over crossings whose two branches belong to\n$K_i$; the total writhe also includes all mixed crossings between distinct\ncomponents.\n\nThe **blackboard framing** of a component of $D$ is the homotopy class of the\nnormal section represented by the positive quarter-turn in $P$ of the projected\noriented tangent. The projection is an immersion, so this vector never\nvanishes; it is perpendicular to the projected tangent, hence also to the\nspatial tangent, and therefore represents a nonzero normal section of the\ncomponent in the ambient $3$-sphere.\n\n```tikz\n\\begin{tikzpicture}[scale=0.8,>=stealth]\n  \\draw[->] (-1,0) -- (1,0) node[right] {$v_{\\rm over}$};\n  \\draw[->] (0,-1) -- (0,1) node[above] {$v_{\\rm under}$};\n  \\node[above left] at (0,0) {$+1$};\n\\end{tikzpicture}\n```\n\nIn the displayed local chart, the over tangent is the positive horizontal\nvector and the under tangent is the positive vertical vector, so the determinant\nis $+1$. This figure illustrates the determinant rule only; no proof below\ndepends on a picture.\n\n",
+          "uses": [
+            "1.2"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "step": "1.1",
+          "claim": "The inverse of the positive crossing is its negative crossing: stacking them creates a type-II bigon, which cancels by regular isotopy. For $|i-j|\\ge2$, the supports of $g_i$ and $g_j$ are disjoint, so they commute; the supports of $g_i$ and $e_j$ are disjoint, so those commute as well; and two distant cup-cap tangles commute by planar isotopy. The adjacent braid relation is the type-III move on three monotone strands, and the two possible orders of stacking the cup-cap tangles in $e_i e_{i\\pm1}e_i=e_i$ reduce by planar isotopy to the same single cup and cap. These checks preserve the ordered boundary endpoints.",
+          "inputs": [
+            "F1",
+            "given"
+          ]
+        },
+        {
+          "id": "step-1-2",
+          "step": "1.2",
+          "claim": "The relation $g_i-g_i^{-1}=z_B(1-e_i)$ maps, by [F2], to $D_+-D_-=z_D(D_0-D_\\infty)$, since $z_B=-z_D$ and $e_i,1$ are respectively the cup-cap and through smoothings. The fixed chart in [F3] ensures these are the designated $D_0,D_\\infty$ pairings, so no crossing rotation changes the sign. The schematic records generator images only; this calculation uses the algebraic relation and the endpoint pairings.",
+          "inputs": [
+            "F1",
+            "F2",
+            "F3",
+            "F4",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "step": "2.1",
+          "claim": "Stacking $g_i$ next to $e_i$ creates a positive curl on the cup-cap strand, and stacking $g_i^{-1}$ creates a negative curl. Their values are $a=\\rho^{-1}$ and $a^{-1}=\\rho$, as required by [F1] and [F2]. Stacking $e_i$ twice creates one disjoint trivial circle and leaves one $e_i$, so $e_i^2=d e_i=\\delta e_i$. Stacking $e_i,g_{i\\pm1},e_i$ creates the opposite curl on the remaining strand; its value is $a^{-1}=\\rho$, which verifies $e_i g_{i\\pm1}e_i=\\rho e_i$.",
+          "inputs": [
+            "F1",
+            "F2",
+            "step 1.2",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-2",
+          "step": "2.2",
+          "claim": "For the remaining adjacent tangle relations, label the three strands in the local rectangle $1,2,3$ from left to right at both boundaries. In the product $g_i g_{i+1}e_i$, the cup-cap endpoints are carried across the two successive crossings to the same top and bottom pairings as in $e_{i+1}e_i$; the intervening arcs form a cancellable type-II pair after a type-III slide. Thus these tangles are regularly isotopic. Reflecting the rectangle vertically gives the corresponding endpoint calculation for $e_i g_{i+1}g_i=e_i e_{i+1}$. The calculation for index $i-1$ is the horizontal reflection of these two, with the endpoint order reversed. Hence every relation in [F1] is preserved for $n\\ge2$.",
+          "inputs": [
+            "F1",
+            "given",
+            "step 1.1"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "step": "3.1",
+          "claim": "For $n=0$ and $n=1$, the BMW algebra is the scalar algebra $T$ by [F1], with no crossing or cup-cap generators. Sending a scalar to the same scalar times the empty tangle or the straight tangle is unital and $T$-linear, so it defines the stated boundary homomorphism.",
+          "inputs": [
+            "F1",
+            "given",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "Step 3.1 defines the scalar map at n=0 by sending T to the empty tangle."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Step 3.1 checks the n=0 boundary algebra, and step 2.1 checks the skein relation as an algebraic identity without division."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Step 3.1 defines the scalar map at n=1 by sending T to the straight strand."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Step 2.1 maps the skein relation using z_B=-z_D and does not divide by either parameter."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Step 1.1 checks that the generator images preserve the ordered boundary endpoints."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "The generator assignment and local relation checks are deterministic and use no choices."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The Lemma asserts well-definedness only and no equivalence."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The Lemma asserts well-definedness only and no equivalence."
+        }
+      ],
+      "finite_checks": [
+        {
+          "name": "small-rank generator boundaries",
+          "method": "exact local relation check",
+          "input": {
+            "n_values": [
+              0,
+              1,
+              2
+            ]
+          },
+          "calculation": "For n=0,1 there are no generators and scalars map to the empty/straight identity; for n=2 the single crossing and cup-cap images satisfy inverse, skein, curl, loop, and e^2=d e relations by the displayed local rules.",
+          "expected": {
+            "n0": "unital scalar map",
+            "n1": "unital scalar map",
+            "n2": "local relations preserved"
+          }
+        }
+      ],
+      "finite_smoke": []
+    },
+    "lem-bmw-descending-tangle-spanning": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-dubrovnik-tangle-skein-algebra",
+          "source_section": "Definition",
+          "quote": "Fix $n\\ge0$ and a rectangle with $n$ distinct ordered endpoints on its top edge and $n$ on its bottom edge. An ordinary $(n,n)$ tangle diagram is a finite generic planar projection in the rectangle of arcs joining these endpoints and finitely many closed curves, with an over/under marking at each transverse double point and no other singularities. Two diagrams are regularly isotopic when related by planar isotopy fixing the boundary and Reidemeister moves II and III. Their regular-isotopy classes form a monoid under vertical stacking, with the $n$ straight strands as its identity. In the fixed crossing chart, $D_+$ and $D_-$ differ by switching the marked crossing, $D_0$ is the cup-cap top/bottom smoothing, and $D_\\infty$ is the through left/right smoothing. A positive curl is a type-I kink with determinant crossing sign $+1$; a negative curl has sign $-1$. Define $\\mathcal{KT}_n(T)$ to be the $T$-algebra obtained from the monoid algebra of these classes by imposing, in every interior disk, the Dubrovnik relations\n$$D_+-D_-=z_D(D_0-D_\\infty),\\qquad \\text{positive curl}=a\\,\\text{straight strand},\\qquad \\text{negative curl}=a^{-1}\\,\\text{straight strand},$$\nand the free-circle relation that adjoining one disjoint circle with no crossings with the tangle multiplies it by $d$. The symbols $a,z_D,d$ are the images from the coefficient extension. No type-I move is imposed as a regular isotopy; its effect is represented by the displayed curl relations.\n\n",
+          "uses": [
+            "1.1",
+            "1.2",
+            "1.3",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "def-kauffman-regular-isotopy-and-dubrovnik-conventions",
+          "source_section": "Definition",
+          "quote": "Let\n$$R_D=\\mathbb Z[a^{\\pm1},z,d^{\\pm1}]/(z(d-1)-(a-a^{-1})),$$\nwhere $z$ is not inverted. A nonempty unoriented regular link diagram is a\nfinite generic planar projection of one or more circles with only transverse\ndouble crossings and an over/under marking at each crossing. Use the crossing\nchart in which the over-strand runs southwest to northeast. Its $D_0$\nsmoothing joins the two top endpoints and the two bottom endpoints, and its\n$D_\\infty$ smoothing joins the left endpoints and the right endpoints. These\nare respectively the $A$- and $B$-smoothings in the stated chart. A positive\ncurl is a type-I kink whose oriented crossing has determinant sign $+1$; a\nnegative curl has determinant sign $-1$. The sign is unchanged if the\norientation of the whole component is reversed.\n\nThe Dubrovnik regular-isotopy evaluation $P$ is normalized by\n$P(\\varnothing)=1$, $P(K\\sqcup\\bigcirc)=dP(K)$, positive and negative curl\nfactors $a$ and $a^{-1}$, and\n$$P(D_+)-P(D_-)=z\\bigl(P(D_0)-P(D_\\infty)\\bigr).$$\nHere $D_+$ and $D_-$ differ only by switching the displayed crossing. For a\nnonempty oriented link diagram $K$, let $c(K)$ be its number of components and\nlet $w(K)$ be the sum of the determinant crossing signs. Define\n$$D_K(a,z)=d^{-1}P(K),$$\n$$L_K(A,Z)=-i^{w(K)}(-1)^{c(K)}D_K(-iA,iZ),\\qquad i^2=-1,$$\nand\n$$F_K(A,Z)=A^{-w(K)}L_K(A,Z).$$\nThus $D$ has unknot value $1$, and the universal relation defining $R_D$ is\nretained even when $z$ is not invertible. These are conventions and\nnormalizations; ambient-isotopy invariance of $F$ is a separate theorem.\n\n",
+          "uses": [
+            "1.1",
+            "1.2",
+            "1.3",
+            "2.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "step": "1.1",
+          "claim": "If a tangle diagram has no crossings, every closed component is a disjoint trivial circle and the remaining arcs form a crossingless connector; removing each circle by [F2] leaves a scalar multiple of its standard matching tangle. This is the base case for induction on the lexicographically ordered pair (crossing count, bad-crossing count).",
+          "inputs": [
+            "F1",
+            "F2",
+            "base"
+          ]
+        },
+        {
+          "id": "step-1-2",
+          "step": "1.2",
+          "claim": "For a diagram with crossings, choose a finite traversal order of its components and orient each arc from its smaller boundary label to its larger one; for closed components use any finite encoded orientation and basepoint. A crossing is bad when its first encountered branch is under. If there is a bad crossing, the skein relation expresses the diagram as its switched diagram plus two smoothing terms. Switching preserves the crossing count and lowers the bad-crossing count by one; each smoothing lowers the crossing count by one. Thus every term is lower in the stated lexicographic order, and the induction hypothesis expresses each as a linear combination of standard descending representatives. The choices here are finite choices made from the encoded diagram, not an appeal to an infinite choice principle.",
+          "inputs": [
+            "F1",
+            "F2",
+            "ih",
+            "induction"
+          ]
+        },
+        {
+          "id": "step-1-3",
+          "step": "1.3",
+          "claim": "If there is no bad crossing, the diagram is totally descending. Place its components in their traversal order as successive height layers. For each closed component, lifting its first traversed branch over all later branches makes it an unknotted circle disjoint from the remaining layers; any framing curl is removed by the corresponding curl relation, and the free-circle rule removes it with a factor $d$. For the remaining arcs, each arc’s first encounter is over at every self-crossing, so lifting each already traversed segment removes its self-crossings while fixing the endpoints; crossings between distinct arcs remain in their ordered layers. The result is a standard loop-free, self-crossing-free descending tangle with the same connector.",
+          "inputs": [
+            "F1",
+            "F2",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "step": "2.1",
+          "claim": "The base case, induction step, and descending terminal case together show by well-founded induction that every diagram reduces to a linear combination of standard representatives. Two descending representatives with the same connector have the same ordered height layers; moving the highest arc to its corresponding arc while fixing lower layers, then proceeding downward, gives a boundary-fixing regular isotopy. Thus each connector has one representative. There are $(2n-1)!!$ perfect matchings on $2n$ endpoints, obtained by pairing the first endpoint in $2n-1$ ways and repeating; for $n=0$ the empty matching is unique and for $n=1$ the straight strand is unique.",
+          "inputs": [
+            "F1",
+            "F2",
+            "step 1.1",
+            "step 1.2",
+            "step 1.3",
+            "discharge-induction: step 1.2"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "Step 2.1 includes the empty connector at n=0, represented by the empty tangle."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Step 1.1 handles the zero-crossing base case as already descending."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Step 2.1 identifies the unique n=1 connector with the straight strand."
+        },
+        {
+          "case": "degenerate",
+          "status": "not_applicable",
+          "reason": "The spanning argument uses formal skein reduction and does not assert a specialization at degenerate coefficient values."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Step 2.1 fixes the boundary and compares diagrams with the same connector."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "The traversal order is fixed in the Statement; the finite reductions use no choice axiom."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The Lemma is a spanning assertion, not an equivalence."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The Lemma is a spanning assertion, not an equivalence."
+        }
+      ],
+      "finite_checks": [
+        {
+          "name": "small matching counts",
+          "method": "exact finite enumeration",
+          "input": {
+            "n_values": [
+              0,
+              1,
+              2
+            ]
+          },
+          "calculation": "The numbers of perfect matchings of 0, 2, and 4 endpoints are 1, 1, and 3; the zero-crossing representatives are already descending.",
+          "expected": {
+            "counts": [
+              1,
+              1,
+              3
+            ]
+          }
+        }
+      ],
+      "finite_smoke": []
+    },
+    "lem-bmw-closure-pairing-independence": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "lem-framed-kauffman-link-evaluation",
+          "source_section": "Statement",
+          "quote": "Put $A=\\mathbb Z[a^{\\pm1},s,d^{\\pm1}]/(s(d-1)-(a-a^{-1}))$. This ring is an integral domain and embeds in $\\mathbb Q(i)(a,s)$ by $d\\mapsto1+(a-a^{-1})/s$, where $i^2=-1$. A link diagram means a finite generic immersion of circles in the oriented plane with over/under data at its double points. Regular isotopy is generated by planar isotopy and Reidemeister moves II and III. A positive curl is a one-crossing curl whose oriented self-crossing has sign $+1$; its sign is independent of the direction chosen on its component. There is a unique function $P$ from link diagrams, including the empty diagram, to $A$ with $P(\\varnothing)=1$, unchanged by regular isotopy, satisfying the following local rules: a positive or negative curl multiplies $P$ by $a$ or $a^{-1}$; a disjoint trivial circle multiplies $P$ by $d$; and $P(L_+)-P(L_-)=s(P(L_0)-P(L_\\infty))$. Here in an oriented disk with four cyclically labelled endpoints $1,2,3,4$, $L_+$ connects $1$ to $3$ over the strand from $2$ to $4$, and the two smoothings are chosen so that the oriented smoothing for any orientation making this crossing positive is $L_0$; $L_-$ reverses the crossing and $L_\\infty$ is the other smoothing. Rotating the disk interchanges both differences and preserves the rule. In particular the empty diagram freely generates the quotient of the free $A$-module on closed diagrams by these rules.\n\n",
+          "uses": [
+            "1.1",
+            "2.1",
+            "3.1",
+            "4.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "lem-bmw-relations-dubrovnik-parameter-dictionary",
+          "source_section": "Statement",
+          "quote": "Let\n$$S=\\mathbb Z[a^{\\pm1},z,d^{\\pm1}]/(z(d-1)-(a-a^{-1}))$$\nbe the Dubrovnik coefficient ring, and let\n$$T=S[q^{\\pm1}]/(q-q^{-1}+z).$$\nIn $T$ put $\\rho=a^{-1}$, $\\delta=d$, and $z_B=q-q^{-1}$. Then the natural\nmap $S\\to T$ is injective and $T$ is a free $S$-module with basis $1,q$.\nMoreover, the BMW coefficient relation\n$$z_B(\\delta-1)=\\rho-\\rho^{-1}$$\nholds, and the substitution $a=\\rho^{-1}$, $z_D=-z_B$, $d=\\delta$ converts\nthe BMW skein, curl, adjacent untwisting, and loop coefficients to the\nDubrovnik relations in the specified chart: $D_+-D_-=z_D(D_0-D_\\infty)$,\nthe curl factors are $a,a^{-1}$, and a disjoint trivial circle contributes\n$d$. Here $D_0$ is cup-cap and $D_\\infty$ is through. No skein parameter is\ndivided out.\n\n",
+          "uses": [
+            "3.1",
+            "4.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "lem-bmw-descending-tangle-spanning",
+          "source_section": "Statement",
+          "quote": "For each integer $n\\ge0$, let $S=\\mathbb Z[a^{\\pm1},z,d^{\\pm1}]/(z(d-1)-(a-a^{-1}))$ and $T=S[q^{\\pm1}]/(q-q^{-1}+z)$, with $z_D=-q+q^{-1}$. Let $\\mathcal{KT}_n(T)$ be the ordinary Dubrovnik tangle skein algebra formed from regular-isotopy classes with crossing rule $D_+-D_-=z_D(D_0-D_\\infty)$, curl factors $a,a^{-1}$, and free-circle factor $d$, where $D_0$ is cup-cap and $D_\\infty$ is through. Number its $2n$ boundary endpoints in cyclic order as $1,2,\\ldots,n,\\bar n,\\ldots,\\bar2,\\bar1$. A connector is a perfect matching of these endpoints. Orient each open strand from its lower-numbered endpoint to its higher-numbered endpoint and order the open strands by their initial endpoints. Place the finitely many closed strands after the open strands in any fixed order, with a chosen orientation and initial point for each. A diagram is totally descending if, in this traversal order, the first branch encountered at each crossing is the overpassing branch. Then $\\mathcal{KT}_n(T)$ is spanned by one loop-free, self-crossing-free totally descending tangle for each connector. These representatives can have crossings between distinct strands; their crossing data are fixed by the total traversal order. For $n=0$ the single representative is the empty tangle, and for $n=1$ it is the straight strand.\n\n",
+          "uses": [
+            "1.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "step": "1.1",
+          "claim": "Define the ring homomorphism $\\sigma:S\\to\\mathbb Z[x^{\\pm1}]$ by $a\\mapsto1$, $z\\mapsto0$, and $d\\mapsto x$; the defining relation maps to $0=0$, so the map is well defined. For any closed diagram in an entry of $M_n$, the skein rule in [F1] becomes $P_+=P_-$ under $\\sigma$. Switch finitely many crossings until the closed diagram is totally descending; these switches do not change its specialized value. Pulling the first traversed strands above the later ones unties every component, and the specialized curl factor is $1$. The result is a disjoint union of $\\ell(m,m')$ trivial circles, where $\\ell(m,m')$ is the number of connected components in the union of the two endpoint matchings. Hence $\\sigma(M_n[m,m'])=x^{\\ell(m,m')}$. The closure is a closed diagram at every $n$, including the empty diagram for $n=0$.",
+          "inputs": [
+            "F1",
+            "F3",
+            "construct",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "step": "2.1",
+          "claim": "If $m=m'$, their union consists of $n$ doubled edges, so $\\ell(m,m)=n$. If $m\\ne m'$, each connected component of their union is an alternating even cycle, and at least one has length at least four; therefore $\\ell(m,m')\\le n-1$. Let $N=(2n-1)!!$ be the number of matchings, with $N=1$ for $n=0$. In the determinant expansion of $\\sigma(M_n)$, the identity permutation contributes $x^{nN}$. Every nonidentity permutation has at least one off-diagonal entry of degree at most $n-1$, while every other entry has degree at most $n$, so its term has degree at most $nN-1$. The identity term is therefore the unique leading term with coefficient $1$, and $\\det(\\sigma(M_n))\\ne0$. Thus $\\det M_n\\ne0$ in $S$. For $n=0$ the matrix is $[1]$, so the same conclusion holds.",
+          "inputs": [
+            "F1",
+            "step 1.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "step": "3.1",
+          "claim": "Since $S$ is a domain by [F1], multiplication by $\\det M_n\\ne0$ is injective on $S$. By [F2], every $t\\in T$ has a unique form $u+vq$ with $u,v\\in S$. If $(\\det M_n)t=0$, uniqueness gives $(\\det M_n)u=(\\det M_n)v=0$ in $S$, hence $u=v=0$; so $\\det M_n$ is a non-zero-divisor in $T$.",
+          "inputs": [
+            "F1",
+            "F2",
+            "step 2.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-4-1",
+          "step": "4.1",
+          "claim": "Suppose $\\sum_m t_m T_m=0$ in the tangle skein algebra over $T$. Close this relation against each reflected standard matching and apply the scalar evaluation; closure respects the skein, curl, and circle relations, so the resulting equations are $M_n^{\\mathsf T}t=0$. Multiplication by the adjugate gives $(\\det M_n)t=0$. Step 3.1 shows each coordinate $t_m$ is zero. Therefore the standard tangles are linearly independent over $T$. The same argument includes $n=0$ and $n=1$, whose matrices are respectively $[1]$ and $[d]$.",
+          "inputs": [
+            "F1",
+            "F2",
+            "step 3.1",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "Steps 2.1 and 4.1 include n=0, where the closure matrix is [1]."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Step 1.1 specializes z=0 and a=1 and proves the specialized closure entries are powers of x."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Step 4.1 includes n=1, whose closure matrix is [d]."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Step 3.1 uses the free S-basis {1,q} to preserve the non-zero-divisor determinant in T; the Statement excludes arbitrary nonflat specializations."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Steps 2.1 and 4.1 include the n=0 and n=1 matching endpoint sets."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "The matching set is finite and all closure pairings are constructed without choice."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The Lemma asserts linear independence, not an equivalence."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The Lemma asserts linear independence, not an equivalence."
+        }
+      ],
+      "finite_checks": [
+        {
+          "name": "closure matrices at n=0,1,2",
+          "method": "exact finite matrix calculation after a=1,z=0,d=x",
+          "input": {
+            "n_values": [
+              0,
+              1,
+              2
+            ]
+          },
+          "calculation": "M0=[1], M1=[x], and in the three-match basis M2 has x^2 on the diagonal and x off diagonal; det(M2)=x^3(x+2)(x-1)^2 has leading term x^6.",
+          "expected": {
+            "determinants": {
+              "n0": "1",
+              "n1": "x",
+              "n2": "x^3(x+2)(x-1)^2"
+            },
+            "leading_degrees": {
+              "n0": 0,
+              "n1": 1,
+              "n2": 6
+            }
+          }
+        }
+      ],
+      "finite_smoke": []
+    },
+    "lem-bmw-markov-trace-stabilization": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "lem-bmw-presentation-tangle-evaluation-is-well-defined",
+          "source_section": "Statement",
+          "quote": "Let $T$ be the coefficient extension and parameter substitution in the BMW-to-Dubrovnik dictionary, and let $\\mathcal{KT}_n(T)$ be the ordinary Dubrovnik tangle skein algebra: its diagrams are finite generic projections of $n$ arcs with fixed ordered top and bottom endpoints and closed curves, modulo planar isotopy, Reidemeister II and III, the Dubrovnik skein relation, the two curl relations, and the free-circle relation with parameters $z_D,a,a^{-1},d$. In its fixed chart, $D_0$ is cup-cap top/bottom and $D_\\infty$ is through left/right. For every $n\\ge2$, send the BMW generator $g_i$ to the positive Artin crossing between strands $i,i+1$, its inverse to the negative crossing, and $e_i$ to the adjacent cup-cap tangle. This assignment extends to a unital $T$-algebra homomorphism $\\Phi_n:BMW_n(T;q,\\rho,\\delta)\\to\\mathcal{KT}_n(T)$. For $n=0,1$, define the unital $T$-algebra homomorphism by sending each scalar to that scalar times the empty or straight tangle, respectively. This claim asserts well-definedness only; it does not assert surjectivity or injectivity.\n\n",
+          "uses": [
+            "1.1",
+            "2.1",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "lem-framed-kauffman-link-evaluation",
+          "source_section": "Statement",
+          "quote": "Put $A=\\mathbb Z[a^{\\pm1},s,d^{\\pm1}]/(s(d-1)-(a-a^{-1}))$. This ring is an integral domain and embeds in $\\mathbb Q(i)(a,s)$ by $d\\mapsto1+(a-a^{-1})/s$, where $i^2=-1$. A link diagram means a finite generic immersion of circles in the oriented plane with over/under data at its double points. Regular isotopy is generated by planar isotopy and Reidemeister moves II and III. A positive curl is a one-crossing curl whose oriented self-crossing has sign $+1$; its sign is independent of the direction chosen on its component. There is a unique function $P$ from link diagrams, including the empty diagram, to $A$ with $P(\\varnothing)=1$, unchanged by regular isotopy, satisfying the following local rules: a positive or negative curl multiplies $P$ by $a$ or $a^{-1}$; a disjoint trivial circle multiplies $P$ by $d$; and $P(L_+)-P(L_-)=s(P(L_0)-P(L_\\infty))$. Here in an oriented disk with four cyclically labelled endpoints $1,2,3,4$, $L_+$ connects $1$ to $3$ over the strand from $2$ to $4$, and the two smoothings are chosen so that the oriented smoothing for any orientation making this crossing positive is $L_0$; $L_-$ reverses the crossing and $L_\\infty$ is the other smoothing. Rotating the disk interchanges both differences and preserves the rule. In particular the empty diagram freely generates the quotient of the free $A$-module on closed diagrams by these rules.\n\n",
+          "uses": [
+            "1.1",
+            "2.1",
+            "2.2",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "lem-bmw-presentation-tangle-evaluation-is-well-defined",
+          "source_section": "Statement",
+          "quote": "Let $T$ be the coefficient extension and parameter substitution in the BMW-to-Dubrovnik dictionary, and let $\\mathcal{KT}_n(T)$ be the ordinary Dubrovnik tangle skein algebra: its diagrams are finite generic projections of $n$ arcs with fixed ordered top and bottom endpoints and closed curves, modulo planar isotopy, Reidemeister II and III, the Dubrovnik skein relation, the two curl relations, and the free-circle relation with parameters $z_D,a,a^{-1},d$. In its fixed chart, $D_0$ is cup-cap top/bottom and $D_\\infty$ is through left/right. For every $n\\ge2$, send the BMW generator $g_i$ to the positive Artin crossing between strands $i,i+1$, its inverse to the negative crossing, and $e_i$ to the adjacent cup-cap tangle. This assignment extends to a unital $T$-algebra homomorphism $\\Phi_n:BMW_n(T;q,\\rho,\\delta)\\to\\mathcal{KT}_n(T)$. For $n=0,1$, define the unital $T$-algebra homomorphism by sending each scalar to that scalar times the empty or straight tangle, respectively. This claim asserts well-definedness only; it does not assert surjectivity or injectivity.\n\n",
+          "uses": [
+            "2.2",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "lem-bmw-relations-dubrovnik-parameter-dictionary",
+          "source_section": "Statement",
+          "quote": "Let\n$$S=\\mathbb Z[a^{\\pm1},z,d^{\\pm1}]/(z(d-1)-(a-a^{-1}))$$\nbe the Dubrovnik coefficient ring, and let\n$$T=S[q^{\\pm1}]/(q-q^{-1}+z).$$\nIn $T$ put $\\rho=a^{-1}$, $\\delta=d$, and $z_B=q-q^{-1}$. Then the natural\nmap $S\\to T$ is injective and $T$ is a free $S$-module with basis $1,q$.\nMoreover, the BMW coefficient relation\n$$z_B(\\delta-1)=\\rho-\\rho^{-1}$$\nholds, and the substitution $a=\\rho^{-1}$, $z_D=-z_B$, $d=\\delta$ converts\nthe BMW skein, curl, adjacent untwisting, and loop coefficients to the\nDubrovnik relations in the specified chart: $D_+-D_-=z_D(D_0-D_\\infty)$,\nthe curl factors are $a,a^{-1}$, and a disjoint trivial circle contributes\n$d$. Here $D_0$ is cup-cap and $D_\\infty$ is through. No skein parameter is\ndivided out.\n\n",
+          "uses": [
+            "2.2"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "step": "1.1",
+          "claim": "By [F1], the tangle class $\\Phi_n(x)$ depends only on the BMW algebra element $x$, so closing it and applying $P$ defines a $T$-linear scalar. For $x,y\\in BMW_n$, the two closed tangles obtained by closing the stacked products $\\Phi_n(x)\\Phi_n(y)$ and $\\Phi_n(y)\\Phi_n(x)$ differ only by moving the chosen cut between the factors once around the closed tangle. This is an isotopy of the closed diagram and preserves its framing; therefore $P(\\widehat{\\Phi_n(xy)})=P(\\widehat{\\Phi_n(yx)})$, proving cyclicity after multiplication by $d^{-n}$.",
+          "inputs": [
+            "F1",
+            "F2"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "step": "2.1",
+          "claim": "Under tower inclusion, the new straight strand closes to a disjoint trivial circle. By [F2], $P(\\widehat{\\Phi_{n+1}(\\iota_n(x))})=dP(\\widehat{\\Phi_n(x)})$. Thus $d^{-(n+1)}dP(\\widehat{\\Phi_n(x)})=\\tau_n(x)$, which proves tower compatibility.",
+          "inputs": [
+            "F1",
+            "F2",
+            "step 1.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-2",
+          "step": "2.2",
+          "claim": "Closing $\\iota_n(x)g_n$ turns the added positive crossing into a positive curl on the last closure arc of $\\widehat{\\Phi_n(x)}$; closing $\\iota_n(x)g_n^{-1}$ gives a negative curl on the same arc. By [F2] and [F3], the respective scalar factors are $a$ and $a^{-1}$. Normalization by $d^{-(n+1)}$ gives $a d^{-1}\\tau_n(x)$ and $a^{-1}d^{-1}\\tau_n(x)$.",
+          "inputs": [
+            "F2",
+            "F3",
+            "F4",
+            "step 1.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "step": "3.1",
+          "claim": "In the closure of $\\iota_n(x)e_n$, the added cup and cap and the two added closure arcs form a detour joining the top and bottom ends of the last strand of $\\Phi_n(x)$. Following that component through the cup, cap, and closure arcs gives exactly the same connection as the untwisted closure arc for $\\Phi_n(x)$; the other components and crossings are unchanged. Pulling this detour into the closing collar is a planar isotopy, so the unnormalized evaluations agree. The normalization changes from $d^{-n}$ to $d^{-(n+1)}$, giving $d^{-1}\\tau_n(x)$.",
+          "inputs": [
+            "F1",
+            "F2",
+            "F3",
+            "step 1.1",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The Statement defines the trace only for n≥1 and does not assert an empty-link value."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "The Statement includes T-linearity, which sends the zero algebra element to zero."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Statement: the formula is defined for all n≥1; an exact finite trace check at n=1 gives τ₁(1)=1."
+        },
+        {
+          "case": "degenerate",
+          "status": "not_applicable",
+          "reason": "No specialization to a degenerate coefficient ring is asserted."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "The Statement defines closure by joining corresponding ordered top and bottom endpoints without a twist."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "The trace construction is deterministic and uses no choice axiom."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The trace identities are direct equalities, not an iff."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The trace identities are direct equalities, not an iff."
+        }
+      ],
+      "finite_checks": [
+        {
+          "name": "one-strand closure and first stabilization",
+          "method": "exact closure evaluation",
+          "input": {
+            "n": 1,
+            "x": "1"
+          },
+          "calculation": "P(unknot)=d gives tau_1(1)=1. In B_2, closures of g_1, g_1^-1, and e_1 evaluate to ad, a^-1d, and d respectively before d^-2 normalization, yielding a/d, a^-1/d, and 1/d.",
+          "expected": {
+            "tau1_identity": "1",
+            "positive": "a/d",
+            "negative": "a^-1/d",
+            "cup_cap": "1/d"
+          }
+        }
+      ],
+      "finite_smoke": []
+    },
+    "lem-bmw-descending-tangle-spanning-and-independence": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "lem-bmw-presentation-tangle-evaluation-is-well-defined",
+          "source_section": "Statement",
+          "quote": "Let $T$ be the coefficient extension and parameter substitution in the BMW-to-Dubrovnik dictionary, and let $\\mathcal{KT}_n(T)$ be the ordinary Dubrovnik tangle skein algebra: its diagrams are finite generic projections of $n$ arcs with fixed ordered top and bottom endpoints and closed curves, modulo planar isotopy, Reidemeister II and III, the Dubrovnik skein relation, the two curl relations, and the free-circle relation with parameters $z_D,a,a^{-1},d$. In its fixed chart, $D_0$ is cup-cap top/bottom and $D_\\infty$ is through left/right. For every $n\\ge2$, send the BMW generator $g_i$ to the positive Artin crossing between strands $i,i+1$, its inverse to the negative crossing, and $e_i$ to the adjacent cup-cap tangle. This assignment extends to a unital $T$-algebra homomorphism $\\Phi_n:BMW_n(T;q,\\rho,\\delta)\\to\\mathcal{KT}_n(T)$. For $n=0,1$, define the unital $T$-algebra homomorphism by sending each scalar to that scalar times the empty or straight tangle, respectively. This claim asserts well-definedness only; it does not assert surjectivity or injectivity.\n\n",
+          "uses": [
+            "2.1",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "lem-bmw-descending-tangle-spanning",
+          "source_section": "Statement",
+          "quote": "For each integer $n\\ge0$, let $S=\\mathbb Z[a^{\\pm1},z,d^{\\pm1}]/(z(d-1)-(a-a^{-1}))$ and $T=S[q^{\\pm1}]/(q-q^{-1}+z)$, with $z_D=-q+q^{-1}$. Let $\\mathcal{KT}_n(T)$ be the ordinary Dubrovnik tangle skein algebra formed from regular-isotopy classes with crossing rule $D_+-D_-=z_D(D_0-D_\\infty)$, curl factors $a,a^{-1}$, and free-circle factor $d$, where $D_0$ is cup-cap and $D_\\infty$ is through. Number its $2n$ boundary endpoints in cyclic order as $1,2,\\ldots,n,\\bar n,\\ldots,\\bar2,\\bar1$. A connector is a perfect matching of these endpoints. Orient each open strand from its lower-numbered endpoint to its higher-numbered endpoint and order the open strands by their initial endpoints. Place the finitely many closed strands after the open strands in any fixed order, with a chosen orientation and initial point for each. A diagram is totally descending if, in this traversal order, the first branch encountered at each crossing is the overpassing branch. Then $\\mathcal{KT}_n(T)$ is spanned by one loop-free, self-crossing-free totally descending tangle for each connector. These representatives can have crossings between distinct strands; their crossing data are fixed by the total traversal order. For $n=0$ the single representative is the empty tangle, and for $n=1$ it is the straight strand.\n\n",
+          "uses": [
+            "1.1",
+            "2.1",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "lem-bmw-closure-pairing-independence",
+          "source_section": "Statement",
+          "quote": "Let $S=\\mathbb Z[a^{\\pm1},z,d^{\\pm1}]/(z(d-1)-(a-a^{-1}))$ and let $T=S[q^{\\pm1}]/(q-q^{-1}+z)$. For each $n\\ge0$, index the standard descending matching tangles by the perfect matchings $m$ of the $2n$ boundary endpoints. Reflect a second such tangle across the horizontal midline and glue corresponding boundary endpoints to obtain a closed diagram. Let $M_n$ be the matrix whose $(m,m')$ entry is the scalar Dubrovnik evaluation $P$ of this closure. Then $\\det M_n$ is nonzero in $S$, its image is a non-zero-divisor in $T$, and the standard matching tangles are linearly independent over $T$. The assertion is over this universal coefficient extension and makes no independence claim after an arbitrary nonflat specialization.\n\n",
+          "uses": [
+            "1.1",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "def-bmw-algebra-with-fixed-kauffman-skein-convention",
+          "source_section": "Definition",
+          "quote": "Let $R$ be a commutative unital ring, let $q,\\rho\\in R^\\times$, put $z=q-q^{-1}$, and choose $\\delta\\in R$ with $z(\\delta-1)=\\rho-\\rho^{-1}$. For $n\\ge2$, the BMW algebra $BMW_n(R;q,\\rho,\\delta)$ is the unital associative $R$-algebra generated by invertible $g_i$ and elements $e_i$ for $1\\le i<n$, subject to the following relations (an adjacent relation is imposed only when both indices exist):\n\n- braid and distant braid: $g_i g_{i+1}g_i=g_{i+1}g_i g_{i+1}$ and $g_i g_j=g_jg_i$ for $|i-j|\\ge2$;\n- distant cups and caps: $g_i e_j=e_jg_i$ and $e_i e_j=e_j e_i$ for $|i-j|\\ge2$;\n- adjacent cup-cap: $e_i e_{i\\pm1}e_i=e_i$, $g_i g_{i\\pm1}e_i=e_{i\\pm1}e_i$, and $e_i g_{i\\pm1}g_i=e_i e_{i\\pm1}$;\n- Kauffman skein and untwisting: $g_i-g_i^{-1}=z(1-e_i)$, $g_i e_i=e_i g_i=\\rho^{-1}e_i$, and $e_i g_{i\\pm1}e_i=\\rho e_i$;\n- loop: $e_i^2=\\delta e_i$.\n\nFor the boundary ranks, set $BMW_0(R;q,\\rho,\\delta)=BMW_1(R;q,\\rho,\\delta)=R$, with the empty and single straight tangle as their respective units.\n\nIf $z$ is invertible, the parameter relation reads $\\delta=1+(\\rho-\\rho^{-1})/z$. If $z$ is not invertible, the presentation uses the universal coefficient relation $z(\\delta-1)=\\rho-\\rho^{-1}$ and does not divide by $z$. The quotient by the two-sided ideal generated by all $e_i$ is the cup-cap-zero Hecke quotient; this definition does not assert a BMW diagram-basis theorem or a BMW quantum-centralizer theorem.\n",
+          "uses": [
+            "2.1",
+            "3.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "step": "1.1",
+          "claim": "By [F2] and [F3], the tangle skein algebra has a basis indexed by the perfect matchings of the $2n$ endpoints. There are $(2n-1)!!$ such matchings: choose the partner of the first endpoint in $2n-1$ ways and apply the same count to the remaining $2n-2$ endpoints, with one empty matching at $n=0$. The unique matching at $n=1$ is the straight strand. Hence the tangle algebra has the stated rank and boundary bases.",
+          "inputs": [
+            "F2",
+            "F3",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "step": "2.1",
+          "claim": "Fix a standard matching connector and let $k$ be the number of top-top pairs. The number of bottom-bottom pairs is also $k$, because the remaining endpoints must be paired top-to-bottom. If $k=0$, the connector is a permutation diagram, so its standard descending representative is a braid diagram; reading its finitely many crossing levels expresses it as a word in the crossing images $G_i^{\\pm1}=\\Phi_n(g_i^{\\pm1})$. If $k>0$, choose a permutation braid $B_1$ that moves the $k$ top pairs to adjacent positions $(1,2),(3,4),\\ldots,(2k-1,2k)$, and a permutation braid $B_2$ that routes the corresponding bottom pairs to those positions. The remaining through-strands form a braid $B$ on $n-2k$ strands. With the shifted copy of $B$ placed beside the cup-cap block, the tangle has factorization $$B_1\\bigl[(E_1E_3\\cdots E_{2k-1})\\otimes B\\bigr]B_2.$$ Each $B_i$ and $B$ is a finite word in the $G_j^{\\pm1}$, each $E_j=\\Phi_n(e_j)$ is a cup-cap generator, and the shifted factors use indices among $1,\\ldots,n-1$. The permutation braid pieces are obtained by reading the existing upper and lower layers of $T_m$; moving the horizontal pairs to adjacent positions is a boundary-fixing braid isotopy, so it preserves the crossing data and total descending order. The factorization therefore has the same connector and is regularly isotopic to the standard representative. Uniqueness for a fixed connector from the spanning proof identifies its class with that representative. Thus every basis tangle is in the image of $\\Phi_n$, proving surjectivity by [F2].",
+          "inputs": [
+            "F1",
+            "F2",
+            "F4",
+            "construct",
+            "step 1.1"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "step": "3.1",
+          "claim": "Injectivity does not follow from surjectivity and the target basis: it requires a spanning bound for the source algebra, which has not been proved in this carrier. The outstanding source-side normal-form argument is stated exactly in the escalation above; therefore this item is escalated and no isomorphism or BMW freeness conclusion is recorded here.",
+          "inputs": [
+            "F1",
+            "F2",
+            "F3",
+            "F4"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "Step 1.1 verifies the target matching basis has rank one at n=0; the source-side isomorphism claim remains escalated."
+        },
+        {
+          "case": "zero",
+          "status": "not_applicable",
+          "reason": "The escalated source-side basis claim makes no special zero-parameter specialization."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Step 1.1 verifies the target basis has one straight-strand matching at n=1; this does not resolve source injectivity."
+        },
+        {
+          "case": "degenerate",
+          "status": "not_applicable",
+          "reason": "No degenerate coefficient specialization is part of the unresolved source-side normal-form claim."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Step 2.1 treats connector matchings on the ordered top and bottom boundary endpoints; source injectivity remains unresolved."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Step 2.1 uses only finite connector-specific permutation braids; no choice axiom is needed."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The Lemma is an isomorphism/basis claim, not an iff formulation."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The Lemma is an isomorphism/basis claim, not an iff formulation."
+        }
+      ],
+      "finite_checks": [
+        {
+          "name": "target-side ranks at n=0,1",
+          "method": "exact finite matching count",
+          "input": {
+            "n_values": [
+              0,
+              1
+            ]
+          },
+          "calculation": "There is one target connector at each boundary size: the empty matching for n=0 and the straight strand for n=1. This check concerns the established tangle target only and does not establish injectivity of the presented BMW source map.",
+          "expected": {
+            "target_ranks": [
+              1,
+              1
+            ],
+            "source_injectivity": "unresolved"
+          }
+        }
+      ],
+      "finite_smoke": []
+    },
+    "alg-kauffman-polynomial-from-bmw-braid-closure": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-oriented-crossing-sign-writhe-and-blackboard-framing",
+          "source_section": "Definition",
+          "quote": "Assume $\\mathrm{AC}_\\omega$ for the smooth normal-bundle structure used in the\nframing clause. For a knot component $K$, its normal bundle is the fibrewise\nquotient $\\nu K=TS^3|_K/TK$, and a normal section is a smooth section of this\nbundle.\n\nLet $D$ be a regular oriented link diagram in a projection plane $P$ of an\noriented $3$-sphere, after moving the link off the point at infinity. Fix the\nunit viewing normal $n$ pointing toward the viewer. Orient $P$ by the rule that\nan ordered basis $(u,v)$ of $P$ is positive exactly when $(n,u,v)$ is a positive\nbasis of the ambient $3$-space. At a crossing $c$, let $v_{\\rm over}$ and\n$v_{\\rm under}$ be the nonzero projected tangent vectors following the\norientations of the overpassing and underpassing strands. Define\n$$\\operatorname{sgn}(c):=\\operatorname{sgn}\\det_P(v_{\\rm over},v_{\\rm under})\\in\\{+1,-1\\}.$$\nReversing the orientation of $P$ reverses every crossing sign.\n\nThis convention makes the positive geometric Artin half twist positive. In\nthe braid chart $(x,y,t)$ with ambient orientation $(x,y,t)$, view along $+y$;\nthe induced positive orientation of the $(x,t)$ projection plane is the ordered\nbasis $(\\partial_t,\\partial_x)$. For the positive half twist, label $i$ moves\nfrom $x=-h$ to $x=h$ below the midpoint, while label $i+1$ moves from $x=h$ to\n$x=-h$ above it, with $h>0$. Thus the over and under projected tangent vectors\nin coordinates $(t,x)$ are $(1,-2h)$ and $(1,2h)$, whose determinant is\n$4h>0$.\n\nThe **writhe** of $D$ is\n$$\\operatorname{wr}(D):=\\sum_{c\\text{ a crossing of }D}\\operatorname{sgn}(c).$$\nFor a link component $K_i$, its **self-writhe**\n$\\operatorname{wr}_i(D)$ is the sum over crossings whose two branches belong to\n$K_i$; the total writhe also includes all mixed crossings between distinct\ncomponents.\n\nThe **blackboard framing** of a component of $D$ is the homotopy class of the\nnormal section represented by the positive quarter-turn in $P$ of the projected\noriented tangent. The projection is an immersion, so this vector never\nvanishes; it is perpendicular to the projected tangent, hence also to the\nspatial tangent, and therefore represents a nonzero normal section of the\ncomponent in the ambient $3$-sphere.\n\n```tikz\n\\begin{tikzpicture}[scale=0.8,>=stealth]\n  \\draw[->] (-1,0) -- (1,0) node[right] {$v_{\\rm over}$};\n  \\draw[->] (0,-1) -- (0,1) node[above] {$v_{\\rm under}$};\n  \\node[above left] at (0,0) {$+1$};\n\\end{tikzpicture}\n```\n\nIn the displayed local chart, the over tangent is the positive horizontal\nvector and the under tangent is the positive vertical vector, so the determinant\nis $+1$. This figure illustrates the determinant rule only; no proof below\ndepends on a picture.\n\n",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "def-closure-of-a-geometric-braid",
+          "source_section": "Definition",
+          "quote": "Let $n\\ge0$ and let $\\beta=(z_1,\\ldots,z_n)$ be a geometric braid with\nthe fixed real basepoints $q_j=((2j-n-1)/(4(n+1)),0)$ and endpoint\npermutation $\\pi$, as in [[def-geometric-braid-with-setwise-endpoints]].\nIdentify the disk with $\\{x\\in\\mathbb C:|x|<1\\}$ and put\n$$V=(D^\\circ\\times[0,1])/((x,1)\\sim(x,0)).$$\nThe quotient and its topology use [[def-product-topology]] and the circle\n$\\mathbb R/\\mathbb Z$ of [[def-circle-as-real-line-mod-integers]].\nThe interval images\n$$s_j=\\{[(z_j(t),t)]:0\\le t\\le1\\},\\qquad \\operatorname{cl}(\\beta)=\\bigcup_{j=1}^n s_j$$\nare the **closure in the open solid torus**. In general an individual\n$s_j$ is an interval image, not a closed circle: its last point is the\nfirst point of $s_{\\pi(j)}$.\n\n**Components and orientation.** For a cycle\n$(j,\\pi(j),\\ldots,\\pi^{k-1}(j))$ concatenate these $k$ strand maps in\nthat order, with parameter in $[0,k]$. Their endpoints agree in $V$,\nso the concatenation factors through $\\mathbb R/k\\mathbb Z$.\nIt is injective on this circle: points at distinct nonintegral heights\ncan agree only when their parameters have the same fractional part,\nand the distinct strands at that height have distinct disk coordinates;\nat integral heights only the specified adjacent endpoints agree.\nThus each cycle gives an embedded circle. Different cycles give\ndisjoint circles, and every strand belongs to exactly one cycle.\nThese circles are precisely the connected components of the closure.\nThe orientation is increasing concatenation parameter. In particular\nthe number of components equals the number of cycles of $\\pi$.\n\n**The standard axis and fixed framing.** In\n$S^3=\\{(z,w)\\in\\mathbb C^2:|z|^2+|w|^2=1\\}$, as in\n[[def-euclidean-spheres-and-closed-balls]], set\n$$A=\\{(0,w):|w|=1\\},\\qquad P_\\theta=\\{(z,w)\\in S^3:z\\ne0,\\ \\arg z=\\theta\\}.$$\nFix the following particular diffeomorphism, including its disk framing:\n$$\\varphi([(x,t)])=  \\bigl(\\sqrt{1-|x|^2}\\,e^{2\\pi it},x\\bigr):  V\\longrightarrow S^3\\setminus A.$$\nIts inverse has disk coordinate $x=w$ and circle coordinate\n$[t]=[\\arg z/(2\\pi)]$. Every $P_\\theta$ is consequently an open disk.\nThe **raw topological oriented closure** is\n$$\\widehat\\beta_{\\mathrm{top}}=\\varphi(\\operatorname{cl}(\\beta)).$$\nThis explicit $\\varphi$ is part of the construction; the definition\ndoes not allow an arbitrary page-preserving change of framing.\n\n**Page intersections and smooth representatives.** The whole closure\nmeets every page in exactly $n$ points. A component belonging to a\n$\\pi$-cycle of length $k$ meets each page in exactly $k$ points:\nat any fractional height it uses exactly those $k$ distinct strands.\nThe page coordinate of its concatenation is $[t]$, for\n$t\\in\\mathbb R/k\\mathbb Z$, so its oriented degree is $+k$.\nIf all disk-coordinate strand maps are smooth and have all positive-order derivatives\nzero at their endpoints, their cycle concatenations have matching jets\nat every seam. The page coordinate has nonzero derivative, so the\nresult is a smooth embedding of disjoint oriented circles, in the\nsense of [[def-smooth-embedding]]. For an endpoint-flat smooth braid, its literal $\\varphi$-image is therefore a smooth oriented link and is denoted $\\widehat\\beta$.\n\n**Closure in the smooth oriented-link category.** The raw image need not be smooth, even if individual strands are smooth but their endpoint jets fail to match at the cycle seams. For an arbitrary continuous braid, assume $\\mathrm{AC}_\\omega$ ([[def-countable-choice]]) and choose a smooth representative $\\beta_s$ by [[lem-every-geometric-braid-is-braid-isotopic-to-a-smooth-braid]]. Make it endpoint-flat by composing all disk-coordinate strands with a fixed smooth nondecreasing $\\psi:I\\to I$, equal to $0$ near $0$ and $1$ near $1$. Interpolation of height maps $(1-u)t+u\\psi(t)$ is an endpoint-fixed braid isotopy, because every strand is evaluated at the same height. The smooth-category closure of $\\beta$ is the oriented-link isotopy class of this chosen model's literal $\\varphi$-image; when a subset is needed, use that chosen closed-braid representative. Independence of the representative is proved by [[lem-closure-depends-only-on-the-braid-isotopy-class]]. Page and cycle properties refer to the chosen constructed closed braid, with the same number of strands and endpoint permutation as $\\beta$.\n\nIf $\\beta$ already has smooth strands with matching cycle-seam jets, in particular if it is endpoint-flat, its literal raw image is a smooth link and is retained as $\\widehat\\beta$. The raw quotient, fixed $\\varphi$, finite cycles, page counts and trivial closures remain choice-free. Finite elementary words have explicit smooth endpoint-flat models, so forming their literal closures also requires no choice assumption; $\\mathrm{AC}_\\omega$ is used for the general continuous-representative convention and its independence theorem.\n\n**The trivial closure.** For the constant braid its circles are\n$\\{(\\sqrt{1-q_j^2}e^{2\\pi it},q_j):[t]\\in\\mathbb R/\\mathbb Z\\}$.\nThey are latitudes of the sphere\n$S=\\{(z,w)\\in S^3:\\operatorname{Im}w=0\\}$, with\n$\\operatorname{Re}w=q_j$. Each northern cap\n$C_j=\\{p\\in S:\\operatorname{Re}w(p)\\ge q_j\\}$ is a smooth disk:\nstereographic coordinates on $S$ give radius\n$\\sqrt{(1-q_j)/(1+q_j)}$ for this cap. To make their spanning disks\ndisjoint, let $e$ be the unit vector in the $\\operatorname{Im}w$\ndirection, set $\\varepsilon=\\pi/16$ and\n$f_j(p)=\\varepsilon(\\operatorname{Re}w(p)-q_j)$ on $C_j$, and use\n$$F_j(p)=\\cos(f_j(p))p+\\sin(f_j(p))e.$$\nThe boundary is fixed. The tubular parametrization\n$(p,s)\\mapsto\\cos(s)p+\\sin(s)e$ is injective for $|s|<\\pi/2$,\nand $0\\le f_j<\\pi/8$. On overlapping caps, if $q_i<q_j$ then\n$f_i-f_j=\\varepsilon(q_j-q_i)>0$, so their graphs are disjoint.\nThus these are pairwise disjoint smooth spanning disks. The trivial\n$n$-braid closes to the oriented $n$-component unlink; for $n=1$\nthis is the unknot.\n\nAt $n=0$ all strand and cycle unions are empty, every page has zero intersections,\nand the closure is the empty link. The basepoint list and disk constructions\nabove then have no entries.\n",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "def-exponent-sum-of-a-braid",
+          "source_section": "Definition",
+          "quote": "Let $n\\ge1$ and let $B_n=\\langle\\sigma_1,\\dots,\\sigma_{n-1}\\mid\\text{Artin\nrelators}\\rangle$ be the braid group of the Artin presentation\n([[def-braid-group-by-the-artin-presentation]]); recall that $B_0$ and $B_1$\nare trivial. The **exponent sum** is the unique homomorphism\n\n$$e_n:B_n\\longrightarrow\\mathbb Z,\\qquad e_n(\\sigma_i)=1\\quad(1\\le i\\le n-1),$$\n\nwhere $\\mathbb Z$ is the additive group of integers. It is well defined because\nevery defining relator of the Artin presentation has exponent sum $0$: the\nbraid relator $\\sigma_i\\sigma_{i+1}\\sigma_i=\\sigma_{i+1}\\sigma_i\\sigma_{i+1}$\nhas both sides of exponent sum $3$, and each far-commutation relator has both\nsides of exponent sum $2$, so the assignment $\\sigma_i\\mapsto1$ kills all\nrelators, and [[thm-von-dyck]] applies. It is surjective for $n\\ge2$ and it is\nthe trivial map on the trivial group $B_1$. For every Artin word\n$\\beta=\\sigma_{i_1}^{\\varepsilon_1}\\cdots\\sigma_{i_k}^{\\varepsilon_k}$ one has\n$e_n(\\beta)=\\sum_{r=1}^k\\varepsilon_r$ independently of the word, and\n$e_n(\\beta^{-1})=-e_n(\\beta)$. **Caveat:** $e_n$ is the composite of the\nabelianisation $B_n\\to B_n^{\\mathrm{ab}}$ with a surjection onto the free cyclic\ngroup $\\mathbb Z$ (for $n\\ge2$): since the target is abelian, every commutator is sent to $0$, so $e_n$ factors through $B_n/[B_n,B_n]$ ([[def-abelianisation-of-a-group]]). No normal form, Garside structure or\nfaithfulness statement is used anywhere.\n\n",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "lem-bmw-presentation-tangle-evaluation-is-well-defined",
+          "source_section": "Statement",
+          "quote": "Let $T$ be the coefficient extension and parameter substitution in the BMW-to-Dubrovnik dictionary, and let $\\mathcal{KT}_n(T)$ be the ordinary Dubrovnik tangle skein algebra: its diagrams are finite generic projections of $n$ arcs with fixed ordered top and bottom endpoints and closed curves, modulo planar isotopy, Reidemeister II and III, the Dubrovnik skein relation, the two curl relations, and the free-circle relation with parameters $z_D,a,a^{-1},d$. In its fixed chart, $D_0$ is cup-cap top/bottom and $D_\\infty$ is through left/right. For every $n\\ge2$, send the BMW generator $g_i$ to the positive Artin crossing between strands $i,i+1$, its inverse to the negative crossing, and $e_i$ to the adjacent cup-cap tangle. This assignment extends to a unital $T$-algebra homomorphism $\\Phi_n:BMW_n(T;q,\\rho,\\delta)\\to\\mathcal{KT}_n(T)$. For $n=0,1$, define the unital $T$-algebra homomorphism by sending each scalar to that scalar times the empty or straight tangle, respectively. This claim asserts well-definedness only; it does not assert surjectivity or injectivity.\n\n",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "lem-bmw-descending-tangle-spanning",
+          "source_section": "Statement",
+          "quote": "For each integer $n\\ge0$, let $S=\\mathbb Z[a^{\\pm1},z,d^{\\pm1}]/(z(d-1)-(a-a^{-1}))$ and $T=S[q^{\\pm1}]/(q-q^{-1}+z)$, with $z_D=-q+q^{-1}$. Let $\\mathcal{KT}_n(T)$ be the ordinary Dubrovnik tangle skein algebra formed from regular-isotopy classes with crossing rule $D_+-D_-=z_D(D_0-D_\\infty)$, curl factors $a,a^{-1}$, and free-circle factor $d$, where $D_0$ is cup-cap and $D_\\infty$ is through. Number its $2n$ boundary endpoints in cyclic order as $1,2,\\ldots,n,\\bar n,\\ldots,\\bar2,\\bar1$. A connector is a perfect matching of these endpoints. Orient each open strand from its lower-numbered endpoint to its higher-numbered endpoint and order the open strands by their initial endpoints. Place the finitely many closed strands after the open strands in any fixed order, with a chosen orientation and initial point for each. A diagram is totally descending if, in this traversal order, the first branch encountered at each crossing is the overpassing branch. Then $\\mathcal{KT}_n(T)$ is spanned by one loop-free, self-crossing-free totally descending tangle for each connector. These representatives can have crossings between distinct strands; their crossing data are fixed by the total traversal order. For $n=0$ the single representative is the empty tangle, and for $n=1$ it is the straight strand.\n\n",
+          "uses": [
+            "1.1",
+            "1.2"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "lem-bmw-closure-pairing-independence",
+          "source_section": "Statement",
+          "quote": "Let $S=\\mathbb Z[a^{\\pm1},z,d^{\\pm1}]/(z(d-1)-(a-a^{-1}))$ and let $T=S[q^{\\pm1}]/(q-q^{-1}+z)$. For each $n\\ge0$, index the standard descending matching tangles by the perfect matchings $m$ of the $2n$ boundary endpoints. Reflect a second such tangle across the horizontal midline and glue corresponding boundary endpoints to obtain a closed diagram. Let $M_n$ be the matrix whose $(m,m')$ entry is the scalar Dubrovnik evaluation $P$ of this closure. Then $\\det M_n$ is nonzero in $S$, its image is a non-zero-divisor in $T$, and the standard matching tangles are linearly independent over $T$. The assertion is over this universal coefficient extension and makes no independence claim after an arbitrary nonflat specialization.\n\n",
+          "uses": [
+            "1.1",
+            "1.2"
+          ]
+        },
+        {
+          "fact": "F6",
+          "source": "lem-bmw-markov-trace-stabilization",
+          "source_section": "Statement",
+          "quote": "For $n\\ge1$, let $\\Phi_n$ be the BMW-to-Dubrovnik tangle homomorphism over $T$, let $\\widehat{t}$ denote closure of an $(n,n)$ tangle by joining corresponding top and bottom endpoints without a twist, and define\n$$\\tau_n(x)=d^{-n}P\\!\\left(\\widehat{\\Phi_n(x)}\\right),\\qquad x\\in BMW_n(T;q,\\rho,\\delta).$$\nThen $\\tau_n$ is a cyclic $T$-linear trace, compatible with the tower inclusion $\\iota_n:BMW_n\\to BMW_{n+1}$ that adds one straight strand, and for every $x\\in BMW_n$,\n$$\\tau_{n+1}(\\iota_n(x))=\\tau_n(x),\\quad \\tau_{n+1}(\\iota_n(x)g_n)=a d^{-1}\\tau_n(x),\\quad \\tau_{n+1}(\\iota_n(x)g_n^{-1})=a^{-1}d^{-1}\\tau_n(x),\\quad \\tau_{n+1}(\\iota_n(x)e_n)=d^{-1}\\tau_n(x),$$\nwhere $a=\\rho^{-1}$ and $d=\\delta$.\n\n",
+          "uses": [
+            "1.2",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F6",
+          "source": "lem-framed-kauffman-link-evaluation",
+          "source_section": "Statement",
+          "quote": "Put $A=\\mathbb Z[a^{\\pm1},s,d^{\\pm1}]/(s(d-1)-(a-a^{-1}))$. This ring is an integral domain and embeds in $\\mathbb Q(i)(a,s)$ by $d\\mapsto1+(a-a^{-1})/s$, where $i^2=-1$. A link diagram means a finite generic immersion of circles in the oriented plane with over/under data at its double points. Regular isotopy is generated by planar isotopy and Reidemeister moves II and III. A positive curl is a one-crossing curl whose oriented self-crossing has sign $+1$; its sign is independent of the direction chosen on its component. There is a unique function $P$ from link diagrams, including the empty diagram, to $A$ with $P(\\varnothing)=1$, unchanged by regular isotopy, satisfying the following local rules: a positive or negative curl multiplies $P$ by $a$ or $a^{-1}$; a disjoint trivial circle multiplies $P$ by $d$; and $P(L_+)-P(L_-)=s(P(L_0)-P(L_\\infty))$. Here in an oriented disk with four cyclically labelled endpoints $1,2,3,4$, $L_+$ connects $1$ to $3$ over the strand from $2$ to $4$, and the two smoothings are chosen so that the oriented smoothing for any orientation making this crossing positive is $L_0$; $L_-$ reverses the crossing and $L_\\infty$ is the other smoothing. Rotating the disk interchanges both differences and preserves the rule. In particular the empty diagram freely generates the quotient of the free $A$-module on closed diagrams by these rules.\n\n",
+          "uses": [
+            "1.2",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F7",
+          "source": "lem-kauffman-dubrovnik-writhe-component-conversion",
+          "source_section": "Statement",
+          "quote": "Assume the Axiom of Countable Choice. For each nonempty oriented regular link\ndiagram $K$, let $w(K)$ be its determinant writhe and $c(K)$ its number of\ncomponents, and define $D,L,F$ by the conventions stated for this page. Then\n$$D_K(a,z)=-i^{-w(K)}(-1)^{c(K)}L_K(ia,-iz),\\qquad i^2=-1.$$\nThe value assigned to $L$ is independent of reversing the orientation of any\nwhole component. The Dubrovnik value has the stated difference-skein, curl and\ncircle rules; the Kauffman value has the sum-skein, curl and circle rules; and\n$F_K(A,Z)=A^{-w(K)}L_K(A,Z)$ is unchanged by planar isotopy and every oriented\nReidemeister move of types I, II, and III. The claim concerns these finite\ndiagram moves and uses the universal coefficient relations without dividing\nby a skein variable.\n\n",
+          "uses": [
+            "2.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "step": "1.1",
+          "claim": "The input word has finite length, so its generator product $b_\\beta$ is formed by finitely many multiplications in the BMW algebra. Each positive Artin letter contributes $+1$ to determinant writhe by [F1], and each inverse contributes $-1$; hence the closure writhe is the exponent sum $w$ in the algorithm by [F3]. The closure connects the bottom endpoint of strand $j$ to the top endpoint with the same index, so its components are exactly the cycles of the strand permutation, giving $c$ by [F2]. For fixed $n$, there are finitely many matchings of the $2n$ endpoints, so [F5] supplies a finite coordinate basis.",
+          "inputs": [
+            "F1",
+            "F2",
+            "F3",
+            "F5",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-1-2",
+          "step": "1.2",
+          "claim": "For each matching basis tangle $T_m$ and each generator $g_i^{\\pm1}$, the product tangle $g_i^{\\pm1}T_m$ has finitely many crossings. In its fixed standard traversal, let $N$ be the crossing count and $b$ the number of crossings whose first branch is under. At a selected bad crossing of sign $\\eta$, apply $$R(D)=R(D^{\\mathrm{sw}})+\\eta z_D\\bigl(R(D_0)-R(D_\\infty)\\bigr).$$ The switched branch has the same $N$ and one fewer bad crossing; each smoothing has crossing count $N-1$. Thus every recursive call decreases $(N,b)$ lexicographically. A descending leaf reduces by the curl and free-circle rules to a standard matching tangle, so the reduction tree is finite and [F5] gives its unique coordinate column. The finite number of basis tangles and generator indices makes every left-multiplication matrix finite. The same crossing-count induction evaluates each closed scalar $P(\\widehat{T_m})$.",
+          "inputs": [
+            "F5",
+            "F6",
+            "algebra",
+            "induction"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "step": "2.1",
+          "claim": "Applying the left-multiplication matrices from right to left sends the identity coordinate vector to $v_\\beta$, the coordinates of $\\Phi_n(b_\\beta)$, because each matrix column is the product of its generator image with the indicated basis tangle and [F4] is an algebra homomorphism. By linearity of closure evaluation, $t^{\\mathsf T}v_\\beta=d^{-n}P(\\widehat{\\Phi_n(b_\\beta)})=\\tau_n(b_\\beta)$ by [F6]. Therefore $D=P/d=d^{n-1}\\tau_n(b_\\beta)$ on the nonempty closure. Applying [F7] gives $-(-1)^c a^{-w}d^{n-1}\\tau_n(b_\\beta)$, the returned value. The only inverses used are powers of the units $a,d$; no division by $z$ occurs.",
+          "inputs": [
+            "F2",
+            "F4",
+            "F6",
+            "F7",
+            "step 1.1",
+            "step 1.2",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "The finite empty word at n=1 is admissible; step 1.1 assigns exponent sum zero and one closure component."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Step 1.1 computes writhe as the exponent sum, which is zero for the empty word."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "The Statement permits n=1, where the empty word is the only braid word because no index satisfies 1≤i<n."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Step 2.1 uses only powers of the units a,d and explicitly avoids division by the skein variable."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "The Statement requires n≥1 and generator indices 1≤i<n; step 1.1 counts the ordered closure endpoints."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Step 2.1 chooses the first bad crossing in a fixed traversal, making the reduction deterministic."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The algorithm specifies a computation and makes no iff claim."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The algorithm specifies a computation and makes no iff claim."
+        }
+      ],
+      "finite_checks": [
+        {
+          "name": "identity braid closures",
+          "method": "exact finite closure calculation",
+          "input": {
+            "words": [
+              {
+                "n": 1,
+                "letters": []
+              },
+              {
+                "n": 2,
+                "letters": []
+              }
+            ]
+          },
+          "calculation": "The 1-braid identity closes to the unknot, so tau_1=1 and output 1. The 2-braid identity closes to two circles, so P=d^2, tau_2=1, c=2,w=0, and output -d.",
+          "expected": {
+            "n1": "1",
+            "n2": "-d"
+          }
+        },
+        {
+          "name": "signed one-crossing closures",
+          "method": "exact finite curl calculation",
+          "input": {
+            "words": [
+              {
+                "n": 2,
+                "letters": [
+                  "sigma_1"
+                ]
+              },
+              {
+                "n": 2,
+                "letters": [
+                  "sigma_1^-1"
+                ]
+              }
+            ]
+          },
+          "calculation": "Each closure is an unknot with one positive or negative curl. The trace factors a/d and a^-1/d cancel the corresponding writhe powers in the return formula.",
+          "expected": {
+            "positive": "1",
+            "negative": "1"
+          }
+        }
+      ],
+      "finite_smoke": []
+    },
+    "thm-bmw-markov-trace-gives-dubrovnik-invariant": {
+      "citations": [
+        {
+          "fact": "A1",
+          "source": "def-axiom-of-choice",
+          "source_section": "Definition",
+          "quote": "The **Axiom of Choice** (AC) is the following statement.\n\n> Every family of nonempty sets has a choice function\n> ([[def-choice-function]]).\n\nWritten out: for every set $\\mathcal{F}$ all of whose members are nonempty,\nthere exists a function $g$ with domain $\\mathcal{F}$ satisfying $g(S) \\in S$ for\nall $S \\in \\mathcal{F}$.\n\nAn equivalent formulation is that a product of nonempty sets is nonempty: if\n$X_i \\ne \\emptyset$ for every $i \\in I$, then $\\prod_{i \\in I} X_i \\ne \\emptyset$.\nHere $\\prod_{i \\in I} X_i$ is the set of functions $f$ with domain $I$ such that\n$f(i) \\in X_i$ for every $i \\in I$; when a family of nonempty sets is indexed by\nitself, such an $f$ is precisely a choice function for it.\n\n",
+          "uses": [
+            "1.1",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F1",
+          "source": "thm-alexanders-closed-braid-theorem",
+          "source_section": "Statement",
+          "quote": "Assume the Axiom of Choice. Every oriented link $L\\subset\\mathbb R^3\\subset S^3$\nis equivalent to the oriented closure $\\widehat\\beta$ of a geometric braid\n$\\beta$ on some number $n\\ge0$ of strands, with $n\\ge1$ when $L$ is nonempty.\n\n",
+          "uses": [
+            "1.1",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "thm-markovs-closed-braid-equivalence-theorem",
+          "source_section": "Statement",
+          "quote": "Assume the Axiom of Choice. Let $\\beta,\\beta'$ be braids. Then\n$\\widehat\\beta$ and $\\widehat{\\beta'}$ are equivalent oriented links if and\nonly if $\\beta$ and $\\beta'$ are Markov equivalent, that is, related by a finite\nsequence of conjugations in a fixed braid group, stabilizations\n$\\beta\\mapsto\\beta\\sigma_n^{\\pm1}$ into the next braid group, and their\ninverses.\n\n",
+          "uses": [
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "lem-bmw-markov-trace-stabilization",
+          "source_section": "Statement",
+          "quote": "For $n\\ge1$, let $\\Phi_n$ be the BMW-to-Dubrovnik tangle homomorphism over $T$, let $\\widehat{t}$ denote closure of an $(n,n)$ tangle by joining corresponding top and bottom endpoints without a twist, and define\n$$\\tau_n(x)=d^{-n}P\\!\\left(\\widehat{\\Phi_n(x)}\\right),\\qquad x\\in BMW_n(T;q,\\rho,\\delta).$$\nThen $\\tau_n$ is a cyclic $T$-linear trace, compatible with the tower inclusion $\\iota_n:BMW_n\\to BMW_{n+1}$ that adds one straight strand, and for every $x\\in BMW_n$,\n$$\\tau_{n+1}(\\iota_n(x))=\\tau_n(x),\\quad \\tau_{n+1}(\\iota_n(x)g_n)=a d^{-1}\\tau_n(x),\\quad \\tau_{n+1}(\\iota_n(x)g_n^{-1})=a^{-1}d^{-1}\\tau_n(x),\\quad \\tau_{n+1}(\\iota_n(x)e_n)=d^{-1}\\tau_n(x),$$\nwhere $a=\\rho^{-1}$ and $d=\\delta$.\n\n",
+          "uses": [
+            "2.1",
+            "2.2",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "def-closure-of-a-geometric-braid",
+          "source_section": "Definition",
+          "quote": "Let $n\\ge0$ and let $\\beta=(z_1,\\ldots,z_n)$ be a geometric braid with\nthe fixed real basepoints $q_j=((2j-n-1)/(4(n+1)),0)$ and endpoint\npermutation $\\pi$, as in [[def-geometric-braid-with-setwise-endpoints]].\nIdentify the disk with $\\{x\\in\\mathbb C:|x|<1\\}$ and put\n$$V=(D^\\circ\\times[0,1])/((x,1)\\sim(x,0)).$$\nThe quotient and its topology use [[def-product-topology]] and the circle\n$\\mathbb R/\\mathbb Z$ of [[def-circle-as-real-line-mod-integers]].\nThe interval images\n$$s_j=\\{[(z_j(t),t)]:0\\le t\\le1\\},\\qquad \\operatorname{cl}(\\beta)=\\bigcup_{j=1}^n s_j$$\nare the **closure in the open solid torus**. In general an individual\n$s_j$ is an interval image, not a closed circle: its last point is the\nfirst point of $s_{\\pi(j)}$.\n\n**Components and orientation.** For a cycle\n$(j,\\pi(j),\\ldots,\\pi^{k-1}(j))$ concatenate these $k$ strand maps in\nthat order, with parameter in $[0,k]$. Their endpoints agree in $V$,\nso the concatenation factors through $\\mathbb R/k\\mathbb Z$.\nIt is injective on this circle: points at distinct nonintegral heights\ncan agree only when their parameters have the same fractional part,\nand the distinct strands at that height have distinct disk coordinates;\nat integral heights only the specified adjacent endpoints agree.\nThus each cycle gives an embedded circle. Different cycles give\ndisjoint circles, and every strand belongs to exactly one cycle.\nThese circles are precisely the connected components of the closure.\nThe orientation is increasing concatenation parameter. In particular\nthe number of components equals the number of cycles of $\\pi$.\n\n**The standard axis and fixed framing.** In\n$S^3=\\{(z,w)\\in\\mathbb C^2:|z|^2+|w|^2=1\\}$, as in\n[[def-euclidean-spheres-and-closed-balls]], set\n$$A=\\{(0,w):|w|=1\\},\\qquad P_\\theta=\\{(z,w)\\in S^3:z\\ne0,\\ \\arg z=\\theta\\}.$$\nFix the following particular diffeomorphism, including its disk framing:\n$$\\varphi([(x,t)])=  \\bigl(\\sqrt{1-|x|^2}\\,e^{2\\pi it},x\\bigr):  V\\longrightarrow S^3\\setminus A.$$\nIts inverse has disk coordinate $x=w$ and circle coordinate\n$[t]=[\\arg z/(2\\pi)]$. Every $P_\\theta$ is consequently an open disk.\nThe **raw topological oriented closure** is\n$$\\widehat\\beta_{\\mathrm{top}}=\\varphi(\\operatorname{cl}(\\beta)).$$\nThis explicit $\\varphi$ is part of the construction; the definition\ndoes not allow an arbitrary page-preserving change of framing.\n\n**Page intersections and smooth representatives.** The whole closure\nmeets every page in exactly $n$ points. A component belonging to a\n$\\pi$-cycle of length $k$ meets each page in exactly $k$ points:\nat any fractional height it uses exactly those $k$ distinct strands.\nThe page coordinate of its concatenation is $[t]$, for\n$t\\in\\mathbb R/k\\mathbb Z$, so its oriented degree is $+k$.\nIf all disk-coordinate strand maps are smooth and have all positive-order derivatives\nzero at their endpoints, their cycle concatenations have matching jets\nat every seam. The page coordinate has nonzero derivative, so the\nresult is a smooth embedding of disjoint oriented circles, in the\nsense of [[def-smooth-embedding]]. For an endpoint-flat smooth braid, its literal $\\varphi$-image is therefore a smooth oriented link and is denoted $\\widehat\\beta$.\n\n**Closure in the smooth oriented-link category.** The raw image need not be smooth, even if individual strands are smooth but their endpoint jets fail to match at the cycle seams. For an arbitrary continuous braid, assume $\\mathrm{AC}_\\omega$ ([[def-countable-choice]]) and choose a smooth representative $\\beta_s$ by [[lem-every-geometric-braid-is-braid-isotopic-to-a-smooth-braid]]. Make it endpoint-flat by composing all disk-coordinate strands with a fixed smooth nondecreasing $\\psi:I\\to I$, equal to $0$ near $0$ and $1$ near $1$. Interpolation of height maps $(1-u)t+u\\psi(t)$ is an endpoint-fixed braid isotopy, because every strand is evaluated at the same height. The smooth-category closure of $\\beta$ is the oriented-link isotopy class of this chosen model's literal $\\varphi$-image; when a subset is needed, use that chosen closed-braid representative. Independence of the representative is proved by [[lem-closure-depends-only-on-the-braid-isotopy-class]]. Page and cycle properties refer to the chosen constructed closed braid, with the same number of strands and endpoint permutation as $\\beta$.\n\nIf $\\beta$ already has smooth strands with matching cycle-seam jets, in particular if it is endpoint-flat, its literal raw image is a smooth link and is retained as $\\widehat\\beta$. The raw quotient, fixed $\\varphi$, finite cycles, page counts and trivial closures remain choice-free. Finite elementary words have explicit smooth endpoint-flat models, so forming their literal closures also requires no choice assumption; $\\mathrm{AC}_\\omega$ is used for the general continuous-representative convention and its independence theorem.\n\n**The trivial closure.** For the constant braid its circles are\n$\\{(\\sqrt{1-q_j^2}e^{2\\pi it},q_j):[t]\\in\\mathbb R/\\mathbb Z\\}$.\nThey are latitudes of the sphere\n$S=\\{(z,w)\\in S^3:\\operatorname{Im}w=0\\}$, with\n$\\operatorname{Re}w=q_j$. Each northern cap\n$C_j=\\{p\\in S:\\operatorname{Re}w(p)\\ge q_j\\}$ is a smooth disk:\nstereographic coordinates on $S$ give radius\n$\\sqrt{(1-q_j)/(1+q_j)}$ for this cap. To make their spanning disks\ndisjoint, let $e$ be the unit vector in the $\\operatorname{Im}w$\ndirection, set $\\varepsilon=\\pi/16$ and\n$f_j(p)=\\varepsilon(\\operatorname{Re}w(p)-q_j)$ on $C_j$, and use\n$$F_j(p)=\\cos(f_j(p))p+\\sin(f_j(p))e.$$\nThe boundary is fixed. The tubular parametrization\n$(p,s)\\mapsto\\cos(s)p+\\sin(s)e$ is injective for $|s|<\\pi/2$,\nand $0\\le f_j<\\pi/8$. On overlapping caps, if $q_i<q_j$ then\n$f_i-f_j=\\varepsilon(q_j-q_i)>0$, so their graphs are disjoint.\nThus these are pairwise disjoint smooth spanning disks. The trivial\n$n$-braid closes to the oriented $n$-component unlink; for $n=1$\nthis is the unknot.\n\nAt $n=0$ all strand and cycle unions are empty, every page has zero intersections,\nand the closure is the empty link. The basepoint list and disk constructions\nabove then have no entries.\n",
+          "uses": [
+            "2.1",
+            "2.2"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "alg-kauffman-polynomial-from-bmw-braid-closure",
+          "source_section": "Statement",
+          "quote": "Use the coefficient extension $T$ with $a=\\rho^{-1}$ and $d=\\delta$. On input an integer $n\\ge1$ and a finite signed Artin braid word\n$$\\beta=\\sigma_{i_1}^{\\varepsilon_1}\\cdots\\sigma_{i_m}^{\\varepsilon_m},\\qquad \\varepsilon_j\\in\\{-1,1\\},\\quad 1\\le i_j<n,$$\nperform the following finite computation:\n\n1. Form the BMW product $b_\\beta=g_{i_1}^{\\varepsilon_1}\\cdots g_{i_m}^{\\varepsilon_m}$.\n2. Set $w=\\sum_{j=1}^m\\varepsilon_j$ and let $c$ be the number of cycles of the permutation $s_{i_1}\\cdots s_{i_m}$ of $\\{1,\\ldots,n\\}$, counting fixed points.\n3. List the perfect matchings of the $2n$ tangle boundary endpoints and their standard descending representatives $T_m$. For each signed generator, form its finite left-multiplication matrix in this basis: its column at $T_m$ is obtained by reducing the tangle $g_i^{\\pm1}T_m$ to the unique matching coordinates. In each reduction, use the standard endpoint traversal order, choose the first crossing whose first traversal branch is under, and for its current sign $\\eta\\in\\{1,-1\\}$ replace\n$$R(D)=R(D^{\\mathrm{sw}})+\\eta z_D\\bigl(R(D_0)-R(D_\\infty)\\bigr).$$\nThe switched branch has one fewer non-descending crossing, and each smoothing has one fewer crossing; a descending leaf is reduced by the curl and free-circle rules to its standard matching representative. Starting with the coordinate vector of the identity tangle, apply the generator matrices from the rightmost braid letter to the leftmost to obtain the coordinate vector $v_\\beta$ of $\\Phi_n(b_\\beta)$.\n4. Form the trace row $t_m=d^{-n}P(\\widehat{T_m})$ by closing each basis tangle and evaluating its scalar Dubrovnik value, and return\n$$-(-1)^c a^{-w}d^{n-1}\\tau_n(b_\\beta).$$\n\nHere $\\tau_n(b_\\beta)=t^{\\mathsf T}v_\\beta$. The output is the declared Kauffman ambient-isotopy value at $A=ia$, $Z=-iz$ in the Dubrovnik parameter convention. All matrices are finite and all coefficients lie in $T$; no division by the skein variable is used.\n\n",
+          "uses": [
+            "2.1",
+            "2.2"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "def-markov-conjugation-and-stabilization-moves",
+          "source_section": "Definition",
+          "quote": "Let $(B_n)_{n\\ge0}$ be the braid groups of the Artin presentation\n([[def-braid-group-by-the-artin-presentation]]), with generators\n$\\sigma_1,\\dots,\\sigma_{n-1}$ and the two Artin relations, and let\n\n$$\\iota_n\\colon B_n\\longrightarrow B_{n+1},\\qquad \\iota_n(\\sigma_i):=\\sigma_i\\quad(1\\le i\\le n-1),$$\n\nbe the **standard inclusion homomorphism**. It is well defined: the defining\nrelators of $B_n$ are among the defining relators of $B_{n+1}$ under the\nassignment $\\sigma_i\\mapsto\\sigma_i$, so [[thm-von-dyck]] extends the\nassignment to a homomorphism. Its image is generated by\n$\\sigma_1,\\dots,\\sigma_{n-1}$, and we write $\\iota_n(\\beta)$ for it; whether\nthis homomorphism is injective is not needed anywhere on this page, and no\nsubgroup identification is made. For the geometric description, use the base configuration $Q^{(n+1)}$ of\n[[def-elementary-geometric-half-twist]]. Express $\\beta$ as an Artin word and\nreplace its letters by the half twists with the same indices at\n$Q^{(n+1)}$. The letters with $i<n$ fix the rightmost point, since their support\ndiscs exclude it. This gives a representative of $\\iota_n(\\beta)$ under\n[[prop-the-artin-presentation-surjects-onto-geometric-braids]]; it is independent\nof the word as a geometric braid class. Thus adding the strand on the right\nincludes expressing the old braid at the first $n$ target basepoints. Those\npoints differ from $Q^{(n)}$, so the original parametrized strands are not\nliterally left untouched. The final half twist is the target $\\sigma_n$.\n\nOn the disjoint union $\\bigsqcup_{n\\ge0}B_n$ define two kinds of elementary\n**Markov moves**.\n\n**Conjugation.** For $\\beta,\\gamma\\in B_n$, replace $\\beta$ by\n$\\gamma\\beta\\gamma^{-1}$, an element of the same group $B_n$. The number of\nstrands does not change. When $\\beta$ is a geometric braid and $\\gamma$ the\nclass of a braid in $G_n$, this is realized on closures by reading $\\gamma$\naround the axis, as the closure-preservation lemma below shows.\n\n**Stabilization and destabilization.** For $n\\ge1$ and $\\beta\\in B_n$ the **positive\nstabilization** is $\\beta\\sigma_n:=\\iota_n(\\beta)\\cdot\\sigma_n\\in B_{n+1}$ and\nthe **negative stabilization** is\n$\\beta\\sigma_n^{-1}:=\\iota_n(\\beta)\\cdot\\sigma_n^{-1}\\in B_{n+1}$; the inverse\noperations, from $B_{n+1}$ to $B_n$, are called **destabilizations**. Both\nsigns occur, and the sign is the sign of the exponent of the new generator. By\n[[prop-the-artin-presentation-surjects-onto-geometric-braids]] and\n[[def-elementary-geometric-half-twist]] the product $\\beta\\sigma_n^{\\pm1}$ is\nthe class of the target-basepoint geometric word just described, composed\nwith the target half twist $\\sigma_n^{\\pm1}$ in its fixed product position;\nthat half twist fixes the first $n-1$ target points. Inserting the generator inside a factorization need not produce a conjugate of that fixed stabilization. It nevertheless gives a Markov sequence: if $\\beta=uv$, old conjugation by $v$ gives $vu$, its right stabilization is $(vu)\\sigma_n^{\\pm1}$, and conjugation by $v^{-1}$ gives $u\\sigma_n^{\\pm1}v$. Only moving a factor past the whole word is cyclic conjugacy. At $n=0$ no $\\sigma_0$ exists, so the empty braid has only conjugation moves and is an isolated Markov class.\n\n**Markov equivalence.** Two braids $\\beta,\\beta'$ (possibly with different\nnumbers of strands) are **Markov equivalent** when they can be connected by a\nfinite sequence of moves each of which is a conjugation, a positive or negative\nstabilization, or a destabilization. Markov equivalence is an equivalence\nrelation on $\\bigsqcup_n B_n$: it is reflexive, symmetric by allowing inverses\nof the listed moves, and transitive by concatenating sequences.\n\n**Convention on orientation and side.** All braids are read with the product\nand side conventions fixed on the pages `geometric-braids-and-artin-generators`\nand `artin-presentation-completeness-and-braid-combing`: the rightmost factor is\ntraversed first in geometric time, and stabilization always adds the new\nstrand on the right. The definition is choice-free: no choice principle is used\nin the Artin presentation, in the inclusion, or in the identification of\n$\\sigma_n$ with the elementary geometric half twist.\n",
+          "uses": [
+            "2.1",
+            "2.2"
+          ]
+        },
+        {
+          "fact": "F6",
+          "source": "alg-kauffman-polynomial-from-bmw-braid-closure",
+          "source_section": "Statement",
+          "quote": "Use the coefficient extension $T$ with $a=\\rho^{-1}$ and $d=\\delta$. On input an integer $n\\ge1$ and a finite signed Artin braid word\n$$\\beta=\\sigma_{i_1}^{\\varepsilon_1}\\cdots\\sigma_{i_m}^{\\varepsilon_m},\\qquad \\varepsilon_j\\in\\{-1,1\\},\\quad 1\\le i_j<n,$$\nperform the following finite computation:\n\n1. Form the BMW product $b_\\beta=g_{i_1}^{\\varepsilon_1}\\cdots g_{i_m}^{\\varepsilon_m}$.\n2. Set $w=\\sum_{j=1}^m\\varepsilon_j$ and let $c$ be the number of cycles of the permutation $s_{i_1}\\cdots s_{i_m}$ of $\\{1,\\ldots,n\\}$, counting fixed points.\n3. List the perfect matchings of the $2n$ tangle boundary endpoints and their standard descending representatives $T_m$. For each signed generator, form its finite left-multiplication matrix in this basis: its column at $T_m$ is obtained by reducing the tangle $g_i^{\\pm1}T_m$ to the unique matching coordinates. In each reduction, use the standard endpoint traversal order, choose the first crossing whose first traversal branch is under, and for its current sign $\\eta\\in\\{1,-1\\}$ replace\n$$R(D)=R(D^{\\mathrm{sw}})+\\eta z_D\\bigl(R(D_0)-R(D_\\infty)\\bigr).$$\nThe switched branch has one fewer non-descending crossing, and each smoothing has one fewer crossing; a descending leaf is reduced by the curl and free-circle rules to its standard matching representative. Starting with the coordinate vector of the identity tangle, apply the generator matrices from the rightmost braid letter to the leftmost to obtain the coordinate vector $v_\\beta$ of $\\Phi_n(b_\\beta)$.\n4. Form the trace row $t_m=d^{-n}P(\\widehat{T_m})$ by closing each basis tangle and evaluating its scalar Dubrovnik value, and return\n$$-(-1)^c a^{-w}d^{n-1}\\tau_n(b_\\beta).$$\n\nHere $\\tau_n(b_\\beta)=t^{\\mathsf T}v_\\beta$. The output is the declared Kauffman ambient-isotopy value at $A=ia$, $Z=-iz$ in the Dubrovnik parameter convention. All matrices are finite and all coefficients lie in $T$; no division by the skein variable is used.\n\n",
+          "uses": [
+            "3.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "step": "1.1",
+          "claim": "Fix an oriented link $K$. By [F1], choose a finite signed braid word $\\beta_0$ whose oriented closure represents $K$. This use of existence is valid under [A1], as required by [F1]. Define $Q(\\beta)$ by the formula in the statement for every braid word with closure equivalent to $K$.",
+          "inputs": [
+            "A1",
+            "F1",
+            "given",
+            "choose"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "step": "2.1",
+          "claim": "A conjugation $\\beta\\mapsto\\gamma\\beta\\gamma^{-1}$ leaves the closure component count unchanged because the strand permutation is conjugated, and leaves writhe unchanged because the exponent sum of $\\gamma$ cancels with that of $\\gamma^{-1}$. Cyclicity in [F3] gives $\\tau_n(\\gamma\\beta\\gamma^{-1})=\\tau_n(\\beta)$. Thus $Q$ is unchanged by conjugation.",
+          "inputs": [
+            "F3",
+            "F4",
+            "F5",
+            "step 1.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-2",
+          "step": "2.2",
+          "claim": "For positive stabilization $\\beta'=\\iota_n(\\beta)\\sigma_n$, the new transposition involving strand $n+1$ joins that new strand to the cycle containing strand $n$, so $c(\\beta')=c(\\beta)$. The exponent sum increases by one, hence $w(\\beta')=w(\\beta)+1$. By [F3], $\\tau_{n+1}(\\beta')=a d^{-1}\\tau_n(\\beta)$. Therefore $$Q(\\beta')=-(-1)^c a^{-(w+1)}d^n\\,a d^{-1}\\tau_n(\\beta)=Q(\\beta).$$ For negative stabilization the cycle count is again unchanged, the writhe becomes $w-1$, and $\\tau_{n+1}(\\beta\\sigma_n^{-1})=a^{-1}d^{-1}\\tau_n(\\beta)$; substituting gives $$-(-1)^c a^{-(w-1)}d^n a^{-1}d^{-1}\\tau_n(\\beta)=Q(\\beta).$$ Thus both stabilizations and their inverse moves preserve $Q$.",
+          "inputs": [
+            "F3",
+            "F4",
+            "F5",
+            "step 1.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "step": "3.1",
+          "claim": "By [F2], any two braid words whose oriented closures represent $K$ are Markov equivalent. Each move in a finite Markov sequence preserves $Q$ by steps 2.1 and 3.1, so $Q$ is independent of the braid representative. By [F6], this common value is the declared Kauffman value of $K$ at the stated substitution. AC is used only in [F1] and [F2]; the trace and move calculations use no choice principle.",
+          "inputs": [
+            "A1",
+            "F1",
+            "F2",
+            "F3",
+            "F6",
+            "step 2.1",
+            "step 2.2"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The Statement is restricted to nonempty oriented links."
+        },
+        {
+          "case": "zero",
+          "status": "not_applicable",
+          "reason": "The theorem does not assert a zero-coefficient specialization or a zero-crossing boundary value."
+        },
+        {
+          "case": "one",
+          "status": "not_applicable",
+          "reason": "The Statement applies to every nonempty link but makes no separate one-component boundary calculation."
+        },
+        {
+          "case": "degenerate",
+          "status": "not_applicable",
+          "reason": "No degenerate coefficient specialization is asserted."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "The theorem concerns closed links and their braid representatives, not tangle endpoints."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Step 1.1 invokes AC and Alexander’s theorem to choose a finite braid representative."
+        },
+        {
+          "case": "iff-forward",
+          "status": "checked",
+          "evidence": "Steps 2.1–3.1 prove the corrected value is preserved by each conjugation and signed stabilization."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "checked",
+          "evidence": "Step 3.1 invokes the reverse direction of Markov’s iff to connect any two representatives of the same oriented link."
+        }
+      ],
+      "finite_checks": [
+        {
+          "name": "signed Markov stabilization factors",
+          "method": "exact scalar cancellation",
+          "input": {
+            "n": 1,
+            "c": "unchanged",
+            "w_changes": [
+              1,
+              -1
+            ],
+            "tau_factors": [
+              "a/d",
+              "a^-1/d"
+            ]
+          },
+          "calculation": "In Q=-(-1)^c a^-w d^(n-1) tau, positive stabilization multiplies the trace by a/d while increasing w and n by one; negative stabilization uses a^-1/d and decreases w by one. Both multipliers cancel exactly.",
+          "expected": {
+            "Q_positive_ratio": "1",
+            "Q_negative_ratio": "1"
+          }
+        }
+      ],
+      "finite_smoke": []
+    },
+    "thm-kauffman-polynomial-from-bmw-braid-closure-procedure-properties": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "alg-kauffman-polynomial-from-bmw-braid-closure",
+          "source_section": "Statement",
+          "quote": "Use the coefficient extension $T$ with $a=\\rho^{-1}$ and $d=\\delta$. On input an integer $n\\ge1$ and a finite signed Artin braid word\n$$\\beta=\\sigma_{i_1}^{\\varepsilon_1}\\cdots\\sigma_{i_m}^{\\varepsilon_m},\\qquad \\varepsilon_j\\in\\{-1,1\\},\\quad 1\\le i_j<n,$$\nperform the following finite computation:\n\n1. Form the BMW product $b_\\beta=g_{i_1}^{\\varepsilon_1}\\cdots g_{i_m}^{\\varepsilon_m}$.\n2. Set $w=\\sum_{j=1}^m\\varepsilon_j$ and let $c$ be the number of cycles of the permutation $s_{i_1}\\cdots s_{i_m}$ of $\\{1,\\ldots,n\\}$, counting fixed points.\n3. List the perfect matchings of the $2n$ tangle boundary endpoints and their standard descending representatives $T_m$. For each signed generator, form its finite left-multiplication matrix in this basis: its column at $T_m$ is obtained by reducing the tangle $g_i^{\\pm1}T_m$ to the unique matching coordinates. In each reduction, use the standard endpoint traversal order, choose the first crossing whose first traversal branch is under, and for its current sign $\\eta\\in\\{1,-1\\}$ replace\n$$R(D)=R(D^{\\mathrm{sw}})+\\eta z_D\\bigl(R(D_0)-R(D_\\infty)\\bigr).$$\nThe switched branch has one fewer non-descending crossing, and each smoothing has one fewer crossing; a descending leaf is reduced by the curl and free-circle rules to its standard matching representative. Starting with the coordinate vector of the identity tangle, apply the generator matrices from the rightmost braid letter to the leftmost to obtain the coordinate vector $v_\\beta$ of $\\Phi_n(b_\\beta)$.\n4. Form the trace row $t_m=d^{-n}P(\\widehat{T_m})$ by closing each basis tangle and evaluating its scalar Dubrovnik value, and return\n$$-(-1)^c a^{-w}d^{n-1}\\tau_n(b_\\beta).$$\n\nHere $\\tau_n(b_\\beta)=t^{\\mathsf T}v_\\beta$. The output is the declared Kauffman ambient-isotopy value at $A=ia$, $Z=-iz$ in the Dubrovnik parameter convention. All matrices are finite and all coefficients lie in $T$; no division by the skein variable is used.\n\n",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "lem-bmw-markov-trace-stabilization",
+          "source_section": "Statement",
+          "quote": "For $n\\ge1$, let $\\Phi_n$ be the BMW-to-Dubrovnik tangle homomorphism over $T$, let $\\widehat{t}$ denote closure of an $(n,n)$ tangle by joining corresponding top and bottom endpoints without a twist, and define\n$$\\tau_n(x)=d^{-n}P\\!\\left(\\widehat{\\Phi_n(x)}\\right),\\qquad x\\in BMW_n(T;q,\\rho,\\delta).$$\nThen $\\tau_n$ is a cyclic $T$-linear trace, compatible with the tower inclusion $\\iota_n:BMW_n\\to BMW_{n+1}$ that adds one straight strand, and for every $x\\in BMW_n$,\n$$\\tau_{n+1}(\\iota_n(x))=\\tau_n(x),\\quad \\tau_{n+1}(\\iota_n(x)g_n)=a d^{-1}\\tau_n(x),\\quad \\tau_{n+1}(\\iota_n(x)g_n^{-1})=a^{-1}d^{-1}\\tau_n(x),\\quad \\tau_{n+1}(\\iota_n(x)e_n)=d^{-1}\\tau_n(x),$$\nwhere $a=\\rho^{-1}$ and $d=\\delta$.\n\n",
+          "uses": [
+            "1.2",
+            "1.3",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "lem-framed-kauffman-link-evaluation",
+          "source_section": "Statement",
+          "quote": "Put $A=\\mathbb Z[a^{\\pm1},s,d^{\\pm1}]/(s(d-1)-(a-a^{-1}))$. This ring is an integral domain and embeds in $\\mathbb Q(i)(a,s)$ by $d\\mapsto1+(a-a^{-1})/s$, where $i^2=-1$. A link diagram means a finite generic immersion of circles in the oriented plane with over/under data at its double points. Regular isotopy is generated by planar isotopy and Reidemeister moves II and III. A positive curl is a one-crossing curl whose oriented self-crossing has sign $+1$; its sign is independent of the direction chosen on its component. There is a unique function $P$ from link diagrams, including the empty diagram, to $A$ with $P(\\varnothing)=1$, unchanged by regular isotopy, satisfying the following local rules: a positive or negative curl multiplies $P$ by $a$ or $a^{-1}$; a disjoint trivial circle multiplies $P$ by $d$; and $P(L_+)-P(L_-)=s(P(L_0)-P(L_\\infty))$. Here in an oriented disk with four cyclically labelled endpoints $1,2,3,4$, $L_+$ connects $1$ to $3$ over the strand from $2$ to $4$, and the two smoothings are chosen so that the oriented smoothing for any orientation making this crossing positive is $L_0$; $L_-$ reverses the crossing and $L_\\infty$ is the other smoothing. Rotating the disk interchanges both differences and preserves the rule. In particular the empty diagram freely generates the quotient of the free $A$-module on closed diagrams by these rules.\n\n",
+          "uses": [
+            "1.2",
+            "1.3",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "alg-kauffman-polynomial-from-bmw-braid-closure",
+          "source_section": "Statement",
+          "quote": "Use the coefficient extension $T$ with $a=\\rho^{-1}$ and $d=\\delta$. On input an integer $n\\ge1$ and a finite signed Artin braid word\n$$\\beta=\\sigma_{i_1}^{\\varepsilon_1}\\cdots\\sigma_{i_m}^{\\varepsilon_m},\\qquad \\varepsilon_j\\in\\{-1,1\\},\\quad 1\\le i_j<n,$$\nperform the following finite computation:\n\n1. Form the BMW product $b_\\beta=g_{i_1}^{\\varepsilon_1}\\cdots g_{i_m}^{\\varepsilon_m}$.\n2. Set $w=\\sum_{j=1}^m\\varepsilon_j$ and let $c$ be the number of cycles of the permutation $s_{i_1}\\cdots s_{i_m}$ of $\\{1,\\ldots,n\\}$, counting fixed points.\n3. List the perfect matchings of the $2n$ tangle boundary endpoints and their standard descending representatives $T_m$. For each signed generator, form its finite left-multiplication matrix in this basis: its column at $T_m$ is obtained by reducing the tangle $g_i^{\\pm1}T_m$ to the unique matching coordinates. In each reduction, use the standard endpoint traversal order, choose the first crossing whose first traversal branch is under, and for its current sign $\\eta\\in\\{1,-1\\}$ replace\n$$R(D)=R(D^{\\mathrm{sw}})+\\eta z_D\\bigl(R(D_0)-R(D_\\infty)\\bigr).$$\nThe switched branch has one fewer non-descending crossing, and each smoothing has one fewer crossing; a descending leaf is reduced by the curl and free-circle rules to its standard matching representative. Starting with the coordinate vector of the identity tangle, apply the generator matrices from the rightmost braid letter to the leftmost to obtain the coordinate vector $v_\\beta$ of $\\Phi_n(b_\\beta)$.\n4. Form the trace row $t_m=d^{-n}P(\\widehat{T_m})$ by closing each basis tangle and evaluating its scalar Dubrovnik value, and return\n$$-(-1)^c a^{-w}d^{n-1}\\tau_n(b_\\beta).$$\n\nHere $\\tau_n(b_\\beta)=t^{\\mathsf T}v_\\beta$. The output is the declared Kauffman ambient-isotopy value at $A=ia$, $Z=-iz$ in the Dubrovnik parameter convention. All matrices are finite and all coefficients lie in $T$; no division by the skein variable is used.\n\n",
+          "uses": [
+            "1.2",
+            "1.3"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "lem-bmw-descending-tangle-spanning",
+          "source_section": "Statement",
+          "quote": "For each integer $n\\ge0$, let $S=\\mathbb Z[a^{\\pm1},z,d^{\\pm1}]/(z(d-1)-(a-a^{-1}))$ and $T=S[q^{\\pm1}]/(q-q^{-1}+z)$, with $z_D=-q+q^{-1}$. Let $\\mathcal{KT}_n(T)$ be the ordinary Dubrovnik tangle skein algebra formed from regular-isotopy classes with crossing rule $D_+-D_-=z_D(D_0-D_\\infty)$, curl factors $a,a^{-1}$, and free-circle factor $d$, where $D_0$ is cup-cap and $D_\\infty$ is through. Number its $2n$ boundary endpoints in cyclic order as $1,2,\\ldots,n,\\bar n,\\ldots,\\bar2,\\bar1$. A connector is a perfect matching of these endpoints. Orient each open strand from its lower-numbered endpoint to its higher-numbered endpoint and order the open strands by their initial endpoints. Place the finitely many closed strands after the open strands in any fixed order, with a chosen orientation and initial point for each. A diagram is totally descending if, in this traversal order, the first branch encountered at each crossing is the overpassing branch. Then $\\mathcal{KT}_n(T)$ is spanned by one loop-free, self-crossing-free totally descending tangle for each connector. These representatives can have crossings between distinct strands; their crossing data are fixed by the total traversal order. For $n=0$ the single representative is the empty tangle, and for $n=1$ it is the straight strand.\n\n",
+          "uses": [
+            "1.1",
+            "1.2"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "lem-bmw-closure-pairing-independence",
+          "source_section": "Statement",
+          "quote": "Let $S=\\mathbb Z[a^{\\pm1},z,d^{\\pm1}]/(z(d-1)-(a-a^{-1}))$ and let $T=S[q^{\\pm1}]/(q-q^{-1}+z)$. For each $n\\ge0$, index the standard descending matching tangles by the perfect matchings $m$ of the $2n$ boundary endpoints. Reflect a second such tangle across the horizontal midline and glue corresponding boundary endpoints to obtain a closed diagram. Let $M_n$ be the matrix whose $(m,m')$ entry is the scalar Dubrovnik evaluation $P$ of this closure. Then $\\det M_n$ is nonzero in $S$, its image is a non-zero-divisor in $T$, and the standard matching tangles are linearly independent over $T$. The assertion is over this universal coefficient extension and makes no independence claim after an arbitrary nonflat specialization.\n\n",
+          "uses": [
+            "1.1",
+            "1.2"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "lem-bmw-presentation-tangle-evaluation-is-well-defined",
+          "source_section": "Statement",
+          "quote": "Let $T$ be the coefficient extension and parameter substitution in the BMW-to-Dubrovnik dictionary, and let $\\mathcal{KT}_n(T)$ be the ordinary Dubrovnik tangle skein algebra: its diagrams are finite generic projections of $n$ arcs with fixed ordered top and bottom endpoints and closed curves, modulo planar isotopy, Reidemeister II and III, the Dubrovnik skein relation, the two curl relations, and the free-circle relation with parameters $z_D,a,a^{-1},d$. In its fixed chart, $D_0$ is cup-cap top/bottom and $D_\\infty$ is through left/right. For every $n\\ge2$, send the BMW generator $g_i$ to the positive Artin crossing between strands $i,i+1$, its inverse to the negative crossing, and $e_i$ to the adjacent cup-cap tangle. This assignment extends to a unital $T$-algebra homomorphism $\\Phi_n:BMW_n(T;q,\\rho,\\delta)\\to\\mathcal{KT}_n(T)$. For $n=0,1$, define the unital $T$-algebra homomorphism by sending each scalar to that scalar times the empty or straight tangle, respectively. This claim asserts well-definedness only; it does not assert surjectivity or injectivity.\n\n",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "def-dubrovnik-tangle-skein-algebra",
+          "source_section": "Definition",
+          "quote": "Fix $n\\ge0$ and a rectangle with $n$ distinct ordered endpoints on its top edge and $n$ on its bottom edge. An ordinary $(n,n)$ tangle diagram is a finite generic planar projection in the rectangle of arcs joining these endpoints and finitely many closed curves, with an over/under marking at each transverse double point and no other singularities. Two diagrams are regularly isotopic when related by planar isotopy fixing the boundary and Reidemeister moves II and III. Their regular-isotopy classes form a monoid under vertical stacking, with the $n$ straight strands as its identity. In the fixed crossing chart, $D_+$ and $D_-$ differ by switching the marked crossing, $D_0$ is the cup-cap top/bottom smoothing, and $D_\\infty$ is the through left/right smoothing. A positive curl is a type-I kink with determinant crossing sign $+1$; a negative curl has sign $-1$. Define $\\mathcal{KT}_n(T)$ to be the $T$-algebra obtained from the monoid algebra of these classes by imposing, in every interior disk, the Dubrovnik relations\n$$D_+-D_-=z_D(D_0-D_\\infty),\\qquad \\text{positive curl}=a\\,\\text{straight strand},\\qquad \\text{negative curl}=a^{-1}\\,\\text{straight strand},$$\nand the free-circle relation that adjoining one disjoint circle with no crossings with the tangle multiplies it by $d$. The symbols $a,z_D,d$ are the images from the coefficient extension. No type-I move is imposed as a regular isotopy; its effect is represented by the displayed curl relations.\n\n",
+          "uses": [
+            "2.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "step": "1.1",
+          "claim": "The generator product in [F1] has one factor for each input letter, so construction of $b_\\beta$ terminates after the finite word length many multiplications. For fixed $n$, [F4] gives a finite basis of $N=(2n-1)!!$ matching tangles, and the number of generator matrices and trace entries is finite.",
+          "inputs": [
+            "F1",
+            "F4",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-1-2",
+          "step": "1.2",
+          "claim": "For one reduction input $D$, order the pair $(r(D),b(D))$ lexicographically, where $r$ is its crossing count and $b$ its number of bad crossings. If $r=0$ or $b=0$, no further skein recursion is needed: the diagram is crossingless or descending and reduces by [F2] to a matching tangle, with a finite curl/circle evaluation for a closure. This is the base case.",
+          "inputs": [
+            "F2",
+            "F3",
+            "F4",
+            "base"
+          ]
+        },
+        {
+          "id": "step-1-3",
+          "step": "1.3",
+          "claim": "Assume by strong induction that every reducer input with smaller pair terminates. At a chosen bad crossing, the switch branch preserves $r$ and lowers $b$ by one, while each of the two smoothing branches lowers $r$ by one; hence every child has smaller pair. Each node has at most three children, so well-founded induction gives a finite reduction tree for every column and every closed trace entry.",
+          "inputs": [
+            "F2",
+            "F3",
+            "ih",
+            "induction"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "step": "2.1",
+          "claim": "The finite matrix products therefore give the coordinates of $\\Phi_n(b_\\beta)$, and pairing with the trace row yields $d^{-n}P(\\widehat{\\Phi_n(b_\\beta)})=\\tau_n(b_\\beta)$. Since the closure is nonempty, $D=P/d=d^{n-1}\\tau_n(b_\\beta)$; applying the conversion [F2] gives exactly $-(-1)^c a^{-w}d^{n-1}\\tau_n(b_\\beta)$. Only powers of the units $a,d$ are inverted, so no division by $z$ occurs.",
+          "inputs": [
+            "F2",
+            "F5",
+            "step 1.1",
+            "step 1.2",
+            "step 1.3",
+            "discharge-induction: step 1.3"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "Statement: the finite empty braid word at n=1 is admissible and terminates immediately."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "A zero-crossing input word has finite empty length; steps 1.1–2.1 terminate with no skein recursion."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "The Statement allows n=1; its empty word has a finite product and one matching coordinate."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Statement: the algorithm works over T and uses no inverse of the skein coefficient."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "The Statement fixes n≥1 and indices 1≤i<n, so n=1 has no generator letters and is still admissible."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "The procedure uses a fixed first-bad-crossing rule and has no existential choice step."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The theorem asserts termination and output, not an equivalence."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The theorem asserts termination and output, not an equivalence."
+        }
+      ],
+      "finite_checks": [
+        {
+          "name": "one-strand empty word and one-crossing recursion",
+          "method": "exact finite measure check",
+          "input": {
+            "n": 1,
+            "empty_word": true,
+            "measure": [
+              "crossings",
+              "bad crossings"
+            ]
+          },
+          "calculation": "The empty word has no reduction nodes. At a chosen bad crossing, the switch branch preserves crossing count and lowers the bad-crossing count; the two smoothing branches lower crossing count by one. The lexicographic measure strictly decreases on every recursive branch.",
+          "expected": {
+            "all_branches_decrease": true,
+            "branching_bound": 3
+          }
+        }
+      ],
+      "finite_smoke": []
+    },
+    "thm-kauffman-and-dubrovnik-conversion": {
+      "citations": [
+        {
+          "fact": "A1",
+          "source": "def-axiom-of-choice",
+          "source_section": "Definition",
+          "quote": "The **Axiom of Choice** (AC) is the following statement.\n\n> Every family of nonempty sets has a choice function\n> ([[def-choice-function]]).\n\nWritten out: for every set $\\mathcal{F}$ all of whose members are nonempty,\nthere exists a function $g$ with domain $\\mathcal{F}$ satisfying $g(S) \\in S$ for\nall $S \\in \\mathcal{F}$.\n\nAn equivalent formulation is that a product of nonempty sets is nonempty: if\n$X_i \\ne \\emptyset$ for every $i \\in I$, then $\\prod_{i \\in I} X_i \\ne \\emptyset$.\nHere $\\prod_{i \\in I} X_i$ is the set of functions $f$ with domain $I$ such that\n$f(i) \\in X_i$ for every $i \\in I$; when a family of nonempty sets is indexed by\nitself, such an $f$ is precisely a choice function for it.\n\n",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F1",
+          "source": "thm-bmw-markov-trace-gives-dubrovnik-invariant",
+          "source_section": "Statement",
+          "quote": "Assume the Axiom of Choice. For every nonempty oriented link $K\\subset S^3$ and every finite signed Artin braid word $\\beta$ whose oriented closure represents $K$, the corrected BMW trace value\n$$Q(\\beta)=-(-1)^{c(\\beta)}a^{-w(\\beta)}d^{n-1}\\tau_n(\\beta),$$\nwhere $n$ is the strand count, $c(\\beta)$ is the number of closure components, and $w(\\beta)$ is the determinant writhe, is independent of the braid representative. It equals the declared writhe-normalized Kauffman ambient-isotopy invariant of $K$ at $A=ia$, $Z=-iz$.\n\n",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "lem-kauffman-dubrovnik-writhe-component-conversion",
+          "source_section": "Statement",
+          "quote": "Assume the Axiom of Countable Choice. For each nonempty oriented regular link\ndiagram $K$, let $w(K)$ be its determinant writhe and $c(K)$ its number of\ncomponents, and define $D,L,F$ by the conventions stated for this page. Then\n$$D_K(a,z)=-i^{-w(K)}(-1)^{c(K)}L_K(ia,-iz),\\qquad i^2=-1.$$\nThe value assigned to $L$ is independent of reversing the orientation of any\nwhole component. The Dubrovnik value has the stated difference-skein, curl and\ncircle rules; the Kauffman value has the sum-skein, curl and circle rules; and\n$F_K(A,Z)=A^{-w(K)}L_K(A,Z)$ is unchanged by planar isotopy and every oriented\nReidemeister move of types I, II, and III. The claim concerns these finite\ndiagram moves and uses the universal coefficient relations without dividing\nby a skein variable.\n\n",
+          "uses": [
+            "1.2",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "def-kauffman-regular-isotopy-and-dubrovnik-conventions",
+          "source_section": "Definition",
+          "quote": "Let\n$$R_D=\\mathbb Z[a^{\\pm1},z,d^{\\pm1}]/(z(d-1)-(a-a^{-1})),$$\nwhere $z$ is not inverted. A nonempty unoriented regular link diagram is a\nfinite generic planar projection of one or more circles with only transverse\ndouble crossings and an over/under marking at each crossing. Use the crossing\nchart in which the over-strand runs southwest to northeast. Its $D_0$\nsmoothing joins the two top endpoints and the two bottom endpoints, and its\n$D_\\infty$ smoothing joins the left endpoints and the right endpoints. These\nare respectively the $A$- and $B$-smoothings in the stated chart. A positive\ncurl is a type-I kink whose oriented crossing has determinant sign $+1$; a\nnegative curl has determinant sign $-1$. The sign is unchanged if the\norientation of the whole component is reversed.\n\nThe Dubrovnik regular-isotopy evaluation $P$ is normalized by\n$P(\\varnothing)=1$, $P(K\\sqcup\\bigcirc)=dP(K)$, positive and negative curl\nfactors $a$ and $a^{-1}$, and\n$$P(D_+)-P(D_-)=z\\bigl(P(D_0)-P(D_\\infty)\\bigr).$$\nHere $D_+$ and $D_-$ differ only by switching the displayed crossing. For a\nnonempty oriented link diagram $K$, let $c(K)$ be its number of components and\nlet $w(K)$ be the sum of the determinant crossing signs. Define\n$$D_K(a,z)=d^{-1}P(K),$$\n$$L_K(A,Z)=-i^{w(K)}(-1)^{c(K)}D_K(-iA,iZ),\\qquad i^2=-1,$$\nand\n$$F_K(A,Z)=A^{-w(K)}L_K(A,Z).$$\nThus $D$ has unknot value $1$, and the universal relation defining $R_D$ is\nretained even when $z$ is not invertible. These are conventions and\nnormalizations; ambient-isotopy invariance of $F$ is a separate theorem.\n\n",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "lem-framed-kauffman-link-evaluation",
+          "source_section": "Statement",
+          "quote": "Put $A=\\mathbb Z[a^{\\pm1},s,d^{\\pm1}]/(s(d-1)-(a-a^{-1}))$. This ring is an integral domain and embeds in $\\mathbb Q(i)(a,s)$ by $d\\mapsto1+(a-a^{-1})/s$, where $i^2=-1$. A link diagram means a finite generic immersion of circles in the oriented plane with over/under data at its double points. Regular isotopy is generated by planar isotopy and Reidemeister moves II and III. A positive curl is a one-crossing curl whose oriented self-crossing has sign $+1$; its sign is independent of the direction chosen on its component. There is a unique function $P$ from link diagrams, including the empty diagram, to $A$ with $P(\\varnothing)=1$, unchanged by regular isotopy, satisfying the following local rules: a positive or negative curl multiplies $P$ by $a$ or $a^{-1}$; a disjoint trivial circle multiplies $P$ by $d$; and $P(L_+)-P(L_-)=s(P(L_0)-P(L_\\infty))$. Here in an oriented disk with four cyclically labelled endpoints $1,2,3,4$, $L_+$ connects $1$ to $3$ over the strand from $2$ to $4$, and the two smoothings are chosen so that the oriented smoothing for any orientation making this crossing positive is $L_0$; $L_-$ reverses the crossing and $L_\\infty$ is the other smoothing. Rotating the disk interchanges both differences and preserves the rule. In particular the empty diagram freely generates the quotient of the free $A$-module on closed diagrams by these rules.\n\n",
+          "uses": [
+            "2.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "step": "1.1",
+          "claim": "Since $K$ is nonempty, [A1] and Alexander's theorem give a finite braid representative; [F1] shows its BMW trace output is the same for every representative and equals $F_K(ia,-iz)$.",
+          "inputs": [
+            "A1",
+            "F1",
+            "given"
+          ]
+        },
+        {
+          "id": "step-1-2",
+          "step": "1.2",
+          "claim": "By [F2], $$F_K(ia,-iz)=(ia)^{-w}L_K(ia,-iz) =(ia)^{-w}\\bigl(-i^w(-1)^cD_K(a,z)\\bigr) =-(-1)^c a^{-w}D_K(a,z).$$ Rearranging the same identity gives the displayed inverse conversion formula in the statement.",
+          "inputs": [
+            "F2",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "step": "2.1",
+          "claim": "The boundary cases agree with this formula: for the unknot, $c=1,w=0,D=1$, so $Q=1$; a positive curl changes $(w,D)$ to $(w+1,aD)$, leaving $a^{-w}D$ unchanged, and a negative curl changes them to $(w-1,a^{-1}D)$ with the same result. At a self-crossing, the oriented smoothing splits one component and the other smoothing keeps the component count. At a mixed crossing, both smoothing pairings merge the two incident components; orienting the non-oriented smoothing by reversing one incident whole component gives the modulo-four writhe phase established from the even mixed-crossing sums in [F2]. Thus the sum/difference skein conversions cover both local component changes, and no coefficient is divided by $z$.",
+          "inputs": [
+            "F2",
+            "F3",
+            "step 1.2",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The conversion theorem is restricted to nonempty oriented links."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Step 2.1 checks the unknot with writhe zero and the proof uses the universal coefficient relation without dividing by z."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Step 2.1 evaluates the one-component unknot boundary case."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Statement and step 2.1: the conversion uses the coefficient relation and unit powers without introducing a skein-variable inverse."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "The theorem concerns closed links and has no tangle boundary endpoints."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Step 1.1 uses AC through braid existence and Markov equivalence."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The theorem states two polynomial conversion identities and no iff."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The theorem states two polynomial conversion identities and no iff."
+        }
+      ],
+      "finite_checks": [
+        {
+          "name": "unknot and curl conversion cases",
+          "method": "exact substitution",
+          "input": {
+            "unknot": {
+              "c": 1,
+              "w": 0,
+              "D": 1
+            },
+            "positive_curl": {
+              "delta_w": 1,
+              "D_factor": "a"
+            },
+            "negative_curl": {
+              "delta_w": -1,
+              "D_factor": "a^-1"
+            }
+          },
+          "calculation": "The corrected expression -(-1)^c a^-w D gives 1 on the unknot and is unchanged by either curl.",
+          "expected": {
+            "unknot": 1,
+            "positive_curl_ratio": 1,
+            "negative_curl_ratio": 1
+          }
+        }
+      ],
+      "finite_smoke": []
+    },
+    "cex-knot-kt-30-boundary-case": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-kauffman-regular-isotopy-and-dubrovnik-conventions",
+          "source_section": "Definition",
+          "quote": "Let\n$$R_D=\\mathbb Z[a^{\\pm1},z,d^{\\pm1}]/(z(d-1)-(a-a^{-1})),$$\nwhere $z$ is not inverted. A nonempty unoriented regular link diagram is a\nfinite generic planar projection of one or more circles with only transverse\ndouble crossings and an over/under marking at each crossing. Use the crossing\nchart in which the over-strand runs southwest to northeast. Its $D_0$\nsmoothing joins the two top endpoints and the two bottom endpoints, and its\n$D_\\infty$ smoothing joins the left endpoints and the right endpoints. These\nare respectively the $A$- and $B$-smoothings in the stated chart. A positive\ncurl is a type-I kink whose oriented crossing has determinant sign $+1$; a\nnegative curl has determinant sign $-1$. The sign is unchanged if the\norientation of the whole component is reversed.\n\nThe Dubrovnik regular-isotopy evaluation $P$ is normalized by\n$P(\\varnothing)=1$, $P(K\\sqcup\\bigcirc)=dP(K)$, positive and negative curl\nfactors $a$ and $a^{-1}$, and\n$$P(D_+)-P(D_-)=z\\bigl(P(D_0)-P(D_\\infty)\\bigr).$$\nHere $D_+$ and $D_-$ differ only by switching the displayed crossing. For a\nnonempty oriented link diagram $K$, let $c(K)$ be its number of components and\nlet $w(K)$ be the sum of the determinant crossing signs. Define\n$$D_K(a,z)=d^{-1}P(K),$$\n$$L_K(A,Z)=-i^{w(K)}(-1)^{c(K)}D_K(-iA,iZ),\\qquad i^2=-1,$$\nand\n$$F_K(A,Z)=A^{-w(K)}L_K(A,Z).$$\nThus $D$ has unknot value $1$, and the universal relation defining $R_D$ is\nretained even when $z$ is not invertible. These are conventions and\nnormalizations; ambient-isotopy invariance of $F$ is a separate theorem.\n\n",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "step": "1.1",
+          "claim": "Apply the proposed false formula to the unknot from [F1]. Since $i^{-w}=i^0=1$ and $(-1)^c=(-1)^1=-1$, it assigns $D=1\\cdot(-1)\\cdot1=-1$. This contradicts the declared value $D=1$ in [F1].",
+          "inputs": [
+            "F1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "step": "2.1",
+          "claim": "Inserting the leading minus changes that result to $-1\\cdot(-1)=1$, exactly the normalized unknot value from [F1]. Thus the leading sign is necessary for the displayed conversion.",
+          "inputs": [
+            "F1",
+            "step 1.1",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The counterexample is the normalized nonempty unknot, not the empty diagram."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Step 1.1 uses the unknot with writhe zero and one component."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Step 1.1 tests the one-component unknot directly."
+        },
+        {
+          "case": "degenerate",
+          "status": "not_applicable",
+          "reason": "The sign counterexample does not depend on a coefficient specialization."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "The counterexample is a closed knot diagram without boundary endpoints."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "The counterexample is explicit and uses no choice."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The item refutes a formula and states no iff."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The item refutes a formula and states no iff."
+        }
+      ],
+      "finite_checks": [
+        {
+          "name": "missing-sign counterexample",
+          "method": "exact one-case calculation",
+          "input": {
+            "diagram": "unknot",
+            "c": 1,
+            "w": 0,
+            "D": 1
+          },
+          "calculation": "The formula without a leading minus returns (-1)^1=-1, contradicting D=1; adding the minus returns 1.",
+          "expected": {
+            "false_formula": -1,
+            "normalized_value": 1
+          }
+        }
+      ],
+      "finite_smoke": []
+    },
+    "ex-knot-kt-30-worked-cases": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-kauffman-regular-isotopy-and-dubrovnik-conventions",
+          "source_section": "Definition",
+          "quote": "Let\n$$R_D=\\mathbb Z[a^{\\pm1},z,d^{\\pm1}]/(z(d-1)-(a-a^{-1})),$$\nwhere $z$ is not inverted. A nonempty unoriented regular link diagram is a\nfinite generic planar projection of one or more circles with only transverse\ndouble crossings and an over/under marking at each crossing. Use the crossing\nchart in which the over-strand runs southwest to northeast. Its $D_0$\nsmoothing joins the two top endpoints and the two bottom endpoints, and its\n$D_\\infty$ smoothing joins the left endpoints and the right endpoints. These\nare respectively the $A$- and $B$-smoothings in the stated chart. A positive\ncurl is a type-I kink whose oriented crossing has determinant sign $+1$; a\nnegative curl has determinant sign $-1$. The sign is unchanged if the\norientation of the whole component is reversed.\n\nThe Dubrovnik regular-isotopy evaluation $P$ is normalized by\n$P(\\varnothing)=1$, $P(K\\sqcup\\bigcirc)=dP(K)$, positive and negative curl\nfactors $a$ and $a^{-1}$, and\n$$P(D_+)-P(D_-)=z\\bigl(P(D_0)-P(D_\\infty)\\bigr).$$\nHere $D_+$ and $D_-$ differ only by switching the displayed crossing. For a\nnonempty oriented link diagram $K$, let $c(K)$ be its number of components and\nlet $w(K)$ be the sum of the determinant crossing signs. Define\n$$D_K(a,z)=d^{-1}P(K),$$\n$$L_K(A,Z)=-i^{w(K)}(-1)^{c(K)}D_K(-iA,iZ),\\qquad i^2=-1,$$\nand\n$$F_K(A,Z)=A^{-w(K)}L_K(A,Z).$$\nThus $D$ has unknot value $1$, and the universal relation defining $R_D$ is\nretained even when $z$ is not invertible. These are conventions and\nnormalizations; ambient-isotopy invariance of $F$ is a separate theorem.\n\n",
+          "uses": [
+            "1.1",
+            "2.1",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F1",
+          "source": "lem-framed-kauffman-link-evaluation",
+          "source_section": "Statement",
+          "quote": "Put $A=\\mathbb Z[a^{\\pm1},s,d^{\\pm1}]/(s(d-1)-(a-a^{-1}))$. This ring is an integral domain and embeds in $\\mathbb Q(i)(a,s)$ by $d\\mapsto1+(a-a^{-1})/s$, where $i^2=-1$. A link diagram means a finite generic immersion of circles in the oriented plane with over/under data at its double points. Regular isotopy is generated by planar isotopy and Reidemeister moves II and III. A positive curl is a one-crossing curl whose oriented self-crossing has sign $+1$; its sign is independent of the direction chosen on its component. There is a unique function $P$ from link diagrams, including the empty diagram, to $A$ with $P(\\varnothing)=1$, unchanged by regular isotopy, satisfying the following local rules: a positive or negative curl multiplies $P$ by $a$ or $a^{-1}$; a disjoint trivial circle multiplies $P$ by $d$; and $P(L_+)-P(L_-)=s(P(L_0)-P(L_\\infty))$. Here in an oriented disk with four cyclically labelled endpoints $1,2,3,4$, $L_+$ connects $1$ to $3$ over the strand from $2$ to $4$, and the two smoothings are chosen so that the oriented smoothing for any orientation making this crossing positive is $L_0$; $L_-$ reverses the crossing and $L_\\infty$ is the other smoothing. Rotating the disk interchanges both differences and preserves the rule. In particular the empty diagram freely generates the quotient of the free $A$-module on closed diagrams by these rules.\n\n",
+          "uses": [
+            "1.1",
+            "2.1",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "lem-bmw-markov-trace-stabilization",
+          "source_section": "Statement",
+          "quote": "For $n\\ge1$, let $\\Phi_n$ be the BMW-to-Dubrovnik tangle homomorphism over $T$, let $\\widehat{t}$ denote closure of an $(n,n)$ tangle by joining corresponding top and bottom endpoints without a twist, and define\n$$\\tau_n(x)=d^{-n}P\\!\\left(\\widehat{\\Phi_n(x)}\\right),\\qquad x\\in BMW_n(T;q,\\rho,\\delta).$$\nThen $\\tau_n$ is a cyclic $T$-linear trace, compatible with the tower inclusion $\\iota_n:BMW_n\\to BMW_{n+1}$ that adds one straight strand, and for every $x\\in BMW_n$,\n$$\\tau_{n+1}(\\iota_n(x))=\\tau_n(x),\\quad \\tau_{n+1}(\\iota_n(x)g_n)=a d^{-1}\\tau_n(x),\\quad \\tau_{n+1}(\\iota_n(x)g_n^{-1})=a^{-1}d^{-1}\\tau_n(x),\\quad \\tau_{n+1}(\\iota_n(x)e_n)=d^{-1}\\tau_n(x),$$\nwhere $a=\\rho^{-1}$ and $d=\\delta$.\n\n",
+          "uses": [
+            "1.1",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "alg-kauffman-polynomial-from-bmw-braid-closure",
+          "source_section": "Statement",
+          "quote": "Use the coefficient extension $T$ with $a=\\rho^{-1}$ and $d=\\delta$. On input an integer $n\\ge1$ and a finite signed Artin braid word\n$$\\beta=\\sigma_{i_1}^{\\varepsilon_1}\\cdots\\sigma_{i_m}^{\\varepsilon_m},\\qquad \\varepsilon_j\\in\\{-1,1\\},\\quad 1\\le i_j<n,$$\nperform the following finite computation:\n\n1. Form the BMW product $b_\\beta=g_{i_1}^{\\varepsilon_1}\\cdots g_{i_m}^{\\varepsilon_m}$.\n2. Set $w=\\sum_{j=1}^m\\varepsilon_j$ and let $c$ be the number of cycles of the permutation $s_{i_1}\\cdots s_{i_m}$ of $\\{1,\\ldots,n\\}$, counting fixed points.\n3. List the perfect matchings of the $2n$ tangle boundary endpoints and their standard descending representatives $T_m$. For each signed generator, form its finite left-multiplication matrix in this basis: its column at $T_m$ is obtained by reducing the tangle $g_i^{\\pm1}T_m$ to the unique matching coordinates. In each reduction, use the standard endpoint traversal order, choose the first crossing whose first traversal branch is under, and for its current sign $\\eta\\in\\{1,-1\\}$ replace\n$$R(D)=R(D^{\\mathrm{sw}})+\\eta z_D\\bigl(R(D_0)-R(D_\\infty)\\bigr).$$\nThe switched branch has one fewer non-descending crossing, and each smoothing has one fewer crossing; a descending leaf is reduced by the curl and free-circle rules to its standard matching representative. Starting with the coordinate vector of the identity tangle, apply the generator matrices from the rightmost braid letter to the leftmost to obtain the coordinate vector $v_\\beta$ of $\\Phi_n(b_\\beta)$.\n4. Form the trace row $t_m=d^{-n}P(\\widehat{T_m})$ by closing each basis tangle and evaluating its scalar Dubrovnik value, and return\n$$-(-1)^c a^{-w}d^{n-1}\\tau_n(b_\\beta).$$\n\nHere $\\tau_n(b_\\beta)=t^{\\mathsf T}v_\\beta$. The output is the declared Kauffman ambient-isotopy value at $A=ia$, $Z=-iz$ in the Dubrovnik parameter convention. All matrices are finite and all coefficients lie in $T$; no division by the skein variable is used.\n\n",
+          "uses": [
+            "1.1",
+            "2.1",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "lem-bmw-relations-dubrovnik-parameter-dictionary",
+          "source_section": "Statement",
+          "quote": "Let\n$$S=\\mathbb Z[a^{\\pm1},z,d^{\\pm1}]/(z(d-1)-(a-a^{-1}))$$\nbe the Dubrovnik coefficient ring, and let\n$$T=S[q^{\\pm1}]/(q-q^{-1}+z).$$\nIn $T$ put $\\rho=a^{-1}$, $\\delta=d$, and $z_B=q-q^{-1}$. Then the natural\nmap $S\\to T$ is injective and $T$ is a free $S$-module with basis $1,q$.\nMoreover, the BMW coefficient relation\n$$z_B(\\delta-1)=\\rho-\\rho^{-1}$$\nholds, and the substitution $a=\\rho^{-1}$, $z_D=-z_B$, $d=\\delta$ converts\nthe BMW skein, curl, adjacent untwisting, and loop coefficients to the\nDubrovnik relations in the specified chart: $D_+-D_-=z_D(D_0-D_\\infty)$,\nthe curl factors are $a,a^{-1}$, and a disjoint trivial circle contributes\n$d$. Here $D_0$ is cup-cap and $D_\\infty$ is through. No skein parameter is\ndivided out.\n\n",
+          "uses": [
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F6",
+          "source": "lem-kauffman-dubrovnik-writhe-component-conversion",
+          "source_section": "Statement",
+          "quote": "Assume the Axiom of Countable Choice. For each nonempty oriented regular link\ndiagram $K$, let $w(K)$ be its determinant writhe and $c(K)$ its number of\ncomponents, and define $D,L,F$ by the conventions stated for this page. Then\n$$D_K(a,z)=-i^{-w(K)}(-1)^{c(K)}L_K(ia,-iz),\\qquad i^2=-1.$$\nThe value assigned to $L$ is independent of reversing the orientation of any\nwhole component. The Dubrovnik value has the stated difference-skein, curl and\ncircle rules; the Kauffman value has the sum-skein, curl and circle rules; and\n$F_K(A,Z)=A^{-w(K)}L_K(A,Z)$ is unchanged by planar isotopy and every oriented\nReidemeister move of types I, II, and III. The claim concerns these finite\ndiagram moves and uses the universal coefficient relations without dividing\nby a skein variable.\n\n",
+          "uses": [
+            "2.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "step": "1.1",
+          "claim": "The unknot has $P(\\bigcirc)=d$, so [F1] gives $D_{\\bigcirc}=P/d=1$. Its identity $1$-braid closure has $n=1$, $w=0$, $c=1$, and $\\tau_1(1)=d^{-1}P(\\bigcirc)=1$ by [F2]. Substitution in [F3] gives $-(-1)^1=1$.",
+          "inputs": [
+            "F1",
+            "F2",
+            "F3",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "step": "2.1",
+          "claim": "A positive curl multiplies $D$ by $a$ and raises $w$ by one, so the product $a^{-w}D$ is unchanged; a negative curl multiplies $D$ by $a^{-1}$ and lowers $w$ by one, with the same cancellation. By [F6], the corresponding Kauffman curl factors $A,A^{-1}$ cancel against $A^{-w}$ in the ambient normalization. Thus both local curl cases preserve the normalized value.",
+          "inputs": [
+            "F1",
+            "F3",
+            "F6",
+            "step 1.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "step": "3.1",
+          "claim": "The identity $2$-braid closes to the two-component unlink, so [F1] gives $P=d^2$ and $D=P/d=d$. Hence [F2] gives $\\tau_2(1)=d^{-2}d^2=1$. Its writhe is $0$ and $c=2$, so [F3] returns $-d$. The coefficient relation in [F4] remains the equality $z(d-1)=a-a^{-1}$; all calculations used only multiplication by the unit $d$ and never divide by $z$.",
+          "inputs": [
+            "F1",
+            "F2",
+            "F3",
+            "F4",
+            "step 2.1",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The examples are nonempty link closures and do not evaluate the empty link."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Step 1.1 and step 3.1 use braid closures of writhe zero."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Step 1.1 treats the one-component unknot, and step 2.1 checks one positive or negative curl."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Step 3.1 retains z(d-1)=a-a^{-1} and does not solve by dividing by z."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Step 3.1 uses the identity two-braid closure with its ordered strand endpoints joined."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "The examples are explicit braid words and use no choice."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The item provides worked examples, not an iff."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The item provides worked examples, not an iff."
+        }
+      ],
+      "finite_checks": [
+        {
+          "name": "unknot, curls, and identity 2-braid",
+          "method": "exact closure evaluation",
+          "input": {
+            "words": [
+              {
+                "n": 1,
+                "letters": []
+              },
+              {
+                "n": 2,
+                "letters": []
+              }
+            ]
+          },
+          "calculation": "The unknot has D=1 and algorithm output 1; positive/negative curl factors cancel their writhe corrections; identity 2-braid has P=d^2, tau_2=1 and output -d, with z(d-1)=a-a^-1 retained as a relation.",
+          "expected": {
+            "unknot": 1,
+            "two_component_unlink": "D=d",
+            "identity_2_braid_output": "-d"
+          }
+        }
+      ],
+      "finite_smoke": []
+    }
+  }
+}

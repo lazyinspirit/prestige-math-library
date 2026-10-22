@@ -19,10 +19,10 @@ sources:
   references:
     - title: "B. Xi, G. Michailidis, and V. N. Nair, Estimating Network Loss Rates Using Active Tomography, Journal of the American Statistical Association 101 (2006), 1430–1448"
       url: "https://www.stat.purdue.edu/~xbw/research/xi_tomo_jasa1206.pdf"
-      locator: "§4.2, PDF pp. 5–6 (printed pp. 1434–1435): latent link successes, conditional expectations, and expected-success/probe-count update"
+      locator: "§4.2, PDF pp. 6–7 (printed pp. 1435–1436): latent link successes, conditional expectations, and expected-success/probe-count update"
     - title: "E. Lawrence, G. Michailidis, and V. N. Nair, Statistical Inverse Problems in Active Network Tomography, IMS Lecture Notes–Monograph Series 54 (2007), 24–44"
       url: "https://arxiv.org/pdf/0708.1079"
-      locator: "§3.2, PDF pp. 5–6 (printed pp. 29–30): flexicast multinomial outcomes and the EM E/M steps"
+      locator: "§3.2, PDF pp. 6–7 (printed pp. 29–30): flexicast multinomial outcomes and the EM E/M steps"
 ---
 
 ## Definition

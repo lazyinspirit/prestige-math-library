@@ -12,6 +12,11 @@ proof_strategy: direct
 provenance:
   statement: literature-derived
   proof: ai-altered
+verification:
+  judge:
+    model: "gpt-6-luna"
+    verdict: pass
+    date: 2026-10-22
 sources:
   references:
     - title: "V. O. Manturov, Knot Theory, Chapter 5, §5.1, printed pp. 49–52"

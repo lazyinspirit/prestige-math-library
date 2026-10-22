@@ -1,0 +1,67 @@
+---
+id: lem-aspherical-pl-targets-admit-incompressible-surface-preimages
+kind: lemma
+title: Aspherical PL targets admit incompressible surface preimages
+status: draft
+origin: pipeline
+pipeline_run: inverse-problems-knot-theory-all-109-2026-10-19
+deps:
+  - def-axiom-of-choice
+  - lem-finite-injective-surface-hierarchies-give-aspherical-pieces-and-annulus-map-control
+  - lem-finite-pl-two-sided-incompressibility-is-pi-one-injectivity
+  - lem-nullhomotopic-circles-on-finite-oriented-pl-surfaces-bound-pl-disks
+  - lem-compact-locally-collared-pl-subpolyhedron-has-pl-collar
+  - thm-relative-simplicial-approximation-after-subdivision
+  - prop-relative-cw-inclusions-are-cofibrations
+  - lem-finite-triangulated-surface-reduces-to-a-one-polygon-schema
+  - lem-polygonal-schema-reduction-moves
+proof_strategy: direct
+provenance:
+  statement: literature-derived
+  proof: ai-generated
+sources:
+  references:
+    - title: Friedhelm Waldhausen, On irreducible 3-manifolds which are sufficiently large
+      url: https://homepages.math.uic.edu/~kauffman/Waldhausen.pdf
+      locator: Proposition1.3 printed60; all finite surgery and relative map-extension operations needed here are supplied explicitly
+---
+
+## Statement
+
+Assume AC. Let $N,C$ be compact connected orientable PL three-manifolds with supplied finite triangulations, with $N$ irreducible. Let $S\subset C$ be a finite disjoint family of compact two-sided proper locally flat PL surfaces with specified collars, no sphere components, and injective fundamental-group inclusions. Suppose the universal covers of $C$ and of every piece of $C\mathbin{\|}S$ are contractible. Let $f:(N,\partial N)\to(C,\partial C)$ be PL, with $f^{-1}(\partial C)=\partial N$, and suppose its restriction to a supplied boundary collar is a product over a PL local homeomorphism $\partial N\to\partial C$.
+
+Then $f$ is homotopic relative to that boundary to a PL map $g$, product-transverse to $S$, whose inverse image is a finite family of two-sided proper PL surfaces, none a sphere, each injective on fundamental groups into $N$. Here product-transverse means that some product neighborhoods of the inverse-image surfaces map to the specified target product neighborhood by a map $(x,t)\mapsto(g(x),t)$, up to independently reversing the normal coordinate. The homotopy is through maps of pairs, and $g^{-1}(\partial C)=\partial N$. No injection of $f_*$ is required for this preimage operation.
+
+## Facts & Assumptions
+
+**Given:** The manifolds, irreducibility of $N$, the injective collared cut family, the contractible-cover hypotheses and the PL map with its fixed boundary product.
+
+[A1] Full choice is [[def-axiom-of-choice]].
+
+[F1] The actual finite injective hierarchy ending in balls supplies contractible universal covers for its pieces; this is an available way to verify the stated target hypotheses, not an assumption that an original manifold comes with a hierarchy. [[lem-finite-injective-surface-hierarchies-give-aspherical-pieces-and-annulus-map-control]]
+
+[F2] For a two-sided non-spherical proper finite PL surface, failure of fundamental-group injectivity supplies an embedded compression disk; the equivalence is the actual finite PL Loop argument. Nullhomotopic simple surface circles bound PL disks, and compact boundary surfaces have finite graph spines. [[lem-finite-pl-two-sided-incompressibility-is-pi-one-injectivity]], [[lem-nullhomotopic-circles-on-finite-oriented-pl-surfaces-bound-pl-disks]]
+
+[F3] Finite PL product neighborhoods exist; a continuous map of finite polyhedra already PL on a subcomplex can be replaced by a PL map homotopic relative to it after compatible subdivisions. Homotopies on such subcomplexes extend. [[lem-compact-locally-collared-pl-subpolyhedron-has-pl-collar]], [[thm-relative-simplicial-approximation-after-subdivision]], [[prop-relative-cw-inclusions-are-cofibrations]]
+
+[F4] A finite triangulation of a closed oriented surface gives a one-polygon schema, and finite opposite-pair moves give a sphere or a positive-genus commutator polygon. A positive-genus model maps onto a circle by one handle coordinate, so its group is infinite. [[lem-finite-triangulated-surface-reduces-to-a-one-polygon-schema]], [[lem-polygonal-schema-reduction-moves]]
+
+## Proof
+
+1.1 A contractible universal cover implies that every sphere map of dimension at least two into the base is nullhomotopic: lift the sphere, contract in that cover, and project. We will use both $\pi_2$ of the actual cut pieces and $\pi_3(C)$, not only $\pi_2(C)$. A compact surface component of $S$, being non-spherical and oriented, has $\pi_2=0$. With boundary it retracts to its graph spine by [F2]. Without boundary its positive-genus polygon model in [F4] has infinite fundamental group, so its universal cover is noncompact; any lifted sphere image lies in a finite compact subsurface with boundary and hence in a graph spine. The tree cover of that graph contracts the lifted sphere. This is the elementary surface argument, requiring no three-manifold sphere theorem. [F1, F2, F4, given, construct]
+
+2.1 Put the map in finite PL transverse position, fixing the supplied boundary product. In a target normal collar the signed normal function composed with $f$ is piecewise linear after subdivision. Move the values at the finitely many interior source vertices slightly away from zero, using the target normal fibers; keep the boundary values and the already transverse boundary strip fixed. On the finite transition triangulation all zero sets are normal polygons in tetrahedra, joining along their edges in the adjacent triangles. The link at an interior polygon edge is an interval times its two normal sides; at boundary points the given product supplies the half-plane model. Thus the inverse image is a finite properly embedded two-sided PL surface family $T$. The normal functions give its source bicollars by following the affine normal intervals in each cut simplex. Shrinking those intervals uniformly, and replacing the tangential projection by its value on $T$, makes $f$ exactly product-transverse in that neighborhood; interpolation of the projection stays in a target collar. These finite local constructions agree on their common faces by first doing them on faces and then coning the remaining simplex pieces. They are unchanged in the fixed boundary strip and do not introduce an interior preimage of $\partial C$. [F3, given, construct]
+
+3.1 Suppose a non-spherical component of $T$ has an essential compression circle $a$. Choose an embedded compression disk $D$ by [F2], with its interior missing $T$. Its image lies in a single target cut piece $P$, and $f(a)$ lies in one face $S_0$. It is nullhomotopic in $C$ via $f(D)$, so injectivity of $S_0$ supplies an exact disk filling into $S_0$. Use [F3] to make that filling PL relative to its specified boundary. A small regular neighborhood of $D$, enlarged across the annular patch of $T$ at its rim, is a parametrized ball $B$ whose old $T$-trace is an unknotted annulus. In cylindrical coordinates it is the side $r=1$, with two boundary circles on the two end faces; the disk is its central radial meridian. Here a polygonal radial coordinate, such as the maximum norm on a square, suffices and all subdivisions are finite. Replace this annulus by its two compressed disk caps. The caps use the two copies of the just-constructed face filling, matching the actual old map on their boundary circles using the old annulus strip. Each of the three complementary regions in this ball is a ball: the two end caps bound the two end chambers, and the middle chamber joins the outer annular collar to the central cylinder. This is explicit from the same product coordinates. The zero set can equally be described by the PL normal function $\max(r-1,a_0-|z|)$, with $0<a_0$ smaller than the end height: its two disk-shaped zero components replace the old cylinder, and its boundary zero circles are unchanged. Boundary heights may be rescaled within their fixed signs, keeping the actual boundary map fixed through an outer collar. [F2, F3, step 2.1, given, construct]
+
+4.1 Extend the new map over those three chambers WITHOUT creating more inverse images of $S$. On every chamber boundary its prescribed map lies in one actual labeled cut piece; the two new cap faces lie in its incident $S_0$ face. That boundary is a sphere. Its map extends over a ball by $\pi_2$ of that cut piece, from step 1.1. To ensure that the chamber interior misses all target boundary faces, push the extension into the interior by the target boundary collar, leaving the prescribed boundary map fixed with a collar interpolation on the domain: the normal coordinate at a cap is positive at all interior times, while it is zero exactly on the prescribed cap. On other domain-boundary patches the old map already has the assigned strict side sign; choose the interpolation there in that same open side. The finitely many collar sectors at joins are products and their positive parameters interpolate by maxima on a common subdivision. This makes the only new preimages exactly the two cap disks. The endpoint map is PL by [F3] relative to this finite boundary/cap complex; approximating on the compact remaining interiors inside the open cut-piece interiors preserves that avoidance. It agrees with the original map on $\partial B$. The two ball maps are homotopic relative to $\partial B$: prescribe them on the two ends of $B\times I$ and the unchanged boundary map on $\partial B\times I$. This is a three-sphere map, null by $\pi_3(C)=0$ from step 1.1, so it extends over the four-ball $B\times I$. Paste this homotopy to the unchanged outside map. Thus the compression is an actual homotopy of maps, not just an alteration of a formal preimage surface. [F3, step 1.1, step 3.1, construct]
+
+5.1 Repeat compressions until every non-spherical component is injective. The operation terminates. For an oriented surface family with the fixed finite boundary, put $d=\sum\max(0,-\chi)$, let $u$ be total genus, and let $v$ count annular components. A compression on a negative-Euler component lowers $d$: a separating essential circle cannot cut off a sphere before capping unless it was inessential, and if it is boundary-parallel its disk output accounts for only one of the two units of Euler increase, still lowering $d$ at least one. A nonseparating compression also lowers $d$, except for a torus, when it lowers $u$. A compression of an annulus lowers $v$, replacing it by two disks. Thus each compression strictly lowers the nonnegative integer lexicographic triple $(d,u,v)$. No boundary curve changes and no extra preimage components beyond the compressed surface appear by step 4.1. Once no compression remains, [F2] gives injectivity of every remaining non-spherical component. [F2, step 3.1, step 4.1, construct, algebra]
+
+6.1 Remove sphere components next. An innermost sphere component $Q\subset T$ bounds an interior PL ball $B$ by irreducibility. Choose it with no other spherical component in its ball. No other now-injective non-spherical component can lie inside $B$: a component with boundary meets $\partial N$ and cannot lie in an interior ball; a closed positive-genus component inside would have its group killed in $N$, contrary to its injectivity. Thus $T\cap\operatorname{int}B$ is empty. Its boundary map $Q\to S_0$ is nullhomotopic inside $S_0$ by step 1.1. Enlarge $B$ by a thin outer collar of $Q$, and use that nullhomotopy followed by a small push to the outer incident cut side to construct a new ball map entirely on that side, matching the old outside boundary map. This can also be obtained by the same boundary sphere filling and positive collar operation as in step 4.1. The enlarged ball maps are homotopic relative boundary by $\pi_3(C)=0$. Hence the sphere disappears by a homotopy supported there and no preimage is created. Finite repetition removes all sphere components. [F3, step 1.1, step 4.1, step 5.1, given, construct]
+
+7.1 The modifications took place away from the fixed source boundary strip. Their endpoint maps have no inverse image of the target boundary in the source interior. Repeat the finite collar straightening of step 2.1 at the new cap disks, keeping all unchanged parts fixed; the source normal parameter and target normal parameter have the same sign and interpolate without adding a zero. The resulting PL map is product-transverse to the whole final surface system. Its non-spherical components are all injective by step 5.1, none were altered except by the finite sphere deletions, and there are no sphere components by step 6.1. Concatenating the finite supported homotopies gives the asserted homotopy of pairs fixed on the given boundary. This proves every stated conclusion; the contractible-cover input remains a genuine supplier obligation. [F3, step 2.1, step 5.1, step 6.1, construct] ∎
+
+## Authoring status
+
+This is an unfrozen development proof in the complete relative marking chain. In particular the finite relative transversality, explicit compression-ball chamber maps and sphere deletion require full checking before any independent acceptance. The aspherical hierarchy supplier is itself developing in the separate complete pared-cut chain; no original hyperbolization theorem is claimed complete.

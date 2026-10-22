@@ -24,7 +24,7 @@ sources:
 
 ## Definition
 
-Let $Y$ be a closed oriented $3$-manifold and let $x,y\in\operatorname{Tor}H_1(Y;\mathbb Z)$. For choices of an integer $n>0$ and an integral $2$-chain $C$ with $\partial C=nx$, the bounding-chain expression is $(C\cdot y)/n\bmod\mathbb Z\in\mathbb Q/\mathbb Z$, where $C$ and $y$ are placed transversely and intersection signs use the orientation of $Y$. This expression is the torsion linking pairing when its independence of the choices is established.
+Let $Y$ be a closed oriented $3$-manifold and let $x,y\in\operatorname{Tor}H_1(Y;\mathbb Z)$. Choose integral $1$-cycles $a,b$ representing $x,y$, respectively. For choices of an integer $n>0$ and an integral $2$-chain $C$ with $\partial C=na$, the bounding-chain expression is $(C\cdot b)/n\bmod\mathbb Z\in\mathbb Q/\mathbb Z$, where $C$ and $b$ are placed transversely and intersection signs use the orientation of $Y$. This expression is the torsion linking pairing when its independence of the choices is established.
 
 ## Definition references
 

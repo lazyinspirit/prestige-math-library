@@ -16,6 +16,11 @@ proof_strategy: direct
 provenance:
   statement: ai-altered
   proof: ai-altered
+verification:
+  judge:
+    model: "gpt-6-luna"
+    verdict: pass
+    date: 2026-10-22
 sources:
   references:
     - title: "Hugh M. Hilden, María Teresa Lozano, and José María Montesinos-Amilibia, On the affine representations of the trefoil knot group, arXiv:1003.3554v1, p. 24"

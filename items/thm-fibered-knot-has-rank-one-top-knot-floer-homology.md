@@ -14,6 +14,7 @@ deps:
   - lem-relative-sutured-diagrams-have-signed-move-equivalences
   - lem-marked-fiber-admits-a-sutured-surface-diagram
   - lem-permissible-surface-niceification-preserves-admissibility
+  - lem-signed-relative-surface-cut-and-horizontal-decomposition
   - lem-fiber-outer-grading-and-integral-cut-euler-matrix
   - lem-signed-outer-summand-cut-comparison-with-zero-periodic-cut
 dependency_level: 6
@@ -65,11 +66,13 @@ $$\widehat{\mathrm{HFK}}(Y,K,[F],g;\mathbb Z)\cong\mathbb Z.$$
 
 [F5] [[lem-signed-outer-summand-cut-comparison-with-zero-periodic-cut]] identifies the entire outer differential with the cut differential over the integers when the cut periodic group vanishes.
 
+[F6] The adapted-admissibility assertion of [[lem-signed-relative-surface-cut-and-horizontal-decomposition]], proved by relative winding in step 2.7, makes a good adapted diagram admissible while retaining its decomposing surface and boundary marking. This is the adapted winding operation of Juhasz, *Floer homology and surface decompositions*, Proposition 4.8; niceification is applied only afterward.
+
 ## Proof
 
 **Given:** Full AC, a null-homologous knot K in the stated general closed oriented Y and its connected fiber F of genus g, with the meridional boundary trivialization in the definition of the integral Alexander grading. [[def-axiom-of-choice]] supplies AC.
 
-1.1 Use the actual binding bridge and drilling construction to represent the exterior with two meridional sutures, carrying the actual page longitude and the class of F. The adapted surface cut is literally the result of cutting this mapping torus along its fiber, hence is F times an interval with its product sutures. Apply the finite permissible niceification. Signed relative diagram moves compare the resulting complex to the chosen defining complex, with its specified coherent orientation class transported. No restriction on Y or change of coefficient ring is made. [F1, F2, F3]
+1.1 Use the actual binding bridge and drilling construction to represent the exterior with two meridional sutures, carrying the actual page longitude and the class of F. The adapted surface cut is literally the result of cutting this mapping torus along its fiber, hence is F times an interval with its product sutures. The fiber has no closed component and its boundary meets both signed boundary regions, so it is a good decomposing surface. First apply the adapted relative winding of F6, away from the protected boundary marking, to obtain an admissible good surface diagram of the same marked exterior and fiber. Now apply the finite permissible niceification, which preserves this established admissibility. Signed relative diagram moves compare the resulting complex to the chosen defining complex, with its specified coherent orientation class transported. No restriction on Y or change of coefficient ring is made. [F1, F6, F2, F3]
 
 2.1 In this marked adapted diagram the local Euler obstruction is minus 2g plus twice the number of interior polygon coordinates when evaluated on minus F. Therefore the Alexander degree is g minus that number: degree g is precisely the outer generator set, and no higher degree occurs. The product cut has zero periodic-domain group, either directly from its empty product diagram and the relative handle description, or from its vanishing relative integral homology. The signed cut comparison consequently identifies the whole degree-g differential with the cut differential, after harmless changes of generator signs. [F4, F5, step 1.1]
 

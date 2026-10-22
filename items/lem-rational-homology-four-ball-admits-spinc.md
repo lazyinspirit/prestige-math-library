@@ -23,6 +23,10 @@ provenance:
   proof: ai-altered
 verification:
   precheck: n/a
+  judge:
+    model: "gpt-6-luna"
+    verdict: pass
+    date: 2026-10-22
 sources:
   references:
     - title: "Danny Calegari, Notes on 4-Manifolds"

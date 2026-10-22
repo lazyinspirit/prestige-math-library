@@ -17,7 +17,7 @@ aliases: []
 proof_strategy: direct
 axiom_use: "The integral Khovanov branch assumes AC_omega through link invariance. The two-color knot Floer branch is over F2[U,V] and is indexed by Spin-c structures, with the composition sum over extensions."
 provenance:
-  statement: literature-derived
+  statement: ai-altered
   proof: ai-altered
 sources:
   references:
@@ -34,7 +34,7 @@ sources:
 
 ## Statement
 
-Assume countable choice. For a smooth oriented knot cobordism in $S^3\times[0,1]$, the ordinary even integral Khovanov assignment has source and target the bigraded groups $Kh^{i,j}$ and is defined up to an overall sign; after quotienting each Khovanov hom-set by the action $f\mapsto -f$, it is invariant under ambient isotopy fixed on the boundary and respects composition. If the surface is equipped with a dividing set and one $w$- and one $z$-basepoint on each boundary knot, the decorated knot Floer assignment has source and target the filtered complexes $CFL^-_{UV}(S^3,K)$ over $\mathbb F_2[U,V]$, and is invariant up to filtered equivariant chain homotopy. For a general gluing of decorated four-dimensional cobordisms, the link Floer composition law sums over Spin-c structures on the composite that restrict to the chosen structures on the pieces; for the product $S^3\times[0,1]$, this sum has one term if the chosen piece structures are restrictions of the unique product structure, and is empty otherwise. In the compatible case the law is ordinary composition. The two assignments therefore have separately specified targets, coefficient rings, decorations, and equivalence relations.
+Assume countable choice. For a smooth oriented knot cobordism in $S^3\times[0,1]$, the ordinary even integral Khovanov assignment has source and target the bigraded groups $Kh^{i,j}$ and is defined up to an overall sign; after quotienting each Khovanov hom-set by the action $f\mapsto -f$, it is invariant under ambient isotopy fixed on the boundary and respects composition. If the surface is equipped with a dividing set and one $w$- and one $z$-basepoint on each boundary knot, the decorated knot Floer assignment has source and target the filtered complexes $CFL^-_{UV}(S^3,K)$ over $\mathbb F_2[U,V]$, and is invariant up to filtered equivariant chain homotopy. For a general gluing of decorated four-dimensional cobordisms with chosen piece Spin-c structures whose restrictions agree on the identified intermediate boundary, the link Floer composition law sums over Spin-c structures on the composite that restrict to the chosen structures on the pieces; for the product $S^3\times[0,1]$, this sum has one term if the chosen piece structures are restrictions of the unique product structure, and is empty otherwise. In the compatible case the law is ordinary composition. If the intermediate restrictions differ, the fixed-sector maps are not composable; an empty extension set does not define their composite. The two assignments therefore have separately specified targets, coefficient rings, decorations, and equivalence relations.
 
 ## Statement references
 
@@ -62,9 +62,9 @@ Assume countable choice. For a smooth oriented knot cobordism in $S^3\times[0,1]
 
 ## Proof
 
+
 1.1 Apply [F1] to the smooth oriented surface. Its target is ordinary even integral $Kh^{i,j}$, and identifying a map with its negative removes exactly the one sign ambiguity. Its isotopy and composition conclusions are the first assertion of the Statement. [F1, given]
 
 1.2 For the separately decorated surface apply [F2], coloring all w-regions by $U$ and z-regions by $V$. The intermediate multiply based link modules and their endpoint naturality identifications are part of that construction. Zero curvature makes the endpoint objects the specified complexes, and external Theorem A gives filtered equivariant chain-homotopy invariance. This assertion has coefficient field $\mathbb F_2$ and its own decoration and Spin-c data; no integral Khovanov sign ambiguity or comparison between the two theories is transferred to it. [F2, given]
 
-2.1 The general composition law is the extension sum in [F2]. On $S^3\times[0,1]$ the Spin-c set has one element, so the extension sum is a singleton for compatible piece structures and empty otherwise. Combining the two independently established assignments proves the entire Statement with its distinct targets, coefficients and equivalence relations. It asserts neither equality of the functors nor a canonical chain-level top generator, and requires no new local reconstruction of the imported Cerf checks. [F1, F2, step 1.1, step 1.2] ∎
-
+2.1 First require the chosen piece Spin-c structures to have equal restrictions on the intermediate boundary and identify their intermediate complexes by naturality. The sector maps are then composable, and their general composition law is the extension sum in [F2]. If those restrictions differ, the target and source sectors differ and no composite is asserted. On $S^3\times[0,1]$ the Spin-c set has one element, so the extension sum is a singleton for compatible piece structures and empty otherwise. Combining the two independently established assignments proves the entire Statement with its distinct targets, coefficients and equivalence relations. It asserts neither equality of the functors nor a canonical chain-level top generator, and requires no new local reconstruction of the imported Cerf checks. [F1, F2, step 1.1, step 1.2] ∎

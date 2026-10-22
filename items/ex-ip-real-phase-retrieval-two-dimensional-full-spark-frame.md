@@ -30,7 +30,7 @@ sources:
 
 ## Example
 
-In $\mathbb R^2$ take $\Phi=(a_1,a_2,a_3)$ with $a_1=(1,0)$, $a_2=(0,1)$, and $a_3=(1,1)$. Its intensity map on classes modulo $x\sim -x$ is $[x]\mapsto(x_1^2,x_2^2,(x_1+x_2)^2)$. Every pair is linearly independent, so every pair spans $\mathbb R^2$; consequently, for every partition one side spans $\mathbb R^2$. Equality of the displayed triples therefore forces two signals to be equal up to a global sign.
+In $\mathbb R^2$ take $\Phi=(a_1,a_2,a_3)$ with $a_1=(1,0)$, $a_2=(0,1)$, and $a_3=(1,1)$. Its intensity map on classes modulo $x\sim -x$ is $[x]\mapsto(x_0^2,x_1^2,(x_0+x_1)^2)$. Every pair is linearly independent, so every pair spans $\mathbb R^2$; consequently, for every partition one side spans $\mathbb R^2$. Equality of the displayed triples therefore forces two signals to be equal up to a global sign.
 
 ## Example references
 

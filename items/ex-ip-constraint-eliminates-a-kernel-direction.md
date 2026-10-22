@@ -1,4 +1,9 @@
 ---
+verification:
+  judge:
+    model: "gpt-6-luna"
+    verdict: pass
+    date: 2026-10-22
 id: ex-ip-constraint-eliminates-a-kernel-direction
 kind: example
 title: A line constraint removes one kernel direction

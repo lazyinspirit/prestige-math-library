@@ -45,7 +45,7 @@ Assume full AC. Let $L$ be a nonempty smooth oriented link in the oriented $3$-s
 
 **Given:** Full AC, a nonempty oriented link $L$, and a connected compact oriented spanning surface $F$ with boundary $L$.
 
-[A1] Full AC implies dependent choice and countable choice, supplying the compact-surface normal form and Alexander-duality conventions. [[def-axiom-of-choice]], [[thm-choice-implies-dependent-implies-countable-choice]], [[def-countable-choice]], [[def-one-variable-alexander-module-of-an-oriented-link]]
+[A1] Full AC is assumed; it implies dependent choice and countable choice, discharging the choice hypotheses of the compact-surface and Alexander-duality suppliers. [[def-axiom-of-choice]], [[thm-choice-implies-dependent-implies-countable-choice]], [[def-countable-choice]], [[def-one-variable-alexander-module-of-an-oriented-link]]
 
 [F1] The compact surface has a finite cellulation, and its first homology is finitely generated and represented by integral cellular cycles. [[lem-finite-chart-surface-normal-forms-supply-jordan-disks-and-torsion-free-groups]]
 
@@ -55,7 +55,7 @@ Assume full AC. Let $L$ be a nonempty smooth oriented link in the oriented $3$-s
 
 [F4] Every smooth oriented circle has a supplied connected compact oriented spanning surface, so the link-intersection theorem applies to it. [[thm-every-oriented-knot-bounds-a-seifert-surface]]
 
-[F5] A transverse perturbation can be chosen arbitrarily $C^1$-close to an embedded circle: the transversality family has good parameters dense in every parameter ball, and its slices converge in $C^1$ to the original map as the parameter tends to zero. To see that sufficiently close maps remain embeddings, cover the circle by finitely many coordinate arcs where a coordinate derivative is bounded away from zero; $C^1$-close maps remain injective on smaller arcs, while compact pairs outside those arcs have a positive separation preserved by sufficiently $C^0$-close maps. A sufficiently $C^0$-close map also remains disjoint from a fixed disjoint compact circle. Thus the other circle can be homotoped in its complement to remain embedded and meet a supplied spanning surface transversely. [[thm-transversality-homotopy-theorem]], [[prop-relative-transversality-preserves-a-map-on-a-closed-good-region]]
+[F5] Here is the small-perturbation consequence needed below, derived from the construction in the proofs of [[thm-transversality-homotopy-theorem]] and [[prop-relative-transversality-preserves-a-map-on-a-closed-good-region]]. If $\partial\Sigma=D$ and $C\cap D=\varnothing$, work in $N=S^3\setminus D$; then $Z=\operatorname{Int}\Sigma$ is a closed embedded submanifold of $N$. Those proofs construct a smooth family $\mathcal G:S^1\times B\to N$ with $\mathcal G_0=C$ and transverse slices for parameters outside a null set. Such parameters occur arbitrarily near $0$, and compactness of $S^1$ gives $\mathcal G_a\to C$ in $C^1$. Sufficiently close maps remain embeddings: on finitely many small coordinate arcs a coordinate derivative stays bounded away from zero, while pairs outside a fixed diagonal neighbourhood retain a positive separation. Thus, for small good $a$, the whole path $\mathcal G_{ta}$ consists of embeddings in $N$ and its endpoint is transverse to $Z$. This proves the required perturbation through disjoint embedded circles without applying transversality to a surface with boundary.
 
 ## Proof
 

@@ -44,8 +44,10 @@ first two coordinates. In the displayed chart the over-strand runs from the
 southwest endpoint to the northeast endpoint, and the under-strand runs from
 the northwest endpoint to the southeast endpoint. The $A$-smoothing pairs the
 two left endpoints and the two right endpoints, and the $B$-smoothing pairs
-the two top endpoints and the two bottom endpoints. The smoothed strips carry
-blackboard framing.
+the two top endpoints and the two bottom endpoints. All three local tangles,
+including the crossing strands, carry the blackboard framing of the displayed
+projection, with no additional framing twists. Their framed strips coincide
+in a collar of the four endpoints.
 
 ```tikz
 \begin{tikzpicture}[scale=0.62,line cap=round,line join=round]

@@ -1,4 +1,9 @@
 ---
+verification:
+  judge:
+    model: "gpt-6-luna"
+    verdict: pass
+    date: 2026-10-22
 id: ex-ip-inverse-coordinate-credible-interval-undercoverage
 kind: example
 title: A proper Gaussian prior yields a credible interval with undercoverage

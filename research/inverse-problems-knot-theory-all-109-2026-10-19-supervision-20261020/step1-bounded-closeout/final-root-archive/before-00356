@@ -1,0 +1,255 @@
+[
+  {
+    "order": 3032,
+    "id": "linear-gaussian-inverse-posteriors-and-tikhonov",
+    "kind": "A",
+    "category": "inverse-problems",
+    "title": "Linear Gaussian inverse posteriors and Tikhonov",
+    "companion": "linear-gaussian-inverse-posteriors-and-tikhonov-examples",
+    "requires": [
+      "bayesian-inverse-likelihoods-and-posterior-propriety",
+      "gaussian-process-priors-and-posterior-laws",
+      "the-moore-penrose-pseudoinverse-and-regularised-least-squares"
+    ],
+    "items": [
+      {
+        "id": "lem-ip-singular-gaussian-support-and-pseudoinverse",
+        "kind": "lemma",
+        "title": "Support and pseudoinverse coordinates of a finite singular Gaussian",
+        "statement": "Assume the Axiom of Choice. Let $n\\ge1$, $m\\in\\mathbb R^n$, and let\n$C\\in\\mathbb R^{n\\times n}$ be symmetric with $v^TCv\\ge0$ for every\n$v\\in\\mathbb R^n$. Let\n$X$ be a random vector with law $N_n(m,C)$, and define\n$\\mu_X(E)=\\mathbb P(X\\in E)$ for Borel $E\\subseteq\\mathbb R^n$. Write\n$\\operatorname{Ran}(C)=\\{Cv:v\\in\\mathbb R^n\\}$, and put\n$r=\\dim\\operatorname{Ran}(C)$. For a Borel probability $\\mu$ on\n$\\mathbb R^n$, define its topological support by\n$$\n\\operatorname{supp}(\\mu)=\\{x:\\mu(B(x,\\varepsilon))>0\\text{ for every }\\varepsilon>0\\},\n$$\nwhere $B(x,\\varepsilon)$ is the open Euclidean ball. If $r>0$, there are\n$U\\in\\mathbb R^{n\\times r}$ and a symmetric positive-definite\n$\\Lambda\\in\\mathbb R^{r\\times r}$ with $U^TU=I_r$ such that\n$$\nC=U\\Lambda U^T,\\qquad\n\\operatorname{Ran}(C)=\\operatorname{Ran}(U),\\qquad\nC^\\dagger=U\\Lambda^{-1}U^T.\n$$\nMoreover, $X$ has the same law as $m+U\\Lambda^{1/2}Z$, where\n$Z\\sim N_r(0,I_r)$, and\n$$\n\\operatorname{supp}(\\mu_X)=m+\\operatorname{Ran}(C).\n$$\nHere $C^\\dagger$ is the unique matrix satisfying\n$CC^\\dagger C=C$, $C^\\dagger CC^\\dagger=C^\\dagger$, and such that\n$CC^\\dagger$ and $C^\\dagger C$ are symmetric. If $r=0$, then\n$C=0$, $X=m$ almost surely, $C^\\dagger=0$, and the support is $\\{m\\}$.",
+        "deps": [
+          "def-axiom-of-choice",
+          "def-multivariate-normal-law",
+          "thm-non-negative-operator-characterisations",
+          "thm-non-negative-square-root-exists-and-is-unique",
+          "thm-nondegenerate-multivariate-normal-law-has-density",
+          "def-moore-penrose-pseudoinverse",
+          "thm-moore-penrose-pseudoinverse-exists-and-is-unique"
+        ],
+        "justified_by": [],
+        "forward_refs": [],
+        "dependency_level": 0,
+        "sources": {
+          "references": [
+            {
+              "title": "Christian Clason, Regularization of Inverse Problems: Lecture Notes, arXiv:2001.00617v2 (2021)",
+              "url": "https://arxiv.org/pdf/2001.00617",
+              "locator": "Chapter 13, printed pp. 127–131 (PDF pp. 129–133), for the finite-dimensional Gaussian inverse-problem setting; the rank-deficient support and pseudoinverse-coordinate statement is proved locally."
+            },
+            {
+              "title": "M. Dashti and A. M. Stuart, The Bayesian Approach to Inverse Problems (full lecture notes, arXiv:1302.6989)",
+              "url": "https://arxiv.org/pdf/1302.6989",
+              "locator": "§§3.1–3.2 for supplied Gaussian prior laws and the potential-weighted posterior framework; the finite singular-support calculation is proved locally."
+            }
+          ]
+        },
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "proof_strategy": "direct",
+        "axiom_use": "AC is inherited from the library's multivariate-normal construction and standard-normal interfaces. The finite-dimensional range, Penrose-equation, and support arguments use no stronger choice principle."
+      },
+      {
+        "id": "thm-ip-finite-linear-gaussian-posterior",
+        "kind": "theorem",
+        "title": "Finite linear Gaussian inverse posterior with singular prior covariance",
+        "statement": "Assume AC. Let $n,m\\ge1$, $m_0\\in\\mathbb R^n$, and let\n$C_0\\in\\mathbb R^{n\\times n}$ be symmetric with $v^TC_0v\\ge0$ for every\n$v\\in\\mathbb R^n$. Let\n$A\\in\\mathbb R^{m\\times n}$ and let\n$\\Gamma\\in\\mathbb R^{m\\times m}$ be symmetric positive definite, meaning\n$u^T\\Gamma u>0$ for every nonzero $u\\in\\mathbb R^m$. Suppose\n$X$ and $\\eta$ are independent random vectors with laws\n$X\\sim N_n(m_0,C_0)$ and $\\eta\\sim N_m(0,\\Gamma)$, and set\n$Y=AX+\\eta$. Define $\\mu_0(E)=\\mathbb P(X\\in E)$ for Borel\n$E\\subseteq\\mathbb R^n$, and set\n$S=AC_0A^T+\\Gamma$. Then $S$ is positive definite. For each\n$y\\in\\mathbb R^m$, define\n$$\n\\Phi_y(x)=\\tfrac12(y-Ax)^T\\Gamma^{-1}(y-Ax),\\qquad\nZ(y)=\\int_{\\mathbb R^n}e^{-\\Phi_y(x)}\\,\\mu_0(dx).\n$$\nFor every $y$, $0<Z(y)<\\infty$, so the normalized potential update\n$$\n\\Pi^y(E)=\\frac{\\int_E e^{-\\Phi_y(x)}\\,\\mu_0(dx)}{Z(y)}\n\\quad(E\\in\\mathcal B(\\mathbb R^n))\n$$\nis a probability measure and equals the conditional-law version obtained by\nconditioning the observation model at $y$. Its Gaussian formula, defined for\nevery $y$, is\n$$\nN_n\\!\\left(\nm_0+C_0A^TS^{-1}(y-Am_0),\\\nC_0-C_0A^TS^{-1}AC_0\n\\right).\n$$\nLet $P_Y(B)=\\mathbb P(Y\\in B)$ for Borel $B\\subseteq\\mathbb R^m$.\nConditional-law versions are unique only $P_Y$-almost surely. The displayed\nmean and covariance formulas invert only $S$, not $C_0$; $C_0$ and the\nposterior covariance may be singular. The prior support is\n$m_0+\\operatorname{Ran}(C_0)$.",
+        "deps": [
+          "def-axiom-of-choice",
+          "def-multivariate-normal-law",
+          "def-gaussian-process",
+          "def-independent-random-elements",
+          "lem-measurable-functions-preserve-independence",
+          "thm-finite-gaussian-process-posterior-and-predictive-laws",
+          "thm-nondegenerate-multivariate-normal-law-has-density",
+          "def-ip-misfit-evidence-and-posterior-law",
+          "thm-ip-function-space-posterior-propriety",
+          "lem-ip-singular-gaussian-support-and-pseudoinverse"
+        ],
+        "justified_by": [],
+        "forward_refs": [],
+        "dependency_level": 4,
+        "sources": {
+          "references": [
+            {
+              "title": "Christian Clason, Regularization of Inverse Problems: Lecture Notes, arXiv:2001.00617v2 (2021)",
+              "url": "https://arxiv.org/pdf/2001.00617",
+              "locator": "Chapter 13, printed pp. 127–131 (PDF pp. 129–133), Theorem 13.1 and equations (145)–(148); source assumes positive-definite isotropic covariances, while the singular and general-covariance extension is proved locally."
+            },
+            {
+              "title": "M. Dashti and A. M. Stuart, The Bayesian Approach to Inverse Problems (full lecture notes, arXiv:1302.6989)",
+              "url": "https://arxiv.org/pdf/1302.6989",
+              "locator": "§3.1, Theorem 3.1; §3.2, Theorem 3.3 and proof for the potential-weighted posterior; §4.1 for evidence propriety context. The local proof uses the current IP-16 support-point argument and checks the finite Gaussian case directly."
+            }
+          ]
+        },
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "proof_strategy": "direct",
+        "axiom_use": "AC is inherited from the multivariate-normal law, Gaussian-process, and finite Gaussian conditioning interfaces. The IP-16 finite-fiber propriety result and the displayed finite-dimensional density/algebra calculation require no stronger choice principle."
+      },
+      {
+        "id": "cor-ip-gaussian-map-equals-tikhonov-minimizer",
+        "kind": "corollary",
+        "title": "Finite Gaussian MAP, posterior mean, and support-restricted Tikhonov minimizer coincide",
+        "statement": "Assume AC and let $n,m\\ge1$, $m_0\\in\\mathbb R^n$,\n$C_0\\in\\mathbb R^{n\\times n}$ symmetric with $v^TC_0v\\ge0$ for all\n$v\\in\\mathbb R^n$,\n$A\\in\\mathbb R^{m\\times n}$, and\n$\\Gamma\\in\\mathbb R^{m\\times m}$ symmetric with $u^T\\Gamma u>0$ for all\nnonzero $u\\in\\mathbb R^m$. Let\n$X\\sim N_n(m_0,C_0)$ and $\\eta\\sim N_m(0,\\Gamma)$ be independent, and\nobserve $Y=AX+\\eta$. Put\n$S_0=m_0+\\operatorname{Ran}(C_0)$ and\n$r=\\dim\\operatorname{Ran}(C_0)$. The $r$-dimensional Euclidean Lebesgue\nmeasure on $S_0$ is the pushforward of Lebesgue measure on $\\mathbb R^r$\nunder any affine isometry onto $S_0$; this measure is independent of the\nchosen orthonormal coordinates. A MAP point means a maximizer of the\nposterior density with respect to this measure; for $r=0$, the unique point\nof $S_0$ is the MAP point. The Moore–Penrose pseudoinverse $C_0^\\dagger$\nsatisfies\n$$\nC_0C_0^\\dagger C_0=C_0,\\qquad\nC_0^\\dagger C_0C_0^\\dagger=C_0^\\dagger,\n$$\nand $C_0C_0^\\dagger$ and $C_0^\\dagger C_0$ are symmetric. The optimization\nbelow is restricted to $S_0$. Then for every $y\\in\\mathbb R^m$, the unique\nMAP point equals the posterior mean and the unique minimizer over $x\\in S_0$ of\n$$\nJ_y(x)=(Ax-y)^T\\Gamma^{-1}(Ax-y)\n+(x-m_0)^TC_0^\\dagger(x-m_0).\n$$\nAll objects are finite-dimensional; no minimization over points outside the\nprior support is asserted when $C_0$ is singular.",
+        "deps": [
+          "def-axiom-of-choice",
+          "thm-ip-finite-linear-gaussian-posterior",
+          "lem-ip-singular-gaussian-support-and-pseudoinverse",
+          "def-moore-penrose-pseudoinverse",
+          "thm-non-negative-operator-characterisations",
+          "thm-non-negative-square-root-exists-and-is-unique",
+          "thm-nondegenerate-multivariate-normal-law-has-density",
+          "def-tikhonov-regularised-least-squares",
+          "thm-tikhonov-regularised-least-squares-has-a-unique-minimiser"
+        ],
+        "justified_by": [],
+        "forward_refs": [],
+        "dependency_level": 5,
+        "sources": {
+          "references": [
+            {
+              "title": "Christian Clason, Regularization of Inverse Problems: Lecture Notes, arXiv:2001.00617v2 (2021)",
+              "url": "https://arxiv.org/pdf/2001.00617",
+              "locator": "Chapter 13, printed pp. 127–131 (PDF pp. 129–133), especially equations (145)–(148): the source proves the full-rank isotropic Gaussian special case; the weighted, singular-support extension is proved locally."
+            },
+            {
+              "title": "M. Dashti and A. M. Stuart, The Bayesian Approach to Inverse Problems (full lecture notes, arXiv:1302.6989)",
+              "url": "https://arxiv.org/pdf/1302.6989",
+              "locator": "§§3.1–3.2 for the posterior density convention. The MAP/Tikhonov minimizer identity is derived locally for positive-definite noise covariance and singular finite prior covariance."
+            }
+          ]
+        },
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "proof_strategy": "direct",
+        "axiom_use": "AC is inherited from the finite Gaussian posterior theorem and the library's Gaussian-law construction. The support-restricted quadratic minimization and square-completion argument use no stronger choice principle."
+      }
+    ]
+  },
+  {
+    "order": 3033,
+    "id": "linear-gaussian-inverse-posteriors-and-tikhonov-examples",
+    "kind": "B",
+    "category": "inverse-problems",
+    "title": "Linear Gaussian inverse posteriors and Tikhonov — Examples and Counterexamples",
+    "companion": "linear-gaussian-inverse-posteriors-and-tikhonov",
+    "requires": [
+      "linear-gaussian-inverse-posteriors-and-tikhonov"
+    ],
+    "items": [
+      {
+        "id": "ex-ip-singular-state-gaussian-posterior",
+        "kind": "example",
+        "title": "A rank-one prior gives a singular Gaussian inverse posterior",
+        "statement": "Assume AC. Let\n$X\\sim N_2(0,\\operatorname{diag}(1,0))$,\n$\\eta\\sim N_2(0,I_2)$ independently, $A=I_2$, and observe\n$y=(2,3)^T$ in the model $Y=AX+\\eta$. The prior support is\n$S_0=\\{(t,0)^T:t\\in\\mathbb R\\}$. The Gaussian posterior version has mean\n$(1,0)^T$ and covariance $\\operatorname{diag}(1/2,0)$. On $S_0$, the\nsupport-restricted objective is\n$$\nJ_y(x)=(x_1-2)^2+(x_2-3)^2+x_1^2,\n$$\nand its unique minimizer is $(1,0)^T$.",
+        "deps": [
+          "def-axiom-of-choice",
+          "thm-ip-finite-linear-gaussian-posterior",
+          "cor-ip-gaussian-map-equals-tikhonov-minimizer",
+          "lem-ip-singular-gaussian-support-and-pseudoinverse"
+        ],
+        "justified_by": [],
+        "forward_refs": [],
+        "dependency_level": 6,
+        "sources": {
+          "references": [
+            {
+              "title": "Christian Clason, Regularization of Inverse Problems: Lecture Notes, arXiv:2001.00617v2 (2021)",
+              "url": "https://arxiv.org/pdf/2001.00617",
+              "locator": "Chapter 13, printed pp. 127–131 (PDF pp. 129–133), finite-dimensional Gaussian MAP/Tikhonov context; the singular example is computed locally."
+            }
+          ]
+        },
+        "provenance": {
+          "statement": "ai-generated",
+          "proof": "ai-generated"
+        },
+        "generation": {
+          "role": "example"
+        },
+        "strategy": "direct",
+        "axiom_use": "AC is inherited from the Gaussian-law and finite Gaussian-conditioning interfaces. The example matrix and one-variable quadratic calculations use no stronger choice principle."
+      },
+      {
+        "id": "ex-ip-prior-whitened-tikhonov-posterior",
+        "kind": "example",
+        "title": "Prior whitening turns an anisotropic Gaussian posterior into Tikhonov form",
+        "statement": "Assume AC. Let $X\\sim N_2(0,\\operatorname{diag}(4,1))$,\n$\\eta\\sim N_2(0,\\operatorname{diag}(1,4))$ independently, $A=I_2$, and\nobserve $y=(2,4)^T$ in $Y=AX+\\eta$. Put\n$L=\\operatorname{diag}(2,1)$ and\n$W=\\operatorname{diag}(1,1/2)$. The coordinate change $x=Lz$ makes the\nprior on $z$ standard Gaussian, and $W$ whitens the observation noise in\nthat $W\\Gamma W^T=I_2$. The\npreconditioned Tikhonov objective is\n$$\n\\|WALz-Wy\\|_2^2+\\|z\\|_2^2\n=\\|\\operatorname{diag}(2,1/2)z-(2,2)^T\\|_2^2+\\|z\\|_2^2.\n$$\nThe posterior mean, MAP point, and minimizer in the original parameter\ncoordinates are $(8/5,4/5)^T$, and the posterior covariance is\n$(4/5)I_2$.",
+        "deps": [
+          "def-axiom-of-choice",
+          "thm-ip-finite-linear-gaussian-posterior",
+          "cor-ip-gaussian-map-equals-tikhonov-minimizer",
+          "def-tikhonov-regularised-least-squares",
+          "thm-tikhonov-regularised-least-squares-has-a-unique-minimiser"
+        ],
+        "justified_by": [],
+        "forward_refs": [],
+        "dependency_level": 6,
+        "sources": {
+          "references": [
+            {
+              "title": "Christian Clason, Regularization of Inverse Problems: Lecture Notes, arXiv:2001.00617v2 (2021)",
+              "url": "https://arxiv.org/pdf/2001.00617",
+              "locator": "Chapter 13, printed pp. 127–131 (PDF pp. 129–133), finite-dimensional Gaussian MAP/Tikhonov context; the anisotropic whitening calculation is local."
+            }
+          ]
+        },
+        "provenance": {
+          "statement": "ai-generated",
+          "proof": "ai-generated"
+        },
+        "generation": {
+          "role": "example"
+        },
+        "strategy": "direct",
+        "axiom_use": "AC is inherited from the finite Gaussian posterior model. The covariance whitening and Tikhonov calculations use no stronger choice principle."
+      },
+      {
+        "id": "cex-ip-nongaussian-map-differs-from-posterior-mean",
+        "kind": "counterexample",
+        "title": "A non-Gaussian posterior can have different MAP and mean",
+        "statement": "For every probability density $p$ on $\\mathbb R$ with finite first absolute\nmoment and at least one global maximizer, every maximum a posteriori (MAP)\npoint, meaning every global maximizer of $p$, equals its mean\n$\\int_{\\mathbb R}t\\,p(t)\\,dt$.",
+        "deps": [
+          "def-axiom-of-choice",
+          "def-standard-normal-and-normal-laws",
+          "thm-nondegenerate-multivariate-normal-law-has-density",
+          "def-ip-misfit-evidence-and-posterior-law",
+          "cor-ip-gaussian-map-equals-tikhonov-minimizer"
+        ],
+        "justified_by": [],
+        "forward_refs": [],
+        "dependency_level": 6,
+        "sources": {
+          "references": [
+            {
+              "title": "Christian Clason, Regularization of Inverse Problems: Lecture Notes, arXiv:2001.00617v2 (2021)",
+              "url": "https://arxiv.org/pdf/2001.00617",
+              "locator": "Chapter 13, printed pp. 127–131 (PDF pp. 129–133), particularly the warning after equations (146)–(148) that posterior mean need not equal MAP outside the Gaussian setting; the bounded-support witness is proved locally."
+            },
+            {
+              "title": "M. Dashti and A. M. Stuart, The Bayesian Approach to Inverse Problems (full lecture notes, arXiv:1302.6989)",
+              "url": "https://arxiv.org/pdf/1302.6989",
+              "locator": "§§3.1–3.2 for the posterior as a normalized likelihood update; the explicit non-Gaussian witness is proved locally."
+            }
+          ]
+        },
+        "provenance": {
+          "statement": "ai-generated",
+          "proof": "ai-generated"
+        },
+        "generation": {
+          "role": "counterexample"
+        },
+        "strategy": "direct",
+        "axiom_use": "AC is used only through the repository's standard-normal law and density interfaces. The posterior normalization and one-dimensional integral comparison are direct."
+      }
+    ]
+  }
+]

@@ -12,6 +12,11 @@ proof_strategy: direct
 provenance:
   statement: literature-derived
   proof: ai-altered
+verification:
+  judge:
+    model: "gpt-6-luna"
+    verdict: pass
+    date: 2026-10-22
 sources:
   references:
     - title: "Leshno, Lin, Pinkus and Schocken, Multilayer Feedforward Networks With a Non-Polynomial Activation Function Can Approximate Any Function"

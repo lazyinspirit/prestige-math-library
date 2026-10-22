@@ -31,6 +31,11 @@ axiom_use: >-
 provenance:
   statement: literature-derived
   proof: ai-altered
+verification:
+  judge:
+    model: "gpt-6-luna"
+    verdict: pass
+    date: 2026-10-22
 sources:
   references:
     - title: "Gerald Teschl, Ordinary Differential Equations and Dynamical Systems, §2.4, Lemma 2.7"

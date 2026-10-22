@@ -25,6 +25,11 @@ axiom_use: "Choice-free: only finite Temperley–Lieb diagrams and linear algebr
 provenance:
   statement: literature-derived
   proof: ai-altered
+verification:
+  judge:
+    model: "gpt-6-luna"
+    verdict: pass
+    date: 2026-10-22
 sources:
   references:
     - title: "Joshua Chen, The Temperley-Lieb Categories and Skein Modules, §§5.1–5.4"

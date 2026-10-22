@@ -1,0 +1,75 @@
+---
+page: normal-surface-unknot-recognition
+title: Normal-surface unknot recognition
+status: draft
+items:
+  - def-normal-surface-coordinate-box
+  - def-finite-triangulated-compact-surface
+  - lem-knot-exterior-homology-and-longitude-via-mayer-vietoris
+  - lem-essential-simple-curve-on-torus-is-primitive
+  - lem-finite-compatible-pl-surfaces-admit-relative-smooth-roundings
+  - lem-smooth-proper-disks-have-compatible-pl-approximations
+  - lem-closed-pl-surfaces-with-even-original-edge-counts-separate
+  - lem-small-integer-matrix-linear-algebra-in-quadratic-logarithmic-space
+  - lem-normal-coordinate-matching-equations-and-finite-bounds
+  - lem-fundamental-normal-surfaces-are-connected
+  - lem-connected-normal-surface-chi-one-is-disk
+  - lem-essential-disk-boundary-is-longitude
+  - lem-degree-one-peripheral-curves-cobound-annuli-with-tube-core
+  - lem-essential-pl-disks-admit-normal-replacements
+  - lem-compatible-normal-disk-boundary-paths-have-a-unique-type-preserving-switch
+  - lem-triangular-normal-arcs-admit-braid-position-stable-under-partial-regular-switches
+  - lem-regular-normal-sum-diagrams-have-reduced-connected-pairs
+  - lem-normal-exchange-disk-patches-have-positive-edge-weight
+  - lem-admissible-normal-vectors-have-rigid-edge-count-averages
+  - lem-no-closed-nonorientable-pl-surface-in-s-three
+  - lem-normal-disk-candidate-check-characterization
+  - lem-smooth-to-pl-knot-exterior-ambient-isotopy
+  - lem-compatible-normal-surfaces-admit-finite-circle-free-tetrahedral-position
+  - lem-positive-euler-finite-pl-surfaces-are-disks-spheres-or-projective-planes
+  - lem-zero-edge-normal-exchange-rectangles-and-annuli-have-cellwise-product-structures
+  - lem-normal-vertex-disk-certificate-verification
+  - lem-compatible-normal-vectors-admit-original-triangulation-regular-sum-diagrams
+  - lem-irregular-switches-in-original-face-braids-give-strict-essential-disk-improvement
+  - lem-embedded-projective-planes-meet-the-one-skeleton-of-a-finite-three-triangulation
+  - lem-nonvertex-fundamental-disks-have-connected-two-copy-normal-sums
+  - lem-between-copy-annular-exchange-caps-have-rigid-original-edge-counts
+  - lem-meridian-disk-criterion-for-unknot-exterior
+  - lem-good-linear-size-exterior-triangulation-from-diagram
+  - lem-reduced-original-normal-pairs-for-a-least-weight-essential-disk-have-no-spherical-summand
+  - lem-reduced-original-normal-pairs-for-a-least-weight-essential-disk-have-no-projective-plane-summand
+  - lem-closed-normal-subdiagrams-inherit-strict-irregular-disk-improvement
+  - thm-smooth-knot-has-compatible-pl-exterior-model
+  - alg-haken-jaco-tollefson-unknot-recognition
+  - lem-nonfundamental-least-weight-essential-disks-have-a-pure-boundary-obstruction
+  - lem-same-copy-exchanges-on-least-fundamental-disks-have-disjoint-adjacent-caps
+  - lem-between-copy-proper-exchanges-have-essential-diagonals-and-rigid-cap-counts
+  - thm-haken-jaco-tollefson-unknot-recognition-procedure-properties
+  - lem-haken-search-acceptance-is-an-essential-normal-disk
+  - lem-jt-search-acceptance-is-an-essential-normal-disk
+  - lem-boundary-exchange-leaf-caps-for-a-least-weight-disk-have-rigid-edge-counts
+  - lem-actual-same-copy-exchange-caps-have-rigid-original-edge-counts
+  - lem-minimum-boundary-exchange-leaves-have-single-leaf-zero-edge-corridors
+  - lem-boundary-exchange-middle-disks-have-positive-original-edge-weight
+  - lem-equal-normal-vectors-have-ambient-cell-homeomorphisms-and-disk-copy-products
+  - lem-minimum-boundary-exchange-cycles-force-an-impossible-zero-edge-normal-component
+  - lem-exchange-surfaces-inside-normal-disk-copy-products-are-vertical
+  - thm-least-weight-lexicographic-essential-normal-disks-are-fundamental
+  - lem-original-between-copy-exchanges-contained-in-normal-products-are-vertical
+  - thm-haken-normal-essential-disk-existence
+  - lem-between-copy-annular-exchanges-on-least-disks-have-adjacent-caps
+  - thm-haken-finite-box-search-correctness
+  - lem-reduced-sphere-annulus-sums-cannot-realize-two-least-fundamental-disks
+  - lem-reduced-two-disk-sums-of-least-fundamental-disks-have-no-closed-exchanges
+  - thm-least-weight-lexicographic-essential-normal-disks-are-vertex-disks
+  - thm-jaco-tollefson-normal-essential-disk-vertex-existence
+  - thm-jaco-tollefson-vertex-search-correctness
+  - thm-unknot-recognition-has-np-certificate
+  - thm-normal-surface-unknot-algorithm-terminates-and-is-correct
+examples: []
+requires:
+  - knot-exteriors-and-peripheral-systems
+  - planar-diagram-codes-and-knot-table-enumeration
+  - connected-sums-and-prime-decomposition
+page_layout: compact-v1
+---

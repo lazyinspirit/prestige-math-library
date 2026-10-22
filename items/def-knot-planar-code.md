@@ -22,6 +22,10 @@ sources:
       url: "https://site.uvm.edu/cmcharbo/files/2021/12/knot-group-1.pdf"
 verification:
   precheck: n/a
+  judge:
+    model: "gpt-6-luna"
+    verdict: pass
+    date: 2026-10-22
 ---
 
 ## Definition

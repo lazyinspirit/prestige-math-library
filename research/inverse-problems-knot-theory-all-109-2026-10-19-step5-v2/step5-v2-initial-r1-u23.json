@@ -1,0 +1,182 @@
+{
+  "run": "inverse-problems-knot-theory-all-109-2026-10-19",
+  "phase": "initial",
+  "round": 1,
+  "unit": "23",
+  "input_sha256": "c872603b0f7c95c42125928ec1ced19e672caec5508e4ce625685b74e981d23d",
+  "decisions": [
+    {
+      "id": "def-ip-posterior-computation-error-budget",
+      "model": "gpt-6-luna",
+      "context_sha256": "edcad6b0f7012936f550da0b5c31da37ef067b538fe9a726b01b565fd5ce4fd2",
+      "outcome": "confirmed_nonfatal",
+      "reason": "The discrete-chain average requires integer indices. Burn-in length and retained sample size already express counts, but b>=0 and N>=1 leave their domains implicit. This is a nonfatal domain-notation omission, not a failed error decomposition. The repair states b in {0,1,2,...} and N in {1,2,3,...}, retaining b=0 and N=1.",
+      "uncertain": false,
+      "source_urls": [],
+      "familiar": true
+    }
+  ],
+  "reviews": [
+    {
+      "id": "def-ip-posterior-computation-error-budget",
+      "disposition": "repaired",
+      "post_sha256": "970595ef0f599b1b2032f6bfa8841fdf3cc6d9066f4ffbf30542e9541e8a9fc4",
+      "review_context_sha256": "a94c4e85dff819d012c3792b676b05f1b2c7d599081e5203a325671366481d26",
+      "reason": "Checked the complete Definition, its owning contract/page interface and all seven direct prerequisite definitions. Bounded measurable f has finite expectations under the declared common-space probability laws; for explicit integer b>=0 and N>=1 its finite chain average and all six absolute differences are defined. Each directed diagram arrow has the correct adjacent endpoint difference. The definition assumes the chain and a specified invariant law when available, asserts no existence/mixing estimate, and introduces no additional choice beyond the existing AC-dependent chain interface. The sole item edit makes the count domains explicit; all other clauses and references are preserved. This is my repair review, not an independent review of my own edit.",
+      "uncertain": false,
+      "source_urls": [],
+      "familiar": true
+    }
+  ],
+  "created_items": [],
+  "downstream": [
+    "prop-ip-bounded-posterior-functional-error",
+    "ex-ip-exact-invariant-kernel-short-run",
+    "ex-ip-low-ess-despite-correct-invariance",
+    "ex-ip-biased-pde-solver-posterior-error",
+    "alg-ip-conditional-flow-matching",
+    "lem-ip-conditional-flow-matching-population-and-exact-flow-meaning",
+    "op-ip-function-space-flow-matching-error-theory"
+  ],
+  "ledger_updates": [
+    {
+      "ledger": "canonical-defect-ledger",
+      "action": "record-fixed-finding",
+      "id": "def-ip-posterior-computation-error-budget",
+      "severity": "nonfatal",
+      "location": "Definition: burn-in length and retained sample size immediately before the empirical average",
+      "reason": "The discrete-chain average requires integer indices. Burn-in length and retained sample size already express counts, but b>=0 and N>=1 leave their domains implicit. This is a nonfatal domain-notation omission, not a failed error decomposition. The repair states b in {0,1,2,...} and N in {1,2,3,...}, retaining b=0 and N=1.",
+      "status": "fixed",
+      "uncertain": false,
+      "source_urls": [],
+      "familiar": true
+    },
+    {
+      "ledger": "canonical-defect-ledger",
+      "action": "record-open-finding",
+      "id": "prop-ip-bounded-posterior-functional-error",
+      "severity": "nonfatal",
+      "location": "Proof 1.2",
+      "affected_use": "The six scalar references run from mu_star(f) to fbar_(b,N). The signed ledger supplier defines later minus earlier, so the sum is fbar_(b,N)-mu_star(f).",
+      "invalidated_claim": "The sentence asserting that those signed adjacent differences sum to mu_star(f)-fbar_(b,N) has the sign reversed; the subsequent absolute inequality is still valid.",
+      "minimality": "Replace only that signed sum by fbar_(b,N)-mu_star(f); no Statement change or downstream propagation is necessary.",
+      "reason": "Confirmed the Step-4 digest concern directly against Proof 1.2 and def-statistical-and-computational-error-ledger: its e_j=r_j-r_(j-1) telescopes in the opposite direction. This consumer is outside this unit write assignment, so no item edit was made; route to its ordinary frontier owner.",
+      "status": "open",
+      "uncertain": false,
+      "source_urls": [],
+      "familiar": true
+    }
+  ],
+  "gate_resolutions": [],
+  "repair_notes": {
+    "status": "assigned_repair_complete",
+    "repair_complete": true,
+    "changed_items": [
+      "items/def-ip-posterior-computation-error-budget.md"
+    ],
+    "exact_interface_change": {
+      "before": "$b\\ge0$ and retained sample size $N\\ge1$, set",
+      "after": "$b\\in\\{0,1,2,\\ldots\\}$ and retained sample size $N\\in\\{1,2,3,\\ldots\\}$, set"
+    },
+    "contract": "Read the complete assigned entry in research/inverse-problems-knot-theory-all-109-2026-10-19-batch-23.proof-contracts.json. Existing zero/one/degenerate/endpoints and missing-invariant-law boundary evidence remains correct. Historical risk-review evidence was preserved, and the current focused strict contract check passes.",
+    "diagram": "Reviewed the sole tikzcd diagram: seven scalar vertices, six forward arrows and their absolute-difference labels match all six component formulas. No crossing, composition or sign claim is made by the arrows.",
+    "consumer_dispositions": [
+      {
+        "id": "prop-ip-bounded-posterior-functional-error",
+        "path": "items/prop-ip-bounded-posterior-functional-error.md",
+        "disposition": "unaffected_by_integer_domain_clarification",
+        "affected_use": "Statement stationary branch and Proof 1.3 use the inherited average fbar_(b,N) and its N-term covariance expansion; F3 and Proof 1.2 use the six adjacent absolute differences. The explicit count domains make these expressions well-defined and leave the variance and pathwise inequalities unchanged. Its separately observed signed-orientation sentence needs an owner proof-only correction.",
+        "route": "ordinary_frontier_owner"
+      },
+      {
+        "id": "ex-ip-exact-invariant-kernel-short-run",
+        "path": "items/ex-ip-exact-invariant-kernel-short-run.md",
+        "disposition": "unaffected_by_integer_domain_clarification",
+        "affected_use": "Example retains the next N=100 draws from time zero, and F4 / Verification 3.1 identify the positive expected average as the burn-in term. Here b=0 and N=100 satisfy the clarified domains; the invariant-law discrepancy and finite-run bias remain exactly as stated.",
+        "route": "ordinary_frontier_owner"
+      },
+      {
+        "id": "ex-ip-low-ess-despite-correct-invariance",
+        "path": "items/ex-ip-low-ess-despite-correct-invariance.md",
+        "disposition": "unaffected_by_integer_domain_clarification",
+        "affected_use": "The deps edge names the budget; the Example uses N=10,000 draws and compares exact target invariance with theoretical functional ESS. Its Verification relies on the separate stationary variance proposition, not a noninteger-index budget; the explicit count domains preserve this use.",
+        "route": "ordinary_frontier_owner"
+      },
+      {
+        "id": "ex-ip-biased-pde-solver-posterior-error",
+        "path": "items/ex-ip-biased-pde-solver-posterior-error.md",
+        "disposition": "unaffected_by_integer_domain_clarification",
+        "affected_use": "Example references, F1 and Verification 3.1 use delta_solver as the difference between exact-model and biased-solver posterior expectations. This deterministic stage comparison uses neither b nor N and is unchanged by their explicit count domains.",
+        "route": "ordinary_frontier_owner"
+      },
+      {
+        "id": "alg-ip-conditional-flow-matching",
+        "path": "items/alg-ip-conditional-flow-matching.md",
+        "disposition": "unaffected_by_integer_domain_clarification",
+        "affected_use": "Definition final paragraph, Definition references and F7 invoke the six-term ledger only when applicable, and explicitly deny that it supplies regression or optimizer error estimates. No noninteger burn-in or sample average is used; these qualifications remain sound.",
+        "route": "ordinary_frontier_owner"
+      },
+      {
+        "id": "lem-ip-conditional-flow-matching-population-and-exact-flow-meaning",
+        "path": "items/lem-ip-conditional-flow-matching-population-and-exact-flow-meaning.md",
+        "disposition": "unaffected_by_integer_domain_clarification",
+        "affected_use": "F7 and Proof 2.1 state that the six-term bookkeeping budget supplies no missing regression or optimizer estimate. The clarified integer counts do not affect this negative claim or the exact-flow conditional-pushforward argument.",
+        "route": "ordinary_frontier_owner"
+      },
+      {
+        "id": "op-ip-function-space-flow-matching-error-theory",
+        "path": "items/op-ip-function-space-flow-matching-error-theory.md",
+        "disposition": "unaffected_by_integer_domain_clarification",
+        "affected_use": "Open problem references describe the budget as six-term telescoping bookkeeping that does not estimate its components. The problem seeks separate posterior, solver and learned-risk Wasserstein bounds, and makes no noninteger use of the retained-chain average.",
+        "route": "ordinary_frontier_owner"
+      }
+    ],
+    "page_interface": "The owning A/B pages have empty bodies and preserve compact-v1 and their inventories. Direct page prerequisites in conditional-flow-matching-for-inverse-posteriors and bayesian-inverse-experimental-design-and-information-gain do not promise noninteger sample domains.",
+    "published_ledger": "No assigned or affected direct consumer is published or outside the frozen frontier. No new published-consumer ledger amendment is proposed; the digest already carries its outside published-supplier presentation alerts for the owner.",
+    "sources_consulted": [
+      "items/def-axiom-of-choice.md",
+      "items/def-expectation-of-a-nonnegative-or-integrable-random-variable.md",
+      "items/def-invariant-and-stationary-distribution-for-a-markov-kernel.md",
+      "items/def-measure-kernel-and-probability-kernel.md",
+      "items/def-probability-measure.md",
+      "items/def-statistical-and-computational-error-ledger.md",
+      "items/def-time-homogeneous-markov-chain-with-transition-kernel.md"
+    ],
+    "external_reading": "No external source was consulted or claimed. The repaired integer-index convention and adjacent-difference bookkeeping are familiar elementary mathematics.",
+    "checks": [
+      {
+        "command": "node tools/rendercheck.mjs items/def-ip-posterior-computation-error-budget.md --json",
+        "exit_code": 0,
+        "result": "1 file; errors=[], warnings=[]"
+      },
+      {
+        "command": "node tools/tsx-run.mjs tools/precheck.mts items/def-ip-posterior-computation-error-budget.md --json",
+        "exit_code": 0,
+        "result": "1 file, 0 phase proofs checked, 0 failures; not-applicable"
+      },
+      {
+        "command": "node tools/proof-contract.mjs research/inverse-problems-knot-theory-all-109-2026-10-19-batch-23.proof-contracts.json --strict --items def-ip-posterior-computation-error-budget --json",
+        "exit_code": 0,
+        "result": "ok=true; assigned scope checked; errors=[], warnings=[]"
+      },
+      {
+        "command": "node tools/proof-layout.mjs items/def-ip-posterior-computation-error-budget.md",
+        "exit_code": 0,
+        "result": "1 item, 0 steps, 0 defects"
+      },
+      {
+        "command": "Per-item inspectStatement(id, definition, body) from tools/statement-first.mjs",
+        "exit_code": 0,
+        "result": "1 item; errors=[]"
+      },
+      {
+        "command": "Exact owning manifest Statement/Definition comparison and current itemHashGuard check",
+        "exit_code": 0,
+        "result": "Complete Definition equals manifest statement; current item guard equals captured post_sha256."
+      }
+    ],
+    "next_action": "Hand off to the controller for ordinary frontier consumer routing, including the unassigned proposition proof-sign correction, and required current certification/judging. No judges, stamps, round state or certificates were written.",
+    "manifest_integration": "Acquired the shared-write lock, reread the current owning batch-23 manifest, replaced only its exact integer-domain clause, verified parsed JSON/all other fields, and released the lock. Checked that the complete manifest statement equals the current Definition.",
+    "review_context_capture": "Ran the required review-contexts command immediately on completing this item review. Preserved both emitted hashes. The subsequent manifest-only mirror edit changes no item or supplier carrier and does not refresh the review."
+  }
+}

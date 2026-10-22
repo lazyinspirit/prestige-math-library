@@ -21,6 +21,10 @@ sources:
       locator: "§2, printed pp. 36–37; Dehn twists in the Heegaard gluing map"
 verification:
   precheck: n/a
+  judge:
+    model: "gpt-6-luna"
+    verdict: pass
+    date: 2026-10-22
 ---
 
 ## Definition

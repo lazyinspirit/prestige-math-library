@@ -21,8 +21,8 @@ sources:
 
 ## Definition
 
-Assume the Axiom of Choice The Axiom of Choice. A real stochastic process
-$X=(X_t)_{t\in I}$ Stochastic processes and their finite-dimensional distributions
+Assume the Axiom of Choice. A real stochastic process
+$X=(X_t)_{t\in I}$
 is a **Gaussian process** if, for every integer $n\ge 1$, every time list
 $t_1,\ldots,t_n\in I$, and every $a_1,\ldots,a_n\in\mathbb R$, the random
 variable

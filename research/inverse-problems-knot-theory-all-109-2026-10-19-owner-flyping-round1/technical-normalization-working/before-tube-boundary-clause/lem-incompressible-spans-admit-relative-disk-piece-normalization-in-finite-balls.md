@@ -1,0 +1,74 @@
+---
+id: lem-incompressible-spans-admit-relative-disk-piece-normalization-in-finite-balls
+kind: lemma
+title: "Incompressible spans admit relative disk-piece normalization in finite balls"
+status: draft
+origin: pipeline
+pipeline_run: inverse-problems-knot-theory-all-109-2026-10-19
+deps:
+  - def-countable-choice
+  - def-split-link
+  - thm-smooth-schoenflies-for-embedded-two-sphere-in-s-three
+  - lem-smooth-ball-windows-and-boundary-disk-absorption
+  - lem-choice-free-isotopy-extension-for-a-compact-smooth-source
+  - lem-nondisk-proper-surface-in-a-ball-has-a-compressing-disk
+justified_by: []
+aliases: []
+proof_strategy: direct
+axiom_use: "Countable choice is inherited from smooth sphere, ball-window and ball-compression suppliers. The disk-replacement loop is bounded by the initial finite intersection-circle count."
+provenance:
+  statement: ai-altered
+  proof: ai-altered
+sources:
+  references:
+    - title: "Thomas Kindred, A geometric proof of the flyping theorem, proof of Lemma3.3, PDF p.41; finite relative disk-piece proof supplied here"
+      url: "https://arxiv.org/pdf/2008.06490v3"
+---
+
+## Statement
+
+Assume countable choice. Let $L\subset S^3$ be a nonsplit smooth link and let $F$ be a compact smoothly embedded spanning surface with $\partial F=L$ and no closed components. Assume geometric incompressibility away from $L$: every smooth embedded disk $D$ with $D\cap F=\partial D\subset\operatorname{int}F$, interior disjoint from $L$, and transverse boundary collar has boundary bounding a disk in $F$.
+
+Let $G$ be a compact smoothly embedded surface with no closed components, with boundary contained in $L$. Suppose $F\cap G$ away from their common boundary is a finite union of properly embedded transverse arcs of $F$, whose ends lie on $L$. The empty obstacle is allowed.
+
+First, if a supplied disk $D$ as above is also disjoint from $G$, its boundary bounds a disk $E\subset\operatorname{int}F$ disjoint from $G$. Replacing $E$ by an arbitrarily close copy of $D$, with a transverse collar push and smooth rounding, is realized by a smooth ambient isotopy fixed pointwise on $L\cup G$. The surface is unchanged outside $E$ and a small collar of its boundary.
+
+A supplied closed tubular neighborhood $N$ of $L$ may additionally be kept fixed: assume $F\cap N$ and $G\cap N$ are their product boundary annuli, and the supplied disk is disjoint from $N$. Then the replacement isotopy is fixed pointwise on $N\cup G$.
+
+One may also fix a supplied finite union $Q$ of compact connected sets, each meeting $L\cup G$, provided every connected component of $F\cap Q$ meets $L\cup G$ and the replacement disk $D$ is disjoint from $Q$.
+
+Consequently, let $H_1,\ldots,H_s$ be supplied smooth closed balls, disjoint from $L$, with pairwise disjoint interiors and $\operatorname{int}H_i\cap G=\varnothing$. Assume $F$ is transverse to each $\partial H_i$. There is a smooth ambient isotopy fixed on $L\cup G$ after which every component of every $F\cap H_i$ is a disk. Throughout, $F$ remains transverse to each ball boundary. Each nontrivial disk replacement strictly decreases $\sum_i |F\cap\partial H_i|$, the sum of the numbers of intersection circles; hence at most its initial value many replacements are needed. If the optional $N$ is supplied and every chamber is disjoint from $N$, this normalization is also fixed on $N$. If the optional $Q$ satisfies the preceding incidence assumptions and every chamber interior is disjoint from $Q$, the normalization is fixed pointwise on $Q$ as well. Balls with corners are included only when actual compatible smooth roundings and their transverse traces have been supplied; the assertion does not construct those input roundings.
+
+## Statement references
+
+[[def-countable-choice]]
+
+[[def-split-link]]
+
+## Facts & Assumptions
+
+**Given:** Countable choice, the nonsplit link, the geometrically incompressible spanning surface, the fixed obstacle with proper intersection arcs, and either the supplied replacement disk or the finite transverse ball family.
+
+[F1] A smooth sphere in $S^3$ has compatible smooth ball parameters on both sides. A sphere disjoint from a nonsplit link has a ball side disjoint from the link. ([[thm-smooth-schoenflies-for-embedded-two-sphere-in-s-three]], [[def-split-link]])
+
+[F2] A ball with a supplied boundary disk is a standard ball-window pair. Attaching a short disk collar and smoothing preserves its ball type. In the actual window parameters a thin ball bulge is a smooth graph over its window, and may be flattened by interpolation of its height; the construction is relative to the outside collar. ([[lem-smooth-ball-windows-and-boundary-disk-absorption]], Proof3.1–5.1)
+
+[F3] A smooth compact-source embedding isotopy extends to an ambient isotopy supported in any prescribed open neighborhood of its compact track, after making time stationary at its endpoints. ([[lem-choice-free-isotopy-extension-for-a-compact-smooth-source]])
+
+[F4] A compact neat proper surface without closed components in a supplied smooth ball has a geometric compressing disk whenever it has a nondisk component. The disk's boundary is essential in the whole ball piece and its interior misses that piece. ([[lem-nondisk-proper-surface-in-a-ball-has-a-compressing-disk]])
+
+## Proof
+
+1.1 By geometric incompressibility, $c=\partial D$ bounds a disk $E$ in $F$. It lies in $\operatorname{int}F$, because $c$ is an interior regular circle and the disk it bounds is a subsurface disk. Since $c$ misses $G$, every component of $(F\cap G)\setminus L$ meeting $E$ would lie wholly in its interior: it cannot cross $c$. Such a component is a proper arc with endpoints on $L$, whereas $E$ misses $L$. Thus $E\cap G=\varnothing$. If the optional $N$ is supplied, each product boundary annulus of $F\cap N$ is connected, misses $c$, and meets $L$ outside $E$; hence it misses $E$ entirely. Thus $E$ misses $N$, as does the supplied $D$. Likewise, if $Q$ is supplied, $c$ misses $Q$; any connected component of $F\cap Q$ meeting $\operatorname{int}E$ would lie wholly inside $E$ and yet meet $L\cup G$, a contradiction. Thus $E$ and $D$ also miss $Q$. The disk $D$ also misses $G$ and $L$, so the sphere $E\cup D$, rounded along its corner, has a neighborhood disjoint from $G\cup L$ and, when supplied, $N$ and $Q$. [given, construct]
+
+2.1 Carry out two-copy surgery: remove a narrow annulus about $c$ in $F$, cap its two sides by nearby copies of $D$, and round. One resulting component is the sphere $S_0$ obtained from $E\cup D$; the other part $F_1$ is $F$ with the disk replacement. The sphere and $F_1$ are disjoint, and $S_0$ misses $G\cup L$, by step1.1. This disk replacement leaves the component count and all boundary circles of $F$ unchanged, so each component of $F_1$ still meets $L$. By [F1], $S_0$ has a closed ball side $V$ with no link points. Every component of $F_1$, being disjoint from $S_0$ and having boundary outside $V$, lies outside $V$. Likewise every component of $G$ lies outside $V$, because it has nonempty boundary in $L$ and misses $S_0$. Every component of the optional tube $N$ contains a component of $L$ and misses $S_0$, so $N$ also lies outside $V$. Each supplied connected piece of $Q$ misses $S_0$ and meets $L\cup G$ outside $V$, so it too is outside $V$. Consequently the interior of $V$ contains neither $F_1$ nor $G$ nor the optional $N$ or $Q$. [given, step 1.1, F1, construct]
+
+3.1 Reverse the short surgery tube between $S_0$ and $F_1$. Absorb that tube's product collar into $V$, using [F2]. It gives a ball $V'$ meeting $F_1$ exactly in one disk window; its remaining boundary, with the window's edge rounded, is the old disk bulge. Its interior misses $F_1$, and the entire ball and its short attaching collar miss $L\cup G$ and the optional $N$ and $Q$. Choose the collars small enough to retain these disjointness properties. This is the actual empty ball needed for the replacement; no assertion that a homotopy disk may pass through the other surface is used. [step 2.1, F2, construct]
+
+4.1 In the standard window and collar parameters from [F2], make the cap thin by positive normal rescaling. The bulged disk is then $t=\gamma(x)$ over a planar disk, where $\gamma$ is smooth and vanishes on its outer collar; the window is $t=0$. The graphs $t=(1-u)\gamma(x)$ give a smooth embedding isotopy agreeing with the fixed rest of the surface on that collar. The ball interior contains no other surface, so these graphs remain disjoint from the unchanged part. Its track and a sufficiently small open neighborhood miss $L\cup G$ and the optional $N$ and $Q$. Apply [F3] with that neighborhood, obtaining the claimed ambient isotopy fixed there. Reversing the flattening if necessary carries the original $F$ to $F_1$. All auxiliary copies and roundings may be made arbitrarily close to the given $D$, and all changes outside $E$ are confined to an arbitrarily small collar of $c$. This proves the first assertion. [step 1.1, step 3.1, F2, F3, construct]
+
+5.1 For the finite-ball assertion, $F\cap H_i$ is a compact neat proper surface after using its transverse boundary chart. It has no closed components: a closed component would be an open and closed component of the whole surface $F$, since it has no intersection with $\partial H_i$, contrary to the fact that every component of $F$ has boundary on $L$ outside $H_i$. If a nondisk component occurs, [F4] supplies a disk $D\subset\operatorname{int}H_i$ whose boundary $c$ is essential in $F\cap H_i$ and whose interior misses $F$. It also misses $G$, since the chamber interior does, and misses $Q$ when that optional set is supplied. Its transverse collar may be chosen in the same chamber. Thus steps1.1–4.1 apply. [given, F4, step 1.1, step 4.1, construct]
+
+6.1 The disk $E\subset F$ from step1.1 cannot be contained in $H_i$: otherwise it would be contained in the component of $F\cap H_i$ containing $c$, contradicting the chosen essentiality. Since its boundary lies in $\operatorname{int}H_i$, it must cross $\partial H_i$. For every $j$, the boundary $c$ misses $\partial H_j$, because $c\subset\operatorname{int}H_i$ and distinct ball interiors are disjoint. Therefore every component of $F\cap\partial H_j$ meeting $E$ lies wholly inside $E$. Each such intersection is a complete circle, and at least one occurs for $j=i$. Choose the new disk and its attaching collar wholly in $\operatorname{int}H_i$, hence disjoint from every ball boundary. The replacement removes precisely those trace circles contained in $E$ and adds none. It leaves all other traces unchanged and retains transversality. Thus the finite integer $\sum_j |F\cap\partial H_j|$ strictly decreases. [given, step 1.1, step 4.1, step 5.1, construct, algebra]
+
+7.1 Every replacement is an ambient isotopy fixed on $L\cup G$ and on the optional $N$ and $Q$ under their stated chamber-disjointness assumptions, so it preserves geometric incompressibility, the absence of closed components and the exact proper-arc intersection with $G$, and the components and incidences of $F\cap Q$ when supplied. Repeat step5.1 whenever a nondisk chamber piece remains. Step6.1 bounds the number of repetitions by the initial nonnegative trace count. At termination no nondisk piece remains; if one did, [F4] and the same construction would yield another strict decrease. Concatenate the finitely many smooth ambient isotopies, with stationary time ends. This proves simultaneous disk-piece normalization for the entire supplied family, including the empty family. It uses the actual rounded transverse ball data in the Statement and makes no claim that arbitrary unprepared corner data already satisfy them. [given, step 5.1, step 6.1, F3, F4, construct, algebra] ∎

@@ -25,6 +25,11 @@ axiom_use: "AC is required by the library's standard-normal law definition; the 
 provenance:
   statement: ai-generated
   proof: ai-altered
+verification:
+  judge:
+    model: "gpt-6-luna"
+    verdict: pass
+    date: 2026-10-22
 sources:
   references:
     - title: "M. Dashti and A. M. Stuart, The Bayesian Approach to Inverse Problems (arXiv:1302.6989)"

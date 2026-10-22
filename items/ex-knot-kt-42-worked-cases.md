@@ -36,7 +36,7 @@ sources:
 
 ## Example
 
-Let $T_{2,3}$ be the right-handed trefoil and $-T_{2,3}$ its reverse mirror. A filtered basis for $\mathrm{CFK}^{\infty}(T_{2,3})$ is $x_0,x_1,x_2$ with $(M,A)(x_0)=(0,1)$, $(M,A)(x_1)=(-1,0)$, $(M,A)(x_2)=(-2,-1)$ and differential $\partial x_1=Ux_0+x_2$, $\partial x_0=\partial x_2=0$. Under the conventions of this page,
+For the knot-level assertions, assume the Axiom of Countable Choice. Let $T_{2,3}$ be the right-handed trefoil and $-T_{2,3}$ its reverse mirror. A filtered basis for $\mathrm{CFK}^{\infty}(T_{2,3})$ is $x_0,x_1,x_2$ with $(M,A)(x_0)=(0,1)$, $(M,A)(x_1)=(-1,0)$, $(M,A)(x_2)=(-2,-1)$ and differential $\partial x_1=Ux_0+x_2$, $\partial x_0=\partial x_2=0$. Under the conventions of this page,
 $$ \epsilon(T_{2,3})=1,\qquad \Upsilon_{T_{2,3}}(t)=\begin{cases}-t,&0\le t\le1,\\ t-2,&1\le t\le2.\end{cases} $$
 The graph has its unique interior breakpoint at $t=1$. For the reverse mirror, $\epsilon(-T_{2,3})=-1$ and $\Upsilon_{-T_{2,3}}(t)=-\Upsilon_{T_{2,3}}(t)$.
 
@@ -70,9 +70,9 @@ The horizontal and vertical coordinates are the algebraic and Alexander filtrati
 
 ## Facts & Assumptions
 
-**Given:** The displayed staircase complex, the epsilon map convention, and the Upsilon cycle-minimax definition.
+**Given:** The displayed staircase complex, the epsilon map convention, and the Upsilon cycle-minimax definition. Countable Choice is assumed for the knot-level constructions and geometric comparisons; finite algebra on the stated supplied complexes and maps requires no further choice.
 
-[F1] [[def-epsilon-from-filtered-knot-floer-complex]]: epsilon is $1$ when the distinguished vertical class is a horizontal boundary, $-1$ when it is not a horizontal cycle, and $0$ when it is a horizontal cycle but not a boundary.
+[F1] [[def-epsilon-from-filtered-knot-floer-complex]]: at $s=\tau$, epsilon is $1$ when $F_s=0$, $-1$ when $G_s=0$, and $0$ when both homology maps are nonzero. These are tests on the exact hook maps, not on an arbitrary representative of the vertical class.
 
 [F2] [[def-upsilon-function-from-filtered-complex]]: $\Upsilon=-2\nu_t$, where $\nu_t$ is the minimum $F_t$-level of a Maslov-zero cycle representing the normalized generator.
 
@@ -88,7 +88,7 @@ The horizontal and vertical coordinates are the algebraic and Alexander filtrati
 
 1.2 A Maslov-zero cycle representing the normalized total generator is either $x_0$ or $U^{-1}x_2$: the Maslov-zero chain group in the displayed basis is spanned by these two cycles, and $\partial(U^{-1}x_1)=x_0+U^{-1}x_2$ makes their homology classes equal. Their coordinates are $(0,1)$ and $(1,0)$, so their filtration levels are $t/2$ and $1-t/2$. Therefore $\nu_t=\min(t/2,1-t/2)$ and $\Upsilon_{T_{2,3}}(t)=-2\nu_t$, which gives the stated two linear pieces. They agree at $t=1$, where the slope changes. [given, F2, algebra]
 
-2.1 The algebraic Laurent dual of the displayed complex has generators $x_0^*,x_1^*,x_2^*$ at Maslov/Alexander values $(0,-1),(1,0),(2,1)$ and differential $\partial x_0^*=Ux_1^*$, $\partial x_2^*=x_1^*$, $\partial x_1^*=0$. In its vertical complex $x_2^*$ maps to $x_1^*$, leaving $x_0^*$ as generator at Alexander level $-1$. At $s=-1$, the $F_{-1}$ target kills $Ux_1^*$ because $i<0$, so $x_0^*$ becomes a cycle; its only degree-one basis vector is $x_1^*$ with zero differential, so the class is not a boundary and $F_{-1}\ne0$. The $G_{-1}$ source has only $x_0^*$ in degree zero, and its differential $Ux_1^*$ is retained; $Ux_2^*$ lies above $j=-1$ and is excluded. Hence $G_{-1}=0$ and the exact epsilon convention gives $-1$. The degree-zero chain space has basis $x_0^*,Ux_2^*$; their individual differentials are both $Ux_1^*$, so the only nonzero cycle is $x_0^*+Ux_2^*$, and it represents the normalized generator. Its two terms have coordinates $(0,-1)$ and $(-1,0)$, giving $\nu_t^*=\max(-t/2,-1+t/2)=-\min(t/2,1-t/2)$. Thus its Upsilon is the negative of the value in step 1.2 by an explicit cycle computation. Fact [F3] identifies the dual of an ADMITTED knot complex with its actual reverse-mirror complex. Both numerical knot-level values here still require admission of this specific staircase from an actual trefoil diagram. [F1, F2, F3, step 1.2, algebra]
+2.1 The algebraic Laurent dual of the displayed complex has generators $x_0^*,x_1^*,x_2^*$ at Maslov/Alexander values $(0,-1),(1,0),(2,1)$ and differential $\partial x_0^*=Ux_1^*$, $\partial x_2^*=x_1^*$, $\partial x_1^*=0$. In its vertical complex $x_2^*$ maps to $x_1^*$, leaving $x_0^*$ as generator at Alexander level $-1$. At $s=-1$, the $F_{-1}$ target kills $Ux_1^*$ because $i<0$, so $x_0^*$ becomes a cycle; its only degree-one basis vector is $x_1^*$ with zero differential, so the class is not a boundary and $F_{-1}\ne0$. The $G_{-1}$ source has only $x_0^*$ in degree zero, and its differential $Ux_1^*$ is retained; $Ux_2^*$ lies above $j=-1$ and is excluded. Hence $G_{-1}=0$ and the exact epsilon convention gives $-1$. The degree-zero chain space has basis $x_0^*,Ux_2^*$; their individual differentials are both $Ux_1^*$, so the only nonzero cycle is $x_0^*+Ux_2^*$, and it represents the normalized generator. Its two terms have coordinates $(0,-1)$ and $(-1,0)$, giving $\nu_t^*=\max(-t/2,-1+t/2)=-\min(t/2,1-t/2)$. Thus its Upsilon is the negative of the value in step 1.2 by an explicit cycle computation. Fact [F3] identifies the dual of the admitted trefoil complex from [F4] with its actual reverse-mirror complex, establishing both knot-level values. [F1, F2, F3, F4, step 1.2, algebra]
 
 3.1 Under [F5], the same calculation is obtained from the diagonal grid complex after accounting for its $W^{\otimes(n-1)}$ factors, whose nonzero t-grade shifts are nonpositive on $[0,1]$. The factor is retained and does not change the maximal non-torsion grading. [given, F5, step 1.2, algebra] ∎
 

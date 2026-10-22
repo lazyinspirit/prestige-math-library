@@ -22,7 +22,7 @@ proof_strategy: direct
 axiom_use: "Assumes AC_omega through link-level Khovanov homology and the oriented link invariance theorem; no full Axiom of Choice is used."
 provenance:
   statement: literature-derived
-  proof: not-supplied
+  proof: ai-altered
 sources:
   references:
     - title: "Dror Bar-Natan, Khovanov's homology for tangles and cobordisms, Theorems 4–5 and §8.3"
@@ -123,4 +123,3 @@ The sweep organization follows Morrison–Walker–Wedrich, *Khovanov–Rozansky
 ## Remarks references
 
 [check-four-rIII-matrices.py](../research/inverse-problems-knot-theory-all-109-2026-10-19-owner-quantum-original-repairs/spherical-sweep/check-four-rIII-matrices.py)
-

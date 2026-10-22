@@ -1,0 +1,37 @@
+# The marked double and the reflection-block operation
+
+This is new characteristic-product topology. It does not apply the accepted knot-exterior JSJ theorem to another category. The newly read Jaco Chapter IX explicitly assumes a Haken ambient manifold with incompressible whole boundary (or no boundary). The sutured M itself need not satisfy that hypothesis. The following operations address that distinction at their actual scope. Neither asserts an equivariant characteristic enclosure before constructing one.
+
+## Construct the correct incompressible-boundary ambient manifold
+
+Suppose M is connected, irreducible, R₊ and R₋ are connected incompressible faces with one boundary component each, and they have positive genus. This is the non-disk branch relevant after the integral homology-product reduction and connection of sutures. Glue a second oppositely oriented copy of M along the two faces, by the identity of their markings. Call the result N. Its boundary is the torus obtained by doubling the annular suture along its two boundary circles. The copy-exchanging involution τ is smooth after rounding collars; its fixed set is exactly the two embedded faces R₊ and R₋. There are no isolated fixed points.
+
+The graph of spaces has two vertex spaces M and two edge spaces R₊,R₋. Their edge-group injections follow from incompressibility. An elementary proof of the normal form is obtained by lifting the graph to its tree: a reduced edge word traces a nonbacktracking path in that tree, so cannot close, while a word in a vertex group acts in its vertex copy exactly as before. This proves vertex and edge injectivity without replacing the boundary pattern by tori in the original M.
+
+Write c for the nontrivial boundary loop of a face and t for the boundary-torus path going from R₊ to R₋ through one suture annulus and back through the other. The face boundary loop is nontrivial since its face has positive genus; it remains nontrivial in M by incompressibility. The torus identifies c and t as commuting. If c^p t^q were trivial with q≠0, its graph word would be cyclically reduced of length 2|q|, contrary to the tree normal form. If q=0 and p≠0, edge injectivity and torsion-freeness of the surface group give the contradiction. Thus π₁(∂N)=Z² injects in π₁(N); the boundary torus is incompressible.
+
+N is irreducible. Put a sphere transverse to the two faces. An innermost circle on the sphere bounds a disk in a vertex M; incompressibility of the face gives its disk on that face. Disk surgery using those two disks reduces the intersection number, with any sphere produced in the vertex M bounding a ball by irreducibility. Induction reduces to spheres entirely in a vertex M, which bound balls. Undo the surgeries by joining those balls along the surgery collars; a tree of balls joined by disjoint disk collars is a ball. This reconstructs a ball for the original sphere. The faces remain incompressible in N by the graph normal form, and they are not disks. Hence N is an actual Haken manifold with incompressible torus boundary, in the category used by the new Chapter IX proof. This is a construction of the hypothesis, not a use of a torus-only theorem on M.
+
+If the connected faces in this one-suture branch are disks, their union with the suture is a sphere. Irreducibility then makes M a ball: push that boundary sphere into the interior, use its bounding ball, and its boundary collar identifies the remaining side. This is already the product case and does not require the double operation.
+
+## A product region doubles to a very particular Seifert block
+
+For an actual embedded product region Φ×I in M with its two horizontal faces in R₋ and R₊, double it using the same face markings. The result is the actual embedded Φ×S¹ in N, with τ acting by reflection of the S¹ coordinate. The two reflection fixed sections lie in the two distinct global fixed faces. Its fundamental group injects: π₁Φ injects into a face by the product-region incompressibility, and a nonzero circle power is a reduced two-edge word in the same graph-of-spaces normal form. Thus this is not merely a homologically guessed Seifert block. The marked doubled product determines both its fiber direction and its two fixed sections.
+
+## Restrict a genuine invariant reflection Seifert block
+
+Now suppose a Seifert block V⊂N has actually been constructed so that τ preserves V and its circle fibers, and suppose its induced base involution is the identity on a nonempty open set coming from one such doubled product region. Suppose V is connected and this base action has order at most two. Give its base orbifold an invariant metric by averaging a smooth orbifold metric. The induced map is an isometry. An isometry which is the identity on a nonempty open set is the identity everywhere: it fixes that open set's tangent frames and hence fixes every geodesic continued from it; connectedness gives the conclusion. Thus τ acts over the identity of the entire base and reverses its fiber orientation.
+
+There can be no exceptional fiber. In the local model
+
+    (D²×S¹)/⟨(z,t)↦(exp(2πi/p)z,t+2πq/p)⟩,
+
+with gcd(p,q)=1, a fiber-reversing lift over the identity of the base has the form (z,t)↦(z,−t+φ(z)), up to a deck rotation. Equivariance requires φ(exp(2πi/p)z)−φ(z)=4πq/p modulo 2π. Let z tend to zero. Continuity gives p|2q, hence p divides two. For p=2 the involution has two fixed points on the exceptional core modulo its period π. At one of them its lift is an ordinary fiber reflection, with derivative (+1,+1,−1). At the other its lift differs by the nontrivial deck transformation, so its derivative is (−1,−1,−1). That point is isolated in Fix(τ). The actual double has no isolated fixed points, so p=2 is impossible. Only p=1 remains.
+
+The two fixed points on each regular fiber consequently form an unbranched two-sheeted covering of the base. On the nonempty open doubled-product part, one sheet lies in global R₊ and one in global R₋. They cannot be exchanged by monodromy: a path exchanging them would give a path in Fix(τ) joining those two distinct global components. They therefore give two separate sections over the connected base. The quotient V/τ is an interval bundle with separately specified upper and lower sections. Give each fiber an invariant metric and parametrize the quotient arc by normalized length from the lower section. This is a global trivialization, so V/τ is the actual oriented product E×I, with E embedded as a subsurface of R₊ (and of R₋), retaining the two boundary markings.
+
+This rules out the exceptional-fiber and endpoint-exchange ambiguities that an unmarked Seifert enclosure would leave unresolved. It proves the needed product conclusion **once an actual invariant fiber-preserving enclosing block has been constructed**.
+
+## Exact next construction
+
+The next operation must construct the characteristic Seifert carrier of the double invariant under τ, with the doubled product regions absorbed into its fiber-reflection blocks, and must realize their enclosure by the required ambient isotopies. Uniqueness up to some ambient isotopy is not yet a literal invariant carrier, and a homotopy of product maps into a Seifert carrier is not yet the required ambient enclosure. The operations above deliberately do not identify these two missing assertions with a theorem in the wrong boundary category. They provide the concrete marked ambient space and the full local restriction calculation for that next construction.

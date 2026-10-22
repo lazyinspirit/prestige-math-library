@@ -26,6 +26,11 @@ axiom_use: "Assumes ACω only for the cited generic-position and oriented Reidem
 provenance:
   statement: literature-derived
   proof: ai-altered
+verification:
+  judge:
+    model: "gpt-6-luna"
+    verdict: pass
+    date: 2026-10-22
 sources:
   references:
     - title: "Józef H. Przytycki, Fundamentals of Kauffman Bracket Skein Modules, arXiv:math/9809113 (1998), §3, Lemma 3.5 and Proposition 3.6"

@@ -21,14 +21,14 @@ sources:
       locator: "§1, Examples 1–2, PDF pp. 1–2 (printed pp. 25–26)"
     - title: "B. Xi, G. Michailidis, and V. N. Nair, Estimating Network Loss Rates Using Active Tomography, Journal of the American Statistical Association 101 (2006), 1430–1448"
       url: "https://www.stat.purdue.edu/~xbw/research/xi_tomo_jasa1206.pdf"
-      locator: "§3.2, two-leaf design discussion, PDF p. 4 (printed p. 1434)"
+      locator: "§3.2, two-leaf design discussion, PDF p. 5 (printed p. 1434)"
 ---
 
 ## Example
 
 Let a rooted tree have root $o$, one shared link $e_0=(o,v)$, and two branch links $e_1=(v,r_1)$ and $e_2=(v,r_2)$ to leaf receivers $r_1,r_2$. Their success probabilities are $p_0,p_1,p_2\in(0,1)$. Compare separate unicast designs to $r_1$ and $r_2$ with a multicast design that sends each probe to both receivers and records both outcomes. For any fixed positive probe counts, the distinct parameter vectors $(1/2,1/2,1/4)$ and $(1/3,3/4,3/8)$ give the same separate-unicast laws but different multicast laws. In fact, the multicast law identifies all three link probabilities for every interior parameter vector.
 
-The diagram labels each edge by its link-success probability; the two lower vertices are the receivers.
+The diagram labels each edge by its link-success probability; the two rightmost vertices are the receivers.
 
 ```tikz
 \begin{tikzpicture}[>=stealth]
@@ -61,6 +61,7 @@ The diagram labels each edge by its link-success probability; the two lower vert
 [F3] [[def-ip-tree-probing-experiment]]: The complete experiment observes $N_d$ independent outcomes with law $P_{p,d}$ for each design, independently across designs.
 
 ## Verification
+
 
 1.1 Under unicast to $r_i$, success has probability $p_0p_i$. Both parameter vectors give $p_0p_1=1/4$ and $p_0p_2=1/8$. Independence across probes makes each unicast outcome sequence have the same Bernoulli-product law under both vectors, and the separate schemes therefore have the same joint law. [given, F1, F2, F3, algebra]
 

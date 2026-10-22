@@ -21,7 +21,7 @@ sources:
   references:
     - title: "Maarten V. de Hoop, Nikola B. Kovachki, Matti Lassas and Nicholas H. Nelsen, Extension and neural operator approximation of the electrical impedance tomography inverse map"
       url: "https://arxiv.org/pdf/2511.20361"
-      locator: "§4.3, equations (4.6)–(4.14), Lemma 4.7 and its proof, printed pp. 19–22."
+      locator: "§4.3, equations (4.6)–(4.14), Lemma 4.7 and its proof, printed pp. 27–30."
     - title: "M. Xu, Math 205B notes from a course by R. Mazzeo"
       url: "https://math.berkeley.edu/~moorxu/oldsite/notes/205b/205bmain.pdf"
       locator: "Theorem 9.3, compact Hausdorff topology and finite subcover arguments."

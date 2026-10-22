@@ -8,7 +8,7 @@ pipeline_run: inverse-problems-knot-theory-all-109-2026-10-19
 dependency_level: 6
 deps:
   - lem-ip-tweedie-mmse-jacobian-and-prox-potential
-  - def-ip-pnp-ista-with-denoiser
+  - alg-ip-pnp-ista-with-denoiser
   - thm-ip-exact-mmse-pnp-ista-stationarity
   - def-euclidean-inner-product
 justified_by: []
@@ -39,7 +39,7 @@ For $\gamma>0$, a global proximal selection of an extended-real penalty $h:\math
 
 [[lem-ip-tweedie-mmse-jacobian-and-prox-potential]]
 
-[[def-ip-pnp-ista-with-denoiser]]
+[[alg-ip-pnp-ista-with-denoiser]]
 
 [[thm-ip-exact-mmse-pnp-ista-stationarity]]
 
@@ -49,7 +49,7 @@ For $\gamma>0$, a global proximal selection of an extended-real penalty $h:\math
 
 [F1] [[lem-ip-tweedie-mmse-jacobian-and-prox-potential]]: for the exact Gaussian posterior-mean map, the constructed extended-real potential has that map as its unique global proximal minimizer.
 
-[F2] [[def-ip-pnp-ista-with-denoiser]]: PnP-ISTA permits a deterministic map $\widetilde D_\sigma$ in the denoising step.
+[F2] [[alg-ip-pnp-ista-with-denoiser]]: PnP-ISTA permits a deterministic map $\widetilde D_\sigma$ in the denoising step.
 
 [F3] [[def-euclidean-inner-product]]: on $\mathbb R$, the norm is the absolute value and the squared Euclidean distance is the square of the scalar difference.
 

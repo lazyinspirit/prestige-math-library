@@ -45,9 +45,11 @@ fails this syntax, the parsed value of $\ell$ differs from the actual number of
 letter tokens, the parsed strand count is $n=0$, or some letter index fails
 $1\le i<n$. For every other input, the algorithm terminates after finitely
 many basis-code searches, algebra operations, and skein reductions, and returns exactly
-$$-(-1)^c a^{-w}d^{n-1}\tau_n(\beta).$$
+$$-i^w(-1)^c A^{-w}\varphi\!\left(d^{n-1}\tau_n(\beta)\right)\in T_K,$$
 Here $w$ is the determinant writhe of the oriented closure, $c$ is its
-component count, and $\tau_n$ is the normalized scalar closure trace. No
+component count, $\tau_n$ is the normalized scalar closure trace over $T$, and
+$\varphi:T\to T_K$ is the algorithm's substitution
+$(a,z,d,q)\mapsto(-iA,iZ,d,q)$. No
 asymptotic complexity bound is asserted.
 
 ## Statement references
@@ -86,4 +88,4 @@ asymptotic complexity bound is asserted.
 
 1.3 Assume by strong induction that every reducer input with smaller pair terminates. Each recursive node has at most three children, and by [F3] every child has a smaller pair than its parent. Well-founded induction therefore gives a finite reduction tree for every generator-matrix column and every closed trace entry. [F2, F3, ih, induction]
 
-2.1 The recursive reductions apply the defining skein relation, and their terminal matching coordinates are unique by [F4]. Thus the finite matrix products give the coordinates of $\Phi_n(b_\beta)$ by [F5]. Pairing with the computed trace row yields $d^{-n}P(\widehat{\Phi_n(b_\beta)})=\tau_n(b_\beta)$ by [F2]. By [F6], the algorithm's $w,c$ are the determinant writhe and component count of this oriented closure. Its prescribed final multiplication is therefore exactly $-(-1)^c a^{-w}d^{n-1}\tau_n(b_\beta)$. Only powers of the units $a,d$ are inverted, so no division by $z$ occurs. [F2, F4, F5, F6, step 1.1, step 1.2, step 1.3, discharge-induction: step 1.3] ∎
+2.1 The recursive reductions apply the defining skein relation, and their terminal matching coordinates are unique by [F4]. Thus the finite matrix products give the coordinates of $\Phi_n(b_\beta)$ by [F5]. Pairing with the computed trace row yields $d^{-n}P(\widehat{\Phi_n(b_\beta)})=\tau_n(b_\beta)$ by [F2]. By [F6], the algorithm's $w,c$ are the determinant writhe and component count of this oriented closure. Under $a=-iA,z=iZ$, the relation $z(d-1)=a-a^{-1}$ becomes $Z(d-1)+A+A^{-1}=0$, and $q-q^{-1}=z$ becomes $q-q^{-1}=iZ$. The units $a,d,q$ map to units, so the substitution defines $\varphi:T\to T_K$. Step 6 is a finite symbolic substitution followed by multiplication, returning exactly $-i^w(-1)^c A^{-w}\varphi(d^{n-1}\tau_n(b_\beta))$. No division by $Z$ occurs. [F2, F4, F5, F6, step 1.1, step 1.2, step 1.3, discharge-induction: step 1.3] ∎

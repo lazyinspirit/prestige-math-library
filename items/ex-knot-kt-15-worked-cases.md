@@ -30,7 +30,7 @@ Let $V=D^2\times S^1$ have boundary meridian $\mu=\partial D^2\times\{1\}$ and l
 $$A=\begin{pmatrix}1&2\\0&1\end{pmatrix}$$
 sends $\mu\mapsto\mu$ and $\lambda\mapsto2\mu+\lambda$. Its induced torus homeomorphism extends over $V$ by $(z,w)\mapsto(w^2z,w)$ and preserves orientation.
 
-The universal-cover rectangle below has horizontal coordinate $\mu$ and vertical coordinate $\lambda$; opposite sides are identified. The red segment ends at $(2,1)$, so it represents the image $2\mu+\lambda$ of the longitude. The picture illustrates the slope convention only; the verification computes the map directly.
+The displayed rectangle is a two-unit-square window in the universal cover $\mathbb R^2$ of the torus $\mathbb R^2/\mathbb Z^2$, with horizontal coordinate $\mu$ and vertical coordinate $\lambda$. The identifications are $(x,y)\sim(x+m,y+n)$ for all integers $m,n$, so each unit square is a fundamental domain. The red lifted segment ends at $(2,1)$ and therefore represents the image $2\mu+\lambda$ of the longitude. The picture illustrates the slope convention only; the verification computes the map directly.
 
 ```tikz
 \begin{tikzpicture}[scale=0.85,>=stealth]
@@ -59,6 +59,7 @@ The universal-cover rectangle below has horizontal coordinate $\mu$ and vertical
 [F1] A torus map carrying the meridian slope to itself extends over the solid torus. [[lem-meridian-preserving-torus-homeomorphism-extends-over-solid-torus]]
 
 ## Verification
+
 
 1.1 The matrix $A$ is integral with determinant $1$, so its linear map on $\mathbb R^2/\mathbb Z^2$ is a torus homeomorphism. Its first column is $(1,0)$, hence it sends $\mu$ to $\mu$, and its second column is $(2,1)$, hence it sends $\lambda$ to $2\mu+\lambda$. [given, construct, algebra]
 

@@ -42,7 +42,7 @@ sources:
 Assume AC and let $f=(f_t)_{t\in T}$ be a real Gaussian process with mean
 $m$ and covariance kernel $k$; when $m$ and $k$ are specified as a prior,
 the canonical cylinder-space process exists by
-A mean and positive-semidefinite kernel define a Gaussian process.
+the existence theorem for a mean and a positive-semidefinite covariance kernel.
 Let $X=(x_1,\ldots,x_n)\in T^n$ and $X_*=(x_1^*,\ldots,x_p^*)\in T^p$,
 where $n,p\ge1$ and repeated indices are allowed. Write
 $f_X=(f_{x_i})_{i=1}^n$, $f_{X_*}=(f_{x_j^*})_{j=1}^p$,

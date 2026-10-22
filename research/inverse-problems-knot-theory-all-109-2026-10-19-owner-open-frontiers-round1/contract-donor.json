@@ -1,0 +1,444 @@
+{
+  "version": 1,
+  "scope": [
+    "ex-ip-integrated-score-error-misses-euler-grid-times",
+    "ex-ip-robust-ellipsoid-minimax-shift-rate",
+    "ex-ip-ideal-score-error-allows-unbounded-euler-wasserstein",
+    "ex-ip-coordinate-free-fno-inverse-risk-obstruction"
+  ],
+  "contracts": {
+    "ex-ip-integrated-score-error-misses-euler-grid-times": {
+      "risk": "high",
+      "kind": "example",
+      "citations": [],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "Completing the square in $e^{-u^2/2}e^{-(Y-u)^2/2}$ gives posterior $N(Y/2,1/2)$, so its exact credible interval is $[Y/2-r,Y/2+r]$. Under truth $\\theta\\in[-1,1]$, $Y=\\theta+G$ and the exact coverage is $c(\\theta)=P\\{|\\theta/2-G/2|\\le r\\}$. This is a continuous strictly positive function of $\\theta$, and is at most one. By compactness of $[-1,1]$ it has a positive minimum $c_*>0$. Therefore $\\delta^0_{1,1/4}\\le\\max\\{q-c_*,1-q\\}<q$.",
+          "step": "1.1",
+          "inputs": [
+            "A1",
+            "A2",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "Put $h=1/K$ and let $\\mathcal G_K=\\{1-kh:0\\le k<K\\}$. Away from this finite set of times, use the exact noised-posterior score. At each $t\\in\\mathcal G_K$ set $s_t^Y(x)=(1-x)/h-x/2$. This finite-valued jointly Borel field has zero integrated score error: its discrepancy from the exact score is supported on the finite, Lebesgue-null set $\\mathcal G_K$ in time. The noised posterior has mean $e^{-t/2}Y/2$ and variance $1-e^{-t}/2$: the integrating-factor solution of the linear forward equation is $e^{-t/2}X_0+e^{-t/2}\\int_0^te^{u/2}\\,dW_u$, whose independent Gaussian integral has variance $1-e^{-t}$ (use dyadic Brownian-increment sums and pass their Gaussian characteristic functions to the mean-square limit). Its exact score is therefore affine in $x$, so the inner Gaussian error integral is finite at every time. The zero-error conclusion holds for every observation and hence uniformly over all truths.",
+          "step": "2.1",
+          "inputs": [
+            "given",
+            "step 1.1",
+            "construct",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-2",
+          "claim": "The variable $\\theta/2-G/2$ has a density bounded by $2/\\sqrt{2\\pi}$ uniformly in $\\theta$. The event $\\bigl||\\theta/2-G/2|-r\\bigr|\\le u$ is contained in two intervals of total length at most $4u$. Thus its probability is at most $8u/\\sqrt{2\\pi}$. The required margin holds, for example with $\\kappa=1$, $u_0=1$ and $C_{\\mathrm{ac}}=8/\\sqrt{2\\pi}$.",
+          "step": "2.2",
+          "inputs": [
+            "A1",
+            "step 1.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "claim": "At every Euler step the deterministic update becomes $x+h(x/2+s_t^Y(x))=1$. Thus each new state is $1+\\sqrt h\\,\\zeta_k$, independently of its input and of $Y$, and the terminal law is $N(1,h)$. For $M=K$, write the independent terminal draws as $1+K^{-1/2}G_i$. If $V_K=\\max_{i\\le K}|G_i|$, then the empirical center differs from one by at most $K^{-1/2}V_K$ and every empirical distance to that center is at most $2K^{-1/2}V_K$. Hence the empirical radius has that same upper bound.",
+          "step": "3.1",
+          "inputs": [
+            "A1",
+            "step 2.1",
+            "construct",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-4-1",
+          "claim": "The Gaussian density gives $P\\{|G|>v\\}\\le2e^{-v^2/2}$ for $v\\ge1$: integrate $x\\phi(x)/v$ on $[v,\\infty)$ and use $1/(v\\sqrt{2\\pi})\\le1$. The union bound then gives $P\\{V_K>K^{1/4}\\}\\le2K e^{-\\sqrt K/2}\\to0$. On the complementary event the center is at least $1-K^{-1/4}$ and the radius at most $2K^{-1/4}$, so for all sufficiently large $K$ the empirical interval excludes truth zero. Its coverage therefore tends to zero, and its deviation from $q$ tends to $q>\\delta^0_{1,1/4}$. Since both error norms are zero and $K^{-1},M^{-1/2}\\to0$, a uniformly vanishing $\\Phi$ would contradict this strict gap.",
+          "step": "4.1",
+          "inputs": [
+            "A1",
+            "step 1.1",
+            "step 2.2",
+            "step 3.1",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "No separate empty boundary claim beyond the explicit domain and case divisions of the Example is asserted."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "The witness has exactly zero score and matrix error at all K; proof gives nonvanishing coverage gap."
+        },
+        {
+          "case": "one",
+          "status": "not_applicable",
+          "reason": "No separate one boundary claim beyond the explicit domain and case divisions of the Example is asserted."
+        },
+        {
+          "case": "degenerate",
+          "status": "not_applicable",
+          "reason": "No separate degenerate boundary claim beyond the explicit domain and case divisions of the Example is asserted."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "No separate endpoints boundary claim beyond the explicit domain and case divisions of the Example is asserted."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "All laws and interval/cutoff/finite-prior constructions are specified explicitly; no choice axiom is added."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "No separate iff-forward boundary claim beyond the explicit domain and case divisions of the Example is asserted."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "No separate iff-reverse boundary claim beyond the explicit domain and case divisions of the Example is asserted."
+        }
+      ]
+    },
+    "ex-ip-robust-ellipsoid-minimax-shift-rate": {
+      "risk": "high",
+      "kind": "example",
+      "citations": [],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "The zero estimator gives risk at most $R^2$ for every allowed law and operator. If $\\sigma<R$, put $t=(R/\\sigma)^{2/(2s+2p+1)}>1$ and $k=\\lfloor t\\rfloor\\ge1$. Use the Borel finite-coordinate estimator $\\widehat\\theta_j=j^pY_j$ for $j\\le k$ and zero otherwise; it ignores the training data. Under any test truth its retained error is $P_kE\\theta+(\\sigma j^p\\xi_j)_{j\\le k}$ and its omitted error is $-(I-P_k)\\theta$. These components are orthogonal, and the centered noise is independent of the truth. Hence its expected squared error is at most $R^2\\rho_A^2+R^2(k+1)^{-2s}+\\sigma^2\\sum_{j=1}^k j^{2p}$. Because $k+1>t$ and $\\sum_{j\\le k}j^{2p}\\le k^{2p+1}\\le t^{2p+1}$, the last two terms are at most $2R^2t^{-2s}=2Q_{p,s}$. If $\\sigma\\ge R$, $Q_{p,s}=R^2$ and the zero estimator already gives the asserted upper bound. Taking the better of the zero and cutoff rules proves the displayed upper bound uniformly over both shift classes.",
+          "step": "1.1",
+          "inputs": [
+            "given",
+            "construct",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-1-2",
+          "claim": "For the noise lower bound first suppose $\\sigma\\ge R$. Set $E=0$ and $\\mu=\\mu_0=(\\delta_{Re_1}+\\delta_{-Re_1})/2$. These laws have Wasserstein distance zero and are admissible at every $\\rho_X$. The training sample is independent of the fresh test sign, and all other test coordinates are independent pure noise. Given those ancillary variables, testing the fresh sign reduces to [A1] with $\\delta=R$. Thus any prediction of its first coordinate has squared error at least $R^2$ whenever its induced sign test is wrong, and its integrated risk is at least $R^2\\Phi(-R/\\sigma)\\ge bR^2=bQ_{p,s}$. At a zero predicted coordinate, choose either sign; the squared error is still $R^2$.",
+          "step": "1.2",
+          "inputs": [
+            "A1",
+            "given",
+            "construct",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-1-3",
+          "claim": "Put $r=\\rho_A$. If $r>0$, define $a=R/(1+r)$, $b_0=R$ and take the same source and test law $\\mu_0=\\mu=(\\delta_{ae_1}+\\delta_{b_0e_1})/2$. Compare the two allowed operators $E_1=0$ and $E_2=-r(1+r)^{-1}P_1$, whose norms are at most $r$. In the first world, the test truth $ae_1$ has observation mean $ae_1$; in the second, truth $b_0e_1$ has the same mean because $(I+E_2)b_0e_1=ae_1$. The joint law of the full training sample and this conditional test observation is identical in the two cases, including every noisy coordinate. Calling that common law $H$, the corresponding two full test risks satisfy $R_1\\ge\\tfrac12E_H\\|G-ae_1\\|^2$ and $R_2\\ge\\tfrac12E_H\\|G-b_0e_1\\|^2$. Therefore [A2] gives $\\max(R_1,R_2)\\ge(b_0-a)^2/8=R^2r^2/[8(1+r)^2]\\ge R^2r^2/18$. This holds for every Borel learner and all training sizes. If $r=0$, the asserted zero operator lower bound is immediate.",
+          "step": "1.3",
+          "inputs": [
+            "A2",
+            "given",
+            "construct",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "If $\\sigma<R$, use $t$ from step 1.1 and $k=\\lceil t\\rceil\\le2t$. On the coordinate block $k\\le j<2k$, put $a=2^{-s-1}Rk^{-s-1/2}$ and let $\\mu_0=\\mu$ be the uniform law on the $2^k$ vectors having independent coordinates $\\theta_j=\\pm a$ on this block and zero elsewhere. Each such vector lies in the ellipsoid because $\\sum_jj^{2s}\\theta_j^2\\le k(2k)^{2s}a^2=R^2/4$. Again choose $E=0$. For every block coordinate, its test sign is independent of the whole training sample and of all other test coordinates. Its signal amplitude is $j^{-p}a\\le k^{-p}a\\le\\sigma$, by the definition of $t$ and $k\\ge t$. Applying the density-crossing argument in [A1], conditional on all ancillary data, gives sign error at least $b$. Summing the coordinate squared errors gives risk at least $bka^2=b2^{-2s-2}R^2k^{-2s}\\ge b2^{-4s-2}Q_{p,s}$. Finite averaging over the sign prior and integration over the independent ancillary observations suffice; no choice of an unknown prior by the learner is being assumed.",
+          "step": "2.1",
+          "inputs": [
+            "A1",
+            "step 1.1",
+            "construct",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "claim": "Steps 1.2 and 2.1 give $\\mathfrak R_N\\ge c_0Q_{p,s}$ with $c_0=b\\min\\{1,2^{-4s-2}\\}>0$, and step 1.3 gives $\\mathfrak R_N\\ge R^2\\rho_A^2/18$. The maximum of these bounds is at least $\\tfrac12\\min\\{c_0,1/18\\}(Q_{p,s}+R^2\\rho_A^2)$, proving the lower bound with that explicit positive $c_{p,s}$. For fixed $p,s,R>0$, the upper bound tends to zero when $\\sigma,\\rho_A\\to0$, and the lower bound forces both limits whenever the risk tends to zero. Both lower constructions have $\\mu=\\mu_0$, so they remain admissible even at zero truth-law shift; the upper construction ignores the training law entirely. This explains why $N$ and $\\rho_X$ do not enter the matching-order rate for this worst-law formulation.",
+          "step": "3.1",
+          "inputs": [
+            "step 1.1",
+            "step 1.2",
+            "step 2.1",
+            "step 1.3",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "No separate empty boundary claim beyond the explicit domain and case divisions of the Example is asserted."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "rho_A=0 is included explicitly; noise sigma is positive, with its zero limit treated separately."
+        },
+        {
+          "case": "one",
+          "status": "not_applicable",
+          "reason": "No separate one boundary claim beyond the explicit domain and case divisions of the Example is asserted."
+        },
+        {
+          "case": "degenerate",
+          "status": "not_applicable",
+          "reason": "No separate degenerate boundary claim beyond the explicit domain and case divisions of the Example is asserted."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "No separate endpoints boundary claim beyond the explicit domain and case divisions of the Example is asserted."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "All laws and interval/cutoff/finite-prior constructions are specified explicitly; no choice axiom is added."
+        },
+        {
+          "case": "iff-forward",
+          "status": "checked",
+          "evidence": "Final step3.1 derives both necessity from the lower bound and sufficiency from the upper bound for fixed positive p,s,R."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "checked",
+          "evidence": "Final step3.1 derives both necessity from the lower bound and sufficiency from the upper bound for fixed positive p,s,R."
+        }
+      ]
+    },
+    "ex-ip-ideal-score-error-allows-unbounded-euler-wasserstein": {
+      "risk": "high",
+      "kind": "example",
+      "citations": [],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "Use the exact score at all grid times before the last two updates. All those states have finite first moment because each exact-score drift has linear growth by [A1]. Let $U$ be the state before the penultimate update, corresponding to ideal time $2h$. Its law has a strictly positive continuous density $\\rho$: for $J=2$ it is exactly $p_T$, and otherwise the last preceding nondegenerate Euler noise gives [A2]. Since $p_{2h}$ is also positive and continuous, the density ratio $\\rho/p_{2h}$ has positive minimum $c$ and finite maximum $C$ on $[-1,1]$.",
+          "step": "1.1",
+          "inputs": [
+            "A1",
+            "A2",
+            "construct"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "For every sufficiently small $q>0$, choose the centered interval $A_q\\subseteq[-1,1]$ with $\\int_{A_q}p_{2h}(x)\\,dx=q$. Such an interval exists by continuity and positivity of that density. Then $cq\\le P\\{U\\in A_q\\}\\le Cq$. Put $b_q=\\varepsilon_s/(2\\sqrt q)$ and add $b_q\\mathbf1_{A_q}$ to the score at time $2h$. Its squared ideal-marginal error is exactly $\\varepsilon_s^2/4$. Set $f(x)=(1+h/2)x+hs_{2h}(x)$ and $H=\\sup_{|x|\\le1}|f(x)|<\\infty$. After this update the state is $V=f(U)+hb_q\\mathbf1_{A_q}(U)+\\sqrt h\\,G$.",
+          "step": "2.1",
+          "inputs": [
+            "A1",
+            "step 1.1",
+            "construct",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "claim": "Let $I_q=[hb_q-H-\\sqrt h,hb_q+H+\\sqrt h]$, and let $r_q=\\int_{I_q}p_h(x)\\,dx>0$. On $\\{U\\in A_q,|G|\\le1\\}$ the state $V$ lies in $I_q$, so $P\\{V\\in I_q\\}\\ge cqP\\{|G|\\le1\\}$. The ideal density $p_h$ is a fixed Gaussian mixture. Since the interval width is constant and its center $hb_q$ tends to infinity, its Gaussian density formula gives constants $C_1,c_1>0$, independent of small $q$, such that $r_q\\le C_1e^{-c_1b_q^2}$. For example, once $hb_q\\ge2(H+\\sqrt h+a)$, every point of the interval is at distance at least $hb_q/2$ from either component mean; use the largest fixed variance in its Gaussian exponent and the constant interval length.",
+          "step": "3.1",
+          "inputs": [
+            "A1",
+            "A2",
+            "step 2.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-4-1",
+          "claim": "At the final evaluation time $h$ add $d_q\\mathbf1_{I_q}$ to the exact score, where $d_q=\\varepsilon_s/(2\\sqrt{r_q})$. This second squared ideal-marginal error is also $\\varepsilon_s^2/4$. At all other times use the exact score. These modifications at two distinct times define a jointly Borel finite-valued field with the original supremum-in-time score bound. Every individual field has finite first moments at all Euler steps: it is an affine-growth exact score plus two bounded, finite-amplitude additions.",
+          "step": "4.1",
+          "inputs": [
+            "A1",
+            "step 2.1",
+            "step 3.1",
+            "construct",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-5-1",
+          "claim": "The first moment of $V$ is bounded uniformly as $q\\downarrow0$: the added term has expectation at most $hb_qCq= hC\\varepsilon_s\\sqrt q/2$, while $E|f(U)|$ and $E|\\sqrt hG|$ are fixed and finite. The terminal state is $X=(1+h/2)V+hs_h(V)+hd_q\\mathbf1_{I_q}(V)+\\sqrt hG'$. By [A1] the absolute expectation of the first two terms is uniformly bounded; $EG'=0$. Therefore $EX\\ge h\\varepsilon_scqP\\{|G|\\le1\\}/(2\\sqrt{r_q})-C_2\\to+\\infty$, because $b_q^2=\\varepsilon_s^2/(4q)$ and the exponential bound in step 3.1 dominates every power of $q$.",
+          "step": "5.1",
+          "inputs": [
+            "A1",
+            "step 2.1",
+            "step 3.1",
+            "step 4.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-6-1",
+          "claim": "Every coupling of two finite-first-moment probabilities satisfies $|EX-EY|\\le E|X-Y|$ by the integral triangle inequality. Thus $W_1(\\widehat\\pi_{J,M},\\pi)\\ge|M^{-1}\\sum_iX^{(i)}|$ because the target mean is zero. Taking expectations gives $EW_1\\ge|EX|$, which tends to infinity by step 5.1 for every finite $M$. The other two terms in the requested fidelity loss are nonnegative. Its supremum is consequently infinite despite fixed positive score-error allowance and fixed admissible target parameters.",
+          "step": "6.1",
+          "inputs": [
+            "given",
+            "step 4.1",
+            "step 5.1",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "No separate empty boundary claim beyond the explicit domain and case divisions of the Example is asserted."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "epsilon_s=0 is explicitly excluded; no negative claim is made there."
+        },
+        {
+          "case": "one",
+          "status": "not_applicable",
+          "reason": "No separate one boundary claim beyond the explicit domain and case divisions of the Example is asserted."
+        },
+        {
+          "case": "degenerate",
+          "status": "not_applicable",
+          "reason": "No separate degenerate boundary claim beyond the explicit domain and case divisions of the Example is asserted."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "No separate endpoints boundary claim beyond the explicit domain and case divisions of the Example is asserted."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "All laws and interval/cutoff/finite-prior constructions are specified explicitly; no choice axiom is added."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "No separate iff-forward boundary claim beyond the explicit domain and case divisions of the Example is asserted."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "No separate iff-reverse boundary claim beyond the explicit domain and case divisions of the Example is asserted."
+        }
+      ]
+    },
+    "ex-ip-coordinate-free-fno-inverse-risk-obstruction": {
+      "risk": "high",
+      "kind": "example",
+      "citations": [],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "Each Fourier multiplier commutes with translation because the kth translated Fourier coefficient is multiplied by the scalar $e^{-ik\\alpha}$, which commutes with its channel matrix. Every constant channel matrix, constant bias and coordinatewise scalar activation also commutes with translation. By induction through the lift, all layers and output map, the realized scalar output field is translation-equivariant. The layer fields are in $L^2$: a globally Lipschitz activation has linear growth, the pointwise weights are finite and the finite Fourier multipliers are bounded. For odd $m$, projection onto the first m coefficients commutes with translation by [A1]. Hence the zero-extended output map $F=I_m\\Psi_m$ satisfies $F(U_\\alpha x)=T_\\alpha F(x)$, where $U_\\alpha$ is the orthogonal translation matrix on the retained coefficients. This holds for every individual parameter array, also after data-dependent selection.",
+          "step": "1.1",
+          "inputs": [
+            "A1",
+            "given",
+            "construct",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-1-2",
+          "claim": "Put $a=R3^{-(p+s)}$, choose $\\theta_c=a2^pe_2$ and $\\theta_s=a3^pe_3$, and let $\\mu=(\\delta_{\\theta_c}+\\delta_{\\theta_s})/2$. These truths lie in the ellipsoid because their weighted squared norms are at most $a^23^{2(p+s)}=R^2$. Their forward coefficient vectors are respectively $ae_2$ and $ae_3$, related by $U=U_{\\pi/2}$. Conditional on any training sample, the test truth is still an independent equal-probability draw from these two values. Couple the corresponding test noises as $\\eta$ and $U\\eta$; by [A2] both have the required $N(0,\\sigma^2m^{-1}I_m)$ law.",
+          "step": "1.2",
+          "inputs": [
+            "A1",
+            "A2",
+            "given",
+            "construct",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-1-3",
+          "claim": "To see unrestricted vanishing without training, put $k_m=\\min\\{m,\\max\\{1,\\lfloor m^{1/(2(2p+1))}\\rfloor\\}\\}$. Output $j^pX_{m,j}$ for $j\\le k_m$ and zero otherwise. Its risk for every truth is at most $\\sigma^2m^{-1}\\sum_{j\\le k_m}j^{2p}+R^2(k_m+1)^{-2s}\\le\\sigma^2m^{-1}k_m^{2p+1}+R^2(k_m+1)^{-2s}\\to0$. It is a Borel predictor and is allowed in the unrestricted class. This proves the contrast with the positive odd-mesh architecture floor.",
+          "step": "1.3",
+          "inputs": [
+            "given",
+            "construct",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "For fixed training data, let $F$ be its selected predictor. By step 1.1, $F(ae_3+U\\eta)=T_{\\pi/2}F(ae_2+\\eta)$. Translating the first output and truth preserves their norm. Consequently the conditional average of the two squared risks is $\\tfrac12E[\\|T_{\\pi/2}F(ae_2+\\eta)-T_{\\pi/2}\\theta_c\\|^2+\\|T_{\\pi/2}F(ae_2+\\eta)-\\theta_s\\|^2]$, which is at least $\\|T_{\\pi/2}\\theta_c-\\theta_s\\|^2/4=a^2(3^p-2^p)^2/4$ by [A3]. This lower bound is independent of the training sample. Integrating over it, taking the worst law and then the infimum over selectors proves the stated floor.",
+          "step": "2.1",
+          "inputs": [
+            "A1",
+            "A3",
+            "step 1.1",
+            "step 1.2",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "claim": "The mismatch arises because the diagonal inverse rescales the first cosine and sine by different factors $2^p$ and $3^p$, while the coordinate-free architecture must respect translation between them. It is independent of finite training or parameter-size limitations. The proof deliberately uses odd $m$ so both the input noise law and retained output subspace are translation-invariant; it supplies no identical assertion for even $m$, whose last frequency pair is incomplete.",
+          "step": "3.1",
+          "inputs": [
+            "step 1.1",
+            "step 2.1",
+            "step 1.3",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "No separate empty boundary claim beyond the explicit domain and case divisions of the Example is asserted."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "The floor does not rely on positive noise; the statement assumes the original positive sigma."
+        },
+        {
+          "case": "one",
+          "status": "not_applicable",
+          "reason": "No separate one boundary claim beyond the explicit domain and case divisions of the Example is asserted."
+        },
+        {
+          "case": "degenerate",
+          "status": "not_applicable",
+          "reason": "No separate degenerate boundary claim beyond the explicit domain and case divisions of the Example is asserted."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "No separate endpoints boundary claim beyond the explicit domain and case divisions of the Example is asserted."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "All laws and interval/cutoff/finite-prior constructions are specified explicitly; no choice axiom is added."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "No separate iff-forward boundary claim beyond the explicit domain and case divisions of the Example is asserted."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "No separate iff-reverse boundary claim beyond the explicit domain and case divisions of the Example is asserted."
+        }
+      ]
+    }
+  },
+  "native_coverage_adopted": false
+}

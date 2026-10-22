@@ -1,0 +1,358 @@
+[
+  {
+    "order": 3020,
+    "id": "feature-inference-and-map-testing",
+    "kind": "A",
+    "category": "inverse-problems",
+    "title": "Linear feature identifiability and Gaussian MAP tests",
+    "companion": "feature-inference-and-map-testing-examples",
+    "requires": [
+      "statistical-inverse-experiments-and-white-noise",
+      "linear-operators-pseudoinverses-and-picard-criteria",
+      "hilbert-space-geometry-and-riesz-representation",
+      "bayesian-models-priors-and-posterior-laws",
+      "gaussian-process-priors-and-posterior-laws"
+    ],
+    "items": [
+      {
+        "id": "def-ip-feature-estimability-through-adjoint-range",
+        "kind": "definition",
+        "title": "Exact linear feature estimability through the adjoint range",
+        "statement": "Assume Countable Choice. Let $X$ be a real Hilbert space and let $H$ be a separable real Hilbert space. Let $K:X\\to H$ be bounded and linear, let $\\epsilon>0$, and let $Z$ be a jointly Gaussian centered family indexed by $H$, linear into $L^2$ with covariance $\\mathbb E[Z(g)Z(k)]=\\langle g,k\\rangle_H$. For each $x\\in X$ define $Y_x(g)=\\langle Kx,g\\rangle_H+\\epsilon Z(g)$. A continuous linear feature is a map $\\phi\\in X^*$, where $X^*$ is the continuous dual of $X$. By the Riesz representation theorem there is a unique $h_\\phi\\in X$ with $\\phi(x)=\\langle x,h_\\phi\\rangle_X$ for every $x\\in X$. The feature is **exactly linearly estimable by one probe** if some $\\Phi\\in H$ makes the statistic $Y_x(\\Phi)$ unbiased for $\\phi(x)$ for every $x\\in X$. Writing $R(K^*)=\\{K^*\\Phi:\\Phi\\in H\\}$ for the adjoint range, this holds exactly when $h_\\phi\\in R(K^*)$. Every such probe has variance $\\epsilon^2\\|\\Phi\\|_H^2$. This definition concerns one-probe unbiased linear estimators; it does not identify membership in $\\overline{R(K^*)}$ with exact estimability.",
+        "strategy": "Characterize unbiasedness by matching the adjoint mean to the Riesz feature vector and compute the probe variance.",
+        "deps": [
+          "def-ip-isonormal-white-noise-experiment",
+          "def-countable-choice",
+          "def-hilbert-space",
+          "def-hilbert-space-adjoint",
+          "thm-riesz-representation-for-hilbert-space"
+        ],
+        "justified_by": [],
+        "dependency_level": 1,
+        "sources": {
+          "references": [
+            {
+              "title": "Remo Kretschmann and Frank Werner, Maximum a posteriori testing in statistical inverse problems, §1.1 and §1.2",
+              "url": "https://arxiv.org/pdf/2402.00686"
+            },
+            {
+              "title": "Remo Kretschmann, Tanja Wachsmuth, and Frank Werner, Optimal regularized hypothesis testing in statistical inverse problems, §1.1",
+              "url": "https://arxiv.org/pdf/2212.12897"
+            }
+          ]
+        },
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "proof_strategy": "direct",
+        "axiom_use": "Countable Choice is inherited from the Hilbert adjoint and Riesz representation interfaces. The range characterization itself uses no further choice."
+      },
+      {
+        "id": "thm-ip-isonormal-gaussian-posterior-law",
+        "kind": "theorem",
+        "title": "Gaussian posterior law in an isonormal inverse experiment",
+        "statement": "Assume the Axiom of Choice. Let $X$ and $H$ be separable real Hilbert spaces with supplied finite or countable complete orthonormal bases $(v_j)$ and $(e_n)$. Let $K:X\\to H$ be bounded and linear, let $\\epsilon>0$, and let $U$ be a Borel Gaussian random element with mean $m_0\\in X$ and positive self-adjoint, injective, trace-class covariance $C_0$. Let $Z$ be a jointly Gaussian centered family indexed by $H$, linear into $L^2$ with covariance $\\mathbb E[Z(g)Z(k)]=\\langle g,k\\rangle_H$, independent of $U$, and observe the random field\n$$Y(g)=\\langle KU,g\\rangle_H+\\epsilon Z(g),\\qquad g\\in H,$$\non $\\mathbb R^H$ with its cylinder sigma-algebra $\\mathcal C_H$; write $P_Y$ for the law of this field. Write $S=C_0^{1/2}$,\n$$B=SK^*KS,\\qquad R=(B+\\epsilon^2I_X)^{-1},\\qquad C_{\\rm post}=\\epsilon^2SRS,$$\nand for $h\\in X$ put\n$$\\Phi_h=KSRSh.$$\nFor $y\\in\\mathbb R^H$, set\n$$b_j(y)=\\langle m_0,v_j\\rangle_X+y(\\Phi_{v_j})-\\langle Km_0,\\Phi_{v_j}\\rangle_H.$$\nIf $\\sum_j b_j(y)^2<\\infty$, define $M_y=\\sum_jb_j(y)v_j$; otherwise define $M_y=m_0$. In finite dimension these sums terminate, and an empty basis is allowed for the zero space.\n\nThere is a data-indexed probability kernel $\\Pi_y$ on $X$ that is a regular conditional law of $U$ given the field $Y$, and for every $y$ it is the Borel Gaussian law with mean $M_y$ and covariance $C_{\\rm post}$. In particular, for every fixed $h\\in X$ and every Borel set $A\\subseteq\\mathbb R$,\n$$\\Pi_y\\{u:\\langle u,h\\rangle_X\\in A\\}=N\\!\\left(\\langle M_y,h\\rangle_X,\\langle C_{\\rm post}h,h\\rangle_X\\right)(A).$$\nFor each fixed $h$, for $P_Y$-almost every $y$,\n$$\\langle M_y,h\\rangle_X=\\langle m_0,h\\rangle_X+y(\\Phi_h)-\\langle Km_0,\\Phi_h\\rangle_H.$$\nThe exceptional null set in this identity may depend on $h$; no simultaneous identity for every $h$ on one sample set is asserted. Here $N(a,\\sigma^2)$ denotes the scalar normal law of mean $a$ and variance $\\sigma^2$, including the zero-variance point mass.",
+        "strategy": "Construct the posterior mean from observation coordinates, prove the Gaussian residual is independent of the full cylinder data, and verify the conditional-law identity.",
+        "deps": [
+          "def-ip-isonormal-white-noise-experiment",
+          "def-bayesian-model-as-prior-and-sampling-kernel",
+          "def-bayesian-posterior-as-regular-conditional-law",
+          "def-gaussian-process",
+          "def-borel-gaussian-random-element-on-a-separable-banach-space",
+          "def-bounded-linear-operator",
+          "def-hilbert-space",
+          "def-self-adjoint-positive-unitary-and-normal-operator",
+          "def-trace-class-operator",
+          "def-hilbert-schmidt-operator",
+          "def-countable-choice",
+          "def-axiom-of-choice",
+          "def-independent-random-elements",
+          "lem-measurable-functions-preserve-independence",
+          "lem-finite-independent-gaussian-vectors-form-joint-multivariate-normal",
+          "lem-joint-gaussian-blocks-with-zero-cross-covariance-are-independent",
+          "lem-positive-square-root-of-a-compact-positive-operator",
+          "lem-compositions-with-a-compact-operator-are-compact",
+          "lem-hilbert-tikhonov-normal-operator-invertible",
+          "def-hilbert-space-adjoint",
+          "def-orthonormal-family-complete-orthonormal-system-and-hilbert-basis",
+          "thm-hilbert-space-fourier-expansion",
+          "thm-parseval-equivalences-for-a-complete-orthonormal-family",
+          "thm-tonelli-theorem-for-sigma-finite-product-spaces",
+          "thm-trace-of-a-positive-operator-is-the-sum-of-its-eigenvalues",
+          "thm-trace-class-iff-product-of-two-hilbert-schmidt-operators",
+          "thm-hilbert-schmidt-operators-form-a-two-sided-ideal",
+          "thm-hilbert-schmidt-norm-is-basis-independent",
+          "thm-measure-uniqueness-on-a-sigma-finite-pi-system",
+          "thm-measurability-of-integration-against-a-kernel",
+          "thm-sequential-suprema-infima-limsup-liminf-and-pointwise-limits-are-measurable",
+          "thm-chebyshev-markov-inequality-for-the-integral",
+          "thm-first-borel-cantelli"
+        ],
+        "justified_by": [],
+        "dependency_level": 1,
+        "sources": {
+          "references": [
+            {
+              "title": "Remo Kretschmann and Frank Werner, Maximum a posteriori testing in statistical inverse problems, §§1.1–1.3",
+              "url": "https://arxiv.org/pdf/2402.00686"
+            },
+            {
+              "title": "Andrew M. Stuart, Inverse problems: A Bayesian perspective, §6.3, Theorem 6.20 and Example 6.23",
+              "url": "https://web.stanford.edu/class/ee378a/REFS/stuart.pdf"
+            },
+            {
+              "title": "Evarist Giné and Richard Nickl, Mathematical Foundations of Infinite-Dimensional Statistical Models, §1.2.2",
+              "url": "https://www.statslab.cam.ac.uk/~rn289/Site/__files/FULLPDF.pdf"
+            }
+          ]
+        },
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "proof_strategy": "direct",
+        "axiom_use": "Assume the Axiom of Choice. It supplies the finite-dimensional Gaussian block independence and uniqueness interfaces used to prove that the residual is independent of the full observation sigma-algebra; Countable Choice is also used through Hilbert adjoints, square roots, and supplied bases. The countable reconstruction uses least-index choices and adds no stronger choice requirement."
+      },
+      {
+        "id": "alg-ip-gaussian-map-feature-test",
+        "kind": "algorithm",
+        "title": "Gaussian MAP feature test",
+        "statement": "Assume the Axiom of Choice. Let $X,H$ be separable real Hilbert spaces, let $K:X\\to H$ be bounded, and let $\\epsilon>0$. Let $U$ be a Borel Gaussian prior with mean $m_0$ and positive self-adjoint, injective, trace-class covariance $C_0$, independent of a jointly Gaussian centered family $Z$ indexed by $H$, linear into $L^2$ with covariance $\\mathbb E[Z(g)Z(k)]=\\langle g,k\\rangle_H$. For parameter $x\\in X$, the observation field is $Y_x(g)=\\langle Kx,g\\rangle_H+\\epsilon Z(g)$. Fix a feature vector $h\\in X$. Let\n$$S=C_0^{1/2},\\qquad B=SK^*KS,\\qquad R=(B+\\epsilon^2I_X)^{-1},\\qquad \\Phi_h=KSRSh,$$\nand define the raw threshold\n$$c_h=\\langle Km_0,\\Phi_h\\rangle_H-\\langle m_0,h\\rangle_X.$$\nGiven a white-noise observation field $y\\in\\mathbb R^H$, the **Gaussian MAP feature test** returns $1$ exactly when $y(\\Phi_h)>c_h$ and returns $0$ otherwise. Equivalently, it returns $1$ exactly when the posterior marginal mode of the scalar feature $\\langle U,h\\rangle_X$ is positive. The comparison is strict; in particular, when $h=0$ the test returns $0$.",
+        "strategy": "Evaluate the scalar posterior marginal mode and return whether it is positive.",
+        "deps": [
+          "thm-ip-isonormal-gaussian-posterior-law"
+        ],
+        "justified_by": [],
+        "dependency_level": 2,
+        "sources": {
+          "references": [
+            {
+              "title": "Remo Kretschmann and Frank Werner, Maximum a posteriori testing in statistical inverse problems, §1.2 and Theorems 2.3–2.5",
+              "url": "https://arxiv.org/pdf/2402.00686"
+            },
+            {
+              "title": "Andrew M. Stuart, Inverse problems: A Bayesian perspective, §6.3",
+              "url": "https://web.stanford.edu/class/ee378a/REFS/stuart.pdf"
+            }
+          ]
+        },
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "not-applicable"
+        },
+        "proof_strategy": "not-applicable",
+        "axiom_use": "The procedure itself uses only the Gaussian posterior formula and a specified resolvent; the MAP interpretation inherits the Axiom of Choice required by the posterior RCD theorem."
+      },
+      {
+        "id": "thm-ip-map-test-level-and-power",
+        "kind": "theorem",
+        "title": "Level, power, and weighted regularization of Gaussian MAP feature tests",
+        "statement": "Assume the Axiom of Choice. Let $X,H$ be separable real Hilbert spaces, $K:X\\to H$ bounded and linear, $\\epsilon>0$, and let $U$ be a Borel Gaussian prior with mean $m_0$ and positive self-adjoint, injective, trace-class covariance $C_0$, independent of a jointly Gaussian centered family $Z$ indexed by $H$, linear into $L^2$ with covariance $\\mathbb E[Z(g)Z(k)]=\\langle g,k\\rangle_H$. Fix $h\\in X$, define $S=C_0^{1/2}$, $B=SK^*KS$, $R=(B+\\epsilon^2I)^{-1}$, $\\Phi_h=KSRSh$, and $c_h=\\langle Km_0,\\Phi_h\\rangle_H-\\langle m_0,h\\rangle_X$. Let $Y_x(g)=\\langle Kx,g\\rangle_H+\\epsilon Z(g)$ and let the raw MAP test reject exactly when $Y_x(\\Phi_h)>c_h$. Define $G(t)=\\int_{-\\infty}^{t}(2\\pi)^{-1/2}e^{-s^2/2}\\,ds$, the standard normal cumulative distribution function. For every $x\\in X$ its rejection probability is\n$$\\mathbb P_x\\{Y_x(\\Phi_h)>c_h\\}=\\begin{cases}G\\!\\left(\\dfrac{\\langle x,K^*\\Phi_h\\rangle_X-c_h}{\\epsilon\\|\\Phi_h\\|_H}\\right),&\\Phi_h\\ne0,\\\\[6pt]\\mathbf1\\{0>c_h\\},&\\Phi_h=0.\\end{cases}$$\n\nFor a further real Hilbert space $V$ continuously and injectively embedded in $X$ by $i:V\\to X$, define the residual functional $r_\\Phi\\in V^*$, where $V^*$ is the continuous dual of $V$, by\n$$r_\\Phi(v)=\\langle Ki(v),\\Phi\\rangle_H-\\langle i(v),h\\rangle_X,\\qquad \\|r_\\Phi\\|_{V^*}=\\sup_{\\|v\\|_V\\le1}|r_\\Phi(v)|.$$\nFor $0<\\alpha<1$ let $z_{1-\\alpha}$ satisfy $G(z_{1-\\alpha})=1-\\alpha$. If $\\Phi\\ne0$, the calibrated probe test rejects exactly when\n$$Y_x(\\Phi)>\\epsilon\\|\\Phi\\|_H z_{1-\\alpha}+\\|r_\\Phi\\|_{V^*}.$$\nIts rejection probability at every $x\\in X$ is the same displayed Gaussian-tail formula with $\\Phi$ in place of $\\Phi_h$ and calibrated threshold in place of $c_h$. If $x=i(v)$ satisfies $\\|v\\|_V\\le1$ and $\\langle x,h\\rangle_X\\le0$, this test has rejection probability at most $\\alpha$. For $\\Phi=0$ it never rejects and has level zero.\n\nAs an additional weighted-regularization identity, assume Countable Choice and suppose that $C_0K^*K=K^*KC_0$. Let $J$ be the real partial isometry in the polar decomposition $K=J(K^*K)^{1/2}$. Let $\\mathcal D=\\{C_0^{1/2}x:x\\in X\\}$, and define $C_0^{-1/2}$ as the inverse of $C_0^{1/2}$ on $\\mathcal D$. On $\\Psi\\in H$, set\n$$J_h(\\Psi)=\\|K^*\\Psi-h\\|_X^2+\\epsilon^2\\|C_0^{-1/2}J^*\\Psi\\|_X^2$$\nwhen $J^*\\Psi\\in\\mathcal D$, and set $J_h(\\Psi)=+\\infty$ otherwise. Then $\\Phi_h$ is a minimizer of $J_h$, and\n$$K^*\\Phi_h=B(B+\\epsilon^2I_X)^{-1}h.$$",
+        "strategy": "Derive raw and calibrated power from scalar normal tails, then minimize the weighted objective in a common eigenbasis.",
+        "deps": [
+          "alg-ip-gaussian-map-feature-test",
+          "thm-ip-isonormal-gaussian-posterior-law",
+          "def-countable-choice",
+          "def-axiom-of-choice",
+          "def-bounded-linear-operator",
+          "def-hilbert-space",
+          "def-hilbert-space-adjoint",
+          "def-self-adjoint-positive-unitary-and-normal-operator",
+          "def-trace-class-operator",
+          "lem-hilbert-tikhonov-normal-operator-invertible",
+          "lem-standard-normal-cdf-quantiles-and-symmetry",
+          "def-ip-isonormal-white-noise-experiment",
+          "def-isometry-coisometry-and-partial-isometry",
+          "thm-spectral-theorem-for-compact-self-adjoint-operators",
+          "cor-real-spectral-theorem-for-self-adjoint-endomorphisms",
+          "lem-positive-square-root-of-a-compact-positive-operator",
+          "def-orthonormal-family-complete-orthonormal-system-and-hilbert-basis",
+          "thm-hilbert-space-fourier-expansion",
+          "thm-parseval-equivalences-for-a-complete-orthonormal-family",
+          "thm-cauchy-schwarz-in-an-inner-product-space"
+        ],
+        "justified_by": [],
+        "dependency_level": 3,
+        "sources": {
+          "references": [
+            {
+              "title": "Remo Kretschmann and Frank Werner, Maximum a posteriori testing in statistical inverse problems, Theorems 2.4–2.5",
+              "url": "https://arxiv.org/pdf/2402.00686"
+            },
+            {
+              "title": "Remo Kretschmann, Tanja Wachsmuth, and Frank Werner, Optimal regularized hypothesis testing in statistical inverse problems, §1.2 and Theorem 2.3",
+              "url": "https://arxiv.org/pdf/2212.12897"
+            }
+          ]
+        },
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "proof_strategy": "direct",
+        "axiom_use": "The raw and calibrated Gaussian-tail arguments add no choice. The weighted-minimizer clause constructs the real polar partial isometry from the common eigenbasis and uses Countable Choice through the compact spectral and square-root suppliers. The posterior input inherits the Axiom of Choice from its separate RCD proof."
+      },
+      {
+        "id": "thm-ip-unrestricted-map-test-can-have-level-one",
+        "kind": "theorem",
+        "title": "A non-eigenfeature can give an unrestricted Gaussian MAP test level one",
+        "statement": "Assume the Axiom of Choice. Let $X,H$ be separable real Hilbert spaces, $K:X\\to H$ bounded and linear, $\\epsilon>0$, and let $U$ be a Borel Gaussian prior with mean $m_0$ and positive self-adjoint, injective, trace-class covariance $C_0$, independent of a jointly Gaussian centered family $Z$ indexed by $H$, linear into $L^2$ with covariance $\\mathbb E[Z(g)Z(k)]=\\langle g,k\\rangle_H$. Put $S=C_0^{1/2}$, $B=SK^*KS$, $R=(B+\\epsilon^2I_X)^{-1}$. For a feature vector $h\\in X$, define $\\Phi_h=KSRSh$, $c_h=\\langle Km_0,\\Phi_h\\rangle_H-\\langle m_0,h\\rangle_X$, and the raw test $\\delta_h=\\mathbf1\\{Y_x(\\Phi_h)>c_h\\}$, where $Y_x(g)=\\langle Kx,g\\rangle_H+\\epsilon Z(g)$. Suppose $C_0K^*K=K^*KC_0$, $h\\ne0$, and $Bh$ is not a scalar multiple of $h$. Then the unrestricted null set $H_0=\\{x\\in X:\\langle x,h\\rangle_X\\le0\\}$ satisfies\n$$\\sup_{x\\in H_0}\\mathbb P_x\\{\\delta_h=1\\}=1.$$\nThe supremum need not be attained at any finite parameter value.",
+        "strategy": "Find a null direction orthogonal to the feature along which the raw MAP mean grows without bound.",
+        "deps": [
+          "alg-ip-gaussian-map-feature-test",
+          "thm-ip-map-test-level-and-power",
+          "thm-ip-isonormal-gaussian-posterior-law",
+          "def-countable-choice",
+          "def-axiom-of-choice",
+          "def-hilbert-space",
+          "def-hilbert-space-adjoint",
+          "lem-hilbert-tikhonov-normal-operator-invertible",
+          "thm-cauchy-schwarz-in-an-inner-product-space"
+        ],
+        "justified_by": [],
+        "dependency_level": 4,
+        "sources": {
+          "references": [
+            {
+              "title": "Remo Kretschmann and Frank Werner, Maximum a posteriori testing in statistical inverse problems, Theorem 2.6 and its proof",
+              "url": "https://arxiv.org/pdf/2402.00686"
+            }
+          ]
+        },
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "proof_strategy": "direct",
+        "axiom_use": "The Axiom of Choice is inherited from the Gaussian posterior construction; Countable Choice is used by the shifted-operator and Hilbert-space interfaces. The null-direction scaling argument uses no further choice."
+      }
+    ]
+  },
+  {
+    "order": 3021,
+    "id": "feature-inference-and-map-testing-examples",
+    "kind": "B",
+    "category": "inverse-problems",
+    "title": "Linear feature identifiability and Gaussian MAP tests — Examples and Counterexamples",
+    "companion": "feature-inference-and-map-testing",
+    "requires": [
+      "feature-inference-and-map-testing"
+    ],
+    "items": [
+      {
+        "id": "ex-ip-adjoint-range-feature-is-estimable",
+        "kind": "example",
+        "title": "An adjoint-range feature has an exact one-probe estimator",
+        "statement": "Assume Countable Choice. Let $X=H=\\mathbb R^2$ with the Euclidean inner product, let $K(x_1,x_2)=(x_1,x_2/2)$, fix $\\epsilon>0$, and let $Z$ be a jointly Gaussian centered family on $H$, linear into $L^2$ with covariance $\\mathbb E[Z(g)Z(k)]=\\langle g,k\\rangle_H$. Define $Y_x(g)=\\langle Kx,g\\rangle_H+\\epsilon Z(g)$ and consider the feature $\\phi(x_1,x_2)=x_1$. The map $K$ is compact, $K^*(1,0)=(1,0)$, and the observation $Y_x(1,0)$ is an unbiased exact estimator of $\\phi(x)$ with variance $\\epsilon^2$. Thus the feature vector lies in the adjoint range and is exactly estimable by one probe.",
+        "strategy": "Evaluate a finite-dimensional adjoint probe and its exact variance.",
+        "deps": [
+          "def-ip-feature-estimability-through-adjoint-range",
+          "def-ip-compact-linear-inverse-model",
+          "lem-finite-rank-operators-are-compact"
+        ],
+        "justified_by": [],
+        "dependency_level": 2,
+        "sources": {
+          "references": [
+            {
+              "title": "Kretschmann and Werner, Maximum a posteriori testing in statistical inverse problems, §1.1",
+              "url": "https://arxiv.org/pdf/2402.00686"
+            },
+            {
+              "title": "Giné and Nickl, Mathematical Foundations of Infinite-Dimensional Statistical Models, §1.2.2",
+              "url": "https://www.statslab.cam.ac.uk/~rn289/Site/__files/FULLPDF.pdf"
+            }
+          ]
+        },
+        "provenance": {
+          "statement": "ai-generated",
+          "proof": "ai-generated"
+        },
+        "proof_strategy": "direct",
+        "generation": {
+          "role": "example"
+        }
+      },
+      {
+        "id": "ex-ip-closure-only-feature-is-not-exactly-estimable",
+        "kind": "example",
+        "title": "A compact diagonal map has a closure-only feature",
+        "statement": "Assume Countable Choice. On the real Hilbert space $X=H=\\ell^2(\\mathbb N)$ with standard basis $(e_j)_{j\\ge1}$, define $Kx=(x_j/j)_{j\\ge1}$ and the feature vector $h=(1/j)_{j\\ge1}$. Fix $\\epsilon>0$, let $Z$ be a jointly Gaussian centered family indexed by $H$, linear into $L^2$ with covariance $\\mathbb E[Z(g)Z(k)]=\\langle g,k\\rangle_H$, and define $Y_x(g)=\\langle Kx,g\\rangle_H+\\epsilon Z(g)$. Fix $\\epsilon>0$, let $Z$ be a jointly Gaussian centered family on $H$, linear into $L^2$ with covariance $\\mathbb E[Z(g)Z(k)]=\\langle g,k\\rangle_H$, and define $Y_x(g)=\\langle Kx,g\\rangle_H+\\epsilon Z(g)$. The map $K$ is compact and self-adjoint. Its adjoint range contains every finitely supported sequence, so $\\overline{R(K^*)}=\\ell^2$. The vector $h$ belongs to $\\ell^2$ but not to $R(K^*)$, since any preimage would have all coordinates equal to $1$. Thus this feature lies in the closure of the adjoint range but is not exactly estimable by one probe.",
+        "strategy": "Approximate the diagonal map by finite-rank truncations and compare the dense adjoint range with the chosen feature.",
+        "deps": [
+          "def-ip-feature-estimability-through-adjoint-range",
+          "def-ip-compact-linear-inverse-model",
+          "def-countable-choice",
+          "def-hilbert-space",
+          "lem-square-summable-sequences-form-a-hilbert-space",
+          "def-square-summable-family-on-an-arbitrary-index-set",
+          "lem-finite-rank-operators-are-compact",
+          "thm-norm-limit-of-compact-operators-is-compact",
+          "thm-p-series-real-exponents",
+          "thm-hilbert-space-fourier-expansion",
+          "def-hilbert-space-adjoint",
+          "thm-cauchy-schwarz-in-an-inner-product-space"
+        ],
+        "justified_by": [],
+        "dependency_level": 2,
+        "sources": {
+          "references": [
+            {
+              "title": "Giné and Nickl, Mathematical Foundations of Infinite-Dimensional Statistical Models, §1.2.2",
+              "url": "https://www.statslab.cam.ac.uk/~rn289/Site/__files/FULLPDF.pdf"
+            },
+            {
+              "title": "Kretschmann and Werner, Maximum a posteriori testing in statistical inverse problems, §1.1",
+              "url": "https://arxiv.org/pdf/2402.00686"
+            }
+          ]
+        },
+        "provenance": {
+          "statement": "ai-generated",
+          "proof": "ai-generated"
+        },
+        "proof_strategy": "direct",
+        "axiom_use": "Countable Choice is used through the norm-limit compactness theorem. The diagonal map, density of finite sequences, and failure of exact range membership are established directly.",
+        "generation": {
+          "role": "example"
+        }
+      },
+      {
+        "id": "ex-ip-non-eigenfeature-map-test-has-level-one",
+        "kind": "example",
+        "title": "A non-eigenfeature gives Gaussian MAP rejection probabilities tending to one",
+        "statement": "Assume the Axiom of Choice. Let $X=H=\\mathbb R^2$, $K=\\operatorname{diag}(1,2)$, $C_0=I$, $m_0=0$, and $\\epsilon=1$. Let $U$ be a Borel Gaussian prior with mean $0$ and covariance $I$, independent of a jointly Gaussian centered family $Z$ on $H$ that is linear into $L^2$ with covariance $\\mathbb E[Z(g)Z(k)]=\\langle g,k\\rangle_H$, and set $Y_x(g)=\\langle Kx,g\\rangle_H+Z(g)$. For $h=(1,1)$, the MAP feature operator is $B=K^*K=\\operatorname{diag}(1,4)$, so $h$ is not an eigenvector. The test probe is $\\Phi_h=(1/2,2/5)$ and the threshold is zero. For every $t>0$, the parameter $x_t=t(-1,1)$ is null for the feature $\\langle x,h\\rangle$, and the MAP test rejection probability is $G(3t/\\sqrt{41})$, which tends to one as $t\\to\\infty$. Thus this unrestricted null class has supremum rejection probability one, although no finite $t$ attains it.",
+        "strategy": "Calculate the finite-dimensional MAP probe and evaluate its rejection tail along a null ray.",
+        "deps": [
+          "alg-ip-gaussian-map-feature-test",
+          "thm-ip-map-test-level-and-power",
+          "thm-ip-unrestricted-map-test-can-have-level-one"
+        ],
+        "justified_by": [],
+        "dependency_level": 5,
+        "sources": {
+          "references": [
+            {
+              "title": "Kretschmann and Werner, Maximum a posteriori testing in statistical inverse problems, Theorem 2.6",
+              "url": "https://arxiv.org/pdf/2402.00686"
+            }
+          ]
+        },
+        "provenance": {
+          "statement": "ai-generated",
+          "proof": "ai-generated"
+        },
+        "proof_strategy": "direct",
+        "generation": {
+          "role": "example"
+        }
+      }
+    ],
+    "examples": [
+      "ex-ip-adjoint-range-feature-is-estimable",
+      "ex-ip-closure-only-feature-is-not-exactly-estimable",
+      "ex-ip-non-eigenfeature-map-test-has-level-one"
+    ]
+  }
+]

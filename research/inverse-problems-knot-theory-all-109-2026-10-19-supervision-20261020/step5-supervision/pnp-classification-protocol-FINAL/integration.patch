@@ -1,0 +1,1009 @@
+--- /dev/null
++++ b/tools/step5-pnp-classification-migration.mjs
+@@ -0,0 +1,190 @@
++// Exactly one owner-authorized native 5.5 identity repair. No generic rename API.
++import {createHash} from 'node:crypto';
++import {existsSync,readFileSync,readdirSync,lstatSync,realpathSync,mkdirSync,writeFileSync} from 'node:fs';
++import {resolve,join,relative,dirname} from 'node:path';
++import {fileURLToPath} from 'node:url';
++import {split,yaml} from './pathway-lib.mjs';
++import {itemHashGuard,itemHashJudge} from './item-hash.mjs';
++import {statementHash} from './step5-statement.mjs';
++import {frontmatterList} from './frontmatter-list.mjs';
++export const PNP_RUN='inverse-problems-knot-theory-all-109-2026-10-19';
++export const PNP_OLD='def-ip-pnp-ista-with-denoiser';
++export const PNP_CURRENT='alg-ip-pnp-ista-with-denoiser';
++export const PNP_CONSUMERS=['cex-ip-pnp-iterative-awgn-error-model','ex-ip-approximate-cnn-mmse-denoiser','rem-ip-arbitrary-denoiser-has-no-inherited-objective','thm-ip-exact-mmse-pnp-ista-stationarity'];
++const sha=x=>createHash('sha256').update(typeof x==='string'?x:JSON.stringify(x)).digest('hex');
++const same=(a,b)=>JSON.stringify(a)===JSON.stringify(b);
++const need=(v,m)=>{if(!v)throw Error('Step 5 PnP classification migration: '+m);};
++const read=p=>JSON.parse(readFileSync(p,'utf8'));
++const dir=(root,run)=>join(resolve(root),'research',`${run}-step5-v2`);
++export const pnpClassificationMigrationPath=(root,run)=>join(dir(root,run),'pnp-classification-migration.json');
++const authenticated=new WeakSet();
++function regular(root,p){p=resolve(root,p);const research=resolve(root,'research');need(p.startsWith(research+'/')&&lstatSync(p).isFile()&&!lstatSync(p).isSymbolicLink()&&realpathSync(p).startsWith(realpathSync(research)+'/'),'evidence must be a regular research file');return p;}
++export function pnpSourceCandidate(before){
++ need(before.startsWith(`---\nid: ${PNP_OLD}\nkind: definition\n`)&&!/^aliases:/m.test(split(before).fm),'unsupported old source header/aliases');
++ return before.replace(`id: ${PNP_OLD}\nkind: definition\n`,`id: ${PNP_CURRENT}\nkind: algorithm\naliases: [${PNP_OLD}]\n`);
++}
++function nativeFinal(log,reportPath,report,{original=false}={}){
++ const end=log.lastIndexOf('\ntokens used\n'),start=log.lastIndexOf('\ncodex\n',end);need(start>=0&&end>start,'missing genuine native final log segment');const summary=log.slice(start+7,end).trim();let parsed;try{parsed=JSON.parse(summary);}catch{}
++ if(parsed){need(parsed.run===report.run&&parsed.phase===report.phase&&parsed.round===report.round&&String(parsed.unit)===String(report.unit)&&parsed.input_sha256===report.input_sha256,'native final summary identity differs');for(const row of parsed.reviews??[])if([PNP_OLD,PNP_CURRENT,...PNP_CONSUMERS].includes(row.id))need(report.reviews?.some(r=>r.id===row.id&&r.post_sha256===row.post_sha256&&r.review_context_sha256===row.review_context_sha256&&r.disposition===row.disposition),'native final review differs from detailed report');}
++ else need(!original&&summary.includes(reportPath),'native final lacks exact detailed report reference');
++ if(original){
++  need(parsed&&parsed.repair_notes?.status==='blocked_by_reclassification_scope'&&parsed.repair_notes?.repair_complete===false&&parsed.repair_notes?.mathematical_uncertainty===false&&parsed.repair_notes?.report===reportPath&&same(parsed.created_items,[]),'native49 final lacks actual unresolved blocker/report reference');
++  for(const type of ['decisions','reviews']){const fields=type==='decisions'?['id','model','context_sha256','outcome']:['id','disposition','post_sha256','review_context_sha256'];need(parsed[type]?.length===1&&report[type]?.length===1&&fields.every(k=>same(parsed[type][0][k],report[type][0][k])),'native49 final decision/review differs');}
++ }
++ if(parsed&&!original)for(const row of report.reviews??[])if([PNP_CURRENT,...PNP_CONSUMERS].includes(row.id))need(parsed.reviews?.some(r=>r.id===row.id&&r.post_sha256===row.post_sha256&&r.review_context_sha256===row.review_context_sha256&&r.disposition===row.disposition),'native current final omits detailed current review');
++ return summary;
++}
++function beforeNativeImpact(root,run){
++ need(!readdirSync(dir(root,run)).some(n=>/^impact-repeat(?:-pass-\d+)?-1(?:\.json|-(?:closed|collected|progress)\.json)$/.test(n))&&!existsSync(join(dir(root,run),'repeat-1-collected.json')),'record only before any native5.6 pack/collection');
++ const dispatch=join(root,'research',`${run}-dispatch`);need(!readdirSync(dispatch).some(n=>/^alpha-repair-step5-v2-impact-repeat(?:-pass-\d+)?-r1-u/.test(n)),'native5.6 dispatch evidence already exists');
++}
++function identityOwnership(root,{currentOnly=false}={}){
++ const old=existsSync(join(root,'items',`${PNP_OLD}.md`)),current=existsSync(join(root,'items',`${PNP_CURRENT}.md`));
++ need(old!==current&&(!currentOnly||current),'canonical identity collision/missing source');
++ let owners=0;
++ for(const name of readdirSync(join(root,'research')).filter(n=>new RegExp('^'+PNP_RUN+'-batch-\\d+\\.pages\\.json$').test(n)))for(const page of read(join(root,'research',name)))for(const row of page.items??[])if([PNP_OLD,PNP_CURRENT].includes(row.id)){
++  owners++;need(name===`${PNP_RUN}-batch-49.pages.json`&&page.id==='plug-and-play-mmse-regularization'&&row.id===(current?PNP_CURRENT:PNP_OLD)&&row.kind===(current?'algorithm':'definition'),'original/current manifest ownership or home differs');
++ }
++ need(owners===1,'ambiguous/missing original/current manifest owner');
++ for(const name of readdirSync(join(root,'items')).filter(n=>n.endsWith('.md'))){
++  const fm=split(readFileSync(join(root,'items',name),'utf8')).fm??'',id=fm.match(/^id:[ \t]*["']?([^\r\n"']+)/m)?.[1]?.trim(),aliases=frontmatterList(fm,'aliases');
++  if([PNP_OLD,PNP_CURRENT].includes(id))need(name===`${id}.md`,'canonical identity filename collision');
++  if(name===`${PNP_CURRENT}.md`)need(same(aliases,[PNP_OLD]),'current source must retain exactly the navigation old alias');
++  else need(!aliases.some(id=>[PNP_OLD,PNP_CURRENT].includes(id)),'original/current navigation alias collision');
++ }
++}
++function boundary(state,request){
++ need(state.run===PNP_RUN&&state.stage==='5.5-adjudicate'&&state.paused===true&&Object.values(state.dispatches??{}).every(d=>(!d.startedAt||Boolean(d.endedAt))&&!(d.stage==='5.6-impact'&&d.startedAt)),'requires actual paused/drained native 5.5');
++ need(request.version===1&&request.run===PNP_RUN&&request.group===state.stage&&same(request.stages,[state.stage])&&typeof request.id==='string'&&request.id.length>0&&Number.isFinite(Date.parse(request.at)),'requires matching actual native owner request');
++}
++// Carrier deltas are reviewed finite proposals. A root approval cannot license
++// extra source prose: supplier bytes and consumer replacements are mechanical.
++function carriers(root,row,bytes){
++ const metadata=new Map();need(Array.isArray(row.carriers)&&row.carriers.length===9,'missing finite metadata/consumer carrier inventory');
++ const required=[...PNP_CONSUMERS.map(id=>`items/${id}.md`),`library/inverse-problems/plug-and-play-mmse-regularization.md`,`research/${PNP_RUN}-batch-49.pages.json`,`research/${PNP_RUN}-batch-49.proof-contracts.json`,`research/${PNP_RUN}-proof-contracts.json`,'research/plan-spec.json'];
++ need(required.every(p=>row.carriers.some(c=>c.path===p))&&new Set(row.carriers.map(c=>c.path)).size===row.carriers.length,'missing/duplicate migration carriers');
++ for(const c of row.carriers){
++  need(required.includes(c.path),'unsupported carrier '+c.path);
++  const before=bytes(c.before_file),after=bytes(c.current_file);need(before!==after&&before.includes(PNP_OLD),'empty carrier delta');
++  if(c.path.startsWith('items/')||c.path.startsWith('library/'))need(after===before.replaceAll(PNP_OLD,PNP_CURRENT),'consumer/page must only retarget identity');
++  else {
++   const old=JSON.parse(before),next=JSON.parse(after);
++   const definition=split(bytes(row.entry.before_source_file)).body.match(/^## Definition\s*\n([\s\S]*?)(?=^## |(?![\s\S]))/m)?.[1]?.trim();
++   const transform=(value,path=[])=>{
++    if(Array.isArray(value))return value.map((v,i)=>transform(v,[...path,i]));
++    if(value&&typeof value==='object'){
++     const result={};for(const [key,v]of Object.entries(value)){
++      const nextKey=key===PNP_OLD?PNP_CURRENT:key;
++      if(key==='kind'&&value.id===PNP_OLD){need(v==='definition','old manifest kind differs');result[key]='algorithm';}
++      else if(key==='quote'&&value.source===PNP_OLD&&path.includes('citations')){need(typeof v==='string'&&definition,'invalid supplier quote');result[key]=definition;}
++      else result[nextKey]=transform(v,[...path,key]);
++     }
++     return result;
++    }
++    return typeof value==='string'?value.replaceAll(PNP_OLD,PNP_CURRENT):value;
++   };
++   need(same(transform(old),next),'metadata permits only identity/kind and exact unchanged Definition quote mirrors');
++  }
++  metadata.set(c.path,c);
++ }
++ const find=(v,id)=>Array.isArray(v)?v.flatMap(x=>find(x,id)):v&&typeof v==='object'?[...(v.id===id?[v]:[]),...Object.values(v).flatMap(x=>find(x,id))]:[];
++ const plan=JSON.parse(bytes(metadata.get('research/plan-spec.json').current_file)),planned=find(plan,PNP_CURRENT);need(planned.length===1&&planned[0].kind==='algorithm'&&find(plan,PNP_OLD).length===0,'plan must contain one truthful current algorithm record');
++ for(const path of [`research/${PNP_RUN}-batch-49.proof-contracts.json`,`research/${PNP_RUN}-proof-contracts.json`]){const contract=JSON.parse(bytes(metadata.get(path).current_file));need(contract.contracts?.[PNP_CURRENT]&&!contract.contracts?.[PNP_OLD]&&contract.scope?.includes(PNP_CURRENT)&&!contract.scope.includes(PNP_OLD),'current algorithm contract/scope missing');}
++ const pages=JSON.parse(bytes(metadata.get(`research/${PNP_RUN}-batch-49.pages.json`).current_file));
++ const inventory=pages.flatMap(p=>p.items??[]);need(inventory.filter(i=>i.id===PNP_CURRENT&&i.kind==='algorithm').length===1&&!inventory.some(i=>i.id===PNP_OLD),'current owning manifest identity/kind differs');
++ return metadata;
++}
++function validate(root,run,row,{current=false,virtual=new Map(),receiptBytes=null}={}){
++ root=resolve(root);const {sha256,...payload}=row;
++ need(run===PNP_RUN&&row.version===1&&row.kind==='owner-pnp-classification-migration'&&row.run===run&&row.owner_identity==='/root'&&row.repairer_identity==='/root'&&row.original_id===PNP_OLD&&row.current_id===PNP_CURRENT&&row.batch==='49'&&row.home_page==='plug-and-play-mmse-regularization'&&Number.isFinite(Date.parse(row.recorded_at))&&row.current_review_granted===false&&row.native_execution_coverage_adopted===false&&row.historical_only===true&&row.original_outcome==='confirmed_nonfatal'&&sha256===sha(payload),'invalid bounded receipt');
++ const evidence={},bytes=p=>{const absolute=resolve(root,p);need(Object.hasOwn(row.bindings??{},relative(root,absolute)),'unbound evidence '+p);if(!virtual.has(absolute))regular(root,absolute);const value=virtual.get(absolute)??readFileSync(absolute,'utf8');need(sha(value)===row.bindings[relative(root,absolute)],'stale evidence '+p);evidence[absolute]=sha(value);return value;},bound=p=>JSON.parse(bytes(p));
++ for(const p of Object.keys(row.bindings??{}))bytes(p);
++ const state=bound(row.creation_state),request=bound(row.owner_gate_request);boundary(state,request);need(request.id===row.owner_gate_request_id&&Date.parse(request.at)<=Date.parse(row.recorded_at),'owner request identity/time differs');
++ const frontier=bound(`research/${run}-step5-v2/frontier.json`),pack=bound(`research/${run}-step5-v2/repeat-1.json`),report=bound(`research/${run}-step5-v2/step5-v2-repeat-r1-u49.json`),judge=bound(`research/${run}-step5-v2/judge-1.json`);
++ const {sha256:frontierHash,...frontierPayload}=frontier;
++ need(frontierHash===sha(frontierPayload)&&frontier.run===run&&frontier.ids.length===1472&&new Set(frontier.ids).size===1472&&frontier.batches.length===109&&frontier.batches.filter(b=>b.items.includes(PNP_OLD)).length===1&&frontier.batches.find(b=>b.items.includes(PNP_OLD)).id==='49','original1472/109/batch49 frontier differs');
++ need(pack.run===run&&pack.phase==='repeat'&&pack.round===1&&pack.units.length===109&&pack.rejected.length===36&&Object.values(pack.assignments).flat().length===36&&pack.assignments['49'].filter(r=>r.id===PNP_OLD).length===1&&judge.verdicts.length===331&&judge.verdicts.filter(r=>r.keep===false).length===36,'original331/36 native judge/assignments differ');
++ need(report.run===run&&report.phase==='repeat'&&report.round===1&&String(report.unit)==='49'&&report.input_sha256===sha(pack)&&report.decisions.length===1&&report.decisions[0].id===PNP_OLD&&report.decisions[0].outcome==='confirmed_nonfatal'&&report.repair_notes?.status==='blocked_by_reclassification_scope'&&report.repair_notes?.repair_complete===false&&report.reviews.length===1&&report.reviews[0].id===PNP_OLD&&report.reviews[0].disposition==='unaffected'&&report.created_items.length===0,'original nonfatal unresolved native49 report differs');
++ const before=bytes(row.entry.before_source_file),after=bytes(row.entry.current_source_file),fm=yaml().parse(split(before).fm);
++ need(fm.id===PNP_OLD&&fm.kind==='definition'&&fm.status==='draft'&&fm.pipeline_run===run&&after===pnpSourceCandidate(before)&&itemHashGuard(before)===report.reviews[0].post_sha256&&itemHashGuard(before)===pack.before[PNP_OLD],'source body/metadata changed beyond exact id/kind/old alias');
++ need(row.entry.before_raw_sha256===sha(before)&&row.entry.after_raw_sha256===sha(after),'source raw binding differs');
++ const metadata=carriers(root,row,bytes);
++ const review=bound(row.independent_review),math=bound(row.root_math_review);need(review.accepted===true&&review.reviewer_identity!=='/root'&&/^\/root\/[a-z0-9_-]+$/.test(review.reviewer_identity??'')&&review.current_review_granted===false&&review.native_execution_coverage_adopted===false&&same(review.carrier_bindings,row.carriers.map(c=>({path:c.path,before_sha256:sha(bytes(c.before_file)),after_sha256:sha(bytes(c.current_file))})))&&review.before_source_sha256===sha(before)&&review.after_source_sha256===sha(after),'independent acceptance must bind exact finite candidates without native credit');
++ need(math?.run===run&&math.native_credit_claimed===false&&same(math.new_prerequisites,[])&&math.native49_binding?.outcome==='confirmed_nonfatal'&&math.native49_binding?.raw_sha256===sha(bytes(`research/${run}-step5-v2/step5-v2-repeat-r1-u49.json`))&&math.classification?.minimal_migration?.old_id===PNP_OLD&&math.classification?.minimal_migration?.new_id===PNP_CURRENT&&same([...(math.consumer_inventory?.current_direct??[])].sort(),[...PNP_CONSUMERS].sort())&&row.consumer_ids?.length===4&&same([...row.consumer_ids].sort(),[...PNP_CONSUMERS].sort()),'missing explicit math/consumer review');
++ // The native execution, actual immutable attempt, prompt and final log remain
++ // bound evidence. Root repair does not alter or adopt their physical review.
++ const nativePath=`research/${run}-dispatch/alpha-adjudicate-step5-v2-repeat-r1-u49.result.json`,native=bound(nativePath),dispatch=Object.values(state.dispatches??{}).filter(d=>d.label==='step5-v2-repeat-r1-u49'&&d.stage==='5.5-adjudicate');
++ need(native.ok===true&&native.run===run&&native.role==='alpha-adjudicate'&&native.label==='step5-v2-repeat-r1-u49'&&native.model==='gpt-6.1-sol'&&native.provider_effort==='high'&&native.exit_code===0&&native.process_exit_code===0&&native.timed_out===false&&native.terminal_summary?.task_completed===true&&native.terminal_summary?.task_aborted===false&&native.terminal_summary?.final_response_present===true&&native.terminal_summary?.error_events===0&&Number.isSafeInteger(native.attempt)&&native.attempt>0&&native.evidence_tag===`.attempt-${native.attempt}`&&same(native.covers,['49'])&&dispatch.length===1&&dispatch[0].role==='alpha-adjudicate'&&same(dispatch[0].covers,['49'])&&dispatch[0].lastExitOk===true&&dispatch[0].attempt===native.attempt&&[native.started_at,native.ended_at,dispatch[0].startedAt,dispatch[0].endedAt].every(d=>Number.isFinite(Date.parse(d)))&&Date.parse(native.started_at)<=Date.parse(native.ended_at)&&Date.parse(native.ended_at)<=Date.parse(dispatch[0].endedAt)&&Date.parse(dispatch[0].startedAt)<=Date.parse(native.started_at)&&Date.parse(dispatch[0].endedAt)<=Date.parse(request.at),'native49 successful execution not authenticated');
++ need(bytes(nativePath)===bytes(nativePath.replace(/\.result\.json$/,`.attempt-${native.attempt}.result.json`)),'immutable native49 attempt differs');
++ need(resolve(root,native.prompt)===resolve(root,nativePath.replace(/\.result\.json$/,`.attempt-${native.attempt}.prompt.md`))&&resolve(root,native.log)===resolve(root,nativePath.replace(/\.result\.json$/,`.attempt-${native.attempt}.log`)),'native49 immutable prompt/log path differs');
++ const prompt=bytes(native.prompt),log=bytes(native.log);nativeFinal(log,`research/${run}-step5-v2/step5-v2-repeat-r1-u49.json`,report,{original:true});need(prompt.includes(`run: ${run}`)&&prompt.includes('unit:"49"')&&prompt.includes(`output: research/${run}-step5-v2/step5-v2-repeat-r1-u49.json`)&&prompt.includes(`input_sha256:"${sha(pack)}"`)&&log.includes('blocked_by_reclassification_scope')&&log.includes(PNP_OLD),'native49 prompt/log identity differs');
++ const allDecisions=[];
++ for(const unit of pack.units){
++  const historical=bound(`research/${run}-step5-v2/step5-v2-repeat-r1-u${unit}.json`);
++  need(historical.run===run&&historical.phase==='repeat'&&historical.round===1&&String(historical.unit)===unit&&historical.input_sha256===sha(pack)&&Array.isArray(historical.decisions)&&same(historical.decisions.map(r=>[r.id,r.model,r.context_sha256]).sort(),pack.assignments[unit].map(r=>[r.id,r.model,r.context_sha256]).sort()),'native repeat decision inventory changed '+unit);
++  allDecisions.push(...historical.decisions);
++ }
++ need(allDecisions.length===36,'original36 native decisions not preserved');
++ const previous=bound(`research/${run}-step5-v2/certification-impact-initial-1.json`);need(previous.items.length===679&&previous.items.some(i=>i.id===PNP_OLD)&&previous.items.some(i=>i.id==='ex-ip-exact-adaptive-credible-coverage-by-posterior-null-deletion'),'prior679 certificate/original batch21 migration absent');
++ // Prefix preservation permits ordinary later native ledger append only.
++ const ledgerBefore=bytes(row.judge_ledger_before);const liveLedger=readFileSync(join(root,'research',`${run}-judge.jsonl`),'utf8');need(liveLedger.startsWith(ledgerBefore),'original Luna/Sol judge ledger history changed');
++ if(current){identityOwnership(root,{currentOnly:true});need(!existsSync(join(root,'items',`${PNP_OLD}.md`))&&existsSync(join(root,'items',`${PNP_CURRENT}.md`)),'old source revived or current source absent');const live=yaml().parse(split(readFileSync(join(root,'items',`${PNP_CURRENT}.md`),'utf8')).fm);need(live.id===PNP_CURRENT&&live.kind==='algorithm'&&live.aliases?.includes(PNP_OLD),'current canonical algorithm identity/alias differs');}
++ const path=pnpClassificationMigrationPath(root,run);if(receiptBytes)evidence[path]=sha(receiptBytes);
++ const loaded={...row,path,root,evidence,metadata,frontier,pack,historicalGuards:Object.fromEntries([...metadata.values()].filter(c=>c.path.startsWith('items/')).map(c=>[c.path.slice(6,-3),itemHashGuard(bytes(c.before_file))])),before_guard:itemHashGuard(before),after_guard:itemHashGuard(after),historical_review:report.reviews[0],before_source:before,after_source:after,allowed_original_raw_sha256:[sha(before)],targets:[PNP_CURRENT,...PNP_CONSUMERS],prior_certificate:previous};authenticated.add(loaded);return loaded;
++}
++export function loadPnpClassificationMigration(root,run,{current=false}={}){const path=pnpClassificationMigrationPath(root,run);if(!existsSync(path))return null;const bytes=readFileSync(path,'utf8');return validate(root,run,JSON.parse(bytes),{current,receiptBytes:bytes});}
++export function projectPnpOriginalIds(root,run,ids){const h=loadPnpClassificationMigration(root,run,{current:true});if(!h)return [...ids];const normalized=list=>list.map(id=>id==='op-ip-honest-coverage-over-ill-posed-truth-classes'?'ex-ip-exact-adaptive-credible-coverage-by-posterior-null-deletion':id).sort();need(ids.length===1472&&same(normalized(ids),normalized(h.frontier.ids))&&ids.includes(PNP_OLD)&&!ids.includes(PNP_CURRENT),'projection requires exact original slots');const result=ids.map(id=>id===PNP_OLD?PNP_CURRENT:id);need(new Set(result).size===1472,'nonbijective projection');return result;}
++export function supportingPnpClassificationHistory(context,path,expected){if(!context?.root||!context?.run)return null;const h=loadPnpClassificationMigration(context.root,context.run);if(!h)return null;const c=h.metadata.get(relative(resolve(context.root),resolve(context.root,path)));if(c&&sha(readFileSync(resolve(context.root,c.before_file),'utf8'))===expected)return {archive:resolve(context.root,c.before_file),marker:h.path,evidence:h.evidence};return null;}
++export function isPnpClassificationMigration(h,pack,now){return authenticated.has(h)&&same(h.pack,pack)&&!Object.hasOwn(now,PNP_OLD)&&now[PNP_CURRENT]===h.after_guard;}
++export function pnpHistoricalCertificate(h,certificate){return authenticated.has(h)&&same(h.prior_certificate,certificate);}
++function currentReviewMatches(root,review){
++ const text=readFileSync(join(root,'items',`${review.id}.md`),'utf8'),parts=split(text),fm=yaml().parse(parts.fm);
++ const canonical=id=>id===PNP_OLD?PNP_CURRENT:id;
++ const suppliers=[...new Set([...(fm.deps??[]),...(fm.justified_by??[]),...(fm.forward_refs??[]),...(fm.external_refs??[]),...[...parts.body.matchAll(/\[\[([^\]|#]+)(?:[^\]]*)\]\]/g)].map(m=>m[1])].map(canonical))].filter(id=>id!==review.id).sort();
++ const context=sha({version:3,item:[review.id,itemHashGuard(text)],suppliers:suppliers.map(id=>[id,statementHash(readFileSync(join(root,'items',`${id}.md`),'utf8'))])});
++ return review.post_sha256===itemHashGuard(text)&&review.review_context_sha256===context;
++}
++export function pnpCurrentNativeReviews(root,run,certificate,{current=true,matchesReview=review=>!current||currentReviewMatches(root,review)}={}){
++ const h=loadPnpClassificationMigration(root,run,{current:true});if(!h)return [];
++ const found=new Map(),bound=p=>certificate.evidence?.[p]===sha(readFileSync(p,'utf8'));
++ for(const path of Object.keys(certificate.evidence??{})){
++  const match=/\/step5-v2-((?:impact-repeat|gate)(?:-pass-\d+)?)-r(\d+)-u(\d+)\.json$/.exec(path);if(!match)continue;
++  need(bound(path),'current native report changed');const report=read(path),phase=match[1],round=Number(match[2]),unit=match[3],packPath=join(dir(root,run),`${phase}-${round}.json`),pack=read(packPath);
++  const reviews=(report.reviews??[]).filter(r=>h.targets.includes(r.id)&&r.uncertain===false&&['repaired','unaffected'].includes(r.disposition)&&r.post_sha256===certificate.items?.find(i=>i.id===r.id)?.guard_sha256&&matchesReview(r));if(!reviews.length)continue;
++  need(bound(packPath)&&report.run===run&&report.phase===phase&&report.round===round&&String(report.unit)===unit&&report.input_sha256===sha(pack)&&reviews.every(r=>pack.assignments[unit]?.includes(r.id)),'current reviews lack native assignments');
++  const label=`step5-v2-${phase}-r${round}-u${unit}`,dispatch=join(root,'research',`${run}-dispatch`,`alpha-repair-${label}.result.json`),native=read(dispatch),attempt=dispatch.replace(/\.result\.json$/,`.attempt-${native.attempt}.result.json`);
++  need(bound(dispatch)&&bound(attempt)&&readFileSync(dispatch,'utf8')===readFileSync(attempt,'utf8')&&native.run===run&&native.role==='alpha-repair'&&native.label===label&&native.ok===true&&native.model==='gpt-6.1-sol'&&native.provider_effort==='high'&&native.exit_code===0&&native.process_exit_code===0&&native.timed_out===false&&native.terminal_summary?.task_completed===true&&native.terminal_summary?.task_aborted===false&&native.terminal_summary?.final_response_present===true&&native.terminal_summary?.error_events===0&&Number.isSafeInteger(native.attempt)&&native.attempt>0&&native.evidence_tag===`.attempt-${native.attempt}`&&same(native.covers,[phase.includes('-pass-')?`${phase}:${unit}`:unit]),'current reviews lack genuine native owner execution');
++  const prompt=resolve(root,native.prompt??''),log=resolve(root,native.log??'');need(bound(prompt)&&bound(log)&&prompt===dispatch.replace(/\.result\.json$/,`.attempt-${native.attempt}.prompt.md`)&&log===dispatch.replace(/\.result\.json$/,`.attempt-${native.attempt}.log`),'current reviews lack actual prompt/final log');
++  const promptText=readFileSync(prompt,'utf8'),logText=readFileSync(log,'utf8');nativeFinal(logText,relative(root,path),report);need(promptText.includes(`run: ${run}`)&&promptText.includes(`output: ${relative(root,path)}`)&&promptText.includes(`input_sha256:"${sha(pack)}"`),'current native prompt/log identity differs');
++  for(const review of reviews)found.set(review.id,review);
++ }
++ return h.targets.every(id=>found.has(id))?[...found.values()]:[];
++}
++export function licensedPnpReplacement(root,run,oldId,newId,certificate,{matchesReview=review=>currentReviewMatches(root,review)}={}){
++ const h=loadPnpClassificationMigration(root,run,{current:true});if(!h||oldId!==PNP_OLD||newId!==PNP_CURRENT)return false;
++ const text=readFileSync(join(root,'items',`${PNP_CURRENT}.md`),'utf8'),rows=certificate?.items?.filter(r=>r.id===PNP_CURRENT)??[];
++ return rows.length===1&&rows[0].guard_sha256===itemHashGuard(text)&&rows[0].item_sha256===itemHashJudge(text)&&!certificate.items.some(r=>r.id===PNP_OLD)&&!(certificate.creations??[]).some(r=>r.id===PNP_CURRENT)&&Object.entries(h.evidence).every(([p,v])=>certificate.evidence?.[p]===v)&&pnpCurrentNativeReviews(root,run,certificate,{matchesReview}).length===5;
++}
++function prepare(root,run,requestFile){
++ root=resolve(root);need(run===PNP_RUN,'unsupported run');const statePath=join(root,'.autopilot',run,'state.json'),ownerPath=join(root,'.autopilot',run,'owner-gate-request.json'),stateBytes=readFileSync(statePath,'utf8'),ownerBytes=readFileSync(ownerPath,'utf8');boundary(JSON.parse(stateBytes),JSON.parse(ownerBytes));beforeNativeImpact(root,run);identityOwnership(root);
++ need(!existsSync(join(dir(root,run),'repeat-1-collected.json'))&&!existsSync(join(dir(root,run),'impact-repeat-1.json')),'record only before native5.5 collection/5.6 assignment');
++ const requestBytes=readFileSync(regular(root,requestFile),'utf8'),request=JSON.parse(requestBytes);need(!request.bindings&&!request.creation_state&&!request.owner_gate_request&&!request.sha256&&!request.recorded_at,'synthetic creation bindings forbidden');
++ const base=join(dir(root,run),'pnp-classification-migration'),virtual=new Map(),pin=(name,text)=>{const p=join(base,name);virtual.set(p,text);return relative(root,p);};
++ const row={...request,recorded_at:new Date().toISOString(),creation_state:pin('creation-state.json',stateBytes),owner_gate_request:pin('native-owner-request.json',ownerBytes),owner_gate_request_id:JSON.parse(ownerBytes).id,owner_request_file:pin('owner-request.json',requestBytes),judge_ledger_before:pin('judge-ledger-before.jsonl',readFileSync(join(root,'research',`${run}-judge.jsonl`),'utf8')),bindings:{}};
++ const nativePath=`research/${run}-dispatch/alpha-adjudicate-step5-v2-repeat-r1-u49.result.json`,native=read(join(root,nativePath));
++ const files=[...['frontier.json','baseline.json','step4-verdicts.json','initial-1.json','judge-1.json','repeat-1.json','step5-v2-repeat-r1-u49.json','certification-impact-initial-1.json','original-slot-reclassification.json'].map(n=>join(dir(root,run),n)),resolve(root,nativePath),resolve(root,nativePath.replace(/\.result\.json$/,`.attempt-${native.attempt}.result.json`)),resolve(root,native.prompt),resolve(root,native.log),resolve(root,row.entry.before_source_file),resolve(root,row.entry.current_source_file),resolve(root,row.root_math_review),resolve(root,row.independent_review),...row.carriers.flatMap(c=>[resolve(root,c.before_file),resolve(root,c.current_file)])];
++ if(existsSync(join(dir(root,run),'original-slot-level-correction.json')))files.push(join(dir(root,run),'original-slot-level-correction.json'));
++ files.push(...read(join(dir(root,run),'repeat-1.json')).units.map(unit=>join(dir(root,run),`step5-v2-repeat-r1-u${unit}.json`)));
++ for(const p of files){regular(root,p);row.bindings[relative(root,p)]=sha(readFileSync(p,'utf8'));}for(const [p,text]of virtual)row.bindings[relative(root,p)]=sha(text);row.sha256=sha(row);validate(root,run,row,{virtual});return {root,row,virtual,statePath,ownerPath,stateBytes,ownerBytes};
++}
++export function previewPnpClassificationMigration(root,run,requestFile){const p=prepare(root,run,requestFile);return {row:p.row,current_review_granted:false,native_execution_coverage_adopted:false};}
++export function recordPnpClassificationMigration(root,run,requestFile){
++ const p=prepare(root,run,requestFile),target=pnpClassificationMigrationPath(p.root,run);need(!existsSync(target),'receipt already exists');const h=validate(p.root,run,p.row,{virtual:p.virtual,current:true});
++ need(readFileSync(join(p.root,'items',`${PNP_CURRENT}.md`),'utf8')===h.after_source,'actual source differs from accepted candidate');for(const c of p.row.carriers)need(readFileSync(resolve(p.root,c.path),'utf8')===readFileSync(resolve(p.root,c.current_file),'utf8'),'actual carrier differs '+c.path);
++ for(const name of readdirSync(join(p.root,'items')).filter(n=>n.endsWith('.md')&&n!==`${PNP_CURRENT}.md`)){const text=readFileSync(join(p.root,'items',name),'utf8');need(!frontmatterList(split(text).fm,'aliases').some(id=>[PNP_OLD,PNP_CURRENT].includes(id)),'old/current alias collision');}
++ beforeNativeImpact(p.root,run);identityOwnership(p.root,{currentOnly:true});
++ for(const [file,hash]of Object.entries(p.row.bindings))need(sha(p.virtual.get(resolve(p.root,file))??readFileSync(resolve(p.root,file),'utf8'))===hash,'bound input changed during recording: '+file);
++ need(readFileSync(join(p.root,'items',`${PNP_CURRENT}.md`),'utf8')===h.after_source,'actual source changed during recording');for(const c of p.row.carriers)need(readFileSync(resolve(p.root,c.path),'utf8')===readFileSync(resolve(p.root,c.current_file),'utf8'),'actual carrier changed during recording');
++ need(readFileSync(p.statePath,'utf8')===p.stateBytes&&readFileSync(p.ownerPath,'utf8')===p.ownerBytes,'native boundary changed');for(const [file,text]of p.virtual){mkdirSync(dirname(file),{recursive:true});writeFileSync(file,text,{flag:'wx'});}writeFileSync(target,JSON.stringify(p.row,null,2)+'\n',{flag:'wx'});return {path:target,current_review_granted:false,native_execution_coverage_adopted:false};
++}
++if(process.argv[1]&&resolve(process.argv[1])===fileURLToPath(import.meta.url)){try{const args=process.argv.slice(2),opt=n=>args[args.indexOf(n)+1],root=resolve(args.includes('--root')?opt('--root'):process.cwd()),run=opt('--run');need(['preview','record','check'].includes(args[0]),'expected preview|record|check');const result=args[0]==='check'?{present:Boolean(loadPnpClassificationMigration(root,run,{current:true}))}:args[0]==='preview'?previewPnpClassificationMigration(root,run,opt('--authorization')):recordPnpClassificationMigration(root,run,opt('--authorization'));console.log(JSON.stringify(result,null,2));}catch(e){console.error(e.message);process.exitCode=1;}}
+--- /dev/null
++++ b/tools/step5-pnp-classification-migration.test.mjs
+@@ -0,0 +1,86 @@
++import test from 'node:test';
++import fs from 'node:fs';
++import {syncBuiltinESMExports} from 'node:module';
++import assert from 'node:assert/strict';
++import {mkdtempSync,mkdirSync,writeFileSync,readFileSync,rmSync,existsSync} from 'node:fs';
++import {tmpdir} from 'node:os';
++import {join,dirname,resolve} from 'node:path';
++import {fileURLToPath} from 'node:url';
++import {createHash} from 'node:crypto';
++import {PNP_RUN as run,PNP_OLD as old,PNP_CURRENT as current,PNP_CONSUMERS as consumers,pnpSourceCandidate,previewPnpClassificationMigration,recordPnpClassificationMigration,loadPnpClassificationMigration,projectPnpOriginalIds,isPnpClassificationMigration,pnpHistoricalCertificate,licensedPnpReplacement} from './step5-pnp-classification-migration.mjs';
++import {itemHashGuard,itemHashJudge} from './item-hash.mjs';
++import {statementHash} from './step5-statement.mjs';
++const sha=x=>createHash('sha256').update(typeof x==='string'?x:JSON.stringify(x)).digest('hex');
++export function createPnpMigrationFixture(){
++ const root=mkdtempSync(join(tmpdir(),'pnp-migration-')),d=`research/${run}-step5-v2`,put=(p,v)=>{const f=join(root,p);mkdirSync(dirname(f),{recursive:true});writeFileSync(f,typeof v==='string'?v:JSON.stringify(v,null,2)+'\n');return p;},get=p=>JSON.parse(readFileSync(join(root,p),'utf8'));
++ const before=`---\nid: ${old}\nkind: definition\nstatus: draft\npipeline_run: ${run}\ndeps: []\n---\n\n## Definition\n\nA deterministic recurrence with no convergence guarantee.\n`,after=pnpSourceCandidate(before),guard=itemHashGuard(before);
++ const ids=[old,...consumers,...Array.from({length:1467},(_,i)=>`ex-fixture-${i}`)],batches=Array.from({length:109},(_,i)=>({id:String(i+1),items:i===48?[old]:[]})),frontier={version:1,run,ids,batches};frontier.sha256=sha(frontier);put(`${d}/frontier.json`,frontier);
++ const rejected=Array.from({length:36},(_,i)=>({id:i===0?old:`ex-fixture-${i}`,model:'gpt-6.1-sol',context_sha256:sha(String(i))})),pack={run,phase:'repeat',round:1,repair_scope:'frontier',frontier_ids:ids,units:batches.map(b=>b.id),rejected,assignments:Object.fromEntries(batches.map(b=>[b.id,b.id==='49'?[rejected[0]]:Number(b.id)<=35?[rejected[Number(b.id)]]:[]])),before:{...Object.fromEntries(rejected.map(r=>[r.id,sha(r.id)])),...Object.fromEntries(consumers.map(id=>[id,itemHashGuard(`---\nid: ${id}\n---\n[[${old}]]\n`)])),[old]:guard}};put(`${d}/repeat-1.json`,pack);
++ const report={run,phase:'repeat',round:1,unit:'49',input_sha256:sha(pack),decisions:[{...rejected[0],outcome:'confirmed_nonfatal',reason:'The procedure requires the exact algorithm identity correction.',uncertain:false,source_urls:[],familiar:true}],reviews:[{id:old,disposition:'unaffected',post_sha256:guard,review_context_sha256:sha('historicalcontext'),reason:'The unchanged historical procedure is well defined by deterministic recursion.',uncertain:false,source_urls:[],familiar:true}],created_items:[],downstream:[],repair_notes:{status:'blocked_by_reclassification_scope',repair_complete:false,mathematical_uncertainty:false,report:`${d}/step5-v2-repeat-r1-u49.json`}};put(`${d}/step5-v2-repeat-r1-u49.json`,report);for(const unit of pack.units)if(unit!=='49')put(`${d}/step5-v2-repeat-r1-u${unit}.json`,{run,phase:'repeat',round:1,unit,input_sha256:sha(pack),decisions:pack.assignments[unit].map(r=>({...r,outcome:'false_positive',reason:'The actual mathematical claim satisfies the stated hypotheses in this fixture.',uncertain:false,source_urls:[],familiar:true})),reviews:pack.assignments[unit].map(r=>({id:r.id,disposition:'unaffected',post_sha256:pack.before[r.id],review_context_sha256:sha(r.id+'context'),reason:'Checked the exact unchanged current carrier and required supplier interfaces.',uncertain:false,source_urls:[],familiar:true})),created_items:[],downstream:[]});
++ put(`${d}/judge-1.json`,{verdicts:Array.from({length:331},(_,i)=>({id:`ex-fixture-${i}`,keep:i>=36}))});for(const n of ['baseline.json','step4-verdicts.json','initial-1.json','original-slot-reclassification.json','original-slot-level-correction.json'])put(`${d}/${n}`,{});
++ const prior={items:[{id:old},{id:'ex-ip-exact-adaptive-credible-coverage-by-posterior-null-deletion'},...Array.from({length:677},(_,i)=>({id:`ex-prior-${i}`}))]};put(`${d}/certification-impact-initial-1.json`,prior);put(`research/${run}-judge.jsonl`,'{"historical":true}\n');
++ const nativePath=`research/${run}-dispatch/alpha-adjudicate-step5-v2-repeat-r1-u49.result.json`,prompt=nativePath.replace('.result.json','.attempt-1.prompt.md'),log=nativePath.replace('.result.json','.attempt-1.log');put(prompt,`run: ${run}\nunit:"49"\noutput: ${d}/step5-v2-repeat-r1-u49.json\ninput_sha256:"${sha(pack)}"`);put(log,`\ncodex\n${JSON.stringify(report)}\ntokens used\n10\n`);
++ const native={run,role:'alpha-adjudicate',label:'step5-v2-repeat-r1-u49',model:'gpt-6.1-sol',provider_effort:'high',ok:true,covers:['49'],started_at:'2026-10-21T23:00:00Z',ended_at:'2026-10-21T23:01:00Z',attempt:1,evidence_tag:'.attempt-1',prompt,log,exit_code:0,process_exit_code:0,timed_out:false,terminal_summary:{task_completed:true,task_aborted:false,final_response_present:true,error_events:0}};put(nativePath,native);put(nativePath.replace('.result.json','.attempt-1.result.json'),native);
++ const state={run,stage:'5.5-adjudicate',paused:true,dispatches:{native:{stage:'5.5-adjudicate',role:'alpha-adjudicate',covers:['49'],label:native.label,startedAt:'2026-10-21T23:00:00Z',endedAt:'2026-10-21T23:01:00Z',lastExitOk:true,attempt:1}}};put(`.autopilot/${run}/state.json`,state);put(`.autopilot/${run}/owner-gate-request.json`,{version:1,run,id:'hold',group:state.stage,stages:[state.stage],at:'2026-10-21T23:02:00Z'});
++ const entry={before_source_file:put('research/source-before.md',before),current_source_file:put('research/source-current.md',after),before_raw_sha256:sha(before),after_raw_sha256:sha(after)},carriers=[];
++ const carrier=(path,a,b)=>{put(path,a);carriers.push({path,before_file:put(`research/carrier-${carriers.length}-before`,a),current_file:put(`research/carrier-${carriers.length}-current`,b)});};
++ for(const id of consumers)carrier(`items/${id}.md`,`---\nid: ${id}\n---\n[[${old}]]\n`,`---\nid: ${id}\n---\n[[${current}]]\n`);
++ carrier('library/inverse-problems/plug-and-play-mmse-regularization.md',`items: [${old}]`,`items: [${current}]`);
++ carrier(`research/${run}-batch-49.pages.json`,[{id:'plug-and-play-mmse-regularization',items:[{id:old,kind:'definition'}]}],[{id:'plug-and-play-mmse-regularization',items:[{id:current,kind:'algorithm'}]}]);
++ for(const path of [`research/${run}-batch-49.proof-contracts.json`,`research/${run}-proof-contracts.json`])carrier(path,{scope:[old],contracts:{[old]:{citations:[]}}},{scope:[current],contracts:{[current]:{citations:[]}}});carrier('research/plan-spec.json',{pages:[{id:'plug-and-play-mmse-regularization',items:[{id:old,kind:'definition'}]}]},{pages:[{id:'plug-and-play-mmse-regularization',items:[{id:current,kind:'algorithm'}]}]});
++ const root_math_review=put('research/math.json',{run,native_credit_claimed:false,new_prerequisites:[],native49_binding:{outcome:'confirmed_nonfatal',raw_sha256:sha(readFileSync(join(root,d,'step5-v2-repeat-r1-u49.json'),'utf8'))},classification:{minimal_migration:{old_id:old,new_id:current}},consumer_inventory:{current_direct:consumers}}),independent_review=put('research/independent.json',{accepted:true,reviewer_identity:'/root/independent',current_review_granted:false,native_execution_coverage_adopted:false,before_source_sha256:sha(before),after_source_sha256:sha(after),carrier_bindings:carriers.map(c=>({path:c.path,before_sha256:sha(readFileSync(join(root,c.before_file),'utf8')),after_sha256:sha(readFileSync(join(root,c.current_file),'utf8'))}))});
++ const request={version:1,kind:'owner-pnp-classification-migration',run,owner_identity:'/root',repairer_identity:'/root',original_id:old,current_id:current,batch:'49',home_page:'plug-and-play-mmse-regularization',current_review_granted:false,native_execution_coverage_adopted:false,historical_only:true,original_outcome:'confirmed_nonfatal',entry,carriers,root_math_review,independent_review,consumer_ids:consumers};const authorization=put('research/request.json',request);
++ put(`items/${old}.md`,before);const install=()=>{rmSync(join(root,'items',`${old}.md`));put(`items/${current}.md`,after);for(const c of carriers)put(c.path,readFileSync(join(root,c.current_file),'utf8'));recordPnpClassificationMigration(root,run,authorization);return loadPnpClassificationMigration(root,run,{current:true});};
++ return {root,d,put,get,entry,request,authorization,before,after,pack,prior,ids,install,cleanup:()=>rmSync(root,{recursive:true,force:true})};
++}
++if(process.argv[1]&&resolve(process.argv[1])===fileURLToPath(import.meta.url)){
++test('exact header transition preserves Definition body and all other metadata',()=>{const f=createPnpMigrationFixture();try{assert.equal(f.after.split('## Definition')[1],f.before.split('## Definition')[1]);assert.throws(()=>pnpSourceCandidate(f.before.replace('kind: definition','kind: theorem')));}finally{f.cleanup();}});
++test('preview is read only; record retains1472 slots,36 tuples and679 historical certificate entries',()=>{const f=createPnpMigrationFixture();try{const prior=readFileSync(join(f.root,f.d,'certification-impact-initial-1.json'),'utf8');const preview=previewPnpClassificationMigration(f.root,run,f.authorization);assert.equal(preview.current_review_granted,false);assert.equal(existsSync(join(f.root,f.d,'pnp-classification-migration.json')),false);const h=f.install();assert.equal(projectPnpOriginalIds(f.root,run,f.ids).length,1472);assert.equal(projectPnpOriginalIds(f.root,run,f.ids).includes(old),false);assert.ok(isPnpClassificationMigration(h,f.pack,{[current]:itemHashGuard(f.after)}));assert.equal(pnpHistoricalCertificate(h,f.prior),true);assert.equal(readFileSync(join(f.root,f.d,'certification-impact-initial-1.json'),'utf8'),prior);assert.equal(licensedPnpReplacement(f.root,run,old,current,{items:[]}),false);}finally{f.cleanup();}});
++test('wrong stages, live writers, early5.6, altered body and unrelated metadata fail closed',()=>{for(const defect of ['stage','writer','next','body','metadata','fatal','review']){const f=createPnpMigrationFixture();try{if(defect==='stage'||defect==='writer'){const path=`.autopilot/${run}/state.json`,state=f.get(path);if(defect==='stage')state.stage='5.1-adjudicate';else state.dispatches.extra={startedAt:'now'};f.put(path,state);}if(defect==='next')f.put(`${f.d}/impact-repeat-1.json`,{});if(defect==='body'){const text=f.after+'Extra theorem.\n';f.put(f.entry.current_source_file,text);f.request.entry.after_raw_sha256=sha(text);f.put(f.authorization,f.request);}if(defect==='metadata'){const c=f.request.carriers.at(-1);f.put(c.current_file,{scope:[current],contracts:{[current]:{citations:[]}},extra:'unrelated'});}if(defect==='fatal'){const p=`${f.d}/step5-v2-repeat-r1-u49.json`,r=f.get(p);r.decisions[0].outcome='confirmed_fatal';f.put(p,r);}if(defect==='review')f.put(f.request.independent_review,{accepted:true});assert.throws(()=>previewPnpClassificationMigration(f.root,run,f.authorization),undefined,defect);}finally{f.cleanup();}}});
++test('historical native bytes, ledger prefix, revived old source and missingcurrent source stay protected',()=>{for(const defect of ['native','ledger','revived','missing']){const f=createPnpMigrationFixture();try{f.install();if(defect==='native')f.put(`${f.d}/step5-v2-repeat-r1-u49.json`,{});if(defect==='ledger')f.put(`research/${run}-judge.jsonl`,'rewritten');if(defect==='revived')f.put(`items/${old}.md`,f.before);if(defect==='missing')rmSync(join(f.root,'items',`${current}.md`));assert.throws(()=>loadPnpClassificationMigration(f.root,run,{current:true}));}finally{f.cleanup();}}});
++
++test('replacement requires fresh native5.6review of current algorithm and allfour affectedconsumers',()=>{
++ const f=createPnpMigrationFixture();try{
++  const h=f.install(),ids=[current,...consumers],phase='impact-repeat',round=1,unit='1',label=`step5-v2-${phase}-r1-u${unit}`,pack={run,phase,round,assignments:{'1':ids}},packPath=join(f.root,f.d,`${phase}-${round}.json`),reportPath=join(f.root,f.d,`${label}.json`);
++  f.put(`${f.d}/${phase}-${round}.json`,pack);
++  const items=ids.map(id=>{const text=readFileSync(join(f.root,'items',`${id}.md`),'utf8');return {id,guard_sha256:itemHashGuard(text),item_sha256:itemHashJudge(text),context_sha256:sha('judgecontext')};});
++  const reviews=items.map(item=>({id:item.id,post_sha256:item.guard_sha256,review_context_sha256:sha({version:3,item:[item.id,item.guard_sha256],suppliers:item.id===current?[]:[[current,statementHash(f.after)]]}),disposition:'unaffected',uncertain:false}));
++  const report={run,phase,round,unit,input_sha256:sha(pack),reviews},dispatch=`research/${run}-dispatch/alpha-repair-${label}.result.json`,prompt=dispatch.replace('.result.json','.attempt-1.prompt.md'),log=dispatch.replace('.result.json','.attempt-1.log');
++  f.put(`${f.d}/${label}.json`,report);f.put(prompt,`run: ${run}\noutput: ${f.d}/${label}.json\ninput_sha256:"${sha(pack)}"`);f.put(log,`\ncodex\nnativefinal report ${f.d}/${label}.json\ntokens used\n10\n`);
++  const native={run,role:'alpha-repair',label,model:'gpt-6.1-sol',provider_effort:'high',ok:true,attempt:1,evidence_tag:'.attempt-1',covers:['1'],prompt,log,exit_code:0,process_exit_code:0,timed_out:false,terminal_summary:{task_completed:true,task_aborted:false,final_response_present:true,error_events:0}};f.put(dispatch,native);f.put(dispatch.replace('.result.json','.attempt-1.result.json'),native);
++  const evidence={...h.evidence};for(const p of [packPath,reportPath,...[dispatch,prompt,log,dispatch.replace('.result.json','.attempt-1.result.json')].map(p=>join(f.root,p))])evidence[p]=sha(readFileSync(p,'utf8'));
++  const cert={items,evidence};assert.equal(licensedPnpReplacement(f.root,run,old,current,cert),true);
++  assert.equal(licensedPnpReplacement(f.root,run,old,current,{...cert,creations:[{id:current}]}),false);
++  const original=readFileSync(reportPath,'utf8');for(const defect of ['missingconsumer','stalecontext','oldid','oldmodel']){
++   if(defect==='oldmodel'){const p=join(f.root,dispatch),n=JSON.parse(readFileSync(p,'utf8'));n.model='gpt-5';writeFileSync(p,JSON.stringify(n));evidence[p]=sha(readFileSync(p,'utf8'));assert.throws(()=>licensedPnpReplacement(f.root,run,old,current,cert));break;}
++   const next=JSON.parse(original);if(defect==='missingconsumer')next.reviews.pop();if(defect==='stalecontext')next.reviews[0].review_context_sha256=sha('old');if(defect==='oldid')next.reviews[0].id=old;writeFileSync(reportPath,JSON.stringify(next));evidence[reportPath]=sha(readFileSync(reportPath,'utf8'));assert.equal(licensedPnpReplacement(f.root,run,old,current,cert),false,defect);
++  }
++ }finally{f.cleanup();}
++});
++
++test('FIRSTmalformed nativefinal, covers, output, timestamps and duplicateowner probes fail closed',()=>{
++ for(const defect of ['final','covers','output','time','owner','alias','nextdispatch']){const f=createPnpMigrationFixture();try{
++  const nativePath=`research/${run}-dispatch/alpha-adjudicate-step5-v2-repeat-r1-u49.result.json`,n=f.get(nativePath),r=f.get(`${f.d}/step5-v2-repeat-r1-u49.json`);
++  if(defect==='final'){r.decisions[0].outcome='false_positive';r.reviews=[];delete r.repair_notes;f.put(n.log,`earlier blocked_by_reclassification_scope ${old}\ncodex\n${JSON.stringify(r)}\ntokens used\n10\n`);}
++  if(defect==='covers'){n.covers=['999'];f.put(nativePath,n);f.put(nativePath.replace('.result.json','.attempt-1.result.json'),n);}
++  if(defect==='output')f.put(n.prompt,`run: ${run}\nunit:"49" input_sha256:"${sha(f.pack)}"\noutput: research/other.json`);
++  if(defect==='time'){const path=`.autopilot/${run}/owner-gate-request.json`,q=f.get(path);q.at='2026-10-21T22:59:00Z';f.put(path,q);}
++  if(defect==='owner')f.put(`research/${run}-batch-2.pages.json`,[{id:'other',items:[{id:old,kind:'definition'}]}]);
++  if(defect==='alias')f.put('items/ex-alias-collision.md',`---\nid: ex-alias-collision\naliases: [${old}]\n---\n`);
++  if(defect==='nextdispatch')f.put(`research/${run}-dispatch/alpha-repair-step5-v2-impact-repeat-pass-2-r1-u1.attempt-1.prompt.md`,'alreadydispatched');
++  assert.throws(()=>previewPnpClassificationMigration(f.root,run,f.authorization),undefined,defect);
++ }finally{f.cleanup();}}
++});
++test('currentloader rejects later canonicalalias collision and manifest reownership',()=>{
++ for(const defect of ['owner','home','alias']){const f=createPnpMigrationFixture();try{f.install();if(defect==='owner')f.put(`research/${run}-batch-2.pages.json`,[{id:'other',items:[{id:current,kind:'algorithm'}]}]);if(defect==='home'){const path=`research/${run}-batch-49.pages.json`,pages=f.get(path);pages[0].id='another-home';f.put(path,pages);}if(defect==='alias')f.put('items/ex-alias-collision.md',`---\nid: ex-alias-collision\naliases: [${old}]\n---\n`);assert.throws(()=>loadPnpClassificationMigration(f.root,run,{current:true}));}finally{f.cleanup();}}
++});
++
++test('recorder finalboundinput recheck refuses an observed source-read race before receipt creation',()=>{
++ const f=createPnpMigrationFixture(),original=fs.readFileSync;let reads=0;
++ try{
++  fs.readFileSync=function(path,...args){const result=original(path,...args);if(String(path)===join(f.root,'items',`${current}.md`)&&++reads===4){const reportPath=join(f.root,f.d,'step5-v2-repeat-r1-u49.json');writeFileSync(reportPath,original(reportPath,'utf8')+'\n');}return result;};syncBuiltinESMExports();
++  assert.throws(()=>f.install(),/bound input changed during recording/);assert.equal(existsSync(join(f.root,f.d,'pnp-classification-migration.json')),false);
++ }finally{fs.readFileSync=original;syncBuiltinESMExports();f.cleanup();}
++});
++
++}
+--- /dev/null
++++ b/tools/step5-pnp-classification-integration.test.mjs
+@@ -0,0 +1,19 @@
++import test from 'node:test';
++import assert from 'node:assert/strict';
++import {readFileSync} from 'node:fs';
++import {join} from 'node:path';
++import {createPnpMigrationFixture} from './step5-pnp-classification-migration.test.mjs';
++import {PNP_RUN as run,PNP_OLD as old,PNP_CURRENT as current,PNP_CONSUMERS as consumers,loadPnpClassificationMigration} from './step5-pnp-classification-migration.mjs';
++import {validateReports} from './step5-workflow.mjs';
++import {itemHashGuard} from './item-hash.mjs';
++test('native report validation retains actual nonfataldecision and oldphysicalreview while licensing only exact rootidentitydelta',()=>{
++ const f=createPnpMigrationFixture();try{
++  const h=f.install(),reports=f.pack.units.map(unit=>f.get(`${f.d}/step5-v2-repeat-r1-u${unit}.json`));
++  const now={...f.pack.before,[current]:itemHashGuard(f.after)};delete now[old];for(const id of consumers)now[id]=itemHashGuard(readFileSync(join(f.root,'items',`${id}.md`),'utf8'));
++  assert.ok(validateReports(f.pack,reports,now,{root:f.root}).errors.some(e=>e.includes(old)));
++  const result=validateReports(f.pack,reports,now,{root:f.root,classificationMigration:h});assert.deepEqual(result.errors,[]);assert.equal(result.decisions.length,36);assert.equal(result.decisions.find(d=>d.id===old).outcome,'confirmed_nonfatal');assert.equal(result.reviews.find(r=>r.id===old).post_sha256,h.before_guard);assert.equal(result.reviews.some(r=>r.id===current),false);
++  assert.throws(()=>validateReports(f.pack,reports,now,{root:f.root,classificationMigration:{...h}}),/guarded/);
++  assert.throws(()=>validateReports(f.pack,reports,{...now,[current]:'f'.repeat(64)},{root:f.root,classificationMigration:h}),/guarded/);
++  assert.equal(loadPnpClassificationMigration(f.root,run,{current:true}).targets.length,5);
++ }finally{f.cleanup();}
++});
+--- /dev/null
++++ b/tools/step5-pnp-classification-migration.md
+@@ -0,0 +1,70 @@
++# Native Step 5.5 PnP classification migration
++
++This opt-in protocol applies only to `inverse-problems-knot-theory-all-109-2026-10-19`, batch49, original `def-ip-pnp-ista-with-denoiser` → current `alg-ip-pnp-ista-with-denoiser`. It is separate from the original batch21 open-problem-to-example migration. Both original slots stay in the unchanged1472-subject/109-batch frontier. Aliases never confer original-slot or native-review coverage.
++
++The authentic native repeat1/u49 decision stays `confirmed_nonfatal`. Its unchanged physical review, unresolved blocker, original assignment and report stay historical. Root separately repairs the classification. No old Luna or Sol judgment, old native review, helper creation, certificate row or owner receipt becomes current algorithm review credit.
++
++## Boundary and source candidates
++
++Root records this transition only at the real paused/drained `5.5-adjudicate` owner request, after all109 native reports exist and before `repeat-1-collected.json` or `impact-repeat-1.json` exists. Preview writes nothing. Recording exclusively creates the immutable receipt and creation snapshots; root applies canonical sources and mirrors separately, under exact candidate hashes, before recording. The recorder checks the actual application again.
++
++The algorithm candidate must equal `pnpSourceCandidate(before)`: change the exact header ID and kind, then add `aliases: [def-ip-pnp-ista-with-denoiser]` immediately after kind. Every other byte, including the entire Definition/TikZ/references body, is preserved. Four fixed consumer item candidates and the fixed owning page may only replace literal old IDs with current IDs. Owning batch49 manifest, batch49 and merged contracts, and plan registry must be semantically identical except old/current identity, algorithm kind on the old-ID record, and citation quotes refreshed to the entire unchanged current Definition. No arbitrary metadata operation or proof repair is licensed. Frozen reader admissions stay unchanged.
++
++The existing FIRST mathematical report is bound as `root_math_review`, including its actual nonfatal native49 hash, minimal classification and exact four-consumer inventory. The separate `independent_review` must accept the complete finite carrier candidates by their before/after raw hashes. It has this exact schema:
++
++```json
++{
++  "accepted": true,
++  "reviewer_identity": "/root/INDEPENDENT_REVIEWER",
++  "current_review_granted": false,
++  "native_execution_coverage_adopted": false,
++  "before_source_sha256": "RAW_BEFORE",
++  "after_source_sha256": "RAW_AFTER",
++  "carrier_bindings": [{"path":"PATH","before_sha256":"RAW_BEFORE","after_sha256":"RAW_AFTER"}]
++}
++```
++
++This acceptance is distinct from native5.6 review. Root does not supply an independent review attributed to itself.
++
++## Request and commands
++
++Store every source/carrier preimage and candidate as regular nonsymlink files under `research/`. The request has:
++
++```js
++{
++ version:1, kind:'owner-pnp-classification-migration', run:RUN,
++ owner_identity:'/root', repairer_identity:'/root',
++ original_id:'def-ip-pnp-ista-with-denoiser', current_id:'alg-ip-pnp-ista-with-denoiser', batch:'49', home_page:'plug-and-play-mmse-regularization',
++ original_outcome:'confirmed_nonfatal', historical_only:true,
++ current_review_granted:false, native_execution_coverage_adopted:false,
++ entry:{before_source_file:'research/BEFORE.md',current_source_file:'research/AFTER.md',before_raw_sha256:SHA,after_raw_sha256:SHA},
++ carriers:[{path:LIVE_PATH,before_file:RESEARCH_PREIMAGE,current_file:RESEARCH_CANDIDATE}],
++ root_math_review:FIRST_REPORT, independent_review:EXACT_CANDIDATE_ACCEPTANCE,
++ consumer_ids:[/* the four IDs in PNP_CONSUMERS */]
++}
++```
++
++Do not supply creation snapshots, owner-request fields, bindings or payload SHA. The recorder derives them from actual runtime and files. It binds all109 original repeat reports/36 decisions, the331-verdict first Sol judge, unchanged baseline/Step4/initial pack, native49 immutable successful attempt/prompt/final log, the original batch21 receipts, the complete prior679-row certificate, candidate archives and explicit mathematical/independent acceptance. It preserves the judge ledger's original raw prefix while allowing ordinary later native appends.
++
++```sh
++node tools/step5-pnp-classification-migration.mjs preview --run RUN --authorization research/REQUEST.json
++# Root applies the exact source and mirror candidates, then:
++node tools/step5-pnp-classification-migration.mjs record --run RUN --authorization research/REQUEST.json
++node tools/step5-pnp-classification-migration.mjs check --run RUN
++```
++
++Only the root source application deletes the old canonical file. The receipt never changes baseline, frozen frontier/packs, native reports, prior certificates or judge history. Recording does not advance native runtime or assert collection, certification or gate success.
++
++## Native continuation and guards
++
++Collection authenticates the exact migration before validating old physical reviews against their historical source guards. It preserves the real old decision/review, separately attributes root classification repair, excludes old review credit, and emits five mandatory current review targets. The native5.6 pack binds this receipt/collection and assigns the algorithm and four consumers together, in supplier-first order, to one actual owner lane. Later repairs still trigger ordinary context invalidation and continuation.
++
++New certification requires actual successful native owner reports, immutable attempt results, exact assignments, prompt/final logs, current guards and supplier-interface review contexts for all five subjects. The old679-row certificate is readable only as its exact historical input; current closure rejects it. The projected algorithm cannot be a creation. Current Sol judgment is mandatory; a pre-migration judge cache is rejected. Protected deletion, selective judge policy, frontier gates and Step6 source selection, ownership, sealed deletion preimages and Git preflight all recognize only this authenticated pair, alongside the unchanged batch21 pair. Other deletions, alias substitutions and arbitrary renames remain forbidden.
++
++Focused tests run against the reviewed integration candidate:
++
++```sh
++node --test tools/step5-pnp-classification-migration.test.mjs tools/step5-pnp-classification-integration.test.mjs
++node --test tools/step5-pnp-classification-lifecycle.test.mjs
++node --test tools/step5-original-slot-reclassification.test.mjs tools/step6-original-slot-integration.test.mjs
++```
+--- /dev/null
++++ b/tools/step5-pnp-classification-lifecycle.test.mjs
+@@ -0,0 +1,67 @@
++import test from 'node:test';
++import assert from 'node:assert/strict';
++import {readFileSync,writeFileSync,mkdirSync,rmSync} from 'node:fs';
++import {join,dirname} from 'node:path';
++import {execFileSync} from 'node:child_process';
++import {runScope} from './step6-lib.mjs';
++import {scopedReadinessTree} from './step6-scoped-tree.mjs';
++import {preflightStep6} from './step6-commit.mjs';
++import {createHash} from 'node:crypto';
++import {createOriginalSlotFixture} from './step5-original-slot-reclassification.test.mjs';
++import {createPnpMigrationFixture} from './step5-pnp-classification-migration.test.mjs';
++import {collect,prepareImpact,prepareAdjudication,closeEmptyAdjudication,certify,judge,verifyCertification,reviewContextHashes} from './step5-workflow.mjs';
++import {PNP_RUN as run,PNP_OLD as old,PNP_CURRENT as current,PNP_CONSUMERS as consumers,pnpSourceCandidate,recordPnpClassificationMigration,loadPnpClassificationMigration,licensedPnpReplacement} from './step5-pnp-classification-migration.mjs';
++import {projectedOriginalIds} from './step5-original-slot-reclassification.mjs';
++import {itemHashGuard,itemHashJudge} from './item-hash.mjs';
++import {step6OwnedInputs} from './step6-owned-inputs.mjs';
++const sha=x=>createHash('sha256').update(typeof x==='string'?x:JSON.stringify(x)).digest('hex');
++const put=(root,p,v)=>{const path=join(root,p);mkdirSync(dirname(path),{recursive:true});writeFileSync(path,typeof v==='string'?v:JSON.stringify(v,null,2)+'\n');return path;};
++const get=(root,p)=>JSON.parse(readFileSync(join(root,p),'utf8'));
++test('composed originalslot lifecycle preserves original1472/109/344/331/36/679 histories and requires fresh native algorithm/consumer certification',()=>{
++ const sample=createPnpMigrationFixture(),extras={[old]:sample.before};for(const id of consumers)extras[id]=`---\nid: ${id}\nkind: example\nstatus: draft\ndeps: [${old}]\n---\n\n## Example\n\nThe procedure [[${old}]] is used here.\n`;
++ for(let i=0;i<333;i++)extras[`ex-zzbridge-${i}`]=`---\nid: ex-zzbridge-${i}\nkind: example\nstatus: draft\ndeps: [op-ip-honest-coverage-over-ill-posed-truth-classes]\n---\n\n## Example\n\nThe original question is used here.\n`;
++ const f=createOriginalSlotFixture({fullBaseline:true,extraSources:extras,initialRepairCount:330}),root=f.root,d=`research/${run}-step5-v2`,home='plug-and-play-mmse-regularization';sample.cleanup();
++ const contextHasher=(root,ids)=>new Map(ids.map(id=>[id,{item_sha256:itemHashJudge(readFileSync(join(root,`items/${id}.md`),'utf8')),context_sha256:sha('fixture judge context:'+id)}]));
++ const native=(pack,unit,{adjudicate=false}={})=>{
++  const phase=pack.phase,label=`step5-v2-${phase}-r${pack.round}-u${unit}`,reportPath=`${d}/${label}.json`,assigned=pack.assignments[unit].map(r=>typeof r==='string'?r:r.id),contexts=reviewContextHashes(root,assigned,{run});
++  const report={run,phase,round:pack.round,unit,input_sha256:sha(pack),decisions:adjudicate?pack.assignments[unit].map(r=>({...r,outcome:r.id===old?'confirmed_nonfatal':'false_positive',reason:'The exact assigned classification and current hypotheses were independently checked for this routing fixture.',uncertain:false,source_urls:[],familiar:true})):[],reviews:assigned.map(id=>({id,...contexts[id],disposition:'unaffected',reason:'Actually checked the complete current carrier and all required supplier interfaces for this routing fixture.',uncertain:false,source_urls:[],familiar:true})),created_items:[],downstream:[]};
++  if(assigned.includes(old)&&adjudicate)report.repair_notes={status:'blocked_by_reclassification_scope',repair_complete:false,mathematical_uncertainty:false,report:reportPath};
++  put(root,reportPath,report);const role=adjudicate?'alpha-adjudicate':'alpha-repair',base=`research/${run}-dispatch/${role}-${label}`,receipt={run,role,label,covers:[unit],ok:true,model:'gpt-6.1-sol',provider_effort:'high',attempt:1,evidence_tag:'.attempt-1',started_at:'2026-10-21T22:00:00Z',ended_at:'2026-10-21T22:01:00Z',exit_code:0,process_exit_code:0,timed_out:false,prompt:join(root,base+'.attempt-1.prompt.md'),log:join(root,base+'.attempt-1.log'),terminal_summary:{task_completed:true,task_aborted:false,final_response_present:true,error_events:0}};
++  put(root,base+'.result.json',receipt);put(root,base+'.attempt-1.result.json',receipt);writeFileSync(receipt.prompt,`run: ${run}\noutput: ${reportPath}\nunit:"${unit}" input_sha256:"${sha(pack)}"\n`);writeFileSync(receipt.log,`native routing fixture\ncodex\n${JSON.stringify(report)}\ntokens used\n1000\n`);return {stage:'5.5-adjudicate',role,label,covers:[unit],attempt:1,startedAt:receipt.started_at,endedAt:receipt.ended_at,lastExitOk:true};
++ };
++ try{
++  f.install();collect(root,run,'initial',1);const first=prepareImpact(root,run,'impact-initial',1);for(const unit of first.units)native(first,unit);
++  const prior=certify(root,run,'impact-initial',1,{contextHasher});assert.equal(prior.items.length,679);assert.equal(prior.changed.length,331);
++  const rejected=new Set([old,...prior.changed.filter(id=>id!==old).slice(0,35)]);
++  const firstJudge=judge(root,run,1,{contextHasher,runSweep:({ids,ledger})=>{const rows=ids.map(id=>({id,model:'gpt-6.1-sol',keep:!rejected.has(id),...contextHasher(root,[id]).get(id)}));writeFileSync(ledger,rows.map(JSON.stringify).join('\n')+'\n');return {status:0};}});assert.equal(firstJudge.verdicts.length,331);
++  const repeat=prepareAdjudication(root,run,'repeat',1);assert.equal(repeat.rejected.length,36);const dispatches={};for(const unit of repeat.units){if(repeat.assignments[unit].length)dispatches[unit]=native(repeat,unit,{adjudicate:true});else {closeEmptyAdjudication(root,run,'repeat',1,unit,sha(repeat));const label=`step5-v2-empty-repeat-r1-u${unit}`;put(root,`research/${run}-dispatch/tool-${label}.result.json`,{role:'tool',label,run,covers:[unit],ok:true,written_by:'autopilot',ended_at:'2026-10-21T22:01:00Z'});}}
++  put(root,`.autopilot/${run}/state.json`,{run,stage:'5.5-adjudicate',paused:true,dispatches});put(root,`.autopilot/${run}/owner-gate-request.json`,{version:1,run,id:'actual-fixture-native5.5hold',group:'5.5-adjudicate',stages:['5.5-adjudicate'],at:'2026-10-21T22:02:00Z'});
++  const before=readFileSync(join(root,`items/${old}.md`),'utf8'),after=pnpSourceCandidate(before),entry={before_source_file:'research/pnp-source-before.md',current_source_file:'research/pnp-source-after.md',before_raw_sha256:sha(before),after_raw_sha256:sha(after)};put(root,entry.before_source_file,before);put(root,entry.current_source_file,after);
++  const carriers=[],add=(path,a,b)=>{const i=carriers.length,before_file=`research/pnp-${i}-before`,current_file=`research/pnp-${i}-after`;put(root,path,a);put(root,before_file,a);put(root,current_file,b);carriers.push({path,before_file,current_file});};
++  for(const id of consumers){const a=readFileSync(join(root,`items/${id}.md`),'utf8');add(`items/${id}.md`,a,a.replaceAll(old,current));}
++  add(`library/inverse-problems/${home}.md`,`---\npage: ${home}\nitems: [${old}, ${consumers.join(', ')}]\n---\n`,`---\npage: ${home}\nitems: [${current}, ${consumers.join(', ')}]\n---\n`);
++  add(`research/${run}-batch-49.pages.json`,[{id:home,category:'inverse-problems',items:[{id:old,kind:'definition'},...consumers.map(id=>({id,kind:'example',deps:[old]}))]}],[{id:home,category:'inverse-problems',items:[{id:current,kind:'algorithm'},...consumers.map(id=>({id,kind:'example',deps:[current]}))]}]);
++  add(`research/${run}-batch-49.proof-contracts.json`,{scope:[old],contracts:{[old]:{}}},{scope:[current],contracts:{[current]:{}}});
++  for(const path of [`research/${run}-proof-contracts.json`,'research/plan-spec.json']){const a=get(root,path);if(path.endsWith('plan-spec.json'))a.pages.push({id:home,items:[{id:old,kind:'definition'}]});else {a.scope.push(old);a.contracts[old]={};}const b=JSON.parse(JSON.stringify(a).replaceAll(old,current));if(path.endsWith('plan-spec.json'))b.pages.find(p=>p.id===home).items[0].kind='algorithm';add(path,a,b);}
++  const report=get(root,`${d}/step5-v2-repeat-r1-u49.json`),math='research/pnp-math.json',review='research/pnp-acceptance.json';put(root,math,{run,native_credit_claimed:false,new_prerequisites:[],native49_binding:{outcome:'confirmed_nonfatal',raw_sha256:sha(readFileSync(join(root,d,'step5-v2-repeat-r1-u49.json'),'utf8'))},classification:{minimal_migration:{old_id:old,new_id:current}},consumer_inventory:{current_direct:consumers}});
++  put(root,review,{accepted:true,reviewer_identity:'/root/independent',current_review_granted:false,native_execution_coverage_adopted:false,before_source_sha256:sha(before),after_source_sha256:sha(after),carrier_bindings:carriers.map(c=>({path:c.path,before_sha256:sha(readFileSync(join(root,c.before_file),'utf8')),after_sha256:sha(readFileSync(join(root,c.current_file),'utf8'))}))});
++  const request={version:1,kind:'owner-pnp-classification-migration',run,owner_identity:'/root',repairer_identity:'/root',original_id:old,current_id:current,batch:'49',home_page:home,current_review_granted:false,native_execution_coverage_adopted:false,historical_only:true,original_outcome:'confirmed_nonfatal',entry,carriers,root_math_review:math,independent_review:review,consumer_ids:consumers};put(root,'research/pnp-request.json',request);
++  const historical=readFileSync(join(root,d,'certification-impact-initial-1.json'),'utf8');rmSync(join(root,`items/${old}.md`));put(root,`items/${current}.md`,after);for(const c of carriers)put(root,c.path,readFileSync(join(root,c.current_file),'utf8'));recordPnpClassificationMigration(root,run,'research/pnp-request.json');
++  assert.equal(projectedOriginalIds(root,run,f.frontier.ids).length,1472);assert.equal(licensedPnpReplacement(root,run,old,current,prior),false);
++  const result=collect(root,run,'repeat',1);assert.equal(result.decisions.length,36);assert.equal(result.decisions.find(r=>r.id===old).outcome,'confirmed_nonfatal');assert.equal(result.reviews.some(r=>r.id===old||r.id===current),false);assert.equal(result.historical_pnp_classification_reviews[0].post_sha256,report.reviews[0].post_sha256);
++  const pack=prepareImpact(root,run,'impact-repeat',1),lane=pack.units.find(u=>pack.assignments[u].includes(current));assert.ok([current,...consumers].every(id=>pack.assignments[lane].includes(id)));for(const unit of pack.units)native(pack,unit);
++  const cert=certify(root,run,'impact-repeat',1,{contextHasher});assert.ok(licensedPnpReplacement(root,run,old,current,cert));assert.ok(cert.items.some(r=>r.id==='ex-ip-exact-adaptive-credible-coverage-by-posterior-null-deletion'));assert.ok(!cert.items.some(r=>r.id===old));verifyCertification(root,run,{current:true});assert.equal(readFileSync(join(root,d,'certification-impact-initial-1.json'),'utf8'),historical);
++  assert.throws(()=>judge(root,run,1,{contextHasher}),/pre-migration|certification/);
++  const second=judge(root,run,2,{contextHasher,runSweep:({ids,ledger})=>{writeFileSync(ledger,readFileSync(ledger,'utf8')+ids.map(id=>JSON.stringify({id,model:'gpt-6.1-sol',keep:true,...contextHasher(root,[id]).get(id)})).join('\n')+'\n');return {status:0};}});assert.ok(second.verdicts.some(r=>r.id===current));
++  const h=loadPnpClassificationMigration(root,run,{current:true});assert.equal(h.targets.length,5);
++  // Focused Step6 packaging/preimage exercise; no final gate/publication credit.
++  put(root,`research/${run}-scope-ledger.json`,{pages:[{id:f.request.home_page,batch:'21'},{id:home,batch:'49'}]});put(root,'research/defect-ledger.jsonl','');put(root,'research/published-consumer-supplier-ledger.md','');
++  const git=(...args)=>execFileSync('git',args,{cwd:root,encoding:'utf8'}).trim(),object=text=>execFileSync('git',['hash-object','-w','--stdin'],{cwd:root,input:text,encoding:'utf8'}).trim();
++  git('init','-b','main');git('config','user.name','Fixture');git('config','user.email','fixture@example.invalid');
++  const oldExample='op-ip-honest-coverage-over-ill-posed-truth-classes';git('update-index','--add','--cacheinfo',`100644,${object(f.before)},items/${oldExample}.md`);git('update-index','--add','--cacheinfo',`100644,${object(before)},items/${old}.md`);git('add','research/plan-spec.json');git('commit','-qm','synthetic exact historical carrier preimages');
++  const owned=step6OwnedInputs(run,root),scope=runScope(run,root);assert.ok(owned.includes(`items/${old}.md`)&&owned.includes(`items/${current}.md`)&&owned.includes(`items/${oldExample}.md`));assert.ok(!scope.items.some(row=>row.id===old||row.id===oldExample));
++  const tree=scopedReadinessTree(run,root,{scope,includeRows:true,ownedPaths:owned});assert.ok(tree.protected_tree_projections.includes(`items/${old}.md#original-slot-deletion`));assert.ok(tree.protected_tree_projections.includes(`items/${oldExample}.md#original-slot-deletion`));
++  assert.ok(preflightStep6(root,run).localPaths.includes(`items/${old}.md`));git('update-index','--cacheinfo',`100644,${object('unlicensed old source')},items/${old}.md`);assert.throws(()=>preflightStep6(root,run),/Git preimage/);
++
++ }finally{f.cleanup();}
++});
+--- a/tools/step5-original-slot-reclassification.test.mjs
++++ b/tools/step5-original-slot-reclassification.test.mjs
+@@ -5,6 +5,7 @@
+ import {join,dirname,resolve} from 'node:path';
+ import {fileURLToPath} from 'node:url';
+ import {createHash} from 'node:crypto';
++import {reviewContextHashes as fixtureReviewContexts} from './step5-workflow.mjs';
+ import {freezeFrontier} from './step5-rounds.mjs';
+ import {itemHashGuard,itemHashJudge} from './item-hash.mjs';
+ import {statementHash} from './step5-statement.mjs';
+@@ -13,19 +14,20 @@
+ const put=(root,p,x)=>{const full=resolve(root,p);mkdirSync(dirname(full),{recursive:true});writeFileSync(full,typeof x==='string'?x:JSON.stringify(x,null,2)+'\n');return full;};
+ const get=p=>JSON.parse(readFileSync(p,'utf8'));
+ // Reusable real-loader fixture. Importing this file does not register its tests.
+-export function createOriginalSlotFixture({fullBaseline=false,migrationLevel=null}={}){
++export function createOriginalSlotFixture({fullBaseline=false,migrationLevel=null,extraSources={},initialRepairCount=0}={}){
+  const root=mkdtempSync(join(tmpdir(),'step5-original-slot-')),run=RUN,d=`research/${run}-step5-v2`,home='credible-sets-and-frequency-coverage-in-inverse-problems';
+  const old=`---\nid: ${OLD}\nkind: open-problem\nstatus: draft\npipeline_run: ${run}\ndeps: []\n---\n\n## Open problem\n\nFix all original model constants and selector branches. Does there exist a single graph-measurable rule with every uniform coverage and no-log diameter target \\eta?$$\n\n## Status\n\nOriginally unresolved.\n`;
+  const before=old.replace('Originally unresolved.','Affirmative construction; classification repair remains blocked.');
+  const example=old.split('## Open problem\n\n')[1].split('\n\n## Status')[0].replace('Does there exist','There exists').replace('\\eta?$$',()=> '\\eta.$$');
+  const fixtureDeps=migrationLevel===null?[]:['ex-original-slot-fixture-0'];
+  const current=`---\nid: ${NEW}\nkind: example\ntitle: Exact coverage example\nstatus: draft\npipeline_run: ${run}\n${migrationLevel===null?'':`dependency_level: ${migrationLevel}\n`}deps: [${fixtureDeps.join(', ')}]\njustified_by: []\naliases: [${OLD}]\nprovenance: {statement: ai-generated, proof: ai-generated}\ngeneration: {role: example}\n---\n\n## Example\n\n${example}\n\n## Verification\n\n**Given:** The exact original question.\n\n1.1 The actual finite construction verifies the question. [given, construct] ∎\n`;
+- const ids=[...Array.from({length:1471},(_,i)=>`ex-original-slot-fixture-${i}`),OLD].sort();
++ const ids=[...Array.from({length:1471-Object.keys(extraSources).length},(_,i)=>`ex-original-slot-fixture-${i}`),...Object.keys(extraSources),OLD].sort();
+  const nonemptyUnits=Array.from({length:87},(_,i)=>String(i+1)).filter(id=>id!=='21'),ordinaryIds=ids.filter(id=>id!==OLD);
++ const idOwner=id=>id==='def-ip-pnp-ista-with-denoiser'?'49':null;
+  const batches=Array.from({length:109},(_,i)=>({id:String(i+1),items:i===20?[OLD]:ordinaryIds.filter((_,index)=>
+-  (index<343?nonemptyUnits[index%nonemptyUnits.length]:'1')===String(i+1))}));
++  (idOwner(ordinaryIds[index])??(index<343?nonemptyUnits[index%nonemptyUnits.length]:'1'))===String(i+1))}));
+  const frontier=freezeFrontier({run,batches}),baseline={};
+- for(const id of ids){const text=id===OLD?old:`---\nid: ${id}\nkind: example\nstatus: draft\ndeps: []\n---\n\n## Example\n\nA fixed original example.\n`;baseline[id]=itemHashGuard(text);put(root,`items/${id}.md`,text);}
++ for(const id of ids){const text=id===OLD?old:extraSources[id]??`---\nid: ${id}\nkind: example\nstatus: draft\ndeps: []\n---\n\n## Example\n\nA fixed original example.\n`;baseline[id]=itemHashGuard(text);put(root,`items/${id}.md`,text);}
+  put(root,`items/${OLD}.md`,before);
+  if(fullBaseline)for(let i=ids.length;i<39041;i++)baseline[`ex-outside-original-slot-baseline-${i}`]=sha(`outside original context ${i}`);
+  const rejection=id=>({id,model:'gpt-6-luna',context_sha256:sha('context:'+id),item_sha256:baseline[id],keep:false});
+@@ -35,12 +37,15 @@
+  const pack={version:2,adjudicationSchemaVersion:1,judge_model:'gpt-6-luna',input_evidence:{[verdictPath]:sha(readFileSync(verdictPath,'utf8'))},run,phase:'initial',round:1,repair_scope:'frontier',frontier_ids:frontier.ids,units:frontier.batches.map(b=>b.id),assignments,rejected,before:baseline,before_statements:Object.fromEntries(ids.map(id=>[id,statementHash(id===OLD?old:readFileSync(join(root,`items/${id}.md`),'utf8'))]))};
+  const actualRejected=verdicts.filter(v=>v.keep===false);pack.rejected=actualRejected;
+  for(const [name,v]of [['frontier',frontier],['baseline',baseline],['initial-1',pack],['step4-verdicts',verdicts]])put(root,`${d}/${name}.json`,v);
++ const initialRepairIds=new Set(ids.filter(id=>id!==OLD).slice(0,initialRepairCount));
++ for(const id of initialRepairIds)put(root,`items/${id}.md`,readFileSync(join(root,`items/${id}.md`),'utf8')+'\nRouting fixture: initial native repair.\n');
++ const extraContexts=Object.keys(extraSources).length?fixtureReviewContexts(root,ids):null;
+  const state={run,stage:'5.1-adjudicate',paused:true,dispatches:{}};const reports=[];
+  for(const unit of pack.units){
+   const assigned=assignments[unit],label=`step5-v2-initial-r1-u${unit}`,empty=!assigned.length;
+-  const decision=r=>({...r,outcome:r.id===OLD?'confirmed_fatal':'false_positive',...(r.id===OLD?{defect_type:'other'}:{}),reason:'The complete actual assigned argument was checked with its suppliers and exact original targets.',uncertain:false,source_urls:[],familiar:true});
+-  const reviews=assigned.map(r=>({id:r.id,disposition:r.id===OLD?'repaired':'unaffected',post_sha256:r.id===OLD?itemHashGuard(before):baseline[r.id],review_context_sha256:sha({version:3,item:[r.id,r.id===OLD?itemHashGuard(before):baseline[r.id]],suppliers:[]}),reason:'Checked the complete original question, exact supplier use and all quantified targets without narrowing.',uncertain:false,source_urls:[],familiar:true}));
+-  const report={run,phase:'initial',round:1,unit,input_sha256:sha(pack),decisions:assigned.map(decision),reviews,created_items:[],downstream:[],ledger_updates:[],gate_resolutions:[],...(empty?{completion:'mechanical-zero-work',written_by:'step5-workflow',mathematical_review:false}:{})};
++  const decision=r=>({...r,outcome:r.id===OLD?'confirmed_fatal':initialRepairIds.has(r.id)?'confirmed_nonfatal':'false_positive',...(r.id===OLD?{defect_type:'other'}:{}),reason:'The complete actual assigned argument was checked with its suppliers and exact original targets.',uncertain:false,source_urls:[],familiar:true});
++  const reviews=assigned.map(r=>({id:r.id,disposition:r.id===OLD||initialRepairIds.has(r.id)?'repaired':'unaffected',post_sha256:extraContexts?.[r.id]?.post_sha256??(r.id===OLD?itemHashGuard(before):baseline[r.id]),review_context_sha256:extraContexts?.[r.id]?.review_context_sha256??sha({version:3,item:[r.id,r.id===OLD?itemHashGuard(before):baseline[r.id]],suppliers:[]}),reason:'Checked the complete original question, exact supplier use and all quantified targets without narrowing.',uncertain:false,source_urls:[],familiar:true}));
++  const report={run,phase:'initial',round:1,unit,input_sha256:sha(pack),decisions:assigned.map(decision),reviews,created_items:[],downstream:Object.keys(extraSources).filter(id=>assigned.some(r=>extraSources[id].includes(`deps: [${r.id}]`))),ledger_updates:[],gate_resolutions:[],...(empty?{completion:'mechanical-zero-work',written_by:'step5-workflow',mathematical_review:false}:{})};
+   if(unit==='21')report.repair_notes={status:'blocked_by_reclassification_scope',repair_complete:false,report:`${d}/${label}.json`};
+   reports.push(report);put(root,`${d}/${label}.json`,report);
+   const nativeLabel=empty?`step5-v2-empty-initial-r1-u${unit}`:label,role=empty?'tool':'alpha-adjudicate',base=`research/${run}-dispatch/${role}-${nativeLabel}`;
+--- a/tools/step5-original-slot-reclassification.mjs
++++ b/tools/step5-original-slot-reclassification.mjs
+@@ -1,3 +1,4 @@
++import {loadPnpClassificationMigration,projectPnpOriginalIds,supportingPnpClassificationHistory} from './step5-pnp-classification-migration.mjs';
+ // One original obligation, two explicitly separated historical/current IDs.
+ // This receipt grants no execution, review, authorship or judgment credit.
+ import {createHash} from 'node:crypto';
+@@ -282,19 +283,19 @@
+ }
+ export function projectedOriginalIds(root,run,frontierIds){
+  const history=loadOriginalSlotReclassification(root,run,{current:true});
+- if(!history)return [...frontierIds];
++ if(!history)return projectPnpOriginalIds(root,run,frontierIds);
+  need(same([...frontierIds].sort(),history.frontier.ids.slice().sort()),'projection must name the exact original frontier');
+  const projected=frontierIds.map(id=>id===ORIGINAL_SLOT_ID?CURRENT_SLOT_ID:id);
+- need(projected.length===1472&&new Set(projected).size===1472,'nonbijective original-slot projection');return projected;
++ need(projected.length===1472&&new Set(projected).size===1472,'nonbijective original-slot projection');return projectPnpOriginalIds(root,run,projected);
+ }
+ export function originalSlotView(root,run,{frontier=null}={}){
+  const ids=Array.isArray(frontier)?frontier:frontier?.ids??read(join(dir(root,run),'frontier.json')).ids;
+  const currentIds=projectedOriginalIds(root,run,ids),history=loadOriginalSlotReclassification(root,run,{current:true});
+- const originalToCurrent=Object.fromEntries(ids.map((id,i)=>[id,currentIds[i]])),currentToOriginal=Object.fromEntries(currentIds.map((id,i)=>[id,ids[i]]));
++ const originalToCurrent=Object.fromEntries(ids.map((id,i)=>[id,currentIds[i]])),currentToOriginal=Object.fromEntries(currentIds.map((id,i)=>[id,ids[i]])),classification=loadPnpClassificationMigration(root,run,{current:true});
+  return {originalIds:[...ids],currentIds,originalToCurrent,currentToOriginal,
+   currentId:id=>originalToCurrent[id]??id,originalId:id=>currentToOriginal[id]??id,
+   currentOwner:id=>history?.frontier.batches.find(b=>b.items.includes(currentToOriginal[id]??id))?.id,
+-  transitionForOriginal:id=>history&&id===ORIGINAL_SLOT_ID?history:null,evidence:history?.evidence??{},history};
++  transitionForOriginal:id=>history&&id===ORIGINAL_SLOT_ID?history:null,evidence:{...(history?.evidence??{}),...(classification?.evidence??{})},history,classification};
+ }
+ export function historicalInitialSource(history,id){return authenticated.has(history)&&id===ORIGINAL_SLOT_ID?history.historical_source:null;}
+ export function isOriginalSlotReclassification(history,pack,now){
+@@ -302,7 +303,7 @@
+   &&!Object.hasOwn(now,ORIGINAL_SLOT_ID)&&now[CURRENT_SLOT_ID]===(history.level_correction?.after_guard??history.after_guard);
+ }
+ export function supportingReclassificationHistory(history,path,expected){
+- if(!history?.root||!history?.run)return null;const loaded=loadOriginalSlotReclassification(history.root,history.run);if(!loaded)return null;
++ if(!history?.root||!history?.run)return null;const classification=supportingPnpClassificationHistory(history,path,expected);if(classification)return classification;const loaded=loadOriginalSlotReclassification(history.root,history.run);if(!loaded)return null;
+  const c=loaded.metadata.get(relative(resolve(history.root),resolve(history.root,path)));
+  if(c&&sha(readFileSync(resolve(history.root,c.before_file),'utf8'))===expected)
+   return {archive:resolve(history.root,c.before_file),marker:loaded.path,evidence:loaded.evidence};
+--- a/tools/step5-rounds.mjs
++++ b/tools/step5-rounds.mjs
+@@ -1,3 +1,4 @@
++import {loadPnpClassificationMigration} from './step5-pnp-classification-migration.mjs';
+ // Durable evidence primitives for the owner-authorized Step-5 round protocol.
+ // These functions never manufacture mathematical decisions or judge verdicts.
+ import { createHash } from 'node:crypto';
+@@ -92,10 +93,11 @@
+     if (!aliases.has(alias)) aliases.set(alias, new Set());
+     aliases.get(alias).add(item.id);
+   }
+-  const transition=loadOriginalSlotReclassification(repo,run);
++  const transition=loadOriginalSlotReclassification(repo,run),classification=loadPnpClassificationMigration(repo,run);
+   const resolve = raw => {
+     // This is an authenticated original work-slot replacement, never alias credit.
+     if(transition&&raw===transition.original_id)return transition.current_id;
++    if(classification&&raw===classification.original_id)return classification.current_id;
+     if (canonical.has(raw) || frontier.has(raw)) return raw;
+     const targets = aliases.get(raw);requireValue(!targets || targets.size === 1, `ambiguous required alias: ${raw}`);
+     return targets ? [...targets][0] : raw;
+--- a/tools/step5-certification-consumer.mjs
++++ b/tools/step5-certification-consumer.mjs
+@@ -1,3 +1,4 @@
++import {loadPnpClassificationMigration,licensedPnpReplacement} from './step5-pnp-classification-migration.mjs';
+ // Shared read-only boundary for consumers of centrally issued Step-5 evidence.
+ import { basename } from 'node:path';
+ import { verifyCertification } from './step5-workflow.mjs';
+@@ -12,6 +13,8 @@
+   if (certificate && transition
+     && !licensedOriginalSlotReplacement(root, inferred, transition.original_id, transition.current_id, certificate))
+     throw Error('Step 5 replacement lacks exact current native certification');
++  const classification=loadPnpClassificationMigration(root,inferred,{current:true});
++  if(certificate&&classification&&!licensedPnpReplacement(root,inferred,classification.original_id,classification.current_id,certificate))throw Error('Step 5 classification replacement lacks current native certification');
+   // Initial certification is the input to the first mandatory judge round.
+   return certificate && ['impact-repeat', 'gate'].includes(certificate.phase)
+     ? certificate : null;
+--- a/tools/step5-judge-policy.mjs
++++ b/tools/step5-judge-policy.mjs
+@@ -1,3 +1,4 @@
++import {loadPnpClassificationMigration,licensedPnpReplacement} from './step5-pnp-classification-migration.mjs';
+ // Selective Step-5 closure: original Luna evidence for unchanged frontier
+ // items, Sol for changed items. This is evidence selection, never a verdict.
+ import { readFileSync } from 'node:fs';
+@@ -16,6 +17,8 @@
+   const verdictPath = join(dir, 'step4-verdicts.json');
+   const frontier = validateFrontier(read(frontierPath));
+   const transition = loadOriginalSlotReclassification(root, run, { current: true });
++  const classification=loadPnpClassificationMigration(root,run,{current:true});
++  if(classification&&!licensedPnpReplacement(root,run,classification.original_id,classification.current_id,certificate))throw Error('selective judge policy requires current algorithm certification');
+   const currentIds = projectedOriginalIds(root, run, frontier.ids);
+   // Native helpers remain separately authenticated creations; they never
+   // acquire an original baseline or a carried Luna verdict. The selected scope
+@@ -44,9 +47,9 @@
+   }
+   return {
+     models: [MODELS.luna.id, MODELS.sol61.id],
+-    requiredModels(id, text) { return [id !== transition?.current_id && !created.includes(id) && itemHashGuard(text) === baseline[id] ? MODELS.luna.id : MODELS.sol61.id]; },
++    requiredModels(id, text) { return [id !== transition?.current_id && id !== classification?.current_id && !created.includes(id) && itemHashGuard(text) === baseline[id] ? MODELS.luna.id : MODELS.sol61.id]; },
+     eligible(id, row, text) {
+-      return created.includes(id) || id === transition?.current_id ? row.model === MODELS.sol61.id
++      return created.includes(id) || id === transition?.current_id || id === classification?.current_id ? row.model === MODELS.sol61.id
+         : itemHashGuard(text) !== baseline[id] || originals.get(id)?.some(original => isDeepStrictEqual(original, row));
+     },
+   };
+--- a/tools/step5-frontier-gate.mjs
++++ b/tools/step5-frontier-gate.mjs
+@@ -1,3 +1,4 @@
++import {loadPnpClassificationMigration,licensedPnpReplacement} from './step5-pnp-classification-migration.mjs';
+ // Step 5.8/7.10 alone judge item findings against the frozen original frontier.
+ // Raw detector output is retained separately; exclusion is never a math pass.
+ import { readFileSync, readdirSync } from 'node:fs';
+@@ -105,6 +106,8 @@
+   const certificate = verifyCertification(ctx.repo, ctx.run);
+   if (transition && (!certificate || !licensedOriginalSlotReplacement(ctx.repo, ctx.run,
+     transition.original_id, transition.current_id, certificate))) throw Error('frontier gate requires current replacement certification');
++  const classification=loadPnpClassificationMigration(ctx.repo,ctx.run,{current:true});
++  if(classification&&(!certificate||!licensedPnpReplacement(ctx.repo,ctx.run,classification.original_id,classification.current_id,certificate)))throw Error('frontier gate requires current algorithm certification');
+   const currentIds = projectedOriginalIds(ctx.repo, ctx.run, frontier.ids);
+   const creations = (certificate?.creations ?? []).map(row => row.id);
+   if (creations.some(id => currentIds.includes(id) || frontier.ids.includes(id))
+--- a/tools/step5-guard.mjs
++++ b/tools/step5-guard.mjs
+@@ -1,4 +1,5 @@
+ #!/usr/bin/env node
++import {loadPnpClassificationMigration,licensedPnpReplacement} from './step5-pnp-classification-migration.mjs';
+ // step5-guard.mjs — R1: step 5 is FATAL-ONLY (owner, 2026-08-03).
+ //
+ // node tools/step5-guard.mjs \
+@@ -149,6 +150,7 @@
+       || JSON.stringify([...frontier.ids].sort()) !== JSON.stringify(Object.keys(workflowScope.by_item ?? {}).sort()))
+       throw Error('frozen original frontier does not match Step-5 scope');
+     const transition = loadOriginalSlotReclassification(workflowRoot, workflowScope.run, { current: true });
++    const classification=loadPnpClassificationMigration(workflowRoot,workflowScope.run,{current:true});
+     const ids = new Set(projectedOriginalIds(workflowRoot, workflowScope.run, frontier.ids));
+     // Deletions share the frozen frontier boundary with changed/created items.
+     // Retain current logical suppliers as integrity context, including aliases
+@@ -173,10 +175,10 @@
+     // reinterpret a genuinely required deleted alias as an outside observation.
+     scopedDeleted = deleted.filter(id => !aliasContextAvailable || protectedIds.has(id));
+     excluded.deleted = deleted.filter(id => !scopedDeleted.includes(id));
+-    for (const id of scopedDeleted) if (id !== transition?.original_id) error('step5-deletion',
++    for (const id of scopedDeleted) if (id !== transition?.original_id&&id!==classification?.original_id) error('step5-deletion',
+       `${id}: deleting a frozen-frontier item or its logical supplier is not licensed at Step 5`, id);
+     for (const id of protectedIds) if (!Object.hasOwn(now, id) && !deleted.includes(id)
+-      && id !== transition?.original_id)
++      && id !== transition?.original_id&&id!==classification?.original_id)
+       error('step5-prerequisite-missing', `${id}: current frozen-frontier dependency context is missing`, id);
+     scopedChanged = changed.filter(id => ids.has(id));
+     scopedCreated = created.filter(id => ids.has(id));
+@@ -191,6 +193,7 @@
+       current_id: transition.current_id, receipt: transition.path };
+     for (const id of scopedDeleted) if (id === transition?.original_id && !replacementLicensed) error('step5-deletion',
+       `${id}: deleting a frozen-frontier item or its logical supplier is not licensed at Step 5`, id);
++    if(classification&&!licensedPnpReplacement(workflowRoot,workflowScope.run,classification.original_id,classification.current_id,certificate))throw Error('Step 5 algorithm deletion lacks current native certification');
+     const original = JSON.parse(readFileSync(join(workflowDirectory, 'baseline.json'), 'utf8'));
+     if (JSON.stringify(Object.keys(original).sort()) !== JSON.stringify(Object.keys(baseline.hashes ?? {}).sort())
+       || Object.entries(original).some(([id, hash]) => !/^[a-f0-9]{64}$/.test(hash) || shortHash(hash) !== baseline.hashes[id]))
+--- a/tools/step5-workflow.mjs
++++ b/tools/step5-workflow.mjs
+@@ -1,4 +1,5 @@
+ #!/usr/bin/env node
++import {loadPnpClassificationMigration,isPnpClassificationMigration,supportingPnpClassificationHistory,pnpHistoricalCertificate,pnpCurrentNativeReviews,PNP_OLD,PNP_CURRENT} from './step5-pnp-classification-migration.mjs';
+ import {loadSuccessorUncertaintyContinuation,successorSchedulingView} from './step5-successor-uncertainty-continuation.mjs';
+ import {loadUnit3NeedleCompletion,completedNeedleReport,completedNeedleReportView,NEEDLE_ID,NEEDLE_LABEL} from './step5-unit3-needle-completion.mjs';
+ // Round-based Step 5. Mathematical workers write evidence; only the controller
+@@ -22,6 +23,7 @@
+ import { supportingSiblingContractHistory } from './step5-sibling-contract-history.mjs';
+ import { loadInitialMetadataHistory, loadRepeatMetadataHistory, initialMetadataSupportingHistory } from './step5-initial-metadata-history.mjs';
+ import { loadOwnerCurrentRepairs } from './step5-owner-current-repairs.mjs';
++import {loadOwnerFactAlertRepairs,isOwnerFactAlertRepairs,ownerFactAlertRepairPath} from './step5-owner-fact-alert-repairs.mjs';
+ import { createdMaintenanceBasis } from './step5-created-maintenance-cert.mjs';
+ import { verdictIsCurrent } from './judge-currency.mjs';
+ import { gateDiagnostics } from './step5-gate-diagnostics.mjs';
+@@ -208,6 +210,7 @@
+ // This run's recovery binds exact historical bytes to unchanged native reports;
+ // it supplies no current-source review or gate coverage.
+ function supportingMetadataHistory(history,path,expected) {
++  const classification=supportingPnpClassificationHistory(history,path,expected);if(classification)return classification;
+   const reclassification=supportingReclassificationHistory(history,path,expected);if(reclassification)return reclassification;
+   const siblings = supportingSiblingContractHistory(history,path,expected); if (siblings) return siblings;
+   const quotes = supportingQuoteHistory(history,path,expected);
+@@ -547,7 +550,8 @@
+   requireValue(pack.run===run&&pack.phase===phase&&pack.round===round&&digest(pack)===inputHash,'empty adjudication input identity or hash mismatch');
+   requireValue(emptyAdjudicationAssignment(pack,unit),`not an empty batch adjudication assignment: ${unit}`);
+   const frontier=read(join(workflowDir(root,run),'frontier.json'));validateFrontier(frontier);
+-  const slots=phase==='initial'?null:originalSlotView(root,run,{frontier});
++  const currentSlots=phase==='initial'?null:originalSlotView(root,run,{frontier});
++  const slots=currentSlots&&pack.frontier_ids.includes(PNP_OLD)&&currentSlots.classification?{...currentSlots,evidence:currentSlots.history?.evidence??{},currentIds:currentSlots.currentIds.map(id=>id===PNP_CURRENT?PNP_OLD:id),currentId:id=>id===PNP_OLD?PNP_OLD:currentSlots.currentId(id)}:currentSlots;
+   requireValue(frontier.run===run&&JSON.stringify(slots?.currentIds??frontier.ids)===JSON.stringify(pack.frontier_ids)
+     &&JSON.stringify(frontier.batches.map(row=>String(row.id)))===JSON.stringify(pack.units),'empty adjudication frontier binding mismatch');
+   const owners=new Map(frontier.batches.flatMap(row=>row.items.map(id=>[slots?.currentId(id)??id,String(row.id)])));
+@@ -1138,8 +1142,10 @@
+   return {pack_sha256:digest(pack),resolved,evidence,path,[supplierRepairSeal]:true};
+ }
+ 
+-export function validateReports(pack,reports,now,{root=null,ownerSupplement=null,currentRepairs=null,operationalSupplement=null,supplierRepairs=null,publishedMaintenance=null,reclassification=null}={}) {
++export function validateReports(pack,reports,now,{root=null,ownerSupplement=null,currentRepairs=null,operationalSupplement=null,supplierRepairs=null,publishedMaintenance=null,reclassification=null,factAlertRepairs=null,classificationMigration=null}={}) {
+   const errors=[],decisions=[],reviews=[],createdItems=[],creatorById=new Map();
++  requireValue(!classificationMigration||(root&&isPnpClassificationMigration(classificationMigration,pack,now)),'classification migration requires exact guarded receipt/current integration');
++  if(classificationMigration)now={...now,...classificationMigration.historicalGuards,[PNP_OLD]:classificationMigration.before_guard};
+   requireValue(!reclassification||(root&&isOriginalSlotReclassification(reclassification,pack,now)),
+     'original-slot history must pass exact guarded loading and integration currency');
+   // Only old physical review validation sees this archived post. Never expose
+@@ -1155,8 +1161,9 @@
+     &&supplierRepairs.pack_sha256===digest(pack)),'unvalidated supplier repair supplement');
+   requireValue(!currentRepairs||(root&&currentRepairs[ownerSupplementSeal]===true
+     &&currentRepairs.pack_sha256===digest(pack)),'unvalidated current-root repair supplement');
++  requireValue(!factAlertRepairs||(root&&isOwnerFactAlertRepairs(factAlertRepairs)&&factAlertRepairs.pack_sha256===digest(pack)),'unvalidated Facts-only outside-alert repair');
+   const ownerReviews=new Map(),ownerDecisions=new Map();
+-  for(const row of [...(ownerSupplement?.reviews??[]),...(currentRepairs?.reviews??[])]){
++  for(const row of [...(ownerSupplement?.reviews??[]),...(currentRepairs?.reviews??[]),...(factAlertRepairs?.reviews??[])]){
+     requireValue(!reclassification||row.id!==reclassification.original_id,'root review cannot replace historical u21 review');
+     requireValue(!ownerReviews.has(row.id)||digest(ownerReviews.get(row.id))===digest(row),'conflicting coexisting current root reviews');ownerReviews.set(row.id,row);
+   }
+@@ -1214,7 +1221,7 @@
+   }
+   for(const id of Object.keys(pack.before))if((!scoped||scoped.has(id))&&!now[id])errors.push(`unlicensed deletion ${id}`);
+   for(const id of creatorById.keys())if(!changed.includes(id))errors.push(`claimed creation without new item ${id}`);
+-  for(const row of decisions)if(['confirmed_fatal','confirmed_nonfatal'].includes(row.outcome)&&!changed.includes(row.id)&&supplierRepairs?.resolved.get(key(row))!==digest(row))errors.push(`confirmed defect not repaired ${row.id}`);
++  for(const row of decisions)if(['confirmed_fatal','confirmed_nonfatal'].includes(row.outcome)&&!changed.includes(row.id)&&supplierRepairs?.resolved.get(key(row))!==digest(row)&&!(classificationMigration&&row.id===PNP_OLD&&row.outcome==='confirmed_nonfatal'))errors.push(`confirmed defect not repaired ${row.id}`);
+   for(const row of reviews)if(['repaired','authored'].includes(row.disposition)&&!changed.includes(row.id))errors.push(`claimed repair or authorship without change ${row.id}`);
+   if(createdItems.length&&root){
+     try{
+@@ -1389,6 +1396,7 @@
+   const metadataHistory=phase==='initial'&&round===1?loadInitialMetadataHistory(root,run,{current:true}):phase==='repeat'?loadRepeatMetadataHistory(root,run,round,{current:true}):null;
+   const publishedMaintenance=phase==='initial'&&round===1?loadInitialPublishedMaintenance(root,run,{current:true}):null;
+   const reclassification=phase==='initial'&&round===1?loadOriginalSlotReclassification(root,run,{current:true}):null;
++  const classificationMigration=phase==='repeat'&&round===1?loadPnpClassificationMigration(root,run,{current:true}):null;
+   // Validate original reviews against exact historical source bytes only.
+   // The collection's post snapshot below always describes actual current bytes.
+   if(metadataHistory)Object.assign(reported,metadataHistory.historicalGuards);
+@@ -1399,6 +1407,8 @@
+     ...loadOwnerCurrentRepairs(root,pack,reports,current,items,read(currentRepairPath),{matchesReview:review=>reviewContexts(items).matches(review,current)}),
+     [ownerSupplementSeal]:true,
+   }:null;
++  const factPath=ownerFactAlertRepairPath(root,run);
++  const factAlertRepairs=phase==='repeat'&&round===1&&existsSync(factPath)?loadOwnerFactAlertRepairs(root,pack,reports,current,items,read(factPath),{matchesReview:review=>reviewContexts(items).matches(review,current)}):null;
+   const operationalSupplement=loadOperationalSupplement(root,pack,reports,current);
+   const supplierRepairs=loadSupplierRepairs(root,pack,reports,current,items);
+   if(deferImpactClosure) {
+@@ -1408,16 +1418,19 @@
+     const assigned=new Set([...Object.values(pack.assignments).flat(),...reports.flatMap(report=>(report.created_items??[]).map(row=>row.id))]);
+     for(const row of reports.flatMap(report=>report.reviews??[]))if(assigned.has(row.id)&&/^[a-f0-9]{64}$/.test(row.post_sha256??''))reported[row.id]=row.post_sha256;
+   }
+-  const result=validateReports(pack,reports,reported,{root,ownerSupplement,currentRepairs,operationalSupplement,supplierRepairs,publishedMaintenance,reclassification});
++  const result=validateReports(pack,reports,reported,{root,ownerSupplement,currentRepairs,operationalSupplement,supplierRepairs,publishedMaintenance,reclassification,factAlertRepairs,classificationMigration});
+   if(result.errors.length)throw Error(result.errors.join('\n'));
++  if(classificationMigration)result.changed=[...new Set([...result.changed,...classificationMigration.targets])];
+   const evidence={...(pack.input_evidence??{}),[packPath(root,run,phase,round)]:digest(readFileSync(packPath(root,run,phase,round),'utf8'))};
+   if(needleCompletion)Object.assign(evidence,completedNeedleReport(needleCompletion,{current:true}).evidence);
+-  Object.assign(evidence,ownerSupplement?.evidence??{},currentRepairs?.evidence??{},operationalSupplement?.evidence??{},supplierRepairs?.evidence??{},metadataHistory?.evidence??{},publishedMaintenance?.evidence??{},reclassification?.evidence??{});
++  Object.assign(evidence,ownerSupplement?.evidence??{},currentRepairs?.evidence??{},operationalSupplement?.evidence??{},supplierRepairs?.evidence??{},metadataHistory?.evidence??{},publishedMaintenance?.evidence??{},reclassification?.evidence??{},classificationMigration?.evidence??{});
+   for(const [p,h]of Object.entries(withdrawal?.evidence??{})){requireValue(!evidence[p]||evidence[p]===h,'withdrawal evidence collision');evidence[p]=h;}
+   if(needleCompletion)Object.assign(evidence,frozenSupportingEvidence(root,run,completedNeedleReport(needleCompletion).report.supporting_evidence??{}));
++  if(factAlertRepairs)for(const [path,hash]of Object.entries(factAlertRepairs.evidence)){requireValue(!evidence[path]||evidence[path]===hash,'Facts-only repair evidence collision');evidence[path]=hash;}
+   verifyEvidence(evidence);
+   const creationAuthors=new Map();
+   const currentSlot=reclassification??loadOriginalSlotReclassification(root,run);
++  const currentClassification=classificationMigration??loadPnpClassificationMigration(root,run);
+   for(const unit of pack.units) {
+     const p=workerReport(root,run,phase,round,unit); evidence[p]=digest(readFileSync(p,'utf8'));
+     if(pack.gateRoutingVersion===1){
+@@ -1459,7 +1472,7 @@
+         &&!expected.some(([model,effort])=>receipt.model===model&&receipt.provider_effort===effort))
+       throw Error(`worker did not succeed with an authorized identity: ${dispatch}`);
+     evidence[dispatch]=digest(readFileSync(dispatch,'utf8'));
+-    if(currentSlot&&role==='alpha-repair'&&pack.assignments[unit]?.includes(currentSlot.current_id)){
++    if(role==='alpha-repair'&&((currentSlot&&pack.assignments[unit]?.includes(currentSlot.current_id))||currentClassification?.targets.some(id=>pack.assignments[unit]?.includes(id)))){
+       const attempt=dispatch.replace(/\.result\.json$/,`.attempt-${receipt.attempt}.result.json`);
+       requireValue(readFileSync(attempt,'utf8')===readFileSync(dispatch,'utf8'),'reclassified example native attempt changed');
+       for(const file of [attempt,resolve(root,receipt.prompt??''),resolve(root,receipt.log??'')]){
+@@ -1483,6 +1496,15 @@
+     receipt.reviews=receipt.reviews.filter(row=>row.id!==original_id);
+     receipt.historical_original_slot_changes=receipt.changed.filter(id=>id===original_id);
+     receipt.changed=[...new Set(receipt.changed.map(id=>id===original_id?current_id:id))];
++  }
++  if(classificationMigration){
++    receipt.pnp_classification_migration={path:classificationMigration.path,original_id:PNP_OLD,current_id:PNP_CURRENT,original_outcome:'confirmed_nonfatal',repairer_identity:'/root',native_execution_coverage_adopted:false,current_review_granted:false};
++    receipt.pnp_classification_current_review_targets=[...classificationMigration.targets];
++    receipt.historical_pnp_classification_reviews=receipt.reviews.filter(row=>row.id===PNP_OLD);
++    requireValue(digest(receipt.historical_pnp_classification_reviews)===digest([classificationMigration.historical_review]),'historical nonfatal native49 physical review changed');
++    receipt.reviews=receipt.reviews.filter(row=>row.id!==PNP_OLD&&!classificationMigration.targets.includes(row.id));
++    receipt.changed=receipt.changed.filter(id=>id!==PNP_OLD);
++    receipt.downstream=[...new Set([...receipt.downstream,...classificationMigration.consumer_ids])];
+   }
+   if(needleCompletion)receipt.unit3_needle_completion={path:needleCompletion.path,supplier:needleCompletion.row.supplier,original_report_unchanged:true,consumer_pending:[...needleCompletion.consumers]};
+   if(withdrawal){
+@@ -1539,8 +1561,15 @@
+       root_interface_changes:currentRepairs.root_interface_changes,examined_ids:[...currentRepairs.ids],
+       native_execution_coverage_adopted:false,native_finding_synthesized:false};
+   }
++  if(factAlertRepairs){
++    receipt.owner_fact_alert_repairs={path:factAlertRepairs.path,id:factAlertRepairs.id,native_origin:factAlertRepairs.native_origin,consumer_checks:factAlertRepairs.consumer_checks,root_interface_changes:[],native_review_credit_granted:false};
++    receipt.root_fact_alert_reviews=factAlertRepairs.reviews;
++    receipt.owner_fact_alert_current_review_targets=[...factAlertRepairs.ids];
++    receipt.reviews=receipt.reviews.filter(review=>!factAlertRepairs.ids.has(review.id));
++  }
+   receipt.restated=restatedIds(pack,result.changed,statementHashes(root,run));
+   if(reclassification)receipt.restated=[...new Set(receipt.restated.map(id=>id===reclassification.original_id?reclassification.current_id:id))];
++  if(classificationMigration)receipt.restated=[...new Set([...receipt.restated.filter(id=>id!==PNP_OLD&&!classificationMigration.targets.includes(id)),PNP_CURRENT])];
+   const afterStatements=statementHashes(root,run);
+   receipt.statement_events=receipt.restated.filter(id=>pack.before_statements?.[id]||!pack.before[id]).map(id=>({id,before_statement_sha256:pack.before_statements?.[id]??statementHash(''),after_statement_sha256:afterStatements[id]}));
+   if(reclassification){
+@@ -1550,6 +1579,10 @@
+       before_guard:reclassification.before_guard,after_guard:current[reclassification.current_id],
+       before_statement_sha256:reclassification.entry.before_statement_sha256,
+       after_statement_sha256:reclassification.entry.after_statement_sha256,receipt:reclassification.path});
++  }
++  if(classificationMigration){
++    receipt.statement_events=receipt.statement_events.filter(event=>event.id!==PNP_CURRENT);
++    receipt.statement_events.push({kind:'owner-pnp-classification-migration',id:PNP_CURRENT,original_id:PNP_OLD,current_id:PNP_CURRENT,before_guard:classificationMigration.before_guard,after_guard:current[PNP_CURRENT],before_statement_sha256:statementHash(classificationMigration.before_source),after_statement_sha256:afterStatements[PNP_CURRENT],receipt:classificationMigration.path,native_execution_coverage_adopted:false});
+   }
+   if(pack.before_statements&&!receipt.restated.length&&!pack.seeds?.length)receipt.downstream=[];
+   const frontier=gateFrontier(root,run);
+@@ -2232,6 +2265,8 @@
+   const path=packPath(root,run,phase,round);
+   if(existsSync(path)){
+     const saved=read(path);
++    const classification=loadPnpClassificationMigration(root,run,{current:true});
++    if(classification&&phase==='impact-repeat'&&round===1)requireValue(classification.targets.every(id=>Object.values(saved.assignments).flat().filter(x=>x===id).length===1)&&Object.entries(classification.evidence).every(([p,h])=>saved.input_evidence?.[p]===h),'saved5.6pack omits algorithm/consumer migration review');
+     if(phase==='impact-initial'&&round===1){
+       checkFrozenReaderConcernInput(root,run,saved);
+       checkFrozenInitialScopeFindingInput(root,run,saved);
+@@ -2258,15 +2293,28 @@
+   const {seeds,impacts}=scope;
+   const concerns=phase==='impact-initial'&&round===1?loadReaderConcerns(root,run):null;
+   const scopeFindings=phase==='impact-initial'&&round===1?loadInitialScopeFindings(root,run):null;
+-  const targets=[...new Set([...scope.targets,...(concerns?.entries??[]).map(row=>row.id),...(scopeFindings?.entries??[]).map(row=>row.id),...(result.metadata_history_current_review_targets??[]),...(result.original_slot_current_review_targets??[])])];
++  const targets=[...new Set([...scope.targets,...(concerns?.entries??[]).map(row=>row.id),...(scopeFindings?.entries??[]).map(row=>row.id),...(result.metadata_history_current_review_targets??[]),...(result.original_slot_current_review_targets??[]),...(result.owner_fact_alert_current_review_targets??[]),...(result.pnp_classification_current_review_targets??[])])];
+   // Deterministic disjoint lanes run concurrently; shared metadata edits lock.
+   // Closure requeues reviews invalidated by a concurrent supplier repair.
+   const assignments={'1':[],'2':[],'3':[]};
+   // Preserve explicit dependency cycles for the dependency gate to judge.
+   const {order,cycles}=orderImpacts(items,targets);
+   order.forEach((id,index)=>assignments[String(Math.min(2,Math.floor(index/Math.max(1,Math.ceil(order.length/3))))+1)].push(id));
++  if(result.pnp_classification_migration){
++    const lane=Object.keys(assignments).find(unit=>assignments[unit].includes(PNP_CURRENT));
++    requireValue(lane,'missing native algorithm owner lane');
++    const family=new Set(result.pnp_classification_current_review_targets);
++    for(const unit of Object.keys(assignments))assignments[unit]=order.filter(id=>unit===lane?(assignments[unit].includes(id)||family.has(id)):(assignments[unit].includes(id)&&!family.has(id)));
++  }
+   const identity=libraryIdentity(root,run);
+   const pack={version:2,run,phase,round,repair_scope:'frontier',frontier_ids:[...scope.frontier].sort(),consumer_maintenance:scope.maintenance,units:['1','2','3'],assignments,before:hashes(root,run),before_statements:statementHashes(root,run),before_aliases:Object.fromEntries(identity.aliases),home_pages:manifestHomes(root,run),impacts,seeds,failures:null,gateAssignments:{},cycles:[...new Set(cycles)],ledger_updates:result.ledger_updates??[]};
++  if(result.owner_fact_alert_current_review_targets){pack.owner_fact_alert_current_review_targets=[...result.owner_fact_alert_current_review_targets];pack.owner_fact_alert_repairs=result.owner_fact_alert_repairs;}
++  if(result.pnp_classification_migration){
++    pack.pnp_classification_migration=result.pnp_classification_migration;
++    pack.pnp_classification_current_review_targets=[...result.pnp_classification_current_review_targets];
++    pack.input_evidence={...result.evidence};
++    const collection=join(workflowDir(root,run),`${source}-${round}-collected.json`);pack.input_evidence[collection]=digest(readFileSync(collection,'utf8'));
++  }
+   if(result.original_slot_reclassification){
+     pack.original_slot_reclassification=result.original_slot_reclassification;
+     pack.original_slot_current_review_targets=[...result.original_slot_current_review_targets];
+@@ -2343,7 +2391,14 @@
+   bindOwnerRepairGuidance(root,pack);frozen(path,pack);writeTasks(root,pack,'repair');return pack;
+ }
+ 
++function verifyPnpClassificationCertificate(root,run,certificate,{current=false}={}){
++  const transition=loadPnpClassificationMigration(root,run,{current:true});if(!transition)return;
++  if(!current&&pnpHistoricalCertificate(transition,certificate))return;
++  requireValue(certificate.items.filter(row=>row.id===PNP_CURRENT).length===1&&!certificate.items.some(row=>row.id===PNP_OLD)&&!(certificate.creations??[]).some(row=>row.id===PNP_CURRENT)&&Object.entries(transition.evidence).every(([p,h])=>certificate.evidence?.[p]===h),'certificate omits current algorithm subject/history');
++  const reviews=pnpCurrentNativeReviews(root,run,certificate,{current});requireValue(reviews.length===5,'certificate lacks genuine current algorithm and affectedconsumer native reviews');
++}
+ function verifyOriginalSlotCertificate(root,run,certificate,{current=false}={}){
++  verifyPnpClassificationCertificate(root,run,certificate,{current});
+   const transition=loadOriginalSlotReclassification(root,run,{current:true});if(!transition)return;
+   requireValue(certificate.items.filter(row=>row.id===transition.current_id).length===1
+     &&!certificate.items.some(row=>row.id===transition.original_id)
+@@ -2417,6 +2472,10 @@
+   // native owner review can supply current certification for this target.
+   for(const id of sourceResult?.metadata_history_current_review_targets??[])
+     requireValue(result.reviews.some(row=>row.id===id&&row.post_sha256===current[id]),`missing current native metadata-target review: ${id}`);
++  for(const id of sourceResult?.owner_fact_alert_current_review_targets??[])
++    requireValue(result.reviews.some(row=>row.id===id&&row.post_sha256===current[id]),`missing current native Facts-only outside-alert review: ${id}`);
++  for(const id of sourceResult?.pnp_classification_current_review_targets??[])
++    requireValue(result.reviews.some(row=>row.id===id&&row.post_sha256===current[id]),`missing fresh native classification-target review: ${id}`);
+   for(const id of sourceResult?.original_slot_current_review_targets??[])
+     requireValue(result.reviews.some(row=>row.id===id&&row.post_sha256===current[id]),`missing current native reclassified-example review: ${id}`);
+   const publishedBaseline=initialPublishedBaselineExclusions(root,run);
+@@ -2494,6 +2553,13 @@
+   const dir=workflowDir(root,run), path=join(dir,`judge-${round}.json`);
+   if(existsSync(path)){
+     const saved=read(path),transition=loadOriginalSlotReclassification(root,run,{current:true});
++    const classification=loadPnpClassificationMigration(root,run,{current:true});
++    if(classification){
++      const cert=verifyWave(root,run,{contextHasher});verifyPnpClassificationCertificate(root,run,cert,{current:true});
++      requireValue(saved.certification_sha256===cert.sha256,'cached Sol judgment belongs to pre-migration certification');
++      const now=contextHasher(root,[PNP_CURRENT]).get(PNP_CURRENT),rows=saved.verdicts.filter(row=>row.id===PNP_CURRENT&&row.model===MODELS.sol61.id&&typeof row.keep==='boolean'&&row.item_sha256===now?.item_sha256&&row.context_sha256===now?.context_sha256);
++      requireValue(rows.length===1&&lines(join(root,'research',`${run}-judge.jsonl`)).some(row=>digest(row)===digest(rows[0])),'cached Sol judgment lacks current algorithm ledger verdict');
++    }
+     if(transition){
+       const cert=verifyWave(root,run,{contextHasher});verifyOriginalSlotCertificate(root,run,cert,{current:true});
+       requireValue(saved.version===2&&saved.run===run&&saved.round===round&&saved.certification_sha256===cert.sha256,
+--- a/tools/step6-owned-inputs.mjs
++++ b/tools/step6-owned-inputs.mjs
+@@ -1,3 +1,4 @@
++import {loadPnpClassificationMigration} from './step5-pnp-classification-migration.mjs';
+ // Metadata-only exact owned inventory. Scientific subjects are independently
+ // selected; no foreign working content is walked or hashed for packaging.
+ import { existsSync, readFileSync } from 'node:fs';
+@@ -16,10 +17,11 @@
+ function addOriginalSlotPaths(root, run, selected, physics) {
+   if (physics) return;
+   const replacement = loadOriginalSlotReclassification(root, run, { current: true });
+-  if (!replacement) return;
+-  selected.add(`items/${replacement.original_id}.md`);
+-  selected.add(`items/${replacement.current_id}.md`);
+-  selected.add(relative(root, replacement.path).replaceAll('\\', '/'));
++  for(const transition of [replacement,loadPnpClassificationMigration(root,run,{current:true})].filter(Boolean)){
++    selected.add(`items/${transition.original_id}.md`);
++    selected.add(`items/${transition.current_id}.md`);
++    selected.add(relative(root,transition.path).replaceAll('\\','/'));
++  }
+ }
+ 
+ export function step6OwnedInputs(run, root, { physics = false } = {}) {
+--- a/tools/step6-scoped-tree.mjs
++++ b/tools/step6-scoped-tree.mjs
+@@ -1,3 +1,4 @@
++import {loadPnpClassificationMigration} from './step5-pnp-classification-migration.mjs';
+ // One native scoped selector shared by readiness and report integrity.
+ // Inventories resolve identities/homes; only selected carriers, actual supplier
+ // closure, relevant evidence and workflow implementation inputs are hashed.
+@@ -42,9 +43,8 @@
+     try { if (!lstatSync(path).isDirectory()) files.add(file); }
+     catch (error) { if (!['ENOENT', 'ENOTDIR'].includes(error.code)) throw error; }
+   };
+-  const replacement = physics ? null : loadOriginalSlotReclassification(root, run, { current: true });
+   const slotArchives = new Set();
+-  if (replacement) {
++  for(const replacement of [physics?null:loadOriginalSlotReclassification(root,run,{current:true}),physics?null:loadPnpClassificationMigration(root,run,{current:true})].filter(Boolean)) {
+     const receipt = relative(root, replacement.path).replaceAll('\\', '/');
+     add(receipt);
+     // Absence is part of the transition, not an omitted protected input.
+@@ -53,7 +53,7 @@
+     // These receipt-authenticated preimages are opaque historical bytes. Their
+     // extension need not describe their content (a page mirror can be .json).
+     for (const file of [replacement.entry.original_source_file, replacement.entry.before_source_file,
+-      replacement.entry.current_source_file, ...[...replacement.metadata.values()].flatMap(row => [row.before_file, row.current_file])])
++      replacement.entry.current_source_file, ...[...replacement.metadata.values()].flatMap(row => [row.before_file, row.current_file])].filter(Boolean))
+       slotArchives.add(relative(root, resolve(root, file)).replaceAll('\\', '/'));
+   }
+   const scalar = (fm, key) => fm.match(new RegExp(`^${key}:\\s*([^\\n]+?)\\s*$`, 'm'))?.[1]?.replace(/^['"]|['"]$/g, '');
+--- a/tools/step6-lib.mjs
++++ b/tools/step6-lib.mjs
+@@ -1,4 +1,5 @@
+ #!/usr/bin/env node
++import {loadPnpClassificationMigration} from './step5-pnp-classification-migration.mjs';
+ // Shared, deterministic scope and hashing helpers for Step 6.
+ //
+ // The visual lane, its repair guard and the publication receipt must agree on
+@@ -94,6 +95,8 @@
+   const replacement = loadOriginalSlotReclassification(repo, run, { current: true });
+   if (replacement && (!itemIds.includes(replacement.current_id) || itemIds.includes(replacement.original_id)))
+     throw new Error(`${run}: Step-6 pages do not select the authenticated current original slot`);
++  const classification=loadPnpClassificationMigration(repo,run,{current:true});
++  if(classification&&(!itemIds.includes(classification.current_id)||itemIds.includes(classification.original_id)))throw Error(`${run}: Step-6 pages do not select authenticated current algorithm`);
+   const items = itemIds.map((id) => {
+     const file = `items/${id}.md`;
+     if (!existsSync(join(repo, file))) throw new Error(`${run}: scoped item ${id} has no ${file}`);
+@@ -104,6 +107,7 @@
+     .filter((file) => existsSync(join(repo, file)));
+ 
+   return { run, ledger: relative(repo, ledgerPath), pages, items, categories, pathwayFiles,
++    ...(classification?{pnp_classification_migration:{original_id:classification.original_id,current_id:classification.current_id,receipt:relative(repo,classification.path).replaceAll('\\','/')}}:{}),
+     ...(replacement ? { original_slot_reclassification: { original_id: replacement.original_id,
+       current_id: replacement.current_id, receipt: relative(repo, replacement.path).replaceAll('\\', '/') } } : {}) };
+ }
+--- a/tools/step6-commit.mjs
++++ b/tools/step6-commit.mjs
+@@ -1,3 +1,4 @@
++import {loadPnpClassificationMigration,licensedPnpReplacement} from './step5-pnp-classification-migration.mjs';
+ // Final transaction only. Git plumbing never touches foreign working files,
+ // runs filters, or checks out a tree. All content gates precede this operation.
+ import { composeFragment, fragmentRecords, recordSignature, decodeLedger } from './step6-ledger-fragment.mjs';
+@@ -43,10 +44,10 @@
+   // commit hooks even when a previously reviewed inert hook is allowed.
+   refuseGitSideEffects(gitRoot, paths, policy?.reviewedHook ?? verifiedInertHook(gitRoot));
+   const preflightIndex = indexEntries(gitRoot); // checks conflicts, flags, unsupported submodules
+-  const replacement = physics ? null : loadOriginalSlotReclassification(root, run, { current: true });
+-  if (replacement) {
++  const replacements=physics?[]:[loadOriginalSlotReclassification(root,run,{current:true}),loadPnpClassificationMigration(root,run,{current:true})].filter(Boolean);
++  for(const replacement of replacements) {
+     const certificate = verifyCertification(root, run, { allowMissing: false, current: true });
+-    if (!licensedOriginalSlotReplacement(root, run, replacement.original_id, replacement.current_id, certificate))
++    if (!(replacement.kind==='owner-pnp-classification-migration'?licensedPnpReplacement:licensedOriginalSlotReplacement)(root, run, replacement.original_id, replacement.current_id, certificate))
+       throw Error('step6 commit: original-slot deletion lacks current replacement certification');
+     for (const id of [replacement.original_id, replacement.current_id])
+       if (!localPaths.includes(`items/${id}.md`)) throw Error('step6 commit: incomplete original-slot ownership');
+--- a/WORKFLOW.md
++++ b/WORKFLOW.md
+@@ -653,6 +653,16 @@
+ an unchanged original Luna subject. Protected deletion and Step6 ownership
+ remain limited to that authenticated source pair.
+ 
++The separate [native PnP classification migration](tools/step5-pnp-classification-migration.md)
++handles only the genuine repeat1/batch49 definition-to-algorithm blocker at the
++actual paused/drained5.5 owner request. Its Definition body stays byte-identical;
++the original confirmed-nonfatal decision and physical review remain historical.
++Root classification repair grants no native credit. The unchanged1472 original
++slots and109 batches project to the current algorithm, alongside the existing
++batch21 example. Fresh native5.6 review of the algorithm and four affected
++consumers, current certification and later Sol judgment remain mandatory.
++Protected deletion and Step6 ownership recognize only both authenticated pairs.
++
+ Optional run-local owner repair guidance is hash-bound instruction context for
+ items already assigned to a native lane. It adds no assignments, verdicts,
+ source-reading claims or acceptance; later actual interface changes retain

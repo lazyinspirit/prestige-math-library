@@ -39,6 +39,10 @@ sources:
       locator: "§11.1.1, Definition 11.1, printed p. 119; frequency rescaling matches the library 2π convention"
 verification:
   precheck: pass
+  judge:
+    model: "gpt-6-luna"
+    verdict: pass
+    date: 2026-10-22
 ---
 
 ## Statement

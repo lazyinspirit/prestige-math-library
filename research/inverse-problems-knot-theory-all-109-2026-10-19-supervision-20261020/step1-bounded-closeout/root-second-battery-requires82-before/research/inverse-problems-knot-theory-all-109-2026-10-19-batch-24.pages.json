@@ -1,0 +1,345 @@
+[
+  {
+    "order": 3044,
+    "id": "conditional-flow-matching-for-inverse-posteriors",
+    "kind": "A",
+    "category": "inverse-problems",
+    "title": "Conditional flow matching for inverse posteriors",
+    "companion": "conditional-flow-matching-for-inverse-posteriors-examples",
+    "requires": [
+      "bayesian-inverse-likelihoods-and-posterior-propriety",
+      "hellinger-posterior-stability-and-discretization",
+      "posterior-computation-error-and-diagnostics",
+      "conditional-distributions-and-regular-conditional-probability"
+    ],
+    "items": [
+      {
+        "id": "lem-ip-gronwall-with-integrable-coefficient",
+        "kind": "lemma",
+        "title": "Grönwall inequality with an integrable coefficient",
+        "statement": "Let $a\\le b$, let $A\\ge0$, let $u:[a,b]\\to[0,\\infty)$ be continuous, and let $\\ell:[a,b]\\to[0,\\infty)$ be Lebesgue measurable with $\\int_a^b\\ell(s)\\,ds<\\infty$. If\n$$u(t)\\le A+\\int_a^t\\ell(s)u(s)\\,ds\\qquad(a\\le t\\le b),$$\nthen\n$$u(t)\\le A\\exp\\!\\left(\\int_a^t\\ell(s)\\,ds\\right)\\qquad(a\\le t\\le b).$$\nIf instead $u(t)\\le A+\\int_t^b\\ell(s)u(s)\\,ds$ for every $t\\in[a,b]$, then\n$$u(t)\\le A\\exp\\!\\left(\\int_t^b\\ell(s)\\,ds\\right)\\qquad(a\\le t\\le b).$$",
+        "deps": [
+          "def-countable-choice",
+          "def-dependent-choice",
+          "def-l-one-of-a-measure",
+          "cor-the-indefinite-integral-of-an-l-one-function-is-absolutely-continuous",
+          "thm-first-fundamental-theorem-of-calculus-for-l-one",
+          "thm-fundamental-theorem-of-calculus-for-absolutely-continuous-functions",
+          "thm-a-lipschitz-function-after-an-absolutely-continuous-function-is-absolutely-continuous",
+          "lem-the-product-of-two-absolutely-continuous-functions-is-absolutely-continuous",
+          "thm-chain-rule",
+          "lem-derivative-algebra-and-chain-rules",
+          "thm-derivative-of-exponential",
+          "lem-mean-value-theorem-on-closed-interval",
+          "cor-c-one-change-of-variables-for-l-one-functions"
+        ],
+        "justified_by": [],
+        "forward_refs": [],
+        "dependency_level": 0,
+        "sources": {
+          "references": [
+            {
+              "title": "Gerald Teschl, Ordinary Differential Equations and Dynamical Systems, §2.4, Lemma 2.7",
+              "url": "https://www.mat.univie.ac.at/~gerald/ftp/book-ode/ode.pdf",
+              "locator": "Generalized Grönwall inequality with an integrable nonnegative coefficient; proof by an integrating factor."
+            },
+            {
+              "title": "Carnegie Mellon University, ODE existence and uniqueness notes, 2026, Grönwall inequality section",
+              "url": "https://www.math.cmu.edu/~gautam/c/2026-632/notes/existence.html",
+              "locator": "Grönwall estimate and its application to continuous dependence for ODEs."
+            }
+          ]
+        },
+        "proof_strategy": "direct",
+        "axiom_use": "The estimate uses Countable Choice and Dependent Choice exactly through the library fundamental theorem for absolutely continuous functions, which represents each absolutely continuous function by the integral of its derivative. The change of variable and inequality are otherwise choice-free.",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        }
+      },
+      {
+        "id": "lem-ip-lipschitz-ode-triangular-flow-and-c1-density",
+        "kind": "lemma",
+        "title": "Global Lipschitz ODE flows and the C1 density formula",
+        "statement": "Assume Countable Choice and Dependent Choice. Let $T>0$, let $d,m\\ge1$, and let $b:[0,T]\\times\\mathbb R^d\\times\\mathbb R^m\\to\\mathbb R^d$ be jointly continuous on the product Euclidean domain. Suppose that for every compact $K\\subseteq\\mathbb R^m$ there are nonnegative Lebesgue-measurable $a_K,L_K\\in L^1([0,T])$ such that for almost every $t$, simultaneously for all $y\\in K$ and $x,x'\\in\\mathbb R^d$,\n$$|b(t,0,y)|\\le a_K(t),\\qquad |b(t,x,y)-b(t,x',y)|\\le L_K(t)|x-x'|.$$\nHere $L^1([0,T])$ means the functions have finite Lebesgue integral of their absolute values. Then for every $x_0\\in\\mathbb R^d$ and $y\\in\\mathbb R^m$ there is a unique continuously differentiable solution $x_y(\\cdot;x_0)$ of\n$$\\dot x(t)=b(t,x(t),y),\\qquad x(0)=x_0,$$\non all of $[0,T]$. Its terminal map $T_y(x_0):=x_y(T;x_0)$ is a bijection with jointly continuous forward and inverse maps in $(x_0,y)$, and for all $x_0,x_1$ and $y\\in K$,\n$$|T_y(x_0)-T_y(x_1)|\\le e^{\\int_0^T L_K(t)dt}|x_0-x_1|,\\qquad |T_y^{-1}(x_0)-T_y^{-1}(x_1)|\\le e^{\\int_0^T L_K(t)dt}|x_0-x_1|.$$\n\nIn the separate C$^1$ clause, suppose additionally that the state derivative $D_xb$ exists and is jointly continuous. Then for fixed $y$, $T_y$ is a bijection and both $T_y$ and its inverse are continuously differentiable. For a measurable map $S$ and a measure $\\mu$, define its image measure by $S_{\\#}\\mu(E):=\\mu(S^{-1}(E))$. The derivative $A_y(t,x_0):=D_{x_0}x_y(t;x_0)$ solves\n$$\\dot A_y(t,x_0)=D_xb(t,x_y(t;x_0),y)A_y(t,x_0),\\qquad A_y(0,x_0)=I_d,$$\nwith Liouville formula\n$$\\det A_y(t,x_0)=\\exp\\!\\left(\\int_0^t\\operatorname{tr}D_xb(s,x_y(s;x_0),y)\\,ds\\right).$$\nConsequently, if a probability measure $\\eta$ on $\\mathbb R^d$ has Lebesgue density $q$, meaning $\\eta(E)=\\int_Eq(x)\\,dx$ for Borel $E$, the image measure $T_y{}_{\\#}\\eta$ has density\n$$z\\longmapsto q(T_y^{-1}(z))\\,|\\det D T_y^{-1}(z)|.$$\nThe global Lipschitz clause alone gives a bi-Lipschitz flow and does not assert a Jacobian density formula.",
+        "deps": [
+          "lem-ip-gronwall-with-integrable-coefficient",
+          "def-countable-choice",
+          "def-dependent-choice",
+          "def-continuous-map-top",
+          "def-l-one-of-a-measure",
+          "lem-vector-valued-continuous-curve-space-is-complete",
+          "thm-banach-fixed-point",
+          "thm-norm-inequality-for-the-vector-valued-integral",
+          "thm-heine-cantor-metric",
+          "cor-the-indefinite-integral-of-an-l-one-function-is-absolutely-continuous",
+          "lem-fundamental-theorem-of-calculus-for-banach-valued-continuous-curves",
+          "prop-order-and-scalar-rules-for-the-nonnegative-integral",
+          "thm-c1-dependence-of-solutions-on-initial-data",
+          "thm-chain-rule-for-total-derivatives",
+          "thm-determinant-differential-and-jacobis-formula",
+          "def-determinant-of-a-square-matrix",
+          "def-trace-of-a-square-matrix",
+          "thm-trace-of-ab-equals-trace-of-ba",
+          "thm-derivative-of-exponential",
+          "thm-chain-rule",
+          "lem-derivative-algebra-and-chain-rules",
+          "lem-mean-value-theorem-on-closed-interval",
+          "thm-c-one-change-of-variables-for-nonnegative-lebesgue-measurable-functions"
+        ],
+        "justified_by": [],
+        "forward_refs": [],
+        "dependency_level": 1,
+        "sources": {
+          "references": [
+            {
+              "title": "Gerald Teschl, Ordinary Differential Equations and Dynamical Systems, §§2.3–2.6",
+              "url": "https://www.mat.univie.ac.at/~gerald/ftp/book-ode/ode.pdf",
+              "locator": "§2.3 Corollary 2.6 for an integrable time-dependent global Lipschitz coefficient; §2.4 Lemma 2.7 for generalized Grönwall and C1 dependence; §2.6 for global continuation. The local proof supplies the construction and estimates used here."
+            },
+            {
+              "title": "Carnegie Mellon University, ODE existence and uniqueness notes, 2026",
+              "url": "https://www.math.cmu.edu/~gautam/c/2026-632/notes/existence.html",
+              "locator": "ODE existence, Grönwall continuous-dependence, flow and Liouville formula sections; used as a second lecture-note treatment, with the integrable-coefficient extension proved locally here."
+            },
+            {
+              "title": "Gerald B. Folland, Real Analysis, 2nd ed., Theorem 2.47",
+              "url": "https://djvu.online/file/NPF4BEtSuqdFA",
+              "locator": "C1 change-of-variables formula for nonnegative Lebesgue-measurable functions."
+            }
+          ]
+        },
+        "proof_strategy": "direct",
+        "axiom_use": "Countable Choice and Dependent Choice are used through the integrable- coefficient Grönwall lemma for the flow bounds. Countable Choice is also required by the C1 change-of-variables theorem in the optional density clause. No full Axiom of Choice is used here.",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        }
+      },
+      {
+        "id": "thm-ip-exact-triangular-transport-disintegrates-to-posterior",
+        "kind": "theorem",
+        "title": "An exact triangular transport disintegrates to the posterior",
+        "statement": "Assume the Axiom of Choice. Let $\\pi$ be a probability measure on $\\mathbb R^d\\times\\mathbb R^m$, where $d,m\\ge1$, and let $\\pi_Y(B):=\\pi(\\mathbb R^d\\times B)$ be its second marginal. Let $\\eta$ be a probability measure on $\\mathbb R^d$, and let $y\\mapsto\\pi_y$ be a probability kernel satisfying\n$$\\pi(A\\times B)=\\int_B\\pi_y(A)\\,\\pi_Y(dy)$$\nfor all Borel $A\\subseteq\\mathbb R^d$ and $B\\subseteq\\mathbb R^m$. Suppose $T:\\mathbb R^d\\times\\mathbb R^m\\to\\mathbb R^d\\times\\mathbb R^m$ is Borel and triangular, $T(x,y)=(T_y(x),y)$, with each $T_y$ a Borel bijection, and define the image measure by $T_{\\#}\\mu(E):=\\mu(T^{-1}(E))$. If\n$$T_{\\#}(\\eta\\otimes\\pi_Y)=\\pi,$$\nthen $T_y{}_{\\#}\\eta=\\pi_y$ as probability measures for $\\pi_Y$-almost every $y$. By disintegration on standard Borel spaces, such a kernel $\\pi_y$ exists and is unique outside one $\\pi_Y$-null set. In a proper Bayesian model, when $\\pi$ is the joint parameter/data law, this conditional kernel is the posterior kernel; the conclusion says an exact triangular transport maps the reference law to the data-conditioned posterior for almost every datum.\n\nFor the triangular terminal flow in the preceding ODE lemma, joint continuity supplies the Borel map and each fiber is a bijection. The theorem requires only the exact joint pushforward identity; it does not require a density or a Jacobian formula.",
+        "deps": [
+          "def-axiom-of-choice",
+          "lem-finite-euclidean-space-is-standard-borel",
+          "def-product-sigma-algebra-and-finite-product-sigma-algebras",
+          "def-measurable-function-between-measurable-spaces",
+          "lem-coordinate-maps-and-permutations-are-measurable-on-finite-products",
+          "thm-sigma-finite-product-measure-exists-is-rectangular-and-is-unique",
+          "def-measure-kernel-and-probability-kernel",
+          "thm-disintegration-of-a-joint-law-on-standard-borel-spaces",
+          "thm-measurability-of-integration-against-a-kernel",
+          "thm-tonelli-theorem-for-sigma-finite-product-spaces",
+          "lem-ip-lipschitz-ode-triangular-flow-and-c1-density",
+          "def-ip-misfit-evidence-and-posterior-law"
+        ],
+        "justified_by": [],
+        "forward_refs": [],
+        "dependency_level": 3,
+        "sources": {
+          "references": [
+            {
+              "title": "Rick Durrett, Probability: Theory and Examples, 5th ed.",
+              "url": "https://sites.math.duke.edu/~rtd/PTE/PTE5_011119.pdf",
+              "locator": "Regular conditional distributions and disintegration for standard Borel variables; the local proof supplies the rectangle identity and common-null-set uniqueness interfaces used here."
+            },
+            {
+              "title": "S. R. S. Varadhan, Probability Theory, Chapter 4",
+              "url": "https://math.nyu.edu/~varadhan/course/PROB.ch4.pdf",
+              "locator": "Conditional distributions, disintegration and conditional integration for standard Borel spaces."
+            }
+          ]
+        },
+        "proof_strategy": "direct",
+        "axiom_use": "The Axiom of Choice is required by the standard-Borel disintegration supplier for existence and simultaneous almost-everywhere uniqueness of the conditional posterior kernel. The pushforward and Tonelli calculations are choice-free once the kernels are supplied. The ODE flow supplier uses only Countable Choice and Dependent Choice, both consequences of AC.",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        }
+      },
+      {
+        "id": "alg-ip-conditional-flow-matching",
+        "kind": "algorithm",
+        "title": "Conditional flow matching for inverse posteriors",
+        "statement": "Assume the Axiom of Choice. Let $d,m,n,B\\ge1$, let $\\eta$ be a reference probability on $\\mathbb R^d$, and let $\\pi$ be the proper joint law of an unknown $X_1\\in\\mathbb R^d$ and data $Y\\in\\mathbb R^m$ in a specified Bayesian inverse model. Write $\\pi_Y$ for the data marginal and $\\pi_y$ for a posterior-kernel version of the conditional law of $X_1$ given $Y=y$. Assume\n$$\\int_{\\mathbb R^d\\times\\mathbb R^m}|x_1|^2\\,\\pi(dx_1,dy)+\\int_{\\mathbb R^d}|x_0|^2\\,\\eta(dx_0)<\\infty.$$\n\nChoose a jointly measurable parameterized vector-field family $v_\\theta:[0,1]\\times\\mathbb R^d\\times\\mathbb R^m\\to\\mathbb R^d$ whose candidates have finite population squared loss. For $i=1,\\ldots,n$, draw independent triples\n$$(t_i,X_{0i},(X_{1i},Y_i))\\sim\\operatorname{Unif}[0,1]\\otimes\\eta\\otimes\\pi,$$\nwhere $\\operatorname{Unif}[0,1]$ is Lebesgue probability on the unit interval, and set\n$$X_{t_i}=(1-t_i)X_{0i}+t_iX_{1i},\\qquad V_i=X_{1i}-X_{0i}.$$\nFit the field by minimizing, over the chosen model class, the empirical squared regression loss\n$$\\widehat{\\mathcal L}_n(\\theta)=\\frac1n\\sum_{i=1}^n\\bigl|v_\\theta(t_i,X_{t_i},Y_i)-V_i\\bigr|^2.$$\nDeclare a finite maximum optimizer-step budget $M$, a tolerance $\\varepsilon_{\\rm opt}>0$, and a named stopping statistic $S$ computed from the finite training objective. Stop with status **converged** when $S\\le\\varepsilon_{\\rm opt}$; return **budget-exhausted** if $M$ steps are used first and **failed** if the objective or optimizer becomes nonfinite. The optimizer returns the fitted field $\\widehat v$, achieved training loss, value of $S$, tolerance, step budget and status; this finite-data stopping rule does not certify $\\widehat v=v^*$.\nThe population least-squares target is the conditional-expectation class\n$$v^*(t,x,y)=\\mathbb E[X_1-X_0\\mid\\sigma(t,X_t,Y)]$$\ncoordinatewise, evaluated at $(t,x,y)$ through a chosen measurable representative. A conditional expectation is only an almost-sure equivalence class, so this formula does not specify an off-support pointwise extension.\n\nFor a query datum $y$, check all hypotheses of the cited ODE flow lemma, including joint continuity of the fitted field and its integrable global spatial-Lipschitz and origin-growth bounds on compact data-parameter sets containing $y$. If this check fails, return a field-regularity failure status. Otherwise draw $B$ independent initial states $Z_0^j\\sim\\eta$ and give each to a declared numerical ODE solver with a finite step or tolerance budget for\n$$\\dot Z_t^j=\\widehat v(t,Z_t^j,y),\\qquad Z_0^j\\sim\\eta.$$\nReturn terminal approximations only for successful integrations, together with the field, optimizer and solver statuses and any certified solver error estimate. Return a failure status for an integration that does not meet its declared stopping rule. If the exact triangular flow of $\\widehat v$ were known to satisfy $T_{\\#}(\\eta\\otimes\\pi_Y)=\\pi$, the exact transport theorem would imply $T_y{}_{\\#}\\eta=\\pi_y$ for $\\pi_Y$-almost every $y$; finite regression loss, optimizer termination, and solver success alone do not establish this joint pushforward identity or exact posterior sampling.\n\nRecord posterior model, discretization, kernel, burn-in, Monte Carlo and solver components under the declared posterior-computation error budget when applicable. The budget does not supply a learned-flow regression or optimizer-error estimate; report those as separate measured or certified quantities, and mark unavailable quantities unquantified rather than zero.",
+        "deps": [
+          "def-axiom-of-choice",
+          "thm-choice-implies-dependent-implies-countable-choice",
+          "def-ip-misfit-evidence-and-posterior-law",
+          "def-conditional-law-given-a-random-element",
+          "def-conditional-expectation-given-a-sigma-algebra",
+          "thm-conditional-expectation-is-the-l2-orthogonal-projection",
+          "cor-conditional-expectation-as-a-measurable-function-of-the-conditioning-variable",
+          "lem-finite-euclidean-space-is-standard-borel",
+          "thm-sigma-finite-product-measure-exists-is-rectangular-and-is-unique",
+          "thm-linearity-of-the-lebesgue-integral-on-l-one",
+          "lem-ip-lipschitz-ode-triangular-flow-and-c1-density",
+          "thm-ip-exact-triangular-transport-disintegrates-to-posterior",
+          "def-ip-posterior-computation-error-budget"
+        ],
+        "justified_by": [],
+        "forward_refs": [],
+        "dependency_level": 4,
+        "sources": {
+          "references": [
+            {
+              "title": "Jan Blechschmidt, Oliver G. Ernst, Moritz Poguntke, and Björn Sprungk, Flow Matching for Fast Posterior Sampling in Bayesian Inverse Problems",
+              "url": "https://arxiv.org/pdf/2610.02377",
+              "locator": "§§3.1–3.2 and Algorithms 2–4 in Appendix B: triangular transport, conditional linear-path regression, joint prior-predictive sampling, and online ODE sampling. The local algorithm makes finite optimizer and solver statuses explicit."
+            },
+            {
+              "title": "Yaron Lipman, Ricky T. Q. Chen, Heli Ben-Hamu, Maximilian Nickel, and Matt Le, Flow Matching for Generative Modeling, Transactions on Machine Learning Research (2024)",
+              "url": "https://arxiv.org/pdf/2302.00482",
+              "locator": "§3, Theorem 3.2 and §3.2: conditional vector-field regression and the linear interpolation target $X_1-X_0$."
+            },
+            {
+              "title": "Percy S. Zhai, So Won Jeong, and Veronika Ročková, Conditional Flow Matching for Bayesian Posterior Inference",
+              "url": "https://arxiv.org/pdf/2510.09534",
+              "locator": "§3.1, Theorem 1 and Assumptions 1–2: finite-dimensional posterior Wasserstein accuracy under a learned-field objective error and flow regularity; §3.2, Theorem 2: consistency under compact bounded domains and Sobolev regularity."
+            }
+          ]
+        },
+        "proof_strategy": "direct",
+        "axiom_use": "AC supplies the conditional-expectation L2 projection and standard-Borel posterior kernel interfaces. Its consequences Countable Choice and Dependent Choice supply the ODE-flow and density clauses when their stated regularity hypotheses hold. No claim that finite-sample fitting or numerical integration is exact is made.",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        }
+      },
+      {
+        "id": "op-ip-function-space-flow-matching-error-theory",
+        "kind": "open-problem",
+        "title": "Dimension-uniform conditional flow error for function-valued Bayesian posteriors",
+        "statement": "Let $\\mathcal H$ be a separable real Hilbert space, let $K\\subseteq\\mathbb R^m$ be compact, and let $y\\mapsto\\Pi^y$ be the pointwise potential posterior of a proper Bayesian inverse model, with positive finite evidence and finite second moment for every $y\\in K$. Let $P_n$ be finite-rank orthogonal projections on $\\mathcal H$ with $P_nx\\to x$ for every $x\\in\\mathcal H$, let $\\mathcal H_n=P_n\\mathcal H$, and let $\\Pi_n^y$ be proper posteriors defined by declared finite-rank forward/potential approximations on $\\mathcal H_n$, with finite second moments for every $y\\in K$. Write $i_n:\\mathcal H_n\\hookrightarrow\\mathcal H$ for inclusion and define the posterior model error\n$$e_{\\mathrm{post},n}:=\\sup_{y\\in K}W_{2,\\mathcal H}(i_{n\\#}\\Pi_n^y,\\Pi^y),$$\nwhere $W_{2,\\mathcal H}(\\mu,\\nu)$ is the infimum, over joint laws with marginals $\\mu,\\nu$, of the square root of the expected squared Hilbert distance. This term includes both posterior-potential and finite-rank model error; the known Hellinger potential/discretization estimates would need an explicit moment or tail argument to control it in $W_2$.\n\nLet $\\pi$ be the prior-predictive joint law of $(X_1,Y)$, let $\\eta$ be an independent reference probability on $\\mathcal H$ with finite second moment, and use the product training law $\\operatorname{Unif}[0,1]\\otimes\\eta\\otimes\\pi$. Let $X_t=(1-t)X_0+tX_1$ and let $v^*(t,X_t,Y)=\\mathbb E[X_1-X_0\\mid\\sigma(t,X_t,Y)]$ be a chosen continuum conditional regression version. For projected endpoints, define\n$$v_n^*(t,P_nX_t,Y)=\\mathbb E[P_n(X_1-X_0)\\mid\\sigma(t,P_nX_t,Y)]$$\nand the finite-rank conditional-target discrepancy\n$$e_{\\mathrm{target},n}:=\\sup_{y\\in K}\\left(\\int_0^1\\mathbb E\\!\\left[\\left\\|P_nv^*(t,X_t,y)-v_n^*(t,P_nX_t,y)\\right\\|_{\\mathcal H}^2\\mid Y=y\\right]dt\\right)^{1/2}.$$\nThe conditional expectation versions at $Y=y$ must be chosen on all $y\\in K$ for these suprema. For a measurable vector field $v:\\,[0,1]\\times\\mathcal H_n\\times K\\to\\mathcal H_n$, define its pointwise conditional population loss by\n$$\\mathcal L_{n,y}(v):=\\int_0^1\\mathbb E\\!\\left[\\left\\|v(t,P_nX_t,y)-P_n(X_1-X_0)\\right\\|_{\\mathcal H}^2\\mid Y=y\\right]dt,$$\nusing the selected conditional-law version. For a finite training sample of size $N$, let $\\bar v_{n,N}$ be an empirical-risk minimizer in the specified vector-field class, when it exists, and let $\\widehat v_{n,N}$ be the output of the declared optimizer. Define the uniform conditional statistical and optimizer excess-risk terms by\n$$e_{\\mathrm{stat},n,N}^2:=\\sup_{y\\in K}\\left[\\mathcal L_{n,y}(\\bar v_{n,N})-\\inf_{v\\in\\mathcal V_n}\\mathcal L_{n,y}(v)\\right],\\qquad e_{\\mathrm{opt},n,N}^2:=\\sup_{y\\in K}\\left[\\mathcal L_{n,y}(\\widehat v_{n,N})-\\mathcal L_{n,y}(\\bar v_{n,N})\\right]_+$$\nwhere $\\mathcal V_n$ is the chosen class and $\\mathcal L_{n,y}$ is its population conditional squared regression loss at datum $y$. Let $e_{\\mathrm{solver},n,N,h}$ be a certified $W_2$ coupling bound between the numerical endpoint law at solver budget $h$ and the exact learned-flow endpoint law. Finally, let $\\Lambda$ be a proposed bound, uniform in $n$ and $y\\in K$, for the time-integrated spatial Lipschitz constants of the learned drifts.\n\nFind checkable assumptions under which the learned finite-rank flow defines a posterior sampler $\\widehat\\Pi_{n,N,h}^y$ and, for each training realization satisfying explicit risk certificates (or with a stated probability over training data), satisfies a dimension-uniform bound of the form\n$$\\sup_{y\\in K}W_{2,\\mathcal H}(i_{n\\#}\\widehat\\Pi_{n,N,h}^y,\\Pi^y)\\le e_{\\mathrm{post},n}+e_{\\mathrm{solver},n,N,h}+C e^{\\Lambda}\\bigl(e_{\\mathrm{target},n}+e_{\\mathrm{stat},n,N}+e_{\\mathrm{opt},n,N}\\bigr),$$\nwith $C$ independent of $n$. The result should derive usable bounds for the posterior model term from the Bayesian potential and discretization hypotheses, establish the uniform-in-$y$ training terms from prior-predictive data, and state the required flow regularity and numerical coupling assumptions. It must not assume that a finite-sample learned field or numerical solver already has the exact joint pushforward property; that property is the conclusion to be certified through the displayed error terms.",
+        "deps": [
+          "def-axiom-of-choice",
+          "def-ip-misfit-evidence-and-posterior-law",
+          "thm-ip-function-space-posterior-propriety",
+          "thm-ip-hellinger-data-stability",
+          "thm-ip-posterior-potential-discretization-error",
+          "def-ip-posterior-computation-error-budget",
+          "prop-ip-bounded-posterior-functional-error",
+          "lem-ip-lipschitz-ode-triangular-flow-and-c1-density",
+          "thm-ip-exact-triangular-transport-disintegrates-to-posterior",
+          "alg-ip-conditional-flow-matching"
+        ],
+        "justified_by": [],
+        "forward_refs": [],
+        "dependency_level": 5,
+        "sources": {
+          "references": [
+            {
+              "title": "Jan Blechschmidt, Oliver G. Ernst, Moritz Poguntke, and Björn Sprungk, Flow Matching for Fast Posterior Sampling in Bayesian Inverse Problems",
+              "url": "https://arxiv.org/pdf/2610.02377",
+              "locator": "Theorem 3.1 and §§3.2–3.4; §5, especially the discussion that function-space TV/KL diagnostics can degenerate and that Wasserstein error analysis in function space is future work. The paper has finite-dimensional theory and function-valued experiments."
+            },
+            {
+              "title": "Percy S. Zhai, So Won Jeong, and Veronika Ročková, Conditional Flow Matching for Bayesian Posterior Inference",
+              "url": "https://arxiv.org/pdf/2510.09534",
+              "locator": "§3.1, Theorem 1 and Assumptions 1–2; §3.2, Theorem 2 and Assumptions 3–4. These give finite-dimensional expected-Wasserstein error and uniform-in-data consistency under smooth-flow, bounded-domain and Sobolev assumptions."
+            },
+            {
+              "title": "Lennon J. Shikhman, Discretization and Statistical Consistency of Functional Flow Matching",
+              "url": "https://arxiv.org/pdf/2608.04531",
+              "locator": "Theorem 23 and Theorem 26, §§8.1–8.2, for Hilbert-space sensor, learning-risk, optimizer and solver error terms; §1.2 scope explicitly excludes infinite-dimensional likelihoods and arbitrary refinement."
+            },
+            {
+              "title": "Luca Chemseddine, Gabriele Crippa, and Jan Maas, Conditional Wasserstein Distances and Bayesian OT Flow Matching, Journal of Machine Learning Research 26 (2025), 24-0586",
+              "url": "https://www.jmlr.org/papers/volume26/24-0586/24-0586.pdf",
+              "locator": "§2 and Proposition 1: finite-dimensional conditional Wasserstein distance equals expected conditional Wasserstein distance and supports Bayesian OT flow-matching constructions."
+            }
+          ]
+        },
+        "axiom_use": "The formulation assumes whatever choice principles are needed for standard- Borel posterior disintegration and conditional-expectation versions in its candidate theorem. This is an open problem, not a proved supplier or an axiom branch used to establish another item.",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "not-applicable"
+        }
+      }
+    ]
+  },
+  {
+    "order": 3045,
+    "id": "conditional-flow-matching-for-inverse-posteriors-examples",
+    "kind": "B",
+    "category": "inverse-problems",
+    "title": "Conditional flow matching for inverse posteriors — Examples and Counterexamples",
+    "companion": "conditional-flow-matching-for-inverse-posteriors",
+    "requires": [
+      "conditional-flow-matching-for-inverse-posteriors"
+    ],
+    "items": [
+      {
+        "id": "ex-ip-cfm-low-imh-acceptance-with-accurate-means",
+        "kind": "example",
+        "title": "Accurate posterior means with low independent-MH acceptance",
+        "statement": "Assume the Axiom of Choice for the general density-based Metropolis–Hastings interface. In the stationary-diffusion inverse-problem experiment with $m=256$ observations, noise variance $\\gamma^2=10^{-5}$, and $n_{KL}=128$ prior modes, use the baseline conditional-flow-matching MLP with 800 hidden units. The reported flow-matching independent-Metropolis–Hastings acceptance rates for four different true parameters are respectively $0.66\\%$, $11.21\\%$, $5.97\\%$, and $5.47\\%$. In this same experiment, the reported posterior means and 95\\% bands agree with the DRAM reference to between $0.8\\%$ and $1.8\\%$ in relative $L^2$. The first truth is a prior-predictive tail observation: its normalized radius is $2.53$, the median training radius is $0.85$, and only $0.12\\%$ of the two million training observations have a larger radius. This reported case shows that close posterior means and bands do not by themselves imply high independent-Metropolis–Hastings acceptance or establish full posterior accuracy.",
+        "deps": [
+          "lem-metropolis-hastings-density-ratio",
+          "def-axiom-of-choice"
+        ],
+        "justified_by": [],
+        "forward_refs": [],
+        "dependency_level": 0,
+        "sources": {
+          "references": [
+            {
+              "title": "Jan Blechschmidt, Oliver G. Ernst, Moritz Poguntke, and Björn Sprungk, Flow Matching for Fast Posterior Sampling in Bayesian Inverse Problems",
+              "url": "https://arxiv.org/pdf/2610.02377",
+              "locator": "§4.2.1, Fig. 6 and Table 1 (PDF pp. 15–16): $m=256$, noise variance $10^{-5}$, $n_{KL}=128$, baseline MLP with 800 hidden units and four FM-IMH acceptance rates; §4.2.2, normalized observation radii and prior-predictive training-tail frequencies; §4.2.1, relative $L^2$ comparison of posterior means and 95% bands with DRAM."
+            },
+            {
+              "title": "Gareth O. Roberts and Jeffrey S. Rosenthal, General State Space Markov Chains and MCMC Algorithms",
+              "url": "https://probability.ca/jeff/ftpdir/probsurv.pdf",
+              "locator": "§2.1 and Proposition 2: independent Metropolis–Hastings acceptance and invariant target-flow construction."
+            }
+          ]
+        },
+        "proof_strategy": "direct",
+        "axiom_use": "The reported experiment is empirical. AC is required only by the general density-based Metropolis–Hastings interface used to interpret its correction; no theorem that the observed finite-run summaries equal the posterior is asserted.",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "literature-derived"
+        }
+      },
+      {
+        "id": "ex-ip-likelihood-free-conditional-flow-matching",
+        "kind": "example",
+        "title": "Likelihood-free conditional flow matching without an MH correction",
+        "statement": "Assume the Axiom of Choice. Let a proper prior and forward simulator define a joint prior-predictive law $\\pi$ for an unknown $X_1$ and data $Y$. Suppose the available interface can draw independent pairs $(X_1,Y)\\sim\\pi$ and reference states $X_0\\sim\\eta$, but supplies neither an evaluable likelihood density $L(x_1;y)$ nor an auxiliary nonnegative random estimate $\\widehat L(x_1;y,U)$ with $\\mathbb E_U\\widehat L(x_1;y,U)=L(x_1;y)$, where the expectation is over auxiliary randomness $U$. Conditional flow matching can train from these joint and reference samples and an independent $t\\sim\\operatorname{Unif}[0,1]$ using the linear path $X_t=(1-t)X_0+tX_1$ and target velocity $X_1-X_0$, without evaluating $L$. For a fixed query datum, suppose the finite-dimensional prior has density $p_0$ with respect to Lebesgue measure $\\lambda$ on $\\mathbb R^d$, the reference law $\\eta$ has a Lebesgue density, and the learned flow satisfies the separate C$^1$ hypotheses of the ODE lemma, so its proposal has the available density $q_y$ with respect to $\\lambda$. Write $\\widetilde p_y(x)=p_0(x)L(x;y)$ for the unnormalized posterior density. For pairs with positive forward proposal-flow density $\\widetilde p_y(x)q_y(z)$, the density-based independent-Metropolis–Hastings acceptance probability is\n$$\\alpha_y(x,z)=\\min\\!\\left\\{1,\\frac{\\widetilde p_y(z)q_y(x)}{\\widetilde p_y(x)q_y(z)}\\right\\}.$$\nThe stated sampling interface does not in general supply this ratio, so it does not by itself give an evaluable density-based correction. In a specified special model the likelihood ratio may cancel or be otherwise known without separate likelihood evaluations; such a case needs no missing likelihood oracle. This example concerns the general limitation of the specified density-based correction; it does not rule out pseudo-marginal correction if an appropriate likelihood estimator is supplied, nor other correction methods with different inputs.",
+        "deps": [
+          "thm-ip-exact-triangular-transport-disintegrates-to-posterior",
+          "def-ip-misfit-evidence-and-posterior-law",
+          "lem-ip-lipschitz-ode-triangular-flow-and-c1-density",
+          "lem-metropolis-hastings-density-ratio",
+          "def-axiom-of-choice"
+        ],
+        "justified_by": [],
+        "forward_refs": [],
+        "dependency_level": 4,
+        "sources": {
+          "references": [
+            {
+              "title": "Jan Blechschmidt, Oliver G. Ernst, Moritz Poguntke, and Björn Sprungk, Flow Matching for Fast Posterior Sampling in Bayesian Inverse Problems",
+              "url": "https://arxiv.org/pdf/2610.02377",
+              "locator": "§3.1–§3.2, especially Remark 3.1 (PDF pp. 5–9): conditional training and sampling use joint prior-predictive samples without likelihood evaluation; §3.3–§3.4 and §4.4: independent-MH correction and diagnostics require an unnormalized posterior density, and the stochastic Lotka–Volterra example has no likelihood."
+            },
+            {
+              "title": "Art B. Owen, Monte Carlo Theory, Methods and Examples, Chapter 11 §11.4",
+              "url": "https://artowen.su.domains/mc/Ch-MCMC.pdf",
+              "locator": "Independent Metropolis–Hastings accepts by the target-to-proposal density ratio, which requires an evaluable unnormalized target density when used for a correction."
+            }
+          ]
+        },
+        "proof_strategy": "direct",
+        "axiom_use": "AC is required only for the general conditional-posterior and density-based Metropolis–Hastings interfaces. The stated simulator interface makes no likelihood evaluation or unbiased likelihood estimator available; it does not rule out a different interface that supplies such an estimator.",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        }
+      }
+    ]
+  }
+]

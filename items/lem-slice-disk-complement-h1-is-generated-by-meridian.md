@@ -13,6 +13,8 @@ deps:
   - thm-excision-for-singular-homology
   - thm-long-exact-sequence-of-a-pair-in-singular-homology
   - cor-homology-of-spheres
+  - cor-contractible-nonempty-spaces-have-the-homology-of-a-point
+  - thm-homotopy-equivalences-induce-isomorphisms-on-singular-homology
 justified_by: []
 aliases: []
 landmark: false
@@ -54,7 +56,7 @@ carrying the positive meridian of $K$ to the positive normal-circle generator.
 
 [F2] [[thm-excision-for-singular-homology]] and [[thm-long-exact-sequence-of-a-pair-in-singular-homology]]: relative homology excision and the natural pair sequence apply to the compact manifold pairs below.
 
-[F3] [[cor-homology-of-spheres]]: $B^4$ is contractible, so its positive-degree homology vanishes.
+[F3] [[cor-contractible-nonempty-spaces-have-the-homology-of-a-point]] gives the homology of any nonempty contractible space. The contractions $x\mapsto(1-t)x$ of $B^4$ and $(u,v)\mapsto((1-t)u,(1-t)v)$ of $D^2\times D^2$ therefore make their positive-degree homology zero. By [[thm-homotopy-equivalences-induce-isomorphisms-on-singular-homology]], the retraction $(u,z)\mapsto(0,z)$ identifies the homology of $D^2\times S^1$ with that of $S^1$; [[cor-homology-of-spheres]] gives $H_1(S^1;\mathbb Z)=\mathbb Z$ and $H_2(S^1;\mathbb Z)=0$.
 
 [F4] [[def-knot-exterior]] and [[def-knot-meridian-and-preferred-longitude]] fix the boundary exterior and positive-meridian orientation.
 

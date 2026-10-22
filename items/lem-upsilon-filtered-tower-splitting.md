@@ -17,6 +17,11 @@ axiom_use: "Only finite-dimensional basis changes are made; no choice axiom is u
 provenance:
   statement: literature-derived
   proof: ai-altered
+verification:
+  judge:
+    model: "gpt-6-luna"
+    verdict: pass
+    date: 2026-10-22
 sources:
   references:
     - title: "Charles Livingston, Notes on the knot concordance invariant Upsilon, Appendix A and §15"

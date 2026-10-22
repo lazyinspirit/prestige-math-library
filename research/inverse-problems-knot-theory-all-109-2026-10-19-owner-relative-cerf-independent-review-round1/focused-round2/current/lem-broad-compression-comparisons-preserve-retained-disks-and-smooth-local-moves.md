@@ -1,0 +1,62 @@
+---
+id: lem-broad-compression-comparisons-preserve-retained-disks-and-smooth-local-moves
+kind: lemma
+title: "Broad compression comparisons preserve retained disks and smooth local moves"
+status: draft
+origin: pipeline
+pipeline_run: inverse-problems-knot-theory-all-109-2026-10-19
+dependency_level: 0
+deps:
+  - def-countable-choice
+  - lem-proper-compression-disks-admit-neat-witnesses-with-standard-cut-balls
+  - lem-simultaneous-bridge-witnesses-can-avoid-a-compression-disk-system
+  - lem-choice-free-smooth-inverse-function-theorem-in-euclidean-space
+  - lem-manifold-bump-for-a-compact-set-inside-an-open-set
+  - lem-smooth-jordan-disk-boundary-maps-extend-to-diffeomorphisms
+  - thm-morse-sard-for-smooth-manifolds
+proof_strategy: direct
+provenance:
+  statement: ai-altered
+  proof: ai-generated
+sources:
+  references:
+    - title: "Allen Hatcher, Notes on Basic 3-Manifold Topology"
+      url: "https://pi.math.cornell.edu/~hatcher/3M/3M.pdf"
+      locator: "Printed1–3, smooth balls and splitting; the relative off-edge comparison and retained-disk construction are proved explicitly here"
+---
+
+## Statement
+
+Assume Countable Choice. Let a finite broad proper compression-disk family in a handlebody $U\subset S^3$ cut it into balls, some possibly empty and the others carrying actual trivial arcs. Supply simultaneous bridge witnesses, whose bottom intervals avoid the attaching curves. Let $C\subset\partial U$ be the union of the original attaching circles. The auxiliary neat preparation can be chosen to give a boundary-pointwise-fixing homeomorphism $H:U\to U$ carrying every ORIGINAL disk to its neat prepared disk, fixing all actual arcs and suitably cleaned bridge witnesses, with the following additional properties.
+
+The restriction of $H$ is smooth with smooth inverse off $C$. At every boundary point outside $C$ it is the identity on some full neighborhood. For every compact set $A\subset U\setminus C$ there is a smooth boundary-preserving diffeomorphism $G:U\to U$, identity on a full boundary collar and on the protected arc/witness data, agreeing with $H$ on a neighborhood of $A$. The same assertions hold simultaneously on both sides of a Heegaard surface; the two homeomorphisms glue across their pointwise fixed surface, and the corresponding smooth $G$ maps glue to a smooth ambient diffeomorphism preserving both sides and that surface pointwise.
+
+Consequently a completed NEW disk in the neat comparison can be pulled back smoothly whenever its boundary misses every original attaching circle. In particular a boundary band sum may first be realized using parallel copies on one cut side, disjoint from the ENTIRE old prepared family, including its old moving disk. Its pullback is a smooth proper disk disjoint from every retained ORIGINAL disk; those retained disks are restored exactly, without claiming a smooth conjugacy at their tangent boundary germs. The actual cut components, their occupancies and disjoint bridge witnesses are transported by $H$. Finite boundary-curve isotopies are unchanged, since $H$ fixes the surface; this does not assert an ambient proper-disk isotopy changing a tangency.
+
+Finally, if a neat comparison supplies a standard local stabilization ball whose boundary misses the whole old prepared disk family and whose surface boundary circle misses $C$, its pullback is a smooth standard ball with the SAME relative splitting model. It contains or misses each original disk exactly as the comparison ball does. The relative smooth identification follows from a $G$ agreeing near that ball boundary; it does not identify tangent retained disks with coordinate disks by a smooth map.
+
+## Facts & Assumptions
+
+**Given:** The broad disk family, actual arcs, simultaneous witnesses and the optional compact comparison objects in the Statement.
+
+[F1] Finite inward-normal disk perturbations and an explicit boundary-fixing homeomorphism give neat disks with standard smooth rounded cut balls. The local tangency chart has $r=R(s,v)>0$ for $v>0$, $R(s,0)=0$, and replaces it by $R+E$ with $E=\epsilon v\chi(s,v)\ge0$. ([[lem-proper-compression-disks-admit-neat-witnesses-with-standard-cut-balls]])
+
+[F2] Finite innermost-circle cleanup gives simultaneous bridge witnesses disjoint from the entire compression family while keeping their whole boundaries and boundary collars fixed, for balanced or extended systems alike. ([[lem-simultaneous-bridge-witnesses-can-avoid-a-compression-disk-system]])
+
+[F3] Smooth local inverses and finite compact cutoffs exist. ([[lem-choice-free-smooth-inverse-function-theorem-in-euclidean-space]], [[lem-manifold-bump-for-a-compact-set-inside-an-open-set]])
+
+[F4] Smooth planar disk collar maps exist, and regular values permit the finite transverse boundary-interval arrangements. ([[lem-smooth-jordan-disk-boundary-maps-extend-to-diffeomorphisms]], [[thm-morse-sard-for-smooth-manifolds]])
+
+## Proof
+
+**Given:** The data in the Statement.
+
+1.1 Apply [F2] first. The resulting compact witness disks and actual arcs miss $C$, so choose all of [F1]'s boundary perturbation neighborhoods disjoint from them. Refine its local comparison as follows. For $v>0$, choose normalized nonnegative smooth functions $b_-,b_+$ in the $r$ variable, supported respectively in $(R/4,3R/4)$ and $(R+Lv/4,R+3Lv/4)$, of integrals one. A fixed compactly supported unit-integral interval bump, rescaled affinely, gives these functions smoothly in $(s,v)$; its sup norm on the second interval is at most $c/(Lv)$ for a fixed constant $c$. Choose $L>2c\epsilon\|\chi\|_\infty$ and put $$k(s,v,r)=1+E(s,v)b_-(s,v,r)-E(s,v)b_+(s,v,r),\qquad h(s,v,r)=\int_0^r k(s,v,w)\,dw.$$ Then $k>0$, $h(R)=R+E$, $h=r$ near $r=0$ and for $r\ge R+Lv$, and $0\le h-r\le E$. Near the disk face $r=R$ the two bumps vanish, so this formula is smooth THROUGH that face for $v>0$. Extend by the identity for $v\le0$. The displacement and inverse-displacement bounds $E\le c'\epsilon v$ prove continuity of both maps at the edge. At any point with $v=0,r>0$ the map is the identity on a neighborhood, because $R+Lv\to0$. Thus its only possible failure of smoothness is the original boundary edge $v=r=0$. This improves the piecewise affine comparison of [F1] without changing its disk image or cut components. [F1, F2, F3, given, construct, algebra]
+
+2.1 Perform these modifications finitely, using the same finite graph-chart cover and positive boundary-normal perturbations as [F1]. Their composition $H$ fixes $\partial U$ pointwise and fixes the chosen compact data. It takes every original disk to its neat prepared image and is a smooth diffeomorphism away from $C$: each local map and its inverse are smooth there by step1.1, and all boundary points outside their edge curves have an open identity neighborhood. In particular it is smooth across disk interiors, not only on a selected cut face. The topological cut correspondence and the actual standard smooth cut-ball parameters are those of [F1]. The bridge witnesses really miss their faces by the initial [F2] cleanup; simultaneous disjointness alone was not used to infer that fact. [F1, F2, step 1.1, construct]
+
+3.1 Prove the compact-set smooth replacement explicitly. In one local construction replace $E$ by $E\theta(v/\delta)$, where $\theta$ is a smooth nondecreasing function zero on $(-\infty,1]$ and one on $[2,\infty)$. Use the same two normalized bumps and integrated derivative. The positive-derivative estimates still hold. This map is the identity near the whole set $v\le\delta$ and is smooth for $v>\delta$; the cutoff is constant on neighborhoods of its end regions, so the gluing is smooth. On its compact active set with $v\ge\delta$, $R$ has a positive minimum wherever the lower bump is used. Hence the map is the identity on ONE full target boundary collar, not merely at each boundary point. Its difference from the original local map is supported where $0<v<2\delta$ and $0\le r\le R+Lv$, a shrinking neighborhood of the edge. Therefore for any compact set avoiding that edge it agrees with the original map on a neighborhood when $\delta$ is sufficiently small. For the finite composition choose these cutoffs to miss the finitely many intermediate images of $A$; those images are compact and still avoid $C$, because every local map fixes the boundary and takes the interior to the interior. The composed $G$ agrees with $H$ near $A$, is smooth with smooth inverse by its positive fiber derivatives and [F3], and is identity on a common full boundary collar and the compact protected data. On the two sides choose their finite parameters independently and take the smaller common identity collar. Their $G$ maps then glue smoothly across the surface; their $H$ maps glue continuously and pointwise fix it. [F3, step 1.1, step 2.1, construct, algebra]
+
+4.1 Let $D'$ be a completed new comparison disk with boundary disjoint from $C$. Its interior lies in $\operatorname{Int}U$, so the whole compact disk avoids $C$. Apply step3.1 to its compact preimage under $H$ to get a $G$ agreeing with $H$ there. Then $H^{-1}D'=G^{-1}D'$ is a smooth proper disk, with exactly the same boundary curve since both maps fix the boundary pointwise. If $D'$ misses the entire prepared family, its pullback misses the entire original family by injectivity of $H$. To arrange that hypothesis for a band sum, use a thin parallel copy of each of its two source disks and an inward band on the chosen cut side. In that cut ball it is the inward frontier of a thin cap over the two face disks and their joining rectangle. Its boundary is the exterior rim of that cap and misses both old rims and every other old rim. Shrinking the finite collars makes the disk itself disjoint even from the old moving disk. All retained disks are now the literal original disks, not their smooth $G$ images. The homeomorphism $H$ identifies the completed cut components and their actual arcs; if smooth rounded ball parameters are needed, [F1]'s smooth Schoenflies argument applies to the newly rounded components. Such witnesses can be chosen outside the cap before the move. The cap base is an empty boundary disk $Q$: it contains no actual arc endpoint. In its smooth cut-ball boundary make a witness bottom interval transverse to $\partial Q$, then replace its finitely many subarcs in $Q$ by disjoint parallel arcs in an exterior collar, processing innermost subarcs first. Each is a disk-supported boundary isotopy fixing its endpoints. Extend that boundary isotopy inward by its explicit product-collar formula, with a radial cutoff; the support misses the actual arc. Its final witness misses $Q$ and hence a sufficiently thin full cap collar by compactness. Its interior stays in the cut ball and its final boundary misses every old face, so it misses the entire old prepared disk family. For multiple occupied balls do this separately. These prepared witnesses and the new disks pull back smoothly by step3.1; the retained original compression disks stay literal originals. For a finite sequence apply the construction to the current family at each completed step. Boundary isotopies are the original smooth isotopies on the fixed surface, so no proper-isotopy theorem is applied to an initially tangent disk. [F1, F2, F4, step 2.1, step 3.1, construct]
+
+5.1 For the last assertion apply the simultaneous two-sided construction to the comparison ball boundary and a compact neighborhood of it. This boundary misses the old disk rims, and its intersection with the surface is their disjoint exterior boundary circle, so its compact preimage avoids $C$. Step3.1 gives a smooth ambient $G$ agreeing with $H$ on a neighborhood of that preimage. Consequently $H^{-1}(\partial B)=G^{-1}(\partial B)$ with matching two-sided collars, and the matching collar side gives $H^{-1}B=G^{-1}B$. This is a smooth standard ball. Since $G$ preserves both handlebodies and fixes their common surface pointwise, its inverse identifies the relative splitting in that ball with the supplied standard comparison splitting. Separately, $H$ carries the original disks exactly to the prepared ones, so their containments and disjointness from the ball boundary are exactly restored. No assertion that $G$ carries a tangent original disk to a neat coordinate disk is made or needed. Countable Choice is inherited from [F1]–[F3]; all additional normalizations, truncations and completed local operations are finite. [F1, F3, step 2.1, step 3.1, step 4.1, construct] ∎

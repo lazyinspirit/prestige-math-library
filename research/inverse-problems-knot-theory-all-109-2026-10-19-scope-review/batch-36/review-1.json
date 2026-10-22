@@ -1,0 +1,225 @@
+{
+  "version": 1,
+  "run": "inverse-problems-knot-theory-all-109-2026-10-19",
+  "batch": "36",
+  "round": 1,
+  "reviewed_items": [
+    "def-ip-2d-radon-transform",
+    "thm-ip-fourier-slice-identity",
+    "thm-ip-radon-normal-operator",
+    "alg-ip-filtered-backprojection-complete-data",
+    "ex-ip-smooth-radial-phantom",
+    "ex-ip-point-source-distributional-limit",
+    "ex-ip-discretized-complete-data-backprojection"
+  ],
+  "reviewed_pages": [
+    "radon-transform-and-fourier-slice-reconstruction",
+    "radon-transform-and-fourier-slice-reconstruction-examples"
+  ],
+  "decision": "escalate",
+  "reason": "The three round-0 findings are repaired, and the Definition change's consumers were rechecked. The final review found undeclared calculus prerequisites in two repaired proofs. This is the second complete review, so owner escalation is required.",
+  "findings": [
+    {
+      "id": "thm-ip-fourier-slice-identity",
+      "type": "prerequisite",
+      "reason": "Step 1.2 uses the fundamental theorem of calculus for a complex-valued function and relies on smoothness of f composed with the linear map T. The deps and Facts & Assumptions omit these prerequisites. Declare/use thm-ftc-second-part and the chain rule for smooth composition (for example, thm-chain-rule-for-total-derivatives), applying the real-valued suppliers componentwise. Affected consumers: thm-ip-radon-normal-operator Steps 2.1 and 4.1, alg-ip-filtered-backprojection-complete-data, prop-ip-limited-angle-fourier-visibility Step 2.1, cor-ip-limited-angle-compact-support-uniqueness Step 1.1, and ex-ip-compact-support-limited-angle-uniqueness Step 1.2."
+    },
+    {
+      "id": "thm-ip-radon-normal-operator",
+      "type": "prerequisite",
+      "reason": "Step 1.1 uses the fundamental theorem of calculus and the chain rule to establish smooth line data and the derivative formula, but neither prerequisite is declared in deps or Facts & Assumptions. Declare/use thm-ftc-second-part and a suitable chain-rule supplier, componentwise for the complex-valued data. The affected consumer is alg-ip-filtered-backprojection-complete-data; ex-ip-discretized-complete-data-backprojection reaches it through the algorithm, though its finite computation makes no continuous-recovery claim."
+    }
+  ],
+  "consumer_checks": [
+    {
+      "id": "thm-ip-fourier-slice-identity",
+      "decision": "escalate",
+      "reason": "The repaired domain and complex Fubini argument are sound; the proof still has the undeclared calculus prerequisites reported above."
+    },
+    {
+      "id": "thm-ip-radon-normal-operator",
+      "decision": "escalate",
+      "reason": "The well-definedness repair is sound; Step 1.1 still has the undeclared calculus prerequisites reported above."
+    },
+    {
+      "id": "alg-ip-filtered-backprojection-complete-data",
+      "decision": "escalate",
+      "reason": "Its well-definedness and exact-recovery contract uses the unresolved Fourier-slice and normal-operator proofs."
+    },
+    {
+      "id": "ex-ip-smooth-radial-phantom",
+      "decision": "accept",
+      "reason": "Uses the repaired Definition's unchanged line-integral convention."
+    },
+    {
+      "id": "ex-ip-point-source-distributional-limit",
+      "decision": "accept",
+      "reason": "Uses the repaired Definition's unchanged line-integral convention; its approximants are compactly supported and smooth."
+    },
+    {
+      "id": "ex-ip-discretized-complete-data-backprojection",
+      "decision": "accept",
+      "reason": "The output notation is repaired and the finite computation does not claim continuous recovery."
+    },
+    {
+      "id": "def-ip-schwartz-radon-transform",
+      "decision": "accept",
+      "reason": "Uses the unchanged line-normal convention, not the ramp-filter domain."
+    },
+    {
+      "id": "def-ip-visible-covector-for-limited-angle-data",
+      "decision": "accept",
+      "reason": "Uses unchanged line geometry and Fourier conventions."
+    },
+    {
+      "id": "ex-ip-analytic-missing-angle-covector",
+      "decision": "accept",
+      "reason": "Uses line geometry and incidence covectors, not the ramp-filter domain."
+    },
+    {
+      "id": "lem-ip-compact-support-fourier-laplace-is-entire",
+      "decision": "accept",
+      "reason": "Uses the unchanged compact-support Fourier convention."
+    },
+    {
+      "id": "ex-ip-visible-conormal-under-bolker",
+      "decision": "accept",
+      "reason": "Uses unchanged line and normal conventions."
+    },
+    {
+      "id": "lem-ip-schwartz-radon-well-defined",
+      "decision": "accept",
+      "reason": "Uses the separate Schwartz line-transform definition."
+    },
+    {
+      "id": "lem-ip-limited-angle-radon-data-is-l2-on-compact-support",
+      "decision": "accept",
+      "reason": "Uses the Schwartz line-transform definition, not the ramp-filter domain."
+    },
+    {
+      "id": "lem-ip-fourier-slice-identity-on-schwartz",
+      "decision": "accept",
+      "reason": "Uses the separate Schwartz transform and Fourier conventions."
+    },
+    {
+      "id": "prop-ip-limited-angle-data-no-holder-stability",
+      "decision": "accept",
+      "reason": "Uses Schwartz Radon data and line geometry, not the ramp-filter domain."
+    },
+    {
+      "id": "ex-ip-invisible-wedge-null-function",
+      "decision": "accept",
+      "reason": "Uses the Schwartz Fourier-slice identity and unchanged line convention."
+    },
+    {
+      "id": "prop-ip-limited-angle-fourier-visibility",
+      "decision": "escalate",
+      "reason": "Step 2.1 uses the Fourier-slice theorem whose proof prerequisites remain unresolved."
+    },
+    {
+      "id": "cor-ip-limited-angle-compact-support-uniqueness",
+      "decision": "escalate",
+      "reason": "Step 1.1 uses the Fourier-slice theorem whose proof prerequisites remain unresolved."
+    },
+    {
+      "id": "ex-ip-compact-support-limited-angle-uniqueness",
+      "decision": "escalate",
+      "reason": "Step 1.2 uses the Fourier-slice theorem whose proof prerequisites remain unresolved."
+    },
+    {
+      "id": "ex-ip-high-frequency-limited-angle-instability",
+      "decision": "accept",
+      "reason": "Uses limited-angle geometry and Schwartz-data estimates, not the ramp-filter domain."
+    },
+    {
+      "id": "op-ip-stable-limited-angle-reconstruction",
+      "decision": "accept",
+      "reason": "Its formulation uses limited-angle data and stability norms, not the ramp-filter domain."
+    },
+    {
+      "id": "radon-transform-and-fourier-slice-reconstruction-examples",
+      "decision": "accept",
+      "reason": "Its inventory is unchanged; the finite-sampling example makes no continuous-recovery claim."
+    },
+    {
+      "id": "limited-angle-tomography-and-invisible-singularities",
+      "decision": "escalate",
+      "reason": "Contains consumers prop-ip-limited-angle-fourier-visibility and cor-ip-limited-angle-compact-support-uniqueness, which use the unresolved Fourier-slice proof."
+    },
+    {
+      "id": "limited-angle-tomography-and-invisible-singularities-examples",
+      "decision": "escalate",
+      "reason": "Contains ex-ip-compact-support-limited-angle-uniqueness, which uses the unresolved Fourier-slice proof."
+    },
+    {
+      "id": "geodesic-x-ray-transforms-on-simple-manifolds",
+      "decision": "accept",
+      "reason": "Its inventory does not use the ramp-filter domain or the Fourier-slice theorem directly."
+    },
+    {
+      "id": "geodesic-x-ray-transforms-on-simple-manifolds-examples",
+      "decision": "accept",
+      "reason": "Its inventory does not use the ramp-filter domain or the Fourier-slice theorem directly."
+    },
+    {
+      "id": "analytic-double-fibration-and-bolker-visibility",
+      "decision": "accept",
+      "reason": "Its inventory does not use the ramp-filter domain or the Fourier-slice theorem directly."
+    },
+    {
+      "id": "analytic-double-fibration-and-bolker-visibility-examples",
+      "decision": "accept",
+      "reason": "Its inventory does not use the ramp-filter domain or the Fourier-slice theorem directly."
+    },
+    {
+      "id": "inverse-wave-problems-and-finite-time-observability",
+      "decision": "accept",
+      "reason": "Its inventory does not use the ramp-filter domain or the Fourier-slice theorem directly."
+    },
+    {
+      "id": "inverse-wave-problems-and-finite-time-observability-examples",
+      "decision": "accept",
+      "reason": "Its inventory does not use the ramp-filter domain or the Fourier-slice theorem directly."
+    },
+    {
+      "id": "calderon-problem-and-cgo-uniqueness",
+      "decision": "accept",
+      "reason": "Its inventory does not use the ramp-filter domain or the Fourier-slice theorem directly."
+    },
+    {
+      "id": "calderon-problem-and-cgo-uniqueness-examples",
+      "decision": "accept",
+      "reason": "Its inventory does not use the ramp-filter domain or the Fourier-slice theorem directly."
+    },
+    {
+      "id": "anisotropic-calderon-gauge-and-open-uniqueness",
+      "decision": "accept",
+      "reason": "Its inventory does not use the ramp-filter domain or the Fourier-slice theorem directly."
+    },
+    {
+      "id": "anisotropic-calderon-gauge-and-open-uniqueness-examples",
+      "decision": "accept",
+      "reason": "Its inventory does not use the ramp-filter domain or the Fourier-slice theorem directly."
+    },
+    {
+      "id": "eit-logarithmic-stability-and-conductivity-classes",
+      "decision": "accept",
+      "reason": "Its inventory does not use the ramp-filter domain or the Fourier-slice theorem directly."
+    },
+    {
+      "id": "eit-logarithmic-stability-and-conductivity-classes-examples",
+      "decision": "accept",
+      "reason": "Its inventory does not use the ramp-filter domain or the Fourier-slice theorem directly."
+    },
+    {
+      "id": "neural-operator-eit-inverse-map",
+      "decision": "accept",
+      "reason": "Its inventory does not use the ramp-filter domain or the Fourier-slice theorem directly."
+    },
+    {
+      "id": "neural-operator-eit-inverse-map-examples",
+      "decision": "accept",
+      "reason": "Its inventory does not use the ramp-filter domain or the Fourier-slice theorem directly."
+    }
+  ]
+}

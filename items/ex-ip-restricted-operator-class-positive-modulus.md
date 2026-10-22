@@ -1,4 +1,9 @@
 ---
+verification:
+  judge:
+    model: "gpt-6-luna"
+    verdict: pass
+    date: 2026-10-22
 id: ex-ip-restricted-operator-class-positive-modulus
 kind: example
 title: A restricted two-operator class with a positive stability modulus

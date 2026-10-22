@@ -25,6 +25,10 @@ sources:
       locator: "§1, operations (O1) and (O2), printed pp. 35–36"
 verification:
   precheck: n/a
+  judge:
+    model: "gpt-6-luna"
+    verdict: pass
+    date: 2026-10-22
 ---
 
 ## Definition

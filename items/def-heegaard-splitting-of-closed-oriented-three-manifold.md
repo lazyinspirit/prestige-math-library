@@ -35,6 +35,6 @@ in which $H_-$ and $H_+$ are orientable handlebodies of the same genus, their co
 
 [[def-oriented-smooth-manifold-and-oriented-chart|Smooth orientations on the manifold and surface]]
 
-[[def-smooth-embedding|Embedded graph neighbourhoods]]
+[[def-smooth-embedding|Smooth embeddings of attaching disks and handlebodies]]
 
 [Danny Calegari, Notes on 3-Manifolds, Definitions 3.20–3.21](https://sschleimer.warwick.ac.uk/Teach/2021_3MFDS/References/2014notes_on_three-manifolds.pdf)

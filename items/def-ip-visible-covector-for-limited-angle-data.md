@@ -21,6 +21,10 @@ sources:
       locator: "§1.5.1, pp. 34–35: visible directions for restricted Radon data."
 verification:
   precheck: n/a
+  judge:
+    model: "gpt-6-luna"
+    verdict: pass
+    date: 2026-10-22
 ---
 
 ## Definition

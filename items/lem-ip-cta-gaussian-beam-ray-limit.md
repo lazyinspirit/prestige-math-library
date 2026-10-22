@@ -9,6 +9,8 @@ deps:
   - def-ip-transversally-anisotropic-product-domain
   - def-ip-injective-geodesic-ray-transform
   - def-riemannian-metric-and-riemannian-manifold
+  - def-riemannian-volume-density
+  - def-laplace-beltrami-operator-as-trace-of-the-hessian
   - def-geodesic-of-an-affine-connection
   - thm-local-existence-uniqueness-and-smooth-dependence-for-manifold-integral-curves
   - thm-collar-neighborhood-theorem
@@ -21,7 +23,7 @@ sources:
   references:
     - title: "Dos Santos Ferreira, Kurylev, Lassas, and Salo, The Calderon problem in transversally anisotropic geometries (2016)"
       url: "https://arxiv.org/pdf/1305.1273"
-      locator: "Section 3, Proposition 3.1, PDF p. 14; proof on pp. 14-22, particularly equation (3.6) on pp. 21-22. External global patching and distinct-branch estimates; current partial reading specified in F3."
+      locator: "Section 3, Proposition 3.1, PDF p. 14; proof on pp. 14-22, particularly equation (3.6) on pp. 21-22. External Fermi-coordinate, global patching, and distinct-branch inputs; current reading extent specified in F3."
     - title: "Mikko Salo, On geometric inverse problems and microlocal analysis (2023)"
       url: "https://arxiv.org/pdf/2312.08123v1"
       locator: "Section 3.4, Gaussian beams, PDF pp. 32-39."
@@ -45,11 +47,11 @@ The statement permits transversal manifolds without an orientability assumption 
 
 **Given:** the compact Riemannian transversal, a nontangential segment, a real attenuation $\lambda$, and $K>0$.
 
-[F1] [[def-riemannian-metric-and-riemannian-manifold]]: geodesic normal coordinates, the metric volume density, and the Laplace-Beltrami operator are defined locally without choosing an orientation.
+[F1] [[def-riemannian-metric-and-riemannian-manifold]] defines the smooth positive-definite metric; [[def-riemannian-volume-density]] defines its orientation-independent density; [[def-laplace-beltrami-operator-as-trace-of-the-hessian]] fixes $\Delta_g=\operatorname{div}_g\nabla_g$. The Fermi-coordinate construction is supplied by the external Lemma 3.5 in [F3], not by the metric definition.
 
 [F2] [[thm-local-existence-uniqueness-and-smooth-dependence-for-manifold-integral-curves]]: the geodesic ODE has local solutions and smooth dependence on initial data, so parallel frames and exponential-coordinate maps vary smoothly along an embedded geodesic subsegment.
 
-[F3] **External input:** Dos Santos Ferreira--Kurylev--Lassas--Salo, Proposition 3.1, PDF p. 14, supplies exactly the residual, norm, and attenuated ray limit in the statement on an oriented compact transversal of dimension at least two. Its finite Taylor-jet construction and distinct-branch cross-term estimate (equation (3.6), PDF pp. 21--22) are imported, including overlap matching at self-intersections. For this repair the proposition and the cross-term argument on pp. 21--22 were inspected; the entire proof on pp. 14--22 is not claimed as newly reconstructed. Historical source coverage is distinct from this reading extent.
+[F3] **External input:** Dos Santos Ferreira--Kurylev--Lassas--Salo, Proposition 3.1, PDF p. 14, supplies exactly the residual, norm, and attenuated ray limit in the statement on an oriented compact transversal of dimension at least two. Its Lemma 3.5, PDF pp. 15--16, supplies the Fermi coordinates used below. Its finite Taylor-jet construction and distinct-branch cross-term estimate (equation (3.6), PDF pp. 21--22) are imported, including overlap matching at self-intersections. For this adjudication the proposition, Lemmas 3.3--3.5, and the complete construction and cross-term argument on PDF pp. 14--22 were read. They remain external inputs, not a newly reconstructed local proof; earlier reading claims are not adopted as this adjudicator's work.
 
 [F4] The construction for each fixed $K$ uses finitely many charts, finite Taylor orders, and linear transport and matrix ODEs with fixed initial data. Increasing the finite order suffices for that $K$; no simultaneous choice of quasimodes for unrelated $K$ or $\lambda$ is required. The parameter $\tau$ then enters the resulting explicit formula. Thus the use here adds no choice axiom to the statement.
 
@@ -57,11 +59,11 @@ The statement permits transversal manifolds without an orientability assumption 
 
 **Given:** the data in the statement.
 
-1.1 Embed the segment in a collar extension across $\partial M_0$ and cover it by finitely many coordinate neighborhoods. On an embedded subsegment, parallel transport an orthonormal normal frame and set $F(t,y)=\exp_{\gamma(t)}(\sum_\alpha y_\alpha E_\alpha(t))$. The inverse function theorem gives local Fermi coordinates with $g_{jk}(t,0)=\delta_{jk}$ and $\partial_i g_{jk}(t,0)=0$. This construction is along an interval and uses no orientation of $M_0$. [F1, F2, given]
+1.1 Embed the segment in a collar extension across $\partial M_0$ and cover it by finitely many coordinate neighborhoods. On an embedded subsegment, parallel transport an orthonormal normal frame and set $F(t,y)=\exp_{\gamma(t)}(\sum_\alpha y_\alpha E_\alpha(t))$. The inverse function theorem gives local Fermi coordinates with $g_{jk}(t,0)=\delta_{jk}$ and $\partial_i g_{jk}(t,0)=0$. This construction is along an interval and uses no orientation of $M_0$. [F1, F2, F3, given]
 
-1.2 In one such chart, seek $v_s=e^{is\Theta}a$, $s=\tau+i\lambda$, with $\Theta(t,0)=t$ and $\operatorname{Im}\Theta(t,y)\geq c|y|^2$. Expand $\Theta$ into homogeneous transverse Taylor polynomials. The quadratic polynomial is $\frac12H(t)y\cdot y$; substituting into $g(d\Theta,d\Theta)=1$ gives the matrix Riccati equation $H'+H^2=F(t)$, where $F$ is determined by the second transverse Taylor coefficient of the inverse metric. An initial complex symmetric $H(t_0)$ with positive-definite imaginary part yields a smooth solution with positive imaginary part on a short subsegment. Each higher homogeneous phase term then solves a linear first-order ODE along $t$, because its newest coefficient occurs linearly in the eikonal equation. [F1, F2, given, algebra]
+1.2 In one such chart, seek $v_s=e^{is\Theta}a$, $s=\tau+i\lambda$, with $\Theta(t,0)=t$ and $\operatorname{Im}\Theta(t,y)\geq c|y|^2$. Expand $\Theta$ into homogeneous transverse Taylor polynomials. The quadratic polynomial is $\frac12H(t)y\cdot y$; substituting into $g(d\Theta,d\Theta)=1$ gives the matrix Riccati equation $H'+H^2=F(t)$, where $F$ is determined by the second transverse Taylor coefficient of the inverse metric. An initial complex symmetric $H(t_0)$ with positive-definite imaginary part yields a smooth solution with positive imaginary part on a short subsegment. Each higher homogeneous phase term then solves a linear first-order ODE along $t$, because its newest coefficient occurs linearly in the eikonal equation. [F1, F2, F3, given, algebra]
 
-2.1 Write $m=\dim M_0$, so the transverse dimension is $m-1$. Substituting $a=\tau^{(m-1)/4}\sum_{j=0}^N s^{-j}a_{-j}$ into $(-\Delta_{g_0}-s^2)e^{is\Theta}a$ cancels successive powers of $s$ by linear transport ODEs for the transverse Taylor coefficients of each $a_{-j}$. The leading coefficient solves $a_0(t,0)=c_0\exp(-\frac12\int_{t_0}^t\operatorname{tr}H(r)\,dr)$. A finite Taylor realization to the order required for the fixed $K$ and a transverse cutoff produce a smooth local beam; Gaussian integration gives bounded $L^2$ norm and a residual that tends to zero faster than any prescribed power after increasing the Taylor order. [F1, step 1.2, construct]
+2.1 Write $m=\dim M_0$, so the transverse dimension is $m-1$. Substituting $a=\tau^{(m-1)/4}\sum_{j=0}^N s^{-j}a_{-j}$ into $(-\Delta_{g_0}-s^2)e^{is\Theta}a$ cancels successive powers of $s$ by linear transport ODEs for the transverse Taylor coefficients of each $a_{-j}$. The leading coefficient solves $a_0(t,0)=c_0\exp(-\frac12\int_{t_0}^t\operatorname{tr}H(r)\,dr)$. A finite Taylor realization to the order required for the fixed $K$ and a transverse cutoff produce a smooth local beam; Gaussian integration gives bounded $L^2$ norm and a residual that tends to zero faster than any prescribed power after increasing the Taylor order. [F1, F3, step 1.2, construct]
 
 3.1 On an oriented transversal of dimension at least two, apply [F3] to complete the finite overlap matching and eliminate all distinct-branch cross terms. This gives the stated global family and limit; steps 1.1--2.1 describe its local ingredients, without claiming a new proof of the imported global estimates. [F3, F4, step 1.1, step 2.1]
 

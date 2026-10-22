@@ -1,0 +1,164 @@
+{
+  "version": 1,
+  "kind": "delegated-diffusion-metadata-donor",
+  "run": "inverse-problems-knot-theory-all-109-2026-10-19",
+  "created_by": "/root/ip_diffusion_escalations",
+  "recorded_at": "2026-10-19T05:07:41.651005+00:00",
+  "native_coverage_adopted": false,
+  "canonical_metadata_written": false,
+  "item": "ex-ip-diffusion-inverse-method-families-and-exactness",
+  "manifest_patch": {
+    "file": "research/inverse-problems-knot-theory-all-109-2026-10-19-batch-50.pages.json",
+    "id": "ex-ip-diffusion-inverse-method-families-and-exactness",
+    "statement": "Let $\\mu_0$ be a probability measure on $\\mathbb R^d$ dominated by a sigma-finite measure $\\lambda$, with density $\\rho_0=d\\mu_0/d\\lambda$. Fix an observation vector $y\\in\\mathbb R^p$ and a nonnegative measurable likelihood function $\\ell_y:\\mathbb R^d\\to[0,\\infty)$. Assume $0<Z_y=\\int\\ell_y(x)\\rho_0(x)\\,\\lambda(dx)<\\infty$ and define the posterior probability measure by $\\pi_y(dx)=Z_y^{-1}\\ell_y(x)\\rho_0(x)\\,\\lambda(dx)$. For the latent-optimization comparison, fix a Borel measurement map $\\mathcal A:\\mathbb R^d\\to\\mathbb R^p$. The following diffusion-inverse solver families have different output laws and exactness conditions.\n\n1. **Explicit-score guidance** uses the exact conditional score $c_\\sigma(x,y)=s_\\sigma(x)+g_\\sigma(x,y)$ when the fixed-$y$ likelihood density is bounded, strictly positive and Borel relative to a fixed sigma-finite observation measure, as required by the conditional-score identity; the scores use Gaussian noising at scale $\\sigma>0$. For a finite integer $N\\ge1$, a reverse-kernel sampler returns $\\pi_y$ if a supplied posterior path probability $\\Pi_y$ on $(X_0,\\ldots,X_N)$ has terminal marginal $\\nu_N$, its exact reverse conditional probability kernels are $R_k$, and the sampler starts from $\\nu_N$ and uses each $R_k$ with no projection, and initialization, corrections and transition sampling all succeed almost surely within the declared budgets. If failures are possible, exact kernels alone do not ensure that the law conditional on completed status is the posterior. A learned score, plug-in likelihood, or other surrogate does not supply that certificate by itself.\n\n2. **Variational inference** selects a probability density $q$ with respect to $\\lambda$, with $q\\ll\\pi_y$, and optimizes the evidence lower bound (ELBO) $\\operatorname{ELBO}(q)=\\int q(x)\\log(\\ell_y(x)\\rho_0(x)/q(x))\\,\\lambda(dx)$ when the logarithmic integrals are finite, using the convention that the integrand is zero where $q=0$. Its output law is the selected $q$; it equals the posterior only when $q=\\pi_y$ as probability measures, equivalently when their densities agree $\\lambda$-almost everywhere.\n\n3. **Latent optimization** specifies a latent domain $\\mathsf Z$, a generator map $G:\\mathsf Z\\to\\mathbb R^d$, and a deterministic finite-iteration procedure that returns $\\widehat z$ using the data-residual objective $\\|y-\\mathcal A(G(z))\\|^2$, without assuming global minimization. Its output law is the point mass $\\delta_{G(\\widehat z)}$. If $\\pi_y$ is not a point mass, this output law is not a posterior draw. A maximum-a-posteriori (MAP) estimate here means a maximizer of the chosen posterior density $Z_y^{-1}\\ell_y\\rho_0$ with respect to $\\lambda$; the measurement-residual objective alone does not establish that claim.\n\n4. **Markov chain Monte Carlo (MCMC)** uses a probability kernel $K_y$ on the Borel space $\\mathbb R^d$, and **sequential Monte Carlo (SMC)** produces a finite weighted particle measure $\\widehat\\pi_J=\\sum_{j=1}^J w_j\\delta_{x_j}$ for an integer $J\\ge1$, with $w_j\\ge0$ and $\\sum_jw_j=1$, where $\\delta_x$ is unit mass at $x$. If $\\pi_y$ is invariant for $K_y$ and a Markov chain starts with law $\\pi_y$, every finite-step marginal remains $\\pi_y$; invariance alone does not make every initial law exact after finitely many steps. A realized weighted particle measure equals the posterior only when the two measures are equal; every finite empirical measure differs from a non-atomic posterior, meaning one that assigns zero mass to each singleton.\n\nThese are law-level distinctions, not performance claims about any trained system."
+  },
+  "proof_contract_replacement": {
+    "citations": [
+      {
+        "fact": "F1",
+        "source": "lem-ip-conditional-score-and-tweedie-identities",
+        "source_section": "Statement",
+        "quote": "the conditional score satisfies $\\nabla_x\\log p_\\sigma(x\\mid y)=\\nabla_x\\log p_\\sigma(x)+\\nabla_x\\log r_\\sigma(y\\mid x)$",
+        "uses": [
+          "1.1"
+        ]
+      },
+      {
+        "fact": "F2",
+        "source": "alg-ip-measurement-guided-diffusion-reconstruction",
+        "source_section": "Definition",
+        "quote": "The procedure returns an algorithmic sample; it makes no posterior-exactness claim unless the terminal law and all transition and projection conditions are separately certified.",
+        "uses": [
+          "1.1",
+          "1.5"
+        ]
+      },
+      {
+        "fact": "F3",
+        "source": "def-invariant-and-stationary-distribution-for-a-markov-kernel",
+        "source_section": "Definition",
+        "quote": "The probability measure $\\pi$ is **invariant** for $K$",
+        "uses": [
+          "1.4"
+        ]
+      }
+    ],
+    "derivations": [
+      {
+        "id": "exact-reverse-path",
+        "claim": "Exact terminal and reverse kernels reproduce the supplied posterior path and its marginal when all budgeted operations succeed almost surely.",
+        "step": "1.1",
+        "inputs": [
+          "A2",
+          "F1",
+          "F2"
+        ]
+      },
+      {
+        "id": "variational-identity",
+        "claim": "The variational objective is log evidence minus the posterior-relative KL expression.",
+        "step": "1.2",
+        "inputs": [
+          "A1",
+          "A3"
+        ]
+      },
+      {
+        "id": "latent-point-output",
+        "claim": "A deterministic latent optimizer induces a point-mass output law, distinct from a non-point-mass posterior.",
+        "step": "1.3",
+        "inputs": [
+          "A1",
+          "A4"
+        ]
+      },
+      {
+        "id": "invariant-chain-and-counterexample",
+        "claim": "An invariant chain initialized at target stays exact, while the identity kernel fails to mix from a different start.",
+        "step": "1.4",
+        "inputs": [
+          "F3"
+        ]
+      },
+      {
+        "id": "failure-selection-boundary",
+        "claim": "State-dependent correction failure can bias completed-output laws despite exact reverse transition kernels.",
+        "step": "1.5",
+        "inputs": [
+          "F2"
+        ]
+      },
+      {
+        "id": "particle-empirical-law",
+        "claim": "Every finite empirical measure differs from every non-atomic posterior by its finite-support event.",
+        "step": "2.1",
+        "inputs": [
+          "A5"
+        ]
+      }
+    ],
+    "routine_steps": [],
+    "boundaries": [
+      {
+        "case": "empty",
+        "status": "checked",
+        "evidence": "The Statement fixes a probability posterior on a nonempty Euclidean state space; step 1.1 uses a nonempty path space."
+      },
+      {
+        "case": "zero",
+        "status": "checked",
+        "evidence": "Step 1.2 checks the zero variational gap at q = pi_y."
+      },
+      {
+        "case": "one",
+        "status": "checked",
+        "evidence": "Step 1.4 includes a one-step identity Markov kernel."
+      },
+      {
+        "case": "degenerate",
+        "status": "checked",
+        "evidence": "Step 1.3 treats point-mass optimizer output against a non-point-mass posterior."
+      },
+      {
+        "case": "endpoints",
+        "status": "not_applicable",
+        "reason": "The Example makes no limiting-time or infinite-particle convergence theorem claim."
+      },
+      {
+        "case": "nonempty-choice",
+        "status": "checked",
+        "evidence": "Steps 1.1\u20132.1 use specified probability laws and finite path/particle constructions; no choice is used."
+      },
+      {
+        "case": "iff-forward",
+        "status": "not_applicable",
+        "reason": "No iff assertion is stated."
+      },
+      {
+        "case": "iff-reverse",
+        "status": "not_applicable",
+        "reason": "No iff assertion is stated."
+      }
+    ]
+  },
+  "coverage_required_changes": [
+    {
+      "item": "ex-ip-diffusion-inverse-method-families-and-exactness",
+      "claim": "finite reverse-kernel posterior exactness",
+      "qualification": "initialization, corrections and all transition sampling succeed almost surely within declared budgets; without this exact kernels alone do not control success-conditioned law",
+      "proof_steps": [
+        "1.1",
+        "1.5"
+      ]
+    },
+    {
+      "item": "ex-ip-diffusion-inverse-method-families-and-exactness",
+      "claim": "finite SMC empirical measure differs from arbitrary non-atomic posterior",
+      "qualification": "generality proved by finite subadditivity of singleton null sets",
+      "proof_steps": [
+        "2.1"
+      ]
+    }
+  ],
+  "readiness_owner_action": "Reconcile now-present IP46/IP48/IP49 page supplier interfaces and design background SDE/ODE edge; root alone records owner decisions/rehashes."
+}

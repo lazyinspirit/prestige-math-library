@@ -12,6 +12,11 @@ proof_strategy: not-applicable
 provenance:
   statement: literature-derived
   proof: not-applicable
+verification:
+  judge:
+    model: "gpt-6-luna"
+    verdict: pass
+    date: 2026-10-22
 sources:
   references:
     - title: "V. O. Manturov, Knot Theory, Chapter 5, §§5.1–5.2, printed pp. 49–55"

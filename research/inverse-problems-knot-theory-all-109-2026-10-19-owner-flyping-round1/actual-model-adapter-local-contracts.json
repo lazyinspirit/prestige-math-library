@@ -1,0 +1,524 @@
+{
+  "version": 1,
+  "scope": [
+    "lem-product-edge-corner-ball-has-a-relative-inward-rounding",
+    "lem-smooth-link-roundings-admit-the-cornered-bubble-normalization"
+  ],
+  "contracts": {
+    "lem-product-edge-corner-ball-has-a-relative-inward-rounding": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "thm-euclidean-implicit-function-theorem",
+          "source_section": "Statement",
+          "quote": "Let $m,n\\ge1$, let $U\\subseteq\\mathbb R^{m+n}$ be open, and let\n$F:U\\to\\mathbb R^n$ be $C^1$.  Suppose $(a,b)\\in U$, $F(a,b)=0$, and the\n**partial derivative in the second block**\n\n$$D_yF(a,b):\\mathbb R^n\\to\\mathbb R^n,\\qquad D_yF(a,b)v:=DF(a,b)(0,v),$$\n\nis invertible.  Put similarly $D_xF(a,b)u:=DF(a,b)(u,0)$.  Then there are open\nneighbourhoods $P$ of $a$ and $Q$ of $b$, and a unique $C^1$ map\n$\\varphi:P\\to Q$, such that\n\n$$F(x,y)=0\\quad\\Longleftrightarrow\\quad y=\\varphi(x)\\qquad((x,y)\\in P\\times Q).$$\n\nAfter shrinking $P,Q$ if necessary, $D_yF(x,\\varphi(x))$ is invertible and\n\n$$D\\varphi(x)=-D_yF(x,\\varphi(x))^{-1}D_xF(x,\\varphi(x)).$$",
+          "uses": [
+            "4.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "thm-smooth-schoenflies-for-embedded-two-sphere-in-s-three",
+          "source_section": "Statement",
+          "quote": "Assume countable choice. Let $S\\subset S^3$ be the image of a smooth embedding of the standard $S^2$. There is a smooth ambient isotopy $H_t:S^3\\to S^3$, with $H_0=\\operatorname{id}$, such that $H_1(S)$ is the standard equatorial sphere $E$. In particular $S^3\\setminus S$ has exactly two components. Their closures $B_+$ and $B_-$ are smoothly embedded standard closed $3$-balls with common boundary $S$. If $D_+$ and $D_-$ denote the standard closed hemispheres bounded by $E$, the labels can be chosen so that the restrictions $H_1:B_\\pm\\to D_\\pm$ are diffeomorphisms with the same boundary restriction $H_1|_S:S\\to E$. Thus the ball identifications are compatible on their boundary and on a common two-sided collar of that boundary.",
+          "uses": [
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "thm-smooth-urysohn-lemma-for-a-closed-set-in-an-open-set",
+          "source_section": "Statement",
+          "quote": "Assume countable choice $\\mathrm{AC}_\\omega$. Let $A$ be a closed subset of a smooth manifold $M$, and let $U\\subseteq M$ be open with $A\\subseteq U$. Then there exists a smooth function $f:M\\to[0,1]$ such that $f=1$ on an open neighbourhood of $A$ and $\\operatorname{supp}(f)\\subseteq U$.",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "step": "1.1",
+          "claim": "In one edge collar replace the boundary graph $v=|u|$ by $v=f_\\epsilon(u)=|u|+\\chi(u)(\\sqrt{u^2+\\epsilon^2}-|u|)$, where $\\chi=1$ near $u=0$ and vanishes before the ends of the collar. It is smooth: near zero it is the square-root graph and away from zero every term is smooth. It equals the old graph near the collar sides, lies above it and differs from it by at most $\\epsilon$. Use sufficiently small positive constants in the finitely many collars, all with modification support disjoint from $K$. This gives an inward-rounded boundary except for optional further adapter indentations. It introduces no new edge, because each graph is smooth throughout its product collar and agrees with the smooth old faces at its ends.",
+          "inputs": [
+            "given",
+            "F3",
+            "construct"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "step": "2.1",
+          "claim": "In an adapter box choose a nonnegative smooth bump $\\gamma(s,u)$ supported in its $(s,u)$ rectangle and equal to a constant greater than $b/4$ on the projection of $Z_\\nu$. Such a projection is compact in the rectangle. For example take the constant $b/3$, and choose the base $\\epsilon$ smaller than $b/16$. The graph $f_\\epsilon(u)+\\gamma(s,u)$ is then strictly above every point of $Z_\\nu$, since its $v$ coordinate is less than $b/4$. The part shaved off remains inside the box: $|u|<a<b/4$ and the total graph height is less than $b$ there. Taper the bump before the rectangle edges. The boxes are disjoint from $\\Sigma\\cup K$, so these extra indentations affect neither. All boundary replacements are smooth graphs lying above $|u|$, hence define a contained region $B'\\subset B$.",
+          "inputs": [
+            "step 1.1",
+            "F3",
+            "construct"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "step": "3.1",
+          "claim": "These replacements preserve the topological ball type. In each product collar set $d(s,u)=f_\\epsilon(u)+\\gamma(s,u)-|u|\\ge0$, using $\\gamma=0$ outside its boxes. The fiber map $v\\mapsto v+d(s,u)\\eta(v-|u|)$, with $\\eta=1$ near zero and zero at the upper end of a slightly larger collar, is strictly increasing when $\\|d\\|_\\infty\\|\\eta'\\|_\\infty<1$. The small graph heights and a larger surrounding collar ensure this inequality; the adapter boxes can first be chosen inside that collar. It carries the old boundary to the new graph and is the identity near the far collar boundary. It is a homeomorphism, with its continuous inverse on each fiber, and is allowed to be nonsmooth at $u=0$ because the original boundary was cornered. Its finite product extensions identify $B$ homeomorphically with $B'$. The new boundary is a smooth sphere by steps 1.1\u20132.1, so [F2] makes its contained region a smooth standard ball. No smooth map from a corner to a rounded face has been asserted.",
+          "inputs": [
+            "step 1.1",
+            "step 2.1",
+            "F2",
+            "construct"
+          ]
+        },
+        {
+          "id": "step-4-1",
+          "step": "4.1",
+          "claim": "The intersections of $\\Sigma$ with the edge circles form a finite set by compact transverse zero-dimensionality. Near each, transversality to the edge means the edge coordinate can be solved as $s=h(u,v)$ by [F1]. Thus the surface has local coordinates $(u,v)$, and its intersection with the original ball is exactly the quadrant-shaped region $v\\ge|u|$. The adapter boxes miss $\\Sigma$, so in these charts the new region is $v\\ge f_\\epsilon(u)$, independent of $s$. Rounding the tip of a quadrant preserves its disk and boundary-interval topology, relative to the outer chart boundary, by the same increasing fiber formula of step 3.1 applied in the surface's own $(u,v)$ coordinates. The new boundary on the surface is smooth and transverse, since the defining function $v-f_\\epsilon(u)$ has nonzero $v$ derivative. Choose the constants small enough that all such charts are disjoint and that elsewhere the unchanged face transversality persists. These local replacements therefore preserve every component, every boundary circle and the homeomorphism type of each surface piece.",
+          "inputs": [
+            "given",
+            "step 1.1",
+            "step 2.1",
+            "step 3.1",
+            "F1",
+            "construct"
+          ]
+        },
+        {
+          "id": "step-5-1",
+          "step": "5.1",
+          "claim": "Steps 1.1\u20133.1 give a contained smooth ball agreeing near $K$ and avoiding the forbidden sets, while step 4.1 gives the neat surface pieces with all the claimed topology unchanged. Empty edge or adapter families require no respective modification. Every selection used finitely many collars and finitely many transverse intersection points.",
+          "inputs": [
+            "step 1.1",
+            "step 2.1",
+            "step 3.1",
+            "step 4.1"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "Step 5.1 handles an empty edge or adapter family."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Step 5.1 includes zero forbidden sets."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Steps 1.1\u20134.1 work with one edge collar or one adapter."
+        },
+        {
+          "case": "degenerate",
+          "status": "not_applicable",
+          "reason": "Product corner charts, transverse surface-edge intersections and positive adapter margins exclude degenerate configurations."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Steps 2.1\u20134.1 keep cores and surface pieces outside adapter boxes unchanged."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Step 1.1 chooses finitely many positive collar sizes; countable choice is inherited explicitly."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "No equivalence is asserted."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "No equivalence is asserted."
+        }
+      ],
+      "axioms": [
+        {
+          "axiom": "countable-choice",
+          "use": "Countable choice is inherited from smooth cutoffs and smooth Schoenflies. The corner collars, their modifications and all surface intersection points are finite."
+        }
+      ],
+      "finite_checks": [],
+      "finite_smoke": [],
+      "risk_review": {
+        "status": "owner-review-pending",
+        "notes": "Actual-diagram transfer is proposed, not canonically accepted. Review-sensitive points: product-corner rounding topology, narrow core rectangle retained under inward rounding, and outer adapter addition in the child window."
+      },
+      "proof_status": "complete-local-proof",
+      "proof_status_evidence": "Literal current steps, current exact supplier quotes, successful scoped checks.",
+      "unresolved_suppliers": [],
+      "unresolved_assumptions": []
+    },
+    "lem-smooth-link-roundings-admit-the-cornered-bubble-normalization": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "lem-finite-planar-link-corners-have-compatible-smooth-roundings",
+          "source_section": "Statement",
+          "quote": "Assume countable choice. Let $K\\subset S^3$ be an embedded link smooth except at finitely many planar corners. Supply disjoint coordinate boxes about these corners, each meeting $K$ in one arc lying in a coordinate plane, with its two oriented one-sided tangents in a common open half-plane. Fix one positive graph coordinate in each box. A rounding means replacement there by a smooth planar graph in that coordinate, agreeing with the old arc near the box ends. Then arbitrarily small such roundings exist, equal to $K$ outside these boxes. Any two sufficiently fine such roundings are related by a smooth ambient isotopy supported in those same boxes, fixing their exterior pointwise. Component labels and orientations are retained. Consequently every surface disjoint from the boxes stays fixed; for a two-point decomposing sphere disjoint from the boxes, triviality or nontriviality of its side tangles is unchanged when one such rounding is replaced by another.\n\nFor the usual crossing-ball picture of a finite regular diagram, obtained by semicircle overpasses and underpasses inside disjoint crossing balls and by its planar edges outside, all sufficiently fine roundings represent the same smooth oriented link as the diagram. At a semicircle endpoint one may also leave the entire part inside its crossing ball unchanged and round only the exterior arc; that exterior rounding can lie on the opposite side of the projection face from the semicircle. This last assertion compares actual smooth roundings; it does not assert a smooth diffeomorphism carrying an unrounded corner to a smooth arc.",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "lem-surface-avoiding-a-trivial-ball-arc-can-avoid-its-ball",
+          "source_section": "Statement",
+          "quote": "Assume countable choice. Let $L\\subset S^3$ be a smooth link, and let a smooth closed ball $W$ meet it in a single neat proper boundary-parallel arc $a$, with a boundary-parallelism disk supplied. Let $\\Sigma\\subset S^3$ be a compact smooth surface disjoint from $a$. In every prescribed open neighborhood of $W$ there is a supported smooth ambient isotopy fixing $L$ pointwise whose final surface is disjoint from $W$.\n\nThe same conclusion holds for finitely many pairwise disjoint such balls when $\\Sigma$ misses every captured arc; their isotopies can have disjoint support neighborhoods. In particular, a two-point decomposing sphere whose punctures avoid these balls can be moved off all of them while retaining its punctures and the nontriviality of its two side tangles.",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "lem-explicit-quadrilateral-saddle-foliation-of-a-crossing-ball",
+          "source_section": "Statement",
+          "quote": "Let $C=\\{(x,y,z):x^2+y^2+z^2\\le1\\}$, with upper overpass $A_+=\\{y=0,x^2+z^2=1,z\\ge0\\}$ and lower underpass $A_-=\\{x=0,y^2+z^2=1,z\\le0\\}$. For every compact $K\\subset C\\setminus(A_+\\cup A_-)$ there are $0<a<b<1$ and $0<\\varepsilon<1/4$ such that, on a neighborhood of $C$, the smooth function\n$$q(x,y,z)=\\frac{z+x^2-y^2}{d(z)},\\qquad d(z)=1+\\sqrt{z^2+\\varepsilon^2}-\\varepsilon-z^2$$\nhas these properties:\n\n1. $K\\subset\\{|q|<a\\}$, $q\\ge1$ on $A_+$ and $q\\le-1$ on $A_-$.\n2. For each $|h|\\le b$, $D_h=C\\cap q^{-1}(h)$ is a smooth proper disk transverse to $\\partial C$. Projection to the $(x,y)$-plane identifies it with a smooth star-shaped disk. Its boundary meets $z=0$ in exactly four points, one in each open quadrant; its intersections with each open hemisphere are two arcs. The disks are disjoint and strictly ordered by height above every common projected point.\n3. On $C\\cap\\{|q|\\le b\\}$ there is a smooth vector field $V$ tangent to the levels of $q$, with $(V_x,V_y)=(x,y)$, zero exactly on the vertical axis, and pointing strictly outward on $\\partial C\\cap\\{|q|\\le b\\}$. Consequently radial dilation in these level coordinates is compatible with the boundary of the crossing ball.\n\nThis supplies the local foliation and vector field, not an ambient positioning theorem for a surface.",
+          "uses": [
+            "2.1",
+            "3.1",
+            "5.2",
+            "6.2"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "lem-finite-saddle-position-in-protected-crossing-balls",
+          "source_section": "Statement",
+          "quote": "Assume countable choice. Let $L\\subset S^3$ be a smooth link and $S\\subset S^3$ a smooth closed embedded surface. Supply finitely many pairwise disjoint closed smooth balls $C_j$, each with coordinates extending to a neighborhood and identifying $C_j$ with the closed unit ball. Require that the whole intersection $L\\cap C_j$ consists of the upper overpass $\\{y=0,x^2+z^2=1,z\\ge0\\}$ and lower underpass $\\{x=0,y^2+z^2=1,z\\le0\\}$ in these coordinates, and that $S\\cap L\\cap C_j=\\varnothing$.\n\nFor every open neighborhood $W$ of $\\bigcup_j C_j$, there is a smooth ambient isotopy of $S^3$, fixing $L$ pointwise and equal to the identity outside $W$, whose final surface meets each $C_j$ in a finite, possibly empty, disjoint collection of the quadrilateral saddle disks of the explicit crossing-ball foliation. In particular the final surface is transverse to each $\\partial C_j$, each saddle boundary has four equatorial corners and two arcs on each hemisphere, and all disks in one ball are ordered levels of one smooth foliation. The isotopy fixes a neighborhood of $S\\cap L$. This assertion does not impose the disk-piece or repeated-bubble conditions on the parts outside the crossing balls.",
+          "uses": [
+            "2.1",
+            "3.1",
+            "5.2",
+            "6.2"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "lem-product-edge-corner-ball-has-a-relative-inward-rounding",
+          "source_section": "Statement",
+          "quote": "Assume countable choice. Let $B\\subset S^3$ be an embedded topological closed ball with smooth boundary faces and finitely many disjoint edge circles. Supply disjoint product collars of the edges, with coordinates $(s,u,v)$, where $s$ is the circle parameter and $B$ has the local form $v\\ge|u|$. Away from the edges its boundary is smooth. Let $\\Sigma$ be a compact smooth surface without boundary, transverse to the smooth faces and to the edge circles. Let $K$ be a compact subset of $B$ disjoint from the edges, to be retained unchanged.\n\nOne may round the boundary inward to a smooth ball $B'\\subset B$, agreeing with $B$ near $K$, so that $\\Sigma\\cap B'$ is a neat proper surface with the same component and boundary-circle counts and the same component homeomorphism types as $\\Sigma\\cap B$ with its corner charts. Moreover suppose finitely many adapter product boxes in the edge collars have closures disjoint from $\\Sigma\\cup K$, and contain supplied compact sets $Z_\\nu$ in their interiors. The boxes may be taken with $|u|<a$, $|v|<b$, $a<b/4$, and the supplied sets with $v<b/4$. The rounding can additionally exclude every $Z_\\nu$ from $B'$, by a boundary indentation supported in these boxes. Thus closed link pieces localized there can be kept out of the rounded ball interior while all specified surface pieces and compact cores are retained.",
+          "uses": [
+            "3.1",
+            "4.1",
+            "5.2",
+            "6.1"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "lem-simultaneous-surface-transversality-fixed-on-a-protected-closed-set",
+          "source_section": "Statement",
+          "quote": "Assume countable choice. Let $S$ be a compact smooth embedded surface without boundary in $S^3$, let $Z\\subset S^3$ be closed, and let $T_1,\\ldots,T_m$ be finitely many closed smooth embedded surfaces. Suppose $S$ is transverse to every $T_i$ on a neighborhood in $S$ of $S\\cap Z$. Then there is a smooth ambient isotopy fixing a neighborhood of $Z$ pointwise whose final surface is transverse to every $T_i$. The induced isotopy of embeddings of $S$ may be taken arbitrarily close to the inclusion in the $C^1$ topology.\n\nThus protected surface patches and protected link points are unchanged when their original intersections with the target surfaces are already transverse. No transversality is asserted at a protected nontransverse intersection.",
+          "uses": [
+            "3.1",
+            "6.1",
+            "6.2"
+          ]
+        },
+        {
+          "fact": "F6",
+          "source": "thm-well-ordering-principle",
+          "source_section": "Statement",
+          "quote": "Every nonempty subset $S \\subseteq \\mathbb{N}$ has a least element: there is $\\ell \\in S$ with $\\ell \\le s$ for all $s \\in S$.",
+          "uses": [
+            "4.1",
+            "6.1"
+          ]
+        },
+        {
+          "fact": "F6",
+          "source": "lem-nondisk-proper-surface-in-a-ball-has-a-compressing-disk",
+          "source_section": "Statement",
+          "quote": "Assume countable choice. Let $B$ be a supplied smooth closed $3$-ball and let $F\\subset B$ be a compact neatly properly embedded smooth surface, possibly disconnected, with no closed components. If at least one component of $F$ is not a disk, there exists an embedded disk $X\\subset\\operatorname{int}B$ such that $X\\cap F=\\partial X$ and $\\partial X$ does not bound a disk in $F$. The assertion concerns a geometric compressing disk for the whole surface; it does not require specifying its boundary component in advance.",
+          "uses": [
+            "4.1",
+            "6.1"
+          ]
+        },
+        {
+          "fact": "F6",
+          "source": "lem-disk-replacement-on-a-nonsplit-two-point-sphere",
+          "source_section": "Statement",
+          "quote": "Assume countable choice. Let $L\\subset S^3$ be a nonsplit smooth link and let $S\\subset S^3$ be a smooth sphere meeting $L$ transversely in two points. Let $D$ be an embedded disk with $\\partial D=c\\subset S\\setminus L$ and $\\operatorname{int}D\\cap(S\\cup L)=\\varnothing$. Assume the disk meets $S$ transversely along its boundary collar.\n\nThen $c$ bounds a disk $E\\subset S\\setminus L$. Replacing $E$ by $D$, with a small collar push and corner rounding near $c$, gives a sphere $S'$ ambient isotopic to $S$ by an isotopy fixing $L$ pointwise. The endpoint sphere agrees with $S$ outside $E$ and an arbitrarily small collar of $c$, and its new disk lies in an arbitrarily small neighborhood of $D$. In particular the two punctures and the nontriviality of either side tangle are preserved.",
+          "uses": [
+            "4.1",
+            "6.1"
+          ]
+        },
+        {
+          "fact": "F7",
+          "source": "lem-empty-rectangle-for-a-repeated-hemisphere-circle",
+          "source_section": "Statement",
+          "quote": "Assume countable choice. Let $H$ be a smooth closed disk on a smooth sphere $P$, and let $I_0,I_1$ be disjoint open intervals on $\\partial H$ with disjoint closures. Let $\\Gamma$ be a finite disjoint collection of smooth embedded circles on $P$, transverse to $\\partial H$. Suppose $\\Gamma\\cap H$ consists of finitely many proper arcs, each joining $I_0$ to $I_1$. If some circle of $\\Gamma$ meets $H$ in at least two arcs, then some circle $C\\in\\Gamma$ has two arcs $\\alpha_0,\\alpha_1\\subset H$ bounding a closed rectangle $R\\subset H$ with its other two sides subintervals of $I_0,I_1$, and\n$$\\operatorname{int}_H(R)\\cap\\Gamma=\\varnothing.$$\nHere the rectangle's interior means its two-dimensional interior in $H$. Moreover $C$ bounds a disk $D\\subset P$ containing $R$, and $R\\cap C=\\alpha_0\\cup\\alpha_1$. The chosen circle need not be the originally supplied repeated circle.",
+          "uses": [
+            "5.2",
+            "6.1"
+          ]
+        },
+        {
+          "fact": "F7",
+          "source": "lem-empty-boundary-rectangle-supplies-a-surface-bridge-disk",
+          "source_section": "Statement",
+          "quote": "Assume countable choice. Let $B\\subset S^3$ be a smooth closed ball and let $F$ be a finite disjoint union of smooth neat proper disks in $B$. Select a component $E$ of $F$. Supply a closed rectangle $R\\subset\\partial B$ with two opposite sides disjoint arcs in $\\partial E$, with $R\\cap\\partial E$ exactly those sides and $\\operatorname{int}_{\\partial B}R$ disjoint from $\\partial F$. Let $\\rho\\subset R$ be a smooth spanning arc joining interior points $q_0,q_1$ of those two sides, otherwise in the rectangle's interior, and let $\\beta\\subset E$ be any smooth proper arc with the same endpoints.\n\nThere is an arc $\\rho^+$ obtained by pushing the interior of $\\rho$ arbitrarily slightly into $\\operatorname{int}B$, fixing its endpoints, and an embedded disk $Q\\subset B$ with boundary $\\beta\\cup\\rho^+$, interior in $\\operatorname{int}B$, and $Q\\cap F=\\beta$. Boundary corners at $q_0,q_1$ are understood with compatible local roundings. Thus a bridge disk exists while avoiding every disk component of $F$. No saddle cancellation or complexity decrease is asserted here.",
+          "uses": [
+            "5.2",
+            "6.1"
+          ]
+        },
+        {
+          "fact": "F7",
+          "source": "lem-empty-overpass-free-rectangle-cancels-two-saddles",
+          "source_section": "Statement",
+          "quote": "Assume countable choice. Let $L$ be a nonsplit smooth link and let $S$ be a smooth sphere meeting $L$ transversely twice. Supply pairwise disjoint closed crossing balls $C_1,\\ldots,C_n$ such that $S\\cap C_j$ is a finite collection of proper saddle disks disjoint from $L$. Supply also a closed ball $B$ whose interior misses $L$ and every $C_j$, such that $S\\cap B$ is a finite neat proper disk family.\n\nIn one crossing ball $C=C_k$, let $\\sigma_0,\\sigma_1$ be two adjacent saddle disks: their boundary circles cobound an annulus $A\\subset\\partial C$ with interior disjoint from $S\\cup L$. Suppose a rectangle $R\\subset A\\cap\\partial B$ joins an arc $\\alpha_0\\subset\\partial\\sigma_0$ to an arc $\\alpha_1\\subset\\partial\\sigma_1$, its other sides span the annulus, and $R\\cap S=\\alpha_0\\cup\\alpha_1$. Require that $R$ misses $L$, and that these two arcs lie on the boundary of the same disk component $E$ of $S\\cap B$. All shared faces and their surface pieces have supplied compatible corner roundings.\n\nThen there is an ambient isotopy fixing $L$ pointwise whose final sphere agrees with $S$ near every other saddle disk and meets each crossing ball in precisely its old saddle disks with $\\sigma_0,\\sigma_1$ deleted from $C_k$. In particular its total number of saddle disks decreases by exactly two. This is the overpass-free rectangle case; no meridional-surgery case is included.",
+          "uses": [
+            "5.2",
+            "6.1"
+          ]
+        },
+        {
+          "fact": "F8",
+          "source": "lem-meridional-splitting-retains-a-nontrivial-decomposing-sphere",
+          "source_section": "Statement",
+          "quote": "Assume countable choice. Let $L\\subset S^3$ be a smooth link, and let a smooth sphere $S$ meet it transversely in two points $x_1,x_2$. Each closed ball side contains one proper arc of $L$ and possibly closed components. Call a side tangle trivial when it has no closed components and its proper arc is boundary-parallel. Suppose both side tangles are nontrivial.\n\nLet $B$ be one side ball, with opposite ball $B_0$. Supply a proper embedded disk $D\\subset B$ transverse to $L$ in one interior point $p$, such that $\\partial D\\subset S\\setminus\\{x_1,x_2\\}$ separates $x_1$ from $x_2$ on $S$. Let $Q_i\\subset S$ be the disk bounded by $\\partial D$ containing $x_i$. After small corner rounding and separation of their copies of $D$, at least one of the spheres $Q_1\\cup D$ and $Q_2\\cup D$ meets $L$ twice and has both side tangles nontrivial. Thus meridional surgery of this decomposing sphere has a nontrivial decomposing child.",
+          "uses": [
+            "6.2"
+          ]
+        },
+        {
+          "fact": "F8",
+          "source": "lem-boundary-sum-of-one-string-ball-tangles-preserves-nontriviality",
+          "source_section": "Statement",
+          "quote": "Assume countable choice. Let $B=B_1\\cup_D B_2\\subset S^3$ be a supplied smooth boundary sum of two embedded balls along a disk, with corners rounded. In each $B_i$ let $T_i$ consist of one proper smooth arc $a_i$ and finitely many disjoint interior circles. Suppose $T_i\\cap D$ is just one endpoint of $a_i$, matched to the corresponding endpoint in the other disk. The union is a one-string ball tangle $T\\subset B$. Call such a tangle trivial if it has no circle components and its proper arc cobounds an embedded disk with an arc in the boundary sphere, with disk interior in the ball interior.\n\nThen $T$ is trivial if and only if both $T_1$ and $T_2$ are trivial. In particular, a nontrivial factor makes the boundary sum nontrivial, and a nontrivial boundary sum has a nontrivial factor.",
+          "uses": [
+            "6.2"
+          ]
+        },
+        {
+          "fact": "F8",
+          "source": "lem-punctured-disk-window-slides-across-a-trivial-arc-ball",
+          "source_section": "Statement",
+          "quote": "Assume countable choice. Let $L$ be a smooth link and $S$ a smooth closed embedded surface in $S^3$. Supply a smooth closed ball $W$ and a disk $U\\subset\\partial W$ such that $W\\cap S=U$, and put $V=\\overline{\\partial W\\setminus U}$. Suppose $L\\cap W$ is a neat proper boundary-parallel arc $a$ with endpoints $p\\in\\operatorname{int}U$ and $q\\in\\operatorname{int}V$, with an actual boundary-parallelism disk supplied. Thus $U$ contains precisely one transverse link intersection.\n\nLet $K\\subset S^3$ be closed with $K\\cap V=\\varnothing$. Then an ambient isotopy preserving $L$ setwise, supported in any prescribed neighborhood of $W$, takes $S$ to a surface that agrees with $S$ outside $\\operatorname{int}U$ and replaces $U$ by a disk disjoint from $K$. It fixes a collar of $\\partial U$ in $S$, and the new puncture lies arbitrarily close to $q$ on $a$. In particular the old intersections $U\\cap K$ are deleted without affecting other surface pieces. Link preservation here is setwise: its intersection point with the moving window travels along $a$.",
+          "uses": [
+            "6.2"
+          ]
+        },
+        {
+          "fact": "F9",
+          "source": "thm-smooth-schoenflies-for-embedded-two-sphere-in-s-three",
+          "source_section": "Statement",
+          "quote": "Assume countable choice. Let $S\\subset S^3$ be the image of a smooth embedding of the standard $S^2$. There is a smooth ambient isotopy $H_t:S^3\\to S^3$, with $H_0=\\operatorname{id}$, such that $H_1(S)$ is the standard equatorial sphere $E$. In particular $S^3\\setminus S$ has exactly two components. Their closures $B_+$ and $B_-$ are smoothly embedded standard closed $3$-balls with common boundary $S$. If $D_+$ and $D_-$ denote the standard closed hemispheres bounded by $E$, the labels can be chosen so that the restrictions $H_1:B_\\pm\\to D_\\pm$ are diffeomorphisms with the same boundary restriction $H_1|_S:S\\to E$. Thus the ball identifications are compatible on their boundary and on a common two-sided collar of that boundary.",
+          "uses": [
+            "6.2"
+          ]
+        },
+        {
+          "fact": "F9",
+          "source": "lem-smooth-ball-windows-and-boundary-disk-absorption",
+          "source_section": "Statement",
+          "quote": "Assume countable choice. For $n=2$ or $3$, a smoothly embedded closed $n$-ball in a connected boundaryless smooth $n$-manifold can be carried to a sufficiently small coordinate round ball by a smooth ambient isotopy. Consequently, a smooth closed disk in the boundary of a smooth $3$-ball is a standard disk window: the pair consisting of the ball and that disk is diffeomorphic to a round ball with a hemispherical boundary disk. Attaching a smooth $3$-ball to a smooth manifold along one such disk window does not change the diffeomorphism type, after smoothing the corner. The same conclusion holds in reverse, when a ball meeting the boundary in one disk is removed; the diffeomorphism is supported near the attached or removed ball and its attaching collar.",
+          "uses": [
+            "6.2"
+          ]
+        },
+        {
+          "fact": "F10",
+          "source": "lem-the-extended-time-dependent-field-has-a-global-time-one-flow",
+          "source_section": "Statement",
+          "quote": "Assume $\\mathrm{AC}_\\omega$. Let $G:N\\times I\\to TN$ be a smooth map with $G(y,t)\\in T_yN$, representing the time-dependent vector field $V:I\\times N\\to TN$, $V(t,y)=G(y,t)$, on a smooth manifold $N$. Suppose its union of slice supports $\\bigcup_{t\\in I}\\operatorname{supp}G_t$ is contained in a compact subset of $N$ ([[def-time-dependent-vector-field-and-evolution-operator]]), as produced in [[lem-compactness-allows-a-cutoff-to-produce-a-compactly-supported-time-dependent-field]]. If $N$ has boundary, assume additionally that $G_t$ is tangent to $\\partial N$ there for every $t$. Then there is a unique global **evolution operator** $\\Psi_{t,s}:N\\to N$, $s,t\\in I$, such that:\n\n1. $\\Psi_{s,s}=\\mathrm{id}_N$ and $\\Psi_{u,t}\\circ\\Psi_{t,s}=\\Psi_{u,s}$ for all $s,t,u\\in I$;\n2. every $\\Psi_{t,s}$ is a diffeomorphism of $N$, with inverse $\\Psi_{s,t}$;\n3. for fixed $s$ and $y$ the curve $t\\mapsto\\Psi_{t,s}(y)$ solves $\\frac{d}{dt}\\Psi_{t,s}(y)=G_t(\\Psi_{t,s}(y))$ and $\\Psi_{s,s}(y)=y$;\n4. $\\Psi_{t,s}=\\mathrm{id}_N$ whenever $G$ vanishes identically between $s$ and $t$.\n\nConsequently $H_t:=\\Psi_{t,0}$ is a compactly supported ambient isotopy with $H_0=\\mathrm{id}_N$, inverse $H_t^{-1}=\\Psi_{0,t}$, and $H_t$ stationary on every time interval on which $G$ vanishes ([[def-smooth-isotopy-of-embeddings-diffeotopy-and-ambient-isotopy]]).",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F11",
+          "source": "def-flype-crossing-ball-and-alternating-tangle-data",
+          "source_section": "Definition",
+          "quote": "A **2-tangle diagram** is a regular diagram in a disk of two properly embedded tangle arcs and possibly finitely many closed tangle components, with four specified endpoints on the disk boundary; the arcs and circles are disjoint in the represented 3-ball, while their projections may have crossings. A **flyping circle** is a simple closed curve in the projection sphere whose intersection with the diagram consists of exactly three points, exactly one of which is a crossing; the circle is transverse to both branches at that crossing and to the diagram at the other two points. A small annular neighborhood of this circle has two complementary tangle disks. A **flype** fixes the tangle in one disk, interchanges which pair of strands crosses in the annular neighborhood, and turns over the tangle in the other disk: its projected tangle is reflected and all its over-under crossing data are reversed. This turnover is a half-turn in three-dimensional space about an axis in the projection sphere. Component orientations are transported by this motion, and the exterior diagram is fixed. The move with the opposite choice of fixed disk is also allowed; a disk containing no crossings is allowed. A flype whose fixed tangle has no crossings is called an **entire flype**. Diagrams are drawn on the oriented projection sphere; a **sphere planar isotopy** is an orientation-preserving smooth isotopy of that sphere carrying the decorated diagram. A plane diagram is obtained by choosing a point of the sphere outside the projection and deleting it. At each crossing of a link diagram, a **crossing ball** is a small 3-ball in which the overpass lies on the upper hemisphere and the underpass lies on the lower hemisphere, with the rest of the link outside that ball. Replacing all crossing disks by upper hemispheres or by lower hemispheres gives the shifted projection spheres $S_+$ and $S_-$. A **saddle disk** in a crossing ball is a properly embedded disk whose boundary meets each of the two hemispheres in two arcs and whose interior passes across the equatorial crossing disk. For a closed embedded surface transverse to the link and to $S_+$ and $S_-$, each component $C$ of its intersection with either shifted sphere has a **bubble word**: read once around $C$, recording $P$ each time it crosses the link and $S$ each time it passes through a crossing ball along a saddle disk. The surface is in **bubble standard position** if every such word is nonempty and no word records the same crossing ball more than once. A **Conway sphere** is an embedded sphere meeting the link transversely in four points; it is in crossing-ball standard position when its intersection with the crossing balls consists of saddle disks and its shifted-sphere intersection curves satisfy the bubble-standard conditions.\n\nThe turnover convention is the one in Kindred's Definition 2.9 and Figure 1. In particular, an entire flype permits viewing the whole diagram from the opposite side of the sphere, as in his Definition 2.11. Closed components inside a tangle disk are carried along with its arcs.",
+          "uses": [
+            "7.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "step": "1.1",
+          "claim": "Use local product crossing coordinates of the diagram to put semicircle arcs into disjoint unit balls, and use its planar edges outside them. This gives the reference cornered link $K$. The upper open-side piece is the standard upper ball of $P$ with the finitely many upper half-crossing balls removed. It is still a topological ball by an explicit collar homeomorphism. In a projection disk let $\\psi(x,y)$ be its continuous upper hemisphere height, zero outside that disk. The map $(x,y,z)\\mapsto(x,y,z+\\psi(x,y)\\rho(z))$, with $\\rho=1$ near zero and zero farther up the upper collar, carries its boundary to that hemisphere. Choose the crossing balls small enough that $\\|\\psi\\rho'\\|_\\infty<1$; every vertical fiber is then strictly increasing, with identity at the far end, so the map and its fiber inverse are continuous. Finite disjoint supports give a homeomorphism of the upper ball onto $B_+$. The lower construction is reflected. Their only corners are product circles: near an equator use $a=z$, $b=r^2+z^2-r_0^2$ for the upper outside region, so $a,b\\ge0$ and their independent derivatives give a product collar; $u=a-b$, $v=a+b$ give $v\\ge|u|$. No smoothness of this collar homeomorphism at the unrounded edge is needed. Choose a smooth exterior-only rounding $L_0$ by [F1], supported in disjoint small endpoint balls $W_e$. Each $L_0\\cap W_e$ is a trivial proper arc: in the positive planar graph coordinate it cobounds a strip with the upper boundary path of the box, with the far box corners rounded. It has an actual bridge disk. By [F1], $L_0$ is ambient isotopic to $L$.",
+          "inputs": [
+            "given",
+            "F1",
+            "construct"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "step": "2.1",
+          "claim": "Transport the supplied sphere to $L_0$ and move its two punctures onto edge subarcs outside all crossing balls and $W_e$. This uses a smooth orientation-preserving circle isotopy on each affected component, with the same cyclic order of the two chosen target points; construct its positive derivative by interior bumps with prescribed positive interval integrals and interpolate its lift with the identity. Extending the velocity in finitely many link-axis charts and using [F10] realizes it ambiently preserving $L_0$. Now apply [F2] to move the sphere off every $W_e$, fixing its punctures and retaining both nontrivial sides. Choose the middle foliation bands of [F3] for this sphere. The corner points lie outside the closed bands, since they have $q=\\pm1$; choose smaller nested adapter balls $A_e\\subset\\operatorname{int}W_e$ disjoint from those bands. Replace the rounding by an exterior-only rounding $L'$ supported in their interiors. The relative rounding isotopy of [F1] is supported in $W_e$, which miss the sphere, so its nontrivial side tangles are unchanged. Perform the saddle-position construction of [F3] with the chosen bands; all its moving supports can be confined to their neighborhoods and the axis patches, away from $A_e$. This gives a sphere avoiding the adapters with a finite fixed foliation stack.",
+          "inputs": [
+            "step 1.1",
+            "F1",
+            "F2",
+            "F3",
+            "F10",
+            "construct"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "step": "3.1",
+          "claim": "All further cut circles are defined in the reference face-and-corner model. They can be made transverse outside the crossing balls by [F5]. To apply it literally, first round the two open-side boundaries individually using [F4] with the empty surface; only the local calculation below is needed before global face transversality is arranged. At a saddle corner, transversality to the edge follows from the nonzero pairing of the edge tangent $(-y,x,0)$ with the saddle normal $(2x,-2y,1)$, namely $-4xy\\ne0$. Hence the inward rounding preserves the cut-piece topology and is transverse to the surface there. The link punctures are on the unchanged common face outside the adapters and crossing balls; transversality to the link forces transversality to that face. Apply [F5] protecting the link, crossing balls, adapters and their small fixed surface collars. In the remaining face interiors its targets are precisely the reference face, so the resulting model intersections are transverse as required. Thus there is a nonempty class of smooth nontrivial two-point spheres avoiding all adapters, with punctures outside crossing balls, finite subsets of the fixed foliation levels and transverse reference face intersections.",
+          "inputs": [
+            "step 2.1",
+            "F3",
+            "F4",
+            "F5",
+            "construct"
+          ]
+        },
+        {
+          "id": "step-4-1",
+          "step": "4.1",
+          "claim": "Minimize lexicographically over that global class the total saddle count $s$ and then the total upper-plus-lower cut-circle count $c$, using [F6]. Both are finite natural numbers, by the finite patches and compact transverse model intersections. For a candidate $T$, use [F4] with forbidden sets $A_e\\cap B_\\pm$ inside slightly larger product boxes disjoint from $T$. The resulting smooth balls $B_\\pm'$ lie inside the reference pieces, avoid all adapters and have the same surface-piece topology. Their interiors miss $L'$: outside the adapters that link lies on the old faces, and inside the adapters the balls are absent. Every component has boundary: a closed component would be the whole connected sphere, contrary to its two punctures on the unchanged boundary face and transversality there. A nondisk piece therefore has a compression disk in $\\operatorname{int}B_\\pm'$ by [F6], missing the whole sphere, every crossing ball, every adapter and the actual smooth link. The puncture-free sphere disk it replaces contains whole model cut circles and saddle patches and at least one cut circle; otherwise the compression boundary would bound a disk in the same ball piece. The replacement deletes whole patches and circles and adds none in the protected regions. It gives a member of the same class with smaller $(s,c)$, a contradiction. Consequently all reference open-side pieces are disks.",
+          "inputs": [
+            "step 3.1",
+            "F4",
+            "F6",
+            "construct",
+            "contradiction"
+          ]
+        },
+        {
+          "id": "step-5-1",
+          "step": "5.1",
+          "claim": "An empty-word circle lies on the common projection face, avoids all saddle patches and all punctures, and is the same cut circle on both sides. Its incident upper and lower pieces are disks by step 4.1. They join to a closed component of the sphere, hence the whole sphere. Their interiors miss $L'$ because they miss the adapters and every other link point lies on the reference faces. Their boundary has no puncture. This contradicts the sphere's two link intersections, so no word is empty.",
+          "inputs": [
+            "step 4.1",
+            "construct",
+            "contradiction"
+          ]
+        },
+        {
+          "id": "step-5-2",
+          "step": "5.2",
+          "claim": "Suppose a hemisphere is repeated by a cut circle. Its upper arcs span two equatorial intervals, so [F7] supplies an empty rectangle $R$ with its two arc sides on one disk piece $E$. The ordered-stack arc list gives two cases: $R$ joins the same-type arcs of two distinct adjacent saddles and misses the overpass, or it is the central strip between the two upper arcs of the same uppermost saddle. Choose a narrow rectangle $R_0$ around a spanning core of $R$, meeting its two arc sides in small interior subintervals. It is compactly inside the smooth hemisphere face, away from its equatorial edge and every adapter; in the central case its core can be the $x=0$ upper meridian. Choose a core arc $\\beta$ in $E$ between those endpoints. Apply [F4] retaining a neighborhood of $R_0\\cup\\beta$, and excluding the adapters. The resulting smooth side ball has a disk family with the same topology, the same core and the same small rectangle. The bridge construction of [F7] therefore gives a disk inside this ball, disjoint from the whole sphere except along $\\beta$. Its boundary may be pushed slightly inward from the rectangle core. Its normal collar is framed by the common side-ball boundary on both ends. Explicitly in its boundary collar the graph $v=f(s,t)$ with $f(s,0)=0$ is straightened by $v\\mapsto v-\\chi(t)f(s,t)$, retaining that framing.",
+          "inputs": [
+            "step 4.1",
+            "F3",
+            "F4",
+            "F7",
+            "construct"
+          ]
+        },
+        {
+          "id": "step-6-1",
+          "step": "6.1",
+          "claim": "In the overpass-free case the annulus between the two adjacent saddle boundaries is entirely in the fixed middle band and avoids every adapter. Remove $R$ from this annulus and attach two normal parallel copies of the bridge, extending them across the two half-rectangles between $R_0$ and the long sides of $R$. This gives a disk whose boundary is the two-saddle-plus-band patch on $T$: attaching each bridge copy along one interval to the annulus complement preserves a disk, and the common boundary-sphere framing pairs the two long sides correctly. Push its interior outside the crossing ball and round the finitely many seams. It misses the whole sphere and $L'$; the rectangle and annulus are empty, the bridge interior missed the sphere, and all these patches avoid the adapters. The quadrant chart at an attaching arc puts the side ball in $v,w\\ge0$ and the region between saddles in $v\\ge0,w\\le0$, so their collars use the same $v>0$ side. Before the exchange, extend the old patch by a short retained-surface collar out of the crossing ball, and extend the replacement disk across the same collar, pushing its interior off the surface on its existing side. In the stated quadrant coordinates the extension and its rounding stay in $v,w>0$; the new common boundary is strictly outside $C_j$. The disk replacement in [F6] consequently deletes exactly those two saddle disks. Its new disk lies outside all crossing and adapter balls. Restoring exterior transversality by [F5], if needed, produces a competitor with smaller $s$, a contradiction. This uses only the retained small rectangle for the smooth bridge application; the full reference rectangle need not survive the inward boundary rounding.",
+          "inputs": [
+            "step 5.2",
+            "F4",
+            "F5",
+            "F6",
+            "F7",
+            "construct",
+            "contradiction"
+          ]
+        },
+        {
+          "id": "step-6-2",
+          "step": "6.2",
+          "claim": "In the central case join the $x=0$ planar cap above the uppermost saddle to the bridge from step 5.2. Extend the cap through the short strip to the pushed meridian before gluing, so its north-pole overpass intersection is interior. It crosses $L'$ once there, transversely, and misses every other saddle, the underpass and all adapters. This is a meridional disk with boundary on $T$; parity of a closed link's intersections with a sphere in [F9] forces that boundary to separate the two punctures. Apply [F8] to obtain a nontrivial child. Choose its parallel cap in $x=\\delta$ or $x=-\\delta$. The region above its half-saddle in the corresponding half-crossing ball is a ball bounded by that half-saddle and cap, together with the curved outer face, by [F9]. It contains no other sphere piece. Extend this outer face slightly outside the crossing ball and extend its surface window along a short actual child-surface collar, as in the local quadrant chart. The remaining endpoint adapter can be included in this window ball without introducing a knot: choose an outer adapter ball $A_e^+$ containing $A_e$, still disjoint from the child sphere and all other saddles. Near that endpoint the graph region occupies the entire inside of $C_j$, so its intersection with $A_e^+$ is one boundary-attached cap ball. Remove this overlap and add the whole $A_e^+$ along the resulting disk window, using [F9]. The opposite face now lies outside $C_j\\cup A_e$. The captured arc is the boundary sum of the overpass segment, whose thin outward strip is a bridge disk, and the planar graph arc in $A_e^+$, with its graph bridge disk. The two factors are trivial, so the constructive boundary-sum assertion of [F8] supplies an actual bridge disk for the combined arc. The attaching disk meets it once, at the incoming segment; the outgoing endpoint lies on the outer adapter face. Apply the punctured-window slide of [F8] with protected closed set $\\bigcup_jC_j\\cup\\bigcup_eA_e$. It removes that child's half-saddle and planar cap, moves its puncture beyond the adapter and leaves every other original saddle fixed. The child remains nontrivial, and after [F5] it is a member of the candidate class with at most $s-1$ saddles, a contradiction. The reflected construction treats lower repetitions, with its corresponding endpoint adapters.",
+          "inputs": [
+            "step 4.1",
+            "step 5.2",
+            "F3",
+            "F5",
+            "F8",
+            "F9",
+            "construct",
+            "contradiction"
+          ]
+        },
+        {
+          "id": "step-7-1",
+          "step": "7.1",
+          "claim": "Thus a minimizing sphere has disk pieces, nonempty words and no repeated hemisphere, on both shifted reference spheres. It is a smooth sphere for the actual smooth link $L'$, and it avoids every adapter by definition of the candidate class and by the protected-set choice in the two moves. The link $L'$ represents the original diagram and is ambient isotopic to $L$ by step 1.1 and the relative rounding comparison in step 2.1. All geometric ball arguments were performed in individual smooth inward roundings or in the marked child window; no simultaneous smooth partition, and no smooth link lying in the literal unrounded planar-corner picture, was assumed. This proves the stated transfer and the word conditions of [F11].",
+          "inputs": [
+            "step 1.1",
+            "step 2.1",
+            "step 3.1",
+            "step 4.1",
+            "step 5.1",
+            "step 6.1",
+            "step 6.2",
+            "F11"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The statement requires a nonempty diagram with a crossing and a two-point sphere."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Steps 4.1\u20137.1 allow the least saddle count to be zero."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Step 6.2 can replace a one-saddle candidate by a child with zero saddles."
+        },
+        {
+          "case": "degenerate",
+          "status": "not_applicable",
+          "reason": "Product corner charts, transverse surface-edge intersections and positive adapter margins exclude degenerate configurations."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Steps 1.1\u20133.1 separate the reference corners from the smooth link punctures; step 6.2 moves a child puncture beyond its adapter."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Steps 2.1\u20134.1 give a nonempty candidate class and two successive natural-number minima."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "No equivalence is asserted."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "No equivalence is asserted."
+        }
+      ],
+      "axioms": [
+        {
+          "axiom": "countable-choice",
+          "use": "Countable choice is inherited from the declared geometric suppliers. The adapter balls, corner modifications and natural-number minima are finite; no smoothing theorem for arbitrary stratified spaces is assumed."
+        }
+      ],
+      "finite_checks": [],
+      "finite_smoke": [],
+      "risk_review": {
+        "status": "owner-review-pending",
+        "notes": "Actual-diagram transfer is proposed, not canonically accepted. Review-sensitive points: product-corner rounding topology, narrow core rectangle retained under inward rounding, and outer adapter addition in the child window."
+      },
+      "proof_status": "complete-local-proof",
+      "proof_status_evidence": "Literal current steps, current exact supplier quotes, successful scoped checks.",
+      "unresolved_suppliers": [],
+      "unresolved_assumptions": []
+    }
+  }
+}

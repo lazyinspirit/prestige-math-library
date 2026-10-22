@@ -16,6 +16,11 @@ provenance:
   proof: ai-generated
 generation:
   role: example
+verification:
+  judge:
+    model: "gpt-6-luna"
+    verdict: pass
+    date: 2026-10-22
 sources:
   references:
     - title: "Giné and Nickl, Mathematical Foundations of Infinite-Dimensional Statistical Models, Gaussian Sequence Space Model, equation (1.8), PDF pp. 21–22"

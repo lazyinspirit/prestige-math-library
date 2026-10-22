@@ -1,0 +1,1640 @@
+{
+  "version": 1,
+  "scope": [
+    "def-oriented-crossing-sign-writhe-and-blackboard-framing",
+    "lem-linking-number-even-sum-and-reidemeister-invariance",
+    "alg-oriented-linking-number-from-diagram",
+    "thm-oriented-linking-number-scan-terminates-and-is-correct",
+    "thm-linking-number-equals-signed-intersection",
+    "lem-framed-knot-push-off-self-linking-well-defined",
+    "def-framed-knot-self-linking-and-seifert-framing",
+    "thm-blackboard-framing-self-linking-is-writhe",
+    "thm-linking-number-is-invariant-and-writhe-is-not",
+    "ex-knot-kt-03-worked-cases",
+    "cex-knot-kt-03-boundary-case",
+    "lem-blackboard-push-off-has-two-mixed-crossings-per-crossing"
+  ],
+  "contracts": {
+    "def-oriented-crossing-sign-writhe-and-blackboard-framing": {
+      "citations": [],
+      "derivations": [],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "Definition: the empty crossing sum gives writhe zero."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Definition: each crossing sign is ±1, while a diagram with no crossings has signed sum zero."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Definition: one crossing contributes its determinant sign to writhe and to self-writhe when both branches lie on one component."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Definition: regularity supplies nonzero projected tangents at transverse double crossings."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "This definition assigns signs and framings to a diagram and has no path-endpoint condition."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Definition: ACω is explicitly assumed for the smooth normal-bundle structure in the framing clause."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The definition introduces objects and conventions, not an equivalence."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The definition introduces objects and conventions, not an equivalence."
+        }
+      ]
+    },
+    "lem-linking-number-even-sum-and-reidemeister-invariance": {
+      "citations": [
+        {
+          "fact": "A1",
+          "source": "def-countable-choice",
+          "source_section": "Definition",
+          "quote": "The **Axiom of Countable Choice**, written $\\mathrm{AC}_\\omega$, is the following\nstatement.",
+          "uses": [
+            "1.1",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F1",
+          "source": "def-regular-oriented-link-diagram",
+          "source_section": "Definition",
+          "quote": "Let $\\pi\\colon\\mathbb R^3\\to\\mathbb R^2$ be the orthogonal projection forgetting\nthe last coordinate, $\\pi(x_1,x_2,x_3):=(x_1,x_2)$, and let $L\\colon C\\to S^3$ be\nan oriented link contained in $\\mathbb R^3\\subset S^3$\n([[def-oriented-link-in-s-three-and-ambient-isotopy]], so $C$ is a finite\ndisjoint union of oriented circles and $L$ is a smooth embedding).\n\nThe projection $\\pi\\circ L$ is **regular** when:\n\n1. it is an immersion, that is, the projected derivative never vanishes\n   ([[def-immersion-submersion-and-constant-rank-map]]);\n2. its only multiple points are finitely many **double points**, and at every\n   double point the two branches meet transversely: the two projected tangent\n   lines are distinct ([[def-transverse-smooth-maps]]);\n3. there are no triple or higher multiple points: no point of the plane is the\n   image of three or more distinct source points.\n\nA **regular oriented link diagram** $D$ consists of the image $\\pi(L)$ together\nwith\n\n(a) the **over/under datum** at every double point: which of the two branches\n    lies above the other, read from the forgotten third coordinate (the branch\n    with the larger $x_3$-coordinate at the crossing is drawn over); and\n(b) the **orientations of the strands**, induced by the orientation of $L$.\n\nThus a diagram is a decorated immersed oriented planar graph with $4$-valent\ncrossing vertices, together with any components having no vertices. Its edges\nare the strands between consecutive crossings, and the decoration records\nwhich strand passes over at each vertex. A diagram is understood up to planar isotopy\n([[def-planar-isotopy-of-link-diagrams]]); two links that differ by an ambient\nisotopy moved off $\\infty$ may be represented by diagrams differing by planar\nisotopy and the local moves of [[def-oriented-reidemeister-moves]], which is the\ncontent of the Reidemeister equivalence theorem below.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "def-oriented-crossing-sign-writhe-and-blackboard-framing",
+          "source_section": "Definition",
+          "quote": "Let $D$ be a regular oriented link diagram in a projection plane $P$ of an\noriented $3$-sphere, after moving the link off the point at infinity. Fix the\nunit viewing normal $n$ pointing toward the viewer. Orient $P$ by the rule that\nan ordered basis $(u,v)$ of $P$ is positive exactly when $(n,u,v)$ is a positive\nbasis of the ambient $3$-space. At a crossing $c$, let $v_{\\rm over}$ and\n$v_{\\rm under}$ be the nonzero projected tangent vectors following the\norientations of the overpassing and underpassing strands. Define\n$$\\operatorname{sgn}(c):=\\operatorname{sgn}\\det_P(v_{\\rm over},v_{\\rm under})\\in\\{+1,-1\\}.$$\nReversing the orientation of $P$ reverses every crossing sign.",
+          "uses": [
+            "1.2",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "def-mod-two-intersection-number",
+          "source_section": "Definition",
+          "quote": "For compact boundaryless sources $X,Z$ and complementary-dimensional smooth maps $f:X\\to M$, $g:Z\\to M$, set $I_2(f,g):=I_2(f\\times g,\\Delta_M)$. The diagonal is a closed embedded $n$-submanifold of $M\\times M$ ([[prop-the-diagonal-is-an-embedded-submanifold]]); closedness follows from Hausdorffness. Modulo its tangent diagonal, the differential of $f\\times g$ is $(v,w)\\mapsto df(v)-dg(w)$, so transversality is exactly that of $f,g$. In the transverse case this number is $\\#(X\\times_MZ)\\bmod2$. Homotopies of either or both maps give product homotopies, hence this number is invariant by the fixed-submanifold homotopy theorem. The arbitrary-map extension is under $\\mathrm{AC}_\\omega$ as above.",
+          "uses": [
+            "1.1",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "thm-mod-two-intersection-number-is-homotopy-invariant",
+          "source_section": "Statement",
+          "quote": "Assume $\\mathrm{AC}_\\omega$. Let $X$ be a compact smooth manifold without boundary, $M$ a smooth $n$-manifold, $Z\\subseteq M$ a closed embedded submanifold, and $F:[0,1]\\times X\\to M$ a smooth family with $\\dim X+\\dim Z=n$. Assume $F$ is transverse to $Z$, including on the boundary faces $\\{0\\}\\times X$ and $\\{1\\}\\times X$ in the sense of [[thm-transverse-preimage-for-manifolds-with-boundary]]. Then the slice maps $F_0=F(0,\\cdot)$ and $F_1=F(1,\\cdot)$ are transverse to $Z$, $F^{-1}(Z)$ is a compact $1$-manifold with boundary $$\\partial F^{-1}(Z)=F_0^{-1}(Z)\\sqcup F_1^{-1}(Z),$$ and $$\\#F_0^{-1}(Z)\\equiv\\#F_1^{-1}(Z)\\pmod 2,\\qquad\\text{that is, } I_2(F_0,Z)=I_2(F_1,Z).$$ Consequently $I_2$ of arbitrary smooth maps is well defined and homotopy invariant, and for transverse representatives the geometric parity of the intersection is the invariant.",
+          "uses": [
+            "1.1",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "thm-oriented-reidemeister-equivalence-theorem",
+          "source_section": "Statement",
+          "quote": "Assume $\\mathrm{AC}_\\omega$. Let $D$ and $D'$ be regular oriented link diagrams.\nThen $D$ and $D'$ represent equivalent oriented links if and only if $D'$ can be\nobtained from $D$ by a finite sequence of planar isotopies and oriented\nReidemeister moves R1, R2, R3.",
+          "uses": [
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "def-oriented-reidemeister-moves",
+          "source_section": "Definition",
+          "quote": "**(R1) Kink creation and deletion.** A single strand is replaced by a small\nkink: two arcs crossing once and otherwise disjoint from the strand, with the\nover/under datum of the new crossing as in the picture. The move is allowed in\nboth directions (create or delete the kink) and with both signs of the kink,\nthe sign being the sign of the crossing created. The orientations of the two\nstrands of the kink are the two possible consistent orientations through the\ncrossing, and all of them occur in the move list.\n\n**(R2) Slide of two strands.** Two local arcs belonging to two strands are\nreplaced so that the number of crossings between those strands changes by two\nof opposite signs: the standard picture slides one strand over or under the\nother, creating or deleting the pair of crossings, with the two crossings being\nthe two possible signs in either order. All four orientation patterns of the\ntwo strands at the two crossings are included.\n\n**(R3) Sliding a strand past a crossing.** One strand is moved across an\nexisting crossing of two other strands, so that the crossing of the two other\nstrands passes from one side of the moving strand to the other; the three\ncrossings of the local picture keep their signs and the over/under data are\npreserved. The three strands must have a consistent strict height order:\none is above both others, one below both, and the remaining strand is between\nthem. The cyclic over/under pattern is excluded. Every orientation pattern\nand all six height orders of this standard local picture are included.",
+          "uses": [
+            "1.2"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "step": "1.1",
+          "claim": "Let $\\gamma_1,\\gamma_2:S^1\\to\\mathbb R^2$ be the projected component maps. They are transverse at every mixed crossing by [F1]. The map $F:S^1\\times S^1\\to\\mathbb R^2\\times\\mathbb R^2$, $F(s,t)=(\\gamma_1(s),\\gamma_2(t))$, is transverse to the diagonal $\\Delta=\\{(x,x):x\\in\\mathbb R^2\\}$, and its inverse image of $\\Delta$ has one point for each mixed crossing because there are no triple points. Therefore $I_2(F,\\Delta)$ is the number of mixed crossings modulo $2$. Homotope $\\gamma_1$ linearly to a point $p$ with $\\lVert p\\rVert$ greater than $\\max_t\\lVert\\gamma_2(t)\\rVert$; the endpoint map misses $\\Delta$. By [F3], the intersection number is $0$, so the number of mixed crossings is even.",
+          "inputs": [
+            "A1",
+            "F1",
+            "F3",
+            "given",
+            "choose"
+          ]
+        },
+        {
+          "id": "step-1-2",
+          "step": "1.2",
+          "claim": "A type-I move contributes no mixed crossing because its new crossing is a self-crossing. Under type II, either both crossings are self-crossings or they are both mixed and have opposite signs by [F5], so $S(D)$ is unchanged. Under type III the three crossing signs and over/under data are preserved, so the mixed subset and its signed sum are unchanged. Planar isotopy creates no crossings and preserves the oriented crossing charts. Hence each move preserves $S(D)/2$.",
+          "inputs": [
+            "F2",
+            "F5",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "step": "2.1",
+          "claim": "Each crossing sign is $+1$ or $-1$, both congruent to $1$ modulo $2$. Thus $S(D)$ has the same parity as the number of mixed crossings shown even in step 1.1; consequently $S(D)/2$ is an integer. Swapping component labels leaves each mixed crossing unchanged, while reversing one strand orientation negates its tangent vector and hence the determinant in [F2]; reversing both vectors preserves the determinant. This proves symmetry and the orientation rules.",
+          "inputs": [
+            "F2",
+            "step 1.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "step": "3.1",
+          "claim": "If two regular diagrams represent the same oriented link, [F4] gives a finite sequence of the moves and planar isotopies checked in step 1.2. By step 2.1 their half-sums are integers; step 1.2 preserves these values at every move, so the endpoint linking numbers agree. Countable Choice is used through [F3] for homotopy-invariant mod $2$ intersection and through [F4] for the finite-move reduction; the determinant calculations and the move-by-move checks are choice-free.",
+          "inputs": [
+            "A1",
+            "F3",
+            "F4",
+            "step 1.2",
+            "step 2.1"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "Steps 1.1 and 2.1 show that an empty mixed-crossing set has parity zero and signed sum S(D)=0."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Steps 1.2 and 2.1 include the zero signed-sum case, whose integer half remains zero under each move."
+        },
+        {
+          "case": "one",
+          "status": "not_applicable",
+          "reason": "The statement requires exactly two link components; a one-component diagram is outside its premise."
+        },
+        {
+          "case": "degenerate",
+          "status": "not_applicable",
+          "reason": "The input is a regular diagram; nontransverse or higher-multiplicity projected crossings are excluded by the hypothesis."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Step 3.1 applies the move calculation to the finite sequence and compares its initial and final diagrams."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Step 3.1 identifies the ACω use through the mod-two intersection and oriented Reidemeister suppliers."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The statement asserts invariance and symmetry, not an if-and-only-if characterization."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The statement asserts invariance and symmetry, not an if-and-only-if characterization."
+        }
+      ]
+    },
+    "alg-oriented-linking-number-from-diagram": {
+      "citations": [],
+      "derivations": [],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "Definition: an empty crossing list makes zero updates and returns 0/2=0."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Definition: a component set of cardinality zero returns invalid-input after the finite count."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Definition: a component set of cardinality one returns invalid-input after the finite count."
+        },
+        {
+          "case": "degenerate",
+          "status": "not_applicable",
+          "reason": "The algorithm’s input is a finite regular oriented diagram; nonregular diagrams are outside its domain."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "The finite scan has no geometric endpoint condition."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Definition: ACω supplies the lemma proving that the half-sum output is an integer."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The algorithm specifies a finite procedure, not an equivalence."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The algorithm specifies a finite procedure, not an equivalence."
+        }
+      ]
+    },
+    "thm-oriented-linking-number-scan-terminates-and-is-correct": {
+      "citations": [
+        {
+          "fact": "A1",
+          "source": "def-countable-choice",
+          "source_section": "Definition",
+          "quote": "The **Axiom of Countable Choice**, written $\\mathrm{AC}_\\omega$, is the following\nstatement.",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F1",
+          "source": "def-regular-oriented-link-diagram",
+          "source_section": "Definition",
+          "quote": "Let $\\pi\\colon\\mathbb R^3\\to\\mathbb R^2$ be the orthogonal projection forgetting\nthe last coordinate, $\\pi(x_1,x_2,x_3):=(x_1,x_2)$, and let $L\\colon C\\to S^3$ be\nan oriented link contained in $\\mathbb R^3\\subset S^3$\n([[def-oriented-link-in-s-three-and-ambient-isotopy]], so $C$ is a finite\ndisjoint union of oriented circles and $L$ is a smooth embedding).\n\nThe projection $\\pi\\circ L$ is **regular** when:\n\n1. it is an immersion, that is, the projected derivative never vanishes\n   ([[def-immersion-submersion-and-constant-rank-map]]);\n2. its only multiple points are finitely many **double points**, and at every\n   double point the two branches meet transversely: the two projected tangent\n   lines are distinct ([[def-transverse-smooth-maps]]);\n3. there are no triple or higher multiple points: no point of the plane is the\n   image of three or more distinct source points.\n\nA **regular oriented link diagram** $D$ consists of the image $\\pi(L)$ together\nwith\n\n(a) the **over/under datum** at every double point: which of the two branches\n    lies above the other, read from the forgotten third coordinate (the branch\n    with the larger $x_3$-coordinate at the crossing is drawn over); and\n(b) the **orientations of the strands**, induced by the orientation of $L$.\n\nThus a diagram is a decorated immersed oriented planar graph with $4$-valent\ncrossing vertices, together with any components having no vertices. Its edges\nare the strands between consecutive crossings, and the decoration records\nwhich strand passes over at each vertex. A diagram is understood up to planar isotopy\n([[def-planar-isotopy-of-link-diagrams]]); two links that differ by an ambient\nisotopy moved off $\\infty$ may be represented by diagrams differing by planar\nisotopy and the local moves of [[def-oriented-reidemeister-moves]], which is the\ncontent of the Reidemeister equivalence theorem below.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "alg-oriented-linking-number-from-diagram",
+          "source_section": "Definition",
+          "quote": "The input is a finite regular oriented link diagram together with its declared\ncomponents. If it does not have exactly two components, return\n`invalid-input`. For a two-component diagram $D$, initialize $s:=0$ and make\none pass over its finite crossing list. At each crossing whose branches lie on\ndifferent components, add\n$$\\operatorname{sgn}\\det_P(v_{\\rm over},v_{\\rm under})$$\nto $s$, where the determinant is taken in the oriented projection plane; ignore\nself-crossings. Return $s/2$. The even-sum lemma establishes that this output is\nan integer and is the diagram's linking number.",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "lem-linking-number-even-sum-and-reidemeister-invariance",
+          "source_section": "Statement",
+          "quote": "Assume the Axiom of Countable Choice. Let $D$ be a regular oriented diagram\nof a two-component oriented link in $S^3$, with components $K_1,K_2$. Write\n$$S(D):=\\sum_{c\\text{ between }K_1\\text{ and }K_2}\\operatorname{sgn}(c).$$\nThen $S(D)$ is even, and\n$$\\operatorname{lk}_D(K_1,K_2):=\\frac{S(D)}2\\in\\mathbb Z$$\nis unchanged by planar isotopy and by each oriented Reidemeister move of types\nI, II, and III. Thus it has the same value on any two regular diagrams of\nambient-isotopic oriented links. It is symmetric in $K_1,K_2$; reversing exactly\none component changes its sign, and reversing both components leaves it\nunchanged.",
+          "uses": [
+            "2.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "step": "1.1",
+          "claim": "The component-count check terminates because the input declares a finite component set. It returns `invalid-input` when that cardinality is not two. Otherwise the finite crossing list has some length $N\\in\\mathbb N_0$ by [F1], and the algorithm performs exactly one update for each of those $N$ crossings with no recursive call or unbounded search. Hence the scan halts after exactly $N$ iterations.",
+          "inputs": [
+            "A1",
+            "F1",
+            "F2",
+            "given",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "step": "2.1",
+          "claim": "In the accepted case, the update in [F2] adds precisely each summand of $S(D)$ and no self-crossing. Thus the returned value is $S(D)/2$; [F3] shows this is an integer and is the linking number specified in the lemma. All arithmetic is a finite integer sum.",
+          "inputs": [
+            "A1",
+            "F2",
+            "F3",
+            "step 1.1"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "Steps 1.1 and 2.1 cover a zero-length crossing list: the scan performs zero updates and returns 0/2=0."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Step 1.1 returns invalid-input after the finite component-count check when the declared component set is empty."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Step 1.1 returns invalid-input when the finite declared component set has cardinality one."
+        },
+        {
+          "case": "degenerate",
+          "status": "not_applicable",
+          "reason": "The theorem assumes a finite regular diagram, so nonregular projections are outside the input domain."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "The algorithm scans a finite crossing list and has no geometric endpoint condition."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Step 2.1 uses ACω through the supplier proving the mixed-sum half is an integer linking number; the finite scan itself is choice-free."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The theorem gives a termination and correctness claim, not an equivalence."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The theorem gives a termination and correctness claim, not an equivalence."
+        }
+      ]
+    },
+    "thm-linking-number-equals-signed-intersection": {
+      "citations": [
+        {
+          "fact": "A1",
+          "source": "def-axiom-of-choice",
+          "source_section": "Definition",
+          "quote": "The **Axiom of Choice** (AC) is the following statement.",
+          "uses": [
+            "1.1",
+            "1.2",
+            "2.1",
+            "2.2",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "A1",
+          "source": "thm-choice-implies-dependent-implies-countable-choice",
+          "source_section": "Statement",
+          "quote": "$$\\mathrm{AC}\\Longrightarrow\\mathrm{DC}\\Longrightarrow\\mathrm{AC}_\\omega\\Longrightarrow\\mathrm{AC}_{\\omega,\\mathrm{fin}}\\Longrightarrow\\mathrm{AC}_{\\omega,2},\\qquad \\mathrm{AC}\\Longrightarrow\\mathrm{AC}_2.$$",
+          "uses": [
+            "1.1",
+            "1.2",
+            "2.1",
+            "2.2",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F1",
+          "source": "def-one-variable-alexander-module-of-an-oriented-link",
+          "source_section": "Definition",
+          "quote": "**Caveats.** The cover is the one classified by $K=\\ker\\varphi$; since $K$ is\nnormal the cover is regular and its deck group is\n$\\pi_1(X_L)/K\\cong\\mathbb Z$\n([[def-regular-covering]], [[thm-regular-covering-characterizations]], [[cor-deck-group-of-a-regular-covering]],\n[[def-deck-transformation-and-deck-group]]). The module $A_L$ is ordinary\nintegral homology of the cover, with the deck action as its module structure;\nno twisting by a representation of the link group is used. The total linking\nhomomorphism satisfies $\\varphi(\\mu_i)=1$ for a meridian $\\mu_i$ of any one\ncomponent, so $r\\ge1$ is needed for $\\varphi$ to be interesting and $A_L$\ndepends on the orientations of all components through this map.",
+          "uses": [
+            "1.2",
+            "2.1",
+            "2.2",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "lem-the-complement-of-an-oriented-link-is-a-connected-smooth-three-manifold",
+          "source_section": "Statement",
+          "quote": "Assume the Axiom of Choice. Let $L=K_1\\cup\\cdots\\cup K_r\\subset S^3$ be an\noriented link (a finite disjoint union of oriented smoothly embedded circles,\n[[def-oriented-link-in-s-three-and-ambient-isotopy]]) with $r\\ge1$ components,\nand let $X_L:=S^3\\setminus L$. Then $X_L$ is a connected smooth $3$-manifold\nwithout boundary, and in particular is path-connected, locally path-connected\nand semilocally simply connected; moreover $X_L$ has the homotopy type of a\nfinite CW complex\n([[def-cw-complex-with-closure-finiteness-and-weak-topology]]). Consequently the\ncovering-space classification\n([[thm-classification-of-connected-covering-spaces]]) applies to $X_L$.",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "prop-the-first-hurewicz-map-in-degree-one-is-abelianization",
+          "source_section": "Statement",
+          "quote": "For every path-connected topological space $X$ and $x_0\\in X$, the Hurewicz map\n$$h:\\pi_1(X,x_0)\\longrightarrow H_1(X;\\mathbb Z)$$\nis surjective and has kernel $[\\pi_1(X,x_0),\\pi_1(X,x_0)]$. Hence it induces a natural isomorphism\n$$\\pi_1(X,x_0)^{\\mathrm{ab}}\\cong H_1(X;\\mathbb Z).$$\nThe proof is choice-free and requires no CW, separation, local path-connectivity or local simple-connectivity assumption.",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "def-oriented-intersection-number",
+          "source_section": "Definition",
+          "quote": "with the local signs of [[def-local-oriented-intersection-sign]]; the sum is finite by [[lem-compact-transverse-complementary-intersections-are-finite]]. For an arbitrary smooth $g:X\\to M$, choose a transverse $f$ homotopic to $g$ ([[thm-transversality-homotopy-theorem]], under Countable Choice; the homotopy is a smooth family in the sense of [[def-smooth-family-of-maps-and-evaluation-map]]) and set $I(g,Z):=I(f,Z)$; independence of the choice is [[thm-oriented-intersection-number-is-homotopy-invariant]], not assumed here. For compact oriented complementary-dimensional submanifolds $A,B\\subseteq M$, where one is compact and the other closed, one sets $I(A,B):=I(i_A,B)$ with $i_A$ the inclusion, so the first factor is the submanifold $A$. If the source is not compact, or the target submanifold is not closed, the sum may fail to be finite or invariant; the safe extension by properness with compact trace is recorded in the remark on properness later on this page. Countable Choice is assumed for selecting transverse representatives and for the classification used to prove independence of that selection; the signs, the finite sum and the empty case (which contributes $0$) are choice-free.",
+          "uses": [
+            "1.1",
+            "2.2"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "def-local-oriented-intersection-sign",
+          "source_section": "Definition",
+          "quote": "For transverse oriented embedded submanifolds $A^a,B^b\\subseteq M$ with $a+b=n$ one takes $f$ and $g$ to be the inclusion maps ([[def-transverse-embedded-submanifolds]]); the sign at $p\\in A\\cap B$ then compares $T_pA\\oplus T_pB\\to T_pM$ with $A$ first. The empty intersection is allowed and carries no signs. In dimension zero the sign compares the two orientation rays directly, and for $x=z=n=0$ it is $\\varepsilon_X(a)\\varepsilon_Z(b)\\varepsilon_M(y)$, the product of the two source point signs and the ambient point sign. The factor order is part of the definition: with the two factors exchanged the signs are multiplied by $(-1)^{ab}$, exactly the graded-commutativity sign measured later on this page by the factor-interchange theorem. No compactness, closedness hypothesis or choice axiom is used in this local definition.",
+          "uses": [
+            "1.1",
+            "2.2"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "thm-oriented-intersection-number-is-homotopy-invariant",
+          "source_section": "Statement",
+          "quote": "Assume $\\mathrm{AC}_\\omega$. Let $X$ be a compact oriented smooth manifold without boundary, $M$ an oriented smooth $n$-manifold without boundary, and $Z\\subseteq M$ a closed oriented embedded submanifold with $\\dim X+\\dim Z=n$. Let $F:[0,1]\\times X\\to M$ be a smooth family transverse to $Z$, including on the boundary faces. Then the endpoint slice maps $F_0,F_1$ are transverse to $Z$ and $$I(F_0,Z)=I(F_1,Z),$$ with the oriented intersection number of [[def-oriented-intersection-number]]. Consequently $I(\\cdot,Z)$ is well defined on homotopy classes of smooth maps $X\\to M$: any two transverse maps in the same homotopy class give the same number, and the definition extends to all smooth maps. Compactness of the source and closedness of $Z$ ensure a compact trace; compactness of $M$ is unnecessary; the safe proper extension is recorded in the remark on properness later on this page.",
+          "uses": [
+            "1.1",
+            "2.2"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "prop-relative-transversality-preserves-a-map-on-a-closed-good-region",
+          "source_section": "Statement",
+          "quote": "Assume the Axiom of Countable Choice $\\mathrm{AC}_\\omega$ ([[def-countable-choice]]). Let $f:M\\to N$ be smooth and let $Z\\subseteq N$ be a closed embedded\nsubmanifold. Suppose $f$ is already transverse to $Z$ on an open neighbourhood\nof a closed set $A\\subseteq M$. Then in the transversality homotopy theorem one\ncan choose the perturbation family so that the perturbed map and the whole\nhomotopy agree with $f$ on a smaller neighbourhood of $A$.",
+          "uses": [
+            "1.1",
+            "2.2",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "thm-transverse-preimage-for-manifolds-with-boundary",
+          "source_section": "Statement",
+          "quote": "Let $W$ be a smooth manifold with boundary, $N$ a smooth manifold without boundary, $Z\\subseteq N$ a closed embedded submanifold, and $F:W\\to N$ a smooth map. Suppose that at every $p\\in F^{-1}(Z)$ the differential is transverse to $Z$, $dF_p(T_pW)+T_{F(p)}Z=T_{F(p)}N$, and that the restriction $F|_{\\partial W}$ is transverse to $Z$. Put $n=\\dim W$ and $c=\\operatorname{codim}Z$. If $c>n$, then $F^{-1}(Z)=\\varnothing$. If $c\\le n$, then $F^{-1}(Z)$ is an embedded smooth submanifold with boundary of $W$ of dimension $n-c$ (possibly empty), with",
+          "uses": [
+            "1.1",
+            "2.2",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "lem-oriented-boundary-of-a-compact-oriented-one-manifold-has-zero-signed-count",
+          "source_section": "Statement",
+          "quote": "Assume $\\mathrm{AC}_\\omega$. Let $W$ be a compact oriented smooth $1$-manifold and give $\\partial W$ the outward-normal-first orientation ([[def-induced-boundary-orientation]]). The boundary is a finite $0$-manifold, so its orientation at a boundary point $p$ is a sign $\\varepsilon(p)\\in\\{+1,-1\\}$; then $$\\sum_{p\\in\\partial W}\\varepsilon(p)=0.$$ On each closed-interval component the two boundary points carry opposite signs; circle components contribute nothing. With the standard orientation of $[a,b]$ the outward-normal-first convention gives $\\partial[a,b]=\\{b\\}-\\{a\\}$.",
+          "uses": [
+            "1.1",
+            "2.2",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "thm-relative-whitney-approximation-for-manifold-valued-maps",
+          "source_section": "Statement",
+          "quote": "Assume countable choice $\\mathrm{AC}_\\omega$. Let $F:M\\to N$ be continuous, let $A\\subseteq M$ be closed, and suppose $F$ is smooth on an open neighbourhood of $A$. Then there exist a smooth map $\\widetilde F:M\\to N$ and an open neighbourhood $W$ of $A$ such that $\\widetilde F=F$ on $W$ and $F$ is homotopic to $\\widetilde F$ by a homotopy fixed on $W$, hence relative to $A$. No compactness of $A$ or its neighbourhood is assumed.",
+          "uses": [
+            "1.1",
+            "1.2"
+          ]
+        },
+        {
+          "fact": "F6",
+          "source": "alg-oriented-linking-number-from-diagram",
+          "source_section": "Definition",
+          "quote": "The input is a finite regular oriented link diagram together with its declared\ncomponents. If it does not have exactly two components, return\n`invalid-input`. For a two-component diagram $D$, initialize $s:=0$ and make\none pass over its finite crossing list. At each crossing whose branches lie on\ndifferent components, add\n$$\\operatorname{sgn}\\det_P(v_{\\rm over},v_{\\rm under})$$\nto $s$, where the determinant is taken in the oriented projection plane; ignore\nself-crossings. Return $s/2$. The even-sum lemma establishes that this output is\nan integer and is the diagram's linking number.",
+          "uses": [
+            "2.2",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F6",
+          "source": "thm-oriented-linking-number-scan-terminates-and-is-correct",
+          "source_section": "Statement",
+          "quote": "Assume the Axiom of Countable Choice. On every finite regular oriented diagram\nwith exactly two components, the crossing-scan algorithm halts after one\niteration per crossing and returns the integer half-sum of the mixed crossing\nsigns. On an input with any other number of components it returns\n`invalid-input` after the finite component-count check.",
+          "uses": [
+            "2.2",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F6",
+          "source": "def-oriented-crossing-sign-writhe-and-blackboard-framing",
+          "source_section": "Definition",
+          "quote": "Let $D$ be a regular oriented link diagram in a projection plane $P$ of an\noriented $3$-sphere, after moving the link off the point at infinity. Fix the\nunit viewing normal $n$ pointing toward the viewer. Orient $P$ by the rule that\nan ordered basis $(u,v)$ of $P$ is positive exactly when $(n,u,v)$ is a positive\nbasis of the ambient $3$-space. At a crossing $c$, let $v_{\\rm over}$ and\n$v_{\\rm under}$ be the nonzero projected tangent vectors following the\norientations of the overpassing and underpassing strands. Define\n$$\\operatorname{sgn}(c):=\\operatorname{sgn}\\det_P(v_{\\rm over},v_{\\rm under})\\in\\{+1,-1\\}.$$\nReversing the orientation of $P$ reverses every crossing sign.",
+          "uses": [
+            "2.2",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F7",
+          "source": "def-the-standard-smooth-step-function",
+          "source_section": "Definition",
+          "quote": "Let $\\beta$ be the standard flat function. The **standard smooth step function** is\n$$ \\sigma(t):=\\frac{\\beta(t)}{\\beta(t)+\\beta(1-t)}. $$\nBecause $\\beta$ is smooth and positive on $(0,\\infty)$, the denominator is positive on $(0,1)$, while $\\sigma(t)=0$ for $t\\le 0$ and $\\sigma(t)=1$ for $t\\ge 1$.",
+          "uses": [
+            "1.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "step": "1.1",
+          "claim": "Put $X=S^3\\setminus K$ and $\\Sigma^\\circ=\\Sigma\\setminus K$. Since $\\Sigma$ is compact in $S^3$, it is closed; hence $\\Sigma^\\circ$ is a closed embedded surface in $X$. Since $J$ is transverse to $\\Sigma$, its inverse image of $\\Sigma$ is a compact $0$-manifold and hence finite; choose a basepoint $x_0\\in J\\setminus\\Sigma$. Then $x_0\\in X\\setminus\\Sigma$. Every based loop class has a smooth representative: on a lift $t\\in[0,1]$ with basepoint $0=1$, fix $0<a<1/2$ and reparametrize by $r(t)=0$ on $[0,a]$, $r(t)=(t-a)/(1-2a)$ on $[a,1-a]$, and $r(t)=1$ on $[1-a,1]$. The interpolation $(1-u)t+ur(t)$ is a based homotopy, and the reparametrized loop is constant on a closed arc about $x_0$. Apply [F5] relative to that arc, then [F4] to make the smooth representative transverse to $\\Sigma^\\circ$ while keeping it fixed near the arc, which maps into $X\\setminus\\Sigma^\\circ$. For such a loop $C$, let $I_\\Sigma(C)$ be the signed count of $C\\cap\\Sigma^\\circ$. For any homotopy between transverse loops, reparametrize its interval variable by the smooth step function [F7] to be constant in endpoint collars, smooth it relative to those collars by [F5], and apply [F4] relative to those collars, where the endpoint loops are already transverse. The inverse image of $\\Sigma^\\circ$ is a compact oriented one-manifold with no boundary, since it is boundaryless in $X$. Its boundary points are exactly the intersections at the two ends, with opposite boundary signs. The signed boundary sum vanishes by [F4], so $I_\\Sigma$ is homotopy invariant. Concatenation can be smoothed in a ball about $x_0$ disjoint from $\\Sigma$, so intersection counts add. Thus $I_\\Sigma$ is a group homomorphism $\\pi_1(X,x_0)\\to\\mathbb Z$ and factors through $H_1(X;\\mathbb Z)$ by [F2].",
+          "inputs": [
+            "A1",
+            "F2",
+            "F3",
+            "F4",
+            "F5",
+            "F7",
+            "given",
+            "construct"
+          ]
+        },
+        {
+          "id": "step-1-2",
+          "step": "1.2",
+          "claim": "Let $\\lambda=\\operatorname{lk}_D(J,K)$ be the algorithmic linking number of the given regular diagram. At each mixed crossing where $K$ is over $J$, let $\\epsilon$ be its sign and switch it so that $J$ passes over $K$. The crossing sign changes from $\\epsilon$ to $-\\epsilon$, so [F5] changes $\\lambda$ by $-\\epsilon$. In local coordinates $(x,y,z)$ with ambient orientation $(x,y,z)$, straighten the overpassing $K$-arc to the $x$-axis in a small ball. For $\\epsilon=+1$, the underpassing $J$-arc runs in the positive $y$ direction; switching it above the $K$-arc makes the local loop new-arc minus old-arc run clockwise in the oriented normal $(y,z)$ disk. Its class in the punctured ball is therefore $-[\\eta]$, where $\\eta$ is the positive meridian. For $\\epsilon=-1$ one tangent is reversed, so the local loop is the positive meridian. Thus in both cases $[J_{\\rm new}]-[J_{\\rm old}]=-\\epsilon[\\eta]$. The same local picture applies to any mixed crossing after an orientation-preserving change of coordinates.",
+          "inputs": [
+            "A1",
+            "F1",
+            "F5",
+            "given",
+            "construct"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "step": "2.1",
+          "claim": "Take a sufficiently small normal disk to $K$ at a boundary point and orient its normal plane so that a positive tangent to $K$ followed by the disk orientation gives the ambient orientation; its oriented boundary is the positive meridian $\\eta$. In orientation-preserving coordinates $(u,v,w)$, the surface is locally $\\{w=0,v\\ge0\\}$ with orientation $(\\partial_u,\\partial_v)$ and $K$ tangent to $+\\partial_u$. The disk is oriented $(\\partial_v,\\partial_w)$, so its positively oriented boundary at $+\\partial_v$ travels in the $+\\partial_w$ direction, from the negative to the positive side of $\\Sigma$. It meets $\\Sigma$ once, hence $I_\\Sigma(\\eta)=1$. By [F1], if $[J]=m[\\eta]$ in $H_1(X;\\mathbb Z)$, then $I_\\Sigma(J)=m$.",
+          "inputs": [
+            "A1",
+            "F1",
+            "F2",
+            "step 1.1",
+            "construct"
+          ]
+        },
+        {
+          "id": "step-2-2",
+          "step": "2.2",
+          "claim": "After finitely many switches, every mixed crossing has $J$ over $K$. The loop $J$ can then be translated in the viewing-normal direction until it lies in a half-space above the compact image of $K$: at each projected coincidence it starts above $K$ and remains above, and away from those finitely many coincidences the projections are disjoint. This isotopy stays in $X$, so the final class is zero because the half-space is contractible. Write $\\gamma_J,\\gamma_K$ for the final projected loops. Each remaining crossing sign is $\\operatorname{sgn}\\det(\\dot\\gamma_J,\\dot\\gamma_K)$. Orient $S^1_J\\times S^1_K$ by the $J$ factor first, orient $\\mathbb R^2\\times\\mathbb R^2$ by its coordinate blocks, and orient the diagonal $\\Delta=\\{(x,x):x\\in\\mathbb R^2\\}$ by $x\\mapsto(x,x)$. By the local-sign definition [F3], the intersection sign of $F=(\\gamma_J,\\gamma_K)$ with $\\Delta$ is $-\\operatorname{sgn}\\det(\\dot\\gamma_J,\\dot\\gamma_K)$: the determinant of the columns $(\\dot\\gamma_J,0),(0,\\dot\\gamma_K),(e_1,e_1),(e_2,e_2)$ is $-\\det(\\dot\\gamma_J,\\dot\\gamma_K)$ for a positive basis $(e_1,e_2)$ of the plane. Homotope $\\gamma_J$ linearly to a point outside the second projected loop and perturb the homotopy relative to the transverse endpoints by [F4]. The endpoint map misses $\\Delta$, so [F3] gives intersection number zero and hence the final mixed signed sum is zero. Thus both the final linking number and the final meridian coefficient are zero. Since step 1.2 shows their changes agree at every switch, the original $\\lambda$ equals the original coefficient $m$.",
+          "inputs": [
+            "A1",
+            "F1",
+            "F3",
+            "F4",
+            "F6",
+            "step 1.2",
+            "construct"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "step": "3.1",
+          "claim": "Step 2.2 proves $\\operatorname{lk}_D(J,K)=m$, and step 2.1 proves $I_\\Sigma(J)=m$. Since $\\operatorname{lk}(J,K)$ was defined to be $m$, all three integers agree. The Axiom of Choice is used through Alexander duality in [F1] and relative transversality in [F4]; no surface-existence result is used.",
+          "inputs": [
+            "A1",
+            "F1",
+            "F4",
+            "F6",
+            "step 2.1",
+            "step 2.2"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "Step 1.2 identifies the signed intersection sum with the meridian coefficient; an empty intersection sum is 0."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Step 2.2 compares the zero final crossing sum and zero meridian coefficient, covering linking number 0."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Step 1.2 computes the positive meridian case, whose transverse collar intersection has exactly one point of sign +1."
+        },
+        {
+          "case": "degenerate",
+          "status": "not_applicable",
+          "reason": "The statement assumes J is transverse to the supplied surface Σ."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Step 1.1 counts the two endpoint intersection sets with opposite boundary signs in the compact trace."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Step 3.1 states the full AC use through Alexander duality and relative transversality."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The theorem is an equality of integers, not an if-and-only-if statement."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The theorem is an equality of integers, not an if-and-only-if statement."
+        }
+      ]
+    },
+    "lem-framed-knot-push-off-self-linking-well-defined": {
+      "citations": [
+        {
+          "fact": "A1",
+          "source": "def-countable-choice",
+          "source_section": "Definition",
+          "quote": "The **Axiom of Countable Choice**, written $\\mathrm{AC}_\\omega$, is the following\nstatement.",
+          "uses": [
+            "1.1",
+            "2.1",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F1",
+          "source": "def-normal-and-conormal-bundles-of-an-embedded-submanifold",
+          "source_section": "Definition",
+          "quote": "The **normal-bundle set** of $S$ in $M$ is the fibrewise quotient\n\n$$\\nu(S):=\\coprod_{p\\in S}T_pM/T_pS.$$",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F1",
+          "source": "prop-normal-and-conormal-bundles-are-smooth-vector-bundles",
+          "source_section": "Statement",
+          "quote": "Assume $\\mathrm{AC}_\\omega$. If $S\\subseteq M$ is an embedded submanifold, then the normal bundle\n$\\nu(S)=TM|_S/TS$ and the conormal bundle $N^*S\\subseteq T^*M|_S$ are smooth\nvector bundles over $S$.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F1",
+          "source": "def-tubular-neighbourhood-of-an-embedded-submanifold",
+          "source_section": "Definition",
+          "quote": "Let $i:S\\hookrightarrow M$ be a smooth embedding, and suppose its normal bundle\n$\\nu(S)$ ([[def-normal-and-conormal-bundles-of-an-embedded-submanifold]]) has\nbeen equipped with its standard smooth-vector-bundle structure. Under\n$\\mathrm{AC}_\\omega$ the existence of this structure is supplied by\n[[prop-normal-and-conormal-bundles-are-smooth-vector-bundles]].",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F1",
+          "source": "thm-tubular-neighbourhood-theorem-in-a-smooth-ambient-manifold",
+          "source_section": "Statement",
+          "quote": "Assume countable choice $\\mathrm{AC}_\\omega$. Let $i:S\\hookrightarrow M$ be a closed smooth embedded submanifold. Then there are an open neighbourhood $\\Omega\\subseteq\\nu(S)$ of the zero section in the quotient normal bundle and a diffeomorphism $\\Phi:\\Omega\\to U$ onto an open neighbourhood $U$ of $i(S)$ in $M$, with $\\Phi(0_p)=i(p)$ for every $p\\in S$. Thus $S$ has a tubular neighbourhood in $M$.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "cor-tubular-neighbourhoods-are-unique-up-to-ambient-isotopy",
+          "source_section": "Statement",
+          "quote": "Assume $\\mathrm{AC}_\\omega$. Let $N$ be a smooth manifold without boundary, let $S\\subseteq N$ be a closed embedded submanifold, let $\\nu(S)$ be its normal bundle ([[def-normal-and-conormal-bundles-of-an-embedded-submanifold]]), and let $\\Phi_1,\\Phi_2:\\Omega\\to N$ be two tubular neighbourhood embeddings of the same open disc bundle $\\Omega=D(\\nu(S))$ whose restrictions to the zero section are the inclusion of $S$ ([[def-tubular-neighbourhood-of-an-embedded-submanifold]]). Assume that $d\\Phi_1$ and $d\\Phi_2$ induce the same isomorphism from each vertical fibre $\\nu(S)_p$ to the ambient normal quotient $T_pN/T_pS$. (The usual normalization makes both induced maps the identity; merely fixing the zero section is insufficient.) Then, after shrinking $\\Omega$ around the zero section, the two embeddings are isotopic through tubular neighbourhood embeddings fixing $S$ pointwise. Consequently, for every compact $A\\subseteq S$ there is an ambient isotopy $H_t$ of $N$ with $H_0=\\mathrm{id}_N$, compact support, $H_t\\circ\\Phi_1=\\Phi_t$ on a neighbourhood of $A$ for every $t$ (in particular $H_1\\circ\\Phi_1=\\Phi_2$ there), and $H_t$ fixing a neighbourhood of $A$ in $S$ pointwise; when $S$ is compact one may take $A=S$ and obtain the agreement on a neighbourhood of all of $S$, with support in any prescribed neighbourhood of $\\Phi_1(\\Omega)\\cup\\Phi_2(\\Omega)$.",
+          "uses": [
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "lem-linking-number-even-sum-and-reidemeister-invariance",
+          "source_section": "Statement",
+          "quote": "Assume the Axiom of Countable Choice. Let $D$ be a regular oriented diagram\nof a two-component oriented link in $S^3$, with components $K_1,K_2$. Write\n$$S(D):=\\sum_{c\\text{ between }K_1\\text{ and }K_2}\\operatorname{sgn}(c).$$\nThen $S(D)$ is even, and\n$$\\operatorname{lk}_D(K_1,K_2):=\\frac{S(D)}2\\in\\mathbb Z$$\nis unchanged by planar isotopy and by each oriented Reidemeister move of types\nI, II, and III. Thus it has the same value on any two regular diagrams of\nambient-isotopic oriented links. It is symmetric in $K_1,K_2$; reversing exactly\none component changes its sign, and reversing both components leaves it\nunchanged.",
+          "uses": [
+            "2.1",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "thm-oriented-linking-number-scan-terminates-and-is-correct",
+          "source_section": "Statement",
+          "quote": "Assume the Axiom of Countable Choice. On every finite regular oriented diagram\nwith exactly two components, the crossing-scan algorithm halts after one\niteration per crossing and returns the integer half-sum of the mixed crossing\nsigns. On an input with any other number of components it returns\n`invalid-input` after the finite component-count check.",
+          "uses": [
+            "2.1",
+            "3.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "step": "1.1",
+          "claim": "Choose a tubular chart $\\Phi:\\Omega\\to U$ as in [F1]. The graph map $x\\mapsto(x,\\varepsilon s(x))$ is an embedding because its projection to the base $K$ is the identity; it is disjoint from the zero section because $s(x)\\ne0$. Since $\\Phi$ is a diffeomorphism on $\\Omega$, its image $K_{\\varepsilon s}$ is embedded and disjoint from $K$ whenever the graph is contained in $\\Omega$. The zero section is compact, so an open neighbourhood of it contains all sufficiently small scalar multiples of $s$ over $K$; hence such $\\varepsilon$ exist. The orientation of $K_{\\varepsilon s}$ is transported from the base orientation by its projection to $K$.",
+          "inputs": [
+            "A1",
+            "F1",
+            "given",
+            "construct"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "step": "2.1",
+          "claim": "For two small radii $\\varepsilon_0,\\varepsilon_1>0$ in the same chart, the positive interpolation $\\varepsilon_u=(1-u)\\varepsilon_0+u\\varepsilon_1$ keeps the graph disjoint from the zero section and gives an isotopy of the two-component links $K\\cup K_{\\varepsilon_u s}$. If $s_u$ is a homotopy through nonzero sections, compactness of $K\\times[0,1]$ gives one small scalar for which all graphs lie in $\\Omega$, and $(x,u)\\mapsto \\Phi(x,\\varepsilon s_u(x))$ gives the same kind of link isotopy. By [F3] the linking number is constant in both cases.",
+          "inputs": [
+            "A1",
+            "F3",
+            "step 1.1",
+            "construct"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "step": "3.1",
+          "claim": "Let $\\Phi_0,\\Phi_1$ be two normalized tubular charts. By [F2], after shrinking there is an ambient isotopy fixing $K$ and carrying one chart to the other near its compact zero section. Apply it to the disjoint pair $K\\cup K_{\\varepsilon s}$ and use [F3]; the resulting linking number is unchanged. Steps 1.1–1.2 prove that the value depends only on the framing homotopy class, not on the chart or the sufficiently small radius. Countable Choice is used only through tubular-neighbourhood existence and uniqueness; the finite linking computations are choice-free.",
+          "inputs": [
+            "A1",
+            "F2",
+            "F3",
+            "step 1.1",
+            "step 2.1"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The object is a nonempty embedded circle K:S¹↪S³ with a section; the empty link is outside the premise."
+        },
+        {
+          "case": "zero",
+          "status": "not_applicable",
+          "reason": "The section is required to be nowhere zero, so the zero section is excluded."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Step 1.1 treats a single nowhere-zero section and proves its graph gives one embedded push-off circle."
+        },
+        {
+          "case": "degenerate",
+          "status": "not_applicable",
+          "reason": "The statement requires a normalized tubular chart and a nowhere-zero section."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Step 2.1 compares both positive radii and the endpoint sections of a homotopy through nonzero sections."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Step 3.1 identifies the ACω use through tubular-neighbourhood existence and normalized chart uniqueness."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The lemma proves well-definedness, not an equivalence."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The lemma proves well-definedness, not an equivalence."
+        }
+      ]
+    },
+    "def-framed-knot-self-linking-and-seifert-framing": {
+      "citations": [],
+      "derivations": [],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The defined object is an oriented knot K:S¹↪S³, not an empty link."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Definition: a framing section is nowhere zero, so the zero section is excluded."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Definition: one framing class determines a self-linking number by a sufficiently small push-off."
+        },
+        {
+          "case": "degenerate",
+          "status": "not_applicable",
+          "reason": "The definition assumes a smooth oriented knot and a normalized normal bundle."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Definition: the relative framing integer is unchanged under homotopy and records the angle-lift endpoint difference."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Definition: ACω is explicitly assumed for the smooth normal-bundle structure."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The definition sets out framing and self-linking notions, not an equivalence."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The definition sets out framing and self-linking notions, not an equivalence."
+        }
+      ]
+    },
+    "thm-blackboard-framing-self-linking-is-writhe": {
+      "citations": [
+        {
+          "fact": "A1",
+          "source": "def-countable-choice",
+          "source_section": "Definition",
+          "quote": "The **Axiom of Countable Choice**, written $\\mathrm{AC}_\\omega$, is the following\nstatement.",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F1",
+          "source": "lem-framed-knot-push-off-self-linking-well-defined",
+          "source_section": "Statement",
+          "quote": "Assume the Axiom of Countable Choice. Let $K:S^1\\hookrightarrow S^3$ be an\noriented smooth embedded circle and let $s$ be a smooth nowhere-zero section of\nits normal bundle. For any tubular neighbourhood chart that is the inclusion\non the zero section and identifies each vertical normal fibre with the ambient\nnormal quotient by the identity, the curve $K_{\\varepsilon s}$ obtained by\nmapping the graph of $\\varepsilon s$ into $S^3$ is an embedded oriented circle\ndisjoint from $K$ for every sufficiently small $\\varepsilon>0$. The integer\nlinking number of $K$ with $K_{\\varepsilon s}$ is independent of the sufficiently\nsmall radius, of the representative section in its homotopy class, and of the\nnormalized tubular chart. It therefore defines a self-linking integer of the\nframing class $[s]$.",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F1",
+          "source": "def-framed-knot-self-linking-and-seifert-framing",
+          "source_section": "Definition",
+          "quote": "The **self-linking number** of a framed knot $(K,[s])$ is the linking number\nof $K$ with a sufficiently small push-off along $s$, oriented parallel to $K$.\nThe push-off and its integer are independent of the representative section,\nsmall radius, and normalized tubular chart by the preceding well-definedness\nresult.",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "alg-oriented-linking-number-from-diagram",
+          "source_section": "Definition",
+          "quote": "The input is a finite regular oriented link diagram together with its declared\ncomponents. If it does not have exactly two components, return\n`invalid-input`. For a two-component diagram $D$, initialize $s:=0$ and make\none pass over its finite crossing list. At each crossing whose branches lie on\ndifferent components, add\n$$\\operatorname{sgn}\\det_P(v_{\\rm over},v_{\\rm under})$$\nto $s$, where the determinant is taken in the oriented projection plane; ignore\nself-crossings. Return $s/2$. The even-sum lemma establishes that this output is\nan integer and is the diagram's linking number.",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "thm-oriented-linking-number-scan-terminates-and-is-correct",
+          "source_section": "Statement",
+          "quote": "Assume the Axiom of Countable Choice. On every finite regular oriented diagram\nwith exactly two components, the crossing-scan algorithm halts after one\niteration per crossing and returns the integer half-sum of the mixed crossing\nsigns. On an input with any other number of components it returns\n`invalid-input` after the finite component-count check.",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "lem-blackboard-push-off-has-two-mixed-crossings-per-crossing",
+          "source_section": "Statement",
+          "quote": "Assume the Axiom of Countable Choice. Let $K:S^1\\hookrightarrow\\mathbb R^3$\nbe an oriented smooth embedded knot with regular oriented diagram $D$ in the\n$(x_1,x_2)$-plane, and write $\\gamma=\\pi\\circ K$ for its projected immersion.\nLet $\\widehat T_\\gamma(t)$ be the unit tangent following the projected\norientation, and let $R(u,v)=(-v,u)$ be the positive quarter-turn in the\noriented projection plane. Define\n$$b_D(t):=(R\\widehat T_\\gamma(t),0)\\in\\mathbb R^3.$$\nThis smooth nonzero vector is perpendicular to the spatial tangent of $K$ and\nrepresents the blackboard normal section. Let $\\Phi$ be a tubular chart of $K$\nwhose vertical differential at each zero vector induces the identity on the\nambient normal quotient. For sufficiently small $\\varepsilon>0$ put\n$$K_\\varepsilon(t):=\\Phi\\bigl(K(t),\\varepsilon[b_D(t)]\\bigr),$$\noriented by the parameter orientation of $K$. Then $K_\\varepsilon$ is embedded\nand disjoint from $K$, and the mixed crossings in the projected diagram of\n$K\\cup K_\\varepsilon$ consist of exactly two crossings for each crossing $c$\nof $D$, both with sign $\\operatorname{sgn}(c)$. There are no other mixed\ncrossings.",
+          "uses": [
+            "1.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "step": "1.1",
+          "claim": "By [F3], the mixed crossing list for $K\\cup K_{b_D}$ has two crossings of sign $\\operatorname{sgn}(c)$ for each crossing $c$ of $D$ and no others. Therefore its signed mixed sum is $2\\sum_c\\operatorname{sgn}(c)=2\\operatorname{wr}(D)$.",
+          "inputs": [
+            "A1",
+            "F3",
+            "given",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "step": "2.1",
+          "claim": "By [F2], the linking number of $K$ with its blackboard push-off is half this mixed sum; by [F1] it is the self-linking number. Thus $\\operatorname{sl}(K,b_D)=\\operatorname{wr}(D)$. For a link component, apply the same calculation to the subdiagram consisting of that component alone; crossings with other components are not mixed crossings of that component and its push-off, so precisely its self-crossings contribute.",
+          "inputs": [
+            "A1",
+            "F1",
+            "F2",
+            "step 1.1",
+            "construct"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "Step 1.1 gives an empty mixed sum for a crossing-free diagram, and step 2.1 then yields zero self-linking."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Step 2.1 proves the equality also when the diagram writhe is zero."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Step 1.1 gives two mixed crossings of one sign for a single crossing, and step 2.1 halves their sum."
+        },
+        {
+          "case": "degenerate",
+          "status": "not_applicable",
+          "reason": "The statement assumes a regular oriented diagram."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "The statement is a diagramwise equality and has no path endpoints."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Step 2.1 uses ACω through the embedded framed push-off supplier."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The theorem states an equality, not an equivalence."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The theorem states an equality, not an equivalence."
+        }
+      ]
+    },
+    "thm-linking-number-is-invariant-and-writhe-is-not": {
+      "citations": [
+        {
+          "fact": "A1",
+          "source": "def-countable-choice",
+          "source_section": "Definition",
+          "quote": "The **Axiom of Countable Choice**, written $\\mathrm{AC}_\\omega$, is the following\nstatement.",
+          "uses": [
+            "1.1",
+            "2.1",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F1",
+          "source": "thm-oriented-reidemeister-equivalence-theorem",
+          "source_section": "Statement",
+          "quote": "Assume $\\mathrm{AC}_\\omega$. Let $D$ and $D'$ be regular oriented link diagrams.\nThen $D$ and $D'$ represent equivalent oriented links if and only if $D'$ can be\nobtained from $D$ by a finite sequence of planar isotopies and oriented\nReidemeister moves R1, R2, R3.",
+          "uses": [
+            "1.1",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "def-oriented-reidemeister-moves",
+          "source_section": "Definition",
+          "quote": "**(R1) Kink creation and deletion.** A single strand is replaced by a small\nkink: two arcs crossing once and otherwise disjoint from the strand, with the\nover/under datum of the new crossing as in the picture. The move is allowed in\nboth directions (create or delete the kink) and with both signs of the kink,\nthe sign being the sign of the crossing created. The orientations of the two\nstrands of the kink are the two possible consistent orientations through the\ncrossing, and all of them occur in the move list.\n\n**(R2) Slide of two strands.** Two local arcs belonging to two strands are\nreplaced so that the number of crossings between those strands changes by two\nof opposite signs: the standard picture slides one strand over or under the\nother, creating or deleting the pair of crossings, with the two crossings being\nthe two possible signs in either order. All four orientation patterns of the\ntwo strands at the two crossings are included.\n\n**(R3) Sliding a strand past a crossing.** One strand is moved across an\nexisting crossing of two other strands, so that the crossing of the two other\nstrands passes from one side of the moving strand to the other; the three\ncrossings of the local picture keep their signs and the over/under data are\npreserved. The three strands must have a consistent strict height order:\none is above both others, one below both, and the remaining strand is between\nthem. The cyclic over/under pattern is excluded. Every orientation pattern\nand all six height orders of this standard local picture are included.",
+          "uses": [
+            "1.2"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "def-oriented-crossing-sign-writhe-and-blackboard-framing",
+          "source_section": "Definition",
+          "quote": "The **writhe** of $D$ is\n$$\\operatorname{wr}(D):=\\sum_{c\\text{ a crossing of }D}\\operatorname{sgn}(c).$$\nFor a link component $K_i$, its **self-writhe**\n$\\operatorname{wr}_i(D)$ is the sum over crossings whose two branches belong to\n$K_i$; the total writhe also includes all mixed crossings between distinct\ncomponents.",
+          "uses": [
+            "1.2",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "lem-linking-number-even-sum-and-reidemeister-invariance",
+          "source_section": "Statement",
+          "quote": "Assume the Axiom of Countable Choice. Let $D$ be a regular oriented diagram\nof a two-component oriented link in $S^3$, with components $K_1,K_2$. Write\n$$S(D):=\\sum_{c\\text{ between }K_1\\text{ and }K_2}\\operatorname{sgn}(c).$$\nThen $S(D)$ is even, and\n$$\\operatorname{lk}_D(K_1,K_2):=\\frac{S(D)}2\\in\\mathbb Z$$\nis unchanged by planar isotopy and by each oriented Reidemeister move of types\nI, II, and III. Thus it has the same value on any two regular diagrams of\nambient-isotopic oriented links. It is symmetric in $K_1,K_2$; reversing exactly\none component changes its sign, and reversing both components leaves it\nunchanged.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "thm-blackboard-framing-self-linking-is-writhe",
+          "source_section": "Statement",
+          "quote": "Assume the Axiom of Countable Choice. Let $D$ be a regular oriented diagram\nof a knot $K$ with blackboard framing $b_D$. The self-linking number of the\nframed knot $(K,b_D)$ equals the diagram writhe:\n$$\\operatorname{sl}(K,b_D)=\\operatorname{wr}(D).$$\nFor a link component $K_i$, the corresponding self-linking number is its\nself-writhe $\\operatorname{wr}_i(D)$. Total writhe of a link still includes\nthe signs of mixed crossings, while the sum of component self-linking numbers\nuses only self-crossings.",
+          "uses": [
+            "2.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "step": "1.1",
+          "claim": "Apply [F1] to two regular diagrams of the same oriented link. By [F4], the integer linking number is unchanged by planar isotopy and by every move in the resulting finite sequence. Hence the two diagrams have equal linking number.",
+          "inputs": [
+            "A1",
+            "F1",
+            "F4",
+            "given"
+          ]
+        },
+        {
+          "id": "step-1-2",
+          "step": "1.2",
+          "claim": "A type-I move creates or deletes exactly one self-crossing and no mixed crossing by [F2]. Its contribution to the writhe in [F3] is therefore the sign $+1$ or $-1$ of that crossing. A type-II move either contributes no mixed crossings or creates a mixed pair of opposite signs; in both cases its total writhe contribution is zero. A type-III move preserves each crossing sign, so it preserves writhe.",
+          "inputs": [
+            "F2",
+            "F3",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "step": "2.1",
+          "claim": "By [F5], the knot component's blackboard self-linking is equal to the writhe of its diagram before and after each move. Thus a type-I move changes that self-linking by the same $+1$ or $-1$ as writhe, while type II and III preserve it.",
+          "inputs": [
+            "A1",
+            "F5",
+            "step 1.2"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "step": "3.1",
+          "claim": "Let $D_0$ be a crossing-free diagram of the unknot, so $\\operatorname{wr}(D_0)=0$. Add a positive type-I kink to obtain $D_1$. By [F1], the two diagrams represent ambient-isotopic unframed knots. The calculation in step 1.2 gives $\\operatorname{wr}(D_1)=1$. Hence writhe is not an invariant of unframed ambient isotopy; step 2.1 gives the same change for the blackboard self-linking.",
+          "inputs": [
+            "A1",
+            "F1",
+            "F3",
+            "step 1.2",
+            "step 2.1",
+            "construct"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "A link diagram is a nonempty union of components, and the theorem concerns two-component linking or a knot component."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Step 1.1 preserves the integer linking number also when its value is zero."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Steps 1.2 and 2.1 show that a single type-I crossing changes writhe and blackboard self-linking by its sign."
+        },
+        {
+          "case": "degenerate",
+          "status": "not_applicable",
+          "reason": "The diagrams are assumed regular; nonregular projections are outside the claim."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Step 1.1 compares initial and final diagrams along the finite Reidemeister sequence supplied by the theorem."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Step 1.1 uses ACω through the oriented Reidemeister equivalence theorem."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The result does not state an if-and-only-if characterization."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The result does not state an if-and-only-if characterization."
+        }
+      ]
+    },
+    "ex-knot-kt-03-worked-cases": {
+      "citations": [
+        {
+          "fact": "A1",
+          "source": "def-countable-choice",
+          "source_section": "Definition",
+          "quote": "The **Axiom of Countable Choice**, written $\\mathrm{AC}_\\omega$, is the following\nstatement.",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F1",
+          "source": "def-geometric-braid-with-setwise-endpoints",
+          "source_section": "Definition",
+          "quote": "**Endpoint permutation.** Let $\\beta=(z_1,\\dots,z_n)$ be a braid. For each\n$j$ the setwise condition (3) produces at least one index $\\pi(j)$ with\n$z_j(1)=q_{\\pi(j)}$, and the pairwise distinctness of $q_1,\\dots,q_n$ makes it\nunique; moreover $j\\mapsto\\pi(j)$ is injective, because $q_{\\pi(j)}=z_j(1)$\nshows that distinct $j$ give distinct points $q_{\\pi(j)}$. Hence $j\\mapsto\n\\pi(j)$ is a bijection of $\\{1,\\dots,n\\}$, that is, a permutation\n([[def-finite-symmetric-group-and-permutation-notation]]). It is called the\n**endpoint permutation** of $\\beta$ and is written $\\pi(\\beta)\\in S_n$:",
+          "uses": [
+            "1.1",
+            "1.2"
+          ]
+        },
+        {
+          "fact": "F1",
+          "source": "def-closure-of-a-geometric-braid",
+          "source_section": "Definition",
+          "quote": "**Components and orientation.** For a cycle\n$(j,\\pi(j),\\ldots,\\pi^{k-1}(j))$ concatenate these $k$ strand maps in\nthat order, with parameter in $[0,k]$. Their endpoints agree in $V$,\nso the concatenation factors through $\\mathbb R/k\\mathbb Z$.\nIt is injective on this circle: points at distinct nonintegral heights\ncan agree only when their parameters have the same fractional part,\nand the distinct strands at that height have distinct disk coordinates;\nat integral heights only the specified adjacent endpoints agree.\nThus each cycle gives an embedded circle. Different cycles give\ndisjoint circles, and every strand belongs to exactly one cycle.\nThese circles are precisely the connected components of the closure.\nThe orientation is increasing concatenation parameter. In particular\nthe number of components equals the number of cycles of $\\pi$.",
+          "uses": [
+            "1.1",
+            "1.2"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "prop-stacking-of-geometric-braids-is-well-defined",
+          "source_section": "Statement",
+          "quote": "**(b) The endpoint permutation multiplies.** $\\pi(\\gamma\\star\\beta)\n=\\pi(\\gamma)\\circ\\pi(\\beta)$, with $(\\pi\\circ\\sigma)(j)=\\pi(\\sigma(j))$.",
+          "uses": [
+            "1.1",
+            "1.2"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "def-elementary-geometric-half-twist",
+          "source_section": "Definition",
+          "quote": "The words *positive* and *anticlockwise* refer to the fixed orientation of the\nplane of the disc and to the fixed planar projection whose horizontal axis\ncontains $Q$: the moving pair turns through the half turn anticlockwise, the\nlabel $i$ passing below its midpoint and the label $i+1$ above. Together with\nthe first-under-second stacking convention of\n[[prop-stacking-of-geometric-braids-is-well-defined]] this fixes the sign\nconvention for every signed crossing on this page and its companion.",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "def-oriented-crossing-sign-writhe-and-blackboard-framing",
+          "source_section": "Definition",
+          "quote": "This convention makes the positive geometric Artin half twist positive. In\nthe braid chart $(x,y,t)$ with ambient orientation $(x,y,t)$, view along $+y$;\nthe induced positive orientation of the $(x,t)$ projection plane is the ordered\nbasis $(\\partial_t,\\partial_x)$. For the positive half twist, label $i$ moves\nfrom $x=-h$ to $x=h$ below the midpoint, while label $i+1$ moves from $x=h$ to\n$x=-h$ above it, with $h>0$. Thus the over and under projected tangent vectors\nin coordinates $(t,x)$ are $(1,-2h)$ and $(1,2h)$, whose determinant is\n$4h>0$.",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "alg-oriented-linking-number-from-diagram",
+          "source_section": "Definition",
+          "quote": "The input is a finite regular oriented link diagram together with its declared\ncomponents. If it does not have exactly two components, return\n`invalid-input`. For a two-component diagram $D$, initialize $s:=0$ and make\none pass over its finite crossing list. At each crossing whose branches lie on\ndifferent components, add\n$$\\operatorname{sgn}\\det_P(v_{\\rm over},v_{\\rm under})$$\nto $s$, where the determinant is taken in the oriented projection plane; ignore\nself-crossings. Return $s/2$. The even-sum lemma establishes that this output is\nan integer and is the diagram's linking number.",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "thm-oriented-linking-number-scan-terminates-and-is-correct",
+          "source_section": "Statement",
+          "quote": "Assume the Axiom of Countable Choice. On every finite regular oriented diagram\nwith exactly two components, the crossing-scan algorithm halts after one\niteration per crossing and returns the integer half-sum of the mixed crossing\nsigns. On an input with any other number of components it returns\n`invalid-input` after the finite component-count check.",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "step": "1.1",
+          "claim": "For the two-strand braid, $\\pi(\\sigma_1^2)=(1\\ 2)^2=\\mathrm{id}$ by [F1] and [F2]. Its two closure cycles are therefore the two singleton components, and each of the two positive generator crossings is mixed. By [F3] their signs are $+1,+1$; [F4] gives linking number $1$.",
+          "inputs": [
+            "A1",
+            "F1",
+            "F2",
+            "F3",
+            "F4",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-1-2",
+          "step": "1.2",
+          "claim": "For the Whitehead word, each squared generator contributes the identity endpoint permutation, leaving $\\pi(\\beta)=(1\\ 3)$; hence [F1] gives component cycles $\\{1,3\\}$ and $\\{2\\}$. Traversing from bottom to top, the first two $\\sigma_2^{-1}$ crossings exchange labels $2$ and $3$, so they are mixed; the following $\\sigma_1$ exchanges $1$ and $2$, so it is mixed; the next $\\sigma_2^{-1}$ exchanges $1$ and $3$, so it is a self-crossing; the final $\\sigma_1$ exchanges $2$ and $3$, so it is mixed.",
+          "inputs": [
+            "F1",
+            "F2",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "step": "2.1",
+          "claim": "By [F3], the mixed signs of the Whitehead word are $-1,-1,+1,+1$ in that traversal, whose sum is $0$. The algorithm in [F4] therefore returns $0/2=0$, as claimed. These are finite crossing checks; the general invariance proof is separate.",
+          "inputs": [
+            "A1",
+            "F3",
+            "F4",
+            "step 1.2",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The examples are closures of nonempty braids with displayed crossings."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Step 2.1 computes the Whitehead example with four mixed signs summing to zero."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Step 1.1 computes the positive Hopf closure with linking number one."
+        },
+        {
+          "case": "degenerate",
+          "status": "not_applicable",
+          "reason": "Both braid closures are regular diagrams with transverse crossings."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Steps 1.1 and 1.2 use the endpoint permutation cycles to determine closure components."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Step 2.1 uses ACω for the linking-number algorithm’s integer output; the finite crossing checks are choice-free."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The worked examples make no equivalence claim."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The worked examples make no equivalence claim."
+        }
+      ]
+    },
+    "cex-knot-kt-03-boundary-case": {
+      "citations": [
+        {
+          "fact": "A1",
+          "source": "def-countable-choice",
+          "source_section": "Definition",
+          "quote": "The **Axiom of Countable Choice**, written $\\mathrm{AC}_\\omega$, is the following\nstatement.",
+          "uses": [
+            "1.2"
+          ]
+        },
+        {
+          "fact": "F1",
+          "source": "def-regular-oriented-link-diagram",
+          "source_section": "Definition",
+          "quote": "Let $\\pi\\colon\\mathbb R^3\\to\\mathbb R^2$ be the orthogonal projection forgetting\nthe last coordinate, $\\pi(x_1,x_2,x_3):=(x_1,x_2)$, and let $L\\colon C\\to S^3$ be\nan oriented link contained in $\\mathbb R^3\\subset S^3$\n([[def-oriented-link-in-s-three-and-ambient-isotopy]], so $C$ is a finite\ndisjoint union of oriented circles and $L$ is a smooth embedding).\n\nThe projection $\\pi\\circ L$ is **regular** when:\n\n1. it is an immersion, that is, the projected derivative never vanishes\n   ([[def-immersion-submersion-and-constant-rank-map]]);\n2. its only multiple points are finitely many **double points**, and at every\n   double point the two branches meet transversely: the two projected tangent\n   lines are distinct ([[def-transverse-smooth-maps]]);\n3. there are no triple or higher multiple points: no point of the plane is the\n   image of three or more distinct source points.\n\nA **regular oriented link diagram** $D$ consists of the image $\\pi(L)$ together\nwith\n\n(a) the **over/under datum** at every double point: which of the two branches\n    lies above the other, read from the forgotten third coordinate (the branch\n    with the larger $x_3$-coordinate at the crossing is drawn over); and\n(b) the **orientations of the strands**, induced by the orientation of $L$.\n\nThus a diagram is a decorated immersed oriented planar graph with $4$-valent\ncrossing vertices, together with any components having no vertices. Its edges\nare the strands between consecutive crossings, and the decoration records\nwhich strand passes over at each vertex. A diagram is understood up to planar isotopy\n([[def-planar-isotopy-of-link-diagrams]]); two links that differ by an ambient\nisotopy moved off $\\infty$ may be represented by diagrams differing by planar\nisotopy and the local moves of [[def-oriented-reidemeister-moves]], which is the\ncontent of the Reidemeister equivalence theorem below.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F1",
+          "source": "def-oriented-reidemeister-moves",
+          "source_section": "Definition",
+          "quote": "An **oriented Reidemeister move** is one of the following local replacements of\na regular oriented link diagram ([[def-regular-oriented-link-diagram]]),\nperformed inside a small closed disk while the diagram outside the disk is left\nunchanged, and understood up to planar isotopy outside the disk\n([[def-planar-isotopy-of-link-diagrams]]). All sign and orientation variants of\neach local picture are included.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "thm-oriented-reidemeister-equivalence-theorem",
+          "source_section": "Statement",
+          "quote": "Assume $\\mathrm{AC}_\\omega$. Let $D$ and $D'$ be regular oriented link diagrams.\nThen $D$ and $D'$ represent equivalent oriented links if and only if $D'$ can be\nobtained from $D$ by a finite sequence of planar isotopies and oriented\nReidemeister moves R1, R2, R3.",
+          "uses": [
+            "1.2"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "def-oriented-crossing-sign-writhe-and-blackboard-framing",
+          "source_section": "Definition",
+          "quote": "The **writhe** of $D$ is\n$$\\operatorname{wr}(D):=\\sum_{c\\text{ a crossing of }D}\\operatorname{sgn}(c).$$\nFor a link component $K_i$, its **self-writhe**\n$\\operatorname{wr}_i(D)$ is the sum over crossings whose two branches belong to\n$K_i$; the total writhe also includes all mixed crossings between distinct\ncomponents.",
+          "uses": [
+            "1.2"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "thm-blackboard-framing-self-linking-is-writhe",
+          "source_section": "Statement",
+          "quote": "Assume the Axiom of Countable Choice. Let $D$ be a regular oriented diagram\nof a knot $K$ with blackboard framing $b_D$. The self-linking number of the\nframed knot $(K,b_D)$ equals the diagram writhe:\n$$\\operatorname{sl}(K,b_D)=\\operatorname{wr}(D).$$\nFor a link component $K_i$, the corresponding self-linking number is its\nself-writhe $\\operatorname{wr}_i(D)$. Total writhe of a link still includes\nthe signs of mixed crossings, while the sum of component self-linking numbers\nuses only self-crossings.",
+          "uses": [
+            "2.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "step": "1.1",
+          "claim": "Let $D_0$ be a crossing-free diagram of the oriented unknot and let $D_1$ be obtained by one positive type-I move. By [F1] the new crossing is a self-crossing and is positive.",
+          "inputs": [
+            "F1",
+            "construct"
+          ]
+        },
+        {
+          "id": "step-1-2",
+          "step": "1.2",
+          "claim": "By [F2], the type-I move is realized by an ambient isotopy, so $D_0$ and $D_1$ represent the same unframed oriented knot. By [F3], $\\operatorname{wr}(D_0)=0$ while $\\operatorname{wr}(D_1)=1$. Therefore the displayed false statement fails.",
+          "inputs": [
+            "A1",
+            "F2",
+            "F3",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "step": "2.1",
+          "claim": "By [F4], the blackboard self-linking values for these two diagrams are also $0$ and $1$, respectively. This is the framing change carried by the single positive kink; it does not contradict equality of knot types after forgetting the framing.",
+          "inputs": [
+            "F4",
+            "step 1.1",
+            "step 1.2"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "Step 1.2 starts from the crossing-free unknot diagram D₀, whose writhe is zero."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Step 1.2 computes writhe zero before the kink and one after it."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Steps 1.1 and 1.2 verify that the single positive type-I kink contributes +1."
+        },
+        {
+          "case": "degenerate",
+          "status": "not_applicable",
+          "reason": "Both diagrams are regular and the kink is an allowed Reidemeister move."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Step 1.2 uses the two endpoint diagrams of the ambient-isotopic type-I move."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Step 1.2 states the ACω use through the Reidemeister realization supplier."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The counterexample refutes an invariance claim; it states no equivalence."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The counterexample refutes an invariance claim; it states no equivalence."
+        }
+      ]
+    },
+    "lem-blackboard-push-off-has-two-mixed-crossings-per-crossing": {
+      "citations": [
+        {
+          "fact": "A1",
+          "source": "def-countable-choice",
+          "source_section": "Definition",
+          "quote": "The **Axiom of Countable Choice**, written $\\mathrm{AC}_\\omega$, is the following\nstatement.",
+          "uses": [
+            "1.1",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F1",
+          "source": "def-regular-oriented-link-diagram",
+          "source_section": "Definition",
+          "quote": "1. it is an immersion, that is, the projected derivative never vanishes\n   ([[def-immersion-submersion-and-constant-rank-map]]);\n2. its only multiple points are finitely many **double points**, and at every\n   double point the two branches meet transversely: the two projected tangent\n   lines are distinct ([[def-transverse-smooth-maps]]);\n3. there are no triple or higher multiple points: no point of the plane is the\n   image of three or more distinct source points.",
+          "uses": [
+            "1.1",
+            "2.1",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "def-oriented-crossing-sign-writhe-and-blackboard-framing",
+          "source_section": "Definition",
+          "quote": "Let $D$ be a regular oriented link diagram in a projection plane $P$ of an\noriented $3$-sphere, after moving the link off the point at infinity. Fix the\nunit viewing normal $n$ pointing toward the viewer. Orient $P$ by the rule that\nan ordered basis $(u,v)$ of $P$ is positive exactly when $(n,u,v)$ is a positive\nbasis of the ambient $3$-space. At a crossing $c$, let $v_{\\rm over}$ and\n$v_{\\rm under}$ be the nonzero projected tangent vectors following the\norientations of the overpassing and underpassing strands. Define\n$$\\operatorname{sgn}(c):=\\operatorname{sgn}\\det_P(v_{\\rm over},v_{\\rm under})\\in\\{+1,-1\\}.$$\nReversing the orientation of $P$ reverses every crossing sign.",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "def-oriented-crossing-sign-writhe-and-blackboard-framing",
+          "source_section": "Definition",
+          "quote": "The **blackboard framing** of a component of $D$ is the homotopy class of the\nnormal section represented by the positive quarter-turn in $P$ of the projected\noriented tangent. The projection is an immersion, so this vector never\nvanishes; it is perpendicular to the projected tangent, hence also to the\nspatial tangent, and therefore represents a nonzero normal section of the\ncomponent in the ambient $3$-sphere.",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "thm-smooth-inverse-function-theorem-on-manifolds",
+          "source_section": "Statement",
+          "quote": "Let $F:M\\to N$ be a smooth map and let $p\\in M$. If $dF_p:T_pM\\to T_{F(p)}N$ is\nan isomorphism, then there are open neighbourhoods $U$ of $p$ and $V$ of\n$F(p)$ such that $F|_U:U\\to V$ is a diffeomorphism.",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "prop-normal-and-conormal-bundles-are-smooth-vector-bundles",
+          "source_section": "Statement",
+          "quote": "Assume $\\mathrm{AC}_\\omega$. If $S\\subseteq M$ is an embedded submanifold, then the normal bundle\n$\\nu(S)=TM|_S/TS$ and the conormal bundle $N^*S\\subseteq T^*M|_S$ are smooth\nvector bundles over $S$.",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "def-tubular-neighbourhood-of-an-embedded-submanifold",
+          "source_section": "Definition",
+          "quote": "Let $i:S\\hookrightarrow M$ be a smooth embedding, and suppose its normal bundle\n$\\nu(S)$ ([[def-normal-and-conormal-bundles-of-an-embedded-submanifold]]) has\nbeen equipped with its standard smooth-vector-bundle structure. Under\n$\\mathrm{AC}_\\omega$ the existence of this structure is supplied by\n[[prop-normal-and-conormal-bundles-are-smooth-vector-bundles]].",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "cor-tubular-neighbourhoods-are-unique-up-to-ambient-isotopy",
+          "source_section": "Statement",
+          "quote": "Assume $\\mathrm{AC}_\\omega$. Let $N$ be a smooth manifold without boundary, let $S\\subseteq N$ be a closed embedded submanifold, let $\\nu(S)$ be its normal bundle ([[def-normal-and-conormal-bundles-of-an-embedded-submanifold]]), and let $\\Phi_1,\\Phi_2:\\Omega\\to N$ be two tubular neighbourhood embeddings of the same open disc bundle $\\Omega=D(\\nu(S))$ whose restrictions to the zero section are the inclusion of $S$ ([[def-tubular-neighbourhood-of-an-embedded-submanifold]]). Assume that $d\\Phi_1$ and $d\\Phi_2$ induce the same isomorphism from each vertical fibre $\\nu(S)_p$ to the ambient normal quotient $T_pN/T_pS$. (The usual normalization makes both induced maps the identity; merely fixing the zero section is insufficient.) Then, after shrinking $\\Omega$ around the zero section, the two embeddings are isotopic through tubular neighbourhood embeddings fixing $S$ pointwise. Consequently, for every compact $A\\subseteq S$ there is an ambient isotopy $H_t$ of $N$ with $H_0=\\mathrm{id}_N$, compact support, $H_t\\circ\\Phi_1=\\Phi_t$ on a neighbourhood of $A$ for every $t$ (in particular $H_1\\circ\\Phi_1=\\Phi_2$ there), and $H_t$ fixing a neighbourhood of $A$ in $S$ pointwise; when $S$ is compact one may take $A=S$ and obtain the agreement on a neighbourhood of all of $S$, with support in any prescribed neighbourhood of $\\Phi_1(\\Omega)\\cup\\Phi_2(\\Omega)$.",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F6",
+          "source": "lem-framed-knot-push-off-self-linking-well-defined",
+          "source_section": "Statement",
+          "quote": "Assume the Axiom of Countable Choice. Let $K:S^1\\hookrightarrow S^3$ be an\noriented smooth embedded circle and let $s$ be a smooth nowhere-zero section of\nits normal bundle. For any tubular neighbourhood chart that is the inclusion\non the zero section and identifies each vertical normal fibre with the ambient\nnormal quotient by the identity, the curve $K_{\\varepsilon s}$ obtained by\nmapping the graph of $\\varepsilon s$ into $S^3$ is an embedded oriented circle\ndisjoint from $K$ for every sufficiently small $\\varepsilon>0$. The integer\nlinking number of $K$ with $K_{\\varepsilon s}$ is independent of the sufficiently\nsmall radius, of the representative section in its homotopy class, and of the\nnormalized tubular chart. It therefore defines a self-linking integer of the\nframing class $[s]$.",
+          "uses": [
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F7",
+          "source": "thm-lebesgue-number-lemma",
+          "source_section": "Statement",
+          "quote": "Let $(X,d)$ be a compact metric space ([[def-metric-compactness]],\n[[def-metric-space]]) and let $\\mathcal{U}$ be an open cover of $X$. Then there\nis a real $\\delta > 0$, a **Lebesgue number** for $\\mathcal{U}$, such that every\nnonempty $A \\subseteq X$ with $\\operatorname{diam}(A) < \\delta$\n([[def-metric-bounded-diameter]]) satisfies $A \\subseteq U$ for some\n$U \\in \\mathcal{U}$.",
+          "uses": [
+            "1.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "step": "1.1",
+          "claim": "Put $\\rho_\\varepsilon(t):=\\pi\\Phi(K(t),\\varepsilon[b_D(t)])$. Then $\\rho_0=\\gamma$, and the normalized-chart condition says that $\\partial_\\varepsilon\\rho_\\varepsilon(t)|_{\\varepsilon=0}$ represents $R\\widehat T_\\gamma(t)$ modulo the tangent line spanned by $\\gamma'(t)$. Therefore the two planar vectors $\\gamma'(t)$ and $\\partial_\\varepsilon\\rho_\\varepsilon(t)|_0$ are linearly independent. The map $(t,\\varepsilon)\\mapsto(\\rho_\\varepsilon(t),\\varepsilon)$ has invertible differential at every $(t,0)$, so [F3] makes it locally injective there. Split the complement of pairwise disjoint crossing disks into finitely many compact embedded arcs, or use the whole embedded circle if $D$ has no crossings. A finite subcover and [F7] give a uniform neighborhood in which close parameters lie in one injectivity chart. Parameter pairs outside that neighborhood have positive minimum image separation by compactness and injectivity; distinct compact arcs are also positively separated. Smoothness of $\\Phi$ gives uniform convergence $\\rho_\\varepsilon\\to\\rho_0$ on these compact arcs. Thus for small $\\varepsilon$ the original and offset arcs do not meet in projection outside the crossing disks. Regularity supplies the finite transverse crossing set [F1].",
+          "inputs": [
+            "A1",
+            "F1",
+            "F3",
+            "F4",
+            "F5",
+            "F7",
+            "given",
+            "choose"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "step": "2.1",
+          "claim": "Fix one crossing disk, with oriented over branch $\\alpha$ and under branch $\\beta$. Choose it so each branch segment lies in the inverse-function neighborhoods for both mixed-pair maps and the corresponding same-branch maps, and no other branch enters. The map $G(s,t,\\varepsilon):=\\bigl(\\alpha(s)-\\rho_\\varepsilon(t),\\varepsilon\\bigr)$ has invertible derivative at the original crossing and $\\varepsilon=0$; its upper-left $2\\times2$ block has columns $\\alpha'(0)$ and $-\\beta'(0)$, which are linearly independent by transversality. By [F3], for each sufficiently small $\\varepsilon$ the original over branch and offset under branch intersect transversely exactly once in the disk. Reversing the branches gives exactly one intersection between the original under branch and offset over branch. The map in step 1.1 is locally injective along each branch at the crossing, so an original branch does not meet its own offset there. The two mixed intersections are distinct: each lies on a different original branch, those branches meet only at the original crossing, and neither offset branch passes through that point. By continuity, the strict height order and the nonzero oriented determinant at the original crossing persist at both new intersections. The offset tangents converge to the original branch tangents as $\\varepsilon\\to0$, so both signs remain $\\operatorname{sgn}(c)$ by [F2].",
+          "inputs": [
+            "F1",
+            "F2",
+            "F3",
+            "F4",
+            "F5",
+            "step 1.1",
+            "choose",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "step": "3.1",
+          "claim": "There are finitely many crossing disks, so choose $\\varepsilon$ below all the local bounds from steps 1.1 and 2.1. By [F6], the spatial push-off is an embedded circle disjoint from $K$. Each crossing disk contributes exactly the two mixed crossings from step 2.1, and step 1.1 excludes all others. Countable Choice is used only through [F6] for the tubular push-off; the finite projected-crossing argument uses no choice.",
+          "inputs": [
+            "A1",
+            "F1",
+            "F6",
+            "step 1.1",
+            "step 2.1",
+            "choose",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "Step 1.1 covers a crossing-free embedded projected circle; there are no crossing disks and hence no mixed crossings."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Steps 1.1 and 3.1 cover the zero-crossing case, where the mixed crossing set is empty."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Step 2.1 shows a single original crossing produces exactly two mixed crossings, both of its sign."
+        },
+        {
+          "case": "degenerate",
+          "status": "not_applicable",
+          "reason": "The input is a regular oriented diagram, so tangencies and triple points are excluded."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "The statement concerns closed knot components and a diagramwise push-off, not path endpoints."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Step 3.1 identifies the ACω use only through the embedded spatial push-off supplier; the projection count itself is finite."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The lemma states an exact crossing count, not an equivalence."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The lemma states an exact crossing count, not an equivalence."
+        }
+      ]
+    }
+  }
+}

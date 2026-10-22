@@ -1,0 +1,1 @@
+ONE focused notation repair following carrier first source-binding check: replaced the literal tab-plus-o in the mapping-torus gluing-map notation by the literal LaTeX command backslash-to. No other proof or Statement change. Full corrected theorem snapshot is adjacent. Original source-qualified first freeze remains preserved.

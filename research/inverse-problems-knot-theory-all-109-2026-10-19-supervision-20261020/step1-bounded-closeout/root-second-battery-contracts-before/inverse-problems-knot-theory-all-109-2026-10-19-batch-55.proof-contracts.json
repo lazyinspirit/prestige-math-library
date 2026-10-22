@@ -1,0 +1,1282 @@
+{
+  "version": 1,
+  "scope": [
+    "def-ip-discrete-linear-input-state-output-experiment",
+    "alg-ip-exact-block-hankel-realization",
+    "thm-ip-finite-observability-identifies-initial-state",
+    "thm-ip-state-similarity-preserves-input-output-data",
+    "thm-ip-hankel-realization-recovers-controllable-observable-system",
+    "cex-ip-continuous-time-frequency-aliasing",
+    "ex-ip-unobservable-state-mode",
+    "ex-ip-similar-state-space-realizations-same-data",
+    "ex-ip-forward-euler-observation-model-error",
+    "ex-ip-small-hankel-singular-value-amplifies-realization-perturbation"
+  ],
+  "contracts": {
+    "def-ip-discrete-linear-input-state-output-experiment": {
+      "citations": [],
+      "derivations": [],
+      "routine_steps": [],
+      "finite_checks": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "Definition: at q=1 the input index range 0 <= k < q-1 is empty."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Definition: d=0 is explicitly included with empty matrix shapes and a singleton state space."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Definition: q=1 gives one output sample and an empty input list."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Definition: the d=0 convention assigns the unique zero state and empty matrices."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Definition: output indices include k=0 and k=q-1; the last transition input is k=q-2."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Definition: only finite real vectors and matrices are specified; no choice principle is used."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "This item defines an experiment and states no if-and-only-if claim."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "This item defines an experiment and states no if-and-only-if claim."
+        }
+      ]
+    },
+    "alg-ip-exact-block-hankel-realization": {
+      "citations": [],
+      "derivations": [],
+      "routine_steps": [],
+      "finite_checks": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "Definition: the d=0 branch supplies empty factors and empty output matrices."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Definition: rank zero is handled by the explicit empty-factorization branch."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Definition: q=1 uses H0=M0 and H1=M1."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Definition: a rank mismatch returns inconsistent-rank-data and a failed exact operation returns failed-solve."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Definition: H1's last block uses M_{2q-1}, which is included in the input list."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Definition: Countable Choice is declared as the inherited SVD hypothesis; no full AC or DC is assumed."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "This item defines a procedure and states no if-and-only-if theorem."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "This item defines a procedure and states no if-and-only-if theorem."
+        }
+      ]
+    },
+    "thm-ip-finite-observability-identifies-initial-state": {
+      "citations": [
+        {
+          "fact": "A1",
+          "source": "def-countable-choice",
+          "source_section": "Definition",
+          "quote": "The **Axiom of Countable Choice**, written $\\mathrm{AC}_\\omega$, is the following statement.",
+          "uses": [
+            "1.2"
+          ]
+        },
+        {
+          "fact": "F1",
+          "source": "def-ip-discrete-linear-input-state-output-experiment",
+          "source_section": "Definition",
+          "quote": "The states are defined by $$x_{k+1}=Ax_k+Bu_k\\qquad(0\\le k<q-1),$$ and the exact sampled outputs at times $kh$ are $y_k=Cx_k$ for $0\\le k<q$.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "thm-matrix-multiplication-laws",
+          "source_section": "Statement",
+          "quote": "Matrix multiplication over a field is associative and unital, distributes over entrywise addition on both sides, and is compatible with scalar multiplication.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "def-rank-and-nullity",
+          "source_section": "Definition",
+          "quote": "Its **nullity** and **rank** are $$\\operatorname{nullity}T:=\\dim_F(\\ker T),\\qquad \\operatorname{rank}T:=\\dim_F(\\operatorname{im}T).$$",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "thm-rank-nullity",
+          "source_section": "Statement",
+          "quote": "Then $$\\dim_F V=\\operatorname{nullity}T+\\operatorname{rank}T.$$",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "thm-singular-value-decomposition",
+          "source_section": "Statement",
+          "quote": "Then there exist orthonormal bases $(e_1,\\dots,e_n)$ of $V$ and $(f_1,\\dots,f_m)$ of $W$, together with singular values",
+          "uses": [
+            "1.2"
+          ]
+        },
+        {
+          "fact": "F6",
+          "source": "cor-rank-equals-number-of-nonzero-singular-values",
+          "source_section": "Statement",
+          "quote": "Then $\\operatorname{rank} T$ equals the number of positive singular values of $T$.",
+          "uses": [
+            "1.2"
+          ]
+        },
+        {
+          "fact": "F7",
+          "source": "def-moore-penrose-pseudoinverse",
+          "source_section": "Definition",
+          "quote": "A matrix $B\\in M_{n\\times m}(\\mathbb F)$ is a **Moore--Penrose pseudoinverse** of $A$ when",
+          "uses": [
+            "2.2"
+          ]
+        },
+        {
+          "fact": "F8",
+          "source": "thm-moore-penrose-pseudoinverse-exists-and-is-unique",
+          "source_section": "Statement",
+          "quote": "there exists a unique matrix $A^+\\in M_{n\\times m}(\\mathbb F)$ satisfying the four Penrose equations",
+          "uses": [
+            "2.2"
+          ]
+        },
+        {
+          "fact": "F9",
+          "source": "prop-full-column-rank-pseudoinverse-formula",
+          "source_section": "Statement",
+          "quote": "$A^+=(A^*A)^{-1}A^*.",
+          "uses": [
+            "2.2"
+          ]
+        },
+        {
+          "fact": "F10",
+          "source": "thm-aa-plus-and-a-plus-a-are-orthogonal-projections-onto-the-image-spaces",
+          "source_section": "Statement",
+          "quote": "Then $AA^+$ is the orthogonal projection onto $\\operatorname{im}A$, and $A^+A$ is the orthogonal projection onto $\\operatorname{im}A^*$. ",
+          "uses": [
+            "2.2"
+          ]
+        },
+        {
+          "fact": "F11",
+          "source": "thm-a-plus-b-is-the-unique-minimum-norm-least-squares-solution",
+          "source_section": "Statement",
+          "quote": "Then $A^+b$ is a least-squares solution of $Ax=b$, and among all least-squares solutions it is the unique one of minimum Euclidean norm.",
+          "uses": [
+            "2.2"
+          ]
+        },
+        {
+          "fact": "F12",
+          "source": "lem-pythagorean-theorem-and-finite-orthogonal-sums",
+          "source_section": "Statement",
+          "quote": "\\Bigl\\|\\sum_{j=1}^{n}x_j\\Bigr\\|^2=\\sum_{j=1}^{n}\\|x_j\\|^2",
+          "uses": [
+            "2.2"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "expand-forced-response",
+          "claim": "The known-input forced response separates from the unknown initial state, giving z=O_q x_0.",
+          "step": "1.1",
+          "inputs": [
+            "given",
+            "F1",
+            "F2",
+            "algebra"
+          ]
+        },
+        {
+          "id": "least-singular-value-lower-bound",
+          "claim": "The SVD bounds ||O_q w|| below by sigma_min(O_q)||w|| under full column rank.",
+          "step": "1.2",
+          "inputs": [
+            "given",
+            "A1",
+            "F5",
+            "F6",
+            "algebra"
+          ]
+        },
+        {
+          "id": "kernel-rank-injectivity",
+          "claim": "Equality of output stacks is equivalent to a kernel vector, and rank-nullity gives the iff criterion.",
+          "step": "2.1",
+          "inputs": [
+            "given",
+            "F3",
+            "F4",
+            "step 1.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "projected-error-bound",
+          "claim": "The least-squares error is O_q^+ e and its image is an orthogonal projection of e.",
+          "step": "2.2",
+          "inputs": [
+            "given",
+            "F7",
+            "F8",
+            "F9",
+            "F10",
+            "F11",
+            "F12",
+            "step 1.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "divide-by-positive-singular-value",
+          "claim": "Combining the sensitivity inequalities and injectivity criterion proves the stated conclusions.",
+          "step": "3.1",
+          "inputs": [
+            "step 1.2",
+            "step 2.2",
+            "step 2.1",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "finite_checks": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "Statement and step 2.1 cover the zero-dimensional state space; q=1 has an empty input list in step 1.1."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Step 2.1 verifies d=0, where rank O_q=0 and the state map is injective."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Step 1.1 specializes to q=1 with f_0=0 and O_1=C."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Step 2.1 treats rank-deficient and full-column-rank cases through the kernel."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Step 1.1 includes the final observed sample k=q-1 and forced response from inputs through q-2."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Step 1.2 uses Countable Choice only through the finite SVD supplier; the kernel/rank argument in step 2.1 is choice-free."
+        },
+        {
+          "case": "iff-forward",
+          "status": "checked",
+          "evidence": "Step 2.1 proves injectivity implies ker O_q={0} and then rank O_q=d."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "checked",
+          "evidence": "Step 2.1 proves rank O_q=d implies ker O_q={0} and hence injectivity."
+        }
+      ]
+    },
+    "thm-ip-state-similarity-preserves-input-output-data": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-ip-discrete-linear-input-state-output-experiment",
+          "source_section": "Definition",
+          "quote": "The states are defined by $$x_{k+1}=Ax_k+Bu_k\\qquad(0\\le k<q-1),$$ and the exact sampled outputs at times $kh$ are $y_k=Cx_k$ for $0\\le k<q$.",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "def-invertible-matrix-and-general-linear-group",
+          "source_section": "Definition",
+          "quote": "A matrix $A\\in M_n(F)$ is **invertible** when there is a matrix $B\\in M_n(F)$ such that",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "thm-matrix-multiplication-laws",
+          "source_section": "Statement",
+          "quote": "Matrix multiplication over a field is associative and unital, distributes over entrywise addition on both sides, and is compatible with scalar multiplication.",
+          "uses": [
+            "1.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "induct-transformed-state",
+          "claim": "Induction proves xhat_k=T^{-1}x_k for every sample.",
+          "step": "1.1",
+          "inputs": [
+            "given",
+            "F1",
+            "F2",
+            "F3",
+            "algebra"
+          ]
+        },
+        {
+          "id": "compare-outputs",
+          "claim": "The transformed output equation and the two-sided inverse identity give yhat_k=y_k.",
+          "step": "2.1",
+          "inputs": [
+            "given",
+            "F1",
+            "F2",
+            "step 1.1",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "finite_checks": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "Step 1.1 applies to q=1, when the input list is empty."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Step 1.1 remains valid for d=0 using the unique empty inverse and empty state."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Step 2.1 verifies equality at every sample, including the single sample q=1."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Step 1.1 uses only the stated invertibility of T, without requiring A to be invertible."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Step 2.1 proves output equality through the last sample k=q-1."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "The finite induction and matrix algebra use no choice principle."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The theorem is an implication about coordinate changes, not an if-and-only-if claim."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The theorem is an implication about coordinate changes, not an if-and-only-if claim."
+        }
+      ]
+    },
+    "thm-ip-hankel-realization-recovers-controllable-observable-system": {
+      "citations": [
+        {
+          "fact": "A1",
+          "source": "def-countable-choice",
+          "source_section": "Definition",
+          "quote": "The **Axiom of Countable Choice**, written $\\mathrm{AC}_\\omega$, is the following statement.",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F1",
+          "source": "def-ip-discrete-linear-input-state-output-experiment",
+          "source_section": "Definition",
+          "quote": "the **Markov parameters** are $$M_k:=CA^kB",
+          "uses": [
+            "1.1",
+            "1.2",
+            "6.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "thm-matrix-multiplication-laws",
+          "source_section": "Statement",
+          "quote": "Matrix multiplication over a field is associative and unital, distributes over entrywise addition on both sides, and is compatible with scalar multiplication.",
+          "uses": [
+            "1.2",
+            "4.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "def-rank-and-nullity",
+          "source_section": "Definition",
+          "quote": "Its **nullity** and **rank** are $$\\operatorname{nullity}T:=\\dim_F(\\ker T),\\qquad \\operatorname{rank}T:=\\dim_F(\\operatorname{im}T).$$",
+          "uses": [
+            "1.2",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "thm-rank-nullity",
+          "source_section": "Statement",
+          "quote": "Then $$\\dim_F V=\\operatorname{nullity}T+\\operatorname{rank}T.$$",
+          "uses": [
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "alg-ip-exact-block-hankel-realization",
+          "source_section": "Definition",
+          "quote": "Set $\\widehat A:=\\widehat O^+H_1\\widehat R^+$, let $\\widehat B$ be the first $m$ columns of $\\widehat R$, and let $\\widehat C$ be the first $p$ rows of $\\widehat O$.",
+          "uses": [
+            "1.1",
+            "2.1",
+            "3.1",
+            "4.1",
+            "5.1"
+          ]
+        },
+        {
+          "fact": "F6",
+          "source": "thm-singular-value-decomposition",
+          "source_section": "Statement",
+          "quote": "Then there exist orthonormal bases $(e_1,\\dots,e_n)$ of $V$ and $(f_1,\\dots,f_m)$ of $W$, together with singular values",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F6",
+          "source": "thm-moore-penrose-pseudoinverse-exists-and-is-unique",
+          "source_section": "Statement",
+          "quote": "there exists a unique matrix $A^+\\in M_{n\\times m}(\\mathbb F)$ satisfying the four Penrose equations",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F7",
+          "source": "def-moore-penrose-pseudoinverse",
+          "source_section": "Definition",
+          "quote": "A matrix $B\\in M_{n\\times m}(\\mathbb F)$ is a **Moore--Penrose pseudoinverse** of $A$ when",
+          "uses": [
+            "4.1"
+          ]
+        },
+        {
+          "fact": "F8",
+          "source": "def-invertible-matrix-and-general-linear-group",
+          "source_section": "Definition",
+          "quote": "A matrix $A\\in M_n(F)$ is **invertible** when there is a matrix $B\\in M_n(F)$ such that $$AB=I_n=BA.$$",
+          "uses": [
+            "1.1",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F9",
+          "source": "thm-ip-state-similarity-preserves-input-output-data",
+          "source_section": "Statement",
+          "quote": "The experiment with $(\\widehat A,\\widehat B,\\widehat C,\\widehat x_0)$ and the same inputs has the same output $y_k$ at every sample $0\\le k<q$.",
+          "uses": [
+            "6.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "zero-dimensional-boundary",
+          "claim": "When d=0, zero Markov data and empty factors give the unique zero-dimensional realization.",
+          "step": "1.1",
+          "inputs": [
+            "given",
+            "F1",
+            "F5",
+            "F6",
+            "F8",
+            "algebra"
+          ]
+        },
+        {
+          "id": "hankel-factor-identities",
+          "claim": "Indexing the Markov blocks proves H0=OR and H1=OAR, and full ranks give rank H0=d.",
+          "step": "1.2",
+          "inputs": [
+            "given",
+            "F1",
+            "F2",
+            "F3",
+            "algebra"
+          ]
+        },
+        {
+          "id": "exact-rank-and-column-space",
+          "claim": "The exact rank test accepts d; the SVD factors have full rank, so the factored and original observability spaces agree.",
+          "step": "2.1",
+          "inputs": [
+            "given",
+            "A1",
+            "F5",
+            "F6",
+            "step 1.2"
+          ]
+        },
+        {
+          "id": "basis-change-between-factors",
+          "claim": "Equal column spaces give an invertible T and the corresponding Rhat relation.",
+          "step": "3.1",
+          "inputs": [
+            "given",
+            "F3",
+            "F4",
+            "F5",
+            "F8",
+            "step 2.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "factor-matrix-transition",
+          "claim": "The pseudoinverse left and right identities yield Ahat=T^{-1}AT.",
+          "step": "4.1",
+          "inputs": [
+            "F2",
+            "F5",
+            "F7",
+            "step 1.2",
+            "step 3.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "extract-input-output-blocks",
+          "claim": "The first blocks yield Bhat=T^{-1}B and Chat=CT.",
+          "step": "5.1",
+          "inputs": [
+            "F5",
+            "step 3.1",
+            "step 4.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "input-output-conclusion",
+          "claim": "The similarity supplier gives the same output sequence and hence every Markov parameter.",
+          "step": "6.1",
+          "inputs": [
+            "F1",
+            "F9",
+            "step 5.1",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "finite_checks": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The theorem assumes q>=1 and m,p>=1, so there is no empty data horizon."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Step 1.1 handles d=0 and the empty SVD factors explicitly."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Step 1.2 applies to q=1 and blocks M0,M1."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Step 2.1 proves the rank d data pass the exact test and the factored observability image agrees; outside that hypothesis the algorithm reports inconsistent-rank-data."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Step 1.2 includes the final block M_{2q-1} in H1."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Step 2.1 uses Countable Choice only for the finite SVD interface."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The theorem is a sufficient exact-realization result under full-rank assumptions, not an if-and-only-if claim."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The theorem is a sufficient exact-realization result under full-rank assumptions, not an if-and-only-if claim."
+        }
+      ]
+    },
+    "cex-ip-continuous-time-frequency-aliasing": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-ip-discrete-linear-input-state-output-experiment",
+          "source_section": "Definition",
+          "quote": "Let $d\\ge0$, $m,p\\ge1$, and $q\\ge1$ be integers, and let $h>0$ be a fixed sampling interval.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "thm-sine-cosine-zero-sets-and-fundamental-period",
+          "source_section": "Statement",
+          "quote": "Both sine and cosine have period $2\\pi$",
+          "uses": [
+            "1.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "construct-aliased-frequencies",
+          "claim": "The frequencies 0 and 2pi/h are distinct but yield the same cosine value at every sample kh.",
+          "step": "1.1",
+          "inputs": [
+            "given",
+            "F1",
+            "F2",
+            "algebra"
+          ]
+        },
+        {
+          "id": "refute-frequency-uniqueness",
+          "claim": "Identical complete data for distinct frequencies refute the uniqueness claim.",
+          "step": "2.1",
+          "inputs": [
+            "given",
+            "step 1.1",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "finite_checks": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The statement concerns the entire nonempty sample sequence indexed by N_0."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Step 1.1 includes the zero frequency omega_0=0."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Step 1.1 gives equal outputs already at the first sample k=0."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Step 1.1 compares two distinct frequencies whose complete sampled sequences agree."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "The counterexample uses all k in N_0 and has no finite endpoint."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "The periodicity calculation is finite and uses no choice principle."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The item refutes a uniqueness statement and is not an if-and-only-if result."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The item refutes a uniqueness statement and is not an if-and-only-if result."
+        }
+      ]
+    },
+    "ex-ip-unobservable-state-mode": {
+      "citations": [
+        {
+          "fact": "A1",
+          "source": "def-countable-choice",
+          "source_section": "Definition",
+          "quote": "The **Axiom of Countable Choice**, written $\\mathrm{AC}_\\omega$, is the following statement.",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F1",
+          "source": "def-ip-discrete-linear-input-state-output-experiment",
+          "source_section": "Definition",
+          "quote": "The states are defined by $$x_{k+1}=Ax_k+Bu_k\\qquad(0\\le k<q-1),$$ and the exact sampled outputs at times $kh$ are $y_k=Cx_k$ for $0\\le k<q$.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source_section": "Statement",
+          "quote": "The map $x_0\\mapsto z$ is injective if and only if $\\operatorname{rank}O_q=d$.",
+          "uses": [
+            "2.1"
+          ],
+          "source": "thm-ip-finite-observability-identifies-initial-state"
+        }
+      ],
+      "derivations": [
+        {
+          "id": "compute-unobservable-mode",
+          "claim": "The second basis state evolves by 2^k and is annihilated by C, so the outputs coincide.",
+          "step": "1.1",
+          "inputs": [
+            "given",
+            "F1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "check-observability-rank",
+          "claim": "The observability rows are all [1,0], so rank is 1<2 and the theorem confirms noninjectivity.",
+          "step": "2.1",
+          "inputs": [
+            "given",
+            "A1",
+            "F2",
+            "step 1.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "interpret-data-ambiguity",
+          "claim": "Distinct initial states with equal data rule out exact state recovery from this experiment.",
+          "step": "3.1",
+          "inputs": [
+            "step 1.1",
+            "step 2.1"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "finite_checks": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The example assumes q>=1 and has no zero-length observation horizon."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Step 1.1 computes the zero output sequence for both initial states."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Step 1.1 applies at k=0, and step 2.1 covers q=1."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Step 2.1 computes rank O_q=1<2 for the unobservable mode."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Step 1.1 proves equality for every sample in the finite horizon."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Step 2.1 invokes the theorem under its Countable Choice assumption; the coordinate calculation in step 1.1 uses no choice."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The example illustrates nonidentifiability and states no if-and-only-if result."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The example illustrates nonidentifiability and states no if-and-only-if result."
+        }
+      ]
+    },
+    "ex-ip-similar-state-space-realizations-same-data": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-ip-discrete-linear-input-state-output-experiment",
+          "source_section": "Definition",
+          "quote": "The states are defined by $$x_{k+1}=Ax_k+Bu_k\\qquad(0\\le k<q-1),$$ and the exact sampled outputs at times $kh$ are $y_k=Cx_k$ for $0\\le k<q$.",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "thm-ip-state-similarity-preserves-input-output-data",
+          "source_section": "Statement",
+          "quote": "For any invertible $T\\in M_d(\\mathbb R)$ define",
+          "uses": [
+            "2.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "verify-coordinate-change",
+          "claim": "The displayed T and T^{-1} multiply to I and give the listed transformed matrices.",
+          "step": "1.1",
+          "inputs": [
+            "given",
+            "algebra"
+          ]
+        },
+        {
+          "id": "apply-similarity-theorem",
+          "claim": "The verified coordinate transformation preserves the output sequence for all common inputs.",
+          "step": "2.1",
+          "inputs": [
+            "F1",
+            "F2",
+            "step 1.1"
+          ]
+        },
+        {
+          "id": "conclude-distinct-models",
+          "claim": "The matrices differ while all their common-input data agree.",
+          "step": "3.1",
+          "inputs": [
+            "step 1.1",
+            "step 2.1"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "finite_checks": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "Step 2.1 applies for q=1 with an empty input list."
+        },
+        {
+          "case": "zero",
+          "status": "not_applicable",
+          "reason": "The example fixes state dimension d=2 and does not use a zero state space."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Step 2.1 proves equality including the single-sample horizon."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Step 1.1 verifies a nonidentity invertible coordinate change with distinct A and C matrices."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Step 2.1 gives equality through every finite-horizon endpoint."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "The explicit matrix calculation and similarity theorem are choice-free."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The example is a construction, not an if-and-only-if result."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The example is a construction, not an if-and-only-if result."
+        }
+      ]
+    },
+    "ex-ip-forward-euler-observation-model-error": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "lem-derivative-of-a-power",
+          "source_section": "Statement",
+          "quote": "For $n \\ge 1$ the function $p_n : \\mathbb{R} \\to \\mathbb{R}$, $p_n(x) = x^{n}$, is differentiable at every $c \\in \\mathbb{R}$, and",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "prop-standard-coordinate-inner-products",
+          "source_section": "Statement",
+          "quote": "For $x,y\\in\\mathbb R^n$ and $z,w\\in\\mathbb C^n$, the formulas",
+          "uses": [
+            "1.2"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "thm-reals-cauchy-complete",
+          "source_section": "Statement",
+          "quote": "Every Cauchy sequence of real numbers",
+          "uses": [
+            "1.2"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "def-hilbert-space",
+          "source_section": "Definition",
+          "quote": "A **real Hilbert space** is a real inner-product space",
+          "uses": [
+            "1.2"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "def-bounded-linear-operator",
+          "source_section": "Definition",
+          "quote": "is a **bounded linear operator** when there is a real constant $C \\ge 0$ such that",
+          "uses": [
+            "1.2"
+          ]
+        },
+        {
+          "fact": "F6",
+          "source": "lem-finite-rank-operators-are-compact",
+          "source_section": "Statement",
+          "quote": "Then $T$ is compact",
+          "uses": [
+            "1.2"
+          ]
+        },
+        {
+          "fact": "F7",
+          "source": "def-ip-error-budget-for-computed-inversion",
+          "source_section": "Definition",
+          "quote": "For a truth $x^\\dagger\\in X$, data perturbation $e\\in Y$, and $\\delta\\ge0$ with $\\|e\\|\\le\\delta$, put",
+          "uses": [
+            "1.2",
+            "3.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "solve-ode-endpoint-map",
+          "claim": "The polynomial trajectory solves the ODE and gives the exact endpoint map.",
+          "step": "1.1",
+          "inputs": [
+            "given",
+            "F1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "verify-error-budget-hypotheses",
+          "claim": "The scalar real spaces are Hilbert, the two maps meet the boundedness and compact-range conditions, and the adjoints and shifted normal maps are explicit.",
+          "step": "1.2",
+          "inputs": [
+            "given",
+            "F2",
+            "F3",
+            "F4",
+            "F5",
+            "F6",
+            "F7",
+            "algebra"
+          ]
+        },
+        {
+          "id": "compute-euler-endpoint",
+          "claim": "The single Euler step gives the zero discretized observation map.",
+          "step": "2.1",
+          "inputs": [
+            "given",
+            "step 1.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "identify-pre-inversion-error",
+          "claim": "Substituting the truth and zero noise gives d_h=1/2.",
+          "step": "3.1",
+          "inputs": [
+            "given",
+            "F7",
+            "step 1.1",
+            "step 2.1",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "finite_checks": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "Step 3.1 uses zero observation error e=0."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Steps 1.2 and 2.1 establish the zero Euler map A_h and its zero-dimensional range."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Step 2.1 computes exactly one forward-Euler step of size h=1."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Step 1.2 verifies A_h=0 is bounded with finite-dimensional range and the shifted normal map is invertible."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Steps 1.1 and 2.1 compare exact and numerical outputs at t=1 from the common initial value at t=0."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "The scalar ODE solution and finite-dimensional operator checks use no choice principle."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The example is a concrete error computation, not an if-and-only-if result."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The example is a concrete error computation, not an if-and-only-if result."
+        }
+      ]
+    },
+    "ex-ip-small-hankel-singular-value-amplifies-realization-perturbation": {
+      "citations": [
+        {
+          "fact": "A1",
+          "source": "def-countable-choice",
+          "source_section": "Definition",
+          "quote": "The **Axiom of Countable Choice**, written $\\mathrm{AC}_\\omega$, is the following statement.",
+          "uses": [
+            "1.1",
+            "1.2"
+          ]
+        },
+        {
+          "fact": "F1",
+          "source": "def-ip-discrete-linear-input-state-output-experiment",
+          "source_section": "Definition",
+          "quote": "the **Markov parameters** are $$M_k:=CA^kB",
+          "uses": [
+            "1.1",
+            "1.2"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "def-singular-values-of-an-endomorphism",
+          "source_section": "Definition",
+          "quote": "The **singular values** of $T$ are the eigenvalues of $|T|$, listed with multiplicity in weakly decreasing order.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "alg-ip-exact-block-hankel-realization",
+          "source_section": "Definition",
+          "quote": "Form the $q$-by-$q$ block Hankel matrices",
+          "uses": [
+            "1.1",
+            "1.2"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "thm-ip-hankel-realization-recovers-controllable-observable-system",
+          "source_section": "Statement",
+          "quote": "Under the exact-operation convention of the block-Hankel realization algorithm, the algorithm returns `success` with matrices $(\\widehat A,\\widehat B,\\widehat C)$, and there is an invertible $T\\in M_d(\\mathbb R)$ such that",
+          "uses": [
+            "1.1",
+            "1.2"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "exact-small-hankel-system",
+          "claim": "The original scalar system has H0=epsilon, H1=0, singular value epsilon, and full finite ranks.",
+          "step": "1.1",
+          "inputs": [
+            "given",
+            "A1",
+            "F1",
+            "F2",
+            "F3",
+            "F4",
+            "algebra"
+          ]
+        },
+        {
+          "id": "perturbed-data-alternate-system",
+          "claim": "The perturbed Markov pair is generated by a scalar system with transition 1/sqrt(epsilon), so the exact theorem returns that value.",
+          "step": "1.2",
+          "inputs": [
+            "given",
+            "A1",
+            "F1",
+            "F3",
+            "F4",
+            "algebra"
+          ]
+        },
+        {
+          "id": "unbounded-sensitivity-sequence",
+          "claim": "Taking epsilon_n=1/n^2 makes the data perturbation vanish while the transition difference diverges.",
+          "step": "2.1",
+          "inputs": [
+            "given",
+            "step 1.1",
+            "step 1.2",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "finite_checks": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The example uses q=d=m=p=1 and two Markov parameters."
+        },
+        {
+          "case": "zero",
+          "status": "not_applicable",
+          "reason": "The premise epsilon>0 is essential; epsilon=0 would fail the full-rank hypotheses."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Step 1.1 uses the one-state, one-input, one-output horizon q=1 boundary."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Step 2.1 takes epsilon_n down to the rank-loss boundary while retaining epsilon_n>0."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Step 1.1 and step 1.2 compare the two complete q=1 Markov blocks M0 and M1."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Steps 1.1 and 1.2 use the exact theorem with its Countable Choice hypothesis."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The example is a sensitivity witness, not an if-and-only-if result."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The example is a sensitivity witness, not an if-and-only-if result."
+        }
+      ]
+    }
+  }
+}

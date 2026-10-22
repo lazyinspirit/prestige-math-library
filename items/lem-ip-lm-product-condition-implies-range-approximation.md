@@ -24,6 +24,10 @@ sources:
       url: "https://arxiv.org/pdf/2001.00617v2"
 verification:
   precheck: pending
+  judge:
+    model: "gpt-6-luna"
+    verdict: pass
+    date: 2026-10-22
 ---
 
 ## Statement

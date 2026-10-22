@@ -8,6 +8,7 @@ pipeline_run: inverse-problems-knot-theory-all-109-2026-10-19
 dependency_level: 6
 deps:
   - def-integral-half-solutions-strebel-and-l2-signatures
+  - thm-topological-finite-projective-l2-duality-and-boundary-gluing
   - def-maximal-abelian-cover-alexander-module
   - def-poly-torsion-free-abelian-group
   - thm-ptfa-group-rings-are-ore-domains
@@ -27,7 +28,7 @@ sources:
       locator: §2.1 and Theorem 2.13, higher-order Blanchfield form
     - title: Jae Choon Cha, “Amenable L²-Theoretic Methods and Knot Concordance”
       url: https://arxiv.org/pdf/1010.1058
-      locator: Definition 3.1, signature defect conventions
+      locator: "§2.2, printed p.5 (1010.1058v2), signature-defect convention; bounding data are supplied here and independence remains a separate theorem"
 ---
 
 ## Definition
@@ -48,6 +49,8 @@ For a homomorphism φ:π₁(M)→G and an extension ψ:π₁(W)→G over a compa
 
 [[def-integral-half-solutions-strebel-and-l2-signatures|Integral solutions, von Neumann dimension, L²-signature and signature defect]]
 
+[[thm-topological-finite-projective-l2-duality-and-boundary-gluing|Finite-projective signatures for arbitrary discrete coefficient groups]]
+
 [[def-poly-torsion-free-abelian-group|PTFA group]]
 
 [[thm-ptfa-group-rings-are-ore-domains|Rational PTFA fraction fields]]
@@ -56,4 +59,8 @@ For a homomorphism φ:π₁(M)→G and an extension ψ:π₁(W)→G over a compa
 
 [ COT, Theorem 2.13 and §2.1](https://arxiv.org/pdf/math/9908117)
 
-[Cha, Definition 3.1](https://arxiv.org/pdf/1010.1058)
+[Cha, §2.2, printed p.5](https://arxiv.org/pdf/1010.1058)
+
+## Coefficient-group convention
+
+In the signature-defect clause, coefficient groups are regarded as discrete, with the standing full AC convention of the signature definition. For an arbitrary target group use the finite-projective signature of [[thm-topological-finite-projective-l2-duality-and-boundary-gluing]]. Its proof 13.1 identifies this signature with that of the countable coefficient image, so it agrees with the countable-group convention in [[def-integral-half-solutions-strebel-and-l2-signatures]]. This supplies the signature used in the displayed defect without asserting bordism independence.

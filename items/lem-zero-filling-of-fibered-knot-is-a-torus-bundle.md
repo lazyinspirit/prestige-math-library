@@ -55,7 +55,7 @@ Assume the Axiom of Choice. Let $K_8$ be the standard figure-eight knot with com
 
 [F3] [[def-oriented-slope-and-knot-dehn-filling]]: with the stated peripheral basis, the integer coefficient $0$ is the unoriented slope represented by $\lambda$; ordinary filling attaches a solid torus whose meridian is that slope.
 
-[F4] [[thm-knot-exterior-homology-and-longitude]]: under AC the preferred longitude is the unique primitive boundary class that maps to zero in $H_1(E_K;\mathbb Z)$, and $(\mu,\lambda)$ is a basis.
+[F4] [[thm-knot-exterior-homology-and-longitude]]: under AC the preferred longitude is, up to sign, the unique primitive boundary class that maps to zero in $H_1(E_K;\mathbb Z)$, and $(\mu,\lambda)$ is a basis.
 
 [F5] [[lem-figure-eight-complement-punctured-torus-bundle]]: the exterior is the mapping torus of a once-punctured torus, with boundary-fixing monodromy whose capped homology matrix is $\begin{pmatrix}2&1\\1&1\end{pmatrix}$.
 

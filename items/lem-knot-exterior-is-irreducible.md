@@ -15,6 +15,11 @@ axiom_use: "Assumes countable choice only through the current draft smooth Schoe
 provenance:
   statement: literature-derived
   proof: ai-generated
+verification:
+  judge:
+    model: "gpt-6-luna"
+    verdict: pass
+    date: 2026-10-22
 sources:
   references:
     - title: "Allen Hatcher, Notes on Basic 3-Manifold Topology, Chapter 1, Theorem 1.1"

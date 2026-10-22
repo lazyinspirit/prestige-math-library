@@ -1,0 +1,92 @@
+---
+id: thm-normalized-sphere-beltrami-solutions-depend-holomorphically-on-all-bounded-coefficients
+kind: theorem
+title: Normalized sphere Beltrami solutions depend holomorphically on the full coefficient ball
+status: draft
+origin: pipeline
+pipeline_run: inverse-problems-knot-theory-all-109-2026-10-19
+deps:
+  - def-axiom-of-choice
+  - thm-choice-implies-dependent-implies-countable-choice
+  - thm-principal-beltrami-solutions-depend-holomorphically-on-bounded-coefficients
+  - thm-measurable-riemann-mapping-sphere
+  - thm-normalized-quasiconformal-compactness
+  - thm-composition-and-inverse-quasiconformal
+  - thm-one-quasiconformal-is-conformal
+  - lem-invariant-beltrami-coefficients-deform-kleinian-groups
+  - thm-cauchy-integral-formula-higher-derivatives
+  - thm-dominated-convergence
+proof_strategy: direct
+provenance:
+  statement: literature-derived
+  proof: ai-altered
+sources:
+  references:
+    - title: Michael Kapovich, Hyperbolic Manifolds and Discrete Groups
+      url: https://www.math.ucdavis.edu/~kapovich/RFG/book.pdf
+      locator: Entire Sections 7.1 and 8.7 read for Schwarzian and coefficient-deformation context; full-support holomorphy and the Banach polynomial limit are supplied locally, not imported as a global parameter theorem
+---
+
+## Statement
+
+Assume AC. Let $B$ be the complex Banach space of essentially bounded sphere Beltrami sections, identified almost everywhere with $L^\infty(\mathbb C)$ in the finite coordinate, and put $U=\{\mu\in B:\|\mu\|_\infty<1\}$. Holomorphic changes of source coordinate multiply coefficients by a fixed modulus-one factor, so this is an intrinsic complex Banach space. For $\mu\in U$ let $f^\mu$ be the unique quasiconformal sphere solution fixing $0,1,\infty$.
+
+For every finite-plane compact set $K\subset\mathbb C$, the map
+$$U\longrightarrow C(K),\qquad \mu\longmapsto f^\mu|_K$$
+is complex Banach holomorphic. In particular every finite-point evaluation $\mu\mapsto f^\mu(z)$ is holomorphic. The values at the three normalization points are fixed. The corresponding assertion holds in the infinity coordinate after applying inversion in source and target. For every $0\le\kappa<1$ and finite-plane compact $K$, the finite-coordinate values are bounded uniformly on $\|\mu\|_\infty\le\kappa$, and the sphere maps and their inverses have a common modulus of continuity in the spherical metric.
+
+For integer $R\ge1$, let $\mu_R=\mathbf1_{D_R}\mu$, where $D_R=\{|z|<R\}$ in the finite chart, and let $f_R^\mu$ be its three-point-normalized solution. For every fixed $\mu\in U$, $f_R^\mu\to f^\mu$ uniformly on the sphere as $R\to\infty$. Near any $\mu_0\in U$ and for every finite-plane compact $K$, the holomorphic conclusion is given by an actual norm-convergent Taylor series of continuous homogeneous $C(K)$-valued polynomials. It does not use a Banach-space Vitali theorem.
+
+If $V$ is a fixed open sphere set and $E\subset B$ is a closed complex-linear subspace of coefficients vanishing almost everywhere on $V$, then on $E\cap U$ the maps $f^\mu$ are conformal on $V$. Their spatial derivatives of every order, and their Schwarzian in a fixed conformal source and target coordinate, depend holomorphically on $\mu$ locally uniformly on compact subsets where those coordinates are finite. The corresponding infinity-chart assertions use the fixed inverted normalization. No spatial conformality is asserted where the coefficient is nonzero.
+
+Finally, for any discrete Möbius group $\Gamma$, let $B_\Gamma\subset B$ be its closed complex-linear invariant coefficient subspace. For every $\gamma\in\Gamma$, the Möbius transformation
+$$\rho_\mu(\gamma)=f^\mu\gamma(f^\mu)^{-1}$$
+depends holomorphically on $\mu\in U\cap B_\Gamma$ as a projective matrix; near every coefficient it admits a holomorphic determinant-one matrix lift after a choice of sign at that coefficient. The representation is faithful and discrete. This is componentwise holomorphy for every group element, without a finite-generation assumption or a representation-variety manifold premise.
+
+## Statement references
+
+[[thm-principal-beltrami-solutions-depend-holomorphically-on-bounded-coefficients]]
+
+[[thm-measurable-riemann-mapping-sphere]]
+
+## Facts & Assumptions
+
+**Given:** AC, the full sphere coefficient ball, the normalized solutions and the stated compact sets and coefficient subspaces.
+
+[A1] AC supplies countable choice and the analytic compactness hypotheses. [[def-axiom-of-choice]], [[thm-choice-implies-dependent-implies-countable-choice]]
+
+[F1] Disk-supported coefficients have principal solutions $F^\nu(z)=z+O(1/z)$, holomorphic in the coefficient in point evaluations and locally uniform finite-coordinate function norms. Their formula is the convergent principal Cauchy–Beurling inverse; normalization by affine postcomposition is allowed. [[thm-principal-beltrami-solutions-depend-holomorphically-on-bounded-coefficients]]
+
+[F2] Every bounded sphere coefficient of strict norm below one has a unique $0,1,\infty$-normalized quasiconformal solution, unique up to Möbius maps before normalization. Its maximal dilatation is at most $(1+\kappa)/(1-\kappa)$ under norm bound $\kappa$. [[thm-measurable-riemann-mapping-sphere]]
+
+[F3] Normalized sphere maps with a common quasiconformal constant, and their inverses, are uniformly equicontinuous. Every such sequence has a uniformly convergent subsequence with a normalized quasiconformal homeomorphic limit. [[thm-normalized-quasiconformal-compactness]]
+
+[F4] The quasiconformal composition and inverse coefficient formulas hold with null-set transport. Equal coefficients cancel locally to a biholomorphism. Invariant sphere coefficients give discrete faithful Möbius conjugacies. [[thm-composition-and-inverse-quasiconformal]], [[thm-one-quasiconformal-is-conformal]], [[lem-invariant-beltrami-coefficients-deform-kleinian-groups]]
+
+[F5] Cauchy's integral formulas and all higher spatial derivatives hold on interior circles; bounded dominated convergence applies to the scalar circle integrals used below. [[thm-cauchy-integral-formula-higher-derivatives]], [[thm-dominated-convergence]]
+
+## Proof
+
+1.1 Coefficients in the finite and infinity charts differ by a fixed smooth modulus-one multiplier under the holomorphic inversion coordinate. Values at infinity itself are null and immaterial. Thus restriction to the finite plane identifies $B$ isometrically and complex-linearly with $L^\infty(\mathbb C)$, and the truncations $T_R:\mu\mapsto\mathbf1_{D_R}\mu$ are bounded complex-linear operators of norm at most one into their disk-supported spaces. Let $F_R^\mu$ be the principal solution supplied by [F1]. Its normalized solution is $f_R^\mu(z)=(F_R^\mu(z)-F_R^\mu(0))/(F_R^\mu(1)-F_R^\mu(0))$. The denominator never vanishes, since $F_R^\mu$ is a homeomorphism. It follows from [F1], bounded linear restriction and scalar inversion that $\mu\mapsto f_R^\mu|_K$ is holomorphic into $C(K)$ for every finite compact $K$, on the entire open unit ball. It fixes $0,1,\infty$, has coefficient $\mu_R$, and by [F2] belongs to the normalized family with constant $(1+\kappa)/(1-\kappa)$ on $\|\mu\|_\infty\le\kappa<1$. [A1, F1, F2, given, construct, algebra]
+
+2.1 If $K$ is empty, its compact-function space is the zero space and its assertions are immediate. Hence assume $K$ nonempty. There is a uniform finite-coordinate bound on each compact $K\subset\mathbb C$, for all $f_R^\mu$ and all full solutions $f^\mu$ with norm at most $\kappa<1$. Indeed $K$ has positive minimum spherical distance $a$ from infinity. By inverse equicontinuity in [F3], choose $b>0$ so that spherical distance less than $b$ between two target points forces distance less than $a/2$ between their inverse images, uniformly for this normalized family. Since each map fixes infinity, its value on $K$ must have spherical distance at least $b$ from infinity. This is exactly a uniform bound $|f(z)|\le M_K$ in the finite coordinate. On that bounded target set spherical and Euclidean metrics are uniformly comparable. Therefore [F3] also gives uniform Euclidean equicontinuity of the restrictions on compact finite source sets. The identical normalization of all inverse maps supplies the asserted common spherical continuity modulus as well. [F2, F3, step 1.1, given, construct, algebra]
+
+3.1 For each fixed $\mu$, the truncation maps converge to the actual full solution, not just to a topological candidate. Any subsequence has by [F3] a further subsequence converging uniformly on the sphere to a normalized quasiconformal homeomorphism $F$. Fix the existing full solution $f^\mu$ from [F2]. On $f^\mu(D_R)$ the composition $H_R=f_R^\mu(f^\mu)^{-1}$ is biholomorphic, since its two factors have equal source coefficient $\mu$ on $D_R$, by [F4]. These domains exhaust the finite plane: $f^\mu$ fixes infinity and is a sphere homeomorphism. The compositions converge uniformly on the sphere to $H=F(f^\mu)^{-1}$. On every compact finite patch the convergence is Euclidean uniform by step 2.1 and the fixed coordinate images, and $H_R$ is holomorphic there for all sufficiently large $R$. The spatial Cauchy formula [F5] passes to the limit on every small circle, making $H$ holomorphic on the whole finite plane. It is globally quasiconformal by [F4], and hence has coefficient zero almost everywhere on the sphere; the single infinity point causes no exception of positive area. Uniqueness in [F2] makes it Möbius, and its three fixed normalization points make it identity. Thus $F=f^\mu$. If the full truncation sequence did not converge uniformly, a subsequence bounded away from this unique limit would have a compactness subsequence just shown to converge to it, a contradiction. Therefore $f_R^\mu\to f^\mu$ uniformly for every fixed coefficient. [F2, F3, F4, F5, step 1.1, step 2.1, construct, algebra]
+
+3.2 We now prove the required holomorphic limit assertion rather than invoking an infinite-dimensional convergence theorem. Fix $\mu_0\in U$, choose $\kappa<1$ and $r>0$ with $\|\mu_0\|_\infty+r<\kappa$, and fix a finite compact $K$. Write $G_R(\nu)=f_R^{\mu_0+\nu}|_K$ for $\|\nu\|_\infty<r$. By steps 1.1 and 2.1 it is holomorphic into $C(K)$ and uniformly bounded by $M_K$ on the closed radius-$r$ coefficient ball. Let $P_{n,R}$ be its degree-$n$ homogeneous Taylor polynomial at zero. Cauchy's formula on each complex line gives $\|P_{n,R}(\nu)\|_{C(K)}\le M_K\|\nu\|_\infty^n/r^n$. Explicitly, for $\nu\ne0$, its scalar evaluation at $z\in K$ is $(\|\nu\|_\infty/r)^n(2\pi)^{-1}\int_0^{2\pi}f_R^{\mu_0+(r/\|\nu\|_\infty)e^{it}\nu}(z)e^{-int}\,dt$. This is the coefficient formula for the one-variable Taylor series along that line; the polynomial property follows from the holomorphic map already proved in step 1.1. The same estimates give, for $\|\nu\|_\infty\le\theta r$, $0<\theta<1$, the uniform tail bound $\|G_R(\nu)-\sum_{n=0}^N P_{n,R}(\nu)\|_{C(K)}\le M_K\theta^{N+1}/(1-\theta)$. [F5, step 1.1, step 2.1, construct, algebra]
+
+4.1 For each fixed $n,\nu,z$, step 3.1 gives convergence of the integrand in step 3.2 at every circle parameter. The integrands are bounded by $M_K$, so dominated convergence [F5] gives a limit $P_n(\nu;z)$. For $\nu=0$ use the constant term $f^{\mu_0}(z)$ when $n=0$ and zero otherwise. This scalar circle integral also shows that $z\mapsto P_n(\nu;z)$ is continuous on $K$: the maps in the integral have the common finite-coordinate equicontinuity from step 2.1, which passes through the integral. The integrand is measurable in the parameter as a pointwise limit of the continuous truncation integrands, so this use of the integral and dominated convergence is justified. Thus $P_n(\nu)\in C(K)$, with $\|P_n(\nu)\|_{C(K)}\le M_K\|\nu\|_\infty^n/r^n$. [F5, step 2.1, step 3.1, step 3.2, construct, algebra]
+
+5.1 The limiting functions are actual continuous homogeneous polynomials, including their multilinear structure. For $n\ge1$, let $A_{n,R}$ be the symmetric complex $n$-linear form whose diagonal is $P_{n,R}$. Its polarization formula is $A_{n,R}(\nu_1,\ldots,\nu_n)=(2^n n!)^{-1}\sum_{\varepsilon_i=\pm1}(\prod_i\varepsilon_i)P_{n,R}(\sum_i\varepsilon_i\nu_i)$. To check the formula, expand the diagonal of the $n$-linear form: the signed sum cancels every monomial in which some index occurs an even number of times, and the only surviving degree-$n$ monomials have each of the $n$ indices once, yielding $2^n n!$ identical terms. Step 4.1 lets this finite formula pass pointwise in $z$ to a form $A_n$ with values in $C(K)$. Symmetry, additivity and complex homogeneity in each argument pass to the limit of their pointwise identities, hence hold as identities in $C(K)$. The norm estimate from the same formula gives $\|A_n\|\le(n^n/n!)M_K/r^n$, first on unit arguments and then by multilinearity on arbitrary arguments. Hence $A_n$ is continuous and its diagonal is $P_n$. The sharper diagonal estimate of step 4.1 is retained. This proves the polynomial claim without presuming that a pointwise limit of arbitrary polynomials has the needed structure. [step 3.2, step 4.1, construct, algebra]
+
+6.1 For $\|\nu\|_\infty\le\theta r$, pass to the pointwise-in-$z$ limit in the tail inequality from step 3.2, using steps 3.1 and 4.1. The bound is uniform in $z$, so taking the supremum gives $\|f^{\mu_0+\nu}|_K-\sum_{n=0}^N P_n(\nu)\|_{C(K)}\le M_K\theta^{N+1}/(1-\theta)$. Thus the actual solution map equals $\sum_{n\ge0}P_n(\nu)$, with norm convergence uniform on every smaller coefficient ball. Steps 4.1 and 5.1 make these continuous complex homogeneous polynomials. This is a local Banach-holomorphic power series at every $\mu_0$, proving all the finite-compact and point-evaluation assertions. In the infinity chart let $J(z)=1/z$. Then $Jf^\mu J$ fixes $0,1,\infty$ and is the normalized solution for the fixed holomorphic pullback $J^*\mu$, a bounded complex-linear isometry on coefficient classes. Applying the same conclusion to this coefficient identifies $1/f^\mu(1/w)$ as a holomorphic compact-evaluation family in the finite $w$ chart, including its fixed value zero at $w=0$. [F2, F4, step 3.1, step 3.2, step 4.1, step 5.1, construct, algebra]
+
+7.1 Now restrict to coefficients in the fixed closed subspace vanishing on $V$. Their solutions are biholomorphic on $V$ by [F4]. On a compact subset in finite source and target coordinates, cover by finitely many discs with closure in $V$. The Cauchy derivative formula [F5] expresses every spatial derivative on a smaller disc as a bounded complex-linear operator applied to the boundary-circle function. Step 6.1 gives Banach-holomorphy of that boundary function, so every derivative depends holomorphically in the uniform compact norm. The first derivative is never zero because the map has a holomorphic inverse. At a fixed parameter its absolute value has positive minimum on a compact set; by continuity of the derivative family the same holds in a parameter neighborhood. Inverting that derivative is holomorphic there, as the convergent geometric series around its nonvanishing base value shows. Hence $Sf^\mu=(f^\mu)'''/(f^\mu)'-(3/2)((f^\mu)''/(f^\mu)')^2$ is holomorphic in parameter locally uniformly in space. For another fixed target coordinate, shrink the parameter neighborhood so its compact image avoids the target pole; fixed fractional-linear postcomposition is then holomorphic in the same compact-function norm. Fixed source coordinate changes give the other conformal charts and the infinity assertion already handled in step 6.1. This applies only on the specified coefficient-zero open set. [F4, F5, step 6.1, given, construct, algebra]
+
+8.1 For a discrete group $\Gamma$, each coefficient-invariance condition is the kernel of a bounded complex-linear difference operator on $B$: Möbius pullback preserves essential norm and multiplies by the fixed conformal phase. Thus $B_\Gamma$ is a closed complex-linear subspace. The invariant-coefficient theorem in [F4] makes $\rho_\mu(\gamma)$ Möbius and the representation discrete and faithful. Since $f^\mu$ fixes $0,1,\infty$, the images of those three points under $\rho_\mu(\gamma)$ are $f^\mu(\gamma0)$, $f^\mu(\gamma1)$ and $f^\mu(\gamma\infty)$. These are distinct and holomorphic sphere-valued functions by step 6.1; an argument equal to infinity has the constant value infinity. Near a fixed coefficient choose one fixed target Möbius coordinate $S$ making the three base values finite. Their nearby transformed values $u,v,w$ are finite holomorphic scalar functions, by the fractional-linear formula with nonvanishing denominator. The matrix $B(u,v,w)=\left(\begin{smallmatrix}w(v-u)&u(w-v)\\v-u&w-v\end{smallmatrix}\right)$ has projective values $(u,v,w)$ at $(0,1,\infty)$; its determinant is $(v-u)(w-v)(w-u)\ne0$. Thus $S^{-1}B$ represents $\rho_\mu(\gamma)$ by holomorphic projective entries. Locally choose a holomorphic square root of its nonzero determinant and divide by it. Such a square root is given explicitly by the binomial series around its base nonzero value after shrinking so the relative variation has modulus less than one. This gives the asserted local determinant-one lift with a chosen sign. The construction is for every individual $\gamma$ and needs no finite generating set or representation-variety structure. [F4, step 6.1, construct, algebra] ∎
+
+## Actual supplier reading and precise scope
+
+The complete current principal disk-supported holomorphic-dependence proof, full sphere measurable mapping proof, normalized quasiconformal compactness proof, invariant-coefficient conjugacy proof, and quasiconformal composition and conformality proofs were read. The actual four-step higher-derivative Cauchy formula and actual three-step dominated convergence proof were read in full for this argument. Kapovich Sections 7.1 and 8.7 were previously read in full from the cached primary source; no unproved full-support parameter theorem from that source is invoked.
+
+Truncation convergence is identified using local equal-coefficient cancellation with the already existing full measurable-mapping solution and the spatial Cauchy formula. The passage from these pointwise coefficient limits to full Banach holomorphy is proved by scalar circle integrals, polarization, and a uniform Taylor tail in the actual compact-function norm. The theorem establishes coefficient analyticity and componentwise representation analyticity; it assumes no Teichmüller quotient, Ahlfors–Bers parameterization or holomorphic family of inverse quasiconformal maps.

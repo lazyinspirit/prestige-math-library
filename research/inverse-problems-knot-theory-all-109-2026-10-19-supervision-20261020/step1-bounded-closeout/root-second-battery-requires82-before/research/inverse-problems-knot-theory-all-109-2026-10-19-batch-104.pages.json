@@ -1,0 +1,2141 @@
+[
+  {
+    "order": 3204,
+    "id": "normal-surface-unknot-recognition",
+    "kind": "A",
+    "category": "knot-theory",
+    "title": "Normal-surface unknot recognition",
+    "companion": "normal-surface-unknot-recognition-examples",
+    "requires": [
+      "knot-exteriors-and-peripheral-systems",
+      "planar-diagram-codes-and-knot-table-enumeration",
+      "connected-sums-and-prime-decomposition"
+    ],
+    "items": [
+      {
+        "id": "def-normal-surface-coordinate-box",
+        "kind": "definition",
+        "title": "Normal-surface coordinates and the Haken cone",
+        "deps": [],
+        "dependency_level": 0,
+        "justified_by": [],
+        "statement": "Let $M$ be a compact piecewise-linear $3$-manifold with a finite simplicial triangulation $T$ consisting of $t$ tetrahedra. A **normal arc** in a triangular face is a properly embedded arc whose endpoints lie in the interiors of two distinct edges and which cuts off the third vertex. A **normal disk** in a tetrahedron is a properly embedded disk whose boundary is a union of normal arcs, one on each face it meets, and whose disk type is one of the following: one of four **triangle types**, each cutting off one tetrahedron vertex, or one of three **quadrilateral types**, each separating one pair of opposite vertices from the other pair. Disks of the same type are parallel copies. A **normal surface** is a properly embedded piecewise-linear surface that meets every tetrahedron in a finite disjoint union of these normal disks and whose arcs match across every interior face. The empty surface is admitted for coordinate addition and has the zero vector.\n\nFor each of the seven disk types in each tetrahedron, the **normal coordinate vector** $v(S)\\in\\mathbb Z_{\\ge0}^{7t}$ records the number of disks of that type in a normal surface $S$. For an interior face shared by tetrahedra $\\Delta$ and $\\Delta'$, and for each of the three normal-arc types $\\tau$ in that face, its **face-matching equation** is the equality between the sum of coordinates of disk types in $\\Delta$ whose boundary contributes an arc of type $\\tau$ and the corresponding sum for $\\Delta'$. A disk type contributes either one such arc or none. A nonnegative integer vector is **admissible** when it satisfies all these equations and, in each tetrahedron, at most one of the three quadrilateral coordinates is nonzero. The **Haken cone** $C(T)\\subseteq\\mathbb R^{7t}$ is the set of nonnegative real vectors satisfying only the face-matching equations; it does not impose quadrilateral restrictions. A nonzero admissible integer vector is **fundamental** if it is not the sum of two nonzero admissible integer vectors. A **primitive vertex vector** is the unique nonnegative integer vector with relatively prime coordinates on a one-dimensional face (extreme ray) of $C(T)$.\n\nA standard schematic records the two disk shapes in a tetrahedron. The vertices are $A,B,C,D$; each red polygon is the intersection of a normal disk with the tetrahedron boundary.\n\n~~~tikz\n\\begin{tikzpicture}[scale=0.9, every node/.style={font=\\small}]\n\\coordinate (A) at (0,0); \\coordinate (B) at (2.7,0); \\coordinate (C) at (1.35,2.2); \\coordinate (D) at (1.45,0.95);\n\\draw (A)--(B)--(C)--cycle; \\draw (A)--(D)--(B); \\draw (C)--(D);\n\\node[below left] at (A) {$A$}; \\node[below right] at (B) {$B$}; \\node[above] at (C) {$C$}; \\node[right] at (D) {$D$};\n\\draw[red,thick] (0.39,0.20)--(0.68,0.30)--(0.65,0.45)--(0.43,0.48)--cycle;\n\\node[red] at (0.30,0.70) {triangle};\n\\begin{scope}[xshift=4.1cm]\n\\coordinate (A) at (0,0); \\coordinate (B) at (2.7,0); \\coordinate (C) at (1.35,2.2); \\coordinate (D) at (1.45,0.95);\n\\draw (A)--(B)--(C)--cycle; \\draw (A)--(D)--(B); \\draw (C)--(D);\n\\node[below left] at (A) {$A$}; \\node[below right] at (B) {$B$}; \\node[above] at (C) {$C$}; \\node[right] at (D) {$D$};\n\\draw[red,thick] (0.72,0.14)--(1.98,0.14)--(2.03,0.29)--(0.68,0.30)--cycle;\n\\node[red] at (1.35,0.62) {quadrilateral};\n\\end{scope}\n\\end{tikzpicture}\n~~~\n\nThe picture is only a schematic of the boundary intersection pattern. The definition is the stated proper embedding and matching condition; no proof below relies on the drawing.",
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "not-applicable"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Joel Hass, Jeffrey C. Lagarias, and Nicholas Pippenger, The Computational Complexity of Knot and Link Problems, Journal of the ACM 46 (1999)",
+              "url": "https://www.math.ucdavis.edu/~hass/Research/Papers/Complexity/hlp.pdf",
+              "locator": "§5, Haken normal coordinates; §6, matching equations and fundamental-solution bounds."
+            },
+            {
+              "title": "Jeff Erickson, Normal Surfaces and Knots, Computational Topology lecture notes (2009)",
+              "url": "https://jeffe.cs.illinois.edu/teaching/comptop/2009/notes/normal-surfaces.pdf",
+              "locator": "§§14.1–14.3, normal disks, matching equations, normal surfaces and fundamental solutions."
+            }
+          ]
+        },
+        "strategy": "not-applicable",
+        "proof_strategy": "not-applicable"
+      },
+      {
+        "id": "def-finite-triangulated-compact-surface",
+        "kind": "definition",
+        "title": "Finite triangulations of compact PL surfaces",
+        "deps": [
+          "def-simplicial-subcomplex-star-closure-and-link",
+          "def-simplicial-euler-characteristic"
+        ],
+        "dependency_level": 0,
+        "justified_by": [],
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "not-applicable"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "C. P. Rourke and B. J. Sanderson, Introduction to Piecewise-Linear Topology",
+              "url": "https://webhomes.maths.ed.ac.uk/~v1ranick/papers/rsplx.pdf",
+              "locator": "§§1.8 and 2.1–2.14, PL manifolds, finite simplicial complexes, links and triangulations."
+            }
+          ]
+        },
+        "strategy": "not-applicable",
+        "statement": "A **finite triangulation of a compact PL surface** is a finite two-dimensional simplicial complex $K$ in which each edge is incident to one or two triangles and the link of each vertex is homeomorphic to a circle or a closed interval. Its realization $|K|$ is the surface; its boundary is the subcomplex formed by edges incident to one triangle and their vertices. If $V,E,F$ are the numbers of vertices, edges and triangles, its simplicial Euler characteristic is $\\chi(K)=V-E+F$.",
+        "proof_strategy": "not-applicable"
+      },
+      {
+        "id": "lem-knot-exterior-homology-and-longitude-via-mayer-vietoris",
+        "kind": "lemma",
+        "title": "Choice-free homology and longitude computation for a supplied knot tube",
+        "deps": [
+          "def-oriented-link-in-s-three-and-ambient-isotopy",
+          "thm-mayer-vietoris-sequence-in-singular-homology",
+          "cor-homology-of-spheres",
+          "thm-cellular-homology-computes-singular-homology",
+          "def-cellular-homology",
+          "thm-cellular-boundary-is-the-incidence-degree-matrix",
+          "thm-homotopy-equivalences-induce-isomorphisms-on-singular-homology",
+          "thm-short-exact-two-open-singular-chain-mayer-vietoris-sequence"
+        ],
+        "dependency_level": 0,
+        "justified_by": [],
+        "statement": "Let $K:S^1\\to S^3$ be a smooth oriented embedding and suppose a product tubular embedding $\\Phi:S^1\\times D^2_{2\\epsilon}\\to S^3$ is supplied, where $D^2_r=\\{z\\in\\mathbb R^2:|z|\\le r\\}$. Define $N=\\Phi(S^1\\times D^2_\\epsilon)$, $E=S^3\\setminus\\operatorname{int}N$, $T=\\partial E$, and let $i:T\\hookrightarrow E$ be inclusion. Fix $s_0\\in S^1$ and $z_0\\in\\partial D^2_\\epsilon$. Let $\\mu=\\Phi(\\{s_0\\}\\times\\partial D^2_\\epsilon)$ be the fibre meridian and let $\\sigma:S^1\\to T$ be the product section $s\\mapsto\\Phi(s,z_0)$. Then $H_1(E;\\mathbb Z)$ is infinite cyclic generated by $i_*[\\mu]$. The kernel of $i_*:H_1(T;\\mathbb Z)\\to H_1(E;\\mathbb Z)$ has a unique generator $[\\lambda]$ whose image under the product projection $H_1(T;\\mathbb Z)\\to H_1(S^1;\\mathbb Z)$ is $1$, and $([\\mu],[\\lambda])$ is a basis of $H_1(T;\\mathbb Z)$. The proof uses no choice axiom beyond the supplied tube.",
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-generated"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Joel Hass, Jeffrey C. Lagarias, and Nicholas Pippenger, The Computational Complexity of Knot and Link Problems, Journal of the ACM 46 (1999)",
+              "url": "https://www.math.ucdavis.edu/~hass/Research/Papers/Complexity/hlp.pdf",
+              "locator": "§§4–8; complete relevant passages on knot exteriors, normal coordinates, finite bounds, triangulations and unknot searches."
+            },
+            {
+              "title": "Jeff Erickson, Normal Surfaces and Knots, Computational Topology lecture notes (2009)",
+              "url": "https://jeffe.cs.illinois.edu/teaching/comptop/2009/notes/normal-surfaces.pdf",
+              "locator": "§§14.1–14.4, complete six-page notes on normal disks, matching, normal surfaces and knots."
+            }
+          ]
+        },
+        "strategy": "direct",
+        "proof_strategy": "direct"
+      },
+      {
+        "id": "lem-essential-simple-curve-on-torus-is-primitive",
+        "kind": "lemma",
+        "title": "Essential simple curves on a torus are primitive",
+        "deps": [],
+        "dependency_level": 0,
+        "justified_by": [],
+        "statement": "Let $T=S^1\\times S^1$ be the standard oriented product torus. If $C\\subset T$ is an embedded piecewise-linear simple closed curve that is not null-homotopic, then its class $[C]\\in H_1(T;\\mathbb Z)$ is nonzero and primitive, meaning that it is not $k x$ for any $x\\in H_1(T;\\mathbb Z)$ and integer $|k|>1$.",
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-generated"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Joel Hass, Jeffrey C. Lagarias, and Nicholas Pippenger, The Computational Complexity of Knot and Link Problems, Journal of the ACM 46 (1999)",
+              "url": "https://www.math.ucdavis.edu/~hass/Research/Papers/Complexity/hlp.pdf",
+              "locator": "§§4–8; complete relevant passages on knot exteriors, normal coordinates, finite bounds, triangulations and unknot searches."
+            },
+            {
+              "title": "Jeff Erickson, Normal Surfaces and Knots, Computational Topology lecture notes (2009)",
+              "url": "https://jeffe.cs.illinois.edu/teaching/comptop/2009/notes/normal-surfaces.pdf",
+              "locator": "§§14.1–14.4, complete six-page notes on normal disks, matching, normal surfaces and knots."
+            }
+          ]
+        },
+        "strategy": "direct",
+        "proof_strategy": "direct"
+      },
+      {
+        "id": "lem-finite-compatible-pl-surfaces-admit-relative-smooth-roundings",
+        "kind": "lemma",
+        "title": "Relative smoothing of finite compatible PL surfaces in dimension three",
+        "deps": [
+          "def-countable-choice",
+          "def-relative-smooth-triangulation-and-projection-preserving-fitting",
+          "lem-piecewise-smooth-embeddings-are-stable-under-fine-c-one-approximation",
+          "lem-relative-shape-controlled-secants-approximate-smooth-simplex-maps",
+          "lem-finite-chart-surface-normal-forms-supply-jordan-disks-and-torsion-free-groups",
+          "lem-finite-c2-surface-carriers-have-smooth-normal-forms-and-relative-cap-approximations"
+        ],
+        "justified_by": [],
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-generated"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "James R. Munkres, Elementary Differential Topology, revised edition (1966)",
+              "url": "https://www.maths.ed.ac.uk/~v1ranick/papers/munkresdiff.pdf",
+              "locator": "§§8–9, whole-star embeddings and relative strong approximation; the dimension-three edge and vertex rounding argument is supplied locally."
+            }
+          ]
+        },
+        "statement": "Assume countable choice. Let a compact embedded surface in a smooth three-manifold have a supplied finite whole-star piecewise smooth triangulation: its simplex maps extend smoothly, and their differential fan is injective on the entire tangent star at every point. Suppose its boundary has an already smooth embedded collar in the surface. Then the surface can be replaced, in any prescribed neighborhood and fixed on a smaller boundary collar, by a smooth embedded surface homeomorphic to it relative to that collar. The replacement can also be fixed on any specified compact subset on a neighborhood of which the surface is already smooth. In particular an embedded disk with such data and smooth boundary collar has a smooth embedded disk replacement with exactly the same boundary.\n\nA finite PL surface in the compatible PL structure of a supplied whole-star smooth triangulation of the ambient manifold has the required piecewise smooth data after common subdivision. This clause concerns compatibility with the specified smooth triangulation; it does not assert compatibility of an arbitrary topological marking.",
+        "proof_strategy": "direct",
+        "dependency_level": 0
+      },
+      {
+        "id": "lem-smooth-proper-disks-have-compatible-pl-approximations",
+        "kind": "lemma",
+        "title": "Smooth proper disks have PL approximations in a compatible triangulation",
+        "deps": [
+          "def-countable-choice",
+          "def-relative-smooth-triangulation-and-projection-preserving-fitting",
+          "lem-piecewise-smooth-embeddings-are-stable-under-fine-c-one-approximation",
+          "lem-relative-shape-controlled-secants-approximate-smooth-simplex-maps",
+          "thm-compact-smooth-manifolds-with-corners-admit-relative-finite-triangulations",
+          "thm-morse-sard-for-euclidean-maps"
+        ],
+        "justified_by": [],
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-generated"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "James R. Munkres, Elementary Differential Topology, revised edition (1966)",
+              "url": "https://www.maths.ed.ac.uk/~v1ranick/papers/munkresdiff.pdf",
+              "locator": "§§8–9, stability and shape-controlled secants; the proper-boundary specialization is given locally."
+            }
+          ]
+        },
+        "statement": "Assume countable choice. Suppose a compact smooth three-manifold $M$ with boundary has a supplied finite compatible whole-star smooth triangulation, with boundary a subcomplex and differential fans homeomorphic onto the boundary tangent half-spaces. If $M$ contains a smooth properly embedded disk transverse to its boundary, it contains a properly embedded PL disk whose boundary is isotopic in $\\partial M$ to the original boundary. In particular essentiality of the boundary is preserved. PL here refers to the supplied compatible structure; no arbitrary topological triangulation is substituted.",
+        "proof_strategy": "direct",
+        "dependency_level": 0
+      },
+      {
+        "id": "lem-closed-pl-surfaces-with-even-original-edge-counts-separate",
+        "kind": "lemma",
+        "title": "Closed PL surfaces with even original-edge counts separate",
+        "deps": [],
+        "justified_by": [],
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-generated"
+        },
+        "statement": "Let $M$ be a connected compact PL three-manifold with a finite simplicial triangulation $T$. Let $S\\subset\\operatorname{int}M$ be a connected closed locally flat PL surface. Suppose $S$ misses the original vertices, is transverse to the original edges, and meets every original global edge in an even number of points. Then $M\\setminus S$ is disconnected. Neither $M$ nor $S$ is assumed orientable, and no irreducibility or choice principle is required.",
+        "proof_strategy": "direct",
+        "dependency_level": 0,
+        "sources": {
+          "references": [
+            {
+              "title": "Wolfgang Haken, Theorie der Normalflächen: Ein Isotopiekriterium für den Kreisknoten, Acta Mathematica105 (1961),245–375",
+              "url": "https://archive.ymsc.tsinghua.edu.cn/pacm_download/117/5921-11511_2007_Article_BF02559591.pdf",
+              "locator": "Complete Chapter5, printed pp.360–374, fundamental normal-surface construction in adapted coordinates; normal-surface/exchange context for the local formulation here. The source has additional separation/adapted-coordinate hypotheses and is not attributed the present original-coordinate refinement."
+            }
+          ],
+          "attribution_boundary": "Existing authoritative subject baseline and local formulation/proof refinement, not a verbatim external theorem; the actual accepted local argument and exact hypotheses remain unchanged.",
+          "reading_limits": "URL and locator drawn from existing canonical source metadata/Statement-reference bibliography only. No source was fetched or newly read for this metadata repair; retained author reading limits remain unchanged and are not transferred into a new whole-source reading claim."
+        }
+      },
+      {
+        "id": "lem-small-integer-matrix-linear-algebra-in-quadratic-logarithmic-space",
+        "kind": "lemma",
+        "title": "Exact small-entry matrix algebra in quadratic logarithmic workspace",
+        "deps": [
+          "def-determinant-of-a-square-matrix",
+          "thm-laplace-cofactor-expansion",
+          "thm-gaussian-elimination-produces-row-echelon-form",
+          "thm-fundamental-theorem-of-arithmetic",
+          "lem-chinese-remainder-two-moduli",
+          "thm-euclidean-algorithm"
+        ],
+        "justified_by": [],
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-generated"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Joel Hass, Jeffrey C. Lagarias and Nicholas Pippenger, The Computational Complexity of Knot and Link Problems",
+              "url": "https://www.math.ucdavis.edu/~hass/Research/Papers/Complexity/hlp.pdf",
+              "locator": "§§6 and 8, small-entry matching matrices, determinant bounds and compressed normal-coordinate computations; the explicit streamed modular implementation is proved locally."
+            },
+            {
+              "title": "Keith Conrad, The Chinese Remainder Theorem",
+              "url": "https://kconrad.math.uconn.edu/blurbs/ugradnumthy/crt.pdf",
+              "locator": "The coprime two-modulus reconstruction used iteratively below."
+            }
+          ]
+        },
+        "statement": "Let $n\\ge1$, and let $A$ be an integer matrix with at most $n$ rows and at most $n$ columns, all entries in $\\{-1,0,1\\}$. Deterministic algorithms compute its rational rank and an independent set of original rows in time polynomial in $n$ and sequential Turing workspace $O(n^2\\log(n+2))$ bits. The determinant of any specified square submatrix is computable within the same bounds. If $A$ has $b\\ge1$ columns and rational rank $b-1$, a primitive integer generator of its one-dimensional rational kernel is computable within those bounds, with either choice of its overall sign. The zero-row and zero-column matrices and the $0\\times0$ determinant convention are included.",
+        "proof_strategy": "direct",
+        "dependency_level": 0
+      },
+      {
+        "id": "lem-normal-coordinate-matching-equations-and-finite-bounds",
+        "kind": "lemma",
+        "title": "Matching equations and finite bounds for normal coordinates",
+        "deps": [
+          "def-normal-surface-coordinate-box"
+        ],
+        "dependency_level": 1,
+        "justified_by": [],
+        "statement": "Let $T$ be a finite tetrahedral triangulation of a compact piecewise-linear $3$-manifold with $t\\ge1$ tetrahedra. A nonzero nonnegative integer vector in $\\mathbb Z^{7t}$ is the normal-coordinate vector of a normal surface exactly when it satisfies every face-matching equation and at most one quadrilateral type is nonzero in each tetrahedron. Every primitive integer generator of an extreme ray of the Haken cone has each coordinate at most $2^{7t-1}$. Every fundamental normal-surface vector has each coordinate at most $t\\,2^{7t+2}$.",
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-generated"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Joel Hass, Jeffrey C. Lagarias, and Nicholas Pippenger, The Computational Complexity of Knot and Link Problems, Journal of the ACM 46 (1999)",
+              "url": "https://www.math.ucdavis.edu/~hass/Research/Papers/Complexity/hlp.pdf",
+              "locator": "§§4–8; complete relevant passages on normal coordinates, finite bounds, triangulations and unknot searches."
+            },
+            {
+              "title": "Jeff Erickson, Normal Surfaces and Knots, Computational Topology lecture notes (2009)",
+              "url": "https://jeffe.cs.illinois.edu/teaching/comptop/2009/notes/normal-surfaces.pdf",
+              "locator": "§§14.1–14.4, complete six-page notes on normal disks, matching, normal surfaces and knots."
+            }
+          ]
+        },
+        "strategy": "direct",
+        "proof_strategy": "direct"
+      },
+      {
+        "id": "lem-fundamental-normal-surfaces-are-connected",
+        "kind": "lemma",
+        "title": "Fundamental normal surfaces are connected",
+        "deps": [
+          "def-normal-surface-coordinate-box"
+        ],
+        "dependency_level": 1,
+        "justified_by": [],
+        "statement": "Every nonempty fundamental normal surface in a finite tetrahedral triangulation of a compact piecewise-linear $3$-manifold is connected.",
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-generated"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Joel Hass, Jeffrey C. Lagarias, and Nicholas Pippenger, The Computational Complexity of Knot and Link Problems, Journal of the ACM 46 (1999)",
+              "url": "https://www.math.ucdavis.edu/~hass/Research/Papers/Complexity/hlp.pdf",
+              "locator": "§§4–8; complete relevant passages on normal coordinates, finite bounds, triangulations and unknot searches."
+            },
+            {
+              "title": "Jeff Erickson, Normal Surfaces and Knots, Computational Topology lecture notes (2009)",
+              "url": "https://jeffe.cs.illinois.edu/teaching/comptop/2009/notes/normal-surfaces.pdf",
+              "locator": "§§14.1–14.4, complete six-page notes on normal disks, matching, normal surfaces and knots."
+            }
+          ]
+        },
+        "strategy": "direct",
+        "proof_strategy": "direct"
+      },
+      {
+        "id": "lem-connected-normal-surface-chi-one-is-disk",
+        "kind": "lemma",
+        "title": "A connected triangulated surface with Euler characteristic one and boundary is a disk",
+        "deps": [
+          "def-finite-triangulated-compact-surface",
+          "def-simplicial-euler-characteristic"
+        ],
+        "dependency_level": 1,
+        "justified_by": [],
+        "statement": "Let $S=|K|$ be a connected compact surface with nonempty boundary, where $K$ is a finite two-dimensional simplicial complex, each edge lies in one or two triangles, and each vertex link is a circle or interval. If its simplicial Euler characteristic is $\\chi(K)=1$, then $S$ is homeomorphic to a closed disk.",
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-generated"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Joel Hass, Jeffrey C. Lagarias, and Nicholas Pippenger, The Computational Complexity of Knot and Link Problems, Journal of the ACM 46 (1999)",
+              "url": "https://www.math.ucdavis.edu/~hass/Research/Papers/Complexity/hlp.pdf",
+              "locator": "§§4–8; complete relevant passages on knot exteriors, normal coordinates, finite bounds, triangulations and unknot searches."
+            },
+            {
+              "title": "Jeff Erickson, Normal Surfaces and Knots, Computational Topology lecture notes (2009)",
+              "url": "https://jeffe.cs.illinois.edu/teaching/comptop/2009/notes/normal-surfaces.pdf",
+              "locator": "§§14.1–14.4, complete six-page notes on normal disks, matching, normal surfaces and knots."
+            }
+          ]
+        },
+        "strategy": "direct",
+        "proof_strategy": "direct"
+      },
+      {
+        "id": "lem-essential-disk-boundary-is-longitude",
+        "kind": "lemma",
+        "title": "An essential disk in a knot exterior has longitude boundary",
+        "deps": [
+          "lem-knot-exterior-homology-and-longitude-via-mayer-vietoris",
+          "lem-essential-simple-curve-on-torus-is-primitive"
+        ],
+        "dependency_level": 1,
+        "justified_by": [],
+        "statement": "Let $E$ be the compact exterior of a smooth knot with supplied product boundary torus $T=S^1\\times S^1$, fibre meridian $\\mu$, and unique degree-one zero-homology longitude class $[\\lambda]$ from the product data. Let $D\\subset E$ be a properly embedded piecewise-linear disk, meaning an embedded copy of the closed disk with $D\\cap T=\\partial D$. If $\\partial D$ is not null-homotopic in $T$, then $[\\partial D]=[\\lambda]$ or $-[\\lambda]$ in $H_1(T;\\mathbb Z)$, and its mod-two intersection number with $\\mu$ is $1$.",
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-generated"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Joel Hass, Jeffrey C. Lagarias, and Nicholas Pippenger, The Computational Complexity of Knot and Link Problems, Journal of the ACM 46 (1999)",
+              "url": "https://www.math.ucdavis.edu/~hass/Research/Papers/Complexity/hlp.pdf",
+              "locator": "§§4–6, peripheral homology, disk criteria and normal-surface disk tests."
+            },
+            {
+              "title": "Jeff Erickson, Normal Surfaces and Knots, Computational Topology lecture notes (2009)",
+              "url": "https://jeffe.cs.illinois.edu/teaching/comptop/2009/notes/normal-surfaces.pdf",
+              "locator": "§§14.1–14.4, complete six-page note on normal surfaces and knot disks."
+            }
+          ]
+        },
+        "strategy": "direct",
+        "proof_strategy": "direct"
+      },
+      {
+        "id": "lem-degree-one-peripheral-curves-cobound-annuli-with-tube-core",
+        "kind": "lemma",
+        "title": "Degree-one peripheral curves cobound annuli with the tube core",
+        "deps": [
+          "def-countable-choice",
+          "lem-essential-simple-curve-on-torus-is-primitive",
+          "lem-finite-chart-surface-normal-forms-supply-jordan-disks-and-torsion-free-groups",
+          "lem-finite-c2-surface-carriers-have-smooth-normal-forms-and-relative-cap-approximations"
+        ],
+        "justified_by": [],
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-generated"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Joel Hass, Jeffrey C. Lagarias and Nicholas Pippenger, The Computational Complexity of Knot and Link Problems",
+              "url": "https://www.math.ucdavis.edu/~hass/Research/Papers/Complexity/hlp.pdf",
+              "locator": "§4, peripheral coordinates and the disk criterion; the curve-straightening and capping annulus are constructed locally."
+            }
+          ]
+        },
+        "statement": "Assume countable choice. In a supplied smooth product solid torus $S^1\\times D^2$, let $C\\subset S^1\\times\\partial D^2$ be a finite PL, or finite piecewise smooth regular, embedded simple closed curve. Interpret PL in the compatible structure of the smooth product. If the projection $C\\to S^1$ has degree $1$ or $-1$, then $C$ and the core $S^1\\times\\{0\\}$ cobound an embedded annulus in the solid torus. The annulus is finite piecewise smooth, smooth on a neighborhood of its core boundary, has its other boundary exactly $C$, and otherwise lies in the interior of the solid torus. Consequently it may be glued to any properly embedded exterior disk with boundary $C$ to give an embedded disk with boundary the smooth core and a smooth collar there.",
+        "proof_strategy": "direct",
+        "dependency_level": 1
+      },
+      {
+        "id": "lem-essential-pl-disks-admit-normal-replacements",
+        "kind": "lemma",
+        "title": "Essential PL disks admit normal disk replacements",
+        "deps": [
+          "def-normal-surface-coordinate-box",
+          "thm-polygonal-jordan-curve",
+          "thm-simple-polygon-admits-a-triangulation"
+        ],
+        "justified_by": [],
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-generated"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "William Jaco and J. Hyam Rubinstein, 0-efficient triangulations of 3-manifolds",
+              "url": "https://arxiv.org/pdf/math/0207158",
+              "locator": "§3.1, printed pp.12–16, the local normalization moves and lexicographic shrinking complexity. The disk-replacement version below permits replacement rather than claiming isotopy in a reducible manifold."
+            }
+          ]
+        },
+        "statement": "Let $M$ be a compact PL three-manifold with a finite simplicial triangulation. If $M$ contains a properly embedded PL disk whose boundary is not null-homotopic in $\\partial M$, then it contains a normal disk with that property. No orientability, irreducibility or projective-plane hypothesis is required. The construction is allowed to replace disk pieces and to change the isotopy class of the original disk; it asserts existence of a normal replacement.",
+        "proof_strategy": "direct",
+        "dependency_level": 1
+      },
+      {
+        "id": "lem-compatible-normal-disk-boundary-paths-have-a-unique-type-preserving-switch",
+        "kind": "lemma",
+        "title": "Compatible normal disk boundary paths have a unique type-preserving switch",
+        "deps": [
+          "def-normal-surface-coordinate-box"
+        ],
+        "justified_by": [],
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-generated"
+        },
+        "statement": "Let $P,Q$ be two normal disk types in one tetrahedron, subject to quadrilateral compatibility. Thus if both are quadrilaterals they have the same type. Choose two distinct faces $f,g$ met by both types, and cut each normal boundary word at one point of its arc in $f$ and one point of its arc in $g$. Each boundary is divided into two paths from $f$ to $g$.\n\nThere are two pairings that join one path from $P$ to one from $Q$ at both ends, producing two new closed boundary words. Exactly one pairing gives the original two normal disk boundary types, as an unordered pair, up to cyclic rotation and reversal of the words. The other pairing has a word crossing some tetrahedral edge at least twice and therefore cannot give those two normal types.\n\nThe conclusion concerns the finite boundary words and type counts in the original tetrahedron. It does not assert that arbitrary surface intersections already have the geometric regular-position or partial-switching properties.",
+        "proof_strategy": "direct",
+        "dependency_level": 1,
+        "sources": {
+          "references": [
+            {
+              "title": "Wolfgang Haken, Theorie der Normalflächen: Ein Isotopiekriterium für den Kreisknoten, Acta Mathematica105 (1961),245–375",
+              "url": "https://archive.ymsc.tsinghua.edu.cn/pacm_download/117/5921-11511_2007_Article_BF02559591.pdf",
+              "locator": "Complete Chapter5, printed pp.360–374, fundamental normal-surface construction in adapted coordinates; normal-surface/exchange context for the local formulation here. The source has additional separation/adapted-coordinate hypotheses and is not attributed the present original-coordinate refinement."
+            }
+          ],
+          "attribution_boundary": "Existing authoritative subject baseline and local formulation/proof refinement, not a verbatim external theorem; the actual accepted local argument and exact hypotheses remain unchanged.",
+          "reading_limits": "URL and locator drawn from existing canonical source metadata/Statement-reference bibliography only. No source was fetched or newly read for this metadata repair; retained author reading limits remain unchanged and are not transferred into a new whole-source reading claim."
+        }
+      },
+      {
+        "id": "lem-triangular-normal-arcs-admit-braid-position-stable-under-partial-regular-switches",
+        "kind": "lemma",
+        "title": "Triangular normal arcs admit braid position stable under partial regular switches",
+        "deps": [
+          "def-normal-surface-coordinate-box",
+          "thm-polygonal-jordan-curve"
+        ],
+        "justified_by": [],
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-generated"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Wolfgang Haken, Theorie der Normalflächen, Acta Mathematica105 (1961),245–375",
+              "url": "https://archive.ymsc.tsinghua.edu.cn/pacm_download/117/5921-11511_2007_Article_BF02559591.pdf",
+              "locator": "Chapter4, Hilfssatz8 and Hauptsatz4, braid pieces and regular switches. The central-triangle and three-strip construction below is given directly inside an original triangular face."
+            }
+          ]
+        },
+        "statement": "Let $f$ be an affine triangle and let $\\mathcal X,\\mathcal Y$ be two finite families of normal arcs in $f$, each family embedded and pairwise disjoint, with disjoint endpoint sets on $\\partial f$. There are PL representatives of the same individual arc types, fixing those endpoints, with these properties:\n\n1. Every intersection is a transverse double point between the two families. Each original pair of arcs intersects at most once.\n2. At every double point there is a chosen regular reconnection. For every subset of the double points, perform just those reconnections and otherwise retain the original transverse crossings. The resulting parametrizing components are embedded normal arcs, never circles, and their total counts of the three normal arc types are unchanged. Every remaining double point lies on two distinct parametrizing arcs.\n3. The chosen reconnection at a crossing is the unique one of the two uncrossings that preserves the unordered pair of the two normal arc types there. Its alternative creates an edge-return arc in that local two-arc endpoint pairing. The same characterization holds at each remaining crossing after any partial reconnection.\n\nHere parametrizing components follow the strands through unswitched crossings without joining them. The construction uses a small central triangle and three quadrilateral strips inside this original face. It changes no triangulation and uses only finite choices.",
+        "proof_strategy": "direct",
+        "dependency_level": 1
+      },
+      {
+        "id": "lem-regular-normal-sum-diagrams-have-reduced-connected-pairs",
+        "kind": "lemma",
+        "title": "A regular normal-sum diagram has a reduced connected pair",
+        "deps": [
+          "def-normal-surface-coordinate-box"
+        ],
+        "justified_by": [],
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-generated"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Wolfgang Haken, Theorie der Normalflächen, Acta Mathematica105 (1961),245–375",
+              "url": "https://archive.ymsc.tsinghua.edu.cn/pacm_download/117/5921-11511_2007_Article_BF02559591.pdf",
+              "locator": "Chapter5§1, printed pp.361–364, definition of reduced normal pairs, the separation consequence, and complete proof of Satz7. The finite maximal-switch argument is expanded below with its input interface explicit."
+            }
+          ]
+        },
+        "statement": "Let $T$ be a finite simplicial triangulation of a compact PL three-manifold. Suppose a **regular normal-sum diagram** is supplied with the following data:\n\n- Two nonempty embedded normal surfaces $X,Y$ in transverse PL position, with no triple points and finitely many disjoint double circles and proper double arcs.\n- Pairwise disjoint switching neighborhoods of those double curves, disjoint from $T^{(1)}$, with compatible chosen regular switches. In each tetrahedron the local switch reconnects two crossing normal disks to normal disks of the same two types. A partial switch therefore leaves a finite immersed normal-disk diagram, with only the unswitched double curves and without branch points. Switches in disjoint neighborhoods commute.\n- Performing all the switches gives a connected embedded normal surface $F$.\n\nThen some partial switching gives a diagram whose normalization has exactly two components $G,H$. Here normalization means separating the two branches at every remaining double point; its components are the parametrizing surfaces, regardless of intersections between their images. Both $G$ and $H$ are connected embedded normal surfaces. They have\n\n$$v(G)+v(H)=v(F),\\qquad w(G)+w(H)=w(F),\\qquad 0<w(G),w(H)<w(F).$$\n\nTheir remaining switching system is reduced in the following precise sense: switching any nonempty subset of its curves gives a diagram with connected normalization. In particular no remaining intersection circle or proper intersection arc separates both $G$ and $H$ when each is cut along its corresponding preimage.\n\nAll surfaces and vectors remain in the original triangulation $T$. No orientability, irreducibility or choice hypothesis is needed. The existence of a regular normal-sum diagram from an arbitrary coordinate decomposition is an input to this lemma, not a conclusion.",
+        "proof_strategy": "direct",
+        "dependency_level": 1
+      },
+      {
+        "id": "lem-normal-exchange-disk-patches-have-positive-edge-weight",
+        "kind": "lemma",
+        "title": "Normal exchange disk patches have positive edge weight",
+        "deps": [
+          "def-normal-surface-coordinate-box",
+          "def-euler-characteristic-of-a-finite-cw-complex",
+          "thm-euler-formula-for-connected-plane-graphs",
+          "thm-polygonal-jordan-curve",
+          "thm-simple-polygon-admits-a-triangulation"
+        ],
+        "justified_by": [],
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-generated"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Chan-Ho Suh, The Unknotting Problem and Normal Surface Q-Theory",
+              "url": "https://arxiv.org/pdf/1009.1500",
+              "locator": "§2.5, exchange surfaces and disk patches; §3.3, the least-weight disk-patch construction."
+            }
+          ]
+        },
+        "statement": "Let $T$ be a finite simplicial triangulation of a compact PL three-manifold $M$, and let $F$ be a normal surface. Its normal disks form polygonal cells with three or four sides. Let $\\Lambda$ be a finite disjoint family of PL simple closed curves and properly embedded PL arcs on $F$. Suppose $\\Lambda$ misses the normal-cell vertices, is transverse to the cell edges, and meets each normal disk in disjoint properly embedded arcs whose endpoints are on distinct sides of that disk.\n\nCut $F$ along $\\Lambda$, retaining separate boundary copies of each cut. Let $P$ be the compact completion of one resulting component, and suppose $P\\cap\\partial F$ has $b$ components, all proper arcs. Define its edge weight by $w(P)=|P\\cap T^{(1)}|$. If $w(P)=0$, its polygonal pieces have $k_j\\ge2$ trace sides and satisfy\n\n$$\\chi(P)=\\frac b2+\\sum_j\\left(1-\\frac{k_j}{2}\\right)\\le\\frac b2.$$\n\nConsequently, if $P$ is a disk and $b\\le1$, then $w(P)>0$. This applies in particular to disk patches of a proper normal sum: an interior disk patch has one closed trace frontier and $b=0$, and a boundary disk patch has one trace-arc frontier and $b=1$.\n\nThe trace hypothesis is satisfied by the usual exchange rectangles: in each tetrahedron a rectangle has two opposite sides on distinct normal disks and the other two sides in distinct tetrahedral faces. No orientability, irreducibility or projective-plane hypothesis is imposed.",
+        "proof_strategy": "direct",
+        "dependency_level": 1
+      },
+      {
+        "id": "lem-admissible-normal-vectors-have-rigid-edge-count-averages",
+        "kind": "lemma",
+        "title": "Admissible normal vectors have rigid averages of tetrahedral edge counts",
+        "deps": [
+          "def-normal-surface-coordinate-box"
+        ],
+        "justified_by": [],
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-generated"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Joel Hass, Jeffrey C. Lagarias and Nicholas Pippenger, The Computational Complexity of Knot and Link Problems",
+              "url": "https://www.math.ucdavis.edu/~hass/Research/Papers/Complexity/hlp.pdf",
+              "locator": "§5, the seven tetrahedral disk types. The edge-count kernel and admissible averaging statement are proved directly below."
+            }
+          ]
+        },
+        "statement": "For a finite tetrahedral triangulation, let $B$ record the six local edge-intersection counts in every tetrahedron from its seven normal coordinates. Let $u,v,d$ be nonnegative real normal-coordinate arrays, each using at most one quadrilateral type in each tetrahedron. They need not satisfy matching equations. If $\\alpha,\\beta>0$ and\n\n$$\\alpha Bu+\\beta Bv=(\\alpha+\\beta)Bd,$$\n\nthen\n\n$$\\alpha u+\\beta v=(\\alpha+\\beta)d.$$\n\nIn particular, if $u,v,d$ are actual normal-surface vectors, the hypothesis may be checked on their global triangulation-edge intersection counts. If those counts for $u$ and $v$ average to those for $d$, then their normal-coordinate vectors also average to $d$.\n\nIf $d$ is lexicographically least in any set of vectors containing $u,v,d$, this averaging identity forces $u=v=d$. Thus two essential normal disks of the same least edge weight whose edge counts average to those of a lexicographically least such disk must have exactly that disk's normal vector.",
+        "proof_strategy": "direct",
+        "dependency_level": 1
+      },
+      {
+        "id": "lem-no-closed-nonorientable-pl-surface-in-s-three",
+        "kind": "lemma",
+        "title": "No closed nonorientable piecewise-linear surface embeds in the three-sphere",
+        "deps": [
+          "def-oriented-link-in-s-three-and-ambient-isotopy",
+          "def-pl-embedding-and-subpolyhedron",
+          "lem-pl-embedded-polyhedron-admits-compatible-subcomplex-triangulation",
+          "cor-homology-of-spheres",
+          "thm-cellular-homology-computes-singular-homology",
+          "def-cellular-homology",
+          "thm-cellular-boundary-is-the-incidence-degree-matrix",
+          "def-r-orientation-of-a-topological-manifold",
+          "def-oriented-cellular-chain-group",
+          "def-induced-boundary-orientation",
+          "lem-the-cellular-boundary-squares-to-zero"
+        ],
+        "dependency_level": 2,
+        "justified_by": [],
+        "statement": "No closed nonorientable piecewise-linear surface embeds in the standard oriented piecewise-linear three-sphere $S^3$.",
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-generated"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Joel Hass, Jeffrey C. Lagarias, and Nicholas Pippenger, The Computational Complexity of Knot and Link Problems, Journal of the ACM 46 (1999)",
+              "url": "https://www.math.ucdavis.edu/~hass/Research/Papers/Complexity/hlp.pdf",
+              "locator": "§§4–8; complete relevant passages on knot exteriors, normal coordinates, finite bounds, triangulations and unknot searches."
+            },
+            {
+              "title": "Jeff Erickson, Normal Surfaces and Knots, Computational Topology lecture notes (2009)",
+              "url": "https://jeffe.cs.illinois.edu/teaching/comptop/2009/notes/normal-surfaces.pdf",
+              "locator": "§§14.1–14.4, complete six-page notes on normal disks, matching, normal surfaces and knots."
+            },
+            {
+              "title": "C. P. Rourke and B. J. Sanderson, Introduction to Piecewise-Linear Topology",
+              "url": "https://webhomes.maths.ed.ac.uk/~v1ranick/papers/rsplx.pdf",
+              "locator": "§1.7, subpolyhedra and PL embeddings; §2.12, compatible subdivisions."
+            }
+          ]
+        },
+        "strategy": "direct",
+        "proof_strategy": "direct"
+      },
+      {
+        "id": "lem-normal-disk-candidate-check-characterization",
+        "kind": "lemma",
+        "title": "Finite normal-coordinate tests characterize essential disk candidates",
+        "deps": [
+          "def-normal-surface-coordinate-box",
+          "lem-normal-coordinate-matching-equations-and-finite-bounds",
+          "lem-fundamental-normal-surfaces-are-connected",
+          "lem-connected-normal-surface-chi-one-is-disk",
+          "lem-essential-disk-boundary-is-longitude"
+        ],
+        "dependency_level": 2,
+        "justified_by": [],
+        "statement": "Let $E$ be a triangulated compact exterior of a smooth knot with peripheral torus $T$ and a marked simple fibre meridian $\\mu$ in the boundary triangulation. For an admissible normal-coordinate vector $v$ and its associated normal surface $S$, the following tests hold exactly when $S$ is a connected properly embedded disk with non-null-homotopic boundary in $T$: (i) $S$ is connected; (ii) $\\partial S\\ne\\varnothing$; (iii) $\\chi(S)=1$; and (iv) $\\partial S$ has odd mod-two intersection with $\\mu$. If $v$ is fundamental, connectedness follows from fundamentalness.",
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-generated"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Joel Hass, Jeffrey C. Lagarias, and Nicholas Pippenger, The Computational Complexity of Knot and Link Problems, Journal of the ACM 46 (1999)",
+              "url": "https://www.math.ucdavis.edu/~hass/Research/Papers/Complexity/hlp.pdf",
+              "locator": "§§4–6, peripheral homology, disk criteria and normal-surface disk tests."
+            },
+            {
+              "title": "Jeff Erickson, Normal Surfaces and Knots, Computational Topology lecture notes (2009)",
+              "url": "https://jeffe.cs.illinois.edu/teaching/comptop/2009/notes/normal-surfaces.pdf",
+              "locator": "§§14.1–14.4, complete six-page note on normal surfaces and knot disks."
+            }
+          ]
+        },
+        "strategy": "direct",
+        "proof_strategy": "direct"
+      },
+      {
+        "id": "lem-smooth-to-pl-knot-exterior-ambient-isotopy",
+        "kind": "lemma",
+        "title": "Smooth-to-piecewise-linear knot exterior approximation",
+        "deps": [
+          "def-oriented-link-in-s-three-and-ambient-isotopy",
+          "def-knot-exterior",
+          "def-knot-meridian-and-preferred-longitude",
+          "def-countable-choice",
+          "thm-isotopy-extension",
+          "def-regular-oriented-link-diagram",
+          "def-planar-diagram-gauss-and-dowker-codes"
+        ],
+        "dependency_level": 2,
+        "justified_by": [],
+        "statement": "Assume countable choice. Let $K:S^1\\to S^3$ be a smooth oriented knot with a supplied product tubular embedding $\\Phi:S^1\\times D^2_{2\\epsilon}\\to S^3$. There is a polygonal knot $P$ inside this tube and a smooth rounding $K'$ of $P$ such that $K'$ is smoothly ambient isotopic to $K$ by an isotopy supported in the tube. If $K$ is supplied with a finite regular projection diagram $D$, the polygonal approximation and rounding can be chosen to have the same crossing code as $D$. A homeomorphism supported in the larger tube carries $P$ to $K'$, preserves the boundary torus of the radius-$\\epsilon$ tube, and sends each marked fibre meridian to itself up to orientation. Conversely, every polygonal knot $P$ with a finite product regular neighborhood can be rounded in pairwise disjoint vertex balls to a smooth knot $P^\\sharp$; a homeomorphism supported in those balls carries its compact exterior and marked meridian to those of $P^\\sharp$. If a regular projection diagram is supplied, the rounding balls can be chosen away from crossing charts, so the crossing code is unchanged. These clauses compare smooth knot type through smooth knots and polygonal exterior models through homeomorphisms; they do not treat a nonsmooth polygonal curve as a smooth isotopy slice.",
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-generated"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Joel Hass, Jeffrey C. Lagarias, and Nicholas Pippenger, The Computational Complexity of Knot and Link Problems, Journal of the ACM 46 (1999)",
+              "url": "https://www.math.ucdavis.edu/~hass/Research/Papers/Complexity/hlp.pdf",
+              "locator": "§§4–8; complete relevant passages on knot exteriors, normal coordinates, finite bounds, triangulations and unknot searches."
+            },
+            {
+              "title": "Jeff Erickson, Normal Surfaces and Knots, Computational Topology lecture notes (2009)",
+              "url": "https://jeffe.cs.illinois.edu/teaching/comptop/2009/notes/normal-surfaces.pdf",
+              "locator": "§§14.1–14.4, complete six-page notes on normal disks, matching, normal surfaces and knots."
+            }
+          ]
+        },
+        "strategy": "direct",
+        "proof_strategy": "direct"
+      },
+      {
+        "id": "lem-compatible-normal-surfaces-admit-finite-circle-free-tetrahedral-position",
+        "kind": "lemma",
+        "title": "Compatible normal surfaces admit finite circle-free tetrahedral position",
+        "deps": [
+          "def-normal-surface-coordinate-box",
+          "lem-essential-pl-disks-admit-normal-replacements",
+          "thm-polygonal-jordan-curve",
+          "thm-simple-polygon-admits-a-triangulation"
+        ],
+        "justified_by": [],
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-generated"
+        },
+        "statement": "Let $X,Y$ be two proper normal PL surfaces in a compact PL three-manifold with a finite simplicial triangulation $T$. Suppose their quadrilateral types are compatible in every tetrahedron. They have embedded normal realizations $X',Y'$ with the same respective normal vectors and respective abstract surface homeomorphism types such that:\n\n- $X'$ and $Y'$ have disjoint edge-intersection sets, and in each triangular face all their arcs are straight segments in that face's affine coordinates;\n- these face arcs have only transverse double intersections;\n- in each tetrahedron, the two disk families are transverse and their intersection consists only of finitely many proper arcs; each arc joins two distinct tetrahedral faces. A pair of disk pieces meets in at most one arc if either is triangular, and in at most two arcs if both are quadrilateral.\n\nTheir global intersection is therefore a finite union of double circles and proper double arcs, disjoint from $T^{(1)}$. The boundary circles of each replacement surface are homotopic in $\\partial M$ to the corresponding original boundary circles. In particular, a disk with essential boundary remains a disk with essential boundary.\n\nThe construction is finite and uses no ambient irreducibility, orientability or choice hypothesis. Interior disk replacements are permitted; an ambient isotopy of the original surfaces is not asserted. The Statement does not yet assert the simultaneous regular-switch or partial-switching conclusions for the resulting diagram.",
+        "proof_strategy": "direct",
+        "dependency_level": 2,
+        "sources": {
+          "references": [
+            {
+              "title": "Wolfgang Haken, Theorie der Normalflächen: Ein Isotopiekriterium für den Kreisknoten, Acta Mathematica105 (1961),245–375",
+              "url": "https://archive.ymsc.tsinghua.edu.cn/pacm_download/117/5921-11511_2007_Article_BF02559591.pdf",
+              "locator": "Complete Chapter5, printed pp.360–374, fundamental normal-surface construction in adapted coordinates; normal-surface/exchange context for the local formulation here. The source has additional separation/adapted-coordinate hypotheses and is not attributed the present original-coordinate refinement."
+            }
+          ],
+          "attribution_boundary": "Existing authoritative subject baseline and local formulation/proof refinement, not a verbatim external theorem; the actual accepted local argument and exact hypotheses remain unchanged.",
+          "reading_limits": "URL and locator drawn from existing canonical source metadata/Statement-reference bibliography only. No source was fetched or newly read for this metadata repair; retained author reading limits remain unchanged and are not transferred into a new whole-source reading claim."
+        }
+      },
+      {
+        "id": "lem-positive-euler-finite-pl-surfaces-are-disks-spheres-or-projective-planes",
+        "kind": "lemma",
+        "title": "Positive-Euler finite PL surfaces are disks, spheres or projective planes",
+        "deps": [
+          "def-finite-triangulated-compact-surface",
+          "def-simplicial-euler-characteristic",
+          "lem-connected-normal-surface-chi-one-is-disk",
+          "ex-cylinder-and-mobius-band-as-quotients",
+          "ex-projective-plane-polygonal-schema"
+        ],
+        "justified_by": [],
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-generated"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Wolfgang Haken, Theorie der Normalflächen, Acta Mathematica105 (1961),245–375",
+              "url": "https://archive.ymsc.tsinghua.edu.cn/pacm_download/117/5921-11511_2007_Article_BF02559591.pdf",
+              "locator": "Chapter5, printed pp.360–374, positive-Euler summands in the fundamental-surface argument. The small finite surface classification used here is proved below."
+            }
+          ]
+        },
+        "statement": "Let $P$ be a connected compact surface supplied with a finite PL triangulation. The following conclusions require no choice axiom.\n\n1. If $\\partial P\\ne\\varnothing$, then $\\chi(P)\\le1$. Equality holds only for a disk. If instead $\\chi(P)=0$, then $P$ is an annulus or a Mobius band; these have respectively two and one boundary circles.\n2. If $\\partial P=\\varnothing$, then $\\chi(P)\\le2$. If $\\chi(P)=2$, then $P$ is a two-sphere; if $\\chi(P)=1$, then $P$ is a projective plane.\n\nConsequently, every positive-Euler connected finite PL surface is a disk, sphere or projective plane. These identifications can be made by PL homeomorphisms between finite polygonal models. In a PL three-manifold without an embedded projective plane, a connected embedded positive-Euler surface is therefore a disk or a sphere.",
+        "proof_strategy": "direct",
+        "dependency_level": 2
+      },
+      {
+        "id": "lem-zero-edge-normal-exchange-rectangles-and-annuli-have-cellwise-product-structures",
+        "kind": "lemma",
+        "title": "Zero-edge normal exchange rectangles and annuli have cellwise product structures",
+        "deps": [
+          "lem-normal-exchange-disk-patches-have-positive-edge-weight",
+          "thm-polygonal-jordan-curve",
+          "thm-simple-polygon-admits-a-triangulation"
+        ],
+        "justified_by": [],
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-generated"
+        },
+        "statement": "Let $F$ be a normal surface in a finite simplicial triangulation $T$. Cut $F$ along a finite disjoint trace family satisfying the distinct-normal-side hypothesis of the positive patch-weight lemma, and let $R$ be a connected compact cut patch missing $T^{(1)}$.\n\nIf $R$ is a disk with two trace-arc boundary sides and two original-boundary arc sides, then its normal-cell regions form a finite chain of quadrilaterals. The opposite trace arcs are parallel by a PL product parametrization of $R$: every intermediate arc meets each region of this chain in one arc joining its two old sides, and its endpoints stay within the two original boundary sides. These old sides lie in distinct tetrahedral faces.\n\nIf $R$ is an annulus whose two boundary components are trace circles and which misses $\\partial F$, its normal-cell regions form a finite cycle of quadrilaterals. There is a PL product parametrization by $S^1\\times[0,1]$ taking its two trace circles to the two end levels and keeping each intervening arc within its original normal-cell region. A Mobius patch instead has the twisted interval-bundle model and does not have two trace boundary components.\n\nThe parallelisms take place on the cut patch, cell by cell in the original triangulation. No ambient three-dimensional product region or cancellation of a separate exchange surface is asserted.",
+        "proof_strategy": "direct",
+        "dependency_level": 2,
+        "sources": {
+          "references": [
+            {
+              "title": "Wolfgang Haken, Theorie der Normalflächen: Ein Isotopiekriterium für den Kreisknoten, Acta Mathematica105 (1961),245–375",
+              "url": "https://archive.ymsc.tsinghua.edu.cn/pacm_download/117/5921-11511_2007_Article_BF02559591.pdf",
+              "locator": "Complete Chapter5, printed pp.360–374, fundamental normal-surface construction in adapted coordinates; normal-surface/exchange context for the local formulation here. The source has additional separation/adapted-coordinate hypotheses and is not attributed the present original-coordinate refinement."
+            }
+          ],
+          "attribution_boundary": "Existing authoritative subject baseline and local formulation/proof refinement, not a verbatim external theorem; the actual accepted local argument and exact hypotheses remain unchanged.",
+          "reading_limits": "URL and locator drawn from existing canonical source metadata/Statement-reference bibliography only. No source was fetched or newly read for this metadata repair; retained author reading limits remain unchanged and are not transferred into a new whole-source reading claim."
+        }
+      },
+      {
+        "id": "lem-normal-vertex-disk-certificate-verification",
+        "kind": "lemma",
+        "title": "Polynomial verification of a primitive normal vertex-disk certificate",
+        "deps": [
+          "def-normal-surface-coordinate-box",
+          "lem-normal-coordinate-matching-equations-and-finite-bounds",
+          "lem-fundamental-normal-surfaces-are-connected",
+          "lem-normal-disk-candidate-check-characterization",
+          "lem-small-integer-matrix-linear-algebra-in-quadratic-logarithmic-space"
+        ],
+        "dependency_level": 3,
+        "justified_by": [],
+        "statement": "Let $T$ be a good triangulation of a knot exterior with $t$ tetrahedra and a marked meridian path in its triangulated boundary torus. A certificate consists of a nonnegative integer vector $v$ with $7t$ binary-encoded coordinates, a set of active matching and zero-coordinate constraints, a nonzero $(7t-1)$-minor witnessing their rank, and the marked boundary data. A deterministic verifier can check the certificate in time polynomial in the certificate bit length. Acceptance verifies that $v$ is a primitive admissible extreme-ray vector of the Haken cone and that its associated normal surface is a properly embedded disk with non-null-homotopic boundary. The verifier uses arithmetic on the compressed coordinates and does not expand the normal surface into its potentially exponentially many normal disks.",
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-generated"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Joel Hass, Jeffrey C. Lagarias, and Nicholas Pippenger, The Computational Complexity of Knot and Link Problems, Journal of the ACM 46 (1999)",
+              "url": "https://www.math.ucdavis.edu/~hass/Research/Papers/Complexity/hlp.pdf",
+              "locator": "§§4–8; complete relevant passages on knot exteriors, normal coordinates, finite bounds, triangulations and unknot searches."
+            },
+            {
+              "title": "Jeff Erickson, Normal Surfaces and Knots, Computational Topology lecture notes (2009)",
+              "url": "https://jeffe.cs.illinois.edu/teaching/comptop/2009/notes/normal-surfaces.pdf",
+              "locator": "§§14.1–14.4, complete six-page notes on normal disks, matching, normal surfaces and knots."
+            }
+          ]
+        },
+        "strategy": "direct",
+        "proof_strategy": "direct"
+      },
+      {
+        "id": "lem-compatible-normal-vectors-admit-original-triangulation-regular-sum-diagrams",
+        "kind": "lemma",
+        "title": "Compatible normal vectors admit regular sum diagrams in the original triangulation",
+        "deps": [
+          "def-normal-surface-coordinate-box",
+          "lem-normal-coordinate-matching-equations-and-finite-bounds",
+          "lem-compatible-normal-disk-boundary-paths-have-a-unique-type-preserving-switch",
+          "lem-compatible-normal-surfaces-admit-finite-circle-free-tetrahedral-position",
+          "lem-triangular-normal-arcs-admit-braid-position-stable-under-partial-regular-switches"
+        ],
+        "justified_by": [],
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-generated"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Wolfgang Haken, Theorie der Normalflächen, Acta Mathematica105 (1961),245–375",
+              "url": "https://archive.ymsc.tsinghua.edu.cn/pacm_download/117/5921-11511_2007_Article_BF02559591.pdf",
+              "locator": "Chapter4 Hauptsatz4, printed pp.356–360, compatibility of partial regular switches. No identification of its adapted coordinates with the original seven coordinates is assumed here."
+            }
+          ]
+        },
+        "statement": "Let $T$ be a finite simplicial triangulation of a compact PL three-manifold. Let $x,y\\in\\mathbb Z_{\\ge0}^{7t}$ be admissible normal-coordinate vectors such that $x+y$ satisfies the quadrilateral condition. There are embedded proper normal surfaces $X,Y$ with vectors $x,y$, a finite transverse double-curve diagram $X\\cup Y$ disjoint from $T^{(1)}$, and pairwise disjoint switching neighborhoods with these properties:\n\n1. In each tetrahedron all double arcs join distinct faces. At every such arc the chosen regular switch preserves the unordered pair of normal disk types.\n2. The choices agree through every crossed face and hence along each entire double circle or proper double arc.\n3. Any partial selection of whole-curve regular switches gives a finite immersed normal-disk diagram with only the unswitched double curves and no branch points. Its total vector is $x+y$. Switches in disjoint neighborhoods commute.\n4. Switching all curves gives an embedded proper normal surface $F$ with $v(F)=x+y$ and $w(F)=w(X)+w(Y)$.\n\nThe realization of an admissible vector determines its abstract surface and its boundary curves up to PL homeomorphism of the surface and homotopy of the corresponding boundary curves in $\\partial M$. In particular, if $x+y=v(D)$ for a connected essential normal disk $D$, then $F$ is a connected essential normal disk. Thus every nontrivial coordinate decomposition of such a disk has an actual regular normal-sum diagram of this kind in the original triangulation.\n\nNo irreducibility, orientability, sphere-separation or choice hypothesis is required. The assertion concerns these explicitly constructed realizations, without claiming an ambient isotopy between arbitrary prior realizations.",
+        "proof_strategy": "direct",
+        "dependency_level": 3
+      },
+      {
+        "id": "lem-irregular-switches-in-original-face-braids-give-strict-essential-disk-improvement",
+        "kind": "lemma",
+        "title": "Irregular switches in original face braids strictly improve essential disks",
+        "deps": [
+          "def-normal-surface-coordinate-box",
+          "lem-triangular-normal-arcs-admit-braid-position-stable-under-partial-regular-switches",
+          "lem-compatible-normal-vectors-admit-original-triangulation-regular-sum-diagrams",
+          "lem-essential-pl-disks-admit-normal-replacements"
+        ],
+        "justified_by": [],
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-generated"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Wolfgang Haken, Theorie der Normalflächen, Acta Mathematica105 (1961),245–375",
+              "url": "https://archive.ymsc.tsinghua.edu.cn/pacm_download/117/5921-11511_2007_Article_BF02559591.pdf",
+              "locator": "Hauptsatz4 and Satz8, printed pp.356–366, irregular-switch fold and strict normalization. The proof below supplies the fold on an original triangulation edge by a first-turnback argument in the actual face braid, rather than transferring the adapted F-number."
+            }
+          ]
+        },
+        "statement": "Start with the normal diagram constructed by the original-triangulation regular-sum construction, retaining its central-triangle and three-strip face braids. Let $W=w(X)+w(Y)$. A preliminary subset of its double curves may already have been switched regularly.\n\nOn some of its remaining double curves choose either the regular switch or its opposite, called an **irregular switch**, leaving the others unswitched. Suppose at least one irregular switch is performed. If a parametrizing component $P$ of the resulting diagram has an embedded proper PL disk as its image and its boundary is essential in $\\partial M$, then there is an essential normal disk $D'$ in the original triangulation with\n\n$$w(D')<W.$$\n\nOther components may intersect the image of $P$ along unswitched double curves; only $P$ itself is required to be embedded. Parametrizing components separate the branches at unswitched crossings. No irreducibility, orientability, projective-plane or choice hypothesis is imposed.",
+        "proof_strategy": "direct",
+        "dependency_level": 4
+      },
+      {
+        "id": "lem-embedded-projective-planes-meet-the-one-skeleton-of-a-finite-three-triangulation",
+        "kind": "lemma",
+        "title": "An embedded projective plane meets the one-skeleton of a finite three-triangulation",
+        "deps": [
+          "ex-projective-plane-polygonal-schema",
+          "lem-parametrized-pl-balls-absorb-standard-boundary-windows",
+          "lem-no-closed-nonorientable-pl-surface-in-s-three"
+        ],
+        "justified_by": [],
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-generated"
+        },
+        "statement": "Let $T$ be a finite simplicial triangulation of a compact PL three-manifold $M$. Every PL embedded projective plane in $\\operatorname{Int}M$ meets $T^{(1)}$. The manifold may be nonorientable and may contain projective planes. No irreducibility or choice hypothesis is imposed.\n\nMore precisely, every compact subset of $\\operatorname{Int}M\\setminus T^{(1)}$ lies in the interior of an explicitly parametrized finite thickening of the dual graph, built from convex three-ball vertex pieces and standard disk-prism edge pieces. An embedded projective plane in such a thickening would lift into a parametrized finite tree of these balls, contradicting its nonorientability.",
+        "proof_strategy": "direct",
+        "dependency_level": 4,
+        "sources": {
+          "references": [
+            {
+              "title": "Wolfgang Haken, Theorie der Normalflächen: Ein Isotopiekriterium für den Kreisknoten, Acta Mathematica105 (1961),245–375",
+              "url": "https://archive.ymsc.tsinghua.edu.cn/pacm_download/117/5921-11511_2007_Article_BF02559591.pdf",
+              "locator": "Complete Chapter5, printed pp.360–374, fundamental normal-surface construction in adapted coordinates; normal-surface/exchange context for the local formulation here. The source has additional separation/adapted-coordinate hypotheses and is not attributed the present original-coordinate refinement."
+            }
+          ],
+          "attribution_boundary": "Existing authoritative subject baseline and local formulation/proof refinement, not a verbatim external theorem; the actual accepted local argument and exact hypotheses remain unchanged.",
+          "reading_limits": "URL and locator drawn from existing canonical source metadata/Statement-reference bibliography only. No source was fetched or newly read for this metadata repair; retained author reading limits remain unchanged and are not transferred into a new whole-source reading claim."
+        }
+      },
+      {
+        "id": "lem-nonvertex-fundamental-disks-have-connected-two-copy-normal-sums",
+        "kind": "lemma",
+        "title": "A nonvertex fundamental disk has a connected two-copy normal sum",
+        "deps": [
+          "def-normal-surface-coordinate-box",
+          "lem-compatible-normal-vectors-admit-original-triangulation-regular-sum-diagrams",
+          "lem-positive-euler-finite-pl-surfaces-are-disks-spheres-or-projective-planes"
+        ],
+        "justified_by": [],
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-generated"
+        },
+        "statement": "Let $D$ be a fundamental normal disk in a finite simplicial triangulation $T$. If its vector $d$ does not lie on an extreme ray of $C(T)$, there are connected embedded normal surfaces $X,Y$, neither with vector proportional to $d$, and an actual original-triangulation regular diagram whose full resolution has vector\n\n$$v(X)+v(Y)=2d.$$\n\nIts full resolution consists of two disks with boundary curves homotopic to $\\partial D$. Exactly one of the following occurs:\n\n1. $X$ and $Y$ are disks.\n2. One is a sphere and the other is an annulus; both annulus boundary curves are homotopic to $\\partial D$.\n\nIf $D$ is in addition a least-weight essential normal disk with lexicographically least vector at that weight, the first case has at least one disk with null-homotopic boundary. This is a reduction of the vertex obligation, not a proof that either case is impossible.",
+        "proof_strategy": "direct",
+        "dependency_level": 4,
+        "sources": {
+          "references": [
+            {
+              "title": "Jeffrey L. Tollefson, Normal surface Q-theory, Pacific Journal of Mathematics 183 (1998), 359–374",
+              "url": "https://msp.org/pjm/1998/183-2/pjm-v183-n2-p07-p.pdf",
+              "locator": "§4, printed pp.366–369, exchange-patch comparison baseline only. Its irreducible/boundary-irreducible hypotheses are not transferred to this local disk-product/exchange formulation; the accepted local proof remains the argument."
+            },
+            {
+              "title": "Wolfgang Haken, Theorie der Normalflächen: Ein Isotopiekriterium für den Kreisknoten, Acta Mathematica105 (1961),245–375",
+              "url": "https://archive.ymsc.tsinghua.edu.cn/pacm_download/117/5921-11511_2007_Article_BF02559591.pdf",
+              "locator": "Complete Chapter5, printed pp.360–374, fundamental normal-surface construction in adapted coordinates; normal-surface/exchange context for the local formulation here. The source has additional separation/adapted-coordinate hypotheses and is not attributed the present original-coordinate refinement."
+            }
+          ],
+          "attribution_boundary": "Existing authoritative subject baseline and local formulation/proof refinement, not a verbatim external theorem; the actual accepted local argument and exact hypotheses remain unchanged.",
+          "reading_limits": "URL and locator drawn from existing canonical source metadata/Statement-reference bibliography only. No source was fetched or newly read for this metadata repair; retained author reading limits remain unchanged and are not transferred into a new whole-source reading claim."
+        }
+      },
+      {
+        "id": "lem-between-copy-annular-exchange-caps-have-rigid-original-edge-counts",
+        "kind": "lemma",
+        "title": "Between-copy annular exchange caps have rigid original edge counts",
+        "deps": [
+          "lem-compatible-normal-vectors-admit-original-triangulation-regular-sum-diagrams",
+          "lem-essential-pl-disks-admit-normal-replacements",
+          "lem-admissible-normal-vectors-have-rigid-edge-count-averages",
+          "lem-normal-exchange-disk-patches-have-positive-edge-weight"
+        ],
+        "justified_by": [],
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-generated"
+        },
+        "statement": "Let $D$ be an essential normal disk of least original-edge weight and, among such disks, of lexicographically least normal vector in a finite simplicial PL three-manifold triangulation. In an actual original-triangulation regular normal diagram, suppose two distinct full-resolution components $D_0,D_1$ have vector $d=v(D)$. Let one of its exchange annuli $A$ have one frontier circle on each of these components, with its usual rectangular switching neighborhood and interior disjoint from the full resolution.\n\nLet $E_i\\subset D_i$ be the disk cap bounded by that circle. Then $N(E_0)=N(E_1)$ on every original global edge and $w(E_0)=w(E_1)>0$. Replacing either cap by the other cap joined across $A$ gives an embedded proper essential PL disk with the original boundary of that copy. Each replacement has edge-count vector $N(D)$, and every componentwise edge-nonincreasing essential normal replacement of it has vector $d$.\n\nNo irreducibility, orientability or fundamentalness assumption is required. Equal edge counts here do not assert that the caps are normally parallel or that the exchange lies in the product between the two copies.",
+        "proof_strategy": "direct",
+        "dependency_level": 4,
+        "sources": {
+          "references": [
+            {
+              "title": "Wolfgang Haken, Theorie der Normalflächen: Ein Isotopiekriterium für den Kreisknoten, Acta Mathematica105 (1961),245–375",
+              "url": "https://archive.ymsc.tsinghua.edu.cn/pacm_download/117/5921-11511_2007_Article_BF02559591.pdf",
+              "locator": "Complete Chapter5, printed pp.360–374, fundamental normal-surface construction in adapted coordinates; normal-surface/exchange context for the local formulation here. The source has additional separation/adapted-coordinate hypotheses and is not attributed the present original-coordinate refinement."
+            }
+          ],
+          "attribution_boundary": "Existing authoritative subject baseline and local formulation/proof refinement, not a verbatim external theorem; the actual accepted local argument and exact hypotheses remain unchanged.",
+          "reading_limits": "URL and locator drawn from existing canonical source metadata/Statement-reference bibliography only. No source was fetched or newly read for this metadata repair; retained author reading limits remain unchanged and are not transferred into a new whole-source reading claim."
+        }
+      },
+      {
+        "id": "lem-meridian-disk-criterion-for-unknot-exterior",
+        "kind": "lemma",
+        "title": "Meridian-disk criterion for unknot recognition",
+        "deps": [
+          "def-oriented-link-in-s-three-and-ambient-isotopy",
+          "def-knot-exterior",
+          "def-knot-meridian-and-preferred-longitude",
+          "lem-essential-disk-boundary-is-longitude",
+          "def-countable-choice",
+          "lem-smooth-to-pl-knot-exterior-ambient-isotopy",
+          "lem-finite-compatible-pl-surfaces-admit-relative-smooth-roundings",
+          "lem-smooth-proper-disks-have-compatible-pl-approximations",
+          "lem-degree-one-peripheral-curves-cobound-annuli-with-tube-core",
+          "lem-knot-genus-zero-iff-unknot",
+          "thm-compact-smooth-manifolds-with-corners-admit-relative-finite-triangulations"
+        ],
+        "dependency_level": 5,
+        "justified_by": [],
+        "statement": "Assume countable choice. Let $K:S^1\\to S^3$ be a smooth oriented knot with a supplied product tubular neighborhood, and let $E_K$ be its compact exterior with peripheral torus $T_K$, fibre meridian $\\mu$, and the unique degree-one generator $[\\lambda]$ of the kernel of $H_1(T_K;\\mathbb Z)\\to H_1(E_K;\\mathbb Z)$ supplied by the product-tube Mayer–Vietoris calculation. Then $K$ is ambient isotopic in the smooth category to the standard unknot if and only if $E_K$ contains a properly embedded piecewise-linear disk $D$ whose boundary is not null-homotopic in $T_K$. Every such disk has $[\\partial D]=[\\lambda]$ or $-[\\lambda]$ and has odd mod-two intersection with the original marked meridian $\\mu$.",
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-generated"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Joel Hass, Jeffrey C. Lagarias, and Nicholas Pippenger, The Computational Complexity of Knot and Link Problems, Journal of the ACM 46 (1999)",
+              "url": "https://www.math.ucdavis.edu/~hass/Research/Papers/Complexity/hlp.pdf",
+              "locator": "§4, Lemmas 4.1–4.2, printed pp.8–9/web lines 357–383; Lemma 4.1’s disk-to-unknot proof is only one sentence."
+            },
+            {
+              "title": "Jeff Erickson, Normal Surfaces and Knots, Computational Topology lecture notes (2009)",
+              "url": "https://jeffe.cs.illinois.edu/teaching/comptop/2009/notes/normal-surfaces.pdf",
+              "locator": "§14.2, printed pp.3–4; the disk criterion is stated but the reverse implication is not proved."
+            }
+          ]
+        },
+        "strategy": "not-supplied",
+        "proof_strategy": "direct"
+      },
+      {
+        "id": "lem-good-linear-size-exterior-triangulation-from-diagram",
+        "kind": "lemma",
+        "title": "Linear-size good exterior triangulation from a planar knot code",
+        "deps": [
+          "def-planar-diagram-gauss-and-dowker-codes",
+          "lem-planar-diagram-code-realizability-and-face-validation",
+          "alg-planar-code-validation-and-diagram-reconstruction",
+          "thm-planar-code-validation-and-diagram-reconstruction-procedure-properties"
+        ],
+        "dependency_level": 5,
+        "justified_by": [],
+        "statement": "For every valid connected one-component oriented planar knot code with $n$ crossings together with a specified polygonal realization $P$ whose regular projection has that code, there is an explicit finite combinatorial construction of a triangulated $S^3$ containing that same $P$ as a subcomplex. An abstract valid code can first be realized by the stated reconstruction procedure and then used as $P$. A **good exterior triangulation** is the triangulation inherited on the complement of the interior of a regular neighborhood made from one fixed ball around each vertex of $P$ and one fixed tube block along each edge, with its boundary torus triangulated and a meridian path marked. The construction gives a good exterior triangulation with at most $C(n+1)$ tetrahedra for one universal constant $C$, and the marked meridian is a path of at most $C(n+1)$ boundary edges. At $n=0$ the construction uses a fixed solid-torus exterior triangulation.\n\nA local crossing is lifted by separating the over- and under-strands in the interval direction; the schematic below records only the projected crossing, with the continuous strand passing over the gapped strand.\n\n~~~tikz\n\\begin{tikzpicture}[scale=1.15]\n\\draw[very thick] (-1,-1)--(1,1);\n\\draw[white,line width=7pt] (-1,1)--(1,-1);\n\\draw[thick] (-1,1)--(-0.18,0.18);\n\\draw[thick] (0.18,-0.18)--(1,-1);\n\\node at (0.62,0.78) {over};\n\\node at (-0.70,0.76) {under};\n\\end{tikzpicture}\n~~~\n\nThe picture records only the planar local incidence. The proof constructs disjoint arcs in a three-dimensional crossing block and does not infer embeddedness from the drawing.",
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-generated"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Joel Hass, Jeffrey C. Lagarias, and Nicholas Pippenger, The Computational Complexity of Knot and Link Problems, Journal of the ACM 46 (1999)",
+              "url": "https://www.math.ucdavis.edu/~hass/Research/Papers/Complexity/hlp.pdf",
+              "locator": "§7, complete construction and linear-size triangulation estimates, printed pp.17–20/web lines 757–879."
+            },
+            {
+              "title": "Jeff Erickson, Normal Surfaces and Knots, Computational Topology lecture notes (2009)",
+              "url": "https://jeffe.cs.illinois.edu/teaching/comptop/2009/notes/normal-surfaces.pdf",
+              "locator": "§14.4, complete knot and exterior-triangulation overview, printed pp.5–6."
+            }
+          ]
+        },
+        "strategy": "direct",
+        "proof_strategy": "direct"
+      },
+      {
+        "id": "lem-reduced-original-normal-pairs-for-a-least-weight-essential-disk-have-no-spherical-summand",
+        "kind": "lemma",
+        "title": "A reduced original normal pair for a least-weight essential disk has no spherical summand",
+        "deps": [
+          "lem-compatible-normal-vectors-admit-original-triangulation-regular-sum-diagrams",
+          "lem-regular-normal-sum-diagrams-have-reduced-connected-pairs",
+          "lem-positive-euler-finite-pl-surfaces-are-disks-spheres-or-projective-planes",
+          "lem-irregular-switches-in-original-face-braids-give-strict-essential-disk-improvement",
+          "thm-polygonal-jordan-curve",
+          "thm-simple-polygon-admits-a-triangulation"
+        ],
+        "justified_by": [],
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-generated"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Wolfgang Haken, Theorie der Normalflächen, Acta Mathematica105 (1961),245–375",
+              "url": "https://archive.ymsc.tsinghua.edu.cn/pacm_download/117/5921-11511_2007_Article_BF02559591.pdf",
+              "locator": "Chapter5 Satz7–9, printed pp.361–369. This disk-specific proof uses the original-face braid and the retained switch neighborhoods; it requires no global sphere-separation or sphere-bicollar input."
+            }
+          ]
+        },
+        "statement": "Let $F$ be a least-edge-weight essential normal disk in a compact PL three-manifold with a finite simplicial triangulation. Put a nontrivial decomposition of $v(F)$ into the original-triangulation regular diagram of the original-triangulation regular-sum construction, and obtain a reduced connected pair $G,H$ by the reduced-connected-pair lemma, retaining the face braids and switch neighborhoods.\n\nNeither $G$ nor $H$ is a two-sphere. No lexicographic tie-break, ambient orientability, projective-plane exclusion, sphere separation, sphere irreducibility or separately supplied bicollar is required. The needed local side choices come from the retained coherent regular switches themselves.",
+        "proof_strategy": "direct",
+        "dependency_level": 5
+      },
+      {
+        "id": "lem-reduced-original-normal-pairs-for-a-least-weight-essential-disk-have-no-projective-plane-summand",
+        "kind": "lemma",
+        "title": "A reduced original normal pair for a least-weight essential disk has no projective-plane summand",
+        "deps": [
+          "lem-compatible-normal-vectors-admit-original-triangulation-regular-sum-diagrams",
+          "lem-regular-normal-sum-diagrams-have-reduced-connected-pairs",
+          "lem-connected-normal-surface-chi-one-is-disk",
+          "lem-positive-euler-finite-pl-surfaces-are-disks-spheres-or-projective-planes",
+          "ex-projective-plane-polygonal-schema",
+          "lem-irregular-switches-in-original-face-braids-give-strict-essential-disk-improvement"
+        ],
+        "justified_by": [],
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-generated"
+        },
+        "statement": "Let $F$ be a least-edge-weight essential normal disk in a compact PL three-manifold with a finite simplicial triangulation. Suppose a nontrivial decomposition of its normal vector has been put into the original-triangulation regular diagram of the original-triangulation regular-sum construction, and partial regular switches have produced a reduced connected pair $G,H$ as in the reduced-connected-pair lemma. Retain the face braids and switch neighborhoods.\n\nNeither $G$ nor $H$ is a projective plane. The ambient manifold is allowed to contain projective planes; no orientability, irreducibility or choice hypothesis is used.",
+        "proof_strategy": "direct",
+        "dependency_level": 5,
+        "sources": {
+          "references": [
+            {
+              "title": "Wolfgang Haken, Theorie der Normalflächen: Ein Isotopiekriterium für den Kreisknoten, Acta Mathematica105 (1961),245–375",
+              "url": "https://archive.ymsc.tsinghua.edu.cn/pacm_download/117/5921-11511_2007_Article_BF02559591.pdf",
+              "locator": "Complete Chapter5, printed pp.360–374, fundamental normal-surface construction in adapted coordinates; normal-surface/exchange context for the local formulation here. The source has additional separation/adapted-coordinate hypotheses and is not attributed the present original-coordinate refinement."
+            }
+          ],
+          "attribution_boundary": "Existing authoritative subject baseline and local formulation/proof refinement, not a verbatim external theorem; the actual accepted local argument and exact hypotheses remain unchanged.",
+          "reading_limits": "URL and locator drawn from existing canonical source metadata/Statement-reference bibliography only. No source was fetched or newly read for this metadata repair; retained author reading limits remain unchanged and are not transferred into a new whole-source reading claim."
+        }
+      },
+      {
+        "id": "lem-closed-normal-subdiagrams-inherit-strict-irregular-disk-improvement",
+        "kind": "lemma",
+        "title": "Closed normal subdiagrams inherit strict irregular disk improvement",
+        "deps": [
+          "lem-compatible-normal-vectors-admit-original-triangulation-regular-sum-diagrams",
+          "lem-triangular-normal-arcs-admit-braid-position-stable-under-partial-regular-switches",
+          "lem-irregular-switches-in-original-face-braids-give-strict-essential-disk-improvement",
+          "lem-essential-pl-disks-admit-normal-replacements"
+        ],
+        "justified_by": [],
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-generated"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Wolfgang Haken, Theorie der Normalflächen, Acta Mathematica105 (1961),245–375",
+              "url": "https://archive.ymsc.tsinghua.edu.cn/pacm_download/117/5921-11511_2007_Article_BF02559591.pdf",
+              "locator": "Hauptsatz4 and Satz8, printed pp.356–366. The restriction to actual original-triangulation parametrizing components and its own edge weight is proved below."
+            }
+          ]
+        },
+        "statement": "Take an actual original-triangulation regular normal diagram, retaining its face braids after any preliminary whole-curve regular switches. Choose a nonempty union $S$ of whole components of its parametrizing normalization. Assume every remaining double curve incident to $S$ has both branches in $S$. Retain its geometric strands, tetrahedral disk pieces and remaining double curves, and write $W_S$ for the total number of its original edge-intersection points, counted on those parametrizing components.\n\nResolve any selection of these remaining curves regularly or irregularly. If at least one irregular switch is made, and the resulting normalization has a component whose image is an embedded proper disk with essential boundary in $\\partial M$, then the original triangulation contains an essential normal disk of weight strictly less than $W_S$.\n\nThe chosen $S$ may be a single immersed parametrizing component with self-double curves; no partition of it into two globally embedded normal families is assumed. The closure condition concerns the actual remaining double curves, not merely a selection of tetrahedral disk types.",
+        "proof_strategy": "direct",
+        "dependency_level": 5
+      },
+      {
+        "id": "thm-smooth-knot-has-compatible-pl-exterior-model",
+        "kind": "theorem",
+        "title": "Smooth knots have compatible piecewise-linear exterior models",
+        "deps": [
+          "def-oriented-link-in-s-three-and-ambient-isotopy",
+          "def-knot-exterior",
+          "def-knot-meridian-and-preferred-longitude",
+          "lem-smooth-to-pl-knot-exterior-ambient-isotopy",
+          "lem-good-linear-size-exterior-triangulation-from-diagram",
+          "def-regular-oriented-link-diagram",
+          "def-planar-diagram-gauss-and-dowker-codes"
+        ],
+        "dependency_level": 6,
+        "justified_by": [],
+        "statement": "Assume countable choice. Let $K$ be a smooth oriented knot with a finite regular projection diagram $D$ having $n$ crossings and a supplied product tube. There is a polygonal knot $P$ inside that tube with the same crossing code as $D$ and a smooth rounding $K^\\sharp$ of $P$ such that $K^\\sharp$ is smoothly ambient isotopic to $K$. The compact exterior of this same $P$ has a good triangulation with at most $C(n+1)$ tetrahedra and a marked path for the original meridian with at most $C(n+1)$ boundary edges, for one universal constant $C$. The peripheral-preserving exterior homeomorphism transfers this model to $K^\\sharp$.",
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-generated"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Joel Hass, Jeffrey C. Lagarias, and Nicholas Pippenger, The Computational Complexity of Knot and Link Problems, Journal of the ACM 46 (1999)",
+              "url": "https://www.math.ucdavis.edu/~hass/Research/Papers/Complexity/hlp.pdf",
+              "locator": "§7, complete diagram-to-exterior triangulation construction and linear-size estimates, printed pp.17–20/web lines 757–879."
+            },
+            {
+              "title": "Jeff Erickson, Normal Surfaces and Knots, Computational Topology lecture notes (2009)",
+              "url": "https://jeffe.cs.illinois.edu/teaching/comptop/2009/notes/normal-surfaces.pdf",
+              "locator": "§14.4, complete knot and exterior-triangulation overview, printed pp.5–6."
+            }
+          ]
+        },
+        "strategy": "direct",
+        "proof_strategy": "direct"
+      },
+      {
+        "id": "alg-haken-jaco-tollefson-unknot-recognition",
+        "kind": "algorithm",
+        "title": "Haken–Jaco–Tollefson normal-surface unknot search",
+        "deps": [
+          "def-planar-diagram-gauss-and-dowker-codes",
+          "alg-planar-code-validation-and-diagram-reconstruction",
+          "thm-planar-code-validation-and-diagram-reconstruction-procedure-properties",
+          "def-normal-surface-coordinate-box",
+          "lem-normal-coordinate-matching-equations-and-finite-bounds",
+          "lem-normal-disk-candidate-check-characterization",
+          "lem-fundamental-normal-surfaces-are-connected",
+          "lem-good-linear-size-exterior-triangulation-from-diagram"
+        ],
+        "dependency_level": 6,
+        "justified_by": [],
+        "statement": "**Input:** A finite tagged Gauss code, signed Dowker–Thistlethwaite code, or oriented planar-diagram code in the code conventions of the planar-code definition, and a mode, either **Haken** or **JT**.\n\n**Output:** The first validation error with its witness; **not-a-knot** for a valid code with more than one component; **disk-certificate** with a normal-coordinate vector and its finite witness data; or **no-candidate** after the selected search is exhausted.\n\n**Procedure:**\n\n1. Run the planar-code validation procedure. Return its first invalid result if validation fails. If the validated code represents more than one component, return **not-a-knot**.\n2. Let $n$ be its crossing count. Construct the good triangulated exterior $E$ with $t\\le C(n+1)$ tetrahedra and the marked original meridian path.\n3. In Haken mode, enumerate all vectors $v\\in\\mathbb Z^{7t}$ with $0\\le v_i\\le t2^{7t+2}$ in lexicographic order. Retain a vector only if it satisfies all matching equations and quadrilateral restrictions and is fundamental. Fundamentalness supplies connectedness. Compute nonempty-boundary, Euler-characteristic, and mod-two meridian-intersection data from the compressed coordinates, without expanding the surface. Return **disk-certificate** at the first vector passing these tests; return **no-candidate** after the finite box is exhausted.\n4. In JT mode, let $A$ be the integer matching matrix and put $m=7t$. Enumerate all subsets $Z\\subseteq\\{1,\\ldots,m\\}$ in lexicographic order. For each $Z$, append the equations $v_i=0$ for $i\\in Z$ to $Av=0$. If the combined matrix has rank $m-1$ and its one-dimensional kernel contains a nonzero nonnegative vector, compute the unique relatively prime nonnegative integer generator $v$ of that ray. Require that its positive-coordinate support be exactly the complement of $Z$; this visits each ray once, at its exact zero-coordinate support. Discard vectors that violate the quadrilateral restriction. A primitive generator on an extreme ray is fundamental, so its surface is connected. Compute nonempty-boundary, Euler-characteristic, and mod-two meridian-intersection data from the compressed coordinates, without expanding the surface. Return **disk-certificate** at the first passing vector; return **no-candidate** after all subsets have been processed.\n\nThe candidate tests use the boundary arcs and Euler-characteristic data computed from the compressed normal coordinates. No correctness or complexity assertion is part of this algorithm definition.",
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "not-applicable"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Joel Hass, Jeffrey C. Lagarias, and Nicholas Pippenger, The Computational Complexity of Knot and Link Problems, Journal of the ACM 46 (1999)",
+              "url": "https://www.math.ucdavis.edu/~hass/Research/Papers/Complexity/hlp.pdf",
+              "locator": "§§4–8 and §10, complete passages on normal-surface algorithms, finite bounds, triangulations and certificate analysis."
+            },
+            {
+              "title": "Jeff Erickson, Normal Surfaces and Knots, Computational Topology lecture notes (2009)",
+              "url": "https://jeffe.cs.illinois.edu/teaching/comptop/2009/notes/normal-surfaces.pdf",
+              "locator": "§§14.1–14.4, complete six-page note on normal disks, matching and unknot recognition."
+            }
+          ]
+        },
+        "strategy": "not-applicable",
+        "proof_strategy": "not-applicable"
+      },
+      {
+        "id": "lem-nonfundamental-least-weight-essential-disks-have-a-pure-boundary-obstruction",
+        "kind": "lemma",
+        "title": "A nonfundamental least-weight essential disk has a pure boundary obstruction",
+        "deps": [
+          "lem-compatible-normal-vectors-admit-original-triangulation-regular-sum-diagrams",
+          "lem-regular-normal-sum-diagrams-have-reduced-connected-pairs",
+          "lem-reduced-original-normal-pairs-for-a-least-weight-essential-disk-have-no-spherical-summand",
+          "lem-reduced-original-normal-pairs-for-a-least-weight-essential-disk-have-no-projective-plane-summand",
+          "lem-positive-euler-finite-pl-surfaces-are-disks-spheres-or-projective-planes",
+          "lem-normal-exchange-disk-patches-have-positive-edge-weight",
+          "lem-essential-pl-disks-admit-normal-replacements",
+          "lem-irregular-switches-in-original-face-braids-give-strict-essential-disk-improvement",
+          "thm-polygonal-jordan-curve",
+          "thm-simple-polygon-admits-a-triangulation"
+        ],
+        "justified_by": [],
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-generated"
+        },
+        "statement": "Let $F$ be a least-edge-weight essential normal disk in a compact PL three-manifold with a finite simplicial triangulation $T$. If its normal vector has a nontrivial admissible decomposition, construct the original-triangulation regular diagram and a reduced connected pair $P,H$ using the original-triangulation regular-sum construction and the reduced-connected-pair lemma. Retain their face braids and switch neighborhoods.\n\nAfter interchanging the two summands if necessary, $P$ is a disk with null-homotopic boundary in $\\partial M$, and $H$ is an annulus or a Mobius band. Their intersection consists of $k\\ge2$ properly embedded arcs and no circles. Every intersection arc separates $P$ and does not separate $H$. Cutting all the arcs leaves $k+1$ disk patches in $P$ and $k$ disk patches in $H$.\n\nThere are at least two patches $E$ of $P$ with exactly one cut-arc side and one original-boundary side. Each has positive edge weight. Choose such a patch of smallest weight. Boundary compression of $H$ along $E$ produces an embedded proper PL disk $D_E$ satisfying\n\n$$w(D_E)=w(H)+2w(E)\\le w(H)+w(P)=w(F).$$\n\nIf $\\partial D_E$ is not null-homotopic in $\\partial M$, then every inequality displayed above is an equality, and normal replacement of $D_E$ can retain an essential disk only at weight $w(F)$. The lemma makes no assertion that this boundary is essential. No irreducibility, orientability or exclusion of projective planes is assumed.",
+        "proof_strategy": "direct",
+        "dependency_level": 6,
+        "sources": {
+          "references": [
+            {
+              "title": "Wolfgang Haken, Theorie der Normalflächen: Ein Isotopiekriterium für den Kreisknoten, Acta Mathematica105 (1961),245–375",
+              "url": "https://archive.ymsc.tsinghua.edu.cn/pacm_download/117/5921-11511_2007_Article_BF02559591.pdf",
+              "locator": "Complete Chapter5, printed pp.360–374, fundamental normal-surface construction in adapted coordinates; normal-surface/exchange context for the local formulation here. The source has additional separation/adapted-coordinate hypotheses and is not attributed the present original-coordinate refinement."
+            }
+          ],
+          "attribution_boundary": "Existing authoritative subject baseline and local formulation/proof refinement, not a verbatim external theorem; the actual accepted local argument and exact hypotheses remain unchanged.",
+          "reading_limits": "URL and locator drawn from existing canonical source metadata/Statement-reference bibliography only. No source was fetched or newly read for this metadata repair; retained author reading limits remain unchanged and are not transferred into a new whole-source reading claim."
+        }
+      },
+      {
+        "id": "lem-same-copy-exchanges-on-least-fundamental-disks-have-disjoint-adjacent-caps",
+        "kind": "lemma",
+        "title": "Same-copy exchanges on least fundamental disks have disjoint adjacent caps",
+        "deps": [
+          "def-normal-surface-coordinate-box",
+          "lem-compatible-normal-vectors-admit-original-triangulation-regular-sum-diagrams",
+          "lem-closed-normal-subdiagrams-inherit-strict-irregular-disk-improvement"
+        ],
+        "justified_by": [],
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-generated"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Chan-Ho Suh, The unknotting problem and normal surface Q-theory",
+              "url": "https://arxiv.org/pdf/1009.1500",
+              "locator": "Theorem3.12 preliminary annular and proper-arc cases. The proof below instead uses fundamentalness and the original retained-diagram irregular improvement, so does not assume irreducibility or annular patch positivity."
+            }
+          ]
+        },
+        "statement": "Let an actual original-triangulation regular normal diagram have full embedded resolution $F$. Suppose a component $D$ of $F$ is an essential normal disk, is fundamental, and has least weight among all essential normal disks in that triangulation.\n\nChoose one original double circle or proper double arc whose two trace curves in the full resolution both lie on $D$. Assume its exchange surface is respectively an annulus or a disk with its usual rectangular switching neighborhood. Then the traces bound disjoint adjacent disk caps on $D$. For a proper exchange disk these are the two outer caps cut off by the two trace arcs. For an exchange annulus the unique two caps bounded by the trace circles are disjoint and adjacent.\n\nHere adjacency means that the two cap germs occupy the same side of the exchange surface in its switching neighborhood. The result concerns these actual original-diagram exchanges, not an arbitrary separately supplied spanning annulus. No irreducibility, orientability or sphere-separation assumption is required.",
+        "proof_strategy": "direct",
+        "dependency_level": 6
+      },
+      {
+        "id": "lem-between-copy-proper-exchanges-have-essential-diagonals-and-rigid-cap-counts",
+        "kind": "lemma",
+        "title": "Between-copy proper exchanges have essential diagonals and rigid cap counts",
+        "deps": [
+          "lem-compatible-normal-vectors-admit-original-triangulation-regular-sum-diagrams",
+          "lem-closed-normal-subdiagrams-inherit-strict-irregular-disk-improvement",
+          "lem-irregular-switches-in-original-face-braids-give-strict-essential-disk-improvement",
+          "lem-essential-pl-disks-admit-normal-replacements",
+          "lem-normal-exchange-disk-patches-have-positive-edge-weight"
+        ],
+        "justified_by": [],
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-generated"
+        },
+        "statement": "Let $D$ be a least-weight essential normal disk in a finite simplicial triangulation of a compact PL three-manifold, with lexicographically least normal vector among essential disks at that weight; put $d=v(D)$. In an actual original-triangulation regular diagram whose full resolution consists of two disjoint disks $D_0,D_1$ with vector $d$, choose an original proper double arc whose exchange disk joins a trace on $D_0$ to a trace on $D_1$.\n\nSwitch every other original curve regularly and leave this arc unswitched. Its two affected parametrizing components are embedded essential normal disks, each with vector $d$. In the transverse exchange rectangle choose the cap on the upper side at each frontier, denoting these adjacent caps by $E_0,E_1$; write $K_i$ for the complementary disk in $D_i$. Then\n\n$$N(E_0)=N(E_1)>0,\\qquad N(K_0)=N(K_1)>0,$$\n\nwhere equality is componentwise on the original global edges and positivity means positive total weight. The two original diagonal disks are $E_0$ joined to $K_1$ and $K_0$ joined to $E_1$, along their original exchange continuations. The opposite, irregular pairing gives two embedded proper PL disks, at least one with null-homotopic boundary. This holds without fundamentalness, irreducibility, orientability or a choice principle. No normal parallelism of the caps is asserted.",
+        "proof_strategy": "direct",
+        "dependency_level": 6,
+        "sources": {
+          "references": [
+            {
+              "title": "Wolfgang Haken, Theorie der Normalflächen: Ein Isotopiekriterium für den Kreisknoten, Acta Mathematica105 (1961),245–375",
+              "url": "https://archive.ymsc.tsinghua.edu.cn/pacm_download/117/5921-11511_2007_Article_BF02559591.pdf",
+              "locator": "Complete Chapter5, printed pp.360–374, fundamental normal-surface construction in adapted coordinates; normal-surface/exchange context for the local formulation here. The source has additional separation/adapted-coordinate hypotheses and is not attributed the present original-coordinate refinement."
+            }
+          ],
+          "attribution_boundary": "Existing authoritative subject baseline and local formulation/proof refinement, not a verbatim external theorem; the actual accepted local argument and exact hypotheses remain unchanged.",
+          "reading_limits": "URL and locator drawn from existing canonical source metadata/Statement-reference bibliography only. No source was fetched or newly read for this metadata repair; retained author reading limits remain unchanged and are not transferred into a new whole-source reading claim."
+        }
+      },
+      {
+        "id": "thm-haken-jaco-tollefson-unknot-recognition-procedure-properties",
+        "kind": "theorem",
+        "title": "Finite procedure properties of the Haken–Jaco–Tollefson search",
+        "deps": [
+          "alg-haken-jaco-tollefson-unknot-recognition"
+        ],
+        "dependency_level": 7,
+        "justified_by": [],
+        "statement": "For every finite input code and either selected mode, the Haken–Jaco–Tollefson procedure terminates. It returns the prescribed first validation error for an invalid code, returns **not-a-knot** for a valid multi-component code, and for a valid one-component knot code returns either a finite normal-coordinate disk-candidate certificate or **no-candidate** after exhaustive search.",
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-generated"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Joel Hass, Jeffrey C. Lagarias, and Nicholas Pippenger, The Computational Complexity of Knot and Link Problems, Journal of the ACM 46 (1999)",
+              "url": "https://www.math.ucdavis.edu/~hass/Research/Papers/Complexity/hlp.pdf",
+              "locator": "§§4–8 and §10, complete passages on normal-surface algorithms, finite bounds, triangulations and certificate analysis."
+            },
+            {
+              "title": "Jeff Erickson, Normal Surfaces and Knots, Computational Topology lecture notes (2009)",
+              "url": "https://jeffe.cs.illinois.edu/teaching/comptop/2009/notes/normal-surfaces.pdf",
+              "locator": "§§14.1–14.4, complete six-page note on normal disks, matching and unknot recognition."
+            }
+          ]
+        },
+        "strategy": "direct",
+        "proof_strategy": "direct"
+      },
+      {
+        "id": "lem-haken-search-acceptance-is-an-essential-normal-disk",
+        "kind": "lemma",
+        "title": "Haken-search acceptance supplies an essential normal disk",
+        "deps": [
+          "alg-haken-jaco-tollefson-unknot-recognition",
+          "lem-normal-disk-candidate-check-characterization",
+          "lem-fundamental-normal-surfaces-are-connected"
+        ],
+        "dependency_level": 7,
+        "justified_by": [],
+        "statement": "Whenever the Haken branch of the Haken–Jaco–Tollefson search returns a disk-certificate, the associated normal surface is a properly embedded disk with non-null-homotopic boundary in the triangulated knot exterior.",
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-generated"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Joel Hass, Jeffrey C. Lagarias, and Nicholas Pippenger, The Computational Complexity of Knot and Link Problems, Journal of the ACM 46 (1999)",
+              "url": "https://www.math.ucdavis.edu/~hass/Research/Papers/Complexity/hlp.pdf",
+              "locator": "§§4–8 and §10, complete passages on normal-surface algorithms, finite bounds, triangulations and certificate analysis."
+            },
+            {
+              "title": "Jeff Erickson, Normal Surfaces and Knots, Computational Topology lecture notes (2009)",
+              "url": "https://jeffe.cs.illinois.edu/teaching/comptop/2009/notes/normal-surfaces.pdf",
+              "locator": "§§14.1–14.4, complete six-page note on normal disks, matching and unknot recognition."
+            }
+          ]
+        },
+        "strategy": "direct",
+        "proof_strategy": "direct"
+      },
+      {
+        "id": "lem-jt-search-acceptance-is-an-essential-normal-disk",
+        "kind": "lemma",
+        "title": "Jaco–Tollefson-search acceptance supplies an essential normal disk",
+        "deps": [
+          "alg-haken-jaco-tollefson-unknot-recognition",
+          "lem-normal-disk-candidate-check-characterization",
+          "lem-fundamental-normal-surfaces-are-connected"
+        ],
+        "dependency_level": 7,
+        "justified_by": [],
+        "statement": "Whenever the JT branch of the Haken–Jaco–Tollefson search returns a disk-certificate, its primitive vertex normal surface is a properly embedded disk with non-null-homotopic boundary in the triangulated knot exterior.",
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-generated"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Joel Hass, Jeffrey C. Lagarias, and Nicholas Pippenger, The Computational Complexity of Knot and Link Problems, Journal of the ACM 46 (1999)",
+              "url": "https://www.math.ucdavis.edu/~hass/Research/Papers/Complexity/hlp.pdf",
+              "locator": "§§4–8 and §10, complete passages on normal-surface algorithms, finite bounds, triangulations and certificate analysis."
+            },
+            {
+              "title": "Jeff Erickson, Normal Surfaces and Knots, Computational Topology lecture notes (2009)",
+              "url": "https://jeffe.cs.illinois.edu/teaching/comptop/2009/notes/normal-surfaces.pdf",
+              "locator": "§§14.1–14.4, complete six-page note on normal disks, matching and unknot recognition."
+            }
+          ]
+        },
+        "strategy": "direct",
+        "proof_strategy": "direct"
+      },
+      {
+        "id": "lem-boundary-exchange-leaf-caps-for-a-least-weight-disk-have-rigid-edge-counts",
+        "kind": "lemma",
+        "title": "Boundary exchange leaf caps of a least-weight disk have rigid edge counts",
+        "deps": [
+          "lem-nonfundamental-least-weight-essential-disks-have-a-pure-boundary-obstruction",
+          "lem-compatible-normal-vectors-admit-original-triangulation-regular-sum-diagrams",
+          "lem-regular-normal-sum-diagrams-have-reduced-connected-pairs",
+          "lem-positive-euler-finite-pl-surfaces-are-disks-spheres-or-projective-planes",
+          "lem-irregular-switches-in-original-face-braids-give-strict-essential-disk-improvement",
+          "lem-essential-pl-disks-admit-normal-replacements",
+          "lem-admissible-normal-vectors-have-rigid-edge-count-averages",
+          "thm-polygonal-jordan-curve",
+          "thm-simple-polygon-admits-a-triangulation"
+        ],
+        "justified_by": [],
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-generated"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Horst Schubert, Bestimmung der Primfaktorzerlegung von Verkettungen, Mathematische Zeitschrift76 (1961),116–148",
+              "url": "https://gdz.sub.uni-goettingen.de/download/pdf/PPN266833020_0076/LOG_0022.pdf",
+              "locator": "§5.4, second case, printed pp.139–141, the uncut disk and opposite disk construction. The boundary essentiality and original-edge equality below are proved directly."
+            }
+          ]
+        },
+        "statement": "Choose a least-edge-weight essential normal disk $F$ whose normal vector is lexicographically least among such disks. Suppose a nontrivial vector decomposition has been put into the retained original-triangulation regular diagram and reduced to the pair $P,H$ of the pure boundary-obstruction lemma. Thus $P$ is a disk, $H$ is an annulus or Mobius band, and their remaining intersections are $k\\ge2$ proper arcs.\n\nLet $E$ be a leaf disk patch of $P$, with sole cut-arc side $\\alpha$. Regularly switch every remaining double arc except $\\alpha$, and cut the two parametrizing copies of $\\alpha$. There are exactly three disk pieces: $E$, an opposite end disk $E'$, and a middle disk $K$. Their images have pairwise disjoint interiors; their only coincident boundary arcs are the indicated copies of $\\alpha$. The irregular switch along $\\alpha$ joins $E$ to $E'$ into an embedded proper disk $W$. Its boundary is null-homotopic in $\\partial M$.\n\nReplacing either end disk by a second parallel copy of the other produces embedded proper disks\n\n$$A=K+2E,\\qquad A'=K+2E'.$$\n\nBoth have essential boundary. For every original edge $e$ of $T$,\n\n$$|E\\cap e|=|E'\\cap e|.$$\n\nBoth disks have weight $w(F)$, and their essential normal replacements have exactly $F$'s normal vector and preserve every original edge count. These conclusions do not assert that $E,E'$ are normally isotopic or that their intervening region can be cancelled.",
+        "proof_strategy": "direct",
+        "dependency_level": 7
+      },
+      {
+        "id": "lem-actual-same-copy-exchange-caps-have-rigid-original-edge-counts",
+        "kind": "lemma",
+        "title": "Actual same-copy exchange caps have rigid original edge counts",
+        "deps": [
+          "lem-same-copy-exchanges-on-least-fundamental-disks-have-disjoint-adjacent-caps",
+          "lem-closed-normal-subdiagrams-inherit-strict-irregular-disk-improvement",
+          "lem-normal-exchange-disk-patches-have-positive-edge-weight",
+          "lem-admissible-normal-vectors-have-rigid-edge-count-averages",
+          "lem-essential-pl-disks-admit-normal-replacements"
+        ],
+        "justified_by": [],
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-generated"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Chan-Ho Suh, The unknotting problem and normal surface Q-theory",
+              "url": "https://arxiv.org/pdf/1009.1500",
+              "locator": "Theorem3.12 cap replacement. The componentwise original-edge equality and full lexicographic conclusion are proved below without irreducibility."
+            }
+          ]
+        },
+        "statement": "In an actual original-triangulation regular diagram let a full-resolution component $D$ be a fundamental essential normal disk, of least weight among essential normal disks and with lexicographically least normal vector at that weight. Let an annular or proper disk exchange belonging to this diagram have both trace components on $D$.\n\nIts disjoint adjacent disk caps $E,E'$ have equal counts on every original triangulation edge and positive total edge weight: $N(E)=N(E')$ and $w(E)=w(E')>0$. Replacing either cap by a nearby copy of the other along the exchange gives an embedded proper PL disk with essential boundary. Both replacements have edge-count vector $N(D)$, and their componentwise edge-nonincreasing normal replacements have exactly the original normal vector $v(D)$.\n\nFor a proper disk exchange, the alternative disk obtained by joining its two outer caps along the exchange has null-homotopic boundary in $\\partial M$. No assertion of normal parallelism of $E,E'$ is made.",
+        "proof_strategy": "direct",
+        "dependency_level": 7
+      },
+      {
+        "id": "lem-minimum-boundary-exchange-leaves-have-single-leaf-zero-edge-corridors",
+        "kind": "lemma",
+        "title": "Minimum boundary exchange leaves have a single-leaf zero-edge corridor",
+        "deps": [
+          "lem-nonfundamental-least-weight-essential-disks-have-a-pure-boundary-obstruction",
+          "lem-boundary-exchange-leaf-caps-for-a-least-weight-disk-have-rigid-edge-counts",
+          "lem-zero-edge-normal-exchange-rectangles-and-annuli-have-cellwise-product-structures",
+          "lem-normal-exchange-disk-patches-have-positive-edge-weight",
+          "lem-compatible-normal-vectors-admit-original-triangulation-regular-sum-diagrams",
+          "thm-polygonal-jordan-curve",
+          "thm-simple-polygon-admits-a-triangulation"
+        ],
+        "justified_by": [],
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-generated"
+        },
+        "statement": "Use the least-weight and lexicographically least disk $F$, reduced boundary pair $P,H$, and leaf/opposite-cap construction of the leaf-cap rigidity lemma. Choose a leaf disk patch $E$ of $P$ with smallest weight among all such leaves, and let $E'$ be its opposite end disk.\n\nView these pieces on the regular full-resolution disk $F$, retaining the two traces of every exchange arc and the exchange rectangle off $F$ between them. Then $E'$ contains exactly one original leaf disk patch $L$ of $P$, with its small half-switch-band collars included. It has $w(L)=w(E)>0$. Either $E'=L$, or the closure of $E'\\setminus L$ is a disk corridor with two trace-arc sides, two original-boundary sides, and zero edge weight. In the latter case its original normal-cell product structure gives an isotopy of the cap $E'$ onto $L$ on $F$, fixing its original edge intersections and keeping every point in its original normal cell. This is a finite cap transport on the given normal disk; it asserts no ambient three-dimensional filling or cancellation of a cycle of exchanges.",
+        "proof_strategy": "direct",
+        "dependency_level": 8,
+        "sources": {
+          "references": [
+            {
+              "title": "Wolfgang Haken, Theorie der Normalflächen: Ein Isotopiekriterium für den Kreisknoten, Acta Mathematica105 (1961),245–375",
+              "url": "https://archive.ymsc.tsinghua.edu.cn/pacm_download/117/5921-11511_2007_Article_BF02559591.pdf",
+              "locator": "Complete Chapter5, printed pp.360–374, fundamental normal-surface construction in adapted coordinates; normal-surface/exchange context for the local formulation here. The source has additional separation/adapted-coordinate hypotheses and is not attributed the present original-coordinate refinement."
+            }
+          ],
+          "attribution_boundary": "Existing authoritative subject baseline and local formulation/proof refinement, not a verbatim external theorem; the actual accepted local argument and exact hypotheses remain unchanged.",
+          "reading_limits": "URL and locator drawn from existing canonical source metadata/Statement-reference bibliography only. No source was fetched or newly read for this metadata repair; retained author reading limits remain unchanged and are not transferred into a new whole-source reading claim."
+        }
+      },
+      {
+        "id": "lem-boundary-exchange-middle-disks-have-positive-original-edge-weight",
+        "kind": "lemma",
+        "title": "Boundary exchange middle disks have positive original edge weight",
+        "deps": [
+          "lem-boundary-exchange-leaf-caps-for-a-least-weight-disk-have-rigid-edge-counts",
+          "lem-embedded-projective-planes-meet-the-one-skeleton-of-a-finite-three-triangulation",
+          "lem-positive-euler-finite-pl-surfaces-are-disks-spheres-or-projective-planes",
+          "thm-polygonal-jordan-curve",
+          "thm-simple-polygon-admits-a-triangulation"
+        ],
+        "justified_by": [],
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-generated"
+        },
+        "statement": "In the leaf/opposite-cap construction of the leaf-cap rigidity lemma, write the regular disk as $F=E+K+E'$, where $E,E'$ are its two end disks and $K$ is the middle disk. Then $w(K)>0$. In particular\n\n$$w(F)>2w(E)=2w(E').$$\n\nThis holds without excluding projective planes from the ambient manifold. The one-skeleton and all switches are those of the original triangulation.",
+        "proof_strategy": "direct",
+        "dependency_level": 8,
+        "sources": {
+          "references": [
+            {
+              "title": "Wolfgang Haken, Theorie der Normalflächen: Ein Isotopiekriterium für den Kreisknoten, Acta Mathematica105 (1961),245–375",
+              "url": "https://archive.ymsc.tsinghua.edu.cn/pacm_download/117/5921-11511_2007_Article_BF02559591.pdf",
+              "locator": "Complete Chapter5, printed pp.360–374, fundamental normal-surface construction in adapted coordinates; normal-surface/exchange context for the local formulation here. The source has additional separation/adapted-coordinate hypotheses and is not attributed the present original-coordinate refinement."
+            }
+          ],
+          "attribution_boundary": "Existing authoritative subject baseline and local formulation/proof refinement, not a verbatim external theorem; the actual accepted local argument and exact hypotheses remain unchanged.",
+          "reading_limits": "URL and locator drawn from existing canonical source metadata/Statement-reference bibliography only. No source was fetched or newly read for this metadata repair; retained author reading limits remain unchanged and are not transferred into a new whole-source reading claim."
+        }
+      },
+      {
+        "id": "lem-equal-normal-vectors-have-ambient-cell-homeomorphisms-and-disk-copy-products",
+        "kind": "lemma",
+        "title": "Equal normal vectors have ambient cell homeomorphisms and disk-copy products",
+        "deps": [
+          "lem-compatible-normal-vectors-admit-original-triangulation-regular-sum-diagrams",
+          "thm-finite-pl-schoenflies-in-dimension-three",
+          "lem-parametrized-pl-balls-absorb-standard-boundary-windows",
+          "thm-polygonal-jordan-curve",
+          "thm-simple-polygon-admits-a-triangulation"
+        ],
+        "justified_by": [],
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-generated"
+        },
+        "statement": "Two embedded normal surfaces with the same normal vector in a finite simplicial triangulation are carried to one another by a finite PL homeomorphism of the ambient manifold preserving every simplex setwise.\n\nConsequently, if $D_0,D_1$ are disjoint connected normal disks with the same vector, they cobound a parametrized PL product $D^2\\times[0,1]$. Its two end disks are $D_0,D_1$, its vertical boundary is in $\\partial M$, and it contains no original triangulation vertex. Its interval fibers remain in their original ambient simplex. The assertion concerns the supplied PL triangulation, not an arbitrary topological marking or a smooth extension problem.",
+        "proof_strategy": "direct",
+        "dependency_level": 8,
+        "sources": {
+          "references": [
+            {
+              "title": "Jeffrey L. Tollefson, Normal surface Q-theory, Pacific Journal of Mathematics 183 (1998), 359–374",
+              "url": "https://msp.org/pjm/1998/183-2/pjm-v183-n2-p07-p.pdf",
+              "locator": "§4, printed pp.366–369, exchange-patch comparison baseline only. Its irreducible/boundary-irreducible hypotheses are not transferred to this local disk-product/exchange formulation; the accepted local proof remains the argument."
+            },
+            {
+              "title": "Wolfgang Haken, Theorie der Normalflächen: Ein Isotopiekriterium für den Kreisknoten, Acta Mathematica105 (1961),245–375",
+              "url": "https://archive.ymsc.tsinghua.edu.cn/pacm_download/117/5921-11511_2007_Article_BF02559591.pdf",
+              "locator": "Complete Chapter5, printed pp.360–374, fundamental normal-surface construction in adapted coordinates; normal-surface/exchange context for the local formulation here. The source has additional separation/adapted-coordinate hypotheses and is not attributed the present original-coordinate refinement."
+            }
+          ],
+          "attribution_boundary": "Existing authoritative subject baseline and local formulation/proof refinement, not a verbatim external theorem; the actual accepted local argument and exact hypotheses remain unchanged.",
+          "reading_limits": "URL and locator drawn from existing canonical source metadata/Statement-reference bibliography only. No source was fetched or newly read for this metadata repair; retained author reading limits remain unchanged and are not transferred into a new whole-source reading claim."
+        }
+      },
+      {
+        "id": "lem-minimum-boundary-exchange-cycles-force-an-impossible-zero-edge-normal-component",
+        "kind": "lemma",
+        "title": "Minimum boundary exchange cycles force an impossible zero-edge normal component",
+        "deps": [
+          "lem-nonfundamental-least-weight-essential-disks-have-a-pure-boundary-obstruction",
+          "lem-boundary-exchange-leaf-caps-for-a-least-weight-disk-have-rigid-edge-counts",
+          "lem-minimum-boundary-exchange-leaves-have-single-leaf-zero-edge-corridors",
+          "lem-boundary-exchange-middle-disks-have-positive-original-edge-weight",
+          "lem-compatible-normal-vectors-admit-original-triangulation-regular-sum-diagrams",
+          "thm-polygonal-jordan-curve",
+          "thm-simple-polygon-admits-a-triangulation"
+        ],
+        "justified_by": [],
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-generated"
+        },
+        "statement": "The reduced boundary pair in the pure boundary-obstruction lemma cannot occur for a least-weight, lexicographically least essential normal disk. The contradiction is in the original triangulation: a finite cycle of minimum leaf patches would give a nonempty zero-edge normalization component of a partial regular resolution, whose tetrahedral pieces are all genuine normal disks.",
+        "proof_strategy": "direct",
+        "dependency_level": 9,
+        "sources": {
+          "references": [
+            {
+              "title": "Wolfgang Haken, Theorie der Normalflächen: Ein Isotopiekriterium für den Kreisknoten, Acta Mathematica105 (1961),245–375",
+              "url": "https://archive.ymsc.tsinghua.edu.cn/pacm_download/117/5921-11511_2007_Article_BF02559591.pdf",
+              "locator": "Complete Chapter5, printed pp.360–374, fundamental normal-surface construction in adapted coordinates; normal-surface/exchange context for the local formulation here. The source has additional separation/adapted-coordinate hypotheses and is not attributed the present original-coordinate refinement."
+            }
+          ],
+          "attribution_boundary": "Existing authoritative subject baseline and local formulation/proof refinement, not a verbatim external theorem; the actual accepted local argument and exact hypotheses remain unchanged.",
+          "reading_limits": "URL and locator drawn from existing canonical source metadata/Statement-reference bibliography only. No source was fetched or newly read for this metadata repair; retained author reading limits remain unchanged and are not transferred into a new whole-source reading claim."
+        }
+      },
+      {
+        "id": "lem-exchange-surfaces-inside-normal-disk-copy-products-are-vertical",
+        "kind": "lemma",
+        "title": "Exchange surfaces inside normal disk-copy products are vertical",
+        "deps": [
+          "lem-equal-normal-vectors-have-ambient-cell-homeomorphisms-and-disk-copy-products",
+          "thm-simple-polygon-admits-a-triangulation",
+          "thm-polygonal-jordan-curve"
+        ],
+        "justified_by": [],
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-generated"
+        },
+        "statement": "Let $P$ be a supplied cellwise normal product between disjoint equal-vector connected normal disks $D_0,D_1$ in a finite simplicial three-manifold triangulation. Thus each tetrahedral part of $P$ is a parametrized disk prism between corresponding normal disk pieces, each face part is the corresponding normal-arc strip, and the product fibers stay in their original ambient simplex.\n\nSuppose an embedded exchange annulus or proper exchange disk $A$ lies in $P$, misses the original one-skeleton, and spans $D_0,D_1$. More explicitly, its two frontier components are respectively a circle or proper arc on each end disk; it meets each tetrahedral prism in disjoint proper rectangles, each with one frontier arc on each horizontal end, joining the same two distinct original faces at both ends; its remaining sides are the face arcs of $A$. In the disk case its remaining boundary is in the vertical boundary of $P$ in $\\partial M$.\n\nThe product parametrization can be chosen to make $A$ vertical, while its fibers still remain in their original ambient simplex. In the annulus case the two disk caps bounded by its frontier cobound a normal product with vertical boundary $A$. In the disk case both pairs of corresponding disk caps cut off by its frontier arcs cobound such products, with the other vertical boundary strips in $\\partial M$. In particular these caps are normally parallel along $A$.",
+        "proof_strategy": "direct",
+        "dependency_level": 9,
+        "sources": {
+          "references": [
+            {
+              "title": "Jeffrey L. Tollefson, Normal surface Q-theory, Pacific Journal of Mathematics 183 (1998), 359–374",
+              "url": "https://msp.org/pjm/1998/183-2/pjm-v183-n2-p07-p.pdf",
+              "locator": "§4, printed pp.366–369, exchange-patch comparison baseline only. Its irreducible/boundary-irreducible hypotheses are not transferred to this local disk-product/exchange formulation; the accepted local proof remains the argument."
+            },
+            {
+              "title": "Wolfgang Haken, Theorie der Normalflächen: Ein Isotopiekriterium für den Kreisknoten, Acta Mathematica105 (1961),245–375",
+              "url": "https://archive.ymsc.tsinghua.edu.cn/pacm_download/117/5921-11511_2007_Article_BF02559591.pdf",
+              "locator": "Complete Chapter5, printed pp.360–374, fundamental normal-surface construction in adapted coordinates; normal-surface/exchange context for the local formulation here. The source has additional separation/adapted-coordinate hypotheses and is not attributed the present original-coordinate refinement."
+            }
+          ],
+          "attribution_boundary": "Existing authoritative subject baseline and local formulation/proof refinement, not a verbatim external theorem; the actual accepted local argument and exact hypotheses remain unchanged.",
+          "reading_limits": "URL and locator drawn from existing canonical source metadata/Statement-reference bibliography only. No source was fetched or newly read for this metadata repair; retained author reading limits remain unchanged and are not transferred into a new whole-source reading claim."
+        }
+      },
+      {
+        "id": "thm-least-weight-lexicographic-essential-normal-disks-are-fundamental",
+        "kind": "theorem",
+        "title": "Least-weight lexicographic essential normal disks are fundamental",
+        "deps": [
+          "def-normal-surface-coordinate-box",
+          "lem-essential-pl-disks-admit-normal-replacements",
+          "lem-nonfundamental-least-weight-essential-disks-have-a-pure-boundary-obstruction",
+          "lem-minimum-boundary-exchange-cycles-force-an-impossible-zero-edge-normal-component"
+        ],
+        "justified_by": [],
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-generated"
+        },
+        "statement": "Let $M$ be a compact PL three-manifold with a finite simplicial triangulation $T$. Among its essential normal disks choose one of least edge weight, and among those choose $F$ with lexicographically least normal vector. Then $F$ is fundamental in the original seven-coordinate system of $T$.\n\nConsequently, if $M$ contains a properly embedded PL disk whose boundary is not null-homotopic in $\\partial M$, it contains such a disk that is a fundamental normal surface. No ambient orientability, irreducibility or exclusion of projective planes is required, and no choice hypothesis is introduced.",
+        "proof_strategy": "direct",
+        "dependency_level": 10,
+        "sources": {
+          "references": [
+            {
+              "title": "Wolfgang Haken, Theorie der Normalflächen: Ein Isotopiekriterium für den Kreisknoten, Acta Mathematica105 (1961),245–375",
+              "url": "https://archive.ymsc.tsinghua.edu.cn/pacm_download/117/5921-11511_2007_Article_BF02559591.pdf",
+              "locator": "Complete Chapter5, printed pp.360–374, fundamental normal-surface construction in adapted coordinates; normal-surface/exchange context for the local formulation here. The source has additional separation/adapted-coordinate hypotheses and is not attributed the present original-coordinate refinement."
+            }
+          ],
+          "attribution_boundary": "Existing authoritative subject baseline and local formulation/proof refinement, not a verbatim external theorem; the actual accepted local argument and exact hypotheses remain unchanged.",
+          "reading_limits": "URL and locator drawn from existing canonical source metadata/Statement-reference bibliography only. No source was fetched or newly read for this metadata repair; retained author reading limits remain unchanged and are not transferred into a new whole-source reading claim."
+        }
+      },
+      {
+        "id": "lem-original-between-copy-exchanges-contained-in-normal-products-are-vertical",
+        "kind": "lemma",
+        "title": "Original between-copy exchanges contained in normal products are vertical",
+        "deps": [
+          "lem-compatible-normal-vectors-admit-original-triangulation-regular-sum-diagrams",
+          "lem-exchange-surfaces-inside-normal-disk-copy-products-are-vertical"
+        ],
+        "justified_by": [],
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-generated"
+        },
+        "statement": "Let $F$ be the full resolution of an actual original-triangulation regular normal diagram. Let two distinct disk components $D_0,D_1$ bound a supplied cellwise normal disk product $P$: its tetrahedral pieces are the disk prisms between corresponding normal pieces, its face pieces are their normal-arc strips, and its fibers stay in their original simplices.\n\nLet $A$ be an exchange annulus or proper exchange disk of that diagram, with one frontier component on each $D_i$, with its usual rectangular switching neighborhood. Suppose $A\\subset P$. Then the product can be parametrized to make $A$ vertical while preserving its simplex incidence. In the annular case its two disk caps are normally parallel along $A$. In the disk case both corresponding cap pairs are normally parallel along $A$, with their remaining vertical boundary in $\\partial M$.\n\nThis concerns the actual original-diagram exchange surface inside the supplied cellwise product. It makes no assertion that an arbitrary between-copy exchange is contained in that product, or can be moved there by following first contact.",
+        "proof_strategy": "direct",
+        "dependency_level": 10,
+        "sources": {
+          "references": [
+            {
+              "title": "Jeffrey L. Tollefson, Normal surface Q-theory, Pacific Journal of Mathematics 183 (1998), 359–374",
+              "url": "https://msp.org/pjm/1998/183-2/pjm-v183-n2-p07-p.pdf",
+              "locator": "§4, printed pp.366–369, exchange-patch comparison baseline only. Its irreducible/boundary-irreducible hypotheses are not transferred to this local disk-product/exchange formulation; the accepted local proof remains the argument."
+            },
+            {
+              "title": "Wolfgang Haken, Theorie der Normalflächen: Ein Isotopiekriterium für den Kreisknoten, Acta Mathematica105 (1961),245–375",
+              "url": "https://archive.ymsc.tsinghua.edu.cn/pacm_download/117/5921-11511_2007_Article_BF02559591.pdf",
+              "locator": "Complete Chapter5, printed pp.360–374, fundamental normal-surface construction in adapted coordinates; normal-surface/exchange context for the local formulation here. The source has additional separation/adapted-coordinate hypotheses and is not attributed the present original-coordinate refinement."
+            }
+          ],
+          "attribution_boundary": "Existing authoritative subject baseline and local formulation/proof refinement, not a verbatim external theorem; the actual accepted local argument and exact hypotheses remain unchanged.",
+          "reading_limits": "URL and locator drawn from existing canonical source metadata/Statement-reference bibliography only. No source was fetched or newly read for this metadata repair; retained author reading limits remain unchanged and are not transferred into a new whole-source reading claim."
+        }
+      },
+      {
+        "id": "thm-haken-normal-essential-disk-existence",
+        "kind": "theorem",
+        "title": "Haken normal essential-disk existence theorem",
+        "deps": [
+          "def-normal-surface-coordinate-box",
+          "lem-essential-pl-disks-admit-normal-replacements",
+          "thm-least-weight-lexicographic-essential-normal-disks-are-fundamental"
+        ],
+        "dependency_level": 11,
+        "justified_by": [],
+        "statement": "Let $M$ be a compact triangulated piecewise-linear $3$-manifold with nonempty boundary and with no embedded projective plane. If $M$ contains a properly embedded disk whose boundary is not null-homotopic in $\\partial M$, then $M$ contains such a disk that is a fundamental normal surface.",
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-generated"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Joel Hass, Jeffrey C. Lagarias, and Nicholas Pippenger, The Computational Complexity of Knot and Link Problems, Journal of the ACM 46 (1999)",
+              "url": "https://www.math.ucdavis.edu/~hass/Research/Papers/Complexity/hlp.pdf",
+              "locator": "§5, Theorem 5.4, printed p.12/web lines 502–506; the source states the theorem and directs readers to earlier proofs."
+            },
+            {
+              "title": "Jeff Erickson, Normal Surfaces and Knots, Computational Topology lecture notes (2009)",
+              "url": "https://jeffe.cs.illinois.edu/teaching/comptop/2009/notes/normal-surfaces.pdf",
+              "locator": "§§14.1–14.4, complete six-page note; it cites rather than proves Haken essential-surface completeness."
+            },
+            {
+              "title": "Wolfgang Haken, Theorie der Normalflächen: Ein Isotopiekriterium für den Kreisknoten, Acta Mathematica105 (1961),245–375",
+              "url": "https://archive.ymsc.tsinghua.edu.cn/pacm_download/117/5921-11511_2007_Article_BF02559591.pdf",
+              "locator": "Introduction§d, printed pp.253–254, and complete Chapter5, printed pp.360–374. Chapter5 proves its fundamental-surface construction under the additional condition that every embedded sphere separates, in an adapted cell/normal decomposition."
+            }
+          ]
+        },
+        "strategy": "not-supplied",
+        "proof_strategy": "direct"
+      },
+      {
+        "id": "lem-between-copy-annular-exchanges-on-least-disks-have-adjacent-caps",
+        "kind": "lemma",
+        "title": "Between-copy annular exchanges on least disks have adjacent caps",
+        "deps": [
+          "lem-between-copy-annular-exchange-caps-have-rigid-original-edge-counts",
+          "lem-original-between-copy-exchanges-contained-in-normal-products-are-vertical",
+          "lem-closed-pl-surfaces-with-even-original-edge-counts-separate"
+        ],
+        "justified_by": [],
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-generated"
+        },
+        "statement": "Use the least-weight, lexicographically least essential disk $D$, distinct full-resolution copies $D_0,D_1$, actual annular exchange $A$, and disk caps $E_0,E_1$ of the between-copy annular cap-rigidity lemma. Supply a cellwise normal product $P$ between $D_0,D_1$, with vertical boundary in $\\partial M$.\n\nThen $E_0,E_1$ are adjacent along $A$: their germs occupy the same side of its rectangular switching neighborhood. This holds without irreducibility or orientability. It does not assert normal parallelism of these caps when $A$ lies outside $P$.",
+        "proof_strategy": "direct",
+        "dependency_level": 11,
+        "sources": {
+          "references": [
+            {
+              "title": "Jeffrey L. Tollefson, Normal surface Q-theory, Pacific Journal of Mathematics 183 (1998), 359–374",
+              "url": "https://msp.org/pjm/1998/183-2/pjm-v183-n2-p07-p.pdf",
+              "locator": "§4, printed pp.366–369, exchange-patch comparison baseline only. Its irreducible/boundary-irreducible hypotheses are not transferred to this local disk-product/exchange formulation; the accepted local proof remains the argument."
+            },
+            {
+              "title": "Wolfgang Haken, Theorie der Normalflächen: Ein Isotopiekriterium für den Kreisknoten, Acta Mathematica105 (1961),245–375",
+              "url": "https://archive.ymsc.tsinghua.edu.cn/pacm_download/117/5921-11511_2007_Article_BF02559591.pdf",
+              "locator": "Complete Chapter5, printed pp.360–374, fundamental normal-surface construction in adapted coordinates; normal-surface/exchange context for the local formulation here. The source has additional separation/adapted-coordinate hypotheses and is not attributed the present original-coordinate refinement."
+            }
+          ],
+          "attribution_boundary": "Existing authoritative subject baseline and local formulation/proof refinement, not a verbatim external theorem; the actual accepted local argument and exact hypotheses remain unchanged.",
+          "reading_limits": "URL and locator drawn from existing canonical source metadata/Statement-reference bibliography only. No source was fetched or newly read for this metadata repair; retained author reading limits remain unchanged and are not transferred into a new whole-source reading claim."
+        }
+      },
+      {
+        "id": "thm-haken-finite-box-search-correctness",
+        "kind": "theorem",
+        "title": "Correctness of the Haken finite-box disk search",
+        "deps": [
+          "alg-haken-jaco-tollefson-unknot-recognition",
+          "lem-normal-coordinate-matching-equations-and-finite-bounds",
+          "lem-fundamental-normal-surfaces-are-connected",
+          "thm-haken-normal-essential-disk-existence",
+          "lem-normal-disk-candidate-check-characterization",
+          "lem-no-closed-nonorientable-pl-surface-in-s-three",
+          "lem-good-linear-size-exterior-triangulation-from-diagram"
+        ],
+        "dependency_level": 12,
+        "justified_by": [],
+        "statement": "For a valid one-component knot code, the Haken finite-box search accepts if and only if the triangulated exterior contains a properly embedded disk with non-null-homotopic boundary. On acceptance it returns a normal-coordinate vector for such a disk; after exhaustive rejection, no such disk exists.",
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-generated"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Joel Hass, Jeffrey C. Lagarias, and Nicholas Pippenger, The Computational Complexity of Knot and Link Problems, Journal of the ACM 46 (1999)",
+              "url": "https://www.math.ucdavis.edu/~hass/Research/Papers/Complexity/hlp.pdf",
+              "locator": "§§5–8, theorem statements, finite normal-coordinate bounds, triangulation and search complexity."
+            },
+            {
+              "title": "Jeff Erickson, Normal Surfaces and Knots, Computational Topology lecture notes (2009)",
+              "url": "https://jeffe.cs.illinois.edu/teaching/comptop/2009/notes/normal-surfaces.pdf",
+              "locator": "§§14.1–14.4, complete six-page note; independent normal-surface search treatment."
+            }
+          ]
+        },
+        "strategy": "direct",
+        "proof_strategy": "direct"
+      },
+      {
+        "id": "lem-reduced-sphere-annulus-sums-cannot-realize-two-least-fundamental-disks",
+        "kind": "lemma",
+        "title": "Reduced sphere-annulus sums cannot realize two least fundamental disks",
+        "deps": [
+          "lem-compatible-normal-vectors-admit-original-triangulation-regular-sum-diagrams",
+          "lem-same-copy-exchanges-on-least-fundamental-disks-have-disjoint-adjacent-caps",
+          "lem-actual-same-copy-exchange-caps-have-rigid-original-edge-counts",
+          "lem-between-copy-annular-exchange-caps-have-rigid-original-edge-counts",
+          "lem-between-copy-annular-exchanges-on-least-disks-have-adjacent-caps",
+          "lem-equal-normal-vectors-have-ambient-cell-homeomorphisms-and-disk-copy-products",
+          "lem-normal-exchange-disk-patches-have-positive-edge-weight",
+          "thm-polygonal-jordan-curve",
+          "thm-simple-polygon-admits-a-triangulation"
+        ],
+        "justified_by": [],
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-generated"
+        },
+        "statement": "Let $D$ be a fundamental essential normal disk in a finite simplicial triangulation of a compact PL three-manifold. Suppose $D$ has least edge weight among all essential normal disks, and lexicographically least normal vector among those of that weight; put $d=v(D)$.\n\nThere is no actual original-triangulation regular-sum diagram $X\\cup Y$ of the following reduced kind. The surfaces $X,Y$ are respectively a connected normal sphere and a connected normal annulus, their vectors are not proportional to $d$, and $v(X)+v(Y)=2d$. All partial regular resolutions retain normal tetrahedral disk pieces, and the full resolution consists of two copies $D_0,D_1$ of $D$. The number of original double circles is least among diagrams of this kind, including diagrams obtained by regularly switching a subset when the two resulting families remain an embedded sphere and annulus.\n\nNo irreducibility, orientability or choice hypothesis is required. The conclusion excludes this sphere-annulus branch only; it does not exclude a sum of two disk summands.",
+        "proof_strategy": "direct",
+        "dependency_level": 12,
+        "sources": {
+          "references": [
+            {
+              "title": "Wolfgang Haken, Theorie der Normalflächen: Ein Isotopiekriterium für den Kreisknoten, Acta Mathematica105 (1961),245–375",
+              "url": "https://archive.ymsc.tsinghua.edu.cn/pacm_download/117/5921-11511_2007_Article_BF02559591.pdf",
+              "locator": "Complete Chapter5, printed pp.360–374, fundamental normal-surface construction in adapted coordinates; normal-surface/exchange context for the local formulation here. The source has additional separation/adapted-coordinate hypotheses and is not attributed the present original-coordinate refinement."
+            }
+          ],
+          "attribution_boundary": "Existing authoritative subject baseline and local formulation/proof refinement, not a verbatim external theorem; the actual accepted local argument and exact hypotheses remain unchanged.",
+          "reading_limits": "URL and locator drawn from existing canonical source metadata/Statement-reference bibliography only. No source was fetched or newly read for this metadata repair; retained author reading limits remain unchanged and are not transferred into a new whole-source reading claim."
+        }
+      },
+      {
+        "id": "lem-reduced-two-disk-sums-of-least-fundamental-disks-have-no-closed-exchanges",
+        "kind": "lemma",
+        "title": "Reduced two-disk sums of least fundamental disks have no closed exchanges",
+        "deps": [
+          "lem-reduced-sphere-annulus-sums-cannot-realize-two-least-fundamental-disks",
+          "lem-compatible-normal-vectors-admit-original-triangulation-regular-sum-diagrams",
+          "lem-normal-exchange-disk-patches-have-positive-edge-weight"
+        ],
+        "justified_by": [],
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-generated"
+        },
+        "statement": "Let $D$ be a least-weight essential fundamental normal disk with lexicographically least vector at that weight, in a finite simplicial triangulation of a compact PL three-manifold; put $d=v(D)$. Let $X,Y$ be connected embedded normal disks with neither vector proportional to $d$ and $v(X)+v(Y)=2d$.\n\nSuppose an actual original-triangulation regular-sum diagram for them has full resolution $D_0\\cup D_1$, the two disk copies of $D$, and retains genuine normal tetrahedral disk pieces under every partial regular resolution. Choose it with the smallest number of double curves among eligible two-disk diagrams, including those obtained by a partial regular switch when its resulting disk families are embedded and nonproportional to $d$.\n\nThen every original double curve is a proper arc. At least one of $\\partial X,\\partial Y$ is null-homotopic in $\\partial M$. The conclusion does not exclude those remaining proper exchanges, and assumes neither orientability nor irreducibility nor a choice principle.",
+        "proof_strategy": "direct",
+        "dependency_level": 13,
+        "sources": {
+          "references": [
+            {
+              "title": "Jeffrey L. Tollefson, Normal surface Q-theory, Pacific Journal of Mathematics 183 (1998), 359–374",
+              "url": "https://msp.org/pjm/1998/183-2/pjm-v183-n2-p07-p.pdf",
+              "locator": "§4, printed pp.366–369, exchange-patch comparison baseline only. Its irreducible/boundary-irreducible hypotheses are not transferred to this local disk-product/exchange formulation; the accepted local proof remains the argument."
+            },
+            {
+              "title": "Wolfgang Haken, Theorie der Normalflächen: Ein Isotopiekriterium für den Kreisknoten, Acta Mathematica105 (1961),245–375",
+              "url": "https://archive.ymsc.tsinghua.edu.cn/pacm_download/117/5921-11511_2007_Article_BF02559591.pdf",
+              "locator": "Complete Chapter5, printed pp.360–374, fundamental normal-surface construction in adapted coordinates; normal-surface/exchange context for the local formulation here. The source has additional separation/adapted-coordinate hypotheses and is not attributed the present original-coordinate refinement."
+            }
+          ],
+          "attribution_boundary": "Existing authoritative subject baseline and local formulation/proof refinement, not a verbatim external theorem; the actual accepted local argument and exact hypotheses remain unchanged.",
+          "reading_limits": "URL and locator drawn from existing canonical source metadata/Statement-reference bibliography only. No source was fetched or newly read for this metadata repair; retained author reading limits remain unchanged and are not transferred into a new whole-source reading claim."
+        }
+      },
+      {
+        "id": "thm-least-weight-lexicographic-essential-normal-disks-are-vertex-disks",
+        "kind": "theorem",
+        "title": "Least-weight lexicographic essential normal disks are vertex disks",
+        "deps": [
+          "def-normal-surface-coordinate-box",
+          "thm-least-weight-lexicographic-essential-normal-disks-are-fundamental",
+          "lem-nonvertex-fundamental-disks-have-connected-two-copy-normal-sums",
+          "lem-reduced-sphere-annulus-sums-cannot-realize-two-least-fundamental-disks",
+          "lem-reduced-two-disk-sums-of-least-fundamental-disks-have-no-closed-exchanges",
+          "lem-same-copy-exchanges-on-least-fundamental-disks-have-disjoint-adjacent-caps",
+          "lem-actual-same-copy-exchange-caps-have-rigid-original-edge-counts",
+          "lem-between-copy-proper-exchanges-have-essential-diagonals-and-rigid-cap-counts",
+          "lem-admissible-normal-vectors-have-rigid-edge-count-averages",
+          "lem-normal-exchange-disk-patches-have-positive-edge-weight",
+          "lem-compatible-normal-vectors-admit-original-triangulation-regular-sum-diagrams",
+          "lem-essential-pl-disks-admit-normal-replacements",
+          "thm-polygonal-jordan-curve",
+          "thm-simple-polygon-admits-a-triangulation"
+        ],
+        "justified_by": [],
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-generated"
+        },
+        "statement": "Let $M$ be a compact PL three-manifold with a finite simplicial triangulation $T$. Among its essential normal disks choose $D$ of least original edge weight and lexicographically least normal vector at that weight. Then $d=v(D)$ is primitive and lies on an extreme ray of the full Haken matching cone $C(T)$ in the original seven coordinates per tetrahedron.\n\nConsequently, if $M$ contains a properly embedded PL disk whose boundary is not null-homotopic in $\\partial M$, it contains such a primitive vertex normal disk in the same triangulation. No orientability, irreducibility, sphere-separation, projective-plane exclusion or choice hypothesis is required.",
+        "proof_strategy": "direct",
+        "dependency_level": 14,
+        "sources": {
+          "references": [
+            {
+              "title": "Jeffrey L. Tollefson, Normal surface Q-theory, Pacific Journal of Mathematics 183 (1998), 359–374",
+              "url": "https://msp.org/pjm/1998/183-2/pjm-v183-n2-p07-p.pdf",
+              "locator": "§4, printed pp.366–369, exchange-patch comparison baseline only. Its irreducible/boundary-irreducible hypotheses are not transferred to this local disk-product/exchange formulation; the accepted local proof remains the argument."
+            },
+            {
+              "title": "Wolfgang Haken, Theorie der Normalflächen: Ein Isotopiekriterium für den Kreisknoten, Acta Mathematica105 (1961),245–375",
+              "url": "https://archive.ymsc.tsinghua.edu.cn/pacm_download/117/5921-11511_2007_Article_BF02559591.pdf",
+              "locator": "Complete Chapter5, printed pp.360–374, fundamental normal-surface construction in adapted coordinates; normal-surface/exchange context for the local formulation here. The source has additional separation/adapted-coordinate hypotheses and is not attributed the present original-coordinate refinement."
+            }
+          ],
+          "attribution_boundary": "Existing authoritative subject baseline and local formulation/proof refinement, not a verbatim external theorem; the actual accepted local argument and exact hypotheses remain unchanged.",
+          "reading_limits": "URL and locator drawn from existing canonical source metadata/Statement-reference bibliography only. No source was fetched or newly read for this metadata repair; retained author reading limits remain unchanged and are not transferred into a new whole-source reading claim."
+        }
+      },
+      {
+        "id": "thm-jaco-tollefson-normal-essential-disk-vertex-existence",
+        "kind": "theorem",
+        "title": "Jaco–Tollefson normal essential-disk vertex theorem",
+        "deps": [
+          "def-normal-surface-coordinate-box",
+          "lem-essential-pl-disks-admit-normal-replacements",
+          "thm-least-weight-lexicographic-essential-normal-disks-are-vertex-disks"
+        ],
+        "dependency_level": 15,
+        "justified_by": [],
+        "statement": "Let $M$ be a compact triangulated piecewise-linear $3$-manifold with nonempty boundary. If $M$ contains a properly embedded disk whose boundary is not null-homotopic in $\\partial M$, then $M$ contains such a disk whose primitive normal-coordinate vector lies on an extreme ray of the Haken cone.",
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-generated"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Joel Hass, Jeffrey C. Lagarias, and Nicholas Pippenger, The Computational Complexity of Knot and Link Problems, Journal of the ACM 46 (1999)",
+              "url": "https://www.math.ucdavis.edu/~hass/Research/Papers/Complexity/hlp.pdf",
+              "locator": "§5, Theorem 5.6, printed p.13; the source states the vertex-disk theorem and cites Jaco–Tollefson Corollary6.4."
+            },
+            {
+              "title": "Jeff Erickson, Normal Surfaces and Knots, Computational Topology lecture notes (2009)",
+              "url": "https://jeffe.cs.illinois.edu/teaching/comptop/2009/notes/normal-surfaces.pdf",
+              "locator": "§§14.1–14.4, complete six-page note; it cites rather than proves Haken essential-surface completeness."
+            },
+            {
+              "title": "Jeffrey L. Tollefson, Normal surface Q-theory, Pacific Journal of Mathematics 183 (1998), 359–374",
+              "url": "https://msp.org/pjm/1998/183-2/pjm-v183-n2-p07-p.pdf",
+              "locator": "Complete §4, printed pp.366–369, actual exchange-patch proof with irreducible/boundary-irreducible hypotheses; it does not prove this general disk theorem."
+            },
+            {
+              "title": "Joel Hass and Jeffrey C. Lagarias, The number of Reidemeister moves needed for unknotting",
+              "url": "https://arxiv.org/pdf/math/9807012",
+              "locator": "Theorem3.1 and following remark, printed pp.10–11: fundamental-disk theorem and discussion of hypotheses; no unrestricted vertex-disk extension proof is inferred from this remark."
+            }
+          ]
+        },
+        "strategy": "not-supplied",
+        "proof_strategy": "direct"
+      },
+      {
+        "id": "thm-jaco-tollefson-vertex-search-correctness",
+        "kind": "theorem",
+        "title": "Correctness and finite bounds of the Jaco–Tollefson vertex search",
+        "deps": [
+          "alg-haken-jaco-tollefson-unknot-recognition",
+          "lem-normal-coordinate-matching-equations-and-finite-bounds",
+          "thm-jaco-tollefson-normal-essential-disk-vertex-existence",
+          "lem-normal-disk-candidate-check-characterization",
+          "lem-small-integer-matrix-linear-algebra-in-quadratic-logarithmic-space"
+        ],
+        "dependency_level": 16,
+        "justified_by": [],
+        "statement": "For a valid one-component knot code, the JT primitive extreme-ray search accepts if and only if the triangulated exterior contains a properly embedded disk with non-null-homotopic boundary. It examines at most $2^{7t}$ support subsets for a $t$-tetrahedron exterior, each candidate coordinate has $O(t)$ bits, and its sequential Turing space is $O(t^2\\log(t+2))$ bits.",
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-generated"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Joel Hass, Jeffrey C. Lagarias, and Nicholas Pippenger, The Computational Complexity of Knot and Link Problems, Journal of the ACM 46 (1999)",
+              "url": "https://www.math.ucdavis.edu/~hass/Research/Papers/Complexity/hlp.pdf",
+              "locator": "§§5–8, theorem statements, finite normal-coordinate bounds, triangulation and search complexity."
+            },
+            {
+              "title": "Jeff Erickson, Normal Surfaces and Knots, Computational Topology lecture notes (2009)",
+              "url": "https://jeffe.cs.illinois.edu/teaching/comptop/2009/notes/normal-surfaces.pdf",
+              "locator": "§§14.1–14.4, complete six-page note; independent normal-surface search treatment."
+            }
+          ]
+        },
+        "strategy": "direct",
+        "proof_strategy": "direct"
+      },
+      {
+        "id": "thm-unknot-recognition-has-np-certificate",
+        "kind": "theorem",
+        "title": "Unknot recognition has a polynomial-bit normal-surface certificate",
+        "deps": [
+          "alg-haken-jaco-tollefson-unknot-recognition",
+          "lem-normal-vertex-disk-certificate-verification",
+          "thm-jaco-tollefson-normal-essential-disk-vertex-existence",
+          "lem-meridian-disk-criterion-for-unknot-exterior",
+          "lem-good-linear-size-exterior-triangulation-from-diagram",
+          "lem-normal-coordinate-matching-equations-and-finite-bounds",
+          "thm-smooth-knot-has-compatible-pl-exterior-model"
+        ],
+        "dependency_level": 16,
+        "justified_by": [],
+        "statement": "Assume countable choice. For a valid finite $n$-crossing one-component knot code $D$, let $T_D$ be the fixed deterministic good exterior triangulation with $t\\le C(n+1)$ tetrahedra and the marked original meridian path, recomputed from $D$ by the stated finite construction. The smooth knot represented by $D$ is the unknot if and only if it has a certificate consisting of a nonnegative $7t$-coordinate normal vector $v$, active matching and zero-coordinate constraints, and a nonzero $(7t-1)$-minor witnessing their rank, all relative to $T_D$. A deterministic verifier reconstructs $T_D$ and its meridian path from $D$ and checks the certificate in time polynomial in its bit length, without expanding the represented normal surface.",
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-generated"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Joel Hass, Jeffrey C. Lagarias, and Nicholas Pippenger, The Computational Complexity of Knot and Link Problems, Journal of the ACM 46 (1999)",
+              "url": "https://www.math.ucdavis.edu/~hass/Research/Papers/Complexity/hlp.pdf",
+              "locator": "§§4–8 and §10, complete disk criterion, normal-surface searches, triangulation bounds and certificate analysis."
+            },
+            {
+              "title": "Jeff Erickson, Normal Surfaces and Knots, Computational Topology lecture notes (2009)",
+              "url": "https://jeffe.cs.illinois.edu/teaching/comptop/2009/notes/normal-surfaces.pdf",
+              "locator": "§§14.1–14.4, complete six-page note on normal surfaces and knot recognition."
+            }
+          ]
+        },
+        "strategy": "direct",
+        "proof_strategy": "direct"
+      },
+      {
+        "id": "thm-normal-surface-unknot-algorithm-terminates-and-is-correct",
+        "kind": "theorem",
+        "title": "Termination, correctness, and bounds of normal-surface unknot recognition",
+        "deps": [
+          "alg-haken-jaco-tollefson-unknot-recognition",
+          "thm-haken-jaco-tollefson-unknot-recognition-procedure-properties",
+          "thm-haken-finite-box-search-correctness",
+          "thm-jaco-tollefson-vertex-search-correctness",
+          "lem-meridian-disk-criterion-for-unknot-exterior",
+          "lem-good-linear-size-exterior-triangulation-from-diagram",
+          "thm-smooth-knot-has-compatible-pl-exterior-model",
+          "lem-normal-coordinate-matching-equations-and-finite-bounds",
+          "lem-small-integer-matrix-linear-algebra-in-quadratic-logarithmic-space"
+        ],
+        "dependency_level": 17,
+        "justified_by": [],
+        "statement": "Assume countable choice. For every valid one-component knot code with $n$ crossings, both the Haken and JT normal-surface searches terminate and decide whether the smooth knot represented by the code is ambient isotopic to the standard unknot. The Haken search uses $2^{O(n^2)}$ Turing time and $O(n^2\\log(n+2))$ Turing space. The JT primitive-vertex search uses $2^{O(n)}$ Turing time and the same space bound. The zero-crossing case is handled by a fixed finite construction. No polynomial-time claim is made.",
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-generated"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Joel Hass, Jeffrey C. Lagarias, and Nicholas Pippenger, The Computational Complexity of Knot and Link Problems, Journal of the ACM 46 (1999)",
+              "url": "https://www.math.ucdavis.edu/~hass/Research/Papers/Complexity/hlp.pdf",
+              "locator": "§§4–8 and §10, complete disk criterion, normal-surface searches, triangulation bounds and certificate analysis."
+            },
+            {
+              "title": "Jeff Erickson, Normal Surfaces and Knots, Computational Topology lecture notes (2009)",
+              "url": "https://jeffe.cs.illinois.edu/teaching/comptop/2009/notes/normal-surfaces.pdf",
+              "locator": "§§14.1–14.4, complete six-page note on normal surfaces and knot recognition."
+            }
+          ]
+        },
+        "strategy": "direct",
+        "proof_strategy": "direct"
+      }
+    ]
+  },
+  {
+    "order": 3205,
+    "id": "normal-surface-unknot-recognition-examples",
+    "kind": "B",
+    "category": "knot-theory",
+    "title": "Normal-surface unknot recognition — Examples and Counterexamples",
+    "companion": "normal-surface-unknot-recognition",
+    "requires": [
+      "normal-surface-unknot-recognition"
+    ],
+    "items": [
+      {
+        "id": "cex-knot-kt-49-boundary-case",
+        "kind": "counterexample",
+        "title": "A boundary-parallel disk fails the meridian test",
+        "deps": [
+          "def-normal-surface-coordinate-box",
+          "lem-normal-disk-candidate-check-characterization"
+        ],
+        "dependency_level": 3,
+        "justified_by": [],
+        "statement": "Every connected admissible normal surface in a finite triangulated knot exterior with nonempty boundary and Euler characteristic one passes the odd-meridian-intersection test for an essential normal disk.",
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-generated"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Joel Hass, Jeffrey C. Lagarias, and Nicholas Pippenger, The Computational Complexity of Knot and Link Problems, Journal of the ACM 46 (1999)",
+              "url": "https://www.math.ucdavis.edu/~hass/Research/Papers/Complexity/hlp.pdf",
+              "locator": "§§4–7; the unknot exterior, normal-surface disk tests and triangulation convention."
+            },
+            {
+              "title": "Jeff Erickson, Normal Surfaces and Knots, Computational Topology lecture notes (2009)",
+              "url": "https://jeffe.cs.illinois.edu/teaching/comptop/2009/notes/normal-surfaces.pdf",
+              "locator": "§§14.1–14.4, complete six-page note on normal disks and knot exteriors."
+            }
+          ]
+        },
+        "strategy": "direct",
+        "proof_strategy": "direct"
+      },
+      {
+        "id": "ex-knot-kt-49-worked-cases",
+        "kind": "example",
+        "title": "Worked case: a normal disk in the zero-crossing unknot exterior",
+        "deps": [
+          "def-normal-surface-coordinate-box",
+          "lem-good-linear-size-exterior-triangulation-from-diagram"
+        ],
+        "dependency_level": 6,
+        "justified_by": [],
+        "statement": "For the crossingless oriented unknot code, triangulate its solid-torus exterior $D^2\\times S^1$ by triangulating $D^2$ as one triangle with vertices $a_0,a_1,a_2$ and $S^1$ as the three-edge cycle $b_0b_1b_2b_0$. In the prism over $b_0b_1$, write $a_i^0=(a_i,b_0)$ and $a_i^1=(a_i,b_1)$ and use the tetrahedra\n$$T_1=[a_0^0,a_1^0,a_2^0,a_2^1],\\qquad T_2=[a_0^0,a_1^0,a_1^1,a_2^1],\\qquad T_3=[a_0^0,a_0^1,a_1^1,a_2^1].$$\nThe properly embedded normal disk $D^2\\times\\{s_*\\}$ at the midpoint $s_*$ of $b_0b_1$ meets $T_1$ in the triangle cutting off $a_2^1$, $T_2$ in the quadrilateral separating $\\{a_0^0,a_1^0\\}$ from $\\{a_1^1,a_2^1\\}$, and $T_3$ in the triangle cutting off $a_0^0$; every other normal coordinate is zero. It is connected, has nonempty boundary and Euler characteristic one, and its boundary meets the marked original meridian $\\mu=\\{a_0\\}\\times S^1$ once mod two.\n\n~~~tikz\n\\begin{tikzpicture}[scale=1]\n\\coordinate (A0) at (0,0); \\coordinate (A1) at (2,0); \\coordinate (A2) at (1,1.5);\n\\coordinate (B0) at (0.6,0.7); \\coordinate (B1) at (2.6,0.7); \\coordinate (B2) at (1.6,2.2);\n\\draw (A0)--(A1)--(A2)--cycle; \\draw (B0)--(B1)--(B2)--cycle;\n\\draw (A0)--(B0) (A1)--(B1) (A2)--(B2);\n\\draw[dashed] (A0)--(B1) (A0)--(B2) (A1)--(B2);\n\\coordinate (M0) at (0.3,0.35); \\coordinate (M1) at (2.3,0.35); \\coordinate (M2) at (1.3,1.85);\n\\draw[red,very thick] (M0)--(M1)--(M2)--cycle;\n\\node[below left] at (A0) {$a_0^0$}; \\node[below right] at (A1) {$a_1^0$}; \\node[left] at (A2) {$a_2^0$};\n\\node[left] at (B0) {$a_0^1$}; \\node[right] at (B1) {$a_1^1$}; \\node[above] at (B2) {$a_2^1$};\n\\node[red] at (1.35,0.8) {$D^2\\times\\{s_*\\}$};\n\\end{tikzpicture}\n~~~\n\nThe dashed edges indicate the staircase prism subdivision specified by $T_1,T_2,T_3$; the red section is the geometric disk whose intersections with those tetrahedra give the stated triangle–quadrilateral–triangle vector. The formula for the tetrahedra, not the schematic projection, fixes the exact triangulation.",
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-generated"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Joel Hass, Jeffrey C. Lagarias, and Nicholas Pippenger, The Computational Complexity of Knot and Link Problems, Journal of the ACM 46 (1999)",
+              "url": "https://www.math.ucdavis.edu/~hass/Research/Papers/Complexity/hlp.pdf",
+              "locator": "§§4–7; the unknot exterior, normal-surface disk tests and triangulation convention."
+            },
+            {
+              "title": "Jeff Erickson, Normal Surfaces and Knots, Computational Topology lecture notes (2009)",
+              "url": "https://jeffe.cs.illinois.edu/teaching/comptop/2009/notes/normal-surfaces.pdf",
+              "locator": "§§14.1–14.4, complete six-page note on normal disks and knot exteriors."
+            }
+          ]
+        },
+        "strategy": "direct",
+        "proof_strategy": "direct"
+      }
+    ]
+  }
+]

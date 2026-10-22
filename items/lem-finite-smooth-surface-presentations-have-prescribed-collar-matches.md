@@ -12,6 +12,11 @@ deps:
   - lem-smooth-jordan-disk-boundary-maps-extend-to-diffeomorphisms
   - lem-boundary-connected-sum-with-a-disk-does-not-change-the-diffeomorphism-type
   - lem-isotopy-extension-for-a-compact-source-with-boundary
+verification:
+  judge:
+    model: "gpt-6-luna"
+    verdict: pass
+    date: 2026-10-22
 sources:
   references:
     - title: Gallier and Xu, A Guide to the Classification Theorem for Compact

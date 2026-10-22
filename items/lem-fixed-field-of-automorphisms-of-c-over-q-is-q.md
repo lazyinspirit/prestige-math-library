@@ -19,6 +19,11 @@ axiom_use: Full AC is used to extend algebraically independent sets to
 provenance:
   statement: literature-derived
   proof: ai-generated
+verification:
+  judge:
+    model: "gpt-6-luna"
+    verdict: pass
+    date: 2026-10-22
 sources:
   references:
     - title: J. S. Milne, Fields and Galois Theory, v5.10, §§3 and 9

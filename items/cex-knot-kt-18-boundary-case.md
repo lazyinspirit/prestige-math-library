@@ -17,6 +17,11 @@ provenance:
   statement: literature-derived
   proof: ai-altered
 axiom_use: "Choice-free: the circle action, orbit space, and centrality homotopy square are explicit."
+verification:
+  judge:
+    model: "gpt-6-luna"
+    verdict: pass
+    date: 2026-10-22
 sources:
   references:
     - title: "Jessica S. Purcell, Hyperbolic Knot Theory"

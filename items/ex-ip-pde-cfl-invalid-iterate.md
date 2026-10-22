@@ -75,7 +75,7 @@ The diagram shows the four exact triangular cells and the only interior degree o
 
 [F3] The algorithm tests the declared admissibility predicate before any PDE solve and returns `inadmissible` when it is false ([[alg-ip-finite-element-pde-tikhonov]], [[def-ip-pde-solver-admissibility-contract]]).
 
-[F4] The theorem verifies that the algorithm's `inadmissible` status is returned when the exact predicate fails ([[thm-ip-finite-element-pde-tikhonov-status-soundness-and-termination]]).
+[F4] The theorem verifies that the algorithm's `inadmissible` status is returned only on a failed admissibility check ([[thm-ip-finite-element-pde-tikhonov-status-soundness-and-termination]]).
 
 ## Verification
 
@@ -85,4 +85,4 @@ The diagram shows the four exact triangular cells and the only interior degree o
 
 2.1 Dividing the semidiscrete equation by $m_h$ gives $\dot U=-(k_h/m_h)U=-12U$. By the specified forward-Euler update, $U^1=U^0+\Delta t\dot U^0=(1-12\Delta t)U^0=-2U^0$. The scalar amplification has modulus at most one exactly when $-1\le1-12\Delta t\le1$, which is equivalent to $0\le\Delta t\le1/6$; $\Delta t=1/4$ violates it. [given, step 1.1, algebra]
 
-3.1 The model's admissibility predicate requires this explicit-step condition. Since the given step fails it, [F3] and [F4] show that the algorithm returns `inadmissible` before calling either state or adjoint solver. This conclusion concerns the declared discrete stability condition, not a stability theorem for the continuous heat equation. [given, F3, F4, step 2.1] ∎
+3.1 The model's admissibility predicate requires this explicit-step condition. Since the given step fails it, [F3] shows that the algorithm returns `inadmissible` before calling either state or adjoint solver. This conclusion concerns the declared discrete stability condition, not a stability theorem for the continuous heat equation. [given, F3, step 2.1] ∎

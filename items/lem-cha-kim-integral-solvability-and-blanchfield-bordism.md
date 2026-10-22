@@ -1,7 +1,7 @@
 ---
 id: lem-cha-kim-integral-solvability-and-blanchfield-bordism
 kind: lemma
-title: "Integral solvability and Blanchfield bordism for iterated infection"
+title: "Integral-pair persistence and Blanchfield bordism for iterated infection"
 status: draft
 origin: pipeline
 pipeline_run: inverse-problems-knot-theory-all-109-2026-10-19

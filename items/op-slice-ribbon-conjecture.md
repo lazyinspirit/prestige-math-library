@@ -34,7 +34,7 @@ sources:
       locator: "§10, Problem 1, printed p.342"
     - title: "A Reduction of the Slice–Ribbon Conjecture: Certified Quenching and a Single Completion Condition, Zenodo record 21752847, attached PDF"
       url: "https://zenodo.org/api/records/21752847/files/cdj%20(4).pdf/content"
-      locator: "Abstract; Definition 0.1; Assumption 10.5; Remarks 10.11–10.12; Theorem 10.26; Corollary 10.27; Conclusion, PDF pp.1, 9, 60–64, 67–70"
+      locator: "Abstract; Definition 0.1; Assumption 10.5; Remarks 10.11–10.12; Theorem 10.26; Corollary 10.27; Conclusion, PDF pp.1, 6, 9, 60–64, 67–70"
     - title: "Current metadata for Zenodo record 21752847"
       url: "https://zenodo.org/api/records/21752847"
       locator: "metadata title, creator, and description checked 2026-10-21; description claims an unconditional proof, unlike the attached PDF"

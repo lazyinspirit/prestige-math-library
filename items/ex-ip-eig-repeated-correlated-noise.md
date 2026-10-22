@@ -33,7 +33,7 @@ sources:
 
 ## Example
 
-Assume AC. Let $\theta\sim N(0,1)$ and take two repeated observations with $A=(1,1)^T$ and noise covariance $\Gamma_\rho=\begin{pmatrix}1&\rho\\\rho&1\end{pmatrix}$, where $-1<\rho<1$. The matrix $\Gamma_\rho$ is positive definite. The expected information gain is $\frac12\log\left(1+\frac{2}{1+\rho}\right)$. In particular, correlation $\rho=\frac12$ gives $\frac12\log(7/3)$, less than the independent-noise value $\frac12\log 3$ at $\rho=0$.
+Assume AC. Let $\theta\sim N(0,1)$ and observe $Y=A\theta+\eta$, where $A=(1,1)^T$ and $\eta\sim N_2(0,\Gamma_\rho)$ is independent of $\theta$, with $\Gamma_\rho=\begin{pmatrix}1&\rho\\\rho&1\end{pmatrix}$ and $-1<\rho<1$. The matrix $\Gamma_\rho$ is positive definite. The expected information gain is $\frac12\log\left(1+\frac{2}{1+\rho}\right)$. In particular, correlation $\rho=\frac12$ gives $\frac12\log(7/3)$, less than the independent-noise value $\frac12\log 3$ at $\rho=0$.
 
 ## Example references
 
@@ -43,11 +43,11 @@ Assume AC. Let $\theta\sim N(0,1)$ and take two repeated observations with $A=(1
 
 ## Facts & Assumptions
 
-**Given:** AC, scalar prior covariance $C=1$, repeated-observation matrix $A=(1,1)^T$, and $-1<\rho<1$.
+**Given:** AC, $\theta\sim N(0,1)$, $Y=A\theta+\eta$ with $A=(1,1)^T$ and independent $\eta\sim N_2(0,\Gamma_\rho)$, and $-1<\rho<1$.
 
 [A1] AC is inherited from the EIG/KL convention. [[def-axiom-of-choice]]
 
-[F1] For $C\succeq0$ and $\Gamma\succ0$, linear-Gaussian EIG is the log determinant in the Statement of the cited theorem. [[thm-ip-linear-gaussian-information-gain-logdet]]
+[F1] For independent $\theta\sim N_n(m_0,C)$ and $\eta\sim N_m(0,\Gamma)$ with $C\succeq0$ and $\Gamma\succ0$, observing $Y=A\theta+\eta$ has the log-determinant EIG in the Statement of the cited theorem. [[thm-ip-linear-gaussian-information-gain-logdet]]
 
 [F2] The natural logarithm is strictly increasing. [[thm-natural-logarithm-laws]]
 
@@ -55,7 +55,7 @@ Assume AC. Let $\theta\sim N(0,1)$ and take two repeated observations with $A=(1
 
 **Given:** The hypotheses in the Example.
 
-1.1 The vectors $(1,1)^T$ and $(1,-1)^T$ are eigenvectors of $\Gamma_\rho$ with eigenvalues $1+\rho$ and $1-\rho$. Both are positive for $-1<\rho<1$, so $\Gamma_\rho\succ0$. The predictive covariance is $S_\rho=ACA^T+\Gamma_\rho=\begin{pmatrix}2&1+\rho\\1+\rho&2\end{pmatrix}$ Thus $\det S_\rho=4-(1+\rho)^2$ and $\det\Gamma_\rho=1-\rho^2$. [given, algebra]
+1.1 The vectors $(1,1)^T$ and $(1,-1)^T$ are eigenvectors of $\Gamma_\rho$ with eigenvalues $1+\rho$ and $1-\rho$. Both are positive for $-1<\rho<1$, so $\Gamma_\rho\succ0$. With $C=1$, independence gives predictive covariance $S_\rho=ACA^T+\Gamma_\rho=\begin{pmatrix}2&1+\rho\\1+\rho&2\end{pmatrix}$. Thus $\det S_\rho=4-(1+\rho)^2$ and $\det\Gamma_\rho=1-\rho^2$. [given, algebra]
 
 2.1 By [F1], $\operatorname{EIG}(\rho)=\frac12\log(\det S_\rho/\det\Gamma_\rho)=\frac12\log\left(\frac{4-(1+\rho)^2}{1-\rho^2}\right)$. Factoring numerator and denominator gives $\frac{4-(1+\rho)^2}{1-\rho^2}=\frac{(3+\rho)(1-\rho)}{(1-\rho)(1+\rho)}=1+\frac{2}{1+\rho}$, proving the formula. [A1, F1, step 1.1, algebra]
 

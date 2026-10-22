@@ -21,6 +21,10 @@ sources:
       locator: "Printed pp. 234–235 (PDF pp. 50–51), local orientations and the two-sheeted orientation cover; the present definition uses the tangent determinant-line model and allows boundary charts."
 verification:
   precheck: n/a
+  judge:
+    model: "gpt-6-luna"
+    verdict: pass
+    date: 2026-10-22
 ---
 
 ## Definition

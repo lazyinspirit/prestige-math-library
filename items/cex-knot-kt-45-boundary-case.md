@@ -16,6 +16,11 @@ axiom_use: "Choice-free finite-dimensional linear algebra over F2."
 provenance:
   statement: ai-altered
   proof: ai-altered
+verification:
+  judge:
+    model: "gpt-6-luna"
+    verdict: pass
+    date: 2026-10-22
 sources:
   references:
     - title: "Weibel, An Introduction to Homological Algebra, Chapter 5"

@@ -24,7 +24,7 @@ sources:
 
 ## Definition
 
-Input a normalized sequence observation $z=(z_j)_{j\in\mathbb N}\in\mathbb R^{\mathbb N}$ from the Gaussian sequence inverse model and a cutoff $D\in\mathbb N_0$, where $\mathbb N_0=\{0,1,2,\ldots\}$. Output the finite-support estimate $\widehat\theta_D(z)\in\ell^2(\mathbb N,\mathbb R)$ defined by
+Input a normalized sequence observation $z=(z_j)_{j\in\mathbb N_{>0}}\in\mathbb R^{\mathbb N_{>0}}$ from the Gaussian sequence inverse model and a cutoff $D\in\mathbb N_0$, where $\mathbb N_0=\{0,1,2,\ldots\}$. Output the finite-support estimate $\widehat\theta_D(z)\in\ell^2(\mathbb N_{>0},\mathbb R)$ defined by
 $$\widehat\theta_{D,j}(z)=\begin{cases}z_j,&1\le j\le D,\\0,&j>D.\end{cases}$$
 For $D=0$ the output is the zero sequence.
 

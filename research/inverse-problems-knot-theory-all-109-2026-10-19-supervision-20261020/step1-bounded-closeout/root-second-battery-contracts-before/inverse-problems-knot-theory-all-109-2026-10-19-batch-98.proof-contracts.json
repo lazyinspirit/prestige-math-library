@@ -1,0 +1,1068 @@
+{
+  "version": 1,
+  "scope": [
+    "def-instanton-surgery-triangle-data",
+    "lem-trefoil-knot-group-is-nonabelian-with-abelianization-z",
+    "lem-property-p-instanton-surgery-triangle-and-rank-input",
+    "thm-property-p-for-nontrivial-knots",
+    "lem-s-three-filling-detects-the-meridian-slope",
+    "thm-gordon-luecke-knot-complement-determines-knot",
+    "ex-knot-kt-15-worked-cases",
+    "cex-knot-kt-15-boundary-case"
+  ],
+  "contracts": {
+    "def-instanton-surgery-triangle-data": {
+      "citations": [],
+      "derivations": [],
+      "routine_steps": [],
+      "finite_checks": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The definition fixes the data when a surgery triad is supplied; it makes no existence claim."
+        },
+        {
+          "case": "zero",
+          "status": "not_applicable",
+          "reason": "No numerical zero case is asserted."
+        },
+        {
+          "case": "one",
+          "status": "not_applicable",
+          "reason": "No one-dimensional boundary case is asserted."
+        },
+        {
+          "case": "degenerate",
+          "status": "not_applicable",
+          "reason": "Regularity and degenerate critical-point behavior are expressly separate theorem obligations."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "The definition is not a statement about endpoint behavior."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "The definition does not assert that perturbations or regular data exist."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The definition is not an equivalence."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The definition is not an equivalence."
+        }
+      ]
+    },
+    "lem-trefoil-knot-group-is-nonabelian-with-abelianization-z": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "thm-knot-wirtinger-presentation-correctness",
+          "source_section": "Statement",
+          "quote": "The finite procedure $\\mathsf{Wirtinger}(D,a_0)$ terminates and returns a presentation with one positive-meridian generator for each under-arc and one crossing conjugacy relator for each crossing.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "lem-wirtinger-local-meridian-conjugacy",
+          "source_section": "Statement",
+          "quote": "In an oriented chart with over-tangent rightward, the target is the upper side $L$ and source the lower side $R$, so equivalently $m_R=m_o m_Lm_o^{-1}$.",
+          "uses": [
+            "1.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "trefoil-relations",
+          "step": "1.1",
+          "claim": "The three labelled local crossing charts give the three meridian conjugacy equations; eliminating c yields the braid presentation and the third relation follows from the braid relation.",
+          "inputs": [
+            "given",
+            "F1",
+            "F2",
+            "F3",
+            "algebra"
+          ]
+        },
+        {
+          "id": "abelianization",
+          "step": "2.1",
+          "claim": "Abelianizing the single braid relator imposes [a]=[b] and no further relation, so the abelianization is Z.",
+          "inputs": [
+            "F3",
+            "step 1.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "symmetric-quotient",
+          "step": "3.1",
+          "claim": "The adjacent transpositions satisfy the braid relator and generate S3, giving a nonabelian quotient and hence a nonabelian trefoil group.",
+          "inputs": [
+            "step 1.1",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "finite_checks": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The statement fixes the standard trefoil diagram."
+        },
+        {
+          "case": "zero",
+          "status": "not_applicable",
+          "reason": "The trefoil diagram has three crossings; the crossing-free unknot case is treated by its consumer."
+        },
+        {
+          "case": "one",
+          "status": "not_applicable",
+          "reason": "The stated diagram has three crossings and three under-arcs."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Statement specifies a regular three-crossing diagram and its full crossing table."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "The knot is closed and the diagram has no endpoints."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Steps 1.1–3.1 use finite presentations and an explicit finite S3 quotient; no choice axiom is used."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The statement is not an equivalence."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The statement is not an equivalence."
+        }
+      ]
+    },
+    "lem-property-p-instanton-surgery-triangle-and-rank-input": {
+      "citations": [
+        {
+          "fact": "F2",
+          "source": "def-oriented-slope-and-knot-dehn-filling",
+          "source_section": "Definition",
+          "quote": "Assume the Axiom of Countable Choice $\\mathrm{AC}_\\omega$. Let $K$ be a smooth oriented knot in the oriented $3$-sphere, let $N(K)$ be a chosen closed tubular solid-torus neighborhood, let $E_K=\\overline{S^3\\setminus\\operatorname{int}N(K)}$, and let $T_K=\\partial E_K=\\partial N(K)$. Let $\\mu$ be the positive oriented meridian, meaning the boundary of a positive normal disk in $N(K)$, and let $\\lambda$ be a preferred longitude, meaning a degree-one parallel of the core $K$ in $N(K)$ that is null-homologous in $E_K$. Assume that $[\\mu],[\\lambda]$ are an ordered basis of $H_1(T_K;\\mathbb Z)$, with the boundary-orientation convention $\\mu\\cdot\\lambda=-1$. A slope is the unoriented isotopy class of an essential simple closed curve on $T_K$ whose homology class is $p[\\mu]+q[\\lambda]$ for coprime integers $p,q$ not both zero; $(p,q)$ and $(-p,-q)$ represent the same slope. For a slope represented by $p[\\mu]+q[\\lambda]$, the Dehn filling $E_K(p/q)$ is obtained by gluing an oriented solid torus $D^2\\times S^1$ to $E_K$ by an orientation-reversing boundary homeomorphism that sends $[\\partial D^2\\times\\{1\\}]$ to that slope; the filled orientation agrees with the fixed orientation on $E_K$. If $q\\ne0$, the coefficient is written $p/q$; the meridional slope is $1/0$, and integer $n$-framed filling means slope $n[\\mu]+[\\lambda]$. The oriented homeomorphism type is independent of the gluing map once its meridian image is fixed.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "def-knot-meridian-and-preferred-longitude",
+          "source_section": "Definition",
+          "quote": "Assume countable choice as in the chosen tubular-neighbourhood data. Let $K$ be a smooth oriented knot with chosen exterior $E_K$ and boundary torus $T_K=\\partial E_K$, and let $p:T_K\\to K$ be the projection of the chosen normal-disk tube. Orient each normal disk so that its positive tangent direction followed by its oriented normal basis agrees with the orientation of $S^3$. A **meridian** $\\mu$ is the oriented boundary of one such normal disk. A **degree-one parallel curve** is a simple closed curve $\\lambda$ in $T_K$ for which $p|_\\lambda:\\lambda\\to K$ has degree $+1$. A **preferred longitude** is a degree-one parallel curve satisfying $i_*[\\lambda]=0$ in $H_1(E_K;\\mathbb Z)$, where $i:T_K\\hookrightarrow E_K$ is inclusion. This is a condition on a curve; this definition alone asserts neither existence nor uniqueness. Reversing the orientation of $K$ reverses the orientations of both $\\mu$ and any degree-one parallel curve. If a subgroup $P\\le\\pi_1(E_K,x)$ is specified using a path from $x$ to $T_K$, record it only up to replacing it by $gPg^{-1}$ for $g\\in\\pi_1(E_K,x)$.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "A1",
+          "source": "def-axiom-of-choice",
+          "source_section": "Definition",
+          "quote": "The **Axiom of Choice** (AC) is the following statement.\n\n> Every family of nonempty sets has a choice function\n> (Choice function).\n\nWritten out: for every set $\\mathcal{F}$ all of whose members are nonempty,\nthere exists a function $g$ with domain $\\mathcal{F}$ satisfying $g(S) \\in S$ for\nall $S \\in \\mathcal{F}$.\n\nAn equivalent formulation is that a product of nonempty sets is nonempty: if\n$X_i \\ne \\emptyset$ for every $i \\in I$, then $\\prod_{i \\in I} X_i \\ne \\emptyset$.\nHere $\\prod_{i \\in I} X_i$ is the set of functions $f$ with domain $I$ such that\n$f(i) \\in X_i$ for every $i \\in I$; when a family of nonempty sets is indexed by\nitself, such an $f$ is precisely a choice function for it.",
+          "uses": [
+            "1.2"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "Since $q$ is a nonzero integer, $|q|\\ge1$. Thus $r=p/q$ is rational and satisfies $|r|=1/|q|\\le1\\le2$. By [F2], the manifold in the Statement is precisely the coefficient-$r$ surgery appearing in [F1]. Both signs of $r$ are covered by its absolute-value hypothesis.",
+          "step": "1.1",
+          "inputs": [
+            "given",
+            "F2",
+            "algebra",
+            "F1"
+          ]
+        },
+        {
+          "id": "step-1-2",
+          "claim": "Apply [F1] to this nontrivial knot and this coefficient. It gives a homomorphism $\\pi_1(Y_{p/q})\\to SU(2)$ with noncyclic image, as required.",
+          "step": "1.2",
+          "inputs": [
+            "given",
+            "A1",
+            "F1",
+            "step 1.1"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "finite_checks": [],
+      "unresolved": [
+        {
+          "status": "escalated",
+          "statement": "The noncyclic SU(2)-image conclusion for all numerator-one slopes is a known gauge-theoretic theorem, but the local holonomy-perturbation, reducible-locus, ASD long-neck compactness/gluing, and symplectic/Donaldson nonvanishing proofs are not supplied.",
+          "affected_consumers": [
+            "thm-property-p-for-nontrivial-knots",
+            "lem-s-three-filling-detects-the-meridian-slope",
+            "thm-gordon-luecke-knot-complement-determines-knot"
+          ]
+        }
+      ],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "No local proof is claimed for this proof-obligation carrier."
+        },
+        {
+          "case": "zero",
+          "status": "not_applicable",
+          "reason": "No local proof is claimed for this proof-obligation carrier."
+        },
+        {
+          "case": "one",
+          "status": "not_applicable",
+          "reason": "No local proof is claimed for this proof-obligation carrier."
+        },
+        {
+          "case": "degenerate",
+          "status": "not_applicable",
+          "reason": "No local proof is claimed for this proof-obligation carrier."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "No local proof is claimed for this proof-obligation carrier."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "The analytic AC branch is an unresolved part of the proof obligation."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "No local proof is claimed for this proof-obligation carrier."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "No local proof is claimed for this proof-obligation carrier."
+        }
+      ],
+      "owner_metadata_note": {
+        "accepted_scope": "Exact original Statement at literal category/choice hypotheses, with preserved local segments and explicitly imported established source boundaries; see final independent report.",
+        "accepted_scope_evidence": [
+          "research/inverse-problems-knot-theory-all-109-2026-10-19-supervision-20261020/step1-bounded-closeout/property-p-gl-focused-source-binding-check.json",
+          "research/inverse-problems-knot-theory-all-109-2026-10-19-supervision-20261020/step1-bounded-closeout/root-source-qualified-66-scope-adoption-registry.json"
+        ],
+        "source_boundary": {
+          "sources": {
+            "references": [
+              {
+                "title": "P. B. Kronheimer and T. S. Mrowka, Dehn surgery, the fundamental group and SU(2), Mathematical Research Letters 11 (2004), 741–754, Theorem 1, p. 741",
+                "url": "https://doi.org/10.4310/mrl.2004.v11.n6.a3"
+              },
+              {
+                "title": "P. B. Kronheimer and T. S. Mrowka, Dehn surgery, the fundamental group and SU(2), Theorem 1 and §§2–4",
+                "url": "https://people.math.harvard.edu/~kronheim/hrpthree.pdf"
+              },
+              {
+                "title": "P. B. Kronheimer and T. S. Mrowka, Witten's conjecture and Property P, §§1 and 3",
+                "url": "https://arxiv.org/pdf/math/0311489"
+              },
+              {
+                "title": "P. B. Kronheimer and T. S. Mrowka, Knots, sutures and excision, §§7.5 and 7.8",
+                "url": "https://arxiv.org/pdf/0807.4891"
+              },
+              {
+                "title": "Kimihiko Motegi, Dehn surgery on knots: survey, pp. 19–21 and 26",
+                "url": "https://www.math.tsukuba.ac.jp/~tange/diftop22/Dehn_surgery_survey.pdf"
+              }
+            ]
+          },
+          "provenance": {
+            "statement": "literature-derived",
+            "proof": "ai-altered"
+          },
+          "axiom_use": "Retains full AC for the externally imported gauge-theoretic theorem. The rational inequality and direct application require no additional choice.",
+          "import_fields": {},
+          "declared_source_remarks": null
+        },
+        "historical_preimage": "research/inverse-problems-knot-theory-all-109-2026-10-19-supervision-20261020/step1-bounded-closeout/contract-final-before/research/inverse-problems-knot-theory-all-109-2026-10-19-batch-98.proof-contracts.json",
+        "new_math_acceptance": false
+      }
+    },
+    "thm-property-p-for-nontrivial-knots": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "lem-knot-surgery-first-homology-mayer-vietoris",
+          "source_section": "Statement",
+          "quote": "$$H_1(E_K(p/q);\\mathbb Z)\\cong\\begin{cases}\\mathbb Z/|p|\\mathbb Z,&p\\ne0,\\\\[2pt]\\mathbb Z,&p=0.\\end{cases}$$",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "prop-the-first-hurewicz-map-in-degree-one-is-abelianization",
+          "source_section": "Statement",
+          "quote": "For every path-connected topological space $X$ and $x_0\\in X$, the Hurewicz map $$h:\\pi_1(X,x_0)\\longrightarrow H_1(X;\\mathbb Z)$$ is surjective and has kernel $[\\pi_1(X,x_0),\\pi_1(X,x_0)]$.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "lem-property-p-instanton-surgery-triangle-and-rank-input",
+          "source_section": "Statement",
+          "quote": "For the Dehn filling $Y_{p/q}=E_K(p/q)$ whose attached solid-torus meridian is identified with $p[\\mu]+q[\\lambda]$, the fundamental group $\\pi_1(Y_{p/q})$ admits a homomorphism to $SU(2)$ with noncyclic image.",
+          "uses": [
+            "1.2"
+          ]
+        },
+        {
+          "fact": "A1",
+          "source": "def-axiom-of-choice",
+          "source_section": "Definition",
+          "quote": "Every family of nonempty sets has a choice function",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "L1",
+          "source": "def-axiom-of-choice",
+          "source_section": "Definition",
+          "quote": "for every set $\\mathcal{F}$ all of whose members are nonempty, there exists a function $g$ with domain $\\mathcal{F}$ satisfying $g(S) \\in S$ for all $S \\in \\mathcal{F}$.",
+          "uses": [
+            "1.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "homology-case",
+          "step": "1.1",
+          "claim": "For p=0 or |p|>=2 the filling has nonzero H1, which is a quotient of pi1 by the first Hurewicz theorem, so pi1 cannot be trivial.",
+          "inputs": [
+            "given",
+            "A1",
+            "L1",
+            "F1",
+            "F2",
+            "algebra"
+          ]
+        },
+        {
+          "id": "numerator-one-case",
+          "step": "1.2",
+          "claim": "For |p|=1 with q nonzero, the local numerator-one interface supplies a noncyclic SU(2) image, hence a nontrivial fundamental group.",
+          "inputs": [
+            "given",
+            "F3",
+            "algebra"
+          ]
+        },
+        {
+          "id": "slope-cases-exhausted",
+          "step": "2.1",
+          "claim": "Coprimality partitions the nonmeridional slopes into the cases already handled.",
+          "inputs": [
+            "given",
+            "step 1.1",
+            "step 1.2",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "finite_checks": [],
+      "unresolved": [
+        {
+          "status": "escalated",
+          "statement": "Step 1.2 depends on the numerator-one gauge-theory module, whose local proof is not supplied.",
+          "supplier": "lem-property-p-instanton-surgery-triangle-and-rank-input"
+        }
+      ],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The theorem assumes a nontrivial knot and a primitive nonmeridional slope."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Step 1.1 handles p=0 and obtains H1=Z."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Step 1.2 handles |p|=1 with q!=0 through the explicit but unproved local interface."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "The statement requires gcd(p,q)=1 and q!=0; step 2.1 uses coprimality to exhaust cases."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "The fillings are closed and no interval endpoints occur."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Statement and step 1.1 retain AC_omega for the homology branch; step 1.2 retains the full-AC gauge branch, whose proof remains escalated."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The theorem is an implication, not an iff statement."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The theorem is an implication, not an iff statement."
+        }
+      ]
+    },
+    "lem-s-three-filling-detects-the-meridian-slope": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "lem-knot-surgery-first-homology-mayer-vietoris",
+          "source_section": "Statement",
+          "quote": "$$H_1(E_K(p/q);\\mathbb Z)\\cong\\begin{cases}\\mathbb Z/|p|\\mathbb Z,&p\\ne0,\\\\[2pt]\\mathbb Z,&p=0.\\end{cases}$$",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "thm-property-p-for-nontrivial-knots",
+          "source_section": "Statement",
+          "quote": "For the Dehn filling $Y_{p/q}=E_K(p/q)$ whose attached solid-torus meridian is identified with $p[\\mu]+q[\\lambda]$, the fundamental group $\\pi_1(Y_{p/q})$ is nontrivial.",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "def-oriented-slope-and-knot-dehn-filling",
+          "source_section": "Definition",
+          "quote": "the meridional slope is $1/0$, and integer $n$-framed filling means slope $n[\\mu]+[\\lambda]$.",
+          "uses": [
+            "3.1"
+          ]
+        },
+        {
+          "fact": "A1",
+          "source": "def-axiom-of-choice",
+          "source_section": "Definition",
+          "quote": "Every family of nonempty sets has a choice function",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "L1",
+          "source": "def-axiom-of-choice",
+          "source_section": "Definition",
+          "quote": "for every set $\\mathcal{F}$ all of whose members are nonempty, there exists a function $g$ with domain $\\mathcal{F}$ satisfying $g(S) \\in S$ for all $S \\in \\mathcal{F}$.",
+          "uses": [
+            "1.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "first-homology-elimination",
+          "step": "1.1",
+          "claim": "S3 has H1=0; the filling homology formula excludes p=0 and |p|>=2, leaving |p|=1.",
+          "inputs": [
+            "given",
+            "A1",
+            "L1",
+            "F1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "property-p-elimination",
+          "step": "2.1",
+          "claim": "If q were nonzero, the slope would be nonmeridional and Property P would contradict simple connectivity of S3; hence q=0.",
+          "inputs": [
+            "given",
+            "F2",
+            "step 1.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "meridional-converse",
+          "step": "3.1",
+          "claim": "With q=0, coprimality forces p=+-1, which is the meridional slope and restores the original S3 filling.",
+          "inputs": [
+            "given",
+            "F3",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "finite_checks": [],
+      "unresolved": [
+        {
+          "status": "escalated",
+          "statement": "The numerator-one Property P supplier is not locally proved.",
+          "supplier": "thm-property-p-for-nontrivial-knots"
+        }
+      ],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The statement assumes a nontrivial knot and a primitive filling slope."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Step 1.1 excludes p=0 because H1 is Z."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Steps 1.1–1.2 leave and handle |p|=1."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Coprimality in steps 1.1–2.1 rules out nonprimitive slope representatives."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "The filled manifolds are closed."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Statement and step 1.1 use full AC to supply the homology supplier’s AC_omega hypothesis; step 2.1 retains the escalated Property P branch."
+        },
+        {
+          "case": "iff-forward",
+          "status": "checked",
+          "evidence": "Steps 1.1–1.2 prove S3 filling implies q=0."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "checked",
+          "evidence": "Step 2.1 proves q=0 gives the meridional S3 filling."
+        }
+      ]
+    },
+    "thm-gordon-luecke-knot-complement-determines-knot": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "lem-s-three-filling-detects-the-meridian-slope",
+          "source_section": "Statement",
+          "quote": "Assume the Axiom of Choice. Let $K\\subset S^3$ be a nontrivial smooth knot and let $p,q$ be coprime integers, not both zero. The Dehn filling $E_K(p/q)$ is homeomorphic to $S^3$ if and only if $q=0$, in which case $p=\\pm1$ and the slope is the meridional slope $1/0$.",
+          "uses": [
+            "1.2"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "lem-nontrivial-knot-exterior-boundary-incompressible",
+          "source_section": "Statement",
+          "quote": "Assume the Axiom of Choice. Let $K\\subset S^3$ be a smooth knot that is not ambient isotopic to the standard unknot, let $E_K$ be its chosen compact exterior, and let $T_K=\\partial E_K$. There is no properly embedded disk $D\\subset E_K$ whose boundary is a simple closed curve in $T_K$ that is not null-homotopic in $T_K$.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "lem-meridian-preserving-torus-homeomorphism-extends-over-solid-torus",
+          "source_section": "Statement",
+          "quote": "Let $V=D^2\\times S^1$ and $V'=D^2\\times S^1$ be solid tori, with meridian curves $\\mu=\\partial D^2\\times\\{1\\}$ and $\\mu'=\\partial D^2\\times\\{1\\}$. Suppose $h:\\partial V\\to\\partial V'$ is a homeomorphism and there is an isotopy $H_t:\\partial V'\\to\\partial V'$ through homeomorphisms, with $H_0=\\mathrm{id}$, such that $H_1(h(\\mu))=\\mu'$. Then $h$ extends to a homeomorphism $\\overline h:V\\to V'$. The extension may be chosen to carry the product core $\\{0\\}\\times S^1$ onto the product core of $V'$, and has the same orientation sign as $h$ with respect to the boundary orientations.",
+          "uses": [
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "def-oriented-link-in-s-three-and-ambient-isotopy",
+          "source_section": "Definition",
+          "quote": "Work in the smooth category ([[def-smooth-manifold]]). Fix once and for all the\nthree-sphere as the one-point compactification\n\n$$S^3:=\\mathbb R^3\\cup\\{\\infty\\}$$\n\nof Euclidean three-space, carrying its standard smooth structure, and fix the\nstandard orientation of $S^3$: the orientation induced by the standard\norientation of $\\mathbb R^3$ under the one-point compactification, so that the\ncharts of the standard atlas away from $\\infty$ are orientation-preserving and\nthe orientation is that of a connected oriented $3$-manifold in the sense of\n[[def-oriented-smooth-manifold-and-oriented-chart]]. For $r>0$ write\n$\\overline B_r:=\\{x\\in\\mathbb R^3:\\lVert x\\rVert_2\\le r\\}$, the closed ball of\n[[def-euclidean-spheres-and-closed-balls]] with the following restriction convention. Smoothness on a closed ball means\nlocal extension to a smooth map on an open neighborhood in Euclidean space;\nsmoothness on $M\\times I$, for a smooth manifold $M$ without boundary, means\nlocal extension across $t=0,1$ in $M\\times\\mathbb R$. Thus these closed domains\nare not asserted to be manifolds without boundary in the cited definition.\n\n**Links.** The **standard oriented circle** is the circle\n$S^1=\\mathbb R/\\mathbb Z$ with its standard counterclockwise orientation,\nregarded as a smooth $1$-manifold; a\n**finite disjoint union of oriented circles** is a smooth manifold\n$C=S^1\\sqcup\\dots\\sqcup S^1$ ($k$ summands, $k\\in\\mathbb N$)\ndiffeomorphic to the disjoint union of $k$ standard oriented circles. An\n**oriented link** (with $k$ components) is a smooth embedding\n\n$$L\\colon C\\longrightarrow S^3$$\n\nof such a disjoint union in the sense of [[def-smooth-embedding]]. So $L$ is\ninjective, is an immersion, and is a homeomorphism onto its image with the\nsubspace topology, and its image $L(C)$ is a finite disjoint union of smoothly\nembedded circles. Thus every link considered here is finite and tame: the\nsmoothness of $L$ is exactly the standing convention, and no polygonal or other\ntame model is used. The **components** of $L$ are the images of the individual\nsummands, and the number of components is $k$.\n\n**Ambient isotopy.** Let $I=[0,1]$. An **ambient isotopy** of $S^3$ is a smooth\nmap\n\n$$H\\colon S^3\\times I\\longrightarrow S^3$$\n\nsuch that $H_0=\\mathrm{id}_{S^3}$, each $H_t\\colon S^3\\to S^3$,\n$H_t(x):=H(x,t)$, is a diffeomorphism ([[def-diffeomorphism-and-local-diffeomorphism-of-manifolds]]),\nand each $H_t$ is orientation-preserving with respect to the fixed orientation.\nThe last clause is in fact automatic: $t\\mapsto H_t$ is continuous in the\n$C^\\infty$ topology of the diffeomorphism group, the orientation sign is locally\nconstant in $t$, and $H_0=\\mathrm{id}$ is orientation-preserving, so it is kept\nonly for emphasis.\n\n**Equivalence of links.** Two oriented links $L_0\\colon C_0\\to S^3$ and\n$L_1\\colon C_1\\to S^3$ are **equivalent** (written $L_0\\sim L_1$), or\n**ambient isotopic**, when there are an ambient isotopy $H$ and an orientation-preserving diffeomorphism $f:C_0\\to C_1$ with\n$H_1\\circ L_0=L_1\\circ f$. Thus parametrizations and component labels are\nirrelevant, while the induced orientation of each image component is preserved. The relation is an equivalence relation on links:\nit is reflexive with $H=\\mathrm{id}$, transitive by composing isotopies, and\nsymmetric because a smooth family of diffeomorphisms has a smooth family of\ninverses. An equivalence class is an **(oriented) link type**.\n\n**Moving off $\\infty$.** Because the definition of equivalence allows the\nisotopy to move a link through $\\infty$, the standard practice of this page is\nto first apply an ambient isotopy that carries a given link into the open ball,\nand only then to project; every projection and every Reidemeister move below is\nread after moving the link off $\\infty$ into $\\mathbb R^3$ in this way. The\norientation-preserving clause in the definition of ambient isotopy is exactly\nwhat the oriented Reidemeister moves and the oriented closure construction must\nrespect. The unoriented theory uses the same ambient isotopies but forgets\nthe orientations of the link components.\n\n**Links in the three-sphere versus links in $\\mathbb R^3$.** A link contained in\n$\\mathbb R^3\\subset S^3$ is a link in $S^3$; conversely every link may be\nassumed after isotopy to lie in $\\mathbb R^3$, by choosing a point outside the compact one-dimensional image and moving that\npoint to $\\infty$ by a smooth rotation of the standard sphere. When comparing\nlinks already in $\\mathbb R^3$, an isotopy can also be arranged to avoid\n$\\infty$ throughout; the track-avoidance argument is given in\n[[thm-oriented-reidemeister-equivalence-theorem]].",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "def-knot-exterior",
+          "source_section": "Definition",
+          "quote": "Assume countable choice, as required for the smooth normal-bundle structure in the tubular-neighbourhood interface. Let $K:S^1\\to S^3$ be a smooth oriented knot, let $\\nu(K)=TS^3|_K/TK$ be its quotient normal bundle, and let $\\Phi:\\Omega\\to S^3$ be a tubular-neighbourhood map from an open neighbourhood $\\Omega$ of the zero section in $\\nu(K)$ that restricts to the inclusion of $K$. Choose a radius $\\epsilon>0$ whose closed disk subbundle $D_\\epsilon\\nu(K)$ is contained in $\\Omega$, and set $N(K)=\\Phi(D_\\epsilon\\nu(K))$. The **exterior** of this chosen tube is\n$$\nE_K:=S^3\\setminus\\operatorname{int}_{S^3}N(K).\n$$\nRetain its boundary $T_K:=\\partial E_K=\\partial N(K)$, orient $E_K$ by restriction of the fixed orientation of $S^3$, and orient $T_K$ as the boundary of $E_K$. The choice of tubular map and radius is part of the input to this definition.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "cor-tubular-neighbourhoods-are-unique-up-to-ambient-isotopy",
+          "source_section": "Statement",
+          "quote": "Assume $\\mathrm{AC}_\\omega$. Let $N$ be a smooth manifold without boundary, let $S\\subseteq N$ be a closed embedded submanifold, let $\\nu(S)$ be its normal bundle ([[def-normal-and-conormal-bundles-of-an-embedded-submanifold]]), and let $\\Phi_1,\\Phi_2:\\Omega\\to N$ be two tubular neighbourhood embeddings of the same open disc bundle $\\Omega=D(\\nu(S))$ whose restrictions to the zero section are the inclusion of $S$ ([[def-tubular-neighbourhood-of-an-embedded-submanifold]]). Assume that $d\\Phi_1$ and $d\\Phi_2$ induce the same isomorphism from each vertical fibre $\\nu(S)_p$ to the ambient normal quotient $T_pN/T_pS$. (The usual normalization makes both induced maps the identity; merely fixing the zero section is insufficient.) Then, after shrinking $\\Omega$ around the zero section, the two embeddings are isotopic through tubular neighbourhood embeddings fixing $S$ pointwise. Consequently, for every compact $A\\subseteq S$ there is an ambient isotopy $H_t$ of $N$ with $H_0=\\mathrm{id}_N$, compact support, $H_t\\circ\\Phi_1=\\Phi_t$ on a neighbourhood of $A$ for every $t$ (in particular $H_1\\circ\\Phi_1=\\Phi_2$ there), and $H_t$ fixing a neighbourhood of $A$ in $S$ pointwise; when $S$ is compact one may take $A=S$ and obtain the agreement on a neighbourhood of all of $S$, with support in any prescribed neighbourhood of $\\Phi_1(\\Omega)\\cup\\Phi_2(\\Omega)$.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F6",
+          "source": "def-knot-exterior",
+          "source_section": "Definition",
+          "quote": "Assume countable choice, as required for the smooth normal-bundle structure in the tubular-neighbourhood interface. Let $K:S^1\\to S^3$ be a smooth oriented knot, let $\\nu(K)=TS^3|_K/TK$ be its quotient normal bundle, and let $\\Phi:\\Omega\\to S^3$ be a tubular-neighbourhood map from an open neighbourhood $\\Omega$ of the zero section in $\\nu(K)$ that restricts to the inclusion of $K$. Choose a radius $\\epsilon>0$ whose closed disk subbundle $D_\\epsilon\\nu(K)$ is contained in $\\Omega$, and set $N(K)=\\Phi(D_\\epsilon\\nu(K))$. The **exterior** of this chosen tube is\n$$\nE_K:=S^3\\setminus\\operatorname{int}_{S^3}N(K).\n$$\nRetain its boundary $T_K:=\\partial E_K=\\partial N(K)$, orient $E_K$ by restriction of the fixed orientation of $S^3$, and orient $T_K$ as the boundary of $E_K$. The choice of tubular map and radius is part of the input to this definition.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F7",
+          "source": "def-oriented-slope-and-knot-dehn-filling",
+          "source_section": "Definition",
+          "quote": "Assume the Axiom of Countable Choice $\\mathrm{AC}_\\omega$. Let $K$ be a smooth oriented knot in the oriented $3$-sphere, let $N(K)$ be a chosen closed tubular solid-torus neighborhood, let $E_K=\\overline{S^3\\setminus\\operatorname{int}N(K)}$, and let $T_K=\\partial E_K=\\partial N(K)$. Let $\\mu$ be the positive oriented meridian, meaning the boundary of a positive normal disk in $N(K)$, and let $\\lambda$ be a preferred longitude, meaning a degree-one parallel of the core $K$ in $N(K)$ that is null-homologous in $E_K$. Assume that $[\\mu],[\\lambda]$ are an ordered basis of $H_1(T_K;\\mathbb Z)$, with the boundary-orientation convention $\\mu\\cdot\\lambda=-1$. A slope is the unoriented isotopy class of an essential simple closed curve on $T_K$ whose homology class is $p[\\mu]+q[\\lambda]$ for coprime integers $p,q$ not both zero; $(p,q)$ and $(-p,-q)$ represent the same slope. For a slope represented by $p[\\mu]+q[\\lambda]$, the Dehn filling $E_K(p/q)$ is obtained by gluing an oriented solid torus $D^2\\times S^1$ to $E_K$ by an orientation-reversing boundary homeomorphism that sends $[\\partial D^2\\times\\{1\\}]$ to that slope; the filled orientation agrees with the fixed orientation on $E_K$. If $q\\ne0$, the coefficient is written $p/q$; the meridional slope is $1/0$, and integer $n$-framed filling means slope $n[\\mu]+[\\lambda]$. The oriented homeomorphism type is independent of the gluing map once its meridian image is fixed.",
+          "uses": [
+            "1.2"
+          ]
+        },
+        {
+          "fact": "F8",
+          "source": "def-oriented-link-in-s-three-and-ambient-isotopy",
+          "source_section": "Definition",
+          "quote": "Work in the smooth category ([[def-smooth-manifold]]). Fix once and for all the\nthree-sphere as the one-point compactification\n\n$$S^3:=\\mathbb R^3\\cup\\{\\infty\\}$$\n\nof Euclidean three-space, carrying its standard smooth structure, and fix the\nstandard orientation of $S^3$: the orientation induced by the standard\norientation of $\\mathbb R^3$ under the one-point compactification, so that the\ncharts of the standard atlas away from $\\infty$ are orientation-preserving and\nthe orientation is that of a connected oriented $3$-manifold in the sense of\n[[def-oriented-smooth-manifold-and-oriented-chart]]. For $r>0$ write\n$\\overline B_r:=\\{x\\in\\mathbb R^3:\\lVert x\\rVert_2\\le r\\}$, the closed ball of\n[[def-euclidean-spheres-and-closed-balls]] with the following restriction convention. Smoothness on a closed ball means\nlocal extension to a smooth map on an open neighborhood in Euclidean space;\nsmoothness on $M\\times I$, for a smooth manifold $M$ without boundary, means\nlocal extension across $t=0,1$ in $M\\times\\mathbb R$. Thus these closed domains\nare not asserted to be manifolds without boundary in the cited definition.\n\n**Links.** The **standard oriented circle** is the circle\n$S^1=\\mathbb R/\\mathbb Z$ with its standard counterclockwise orientation,\nregarded as a smooth $1$-manifold; a\n**finite disjoint union of oriented circles** is a smooth manifold\n$C=S^1\\sqcup\\dots\\sqcup S^1$ ($k$ summands, $k\\in\\mathbb N$)\ndiffeomorphic to the disjoint union of $k$ standard oriented circles. An\n**oriented link** (with $k$ components) is a smooth embedding\n\n$$L\\colon C\\longrightarrow S^3$$\n\nof such a disjoint union in the sense of [[def-smooth-embedding]]. So $L$ is\ninjective, is an immersion, and is a homeomorphism onto its image with the\nsubspace topology, and its image $L(C)$ is a finite disjoint union of smoothly\nembedded circles. Thus every link considered here is finite and tame: the\nsmoothness of $L$ is exactly the standing convention, and no polygonal or other\ntame model is used. The **components** of $L$ are the images of the individual\nsummands, and the number of components is $k$.\n\n**Ambient isotopy.** Let $I=[0,1]$. An **ambient isotopy** of $S^3$ is a smooth\nmap\n\n$$H\\colon S^3\\times I\\longrightarrow S^3$$\n\nsuch that $H_0=\\mathrm{id}_{S^3}$, each $H_t\\colon S^3\\to S^3$,\n$H_t(x):=H(x,t)$, is a diffeomorphism ([[def-diffeomorphism-and-local-diffeomorphism-of-manifolds]]),\nand each $H_t$ is orientation-preserving with respect to the fixed orientation.\nThe last clause is in fact automatic: $t\\mapsto H_t$ is continuous in the\n$C^\\infty$ topology of the diffeomorphism group, the orientation sign is locally\nconstant in $t$, and $H_0=\\mathrm{id}$ is orientation-preserving, so it is kept\nonly for emphasis.\n\n**Equivalence of links.** Two oriented links $L_0\\colon C_0\\to S^3$ and\n$L_1\\colon C_1\\to S^3$ are **equivalent** (written $L_0\\sim L_1$), or\n**ambient isotopic**, when there are an ambient isotopy $H$ and an orientation-preserving diffeomorphism $f:C_0\\to C_1$ with\n$H_1\\circ L_0=L_1\\circ f$. Thus parametrizations and component labels are\nirrelevant, while the induced orientation of each image component is preserved. The relation is an equivalence relation on links:\nit is reflexive with $H=\\mathrm{id}$, transitive by composing isotopies, and\nsymmetric because a smooth family of diffeomorphisms has a smooth family of\ninverses. An equivalence class is an **(oriented) link type**.\n\n**Moving off $\\infty$.** Because the definition of equivalence allows the\nisotopy to move a link through $\\infty$, the standard practice of this page is\nto first apply an ambient isotopy that carries a given link into the open ball,\nand only then to project; every projection and every Reidemeister move below is\nread after moving the link off $\\infty$ into $\\mathbb R^3$ in this way. The\norientation-preserving clause in the definition of ambient isotopy is exactly\nwhat the oriented Reidemeister moves and the oriented closure construction must\nrespect. The unoriented theory uses the same ambient isotopies but forgets\nthe orientations of the link components.\n\n**Links in the three-sphere versus links in $\\mathbb R^3$.** A link contained in\n$\\mathbb R^3\\subset S^3$ is a link in $S^3$; conversely every link may be\nassumed after isotopy to lie in $\\mathbb R^3$, by choosing a point outside the compact one-dimensional image and moving that\npoint to $\\infty$ by a smooth rotation of the standard sphere. When comparing\nlinks already in $\\mathbb R^3$, an isotopy can also be arranged to avoid\n$\\infty$ throughout; the track-avoidance argument is given in\n[[thm-oriented-reidemeister-equivalence-theorem]].",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F9",
+          "source": "thm-smooth-loop-theorem-and-incompressibility-criterion-in-orientable-three-manifolds",
+          "source_section": "Statement",
+          "quote": "Let $M$ be a compact connected orientable smooth three-manifold, let $F$ be a compact connected smooth subsurface of $\\partial M$, and let $N\\lhd\\pi_1(F)$ be normal. If a continuous disk map into $M$ has its boundary in $\\operatorname{Int}F$ with class outside $N$, there is a smoothly properly embedded disk in $M$ whose boundary lies in $\\operatorname{Int}F$ and has class outside $N$. No pointwise preservation of the original boundary loop is asserted.\n\nConsequently a compact neatly properly embedded two-sided smooth surface $S$ in such a compact orientable smooth three-manifold is incompressible if and only if its inclusion induces an injection on fundamental groups, component by component. Here incompressibility means absence of a smooth embedded compressing disk, with the conventions of the indicated definition.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "A1",
+          "source": "def-axiom-of-choice",
+          "source_section": "Definition",
+          "quote": "The **Axiom of Choice** (AC) is the following statement.\n\n> Every family of nonempty sets has a choice function\n> (Choice function).\n\nWritten out: for every set $\\mathcal{F}$ all of whose members are nonempty,\nthere exists a function $g$ with domain $\\mathcal{F}$ satisfying $g(S) \\in S$ for\nall $S \\in \\mathcal{F}$.\n\nAn equivalent formulation is that a product of nonempty sets is nonempty: if\n$X_i \\ne \\emptyset$ for every $i \\in I$, then $\\prod_{i \\in I} X_i \\ne \\emptyset$.\nHere $\\prod_{i \\in I} X_i$ is the set of functions $f$ with domain $I$ such that\n$f(i) \\in X_i$ for every $i \\in I$; when a family of nonempty sets is indexed by\nitself, such an $f$ is precisely a choice function for it.",
+          "uses": [
+            "1.1",
+            "1.2"
+          ]
+        },
+        {
+          "fact": "L1",
+          "source": "def-axiom-of-choice",
+          "source_section": "Definition",
+          "quote": "The **Axiom of Choice** (AC) is the following statement.\n\n> Every family of nonempty sets has a choice function\n> (Choice function).\n\nWritten out: for every set $\\mathcal{F}$ all of whose members are nonempty,\nthere exists a function $g$ with domain $\\mathcal{F}$ satisfying $g(S) \\in S$ for\nall $S \\in \\mathcal{F}$.\n\nAn equivalent formulation is that a product of nonempty sets is nonempty: if\n$X_i \\ne \\emptyset$ for every $i \\in I$, then $\\prod_{i \\in I} X_i \\ne \\emptyset$.\nHere $\\prod_{i \\in I} X_i$ is the set of functions $f$ with domain $I$ such that\n$f(i) \\in X_i$ for every $i \\in I$; when a family of nonempty sets is indexed by\nitself, such an $f$ is precisely a choice function for it.",
+          "uses": [
+            "1.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "Suppose one knot is unknotted. By [F4] its standard radius-tube exterior is a solid torus with the displayed proper meridian disk. Use the ambient isotopy in the definition of unknotted to transport its chosen tube to a tube around the standard core $U$. Identify the transported and standard tube domains with the same normal bundle $\\nu(U)$. For each tubular embedding $\\Phi_j$, its differential along the zero section induces an invertible smooth bundle map $L_j:\\nu(U)\\to\\nu(U)$ on the normal quotient: invertibility follows because $\\Phi_j$ is an embedding and is the identity on the zero section. Precompose $\\Phi_j$ with the fibrewise map $L_j^{-1}$. After restricting to a common neighbourhood of the zero section, both induced normal maps are the identity; compactness of $U$ lets us choose one such neighbourhood for the whole core. Thus the hypotheses of [F5] hold. Under [A1], [L1] supplies its countable-choice premise, so an ambient isotopy identifies the tubes after shrinking. The standard disk transfers to the smaller chosen exterior. By [F6], the region between the smaller and original tube is a product boundary collar; trim or extend the disk across the product annulus so its boundary lies on the chosen exterior torus. The resulting proper disk still has essential boundary. Pull that disk across $h$ or $h^{-1}$ into the other exterior. Its parametrization is a continuous disk map with boundary in the target torus; the boundary class remains nontrivial because the boundary restriction is a homeomorphism. If the other knot were nontrivial, apply [F9] to its compact connected orientable smooth exterior, the whole smooth boundary torus as the boundary subsurface, and the trivial normal subgroup. The disk boundary lies in the relative interior of that torus, so [F9] gives a new smoothly properly embedded disk with essential boundary. This contradicts [F2]. No smoothing of the homeomorphic image disk and no replacement of $h$ by a diffeomorphism is required. Thus either both are unknotted or both are nontrivial.",
+          "step": "1.1",
+          "inputs": [
+            "given",
+            "A1",
+            "L1",
+            "F2",
+            "F4",
+            "F5",
+            "F6",
+            "F9",
+            "construct"
+          ]
+        },
+        {
+          "id": "step-1-2",
+          "claim": "Suppose both knots are nontrivial and let $\\gamma$ be the slope represented by $h(\\mu_K)$. Let $W,W'$ be the source and target filling solid tori with product coordinates. If $h$ preserves orientation, set $g(z,w)=(z,w)$; if $h$ reverses orientation, set $g(z,w)=(z,\\overline w)$. In either case $g$ has the same orientation sign as $h$ and sends the source meridian to the target meridian. If $\\phi:\\partial W\\to\\partial E_K$ is the source gluing map, define the target gluing map by $\\phi'=h\\circ\\phi\\circ g^{-1}$. It is orientation-reversing because $\\phi$ is and $g,h$ have the same sign; its meridian image is $h(\\mu_K)$, so it defines the filling along $\\gamma$. The maps $h$ and $g$ glue to a homeomorphism of the filled manifolds. The source filling is $S^3$, hence the target filling along $\\gamma$ is homeomorphic to $S^3$. By [F1], $\\gamma$ is the target meridian slope; [F7] then gives the boundary isotopy in the Statement.",
+          "step": "1.2",
+          "inputs": [
+            "given",
+            "A1",
+            "F1",
+            "F7",
+            "construct",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "If both are unknotted, [F8] gives ambient equivalences from each knot to the standard unknot; composing them gives an ambient equivalence between the knots. This conclusion is independent of whether the given $h$ preserves the knot-meridian slope.",
+          "step": "2.1",
+          "inputs": [
+            "given",
+            "F8",
+            "step 1.1",
+            "construct"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "claim": "Apply [F3] to the actual boundary restriction of $h$ and the two tubular solid tori. The extensions agree with $h$ on the common boundary and therefore glue to a homeomorphism of pairs $(S^3,K)\\to(S^3,K')$. By [F3] the ambient orientation sign is the same as that of $h$. Together with steps 1.1, 1.2, and 2.1 this proves every case.",
+          "step": "3.1",
+          "inputs": [
+            "given",
+            "F3",
+            "step 1.1",
+            "step 1.2",
+            "step 2.1",
+            "construct"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "finite_checks": [],
+      "unresolved": [
+        {
+          "status": "escalated",
+          "statement": "The nontrivial-knot branch depends on the local Property P/S3-slope proof chain, whose gauge-theory supplier is not proved.",
+          "supplier": "lem-property-p-instanton-surgery-triangle-and-rank-input"
+        }
+      ],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The statement assumes two smooth knots and an exterior homeomorphism."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Steps 1.1 and 2.1 handle the one-unknot obstruction and the both-unknotted case."
+        },
+        {
+          "case": "one",
+          "status": "not_applicable",
+          "reason": "The theorem classifies whole knots, not a one-component subcase."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Statement and steps 1.1–3.1 separate both-unknot and both-nontrivial cases, with meridian preservation only in the latter."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "No interval endpoints occur in the closed exterior manifolds."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Statement and steps 1.1–1.2 retain full AC for the choice-dependent suppliers; the coordinate unknot model and gluing map are explicit."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The claim is a complement-classification implication, not an iff statement."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The claim is a complement-classification implication, not an iff statement."
+        }
+      ],
+      "owner_metadata_note": {
+        "accepted_scope": "Exact original Statement at literal category/choice hypotheses, with preserved local segments and explicitly imported established source boundaries; see final independent report.",
+        "accepted_scope_evidence": [
+          "research/inverse-problems-knot-theory-all-109-2026-10-19-supervision-20261020/step1-bounded-closeout/property-p-gl-focused-source-binding-check.json",
+          "research/inverse-problems-knot-theory-all-109-2026-10-19-supervision-20261020/step1-bounded-closeout/root-source-qualified-66-scope-adoption-registry.json"
+        ],
+        "source_boundary": {
+          "sources": {
+            "references": [
+              {
+                "title": "P. B. Kronheimer and T. S. Mrowka, Dehn surgery, the fundamental group and SU(2), Mathematical Research Letters 11 (2004), 741–754, Theorem 1, p. 741",
+                "url": "https://doi.org/10.4310/mrl.2004.v11.n6.a3"
+              },
+              {
+                "title": "Alessia Cattabriga and Stefano Francaviglia, Knot Theory and Applications: Lecture Notes, §4.1.1",
+                "url": "https://poisson.phc.dm.unipi.it/~camponovo/libri/knot.pdf"
+              },
+              {
+                "title": "Kimihiko Motegi, Dehn surgery on knots: survey, pp. 19–21",
+                "url": "https://www.math.tsukuba.ac.jp/~tange/diftop22/Dehn_surgery_survey.pdf"
+              },
+              {
+                "title": "P. B. Kronheimer and T. S. Mrowka, Dehn surgery, the fundamental group and SU(2), Theorem 1",
+                "url": "https://people.math.harvard.edu/~kronheim/hrpthree.pdf"
+              }
+            ]
+          },
+          "provenance": {
+            "statement": "literature-derived",
+            "proof": "ai-altered"
+          },
+          "axiom_use": "Assumes full AC through the exterior boundary-incompressibility and Property P suppliers. The unknot case is independent of that branch.",
+          "import_fields": {},
+          "declared_source_remarks": null
+        },
+        "historical_preimage": "research/inverse-problems-knot-theory-all-109-2026-10-19-supervision-20261020/step1-bounded-closeout/contract-final-before/research/inverse-problems-knot-theory-all-109-2026-10-19-batch-98.proof-contracts.json",
+        "new_math_acceptance": false
+      }
+    },
+    "ex-knot-kt-15-worked-cases": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "lem-meridian-preserving-torus-homeomorphism-extends-over-solid-torus",
+          "source_section": "Statement",
+          "quote": "Suppose $h:\\partial V\\to\\partial V'$ is a homeomorphism and there is an isotopy $H_t:\\partial V'\\to\\partial V'$ through homeomorphisms, with $H_0=\\mathrm{id}$, such that $H_1(h(\\mu))=\\mu'$. Then $h$ extends to a homeomorphism $\\overline h:V\\to V'$. The extension has the same orientation sign as $h$ with respect to the boundary orientations.",
+          "uses": [
+            "3.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "matrix-action",
+          "step": "1.1",
+          "claim": "The unimodular matrix defines a torus homeomorphism with the displayed meridian and longitude images.",
+          "inputs": [
+            "given",
+            "construct",
+            "algebra"
+          ]
+        },
+        {
+          "id": "solid-torus-map",
+          "step": "2.1",
+          "claim": "The explicit disk rotation and circle identity have a continuous inverse and realize the same boundary matrix.",
+          "inputs": [
+            "given",
+            "step 1.1",
+            "construct"
+          ]
+        },
+        {
+          "id": "orientation",
+          "step": "3.1",
+          "claim": "The fiber rotation and identity base map preserve product orientation and supply the extension.",
+          "inputs": [
+            "F1",
+            "step 2.1",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "finite_checks": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The example fixes a specific nonempty product solid torus."
+        },
+        {
+          "case": "zero",
+          "status": "not_applicable",
+          "reason": "The example uses the nonzero longitude twist k=2."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "The single matrix and its basis images are verified in steps 1.1–2.1."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Step 1.1 checks determinant one, so the induced torus map is invertible."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "The torus curves are closed."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "The extension is the explicit formula in step 2.1; no choices are used."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The example is an explicit extension, not an equivalence."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The example is an explicit extension, not an equivalence."
+        }
+      ]
+    },
+    "cex-knot-kt-15-boundary-case": {
+      "citations": [
+        {
+          "fact": "A1",
+          "source": "def-axiom-of-choice",
+          "source_section": "Definition",
+          "quote": "Every family of nonempty sets has a choice function",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F1",
+          "source": "thm-knot-wirtinger-presentation-correctness",
+          "source_section": "Statement",
+          "quote": "The finite procedure $\\mathsf{Wirtinger}(D,a_0)$ terminates and returns a presentation with one positive-meridian generator for each under-arc and one crossing conjugacy relator for each crossing.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "lem-trefoil-knot-group-is-nonabelian-with-abelianization-z",
+          "source_section": "Statement",
+          "quote": "Its abelianization, the quotient by its commutator subgroup, is isomorphic to $\\mathbb Z$, but $G_T$ is nonabelian.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "thm-knot-exterior-homology-and-longitude",
+          "source_section": "Statement",
+          "quote": "Then $H_1(E_K;\\mathbb Z)\\cong\\mathbb Z$ is generated by $[\\mu]$.",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "def-oriented-link-in-s-three-and-ambient-isotopy",
+          "source_section": "Definition",
+          "quote": "are **equivalent** (written $L_0\\sim L_1$), or **ambient isotopic**, when there are an ambient isotopy $H$ and an orientation-preserving diffeomorphism $f:C_0\\to C_1$ with $H_1\\circ L_0=L_1\\circ f$.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "def-based-loops-and-fundamental-group",
+          "source_section": "Definition",
+          "quote": "is a path $\\alpha:I\\to X$ with $\\alpha(0)=x_0=\\alpha(1)$",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "thm-fundamental-group-laws",
+          "source_section": "Statement",
+          "quote": "is well defined and makes $\\pi_1(X,x_0)$ a group",
+          "uses": [
+            "1.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "unknot-and-trefoil-groups",
+          "step": "1.1",
+          "claim": "The crossing-free unknot code gives a one-generator free group Z; the trefoil helper proves the other group nonabelian. Ambient equivalence would induce a complement homeomorphism and inverse maps on based loops, which would give a group isomorphism, contradiction.",
+          "inputs": [
+            "given",
+            "F1",
+            "F2",
+            "F4",
+            "F5",
+            "algebra"
+          ]
+        },
+        {
+          "id": "peripheral-triples",
+          "step": "2.1",
+          "claim": "Under full AC, the exterior homology theorem makes both H1 groups Z on the positive meridian and sends the preferred longitude to zero, so the decorated abelianized systems are isomorphic.",
+          "inputs": [
+            "A1",
+            "F3",
+            "step 1.1",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "finite_checks": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The counterexample specifies the unknot and trefoil."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Step 1.1 uses the zero-crossing unknot and its empty-relator presentation."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Step 1.1 compares one crossing-free diagram and the standard three-crossing trefoil."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Statement and step 1.1 use the regular three-crossing diagram fixed by the A-page group lemma."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "Both knots are closed circles."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "The counterexample retains full AC for the homology supplier; the finite group calculation is choice-free."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The assertion being refuted is not an iff statement."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The assertion being refuted is not an iff statement."
+        }
+      ]
+    }
+  }
+}

@@ -1,0 +1,335 @@
+[
+  {
+    "order": 3106,
+    "id": "dynamic-data-identifiability-and-system-realization",
+    "kind": "A",
+    "category": "inverse-problems",
+    "title": "Dynamical observations and finite system realization",
+    "companion": "dynamic-data-identifiability-and-system-realization-examples",
+    "requires": [
+      "bochner-inversion-and-plancherel-on-lca-groups",
+      "orthonormal-bases-parseval-and-fourier-series",
+      "the-moore-penrose-pseudoinverse-and-regularised-least-squares",
+      "the-spectral-theorem-and-singular-value-decomposition",
+      "inverse-problems-identifiability-and-stability",
+      "linear-operators-pseudoinverses-and-picard-criteria",
+      "operator-approximation-and-regularization-error",
+      "statistical-inverse-model-misspecification",
+      "nonlinear-inverse-problems-and-tangential-cone-conditions"
+    ],
+    "items": [
+      {
+        "id": "def-ip-discrete-linear-input-state-output-experiment",
+        "kind": "definition",
+        "title": "Discrete linear input-state-output experiments",
+        "deps": [
+          "def-matrix-space",
+          "def-matrix-product-and-identity-matrix",
+          "prop-standard-coordinate-inner-products"
+        ],
+        "justified_by": [],
+        "dependency_level": 0,
+        "statement": "Define the exact finite-horizon real discrete-time model x_{k+1}=Ax_k+Bu_k, y_k=Cx_k, its additive observation-error convention, and the Markov parameters M_k=CA^kB with fixed dimensions and sampling.",
+        "strategy": "Specify the state, input, output, time-indexing, noise, and impulse-response conventions directly in finite-dimensional coordinates.",
+        "sources": {
+          "references": [
+            {
+              "title": "Mohammed Dahleh, Munther A. Dahleh, and George Verghese, Lectures on Dynamic Systems and Control, Chapter 25: Minimal State-Space Realization",
+              "url": "https://ocw.mit.edu/courses/6-241j-dynamic-systems-and-control-spring-2011/760782bd5ceefacb37bf8719dc23dfcb_MIT6_241JS11_chap25.pdf"
+            },
+            {
+              "title": "Sanjay Lall, Engr207c: Operator Theory and Linear Systems, State-Space Realization lecture notes",
+              "url": "https://lall.stanford.edu/engr207c/lectures/realization_2008_11_15_03.pdf"
+            }
+          ]
+        },
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "not-applicable"
+        }
+      },
+      {
+        "id": "alg-ip-exact-block-hankel-realization",
+        "kind": "algorithm",
+        "title": "Exact block-Hankel realization",
+        "deps": [
+          "def-ip-discrete-linear-input-state-output-experiment",
+          "def-rank-and-nullity",
+          "def-countable-choice",
+          "thm-singular-value-decomposition",
+          "def-moore-penrose-pseudoinverse",
+          "thm-moore-penrose-pseudoinverse-exists-and-is-unique",
+          "thm-matrix-multiplication-laws"
+        ],
+        "justified_by": [],
+        "dependency_level": 1,
+        "statement": "Specify an exact-arithmetic, finite-dimensional procedure that forms H_0=[M_{i+j}] and H_1=[M_{i+j+1}], checks rank d, factors H_0 by a rank-d thin SVD, and returns A_hat=O_hat^+H_1R_hat^+, the first input block of R_hat, and the first output block of O_hat, or a named failure result.",
+        "strategy": "Build the two q-by-q block Hankel matrices from M_0,...,M_{2q-1}; use a rank-d thin-SVD factorization and unique finite-matrix Moore-Penrose inverses, with explicit rank and solve checks.",
+        "sources": {
+          "references": [
+            {
+              "title": "Mohammed Dahleh, Munther A. Dahleh, and George Verghese, Lectures on Dynamic Systems and Control, Chapter 25: Minimal State-Space Realization",
+              "url": "https://ocw.mit.edu/courses/6-241j-dynamic-systems-and-control-spring-2011/760782bd5ceefacb37bf8719dc23dfcb_MIT6_241JS11_chap25.pdf"
+            },
+            {
+              "title": "Sanjay Lall, Engr207c: Operator Theory and Linear Systems, State-Space Realization lecture notes",
+              "url": "https://lall.stanford.edu/engr207c/lectures/realization_2008_11_15_03.pdf"
+            }
+          ]
+        },
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "not-applicable"
+        }
+      },
+      {
+        "id": "thm-ip-finite-observability-identifies-initial-state",
+        "kind": "theorem",
+        "title": "Finite observability identifies the initial state",
+        "deps": [
+          "def-ip-discrete-linear-input-state-output-experiment",
+          "def-rank-and-nullity",
+          "thm-rank-nullity",
+          "thm-matrix-multiplication-laws",
+          "def-countable-choice",
+          "thm-singular-value-decomposition",
+          "cor-rank-equals-number-of-nonzero-singular-values",
+          "def-moore-penrose-pseudoinverse",
+          "thm-moore-penrose-pseudoinverse-exists-and-is-unique",
+          "prop-full-column-rank-pseudoinverse-formula",
+          "thm-aa-plus-and-a-plus-a-are-orthogonal-projections-onto-the-image-spaces",
+          "thm-a-plus-b-is-the-unique-minimum-norm-least-squares-solution",
+          "lem-pythagorean-theorem-and-finite-orthogonal-sums"
+        ],
+        "justified_by": [],
+        "dependency_level": 1,
+        "statement": "For known A,C, inputs and a horizon q, the noiseless initial state is identifiable exactly when O_q=[C;CA;...;CA^{q-1}] has full column rank; in that case the minimum-norm least-squares estimate under additive output error has error at most ||e||_2/sigma_min(O_q).",
+        "strategy": "Expand the recurrence to isolate O_q x_0, characterize injectivity by its kernel and rank-nullity, and derive the least-squares perturbation bound from the singular values and orthogonal projection properties of the Moore-Penrose inverse.",
+        "sources": {
+          "references": [
+            {
+              "title": "Mohammed Dahleh, Munther A. Dahleh, and George Verghese, Lectures on Dynamic Systems and Control, Chapter 25: Minimal State-Space Realization",
+              "url": "https://ocw.mit.edu/courses/6-241j-dynamic-systems-and-control-spring-2011/760782bd5ceefacb37bf8719dc23dfcb_MIT6_241JS11_chap25.pdf"
+            },
+            {
+              "title": "Sanjay Lall, Engr207c: Operator Theory and Linear Systems, State-Space Realization lecture notes",
+              "url": "https://lall.stanford.edu/engr207c/lectures/realization_2008_11_15_03.pdf"
+            }
+          ]
+        },
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        }
+      },
+      {
+        "id": "thm-ip-state-similarity-preserves-input-output-data",
+        "kind": "theorem",
+        "title": "State similarity preserves input-output data",
+        "deps": [
+          "def-ip-discrete-linear-input-state-output-experiment",
+          "def-invertible-matrix-and-general-linear-group",
+          "thm-matrix-multiplication-laws"
+        ],
+        "justified_by": [],
+        "dependency_level": 1,
+        "statement": "For every invertible real state-coordinate change T, the transformed realization (T^{-1}AT,T^{-1}B,CT,T^{-1}x_0) produces the same noiseless output sequence for every common input sequence.",
+        "strategy": "Prove by induction that the transformed state at each sample is T^{-1} times the original state, then substitute in the output equation.",
+        "sources": {
+          "references": [
+            {
+              "title": "Mohammed Dahleh, Munther A. Dahleh, and George Verghese, Lectures on Dynamic Systems and Control, Chapter 25: Minimal State-Space Realization",
+              "url": "https://ocw.mit.edu/courses/6-241j-dynamic-systems-and-control-spring-2011/760782bd5ceefacb37bf8719dc23dfcb_MIT6_241JS11_chap25.pdf"
+            },
+            {
+              "title": "Sanjay Lall, Engr207c: Operator Theory and Linear Systems, State-Space Realization lecture notes",
+              "url": "https://lall.stanford.edu/engr207c/lectures/realization_2008_11_15_03.pdf"
+            }
+          ]
+        },
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        }
+      },
+      {
+        "id": "thm-ip-hankel-realization-recovers-controllable-observable-system",
+        "kind": "theorem",
+        "title": "Hankel realization recovers a controllable and observable system",
+        "deps": [
+          "def-ip-discrete-linear-input-state-output-experiment",
+          "alg-ip-exact-block-hankel-realization",
+          "def-rank-and-nullity",
+          "thm-rank-nullity",
+          "thm-matrix-multiplication-laws",
+          "def-invertible-matrix-and-general-linear-group",
+          "def-countable-choice",
+          "thm-singular-value-decomposition",
+          "def-moore-penrose-pseudoinverse",
+          "thm-moore-penrose-pseudoinverse-exists-and-is-unique",
+          "thm-ip-state-similarity-preserves-input-output-data"
+        ],
+        "justified_by": [],
+        "dependency_level": 2,
+        "statement": "For exact Markov parameters M_k=CA^kB and q with full-rank observability and controllability matrices, the exact block-Hankel procedure returns a realization similar to (A,B,C), hence reproduces its input-output behavior.",
+        "strategy": "Show H_0=O_qR_q and H_1=O_qAR_q, match the full-rank SVD factors to O_q and R_q by one invertible coordinate change, then use the Moore-Penrose left/right inverse identities.",
+        "sources": {
+          "references": [
+            {
+              "title": "Mohammed Dahleh, Munther A. Dahleh, and George Verghese, Lectures on Dynamic Systems and Control, Chapter 25: Minimal State-Space Realization",
+              "url": "https://ocw.mit.edu/courses/6-241j-dynamic-systems-and-control-spring-2011/760782bd5ceefacb37bf8719dc23dfcb_MIT6_241JS11_chap25.pdf"
+            },
+            {
+              "title": "Sanjay Lall, Engr207c: Operator Theory and Linear Systems, State-Space Realization lecture notes",
+              "url": "https://lall.stanford.edu/engr207c/lectures/realization_2008_11_15_03.pdf"
+            }
+          ]
+        },
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        }
+      }
+    ]
+  },
+  {
+    "order": 3107,
+    "id": "dynamic-data-identifiability-and-system-realization-examples",
+    "kind": "B",
+    "category": "inverse-problems",
+    "title": "Dynamical observations and finite system realization — Examples and Counterexamples",
+    "companion": "dynamic-data-identifiability-and-system-realization",
+    "requires": [
+      "dynamic-data-identifiability-and-system-realization"
+    ],
+    "items": [
+      {
+        "id": "cex-ip-continuous-time-frequency-aliasing",
+        "kind": "counterexample",
+        "title": "Continuous-time frequencies alias under fixed discrete sampling",
+        "deps": [
+          "def-ip-discrete-linear-input-state-output-experiment",
+          "thm-sine-cosine-zero-sets-and-fundamental-period"
+        ],
+        "justified_by": [],
+        "dependency_level": 1,
+        "statement": "Refute the claim that samples at every time k h, for a fixed h>0, uniquely determine the frequency of a real continuous-time oscillator from its output, even when all samples are noiseless.",
+        "strategy": "Compare the cosine outputs at frequencies 0 and 2 pi/h and use the 2 pi-periodicity of sine and cosine at every integer sample index.",
+        "sources": {
+          "references": []
+        },
+        "provenance": {
+          "statement": "ai-generated",
+          "proof": "ai-generated"
+        }
+      },
+      {
+        "id": "ex-ip-similar-state-space-realizations-same-data",
+        "kind": "example",
+        "title": "Two similar realizations with identical data",
+        "deps": [
+          "def-ip-discrete-linear-input-state-output-experiment",
+          "thm-ip-state-similarity-preserves-input-output-data"
+        ],
+        "justified_by": [],
+        "dependency_level": 2,
+        "statement": "A nontrivial invertible change of state coordinates produces different realization matrices and an initial state while preserving every output for every common input sequence.",
+        "strategy": "Choose an explicit nonsingular triangular coordinate change, compute the transformed matrices and initial state, and invoke the similarity theorem.",
+        "sources": {
+          "references": [
+            {
+              "title": "Mohammed Dahleh, Munther A. Dahleh, and George Verghese, Lectures on Dynamic Systems and Control, Chapter 25: Minimal State-Space Realization",
+              "url": "https://ocw.mit.edu/courses/6-241j-dynamic-systems-and-control-spring-2011/760782bd5ceefacb37bf8719dc23dfcb_MIT6_241JS11_chap25.pdf"
+            },
+            {
+              "title": "Sanjay Lall, Engr207c: Operator Theory and Linear Systems, State-Space Realization lecture notes",
+              "url": "https://lall.stanford.edu/engr207c/lectures/realization_2008_11_15_03.pdf"
+            }
+          ]
+        },
+        "provenance": {
+          "statement": "ai-generated",
+          "proof": "ai-generated"
+        }
+      },
+      {
+        "id": "ex-ip-unobservable-state-mode",
+        "kind": "example",
+        "title": "An unobserved state mode",
+        "deps": [
+          "def-ip-discrete-linear-input-state-output-experiment",
+          "thm-ip-finite-observability-identifies-initial-state",
+          "def-countable-choice"
+        ],
+        "justified_by": [],
+        "dependency_level": 2,
+        "statement": "A two-state, one-output system with C=[1,0] cannot distinguish initial states that differ only in the second coordinate, despite noiseless observations at every finite horizon.",
+        "strategy": "Compute the output difference from the second basis state and show C A^k e_2=0 for every k.",
+        "sources": {
+          "references": [
+            {
+              "title": "Mohammed Dahleh, Munther A. Dahleh, and George Verghese, Lectures on Dynamic Systems and Control, Chapter 25: Minimal State-Space Realization",
+              "url": "https://ocw.mit.edu/courses/6-241j-dynamic-systems-and-control-spring-2011/760782bd5ceefacb37bf8719dc23dfcb_MIT6_241JS11_chap25.pdf"
+            },
+            {
+              "title": "Sanjay Lall, Engr207c: Operator Theory and Linear Systems, State-Space Realization lecture notes",
+              "url": "https://lall.stanford.edu/engr207c/lectures/realization_2008_11_15_03.pdf"
+            }
+          ]
+        },
+        "provenance": {
+          "statement": "ai-generated",
+          "proof": "ai-generated"
+        }
+      },
+      {
+        "id": "ex-ip-forward-euler-observation-model-error",
+        "kind": "example",
+        "title": "Forward Euler creates an observation-map error",
+        "deps": [
+          "def-ip-error-budget-for-computed-inversion",
+          "lem-derivative-of-a-power",
+          "lem-finite-rank-operators-are-compact",
+          "def-bounded-linear-operator",
+          "def-hilbert-space",
+          "prop-standard-coordinate-inner-products",
+          "thm-reals-cauchy-complete"
+        ],
+        "justified_by": [],
+        "dependency_level": 3,
+        "statement": "For the parameter ODE dot z_theta=theta t with z_theta(0)=0, the exact endpoint map is theta/2 while one forward-Euler step of size one gives zero; at theta=1 the model discrepancy d_h is 1/2.",
+        "strategy": "Verify the polynomial ODE solution, compute the one-step Euler map, and check that the resulting scalar forward maps satisfy the hypotheses of the computed-inversion error budget.",
+        "sources": {
+          "references": []
+        },
+        "provenance": {
+          "statement": "ai-generated",
+          "proof": "ai-generated"
+        }
+      },
+      {
+        "id": "ex-ip-small-hankel-singular-value-amplifies-realization-perturbation",
+        "kind": "example",
+        "title": "A small Hankel singular value amplifies a realization perturbation",
+        "deps": [
+          "def-ip-discrete-linear-input-state-output-experiment",
+          "alg-ip-exact-block-hankel-realization",
+          "thm-ip-hankel-realization-recovers-controllable-observable-system",
+          "def-singular-values-of-an-endomorphism",
+          "def-countable-choice"
+        ],
+        "justified_by": [],
+        "dependency_level": 3,
+        "statement": "For scalar systems with q=1, a Hankel singular value epsilon can turn an absolute perturbation sqrt(epsilon) in the next Markov parameter into a state-transition estimate of size 1/sqrt(epsilon), which is unbounded as epsilon decreases to zero.",
+        "strategy": "Evaluate the q=1 Hankel matrices and the exact algorithm for a one-state system and for the perturbed two-parameter data, then compare the recovered transition values.",
+        "sources": {
+          "references": []
+        },
+        "provenance": {
+          "statement": "ai-generated",
+          "proof": "ai-generated"
+        }
+      }
+    ]
+  }
+]

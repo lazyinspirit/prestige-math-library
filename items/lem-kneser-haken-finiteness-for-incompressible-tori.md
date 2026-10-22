@@ -55,13 +55,13 @@ Consequently, any iterative process that cuts along tori and for which every fin
 
 [F1] Incompressibility, irreducibility and a product cut component have the given conventions. [[def-incompressibility-seifert-fibration-and-jsj-system]]
 
-[F2] For this supplied compatible smooth triangulation, a finite incompressible smooth torus family has simultaneous smooth normal position. The actual cut tetrahedra and normal face disks retain their marked ball and rectangle parameters. [[lem-smooth-incompressible-tori-admit-normal-position-in-a-compatible-triangulation]]
+[F2] For this supplied compatible smooth triangulation, a finite incompressible smooth torus family has simultaneous smooth normal position. The balls cut out in each tetrahedron have supplied parameters retaining their disk faces and face-cell corners. Rectangle-face product parameters are constructed separately as recorded in [F5]. [[lem-smooth-incompressible-tori-admit-normal-position-in-a-compatible-triangulation]]
 
 [F3] A rectangular-only cut component with those actual parameters is an interval bundle. If it is not $T^2\times I$, it has a compact one-sided locally flat core whose removal leaves the component connected. [[lem-rectangular-normal-cut-components-are-interval-bundles]]
 
 [F4] In a connected boundaryless three-manifold, disjoint compact locally flat closed surfaces with connected complement have independent mod-two homology classes, including one-sided surfaces. [[lem-connected-complement-surfaces-have-independent-mod-two-homology-classes]]
 
-[F5] The accepted Haken bound proof constructs the finite normal face-cell and rectangle parameters and the finite inward collar push, and identifies finite simplicial and singular homology. These finite constructions and their declared countable-choice hypothesis apply to the exact same supplied triangulation here. [[lem-haken-torus-bound-for-a-supplied-compatible-smooth-triangulation]], Proof1.1 and4.1; [[thm-simplicial-and-singular-homology-agree-for-simplicial-complexes]]
+[F5] The Haken bound proof constructs the finite normal face-cell and rectangle parameters and the finite inward collar push, and identifies finite simplicial and singular homology. These finite constructions and their declared countable-choice hypothesis apply to the exact same supplied triangulation here. [[lem-haken-torus-bound-for-a-supplied-compatible-smooth-triangulation]], Proof 1.1 and 4.1; [[thm-simplicial-and-singular-homology-agree-for-simplicial-complexes]]
 
 ## Proof
 

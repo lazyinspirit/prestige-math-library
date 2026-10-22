@@ -19,6 +19,11 @@ axiom_use: "Choice-free: all disks, bands, graph chains and normal pushoffs are 
 provenance:
   statement: literature-derived
   proof: ai-altered
+verification:
+  judge:
+    model: "gpt-6-luna"
+    verdict: pass
+    date: 2026-10-22
 sources:
   references:
     - title: "Joshua E. Greene, Alternating links and definite surfaces, §5, Theorem 5.1, manuscript pp. 8–9"

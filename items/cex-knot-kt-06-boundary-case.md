@@ -23,6 +23,11 @@ provenance:
   proof: ai-generated
 generation:
   role: counterexample
+verification:
+  judge:
+    model: "gpt-6-luna"
+    verdict: pass
+    date: 2026-10-22
 sources:
   references:
     - title: "Dale Rolfsen, Knots and Links, Chapter 8.A"

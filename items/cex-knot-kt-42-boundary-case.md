@@ -32,7 +32,7 @@ sources:
 ---
 ## Statement refuted
 
-Let $C=\mathrm{CFK}^{\infty}(T_{2,3})$ be the right-handed trefoil staircase on generators $x_0,x_1,x_2$ with $(M,A)(x_0)=(0,1)$, $(M,A)(x_1)=(-1,0)$, $(M,A)(x_2)=(-2,-1)$ and differential $\partial x_1=Ux_0+x_2$, $\partial x_0=\partial x_2=0$. The claim that $\Upsilon_{T_{2,3}}(1)$ is obtained by minimizing $F_1(x)$ over the individual displayed basis terms $x_0,x_1,x_2$, instead of over Maslov-zero cycles representing the normalized generator, is false. Under the diagonal-grid convention, every grid diagram of the trefoil also has grid Upsilon value $-1$ at $t=1$.
+Let $C=\mathrm{CFK}^{\infty}(T_{2,3})$ be the right-handed trefoil staircase on generators $x_0,x_1,x_2$ with $(M,A)(x_0)=(0,1)$, $(M,A)(x_1)=(-1,0)$, $(M,A)(x_2)=(-2,-1)$ and differential $\partial x_1=Ux_0+x_2$, $\partial x_0=\partial x_2=0$. The claim that $\Upsilon_{T_{2,3}}(1)$ is obtained by minimizing $F_1(x)$ over the individual displayed basis terms $x_0,x_1,x_2$, instead of over Maslov-zero cycles representing the normalized generator, is false. Assuming the Axiom of Countable Choice for the normalized grid/analytic comparison, under the diagonal-grid convention every grid diagram of the trefoil also has grid Upsilon value $-1$ at $t=1$.
 
 ## Statement references
 
@@ -56,7 +56,7 @@ Let $C=\mathrm{CFK}^{\infty}(T_{2,3})$ be the right-handed trefoil staircase on 
 
 2.1 The displayed basis term $x_2$ has coordinates $(0,-1)$ and weight $F_1(x_2)=-1/2$, which is less than $1/2$. It has Maslov grading $-2$, so it is excluded from the Maslov-zero representative set; although it is a cycle, its homology class is not the normalized degree-zero generator. The false rule would return $-2(-1/2)=+1$, contradicting step 1.1. [given, F1, step 1.1, algebra]
 
-3.1 By [F2], the diagonal grid complex has the same Upsilon value as the original invariant, so step 1.1 gives the stated grid value $-1$. The grid comparison uses the supplier prerequisites recorded in [F2]. [given, F2, step 1.1, algebra] ∎
+3.1 Under Countable Choice, [F2] gives that the diagonal grid complex has the same Upsilon value as the original invariant, so step 1.1 gives the stated grid value $-1$. The grid comparison uses the supplier prerequisites recorded in [F2]. [given, F2, step 1.1, algebra] ∎
 
 ## Unresolved proof obligations
 

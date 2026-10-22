@@ -42,7 +42,7 @@ proof_strategy: weighted-energy-cutoff
 
 ## Statement
 
-Let $(M,g)$ be a compact, connected, nonempty smooth Riemannian manifold with nonempty smooth boundary, let $T>0$, and define the intrinsic distance $d_g(x,y)$ as the infimum of Riemannian lengths of piecewise $C^1$ curves in $M$ from $x$ to $y$. For a nonempty set $K\subseteq M$, write $d_g(x,K)=\inf_{y\in K}d_g(x,y)$; for nonempty sets $A,B\subseteq M$, write $d_g(A,B)=\inf_{a\in A,b\in B}d_g(a,b)$. Let $q\in C^\infty(M;\mathbb R)$ be independent of time; the solution functions may be real- or complex-valued. Set
+Assume Countable Choice. Let $(M,g)$ be a compact, connected, nonempty smooth Riemannian manifold with nonempty smooth boundary, let $T>0$, and define the intrinsic distance $d_g(x,y)$ as the infimum of Riemannian lengths of piecewise $C^1$ curves in $M$ from $x$ to $y$. For a nonempty set $K\subseteq M$, write $d_g(x,K)=\inf_{y\in K}d_g(x,y)$; for nonempty sets $A,B\subseteq M$, write $d_g(A,B)=\inf_{a\in A,b\in B}d_g(a,b)$. Let $q\in C^\infty(M;\mathbb R)$ be independent of time; the solution functions may be real- or complex-valued. Set
 $$L_q=\partial_t^2-\Delta_g+q(x),\qquad \Delta_g=\operatorname{div}_g\nabla_g.$$
 For a smooth solution $u$ up to the boundary on $[0,T]\times M$, let $u_0=u(0,\cdot)$, $u_1=\partial_tu(0,\cdot)$, and let $h=u|_{[0,T]\times\partial M}$ be its Dirichlet boundary value. The support of a function is the closure of the set where it is nonzero.
 
@@ -100,6 +100,7 @@ Therefore $D_{y_j}w=\sum_i(B^{-1})_{ij}(D_{x_i}u)\circ B^{-1}(y-c)$. In particul
 
 
 ## Proof
+
 
 1.1 Fix a nonempty closed $K\subseteq M$ and write $\rho(x)=d_g(x,K)$. By [F2], $\rho$ is 1-Lipschitz in the intrinsic metric. Local metric comparison [F3] bounds the length of sufficiently short coordinate segments above by a constant times their Euclidean length, so $\rho$ is locally Euclidean-Lipschitz in each chart. [F2, F3, given]
 

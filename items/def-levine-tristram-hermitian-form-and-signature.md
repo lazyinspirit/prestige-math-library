@@ -27,7 +27,7 @@ sources:
 ---
 ## Definition
 
-Assume full AC. Let $K$ be a smooth oriented knot in the oriented standard $3$-sphere, let $F$ be a connected compact smooth oriented surface with oriented boundary $K$, let $V$ be the matrix of the Seifert pairing $V_{ij}=\operatorname{lk}(a_i^+,a_j)$ in an ordered integral basis, and let $\omega\in S^1\setminus\{1\}$. Define the **Levine–Tristram Hermitian matrix** by
+Assume full AC. Let $K$ be a smooth oriented knot in the oriented standard $3$-sphere, let $F\subset S^3$ be a connected compact smooth oriented embedded surface with oriented boundary $K$, let $V$ be the matrix of the Seifert pairing $V_{ij}=\operatorname{lk}(a_i^+,a_j)$ in an ordered integral basis, and let $\omega\in S^1\setminus\{1\}$. Define the **Levine–Tristram Hermitian matrix** by
 $$H_\omega(V)=(1-\omega)V+(1-\bar\omega)V^T.$$
 It is Hermitian because $V$ is real and $\bar\omega=\omega^{-1}$. Its signature is the number of positive eigenvalues minus the number of negative eigenvalues, both counted with multiplicity and with zero eigenvalues omitted. When $\Delta_K(\omega)\ne0$, define $\sigma_\omega(K)$ to be this signature. At a root $\omega_0\ne1$ of $\Delta_K$, define $\sigma_{\omega_0}(K)$ to be the arithmetic mean of the two one-sided limits of $\sigma_{e^{i\theta}}(K)$ as $\theta$ approaches an argument of $\omega_0$ from below and above. The invariance and one-sided-existence lemmas justify treating these values as independent of the chosen surface and basis.
 
@@ -45,7 +45,7 @@ It is Hermitian because $V$ is real and $\bar\omega=\omega^{-1}$. Its signature 
 
 **Given:** Full AC, a smooth oriented knot, a connected compact oriented spanning surface, an ordered integral basis, and a point $\omega$ on the unit circle other than $1$.
 
-[A1] Full AC is the stated ambient axiom for the Alexander-module and Seifert-pairing conventions. [[def-axiom-of-choice]]
+[A1] Full AC is the choice-function axiom assumed by the Alexander-module and Seifert-pairing suppliers. [[def-axiom-of-choice]]
 
 [F1] For real $V$, $H_\omega(V)^*=H_\omega(V)$ because conjugation exchanges the coefficients of $V$ and $V^T$. [[lem-levine-tristram-hermitian-form-singular-set]]
 

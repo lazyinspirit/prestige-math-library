@@ -1,0 +1,45 @@
+---
+id: lem-ip-bv-extension-translation-and-coarea
+kind: lemma
+title: BV extension, translation, and coarea
+status: draft
+origin: pipeline
+deps:
+  - def-countable-choice
+  - def-dependent-choice
+  - def-ip-spatial-bv-and-distributional-tv
+  - lem-ip-bv-coarea-formula
+  - lem-ip-bv-extension-and-translation
+provenance:
+  statement: literature-derived
+  proof: not-supplied
+sources:
+  references:
+    - title: "Gláucio Terra, Introduction to Geometric Measure Theory — Lecture Notes, version 1.6"
+      url: "https://www.ime.usp.br/~glaucio/mat6704/textos/GMTLecureNotes.pdf"
+    - title: "Piotr Rybka, The space in variational and evolution problems — Lecture Notes in Mathematical Sciences 15"
+      url: "https://www.ms.u-tokyo.ac.jp/publication/docs/lecturenotes15-rybka.pdf"
+pipeline_run: inverse-problems-knot-theory-all-109-2026-10-19
+---
+
+## Statement
+
+Assume Countable Choice. For every bounded Lipschitz domain $\Omega\subseteq\mathbb R^n$ (a bounded open set with a finite Lipschitz graph cover of its boundary, with the domain on one side of each graph), zero extension is a bounded map $BV(\Omega)\to BV(\mathbb R^n)$ with support in $\overline\Omega$ and satisfies $\|\widetilde v\|_{L^1(\mathbb R^n)}+TV(\widetilde v;\mathbb R^n)\le C_\Omega(\|v\|_{L^1(\Omega)}+TV(v;\Omega))$; translations satisfy $\|w(\cdot+h)-w\|_{L^1(\mathbb R^n)}\le|h|TV(w;\mathbb R^n)$ for $w\in BV(\mathbb R^n)$; and, for every open $U\subseteq\mathbb R^n$ and every $u\in BV(U)$, if $E_t^+:=\{x\in U:u(x)>t\}$ for $t>0$ and $E_t^-:=\{x\in U:u(x)<t\}$ for $t<0$, then these sets have finite perimeter for almost every applicable $t$ and $$TV(u;U)=\int_0^\infty P(E_t^+;U)\,dt+\int_{-\infty}^0P(E_t^-;U)\,dt.$$
+
+## Statement references
+
+[[lem-ip-bv-extension-and-translation|The BV zero-extension and translation conclusions.]]
+
+[[lem-ip-bv-coarea-formula|The signed-level BV coarea identity.]]
+
+## Facts & Assumptions
+
+**Given:** Countable Choice, bounded Lipschitz domains, and BV functions on the stated domains.
+
+[F1] The extension/translation conclusion is drafted in this batch but remains escalated because its trace supplier is unproved. ([[lem-ip-bv-extension-and-translation]])
+
+[F2] The coarea conclusion retains a Countable Choice interface, but its current proof route has an unresolved stronger axiom dependency. ([[lem-ip-bv-coarea-formula]])
+
+## Escalation
+
+This combined claim is not ready while either [F1] or [F2] is unresolved. The extension branch inherits the trace and zero-extension gap; the coarea branch needs a Countable-Choice-only proof or owner reconciliation of its current Dependent Choice dependency. The statement has not been weakened to hide either gap. No proof contract or readiness decision is supplied for this item.

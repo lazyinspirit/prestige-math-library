@@ -25,6 +25,11 @@ proof_strategy: direct
 provenance:
   statement: literature-derived
   proof: ai-altered
+verification:
+  judge:
+    model: "gpt-6-luna"
+    verdict: pass
+    date: 2026-10-22
 sources:
   references:
     - title: "Lisa Piccirillo, The Conway knot is not slice, Annals of Mathematics 191 (2020), 581–591"

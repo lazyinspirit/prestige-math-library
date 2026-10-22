@@ -27,8 +27,8 @@ sources:
 ## Definition
 
 Assume Countable Choice and use the Gaussian sequence inverse model with singular values $s_j>0$, inverse-noise weights $\sigma_j=s_j^{-1}$, and parameter coordinates $\theta=(\theta_j)\in\ell^2$. Let $a=(a_j)$ be a positive nondecreasing sequence with $a_j\to\infty$, and let $\sigma=(\sigma_j)$ be a positive nondecreasing sequence with $\sigma_j\to\infty$. For $\varepsilon>0$, put $\eta_j=\theta_j/\sigma_j$ and observe $Y_j=Z_j/\sigma_j=\eta_j+\varepsilon\xi_j$, where $Z$ is the normalized observation in the Gaussian sequence inverse model and the $\xi_j$ are independent standard normal random variables. For $0<q\le2$ and $r>0$, define
-$$\Theta_q(r)=\left\{\eta\in\mathbb R^{\mathbb N}:(\sigma_j\eta_j)_{j\ge1}\in\ell^2,\ \sum_{j=1}^{\infty}|a_j\sigma_j\eta_j|^q\le1,\ \sum_{j=1}^{\infty}\sigma_j^2\eta_j^2\ge r^2\right\}.$$
-Test $H_0:\eta=0$ against $H_1:\eta\in\Theta_q(r)$ by a product-Borel measurable randomized test $\psi:\mathbb R^{\mathbb N}\to[0,1]$, where $\psi(y)$ is the rejection probability. Its type-I error and maximal type-II error are
+$$\Theta_q(r)=\left\{\eta\in\mathbb R^{\mathbb N_{>0}}:(\sigma_j\eta_j)_{j\ge1}\in\ell^2,\ \sum_{j=1}^{\infty}|a_j\sigma_j\eta_j|^q\le1,\ \sum_{j=1}^{\infty}\sigma_j^2\eta_j^2\ge r^2\right\}.$$
+Test $H_0:\eta=0$ against $H_1:\eta\in\Theta_q(r)$ by a product-Borel measurable randomized test $\psi:\mathbb R^{\mathbb N_{>0}}\to[0,1]$, where $\psi(y)$ is the rejection probability. Its type-I error and maximal type-II error are
 $$\alpha_\varepsilon(\psi)=\mathbb E_{\varepsilon,0}\psi,\qquad \beta_\varepsilon(\Theta_q(r),\psi)=\sup_{\eta\in\Theta_q(r)}\mathbb E_{\varepsilon,\eta}(1-\psi).$$
 When $\Theta_q(r)=\varnothing$, define $\beta_\varepsilon(\Theta_q(r),\psi)=\beta_\varepsilon(\Theta_q(r),\alpha)=\gamma_\varepsilon(\Theta_q(r))=0$, the convention that no type-II error occurs when no alternative is possible. For $\alpha\in(0,1)$ define
 $$\beta_\varepsilon(\Theta_q(r),\alpha)=\inf_{\psi:\,\alpha_\varepsilon(\psi)\le\alpha}\beta_\varepsilon(\Theta_q(r),\psi),\qquad \gamma_\varepsilon(\Theta_q(r))=\inf_\psi\{\alpha_\varepsilon(\psi)+\beta_\varepsilon(\Theta_q(r),\psi)\}.$$

@@ -15,6 +15,11 @@ axiom_use: Full AC is retained for the geometric consumers; the
 provenance:
   statement: literature-derived
   proof: ai-altered
+verification:
+  judge:
+    model: "gpt-6-luna"
+    verdict: pass
+    date: 2026-10-22
 sources:
   references:
     - title: William P. Thurston, The Geometry and Topology of Three-Manifolds

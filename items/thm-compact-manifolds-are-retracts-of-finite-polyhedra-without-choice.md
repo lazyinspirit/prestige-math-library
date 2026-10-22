@@ -27,7 +27,7 @@ Every compact Hausdorff topological manifold $M$, with boundary allowed, admits 
 
 **Given:** The compact Hausdorff manifold.
 
-[F1] A finite union of closed Euclidean cubes together with all their faces is a finite CW complex: the open faces are its cells, their characteristic maps are the closed cubes, and the finite closed-cover topology gives the weak topology. [[def-cw-complex-with-closure-finiteness-and-weak-topology]]
+[F1] A finite union of closed cubes from one rectangular grid, together with all their faces, is a finite CW complex: distinct relative interiors of grid faces are disjoint, the closed faces give their characteristic maps, their boundaries consist of lower-dimensional faces, and the finite closed-cover topology gives the weak topology. [[def-cw-complex-with-closure-finiteness-and-weak-topology]]
 
 ## Proof
 

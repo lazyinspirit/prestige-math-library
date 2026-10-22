@@ -1,0 +1,65 @@
+---
+id: thm-countable-choice-generic-regularity-for-distinct-end-strips
+kind: theorem
+title: "Actual generic regularity for distinct-end strips with fixed endpoint collars"
+status: draft
+origin: pipeline
+pipeline_run: inverse-problems-knot-theory-all-109-2026-10-19
+deps: [def-countable-choice, lem-separable-hilbert-smooth-almost-complex-strip-variations, lem-interior-regularity-of-strip-linearization-cokernels, lem-countable-choice-cauchy-riemann-similarity-and-unique-continuation, lem-finite-energy-strip-time-slice-injective-points-are-dense, thm-countable-choice-sard-smale-for-separable-hilbert-manifolds]
+dependency_level: 9
+justified_by: []
+aliases: []
+proof_strategy: direct
+provenance:
+  statement: literature-derived
+  proof: ai-altered
+sources:
+  references:
+    - title: "Peter Ozsvath and Zoltan Szabo, Holomorphic disks and topological invariants for closed three-manifolds"
+      url: "https://arxiv.org/abs/math/0101206"
+      locator: "Sections 3.2–3.4 universal regularity; actual fixed-collar distinct-end proof under CC below"
+---
+
+## Statement
+
+Assume Countable Choice and the actual smooth Hilbert family of almost complex paths with fixed endpoint collars, fixed totally real boundary structures, exact product generator charts, and compact transverse boundary submanifolds. Write $\mathcal K=L_0\cap L_1$, a finite set. Make the following separated choice of its spatial protected set: for every $x\in\mathcal K$ choose a compact neighborhood $A_x$ of $x$ inside its product generator chart, with the $A_x$ pairwise disjoint, and choose a compact protected set $D$ disjoint from their union. Set
+$$P=\bigl(([0,\eta]\cup[1-\eta,1])\times X\bigr)\ \cup\ \bigl([0,1]\times(D\cup\bigcup_{x\in\mathcal K}A_x)\bigr).$$
+Here the background path is constant on the stated endpoint collars, exact product-integrable near each $A_x$, and has any required protected diagonal and divisor values on $D$. Use the constructed Hilbert family with this $P$ and any tameness conditions in that construction.
+
+A dense residual subset of its parameter ball consists of parameters $a$ for which the actual geometric $H^1\to L^2$ linearization is surjective at every smooth finite-energy $J_t(a)$ strip whose end generators are distinct. The same operator is surjective in every integer higher Hilbert Sobolev realization. The universal derivative is onto at every such actual strip, and the actual universal solution space and Fredholm parameter projection are thereby supplied.
+
+Every path in this conclusion is constant on the same actual endpoint collars and retains all specified protected values. The theorem covers all actual distinct-end strips simultaneously, without a hypothesis that their homotopy classes have already been enumerated. It does not cover nonconstant strips with the same end generator, does not assert compactness of any fixed-index moduli space, and does not exclude sphere or boundary-degeneration strata. Those remain separate obligations for the full pointed Floer analytic result.
+
+## Statement references
+
+[[def-countable-choice]]
+
+## Facts & Assumptions
+
+**Given:** The actual strip geometry, separated compact spatial protected pieces, fixed endpoint collars and actual smooth Hilbert family in the statement. All configuration spaces here use unweighted $H^3$ and their exact zeroth boundary trace domain.
+
+[F1] [[lem-separable-hilbert-smooth-almost-complex-strip-variations]] gives this actual family, compatible smooth coefficient maps into every $C^k$, finite-span tangent density for compactly supported anti-$J$ fields in $O=P^c$, the actual universal section, and actual split zero charts and Fredholm projection wherever the universal derivative is onto.
+
+[F2] [[lem-interior-regularity-of-strip-linearization-cokernels]] gives closed augmented ranges, equivalence of universal surjectivity in $H^1\to L^2$ and $H^3\to H^2$, and an exact $L^2$ obstruction criterion with smooth interior obstructions satisfying the actual formal adjoint equation.
+
+[F3] [[lem-countable-choice-cauchy-riemann-similarity-and-unique-continuation]] gives isolated zeros or global vanishing for those smooth variable-principal linear equations. [[lem-finite-energy-strip-time-slice-injective-points-are-dense]] gives the open dense set of points with $u_s\ne0$, value outside the finite generator set, and no other same-time preimage of that value. The finite-energy strips in the present geometry have the uniform ends required in that theorem.
+
+[F4] [[thm-countable-choice-sard-smale-for-separable-hilbert-manifolds]] gives dense residual regular values for an actual smooth second-countable separable Hilbert Fredholm map of fixed index, under Countable Choice. Its proof also gives deterministic Baire density for countable intersections of residual subsets of the parameter ball.
+
+## Proof
+
+1.1 Each actual strip with distinct ends has a free-image source point in every prescribed central open time interval. Fix $t\in(\eta,1-\eta)$. The curve $s\mapsto u(s,t)$ extends continuously to the compactified real line by its two uniform generator limits. If it avoided $X\setminus(D\cup\bigcup_x A_x)$ entirely, its connected image would lie in that compact union. But $A_{x_-}$ is both open and closed relative to that union: it is compact and has positive distance from the finite union of the other compact disjoint pieces. The curve contains $x_-$ in that piece and $x_+$ outside it, contradicting connectedness. Thus some $(s,t)$ has $u(s,t)$ spatially free. Since the spatial free set and the central time interval are open, its inverse image contains a nonempty interior source neighborhood. In particular the complement of the fixed endpoint collars is sufficient for distinct ends; the widths of those collars have not been shrunk depending on the strip. [given, construct, algebra]
+
+2.1 Fix a parameter $a$ and one such strip. Suppose the actual universal derivative were not onto. By [F2] there would be a nonzero $L^2$ section $\eta$ annihilating the actual $H^1$ strip range and all parameter derivatives $K_0b=(d_aJ[b])_t(u)u_t$. It is smooth in the interior and in a smooth local frame its metric-weighted representative satisfies a linear Cauchy–Riemann equation with smooth transpose complex principal part, by [F2]. Consequently [F3] applies. Since it is nonzero as an $L^2$ section, it is not identically zero on the interior; its zero set there is discrete. Applying the time-slice theorem of [F3] to the nonempty free source neighborhood from step 1.1 therefore gives a point $p=(s_0,t_0)$ with $u_s(p)\ne0$, $\eta(p)\ne0$, and no other same-time partner. Its target-time value $(t_0,u(p))$ lies in $O$, and $u_t(p)\ne0$ follows from the actual Cauchy–Riemann equation. [F2, F3, step 1.1, construct, algebra]
+
+2.2 The target-time map $F(s,t)=(t,u(s,t))$ isolates this point not merely locally but from all other source points in a sufficiently small target-time neighborhood. It is locally an embedding near $p$: select a component of $u$ with nonzero $s$ derivative and apply the two-dimensional coordinate inverse theorem, as proved in [F3]. Fix a small source neighborhood $U$ compactly in that embedding neighborhood. If no sufficiently small target-time neighborhood of $F(p)$ had its entire preimage in $U$, choose a sequence of target-time points converging to $F(p)$ with preimages $q_n$ outside $U$. Their time coordinates tend to $t_0$. Their longitudinal coordinates are bounded, because the uniform ends lie in the finite generator set while $u(p)$ is spatially free and hence has positive distance from that set. A subsequence therefore tends to an interior point $q$ with $F(q)=F(p)$. The no-partner property gives $q=p$, which contradicts $q_n\notin U$. Thus there is an open target-time neighborhood $W$ with $\overline W\subset O$ and $F^{-1}(W)\subset U$. It can be made arbitrarily small, so all subsequent sign requirements can be imposed on its preimage. [F3, step 2.1, construct, algebra]
+
+3.1 Choose a smooth anti-$J(a)$ endomorphism field $Y$ compactly supported in $W$ whose pairing with $\eta$ along the strip is positive somewhere and never negative. At $F(p)$ prescribe $Y u_t(p)=\eta(p)$; such an anti-complex-linear endomorphism exists by the explicit invariant-plane construction in [F1]. Extend its matrix in a smooth local target frame and project by $A\mapsto(A+J(a)AJ(a))/2$, obtaining a smooth anti-$J(a)$ field with the prescribed value. Continuity gives $\langle\eta,Yu_t\rangle>0$ on a smaller source neighborhood of $p$. First shrink $U$ into that neighborhood and then shrink $W$ by step 2.2; multiply by a nonnegative smooth bump supported in $W$ and positive at $F(p)$. Outside $F^{-1}(W)$ the field vanishes along the strip, while on that preimage the pairing is nonnegative and is strictly positive on a source neighborhood of $p$. Hence $$I=\int_{\mathbb R\times[0,1]}\langle\eta,Y_t(u)u_t\rangle\,ds\,dt>0.$$ This is finite, since $Y$ is bounded, $\eta\in L^2$ and the strip has finite energy. [F1, step 2.1, step 2.2, construct, algebra]
+
+3.2 By the actual finite-span tangent density in [F1], choose finite-support parameter directions $b_n$ such that $d_aJ[b_n]\to Y$ in global $C^0$. Their pairings differ from $I$ by at most $$\|\eta\|_{L^2}\|u_t\|_{L^2}\|d_aJ[b_n]-Y\|_{C^0},$$ which tends to zero. Some pairing is therefore nonzero, contradicting annihilation of every actual parameter derivative in step 2.1. Thus the universal $H^1\to L^2$ derivative is onto at every distinct-end solution. The actual low/high surjectivity bridge [F2] makes its $H^3\to H^2$ realization onto as well. This is a proof of actual universal submersion using smooth obstructions and localized variations, not a moduli-space regularity assumption. [F1, F2, step 2.1, step 3.1, construct, algebra]
+
+4.1 For each ordered distinct generator pair take the actual configuration manifold and universal section from [F1]. The preceding step and its specified right-inverse construction give an actual separable Hilbert manifold $\mathcal Z$ of all its zeros, with a smooth parameter projection $\pi:\mathcal Z\to B_H(0,r)$. It is second-countable: it is a subspace of the second-countable configuration-parameter product, and each actual implicit zero chart has this subspace topology. At every point [F1] proves the projection is Fredholm with index that of the actual fixed-parameter strip operator. No compactness or enumeration of strip homotopy classes is used. The projection derivative is onto exactly when that actual strip operator is onto. [F1, step 3.2, construct, algebra]
+
+4.2 We justify the fixed-index decomposition before applying [F4]. A norm-continuous family of Fredholm operators between the fixed local Hilbert tangent spaces has locally constant index. At one operator split the domain as its finite-dimensional kernel plus its orthogonal complement, and the target as its closed range plus finite-dimensional orthogonal complement, using the Countable-Choice projections in [F2]. The range block on the infinite complement is invertible with bounded inverse. For every sufficiently close operator the corresponding block remains invertible by the explicit Neumann series. Eliminating that block by bounded invertible triangular row and column operations leaves one finite-dimensional map between the original finite kernel and cokernel. Its kernel dimension is the kernel dimension of the full operator, and its cokernel dimension is the full cokernel dimension. Their difference is always the dimension of that fixed finite domain minus that of that fixed finite target, independently of its rank. Thus the index is locally constant. Apply this to the derivative of $\pi$ in actual smooth charts. Its index-$d$ locus $\mathcal Z_d$ is open for every integer $d$; it is still second-countable, and $\pi|_{\mathcal Z_d}$ is an actual smooth Fredholm map of the one index $d$. [F1, F2, step 4.1, construct, algebra]
+
+5.1 Apply [F4] to each $\pi|_{\mathcal Z_d}$. For every integer $d$ its regular values form a dense residual subset of the parameter ball, including the empty-source case. Their intersection over the countable integer indices and the finitely many ordered distinct generator pairs is residual and dense by the deterministic Baire argument in [F4]. At a parameter in this intersection, step 4.1 identifies regularity of every projection fiber point with surjectivity of every actual distinct-end strip operator $H^1\to L^2$. The higher range and kernel agreement included in [F2] implies surjectivity in each integer higher realization as well: a higher regular forcing solved at level $H^1$ has the required higher regular solution. All protected values, actual endpoint collars and optional tameness were retained throughout by [F1]. This proves every asserted actual distinct-end regularity conclusion. Same-generator strips, compactification and the classification or gluing of bubbles have not been invoked or silently discharged. [F1, F2, F4, step 4.1, step 4.2, construct, algebra] ∎

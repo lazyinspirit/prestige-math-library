@@ -31,6 +31,10 @@ provenance:
   proof: not-applicable
 verification:
   precheck: n/a
+  judge:
+    model: "gpt-6-luna"
+    verdict: pass
+    date: 2026-10-22
 sources:
   references:
     - title: "Daniel S. Silver and Susan G. Williams, Mahler Measure, Links and Homology Growth, §4, pp. 4–5"

@@ -18,6 +18,11 @@ provenance:
   statement: ai-altered
   proof: ai-generated
 dependency_level: 8
+verification:
+  judge:
+    model: "gpt-6-luna"
+    verdict: pass
+    date: 2026-10-22
 sources:
   references:
     - title: Jeffrey L. Tollefson, Normal surface Q-theory, Pacific Journal of Mathematics 183 (1998), 359–374

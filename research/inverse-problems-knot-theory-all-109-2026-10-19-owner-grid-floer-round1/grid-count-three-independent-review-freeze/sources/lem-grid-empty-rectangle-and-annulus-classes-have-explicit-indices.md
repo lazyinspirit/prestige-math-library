@@ -1,0 +1,62 @@
+---
+id: lem-grid-empty-rectangle-and-annulus-classes-have-explicit-indices
+kind: lemma
+title: "Grid rectangle and annulus classes have explicit Fredholm indices"
+status: draft
+origin: pipeline
+pipeline_run: inverse-problems-knot-theory-all-109-2026-10-19
+deps:
+  - def-countable-choice
+  - def-grid-diagram-for-an-oriented-knot
+  - lem-symmetric-product-quotient-determinant-has-vandermonde-ramification
+  - lem-continuous-whitney-classes-admit-relative-smooth-fixed-end-models
+  - lem-smooth-relative-whitney-homotopies-preserve-strip-fredholm-index
+  - lem-relative-strip-maslov-determinant-excision-and-local-models
+  - lem-geometric-oriented-disk-cauchy-riemann-fredholm-and-higher-regularity
+sources:
+  references:
+    - title: "Manolescu, Ozsvath and Sarkar, A combinatorial description of knot Floer homology"
+      url: "https://arxiv.org/abs/math/0607691"
+proof_strategy: direct
+provenance:
+  statement: literature-derived
+  proof: ai-altered
+---
+
+## Statement
+
+Assume Countable Choice. Use a size-$n\ge2$ toroidal grid, its flat oriented torus $T=\mathbb R^2/(n\mathbb Z)^2$, horizontal alpha circles and vertical beta circles, and $X=\operatorname{Sym}^n(T)$. At each generator use the actual flat product chart with alpha plane $\mathbb R^n$ and beta plane $i\mathbb R^n$. The path of target almost complex structures may be any homotopy of the standard complex structure compatible with these boundary planes and fixed product ends as in the relative-index suppliers.
+
+For each embedded grid rectangle $R$ from $x$ to $y$, with $x$ at its northeast and southwest corners and with no other point of $x$ in its interior, there is an actual continuous Whitney class $r_R:x\to y$ whose domain is exactly $R$ and whose actual fixed-end Fredholm index is $1$. Markings inside $R$ are unrestricted.
+
+For every generator $x$ and every closed band between consecutive horizontal grid circles there is an actual based disk on $L_\alpha$, based at $x$, with domain that unit row annulus and boundary Maslov index $2$. Likewise every consecutive column annulus is the domain of an actual based disk on $L_\beta$ with boundary Maslov index $2$. Inserting either disk on the corresponding boundary of the constant Whitney class at $x$ gives a class $x\to x$ of actual fixed-end index $2$. Reversals give the negative domains and negative indices, and finite concatenations are actual classes with additive domains and indices.
+
+All these assertions construct classes and compute their linearized indices. They do not count holomorphic representatives, prove moduli regularity, or identify absolute gradings or an analytic invariant.
+
+## Facts & Assumptions
+
+**Given:** The actual flat grid, rectangle or consecutive row/column annulus, and the generator points and product end frames stated above.
+
+[F1] The quotient determinant line has its Vandermonde ramification factor at every collision. In particular, for the constant nonzero tangent vector $V$ on $T$, the square of the wedge of its coordinate vectors descends to a section of $(\det TX)^2$; an isolated simple exchange of two roots gives one positive zero of this section. ([[lem-symmetric-product-quotient-determinant-has-vandermonde-ramification]])
+
+[F2] Every continuous Whitney class has an actual smooth fixed-end model. Its index is the squared determinant boundary-phase winding with the specified product caps, is invariant under relative homotopy, and adds under concatenation; reversal negates it. ([[lem-continuous-whitney-classes-admit-relative-smooth-fixed-end-models]], [[lem-smooth-relative-whitney-homotopies-preserve-strip-fredholm-index]], [[lem-relative-strip-maslov-determinant-excision-and-local-models]])
+
+[F3] For a smooth one-torus disk the boundary Maslov phase is the winding of its squared real tangent determinant in a complex disk frame; its compact real Fredholm index is $n$ plus that winding. This phase statement does not require the map to be a nonlinear holomorphic zero. ([[lem-geometric-oriented-disk-cauchy-riemann-fredholm-and-higher-regularity]])
+
+[F4] Grid states have one point on each alpha and each beta circle, and rectangle orientation from $x$ to $y$ places $x$ northeast/southwest. ([[def-grid-diagram-for-an-oriented-knot]])
+
+## Proof
+
+1.1 Lift $R$ to the plane and write it as $c+[-a,a]+i[-b,b]$ with $a,b>0$ and side lengths less than $n$. Quotient this rectangle by $z\mapsto-z$ and use $w=z^2$ as its actual interior complex coordinate. This quotient is a disk: each radial ray in the $w$ plane has an interval from zero to its boundary, whose radial length is the square of the rectangle's radial length at half the angle. Its boundary consists of two arcs meeting at the two images of opposite corners; the map is smooth up to these arcs and their corners. Define the active roots to be $c+z,c-z$ modulo the torus periods and retain all inactive coordinates of $x$. The symmetric map is smooth at $w=0$ because its two active elementary symmetric coordinates are $2c,c^2-w$. Along the horizontal boundary arc the two roots lie on their original alpha circles; along the vertical arc they lie on their beta circles. Positive source-boundary orientation traverses the horizontal arc from the northeast/southwest tuple $x$ to the northwest/southeast tuple $y$. This constructs the stated continuous Whitney disk. [F4, given, construct, algebra]
+
+1.2 Now let the row annulus be $i\le\operatorname{Im}z\le i+1$ modulo $n$, and put $c_y=i+1/2$ and $r=e^{-\pi/n}$. On $A=\{r\le|\zeta|\le r^{-1}\}$ define $$f(\zeta)=c_x+ic_y+\frac{n}{2\pi i}\log\zeta\pmod{n\mathbb Z+in\mathbb Z}.$$ Changing a logarithm adds $n$, so this is well defined and is a biholomorphism of the annulus interior onto the open row annulus. The map $p(\zeta)=\zeta+\zeta^{-1}$ has the two simple branch points $\pm1$ and maps $A$ properly with degree two onto the closed ellipse with semiaxes $r+r^{-1}$ and $r^{-1}-r$. Indeed both boundary circles have that same ellipse as image, with reciprocal boundary points paired, and every fiber solves $\zeta^2-p\zeta+1=0$; the pair above $p=0$ lies inside $A$, so the two-root count is constant throughout the ellipse interior. No interior root can escape across its boundary without its image reaching that ellipse. The exterior contains no fiber in $A$, since the count is zero near infinity and its only possible crossing locus is the ellipse. [given, construct, algebra]
+
+2.1 Its coordinate incidence surface is precisely the lifted rectangle, with one root above every generic point of its interior and none above its exterior; the inactive roots contribute constant maps only. Thus its point-divisor degrees are exactly the region chain $R$. No inactive root meets the rectangle: none lies on its boundary by the one-point-per-row/column condition, and none lies inside by the empty-state-interior hypothesis. Hence its only repeated tuple is the active exchange at $w=0$. In a local determinant frame the squared wedge section $\sigma$ from $V=1$ is a nonzero constant times $w$ there, by [F1]; it has no other zero. It follows that the boundary winding of $\sigma$ in any complex disk frame is $1$. This last equality is the finite argument principle for a line section: remove a small disk about its one zero, trivialize on finitely many patches of the remaining annulus, and cancel their common-edge argument changes, leaving the local winding $1$. [F1, step 1.1, construct, algebra]
+
+2.2 Send this ellipse to a round disk by its positive diagonal real affine map. To each point of that disk assign the unordered pair of values $f(\zeta),f(\zeta^{-1})$ above it, and keep the remaining $n-2$ coordinates of $x$ fixed. It is an actual smooth symmetric map, including at the two branch points: in local coordinates its roots are exchanged by a holomorphic involution, and their elementary symmetric coefficients are holomorphic functions of $p$ before the real affine change. On the boundary one root lies on each of the two consecutive alpha circles. If the two required generator coordinates on the upper and lower circles have real lifts $x_u,x_l$, choose $c_x=(x_u+x_l)/2$ and $\theta=\pi(x_u-x_l)/n$. The boundary pair $\zeta=r e^{i\theta},\zeta^{-1}=r^{-1}e^{-i\theta}$ then gives exactly these generator entries. Taking its image point as the marked disk node makes this an actual based disk at $x$. The other roots lie on different alpha circles, hence outside the closed row annulus. The incidence map $f$ has degree one over that annulus and zero elsewhere, so its domain is the asserted unit annulus. [step 1.2, construct, algebra]
+
+3.1 Relate this section to the actual strip caps, rather than identifying it with a compact disk problem with a single boundary condition. On the alpha boundary, the normalized squared determinant of the physical plane equals that of $\sigma$. On the beta boundary it equals $(-1)^n$ times that value, because each real coordinate vector is replaced by $iV$. At each marked corner all roots are distinct. Use its ordered flat product frame and the cap $e^{i\pi t/2}\mathbb R^n$, $0\le t\le1$. Its squared determinant is $e^{in\pi t}$ times the alpha value. Choose a continuous scalar function $t$ on the disk core, equal to $0$ on the alpha arc, $1$ on the beta arc, and to the indicated cap parameter on the two inserted constant corner collars. Such a function is obtained by interpolation in a rectangle model of the punctured disk; the collars are disjoint. Consequently the completed physical phase is the boundary phase of $\sigma$ multiplied by $e^{in\pi t}$. The second factor extends over the core, so has winding zero. The first has winding $1$ by step 2.1. Corner flattening in the two product charts by a real scalar cutoff preserves both planes, and changes this calculation only by a relative homotopy. [F2] therefore gives actual fixed-end index $1$, also for every allowed homotopic target complex structure. [F1, F2, step 1.1, step 2.1, construct, algebra]
+
+3.2 There are no coincidences with inactive coordinates. Equality of the two active values of $f$ would force their logarithmic arguments to differ by a torus period; their imaginary coordinates lie in an interval of length $1<n$, so only the horizontal period can occur. Therefore $\zeta^2=1$, precisely the two branch points. Since $df$ is nonzero there, [F1]'s section $\sigma$ has one positive simple zero at each, and no others. On the entire physical boundary its normalized value is the squared real tangent determinant for $L_\alpha$, since $V=1$ is tangent to every alpha circle. The finite line-section argument of step 2.1 and [F3] give boundary Maslov index $2$. A column annulus is obtained by the orientation-preserving torus rotation $z\mapsto iz$ from the same construction with the corresponding generator. Now $V=i$ is tangent to every beta circle; the constant factor $i^n$ in its wedge has no winding, so its boundary Maslov index is again $2$. This rotation is used only for a one-system based disk and does not exchange the alpha/beta conditions in the rectangle assertion. [F1, F3, step 2.1, step 1.2, step 2.2, construct, algebra]
+
+4.1 Flatten either based disk near its node in a product chart by a real scalar cutoff, which preserves its one real boundary plane. Insert this disk on the corresponding side of the constant strip at $x$: glue its constant node collar to a small constant boundary interval of that strip, retaining both outer marked strip ends. A smooth rounded planar source for this glued disk is obtained by connecting their two collar rectangles and rounding their finitely many corners; both maps are constant on the joining rectangles. It is a continuous Whitney representative; the relative smoothing and fixed-end construction in [F2] supplies an actual smooth model. The completed determinant phase of its boundary is the constant strip's completed phase with the based disk's physical boundary phase inserted. The two joining constant intervals have identical frames, and their argument changes cancel; hence its winding is $0+2=2$. This directly proves its actual strip index without subtracting a compact disk's $n$-dimensional constant kernel. Domain degrees add by local winding and the inserted disk has its computed unit annulus domain. Finally [F2]'s actual class concatenation and reversal give all the stated sums and negative domains. No nonlinear holomorphic count or moduli regularity entered any step. [F2, F3, step 3.1, step 3.2, construct, algebra] ∎

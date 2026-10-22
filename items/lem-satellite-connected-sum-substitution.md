@@ -11,7 +11,7 @@ deps:
   - def-satellite-induced-concordance-operator
   - def-satellite-pattern-companion-and-winding-number
   - lem-smooth-bump-between-concentric-euclidean-balls
-  - thm-euclidean-inverse-function-theorem
+  - lem-choice-free-smooth-inverse-function-theorem-in-euclidean-space
 justified_by: []
 aliases: []
 landmark: false
@@ -48,7 +48,7 @@ Let P be a pattern and let K be a knot. Choose a transverse meridional disk for 
 
 [F2] Connected sum joins two long-knot representatives end to end with their endpoint product coordinates matched. [[def-knot-connected-sum-and-prime-knot]]
 
-[F3] Coordinate disks have smooth cutoffs, and an everywhere invertible derivative gives a smooth local inverse. [[lem-smooth-bump-between-concentric-euclidean-balls]], [[thm-euclidean-inverse-function-theorem]]
+[F3] Coordinate disks have smooth cutoffs; a smooth Euclidean map with invertible derivative has a smooth local inverse, without a choice axiom. [[lem-smooth-bump-between-concentric-euclidean-balls]], [[lem-choice-free-smooth-inverse-function-theorem-in-euclidean-space]]
 
 ## Proof
 

@@ -1,0 +1,100 @@
+---
+id: lem-framed-link-diagram-calculus
+kind: lemma
+title: "Framed link diagrams and local Reidemeister moves in plane products"
+status: draft
+origin: pipeline
+pipeline_run: inverse-problems-knot-theory-all-109-2026-10-19
+dependency_level: 1
+deps:
+  - def-countable-choice
+  - def-oriented-link-in-s-three-and-ambient-isotopy
+  - def-regular-oriented-link-diagram
+  - def-oriented-reidemeister-moves
+  - def-planar-isotopy-of-link-diagrams
+  - thm-oriented-reidemeister-equivalence-theorem
+  - lem-every-oriented-link-admits-a-regular-projection
+  - lem-a-smooth-isotopy-of-links-can-be-put-in-general-position
+  - lem-a-generic-isotopy-of-links-has-only-reidemeister-singular-times
+  - thm-parametric-transversality
+  - thm-transverse-preimage-theorem
+  - def-kauffman-bracket-smoothing-and-loop-value
+justified_by: []
+aliases: []
+proof_strategy: direct
+axiom_use: "Assumes ACω only for the cited generic-position and oriented Reidemeister results. Finite-jet perturbations, local framing tracking, and the skein calculations are choice-free."
+provenance:
+  statement: literature-derived
+  proof: ai-altered
+sources:
+  references:
+    - title: "Józef H. Przytycki, Fundamentals of Kauffman Bracket Skein Modules, arXiv:math/9809113 (1998), §3, Lemma 3.5 and Proposition 3.6"
+      url: "https://arxiv.org/pdf/math/9809113"
+    - title: "Daniel Queffelec, Reidemeister's theorem using transversality, arXiv:2406.18203v1 (2024), §§2–3.6"
+      url: "https://arxiv.org/pdf/2406.18203v1"
+---
+
+## Statement
+
+Assume the Axiom of Countable Choice. Let $\mathcal A$ be a smooth planar
+annulus and let $X=\mathcal A\times(-1,1)$, the interior of a solid torus.
+A regular annular diagram is a finite immersed union of circles in
+$\operatorname{int}(\mathcal A)$ with only finitely many transverse double
+points, no triple points, and over/under data from the interval coordinate.
+The **blackboard framing** is the normal strip lying in the annulus. A specified
+framing differs from it on each component by an integer full-twist correction,
+measured by the winding number of its normal direction relative to the
+blackboard normal. Count the correction positively for an A-type full twist,
+whose local curl has A-smoothing equal to the straight strip with one
+contractible circle; count the opposite B-type twist negatively. Every framed
+link in $X$ admits a regular annular diagram. The correction may be recorded
+as signed full-twist marks on diagram arcs; its total is additive when arcs
+are concatenated.
+
+If two framed links in $X$ are ambient isotopic through links in $X$, their
+regular annular diagrams are related by finitely many annular planar isotopies
+and local oriented Reidemeister I, II, and III moves in disks contained in
+$\operatorname{int}(\mathcal A)$. Reidemeister II and III and planar isotopy
+preserve the blackboard framing; an A-type or B-type Reidemeister I move
+changes it by one corresponding full twist, so the correction integer changes
+by the opposite twist. For framed links in $S^3$, every link also admits a
+regular planar diagram, and any two diagrams of ambient-isotopic framed links
+are related by a finite planar-isotopy/Reidemeister sequence with the same
+framing-correction rule.
+
+## Statement references
+
+[Józef H. Przytycki, *Fundamentals of Kauffman Bracket Skein Modules* (1998), §3, Lemma 3.5 and Proposition 3.6](https://arxiv.org/pdf/math/9809113)
+
+[Daniel Queffelec, *Reidemeister's theorem using transversality* (2024), arXiv:2406.18203v1, §§2–3.6](https://arxiv.org/pdf/2406.18203v1)
+
+## Facts & Assumptions
+
+**Given:** Countable choice, a framed link in $S^3$ or $X$, and a framed ambient isotopy between two such links.
+
+[A1] Countable choice is the assertion that every countable family of nonempty sets has a choice function ([[def-countable-choice]]).
+
+[F1] A regular oriented link diagram is an immersion with finitely many transverse double points, no triple points, and over/under and orientation data; every oriented link in $S^3$ has a regular projection under countable choice ([[def-regular-oriented-link-diagram]], [[lem-every-oriented-link-admits-a-regular-projection]]).
+
+[F2] Under countable choice, two regular oriented diagrams in $S^3$ represent equivalent oriented links exactly when a finite sequence of planar isotopies and oriented Reidemeister I, II, and III moves connects them ([[thm-oriented-reidemeister-equivalence-theorem]]).
+
+[F3] Under countable choice, a smooth isotopy in $\mathbb R^3$ with regular endpoint projections can be perturbed, fixed near its endpoints, so its projection has finitely many isolated cusps, quadratic double tangencies, and transverse triple events; each event time is distinct ([[lem-a-smooth-isotopy-of-links-can-be-put-in-general-position]], [[lem-a-generic-isotopy-of-links-has-only-reidemeister-singular-times]]).
+
+[F4] Parametric transversality gives generic parameter slices transverse to any fixed finite list of smooth strata, and a transverse preimage of codimension $c$ in a source of dimension $m<c$ is empty ([[thm-parametric-transversality]], [[thm-transverse-preimage-theorem]]).
+
+[F5] R1, R2, and R3 are the local kink, two-strand cancellation, and strand-past-crossing replacements, with all sign and orientation variants; planar isotopy transports the diagram without creating or deleting a crossing ([[def-oriented-reidemeister-moves]], [[def-planar-isotopy-of-link-diagrams]]).
+
+[F6] The A-smoothing is the top/bottom pairing with weight $A$, and the B-smoothing is the left/right pairing with weight $A^{-1}$ in the KT-29 source chart ([[def-kauffman-bracket-smoothing-and-loop-value]]).
+
+## Proof
+
+
+1.1 For an annular link $L:C\hookrightarrow\mathcal A\times(-1,1)$, write its annular projection as $g:C\to\operatorname{int}(\mathcal A)$. Since $L(C)$ is compact in the interior, its projection has positive distance from $\partial\mathcal A$. Fix an auxiliary smooth embedding $x:C\hookrightarrow\mathbb R^3$. Perturb the two coordinates of $g$ by a finite-dimensional family of polynomials of degree at most five in $x$, multiplied by a smooth cutoff supported in $\operatorname{int}(\mathcal A)$ and equal to one near $g(C)$. At any three distinct points $x_1,x_2,x_3$, the polynomials $p_i(x)=\prod_{j\ne i}\lVert x-x_j\rVert^2$ vanish to first order at the other two points and are nonzero at $x_i$; multiplying by affine functions therefore prescribes independently the value and first derivative of both projected coordinates at these points. Thus the family is a submersion on every one-, two-, and three-point first-jet space. [A1, F4, given, construct]
+
+2.1 Apply [F4] to the derivative-zero stratum, the pair-equality diagonal, the nontransverse-pair stratum, and the triple-equality diagonal. The derivative-zero stratum has codimension two on the one-dimensional source, so it is avoided. Pair equality has codimension two on the two-dimensional distinct-pair source and is transverse, hence gives isolated double points; tangency imposes one additional independent equation, so its codimension is three and it is avoided. Triple equality has codimension four on the three-dimensional distinct-triple source, so it is avoided. A sufficiently small good parameter keeps the curve in the annulus and keeps $(g_a(x),L_3(x))$ embedded, because the original embedding is compact and embedding is open in the $C^1$ topology. The parameter path supplies an isotopy of the framed link, with its framing transported along the annuli. [A1, F4, step 1.1, algebra, construct]
+
+3.1 The transverse double pairs are finite. Immersion gives, near each point of the compact source, a source arc on which the projection is injective; finitely many such arcs exclude double pairs near the diagonal in $C\times C$. Away from that diagonal, the double-pair set is closed in a compact set and is discrete by transversality, hence finite. This proves the annular regular-diagram assertion. For a link in $S^3$, choose orientations on its finitely many components, move it off $\infty$, and apply [F1]. [F1, step 2.1, algebra]
+
+4.1 For an isotopy in $X$, reparametrize it to be constant near its endpoints and choose regular endpoint diagrams using steps 1.1, 2.1, and 3.1. Regard $X$ as an open subset of $\mathbb R^3$ by the annulus-product coordinates. Its compact isotopy track has positive distance from the boundary of $X$. Apply [F3] with a perturbation smaller than this distance and fixed near the endpoints. Every exceptional event and every regular interval then remains in $X$; by [F3] its projected annular diagrams differ by a finite sequence of R1, R2, R3, and planar isotopies in disks of $\operatorname{int}(\mathcal A)$. For isotopies in $S^3$, [F2] gives the corresponding finite sequence after orienting the components and transporting those orientations. [A1, F2, F3, step 1.1, step 2.1, step 3.1, given]
+
+5.1 A planar isotopy transports the blackboard strip continuously. In R2 and R3 the participating strips deform inside the move ball without a full rotation of the normal direction. In an A-type R1 move the blackboard strip gains one full twist, and in the opposite B-type move it loses one; this is the local curl convention in [F6]. Since the framed link isotopy transports the specified annulus without changing its homotopy class, the recorded integer correction changes by the negative of that blackboard turn. Thus the move sequence preserves the framed isotopy class, and all framing changes in the statement are exact. [F5, F6, step 4.1, given, algebra] ∎

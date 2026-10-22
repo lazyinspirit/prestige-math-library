@@ -18,6 +18,11 @@ axiom_use: "Choice-free in the finite color calculations; full AC is carried sep
 provenance:
   statement: literature-derived
   proof: literature-derived
+verification:
+  judge:
+    model: "gpt-6-luna"
+    verdict: pass
+    date: 2026-10-22
 sources:
   references:
     - title: "C. Blanchet, N. Habegger, G. Masbaum, and P. Vogel, Three-Manifold Invariants Derived from the Kauffman Bracket, Topology 31 (1992), §§2–4"

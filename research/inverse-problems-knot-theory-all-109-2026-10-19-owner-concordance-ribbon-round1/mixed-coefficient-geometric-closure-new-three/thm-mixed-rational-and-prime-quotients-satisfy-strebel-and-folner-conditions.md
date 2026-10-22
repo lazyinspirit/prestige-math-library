@@ -1,0 +1,64 @@
+---
+id: thm-mixed-rational-and-prime-quotients-satisfy-strebel-and-folner-conditions
+kind: theorem
+title: Mixed rational and prime quotients satisfy Strebel and Folner conditions
+status: draft
+origin: session
+deps: [thm-ptfa-augmentation-detects-projective-injectivity-without-choice, lem-ptfa-groups-have-finite-folner-sets, lem-killing-deep-derived-normal-subgroups-preserves-mixed-derived-quotients, def-projective-module, def-opposite-ring, def-tensor-product-of-modules-by-generators-and-relations, def-left-invariant-mean-and-amenable-group]
+proof_strategy: direct
+provenance:
+  statement: literature-derived
+  proof: ai-generated
+sources:
+  references:
+    - title: Cha and Kim, Iterated satellite operators on the knot concordance group
+      url: https://arxiv.org/pdf/2402.04629v2
+      locator: Lemma3.4 and Proposition4.6(H1), printed pages9,15
+    - title: Cha and Orr, L2-signatures, homology localization, and amenable groups
+      url: https://arxiv.org/pdf/0910.3700
+      locator: Lemma6.8, subnormal-series Strebel classes
+---
+
+## Statement
+
+Let $p$ be a prime and let $G$ admit a supplied finite subnormal series whose factors are each either torsion-free abelian or elementary abelian $p$-groups, allowing trivial factors and groups not finitely generated. Then every homomorphism $f:P\to Q$ of projective right-$\mathbb F_p[G]$ modules is injective whenever its augmentation
+$$f\otimes1:P\otimes_{\mathbb F_p[G]}\mathbb F_p\longrightarrow Q\otimes_{\mathbb F_p[G]}\mathbb F_p$$
+is injective. Thus $G$ satisfies the defining projective-module detection property of $D(\mathbb F_p)$, on the right and on the left. Projective means the lifting property against individual surjections; neither a supplied basis nor finite generation is required.
+
+Also $G$ satisfies the finite left Folner condition: for each finite $S\subset G$ and each $\varepsilon>0$ there is a finite nonempty $F\subset G$ with $|sF\triangle F|<\varepsilon|F|$ for all $s\in S$. Both assertions are choice-free. If, additionally, every proper filter on a set extends to an ultrafilter, $G$ has a left-invariant mean and is amenable; that extra hypothesis is used only in this invariant-mean assertion.
+
+In particular, for any group $L$ and integer $n\ge0$, put $P^0L=L$ and
+$$P^{i+1}L=\ker\{P^iL\to(P^iL/[P^iL,P^iL])\otimes_{\mathbb Z}R_i\},\qquad R_i=\mathbb Q\ (i<n),\quad R_n=\mathbb F_p.$$
+The actual quotient $G=L/P^{n+1}L$ has the two choice-free properties just proved and has $G^{(n+1)}=1$. If a supplied element of $L$ has infinite order in $L/P^1L$, its image in $G$ has infinite order. No PTFA or Ore-domain assertion is made for $G$; its last elementary-abelian factor can have $p$-torsion.
+
+## Facts & Assumptions
+
+**Given:** The prime, supplied finite subnormal series, individual projective maps, finite Folner tests, and the mixed-series data for the last assertion. The ultrafilter extension principle is assumed only for the conditional invariant-mean assertion.
+
+[F1] A torsion-free abelian group has augmentation detection for finite free $\mathbb F_p$ group-ring maps, as a one-factor case of the choice-free PTFA theorem. [[thm-ptfa-augmentation-detects-projective-injectivity-without-choice]]
+
+[F2] Torsion-free abelian groups have finite Folner sets. More generally an arbitrary extension of two groups satisfying the finite Folner condition satisfies it, without a global transversal or a split-extension assumption. [[lem-ptfa-groups-have-finite-folner-sets]]
+
+[F3] Projectivity is the individual lifting property, usable on right modules through the opposite ring. Tensor products preserve compositions and split identities. [[def-projective-module]], [[def-opposite-ring]], [[def-tensor-product-of-modules-by-generators-and-relations]]
+
+[F4] The mixed subgroups are characteristic, normal, and contain the corresponding ordinary derived subgroups. The rational successive factors embed in additive rational tensor groups. [[lem-killing-deep-derived-normal-subgroups-preserves-mixed-derived-quotients]]
+
+[F5] Amenability means existence of a positive normalized linear functional on bounded functions invariant under left translation. [[def-left-invariant-mean-and-amenable-group]]
+
+## Proof
+
+1.1 Let $B$ be an elementary abelian $p$-group and let $T:\mathbb F_p[B]^m\to\mathbb F_p[B]^u$ be a finite matrix with injective augmentation. Choose $m$ output rows giving an augmented invertible square minor $U$; finite Gaussian elimination over $\mathbb F_p$ supplies them, with the empty case immediate. The finitely many group elements in the coefficients of $U$ generate a finite subgroup $B_0$: a list of $r$ generators gives an image of $(\mathbb Z/p)^r$, so at most $p^r$ elements. Choose from that finite list a basis $b_1,\ldots,b_v$ by finite elimination, so every element is uniquely $b_1^{i_1}\cdots b_v^{i_v}$, $0\le i_j<p$. The map $$\mathbb F_p[z_1,\ldots,z_v]/(z_1^p,\ldots,z_v^p)\longrightarrow\mathbb F_p[B_0],\qquad z_i\longmapsto b_i-1$$ is an isomorphism: the binomial identity gives the relations, and its source and target have the displayed $p^v$ spanning monomials and group basis, with the inverse $b_i\mapsto1+z_i$. The augmentation ideal $I=(z_1,\ldots,z_v)$ has $I^{v(p-1)+1}=0$, since each longer monomial has some exponent at least $p$. The determinant $d=\det U$ has augmentation $c\ne0$, so $d=c(1+w)$ for $w\in I$ and is a unit by the finite inverse $c^{-1}\sum_{h=0}^{v(p-1)}(-w)^h$. The adjugate now makes $U$ invertible in $\mathbb F_p[B_0]$, and therefore in $\mathbb F_p[B]$. Thus $T$ is injective over the entire group ring. This proves finite-free augmentation detection for every elementary abelian $p$-group, with no infinite vector-space basis. [given, construct, algebra]
+
+1.2 The finite-free detection property is preserved by arbitrary group extensions. Suppose $N\trianglelefteq H$, with the property for $N$ and $H/N$, and let a finite matrix $T$ over $\mathbb F_p[H]$ have injective augmentation. Its quotient matrix $\overline T$ over $\mathbb F_p[H/N]$ is injective. A proposed kernel vector $v$ has finite support. For the finitely many right-$N$ cosets meeting its coordinates, select representatives $g$ and use input basis elements $e_i g$ for their finite free right-$\mathbb F_p[N]$ span. The images of those finitely many elements have finite supports, so choose finitely many target coset basis elements containing them. This gives a finite restricted matrix over $\mathbb F_p[N]$. Upon augmenting $N$ its matrix is exactly the restriction of $\overline T$ to the finite quotient-coset span: normality identifies the cosets with distinct elements of $H/N$. Its augmentation is therefore injective. The detection property of $N$ makes the restriction injective, forcing $v=0$. All representatives were selected from finitely many prescribed nonempty cosets; the extension need not split, and no global transversal is used. [given, construct, algebra]
+
+2.1 Induct up the supplied finite subnormal series. The trivial group has finite-free detection over the field. Each factor has it by [F1] or step 1.1, and step 1.2 propagates it to the next group. This proves finite-free detection for $G$ with only the supplied successive normalities, not normality of the whole series in $G$. It also gives detection for free modules of arbitrary ranks with specified bases. Indeed a proposed kernel vector uses finitely many input basis elements, whose images use finitely many target elements. Restriction to those finite free submodules preserves augmented injectivity because the inclusions are split coordinate inclusions before and after tensoring with $\mathbb F_p$. The finite-free result then excludes that kernel vector. [F1, F3, step 1.1, step 1.2, construct, algebra]
+
+3.1 Put $A=\mathbb F_p[G]$ and let $f:P\to Q$ be as in the Statement. The canonical free module $A^{(P)}$ on the underlying set of $P$ surjects onto $P$ by $e_x\mapsto x$. Its one individual projectivity assertion gives a section $s_P$ of this map $\pi_P$; similarly obtain $\pi_Q,s_Q$ for $Q$. Put $e=s_P\pi_P$ and define $$g:A^{(P)}\to A^{(Q)}\oplus A^{(P)},\qquad g(z)=(s_Qf\pi_Pz,(1-e)z).$$ If an augmented vector $\xi$ is in the kernel, its second coordinate says $\xi=(s_P\otimes1)(\pi_P\otimes1)\xi$. Apply the left inverse $\pi_Q\otimes1$ to the first coordinate and use injectivity of $f\otimes1$ to obtain $(\pi_P\otimes1)\xi=0$, hence $\xi=0$. Thus $g$ has injective augmentation and is injective by step 2.1. For $x\in\ker f$, $g(s_Px)=0$ forces $s_Px=0$ and then $x=0$. The two sections are individual projective lifts, and no assertion that arbitrary free modules are projective has been used. This proves the full right-projective detection property. Inversion on $G$ is an augmentation-preserving anti-isomorphism of its group ring, so the opposite-ring conversion [F3] gives the left-projective property as well. [F3, step 2.1, construct, algebra]
+
+4.1 Each elementary abelian $p$-group satisfies the finite left Folner condition directly: the subgroup generated by a finite test set $S$ has at most $p^{|S|}$ elements by the argument of step 1.1, and that finite subgroup is exactly invariant under $S$. The empty test set permits $F=\{1\}$. Torsion-free abelian factors satisfy the condition by [F2]. Induction up the same finite subnormal series, using the arbitrary-extension assertion of [F2] at each successive normal inclusion, therefore constructs finite nonempty Folner sets for $G$. Each test involves only finitely many extension witnesses and lifts. Thus the finite-set assertion and the projective assertion of step 3.1 require no choice axiom, countability or finite generation. [F2, step 1.1, step 3.1, construct, algebra]
+
+5.1 For the mixed quotient, [F4] makes every $P^iL$ normal, with $L^{(i)}\subseteq P^iL$. For $i<n$, $P^iL/P^{i+1}L$ embeds in $(P^iL)_{\mathrm{ab}}\otimes\mathbb Q$ and is torsion-free abelian. The last factor $P^nL/P^{n+1}L$ embeds in $(P^nL)_{\mathrm{ab}}\otimes\mathbb F_p$, hence is elementary abelian: its additive group is abelian and every element is killed by $p$. These are exactly the factors of the finite normal series of $G=L/P^{n+1}L$. Steps 3.1 and 4.1 apply, and $G^{(n+1)}=1$ follows from $L^{(n+1)}\subseteq P^{n+1}L$. Since $P^{n+1}L\subseteq P^1L$ even when $n=0$, the natural epimorphism $G\to L/P^1L$ preserves the stated infinite-order obstruction: a finite-order image upstairs would have finite-order image downstairs. No domain claim is used for a positive-characteristic last factor. [F4, step 3.1, step 4.1, construct, algebra]
+
+5.2 Assume now, solely for the invariant-mean assertion, the ultrafilter extension principle in the Statement. Let $\mathcal D$ be the set of triples $(S,m,F)$ with $S\subset G$ finite, $m\ge1$ an integer and $F$ a finite nonempty set satisfying $|sF\triangle F|<|F|/m$ for all $s\in S$. Step 4.1 shows that the tails specifying finitely many required elements of $S$ and a lower bound on $m$ have the finite intersection property. They generate a proper filter on the set $\mathcal D$, so the assumed principle supplies an ultrafilter containing every tail. For each bounded real function $f$, form the finite average $a_d(f)=|F|^{-1}\sum_{x\in F}f(x)$. Its ultrafilter limit exists uniquely in a bounded closed interval: repeatedly bisect a containing interval, at each stage take the left closed half if its preimage belongs to the ultrafilter, and otherwise take the right half, and use nested intervals of lengths tending to zero; any common endpoint ambiguity gives the same limit. This is a recursive finite decision determined by the ultrafilter, not another choice principle. [given, step 4.1, construct, algebra]
+
+6.1 Put $m_G(f)=\lim_{\mathcal U}a_d(f)$. Finite intersections of neighborhoods of the limits show directly that limits preserve addition and real scalar multiplication; positivity and $m_G(1)=1$ follow from those properties of every finite average. If $(g\cdot f)(x)=f(g^{-1}x)$, then $$|a_d(g\cdot f)-a_d(f)|\le\|f\|_\infty\,|g^{-1}F\triangle F|/|F|,$$ which tends to zero along the tails containing $g^{-1}$ and with $m$ arbitrarily large. Thus $m_G(g\cdot f)=m_G(f)$ for every $g$. Complexification, if bounded complex functions are used, is defined from the real and imaginary parts and retains positivity on real nonnegative functions. By [F5] this is a left-invariant mean and makes $G$ amenable under precisely the additional ultrafilter hypothesis. The projective, finite-set and mixed-quotient conclusions were established before that hypothesis was invoked. This proves all the stated conclusions, with the exact separation of choice-free algebraic and finite-set assertions from the conditional invariant-mean assertion. [F5, step 3.1, step 4.1, step 5.1, step 5.2, algebra] ∎

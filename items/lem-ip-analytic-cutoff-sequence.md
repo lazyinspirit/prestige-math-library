@@ -9,6 +9,7 @@ deps:
   - lem-smooth-bump-between-concentric-euclidean-balls
   - def-ck-and-multi-index-notation-in-several-variables
   - def-support-and-compactly-supported-riemann-integral-in-rn
+  - thm-continuous-on-a-rectangle-is-riemann-integrable
   - thm-riemann-fubini-on-product-rectangles
 dependency_level: 0
 provenance:
@@ -41,6 +42,8 @@ These are smooth compact cutoffs; no compactly supported analytic function is as
 
 [[def-support-and-compactly-supported-riemann-integral-in-rn|Compact support and integral]]
 
+[[thm-continuous-on-a-rectangle-is-riemann-integrable|Continuous functions on rectangles are integrable]]
+
 [[thm-riemann-fubini-on-product-rectangles|Compact-rectangle Fubini]]
 
 ## Facts & Assumptions
@@ -51,7 +54,7 @@ These are smooth compact cutoffs; no compactly supported analytic function is as
 
 [F2] [[def-ck-and-multi-index-notation-in-several-variables]]: $\partial^\alpha$ denotes the specified iterated coordinate derivatives, with $|\alpha|$ their order.
 
-[F3] [[def-support-and-compactly-supported-riemann-integral-in-rn]]: continuous compactly supported functions have finite integrals on containing rectangles.
+[F3] [[thm-continuous-on-a-rectangle-is-riemann-integrable]]: every continuous real function on a closed nondegenerate rectangle is Riemann integrable. Thus a continuous compactly supported function, restricted to a rectangle containing its support in the interior, has the finite Euclidean-space integral of [[def-support-and-compactly-supported-riemann-integral-in-rn]].
 
 [F4] [[thm-riemann-fubini-on-product-rectangles]]: for continuous functions on compact product rectangles, iterated integrals equal the product integral.
 
@@ -59,9 +62,9 @@ These are smooth compact cutoffs; no compactly supported analytic function is as
 
 **Given:** The compact set $K$ and open neighborhood $U$.
 
-1.1 If $K=\varnothing$, set $\chi_N=0$ for all $N$; the empty set is a neighborhood of $K$, so every assertion is vacuous. Assume henceforth $K\ne\varnothing$. For each $x\in K$, choose concentric balls $B_{r_x}(x)\Subset B_{R_x}(x)\Subset U$. By [F1], take $b_x\in C_c^\infty(B_{R_x}(x))$ with $0\le b_x\le1$ and $b_x=1$ on $B_{r_x}(x)$. Compactness gives a finite subcover $B_{r_1}(x_1),\ldots,B_{r_m}(x_m)$ of $K$. The smooth function $ g=1-\prod_{j=1}^m(1-b_{x_j}) $ satisfies $0\le g\le1$, equals one on the open set $O=\bigcup_{j=1}^m B_{r_j}(x_j)$ containing $K$, and has compact support $S\Subset U$. This construction uses only finite subcover compactness. [given, F1, choose, algebra]
+1.1 If $K=\varnothing$, set $\chi_N=0$ for all $N$; the empty set is a neighborhood of $K$, so every assertion holds. Assume henceforth $K\ne\varnothing$. Consider all pairs of concentric balls $B_r(x)\Subset B_R(x)\Subset U$ with $x\in K$ and $0<r<R$. Their smaller balls cover $K$, so compactness supplies finitely many pairs $B_{r_j}(x_j)\Subset B_{R_j}(x_j)$, $1\le j\le m$, whose smaller balls cover $K$. Choose their finitely many bumps $b_j$ by [F1], translated to $x_j$, with $0\le b_j\le1$, $b_j=1$ on $B_{r_j}(x_j)$ and compact support in $B_{R_j}(x_j)$. The smooth function $ g=1-\prod_{j=1}^m(1-b_j) $ satisfies $0\le g\le1$, equals one on the open set $O=\bigcup_{j=1}^m B_{r_j}(x_j)$ containing $K$, and has compact support $S\Subset U$. Only finitely many bumps are selected. [given, F1, choose, algebra]
 
-2.1 Choose a nonnegative smooth bump $\rho_0$ supported in the unit ball and equal to one on the ball of radius $1/2$, using [F1]. Its compactly supported integral is finite by [F3] and positive because it equals one on a ball. Normalize $\rho=\rho_0/\int\rho_0$, so $\int\rho=1$, $\rho\ge0$, and $\operatorname{supp}\rho\subset\overline B_1(0)$. Since $K\Subset O$ and $S\Subset U$, choose $\varepsilon>0$ smaller than one third of each distance $\operatorname{dist}(K,O^c)$ and $\operatorname{dist}(S,U^c)$. [F1, F3, step 1.1, choose]
+2.1 Choose a nonnegative smooth bump $\rho_0$ supported in the unit ball and equal to one on the ball of radius $1/2$, using [F1]. Its compactly supported integral is finite by [F3] and positive: a closed nondegenerate rectangle inside $B_{1/2}(0)$ has positive volume and $\rho_0=1$ there. Normalize $\rho=\rho_0/\int\rho_0$, so $\int\rho=1$, $\rho\ge0$, and $\operatorname{supp}\rho\subset\overline B_1(0)$. Since $K\Subset O$ and $S\Subset U$, choose $\varepsilon>0$ smaller than one third of each distance $\operatorname{dist}(K,O^c)$ and $\operatorname{dist}(S,U^c)$, omitting the second restriction when $U=\mathbb R^n$. [F1, F3, step 1.1, choose]
 
 3.1 For each $N\ge1$, put $\delta=\varepsilon/N$, $\rho_\delta(x)=\delta^{-n}\rho(x/\delta)$, and recursively $\eta_1=\rho_\delta$, $\eta_{j+1}=\eta_j*\rho_\delta$ for $1\le j<N$. Compact-rectangle Fubini [F4] and change of variables give $\int\eta_N=1$ and $\operatorname{supp}\eta_N\subset\overline B_\varepsilon(0)$; [F4] also permits reassociation of these compact convolution integrals. Define $\chi_N=g*\eta_N$. The integral defining $\chi_N$ is over a fixed compact rectangle. Differentiating the smooth kernel under this compact integral is justified by uniform convergence of its difference quotients on that rectangle, so $\chi_N$ is smooth. Positivity and unit mass give $0\le\chi_N\le1$. If $\operatorname{dist}(x,K)<\varepsilon$, then every $y\in\operatorname{supp}\eta_N$ satisfies $\operatorname{dist}(x-y,K)<2\varepsilon<\operatorname{dist}(K,O^c)$, hence $g(x-y)=1$ and $\chi_N(x)=1$. Also $\operatorname{supp}\chi_N\subset S+\overline B_\varepsilon(0)\Subset U$. [F1, F3, F4, step 1.1, step 2.1, given]
 

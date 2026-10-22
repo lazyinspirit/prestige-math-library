@@ -1,0 +1,68 @@
+---
+id: lem-finite-energy-almost-complex-puncture-removability
+kind: lemma
+title: "Finite-energy interior and totally real boundary puncture removability"
+status: draft
+origin: pipeline
+pipeline_run: inverse-problems-knot-theory-all-109-2026-10-19
+deps: [def-countable-choice, lem-interior-energy-regularity-for-smooth-almost-complex-strips, lem-boundary-energy-regularity-for-totally-real-strips, lem-continuous-weak-almost-complex-strip-solutions-are-smooth, thm-euclidean-inverse-function-theorem, thm-higher-regularity-of-local-inverses]
+dependency_level: 5
+justified_by: []
+aliases: []
+proof_strategy: direct
+provenance:
+  statement: literature-derived
+  proof: ai-altered
+sources:
+  references:
+    - title: "Dusa McDuff and Dietmar Salamon, J-holomorphic Curves and Symplectic Topology, removal of singularities"
+      url: "https://bookstore.ams.org/coll-52"
+---
+
+## Statement
+
+Assume Countable Choice. Let $(X,g)$ be a compact smooth manifold and let $J(z,x)$ be a smooth family of almost complex structures for $z$ in a disk about $0$, smooth also at $z=0$. A smooth solution $u_s+J(z,u)u_t=0$ on the punctured disk with finite Dirichlet energy extends smoothly over $0$.
+
+The same holds on a punctured upper half-disk with boundary on a fixed compact totally real submanifold $L\subset X$, provided $J(z,x)=J(0,x)$ for $x\in L$ and real $z$ near $0$. Smoothness and the boundary condition of $u$ are assumed up to the two open straight boundary intervals. The extension is smooth up to the filled boundary point and remains on $L$ there.
+
+In particular, for autonomous $J(x)$, every finite-energy smooth plane map extends over infinity to a smooth $J$-holomorphic sphere, and every finite-energy smooth upper-half-plane map with compact totally real boundary extends over infinity to a smooth disk. No bubble-tree, energy identity for a sequence, or gluing statement is included.
+
+## Statement references
+
+[[def-countable-choice]]
+
+## Facts & Assumptions
+
+**Given:** The compact smooth target, smooth almost complex family, punctured-domain solution, finite energy, and, when present, the fixed totally real boundary data in the statement.
+
+[F1] The actual interior and totally real boundary small-energy derivative estimates are [[lem-interior-energy-regularity-for-smooth-almost-complex-strips]] and [[lem-boundary-energy-regularity-for-totally-real-strips]]. The latter requires the boundary complex structure restricted to $L$ to be independent of its tangential source coordinate, as stipulated here.
+
+[F2] A continuous weak $W^{1,2}$ solution is smooth in local charts, including a flattened totally real boundary, by [[lem-continuous-weak-almost-complex-strip-solutions-are-smooth]].
+
+[F3] The finite-dimensional smooth inverse results used below have actual proofs in [[thm-euclidean-inverse-function-theorem]] and [[thm-higher-regularity-of-local-inverses]].
+
+
+
+## Proof
+
+1.1 We first construct convenient finite-dimensional target data. Take finitely many coordinate charts $U_i$ and smaller relatively compact chart neighborhoods covering $X$. Euclidean smooth bumps supported in $U_i$, equal to one on those smaller neighborhoods, normalized by their positive sum, give a finite smooth partition $\phi_i$. The map $$F:X\longrightarrow\mathbb R^N,\qquad F(x)=(\phi_i(x),\phi_i(x)x_i(x))_i$$ is smooth, interpreting each coordinate product as zero off its compact support. It is injective: if $F(x)=F(y)$ choose $i$ with $\phi_i(x)>0$; the equal first coordinates and coordinate products give $x_i(x)=x_i(y)$. Its derivative is injective by the same argument: if $dF(v)=0$, then $d\phi_i(v)=0$ for all $i$, and at such an $i$ the product derivative gives $\phi_i dx_i(v)=0$. Compactness makes $F$ a homeomorphism onto its image, and [F3] in local coordinates gives smooth inverse charts on that image. Thus $F$ is a smooth embedding. Its induced derivative norms are uniformly equivalent to the original metric norms. No general embedding theorem is needed. [F3, given, construct, algebra]
+
+1.2 Use cylindrical coordinates $z=-e^{-\sigma-i\tau}$ about the puncture and put $v(\sigma,\tau)=u(-e^{-\sigma-i\tau})$. The angular variable has period $2\pi$ in the interior case and lies in $[0,\pi]$ in the boundary case. This holomorphic coordinate change preserves the equation and Dirichlet energy: $$v_\sigma+J(-e^{-\sigma-i\tau},v)v_\tau=0,\qquad \int_{\sigma>S}(|v_\sigma|_g^2+|v_\tau|_g^2)<\infty,$$ with that tail integral tending to zero as $S\to\infty$. The composed coefficients have uniformly bounded derivatives of every fixed order; positive cylindrical source derivatives of $-e^{-\sigma-i\tau}$ are bounded and tend to zero. Their restriction to $L$ on the two physical boundary edges is the fixed structure $J(0,x)$, so [F1] applies uniformly on fixed-radius cylinder disks or boundary half-disks. Choose their radius smaller than $\pi/8$. Every point is covered by an interior estimate or a boundary half-radius estimate on such a patch. For sufficiently large $S$ the patch energies are below the fixed threshold, and [F1] gives $$\sup_{\tau}|dv(\sigma,\tau)|_g\longrightarrow0\quad(\sigma\to\infty).$$ This argument uses target-global estimates and assumes no prior containment in one target chart. [F1, given, construct, algebra]
+
+2.1 Write $Y=F(X)$ and $P_x=dF_x$. Relative to $g$ and the Euclidean metric the map $Q_x=(P_x^*P_x)^{-1}P_x^*$ is a smooth left inverse of $P_x$. Define on $Y$ the smooth ambient operator $$K(z,F(x))=P_xJ(z,x)Q_x.$$ For $U=F\circ u$, the equation is $U_s+K(z,U)U_t=0$. These operators are uniformly bounded and Lipschitz in their $Y$ variable for $z$ near zero. To justify the global Lipschitz bound, on each of finitely many smaller image charts, bounded coordinate derivatives and the local inverse estimates bound operator differences by Euclidean chord length. All sufficiently close pairs of points lie in one such chart, by compactness and the Lebesgue-number property of a finite cover. For pairs whose distance is bounded below, boundedness of $K$ gives the same Lipschitz inequality after enlarging the constant. Also $|K(z,a)-K(0,a)|\le C|z|$ uniformly for $a\in Y$, by bounded source derivatives. [F3, step 1.1, construct, algebra]
+
+2.2 For use in the boundary case we construct an ambient retraction $R$ from a neighborhood of $F(L)$ to $F(L)$ such that $$dR_{F(x)}\bigl(P_xJ(0,x)v\bigr)=0\qquad(v\in T_xL).$$ In the Euclidean ambient space let $$N_x=P_xJ(0,x)T_xL\oplus(P_xT_xX)^\perp.$$ Total reality makes $\mathbb R^N=P_xT_xL\oplus N_x$. In finite local frames of this smooth vector bundle, the derivative at $(x,0)$ of $\Psi(x,v)=F(x)+v$ is an isomorphism, so [F3] supplies smooth local inverses. The map is injective on $|v|<\delta$ for some uniform $\delta>0$. Otherwise choose collisions with both normal vectors tending to zero; compactness gives a subsequence of their base points converging, equality of the images forces the two limits equal, and the local inverse near that zero-section point contradicts the collisions. Its derivative remains invertible on a smaller uniform neighborhood by the same compactness argument. Consequently its image is an open neighborhood of $F(L)$, its local inverses agree, and projection to the base defines the claimed smooth retraction $R$. On a still smaller neighborhood its first two derivatives are bounded. The projection differential is the identity on $P_xT_xL$ and zero on $N_x$, proving the displayed property. [F3, step 1.1, given, construct, algebra]
+
+2.3 Set $V=F\circ v$, and define $$e(\sigma)=\int_I|V_\tau(\sigma,\tau)|^2d\tau,\qquad b(\sigma)=\frac1{|I|}\int_I V(\sigma,\tau)d\tau,$$ where $I$ is one angular period or $[0,\pi]$. Then $\int_S^\infty e(\sigma)d\sigma<\infty$, $e(\sigma)\to0$, and $$\sup_\tau|V(\sigma,\tau)-b(\sigma)|\le C\sqrt{e(\sigma)}\longrightarrow0.$$ The last estimate follows from the fundamental theorem on the angular interval, Holder, and averaging. In particular every angular slice has vanishing diameter. The map $b$ is smooth for finite $\sigma$. [step 1.1, step 1.2, construct, algebra]
+
+3.1 There is also a uniform quadratic chord estimate: for $a,a'\in F(L)$ sufficiently close, $$|dR_a K(0,a)(a'-a)|\le C|a'-a|^2.$$ Indeed choose a local smooth parametrization $\ell$ of $F(L)$ about $a$. Taylor's formula gives $a'-a=d\ell\,h+O(|h|^2)$ and the local inverse estimate gives $|h|\le C|a'-a|$. The operator $K(0,a)$ sends the first tangent term into $P_xJ(0,x)T_xL$, killed by $dR_a$ from step 2.2. Bounded second derivatives give the remainder estimate, uniformly by a finite cover. The same finite-cover argument gives $|dR_b-dR_a|\le C|b-a|$ when $a\in F(L)$ and $b$ is sufficiently close to $a$. [step 2.1, step 2.2, construct, algebra]
+
+3.2 In the interior case choose $a=V(\sigma,0)$ and $K_0=K(0,a)$. Periodicity gives $\int_I V_\tau=0$. Therefore the equation and step 2.1 imply $$|b'(\sigma)|=\left|\frac1{|I|}\int_I(K_0-K(-e^{-\sigma-i\tau},V))V_\tau d\tau\right|\le C e(\sigma)+C e^{-\sigma}\sqrt{e(\sigma)}.$$ The right side is integrable: the first term by finite energy and the second by Holder against $e^{-\sigma}$. Thus $b$ has finite total variation on the infinite tail, hence has a Euclidean limit. Step 2.3 shows all $V(\sigma,\tau)$ approach that same limit uniformly in $\tau$. Since $Y$ is compact and closed, the limit lies in $Y$. [step 2.1, step 2.3, algebra]
+
+4.1 In the boundary case $a=V(\sigma,0)$ and $a'=V(\sigma,\pi)$ lie in $F(L)$. For large $\sigma$, step 2.3 puts $b(\sigma)$ in the neighborhood of the retraction $R$. The same calculation now gives $$b'=-\frac1\pi K(0,a)(a'-a)+q,\qquad |q|\le C e(\sigma)+C e^{-\sigma}\sqrt{e(\sigma)}.$$ Let $c(\sigma)=R(b(\sigma))\in F(L)$. By step 3.1 and $|a'-a|+|b-a|\le C\sqrt{e(\sigma)}$, $$|dR_bK(0,a)(a'-a)|\le C\bigl(|a'-a|^2+|b-a|\,|a'-a|\bigr)\le C e(\sigma).$$ Boundedness of $dR$ therefore gives the same integrable bound for $|c'|$. Thus $c(\sigma)$ converges to a point of compact $F(L)$. Moreover $|b-c|\le C|b-a|\to0$, since $R(a)=a$, and step 2.3 proves that every $V(\sigma,\tau)$ converges uniformly to that same point. The endpoint contribution has been estimated quadratically, rather than discarded. [step 2.2, step 3.1, step 2.3, algebra]
+
+5.1 By the inverse homeomorphism of $F$, steps 3.2 and 4.1 give a unique continuous extension of $u$ to the puncture, with value on $L$ in the boundary case. Localize now in a smooth target chart about that limiting value; in the boundary case use any smooth submanifold chart flattening $L$ to $\mathbb R^m$. The transformed map is continuous and has square-integrable first derivatives off zero. It belongs to $W^{1,2}$ across zero. For the interior assertion, multiply a compact test by a radial cutoff vanishing on radius $\varepsilon$ and equal to one outside radius $2\varepsilon$. In integration by parts the cutoff-error term is at most $C\|u\|_\infty\|\varphi\|_\infty\varepsilon$, since the cutoff gradient has $L^1$ norm $O(\varepsilon)$. All other terms converge by integrability. This proves the weak derivative identity on the whole disk with the original $L^2$ derivative. On a half-disk the identical cutoff argument works, or one can note that zero lies on its physical boundary and the weak identities in its open interior are already available with finite $L^2$ norm up to that edge. The equation holds almost everywhere and hence weakly after filling the measure-zero point. [step 1.1, step 3.2, step 4.1, construct, algebra]
+
+6.1 The coordinate chain rule needed in step 5.1 follows by smooth mollification on smaller patches: continuity gives uniform convergence of coefficient compositions and the weak derivatives converge in $L^2$, so the classical smooth chain rule passes to distributions. Thus the transformed coefficients remain smooth, the boundary plane remains totally real, and all hypotheses of [F2] hold. That lemma proves a smooth extension, including the boundary case. Its boundary value lies in $L$ by step 4.1. The extension adds no energy, since its new point has measure zero. [F2, step 5.1, algebra]
+
+7.1 Finally, for an autonomous plane solution use the holomorphic coordinate $z=1/w$ at infinity; conformal invariance preserves finite energy and produces a punctured-disk solution of the same autonomous equation. The proved interior assertion fills it and gives a sphere map. For an upper-half-plane solution use $z=-1/w$, which preserves the upper half-plane and its real boundary; the boundary assertion fills infinity. The upper half-plane together with that point is smoothly conformally a closed disk, as is seen explicitly by a Mobius map from the half-plane to the disk. All other finite boundary points were already smooth. These are statements about one finite-energy map; they do not infer compactification, no-neck convergence, or gluing for a sequence. [step 1.2, step 6.1, construct, algebra] ∎

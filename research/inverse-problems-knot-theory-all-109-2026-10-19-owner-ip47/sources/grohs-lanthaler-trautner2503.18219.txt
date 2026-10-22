@@ -1,0 +1,2859 @@
+PDF PAGE 1
+IMA Journal of Numerical Analysis (2026) , 1–43
+https://doi.org/
+Theory-to-Practice Gap for Neural Networks and Neural Operators
+PHILIPP GROHS
+Department of Mathematics, University of Vienna, 1090 Wien, Vienna, Austria
+SAMUEL LANTHALER
+G-Research, 1 Soho Pl, London, United Kingdom
+AND
+MARGARET TRAUTNER*
+Department of Computing and Mathematical Sciences, California Institute of Technology, 1200 E
+California Blvd, Pasadena, CA, USA
+*Corresponding author: trautner@utexas.edu
+[Received on 14 November 2025]
+This work studies the sample complexity of learning with ReLU neural networks and neural operators.
+For mappings belonging to relevant approximation spaces, we derive upper bounds on the best-possible
+convergence rate of any learning algorithm, with respect to the number of samples. In the finite-
+dimensional case, these bounds imply a gap between the parametric and sample complexities of learning,
+known as the theory-to-practice gap. In this work, a unified treatment of the theory-to-practice gap is
+achieved in a general Lp-setting, while at the same time improving available bounds in the literature.
+Furthermore, based on these results the theory-to-practice gap is extended to the infinite-dimensional
+setting of operator learning. Our results apply to Deep Operator Networks and integral kernel-based
+neural operators, including the Fourier neural operator. We show that the best-possible convergence rate
+in a Bochner Lp-norm is bounded by rates of order 1/p.
+Keywords: approximation theory; operator learning; neural networks; error analysis.
+1. Introduction
+Deep learning has had remarkable success in a wide range of tasks such as speech recognition, computer
+vision, or natural language processing [17]. Increasingly this methodology is also used in the scientific
+domain, with applications to protein folding [22], plasma physics [13] and numerical weather prediction
+[5, 27, 43]. However, the theoretical underpinnings of this field remain incomplete, and significant
+advances are still required to understand the empirical success of neural networks in these diverse
+applications. In many of these tasks, the goal is to approximate an unknown mapping based on a dataset
+consisting of input- and output-pairs, so-called supervised learning. This has motivated a surge of
+theoretical work aimed at deepening our understanding of supervised learning with neural networks.
+Theoretical error estimates for supervised learning are usually obtained by splitting the overall error
+into two contributions [10]: the approximation error and the generalization error. The approximation
+error measures the best-possible error that can be achieved by a given architecture. The generalization
+error bounds the difference between this best-possible error and the error achieved by empirical risk
+minimization, i.e. optimization based on a finite number of empirical data samples. This decomposition
+captures a trade-off between model expressivity (or parametric complexity), and generalization from a
+finite amount of data, i.e. the sample complexity.
+© The Author(s) 2026.
+arXiv:2503.18219v2  [cs.LG]  21 Jul 2026
+
+PDF PAGE 2
+2
+GROHS, LANTHALER, TRAUTNER
+The study of the expressivity of neural networks dates back several decades to foundational
+work such as that of Cybenko [11] and Hornik, Stinchcombe, and White [20], which focused on
+qualitative universality theorems. Motivated by the need to better explain the empirical efficiency of
+deep neural networks in applications, there has recently been increased interest in deriving quantitative
+approximation guarantees. These relate achievable approximation errors to key factors, such as the
+depth, width or choice of activation function [6, 14, 15, 18, 47]. What is striking about these results
+is that the derived approximation rates are generally far superior to the rates that are achievable by
+classical numerical representations. This fact makes deep learning methods potentially appealing for
+applications in numerical analysis where a high convergence rate is often desired.
+The Theory-to-Practice Gap. Despite these encouraging results, any actual numerical approximation
+algorithm must operate with limited information on the function to be approximated – typically in the
+form of a finite number of samples of the function itself, or samples of a local (differential) operator
+applied to the function. It is therefore a key question whether the theoretically established approximation
+rates can be retained under such limited information.
+For this reason, the sample complexity of deep learning has also been of recent focus. Of particular
+relevance to the present work are the articles [1, 4, 18]. An informal summary of their results is as
+follows. First, define by Uα([0,1]d) the set of functions on [0,1]d which, for any n ∈N, can be
+approximated by a neural network ψn with at most n non-zero weights, and with approximation error
+∥f −ψn∥L∞≤n−α. We refer to the approximation rate α as the parametric convergence rate, since this
+rate holds with respect to the number of neural network parameters n.
+Second, to address the sample complexity of computing such an approximation, [18] considers
+(optimal) reconstruction methods aiming to reconstruct
+f ∈Uα([0,1]d) from point samples
+f(x1),..., f(xN), and examines limits on the best possible guaranteed convergence rate – not in terms
+of the number of parameters but in the number of samples N.
+More formally, [18] asks for the optimal convergence rate β∗> 0 for which there exists a
+reconstruction method A : f 7→Q(f(x1),..., f(xN)) defined in terms of a reconstruction mapping
+Q : RN →Lp([0,1]d), with a convergence guarantee of the form supf∈Uα ∥f −A(f)∥Lp ≤CN−β∗.
+Compared to the parametric convergence rate α, which describes the optimal convergence rate in terms
+of the number of parameters, the rate β∗is now in terms of the available information – the N function
+samples. This is of practical relevance, since a single function evaluation requires a certain minimal
+computational time, any upper bound on β∗yields a corresponding lower bound on the time to compute
+an accurate approximation for f ∈Uα.
+A naive counting argument based on the number of degrees of freedom would suggest that
+β∗= α coincides with the optimal parametric convergence rate α. Indeed, it might be hoped that the
+determination of n parameters of the approximating neural network ψn requires N = n point evaluations,
+implying that for A(f) := ψn, we have ∥f −A(f)∥L∞≤n−α = N−α. As is well-known, this intuition
+is indeed correct for reconstruction by several popular methods, including polynomials, trigonometric
+polynomials and certain kernel methods [42]. However, the results of [18] show that this intuition does
+not carry over to the sample complexity of neural network approximation spaces: In this case, there
+is a gap between β∗and α. In fact, even in the limit α →∞, the optimal sample convergence rate β∗
+remains uniformly bounded and, for p = ∞it even holds that β∗≲1
+d which implies the existence of a
+curse of dimension. The gap between α and β∗is termed the theory-to-practice gap as it describes the
+discrepancy between the complexity of a theoretically possible approximation and one that can actually
+be computed from the information at hand.
+
+PDF PAGE 3
+THEORY-TO-PRACTICE GAP FOR NN AND NO
+3
+A first contribution of this work is Theorem 2.3 which further extends and sharpens the bounds
+from [18] in the setting of finite-dimensional function approximation. Roughly speaking, we show that
+in a general Lp-setting, β∗≤1
+p + 1
+d which means that for high input dimensions (i.e., large d), no
+actual algorithm is capable of beating the standard Monte-Carlo rate 1
+p – irrespective of the parametric
+convergence rate α. Compared to results in [18] which, roughly speaking, established bounds of the
+form β∗≤1
+p +1, this constitutes a significant improvement if the input dimension d is large.
+Operator Learning. In addition to the aforementioned works on neural networks in finite-dimensions,
+there has also been increasing interest in operator learning [26]. The aim of operator learning is
+to approximate non-linear operators G : X →Y , mapping between infinite-dimensional function
+spaces X and Y . In applications, such operators often arise as solution operators associated with a
+partial differential equation, but more general classes of operators can be considered. To approximate
+such G , operator learning frameworks generalize neural networks to this infinite-dimensional setting.
+Empirically, the most successful approach is usually based on supervised learning from training data,
+and hence the same questions as discussed above also arise in this context.
+Early work on operator learning dates back to a foundational paper by Chen and Chen [9]. Without
+any claim of completeness, we mention a number of works studying the parametric complexity of
+operator learning which aim to relate the model size to the achieved approximation accuracy, including
+both upper bounds on the required number of parameters, e.g. [16, 19, 23, 37], as well as lower
+bounds, e.g. [28, 29, 32, 39]. The data (or sample) complexity of operator learning has e.g. been
+studied in [2, 3, 34]. While the present work is restricted to the noiseless setting, some related work has
+investigated the sample complexity of operator learning in the setting of noisy data [8, 12, 35, 44, 45].
+In connection with the present work, we also highlight [25], where approximation spaces for the
+Fourier neural operator are introduced, and upper bounds on the sample complexity of learning on these
+spaces are discussed. Closely related spaces will be discussed in this work. These spaces, which are an
+infinite-dimensional generalization of the approximation spaces Uα introduced in [18] (and described
+above), represent classes of Deep Operator Networks and kernel-integral based neural operators with a
+parametric approximation rate α. They will be introduced and studied in Sections 3.4 and 3.5.
+In the context we are able to generalize the theory-to-practice gap to the infinite-dimensional setting:
+Assuming access to an optimal algorithm for the reconstruction of the underlying mapping from N
+samples, we show that the best achievable convergence rate N−β∗on the relevant approximation spaces
+is upper bounded by 1/p, if the reconstruction error is measured in a Bochner Lp-norm. These results are
+provided in Theorems 3.12 and 3.14 (Deep Operator Networks) and Theorems 3.20 and 3.22 (kernel-
+integral based neural operators) and they uncover fundamental limits on the convergence guarantees
+that are possible in the context of operator learning: one cannot improve on the standard Monte-Carlo
+rate, irrespective of how high the parametric convergence rate may be.
+In summary, this work makes the following contributions:
+•
+We give a unified treatment of the theory-to-practice gap in a general Lp-setting, valid for arbitrary
+p ∈[1,∞], sharpening available bounds in the literature. Specifically, the bounds we achieve in the
+finite-dimensional setting is sharper than that of [18].
+•
+Going beyond the setting of [18], we extend the theory-to-practice gap to the infinite-dimensional
+setting of operator learning. Our results apply to Deep Operator Networks and integral kernel-based
+neural operators, including the Fourier neural operator.
+•
+For these architectures, we show that the optimal convergence rate in a Bochner Lp-norm is bounded
+by β∗≤1/p, for any p ∈[1,∞).
+
+PDF PAGE 4
+4
+GROHS, LANTHALER, TRAUTNER
+•
+We furthermore show that β∗= 0 for uniform approximation over a compact set of input functions,
+i.e. no algebraic convergence rates are possible.
+Ultimately, the results of this work suggest that the practical limitation of learning operators arises
+from an information-theoretic barrier rather than a model expressivity barrier. In other words, one is
+limited by the ability to extract information from finite data samples.
+1.1. Overview
+In Section 2 we first review neural network approximation spaces and relevant notions from sample
+complexity theory. In Section 2.4, we then state and prove our main result in the finite dimensional
+setting, Theorem 2.3. In Section 3, we extend the finite-dimensional result to operator learning. After
+a brief review of relevant concepts, we discuss the approximation-theoretic setting in Section 3.2. In
+Section 3.3 we state an abstract result, Proposition 3.6, which establishes a connection between the
+finite- and infinite-dimensional settings. Finally, based on this abstract result, we derive an infinite-
+dimensional theory-to-practice gap for approximation in Lp- and sup-norms. Section 3.4 discusses Deep
+Operator Networks, resulting in Theorems 3.12 and 3.14, respectively. Section 3.5 discusses kernel-
+integral based neural operators, resulting in Theorems 3.20 and 3.22. We end with conclusions and
+further discussion in Section 4.
+1.2. Notation
+For a vector v ∈Rd, we indicate by |v| the Euclidean norm, and for a matrix A ∈Rm×d, we denote
+by ∥A∥= sup|v|=1 |Av| its operator norm. Given a domain D ⊂Rd, we denote by W 1,∞(D;Rm) the
+set of measurable functions u : D →Rm with uniformly bounded values and uniformly bounded weak
+derivatives (Lebesgue almost everywhere). The corresponding norm is defined as
+∥u∥W 1,∞(D;Rm) = ∥u∥L∞(D;Rm) +|u|W 1,∞(D;Rm),
+where |u|W 1,∞(D;Rm) = esssupx∈D ∥Du(x)∥denotes the W 1,∞seminorm. Given a topological space X ,
+we will denote by P(X ) the set of all probability measures on X under the Borel σ-algebra. For two
+measures µ and ν, on a measure space (Ω,Σ), we will write µ ≥ν to indicate that µ(B) ≥ν(B) for any
+element B ∈Σ.
+2. A generalized gap in finite dimension
+The goal of this section is to derive new lower bounds on the sample complexity of ReLU neural
+network approximation spaces, in a finite-dimensional setting. To describe the mathematical setting, we
+recall relevant notions from [18, Sect. 2.1 and 2.2], below.
+2.1. ReLU neural networks
+Following [18], a neural network is defined as a tuple ψ = ((A1,b1),...,(AL,bL)), consisting of
+matrices Aj ∈Rdj×d j−1 and bias vectors b j ∈Rdj. The number of layers L(ψ) := L is the depth of
+ψ, and W(ψ) := ∑L
+j=1 (∥A j∥ℓ0 +∥bj∥ℓ0) is used to denote the number of (nonzero) weights of ψ.
+Here, the notation ∥A∥ℓ0 refers to the number of nonzero entries of a matrix (or vector) A. Finally,
+we write din(ψ) := d0 and dout(ψ) := dL for the input and output dimension of ψ, and we set
+∥ψ∥NN := max j=1,...,L max{∥Aj∥∞,∥b j∥∞}, where ∥A∥∞:= maxi,j |Ai,j|.
+
+PDF PAGE 5
+THEORY-TO-PRACTICE GAP FOR NN AND NO
+5
+The function Rσψ computed by ψ, is defined via an activation function σ. In this paper, we restrict
+attention to ReLU networks, corresponding to σ : R →R, x 7→max{0,x}, and acting componentwise
+on vectors. The realization Rσψ : Rd0 →RdL is then given by
+Rσψ := TL ◦(σ ◦TL−1)◦···◦(σ ◦T1)
+where
+Tj :
+
+Rdj−1
+→
+Rdj
+x
+7→
+A jx+bj .
+With slight abuse of notation, we usually do not distinguish notationally between ψ and its ReLU-
+realization Rσψ. Thus, we simply say that ψ : Rd0 →RdL is a (ReLU) neural network, when
+referring to the realization associated with a specific setting of the weights matrices and biases
+ψ = ((A1,b1),...,(AL,bL)).
+2.2. Neural network approximation spaces
+We next summarize the relevant approximation spaces Aα,∞
+ℓ
+(D) for a domain D ⊂Rd; they depend on
+a generalized ‘smoothness’ parameter α > 0 and a depth-growth function ℓ= ℓ(n). In short, Aα,∞
+ℓ
+(D)
+contains all functions f : D →R that can be uniformly approximated at rate n−α, by ReLU neural
+networks with at most n non-zero weights and biases, depth at most ℓ(n), and weight magnitude at
+most 1. The approximation spaces formulated below are similar to the approximation classes described
+in the seminal work [14] in Section 11.2. For the purposes of this work, we take the definitions a step
+further by putting additional depth and weight magnitude bounds on the ReLU neural network class
+Σℓ
+d,n defined below and defining a quasi-norm on the approximation class.
+More precisely, given an input dimension d ∈N and a non-decreasing depth-growth function ℓ:
+N →N∪{∞}, we define
+Σℓ
+d,n :=
+
+ψ : Rd →R
+
+ψ NN with din(ψ) = d,dout(ψ) = 1,
+W(ψ) ≤n,L(ψ) ≤ℓ(n),∥ψ∥NN ≤1
+
+.
+Then, given a measurable subset D ⊂Rd, p ∈[1,∞], and α ∈(0,∞), for each measurable f : D →R,
+we define
+Γα,p(f) := max
+
+∥f∥Lp(D), sup
+n∈N
+h
+nα ·dp,D
+
+f,Σℓ
+d,n
+i
+∈[0,∞],
+where dp,D(f,Σ) := infg∈Σ ∥f −g∥Lp(D).
+As pointed out in [18], Γα,p is not a (quasi-)norm. However, one can define a neural network
+approximation space quasi-norm ∥·∥Aα,p
+ℓ
+by
+∥f∥Aα,p
+ℓ
+:= inf{θ > 0 : Γα,p(f/θ) ≤1} ∈[0,∞],
+giving rise to the approximation space
+Aα,p
+ℓ
+:= Aα,p
+ℓ
+(D) :=
+n
+f ∈Lp(D) : ∥f∥Aα,p
+ℓ
+< ∞
+o
+.
+We denote by Uα,p
+ℓ
+(D) ⊂Aα,p
+ℓ
+(D) the unit ball,
+Uα,p
+ℓ
+:= Uα,p
+ℓ
+(D) :=
+n
+f ∈Lp(D) : ∥f∥Aα,p
+ℓ
+≤1
+o
+.
+As shown in [18], Uα,p
+ℓ
+(D) consists precisely of those f for which dp,D(f,Σℓ
+d,n) ≤n−α for all n ∈N.
+We will focus on the special case p = ∞, in the following.
+
+PDF PAGE 6
+6
+GROHS, LANTHALER, TRAUTNER
+The following quantity is crucial in characterizing the sample complexity of neural network
+approximation spaces [18]:
+ℓ∗:= sup
+n∈N
+ℓ(n) ∈N∪{∞}.
+(2.1)
+It describes the maximal depth that is allowed for a neural network approximant of a given function.
+Remark 2.1
+We will later extend the definition of the approximation spaces Aα,∞
+ℓ
+to the infinite-
+dimensional operator learning setting. Specifically, in Section 3.4 we define Aα,∞
+ℓ,DON for a class of
+DeepONets and in Section 3.5, we define Aα,∞
+ℓ,NO for (integral-kernel based) Neural Operators.
+2.3. Sample Complexity
+By definition, the approximation of a function f ∈Aα,∞
+ℓ
+(D) by neural networks can be achieved at a
+rate n−α, in terms of the required number of neural network parameters. This rate is fast, when α ≫1,
+thus allowing for efficient approximation in principle. Despite this fact, it has been shown in [18] that
+such high rates, in terms of the parameter count n, do not imply correspondingly high convergence rates
+when considering the required number of samples to train such neural networks. This phenomenon is
+referred to as the theory-to-practice gap.
+Below, we recall mathematical notions from [18], which quantify the sample complexity of a set of
+continuous functions U ⊂C(D), where D ⊂Rd is a subdomain. We are mostly interested in the setting
+where U = Uα,∞
+ℓ
+(D) is the unit ball in the relevant neural network approximation space.
+2.3.1. The Deterministic Setting
+Given U ⊂C(D), we now consider the approximation of f ∈U with respect to the Lp(D)-norm.
+A map A : U →Lp(D) is called a deterministic method using N ∈N point measurements, if there
+exists x = (x1,...,xN) ∈DN and a map Q : RN →Lp(D) such that
+A(f) = Q(f(x1),..., f(xN))
+∀f ∈U.
+The set of all deterministic methods using N point measurements will be denoted by Algdet
+N (U,Lp(D)).
+We define the error of A for approximation in Lp as
+e(A,U,Lp(D)) := sup
+f∈U
+∥f −A(f)∥Lp(D).
+The optimal error for (deterministic) approximation in Lp using N point samples is then
+edet
+N (U,Lp(D)) :=
+inf
+A∈Algdet
+N (U,Lp(D))
+e(A,U,Lp(D)).
+Finally, the optimal order of convergence for (deterministic) approximation in Lp using N point
+samples is
+β det
+∗(U,Lp(D)) := sup
+
+β ≥0 : ∃C > 0s.t. ∀N ∈N,
+edet
+N (U,Lp(D)) ≤C ·N−β
+
+.
+(2.2)
+Example 2.2
+As an example, for a fixed set of points {x1,...,xN}, the optimal recovery algorithm is
+known, although difficult to compute in practice. It is obtained by returning the center of the smallest
+
+PDF PAGE 7
+THEORY-TO-PRACTICE GAP FOR NN AND NO
+7
+Lp ball in U containing the set { bf : f ∈U, bf(xi) = f(xi), i ∈[N]}. This ball is known as the Chebyshev
+ball [40]. Furthermore, returning any function in this set incurs error only up to a factor of 2 greater
+than the optimal error. So the deterministic setting decomposes into two parts; first, choosing sample
+points, and second, computing the center of the Chebyshev ball [14, Section 10.2].
+2.3.2. The Randomized Setting
+Generalizing the deterministic setting above, we consider randomized algorithms. A randomized
+method using N ∈N point measurements (in expectation) is a tuple (A,N) consisting of a family
+A = (Aω)ω∈Ωof maps Aω : U →Lp(D) indexed by a probability space (Ω,F,P) and a measurable
+function N : Ω→N with the following properties:
+1.
+for each f ∈U, the map Ω→Lp(D),ω 7→Aω(f) is measurable with respect to the Borel σ-algebra
+on Lp(D),
+2.
+for each ω ∈Ω, we have Aω ∈Algdet
+N(ω)(U,Lp(D)),
+3.
+Eω[N(ω)] ≤N.
+We say that (A,N) is strongly measurable if the map Ω×U →Lp(D),(ω, f) 7→Aω(f) is measurable,
+where U ⊂C(D) is equipped with the Borel σ-algebra induced by the uniform norm. We denote the set
+of all strongly measurable (A,N) satisfying the above properties by AlgN(U,Lp(D)).
+The expected error of a randomized algorithm (A,N) for approximation in Lp is defined as
+e((A,N),U,Lp(D)) := sup
+f∈U
+Eω
+
+∥f −Aω(f)∥Lp(D)
+
+.
+(2.3)
+The optimal randomized error for approximation in Lp using N point samples (in expectation) is
+eran
+N (U,Lp(D)) :=
+inf
+(A,N)∈AlgN(U,Lp(D))e((A,N),U,Lp(D)).
+(2.4)
+Finally, the optimal randomized order for approximation in Lp using point samples is
+β∗(U,Lp(D)) := sup
+
+β ≥0 : ∃C > 0 s.t. ∀N ∈N,
+eran
+N (U,Lp(D)) ≤C ·N−β
+
+.
+(2.5)
+We point out that a deterministic method is a special case of a randomized method, and hence
+β det
+∗(U,Lp(D)) ≤β∗(U,Lp(D)).
+(2.6)
+Since our aim is to derive upper bounds on these convergence rates, we may restrict attention to
+β∗(U,Lp(D)), implying corresponding bounds also for β det
+∗(U,Lp(D)).
+In the following, we in particular derive upper bounds for the exponents β∗(Uα,∞
+ℓ
+,Lp), where
+Uα,∞
+ℓ
+= Uα,∞
+ℓ
+([0,1]d) and Lp = Lp([0,1]d) with 1 ≤p ≤∞.
+2.4. Theory-to-practice gap
+It was shown in [18, Theorem 1.1 and 1.2], that the best possible convergence rate of any reconstruction
+method on Uα,∞
+ℓ
+:= Uα,∞
+ℓ
+([0,1]d) based on point samples is upper bounded as follows. When the
+
+PDF PAGE 8
+8
+GROHS, LANTHALER, TRAUTNER
+reconstruction error is measured with respect to the L∞([0,1]d) norm, the rate is upper bounded by
+β∗(Uα,∞
+ℓ
+,L∞) ≤1
+d ·
+α
+α +⌊ℓ∗/2⌋.
+(2.7)
+When measuring the reconstruction error with respect to the L2([0,1]d) norm, the bound becomes
+β∗(Uα,∞
+ℓ
+,L2) ≤1
+2 +
+α
+α +⌊ℓ∗/2⌋.
+(2.8)
+These are the tightest known upper bounds on the convergence rates for the most relevant range α ≥
+max(2,⌊ℓ∗/2⌋); for smaller values of α refined estimates are given in [18, Theorems 5.1 and 7.1].
+Astonishingly, even in the limit α →∞, the best possible reconstruction rates are upper bounded by
+1/d and 3/2, respectively.
+Our first goal in the next subsection is to extend and sharpen the bounds in (2.7) and (2.8) for
+arbitrary d ∈N and p ∈[1,∞], with a unified proof.
+Main result in finite dimension We prove the following theorem:
+Theorem 2.3
+Let p ∈[1,∞]. Let ℓ: N →N ∪{∞} be non-decreasing with ℓ∗≥3. Given d ∈N and
+α ∈(0,∞), consider
+U := Uα,∞
+ℓ
+(Rd)|[0,1]d :=
+n
+f|[0,1]d
+ f ∈Uα,∞
+ℓ
+(Rd)
+o
+,
+such that U ⊂C([0,1]d). Then
+β∗(U,Lp([0,1]d)) ≤1
+p + 1
+d ·
+α
+α +⌊ℓ∗/2⌋.
+(2.9)
+Since the restriction U = Uα,∞
+ℓ
+(Rd)|[0,1]d is a subset of Uα,∞
+ℓ
+([0,1]d), Theorem 2.3 implies the
+following corollary:
+Corollary 2.4
+Denote Uα,∞
+ℓ
+= Uα,∞
+ℓ
+([0,1]d). Under the assumptions of Theorem 2.3, we have
+β∗(Uα,∞
+ℓ
+,Lp([0,1]d)) ≤1
+p + 1
+d ·
+α
+α +⌊ℓ∗/2⌋.
+Remark 2.5
+The upper bound (2.9) implies in particular, that the best possible convergence rate
+of any randomized or deterministic reconstruction method is upper bounded by β ≤1
+p + 1
+d . In high-
+dimensional applications, this upper bound is approximately 1
+p, implying that algorithms cannot be
+expected to converge at substantially faster than Monte-Carlo rates. It is an open problem whether the
+bound in (2.9) is sharp or whether the bound may be tightened further towards 1
+p.
+2.5. Proof of Theorem 2.3
+Our proof of Theorem 2.3 is based on several technical lemmas and ideas from [18]. The main novelty
+here is a different approach to combining these ingredients: While the derivation in [18] relies on a
+linear combination of (many) hat functions and combinatorial arguments, our proof will be instead be
+based on a random placement of a single hat function, and a probabilistic argument. Thus, the novelty
+
+PDF PAGE 9
+THEORY-TO-PRACTICE GAP FOR NN AND NO
+9
+of our contribution in the finite-dimensional setting is twofold; (i) the obtained bounds are sharper and
+(ii) the probabilistic proof is new. In obtaining this result, we have lifted Lemmas 2.7 and 2.8 with minor
+modifications from [18], and Lemmas 2.6 and 2.9 are entirely new.
+Outline Before detailing the proof of Theorem 2.3, we first outline the general idea on the domain
+[0,1]d. Our first observation is that, for any choice of evaluation points x1,...,xN ∈[0,1]d, there exists
+a void with inner diameter of order N−1/d; more precisely, we show that, independently of the choice
+of x1,...,xN, for a randomly drawn y ∼Unif([0,1]d), we have
+min
+j=1,...,N |y−xj| ≥1
+4N−1/d,
+(2.10)
+with probability at least 1/2.
+Given the inevitable presence of such a void, we are then tempted to place a function g with support
+inside this void. If we assume that ∥g∥L∞≤1, or indeed that g is the characteristic function of a cube
+in this void, then such g can have an Lp-norm as large as ∥g∥Lp ∼N−1/p. Given only point values at
+x1,...,xN, such g will be indistinguishable from the zero-function. Thus, if A is a reconstruction method
+relying only on the point values at x1,...,xN, then A(g) = A(0). It follows that ∥g∥Lp ≤∥g−A(g)∥Lp +
+∥0−A(0)∥Lp and hence at least one of ∥g−A(g)∥Lp or ∥0−A(0)∥Lp must be on the order of magnitude
+of ∥g∥Lp([0,1]d) ∼N−1/p. As a consequence, the achievable convergence rate β of a reconstruction
+method on characteristic functions is fundamentally limited to β ≤1
+p.
+To link the above observation with reconstruction methods on neural network approximation spaces,
+we will recall (cp. Lemma 2.7, below) that ReLU neural networks can efficiently approximate certain
+localized functions ϑM,y. These functions are locally supported inside a cube of side-length r := 1/M
+with center y ∈[0,1]d. In our proof, the ϑM,y with M ∼N1/d will act as a replacement of the
+characteristic function g of the outline, above. The main difference with the characteristic function
+is that the gradient of ϑM,y cannot be arbitrarily large, if we constrain it to belong to the unit ball Uα,∞
+ℓ
+in the approximation space. This limit on the gradient introduces an additional correction in our upper
+bound, which finally will take the form β∗≤1
+p +(correction depending on α,ℓ).
+Details We now proceed with the detailed proof of Theorem 2.3. For any placement of evaluation points
+x1,...,xN ∈[0,1]d, we first show that a point y ∈[0,1]d picked uniformly at random has a positive
+chance of sitting in a “void” with interior diameter ∼N−1/d:
+Lemma 2.6 (Existence of a void)
+Let d,N ∈N. Let x1,...,xN ∈[0,1]d be given. Consider y ∼
+Unif([0,1]d) drawn uniformly at random. Then
+Proby
+
+min
+j=1,...,N |y−xj|∞> 1
+4N−1/d
+
+≥1
+2.
+(2.11)
+Proof Let us fix r > 0 for the moment. Applying a union bound, we note that
+Proby
+
+min
+j=1,...,N |y−xj|∞≤r
+
+= Proby
+
+y ∈SN
+j=1
+ xj +[−r,r]d
+≤
+N
+∑
+j=1
+Vol
+
+xj +[−r,r]d
+= N(2r)d.
+
+PDF PAGE 10
+10
+GROHS, LANTHALER, TRAUTNER
+It thus follows that, if r := 1
+4N−1/d ≤1
+2(2N)−1/d, then
+Proby
+
+min
+j=1,...,N |y−xj|∞≤r
+
+≤1
+2.
+Hence, we must have Proby
+
+min j=1,...,N |y−xj|∞> r
+
+≥1
+2, as claimed.
+□
+We now state the following fundamental result, which follows from [18, Lemma 3.4]. The main
+insight of this lemma is that ReLU neural networks can efficiently approximate a localized function
+ϑM,y : Rd →[0,1], which is supported in a cube of side-length 2/M around y, and which “fills in” a
+significant fraction of this cube.
+Lemma 2.7 (Localized networks)
+Given d ∈N, M ≥1 and y ∈[0,1]d, there exists a function ϑM,y :
+Rd →[0,1] with the following properties:
+•
+ϑM,y(x) depends continuously on x and y; in fact, we have that ϑM,y(x) = ϑM(x −y) is a shift of a
+neural network ϑM.
+•
+ϑM,y(x) = 0 whenever |x−y|∞≥1/M,
+•
+For any p ∈[1,∞], there exists C = C(d, p) > 0 satisfying,
+∥ϑM,y∥Lp([0,1]d) ≥CM−d/p,
+•
+There exists a constant κ = κ(γ,α,d,ℓ,c) > 0, such that
+gM,y := κM−α/(α+⌊ℓ∗/2⌋)ϑM,y ∈Uα,∞
+ℓ
+(Rd).
+Proof The existence of ϑM,y and the other properties are shown in [18], see in particular [18, Lemma
+3.4].
+□
+We also state the following result, which is a minor variant of [18, Lemma 2.3]:
+Lemma 2.8
+Let D ⊂Rd and /0 ̸= U ⊂C(D) be bounded, and let 1 ≤p ≤∞. Assume that there exists
+λ ∈[0,∞), κ > 0, such that for every N ∈N, there exists a probability space (Ξ,P) and a random
+variable ψ : Ξ →U, ξ 7→ψξ, such that
+Eξ
+
+∥ψξ −A(ψξ)∥Lp(D)
+
+≥κN−λ,
+∀A ∈Algdet
+N (U,Lp(D)).
+Then β∗(U,Lp(D)) ≤λ.
+Proof This follows by the same reasoning as [18, Lemma 2.3].
+□
+Our main interest in this result is when U = Uα,∞
+ℓ
+(Rd)|[0,1]d. Combining the results from Lemmas
+2.6, 2.7 and 2.8, we now come to the proof of Theorem 2.3.
+
+PDF PAGE 11
+THEORY-TO-PRACTICE GAP FOR NN AND NO
+11
+Proof of Theorem 2.3 Let d,N ∈N be given. Recall that U := Uα,∞
+ℓ
+(Rd)|[0,1]d. Our goal is to apply
+Lemma 2.8 to deterministic reconstruction methods based on N point-values,
+A ∈Algdet
+N (U,Lp([0,1]d)).
+To construct a suitable probability space (Ξ,P) and random function Ξ →U, we first define a probability
+space as Ξ := [0,1]d × {−1,+1} endowed with the Borel σ-algebra and define P := Unif([0,1]d) ⊗
+Unif({−1,+1}). We will denote elements of Ξ as ξ = (y,σ). This defines our probability space.
+We next fix
+M := 4N1/d.
+(2.12)
+With this choice of M, we then define ψξ := ψ(y,σ) := σgM,y ∈U, where gM,y is the function of Lemma
+2.7. Thus, ψξ = ψ(y,σ) is a random function, given by a random shift of a localized neural network
+ϑM by y ∼Unif([0,1]d) and a random choice of sign σ ∼Unif({−1,+1}). This defines our random
+variable
+ψ : Ξ →U.
+(2.13)
+Invoking Lemma 2.8, it will suffice to prove the following claim, formulated as a lemma for later
+reference:
+Lemma 2.9
+Let ψ : Ξ →U, ξ 7→ψξ be the random variable defined above (2.13), where U :=
+Uα,∞
+ℓ
+(Rd)|[0,1]d. There exists a constant κ, independent of N, such that
+Eξ
+h
+∥ψξ −A(ψξ)∥Lp([0,1]d)
+i
+≥κN−λ,
+(2.14)
+for all A ∈Algdet
+N (U,Lp([0,1]d)) and where λ := 1
+p + 1
+d ·
+α
+α+⌊ℓ∗/2⌋.
+The claim of Theorem 2.3 is then immediate from Lemma 2.8 and 2.9.
+Proof of Lemma 2.9. Let A ∈Algdet
+N (Uα,∞
+ℓ
+(Rd),Lp([0,1]d)) be given. Let Q : RN →Lp([0,1]d) be
+the reconstruction mapping associated with A and let x1,...,xN ∈Rd denote the associated evaluation
+points, such that A(f) = Q(f(x1),..., f(xN)). We first observe that – whatever the choice of x1,...,xN
+– we have, by Lemma 2.6 and our choice of M = 4N1/d in (2.12),
+Proby
+
+min
+j=1,...,N |y−xj|∞> 1/M
+
+≥1
+2.
+Now consider the random event
+E =
+
+(y,σ) ∈Ξ
+ψ(y,σ)(x1) = ··· = ψ(y,σ)(xN) = 0
+	
+= {(y,σ) ∈Ξ|σgM,y(x1) = ··· = σgM,y(xN) = 0},
+where the randomness is introduced by y ∼Unif([0,1]d) and σ ∼Unif{−1,+1}. Since gM,y is supported
+in the shifted cube (y+[−1/M,1/M]d) (cp. Lemma 2.7), it follows that
+Proby,σ[E] ≥Proby
+
+min
+j=1,...,N |y−xj|∞> 1/M
+
+≥1
+2.
+
+PDF PAGE 12
+12
+GROHS, LANTHALER, TRAUTNER
+We can now finish the proof. To this end, we first observe that
+Eξ
+h
+∥ψξ −A(ψξ)∥Lp([0,1]d)
+i
+≥Eξ
+h
+∥ψξ −A(ψξ)∥Lp([0,1]d) | E
+i
+Probξ[E]
+≥1
+2Eξ
+h
+∥ψξ −A(ψξ)∥Lp([0,1]d) | E
+i
+= 1
+2Eξ
+h
+∥ψξ −A(0)∥Lp([0,1]d) | E
+i
+.
+(2.15)
+We next note that the random variable ψξ = σgM,y, conditioned on E, has the same distribution
+as −ψξ = −σgM,y conditioned on E; this follows from the fact that E and P are invariant under
+replacement σ →−σ. Furthermore, it follows from Lemma 2.7 that there exists a constant C =
+C(α,d, p,ℓ) > 0, such that
+∥ψξ∥Lp([0,1]d) = ∥gM,y∥Lp([0,1]d) ≥CM−d/p−α/(α+⌊ℓ∗/2⌋),
+(2.16)
+for all M ≥1 and y ∈[0,1]d. Hence, it follows with
+λ := 1
+p + 1
+d ·
+α
+α +⌊ℓ∗/2⌋,
+that
+2CM−dλ ≤2Eξ
+h
+∥ψξ∥Lp([0,1]d) | E
+i
+(by (2.16))
+= Eξ
+h
+∥ψξ −(−ψξ)∥Lp([0,1]d) | E
+i
+≤Eξ
+h
+∥ψξ −A(0)∥Lp([0,1]d) | E
+i
++Eξ
+h
+∥−ψξ −A(0)∥Lp([0,1]d) | E
+i
+(triangle ineq.)
+= 2Eξ
+h
+∥ψξ −A(0)∥Lp([0,1]d) | E
+i
+(invar. σ →−σ)
+≤4Eξ
+h
+∥ψξ −A(ψξ)∥Lp([0,1]d)
+i
+.
+(by (2.15))
+Thus, we have shown that
+Eξ
+h
+∥ψξ −A(ψξ)∥Lp([0,1]d)
+i
+≥C
+2 M−dλ.
+This implies a bound of the desired form (2.14), since
+C
+2 M−dλ = C
+2
+
+4N1/d−dλ
+=: κN−λ,
+where we recall λ = 1
+p + 1
+d ·
+α
+α+⌊ℓ∗/2⌋, and where the constant κ depends on α,d, p,ℓ, but is independent
+of N. This is (2.14) and concludes our proof.
+□
+
+PDF PAGE 13
+THEORY-TO-PRACTICE GAP FOR NN AND NO
+13
+3. Extension to operator Learning
+We now consider the extension of the theory-to-practice gap to operator learning, i.e. the data-
+driven approximation of operators mapping between infinite-dimensional function spaces. The finite-
+dimensional upper bound (2.9) suggests that in the infinite-dimensional limit, d →∞, the best
+convergence rate in Lp should be upper bounded by 1
+p, independently of α and ⌊ℓ∗/2⌋.
+Our goal in this second half of the paper is to rigorously state and prove such a theory-to-practice
+gap for two prototypical classes of neural operators: deep operator networks, as discussed in [31, 36],
+and a class of integral-kernel based neural operators [24, 30]. Before stating our main results in the
+operator-learning setting, we will first summarize the overall objective of operator learning, and discuss
+suitable infinite-dimensional replacements of the spaces Lp([0,1]d), for 1 ≤p ≤∞in this context. This is
+followed by a definition of the aforementioned prototypical neural operator frameworks, their associated
+operator approximation spaces, and the statement of our main results, establishing a theory-to-practice
+gap in infinite dimensions.
+3.1. Operator Learning
+In the following, we will be interested in the sample complexity of operator learning. To simplify
+our discussion, we will only consider the special case Y = R, i.e. we consider the data-driven
+approximation of non-linear functionals G : X →R. Since our analysis concerns lower bounds on
+the sample complexity (or upper bounds on the optimal convergence rates), the results continue to hold
+if the output space is replaced by a more general Y (finite-dimensional or infinite-dimensional). Thus,
+this reduction can be made without loss of generality. For our analysis, only the fact that the input space
+X is infinite-dimensional will be relevant.
+3.1.1. Sample Complexity of Operator Learning
+With this operator learning setting in mind, we first point out that the discussion of the sample
+complexity of Section 2.3 carries over with only minor changes. For convenience, we repeat the main
+elements here.
+We now consider a set of continuous operators U ⊂C(X ) = C(X ;R) on a separable Banach
+space X . We fix a Banach space of operators V, equipped with a norm ∥·∥V. In analogy with the
+finite-dimensional setting, a map A : U →V will be called a deterministic method using N ∈N point
+measurements, if there exists u = (u1,...,uN) ∈X N, and a map Q : RN →V, such that
+A (G ) = Q(G (u1),...,G (uN)),
+∀G ∈U.
+We recall that each G ∈U is a continuous operator G : X →R, and hence the above expression
+is well-defined. Consistent with our earlier discussion, the set of all deterministic methods using N
+point measurements will be denoted by Algdet
+N (U,V). It will be assumed that U ⊂V with a canonical
+embedding.
+The approximation error of A in V is defined as
+e(A ,U,V) = sup
+G ∈U
+∥A (G )−G ∥V,
+and the optimal error is edet
+N (U,V) = infA ∈Algdet
+N (U,V) e(A ,U,V). The optimal order of convergence for
+deterministic approximation in V using N point samples is defined as in (2.2).
+Randomized methods for operator learning, as well as the corresponding errors and the optimal
+randomized order (2.5) are similarly defined, in analogy with Section 2.3; we here only recall that a
+
+PDF PAGE 14
+14
+GROHS, LANTHALER, TRAUTNER
+randomized method using N point measurement (in expectation) is a tuple (A ,N) consisting of a family
+A = (Aω),ω ∈Ωof maps Aω : U →V indexed by a probability space (Ω,F,P) and a measurable
+function N : Ω→N with the same properties as described there, and with Aω ∈Algdet
+N(ω)(U,V).
+We continue to denote by AlgN(U,V) the set of all strongly measurable randomized methods with
+Eω[N(ω)] ≤N expected point evaluations.
+In the following, we will derive upper bounds on β∗(U,V), where U is the unit ball in an operator
+learning approximation space, and V is a space of operators with distance measured by either an Lp-
+norm with 1 ≤p < ∞, or by a sup-norm. We describe the relevant setting in the next section.
+3.2. Input functions in infinite dimensions
+In the finite-dimensional case, the domain [0,1]d is widely considered as a canonical prototype, and
+results obtained for [0,1]d usually extend to more general bounded domains D ⊂Rd, under mild
+assumptions. In the infinite-dimensional setting, there is no longer such a canonical choice. Therefore,
+we preface our discussion of the infinite-dimensional theory-to-practice gap with the introduction of
+suitable alternatives to the spaces Lp([0,1]d) and C([0,1]d) (the latter corresponding to the limit case
+p = ∞) to be considered in this work.
+Approximation in V = Lp(µ) When the approximation error is measured in an Lp-norm for 1 ≤p < ∞,
+we consider the following prototypical setting: We are given a probability measure µ on the input
+function space X . We then consider the Banach space of p-integrable (real-valued) operators V =
+Lp(µ), with the following Lp-norm:
+∥G ∥Lp(µ) := Eu∼µ [|G (u)|p]1/p .
+Thus, in the infinite-dimensional setting, the probability measure µ replaces the Lebesgue measure on
+[0,1]d. In order to obtain the hardness result, we must ensure that µ is “truly infinite-dimensional”. We
+thus assume that the following d-dependent assumption holds for any d ∈N:
+Assumption 3.1
+There exist linearly independent {e1,...,ed} ⊂X with bi-orthogonal {e∗
+1,...,e∗
+d} ⊂
+X ∗, such that µ ∈P(X ) is the law of
+u = ξ +
+d
+∑
+j=1
+y je j,
+(y1,...,yd) ∼µd, ξ ∼µ⊥
+d ,
+(3.1)
+where
+1.
+The law of (y1,...yd) is of the form µd = ∏d
+j=1 ρ j(zj) dzj, for ρj ∈L1(R).
+2.
+The law of ξ is of the form µ⊥
+d ∈P(Ωd) for Ωd :=
+
+ξ ∈X
+e∗
+1(ξ) = ··· = e∗
+d(ξ) = 0
+	
+⊂
+X .
+3.
+There exist intervals Ij ⊂R such that essinfzj∈Ij ρ j(zj) > 0 for j = 1,...,d.
+We can thus think of µ in Assumption 3.1 as essentially equivalent to the product measure µd ⊗µ⊥
+d .
+This structure will be convenient for our derivation of the infinite-dimensional theory-to-practice gap.
+Below we provide an illustrative example of a basic setting where Assumptions 3.1 hold.
+Example 3.2
+Consider the space X = L2([0,1]) and the Dirichlet Laplacian sine basis ej(x) =
+√
+2sin(jπx) for j ∈{1,2,...} and x ∈[0,1]. Then we have that e∗
+j(u) =
+´ 1
+0 u(x)ej(x) dx. It is
+
+PDF PAGE 15
+THEORY-TO-PRACTICE GAP FOR NN AND NO
+15
+straightforward to check that biorthogonality and linear independence hold. Draw independent Z j ∼
+N(0,σ2
+j ) with ∑j σ2
+j < ∞, for instance, with σ j = 1
+j , and set u = ∑∞
+j=1 Z jej. Then µ, the law of
+u, is the trace-class Gaussian measure N(0,C) on L2([0,1]) with covariance C = ∑∞
+j=1 σ2
+j ej ⊗ej.
+Splitting at d with yj = Z j for j ≤d and ξ = ∑j>d Z jej yields the form (3.1), where independence
+of the Zj gives ξ ⊥(y1,...,yd). The law of (y1,...,yd) is µd = N(0,Σd) where Σd = diag(σ2
+1 ,...,σ2
+d )
+with product density µd = ∏d
+j=1 ρ j(z j)dzj for ρj the N(0, 1
+j2 ) density. Each Gaussian density satisfies
+essinfz∈Ij ρ j > 0 on any bounded interval Ij. The law of ξ is µ⊥
+d = N(0,C⊥
+d ) with C⊥
+d = ∑j>d σ2
+j ej ⊗ej,
+supported on Ωd since e∗
+k(ξ) = 0 for k ≤d.
+This concludes our discussion of the Lp(µ)-setting considered in this work.
+Approximation in V =C(K ) When the goal is to approximate G ∈U uniformly, i.e. with respect to the
+L∞-norm, we restrict attention to a compact set K ⊂X . In this case, we consider the Banach space of
+continuous operators V = C(K ), endowed with the sup-norm:
+∥G ∥C(K ) := sup
+u∈K
+|G (u)|.
+Thus, in the infinite-dimensional setting, the compact set K replaces the unit cube [0,1]d. To ensure
+that K is truly infinite-dimensional, and we make the following assumption:
+Assumption 3.3
+We assume that the set K is (i) convex and (ii) there does not exist a finite-
+dimensional subspace X0 ⊂X containing K .
+We can relate this uniform setting to the Lp(µ)-setting described above:
+Proposition 3.4
+Let K satisfy Assumption 3.3. Then for any d ∈N, there exists a probability measure
+µ ∈P(X ), with supp(µ) ⊂K , satisfying Assumption 3.1; more specifically, µ is the law of
+u = e0 +
+d
+∑
+j=1
+y je j,
+(y1,...,yd) ∼
+d
+∏
+j=1
+Unif([0,1]).
+Here e1,...,ed ∈X are linearly independent elements for which there exist bi-orthogonal elements
+e∗
+1,...,e∗
+d ∈X ∗, and e0 ∈K is such that e∗
+1(e0) = ··· = e∗
+d(e0) = 0.
+Proof Let d ∈N be given. Our aim is to construct µ ∈P(X ) as in the claim of Proposition 3.4. By
+assumption, K is infinite-dimensional. It follows that there exist v0,...,vd ∈K which are linearly
+independent. Given such a choice, we set e0 := v0, and e j := 1
+d (vj −v0) for j = 1,...,d. Since v0,...,vd
+are linearly independent, it follows that also e0,...,ed are linearly independent. Furthermore, for any
+finite set of linearly independent vectors, we can find bi-orthogonal elements e∗
+0,...,e∗
+d ∈X ∗, such that
+e∗
+j(ek) = δjk, j,k = 0,...,d. In particular, for this choice we then have e∗
+1(e0) = ··· = e∗
+d(e0) = 0.
+We now define µ ∈P(X ) as the law of u := e0 +∑d
+j=1 yjej, with y1,...,yd
+iid∼Unif([0,1]). This µ
+trivially satisfies Assumption 3.1. To prove Proposition 3.4, it thus only remains to show that supp(µ) ⊂
+
+PDF PAGE 16
+16
+GROHS, LANTHALER, TRAUTNER
+K . To see this, we observe that
+u = e0 +
+d
+∑
+j=1
+y je j = v0 + 1
+d
+d
+∑
+j=1
+yj(vj −v0)
+=
+ 
+1−1
+d
+d
+∑
+j=1
+y j
+!
+v0 +
+d
+∑
+j=1
+yj
+d vj =:
+d
+∑
+j=0
+λ jvj,
+where λ0 := 1−1
+d ∑d
+j=1 y j, λ j := 1
+d y j for j = 1,...,d. The last sum identifies u as a convex combination
+of v0,...,vd ∈K : Indeed, since yj ∈[0,1], for j = 1,...,d, it follows that λ0,...,λd ≥0 and we also
+have ∑d
+j=0 λ j = 1 by definition of λ0. It now follows from the convexity of K that u ∈K for any choice
+of y1,...,yd ∈[0,1], and hence supp(µ) ⊂K . This concludes the proof.
+□
+A consequence of Proposition 3.4 is that approximation of a continuous operator G : K →Y
+with respect to the C(K )-norm is at least as difficult as approximation with respect to the Lp(µ)-
+norm, for any p ∈[1,∞), and where µ satisfies Assumption 3.1. Indeed, for any reconstruction method
+A : U →C(K ), we have
+∥G −A (G )∥Lp(µ) ≤∥G −A (G )∥L∞(µ) ≤∥G −A (G )∥C(K ),
+where the last inequality follows from supp(µ) ⊂K . This implies that the optimal convergence rate
+with respect to C(K ) can be at most as large as the optimal convergence rate with respect to Lp(µ):
+Lemma 3.5
+Let K ⊂X be compact. If µ ∈P(X ) is a probability measure such that supp(µ) ⊂K ,
+then
+β∗(U,C(K )) ≤β∗(U,Lp(µ)).
+(3.2)
+This simple observation will allow us to deduce results about the uniform setting from corresponding
+results in the Lp(µ) setting, and derive estimates on β∗(U,C(K )) by passing to the limit p →∞.
+3.3. From Finite to Infinite Dimensions
+Neural operators Ψ : X →R, approximating G : X →R, can often be interpreted as a composition of
+two mappings, Ψ(u) = ψ ◦E (u). Here, E : X →Rd is an encoder, which maps the infinite-dimensional
+input into a finite-dimensional latent space, and ψ : Rd →R is the realization of a finite-dimensional
+neural network. The latent dimension d ∈N is a hyperparameter of the architecture.
+The general idea behind our proof of the infinite-dimensional theory-to-practice gap is the following:
+If the relevant approximation space U ⊂C(X ) contains compositions of the form f ◦E : X →R where
+f ∈Uα,∞
+ℓ
+belongs to the d-dimensional neural network approximation space, then the mapping
+Uα,∞
+ℓ
+→U,
+f 7→f ◦E ,
+defines an embedding of Uα,∞
+ℓ
+into U. Thus, the sample complexity of U should be at least as large
+as that of Uα,∞
+ℓ
+. As a consequence, any d-dimensional upper bound on convergence rate implies a
+corresponding bound in the infinite-dimensional case. This general intuition is confirmed and made
+precise by the following proposition:
+
+PDF PAGE 17
+THEORY-TO-PRACTICE GAP FOR NN AND NO
+17
+Proposition 3.6 (Lp setting)
+Let X be a separable Banach space, let µ ∈P(X ) be a probability
+measure on X , and let U ⊂C(X ) be a set of continuous operators. Assume that there is an encoder
+E : X →Rd and a constant c > 0, such that
+E#µ ≥c·Unif([0,1]d).
+(3.3)
+If for some α > 0 and ℓ: N →N, we have
+n
+f ◦E : X →R
+ f ∈Uα,∞
+ℓ
+(Rd)
+o
+⊂U,
+(3.4)
+then
+β∗(U,Lp(µ)) ≤1
+p + 1
+d ·
+α
+α +⌊ℓ∗/2⌋.
+(3.5)
+Our proof of Proposition 3.6 will be based on the following two lemmas. The first lemma
+shows that, under the assumptions of Proposition 3.6 any deterministic reconstruction method A ∈
+Algdet
+N (U,Lp(µ)) in infinite dimensions induces an associated finite-dimensional reconstruction method
+A ∈Algdet
+N (Uα,∞
+ℓ
+,Lp([0,1]d)).
+Lemma 3.7
+With the notation and under assumptions (3.3) and (3.4) of Proposition 3.6, the following
+holds: For any A ∈Algdet
+N (U,Lp(µ)), there exists A ∈Algdet
+N (Uα,∞
+ℓ
+,Lp([0,1]d)), such that
+∥f ◦E −A (f ◦E )∥Lp(µ) ≥c∥f −A(f)∥Lp([0,1]d),
+∀f ∈Uα,∞
+ℓ
+.
+(3.6)
+Here c > 0 is the constant of (3.3).
+Proof Sketch The detailed proof of Lemma 3.7 is included in Appendix B.2. The basic idea of the
+proof is the following: By definition, A is of the form A (G ) = Q(G (u1),...,G (uN)) for some sample
+points u1,...,uN ∈X and Q : RN →Lp(µ). We want to construct A : Uα,∞
+ℓ
+→Lp([0,1]d), of the form
+A(f) = Q(f(x1),..., f(xN)), where Q : RN →Lp([0,1]d). The canonical choice of the sample points
+x1,...,xN ∈Rd is via composition with the encoder, x j := E (uj). The main remaining question is then
+how to construct the mapping Q : RN →Lp([0,1]d) from Q : RN →Lp(µ). A first idea is that this
+reconstruction could satisfy,
+Q(y1,...,yN)(E (u)) := Q(y1,...,yN)(u),
+∀u ∈X , ∀(y1,...,yN) ∈RN.
+However, this is not well-defined, since different u will generally map to the same x = E (u). The
+improved guess is the following: Fix x ∈Rd and consider a random variable u ∼µ. We now condition
+on the event that E (u) = x. This gives a conditional distribution on the input function space. We then
+average the reconstruction Q(y1,...,yN)(u) in u over this conditional distribution, i.e. define
+Q(y1,...,yN)(x) := Eu∼µ [Q(y1,...,yN)(u)|E (u) = x].
+This is well-defined, and due to Jensen’s inequality the conditional averaging on the right-hand side
+turns out to reduce the reconstruction error of A compared to A . The detailed calculations are provided
+in Appendix B.2.
+□
+
+PDF PAGE 18
+18
+GROHS, LANTHALER, TRAUTNER
+The last lemma is in anticipation of our next result, Lemma 3.8. The final result Proposition 3.6 will
+then be an immediate consequence.
+Lemma 3.8
+With the notation and under assumptions (3.3) and (3.4) of Proposition 3.6, the following
+holds. There exists κ > 0, such that for every N ∈N, there exists a probability space (Ξ,P) and a
+random variable Ψ : Ξ →U, ξ 7→Ψξ, such that
+Eξ
+
+∥Ψξ −A (Ψξ)∥Lp(µ)
+
+≥κN−λ,
+∀A ∈Algdet
+N (U,Lp(µ)),
+(3.7)
+where λ = 1
+p + 1
+d ·
+α
+α+⌊ℓ∗/2⌋.
+Proof By Lemma 2.9, there exists a constant κ > 0, such that for any N ∈N, there exists a probability
+space (Ξ,P) and random variable ψ : Ξ →Uα,∞
+ℓ
+, ξ 7→ψξ, such that
+Eξ
+h
+∥ψξ −A(ψξ)∥Lp([0,1]d)
+i
+≥κN−λ,
+∀A ∈Algdet
+N (Uα,∞
+ℓ
+,Lp([0,1]d)),
+and where λ := 1
+p + 1
+d ·
+α
+α+⌊ℓ∗/2⌋. We use ψξ to define a new random variable Ψ : Ξ →U, Ψξ := ψξ ◦E .
+We claim that (3.7) holds for this Ψξ.
+To see this,
+let A ∈Algdet
+N (U,Lp(µ)) be given.
+By Lemma 3.7,
+there exists A ∈
+Algdet
+N (U,Lp([0,1]d)), such that
+∥ψξ ◦E −A (ψξ ◦E )∥Lp(µ) ≥c∥ψξ −A(ψξ)∥Lp([0,1]d),
+∀ξ ∈Ξ.
+Here c > 0 is the constant appearing in (3.3) (and is independent of N). Taking expectations over ξ, it
+follows that
+Eξ
+
+∥Ψξ −A (Ψξ)∥Lp(µ)
+
+≥cEξ
+h
+∥ψξ −A(ψξ)∥Lp([0,1]d)
+i
+.
+By construction of ψξ, the right hand side is lower bounded by cκN−λ, with κ > 0 independent of N
+and λ = 1
+p + 1
+d ·
+α
+α+⌊ℓ∗/2⌋. Thus it follows that
+Eξ
+
+∥Ψξ −A (Ψξ)∥Lp(µ)
+
+≥cκN−λ,
+where c,κ > 0 are independent of N. Replacing cκ by κ, the claimed bound (3.7) follows.
+□
+The proof of Proposition 3.6 is now immediate:
+Proof of Proposition 3.6 Proposition 3.6 follows from Lemma 3.8 and Lemma 2.9.
+□
+3.4. Deep Operator Networks (DeepONet)
+In this section, we state and prove a theory-to-practice gap for a general family of “DeepONet”
+architectures. We recall that we are interested in the approximation of operators G : X →R. In this
+setting, we define these DeepONet architectures to be of the form Ψ = ψ ◦L , combining a linear
+encoder L : X →Rd with a feedforward neural network ψ : Rd →R. The next three paragraphs
+provide a precise description of the considered architecture, define relevant approximation spaces, and
+prove an infinite-dimensional theory-to-practice gap for these architectures.
+
+PDF PAGE 19
+THEORY-TO-PRACTICE GAP FOR NN AND NO
+19
+Architecture Fix a sequence of continuous linear functionals ℓ1,ℓ2,··· : X →R. For d0 ∈N, we denote
+by Ld0 the linear encoder Ld0 : X →Rd0, Ld0(u) := (ℓ1(u),...,ℓd0(u)). The encoder-net Ψ : X →R
+associated with a neural network ψ : Rd0 →R is a mapping of the form Ψ(u) = ψ ◦Ld0(u).
+To ensure universality of the resulting operator learning architecture, we will make the (minimal)
+assumption that
+span
+
+ℓj : X →R
+ j ∈N
+	
+⊂X ∗is dense,
+(3.8)
+where we recall that X ∗denotes the continuous dual of X . Throughout the following discussion, we
+will consider the sequence (ℓj)j∈N ⊂X ∗fixed, and it will be assumed that (3.8) holds without further
+mention.
+DeepONet Approximation Space We can now define spaces Aα,∞
+ℓ,DON for DeepONets. To this end, we
+introduce,
+Σℓ
+n,DON :=
+
+Ψ = ψ ◦Ld0 : ψ NN with din(ψ) = d0,dout(ψ) = 1,
+max{W(ψ),d0} ≤n,L(ψ) ≤ℓ(n),∥ψ∥NN ≤1
+
+.
+Then, given α ∈(0,∞), for each continuous (non-linear) operator G : X →R, we define
+Γα,∞
+DON(G ) := max
+
+sup
+u∈X
+∥G (u)∥, sup
+n∈N
+h
+nα ·d∞
+
+G ,Σℓ
+n,DON
+i
+∈[0,∞],
+where d∞(G ,Σ) := infΨ∈Σ supu∈X ∥G (u) −Ψ(u)∥. We can define a DeepONet approximation space
+quasi-norm ∥·∥Aα,∞
+ℓ,DON by
+∥G ∥Aα,∞
+ℓ,DON := inf
+
+θ > 0 : Γα,∞
+DON(G /θ) ≤1
+	
+∈[0,∞],
+giving rise to the DeepONet approximation space
+Aα,∞
+ℓ,DON :=
+n
+G ∈C(X ) : ∥G ∥Aα,∞
+ℓ,DON < ∞
+o
+.
+Encoder Construction The following is a useful technical lemma, which will be applied to construct
+suitable encoders E : X →Rd. It shows that if a finite-dimensional map F :V ⊂Rd →Rd is sufficiently
+close to the identity, then the image of V must “fill out” a non-empty open set V0 ⊂Rd.
+Lemma 3.9
+Let V ⊂Rd be a non-empty domain. There exist constants ε0,c0 > 0 and a non-empty
+open subset V0 ⊂V with the following property: For any Lipschitz-continuous function F : V →Rd,
+satisfying
+∥F −id∥W 1,∞(V) ≤ε0,
+where id : V →Rd, id(y) = y denotes the identity mapping, it follows that F(V) ⊃V0, and
+F#Unif(V) ≥c0Unif(V0).
+The result of Lemma 3.9 follows as a consequence of the contraction mapping theorem; we provide
+a detailed proof in Appendix B.1. Our goal in this section is to construct encoders E : X →Rd which
+
+PDF PAGE 20
+20
+GROHS, LANTHALER, TRAUTNER
+“fill out” the set [0,1]d. The link with the finite-dimensional setting of Lemma 3.9 is made by identifying
+X ≃Rd ×Ωd, as in the decomposition of µ made in Assumptions 3.1, and by considering the second
+factor as a parameter. This leads us to study parametrized mappings, F :V ×Ωd →Rd, (y,ξ) 7→Fξ(y) =
+F(y;ξ), with the parameter ξ ∈Ωd a random variable. The following result derives a similar result as
+Lemma 3.9 in this parametrized setting:
+Lemma 3.10
+Let V ⊂Rd be a non-empty domain, and let ε0,c0 > 0 and V0 ⊂V denote the constants
+and set of Lemma 3.9, respectively. Let (Ω,P) be a probability space, and assume that F : V ×Ω→Rd,
+(y,ξ) 7→F(y;ξ) is measurable. Assume furthermore, that there exists K ⊂Ω, such that the mapping
+Fξ : V →Rd, y 7→Fξ(y) := F(y;ξ) is Lipschitz for each ξ ∈K, and
+∥Fξ −id∥W 1,∞(V) ≤ε0,
+∀ξ ∈K.
+(3.9)
+Then the push-forward under F of the product measure Unif(V)⊗P on V ×Ωsatisfies,
+F#(Unif(V)⊗P) ≥c0P(K)Unif(V0).
+A detailed proof of Lemma 3.10 is given in Appendix B.1. Let now {ℓk} ⊂X ∗be a set of encoding
+functionals, such that span{ℓk} ⊂X ∗is dense. Our first goal is to use the {ℓk} to construct an encoder
+E : X →Rd, such that E#µ ≥cUnif([0,1]d).
+To this end, let us momentarily fix δ > 0. Then by density, there exists d0 ∈N and coefficients cjk
+for j ∈[d], k ∈[d0], such that
+e∗
+j −
+d0
+∑
+k=1
+c jkℓk
+
+X ∗
+≤δ,
+∀j = 1,...,d.
+(3.10)
+Since e∗
+j(u(y;ξ)) = yj, (3.10) allows us to approximate a “projection” onto yj. Motivated by this, we
+now define the encoder E : X →Rd, E (u) := (E1(u),...,Ed(u)), via
+Ej(u) = bj +
+d0
+∑
+k=1
+ajkℓk(u),
+(3.11)
+for coefficients ajk and bias bj, for j ∈[d] and k ∈[d0], to be determined.
+Proposition 3.11
+Assume that µ ∈P(X ) satisfies Assumption 3.1 for d ∈N. Then there exists an
+encoder E : X →Rd of the form (3.11) and constant c > 0, such that
+E#µ ≥cUnif([0,1]d).
+(3.12)
+The proof of Proposition 3.11 is a straight-forward, albeit somewhat tedious, consequence of
+Lemma 3.10 and the fact that encoders of the form (3.11) are dense in the space of all affine encoders
+with d-dimensional range. The proof relies on the assumption that the linear functionals {ℓk}k∈N are
+dense in X ∗. We include the detailed argument in Appendix B.4.
+
+PDF PAGE 21
+THEORY-TO-PRACTICE GAP FOR NN AND NO
+21
+Theory-to-Practice Gap We can now state a theory-to-practice gap for the unit ball Uα,∞
+ℓ,DON in the
+DeepONet approximation space Aα,∞
+ℓ,DON:
+Theorem 3.12 (DeepONet theory-to-practice gap)
+Let p ∈[1,∞]. Let ℓ: N →N ∪{∞} be non-
+decreasing with ℓ∗≥4. Assume that µ ∈P(X ) satisfies Assumption 3.1. Then for any α > 0, we
+have
+β∗(Uα,∞
+ℓ,DON,Lp(µ)) ≤1
+p.
+(3.13)
+We recall that the typical Monte-Carlo (MC) approximation rate in the Lp-norm is βMC =
+1/p, reducing to the well-known 1/2-rate with respect to the L2-norm. Theorem 3.12 shows that,
+independently of α > 0 and the depth ℓ∗≥4, it is not possible to achieve better-than-MC rates by
+any approximation method on the relevant approximation spaces Aα,∞
+ℓ,DON.
+Proof Fix d ∈N, and let ℓ: N →N∪{∞} be a non-decreasing function with ℓ∗≥4. We denote eℓ:= ℓ−3,
+so that eℓ∗≥3, as in the assumptions of the finite dimensional theory-to-practice gap, Theorem 2.3. Let
+E : X →Rd be the encoder of Proposition 3.11, such that E#µ ≥cUnif([0,1]d). Let γd ·Uα,∞
+ℓ,DON denote
+re-scaling of Uα,∞
+ℓ,DON by a constant scaling factor γd. By Lemma 3.13, which we state below after the
+proof, there exists a constant γd ≥1, such that we have
+n
+f ◦E
+ f ∈Uα,∞
+eℓ
+(Rd)
+o
+⊂γd ·Uα,∞
+ℓ,DON.
+(3.14)
+Assuming (3.14), the claim of Theorem 3.12 then follows immediately from Proposition 3.6. Indeed,
+defining U := γd ·Uα,∞
+ℓ,DON, that proposition implies that
+β∗(γd ·Uα,∞
+ℓ,DON,Lp(µ)) ≤1
+p + 1
+d ·
+α
+α +⌊eℓ∗/2⌋
+.
+However, it follows from the definition that β∗is invariant under re-scaling,
+β∗(γd ·Uα,∞
+ℓ,DON,Lp(µ)) = β∗(Uα,∞
+ℓ,DON,Lp(µ)).
+Thus, recalling also eℓ∗= ℓ∗−1, we have
+β∗(Uα,∞
+ℓ,DON,Lp(µ)) ≤1
+p + 1
+d ·
+α
+α +⌊(ℓ∗−1)/2⌋.
+(3.15)
+Since d ∈N was arbitrary and the left-hand side is independent of d, we can take the infimum over all
+d ∈N on the right to conclude that
+β∗(Uα,∞
+ℓ,DON,Lp(µ)) ≤1
+p.
+This is (3.13).
+□
+
+PDF PAGE 22
+22
+GROHS, LANTHALER, TRAUTNER
+Lemma 3.13
+Let D ⊂Rd, ℓ: N →N ∪{∞} non-decreasing and f ∈Uα,∞
+ℓ
+(D). Then for every
+e ∈N, C ∈Rd×e and b ∈Rd there is R ∈(0,∞) with f(C · +b) ∈R · Uα,∞
+ℓ
+(E), where E :=
+{x ∈Re : Cx+b ∈D} ⊂Re.
+The detailed proof of Lemma 3.13 is given in Appendix B.5. We also state the following theory-to-
+practice gap for uniform approximation over compact K :
+Theorem 3.14 (DeepONet; uniform theory-to-practice gap)
+Let ℓ: N →N ∪{∞} be non-decreasing
+with ℓ∗≥4. Assume that K ⊂X is a compact set satisfying Assumption 3.3. Then for any α > 0, we
+have
+β∗(Uα,∞
+ℓ,DON,C(K )) = 0.
+Proof By Proposition 3.4, for any d ∈N, there exists a probability measure µ ∈P(X ), with supp(µ) ⊂
+K , and µ satisfies Assumption 3.1. By Proposition 3.11, there exists a DeepONet encoder E : X →Rd
+and constant c > 0, such that
+E#µ ≥cUnif([0,1]d).
+Following the steps in the proof of Theorem 3.12, leading up to (3.15), it follows that for any p ∈[1,∞],
+we have
+β∗(Uα,∞
+ℓ,DON,Lp(µ)) ≤1
+p + 1
+d ·
+α
+α +⌊(ℓ∗−1)/2⌋.
+We now recall that,
+β∗(Uα,∞
+ℓ,DON,C(K )) ≤β∗(Uα,∞
+ℓ,DON,Lp(µ)).
+This inequality is (3.2) and follows from the fact that uniform approximation over K is a more stringent
+criterion than Lp(µ) approximation with respect to µ, owing to the fact that supp(µ) ⊂K . Thus, we
+have
+β∗(Uα,∞
+ℓ,DON,C(K )) ≤1
+p + 1
+d ·
+α
+α +⌊(ℓ∗−1)/2⌋.
+This holds for any d ∈N and p ∈[1,∞). The convergence rate β∗(Uα,∞
+ℓ,DON,C(K )) on the left depends
+on α and ℓ, but is independent of p and d. Thus, upon letting d, p →∞, the claim follows.
+□
+3.5. Integral-kernel Neural Operators
+In this section, we state and prove a theory-to-practice gap for a general family of integral-kernel neural
+operator (NO) architectures [24, 33]. Again, we are interested in the approximation of operators G :
+X →R. In this setting, we define integral-kernel NO architectures to be of the form Ψ = Q ◦LL ◦
+...L1 ◦R, combining a lifting layer R, hidden layers L1,...,LL and an output layer Q. The next three
+paragraphs provide a precise description of the considered architecture, define relevant approximation
+spaces, and prove an infinite-dimensional theory-to-practice gap.
+Architecture The following is a minimal architecture shared by all/most variants of integral kernel-
+based neural operators [30]. For notational simplicity, we focus on real-valued input and output
+functions. All results extend readily to the more general vector-valued case.
+
+PDF PAGE 23
+THEORY-TO-PRACTICE GAP FOR NN AND NO
+23
+Definition 3.15 (Averaging Neural Operator)
+Let X (D;R), Y (D;R), and V (D;Rdc) be spaces
+of functions on Lipschitz domain D ⊂RdD. An averaging neural operator (ANO) Ψ : X (D;R) →
+Y (D;R) of depth L takes the form
+Ψ(u) = Q ◦LL ◦...L1 ◦R(u)
+(3.16)
+where u ∈X (D;R) and x ∈Rd. In addition, the pointwise lifting operators R and Q are obtained by
+composition with shallow ReLU neural networks; i.e. there exist neural networks R : R×Rd →Rdc and
+Q : Rdc →R, of depth L(R) = L(Q) = 2, such that
+R(u)(x) = R(u(x),x),
+Q(v)(x) = Q(v(x)).
+(3.17)
+Finally, the hidden layers Lj : V (D;Rdc) →V (D;Rdc) take the form
+Lj(v)(x) = σ
+
+Wjv(x)+bj +
+ 
+D
+v(y) dy
+
+,
+(3.18)
+where Wj ∈Rdc×dc is a matrix and bj ∈Rdc a bias.
+Generalizing our definitions of quantities of interest from Section 2.1, we will denote by
+L(Ψ) := L the depth (number of hidden layers) of an ANO, and we denote by W(Ψ) =
+W(R) + ∑L
+j=1 (∥Wj∥ℓ0 +∥bj∥ℓ0) +W(Q) the total number of non-zero parameters of the architecture.
+Furthermore, we define ∥Ψ∥NN := max
+
+∥Wj∥∞,∥b j∥∞,∥R∥NN,∥Q∥NN
+	
+as the maximal weight
+magnitude.
+Remark 3.16
+The ANO introduced above is a special case of a more general family of kernel-based
+neural operators introduced in [24]. Its theoretical significance is that most instantiations of such neural
+operators contain the ANO as a special case, with a specific tuning of the weights. For example, the
+popular Fourier neural operator (FNO) [33] uses the same general structure, but employs hidden layers
+of the form
+L (v)(x) = σ
+
+Wv(x)+b+
+ˆ
+κ(x−y)v(y)dy
+
+,
+where the integral kernel κ is convolutional, and
+κ(x) = ∑
+|k|≤kmax
+bκkeik·x
+is parametrized by the coefficients bκk ∈Cdc×dc in its (truncated) Fourier expansion. Thus, the ANO can
+be obtained from the FNO upon setting bκk ≡0 for k ̸= 0 and bκ0 = Idc×dc/vol(D).
+NO Approximation Space We now define the relevant approximation spaces Aα,∞
+ℓ,NO for (averaging)
+neural operators. Assume we are given function spaces X (D) = X (D;R) and Y (D) = Y (D;R).
+In our discussion, we will assume that X (D) ⊂L∞(D) is an infinite-dimensional Banach space on
+Lipschitz domain D ⊂RdD, and we will assume that Y (D) contains all constant functions. We now
+introduce,
+Σℓ
+n,NO :=
+
+Ψ : X →Y : Ψ is an ANO with W(Ψ) ≤n,
+L(Ψ) ≤ℓ(n),∥Ψ∥NN ≤1
+
+.
+
+PDF PAGE 24
+24
+GROHS, LANTHALER, TRAUTNER
+Remark 3.17
+Part of the definition of Σℓ
+n,NO is that for any Ψ ∈Σℓ
+n,NO, we must have Ψ(X ) ⊂Y .
+Non-trivial Ψ exist, since we can readily construct averaging neural operators Ψ of the form (3.16), for
+which the output Ψ(u) is a constant-valued function, for any input u ∈X . Since Y contains constant
+functions by assumption, this implies that such Ψ defines a map Ψ : X →Y . In our proofs, we will
+only ever consider Ψ of this form, thus our results hold even when Y = R.
+Given α ∈(0,∞), for each continuous (non-linear) operator G : X →Y , we define
+Γα,∞
+NO (G ) := max
+
+sup
+u∈X
+∥G (u)∥, sup
+n∈N
+h
+nα ·d∞
+
+G ,Σℓ
+n,NO
+i
+∈[0,∞],
+where d∞(G ,Σ) := infΨ∈Σ supu∈X ∥G (u) −Ψ(u)∥Y . We define a NO approximation space quasi-
+norm ∥·∥Aα,∞
+ℓ,NO by
+∥G ∥Aα,∞
+ℓ,NO := inf
+
+θ > 0 : Γα,∞
+DON(G /θ) ≤1
+	
+∈[0,∞],
+giving rise to the NO approximation space
+Aα,∞
+ℓ,NO :=
+n
+G ∈C(X ;Y ) : ∥G ∥Aα,∞
+ℓ,NO < ∞
+o
+.
+We again denote by Uα,∞
+ℓ,NO the unit ball in Aα,∞
+ℓ,NO.
+Remark 3.18
+As pointed out in Remark 3.16, the ANO can be obtained by a special setting of the
+weights in the FNO. As a consequence, it can be shown that Aα,∞
+ℓ,NO ⊂Aα,∞
+ℓ,FNO, where Aα,∞
+ℓ,FNO denotes
+the relevant approximation space for FNO, which can be defined in analogy to Aα,∞
+ℓ,NO. Based on this
+relationship, it could be shown that
+β∗(Uα,∞
+ℓ,FNO,Lp(µ)) ≤β∗(Uα,∞
+ℓ,NO,Lp(µ)),
+and hence any upper bound on β∗(Uα,∞
+ℓ,NO,Lp(µ)) implies a corresponding upper bound for the FNO.
+Encoder Construction Let µ ∈P(X ) be a probability measure on X . We recall that L1(D) is a subset
+of the dual of L∞(D) under the natural pairing,
+⟨u,e∗⟩=
+ˆ
+D
+u(x)e∗(x) dx,
+∀u ∈L∞(D), e∗∈L1(D).
+The following proposition constructs an encoder E : X →Rd, whose existence will imply a theory-to-
+practice gap for the averaging neural operator.
+Proposition 3.19
+Let µ satisfy Assumption 3.1 for d ∈N, with bi-orthogonal elements e∗
+j ∈L1(D).
+Then there exists an encoder E : X (D) →Rd,
+E (u) =
+ 
+D
+R(u(x),x) dx,
+(3.19)
+with R : R×RdD →Rd a shallow ReLU neural network, and constant c > 0 dependent on d, such that
+E#µ ≥c·Unif([0,1]d).
+(3.20)
+
+PDF PAGE 25
+THEORY-TO-PRACTICE GAP FOR NN AND NO
+25
+Proof It will suffice to show that there exists a neural network R : R × RdD →Rd and encoder of the
+form (3.19), such that for some non-empty open set V0 ⊂Rd and constant c > 0, we have
+E#µ ≥c·Unif(V0).
+(3.21)
+Indeed, given such V0, there exists a scaling factor γ > 0 and shift b ∈Rd, such that [0,1]d ⊂γ ·V0 +b.
+Replacing the neural network R(η,x) by eR(η,x) := γ ·R(η,x)+b, it is then immediate that the encoder
+eE : X (D) →Rd defined by eE (u) =
+ffl
+D eR(u(x),x) dx satisfies a lower bound of the form (3.20).
+To prove the existence of an encoder E satisfying (3.21), we recall that, by Assumption 3.1, u ∼
+P(X ) is of the form
+u(x;y,ξ) = ξ(x)+
+d
+∑
+j=1
+yjej(x),
+where e1,...,ed are linearly independent with bi-orthogonal elements e∗
+1,...,e∗
+d, and the coefficients
+y j ∼ρj(y) dy are independent. Furthermore, ξ ∼µ⊥
+d is a random function such that e∗
+1(ξ) = ··· =
+e∗
+d(ξ) = 0. In the following we will consider ξ a random “parameter” and denote the law of ξ by
+P := µ⊥
+d . By assumption the dual elements e∗
+j are represented by a function in L1.
+Under our assumptions, there exist non-empty intervals Ij ⊂R and constant cρ > 0, such that
+essinfIj ρ j(z) ≥cρ for all j = 1,...,d. We may assume without loss of generality that Ij is a bounded
+interval, and fix a constant cV > 0 such that Ij ⊂[−cV,cV] for all j = 1,...,d. Let V = ∏d
+j=1 Ij ⊂Rd. We
+now choose B > 0, such that Prob(∥ξ∥L∞≤B) > 0. This is possible, because of the assumed inclusion
+X ⊂L∞. For this choice of B > 0, we define the random event
+K := {∥ξ∥L∞≤B},
+so that P(K ) > 0. Note that this bound on B implies that for all y ∈V and ξ ∈K, we have
+∥u(·;y,ξ)∥L∞(D) ≤B+dcV max
+j=1,...,d∥ej∥L∞(D) =: B′.
+For fixed ξ ∈K, define the maps F†
+ξ ,Fξ : Rd →Rd, as follows:
+
+
+
+
+
+
+
+
+
+F†
+ξ (y) :=
+ 
+D
+u(x;y,ξ)e∗
+k(x) dx
+d
+k=1
+= y
+Fξ(y) :=
+ 
+D
+R(u(x;y,ξ),x) dx
+(3.22)
+where R is a ReLU neural network mapping R × RdD to Rd. Let R† be defined by R†(η,x) =
+{η e∗
+k(x)}d
+k=1. Then by Corollary A.2, for any ε > 0, there exists a ReLU neural network R such that
+ 
+D
+∥R(·,x)−R†(·,x)∥W 1,∞([−B′,B′];Rd) dx ≤ε.
+(3.23)
+Identify R with a ReLU neural network achieving this bound. Note that F†
+ξ ≡id is exactly the identity
+on Rd for all ξ ∈K. Given the constant ε0 > 0 of Lemma 3.10, We seek to show that for sufficiently
+
+PDF PAGE 26
+26
+GROHS, LANTHALER, TRAUTNER
+small ε > 0 in (3.23), we can ensure that
+∥Fξ −F†
+ξ ∥W 1,∞(V) = ∥Fξ −id∥W 1,∞(V) ≤ε0,
+∀ξ ∈K.
+(3.24)
+By Lemma 3.10, this entails that there exist V0 ⊂V and c0 > 0, such that
+F# (Unif(Y)⊗P) ≥c0P(K)Unif(V0),
+where P denotes the law of ξ. The claim then follows by observing that
+E#µ = F# (µd ⊗P) ≥cd
+ρ F# (Unif(Y)⊗P) ≥cd
+ρc0P(K)Unif(V0).
+Since P(K) > 0 by construction, the claim then follows with constant c := cd
+ρc0P(K). It therefore
+remains to show that (3.23) for sufficiently small ε > 0 implies (3.24).
+In the remainder of this proof, we will show that this holds for ε := ε0/2d. By (3.23), we have
+∥∂η(R−R†)(·,x)∥L∞([−B′,B′]) < ε, where η refers to the first argument of R and R†. Then for ξ ∈K and
+y,y′ ∈V, we have
+∥u(·;y,ξ)∥L∞(D), ∥u(·;y,ξ)∥L∞(D) ≤B′,
+and hence
+∥Fξ −F†
+ξ ∥L∞(V) ≤
+ˆ
+D
+∥R(·,x)−R†(·,x)∥L∞([−B′,B′]) dx ≤ε = ε0/2d.
+To estimate ∥DFξ −DF†
+ξ ∥L∞(V), we recall that, due to the convexity of the d-dimensional cube V, the
+W 1,∞(V) seminorm is equal to the Lipschitz seminorm:
+∥DFξ∥L∞(V) = sup
+y,y′∈V
+|Fξ(y)−Fξ(y′)|
+|y−y′|
+.
+We now bound, for y,y′ ∈V:
+|(Fξ −F†
+ξ )(y)−(Fξ −F†
+ξ )(y′)| =
+
+ 
+D
+(R−R†)(u(x;y,ξ),x)−(R−R†)(u(x;y′,ξ),x) dx
+
+≤
+ 
+D
+(R−R†)(u(x;y,ξ),x)−(R−R†)(u(x;y′,ξ),x)
+ dx
+≤
+ 
+D
+u(x;y,ξ)−u(x;y′,ξ)
+∥∂η(R−R†)(·,x)∥L∞([−B′,B′]) dx
+=
+ 
+D
+
+d
+∑
+j=1
+(y j −y′
+j)ej(x)
+∥∂η(R−R†)(·,x)∥L∞([−B′,B′]) dx
+≤
+ 
+D
+d
+∑
+j=1
+|yj −y′
+j|∥∂η(R−R†)(·,x)∥L∞([−B′,B′]) dx
+≤
+√
+d|y−y′|ε.
+
+PDF PAGE 27
+THEORY-TO-PRACTICE GAP FOR NN AND NO
+27
+With our choice of ε = ε0/2d, this implies that
+∥DFξ −DF†
+ξ ∥L∞(V) = sup
+y,y′∈V
+|(Fξ −F†
+ξ )(y)−(Fξ −F†
+ξ )(y′)|
+|y−y′|
+≤ε
+√
+d ≤ε0/2.
+Combining both estimates, we have shown that
+ 
+D
+∥R(·,x)−R†(·;x)∥W 1,∞([−B′,B′]) dx ≤ε,
+for ε = ε0/2d, implies
+∥Fξ −F†
+ξ ∥W 1,∞(V) ≤ε0.
+This is what we set out to show, and concludes our proof of Proposition 3.19.
+□
+Theory-to-Practice Gap We can now state a theory-to-practice gap for the unit ball Uα,∞
+ℓ,NO in the NO
+approximation space Aα,∞
+ℓ,NO:
+Theorem 3.20 (NO theory-to-practice gap)
+Let p ∈[1,∞]. Let ℓ: N →N∪{∞} be non-decreasing with
+ℓ∗≥4. Let X (D) ⊂L∞(D) be a Banach space on Lipschitz domain D ⊂RdD. Assume that µ ∈P(X )
+satisfies Assumption 3.1 with bi-orthogonal elements {e∗
+j}j∈N ⊂L1(D). Then for any α > 0, we have
+β∗(Uα,∞
+ℓ,NO,Lp(µ)) ≤1
+p.
+(3.25)
+The proof of Theorem 3.20 relies on the following lemma:
+Lemma 3.21
+Let X (D) ⊂L∞(D) be a Banach space on Lipschitz domain D ⊂RdD, and let µ ∈
+P(X ) be a probability measure on X . Assume that Y (D) contains all constant functions and µ
+satisfies Assumption 3.1 for d ∈N, with bi-orthogonal elements e∗
+1,...,e∗
+d ∈L1(D). Let E : X (D) →
+Rd be the encoder of Proposition 3.19. Fix a (finite) constant ℓ0 ≤ℓ∗+ 2. There exists a constant
+γ = γ(d,E ,α,ℓ0) > 0, such that
+n
+f ◦E
+ f ∈Uα,∞
+ℓ0
+(Rd)
+o
+⊂γ ·Uα,∞
+ℓ,NO.
+(3.26)
+A proof of this lemma is given in Appendix B.6. We now come to the proof of Theorem 3.20.
+Proof of Theorem 3.20 Fix d ∈N, and let ℓ: N →N ∪{∞} be a non-decreasing function. Clearly, we
+have ℓ∗≥1. We define ℓ0 := 3, so that the finite dimensional theory-to-practice gap, Theorem 2.3
+applies to Uα,∞
+ℓ0
+(Rd). Let E : X →Rd be an encoder as in Proposition 3.19, with E#µ ≥cUnif([0,1]d).
+By (3.26), there exists a constant γ > 0, such that
+n
+f ◦E
+ f ∈Uα,∞
+ℓ0
+(Rd)
+o
+⊂γ ·Uα,∞
+ℓ,NO.
+The claim of Theorem 3.20 then follows again from Proposition 3.6, as in the proof of Theorem 3.12.
+Indeed, Proposition 3.6, and the fact that β∗(γ ·Uα,∞
+ℓ,NO,Lp(µ)) = β∗(Uα,∞
+ℓ,NO,Lp(µ)), imply that
+β∗(Uα,∞
+ℓ,NO,Lp(µ)) ≤1
+p + 1
+d ·
+α
+α +⌊ℓ0/2⌋.
+Since the left-hand side is independent of d, we let d →∞, to obtain (3.25).
+□
+
+PDF PAGE 28
+28
+GROHS, LANTHALER, TRAUTNER
+We also state the following theory-to-practice gap for uniform approximation over compact K :
+Theorem 3.22 (NO; uniform theory-to-practice gap)
+Let ℓ: N →N ∪{∞} be non-decreasing with
+ℓ∗≥4. Let X (D) ⊂L∞(D) be a Banach space on Lipschitz domain D ⊂RdD. Assume that K ⊂X is
+a compact set satisfying Assumption 3.3. Then for any α > 0, we have
+β∗(Uα,∞
+ℓ,NO,C(K )) = 0.
+Proof The proof is analogous to the argument for the uniform theory-to-practice gap for DeepONet,
+except that the DeepONet encoder construction, Proposition 3.11, is replaced by the NO encoder
+construction in 3.19, and the relevant inclusion is the one identified in Lemma 3.21.
+□
+4. Discussion and Conclusion
+This work has rigorously examined the theory-to-practice gap in both finite-dimensional and infinite-
+dimensional settings, resulting in rigorous bounds on achievable convergence rates for general
+reconstruction methods based on point-values. By deriving upper bounds on the optimal rate β∗, we
+have uncovered the inherent constraints of learning on relevant neural network and neural operator
+approximation spaces. In the finite-dimensional case, our contributions include a unified treatment of the
+theory-to-practice gap for approximation errors measured in general Lp-spaces for arbitrary p ∈[1,∞]
+and dimension d ∈N. Furthermore, we extend the theory-to-practice gap to infinite-dimensional
+operator learning frameworks, and derive results for prominent architectures such as Deep Operator
+Networks and integral kernel-based neural operators, such as the Fourier neural operator (FNO).
+Notably, for operator learning we establish that the optimal convergence rate in a Bochner Lp-norm
+satisfies β∗≤1/p, while no algebraic convergence is possible (β∗= 0) for uniform approximation
+on infinite-dimensional compact input sets. These findings highlight some intrinsic limitations of
+these data-driven methodologies and provide a clearer understanding of the theoretical bounds shaping
+practical applications. In particular, the practical barrier to accurate operator learning models is an
+information-theoretic barrier rather than a model expressivity barrier. Ultimately, the parameters of any
+model must be identified from finite data samples, and the present work shows that in the worst case, the
+sample convergence rate will not match the parametric one. We hypothesize that the sample complexity
+limitation identified in this work provides an explanation for why sample convergence rates can be seen
+in practice; e.g. [21], while to our knowledge it is rare to match empirical parametric rates to rates
+obtained via theory in operator learning.
+A natural response to the hardness results obtained in this work is what modifications to the problem
+setting would allow this limitation to be bypassed. In particular, the results of the present work state that
+in the worst case, no algebraic rate is possible for uniform approximation in operator learning, even in
+the setting of arbitrarily good parametric rates. As a closing discussion, we attempt to place this result
+in context of some other relevant results in the literature. In the nonparametric statistics literature, it has
+been proved that no algebraic rates exist for finite-data regression of Lipschitz functionals on a Hilbert
+space [38]. A similar result holds for approximation of Lipschitz operators between Banach spaces; no
+method based on finite data samples can achieve algebraic sample rates [3, 25]. A complementary result
+to the present work restricts the notion of the parametric space to efficient parametric approximation by a
+particular architecture (FNO), and finds that for error measured in L2, algebraic parametric convergence
+rates imply algebraic sample convergence rates [25]. On the other hand, for holomorphic functions,
+
+PDF PAGE 29
+THEORY-TO-PRACTICE GAP FOR NN AND NO
+29
+existing work has provided both lower and upper bounds on the algebraic approximation rates that
+hold in this setting [2]. While it is in general difficult to directly compare rates results as the particular
+settings tend to differ, recent work has made an attempt to present existing sample rates for operator
+learning in a general setting [7].
+As an alternative to modifying smoothness assumptions on the function space, another direction
+could be to modify the character of the data. While our results hold for any possible algorithm,
+deterministic or randomized or adaptive, using finite data samples, we restricted to the setting of point
+evaluations f(xj). An examination of the proofs of Lemma 2.6 and Lemma 2.9 reveals that the situation
+does not improve if one instead has access to point samples of derivatives because the argument relies
+on detection of a localized bump function, and higher order derivatives of the localized bump function
+are still indistinguishable from those of the zero function outside the support of the localized bump
+function. However, it is an open question whether our lower bounds still hold if the data samples provide
+some nonlocal information about the function. While we expect that they do in general, it is possible
+that simultaneously restricting the function class to be approximated and elevating the data samples to
+include nonlocal functionals could yield improved rates. Additionally, while the present work focused
+on the noiseless setting, if the approximation classes remain noiseless, we expect the lower bounds on
+sample complexity rates to hold in the setting of noisy data samples. However, it is unclear whether
+the same would hold true if the approximation classes that determine the parametric complexity were
+defined with some notion of noise from the onset.
+There are several additional interesting avenues for future work, two of which we briefly mention
+in closing. One open problem is to study the theory-to-practice gap under additional constraints, e.g.
+on spaces of the form Aα,∞
+ℓ
+∩Lip. We expect that the theory-to-practice gap will persist essentially
+unchanged even when introducing additional regularity constraints. Another open problem is to extend
+this gap beyond ReLU activations. This is specifically relevant for operator learning, where popular
+implementations of e.g. FNO usually use a smooth variant of ReLU, such as GeLU. To date, even in
+finite dimensions, no theory-to-practice gap is known for such smooth activation functions, though such
+results do hold for the ReQu activation [1]. Since our proofs rely on the homogeneity of ReLU, the path
+to such an extension for smooth activations is not immediately obvious.
+A. A result on neural network approximation
+We here derive a technical result, which shows that ReLU neural networks can approximateC1 functions
+in the W 1,∞-norm over compact subsets. This result follows from well-known techniques, but we
+couldn’t find a reference. We hence include a statement and proof (sketch), below.
+Lemma A.1
+Let σ(x) = max(x,0) denote the ReLU activation. Let D ⊂Rd be a bounded Lipschitz
+domain. For any f ∈C1(D) and ε > 0, there exists a shallow ReLU-neural network ψ : Rd →R, of the
+form,
+ψ(x) =
+N
+∑
+j=1
+a jσ(wT
+j x+bj),
+with a j,b j ∈R, wj ∈Rd, for j = 1,...,N,
+(A.1)
+such that ∥ψ −f∥W 1,∞(D) ≤ε.
+Proof Step 1: Fix a compactly supported smooth function ρ : R →R, with supp(ρ) ⊂(−1,1), ρ ≥0,
+and such that ρ is even, i.e. ρ(x) = ρ(−x) for all x ∈R. Let σρ(x) := (σ ∗ρ)(x) denote the convolution.
+
+PDF PAGE 30
+30
+GROHS, LANTHALER, TRAUTNER
+We note that σρ ∈C∞(R) is smooth and monotonically increasing and that σρ is equal to ReLU on
+R\(−1,1), i.e.
+σρ(x) =
+(
+0,
+(x ≤−1),
+x,
+(x ≥1).
+We first note that for any ε > 0, we can find N ∈N and coefficients αj,β j,ω j ∈R, for j = 1,...,N,
+such that
+σρ(x)−∑N
+j=1 α jσ(ω jx+βj)
+
+W 1,∞(R) ≤ε.
+To see this, we temporarily fix M ∈N, introduce an equidistant partition xm := −1+2m/M of [−1,1],
+for m = 0,...,M, denote cm := σ′
+ρ(xm)−σ′
+ρ(xm−1) and note that
+σ′
+ρ(x)−
+M
+∑
+m=1
+cm1[xm,∞)(x)
+ =
+
+
+
+
+
+|σ′
+ρ(x)|,
+x ∈(−∞,−1),
+|σ′
+ρ(x)−σ′
+ρ(xm0)|,
+x ∈[xm0,xm0+1),
+|σ′
+ρ(x)−σ′
+ρ(xM)|,
+x ∈[1,∞).
+(A.2)
+Since σ′
+ρ(x) ≡0 for x ≤−1 and σ′
+ρ(x) ≡1 for x ≥xM = 1, it follows that
+σ′
+ρ(x)−
+M
+∑
+m=1
+cm1[xm,∞)(x)
+ = 0,
+∀x ∈R\[−1,1).
+On the other hand, we also have
+∥σ′′
+ρ ∥L∞(R) = ∥σ′ ∗ρ′∥L∞(R) ≤∥σ′∥L∞(R)∥ρ′∥L1(R) ≤∥ρ′∥L1(R).
+For any x ∈[−1,1), we can find m0 ∈{0,...,M −1}, such that x ∈[xm0,xm0+1), and from (A.2), we
+obtain
+σ′
+ρ(x)−
+M
+∑
+m=1
+cm1[xm,∞)(x)
+ ≤|σ′
+ρ(x)−σ′
+ρ(xm0)|
+≤∥σ′′∥L∞|x−xm0|
+≤
+2∥ρ′∥L1(R)
+M
+.
+Given ε > 0, choose M sufficiently large so that 2∥ρ′∥L1(R)/M ≤ε/2. Then, noting that σ′(x −xm) =
+1[xm,∞)(x) pointwise a.e., it follows that
+σ′
+ρ(x)−
+M
+∑
+m=1
+cmσ′(x−xm)
+
+L∞(R)
+≤ε/2.
+Taking into account that σρ(x) ≡0 ≡∑M
+m=1 cmσ(x−xm) for x < −1 and σρ(x) ≡x ≡∑M
+m=1 cmσ(x−xm)
+for x > 1, this in turn implies that,
+σρ(x)−
+M
+∑
+m=1
+cmσ(x−xm)
+
+L∞(R)
+≤
+ˆ 1
+−1
+σ′
+ρ(x)−
+M
+∑
+m=1
+cmσ′(x−xm)
+
+L∞(R)
+dx′ ≤ε.
+Since ε was arbitrary, we have shown that σρ belongs to the W 1,∞(R)-closure of the set of shallow
+σ-neural networks, in one spatial dimension. In turn, this implies that any shallow σρ-neural network
+
+PDF PAGE 31
+THEORY-TO-PRACTICE GAP FOR NN AND NO
+31
+in d dimensions can be approximated by a shallow σ-neural network to any desired accuracy in the
+W 1,∞(Rd)-norm.
+Step 2: Given a compact domain D ⊂Rd, it follows from [41, Theorem 4.1] and the fact that σρ
+is smooth and non-polynomial, that the set of shallow σρ-neural networks is dense in C1(D). Thus, for
+any f ∈C1(D) and given ε > 0, we can first find a shallow σρ-neural network ψρ, such that
+∥f −ψρ∥W 1,∞(D) = ∥f −ψρ∥C1(D) ≤ε/2.
+Second, as a result of Step 1 we can find a σ-neural network ψ, such that
+∥ψρ −ψ∥W 1,∞(D) ≤ε/2.
+By the triangle inequality, we conclude that, for this ψ, we have
+∥f −ψ∥W 1,∞(D) ≤∥f −ψρ∥W 1,∞(D) +∥ψρ −ψ∥W 1,∞(D) ≤ε.
+□
+In the following corollary, we weaken the C1 requirements for Lemma A.1 for chosen inputs.
+Corollary A.2
+Let D1 ⊂Rd1 and D2 ⊂Rd2 be compact domains. Let f : D1 × D2 →R, (η,x) 7→
+f(η,x) be a measurable function such that f is C1 in η and integrable in x, such that
+ˆ
+D2
+∥f(·,x)∥C1(D1) dx < ∞.
+The for any ε > 0, there exists a shallow ReLU-neural network ψ : Rd1+d2 →R of the form A.1 such
+that
+ˆ
+D2
+∥ψ(·,x)−f(·,x)∥W 1,∞(D1) dx ≤ε.
+(A.3)
+Proof The assumption says that f belongs to L1
+x(D2;C1
+η(D1)). Clearly, we have C1(D1 × D2) ⊂
+L1
+x(D2;C1
+η(D1)). Upon mollifying f(η,x) in the second variable, one checks that C1(D1 × D2) is in
+fact dense in L1
+x(D2;C1
+η(D1)). Thus, there exists fε ∈C1(D1 ×D2), such that
+ˆ
+D2
+∥f(·,x)−fε(·,x)∥C1(D1) dx ≤ε/2.
+From Lemma A.1, there exists a shallow ReLU-neural network ψ : Rd1+d2 →R such that
+∥ψ −fε∥W 1,∞(D1×D2) ≤ε/(2|D2|).
+This in turn implies that
+ˆ
+D2
+∥ψ(·,x)−fε(·,x)∥W 1,∞(D1) dx ≤ε/2.
+Combining the above estimates, and using the triangle inequality, we conclude that
+ˆ
+D2
+∥ψ(·,x)−f(·,x)∥W 1,∞(D1) dx ≤ε/2+ε/2 = ε.
+□
+
+PDF PAGE 32
+32
+GROHS, LANTHALER, TRAUTNER
+B. Proofs for Section 3.4
+B.1. Proof of Lemma 3.9
+Our proof of Lemma 3.9 will make use of the following version of the contraction mapping theorem:
+Lemma B.1 (Lemma 6.6.6. of [46])
+Let B(0,r) be a ball in Rn centered at the origin and let g :
+B(0,r) →Rn be a map such that g(0) = 0 and
+|g(x)−g(y)| ≤1
+2|x−y| for all x,y ∈B(0,r).
+Then the function F : B(0,r) →Rn defined by F(x) = x+g(x) is one-to-one, and the image F(B(0,r))
+of this map contains the ball B(0, r
+2).
+We now come to the proof of Lemma 3.9 in the main text.
+Proof of Lemma 3.9 Since V ⊂Rd is open, we may pick r > 0 and y0 ∈V such that B(y0,r) ⊂V. We
+will show that the claim holds with
+ε0 := min
+  1
+2, r
+4
+
+,
+V0 := B(y0, r
+4).
+Our proof relies on the contraction mapping theorem, formulated as Lemma B.1. To this end, we first
+define eF : B(0,r) →Rd, by
+eF(y) = F(y+y0)−F(y0).
+We have that eF(0) = 0 and, by assumption, the spectral norm of the Jacobian satisfies ∥DeF(y)−Id∥2 ≤
+∥F −id∥W 1,∞(V) ≤ε0 for all y ∈B(0,r). Defining g = eF −id, this implies that ∥Dg(y)∥2 ≤ε0 for all
+y ∈B(0,r). We assume that 0 < ε0 ≤1/2. Since,
+g(y)−g(y′) =
+ˆ 1
+0
+d
+dt g(y′ +t(y−y′)) dt
+=
+ˆ 1
+0
+Dg(y′ +t(y−y′)) dt ·(y−y′),
+this implies that,
+|g(y)−g(y′)| ≤
+ˆ 1
+0
+Dg(y′ +t(y−y′))
+
+2 dt|y−y′|
+≤1
+2|y−y′|.
+for y,y′ ∈B(0,r) by our assumption on ε0. As a consequence of the contraction mapping theorem (cp.
+Lemma B.1), ef is injective on B(0,r), and B(0, r
+2) ⊂eF(B(0,r)). The next step is to return to B(y0,r).
+As
+F(y+y0) = eF(y)+F(y0),
+and since F(y0) is a constant shift, F is injective on B(y0,r), and B(F(y0), r
+2) ⊂F(B(y0,r)). The
+center of ball B(F(y0), r
+2) clearly depends on the value of F(y0). However, we argue that B(y0, r
+4) ⊂
+
+PDF PAGE 33
+THEORY-TO-PRACTICE GAP FOR NN AND NO
+33
+B(F(y0), r
+2): this follows from the fact that, by assumption on F, we have
+|F(y0)−y0| ≤∥F −id∥W 1,∞(V) ≤ε0 ≤r
+4.
+Thus, B(F(y0), r
+2) contains a ball B(y0,r0) of radius r0 = r
+2 −ε0 ≥r
+4. It follows that
+B(y0, r
+4) ⊂B(F(y0), r
+2) ⊂F(B(y0,r)).
+This shows that the image of F : V →Rd contains V0 := B(y0, r
+4). We finally verify that there exists a
+constant c0 > 0 such that
+F#Unif(V) ≥c0 Unif(V0).
+To this end, we recall that Unif(V) = |V|−1 1V(y) dy is just a rescaling of the Lebesgue measure
+1V(y) dy. Since F : F−1(V0) →V0 is bijective, the push-forward of the Lebesgue measure under F
+satisfies
+F#(1V(y) dy) ≥F#(1F−1(V0)(y) dy) = |detDF(F−1(z))|−11V0(z) dz.
+The spectral norm bound ∥DF(y)−Id∥2 ≤ε0 ≤1
+2, which holds for almost all y ∈V, now implies that
+1
+2
+d
+≤|det(DF(F−1(z)))| ≤
+3
+2
+d
+,
+dz-almost everywhere.
+Thus,
+F#Unif(V) = |V|−1F#(1V(y) dy)
+≥|V|−1|detDF(F−1(z))|−11V0(z) dz
+≥|V|−1
+2
+3
+d
+1V0(z) dz
+= |V0|
+|V|
+2
+3
+d
+Unif(V0).
+The claim thus follows with c0 := |V0|
+|V|
+  2
+3
+d > 0.
+□
+B.2. Proof of Lemma 3.7
+Proof of Lemma 3.7 Before discussing our construction of A, we recall that, by definition, A : U →
+Lp(µ) is of the form
+A (Ψ) = Q(Ψ(u1),...,Ψ(uN)),
+where u1,...,uN are fixed and Q : RN →Lp(µ) is a reconstruction from point-values. Given ψ ∈Uα,∞
+ℓ
+,
+we now define A(ψ) ∈Lp([0,1]d) by the conditional expectation,
+A(ψ)(x) := Eu∼µ [A (ψ ◦E )(u)|E (u) = x],
+∀x ∈[0,1]d,
+This conditional expectation is well-defined for E#µ almost every x. By assumption (3.3), we have
+E#µ ≥c·Unif([0,1]d), and hence A(ψ)(x) is well-defined for (Lebesgue-) almost every x ∈[0,1]d.
+
+PDF PAGE 34
+34
+GROHS, LANTHALER, TRAUTNER
+We also note that A(ψ)(x) is of the form A(ψ) = Q(ψ(x1),...,ψ(xN)): indeed, by definition, we
+have A (ψ ◦E )(u) = Q(ψ(E (u1)),...,ψ(E (uN)))(u). Hence, upon defining xj := E (uj) ∈RN, and
+Q(y1,...,yN)(x) := Eu∼µ [Q(y1,...,yN)(u)|E (u) = x],
+we then have A(ψ) = Q(ψ(x1),...,ψ(xn)) for all ψ ∈Uα,∞
+ℓ
+.
+To simplify notation for the following calculations, we define ΨA := A (Ψ) with Ψ := ψ ◦E . We
+can then write
+A(ψ)(x) = Eu[ΨA (u)|E (u) = x].
+Here Eu[... |E (u) = x] is the conditional expectation over a random variable u ∼µ, with conditioning
+on E (u) = x.
+For p ∈[1,∞), we then have
+|A(ψ)(x)|p =
+Eu [ΨA (u)|E (u) = x]
+p ≤Eu [|ΨA (u)|p |E (u) = x],
+(B.1)
+by conditional Jensen’s inequality. It follows that
+ˆ
+[0,1]d |A(ψ)(x)|p dx ≤c−1
+ˆ
+Rd |A(ψ)(x)|p E#µ(dx)
+= c−1 Ex∼E#µ
+h
+|A(ψ)(x)|pi
+≤c−1 Ex∼E#µ
+h
+Eu
+h
+|ΨA (u)|p E (u) = x
+ii
+= c−1 Eu∼µ
+h
+|ΨA (u)|p i
+.
+The first inequality is by assumption E#µ ≥c · Unif([0,1]d), the second inequality on the third row
+is (B.1) above. The final equality follows from basic properties of the conditional expectation. Thus,
+recalling that ΨA = A (Ψ) ∈Lp(µ), it follows that
+ˆ
+[0,1]d |A(ψ)(x)|p dx ≤c−1 ∥A (Ψ)∥p
+Lp(µ) < ∞.
+This shows that A : Uα,∞
+ℓ
+→Lp([0,1]d) is well-defined.
+It remains to show that A satisfies the claimed lower bound (3.6). To see this, we once more apply
+conditional Jensen’s inequality, to obtain
+∥Ψ−A (Ψ)∥p
+Lp(µ) = ∥Ψ−ΨA ∥p
+Lp(µ)
+= Eu∼µ [|ψ(E (u))−ΨA (u)|p]
+= Ex∼E#µEu
+hψ(E (u))−ΨA (u)
+
+p
+|E (u) = x
+i
+≥Ex∼E#µ
+hψ(x)−Eu [ΨA (u)|E (u) = x]
+
+pi
+= Ex∼E#µ [|ψ(x)−A(ψ)(x)|p]
+= ∥ψ −A(ψ)∥p
+Lp(E#µ).
+
+PDF PAGE 35
+THEORY-TO-PRACTICE GAP FOR NN AND NO
+35
+Recalling (3.3), this implies that
+∥Ψ−A (Ψ)∥p
+Lp(µ) ≥c∥ψ −A(ψ)∥p
+Lp([0,1]d).
+Since ψ ∈Uα,∞
+ℓ
+was arbitrary and Ψ = ψ ◦E , the proof of (3.6) is complete.
+□
+B.3. Proof of Lemma 3.10
+Proof of Lemma 3.10 By assumption on Fξ = F(·;ξ), we have
+∥Fξ −id∥W 1,∞(V) ≤ε0,
+∀ξ ∈K.
+By Lemma 3.9, there exists V0 ⊂V and a constant c0 > 0, such that
+(Fξ)#Unif(V) ≥c0 Unif(V0),
+∀ξ ∈K.
+(B.2)
+We want to show that the push-forward under F of the product measure Unif(V) ⊗P ∈P(V × Ω)
+satisfies,
+F#(Unif(V)⊗P) ≥c0P(K)Unif(V0).
+Given a non-negative, bounded measurable function φ : Rd →[0,∞), we have
+Ez∼F#(Unif(V)⊗P)[φ(z)] = E(y,ξ)∼Unif(V)⊗P [φ(F(y;ξ))]
+= Eξ∼P
+
+Ey∼Unif(V)
+
+φ(Fξ(y))
+
+By (B.2), we have
+Ey∼Unif(V)
+
+φ(Fξ(y))
+
+≥c0 Ez∼Unif(V0) [φ(z)],
+∀ξ ∈K,
+and hence
+Ez∼F#(Unif(V)⊗P)[φ(z)] ≥Eξ∼P
+
+1K(ξ)Ey∼Unif(V)
+
+φ(Fξ(y))
+
+≥c0 Eξ∼P
+
+1K(ξ)Ez∼Unif(V0) [φ(z)]
+
+= c0P(K)Ez∼Unif(V0) [φ(z)].
+Since φ ≥0 was arbitrary, the claim follows.
+□
+B.4. Proof of Proposition 3.11
+Proof of Proposition 3.11 Let I1,...,Id denote the open intervals in Assumption 3.1. Define V := I1 ×
+···×Id ⊂Rd. Instead of proving (3.12) directly, we will consider the simplified encoder E : X →Rd,
+
+PDF PAGE 36
+36
+GROHS, LANTHALER, TRAUTNER
+with components of the form
+Ej(u) =
+d0
+∑
+k=1
+cjkℓk(u),
+(B.3)
+and where the coefficient c jk are chosen to ensure (3.10) for a δ > 0 to be determined. Our goal is to
+show that there exists an open set V0 ⊂V and constant c > 0, such that
+E#µ ≥cUnif(V0).
+(B.4)
+The general claim (3.12) then follows by introducing a scaling factor γ > 0 and bias b ∈Rd, such that
+[0,1]d ⊂γ ·V0 +b,
+and replacing the simple encoder E (B.3) by
+eEj(u) := bj +
+d0
+∑
+k=1
+ajkℓk(u),
+where ajk := γ c jk. Thus, it only remains to show (B.4).
+Fix δ > 0 for the moment. We will determine conditions on δ which imply that (B.4) holds for the
+encoder (B.3), where c jk are chosen according to (3.10). With this specific choice of cjk, we can then
+write (3.10) in the form
+e∗
+j −Ej
+
+X ∗≤δ,
+∀j = 1,...,d.
+(B.5)
+Our goal is to apply Lemma 3.10. To this end, we recall the decomposition u = u(y;ξ) = ξ +∑d
+j=1 yjej
+of (3.1) and the probability measures µd ∈P(Rd), µ⊥
+d ∈P(Ωd) of Assumption 3.1. Given this
+decomposition, we let F : V × Ωd →Rd be defined by F(y;ξ) := E (u(y;ξ)), and denote Fξ(y) :=
+F(y;ξ). We will apply Lemma 3.10 with this choice of Fξ and with P := µ⊥
+d . As our final ingredient,
+we recall for any probability measure on a Banach space X , that there exists a set B > 0, such that
+P(K) > 0 for K := {ξ ∈Ωd |∥ξ∥X ≤B}. Given these preparatory remarks, our goal now is to show
+that (3.9) holds, provided that δ > 0 in (3.10) is sufficiently small.
+To this end, we first note that (y,ξ) 7→F(y;ξ) is linear, and hence y 7→Fξ(y) is affine for fixed ξ,
+and
+Fξ(y) = F(y;ξ) = F(y;0)+F(0,ξ) = F0(y)+Fξ(0).
+Thus, we can write
+∥Fξ(y)−y∥W 1,∞(V) ≤∥F0(y)−y∥W 1,∞(V) +∥Fξ(0)∥W 1,∞(V).
+(B.6)
+We will bound both terms on the right, individually.
+
+PDF PAGE 37
+THEORY-TO-PRACTICE GAP FOR NN AND NO
+37
+The last term is constant in y, and hence ∥Fξ(0)∥W 1,∞(V) = |Fξ(0)|. By (B.3), the j-th component of
+Fξ(0) = E (u(0;ξ)) = E (ξ) is given by,
+Ej(ξ) :=
+d0
+∑
+k=1
+cjkℓk(ξ).
+Since j ≤d, it follows that e∗
+j(ξ) = 0. From (B.5), we conclude that
+|Ej(ξ)| =
+Ej(ξ)−e∗
+j(ξ)
+
+≤
+Ej −e∗
+j
+
+X ∗∥ξ∥X
+≤δ∥ξ∥X .
+For ξ ∈K = {ξ |∥ξ∥X ≤B}, then it follows that
+|Fξ(0)| ≤d max
+j∈[d]|Ej(ξ)| ≤dBδ.
+Thus, for δ ≤ε0/(3dB), we obtain
+∥Fξ(0)∥W 1,∞(V) ≡|Fξ(0)| ≤ε0/3,
+∀ξ ∈K.
+(B.7)
+This provides our estimate for the second term in (B.6). To bound the first term, we note that F0(y) =
+E (u(y;0)), and hence
+|F0(y)j −yj| = |Ej(u(y;0))−e∗
+j(u(y;0))|
+≤∥Ej −e∗
+j∥X ∗∥u(y;0)∥X .
+Since y ∈V is from a bounded set, we can assume without loss of generality that B > 0 is chosen
+sufficiently large such that ∥u(y;0)∥X ≤B for all y ∈V, and hence, we obtain,
+∥F0(y)−y∥L∞(V) ≤ε0/3,
+(B.8)
+whenever δ ≤ε0/(3dB). It remains to derive a similar bound on
+∥DyF0(y)−Dyy∥L∞(V) = ∥DyF0(y)−I∥L∞(V).
+To this end, we recall that y 7→F0(y) is linear, and hence is represented by a matrix A ∈Rd×d, i.e.
+F0(y) = Ay. It follows that
+∥DyF0(y)−Dyy∥L∞(V) = ∥A−I∥2,
+where ∥·∥2 is the operator norm. Retracing the argument above, it follows that any y ∈Rd, we have
+|Ay−y|ℓ2 ≤d max
+j∈[d]|Ej(u(y;0))−e∗
+j(u(y;0))|
+≤d∥Ej −e∗
+j∥X ∗∥u(y;0)∥X
+≤dδ∥u(y;0)∥X .
+
+PDF PAGE 38
+38
+GROHS, LANTHALER, TRAUTNER
+We can furthermore find a constant C > 0, depending only on d and e1,...,ed, such that
+∥u(y;0)∥X ≤C|y|ℓ2,
+∀y ∈Rd.
+Thus,
+|Ay−y|ℓ2 ≤dCδ |y|ℓ2,
+which, upon taking the supremum over all |y|ℓ2 = 1, implies that
+∥A−I∥op ≤(dC)δ.
+Hence, for δ ≤min(ε0/(3dC),ε0/(3dB)), we conclude that
+∥DyF0(y)−Dyy∥L∞(V) ≤ε0/3,
+and by (B.8),
+∥F0(y)−y∥W 1,∞(V) = ∥DyF0(y)−Dyy∥L∞(V) +∥F0(y)−y∥L∞(V)
+≤2ε0/3.
+Combining the last estimate, (B.7) and (B.6), we conclude that
+∥Fξ(y)−y∥W 1,∞(V) ≤ε0,
+∀ξ ∈K.
+Thus, by Lemma 3.10, there exists V0 ⊂V and c0 > 0, such that
+E#µ = F#(µd ⊗P)
+≥cρF#(Unif(V)⊗P)
+≥cρc0P(K)
+|
+{z
+}
+=:c
+Unif(V0).
+□
+B.5. Proof of Lemma 3.13
+Proof of Lemma 3.13 By the assumption that f ∈Uα,∞
+ℓ
+(D) it follows that for each n ∈N there is ψn ∈Σℓ
+n
+with
+∥f −Rσ(ψn)∥L∞(D) ≤n−α.
+(B.9)
+Recall that,
+by definition,
+ψn = ((A1,b1),...,(AL,bl)) ∈×L
+l=1(Rdl×dl−1 × Rdl) with some
+(d0,d1,...,dL) ∈NL+1, where d0 = d, L ≤ℓ(n), W(ψn) ≤n and ∥ψn∥NN ≤1.
+
+PDF PAGE 39
+THEORY-TO-PRACTICE GAP FOR NN AND NO
+39
+Consider the functions
+hn :
+(
+Re →R,
+x 7→Rσ(ψn)(Cx+b),
+(B.10)
+which clearly satisfy that
+hn = Rσ(ϕn),
+(B.11)
+where
+ϕn =
+
+eAl,ebl
+L
+l=1 ∈
+
+Re×d1 ×Rd1
+
+×
+ L×
+l=2
+
+Rdl×dl−1 ×Rdl
+!
+,
+and
+eA1 = A1C, eb1 = A1b+b1
+and
+eAl = Al, ebl = bl
+for l = 2,...,L.
+This, and the fact that W(ψn) ≤n and ∥ψn∥NN ≤1 readily yields that
+W(ϕn) ≤W(ψn)·(∥C∥ℓ0 +∥b∥ℓ0) = n·(∥C∥ℓ0 +∥b∥ℓ0).
+(B.12)
+and
+∥ϕn∥NN ≤max
+ 
+{1}∪
+e[
+k=1
+(
+d
+∑
+j=1
+|Cj,k|
+)
+∪
+(
+1+
+d
+∑
+j=1
+|b j|
+)!
+=: T.
+(B.13)
+Note that T is independent of n. Now pick R ≥T to be determined later and denote
+τn :=
+ 1
+R
+eA1, 1
+R
+eb1
+
+,
+
+A2, 1
+Rb2
+
+,...,
+
+AL, 1
+RbL
+
+.
+By the homogeinity of the ReLU activation function σ it holds that
+Rσ(τn) = 1
+Rhn.
+(B.14)
+Moreover, due to (B.13), the fact that R ≥max{1,T} and (B.12) it holds that
+∥τn∥NN ≤1
+and
+W(τn) ≤n·(∥C∥ℓ0 +∥b∥ℓ0),
+(B.15)
+which implies that
+τn ∈Σ
+ℓ(·/(∥C∥ℓ0+∥b∥ℓ0))
+n·(∥C∥ℓ0+∥b∥ℓ0)
+⊂Σℓ
+n·(∥C∥ℓ0+∥b∥ℓ0),
+(B.16)
+where the last inclusion follows from the fact that ℓis non-decreasing.
+Moreover, by (B.9), (B.10), (B.14) and the definition of E it holds that
+
+1
+R f(C ·+b)−Rσ(τn)(·)
+
+L∞(E)
+≤1
+R ·n−α
+(B.17)
+for all n ∈N.
+
+PDF PAGE 40
+40
+GROHS, LANTHALER, TRAUTNER
+Let m ∈N be arbitrary and define µm := τ⌊m/(∥C∥ℓ0+∥b∥ℓ0)⌋. Equations (B.16) and (B.17) now readily
+yield that µm ∈Σℓ
+m and
+
+1
+R f(C ·+b)−Rσ(µm)(·)
+
+L∞(E)
+≤2α ·(∥C∥ℓ0 +∥b∥ℓ0)α
+R
+m−α.
+By choosing R sufficiently large this implies that
+dL∞(E)
+ 1
+R f(C ·+b),Σℓ
+m
+
+≤m−α
+for all
+m ∈N,
+which implies that f(C ·+b) ∈R·Uα,∞
+ℓ
+(E), as claimed.
+□
+B.6. Proof of Lemma 3.21
+Proof By construction, the encoder E is of the form
+E (u) =
+ 
+D
+R(u(x),x)dx,
+where R : R × RdD →Rd is a shallow neural network. Let ψ = ((A1,b1),...,(AL,bL)) be a neural
+network with L ≤ℓ0 layers. We define a shallow neural network,
+eR(η,x) := A1R(η,x)+b1,
+and e
+R(u)(x) := eR(u(x),x). We next define the first hidden ANO layer as,
+L1(v)(x) = σ
+ 
+D
+v(x)dx
+
+,
+i.e. a hidden layer with weight matrix and bias W1 = 0, b1 = 0. For j = 2,...,L−2, we define
+Lj(v) = σ
+
+(Aj −I)v(x)+bj +
+ 
+D
+v(x)dx
+
+,
+where I denotes the unit matrix and finally,
+Q(v) = ALσ (AL−1v+bL−1)+bL.
+Let ψ1(ξ) = σ(A1ξ +b1) denote the first layer of ψ. Then we have
+ψ1(E (u)) = σ
+
+A1
+ 
+D
+R(u(x),x)dx+b1
+
+= σ
+ 
+D
+eR(u(x),x)dx
+
+= L1( e
+R(u)).
+Since the output v(x) := ψ1(E (u)) = L1( e
+R(u)) is a constant function, it follows that
+L2(v) = σ
+
+(A2 −I)v(x)+b2 +
+ 
+D
+v(x)dx
+
+= σ (A2v+b2).
+
+PDF PAGE 41
+THEORY-TO-PRACTICE GAP FOR NN AND NO
+41
+Thus, L2(L1( e
+R(u))) = σ (A2ψ1(E (u))+b2) agrees with the output of the second hidden layer of ψ.
+Continuing recursively, it follows that
+Ψ(u) := Q ◦LL−2 ◦···◦L1 ◦e
+R(u) = ψ ◦E (u),
+∀u ∈X (D).
+Thus, ψ ◦E is equal to an ANO of depth L −2 ≤ℓ0 −2, with input layer e
+R and output layer Q.
+Employing a rescaling argument similar to the proof of Lemma 3.13, relying on the homogeneity of
+ReLU as well as the fact that the total number of layers is bounded by ℓ0 < ∞, it follows that for
+sufficiently large γ > 0, depending only on E , ℓ0 and α, we have 1
+γ Ψ ∈Uα
+ℓ,NO, i.e. Ψ ∈γ ·Uα
+ℓ,NO. Here
+we have also made use of the fact that ℓ0 −2 ≤ℓ∗.
+□
+REFERENCES
+1.
+Ahmed Abdeljawad and Philipp Grohs. Sampling complexity of deep approximation spaces, 2023.
+2.
+Ben Adcock, Nick Dexter, and Sebastian Moraga.
+Optimal approximation of infinite-dimensional
+holomorphic functions. Calcolo, 61(1):12, 2024.
+3.
+Ben Adcock, Michael Griebel, and Gregor Maier.
+Learning lipschitz operators with respect to gaussian
+measures with near-optimal sample complexity, 2024.
+4.
+Julius Berner, Philipp Grohs, and Felix Voigtlaender.
+Learning relu networks to high uniform accuracy
+is intractable.
+2023.
+The Eleventh International Conference on Learning Representations: ICLR 2023 ;
+Conference date: 01-05-2023 Through 05-05-2023.
+5.
+Cristian Bodnar, Wessel P Bruinsma, Ana Lucic, Megan Stanley, Anna Allen, Johannes Brandstetter, Patrick
+Garvan, Maik Riechert, Jonathan A Weyn, Haiyu Dong, et al. A foundation model for the earth system.
+Nature, 641(8065):1180–1187, 2025.
+6.
+Helmut Bolcskei, Philipp Grohs, Gitta Kutyniok, and Philipp Petersen. Optimal approximation with sparsely
+connected deep neural networks. SIAM Journal on Mathematics of Data Science, 1(1):8–45, 2019.
+7.
+Simone Brugiapaglia, Nicola Rares Franco, and Nicholas H Nelsen. A short tour of operator learning theory:
+Convergence rates, statistical limits, and open questions. arXiv preprint arXiv:2603.00819, 2026.
+8.
+Jiaheng Chen and Daniel Sanz-Alonso. Convergence rates for learning pseudo-differential operators. arXiv
+preprint arXiv:2601.04463, 2026.
+9.
+Tianping Chen and Hong Chen. Universal approximation to nonlinear operators by neural networks with
+arbitrary activation functions and its application to dynamical systems. IEEE transactions on neural networks,
+6(4):911–917, 1995.
+10. Felipe Cucker and Steve Smale.
+On the mathematical foundations of learning.
+Bulletin of the American
+mathematical society, 39(1):1–49, 2002.
+11. George Cybenko. Approximation by superpositions of a sigmoidal function. Mathematics of control, signals
+and systems, 2(4):303–314, 1989.
+12. Maarten V de Hoop, Nikola B Kovachki, Nicholas H Nelsen, and Andrew M Stuart. Convergence rates for
+learning linear operators from noisy data. SIAM/ASA Journal on Uncertainty Quantification, 11(2):480–513,
+2023.
+13. Jonas Degrave, Federico Felici, Jonas Buchli, Michael Neunert, Brendan Tracey, Francesco Carpanese, Timo
+Ewalds, Roland Hafner, Abbas Abdolmaleki, Diego de Las Casas, et al. Magnetic control of tokamak plasmas
+through deep reinforcement learning. Nature, 602(7897):414–419, 2022.
+14. Ronald DeVore, Boris Hanin, and Guergana Petrova. Neural network approximation. Acta Numerica, 30:327–
+444, 2021.
+15. Dennis Elbr¨achter, Dmytro Perekrestenko, Philipp Grohs, and Helmut B¨olcskei.
+Deep neural network
+approximation theory. IEEE Transactions on Information Theory, 67(5):2581–2623, 2021.
+16. Nicola Rares Franco, Stefania Fresca, Andrea Manzoni, and Paolo Zunino.
+Approximation bounds for
+convolutional neural networks in operator learning. Neural Networks, 161:129–141, 2023.
+
+PDF PAGE 42
+42
+GROHS, LANTHALER, TRAUTNER
+17. Ian Goodfellow. Deep learning, 2016.
+18. Philipp Grohs and Felix Voigtlaender.
+Proof of the theory-to-practice gap in deep learning via sampling
+complexity bounds for neural network approximation spaces. Foundations of Computational Mathematics,
+pages 1–59, 2023.
+19. Lukas Herrmann, Christoph Schwab, and Jakob Zech.
+Neural and spectral operator surrogates: unified
+construction and expression rate bounds. Advances in Computational Mathematics, 50(4):72, 2024.
+20. Kurt Hornik, Maxwell Stinchcombe, and Halbert White.
+Multilayer feedforward networks are universal
+approximators. Neural networks, 2(5):359–366, 1989.
+21. Daniel Zhengyu Huang, Nicholas H. Nelsen, and Margaret Trautner. An operator learning perspective on
+parameter-to-observable maps. Foundations of Data Science, 7(1):163–225, 2025.
+22. John Jumper, Richard Evans, Alexander Pritzel, Tim Green, Michael Figurnov, Olaf Ronneberger, Kathryn
+Tunyasuvunakool, Russ Bates, Augustin ˇZ´ıdek, Anna Potapenko, et al. Highly accurate protein structure
+prediction with alphafold. nature, 596(7873):583–589, 2021.
+23. Nikola Kovachki, Samuel Lanthaler, and Siddhartha Mishra. On universal approximation and error bounds
+for fourier neural operators. Journal of Machine Learning Research, 22(290):1–76, 2021.
+24. Nikola Kovachki, Zongyi Li, Burigede Liu, Kamyar Azizzadenesheli, Kaushik Bhattacharya, Andrew Stuart,
+and Anima Anandkumar. Neural operator: Learning maps between function spaces with applications to pdes.
+Journal of Machine Learning Research, 24(89):1–97, 2023.
+25. Nikola B. Kovachki, Samuel Lanthaler, and Hrushikesh Mhaskar. Data complexity estimates for operator
+learning, 2024.
+26. Nikola B. Kovachki, Samuel Lanthaler, and Andrew M. Stuart. Operator learning: Algorithms and analysis.
+Handbook of Numerical Analysis. Elsevier, 2024.
+27. Thorsten Kurth, Shashank Subramanian, Peter Harrington, Jaideep Pathak, Morteza Mardani, David Hall,
+Andrea Miele, Karthik Kashinath, and Anima Anandkumar. Fourcastnet: Accelerating global high-resolution
+weather forecasting using adaptive fourier neural operators. In Proceedings of the platform for advanced
+scientific computing conference, pages 1–11, 2023.
+28. Samuel Lanthaler. Operator learning with pca-net: upper and lower complexity bounds. Journal of Machine
+Learning Research, 24(318):1–67, 2023.
+29. Samuel Lanthaler. Operator learning of lipschitz operators: An information-theoretic perspective, 2024.
+30. Samuel Lanthaler, Zongyi Li, and Andrew M. Stuart. Nonlocality and nonlinearity implies universality in
+operator learning, 2024.
+31. Samuel Lanthaler, Siddhartha Mishra, and George E Karniadakis. Error estimates for DeepONets: A deep
+learning framework in infinite dimensions. Transactions of Mathematics and Its Applications, 6(1):tnac001,
+2022.
+32. Samuel Lanthaler and Andrew M. Stuart. The parametric complexity of operator learning, 2024.
+33. Zongyi Li, Nikola B. Kovachki, Kamyar Azizzadenesheli, Burigede Liu, Kaushik Bhattacharya, Andrew M.
+Stuart, and Anima Anandkumar.
+Fourier neural operator for parametric partial differential equations.
+International Conference on Learning Representations, 2021.
+34. Hao Liu, Haizhao Yang, Minshuo Chen, Tuo Zhao, and Wenjing Liao. Deep nonparametric estimation of
+operators between infinite dimensional spaces. Journal of Machine Learning Research, 25(24):1–67, 2024.
+35. Hao Liu, Haizhao Yang, Minshuo Chen, Tuo Zhao, and Wenjing Liao. Deep nonparametric estimation of
+operators between infinite dimensional spaces. Journal of Machine Learning Research, 25(24):1–67, 2024.
+36. Lu Lu, Pengzhan Jin, Guofei Pang, Zhongqiang Zhang, and George Em Karniadakis. Learning nonlinear
+operators via deeponet based on the universal approximation theorem of operators.
+Nature machine
+intelligence, 3(3):218–229, 2021.
+37. Carlo Marcati and Christoph Schwab. Exponential convergence of deep operator networks for elliptic partial
+differential equations. SIAM Journal on Numerical Analysis, 61(3):1513–1545, 2023.
+38. Andr´e Mas. Lower bound in regression for functional data by representation of small ball probabilities. 2012.
+39. Hrushikesh Narhar Mhaskar and Nahmwoo Hahm. Neural networks for functional approximation and system
+identification. Neural Computation, 9(1):143–159, 1997.
+
+PDF PAGE 43
+THEORY-TO-PRACTICE GAP FOR NN AND NO
+43
+40. Charles A Micchelli and Theodore J Rivlin. Optimal estimation in approximation theory. Springer, 1977.
+41. Allan Pinkus. Approximation theory of the mlp model in neural networks. Acta Numerica, 8:143–195, 1999.
+42. Kateryna Pozharska and Tino Ullrich. A note on sampling recovery of multivariate functions in the uniform
+norm. SIAM Journal on Numerical Analysis, 60(3):1363–1384, 2022.
+43. Ilan Price, Alvaro Sanchez-Gonzalez, Ferran Alet, Tom R Andersson, Andrew El-Kadi, Dominic Masters,
+Timo Ewalds, Jacklynn Stott, Shakir Mohamed, Peter Battaglia, et al. Probabilistic weather forecasting with
+machine learning. Nature, pages 1–7, 2024.
+44. Niklas Reinhardt, Sven Wang, and Jakob Zech. Statistical learning theory for neural operators. arXiv preprint
+arXiv:2412.17582, 2024.
+45. Unique Subedi and Ambuj Tewari. Operator learning: A statistical perspective. Annual Review of Statistics
+and Its Application, 13, 2025.
+46. Terence Tao. Analysis ii, volume 1. Springer, third edition, 2016.
+47. Dmitry Yarotsky. Error bounds for approximations with deep relu networks. Neural Networks, 94:103–114,
+2017.

@@ -58,7 +58,7 @@ for every $\alpha\in(0,1)$.
 
 [F2] [[def-ip-minimax-detection-risk-and-separation]]: $\alpha_\varepsilon(\psi)=\mathbb E_{\varepsilon,0}\psi$, $\beta_\varepsilon(\Theta_q(r),\psi)=\sup_{\eta\in\Theta_q(r)}\mathbb E_{\varepsilon,\eta}(1-\psi)$, and $\gamma_\varepsilon$ is the infimum of their sum.
 
-[F3] [[lem-normal-density-has-total-mass-one]]: the standard normal density is $\varphi(x)=(2\pi)^{-1/2}e^{-x^2/2}$ and integrates to one.
+[F3] The standard-normal coordinate law supplied by [F1] has density $\varphi(x)=(2\pi)^{-1/2}e^{-x^2/2}$. Since it is a probability law, $\int_{\mathbb R}\varphi(x)\,dx=1$. This uses the supplied experiment, not the stronger-AC normalization theorem [[lem-normal-density-has-total-mass-one]].
 
 [F4] [[thm-independent-random-elements-have-product-joint-law]]: a finite tuple of independent coordinates has the product of its marginal laws.
 
@@ -69,6 +69,7 @@ for every $\alpha\in(0,1)$.
 [F7] [[thm-c-one-change-of-variables-for-nonnegative-lebesgue-measurable-functions]]: translation of the standard normal density preserves its integral, so $\mathbb E e^{tG}=e^{t^2/2}$ for $G\sim N(0,1)$ by completing the square.
 
 ## Proof
+
 
 1.1 For each sign vector $\tau\in\{-1,+1\}^J$, let $v^\tau_j=\tau_jv_j$ on $J$ and zero elsewhere. Absolute values and squares are unchanged, so every $v^\tau$ belongs to $\Theta_q(r)$. [A1, F1, given, construct]
 

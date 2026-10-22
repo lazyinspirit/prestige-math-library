@@ -47,7 +47,7 @@ Selecting $F_0$ as the outer face gives a valid one-component three-crossing
 code, and the bounded enumerator includes its reconstructed candidate at
 crossing bound $3$.
 
-The figure displays the positive two-strand braid closure used for this code.
+The figure displays the positive two-strand braid closure with the same spherical crossing and face data. Its unbounded face is $F_1=(1:e_2,2:e_3)$, bounded by the two exterior closure arcs; it is not the plane realization obtained above by selecting $F_0$ as outer face.
 The braid strands are oriented downward, the closure arcs upward, and the
 crossings are labeled from top to bottom $1,3,2$; the upper branch is the
 right-to-left branch at each positive crossing. The proof below verifies the
@@ -111,6 +111,7 @@ drawing.
 [F6] [Fish, “Codes, Links and Racks,” §5.2.1, p. 67](https://wrap.warwick.ac.uk/id/eprint/136332/1/WRAP_Theses_Fish_2001.pdf): the right trefoil signed Gauss code is $o1+,u2+,o3+,u1+,o2+,u3+$, and crossing signs are unchanged between the two visits to a crossing.
 
 ## Proof
+
 
 1.1 The visits of the given word are, in order, under at crossing $1$, over at $3$, under at $2$, over at $1$, under at $3$, and over at $2$. The source code in [F6], started at its fourth visit, is $u1+,o2+,u3+,o1+,u2+,o3+$; exchanging labels $2$ and $3$ gives exactly the stated word and the same positive sign at each crossing. Thus the word is the stated based traversal of the right trefoil. [given, F1, F6, algebra]
 

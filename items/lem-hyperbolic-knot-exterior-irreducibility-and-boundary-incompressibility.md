@@ -15,7 +15,7 @@ deps:
 justified_by: []
 aliases: []
 proof_strategy: direct
-axiom_use: "Full AC supplies the ACω branch of the local irreducibility/boundary-incompressibility lemma; the implication is explicit in the proof."
+axiom_use: "Full AC is the stated hypothesis of the local irreducibility/boundary-incompressibility lemma and supplies countable choice for the chosen smooth tubular-exterior data."
 provenance:
   statement: literature-derived
   proof: ai-altered
@@ -47,13 +47,13 @@ Assume the Axiom of Choice. Let $K$ be a smooth knot in $S^3$ that is not ambien
 
 [F1] [[def-incompressibility-seifert-fibration-and-jsj-system]] defines irreducible to mean every interior $2$-sphere bounds a $3$-ball, incompressible boundary to mean no compressing disk with essential boundary, atoroidal to mean every incompressible torus is boundary-parallel, and Seifert-fibered to mean decomposed into circles with the specified fibered-solid-torus local models.
 
-[L1] Full AC implies the countable-choice assumption of [F1] by applying a choice function to the countable family of nonempty smooth-manifold data. [[def-countable-choice]]
+[L1] Full AC implies countable choice by restricting a choice function to the given countable family of nonempty sets. This supplies the countable-choice premise of the chosen smooth tubular-exterior definition, not a premise of the topological vocabulary in [F1]. [[def-countable-choice]], [[def-knot-exterior]]
 
 [F2] [[lem-knot-exterior-irreducible-and-boundary-incompressible-kt18-local]] proves that every knot exterior with non-unknot core is irreducible and has incompressible boundary under AC.
 
 ## Proof
 
-1.1 Full AC supplies the countable-choice premise in [F1] by [L1]. The supplied atoroidality and non-Seifert assumptions have the exact meanings in [F1]; they impose additional hypotheses on the exterior and do not remove either conclusion of [F2]. [given, A1, L1, F1, F2]
+1.1 Full AC is exactly the choice hypothesis of [F2] and supplies countable choice for the chosen exterior data by [L1]. The supplied atoroidality and non-Seifert assumptions have the exact meanings in [F1]; they impose additional hypotheses on the exterior and do not remove either conclusion of [F2]. [given, A1, L1, F1, F2]
 
 2.1 Apply [F2] to the stated nontrivial knot and its chosen compact exterior. It gives irreducibility and absence of a compressing disk on the boundary; by [F1], these are exactly the two conclusions asserted here. [given, F1, F2, step 1.1] ∎
 

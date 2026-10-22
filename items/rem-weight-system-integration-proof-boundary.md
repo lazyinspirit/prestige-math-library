@@ -13,6 +13,10 @@ justified_by: []
 dependency_level: 3
 verification:
   precheck: pass
+  judge:
+    model: "gpt-6-luna"
+    verdict: pass
+    date: 2026-10-22
 sources:
   references:
     - title: "The Fundamental Theorem of Vassiliev Invariants"

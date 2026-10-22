@@ -1,0 +1,9 @@
+# IP41 five-import source-binding check
+
+PASS: no confirmed mathematical defect; no focused mathematical repair required. This one consolidated FIRST check applies to the immutable root binding and only the new external imports, finite descent/specialization operations, and declared interfaces. Preserved proof bodies were not reopened.
+
+The real-weight H1 solver matches the source Proposition2.1, including arbitrary L2 forcing, either sign, and no boundary data. Finite orientation-cover averaging preserves the equation and estimates. The normalized beam Proposition3.1 and distinct-branch equation3.6 support the deck sum; the covering factor gives exactly the original ray measure, with no extra factor2. The dimension1 explicit solution covers the literal extra dimension.
+
+The density theorem is genuinely Proposition5.1 of 1903.12562v1, PDF14. The four-factor Statement permits Q-dependent constant-parameter witnesses and imposes no uniform Gaussian profile or nonzero-solution condition. Scaling a nonzero density test integral realizes its exact scalar target, including a zero target. The cubic addition first obtains orthogonality to every smooth harmonic quadruple, so its use of these Q-dependent witnesses is valid and needs no H1 boundary-trace extension. The linear correction uses the imported arbitrary-forcing solver and maintains the claimed complex-frequency product and L2 error estimates.
+
+Only source statement/setting pages10–14 and cross-term pages21–22 of1305.1273v2, and Proposition5.1 page14/context of1903.12562v1 were inspected for this check. The author's narrower partial-proof reading disclosures remain honest. A nonblocking editorial typo in cubic step2.1 has TAB+au in math where backslash-tau is intended; root may normalize it during integration. No hashes, validators, accepted-proof checks or input edits were performed. Exact details are in the adjacent JSON.

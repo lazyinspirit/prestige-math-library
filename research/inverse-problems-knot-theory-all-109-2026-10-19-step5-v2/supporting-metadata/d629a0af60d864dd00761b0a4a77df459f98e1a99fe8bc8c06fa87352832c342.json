@@ -1,0 +1,460 @@
+[
+  {
+    "order": 3104,
+    "id": "bayesian-inverse-experimental-design-and-information-gain",
+    "kind": "A",
+    "category": "inverse-problems",
+    "title": "Bayesian measurement design and information gain",
+    "companion": "bayesian-inverse-experimental-design-and-information-gain-examples",
+    "requires": [
+      "minimax-lower-bounds-and-information-theoretic-methods",
+      "conditional-distributions-and-regular-conditional-probability",
+      "gaussian-process-priors-and-posterior-laws",
+      "feature-inference-and-map-testing",
+      "bayesian-inverse-likelihoods-and-posterior-propriety",
+      "linear-gaussian-inverse-posteriors-and-tikhonov",
+      "posterior-computation-error-and-diagnostics",
+      "numerical-optimization-for-statistical-computation",
+      "finite-precision-direct-factorizations",
+      "numerical-identifiability-and-optimal-experiment-design"
+    ],
+    "items": [
+      {
+        "id": "def-ip-design-indexed-inverse-experiment",
+        "kind": "definition",
+        "title": "Design-indexed dominated inverse experiment",
+        "dependency_level": 0,
+        "deps": [
+          "def-measurable-space",
+          "def-finite-cardinality",
+          "def-probability-measure",
+          "def-measure-kernel-and-probability-kernel",
+          "def-finite-sigma-finite-and-semifinite-measures",
+          "def-product-sigma-algebra-and-finite-product-sigma-algebras",
+          "def-measurable-function-between-measurable-spaces",
+          "thm-bayes-formula-for-dominated-kernels",
+          "def-bayesian-posterior-as-regular-conditional-law"
+        ],
+        "statement": "Let $D$ be a finite set of design indices, let $(\\Theta,\\mathcal T)$ and $(\\mathsf Y,\\mathcal Y)$ be measurable spaces, let $\\mu_0$ be a probability measure on $(\\Theta,\\mathcal T)$, and let $\\nu$ be a sigma-finite measure on $(\\mathsf Y,\\mathcal Y)$. For each $d\\in D$, let $Q_d$ be a probability kernel from $\\Theta$ to $\\mathsf Y$ with a specified nonnegative jointly measurable density $p_d(y\\mid\\theta)$ relative to $\\nu$, so\n$$Q_d(\\theta,B)=\\int_B p_d(y\\mid\\theta)\\,\\nu(dy)\\qquad(\\theta\\in\\Theta,\\ B\\in\\mathcal Y).$$\nDefine the prior-predictive density $p_d(y)=\\int_\\Theta p_d(y\\mid\\theta)\\,\\mu_0(d\\theta)$. For each datum $y$ with $0<p_d(y)<\\infty$, define the posterior probability measure\n$$\\mu_d^y(A)=\\frac{\\int_A p_d(y\\mid\\theta)\\,\\mu_0(d\\theta)}{p_d(y)}\\qquad(A\\in\\mathcal T).$$\nThe dominated-kernel Bayes formula makes $p_d\\,d\\nu$ the observation law and identifies $\\mu_d^y$ as a posterior version on these positive finite evidence fibers. No posterior formula is assigned on fibers with zero or infinite evidence; their prior-predictive probability is zero.",
+        "justified_by": [],
+        "forward_refs": [],
+        "sources": {
+          "references": [
+            {
+              "title": "Kathryn Chaloner and Isabella Verdinelli, Bayesian Experimental Design: A Review, Statistical Science 10(3) (1995), 273–304",
+              "url": "https://www.stat.cmu.edu/tr/tr599/tr599.ps",
+              "locator": "§1.2, equations (1)–(2): expected utility under the prior-predictive distribution."
+            },
+            {
+              "title": "David J. C. MacKay, Information-Based Objective Functions for Active Data Selection, Neural Computation 4(4) (1992), 590–604",
+              "url": "https://gwern.net/doc/reinforcement-learning/exploration/active-learning/1992-mackay.pdf",
+              "locator": "§2: expected information criteria for a Bayesian model and the model-correctness qualification."
+            }
+          ]
+        },
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "not-applicable"
+        },
+        "axiom_use": "No choice axiom is used to specify the prior, dominated probability kernels, predictive densities, or positive-finite-evidence posterior fibers. The supplied dominated-kernel Bayes formula is choice-free."
+      },
+      {
+        "id": "def-ip-expected-information-gain",
+        "kind": "definition",
+        "title": "Expected information gain",
+        "dependency_level": 1,
+        "deps": [
+          "def-ip-design-indexed-inverse-experiment",
+          "def-kullback-leibler-divergence",
+          "def-axiom-of-choice",
+          "thm-kullback-leibler-is-nonnegative",
+          "thm-tonelli-theorem-for-sigma-finite-product-spaces"
+        ],
+        "statement": "Assume the Axiom of Choice for the library's Kullback–Leibler divergence convention. For a design $d$ in a design-indexed dominated inverse experiment, let $G_d=\\{y:0<p_d(y)<\\infty\\}$ be its positive finite evidence fibers. The **expected information gain** is\n$$\\operatorname{EIG}(d):=\\int_{G_d}D(\\mu_d^y\\|\\mu_0)\\,p_d(y)\\,\\nu(dy)\\in[0,+\\infty],$$\nwhere the integrand is defined to be zero outside $G_d$. Here $D(P\\|Q)$ is the directional Kullback–Leibler divergence of probability measures, with natural logarithms.\n\nThis integrand is measurable. Tonelli's theorem makes $p_d$ measurable, so $G_d$ is measurable. On $G_d$, the likelihood ratio $r_d(\\theta,y)=p_d(y\\mid\\theta)/p_d(y)$ is the $\\mu_0$-density of $\\mu_d^y$. Set $r_d=0$ off $G_d$ and wherever $p_d(y\\mid\\theta)=+\\infty$; the latter set is $\\mu_0$-null on each $y\\in G_d$ because its integral is the finite value $p_d(y)$. Thus $r_d$ is a finite-valued product-measurable function. With $\\psi(0)=0$ and $\\psi(t)=t\\log t$ for $t>0$, the KL definition gives $D(\\mu_d^y\\|\\mu_0)=\\int\\psi(r_d(\\theta,y))\\,\\mu_0(d\\theta)$. Tonelli makes the section integrals of $\\psi(r_d)^+$ and $\\psi(r_d)^-$ measurable; the negative integral is finite by the KL definition. Their difference is therefore measurable and extended-valued, and KL nonnegativity makes it $[0,+\\infty]$-valued. Setting it to zero off $G_d$ preserves measurability, so the displayed EIG integral is well-defined.",
+        "justified_by": [],
+        "forward_refs": [],
+        "sources": {
+          "references": [
+            {
+              "title": "Kathryn Chaloner and Isabella Verdinelli, Bayesian Experimental Design: A Review, Statistical Science 10(3) (1995), 273–304",
+              "url": "https://www.stat.cmu.edu/tr/tr599/tr599.ps",
+              "locator": "§2.2, equation (3): expected posterior-to-prior Kullback–Leibler distance as a design utility."
+            },
+            {
+              "title": "David J. C. MacKay, Information-Based Objective Functions for Active Data Selection, Neural Computation 4(4) (1992), 590–604",
+              "url": "https://gwern.net/doc/reinforcement-learning/exploration/active-learning/1992-mackay.pdf",
+              "locator": "§2, complete expected-information derivation under the model's prior-predictive distribution."
+            }
+          ]
+        },
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "not-applicable"
+        },
+        "axiom_use": "AC is inherited only through the library's general Radon–Nikodym-based Kullback–Leibler divergence convention. The explicit dominated densities and the extended nonnegative integral add no stronger choice principle."
+      },
+      {
+        "id": "thm-ip-eig-is-joint-relative-entropy",
+        "kind": "theorem",
+        "title": "Expected information gain is joint relative entropy",
+        "dependency_level": 2,
+        "deps": [
+          "def-ip-design-indexed-inverse-experiment",
+          "def-ip-expected-information-gain",
+          "def-kullback-leibler-divergence",
+          "thm-kullback-leibler-is-nonnegative",
+          "thm-bayes-formula-for-dominated-kernels",
+          "thm-tonelli-theorem-for-sigma-finite-product-spaces",
+          "thm-measure-uniqueness-on-a-sigma-finite-pi-system",
+          "thm-nonnegative-integral-zero-iff-zero-almost-everywhere",
+          "def-finite-sigma-finite-and-semifinite-measures",
+          "thm-indefinite-integral-of-a-nonnegative-function-is-a-measure",
+          "thm-integration-against-a-density",
+          "thm-sigma-finite-product-measure-exists-is-rectangular-and-is-unique",
+          "def-product-sigma-algebra-and-finite-product-sigma-algebras",
+          "def-axiom-of-choice"
+        ],
+        "statement": "Assume the Axiom of Choice. Fix a design $d$ in a design-indexed dominated inverse experiment, with prior $\\mu_0$, likelihood density $p_d(y\\mid\\theta)$ relative to the common sigma-finite measure $\\nu$, predictive density $p_d(y)$, and posterior $\\mu_d^y$ on $G_d=\\{y:0<p_d(y)<\\infty\\}$. Let $P_d$ be the joint law of $(\\theta,Y)$, so on measurable rectangles\n$$P_d(A\\times B)=\\int_B\\int_Ap_d(y\\mid\\theta)\\,\\mu_0(d\\theta)\\,\\nu(dy),$$\nlet $P_{Y\\mid d}(B)=\\int_Bp_d(y)\\,\\nu(dy)$, and let $Q_d=\\mu_0\\otimes P_{Y\\mid d}$. Then\n$$\\operatorname{EIG}(d)=D(P_d\\|Q_d)\\in[0,+\\infty].$$\nOn $G_d$, the Radon–Nikodym density $dP_d/dQ_d$ is $p_d(y\\mid\\theta)/p_d(y)$ almost everywhere. The identity is valid as an extended integral: its negative part is finite, its positive part may be infinite, and no subtraction of two infinite entropies occurs.",
+        "justified_by": [],
+        "forward_refs": [],
+        "sources": {
+          "references": [
+            {
+              "title": "Kathryn Chaloner and Isabella Verdinelli, Bayesian Experimental Design: A Review, Statistical Science 10(3) (1995), 273–304",
+              "url": "https://www.stat.cmu.edu/tr/tr599/tr599.ps",
+              "locator": "§2.2, equation (3), expected posterior-to-prior KL criterion."
+            },
+            {
+              "title": "David J. C. MacKay, Information-Based Objective Functions for Active Data Selection, Neural Computation 4(4) (1992), 590–604",
+              "url": "https://gwern.net/doc/reinforcement-learning/exploration/active-learning/1992-mackay.pdf",
+              "locator": "§2, complete expectation argument for information criteria under the prior-predictive law."
+            }
+          ]
+        },
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "proof_strategy": "direct",
+        "strategy": "direct",
+        "axiom_use": "Assume AC only through the library's KL definition of a Radon–Nikodym derivative. The posterior density and all Tonelli, null-fiber, and integral exchanges in the proof use the supplied dominated densities and are choice-free."
+      },
+      {
+        "id": "thm-ip-linear-gaussian-information-gain-logdet",
+        "kind": "theorem",
+        "title": "Linear Gaussian information gain has a log-determinant formula",
+        "dependency_level": 5,
+        "deps": [
+          "thm-ip-eig-is-joint-relative-entropy",
+          "thm-ip-finite-linear-gaussian-posterior",
+          "def-multivariate-normal-law",
+          "lem-finite-independent-gaussian-vectors-form-joint-multivariate-normal",
+          "thm-nondegenerate-multivariate-normal-law-has-density",
+          "thm-non-negative-square-root-exists-and-is-unique",
+          "def-determinant-of-a-square-matrix",
+          "def-natural-logarithm",
+          "thm-determinant-multiplicative",
+          "def-axiom-of-choice"
+        ],
+        "statement": "Assume the Axiom of Choice. Let $n,m\\ge1$, let $m_0\\in\\mathbb R^n$, let $C\\in\\mathbb R^{n\\times n}$ be symmetric positive semidefinite, let $A\\in\\mathbb R^{m\\times n}$, and let $\\Gamma\\in\\mathbb R^{m\\times m}$ be symmetric positive definite. Suppose $\\theta\\sim N_n(m_0,C)$ and $\\eta\\sim N_m(0,\\Gamma)$ are independent, and observe $Y=A\\theta+\\eta$. With $S=ACA^T+\\Gamma$, the expected information gain of this experiment is\n$$\\operatorname{EIG}=\\frac12\\log\\det\\!\\left(I_m+\\Gamma^{-1/2}ACA^T\\Gamma^{-1/2}\\right).$$\nHere $\\Gamma^{-1/2}$ is the inverse of the unique symmetric positive-definite square root of $\\Gamma$, and $\\log$ is the natural logarithm. The matrix inside the log determinant is positive definite. This formula permits singular $C$ and never uses differential entropy of $\\theta$; the mean $m_0$ cancels. Noise depending on $\\theta$ is outside the hypotheses and need not satisfy the formula.",
+        "justified_by": [],
+        "forward_refs": [],
+        "sources": {
+          "references": [
+            {
+              "title": "Kathryn Chaloner and Isabella Verdinelli, Bayesian Experimental Design: A Review, Statistical Science 10(3) (1995), 273–304",
+              "url": "https://www.stat.cmu.edu/tr/tr599/tr599.ps",
+              "locator": "§2.2, normal-linear Bayesian D-optimality and its determinant criterion."
+            },
+            {
+              "title": "David J. C. MacKay, Information-Based Objective Functions for Active Data Selection, Neural Computation 4(4) (1992), 590–604",
+              "url": "https://gwern.net/doc/reinforcement-learning/exploration/active-learning/1992-mackay.pdf",
+              "locator": "§3.1, equations (3.4)–(3.6), Gaussian information gain from a determinant ratio."
+            },
+            {
+              "title": "Carl Edward Rasmussen and Christopher K. I. Williams, Gaussian Processes for Machine Learning, MIT Press (2006)",
+              "url": "https://gaussianprocess.org/gpml/chapters/RW.pdf",
+              "locator": "Chapter 2 §§2.1–2.2, finite Gaussian conditioning and predictive laws."
+            }
+          ]
+        },
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "proof_strategy": "direct",
+        "strategy": "direct",
+        "axiom_use": "AC is inherited from the library KL convention, finite Gaussian and conditional-law interfaces. The expectation and finite matrix algebra in the local proof use no stronger choice principle and never require an inverse of the possibly singular state covariance."
+      },
+      {
+        "id": "alg-ip-finite-candidate-information-design",
+        "kind": "algorithm",
+        "title": "Finite-candidate information design",
+        "dependency_level": 6,
+        "deps": [
+          "def-ip-design-indexed-inverse-experiment",
+          "def-ip-expected-information-gain",
+          "thm-ip-linear-gaussian-information-gain-logdet",
+          "thm-non-negative-square-root-exists-and-is-unique",
+          "def-cholesky-factorisation-with-positive-diagonal",
+          "thm-cholesky-factorisation-exists-iff-hermitian-positive-definite-and-is-unique",
+          "thm-cholesky-solves-hermitian-positive-definite-systems-and-has-half-the-lu-factorisation-cost",
+          "thm-determinant-of-a-triangular-matrix",
+          "def-determinant-of-a-square-matrix",
+          "def-natural-logarithm",
+          "alg-rounded-cholesky-with-failure-status",
+          "lem-rounded-triangular-substitution-componentwise-backward-error",
+          "thm-rounded-cholesky-componentwise-and-normwise-backward-error",
+          "lem-information-matrix-perturbation-bound",
+          "lem-logdet-information-perturbation-bound",
+          "def-nonlinear-experimental-design-and-local-identifiability"
+        ],
+        "statement": "Assume AC for the library KL/EIG convention. Input a prior covariance $C\\in\\mathbb R^{n\\times n}$ with $n\\ge1$ symmetric positive semidefinite, a finite ordered list of raw candidate records $(A_d,\\Gamma_d,c_d)_{d=1}^N$, and a real budget $B$. Each stored $A_d$ and $\\Gamma_d$ is a finite real matrix, with its dimensions part of the input, and each declared cost $c_d$ is finite and real. A candidate is dimension-valid when $A_d$ has at least one row and exactly $n$ columns and $\\Gamma_d$ is a symmetric square matrix whose dimension equals the row count of $A_d$; for a dimension-valid candidate write that common positive dimension as $m_d$. The prior mean is immaterial to the score.\n\nInterpret each admissible candidate $d$ (dimension-valid with $\\Gamma_d$ positive definite) as a separate singleton-design dominated inverse experiment with prior $\\theta\\sim N_n(m_0,C)$ for any $m_0\\in\\mathbb R^n$, observation space $\\mathbb R^{m_d}$ with Lebesgue measure, and observation $Y_d=A_d\\theta+\\eta_d$, where $\\eta_d\\sim N_{m_d}(0,\\Gamma_d)$ is independent of $\\theta$. Here $\\operatorname{EIG}(d)$ is the expected information gain from the preceding definition for that singleton experiment. Different candidates may have different $m_d$ because each is evaluated on its own observation space. The score is independent of $m_0$.\n\nIn exact-real arithmetic, process the list in order. Mark a candidate inadmissible if it is not dimension-valid or if its noise covariance $\\Gamma_d$ is not positive definite. For each remaining candidate with $c_d\\le B$, compute the Cholesky factor $\\Gamma_d=L_dL_d^T$ with positive diagonal, solve $L_dV_d=A_d$ by forward substitution, and form the symmetric positive-semidefinite matrix $Z_d=V_dCV_d^T$. Set $H_d=I_{m_d}+Z_d$ and compute its Cholesky factor $H_d=R_dR_d^T$. Assign the utility\n$$U_d=\\sum_{j=1}^{m_d}\\log (R_d)_{jj}-c_d=\\tfrac12\\log\\det(H_d)-c_d.$$\nInitialize the stored best candidate as unset. For each admissible candidate meeting the budget, set it if unset; otherwise replace it exactly when the new utility is strictly greater than the stored utility. After the scan, return the stored candidate. This update rule preserves the first index in any tie. If every candidate is inadmissible, return `all-inadmissible`; if at least one candidate is admissible but none meets the budget, return `budget-exhausted`.\n\nIn floating-point mode, treat each finite stored floating-point matrix entry, cost, budget, and tolerance as the exact real number represented by that value; no uncertainty in these input data is included. Use failure-aware Cholesky and triangular-solve procedures, and take a certificate provider as part of the floating-point input. Each provider result is a finite, independently checkable certificate; if the provider cannot certify a required fact, it returns `unresolved`.\n\nProcess the candidates in list order. Test dimensions and symmetry exactly, marking a dimension-invalid candidate inadmissible. For each dimension-valid noise matrix $\\Gamma_d$, call `CertifyPositiveDefiniteness(\\Gamma_d)`. It returns `positive-definite` only with a checkable positive-definiteness certificate, `not-positive-definite` only with a checkable certificate, or `unresolved`. For example, an exact factorization $\\Gamma_d=L L^T$ with $L$ lower triangular and positive diagonal certifies positive definiteness, while a nonzero vector $v$ with $v^T\\Gamma_dv\\le0$ certifies that it is not positive definite. A failed rounded Cholesky factorization is not a certificate of non-positive-definiteness. If any required status is unresolved, return `numerically-unresolved`. After all statuses are certified, return `all-inadmissible` if none is admissible. Compare each admissible stored cost to the stored budget exactly; if none meets it, return `budget-exhausted`.\n\nFor each feasible candidate $d$ in inherited order, call `CertifyScore(d)`. It first runs failure-aware rounded Cholesky on $\\Gamma_d$ and, on success, failure-aware forward substitution on each column of $A_d$ in order; any operation failure or unmet range hypothesis returns `unresolved`. After forming a certified positive-semidefinite $\\widehat Z_d$, it forms a stored matrix $\\widehat H_d$ and certifies both that $\\widehat H_d$ is symmetric positive definite and that $\\|\\widehat H_d-(I_{m_d}+\\widehat Z_d)\\|_2\\le\\sigma_d$ for a rational bound $\\sigma_d\\ge0$. It then runs failure-aware rounded Cholesky on $\\widehat H_d$; a failed definiteness check, factorization, or formation bound returns `unresolved`. The call then returns either `certified` with finite stored values $\\widehat U_d$, $\\widehat Z_d$, and $\\widehat R_d$, nonnegative rational upper bounds $\\delta_d,\\rho_d,\\lambda_d$, and certificates for all of the following, or `unresolved`:\n\n- $\\widehat Z_d$ is symmetric positive semidefinite and $\\|\\widehat Z_d-Z_d\\|_2\\le\\delta_d$, where $Z_d$ uses the exact Cholesky factor of the represented $\\Gamma_d$. This bound includes rounding in forming the Cholesky factor and triangular solve for $\\Gamma_d$, the covariance square root, and the matrix products.\n- $\\widehat R_d$ is a successful lower-triangular Cholesky factor with positive diagonal. If $\\widetilde\\rho_d$ is a certified upper bound for $\\|\\widehat R_d\\widehat R_d^T-\\widehat H_d\\|_2$, choose a rational $\\rho_d\\ge\\widetilde\\rho_d+\\sigma_d$ with $\\rho_d<1$; then $\\|\\widehat R_d\\widehat R_d^T-(I_{m_d}+\\widehat Z_d)\\|_2\\le\\rho_d$.\n- $\\left|\\widehat U_d-\\left(\\frac12\\log\\det(\\widehat R_d\\widehat R_d^T)-c_d\\right)\\right|\\le\\lambda_d$. Evaluate the exact expression as $\\sum_j\\log((\\widehat R_d)_{jj})-c_d$ using the triangular determinant identity; $\\lambda_d$ covers rounded logarithms, their summation, and cost evaluation.\n\nIf any `CertifyScore` call returns `unresolved`, return `numerically-unresolved` immediately, without a candidate or optimum claim. Continue to interval comparisons only when every feasible candidate has a `certified` result.\n\nThe matrix radius may be certified by the published information-matrix perturbation bound in its single-design, unit-weight $W=I_n$ case. Factor $C$ as $C^{1/2}C^{1/2}$ and set $J_d=C^{1/2}V_d^T$; for a computed solve $\\widehat V_d$, set $\\widehat J_d=C^{1/2}\\widehat V_d^T$. Then $Z_d=J_d^TJ_d$ and $\\widehat Z_d=\\widehat J_d^T\\widehat J_d$. The lemma's finite-design hypotheses hold for the one-point sensitivity maps $z\\mapsto J_dz$ and $z\\mapsto\\widehat J_dz$ from $\\mathbb R^{m_d}$ to $\\mathbb R^n$, with weight $W=I_n$ and design weight $1$. If $\\|J_d\\|_2\\le K_d$ and $\\|\\widehat J_d-J_d\\|_2\\le\\eta_d$, then $\\delta_d$ may be any verified bound at least $2K_d\\eta_d+\\eta_d^2$, enlarged by any separate matrix-formation residual. A rounded triangular-substitution bound may be used only after checking its $(m_d+3)u<1$ and normal-range, finite-operation hypotheses for every right-hand side. Convert its backward-error bound to the required forward matrix bound using verified conditioning; a solve backward-error bound alone does not certify $\\eta_d$. For the published rounded-Cholesky normwise bound, verify success and its operationwise model, put $q=20m_d+20$ and $g=qu/(1-qu)$, and check $qu<1/5$ before using $100g\\|\\widehat R_d\\|_F^2$ as a residual bound; if using its relative bound, also check $100\\sqrt{m_d}g\\le1/2$. The log-determinant perturbation bound is applied on the two symmetric matrix segments with eigenvalue floors $1$ and $1-\\rho_d$. A missing or failed certificate returns `numerically-unresolved` and no optimum claim.\n\nSet $\\varepsilon_d=\\frac{m_d}{2}\\left(\\delta_d+\\frac{\\rho_d}{1-\\rho_d}\\right)+\\lambda_d$ and form the exact rational interval $[\\widehat U_d-\\varepsilon_d,\\widehat U_d+\\varepsilon_d]$. Given a finite nonnegative stored tolerance $\\tau$, compute $M=\\max_{d\\text{ feasible}}\\widehat U_d$ and return the first feasible candidate with $\\widehat U_d\\ge M-\\tau$. Certify the comparisons exactly on the represented floating-point values and rational bounds; if any comparison needed for this branch or for its interval certificate is undecided, return `numerically-unresolved`. The returned candidate's true utility gap is at most $\\tau+2\\max_d\\varepsilon_d$. If its lower interval endpoint exceeds every earlier candidate's upper endpoint and is at least every later candidate's upper endpoint, certify it as the first exact maximizer. The algorithm makes no bit-complexity claim for exact-real comparisons.",
+        "justified_by": [],
+        "forward_refs": [],
+        "sources": {
+          "references": [
+            {
+              "title": "Carl Edward Rasmussen and Christopher K. I. Williams, Gaussian Processes for Machine Learning, MIT Press (2006)",
+              "url": "https://gaussianprocess.org/gpml/chapters/RW.pdf",
+              "locator": "Chapter 2, Algorithm 2.1 and equation (2.30): Cholesky solves and log determinant from a positive-diagonal triangular factor."
+            },
+            {
+              "title": "Kathryn Chaloner and Isabella Verdinelli, Bayesian Experimental Design: A Review, Statistical Science 10(3) (1995), 273–304",
+              "url": "https://www.stat.cmu.edu/tr/tr599/tr599.ps",
+              "locator": "§2.2, expected information criterion in the normal linear model."
+            }
+          ]
+        },
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "not-applicable"
+        },
+        "axiom_use": "The finite scan and its deterministic tie rule are choice-free. The exact utility inherits AC from the EIG/KL convention; no arbitrary selection among the finite candidates is made."
+      },
+      {
+        "id": "thm-ip-finite-candidate-information-design-correctness",
+        "kind": "theorem",
+        "title": "Finite-candidate information design returns an exact or certified approximate optimum",
+        "dependency_level": 7,
+        "deps": [
+          "alg-ip-finite-candidate-information-design",
+          "thm-ip-linear-gaussian-information-gain-logdet",
+          "def-axiom-of-choice",
+          "thm-cholesky-factorisation-exists-iff-hermitian-positive-definite-and-is-unique",
+          "thm-cholesky-solves-hermitian-positive-definite-systems-and-has-half-the-lu-factorisation-cost",
+          "thm-determinant-multiplicative",
+          "thm-determinant-of-a-triangular-matrix",
+          "thm-non-negative-square-root-exists-and-is-unique",
+          "lem-information-matrix-perturbation-bound",
+          "def-nonlinear-experimental-design-and-local-identifiability",
+          "lem-logdet-information-perturbation-bound",
+          "thm-rounded-cholesky-componentwise-and-normwise-backward-error",
+          "lem-rounded-triangular-substitution-componentwise-backward-error",
+          "thm-natural-logarithm-laws"
+        ],
+        "statement": "Assume AC for the library KL/EIG convention.\n\nAssume the finite-candidate algorithm's hypotheses. A candidate is admissible when it is dimension-valid and its symmetric noise covariance is positive definite; let $\\mathcal V$ be the ordered list of admissible candidates and let $\\mathcal F=(d\\in\\mathcal V:c_d\\le B)$ in the inherited order. For each $d\\in\\mathcal F$, let $U_d=\\operatorname{EIG}(d)-c_d$ be its exact utility. In exact-real mode, if $\\mathcal F$ is nonempty, the algorithm returns the first index in $\\mathcal F$ attaining $\\max_{d\\in\\mathcal F}U_d$; if $\\mathcal V$ is empty it returns `all-inadmissible`, and if $\\mathcal V$ is nonempty but $\\mathcal F$ is empty it returns `budget-exhausted`.\n\nFor the floating-point mode, suppose each $d\\in\\mathcal F$ has a computed score $\\widehat U_d$, a symmetric positive-semidefinite matrix $\\widehat Z_d$, a successful factor $\\widehat R_d$, and certified radii $\\delta_d\\ge0$, $0\\le\\rho_d<1$, and $\\lambda_d\\ge0$ such that\n$$\\|\\widehat Z_d-Z_d\\|_2\\le\\delta_d,\\qquad \\|\\widehat R_d\\widehat R_d^T-(I_{m_d}+\\widehat Z_d)\\|_2\\le\\rho_d,$$\nwhere $Z_d$ is the exact Cholesky-whitened matrix in the algorithm's Definition, and\n$$\\left|\\widehat U_d-\\left(\\frac12\\log\\det(\\widehat R_d\\widehat R_d^T)-c_d\\right)\\right|\\le\\lambda_d.$$\nFor example, the matrix-radius component can use the information-matrix perturbation result in its single-design, unit-weight $W=I$ specialization: if $Z_d=J_d^TJ_d$, $\\widehat Z_d=\\widehat J_d^T\\widehat J_d$, $\\|J_d\\|_2\\le K_d$, and $\\|\\widehat J_d-J_d\\|_2\\le\\eta_d$, then $\\delta_d\\ge2K_d\\eta_d+\\eta_d^2$ is sufficient, with any separate formation residual added. A rounded triangular-solve backward-error bound must be converted to the needed forward matrix error using a verified conditioning bound. The rounded-Cholesky residual must follow from a successful factorization under its stated floating-point assumptions; in particular, the cited bound assumes $m u<1/5$, where $m=20m_d+20$ and $u$ is unit roundoff. The value $\\lambda_d$ must bound the rounded logarithms, their summation, and cost evaluation. Set $\\varepsilon_d=\\frac{m_d}{2}\\left(\\delta_d+\\frac{\\rho_d}{1-\\rho_d}\\right)+\\lambda_d$. If the algorithm returns a candidate $\\widehat d$ with $\\widehat U_{\\widehat d}\\ge\\max_{d\\in\\mathcal F}\\widehat U_d-\\tau$, then\n$$\\max_{d\\in\\mathcal F}U_d-U_{\\widehat d}\\le\\tau+\\varepsilon_{d^*}+\\varepsilon_{\\widehat d}\\le\\tau+2\\max_{d\\in\\mathcal F}\\varepsilon_d,$$\nwhere $d^*$ is any exact maximizer. If the certified score intervals show that the selected candidate's lower endpoint exceeds every earlier candidate's upper endpoint and is at least every later candidate's upper endpoint, it is the first exact maximizer. The matrix and factor radii must be certified under the published solve, information-matrix, rounded-Cholesky, and log-determinant error hypotheses; $\\lambda_d$ must additionally cover rounded logarithm, summation, and cost evaluation.",
+        "justified_by": [],
+        "forward_refs": [],
+        "sources": {
+          "references": [
+            {
+              "title": "Stephen Boyd and Lieven Vandenberghe, Convex Optimization, §3.1.5",
+              "url": "https://web.stanford.edu/~boyd/cvxbook/bv_cvxbook.pdf",
+              "locator": "The complete book was retrieved; §3.1.5, printed pp. 73–74, supports log-determinant perturbation context. The local finite-candidate guarantee is proved here."
+            },
+            {
+              "title": "Tobin A. Driscoll and Richard J. Braun, Fundamentals of Numerical Computation, §§2.8–2.9",
+              "url": "https://fncbook.com/structure/",
+              "locator": "Cholesky factorization and rounded factorization context; the local certificate conditions retain the library's exact residual hypotheses."
+            }
+          ]
+        },
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-altered"
+        },
+        "proof_strategy": "direct",
+        "strategy": "direct",
+        "axiom_use": "The finite comparison and its tie rule are choice-free. The utility inherits the Axiom of Choice from the EIG/KL convention; the numerical error bounds use only the declared finite-dimensional error interfaces."
+      }
+    ]
+  },
+  {
+    "order": 3105,
+    "id": "bayesian-inverse-experimental-design-and-information-gain-examples",
+    "kind": "B",
+    "category": "inverse-problems",
+    "title": "Bayesian measurement design and information gain — Examples and Counterexamples",
+    "companion": "bayesian-inverse-experimental-design-and-information-gain",
+    "requires": [
+      "bayesian-inverse-experimental-design-and-information-gain",
+      "numerical-optimization-for-statistical-computation"
+    ],
+    "items": [
+      {
+        "id": "cex-ip-eig-cannot-identify-wrong-forward-operator",
+        "kind": "counterexample",
+        "title": "Expected information gain under a wrong operator does not identify the operator-parameter pair",
+        "dependency_level": 3,
+        "deps": [
+          "def-ip-design-indexed-inverse-experiment",
+          "def-ip-expected-information-gain",
+          "thm-ip-eig-is-joint-relative-entropy",
+          "def-kullback-leibler-divergence",
+          "thm-kullback-leibler-is-nonnegative",
+          "def-axiom-of-choice",
+          "thm-natural-logarithm-laws"
+        ],
+        "statement": "The following implication is false: in every finite dominated inverse experiment, if expected information gain for a parameter is positive under a fixed nominal forward operator, then an unknown truth-operator pair is identifiable from the observation law, where identifiable means that distinct pairs induce distinct conditional observation laws.",
+        "justified_by": [],
+        "forward_refs": [],
+        "sources": {
+          "references": [
+            {
+              "title": "David J. C. MacKay, Information-Based Objective Functions for Active Data Selection, Neural Computation 4(4) (1992), 590–604",
+              "url": "https://gwern.net/doc/reinforcement-learning/exploration/active-learning/1992-mackay.pdf",
+              "locator": "§6.1 and Conclusion: information utility is evaluated under the assumed model and can answer the wrong question when that model is incorrect."
+            },
+            {
+              "title": "Kathryn Chaloner and Isabella Verdinelli, Bayesian Experimental Design: A Review, Statistical Science 10(3) (1995), 273–304",
+              "url": "https://www.stat.cmu.edu/tr/tr599/tr599.ps",
+              "locator": "§1.2 and §2.2: the design objective averages information under the specified prior-predictive model."
+            }
+          ]
+        },
+        "provenance": {
+          "statement": "ai-generated",
+          "proof": "ai-generated"
+        },
+        "proof_strategy": "direct",
+        "strategy": "direct",
+        "generation": {
+          "role": "counterexample"
+        },
+        "axiom_use": "AC is inherited from the library EIG/KL convention."
+      },
+      {
+        "id": "ex-ip-eig-high-prior-variance-direction",
+        "kind": "example",
+        "title": "Sensor placement along a high prior-variance direction",
+        "dependency_level": 6,
+        "deps": [
+          "def-ip-design-indexed-inverse-experiment",
+          "def-ip-expected-information-gain",
+          "thm-ip-linear-gaussian-information-gain-logdet",
+          "def-axiom-of-choice",
+          "thm-natural-logarithm-laws"
+        ],
+        "statement": "Assume AC. Let $\\theta\\sim N_2(0,C)$ with $C=\\operatorname{diag}(9,1)$. Compare two zero-cost one-sensor designs with independent unit-variance Gaussian noise: $d_1$ observes $A_1\\theta$ with $A_1=(1,0)$, and $d_2$ observes $A_2\\theta$ with $A_2=(0,1)$. Their expected information gains are $\\frac12\\log 10$ and $\\frac12\\log 2$, respectively, so the sensor measuring the higher prior-variance direction is uniquely preferred.",
+        "justified_by": [],
+        "forward_refs": [],
+        "sources": {
+          "references": [
+            {
+              "title": "Kathryn Chaloner and Isabella Verdinelli, Bayesian Experimental Design: A Review, Statistical Science 10(3) (1995), 273–304",
+              "url": "https://www.stat.cmu.edu/tr/tr599/tr599.ps",
+              "locator": "§2.2, expected information and Gaussian linear design criterion."
+            },
+            {
+              "title": "David J. C. MacKay, Information-Based Objective Functions for Active Data Selection, Neural Computation 4(4) (1992), 590–604",
+              "url": "https://gwern.net/doc/reinforcement-learning/exploration/active-learning/1992-mackay.pdf",
+              "locator": "§3.1, Gaussian information gain and prior predictive variance."
+            }
+          ]
+        },
+        "provenance": {
+          "statement": "ai-generated",
+          "proof": "ai-generated"
+        },
+        "proof_strategy": "direct",
+        "strategy": "direct",
+        "generation": {
+          "role": "example"
+        },
+        "axiom_use": "AC is inherited from the finite Gaussian EIG and library KL interfaces."
+      },
+      {
+        "id": "ex-ip-eig-repeated-correlated-noise",
+        "kind": "example",
+        "title": "Repeated measurements with correlated noise",
+        "dependency_level": 6,
+        "deps": [
+          "def-ip-design-indexed-inverse-experiment",
+          "def-ip-expected-information-gain",
+          "thm-ip-linear-gaussian-information-gain-logdet",
+          "def-axiom-of-choice",
+          "thm-natural-logarithm-laws"
+        ],
+        "statement": "Assume AC. Let $\\theta\\sim N(0,1)$ and observe $Y=A\\theta+\\eta$, where $A=(1,1)^T$ and $\\eta\\sim N_2(0,\\Gamma_\\rho)$ is independent of $\\theta$, with $\\Gamma_\\rho=\\begin{pmatrix}1&\\rho\\\\\\rho&1\\end{pmatrix}$ and $-1<\\rho<1$. The matrix $\\Gamma_\\rho$ is positive definite. The expected information gain is $\\frac12\\log\\left(1+\\frac{2}{1+\\rho}\\right)$. In particular, correlation $\\rho=\\frac12$ gives $\\frac12\\log(7/3)$, less than the independent-noise value $\\frac12\\log 3$ at $\\rho=0$.",
+        "justified_by": [],
+        "forward_refs": [],
+        "sources": {
+          "references": [
+            {
+              "title": "Kathryn Chaloner and Isabella Verdinelli, Bayesian Experimental Design: A Review, Statistical Science 10(3) (1995), 273–304",
+              "url": "https://www.stat.cmu.edu/tr/tr599/tr599.ps",
+              "locator": "§2.2, expected information criterion for the normal linear model."
+            },
+            {
+              "title": "David J. C. MacKay, Information-Based Objective Functions for Active Data Selection, Neural Computation 4(4) (1992), 590–604",
+              "url": "https://gwern.net/doc/reinforcement-learning/exploration/active-learning/1992-mackay.pdf",
+              "locator": "§3.1 and p. 594, information criteria with correlated or design-dependent noise."
+            }
+          ]
+        },
+        "provenance": {
+          "statement": "ai-generated",
+          "proof": "ai-generated"
+        },
+        "proof_strategy": "direct",
+        "strategy": "direct",
+        "generation": {
+          "role": "example"
+        },
+        "axiom_use": "AC is inherited from the finite Gaussian EIG and library KL interfaces."
+      },
+      {
+        "id": "ex-ip-eig-singular-prior-support",
+        "kind": "example",
+        "title": "Information gain on a singular prior support",
+        "dependency_level": 6,
+        "deps": [
+          "def-ip-design-indexed-inverse-experiment",
+          "def-ip-expected-information-gain",
+          "thm-ip-linear-gaussian-information-gain-logdet",
+          "lem-ip-singular-gaussian-support-and-pseudoinverse",
+          "def-axiom-of-choice",
+          "thm-natural-logarithm-laws"
+        ],
+        "statement": "Assume AC. Let $\\theta\\sim N_2(0,C)$ with $C=\\operatorname{diag}(1,0)$, so its support is the first coordinate axis. Let $\\eta\\sim N(0,1)$ be independent of $\\theta$ and compare the one-coordinate experiments $Y=A\\theta+\\eta$ for $A_\\perp=(0,1)$ and $A_\\parallel=(1,0)$. Their expected information gains are $0$ and $\\frac12\\log 2$, respectively. The log-determinant formula remains defined although $C$ is singular.",
+        "justified_by": [],
+        "forward_refs": [],
+        "sources": {
+          "references": [
+            {
+              "title": "Christian Clason, Regularization of Inverse Problems: Lecture Notes, arXiv:2001.00617v2 (2021)",
+              "url": "https://arxiv.org/pdf/2001.00617",
+              "locator": "Chapter 13, finite-dimensional Gaussian inverse setting; singular support is verified locally using the current IP-18 supplier."
+            },
+            {
+              "title": "M. Dashti and A. M. Stuart, The Bayesian Approach to Inverse Problems, full lecture notes, arXiv:1302.6989",
+              "url": "https://arxiv.org/pdf/1302.6989",
+              "locator": "§3.1, Gaussian prior and posterior context; the example's finite singular-support calculations are local."
+            }
+          ]
+        },
+        "provenance": {
+          "statement": "ai-generated",
+          "proof": "ai-generated"
+        },
+        "proof_strategy": "direct",
+        "strategy": "direct",
+        "generation": {
+          "role": "example"
+        },
+        "axiom_use": "AC is inherited from the finite Gaussian and EIG/KL interfaces."
+      }
+    ]
+  }
+]

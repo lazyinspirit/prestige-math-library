@@ -56,7 +56,7 @@ Let $S=\mathbb Z[a^{\pm1},z,d^{\pm1}]/(z(d-1)-(a-a^{-1}))$ and let $T=S[q^{\pm1}
 
 In the schematic, solid blue edges are one endpoint matching and dashed red edges are the other. Each vertex belongs to one edge of each color, so the union decomposes into alternating cycles; each such cycle is one component after closure.
 
-\begin{center}
+```tikz
 \begin{tikzpicture}[baseline=-0.5ex,scale=0.72]
 \foreach \i/\ang in {1/90,2/30,3/-30,4/-90,5/-150,6/150}{\coordinate (v\i) at (\ang:1.2);}
 \draw[blue!70!black,line width=1.2pt] (v1)--(v4) (v2)--(v5) (v3)--(v6);
@@ -65,10 +65,11 @@ In the schematic, solid blue edges are one endpoint matching and dashed red edge
 \node[blue!70!black] at (0,-1.65) {$m$};
 \node[red!70!black] at (0,1.65) {$m'$};
 \end{tikzpicture}
-\end{center}
+```
 
 
 ## Proof
+
 
 1.1 Define the ring homomorphism $\sigma:S\to\mathbb Z[x^{\pm1}]$ by $a\mapsto1$, $z\mapsto0$, and $d\mapsto x$; the defining relation maps to $0=0$, so the map is well defined. For any closed diagram in an entry of $M_n$, the skein rule in [F1] becomes $P_+=P_-$ under $\sigma$. Switch finitely many crossings until the closed diagram is totally descending; these switches do not change its specialized value. Pulling the first traversed strands above the later ones unties every component, and the specialized curl factor is $1$. The result is a disjoint union of $\ell(m,m')$ trivial circles, where $\ell(m,m')$ is the number of connected components in the union of the two endpoint matchings. Hence $\sigma(M_n[m,m'])=x^{\ell(m,m')}$. The closure is a closed diagram at every $n$, including the empty diagram for $n=0$. [F1, F3, construct, algebra]
 

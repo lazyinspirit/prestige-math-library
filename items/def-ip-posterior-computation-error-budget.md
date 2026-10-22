@@ -65,7 +65,7 @@ invariant law has been established, the invariant-kernel and burn-in terms
 below are unavailable; they are not set to zero. Let $(X_n)_{n\ge0}$ be a
 time-homogeneous Markov chain with transition kernel $K$ relative to its
 natural filtration, with initial probability law $\lambda$. For burn-in length
-$b\ge0$ and retained sample size $N\ge1$, set
+$b\in\{0,1,2,\ldots\}$ and retained sample size $N\in\{1,2,3,\ldots\}$, set
 $$\bar f_{b,N}:=\frac1N\sum_{j=1}^N f(X_{b+j}),$$
 and let $\mathbb E_\lambda$ denote expectation under this initial law and the
 chain's transition randomness.

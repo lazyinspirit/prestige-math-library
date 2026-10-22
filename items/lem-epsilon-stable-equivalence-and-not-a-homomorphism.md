@@ -49,7 +49,7 @@ sources:
 
 ## Statement
 
-Let $K$ and $J$ be smooth oriented knots, and use the epsilon sign convention from the preceding definition. If their knot Floer complexes are stably filtered equivalent, meaning that there are totally acyclic bifiltered complexes $A$ and $B$ with $\mathrm{CFK}^{\infty}(K)\oplus A$ filtered-chain-homotopy equivalent to $\mathrm{CFK}^{\infty}(J)\oplus B$, then $\epsilon(K)=\epsilon(J)$. The acyclic summands here need not be acyclic after taking either associated-graded filtration.
+For the knot-level assertions, assume the Axiom of Countable Choice. Let $K$ and $J$ be smooth oriented knots, and use the epsilon sign convention from the preceding definition. If their knot Floer complexes are stably filtered equivalent, meaning that there are totally acyclic bifiltered complexes $A$ and $B$ with $\mathrm{CFK}^{\infty}(K)\oplus A$ filtered-chain-homotopy equivalent to $\mathrm{CFK}^{\infty}(J)\oplus B$, then $\epsilon(K)=\epsilon(J)$. The acyclic summands here need not be acyclic after taking either associated-graded filtration.
 
 The invariant satisfies $\epsilon(-K)=-\epsilon(K)$, $\epsilon(K)=0\Rightarrow\tau(K)=0$, and the tensor rules
 $$ \epsilon(K)=\epsilon(J)\Rightarrow\epsilon(K\#J)=\epsilon(K),\qquad \epsilon(K)=0\Rightarrow\epsilon(K\#J)=\epsilon(J). $$
@@ -69,7 +69,7 @@ The converse of $\epsilon(K)=0\Rightarrow\tau(K)=0$ fails: the knot $T_{2,5}\#-T
 
 ## Facts & Assumptions
 
-**Given:** The actual normalized finite free Maslov-graded bifiltered complexes of the knots, with the supplied geometric tensor and duality identifications. Every newly used finite operation below is over $\mathbb F_2$.
+**Given:** The actual normalized finite free Maslov-graded bifiltered complexes of the knots, with the supplied geometric tensor and duality identifications. Every newly used finite operation below is over $\mathbb F_2$. Countable Choice is assumed for the knot-level constructions and geometric comparisons; finite algebra on the stated supplied complexes and maps requires no further choice.
 
 [F1] [[def-epsilon-from-filtered-knot-floer-complex]] defines $F_s,G_s$ and epsilon. Its supplied two-hook argument proves the three cases are exhaustive and the two maps cannot both vanish.
 

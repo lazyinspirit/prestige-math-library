@@ -14,6 +14,11 @@ dependency_level: 1
 provenance:
   statement: literature-derived
   proof: ai-altered
+verification:
+  judge:
+    model: "gpt-6-luna"
+    verdict: pass
+    date: 2026-10-22
 sources:
   references:
     - title: Lauri Oksanen, Mikko Salo, Plamen Stefanov, and Gunther Uhlmann, Inverse

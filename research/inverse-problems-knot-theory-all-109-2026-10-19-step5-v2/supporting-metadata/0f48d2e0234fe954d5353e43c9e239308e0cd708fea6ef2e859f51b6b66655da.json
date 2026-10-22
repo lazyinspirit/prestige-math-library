@@ -1,0 +1,181 @@
+[
+  {
+    "order": 3038,
+    "id": "credible-sets-and-frequency-coverage-in-inverse-problems",
+    "kind": "A",
+    "category": "inverse-problems",
+    "title": "Credible sets and frequentist coverage",
+    "companion": "credible-sets-and-frequency-coverage-in-inverse-problems-examples",
+    "requires": [
+      "statistical-inverse-experiments-and-white-noise",
+      "bayesian-inverse-likelihoods-and-posterior-propriety",
+      "posterior-contraction-in-gaussian-sequence-inversion",
+      "adaptive-empirical-bayes-credible-set-calibration",
+      "functional-bayesian-limits-and-credible-set-calibration"
+    ],
+    "items": [
+      {
+        "id": "def-ip-credible-set-and-frequency-coverage",
+        "kind": "definition",
+        "title": "Posterior credibility and frequentist coverage",
+        "statement": "Let $(\\Theta,\\mathcal T)$ be a measurable parameter space and, for each integer $n\\ge1$, let $\\mathcal E_n=((\\mathsf Y_n,\\mathcal Y_n),(P_{\\theta,n})_{\\theta\\in\\Theta})$ be a statistical experiment. Let $\\Pi_{0,n}$ be a proper prior on $(\\Theta,\\mathcal T)$ and let $y\\mapsto\\Pi_n(\\cdot\\mid y)$ be a supplied posterior probability kernel under the associated prior-predictive law. For $0<\\gamma<1$, a data-indexed set rule $C_n:\\mathsf Y_n\\to\\mathcal P(\\Theta)$ is a posterior credible set at level $1-\\gamma$ if its membership graph $\\{(y,\\theta):\\theta\\in C_n(y)\\}$ is in $\\mathcal Y_n\\otimes\\mathcal T$ and $\\Pi_n(C_n(y)\\mid y)\\ge1-\\gamma$ for every $y$ in its declared data domain. At a fixed truth $\\theta\\in\\Theta$, its frequentist coverage is $c_n(\\theta):=P_{\\theta,n}\\{y:\\theta\\in C_n(y)\\}$. For a truth class $\\mathcal T_n\\subseteq\\Theta$, the rule is asymptotically honest at level $1-\\gamma$ on $\\mathcal T_n$ if $\\liminf_{n\\to\\infty}\\inf_{\\theta\\in\\mathcal T_n}c_n(\\theta)\\ge1-\\gamma$, and it is asymptotically exactly calibrated there if $\\sup_{\\theta\\in\\mathcal T_n}|c_n(\\theta)-(1-\\gamma)|\\to0$.",
+        "deps": [
+          "def-posterior-credible-set",
+          "def-confidence-set-and-coverage"
+        ],
+        "justified_by": [],
+        "dependency_level": 0,
+        "sources": {
+          "references": [
+            {
+              "title": "Botond Szabó, A. W. van der Vaart, and J. H. van Zanten, Frequentist coverage of adaptive nonparametric Bayesian credible sets, Annals of Statistics 43(4) (2015)",
+              "url": "https://arxiv.org/pdf/1310.4489v5",
+              "locator": "§1, distinction between posterior credible mass and repeated-sampling coverage; §§2–3, inverse Gaussian sequence setup and frequentist coverage formulation."
+            },
+            {
+              "title": "Evarist Giné and Richard Nickl, Mathematical Foundations of Infinite-Dimensional Statistical Models, Cambridge University Press (2016)",
+              "url": "https://www.statslab.cam.ac.uk/~rn289/Site/__files/FULLPDF.pdf",
+              "locator": "§6.4, confidence sets; §8.3, adaptive honest confidence sets and self-similarity restrictions."
+            },
+            {
+              "title": "Kolyan Ray, Adaptive Bernstein–von Mises theorems in Gaussian white noise",
+              "url": "https://arxiv.org/pdf/1407.3397",
+              "locator": "§1, posterior credible sets and their frequentist interpretation; §4.1, adaptive full-parameter confidence sets in direct Gaussian white noise."
+            }
+          ]
+        },
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "not-applicable"
+        },
+        "axiom_use": "A proper posterior kernel and the sampling laws are supplied; this definition introduces no existence or choice principle.",
+        "strategy": "Define posterior credibility and fixed-truth coverage separately; state uniform honesty and exact calibration."
+      },
+      {
+        "id": "op-ip-honest-coverage-over-ill-posed-truth-classes",
+        "kind": "open-problem",
+        "title": "Exact adaptive credible coverage in mildly ill-posed Gaussian sequence models",
+        "statement": "Assume AC and Countable Choice. Fix $p>0$, $C\\ge1$, $0<\\beta_-<\\beta_+<A<\\infty$, $R\\ge1$, $L_0\\ge1$, an integer $N_0\\ge1$, $\\rho\\ge2$, $m\\in(0,R]$, and $0<\\gamma<1$. Let a known positive singular-value sequence satisfy $C^{-2}i^{-2p}\\le\\kappa_i^2\\le C^2i^{-2p}$, and observe $X_i=\\kappa_i\\theta_i+n^{-1/2}\\xi_i$ for $i\\ge1$, where the fixed truth $\\theta=(\\theta_i)\\in\\ell^2(\\mathbb N,\\mathbb R)$ and the $\\xi_i$ are independent $N(0,1)$ variables. For $\\alpha>0$, use the product prior $\\Pi_\\alpha=\\bigotimes_{i\\ge1}N(0,i^{-1-2\\alpha})$ and its product Gaussian posterior with coordinate mean $n\\kappa_iX_i/(i^{1+2\\alpha}+n\\kappa_i^2)$ and variance $(i^{1+2\\alpha}+n\\kappa_i^2)^{-1}$. Select $\\widehat\\alpha_n$ as a Borel global maximizer over $[0,A]$ of the marginal log-likelihood score\n$$\\ell_n(\\alpha;X)=-\\frac12\\sum_{i\\ge1}\\left[\\log\\left(1+\\frac{n\\kappa_i^2}{i^{1+2\\alpha}}\\right)-\\frac{n^2\\kappa_i^2X_i^2}{i^{1+2\\alpha}+n\\kappa_i^2}\\right],$$\nassuming the score series is finite on a Borel data domain of probability one for the truths below and is upper semicontinuous in $\\alpha$ there. The $\\widehat\\alpha_n=0$ branch uses the whole space $\\ell^2$ and asserts no posterior probability on $\\ell^2$.\n\nFor $\\theta\\in\\ell^2$, write $\\|\\theta\\|_2=(\\sum_{i\\ge1}\\theta_i^2)^{1/2}$. For $B\\subseteq\\ell^2$, define $\\operatorname{diam}_{\\ell^2}(B)=\\sup_{u,v\\in B}\\|u-v\\|_2$, with $\\operatorname{diam}_{\\ell^2}(\\varnothing)=0$.\n\nFor $\\beta\\in[\\beta_-,\\beta_+]$, let $\\Theta_\\beta(R)=\\{\\theta\\in\\ell^2:\\sum_{i\\ge1}i^{2\\beta}\\theta_i^2\\le R^2\\}$ and let $\\Theta_{\\mathrm{pt}}(L_0,N_0,\\rho)$ consist of those $\\theta\\in\\ell^2$ satisfying $\\sum_{i=N}^{\\infty}\\theta_i^2\\le L_0\\sum_{i=N}^{\\lfloor\\rho N\\rfloor}\\theta_i^2$ for every integer $N\\ge N_0$. Put $\\mathcal G_\\beta=\\Theta_\\beta(R)\\cap\\Theta_{\\mathrm{pt}}(L_0,N_0,\\rho)\\cap\\{\\theta:\\theta_1=0,\\ \\|\\theta\\|_2\\ge m\\}$ and assume the fixed constants make each $\\mathcal G_\\beta$ nonempty. Does there exist a single graph-measurable data-indexed set rule $C_{n,\\gamma}(X)\\subseteq\\ell^2$, depending only on the known model and class constants and not on $\\theta$ or $\\beta$, such that on $\\widehat\\alpha_n>0$ it has posterior mass $\\Pi_{\\widehat\\alpha_n}(C_{n,\\gamma}(X)\\mid X)\\ge1-\\gamma$, its uniform frequentist coverage satisfies\n$$\\sup_{\\beta\\in[\\beta_-,\\beta_+]}\\sup_{\\theta\\in\\mathcal G_\\beta}\\left|P_\\theta^{(n)}\\{\\theta\\in C_{n,\\gamma}(X)\\}-(1-\\gamma)\\right|\\longrightarrow0,$$\nand its $\\ell^2$-diameter has the no-log rate $n^{-\\beta/(1+2\\beta+2p)}$ uniformly in the following sense: for every $\\eta>0$ there is $K_\\eta<\\infty$ such that\n$$\\limsup_{n\\to\\infty}\\sup_{\\beta\\in[\\beta_-,\\beta_+]}\\sup_{\\theta\\in\\mathcal G_\\beta}P_\\theta^{(n)}\\left\\{\\operatorname{diam}_{\\ell^2}(C_{n,\\gamma}(X))>K_\\eta n^{-\\beta/(1+2\\beta+2p)}\\right\\}\\le\\eta?$$",
+        "deps": [
+          "def-ip-credible-set-and-frequency-coverage",
+          "def-ip-posterior-contraction-rate",
+          "def-adaptive-empirical-bayes-gaussian-sequence-procedure",
+          "lem-gaussian-sequence-empirical-bayes-posterior-formula",
+          "def-countable-choice",
+          "def-axiom-of-choice",
+          "def-gaussian-sequence-hyperrectangle-class",
+          "def-polished-tail-class-for-gaussian-sequence",
+          "thm-adaptive-empirical-bayes-credible-ball-conservative-coverage-on-polished-tails",
+          "cex-sparse-gap-truth-causes-empirical-bayes-credible-set-undercoverage"
+        ],
+        "justified_by": [],
+        "dependency_level": 4,
+        "sources": {
+          "references": [
+            {
+              "title": "Botond Szabó, A. W. van der Vaart, and J. H. van Zanten, Frequentist coverage of adaptive nonparametric Bayesian credible sets, Annals of Statistics 43(4) (2015)",
+              "url": "https://arxiv.org/pdf/1310.4489v5",
+              "locator": "§2, mildly ill-posed Gaussian sequence model and empirical-Bayes posterior; §3, Theorems 3.1 and 3.6; §§5 and 9, complete proofs."
+            },
+            {
+              "title": "Judith Rousseau and Botond Szabó, Asymptotic frequentist coverage properties of Bayesian credible sets for sieve priors",
+              "url": "https://arxiv.org/pdf/1609.05067",
+              "locator": "§1 and §2, limitations of adaptive honest confidence sets and general polished-tail assumptions for sieve-posterior credible balls."
+            },
+            {
+              "title": "Kolyan Ray, Adaptive Bernstein–von Mises theorems in Gaussian white noise",
+              "url": "https://arxiv.org/pdf/1407.3397",
+              "locator": "§§2.1 and 3.1, direct white-noise empirical-Bayes posterior; §4.1, exact coverage and diameter of full-parameter confidence sets under self-similarity."
+            },
+            {
+              "title": "B. T. Knapik, B. T. Szabó, A. W. van der Vaart, and J. H. van Zanten, Bayes procedures for adaptive inference in inverse problems for the white noise model",
+              "url": "https://arxiv.org/pdf/1209.3628",
+              "locator": "§§1–2.3, mildly ill-posed inverse sequence model and adaptive global ℓ² contraction rates; §2.3 distinguishes global-parameter results from linear-functional questions."
+            },
+            {
+              "title": "Evarist Giné and Richard Nickl, Mathematical Foundations of Infinite-Dimensional Statistical Models, Cambridge University Press (2016)",
+              "url": "https://www.statslab.cam.ac.uk/~rn289/Site/__files/FULLPDF.pdf",
+              "locator": "§6.4 and §8.3, confidence-set coverage, adaptive size limitations, and self-similarity restrictions."
+            }
+          ]
+        },
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "not-applicable"
+        },
+        "axiom_use": "Countable Choice is inherited from the sequence inverse model; AC supplies the countable Gaussian product prior and posterior construction. No stronger choice principle is asserted.",
+        "strategy": "Formulate the exact-coverage and no-log-diameter question at the stated inverse-sequence and polished-tail scope."
+      }
+    ]
+  },
+  {
+    "order": 3039,
+    "id": "credible-sets-and-frequency-coverage-in-inverse-problems-examples",
+    "kind": "B",
+    "category": "inverse-problems",
+    "title": "Credible sets and frequentist coverage — Examples and Counterexamples",
+    "companion": "credible-sets-and-frequency-coverage-in-inverse-problems",
+    "requires": [
+      "credible-sets-and-frequency-coverage-in-inverse-problems"
+    ],
+    "items": [
+      {
+        "id": "ex-ip-inverse-coordinate-credible-interval-undercoverage",
+        "kind": "example",
+        "title": "A proper Gaussian prior yields a credible interval with undercoverage",
+        "statement": "Assume AC. Observe $Y=\\theta+Z$ with fixed truth $\\theta\\in\\mathbb R$, $Z\\sim N(0,1)$, and proper prior $\\theta\\sim N(0,1)$. Let $\\phi(x)=e^{-x^2/2}/\\sqrt{2\\pi}$ and $\\Phi(y)=\\int_{-\\infty}^y\\phi(x)\\,dx$, let $z>0$ be the unique number satisfying $\\Phi(z)=0.975$, and put $r=z/\\sqrt2$. The posterior is $N(Y/2,1/2)$, so the central interval $I(Y)=[Y/2-r,Y/2+r]$ has posterior mass exactly $0.95$ for every $Y$. At the fixed truth $\\theta_*=2r+1$, its frequentist coverage is $P\\{1\\le Z\\le4r+1\\}<0.95$.",
+        "deps": [
+          "def-ip-credible-set-and-frequency-coverage",
+          "def-standard-normal-and-normal-laws",
+          "def-axiom-of-choice",
+          "thm-intermediate-value"
+        ],
+        "justified_by": [],
+        "dependency_level": 1,
+        "provenance": {
+          "statement": "ai-generated",
+          "proof": "ai-generated"
+        },
+        "proof_strategy": "direct",
+        "axiom_use": "AC is inherited through the standard-normal probability-law supplier; no additional choice principle is used.",
+        "generation": {
+          "role": "example"
+        },
+        "strategy": "Complete the square for a proper normal prior and calculate fixed-truth repeated-sampling coverage."
+      },
+      {
+        "id": "cex-ip-empirical-bayes-coverage-fails-for-sparse-gap-truth",
+        "kind": "counterexample",
+        "title": "Sparse-gap truths defeat uniform coverage over a hyperrectangle",
+        "statement": "Assume AC. Fix $p\\ge0$, $C\\ge1$, $\\beta>0$, finite $A>\\beta$, $0<M\\le(1984C^8)^{-1}$, and $0<\\gamma<1$. For $n\\ge3$, observe $X_i=\\kappa_i\\theta_i+n^{-1/2}Z_i$ in the Gaussian sequence experiment, where $\\theta\\in\\ell^2(\\mathbb N_+,\\mathbb R)$ is fixed, $C^{-2}i^{-2p}\\le\\kappa_i^2\\le C^2i^{-2p}$, and the $Z_i$ are independent $N(0,1)$. Define $\\Theta_\\beta(M)=\\{\\theta\\in\\ell^2:\\sup_{i\\ge1}i^{1+2\\beta}\\theta_i^2\\le M\\}$. For $0<\\alpha\\le A$, use the product prior $\\Pi_\\alpha=\\bigotimes_{i\\ge1}N(0,i^{-1-2\\alpha})$ and its product Gaussian posterior with coordinate mean $\\widehat\\theta_{n,\\alpha,i}(x)=n\\kappa_ix_i/(i^{1+2\\alpha}+n\\kappa_i^2)$ and variance $(i^{1+2\\alpha}+n\\kappa_i^2)^{-1}$. Select $\\widehat\\alpha_n$ as a Borel global maximizer over $[0,A]$ of\n$$\\ell_n(\\alpha;x)=-\\frac12\\sum_{i\\ge1}\\left[\\log\\left(1+\\frac{n\\kappa_i^2}{i^{1+2\\alpha}}\\right)-\\frac{n^2\\kappa_i^2x_i^2}{i^{1+2\\alpha}+n\\kappa_i^2}\\right],$$\nAssume the score series is finite on a Borel full-measure data domain for the truths considered and is upper semicontinuous in $\\alpha$ there. For $\\widehat\\alpha_n>0$, let $r_{n,\\gamma}(\\widehat\\alpha_n)$ be the $1-\\gamma$ posterior quantile of $\\|\\theta-\\widehat\\theta_{n,\\widehat\\alpha_n}(X)\\|_2$, and let $\\widehat C_n(L)$ be the ball centered at $\\widehat\\theta_{n,\\widehat\\alpha_n}(X)$ with radius $Lr_{n,\\gamma}(\\widehat\\alpha_n)$. Set $\\widehat C_n(L)=\\ell^2$ if $\\widehat\\alpha_n=0$. There exists a finite fixed $L\\ge1$ for which\n$$\\liminf_{n\\to\\infty}\\inf_{\\theta\\in\\Theta_\\beta(M)}P_\\theta^{(n)}\\{\\theta\\in\\widehat C_n(L)\\}\\ge1-\\gamma$$",
+        "deps": [
+          "def-ip-credible-set-and-frequency-coverage",
+          "def-adaptive-empirical-bayes-gaussian-sequence-procedure",
+          "def-gaussian-sequence-hyperrectangle-class",
+          "def-polished-tail-class-for-gaussian-sequence",
+          "def-axiom-of-choice",
+          "thm-adaptive-empirical-bayes-credible-ball-conservative-coverage-on-polished-tails",
+          "cex-sparse-gap-truth-causes-empirical-bayes-credible-set-undercoverage"
+        ],
+        "justified_by": [],
+        "dependency_level": 1,
+        "sources": {
+          "references": [
+            {
+              "title": "Botond Szabó, A. W. van der Vaart, and J. H. van Zanten, Frequentist coverage of adaptive nonparametric Bayesian credible sets, Annals of Statistics 43(4) (2015)",
+              "url": "https://arxiv.org/pdf/1310.4489v5",
+              "locator": "Theorem 3.1 and complete proof in §9; Theorem 3.6 and complete proof in §5 (arXiv:1310.4489v5)."
+            }
+          ]
+        },
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "proof_strategy": "direct",
+        "axiom_use": "The model inherits AC through the Gaussian product prior; no stronger choice principle is asserted.",
+        "strategy": "Apply the exact sparse-gap subsequence bound and show its truth lies outside every fixed polished-tail class."
+      }
+    ]
+  }
+]

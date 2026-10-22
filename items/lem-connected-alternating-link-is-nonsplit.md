@@ -43,9 +43,9 @@ If a regular link diagram on $S^2$ is connected and alternating, then the repres
 
 **Given:** A connected alternating regular diagram $D$ and its represented link $L$.
 
-[F1] Connectedness and alternation are properties of the projection and its crossing visits; a connected crossingless diagram consists of one circle. ([[def-reduced-alternating-link-diagram]])
+[F1] Connectedness and alternation are properties of the projection and its crossing visits; a nonempty connected crossingless diagram consists of one circle. ([[def-reduced-alternating-link-diagram]])
 
-[F2] The checkerboard construction gives a connected embedded surface $F$ with boundary $L$, a finite disk-and-band presentation, and a definite quadratic form on $H_1(F;\mathbb Q)$ satisfying $q([c])=\operatorname{lk}(c,\tau c)$ for all oriented rational multicurves. This also includes the zero-dimensional form of a crossingless spanning disk. ([[lem-alternating-checkerboard-normal-pairing-is-definite]])
+[F2] For a nonempty connected alternating diagram, the checkerboard construction gives a connected embedded surface $F$ with boundary $L$, a finite disk-and-band presentation, and a definite quadratic form on $H_1(F;\mathbb Q)$ satisfying $q([c])=\operatorname{lk}(c,\tau c)$ for all oriented rational multicurves. This also includes the zero-dimensional form of a crossingless spanning disk. ([[lem-alternating-checkerboard-normal-pairing-is-definite]])
 
 [F3] A connected spanning surface with that definite normal-pairing property has nonsplit boundary. ([[lem-definite-normal-pairing-forces-nonsplit-boundary]])
 
@@ -53,6 +53,7 @@ If a regular link diagram on $S^2$ is connected and alternating, then the repres
 
 ## Proof
 
-1.1 Apply [F2] to the supplied connected alternating diagram. The resulting surface $F$ is connected, has the represented link as its entire boundary, and carries the stated definite normal pairing. If the diagram has no crossings, [F1] identifies it as a single circle and [F2] uses a spanning disk, so the same supplied-surface conclusions hold. [given, F1, F2, construct]
+
+1.1 If $D$ is empty, the represented link $L$ is empty, so no sphere has link points on both sides; $L$ is nonsplit by [F4]. Henceforth assume $D$ is nonempty. Apply [F2] to the supplied connected alternating diagram. The resulting surface $F$ is connected, has the represented link as its entire boundary, and carries the stated definite normal pairing. If the diagram has no crossings, [F1] identifies it as a single circle and [F2] uses a spanning disk, so the same supplied-surface conclusions hold. [given, F1, F2, F4, construct]
 
 2.1 The surface from step 1.1 satisfies every hypothesis of [F3], which therefore says that no sphere of the kind in [F4] splits its boundary $L$. Thus $L$ is nonsplit, with no reduction or choice assumption required. [F3, F4, step 1.1] ∎

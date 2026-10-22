@@ -34,6 +34,10 @@ sources:
       locator: "Chapter 5, §5.2.6, printed pp. 79–82: volume potential and scattering equation"
 verification:
   precheck: pass
+  judge:
+    model: "gpt-6-luna"
+    verdict: pass
+    date: 2026-10-22
 ---
 
 ## Statement

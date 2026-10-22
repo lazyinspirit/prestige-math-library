@@ -1,0 +1,70 @@
+--- a/tools/step5-frontier-gate.mjs
++++ b/tools/step5-frontier-gate.mjs
+@@ -7,7 +7,7 @@
+ import { verifyCertification } from './step5-workflow.mjs';
+ import { loadOriginalSlotReclassification, projectedOriginalIds, licensedOriginalSlotReplacement } from './step5-original-slot-reclassification.mjs';
+ 
+-const ITEM = '(?:alg|def|lem|thm|prop|cor|ex|cex|fs|rem|op)-[a-z0-9]+(?:-[a-z0-9]+)*';
++const ITEM = '(?:alg|def|lem|thm|prop|cor|ex|cex|fs|rem|op)-[A-Za-z0-9]+(?:-[A-Za-z0-9]+)*';
+ const itemId = new RegExp(`^${ITEM}$`);
+ const itemFile = new RegExp(`^(?:.*?/)?items/(${ITEM})\\.md:`);
+ const native = new Set(['precheck', 'rendercheck', 'prosecheck']);
+--- a/tools/step5-frontier-gate.test.mjs
++++ b/tools/step5-frontier-gate.test.mjs
+@@ -133,3 +133,41 @@
+     assert.match(broken.stderr, /unparseable adjudication/);
+   } finally { rmSync(repo, { recursive: true, force: true }); }
+ });
++
++const mixedCaseIds = ['lem-amenable-D-R-l2-dimension-estimate', 'lem-hat-CF-genus-one-lens-space-order-three-rank-three'];
++test('mixed-case canonical IDs retain exact descriptor file arguments and diagnostic ownership', () => {
++  const repo = mkdtempSync(join(tmpdir(), 'frontier-case-')), run = 'mixed-case';
++  try {
++    mkdirSync(join(repo, `research/${run}-step5-v2`), { recursive: true }); mkdirSync(join(repo, 'items'));
++    const frozen = freezeFrontier({run, batches: [{id: '1', items: mixedCaseIds}]}), outside = 'lem-outside-CF';
++    writeFileSync(join(repo, `research/${run}-step5-v2/frontier.json`), JSON.stringify(frozen));
++    for (const id of [...mixedCaseIds, outside]) writeFileSync(join(repo, `items/${id}.md`), 'fixture');
++    const original = ['precheck', 'rendercheck', 'prosecheck', 'proof-contract', 'depcheck', 'judge-closure'].map(id => ({id, argv: ['node', `tools/${id}.mjs`]}));
++    const gates = frontierGateBattery({repo, run}, original);
++    for (const gate of gates.slice(0, 3)) assert.deepEqual(gate.argv.slice(2), frozen.ids.map(id => `items/${id}.md`));
++    const projected = gates[3].projectResult(raw({errors: [...mixedCaseIds, outside].map(error)}));
++    assert.equal(projected.code, 1); assert.deepEqual(JSON.parse(projected.output).errors.map(row => row.id), mixedCaseIds);
++    assert.deepEqual(projected.frontierScope.retained.map(row => row.subjects[0]), mixedCaseIds);
++    assert.deepEqual(projected.frontierScope.excluded.map(row => row.subjects[0]), [outside]);
++    const fileRows = [...mixedCaseIds, outside].map(id => ({code:'dep-unresolved', msg:`items/${id}.md: missing dependency`}));
++    const files = gates[4].projectResult(raw({errors:fileRows}));
++    assert.deepEqual(JSON.parse(files.output).errors, fileRows.slice(0, 2)); assert.equal(files.frontierScope.global.length, 0);
++    const judge = gates[5].projectResult(raw({errors:[], judge_coverage:[...mixedCaseIds, outside].map(id=>({id}))}, 0));
++    assert.equal(JSON.parse(judge.output).frontier_judge_complete, 2);
++    // Lowercasing changes identity; even a syntactically valid unknown ID stays global.
++    const unknown = gates[3].projectResult(raw({errors:[error(mixedCaseIds[0].toLowerCase())]}));
++    assert.equal(unknown.code, 1); assert.equal(unknown.frontierScope.global.length, 1);
++  } finally {rmSync(repo, {recursive:true, force:true});}
++});
++test('mixed-case support preserves strict kind, segment and path grammar', () => {
++  for (const id of ['Lem-name', 'xyz-name', 'lem-', 'lem--name', 'lem-name-', 'lem-name_part', 'lem-name.part', 'lem-name/part', 'lem-name space', '../lem-name', 'lem-é']) {
++    const repo = mkdtempSync(join(tmpdir(), 'frontier-bad-id-')), run='malformed';
++    try {
++      mkdirSync(join(repo, `research/${run}-step5-v2`), {recursive:true}); mkdirSync(join(repo, 'items'));
++      writeFileSync(join(repo, `research/${run}-step5-v2/frontier.json`), JSON.stringify(freezeFrontier({run,batches:[{id:'1',items:[id]}]})));
++      assert.throws(()=>frontierGateBattery({repo,run},[]), /invalid current Step 5 frontier/);
++      const projected = projectFrontierGate('proof-contract', raw({errors:[error(id)]}), frontier, [id]);
++      assert.equal(projected.code, 1); assert.equal(projected.frontierScope.global.length, 1);
++    } finally {rmSync(repo,{recursive:true,force:true});}
++  }
++});
+--- a/tools/step5-frontier-gate.md
++++ b/tools/step5-frontier-gate.md
+@@ -3,7 +3,11 @@
+ `step5-frontier-gate.mjs` scopes the Step 5.8/7.10 mathematical gate battery
+ to the validated frozen original frontier. Its item-ID grammar recognizes all
+ canonical mathematical prefixes in [SCHEMA.md](../SCHEMA.md), including `op-`
+-for an `open-problem`. The same grammar identifies item-file diagnostics;
++for an `open-problem`. As required by the schema and current frontier item
++selectors, ASCII letters and digits are permitted in each hyphen-separated
++segment after the lowercase kind prefix. Existing mixed-case mathematical
++segments are case-sensitive and are never normalized. The same grammar
++identifies item-file diagnostics;
+ recognizing this prefix does not classify an open problem as a proved result
+ or permit it as a logical supplier. Its formulation and status retain the
+ schema's separate source-review requirements.

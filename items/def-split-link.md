@@ -14,6 +14,11 @@ axiom_use: "No choice principle is used; splitness is defined by existence of a 
 provenance:
   statement: literature-derived
   proof: ai-altered
+verification:
+  judge:
+    model: "gpt-6-luna"
+    verdict: pass
+    date: 2026-10-22
 sources:
   references:
     - title: "William W. Menasco, Closed incompressible surfaces in alternating knot and link complements, Topology 23 (1984), Theorem 1(a), pp. 37–41"

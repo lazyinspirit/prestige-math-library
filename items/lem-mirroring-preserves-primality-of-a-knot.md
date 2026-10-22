@@ -45,7 +45,7 @@ Assume the Axiom of Countable Choice. If a smooth oriented knot $K$ is nontrivia
 
 **Given:** AC$_\omega$, $K$, and $r$.
 
-1.1 If $r(K)$ were ambient isotopic to the standard unknot, conjugating that isotopy by $r$ would give an orientation-preserving ambient isotopy from $K$ to $r^{-1}(U)$. The reflection image $r^{-1}(U)$ is a round circle and hence a standard unknot; if its orientation is reversed, a half-turn in its plane is an orientation-preserving isotopy to the chosen orientation. Thus $K$ would be trivial, contrary to [F1], and $r(K)$ is nontrivial. [given, F1, construct]
+1.1 If $r(K)$ were ambient isotopic to the standard unknot, conjugating that isotopy by $r$ would give an orientation-preserving ambient isotopy from $K$ to $r^{-1}(U)$. The reflection image $r^{-1}(U)$ is a round circle and hence a standard unknot; if its orientation is reversed, a half-turn about a diameter of the circle reverses its circle orientation while preserving the ambient orientation: in coordinates with the circle in the $(x,y)$-plane, the rotation $(x,y,z)\mapsto(x,-y,-z)$ is joined to the identity by rotations about the $x$-axis. Thus $K$ would be trivial, contrary to [F1], and $r(K)$ is nontrivial. [given, F1, construct]
 
 2.1 Suppose $r(K)=J\#L$ with both $J,L$ nontrivial. Reflect the connected-sum model. By [F2], its image is the connected sum of the reflected summands, $K=r^{-1}(J)\#r^{-1}(L)$ up to oriented ambient isotopy. Reflection preserves nontriviality by the argument in step 1.1, contradicting primeness of $K$. Hence $r(K)$ is prime. [given, F1, F2, A1, step 1.1, construct] ∎
 

@@ -1,0 +1,7 @@
+# Current handoff: stable construction interfaces bound
+
+Six-module first/focused-final review PASS adopted in `root-six-module-adoption.json`. The subsequently exposed ordinary NORMAL-refurl bridge received its separate first/ONE-focused-final PASS and root adoption `../root-normal-refurl-bridge-adoption.json`. The sole clarification was actual germ on a smaller open neighborhood containing H inside W; no whole-W agreement is asserted.
+
+Faithful consumer bindings are now integrated in `five-dimensional-handle-device.md`: initial noncompact BASE/core furl uses pair E (`../root-relative-e-four-file-adoption.json`); two NORMAL refurls use ordinary coverage and the new compact-selected-core bridge; second split uses the separately adopted S6-proper actual proper-homotopy-input contract. The selected core's saturated central neighborhood has singleton quotient classes and inherits its actual smooth chart germ. Both normal classes, side product and later literal auxiliary BASE T² product are retained. No generic fixed fundamental strip or preservation of all lifted core copies is assumed.
+
+The source/status and scope records append these actual interface dispositions while retaining review history. No accepted argument body was reread. No canonical item, map, gate or native state was edited by this agent. Root owns canonical packaging and original-target disposition. The stable tube gives no extra relative stable tangent-germ concordance between independently prescribed ambient smoothings; that is a separate supplier.

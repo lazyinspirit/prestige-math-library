@@ -33,7 +33,7 @@ sources:
 
 ## Statement
 
-Assume the full Axiom of Choice. Let $D_+$ and $D_-$ be finite regular oriented diagrams that agree outside one crossing neighborhood and differ inside it by switching which branch is over. Let $V_+$ and $V_-$ be the Seifert matrices obtained from their oriented disk-and-band surfaces. There are corresponding integral bases in which either $V_+=V_-$ or $V_+-V_-=\pm vv^T$ for some integral column vector $v$. In particular, $\operatorname{rank}(V_+-V_-)\le1$.
+Assume the full Axiom of Choice. Let $D_+$ and $D_-$ be finite regular oriented knot diagrams that agree outside one crossing neighborhood and differ inside it by switching which branch is over. Let $V_+$ and $V_-$ be the Seifert matrices obtained from their oriented disk-and-band surfaces. There are corresponding integral bases in which either $V_+=V_-$ or $V_+-V_-=\pm vv^T$ for some integral column vector $v$. In particular, $\operatorname{rank}(V_+-V_-)\le1$.
 
 ## Statement references
 

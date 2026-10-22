@@ -1,0 +1,61 @@
+---
+id: lem-alternating-state-adequacy-and-jones-span
+kind: lemma
+title: Adequacy and Jones span of reduced alternating diagrams
+status: draft
+origin: pipeline
+pipeline_run: inverse-problems-knot-theory-all-109-2026-10-19
+dependency_level: 5
+deps:
+  - def-reduced-alternating-link-diagram
+  - lem-connected-diagram-bracket-span-bound-and-alternating-equality
+  - thm-bracket-state-sum-matches-library-jones-specialization
+  - def-axiom-of-choice
+justified_by: []
+aliases: []
+proof_strategy: direct
+axiom_use: The finite A/B adequacy and raw bracket-span claims are choice-free;
+  full AC is used only for the library Jones specialization.
+provenance:
+  statement: literature-derived
+  proof: ai-altered
+sources:
+  references:
+    - title: Danny Calegari, Introduction to Knot Theory, §5.2, printed pp. 42–45
+      url: https://math.uchicago.edu/~dannyc/notes/knot_theory.pdf
+    - title: Louis H. Kauffman, New Invariants in the Theory of Knots, Astérisque
+        163–164 (1988), §III, printed pp. 160–164
+      url: https://www.numdam.org/item/AST_1988__163-164__137_0.pdf
+    - title: Louis H. Kauffman, Combinatorial Knot Theory and the Jones Polynomial,
+        arXiv:2204.12104v2, §2
+      url: https://arxiv.org/pdf/2204.12104v2
+---
+
+## Statement
+
+Assume full AC and let $D$ be a connected reduced alternating diagram with $c$ crossings. At every crossing, changing one smoothing from the all-$A$ state or from the all-$B$ state merges two distinct state circles; these are A- and B-adequacy. The Kauffman bracket has $A$-span $4c$. If $D$ represents a knot $K$, then the library Jones polynomial has $t$-span $c$, and every $c'$-crossing diagram of $K$ has $t$-span at most $c'$ under the convention $t=A^{-4}$. The span of a nonzero Laurent polynomial is its largest exponent minus its smallest exponent.
+
+## Statement references
+
+[Calegari, *Introduction to Knot Theory*, §5.2](https://math.uchicago.edu/~dannyc/notes/knot_theory.pdf)
+
+[Kauffman, *New Invariants in the Theory of Knots*, §III](https://www.numdam.org/item/AST_1988__163-164__137_0.pdf)
+
+[Kauffman, *Combinatorial Knot Theory and the Jones Polynomial*, §2](https://arxiv.org/pdf/2204.12104v2)
+
+## Facts & Assumptions
+
+**Given:** Full AC and a connected reduced alternating diagram $D$ with $c$ crossings.
+
+[F1] In a reduced alternating diagram, successive crossing visits along each component switch over-under, and no complementary region has a crossing more than once on its boundary ([[def-reduced-alternating-link-diagram]]).
+
+[F2] For a connected reduced alternating diagram, each one-crossing change from either extreme state merges distinct circles, both extreme coefficients are nonzero, and the bracket span is $4c$; for any connected diagram its bracket span is at most $4c$ ([[lem-connected-diagram-bracket-span-bound-and-alternating-equality]]).
+
+[F3] Under full AC, the library Jones polynomial satisfies $V_K(t)=f_K(t^{-1/4})$, where $f_D(A)=(-A^3)^{-\operatorname{wr}(D)}\langle D\rangle$ and $t=A^{-4}$ ([[thm-bracket-state-sum-matches-library-jones-specialization]]).
+
+[A1] The Axiom of Choice supplies a choice function for every family of nonempty sets ([[def-axiom-of-choice]]).
+
+## Proof
+1.1 By [F1], the input is a connected reduced alternating diagram, so the finite state-merging conclusion in [F2] applies. It establishes both A-adequacy and B-adequacy without invoking the separate Jones axiom branch, and gives $\operatorname{span}_A\langle D\rangle=4c$. [given, F1, F2]
+
+2.1 Suppose $D$ represents a knot $K$. Let $E$ be any $c'$-crossing diagram of the same knot, with its component oriented to represent the chosen orientation of $K$. The projection of a one-component diagram is connected because it is the continuous image of a circle; thus [F2] gives $\operatorname{span}_A\langle E\rangle\le4c'$. Multiplication by the writhe-normalizing monomial $(-A^3)^{-\operatorname{wr}(E)}$ shifts all exponents equally and does not change span. By [A1] and [F3], substituting $t=A^{-4}$ divides the exponent span by $4$, so $\operatorname{span}_t V_K(t)\le c'$. Applying this to $D$ and using step 1.1 gives $\operatorname{span}_tV_K(t)=c$. [A1, F2, F3, step 1.1, given, algebra] ∎

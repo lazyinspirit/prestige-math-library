@@ -1,0 +1,63 @@
+---
+page: character-varieties-and-the-a-polynomial
+title: Character varieties and the A-polynomial
+status: draft
+items:
+  - lem-fixed-field-of-automorphisms-of-c-over-q-is-q
+  - lem-two-commuting-complex-2x2-matrices-are-simultaneously-triangularizable
+  - lem-sl2-matrix-invariants-by-epsilon-contractions-and-traces
+  - lem-equal-irreducible-sl2-traces-determine-conjugacy
+  - lem-torus-presentation-irreducible-peripheral-eigenvalue-curves
+  - lem-two-generator-sl2-word-traces-reduce-to-three-coordinates
+  - lem-absolutely-irreducible-sl2-representations-have-quadratic-trace-field-models
+  - lem-finite-homology-kernel-lines-have-rational-rank-charts
+  - lem-nonparabolic-adjoint-torus-homology-has-explicit-peripheral-basis
+  - lem-partial-projective-resolutions-determine-tensor-homology-in-degree-one
+  - lem-laurent-algebraic-curve-has-principal-equation
+  - lem-automorphism-stable-laurent-ideals-descend-to-rational-coefficients
+  - lem-finite-affine-incidence-projection-and-curve-component-selection
+  - def-boundary-slope-of-an-incompressible-surface
+  - lem-presentation-complex-computes-twisted-first-homology-and-peripheral-cycles
+  - def-sl-two-abelian-surgery
+  - def-sl-two-character-variety-and-peripheral-eigenvalues
+  - lem-nonseparating-longitudinal-surface-in-fibered-exterior-is-fiber
+  - op-two-boundary-slopes-characterize-torus-knots
+  - lem-sl2-representation-variety-is-affine
+  - lem-figure-eight-two-meridian-presentation-and-preferred-longitude-word
+  - def-adjoint-twisted-homology-and-culler-shalen-data
+  - lem-knot-boundary-eigenvalue-locus-defined-over-q
+  - lem-sl2-trace-functions-are-regular-and-invariant
+  - def-knot-a-polynomial
+  - lem-sl2-character-trace-coordinate-algebra
+  - def-enhanced-a-polynomial
+  - lem-sl-two-character-trace-coordinate-model
+  - op-ordinary-a-polynomial-detects-torus-knots
+  - def-character-variety-logarithmic-slope-invariant
+  - lem-figure-eight-character-and-longitude-traces
+  - lem-knot-a-polynomial-boundary-elimination
+  - lem-torus-knot-enhanced-a-polynomial
+  - op-a-polynomial-for-knots-in-other-three-manifolds
+  - op-a-polynomial-newton-parallelogram-characterizes-torus-knots
+  - lem-irreducible-sl2-character-components-have-specializing-quadratic-models
+  - lem-adjoint-twisted-slope-is-rational-on-a-character-component
+  - thm-a-polynomial-boundary-restriction-and-surgery-detector
+  - thm-ccgls-newton-edge-slope-is-boundary-slope
+  - thm-adjoint-logarithmic-gauss-slope-and-ideal-point
+  - thm-enhanced-a-polynomial-newton-edge-is-strict-boundary-slope
+  - thm-benard-florens-rodau-logarithmic-gauss-formula
+  - lem-baldwin-sivek-instanton-surgery-and-newton-polygon-inputs
+  - thm-baldwin-sivek-infinitely-many-abelian-surgeries-characterize-torus-knots
+  - thm-enhanced-a-polynomial-newton-polygon-detects-torus-knots
+  - cor-enhanced-a-polynomial-and-alexander-degree-identify-torus-knots
+  - thm-baldwin-sivek-two-boundary-slope-alternative
+examples: []
+requires:
+  - wirtinger-presentations-and-knot-groups
+  - knot-exteriors-and-peripheral-systems
+  - twisted-alexander-polynomials-and-reidemeister-torsion
+  - satellite-knots-and-jsj-tori
+  - hyperbolic-dehn-filling-and-exceptional-slopes
+  - khovanov-homology-detects-the-unknot
+order: 3190
+page_layout: compact-v1
+---

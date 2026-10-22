@@ -45,7 +45,7 @@ This gives a concrete observation-time condition: observing longer than a unifor
 
 [A1] Countable Choice is the axiom base of the finite-time coefficient-uniqueness and two-dimensional X-ray injectivity suppliers. ([[def-countable-choice]])
 
-[F1] In dimension two, the wave coefficient-uniqueness corollary applies on a simple background when the observation time exceeds the longest relevant maximal geodesic length and the corresponding light-ray integrals vanish. ([[cor-ip-wave-coefficient-uniqueness-under-simple-geometry]])
+[F1] Under Countable Choice, on a compact connected nonempty simple surface, if $L_*<\infty$ bounds all maximal unit-speed geodesic lengths and $T>L_*$, equality of the full forward DN maps on smooth time-compact boundary inputs implies $q_1=q_2$ for real static $q_1,q_2\in C_c^\infty(M^\circ;\mathbb R)$. The vanishing ray integrals are proved inside this corollary, not required as an additional premise. ([[cor-ip-wave-coefficient-uniqueness-under-simple-geometry]])
 
 [F2] The unweighted scalar geodesic X-ray transform is injective on a compact simple surface. ([[thm-ip-2d-simple-surface-xray-injectivity]])
 

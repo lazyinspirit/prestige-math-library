@@ -42,7 +42,7 @@ False claim: In every finite-dimensional state-residual Tikhonov model, solving 
 
 [F3] The proposition's status guarantee requires a valid bound on the approximate gradient error ([[prop-ip-discrete-adjoint-gradient-and-residual-status]]).
 
-[F4] The status theorem proves that `linear-solve-failed` is returned when a required solve or its residual certificate fails ([[thm-ip-finite-element-pde-tikhonov-status-soundness-and-termination]]).
+[F4] The status theorem asserts that `linear-solve-failed` is returned only on the corresponding failed solver or solver-certificate checks ([[thm-ip-finite-element-pde-tikhonov-status-soundness-and-termination]]).
 
 ## Counterexample
 
@@ -52,4 +52,4 @@ False claim: In every finite-dimensional state-residual Tikhonov model, solving 
 
 2.2 If an unchecked iterative adjoint returns $\widetilde p=1$, its computed reduced gradient is $\widetilde g=\nabla_qJ(0,0)-(D_qR)^T\widetilde p=0-(-1)(1)=1$, the opposite sign. Its exact adjoint-equation residual is $|(D_uR)^T\widetilde p-\nabla_uJ(0,0)|=|1-(-1)|=2$. [given, F1, step 1.1, algebra]
 
-3.1 With declared adjoint residual tolerance $\tau_p=1$, the residual in step 2.2 exceeds tolerance. By [F2] and [F4], the algorithm rejects this vector as a solver result with status `linear-solve-failed`; it cannot receive `converged`. Step 2.2 nevertheless exhibits opposite gradient signs when the unchecked vector is substituted. Thus an exact state solve alone does not determine the gradient sign. Treating $\widetilde p$ as a contract-valid solver result would violate the adjoint-residual requirement and the proposition's gradient-error certificate [F3]. [F2, F3, F4, step 2.2, algebra] ∎
+3.1 With declared adjoint residual tolerance $\tau_p=1$, the residual in step 2.2 exceeds tolerance. By [F2], the algorithm rejects this vector as a solver result with status `linear-solve-failed`; it cannot receive `converged`. Step 2.2 nevertheless exhibits opposite gradient signs when the unchecked vector is substituted. Thus an exact state solve alone does not determine the gradient sign. Treating $\widetilde p$ as a contract-valid solver result would violate the adjoint-residual requirement. The gradient-error certificate [F3] remains valid: take $\eta_u=0$, $\eta_p=2$, $P=M_q=L_{G,u}=1$, and $L_{J,u}=L_{R,u}=0$, which satisfy all the proposition's bounds and give $\varepsilon_g=2=|\widetilde g-\nabla\Phi(0)|$. This error bound permits the observed sign reversal. [F2, F3, step 2.2, algebra] ∎

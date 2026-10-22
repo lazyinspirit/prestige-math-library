@@ -1,0 +1,4505 @@
+
+PDF PAGE 1
+Extension and neural operator approximation of
+the electrical impedance tomography inverse map
+Maarten V. de Hoop1, Nikola B. Kovachki2, Matti Lassas3,
+Nicholas H. Nelsen4,5,6*
+1Simons Chair in Computational and Applied Mathematics and Earth Science,
+Rice University, Houston, TX 77005, USA.
+2NVIDIA AI, NVIDIA Corporation, Santa Clara, CA 95051, USA.
+3Department of Mathematics and Statistics, University of Helsinki, P.O. Box
+68 FI-00014, Helsinki, Finland.
+4Department of Mathematics, Massachusetts Institute of Technology,
+Cambridge, MA 02139, USA.
+5Department of Mathematics, Cornell University, Ithaca, NY 14853, USA.
+6Oden Institute for Computational Engineering and Sciences, The University
+of Texas at Austin, Austin, TX 78712, USA.
+*Corresponding author(s). E-mail(s): nnelsen@oden.utexas.edu;
+Contributing authors: mdehoop@rice.edu; nkovachki@nvidia.com;
+matti.lassas@helsinki.fi;
+Abstract
+This paper considers the problem of noise-robust neural operator approxima-
+tion for the solution map of Calder´on’s inverse conductivity problem. In this
+continuum model of electrical impedance tomography (EIT), the boundary mea-
+surements are realized as a noisy perturbation of the Neumann-to-Dirichlet map’s
+integral kernel. The theoretical analysis proceeds by extending the domain of
+the inversion operator to a Hilbert space of kernel functions. The resulting
+extension shares the same stability properties as the original inverse map from
+kernels to conductivities, but is now amenable to neural operator approximation.
+Numerical experiments demonstrate that Fourier neural operators excel at recon-
+structing infinite-dimensional piecewise constant and lognormal conductivities in
+noisy setups both within and beyond the theory’s assumptions. The methodol-
+ogy developed in this paper for EIT exemplifies a broader strategy for addressing
+nonlinear inverse problems with a noise-aware operator learning framework.
+Keywords: Calder´on problem, extension, universal approximation, neural operator,
+inverse map, stability estimates, compactness, boundary manifold
+1
+arXiv:2511.20361v1  [math.NA]  25 Nov 2025
+
+PDF PAGE 2
+MSC Classification: 35R30 (Primary) 65N21 , 68T07 (Secondary)
+Contents
+1
+Introduction
+3
+1.1
+Contributions and proof overview . . . . . . . . . . . . . . . . . . . . .
+3
+1.2
+Literature review . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+6
+1.3
+Outline
+. . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+7
+2
+Preliminaries
+8
+2.1
+General notation . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+8
+2.2
+Function spaces and linear operators . . . . . . . . . . . . . . . . . . .
+8
+2.3
+Electrical impedance tomography . . . . . . . . . . . . . . . . . . . . .
+10
+2.4
+Neural operators . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+12
+3
+Extension of the inverse map
+13
+3.1
+Stability of the inverse map . . . . . . . . . . . . . . . . . . . . . . . .
+13
+3.2
+Norm estimates for Neumann-to-Dirichlet maps . . . . . . . . . . . . .
+15
+3.3
+From Neumann-to-Dirichlet maps to kernel functions . . . . . . . . . .
+18
+3.4
+Extending beyond the range of the forward map
+. . . . . . . . . . . .
+20
+4
+Approximation of the inverse map
+23
+4.1
+Stability of the forward map . . . . . . . . . . . . . . . . . . . . . . . .
+23
+4.2
+Compactness of the admissible conductivities
+. . . . . . . . . . . . . .
+25
+4.3
+Local representation of the boundary manifold
+. . . . . . . . . . . . .
+27
+4.4
+Main result on neural operator approximation . . . . . . . . . . . . . .
+30
+4.5
+Discussion . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+34
+5
+Numerical experiments
+37
+5.1
+Shape detection . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+39
+5.2
+Three phase inclusions . . . . . . . . . . . . . . . . . . . . . . . . . . .
+42
+5.3
+Lognormal conductivities
+. . . . . . . . . . . . . . . . . . . . . . . . .
+43
+6
+Conclusion and outlook
+45
+6.1
+Toward a general inverse map approximation framework . . . . . . . .
+47
+6.2
+Future directions . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+49
+A Remaining proofs
+50
+B Auxiliary lemmas
+59
+C Numerical experiment details
+61
+2
+
+PDF PAGE 3
+1. Introduction
+Electrical impedance tomography (EIT) is a canonical nonlinear and severely ill-posed
+inverse boundary value problem. Let Ω⊂Rd be a bounded domain representing the
+medium of interest and ∂Ωbe its smooth boundary. In EIT, the physical model is the
+linear elliptic partial differential equation (PDE)
+−∇· (γ∇u) = 0 in Ω,
+γ ∂u
+∂n = g on ∂Ω.
+(1.1)
+In the context of medical imaging, the solution u is the electric potential, γ is the
+unknown interior electrical conductivity, g is the applied boundary current, and ∂/∂n
+is the outward normal derivative. The inverse problem is to recover γ inside Ωgiven
+noisy measurements on ∂Ω. Mathematically, these measurements are encoded by the
+Neumann-to-Dirichlet (NtD) map Rγ assigning to each applied boundary current g
+the resulting boundary voltage u|∂Ω. This leads to the so-called Calder´on problem.
+Applications of EIT include lung monitoring, stroke detection, non-destructive
+testing, and geophysical exploration. Traditional direct reconstruction methods are
+grounded in PDE analysis and have well-understood stability properties. However,
+they can rely on strong regularization that blurs sharp inclusions and small scale
+structure in the reconstructions. Iterative methods are a local alternative based on
+optimization, but they can be too slow for real-time use. Moreover, both classes of
+methods are usually applied independently to each set of measurements and do not
+exploit historical information. Obtaining EIT reconstructions that are simultaneously
+accurate, noise-robust, and computationally efficient remains challenging, especially
+for highly heterogeneous or discontinuous conductivities.
+Operator learning offers a distinct, amortized viewpoint. Instead of repeatedly
+running the classic inverse solver for each new set of measurements from the map Rγ,
+one learns a single approximation of the inversion operator Rγ 7→γ from training data
+using a suitable network architecture. Once trained, this map can be rapidly evaluated
+on new observations. It implicitly encodes rich prior information derived from historical
+datasets. The present paper develops and analyzes neural operator approximations for
+EIT in dimension d ≥2. The theoretical analysis establishes an approximation theorem
+that is valid for noisy inputs. Numerically, the paper demonstrates that appropriately
+designed and trained neural operators can deliver highly accurate reconstructions of
+discontinuous conductivities given noisy measurements; see Fig. 1 for a preview.
+Section 1.1 presents the contributions of this paper and gives a high-level overview
+of the paper’s main result and its proof. Section 1.2 briefly reviews relevant literature.
+Section 1.3 outlines the structure of the remainder of the paper.
+1.1. Contributions and proof overview
+In the setting of Calder´on’s problem and EIT, this paper blends operator learning of
+inverse maps with the rich stability theory of nonlinear inverse problems. Our main
+contributions are as follows.
+3
+
+PDF PAGE 4
+Fig. 1: FNO reconstruction of three discontinuous conductivities as training dataset size N
+increases. D-bar method [2] reconstructions are shown in comparison. The noise level is 1%.
+(C1) Extension
+of
+inverse
+map.
+We establish that the EIT inversion
+operator—usually defined between subsets of two Banach spaces—also maps
+between subsets of two Hilbert spaces, and moreover, can be extended to the
+whole input Hilbert space with a controlled modulus of continuity.
+(C2) Approximation of inverse map.
+Building on Contribution (C1), we
+prove that there exists a Fourier neural operator (FNO) [1] that uni-
+formly approximates the EIT inverse map over a compact set of admissible
+conductivities and noisy NtD map data perturbations.
+(C3) Numerical reconstructions.
+We numerically demonstrate that trained
+FNOs can rapidly and accurately reconstruct two and three phase discontin-
+uous conductivities and lognormal conductivities from highly noisy NtD map
+integral kernel functions, in regimes both within and beyond the scope of the
+theoretical assumptions required by Contribution (C2).
+Along the way to Contributions (C1) and (C2), we develop several technical results
+that may be of independent interest. In dimension d = 2, we work with an admissible
+set X of conductivities bounded in L∞and in total variation norm. This set contains
+certain piecewise constant functions, which makes our results widely applicable. We
+obtain quantitative logarithmic stability estimates on the set X, while accommodating
+boundary data not just in the form of NtD maps, but also in the form of integral
+kernel functions corresponding to these NtD maps. We also show that X is compact in
+the Lp(Ω) topology. On the machine learning side, we generalize neural operators such
+as FNO to accommodate (i) functions defined on compact manifolds instead of just
+bounded domains and (ii) input and output domains of different spatial dimension.
+The main result of this paper is Theorem 4.8, which is the FNO approximation
+theorem for EIT as mentioned in Contribution (C2). The theorem holds for boundary
+4
+
+PDF PAGE 5
+Lemma 3.6
+NtD maps are
+Hilbert–Schmidt
+Corollary 4.3
+Forward map stability
+Lemma 4.5
+Xd(R) ⊂Lp(Ω)
+is compact
+Corollary 4.6
+Domain of inverse map
+is compact
+Proposition 3.8
+Inverse map stability
+Lemma 3.5
+NtD map norm estimates
+Theorem 3.9
+Stable extension
+of inverse map
+Main Theorem 4.8
+FNO approximation
+of inverse map
+Lemma 4.7
+Local representation of
+boundary manifold ∂Ω
+Fig. 2: An overview of Theorem 4.8’s proof structure.
+data outside of the range of the EIT forward map. Data can leave this range for sev-
+eral reasons, including noisy measurements, discretization errors, or modeling errors.
+Our theory handles general worst-case perturbations and thus encompasses all three
+examples. The proof of Theorem 4.8 requires several steps, as illustrated in Fig. 2. We
+now give an overview of the argument.
+Extension.
+Universal approximation theorems for neural operators such as FNO are
+by now well-established [3–5]. The first part of the proof of Theorem 4.8 requires us to
+identify the correct function-to-function operator to approximate with the FNO. Since
+we desire quantitative robustness to boundary data perturbations, we must extend the
+domain of the Calder´on inversion operator to a larger space in which the perturbations
+belong. The FNO will approximate this extension. To extend the inverse map, we apply
+a result due to Benyamin and Lindenstrauss [6, Thm. 1.12, p. 18] (see Theorem 3.1).
+This theorem extends a uniformly continuous map between subsets of Hilbert spaces to
+a globally-defined map with the same modulus of continuity. We identify appropriate
+Hilbert spaces of Hilbert–Schmidt operators and square integrable kernel functions
+with Theorem 3.6. Together with some technical elliptic PDE estimates for NtD maps
+(Theorem 3.5), we show in Theorem 3.8 that the inverse map from NtD integral kernels
+to conductivities in the admissible set X is logarithmically stable between Hilbert
+spaces. Then invoking Theorem 3.1, we deduce the desired extension in Theorem 3.9.
+Approximation.
+With the continuous function-to-function inverse map between
+Hilbert spaces now identified in Theorem 3.9, it remains to apply the universal approx-
+imation theorem for FNOs and control errors due to boundary data perturbations. We
+apply a simple triangle inequality to decompose the reconstruction error into a stabil-
+ity part and an approximation error part [7, Sec. 4.1.2, Eqn. (4.10), p. 27]. Theorem 3.9
+already handles the stability term. For the approximation error term, FNO universal
+approximation is uniform over a compact set of inputs. In our setting, this is a set of
+NtD integral kernel functions equal to the image of admissible conductivities X under
+5
+
+PDF PAGE 6
+the EIT forward map. This image is indeed compact (Theorem 4.6) by the compact-
+ness of X (Theorem 4.5) and the continuity of the forward map (Theorem 4.3). A final
+technical issue is that the input kernels are bivariate functions on ∂Ω× ∂Ω, which is a
+manifold that is incompatible with standard FNOs. Based on Theorem 4.7, we instead
+use coordinate charts to define the FNO on local patches. Theorem 4.8 follows.
+1.2. Literature review
+The Calder´on problem and its application to EIT have been extensively studied from
+both analytic and computational perspectives [8–11]. The inverse boundary value
+problem for the conductivity equation was originally proposed by Calder´on [12] in
+1980 and studied for analytic conductivities in [13, 14]. Sylvester and Uhlmann [15]
+proved the unique identifiability of the conductivity in dimension d ≥3 for isotropic
+conductivities which are C∞-smooth. Analytic reconstruction methods based on the
+complex geometrical optics solutions were given by Nachman [16] for the inverse con-
+ductivity problem and by Novikov [17] for the corresponding scattering problem. In
+three dimensions or higher, unique identifiability of the conductivity is proven in [18]
+for C1 conductivities. The problem has also been solved with measurements only on
+a part of the boundary [19].
+In d = 2 dimensions, the first global solution of the inverse conductivity problem
+is due to Nachman [20] for conductivities with two derivatives. In this seminal paper,
+the ∂technique was used for the first time in the study of Calder´on’s inverse problem.
+Finally, Astala and P¨aiv¨arinta [21] proved the uniqueness of the inverse problem in
+the form of its original formulation from [12], i.e., for general isotropic conductivities
+in L∞which are bounded from below and above by positive constants. For further
+developments on the uniqueness of the inverse problem, see [10, 21–27].
+Stability is much more delicate. Classical logarithmic-type stability estimates go
+back to [28–30], with further improvements under lower regularity assumptions such as
+C1,α [31] or W 2,p conductivities (with p > d ≥3) [32]. In parallel, a growing literature
+studies Lipschitz stability for finite-dimensional parametrizations and measurement
+models [33–36]. This line of work provides a firm justification for reconstructing
+realistic conductivities from discretized data.
+Regarding traditional numerical algorithms and regularization strategies for EIT,
+classical approaches include layer stripping [37], D-bar and nonlinear Fourier methods
+[2, 38–44], and variational formulations with total variation or level set regulariza-
+tion [45–48]. Monotonicity and range-based methods provide yet another family of
+reconstruction strategies with guarantees [49, 50]. These are especially natural in ver-
+sions of the complete electrode model [34, 51–53]. Within this broad literature, most
+reconstruction results are performed under H¨older or Sobolev regularity assumptions
+on the conductivities, or for piecewise constant models with a fixed number of par-
+titions [24, 29, 30]. In contrast, the current paper, at least in dimension two, studies
+more complicated sets of conductivities containing discontinuous functions of bounded
+variation.
+Motivated by the promise of highly accurate and sharper resolution reconstruc-
+tions, data-driven solution methods for inverse problems have gained traction in recent
+times [54–56]. In particular, there is substantial literature on combining deep learning
+6
+
+PDF PAGE 7
+with classical reconstruction pipelines in EIT and related imaging modalities. Exam-
+ples include Deep D-bar and Beltrami-Net methods, which learn post-processing or
+enhancement maps on top of D-bar reconstructions [57–60], as well as end-to-end and
+hybrid approaches for EIT [61–65]; related ideas have been explored in full waveform
+inversion [66]. These methods have demonstrated impressive empirical performance
+on a range of tasks, including inclusion detection, stroke classification, and hybrid
+CT/EIT imaging [50, 62, 67].
+The present work builds on and contributes to a rapidly evolving theory of oper-
+ator learning: the data-driven approximation of maps between infinite-dimensional
+spaces [68–71]. Once trained, such maps can be used as fast surrogate models in
+numerical analysis and scientific computing problems. Within this emerging subfield
+of scientific machine learning, a class of operator learning architectures known as neu-
+ral operators are particularly effective for approximating function-to-function maps
+encoded by parametrized PDEs [3]. Although the bulk of existing research centers
+on well-posed forward operator learning, the use of operator learning to accelerate
+or directly solve inverse problems is also gaining significant attention [7], both in
+deterministic [72–82] and Bayesian settings [83–87].
+Concerning inverse problems for PDEs, neural operator methods have recently
+been proposed as flexible surrogates for mapping high-dimensional measurement data
+to unknown parameter fields. Neural Inverse Operators (NIO) learn a map from
+boundary measurement data—treated as an empirical measure of sensor locations and
+values—to unknown parameters, and have been successfully applied to solve various
+nonlinear inverse problems [7, 88, 89]. Similarly, transformer-based architectures for
+inverse boundary value problems [79] and direct sampling–inspired networks for EIT
+[90] process boundary data as unordered sets or point clouds, echoing the empirical
+measure viewpoint of NIO. However, these approaches are typically trained on noise-
+less or low-noise forward simulations and are primarily designed to invert data that
+lie in the range of the forward map.
+In contrast, the current paper goes further by constructing and analyzing an
+extension of the EIT inverse map that is suitable for out-of-range or highly noisy
+measurement data. Indeed, quantitative control of the extension’s modulus of conti-
+nuity allows one to bound the influence of noise on the reconstruction error. Some
+works that are closest in spirit to the present setting also employ neural operators and
+extension-type approximation arguments [91–93]. In comparison to these works, the
+current paper treats genuinely infinite-dimensional sets of conductivities, works with
+absolute instead of relative boundary maps, and provides a more detailed stability
+and approximation analysis for the approximate inverse map in the presence of noisy
+measurements. See Section 4.5 for additional discussion.
+1.3. Outline
+The remainder of this paper is organized as follows. Section 2 introduces essential
+background material. Section 3 makes Contribution (C1) by stably extending the EIT
+inversion operator to a map between subsets of two Hilbert spaces. Section 4 contains
+the approximation theory and main result of the paper, making Contribution (C2).
+Section 5 addresses Contribution (C3) by training and evaluating neural operators on
+7
+
+PDF PAGE 8
+three challenging EIT datasets. Section 6 provides concluding remarks and an outlook
+toward future developments for data-driven EIT and beyond. The appendix collects
+remaining proofs (Section A), auxiliary lemmas (Section B), and numerical experiment
+details (Section C).
+2. Preliminaries
+This
+section
+introduces
+notation
+(Section
+2.1),
+mathematical
+preliminaries
+(Section 2.2), the EIT problem setup (Section 2.3), and neural operators (Section 2.4).
+2.1. General notation
+We use the term domain to mean an open connected set Ωin Rd with sufficiently
+smooth boundary. We use n to denote the outward pointing unit vector normal to
+the boundary ∂Ωof domain Ωand Ωfor its closure. The Euclidean inner product on
+Rd between vectors x and y is denoted by x · y and the induced norm by | · |. The
+constant function x 7→1 is denoted by 1. We occasionally invoke the notation a ≲b
+for nonnegative real numbers a and b if a ≤Cb for an unimportant constant C > 0
+and similarly a ≳b if b ≲a. We write a ≍b if both a ≲b and b ≲a. We let P(X)
+denote the set of Borel probability measures supported on a set X. The identity map
+on X is written as IdX. Define Z≥0 := {0, 1, . . .} and R≥0 (respectively, R>0) by [0, ∞)
+(respectively, (0, ∞)). For z1 + iz2 =: z ∈C, we write z := z1 −iz2 for the complex
+conjugate. We use the convention that complex inner products on vector and function
+spaces are linear in the first argument and conjugate-linear in the second argument.
+2.2. Function spaces and linear operators
+For a domain Ω⊂Rd, we work with the standard Lebesgue spaces Lp(Ω; C) for
+p ∈[1, ∞] and Sobolev Hilbert spaces Hk(Ω; C) for k ∈Z≥0 [94, 95]. When k ∈R, we
+use interpolation (k > 0) and duality (k < 0) to define Hk(Ω; C) [96, Appendix A].
+We often omit the function space codomain if it is the real line R or complex plane C,
+or when no confusion is caused by doing so. For example, we write Lp(Ω; C) ≡Lp(Ω).
+However, we mostly work in the real-valued subsets of complex function spaces. Simi-
+larly, we may occasionally omit the domain of the function space under consideration
+if it is obvious from the context, e.g., writing L∞instead of L∞(Ω).
+The space of functions with bounded variation (BV) [97, Chp. 14.1] plays an impor-
+tant role in this paper. For an open set U ⊆Rd, the total variation of an element
+v ∈L1
+loc(U; R) is defined by
+V (v; U) := sup
+Z
+U
+v(x)∇· ϕ(x) dx
+ ϕ ∈C∞
+c (U; Rd) and ∥ϕ∥L∞(U;Rd) ≤1
+
+,
+(2.1)
+where C∞
+c (U; Rd) is the set of infinitely continuously differentiable Rd-valued functions
+with compact support in U. The set of real-valued BV functions is defined as
+BV(U) :=
+
+v ∈L1(U)
+ V (v; U) < ∞
+	
+.
+(2.2)
+8
+
+PDF PAGE 9
+We endow BV(U) with the norm
+v 7→∥v∥BV := max
+
+∥v∥L1(U), V (v; U)
+
+.
+(2.3)
+It follows that (BV(U), ∥· ∥BV) is a Banach space [97].
+Next, for α ∈(0, 1], we recall the H¨older space C1,α(Ω) of real-valued continuously
+differentiable functions with α-H¨older first derivatives on the closure Ωof a domain
+Ω⊂Rd [94, Sec. 1.29]. It is a Banach space when endowed with the norm
+v 7→∥v∥C1,α := max
+
+∥v∥C1, max
+|β|=1|∂βv|C0,α
+
+,
+(2.4)
+where the C1(Ω) norm and C0,α(Ω) seminorm are defined for a given v by
+∥v∥C1 := max
+|β|≤1 sup
+x∈Ω
+(∂βv)(x)
+
+and
+|v|C0,α :=
+sup
+(x,x′)∈Ω×Ω
+x̸=x′
+|v(x) −v(x′)|
+|x −x′|α
+,
+(2.5)
+respectively. We have adopted standard multi-index notation in the preceding displays.
+We now turn to linear operators. The Banach space of continuous linear operators
+from a Banach space X to a Banach space Y is denoted by L (X; Y ). It is equipped
+with the operator norm T 7→∥T∥L (X;Y ) := sup∥x∥X≤1∥Tx∥Y . The Hilbert space of
+Hilbert–Schmidt operators between Hilbert spaces U and V is denoted as HS(U; V). It
+has inner product (S, T) 7→⟨S, T⟩HS(U;V) := P
+j∈Z≥0⟨Se(U)
+j
+, Te(U)
+j
+⟩V for any orthonor-
+mal basis {e(U)
+j
+}j∈Z≥0 of U. If U = V, we write HS(U) and similarly for L (U). For
+u ∈U and v ∈V, their tensor product is the linear operator v ⊗U u: w 7→⟨w, u⟩Uv.
+For s ∈R, we make frequent use of the Sobolev Hilbert spaces Hs(∂Ω) of functions
+on the boundary ∂Ωof domain Ω. To define them, we follow [96, Appendix A, pp. 192–
+193]. Let σ be the surface measure on ∂Ω. Since Ωis a domain, ∂Ωis a compact
+manifold. The (negative) Laplace–Beltrami operator −∆∂Ωon this manifold has a
+real discrete spectrum consisting of nonnegative eigenvalues {λj}j∈Z≥0 that we sort
+in nondecreasing order. Let {φj}j∈Z≥0 denote the corresponding L2(∂Ω)-orthonormal
+real-valued eigenfunctions, i.e., −∆∂Ωφj = λjφj. Define
+(h1, h2) 7→⟨h1, h2⟩Hs(∂Ω) :=
+∞
+X
+j=0
+(1 + λj)s⟨h1, φj⟩L2(∂Ω)⟨h2, φj⟩L2(∂Ω) .
+(2.6)
+Then we write Hs(∂Ω) := {h ∈L2(∂Ω): ∥h∥Hs(∂Ω) < ∞} if s ≥0. Otherwise, Hs(∂Ω)
+is taken to be the completion of L2(∂Ω) under the norm induced by (2.6). It is useful
+to define the zero-mean Hilbert subspace
+Hs
+⋄(∂Ω) :=
+
+h ∈Hs(∂Ω)
+
+Z
+∂Ω
+h(x) σ(dx) = 0
+
+(2.7)
+9
+
+PDF PAGE 10
+and also the quotient Hilbert space Hs(∂Ω)/C of equivalence classes of functions that
+are equal up to the addition of complex scalars. Since φ0 is proportional to 1 and
+λ0 = 0, the quotient norm ∥[h] ∥Hs(∂Ω)/C := infz∈C∥h −z∥Hs(∂Ω) = ∥h0∥Hs(∂Ω) for
+some zero-mean representative h0 ∈Hs
+⋄(∂Ω) of equivalence class [h] ∈Hs(∂Ω)/C [53,
+Remark 3.5, pp. 1931–1932]. The quotient space Hs(Ω)/C is defined in the same way.
+The spectral definition (2.6) implies that {φ(s)
+j
+:= (1 + λj)−s/2φj}∞
+j=0 is an
+orthonormal basis of Hs(∂Ω) [96, p. 193, Remark i]. Similarly, {φ(s)
+j }∞
+j=1 is an orthonor-
+mal basis of both Hs
+⋄(∂Ω) and Hs(∂Ω)/C. Using these facts, for any real s and t
+and natural numbers J and K, we define the orthogonal projection operator (tensor)
+ΠJK ∈L (HS(Hs
+⋄(∂Ω); Ht(∂Ω)/C)) by
+T 7→ΠJKT :=
+J
+X
+j=1
+K
+X
+k=1
+⟨Tφ(s)
+k , φ(t)
+j ⟩Ht(∂Ω) φ(t)
+j
+⊗Hs(∂Ω) φ(s)
+k .
+(2.8)
+The range of ΠJK is a finite-dimensional subspace that is independent of s and t [96,
+Appendix B, p. 194]. When J = K, we define PJ := ΠJJ.
+2.3. Electrical impedance tomography
+In EIT imaging, real data is acquired by applying current patterns and measuring the
+resulting voltage at a finite number of electrodes attached to the boundary of an object
+[98]. The goal is to use such data to infer hidden structure about the object’s interior.
+Calder´on’s problem [12] is a continuum model for EIT in which an uncountably infinite
+number of measurements is assumed to be available for inversion. We now describe
+this model. For a more comprehensive mathematical treatment, we refer the reader to
+several books and review articles [10, 99, 100].
+In the rest of this paper, we fix Ω⊂Rd to be a bounded nonempty domain with
+C∞-smooth boundary ∂Ω. Consider the linear elliptic PDE (1.1) with positive almost
+everywhere (a.e.) conductivity coefficient γ ∈L∞(Ω; R>0) and zero-mean Neumann
+boundary data g ∈H−1/2
+⋄
+(∂Ω). The (weak) solution u = uγ,g exists in H1(Ω)/C and
+is unique [95, Chp. 2]. Moreover, the NtD map Rγ is defined (in the trace sense) by
+g 7→Rγg := uγ,g
+
+∂Ω
+(2.9)
+and satisfies Rγ ∈L (H−1/2
+⋄
+(∂Ω); H1/2(∂Ω)/C). A related object is the Dirichlet-
+to-Neumann (DtN) map Λγ ∈L (H1/2(∂Ω)/C; H−1/2
+⋄
+(∂Ω)), which is the continuous
+inverse of Rγ. These linear operators represent all possible measurements that can
+be taken at the boundary under the model (1.1). Although defined between complex
+Hilbert spaces, both operators Rγ and Λγ map real-valued functions to real-valued
+functions [96, Remark on p. 176].
+Calder´on’s inverse conductivity problem is to recover γ from knowledge of (a poten-
+tially noisy version of) the boundary operator Λγ. Notice that although Λγ itself is
+linear, the mapping γ 7→Λγ is nonlinear. Consequently, the Calder´on problem is a
+canonical example of a severely ill-posed nonlinear inverse problem. Although most
+10
+
+PDF PAGE 11
+of the mathematical literature focuses on the DtN map Λγ, the present paper instead
+aims to accurately approximate a variant of the inversion operator Rγ 7→γ defined
+for NtD maps. This NtD setup is more amenable to practical measurement systems,
+machine learning models, and finite-dimensional approximations.
+The main results of this paper will hold for real-valued conductivities in an admis-
+sible set X. At a minimum, inverse problem solutions belonging to this set should be
+unique and (weakly) stable to perturbations of the boundary data. To define X, first
+fix Ω′ ⊂Rd to be a domain that is compactly contained in Ω, i.e.,
+Ω′ ⊂Ω.
+(2.10)
+Next, fix m > 0 and M ≥max(1, m) to be strictly positive numbers. Define sets
+Γ := {γ ∈L∞(Ω; R) | m ≤γ(x) ≤M for a.e. x ∈Ω}
+and
+Γ′ := {γ ∈Γ | γ = 1 a.e. on Ω\ Ω′} .
+(2.11)
+Conductivities γ ∈Γ′ have the property that γ ≡1 in a neighborhood of the boundary
+∂Ω. This fact will be crucial later in the paper when we exploit regularity theory for
+elliptic PDEs near the boundary to control norms of the NtD map. Additionally, it
+will be useful at times to view elements γ ∈Γ′ as functions eγ : Rd →R on the whole
+of Rd by defining eγ to be the extension of γ with the property that eγ ≡1 on Rd \ Ω.
+This extension is continuous because γ ≡1 on Ω\ Ω′.
+Now fix R > 0 and α ∈(0, 1]. We require conductivities in X to satisfy a priori
+uniform bounds that depend on the spatial dimension d. To this end, define
+XBV(R) := {γ ∈Γ′ ∩BV(Ω) | ∥γ∥BV ≤R} ,
+XC1,α(R) :=
+
+γ ∈Γ′ ∩C1,α(Ω)
+ ∥γ∥C1,α ≤R
+	
+,
+and
+Xd(R) :=
+(
+XBV(R),
+if
+d = 2 ,
+XC1,α(R),
+if
+d ≥3 .
+(2.12)
+We then take our admissible set to be X := Xd(R). To endow Xd(R) with met-
+ric structure, fix p ∈[1, ∞). We equip the admissible set Xd(R) with the metric
+dp : Xd(R) × Xd(R) →R≥0 induced by the Lp(Ω) norm. That is,
+dp(γ, γ0) := ∥γ −γ0∥Lp(Ω)
+(2.13)
+for any γ and γ0 in Xd(R). Due to the uniform L∞bounds in the definition of Γ, on
+Xd(R) all Lp distances dp for p ∈[1, ∞) are topologically equivalent. However, the L1
+norm is better suited than the usual L∞norm to detect closeness of discontinuous or
+nearly discontinuous conductivities. Thus, we use p = 1 in our numerical experiments.
+In the theoretical analysis, we work with the Lp distance dp for general p, but with a
+primary emphasis on the p = 2 case.
+11
+
+PDF PAGE 12
+2.4. Neural operators
+We use neural operators to approximate the nonlinear mapping from boundary mea-
+surements to conductivities arising in the Calder´on problem. Neural operators mimic
+the feedforward, compositional structure of finite-dimensional neural networks in a
+function space-consistent way [3]. They take the form
+Ψ(NO) := Q ◦LL ◦LL−1 ◦· · · ◦L2 ◦L1 ◦S .
+(2.14)
+The local Nemytskii operators S and Q in (2.14) act pointwise on input functions.
+They are usually chosen to be shallow neural networks, e.g., Q(h(x)) = A1ς(A0h(x)+
+a0) + a1 for a function h, point x, pointwise nonlinearity ς, and weights and biases
+{A0, a0, A1, a1}. In contrast, the L hidden layer operators {Lℓ}L
+ℓ=1 act nonlocally. Each
+hidden layer Lℓmaps vector-valued functions to vector-valued functions. The vector
+dimension dc is typically fixed for all ℓand is called the channel width of the neural
+operator. Suppose that the underlying domain is a bounded subset D ⊂Rn. The basic
+hidden layer parametrization is
+ Lℓ(h)
+
+(x) = ςℓ
+ Wℓh(x) + (Kℓh)(x) + bℓ(x)
+
+(2.15)
+for an input function h: D →Rdc and evaluation point x ∈D. The function ςℓ: R →R
+is a pointwise nonlinear activation; usually the last hidden layer activation ςL is set to
+the identity. The local weight matrix Wℓ∈Rdc×dc acts pointwise, while bℓ: D →Rdc
+is a vector-valued bias function. The main innovation of neural operators is the linear
+kernel integral operator Kℓgiven by
+(Kℓh)(x) :=
+Z
+D
+κℓ(x, y)h(y) dy .
+(2.16)
+The matrix-valued kernel κℓ: D × D →Rdc×dc determines the type of the neural
+operator architecture [3, Sec. 4]. This paper primarily considers the FNO [1]. The FNO
+is a neural operator of the form (2.14) with kernel integral operator (2.16) parametrized
+as the Fourier series
+(Kℓh)(x) =
+
+
+
+X
+k∈Zn
+
+
+dc
+X
+j=1
+ P (k)
+ℓ
+
+lj
+
+e2πi⟨k, · ⟩Rn, hj
+
+L2(Tn;C)
+
+e2πi⟨k,x⟩Rn
+
+
+
+dc
+l=1
+.
+(2.17)
+The Fourier series coefficients P (k)
+ℓ
+∈Cdc×dc for each k ∈Zn are trainable. By choosing
+D := Tn ≃[0, 1]n
+per to be the unit hypertorus, the parametrization (2.17) induces a
+convolutional structure that admits efficient numerical implementation via the Fast
+Fourier Transform (FFT) [1, 101]. More sophisticated versions maintain computational
+efficiency without assuming periodicity or well-behaved geometries [5, 102–105].
+12
+
+PDF PAGE 13
+3. Extension of the inverse map
+This section carries out the inverse problem extension procedure that forms the foun-
+dation of our neural operator approximation. The main result of the section relies
+on the following abstract extension theorem due to Benyamin and Lindenstrauss [6,
+Thm. 1.12, p. 18] that pertains to uniformly continuous maps between Hilbert spaces.
+Theorem 3.1 (Benyamin–Lindenstrauss extension). Let H1 and H2 be Hilbert spaces.
+Suppose that U is a subset of H1 and that ω: R>0 →R≥0 is a nonnegative con-
+cave function with the property that limt↓0 ω(t) = 0. If G: U →H2 is a uniformly
+continuous map with modulus of continuity bounded above pointwise by ω, then there
+exists a uniformly continuous map G: H1 →H2 defined on the whole of H1 such that
+G|U = G. The modulus of continuity of the extension G is also bounded above by ω.
+The aim of this section is to apply Theorem 3.1 with G representing the EIT
+solution operator mapping the admissible boundary data to the conductivity. Once
+found, such an extension allows us to control the inverse problem reconstruction error
+of a neural operator method by the noise level in the boundary measurements and the
+network approximation error itself [7, Sec. 4.1.2, Eqn. (4.10), p. 27]. In particular, this
+approach does not require quantitative stability of the neural operator, unlike in [93].
+The rest of Section 3 is primarily devoted to verifying the hypotheses of
+Theorem 3.1. Section 3.1 develops a stability result for Calder´on’s problem (with DtN
+maps) that is applicable to the admissible set Xd(R) of conductivities considered in
+this paper. This is a first step toward identifying ω and H2. Next, Section 3.2 estab-
+lishes various bounds on NtD maps and their differences. These estimates expose the
+smoothing properties of such maps, enable the interpolation of different norms on
+spaces of linear operators, and facilitate stability estimates written in terms of NtD
+maps. Section 3.3 identifies NtD maps with square integrable kernel functions, which
+in turn determines the sets U and H1. For machine learning architectures, such kernel
+functions are a more convenient form of input data than are linear operators. Last,
+Section 3.4 deploys the technical results from the previous two subsections alongside
+Theorem 3.1 to deliver a stable extension of the EIT inverse map.
+3.1. Stability of the inverse map
+This subsection produces a stability theorem for Calder´on’s problem with conductiv-
+ities in the set Xd(R) from (2.12). The case d ≥3 is more standard in the literature
+and typically delivers logarithmic stability in L∞(Ω). In contrast, the d = 2 case for
+the BV conductivities in X2(R) is more challenging. We establish a L2(Ω) continuity
+result when d = 2 that is a consequence of [24, Thm. 1.6, pp. 5661–5662]. It relies on
+the notion of integral modulus of continuity. To this end, for any p ∈[1, ∞), the inte-
+gral p-modulus of continuity of any v: Rd →R is the function ω(p)(v): R≥0 →R≥0
+defined for t ≥0 by
+ω(p)(v)(t) := sup
+|y|≤t
+∥τyv −v∥Lp(Rd) .
+(3.1)
+13
+
+PDF PAGE 14
+In (3.1), τy is the translation-by-y operator (τyv)(x) := v(x + y) for fixed y ∈Rd \ {0}
+and for any x ∈Rd. We often invoke (3.1) with v equal to the continuous extension
+eγ : Rd →R≥0 of γ ∈Xd(R) defined by eγ = γ on Ωand eγ ≡1 on Rd \ Ω.
+We are now in a position to state and prove the L2(Ω) stability theorem.
+Theorem 3.2 (L2 stability of the Calder´on problem). Let d ≥2. Suppose that α ∈
+(0, 1) and R > 0 are as in (2.12). Then there exist constants C > 0, ρ > 0, and
+t0 ∈(0, 1) depending on d, α, M, m, R, Ω, and Ω′ such that for any γ ∈Xd(R) and
+any γ0 ∈Xd(R) with Xd(R) as in (2.12), the DtN maps Λγ and Λγ0 satisfy
+∥γ −γ0∥L2(Ω) ≤Cω
+
+∥Λγ −Λγ0∥L(H1/2(∂Ω)/C;H−1/2(∂Ω))
+
+,
+(3.2)
+where the modulus of continuity ω: R>0 →R>0 is given by
+t 7→ω(t) := log
+
+1
+min(t, t0)
+−ρ
+.
+(3.3)
+Proof. First, Λγ1 = Λγ01 = 0 for any (γ, γ0) ∈Γ × Γ implies that
+∥Λγ −Λγ0∥L(H1/2(∂Ω)/C;H−1/2(∂Ω)) = ∥Λγ −Λγ0∥L(H1/2(∂Ω);H−1/2(∂Ω)) .
+Thus, it suffices to develop the stability results for the rightmost operator norm. We
+denote this norm by ∥· ∥in the remainder of the proof.
+We begin with the d = 2 case. Let B := max{1, M, m−1} ≥1. Notice that γ ∈
+X2(R) implies B−1 ≤eγ(x) ≤B for a.e. x ∈R2. Fix p = pB > 2B ≥2 and γ ∈X2(R).
+The asserted result will follow by [24, Thm. 1.6, pp. 5661–5662] if there exists a so-
+called uniform modulus of continuity ω0 such that supγ∈X2(R) ω(p)(eγ)(t) ≤ω0(t) for
+every t ≥0. To show this, we invoke properties of BV functions. For any y ∈R2, by
+H¨older’s inequality and the triangle inequality we compute
+∥τyeγ −eγ∥Lp(R2) =
+Z
+R2|eγ(x + y) −eγ(x)|p−1|eγ(x + y) −eγ(x)| dx
+1/p
+≤
+τyeγ −eγ
+(p−1)/p
+L∞(R2)
+τyeγ −eγ
+1/p
+L1(R2)
+≤(2B)(p−1)/pτyeγ −eγ
+1/p
+L1(R2) .
+By Theorem A.1 and the definitions of X2(R), BV, and total variation, it holds that
+V (eγ; R2) = V (γ; Ω) < ∞and eγ ∈L1
+loc(R2) for any γ ∈X2(R). Application of [97,
+Exercise 14.3(ii), p. 460], [97, Exercise 14.3(i), p. 460], and [97, Lemma 14.37, p. 483],
+in that order, delivers the estimate
+∥τyeγ −eγ∥L1(R2) ≤V (eγ; R2)|y| = V (γ; Ω)|y| ≤R|y|
+14
+
+PDF PAGE 15
+on X2(R). For every t ≥0, we deduce that
+sup
+γ∈X2(R)
+ω(p)(eγ)(t) =
+sup
+γ∈X2(R)
+sup
+|y|≤t
+∥τyeγ −eγ∥Lp(R2) ≤
+ (2B)(p−1)/pR1/p
+t1/p .
+Thus, with CB,R the rightmost constant in the preceding display, the map ω0 : t 7→
+CB,R t1/pB is a valid uniform modulus of continuity. In particular, ω0 is continuous on
+R>0 and hence upper semi-continuous. Then [24, p. 5662] implies that (3.2) is valid
+with modulus of continuity ω in (3.3) for some ρ = ρ2 and t0 = t(2)
+0 .
+Now let d ≥3. We exploit the stronger a priori bounds on the conductivities in the
+set Xd(R). Define b = max{1, m−1, R}. For γ ∈Xd(R), we have γ(x) ≥m−1 ≥b−1 for
+all x ∈Ωand ∥γ∥C1,α ≤R ≤b. Then [31, Thm. 1.1, p. 470] delivers the stability bound
+∥γ −γ0∥L∞(Ω) ≤Cω′(∥Λγ −Λγ0∥) on Xd(R), where ω′(t) = (log(min(t, t(d)
+0 )−1))−ρd
+for some ρd ∈(0, 1) depending only on d and α. Here, the value of t(d)
+0
+∈(0, 1) is
+implied by [31, pp. 489–490]. To complete the proof, we use the continuous embedding
+L∞,→L2, enlarge C, and choose ρ := min(ρ2, ρd) and t0 := max(t(2)
+0 , t(d)
+0 ) to ensure
+that (3.2) and (3.3) are valid for all d ≥2.
+□
+The stability estimate (3.2) from Theorem 3.2 remains valid with the Lp(Ω) norm
+replacing the L2(Ω) norm on the left-hand side if p ≤2. This follows by continuous
+embedding. By the uniform L∞bounds on the set Γ, interpolating the L∞and L2
+norms shows that Lp(Ω) stability holds for p > 2 if ω is replaced by ω2/p. The following
+remark comments on other stronger norms in the d ≥3 case.
+Remark 1 (stronger metrics on the set of conductivities). It is possible to obtain a
+result similar to Theorem 3.2 in the d ≥3 setting by applying [32, Thm. 1.2, p. 4].
+This theorem proves logarithmic stability with the L2(Ω) norm in (3.2) replaced by
+the H1(Ω) norm whenever the conductivities are uniformly bounded in the Sobolev
+space W 2,p(Ω) with p > d. Although the universal approximation theorems we later
+invoke remain valid for Hilbert Sobolev spaces such as H1(Ω), we choose to work in
+the weaker setting of Theorem 3.2 in the d ≥3 case to provide a unified presentation
+of the main results in all dimensions d ≥2.
+3.2. Norm estimates for Neumann-to-Dirichlet maps
+The previous stability result in Theorem 3.2 is formulated in terms of DtN maps.
+However, in realistic EIT current and voltage hardware setups, it is more convenient
+to work with NtD maps. This subsection develops useful technical machinery for NtD
+maps. Our first lemma controls differences of DtN maps by differences of NtD maps.
+Lemma 3.3 (NtD to DtN). There exists a constant C > 0 depending on d, Ω, m,
+and M such that for any γ ∈Γ and γ0 ∈Γ with Γ as in (2.11), it holds that
+Λγ −Λγ0
+
+L (H1/2(∂Ω)/C;H−1/2(∂Ω)) ≤C
+Rγ −Rγ0
+
+L (H−1/2
+⋄
+(∂Ω);H1/2(∂Ω)/C) .
+(3.4)
+15
+
+PDF PAGE 16
+Proof. We use the fact that Λγ : H1/2(∂Ω)/C →H−1/2
+⋄
+(∂Ω) and Rγ : H−1/2
+⋄
+(∂Ω) →
+H1/2(∂Ω)/C are continuous inverses of each other; see, e.g., [9, Sec. 12.3.2, pp. 164–
+165] or [96, Lemma 20, p. 197]. For any γ ∈Γ, γ0 ∈Γ, and distinguished representative
+f of the C-equivalence class [f] ∈H1/2(∂Ω)/C, observe that
+Λγ(Rγ0 −Rγ)Λγ0f = Λγ(Rγ0Λγ0f −RγΛγ0f)
+= Λγf −(ΛγRγ)Λγ0f
+= (Λγ −Λγ0)f .
+This implies the operator norm estimates
+∥Λγ −Λγ0∥L (H1/2/C;H−1/2) = ∥Λγ(Rγ0 −Rγ)Λγ0∥L (H1/2/C;H−1/2)
+≤∥Λγ(Rγ0 −Rγ)∥L (H−1/2
+⋄
+;H−1/2)∥Λγ0∥L (H1/2/C;H−1/2)
+≤∥Λγ∥L (H1/2/C;H−1/2)∥Λγ0∥L (H1/2/C;H−1/2)∥Rγ −Rγ0∥L (H−1/2
+⋄
+;H1/2/C).
+By Theorem A.2, there exists c > 0 such that supγ∈Γ∥Λγ∥L (H1/2/C;H−1/2) ≤c. Taking
+C := c2 completes the proof.
+□
+The next lemma bounds the operator norms of NtD maps acting between bound-
+ary Sobolev spaces of arbitrarily small or large smoothness exponents, uniformly
+over the set Γ′ from (2.11). Such estimates are enabled by harmonic regularity in a
+neighborhood of the boundary for conductivities γ ∈Γ′ because γ ≡1 on such a
+neighborhood.
+Lemma 3.4 (uniform bounds on NtD maps). For any s ∈R and any t ∈R, there
+exist Cs > 0 and C′
+s,t > 0 depending on s and t such that
+sup
+γ∈Γ′∥Rγ∥L (Hs
+⋄(∂Ω);Hs+1(∂Ω)/C) ≤Cs
+and
+sup
+γ∈Γ′∥Rγ −R1∥L (Hs
+⋄(∂Ω);Ht(∂Ω)/C) ≤C′
+s,t .
+(3.5)
+Section A provides the proof of Theorem 3.4. The arbitrarily high order smooth-
+ing properties (3.5) of shifted NtD maps plays an important role in our quantitative
+extension theory. In particular, it helps us obtain the following H¨older-type continuity
+result for a particular embedding operator acting between spaces of linear operators.
+Lemma 3.5 (NtD inverse inequality: Hilbert–Schmidt norm to operator norm). For
+any real numbers s and t, there exists C > 0 depending on d, s, t, Ω, Ω′, m, and M
+such that for all γ and γ0 belonging to Γ′, it holds that
+Rγ −Rγ0
+
+L (H−1/2
+⋄
+(∂Ω);H1/2(∂Ω)/C) ≤C
+Rγ −Rγ0
+1/2
+HS(Hs
+⋄(∂Ω);Ht(∂Ω)/C) .
+(3.6)
+16
+
+PDF PAGE 17
+Proof. The following argument mimics the proof of [96, Lemma 5, p. 177] for a sim-
+ilar result applicable to DtN maps instead of NtD maps. Let γ ∈Γ′ and γ0 ∈Γ′
+be arbitrary. We make use of low-rank approximations and the extreme smoothing
+properties of the shifted NtD maps e
+Rγ := Rγ −R1 and e
+Rγ0 := Rγ0 −R1. Write
+∥· ∥for the HS(H−1/2
+⋄
+(∂Ω); H1/2(∂Ω)/C) operator norm. To begin, we project onto
+finite-dimensional subspaces via PJ = ΠJJ from (2.8). For any J, this leads to
+∥Rγ −Rγ0∥L (H−1/2
+⋄
+;H1/2/C) ≤∥Rγ −Rγ0∥
+= ∥e
+Rγ −e
+Rγ0∥
+≤∥e
+Rγ −PJ e
+Rγ∥+ ∥PJ e
+Rγ −PJ e
+Rγ0∥+ ∥PJ e
+Rγ0 −e
+Rγ0∥
+≤2 sup
+γ′∈Γ′∥e
+Rγ′ −PJ e
+Rγ′∥+ ∥PJ e
+Rγ −PJ e
+Rγ0∥.
+Next, we control the truncation error represented by the first term in the last line
+of the preceding display. For any ϱ ≥0, Theorem B.2 (applied with K = J, r = −1/2,
+s = 1/2, and q = −p = ϱ(d −1) + 1/2) delivers the bound
+∥e
+Rγ −PJ e
+Rγ∥≤C∥e
+Rγ∥L (H−(ϱ+1)(d−1)−1/2
+⋄
+;Hϱ(d−1)+1/2/C)J−ϱ ≤Cϱ,dJ−ϱ .
+The final inequality in the last display is due to Theorem 3.4 (applied with s =
+−(ϱ + 1)(d −1) −1/2 and t = ϱ(d −1) + 1/2). The constant Cϱ,d depends on ϱ and d
+but does not depend on γ. Thus, Cϱ,dJ−ϱ also upper bounds the supremum.
+Now fix real numbers s and t. To control the second term in the error decomposi-
+tion, we apply Theorem B.3 with K = J, r = −1/2, s = 1/2, p = s, and q = t. This
+finite-dimensional norm equivalence result gives
+∥PJ e
+Rγ −PJ e
+Rγ0∥≤CJ
+p(s,t)
+d−1 ∥e
+Rγ −e
+Rγ0∥HS(Hs
+⋄;Ht/C) ,
+where p(s, t) := (s + 1/2)+ + (1/2 −t)+ ≥0 and a 7→a+ := max(0, a).
+Finally, we balance the preceding two upper bounds with a judicious choice of
+truncation level J. For another constant cϱ,d > 0, it holds that
+x :=
+ cϱ,d∥e
+Rγ −e
+Rγ0∥HS(Hs
+⋄;Ht/C)
+−
+d−1
+ϱ(d−1)+p(s,t)
+solves the equation Cϱ,dx−ϱ = Cxp(s,t)/(d−1)∥e
+Rγ −e
+Rγ0∥HS(Hs
+⋄;Ht/C). It further holds
+that x ≥cϱ, d′ for a constant c′
+ϱ,d > 0. That is, x is bounded away from zero uni-
+formly in γ and γ0 because sup(γ,γ0)∈Γ′×Γ′∥e
+Rγ −e
+Rγ0∥HS(Hs
+⋄;Ht/C) ≤C by the triangle
+inequality and Theorems B.2 and 3.4. Since J was arbitrary, choosing the truncation
+level J := ⌈x⌉∈N implies that
+∥Rγ −Rγ0∥L (H−1/2
+⋄
+;H1/2/C) ≤C
+ e
+Rγ −e
+Rγ0
+
+ϱ(d−1)
+ϱ(d−1)+p(s,t)
+HS(Hs
+⋄;Ht/C)
+= C
+Rγ −Rγ0
+
+ϱ(d−1)
+ϱ(d−1)+p(s,t)
+HS(Hs
+⋄;Ht/C) .
+17
+
+PDF PAGE 18
+Setting ϱ := p(s, t)/(d −1) if p(s, t) > 0 and ϱ > 0 otherwise completes the proof.
+□
+Theorem 3.5 is a kind of “inverse inequality” in our application of interest. We will
+be interested in smoothness exponents t = 0 and s close to zero. However, for general
+operators, the inequality only holds in the opposite direction (without the square root)
+for certain values of non-zero s and t. We are able to obtain (3.6) for all values of s
+and t because shifted NtD maps are arbitrarily smoothing, as shown in (3.5).
+3.3. From Neumann-to-Dirichlet maps to kernel functions
+Another advantage of working with NtD maps Rγ instead of DtN maps Λγ is that,
+viewed as mappings from L2
+⋄(∂Ω) into L2
+⋄(∂Ω), NtD maps are self-adjoint compact
+linear operators. Thus, they are amenable to numerical discretization, e.g., finite ele-
+ment methods or finite spectral measurements. In two dimensions in particular, the
+NtD map Rγ ∈L (L2
+⋄(∂Ω)) is actually a Hilbert–Schmidt operator if γ ∈Γ [53,
+Lemma A.1, p. 1948]. This fact is useful because every Hilbert–Schmidt operator on
+an L2 space has an integral kernel [106, Prop. 2.8.6, p. 74]. Thus, we may identify the
+linear operator Rγ with its kernel function. Such an identification is natural for the
+purpose of learning the solution map of Calder´on’s problem because neural operators
+(in general) map functions to functions instead of operators to functions [3].
+However, if d > 2, then Rγ is no longer a Hilbert–Schmidt operator on L2 [53,
+p. 1948]. Although there is work concerning neural operators that directly receive linear
+operators like Rγ as input, these require specialized approximation architectures that
+are not yet fully understood [91, 92, 107]. In the present paper, we nonetheless seek
+an identification between NtD maps and kernel functions in the higher-dimensional
+setting. To do so, we compose the NtD map with a d-dependent but otherwise fixed
+compact operator chosen such that their composition is Hilbert–Schmidt on L2; similar
+ideas are carried out in [108, Sec. 4.3.2]. In the rest of this section, for t ∈R, we view
+Rγ as a mapping into Ht
+⋄(∂Ω; C) instead of into the quotient space Ht(∂Ω)/C. We do
+this by working with the mean-zero representative f ∈Ht
+⋄(∂Ω; C) of any equivalence
+class [f] ∈Ht(∂Ω)/C because their respective norms agree [96, Appendix A, Remark
+(iii)]. Thus, operator norms and Hilbert–Schmidt norms of the NtD maps viewed as
+acting on mean-zero spaces and on quotient spaces, respectively, also agree.
+Recall the nondecreasing sequence of Laplace–Beltrami eigenvalues {λj}j∈Z≥0 ⊂
+R≥0
+and
+corresponding
+L2(∂Ω)-orthonormal
+eigenfunctions
+{φj}j∈Z≥0
+from
+Section 2.2. Define compact self-adjoint operator C : L2
+⋄(∂Ω; C) →L2
+⋄(∂Ω; C) by
+C :=
+∞
+X
+j=1
+(1 + λj)−1φj ⊗L2(∂Ω;C) φj .
+(3.7)
+Since {(λj, φj)} are real, C maps real-valued functions to real-valued functions. For
+s > 0, we define powers Cs of C by functional calculus. The next lemma shows that
+the composition RγCs is Hilbert–Schmidt for an appropriate choice of s.
+Lemma 3.6 (NtD maps and Hilbert–Schmidt integral operators). Let τ > 0 and
+d ≥2. Define rd := d−1
+2
+−1 + τ. If γ ∈Γ′, then RγCrd/2 ∈HS(L2
+⋄(∂Ω)).
+18
+
+PDF PAGE 19
+Proof. The squared HS(L2
+⋄(∂Ω)) norm of RγCrd/2 satisfies
+∞
+X
+j=1
+RγCrd/2φj
+2
+L2 ≤∥Rγ∥2
+L (H−1
+⋄
+;L2)
+∞
+X
+j=1
+Crd/2φj
+2
+H−1
+= ∥Rγ∥2
+L (H−1
+⋄
+;L2/C)
+∞
+X
+j=1
+
+(1 + λj)−rd/2
+p
+1 + λj
+p
+1 + λjφj
+
+2
+H−1
+= ∥Rγ∥2
+L (H−1
+⋄
+;L2/C)
+∞
+X
+j=1
+(1 + λj)−1−rdφ(−1)
+j
+2
+H−1 .
+The L (H−1
+⋄(∂Ω); L2(∂Ω)/C) operator norm of Rγ is finite for any d ≥2 by
+Theorem 3.4. Since ∥φ(−1)
+j
+∥2
+H−1 = 1 for all j, Weyl’s law [96, Corollary 16, p. 194]
+shows that the series in the last line of the preceding display is bounded above and
+below by P∞
+j=1(1 + j
+2
+d−1 )−1−rd. This sum is finite if and only if rd > −1 + (d −1)/2.
+The assertion follows.
+□
+Remark 2 (weighted Hilbert–Schmidt spaces). It is known that the HS(L2
+⋄(∂Ω))
+norm of RγCrd/2 is equal to the HS(Hrd
+⋄(∂Ω); L2
+⋄(∂Ω)) norm of Rγ, which is a weighted
+Hilbert–Schmidt norm with information-theoretic relevance in Bayesian formulations
+of EIT [96]. Additionally, these norms also equal the L2
+µ(L2
+⋄(∂Ω)) norm of Rγ for
+any centered probability measure µ ∈P(L2
+⋄(∂Ω)) with Mat´ern-like covariance oper-
+ator Crd [109, Sec. 2.2.1]. This viewpoint is especially relevant when the NtD map
+is regressed from paired data under squared loss, as is common in operator learning
+[68, 69].
+Since every Hilbert–Schmidt operator on L2 is a kernel integral operator [106,
+Prop. 2.8.6, p. 74], Theorem 3.6 allows us to make the following definition.
+Definition 1 (integral kernel of smoothed NtD map). Let τ > 0 and rd := d−1
+2 −1+τ.
+For any γ ∈Γ′ and NtD map Rγ, let κγ ∈L2(∂Ω×∂Ω; R) be the unique, real, integral
+(Schwartz) kernel of RγCrd/2 ∈HS(L2
+⋄(∂Ω)). That is, κγ : ∂Ω× ∂Ω→R is such that
+RγCrd/2g =
+Z
+∂Ω
+κγ( · , y)g(y)σ(dy)
+(3.8)
+for all g ∈L2
+⋄(∂Ω).
+The fact that κγ is real-valued follows because both Rγ and C map real-valued
+functions to real-valued functions. Two physically relevant settings are when d = 2 or
+d = 3. When d = 2, we can take r2 = 0 (with the choice τ = 1/2) because Rγ itself
+is a Hilbert–Schmidt operator with symmetric kernel κγ in this case. If d = 3, then
+we can take r3 = τ > 0 arbitrarily small. However, the kernel κγ is not necessarily
+symmetric. A more convenient choice of r3 for numerical acquisition of boundary data
+is r3 = τ = 2, especially when the boundary ∂Ωor eigendecomposition of ∆∂Ωare not
+known precisely. Specifically, let A := −∆∂Ω+ IdL2(∂Ω) be the unbounded self-adjoint
+19
+
+PDF PAGE 20
+operator on L2
+⋄(∂Ω) with domain Dom(A) = {g ∈L2
+⋄(∂Ω) | P∞
+j=1(1 + λj)2⟨φj, g⟩2
+L2 <
+∞}. We can view C = A−1. So, application of Cr3/2 = C to a function h requires
+solving the linear second order elliptic PDE Ag = h for g = Ch. Then g becomes the
+boundary current input in a practical EIT imaging system.
+Remark 3 (integral kernels of shifted NtD maps). Theoretically, we could have
+worked with shifted NtD maps Rγ−R1. These shifted operators belong to HS(L2
+⋄(∂Ω))
+in any dimension d ≥2 by Theorem 3.4 and the proof of Theorem 3.6. Although math-
+ematically convenient, it is known that this relative continuum measurement model
+is not clinically relevant in practice. Indeed, having access to the background NtD
+map R1 is not a realistic assumption [9, Chp. 12.8.5, p. 182], and there is work that
+attempts to circumvent relative or difference EIT measurements [52]. We emphasize
+that the availability of relative NtD boundary data is not assumed in our work.
+3.4. Extending beyond the range of the forward map
+To complete the extension argument using Theorem 3.1, it remains to specify Hilbert
+spaces H1 and H2 such that the inversion operator has a controlled concave modulus
+of continuity when viewed as a map between subsets of these two spaces. By virtue of
+Theorem 3.2, it is natural to take H2 ≡L2(Ω). However, the operator norm on the
+right-hand side of (3.2) is non-Hilbertian. Thus, the choice of H1 is not yet clear. The
+results in Section 3.2 remedy this issue by bounding the operator norm by fractional
+powers of certain Hilbert–Schmidt norms, which are Hilbertian. Although the Hilbert
+space of Hilbert–Schmidt operators is sufficient from the perspective of verifying the
+hypotheses of Theorem 3.1, this space is still unsatisfactory from the machine learning
+perspective because linear operators are a nonstandard data type for most deep learn-
+ing architectures (the exceptions being those in [91, 92, 107]; see also [7, Sec. 4.2–4.3]).
+Similar to [110], we apply the ideas from Section 3.3 to identify NtD operators with
+certain square-integrable kernel functions. Consequently, we choose H1 ≡L2(∂Ω×∂Ω).
+With the real Hilbert spaces H1 and H2 now fixed, we define the nonlinear EIT
+inversion operator with domain
+Dom(Ψ⋆) := {κγ | γ ∈Xd(R)} ⊆L2(∂Ω× ∂Ω)
+(3.9)
+by the expression
+Ψ⋆: Dom(Ψ⋆) →L2(Ω) ,
+κγ 7→γ ,
+(3.10)
+where κγ is the integral kernel corresponding to a smoothed NtD map from Defini-
+tion 1. The domain Dom(Ψ⋆) (3.9) of the inverse map (3.10) is taken to be equal to
+the range of the forward map γ 7→κγ. This complicated set plays the role of U in
+Theorem 3.1. To complete the procedure outlined in the preceding discussion, we must
+bound the modulus of continuity of Ψ⋆. This requires an additional result.
+20
+
+PDF PAGE 21
+Lemma 3.7 (norm of operator composition). Let C be as in (3.7). For any real
+numbers s and t, any T ∈HS(Hs
+⋄(∂Ω); Ht
+⋄(∂Ω)), and any r ≥0, it holds that
+T
+
+HS(Hs
+⋄(∂Ω);Ht
+⋄(∂Ω)) =
+TCr/2
+HS(Hs−r
+⋄
+(∂Ω);Ht
+⋄(∂Ω)) .
+(3.11)
+Proof. By the spectral decomposition of C from (3.7), it holds that
+T
+2
+HS(Hs
+⋄;Ht
+⋄) =
+∞
+X
+j=1
+Tφ(s)
+j
+2
+Ht =
+∞
+X
+j=1
+(1 + λj)r(1 + λj)−rT(1 + λj)−s/2φj
+2
+Ht
+=
+∞
+X
+j=1
+TC−r/2(1 + λj)−(s−r)/2φj
+2
+Ht
+=
+∞
+X
+j=1
+TC−r/2φ(s−r)
+j
+2
+Ht .
+This is the asserted result because {φ(s−r)
+j
+}∞
+j=1 is an orthonormal basis of Hs−r
+⋄
+.
+□
+Application of Theorem 3.7 and the supporting results from Sections 3.1 to 3.3
+lead to the following logarithmic stability estimate for Ψ⋆.
+Proposition 3.8 (L2 stability of Ψ⋆). If d ≥2 and R > 0, then there exists a constant
+C⋆> 0 such that for any γ ∈Xd(R) and any γ0 ∈Xd(R), it holds that
+∥Ψ⋆(κγ) −Ψ⋆(κγ0)∥L2(Ω) ≤C⋆ω⋆ ∥κγ −κγ0∥L2(∂Ω×∂Ω)
+
+,
+(3.12)
+where t 7→ω⋆(t) := ω(
+√
+t) and ω is as in (3.3).
+Proof. In the following, we let C > 0 be a constant that is allowed to change from line
+to line. Let γ and γ0 belong to Xd(R). Let rd be as in Theorem 3.6. Since Ψ⋆(κγ) =
+γ by definition (3.10) and moduli of continuity are increasing functions, successive
+application of Theorem 3.2, Theorem 3.3, and Theorem 3.5 (with s = rd and t = 0)
+yield the inequalities
+∥Ψ⋆(κγ) −Ψ⋆(κγ0)∥L2(Ω) = ∥γ −γ0∥L2(Ω)
+≤Cω
+ ∥Λγ −Λγ0∥L (H1/2(∂Ω)/C;H−1/2(∂Ω))
+
+≤Cω
+ ∥Rγ −Rγ0∥L (H−1/2
+⋄
+(∂Ω);H1/2(∂Ω)/C)
+
+≤Cω
+
+∥Rγ −Rγ0∥1/2
+HS(H
+rd
+⋄(∂Ω);L2(∂Ω)/C)
+
+.
+Next, Theorem 3.7, Theorem 3.6, and Definition 1 imply that
+Rγ −Rγ0
+
+HS(H
+rd
+⋄(∂Ω);L2(∂Ω)/C) =
+RγCrd/2 −Rγ0Crd/2
+HS(L2
+⋄(∂Ω))
+21
+
+PDF PAGE 22
+= ∥κγ −κγ0∥L2(∂Ω×∂Ω) .
+To achieve the last equality in the previous display, we used linearity and the fact that
+the mapping from a L2(∂Ω×∂Ω) kernel function to the HS(L2
+⋄(∂Ω)) integral operator
+with that same kernel function is an isometric isomorphism [106, Prop. 2.8.6, p. 74].
+Putting together the pieces, we deduce that
+∥Ψ⋆(κγ) −Ψ⋆(κγ0)∥L2(Ω) ≤Cω
+ ∥κγ −κγ0∥1/2
+L2(∂Ω×∂Ω)
+
+as asserted.
+□
+With this stability result between Hilbert function spaces in hand, we are now in a
+position to apply the Benyamin–Lindenstrauss extension from Theorem 3.1 to deliver
+the promised result.
+Theorem 3.9 (extending outside of the range). Let Ψ⋆: Dom(Ψ⋆) ⊆L2(∂Ω×∂Ω) →
+L2(Ω) be as in (3.9) and (3.10). Let C⋆and ω⋆be as in Theorem 3.8. There exists
+eΨ⋆: L2(∂Ω× ∂Ω) →L2(Ω) such that eΨ⋆(κ) = Ψ⋆(κ) for all κ ∈Dom(Ψ⋆), and
+∥eΨ⋆(κ) −eΨ⋆(κ0)∥L2(Ω) ≤C⋆ω⋆ ∥κ −κ0∥L2(∂Ω×∂Ω)
+
+(3.13)
+for all κ ∈L2(∂Ω× ∂Ω) and all κ0 ∈L2(∂Ω× ∂Ω).
+Proof. The assertion follows by applying Theorem 3.1 with H1 = L2(∂Ω× ∂Ω), H2 =
+L2(Ω), U = Dom(Ψ⋆), G = Ψ⋆, and ω = ω⋆. That ω⋆is a modulus of continuity for
+Ψ⋆is due to Theorem 3.8. Moreover, ω⋆is clearly nonnegative. It is also concave if the
+threshold t0 from (3.3) is constructed to be sufficiently small; examination of the proof
+of Theorem 3.2 and the results used therein show that this is always possible.
+□
+Even though eΨ⋆from Theorem 3.9 extends Ψ⋆, in general eΨ⋆only maps into L2(Ω)
+instead of into the admissible set Xd(R). The next remark shows that the use of a
+thresholding operation can upgrade the range of the extension to Γ ⊂L∞(Ω).
+Remark 4 (clipping). Define the clipping function TΓ : R →[m, M] by x 7→T(x) :=
+max(m, min(M, x)). Since m ≤M, it holds that TΓ is 1-Lipschitz continuous on R. The
+corresponding Nemytskii operator TΓ : L2(Ω) →L2(Ω) given by TΓ(f)(x) = Tγ(f(x))
+is also 1-Lipschitz. In Theorem 3.9, we could have replaced eΨ⋆with eΨ⋆
+Γ := TΓ ◦eΨ⋆
+everywhere. Indeed, eΨ⋆
+Γ extends Ψ⋆because eΨ⋆
+Γ(κγ) = TΓ(Ψ⋆(κγ)) = Ψ⋆(κγ) for
+any γ ∈Xd(R) ⊆Γ. The continuity bound (3.13) also remains valid because TΓ is
+Lipschitz. Such a clipped extension is interesting because its range satisfies Ran(eΨ⋆
+Γ) ⊆
+Γ ⊂L∞(Ω) instead of merely Ran(eΨ⋆) ⊆L2(Ω). However, for the purposes of the
+present paper, we do not need to consider clipping the extension eΨ⋆, but remark that
+doing so may prove useful in other contexts. For example, the elliptic operator in (1.1)
+with γ ∈Ran(eΨ⋆
+Γ) is well-defined, while it may not be with γ ∈Ran(eΨ⋆).
+22
+
+PDF PAGE 23
+Theorem 3.9 is particularly useful when κ ∈Dom(Ψ⋆) and κ0 ̸∈Dom(Ψ⋆), but
+κ0 is instead a small perturbation away from Dom(Ψ⋆), e.g., κ0 represents a noisy
+continuum EIT measurement. Indeed, the stability estimate (3.13) controls how far the
+two reconstructions deviate by the size of the data perturbation. More importantly,
+Theorem 3.9 sets the stage for neural operator approximations of the true inverse map
+Ψ⋆by way of the extension eΨ⋆. We now turn our attention to this task.
+4. Approximation of the inverse map
+This section employs the extension eΨ⋆from Section 3 to establish an approximation
+theorem for the solution operator Ψ⋆of EIT. The error is measured in the topology of
+uniform convergence over compact sets. Toward showing that the relevant set of NtD
+integral kernel functions is compact in L2(∂Ω× ∂Ω), Section 4.1 develops H¨older sta-
+bility estimates for the forward map of EIT. These estimates help deliver the required
+compactness results in Section 4.2. Another challenge is that off-the-shelf neural oper-
+ators from Section 2.4 do not natively handle functions defined on manifolds such as
+the boundary product ∂Ω× ∂Ω. Section 4.3 sidesteps this issue by developing local
+coordinate operators for the manifold. Section 4.4 defines a slightly generalized FNO
+that is compatible with the manifold structure and presents the main result of the
+paper: the existence of such an FNO that approximates Ψ⋆arbitrarily well, albeit up
+to the noise level in the boundary data. Finally, Section 4.5 discusses the implications
+of the theorem.
+4.1. Stability of the forward map
+The goal of this subsection is to produce a forward stability estimate for the map
+γ 7→κγ. To begin, we need the following Lq(Ω) Lipschitz continuity result for the
+Neumann problem [48, Thm. 4.2 and Remark 4.5, p. 406].
+Theorem 4.1 (forward Lipschitz stability in Lq(Ω): operator norm). There exists
+Q > 2 depending only on d, m, and M such that the following holds. For any q′ ∈
+(2, Q), define q ∈(2, ∞) by the equation 1/q + 1/q′ + 1/2 = 1. Then for any γ and γ0
+belonging to Γ′, it holds that
+∥Rγ −Rγ0∥L (H−1/2
+⋄
+(∂Ω);H1/2(∂Ω)/C) ≤C∥γ −γ0∥Lq(Ω) .
+(4.1)
+The constant C > 0 depends on d, q′, m, M, Ω, and Ω′.
+To translate the preceding theorem for Rγ into one applicable to κγ, we must
+interpolate the operator norm using Hilbert–Schmidt operator truncations as in
+Theorem 3.5 from Section 3.2. The following lemma is another such “inverse inequal-
+ity” that is valid due to the smoothing properties of shifted NtD maps as shown in
+Theorem 3.4.
+Lemma 4.2 (NtD inverse inequality: operator norm to Hilbert–Schmidt norm). For
+any real numbers s and t, there exists C > 0 depending on d, s, t, Ω, Ω′, m, and M
+23
+
+PDF PAGE 24
+such that for all γ and γ0 belonging to Γ′, it holds that
+∥Rγ −Rγ0∥HS(Hs
+⋄(∂Ω);Ht(∂Ω)/C) ≤C∥Rγ −Rγ0∥1/2
+L (H−1/2
+⋄
+(∂Ω);H1/2(∂Ω)/C) .
+(4.2)
+The proof of Theorem 4.2 is in Section A. As a consequence, we obtain our desired
+forward continuity result.
+Corollary 4.3 (forward H¨older stability in Lp(Ω): kernel norm). There exists q > 2
+depending only on d, m, and M such that for any p ∈[1, ∞) and any γ and γ0
+belonging to Γ′, it holds that
+κγ −κγ0
+
+L2(∂Ω×∂Ω) ≤C
+γ −γ0
+
+1
+2 min(1, p
+q)
+Lp(Ω)
+.
+(4.3)
+The constant C > 0 depends on d, p, q, m, M, Ω, and Ω′.
+Proof. Application of Theorem 4.1 and Theorem 4.2 delivers a q > 2 such that
+∥Rγ −Rγ0∥HS(Hs
+⋄(∂Ω);Ht(∂Ω)/C) ≤C∥γ −γ0∥1/2
+Lq(Ω) .
+By Theorem 3.7 and Theorem 3.6, choosing s = rd and t = 0 (or s = rd = 0 if d = 2)
+in the previous display gives
+∥Rγ −Rγ0∥HS(H
+rd
+⋄;L2/C) = ∥RγCrd/2 −Rγ0Crd/2∥HS(L2
+⋄) = ∥κγ −κγ0∥L2(∂Ω×∂Ω) .
+If p ≥q, the asserted result (4.3) follows by monotonicity of Lp norms. Otherwise,
+p < q and we use the topological equivalence of the Lp(Ω) distances on Γ ⊇Γ′. In this
+case, for any γ and γ0 in Γ′, it holds that
+∥γ −γ0∥Lq(Ω) =
+Z
+Ω
+|γ(x) −γ0(x)|q−p|γ(x) −γ0(x)|p dx
+1/q
+≤(2M)1−p/q∥γ −γ0∥p/q
+Lp(Ω) .
+Putting together the pieces completes the proof.
+□
+In summary, Theorem 4.3 establishes that for any p ∈[1, ∞), the forward map
+F : (Γ′, dp) →L2(∂Ω× ∂Ω) ,
+γ 7→F(γ) := κγ ,
+(4.4)
+is H¨older continuous. In particular, F is continuous, which is all we will need. This
+continuity remains valid for the restriction
+F := F|Xd(R) : (Xd(R), dp) →L2(∂Ω× ∂Ω)
+(4.5)
+24
+
+PDF PAGE 25
+of F to the admissible set of conductivities Xd(R) ⊆Γ′. We now turn our attention
+to the compactness of this set.
+4.2. Compactness of the admissible conductivities
+Our next aim is to establish that Dom(Ψ⋆) is compact in the L2(∂Ω× ∂Ω) topology
+because this will be the input space for our neural operator approximations. By the
+definition (3.9) of the domain Dom(Ψ⋆), we see that Dom(Ψ⋆) is equal to the range
+Ran(F) of the continuous forward map F from (4.5). Therefore, the compactness of
+Dom(Ψ⋆) = Ran(F) = F(Xd(R)) will follow if we can show that the set Xd(R) of
+admissible conductivities is compact in Lp(Ω). We need the following lemma.
+Lemma 4.4 (the admissible conductivity set is closed). For any p ∈[1, ∞) and any
+d ≥2, it holds that Xd(R) is closed in Lp(Ω).
+Proof. Clearly Xd(R) ⊆Lp(Ω) by definition (2.12). To show that Xd(R) is closed in
+Lp(Ω), let {γn}n∈N ⊆Xd(R) be a sequence such that γn →γ ∈Lp(Ω) in Lp(Ω) as
+n →∞. First, we show that γ ∈Γ. Since Ωhas finite Lebesgue measure, convergence
+in Lp(Ω) implies the existence of a subsequence {γnk} such that γnk(x) →γ(x) as
+k →∞for a.e. x ∈Ω. Thus,
+|γ(x)| ≤|γnk(x)| + |γ(x) −γnk(x)| ≤M + |γ(x) −γnk(x)| .
+Taking the limit superior shows that γ(x) ≤|γ(x)| ≤M for a.e. x ∈Ω. Thus, γ ∈
+L∞(Ω). The strictly positive lower bound is similar because
+γ(x) ≥γnk(x) −|γnk(x) −γ(x)| ≥m −|γnk(x) −γ(x)| .
+Taking the limit inferior, we deduce that γ ∈Γ.
+Next, we show that γ ∈Γ′ is identically one in a neighborhood of the boundary.
+Let E = Ω\ Ω′, where Ω′ ⊂Ω. By hypothesis, γn = 1 a.e. on E. Thus
+Z
+E
+|1 −γ(x)|p dx =
+Z
+E
+|γn(x) −γ(x)|p dx ≤
+Z
+Ω
+|γn(x) −γ(x)|p dx
+for any n. By taking the limit superior, it follows that
+R
+E|1 −γ(x)|p dx = 0. This
+implies that γ = 1 a.e. on E as required. Hence, γ ∈Γ′.
+To conclude that γ ∈Xd(R), we must prove that the Lp-limit γ satisfies the a
+priori bounds in the definition (2.12) of Xd(R). Beginning with dimension d = 2, we
+must establish the BV norm bound. Since supn∈N∥γn∥BV ≤R, it holds that
+∥γ∥L1(Ω) =
+Z
+Ω
+lim
+k→∞|γnk(x)| dx ≤lim inf
+k→∞
+Z
+Ω
+|γnk(x)| dx = lim inf
+k→∞∥γnk∥L1(Ω) ≤R
+by Fatou’s lemma. Next, the total variation functional V ( · ; Ω): L1
+loc(Ω) →R≥0∪{∞}
+is lower semi-continuous in L1
+loc(Ω) [97, Exercise 14.3 (iii), p. 460]. Since p ≥1, the
+25
+
+PDF PAGE 26
+sequence {γn}n∈N and limit γ both belong to L1
+loc(Ω). It follows that V (γ; Ω) ≤
+lim infn→∞V (γn; Ω) ≤R. Therefore, ∥γ∥BV ≤R as desired.
+Now consider d ≥3. We have supn∈N∥γn∥C1,α ≤R. Let β < α. By the compactness
+of the embedding C1,α(Ω) ,→C1,β(Ω) [94, Thm. 1.34, pp. 11–12], there exists a
+subsequence {γnk}k∈N and a limit γ′ ∈C1,β(Ω) such that limk→∞∥γnk −γ′∥C1,β = 0.
+Thus, it also holds that
+∥γnk −γ′∥Lp ≲∥γnk −γ′∥L∞= sup
+x∈Ω
+|γnk(x) −γ′(x)| ≤∥γnk −γ′∥C1,β →0
+as k →∞. By uniqueness of limits, we deduce that γ = γ′ a.e. on Ωand γ = γ′ in Lp.
+Identifying γ with its continuous representative γ′, in particular it holds that γnk →γ
+as k →∞in C1(Ω). Thus
+∥γ∥C1 ≤lim sup
+k→∞
+∥γnk∥C1 + lim sup
+k→∞
+∥γ −γnk∥C1 ≤R .
+Finally, let ν be a multi-index with |ν| = 1 and let (x, x′) ∈Ω× Ω. Then
+(∂νγ)(x) −(∂νγ)(x′)
+ = lim sup
+k→∞
+(∂νγnk)(x) −(∂νγnk)(x′)
+ ≤R |x −x′|α
+because {γnk}k∈N ⊆Xd(R). Since ν, x, and x′ are arbitrary, the assertion ∥γ∥C1,α ≤R
+follows. This completes the proof.
+□
+With the help of Theorem 4.4, we can now prove that Xd(R) ⊆Lp(Ω) is compact.
+Lemma 4.5 (compactness of admissible conductivity set). For any 1 ≤p < ∞and
+any d ≥2, the set Xd(R) is compact in Lp(Ω).
+Proof. Since Xd(R) is closed in the Lp(Ω) topology by Theorem 4.4, compactness will
+follow by establishing relative compactness (i.e., precompactness) in Lp(Ω).
+First let d = 2. In this case, our argument is similar to that in [111, Appendix
+C]. The proof uses the Frech´et–Kolmogorov–Riesz (FKR) compactness theorem [112,
+Thm. 4.26, Sec. 4.5, p. 111]. This theorem requires Lp(Rd) boundedness and Lp(Rd)
+equicontinuity estimates on the whole of Rd. To this end, define the set
+e
+X
+:=
+
+eγ −1: R2 →R
+ γ ∈X2(R)
+	
+, where eγ : R2 →R is the continuous extension of γ by
+one outside of Ω. For the boundedness over e
+X, notice that
+∥eγ −1∥Lp(Rd) = ∥γ −1∥Lp(Ω) ≤(M + 1)|Ω|1/p
+because eγ −1 ≡0 outside of Ω. For equicontinuity on average, we first recall (3.1) and
+the translation-by-y operator τy defined by (τyf)(x) = f(x + y) for fixed y ∈Rd \ {0}
+and for any x ∈Rd. For any h ∈Rd, we compute that
+∥τh(eγ −1) −(eγ −1)∥L∞(Rd) = ∥τheγ −eγ∥L∞(Rd) ≤2∥eγ∥L∞(Rd) ≤2M .
+26
+
+PDF PAGE 27
+Also, by an argument similar to the one used in the proof of Theorem 3.2,
+∥τh(eγ −1) −(eγ −1)∥L1(Rd) = ∥τheγ −eγ∥L1(Rd) ≤V (eγ; Rd)|h| = V (γ; Ω)|h| ≤R|h| .
+We again invoked Theorem A.1. By interpolating the L1 and L∞norms, it follows that
+∥τh(eγ −1) −(eγ −1)∥Lp(Rd) ≤∥τheγ −eγ∥1−1/p
+L∞(Rd)∥τheγ −eγ∥1/p
+L1(Rd)
+≤(2M)1−1/pR1/p|h|1/p ,
+which tends to zero uniformly over e
+X as |h| →0. Then, the FKR compactness theorem
+asserts that e
+X|Ω:= {γ −1: Ω→R | γ ∈X2(R)} is relatively compact in Lp(Ω). From
+this fact, it is easy to see that X2(R) itself is relatively compact in Lp(Ω).
+Now let d ≥3. Let {γn} ⊆Xd(R) be a sequence. Since supn∈N∥γn∥C1,α ≤R, the
+compactness of the embedding C1,α(Ω) ,→C1,β(Ω) for β < α [94, Thm. 1.34, pp. 11–
+12] delivers the existence of a subsequence {γnk}k∈N and a limit γ′ ∈C1,β(Ω) such
+that
+∥γnk −γ′∥Lp ≲∥γnk −γ′∥L∞= sup
+x∈Ω
+|γnk(x) −γ′(x)| ≤∥γnk −γ′∥C1,β →0
+as k →∞. This proves that Xd(R) is relatively compact in Lp(Ω) for d ≥3.
+□
+By combining Theorem 4.3 with Theorem 4.5, we obtain our desired compactness
+result in the space of kernel functions.
+Corollary 4.6 (compactness of integral kernels). The set Dom(Ψ⋆) ⊆L2(∂Ω× ∂Ω)
+is compact in L2(∂Ω× ∂Ω).
+Theorem 4.6 plays an important role in the neural operator approximation theory
+to follow.
+4.3. Local representation of the boundary manifold
+The neural operators as described in Section 2.4 map between spaces of functions
+defined over bounded domains. However, in the context of EIT, inputs to the inverse
+map (3.10) are functions defined on ∂Ω× ∂Ω. The set ∂Ω× ∂Ωis not a domain, but
+is instead a compact manifold possibly representing complicated geometry. This fact
+requires additional care. Using basic properties of manifolds [113], the goal of this
+subsection is to construct an injective linear transformation from functions on the
+manifold to functions on a latent, nonphysical domain.
+To this end, recall that Ω⊂Rd is the bounded physical domain with C∞-smooth
+boundary. It follows that ∂Ω⊂Rd is a C∞-smooth (d−1)-dimensional manifold with-
+out boundary that is compact in the subspace topology of Rd [113]. Let {(Uj, ϕj)}J
+j=1
+be a finite atlas of charts for ∂Ω. The coordinate neighborhoods Uj ⊂∂Ωare open
+sets with the property that ∪J
+j=1Uj = ∂Ω. Let the diffeomorphic coordinate maps
+ϕj : Uj →ϕj(Uj) ⊂Rd−1 be chosen such that the coordinate patches Wj := ϕj(Uj)
+27
+
+PDF PAGE 28
+satisfy Wj ⊆D for all j, where D is a latent Lipschitz domain with the property that
+D ⊂(0, 1)d−1. Additionally, we require the following assumption.
+Assumption 1 (bi-Lipschitz coordinate maps). The domain Ωis such that the
+boundary manifold ∂Ωadmits bi-Lipschitz coordinate maps {ϕj}J
+j=1.
+We next operate on the C∞-smooth (2d −2)-dimensional compact manifold ∂Ω×
+∂Ω⊂Rd × Rd [113, Prop. 5.18, p. 56]. For every j and k, define the diffeomorphism
+Φ−1
+jk : Wj × Wk →Uj × Uk
+(x, y) 7→
+ ϕ−1
+j (x), ϕ−1
+k (y)
+
+(4.6)
+and its associated pullback linear operator
+(Φ−1
+jk )∗: L2(∂Ω× ∂Ω) →L2(Wj × Wk)
+h 7→h ◦Φ−1
+jk .
+(4.7)
+The linear operator (Φ−1
+jk )∗is continuous by the change of variables integration formula
+and the bi-Lipschitz property of the coordinate maps from Assumption 1. For any h,
+we also define the zero-extended continuous pullback operator (eΦ−1
+jk )∗: L2(∂Ω×∂Ω) →
+L2(D × D) by
+(x, y) 7→
+ (eΦ−1
+jk )∗h
+
+(x, y) :=
+( (Φ−1
+jk )∗h
+
+(x, y) ,
+if (x, y) ∈Wj × Wk ,
+0 ,
+otherwise .
+(4.8)
+Stacking together all J2 pullback operators {(eΦ−1
+jk )∗}J
+j,k=1 defines the continuous
+global-to-local linear map
+G: L2(∂Ω× ∂Ω) →L2(D × D)J×J
+h 7→Gh :=
+
+(eΦ−1
+jk )∗h
+	J
+j,k=1 .
+(4.9)
+We may identify L2(D × D)J×J with L2(D × D; RJ2) via the natural isometric iso-
+morphism. The global-to-local map G allows us to move off of the manifold and work
+in J2 Euclidean patches. In particular, standard neural operators are applicable on
+such patches.
+It remains to define a suitable inverse of the global-to-local map in order to return
+to the manifold. We take an approach based on smooth partitions of unity. Standard
+results [113, Prop. 13.6, p. 146] show that there exists a partition of unity {ψj}J
+j=1
+subordinate to {Uj}J
+j=1 such that ψj ∈C∞
+c (Uj) for every j. The functions {ψj}
+are nonnegative and sum to one pointwise. Define the linear multiplication operators
+Mjk : L2(∂Ω× ∂Ω) →L2(∂Ω× ∂Ω) by
+(Mjkh)(x, y) := ψj(x)ψk(y)h(x, y)
+(4.10)
+28
+
+PDF PAGE 29
+for every h, x, and y. Each Mjkh is supported in Uj ×Uk. The multiplication operators
+are continuous because ψj has compact support in Uj for all j and hence ∥ψj∥L∞(Uj) <
+∞. Now define the diffeomorphism
+Φjk : Uj × Uk →Wj × Wk
+(x, y) 7→
+ ϕj(x), ϕk(y)
+
+(4.11)
+and its associated continuous pullback linear operators
+Φ∗
+jk : L2(D × D) →L2(Uj × Uk)
+h 7→h ◦Φjk
+(4.12)
+and eΦ∗
+jk : L2(D × D) →L2(∂Ω× ∂Ω). The latter is given by
+(x, y) 7→(eΦ∗
+jkh)(x, y) :=
+(
+(Φ∗
+jkh)(x, y) ,
+if (x, y) ∈Uj × Uk ,
+0 ,
+otherwise .
+(4.13)
+Finally, we define the linear local-to-global map
+L: L2(D × D)J×J →L2(∂Ω× ∂Ω)
+
+fjk}J
+j,k=1 7→
+J
+X
+j,k=1
+MjkeΦ∗
+jkfjk .
+(4.14)
+The map L is continuous because it is the composition of continuous linear maps. The
+following lemma shows that L is a left inverse of G.
+Lemma 4.7 (left inverse). Under Assumption 1, it holds that LG = IdL2(∂Ω×∂Ω).
+Proof. Let h ∈L2(∂Ω× ∂Ω) and (x, y) ∈∂Ω× ∂Ω. By definition,
+(LGh)(x, y) =
+J
+X
+j,k=1
+ MjkeΦ∗
+jk(eΦ−1
+jk )∗h
+
+(x, y)
+=
+J
+X
+j,k=1
+ψj(x)ψk(y)
+ eΦ∗
+jk(eΦ−1
+jk )∗h
+
+(x, y)
+=
+X
+(j,k)∈{(m,n) | (x,y)∈Um×Un}
+ψj(x)ψk(y)
+ (eΦ−1
+jk )∗h
+ ϕj(x), ϕk(y)
+
+.
+Also, (4.8) implies that
+ (eΦ−1
+jk )∗h
+ ϕj(x), ϕk(y)
+
+=
+ (Φ−1
+jk )∗h
+ ϕj(x), ϕk(y)
+
+= h(x, y) .
+29
+
+PDF PAGE 30
+We deduce that
+(LGh)(x, y) =
+X
+(j,k)∈{(m,n) | (x,y)∈Um×Un}
+ψj(x)ψk(y)h(x, y) = h(x, y)
+because {Mjk1}J
+j,k=1 is a partition of unity subordinate to {Uj×Uk}J
+j,k=1 with Mjk1 ∈
+C∞
+c (Uj × Uk). Since h, x, and y are arbitrary, the assertion is proved.
+□
+With the maps G and L in hand, we are now in a position to develop approximation
+theory for EIT.
+4.4. Main result on neural operator approximation
+This subsection approximates the (extended) EIT inverse map eΨ⋆: L2(∂Ω× ∂Ω) →
+L2(Ω) from Theorem 3.9 with neural operators. As noted in Section 4.3, the standard
+neural operators defined in Section 2.4 are only capable of processing functions defined
+on domains. However, ∂Ω× ∂Ωis a compact manifold. We therefore must generalize
+the definition of FNO to encompass input functions defined on manifolds.
+To this end, let M ⊂Rda be a dm-dimensional compact manifold embedded in
+Rda. Suppose that dm ≥d, where Ω⊂Rd. Let de, dc, dr, and dq be natural numbers.
+We define a generalized FNO Ψ(FNO) : L2(M; Rdin) →L2(Ω; Rdout) by
+Ψ(FNO) := Q ◦R ◦F ◦LL ◦· · · ◦L1 ◦E ◦S .
+(4.15)
+Comparing (4.15) to (2.14), the layers S, {Lℓ}L
+ℓ=1, and Q agree with those of the
+standard neural operator. The first layer S : L2(M; Rdin) →L2(M; Rde) is pointwise
+defined by a map S : Rda × Rdin →Rde. This means
+ S(h)
+
+(x) := S
+ x, h(x)
+
+(4.16)
+for every h ∈L2(M; Rdin) and x ∈M. Each nonlinear operator Lℓ: L2(Tdm; Rdc) →
+L2(Tdm; Rdc) is as in (2.15) and (2.17). The final operator Q: L2(Ω; Rdq)
+→
+L2(Ω; Rdout) is also defined pointwise by
+ Q(h)
+
+(x) := Q
+ h(x)
+
+(4.17)
+for some map Q: Rdq →Rdout.
+However, (4.15) also introduces E, F, and R. The operator E : L2(M; Rde) →
+L2(Tdm; Rdc) is continuous and linear. Its role is to transform functions on the manifold
+to functions on the torus (recall that T ≃[0, 1]per). As a special case, one can build
+such an E from the global-to-local map G from (4.9) in Section 4.3. The role of the
+continuous and linear map F : L2(Tdm; Rdc) →L2(Td; Rdr) is to change the dimension
+of the input and output domain. To do this, we adopt the linear functional layer of
+Fourier neural functionals [105]. For h ∈L2(Tdm; Rdc) and x = (x1, . . . , xd) ∈Td,
+30
+
+PDF PAGE 31
+define (Fh)(x1, . . . , xd) to be equal to
+Z
+Tdm−d κ(xd+1, . . . , xdm)h(x1, . . . , xd, xd+1, . . . , xdm) dxd+1 · · · dxdm .
+(4.18)
+The periodic function κ: Tdm−d →Rdr×dc parametrizes F. In turn, κ is parametrized
+by its Fourier coefficients, enabling the fast computation of h 7→Fh as an inner prod-
+uct in Fourier space [105, Sec. 2.2, Eqn. 6, p. 7]. Last, the continuous linear operator
+R: L2(Td; Rdr) →L2(Ω; Rdq) returns periodic functions to the output domain Ω.
+In the setting of Calder´on’s problem, let M = ∂Ω×∂Ωbe the manifold, dm = 2d−2
+be the manifold dimension, and da = 2d be the ambient dimension. We need the
+following conditions on the physical domain and the FNO activation function.
+Assumption 2 (main assumptions for EIT approximation). Instate the setting of
+Section 4.3. The following hold true:
+(A-I) (physical domain) Let Ω⊂Rd be a bounded domain with C∞-smooth boundary
+such that Ω⊂(0, 1)d and Assumption 1 holds.
+(A-II) (activation function) Let ς ∈C∞(R) be a fixed globally Lipschitz and non-
+polynomial activation function. For all ℓ∈N, it holds that ςℓ= ς in (2.15).
+The stability, extension, and compactness results from the previous sections lead
+to our main approximation theorem for EIT that we now state and prove.
+Theorem 4.8 (FNO approximation of EIT). Suppose that Assumption 2 holds.
+Let C⋆and ω⋆be as in Theorem 3.8. Let d ≥2 and R > 0. For any com-
+pact set K
+⊂L2(∂Ω× ∂Ω) and any δ > 0, the following holds. Let Kδ
+:=
+{η ∈K : ∥η∥L2(∂Ω×∂Ω) ≤δ}. For any ε
+>
+0, there exists a generalized FNO
+Ψ: L2(∂Ω× ∂Ω) →L2(Ω) of the form (4.15) such that
+sup
+(γ,η)∈Xd(R)×Kδ
+∥γ −Ψ(κγ + η)∥L2(Ω) ≤ε + C⋆ω⋆(δ) .
+(4.19)
+Proof. Let eΨ⋆be the extension of Ψ⋆from Theorem 3.9. Define the set sum
+Zδ := {κ0 + η0 | κ0 ∈Dom(Ψ⋆) and η0 ∈Kδ} ⊆L2(∂Ω× ∂Ω) .
+The set Dom(Ψ⋆) from (3.9) is compact in L2(∂Ω× ∂Ω) by Theorem 4.6. Also, Kδ
+is compact because it is a closed subset of the compact set K ⊂L2(∂Ω× ∂Ω). It
+follows that the sum Zδ is also compact in L2(∂Ω× ∂Ω) because it is the continuous
+image of the compact set Dom(Ψ⋆) × Kδ. Now fix ε > 0. We claim that there exists a
+generalized FNO Ψ of the form (4.15) such that
+sup
+κ∈Zδ
+∥eΨ⋆(κ) −Ψ(κ)∥L2(Ω) ≤ε .
+(4.20)
+31
+
+PDF PAGE 32
+Under this claim, let γ ∈Xd(R) and η ∈Kδ be arbitrary. By the definition of Ψ⋆and
+its extension,
+∥γ −Ψ(κγ + η)∥L2(Ω) = ∥Ψ⋆(κγ) −Ψ(κγ + η)∥L2(Ω) = ∥eΨ⋆(κγ) −Ψ(κγ + η)∥L2(Ω) .
+By the triangle inequality, the uniform continuity estimate (3.13), and the claim (4.20),
+∥eΨ⋆(κγ) −Ψ(κγ + η)∥L2(Ω) ≤∥eΨ⋆(κγ) −eΨ⋆(κγ + η)∥L2(Ω)
++ ∥eΨ⋆(κγ + η) −Ψ(κγ + η)∥L2(Ω)
+≤C⋆ω⋆ ∥η∥L2(∂Ω×∂Ω)
+
++ sup
+κ∈Zδ
+∥eΨ⋆(κ) −Ψ(κ)∥L2(Ω)
+≤C⋆ω⋆(δ) + ε .
+This implies the assertion (4.19). It remains to prove the claim (4.20).
+Recall the global-to-local map G from (4.9) and the local-to-global map L from
+(4.14). Write
+Ψ := Ψ0 ◦G
+for some
+Ψ0 : L2(D × D; RJ2) →L2(Ω)
+to be determined. By Theorem 4.7,
+sup
+κ∈Zδ
+∥eΨ⋆(κ) −Ψ(κ)∥L2(Ω) = sup
+κ∈Zδ
+∥(eΨ⋆◦L)(Gκ) −Ψ0(Gκ)∥L2(Ω)
+=
+sup
+h∈G(Zδ)
+∥(eΨ⋆◦L)(h) −Ψ0(h)∥L2(Ω) .
+(4.21)
+Since Zδ is compact in L2(∂Ω× ∂Ω), the set G(Zδ) is compact in L2(D × D; RJ2)
+by the continuity of G. To find Ψ0 that uniformly approximates eΨ⋆◦L over G(Zδ),
+we adapt ideas from the proof of [105, Thm. 3.2, pp. 34–35]. First, we associate to
+eΨ⋆◦L another operator Υ⋆that is more compatible with existing FNO approximation
+theorems requiring matching domain dimensions [4, Sec. 2]. Second, we relate Υ⋆
+back to eΨ⋆◦L by introducing a linear functional averaging layer. This allows us to
+bound the display (4.21). Last, we demonstrate that our approach indeed leads to an
+approximation of the form (4.15).
+Step 1.
+Since Ω⊂(0, 1)d and Td ≃[0, 1]d
+per, the linear restriction operator
+R: L2(Td) →L2(Ω)
+given by u 7→u|Ωis well-defined and continuous with norm at most one. Let
+E: L2(Ω) →L2(Td)
+32
+
+PDF PAGE 33
+be the continuous linear extension operator from [105, Lemma B.1, p. 34, applied with
+du = dy = 1 and s = s′ = 0]. It holds that RE = IdL2(Ω). Define
+Υ⋆
+0 := E ◦eΨ⋆◦L: L2(D × D; RJ2) →L2(Td)
+so that eΨ⋆◦L = R◦Υ⋆
+0. Recall that d ≥2. Define Υ⋆: L2(D×D; RJ2) →L2(T2d−2) by
+ Υ⋆(h)
+
+(x1, x2, . . . , x2d−3, x2d−2) :=
+ Υ⋆
+0(h)
+
+(x1, x2, . . . , xd−1, xd)
+for every h and x = (x1, . . . , x2d−2). The periodic function Υ⋆(h) is constant in the
+last d −2 dimensions. Since eΨ⋆: L2(∂Ω× ∂Ω) →L2(Ω) is continuous by (3.13), and
+so are the linear maps E and L, the operator Υ⋆
+0 is also continuous. Moreover,
+∥Υ⋆(h) −Υ⋆(h′)∥2
+L2(T2d−2) = ∥Υ⋆
+0(h) −Υ⋆
+0(h′)∥2
+L2(Td)
+for all h and h′. We deduce that Υ⋆is continuous. Using Assumption 2 and the fact
+that (abusing notation) D × D ⊂(0, 1)2d−2, the universal approximation theorem for
+FNOs with periodic outputs [105, Lemma B.1, p. 34, applied with s = s′ = 0, du = J2,
+and dy = 1] shows that there exist a continuous linear extension operator
+E′ : L2(D × D; RJ2) →L2(T2d−2; RJ2)
+and, for every ε > 0, an FNO
+Ψ′ : L2(T2d−2; RJ2) →L2(T2d−2)
+of the form (2.14) such that
+sup
+h∈G(Zδ)
+∥Υ⋆(h) −Ψ′(E′h)∥L2(T2d−2) ≤ε .
+Step 2.
+To relate the preceding periodic approximation result back to the claim
+(4.20) and the display (4.21), define the linear operator A: L2(T2d−2) →L2(Td) by
+u 7→Au :=
+Z
+Td−2 u( · , xd+1, . . . , x2d−2) dxd+1 · · · dx2d−2 .
+This operator averages the last d−2 dimensions of the input function. Since [0, 1]n has
+Lebesgue measure one for all n, Jensen’s inequality shows that the map A has operator
+norm one (with supremum achieved at the constant function 1). Observe that
+Υ⋆
+0 = A ◦Υ⋆.
+By defining Ψ0 := R ◦A ◦Ψ′ ◦E′, it holds that
+sup
+h∈G(Zδ)
+∥(eΨ⋆◦L)(h) −Ψ0(h)∥L2(Ω) =
+sup
+h∈G(Zδ)
+∥(R ◦A ◦Υ⋆)(h) −Ψ0(h)∥L2(Ω)
+33
+
+PDF PAGE 34
+≤
+sup
+h∈G(Zδ)
+∥(A ◦Υ⋆)(h) −(A ◦Ψ′ ◦E′)(h)∥L2(Td)
+≤
+sup
+h∈G(Zδ)
+∥Υ⋆(h) −(Ψ′ ◦E′)(h)∥L2(T2d−2)
+≤ε
+because both R and A have operator norm at most one. This delivers the display (4.20).
+Step 3.
+To complete the proof of the claim, we must show that our final
+approximation
+Ψ := R ◦A ◦Ψ′ ◦E′ ◦G
+is of the form (4.15) with M = ∂Ω×∂Ω, da = 2d, dm = 2d−2, and din = dout = 1. By
+definition of Ψ′, [105, Lemma B.1, p. 34] asserts that there exist a number of layers
+T, channel dimension dc, matrix S′ ∈Rdc×J2 determining operator S′ according to
+(4.16), and matrix Q′ ∈R1×dc determining operator Q′ according to (4.17) such that
+Ψ′ = Q′ ◦LL ◦· · · ◦L1 ◦S′ ,
+where the nonlinear operators {Lℓ}L
+ℓ=1 map L2(T2d−2; Rdc) into itself and are given
+in (2.15) and (2.17). The preceding two displays show that we can write
+Ψ = Q ◦R ◦F ◦LL ◦· · · ◦L1 ◦E ◦S
+in the form (4.15) by taking
+S :=
+
+0 · · · 0 1
+
+∈R1×(2d+1)
+so that
+S = IdL2(∂Ω×∂Ω) ,
+E := S′ ◦E′ ◦G ∈L
+ L2(∂Ω× ∂Ω); L2(T2d−2; Rdc)
+
+,
+F := A ◦Q′ ∈L
+ L2(T2d−2; Rdc); L2(Td)
+
+,
+R := R ∈L
+ L2(Td); L2(Ω)
+
+,
+and
+Q := 1 ∈R1×1
+so that
+Q = IdL2(Ω) .
+The requirement that E be continuous holds because the global-to-local map G ∈
+L (L2(∂Ω× ∂Ω); L2(D × D; RJ2)), E′, and S′ are all continuous linear operators.
+Moreover, F is the composition of two continuous linear maps so it is itself contin-
+uous and linear. It may be identified, via (4.18), with the constant kernel function
+κ: Td−2 →R1×dc given by x 7→κ(x) = Q′. Being constant, the function κ is periodic
+and has a well-defined Fourier series. All together, these facts deliver the claimed form
+of the neural operator approximation.
+□
+4.5. Discussion
+Theorem 4.8 delivers the existence of a noise-robust FNO that uniformly reconstructs
+the unknown conductivity up to an error represented by a function of the noise level
+34
+
+PDF PAGE 35
+in the boundary data. The use of worst-case error in (4.19) is natural in light of the
+compactness of the set Xd(R) established in Section 4.2. However, alternative formu-
+lations in terms of average-case error with respect to a probability measure over the
+conductivity space are possible [4, e.g., following Thm. 18] and may also be of inter-
+est [91]. Theorem 4.8 holds at the infinite-dimensional continuum level unlike results in
+related studies [92, 93], which either work with finite-dimensional conductivity sets, a
+finite number of electrodes, or a pre-discretization of the entire inverse problem. More-
+over, the present theorem is valid for possibly infinite-dimensional sets of admissible
+conductivities with low regularity.
+The fundamental instability of the Calder´on problem is not mitigated by our oper-
+ator learning approach. In fact, we exploit problem-specific inverse stability estimates
+to control errors in the measurements. Consequently, it is unavoidable that to achieve
+accuracy O(ε) in (4.19), it is sufficient for the magnitude δ of the data perturbations
+to be exponentially small, that is, δ = O(exp(−ε−1/ρ)). Of course, this assumes a
+worst-case analysis. In practical average-case operator learning computations based on
+empirical risk minimization, we might not observe this poor complexity. Moreover, by
+restricting to finite-dimensional sets of admissible conductivities with appropriate reg-
+ularity [92, 93], it should be possible using Lipschitz stability estimates [33] to achieve
+a better polynomial complexity of the form δ = O(εϱ) for some ϱ > 0. The tradeoff is
+that the constant corresponding to C⋆in the error bound (4.19) will explode as the
+dimension increases [33].
+We close Section 4 by discussing more related work, alternative architectures, and
+noise distributions.
+Comparison to related work.
+Although Theorem 4.8 is formulated for kernel
+functions associated to NtD maps Rγ, it could be adapted to DtN maps Λγ as well.
+This aligns with related work [91, 92]. The extension program from Section 3 would
+go through by similar arguments, following the ideas in [96]. Regarding FNO approx-
+imation, one must smooth Λγ as in Section 3.3 in all dimensions d ≥2 or work with
+the smoothing difference operator Rγ −R1 in order to identify a square integrable
+input kernel function. Beyond FNOs, alternative neural operator architectures—such
+as those summarized in [7, Sec. 4.2]—could directly process linear operator data Rγ
+[91, 107] or distribution-based relaxations thereof [88, 89]. These methods are also
+suitable for use in our approximation framework.
+The approximation result (4.19) is related to error bounds found in [91–93] for
+other operator learning architectures. As in the current paper, these works reformulate
+the inverse map to act between Hilbert spaces and extend the domain of the inverse in
+order to apply universal approximation theorems for neural operators. One approach
+along these lines is to approximate Calder´on’s inverse map on average with respect to a
+probability measure compacted supported on Dom(Ψ⋆) using deep operator networks
+(DeepONets) [91, Thm. 4.4, p. 786]. However, by only using a zero extension that
+ignores the continuity properties of Ψ⋆, this approach requires detailed information
+about Dom(Ψ⋆) and cannot handle noisy boundary data.
+A similar DeepONet approach is adopted by [92] for the complete electrode model
+of EIT. Unlike that in [91] and Xd(R) from the present paper, the admissible set of
+conductivities in [92] is taken to be a finite-dimensional subset of Γ′. It is shown
+35
+
+PDF PAGE 36
+in [92, Thm. 3.1, p. 7] that one can find a sufficiently large number of electrodes
+and a DeepONet with sufficiently many parameters to ensure that the worst case
+L2(Ω) reconstruction error is arbitrarily small. Although [92, Thm. 3.1, p. 7] does
+not track the effect of perturbations in the NtD map data, the approach taken in the
+present paper to prove Theorem 4.8 could be used to derive a noise-robust estimate
+akin to (4.19) in the setting of [92]. Here in particular, the finite-dimensionality of
+the conductivity set implies that the inverse map and its Benyamin–Lindenstrauss
+extension are Lipschitz continuous [33, 34, 114], in contrast to the logarithmic stability
+shown in the current paper.
+Work in [93] takes this finite-dimensional Lipschitz analysis further by going beyond
+EIT to a broad class of nonlinear inverse problems. Building on [33] by working with
+sufficiently many finite-dimensional measurements in addition to finite-dimensional
+parameter sets, the paper [93] studies an effective finite-dimensional inverse problem
+that admits a Lipschitz continuous inverse map. The resulting analysis establishes
+that ReLU neural networks can approximate the finite-dimensional inverse map
+with average-case robustness to Gaussian noise perturbing the data [93, Thm. 3.9].
+Moreover, empirical risk minimization realizes such Lipschitz neural networks [93,
+Thm. 4.3]. Although the approach avoids case-by-case analysis, this generality comes
+at the cost of obscuring ties to the underlying infinite-dimensional inverse problem
+of interest. The finite-dimensionalization procedure also links the architecture to the
+number of measurements and requires re-training the network whenever the dimen-
+sion changes. This contrasts with the present work on EIT, which adopts an operator
+learning learning perspective, works in infinite dimensions throughout, and obtains
+worst-case robustness to noise.
+We refer the reader to [7, Sec. 4.3.1–4.3.2] for a more detailed comparison between
+the related works [91–93] and the present paper.
+Neural operators and boundary functions.
+The construction of the global-to-
+local and local-to-global linear operators G and L, respectively, in Section 4.3 is crucial
+to enable the application of standard universal approximation theorems for (Fourier)
+neural operators. Although the proof of Theorem 4.8 identifies a specific choice based
+on G, the continuous linear map E in the generalized FNO definition (4.15) is allowed to
+be general. Indeed, G may be difficult to access or work with in practical computations.
+More constrained parametrizations of E that can be easily identified or learned from
+data are of interest. Examples include constant extensions to the whole domain Ω[115],
+handcrafted global parametrizations of ∂Ω, e.g., polar coordinates if Ωis the unit disk
+and d = 2 (see Section 5), or learnable kernel integral operators [116, Sec. 3.5, pp. 18–
+19]. In the latter case, Theorem 4.8 would remain valid as long as we can use such
+boundary integral operators to uniformly approximate G over the set Zδ defined in the
+proof of the theorem. Beyond EIT, these ideas could also provide a theoretical path for
+showing that various practical geometry-aware neural operators [102–104, 117, 118]
+are universal approximators of operators defined on L2(M) for a manifold M, or even
+on smaller sets such as Hs(M) or Cα(M); see [5, p. 7] for similar remarks.
+Statistical noise models.
+Theorem 4.8 only requires that the perturbation η
+belong to a compact set. The result does not enforce a statistical description of the
+36
+
+PDF PAGE 37
+noise. However, modeling η as a random variable is quite natural due to the impre-
+cise nature of real EIT hardware systems [49, Sec. 4]. One way to do this while still
+satisfying the hypotheses of Theorem 4.8 is by using random series expansions. Con-
+sider the following example. Recalling the Laplace–Beltrami eigenfunctions {φj} from
+Section 2.2, define η ∈L2(∂Ω× ∂Ω) in law by
+(x, x′) 7→η(x, x′) :=
+∞
+X
+i=1
+∞
+X
+j=1
+√cijζijφi(x)φj(x′)
+(4.22)
+in the mean square sense. The {ζij} are independent and identically distributed (i.i.d.)
+bounded random variables with mean zero and variance one. We want to ensure that
+µ := Law(η) ∈P(L2(∂Ω× ∂Ω)) has compact support. Fix positive δ, s, and t. If
+t > s + d −1 and the non-increasing rearrangement of the doubly-indexed coefficients
+{cij} into a singly-indexed sequence {c′
+k} satisfies c′
+k = O(δ2k−t/(d−1)) as k →∞, then
+we can show that there exists C > 0 such that ∥η∥Hs(∂Ω×∂Ω) ≤C and ∥η∥L2(∂Ω×∂Ω) ≤
+δ almost surely. Since the closed Hs ball of radius C is compact in L2, we deduce
+that Theorem 4.8 is valid with Kδ replaced by supp(µ). High probability versions of
+Theorem 4.8 are also conceivable; these would be able to accommodate probability
+measures µ with unbounded support, such as (sub)Gaussian noise distributions [93].
+5. Numerical experiments
+The primary purpose of this section is to demonstrate the practical performance of the
+FNO in reconstructing challenging conductivities from noisy NtD kernels. Although
+Theorem 4.8 asserts the existence of an FNO that stably approximates the Calder´on
+inversion operator (3.10), the theorem is not constructive. We actually find high qual-
+ity FNO approximations using standard empirical risk minimization over a noisy
+training dataset of size N. We pay particular attention to the test error of the trained
+FNOs as the noise level varies.
+This section specializes to the d = 2 setting of EIT (Section 2.3) in which Ω:=
+D ⊂R2 is the unit disk. We identify the boundary ∂D ≃T ≃[0, 2π]per. We take Ω′
+in (2.10) to be an open ball of (possibly variable) radius less than one. We consider
+three different random field models for the conductivities: binary, three phase, and
+lognormal-type. Section C contains details on their contruction. To summarize, the
+binary fields are obtained by thresholding a single Gaussian random field to two values,
+leading to a shape detection task; see Fig. 3. The three phase inclusions are the result
+of thresholding two Gaussian random fields to three values; see Fig. 5. The final model
+applies a smooth cutoff to a lognormal random field; see Fig. 7. We emphasize that
+the support of each of these three data-generating probability measures is genuinely
+infinite-dimensional and is not constructed from any finite-dimensional manifold.
+By construction, sampled conductivities belong to Γ′ in (2.11) almost surely under
+all three distributions. Moreover, the binary and three phase fields belong to BV(D)
+almost surely. However, for large enough R, we can only expect samples to belong
+to X2(R) = XBV(R) in (2.12) with high probability. Unless we condition on this high
+37
+
+PDF PAGE 38
+Table 1: Sample complexity for the three sets of FNO experiments. For each dataset, the
+table entries record the experimental convergence rate exponents r in O(N−r) of the average
+relative L1(D) test error for either noisy or clean test data (rows) as the training data noise
+level (last four columns) increases. Higher values indicate faster convergence.
+Training data noise level
+Dataset
+Test data noise level
+0%
+3%
+10%
+30%
+Shape detection
+Same as train
+0.231
+0.261
+0.293
+0.252
+0%
+0.231
+0.254
+0.291
+0.321
+Three phase inclusions
+Same as train
+0.100
+0.095
+0.081
+0.058
+0%
+0.100
+0.098
+0.090
+0.070
+Lognormal conductivities
+Same as train
+0.332
+0.432
+0.406
+0.360
+0%
+0.332
+0.445
+0.485
+0.431
+probability event, Theorem 4.8 does not directly apply to the support of our data-
+generating distributions. Precise probabilistic statements require estimating moments
+of the perimeter of excursion sets [119] and are beyond the scope of this paper.
+For sample size N and relative noise level δ, we generate paired i.i.d. samples
+{(κ(δ)
+γn , γn)}N
+n=1 under the forward map (4.4) and the noise model
+κ(δ)
+γ
+:= κγ + δ∥κγ∥L2(T2;R)ξ .
+(5.1)
+In (5.1), κ(δ)
+γ
+is a perturbed version of the NtD kernel κγ under (100 × δ)% relative
+noise. The factor ξ is either an independent Gaussian random field or a bounded
+random field; see Section C. In the experiments, δ is allowed to vary between training
+and test input data, as shown in Table 1. We take N = 9500 unless otherwise stated.
+The FNO discretization and implementation is described in Section C. To sum-
+marize, the architecture Ψ(FNO)
+θ
+is of the form (2.14) and (2.17) for a finite number
+trainable parameters θ ∈Θ. We fix L = 2 layers, 12 Fourier modes per dimension,
+and channel width dc = 48. To train FNOs, we approximately solve
+min
+θ∈Θ
+1
+N
+N
+X
+n=1
+ℓ
+
+γn, Ψ(FNO)
+θ
+ κ(δ)
+γn
+
+,
+where
+ℓ(γ, γ′) := ∥γ −γ′∥L1(D)
+∥γ∥L1(D) + ϵ
+(5.2)
+is a relative loss function and ϵ > 0 is a numerical stability hyperparameter. We
+emphasize the use of L1(D) in the output space; the use of L2(D) empirically delivered
+worse reconstructions that were substantially oversmoothed. See [7, Secs. 3.1 and 4.1.1]
+for more details about training neural operators. Reconstruction accuracy, i.e., test
+error, is mainly evaluated pointwise in relative L1(D) loss for individual samples or
+in average relative L1(D) loss over a test dataset. The test dataset is unseen during
+training but has the same distribution as the training data.
+The main observations of this section are summarized as follows.
+38
+
+PDF PAGE 39
+(O1) Trained FNO reconstructions are robust to large noise levels. Conversely, as
+the noise level tends to zero, the test error closely follows a logarithmic law
+as anticipated by (4.19) in Theorem 4.8.
+(O2) The convergence rate of trained FNOs is algebraic in N for all three datasets,
+as reported in Table 1. The rate varies depending on the dataset.
+(O3) FNOs
+can
+be
+trained
+with
+Gaussian
+noise—which
+does
+not
+satisfy
+Theorem 4.8—and deployed with bounded noise, which does satisfy it.
+(O4) Training FNOs on highly noisy boundary data has a regularizing effect. These
+models can still be accurate when the test data has lower noise levels.
+(O5) Although the paper does not emphasize reconstruction speed, nevertheless the
+FNO can map 500 NtD kernels to reconstructed conductivities on a 256×256
+resolution grid in under one second on a graphics processing unit (GPU).
+As a point of reference, Figure 1 compares FNOs trained on N pairs of noise-free
+data to the regularized D-bar direct inversion method [2, 9, 42]. Here δ = 10−2 for
+boundary data corresponding to the three piecewise constant conductivities depicted.
+This noise level is high for the D-bar method. As a result, D-bar solutions are over-
+smoothed and even fail to detect some of the inclusions. In contrast, when N is
+sufficiently large, the trained FNOs reconstruct inclusion locations correctly, but still
+can get the conductivity values on the inclusions wrong, as in the bottom row.
+Although such comparisons are insightful, the focus of this section is to illuminate
+the robustness, accuracy, and complexity characteristics of a fixed method, namely,
+the FNO. To this end, the remainder of the section presents and describes numerical
+results in which the noise level δ, sample size N, and type of conductivity are varied.
+Section 5.1 presents results for shape detection, Section 5.2 for three phase inclusion
+recovery, and Section 5.3 for lognormal conductivity imaging.
+5.1. Shape detection
+The binary conductivities in the shape detection dataset have a contrast ratio of 100
+(inclusion) to 1 (background), which places the inverse problem in the highly nonlin-
+ear regime. Different interior structures within highly conducting or highly insulating
+regions can produce almost the same boundary data, making it difficult to reconstruct
+such hidden structure. Figure 3 shows an example of this phenomenon. The recon-
+structions in row three are obtained by inputting the top row of standardized NtD
+kernels with 2% bounded noise into a single FNO trained on data samples corrupted by
+3% Gaussian noise. The true conductivity in row two, column four (a random sample
+from the test set) has a low conductivity “hole” within a high conductivity surround-
+ing region. The FNO reconstruction in row three, column four misses the hole and fills
+it in with the high conductivity value, as expected.
+Overall, the FNO succeeds greatly at shape reconstruction. The last row of Fig. 3
+shows that most of the error is made at the boundary of the inclusions. The number
+of inclusions is usually predicted correctly, ranging from one to four or more. We now
+comment on accuracy quantitatively. The first three columns of Fig. 3 represent the
+39
+
+PDF PAGE 40
+Fig. 3: Sample reconstructions from the shape detection dataset.
+test set samples with the worst, median, and best Dice scores (larger is better), which
+is a similarity coefficient commonly used to assess image segmentation quality [120].
+The test set average Dice score is 0.865 and relative L1(D) error is 0.264. We also
+compute an average “L0(D) norm” error of 0.197, which is the area of the region where
+the true and predicted conductivities differ. These are excellent scores considering how
+challenging this discontinuous dataset is.
+Next, the top row of Fig. 4 suggests that FNOs trained on sample size N are robust
+to increasing amounts of noise in the sense that the average test error only increases
+sublinearly with δ (Fig. 4a). In Fig. 4b, we also fit the difference between the test error
+and the noise-free test error to the logarithmic relationship implied by the right-hand
+side of (4.19) from Theorem 4.8. Since the fit is approximately linear on a log-log
+scale, it suggests that the severe ill-posedness of EIT does indeed manifest numerically
+for FNOs. Last, we observe that increasing the training data noise level serves to
+greater regularize reconstructions by returning less detailed, larger lengthscale “filled
+40
+
+PDF PAGE 41
+0.0
+0.1
+0.2
+0.3
+Noise Level
+0.30
+0.35
+0.40
+0.45
+0.50
+0.55
+Average Relative L1 Test Error
+N = 256
+N = 1024
+N = 4096
+(a) Robustness to large noise levels
+2 × 100
+3 × 100 4 × 100
+6 × 100
+log(1/δ)
+10−2
+10−1
+Errδ,N −Err0,N
+N = 256
+N = 1024
+N = 4096
+(b) Fit to logarithmic modulus of continuity
+101
+102
+103
+104
+Sample Size
+100
+3 × 10−1
+4 × 10−1
+6 × 10−1
+Average Relative L1 Test Error
+0%
+3%
+10%
+30%
+(c) Algebraic sample complexity
+101
+102
+103
+104
+N
+10−1
+Errδ,N −Errδ,∞
+0%
+3%
+10%
+30%
+(d) Fit of excess test error to power law
+Fig. 4: Shape detection noise robustness (top row) and sample complexity (bottom row)
+experiments. For training dataset size N, Fig. 4a shows how the average relative L1(D)
+test error Errδ,N increases sublinearly as the training and test data noise level δ increases.
+Figure 4b plots the excess error versus log(1/δ) to validate the logarithmic bound in
+Theorem 4.8. Figure 4c shows how Errδ,N decreases algebraically with N. Figure 4d plots the
+excess error versus N to obtain precise estimates of the convergence rate (Table 1). Purple
+lines are linear least squares fits on a logarithmic scale. Shaded bands denote two standard
+deviations from the mean (excess) error over five independent training runs.
+in” inclusions (still with sharp boundaries), regardless of the test data noise level. See,
+e.g., Fig. C4 in Section C. These observations align with classical statistical intuition
+that training on noisy inputs is a form of regularization [121].
+From the point of view of offline computational cost, understanding the sample
+complexity of learned inverse solvers is paramount. By taking the test error as a
+function of sample size N (Fig. 4c) and subtracting a regressed N independent bias,
+we obtain linear decay on a log-log scale in Fig. 4d. The slopes of these lines are the
+41
+
+PDF PAGE 42
+statistical rate of convergence exponents that we record in row one of Table 1. The rate
+is approximately O(N −1/4)—which is slower than the fast parametric O(N −1/2) rate
+of estimation—and mostly independent of δ as expected. Similar rates also hold when
+only the training data is noisy and the test data is clean. The observed polynomial
+complexity further supports the observed success of FNOs for EIT shape detection.
+We conclude the shape detection results by commenting on out-of-distribution
+performance. Since the dataset consists of conductivities with random shapes but fixed
+values on the shapes, reconstructing conductivities with new shapes is possible but
+different values or contrast ratios is challenging. In row two of Fig. 1 and Fig. C3, we
+provide an FNO trained on shape detection with a noisy NtD kernel corresponding to
+a deterministic heart and lungs phantom. It has the same contrast ratio as the dataset,
+but consists of perfect ellipses instead of inclusions with rough random boundaries.
+The FNO is still able to detect the inclusion locations with reasonable accuracy.
+5.2. Three phase inclusions
+The most difficult dataset considered in this paper corresponds to the three phase
+inclusions model, as implied by the small statistical convergence rate exponents of 0.1
+or less in the middle row of Table 1. Unlike in shape detection, this dataset features
+two random conductivity values on piecewise constant inclusions in addition to the
+background value of one. This leads to complicated triple junction patterns as shown
+in row two of Fig. 5. As a result, the conductivity contrast ratio is a random variable
+with an upper bound of 100. FNO training overfits almost immediately on this dataset,
+so the best model is usually found after just a few epochs. We report results using
+this model. Training on higher noise levels provides additional regularization that
+can improve reconstruction accuracy (Fig. C5a). The noise robustness and sample
+complexity results in the top row of Fig. 6 are analogous to those for shape detection.
+Figure 5 is analogous to Fig. 3, except now with 1% bounded noise in the NtD
+kernels along the top row of the figure. The first three columns represent the samples
+achieving the maximum (0.854), median (0.243), and minimum (0.030) relative L1(D)
+test errors over the 400 sample test dataset. The average test error is 0.252. The
+worst NtD kernel spans a larger range of function values than the others. The FNO
+is challenged by this outlier kernel and produces a very irregular output prediction.
+Although the FNO also has a hard time detecting the sharp transition between random
+phases, it is able to roughly identity the inclusion locations and values. However, the
+reconstruction boundaries are more blurred than those for shape detection.
+Although performance on the three phase inclusion dataset is worse than that on
+the other two datasets, trained FNOs perform well out-of-distribution. Indeed, the
+diversity of the three phase dataset now enables the FNO to handle input samples
+corresponding to new shapes and varying contrast. In Fig. 6d and the last row of
+Fig. 1, we illustrate this with a deterministic heart and lungs phantom with realistic
+conductivities values of 6.3 for the heart and 0.4 for the lungs [9, Table 12.1, p. 160].
+The FNO reconstructs the two lungs accurately and the location of the heart. However,
+the conductivity value of the heart is underpredicted by a factor of around two.
+42
+
+PDF PAGE 43
+Fig. 5: Sample reconstructions from the three phase inclusion dataset.
+5.3. Lognormal conductivities
+The lognormal-type conductivity dataset is the easiest of the three. Conductivity
+samples are a small random perturbation away from the constant unit background
+(Fig. 7, row two). The (random) contrast ratio is bounded and small. As a result, we
+observe higher sensitivity to noise than in the discontinuous conductivity datasets.
+Figure 7 shows reconstructions corresponding to the maximum (0.067), median
+(0.013), minimum (0.007), and random (0.014) relative L1(D) errors over a 400 sam-
+ple test set. The average test error is 0.014. Here the training noise is 3% and the
+testing noise is 1%. The noise is clearly visible in the top row of NtD kernels. As in
+Sections 5.1 and 5.2, the worst sample corresponds to an NtD kernel with large abso-
+lute function values. Trained FNOs are sensitive to this scale. Row three shows that
+FNO reconstructions are affected by high frequency artifacts that are likely due to the
+noise. Training on noisier data can dampen this behavior to some extent (Fig. C6).
+The pointwise errors in row four of Fig. 7 are lowest near the boundary of D. There
+43
+
+PDF PAGE 44
+0.0
+0.1
+0.2
+0.3
+Noise Level
+0.26
+0.28
+0.30
+0.32
+0.34
+0.36
+0.38
+0.40
+Average Relative L1 Test Error
+N = 256
+N = 1024
+N = 4096
+(a) Robustness to large noise levels
+2 × 100
+3 × 100 4 × 100
+6 × 100
+log(1/δ)
+10−3
+10−2
+10−1
+Errδ,N −Err0,N
+N = 256
+N = 1024
+N = 4096
+(b) Fit to log modulus of continuity
+101
+102
+103
+104
+Sample Size
+3 × 10−1
+4 × 10−1
+Average Relative L1 Test Error
+0%
+3%
+10%
+30%
+(c) Sample complexity
+(d) FNO reconstruction of a benchmark phantom from an NtD kernel with 1% noise.
+Fig. 6: Three phase inclusion noise robustness and sample complexity (top row) and distri-
+bution shift (bottom row) experiments. Figure 6a and Fig. 6b are analogous to the top row
+of Fig. 4, and Fig. 6c is analogous to Fig. 4c. Figure 6d plots the FNO reconstruction of an
+out-of-distribution heart and lungs phantom; the training data is noise-free.
+are also one-dimensional curves embedded in high error regions where the error along
+the curves is much smaller.
+The sensitivity to noise is quantified in the top row of Fig. 8 for the lognormal
+conductivity dataset. In the leftmost plot, the relative error grows substantially as
+δ increases, albeit still respecting sublinear growth. The actual relationship between
+relative error and δ is best explained by a power law, as shown in Fig. 8b. For large
+enough N, the slope of the power law is independent of N. This suggests a H¨older-
+type modulus of continuity instead of the weaker logarithmic one from Theorem 4.8.
+The sample complexity is also strongly influenced by noise. Nonasymptotically, Fig. 8c
+shows noise-induced saturation of the average relative test error as N increases. This
+saturation is absent for clean train and test data (the black line with circle markers).
+Figure 8d subtracts out this constant bias component to isolate the statistical error
+and fill in the last row of Table 1. We observe near parametric rates of O(N −0.45) for
+noise-free test data and noisy training data. With noisy test data, the rate exponent
+reduces slightly, but is still better than those corresponding to the shape detection
+and three phase inclusion datasets.
+44
+
+PDF PAGE 45
+Fig. 7: Sample reconstructions from the lognormal conductivity dataset.
+6. Conclusion and outlook
+This paper investigates Calder´on’s inverse conductivity problem within the frame-
+work of operator learning. The work directly approximates the inverse map that sends
+continuum boundary data to the interior electrical conductivity. The core of the the-
+oretical analysis involves extending the domain of the inversion operator to a Hilbert
+space of integral kernel functions associated with Neumann-to-Dirichlet maps. This
+delivers a continuous extension that retains the logarithmic stability properties of
+the original inverse problem under minimal regularity assumptions on the conductiv-
+ities. Such sets of admissible conductivities are compact in Lebesgue spaces. These
+facts yield the main result of the paper, which asserts the existence of a Fourier neu-
+ral operator that uniformly approximates the inverse map with respect to admissible
+conductivities and noisy boundary measurements.
+45
+
+PDF PAGE 46
+0.0
+0.1
+0.2
+0.3
+Noise Level
+0.01
+0.02
+0.03
+0.04
+0.05
+Average Relative L1 Test Error
+N = 256
+N = 1024
+N = 4096
+(a) Robustness to large noise levels
+10−2
+10−1
+δ
+10−2
+6 × 10−3
+2 × 10−2
+3 × 10−2
+4 × 10−2
+Errδ,N −Err0,N
+N = 256
+N = 1024
+N = 4096
+(b) Fit to H¨older modulus of continuity
+101
+102
+103
+104
+Sample Size
+10−2
+Average Relative L1 Test Error
+0%
+3%
+10%
+30%
+(c) Algebraic sample complexity
+101
+102
+103
+104
+N
+10−3
+10−2
+Errδ,N −Errδ,∞
+0%
+3%
+10%
+30%
+(d) Fit of excess test error to power law
+Fig. 8: Lognormal conductivity noise robustness (top row) and sample complexity (bottom
+row) experiments. Figures 8a and 8b are analogous to the top row of Fig. 4, except Fig. 8b
+plots the excess error versus δ on a logarithmic scale. This strongly indicates a power law
+behavior in contrast to the logarithmic bound in Theorem 4.8. Figures 8c and 8d are analogous
+to the bottom row of Fig. 4.
+Numerical evidence suggests that an accurate Fourier neural operator can actually
+be found by computing an empirical risk minimizer corresponding to a finite training
+dataset of noisy samples. The trained models successfully reconstruct piecewise con-
+stant and lognormal conductivities, even in regimes that do not satisfy the theoretical
+assumptions. The numerical results also underscore the models’ robustness to noise
+in the boundary data and their statistical capacity to generalize beyond the training
+distribution.
+In summary, the proposed framework is a principled integration of classical
+inverse problems theory with modern operator learning methods. Although focused on
+Calder´on’s problem, the methodology developed in this paper should remain valid for a
+46
+
+PDF PAGE 47
+wider class of nonlinear inverse problems whose solution maps can be stably extended
+to appropriate Hilbert spaces. This is the subject of the discussion in Section 6.1. The
+paper concludes in Section 6.2 by identifying several directions for future research.
+6.1. Toward a general inverse map approximation framework
+The results in Sections 3 and 4 leading to Theorem 4.8 suggest a more general frame-
+work for approximation of nonlinear inverse problem solution operators. This approach
+requires checking several technical conditions that must be verified on a case-by-case
+basis for the specific inverse problem under consideration, as done in Sections 3 and 4
+for Calder´on’s problem. This subsection now lists these abstract conditions.
+Condition 1 (forward map, inverse map, embeddings, and compactness).
+(i) Let X and Z be Banach spaces and B ⊆X be a compact subset. There exists a
+“forward map” F: B ⊆X →Z that is uniformly continuous.
+In Calder´on’s problem, X = Lq(Ω), Z = L (H−1/2
+⋄
+(∂Ω); H1/2(∂Ω)/C), B =
+Xd(R), and F: γ 7→Rγ is H¨older continuous. See Sections 2.3, 4.1 and 4.2.
+(ii) Let A ⊆Z be a bounded subset and Y be another Banach space. There exists a
+uniformly continuous “inverse map” G : A ⊆Z →Y such that
+G
+ F(x)
+
+= x
+for all
+x ∈B ,
+(6.1)
+the range of F satisfies F(B) ⊆A, and G has modulus of continuity ωG.
+In Calder´on’s problem, G : Rγ 7→γ, A = F(B), and Y ⊆Lp(Ω). The function
+ωG is of logarithmic type. See Sections 3.1 and 3.4.
+(iii) There exist separable Hilbert spaces H1 ⊇A and H2 ⊇G(A) and maps
+E−1
+1
+: A ⊆Z →H1 and E2 : G(A) ⊆Y →H2 such that the following holds. For
+some modulus of continuity ω′
+1, the map E−1
+1
+satisfies
+∥E−1
+1 (u) −E−1
+1 (u0)∥H1 ≤ω′
+1(∥u −u0∥Z)
+(6.2)
+for all u ∈A and u0 ∈A. For some modulus of continuity ω2, the map E2 satisfies
+∥E2(x) −E2(x0)∥H2 ≤ω2(∥x −x0∥Y )
+(6.3)
+for all x ∈G(A) and x0 ∈G(A).
+The modulus of continuity functions ω′
+1 and ω2 may be obtained using inter-
+polation of Banach spaces or related arguments. In Calder´on’s problem, H1 =
+HS(Hs
+⋄(∂Ω); Ht(∂Ω)/C) and H2 = L2(Ω). Each map has action x 7→x. The mod-
+ulus ω′
+1 can be taken to be r 7→√r. If Y ⊆L2(Ω), then E2 can be taken to be the
+identity operator on Y with modulus ω2(r) = r. See Sections 3.2 and 4.1.
+47
+
+PDF PAGE 48
+E−1
+1 (A) ⊆H1
+A ⊆Z
+E−1
+1 (A) ⊆H1
+E2
+ G(A)
+
+⊆H2
+G(A) ⊆Y
+E2
+ G(A)
+
+⊆H2
+E1
+Ψ
+E−1
+1
+G
+Ψ
+E−1
+2
+E2
+Fig. 9: Factorization of an abstract inverse map G according to Condition 1 when viewed as
+a map Ψ between suitable Hilbert spaces H1 and H2.
+(iv) There exist E1 : E−1
+1 (A) ⊆H1 →Z and E−1
+2
+: E2(G(A)) ⊆H2 →Y such that
+E1 ◦E−1
+1
+= Id
+on
+A
+and
+E−1
+2
+◦E2 = Id
+on
+G(A) .
+(6.4)
+Furthermore, for some moduli of continuity ω1 and ω′
+2, it holds that
+∥E1(v) −E1(v0)∥Z ≤ω1(∥v −v0∥H1)
+(6.5)
+for all v and v0 belonging to E−1
+1 (A), and
+∥E−1
+2 (w) −E−1
+2 (w0)∥Y ≤ω′
+2(∥w −w0∥H2)
+(6.6)
+for all w and w0 belonging to E2(G(A)).
+In Calder´on’s problem, both maps are inclusion maps x 7→x. The modulus of
+continuity functions are ω1 : r 7→√r and ω′
+2 : r 7→r. See Sections 3.2 and 4.1.
+If the assertions of Condition 1 are valid, then
+Ψ := E2 ◦G ◦E1
+(6.7)
+is a map Ψ: E−1
+1 (A) ⊆H1 →H2 between subsets of separable Hilbert spaces.
+Moreover, it holds that
+x = G
+ F(x)
+
+=
+ E−1
+2
+◦Ψ ◦E−1
+1
+◦F
+
+(x)
+for all
+x ∈B
+(6.8)
+and so G = E−1
+2
+◦Ψ ◦E−1
+1
+on F(B). Figure 9 illustrates the factorizations implied by
+the preceding two displays.
+The map Ψ has modulus of continuity ω2◦ωG◦ω1. By Theorem 3.1, Ψ has an exten-
+sion eΨ: H1 →H2 with the same modulus of continuity. The extension eΨ may then
+be uniformly approximated by a neural operator over the compact subset E−1
+1 (F(B))
+of the Hilbert space H1 up to noisy perturbations belonging to a compact subset of
+H1. In the setting of EIT, these ingredients are accomplished in Section 4.4. The cur-
+rent paper further passes to kernel functions κγ ∈L2(∂Ω× ∂Ω) for the purposes of
+applying FNOs, but this is not strictly necessary. Architectures that accommodate
+Hilbert–Schmidt operators (such as Rγ when d = 2) can be used directly [107].
+One should note that the preceding discussion is not applicable to all inverse prob-
+lems. For example, the required embedding estimates and stability results may not
+48
+
+PDF PAGE 49
+hold for inverse boundary value problems involving hyperbolic PDEs whose differ-
+ence NtD maps do not exhibit exponential smoothing (cf. Theorem 3.4); a different
+approach is needed to handle such situations.
+6.2. Future directions
+A number of important directions remain open for future work. It is natural to special-
+ize the analysis and experiments in this paper to finite-dimensional [33] or otherwise
+structured [36] families of conductivities. Similarly, accommodating a finite number
+of measurements—possibly adopting a measure-centric perspective [7]—would bring
+the theory closer to EIT practice and interface with contemporary work on optimal
+experimental design [89, 122–125]. Another direction is to develop quantitative approx-
+imation rates [126] and statistical bounds for empirical risk minimizers [107, 127, 128]
+in the EIT setting. There is also a need for a comprehensive numerical comparison
+of neural operator inverse solvers against alternative operator learning, classical reg-
+ularization, and hybrid reconstruction methods. Last, the framework set forth in this
+paper offers a theoretical foundation that can support the data-driven solution of other
+nonlinear inverse problems beyond EIT, as anticipated in Section 6.1.
+Data and code availability.
+All code used to produce the data, numerical results,
+and figures in this paper is available at
+https://github.com/nickhnelsen/learning-eit .
+Funding.
+M.V. de Hoop gratefully acknowledges the support of the Department of
+Energy BES, under grant DE-SC0020345, Oxy, the corporate members of the Geo-
+Mathematical Imaging Group at Rice University and the Simons Foundation under
+the MATH + X Program. N.B.K. is grateful to the Nvidia Corporation for support
+through full-time employment. M.L. was partially supported by PDE-Inverse project
+of the European Research Council of the European Union, the FAME and Finnish
+Quantum flagships and the grant 336786 of the Research Council of Finland. Views and
+opinions expressed are those of the authors only and do not necessarily reflect those of
+the European Union or the other funding organizations. Neither the European Union
+nor the other funding organizations can be held responsible for them. N.H.N. acknowl-
+edges support from a Klarman Fellowship through Cornell University’s College of Arts
+& Sciences, the U.S. National Science Foundation (NSF) under award DMS-2402036,
+the NSF Graduate Research Fellowship Program under award DGE-1745301, the Ama-
+zon/Caltech AI4Science Fellowship, the Air Force Office of Scientific Research under
+MURI award FA9550-20-1-0358 (Machine Learning and Physics-Based Modeling and
+Simulation), and the Department of Defense Vannevar Bush Faculty Fellowship held
+by Andrew M. Stuart under Office of Naval Research award N00014-22-1-2790.
+Acknowledgments.
+The authors are grateful to Richard Nickl and Andrew Stuart
+for many helpful discussions during the course of this project. A significant portion
+of this work was completed when N.B.K. and N.H.N. were with the Department of
+Computing and Mathematical Sciences at the California Institute of Technology. The
+computations presented in this paper were partially conducted on the Resnick High
+49
+
+PDF PAGE 50
+Performance Computing Center, a facility supported by the Resnick Sustainability
+Institute at the California Institute of Technology.
+Appendix A. Remaining proofs
+This appendix provides the remaining proofs of results in the main text as well as
+additional lemmas specific to the Calder´on problem that support those proofs. While
+several of these results may be familiar to experts, we provide full proofs for com-
+pleteness, especially because those regarding NtD maps are much less common in the
+literature than analogous statements for DtN maps.
+First, we need a lemma showing that the total variation V (eγ; Rd) of the unit
+extension eγ in Rd is equal to the total variation V (γ; Ω) of the original γ in Ω. This
+result is used in the proofs of Theorems 3.2 and 4.5.
+Lemma A.1 (total variation identity). If γ ∈XBV(R), then V (eγ; Rd) = V (γ; Ω).
+Proof. For any γ ∈XBV(R), it holds that eγ ∈L∞(Rd) and thus eγ ∈L1
+loc(Rd). Hence,
+since Rd is open, V (eγ; Rd) is well-defined [97, Definition 14.2, p. 460]. For a set U ⊆Rd,
+write ΦU for the set of all ϕ ∈C∞
+c (U; Rd) such that ∥ϕ∥L∞(U;Rd) ≤1. Then
+V (eγ; Rd) = sup
+ϕ∈ΦRd
+d
+X
+i=1
+Z
+Rd eγ(x)∂iϕi(x) dx
+= sup
+ϕ∈ΦRd
+d
+X
+i=1
+Z
+Ω
+eγ(x)∂iϕi(x) dx +
+Z
+Rd\Ω
+∂iϕi(x) dx
+
+= sup
+ϕ∈ΦRd
+d
+X
+i=1
+Z
+Ω
+γ(x)∂iϕi(x) dx +
+Z
+Rd ∂iϕi(x) dx −
+Z
+Ω
+∂iϕi(x) dx
+
+= sup
+ϕ∈ΦRd
+d
+X
+i=1
+Z
+Ω
+ γ(x) −1
+
+∂iϕi(x) dx
+
+.
+In the third line, the second integral equals zero by the divergence theorem due to the
+compact support of ϕ ∈ΦRd. It remains to show that
+sup
+ϕ∈ΦRd
+d
+X
+i=1
+Z
+Ω
+ γ(x) −1
+
+∂iϕi(x) dx
+
+= sup
+ϕ∈ΦΩ
+d
+X
+i=1
+Z
+Ω
+γ(x)∂iϕi(x) dx
+
+because the rightmost quantity equals V (γ; Ω). If ϕ ∈ΦΩ, then supx∈Rd|ϕ(x)| =
+supx∈Ω|ϕ(x)| ≤1 because ϕ is compactly supported in Ω. Since Ω⊆Rd, it holds that
+ϕ ∈C∞
+c (Rd; Rd) as well. We have implicitly extended ϕ by zero to all of Rd. This
+implies that ΦΩ⊆ΦRd and thus
+V (eγ; Rd) ≥sup
+ϕ∈ΦΩ
+d
+X
+i=1
+Z
+Ω
+ γ(x) −1
+
+∂iϕi(x) dx
+
+50
+
+PDF PAGE 51
+= V (γ; Ω) .
+To achieve the final equality, we use the fact that supp(ϕ) ⊂Ωand apply the
+divergence theorem.
+To show the upper bound, fix any ϕ ∈ΦRd and i ∈{1, . . . , d}. Let χU denote the
+indicator function of a set U ⊆Rd. Since γ = 1 on Ω\ Ω′ and eγ = 1 on Rd \ Ωfrom
+(2.10) and (2.11), it follows that eγ = 1 on Rd \ Ω′, all in the a.e. sense. Then
+Z
+Ω
+ γ(x) −1
+
+∂iϕi(x) dx =
+Z
+Rd
+χΩ′(x)
+ eγ(x) −1
+
+∂iϕi(x) dx
+=
+Z
+Rd
+χΩ′(x)
+ eγ(x) −1
+
+∂iξi(x) dx
+=
+Z
+Ω′
+ γ(x) −1
+
+∂iξi(x) dx
+for any smooth enough ξ : Rd →Rd such that ξi = ϕi on Ω′ for each i. By compact
+containment, we can find another domain Ω′′ ⊂Rd such that Ω′ ⊂Ω′′ ⊂Ω′′ ⊂Ω.
+Let ϱ ∈C∞
+c (Rd; R) be a smooth cutoff function such that ϱ ≡1 on Ω′ and ϱ ≡0 on
+Rd \ Ω′′. Define ξ := ϱϕ in the pointwise sense. Then ξ belongs to C∞
+c (Ω; Rd) because
+smoothness is preserved under pointwise multiplication and supp(ξ) ⊆supp(ϱ) ⊆
+Ω′′ ⊂Ω. Furthermore, supx∈Ω|ξ(x)| ≤supx∈Rd|ξ(x)| ≤1 because both supx∈Rd|ϱ(x)|
+and supx∈Rd|ϕ(x)| are bounded above by one. We deduce that ξ ∈ΦΩ. Summing the
+previous display and taking the supremum on the right yields
+d
+X
+i=1
+Z
+Ω
+ γ(x) −1
+
+∂iϕi(x) dx
+
+≤sup
+ξ′∈ΦΩ
+d
+X
+i=1
+Z
+Ω′
+ γ(x) −1
+
+∂iξ′
+i(x) dx
+
+.
+By replacing Ω′ with Ωin the integral, taking the supremum over ϕ ∈ΦRd on the
+left-hand side of the preceding inequality, and applying the divergence theorem a final
+time, the desired result V (eγ; Rd) ≤V (γ; Ω) follows.
+□
+The proof of Theorem 3.3 relies on the following standard fact.
+Lemma A.2 (uniformly bounded DtN maps). There exists a constant c > 0
+depending on d, Ω, m, and M such that
+sup
+γ∈Γ
+∥Λγ∥L(H1/2(∂Ω)/C;H−1/2(∂Ω)) ≤c .
+(A1)
+Proof. Fix γ ∈Γ. The proof uses the variational definition of the DtN map. For any
+representative f of equivalence class [f] ∈H1/2(∂Ω)/C and any h ∈H1/2(∂Ω), it
+holds by definition that
+Λγf(h) =
+Z
+Ω
+γ(x)∇uγ,f(x) · ∇(Eh)(x) dx .
+51
+
+PDF PAGE 52
+In the preceding display, u = uγ,f solves (1.1) with Dirichlet data f = u|∂Ωand
+E : H1/2(∂Ω) →H1(Ω) is the continuous right inverse of the trace operator v 7→
+v|∂Ω[95, Thm. 8.3, p. 39]. We estimate
+|Λγf(h)| ≤M
+Z
+Ω
+|∇uγ,f(x)||∇(Eh)(x)| dx
+≤M∥∇uγ,f∥L2(Ω)∥∇(Eh)∥L2(Ω)
+≤M∥∇uγ,f∥L2(Ω)∥Eh∥H1(Ω)
+≤M∥E∥L (H1/2(∂Ω);H1(Ω))∥∇uγ,f∥L2(Ω)∥h∥H1/2(∂Ω) .
+We applied the Cauchy–Schwarz inequality twice in the preceding display. Thus,
+∥Λγf∥H−1/2(∂Ω) =
+sup
+∥h∥H1/2(∂Ω)≤1
+|Λγf(h)|
+≤M∥E∥L (H1/2(∂Ω);H1(Ω))∥∇uγ,f∥L2(Ω) .
+By Theorem A.3, there exists c0 > 0 independent of γ (but depending on M and
+m) such that ∥∇uγ,f∥L2(Ω) ≤c0∥f∥H1/2(∂Ω). Replacing f by f −z1, we deduce that
+∥Λγf∥H−1/2(∂Ω) ≤c0M∥E∥infz∈C∥f −z1∥H1/2(∂Ω). The result follows by defining
+c := c0M∥E∥and taking the supremum over [f] in the H1/2(∂Ω)/C unit ball.
+□
+The proof of Theorem A.2 requires the following gradient estimate for the Dirichlet
+problem.
+Lemma A.3 (Dirichlet gradient estimate). Let u = uγ,f denote the unique weak solu-
+tion to the Dirichlet problem ∇· (γ∇u) = 0 in Ωand u = f on ∂Ω. Then there exists
+c > 0 depending on d, M, m, and Ωsuch that supγ∈Γ∥∇uγ,f∥L2(Ω) ≤c∥f∥H1/2(∂Ω).
+Proof. Fix γ ∈Γ and f ∈H1/2(∂Ω). Consider the weak solution u to the Dirichlet
+problem ∇· (γ∇u) = 0 in Ωand u = f on ∂Ω. Recall that E : H1/2(∂Ω) →H1(Ω)
+is the continuous right inverse of the trace operator v 7→v|∂Ω[95, Thm. 8.3, p. 39].
+Define w such that u := w + Ef. Then w satisfies the weak formulation
+Z
+Ω
+γ∇w · ∇v dx = −
+Z
+Ω
+γ∇(Ef) · ∇v dx
+for all
+v ∈H1
+0(Ω) .
+Taking v = w and using the uniform bounds on γ ∈Γ gives
+m∥∇w∥2
+L2(Ω) ≤
+
+Z
+Ω
+γ∇(Ef) · ∇w dx
+
+≤M∥∇(Ef)∥L2(Ω)∥∇w∥L2(Ω)
+≤M∥E∥L (H1/2(∂Ω);H1(Ω))∥f∥H1/2(∂Ω)∥∇w∥L2(Ω) .
+52
+
+PDF PAGE 53
+Rearranging terms and applying the triangle inequality delivers the required estimate
+∥∇u∥L2(Ω) ≤(1 + M/m)∥E∥L (H1/2(∂Ω);H1(Ω))∥f∥H1/2(∂Ω) .
+Taking the supremum over γ completes the proof.
+□
+Using the fact that γ ∈Γ′ is identically one near the boundary, the next lemma
+provides a Lipschitz-type stability estimate for the forward solution operator of the
+homogeneous Neumann problem. In particular, the bound is uniform over Γ′ and
+allows for arbitrary Sobolev regularity of the input Neumann data. The proof follows
+that of an analogous result for the Dirichlet problem [96, Lemma 19, p. 197].
+Lemma A.4 (Neumann problem: generalized Lax–Milgram continuity bound). For
+any s ∈R and any g ∈Hs
+⋄(∂Ω), there exists Cs > 0 such that
+sup
+γ∈Γ′∥uγ,g −u1,g∥H1(Ω)/C ≤Cs∥g∥Hs
+⋄(∂Ω) ,
+(A2)
+where u = uγ′,g solves (1.1) with conductivity γ = γ′ ∈Γ′ and Neumann data g.
+Proof. Let s ∈R and g ∈Hs
+⋄(∂Ω) be arbitrary. Let u1,g solve the Neumann Laplace
+equation with Neumann data g, i.e., (1.1) with conductivity γ ≡1. This solution
+exists in Hs+3/2(Ω)/C and is unique by classical results [95, Chp. 2, Remark 7.2,
+pp. 188–189, taking Ω= Ω, A = −∆, f ≡0, s = s + 3/2, m = m0 = 1, g0 = g, and
+N = {z1: z ∈C}]. Also fix γ ∈Γ′. Consider the PDE
+−∇· (γ∇w) = ∇· (γ∇u1,g) in Ω
+and
+∂w
+∂n = 0 on ∂Ω.
+(A3)
+Define sesquilinear form Bγ and conjugate linear functional fγ,g, respectively, by
+Bγ(w, v) :=
+Z
+Ω
+γ∇w · ∇v dx
+and
+fγ,g(v) := −
+Z
+Ω
+γ∇u1,g · ∇v dx .
+The weak form of the Neumann problem (A3) is to find w = wγ,g ∈H1(Ω)/C such
+that
+Bγ(w, v) = fγ,g(v)
+for all
+v ∈H1(Ω)/C .
+(A4)
+Since such a weak solution wγ,g defines a weak solution uγ,g := wγ,g + u1,g to the
+original problem (1.1) [129, Thm. A.2 and its proof, pp. 392–394], it remains to bound
+the H1(Ω)/C norm of wγ,g uniformly over the set Γ′ of conductivities.
+To this end, we apply the Lax–Milgram theorem. To show continuity of Bγ, we
+apply the Cauchy–Schwarz inequality to obtain
+|Bγ(w, v)| ≤
+Z
+Ω
+|γ(x)||∇w(x)||∇v(x)| dx
+53
+
+PDF PAGE 54
+≤M∥∇w∥L2(Ω)∥∇v∥L2(Ω)
+≤M∥w −z1∥H1(Ω)∥v −z1∥H1(Ω)
+for any z ∈C and any w and v in H1(Ω)/C. The previous display implies that
+|Bγ(w, v)| ≤M∥w∥H1(Ω)/C∥v∥H1(Ω)/C ,
+which is the desired continuity.
+By the Poincar´e–Wirtinger inequality [129, Remark 1, p. 376],
+Bγ(v, v) =
+Z
+Ω
+γ(x)|∇v(x)|2 dx ≥m∥∇v∥2
+L2(Ω) ≥Cm∥v∥2
+H1(Ω)/C .
+This furnishes coercivity of Bγ.
+To conclude, we bound the operator norm of the conjugate linear functional fγ,g.
+Since Ω′ ⊂Ω, it holds that Ω= (Ω\ Ω′) ∪Ω′. Thus,
+−fγ,g(v) =
+Z
+Ω\Ω′ ∇u1,g · ∇v dx +
+Z
+Ω′ γ∇u1,g · ∇v dx
+because γ ≡1 on Ω\ Ω′. Since
+R
+∂Ωg dx = 0 and u1,g ∈H1(Ω)/C solves the Neumann
+Laplace equation inside Ω, we deduce that
+R
+Ω∇u1,g · ∇v dx = 0. Therefore,
+Z
+Ω\Ω′ ∇u1,g · ∇v dx =
+Z
+Ω
+∇u1,g · ∇v dx −
+Z
+Ω′ ∇u1,g · ∇v dx
+= −
+Z
+Ω′ ∇u1,g · ∇v dx .
+Using the previous display, we now estimate
+|fγ,g(v)| =
+
+Z
+Ω′
+ 1 −γ(x)
+
+∇u1,g(x) · ∇v(x) dx
+
+≤∥1 −γ∥L∞(Ω)∥∇u1,g∥L2(Ω′)∥∇v∥L2(Ω′)
+≤(1 + M)∥u1,g∥H1(Ω′)/C∥v∥H1(Ω)/C .
+We used an argument similar to the one showing the continuity of Bγ. It follows that
+the operator norm ∥fγ,g∥∗of fγ,g is bounded above by (1 + M)∥u1,g∥H1(Ω′)/C.
+By interior harmonic regularity [96, Lemma 22, p. 197, applied with exponents 1
+and s + 3/2],
+∥u1,g∥H1(Ω′)/C ≤Cs∥u1,g∥Hs+3/2(Ω)/C .
+Again by [95, Chp. 2, Remark 7.2, pp. 188–189], it holds that
+∥u1,g∥Hs+3/2(Ω)/C ≤C′
+s∥g∥Hs(∂Ω) = C′
+s∥g∥Hs
+⋄(∂Ω) .
+54
+
+PDF PAGE 55
+The equality of norms holds by [96, Remark (iii), p. 193]. Hence, ∥fγ,g∥∗≤C′′
+s (1 +
+M)∥g∥Hs
+⋄(∂Ω) < ∞. The Lax–Milgram theorem [130, Thm. 1, Sec. 6.2.1, pp. 297–
+298] asserts the existence of a unique wγ,g ∈H1(Ω)/C solving (A4). In particular,
+Bγ(wγ,g, wγ,g) = fγ,g(wγ,g). This equality, the operator norm bound on fγ,g, and the
+coercivity of Bγ imply (A2) as required.
+□
+Theorem A.4 is used in the following proof of Theorem 3.4, which pertains to the
+Neumann problem. The proof closely follows that of [96, Lemma 20, p. 197] for the
+Dirichlet problem.
+Proof of Theorem 3.4. In the proof, we freely allow C to denote a constant that
+changes from line to line. Consider the Neumann problem (1.1) with γ ∈Γ′. To set
+up the proof, define connected open sets D, U, and U0 in Rd such that
+Ω′ ⊂D ⊂D ⊂Ω
+and
+∂D ⊆U ⊂U ⊂U0 ⊂U0 ⊂Ω\ Ω′ .
+Let the Neumann data be denoted by g ∈Hs
+⋄(∂Ω). Define the difference of solutions
+w := uγ,g −u1,g ,
+where uγ,g solves (1.1) with fixed but arbitrary conductivity γ and u1,g solves (1.1)
+with γ ≡1 (i.e., the Laplace equation). In the following, it will be important to
+recognize that
+∆w = 0
+on
+Ω\ Ω′
+because γ ≡1 on Ω\Ω′. Thus, w = wγ,g is also harmonic on the domain Ω\D ⊂Ω\Ω′.
+This fact will allow us to control the dependence of constants on γ.
+Let t ∈R. We begin by estimating the boundary traces of w. To this end,
+we first note by Theorem B.1 (i) that ∂Ω⊆∂(Ω\ D) because D ⊆Ω. Thus,
+∥w∥Ht(∂Ω)/C ≤C∥w∥Ht(∂(Ω\D))/C by monotonicity and the norm equivalence of the
+spectral (recall Eqn. 2.6) and interpolation definitions of fractional Sobolev norms on
+compact boundary manifolds [95, Chp. 1, Sec. 7.3, pp. 34–37].
+Next, for any z ∈C, we apply appropriate boundary trace theorems to the
+harmonic function w −z1 to obtain
+∥w∥Ht(∂(Ω\D))/C ≤∥w −z1∥Ht(∂(Ω\D)) ≤C∥w −z1∥Ht+1/2(Ω\D) .
+For t > 0, the preceding result follows from [95, Chp. 1, Thm. 9.4, pp. 41–42, taking
+µ = 0 and s = t + 1/2]. For t ≤−1/2, we invoke [95, Chp. 2, Thm. 6.5 and Remark
+6.4, pp. 175–177, taking m = 1, m0 = 0, r = −t −1/2, and A = −∆]. The final case
+−1/2 < t ≤0 is due to [95, Chp. 2, Thm. 7.3, pp. 187–188, taking m = 1, m0 = 0,
+55
+
+PDF PAGE 56
+0 < s = t + 1/2 < 2, and A = −∆]. Taking the infimum over z ∈C in the previous
+display delivers the bound
+∥w∥Ht(∂(Ω\D))/C ≤C∥w∥Ht+1/2(Ω\D)/C .
+To bound the right hand side from above in the last display, we use stability bounds
+for the solution operator of the Neumann problem applied to the Laplace equation
+on the domain Ω\ D. First, since the boundary of a set equals the boundary of its
+complement,
+∂(Ω\ D) = ∂(Ω∩(D)c) = ∂(Ωc ∪D) ⊆∂Ω∪∂D ⊆∂Ω∪∂D .
+The first inclusion follows from ∂(A ∪B) ⊆∂A ∪∂B and the second from ∂A ⊆∂A
+for any sets A and B in a metric space. Next, application of [95, Chp. 2, Remark 7.2,
+pp. 188–189, taking Ω= Ω\ D, A = −∆, f ≡0, s = t + 1/2, m = m0 = 1, and
+N = {z1: z ∈C}] and the monotonicity implied by the previous display deliver the
+bounds
+∥w∥Ht+1/2(Ω\D)/C ≤C
+
+∂w
+∂n
+
+Ht−1(∂(Ω\D))
+≤C
+ 
+∂w
+∂n
+
+Ht−1(∂Ω)
++
+
+∂w
+∂n
+
+Ht−1(∂D)
+!
+= C
+
+∂w
+∂n
+
+Ht−1(∂D)
+.
+The equality in the final line holds because the Neumann data satisfies
+∂w
+∂n = ∂uγ,g
+∂n
+−∂u1,g
+∂n
+= g −g = 0
+on
+∂Ω.
+Next, we bound the Neumann data by the interior solution. Let S := D ∩U. Since
+∂D ⊆U by construction, Theorem B.1 (ii) implies that
+∂S = ∂(D ∩U) ⊇(U ∩∂D) ∪(D ∩∂U) = ∂D ∪(D ∩∂U) ⊇∂D .
+Similar application of boundary trace theorems to the domain S ⊆U leads to
+
+∂w
+∂n
+
+Ht−1(∂D)
+=
+
+∂(w −z1)
+∂n
+
+Ht−1(∂D)
+≤C
+
+∂(w −z1)
+∂n
+
+Ht−1(∂S)
+≤C∥w −z1∥Ht+1/2(S)
+≤C∥w −z1∥Ht+1/2(U)
+for any z ∈C. For t > 1, [95, Chp. 1, Thm. 9.4, pp. 41–42, taking µ = 1, m = 1, and
+s = t + 1/2] gives the second inequality. The case t ≤−1/2 follows from [95, Chp. 2,
+56
+
+PDF PAGE 57
+Thm. 6.5 and Remark 6.4, pp. 175–177, taking m = 1, m0 = 1, r = −t −1/2, and
+A = −∆]. Finally, the inequality holds for −1/2 < t ≤1 by [95, Chp. 2, Thm. 7.3,
+pp. 187–188, taking m = 1, m0 = 1, 0 < s = t + 1/2 < 2, and A = −∆].
+Continuing, we use the preceding display and the interior regularity of harmonic
+functions [96, Lemma 22, p. 197] to yield
+
+∂w
+∂n
+
+Ht−1(∂D)
+≤C∥w∥Ht+1/2(U)/C ≤C′∥w∥Hr(U0)/C
+for any r ∈R (with C′ depending on r), and in particular for r = 1. Then by the set
+monotonicity U0 ⊂Ω\ Ω′ ⊆Ω, it holds that
+
+∂w
+∂n
+
+Ht−1(∂D)
+≤C′∥w∥H1(U0)/C ≤C′∥w∥H1(Ω)/C .
+Use of the generalized Lax–Milgram result from Theorem A.4 delivers the upper bound
+∥w∥H1(Ω)/C ≤∥w∥H1(Ω) ≤Cs
+M
+m ∥g∥Hs
+⋄(∂Ω)
+for a constant Cs that is independent of the conductivity γ.
+Putting together the pieces gives
+∥w∥Ht(∂Ω)/C = ∥(Rγ −R1)g∥Ht(∂Ω)/C ≤eCs,t
+M
+m ∥g∥Hs
+⋄(∂Ω)
+for a constant eCs,t > 0 depending on s and t. Therefore,
+sup
+γ∈Γ′∥Rγ −R1∥L (Hs
+⋄(∂Ω);Ht(∂Ω)/C) ≤eCs,t
+M
+m < ∞
+(A5)
+as asserted.
+To finish the proof, we must show the first assertion of the lemma. The usual
+boundary trace and stability theorems applied to the harmonic function u1,g give
+∥R1g∥Hs+1(∂Ω)/C = ∥u1,g∥Hs+1(∂Ω)/C ≤C∥u1,g∥Hs+3/2(Ω)/C
+≤C′∥g∥Hs(∂Ω) .
+Specifically, for s > −1, the first inequality is due to [95, Chp. 1, Thm. 9.4, pp. 41–
+42, taking µ = 1, m = 1, and s = s + 3/2], while for s ≤−3/2 and −3/2 < s ≤−1
+it follows from [95, Chp. 2, Thm. 6.5 and Remark 6.4, pp. 175–177, taking m = 1,
+m0 = 0, r = −s −3/2, and A = −∆] and [95, Chp. 2, Thm. 7.3, pp. 187–188, taking
+m = 1, m0 = 0, 0 < s = s+3/2 < 2, and A = −∆], respectively. The second inequality
+in the previous display is a consequence of [95, Chp. 2, Remark 7.2, pp. 188–189, taking
+57
+
+PDF PAGE 58
+Ω= Ω, A = −∆, f ≡0, s = s + 3/2, m = m0 = 1, g0 = g, and N = {z1: z ∈C}].
+From (A5) and the preceding display,
+sup
+γ∈Γ′∥Rγ∥L (Hs
+⋄;Hs+1/C) ≤sup
+γ∈Γ′
+
+∥Rγ −R1∥L (Hs
+⋄;Hs+1/C) + ∥R1∥L (Hs
+⋄;Hs+1/C)
+
+≤eCs,s+1
+M
+m + C′ .
+This is the required result.
+□
+This appendix concludes with the proof of Theorem 4.2 from Section 4.1.
+Proof of Theorem 4.2. The proof is similar to that of Theorem 3.5. Let γ ∈Γ′, γ0 ∈Γ′,
+and s and t be arbitrary. Denote the shifted NtD maps by
+e
+Rγ := Rγ −R1 and
+e
+Rγ0 := Rγ0 −R1. Let ∥· ∥denote the HS(Hs
+⋄(∂Ω); Ht(∂Ω)/C) norm for brevity. We
+begin with the triangle inequality. For any J ∈N, it holds that
+∥Rγ −Rγ0∥≤∥e
+Rγ −PJ e
+Rγ∥+ ∥PJ e
+Rγ −PJ e
+Rγ0∥+ ∥PJ e
+Rγ0 −e
+Rγ0∥
+≤2 sup
+γ′∈Γ′∥e
+Rγ′ −PJ e
+Rγ′∥+ ∥PJ e
+Rγ −PJ e
+Rγ0∥.
+We used the linear projection operator PJ = ΠJJ from (2.8). For any ϱ ≥0,
+Theorem B.2 (applied with K = J, r = s, s = t, p = s−ϱ(d−1), and q = t+ϱ(d−1))
+shows that
+∥e
+Rγ −PJ e
+Rγ∥≤C∥e
+Rγ∥L (Hs−(ϱ+1)(d−1)
+⋄
+(∂Ω);Ht+ϱ(d−1)(∂Ω)/C)J−ϱ ≤Cϱ,s,t,dJ−ϱ .
+The final inequality follows by Theorem 3.4 (applied with s = s −(ϱ + 1)(d −1) and
+t = t + ϱ(d −1)). The constant Cϱ,s,t,d > 0 depends on ϱ, s, t, and d but does not
+depend on γ. Thus, we have also obtained a bound on the supremum.
+Next, Theorem B.3 (with K = J, r = s, s = t, p = (d −1) −1/2, and q = 1/2)
+yields
+∥PJ e
+Rγ −PJ e
+Rγ0∥≤CJ
+β(s,t,d)
+d−1 ∥e
+Rγ −e
+Rγ0∥HS(H(d−1)−1/2
+⋄
+(∂Ω);H1/2(∂Ω)/C)
+≤C′J
+β(s,t,d)
+d−1 ∥Rγ −Rγ0∥L (H−1/2
+⋄
+(∂Ω);H1/2(∂Ω)/C) ,
+where β(s, t, d) := (d −3/2 −s)+ + (t −1/2)+ ≥0. The inequality in the last line of
+the previous display is due to Theorem B.2 (applied with r = p = (d −1) −1/2 and
+s = q = 1/2).
+By the triangle inequality and the first assertion of Theorem 3.4, it holds that
+sup
+(γ,γ0)∈Γ′×Γ′∥Rγ −Rγ0∥L (H−1/2
+⋄
+(∂Ω);H1/2(∂Ω)/C) ≤C .
+58
+
+PDF PAGE 59
+Thus, we may choose the natural number J such that
+J ≍∥Rγ −Rγ0∥
+−
+(d−1)
+ϱ(d−1)+β(s,t,d)
+L (H−1/2
+⋄
+(∂Ω);H1/2(∂Ω)/C)
+balances the two terms J−ϱ ≍Jβ(s,t,d)/(d−1)∥Rγ −Rγ0∥L (H−1/2
+⋄
+(∂Ω);H1/2(∂Ω)/C). We
+deduce that
+∥Rγ −Rγ0∥≤C∥Rγ −Rγ0∥
+ϱ(d−1)
+ϱ(d−1)+β(s,t)
+L (H−1/2
+⋄
+(∂Ω);H1/2(∂Ω)/C) .
+Finally, choosing ϱ := β(s, t, d)/(d −1) if β(s, t, d) > 0 and ϱ > 0 otherwise completes
+the proof.
+□
+Appendix B. Auxiliary lemmas
+This appendix collects several auxiliary technical lemmas that are agnostic to the EIT
+application setting.
+The first lemma develops set inclusions involving boundaries. We recall that the
+boundary of a set is the intersection of its closure with the closure of its complement.
+Lemma B.1 (comparison of boundaries). Let (X, d) be a metric space and A ⊆X
+and B ⊆X be subsets. The following holds true.
+(i) If B ⊆Int(A), then ∂A ⊆∂(A \ B).
+(ii) If A and B are both open in (X, d), then (A∩∂B)∪(∂A∩B) ⊆∂(A∩B)\(∂A∩∂B).
+Proof. We begin with Item (i). By definition of boundary and by basic set operations,
+∂A = Ac ∩A
+⊆Ac
+⊆Ac ∪B
+= Ac ∪B
+= (A ∩Bc)c
+= (A \ B)c .
+Moreover, A = (A \ B) ∪(A ∩B) ⊆(A \ B) ∪B. Therefore,
+∂A = Ac ∩A
+⊆Ac ∩(A \ B) ∪B
+= Ac ∩
+ A \ B ∪B
+
+=
+ Ac ∩A \ B
+
+∪
+ Ac ∩B
+
+59
+
+PDF PAGE 60
+⊆
+ A \ B
+
+∪
+ Ac ∩B
+
+.
+By the hypothesis B ⊆Int(A), it holds that Ac ∩B ⊆Ac ∩Int(A) = ∅. Thus,
+∂A ⊆A \ B. It follows that ∂A ⊆A \ B ∩(A \ B)c = ∂(A \ B) as asserted in Item (i).
+Next, we prove Item (ii) under the hypothesis that A and B are open. By symmetry,
+it suffices to prove that (A ∩∂B) ⊆∂(A ∩B) \ (∂A ∩∂B). If x ∈A ∩∂B, then
+x ∈A. Thus, x /∈∂A = A \ Int(A) because A = Int(A) is open. We have shown that
+x /∈(∂A ∩∂B). It remains to show that x ∈∂(A ∩B). By the first part of the proof
+of Item (i), it holds that
+A ∩∂B = A ∩B ∩Bc ⊆Bc ⊆(B ∩S)c
+for any set S. In particular, taking S = A gives x ∈(A ∩B)c. By the second part of
+the proof of Item (i), for any set T it holds that
+∂B = Bc ∩B ⊆Bc ∩(B \ T) ∪T = (Bc ∩B \ T) ∪(Bc ∩T) .
+Thus, A ∩∂B ⊆(A ∩Bc ∩B \ T) ∪(Bc ∩T ∩A). The choice T = Ac and the fact that
+Ac is closed yield the set inclusions
+A ∩∂B ⊆(A ∩Bc ∩B \ Ac) ∪(Bc ∩Ac ∩A)
+= (A ∩Bc ∩A ∩B) ∪(Bc ∩∅)
+= (A ∩Bc ∩A ∩B)
+⊆A ∩B .
+We deduce that x ∈A ∩B ∩(A ∩B)c = ∂(A ∩B) as required.
+□
+The statements of the next two lemmas involve the family of orthogonal projec-
+tion operators {ΠJK}(J,K)∈N×N from (2.8). The first result of the two is due to [96,
+Lemma 18, p. 195]. It controls Hilbert–Schmidt norms and Hilbert–Schmidt projection
+errors by operator norms involving dimension-dependent input space smoothness.
+Lemma B.2 (general operator norm and Hilbert–Schmidt norm comparisons). Let
+d ≥2 and Ω⊂Rd be a bounded domain with smooth boundary ∂Ω. Let p ≤r and
+q ≥s. There exist positive numbers C and C′ depending only on Ωand the differences
+p −r and q −s such that the following holds. If T ∈L (Hp−(d−1)
+⋄
+(∂Ω); Hq(∂Ω)/C),
+then T ∈HS(Hr
+⋄(∂Ω); Hs(∂Ω)/C) and
+∥T∥HS(Hr
+⋄(∂Ω);Hs(∂Ω)/C) ≤C∥T∥L (Hp−(d−1)
+⋄
+(∂Ω);Hq(∂Ω)/C) .
+(B1)
+Additionally, for any J ∈N and K ∈N, it holds that
+∥T −ΠJKT∥HS(Hr
+⋄(∂Ω);Hs(∂Ω)/C)
+(B2)
+≤C′∥T∥L (Hp−(d−1)
+⋄
+(∂Ω);Hq(∂Ω)/C) max
+
+J−
+ r−p
+d−1
+
+, K−
+ q−s
+d−1
+
+.
+60
+
+PDF PAGE 61
+Recall that x+ := max(x, 0) is the positive part of a number x. The final lemma of
+this appendix is implied by [96, Lemma 17, p. 195]. It can be viewed as a quantitative
+form of finite-dimensional norm equivalence for Hilbert–Schmidt operators.
+Lemma B.3 (finite-dimensional Hilbert–Schmidt norms). Let d ≥2 and Ω⊂Rd be a
+bounded domain with smooth boundary ∂Ω. For any real p, q, r, and s, there exists C >
+0 depending only on Ω, p−r, and s−q such that for all T ∈HS(Hp
+⋄(∂Ω); Hq(∂Ω)/C),
+∥ΠJKT∥HS(Hr
+⋄(∂Ω);Hs(∂Ω)/C) ≤CJ
+(p−r)+
+d−1 K
+(s−q)+
+d−1 ∥ΠJKT∥HS(Hp
+⋄(∂Ω);Hq(∂Ω)/C) . (B3)
+Appendix C. Numerical experiment details
+This appendix expands upon Section 5 by providing supplementary details about
+the numerical results, dataset generation, implementation of FNOs, and computing
+environment used in the experiments.
+In this appendix, we take Ω:= D to be the unit disk and interpret T ≃[0, 2π]per ≃
+∂D. For a < b, let Unif[a, b] be the uniform distribution on the interval [a, b]. For some
+x ∈R2 and radius 0 < r < 1, define the open ball Br(x) := {y ∈R2 : |y−x| < r}. Thus,
+D = B1(0). The set of eigenfunctions {φj}j∈Z≥0 of the Laplace–Beltrami operator
+−∆∂D is the standard real Fourier basis (i.e., sines and cosines) of L2(T; R). For
+computational convenience, we re-index this basis in terms of complex exponentials
+as {φj}j∈Z ⊂L2(T; C). That is, θ 7→φj(θ) = exp(ijθ)/
+√
+2π for each j ∈Z.
+Further results and discussion.
+We now present supplemental results that sup-
+port those in Section 5. To set the notation and conventions, we recall that shaded
+bands in all figures denote two standard deviations from the mean (excess) error over
+five independent training runs. The rates in Table 1 are estimated using nonlinear
+curve fitting based on the mean expected relative L1(D) test errors over the five train-
+ing runs. In addition to L1(D) errors, we also considered the L0(D) “distance” and
+Dice score for the shape detection experiments. These are defined by
+dL0(D)(γ, γ′) :=
+Z
+D
+χ{χ{γ(x)>c}̸=χ{γ′(x)>c}} dx
+(C1)
+and
+DSC(γ, γ′) :=
+2
+R
+D χ{γ(x)>c}χ{γ′(x)>c} dx
+ϵ +
+R
+D χ{γ(x)>c} dx +
+R
+D χ{γ′(x)>c} dx ,
+(C2)
+respectively. We take ϵ = 10−8 and c = 50 because the true γ takes values in {1, 100}.
+The purple lines in Figs. 4, 6 and 8 are linear least squares fits (on log-log scales) to
+either noise laws of the form ErrN,δ −eN = Cδρ (H¨older power law) or ErrN,δ −eN =
+C(log(1/δ))−ρ (logarithmic modulus of continuity), and a sample complexity power
+law ErrN,δ −eδ = cN −r. The parameters C, c, ρ, eN, eδ, and r are found by nonlinear
+curve fitting. The terms eN and eδ represent irreducible errors due to fixed sample size
+or noise level, respectively; they contribute to the saturation of the curves in Figs. 4,
+61
+
+PDF PAGE 62
+0.0
+0.1
+0.2
+0.3
+Noise Level
+0.30
+0.35
+0.40
+0.45
+0.50
+0.55
+Average Relative L1 Test Error
+N = 256
+N = 1024
+N = 4096
+(a) Shape detection
+0.0
+0.1
+0.2
+0.3
+Noise Level
+0.26
+0.28
+0.30
+0.32
+0.34
+0.36
+0.38
+0.40
+Average Relative L1 Test Error
+N = 256
+N = 1024
+N = 4096
+(b) Three phase
+0.0
+0.1
+0.2
+0.3
+Noise Level
+0.01
+0.02
+0.03
+0.04
+0.05
+Average Relative L1 Test Error
+N = 256
+N = 1024
+N = 4096
+(c) Lognormal
+Fig. C1: Noise robustness for all three datasets under clean test data.
+Fig. C2: FNO reconstruction of three discontinuous conductivities as training dataset size
+N increases. D-bar reconstructions are shown in comparison. The data are noise-free.
+6 and 8. We find that the shape detection and three phase inclusion dataset errors
+are best explained by logarithmic noise laws, while those of the lognormal dataset fit
+a power law better as in Fig. 8b. The same conclusions here and in Section 5 hold
+for noisy training data and noise-free test data. Clean test data error still increases
+as the training data noise level increases, but more mildly as seen in Fig. C1. The
+corresponding FNOs are regularized by absorbing the noise from the training data.
+Figure C2 is analogous to Fig. 1, but now with both noise-free training and test
+data instead of just noise-free training data. The first two rows correspond to FNOs
+trained on the shape detection dataset and the last row to the three phase inclusion
+dataset. The conductivity in the first row is a sample from the test set, while the latter
+two are deterministic heart and lungs phantoms that are “out-of-distribution.” Due to
+perfect boundary data (up to discretization error), the D-bar method performs much
+62
+
+PDF PAGE 63
+Fig. C3: Heart and lungs phantom reconstruction with no training noise and 1% test noise.
+better than shown in Fig. 1 and now detects both high and low conductivity inclu-
+sions correctly. However, the results are still substantially oversmoothed compared to
+the crisp FNO reconstructions with large enough N. Both Figs. 1 and C2 use the
+bounded noise model (4.22) for test data corruption. The regularized D-bar method
+implementation is discussed later in this appendix.
+In Figs. 3, 5 and 7, we train on Gaussian process noise perturbations to NtD
+kernel boundary data and test on boundary data corrupted by noise constructed via
+random series with uniformly distributed coefficients (4.22). This is already a form
+of input distribution shift that the FNO can easily handle. We further evaluate the
+out-of-distribution capabilities of the trained FNOs in Figs. 1 to C3, C5b and 6d for
+deterministic heart and lungs phantoms [9, Chp. 12] unseen during training.
+We conclude our discussion by visualizing reconstructions obtained with very high
+training and test data noise levels. We also tried training on clean data and testing on
+highly noisy NtD kernels, but the reconstructions were generally poor and contained
+numerical artifacts. Figure C4 is analogous to Fig. 3 for shape detection, but now with
+30% training noise and 20% testing noise. In the top row of noisy NtD kernels, the
+individual features are almost completely washed out by the severe noise. Nonetheless,
+reconstructions have acceptable accuracy. Row three columns one and two shows that
+the reconstructions are regularized: the finer scale cavities in the true conductivities
+are filled in smoothly. The average test set scores are 0.357 L1(D) error, 0.267 L0(D)
+distance, and 0.825 Dice score. The clean test data errors were not much better at
+0.348 L1(D) error, 0.258 L0(D) distance, and 0.836 Dice score. Table C1 provides the
+scores for the four individual reconstructions shown in Fig. C4.
+Figure C5 tells a similar story, except this time the regularization due to high
+training noise actually leads to visually better test set reconstructions than in Fig. 5, at
+least for the four samples shown in Fig. C5a. The average relative L1(D) error over the
+whole test dataset is 0.300. The individual worst, median, best, and random test errors
+are 0.604, 0.294, 0.039, and 0.348, respectively. The heart and lung reconstruction in
+Fig. C5b is also reasonable given the noise level.
+For the lognormal conductivity dataset, we reduced to 10% training noise and 6%
+test noise due to its increased sensitivity. Figure C6 contains the results. The top row of
+noisy NtD kernels does not prevent the FNO from returning accurate reconstructions
+that capture the large scale features correctly. Pointwise errors are also reasonable and
+have slightly larger lengthscale features than the analogous row four in Fig. 7. The
+63
+
+PDF PAGE 64
+Fig. C4: Sample reconstructions from the shape detection dataset, with max, median, and
+min errors with respect to the L0 “distance.” Training noise is 30% and test noise is 20%.
+L1 error over the whole test set is 0.023. Individually, the worst, median, best, and
+random test errors are 0.055, 0.022, 0.010, and 0.023, respectively.
+Due to the end-to-end training, the results in Figs. C4 to C6 highlight the ability
+of the FNO to handle much higher noise levels than traditional inverse solvers.
+Dataset generation.
+Each of the three datasets (hereafter referred to as “Shape”,
+“Three Phase”, and “Lognormal”, respectively) corresponding to Sections 5.1 to 5.3 is
+comprised of 104 pairs of conductivities and NtD kernels. The forward map γ 7→Rγ is
+implemented with a P1 finite element solver. The conductivities are sampled from the
+Shape, Three Phase, or Lognormal data distributions (details to follow) on a 256×256
+uniform grid representing (−1, 1)2, restricted to D ⊂(−1, 1)2, and interpolated to the
+finite element mesh. For each γ, we approximate Rγ as follows. For every j ∈J256 :=
+{−127, −126, . . . , 127, 128} \ {0}, solve (1.1) with Neumann data g = φj to obtain the
+Dirichlet data Rγφj. Using these 255 PDE solves, we construct an NtD matrix with
+64
+
+PDF PAGE 65
+(a) Sample reconstructions from the three phase inclusion dataset subject to high noise levels.
+(b) Same as Fig. C5a for a deterministic heart and lungs phantom.
+Fig. C5: Reconstruction of test set samples (top row) and a synthetic heart and lungs
+phantom (bottom row) subject to 30% training noise and 20% test noise.
+65
+
+PDF PAGE 66
+Table C1: Relative errors in L1 norm, “L0 norm”, or Dice score for the shape detection
+reconstructions in Figs. 3 and C4. Higher Dice scores are better, unlike the norms.
+Error of Test Sample
+Loss
+Figure
+Worst
+Median
+Best
+Random
+L1
+Fig. 3
+0.778
+0.244
+0.041
+0.533
+Fig. C4
+1.041
+0.329
+0.071
+0.605
+L0
+Fig. 3
+0.495
+0.187
+0.041
+0.197
+Fig. C4
+0.643
+0.252
+0.054
+0.199
+Dice
+Fig. 3
+0.522
+0.874
+0.980
+0.953
+Fig. C4
+0.380
+0.834
+0.965
+0.889
+entries ⟨φj, Rγφk⟩L2(T;C) in Fourier basis coordinates. The kernel κγ is then given by
+κγ(θ, θ′) :=
+X
+j∈J256
+X
+k∈J256
+⟨φj, Rγφk⟩L2(T;C) φj(θ)φk(θ′)
+(C3)
+for (θ, θ′) ∈T2.
+To model noisy boundary data, for an NtD kernel κγ we define the perturbed
+kernel κ(δ)
+γ
+for a noise level δ by (5.1). In particular, the noise is additive, but not
+independent due to its dependence on γ through κγ. The noise factor ξ ∈L2
+⋄(T2; R)
+in the display (5.1) is defined in law by the real (or imaginary) part of random series
+expansions of the form (4.22) with the real and imaginary parts of {ζij} either i.i.d.
+Unif[−
+√
+3,
+√
+3] or N(0, 1) random variables. Let α > 1 and τ > 0. The coefficients
+{cij} in (4.22) are defined for (i, j) ̸= (0, 0) by
+cij := τ 2α−2(4π2(i2 + j2) + τ 2)−α
+(C4)
+and c00 = 0. We take α = 1.5 and τ = 10. This implies that supp(Law(ξ)) is compact
+in L2(T2) by the discussion following (4.22) in Section 4.5.
+We now describe the random field models for the three types of conductivities
+studied in Section 5. Let µτ,α = N(0, Cτ,α) be a Gaussian measure on L2
+⋄((−1, 1)2)
+with covariance operator
+Cτ,α := (τ/2)2α−2 −∆+ (τ/2)2 Id
+−α .
+(C5)
+The Laplacian in the preceding display is defined with homogeneous Neumann bound-
+ary conditions. The operator Cτ,α is diagonalized in the Fourier cosine basis. Thus,
+samples from µ can be generated efficiently using the FFT; see [71, Sec. 4]. Let χA
+denote the indicator function of a set A and Ac := (−1, 1)2 \ A be the complement of
+A with respect to (−1, 1)2. The three conductivity distributions are given as follows.
+66
+
+PDF PAGE 67
+Fig. C6: Sample reconstructions from the lognormal conductivity dataset. The training noise
+is 10% and the test noise is 6%.
+(i) (shape detection) Fix τ = 20, α = 4.5, and r = 0.7. Let u ∼µτ,α. Let U :=
+{x ∈(−1, 1)2 : u(x) ≥0} be the induced zero super level set. Define
+γ :=
+ 100 χU + χU cχBr(0) + χBr(0)c
+
+D
+(C6)
+to be a draw from the Shape conductivity data distribution. The indicators
+involving Ω′ := Br(0) ensure that γ ∈Γ′. It follows that γ takes values in the
+set {1, 100} almost surely, and thus the contrast ratio equals 100.
+(ii) (three phase inclusions) Independently draw τ ∼Unif[12, 18], α ∼Unif[4, 5],
+r ∼Unif[0.65, 0.9], c1 ∼Unif[2, 10], and c2 ∼Unif[0.1, 0.5]. Let u1 and u2 be
+independent draws from µτ,α. Let Ui := {x ∈(−1, 1)2 : ui(x) ≥0} for i ∈{1, 2}
+67
+
+PDF PAGE 68
+be the induced zero super level sets. Define
+γ :=
+ c1χU1∩U2 + c2χU1∩U c
+2 + χU c
+1
+χBr(0) + χBr(0)c
+
+D
+(C7)
+to be a draw from the Three Phase conductivity data distribution. The term in
+inner parentheses creates a vector level set field with three values c1 > 0, c2 > 0,
+and 1 (the background value). The indicators involving Ω′ := Br(0) from (2.10)
+ensure that γ ∈Γ′ in (2.11). It follows that γ takes values in the (random)
+set {1, c1, c2} almost surely. The contrast ratio is bounded above by 100 almost
+surely.
+(iii) (lognormal
+conductivities)
+For
+w
+≥
+0,
+Define
+the
+cutoff
+function
+[131]
+ρλ,r±( · ; w): [0, 1] →[0, 1] by
+t 7→ρλ,r±(t; w) :=
+
+
+
+
+
+
+
+1
+if 0 ≤t ≤r−,
+1+w
+2
++ 1−w
+2
+tanh
+
+(t−r−)−1+(t−r+)−1
+λ
+
+if r−< t ≤r+ ,
+0 ,
+otherwise .
+(C8)
+Independently draw τ ∼Unif[7, 9], α ∼Unif[3, 4], r−∼Unif[0.50, 0.55], r+ ∼
+Unif[0.85, 0.95], and λ ∼Unif[7.5, 8.5]. Draw u ∼µτ,α independently. Let
+v := exp(u)χBr+(0) + χBr+(0)c
+(C9)
+be defined pointwise, which is well-defined by a Sobolev embedding because
+α ≥3 > 1 = d/2 almost surely. Let the function γ defined for each x ∈D by
+γ(x) := v(x)χ(Br+(0)\Br−(0))c(x) + v(x)ρλ,r±
+ |x|;
+1
+v(x)
+χ(Br+(0)\Br−(0))(x)
+(C10)
+be a draw from the Lognormal conductivity data distribution. The cutoff
+function ensures that γ ≡1 in a neighborhood of the boundary of the disk.
+Conductivities γ drawn from the Shape and Three Phase data distributions belong to
+BV(D) almost surely. Indeed, excursion sets of smooth enough Gaussian processes have
+finite perimeter [119]. The fields γ are linear combinations of excursion set indicator
+functions. The perimeter of an excursion set equals the total variation of its indicator
+[97, Chp. 14]. However, such an argument does not guarantee uniform BV norm bounds
+as in (2.12). This is an interesting technical point to further explore.
+Implementation details.
+We use a standard implementation of FNO [1, 105]. The
+series in (2.17) is discretized by truncating to J terms per dimension. The hyperpa-
+rameter choices include L = 2 layers, J = 12 terms for a total of 144 retained Fourier
+modes, ReLU activation for layer one and identity activation for layer two, and hid-
+den channel width of dc = 48. The final MLP defining Q in (2.14) has width 256 and
+68
+
+PDF PAGE 69
+ReLU activation. The lifting layer S is pointwise affine. These architectural choices
+are obtained from a small hyperparameter grid search. In particular, the small layer
+size of L = 2 helps to reduce overfitting in this ill-posed inverse problem. We use stan-
+dard input grid concatenation and zero padding to and from the latent torus T2. The
+total FNO parameter count is approximately 2.7 million.
+We train the FNOs using stochastic gradient descent with batch size 32 and the
+AdamW optimizer with initial learning rate 8 × 10−3 and weight decay of 10−4. The
+learning rate decays according to a standard cosine annealing scheduler over 250 total
+epochs. The loss function is the relative L1(D) loss defined in (5.2) with ϵ := 10−8. We
+enforce that the FNO map into functions defined on domain D by masking (−1, 1)2.
+All loss calculations use this mask to assign zero error on (−1, 1)2 \ D.
+The test set is fixed with 400 samples. We also hold out 100 fixed samples as
+validation data to select the best model (over 250 training epochs) for testing. All
+models are trained on input and output resolution 128 × 128 and tested on resolution
+256 × 256 to avoid an inverse crime [132]. This resolution transfer is trivial with the
+FNO due to its resolution invariance. For both the training and test data, we use stan-
+dard pointwise empirical mean and variance data standardization for the input NtD
+kernel functions and no normalization for the output conductivities. All visualizations
+show normalized NtD kernels to emphasize sample diversity.
+Our implementation of the D-bar method used in Figs. 1 and C2 is based on
+publicly available MATLAB code [9, Chp. 15]. We discretize the unit circle with 128
+equally-spaced grid points. We discretize the complex plane on a 128 × 128 grid and
+restrict to the disk of radius 10. The NtD maps are discretized using Fourier modes
+j ∈J128. The D-bar equation and the reconstructions are performed on 256 × 256
+resolution grids. To regularize, we truncate the scattering transform to radius 4.5 (7.7)
+for the noisy (resp., clean) shape detection test sample, 4.9 (7.9) for the noisy (resp.,
+clean) shape detection heart and lungs phantom, and 5.2 (9.1) for the noisy (resp.,
+clean) three phase heart and lungs phantom. Each D-bar reconstruction requires one
+to two hours of wall-clock time on a 256 × 256 grid. These timings could be improved
+by parallelizing the GMRES real-linear D-bar solves via batching over points x ∈Ω.
+Computational resources.
+The majority of all computations are performed on a
+machine equipped with an NVIDIA GeForce RTX 4090 GPU (24 GB VRAM) running
+CUDA version 12.4, Intel i7-10700K CPU (8 cores/16 threads) running at 4.9 GHz, and
+64 GB of DDR4-3200 CL16 RAM. We generate data in MATLAB (R2019b, Update 6)
+using the Partial Differential Equation Toolbox and Image Processing Toolbox. The
+data generation for shape detection and three phase inclusions each required 168 hours
+of wall-clock time on a finite element mesh with 262144 P1 elements and 131585 nodes.
+The lognormal conductivity data generation required 42 hours of wall-clock time on
+a finite element mesh with 65536 P1 elements and 33025 nodes. All FNO training
+experiments are performed in Python using the PyTorch framework in float32 single
+precision. For each of the three datasets, the total training and evaluation time for
+the results presented in Section 5 is 48 hours of wall-clock time when accelerated with
+one NVIDIA GeForce RTX 4090 GPU.
+69
+
+PDF PAGE 70
+References
+[1] Li, Z., Kovachki, N.B., Azizzadenesheli, K., Liu, B., Bhattacharya, K., Stuart,
+A.M., Anandkumar, A.: Fourier neural operator for parametric partial differ-
+ential equations. International Conference on Learning Representations (2021)
+(cited on pp. 4, 12, and 68)
+[2] Knudsen, K., Lassas, M., Mueller, J.L., Siltanen, S.: Regularized D-bar method
+for the inverse conductivity problem. Inverse Problems & Imaging 3(4) (2009)
+(cited on pp. 4, 6, and 39)
+[3] Kovachki, N.B., Li, Z., Liu, B., Azizzadenesheli, K., Bhattacharya, K., Stu-
+art, A.M., Anandkumar, A.: Neural operator: Learning maps between function
+spaces with applications to PDEs. Journal of Machine Learning Research 24(89),
+1–97 (2023)
+(cited on pp. 5, 7, 12, and 18)
+[4] Kovachki, N.B., Lanthaler, S., Mishra, S.: On universal approximation and error
+bounds for Fourier neural operators. Journal of Machine Learning Research
+22(290), 1–76 (2021)
+(cited on pp. 5, 32, and 35)
+[5] Lanthaler, S., Li, Z., Stuart, A.M.: Nonlocality and nonlinearity implies univer-
+sality in operator learning. Constructive Approximation, 1–43 (2025)
+(cited on
+pp. 5, 12, and 36)
+[6] Benyamini, Y., Lindenstrauss, J.: Geometric Nonlinear Functional Analysis vol.
+48. American Mathematical Society (1998)
+(cited on pp. 5 and 13)
+[7] Nelsen, N.H., Yang, Y.: Operator learning meets inverse problems: A probabilis-
+tic perspective. preprint arXiv:2508.20207 (2025)
+(cited on pp. 5, 7, 13, 20, 35,
+36, 38, and 49)
+[8] Borcea, L.: Electrical impedance tomography. Inverse Problems 18(6), 99–136
+(2002)
+(cited on p. 6)
+[9] Mueller, J.L., Siltanen, S.: Linear and Nonlinear Inverse Problems with Practical
+Applications. SIAM (2012)
+(cited on pp. 6, 16, 20, 39, 42, 63, and 69)
+[10] Uhlmann, G.: Electrical impedance tomography and Calder´on’s problem. Inverse
+problems 25(12) (2009)
+(cited on pp. 6 and 10)
+[11] Hanke, M.: A Taste of Inverse Problems: Basic Theory and Examples. SIAM
+(2017)
+(cited on p. 6)
+[12] Calder´on, A.P.: On an inverse boundary value problem. Seminar on Numerical
+Analysis and its Applications to Continuum Physics (Rio de Janeiro, 1980),
+65–73 (1980)
+(cited on pp. 6 and 10)
+70
+
+PDF PAGE 71
+[13] Kohn, R.V., Vogelius, M.: Determining conductivity by boundary measurements.
+Communications on Pure and Applied Mathematics 37(3), 289–298 (1984)
+(cited on p. 6)
+[14] Kohn, R.V., Vogelius, M.: Determining conductivity by boundary measurements
+II. Interior results. Communications on Pure and Applied Mathematics 38(5),
+643–667 (1985)
+(cited on p. 6)
+[15] Sylvester, J., Uhlmann, G.: A global uniqueness theorem for an inverse boundary
+value problem. Annals of Mathematics 125(1), 153–169 (1987)
+(cited on p. 6)
+[16] Nachman, A.I.: Reconstructions from boundary measurements. Annals of Math-
+ematics 128(3), 531–576 (1988)
+(cited on p. 6)
+[17] Novikov, R.G.: A multidimensional inverse spectral problem for the equation
+−∆ψ + (v(x) −Eu(x))ψ = 0. Functional Analysis and Its Applications 22(4),
+263–272 (1987)
+(cited on p. 6)
+[18] Haberman, B., Tataru, D.: Uniqueness in Calder´on’s problem with Lipschitz
+conductivities. Duke Mathematical Journal 162(3), 496–516 (2013)
+(cited on
+p. 6)
+[19] Kenig, C.E., Sj¨ostrand, J., Uhlmann, G.: The Calder´on problem with partial
+data. Annals of Mathematics 165(2), 567–591 (2007)
+(cited on p. 6)
+[20] Nachman, A.I.: Global uniqueness for a two-dimensional inverse boundary value
+problem. Annals of Mathematics, 71–96 (1996)
+(cited on p. 6)
+[21] Astala, K., P¨aiv¨arinta, L.: Calder´on’s inverse conductivity problem in the plane.
+Annals of Mathematics, 265–299 (2006)
+(cited on p. 6)
+[22] Astala, K., Lassas, M., P¨aiv¨arinta, L.: The borderlines of invisibility and visi-
+bility in Calder´on’s inverse problem. Analysis & PDE 9(1), 43–98 (2016) (cited
+on p. 6)
+[23] Dos Santos Ferreira, D., Kenig, C.E., Salo, M., Uhlmann, G.: Limiting Carleman
+weights and anisotropic inverse problems. Inventiones Mathematicae 178(1),
+119–171 (2009)
+(cited on p. 6)
+[24] Faraco, D., Prats, M.: Characterization for stability in planar conductivities.
+Journal of Differential Equations 264(9), 5659–5712 (2018)
+(cited on pp. 6, 13,
+14, and 15)
+[25] Caro, P., Rogers, K.M.: Global uniqueness for the Calder´on problem with Lip-
+schitz conductivities. In: Forum of Mathematics, Pi, vol. 4 (2016). Cambridge
+University Press
+(cited on p. 6)
+[26] Ide, T., Isozaki, H., Nakata, S., Siltanen, S., Uhlmann, G.: Probing for electrical
+71
+
+PDF PAGE 72
+inclusions with complex spherical waves. Communications on Pure and Applied
+Mathematics 60(10), 1415–1442 (2007)
+(cited on p. 6)
+[27] Novikov, R., Santacesaria, M.: A global stability estimate for the Gel’fand–
+Calder´o´on inverse problem in two dimensions. Journal of Inverse & Ill-Posed
+Problems 18(7) (2010)
+(cited on p. 6)
+[28] Alessandrini, G.: Stable determination of conductivity by boundary measure-
+ments. Applicable Analysis 27(1-3), 153–172 (1988)
+(cited on p. 6)
+[29] Barcel´o, J.A., Barcel´o, T., Ruiz, A.: Stability of the inverse conductivity problem
+in the plane for less regular conductivities. Journal of Differential Equations
+173(2), 231–270 (2001)
+(cited on p. 6)
+[30] Clop, A., Faraco, D., Ruiz, A.: Stability of Calder´on’s inverse conductivity prob-
+lem in the plane for discontinuous conductivities. Inverse Problems and Imaging
+4(1), 49–91 (2010)
+(cited on p. 6)
+[31] Caro, P., Garcia, A., Reyes, J.M.: Stability of the Calder´on problem for less
+regular conductivities. Journal of Differential Equations 254(2), 469–492 (2013)
+(cited on pp. 6 and 15)
+[32] Choulli, M.: Comments on the determination of the conductivity by bound-
+ary measurements. Journal of Mathematical Analysis and Applications 517(2)
+(2023)
+(cited on pp. 6 and 15)
+[33] Alberti, G.S., Santacesaria, M.: Infinite-dimensional inverse problems with finite
+measurements. Archive for Rational Mechanics and Analysis 243, 1–31 (2022)
+(cited on pp. 6, 35, 36, and 49)
+[34] Harrach, B.: Uniqueness and Lipschitz stability in electrical impedance tomog-
+raphy with finitely many electrodes. Inverse Problems 35(2) (2019)
+(cited on
+pp. 6 and 36)
+[35] Garde, H., Hyv¨onen, N.: Linearized Calder´on problem: Reconstruction and Lips-
+chitz stability for infinite-dimensional spaces of unbounded perturbations. SIAM
+Journal on Mathematical Analysis 56(3), 3588–3604 (2024)
+(cited on p. 6)
+[36] Garde, H., Hirvensalo, M., Hyv¨onen, N.: Infinite-dimensional Lipschitz stability
+in the Calder´on problem and general Zernike bases. preprint arXiv:2502.16264
+(2025)
+(cited on pp. 6 and 49)
+[37] Somersalo, E., Cheney, M., Isaacson, D., Isaacson, E.: Layer stripping: a direct
+numerical method for impedance imaging. Inverse problems 7(6) (1991)
+(cited
+on p. 6)
+72
+
+PDF PAGE 73
+[38] Knudsen, K., Lassas, M., Mueller, J.L., Siltanen, S.: D-bar method for electri-
+cal impedance tomography with discontinuous conductivities. SIAM Journal on
+Applied Mathematics 67(3), 893–913 (2007)
+(cited on p. 6)
+[39] Mueller, J.L., Siltanen, S.: Direct reconstructions of conductivities from bound-
+ary measurements. SIAM Journal on Scientific Computing 24(4), 1232–1266
+(2003)
+(cited on p. 6)
+[40] Astala, K., Mueller, J.L., P¨aiv¨arinta, L., Siltanen, S.: Numerical computation of
+complex geometrical optics solutions to the conductivity equation. Applied and
+Computational Harmonic Analysis 29(1), 2–17 (2010)
+(cited on p. 6)
+[41] Astala, K., P¨aiv¨arinta, L., Reyes, J.M., Siltanen, S.: Nonlinear Fourier analysis
+for discontinuous conductivities: computational results. Journal of Computa-
+tional Physics 276, 74–91 (2014)
+(cited on p. 6)
+[42] Mueller, J.L., Siltanen, S.: The D-bar method for electrical impedance tomog-
+raphy—demystified. Inverse problems 36(9) (2020)
+(cited on pp. 6 and 39)
+[43] Isaacson, D., Mueller, J.L., Siltanen, S.: D-bar Methods for EIT. In: Electrical
+Impedance Tomography, pp. 137–150. CRC press (2021)
+(cited on p. 6)
+[44] Lytle, G., Perry, P., Siltanen, S.: Nachman’s reconstruction method for the
+Calder´on problem with discontinuous conductivities. Inverse Problems 36(3)
+(2020)
+(cited on p. 6)
+[45] Chung, E.T., Chan, T.F., Tai, X.-C.: Electrical impedance tomography using
+level set representation and total variational regularization. Journal of Compu-
+tational Physics 205(1), 357–372 (2005)
+(cited on p. 6)
+[46] Tanushev, N.M., Vese, L.: A piecewise-constant binary model for electrical
+impedance tomography. Inverse Problems & Imaging 1(2) (2007) (cited on p. 6)
+[47] Jin, B., Maass, P.: An analysis of electrical impedance tomography with applica-
+tions to Tikhonov regularization. ESAIM: Control, Optimisation and Calculus
+of Variations 18(4), 1027–1048 (2012)
+(cited on p. 6)
+[48] Rondi, L.: On the regularization of the inverse conductivity problem with dis-
+continuous conductivities. Inverse Problems and Imaging 2(3), 397–409 (2008)
+(cited on pp. 6 and 23)
+[49] Garde, H., Staboulis, S.: Convergence and regularization for monotonicity-
+based shape reconstruction in electrical impedance tomography. Numerische
+Mathematik 135, 1221–1251 (2017)
+(cited on pp. 6 and 37)
+[50] Sun, S., Alberti, G.S.: The learned range test method for the inverse inclusion
+problem. SIAM Journal on Applied Mathematics 85(4), 1881–1905 (2025) (cited
+73
+
+PDF PAGE 74
+on pp. 6 and 7)
+[51] Stuart, A.M., Dunlop, M.M.: The Bayesian formulation of EIT: analysis and
+algorithms. Inverse Problems and Imaging 10(4), 1007–1036 (2016)
+(cited on
+p. 6)
+[52] Garde, H., Hyv¨onen, N.: Mimicking relative continuum measurements by elec-
+trode data in two-dimensional electrical impedance tomography. Numerische
+Mathematik 147, 579–609 (2021)
+(cited on pp. 6 and 20)
+[53] Garde, H., Hyv¨onen, N.: Series reversion in Calder´on’s problem. Mathematics
+of Computation 91(336), 1925–1953 (2022)
+(cited on pp. 6, 10, and 18)
+[54] Arridge, S., Maass, P., ¨Oktem, O., Sch¨onlieb, C.-B.: Solving inverse problems
+using data-driven models. Acta Numerica 28, 1–174 (2019)
+(cited on p. 6)
+[55] Ghattas, O., Willcox, K.: Learning physics-based models from data: Perspectives
+from inverse problems and model reduction. Acta Numerica 30, 445–554 (2021)
+(cited on p. 6)
+[56] Ongie, G., Jalal, A., Metzler, C.A., Baraniuk, R.G., Dimakis, A.G., Willett,
+R.: Deep learning techniques for inverse problems in imaging. IEEE Journal on
+Selected Areas in Information Theory 1(1), 39–56 (2020)
+(cited on p. 6)
+[57] Hamilton, S.J., Hauptmann, A.: Deep D-bar: Real-time electrical impedance
+tomography imaging with deep neural networks. IEEE Transactions on Medical
+Imaging 37(10), 2367–2377 (2018)
+(cited on p. 7)
+[58] Hamilton, S.J., H¨anninen, A., Hauptmann, A., Kolehmainen, V.: Beltrami-net:
+domain-independent deep D-bar learning for absolute imaging with electrical
+impedance tomography (a-EIT). Physiological Measurement 40(7) (2019) (cited
+on p. 7)
+[59] Hamilton, S.J., Reyes, J.M., Siltanen, S., Zhang, X.: A hybrid segmentation and
+D-bar method for electrical impedance tomography. SIAM Journal on Imaging
+Sciences 9(2), 770–793 (2016)
+(cited on p. 7)
+[60] Siltanen, S., Ide, T.: Electrical impedance tomography, enclosure method and
+machine learning. In: 2020 IEEE 30th International Workshop on Machine
+Learning for Signal Processing (MLSP), pp. 1–6 (2020). IEEE
+(cited on p. 7)
+[61] Colibazzi, F., Lazzaro, D., Morigi, S., Samor´e, A.: Learning nonlinear electrical
+impedance tomography. Journal of Scientific Computing 90(1) (2022) (cited on
+p. 7)
+[62] Tanyu, D.N., Ning, J., Hauptmann, A., Jin, B., Maass, P.: Electrical impedance
+tomography: A fair comparative study on deep learning and analytic-based
+74
+
+PDF PAGE 75
+approaches. In: Bubba, T.A. (ed.) Data-driven Models in Inverse Problems, pp.
+437–470. Walter de Gruyter GmbH & Co KG (2024). Chap. 13
+(cited on p. 7)
+[63] Agnelli, J.P., C¨ol, A., Lassas, M., Murthy, R., Santacesaria, M., Siltanen, S.:
+Classification of stroke using neural networks in electrical impedance tomogra-
+phy. Inverse Problems 36(11) (2020)
+(cited on p. 7)
+[64] Beretta, E., Deng, M., Gandolfi, A., Jin, B.: The discrete inverse conductivity
+problem solved by the weights of an interpretable neural network. Journal of
+Computational Physics (2025)
+(cited on p. 7)
+[65] Alsaker, M., Rautio, S., Moura, F., Agnelli, J.P., Murthy, R., Lassas, M.,
+Mueller, J.L., Siltanen, S.: CT scans without X-rays: parallel-beam imaging from
+nonlinear current flows. preprint arXiv:2408.12992 (2024)
+(cited on p. 7)
+[66] Ding, W., Ren, K., Zhang, L.: Coupling deep learning with full waveform
+inversion. preprint arXiv:2203.01799 (2022)
+(cited on p. 7)
+[67] Agnelli, J.P., Moura, F.S., Rautio, S., Alsaker, M., Murthy, R., Lassas, M.,
+Siltanen, S.: Stroke classification using virtual hybrid edge detection from in
+silico electrical impedance tomography data. preprint arXiv:2501.14704 (2025)
+(cited on p. 7)
+[68] Kovachki, N.B., Lanthaler, S., Stuart, A.M.: Operator learning: Algorithms and
+analysis. Handbook of Numerical Analysis 25, 419–467 (2024)
+(cited on pp. 7
+and 19)
+[69] Boull´e, N., Townsend, A.: A mathematical guide to operator learning. In: Hand-
+book of Numerical Analysis vol. 25, pp. 83–125. Elsevier (2024)
+(cited on pp. 7
+and 19)
+[70] Subedi, U., Tewari, A.: Operator learning: A statistical perspective. preprint
+arXiv:2504.03503 (2025)
+(cited on p. 7)
+[71] Nelsen, N.H., Stuart, A.M.: Operator learning using random features: A tool for
+scientific computing. SIAM Review 66(3), 535–571 (2024) (cited on pp. 7 and 66)
+[72] Kaltenbach, S., Perdikaris, P., Koutsourelakis, P.-S.: Semi-supervised invertible
+neural operators for Bayesian inverse problems. Computational Mechanics 72(3),
+451–470 (2023)
+(cited on p. 7)
+[73] Chen, K., Wang, C., Yang, H.: Let data talk: Data-regularized operator learning
+theory for inverse problems. preprint arXiv:2310.09854 (2023)
+(cited on p. 7)
+[74] Nguyen, H.V., Bui-Thanh, T.: TNet: A model-constrained Tikhonov network
+approach for inverse problems. SIAM Journal on Scientific Computing 46(1),
+77–100 (2024)
+(cited on p. 7)
+75
+
+PDF PAGE 76
+[75] Wang, T., Wang, C.: Latent neural operator for solving forward and inverse PDE
+problems. In: Advances in Neural Information Processing Systems, vol. 37, pp.
+33085–33107 (2024)
+(cited on p. 7)
+[76] Yang, Y., Gao, A.F., Castellanos, J.C., Ross, Z.E., Azizzadenesheli, K., Clay-
+ton, R.W.: Seismic wave propagation and inversion with neural operators. The
+Seismic Record 1(3), 126–134 (2021)
+(cited on p. 7)
+[77] Zhang, R.Z., Xie, X., Lowengrub, J.S.: BiLO: Bilevel local operator learning for
+PDE inverse problems. preprint arXiv:2404.17789 (2024)
+(cited on p. 7)
+[78] Long, D., Xu, Z., Yuan, Q., Yang, Y., Zhe, S.: Invertible Fourier neural operators
+for tackling both forward and inverse problems. In: International Conference on
+Artificial Intelligence and Statistics, pp. 3043–3051 (2025). PMLR (cited on p. 7)
+[79] Guo, R., Cao, S., Chen, L.: Transformer meets boundary value inverse problems.
+In: The Eleventh International Conference on Learning Representations (2023)
+(cited on p. 7)
+[80] Lingsch, L., Grund, D., Mishra, S., Kissas, G.: FUSE: Fast unified simulation and
+estimation for PDEs. In: Advances in Neural Information Processing Systems,
+vol. 37, pp. 21656–21698 (2024)
+(cited on p. 7)
+[81] Jiao, A., Yan, Q., Harlim, J., Lu, L.: Solving forward and inverse PDE prob-
+lems on unknown manifolds via physics-informed neural operators. preprint
+arXiv:2407.05477 (2024)
+(cited on p. 7)
+[82] Massa, P., Garbarino, S., Benvenuto, F.: Approximation of discontinuous inverse
+operators with neural networks. Inverse Problems 38(10) (2022)
+(cited on p. 7)
+[83] Herrmann, L., Schwab, C., Zech, J.: Deep neural network expression of posterior
+expectations in bayesian PDE inversion. Inverse Problems 36(12) (2020)
+(cited
+on p. 7)
+[84] Baptista, R., Hosseini, B., Kovachki, N.B., Marzouk, Y.M.: Conditional sam-
+pling with monotone GANs: From generative models to likelihood-free inference.
+SIAM/ASA Journal on Uncertainty Quantification 12(3), 868–900 (2024) (cited
+on p. 7)
+[85] Cao, L., O’Leary-Roseberry, T., Jha, P.K., Oden, J.T., Ghattas, O.: Residual-
+based error correction for neural operator accelerated infinite-dimensional
+Bayesian inverse problems. Journal of Computational Physics 486 (2023) (cited
+on p. 7)
+[86] Cao, L., Chen, J., Brennan, M., O’Leary-Roseberry, T., Marzouk, Y., Ghat-
+tas, O.: LazyDINO: Fast, scalable, and efficiently amortized Bayesian inver-
+sion via structure-exploiting and surrogate-driven measure transport. preprint
+76
+
+PDF PAGE 77
+arXiv:2411.12726 (2024)
+(cited on p. 7)
+[87] Cao, L., O’Leary-Roseberry, T., Ghattas, O.: Derivative-informed neural oper-
+ator acceleration of geometric MCMC for infinite-dimensional Bayesian inverse
+problems. Journal of Machine Learning Research 26(78), 1–68 (2025)
+(cited on
+p. 7)
+[88] Molinaro, R., Yang, Y., Engquist, B., Mishra, S.: Neural inverse operators
+for solving PDE inverse problems. In: International Conference on Machine
+Learning, pp. 25105–25139 (2023). PMLR
+(cited on pp. 7 and 35)
+[89] Guerra, N., Nelsen, N.H., Yang, Y.: Learning where to learn: Training data dis-
+tribution optimization for scientific machine learning. preprint arXiv:2505.21626
+(2025)
+(cited on pp. 7, 35, and 49)
+[90] Guo, R., Jiang, J.: Construct deep neural networks based on direct sam-
+pling methods for solving electrical impedance tomography. SIAM Journal on
+Scientific Computing 43(3), 678–711 (2021)
+(cited on p. 7)
+[91] Castro, J., Mu˜noz, C., Valenzuela, N.: The Calder´on’s problem via DeepONets.
+Vietnam Journal of Mathematics, 1–32 (2024) (cited on pp. 7, 18, 20, 35, and 36)
+[92] Abhishek, A., Strauss, T.: A DeepONet for inverting the Neumann-to-Dirichlet
+Operator in Electrical Impedance Tomography: An approximation theoretic per-
+spective and numerical results. preprint arXiv:2407.17182 (2024) (cited on pp. 7,
+18, 20, 35, and 36)
+[93] Pineda, A.F.L., Petersen, P.C.: Deep neural networks can stably solve high-
+dimensional, noisy, non-linear inverse problems. Analysis and Applications
+21(1), 49–91 (2023)
+(cited on pp. 7, 13, 35, 36, and 37)
+[94] Adams, R.A., Fournier, J.J.: Sobolev Spaces vol. 140, 2nd edn. Elsevier (2003)
+(cited on pp. 8, 9, 26, and 27)
+[95] Lions, J.L., Magenes, E.: Non-homogeneous Boundary Value Problems and
+Applications vol. 1. Springer Verlag Berlin Heidelberg (1972) (cited on pp. 8, 10,
+52, 53, 54, 55, 56, and 57)
+[96] Abraham, K., Nickl, R.: On statistical Calder´on problems. Mathematical Statis-
+tics and Learning 2(2), 165–216 (2020)
+(cited on pp. 8, 9, 10, 16, 17, 18, 19, 35,
+53, 54, 55, 57, 60, and 61)
+[97] Leoni, G.: A First Course in Sobolev Spaces. American Mathematical Society
+(2017)
+(cited on pp. 8, 9, 14, 25, 50, and 68)
+[98] Cheney, M., Isaacson, D., Newell, J.C.: Electrical impedance tomography. SIAM
+Review 41(1), 85–101 (1999)
+(cited on p. 10)
+77
+
+PDF PAGE 78
+[99] Feldman, J., Salo, M., Uhlmann, G.: The Calder´on Problem: An Introduction,
+1st edn. American Mathematical Society (2025)
+(cited on p. 10)
+[100] Uhlmann,
+G.:
+30
+years
+of
+Calder´on’s
+problem.
+S´eminaire
+Laurent
+Schwartz—EDP et applications, 1–25 (2012)
+(cited on p. 10)
+[101] Lanthaler, S., Stuart, A.M., Trautner, M.: Discretization error of Fourier neural
+operators. preprint arXiv:2405.02221 (2024)
+(cited on p. 12)
+[102] Li, Z., Kovachki, N.B., Choy, C., Li, B., Kossaifi, J., Otta, S., Nabian, M.A.,
+Stadler, M., Hundt, C., Azizzadenesheli, K., Anandkumar, A.: Geometry-
+informed neural operator for large-scale 3D PDEs. In: Advances in Neural
+Information Processing Systems, vol. 36, pp. 35836–35854 (2023) (cited on pp. 12
+and 36)
+[103] Li, Z., Huang, D.Z., Liu, B., Anandkumar, A.: Fourier neural operator with
+learned deformations for PDEs on general geometries. Journal of Machine
+Learning Research 24(388), 1–26 (2023)
+(cited on pp. 12 and 36)
+[104] Li, X., Li, Z., Kovachki, N.B., Anandkumar, A.: Geometric operator learning
+with optimal transport. preprint arXiv:2507.20065 (2025) (cited on pp. 12 and 36)
+[105] Huang, D.Z., Nelsen, N.H., Trautner, M.: An operator learning perspective
+on parameter-to-observable maps. Foundations of Data Science 7(1), 163–225
+(2025)
+(cited on pp. 12, 30, 31, 32, 33, 34, and 68)
+[106] Arveson, W.: A Short Course on Spectral Theory vol. 1. Graduate Texts in
+Matheamtics, Springer New York, NY (2002)
+(cited on pp. 18, 19, and 22)
+[107] de Hoop, M.V., Lassas, M., Wong, C.A.: Deep learning architectures for nonlin-
+ear operator functions and nonlinear inverse problems. Mathematical Statistics
+and Learning 4(1), 1–86 (2022)
+(cited on pp. 18, 20, 35, 48, and 49)
+[108] Kratsios, A., Liu, C., Lassas, M., de Hoop, M.V., Dokmani´c, I.: An approxima-
+tion theory for metric space-valued functions with a view towards deep learning.
+preprint arXiv:2304.12231 (2023)
+(cited on p. 18)
+[109] de Hoop, M.V., Kovachki, N.B., Nelsen, N.H., Stuart, A.M.: Convergence rates
+for learning linear operators from noisy data. SIAM/ASA Journal on Uncertainty
+Quantification 11(2), 480–513 (2023)
+(cited on p. 19)
+[110] Fan, Y., Ying, L.: Solving electrical impedance tomography with deep learning.
+Journal of Computational Physics 404 (2020)
+(cited on p. 20)
+[111] Bhattacharya, K., Kovachki, N.B., Rajan, A., Stuart, A.M., Trautner, M.: Learn-
+ing homogenization for elliptic operators. SIAM Journal on Numerical Analysis
+62(4), 1844–1873 (2024)
+(cited on p. 26)
+78
+
+PDF PAGE 79
+[112] Brezis, H.: Functional Analysis, Sobolev Spaces and Partial Differential
+Equations vol. 1. Springer (2011)
+(cited on p. 26)
+[113] Tu, L.W.: An Introduction to Manifolds, 2nd edn. Springer (2011)
+(cited on
+pp. 27 and 28)
+[114] Alberti, G.S., Santacesaria, M.: Calder´on’s inverse problem with a finite number
+of measurements. In: Forum of Mathematics, Sigma, vol. 7 (2019). Cambridge
+University Press
+(cited on p. 36)
+[115] Hoop, M.V., Huang, D.Z., Qian, E., Stuart, A.M.: The cost-accuracy trade-off
+in operator learning with neural networks. Journal of Machine Learning 1(3),
+299–341 (2022)
+(cited on p. 36)
+[116] Wu, R., Kovachki, N.B., Liu, B.: A learning-based domain decomposition
+method. preprint arXiv:2507.17328 (2025)
+(cited on p. 36)
+[117] Chen, G., Liu, X., Meng, Q., Chen, L., Liu, C., Li, Y.: Learning neural operators
+on Riemannian manifolds. National Science Open 3(6) (2024)
+(cited on p. 36)
+[118] Wu, H., Weng, K., Zhou, S., Huang, X., Xiong, W.: Neural manifold operators
+for learning the evolution of physical dynamics. In: Proceedings of the 30th ACM
+SIGKDD Conference on Knowledge Discovery and Data Mining, pp. 3356–3366
+(2024)
+(cited on p. 36)
+[119] Adler, R.J., Taylor, J.E.: Random Fields and Geometry. Springer (2007)
+(cited
+on pp. 38 and 68)
+[120] Zou, K.H., Warfield, S.K., Bharatha, A., Tempany, C.M., Kaus, M.R., Haker,
+S.J., Wells III, W.M., Jolesz, F.A., Kikinis, R.: Statistical validation of image seg-
+mentation quality based on a spatial overlap index: scientific reports. Academic
+Radiology 11(2), 178–189 (2004)
+(cited on p. 40)
+[121] Bishop, C.M.: Training with noise is equivalent to Tikhonov regularization.
+Neural Computation 7(1), 108–116 (1995)
+(cited on p. 41)
+[122] Bui-Thanh, T., Li, Q., Zepeda-N´u˜nez, L.: Bridging and improving theoretical
+and computational electrical impedance tomography via data completion. SIAM
+Journal on Scientific Computing 44(3), 668–693 (2022)
+(cited on p. 49)
+[123] Huan, X., Jagalur, J., Marzouk, Y.: Optimal experimental design: Formulations
+and computations. Acta Numerica 33, 715–840 (2024)
+(cited on p. 49)
+[124] Jin, R., Guerra, M., Li, Q., Wright, S.: Optimal design for linear models via
+gradient flow. preprint arXiv:2401.07806 (2024)
+(cited on p. 49)
+[125] Jin, R., Li, Q., Mussmann, S.O., Wright, S.J.: Continuous nonlinear adaptive
+experimental design with gradient flow. preprint arXiv:2411.14332 (2024) (cited
+79
+
+PDF PAGE 80
+on p. 49)
+[126] Kratsios, A., Furuya, T., Benitez, J.A.L., Lassas, M., Hoop, M.V.: Mixture
+of experts soften the curse of dimensionality in operator learning. preprint
+arXiv:2404.09101 (2024)
+(cited on p. 49)
+[127] Kovachki, N.B., Lanthaler, S., Mhaskar, H.: Data complexity estimates for
+operator learning. preprint arXiv:2405.15992 (2024)
+(cited on p. 49)
+[128] Lanthaler, S., Nelsen, N.H.: Error bounds for learning with vector-valued random
+features. In: Oh, A., Neumann, T., Globerson, A., Saenko, K., Hardt, M., Levine,
+S. (eds.) Advances in Neural Information Processing Systems, vol. 36, pp. 71834–
+71861. Curran Associates, Inc. (2023)
+(cited on p. 49)
+[129] Hanke, M., Hyv¨onen, N., Reusswig, S.: Convex backscattering support in electric
+impedance tomography. Numerische Mathematik 117, 373–396 (2011) (cited on
+pp. 53 and 54)
+[130] Evans, L.C.: Partial Differential Equations, 1st edn. American Mathematical
+Society (1998)
+(cited on p. 55)
+[131] Miller, P.D.: Applied Asymptotic Analysis vol. 75. American Mathematical
+Society (2006)
+(cited on p. 68)
+[132] Kaipio, J.P., Somersalo, E.: Statistical and Computational Inverse Problems.
+Springer (2005)
+(cited on p. 69)
+80

@@ -1,0 +1,163 @@
+[
+  {
+    "order": 2998,
+    "id": "inverse-problems-identifiability-and-stability",
+    "kind": "A",
+    "category": "inverse-problems",
+    "title": "Inverse maps, identifiability, and stability",
+    "companion": "inverse-problems-identifiability-and-stability-examples",
+    "requires": [
+      "hilbert-space-geometry-and-riesz-representation"
+    ],
+    "items": [
+      {
+        "id": "def-ip-forward-map-and-solution-classes",
+        "kind": "definition",
+        "title": "Inverse-problem models and solution classes",
+        "deps": [
+          "def-metric-space"
+        ],
+        "dependency_level": 0,
+        "justified_by": [],
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "not-applicable"
+        },
+        "sources": {
+          "scraped": [],
+          "references": [
+            {
+              "title": "Christian Clason, Regularization of Inverse Problems, Chapter 3, printed pp. 15–27",
+              "url": "https://arxiv.org/pdf/2001.00617v2"
+            },
+            {
+              "title": "Tristan van Leeuwen and Christoph Brune, 10 Lectures on Inverse Problems and Imaging, Lecture 1 §§1.2–1.3",
+              "url": "https://tristanvanleeuwen.github.io/IP_and_Im_Lectures/what_is.html"
+            }
+          ]
+        },
+        "statement": "Let $(X,d_X)$ and $(Y,d_Y)$ be metric spaces, called the **parameter space** and the **data space**. Let $U\\subseteq X$ be a nonempty set of **admissible truths**, and let $F:U\\to Y$ be a **forward map**. For $x\\in U$, the datum $F(x)$ is its exact observation. For $y\\in Y$, define the exact solution set\n\n$$S_F(y):=\\{x\\in U:F(x)=y\\}.$$\n\nThe datum $y$ is exactly solvable on $U$ when $S_F(y)\\ne\\varnothing$.\n\nLet $\\sim$ be an equivalence relation on $U$, meaning it is reflexive, symmetric, and transitive; truths equivalent under $\\sim$ represent the same recovery target. A **metric solution-class space** for $(U,\\sim)$ consists of a metric space $(Q,d_Q)$ and a function $q:U\\to Q$ whose image is all of $Q$ and such that $q(x)=q(x')$ if and only if $x\\sim x'$. The loss between two target classes is their metric distance $d_Q$. Exact recovery of the truth itself is the special case $Q=U$, $q(x)=x$, and $d_Q=d_X$ restricted to $U$."
+      },
+      {
+        "id": "def-ip-identifiability-and-stability-modulus",
+        "kind": "definition",
+        "title": "Identifiability and stability moduli",
+        "deps": [
+          "def-ip-forward-map-and-solution-classes",
+          "def-metric-space",
+          "lem-metric-nonnegativity"
+        ],
+        "dependency_level": 1,
+        "justified_by": [],
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "not-applicable"
+        },
+        "sources": {
+          "scraped": [],
+          "references": [
+            {
+              "title": "Christian Clason, Regularization of Inverse Problems, Chapter 3 §§3.1–3.2 and Chapter 4 §4.1",
+              "url": "https://arxiv.org/pdf/2001.00617v2"
+            },
+            {
+              "title": "Tristan van Leeuwen and Christoph Brune, 10 Lectures on Inverse Problems and Imaging, Lecture 1 §§1.2–1.3",
+              "url": "https://tristanvanleeuwen.github.io/IP_and_Im_Lectures/what_is.html"
+            }
+          ]
+        },
+        "statement": "Use metric spaces $(X,d_X)$ and $(Y,d_Y)$, a nonempty admissible truth class $U\\subseteq X$, a forward map $F:U\\to Y$, and a metric solution-class space $(Q,d_Q)$ with class map $q:U\\to Q$ as follows: $q$ has image all of $Q$, and $q(x)=q(x')$ exactly when $x$ and $x'$ are equivalent for recovery. The library's metric axioms imply nonnegative metric values.\n\nThe forward map $F$ is **identifiable modulo the recovery equivalence on $U$** if\n\n$$x,x'\\in U\\text{ and }F(x)=F(x')\\quad\\Longrightarrow\\quad q(x)=q(x').$$\n\nIt is nonidentifiable modulo that equivalence if some two admissible truths have equal data and distinct target classes.\n\nA **deterministic data-only estimator** is a function $\\widehat q:Y\\to Q$. It is exact on $U$ if $\\widehat q(F(x))=q(x)$ for every $x\\in U$. The diagram below commutes exactly under this condition; it states the defining equality of functions and is not a proof device.\n\n```tikzcd\nU \\arrow[r,\"F\"] \\arrow[dr,\"q\"'] & Y \\arrow[d,\"\\widehat q\"] \\\\\n& Q\n```\n\nA **uniform stability modulus on $U$** is a nondecreasing function $\\omega:[0,\\infty)\\to[0,\\infty)$, with $\\omega(0)=0$ and $\\lim_{t\\downarrow0}\\omega(t)=0$, such that\n\n$$d_Q(q(x),q(x'))\\le\\omega\\bigl(d_Y(F(x),F(x'))\\bigr)\\qquad(x,x'\\in U).$$\n\nIdentifiability concerns equality of exact data; the modulus is a separate quantitative bound for all truth pairs. The estimator definition specifies no regularization procedure or convergence guarantee."
+      },
+      {
+        "id": "thm-ip-kernel-directions-preclude-unrestricted-recovery",
+        "kind": "theorem",
+        "title": "Kernel directions preclude unrestricted recovery",
+        "deps": [
+          "def-ip-forward-map-and-solution-classes",
+          "def-ip-identifiability-and-stability-modulus",
+          "def-metric-space",
+          "lem-metric-nonnegativity"
+        ],
+        "dependency_level": 2,
+        "justified_by": [],
+        "proof_strategy": "direct",
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "scraped": [],
+          "references": [
+            {
+              "title": "Christian Clason, Regularization of Inverse Problems, Chapter 3 and Chapter 4 §4.1",
+              "url": "https://arxiv.org/pdf/2001.00617v2"
+            },
+            {
+              "title": "Tristan van Leeuwen and Christoph Brune, 10 Lectures on Inverse Problems and Imaging, Lecture 1 §§1.2–1.3",
+              "url": "https://tristanvanleeuwen.github.io/IP_and_Im_Lectures/what_is.html"
+            }
+          ]
+        },
+        "statement": "Let $(X,d_X)$, $(Y,d_Y)$, and $(Q,d_Q)$ be metric spaces, let $U\\subseteq X$ be a nonempty admissible truth class, let $F:U\\to Y$ be a forward map, and let $q:U\\to Q$ assign each truth its target class. Let $x_0,x_1\\in U$, let $\\delta\\ge0$, and suppose a single datum $y\\in Y$ satisfies\n\n$$d_Y(y,F(x_0))\\le\\delta\\quad\\text{and}\\quad d_Y(y,F(x_1))\\le\\delta.$$\n\nFor every deterministic data-only estimator, meaning every function $\\widehat q:Y\\to Q$, the two target-class losses at that datum satisfy\n\n$$\\max\\{d_Q(\\widehat q(y),q(x_0)),d_Q(\\widehat q(y),q(x_1))\\}\\ge\\frac12d_Q(q(x_0),q(x_1)).$$\n\nIn particular, if $F(x_0)=F(x_1)$ but $q(x_0)\\ne q(x_1)$, no data-only estimator exactly recovers both truths. The quantitative bound also holds whenever the radius-$\\delta$ data balls around the two forward data share the observed datum $y$."
+      }
+    ]
+  },
+  {
+    "order": 2999,
+    "id": "inverse-problems-identifiability-and-stability-examples",
+    "kind": "B",
+    "category": "inverse-problems",
+    "title": "Inverse maps, identifiability, and stability — Examples and Counterexamples",
+    "companion": "inverse-problems-identifiability-and-stability",
+    "requires": [
+      "inverse-problems-identifiability-and-stability"
+    ],
+    "items": [
+      {
+        "id": "ex-ip-01-scope-and-boundary-cases",
+        "kind": "example",
+        "title": "Kernel ambiguity, an unstable diagonal inverse, and a constrained class",
+        "deps": [
+          "def-ip-forward-map-and-solution-classes",
+          "def-ip-identifiability-and-stability-modulus",
+          "thm-ip-kernel-directions-preclude-unrestricted-recovery",
+          "def-euclidean-inner-product",
+          "def-linear-map",
+          "lem-metrics-on-rn",
+          "def-square-summable-family-on-an-arbitrary-index-set",
+          "def-hilbert-space",
+          "lem-square-summable-sequences-form-a-hilbert-space",
+          "lem-geometric-sequence-null",
+          "lem-power-monotone"
+        ],
+        "dependency_level": 3,
+        "proof_strategy": "direct",
+        "provenance": {
+          "statement": "ai-generated",
+          "proof": "ai-generated"
+        },
+        "generation": {
+          "role": "example"
+        },
+        "sources": {
+          "scraped": [],
+          "references": [
+            {
+              "title": "Christian Clason, Regularization of Inverse Problems, Chapter 3 §§3.1–3.2 and Chapter 4 §4.1",
+              "url": "https://arxiv.org/pdf/2001.00617v2"
+            },
+            {
+              "title": "Tristan van Leeuwen and Christoph Brune, 10 Lectures on Inverse Problems and Imaging, Lecture 1 §§1.2–1.3",
+              "url": "https://tristanvanleeuwen.github.io/IP_and_Im_Lectures/what_is.html"
+            },
+            {
+              "title": "Giannis Daras et al., A Survey on Diffusion Models for Inverse Problems, §1.2 (scope context)",
+              "url": "https://arxiv.org/pdf/2410.00083v1"
+            }
+          ]
+        },
+        "statement": "For $n=1,2$, give $\\mathbb R^n$ the metric $d_1(x,z)=\\sum_{k<n}|x_k-z_k|$, using the coordinatewise real vector-space structure. In the first model take parameter space and admissible truth class $X=U=\\mathbb R^2$, data space $Y=\\mathbb R^1$, and identity recovery target $Q=U$ with $q=\\operatorname{id}_U$ and the restricted $d_1$ metric. Define $A:\\mathbb R^2\\to\\mathbb R^1$ by $A(a,b)=(a)$, take $F:=A$, and define $\\ker A:=\\{x\\in\\mathbb R^2:A(x)=(0)\\}$. Then $\\ker A=\\{(0,t):t\\in\\mathbb R\\}$ is nontrivial. The truths $x_0=(0,0)$ and $x_1=(0,1)$ have the same exact datum $(0)$ and target-class distance $d_1(x_0,x_1)=1$, so every deterministic data-only estimator at that datum has worst-case loss at least $1/2$.\n\nLet $\\mathbb N=\\{0,1,2,\\ldots\\}$ and use the real Hilbert space $\\ell^2(\\mathbb N,\\mathbb R)$. For each $n\\in\\mathbb N$, let $e_n$ be the sequence with value $1$ at $n$ and $0$ elsewhere. Define the diagonal map $D:\\ell^2\\to\\ell^2$ by $(Dx)_n=(1/2)^n x_n$. In the second model take $X=U=Y=Q=\\ell^2(\\mathbb N,\\mathbb R)$ with its canonical norm metric $d_2(x,z)=\\|x-z\\|_2$, forward map $F:=D$, and identity target map $q=\\operatorname{id}_U$. This map is well-defined, linear, and injective, hence identifiable, but it has no uniform stability modulus on all of $\\ell^2$: $\\|e_n\\|_2=1$ and $\\|De_n\\|_2=(1/2)^n\\to0$. For each $n$, the observed datum $y=0$ lies within noise radius $\\delta=(1/2)^n$ of both $D(0)$ and $D(e_n)$, so every deterministic data-only estimator at $y=0$ has worst-case loss at least $1/2$.\n\nFinally, restrict $A$ to $U_0:=\\{(a,0):a\\in\\mathbb R\\}$ and use $U_0$ itself as the target class with its inherited $d_1$ metric. The restricted map is identifiable, and its inverse $\\widehat q((a))=(a,0)$ is an isometry; the function $\\omega(t)=t$ is a uniform stability modulus. This restriction removes the particular kernel ambiguity above."
+      }
+    ]
+  }
+]

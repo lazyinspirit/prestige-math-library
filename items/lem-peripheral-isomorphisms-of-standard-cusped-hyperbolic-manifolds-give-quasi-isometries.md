@@ -13,6 +13,11 @@ axiom_use: Full AC is retained for the finite covers, lifted locally finite fami
 provenance:
   statement: literature-derived
   proof: ai-altered
+verification:
+  judge:
+    model: "gpt-6-luna"
+    verdict: pass
+    date: 2026-10-22
 sources:
   references:
     - title: Gopal Prasad, Strong Rigidity of Q-Rank 1 Lattices

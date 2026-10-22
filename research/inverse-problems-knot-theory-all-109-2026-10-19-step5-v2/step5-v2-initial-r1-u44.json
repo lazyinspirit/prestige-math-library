@@ -1,0 +1,606 @@
+{
+  "run": "inverse-problems-knot-theory-all-109-2026-10-19",
+  "phase": "initial",
+  "round": 1,
+  "unit": "44",
+  "input_sha256": "c872603b0f7c95c42125928ec1ced19e672caec5508e4ce625685b74e981d23d",
+  "decisions": [
+    {
+      "id": "def-ip-pde-solver-admissibility-contract",
+      "model": "gpt-6-luna",
+      "context_sha256": "accec3781e975390b0a56832d9cde55ffc7c5f5a15d28ce52e3f70edb845a909",
+      "outcome": "confirmed_nonfatal",
+      "reason": "The reference-element Definition permits any finite-dimensional continuous shape-function space, with no polynomial hypothesis. Replaced polynomial space by finite-dimensional shape-function space; unisolvence and every solver/certificate assumption remain intact. This is an inaccurate restatement, not a failure of the adjoint or certificate arguments.",
+      "uncertain": false,
+      "source_urls": [],
+      "familiar": true
+    },
+    {
+      "id": "lem-ip-finite-element-reduced-gradient-from-discrete-adjoint",
+      "model": "gpt-6-luna",
+      "context_sha256": "b5f8fed8b1fc31417c59baf79adfcee0ec7e63b8af00e2c5015e61f62f862295",
+      "outcome": "confirmed_nonfatal",
+      "reason": "F1 and F2 cite the specialized finite-element contract for identities assumed directly on the lemma's arbitrary C1 maps and fixed q in O. The state identity and adjoint equation are explicit hypotheses, so the chain-rule/transpose proof is valid. Restated both facts as hypotheses, retaining invertibility for unique adjoint solvability and preserving the full Statement.",
+      "uncertain": false,
+      "source_urls": [],
+      "familiar": true
+    },
+    {
+      "id": "alg-ip-finite-element-pde-tikhonov",
+      "model": "gpt-6-luna",
+      "context_sha256": "90950d44a563562b373e699824f06797e6a8471099f7a1f185a3e33f62de30d0",
+      "outcome": "confirmed_fatal",
+      "defect_type": "logic",
+      "reason": "The tuple's projection objection is unfounded: the supplied contract permits projection failure only when its declared finite call budget is exhausted. Nevertheless this rejected carrier has the fatal Step-4 concern: trial objective evaluation may fail on a nonlinear state solve with budget remaining, while step 7 only handles linear-solve failure or evaluation-budget exhaustion and then uses a nonexistent interval. Replaced linear solve by state or adjoint solve and included the global solve budget, matching step 6 and the actual contract. This repairs a missing operational branch, not a projection defect.",
+      "uncertain": false,
+      "source_urls": [],
+      "familiar": true
+    },
+    {
+      "id": "cex-ip-pde-biased-under-solved-adjoint-gradient",
+      "model": "gpt-6-luna",
+      "context_sha256": "c53258ee1b00a824d58cd80242345ae7e249daab64d61918ef3d584ad7c10888",
+      "outcome": "confirmed_nonfatal",
+      "reason": "F4 reverses the status theorem's necessary-condition interface, although algorithm step 3 (F2) already supplies the rejection used in step 3.1. Rephrased F4 as an only-on implication and made the rejection depend on F2 alone. The witness still gives exact gradient -1, unchecked gradient +1 and adjoint residual 2 exceeding tolerance 1.",
+      "uncertain": false,
+      "source_urls": [],
+      "familiar": true
+    },
+    {
+      "id": "ex-ip-pde-cfl-invalid-iterate",
+      "model": "gpt-6-luna",
+      "context_sha256": "aa0fe5089d159e389732a1bb7070e4d1d9e2cbeb586895ccf761f3c1e6d3f984",
+      "outcome": "confirmed_nonfatal",
+      "reason": "F4 reverses the theorem's only-on condition. Algorithm step 1 (F3) already proves the required sufficient rejection implication, so the example remains valid. Corrected F4 to a necessary-condition restatement and removed it from the sufficient implication in step 3.1; the CFL calculation and Example section are unchanged.",
+      "uncertain": false,
+      "source_urls": [],
+      "familiar": true
+    }
+  ],
+  "reviews": [
+    {
+      "id": "def-ip-pde-solver-admissibility-contract",
+      "disposition": "repaired",
+      "post_sha256": "31d39a9b4b60b4d7e4fa2304cbc981f8f60adba97808fed65c76d5b098675c1a",
+      "review_context_sha256": "d008212e10947497c9089adcfb56683d225939c6571593f89ace987c57b7aefa",
+      "reason": "Checked the complete model contract against mesh, unisolvence, nonlinear objective, Euclidean Riesz and nearest-point interfaces. C1 state branch and invertibility are supplied hypotheses, projection computability is separately assumed, and algebraic error bounds require stability distinct from mesh error. No choice axiom or convergence assertion is introduced. Corrected only the local-space restatement.",
+      "uncertain": false,
+      "source_urls": [],
+      "familiar": true
+    },
+    {
+      "id": "lem-ip-finite-element-reduced-gradient-from-discrete-adjoint",
+      "disposition": "repaired",
+      "post_sha256": "26c378582cea9459ef6254008e72288e3e3a452108c8202206b7fcd3d71a3b81",
+      "review_context_sha256": "89265152ae22f33dcaf7234e8d67abd8e5825c92b173feca90526b5eef623934",
+      "reason": "Differentiating R(q,S(q))=0 gives R_u DS[h]=-R_q h. The chain rule gives D Phi[h]=J_q[h]+J_u[DS[h]], and R_u^T p=grad_u J converts the latter term to -<R_q^T p,h>. Finite-dimensional Riesz identifies the gradient. Corrected only F1/F2 provenance; the statement, sign, open-domain hypotheses and Euclidean convention remain unchanged.",
+      "uncertain": false,
+      "source_urls": [],
+      "familiar": true
+    },
+    {
+      "id": "alg-ip-finite-element-pde-tikhonov",
+      "disposition": "repaired",
+      "post_sha256": "e68fdc918b48683bc6ffd7abdf946294e84cf070807fa987571e82316540c020",
+      "review_context_sha256": "9121ce2a5b1ca56c654b3bd979bffcfde38d42f2948480a3cb7a85dab3683f75",
+      "reason": "Checked all branches against finite-return routine contracts and the gradient/discrepancy inequalities. Step 7 now handles every allowed objective failure, including a nonlinear primal solve and exhausted solve budget. Projection failures already mean budget exhaustion. Finite counters bound outer/trial calls; interval sandwich ensures nonincrease; stationarity precedes discrepancy and neither asserts mesh accuracy or minimization. Status vocabulary and positive scaling assumptions are preserved.",
+      "uncertain": false,
+      "source_urls": [],
+      "familiar": true
+    },
+    {
+      "id": "cex-ip-pde-biased-under-solved-adjoint-gradient",
+      "disposition": "repaired",
+      "post_sha256": "bade9bc8d2b39191d83dec9dbc5fe47e9b0748fb29323d186418d1faab5cec67",
+      "review_context_sha256": "b31109d769e92fd3fad08c5c6c54039347deac00ae0bd23313fe90b4f2ee6af4",
+      "reason": "Recomputed R_u=1, R_q=-1, exact state u=0, adjoint p=-1 and gradient -1 at q=0. Substitution of p_tilde=1 gives +1 and exact adjoint residual 2. Algorithm step 3 rejects that certificate when tau_p=1, before stationarity. Corrected the redundant theorem citation and removed its use as a sufficient rejection rule. The refuted claim is unchanged.",
+      "uncertain": false,
+      "source_urls": [],
+      "familiar": true
+    },
+    {
+      "id": "ex-ip-pde-cfl-invalid-iterate",
+      "disposition": "repaired",
+      "post_sha256": "ce9f89ea66c3bc396c2c2c1dcd1a137fbbe883c27274c2b8ca478145eab0e059",
+      "review_context_sha256": "9d029e4acc47f910988d70ddaea7f30440c0f2248d781eef923d54b99d66b45d",
+      "reason": "Four area-1/4 triangles with center barycentric gradient magnitude 2 give lumped mass 1/3 and stiffness 4. Forward Euler has amplification 1-12 Delta t, bounded in modulus by one exactly on [0,1/6]; Delta t=1/4 violates it. The declared predicate therefore triggers algorithm step 1 before any solve. Checked the TikZ square, four center-corner triangles, vertex labels and unique free node against the independent calculation. Corrected only the redundant F4 attribution and use.",
+      "uncertain": false,
+      "source_urls": [],
+      "familiar": true
+    }
+  ],
+  "created_items": [],
+  "downstream": [
+    "lem-ip-finite-element-reduced-gradient-from-discrete-adjoint",
+    "lem-ip-linear-finite-element-solve-residual-controls-state-error",
+    "prop-ip-discrete-adjoint-gradient-and-residual-status",
+    "alg-ip-finite-element-pde-tikhonov",
+    "thm-ip-finite-element-pde-tikhonov-status-soundness-and-termination",
+    "cex-ip-pde-biased-under-solved-adjoint-gradient",
+    "ex-ip-pde-cfl-invalid-iterate",
+    "ex-ip-finite-element-mesh-error-at-zero-solve-residual",
+    "def-ip-benchmark-risk-and-compute-budget",
+    "ex-ip-inversebench-solver-invalid-iterate",
+    "rem-ip-inversebench-scoped-findings"
+  ],
+  "ledger_updates": [
+    {
+      "ledger": "canonical-defect-ledger",
+      "action": "record-adjudication",
+      "id": "def-ip-pde-solver-admissibility-contract",
+      "outcome": "confirmed_nonfatal",
+      "status": "fixed",
+      "reason": "The reference-element Definition permits any finite-dimensional continuous shape-function space, with no polynomial hypothesis. Replaced polynomial space by finite-dimensional shape-function space; unisolvence and every solver/certificate assumption remain intact. This is an inaccurate restatement, not a failure of the adjoint or certificate arguments.",
+      "repair": "See assigned item and corresponding review; preserve the original tuple and round evidence.",
+      "uncertain": false,
+      "source_urls": [],
+      "familiar": true
+    },
+    {
+      "ledger": "canonical-defect-ledger",
+      "action": "record-adjudication",
+      "id": "lem-ip-finite-element-reduced-gradient-from-discrete-adjoint",
+      "outcome": "confirmed_nonfatal",
+      "status": "fixed",
+      "reason": "F1 and F2 cite the specialized finite-element contract for identities assumed directly on the lemma's arbitrary C1 maps and fixed q in O. The state identity and adjoint equation are explicit hypotheses, so the chain-rule/transpose proof is valid. Restated both facts as hypotheses, retaining invertibility for unique adjoint solvability and preserving the full Statement.",
+      "repair": "See assigned item and corresponding review; preserve the original tuple and round evidence.",
+      "uncertain": false,
+      "source_urls": [],
+      "familiar": true
+    },
+    {
+      "ledger": "canonical-defect-ledger",
+      "action": "record-adjudication",
+      "id": "alg-ip-finite-element-pde-tikhonov",
+      "outcome": "confirmed_fatal",
+      "status": "fixed",
+      "defect_type": "logic",
+      "reason": "The tuple's projection objection is unfounded: the supplied contract permits projection failure only when its declared finite call budget is exhausted. Nevertheless this rejected carrier has the fatal Step-4 concern: trial objective evaluation may fail on a nonlinear state solve with budget remaining, while step 7 only handles linear-solve failure or evaluation-budget exhaustion and then uses a nonexistent interval. Replaced linear solve by state or adjoint solve and included the global solve budget, matching step 6 and the actual contract. This repairs a missing operational branch, not a projection defect.",
+      "repair": "See assigned item and corresponding review; preserve the original tuple and round evidence.",
+      "uncertain": false,
+      "source_urls": [],
+      "familiar": true
+    },
+    {
+      "ledger": "canonical-defect-ledger",
+      "action": "record-adjudication",
+      "id": "cex-ip-pde-biased-under-solved-adjoint-gradient",
+      "outcome": "confirmed_nonfatal",
+      "status": "fixed",
+      "reason": "F4 reverses the status theorem's necessary-condition interface, although algorithm step 3 (F2) already supplies the rejection used in step 3.1. Rephrased F4 as an only-on implication and made the rejection depend on F2 alone. The witness still gives exact gradient -1, unchecked gradient +1 and adjoint residual 2 exceeding tolerance 1.",
+      "repair": "See assigned item and corresponding review; preserve the original tuple and round evidence.",
+      "uncertain": false,
+      "source_urls": [],
+      "familiar": true
+    },
+    {
+      "ledger": "canonical-defect-ledger",
+      "action": "record-adjudication",
+      "id": "ex-ip-pde-cfl-invalid-iterate",
+      "outcome": "confirmed_nonfatal",
+      "status": "fixed",
+      "reason": "F4 reverses the theorem's only-on condition. Algorithm step 1 (F3) already proves the required sufficient rejection implication, so the example remains valid. Corrected F4 to a necessary-condition restatement and removed it from the sufficient implication in step 3.1; the CFL calculation and Example section are unchanged.",
+      "repair": "See assigned item and corresponding review; preserve the original tuple and round evidence.",
+      "uncertain": false,
+      "source_urls": [],
+      "familiar": true
+    },
+    {
+      "ledger": "canonical-published-consumer-ledger",
+      "action": "route-presentation-maintenance",
+      "id": "def-operator-norm",
+      "path": "items/def-operator-norm.md",
+      "location": "Definition",
+      "source_excerpt": "$T:X\\to Y$ be bounded in the sense of [[def-bounded-linear-operator]]. The",
+      "affected_use": "A published prerequisite retains hyperlinks inside its complete defining section; this is the current-byte presentation alert already present in the Step-4 batch digest.",
+      "invalidated_claim": "No mathematical claim is invalidated by this presentation finding.",
+      "minimality": "Move links to the immediately following references section while preserving complete hypotheses, claim and publication status; outside this assignment, so no item edit or Step-5 adjudication is claimed.",
+      "status": "open",
+      "route": "owner/separate-maintenance",
+      "reason": "Confirmed the exact current inline-link occurrence in the published prerequisite. This proposal preserves the original read-only digest and supplies no audit, repair or whole-item mathematical acceptance.",
+      "uncertain": false,
+      "source_urls": [],
+      "familiar": true
+    },
+    {
+      "ledger": "canonical-published-consumer-ledger",
+      "action": "route-presentation-maintenance",
+      "id": "def-linear-elliptic-pde-constrained-control-problem",
+      "path": "items/def-linear-elliptic-pde-constrained-control-problem.md",
+      "location": "Definition",
+      "source_excerpt": "Here $H^1_0=W^{1,2}_0$ is the closure of $C_c^\\infty(\\Omega;\\mathbb R)$ in the $W^{1,2}$ norm of [[def-wkp-zero-as-a-sobolev-closure]]. Under Countable Choice, $H$ and $V$ are real Hilbert spaces; the local proof of completeness of $V$ is included in [[thm-linear-elliptic-control-state-and-adjoint-wellposedness]]. The inclusion $J:V\\to H$ is continuous with $\\|J\\|\\le1$.",
+      "affected_use": "A published prerequisite retains hyperlinks inside its complete defining section; this is the current-byte presentation alert already present in the Step-4 batch digest.",
+      "invalidated_claim": "No mathematical claim is invalidated by this presentation finding.",
+      "minimality": "Move links to the immediately following references section while preserving complete hypotheses, claim and publication status; outside this assignment, so no item edit or Step-5 adjudication is claimed.",
+      "status": "open",
+      "route": "owner/separate-maintenance",
+      "reason": "Confirmed the exact current inline-link occurrence in the published prerequisite. This proposal preserves the original read-only digest and supplies no audit, repair or whole-item mathematical acceptance.",
+      "uncertain": false,
+      "source_urls": [],
+      "familiar": true
+    },
+    {
+      "ledger": "canonical-published-consumer-ledger",
+      "action": "route-presentation-maintenance",
+      "id": "thm-linear-elliptic-control-state-and-adjoint-wellposedness",
+      "path": "items/thm-linear-elliptic-control-state-and-adjoint-wellposedness.md",
+      "location": "Statement",
+      "source_excerpt": "Assume Countable Choice and the setting of [[def-linear-elliptic-pde-constrained-control-problem]]. For every $q\\in U$, there is a unique state $u(q)\\in V$ satisfying",
+      "affected_use": "A published prerequisite retains hyperlinks inside its complete defining section; this is the current-byte presentation alert already present in the Step-4 batch digest.",
+      "invalidated_claim": "No mathematical claim is invalidated by this presentation finding.",
+      "minimality": "Move links to the immediately following references section while preserving complete hypotheses, claim and publication status; outside this assignment, so no item edit or Step-5 adjudication is claimed.",
+      "status": "open",
+      "route": "owner/separate-maintenance",
+      "reason": "Confirmed the exact current inline-link occurrence in the published prerequisite. This proposal preserves the original read-only digest and supplies no audit, repair or whole-item mathematical acceptance.",
+      "uncertain": false,
+      "source_urls": [],
+      "familiar": true
+    },
+    {
+      "ledger": "canonical-published-consumer-ledger",
+      "action": "route-presentation-maintenance",
+      "id": "thm-elliptic-adjoint-reduced-gradient",
+      "path": "items/thm-elliptic-adjoint-reduced-gradient.md",
+      "location": "Statement",
+      "source_excerpt": "Assume Countable Choice and the elliptic state setting of [[def-parameterized-elliptic-variational-problem]] and [[lem-elliptic-state-map-c1-under-uniform-coercivity]]. Let $J:V\\times\\Theta\\to\\mathbb R$ be $C^1$. For a parameter $\\theta$, let $p_\\theta\\in V$ solve the adjoint variational problem",
+      "affected_use": "A published prerequisite retains hyperlinks inside its complete defining section; this is the current-byte presentation alert already present in the Step-4 batch digest.",
+      "invalidated_claim": "No mathematical claim is invalidated by this presentation finding.",
+      "minimality": "Move links to the immediately following references section while preserving complete hypotheses, claim and publication status; outside this assignment, so no item edit or Step-5 adjudication is claimed.",
+      "status": "open",
+      "route": "owner/separate-maintenance",
+      "reason": "Confirmed the exact current inline-link occurrence in the published prerequisite. This proposal preserves the original read-only digest and supplies no audit, repair or whole-item mathematical acceptance.",
+      "uncertain": false,
+      "source_urls": [],
+      "familiar": true
+    },
+    {
+      "ledger": "canonical-published-consumer-ledger",
+      "action": "route-presentation-maintenance",
+      "id": "lem-fem-control-gradient-residual-bound",
+      "path": "items/lem-fem-control-gradient-residual-bound.md",
+      "location": "Statement",
+      "source_excerpt": "Assume the continuous problem of [[def-linear-elliptic-pde-constrained-control-problem]], Countable Choice, and a finite-dimensional conforming subspace $V_h\\subset V$. Let $u=u(q)$ and $p=p(q)$ be the exact state and adjoint. Let $\\tilde u,\\tilde p\\in V_h$ be computed state and adjoint, where $\\tilde p$ uses $\\tilde u$ in its right-hand side. Suppose the primal and transposed discrete variational problems meet the form-linearity, load-linearity, boundedness and coercivity hypotheses of [[thm-first-strang-lemma-for-conforming-perturbed-galerkin]]. Let $\\varepsilon_u$ be the first-Strang right-hand side for the primal problem, and let $\\varepsilon_p$ be that right-hand side for the adjoint problem when its load defect includes the additional term $\\|J\\|^2\\varepsilon_u$. Then",
+      "affected_use": "A published prerequisite retains hyperlinks inside its complete defining section; this is the current-byte presentation alert already present in the Step-4 batch digest.",
+      "invalidated_claim": "No mathematical claim is invalidated by this presentation finding.",
+      "minimality": "Move links to the immediately following references section while preserving complete hypotheses, claim and publication status; outside this assignment, so no item edit or Step-5 adjudication is claimed.",
+      "status": "open",
+      "route": "owner/separate-maintenance",
+      "reason": "Confirmed the exact current inline-link occurrence in the published prerequisite. This proposal preserves the original read-only digest and supplies no audit, repair or whole-item mathematical acceptance.",
+      "uncertain": false,
+      "source_urls": [],
+      "familiar": true
+    }
+  ],
+  "gate_resolutions": [],
+  "repair_notes": [
+    {
+      "id": "def-ip-pde-solver-admissibility-contract",
+      "status": "complete",
+      "claim": "Unisolvent DOF bijection on a finite-dimensional shape-function space; all PDE and certificate hypotheses unchanged.",
+      "evidence": [
+        "items/def-reference-finite-element-and-unisolvent-dofs.md, Definition",
+        "items/def-ip-pde-solver-admissibility-contract.md, Definition"
+      ],
+      "validation": "review-contexts exit 0; hashes copied immediately",
+      "next_action": "Shared manifest mirror and owning-batch supplier citation quotes refreshed under lock; consumer dispositions below."
+    },
+    {
+      "id": "lem-ip-finite-element-reduced-gradient-from-discrete-adjoint",
+      "claim": "Exact reduced derivative for arbitrary C1 finite-dimensional maps with invertible state Jacobian at the fixed point.",
+      "evidence": [
+        "items/thm-chain-rule-for-total-derivatives.md, Statement and proof",
+        "items/thm-riesz-representation-in-finite-dimensions.md, Statement and proof",
+        "items/lem-ip-finite-element-reduced-gradient-from-discrete-adjoint.md, Facts F1/F2 and steps 1.1–3.1"
+      ],
+      "validation": "review-contexts exit 0; unchanged Statement directly compared",
+      "next_action": "Contract regenerated under lock; no Statement change and no propagation.",
+      "status": "complete"
+    },
+    {
+      "id": "alg-ip-finite-element-pde-tikhonov",
+      "claim": "Finite-budget procedure with complete state/adjoint solve-failure branches; exact projected stationarity and discrepancy semantics unchanged.",
+      "evidence": [
+        "research/inverse-problems-knot-theory-all-109-2026-10-19-batch-44-step5-context.json, concerns[0]",
+        "items/def-ip-pde-solver-admissibility-contract.md, projection and objective-evaluation clauses",
+        "items/alg-ip-finite-element-pde-tikhonov.md, Definition steps 6–7",
+        "items/prop-ip-discrete-adjoint-gradient-and-residual-status.md, proof steps 1.1–3.1"
+      ],
+      "validation": "review-contexts exit 0; Definition directly compared; direct consumers to be reported",
+      "next_action": "Shared manifest mirror and owning-batch supplier citation quotes refreshed under lock; direct consumers remain sound as recorded below.",
+      "status": "complete"
+    },
+    {
+      "id": "cex-ip-pde-biased-under-solved-adjoint-gradient",
+      "claim": "An exact state alone does not preserve the reduced-gradient sign when the adjoint is unchecked.",
+      "evidence": [
+        "items/cex-ip-pde-biased-under-solved-adjoint-gradient.md, steps 1.1–3.1",
+        "items/alg-ip-finite-element-pde-tikhonov.md, Definition step 3",
+        "items/thm-ip-finite-element-pde-tikhonov-status-soundness-and-termination.md, Statement only-on clause"
+      ],
+      "validation": "review-contexts exit 0; Statement refuted unchanged; no diagram",
+      "next_action": "Contract regenerated under lock; no Statement refuted change and no propagation.",
+      "status": "complete"
+    },
+    {
+      "id": "ex-ip-pde-cfl-invalid-iterate",
+      "claim": "The specified solver rejects its CFL-violating initial coefficient before solving.",
+      "evidence": [
+        "items/ex-ip-pde-cfl-invalid-iterate.md, Example/TikZ and Verification steps 1.1–3.1",
+        "items/alg-ip-finite-element-pde-tikhonov.md, Definition step 1",
+        "items/thm-ip-finite-element-pde-tikhonov-status-soundness-and-termination.md, Statement only-on clause"
+      ],
+      "validation": "review-contexts exit 0; Example unchanged, including diagram; proof independent of diagram",
+      "next_action": "Final report and controller-owned subsequent certification/rejudgment.",
+      "status": "complete"
+    },
+    {
+      "page_interface": "library/inverse-problems/numerical-pde-inversion-and-adjoint-error-control.md; library/inverse-problems/numerical-pde-inversion-and-adjoint-error-control-examples.md",
+      "evidence": "Both owning pages remain YAML-only, with unchanged inventories, status and page_layout: compact-v1. The A page directly lists both changed definitions. Shared manifest Statement mirrors were synchronized to their exact Definition sections; no page edit was needed.",
+      "consumer_inventory": "Current direct deps/reference search in items/ and library/ found 11 unique item consumers and the owning A page. Both suppliers have no aliases. Every item consumer belongs to the frozen frontier; no outside consumer is opened and no unchanged consumer Statement is traversed further."
+    },
+    {
+      "metadata": "Acquired/reread/edited/checked/released tools/step5-shared-write-lock.mjs for the owning batch manifest and proof contract. Preserved UTF-8 serialization in a second locked metadata-only normalization. No shared ledger, judge stamp, round state or certificate was written.",
+      "sources": "The arguments and diagrams are familiar finite-dimensional differentiation, matrix algebra, projection and elementary finite-element calculations. Read the cited local prerequisite interfaces and relevant proofs; no external source was opened and no external source-reading claim is made.",
+      "handoff": "All five assigned mathematical defects are repaired; no mathematical uncertainty, new prerequisite, outside-frontier consumer or additional interface hop remains within this assignment. Independent rejudgment and central certification remain controller work; this report does not claim independent review of these repairs."
+    }
+  ],
+  "downstream_reviews": [
+    {
+      "supplier": "def-ip-pde-solver-admissibility-contract",
+      "id": "lem-ip-finite-element-reduced-gradient-from-discrete-adjoint",
+      "path": "items/lem-ip-finite-element-reduced-gradient-from-discrete-adjoint.md",
+      "location": "Statement references and Remarks",
+      "source_excerpt": "The transpose convention is the Euclidean coefficient-space convention fixed in the definition.",
+      "affected_use": "The general C1 argument uses only the state identity, invertibility and Euclidean transpose, none of which changes. F1/F2 citation scope repaired in its assigned review.",
+      "disposition": "repaired_in_assigned_review",
+      "invalidated_claim": "None: the corrected shape-space clause supplies the same unisolvent coordinate identification; no consumer uses a polynomial-only consequence.",
+      "minimality": "No consumer Statement or Definition repair is needed for this supplier event; propagation stops at this direct use.",
+      "route": "assigned-review",
+      "uncertain": false,
+      "source_urls": [],
+      "familiar": true
+    },
+    {
+      "supplier": "def-ip-pde-solver-admissibility-contract",
+      "id": "lem-ip-linear-finite-element-solve-residual-controls-state-error",
+      "path": "items/lem-ip-linear-finite-element-solve-residual-controls-state-error.md",
+      "location": "Facts F1 and proof steps 1.1–2.1",
+      "source_excerpt": "The state and adjoint residual upper bounds are the certified norms of the finite-dimensional equations defined by the model contract",
+      "affected_use": "Only exact-system residual meanings are used. Multiplication by the separately bounded inverse matrices is independent of polynomial shape spaces.",
+      "disposition": "unchanged_sound",
+      "invalidated_claim": "None: the corrected shape-space clause supplies the same unisolvent coordinate identification; no consumer uses a polynomial-only consequence.",
+      "minimality": "No consumer Statement or Definition repair is needed for this supplier event; propagation stops at this direct use.",
+      "route": "frontier-owner",
+      "uncertain": false,
+      "source_urls": [],
+      "familiar": true
+    },
+    {
+      "supplier": "def-ip-pde-solver-admissibility-contract",
+      "id": "prop-ip-discrete-adjoint-gradient-and-residual-status",
+      "path": "items/prop-ip-discrete-adjoint-gradient-and-residual-status.md",
+      "location": "Facts A1 and proof step 1.1",
+      "source_excerpt": "The model contract supplies $\\|u-\\widetilde u\\|\\le\\eta_u$, $\\|p-\\widetilde p\\|\\le\\eta_p$, $\\|p\\|\\le P$",
+      "affected_use": "The three-term gradient error decomposition, observation bound and projection estimate depend on unchanged certificate clauses, not polynomial reproduction.",
+      "disposition": "unchanged_sound",
+      "invalidated_claim": "None: the corrected shape-space clause supplies the same unisolvent coordinate identification; no consumer uses a polynomial-only consequence.",
+      "minimality": "No consumer Statement or Definition repair is needed for this supplier event; propagation stops at this direct use.",
+      "route": "frontier-owner",
+      "uncertain": false,
+      "source_urls": [],
+      "familiar": true
+    },
+    {
+      "supplier": "def-ip-pde-solver-admissibility-contract",
+      "id": "alg-ip-finite-element-pde-tikhonov",
+      "path": "items/alg-ip-finite-element-pde-tikhonov.md",
+      "location": "Definition opening and step 3",
+      "source_excerpt": "Assume a finite-element PDE model satisfying the admissibility and certificate contract",
+      "affected_use": "The procedure calls the same supplied finite-return coefficient-space routines. No polynomial property enters any instruction; the separate nonlinear failure-branch repair is complete.",
+      "disposition": "repaired_in_assigned_review",
+      "invalidated_claim": "None: the corrected shape-space clause supplies the same unisolvent coordinate identification; no consumer uses a polynomial-only consequence.",
+      "minimality": "No consumer Statement or Definition repair is needed for this supplier event; propagation stops at this direct use.",
+      "route": "assigned-review",
+      "uncertain": false,
+      "source_urls": [],
+      "familiar": true
+    },
+    {
+      "supplier": "def-ip-pde-solver-admissibility-contract",
+      "id": "thm-ip-finite-element-pde-tikhonov-status-soundness-and-termination",
+      "path": "items/thm-ip-finite-element-pde-tikhonov-status-soundness-and-termination.md",
+      "location": "Facts A1/F3 and proof steps 1.1–1.4",
+      "source_excerpt": "objective evaluation fails only on a required state/adjoint solve-contract failure or its call-budget exhaustion",
+      "affected_use": "Finite returns, failure causes and objective inclusion are unchanged. The coefficient-space proof needs no polynomial approximation property.",
+      "disposition": "unchanged_sound",
+      "invalidated_claim": "None: the corrected shape-space clause supplies the same unisolvent coordinate identification; no consumer uses a polynomial-only consequence.",
+      "minimality": "No consumer Statement or Definition repair is needed for this supplier event; propagation stops at this direct use.",
+      "route": "frontier-owner",
+      "uncertain": false,
+      "source_urls": [],
+      "familiar": true
+    },
+    {
+      "supplier": "def-ip-pde-solver-admissibility-contract",
+      "id": "cex-ip-pde-biased-under-solved-adjoint-gradient",
+      "path": "items/cex-ip-pde-biased-under-solved-adjoint-gradient.md",
+      "location": "Facts F1 and proof steps 1.1–2.2",
+      "source_excerpt": "$p$ solves $(D_uR)^Tp=\\nabla_uJ(q,u)$",
+      "affected_use": "The scalar witness uses only the unchanged adjoint and gradient convention, also supplied by the general reduced-gradient lemma.",
+      "disposition": "repaired_in_assigned_review",
+      "invalidated_claim": "None: the corrected shape-space clause supplies the same unisolvent coordinate identification; no consumer uses a polynomial-only consequence.",
+      "minimality": "No consumer Statement or Definition repair is needed for this supplier event; propagation stops at this direct use.",
+      "route": "assigned-review",
+      "uncertain": false,
+      "source_urls": [],
+      "familiar": true
+    },
+    {
+      "supplier": "def-ip-pde-solver-admissibility-contract",
+      "id": "ex-ip-pde-cfl-invalid-iterate",
+      "path": "items/ex-ip-pde-cfl-invalid-iterate.md",
+      "location": "Facts F3 and Verification step 3.1",
+      "source_excerpt": "The algorithm tests the declared admissibility predicate before any PDE solve",
+      "affected_use": "The example explicitly chooses piecewise-affine elements, which remain a valid special case. Its model-specific CFL predicate and rejection branch are unchanged.",
+      "disposition": "repaired_in_assigned_review",
+      "invalidated_claim": "None: the corrected shape-space clause supplies the same unisolvent coordinate identification; no consumer uses a polynomial-only consequence.",
+      "minimality": "No consumer Statement or Definition repair is needed for this supplier event; propagation stops at this direct use.",
+      "route": "assigned-review",
+      "uncertain": false,
+      "source_urls": [],
+      "familiar": true
+    },
+    {
+      "supplier": "def-ip-pde-solver-admissibility-contract",
+      "id": "ex-ip-finite-element-mesh-error-at-zero-solve-residual",
+      "path": "items/ex-ip-finite-element-mesh-error-at-zero-solve-residual.md",
+      "location": "Facts F5 and Verification step 4.1",
+      "source_excerpt": "The algorithm's `converged` status tests the exact discrete projected-gradient residual, not the continuous-to-discrete mesh error",
+      "affected_use": "The explicit piecewise-affine mesh remains admissible; separate algebraic and mesh certificate channels are unchanged. The consumer still returns at step 4 with an evaluation call remaining.",
+      "disposition": "unchanged_sound",
+      "invalidated_claim": "None: the corrected shape-space clause supplies the same unisolvent coordinate identification; no consumer uses a polynomial-only consequence.",
+      "minimality": "No consumer Statement or Definition repair is needed for this supplier event; propagation stops at this direct use.",
+      "route": "frontier-owner",
+      "uncertain": false,
+      "source_urls": [],
+      "familiar": true
+    },
+    {
+      "supplier": "def-ip-pde-solver-admissibility-contract",
+      "id": "def-ip-benchmark-risk-and-compute-budget",
+      "path": "items/def-ip-benchmark-risk-and-compute-budget.md",
+      "location": "Definition solver paragraph and Definition references",
+      "source_excerpt": "including its discretization, tolerances, finite call budget, and any model-specific admissibility test",
+      "affected_use": "This general benchmark only records declared solver inputs and failures; no finite-element polynomial restriction is assumed.",
+      "disposition": "unchanged_sound",
+      "invalidated_claim": "None: the corrected shape-space clause supplies the same unisolvent coordinate identification; no consumer uses a polynomial-only consequence.",
+      "minimality": "No consumer Statement or Definition repair is needed for this supplier event; propagation stops at this direct use.",
+      "route": "frontier-owner",
+      "uncertain": false,
+      "source_urls": [],
+      "familiar": true
+    },
+    {
+      "supplier": "def-ip-pde-solver-admissibility-contract",
+      "id": "ex-ip-inversebench-solver-invalid-iterate",
+      "path": "items/ex-ip-inversebench-solver-invalid-iterate.md",
+      "location": "Facts F2 and Verification steps 1.1–1.2",
+      "source_excerpt": "an admissibility predicate tests the specified model's hypotheses, and any CFL condition is method-specific",
+      "affected_use": "Only the unchanged finite-time predicate and model-specific CFL scope are used; the example infers no universal threshold.",
+      "disposition": "unchanged_sound",
+      "invalidated_claim": "None: the corrected shape-space clause supplies the same unisolvent coordinate identification; no consumer uses a polynomial-only consequence.",
+      "minimality": "No consumer Statement or Definition repair is needed for this supplier event; propagation stops at this direct use.",
+      "route": "frontier-owner",
+      "uncertain": false,
+      "source_urls": [],
+      "familiar": true
+    },
+    {
+      "supplier": "def-ip-pde-solver-admissibility-contract",
+      "id": "rem-ip-inversebench-scoped-findings",
+      "path": "items/rem-ip-inversebench-scoped-findings.md",
+      "location": "Remark references",
+      "source_excerpt": "Solver admissibility and CFL thresholds are model-specific",
+      "affected_use": "This contextual reference retains its precise scope; changing the local finite-element space description does not change the empirical qualification.",
+      "disposition": "unchanged_sound",
+      "invalidated_claim": "None: the corrected shape-space clause supplies the same unisolvent coordinate identification; no consumer uses a polynomial-only consequence.",
+      "minimality": "No consumer Statement or Definition repair is needed for this supplier event; propagation stops at this direct use.",
+      "route": "frontier-owner",
+      "uncertain": false,
+      "source_urls": [],
+      "familiar": true
+    },
+    {
+      "supplier": "alg-ip-finite-element-pde-tikhonov",
+      "id": "thm-ip-finite-element-pde-tikhonov-status-soundness-and-termination",
+      "path": "items/thm-ip-finite-element-pde-tikhonov-status-soundness-and-termination.md",
+      "location": "Statement and proof steps 1.1–1.4",
+      "source_excerpt": "each loop either returns one of its named statuses, takes a bounded next step, or exhausts a finite budget",
+      "affected_use": "The formerly missing nonlinear-solve branch is now a finite named return covered by A1. Its linear-solve-failed only-on claim permits required solver failure, including nonlinear state failure. Acceptance, counter bounds and status inequalities are unchanged.",
+      "disposition": "unchanged_sound",
+      "invalidated_claim": "The original universal termination proof lacked an allowed trial failure case; the supplier repair restores that case without changing the consumer claim.",
+      "minimality": "No consumer Statement or Definition change is necessary; no further hop is opened.",
+      "route": "frontier-owner",
+      "uncertain": false,
+      "source_urls": [],
+      "familiar": true
+    },
+    {
+      "supplier": "alg-ip-finite-element-pde-tikhonov",
+      "id": "cex-ip-pde-biased-under-solved-adjoint-gradient",
+      "path": "items/cex-ip-pde-biased-under-solved-adjoint-gradient.md",
+      "location": "Facts F2 and Counterexample step 3.1",
+      "source_excerpt": "the algorithm rejects this vector as a solver result with status `linear-solve-failed`",
+      "affected_use": "The witness fails adjoint residual validation in step 3, before step 7. Trial objective failure handling does not affect this sufficient rejection.",
+      "disposition": "repaired_in_assigned_review",
+      "invalidated_claim": "None: the actual use precedes the changed trial-evaluation branch.",
+      "minimality": "No consumer Statement or Definition change is necessary; no further hop is opened.",
+      "route": "assigned-review",
+      "uncertain": false,
+      "source_urls": [],
+      "familiar": true
+    },
+    {
+      "supplier": "alg-ip-finite-element-pde-tikhonov",
+      "id": "ex-ip-pde-cfl-invalid-iterate",
+      "path": "items/ex-ip-pde-cfl-invalid-iterate.md",
+      "location": "Facts F3 and Verification step 3.1",
+      "source_excerpt": "the algorithm returns `inadmissible` before calling either state or adjoint solver",
+      "affected_use": "The failed CFL predicate returns at initialization in step 1. Trial objective evaluation is never reached, so the repaired step 7 cannot change the example.",
+      "disposition": "repaired_in_assigned_review",
+      "invalidated_claim": "None: the actual use precedes the changed trial-evaluation branch.",
+      "minimality": "No consumer Statement or Definition change is necessary; no further hop is opened.",
+      "route": "assigned-review",
+      "uncertain": false,
+      "source_urls": [],
+      "familiar": true
+    },
+    {
+      "supplier": "alg-ip-finite-element-pde-tikhonov",
+      "id": "ex-ip-finite-element-mesh-error-at-zero-solve-residual",
+      "path": "items/ex-ip-finite-element-mesh-error-at-zero-solve-residual.md",
+      "location": "Facts F5 and Verification step 4.1",
+      "source_excerpt": "hence the algorithm returns `converged` before its discrepancy check",
+      "affected_use": "With exact scalar solves and two evaluation calls the consumer returns at step 4. The trial objective failure branch is never reached; zero discrete stationarity and separate mesh error remain sound.",
+      "disposition": "unchanged_sound",
+      "invalidated_claim": "None: the actual use precedes the changed trial-evaluation branch.",
+      "minimality": "No consumer Statement or Definition change is necessary; no further hop is opened.",
+      "route": "frontier-owner",
+      "uncertain": false,
+      "source_urls": [],
+      "familiar": true
+    }
+  ],
+  "checks": [
+    {
+      "command": "node tools/tsx-run.mjs tools/precheck.mts items/def-ip-pde-solver-admissibility-contract.md items/lem-ip-finite-element-reduced-gradient-from-discrete-adjoint.md items/alg-ip-finite-element-pde-tikhonov.md items/cex-ip-pde-biased-under-solved-adjoint-gradient.md items/ex-ip-pde-cfl-invalid-iterate.md --json",
+      "exit_code": 0,
+      "result": "5 files; 3 proof-bearing items passed; definition and algorithm not applicable; 0 failures."
+    },
+    {
+      "command": "node tools/rendercheck.mjs items/def-ip-pde-solver-admissibility-contract.md items/lem-ip-finite-element-reduced-gradient-from-discrete-adjoint.md items/alg-ip-finite-element-pde-tikhonov.md items/cex-ip-pde-biased-under-solved-adjoint-gradient.md items/ex-ip-pde-cfl-invalid-iterate.md library/inverse-problems/numerical-pde-inversion-and-adjoint-error-control.md library/inverse-problems/numerical-pde-inversion-and-adjoint-error-control-examples.md --json",
+      "exit_code": 0,
+      "result": "7 files checked; 0 errors; 0 warnings."
+    },
+    {
+      "command": "node tools/proof-contract.mjs research/inverse-problems-knot-theory-all-109-2026-10-19-batch-44.proof-contracts.json --strict --items def-ip-pde-solver-admissibility-contract,lem-ip-finite-element-reduced-gradient-from-discrete-adjoint,alg-ip-finite-element-pde-tikhonov,cex-ip-pde-biased-under-solved-adjoint-gradient,ex-ip-pde-cfl-invalid-iterate --json",
+      "exit_code": 0,
+      "result": "All 5 assigned contracts checked; ok true; 0 errors; 0 warnings. Three proof entries regenerated; other owning-batch citation quotes refreshed only where they cite the two changed supplier Definitions."
+    },
+    {
+      "command": "node tools/proof-layout.mjs items/def-ip-pde-solver-admissibility-contract.md items/lem-ip-finite-element-reduced-gradient-from-discrete-adjoint.md items/alg-ip-finite-element-pde-tikhonov.md items/cex-ip-pde-biased-under-solved-adjoint-gradient.md items/ex-ip-pde-cfl-invalid-iterate.md",
+      "exit_code": 0,
+      "result": "5 items, 11 numbered proof steps, 0 defects; run once after the final item edit."
+    },
+    {
+      "command": "node tools/step5-workflow.mjs review-contexts --run inverse-problems-knot-theory-all-109-2026-10-19 --items ID (separately after each review)",
+      "exit_code": 0,
+      "result": "All five post_sha256 and review_context_sha256 values copied at the reviewed state before editing the next supplier; none refreshed after later supplier edits."
+    },
+    {
+      "command": "Read-only Node verification of input digest, current itemHashGuard values, direct defining-section comparison and manifest mirrors",
+      "exit_code": 0,
+      "result": "Exact task input digest matches; all 5 report guards current; only the solver contract and algorithm Definition sections changed; other claim sections unchanged; both manifest mirrors exact."
+    }
+  ]
+}

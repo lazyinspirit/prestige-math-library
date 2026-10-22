@@ -25,7 +25,7 @@ provenance:
 axiom_use: No choice principle is used. The inverse is unique, and the upper bound uses fixed finite coordinate windows before taking numerical limits.
 sources:
   references:
-    - title: "Yuri I. Ingster and Irina A. Suslina, Minimax nonparametric hypothesis testing for ellipsoids and Besov bodies, ESAIM Probability and Statistics 4 (2000), pp. 87–100"
+    - title: "Yuri I. Ingster and Irina A. Suslina, Minimax nonparametric hypothesis testing for ellipsoids and Besov bodies, ESAIM Probability and Statistics 4 (2000), pp. 53–135, especially pp. 87–100"
       url: https://www.numdam.org/article/PS_2000__4__53_0.pdf
 ---
 
@@ -47,7 +47,7 @@ $$c_0=\int_0^\infty d(x)^2(\cosh(z(x)^2)-1)\,dx,\quad c_1=\int_0^\infty d(x)z(x)
 $$M_1=\int_0^\infty x^{4\beta}d(x)z(x)^4\,dx,\qquad M_2=\int_0^\infty x^{2qs}d(x)z(x)^{2q}\,dx,$$
 and $c_0=(c_1-c_2)/2$.
 
-For positive real $n,h_0$, set $z_i=z(i/n)$ and $h_i=h_0d(i/n)$. Then $\sum_i h_i<\infty$, and for every finite real vector $(v_i)_{i\le m}$,
+All coordinate indices below are positive integers; $h_0$ is a scale parameter, not a coordinate. For positive real $n,h_0$, set $z_i=z(i/n)$ and $h_i=h_0d(i/n)$ for $i\ge1$. Then $\sum_i h_i<\infty$, and for every finite real vector $(v_i)_{1\le i\le m}$,
 $$\sum_{i\le m}h_i(\cosh(z_iv_i)-1)\ge\frac{h_0}2\left(n^{-2\beta}\sum_{i\le m}i^{2\beta}v_i^2-n^{-qs}\sum_{i\le m}i^{qs}|v_i|^q\right).$$
 As $n\to\infty$, the Riemann sums of the five displayed integral integrands, divided by $n$, converge to their respective integrals. In particular,
 $$\sum_i h_i^2(\cosh(z_i^2)-1)\sim c_0h_0^2n,\quad \sum_i i^{2\beta}h_iz_i^2\sim c_1h_0n^{2\beta+1},\quad \sum_i i^{qs}h_iz_i^q\sim c_2h_0n^{qs+1},$$

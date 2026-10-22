@@ -25,7 +25,7 @@ sources:
   references:
     - title: "Brendan Owens, Knots and 4-Manifolds, Winter Braids IX lecture notes"
       url: "https://www.maths.gla.ac.uk/~bowens/papers/WB.pdf"
-      locator: "Lecture 1, PDF p.2: the interior preimage interval is pushed deeper than the proper interval"
+      locator: "Lecture 1, PDF p.3: the interior preimage interval is pushed deeper than the proper interval"
     - title: "Arunima Ray, Slice Knots and Knot Concordance, Winter Braids Lecture Notes 8"
       url: "https://aru-ray.github.io/documents/slicenotes.pdf"
       locator: "§1.1, Proposition 1.5 and Figure 6, printed pp.4–5"
@@ -44,7 +44,7 @@ Let $f:D^2\to S^3$ be a smooth immersion of an oriented disk whose boundary is a
 
 [[def-locally-flat-proper-surface-and-concordance-collars|Properness and smooth boundary collars]]
 
-[Owens, *Knots and 4-Manifolds*, Lecture 1, PDF p.2](https://www.maths.gla.ac.uk/~bowens/papers/WB.pdf)
+[Owens, *Knots and 4-Manifolds*, Lecture 1, PDF p.3](https://www.maths.gla.ac.uk/~bowens/papers/WB.pdf)
 
 [Ray, *Slice Knots and Knot Concordance*, §1.1](https://aru-ray.github.io/documents/slicenotes.pdf)
 

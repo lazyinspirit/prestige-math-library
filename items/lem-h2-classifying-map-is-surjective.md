@@ -26,7 +26,10 @@ sources:
   references:
     - title: "John McCleary, Nontrivial fundamental groups, §8bis.2"
       url: "https://pages.vassar.edu/mccleary/files/2011/04/MC08bis.fin_.pdf"
-      locator: "Theorem 8bis.14 and its spectral-sequence derivation, PDF pp. 13–14"
+      locator: "Theorem 8bis.10 and the following Hopf exact sequence, printed pp. 338–339 (PDF pp. 10–11)"
+    - title: "Kenneth S. Brown, Lectures on the Cohomology of Groups"
+      url: "https://pi.math.cornell.edu/~kbrown/papers/cohomology_hangzhou.pdf"
+      locator: "Section 1, printed pp. 4–5 and 7: universal-cover cellular resolution (1.3), resolution comparison, Definition 1.4 and the following topological identification"
 ---
 
 ## Statement
@@ -44,7 +47,7 @@ is surjective.
 ## Facts & Assumptions
 
 **Given:** Full AC, a path-connected CW complex $X$, a basepoint $x_0$, and
-$G=\pi_1(X,x_0)$.
+$G=\pi_1(X,x_0)$, and an arbitrary prescribed based classifying map $c:X\to BG$ inducing the identity on $\pi_1$.
 
 [A1] Full AC, written AC, is [[def-axiom-of-choice]].
 
@@ -63,15 +66,19 @@ for the homology of a fibration. [[thm-homological-serre-spectral-sequence]],
 [F4] A simply connected path-connected space has zero first homology by the
 degree-one Hurewicz theorem. [[prop-the-first-hurewicz-map-in-degree-one-is-abelianization]]
 
-[F5] Under AC there is a connected CW model $K(G,1)$, and under DC its homology with trivial coefficients is the bar-model group homology. [[thm-existence-and-homotopy-uniqueness-of-eilenberg-maclane-spaces]], [[lem-diagonal-bar-coinvariants-compute-group-homology]], [[def-dependent-choice]]
+[F5] Under AC there is a connected CW model $K(G,1)$. Under DC with supplied projective-resolution data, derived group homology is naturally identified with algebraic bar homology. [[thm-existence-and-homotopy-uniqueness-of-eilenberg-maclane-spaces]], [[lem-diagonal-bar-coinvariants-compute-group-homology]], [[def-dependent-choice]]
+
+[F6] External input: for a connected CW $K(G,1)$, its universal cover $T$ is a contractible free $G$-CW complex. Its augmented cellular chains $C_*^{\mathrm{cell}}(T)\to\mathbb Z$ form a free left $\mathbb ZG$-resolution, and their coinvariants are the cellular chains of the base. Brown, §1, printed pp. 4–5 and 7, gives this construction and the resulting identification of derived group homology with the singular homology of the base. Only that comparison is imported here. [Brown, §1](https://pi.math.cornell.edu/~kbrown/papers/cohomology_hangzhou.pdf)
 
 ## Proof
 
 **Given:** The data above and [A1].
 
-1.1 By [F1, F5], choose a connected CW classifying-space model $BG$. Define a based map on the one-skeleton of $X$ sending its loops to loops in $BG$ that represent the same elements of $G$. Each two-cell attaching loop then maps to the identity in $\pi_1(BG)$, so its map extends over the disk. For every cell of dimension at least three, its attaching sphere extends because the corresponding higher homotopy group of $BG$ vanishes. AC supplies the simultaneous cellwise extensions. The resulting based map $c:X\to BG$ induces the identity on $\pi_1$. [A1, F1, given, construct]
+1.1 Fix the arbitrary map $c$ in the statement, rather than selecting a special classifying map. By [F1], its target is a connected CW $K(G,1)$, so $\pi_2(BG)=0$ and $\pi_1(c)$ is an isomorphism. For the derived-homology comparison in [F5], supply resolutions explicitly: over $\mathbb ZG$, take the free module on the underlying set of a module $M$, map its basis element $[m]$ to $m$, and repeat the same free-module construction on each successive kernel. The augmentations are onto and each image is the preceding kernel, so this is an exact free, hence projective, resolution for every $M$. This specified construction supplies the resolution convention; [A1] and [L1] supply DC. [A1, L1, F1, F5, given, construct]
 
-2.1 Replace $c$ by its mapping-path Serre fibration $p:E\to BG$. The total space $E$ is homotopy equivalent to $X$. The homotopy long exact sequence [F2] shows that the fiber $F$ is path-connected and has $\pi_1(F)=\ker(\pi_1(c))=1$. Hence $H_1(F;\mathbb Z)=0$ by [F4]. [F1, F2, step 1.1, algebra]
+2.1 Apply the external comparison [F6] to this CW model $BG$. With $T$ its universal cover, put $P_*=C_*^{\mathrm{cell}}(T)$. Choosing an oriented lift of each cell, permitted by AC, exhibits $P_*$ as free over $\mathbb ZG$. Contractibility makes its augmentation exact. Thus $P_*$ is a supplied resolution of the trivial left module; its comparison with the resolution in step 1.1 identifies the same derived group homology. Projection to $BG$ identifies $\mathbb Z\otimes_{\mathbb ZG}P_*$ with $C_*^{\mathrm{cell}}(BG)$, including their differentials. Taking homology, and using cellular-to-singular homology comparison as in [F6], gives $H_n(G;\mathbb Z)\cong H_n(BG;\mathbb Z)$. [A1, L1, F1, F5, F6, step 1.1, construct, algebra]
 
-3.1 By [A1] and [L1], the DC hypothesis in [F5] holds, so $H_2(BG;\mathbb Z)=H_2(G;\mathbb Z)$. Apply [F3] to $F\to E\to BG$. Its five-term sequence has consecutive terms $$H_2(E;\mathbb Z)\longrightarrow H_2(BG;\mathbb Z) \longrightarrow H_0(BG;H_1(F;\mathbb Z)).$$ The last group is zero by step 2.1. Exactness therefore makes the first map surjective. Under the homotopy equivalence $E\simeq X$, this first map is $c_*$, proving the assertion. [A1, L1, F3, F5, step 2.1, algebra] ∎
+2.2 Replace this prescribed $c$ by its mapping-path Serre fibration $p:E\to BG$, with $E\simeq X$ and $p$ corresponding to $c$. In [F2], the action on fiber components is transitive because $E$ is connected, and the component of the based fiber point has stabilizer all of $\pi_1(BG)$ because $\pi_1(c)$ is onto. Thus the fiber $F$ is path-connected. Since $\pi_2(BG)=0$ and $\pi_1(c)$ is injective, the same exact sequence gives $\pi_1(F)=1$. Hence $H_1(F;\mathbb Z)=0$ by [F4]. [F1, F2, F4, step 1.1, algebra]
+
+3.1 Apply [F3] to $F\to E\to BG$. Since $F$ is path-connected, its $H_0$ local system is canonically the constant system $\mathbb Z$. The five-term sequence therefore has consecutive terms $$H_2(E;\mathbb Z)\longrightarrow H_2(BG;\mathbb Z) \longrightarrow H_0(BG;\mathcal H_1(F;\mathbb Z)).$$ The last group is zero by step 2.2. Exactness makes the first map, the edge homomorphism $p_*$, surjective. Under $E\simeq X$ this map is $c_*$, and step 2.1 identifies its target with $H_2(G;\mathbb Z)$, proving the assertion. [F3, step 2.1, step 2.2, algebra] ∎
 

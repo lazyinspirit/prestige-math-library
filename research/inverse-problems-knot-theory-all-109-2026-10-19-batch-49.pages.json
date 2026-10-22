@@ -68,10 +68,10 @@
         "axiom_use": "The local Gaussian-kernel, moment, Jacobian, and potential arguments use no choice axiom. The IP-46 learned-estimator definition states no choice use. The AC- and Countable-Choice-dependent Hilbert posterior-mean proposition is not used; the pointwise finite-posterior-risk identity is proved directly here."
       },
       {
-        "id": "def-ip-pnp-ista-with-denoiser",
-        "kind": "definition",
+        "id": "alg-ip-pnp-ista-with-denoiser",
+        "kind": "algorithm",
         "title": "Plug-and-play ISTA with a denoiser",
-        "statement": "Let $n\\ge1$, $\\sigma,\\gamma>0$, let $g:\\mathbb R^n\\to\\mathbb R$ be continuously differentiable, let $\\widetilde D_\\sigma:\\mathbb R^n\\to\\mathbb R^n$ be a deterministic denoiser map, and choose $x_0\\in\\mathbb R^n$. Define\n$$z_t=x_{t-1}-\\gamma\\nabla g(x_{t-1}),\\qquad x_t=\\widetilde D_\\sigma(z_t)\\quad(t=1,2,\\ldots).$$\nThe output is the sequence $(x_t)_{t\\ge0}$. This definition imposes no convexity, proximal representation, exact-MMSE identity, or convergence property on $\\widetilde D_\\sigma$.\n\nThe diagram depicts the data flow for one update; the displayed recurrence, not the diagram, defines the iteration.\n\n~~~tikz\n\\begin{tikzpicture}[x=1.3cm,y=0.9cm,>=stealth]\n  \\node at (0,0) (old) {$x_{t-1}$};\n  \\node at (3,0) (grad) {$z_t=x_{t-1}-\\gamma\\nabla g(x_{t-1})$};\n  \\node at (7,0) (den) {$x_t=\\widetilde D_\\sigma(z_t)$};\n  \\draw[->] (old) -- (grad);\n  \\draw[->] (grad) -- (den);\n\\end{tikzpicture}\n~~~",
+        "statement": "Let $n\\ge1$, $\\sigma,\\gamma>0$, let $g:\\mathbb R^n\\to\\mathbb R$ be continuously differentiable, let $\\widetilde D_\\sigma:\\mathbb R^n\\to\\mathbb R^n$ be a supplied deterministic map used in the denoising step, and choose $x_0\\in\\mathbb R^n$. Define\n$$z_t=x_{t-1}-\\gamma\\nabla g(x_{t-1}),\\qquad x_t=\\widetilde D_\\sigma(z_t)\\quad(t=1,2,\\ldots).$$\nThe output is the sequence $(x_t)_{t\\ge0}$. This definition imposes no convexity, proximal representation, exact-MMSE identity, or convergence property on $\\widetilde D_\\sigma$.\n\nHere “denoiser” names the role of the plug-in map; Borel measurability and training under a signal-corruption law, as in the learned-estimator interface, are not assumed.\n\nThe diagram depicts the data flow for one update; the displayed recurrence, not the diagram, defines the iteration.\n\n~~~tikz\n\\begin{tikzpicture}[x=1.3cm,y=0.9cm,>=stealth]\n  \\node at (0,0) (old) {$x_{t-1}$};\n  \\node at (3,0) (grad) {$z_t=x_{t-1}-\\gamma\\nabla g(x_{t-1})$};\n  \\node at (7,0) (den) {$x_t=\\widetilde D_\\sigma(z_t)$};\n  \\draw[->] (old) -- (grad);\n  \\draw[->] (grad) -- (den);\n\\end{tikzpicture}\n~~~",
         "deps": [
           "def-ip-learned-reconstruction-estimator",
           "def-euclidean-inner-product"
@@ -106,7 +106,7 @@
         "statement": "Let $n\\ge1$, let $\\sigma>0$, and let $\\mu$ be a Borel probability measure on $\\mathbb R^n$ that is not concentrated on any affine hyperplane. Use the analytic Gaussian posterior-mean map $D_\\sigma$ and potential $h_{\\sigma,\\gamma}$ constructed from $\\mu$ in the local lemma. This map is used as the exact MMSE plug-in map; no fitted parameter or training guarantee is assumed. Let $g:\\mathbb R^n\\to\\mathbb R$ be $C^1$ and suppose\n$$\\|\\nabla g(u)-\\nabla g(v)\\|_2\\le L\\|u-v\\|_2\\quad(u,v\\in\\mathbb R^n)$$\nfor some $L>0$. Suppose the extended-real objective $f=g+h_{\\sigma,\\gamma}$ has finite infimum in $\\mathbb R$, fix $0<\\gamma\\le1/L$, and run\n$$x_t=D_\\sigma\\!\\left(x_{t-1}-\\gamma\\nabla g(x_{t-1})\\right)\\quad(t\\ge1)$$\nfrom any $x_0\\in\\mathbb R^n$. Then $x_t\\in X_\\sigma$ and $f(x_t)$ is finite for every $t\\ge1$; $f(x_t)\\le f(x_{t-1})$ in extended-real order for $t\\ge1$; the finite sequence $(f(x_t))_{t\\ge1}$ converges; and $\\|\\nabla f(x_t)\\|_2\\to0$, where $\\nabla f$ is the ordinary gradient of its restriction to the open set $X_\\sigma$. This is a stationarity conclusion only: it asserts no global minimizer, objective rate, iterate convergence, posterior sampling, or trained-network guarantee.",
         "deps": [
           "lem-ip-tweedie-mmse-jacobian-and-prox-potential",
-          "def-ip-pnp-ista-with-denoiser",
+          "alg-ip-pnp-ista-with-denoiser",
           "lem-l-smoothness-descent-inequality",
           "def-lipschitz-holder-contraction",
           "def-euclidean-inner-product",
@@ -148,7 +148,7 @@
         "statement": "For $\\gamma>0$, a global proximal selection of an extended-real penalty $h:\\mathbb R\\to\\mathbb R\\cup\\{+\\infty\\}$ is a map $P:\\mathbb R\\to\\mathbb R$ such that, for every $z\\in\\mathbb R$, $P(z)$ is a global minimizer of $x\\mapsto\\frac12|x-z|^2+\\gamma h(x)$. The potential $h_{\\sigma,\\gamma}$ in the exact-MMSE stationarity result is constructed from the conditional-mean map $D_\\sigma$. Replacing $D_\\sigma$ in PnP-ISTA by an arbitrary map $\\widetilde D_\\sigma$ does not in general give a global proximal representation or inherit that stationarity conclusion: for every $\\gamma>0$, the map $z\\mapsto-z$ is not a global proximal selection of any such $h$ that is finite somewhere and nowhere $-\\infty$. This does not assert that a particular other denoiser has no different objective.",
         "deps": [
           "lem-ip-tweedie-mmse-jacobian-and-prox-potential",
-          "def-ip-pnp-ista-with-denoiser",
+          "alg-ip-pnp-ista-with-denoiser",
           "thm-ip-exact-mmse-pnp-ista-stationarity",
           "def-euclidean-inner-product"
         ],
@@ -244,7 +244,7 @@
         "title": "Gaussian measurement noise need not remain Gaussian at later PnP-ISTA inputs",
         "statement": "Assume the Axiom of Choice. Let $\\varepsilon$ have the standard normal law, let $Y=\\theta+\\varepsilon$, and let $g(x)=(x-Y)^2/2$. For any noise parameter $\\sigma>0$, deterministic map $\\widetilde D_\\sigma:\\mathbb R\\to\\mathbb R$, step $\\gamma>0$, and initialization $x_0\\in\\mathbb R$, define $z_t=x_{t-1}-\\gamma(x_{t-1}-Y)$ and $x_t=\\widetilde D_\\sigma(z_t)$. The false claim is that Gaussian measurement noise forces $z_t-\\theta$ to have a Gaussian law at every iteration $t\\ge1$, for every such denoiser, step, and initialization.",
         "deps": [
-          "def-ip-pnp-ista-with-denoiser",
+          "alg-ip-pnp-ista-with-denoiser",
           "def-axiom-of-choice",
           "def-standard-normal-and-normal-laws",
           "lem-normal-location-scale-density"
@@ -288,7 +288,7 @@
         "statement": "Let $a,\\sigma>0$ and use the scalar two-point prior assigning mass $1/2$ to each of $-a$ and $a$, whose exact Gaussian posterior-mean map is $D_\\sigma(z)=a\\tanh(az/\\sigma^2)$, where $\\tanh(s)=(\\exp(s)-\\exp(-s))/(\\exp(s)+\\exp(-s))$. For any tolerance $\\eta>0$, choose $b$ with $0<|b|<\\eta$ and define the one-pixel convolutional neural network (CNN) map\n$$\\widetilde D_\\sigma(z)=a\\tanh(az/\\sigma^2)+b.$$\nThis map is implemented by a $1\\times1$ convolution, a $\\tanh$ activation, output scaling, and an output bias $b$. It satisfies $\\sup_{z\\in\\mathbb R}|\\widetilde D_\\sigma(z)-D_\\sigma(z)|=|b|<\\eta$, while $\\widetilde D_\\sigma(0)\\ne D_\\sigma(0)$. It is approximate and does not meet the exact-denoiser hypothesis of the stationarity theorem; this example makes no claim that it lacks some other objective.",
         "deps": [
           "lem-ip-tweedie-mmse-jacobian-and-prox-potential",
-          "def-ip-pnp-ista-with-denoiser",
+          "alg-ip-pnp-ista-with-denoiser",
           "thm-ip-exact-mmse-pnp-ista-stationarity",
           "rem-ip-arbitrary-denoiser-has-no-inherited-objective",
           "def-dirac-measure",

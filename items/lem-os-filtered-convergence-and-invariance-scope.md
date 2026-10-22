@@ -16,7 +16,7 @@ provenance:
   proof: ai-altered
 sources:
   references:
-    - title: "Ozsváth and Szabó, On the Heegaard Floer homology of branched double-covers, Remark 1.1"
+    - title: "Ozsváth and Szabó, On the Heegaard Floer homology of branched double-covers, §1.1 Further remarks and speculation, printed pp. 3–4; filtered quasi-isomorphism discussion on p. 4"
       url: "https://arxiv.org/pdf/math/0309170v1"
     - title: "Weibel, An Introduction to Homological Algebra, Chapter 5"
       url: "https://math.mit.edu/~hrm/palestine/weibel/05-spectral_sequences.pdf"
@@ -34,7 +34,7 @@ Let $(C,d,F)$ be a filtered chain complex over a field with an increasing filtra
 
 [[thm-bounded-filtered-complex-spectral-sequence-abuts-to-filtered-homology|Bounded filtration convergence theorem]]
 
-[Ozsváth and Szabó, *On the Heegaard Floer homology of branched double-covers*, Remark 1.1](https://arxiv.org/pdf/math/0309170v1)
+[Ozsváth and Szabó, *On the Heegaard Floer homology of branched double-covers*, §1.1, “Further remarks and speculation,” printed pp. 3–4, especially p. 4](https://arxiv.org/pdf/math/0309170v1)
 
 [Weibel, *An Introduction to Homological Algebra*, Chapter 5](https://math.mit.edu/~hrm/palestine/weibel/05-spectral_sequences.pdf)
 
@@ -49,6 +49,7 @@ Let $(C,d,F)$ be a filtered chain complex over a field with an increasing filtra
 [F2] A finite filtration yields a spectral sequence abutting to homology with the image filtration ([[thm-bounded-filtered-complex-spectral-sequence-abuts-to-filtered-homology]]).
 
 ## Proof
+
 
 1.1 The filtration has only the levels $0,\ldots,n$, so it is finite, exhaustive and separated; [F1] says each level is a subcomplex. [F1, given]
 

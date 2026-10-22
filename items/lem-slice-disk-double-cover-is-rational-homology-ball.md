@@ -46,9 +46,9 @@ Assume AC. Let $K\subset S^3$ be a smooth oriented knot and let $D\subset B^4$ b
 
 [A1] AC is assumed by the published smooth-disk cover theorem ([[def-axiom-of-choice]]).
 
-[F1] The cyclic branched cover uses the homomorphism sending a positive meridian to the generator of $\mathbb Z/2$; its boundary is the branched cover of the boundary knot with the induced orientation ([[def-cyclic-branched-cover-of-a-knot]]).
+[F1] The double cyclic branched cover $\Sigma_2(K)$ is obtained from the connected exterior cover whose monodromy sends a positive meridian to the generator of $\mathbb Z/2$, by filling along the closed lift of the squared meridian. Its oriented branched map has local form $(s,z)\mapsto(s,z^2)$ near $K$ ([[def-cyclic-branched-cover-of-a-knot]]).
 
-[F2] The connected double cover of $B^4$ branched over a smooth properly embedded disk is a rational homology ball under AC ([[lem-double-cover-branched-over-a-slice-disk-is-a-rational-homology-ball]]).
+[F2] Under AC, the connected double cover of $B^4$ branched over a smooth properly embedded disk is a compact connected oriented smooth rational homology four-ball, and its boundary is the double cover of $S^3$ branched over the disk's boundary. The supplier constructs it using the orientation-preserving normal model $(x,z)\mapsto(x,z^2)$, with a product collar at the boundary ([[lem-double-cover-branched-over-a-slice-disk-is-a-rational-homology-ball]]).
 
 ## Proof
 **Proof technique:** apply the smooth-disk cover result and identify the boundary cover.
@@ -57,4 +57,4 @@ Assume AC. Let $K\subset S^3$ be a smooth oriented knot and let $D\subset B^4$ b
 
 1.1 By [F2], the connected branched double cover $W_D$ has the rational homology of a point; smoothness and properness of the disk are exactly the hypotheses of that supplier. [A1, F2, given]
 
-2.1 The restriction of the covering map to $\partial B^4=S^3$ is the connected double cover branched along $\partial D=K$. Its monodromy sends a positive meridian of $K$ to the nontrivial element of $\mathbb Z/2$, because a meridian disk normal to $D$ has local branched model $z\mapsto z^2$. Therefore its oriented boundary is precisely $\Sigma_2(K)$ under [F1]. The supplier was used only for smooth disks, so no topological-disk conclusion follows. [F1, given, construct] ∎
+2.1 By [F2], the restriction of the covering map to $\partial B^4=S^3$ is the double cover branched along $\partial D=K$. Its exterior cover is connected because the local model $z\mapsto z^2$ gives nontrivial monodromy on a positive meridian. Thus its exterior cover and meridional filling are exactly those defining $\Sigma_2(K)$ in [F1]. The orientation pulled back off the branch locus induces the same boundary orientation, since the product collar in [F2] preserves the outward normal. Therefore $\partial W_D=\Sigma_2(K)$ as oriented manifolds. The supplier was used only for smooth disks, so no topological-disk conclusion follows. [F1, F2, given, construct] ∎

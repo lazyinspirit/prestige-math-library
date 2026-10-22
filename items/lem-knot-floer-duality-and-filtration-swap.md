@@ -15,7 +15,6 @@ deps:
   - thm-balanced-s-three-knot-generators-admit-consistent-relative-gradings
   - lem-doubly-pointed-knot-morse-fields-have-a-zero-framed-seifert-extension
   - lem-relative-s-three-maslov-gradings-have-a-unique-hat-homology-normalization
-  - thm-balanced-knot-attaching-moves-have-full-minus-inverse-maps
 dependency_level: 2
 justified_by: []
 aliases: []
@@ -39,9 +38,11 @@ sources:
 
 ## Statement
 
-Let $K\subset S^3$ be a smooth oriented knot and let $C(K)=\mathrm{CFK}^{\infty}(K)$ be its normalized bifiltered complex over $\mathbb F_2[U,U^{-1}]$. The complex of the reverse mirror $-K$ is filtered-chain-homotopy equivalent to the dual complex $C(K)^*=\operatorname{Hom}_{\mathbb F_2[U,U^{-1}]}(C(K),\mathbb F_2[U,U^{-1}])$, with dual differential $d\phi(x)=\phi(\partial x)$ and dual basis elements at negated bifiltration coordinates. There is also a Maslov-graded filtered-chain-homotopy equivalence from $C(K)$ to the complex obtained by exchanging the algebraic and Alexander filtrations. These are distinct symmetries: duality negates both filtration coordinates, while conjugation exchanges them.
+Assume countable choice. Let $K\subset S^3$ be a smooth oriented knot and let $C(K)=\mathrm{CFK}^{\infty}(K)$ be its normalized bifiltered complex over $\mathbb F_2[U,U^{-1}]$. The complex of the reverse mirror $-K$ is filtered-chain-homotopy equivalent to the dual complex $C(K)^*=\operatorname{Hom}_{\mathbb F_2[U,U^{-1}]}(C(K),\mathbb F_2[U,U^{-1}])$, with dual differential $d\phi(x)=\phi(\partial x)$ and dual basis elements at negated bifiltration coordinates. There is also a Maslov-graded filtered-chain-homotopy equivalence from $C(K)$ to the complex obtained by exchanging the algebraic and Alexander filtrations. These are distinct symmetries: duality negates both filtration coordinates, while conjugation exchanges them.
 
 ## Statement references
+
+[[def-countable-choice|The Axiom of Countable Choice for the disk-count branch]]
 
 [[def-reverse-mirror-of-oriented-knot|Reverse-mirror convention for the smooth concordance inverse]]
 
@@ -61,7 +62,7 @@ Let $K\subset S^3$ be a smooth oriented knot and let $C(K)=\mathrm{CFK}^{\infty}
 
 [F3] Between actual doubly pointed diagrams of the SAME oriented knot in S3 there are full minus filtered equivalences with filtered inverse homotopies, preserving the absolute Seifert origin and normalized Maslov degree. Every term $U^a y$ has $a\ge0$ and $A(y)-a\le A(x)$; thus localization is nonincreasing in both bifiltration coordinates. [[thm-doubly-pointed-s-three-moves-preserve-the-seifert-normalized-filtration]]
 
-[F4] The accepted real-operator conjugation uses the coefficientwise conjugation map $C:\operatorname{Sym}^g(\Sigma,j)\to\operatorname{Sym}^g(-\Sigma,-j)$, defined in symmetric root-coordinate charts and smooth even at collisions. Conjugating target and source and interchanging the two boundary labels gives literal operator and divisor-degree correspondence, with all marked weights retained. The explicit calculation is also repeated below for the two needed strip maps. [[thm-balanced-knot-attaching-moves-have-full-minus-inverse-maps]]
+[F4] Write $C:\operatorname{Sym}^g(\Sigma,j)\to\operatorname{Sym}^g(-\Sigma,-j)$ for the map retaining the same unordered physical points. A conjugate surface coordinate is $\bar z$, so in unordered-root charts $C$ conjugates every elementary symmetric coefficient. It is therefore a smooth real diffeomorphism even at collisions, and is antiholomorphic for the standard induced complex structures. The strip-equation, linearized-operator and marked-degree correspondences for the two transformations are proved directly in steps3.1 and4.2.
 
 [F5] Reversing the ambient orientation and the knot orientation is exactly the reverse-mirror convention in the Statement. [[def-reverse-mirror-of-oriented-knot]]
 

@@ -46,7 +46,7 @@ sources:
 
 ## Statement
 
-Let $G$ be any $n\times n$ grid diagram representing a smooth oriented knot $K\subset S^3$. Form the diagonal grid complex by setting every marking variable $U_i$ equal to a single variable $U$, and define $\Upsilon_G(t)$ by the t-modified non-torsion grading on that complex for $0\le t\le1$, extended by $\Upsilon_G(t)=\Upsilon_G(2-t)$ for $1<t\le2$. Then for every $t\in[0,2]$,
+For the knot-level assertions, assume the Axiom of Countable Choice. Let $G$ be any $n\times n$ grid diagram representing a smooth oriented knot $K\subset S^3$. Form the diagonal grid complex by setting every marking variable $U_i$ equal to a single variable $U$, and define $\Upsilon_G(t)$ by the t-modified non-torsion grading on that complex for $0\le t\le1$, extended by $\Upsilon_G(t)=\Upsilon_G(2-t)$ for $1<t\le2$. Then for every $t\in[0,2]$,
 $$ \Upsilon_G(t)=\Upsilon_K(t), $$
 where $\Upsilon_K$ is the finite cycle-minimax invariant defined from $\mathrm{CFK}^{\infty}(K)$. In this statement the quotient with all $U_i$ identified carries the factor $W^{\otimes(n-1)}$, where $W$ has generators in Maslov/Alexander bidegrees $(0,0)$ and $(-1,-1)$; this factor is retained in the proof and is not counted as an improvement to the grid-state complexity bound.
 
@@ -68,7 +68,7 @@ where $\Upsilon_K$ is the finite cycle-minimax invariant defined from $\mathrm{C
 
 ## Facts & Assumptions
 
-**Given:** A knot grid $G$ with grid number $n$, its full filtered grid complex, the diagonal quotient, and the two Upsilon conventions just defined.
+**Given:** A knot grid $G$ with grid number $n$, its full filtered grid complex, the diagonal quotient, and the two Upsilon conventions just defined. Countable Choice is assumed for the knot-level constructions and geometric comparisons; finite algebra on the stated supplied complexes and maps requires no further choice.
 
 [F1] [[lem-grid-marking-variables-chain-homotopic]]: for consecutive markings the rectangle homotopy $H_\ell$ satisfies $\partial H_\ell+H_\ell\partial=(U_i+U_j)\operatorname{id}$ and is Alexander-filtered; following the one-cycle marking route identifies any two variable actions by filtered chain homotopy.
 

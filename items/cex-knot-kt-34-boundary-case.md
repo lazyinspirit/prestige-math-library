@@ -46,8 +46,8 @@ The picture is a local Reidemeister I pair: the vertical branch passes over the 
   \node at (0,-1.2) {$D_0$};
 \end{scope}
 \begin{scope}[xshift=3.0cm]
-  \draw (-1,0) .. controls (-1.15,-0.75) and (1.15,-0.75) .. (1,0);
-  \draw[->] (0.45,-0.62) -- (0.20,-0.68);
+  \draw (-1,0) .. controls (-1.15,-1.60) and (1.15,-1.60) .. (1,0);
+  \draw[->] (0.60,-1.01) -- (0.31,-1.15);
   \draw (-1,0) -- (-0.22,0);
   \draw[->] (-0.78,0) -- (-0.50,0);
   \draw (0.22,0) -- (0.35,0)
@@ -57,7 +57,7 @@ The picture is a local Reidemeister I pair: the vertical branch passes over the 
     .. controls (0,-0.76) and (0.50,-0.70) .. (1,0);
   \draw[white,line width=5pt] (0,0.25) -- (0,-0.25);
   \draw (0,0.25) -- (0,-0.25);
-  \node at (0,-1.2) {$D_1$};
+  \node at (0,-1.60) {$D_1$};
 \end{scope}
 \end{tikzpicture}
 ```

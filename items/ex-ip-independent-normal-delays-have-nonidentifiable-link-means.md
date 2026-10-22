@@ -1,7 +1,7 @@
 ---
 id: ex-ip-independent-normal-delays-have-nonidentifiable-link-means
 kind: example
-title: "Additive Gaussian tree delays do not identify link means"
+title: "A shared-link Gaussian tree with nonidentifiable link means"
 status: draft
 origin: pipeline
 pipeline_run: inverse-problems-knot-theory-all-109-2026-10-19
@@ -19,14 +19,14 @@ sources:
   references:
     - title: "E. Lawrence, G. Michailidis, and V. N. Nair, Statistical Inverse Problems in Active Network Tomography, IMS Lecture Notes–Monograph Series 54 (2007), 24–44"
       url: "https://arxiv.org/pdf/0708.1079"
-      locator: "§1, Example 3, PDF p. 2 (printed p. 26): two-leaf additive Gaussian delay model and nonidentifiable means"
+      locator: "§1, Example 3, PDF p. 3 (printed p. 26): two-leaf additive Gaussian delay model and nonidentifiable means"
 ---
 
 ## Example
 
 Assume AC for the library's standard-normal-law convention. Let a rooted tree have root $o$, one shared link $e_0=(o,v)$, and two branch links $e_1=(v,r_1)$ and $e_2=(v,r_2)$ to leaf receivers. On each probe, the three link delays are independent with laws $X_i\sim N(\mu_i,1)$, $i=0,1,2$, and the observed path delays are $Y_1=X_0+X_1$ and $Y_2=X_0+X_2$. The distinct link-mean vectors $\mu=(0,0,0)$ and $\mu'=(1,-1,-1)$ induce the same joint law of $(Y_1,Y_2)$; hence the three link means are not identifiable. The same equality holds for any number of independent repeated probes with these fixed link laws.
 
-The diagram labels the shared and branch links by their delay variables; the two lower vertices are the receivers.
+The diagram labels the shared and branch links by their delay variables; the two rightmost vertices are the receivers.
 
 ```tikz
 \begin{tikzpicture}[>=stealth]

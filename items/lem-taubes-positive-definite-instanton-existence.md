@@ -28,6 +28,11 @@ proof_strategy: direct
 provenance:
   statement: ai-altered
   proof: ai-altered
+verification:
+  judge:
+    model: "gpt-6-luna"
+    verdict: pass
+    date: 2026-10-22
 sources:
   references:
     - title: Simon K. Donaldson, An Application of Gauge Theory to the Topology of 4-Manifolds

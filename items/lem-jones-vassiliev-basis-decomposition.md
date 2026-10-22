@@ -19,6 +19,11 @@ axiom_use: "Choice-free: the Laurent-polynomial quotient and monic-remainder arg
 provenance:
   statement: literature-derived
   proof: ai-altered
+verification:
+  judge:
+    model: "gpt-6-luna"
+    verdict: pass
+    date: 2026-10-22
 sources:
   references:
     - title: "Avishy Carmi and Eliahu Cohen, On trivial Jones–Vassiliev polynomials, arXiv:2606.22410v1, Lemma 3.1 and Appendix B.1"

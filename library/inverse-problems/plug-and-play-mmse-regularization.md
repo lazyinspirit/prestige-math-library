@@ -7,7 +7,7 @@ requires:
   - proximal-gradient-and-accelerated-composite-optimization
 items:
   - lem-ip-tweedie-mmse-jacobian-and-prox-potential
-  - def-ip-pnp-ista-with-denoiser
+  - alg-ip-pnp-ista-with-denoiser
   - thm-ip-exact-mmse-pnp-ista-stationarity
   - rem-ip-arbitrary-denoiser-has-no-inherited-objective
 examples: []

@@ -1,0 +1,1668 @@
+{
+  "version": 1,
+  "level": "inverse-problems-knot-theory-all-109-2026-10-19-batch-51",
+  "scope": [
+    "def-ip-benchmark-risk-and-compute-budget",
+    "rem-ip-inversebench-scoped-findings",
+    "ex-ip-inversebench-first-born-scattering",
+    "ex-ip-inversebench-multicoil-mri",
+    "ex-ip-inversebench-black-hole-imaging",
+    "ex-ip-inversebench-full-waveform-inversion",
+    "ex-ip-inversebench-navier-stokes",
+    "ex-ip-inversebench-prior-shift",
+    "ex-ip-inversebench-solver-invalid-iterate"
+  ],
+  "contracts": {
+    "def-ip-benchmark-risk-and-compute-budget": {
+      "risk": "low",
+      "kind": "definition",
+      "citations": [],
+      "derivations": [],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The definition defines or reports a protocol and makes no empty-input theorem claim."
+        },
+        {
+          "case": "zero",
+          "status": "not_applicable",
+          "reason": "The definition makes no zero-input theorem claim."
+        },
+        {
+          "case": "one",
+          "status": "not_applicable",
+          "reason": "The definition makes no singleton-input theorem claim."
+        },
+        {
+          "case": "degenerate",
+          "status": "not_applicable",
+          "reason": "The definition makes no degenerate-model theorem claim."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "The definition makes no endpoint theorem claim."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "No construction requiring a choice principle is supplied."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The definition makes no if-and-only-if claim."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The definition makes no if-and-only-if claim."
+        }
+      ]
+    },
+    "rem-ip-inversebench-scoped-findings": {
+      "risk": "low",
+      "kind": "remark",
+      "citations": [],
+      "derivations": [],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The remark defines or reports a protocol and makes no empty-input theorem claim."
+        },
+        {
+          "case": "zero",
+          "status": "not_applicable",
+          "reason": "The remark makes no zero-input theorem claim."
+        },
+        {
+          "case": "one",
+          "status": "not_applicable",
+          "reason": "The remark makes no singleton-input theorem claim."
+        },
+        {
+          "case": "degenerate",
+          "status": "not_applicable",
+          "reason": "The remark makes no degenerate-model theorem claim."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "The remark makes no endpoint theorem claim."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "No construction requiring a choice principle is supplied."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The remark makes no if-and-only-if claim."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The remark makes no if-and-only-if claim."
+        }
+      ]
+    },
+    "ex-ip-inversebench-first-born-scattering": {
+      "risk": "low",
+      "kind": "example",
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-ip-benchmark-risk-and-compute-budget",
+          "source_section": "Definition",
+          "quote": "Fix measurable spaces $(X,\\mathcal X)$ and $(Y,\\mathcal Y)$, a metric target space $(Q,d_Q)$ with its Borel sigma-algebra $\\mathcal Q$, and a nonempty truth class $U\\subseteq X$ with inherited sigma-algebra $\\mathcal U=\\{A\\cap U:A\\in\\mathcal X\\}$. Let $q:U\\to Q$ and $F:U\\to Y$ be measurable target and forward maps. The **admissible state set** is a declared nonempty $\\mathcal U$-measurable subset $C\\subseteq U$. The observation model is a specified probability kernel $K(dy\\mid x)$ from $(U,\\mathcal U)$ to $(Y,\\mathcal Y)$; in an additive-noise model, when $Y$ has a measurable addition operation, it is the law of $F(x)+\\varepsilon$ for a declared noise law of $\\varepsilon$, while nonadditive or model-dependent observation noise is encoded directly by $K$.\n\nThe forward solver, when a numerical evaluation is used, is the specified procedure for evaluating this model, including its discretization, tolerances, finite call budget, and any model-specific admissibility test; exact evaluation is the special case with no numerical-solver error. A failed admissibility test or solver call is recorded with its failure status and is not silently omitted from the benchmark results.\n\nA **benchmark specification** also declares a training law $P_{\\rm train}$ on a named measurable space for all random variables used to fit a method or select its hyperparameters; those variables may be paired or unpaired. It declares a test law $P_{\\rm test}$ on $(Y\\times Q,\\mathcal Y\\otimes\\mathcal Q)$ for evaluation pairs $(Y,q(X))$, and any separate validation law used for tuning. The training and test laws need not agree. Each candidate method is identified by its fitting procedure and by its deployed measurable deterministic reconstruction rule $g:Y\\to Q$ or randomized reconstruction kernel $L(da\\mid y)$ from $Y$ to $Q$. Its population test risk is the risk under $P_{\\rm test}$ as defined by the inverse-risk functional; a reported finite-sample score must additionally name its test sample and empirical aggregation rule. No risk transfer or generalization bound follows from the benchmark specification.\n\nBefore comparison, the specification fixes a nonnegative product-measurable loss $\\ell:Q\\times Q\\to[0,+\\infty]$, an uncertainty diagnostic, and a finite compute-budget vector. An uncertainty diagnostic is a declared measurable statistic of the method outputs and, when applicable, target labels, together with its target quantity; for example, if a reported set-valued estimate $C(y)\\subseteq Q$ has a product-measurable membership event $\\{(y,a):a\\in C(y)\\}\\in\\mathcal Y\\otimes\\mathcal Q$, its test coverage is $P_{\\rm test}(\\{(y,a)\\in Y\\times Q:a\\in C(y)\\})$. The budget vector records the applicable maximum counts of forward-model queries, adjoint queries, gradient evaluations, ODE right-hand-side evaluations, solver or sampling steps, and elapsed runtime; inapplicable counts are marked as not applicable, not zero. It also records the hardware, numerical precision, software/model versions, random seeds, tuning data, and stopping tolerances needed to interpret those counts. Each method's result records its metric values, uncertainty diagnostic, realized compute counts, solver status, and failed runs. A comparison is tied to the declared test law, test sample, loss, solver, admissibility rules, and tuning protocol; when budgets or other conditions differ, those differences are reported as part of the comparison. The specification defines an evaluation protocol, not a theorem ranking algorithms.\n\n```tikz\n\\begin{tikzpicture}[>=stealth]\n  \\node[draw,rounded corners,align=center] (train) at (0,1.3) {$P_{\\rm train}$};\n  \\node[draw,rounded corners,align=center] (fit) at (3,1.3) {fit and tune};\n  \\node[draw,rounded corners,align=center] (rule) at (6.2,1.3) {$g$ or $L$};\n  \\node[draw,rounded corners,align=center] (forward) at (0,-0.2) {$F$, noise $K$, solver};\n  \\node[draw,rounded corners,align=center] (test) at (3,-0.2) {$P_{\\rm test}$ pairs};\n  \\node[draw,rounded corners,align=center] (eval) at (6.4,-0.2) {loss and uncertainty};\n  \\node[draw,rounded corners,align=center] (record) at (10,-0.2) {scores, budget, status};\n  \\draw[->] (train)--(fit);\n  \\draw[->] (fit)--(rule);\n  \\draw[->] (forward)--(test);\n  \\draw[->] (test)--(eval);\n  \\draw[->] (rule)--(eval);\n  \\draw[->] (eval)--(record);\n\\end{tikzpicture}\n```\n\nThe arrows label declared information flow into fitting, observation generation, and evaluation. The diagram asserts no equality between $P_{\\rm train}$ and $P_{\\rm test}$ and no risk-transfer result.",
+          "uses": [
+            "1.2",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "rem-ip-inversebench-scoped-findings",
+          "source_section": "Remark",
+          "quote": "Zheng et al.'s InverseBench reports 14 plug-and-play diffusion-prior algorithms and domain-specific baselines on five selected cases: first-Born optical scattering, raw multi-coil knee MRI, black-hole very-long-baseline interferometry, full waveform inversion, and two-dimensional vorticity-form Navier–Stokes inversion. For these experiments, the authors report that diffusion-prior methods often outperform conventional baselines when the training data are suitable, while a classical full-waveform-inversion optimizer initialized from a smoothed ground truth outperforms the tested diffusion-prior methods. In cases with closed-form forward models, methods using more forward-gradient queries can be more accurate and more expensive; the paper reports that this trend fails for its numerical PDE cases. Its Navier–Stokes split has one validation case and ten test cases. The paper reports step-size/Courant–Friedrichs–Lewy (CFL) failures in its PDE experiments. Its Figure 5 out-of-distribution diagnostics feed digit images to a black-hole prior trained on simulated black-hole images, and nine-cell scattering sources to a prior trained on one-to-six-cell sources; for the black-hole case, the authors report outputs with the prior's characteristic ring feature. These are empirical observations for the named data, solvers, methods, tuning protocol, and hardware; they establish no universal ranking, stability bound, posterior exactness, risk-transfer bound, or robustness theorem.\n\nThere is a first-Born notation discrepancy between the paper and its released implementation. Appendix B.1 defines a contrast-dependent total field and then displays a sensor equation with that field multiplied by the contrast, which does not itself exhibit a fixed linear map. The pinned implementation instead passes the fixed incident field into the sensor-propagation routine and constructs its cached linear matrix from that fixed field. This page therefore identifies the implemented benchmark as the first-Born linear case and does not infer linearity from the printed contrast-dependent expression.",
+          "uses": [
+            "2.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "For each fixed pair $(j,m)$, all coefficients multiplying $z_r$ in the displayed finite sum are fixed independently of $z$. Therefore the signal part is a real-linear function of the real vector $z$; adding the specified noise yields the stated measurement model.",
+          "step": "1.1",
+          "inputs": [
+            "given",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-1-2",
+          "claim": "On the finite labelled truth space in [A1], the target and discrete forward maps are measurable. For each case $i$, $K(\\cdot\\mid i)=\\delta_{y_i}$ is a probability measure, and $i\\mapsto K(B\\mid i)$ is measurable for every Borel observation set $B$. The declared empirical test/validation laws and point-mass fitting law therefore supply the probability fields of [F1]. Conditioning on a realized noisy list does not identify its replay kernel with the original Gaussian acquisition law.",
+          "step": "1.2",
+          "inputs": [
+            "A1",
+            "F1"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "The squared loss and radius-ball membership event in [A2] are product-measurable, and integration against the empirical test law gives exactly the specified average loss and coverage. The supplied procedures, budget records, and failure convention complete the remaining fields of [F1]. Cosine similarity only curates the data; it is not this evaluation loss. The implemented real-linear model and the source/code qualification in [F2] remain unchanged, and no calibration theorem is inferred.",
+          "step": "2.1",
+          "inputs": [
+            "A1",
+            "A2",
+            "F1",
+            "F2"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The specified contrast grid has 128^2 cells, 20 transmitters and a positive listed receiver count; the benchmark arrays are not empty.",
+          "template_review": {
+            "upheld": true,
+            "by": "/root",
+            "reason": "The specified contrast grid has 128^2 cells, 20 transmitters and a positive listed receiver count; the benchmark arrays are not empty.",
+            "item_sha256": "604f658b1fbab769897fb23fdd217081113056fa44674b0a24aa49500d608fe1",
+            "row_sha256": "9349918ba9f22d13bbb29276b2a04aecfdd12da24cfd00882636a71a2cefb953",
+            "role": "root-adopted actual delegated owner-focused FIRST; not native Alpha",
+            "delegated_reviewer": "/root/flyping_composite",
+            "delegated_review_sources": [
+              {
+                "file": "research/inverse-problems-knot-theory-all-109-2026-10-19-supervision-20261020/step2-supervision/battery1-boundary/lane-3/proposal.json",
+                "field": "rows",
+                "index": 224
+              }
+            ],
+            "root_adoption_record": "research/inverse-problems-knot-theory-all-109-2026-10-19-supervision-20261020/step2-supervision/battery1-boundary/lane-3/root-final-adoption.json"
+          }
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "The zero contrast array gives zero signal in the displayed sum, with additive noise still present. Background permittivity 1 defines that contrast zero. [Owner-focused FIRST reviewed location: Example; Verification 1.1–2.1; focused on assigned boundary cases and local interfaces, not an independent entire-proof audit or supplier-body review.]",
+          "template_review": {
+            "upheld": true,
+            "by": "/root",
+            "reason": "The zero contrast array gives zero signal in the displayed sum, with additive noise still present. Background permittivity 1 defines that contrast zero.",
+            "item_sha256": "604f658b1fbab769897fb23fdd217081113056fa44674b0a24aa49500d608fe1",
+            "row_sha256": "1ddf9be980a0bc770897a581d00100840298f5d0a3c5a5590aa7baae43ffe1a2",
+            "role": "root-adopted actual delegated owner-focused FIRST; not native Alpha",
+            "delegated_reviewer": "/root/flyping_composite",
+            "delegated_review_sources": [
+              {
+                "file": "research/inverse-problems-knot-theory-all-109-2026-10-19-supervision-20261020/step2-supervision/battery1-boundary/lane-3/proposal.json",
+                "field": "rows",
+                "index": 225
+              }
+            ],
+            "root_adoption_record": "research/inverse-problems-knot-theory-all-109-2026-10-19-supervision-20261020/step2-supervision/battery1-boundary/lane-3/root-final-adoption.json"
+          }
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Background permittivity 1 and fixed illumination appear explicitly; this is not a single-cell asymptotic model. Each output coordinate is a linear functional in 1.1.",
+          "template_review": {
+            "upheld": true,
+            "by": "/root",
+            "reason": "Background permittivity 1 and fixed illumination appear explicitly; this is not a single-cell asymptotic model. Each output coordinate is a linear functional in 1.1.",
+            "item_sha256": "604f658b1fbab769897fb23fdd217081113056fa44674b0a24aa49500d608fe1",
+            "row_sha256": "edf48058bc7edace4b7b1804ad003c68b4873fde783bc8c0e5a913bf5248d27c",
+            "role": "root-adopted actual delegated owner-focused FIRST; not native Alpha",
+            "delegated_reviewer": "/root/flyping_composite",
+            "delegated_review_sources": [
+              {
+                "file": "research/inverse-problems-knot-theory-all-109-2026-10-19-supervision-20261020/step2-supervision/battery1-boundary/lane-3/proposal.json",
+                "field": "rows",
+                "index": 226
+              }
+            ],
+            "root_adoption_record": "research/inverse-problems-knot-theory-all-109-2026-10-19-supervision-20261020/step2-supervision/battery1-boundary/lane-3/root-final-adoption.json"
+          }
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "The cosine formula is restricted to nonzero arrays; the example does not assign cosine similarity to zero images. It follows the implementation, not the contrast-dependent printed formula.",
+          "template_review": {
+            "upheld": true,
+            "by": "/root",
+            "reason": "The cosine formula is restricted to nonzero arrays; the example does not assign cosine similarity to zero images. It follows the implementation, not the contrast-dependent printed formula.",
+            "item_sha256": "604f658b1fbab769897fb23fdd217081113056fa44674b0a24aa49500d608fe1",
+            "row_sha256": "808147f9d24d7174ef72e9e7b049f97c877d84b088d99fe15cfb6c975e280b38",
+            "role": "root-adopted actual delegated owner-focused FIRST; not native Alpha",
+            "delegated_reviewer": "/root/flyping_composite",
+            "delegated_review_sources": [
+              {
+                "file": "research/inverse-problems-knot-theory-all-109-2026-10-19-supervision-20261020/step2-supervision/battery1-boundary/lane-3/proposal.json",
+                "field": "rows",
+                "index": 227
+              }
+            ],
+            "root_adoption_record": "research/inverse-problems-knot-theory-all-109-2026-10-19-supervision-20261020/step2-supervision/battery1-boundary/lane-3/root-final-adoption.json"
+          }
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Grid spacing and the finite transmitter/receiver indices fix the implementation domain; no continuum boundary condition or endpoint inversion theorem is deduced. [Owner-focused FIRST reviewed location: Example; Verification 1.1–2.1; focused on assigned boundary cases and local interfaces, not an independent entire-proof audit or supplier-body review.]",
+          "template_review": {
+            "upheld": true,
+            "by": "/root",
+            "reason": "Grid spacing and the finite transmitter/receiver indices fix the implementation domain; no continuum boundary condition or endpoint inversion theorem is deduced.",
+            "item_sha256": "604f658b1fbab769897fb23fdd217081113056fa44674b0a24aa49500d608fe1",
+            "row_sha256": "4b787f19f063c695133bc11aace2387b4e17d9ca3ca8d1df5f8427eb40958c81",
+            "role": "root-adopted actual delegated owner-focused FIRST; not native Alpha",
+            "delegated_reviewer": "/root/flyping_composite",
+            "delegated_review_sources": [
+              {
+                "file": "research/inverse-problems-knot-theory-all-109-2026-10-19-supervision-20261020/step2-supervision/battery1-boundary/lane-3/proposal.json",
+                "field": "rows",
+                "index": 228
+              }
+            ],
+            "root_adoption_record": "research/inverse-problems-knot-theory-all-109-2026-10-19-supervision-20261020/step2-supervision/battery1-boundary/lane-3/root-final-adoption.json"
+          }
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "The finite contrast grid, transmitter/receiver sets, and source data splits are explicitly supplied in the Example statement; the algebra uses only the stated finite sum."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "Fixed incident-field coefficients give a real-linear implemented map; no converse identification of the physical nonlinear scattering law is asserted. There is no separate iff-forward obligation beyond this asserted scope.",
+          "template_review": {
+            "upheld": true,
+            "by": "/root",
+            "reason": "Fixed incident-field coefficients give a real-linear implemented map; no converse identification of the physical nonlinear scattering law is asserted. There is no separate iff-forward obligation beyond this asserted scope.",
+            "item_sha256": "604f658b1fbab769897fb23fdd217081113056fa44674b0a24aa49500d608fe1",
+            "row_sha256": "d87e1dd2943fced6bc20e6806c0bf348f8dd66678970987db329a228ceda73d4",
+            "role": "root-adopted actual delegated owner-focused FIRST; not native Alpha",
+            "delegated_reviewer": "/root/flyping_composite",
+            "delegated_review_sources": [
+              {
+                "file": "research/inverse-problems-knot-theory-all-109-2026-10-19-supervision-20261020/step2-supervision/battery1-boundary/lane-3/proposal.json",
+                "field": "rows",
+                "index": 222
+              }
+            ],
+            "root_adoption_record": "research/inverse-problems-knot-theory-all-109-2026-10-19-supervision-20261020/step2-supervision/battery1-boundary/lane-3/root-final-adoption.json"
+          }
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "Fixed incident-field coefficients give a real-linear implemented map; no converse identification of the physical nonlinear scattering law is asserted. In particular, no reverse classification implication is part of this item.",
+          "template_review": {
+            "upheld": true,
+            "by": "/root",
+            "reason": "Fixed incident-field coefficients give a real-linear implemented map; no converse identification of the physical nonlinear scattering law is asserted. In particular, no reverse classification implication is part of this item.",
+            "item_sha256": "604f658b1fbab769897fb23fdd217081113056fa44674b0a24aa49500d608fe1",
+            "row_sha256": "50872bcd7ba3f9241d6c3a08cbb94f6a188a9aa41299f1244a5dd54e2f6f2b34",
+            "role": "root-adopted actual delegated owner-focused FIRST; not native Alpha",
+            "delegated_reviewer": "/root/flyping_composite",
+            "delegated_review_sources": [
+              {
+                "file": "research/inverse-problems-knot-theory-all-109-2026-10-19-supervision-20261020/step2-supervision/battery1-boundary/lane-3/proposal.json",
+                "field": "rows",
+                "index": 223
+              }
+            ],
+            "root_adoption_record": "research/inverse-problems-knot-theory-all-109-2026-10-19-supervision-20261020/step2-supervision/battery1-boundary/lane-3/root-final-adoption.json"
+          }
+        }
+      ]
+    },
+    "ex-ip-inversebench-multicoil-mri": {
+      "risk": "low",
+      "kind": "example",
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-ip-benchmark-risk-and-compute-budget",
+          "source_section": "Definition",
+          "quote": "Fix measurable spaces $(X,\\mathcal X)$ and $(Y,\\mathcal Y)$, a metric target space $(Q,d_Q)$ with its Borel sigma-algebra $\\mathcal Q$, and a nonempty truth class $U\\subseteq X$ with inherited sigma-algebra $\\mathcal U=\\{A\\cap U:A\\in\\mathcal X\\}$. Let $q:U\\to Q$ and $F:U\\to Y$ be measurable target and forward maps. The **admissible state set** is a declared nonempty $\\mathcal U$-measurable subset $C\\subseteq U$. The observation model is a specified probability kernel $K(dy\\mid x)$ from $(U,\\mathcal U)$ to $(Y,\\mathcal Y)$; in an additive-noise model, when $Y$ has a measurable addition operation, it is the law of $F(x)+\\varepsilon$ for a declared noise law of $\\varepsilon$, while nonadditive or model-dependent observation noise is encoded directly by $K$.\n\nThe forward solver, when a numerical evaluation is used, is the specified procedure for evaluating this model, including its discretization, tolerances, finite call budget, and any model-specific admissibility test; exact evaluation is the special case with no numerical-solver error. A failed admissibility test or solver call is recorded with its failure status and is not silently omitted from the benchmark results.\n\nA **benchmark specification** also declares a training law $P_{\\rm train}$ on a named measurable space for all random variables used to fit a method or select its hyperparameters; those variables may be paired or unpaired. It declares a test law $P_{\\rm test}$ on $(Y\\times Q,\\mathcal Y\\otimes\\mathcal Q)$ for evaluation pairs $(Y,q(X))$, and any separate validation law used for tuning. The training and test laws need not agree. Each candidate method is identified by its fitting procedure and by its deployed measurable deterministic reconstruction rule $g:Y\\to Q$ or randomized reconstruction kernel $L(da\\mid y)$ from $Y$ to $Q$. Its population test risk is the risk under $P_{\\rm test}$ as defined by the inverse-risk functional; a reported finite-sample score must additionally name its test sample and empirical aggregation rule. No risk transfer or generalization bound follows from the benchmark specification.\n\nBefore comparison, the specification fixes a nonnegative product-measurable loss $\\ell:Q\\times Q\\to[0,+\\infty]$, an uncertainty diagnostic, and a finite compute-budget vector. An uncertainty diagnostic is a declared measurable statistic of the method outputs and, when applicable, target labels, together with its target quantity; for example, if a reported set-valued estimate $C(y)\\subseteq Q$ has a product-measurable membership event $\\{(y,a):a\\in C(y)\\}\\in\\mathcal Y\\otimes\\mathcal Q$, its test coverage is $P_{\\rm test}(\\{(y,a)\\in Y\\times Q:a\\in C(y)\\})$. The budget vector records the applicable maximum counts of forward-model queries, adjoint queries, gradient evaluations, ODE right-hand-side evaluations, solver or sampling steps, and elapsed runtime; inapplicable counts are marked as not applicable, not zero. It also records the hardware, numerical precision, software/model versions, random seeds, tuning data, and stopping tolerances needed to interpret those counts. Each method's result records its metric values, uncertainty diagnostic, realized compute counts, solver status, and failed runs. A comparison is tied to the declared test law, test sample, loss, solver, admissibility rules, and tuning protocol; when budgets or other conditions differ, those differences are reported as part of the comparison. The specification defines an evaluation protocol, not a theorem ranking algorithms.\n\n```tikz\n\\begin{tikzpicture}[>=stealth]\n  \\node[draw,rounded corners,align=center] (train) at (0,1.3) {$P_{\\rm train}$};\n  \\node[draw,rounded corners,align=center] (fit) at (3,1.3) {fit and tune};\n  \\node[draw,rounded corners,align=center] (rule) at (6.2,1.3) {$g$ or $L$};\n  \\node[draw,rounded corners,align=center] (forward) at (0,-0.2) {$F$, noise $K$, solver};\n  \\node[draw,rounded corners,align=center] (test) at (3,-0.2) {$P_{\\rm test}$ pairs};\n  \\node[draw,rounded corners,align=center] (eval) at (6.4,-0.2) {loss and uncertainty};\n  \\node[draw,rounded corners,align=center] (record) at (10,-0.2) {scores, budget, status};\n  \\draw[->] (train)--(fit);\n  \\draw[->] (fit)--(rule);\n  \\draw[->] (forward)--(test);\n  \\draw[->] (test)--(eval);\n  \\draw[->] (rule)--(eval);\n  \\draw[->] (eval)--(record);\n\\end{tikzpicture}\n```\n\nThe arrows label declared information flow into fitting, observation generation, and evaluation. The diagram asserts no equality between $P_{\\rm train}$ and $P_{\\rm test}$ and no risk-transfer result.",
+          "uses": [
+            "1.2",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "rem-ip-inversebench-scoped-findings",
+          "source_section": "Remark",
+          "quote": "Zheng et al.'s InverseBench reports 14 plug-and-play diffusion-prior algorithms and domain-specific baselines on five selected cases: first-Born optical scattering, raw multi-coil knee MRI, black-hole very-long-baseline interferometry, full waveform inversion, and two-dimensional vorticity-form Navier–Stokes inversion. For these experiments, the authors report that diffusion-prior methods often outperform conventional baselines when the training data are suitable, while a classical full-waveform-inversion optimizer initialized from a smoothed ground truth outperforms the tested diffusion-prior methods. In cases with closed-form forward models, methods using more forward-gradient queries can be more accurate and more expensive; the paper reports that this trend fails for its numerical PDE cases. Its Navier–Stokes split has one validation case and ten test cases. The paper reports step-size/Courant–Friedrichs–Lewy (CFL) failures in its PDE experiments. Its Figure 5 out-of-distribution diagnostics feed digit images to a black-hole prior trained on simulated black-hole images, and nine-cell scattering sources to a prior trained on one-to-six-cell sources; for the black-hole case, the authors report outputs with the prior's characteristic ring feature. These are empirical observations for the named data, solvers, methods, tuning protocol, and hardware; they establish no universal ranking, stability bound, posterior exactness, risk-transfer bound, or robustness theorem.\n\nThere is a first-Born notation discrepancy between the paper and its released implementation. Appendix B.1 defines a contrast-dependent total field and then displays a sensor equation with that field multiplied by the contrast, which does not itself exhibit a fixed linear map. The pinned implementation instead passes the fixed incident field into the sensor-propagation routine and constructs its cached linear matrix from that fixed field. This page therefore identifies the implemented benchmark as the first-Born linear case and does not infer linearity from the printed contrast-dependent expression.",
+          "uses": [
+            "2.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "With $P$, $F$, and each $S_j$ fixed, $PFS_j$ is a linear map on $\\mathbb C^n$; therefore the displayed observation equation is a linear multi-coil measurement model for each $j$.",
+          "step": "1.1",
+          "inputs": [
+            "given",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-1-2",
+          "claim": "For each labelled case in [A1], $K(\\cdot\\mid i)=\\delta_{y_i}$ is a probability measure. Every function on the finite truth space is measurable, including $i\\mapsto K(B\\mid i)$ for each Borel observation set $B$. Thus this is an explicitly specified probability kernel, and $q$, $F$, and the empirical test/validation and point-mass fitting laws are measurable or probability-valued as required by [F1]. This conditional construction uses recorded raw data and makes no inference of a physical noise law from the term \"raw noise.\"",
+          "step": "1.2",
+          "inputs": [
+            "A1",
+            "F1"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "The squared loss and ball-membership event in [A2] are product-measurable for the magnitude-image targets and measurable deployed rule. Their empirical-law integrals equal the declared averages, including fallback outputs. The procedures, budgets, metadata, and retained statuses in [A2] complete this finite-data instance of [F1]. The paper's PSNR/SSIM/data-misfit reports retain their original meaning and scope in [F2]; the chosen squared-error and coverage protocol is an explicit specialization, not a claim that the paper specified this diagnostic or a physical observation kernel.",
+          "step": "2.1",
+          "inputs": [
+            "A1",
+            "A2",
+            "F1",
+            "F2"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The benchmark has n=320^2 pixels and actual per-coil data; it is not an empty-image model.",
+          "template_review": {
+            "upheld": true,
+            "by": "/root",
+            "reason": "The benchmark has n=320^2 pixels and actual per-coil data; it is not an empty-image model.",
+            "item_sha256": "683abfcfc851ada50a080ff560da042965268f8e94371a6eff1e0293d2451741",
+            "row_sha256": "355d1c376ae5ae2268855e7ad8e114c226e9dcd4797d6043f1085c9f578dbc9f",
+            "role": "root-adopted actual delegated owner-focused FIRST; not native Alpha",
+            "delegated_reviewer": "/root/top_controlled_h_cobordism",
+            "delegated_review_sources": [
+              {
+                "file": "research/inverse-problems-knot-theory-all-109-2026-10-19-supervision-20261020/step2-supervision/battery1-boundary/lane-5/proposal.json",
+                "field": "rows",
+                "index": 224
+              }
+            ],
+            "root_adoption_record": "research/inverse-problems-knot-theory-all-109-2026-10-19-supervision-20261020/step2-supervision/battery1-boundary/lane-5/root-final-adoption.json"
+          }
+        },
+        {
+          "case": "zero",
+          "status": "not_applicable",
+          "reason": "Zero raw noise is allowed algebraically, but no Gaussian raw-noise distribution is assumed in1.1.",
+          "template_review": {
+            "upheld": true,
+            "by": "/root",
+            "reason": "Zero raw noise is allowed algebraically, but no Gaussian raw-noise distribution is assumed in1.1.",
+            "item_sha256": "683abfcfc851ada50a080ff560da042965268f8e94371a6eff1e0293d2451741",
+            "row_sha256": "0e02a5c255d96822cdffaad83cbb649cfd29afdc71d5b512b1c0a736f3b40035",
+            "role": "root-adopted actual delegated owner-focused FIRST; not native Alpha",
+            "delegated_reviewer": "/root/top_controlled_h_cobordism",
+            "delegated_review_sources": [
+              {
+                "file": "research/inverse-problems-knot-theory-all-109-2026-10-19-supervision-20261020/step2-supervision/battery1-boundary/lane-5/proposal.json",
+                "field": "rows",
+                "index": 225
+              }
+            ],
+            "root_adoption_record": "research/inverse-problems-knot-theory-all-109-2026-10-19-supervision-20261020/step2-supervision/battery1-boundary/lane-5/root-final-adoption.json"
+          }
+        },
+        {
+          "case": "one",
+          "status": "not_applicable",
+          "reason": "With one fixed coil, PFS1 is still a linear map; the stated empirical benchmark is the supplied multicoil split.",
+          "template_review": {
+            "upheld": true,
+            "by": "/root",
+            "reason": "With one fixed coil, PFS1 is still a linear map; the stated empirical benchmark is the supplied multicoil split.",
+            "item_sha256": "683abfcfc851ada50a080ff560da042965268f8e94371a6eff1e0293d2451741",
+            "row_sha256": "d1bf5304a6e346daae0bb0dd1eca8c674e1ead572b8aabf4dd362e7eb657f7a0",
+            "role": "root-adopted actual delegated owner-focused FIRST; not native Alpha",
+            "delegated_reviewer": "/root/top_controlled_h_cobordism",
+            "delegated_review_sources": [
+              {
+                "file": "research/inverse-problems-knot-theory-all-109-2026-10-19-supervision-20261020/step2-supervision/battery1-boundary/lane-5/proposal.json",
+                "field": "rows",
+                "index": 226
+              }
+            ],
+            "root_adoption_record": "research/inverse-problems-knot-theory-all-109-2026-10-19-supervision-20261020/step2-supervision/battery1-boundary/lane-5/root-final-adoption.json"
+          }
+        },
+        {
+          "case": "degenerate",
+          "status": "not_applicable",
+          "reason": "Vanishing coil sensitivity or omitted k-space rows do not change linearity and imply no inverse uniqueness claim.",
+          "template_review": {
+            "upheld": true,
+            "by": "/root",
+            "reason": "Vanishing coil sensitivity or omitted k-space rows do not change linearity and imply no inverse uniqueness claim.",
+            "item_sha256": "683abfcfc851ada50a080ff560da042965268f8e94371a6eff1e0293d2451741",
+            "row_sha256": "ec4f9b2543a7255b0a4bd288aa60294338cba19e4ddf27d99a7de04a913ffabd",
+            "role": "root-adopted actual delegated owner-focused FIRST; not native Alpha",
+            "delegated_reviewer": "/root/top_controlled_h_cobordism",
+            "delegated_review_sources": [
+              {
+                "file": "research/inverse-problems-knot-theory-all-109-2026-10-19-supervision-20261020/step2-supervision/battery1-boundary/lane-5/proposal.json",
+                "field": "rows",
+                "index": 227
+              }
+            ],
+            "root_adoption_record": "research/inverse-problems-knot-theory-all-109-2026-10-19-supervision-20261020/step2-supervision/battery1-boundary/lane-5/root-final-adoption.json"
+          }
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "The6 tuning and94 test images are finite split counts, not endpoints of an asymptotic sample interval.",
+          "template_review": {
+            "upheld": true,
+            "by": "/root",
+            "reason": "The6 tuning and94 test images are finite split counts, not endpoints of an asymptotic sample interval.",
+            "item_sha256": "683abfcfc851ada50a080ff560da042965268f8e94371a6eff1e0293d2451741",
+            "row_sha256": "ce6445fda1506fbfbe932aec5003a6c4fddc8c3070a0823785d56d2064d36412",
+            "role": "root-adopted actual delegated owner-focused FIRST; not native Alpha",
+            "delegated_reviewer": "/root/top_controlled_h_cobordism",
+            "delegated_review_sources": [
+              {
+                "file": "research/inverse-problems-knot-theory-all-109-2026-10-19-supervision-20261020/step2-supervision/battery1-boundary/lane-5/proposal.json",
+                "field": "rows",
+                "index": 228
+              }
+            ],
+            "root_adoption_record": "research/inverse-problems-knot-theory-all-109-2026-10-19-supervision-20261020/step2-supervision/battery1-boundary/lane-5/root-final-adoption.json"
+          }
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "The coil-indexed operators and finite train/tuning/test lists are specified in the Example statement; no selection from an arbitrary family is made."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The example instantiates a fixed linear observation model; it does not assert an iff for MRI recoverability.",
+          "template_review": {
+            "upheld": true,
+            "by": "/root",
+            "reason": "The example instantiates a fixed linear observation model; it does not assert an iff for MRI recoverability.",
+            "item_sha256": "683abfcfc851ada50a080ff560da042965268f8e94371a6eff1e0293d2451741",
+            "row_sha256": "ee1b8e3af47ea559670a8e7b73e8cc12795ae1da0919a9ac4907fd2cc04e1c9d",
+            "role": "root-adopted actual delegated owner-focused FIRST; not native Alpha",
+            "delegated_reviewer": "/root/top_controlled_h_cobordism",
+            "delegated_review_sources": [
+              {
+                "file": "research/inverse-problems-knot-theory-all-109-2026-10-19-supervision-20261020/step2-supervision/battery1-boundary/lane-5/proposal.json",
+                "field": "rows",
+                "index": 222
+              }
+            ],
+            "root_adoption_record": "research/inverse-problems-knot-theory-all-109-2026-10-19-supervision-20261020/step2-supervision/battery1-boundary/lane-5/root-final-adoption.json"
+          }
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "No converse performance guarantee or calibration theorem is inferred from the benchmark equation.",
+          "template_review": {
+            "upheld": true,
+            "by": "/root",
+            "reason": "No converse performance guarantee or calibration theorem is inferred from the benchmark equation.",
+            "item_sha256": "683abfcfc851ada50a080ff560da042965268f8e94371a6eff1e0293d2451741",
+            "row_sha256": "117e60d5e2b3bb9861827b4869d68414684120b63242b74f367ee0b007d8b698",
+            "role": "root-adopted actual delegated owner-focused FIRST; not native Alpha",
+            "delegated_reviewer": "/root/top_controlled_h_cobordism",
+            "delegated_review_sources": [
+              {
+                "file": "research/inverse-problems-knot-theory-all-109-2026-10-19-supervision-20261020/step2-supervision/battery1-boundary/lane-5/proposal.json",
+                "field": "rows",
+                "index": 223
+              }
+            ],
+            "root_adoption_record": "research/inverse-problems-knot-theory-all-109-2026-10-19-supervision-20261020/step2-supervision/battery1-boundary/lane-5/root-final-adoption.json"
+          }
+        }
+      ]
+    },
+    "ex-ip-inversebench-black-hole-imaging": {
+      "risk": "low",
+      "kind": "example",
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-ip-benchmark-risk-and-compute-budget",
+          "source_section": "Definition",
+          "quote": "Fix measurable spaces $(X,\\mathcal X)$ and $(Y,\\mathcal Y)$, a metric target space $(Q,d_Q)$ with its Borel sigma-algebra $\\mathcal Q$, and a nonempty truth class $U\\subseteq X$ with inherited sigma-algebra $\\mathcal U=\\{A\\cap U:A\\in\\mathcal X\\}$. Let $q:U\\to Q$ and $F:U\\to Y$ be measurable target and forward maps. The **admissible state set** is a declared nonempty $\\mathcal U$-measurable subset $C\\subseteq U$. The observation model is a specified probability kernel $K(dy\\mid x)$ from $(U,\\mathcal U)$ to $(Y,\\mathcal Y)$; in an additive-noise model, when $Y$ has a measurable addition operation, it is the law of $F(x)+\\varepsilon$ for a declared noise law of $\\varepsilon$, while nonadditive or model-dependent observation noise is encoded directly by $K$.\n\nThe forward solver, when a numerical evaluation is used, is the specified procedure for evaluating this model, including its discretization, tolerances, finite call budget, and any model-specific admissibility test; exact evaluation is the special case with no numerical-solver error. A failed admissibility test or solver call is recorded with its failure status and is not silently omitted from the benchmark results.\n\nA **benchmark specification** also declares a training law $P_{\\rm train}$ on a named measurable space for all random variables used to fit a method or select its hyperparameters; those variables may be paired or unpaired. It declares a test law $P_{\\rm test}$ on $(Y\\times Q,\\mathcal Y\\otimes\\mathcal Q)$ for evaluation pairs $(Y,q(X))$, and any separate validation law used for tuning. The training and test laws need not agree. Each candidate method is identified by its fitting procedure and by its deployed measurable deterministic reconstruction rule $g:Y\\to Q$ or randomized reconstruction kernel $L(da\\mid y)$ from $Y$ to $Q$. Its population test risk is the risk under $P_{\\rm test}$ as defined by the inverse-risk functional; a reported finite-sample score must additionally name its test sample and empirical aggregation rule. No risk transfer or generalization bound follows from the benchmark specification.\n\nBefore comparison, the specification fixes a nonnegative product-measurable loss $\\ell:Q\\times Q\\to[0,+\\infty]$, an uncertainty diagnostic, and a finite compute-budget vector. An uncertainty diagnostic is a declared measurable statistic of the method outputs and, when applicable, target labels, together with its target quantity; for example, if a reported set-valued estimate $C(y)\\subseteq Q$ has a product-measurable membership event $\\{(y,a):a\\in C(y)\\}\\in\\mathcal Y\\otimes\\mathcal Q$, its test coverage is $P_{\\rm test}(\\{(y,a)\\in Y\\times Q:a\\in C(y)\\})$. The budget vector records the applicable maximum counts of forward-model queries, adjoint queries, gradient evaluations, ODE right-hand-side evaluations, solver or sampling steps, and elapsed runtime; inapplicable counts are marked as not applicable, not zero. It also records the hardware, numerical precision, software/model versions, random seeds, tuning data, and stopping tolerances needed to interpret those counts. Each method's result records its metric values, uncertainty diagnostic, realized compute counts, solver status, and failed runs. A comparison is tied to the declared test law, test sample, loss, solver, admissibility rules, and tuning protocol; when budgets or other conditions differ, those differences are reported as part of the comparison. The specification defines an evaluation protocol, not a theorem ranking algorithms.\n\n```tikz\n\\begin{tikzpicture}[>=stealth]\n  \\node[draw,rounded corners,align=center] (train) at (0,1.3) {$P_{\\rm train}$};\n  \\node[draw,rounded corners,align=center] (fit) at (3,1.3) {fit and tune};\n  \\node[draw,rounded corners,align=center] (rule) at (6.2,1.3) {$g$ or $L$};\n  \\node[draw,rounded corners,align=center] (forward) at (0,-0.2) {$F$, noise $K$, solver};\n  \\node[draw,rounded corners,align=center] (test) at (3,-0.2) {$P_{\\rm test}$ pairs};\n  \\node[draw,rounded corners,align=center] (eval) at (6.4,-0.2) {loss and uncertainty};\n  \\node[draw,rounded corners,align=center] (record) at (10,-0.2) {scores, budget, status};\n  \\draw[->] (train)--(fit);\n  \\draw[->] (fit)--(rule);\n  \\draw[->] (forward)--(test);\n  \\draw[->] (test)--(eval);\n  \\draw[->] (rule)--(eval);\n  \\draw[->] (eval)--(record);\n\\end{tikzpicture}\n```\n\nThe arrows label declared information flow into fitting, observation generation, and evaluation. The diagram asserts no equality between $P_{\\rm train}$ and $P_{\\rm test}$ and no risk-transfer result.",
+          "uses": [
+            "1.2",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "rem-ip-inversebench-scoped-findings",
+          "source_section": "Remark",
+          "quote": "Zheng et al.'s InverseBench reports 14 plug-and-play diffusion-prior algorithms and domain-specific baselines on five selected cases: first-Born optical scattering, raw multi-coil knee MRI, black-hole very-long-baseline interferometry, full waveform inversion, and two-dimensional vorticity-form Navier–Stokes inversion. For these experiments, the authors report that diffusion-prior methods often outperform conventional baselines when the training data are suitable, while a classical full-waveform-inversion optimizer initialized from a smoothed ground truth outperforms the tested diffusion-prior methods. In cases with closed-form forward models, methods using more forward-gradient queries can be more accurate and more expensive; the paper reports that this trend fails for its numerical PDE cases. Its Navier–Stokes split has one validation case and ten test cases. The paper reports step-size/Courant–Friedrichs–Lewy (CFL) failures in its PDE experiments. Its Figure 5 out-of-distribution diagnostics feed digit images to a black-hole prior trained on simulated black-hole images, and nine-cell scattering sources to a prior trained on one-to-six-cell sources; for the black-hole case, the authors report outputs with the prior's characteristic ring feature. These are empirical observations for the named data, solvers, methods, tuning protocol, and hardware; they establish no universal ranking, stability bound, posterior exactness, risk-transfer bound, or robustness theorem.\n\nThere is a first-Born notation discrepancy between the paper and its released implementation. Appendix B.1 defines a contrast-dependent total field and then displays a sensor equation with that field multiplied by the contrast, which does not itself exhibit a fixed linear map. The pinned implementation instead passes the fixed incident field into the sensor-propagation routine and constructs its cached linear matrix from that fixed field. This page therefore identifies the implemented benchmark as the first-Born linear case and does not infer linearity from the printed contrast-dependent expression.",
+          "uses": [
+            "2.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "Substitution of the ideal Fourier visibility into the displayed gain/phase/noise equation gives the paper's complex observation model; on the stated nonzero-visibility domains, applying the displayed argument and log-amplitude functions gives the stated closure data.",
+          "step": "1.1",
+          "inputs": [
+            "given",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-1-2",
+          "claim": "On the finite labelled truth space in [A1], $q$ and $F$ are measurable and each $K(\\cdot\\mid i)$ is a probability measure; for every Borel set $B\\subseteq Y$, $i\\mapsto\\mathbf1_B(y_i)$ is measurable. Thus $K$ is a probability kernel. The empirical test and validation laws and the point-mass fitting law are specified probability measures. They complete the case data with the law fields of [F1]; the split sizes alone do not determine those laws.",
+          "step": "1.2",
+          "inputs": [
+            "A1",
+            "F1"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "The squared loss and the ball-membership event in [A2] are product-measurable, since $g$ is measurable and the Euclidean distance is continuous. Their integrals under the empirical test law are exactly the declared finite averages, including the prescribed fallback outputs. Together with the supplied procedures, finite budgets, metadata, and failure records, these instantiate the remaining fields of [F1]. This verifies the conditional specialization, while the source's empirical scope remains [F2]; neither empirical coverage nor the physical observation formulas imply population calibration or uniqueness.",
+          "step": "2.1",
+          "inputs": [
+            "A1",
+            "A2",
+            "F1",
+            "F2"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The fixed benchmark uses64by64images and stated finite data splits, not an empty image space or absent observation model.",
+          "template_review": {
+            "upheld": true,
+            "by": "/root",
+            "reason": "Actual assigned-case review: The fixed benchmark uses64by64images and stated finite data splits, not an empty image space or absent observation model.",
+            "item_sha256": "78d983339024a5f285da410ef38dc28e57ace7379f33238ef1b56378a7d7b703",
+            "row_sha256": "4c9d70ede80ff61ea5acf4dc30142f58000462a50cd8413cb20598a8a9c66b73",
+            "role": "root-adopted actual delegated owner-focused FIRST; not native Alpha",
+            "delegated_reviewer": "/root/flyping_bridge",
+            "delegated_review_sources": [
+              {
+                "file": "research/inverse-problems-knot-theory-all-109-2026-10-19-supervision-20261020/step2-supervision/battery1-boundary/lane-2/proposal.json",
+                "field": "rows",
+                "index": 224
+              }
+            ],
+            "root_adoption_record": "research/inverse-problems-knot-theory-all-109-2026-10-19-supervision-20261020/step2-supervision/battery1-boundary/lane-2/root-final-adoption.json"
+          }
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "On the explicitly stated valid-data domain, the closure phase requires a nonzero triangle product and the logarithmic amplitude requires all four amplitudes nonzero. Zero products or zero amplitudes are outside that observable domain; Verification 1.1 applies only there. No value or masking behavior is asserted at undefined inputs.",
+          "template_review": {
+            "upheld": true,
+            "by": "/root",
+            "reason": "On the explicitly stated valid-data domain, the closure phase requires a nonzero triangle product and the logarithmic amplitude requires all four amplitudes nonzero. Zero products or zero amplitudes are outside that observable domain; Verification 1.1 applies only there. No value or masking behavior is asserted at undefined inputs. Root adopted the three exact domain hunks; current Example/Given/Verification 1.1 were read after adoption.",
+            "item_sha256": "78d983339024a5f285da410ef38dc28e57ace7379f33238ef1b56378a7d7b703",
+            "row_sha256": "9614bbd1e5ed0a162281959fab207f9eff782b1e37c232af4c847efc3e28b380",
+            "role": "root-adopted actual delegated owner-focused FIRST; not native Alpha",
+            "delegated_reviewer": "/root/flyping_bridge",
+            "delegated_review_sources": [
+              {
+                "file": "research/inverse-problems-knot-theory-all-109-2026-10-19-supervision-20261020/step2-supervision/battery1-boundary/lane-2/proposal.json",
+                "field": "rows",
+                "index": 225
+              }
+            ],
+            "root_adoption_record": "research/inverse-problems-knot-theory-all-109-2026-10-19-supervision-20261020/step2-supervision/battery1-boundary/lane-2/root-final-adoption.json"
+          }
+        },
+        {
+          "case": "one",
+          "status": "not_applicable",
+          "reason": "The closure phase requires three oriented telescope edges and the log-amplitude uses a quadrangle; a one-telescope closure is not defined.",
+          "template_review": {
+            "upheld": true,
+            "by": "/root",
+            "reason": "Actual assigned-case review: The closure phase requires three oriented telescope edges and the log-amplitude uses a quadrangle; a one-telescope closure is not defined.",
+            "item_sha256": "78d983339024a5f285da410ef38dc28e57ace7379f33238ef1b56378a7d7b703",
+            "row_sha256": "63355b71b0afae7215ecc21914df1836b904c4c2a440b571aeb1e671325c8291",
+            "role": "root-adopted actual delegated owner-focused FIRST; not native Alpha",
+            "delegated_reviewer": "/root/flyping_bridge",
+            "delegated_review_sources": [
+              {
+                "file": "research/inverse-problems-knot-theory-all-109-2026-10-19-supervision-20261020/step2-supervision/battery1-boundary/lane-2/proposal.json",
+                "field": "rows",
+                "index": 226
+              }
+            ],
+            "root_adoption_record": "research/inverse-problems-knot-theory-all-109-2026-10-19-supervision-20261020/step2-supervision/battery1-boundary/lane-2/root-final-adoption.json"
+          }
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "On the explicitly stated valid-data domain, the closure phase requires a nonzero triangle product and the logarithmic amplitude requires all four amplitudes nonzero. Zero products or zero amplitudes are outside that observable domain; Verification 1.1 applies only there. No value or masking behavior is asserted at undefined inputs.",
+          "template_review": {
+            "upheld": true,
+            "by": "/root",
+            "reason": "On the explicitly stated valid-data domain, the closure phase requires a nonzero triangle product and the logarithmic amplitude requires all four amplitudes nonzero. Zero products or zero amplitudes are outside that observable domain; Verification 1.1 applies only there. No value or masking behavior is asserted at undefined inputs. Root adopted the three exact domain hunks; current Example/Given/Verification 1.1 were read after adoption.",
+            "item_sha256": "78d983339024a5f285da410ef38dc28e57ace7379f33238ef1b56378a7d7b703",
+            "row_sha256": "a59f091281d09e7915bb3c61b3986aab94327537a9148c5d3ef6021f96f4f2d8",
+            "role": "root-adopted actual delegated owner-focused FIRST; not native Alpha",
+            "delegated_reviewer": "/root/flyping_bridge",
+            "delegated_review_sources": [
+              {
+                "file": "research/inverse-problems-knot-theory-all-109-2026-10-19-supervision-20261020/step2-supervision/battery1-boundary/lane-2/proposal.json",
+                "field": "rows",
+                "index": 227
+              }
+            ],
+            "root_adoption_record": "research/inverse-problems-knot-theory-all-109-2026-10-19-supervision-20261020/step2-supervision/battery1-boundary/lane-2/root-final-adoption.json"
+          }
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "Angular coordinates and observed closure phases are not a theorem about continuity at an argument branch-cut endpoint; no such extension is asserted.",
+          "template_review": {
+            "upheld": true,
+            "by": "/root",
+            "reason": "Actual assigned-case review: Angular coordinates and observed closure phases are not a theorem about continuity at an argument branch-cut endpoint; no such extension is asserted.",
+            "item_sha256": "78d983339024a5f285da410ef38dc28e57ace7379f33238ef1b56378a7d7b703",
+            "row_sha256": "36e2efd263c40038b41ab6ab35e64c9e7b5fd0f7d6da9cde1b21f33892111e60",
+            "role": "root-adopted actual delegated owner-focused FIRST; not native Alpha",
+            "delegated_reviewer": "/root/flyping_bridge",
+            "delegated_review_sources": [
+              {
+                "file": "research/inverse-problems-knot-theory-all-109-2026-10-19-supervision-20261020/step2-supervision/battery1-boundary/lane-2/proposal.json",
+                "field": "rows",
+                "index": 228
+              }
+            ],
+            "root_adoption_record": "research/inverse-problems-knot-theory-all-109-2026-10-19-supervision-20261020/step2-supervision/battery1-boundary/lane-2/root-final-adoption.json"
+          }
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "The finite telescope/image model and finite dataset sizes are explicitly stated in the Example statement; no choice axiom is used."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The Example specifies an empirical visibility/closure model, expressly declining a general uniqueness or calibration equivalence.",
+          "template_review": {
+            "upheld": true,
+            "by": "/root",
+            "reason": "Actual assigned-case review: The Example specifies an empirical visibility/closure model, expressly declining a general uniqueness or calibration equivalence.",
+            "item_sha256": "78d983339024a5f285da410ef38dc28e57ace7379f33238ef1b56378a7d7b703",
+            "row_sha256": "488e2867e6ee03d00b6e90e242709dbde8bdb84c8e0d991a20e408aee0b9bfee",
+            "role": "root-adopted actual delegated owner-focused FIRST; not native Alpha",
+            "delegated_reviewer": "/root/flyping_bridge",
+            "delegated_review_sources": [
+              {
+                "file": "research/inverse-problems-knot-theory-all-109-2026-10-19-supervision-20261020/step2-supervision/battery1-boundary/lane-2/proposal.json",
+                "field": "rows",
+                "index": 222
+              }
+            ],
+            "root_adoption_record": "research/inverse-problems-knot-theory-all-109-2026-10-19-supervision-20261020/step2-supervision/battery1-boundary/lane-2/root-final-adoption.json"
+          }
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "No reverse inference from successful benchmark reconstructions to a unique image or calibrated posterior is claimed.",
+          "template_review": {
+            "upheld": true,
+            "by": "/root",
+            "reason": "Actual assigned-case review: No reverse inference from successful benchmark reconstructions to a unique image or calibrated posterior is claimed.",
+            "item_sha256": "78d983339024a5f285da410ef38dc28e57ace7379f33238ef1b56378a7d7b703",
+            "row_sha256": "21cee95dfaf532ca64f5795126d4bf43822edb609657efe6a93017c2d673f0b3",
+            "role": "root-adopted actual delegated owner-focused FIRST; not native Alpha",
+            "delegated_reviewer": "/root/flyping_bridge",
+            "delegated_review_sources": [
+              {
+                "file": "research/inverse-problems-knot-theory-all-109-2026-10-19-supervision-20261020/step2-supervision/battery1-boundary/lane-2/proposal.json",
+                "field": "rows",
+                "index": 223
+              }
+            ],
+            "root_adoption_record": "research/inverse-problems-knot-theory-all-109-2026-10-19-supervision-20261020/step2-supervision/battery1-boundary/lane-2/root-final-adoption.json"
+          }
+        }
+      ],
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "alpha-batch-51",
+        "notes": "Read Example, both Verification steps, F1/F2 current carriers and pinned blackhole.py 110–140, 208–260; checked paper v2 §4.1 and Appendix B.3 equations 15–20 and multimodal discussion. Directed triangle uses conjugation for reversed baselines; quadrangle uses ab,cd over ad,bc exactly as code, rather than the differently ordered printed paper formula. Argument requires nonzero product, logs require all four amplitudes positive. Thermal visibility noise need not remain additive after nonlinear closure maps. Finite 50000/5/100 split and 64-square image size checked. No uniqueness, calibration or universal noise claim is inferred. Corrected inaccurate reader source locator; formulas and proof unchanged."
+      }
+    },
+    "ex-ip-inversebench-full-waveform-inversion": {
+      "risk": "low",
+      "kind": "example",
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-ip-benchmark-risk-and-compute-budget",
+          "source_section": "Definition",
+          "quote": "Fix measurable spaces $(X,\\mathcal X)$ and $(Y,\\mathcal Y)$, a metric target space $(Q,d_Q)$ with its Borel sigma-algebra $\\mathcal Q$, and a nonempty truth class $U\\subseteq X$ with inherited sigma-algebra $\\mathcal U=\\{A\\cap U:A\\in\\mathcal X\\}$. Let $q:U\\to Q$ and $F:U\\to Y$ be measurable target and forward maps. The **admissible state set** is a declared nonempty $\\mathcal U$-measurable subset $C\\subseteq U$. The observation model is a specified probability kernel $K(dy\\mid x)$ from $(U,\\mathcal U)$ to $(Y,\\mathcal Y)$; in an additive-noise model, when $Y$ has a measurable addition operation, it is the law of $F(x)+\\varepsilon$ for a declared noise law of $\\varepsilon$, while nonadditive or model-dependent observation noise is encoded directly by $K$.\n\nThe forward solver, when a numerical evaluation is used, is the specified procedure for evaluating this model, including its discretization, tolerances, finite call budget, and any model-specific admissibility test; exact evaluation is the special case with no numerical-solver error. A failed admissibility test or solver call is recorded with its failure status and is not silently omitted from the benchmark results.\n\nA **benchmark specification** also declares a training law $P_{\\rm train}$ on a named measurable space for all random variables used to fit a method or select its hyperparameters; those variables may be paired or unpaired. It declares a test law $P_{\\rm test}$ on $(Y\\times Q,\\mathcal Y\\otimes\\mathcal Q)$ for evaluation pairs $(Y,q(X))$, and any separate validation law used for tuning. The training and test laws need not agree. Each candidate method is identified by its fitting procedure and by its deployed measurable deterministic reconstruction rule $g:Y\\to Q$ or randomized reconstruction kernel $L(da\\mid y)$ from $Y$ to $Q$. Its population test risk is the risk under $P_{\\rm test}$ as defined by the inverse-risk functional; a reported finite-sample score must additionally name its test sample and empirical aggregation rule. No risk transfer or generalization bound follows from the benchmark specification.\n\nBefore comparison, the specification fixes a nonnegative product-measurable loss $\\ell:Q\\times Q\\to[0,+\\infty]$, an uncertainty diagnostic, and a finite compute-budget vector. An uncertainty diagnostic is a declared measurable statistic of the method outputs and, when applicable, target labels, together with its target quantity; for example, if a reported set-valued estimate $C(y)\\subseteq Q$ has a product-measurable membership event $\\{(y,a):a\\in C(y)\\}\\in\\mathcal Y\\otimes\\mathcal Q$, its test coverage is $P_{\\rm test}(\\{(y,a)\\in Y\\times Q:a\\in C(y)\\})$. The budget vector records the applicable maximum counts of forward-model queries, adjoint queries, gradient evaluations, ODE right-hand-side evaluations, solver or sampling steps, and elapsed runtime; inapplicable counts are marked as not applicable, not zero. It also records the hardware, numerical precision, software/model versions, random seeds, tuning data, and stopping tolerances needed to interpret those counts. Each method's result records its metric values, uncertainty diagnostic, realized compute counts, solver status, and failed runs. A comparison is tied to the declared test law, test sample, loss, solver, admissibility rules, and tuning protocol; when budgets or other conditions differ, those differences are reported as part of the comparison. The specification defines an evaluation protocol, not a theorem ranking algorithms.\n\n```tikz\n\\begin{tikzpicture}[>=stealth]\n  \\node[draw,rounded corners,align=center] (train) at (0,1.3) {$P_{\\rm train}$};\n  \\node[draw,rounded corners,align=center] (fit) at (3,1.3) {fit and tune};\n  \\node[draw,rounded corners,align=center] (rule) at (6.2,1.3) {$g$ or $L$};\n  \\node[draw,rounded corners,align=center] (forward) at (0,-0.2) {$F$, noise $K$, solver};\n  \\node[draw,rounded corners,align=center] (test) at (3,-0.2) {$P_{\\rm test}$ pairs};\n  \\node[draw,rounded corners,align=center] (eval) at (6.4,-0.2) {loss and uncertainty};\n  \\node[draw,rounded corners,align=center] (record) at (10,-0.2) {scores, budget, status};\n  \\draw[->] (train)--(fit);\n  \\draw[->] (fit)--(rule);\n  \\draw[->] (forward)--(test);\n  \\draw[->] (test)--(eval);\n  \\draw[->] (rule)--(eval);\n  \\draw[->] (eval)--(record);\n\\end{tikzpicture}\n```\n\nThe arrows label declared information flow into fitting, observation generation, and evaluation. The diagram asserts no equality between $P_{\\rm train}$ and $P_{\\rm test}$ and no risk-transfer result.",
+          "uses": [
+            "1.2",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "rem-ip-inversebench-scoped-findings",
+          "source_section": "Remark",
+          "quote": "Zheng et al.'s InverseBench reports 14 plug-and-play diffusion-prior algorithms and domain-specific baselines on five selected cases: first-Born optical scattering, raw multi-coil knee MRI, black-hole very-long-baseline interferometry, full waveform inversion, and two-dimensional vorticity-form Navier–Stokes inversion. For these experiments, the authors report that diffusion-prior methods often outperform conventional baselines when the training data are suitable, while a classical full-waveform-inversion optimizer initialized from a smoothed ground truth outperforms the tested diffusion-prior methods. In cases with closed-form forward models, methods using more forward-gradient queries can be more accurate and more expensive; the paper reports that this trend fails for its numerical PDE cases. Its Navier–Stokes split has one validation case and ten test cases. The paper reports step-size/Courant–Friedrichs–Lewy (CFL) failures in its PDE experiments. Its Figure 5 out-of-distribution diagnostics feed digit images to a black-hole prior trained on simulated black-hole images, and nine-cell scattering sources to a prior trained on one-to-six-cell sources; for the black-hole case, the authors report outputs with the prior's characteristic ring feature. These are empirical observations for the named data, solvers, methods, tuning protocol, and hardware; they establish no universal ranking, stability bound, posterior exactness, risk-transfer bound, or robustness theorem.\n\nThere is a first-Born notation discrepancy between the paper and its released implementation. Appendix B.1 defines a contrast-dependent total field and then displays a sensor equation with that field multiplied by the contrast, which does not itself exhibit a fixed linear map. The pinned implementation instead passes the fixed incident field into the sensor-propagation routine and constructs its cached linear matrix from that fixed field. This page therefore identifies the implemented benchmark as the first-Born linear case and does not infer linearity from the printed contrast-dependent expression.",
+          "uses": [
+            "2.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "With the zero initial data and the stated source, boundary conditions, and solver, the forward call produces the acoustic wavefield; applying the receiver restriction $P$ gives the stated observation, with the velocity map as the parameter being inferred.",
+          "step": "1.1",
+          "inputs": [
+            "given",
+            "construct"
+          ]
+        },
+        {
+          "id": "step-1-2",
+          "claim": "On the finite labelled truth space of [A1], $q$ and $F$ are measurable. Since $y_i=f_i$, the replay kernel $K(\\cdot\\mid i)=\\delta_{F(i)}$ is the noise-free observation kernel for this supplied finite numerical model; its dependence on $i$ is measurable. The empirical test/validation laws and point-mass fitting law specify the population fields of [F1]. The counts fix their list sizes, while the actual supplied lists fix their atoms.",
+          "step": "1.2",
+          "inputs": [
+            "A1",
+            "F1"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "The squared loss and radius-ball membership event in [A2] are product-measurable, so the loss and coverage under the empirical test law equal the declared finite averages. With the supplied procedures, finite budgets, solver settings, metadata, and retained failure records, this gives the remaining fields of [F1]. The source experiment remains scoped as in [F2]; this finite-data specialization proves no continuum PDE existence, numerical convergence, population generalization, or posterior-calibration theorem.",
+          "step": "2.1",
+          "inputs": [
+            "A1",
+            "A2",
+            "F1",
+            "F2"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The specified instance has16 sources,129 receivers,50000 training maps,1 validation map and10 test maps; an empty experiment is not the reported setup. Read: Example; Verification1.1–2.1.",
+          "template_review": {
+            "upheld": true,
+            "by": "/root",
+            "reason": "The specified instance has16 sources,129 receivers,50000 training maps,1 validation map and10 test maps; an empty experiment is not the reported setup.",
+            "item_sha256": "83d33da0d1c85967bc307d495ca77cd1143e9d7bc36195564064443b289b86fa",
+            "row_sha256": "f09c1149a726f5a58ba1451d9cdd7b11c099e779149352837b07d82313290a97",
+            "role": "root-adopted actual delegated owner-focused FIRST; not native Alpha",
+            "delegated_reviewer": "/root/flyping_repair",
+            "delegated_review_sources": [
+              {
+                "file": "research/inverse-problems-knot-theory-all-109-2026-10-19-supervision-20261020/step2-supervision/battery1-boundary/lane-4/proposal.json",
+                "field": "rows",
+                "index": 224
+              }
+            ],
+            "root_adoption_record": "research/inverse-problems-knot-theory-all-109-2026-10-19-supervision-20261020/step2-supervision/battery1-boundary/lane-4/root-final-adoption.json"
+          }
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "The observation noise is explicitly0; velocity still satisfies v(x)>0, so this does not permit zero sound speed in v^-2. Read: Example; Verification 1.1–2.1.",
+          "template_review": {
+            "upheld": true,
+            "by": "/root",
+            "reason": "The observation noise is explicitly0; velocity still satisfies v(x)>0, so this does not permit zero sound speed in v^-2.",
+            "item_sha256": "83d33da0d1c85967bc307d495ca77cd1143e9d7bc36195564064443b289b86fa",
+            "row_sha256": "751ffb0f3255c06ea8b37c6a3ef5da8db00ffe8ac341e34d34062962b0a32107",
+            "role": "root-adopted actual delegated owner-focused FIRST; not native Alpha",
+            "delegated_reviewer": "/root/flyping_repair",
+            "delegated_review_sources": [
+              {
+                "file": "research/inverse-problems-knot-theory-all-109-2026-10-19-supervision-20261020/step2-supervision/battery1-boundary/lane-4/proposal.json",
+                "field": "rows",
+                "index": 225
+              }
+            ],
+            "root_adoption_record": "research/inverse-problems-knot-theory-all-109-2026-10-19-supervision-20261020/step2-supervision/battery1-boundary/lane-4/root-final-adoption.json"
+          }
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "The one validation map is a reported sample count, not evidence for a statistical generalization theorem or a single-source version of the benchmark. Read: Example; Verification 1.1–2.1.",
+          "template_review": {
+            "upheld": true,
+            "by": "/root",
+            "reason": "The one validation map is a reported sample count, not evidence for a statistical generalization theorem or a single-source version of the benchmark.",
+            "item_sha256": "83d33da0d1c85967bc307d495ca77cd1143e9d7bc36195564064443b289b86fa",
+            "row_sha256": "1d85c7f3dacb2a6f35bcb03b591a6c4d8c75a312fb528bd95a484051606316b6",
+            "role": "root-adopted actual delegated owner-focused FIRST; not native Alpha",
+            "delegated_reviewer": "/root/flyping_repair",
+            "delegated_review_sources": [
+              {
+                "file": "research/inverse-problems-knot-theory-all-109-2026-10-19-supervision-20261020/step2-supervision/battery1-boundary/lane-4/proposal.json",
+                "field": "rows",
+                "index": 226
+              }
+            ],
+            "root_adoption_record": "research/inverse-problems-knot-theory-all-109-2026-10-19-supervision-20261020/step2-supervision/battery1-boundary/lane-4/root-final-adoption.json"
+          }
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "The benchmark fixes positive128x128 velocity maps and a0.001s CFL-compatible timestep; it claims no stability when velocity vanishes or these solver settings are violated. Read: Example; Verification 1.1–2.1.",
+          "template_review": {
+            "upheld": true,
+            "by": "/root",
+            "reason": "The benchmark fixes positive128x128 velocity maps and a0.001s CFL-compatible timestep; it claims no stability when velocity vanishes or these solver settings are violated.",
+            "item_sha256": "83d33da0d1c85967bc307d495ca77cd1143e9d7bc36195564064443b289b86fa",
+            "row_sha256": "ca529b1a6d23223892d2bdd117772c0a7bb0d9088536e1c607a9946e68ff9cf0",
+            "role": "root-adopted actual delegated owner-focused FIRST; not native Alpha",
+            "delegated_reviewer": "/root/flyping_repair",
+            "delegated_review_sources": [
+              {
+                "file": "research/inverse-problems-knot-theory-all-109-2026-10-19-supervision-20261020/step2-supervision/battery1-boundary/lane-4/proposal.json",
+                "field": "rows",
+                "index": 227
+              }
+            ],
+            "root_adoption_record": "research/inverse-problems-knot-theory-all-109-2026-10-19-supervision-20261020/step2-supervision/battery1-boundary/lane-4/root-final-adoption.json"
+          }
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Simulation lasts1s; top boundary is free-surface and other boundaries have80-grid-point absorbing treatment. These are empirical solver boundaries, not a demonstrated analytical uniqueness condition. Read: Example; Verification 1.1–2.1.",
+          "template_review": {
+            "upheld": true,
+            "by": "/root",
+            "reason": "Simulation lasts1s; top boundary is free-surface and other boundaries have80-grid-point absorbing treatment. These are empirical solver boundaries, not a demonstrated analytical uniqueness condition.",
+            "item_sha256": "83d33da0d1c85967bc307d495ca77cd1143e9d7bc36195564064443b289b86fa",
+            "row_sha256": "3e3b249c871a5f9fb6eeb476970d8c6a7edabc94c051b858a3da8c5c21326907",
+            "role": "root-adopted actual delegated owner-focused FIRST; not native Alpha",
+            "delegated_reviewer": "/root/flyping_repair",
+            "delegated_review_sources": [
+              {
+                "file": "research/inverse-problems-knot-theory-all-109-2026-10-19-supervision-20261020/step2-supervision/battery1-boundary/lane-4/proposal.json",
+                "field": "rows",
+                "index": 228
+              }
+            ],
+            "root_adoption_record": "research/inverse-problems-knot-theory-all-109-2026-10-19-supervision-20261020/step2-supervision/battery1-boundary/lane-4/root-final-adoption.json"
+          }
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "The finite grid, source/receiver geometry, and dataset split are explicit in the Example statement; no arbitrary selection is used."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "Forward-direction disposition: This is the reported InverseBench acoustic FWI setup, not an iff inverse-uniqueness, consistency or PDE convergence theorem. Read: Example; Verification1.1–2.1.",
+          "template_review": {
+            "upheld": true,
+            "by": "/root",
+            "reason": "Forward-direction disposition: This is the reported InverseBench acoustic FWI setup, not an iff inverse-uniqueness, consistency or PDE convergence theorem.",
+            "item_sha256": "83d33da0d1c85967bc307d495ca77cd1143e9d7bc36195564064443b289b86fa",
+            "row_sha256": "ced1ce2a331befaf3747cd16bf76f7cb09a42c592fb8c0ff1a1f680852d60b47",
+            "role": "root-adopted actual delegated owner-focused FIRST; not native Alpha",
+            "delegated_reviewer": "/root/flyping_repair",
+            "delegated_review_sources": [
+              {
+                "file": "research/inverse-problems-knot-theory-all-109-2026-10-19-supervision-20261020/step2-supervision/battery1-boundary/lane-4/proposal.json",
+                "field": "rows",
+                "index": 222
+              }
+            ],
+            "root_adoption_record": "research/inverse-problems-knot-theory-all-109-2026-10-19-supervision-20261020/step2-supervision/battery1-boundary/lane-4/root-final-adoption.json"
+          }
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "Reverse-direction disposition: This is the reported InverseBench acoustic FWI setup, not an iff inverse-uniqueness, consistency or PDE convergence theorem. Read: Example; Verification1.1–2.1.",
+          "template_review": {
+            "upheld": true,
+            "by": "/root",
+            "reason": "Reverse-direction disposition: This is the reported InverseBench acoustic FWI setup, not an iff inverse-uniqueness, consistency or PDE convergence theorem.",
+            "item_sha256": "83d33da0d1c85967bc307d495ca77cd1143e9d7bc36195564064443b289b86fa",
+            "row_sha256": "e6957d42340105f5f05d9b417f895f74e71df11286b92464b5a2dfb3f5706343",
+            "role": "root-adopted actual delegated owner-focused FIRST; not native Alpha",
+            "delegated_reviewer": "/root/flyping_repair",
+            "delegated_review_sources": [
+              {
+                "file": "research/inverse-problems-knot-theory-all-109-2026-10-19-supervision-20261020/step2-supervision/battery1-boundary/lane-4/proposal.json",
+                "field": "rows",
+                "index": 223
+              }
+            ],
+            "root_adoption_record": "research/inverse-problems-knot-theory-all-109-2026-10-19-supervision-20261020/step2-supervision/battery1-boundary/lane-4/root-final-adoption.json"
+          }
+        }
+      ],
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "alpha-batch-51",
+        "notes": "Read both Verification steps and current F1/F2 carriers. Accepted zero initial pressure and velocity: pinned acoustic.py 61–69 calls solver.forward without u; Devito v4.8.12 wavesolver.py 103–106 constructs default time-order-2 TimeFunction, and dense.py 84–115, 141–155 zero-fills default data. Directly fetched the version-specific dense.py that refuter could not access. Corrected acoustic.py line locator. Paper v2 §4.1 and Appendix B.4 634–637 support mesh, physical domain, free surface/absorbing boundaries, depths, wavelet, CFL time step and sample split; Table 2 supplies zero observation noise. This is a declared numerical benchmark, not PDE existence for arbitrary positive rough velocities or convergence of inversion. No new analytic theorem is invoked; zero initial data remove an essential forward-model omission. Consumer search found no other item use of this example."
+      }
+    },
+    "ex-ip-inversebench-navier-stokes": {
+      "risk": "low",
+      "kind": "example",
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-ip-benchmark-risk-and-compute-budget",
+          "source_section": "Definition",
+          "quote": "Fix measurable spaces $(X,\\mathcal X)$ and $(Y,\\mathcal Y)$, a metric target space $(Q,d_Q)$ with its Borel sigma-algebra $\\mathcal Q$, and a nonempty truth class $U\\subseteq X$ with inherited sigma-algebra $\\mathcal U=\\{A\\cap U:A\\in\\mathcal X\\}$. Let $q:U\\to Q$ and $F:U\\to Y$ be measurable target and forward maps. The **admissible state set** is a declared nonempty $\\mathcal U$-measurable subset $C\\subseteq U$. The observation model is a specified probability kernel $K(dy\\mid x)$ from $(U,\\mathcal U)$ to $(Y,\\mathcal Y)$; in an additive-noise model, when $Y$ has a measurable addition operation, it is the law of $F(x)+\\varepsilon$ for a declared noise law of $\\varepsilon$, while nonadditive or model-dependent observation noise is encoded directly by $K$.\n\nThe forward solver, when a numerical evaluation is used, is the specified procedure for evaluating this model, including its discretization, tolerances, finite call budget, and any model-specific admissibility test; exact evaluation is the special case with no numerical-solver error. A failed admissibility test or solver call is recorded with its failure status and is not silently omitted from the benchmark results.\n\nA **benchmark specification** also declares a training law $P_{\\rm train}$ on a named measurable space for all random variables used to fit a method or select its hyperparameters; those variables may be paired or unpaired. It declares a test law $P_{\\rm test}$ on $(Y\\times Q,\\mathcal Y\\otimes\\mathcal Q)$ for evaluation pairs $(Y,q(X))$, and any separate validation law used for tuning. The training and test laws need not agree. Each candidate method is identified by its fitting procedure and by its deployed measurable deterministic reconstruction rule $g:Y\\to Q$ or randomized reconstruction kernel $L(da\\mid y)$ from $Y$ to $Q$. Its population test risk is the risk under $P_{\\rm test}$ as defined by the inverse-risk functional; a reported finite-sample score must additionally name its test sample and empirical aggregation rule. No risk transfer or generalization bound follows from the benchmark specification.\n\nBefore comparison, the specification fixes a nonnegative product-measurable loss $\\ell:Q\\times Q\\to[0,+\\infty]$, an uncertainty diagnostic, and a finite compute-budget vector. An uncertainty diagnostic is a declared measurable statistic of the method outputs and, when applicable, target labels, together with its target quantity; for example, if a reported set-valued estimate $C(y)\\subseteq Q$ has a product-measurable membership event $\\{(y,a):a\\in C(y)\\}\\in\\mathcal Y\\otimes\\mathcal Q$, its test coverage is $P_{\\rm test}(\\{(y,a)\\in Y\\times Q:a\\in C(y)\\})$. The budget vector records the applicable maximum counts of forward-model queries, adjoint queries, gradient evaluations, ODE right-hand-side evaluations, solver or sampling steps, and elapsed runtime; inapplicable counts are marked as not applicable, not zero. It also records the hardware, numerical precision, software/model versions, random seeds, tuning data, and stopping tolerances needed to interpret those counts. Each method's result records its metric values, uncertainty diagnostic, realized compute counts, solver status, and failed runs. A comparison is tied to the declared test law, test sample, loss, solver, admissibility rules, and tuning protocol; when budgets or other conditions differ, those differences are reported as part of the comparison. The specification defines an evaluation protocol, not a theorem ranking algorithms.\n\n```tikz\n\\begin{tikzpicture}[>=stealth]\n  \\node[draw,rounded corners,align=center] (train) at (0,1.3) {$P_{\\rm train}$};\n  \\node[draw,rounded corners,align=center] (fit) at (3,1.3) {fit and tune};\n  \\node[draw,rounded corners,align=center] (rule) at (6.2,1.3) {$g$ or $L$};\n  \\node[draw,rounded corners,align=center] (forward) at (0,-0.2) {$F$, noise $K$, solver};\n  \\node[draw,rounded corners,align=center] (test) at (3,-0.2) {$P_{\\rm test}$ pairs};\n  \\node[draw,rounded corners,align=center] (eval) at (6.4,-0.2) {loss and uncertainty};\n  \\node[draw,rounded corners,align=center] (record) at (10,-0.2) {scores, budget, status};\n  \\draw[->] (train)--(fit);\n  \\draw[->] (fit)--(rule);\n  \\draw[->] (forward)--(test);\n  \\draw[->] (test)--(eval);\n  \\draw[->] (rule)--(eval);\n  \\draw[->] (eval)--(record);\n\\end{tikzpicture}\n```\n\nThe arrows label declared information flow into fitting, observation generation, and evaluation. The diagram asserts no equality between $P_{\\rm train}$ and $P_{\\rm test}$ and no risk-transfer result.",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "rem-ip-inversebench-scoped-findings",
+          "source_section": "Remark",
+          "quote": "Zheng et al.'s InverseBench reports 14 plug-and-play diffusion-prior algorithms and domain-specific baselines on five selected cases: first-Born optical scattering, raw multi-coil knee MRI, black-hole very-long-baseline interferometry, full waveform inversion, and two-dimensional vorticity-form Navier–Stokes inversion. For these experiments, the authors report that diffusion-prior methods often outperform conventional baselines when the training data are suitable, while a classical full-waveform-inversion optimizer initialized from a smoothed ground truth outperforms the tested diffusion-prior methods. In cases with closed-form forward models, methods using more forward-gradient queries can be more accurate and more expensive; the paper reports that this trend fails for its numerical PDE cases. Its Navier–Stokes split has one validation case and ten test cases. The paper reports step-size/Courant–Friedrichs–Lewy (CFL) failures in its PDE experiments. Its Figure 5 out-of-distribution diagnostics feed digit images to a black-hole prior trained on simulated black-hole images, and nine-cell scattering sources to a prior trained on one-to-six-cell sources; for the black-hole case, the authors report outputs with the prior's characteristic ring feature. These are empirical observations for the named data, solvers, methods, tuning protocol, and hardware; they establish no universal ranking, stability bound, posterior exactness, risk-transfer bound, or robustness theorem.\n\nThere is a first-Born notation discrepancy between the paper and its released implementation. Appendix B.1 defines a contrast-dependent total field and then displays a sensor equation with that field multiplied by the contrast, which does not itself exhibit a fixed linear map. The pinned implementation instead passes the fixed incident field into the sensor-propagation routine and constructs its cached linear matrix from that fixed field. This page therefore identifies the implemented benchmark as the first-Born linear case and does not infer linearity from the printed contrast-dependent expression.",
+          "uses": [
+            "2.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "The supplied evolved dataset field $z=w_0$ is the initial scalar state for the specified numerical map $L$. Applying its final-time sampling operator $P$ and adding the stated observation noise gives exactly $y=PL(z)+n$; the separate five-time-unit seed evolution prepares $z$ and is not the inversion horizon.",
+          "step": "1.1",
+          "inputs": [
+            "given",
+            "construct"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "The stated forcing and seed-to-dataset preparation, grid, pseudo-spectral solver, noise model, and finite data split fill the solver/population fields of [F1]. The empirical scope in [F2] is retained, and no closed-form-gradient or convergence claim is added.",
+          "step": "2.1",
+          "inputs": [
+            "F1",
+            "F2",
+            "given"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The stated benchmark has 10000 training, one validation and ten test examples; an empty dataset is not the specified benchmark.",
+          "template_review": {
+            "upheld": true,
+            "by": "/root",
+            "reason": "The stated benchmark has 10000 training, one validation and ten test examples; an empty dataset is not the specified benchmark.",
+            "item_sha256": "6c4cb3b4943f8eb865b016e950272c2282cafe202bda8a7167ee1fae4ad95f76",
+            "row_sha256": "28016f050fda40a5e810ad1213f53ea3ce12a30c8bb089f9037c057b55ed4ce3",
+            "role": "root-adopted actual delegated owner-focused FIRST; not native Alpha",
+            "delegated_reviewer": "/root/top_free_abelian_torsion",
+            "delegated_review_sources": [
+              {
+                "file": "research/inverse-problems-knot-theory-all-109-2026-10-19-supervision-20261020/step2-supervision/battery1-boundary/lane-6/proposal.json",
+                "field": "rows",
+                "index": 224
+              }
+            ],
+            "root_adoption_record": "research/inverse-problems-knot-theory-all-109-2026-10-19-supervision-20261020/step2-supervision/battery1-boundary/lane-6/root-final-adoption.json"
+          }
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Zero initial vorticity may be inserted in the PDE, but its nonzero prescribed forcing remains; no stationary zero solution is inferred. [Owner-focused FIRST reviewed location: Complete Example and Proof 1.1 (fixed Navier-Stokes benchmark and observation formula).]",
+          "template_review": {
+            "upheld": true,
+            "by": "/root",
+            "reason": "Zero initial vorticity may be inserted in the PDE, but its nonzero prescribed forcing remains; no stationary zero solution is inferred.",
+            "item_sha256": "6c4cb3b4943f8eb865b016e950272c2282cafe202bda8a7167ee1fae4ad95f76",
+            "row_sha256": "6dd8f5d4cb4420eb533df33a6e64b8a50ccbb7441e1bbe34501dc5be8b71ced9",
+            "role": "root-adopted actual delegated owner-focused FIRST; not native Alpha",
+            "delegated_reviewer": "/root/top_free_abelian_torsion",
+            "delegated_review_sources": [
+              {
+                "file": "research/inverse-problems-knot-theory-all-109-2026-10-19-supervision-20261020/step2-supervision/battery1-boundary/lane-6/proposal.json",
+                "field": "rows",
+                "index": 225
+              }
+            ],
+            "root_adoption_record": "research/inverse-problems-knot-theory-all-109-2026-10-19-supervision-20261020/step2-supervision/battery1-boundary/lane-6/root-final-adoption.json"
+          }
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "One validation sample is explicitly part of the benchmark; its presence is descriptive and is not a one-sample statistical guarantee. [Owner-focused FIRST reviewed location: Complete Example and Proof 1.1 (fixed Navier-Stokes benchmark and observation formula).]",
+          "template_review": {
+            "upheld": true,
+            "by": "/root",
+            "reason": "One validation sample is explicitly part of the benchmark; its presence is descriptive and is not a one-sample statistical guarantee.",
+            "item_sha256": "6c4cb3b4943f8eb865b016e950272c2282cafe202bda8a7167ee1fae4ad95f76",
+            "row_sha256": "bf410fbdf57bcb7850c16d1739f822e49c15feeb71d4a716ab4b46aaf4f88f4c",
+            "role": "root-adopted actual delegated owner-focused FIRST; not native Alpha",
+            "delegated_reviewer": "/root/top_free_abelian_torsion",
+            "delegated_review_sources": [
+              {
+                "file": "research/inverse-problems-knot-theory-all-109-2026-10-19-supervision-20261020/step2-supervision/battery1-boundary/lane-6/proposal.json",
+                "field": "rows",
+                "index": 226
+              }
+            ],
+            "root_adoption_record": "research/inverse-problems-knot-theory-all-109-2026-10-19-supervision-20261020/step2-supervision/battery1-boundary/lane-6/root-final-adoption.json"
+          }
+        },
+        {
+          "case": "degenerate",
+          "status": "not_applicable",
+          "reason": "Viscosity is strictly positive. Verification 1.1 uses the supplied numerical inversion horizon T, distinct from five-time-unit seed preparation; no inviscid or zero-time conclusion is asserted.",
+          "template_review": {
+            "upheld": true,
+            "by": "/root",
+            "reason": "Viscosity is strictly positive and the observation time is T=5; inviscid or zero-time problems are not the asserted numerical setup.",
+            "item_sha256": "6c4cb3b4943f8eb865b016e950272c2282cafe202bda8a7167ee1fae4ad95f76",
+            "row_sha256": "5b52a7bae3013f324a84ce1af0607ddaf3a3988b2e171b0e523a25ebad55bd83",
+            "role": "root-adopted actual delegated owner-focused FIRST; not native Alpha",
+            "delegated_reviewer": "/root/top_free_abelian_torsion",
+            "delegated_review_sources": [
+              {
+                "file": "research/inverse-problems-knot-theory-all-109-2026-10-19-supervision-20261020/step2-supervision/battery1-boundary/lane-6/proposal.json",
+                "field": "rows",
+                "index": 227
+              }
+            ],
+            "root_adoption_record": "research/inverse-problems-knot-theory-all-109-2026-10-19-supervision-20261020/step2-supervision/battery1-boundary/lane-6/root-final-adoption.json"
+          }
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Verification 1.1 starts the inversion solver at the evolved dataset field z=w0 and observes PL(z) at the supplied inversion horizon T. The five-time-unit horizon prepares the dataset seeds and is not identified with T.",
+          "template_review": {
+            "upheld": true,
+            "by": "/root",
+            "reason": "The PDE starts at w0 at t=0 and the measurement is PL applied at final time T=5; 1.1 retains both roles.",
+            "item_sha256": "6c4cb3b4943f8eb865b016e950272c2282cafe202bda8a7167ee1fae4ad95f76",
+            "row_sha256": "ddd39b1650a2a8059dea82a56e710618166e297ede992c6bc52e1826da79c155",
+            "role": "root-adopted actual delegated owner-focused FIRST; not native Alpha",
+            "delegated_reviewer": "/root/top_free_abelian_torsion",
+            "delegated_review_sources": [
+              {
+                "file": "research/inverse-problems-knot-theory-all-109-2026-10-19-supervision-20261020/step2-supervision/battery1-boundary/lane-6/proposal.json",
+                "field": "rows",
+                "index": 228
+              }
+            ],
+            "root_adoption_record": "research/inverse-problems-knot-theory-all-109-2026-10-19-supervision-20261020/step2-supervision/battery1-boundary/lane-6/root-final-adoption.json"
+          }
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "The periodic domain, discrete grid, and finite sample counts are all explicit in the Example statement; no arbitrary choice is required."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The Example defines one forward solution/measurement experiment, not an iff identifiability theorem for its initial vorticity.",
+          "template_review": {
+            "upheld": true,
+            "by": "/root",
+            "reason": "The Example defines one forward solution/measurement experiment, not an iff identifiability theorem for its initial vorticity.",
+            "item_sha256": "6c4cb3b4943f8eb865b016e950272c2282cafe202bda8a7167ee1fae4ad95f76",
+            "row_sha256": "3a0f48a5ebaa3cc0c1db8a2457e364c50571e7dacf1e6e659ce00665fda4a442",
+            "role": "root-adopted actual delegated owner-focused FIRST; not native Alpha",
+            "delegated_reviewer": "/root/top_free_abelian_torsion",
+            "delegated_review_sources": [
+              {
+                "file": "research/inverse-problems-knot-theory-all-109-2026-10-19-supervision-20261020/step2-supervision/battery1-boundary/lane-6/proposal.json",
+                "field": "rows",
+                "index": 222
+              }
+            ],
+            "root_adoption_record": "research/inverse-problems-knot-theory-all-109-2026-10-19-supervision-20261020/step2-supervision/battery1-boundary/lane-6/root-final-adoption.json"
+          }
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "No reconstruction or uniqueness of initial data is inferred from the low-pass noisy final observation.",
+          "template_review": {
+            "upheld": true,
+            "by": "/root",
+            "reason": "No reconstruction or uniqueness of initial data is inferred from the low-pass noisy final observation.",
+            "item_sha256": "6c4cb3b4943f8eb865b016e950272c2282cafe202bda8a7167ee1fae4ad95f76",
+            "row_sha256": "6fc01026a05eb2b4a7303ea327b3ec0cc3c3a96995868c9e9b9b4a341f831ab3",
+            "role": "root-adopted actual delegated owner-focused FIRST; not native Alpha",
+            "delegated_reviewer": "/root/top_free_abelian_torsion",
+            "delegated_review_sources": [
+              {
+                "file": "research/inverse-problems-knot-theory-all-109-2026-10-19-supervision-20261020/step2-supervision/battery1-boundary/lane-6/proposal.json",
+                "field": "rows",
+                "index": 223
+              }
+            ],
+            "root_adoption_record": "research/inverse-problems-knot-theory-all-109-2026-10-19-supervision-20261020/step2-supervision/battery1-boundary/lane-6/root-final-adoption.json"
+          }
+        }
+      ],
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "/root/instanton_original_review",
+        "role": "delegated independent owner-focused review; not native Alpha",
+        "notes": "Independent current owner-focused review of complete Example and both actual supplier interfaces. The physical periodic curl is explicitly mean-zero with zero-mean velocity; the pinned released numerical scalar-state extension handles a constant offset without asserting it is a periodic curl. Gaussian seeds and five-time-unit evolved reconstruction-input distribution are distinguished. Full pinned navier_stokes.py read; actual arXiv v2 Navier–Stokes passages in sections 3 and 4.1 and complete Appendix B.5 read. No mean-zero dataset law or exact continuum convergence is asserted. Observation PL(z)+n and all finite split/solver/empirical qualifications retained; no direct or indirect item consumer exists. Original Alpha51 escalation preserved in archived before value; not native Alpha coverage.",
+        "review_report": "research/inverse-problems-knot-theory-all-109-2026-10-19-supervision-20261020/step3-supervision/gate-r1-risk-two/report.json"
+      }
+    },
+    "ex-ip-inversebench-prior-shift": {
+      "risk": "low",
+      "kind": "example",
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-ip-benchmark-risk-and-compute-budget",
+          "source_section": "Definition",
+          "quote": "Fix measurable spaces $(X,\\mathcal X)$ and $(Y,\\mathcal Y)$, a metric target space $(Q,d_Q)$ with its Borel sigma-algebra $\\mathcal Q$, and a nonempty truth class $U\\subseteq X$ with inherited sigma-algebra $\\mathcal U=\\{A\\cap U:A\\in\\mathcal X\\}$. Let $q:U\\to Q$ and $F:U\\to Y$ be measurable target and forward maps. The **admissible state set** is a declared nonempty $\\mathcal U$-measurable subset $C\\subseteq U$. The observation model is a specified probability kernel $K(dy\\mid x)$ from $(U,\\mathcal U)$ to $(Y,\\mathcal Y)$; in an additive-noise model, when $Y$ has a measurable addition operation, it is the law of $F(x)+\\varepsilon$ for a declared noise law of $\\varepsilon$, while nonadditive or model-dependent observation noise is encoded directly by $K$.\n\nThe forward solver, when a numerical evaluation is used, is the specified procedure for evaluating this model, including its discretization, tolerances, finite call budget, and any model-specific admissibility test; exact evaluation is the special case with no numerical-solver error. A failed admissibility test or solver call is recorded with its failure status and is not silently omitted from the benchmark results.\n\nA **benchmark specification** also declares a training law $P_{\\rm train}$ on a named measurable space for all random variables used to fit a method or select its hyperparameters; those variables may be paired or unpaired. It declares a test law $P_{\\rm test}$ on $(Y\\times Q,\\mathcal Y\\otimes\\mathcal Q)$ for evaluation pairs $(Y,q(X))$, and any separate validation law used for tuning. The training and test laws need not agree. Each candidate method is identified by its fitting procedure and by its deployed measurable deterministic reconstruction rule $g:Y\\to Q$ or randomized reconstruction kernel $L(da\\mid y)$ from $Y$ to $Q$. Its population test risk is the risk under $P_{\\rm test}$ as defined by the inverse-risk functional; a reported finite-sample score must additionally name its test sample and empirical aggregation rule. No risk transfer or generalization bound follows from the benchmark specification.\n\nBefore comparison, the specification fixes a nonnegative product-measurable loss $\\ell:Q\\times Q\\to[0,+\\infty]$, an uncertainty diagnostic, and a finite compute-budget vector. An uncertainty diagnostic is a declared measurable statistic of the method outputs and, when applicable, target labels, together with its target quantity; for example, if a reported set-valued estimate $C(y)\\subseteq Q$ has a product-measurable membership event $\\{(y,a):a\\in C(y)\\}\\in\\mathcal Y\\otimes\\mathcal Q$, its test coverage is $P_{\\rm test}(\\{(y,a)\\in Y\\times Q:a\\in C(y)\\})$. The budget vector records the applicable maximum counts of forward-model queries, adjoint queries, gradient evaluations, ODE right-hand-side evaluations, solver or sampling steps, and elapsed runtime; inapplicable counts are marked as not applicable, not zero. It also records the hardware, numerical precision, software/model versions, random seeds, tuning data, and stopping tolerances needed to interpret those counts. Each method's result records its metric values, uncertainty diagnostic, realized compute counts, solver status, and failed runs. A comparison is tied to the declared test law, test sample, loss, solver, admissibility rules, and tuning protocol; when budgets or other conditions differ, those differences are reported as part of the comparison. The specification defines an evaluation protocol, not a theorem ranking algorithms.\n\n```tikz\n\\begin{tikzpicture}[>=stealth]\n  \\node[draw,rounded corners,align=center] (train) at (0,1.3) {$P_{\\rm train}$};\n  \\node[draw,rounded corners,align=center] (fit) at (3,1.3) {fit and tune};\n  \\node[draw,rounded corners,align=center] (rule) at (6.2,1.3) {$g$ or $L$};\n  \\node[draw,rounded corners,align=center] (forward) at (0,-0.2) {$F$, noise $K$, solver};\n  \\node[draw,rounded corners,align=center] (test) at (3,-0.2) {$P_{\\rm test}$ pairs};\n  \\node[draw,rounded corners,align=center] (eval) at (6.4,-0.2) {loss and uncertainty};\n  \\node[draw,rounded corners,align=center] (record) at (10,-0.2) {scores, budget, status};\n  \\draw[->] (train)--(fit);\n  \\draw[->] (fit)--(rule);\n  \\draw[->] (forward)--(test);\n  \\draw[->] (test)--(eval);\n  \\draw[->] (rule)--(eval);\n  \\draw[->] (eval)--(record);\n\\end{tikzpicture}\n```\n\nThe arrows label declared information flow into fitting, observation generation, and evaluation. The diagram asserts no equality between $P_{\\rm train}$ and $P_{\\rm test}$ and no risk-transfer result.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "def-ip-inverse-risk-under-train-and-test-laws",
+          "source_section": "Definition",
+          "quote": "Let $(\\mathsf Y,\\mathcal Y)$ and $(Q,\\mathcal Q)$ be measurable data and target spaces, with $\\mathcal Q$ the Borel sigma-algebra of the target metric space. Let $P$ be a probability measure on the product space $(\\mathsf Y\\times Q,\\mathcal Y\\otimes\\mathcal Q)$, and let $\\ell:Q\\times Q\\to[0,+\\infty]$ be product-measurable, where $\\ell(t,a)$ is the loss for target $t$ and action $a$. For a point reconstruction rule $g:(\\mathsf Y,\\mathcal Y)\\to(Q,\\mathcal Q)$ measurable with respect to the stated sigma-algebras, its risk under $P$ is the extended nonnegative integral\n$$R_P(g):=\\int_{\\mathsf Y\\times Q}\\ell(t,g(y))\\,P(dy,dt).$$\nFor a randomized reconstruction rule given by a probability kernel $K$ from $\\mathsf Y$ to $Q$, define\n$$R_P(K):=\\int_{\\mathsf Y\\times Q}\\!\\left(\\int_Q\\ell(t,a)\\,K(y,da)\\right)P(dy,dt).$$\nThe inner integral is measurable in $(y,t)$ by kernel integration; a deterministic rule is the special case $K_y=\\delta_{g(y)}$. When $P_{\\rm train}$ and $P_{\\rm test}$ are specified joint laws on the same input-target space, the corresponding training-law risk and test-law risk are $R_{P_{\\rm train}}(K)$ and $R_{P_{\\rm test}}(K)$. Either value may be $+\\infty$. This definition imposes no inequality between the two risks: any such comparison requires an additional assumption relating the joint laws or the rule's behavior under them.",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "def-ip-operator-and-prior-mismatch",
+          "source_section": "Definition",
+          "quote": "Let $(X,d_X)$ and $(\\mathsf Y,d_Y)$ be metric spaces, let $U\\subseteq X$ be a nonempty class of admissible truths, and let $q:U\\to Q$ assign each truth its recovery target in a metric space $(Q,d_Q)$. Let $\\mathfrak A$ index forward maps $F_A:U\\to\\mathsf Y$; in this definition an **operator** means such a forward map, and linearity is not assumed. A specified set $\\mathcal C\\subseteq U\\times\\mathfrak A$ records which truth/operator pairs are admissible; no full-product assumption is made. Equip $\\mathsf Y$ with a sigma-algebra $\\mathcal Y$ and an addition operation such that every translation $\\tau_z(e)=z+e$ is measurable. A **noise law** is a probability measure $\\nu$ on $(\\mathsf Y,\\mathcal Y)$. For each admissible pair $(x,A)\\in\\mathcal C$, the observation random element on the probability space $(\\mathsf Y,\\mathcal Y,\\nu)$ is $e\\mapsto F_A(x)+e$, and its sampling law is\n$$P_{x,A,\\nu}(B)=\\nu\\bigl(\\{e\\in\\mathsf Y:F_A(x)+e\\in B\\}\\bigr),\\qquad B\\in\\mathcal Y.$$\nThe translation measurability assumption makes this law a probability measure.\n\nFor a true specification $(x_\\star,A_\\star,\\nu_\\star)$ with $(x_\\star,A_\\star)\\in\\mathcal C$ and a specified working operator $\\widetilde A\\in\\mathfrak A$ and noise law $\\widetilde\\nu$, there is **operator mismatch at the truth** when $F_{A_\\star}(x_\\star)\\ne F_{\\widetilde A}(x_\\star)$, and there is **noise-law mismatch** when $\\nu_\\star\\ne\\widetilde\\nu$. A **working statistical model** is a metric index space $(\\Xi,d_\\Xi)$, a family $(Q_\\xi)_{\\xi\\in\\Xi}$ of sampling laws on the same data space, and a prior probability measure $\\Pi$ on a sigma-algebra containing every open metric ball. The statistical model is **misspecified** for true observation law $P_\\star=P_{x_\\star,A_\\star,\\nu_\\star}$ when $P_\\star\\notin\\{Q_\\xi:\\xi\\in\\Xi\\}$. If a true model index $\\xi_\\star\\in\\Xi$ is specified, there is a **prior-support mismatch** at $\\xi_\\star$ when some open ball $B_\\Xi(\\xi_\\star,r)$, $r>0$, has $\\Pi(B_\\Xi(\\xi_\\star,r))=0$. These are distinct properties; an operator or noise-law mismatch need not by itself make the statistical model misspecified or exclude the true index from the prior's support. This definition makes no assertion about posterior existence or convergence.",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "rem-ip-inversebench-scoped-findings",
+          "source_section": "Remark",
+          "quote": "Zheng et al.'s InverseBench reports 14 plug-and-play diffusion-prior algorithms and domain-specific baselines on five selected cases: first-Born optical scattering, raw multi-coil knee MRI, black-hole very-long-baseline interferometry, full waveform inversion, and two-dimensional vorticity-form Navier–Stokes inversion. For these experiments, the authors report that diffusion-prior methods often outperform conventional baselines when the training data are suitable, while a classical full-waveform-inversion optimizer initialized from a smoothed ground truth outperforms the tested diffusion-prior methods. In cases with closed-form forward models, methods using more forward-gradient queries can be more accurate and more expensive; the paper reports that this trend fails for its numerical PDE cases. Its Navier–Stokes split has one validation case and ten test cases. The paper reports step-size/Courant–Friedrichs–Lewy (CFL) failures in its PDE experiments. Its Figure 5 out-of-distribution diagnostics feed digit images to a black-hole prior trained on simulated black-hole images, and nine-cell scattering sources to a prior trained on one-to-six-cell sources; for the black-hole case, the authors report outputs with the prior's characteristic ring feature. These are empirical observations for the named data, solvers, methods, tuning protocol, and hardware; they establish no universal ranking, stability bound, posterior exactness, risk-transfer bound, or robustness theorem.\n\nThere is a first-Born notation discrepancy between the paper and its released implementation. Appendix B.1 defines a contrast-dependent total field and then displays a sensor equation with that field multiplied by the contrast, which does not itself exhibit a fixed linear map. The pinned implementation instead passes the fixed incident field into the sensor-propagation routine and constructs its cached linear matrix from that fixed field. This page therefore identifies the implemented benchmark as the first-Born linear case and does not infer linearity from the printed contrast-dependent expression.",
+          "uses": [
+            "2.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "The MRI training and held-out test splits come from the same named fastMRI knee collection, so they provide an operational within-source comparison; [F1] does not identify their underlying probability laws.",
+          "step": "1.1",
+          "inputs": [
+            "F1",
+            "given"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "The black-hole digit and nine-cell scattering cases deliberately change the test-source family from the source used to train each prior. The reported output tendencies are finite observations under [F4], and [F2]–[F3] preclude promoting them to a general test-risk or robustness bound.",
+          "step": "2.1",
+          "inputs": [
+            "F2",
+            "F3",
+            "F4",
+            "given"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "InverseBench dataset-family comparisons are finite observations, not equality of laws or a robustness theorem. The reported MRI, simulated black-hole and scattering experiments all have stated nonzero finite data sizes.",
+          "template_review": {
+            "upheld": true,
+            "by": "/root",
+            "reason": "The reported MRI, simulated black-hole and scattering experiments all have stated nonzero finite data sizes.",
+            "item_sha256": "038998b81566dc820ac8cab0d7cf2973c63dfdb46e74c9f0991861c7e38e5a17",
+            "row_sha256": "de3b8258ae1a8d0779b81e5679db27c97214363441323b4f860df914e3de69f9",
+            "role": "root-adopted actual delegated owner-focused FIRST; not native Alpha",
+            "delegated_reviewer": "/root/top_local_homeomorphism_deformation",
+            "delegated_review_sources": [
+              {
+                "file": "research/inverse-problems-knot-theory-all-109-2026-10-19-supervision-20261020/step2-supervision/battery1-boundary/lane-7/proposal.json",
+                "field": "rows",
+                "index": 224
+              }
+            ],
+            "root_adoption_record": "research/inverse-problems-knot-theory-all-109-2026-10-19-supervision-20261020/step2-supervision/battery1-boundary/lane-7/root-final-adoption.json"
+          }
+        },
+        {
+          "case": "zero",
+          "status": "not_applicable",
+          "reason": "InverseBench dataset-family comparisons are finite observations, not equality of laws or a robustness theorem. No zero-noise or zero-risk limit is part of these empirical observations.",
+          "template_review": {
+            "upheld": true,
+            "by": "/root",
+            "reason": "No zero-noise or zero-risk limit is part of these empirical observations.",
+            "item_sha256": "038998b81566dc820ac8cab0d7cf2973c63dfdb46e74c9f0991861c7e38e5a17",
+            "row_sha256": "9c4b72dd0e16068c94f8f655f8f58945d10421fc5fb80362daeb29ac9e231a20",
+            "role": "root-adopted actual delegated owner-focused FIRST; not native Alpha",
+            "delegated_reviewer": "/root/top_local_homeomorphism_deformation",
+            "delegated_review_sources": [
+              {
+                "file": "research/inverse-problems-knot-theory-all-109-2026-10-19-supervision-20261020/step2-supervision/battery1-boundary/lane-7/proposal.json",
+                "field": "rows",
+                "index": 225
+              }
+            ],
+            "root_adoption_record": "research/inverse-problems-knot-theory-all-109-2026-10-19-supervision-20261020/step2-supervision/battery1-boundary/lane-7/root-final-adoption.json"
+          }
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "InverseBench dataset-family comparisons are finite observations, not equality of laws or a robustness theorem. The scattering training family includes one-cell sources and stops at six, whereas the stress input has nine cells. [Owner-focused FIRST reviewed location: Read the current complete claim/Definition and the listed relevant numbered rows: Example; Proof 1.1–2.1. This is boundary-case reading, not an entire-proof or accepted-supplier audit.]",
+          "template_review": {
+            "upheld": true,
+            "by": "/root",
+            "reason": "The scattering training family includes one-cell sources and stops at six, whereas the stress input has nine cells.",
+            "item_sha256": "038998b81566dc820ac8cab0d7cf2973c63dfdb46e74c9f0991861c7e38e5a17",
+            "row_sha256": "684b635ce4123df07909a40ae89b10810d67cb028fce42b410afebe0dc5925d8",
+            "role": "root-adopted actual delegated owner-focused FIRST; not native Alpha",
+            "delegated_reviewer": "/root/top_local_homeomorphism_deformation",
+            "delegated_review_sources": [
+              {
+                "file": "research/inverse-problems-knot-theory-all-109-2026-10-19-supervision-20261020/step2-supervision/battery1-boundary/lane-7/proposal.json",
+                "field": "rows",
+                "index": 226
+              }
+            ],
+            "root_adoption_record": "research/inverse-problems-knot-theory-all-109-2026-10-19-supervision-20261020/step2-supervision/battery1-boundary/lane-7/root-final-adoption.json"
+          }
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "InverseBench dataset-family comparisons are finite observations, not equality of laws or a robustness theorem. Using the same named MRI collection is expressly not a proof that train/test probability laws coincide. [Owner-focused FIRST reviewed location: Read the current complete claim/Definition and the listed relevant numbered rows: Example; Proof 1.1–2.1. This is boundary-case reading, not an entire-proof or accepted-supplier audit.]",
+          "template_review": {
+            "upheld": true,
+            "by": "/root",
+            "reason": "Using the same named MRI collection is expressly not a proof that train/test probability laws coincide.",
+            "item_sha256": "038998b81566dc820ac8cab0d7cf2973c63dfdb46e74c9f0991861c7e38e5a17",
+            "row_sha256": "c4fb6a9c6a0c4aebaa228a05997f6190bf503d7cdd66cdd9f384d8dc11418c8b",
+            "role": "root-adopted actual delegated owner-focused FIRST; not native Alpha",
+            "delegated_reviewer": "/root/top_local_homeomorphism_deformation",
+            "delegated_review_sources": [
+              {
+                "file": "research/inverse-problems-knot-theory-all-109-2026-10-19-supervision-20261020/step2-supervision/battery1-boundary/lane-7/proposal.json",
+                "field": "rows",
+                "index": 227
+              }
+            ],
+            "root_adoption_record": "research/inverse-problems-knot-theory-all-109-2026-10-19-supervision-20261020/step2-supervision/battery1-boundary/lane-7/root-final-adoption.json"
+          }
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "InverseBench dataset-family comparisons are finite observations, not equality of laws or a robustness theorem. The quantitative ranges are25012 training/94 held-out MRI images,50000 simulated images, and1–6 versus9 cells, not asymptotic endpoints. [Owner-focused FIRST reviewed location: Read the current complete claim/Definition and the listed relevant numbered rows: Example; Proof 1.1–2.1. This is boundary-case reading, not an entire-proof or accepted-supplier audit.]",
+          "template_review": {
+            "upheld": true,
+            "by": "/root",
+            "reason": "The quantitative ranges are25012 training/94 held-out MRI images,50000 simulated images, and1–6 versus9 cells, not asymptotic endpoints.",
+            "item_sha256": "038998b81566dc820ac8cab0d7cf2973c63dfdb46e74c9f0991861c7e38e5a17",
+            "row_sha256": "9fb49d096428bb370840ffa95abd17927d858e1c896a91789703056d9d00dffc",
+            "role": "root-adopted actual delegated owner-focused FIRST; not native Alpha",
+            "delegated_reviewer": "/root/top_local_homeomorphism_deformation",
+            "delegated_review_sources": [
+              {
+                "file": "research/inverse-problems-knot-theory-all-109-2026-10-19-supervision-20261020/step2-supervision/battery1-boundary/lane-7/proposal.json",
+                "field": "rows",
+                "index": 228
+              }
+            ],
+            "root_adoption_record": "research/inverse-problems-knot-theory-all-109-2026-10-19-supervision-20261020/step2-supervision/battery1-boundary/lane-7/root-final-adoption.json"
+          }
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "The named task splits and OOD stress-test cases are finite supplied datasets in the Example statement; no arbitrary choice is used."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "InverseBench dataset-family comparisons are finite observations, not equality of laws or a robustness theorem. The example reports named training/test configurations and supplies no equivalence criterion for distribution match.",
+          "template_review": {
+            "upheld": true,
+            "by": "/root",
+            "reason": "The example reports named training/test configurations and supplies no equivalence criterion for distribution match.",
+            "item_sha256": "038998b81566dc820ac8cab0d7cf2973c63dfdb46e74c9f0991861c7e38e5a17",
+            "row_sha256": "9e1b3ac044bbceb2585ea8b7d4221dc81a3e80a235052e1e98c9d3f934e49e3c",
+            "role": "root-adopted actual delegated owner-focused FIRST; not native Alpha",
+            "delegated_reviewer": "/root/top_local_homeomorphism_deformation",
+            "delegated_review_sources": [
+              {
+                "file": "research/inverse-problems-knot-theory-all-109-2026-10-19-supervision-20261020/step2-supervision/battery1-boundary/lane-7/proposal.json",
+                "field": "rows",
+                "index": 222
+              }
+            ],
+            "root_adoption_record": "research/inverse-problems-knot-theory-all-109-2026-10-19-supervision-20261020/step2-supervision/battery1-boundary/lane-7/root-final-adoption.json"
+          }
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "InverseBench dataset-family comparisons are finite observations, not equality of laws or a robustness theorem. Visual output agreement is not asserted to imply equality of population training and test laws.",
+          "template_review": {
+            "upheld": true,
+            "by": "/root",
+            "reason": "Visual output agreement is not asserted to imply equality of population training and test laws.",
+            "item_sha256": "038998b81566dc820ac8cab0d7cf2973c63dfdb46e74c9f0991861c7e38e5a17",
+            "row_sha256": "423f9e7b0de82038d9af82b0613d673e112dae6b52b80d10f5d53ce075e5c1c0",
+            "role": "root-adopted actual delegated owner-focused FIRST; not native Alpha",
+            "delegated_reviewer": "/root/top_local_homeomorphism_deformation",
+            "delegated_review_sources": [
+              {
+                "file": "research/inverse-problems-knot-theory-all-109-2026-10-19-supervision-20261020/step2-supervision/battery1-boundary/lane-7/proposal.json",
+                "field": "rows",
+                "index": 223
+              }
+            ],
+            "root_adoption_record": "research/inverse-problems-knot-theory-all-109-2026-10-19-supervision-20261020/step2-supervision/battery1-boundary/lane-7/root-final-adoption.json"
+          }
+        }
+      ],
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "alpha-batch-51",
+        "notes": "Read both Verification steps and all four current cited suppliers. Paper v2 §4.1 224/230/233 supports 50000 GRMHD, one-to-six-cell training and 25012/94 fastMRI counts; §4.3 Figure5 283–286 gives digit/ring and nine-cell observations. Appendix C 699–702 is a separate preliminary prior-mismatch study, not a transfer theorem. Same dataset collection does not imply equality of joint train/test laws; a visually unusual source does not establish a mathematically zero prior-support ball. Item asserts neither. Infinite-risk possibility in risk definition is retained, and finite empirical outcomes give no inequality of population risks. No choice, iff, universal sample or boundary guarantee is needed."
+      }
+    },
+    "ex-ip-inversebench-solver-invalid-iterate": {
+      "risk": "low",
+      "kind": "example",
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-ip-benchmark-risk-and-compute-budget",
+          "source_section": "Definition",
+          "quote": "Fix measurable spaces $(X,\\mathcal X)$ and $(Y,\\mathcal Y)$, a metric target space $(Q,d_Q)$ with its Borel sigma-algebra $\\mathcal Q$, and a nonempty truth class $U\\subseteq X$ with inherited sigma-algebra $\\mathcal U=\\{A\\cap U:A\\in\\mathcal X\\}$. Let $q:U\\to Q$ and $F:U\\to Y$ be measurable target and forward maps. The **admissible state set** is a declared nonempty $\\mathcal U$-measurable subset $C\\subseteq U$. The observation model is a specified probability kernel $K(dy\\mid x)$ from $(U,\\mathcal U)$ to $(Y,\\mathcal Y)$; in an additive-noise model, when $Y$ has a measurable addition operation, it is the law of $F(x)+\\varepsilon$ for a declared noise law of $\\varepsilon$, while nonadditive or model-dependent observation noise is encoded directly by $K$.\n\nThe forward solver, when a numerical evaluation is used, is the specified procedure for evaluating this model, including its discretization, tolerances, finite call budget, and any model-specific admissibility test; exact evaluation is the special case with no numerical-solver error. A failed admissibility test or solver call is recorded with its failure status and is not silently omitted from the benchmark results.\n\nA **benchmark specification** also declares a training law $P_{\\rm train}$ on a named measurable space for all random variables used to fit a method or select its hyperparameters; those variables may be paired or unpaired. It declares a test law $P_{\\rm test}$ on $(Y\\times Q,\\mathcal Y\\otimes\\mathcal Q)$ for evaluation pairs $(Y,q(X))$, and any separate validation law used for tuning. The training and test laws need not agree. Each candidate method is identified by its fitting procedure and by its deployed measurable deterministic reconstruction rule $g:Y\\to Q$ or randomized reconstruction kernel $L(da\\mid y)$ from $Y$ to $Q$. Its population test risk is the risk under $P_{\\rm test}$ as defined by the inverse-risk functional; a reported finite-sample score must additionally name its test sample and empirical aggregation rule. No risk transfer or generalization bound follows from the benchmark specification.\n\nBefore comparison, the specification fixes a nonnegative product-measurable loss $\\ell:Q\\times Q\\to[0,+\\infty]$, an uncertainty diagnostic, and a finite compute-budget vector. An uncertainty diagnostic is a declared measurable statistic of the method outputs and, when applicable, target labels, together with its target quantity; for example, if a reported set-valued estimate $C(y)\\subseteq Q$ has a product-measurable membership event $\\{(y,a):a\\in C(y)\\}\\in\\mathcal Y\\otimes\\mathcal Q$, its test coverage is $P_{\\rm test}(\\{(y,a)\\in Y\\times Q:a\\in C(y)\\})$. The budget vector records the applicable maximum counts of forward-model queries, adjoint queries, gradient evaluations, ODE right-hand-side evaluations, solver or sampling steps, and elapsed runtime; inapplicable counts are marked as not applicable, not zero. It also records the hardware, numerical precision, software/model versions, random seeds, tuning data, and stopping tolerances needed to interpret those counts. Each method's result records its metric values, uncertainty diagnostic, realized compute counts, solver status, and failed runs. A comparison is tied to the declared test law, test sample, loss, solver, admissibility rules, and tuning protocol; when budgets or other conditions differ, those differences are reported as part of the comparison. The specification defines an evaluation protocol, not a theorem ranking algorithms.\n\n```tikz\n\\begin{tikzpicture}[>=stealth]\n  \\node[draw,rounded corners,align=center] (train) at (0,1.3) {$P_{\\rm train}$};\n  \\node[draw,rounded corners,align=center] (fit) at (3,1.3) {fit and tune};\n  \\node[draw,rounded corners,align=center] (rule) at (6.2,1.3) {$g$ or $L$};\n  \\node[draw,rounded corners,align=center] (forward) at (0,-0.2) {$F$, noise $K$, solver};\n  \\node[draw,rounded corners,align=center] (test) at (3,-0.2) {$P_{\\rm test}$ pairs};\n  \\node[draw,rounded corners,align=center] (eval) at (6.4,-0.2) {loss and uncertainty};\n  \\node[draw,rounded corners,align=center] (record) at (10,-0.2) {scores, budget, status};\n  \\draw[->] (train)--(fit);\n  \\draw[->] (fit)--(rule);\n  \\draw[->] (forward)--(test);\n  \\draw[->] (test)--(eval);\n  \\draw[->] (rule)--(eval);\n  \\draw[->] (eval)--(record);\n\\end{tikzpicture}\n```\n\nThe arrows label declared information flow into fitting, observation generation, and evaluation. The diagram asserts no equality between $P_{\\rm train}$ and $P_{\\rm test}$ and no risk-transfer result.",
+          "uses": [
+            "1.2"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "def-ip-pde-solver-admissibility-contract",
+          "source_section": "Definition",
+          "quote": "Fix an integer $d\\ge2$, a bounded polyhedral open set $\\Omega\\subset\\mathbb R^d$, a finite matching affine simplicial mesh $\\mathcal T_h$ of $\\Omega$, and unisolvent reference finite elements assembled on that mesh. Thus the mesh is a finite face-to-face cover by nondegenerate affine simplices with disjoint interiors, and each local finite-element degree-of-freedom map is bijective on its finite-dimensional shape-function space. Fix coefficient spaces $\\Theta_h=\\mathbb R^m$, $V_h=\\mathbb R^n$, and $Y_h=\\mathbb R^s$ with their standard Euclidean inner products, where $m,n,s\\ge1$. Let $Q_h\\subseteq\\Theta_h$ be nonempty, closed, and convex, and let $O_h\\subseteq\\Theta_h$ be open with $Q_h\\subseteq O_h$.\n\nA **finite-element PDE model** in this contract consists of a continuously differentiable residual map $R_h:O_h\\times V_h\\to V_h$ and a continuously differentiable observation map $G_h:O_h\\times V_h\\to Y_h$. It must supply a continuously differentiable state branch $S_h:O_h\\to V_h$ satisfying $R_h(q,S_h(q))=0$ for every $q\\in O_h$. For every $q\\in Q_h$, this branch must be the specified unique admissible state and the matrix $D_uR_h(q,S_h(q))$ must be invertible. The discrete forward map is $F_h(q):=G_h(q,S_h(q))$. The unisolvent finite-element degrees of freedom identify $V_h$ with its coefficient space; all matrix transposes below are in the fixed Euclidean coefficient inner products.\n\nFor data $y^\\delta\\in Y_h$, reference parameter $q_0\\in\\Theta_h$, and $\\alpha>0$, the discrete nonlinear Tikhonov objective is\n$$\n\\Phi_h(q):=\\frac12\\|F_h(q)-y^\\delta\\|_{Y_h}^2+\\frac\\alpha2\\|q-q_0\\|_{\\Theta_h}^2\\qquad(q\\in Q_h).\n$$\nDefine the finite-dimensional objective before eliminating the state by\n$$\nJ_h(q,u):=\\frac12\\|G_h(q,u)-y^\\delta\\|_{Y_h}^2+\\frac\\alpha2\\|q-q_0\\|_{\\Theta_h}^2.\n$$\nThe symbols $\\nabla_uJ_h$ and $\\nabla_qJ_h$ denote the Euclidean gradient vectors representing the two partial derivative functionals. At an admissible $q$, the **exact discrete adjoint** $p_h(q)\\in V_h$ is the unique solution of\n$$\n\\bigl(D_uR_h(q,S_h(q))\\bigr)^T p_h(q)=\\nabla_uJ_h(q,S_h(q)).\n$$\nThe associated discrete-adjoint gradient vector is\n$$\ng_h(q):=\\nabla_qJ_h(q,S_h(q))-\\bigl(D_qR_h(q,S_h(q))\\bigr)^T p_h(q).\n$$\nThe next lemma proves that this vector is the gradient of $\\Phi_h$; the definition itself asserts no minimizer exists and no gradient iteration converges.\n\nAn **admissibility predicate** is a specified finite-time test $\\operatorname{adm}_h(q)$ that decides whether $q\\in Q_h$ and checks the model's stated coefficient, boundary, mesh, and time-step hypotheses before a PDE solve. For an explicit time discretization, a Courant–Friedrichs–Lewy condition (CFL condition) is a method-specific bound relating the time step to the mesh and the discrete evolution operator; no universal CFL threshold is part of this definition. A true predicate result certifies that the declared model hypotheses hold for that input, not merely that a heuristic check passed.\n\nThe model must also supply an exact finite-dimensional projection routine which returns $P_{Q_h}(z)$ for a queried $z\\in\\Theta_h$ in finite time or reports failure only when its declared finite call budget is exhausted. The unique nearest point exists because $Q_h$ is nonempty, closed, and convex, but an operational routine for computing it is an additional part of this contract.\n\nA solver routine with declared nonnegative state and adjoint tolerances $\\tau_u,\\tau_p$ and a finite solve budget must return either `failure` or approximate state and adjoint vectors $\\widetilde u,\\widetilde p$ together with certified finite bounds $\\rho_u,\\rho_p,\\eta_u,\\eta_p,P,L_{J,u},L_{R,u},M_q,L_{G,u}$. The residual bounds have the exact-system meaning $\\|R_h(q,\\widetilde u)\\|_{V_h}\\le\\rho_u$ and $\\|(D_uR_h(q,u))^T\\widetilde p-\\nabla_uJ_h(q,u)\\|_{V_h}\\le\\rho_p$, where $u=S_h(q)$; both must satisfy $\\rho_u\\le\\tau_u$ and $\\rho_p\\le\\tau_p$. In particular, an adjoint residual evaluated at $\\widetilde u$ alone does not certify $\\rho_p$ unless the model also bounds the resulting state and derivative-data defects. With $u=S_h(q)$ and $p=p_h(q)$, the model must certify\n$$\n\\|u-\\widetilde u\\|_{V_h}\\le\\eta_u,\\qquad \\|p-\\widetilde p\\|_{V_h}\\le\\eta_p,\\qquad \\|p\\|_{V_h}\\le P,\n$$\n$$\n\\|\\nabla_qJ_h(q,u)-\\nabla_qJ_h(q,\\widetilde u)\\|_{\\Theta_h}\\le L_{J,u}\\eta_u,\n$$\n$$\n\\|(D_qR_h(q,u))^T-(D_qR_h(q,\\widetilde u))^T\\|\\le L_{R,u}\\eta_u,\\qquad \\|(D_qR_h(q,\\widetilde u))^T\\|\\le M_q,\n$$\nand $\\|G_h(q,u)-G_h(q,\\widetilde u)\\|_{Y_h}\\le L_{G,u}\\eta_u$. It then returns\n$$\n\\widetilde g:=\\nabla_qJ_h(q,\\widetilde u)-(D_qR_h(q,\\widetilde u))^T\\widetilde p,\\qquad \\widetilde F:=G_h(q,\\widetilde u),\n$$\nAll constants and state/adjoint error bounds must be justified for the chosen model with every derivative-data, geometry, quadrature, and algebraic-solve defect retained. Certified residual bounds $\\rho_u,\\rho_p$ do not by themselves imply $\\eta_u,\\eta_p$; a separate model-valid stability estimate is required. The proposition below derives the resulting $\\varepsilon_g$ and $\\varepsilon_F$ bounds. An objective-evaluation routine must return in its finite budget either `failure` or an interval $[\\ell_h(q),u_h(q)]$ containing the exact value $\\Phi_h(q)$; `failure` is permitted only when a required state/adjoint solve fails its contract or the evaluation-call budget is exhausted. Exact evaluation is the degenerate-interval case. Projection and objective-evaluation calls consume the algorithm's finite evaluation budget. Each routine must return within its declared budget or report failure.\n\nIf a continuous model $F$ is also supplied, an optional mesh certificate $\\varepsilon_{\\rm mesh}$ must separately bound the claimed continuous-to-discrete error, such as $\\|F_h(q)-F(q)\\|$ or $\\|\\nabla\\Phi_h(q)-\\nabla\\Phi(q)\\|$. The state and adjoint algebraic residual certificates do not imply this mesh certificate.",
+          "uses": [
+            "1.1",
+            "1.2"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "rem-ip-inversebench-scoped-findings",
+          "source_section": "Remark",
+          "quote": "Zheng et al.'s InverseBench reports 14 plug-and-play diffusion-prior algorithms and domain-specific baselines on five selected cases: first-Born optical scattering, raw multi-coil knee MRI, black-hole very-long-baseline interferometry, full waveform inversion, and two-dimensional vorticity-form Navier–Stokes inversion. For these experiments, the authors report that diffusion-prior methods often outperform conventional baselines when the training data are suitable, while a classical full-waveform-inversion optimizer initialized from a smoothed ground truth outperforms the tested diffusion-prior methods. In cases with closed-form forward models, methods using more forward-gradient queries can be more accurate and more expensive; the paper reports that this trend fails for its numerical PDE cases. Its Navier–Stokes split has one validation case and ten test cases. The paper reports step-size/Courant–Friedrichs–Lewy (CFL) failures in its PDE experiments. Its Figure 5 out-of-distribution diagnostics feed digit images to a black-hole prior trained on simulated black-hole images, and nine-cell scattering sources to a prior trained on one-to-six-cell sources; for the black-hole case, the authors report outputs with the prior's characteristic ring feature. These are empirical observations for the named data, solvers, methods, tuning protocol, and hardware; they establish no universal ranking, stability bound, posterior exactness, risk-transfer bound, or robustness theorem.\n\nThere is a first-Born notation discrepancy between the paper and its released implementation. Appendix B.1 defines a contrast-dependent total field and then displays a sensor equation with that field multiplied by the contrast, which does not itself exhibit a fixed linear map. The pinned implementation instead passes the fixed incident field into the sensor-propagation routine and constructs its cached linear matrix from that fixed field. This page therefore identifies the implemented benchmark as the first-Born linear case and does not infer linearity from the printed contrast-dependent expression.",
+          "uses": [
+            "2.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "Since $\\operatorname{adm}_{\\mathcal S}(\\widetilde v)=\\mathrm{false}$, the proposed iterate fails the selected solver's declared admissibility test; it is therefore not an admissible input for that solver call.",
+          "step": "1.1",
+          "inputs": [
+            "F2",
+            "given"
+          ]
+        },
+        {
+          "id": "step-1-2",
+          "claim": "The benchmark records the failed call; that failure record alone does not prescribe whether a numeric score is assigned or how the failed trial enters an aggregate.",
+          "step": "1.2",
+          "inputs": [
+            "F1",
+            "F2",
+            "given"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "The stated smaller-step/larger-step DAPS behavior is the paper's reported FWI observation for its numerical PDE setup, as recorded by [F3]; no inference is made from it to other solvers or parameter ranges.",
+          "step": "2.1",
+          "inputs": [
+            "F3",
+            "given"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The premise supplies a particular finite candidate iterate and a false admissibility predicate; it is not an empty run.",
+          "template_review": {
+            "upheld": true,
+            "by": "/root",
+            "reason": "The premise supplies a particular finite candidate iterate and a false admissibility predicate; it is not an empty run.",
+            "item_sha256": "09d8cb3df1bdc55a0fa2a06f09ca3dca92daeb748fc69d7596c7f1955a569d10",
+            "row_sha256": "6d71a663951ad164c4213835cd11cf6186beca1ffabab5929cf8859ebd052877",
+            "role": "root-adopted actual delegated owner-focused FIRST; not native Alpha",
+            "delegated_reviewer": "/root/top_marked_torus_operation",
+            "delegated_review_sources": [
+              {
+                "file": "research/inverse-problems-knot-theory-all-109-2026-10-19-supervision-20261020/step2-supervision/battery1-boundary/lane-8/proposal.json",
+                "field": "rows",
+                "index": 224
+              }
+            ],
+            "root_adoption_record": "research/inverse-problems-knot-theory-all-109-2026-10-19-supervision-20261020/step2-supervision/battery1-boundary/lane-8/root-final-adoption.json"
+          }
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Verification 1.2 records a failed validity status rather than a numerical score zero; these are expressly distinct outputs.",
+          "template_review": {
+            "upheld": true,
+            "by": "/root",
+            "reason": "Verification 1.2 records a failed validity status rather than a numerical score zero; these are expressly distinct outputs.",
+            "item_sha256": "09d8cb3df1bdc55a0fa2a06f09ca3dca92daeb748fc69d7596c7f1955a569d10",
+            "row_sha256": "943e502cbe498a5bc0974e1317cae119d8e04c4b3f62cff185b5776251a8a95e",
+            "role": "root-adopted actual delegated owner-focused FIRST; not native Alpha",
+            "delegated_reviewer": "/root/top_marked_torus_operation",
+            "delegated_review_sources": [
+              {
+                "file": "research/inverse-problems-knot-theory-all-109-2026-10-19-supervision-20261020/step2-supervision/battery1-boundary/lane-8/proposal.json",
+                "field": "rows",
+                "index": 225
+              }
+            ],
+            "root_adoption_record": "research/inverse-problems-knot-theory-all-109-2026-10-19-supervision-20261020/step2-supervision/battery1-boundary/lane-8/root-final-adoption.json"
+          }
+        },
+        {
+          "case": "one",
+          "status": "not_applicable",
+          "reason": "The predicate-true branch is outside the Given false-predicate premise and is not certified by this failure example.",
+          "template_review": {
+            "upheld": true,
+            "by": "/root",
+            "reason": "The predicate-true branch is outside the Given false-predicate premise and is not certified by this failure example.",
+            "item_sha256": "09d8cb3df1bdc55a0fa2a06f09ca3dca92daeb748fc69d7596c7f1955a569d10",
+            "row_sha256": "6eeae4f8b1b1c1f994758e8d88481bbdc0bb7aa80016525a786f201749def887",
+            "role": "root-adopted actual delegated owner-focused FIRST; not native Alpha",
+            "delegated_reviewer": "/root/top_marked_torus_operation",
+            "delegated_review_sources": [
+              {
+                "file": "research/inverse-problems-knot-theory-all-109-2026-10-19-supervision-20261020/step2-supervision/battery1-boundary/lane-8/proposal.json",
+                "field": "rows",
+                "index": 226
+              }
+            ],
+            "root_adoption_record": "research/inverse-problems-knot-theory-all-109-2026-10-19-supervision-20261020/step2-supervision/battery1-boundary/lane-8/root-final-adoption.json"
+          }
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Verification 1.1 applies precisely to invalid boundary, coefficient, mesh or CFL data as encoded by the solver-specific predicate.",
+          "template_review": {
+            "upheld": true,
+            "by": "/root",
+            "reason": "Verification 1.1 applies precisely to invalid boundary, coefficient, mesh or CFL data as encoded by the solver-specific predicate.",
+            "item_sha256": "09d8cb3df1bdc55a0fa2a06f09ca3dca92daeb748fc69d7596c7f1955a569d10",
+            "row_sha256": "e955848c05af0426322473d2417739e8af98b2beec16f925b92c77f9f6314e77",
+            "role": "root-adopted actual delegated owner-focused FIRST; not native Alpha",
+            "delegated_reviewer": "/root/top_marked_torus_operation",
+            "delegated_review_sources": [
+              {
+                "file": "research/inverse-problems-knot-theory-all-109-2026-10-19-supervision-20261020/step2-supervision/battery1-boundary/lane-8/proposal.json",
+                "field": "rows",
+                "index": 227
+              }
+            ],
+            "root_adoption_record": "research/inverse-problems-knot-theory-all-109-2026-10-19-supervision-20261020/step2-supervision/battery1-boundary/lane-8/root-final-adoption.json"
+          }
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "No exact timestep or learning-rate endpoint is claimed: Verification 2.1 expressly limits the paper comparison to qualitative reported behavior.",
+          "template_review": {
+            "upheld": true,
+            "by": "/root",
+            "reason": "No exact timestep or learning-rate endpoint is claimed: Verification 2.1 expressly limits the paper comparison to qualitative reported behavior.",
+            "item_sha256": "09d8cb3df1bdc55a0fa2a06f09ca3dca92daeb748fc69d7596c7f1955a569d10",
+            "row_sha256": "911fa46ef854ea5da46bbbf505832a76dbdef30190e7a7d1825a9ded5053fa41",
+            "role": "root-adopted actual delegated owner-focused FIRST; not native Alpha",
+            "delegated_reviewer": "/root/top_marked_torus_operation",
+            "delegated_review_sources": [
+              {
+                "file": "research/inverse-problems-knot-theory-all-109-2026-10-19-supervision-20261020/step2-supervision/battery1-boundary/lane-8/proposal.json",
+                "field": "rows",
+                "index": 228
+              }
+            ],
+            "root_adoption_record": "research/inverse-problems-knot-theory-all-109-2026-10-19-supervision-20261020/step2-supervision/battery1-boundary/lane-8/root-final-adoption.json"
+          }
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "The candidate, solver-specific predicate, and its false result are supplied explicitly in the Example statement; no search or choice axiom is used."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The item proves a conditional failure for a supplied false predicate, not an equivalence between admissibility and convergence.",
+          "template_review": {
+            "upheld": true,
+            "by": "/root",
+            "reason": "The item proves a conditional failure for a supplied false predicate, not an equivalence between admissibility and convergence.",
+            "item_sha256": "09d8cb3df1bdc55a0fa2a06f09ca3dca92daeb748fc69d7596c7f1955a569d10",
+            "row_sha256": "59d6efdf8919ca28f99fbd295ed6be1ec7f817c7c3ad3b7f75e03331dfb23101",
+            "role": "root-adopted actual delegated owner-focused FIRST; not native Alpha",
+            "delegated_reviewer": "/root/top_marked_torus_operation",
+            "delegated_review_sources": [
+              {
+                "file": "research/inverse-problems-knot-theory-all-109-2026-10-19-supervision-20261020/step2-supervision/battery1-boundary/lane-8/proposal.json",
+                "field": "rows",
+                "index": 222
+              }
+            ],
+            "root_adoption_record": "research/inverse-problems-knot-theory-all-109-2026-10-19-supervision-20261020/step2-supervision/battery1-boundary/lane-8/root-final-adoption.json"
+          }
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "It does not infer the converse that every failed or inaccurate solve violates this finite admissibility predicate.",
+          "template_review": {
+            "upheld": true,
+            "by": "/root",
+            "reason": "It does not infer the converse that every failed or inaccurate solve violates this finite admissibility predicate.",
+            "item_sha256": "09d8cb3df1bdc55a0fa2a06f09ca3dca92daeb748fc69d7596c7f1955a569d10",
+            "row_sha256": "4d91b30a5904dff01a76a138442676c5a0d09ecb6fc782153aaa039944f73f11",
+            "role": "root-adopted actual delegated owner-focused FIRST; not native Alpha",
+            "delegated_reviewer": "/root/top_marked_torus_operation",
+            "delegated_review_sources": [
+              {
+                "file": "research/inverse-problems-knot-theory-all-109-2026-10-19-supervision-20261020/step2-supervision/battery1-boundary/lane-8/proposal.json",
+                "field": "rows",
+                "index": 223
+              }
+            ],
+            "root_adoption_record": "research/inverse-problems-knot-theory-all-109-2026-10-19-supervision-20261020/step2-supervision/battery1-boundary/lane-8/root-final-adoption.json"
+          }
+        }
+      ]
+    }
+  }
+}

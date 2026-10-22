@@ -14,6 +14,11 @@ axiom_use: Inherits the full-AC branch of the ordinary A-polynomial definition; 
 provenance:
   statement: literature-derived
   proof: not-applicable
+verification:
+  judge:
+    model: "gpt-6-luna"
+    verdict: pass
+    date: 2026-10-22
 sources:
   references:
     - title: John A. Baldwin and Steven Sivek, Torus knots, the A-polynomial, and SL(2,C), §2.3

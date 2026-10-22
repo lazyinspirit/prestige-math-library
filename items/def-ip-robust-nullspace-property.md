@@ -25,6 +25,10 @@ sources:
       url: "https://www.mat.uniroma2.it/~speleers/cime2024/material/book_rauhut.pdf"
 verification:
   precheck: n/a
+  judge:
+    model: "gpt-6-luna"
+    verdict: pass
+    date: 2026-10-22
 ---
 
 ## Definition

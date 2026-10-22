@@ -13,6 +13,11 @@ proof_strategy: direct
 provenance:
   statement: ai-altered
   proof: ai-generated
+verification:
+  judge:
+    model: "gpt-6-luna"
+    verdict: pass
+    date: 2026-10-22
 sources:
   references:
     - title: Wolfgang Haken, Theorie der Normalflächen, Acta Mathematica105

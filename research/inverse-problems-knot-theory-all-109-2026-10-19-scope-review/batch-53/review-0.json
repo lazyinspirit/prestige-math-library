@@ -1,0 +1,92 @@
+{
+  "version": 1,
+  "run": "inverse-problems-knot-theory-all-109-2026-10-19",
+  "batch": "53",
+  "round": 0,
+  "reviewed_items": [
+    "lem-ip-vandermonde-determinant",
+    "def-ip-real-frame-phase-retrieval",
+    "lem-ip-real-phase-retrieval-quotient-metric",
+    "def-ip-frame-complement-property",
+    "def-ip-real-full-spark-measurement-family",
+    "alg-ip-finite-sign-enumeration-phase-retrieval",
+    "thm-ip-real-phase-retrieval-complement-property",
+    "thm-ip-finite-sign-enumeration-correctness",
+    "cor-ip-full-spark-sharp-real-phase-measurement-count",
+    "ex-ip-fourier-translation-reflection-ambiguity",
+    "cex-ip-real-failed-complement-partition",
+    "ex-ip-sign-enumeration-budget-exhaustion",
+    "ex-ip-real-phase-retrieval-two-dimensional-full-spark-frame",
+    "cex-ip-complex-complement-property-insufficient"
+  ],
+  "reviewed_pages": [
+    "real-phase-retrieval-and-complement-property",
+    "real-phase-retrieval-and-complement-property-examples"
+  ],
+  "decision": "repair",
+  "reason": "The assigned inventory and page prerequisites match the approved design, and the statements are uninterrupted with references after each complete claim. Request one local repair for the proof prerequisites and algorithm input conditions below; each can be resolved within this batch.",
+  "findings": [
+    {
+      "id": "lem-ip-vandermonde-determinant",
+      "type": "prerequisite",
+      "reason": "F1 uses the univariate polynomial-domain corollary for a multivariate ring without the induction it requires. Step 1.3 also treats P as C[t_q] for arbitrary q, and the proof uses total-degree and lexicographic-leading-term facts without their suppliers. Add the multivariate-domain and monomial/lex suppliers, or justify these facts locally, including variable reordering."
+    },
+    {
+      "id": "thm-ip-real-phase-retrieval-complement-property",
+      "type": "prerequisite",
+      "reason": "Fact F5 uses that every vector in a span is a finite linear combination. The actual span definition defers this identification to lem-span-is-the-set-of-linear-combinations. Add that supplier or rewrite step 3.1 using the smallest-subspace property and establish the required inclusion. Make the approved zero-measurement-vector and zero-signal cases explicit; the general algebra appears to cover them."
+    },
+    {
+      "id": "cor-ip-full-spark-sharp-real-phase-measurement-count",
+      "type": "prerequisite",
+      "reason": "Fact F4 and steps 1.1 and 3.1 use image-equals-span and finite-combination properties not supplied by the cited span definition. Add lem-span-is-the-set-of-linear-combinations or establish the needed image/span inclusions directly."
+    },
+    {
+      "id": "cex-ip-real-failed-complement-partition",
+      "type": "prerequisite",
+      "reason": "Step 1.1 asserts the singleton spans are exactly the coordinate axes, but the cited span definition does not identify spans with finite linear combinations. Add lem-span-is-the-set-of-linear-combinations or prove these two inclusions from the smallest-subspace definition."
+    },
+    {
+      "id": "cex-ip-complex-complement-property-insufficient",
+      "type": "prerequisite",
+      "reason": "Step 1.1 uses finite-combination properties of spans and the coordinate-basis structure of C², while F5 cites only the span definition. Add the span and coordinate-space suppliers, or give explicit coordinate decompositions for all three pairs."
+    },
+    {
+      "id": "ex-ip-real-phase-retrieval-two-dimensional-full-spark-frame",
+      "type": "prerequisite",
+      "reason": "Step 1.1 infers linear independence from nonzero determinants without a determinant criterion supplier or direct calculation. The statement also says every pair spans R², which the proof does not establish. Supply the determinant/basis results or verify each pair by explicit coordinate combinations."
+    },
+    {
+      "id": "alg-ip-finite-sign-enumeration-phase-retrieval",
+      "type": "local",
+      "reason": "P and L are pattern and solve counts, but the admissible conditions state only P,L≥0. Specify nonnegative integer budgets in the Definition and align the correctness theorem's budget hypotheses."
+    },
+    {
+      "id": "thm-ip-finite-sign-enumeration-correctness",
+      "type": "prerequisite",
+      "reason": "Step 5.1 and step 6.1 use a minimum over a finite sign set without a finite-minimum supplier such as lem-finite-set-has-max. Fact F6 also relies on lem-metrics-on-rn, whose statement assumes m≥1, while this theorem includes m=0; give the empty-coordinate residual case explicitly from def-euclidean-inner-product."
+    }
+  ],
+  "consumer_checks": [
+    {
+      "id": "thm-ip-finite-sign-enumeration-correctness",
+      "decision": "repair",
+      "reason": "Direct consumer of the algorithm Definition; update its P,L hypotheses to nonnegative integers and retain the existing exact/noisy conclusions."
+    },
+    {
+      "id": "ex-ip-sign-enumeration-budget-exhaustion",
+      "decision": "accept",
+      "reason": "Its budgets are P=L=1, so they satisfy the clarified integer conditions; recheck after the repair."
+    },
+    {
+      "id": "real-phase-retrieval-and-complement-property",
+      "decision": "accept",
+      "reason": "The A page lists the algorithm and correctness theorem; its inventory and prerequisites remain unchanged."
+    },
+    {
+      "id": "real-phase-retrieval-and-complement-property-examples",
+      "decision": "accept",
+      "reason": "Indirect page consumer through the A page; the budget example uses integer budgets and remains within scope."
+    }
+  ]
+}

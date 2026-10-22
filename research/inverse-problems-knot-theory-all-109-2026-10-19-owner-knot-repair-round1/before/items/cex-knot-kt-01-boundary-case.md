@@ -1,0 +1,119 @@
+---
+id: cex-knot-kt-01-boundary-case
+kind: counterexample
+title: "Equal abelianizations do not classify knots"
+status: draft
+origin: pipeline
+pipeline_run: inverse-problems-knot-theory-all-109-2026-10-19
+dependency_level: 5
+deps: [alg-knot-wirtinger-presentation-from-code,
+       lem-wirtinger-local-meridian-conjugacy,
+       thm-knot-wirtinger-presentation-correctness,
+       def-group-presentation,
+       def-free-group,
+       thm-quotient-group-universal-property,
+       def-oriented-link-in-s-three-and-ambient-isotopy,
+       def-induced-homomorphism-on-fundamental-groups,
+       thm-induced-fundamental-group-map-functoriality,
+       def-commutator-and-commutator-subgroup,
+       thm-derived-subgroup-is-characteristic-and-abelianization-is-universal]
+justified_by: []
+aliases: []
+proof_strategy: direct
+provenance:
+  statement: literature-derived
+  proof: ai-altered
+sources:
+  references:
+    - title: "Stefan Friedl, Knot Theory, §§5.2–5.4, trefoil group and link group-abelianization corollary, printed pp. 68–73"
+      url: "https://friedl.app.uni-regensburg.de/papers/2024_knot-theory-final.pdf"
+    - title: "Danny Calegari, Introduction to Knot Theory, §4.2, printed pp. 34–36"
+      url: "https://math.uchicago.edu/~dannyc/notes/knot_theory.pdf"
+verification: {precheck: pass}
+---
+## Statement refuted
+
+Write $G(K):=\pi_1(S^3\setminus K)$ for the group of a smooth oriented knot $K$. The claim is that for every pair of such knots $K_1,K_2$, an isomorphism $G(K_1)^{\mathrm{ab}}\cong G(K_2)^{\mathrm{ab}}$ implies that $K_1$ and $K_2$ are ambient isotopic.
+
+## Statement references
+
+[[thm-knot-wirtinger-presentation-correctness|Wirtinger presentations compute the knot complement group]]
+
+[[def-oriented-link-in-s-three-and-ambient-isotopy|Ambient isotopy of knots and induced complement homeomorphism]]
+
+[[def-commutator-and-commutator-subgroup|Abelianization as the quotient by the commutator subgroup]]
+
+[Friedl, *Knot Theory*, §5.4](https://friedl.app.uni-regensburg.de/papers/2024_knot-theory-final.pdf)
+
+[Calegari, *Introduction to Knot Theory*, §4.2](https://math.uchicago.edu/~dannyc/notes/knot_theory.pdf)
+
+## Facts & Assumptions
+
+**Given:** The crossing-free unknot code and the standard three-crossing trefoil diagram, with their Wirtinger presentations.
+
+[F1] The constructor returns one meridian generator per under-arc and one relator per crossing. [[alg-knot-wirtinger-presentation-from-code]]
+
+[F2] The over- and under-meridians at an oriented crossing satisfy the conjugacy relation determined by its chart. [[lem-wirtinger-local-meridian-conjugacy]]
+
+[F3] The constructor's presentation group is isomorphic to the knot complement group. [[thm-knot-wirtinger-presentation-correctness]]
+
+[F4] A group presentation is a quotient of the free group on the generators by the relator normal closure. [[def-group-presentation]]
+
+[F5] The free group on one generator is isomorphic to $\mathbb Z$ by exponent sum. [[def-free-group]]
+
+[F6] Quotient maps from free groups factor uniquely through their relator normal closures. [[thm-quotient-group-universal-property]]
+
+[F7] The abelianization is the quotient by the commutator subgroup. [[def-commutator-and-commutator-subgroup]]
+
+[F8] The abelianization is universal among homomorphisms to abelian groups. [[thm-derived-subgroup-is-characteristic-and-abelianization-is-universal]]
+
+[F9] An ambient isotopy of knots induces a homeomorphism of their complements. [[def-oriented-link-in-s-three-and-ambient-isotopy]]
+
+[F10] A pointed homeomorphism induces a fundamental-group isomorphism. [[def-induced-homomorphism-on-fundamental-groups]]
+
+[F11] Induced fundamental-group maps are functorial under composition. [[thm-induced-fundamental-group-map-functoriality]]
+
+## Counterexample
+
+Let $G_J:=\pi_1(S^3\setminus J)$ for a knot $J$. Let $U$ be the crossing-free unknot and let $T$ be the closed three-crossing diagram shown below, formed from two oriented strands and the two exterior closure arcs. With the shown orientation and under-arc labels $a,b,c$, its crossing triples $(o,L,R)$ are $(c,a,b)$, $(b,c,a)$, and $(a,b,c)$, so its crossing equations are $b=cac^{-1}$, $a=bcb^{-1}$, and $c=aba^{-1}$. Eliminating $c$ gives $G_T\cong\langle a,b\mid aba=bab\rangle$. The map $a\mapsto(12)$, $b\mapsto(23)$ is a surjection of $G_T$ onto the nonabelian permutation group $S_3$. Consequently $G_U\cong\mathbb Z$ and $G_T$ is noncyclic. Their abelianizations are both $\mathbb Z$, so they are not distinguished by abelianization. Ambient-isotopic knots have isomorphic complement groups, hence $U$ and $T$ are not ambient isotopic. Thus abelianization alone does not classify knots.
+
+The diagram is the closure of the displayed braid; the arrows give the knot orientation, each white gap marks an underpass, and the strand drawn continuously over a gap is the overpass. The triples $(o,L,R)$ list the over-arc, the incoming left under-arc, and the outgoing right under-arc at each crossing.
+
+```tikz
+\begin{tikzpicture}[x=1cm,y=1cm,>=stealth,line width=0.9pt]
+  \draw (0.8,3) -- (-0.8,2.2) -- (0.8,1.2) -- (-0.8,0.2);
+  \draw (-0.8,3) -- (0.8,2.2) -- (-0.8,1.2) -- (0.8,0.2);
+  \draw (0.8,0.2) .. controls (1.8,0.2) and (1.8,3) .. (0.8,3);
+  \draw (-0.8,0.2) .. controls (-1.8,0.2) and (-1.8,3) .. (-0.8,3);
+  \draw[white,line width=3.4pt] (0.28,2.74) -- (-0.28,2.46);
+  \draw[white,line width=3.4pt] (0.28,0.88) -- (-0.28,0.52);
+  \draw[white,line width=3.4pt] (0.28,1.875) -- (-0.28,1.525);
+  \draw[black,line width=0.9pt] (-0.28,2.74) -- (0.28,2.46);
+  \draw[black,line width=0.9pt] (-0.28,1.875) -- (0.28,1.525);
+  \draw[black,line width=0.9pt] (-0.28,0.875) -- (0.28,0.525);
+  \draw[->] (-0.5,2.85) -- (-0.2,2.7);
+  \draw[->] (0.5,2.85) -- (0.2,2.7);
+  \draw[->] (0.5,2.01) -- (0.2,1.825);
+  \draw[->] (-0.5,2.01) -- (-0.2,1.825);
+  \draw[->] (-0.5,1.01) -- (-0.2,0.825);
+  \draw[->] (0.5,1.01) -- (0.2,0.825);
+  \draw[->] (1.52,1.55) -- (1.52,1.9);
+  \draw[->] (-1.52,1.55) -- (-1.52,1.9);
+  \node[right] at (1.55,1.18) {$a$};
+  \node[left] at (-0.45,2.05) {$b$};
+  \node[left] at (-1.45,2.75) {$c$};
+  \node[above right] at (0.04,2.72) {$1$};
+  \node[above right] at (0.04,1.72) {$2$};
+  \node[above right] at (0.04,0.72) {$3$};
+\end{tikzpicture}
+```
+
+1.1 By [F1] and [F3], the crossing-free unknot group is $\langle x\mid\ \rangle$, the free group on one generator. By [F5] it is isomorphic to $\mathbb Z$, whose abelianization is itself by [F7]. [given, F1, F3, F4, F5, F7, algebra]
+
+1.2 The trefoil's displayed crossing triples and [F2] give $b=cac^{-1}$, $a=bcb^{-1}$, and $c=aba^{-1}$. Substituting the last into the second yields $a=bab a^{-1}b^{-1}$; right multiplication by $ba$ gives $aba=bab$. Under this relation, $cac^{-1}=a b a b^{-1}a^{-1}=b$, so the first equation follows. Thus eliminating $c$ gives $\langle a,b\mid aba=bab\rangle$, and [F3] identifies it with $G_T$. [given, F2, F3, F4, algebra]
+
+2.1 In the abelianization, written additively by [F7], $aba=bab$ gives $2[a]+[b]=[a]+2[b]$, hence $[a]=[b]$ and the abelianization is generated by $[a]$. The map $G_T\to\mathbb Z$ sending $a,b$ to $1$ respects the relator and is surjective; by [F8] it factors through the abelianization. The map $\mathbb Z\to G_T^{\mathrm{ab}}$ sending $1$ to $[a]$ is inverse, so $G_T^{\mathrm{ab}}\cong\mathbb Z$. [F7, F8, step 1.2, algebra]
+
+2.2 The map $a\mapsto(12)$, $b\mapsto(23)$ respects $aba=bab$, since both sides equal $(13)$. Its image contains two adjacent transpositions and hence all six elements of $S_3$, so it is surjective by [F4] and [F6]. Since $S_3$ is nonabelian, $G_T$ is nonabelian; every quotient of the cyclic group $\mathbb Z$ is cyclic, so $G_T\not\cong\mathbb Z\cong G_U$. [F4, F5, F6, step 1.2, algebra]
+
+3.1 If $U$ and $T$ were ambient isotopic, [F9] would give a homeomorphism of their complements; [F10] and [F11] would induce a fundamental-group isomorphism. Step 2.1 rules this out. Their abelianizations nevertheless agree by steps 1.1 and 1.3, proving the stated counterexample. [F9, F10, F11, step 1.1, step 2.1, step 2.2] ∎

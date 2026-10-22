@@ -26,7 +26,7 @@ sources:
   references:
     - title: "Stefan Friedl, Knot Theory, §5.3, proof of the Wirtinger Presentation Proposition"
       url: "https://friedl.app.uni-regensburg.de/papers/2024_knot-theory-final.pdf"
-verification: {precheck: pass}
+verification: {precheck: pass, judge: {model: "gpt-6-luna", verdict: pass, date: 2026-10-22}}
 ---
 
 ## Statement

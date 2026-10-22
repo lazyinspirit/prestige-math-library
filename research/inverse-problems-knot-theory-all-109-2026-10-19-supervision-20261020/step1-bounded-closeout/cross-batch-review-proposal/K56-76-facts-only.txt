@@ -1,0 +1,445 @@
+# K56-76 literal supplier/Facts-only interfaces; NO PROOFS
+
+SUPPLIER alg-seifert-surface-from-diagram
+Assume the Axiom of Countable Choice. Let $D$ be a finite regular oriented link diagram with exactly one component, and let $c$ be its number of crossings. Perform the following construction in its projection sphere $S^2$.
+
+1. Choose a point $q\in S^2$ outside the finite diagram. In pairwise disjoint small disks about the crossings, replace each crossing by the unique noncrossing smoothing compatible with the strand orientations. Let the resulting oriented circles be the Seifert circles and let $s$ be their number.
+2. For each Seifert circle $C$, take the closure of the component of $S^2\setminus C$ that does not contain $q$. Under the stated choice axiom, each such region is an embedded compact disk. The finite family of disk regions is nested or disjoint. Orient each disk to induce the given orientation of its boundary circle, then place nested disks at distinct nearby heights ordered by inclusion; the resulting disk interiors are pairwise disjoint in $S^3$.
+3. For every original crossing, attach one rectangular band along short boundary intervals on the two smoothing arcs. A half-twist means a single $180$-degree turn of the band across the crossing neighborhood. Choose its direction, endpoint orientations, and over/under order to match the original crossing.
+4. Return the finite disk-and-band construction data together with $(s,c)$.
+
+The returned data are a finite attached two-dimensional complex. This algorithm's definition alone does not assert that the resulting image is embedded, is a surface, is connected, or has the original knot as boundary; the separate correctness lemma establishes those properties.
+
+SUPPLIER def-coprime-torus-knot
+Assume the Axiom of Countable Choice. Identify the standard oriented three-sphere with $S^3=\{(z_1,z_2)\in\mathbb C^2:|z_1|^2+|z_2|^2=1\}$ and choose $0<r<1$. The standard unknotted Heegaard torus is $T_r=\{|z_1|=r,\ |z_2|=\sqrt{1-r^2}\}$; its two sides are solid tori. In the angular coordinates $(u,v)\in(\mathbb R/\mathbb Z)^2$ given by $(u,v)\mapsto(r e^{2\pi i u},\sqrt{1-r^2}e^{2\pi i v})$, let $\alpha$ and $\beta$ be the first and second coordinate classes in $H_1(T_r;\mathbb Z)$. For coprime nonzero integers $p,q$, the **oriented torus knot** $T(p,q)$ is the image of $s\mapsto(r e^{2\pi i p s},\sqrt{1-r^2}e^{2\pi i q s})$, for $s\in\mathbb R/\mathbb Z$, oriented by increasing $s$; it represents the primitive slope $p\alpha+q\beta$. The mirror convention is the reflection $(z_1,z_2)\mapsto(z_1,\overline{z_2})$, which sends $T(p,q)$ to $T(p,-q)$ with image orientation, and reversing the knot orientation gives $T(-p,-q)$. For nonzero $p,q$ with $d=\gcd(|p|,|q|)>1$, the corresponding torus link is the union of $d$ disjoint parallel copies of the primitive slope $(p/d,q/d)$; it is not a single embedded curve of class $p\alpha+q\beta$. The exterior is $E_K=S^3\setminus\operatorname{int}N(K)$ for a chosen closed tubular neighborhood. A positive meridian is the oriented boundary of a normal disk, and a preferred longitude is a degree-one class on $\partial E_K$ whose image in $H_1(E_K;\mathbb Z)$ is zero; this definition alone asserts neither existence nor uniqueness.
+
+SUPPLIER def-ideal-tetrahedron-shape-and-cusp-holonomy
+Use the upper half-space model
+$$
+\mathbb H^3=\{(x+iy,t):x,y\in\mathbb R,\ t>0\},\qquad
+ds^2=t^{-2}(dx^2+dy^2+dt^2),
+$$
+whose ideal boundary is $\mathbb C\cup\{\infty\}$. An oriented ideal tetrahedron in normalized position has ideal vertices $0,1,\infty,z$, where $\operatorname{Im}z>0$. Its three edge-shape parameters are
+$$
+z,\qquad z'=\frac1{1-z},\qquad z''=\frac{z-1}{z},
+$$
+each assigned to one pair of opposite edges; the parameter at a corner of a truncated ideal vertex triangle is the parameter of the incident edge. For an oriented path $\gamma$ in a triangulated torus link of ideal vertices, its cusp multiplier $H(\gamma)$ is the product of the corner parameters encountered along $\gamma$, using the parameter when the path cuts off that corner on its left and its reciprocal when it cuts off the corner on its right.
+
+SUPPLIER def-incompressibility-seifert-fibration-and-jsj-system
+Let $M$ be a compact smooth $3$-manifold. A properly embedded surface is **two-sided** if it has a product neighbourhood $F\times[-1,1]$ in $M$. A **compressing disk** for a two-sided surface $F$ is an embedded disk $D\subset M$ with $\operatorname{int}(D)\cap F=\varnothing$ and $\partial D$ an essential simple closed curve in $F$; $F$ is **incompressible** if it has no compressing disk. A **boundary-compressing disk** is an embedded disk $D$ with $\partial D=\alpha\cup\beta$, where $\alpha=D\cap F$ is an arc not cutting off a disk in $F$, $\beta=D\cap\partial M$, and $\operatorname{int}(D)$ misses $F\cup\partial M$; $F$ is **boundary-incompressible** if it has no such disk. A surface is **boundary-parallel** if it cobounds a product with a subsurface of $\partial M$, and it is **essential** if it is incompressible, boundary-incompressible, and not boundary-parallel. $M$ is **irreducible** if every embedded $2$-sphere in its interior bounds an embedded $3$-ball in $M$. An incompressible torus is boundary-parallel if it cobounds a product $T^2\times[0,1]$ with a component of $\partial M$; $M$ is **atoroidal** if every incompressible torus is boundary-parallel. A **Seifert fibration** is a decomposition into circles with local models given by fibered solid tori; in the model $(D^2\times S^1)/\langle(z,w)\mapsto(e^{2\pi i/q}z,e^{2\pi ip/q}w)\rangle$, where $\gcd(p,q)=1$, the core fiber has multiplicity $q$. Fibers of multiplicity $1$ are **regular** and those of multiplicity greater than $1$ are **exceptional**. A finite family of pairwise disjoint incompressible tori is a **JSJ system** if every component obtained by cutting $M$ along the family is atoroidal or Seifert-fibered. It is **inclusion-minimal** if no proper subfamily is a JSJ system. Atoroidal does not mean hyperbolic.
+
+SUPPLIER def-knot-connected-sum-and-prime-knot
+Fix a coordinate orientation-reversing reflection $r:S^3\to S^3$ for the mirror convention. Let $K$ and $J$ be smooth oriented knots in the standard oriented three-sphere. A connected-sum datum consists of one smoothly embedded closed three-ball around a short subarc of $K$ and one around a short subarc of $J$, each meeting its knot in a single trivial properly embedded arc, together with the fixed standard orientation-reversing boundary identification of the two standard oriented ball boundaries that joins the oriented arcs into one circle. Choose this standard map once in the standard two-ball model so that it commutes with $r$ and an orientation-preserving half-turn interchanging the two balls preserves the joining convention. Here a trivial arc is an embedded interval in a ball that is carried by an orientation-preserving diffeomorphism of ball-arc pairs to a straight diameter. Remove the interiors of the two balls and glue the remaining boundary spheres using this fixed identification; the resulting oriented knot in the standard oriented three-sphere is a connected sum of $K$ and $J$, denoted $K\#J$ for the specified datum.
+
+The **standard unknot** is the oriented unit circle in a fixed coordinate two-plane of $S^3\subset\mathbb R^4$. A knot is **nontrivial** if it is not ambient isotopic through orientation-preserving diffeomorphisms of $S^3$ to the standard unknot. A nontrivial knot is **prime** if it has no connected-sum presentation whose two summand knots are both nontrivial.
+
+SUPPLIER def-knot-exterior
+Assume countable choice, as required for the smooth normal-bundle structure in the tubular-neighbourhood interface. Let $K:S^1\to S^3$ be a smooth oriented knot, let $\nu(K)=TS^3|_K/TK$ be its quotient normal bundle, and let $\Phi:\Omega\to S^3$ be a tubular-neighbourhood map from an open neighbourhood $\Omega$ of the zero section in $\nu(K)$ that restricts to the inclusion of $K$. Choose a radius $\epsilon>0$ whose closed disk subbundle $D_\epsilon\nu(K)$ is contained in $\Omega$, and set $N(K)=\Phi(D_\epsilon\nu(K))$. The **exterior** of this chosen tube is
+$$
+E_K:=S^3\setminus\operatorname{int}_{S^3}N(K).
+$$
+Retain its boundary $T_K:=\partial E_K=\partial N(K)$, orient $E_K$ by restriction of the fixed orientation of $S^3$, and orient $T_K$ as the boundary of $E_K$. The choice of tubular map and radius is part of the input to this definition.
+
+SUPPLIER def-knot-meridian-and-preferred-longitude
+Assume countable choice as in the chosen tubular-neighbourhood data. Let $K$ be a smooth oriented knot with chosen exterior $E_K$ and boundary torus $T_K=\partial E_K$, and let $p:T_K\to K$ be the projection of the chosen normal-disk tube. Orient each normal disk so that its positive tangent direction followed by its oriented normal basis agrees with the orientation of $S^3$. A **meridian** $\mu$ is the oriented boundary of one such normal disk. A **degree-one parallel curve** is a simple closed curve $\lambda$ in $T_K$ for which $p|_\lambda:\lambda\to K$ has degree $+1$. A **preferred longitude** is a degree-one parallel curve satisfying $i_*[\lambda]=0$ in $H_1(E_K;\mathbb Z)$, where $i:T_K\hookrightarrow E_K$ is inclusion. This is a condition on a curve; this definition alone asserts neither existence nor uniqueness. Reversing the orientation of $K$ reverses the orientations of both $\mu$ and any degree-one parallel curve. If a subgroup $P\le\pi_1(E_K,x)$ is specified using a path from $x$ to $T_K$, record it only up to replacing it by $gPg^{-1}$ for $g\in\pi_1(E_K,x)$.
+
+SUPPLIER def-knot-seifert-pairing-and-matrix
+Assume the Axiom of Choice. Let $K:S^1\hookrightarrow S^3$ be a smooth oriented knot in the standard oriented three-sphere, and let $F\subset S^3$ be a connected compact smooth oriented embedded surface with boundary $K$, oriented so that its boundary orientation is the given orientation of $K$. Let $g$ be the nonnegative integer determined by $\chi(F)=1-2g$. Choose an ordered integral basis $a_1,\ldots,a_{2g}$ of the first singular homology group $H_1(F;\mathbb Z)$, represented by integral one-cycles on $F$. Orient the normal line of $F$ by requiring $(n,u,v)$ to be positively oriented in $S^3$ whenever $(u,v)$ is a positive tangent basis of $F$. The positive push-off $a_i^+$ is the cycle carried to a sufficiently small positive normal level in a bicollar of $F$.
+
+For disjoint oriented closed curves $J,L\subset S^3$, orient a meridian $\mu_L$ of $L$ so that a positive tangent to $L$ followed by a positive basis of its normal disk gives the ambient orientation. The linking number $\operatorname{lk}(J,L)$ is the integer determined by $[J]=\operatorname{lk}(J,L)[\mu_L]$ in $H_1(S^3\setminus L;\mathbb Z)$, using the Alexander-duality identification that sends $[\mu_L]$ to $1$. Extend linking additively over integral one-cycles. The Seifert pairing is $\theta_F(x,y)=\operatorname{lk}(x^+,y)$, and its matrix in the chosen basis is $V=(V_{ij})_{i,j=1}^{2g}$, where $V_{ij}=\theta_F(a_i,a_j)=\operatorname{lk}(a_i^+,a_j)$. The surface and basis are part of the data; this definition asserts no knot-only matrix invariant.
+
+SUPPLIER def-metabolic-seifert-form-and-algebraic-knot-concordance
+Assume the full Axiom of Choice when a knot's Seifert pairing is formed. An integral Seifert lattice is a pair $(H,V)$ in which $H$ is a free abelian group of rank $2g$ for some $g\geq0$, and $V:H\times H\to\mathbb Z$ is bilinear with $V-V^T$ unimodular. The rank-zero lattice is allowed, with the determinant of its empty skew matrix equal to $1$. A metabolizer is a primitive direct summand $M\subset H$ of rank $g$ such that $V(x,y)=0$ for every $x,y\in M$; the lattice is metabolic when it has a metabolizer. A chosen Seifert surface of an oriented knot gives such a lattice through the positive-push pairing. Its form is algebraically slice when that lattice is metabolic.
+
+An isomorphism of integral Seifert lattices $(H,V)$ and $(H',V')$ is an integral group isomorphism $P:H\to H'$ satisfying $V'(Px,Py)=V(x,y)$ for all $x,y\in H$. Let $\mathcal S$ be the commutative monoid of these isomorphism classes under orthogonal direct sum, where $(H,V)\oplus(H',V')$ has underlying group $H\oplus H'$ and pairing $V\oplus V'$, with the rank-zero lattice as identity. The integral algebraic concordance group $G_{\mathbb Z}$ is the abelian group generated by symbols $[V]$ for $[V]\in\mathcal S$, subject to $[V\oplus W]=[V]+[W]$ and $[M]=0$ for every metabolic lattice $M$. Two selected Seifert forms are algebraically concordant when they represent the same element of $G_{\mathbb Z}$. This form relation does not assert the existence of a smooth or locally flat topological concordance annulus between the knots.
+
+SUPPLIER def-oriented-seifert-surface-and-knot-genus
+Assume the Axiom of Countable Choice. For an oriented smooth knot $K\subset S^3$, define
+
+$$\mathcal G(K):=\{n\in\mathbb N_0: \text{there is a Seifert surface }F\text{ for }K\text{ with }g(F)=n\}.$$
+
+Every element of $\mathcal G(K)$ is the genus of a connected compact oriented surface. The existence theorem makes $\mathcal G(K)$ nonempty, and the well-ordering of $\mathbb N_0$ gives its least element. The **smooth knot genus** is $g(K):=\min\mathcal G(K)$. This genus is the minimum over embedded spanning surfaces; it is not the number of Seifert circles or the genus of every surface produced from a diagram.
+
+SUPPLIER def-oriented-slope-and-knot-dehn-filling
+Assume the Axiom of Countable Choice $\mathrm{AC}_\omega$. Let $K$ be a smooth oriented knot in the oriented $3$-sphere, let $N(K)$ be a chosen closed tubular solid-torus neighborhood, let $E_K=\overline{S^3\setminus\operatorname{int}N(K)}$, and let $T_K=\partial E_K=\partial N(K)$. Let $\mu$ be the positive oriented meridian, meaning the boundary of a positive normal disk in $N(K)$, and let $\lambda$ be a preferred longitude, meaning a degree-one parallel of the core $K$ in $N(K)$ that is null-homologous in $E_K$. Assume that $[\mu],[\lambda]$ are an ordered basis of $H_1(T_K;\mathbb Z)$, with the boundary-orientation convention $\mu\cdot\lambda=-1$. A slope is the unoriented isotopy class of an essential simple closed curve on $T_K$ whose homology class is $p[\mu]+q[\lambda]$ for coprime integers $p,q$ not both zero; $(p,q)$ and $(-p,-q)$ represent the same slope. For a slope represented by $p[\mu]+q[\lambda]$, the Dehn filling $E_K(p/q)$ is obtained by gluing an oriented solid torus $D^2\times S^1$ to $E_K$ by an orientation-reversing boundary homeomorphism that sends $[\partial D^2\times\{1\}]$ to that slope; the filled orientation agrees with the fixed orientation on $E_K$. If $q\ne0$, the coefficient is written $p/q$; the meridional slope is $1/0$, and integer $n$-framed filling means slope $n[\mu]+[\lambda]$. The oriented homeomorphism type is independent of the gluing map once its meridian image is fixed.
+
+SUPPLIER def-pared-hyperbolic-structures-and-volume
+A compact orientable three-manifold $M$ is **irreducible** if every embedded $2$-sphere in its interior bounds an embedded $3$-ball in $M$. A properly embedded surface is **incompressible** if it admits no embedded disk whose interior misses the surface and whose boundary is an essential simple closed curve in it. A boundary subsurface is **$\pi_1$-injective** if the inclusion of each component induces an injection on fundamental groups. A **pared pair** is a pair $(M,P)$ in which $M$ is compact, orientable and irreducible, and $P$ is a possibly empty compact subsurface of $\partial M$ whose pairwise disjoint components are $\pi_1$-injective annuli or tori, every noncyclic abelian subgroup of $\pi_1(M)$ is conjugate into $\pi_1$ of a component of $P$ up to base-path conjugacy, and every map of pairs
+$$
+(S^1\times I,S^1\times\partial I)\longrightarrow(M,P)
+$$
+that induces injections on fundamental groups is homotopic through maps of pairs into $P$, so its boundary remains in $P$ during the homotopy. Write $\partial_0M=\partial M\setminus\operatorname{int}P$. A **horoball** is a region bounded by a horosphere, a Euclidean plane or sphere tangent to the ideal boundary at one point. The **peripheral subgroup** for a component of $P$ is the image of its fundamental group in $\pi_1(M)$, recorded up to conjugacy. A **hyperbolic structure** on $(M,P)$ is a curvature $-1$ metric on $\operatorname{int}M$ described by an atlas of charts into $\mathbb H^3$ whose transition maps are in $\operatorname{Isom}^+(\mathbb H^3)$. Its developing map $\operatorname{dev}$ from the universal cover and holonomy homomorphism $\rho:\pi_1(M)\to\operatorname{Isom}^+(\mathbb H^3)$ satisfy $\operatorname{dev}(gx)=\rho(g)\operatorname{dev}(x)$. The metric is **complete** when it is geodesically complete. A **cusp** corresponding to a component of $P$ is a quotient of a horoball by the associated peripheral subgroup. The hyperbolic volume is the integral of the Riemannian volume density over $\operatorname{int}M$; the structure has **finite volume** when this integral is finite.
+
+SUPPLIER def-ribbon-disk-and-ribbon-knot
+Let $D^2$ be the oriented closed disk and let $K\subset S^3=\partial B^4$ be a smooth oriented knot, meaning the image of an orientation-preserving smooth embedding of a circle. A **ribbon immersion** for $K$ is a smooth immersion $f:D^2\to S^3$ whose boundary restriction is an embedding onto $K$ and whose only multiple points form finitely many pairwise disjoint transverse double arcs $\gamma_1,\ldots,\gamma_m$. For each $i$, the full preimage of $\gamma_i$ consists of two disjoint embedded arcs $\alpha_i$ and $\beta_i$ in $D^2$: $\alpha_i$ is properly embedded, with its two endpoints on $\partial D^2$ and its interior in $\operatorname{Int}D^2$, while $\beta_i$ is compact and lies in $\operatorname{Int}D^2$. There are no triple points or other self-intersections. A **ribbon disk** for $K$ is such a ribbon immersion, and $K$ is a **ribbon knot** if it admits a ribbon disk.
+
+A **band** on a link in $S^3$ is the image of a smoothly embedded rectangle whose two opposite attaching edges lie on the link and whose remaining points are disjoint from it. A **band move** removes the attaching edges, inserts the other two edges, and rounds the corners; the embedded band, including its half-twist data, is part of the move. A **no-maximum disk movie** is the family of regular level links of a smooth proper disk $D\subset B^4$ for which the squared radial function $\rho(x)=\lVert x\rVert^2$ is Morse in the disk interior and has only index-$0$ minima and index-$1$ saddles. A minimum creates a split unknot and a saddle performs an oriented band move; there are no maxima. The no-maximum disk movie is a second presentation convention used by the design for explicit ribbon examples. This movie model and the ribbon-immersion definition above describe the same class of knots: a finite birth-and-band induction converts the movie to an immersion, and cutting the proper double-arc preimages converts an immersion to a disk-and-band movie. The local resolution lemma proves only that a ribbon immersion pushes rel boundary to a smooth proper disk in $B^4$. The slice-ribbon conjecture asks whether every smooth slice knot admits a ribbon immersion as defined above.
+
+SUPPLIER lem-complete-curvature-minus-one-manifolds-are-kleinian-quotients
+Assume AC. Every nonempty connected oriented complete Riemannian three-manifold of constant sectional curvature $-1$ is isometric to $\Gamma\backslash\mathbb H^3$ for a discrete torsion-free subgroup $\Gamma\le\mathrm{PSL}_2(\mathbb C)$. The covering is a universal Riemannian covering and identifies $\Gamma$ with the fundamental group up to the usual basepoint conjugacies. Its completeness and quotient presentation are conclusions from the stated metric hypotheses. The orientation-preserving isometry group of the model is $\mathrm{PSL}_2(\mathbb C)$ with its usual Möbius boundary action.
+
+SUPPLIER lem-finite-volume-hyperbolic-three-manifolds-have-finite-standard-cusp-decompositions
+Assume AC. Let $M$ be a nonempty connected oriented complete Riemannian three-manifold of constant curvature $-1$ and finite volume. Then $M$ is a compact core together with finitely many pairwise disjoint standard torus cusp ends. Each end is an embedded quotient $\{y>R_i\}/\Lambda_i$ of a horoball by a rank-two translation lattice, and the complement of these open ends is compact. The number of cusps may be zero. In particular, the standard cusp decomposition in the general rigidity construction follows from the complete finite-volume metric, with no knot or triangulation assumption.
+
+SUPPLIER lem-framed-knot-push-off-self-linking-well-defined
+Assume the Axiom of Countable Choice. Let $K:S^1\hookrightarrow S^3$ be an
+oriented smooth embedded circle and let $s$ be a smooth nowhere-zero section of
+its normal bundle. For any tubular neighbourhood chart that is the inclusion
+on the zero section and identifies each vertical normal fibre with the ambient
+normal quotient by the identity, the curve $K_{\varepsilon s}$ obtained by
+mapping the graph of $\varepsilon s$ into $S^3$ is an embedded oriented circle
+disjoint from $K$ for every sufficiently small $\varepsilon>0$. The integer
+linking number of $K$ with $K_{\varepsilon s}$ is independent of the sufficiently
+small radius, of the representative section in its homotopy class, and of the
+normalized tubular chart. It therefore defines a self-linking integer of the
+framing class $[s]$.
+
+SUPPLIER lem-horocusp-truncation-has-finite-volume
+Let $\Gamma\subset\mathbb C$ be a rank-two lattice acting on $\mathbb H^3$ by horizontal translations, and let
+$$
+C=\{(x+iy,t):t\ge1\}/\Gamma
+$$
+be the quotient of the horoball $t\ge1$. If $A$ is the Euclidean area of a fundamental parallelogram for $\Gamma$, then the end is at infinite hyperbolic distance and $\operatorname{Vol}(C)=A/2$.
+
+SUPPLIER lem-ideal-tetrahedron-shape-parameter-relations
+For an oriented ideal tetrahedron with normalized vertices $0,1,\infty,z$ and $\operatorname{Im}z>0$, its three edge-shape parameters are $z$, $z'=1/(1-z)$, and $z''=(z-1)/z$. They satisfy $zz'z''=-1$, and their arguments in $(0,\pi)$ are the three dihedral angles, whose sum is $\pi$. For $\omega=e^{i\pi/3}$, the choice $z=\omega$ gives $z=z'=z''=\omega$ and all six dihedral angles equal to $\pi/3$.
+
+SUPPLIER lem-ideal-torus-cusp-holonomy-criterion
+Let an orientable finite ideal triangulation have exactly one ideal vertex, whose link is a torus. Suppose its tetrahedra carry positive shapes whose edge products equal $1$ and whose dihedral angles sum to $2\pi$ around every edge. If the cusp multipliers $H(\alpha)$ and $H(\beta)$ are $1$ for a basis $\alpha,\beta$ of the torus fundamental group, then the glued hyperbolic metric is complete at that cusp.
+
+SUPPLIER lem-knot-connected-sum-well-defined
+Assume the Axiom of Countable Choice. For two smooth oriented knots, changing either representative by oriented ambient isotopy, changing the sufficiently small coordinate ball and trivial subarc used for either knot, or changing the positive local frame used to identify that ball with the standard oriented ball does not change the oriented ambient-isotopy class of the connected-sum knot, when the boundary gluing map is the fixed standard orientation-reversing map from the definition.
+
+SUPPLIER lem-knot-exterior-has-peripheral-torus
+Assume countable choice. For a smooth oriented knot with a chosen product tubular neighbourhood $N(K)\cong S^1\times D^2$, let $\mu$ be the positive fibre meridian and let $\sigma$ be the product section $s\mapsto(s,1)$ of $T_K=\partial N(K)\cong S^1\times S^1$. Then $T_K=\partial E_K$ is a torus and $[\mu],[\sigma]$ form a basis of $H_1(T_K;\mathbb Z)$. The curve $\sigma$ is a product section; this statement does not assert that it is the preferred zero-homology longitude.
+
+SUPPLIER lem-knot-normal-circle-bundle-trivialization
+For every smooth oriented embedding $K:S^1\to S^3$, let $\nu_K=K^*TS^3/dK(TS^1)$ be the quotient normal bundle. Orient its two-dimensional fibres so that a positive tangent to $K$ followed by a positive basis of the normal fibre gives the fixed orientation of $S^3$. Then $\nu_K$ admits a smooth orientation-preserving bundle isomorphism $\nu_K\cong K\times\mathbb R^2$.
+
+SUPPLIER lem-pl-embedded-polyhedron-admits-compatible-subcomplex-triangulation
+Let $Q$ be a compact piecewise-linear polyhedron with a fixed finite linear triangulation $T$. If $f:P\to Q$ is a piecewise-linear embedding of a compact piecewise-linear polyhedron, then some finite subdivision $T'$ of $T$ contains $f(P)$ as the realization of a subcomplex.
+
+SUPPLIER lem-relative-transversality-for-embedded-surfaces
+Assume the Axiom of Countable Choice. Let $F$ be a compact smooth surface with boundary, let $M$ be a smooth three-manifold without boundary, and let $S\subset M$ be a closed embedded smooth surface. If $i:F\to M$ is a smooth embedding whose boundary restriction $i|_{\partial F}$ is transverse to $S$, then there is a smooth isotopy $i_t:F\to M$ through embeddings, fixed on a neighbourhood of $\partial F$, such that $i_1(F)$ is transverse to $S$.
+
+SUPPLIER lem-seifert-bands-embedded-orientable-boundary-correct
+Assume the Axiom of Countable Choice. Let $D$ be a finite regular oriented diagram of a single knot, and let the Seifert algorithm supply its finite disk-and-band construction data. These disks and bands can be realized in $S^3$ as a connected compact smooth oriented embedded surface $F$ with exactly one boundary component, whose oriented boundary is the knot represented by $D$. The bands can be chosen mutually disjoint and disjoint from disk interiors except at their attaching intervals.
+
+SUPPLIER lem-seifert-matrices-of-a-knot-are-s-equivalent
+Assume full AC. Let $K$ be a smooth oriented knot in the oriented standard $3$-sphere, and let $F,F'$ be any connected compact smooth oriented spanning surfaces for $K$. For any ordered integral bases of $H_1(F;\mathbb Z)$ and $H_1(F';\mathbb Z)$, the matrices of the positive-push Seifert pairing are related by a finite sequence of integral unimodular congruences and the two rank-two elementary Seifert enlargements or their reverses.
+
+SUPPLIER lem-seifert-matrix-s-equivalence-under-isotopy
+Assume the Axiom of Choice. Let $(K,F)$ and $(K',F')$ be oriented knot and spanning-surface pairs in the oriented standard three-sphere, and let $h_t:S^3\to S^3$ be a smooth ambient isotopy with $h_0$ the identity, $h_1(K)=K'$, and $h_1(F)=F'$, preserving the given orientations. If $V$ and $V'$ are their Seifert matrices in any integral bases, then the basis transported by $h_1$ has matrix $V$, and any other target basis with transition matrix $P$ has matrix $V'=P^TVP$. Hence $V$ and $V'$ are S-equivalent, meaning they are related by a finite sequence of integral unimodular congruences and the two elementary rank-two enlargement moves or their reverses.
+
+SUPPLIER lem-smooth-jordan-disk-boundary-maps-extend-to-diffeomorphisms
+Assume the Axiom of Countable Choice. The bounded region of a smooth embedded
+circle in the oriented plane, together with its boundary, is a smooth manifold
+with boundary diffeomorphic to the closed standard disk. Let $D_0,D_1$ be two
+such closed regions. Every orientation-preserving smooth boundary
+diffeomorphism $b:\partial D_0\to\partial D_1$ extends to an
+orientation-preserving diffeomorphism $B:D_0\to D_1$. More precisely, for
+specified smooth inward collars $c_i:\partial D_i\times[0,\epsilon)\to D_i$
+with $c_i(p,0)=p$, the extension may be required to satisfy
+$B(c_0(p,r))=c_1(b(p),r)$ for every sufficiently small $r\ge0$. In addition, given interior points $p_i\in D_i$ and an orientation-preserving smooth diffeomorphism $q$ from a neighborhood of $p_0$ onto a neighborhood of $p_1$, the extension can agree with $q$ near $p_0$ while retaining the prescribed boundary collars.
+
+SUPPLIER lem-smooth-slice-iff-concordant-to-unknot
+Assume the Axiom of Countable Choice. A smooth oriented knot in the standard oriented three-sphere bounds a smooth properly embedded disk in the unit four-ball $B^4=\{x\in\mathbb R^4:\lVert x\rVert^2\le1\}$ if and only if it is smoothly concordant to the standard unknot.
+
+SUPPLIER thm-knot-exterior-homology-and-longitude
+Assume the Axiom of Choice. Let $K:S^1\to S^3$ be a smooth oriented embedding and write its quotient normal bundle as $\nu_K=K^*TS^3/dK(TS^1)$. Choose an orientation-preserving trivialization $\nu_K\cong S^1\times\mathbb R^2$ and a tubular map $\Phi:\Omega\to S^3$, meaning a smooth embedding from an open neighbourhood $\Omega\subseteq\nu_K$ of the zero section onto an open neighbourhood of $K(S^1)$ with $\Phi(s,0)=K(s)$, such that in these product coordinates $\Omega$ contains $S^1\times D^2_{2\epsilon}$ for some $\epsilon>0$. Here $D^2_r=\{z\in\mathbb R^2:\|z\|\le r\}$. Set $N(K)=\Phi(S^1\times D^2_\epsilon)$, $E_K=S^3\setminus\operatorname{int}N(K)$, $T_K=\partial E_K$, and let $i:T_K\hookrightarrow E_K$ be inclusion, $p:T_K\to S^1$ the product projection, and $\mu$ the positive boundary of a normal disk, using the normal-plane orientation determined by the orientations of $K$ and $S^3$. A class is primitive if it is not $m$ times another class for any integer $|m|>1$. Then $H_1(E_K;\mathbb Z)\cong\mathbb Z$ is generated by $[\mu]$. The kernel of $i_*:H_1(T_K;\mathbb Z)\to H_1(E_K;\mathbb Z)$ is a primitive rank-one direct summand generated by a unique class $[\lambda]$ with $p_*[\lambda]=1\in H_1(S^1;\mathbb Z)$. It has a simple closed representative, is the preferred longitude, and $([\mu],[\lambda])$ is a basis of $H_1(T_K;\mathbb Z)$.
+
+SUPPLIER thm-linking-number-equals-signed-intersection
+Assume the Axiom of Choice. Let $K$ and $J$ be disjoint oriented smooth
+embedded circles in the oriented three-sphere, and let $\Sigma$ be a compact
+oriented smooth surface embedded in the three-sphere with boundary $K$, whose
+outward-normal-first boundary orientation is the specified orientation of $K$.
+Here outward-normal-first means that an outward-pointing normal followed by a
+positive boundary tangent gives the orientation of $\Sigma$. Assume
+$J$ is transverse to $\Sigma$, and fix a regular oriented diagram $D$ of
+$J\cup K$. Let $\eta$ be a positively oriented meridian of $K$ and let
+$m\in\mathbb Z$ be the unique integer such that
+$[J]=m[\eta]$ in $H_1(S^3\setminus K;\mathbb Z)$. Define the topological
+linking number by $\operatorname{lk}(J,K):=m$. Let
+$\operatorname{lk}_D(J,K)$ be the half-sum of the signs of the mixed crossings
+of $D$. Orient the normal line of $\Sigma$ by the ambient orientation. A point
+of $J\cap\Sigma$ has sign $+1$ if the oriented curve $J$ crosses from the
+negative side of $\Sigma$ to its positive side, and sign $-1$ for the reverse
+passage. Then
+$$\operatorname{lk}_D(J,K)=\operatorname{lk}(J,K)=\sum_{p\in J\cap\Sigma}\operatorname{sign}_\Sigma(p).$$
+The statement is conditional on a supplied spanning surface and regular
+diagram; it asserts no surface- or diagram-existence theorem.
+
+SUPPLIER thm-loop-theorem-for-finitely-triangulated-orientable-pl-three-manifolds
+Let $M$ be a compact connected orientable piecewise linear three-manifold with a given finite compatible manifold triangulation and with boundary a subcomplex. Let $F\subset\partial M$ be a connected compact piecewise linear subsurface and $N\trianglelefteq\pi_1(F)$ a normal subgroup. Suppose there is a continuous map $f:(D^2,\partial D^2)\to(M,F)$ whose boundary lies in the relative interior of $F$ and has class outside $N$. Then there is a properly embedded piecewise linear disk in $M$, with boundary in the relative interior of $F$, whose boundary class is outside $N$.
+
+In particular, if a connected boundary component has noninjective induced fundamental-group map into $M$, it contains an essential simple closed curve bounding a properly embedded piecewise linear disk in $M$. Boundary classes outside $N$ are understood up to conjugation by a basepath in $F$.
+
+SUPPLIER thm-seifert-algorithm-boundary-euler-and-genus
+Assume the Axiom of Countable Choice. If a connected compact oriented disk-and-band surface $F$ is built from $s$ disjoint disks by attaching $c$ rectangular bands along boundary intervals and has one boundary component, then $\chi(F)=s-c$ and $g(F)=(1-s+c)/2$. In particular, if the Seifert algorithm on an oriented knot diagram $D$ has $s$ Seifert circles and $c$ crossings, its output surface has genus $(1-s+c)/2$ and the knot genus satisfies $g(K)\le (1-s+c)/2$. This is an upper bound from one spanning surface, not a minimality assertion.
+
+SUPPLIER thm-torus-knot-group-presentation
+Assume the full Axiom of Choice. Let $p,q$ be coprime nonzero integers, let $K=T(p,q)$ be the oriented primitive slope curve in the standard Heegaard torus, and let $\rho_t(z_1,z_2)=(e^{2\pi i p t}z_1,e^{2\pi i q t}z_2)$ be the weighted circle action on the unit $S^3\subset\mathbb C^2$. Choose $N(K)$ to be a sufficiently small closed metric tube around the orbit $K$ for the round metric; this tube is invariant because $\rho_t$ is isometric and preserves $K$. Set $E_K=S^3\setminus\operatorname{int}N(K)$. Let $x$ and $y$ be based generators of the fundamental groups of the two solid-torus pieces obtained by cutting $E_K$ along the annulus left on the Heegaard torus, oriented so that the annulus core maps to $x^p$ and $y^q$. Then
+
+$$\pi_1(E_K)=\langle x,y\mid x^p=y^q\rangle.$$
+
+The common element $h=x^p=y^q$ is central and represents a regular fiber of a Seifert fibration of $E_K$ over a disk. The fibration has two distinguished core fibers of multiplicities $|p|$ and $|q|$; a fiber of multiplicity one is regular, and a fiber of multiplicity greater than one is exceptional. Thus there are exactly two exceptional fibers when $|p|,|q|>1$, and one is regular when one absolute parameter is $1$.
+
+For any integers $\alpha,\beta$ with $p\alpha+q\beta=1$, compatible based paths identify the positive normal-disk meridian and preferred longitude in the peripheral system as
+
+$$\mu=y^\alpha x^\beta,\qquad \lambda=h\mu^{-pq}.$$
+
+Here the positive meridian is the oriented boundary of a normal disk, and the preferred longitude has degree one around $K$ and maps to zero in $H_1(E_K;\mathbb Z)$. Their homology classes form a basis of $H_1(\partial E_K;\mathbb Z)$, so both classes are primitive.
+
+CONSUMER cex-knot-kt-18-boundary-case
+Supplier edges: def-incompressibility-seifert-fibration-and-jsj-system, def-knot-exterior
+**Given:** $S^3=\{(z,w)\in\mathbb C^2:|z|^2+|w|^2=1\}$, the weighted circle action $g_\theta(z,w)=(e^{3i\theta}z,e^{2i\theta}w)$, its orbit $K(t)=2^{-1/2}(e^{3it},e^{2it})$, the orbit map $q:S^3\to S^3/S^1$, a small closed disk $D$ around $q(K)$ disjoint from the two axis orbits, and the invariant tube $N(K)=q^{-1}(D)$ with exterior $E_K=S^3\setminus\operatorname{int}N(K)$.
+
+[F1] [[def-knot-exterior]] defines the compact exterior by removing the interior of the chosen closed tube.
+
+[F2] [[def-incompressibility-seifert-fibration-and-jsj-system]] defines a Seifert fibration by local fibered-solid-torus models; multiplicity $1$ fibers are regular, while multiplicity $q>1$ fibers are exceptional of order $q$.
+
+CONSUMER cex-knot-kt-21-boundary-case
+Supplier edges: def-knot-connected-sum-and-prime-knot
+**Given:** The standard unknot $U$, the standard right-handed trefoil $T$, and the claim in the Statement refuted.
+
+[F4] The standard unknot bounds a disk in $S^3$; the disk is contractible, so its first homology is zero and its symmetrized Seifert form has signature $0$. ([[def-knot-connected-sum-and-prime-knot]])
+
+CONSUMER cex-knot-kt-23-boundary-case
+Supplier edges: def-knot-seifert-pairing-and-matrix
+**Given:** Full AC, the positive-push trefoil matrix $V$, and the claim that the trefoil is locally flat slice to be refuted.
+
+CONSUMER def-incompressibility-seifert-fibration-and-jsj-system
+Supplier edges: def-knot-connected-sum-and-prime-knot, def-knot-exterior, def-knot-meridian-and-preferred-longitude
+(No named supplier use in literal Facts; declared-context edge only at this scope.)
+Literal Definition/Statement in absence of Facts:
+Let $M$ be a compact smooth $3$-manifold. A properly embedded surface is **two-sided** if it has a product neighbourhood $F\times[-1,1]$ in $M$. A **compressing disk** for a two-sided surface $F$ is an embedded disk $D\subset M$ with $\operatorname{int}(D)\cap F=\varnothing$ and $\partial D$ an essential simple closed curve in $F$; $F$ is **incompressible** if it has no compressing disk. A **boundary-compressing disk** is an embedded disk $D$ with $\partial D=\alpha\cup\beta$, where $\alpha=D\cap F$ is an arc not cutting off a disk in $F$, $\beta=D\cap\partial M$, and $\operatorname{int}(D)$ misses $F\cup\partial M$; $F$ is **boundary-incompressible** if it has no such disk. A surface is **boundary-parallel** if it cobounds a product with a subsurface of $\partial M$, and it is **essential** if it is incompressible, boundary-incompressible, and not boundary-parallel. $M$ is **irreducible** if every embedded $2$-sphere in its interior bounds an embedded $3$-ball in $M$. An incompressible torus is boundary-parallel if it cobounds a product $T^2\times[0,1]$ with a component of $\partial M$; $M$ is **atoroidal** if every incompressible torus is boundary-parallel. A **Seifert fibration** is a decomposition into circles with local models given by fibered solid tori; in the model $(D^2\times S^1)/\langle(z,w)\mapsto(e^{2\pi i/q}z,e^{2\pi ip/q}w)\rangle$, where $\gcd(p,q)=1$, the core fiber has multiplicity $q$. Fibers of multiplicity $1$ are **regular** and those of multiplicity greater than $1$ are **exceptional**. A finite family of pairwise disjoint incompressible tori is a **JSJ system** if every component obtained by cutting $M$ along the family is atoroidal or Seifert-fibered. It is **inclusion-minimal** if no proper subfamily is a JSJ system. Atoroidal does not mean hyperbolic.
+
+CONSUMER def-pared-hyperbolic-structures-and-volume
+Supplier edges: def-incompressibility-seifert-fibration-and-jsj-system
+(No named supplier use in literal Facts; declared-context edge only at this scope.)
+Literal Definition/Statement in absence of Facts:
+A compact orientable three-manifold $M$ is **irreducible** if every embedded $2$-sphere in its interior bounds an embedded $3$-ball in $M$. A properly embedded surface is **incompressible** if it admits no embedded disk whose interior misses the surface and whose boundary is an essential simple closed curve in it. A boundary subsurface is **$\pi_1$-injective** if the inclusion of each component induces an injection on fundamental groups. A **pared pair** is a pair $(M,P)$ in which $M$ is compact, orientable and irreducible, and $P$ is a possibly empty compact subsurface of $\partial M$ whose pairwise disjoint components are $\pi_1$-injective annuli or tori, every noncyclic abelian subgroup of $\pi_1(M)$ is conjugate into $\pi_1$ of a component of $P$ up to base-path conjugacy, and every map of pairs
+$$
+(S^1\times I,S^1\times\partial I)\longrightarrow(M,P)
+$$
+that induces injections on fundamental groups is homotopic through maps of pairs into $P$, so its boundary remains in $P$ during the homotopy. Write $\partial_0M=\partial M\setminus\operatorname{int}P$. A **horoball** is a region bounded by a horosphere, a Euclidean plane or sphere tangent to the ideal boundary at one point. The **peripheral subgroup** for a component of $P$ is the image of its fundamental group in $\pi_1(M)$, recorded up to conjugacy. A **hyperbolic structure** on $(M,P)$ is a curvature $-1$ metric on $\operatorname{int}M$ described by an atlas of charts into $\mathbb H^3$ whose transition maps are in $\operatorname{Isom}^+(\mathbb H^3)$. Its developing map $\operatorname{dev}$ from the universal cover and holonomy homomorphism $\rho:\pi_1(M)\to\operatorname{Isom}^+(\mathbb H^3)$ satisfy $\operatorname{dev}(gx)=\rho(g)\operatorname{dev}(x)$. The metric is **complete** when it is geodesically complete. A **cusp** corresponding to a component of $P$ is a quotient of a horoball by the associated peripheral subgroup. The hyperbolic volume is the integral of the Riemannian volume density over $\operatorname{int}M$; the structure has **finite volume** when this integral is finite.
+
+CONSUMER ex-knot-kt-17-worked-cases
+Supplier edges: def-coprime-torus-knot, thm-loop-theorem-for-finitely-triangulated-orientable-pl-three-manifolds, thm-torus-knot-group-presentation
+**Given:** Full AC, the standard solid torus $V$, the pattern $P_{2,1}$, the right trefoil $K=T(2,3)$, and the specified companion embedding.
+
+[F2] The torus-knot supplier gives $\pi_1(E_{T(p,q)})=\langle x,y\mid x^p=y^q\rangle$, identifies $h=x^p=y^q$ as the regular fiber, and gives $\lambda=h\mu^{-pq}$ ([[thm-torus-knot-group-presentation]], Statement).
+
+CONSUMER lem-closed-hyperbolic-three-manifold-has-no-z2-subgroup
+Supplier edges: def-pared-hyperbolic-structures-and-volume
+**Given:** A closed connected three-manifold $M$ with a complete metric of constant sectional curvature $-1$ and the inherited $\mathrm{AC}_\omega$.
+
+[F1] [[def-pared-hyperbolic-structures-and-volume]]: a hyperbolic structure is a curvature $-1$ metric described by charts into $\mathbb H^3$.
+
+CONSUMER lem-cut-along-incompressible-tori-preserves-irreducibility
+Supplier edges: lem-pl-embedded-polyhedron-admits-compatible-subcomplex-triangulation
+**Given:** Full AC, the compact irreducible finite PL manifold, disjoint two-sided incompressible PL torus family and cut component of the Statement.
+
+[F3] A compact PL ball and the finite PL torus polyhedra inside it have common compatible finite subcomplex subdivisions. [[lem-pl-embedded-polyhedron-admits-compatible-subcomplex-triangulation]]
+
+CONSUMER lem-dehn-filling-deformation-and-completeness
+Supplier edges: def-pared-hyperbolic-structures-and-volume, lem-complete-curvature-minus-one-manifolds-are-kleinian-quotients, lem-finite-volume-hyperbolic-three-manifolds-have-finite-standard-cusp-decompositions
+**Given:** AC, the full finite-volume $k$-cusped metric, the ordered peripheral bases and the primitive filling data.
+
+[F1] The given metric has a Kleinian quotient description and a compact smooth core with standard torus cusps. [[lem-complete-curvature-minus-one-manifolds-are-kleinian-quotients]], [[lem-finite-volume-hyperbolic-three-manifolds-have-finite-standard-cusp-decompositions]]
+
+[F5] Ordinary fillings use primitive slopes modulo sign, and cusp lengths use chosen-section Euclidean norms. [[def-multicusped-dehn-filling]], [[def-cusp-slope-length]], [[def-pared-hyperbolic-structures-and-volume]]
+
+CONSUMER lem-essential-surface-in-seifert-piece-is-vertical-or-horizontal
+Supplier edges: lem-relative-transversality-for-embedded-surfaces
+**Given:** Full AC, the compact connected irreducible smooth Seifert-fibered three-manifold $M$ and the connected two-sided essential annulus or torus $F$, neat for the smooth ambient conclusion and otherwise a smooth boundary-preimage embedding for the final broader variant. The ambient manifold is not assumed orientable.
+
+[F6] Relative surface general position is [[lem-relative-transversality-for-embedded-surfaces]], Statement; general embedded-submanifold parametric transversality is [[thm-parametric-transversality]], Statement. For boundary faces apply the former in the double of the supplied neat collars. The latter also applies to the one-dimensional fiber cores.
+
+CONSUMER lem-figure-eight-complement-punctured-torus-bundle
+Supplier edges: def-knot-exterior
+**Given:** The explicitly plumbed oriented knot $K_8$, the chosen compact exterior $E_{K_8}$, and the square-plumbing surface with ordered core curves $a,b$.
+
+[F1] [[def-knot-exterior]]: the chosen exterior is $S^3$ with the interior of the supplied closed tubular neighborhood removed.
+
+CONSUMER lem-figure-eight-ideal-gluing-and-cusp-completeness
+Supplier edges: def-knot-exterior, lem-knot-exterior-has-peripheral-torus
+**Given:** The stated face-paired ideal triangulation of the complement of the standard figure-eight knot, with positive tetrahedron shapes as specified.
+
+[F6] [[def-knot-exterior]] fixes the chosen compact knot exterior, and [[lem-knot-exterior-has-peripheral-torus]] identifies its boundary as the peripheral torus.
+
+CONSUMER lem-general-knot-reverse-mirror-sum-is-ribbon
+Supplier edges: lem-knot-connected-sum-well-defined
+**Given:** $\mathrm{AC}_\omega$ and a smooth oriented knot $K\subset S^3$.
+
+[F2] The connected sum uses the fixed reflection and orientation-reversing boundary gluing, and changing the local trivial arcs and ball charts does not change its oriented knot type under $\mathrm{AC}_\omega$. ([[def-knot-connected-sum-and-prime-knot]], [[lem-knot-connected-sum-well-defined]])
+
+CONSUMER lem-hyperbolic-knot-exterior-irreducibility-and-boundary-incompressibility
+Supplier edges: def-knot-exterior
+**Given:** Full AC, a nontrivial smooth knot exterior $E_K$, and the assumptions that it is atoroidal and not Seifert-fibered.
+
+CONSUMER lem-ideal-triangulation-gluing-equations-and-peripheral-holonomy
+Supplier edges: def-ideal-tetrahedron-shape-and-cusp-holonomy, def-pared-hyperbolic-structures-and-volume, lem-horocusp-truncation-has-finite-volume, lem-ideal-tetrahedron-shape-parameter-relations, lem-ideal-torus-cusp-holonomy-criterion
+**Given:** The finite face-paired ideal triangulation, its positive shapes, all edge equations and angle sums, and a homology basis on each torus vertex link.
+
+[F1] [[def-ideal-tetrahedron-shape-and-cusp-holonomy]]: a positive shape determines a nondegenerate ideal tetrahedron in $\mathbb H^3$, its corner factors, and the cusp multiplier $H(\gamma)$ along a path in a torus vertex link.
+
+[F2] [[lem-ideal-tetrahedron-shape-parameter-relations]]: the argument of each positive shape parameter is the corresponding dihedral angle.
+
+[F3] [[lem-ideal-torus-cusp-holonomy-criterion]]: for one torus vertex, edge products $1$, angle sums $2\pi$, and cusp multipliers $1$ on a fundamental-group basis imply a complete hyperbolic cusp.
+
+[F4] [[lem-horocusp-truncation-has-finite-volume]]: a rank-two translation-lattice horocusp with Euclidean cross-section area $A$ has volume $A/2$.
+
+[F5] [[def-pared-hyperbolic-structures-and-volume]]: a hyperbolic structure is a curvature $-1$ metric on the manifold interior, and a torus cusp is a horoball quotient by its peripheral subgroup.
+
+CONSUMER lem-incompressible-surface-in-solid-torus-is-meridian-or-boundary-parallel
+Supplier edges: lem-relative-transversality-for-embedded-surfaces, lem-smooth-jordan-disk-boundary-maps-extend-to-diffeomorphisms, thm-loop-theorem-for-finitely-triangulated-orientable-pl-three-manifolds
+**Given:** Full AC, the standard smooth solid torus $V$, the connected two-sided proper surface $F$ with nonempty boundary and the two disk-obstruction hypotheses; and, for the last assertion, an embedded two-sided torus $T$ in its interior.
+
+[F3] A smooth sphere boundary map extends over parametrized balls, as a product in their smaller boundary collars ([[lem-smooth-sphere-diffeomorphisms-extend-over-balls]], Statement). Smooth disk boundary maps extend retaining prescribed collars ([[lem-smooth-jordan-disk-boundary-maps-extend-to-diffeomorphisms]], Statement).
+
+[F5] Finite relative general position and smooth ambient extension are [[lem-relative-transversality-for-embedded-surfaces]] and [[thm-isotopy-extension]], Statements.
+
+[F10] Full AC gives a finite PL triangulation of every compact TOP cut piece, with its entire boundary triangulated. The finite PL Loop theorem applies to a connected boundary component with nontrivial inclusion kernel; transporting its proper disk through that triangulation gives a TOP disk in the original piece. [[thm-compact-topological-three-manifolds-admit-finite-pl-triangulations]] [[thm-loop-theorem-for-finitely-triangulated-orientable-pl-three-manifolds]]
+
+CONSUMER lem-kirby-moves-preserve-surgery-manifold
+Supplier edges: def-oriented-slope-and-knot-dehn-filling
+**Given:** Full AC, two integral framed-link diagrams, and one allowed Kirby move between them.
+
+[F7] [[def-oriented-slope-and-knot-dehn-filling]]: the integer $r$ filling slope is $r[\mu]+[\lambda]$.
+
+CONSUMER lem-knot-concordance-compatible-with-connected-sum
+Supplier edges: def-knot-connected-sum-and-prime-knot, lem-knot-connected-sum-well-defined
+**Given:** $\mathrm{AC}_\omega$, concordance annuli $A$ from $K_0$ to $K_1$ and $B$ from $J_0$ to $J_1$ in one of the two categories.
+
+[F2] The oriented connected sum is obtained by deleting short trivial arcs and gluing with the fixed orientation-reversing boundary map; its class is independent of the local choices under $\mathrm{AC}_\omega$. ([[def-knot-connected-sum-and-prime-knot]], [[lem-knot-connected-sum-well-defined]])
+
+CONSUMER lem-knot-exterior-irreducible-and-boundary-incompressible-kt18-local
+Supplier edges: def-knot-exterior, def-knot-meridian-and-preferred-longitude, lem-knot-exterior-has-peripheral-torus, thm-knot-exterior-homology-and-longitude
+**Given:** Full AC, the smooth oriented knot, its chosen product tube and the non-unknot hypothesis in the original Statement.
+
+CONSUMER lem-knot-genus-invariant-under-mirror-and-reversal
+Supplier edges: def-oriented-seifert-surface-and-knot-genus
+**Given:** AC$_\omega$, a smooth oriented knot $K$, and a smooth reflection $r$ of $S^3$.
+
+[F1] Knot genus is the minimum genus among connected compact smooth oriented surfaces whose oriented boundary is the knot. ([[def-oriented-seifert-surface-and-knot-genus]])
+
+CONSUMER lem-knot-genus-zero-iff-unknot
+Supplier edges: def-oriented-seifert-surface-and-knot-genus
+**Given:** AC$_\omega$ and a smooth oriented knot $K$.
+
+[F1] Genus is the minimum genus of a connected compact oriented spanning surface; a genus-zero surface with one boundary circle is topologically a disk. For smooth input, the disk-and-band construction in steps 7.1–12.1 of [[lem-finite-c2-surface-carriers-have-smooth-normal-forms-and-relative-cap-approximations]] gives a smooth disk parametrization, including its boundary collar: its interval and circle extensions are smooth for smooth data, and all subsequent disk/band moves are smooth. ([[def-oriented-seifert-surface-and-knot-genus]], [[lem-finite-chart-surface-normal-forms-supply-jordan-disks-and-torsion-free-groups]])
+
+CONSUMER lem-knot-reverse-mirror-connected-sum-is-ribbon
+Supplier edges: def-ribbon-disk-and-ribbon-knot
+**Given:** AC$_\omega$ and the standard oriented trefoil $T$ with the fixed mirror convention.
+
+CONSUMER lem-locally-flat-slice-surface-bounds-seifert-hypersurface
+Supplier edges: thm-linking-number-equals-signed-intersection
+**Given:** Full AC, the locally flat disk and surface of the Statement and their matching boundary collars. The first part additionally assumes that the disk is smooth; the final part proves the TOP branch using the explicitly cited external normal-bundle and transversality inputs.
+
+[F4] Mayer–Vietoris computes the actual collared decomposition homology; the oriented meridian is dual to a Seifert surface. [[thm-excision-and-mayer-vietoris-with-local-coefficients]], [[thm-linking-number-equals-signed-intersection]]
+
+CONSUMER lem-one-cusped-deformation-parameters-and-holonomy
+Supplier edges: def-pared-hyperbolic-structures-and-volume, lem-complete-curvature-minus-one-manifolds-are-kleinian-quotients, lem-finite-volume-hyperbolic-three-manifolds-have-finite-standard-cusp-decompositions
+**Given:** AC, the complete one-cusped metric and the chosen ordered peripheral basis.
+
+[F1] A complete oriented curvature-minus-one manifold is a Kleinian quotient, and finite volume supplies a compact smooth core with finitely many standard rank-two cusps. [[lem-complete-curvature-minus-one-manifolds-are-kleinian-quotients]], [[lem-finite-volume-hyperbolic-three-manifolds-have-finite-standard-cusp-decompositions]]
+
+[F5] Ordinary slopes are primitive pairs modulo sign, and the chosen-section length is a lattice norm up to a fixed invertible real-linear map. [[def-multicusped-dehn-filling]], [[def-cusp-slope-length]], [[def-pared-hyperbolic-structures-and-volume]]
+
+CONSUMER lem-positive-hopf-plumbing-has-trefoil-seifert-matrix
+Supplier edges: thm-linking-number-equals-signed-intersection
+**Given:** The stated positive Hopf plumbing, its oriented core curves $a,b$, the positive-push convention, and full AC for the knot Seifert-pairing interface.
+
+CONSUMER lem-right-trefoil-has-genus-one
+Supplier edges: alg-seifert-surface-from-diagram, def-oriented-seifert-surface-and-knot-genus, lem-seifert-bands-embedded-orientable-boundary-correct, thm-seifert-algorithm-boundary-euler-and-genus
+**Given:** Full AC and the standard right-handed trefoil $T$.
+
+[F1] Oriented smoothing replaces a crossing by its orientation-compatible noncrossing pairing; the Seifert algorithm records one disk per resulting circle and one band per crossing. Under AC$_\omega$, the bands realize a connected compact smooth oriented embedded surface with the original knot as boundary, and its genus is $(1-s+c)/2$ for $s$ circles and $c$ crossings. ([[def-seifert-smoothing-and-seifert-circles-of-an-oriented-link-diagram]], [[alg-seifert-surface-from-diagram]], [[lem-seifert-bands-embedded-orientable-boundary-correct]], [[thm-seifert-algorithm-boundary-euler-and-genus]])
+
+[F5] Knot genus is the minimum nonnegative integer among the genera of spanning surfaces. ([[def-oriented-seifert-surface-and-knot-genus]])
+
+CONSUMER lem-satellite-torus-is-essential
+Supplier edges: thm-loop-theorem-for-finitely-triangulated-orientable-pl-three-manifolds
+**Given:** Full AC, a nontrivial smooth knot $K$, the supplied orientation-preserving companion product embedding $e:S^1\times D^2\to S^3$, and the specified pattern exterior with incompressible outer boundary and nonproduct ends.
+
+CONSUMER lem-seifert-surfaces-of-same-link-are-related-by-arc-surgeries
+Supplier edges: thm-linking-number-equals-signed-intersection
+**Given:** Full AC, a nonempty oriented link $L\subset S^3$, and connected compact oriented spanning surfaces $F_0,F_1$ with boundary $L$.
+
+CONSUMER lem-smooth-slice-iff-concordant-to-unknot
+Supplier edges: def-knot-connected-sum-and-prime-knot
+**Given:** $\mathrm{AC}_\omega$, a smooth oriented knot $K\subset S^3$, and one of the two asserted geometric objects.
+
+[F3] The standard unknot bounds its standard disk in the standard four-ball. ([[def-knot-connected-sum-and-prime-knot]])
+
+CONSUMER lem-torus-in-ball-is-compressible
+Supplier edges: thm-loop-theorem-for-finitely-triangulated-orientable-pl-three-manifolds
+**Given:** Full AC, the finite PL ball and the original unqualified two-sided embedded torus with product neighborhood. No PL or smooth compatibility of that torus is assumed.
+
+[F2] Under full AC every compact TOP3-manifold, boundary allowed, has a finite compatible PL triangulation with its boundary a subcomplex. The finite PL Loop theorem applies to any connected boundary component with nontrivial inclusion kernel. [[thm-compact-topological-three-manifolds-admit-finite-pl-triangulations]] [[thm-loop-theorem-for-finitely-triangulated-orientable-pl-three-manifolds]]
+
+CONSUMER thm-jsj-decomposition-of-knot-exteriors
+Supplier edges: def-knot-exterior, lem-knot-normal-circle-bundle-trivialization, thm-loop-theorem-for-finitely-triangulated-orientable-pl-three-manifolds
+**Given:** Full AC, the smooth oriented knot and its chosen compact exterior $E_K$.
+
+[F2] The chosen tube and exterior are those of [[def-knot-exterior]]. The oriented normal plane bundle has a smooth global frame by [[lem-knot-normal-circle-bundle-trivialization]], Statement and full finite-frame proof. Under countable choice the exterior is irreducible by [[lem-knot-exterior-is-irreducible]], Statement.
+
+CONSUMER thm-knot-concordance-is-an-abelian-group
+Supplier edges: lem-knot-connected-sum-well-defined
+**Given:** $\mathrm{AC}_\omega$, the smooth and topological concordance relations, and their oriented connected-sum operation.
+
+[A1] The Axiom of Countable Choice is used by the actual connected-sum and isotopy-extension supplier branches cited in this theorem; the TOP external input is specialized to the required compact data under that same hypothesis in [F2], rather than assuming ambient full Choice. ([[def-countable-choice]], [[thm-oriented-knot-connected-sum-is-a-commutative-monoid]], [[lem-knot-connected-sum-well-defined]])
+
+CONSUMER thm-knot-genus-additive-under-connected-sum
+Supplier edges: def-oriented-seifert-surface-and-knot-genus
+**Given:** AC$_\omega$ and smooth oriented knots $K,J$.
+
+[F1] The minimum genus surfaces for $K$ and $J$ exist by the definition of genus and the nonempty spanning-surface theorem. ([[def-oriented-seifert-surface-and-knot-genus]])
+
+CONSUMER thm-levine-algebraic-concordance-classification
+Supplier edges: def-metabolic-seifert-form-and-algebraic-knot-concordance, lem-seifert-matrices-of-a-knot-are-s-equivalent
+**Given:** Full AC and the two groups in the Statement, with their original defining objects and metabolic relations.
+
+[F1] The integral group uses finite integral Seifert lattices with unimodular skew part, and the rational group uses the even-dimensional rational isometric structures in the Statement. [[def-metabolic-seifert-form-and-algebraic-knot-concordance]], [[def-integral-witt-and-seifert-isometric-structures]]
+
+CONSUMER thm-levine-algebraic-concordance-surjection-proof
+Supplier edges: def-metabolic-seifert-form-and-algebraic-knot-concordance, lem-seifert-matrices-of-a-knot-are-s-equivalent, lem-seifert-matrix-s-equivalence-under-isotopy, lem-smooth-slice-iff-concordant-to-unknot, thm-linking-number-equals-signed-intersection
+**Given:** Full AC, the smooth and locally flat categories in the Statement, and the positive-push Seifert-pairing convention.
+
+[F2] Integral Seifert lattices generate $G_{\mathbb Z}$ with direct-sum and metabolic relations; the negative form represents the group inverse. [[def-metabolic-seifert-form-and-algebraic-knot-concordance]], [[lem-negative-seifert-form-represents-algebraic-inverse]]
+
+[F4] Any two Seifert matrices of the same smooth oriented knot are related by a finite sequence of integral congruences, elementary Seifert enlargements and their inverses; these moves preserve the class in $G_{\mathbb Z}$. Transporting an oriented surface under an oriented ambient isotopy preserves its matrix in the transported basis. [[lem-seifert-matrices-of-a-knot-are-s-equivalent]], [[lem-seifert-matrix-s-enlargement-preserves-algebraic-concordance-class]], [[lem-seifert-matrix-s-equivalence-under-isotopy]]
+
+[F6] Smooth concordance classes form an abelian group with inverse represented by the reverse mirror, and a knot is smoothly concordant to the unknot exactly when it bounds a smooth proper disk. [[thm-knot-concordance-is-an-abelian-group]], [[lem-smooth-slice-iff-concordant-to-unknot]]
+
+[F7] Linking of disjoint oriented curves is the signed intersection with a spanning two-chain. [[thm-linking-number-equals-signed-intersection]]
+
+CONSUMER thm-schubert-prime-decomposition-for-knots
+Supplier edges: def-oriented-seifert-surface-and-knot-genus
+**Given:** AC$_\omega$ and a nontrivial smooth oriented knot $K\subset S^3$.
+
+[F1] Nontrivial knots have positive integer genus, genus is additive under connected sum, and the unknot has genus zero. ([[def-oriented-seifert-surface-and-knot-genus]], [[thm-knot-genus-additive-under-connected-sum]], [[lem-knot-genus-zero-iff-unknot]])
+
+CONSUMER thm-seifert-zero-framing-and-framing-integer
+Supplier edges: lem-framed-knot-push-off-self-linking-well-defined
+**Given:** The Axiom of Choice, a smooth oriented knot $K\subset S^3$, and a connected compact smooth oriented embedded surface $F$ whose oriented boundary is $K$.
+
+[F4] The linking number of a framed knot is unchanged when its normal section is replaced by a homotopic nowhere-zero section and the push-off radius is sufficiently small. ([[lem-framed-knot-push-off-self-linking-well-defined]])
+
+CONSUMER thm-small-augmented-holonomy-deformations-have-smooth-geometric-fillings
+Supplier edges: lem-complete-curvature-minus-one-manifolds-are-kleinian-quotients
+**Given:** Full AC, the complete quotient, the compact core and standard cusp models, the peripheral bases, and the augmented representation family in the Statement.
+
+[F3] The curvature-$-1$ model is the upper half-space $(Z,Y)\in\mathbb C\times(0,\infty)$, with its orientation-preserving projective matrix isometries. Its metric and volume formula are computed directly in step 1.1. [[lem-complete-curvature-minus-one-manifolds-are-kleinian-quotients]]
+
+CONSUMER thm-thurston-hyperbolic-dehn-filling
+Supplier edges: def-pared-hyperbolic-structures-and-volume
+**Given:** AC, the complete finite-volume metric with $k\ge1$ torus cusps and the chosen ordered peripheral bases.
+
+[F3] The input metric and volume convention are [[def-pared-hyperbolic-structures-and-volume]]. Each chosen-section cusp length is a norm on its rank-two peripheral lattice; changing section rescales it by a positive constant. [[def-cusp-slope-length]]
+
+CONSUMER thm-thurston-hyperbolization-for-atoroidal-knot-exteriors
+Supplier edges: def-knot-exterior
+**Given:** The smooth knot exterior $E_K$ and all hypotheses in the Statement, including full AC. Atoroidality here has the embedded-torus meaning of [[def-incompressibility-seifert-fibration-and-jsj-system]].

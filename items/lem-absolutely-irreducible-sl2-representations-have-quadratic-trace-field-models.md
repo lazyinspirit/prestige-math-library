@@ -13,6 +13,11 @@ axiom_use: Only finite matrix operations and a single quadratic extension are
 provenance:
   statement: ai-altered
   proof: ai-generated
+verification:
+  judge:
+    model: "gpt-6-luna"
+    verdict: pass
+    date: 2026-10-22
 sources:
   references:
     - title: Bénard, Florens and Rodau, A slope invariant and the A-polynomial of

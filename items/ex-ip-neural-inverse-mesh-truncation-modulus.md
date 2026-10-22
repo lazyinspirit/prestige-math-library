@@ -21,7 +21,8 @@ generation:
 
 ## Example
 
-Let $p,s,R>0$, $m\ge1$, $\theta\in\ell^2$ satisfy $\sum_{j\ge1}j^{2s}\theta_j^2\le R^2$, and let $(A_p\theta)_j=j^{-p}\theta_j$. Given data $y=A_p\theta+\eta$ with $\|\eta\|_{\ell^2}\le\delta$, the mesh-$m$ truncated inverse is $g_m(y)=(j^py_j)_{j\le m}$ with zero output coordinates for $j>m$. It satisfies the continuum error bound
+Write $\ell^2=\ell^2(\mathbb N_{>0};\mathbb R)$, where $\mathbb N_{>0}=\{1,2,\ldots\}$, so all sequence coordinates below have positive indices.
+Let $p,s,R>0$, let $m\ge1$ be an integer, let $\theta\in\ell^2$ satisfy $\sum_{j\ge1}j^{2s}\theta_j^2\le R^2$, and let $(A_p\theta)_j=j^{-p}\theta_j$. Given data $y=A_p\theta+\eta$ with $\|\eta\|_{\ell^2}\le\delta$, the mesh-$m$ truncated inverse is $g_m(y)=(j^py_j)_{j\le m}$ with zero output coordinates for $j>m$. It satisfies the continuum error bound
 $$\|g_m(y)-\theta\|_{\ell^2}\le m^p\delta+R(m+1)^{-s}.$$
 This separates measurement-noise amplification from the mesh truncation tail; it makes no statistical or neural-operator claim.
 
@@ -31,7 +32,7 @@ This separates measurement-noise amplification from the mesh truncation tail; it
 
 ## Facts & Assumptions
 
-**Given:** $p,s,R>0$, $m\ge1$, $\sum_{j\ge1}j^{2s}\theta_j^2\le R^2$, data $y=A_p\theta+\eta$, and $\|\eta\|_{\ell^2}\le\delta$.
+**Given:** $p,s,R>0$, an integer $m\ge1$, $\sum_{j\ge1}j^{2s}\theta_j^2\le R^2$, data $y=A_p\theta+\eta$, and $\|\eta\|_{\ell^2}\le\delta$.
 
 [A1] $g_m(y)$ retains the first $m$ coordinates $j^py_j$ and sets all later coordinates to zero.
 

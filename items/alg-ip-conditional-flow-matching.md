@@ -107,7 +107,7 @@ If the exact triangular flow of $\widehat v$ were known to satisfy $T_{\#}(\eta\
 
 [F4] Independent sampling from $\operatorname{Unif}[0,1]$, $\eta$, and $\pi$ gives the stated product training law; product probabilities have the rectangle formula, and the expectation of a finite sum of integrable losses is the sum of their expectations. [[thm-sigma-finite-product-measure-exists-is-rectangular-and-is-unique]], [[thm-linearity-of-the-lebesgue-integral-on-l-one]]
 
-[F5] A fitted field satisfying the integrable spatial-Lipschitz and origin-growth assumptions has a unique global flow and a continuous terminal map; these facts do not certify that its output law is the target. [[lem-ip-lipschitz-ode-triangular-flow-and-c1-density]]
+[F5] Under [A1], a fitted field jointly continuous in $(t,x,y)$ and satisfying the ODE lemma's compact-parameter-uniform integrable global spatial-Lipschitz and origin-growth bounds, holding almost everywhere in time simultaneously for all states and parameters in each compact set, has a unique global flow and a jointly continuous terminal map; these facts do not certify that its output law is the target. [[lem-ip-lipschitz-ode-triangular-flow-and-c1-density]]
 
 [F6] If the exact triangular terminal map has joint pushforward $\pi$, its exact conditional fibers push $\eta$ to $\pi_y$ for $\pi_Y$-almost every datum; this needs the joint identity as a separate hypothesis. [[thm-ip-exact-triangular-transport-disintegrates-to-posterior]]
 

@@ -1,0 +1,108 @@
+{
+  "phase": "repair",
+  "round": 1,
+  "role": "scope-repairer",
+  "label": "scope-repair-28-1",
+  "inventory": {
+    "pages": [
+      "nonlinear-landweber-and-discrepancy-stopping",
+      "nonlinear-landweber-and-discrepancy-stopping-examples"
+    ],
+    "items": [
+      "alg-ip-nonlinear-landweber-discrepancy",
+      "thm-ip-nonlinear-landweber-fejer-and-finite-stopping",
+      "ex-ip-landweber-initial-discrepancy-stop",
+      "cex-ip-landweber-outside-local-ball-stalls",
+      "ex-ip-landweber-exact-data-no-finite-stop"
+    ],
+    "pairs": [
+      "nonlinear-landweber-and-discrepancy-stopping"
+    ]
+  },
+  "simple_loop": true,
+  "write_files": [
+    "items/alg-ip-nonlinear-landweber-discrepancy.md",
+    "items/thm-ip-nonlinear-landweber-fejer-and-finite-stopping.md",
+    "items/ex-ip-landweber-initial-discrepancy-stop.md",
+    "items/cex-ip-landweber-outside-local-ball-stalls.md",
+    "items/ex-ip-landweber-exact-data-no-finite-stop.md",
+    "library/inverse-problems/nonlinear-landweber-and-discrepancy-stopping.md",
+    "library/inverse-problems/nonlinear-landweber-and-discrepancy-stopping-examples.md"
+  ],
+  "write_batches": [
+    "28"
+  ],
+  "consumer_scope": [
+    {
+      "id": "cex-ip-landweber-outside-local-ball-stalls",
+      "path": [
+        "alg-ip-nonlinear-landweber-discrepancy",
+        "cex-ip-landweber-outside-local-ball-stalls"
+      ],
+      "paths": [
+        [
+          "alg-ip-nonlinear-landweber-discrepancy",
+          "cex-ip-landweber-outside-local-ball-stalls"
+        ],
+        [
+          "thm-ip-nonlinear-landweber-fejer-and-finite-stopping",
+          "cex-ip-landweber-outside-local-ball-stalls"
+        ]
+      ]
+    },
+    {
+      "id": "ex-ip-landweber-exact-data-no-finite-stop",
+      "path": [
+        "alg-ip-nonlinear-landweber-discrepancy",
+        "ex-ip-landweber-exact-data-no-finite-stop"
+      ],
+      "paths": [
+        [
+          "alg-ip-nonlinear-landweber-discrepancy",
+          "ex-ip-landweber-exact-data-no-finite-stop"
+        ],
+        [
+          "thm-ip-nonlinear-landweber-fejer-and-finite-stopping",
+          "ex-ip-landweber-exact-data-no-finite-stop"
+        ]
+      ]
+    },
+    {
+      "id": "ex-ip-landweber-initial-discrepancy-stop",
+      "path": [
+        "alg-ip-nonlinear-landweber-discrepancy",
+        "ex-ip-landweber-initial-discrepancy-stop"
+      ],
+      "paths": [
+        [
+          "alg-ip-nonlinear-landweber-discrepancy",
+          "ex-ip-landweber-initial-discrepancy-stop"
+        ]
+      ]
+    },
+    {
+      "id": "thm-ip-nonlinear-landweber-fejer-and-finite-stopping",
+      "path": [
+        "alg-ip-nonlinear-landweber-discrepancy",
+        "thm-ip-nonlinear-landweber-fejer-and-finite-stopping"
+      ],
+      "paths": [
+        [
+          "alg-ip-nonlinear-landweber-discrepancy",
+          "thm-ip-nonlinear-landweber-fejer-and-finite-stopping"
+        ]
+      ]
+    }
+  ],
+  "before_interfaces": {
+    "alg-ip-nonlinear-landweber-discrepancy": [
+      "## Definition\n\nLet $X,Y$ be real Hilbert spaces, let $U\\subseteq X$ be open, and let $F:U\\to Y$ be Fréchet differentiable at every point with a derivative map $F':U\\to\\mathcal B(X,Y)$ that is continuous in operator norm. This is the real-Hilbert forward-map convention. Assume Countable Choice, so every bounded derivative $F'(x)$ has the Hilbert adjoint $F'(x)^*:Y\\to X$ characterized by $\\langle F'(x)u,v\\rangle_Y=\\langle u,F'(x)^*v\\rangle_X$.\n\nAn **admissible local instance** consists of an initial point $x_0\\in U$, a radius $r>0$, an exact solution $x^\\dagger\\in\\overline B_r(x_0):=\\{x\\in X:\\|x-x_0\\|_X\\le r\\}$ with exact datum $y=F(x^\\dagger)$, a noise level $\\delta\\ge0$, noisy datum $y^\\delta\\in Y$ with $\\|y^\\delta-y\\|_Y\\le\\delta$, a constant $0\\le\\eta<1/2$, a discrepancy parameter $\\tau>2(1+\\eta)/(1-2\\eta)$, and a finite update budget $M\\in\\mathbb N_0$. The closed outer ball $\\overline B_{2r}(x_0)$ is contained in $U$; $\\|F'(x)\\|\\le1$ for every $x\\in\\overline B_{2r}(x_0)$; and the uniform two-point tangential-cone inequality\n\n$$\n\\|F(x)-F(\\widetilde x)-F'(x)(x-\\widetilde x)\\|_Y\\le\\eta\\|F(x)-F(\\widetilde x)\\|_Y\n$$\n\nholds for every $x,\\widetilde x\\in\\overline B_{2r}(x_0)$. This is the uniform family of the one-basepoint local tangential-cone inequality; the shared constant and pair domain are part of the admissibility hypothesis. The exact solution and the bounds are analysis data and need not be available to the computational loop.\n\n**Inputs:** $F$, $x_0$, $y^\\delta$, $\\delta$, $\\tau$, and $M$ from an admissible local instance.\n\n**Output:** Either `stopped` with an index $k$, iterate $x_k^\\delta$, and residual $\\|y^\\delta-F(x_k^\\delta)\\|_Y$, or `budget_exhausted` with the last iterate and its residual.\n\n**Procedure:** Set $x_0^\\delta:=x_0$. For $k=0,1,\\ldots,M$, compute $r_k^\\delta:=\\|y^\\delta-F(x_k^\\delta)\\|_Y$. If $r_k^\\delta\\le\\tau\\delta$, return `stopped` with $(k,x_k^\\delta,r_k^\\delta)$. If $k=M$, return `budget_exhausted` with $(k,x_k^\\delta,r_k^\\delta)$. Otherwise set\n\n$$\nx_{k+1}^\\delta:=x_k^\\delta+F'(x_k^\\delta)^*(y^\\delta-F(x_k^\\delta))\n$$\n\nand continue at the next index. Each update is evaluated at a current point in $U$, where the derivative and its Hilbert adjoint are defined."
+    ],
+    "thm-ip-nonlinear-landweber-fejer-and-finite-stopping": [
+      "## Statement\n\nLet $X,Y$ be real Hilbert spaces, let $U\\subseteq X$ be open, and let $F:U\\to Y$ be Fréchet differentiable at every point with $F':U\\to\\mathcal B(X,Y)$ continuous in operator norm. Fix $x_0\\in U$ and $r>0$ such that $\\overline B_{2r}(x_0)\\subseteq U$, and suppose an exact solution $x^\\dagger\\in\\overline B_r(x_0)$ satisfies $y=F(x^\\dagger)$. Assume $\\|F'(x)\\|\\le1$ for every $x\\in\\overline B_{2r}(x_0)$ and that, for some $0\\le\\eta<1/2$,\n\n$$\n\\|F(x)-F(\\widetilde x)-F'(x)(x-\\widetilde x)\\|_Y\\le\\eta\\|F(x)-F(\\widetilde x)\\|_Y\n$$\n\nfor every $x,\\widetilde x\\in\\overline B_{2r}(x_0)$. This is a uniform two-point hypothesis with the derivative based at the first point. Assume Countable Choice so that the bounded derivatives have Hilbert adjoints. For $\\delta\\ge0$ and $y^\\delta\\in Y$ with $\\|y^\\delta-y\\|_Y\\le\\delta$, set $x_0^\\delta=x_0$ and define the ideal Landweber sequence by\n\n$$\nx_{n+1}^\\delta=x_n^\\delta+F'(x_n^\\delta)^*(y^\\delta-F(x_n^\\delta)).\n$$\n\nLet $\\tau>2(1+\\eta)/(1-2\\eta)$. For $\\delta>0$, let $N(\\delta,y^\\delta)$ denote the first $n\\in\\mathbb N_0$ with $\\|y^\\delta-F(x_n^\\delta)\\|_Y\\le\\tau\\delta$, if it exists. Put $d_0=\\|x_0-x^\\dagger\\|_X$ and $c_\\tau=1-2\\eta-2(1+\\eta)/\\tau>0$. Then the following hold.\n\n1. For every update before the first discrepancy stop, writing $R_n^\\delta=\\|y^\\delta-F(x_n^\\delta)\\|_Y$, the squared-error estimate is\n\n   $$\n   \\|x_{n+1}^\\delta-x^\\dagger\\|_X^2-\\|x_n^\\delta-x^\\dagger\\|_X^2\\le R_n^\\delta\\bigl(2(1+\\eta)\\delta-(1-2\\eta)R_n^\\delta\\bigr).\n   $$\n\n   In particular, the iterates are Fejér monotone relative to $x^\\dagger$ up to the stop: their distance to $x^\\dagger$ does not increase. Here Fejér monotonicity means exactly this nonincrease of distance to the stated solution.\n\n2. If $\\delta>0$, the first discrepancy index exists and\n\n   $$\n   N(\\delta,y^\\delta)<C\\delta^{-2},\\qquad C:=1+\\frac{d_0^2}{c_\\tau\\tau^2}.\n   $$\n\n   A run of the finite-budget algorithm with budget $M\\ge N(\\delta,y^\\delta)$ returns `stopped` at this first index; if $M<N(\\delta,y^\\delta)$, it returns `budget_exhausted` at $M$.\n\n3. For exact data ($\\delta=0$ and $y^\\delta=y$), the ideal sequence is defined for every $n$, satisfies\n\n   $$\n   (1-2\\eta)\\sum_{n=0}^{\\infty}\\|F(x_n)-y\\|_Y^2\\le d_0^2,\n   $$\n\n   and converges strongly to some $\\bar x\\in\\overline B_{2r}(x_0)$ with $F(\\bar x)=y$. No finite stopping index is claimed in the exact-data case.\n\n4. For noisy data ($\\delta>0$), the ideal stopped iterates converge uniformly over the admissible noise ball to that same exact-data limit:\n\n   $$\n   \\lim_{\\delta\\downarrow0}\\ \\sup_{\\|y^\\delta-y\\|_Y\\le\\delta}\\|x_{N(\\delta,y^\\delta)}^\\delta-\\bar x\\|_X=0.\n   $$\n\n   For finite-budget runs this conclusion concerns outputs only when their budgets reach the first discrepancy indices. The theorem asserts neither a convergence rate nor that $\\bar x$ is an $x_0$-minimum-norm solution."
+    ],
+    "ex-ip-landweber-initial-discrepancy-stop": [],
+    "cex-ip-landweber-outside-local-ball-stalls": [],
+    "ex-ip-landweber-exact-data-no-finite-stop": []
+  }
+}

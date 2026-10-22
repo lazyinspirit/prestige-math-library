@@ -37,7 +37,7 @@ verification:
 
 ## Example
 
-Let $K_8$ be the standard figure-eight knot, let $E_{K_8}$ be the exterior obtained by deleting the binding neighborhood from its open-book presentation, and use the positive meridian $\mu$ and preferred longitude $\lambda$. The exterior admits a complete finite-volume hyperbolic metric obtained by gluing two regular ideal tetrahedra, of total volume $2v_3=6\Lambda(\pi/3)\approx2.02988$, where $v_3=3\Lambda(\pi/3)$ is the volume of one regular ideal tetrahedron and $\Lambda$ is the Lobachevsky function. The ordinary zero filling along $\lambda$ is a torus bundle over $S^1$ with monodromy matrix $\begin{pmatrix}2&1\\1&1\end{pmatrix}$ on the capped fiber homology, and the filled manifold admits no complete hyperbolic metric.
+Assume the Axiom of Choice. Let $K_8$ be the standard figure-eight knot, let $E_{K_8}$ be the exterior obtained by deleting the binding neighborhood from its open-book presentation, and use the positive meridian $\mu$ and preferred longitude $\lambda$. The interior of the exterior admits a complete finite-volume hyperbolic metric obtained by gluing two regular ideal tetrahedra, of total volume $2v_3=6\Lambda(\pi/3)\approx2.02988$, where $v_3=3\Lambda(\pi/3)$ is the volume of one regular ideal tetrahedron and $\Lambda$ is the Lobachevsky function. The ordinary zero filling along $\lambda$ is a torus bundle over $S^1$ with monodromy matrix $\begin{pmatrix}2&1\\1&1\end{pmatrix}$ on the capped fiber homology, and the filled manifold admits no complete hyperbolic metric.
 
 ## Example references
 
@@ -47,27 +47,25 @@ Let $K_8$ be the standard figure-eight knot, let $E_{K_8}$ be the exterior obtai
 
 ## Diagram
 
-After capping, the punctured-torus fiber becomes $T^2$, and the displayed matrix is the monodromy action on its first homology. The separate circle marks the $S^1$ base. This schematic does not encode the knot projection or prove the bundle claim.
+After capping, the punctured-torus fiber becomes $T^2$. The square presents it by identifying equally labelled opposite edges in the indicated directions; $a$ is horizontal and $b$ vertical, so $a\cdot b=+1$ for the usual square orientation. The curved arrow labels the monodromy action on homology, and the separate circle marks the $S^1$ base. The proof is independent of this presentation.
 
 ```tikz
 \begin{tikzpicture}[>=stealth,scale=1]
-  \draw[thick] (0,0) circle (1.0);
-  \draw[thick] (0,0) ellipse (1.0 and 0.42);
-  \draw[->,blue,thick] (-0.75,0) arc (180:520:0.75 and 0.30);
-  \draw[->,red,thick] (0,-0.32) arc (-90:270:0.30 and 0.30);
-  \node[blue] at (-1.35,0.45) {$a$};
-  \node[red] at (0.45,-0.75) {$b$};
-  \node at (0,1.32) {$T^2$ fiber};
-  \draw[->,thick] (0.72,0.78) .. controls (1.15,2.3) and (-1.15,2.3) .. (-0.72,0.78);
-  \node[above] at (0,2.35) {$\varphi_* = \begin{pmatrix}2&1\\1&1\end{pmatrix}$};
-  \draw[thick] (3.7,0) circle (0.30);
-  \node[below] at (3.7,-0.48) {$S^1$ base};
+  \draw[->,blue,thick] (0,0) -- node[below] {$a$} (1.5,0);
+  \draw[->,blue,thick] (0,1.5) -- node[above] {$a$} (1.5,1.5);
+  \draw[->,red,thick] (0,0) -- node[left] {$b$} (0,1.5);
+  \draw[->,red,thick] (1.5,0) -- node[right] {$b$} (1.5,1.5);
+  \node at (0.75,0.75) {$T^2$ fiber};
+  \draw[->,thick] (1.2,1.8) .. controls (1.9,2.9) and (-0.4,2.9) .. (0.3,1.8);
+  \node[above] at (0.75,2.8) {$\varphi_* = \begin{pmatrix}2&1\\1&1\end{pmatrix}$};
+  \draw[thick] (3.7,0.75) circle (0.30);
+  \node[below] at (3.7,0.25) {$S^1$ base};
 \end{tikzpicture}
 ```
 
 ## Facts & Assumptions
 
-**Given:** The standard figure-eight knot with chosen compact exterior and peripheral basis $(\mu,\lambda)$, with $\lambda$ the preferred longitude.
+**Given:** AC and the standard figure-eight knot with chosen compact exterior and peripheral basis $(\mu,\lambda)$, with $\lambda$ the preferred longitude.
 
 [A1] [[def-axiom-of-choice]]: AC selects from every family of nonempty sets.
 
@@ -77,13 +75,13 @@ After capping, the punctured-torus fiber becomes $T^2$, and the displayed matrix
 
 [F3] [[lem-figure-eight-ideal-gluing-and-cusp-completeness]]: the standard two-tetrahedron gluing gives the figure-eight exterior a complete finite-volume hyperbolic metric, with total volume $2v_3$.
 
-[F4] [[lem-zero-filling-of-fibered-knot-is-a-torus-bundle]]: filling the figure-eight exterior along $\lambda$ caps its once-punctured torus fiber and gives the torus bundle whose homology matrix is $\begin{pmatrix}2&1\\1&1\end{pmatrix}$.
+[F4] [[lem-zero-filling-of-fibered-knot-is-a-torus-bundle]]: under AC, filling the figure-eight exterior along $\lambda$ caps its once-punctured torus fiber and gives the torus bundle whose homology matrix is $\begin{pmatrix}2&1\\1&1\end{pmatrix}$.
 
-[F5] [[lem-closed-hyperbolic-three-manifold-has-no-z2-subgroup]]: a closed connected three-manifold with a complete curvature $-1$ metric has fundamental group with no subgroup isomorphic to $\mathbb Z^2$.
+[F5] [[lem-closed-hyperbolic-three-manifold-has-no-z2-subgroup]]: under $\mathrm{AC}_\omega$, a closed connected orientable three-manifold with a complete curvature $-1$ metric has fundamental group with no subgroup isomorphic to $\mathbb Z^2$.
 
 [F6] [[def-multicusped-dehn-filling]]: ordinary filling along $\lambda$ attaches a solid torus with meridian disk boundary in that slope.
 
-[F7] [[def-covering-map-and-evenly-covered-neighbourhoods]]: the explicit pullback of a bundle along $\mathbb R\to S^1$ is a covering map.
+[F7] [[def-covering-map-and-evenly-covered-neighbourhoods]]: a covering map is a continuous surjection locally given by disjoint sheets, each mapped homeomorphically onto the same open set downstairs.
 
 [F8] [[thm-covering-maps-inject-fundamental-groups]]: every covering map induces an injective homomorphism on fundamental groups.
 
@@ -95,7 +93,7 @@ After capping, the punctured-torus fiber becomes $T^2$, and the displayed matrix
 
 2.1 Write the bundle as the mapping torus of its torus monodromy. Pull it back along the explicit universal cover $t\mapsto e^{2\pi i t}$ of $S^1$; its total space is $T^2\times\mathbb R$, and the pullback projection is a covering because it is trivial over each lifted bundle chart. Its fundamental group is $\pi_1(T^2)\cong\mathbb Z^2$. By [F8], this subgroup injects into the fundamental group of the filled manifold. [F7, F8, step 1.1, construct]
 
-3.1 If the filled manifold admitted a complete hyperbolic metric, it would be a closed connected three-manifold with curvature $-1$. By [F5] its fundamental group could contain no $\mathbb Z^2$ subgroup, contradicting step 2.1. Hence the zero filling is nonhyperbolic. The original complete structure has volume $2v_3=6\Lambda(\pi/3)$ by step 1.1. [F3, F5, step 1.1, step 2.1, contradiction] ∎
+3.1 If the filled manifold admitted a complete hyperbolic metric, it would be a closed connected orientable three-manifold with curvature $-1$: the compact connected exterior has its sole boundary filled by the oriented solid torus of [F6], and the orientation extends across the orientation-reversing boundary attachment. The countable-choice hypothesis holds by step 1.1. By [F5] its fundamental group could contain no $\mathbb Z^2$ subgroup, contradicting step 2.1. Hence the zero filling is nonhyperbolic. The original complete structure has volume $2v_3=6\Lambda(\pi/3)$ by step 1.1. [F3, F5, F6, step 1.1, step 2.1, contradiction] ∎
 
 ## Sources
 

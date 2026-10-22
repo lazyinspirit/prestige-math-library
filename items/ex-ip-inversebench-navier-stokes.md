@@ -19,6 +19,11 @@ provenance:
 generation:
   role: example
 axiom_use: "No choice axiom is used; the finite periodic grid, random-field data generation, and numerical solver are supplied inputs."
+verification:
+  judge:
+    model: "gpt-6-luna"
+    verdict: pass
+    date: 2026-10-22
 sources:
   references:
     - title: "Hongkai Zheng et al., InverseBench: Benchmarking Plug-and-Play Diffusion Priors for Inverse Problems in Physical Sciences, ICLR 2025, full paper and appendices"

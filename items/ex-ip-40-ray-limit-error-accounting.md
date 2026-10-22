@@ -13,6 +13,7 @@ deps:
   - def-riemannian-metric-and-riemannian-manifold
   - def-riemannian-volume-density
   - def-riemannian-speed-and-length
+  - def-countable-choice
 provenance:
   statement: ai-altered
   proof: ai-generated
@@ -37,7 +38,7 @@ Let $(M,g)$ be a compact Riemannian manifold, let $T>0$, and let $Q=(0,T)\times 
 $$\int_Q a\,u_{1,\lambda}^{\mathrm{app}}u_{2,\lambda}^{\mathrm{app}}\,dV_gdt\longrightarrow \int_0^L a(t_0+s,\gamma(s))\,ds.$$
 Set $u_{j,\lambda}=u_{j,\lambda}^{\mathrm{app}}+R_{j,\lambda}$. Then
 $$\left|\int_Q a\,u_{1,\lambda}u_{2,\lambda}\,dV_gdt-\int_Q a\,u_{1,\lambda}^{\mathrm{app}}u_{2,\lambda}^{\mathrm{app}}\,dV_gdt\right|=O(\lambda^{-1/2}),$$
-and hence the exact-solution product has the same ray-integral limit. The real self-adjoint wave application is to beams satisfying the following additional supplier conditions: the observed ray has a compact embedded phase-space extension with immersed base projection; its two endpoint cutoff neighborhoods lie outside the measurement cylinder; and the approximate forward beam vanishes near $t=0$, while the approximate terminal beam vanishes near $t=T$. These temporal vanishing conditions are separate from the location of the spatial endpoint residuals. Use physical time along the unit-speed spatial ray and the normalization $|\partial_t\phi|=1$, with initial transported mass one. Then the Gaussian-beam lemma gives the unweighted ray measure and residual $O(\lambda^{-N})$ throughout $Q$. Apply the wave energy wellposedness theorem with zero boundary data and zero initial data for the forward correction, or zero terminal data for the terminal correction, to the negative residual. Since $\|Pu_{j,\lambda}^{\mathrm{app}}\|_{L^1_tL^2_x}\le\sqrt T\|Pu_{j,\lambda}^{\mathrm{app}}\|_{L^2(Q)}$, its energy estimate gives an $L^2(Q)$ correction $O(\lambda^{-N})$, hence the assumed $O(\lambda^{-1/2})$ order after choosing $N\ge1$. The exact waves retain the actual approximate boundary traces. This application asserts no temporal vanishing merely from an extension outside the measurement domain; the generic error estimate above only needs its explicitly stated norm and product-limit hypotheses.
+and hence the exact-solution product has the same ray-integral limit. For the real self-adjoint wave application, assume additionally Countable Choice, that $M$ is connected and nonempty with nonempty smooth boundary, and that the two operators are $P_j=\partial_t^2-\Delta_g+q_j(x)$ with $q_j\in C^\infty(M;\mathbb R)$ independent of time. The beams must satisfy the following additional supplier conditions: the observed ray has a compact embedded phase-space extension with immersed base projection; its two endpoint cutoff neighborhoods lie outside the measurement cylinder; and the approximate forward beam vanishes near $t=0$, while the approximate terminal beam vanishes near $t=T$. These temporal vanishing conditions are separate from the location of the spatial endpoint residuals. Use physical time along the unit-speed spatial ray and the normalization $|\partial_t\phi|=1$, with initial transported mass one. Then the Gaussian-beam lemma gives the unweighted ray measure and residual $O(\lambda^{-N})$ throughout $Q$. Apply the wave energy wellposedness theorem with zero boundary data and zero initial data for the forward correction, or zero terminal data for the terminal correction, to the negative residual. Since $\|P_ju_{j,\lambda}^{\mathrm{app}}\|_{L^1_tL^2_x}\le\sqrt T\|P_ju_{j,\lambda}^{\mathrm{app}}\|_{L^2(Q)}$, its energy estimate gives an $L^2(Q)$ correction $O(\lambda^{-N})$, hence the assumed $O(\lambda^{-1/2})$ order after choosing $N\ge1$. The exact waves retain the actual approximate boundary traces. This application asserts no temporal vanishing merely from an extension outside the measurement domain; the generic error estimate above only needs its explicitly stated norm and product-limit hypotheses.
 
 ## Example references
 
@@ -52,6 +53,8 @@ and hence the exact-solution product has the same ray-integral limit. The real s
 [[def-riemannian-volume-density]]
 
 [[def-riemannian-speed-and-length]]
+
+[[def-countable-choice]]
 
 ## Facts & Assumptions
 

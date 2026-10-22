@@ -32,6 +32,11 @@ axiom_use: Full AC permits simultaneous lifts of the singular simplices of the
 provenance:
   statement: ai-altered
   proof: ai-generated
+verification:
+  judge:
+    model: "gpt-6-luna"
+    verdict: pass
+    date: 2026-10-22
 sources:
   references:
     - title: Davis and Kirk, Lecture Notes in Algebraic Topology

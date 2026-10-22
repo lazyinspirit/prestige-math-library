@@ -1,0 +1,775 @@
+PDF PAGE 1
+Inverse Problems and Imaging
+Web site: http://www.aimSciences.org
+Volume 2, No. 3, 2008, 397–409
+ON THE REGULARIZATION OF THE INVERSE
+CONDUCTIVITY PROBLEM WITH DISCONTINUOUS
+CONDUCTIVITIES
+Luca Rondi
+Dipartimento di Matematica e Informatica
+Universit`a degli Studi di Trieste
+via Valerio, 12/1, 34127 Trieste, Italy
+(Communicated by Matti Lassas)
+Abstract. We consider the regularization of the inverse conductivity problem
+with discontinuous conductivities, like for example the so-called inclusion prob-
+lem. We theoretically validate the use of some of the most widely adopted reg-
+ularization operators, like for instance total variation and the Mumford-Shah
+functional, by proving a convergence result for the solutions to the regularized
+minimum problems.
+1. Introduction. A conducting body is contained in a bounded domain Ω⊂RN,
+N ≥2, with Lipschitz boundary ∂Ω. Let the conductivity of the body be given by
+σ = σ(x), x ∈Ω, such that σ ∈L∞(Ω) and, for some constant λ, 0 < λ < 1,
+0 < λ ≤σ(x) ≤λ−1
+for a.e. x ∈Ω.
+If we prescribe a current density f on the boundary, where f ∈L2(∂Ω) with zero
+mean, then the electrostatic potential u in Ωis the solution to the Neumann bound-
+ary value problem
+(1.1)
+ div(σ∇u) = 0
+in Ω
+σ∇u · ν = f
+on ∂Ω
+where ν denotes the exterior unit normal. If we normalize u in such a way that u has
+zero mean on ∂Ω, then we have existence and uniqueness of the solution. We deﬁne
+the Neumann-to-Dirichlet map associated to σ the operator Λ(σ) : 0L2(∂Ω) →
+0L2(∂Ω) such that, for any f ∈0L2(∂Ω), Λ(σ)(f) = u|∂Ω, u solution to (1.1). Here
+0L2(∂Ω) denotes the space of L2(∂Ω) functions with zero mean. We observe that
+Λ(σ) is a linear and bounded operator.
+The inverse conductivity problem is the following. Can we determine the conduc-
+tivity σ from the knowledge of its corresponding Neumann-to-Dirichlet map Λ(σ)?
+We note that Λ(σ) can be obtained, at least in an approximate way, by performing
+current and voltage measurements at the boundary of our body. We refer to [25] for
+more realistic electrode measurements models, whose numerical investigation has
+been treated for instance in [20].
+2000 Mathematics Subject Classiﬁcation. Primary: 35R30; Secondary: 47J06, 49J45.
+Key words and phrases. Electrical impedance tomography, inclusion, regularization, BV func-
+tions, Γ-convergence.
+Work partly supported by MiUR under grant n. 2006014115 and by GNAMPA under 2008
+Project “Metodi variazionali applicati a problemi inversi”.
+397
+c
+⃝2008 American Institute of Mathematical Sciences
+
+PDF PAGE 2
+398
+Luca Rondi
+In some interesting applications, the conductivity σ might present discontinuities.
+For example this is the case for the determination of inclusions in a conducting body.
+Namely, we assume that σ = k0 + Pn
+i=1(ki −k0)χDi, where ki, i = 0, . . . , n, are
+positive constants, Di, i = 1, . . . , n, are domains contained in Ωwhich are pairwise
+internally disjoint. For any i = 1, . . . , n, the set Di is an inclusion and χDi is its
+characteristic function. The background conductivity k0 and the conductivities of
+the inclusions, ki, i = 1, . . . , n, may be known or not. Of crucial importance in these
+applications is the determination of the boundaries of the inclusions. In two dimen-
+sions, uniqueness holds due to a recent result by Astala and P¨aiv¨arinta, [6]. In fact
+they completely solved the uniqueness issue for the inverse conductivity problem in
+two dimensions by proving it for L∞conductivities, therefore also for discontinuous
+conductivities and the inclusion case. In three and higher dimensions, a uniqueness
+result for the inclusion problem may be found in [18]. We wish to mention that
+optimal stability estimates for the inclusion problem have been obtained in [4]. Op-
+timality of these estimates and severely ill-posedness of the inclusion problem has
+been shown in [14]. We also note that there exist other uniqueness results concerning
+discontinuous conductivities, for example the case of piecewise analytic conductivi-
+ties, with respect to a piecewise analytic partition of the domain, has been treated
+in [19].
+Let us assume that the conductivity to be reconstructed is σ0 and that its
+Neumann-to-Dirichlet map is Λ0 = Λ(σ0). First of all, the knowledge of the Neu-
+mann-to-Dirichlet map involves some measurements, therefore the actual data which
+are available are only a perturbed Neumann-to-Dirichlet map Λε, where ε > 0 is
+a parameter denoting the noise level, that is ∥Λε −Λ0∥≤ε. The facts that the
+data are noisy and that the problem is severely ill-posed have to be taken into ac-
+count in order to reconstruct numerically the conductivity σ0 from its perturbed
+Neumann-to-Dirichlet map in a reasonably stable way. Following the pioneering
+ideas developed by Tikhonov in the 1960’s, usually this is done through a regular-
+ization procedure. For a detailed account on regularization and its applications we
+refer to the book by Engl, Hanke and Neubauer, [16].
+Roughly speaking, instead of solving a classical least squares problem in order to
+ﬁt the data, we solve the following regularized minimum problem, in a suitable set
+X of admissible conductivities,
+(1.2)
+min
+σ∈X ∥Λ(σ) −Λε∥2 + a(ε)R(σ)
+where R is a so-called regularization operator (usually a norm or a seminorm) and
+the positive coeﬃcient a(ε) is the regularization coeﬃcient.
+A correct choice of the regularization operator and of its coeﬃcient should guar-
+antee that (1.2) admits a solution, that is there exists a minimizer σε, for any ε > 0,
+and that, as ε →0+, σε converges, in a suitable norm, to the looked for conductivity
+σ0. The minimizer σε, ε > 0, is usually referred to as a regularized solution.
+In Section 3 we shall restate and prove, using Γ-convergence terminology and
+techniques, some classical results on the regularization of nonlinear operators. We
+remark that we state our results for metric spaces. Namely, in Corollary 3.5, we shall
+show that, setting a(ε) = ˜aεβ with constants ˜a > 0 and 0 < β ≤2, existence and
+convergence to σ0 of regularized solutions are achieved provided three conditions are
+satisﬁed. For a suitable metric on the set of admissible conductivities X, we require
+ﬁrst that the map σ →Λ(σ) is continuous. Second, that R is lower semicontinuous
+and the set {σ :
+R(σ) ≤C} is compact, for any C > 0. Finally, uniqueness for
+Inverse Problems and Imaging
+Volume 2, No. 3 (2008), 397–409
+
+PDF PAGE 3
+Inverse conductivity problem
+399
+the inverse problem should hold on the set {σ : R(σ) < +∞}. Clearly we need to
+assume also that R(σ0) is ﬁnite.
+Moreover, in Theorem 3.4, we observe that, even when uniqueness is not guar-
+anteed, if 0 < β < α then the ﬁrst two conditions give us compactness properties
+of the family of regularized solutions and convergence, up to subsequences, to a
+conductivity ˜σ such that Λ(˜σ) = Λ(σ0) = Λ0 and ˜σ minimizes R among all con-
+ductivities in X whose corresponding Neumann-to-Dirichlet maps coincide with Λ0.
+Therefore the regularization procedure selects conductivities which ﬁt the data and
+with minimal value of R.
+For what concerns the inverse conductivity problem with discontinuous conduc-
+tivities, for example the inclusion problem, a careful choice of the metric on X and
+of the regularization operator has to be made. The metric usually used for sets of
+conductivities, that is the one induced by the L∞norm, which guarantees continu-
+ity of the map σ →Λ(σ), is not suited to treat discontinuous conductivities. In fact,
+two inclusions may have a constant positive distance in the L∞norm no matter
+how close they are. We shall prove, Theorem 4.2 and Corollary 4.3, that the map
+σ →Λ(σ) is continuous also with respect to the metric induced by the L1 norm,
+which is much better suited for discontinuous conductivities. The proof of the sta-
+bility result relies on the higher integrability properties of the gradients of solutions
+to elliptic equations, which is a consequence of a classical result by Meyers, [21].
+As a regularization operator, various options have been considered in the lit-
+erature for these kinds of inverse problems. The regularization operators and the
+numerical implementations are often borrowed from corresponding techniques de-
+veloped in imaging problems. The eﬃciency of the reconstruction method is usually
+validated by numerical experiments. For example, as a regularization operator R
+we may choose the total variation of σ. Dobson and Santosa, [15], treated the to-
+tal variation regularization with an implementation through a discretized problem.
+Later on, [10, 12], Chan and its collaborators used the total variation regularization
+in connection with level set methods. Another possible choice of R is the so-called
+Mumford-Shah functional, developed in [22] for image segmentation problems. The
+Mumford-Shah functional has been used in [24] with an implementation exploiting
+approximation of the Mumford-Shah functional with simpler functionals deﬁned on
+sets of smooth functions.
+Both these choices satisfy the second requirement of our abstract result, that is
+the assumptions on R, with respect to the L1 norm. Therefore we may conclude
+that the use of these regularization operators is validated also through a convergence
+result, which we shall state in Theorem 4.6.
+Let us note that the total variation regularization operator (along with some of
+its variants) has been extensively studied also for the regularization of linear ill-
+posed problems when nonsmooth solutions are looked for. We mention the papers
+by Acar and Vogel, [1], and by Chavent and Kunisch, [11], and the work by Vasin,
+see his review papers [27, 28] and the references therein.
+We ﬁnally wish to mention that higher integrability of gradients of solutions and
+Γ-convergence techniques have already been used, although in a diﬀerent way, to
+prove convergence of a regularization technique for another inverse problem involv-
+ing discontinuous functions, namely the inverse crack problem, see [23].
+The plan of the paper is the following. After a section containing some notation
+and preliminaries, Section 2, we consider an abstract approach to the regulariza-
+tion problem, which is carried out in Section 3. Finally, in Section 4, we present
+Inverse Problems and Imaging
+Volume 2, No. 3 (2008), 397–409
+
+PDF PAGE 4
+400
+Luca Rondi
+the application of the abstract results to the inverse conductivity problem with
+discontinuous conductivities.
+2. Preliminaries. Throughout the paper the integer N ≥2 will denote the space
+dimension. For every x ∈RN and any r > 0, we shall denote by Br(x) the open
+ball in RN centred at x of radius r.
+We recall that a bounded domain Ω⊂RN is said to have a Lipschitz boundary
+if for every x ∈∂Ωthere exist a Lipschitz function ϕ : RN−1 →R and a positive
+constant r such that for any y ∈Br(x) we have, up to a rigid transformation,
+y ∈Ω
+if and only if
+yN < ϕ(y′).
+Let us observe that in this case ∂Ωhas ﬁnite (N−1)-dimensional Hausdorﬀmeasure,
+that is HN−1(∂Ω) < +∞. Here and in the sequel, for any non negative integer k we
+denote by Hk the k-dimensional Hausdorﬀmeasure. We recall that for Borel subsets
+of RN the N-dimensional Hausdorﬀmeasure coincides with LN, the N-dimensional
+Lebesgue measure. Furthermore, if γ ⊂RN is a smooth manifold of dimension k,
+then Hk restricted to γ coincides with its k-dimensional surface measure. For any
+Borel E ⊂RN we let |E| = LN(E).
+Given an open bounded set Ω⊂RN, we denote by BV (Ω) the Banach space of
+functions of bounded variation. We recall that u ∈BV (Ω) if and only if u ∈L1(Ω)
+and its distributional derivative Du is a bounded vector measure. We endow BV (Ω)
+with the standard norm as follows. Given u ∈BV (Ω), we denote by |Du| the total
+variation of its distributional derivative and we set ∥u∥BV (Ω) = ∥u∥L1(Ω) +|Du|(Ω).
+We shall also use the notation T V (u) to denote the total variation of u on Ω, that
+is T V (u) = |Du|(Ω).
+We denote by SBV (Ω) the space of special functions of bounded variation that
+is the space of functions u ∈BV (Ω) so that Du has a singular part, with respect
+to the N-dimensional Lebesgue measure, concentrated on J(u), J(u) being the
+approximate discontinuity set (or jump set) of u. The density of the absolutely
+continuous part of Du with respect to the N-dimensional Lebesgue measure will
+be denoted by ∇u, the approximate gradient of u. That is, Du may be written as
+follows
+Du = ∇uLN + (u+ −u−)νHN−1⌊J(u)
+where, in a measure theoretical sense, ν denotes the normal to J(u) and u+ and u−
+denote the traces of u on the sides of J(u). In other words, u ∈BV (Ω) belongs to
+SBV (Ω) if and only if the Cantor part of Du is zero.
+For a more comprehensive treatment of BV and SBV functions see, for instance,
+[5].
+We recall the deﬁnition and basic properties of Γ-convergence. We recall that
+Γ-convergence is a type of variational convergence, introduced by De Giorgi in the
+1970’s. A thorough reference to Γ-convergence may be found in [13]. For a simple
+introduction we refer to [9], whereas for general variational convergence techniques
+we refer to [8]. Let (X, d) be a metric space. Then a sequence Fn : X →[−∞, +∞],
+n ∈N, Γ-converges as n →∞to a function F : X →[−∞, +∞] if for every x ∈X
+Inverse Problems and Imaging
+Volume 2, No. 3 (2008), 397–409
+
+PDF PAGE 5
+Inverse conductivity problem
+401
+we have
+for every sequence {xn}n∈N converging to x we have
+(2.1)
+F(x) ≤lim inf
+n
+Fn(xn);
+there exists a sequence {xn}n∈N converging to x such that
+(2.2)
+F(x) = lim
+n Fn(xn).
+The function F will be called the Γ-limit of the sequence {Fn}n∈N as n →∞with
+respect to the metric d and we denote it by F = Γ-limn Fn.
+The following theorem, usually known as the Fundamental Theorem of Γ-conver-
+gence, illustrates the motivations for the deﬁnition of such a kind of convergence.
+For its proof we refer, for instance, to [9, Theorem 1.21].
+Theorem 2.1. Let (X, d) be a metric space and let Fn : X →[−∞, +∞], n ∈N,
+be a sequence of functions deﬁned on X. If there exists a compact set K such that
+infK Fn = infX Fn for any n ∈N and F = Γ-limn Fn, then F admits a minimum
+over X and we have
+min
+X F = lim
+n inf
+X Fn.
+Furthermore, if {xn}n∈N is a sequence of points in X which converges to a point
+x ∈X and satisﬁes limn Fn(xn) = limn infX Fn, then x is a minimum point for F.
+The deﬁnition of Γ-convergence may be extended in a natural way to families
+depending on a continuous parameter. For instance we say that the family of func-
+tions Fε, deﬁned for every ε > 0, Γ-converges to a function F as ε →0+ if for
+every sequence {εn}n∈N of positive numbers converging to 0 as n →∞, we have
+F = Γ-limn Fεn.
+3. An abstract regularization result. Let (X, dX) and (Y, dY ) be two metric
+spaces. Let Λ : X →Y be a continuous function. Let us ﬁx x0 ∈X and Λ0 =
+Λ(x0) ∈Y .
+Let ε0 be a positive constant and let us take, for any ε, 0 < ε ≤ε0, Λε ∈Y such
+that
+dY (Λε, Λ0) ≤ε.
+We assume that Λε, 0 < ε ≤ε0, is kept ﬁxed throughout this section.
+We say that R : X →R ∪{+∞} is a regularization operator for the metric
+space X if R ̸≡+∞and, with respect to the metric induced by dX, R is a lower
+semicontinuous function such that for any constant C > 0 the set {x ∈X : R(x) ≤
+C} is a compact subset of X.
+A simple application of the direct method allows us to prove the following.
+Theorem 3.1. For any ε, 0 ≤ε ≤ε0, any α > 0, and any a > 0, we have that the
+minimization problem
+(3.1)
+min
+x∈X(dY (Λ(x), Λε))α + aR(x)
+admits a solution provided Λ is continuous and R is a regularization operator for
+X.
+Proof. Clearly, there exists x ∈X such that (dY (Λ(x), Λε))α + aR(x) is ﬁnite.
+Hence, if we take a minimizing sequence {xn}n∈N, we may assume that R(xn),
+n ∈N, is uniformly bounded. Without loss of generality, by the properties of R,
+we may assume that there exists ˜x ∈X such that limn xn = ˜x. By the continuity
+Inverse Problems and Imaging
+Volume 2, No. 3 (2008), 397–409
+
+PDF PAGE 6
+402
+Luca Rondi
+properties of Λ and the semicontinuity of R, we immediately obtain that ˜x is a
+minimizer.
+We remark that α = 2 corresponds to the regularization of a least squares prob-
+lem.
+Let us now suppose that a is a positive number depending on ε. For the sake of
+simplicity, let as assume that, for any ε, 0 < ε ≤ε0, a(ε) = ˜aεβ for some positive
+constants ˜a and β. For any ε, 0 < ε ≤ε0, we deﬁne Gε : X →R ∪{+∞} such that,
+for any x ∈X, Gε(x) = (dY (Λ(x), Λε))α + ˜aεβR(x). We rescale the functionals Gε,
+0 < ε ≤ε0, by deﬁning Fε : X →R ∪{+∞} such that for any x ∈X
+(3.2)
+Fε(x) = Gε(x)
+εβ
+= (dY (Λ(x), Λε))α
+εβ
++ ˜aR(x).
+We recall that dY (Λε, Λ0) ≤ε, 0 < ε ≤ε0.
+Then we have that, for any ε, 0 < ε ≤ε0, Fε admits a minimum over X.
+Moreover, Fε and Gε share the minimizers. If xε is one of these minimizers, then
+˜aR(xε) ≤Fε(xε) = min
+X Fε ≤Fε(x0) ≤εα−β + ˜aR(x0).
+Then it is immediate to show the following equicoerciveness property.
+Proposition 3.2. Under the previous notation and assumptions, let Λ be continu-
+ous and R be a regularization operator for X. If R(x0) < +∞and β ≤α, then there
+exists a compact set K ⊂X such that minX Fε = minK Fε for any ε, 0 < ε ≤ε0.
+Furthermore, there exists a constant C, depending on R(x0), ε0, α, ˜a and β only,
+such that
+min
+X Fε = min
+K Fε ≤C
+for any ε, 0 < ε ≤ε0.
+Moreover, if we deﬁne F0 : X →R ∪{+∞} such that for any x ∈X we have
+(3.3)
+F0(x) =
+ ˜aR(x)
+if Λ(x) = Λ(x0) = Λ0
++∞
+otherwise
+then we can easily prove the following Γ-convergence result.
+Theorem 3.3. Under the previous notation and assumptions, let Λ be continuous
+and R be a regularization operator for X. If 0 < β < α, then, as ε →0+, Fε
+Γ-converges to F0 with respect to the metric induced by dX.
+Proof. Let us ﬁx a sequence of positive numbers εn, n ∈N, such that limn εn = 0.
+Let us call Fn = Fεn and let us prove that, as n →∞, Fn Γ-converges to F0.
+We begin by proving the lim inf inequality, that is (2.1). Let us ﬁx x ∈X and
+let {xn}n∈N be a sequence in X such that limn xn = x. If lim infn Fn(xn) = +∞,
+then (2.1) is trivial. Otherwise, we may ﬁnd a subsequence {xnk}k∈N, such that
+lim infn Fn(xn) = limk Fnk(xnk). Clearly, we infer that limk dY (Λ(xnk), Λεnk ) = 0,
+therefore, by the continuity of Λ and the properties of Λε, we conclude that Λ(x) =
+Λ0. Furthermore, lim inf Fn(xn) ≥lim infn ˜aR(xn) ≥˜aR(x), by the semicontinuity
+of R. Therefore (2.1) holds.
+For what concerns the construction of the recovery sequence, (2.2), by (2.1) it is
+enough to treat the case when F0(x) is ﬁnite. In such a case it is suﬃcient to take
+xn = x for any n ∈N.
+It is an easy remark to show that either F0 is identically equal to +∞or F0
+admits a ﬁnite minimum value.
+Inverse Problems and Imaging
+Volume 2, No. 3 (2008), 397–409
+
+PDF PAGE 7
+Inverse conductivity problem
+403
+By Proposition 3.2 and Theorem 3.3, using the Fundamental Theorem of Γ-
+convergence, Theorem 2.1, we conclude that the following convergence result holds
+true.
+Theorem 3.4. Under the previous notation and assumptions, let Λ be continuous
+and R be a regularization operator for X. Let us also assume that R(x0) < +∞and
+β < α.
+Then we have that there exists minX Fε, for any ε, 0 ≤ε ≤ε0, and
+min
+X F0 = lim
+ε→0+ min
+X Fε < +∞.
+Let {εn}n∈N be a sequence of positive numbers converging to 0 as n →∞. Let
+{˜xn}n∈N be such that lim Fεn(˜xn) = limn minX Fεn.
+Then, up to a subsequence, ˜xn converges to a point ˜x ∈X such that ˜x is a
+minimizer of F0, that is in particular Λ(˜x) = Λ(x0) and R(˜x) = min{R(x) : x ∈
+X such that Λ(x) = Λ(x0)}.
+Obviously the result holds if we take as {˜xn}n∈N a sequence {xεn}n∈N of mini-
+mizers of Fεn.
+Corollary 3.5. Under the assumptions of Theorem 3.4, let {˜xε}0<ε≤ε0 satisfy
+limε→0+ Fε(˜xε) = limε→0+ minX Fε (for example we may pick as {˜xε}0<ε≤ε0 a fam-
+ily {xε}0<ε≤ε0 of minimizers of Fε).
+If ˜x is the only solution to min{R(x) : x ∈X such that Λ(x) = Λ(x0)}, we have
+that
+lim
+ε→0+ ˜xε = ˜x.
+Under the assumptions of Theorem 3.4, and even if β = α, let {˜xε}0<ε≤ε0 satisfy
+lim supε→0+ Fε(˜xε) < +∞.
+If on the set {x ∈X : R(x) < +∞} the map Λ is injective, then we have
+lim
+ε→0+ ˜xε = x0.
+4. Application to the inverse conductivity problem with discontinuous
+conductivities. We wish to apply the previous section analysis to inverse prob-
+lems. Summarizing, in order to have convergence of the regularized solutions to the
+looked for solution, we need the following three properties
+1) continuity of the forward function Λ;
+2) a regularization operator R for X;
+3) injectivity of the forward function (uniqueness of the inverse problem).
+Clearly the ﬁrst two items must be true with respect to the same metric on X.
+Let us describe the inverse conductivity problem. We begin with the direct prob-
+lem by describing the forward function and studying its continuity properties.
+Let Ωbe a bounded domain contained in RN, N ≥2, with Lipschitz boundary.
+We assume that Ωand a constant λ, 0 < λ < 1, are ﬁxed throughout this section.
+Let A = A(x), x ∈Ω, be an N × N matrix such that its entries are real valued
+measurable functions and it satisﬁes the following ellipticity condition
+(4.1)
+A(x)ξ · ξ ≥λ|ξ|2
+for every ξ ∈RN and for a.e. x ∈Ω,
+∥A∥L∞(Ω) ≤λ−1.
+Inverse Problems and Imaging
+Volume 2, No. 3 (2008), 397–409
+
+PDF PAGE 8
+404
+Luca Rondi
+Here ∥A∥L∞(Ω) is the essential supremum over Ωof ∥A∥, where, for any A ∈MN×N,
+∥A∥denotes its norm as a linear operator of RN into itself.
+We shall denote by L∞
+λ (Ω, MN×N) the set of conductivity tensors A such that
+A ∈L∞(Ω, MN×N) and A satisﬁes (4.1) with constant λ. Analogously, we shall call
+L∞
+λ (Ω) the set of real valued measurable functions σ = σ(x), x ∈Ω, such that
+0 < λ ≤σ(x) ≤λ−1
+for a.e. x ∈Ω.
+Let H1/2(∂Ω) be the space of traces of H1(Ω) functions on the boundary ∂Ω.
+We recall that H1/2(∂Ω) ⊂L2(∂Ω), with continuous immersion. We denote
+0H1/2(∂Ω) =
+
+v ∈H1/2(∂Ω) :
+Z
+∂Ω
+v = 0
+
+.
+As usual H−1/2(∂Ω) is the dual of H1/2(∂Ω). We denote
+0H−1/2(∂Ω) =
+n
+f ∈H1/2(∂Ω) : ⟨f, 1⟩(H−1/2(∂Ω),H1/2(∂Ω)) = 0
+o
+.
+Let H1
+∗(Ω) = {u ∈H1(Ω) :
+R
+∂Ωu = 0}, that is the space of H1(Ω) functions
+whose traces on ∂Ωbelong to 0H1/2(∂Ω). Then, there exists a unique solution to
+the following problem
+(4.2)
+ u ∈H1
+∗(Ω)
+R
+ΩA∇u · ∇v = ⟨f, v|∂Ω⟩(H−1/2(∂Ω),H1/2(∂Ω))
+for any v ∈H1(Ω)
+provided f ∈0H−1/2(∂Ω). We note that (4.2) is the weak formulation of the Neu-
+mann boundary value problem (1.1) with σ replaced by A.
+We deﬁne the Neumann-to-Dirichlet map associated to the conductivity tensor
+A as follows. We let Λ(A) : 0H−1/2(∂Ω) →0H1/2(∂Ω) such that for any f ∈
+0H−1/2(∂Ω) we deﬁne
+Λ(A)(f) = u|∂Ω
+where u solves (4.2). We have that Λ(A) is a bounded linear operator whose norm
+depends on N, λ and Ωonly.
+For any two Banach spaces B1, B2, L(B1, B2) will denote the Banach space of
+bounded linear operators from B1 to B2 with the usual operator norm. Hence the
+forward function is Λ : L∞
+λ (Ω, MN×N) →L(0H−1/2(∂Ω), 0H1/2(∂Ω)).
+For what concerns the metric on L∞
+λ (Ω, MN×N), we observe that the natural
+metric might be the one induced by the L∞norm. In fact, let us consider the
+following computation
+Let A1, A2 ∈L∞
+λ (Ω, MN×N). For any f ∈0H−1/2(∂Ω), let u1 and u2 be the
+solutions to (4.2) with A replaced by A1 and A2, respectively.
+Then, for any v ∈H1(Ω) and any i = 1, 2, we have
+Z
+Ω
+Ai∇ui · ∇v = ⟨f, v|∂Ω⟩.
+Therefore,
+0 =
+Z
+Ω
+A1∇u1 · ∇v −
+Z
+Ω
+A2∇u2 · ∇v
+=
+Z
+Ω
+A1∇(u1 −u2) · ∇v +
+Z
+Ω
+(A1 −A2)∇u2 · ∇v.
+Inverse Problems and Imaging
+Volume 2, No. 3 (2008), 397–409
+
+PDF PAGE 9
+Inverse conductivity problem
+405
+By taking v = u1 −u2 and using the ellipticity condition (4.1), we obtain
+λ
+Z
+Ω
+|∇(u1 −u2)|2 ≤
+Z
+Ω
+|(A1 −A2)∇u2 · ∇(u1 −u2)|.
+Then by H¨older’s inequality, we have
+λ
+Z
+Ω
+|∇(u1 −u2)|2
+1/2
+≤∥A1 −A2∥L∞(Ω)∥∇u2∥L2(Ω).
+We may easily conclude that
+∥Λ(A1) −Λ(A2)∥L(0H−1/2(∂Ω),0H1/2(∂Ω)) ≤C∥A1 −A2∥L∞(Ω)
+where C depends on N, λ and Ωonly. In other words, the function Λ is Lips-
+chitz continuous, with Lipschitz constant C, from L∞
+λ (Ω, MN×N), with the metric
+induced by the L∞norm, to L(0H−1/2(∂Ω), 0H1/2(∂Ω)), with its usual norm.
+However, we have already pointed out that the L∞norm is not suited to treat
+the case of discontinuous conductivity tensors. For discontinuous conductivities one
+should consider a weaker norm, namely the one induced by the L1 norm (or, equiv-
+alently, given the uniform L∞bound, by the Lq norm for some q, 1 ≤q < +∞).
+In order to have continuity of the forward function with respect to the distance
+induced by the L1 norm we need to change the spaces among which operates Λ(A),
+A ∈L∞
+λ (Ω, MN×N).
+Let f ∈Ls(∂Ω), with 1 < s ≤+∞if N = 2 or 2 −(2/N) ≤s ≤+∞if
+N ≥3. Then, f ∈H−1/2(∂Ω), see for instance [2, Theorems 7.53 and 7.57], by
+setting ⟨f, v⟩(H−1/2(∂Ω),H1/2(∂Ω)) =
+R
+∂Ωfv for any v ∈H1/2(∂Ω). We have that
+Ls(∂Ω) ⊂H−1/2(∂Ω) with continuous immersion, and, furthermore, if
+R
+∂Ωf = 0,
+then f ∈0Ls(∂Ω) ⊂0H−1/2(∂Ω). Therefore, for any s as before, we have that
+Λ(A) : 0Ls(∂Ω) →0H1/2(∂Ω) is a bounded linear operator whose norm depends on
+N, λ, Ωand s only.
+By using Theorem 2 in [17], which is an extension to Neumann problems of a
+classical theorem by Meyers, [21], the following proposition holds true. For more
+details see for instance Section 2 of [23].
+Proposition 4.1. Let Ωbe a bounded domain in RN, N ≥2, with Lipschitz bound-
+ary. Let A ∈L∞
+λ (Ω, MN×N) for some constant λ, 0 < λ < 1.
+There exists a constant Q1 > 2, depending on N, λ and Ωonly, such that for
+any p, 2 < p < Q1, any s, p −(p/N) ≤s ≤+∞, and any f ∈0Ls(∂Ω), u solution
+to (4.2) satisﬁes
+(4.3)
+∥u∥W 1,p(Ω) ≤C(s, p)∥f∥Ls(∂Ω),
+where C(s, p) is a constant depending on N, λ, Ω, s and p only.
+In the sequel, the constant Q1 will denote the constant appearing in Proposi-
+tion 4.1, which depends on N, λ and Ω. We shall also ﬁx constants p, 2 < p < Q1,
+s, p −(p/N) ≤s ≤+∞, and q, 2 < q < +∞such that
+(4.4)
+1
+q + 1
+p + 1
+2 = 1.
+Let W 1−1/p,p(∂Ω) be the space of traces of W 1,p(Ω) functions on ∂Ωand let us
+recall that W 1−1/p,p(∂Ω) ⊂Lp(∂Ω), with continuous immersion.
+If B1, B2 are Banach spaces such that B1 ⊂0Ls(∂Ω) and 0W 1−1/p,p(∂Ω) ⊂B2,
+both with continuous immersion, then for any A ∈L∞
+λ (Ω, MN×N) we have that
+Inverse Problems and Imaging
+Volume 2, No. 3 (2008), 397–409
+
+PDF PAGE 10
+406
+Luca Rondi
+Λ(A) : B1 →B2 is a bounded linear operator whose norm depends on N, λ, Ω, s,
+p, B1 and B2 only.
+We now investigate the continuity of the function Λ. Let A1, A2 ∈L∞
+λ (Ω, MN×N),
+let f ∈0Ls(∂Ω), let u1 and u2 be the solutions to (4.2) with A replaced by A1 and
+A2, respectively. With the same computation we have used before, we obtain that
+λ
+Z
+Ω
+|∇(u1 −u2)|2
+1/2
+≤∥A1 −A2∥Lq(Ω)∥∇u2∥Lp(Ω).
+Here ∥A1 −A2∥Lq(Ω) =
+ R
+Ω∥A1 −A2∥q1/q. By Proposition 4.1, we may ﬁnd a
+constant C depending on N, λ, Ω, s and p only such that
+∥u1 −u2∥H1(Ω) ≤C∥A1 −A2∥Lq(Ω)∥f∥Ls(∂Ω).
+In other words we have proved the following.
+Theorem 4.2. Under the previous notation and assumptions, let B1 and B2 be two
+Banach spaces such that B1 ⊂0Ls(∂Ω) and 0H1/2(∂Ω) ⊂B2, both with continuous
+immersion.
+Then the map Λ : L∞
+λ (Ω, MN×N) →L(B1, B2) is Lipschitz continuous if we
+take on L∞
+λ (Ω, MN×N) the metric induced by the Lq norm, that is for any A1,
+A2 ∈L∞
+λ (Ω, MN×N) we have
+(4.5)
+∥Λ(A1) −Λ(A2)∥L(B1,B2) ≤C∥A1 −A2∥Lq(Ω),
+where the Lipschitz constant C depends on N, λ, Ω, s, p, B1 and B2 only.
+Corollary 4.3. Under the assumptions of Theorem 4.2, we have that the map
+Λ is H¨older continuous with respect to the metric induced by the L1 norm on
+L∞
+λ (Ω, MN×N), that is for any A1, A2 ∈L∞
+λ (Ω, MN×N) we have
+(4.6)
+∥Λ(A1) −Λ(A2)∥L(B1,B2) ≤Cλ1/q−1∥A1 −A2∥1/q
+L1(Ω),
+where C is the same constant appearing in (4.5).
+Remark 4.4. We may choose p in such a way that s may be taken equal to 2.
+Therefore, we may always take B1 = B2 = 0L2(∂Ω) in the previous two results.
+A further result can be proven by using Meyers theorem and let us note that a
+similar observation has been already made in [3].
+Remark 4.5. Let Ω1 be compactly contained in Ω. We ﬁx ˜A ∈L∞
+λ (Ω, MN×N) and
+let us assume that Λ is restricted to the set
+˜X = {A ∈L∞
+λ (Ω, MN×N) : A = ˜A a.e. outside Ω1}.
+For example, in the inclusion problem this is equivalent to assume that the back-
+ground conductivity is known and that all the inclusions are a priori known to be
+contained in Ω1.
+Let us ﬁx B1 and B2, two Banach spaces such that B1 ⊂0H−1/2(∂Ω) and
+0H1/2(∂Ω) ⊂B2, both with continuous immersion. Then there exists Q > 2, de-
+pending on N and λ only, such that for any p, 2 < p < Q, and any q, 2 < q < +∞
+satisfying (4.4), we have that (4.5) and (4.6) holds for any A1, A2 ∈˜X. The constant
+C in this case depends on N, λ, Ω, B1, B2 and Ω1.
+Inverse Problems and Imaging
+Volume 2, No. 3 (2008), 397–409
+
+PDF PAGE 11
+Inverse conductivity problem
+407
+We now turn our attention to the inverse problem and its regularization. For
+simplicity, let us now concentrate on scalar conductivities only. In fact, for what
+concerns anisotropic conductivities, it is well-known that uniqueness does not hold
+in general since any suitable change of variable leaving the boundary ﬁxed would
+lead to a diﬀerent conductivity with the same Neumann-to-Dirichlet map. Let us
+also note that, in many interesting cases, this is the only obstruction to uniqueness,
+see [26] and [7].
+Therefore, we denote X = L∞
+λ (Ω) and
+dX(σ1, σ2) =
+Z
+Ω
+|σ1 −σ2|
+for any σ1, σ2 ∈X.
+In other words, the topology on X is the one induced by the L1 norm. As we have
+already noted, the L1 norm is the natural one to measure the distance between
+discontinuous conductivities. For example, if we have two diﬀerent inclusions, with
+the same conductivity, then the L1 distance of the conductivities corresponds to the
+Lebesgue measure of the symmetric diﬀerence between the two inclusions.
+We ﬁx Y = L(B1, B2), with the usual operator norm, where B1 and B2 are two
+Banach spaces satisfying B1 ⊂0Ls(∂Ω) and 0H1/2(∂Ω) ⊂B2, both with continuous
+immersion. We recall that we may take B1 = B2 = 0L2(∂Ω), if p is suﬃciently close
+to 2.
+The forward function is the map Λ : X →Y such that, for any σ ∈X, Λ(σ)
+is the Neumann-to-Dirichlet map associated to σ. Corollary 4.3 guarantees that
+Λ : X →Y is continuous.
+As a regularization operator for X, with respect to the L1 metric, we have many
+diﬀerent choices. We illustrate two of them, which have been already used for this
+kind of inverse problems.
+The ﬁrst one is the following. We set
+(4.7)
+R(σ) = T V (σ)
+for any σ ∈X.
+Clearly R(σ) = +∞if σ does not belong to BV (Ω). We know that R is lower
+semicontinuous with respect to the L1 norm and, as a corollary of Theorem 3.23
+in [5], we also have that for any C > 0 the set {u ∈BV (Ω) : ∥u∥BV (Ω) ≤C} is a
+compact subset of L1(Ω). Therefore, R is a regularization operator for X. The total
+variation regularization have been used in [15], with a discretization method, and
+in [10, 12], with level set methods.
+Another possible choice of a regularization operator is
+(4.8)
+R(σ) =
+
+
+
+
+
+Z
+Ω
+|∇σ|2 + HN−1(J(σ))
+if σ ∈SBV (Ω) ∩X,
++ ∞
+otherwise.
+Here the functional deﬁning R is the so-called Mumford-Shah functional introduced
+in the context of image segmentation in [22]. The compactness and semicontinuity
+theorem for special functions of bounded variation due to Ambrosio, see for in-
+stance [5, Theorem 4.7 and Theorem 4.8], guarantees that also in this case R is
+a regularization operator for X. The Mumford-Shah functional has been used as
+a regularization operator for the inverse conductivity problem in [24], with an ap-
+proximation method with smoother functionals.
+We are now in the position to state the main result of the paper.
+Inverse Problems and Imaging
+Volume 2, No. 3 (2008), 397–409
+
+PDF PAGE 12
+408
+Luca Rondi
+Theorem 4.6. Under the previous notation and assumptions, let Λ : X →Y be
+the forward function, where, for any σ ∈X, Λ(σ) is the Neumann-to-Dirichlet map
+associated to σ. Let R be deﬁned either as in (4.7) or in (4.8).
+Let σ0 ∈X be such that R(σ0) < +∞and Λ0 = Λ(σ0). For any ε, 0 < ε ≤ε0,
+let Λε ∈Y be such that dY (Λε, Λ0) = ∥Λε −Λ0∥L(B1,B2) ≤ε.
+Let us ﬁx positive constants α, β and ˜a, such that 0 < β < α. For any ε,
+0 < ε ≤ε0, let Fε be deﬁned as in (3.2) and F0 be deﬁned as in (3.3).
+Then we have that there exists minX Fε, for any ε, 0 ≤ε ≤ε0, and
+min
+X F0 = lim
+ε→0+ min
+X Fε < +∞.
+Let {εn}n∈N be a sequence of positive numbers converging to 0 as n →∞. Let
+{˜σn}n∈N be such that lim Fεn(˜σn) = limn minX Fεn.
+Then, up to a subsequence, ˜σn converges in the L1 norm to ˜σ ∈X such that ˜σ is
+a minimizer of F0, that is in particular Λ(˜σ) = Λ(σ0) and R(˜σ) = min{R(σ) : σ ∈
+X such that Λ(σ) = Λ(σ0)}.
+Let us further assume that the space dimension is 2, that is N = 2. Let {˜σε}0<ε≤ε0
+satisfy lim supε→0+ Fε(˜σε) < +∞. Then, even if β = α, we have that
+lim
+ε→0+
+Z
+Ω
+|˜σε −σ0| = 0.
+Proof. It is an immediate consequence of Corollary 4.3 and the properties of the
+regularization operators, which allow us to use Theorem 3.4.
+For the case N = 2, we may apply Corollary 3.5 by exploiting the uniqueness
+result by Astala and P¨aiv¨arinta, [6].
+The use of many BV -related regularization operators may suggest the following
+Open problem For N ≥3, prove a uniqueness result for the inverse problem for
+conductivities belonging to some class of BV or SBV functions.
+Such a result is still missing and we believe this to be an extremely challenging but
+very interesting task. Until this problem remains unsolved, in order to have that the
+conclusion of Corollary 3.5 holds true, we need to choose a diﬀerent regularization
+operator R for X which also guarantees that the set {σ ∈X : R(σ) < +∞} is
+contained in some class of conductivities for which we have uniqueness results. For
+example, for the inclusion problem, in the class of inclusions for which Isakov proved
+unique determination, [18].
+REFERENCES
+[1] R. Acar and C. R. Vogel, Analysis of bounded variation penalty methods for ill-posed problems,
+Inverse Problems, 10 (1994), 1217–1229.
+[2] R. A. Adams, “Sobolev Spaces,” Academic Press, New York, 1975.
+[3] G. Alessandrini, Open issues of stability for the inverse conductivity problem, J. Inverse Ill-
+Posed Probl., 15 (2007), 451–460.
+[4] G. Alessandrini and M. Di Cristo, Stable determination of an inclusion by boundary mea-
+surements, SIAM J. Math. Anal., 37 (2005), 200–217.
+[5] L. Ambrosio, N. Fusco and D. Pallara, “Functions of Bounded Variation and Free Disconti-
+nuity Problems,” Clarendon Press, Oxford, 2000.
+[6] K. Astala and L. P¨aiv¨arinta, Calder´on’s inverse conductivity problem in the plane, Ann. of
+Math. (2), 163 (2006), 265–299.
+[7] K. Astala, L. P¨aiv¨arinta and M. Lassas, Calder´on’s inverse problem for anisotropic conduc-
+tivity in the plane, Comm. Partial Diﬀerential Equations, 30 (2005), 207–224.
+Inverse Problems and Imaging
+Volume 2, No. 3 (2008), 397–409
+
+PDF PAGE 13
+Inverse conductivity problem
+409
+[8] H. Attouch, “Variational Convergence for Functions and Operators,” Pitman Publishing,
+Boston London Melbourne, 1984.
+[9] A. Braides, “Γ-convergence for Beginners,” Oxford University Press, Oxford, 2002.
+[10] T. F. Chan and X.-C. Tai, Level set and total variation regularization for elliptic inverse
+problems with discontinuous coeﬃcients, J. Comput. Phys., 193 (2004), 40–66.
+[11] G. Chavent and K. Kunisch, Regularization of linear least squares problems by total bounded
+variation, ESAIM Control Optim. Calc. Var., 2 (1997), 359–376.
+[12] E. T. Chung, T. F. Chan and X.-C. Tai, Electrical impedance tomography using level set
+representation and total variational regularization, J. Comput. Phys., 205 (2005), 357–372.
+[13] G. Dal Maso, “An Introduction to Γ-convergence,” Birkh¨auser, Boston Basel Berlin, 1993.
+[14] M. Di Cristo and L. Rondi, Examples of exponential instability for inverse inclusion and
+scattering problems, Inverse Problems, 19 (2003), 685–701.
+[15] D. C. Dobson and F. Santosa, An image-enhancement technique for electrical impedance
+tomography, Inverse Problems, 10 (1994), 317–334.
+[16] H. W. Engl, M. Hanke and A. Neubauer, “Regularization of Inverse Problems,” Kluwer Aca-
+demic Publishers, Dordrecht Boston London, 1996.
+[17] T. Gallouet and A. Monier, On the regularity of solutions to elliptic equations, Rend. Mat.
+Appl. (7), 19 (1999), 471–488.
+[18] V. Isakov, On uniqueness of recovery of a discontinuous conductivity coeﬃcient, Comm. Pure
+Appl. Math., 41 (1988), 865–877.
+[19] R. V. Kohn and M. Vogelius, Determining conductivity by boundary measurements II. Interior
+results, Comm. Pure Appl. Math., 38 (1985), 643–667.
+[20] A. Lechleiter and A. Rieder, Newton regularizations for impedance tomography: a numerical
+study, Inverse Problems, 22 (2006), 1967–1987.
+[21] N. G. Meyers, An Lp-estimate for the gradient of solutions of second order elliptic divergence
+equations, Ann. Scuola Norm. Sup. Pisa (3), 17 (1963), 189–206.
+[22] D. Mumford and J. Shah, Optimal approximations by piecewise smooth functions and asso-
+ciated variational problems, Comm. Pure Appl. Math., 42 (1989), 577–685.
+[23] L. Rondi, A variational approach to the reconstruction of cracks by boundary measurements,
+J. Math. Pures Appl. (9), 87 (2007), 324–342.
+[24] L. Rondi and F. Santosa, Enhanced electrical impedance tomography via the Mumford-Shah
+functional, ESAIM Control Optim. Calc. Var., 6 (2001), 517–538.
+[25] E. Somersalo, M. Cheney and D. Isaacson, Existence and uniqueness for electrode models for
+electric current computed tomography, SIAM J. Appl. Math., 52 (1992), 1023–1040.
+[26] J. Sylvester, An anisotropic inverse boundary value problem, Comm. Pure Appl. Math., 43
+(1990), 201–232.
+[27] V. V. Vasin, Some tendencies in the Tikhonov regularization of ill-posed problems, J. Inverse
+Ill-Posed Probl., 14 (2006), 813–840.
+[28] V. V. Vasin, Some approaches to reconstruction of nonsmooth solutions of linear ill-posed
+problems, J. Inverse Ill-Posed Probl., 15 (2007), 625–640.
+Received May 2008; revised June 2008.
+E-mail address: rondi@units.it
+Inverse Problems and Imaging
+Volume 2, No. 3 (2008), 397–409

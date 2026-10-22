@@ -7,6 +7,8 @@ origin: pipeline
 pipeline_run: inverse-problems-knot-theory-all-109-2026-10-19
 dependency_level: 12
 deps:
+  - def-axiom-of-choice
+  - def-countable-choice
   - def-ip-calderon-admissible-conductivity-class
   - def-ip-generalized-fourier-neural-operator
   - def-ip-inverse-risk-under-train-and-test-laws
@@ -22,7 +24,7 @@ sources:
         Nelsen, Extension and neural operator approximation of the electrical
         impedance tomography inverse map
       url: https://arxiv.org/pdf/2511.20361
-      locator: "Theorem 4.8 and §5 numerical experiments, printed pp. 23–30: continuum
+      locator: "Theorem 4.8 and §5 numerical experiments, printed pp. 31–34 and 37–45: continuum
         existence theorem versus finite training and test sets."
     - title: Niklas Reinhardt, Sven Wang and Jakob Zech, Statistical Learning Theory for
         Neural Operators
@@ -53,7 +55,9 @@ sources:
 
 Fix $d\ge2$, a bounded connected smooth domain $\Omega\subset(0,1)^d$, a fixed collar $\Omega'\Subset\Omega$, an admissible conductivity class $X_d(R)$ with fixed ellipticity and regularity parameters, a compact perturbation set $K\subset L^2(\partial\Omega\times\partial\Omega;\mathbb C)$, and a threshold $\delta\ge0$. Let $K_\delta=\{\eta\in K:\|\eta\|_2\le\delta\}$ and
 $$\mathcal Z=\{(\kappa_\gamma+\eta,\gamma):\gamma\in X_d(R),\ \eta\in K_\delta\}$$
-in $\mathcal H\times\mathcal Y$, where $\mathcal H=L^2(\partial\Omega\times\partial\Omega;\mathbb C)$ is viewed as a real Hilbert space, $\mathcal Y=L^2(\Omega;\mathbb R)$, and $\mathfrak R f=(\operatorname{Re}f,\operatorname{Im}f)\in L^2(\partial\Omega\times\partial\Omega;\mathbb R^2)$ is the isometric realification. Assume $\mathcal Z$ is nonempty and compact, and set $X=\{x\in\mathcal H:(x,y)\in\mathcal Z\text{ for some }y\in\mathcal Y\}$. Fix a smooth globally Lipschitz nonpolynomial activation $\sigma_0$.
+in $\mathcal H\times\mathcal Y$, where $\mathcal H=L^2(\partial\Omega\times\partial\Omega;\mathbb C)$ is viewed as a real Hilbert space, $\mathcal Y=L^2(\Omega;\mathbb R)$, and $\mathfrak R f=(\operatorname{Re}f,\operatorname{Im}f)\in L^2(\partial\Omega\times\partial\Omega;\mathbb R^2)$ is the isometric realification. Assume the Axiom of Choice and Countable Choice. Fix an extension $\widetilde\Psi^\star:\mathcal H\to\mathcal Y$ of the exact-data inverse, so $\widetilde\Psi^\star(\kappa_\gamma)=\gamma$, and fix $C_\star>0$ and a continuous nondecreasing concave modulus $\omega_\star:[0,\infty)\to[0,\infty)$ with $\omega_\star(0)=0$ such that
+$$\|\widetilde\Psi^\star(f)-\widetilde\Psi^\star(g)\|_{\mathcal Y}\le C_\star\omega_\star(\|f-g\|_{\mathcal H})\qquad(f,g\in\mathcal H).$$
+These extension data are fixed independently of the architecture budgets, sample size and joint law. Assume $\mathcal Z$ is nonempty and compact, and set $X=\{x\in\mathcal H:(x,y)\in\mathcal Z\text{ for some }y\in\mathcal Y\}$. Fix a smooth globally Lipschitz nonpolynomial activation $\sigma_0$.
 
 Choose once and for all a finite smooth boundary chart family and square partition of unity as in the boundary chart-lifting lemma. For every positive finite channel count $c$, let $G_c$ be the componentwise application of this same scalar chart construction, so $G_c:L^2(\partial\Omega\times\partial\Omega;\mathbb R^c)\to L^2(\mathbb T^n;\mathbb R^{J^2c})$ for its fixed number $J^2$ of chart pairs. Each pointwise lift $S_0$ receives the two realified input channels; if its output has $c$ channels, take $E=G_c$. The family $(G_c)$, the chart weights and the output restriction $R$ to $\Omega$ are fixed and have no trainable parameters; $c$ is already part of the counted finite architecture index, not an additional scalar parameter. Write $n=2d-2$. The dimension-reduction layer $F$ has a matrix-valued kernel on $\mathbb T^{n-d}$; if $n=d$, take $F$ to be the identity. For each integer $s\ge1$ and $B>0$, define $\mathcal F_{s,B}\subset C(X,\mathcal Y)$ as the restrictions to $X$ of maps $x\mapsto\Phi(\mathfrak R x)$, where $\Phi$ is a generalized Fourier neural operator with the following finite parameterization:
 

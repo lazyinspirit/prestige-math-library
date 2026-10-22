@@ -8,6 +8,7 @@ pipeline_run: inverse-problems-knot-theory-all-109-2026-10-19
 dependency_level: 3
 deps:
   - def-ip-gaussian-sequence-inverse-model
+  - def-bayesian-posterior-as-regular-conditional-law
 justified_by: []
 forward_refs: []
 provenance:
@@ -28,9 +29,9 @@ axiom_use: "No additional axiom is required to define this rate; a posterior ker
 
 ## Definition
 
-Let $\mathbb N=\{1,2,3,\ldots\}$. For each positive noise level $\epsilon$, let $\Pi_{0,\epsilon}$ be a proper Borel prior on $\ell^2(\mathbb N,\mathbb R)$ in the Gaussian sequence inverse experiment, and let $\mathbb P_{\Pi_{0,\epsilon}}$ be the resulting prior-predictive joint law of parameter and data. A posterior kernel is a data-measurable assignment $y\mapsto\Pi_\epsilon(\cdot\mid y)$ of Borel probability measures on $\ell^2$ satisfying
+Let $\mathbb N_{>0}=\{1,2,3,\ldots\}$. For each positive noise level $\epsilon$, let $\Pi_{0,\epsilon}$ be a proper Borel prior on $\ell^2(\mathbb N_{>0},\mathbb R)$ in the Gaussian sequence inverse experiment, and let $\mathbb P_{\Pi_{0,\epsilon}}$ be the resulting prior-predictive joint law of parameter and data. A posterior kernel is a data-measurable assignment $y\mapsto\Pi_\epsilon(\cdot\mid y)$ of Borel probability measures on $\ell^2$ satisfying
 $$\mathbb P_{\Pi_{0,\epsilon}}(\theta\in A,\,Y\in B)=\int_B\Pi_\epsilon(A\mid y)\,\mathbb P_{\Pi_{0,\epsilon}}^Y(dy)$$
-for every Borel $A\subseteq\ell^2$ and every product-Borel $B\subseteq\mathbb R^{\mathbb N}$, where $\mathbb P_{\Pi_{0,\epsilon}}^Y$ is the prior-predictive data marginal. Fix a truth $\theta^\dagger\in\ell^2$ and write $\mathbb P_{\theta^\dagger}^\epsilon$ for its data law. Since a conditional-law version is specified only up to a prior-predictive null set, any contraction claim under $\mathbb P_{\theta^\dagger}^\epsilon$ refers to the stated version. A positive function $r_\epsilon\to0$ is a posterior contraction rate in the $\ell^2$ norm at $\theta^\dagger$ if, for every positive function $M_\epsilon\to\infty$,
+for every Borel $A\subseteq\ell^2$ and every product-Borel $B\subseteq\mathbb R^{\mathbb N_{>0}}$, where $\mathbb P_{\Pi_{0,\epsilon}}^Y$ is the prior-predictive data marginal. Fix a truth $\theta^\dagger\in\ell^2$ and write $\mathbb P_{\theta^\dagger}^\epsilon$ for its data law. Since a conditional-law version is specified only up to a prior-predictive null set, any contraction claim under $\mathbb P_{\theta^\dagger}^\epsilon$ refers to the stated version. A positive function $r_\epsilon\to0$ is a posterior contraction rate in the $\ell^2$ norm at $\theta^\dagger$ if, for every positive function $M_\epsilon\to\infty$,
 $$\mathbb E_{\theta^\dagger}^\epsilon\!\left[\Pi_\epsilon\!\left(\{\theta\in\ell^2:\|\theta-\theta^\dagger\|_2>M_\epsilon r_\epsilon\}\mid Y\right)\right]\longrightarrow0\quad\text{as }\epsilon\downarrow0.$$
 
 ## Definition references

@@ -17,6 +17,11 @@ axiom_use: The matrix calculation is choice-free. It refutes only the general
 provenance:
   statement: literature-derived
   proof: ai-generated
+verification:
+  judge:
+    model: "gpt-6-luna"
+    verdict: pass
+    date: 2026-10-22
 sources:
   references:
     - title: John A. Baldwin and Steven Sivek, Torus knots, the A-polynomial, and

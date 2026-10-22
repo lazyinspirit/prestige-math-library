@@ -85,7 +85,7 @@ The drawing shows a singular crossing and the two oriented resolutions. The plus
 
 [F4] [[def-oriented-crossing-sign-writhe-and-blackboard-framing]]: the positive crossing sign is $\operatorname{sgn}\det(v_{\rm over},v_{\rm under})$ in the positively oriented projection plane, with the positive Artin half twist assigned sign $+1$.
 
-[F5] [[lem-kontsevich-configuration-integral-convergence-needle-estimates]]: each fixed-degree sum converges absolutely; contributions with an endpoint in a width-$\varepsilon$ critical needle are uniformly $O(\varepsilon)$.
+[F5] [[lem-kontsevich-configuration-integral-convergence-needle-estimates]]: the configuration sum for each fixed strict Morse presentation converges absolutely degreewise. Its controlled local-cap estimate includes explicit uniformity hypotheses and logarithmic factors; the principal-symbol conclusion below uses the separate established external input [F7].
 
 [A1] [[def-countable-choice]]: $\mathrm{AC}_\omega$ is the countable-choice axiom used by the ambient-isotopy supplier.
 

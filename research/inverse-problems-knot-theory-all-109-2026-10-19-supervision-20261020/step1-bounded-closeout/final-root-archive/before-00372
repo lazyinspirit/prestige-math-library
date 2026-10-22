@@ -1,0 +1,223 @@
+[
+  {
+    "order": 3070,
+    "id": "limited-angle-tomography-and-invisible-singularities",
+    "kind": "A",
+    "category": "inverse-problems",
+    "title": "Limited-angle visibility and instability",
+    "companion": "limited-angle-tomography-and-invisible-singularities-examples",
+    "requires": [
+      "inverse-problems-identifiability-and-stability",
+      "radon-transform-and-fourier-slice-reconstruction",
+      "tempered-distributions-and-the-fourier-transform"
+    ],
+    "items": [
+      {
+        "id": "lem-ip-compact-support-fourier-laplace-is-entire",
+        "kind": "lemma",
+        "title": "The compact-support Fourier-Laplace transform is entire by coordinate slices",
+        "dependency_level": 1,
+        "deps": [
+          "def-ip-2d-radon-transform",
+          "thm-continuous-on-a-rectangle-is-riemann-integrable",
+          "thm-multidimensional-integral-properties",
+          "thm-complex-exponential-is-entire-with-derivative-itself",
+          "def-complex-differentiability-holomorphic-and-entire"
+        ],
+        "strategy": "Differentiate the compact-support Riemann integral in one complex coordinate. Bounded coordinates on a containing rectangle make the exponential difference quotients converge uniformly, so the Riemann integrals converge componentwise without a Lebesgue/Riemann identification or choice axiom."
+      },
+      {
+        "id": "def-ip-visible-covector-for-limited-angle-data",
+        "kind": "definition",
+        "title": "Visible covectors for limited-angle data",
+        "dependency_level": 1,
+        "deps": ["def-ip-2d-radon-transform"]
+      },
+      {
+        "id": "def-ip-schwartz-radon-transform",
+        "kind": "definition",
+        "title": "Radon transform on Schwartz functions",
+        "dependency_level": 1,
+        "deps": [
+          "def-ip-2d-radon-transform",
+          "def-schwartz-space-and-its-seminorms",
+          "def-countable-choice",
+          "thm-bounded-riemann-integrable-functions-are-lebesgue-measurable-and-have-the-same-integral"
+        ]
+      },
+      {
+        "id": "lem-ip-schwartz-radon-well-defined",
+        "kind": "lemma",
+        "title": "The Radon transform maps Schwartz functions to Schwartz offset data",
+        "dependency_level": 2,
+        "deps": [
+          "def-ip-schwartz-radon-transform",
+          "def-schwartz-space-and-its-seminorms",
+          "thm-chain-rule-for-total-derivatives",
+          "thm-differentiation-under-the-integral-sign",
+          "cor-mean-value-theorem"
+        ],
+        "strategy": "Use Schwartz seminorms to obtain uniform decay in both line coordinates, then differentiate the offset integral under an integrable derivative majorant and estimate every directional derivative uniformly over the unit normal."
+      },
+      {
+        "id": "lem-ip-limited-angle-radon-data-is-l2-on-compact-support",
+        "kind": "lemma",
+        "title": "Restricted Radon data are square-integrable on fixed compact support",
+        "dependency_level": 2,
+        "deps": [
+          "def-ip-schwartz-radon-transform",
+          "cor-cauchy-schwarz-inequality-for-l-two",
+          "thm-fubini-theorem-for-l-one-on-sigma-finite-product-spaces",
+          "cor-c-one-change-of-variables-for-l-one-functions",
+          "def-countable-choice"
+        ],
+        "strategy": "Bound each line integral by its support length times the line L2 integral, then integrate the resulting compactly supported product-space function and apply the orthogonal change of variables."
+      },
+      {
+        "id": "cor-ip-limited-angle-compact-support-uniqueness",
+        "kind": "corollary",
+        "title": "Compactly supported smooth functions are unique from any open set of Radon angles",
+        "dependency_level": 2,
+        "deps": [
+          "def-ip-visible-covector-for-limited-angle-data",
+          "thm-ip-fourier-slice-identity",
+          "lem-ip-compact-support-fourier-laplace-is-entire",
+          "thm-multidimensional-integral-properties",
+          "thm-identity-theorem-holomorphic-functions",
+          "thm-real-stone-weierstrass-for-compact-metric-spaces"
+        ],
+        "strategy": "The compact-support slice identity vanishes on an open polar sector; extend by one-variable identity theorems, obtain all moments, and use real Stone-Weierstrass to approximate the conjugate object in the compact-support Riemann integral."
+      },
+      {
+        "id": "prop-ip-limited-angle-data-no-holder-stability",
+        "kind": "proposition",
+        "title": "Limited-angle inversion has no Hölder modulus on a fixed-support H1 ball",
+        "dependency_level": 3,
+        "deps": [
+          "def-ip-visible-covector-for-limited-angle-data",
+          "def-ip-schwartz-radon-transform",
+          "lem-ip-limited-angle-radon-data-is-l2-on-compact-support",
+          "lem-smooth-bump-between-concentric-euclidean-balls",
+          "cor-cauchy-schwarz-inequality-for-l-two",
+          "cor-c-one-change-of-variables-for-l-one-functions",
+          "lem-complex-integration-by-parts-on-intervals-and-decaying-lines",
+          "thm-algebra-of-derivatives",
+          "thm-chain-rule-for-total-derivatives",
+          "thm-sine-and-cosine-derivatives",
+          "thm-lebesgue-measure-of-a-box-of-every-kind",
+          "def-countable-choice"
+        ],
+        "strategy": "Modulate one normalized compactly supported bump in a frequency direction uniformly transverse to all measured line tangents. Repeated linewise integration by parts yields superpolynomial data decay while the H1 norm stays bounded and the L2 norm decays only as N^-1."
+      },
+      {
+        "id": "lem-ip-fourier-slice-identity-on-schwartz",
+        "kind": "lemma",
+        "title": "Fourier-slice identity for Schwartz inputs",
+        "dependency_level": 3,
+        "deps": [
+          "def-ip-schwartz-radon-transform",
+          "lem-ip-schwartz-radon-well-defined",
+          "def-fourier-transform-on-l-one-of-rn",
+          "lem-schwartz-functions-and-all-derivatives-are-integrable",
+          "lem-smooth-bump-between-concentric-euclidean-balls",
+          "thm-dominated-convergence",
+          "thm-fubini-theorem-for-l-one-on-sigma-finite-product-spaces",
+          "cor-c-one-change-of-variables-for-l-one-functions",
+          "def-countable-choice"
+        ],
+        "strategy": "Apply L1 Fubini to the line coordinates, prove the identity for smooth compact cutoffs by Lebesgue change of variables, then pass both integrals to their Schwartz limits by dominated convergence."
+      },
+      {
+        "id": "prop-ip-limited-angle-fourier-visibility",
+        "kind": "proposition",
+        "title": "Limited-angle data sample exactly the visible Fourier wedge",
+        "dependency_level": 4,
+        "deps": [
+          "def-ip-visible-covector-for-limited-angle-data",
+          "def-ip-schwartz-radon-transform",
+          "lem-ip-fourier-slice-identity-on-schwartz",
+          "thm-ip-fourier-slice-identity",
+          "cor-ip-limited-angle-compact-support-uniqueness",
+          "def-countable-choice"
+        ],
+        "strategy": "Use the Schwartz Fourier-slice identity for wedge visibility and the independent compact-support Fourier-slice theorem plus the choice-free analytic-continuation corollary for the compact-support uniqueness branch."
+      },
+      {
+        "id": "op-ip-stable-limited-angle-reconstruction",
+        "kind": "open-problem",
+        "title": "Sharp deterministic stability for limited-angle reconstruction",
+        "dependency_level": 5,
+        "deps": [
+          "def-ip-visible-covector-for-limited-angle-data",
+          "lem-ip-limited-angle-radon-data-is-l2-on-compact-support",
+          "prop-ip-limited-angle-fourier-visibility",
+          "prop-ip-limited-angle-data-no-holder-stability",
+          "def-ip-identifiability-and-stability-modulus"
+        ]
+      }
+    ]
+  },
+  {
+    "order": 3071,
+    "id": "limited-angle-tomography-and-invisible-singularities-examples",
+    "kind": "B",
+    "category": "inverse-problems",
+    "title": "Limited-angle visibility and instability — Examples and Counterexamples",
+    "companion": "limited-angle-tomography-and-invisible-singularities",
+    "requires": ["limited-angle-tomography-and-invisible-singularities"],
+    "items": [
+      {
+        "id": "ex-ip-compact-support-limited-angle-uniqueness",
+        "kind": "example",
+        "title": "A compactly supported bump remains uniquely determined from limited angles",
+        "dependency_level": 3,
+        "deps": [
+          "def-ip-visible-covector-for-limited-angle-data",
+          "lem-smooth-bump-between-concentric-euclidean-balls",
+          "lem-ip-compact-support-fourier-laplace-is-entire",
+          "thm-ip-fourier-slice-identity",
+          "cor-ip-limited-angle-compact-support-uniqueness"
+        ],
+        "strategy": "Choose a nonzero bump, convert equality of limited-angle data into equality of Fourier values on the measured wedge, and apply the fully proved choice-free compact-support uniqueness result to the difference."
+      },
+      {
+        "id": "ex-ip-high-frequency-limited-angle-instability",
+        "kind": "example",
+        "title": "Rapid oscillations make limited-angle data smaller than every power",
+        "dependency_level": 4,
+        "deps": [
+          "def-ip-visible-covector-for-limited-angle-data",
+          "lem-smooth-bump-between-concentric-euclidean-balls",
+          "thm-lebesgue-measure-of-a-box-of-every-kind",
+          "prop-ip-limited-angle-data-no-holder-stability",
+          "def-countable-choice"
+        ],
+        "strategy": "Verify an explicit aperture has a uniform transverse line-tangent factor, normalize one fixed bump, and instantiate the proved high-frequency modulation estimate."
+      },
+      {
+        "id": "ex-ip-invisible-wedge-null-function",
+        "kind": "example",
+        "title": "A nonzero Schwartz function invisible to a limited-angle Radon transform",
+        "dependency_level": 4,
+        "deps": [
+          "def-ip-visible-covector-for-limited-angle-data",
+          "def-ip-schwartz-radon-transform",
+          "lem-ip-schwartz-radon-well-defined",
+          "lem-ip-fourier-slice-identity-on-schwartz",
+          "lem-smooth-bump-between-concentric-euclidean-balls",
+          "def-fourier-transform-on-l-one-of-rn",
+          "thm-fourier-transform-maps-schwartz-space-continuously-to-itself",
+          "thm-fourier-inversion-on-schwartz-space",
+          "lem-schwartz-functions-and-all-derivatives-are-integrable",
+          "cor-c-one-change-of-variables-for-l-one-functions",
+          "thm-the-l-p-norm-descends-to-the-quotient-and-makes-l-p-a-normed-space",
+          "def-metric-space",
+          "thm-ip-kernel-directions-preclude-unrestricted-recovery",
+          "def-ip-forward-map-and-solution-classes",
+          "def-countable-choice"
+        ],
+        "strategy": "Place a smooth frequency bump in a blind annular sector, invert it using the Schwartz Fourier transform under Countable Choice, recover zero Radon data by offset Fourier inversion, and apply the exact two-truth estimator lower bound."
+      }
+    ]
+  }
+]

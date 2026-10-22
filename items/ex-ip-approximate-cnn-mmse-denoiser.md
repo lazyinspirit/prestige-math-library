@@ -8,7 +8,7 @@ pipeline_run: inverse-problems-knot-theory-all-109-2026-10-19
 dependency_level: 7
 deps:
   - lem-ip-tweedie-mmse-jacobian-and-prox-potential
-  - def-ip-pnp-ista-with-denoiser
+  - alg-ip-pnp-ista-with-denoiser
   - thm-ip-exact-mmse-pnp-ista-stationarity
   - rem-ip-arbitrary-denoiser-has-no-inherited-objective
   - def-dirac-measure
@@ -47,7 +47,7 @@ This map is implemented by a $1\times1$ convolution, a $\tanh$ activation, outpu
 
 [[lem-ip-tweedie-mmse-jacobian-and-prox-potential]]
 
-[[def-ip-pnp-ista-with-denoiser]]
+[[alg-ip-pnp-ista-with-denoiser]]
 
 [[thm-ip-exact-mmse-pnp-ista-stationarity]]
 

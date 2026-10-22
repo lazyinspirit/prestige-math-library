@@ -1,4 +1,9 @@
 ---
+verification:
+  judge:
+    model: "gpt-6-luna"
+    verdict: pass
+    date: 2026-10-22
 id: ex-ip-identical-laws-under-operator-mismatch
 kind: example
 title: Distinct truths and operators with identical noisy data laws

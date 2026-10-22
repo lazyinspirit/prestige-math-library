@@ -1,0 +1,92 @@
+{
+  "run": "inverse-problems-knot-theory-all-109-2026-10-19",
+  "id": "alg-reidemeister-move-neighbors-from-code",
+  "kind": "root-proposed-native-reader-concern-repair-instructions",
+  "source_edits_preapplied": false,
+  "native_review_or_acceptance_granted": false,
+  "original_concerns": [
+    {
+      "batch": "103",
+      "concern_index": 0,
+      "concern": {
+        "id": "alg-reidemeister-move-neighbors-from-code",
+        "concern": "The finite comparison rules say to 'enumerate all finite choices of local edge intervals and crossing subrecords' and 'test that the codes agree outside the chosen disk boundary'. They do not specify finite representatives for interval endpoints or the combinatorial test that the selected boundary bounds an admissible move disk with no additional diagram inside. The intended finite plane-map test is reconstructible, but it is an unstated subprocedure on which termination and completeness in theorem steps 1.1 and 2.1 depend, including the crossingless-circle case.",
+        "severity": "gap-a-reader-closes"
+      },
+      "classification": "confirmed_defect",
+      "reason": "The procedure asserts a finite local test but leaves its endpoint representatives and empty embedded disk decision undefined. These are essential executable subprocedures for both soundness and completeness, not a change of mathematical goal. Neither the supplied validator nor the move definition contains the missing test.",
+      "report": "research/inverse-problems-knot-theory-all-109-2026-10-19-supervision-20261020/step5-supervision/reader-concern-review/report-5.json",
+      "reading_limits": {
+        "case": {},
+        "report": {
+          "scope": "Exactly six assigned original concerns. Research-only proposals; no canonical content, metadata, hashes, certificates, gates, ledgers or native coverage changed. Root must revalidate current bytes/context at actual paused/drained hold.",
+          "reading_limits": {
+            "full_target_items": [
+              "items/thm-ip-general-source-minimax-comparison.md",
+              "items/ex-ip-analytic-minimax-rates.md",
+              "items/ex-ip-power-source-minimax-rates.md",
+              "items/alg-reidemeister-move-neighbors-from-code.md",
+              "items/alg-breadth-first-reidemeister-search.md",
+              "items/def-quantum-sl2-fundamental-ribbon-module.md"
+            ],
+            "full_local_supplier_context": [
+              "items/def-randomized-procedure-as-a-markov-kernel.md",
+              "items/lem-ip-univariate-gaussian-projection-minimax-comparison.md",
+              "items/cor-ip-mild-and-severe-estimation-rates.md",
+              "items/def-planar-diagram-gauss-and-dowker-codes.md",
+              "items/alg-planar-code-validation-and-diagram-reconstruction.md",
+              "items/alg-enumerate-diagrams-up-to-crossing-bound.md",
+              "items/def-oriented-reidemeister-moves.md",
+              "items/thm-reidemeister-enumeration-is-only-a-semidecision.md",
+              "items/def-twist-and-ribbon-structure.md",
+              "items/def-left-dual-and-right-dual-object.md",
+              "items/thm-a-ribbon-object-defines-a-unique-framed-tangle-evaluation-functor.md",
+              "items/def-ribbon-evaluation-of-an-x-colored-closed-braid.md",
+              "items/lem-ribbon-trace-equals-the-framed-closure-evaluation.md",
+              "items/lem-quantum-sl2-ribbon-trace-matches-hecke-and-bracket.md",
+              "items/cex-knot-kt-48-boundary-case.md"
+            ],
+            "external_fulltexts_read_this_review": [],
+            "boundary": "CLAUDE rule 12 retained: existing external inputs remain externally attributed. No new claim to source reading, reconstructed external proof, bibliography audit or supplier-closure certification.",
+            "uncertainty": "Finite disk proposal is a mathematical subprocedure description, not implemented code. Its face pairing enumeration must distinguish repeated boundary occurrences and the infinity region as stated. Root must review exact proposal and live consumers after native writers drain."
+          }
+        }
+      }
+    }
+  ],
+  "required_own_edits": [
+    {
+      "target_id": "alg-reidemeister-move-neighbors-from-code",
+      "source_path": "items/alg-reidemeister-move-neighbors-from-code.md",
+      "source_excerpt": "**Finite comparison rules:** Two normalized codes represent the same code class when some bijection of their finite crossing labels and edge labels carries all dart incidences, crossing rotations, orientations, signs, component cycles, and outer-face data of one code to the other. To test whether two codes differ by one move, enumerate all finite choices of local edge intervals and crossing subrecords of sizes allowed by R1, R2, or R3; test that the codes agree outside the chosen disk boundary and that the two local records are one of the standard orientation/sign variants of that move. The local-site test uses the exact variants in the oriented Reidemeister-move definition.",
+      "proposed_replacement": "**Finite comparison rules:** Two normalized codes represent the same code class when some bijection of their finite crossing labels and edge labels carries all dart incidences, crossing rotations, orientations, signs, component cycles, and outer-face data of one code to the other. For a move-site test use the finite spherical cellulation returned by reconstruction and mark a point at infinity in its distinguished outer face. For the crossingless circle, insert one auxiliary degree-two vertex and use its two complementary face disks; this vertex is suppressed in all comparisons.\n\nFor each of $m=2,4,6$, enumerate every distribution of $m$ distinct cut points among diagram edges and every linear order of the points on each edge. Use one representative of each order (for example equally spaced interior points); their numerical positions are immaterial. In each face disk enumerate noncrossing pairings of all boundary occurrences of these cut points by interior arcs. In the distinguished face also record which complementary region contains the marked point at infinity. Glue the face arcs at the cut points and retain only choices forming a single simple closed curve. Cutting the finite cellulation along these arcs and flooding across incident cell pieces identifies the two sides; select the side not containing infinity. This is the candidate closed move disk. Its entire diagram intersection, including every vertex, edge segment and possible closed component inside it, must be isomorphic relative to its cyclically ordered boundary points to one side of a standard R1, R2 or R3 template with the chosen orientation/sign variant. In particular no additional diagram portion is permitted inside the disk. All tests are finite incidence and cyclic-order comparisons. The same construction is performed for the other code, requiring the opposite side of the same template and an isomorphism of the outside records fixing the ordered boundary points, all decorations and the infinity region. Store the cut orders, face pairings, selected regions, template variant and outside isomorphism as the certificate.\n\nThere are finitely many cut distributions, orders, face pairings and region choices. Every move disk has two, four or six transverse boundary intersections, avoids crossing vertices, and cuts each face into disjoint arcs; it therefore has a representative among these choices. Moving cut points along an edge and face arcs within a face disk changes neither the inside tangle nor the outside code class. Thus the test includes every admissible move disk, including move creation from the crossingless circle, and accepts only genuine disk-supported template replacements. The local templates and their exact orientation/sign variants are those in the oriented Reidemeister-move definition.",
+      "required": true,
+      "origins": [
+        {
+          "case_key": "103:0",
+          "id": "alg-reidemeister-move-neighbors-from-code",
+          "classification": "confirmed_defect",
+          "report_path": "research/inverse-problems-knot-theory-all-109-2026-10-19-supervision-20261020/step5-supervision/reader-concern-review/report-5.json",
+          "json_pointer": "/cases/3/proposals/0"
+        }
+      ],
+      "original_operation_annotations": [
+        {
+          "source_excerpt": "**Finite comparison rules:** Two normalized codes represent the same code class when some bijection of their finite crossing labels and edge labels carries all dart incidences, crossing rotations, orientations, signs, component cycles, and outer-face data of one code to the other. To test whether two codes differ by one move, enumerate all finite choices of local edge intervals and crossing subrecords of sizes allowed by R1, R2, or R3; test that the codes agree outside the chosen disk boundary and that the two local records are one of the standard orientation/sign variants of that move. The local-site test uses the exact variants in the oriented Reidemeister-move definition.",
+          "proposed_replacement": "**Finite comparison rules:** Two normalized codes represent the same code class when some bijection of their finite crossing labels and edge labels carries all dart incidences, crossing rotations, orientations, signs, component cycles, and outer-face data of one code to the other. For a move-site test use the finite spherical cellulation returned by reconstruction and mark a point at infinity in its distinguished outer face. For the crossingless circle, insert one auxiliary degree-two vertex and use its two complementary face disks; this vertex is suppressed in all comparisons.\n\nFor each of $m=2,4,6$, enumerate every distribution of $m$ distinct cut points among diagram edges and every linear order of the points on each edge. Use one representative of each order (for example equally spaced interior points); their numerical positions are immaterial. In each face disk enumerate noncrossing pairings of all boundary occurrences of these cut points by interior arcs. In the distinguished face also record which complementary region contains the marked point at infinity. Glue the face arcs at the cut points and retain only choices forming a single simple closed curve. Cutting the finite cellulation along these arcs and flooding across incident cell pieces identifies the two sides; select the side not containing infinity. This is the candidate closed move disk. Its entire diagram intersection, including every vertex, edge segment and possible closed component inside it, must be isomorphic relative to its cyclically ordered boundary points to one side of a standard R1, R2 or R3 template with the chosen orientation/sign variant. In particular no additional diagram portion is permitted inside the disk. All tests are finite incidence and cyclic-order comparisons. The same construction is performed for the other code, requiring the opposite side of the same template and an isomorphism of the outside records fixing the ordered boundary points, all decorations and the infinity region. Store the cut orders, face pairings, selected regions, template variant and outside isomorphism as the certificate.\n\nThere are finitely many cut distributions, orders, face pairings and region choices. Every move disk has two, four or six transverse boundary intersections, avoids crossing vertices, and cuts each face into disjoint arcs; it therefore has a representative among these choices. Moving cut points along an edge and face arcs within a face disk changes neither the inside tangle nor the outside code class. Thus the test includes every admissible move disk, including move creation from the crossingless circle, and accepts only genuine disk-supported template replacements. The local templates and their exact orientation/sign variants are those in the oriented Reidemeister-move definition.",
+          "unique_literal_occurrences": 1,
+          "applied": false
+        }
+      ],
+      "operation_id": "op-049",
+      "current_literal_check": {
+        "checked_against": "items/alg-reidemeister-move-neighbors-from-code.md",
+        "occurrences": 1,
+        "no_hash_computed": true,
+        "no_edit_applied": true
+      }
+    }
+  ],
+  "necessary_related_consumer_edits": [],
+  "instructions": "Genuine native owner must read the exact current source and bound focused reports, earn an ordinary current review and apply the smallest sound repair. Complete related edits supplier-first under ordinary ownership, guard and downstream routing; do not invent an original concern or frontier home for an outside consumer. Actual Statement/Definition changes require the same native reviewer to check all affected consumers. Preserve old native verdicts, Step3 closure and Step4 receipts. Metadata and quote mirrors must reflect actual current source. The outside taut-hierarchy proof-only edit is a genuine later successor; do not rewrite its Step4 before/application archives. The candidate is instructions, not a native repair, acceptance or coverage."
+}

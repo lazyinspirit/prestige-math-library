@@ -1,0 +1,1729 @@
+[
+  {
+    "order": 3190,
+    "id": "character-varieties-and-the-a-polynomial",
+    "kind": "A",
+    "category": "knot-theory",
+    "title": "Character varieties and the A-polynomial",
+    "companion": "character-varieties-and-the-a-polynomial-examples",
+    "requires": [
+      "wirtinger-presentations-and-knot-groups",
+      "knot-exteriors-and-peripheral-systems",
+      "twisted-alexander-polynomials-and-reidemeister-torsion",
+      "satellite-knots-and-jsj-tori",
+      "hyperbolic-dehn-filling-and-exceptional-slopes",
+      "khovanov-homology-detects-the-unknot"
+    ],
+    "items": [
+      {
+        "id": "lem-fixed-field-of-automorphisms-of-c-over-q-is-q",
+        "kind": "lemma",
+        "title": "The fixed field of Aut(C/Q) is Q",
+        "deps": [
+          "def-axiom-of-choice",
+          "cor-ac-iff-zorn",
+          "thm-the-complex-numbers-are-algebraically-closed",
+          "thm-transitivity-of-algebraicity",
+          "lem-maximal-algebraically-independent-subset-is-a-transcendence-basis"
+        ],
+        "dependency_level": 0,
+        "justified_by": [],
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-generated"
+        },
+        "statement": "Assume the Axiom of Choice. The subfield of $\\mathbb C$ fixed by every field automorphism $\\sigma:\\mathbb C\\to\\mathbb C$ with $\\sigma(q)=q$ for all $q\\in\\mathbb Q$ is exactly $\\mathbb Q$.",
+        "sources": {
+          "references": [
+            {
+              "title": "J. S. Milne, Fields and Galois Theory, v5.10, §§3 and 9",
+              "url": "https://www.jmilne.org/math/CourseNotes/FT.pdf"
+            },
+            {
+              "title": "The Stacks Project, Section 9.26: Transcendence, Lemma 9.26.3",
+              "url": "https://stacks.math.columbia.edu/tag/030F"
+            }
+          ]
+        },
+        "proof_strategy": "direct",
+        "axiom_use": "Full AC is used to extend algebraically independent sets to transcendence bases and to extend field embeddings to algebraic closures."
+      },
+      {
+        "id": "lem-two-commuting-complex-2x2-matrices-are-simultaneously-triangularizable",
+        "kind": "lemma",
+        "title": "Two commuting complex 2x2 matrices are simultaneously triangularizable",
+        "deps": [],
+        "dependency_level": 0,
+        "justified_by": [],
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-generated"
+        },
+        "statement": "Let $A,B\\in M_2(\\mathbb C)$ commute. There is a one-dimensional subspace of $\\mathbb C^2$ invariant under both $A$ and $B$. Equivalently, in a basis beginning with a nonzero vector in that subspace, both matrices are upper triangular.",
+        "sources": {
+          "references": [
+            {
+              "title": "Léo Bénard, François Florens, and Adrien Rodau, A slope invariant and the A-polynomial of knots, §2.2",
+              "url": "https://arxiv.org/pdf/2103.14151"
+            },
+            {
+              "title": "Stephan Tillmann, Varieties associated to 3-manifolds, §§4.2–4.4",
+              "url": "https://www.maths.usyd.edu.au/u/tillmann/papers/course.pdf"
+            }
+          ]
+        },
+        "proof_strategy": "direct",
+        "axiom_use": "The proof uses only that the characteristic polynomial of a complex 2x2 matrix has a root."
+      },
+      {
+        "id": "lem-sl2-matrix-invariants-by-epsilon-contractions-and-traces",
+        "kind": "lemma",
+        "title": "SL2 matrix invariants from epsilon contractions and traces",
+        "deps": [
+          "def-axiom-of-choice",
+          "def-reductive-and-linearly-reductive-over-c",
+          "thm-invariant-ring-finite-generation-and-affine-categorical-quotient"
+        ],
+        "justified_by": [],
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-generated"
+        },
+        "statement": "Assume full AC. For any finite $r\\ge0$, every polynomial in the entries of $r$ complex $2\\times2$ matrices invariant under simultaneous conjugation by $SL_2(\\mathbb C)$ is a polynomial in traces of words in those matrices. For each given invariant only finitely many words are needed. If $Z\\subseteq M_2(\\mathbb C)^r$ is any closed reduced invariant algebraic subset, every invariant regular function on $Z$ is likewise a polynomial in the restricted word traces. In particular this applies to the representation variety of any finitely presented group in $SL_2(\\mathbb C)$, with its determinant and relator equations. The assertion does not identify a nonsemisimple representation from its character or assert a generic representation over the character function field.",
+        "sources": {
+          "references": [
+            {
+              "title": "Procesi, The invariant theory of n x n matrices",
+              "url": "https://doi.org/10.1016/0001-8708(76)90027-X",
+              "locator": "Classical trace-generation target. The rank-two tensor, polarization and contraction proof is supplied explicitly here; no full-text reading of this paper is claimed."
+            },
+            {
+              "title": "Cooper, Culler, Gillet, Long and Shalen, Plane Curves Associated to Character Varieties of 3-Manifolds",
+              "url": "https://homepages.math.uic.edu/~culler/papers/PlaneCurves/curves.pdf",
+              "locator": "Section2.1 uses the character/trace model; its matrix invariant prerequisite is proved below rather than imported from that citation."
+            }
+          ]
+        },
+        "proof_strategy": "direct",
+        "dependency_level": 0,
+        "axiom_use": "The invariant-tensor and matrix calculations are finite and choice-free; full AC is inherited in the stated closed-subvariety quotient clause."
+      },
+      {
+        "id": "lem-equal-irreducible-sl2-traces-determine-conjugacy",
+        "kind": "lemma",
+        "title": "Equal irreducible SL2 trace characters determine conjugacy",
+        "deps": [],
+        "justified_by": [],
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-generated"
+        },
+        "statement": "Let $G$ be any group and $\\rho,\\rho':G\\to SL_2(\\mathbb C)$ be representations with $$\\operatorname{tr}\\rho(g)=\\operatorname{tr}\\rho'(g)\\qquad(g\\in G).$$ If $\\rho$ is irreducible, then $\\rho'$ is irreducible and there is $P\\in SL_2(\\mathbb C)$ such that $\\rho'(g)=P\\rho(g)P^{-1}$ for every $g$. If $\\rho$ is reducible, it has the same trace character as its diagonal semisimplification $g\\mapsto\\operatorname{diag}(\\chi(g),\\chi(g)^{-1})$, where $\\chi:G\\to\\mathbb C^*$ is the character on a common invariant line. The two diagonal characters $\\chi,\\chi^{-1}$ determine the same semisimple conjugacy class. This is a pointwise statement; it does not assert that an irreducible character component admits a tautological representation over its function field or prove rational quotient descent.",
+        "sources": {
+          "references": [
+            {
+              "title": "Cooper, Culler, Gillet, Long and Shalen, Plane Curves Associated to Character Varieties of 3-Manifolds",
+              "url": "https://homepages.math.uic.edu/~culler/papers/PlaneCurves/curves.pdf",
+              "locator": "Section2.1 uses the trace character model. The rank-two matrix-algebra and conjugacy proofs are supplied explicitly below."
+            }
+          ]
+        },
+        "proof_strategy": "direct",
+        "dependency_level": 0,
+        "axiom_use": "The proof uses finite-dimensional linear algebra and complex square roots only; no choice axiom is required."
+      },
+      {
+        "id": "lem-torus-presentation-irreducible-peripheral-eigenvalue-curves",
+        "kind": "lemma",
+        "title": "Irreducible peripheral eigenvalue curves of a torus presentation",
+        "deps": [],
+        "justified_by": [],
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-generated"
+        },
+        "statement": "Let $a>b\\ge2$ be coprime integers, choose integers $\\alpha,\\beta$ with $a\\alpha+b\\beta=1$, and put $G=\\langle x,y\\mid x^a=y^b\\rangle$, $h=x^a=y^b$, $\\mu=y^\\alpha x^\\beta$ and $\\lambda=h\\mu^{-ab}$. Consider all irreducible representations $\\rho:G\\to SL_2(\\mathbb C)$, where irreducible means having no common invariant complex line. The common peripheral eigenvalue pairs $(M,L)\\in(\\mathbb C^*)^2$ have reduced Zariski closure with vanishing ideal $$(1+M^{2a}L)\\quad\\hbox{if }b=2,\\qquad (M^{2ab}L^2-1)\\quad\\hbox{if }b>2.$$ More precisely, $\\rho(h)=\\epsilon I$ with $\\epsilon=-1$ when $b=2$ and $\\epsilon\\in\\{1,-1\\}$ when $b>2$; each permitted sign occurs in a family realizing every point of the graph $L=\\epsilon M^{-ab}$ except possibly finitely many meridian values. The displayed ideal is the ideal of the entire irreducible eigenvalue locus, not just of the exhibited families. No choice axiom is assumed.",
+        "sources": {
+          "references": [
+            {
+              "title": "Baldwin and Sivek, Torus knots, the A-polynomial, and SL(2,C)",
+              "url": "https://arxiv.org/pdf/2405.19197v2",
+              "locator": "Example2.13, printed/PDF p8 states the torus formula, citing Ni–Zhang. The full finite matrix proof is supplied here."
+            }
+          ]
+        },
+        "proof_strategy": "direct",
+        "dependency_level": 0,
+        "axiom_use": "The argument is finite matrix algebra over the fixed algebraically closed field C and uses no choice principle."
+      },
+      {
+        "id": "lem-two-generator-sl2-word-traces-reduce-to-three-coordinates",
+        "kind": "lemma",
+        "title": "Two-generator SL2 word traces reduce to three coordinates",
+        "deps": [],
+        "justified_by": [],
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-generated"
+        },
+        "statement": "Let $A,B\\in SL_2(\\mathbb C)$ and put $a=\\operatorname{tr}A$, $b=\\operatorname{tr}B$, $c=\\operatorname{tr}(AB)$. Every word matrix in $A^{\\pm1},B^{\\pm1}$ is a linear combination of $I,A,B,AB$ with coefficients in $\\mathbb Z[a,b,c]$, computed by finite word induction. Consequently its trace is a polynomial in those three traces. If $a=b=x$ and $c=y$, the coefficients specialize to $\\mathbb Z[x,y]$. The assertion includes scalar, unipotent, reducible and irreducible pairs and uses no choice axiom.",
+        "sources": {
+          "references": [
+            {
+              "title": "Explicit rank-two Cayley–Hamilton and polarized matrix identities",
+              "locator": "All identities and the word induction are proved below; no unproved trace-coordinate theorem is used."
+            },
+            {
+              "title": "Cooper, Culler, Gillet, Long and Shalen, Plane Curves Associated to Character Varieties of 3-Manifolds",
+              "url": "https://homepages.math.uic.edu/~culler/papers/PlaneCurves/curves.pdf",
+              "locator": "§2.1, trace-character model baseline. The explicit Cayley–Hamilton word induction here, including reducible/scalar cases, is a local formulation/proof refinement, not a verbatim theorem attributed to this source."
+            }
+          ],
+          "attribution_boundary": "Existing authoritative subject baseline and local formulation/proof refinement, not a verbatim external theorem; the actual accepted local argument and exact hypotheses remain unchanged.",
+          "reading_limits": "URL and locator drawn from existing canonical source metadata/Statement-reference bibliography only. No source was fetched or newly read for this metadata repair; retained author reading limits remain unchanged and are not transferred into a new whole-source reading claim."
+        },
+        "proof_strategy": "direct",
+        "dependency_level": 0
+      },
+      {
+        "id": "lem-absolutely-irreducible-sl2-representations-have-quadratic-trace-field-models",
+        "kind": "lemma",
+        "title": "An absolutely irreducible SL2 representation has a quadratic trace-field model",
+        "deps": [],
+        "justified_by": [],
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-generated"
+        },
+        "statement": "Let $F$ be a field of characteristic zero and let $\\rho:\\Gamma\\to SL_2(F)$ be a representation of a finitely generated group which is absolutely irreducible, meaning that no line is invariant under all its matrices after extension to any field containing $F$. Let $K\\subseteq F$ be the subfield generated by the prime field and all traces $\\operatorname{tr}\\rho(g)$, $g\\in\\Gamma$. There are words $A=\\rho(a)$ and $B=\\rho(b)$ and an element $\\xi$ satisfying $\\xi^2-(\\operatorname{tr}A)\\xi+1=0$, with $\\xi\\ne\\xi^{-1}$, such that over $F(\\xi)$ the representation is conjugate by a matrix in $GL_2(F(\\xi))$ to one whose generator matrices all lie in $SL_2(K(\\xi))$. Thus the required model field has degree at most two over $K$. The entries are obtained by explicit finite formulas from $\\xi$ and the traces of $A,B,AB,C,AC,BC,ABC$ for each generator matrix $C$. If $K(\\xi)\\ne K$, its nonidentity automorphism is realized on this model by simultaneous conjugation with one explicit matrix in $GL_2(K(\\xi))$. In particular, suppose a projective point $z\\in\\mathbb P^r(K(\\xi))$ is obtained from the model by a construction commuting with field automorphisms and invariant under simultaneous $GL_2$ conjugation. Then $z$ is defined over $K$. This last clause requires the stated compatibility and invariance; it asserts no analytic, homology-rank or quotient-existence theorem.",
+        "sources": {
+          "references": [
+            {
+              "title": "Bénard, Florens and Rodau, A slope invariant and the A-polynomial of knots",
+              "url": "https://arxiv.org/pdf/2103.14151",
+              "locator": "Section3.3, Proposition3.8 and Lemma3.10, PDF/printed pp8–9 motivate rational descent; the explicit trace-field model and quadratic conjugator are proved directly here."
+            }
+          ]
+        },
+        "proof_strategy": "direct",
+        "dependency_level": 0,
+        "axiom_use": "Only finite matrix operations and a single quadratic extension are used; no choice principle is assumed."
+      },
+      {
+        "id": "lem-finite-homology-kernel-lines-have-rational-rank-charts",
+        "kind": "lemma",
+        "title": "Finite homology kernel lines have rational rank charts",
+        "deps": [
+          "thm-adjugate-identity-over-a-commutative-ring"
+        ],
+        "justified_by": [],
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-generated"
+        },
+        "statement": "Let $A$ be a commutative integral domain with fraction field $F$. Let $B:A^s\\to A^n$, $C:A^n\\to A^t$ and $U=(u,v):A^2\\to A^n$ be finite matrices with $CB=CU=0$. Put $\\beta=\\operatorname{rank}_F B$, $\\gamma=\\operatorname{rank}_F C$, and assume $$\\operatorname{rank}_F(B\\mid U)=\\beta+1.$$ Then $h=n-\\gamma-\\beta\\ge1$. There exists $0\\ne f\\in A$ such that, over $A_f$, the kernel, image and homology $H_f=\\ker C_f/\\operatorname{im}B_f$ have explicit free bases, with ranks $n-\\gamma$, $\\beta$ and $h$. The kernel $$L_f=\\ker\\{A_f^2\\xrightarrow{U_f}H_f\\}$$ is a free rank-one direct summand of $A_f^2$. In explicit homology coordinates the images of $u,v$ can be written $a e_1,b e_1$, with at least one of $a,b$ a unit of $A_f$. Hence $$L_f=A_f(-b,a).$$ All these assertions, including the displayed kernel, commute with any homomorphism $A_f\\to E$ to a field. In particular they describe the actual homology kernel of the specialized matrices, not just a kernel before specialization.\n\nIf $A=\\mathbb C[X]$ for a nonempty irreducible affine algebraic set $X$, this gives a regular projective kernel line $[-b:a]$ on a nonempty dense principal open subset and hence a rational map $X\\dashrightarrow\\mathbb P^1$. Its slope convention $-\\text{second coordinate}/\\text{first coordinate}$ is the projective value $[a:b]$, including zero and infinity. The rank-chart expressions agree wherever both are defined. The kernel line is unchanged by invertible changes of the three chain bases, by adding boundary columns to $U$, and by multiplying both columns of $U$ by the same invertible scalar. For rational changes it is unchanged after restricting to a common open set where their denominators and inverses are defined. No assertion that the matrix rank hypotheses hold for an arbitrary topological or representation-theoretic family is part of this lemma.",
+        "sources": {
+          "references": [
+            {
+              "title": "Bénard, Florens and Rodau, A slope invariant and the A-polynomial of knots",
+              "url": "https://arxiv.org/pdf/2103.14151",
+              "locator": "Section3.3, Lemma3.10 proof, PDF/printed p9 asserts the algebraic homology kernel section. The explicit finite-matrix rank charts and base-change proof needed here are supplied below."
+            }
+          ]
+        },
+        "proof_strategy": "direct",
+        "dependency_level": 0,
+        "axiom_use": "Only finite Gaussian elimination, explicit matrix inverses and finite products of nonzero denominators are used. No choice principle is assumed."
+      },
+      {
+        "id": "lem-nonparabolic-adjoint-torus-homology-has-explicit-peripheral-basis",
+        "kind": "lemma",
+        "title": "An explicit peripheral basis for nonparabolic adjoint torus homology",
+        "deps": [
+          "thm-cellular-chains-compute-homology-with-local-coefficients"
+        ],
+        "justified_by": [],
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-generated"
+        },
+        "statement": "Let $F$ be a field of characteristic different from $2$, and let $L,M\\in SL_2(F)$ commute. Write $t=\\operatorname{tr}M$ and suppose $\\Delta=t^2-4\\ne0$. Give the torus $T^2$ an ordered pair of based oriented generating loops $(\\lambda,\\mu)$, and give its adjoint local system intrinsic monodromies $P=\\operatorname{Ad}L$ and $Q=\\operatorname{Ad}M$ on $V=\\mathfrak{sl}_2(F)$. Here monodromy acts on column coefficient vectors on the left. Set\n$$v=M-\\frac t2 I,\\qquad W=\\{X\\in V:\\operatorname{tr}(vX)=0\\}.$$\nThen $V=Fv\\oplus W$, both summands are preserved by $P,Q$, and $P,Q$ are the identity on $Fv$. There is an explicit split chain model\n$$0\\longrightarrow V\\xrightarrow{d_2}V\\oplus V\\xrightarrow{d_1}V\\longrightarrow0,$$\nwhere $d_2z=((I-Q)z,(P-I)z)$ and $d_1(x,y)=(P-I)x+(Q-I)y$, in the ordered edge coordinates $(\\lambda,\\mu)$. Its $W$ subcomplex is contractible, so\n$$H_0(T^2;V)=F[v],\\qquad H_1(T^2;V)=F[v\\otimes\\lambda]\\oplus F[v\\otimes\\mu],\\qquad H_2(T^2;V)=F[v\\otimes[T^2]].$$\nIn particular the two displayed peripheral classes are an actual basis, without imposing any norm-one normalization on $v$. The splitting, contraction and classes commute with field extensions and simultaneous conjugation of $L,M$. All their matrix entries are rational expressions in the entries of $L,M$, with denominators powers of $2$ and $\\Delta$. This assertion concerns boundary-torus homology only: it makes no claim about the rank of its inclusion into the homology of a knot exterior.",
+        "sources": {
+          "references": [
+            {
+              "title": "Bénard, Florens and Rodau, A slope invariant and the A-polynomial of knots",
+              "url": "https://arxiv.org/pdf/2103.14151",
+              "locator": "Section2.2 and Section3.3, PDF/printed pp6–10; invariant peripheral vectors and peripheral twisted homology. The unnormalized vector and explicit contraction are proved here."
+            }
+          ]
+        },
+        "proof_strategy": "direct",
+        "dependency_level": 0,
+        "axiom_use": "The calculation uses only finite-dimensional linear algebra and at most one explicit quadratic field extension for checking identities. No choice principle is assumed."
+      },
+      {
+        "id": "lem-partial-projective-resolutions-determine-tensor-homology-in-degree-one",
+        "kind": "lemma",
+        "title": "Three projective degrees suffice for twisted first-homology comparison",
+        "deps": [
+          "def-projective-module",
+          "def-tensor-product-of-modules-by-generators-and-relations"
+        ],
+        "justified_by": [],
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-generated"
+        },
+        "statement": "Let $R$ be any unital ring, let $S$ be a left $R$-module, and let\n$$C_2\\xrightarrow{d_2}C_1\\xrightarrow{d_1}C_0\\xrightarrow{\\epsilon_C}S\\longrightarrow0,\\qquad D_2\\xrightarrow{\\delta_2}D_1\\xrightarrow{\\delta_1}D_0\\xrightarrow{\\epsilon_D}S\\longrightarrow0$$\nbe augmented complexes of left $R$-modules, exact at $C_1,C_0,S$ and at $D_1,D_0,S$. Suppose each of the six modules $C_i,D_i$, $0\\le i\\le2$, is projective. No exactness at $C_2,D_2$ or further degrees is required. There are augmentation-preserving chain maps through degree $2$ between these complexes lifting $1_S$. For every right $R$-module $N$, any such comparison induces the same isomorphism of abelian groups\n$$H_1(N\\otimes_R C_\\bullet)\\ \\cong\\ H_1(N\\otimes_R D_\\bullet).$$\nThese isomorphisms are inverse under reversing the complexes, compose for a third such complex, and are natural in homomorphisms of right coefficient modules. In particular a supplied augmentation-preserving chain map through degree $2$ induces this isomorphism; its construction need not be the one chosen in the proof. Tensoring is not assumed exact, and $N$ need not be flat. This is a comparison of supplied algebraic complexes, not an assertion that a presentation complex is a deformation retract or a homotopy-equivalent spine of another space.",
+        "sources": {
+          "references": [
+            {
+              "title": "Romyar Sharifi, Homological Algebra",
+              "url": "https://math.ucla.edu/~sharifi/homalg.pdf",
+              "locator": "Projective comparison argument; the finite low-degree version and coefficient-side bookkeeping are supplied locally below."
+            }
+          ]
+        },
+        "proof_strategy": "direct",
+        "dependency_level": 0,
+        "axiom_use": "The supplied projective lifting properties are used only finitely many times. Neither an infinite resolution, a global family of basis choices, nor a choice principle is assumed."
+      },
+      {
+        "id": "lem-laurent-algebraic-curve-has-principal-equation",
+        "kind": "lemma",
+        "title": "A reduced Laurent plane curve has a principal equation",
+        "deps": [
+          "lem-finite-variable-polynomial-rings-over-fields-are-ufds",
+          "cor-height-plus-quotient-dimension-affine-domain",
+          "thm-prime-spectrum-of-a-localisation-bijection",
+          "thm-affine-domain-dimension-transcendence-degree",
+          "thm-affine-variety-dimension-coordinate-ring",
+          "def-axiom-of-choice",
+          "lem-fixed-field-of-automorphisms-of-c-over-q-is-q"
+        ],
+        "dependency_level": 1,
+        "justified_by": [],
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-generated"
+        },
+        "statement": "Assume the Axiom of Choice. Let $C$ be a finite union of distinct irreducible one-dimensional closed algebraic subsets of $(\\mathbb C^*)^2$. Suppose its radical vanishing ideal in $\\mathbb C[M^{\\pm1},L^{\\pm1}]$ is the scalar extension of a radical ideal in $\\mathbb Q[M^{\\pm1},L^{\\pm1}]$; this is what it means here for the reduced union to be defined over $\\mathbb Q$. Then its complex vanishing ideal is generated by a square-free Laurent polynomial $F$ with primitive integer coefficients. Any two such primitive integer-coefficient generators differ by multiplication by $\\pm M^aL^b$, where $a,b\\in\\mathbb Z$.",
+        "sources": {
+          "references": [
+            {
+              "title": "J. S. Milne, Algebraic Geometry v6.10, §§1–3",
+              "url": "https://www.jmilne.org/math/CourseNotes/AG.pdf"
+            },
+            {
+              "title": "The Stacks Project, Section 10.9 (Tag 00CM), Localization",
+              "url": "https://stacks.math.columbia.edu/tag/00CM"
+            }
+          ]
+        },
+        "proof_strategy": "direct",
+        "axiom_use": "Full AC is inherited through the affine dimension and fixed-field suppliers; the factorization and localization argument is choice-free."
+      },
+      {
+        "id": "lem-automorphism-stable-laurent-ideals-descend-to-rational-coefficients",
+        "kind": "lemma",
+        "title": "Automorphism-stable Laurent ideals descend to rational coefficients",
+        "deps": [
+          "def-axiom-of-choice",
+          "lem-fixed-field-of-automorphisms-of-c-over-q-is-q"
+        ],
+        "justified_by": [],
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-generated"
+        },
+        "statement": "Assume full AC. Let $n\\ge0$, let $R_{\\mathbb Q}=\\mathbb Q[z_1^{\\pm1},\\ldots,z_n^{\\pm1}]$ and $R_{\\mathbb C}=\\mathbb C[z_1^{\\pm1},\\ldots,z_n^{\\pm1}]$, and let $I\\subseteq R_{\\mathbb C}$ be an ideal invariant under coefficientwise application of every field automorphism of $\\mathbb C$ fixing $\\mathbb Q$. Then $$I=(I\\cap R_{\\mathbb Q})R_{\\mathbb C}.$$ If $I$ is radical, then $I\\cap R_{\\mathbb Q}$ is radical as well. In particular, if $S\\subseteq(\\mathbb C^*)^n$ is preserved by all such coordinatewise automorphisms, the radical vanishing ideal of its Zariski closure is the scalar extension of a radical ideal over $\\mathbb Q$. This includes the empty set, the whole torus and zero variables. No algebraicity or closedness of $S$ is assumed.",
+        "sources": {
+          "references": [
+            {
+              "title": "Cooper, Culler, Gillet, Long and Shalen, Plane Curves Associated to Character Varieties of 3-Manifolds",
+              "url": "https://homepages.math.uic.edu/~culler/papers/PlaneCurves/curves.pdf",
+              "locator": "Section2.3, printed/PDF p6, proves the integer-coefficient assertion using a minimal-field-of-definition theorem. The finite row-reduction descent needed here is proved directly below."
+            }
+          ]
+        },
+        "proof_strategy": "direct",
+        "dependency_level": 1,
+        "axiom_use": "Full AC is inherited only through the fixed-field theorem. Finite row reduction adds no choice principle."
+      },
+      {
+        "id": "lem-finite-affine-incidence-projection-and-curve-component-selection",
+        "kind": "lemma",
+        "title": "Finite affine incidence projection and selection of curve components",
+        "deps": [
+          "thm-classical-affine-nullstellensatz-correspondence",
+          "lem-classical-affine-algebraic-set-finite-irreducible-components",
+          "thm-affine-variety-dimension-coordinate-ring",
+          "lem-automorphism-stable-laurent-ideals-descend-to-rational-coefficients"
+        ],
+        "justified_by": [],
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-generated"
+        },
+        "statement": "Assume full AC. Put $T=(\\mathbb C^*)^n$ and $R=\\mathbb C[z_1^{\\pm1},\\ldots,z_n^{\\pm1}]$, with $n\\ge0$. For a finite index set $B$, let $J_b$ be an ideal of $R[u_1,\\ldots,u_{m_b}]$, where $m_b\\ge0$, and let $X_b$ be its zero set in $T\\times\\mathbb C^{m_b}$. Let $S$ be the union of the coordinate projections of the $X_b$ to $T$. Then its Zariski closure $Z$ has radical vanishing ideal $$I(Z)=\\bigcap_{b\\in B}\\bigl(\\sqrt{J_b}\\cap R\\bigr).$$ Write the finite irreducible-component decomposition as $Z=\\bigcup_i Z_i$, and let $C$ be the union of those $Z_i$ whose dimension is one. Then $$I(C)=\\bigcap_{\\dim Z_i=1}I(Z_i).$$ Thus one must select the one-dimensional components after radical elimination; the first intersection alone also retains any isolated or higher-dimensional components. Empty intersections are the unit ideal and an empty selected union is empty. If $S$ is preserved by every coordinatewise field automorphism of $\\mathbb C$ fixing $\\mathbb Q$ (in particular, if all $J_b$ are generated by rational-coefficient Laurent polynomials), both $I(Z)$ and $I(C)$ are scalar extensions of radical ideals over $\\mathbb Q$. No closedness of the projections or bound on their dimension is assumed.",
+        "sources": {
+          "references": [
+            {
+              "title": "Cooper, Culler, Gillet, Long and Shalen, Plane Curves Associated to Character Varieties of 3-Manifolds",
+              "url": "https://homepages.math.uic.edu/~culler/papers/PlaneCurves/curves.pdf",
+              "locator": "Sections2.1–2.3, PDF/printed pp4–6; the finite-chart radical projection and component-selection argument is supplied explicitly here."
+            }
+          ]
+        },
+        "proof_strategy": "direct",
+        "dependency_level": 2,
+        "axiom_use": "Full AC is inherited from the affine Nullstellensatz and rational descent; it includes the DC used by finite irreducible decomposition."
+      },
+      {
+        "id": "def-boundary-slope-of-an-incompressible-surface",
+        "kind": "definition",
+        "title": "Boundary slope of an incompressible surface in a knot exterior",
+        "deps": [
+          "def-knot-exterior",
+          "def-knot-meridian-and-preferred-longitude",
+          "thm-knot-exterior-homology-and-longitude",
+          "def-incompressibility-seifert-fibration-and-jsj-system"
+        ],
+        "dependency_level": 4,
+        "justified_by": [],
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "not-applicable"
+        },
+        "statement": "Assume full AC. Let $K\\subset S^3$ be a smooth oriented knot with chosen compact exterior $E_K$ and boundary torus $T_K=\\partial E_K$. A simple closed curve on a surface is **essential** if it is not null-homotopic there. A surface $S\\subset E_K$ is properly embedded if $S\\cap\\partial E_K=\\partial S$ and its interior lies in the interior of $E_K$. It is **incompressible** if it has no embedded disk with interior disjoint from $S$ and essential boundary in $S$; it is **boundary-incompressible** if it has no embedded disk whose boundary is the union of an arc in $S$ that does not cut off a disk and an arc in $\\partial E_K$. A **boundary slope** of $K$ is the unoriented isotopy class of an essential simple closed curve on $T_K$ that occurs as the boundary of a properly embedded, orientable, incompressible, boundary-incompressible surface. Using the positive meridian $\\mu$ and preferred longitude $\\lambda$ as a homology basis, a primitive class $a[\\lambda]+b[\\mu]$ has slope $b/a\\in\\mathbb Q\\cup\\{\\infty\\}$, with $a=0$ interpreted as $\\infty$. A boundary slope is **strict** if it has a realizing orientable, incompressible, boundary-incompressible surface which is not a fiber of any locally trivial fibration $E_K\\to S^1$; a fiber is the inverse image of a point under that bundle projection.",
+        "sources": {
+          "references": [
+            {
+              "title": "Allen Hatcher, Boundary Slopes of Incompressible Surfaces",
+              "url": "https://www.math.unl.edu/~mbrittenham2/classwk/990s08/public/hatcher.bdyslopes.pdf"
+            },
+            {
+              "title": "John A. Baldwin and Steven Sivek, Torus knots, the A-polynomial, and SL(2,C), §4.1",
+              "url": "https://arxiv.org/pdf/2405.19197v2"
+            }
+          ]
+        },
+        "proof_strategy": "not-applicable",
+        "axiom_use": "Uses full AC only through the existence and uniqueness of the preferred-longitude class in the exterior homology supplier."
+      },
+      {
+        "id": "lem-presentation-complex-computes-twisted-first-homology-and-peripheral-cycles",
+        "kind": "lemma",
+        "title": "Presentation chains compute twisted first homology and peripheral cycles",
+        "deps": [
+          "thm-fundamental-group-of-finite-wedge-of-circles",
+          "thm-seifert-van-kampen",
+          "thm-universal-cover-existence",
+          "thm-covering-space-lifting-criterion",
+          "def-right-group-ring-action-on-the-chains-of-a-universal-cover",
+          "thm-deck-group-of-a-universal-cover-is-the-fundamental-group",
+          "prop-the-first-hurewicz-map-in-degree-one-is-abelianization",
+          "thm-cellular-homology-computes-singular-homology",
+          "thm-free-modules-are-projective-with-choice-boundary",
+          "lem-partial-projective-resolutions-determine-tensor-homology-in-degree-one",
+          "def-singular-and-cellular-chain-complexes-with-local-coefficients",
+          "thm-cellular-chains-compute-homology-with-local-coefficients",
+          "prop-local-coefficient-homology-and-cohomology-are-functorial-for-a-map-with-a-coefficient-morphism",
+          "lem-nonparabolic-adjoint-torus-homology-has-explicit-peripheral-basis",
+          "def-axiom-of-choice",
+          "lem-the-complement-of-an-oriented-link-is-a-connected-smooth-three-manifold",
+          "lem-maximal-abelian-cover-link-exterior-retraction"
+        ],
+        "justified_by": [],
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-generated"
+        },
+        "statement": "Assume full AC. Let $(Y,y)$ be a path-connected, locally path-connected, semilocally simply connected based space, and fix an isomorphism\n$$\\langle x_1,\\ldots,x_n\\mid r_1,\\ldots,r_m\\rangle\\ \\cong\\ \\Gamma=\\pi_1(Y,y)$$\nfrom a finite presentation. Let $P$ be its presentation $2$-complex, with its one vertex $p$. Choose based loops in $Y$ representing the specified generators. They extend, after choosing fillings of the finitely many relators, to a based map $f:P\\to Y$ inducing the specified isomorphism. No CW structure on $Y$ is required. For every left $\\mathbb Z[\\Gamma]$-module $A$, interpreted as the base fibre of a local system with $g a=T_{\\bar g}a$ in the first-loop-first convention, this map induces an isomorphism\n$$H_1(P;f^*\\mathcal A)\\ \\xrightarrow{\\ \\cong\\ }\\ H_1(Y;\\mathcal A).$$\nThis assertion does not require $Y$ or its universal cover to be aspherical and does not assert that $P$ is a spine or a homotopy-equivalent model of $Y$.\n\nThere is the following explicit finite-chain form. Give universal-cover chains the right action $c\\cdot g=T_{g^{-1}}c$, and choose the lifted presentation vertex $e_0$ and generator edges $e_j$ starting there. For a word $w$ in the generators and their inverses, let each positive letter $x_j$ after prefix $q$ contribute $e_j\\cdot q^{-1}$, and each negative letter $x_j^{-1}$ after prefix $q$ contribute $-e_j\\cdot(qx_j^{-1})^{-1}$. Denote the sum by $c_w$. Then\n$$\\partial c_w=e_0\\cdot w^{-1}-e_0.$$\nIf $u\\in A$ is fixed by $w$, the tensor $c_w\\otimes u$ is a cycle. Under the displayed isomorphism its class is the class of the actual based loop in $Y$ represented by $w$, with initial coefficient $u$; it is independent of the word representative and the relator fillings of $f$.\n\nIn particular let $j:(T^2,*)\\to(Y,y)$ be a based torus map with ordered based loops $(\\lambda,\\mu)$, choose words $w_\\lambda,w_\\mu$ for their images, and let $u$ be fixed by both. The two finite cycles $c_{w_\\lambda}\\otimes u,c_{w_\\mu}\\otimes u$ compute the images of the actual torus classes in precisely this order. If $A$ is a finite-dimensional vector space over a field $F$, the presentation complex gives finite matrices $B:C_2\\to C_1$, $C:C_1\\to C_0$ and these two cycle columns $U$, with $CB=CU=0$. The actual kernel of the two peripheral classes mapping into $H_1(Y;\\mathcal A)$ is exactly\n$$\\ker\\{F^2\\xrightarrow{U}\\ker C/\\operatorname{im}B\\}.$$\nThus a one-dimensional image of those two actual peripheral classes is equivalent to $\\operatorname{rank}_F(B\\mid U)=\\operatorname{rank}_FB+1$. All matrix entries are finite sums of matrices for generator words and their inverses. For the left coefficient action $\\operatorname{Ad}\\rho$ of an $SL_2$ representation they are polynomial in the representation entries and in the chosen vector $u$. For a torus restriction with $\\operatorname{tr}(\\rho(\\mu))^2\\ne4$, one may take $u=\\rho(\\mu)-\\tfrac12\\operatorname{tr}(\\rho(\\mu))I$ in characteristic different from $2$; the two torus classes are then a basis. This applies, in particular, to an actual compact smooth knot exterior and its based peripheral torus map. No existence of a generic representation family or generic exterior rank is inferred.",
+        "sources": {
+          "references": [
+            {
+              "title": "Davis and Kirk, Lecture Notes in Algebraic Topology",
+              "url": "https://www.maths.gla.ac.uk/~mpowell/Davis_Kirk_Lecture%20notes%20in%20algebraic%20topology.pdf",
+              "locator": "Chapter5, local coefficient cellular chains and maps; the degree-one partial-resolution and peripheral-word comparison are proved below."
+            }
+          ]
+        },
+        "proof_strategy": "direct",
+        "dependency_level": 4,
+        "axiom_use": "Full AC permits simultaneous lifts of the singular simplices of the target and projectivity of the resulting possibly infinitely generated free group-ring modules. The presentation, relator fillings and word calculations themselves are finite."
+      },
+      {
+        "id": "def-sl-two-abelian-surgery",
+        "kind": "definition",
+        "title": "SL2(C)-abelian surgery",
+        "deps": [
+          "thm-knot-wirtinger-presentation-correctness",
+          "def-knot-exterior",
+          "def-knot-meridian-and-preferred-longitude",
+          "thm-knot-exterior-homology-and-longitude",
+          "def-oriented-slope-and-knot-dehn-filling"
+        ],
+        "dependency_level": 5,
+        "justified_by": [],
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "not-applicable"
+        },
+        "statement": "Assume full AC. Let $K\\subset S^3$ be a smooth oriented knot, let $p,q\\in\\mathbb Z$ be coprime and not both zero, and let $E_K(p/q)$ be the Dehn filling whose attached solid-torus meridian is identified with $p[\\mu]+q[\\lambda]$. A closed 3-manifold $Y$ is **$SL_2(\\mathbb C)$-abelian** if every homomorphism $\\pi_1(Y)\\to SL_2(\\mathbb C)$ has abelian image. The slope $p/q$ is an **$SL_2(\\mathbb C)$-abelian surgery slope** for $K$ if $E_K(p/q)$ is $SL_2(\\mathbb C)$-abelian. The knot admits infinitely many such surgeries if infinitely many distinct rational slopes have this property.",
+        "sources": {
+          "references": [
+            {
+              "title": "John A. Baldwin and Steven Sivek, Torus knots, the A-polynomial, and SL(2,C), §§1 and 2.2",
+              "url": "https://arxiv.org/pdf/2405.19197v2"
+            },
+            {
+              "title": "Steven Sivek and Raphael Zentner, SU(2)-cyclic surgeries and the pillowcase, §1",
+              "url": "https://arxiv.org/pdf/2103.12651v2"
+            }
+          ]
+        },
+        "proof_strategy": "not-applicable",
+        "axiom_use": "The meridian-longitude basis uses the full-AC exterior-homology supplier; the representation and quotient definitions are choice-free."
+      },
+      {
+        "id": "def-sl-two-character-variety-and-peripheral-eigenvalues",
+        "kind": "definition",
+        "title": "SL2 character variety and peripheral eigenvalues",
+        "deps": [
+          "thm-knot-wirtinger-presentation-correctness",
+          "def-knot-exterior",
+          "def-knot-meridian-and-preferred-longitude",
+          "thm-knot-exterior-homology-and-longitude",
+          "thm-invariant-ring-finite-generation-and-affine-categorical-quotient",
+          "lem-two-commuting-complex-2x2-matrices-are-simultaneously-triangularizable"
+        ],
+        "dependency_level": 5,
+        "justified_by": [
+          "thm-invariant-ring-finite-generation-and-affine-categorical-quotient"
+        ],
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "not-applicable"
+        },
+        "statement": "Assume full AC. Let $G=\\pi_1(E_K)$ be the group of a smooth oriented knot exterior, with positive meridian $\\mu$ and preferred longitude $\\lambda$. For a finite presentation $G=\\langle g_1,\\ldots,g_n\\mid r_1,\\ldots,r_m\\rangle$, the **$SL_2(\\mathbb C)$ representation variety** is the algebraic set of tuples $(A_1,\\ldots,A_n)\\in SL_2(\\mathbb C)^n$ for which every relator matrix $r_j(A_1,\\ldots,A_n)$ equals the identity. The group $SL_2(\\mathbb C)$ acts on this set by simultaneous conjugation. Its affine categorical quotient, whose coordinate ring is the invariant ring of regular functions, is the **$SL_2(\\mathbb C)$ character variety** $X(E_K)$. For a representation $\\rho$, its character is the function $\\gamma\\mapsto\\operatorname{tr}(\\rho(\\gamma))$. A representation is **reducible** if its matrices preserve a common one-dimensional subspace of $\\mathbb C^2$; otherwise it is irreducible. The peripheral torus group is $\\pi_1(T_K)\\cong\\mathbb Z^2$, generated by the meridian and preferred longitude; its image in $G$ is generated by their commuting classes and need not be isomorphic to $\\mathbb Z^2$. Their image under any representation is a commuting pair of matrices, so it has a common invariant line and is simultaneously triangularizable over $\\mathbb C$. Choosing a common invariant line gives meridian and longitude eigenvalues $(M,L)\\in(\\mathbb C^*)^2$; the unordered boundary character identifies $(M,L)$ with $(M^{-1},L^{-1})$. Simultaneous diagonalizability is stronger than simultaneous triangularizability.",
+        "sources": {
+          "references": [
+            {
+              "title": "D. Cooper, M. Culler, H. Gillet, D. D. Long, and P. B. Shalen, Plane Curves Associated to Character Varieties of 3-Manifolds, §2",
+              "url": "https://homepages.math.uic.edu/~culler/papers/PlaneCurves/curves.pdf"
+            },
+            {
+              "title": "Stephan Tillmann, Varieties Associated to 3-Manifolds, §§4.2–4.8",
+              "url": "https://www.maths.usyd.edu.au/u/tillmann/papers/course.pdf"
+            }
+          ]
+        },
+        "proof_strategy": "not-applicable",
+        "axiom_use": "The marked preferred longitude is supplied under the full-AC branch of the exterior homology theorem; the matrix definitions and conjugation action use no choice principle."
+      },
+      {
+        "id": "lem-nonseparating-longitudinal-surface-in-fibered-exterior-is-fiber",
+        "kind": "lemma",
+        "title": "A nonseparating longitudinal surface in a fibered exterior is a fiber",
+        "deps": [
+          "def-knot-exterior",
+          "def-boundary-slope-of-an-incompressible-surface",
+          "def-incompressibility-seifert-fibration-and-jsj-system",
+          "thm-knot-exterior-homology-and-longitude",
+          "thm-nielsen-injective-surface-map-homotopic-to-covering",
+          "thm-waldhausen-homotopic-incompressible-surfaces-are-isotopic"
+        ],
+        "dependency_level": 5,
+        "justified_by": [],
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "not-supplied"
+        },
+        "statement": "Let $K\\subset S^3$ be a fibered knot with exterior $E_K$ and fiber surface $F$. If $S\\subset E_K$ is a connected, orientable, nonseparating, incompressible properly embedded surface whose boundary is a nonempty union of longitudes, then $S$ is isotopic to $F$. After their boundary curves are identified by an isotopy in the boundary torus and this alignment is extended across a collar, the concluding isotopy may be taken relative to the aligned boundary.",
+        "sources": {
+          "references": [
+            {
+              "title": "John A. Baldwin and Steven Sivek, Torus knots, the A-polynomial, and SL(2,C), Proposition 4.7",
+              "url": "https://arxiv.org/pdf/2405.19197v2"
+            },
+            {
+              "title": "F. Waldhausen, On irreducible 3-manifolds which are sufficiently large, Annals of Mathematics 87 (1968), Corollary 5.5",
+              "url": "https://doi.org/10.2307/1970594"
+            }
+          ]
+        }
+      },
+      {
+        "id": "op-two-boundary-slopes-characterize-torus-knots",
+        "kind": "open-problem",
+        "title": "Do exactly two boundary slopes characterize torus knots?",
+        "deps": [
+          "def-boundary-slope-of-an-incompressible-surface",
+          "def-coprime-torus-knot",
+          "def-knot-exterior",
+          "def-knot-meridian-and-preferred-longitude",
+          "thm-knot-exterior-homology-and-longitude"
+        ],
+        "dependency_level": 5,
+        "justified_by": [],
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "not-applicable"
+        },
+        "statement": "If a nontrivial knot $K\\subset S^3$ has exactly two distinct boundary slopes, must $K$ be a torus knot? The two slopes of a nontrivial torus knot $T_{p,q}$ are $0$ and $pq$ in the meridian-longitude convention where $a[\\lambda]+b[\\mu]$ has slope $b/a$.",
+        "sources": {
+          "references": [
+            {
+              "title": "John A. Baldwin and Steven Sivek, Torus knots, the A-polynomial, and SL(2,C), discussion following Question 1.6",
+              "url": "https://arxiv.org/pdf/2405.19197v2"
+            }
+          ]
+        },
+        "axiom_use": "No axiom branch is asserted; the question is about knots in the classical 3-sphere."
+      },
+      {
+        "id": "lem-sl2-representation-variety-is-affine",
+        "kind": "lemma",
+        "title": "The SL2 representation variety is affine",
+        "deps": [
+          "def-sl-two-character-variety-and-peripheral-eigenvalues",
+          "thm-knot-wirtinger-presentation-correctness"
+        ],
+        "dependency_level": 6,
+        "justified_by": [],
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-generated"
+        },
+        "statement": "Assume full AC and let $G=\\pi_1(E_K)=\\langle g_1,\\ldots,g_n\\mid r_1,\\ldots,r_m\\rangle$ be a finite presentation of a knot-exterior group. The set of homomorphisms $G\\to SL_2(\\mathbb C)$ is the affine algebraic subset of $SL_2(\\mathbb C)^n$ cut out by the matrix-entry equations $r_j(A_1,\\ldots,A_n)=I_2$ for $1\\le j\\le m$. After each inverse letter is replaced by the adjugate of its determinant-one matrix, these equations have integer coefficients in the matrix-entry coordinates.",
+        "sources": {
+          "references": [
+            {
+              "title": "Léo Bénard, François Florens, and Adrien Rodau, A slope invariant and the A-polynomial of knots, §2.1",
+              "url": "https://arxiv.org/pdf/2103.14151"
+            },
+            {
+              "title": "Stephan Tillmann, Varieties associated to 3-manifolds, §4.2",
+              "url": "https://www.maths.usyd.edu.au/u/tillmann/papers/course.pdf"
+            }
+          ]
+        },
+        "proof_strategy": "direct",
+        "axiom_use": "The finite polynomial presentation and adjugate inverse formula are choice-free; the finite Wirtinger presentation is supplied under the stated AC branch."
+      },
+      {
+        "id": "lem-figure-eight-two-meridian-presentation-and-preferred-longitude-word",
+        "kind": "lemma",
+        "title": "A two-meridian figure-eight presentation and its preferred longitude word",
+        "deps": [
+          "def-axiom-of-choice",
+          "lem-explicit-unknot-and-figure-eight-oriented-wirtinger-codes",
+          "lem-link-peripheral-longitude-word-from-diagram"
+        ],
+        "justified_by": [],
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-generated"
+        },
+        "statement": "Assume full AC and use the standard oriented four-crossing figure-eight code of the explicit oriented Wirtinger-code lemma, with its positive based under-arc meridians $x_1,x_2,x_3,x_4$ and compatible diagram access paths. Put $u=x_1$, $v=x_2$, and $w=uv^{-1}u^{-1}v$. Then $$\\pi_1(E_{4_1})=\\langle u,v\\mid vw=wu\\rangle,$$ with $u$ a positive meridian. In this presentation $$X_3=uvu^{-1},\\qquad X_4=v^{-1}uvu^{-1}v=w^{-1}v$$ are the old $x_3,x_4$. The preferred longitude based compatibly with $u$ is represented by $$\\lambda=X_4u^{-1}vX_3^{-1}.$$ In particular its trace in any representation is the trace of this explicit word. The formula does not identify a zero-homology centralizing word as a longitude without the diagram-parallel calculation.",
+        "sources": {
+          "references": [
+            {
+              "title": "Petersen, A-polynomials of a family of two-bridge knots",
+              "url": "https://nyjm.albany.edu/j/2015/21-39v.pdf",
+              "locator": "Section3, Proposition3.1 and the longitude paragraph, printedpp851–852/PDFpp5–6. The exact transition from the repository's four-crossing code and its own preferred longitude is proved below."
+            }
+          ]
+        },
+        "proof_strategy": "direct",
+        "dependency_level": 6,
+        "axiom_use": "Full AC is retained from the knot-exterior branch; the Tietze eliminations and crossing-word calculation are finite."
+      },
+      {
+        "id": "def-adjoint-twisted-homology-and-culler-shalen-data",
+        "kind": "definition",
+        "title": "Adjoint-twisted homology and Culler-Shalen data",
+        "deps": [
+          "def-sl-two-character-variety-and-peripheral-eigenvalues",
+          "def-knot-exterior",
+          "def-knot-meridian-and-preferred-longitude",
+          "thm-knot-exterior-homology-and-longitude",
+          "def-knot-twisted-chain-complex-and-reidemeister-torsion",
+          "lem-twisted-fox-jacobian-is-cellular-boundary",
+          "def-normalization-affine-variety",
+          "thm-normalization-reduced-curve-exists-finite",
+          "def-singular-and-cellular-chain-complexes-with-local-coefficients",
+          "thm-cellular-chains-compute-homology-with-local-coefficients"
+        ],
+        "dependency_level": 7,
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "not-applicable"
+        },
+        "statement": "Assume full AC. Let $K\\subset S^3$ be a smooth oriented knot, $E_K$ its exterior, and $\\rho:\\pi_1(E_K)\\to SL_2(\\mathbb C)$ a representation. The **adjoint local system** $\\operatorname{Ad}\\rho$ has fibre $\\mathfrak{sl}_2(\\mathbb C)$ and left group-module action $\\gamma\\cdot v=\\rho(\\gamma)v\\rho(\\gamma)^{-1}$. In the first-loop-first intrinsic convention, this means forward path transport $T_\\gamma(v)=\\rho(\\gamma)^{-1}v\\rho(\\gamma)$; equivalently the corresponding right action is $v\\cdot\\gamma=\\rho(\\gamma)^{-1}v\\rho(\\gamma)$. Its twisted homology $H_*(E_K;\\operatorname{Ad}\\rho)$ is the intrinsic local-system homology with these transports, equivalently the homology of the cellular local-coefficient complex for a supplied CW structure; the same convention defines boundary-torus twisted homology and the inclusion map $i_*:H_1(\\partial E_K;\\operatorname{Ad}\\rho)\\to H_1(E_K;\\operatorname{Ad}\\rho)$. An **admissible adjoint representation** is one for which there is a nonzero vector $v_\\rho\\in\\mathfrak{sl}_2(\\mathbb C)$ fixed by the peripheral adjoint action such that $\\{[v_\\rho\\otimes\\lambda],[v_\\rho\\otimes\\mu]\\}$ is a basis of $H_1(\\partial E_K;\\operatorname{Ad}\\rho)$ and $\\ker i_*$ is one-dimensional. For an irreducible affine character curve $X$, its function field $\\mathbb C(X)$ is the fraction field of its coordinate domain. A **tautological representation** over $\\mathbb C(X)$ is a homomorphism $\\rho_X:\\pi_1(E_K)\\to SL_2(\\mathbb C(X))$ whose character is the generic character of $X$. A **smooth projective completion** consists of a smooth complete curve $\\overline X$ with a dense open subset $U$ identified with the normalization $X^\\nu$ of $X$, with its finite birational normalization map $\\nu:U\\to X$ recorded. When $X$ is smooth, $\\nu$ identifies $U$ with $X$, recovering the usual completion. An **ideal point** is a point $x\\in\\overline X\\setminus U$; points of $U$ over singular affine points of $X$ are affine branches and are retained inside $U$. Such an ideal point defines the discrete valuation $v_x(f)=\\operatorname{ord}_x(f)$ on $\\mathbb C(X)$. The valuation ring is $\\mathcal O_x=\\{f:v_x(f)\\ge0\\}$, and a **uniformizer** is an element $\\pi\\in\\mathcal O_x$ with $v_x(\\pi)=1$. Its residue field is $k_x=\\mathcal O_x/(\\pi)$. An $\\mathcal O_x$-lattice in $\\mathbb C(X)^2$ is a free rank-two $\\mathcal O_x$-submodule spanning $\\mathbb C(X)^2$; two lattices are homothetic if one is a nonzero scalar multiple of the other. The **Bruhat–Tits tree** has homothety classes of these lattices as vertices, with two vertices adjacent if representatives satisfy $\\pi\\Lambda\\subsetneq\\Lambda'\\subsetneq\\Lambda$ and $\\Lambda/\\Lambda'$ is one-dimensional over $k_x$. Whenever the tautological representation exists, it acts on this tree. The ideal point, valuation, action, and any essential surface produced from the action are its Culler–Shalen data; that surface is called the associated Culler–Shalen surface.",
+        "justified_by": [],
+        "sources": {
+          "references": [
+            {
+              "title": "Léo Bénard, François Florens, and Adrien Rodau, A slope invariant and the A-polynomial of knots, §§3.1 and 3.5",
+              "url": "https://arxiv.org/pdf/2103.14151"
+            },
+            {
+              "title": "Marc Culler and Peter B. Shalen, Varieties of group representations and splittings of 3-manifolds, §3",
+              "url": "https://marc-culler.info/static/home/papers/CharacterVarieties.pdf"
+            }
+          ]
+        },
+        "proof_strategy": "not-applicable",
+        "axiom_use": "Finite CW chains and the conjugation representation are choice-free once the specified full-AC knot-exterior data are fixed."
+      },
+      {
+        "id": "lem-knot-boundary-eigenvalue-locus-defined-over-q",
+        "kind": "lemma",
+        "title": "The peripheral eigenvalue locus is defined over Q",
+        "deps": [
+          "lem-sl2-representation-variety-is-affine",
+          "def-sl-two-character-variety-and-peripheral-eigenvalues",
+          "thm-knot-wirtinger-presentation-correctness",
+          "def-knot-meridian-and-preferred-longitude",
+          "lem-automorphism-stable-laurent-ideals-descend-to-rational-coefficients"
+        ],
+        "dependency_level": 7,
+        "justified_by": [],
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "statement": "Assume full AC. Let $K\\subset S^3$ be a smooth oriented knot with a finite Wirtinger presentation by words in generators and their inverses, and let $\\mu,\\lambda$ be its marked meridian and preferred-longitude words. Let $\\mathcal E_K\\subset(\\mathbb C^*)^2$ consist of the pairs $(M,L)$ for which some representation $\\rho:\\pi_1(E_K)\\to SL_2(\\mathbb C)$ has a common eigenline for $\\rho(\\mu)$ and $\\rho(\\lambda)$ with eigenvalues $M$ and $L$. Then the Zariski closure of $\\mathcal E_K$ is defined over $\\mathbb Q$: its radical vanishing ideal in $\\mathbb C[M^{\\pm1},L^{\\pm1}]$ is obtained by extending scalars from a radical ideal in $\\mathbb Q[M^{\\pm1},L^{\\pm1}]$.",
+        "sources": {
+          "references": [
+            {
+              "title": "D. Cooper, M. Culler, H. Gillet, D. D. Long, and P. B. Shalen, Plane curves associated to character varieties of 3-manifolds, §§2–3",
+              "url": "https://homepages.math.uic.edu/~culler/papers/PlaneCurves/curves.pdf"
+            },
+            {
+              "title": "Stephan Tillmann, Varieties associated to 3-manifolds, §§4.2–4.8",
+              "url": "https://www.maths.usyd.edu.au/u/tillmann/papers/course.pdf"
+            }
+          ]
+        },
+        "proof_strategy": "direct"
+      },
+      {
+        "id": "lem-sl2-trace-functions-are-regular-and-invariant",
+        "kind": "lemma",
+        "title": "Trace functions are regular and conjugation invariant",
+        "deps": [
+          "def-sl-two-character-variety-and-peripheral-eigenvalues",
+          "lem-sl2-representation-variety-is-affine"
+        ],
+        "dependency_level": 7,
+        "justified_by": [],
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-generated"
+        },
+        "statement": "Assume full AC. For every word $w$ in the generators of a finitely presented group $G$, the function $\\rho\\mapsto\\operatorname{tr}(\\rho(w))$ is a regular function on $\\operatorname{Hom}(G,SL_2(\\mathbb C))$ and is invariant under simultaneous conjugation.",
+        "sources": {
+          "references": [
+            {
+              "title": "Léo Bénard, François Florens, and Adrien Rodau, A slope invariant and the A-polynomial of knots, §2.1",
+              "url": "https://arxiv.org/pdf/2103.14151"
+            },
+            {
+              "title": "Stephan Tillmann, Varieties associated to 3-manifolds, §§4.2–4.4",
+              "url": "https://www.maths.usyd.edu.au/u/tillmann/papers/course.pdf"
+            }
+          ]
+        },
+        "proof_strategy": "direct",
+        "axiom_use": "The adjugate and trace identities used in the proof are choice-free."
+      },
+      {
+        "id": "def-knot-a-polynomial",
+        "kind": "definition",
+        "title": "The ordinary knot A-polynomial",
+        "deps": [
+          "def-sl-two-character-variety-and-peripheral-eigenvalues",
+          "def-knot-exterior",
+          "def-knot-meridian-and-preferred-longitude",
+          "thm-knot-exterior-homology-and-longitude",
+          "lem-knot-boundary-eigenvalue-locus-defined-over-q",
+          "lem-laurent-algebraic-curve-has-principal-equation"
+        ],
+        "dependency_level": 8,
+        "justified_by": [
+          "lem-knot-boundary-eigenvalue-locus-defined-over-q",
+          "lem-laurent-algebraic-curve-has-principal-equation"
+        ],
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "not-applicable"
+        },
+        "statement": "Assume full AC and let $K\\subset S^3$ be a smooth oriented knot with exterior $E_K$, positive meridian $\\mu$, and preferred longitude $\\lambda$. Define $\\mathcal E_K\\subset(\\mathbb C^*)^2$ to consist of all pairs $(M,L)$ for which some representation $\\rho:\\pi_1(E_K)\\to SL_2(\\mathbb C)$ has a common invariant line on which $\\rho(\\mu)$ acts by $M$ and $\\rho(\\lambda)$ acts by $L$. The Zariski closure is the smallest Zariski-closed algebraic subset containing $\\mathcal E_K$; let $V_K$ be the union of its one-dimensional irreducible components, where an irreducible component is a maximal irreducible closed subset. Zero-dimensional image components are omitted. The **ordinary A-polynomial** $A_K(M,L)$ is the Laurent polynomial generating the vanishing ideal of $V_K$, chosen square-free (no repeated irreducible factors) and with primitive integer coefficients (their greatest common divisor is one). It is determined up to multiplication by $\\pm M^aL^b$ for $a,b\\in\\mathbb Z$. Its reduced curve includes the abelian component $L=1$; equivalently, its representative in $\\mathbb Z[M,L]$ is divisible by $L-1$.",
+        "sources": {
+          "references": [
+            {
+              "title": "John A. Baldwin and Steven Sivek, Torus knots, the A-polynomial, and SL(2,C), §2.3",
+              "url": "https://arxiv.org/pdf/2405.19197v2"
+            },
+            {
+              "title": "Cooper, Culler, Gillet, Long, and Shalen, Plane curves associated to character varieties of 3-manifolds, §§2–3",
+              "url": "https://homepages.math.uic.edu/~culler/papers/PlaneCurves/curves.pdf"
+            }
+          ]
+        },
+        "proof_strategy": "not-applicable",
+        "axiom_use": "Uses full AC through the finite Wirtinger presentation, the preferred-longitude homology supplier, and the affine dimension/localization results in the Laurent curve lemma."
+      },
+      {
+        "id": "lem-sl2-character-trace-coordinate-algebra",
+        "kind": "lemma",
+        "title": "Trace-coordinate algebra for the SL2 character quotient",
+        "deps": [
+          "def-sl-two-character-variety-and-peripheral-eigenvalues",
+          "lem-sl2-representation-variety-is-affine",
+          "lem-sl2-trace-functions-are-regular-and-invariant",
+          "thm-invariant-ring-finite-generation-and-affine-categorical-quotient",
+          "lem-sl2-matrix-invariants-by-epsilon-contractions-and-traces"
+        ],
+        "dependency_level": 8,
+        "justified_by": [],
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "statement": "Assume full AC and let $G$ be a finitely presented group. Every regular function on $\\operatorname{Hom}(G,SL_2(\\mathbb C))$ invariant under simultaneous conjugation is a polynomial in finitely many word-trace functions $t_w(\\rho)=\\operatorname{tr}(\\rho(w))$. Equivalently, the coordinate algebra of the affine character quotient is generated by trace functions of words in $G$.",
+        "sources": {
+          "references": [
+            {
+              "title": "C. Procesi, The invariant theory of n x n matrices, Advances in Mathematics 19 (1976), Theorem 1.3",
+              "url": "https://doi.org/10.1016/0001-8708(76)90027-X"
+            },
+            {
+              "title": "Stephan Tillmann, Varieties associated to 3-manifolds, §§4.2–4.8",
+              "url": "https://www.maths.usyd.edu.au/u/tillmann/papers/course.pdf"
+            }
+          ]
+        },
+        "proof_strategy": "direct"
+      },
+      {
+        "id": "def-enhanced-a-polynomial",
+        "kind": "definition",
+        "title": "The enhanced A-polynomial",
+        "deps": [
+          "def-knot-a-polynomial"
+        ],
+        "dependency_level": 9,
+        "justified_by": [
+          "def-knot-a-polynomial"
+        ],
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "not-applicable"
+        },
+        "statement": "Assume full AC and let $K\\subset S^3$ be a smooth oriented knot. The **enhanced A-polynomial** $\\widetilde A_K(M,L)$ is the primitive square-free Laurent polynomial defining the union of one-dimensional peripheral-eigenvalue image components arising from irreducible characters of $\\pi_1(E_K)$. It is defined up to multiplication by $\\pm M^aL^b$. The ordinary A-polynomial is the least common multiple $A_K=\\operatorname{lcm}(\\widetilde A_K,L-1)$, up to a Laurent unit, where the least common multiple uses each distinct irreducible Laurent factor only once; the factor $L-1$ is the contribution of the abelian character component, and an irreducible component may also contribute that same factor.",
+        "sources": {
+          "references": [
+            {
+              "title": "John A. Baldwin and Steven Sivek, Torus knots, the A-polynomial, and SL(2,C), §2.3",
+              "url": "https://arxiv.org/pdf/2405.19197v2"
+            },
+            {
+              "title": "Yi Ni and Xingru Zhang, Characterizing slopes for torus knots, §2",
+              "url": "https://arxiv.org/pdf/1712.04012"
+            }
+          ]
+        },
+        "proof_strategy": "not-applicable",
+        "axiom_use": "Inherits the full-AC branch of the ordinary A-polynomial definition; removing the reducible component is choice-free."
+      },
+      {
+        "id": "lem-sl-two-character-trace-coordinate-model",
+        "kind": "lemma",
+        "title": "Finite trace-coordinate model on the stated loci",
+        "deps": [
+          "def-sl-two-character-variety-and-peripheral-eigenvalues",
+          "lem-sl2-character-trace-coordinate-algebra",
+          "thm-knot-wirtinger-presentation-correctness",
+          "lem-equal-irreducible-sl2-traces-determine-conjugacy",
+          "thm-invariant-ring-finite-generation-and-affine-categorical-quotient"
+        ],
+        "dependency_level": 9,
+        "justified_by": [],
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "statement": "Assume full AC and let $G=\\pi_1(E_K)$ have a finite presentation. There is a finite list of words $w_1,\\ldots,w_N\\in G$ whose trace functions generate the coordinate ring of $X(E_K)$, so the map $[\\rho]\\mapsto(\\operatorname{tr}\\rho(w_1),\\ldots,\\operatorname{tr}\\rho(w_N))$ is a closed embedding into $\\mathbb C^N$, with defining ideal the kernel of the induced map $\\mathbb C[z_1,\\ldots,z_N]\\to\\mathbb C[\\operatorname{Hom}(G,SL_2)]^{SL_2}$. On the irreducible-character locus, equal trace coordinates determine conjugate representations; on the reducible locus, the quotient records the semisimplified diagonal character, not the possibly non-diagonalizable representative.",
+        "sources": {
+          "references": [
+            {
+              "title": "D. Cooper, M. Culler, H. Gillet, D. D. Long, and P. B. Shalen, Plane curves associated to character varieties of 3-manifolds, §2",
+              "url": "https://homepages.math.uic.edu/~culler/papers/PlaneCurves/curves.pdf"
+            },
+            {
+              "title": "Stephan Tillmann, Varieties associated to 3-manifolds, §§4.2–4.8",
+              "url": "https://www.maths.usyd.edu.au/u/tillmann/papers/course.pdf"
+            }
+          ]
+        },
+        "proof_strategy": "direct"
+      },
+      {
+        "id": "op-ordinary-a-polynomial-detects-torus-knots",
+        "kind": "open-problem",
+        "title": "Does the ordinary A-polynomial detect torus knots?",
+        "deps": [
+          "def-knot-a-polynomial",
+          "def-coprime-torus-knot",
+          "def-knot-exterior",
+          "def-knot-meridian-and-preferred-longitude",
+          "thm-knot-exterior-homology-and-longitude"
+        ],
+        "dependency_level": 9,
+        "justified_by": [],
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "not-applicable"
+        },
+        "statement": "For a nontrivial torus knot $T_{p,q}\\subset S^3$, does equality $A_K(M,L)=A_{T_{p,q}}(M,L)$ up to multiplication by a Laurent unit force a knot $K\\subset S^3$ to be a torus knot? Equivalently, does the ordinary A-polynomial distinguish torus knots from all non-torus knots?",
+        "sources": {
+          "references": [
+            {
+              "title": "John A. Baldwin and Steven Sivek, Torus knots, the A-polynomial, and SL(2,C), Question 1.5",
+              "url": "https://arxiv.org/pdf/2405.19197v2"
+            }
+          ]
+        },
+        "axiom_use": "No axiom branch is asserted; the question is about knots in the classical 3-sphere."
+      },
+      {
+        "id": "def-character-variety-logarithmic-slope-invariant",
+        "kind": "definition",
+        "title": "Character-variety logarithmic slope",
+        "deps": [
+          "def-sl-two-character-variety-and-peripheral-eigenvalues",
+          "def-knot-a-polynomial",
+          "def-enhanced-a-polynomial",
+          "def-adjoint-twisted-homology-and-culler-shalen-data",
+          "def-knot-twisted-chain-complex-and-reidemeister-torsion",
+          "thm-knot-exterior-homology-and-longitude"
+        ],
+        "dependency_level": 10,
+        "justified_by": [
+          "def-adjoint-twisted-homology-and-culler-shalen-data"
+        ],
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "not-applicable"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Léo Bénard, François Florens, and Adrien Rodau, A slope invariant and the A-polynomial of knots, §3.1",
+              "url": "https://arxiv.org/pdf/2103.14151"
+            },
+            {
+              "title": "Stephan Tillmann, Varieties associated to 3-manifolds, §§4.5–4.8",
+              "url": "https://www.maths.usyd.edu.au/u/tillmann/papers/course.pdf"
+            }
+          ]
+        },
+        "statement": "Assume full AC. Let $K\\subset S^3$ be a smooth oriented knot, let $\\rho:\\pi_1(E_K)\\to SL_2(\\mathbb C)$ have admissible adjoint local system, and let $v_\\rho$ be a nonzero peripheral-adjoint-invariant vector for which $[v_\\rho\\otimes\\lambda],[v_\\rho\\otimes\\mu]$ form the specified ordered basis of $H_1(\\partial E_K;\\operatorname{Ad}\\rho)$. If a generator of the one-dimensional kernel of inclusion is $a[v_\\rho\\otimes\\lambda]+b[v_\\rho\\otimes\\mu]$, the **Bénard–Florens–Rodau slope** is $s_K(\\rho)=-b/a\\in\\mathbb C\\cup\\{\\infty\\}$, with $a=0$ interpreted as $\\infty$. Rescaling $v_\\rho$ or the kernel generator does not change this projective ratio. A rational function on an irreducible character component means an element of its function field, the fraction field of its coordinate domain. A projective-valued rational function means a point of the projective line over that field; it may be identically $\\infty$. The slope's rational extension has this projective meaning. Unless its generic value is $\\infty$, it is an ordinary rational function, whose individual infinite values are poles. Its rational extension is not a value assigned to every singular or inadmissible character.",
+        "proof_strategy": "not-applicable",
+        "axiom_use": "The representation, local-system, and peripheral conventions inherit the full-AC branch of their named knot-exterior suppliers."
+      },
+      {
+        "id": "lem-figure-eight-character-and-longitude-traces",
+        "kind": "lemma",
+        "title": "Figure-eight character curve and longitude trace",
+        "deps": [
+          "def-sl-two-character-variety-and-peripheral-eigenvalues",
+          "lem-sl-two-character-trace-coordinate-model",
+          "thm-knot-wirtinger-presentation-correctness",
+          "lem-explicit-unknot-and-figure-eight-oriented-wirtinger-codes",
+          "def-knot-meridian-and-preferred-longitude",
+          "lem-figure-eight-two-meridian-presentation-and-preferred-longitude-word",
+          "lem-two-generator-sl2-word-traces-reduce-to-three-coordinates",
+          "lem-sl2-character-trace-coordinate-algebra",
+          "thm-invariant-ring-finite-generation-and-affine-categorical-quotient"
+        ],
+        "dependency_level": 10,
+        "justified_by": [],
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "statement": "Assume full AC and let $K=J(2,-2)$ be the figure-eight knot. Use the two-bridge group presentation $\\pi_1(E_K)=\\langle u,v\\mid v w=w u\\rangle$, where $w=uv^{-1}u^{-1}v$, and take $\\mu=u$. On the one-dimensional irreducible character component, define $x(\\chi)=\\operatorname{tr}(\\rho(u))=\\operatorname{tr}(\\rho(v))$ and $y(\\chi)=\\operatorname{tr}(\\rho(uv))$. Then\n$$2x^2+y^2-x^2y-y-1=0,$$\nand the preferred-longitude trace is $\\operatorname{tr}(\\rho(\\lambda))=x^4-5x^2+2$. The displayed curve equation is irreducible over $\\mathbb C$, and $x$ is nonconstant on it.",
+        "sources": {
+          "references": [
+            {
+              "title": "Léo Bénard, François Florens, and Adrien Rodau, A slope invariant and the A-polynomial of knots, Example 3.20",
+              "url": "https://arxiv.org/pdf/2103.14151"
+            },
+            {
+              "title": "Kathleen L. Petersen, A-polynomials of a family of two-bridge knots, §§3–4",
+              "url": "https://nyjm.albany.edu/j/2015/21-39v.pdf"
+            }
+          ]
+        },
+        "proof_strategy": "direct"
+      },
+      {
+        "id": "lem-knot-a-polynomial-boundary-elimination",
+        "deps": [
+          "def-knot-a-polynomial",
+          "lem-sl-two-character-trace-coordinate-model",
+          "lem-laurent-algebraic-curve-has-principal-equation",
+          "lem-knot-boundary-eigenvalue-locus-defined-over-q",
+          "lem-finite-affine-incidence-projection-and-curve-component-selection",
+          "lem-sl2-representation-variety-is-affine"
+        ],
+        "dependency_level": 10,
+        "kind": "lemma",
+        "title": "Boundary eigenvalue curve elimination for the A-polynomial",
+        "justified_by": [],
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "statement": "Assume full AC and let $K\\subset S^3$ be a smooth oriented knot. The restriction of representations of $\\pi_1(E_K)$ to the peripheral torus gives an eigenvalue locus in $(\\mathbb C^*)^2$ with algebraic Zariski closure. Its one-dimensional reduced image components are exactly the curve components used in $A_K(M,L)$; isolated image points contribute no curve factor. Radical elimination of the representation, trace and eigenline coordinates from the finite presentation incidence equations, followed by retaining precisely the one-dimensional irreducible components, yields the Laurent ideal of that curve union, whose square-free primitive generator is $A_K$ up to $\\pm M^aL^b$.",
+        "sources": {
+          "references": [
+            {
+              "title": "D. Cooper, M. Culler, H. Gillet, D. D. Long, and P. B. Shalen, Plane curves associated to character varieties of 3-manifolds, §§2–3",
+              "url": "https://homepages.math.uic.edu/~culler/papers/PlaneCurves/curves.pdf"
+            },
+            {
+              "title": "Stephan Tillmann, Varieties associated to 3-manifolds, §7",
+              "url": "https://www.maths.usyd.edu.au/u/tillmann/papers/course.pdf"
+            }
+          ]
+        },
+        "proof_strategy": "direct"
+      },
+      {
+        "id": "lem-torus-knot-enhanced-a-polynomial",
+        "kind": "lemma",
+        "title": "Enhanced A-polynomial of a torus knot",
+        "deps": [
+          "def-coprime-torus-knot",
+          "thm-torus-knot-group-presentation",
+          "def-enhanced-a-polynomial",
+          "lem-torus-presentation-irreducible-peripheral-eigenvalue-curves",
+          "lem-explicit-unknot-and-figure-eight-oriented-wirtinger-codes"
+        ],
+        "dependency_level": 10,
+        "justified_by": [],
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "statement": "Assume full AC and let $a>b\\ge2$ be coprime positive integers. With the meridian-longitude and exponent conventions used for the enhanced A-polynomial, the enhanced A-polynomial of $T_{a,b}$ is, up to multiplication by a Laurent unit,\n$$\\widetilde A_{T_{a,b}}(M,L)=\\begin{cases}1+M^{2a}L,&b=2,\\\\-1+M^{2ab}L^2,&b>2.\\end{cases}$$\nIf $K$ is the unknot, then $\\widetilde A_K=1$. The nontrivial torus-knot Newton polygon is therefore a line segment whose slope in the $(a,b)\\mapsto M^bL^a$ convention is $ab$.",
+        "sources": {
+          "references": [
+            {
+              "title": "John A. Baldwin and Steven Sivek, Torus knots, the A-polynomial, and SL(2,C), Example 2.13",
+              "url": "https://arxiv.org/pdf/2405.19197v2"
+            },
+            {
+              "title": "Yi Ni and Xingru Zhang, Characterizing slopes for torus knots, Lemma 2.1",
+              "url": "https://arxiv.org/pdf/1712.04012"
+            }
+          ]
+        },
+        "proof_strategy": "direct"
+      },
+      {
+        "id": "op-a-polynomial-for-knots-in-other-three-manifolds",
+        "kind": "open-problem",
+        "title": "A-polynomial questions for knots in other 3-manifolds",
+        "deps": [
+          "def-axiom-of-choice",
+          "def-knot-a-polynomial",
+          "def-enhanced-a-polynomial",
+          "def-sl-two-abelian-surgery",
+          "def-adjoint-twisted-homology-and-culler-shalen-data",
+          "def-incompressibility-seifert-fibration-and-jsj-system",
+          "def-satellite-pattern-companion-and-winding-number"
+        ],
+        "dependency_level": 10,
+        "justified_by": [],
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "not-applicable"
+        },
+        "statement": "Assume full AC. Let $Y$ be a closed connected oriented smooth $3$-manifold and let $K\\subset Y$ be an oriented knot with irreducible exterior $E=Y\\setminus\\operatorname{Int}\\nu K$. Choose a parametrized tubular neighborhood and an oriented integral basis $(\\mu,\\lambda)$ on its boundary torus $T$, where $\\mu$ bounds a meridian disk in $\\nu K$ and $\\lambda$ is a chosen framing; no preferred null-homologous longitude is assumed. For each primitive pair $(p,q)$, filling along $p\\mu+q\\lambda$ means attaching a solid torus whose meridian has that unoriented class.\n\nDefine $Z^{\\mathrm{irr}}_{E,T}\\subset(\\mathbb C^*)^2$ to be the Zariski closure of the pairs $(M,L)$ arising on a common peripheral invariant line of an irreducible representation $\\pi_1(E)\\to SL_2(\\mathbb C)$, in the chosen basis. Let $C^{\\mathrm{irr}}_{E,T}$ be the union of its one-dimensional irreducible components. Use a square-free Laurent equation over $\\mathbb C$ of this reduced curve as the enhanced polynomial, up to a Laurent unit, with $1$ for the empty curve. This definition selects curve components; it does not assert that higher-dimensional peripheral-image components are impossible or detected by that equation.\n\nDo the following analogues hold for such closed ambient manifolds: (i) the Newton polygon of this enhanced polynomial is contained in an affine line if and only if $E$ admits a Seifert fibration over a disk with at most two exceptional circle fibers; and (ii) infinitely many distinct primitive filling slopes on $T$ give manifolds whose every $SL_2(\\mathbb C)$ representation has abelian image if and only if $E$ admits that Seifert fibration? What additional hypotheses, if any, are required for these equivalences and for the curve-component convention to capture the relevant peripheral representations? An exceptional circle fiber has multiplicity greater than one.",
+        "sources": {
+          "references": [
+            {
+              "title": "John A. Baldwin and Steven Sivek, Torus knots, the A-polynomial, and SL(2,C), Question 1.8",
+              "url": "https://arxiv.org/pdf/2405.19197v2"
+            }
+          ]
+        },
+        "axiom_use": "Full AC is assumed for the generalized peripheral algebraic and smooth manifold conventions; this is a formulation question, not a logical proof supplier."
+      },
+      {
+        "id": "op-a-polynomial-newton-parallelogram-characterizes-torus-knots",
+        "kind": "open-problem",
+        "title": "A-polynomial Newton parallelogram characterization",
+        "deps": [
+          "def-knot-a-polynomial",
+          "def-enhanced-a-polynomial",
+          "def-coprime-torus-knot",
+          "def-knot-exterior",
+          "def-knot-meridian-and-preferred-longitude",
+          "thm-knot-exterior-homology-and-longitude"
+        ],
+        "dependency_level": 10,
+        "justified_by": [],
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "not-applicable"
+        },
+        "statement": "For a Laurent polynomial $f(M,L)=\\sum_{i,j}c_{ij}M^iL^j$, its Newton polygon is the convex hull of the exponent support $\\{(i,j):c_{ij}\\ne0\\}$. For a nontrivial knot $K\\subset S^3$, is $K$ a torus knot if and only if the Newton polygon of its ordinary A-polynomial is a parallelogram with nonzero area?",
+        "sources": {
+          "references": [
+            {
+              "title": "John A. Baldwin and Steven Sivek, Torus knots, the A-polynomial, and SL(2,C), Question 1.6",
+              "url": "https://arxiv.org/pdf/2405.19197v2"
+            }
+          ]
+        },
+        "axiom_use": "No axiom branch is asserted; the question is about knots in the classical 3-sphere."
+      },
+      {
+        "id": "lem-irreducible-sl2-character-components-have-specializing-quadratic-models",
+        "kind": "lemma",
+        "title": "A quadratic generic character model specializes on a dense principal open",
+        "deps": [
+          "def-axiom-of-choice",
+          "thm-choice-implies-dependent-implies-countable-choice",
+          "lem-sl2-matrix-invariants-by-epsilon-contractions-and-traces",
+          "lem-sl-two-character-trace-coordinate-model",
+          "lem-absolutely-irreducible-sl2-representations-have-quadratic-trace-field-models",
+          "lem-equal-irreducible-sl2-traces-determine-conjugacy",
+          "lem-classical-affine-algebraic-set-finite-irreducible-components",
+          "thm-invariant-ring-finite-generation-and-affine-categorical-quotient"
+        ],
+        "justified_by": [],
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-generated"
+        },
+        "statement": "Assume full AC. Let $G$ be finitely presented, let its reduced complex $SL_2$ representation variety have its trace-coordinate affine character quotient, and let $X$ be a nonempty irreducible closed subset of that quotient containing an irreducible character. Write $A=\\mathbb C[X]$ and $K=\\operatorname{Frac}(A)$. There is a field $L/K$ of degree at most two and an absolutely irreducible representation $\\sigma:G\\to SL_2(L)$ whose every word trace is the corresponding function on $X$.\n\nMore precisely, for some $0\\ne f\\in A$ there is a subring $B\\subset L$ which is either $A_f$ or the free rank-two algebra $A_f[\\xi]=A_f[T]/(T^2-aT+1)$, where $a$ is one word trace and $a^2-4$ is a unit. All generator matrices lie in $SL_2(B)$. Every $\\chi\\in D_X(f)$ admits a homomorphism $B\\to\\mathbb C$ extending evaluation at $\\chi$; every resulting representation has character $\\chi$ and is irreducible. This is an actual family of representatives, not merely agreement of formal traces. One can enlarge $f$ to make any specified finite list of nonzero elements of $L$ and their inverses belong to $B$.\n\nIf $[L:K]=2$, its nonidentity automorphism $\\tau$ acts on $\\sigma$ by simultaneous conjugation with an explicit matrix $P\\in GL_2(L)$. Consequently any projective point obtained from $\\sigma$ by finite field operations that commute with field automorphisms and whose value is invariant under simultaneous $GL_2$ conjugation is defined over $K$. This clause presumes that the construction is actually defined and invariant; it supplies no homological rank, tangent-space or essential-surface assertion.",
+        "sources": {
+          "references": [
+            {
+              "title": "Benard, Florens and Rodau, A slope invariant and the A-polynomial of knots",
+              "url": "https://arxiv.org/pdf/2103.14151",
+              "locator": "Section3.3, PDF pp8–10; the generic representation, actual specializations and quadratic descent used below are supplied directly, rather than inferred from pointwise conjugacy."
+            }
+          ]
+        },
+        "proof_strategy": "direct",
+        "dependency_level": 10,
+        "axiom_use": "Full AC is inherited from the affine quotient and finite-component suppliers; it includes their DC premise. All later denominator and matrix operations are finite."
+      },
+      {
+        "id": "lem-adjoint-twisted-slope-is-rational-on-a-character-component",
+        "kind": "lemma",
+        "title": "Rationality of the adjoint-twisted slope",
+        "deps": [
+          "def-character-variety-logarithmic-slope-invariant",
+          "def-adjoint-twisted-homology-and-culler-shalen-data",
+          "def-knot-a-polynomial",
+          "lem-knot-a-polynomial-boundary-elimination",
+          "lem-sl-two-character-trace-coordinate-model",
+          "lem-twisted-fox-jacobian-is-cellular-boundary",
+          "lem-equal-irreducible-sl2-traces-determine-conjugacy",
+          "thm-invariant-ring-finite-generation-and-affine-categorical-quotient",
+          "lem-irreducible-sl2-character-components-have-specializing-quadratic-models",
+          "lem-presentation-complex-computes-twisted-first-homology-and-peripheral-cycles",
+          "lem-nonparabolic-adjoint-torus-homology-has-explicit-peripheral-basis",
+          "lem-finite-homology-kernel-lines-have-rational-rank-charts"
+        ],
+        "dependency_level": 11,
+        "justified_by": [],
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Léo Bénard, François Florens, and Adrien Rodau, A slope invariant and the A-polynomial of knots, Proposition 3.8 and §§3.3–3.5",
+              "url": "https://arxiv.org/pdf/2103.14151"
+            },
+            {
+              "title": "Stephan Tillmann, Varieties associated to 3-manifolds, §§4.5–4.8",
+              "url": "https://www.maths.usyd.edu.au/u/tillmann/papers/course.pdf"
+            }
+          ]
+        },
+        "statement": "Assume full AC. Let $X$ be an irreducible component of the $SL_2(\\mathbb C)$ character variety of a knot exterior that contains irreducible characters and has a nonempty dense Zariski-open locus of scheme-smooth, non-boundary-parabolic admissible characters. On this locus the Bénard–Florens–Rodau slope is invariant under conjugation and extends to a rational map $X\\dashrightarrow\\mathbb P^1(\\mathbb C)$; when $X$ is one-dimensional its generic value lies in $\\mathbb P^1(\\mathbb C(X))$, and unless it is identically $\\infty$ it is an ordinary rational function in $\\mathbb C(X)$.",
+        "proof_strategy": "direct"
+      },
+      {
+        "id": "thm-a-polynomial-boundary-restriction-and-surgery-detector",
+        "kind": "theorem",
+        "title": "Boundary restriction and the surgery detector",
+        "deps": [
+          "thm-knot-wirtinger-presentation-correctness",
+          "def-knot-exterior",
+          "def-knot-meridian-and-preferred-longitude",
+          "thm-knot-exterior-homology-and-longitude",
+          "def-oriented-slope-and-knot-dehn-filling",
+          "def-sl-two-character-variety-and-peripheral-eigenvalues",
+          "lem-sl2-representation-variety-is-affine",
+          "thm-invariant-ring-finite-generation-and-affine-categorical-quotient",
+          "def-knot-a-polynomial",
+          "def-enhanced-a-polynomial",
+          "lem-sl-two-character-trace-coordinate-model",
+          "lem-knot-a-polynomial-boundary-elimination",
+          "def-sl-two-abelian-surgery",
+          "thm-seifert-van-kampen",
+          "thm-group-pushout-as-an-amalgamated-quotient",
+          "prop-retracts-inject-fundamental-groups",
+          "thm-fundamental-group-of-the-circle",
+          "def-axiom-of-choice",
+          "thm-choice-implies-dependent-implies-countable-choice",
+          "thm-collar-neighborhood-theorem",
+          "def-smooth-collar-of-a-manifold-boundary"
+        ],
+        "dependency_level": 11,
+        "justified_by": [],
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-generated"
+        },
+        "statement": "Assume full AC and let $K\\subset S^3$ be a smooth oriented knot with exterior $E_K$, meridian $\\mu$, and preferred longitude $\\lambda$. Restriction to the peripheral torus induces an algebraic map from the character variety of $E_K$ to that of the torus. Every one-dimensional peripheral eigenvalue image component is contained in the zero set of the ordinary A-polynomial, while isolated image points are not treated as curve factors. For a primitive pair $(p,q)\\in\\mathbb Z^2$ (with $q=0$ denoting the meridional slope), a representation $\\rho:\\pi_1(E_K)\\to SL_2(\\mathbb C)$ descends to the filling that kills $p[\\mu]+q[\\lambda]$ exactly when $\\rho(\\mu)^p\\rho(\\lambda)^q=I_2$. If the peripheral matrices are simultaneously diagonalizable with eigenvalues $(M,L)$ on a common eigenline, this matrix condition is equivalent to $M^pL^q=1$; without that diagonalizability, the eigenvalue equation is only necessary and the matrix relation must be checked.",
+        "sources": {
+          "references": [
+            {
+              "title": "D. Cooper, M. Culler, H. Gillet, D. D. Long, and P. B. Shalen, Plane curves associated to character varieties of 3-manifolds, §§2–3",
+              "url": "https://homepages.math.uic.edu/~culler/papers/PlaneCurves/curves.pdf"
+            },
+            {
+              "title": "Léo Bénard, François Florens, and Adrien Rodau, A slope invariant and the A-polynomial of knots, §§2.1–2.3",
+              "url": "https://arxiv.org/pdf/2103.14151"
+            }
+          ]
+        },
+        "proof_strategy": "direct",
+        "axiom_use": "Full AC is inherited through the exterior/character-quotient branch and supplies ACω for the collar theorem via the named implication; the pushout algebra is choice-free."
+      },
+      {
+        "id": "thm-ccgls-newton-edge-slope-is-boundary-slope",
+        "kind": "theorem",
+        "title": "Newton polygon edge slopes are boundary slopes",
+        "deps": [
+          "def-knot-a-polynomial",
+          "def-boundary-slope-of-an-incompressible-surface",
+          "def-incompressibility-seifert-fibration-and-jsj-system",
+          "lem-knot-a-polynomial-boundary-elimination",
+          "lem-knot-exterior-is-irreducible",
+          "lem-nontrivial-knot-exterior-boundary-incompressible",
+          "lem-newton-edges-have-valued-finite-peripheral-representation-models",
+          "thm-nonelliptic-lattice-tree-actions-produce-essential-boundary-surfaces",
+          "def-axiom-of-choice",
+          "lem-knot-normal-circle-bundle-trivialization",
+          "lem-choice-free-relative-transversality-for-a-compact-smooth-embedding"
+        ],
+        "dependency_level": 11,
+        "justified_by": [],
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "statement": "Assume full AC and let $K\\subset S^3$ be a nontrivial smooth knot. Form the Newton polygon of the ordinary A-polynomial using the exponent convention that the lattice point $(a,b)$ represents the monomial $M^bL^a$, so edge slopes are measured in the preferred meridian-longitude convention. Every finite rational slope or infinite slope of an edge of this Newton polygon is a boundary slope of an incompressible, boundary-incompressible, orientable surface in the knot exterior. This statement does not assert that the realizing surface is non-fibered or that the slope is strict.",
+        "sources": {
+          "references": [
+            {
+              "title": "D. Cooper, M. Culler, H. Gillet, D. D. Long, and P. B. Shalen, Plane curves associated to character varieties of 3-manifolds, Theorem 3.4",
+              "url": "https://homepages.math.uic.edu/~culler/papers/PlaneCurves/curves.pdf"
+            },
+            {
+              "title": "Stephan Tillmann, Varieties associated to 3-manifolds, §7",
+              "url": "https://www.maths.usyd.edu.au/u/tillmann/papers/course.pdf"
+            }
+          ]
+        },
+        "proof_strategy": "direct",
+        "axiom_use": "Full AC is the original hypothesis and is used through actual finite normalization, representation-field selection, valuation extension and the equivariant-map essential-surface construction. Ordinary edge slopes use no irreducibility or nonfiber conclusion; the enhanced case uses an actual absolutely irreducible model."
+      },
+      {
+        "id": "thm-adjoint-logarithmic-gauss-slope-and-ideal-point",
+        "kind": "theorem",
+        "title": "Adjoint logarithmic Gauss slope on an affine character component",
+        "deps": [
+          "lem-adjoint-twisted-slope-is-rational-on-a-character-component",
+          "def-character-variety-logarithmic-slope-invariant",
+          "def-knot-a-polynomial",
+          "def-adjoint-twisted-homology-and-culler-shalen-data",
+          "lem-generic-adjoint-peripheral-kernel-is-the-logarithmic-conormal-line",
+          "lem-logarithmic-ideal-point-limits-and-lattice-fixed-peripheral-slopes"
+        ],
+        "dependency_level": 12,
+        "justified_by": [],
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-generated"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Léo Bénard, François Florens, and Adrien Rodau, A slope invariant and the A-polynomial of knots, Theorems 1.3 and 1.5 and §§4–5",
+              "url": "https://arxiv.org/html/2103.14151"
+            },
+            {
+              "title": "Marc Culler and Peter B. Shalen, Varieties of group representations and splittings of 3-manifolds, §3",
+              "url": "https://marc-culler.info/static/home/papers/CharacterVarieties.pdf"
+            }
+          ]
+        },
+        "statement": "Assume full AC. Let $X$ be an irreducible one-dimensional character component whose peripheral eigenvalue image is a curve component $A_X(M,L)=0$ of the ordinary A-polynomial. At a smooth point where $M,L\\ne0$, $\\partial_M A_X\\ne0$, and $\\partial_L A_X\\ne0$, the rational adjoint-twisted slope is\n$$s_K=-\\frac{M}{L}\\frac{\\partial_M A_X}{\\partial_L A_X}.$$\nIf $x$ is an ideal point of the smooth projective completion of this curve and the associated Culler-Shalen construction yields an essential surface of boundary slope $r$ in the fixed meridian-longitude convention, the limiting slope at $x$ is $-r$.",
+        "proof_strategy": "direct",
+        "axiom_use": "Full AC is inherited from the generic representation, local-coefficient duality, normalization and valuation-extension suppliers; no additional choice principle is introduced."
+      },
+      {
+        "id": "thm-enhanced-a-polynomial-newton-edge-is-strict-boundary-slope",
+        "kind": "theorem",
+        "title": "Enhanced A-polynomial Newton edges give strict boundary slopes",
+        "deps": [
+          "def-enhanced-a-polynomial",
+          "thm-ccgls-newton-edge-slope-is-boundary-slope",
+          "def-boundary-slope-of-an-incompressible-surface",
+          "lem-newton-edges-have-valued-finite-peripheral-representation-models",
+          "thm-nonelliptic-lattice-tree-actions-produce-essential-boundary-surfaces",
+          "def-axiom-of-choice",
+          "lem-knot-normal-circle-bundle-trivialization",
+          "lem-choice-free-relative-transversality-for-a-compact-smooth-embedding",
+          "lem-knot-exterior-is-irreducible",
+          "lem-nontrivial-knot-exterior-boundary-incompressible"
+        ],
+        "dependency_level": 12,
+        "justified_by": [],
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "statement": "Assume full AC and let $K\\subset S^3$ be a nontrivial knot. Every finite rational or infinite slope of an edge of the Newton polygon of the enhanced A-polynomial is a strict boundary slope of $K$: it is realized by an incompressible, boundary-incompressible, orientable surface in the exterior which is not a fiber of any exterior fibration over $S^1$.",
+        "sources": {
+          "references": [
+            {
+              "title": "John A. Baldwin and Steven Sivek, Torus knots, the A-polynomial, and SL(2,C), Theorem 4.4 and Remark 4.5",
+              "url": "https://arxiv.org/pdf/2405.19197v2"
+            },
+            {
+              "title": "D. Cooper, M. Culler, H. Gillet, D. D. Long, and P. B. Shalen, Plane curves associated to character varieties of 3-manifolds, §3",
+              "url": "https://homepages.math.uic.edu/~culler/papers/PlaneCurves/curves.pdf"
+            }
+          ]
+        },
+        "proof_strategy": "direct",
+        "axiom_use": "Full AC is the original hypothesis and is used through actual finite normalization, representation-field selection, valuation extension and the equivariant-map essential-surface construction. Ordinary edge slopes use no irreducibility or nonfiber conclusion; the enhanced case uses an actual absolutely irreducible model."
+      },
+      {
+        "id": "thm-benard-florens-rodau-logarithmic-gauss-formula",
+        "kind": "theorem",
+        "title": "Bénard–Florens–Rodau logarithmic Gauss formula and ideal-point slope",
+        "deps": [
+          "thm-adjoint-logarithmic-gauss-slope-and-ideal-point",
+          "lem-adjoint-twisted-slope-is-rational-on-a-character-component",
+          "def-character-variety-logarithmic-slope-invariant",
+          "def-knot-a-polynomial",
+          "def-boundary-slope-of-an-incompressible-surface",
+          "lem-generic-adjoint-peripheral-kernel-is-the-logarithmic-conormal-line",
+          "lem-sl2-representation-variety-is-affine",
+          "lem-classical-affine-algebraic-set-finite-irreducible-components",
+          "thm-affine-domain-dimension-transcendence-degree"
+        ],
+        "dependency_level": 13,
+        "justified_by": [],
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-generated"
+        },
+        "statement": "Assume full AC. Let $K\\subset S^3$ be a smooth oriented knot, and let $X$ be a one-dimensional irreducible component of its $SL_2(\\mathbb C)$ character variety whose peripheral image is a curve in $(\\mathbb C^*)^2$. With Bénard–Florens–Rodau's variable order $A_K(L,M)$ and their slope convention, on the admissible smooth locus where the displayed derivatives are nonzero,\n$$s_K(\\rho)=-\\frac{M}{L}\\frac{\\partial_M A_K}{\\partial_L A_K}.$$\nAt an ideal point of the curve, if the associated Culler-Shalen surface has boundary slope $r$ measured by $a[\\lambda]+b[\\mu]$ with $r=b/a$, the limiting Bénard–Florens–Rodau slope is $-r$.",
+        "sources": {
+          "references": [
+            {
+              "title": "Léo Bénard, Vincent Florens, and Adrien Rodau, A slope invariant and the A-polynomial of knots, Theorems 1.3, 1.5, 4.1 and 5.2",
+              "url": "https://arxiv.org/pdf/2103.14151"
+            },
+            {
+              "title": "Allen Hatcher, Boundary slopes of incompressible surfaces",
+              "url": "https://www.math.unl.edu/~mbrittenham2/classwk/990s08/public/hatcher.bdyslopes.pdf"
+            }
+          ]
+        },
+        "proof_strategy": "direct",
+        "strategy": "Retain local derivations and apply the explicit imported Facts at the precise source, hypothesis and category boundaries recorded in the current item and accepted source-binding report.",
+        "owner_metadata_note": {
+          "scope": "External inputs remain imported results; no locally reconstructed external proof or whole-source reading is inferred.",
+          "root_adoption": "research/inverse-problems-knot-theory-all-109-2026-10-19-supervision-20261020/step1-bounded-closeout/root-source-qualified-66-scope-adoption-registry.json",
+          "review": "research/inverse-problems-knot-theory-all-109-2026-10-19-supervision-20261020/step1-bounded-closeout/instanton_original_review/character-peer-source-binding-report.json"
+        }
+      },
+      {
+        "id": "lem-baldwin-sivek-instanton-surgery-and-newton-polygon-inputs",
+        "kind": "lemma",
+        "title": "Baldwin–Sivek instanton-surgery and Newton-polygon input module",
+        "deps": [
+          "thm-knot-wirtinger-presentation-correctness",
+          "def-knot-exterior",
+          "def-knot-meridian-and-preferred-longitude",
+          "thm-knot-exterior-homology-and-longitude",
+          "def-knot-twisted-chain-complex-and-reidemeister-torsion",
+          "lem-twisted-fox-jacobian-is-cellular-boundary",
+          "def-incompressibility-seifert-fibration-and-jsj-system",
+          "thm-jsj-decomposition-of-knot-exteriors",
+          "def-satellite-pattern-companion-and-winding-number",
+          "def-finite-volume-hyperbolic-knot-exterior",
+          "thm-thurston-hyperbolic-dehn-filling",
+          "def-singular-instanton-knot-and-sutured-closure-data",
+          "lem-instanton-knot-complex-asd-analytic-foundations",
+          "thm-sutured-instanton-khi-rank-detects-unknot",
+          "def-sl-two-character-variety-and-peripheral-eigenvalues",
+          "def-knot-a-polynomial",
+          "def-enhanced-a-polynomial",
+          "def-sl-two-abelian-surgery",
+          "def-adjoint-twisted-homology-and-culler-shalen-data",
+          "def-coprime-torus-knot",
+          "thm-torus-knot-group-presentation",
+          "thm-torus-knot-alexander-and-genus-formulas",
+          "def-axiom-of-choice",
+          "lem-torus-knot-enhanced-a-polynomial",
+          "lem-satellite-sl2-abelian-fillings-transfer-to-pattern-and-companion",
+          "lem-closed-oriented-hyperbolic-holonomy-has-a-faithful-sl2-lift",
+          "thm-thurston-hyperbolization-for-atoroidal-knot-exteriors",
+          "lem-generic-adjoint-peripheral-kernel-is-the-logarithmic-conormal-line",
+          "lem-sl2-representation-variety-is-affine",
+          "lem-classical-affine-algebraic-set-finite-irreducible-components",
+          "thm-affine-domain-dimension-transcendence-degree"
+        ],
+        "dependency_level": 14,
+        "justified_by": [],
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-generated"
+        },
+        "statement": "Assume full AC and let $K\\subset S^3$ be a knot. The input package required by the Baldwin–Sivek thin-knot and infinitely-many-abelian-surgeries arguments consists of the following conclusions with their stated hypotheses: (i) a nontrivial $\\mathrm{SU}(2)$-averse knot has a unique rational accumulation slope and either it or its mirror is an instanton L-space knot; (ii) a nontrivial instanton L-space knot is fibered and its symmetrized Alexander polynomial has coefficients in $\\{-1,0,1\\}$ with nonzero coefficients alternating in sign; (iii) the L-space satellite restrictions and the pattern/companion surgery-transfer statements exclude the satellite cases used in §§3–5; and (iv) the hyperbolic Dehn-filling theorem and the knot-exterior JSJ classification reduce the remaining cases to torus knots. This carrier records the exact imported result interfaces and does not assert that these conclusions have been proved locally.",
+        "sources": {
+          "references": [
+            {
+              "title": "John A. Baldwin and Steven Sivek, Torus knots, the A-polynomial, and SL(2,C), §§2–5",
+              "url": "https://arxiv.org/pdf/2405.19197v2"
+            },
+            {
+              "title": "Steven Sivek and Raphael Zentner, SU(2)-cyclic surgeries and the pillowcase, Theorems 1.1 and 4.1, Proposition 10.3",
+              "url": "https://arxiv.org/pdf/1710.01957v2"
+            }
+          ]
+        },
+        "proof_strategy": "direct",
+        "strategy": "Retain local derivations and apply the explicit imported Facts at the precise source, hypothesis and category boundaries recorded in the current item and accepted source-binding report.",
+        "owner_metadata_note": {
+          "scope": "External inputs remain imported results; no locally reconstructed external proof or whole-source reading is inferred.",
+          "root_adoption": "research/inverse-problems-knot-theory-all-109-2026-10-19-supervision-20261020/step1-bounded-closeout/root-source-qualified-66-scope-adoption-registry.json",
+          "review": "research/inverse-problems-knot-theory-all-109-2026-10-19-supervision-20261020/step1-bounded-closeout/instanton_original_review/character-peer-source-binding-report.json"
+        }
+      },
+      {
+        "id": "thm-baldwin-sivek-infinitely-many-abelian-surgeries-characterize-torus-knots",
+        "kind": "theorem",
+        "title": "Infinitely many SL2(C)-abelian surgeries characterize torus knots",
+        "deps": [
+          "lem-baldwin-sivek-instanton-surgery-and-newton-polygon-inputs",
+          "def-sl-two-abelian-surgery",
+          "def-coprime-torus-knot",
+          "thm-torus-knot-group-presentation",
+          "def-satellite-pattern-companion-and-winding-number",
+          "thm-jsj-decomposition-of-knot-exteriors",
+          "thm-thurston-hyperbolic-dehn-filling",
+          "lem-satellite-sl2-abelian-fillings-transfer-to-pattern-and-companion",
+          "lem-closed-oriented-hyperbolic-holonomy-has-a-faithful-sl2-lift",
+          "lem-satellite-peripheral-representations-transfer-thinness",
+          "thm-knot-exterior-homology-and-longitude",
+          "thm-compactness-is-invariant-under-finite-sheeted-coverings",
+          "lem-complete-curvature-minus-one-manifolds-are-kleinian-quotients",
+          "lem-fibered-satellite-cuts-give-nonzero-winding-and-genus-splitting",
+          "thm-seifert-matrix-presents-knot-alexander-module",
+          "thm-seifert-determinant-is-the-knot-alexander-polynomial",
+          "thm-torus-knot-alexander-and-genus-formulas",
+          "thm-mayer-vietoris-sequence-in-singular-homology",
+          "lem-knot-genus-zero-iff-unknot",
+          "def-axiom-of-choice",
+          "thm-thurston-hyperbolization-for-atoroidal-knot-exteriors"
+        ],
+        "dependency_level": 15,
+        "justified_by": [],
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-generated"
+        },
+        "statement": "Assume full AC. A smooth knot $K\\subset S^3$ admits infinitely many distinct rational $SL_2(\\mathbb C)$-abelian Dehn surgeries if and only if $K$ is a torus knot, with the unknot included as a torus knot with one parameter of absolute value one.",
+        "sources": {
+          "references": [
+            {
+              "title": "John A. Baldwin and Steven Sivek, Torus knots, the A-polynomial, and SL(2,C), Theorems 1.1 and 5.1",
+              "url": "https://arxiv.org/pdf/2405.19197v2"
+            },
+            {
+              "title": "Steven Sivek and Raphael Zentner, SU(2)-cyclic surgeries and the pillowcase, §§1 and 10",
+              "url": "https://arxiv.org/pdf/1710.01957v2"
+            }
+          ]
+        },
+        "proof_strategy": "direct",
+        "strategy": "Retain local derivations and apply the explicit imported Facts at the precise source, hypothesis and category boundaries recorded in the current item and accepted source-binding report.",
+        "owner_metadata_note": {
+          "scope": "External inputs remain imported results; no locally reconstructed external proof or whole-source reading is inferred.",
+          "root_adoption": "research/inverse-problems-knot-theory-all-109-2026-10-19-supervision-20261020/step1-bounded-closeout/root-source-qualified-66-scope-adoption-registry.json",
+          "review": "research/inverse-problems-knot-theory-all-109-2026-10-19-supervision-20261020/step1-bounded-closeout/instanton_original_review/character-peer-source-binding-report.json"
+        }
+      },
+      {
+        "id": "thm-enhanced-a-polynomial-newton-polygon-detects-torus-knots",
+        "kind": "theorem",
+        "title": "The enhanced A-polynomial Newton polygon detects torus knots",
+        "deps": [
+          "lem-baldwin-sivek-instanton-surgery-and-newton-polygon-inputs",
+          "def-knot-a-polynomial",
+          "def-enhanced-a-polynomial",
+          "def-sl-two-character-variety-and-peripheral-eigenvalues",
+          "def-boundary-slope-of-an-incompressible-surface",
+          "thm-jsj-decomposition-of-knot-exteriors",
+          "thm-thurston-hyperbolic-dehn-filling",
+          "def-singular-instanton-knot-and-sutured-closure-data",
+          "thm-sutured-instanton-khi-rank-detects-unknot",
+          "lem-torus-knot-enhanced-a-polynomial",
+          "def-coprime-torus-knot",
+          "lem-fibered-satellite-cuts-give-nonzero-winding-and-genus-splitting",
+          "lem-generic-adjoint-peripheral-kernel-is-the-logarithmic-conormal-line",
+          "lem-knot-exterior-is-irreducible",
+          "lem-knot-genus-zero-iff-unknot",
+          "lem-knot-newton-edge-roots-are-roots-of-unity",
+          "lem-noetherian-space-has-finitely-many-irreducible-components",
+          "lem-nontrivial-knot-exterior-boundary-incompressible",
+          "lem-one-cusped-deformation-parameters-and-holonomy",
+          "lem-satellite-peripheral-representations-transfer-thinness",
+          "lem-sl2-representation-variety-is-affine",
+          "lem-smooth-tori-in-s-three-give-marked-unknotted-or-satellite-models",
+          "lem-torus-knot-unit-slope-is-unknot",
+          "lem-torus-presentation-irreducible-peripheral-eigenvalue-curves",
+          "thm-affine-domain-dimension-transcendence-degree",
+          "thm-alexander-duality-for-compact-locally-contractible-subsets-of-a-sphere",
+          "thm-augmented-finite-volume-hyperbolic-holonomy-coordinates",
+          "thm-choice-implies-dependent-implies-countable-choice",
+          "thm-compact-smooth-manifolds-with-corners-admit-relative-finite-triangulations",
+          "thm-knot-exterior-homology-and-longitude",
+          "thm-mayer-vietoris-sequence-in-singular-homology",
+          "thm-seifert-determinant-is-the-knot-alexander-polynomial",
+          "thm-seifert-fibered-smooth-knot-exteriors-have-torus-knot-models",
+          "thm-seifert-matrix-presents-knot-alexander-module",
+          "thm-thurston-hyperbolization-for-atoroidal-knot-exteriors",
+          "thm-torus-knot-alexander-and-genus-formulas",
+          "thm-universal-coefficient-theorem-for-cohomology-over-a-pid"
+        ],
+        "dependency_level": 15,
+        "justified_by": [],
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-generated"
+        },
+        "statement": "Assume full AC and let $K\\subset S^3$ be a smooth knot. For a nonzero Laurent polynomial $f(M,L)$, its Newton polygon is the convex hull in $\\mathbb R^2$ of exponent pairs $(a,b)$ for which the coefficient of $M^bL^a$ is nonzero. The enhanced A-polynomial is **thin** when this polygon is contained in an affine line; the constant polynomial $1$ has a one-point Newton polygon and is thin. Then the enhanced A-polynomial of $K$ is thin if and only if $K$ is a torus knot, including the unknot.",
+        "sources": {
+          "references": [
+            {
+              "title": "John A. Baldwin and Steven Sivek, Torus knots, the A-polynomial, and SL(2,C), Theorem 1.2 and §4",
+              "url": "https://arxiv.org/pdf/2405.19197v2"
+            },
+            {
+              "title": "Yi Ni and Xingru Zhang, Characterizing slopes for torus knots, §2",
+              "url": "https://arxiv.org/pdf/1712.04012"
+            }
+          ]
+        },
+        "proof_strategy": "direct",
+        "strategy": "Retain local derivations and apply the explicit imported Facts at the precise source, hypothesis and category boundaries recorded in the current item and accepted source-binding report.",
+        "owner_metadata_note": {
+          "scope": "External inputs remain imported results; no locally reconstructed external proof or whole-source reading is inferred.",
+          "root_adoption": "research/inverse-problems-knot-theory-all-109-2026-10-19-supervision-20261020/step1-bounded-closeout/root-source-qualified-66-scope-adoption-registry.json",
+          "review": "research/inverse-problems-knot-theory-all-109-2026-10-19-supervision-20261020/step1-bounded-closeout/instanton_original_review/character-peer-source-binding-report.json"
+        }
+      },
+      {
+        "id": "cor-enhanced-a-polynomial-and-alexander-degree-identify-torus-knots",
+        "kind": "corollary",
+        "title": "Enhanced A-polynomial and Alexander degree identify torus knots",
+        "deps": [
+          "thm-enhanced-a-polynomial-newton-polygon-detects-torus-knots",
+          "lem-torus-knot-enhanced-a-polynomial",
+          "def-enhanced-a-polynomial",
+          "thm-torus-knot-alexander-and-genus-formulas",
+          "def-coprime-torus-knot",
+          "lem-torus-knot-unit-slope-is-unknot",
+          "def-axiom-of-choice",
+          "thm-choice-implies-dependent-implies-countable-choice"
+        ],
+        "dependency_level": 16,
+        "justified_by": [],
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-generated"
+        },
+        "statement": "Assume full AC. Let $a\\ge b\\ge1$ be coprime positive integers, and let $T_{a,b}\\subset S^3$ be the corresponding torus knot. If a knot $K\\subset S^3$ has the same enhanced A-polynomial as $T_{a,b}$ up to a Laurent unit and the same Alexander-polynomial breadth (highest exponent minus lowest exponent of its symmetrized Alexander polynomial), then $K$ has the same underlying unoriented knot type as $T_{a,b}$. When $b\\ge2$, the absolute torus parameters of $K$ agree with $\\{a,b\\}$.",
+        "sources": {
+          "references": [
+            {
+              "title": "John A. Baldwin and Steven Sivek, Torus knots, the A-polynomial, and SL(2,C), Corollary 1.4 and §4",
+              "url": "https://arxiv.org/pdf/2405.19197v2"
+            }
+          ]
+        },
+        "proof_strategy": "direct",
+        "axiom_use": "The algebraic identification inherits the full-AC branch of the torus-knot Alexander/genus supplier; full AC supplies the countable-choice hypothesis of the unit-slope unknot lemma via the named implication.",
+        "strategy": "Retain local derivations and apply the explicit imported Facts at the precise source, hypothesis and category boundaries recorded in the current item and accepted source-binding report.",
+        "owner_metadata_note": {
+          "scope": "External inputs remain imported results; no locally reconstructed external proof or whole-source reading is inferred.",
+          "root_adoption": "research/inverse-problems-knot-theory-all-109-2026-10-19-supervision-20261020/step1-bounded-closeout/root-source-qualified-66-scope-adoption-registry.json",
+          "review": "research/inverse-problems-knot-theory-all-109-2026-10-19-supervision-20261020/step1-bounded-closeout/instanton_original_review/character-peer-source-binding-report.json"
+        }
+      },
+      {
+        "id": "thm-baldwin-sivek-two-boundary-slope-alternative",
+        "kind": "theorem",
+        "title": "The two-boundary-slope alternative",
+        "deps": [
+          "thm-enhanced-a-polynomial-newton-polygon-detects-torus-knots",
+          "lem-nonseparating-longitudinal-surface-in-fibered-exterior-is-fiber",
+          "def-boundary-slope-of-an-incompressible-surface",
+          "thm-enhanced-a-polynomial-newton-edge-is-strict-boundary-slope",
+          "thm-ccgls-newton-edge-slope-is-boundary-slope"
+        ],
+        "dependency_level": 16,
+        "justified_by": [],
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-generated"
+        },
+        "statement": "Assume full AC. If $K\\subset S^3$ is a nontrivial fibered knot that is not a torus knot, then either its exterior contains a connected, separating, incompressible surface whose boundary curves have slope zero, or $K$ has at least three distinct boundary slopes.",
+        "sources": {
+          "references": [
+            {
+              "title": "John A. Baldwin and Steven Sivek, Torus knots, the A-polynomial, and SL(2,C), Theorem 1.7 and §4.1",
+              "url": "https://arxiv.org/pdf/2405.19197v2"
+            },
+            {
+              "title": "D. Cooper, M. Culler, H. Gillet, D. D. Long, and P. B. Shalen, Plane curves associated to character varieties of 3-manifolds, Theorem 3.4",
+              "url": "https://homepages.math.uic.edu/~culler/papers/PlaneCurves/curves.pdf"
+            }
+          ]
+        },
+        "proof_strategy": "direct",
+        "strategy": "Retain local derivations and apply the explicit imported Facts at the precise source, hypothesis and category boundaries recorded in the current item and accepted source-binding report.",
+        "owner_metadata_note": {
+          "scope": "External inputs remain imported results; no locally reconstructed external proof or whole-source reading is inferred.",
+          "root_adoption": "research/inverse-problems-knot-theory-all-109-2026-10-19-supervision-20261020/step1-bounded-closeout/root-source-qualified-66-scope-adoption-registry.json",
+          "review": "research/inverse-problems-knot-theory-all-109-2026-10-19-supervision-20261020/step1-bounded-closeout/instanton_original_review/character-peer-source-binding-report.json"
+        }
+      }
+    ]
+  },
+  {
+    "order": 3191,
+    "id": "character-varieties-and-the-a-polynomial-examples",
+    "kind": "B",
+    "category": "knot-theory",
+    "title": "Character varieties and the A-polynomial — Examples and Counterexamples",
+    "companion": "character-varieties-and-the-a-polynomial",
+    "requires": [
+      "character-varieties-and-the-a-polynomial"
+    ],
+    "items": [
+      {
+        "id": "cex-knot-kt-20-boundary-case",
+        "kind": "counterexample",
+        "title": "The eigenvalue equation does not imply the matrix relation",
+        "deps": [
+          "def-sl-two-character-variety-and-peripheral-eigenvalues",
+          "def-oriented-slope-and-knot-dehn-filling"
+        ],
+        "dependency_level": 6,
+        "justified_by": [],
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-generated"
+        },
+        "statement": "Let $U,V\\in SL_2(\\mathbb C)$ commute and have a common invariant line on which their eigenvalues are $M,L$, respectively. For every primitive pair $(p,q)\\in\\mathbb Z^2$, if $M^pL^q=1$, then $U^pV^q=I_2$.",
+        "sources": {
+          "references": [
+            {
+              "title": "John A. Baldwin and Steven Sivek, Torus knots, the A-polynomial, and SL(2,C), §2.3",
+              "url": "https://arxiv.org/pdf/2405.19197v2"
+            },
+            {
+              "title": "Léo Bénard, François Florens, and Adrien Rodau, A slope invariant and the A-polynomial of knots, §2.2",
+              "url": "https://arxiv.org/pdf/2103.14151"
+            }
+          ]
+        },
+        "proof_strategy": "direct",
+        "axiom_use": "The matrix calculation is choice-free. It refutes only the general matrix implication and does not assert that this pair extends to a representation of a knot group."
+      },
+      {
+        "id": "ex-knot-kt-20-worked-cases",
+        "kind": "example",
+        "title": "Figure-eight A-polynomial calculation",
+        "deps": [
+          "def-sl-two-character-variety-and-peripheral-eigenvalues",
+          "lem-sl-two-character-trace-coordinate-model",
+          "def-knot-a-polynomial",
+          "def-enhanced-a-polynomial",
+          "lem-two-commuting-complex-2x2-matrices-are-simultaneously-triangularizable",
+          "lem-knot-a-polynomial-boundary-elimination",
+          "thm-a-polynomial-boundary-restriction-and-surgery-detector",
+          "lem-finite-variable-polynomial-rings-over-fields-are-ufds",
+          "lem-figure-eight-character-and-longitude-traces",
+          "lem-gauss-lemma-over-a-ufd",
+          "lem-figure-eight-two-meridian-presentation-and-preferred-longitude-word"
+        ],
+        "dependency_level": 12,
+        "justified_by": [],
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-generated"
+        },
+        "statement": "Let $K=J(2,-2)$ be the figure-eight knot with its positive meridian $\\mu$ and preferred longitude $\\lambda$. The enhanced A-polynomial is\n$$\\widetilde A_K(M,L)=M^4L^2+(-M^8+M^6+2M^4+M^2-1)L+M^4,$$\nand the ordinary A-polynomial is $(L-1)\\widetilde A_K(M,L)$, up to a Laurent unit.",
+        "sources": {
+          "references": [
+            {
+              "title": "Kathleen L. Petersen, A-polynomials of a family of two-bridge knots, §§3–4 and §7.2",
+              "url": "https://nyjm.albany.edu/j/2015/21-39v.pdf"
+            },
+            {
+              "title": "Léo Bénard, François Florens, and Adrien Rodau, A slope invariant and the A-polynomial of knots, Example 3.20 and §4.1",
+              "url": "https://arxiv.org/pdf/2103.14151"
+            },
+            {
+              "title": "D. Cooper, M. Culler, H. Gillet, D. D. Long, and P. B. Shalen, Plane curves associated to character varieties of 3-manifolds, §2",
+              "url": "https://homepages.math.uic.edu/~culler/papers/PlaneCurves/curves.pdf"
+            }
+          ]
+        },
+        "proof_strategy": "direct",
+        "axiom_use": "The finite matrix and polynomial calculations are choice-free; the actual character quotient and peripheral data retain their full-AC supplier branch."
+      }
+    ],
+    "examples": [
+      "cex-knot-kt-20-boundary-case",
+      "ex-knot-kt-20-worked-cases"
+    ]
+  }
+]

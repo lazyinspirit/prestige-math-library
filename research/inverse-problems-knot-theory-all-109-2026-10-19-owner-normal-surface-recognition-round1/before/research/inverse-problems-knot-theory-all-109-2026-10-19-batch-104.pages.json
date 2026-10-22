@@ -1,0 +1,969 @@
+[
+  {
+    "order": 3204,
+    "id": "normal-surface-unknot-recognition",
+    "kind": "A",
+    "category": "knot-theory",
+    "title": "Normal-surface unknot recognition",
+    "companion": "normal-surface-unknot-recognition-examples",
+    "requires": [
+      "knot-exteriors-and-peripheral-systems",
+      "planar-diagram-codes-and-knot-table-enumeration"
+    ],
+    "items": [
+      {
+        "id": "def-normal-surface-coordinate-box",
+        "kind": "definition",
+        "title": "Normal-surface coordinates and the Haken cone",
+        "deps": [],
+        "dependency_level": 0,
+        "justified_by": [],
+        "statement": "Let $M$ be a compact piecewise-linear $3$-manifold with a finite simplicial triangulation $T$ consisting of $t$ tetrahedra. A **normal arc** in a triangular face is a properly embedded arc whose endpoints lie in the interiors of two distinct edges and which cuts off the third vertex. A **normal disk** in a tetrahedron is a properly embedded disk whose boundary is a union of normal arcs, one on each face it meets, and whose disk type is one of the following: one of four **triangle types**, each cutting off one tetrahedron vertex, or one of three **quadrilateral types**, each separating one pair of opposite vertices from the other pair. Disks of the same type are parallel copies. A **normal surface** is a properly embedded piecewise-linear surface that meets every tetrahedron in a finite disjoint union of these normal disks and whose arcs match across every interior face. The empty surface is admitted for coordinate addition and has the zero vector.\n\nFor each of the seven disk types in each tetrahedron, the **normal coordinate vector** $v(S)\\in\\mathbb Z_{\\ge0}^{7t}$ records the number of disks of that type in a normal surface $S$. For an interior face shared by tetrahedra $\\Delta$ and $\\Delta'$, and for each of the three normal-arc types $\\tau$ in that face, its **face-matching equation** is the equality between the sum of coordinates of disk types in $\\Delta$ whose boundary contributes an arc of type $\\tau$ and the corresponding sum for $\\Delta'$. A disk type contributes either one such arc or none. A nonnegative integer vector is **admissible** when it satisfies all these equations and, in each tetrahedron, at most one of the three quadrilateral coordinates is nonzero. The **Haken cone** $C(T)\\subseteq\\mathbb R^{7t}$ is the set of nonnegative real vectors satisfying only the face-matching equations; it does not impose quadrilateral restrictions. A nonzero admissible integer vector is **fundamental** if it is not the sum of two nonzero admissible integer vectors. A **primitive vertex vector** is the unique nonnegative integer vector with relatively prime coordinates on a one-dimensional face (extreme ray) of $C(T)$.\n\nA standard schematic records the two disk shapes in a tetrahedron. The vertices are $A,B,C,D$; each red polygon is the intersection of a normal disk with the tetrahedron boundary.\n\n~~~tikz\n\\begin{tikzpicture}[scale=0.9, every node/.style={font=\\small}]\n\\coordinate (A) at (0,0); \\coordinate (B) at (2.7,0); \\coordinate (C) at (1.35,2.2); \\coordinate (D) at (1.45,0.95);\n\\draw (A)--(B)--(C)--cycle; \\draw (A)--(D)--(B); \\draw (C)--(D);\n\\node[below left] at (A) {$A$}; \\node[below right] at (B) {$B$}; \\node[above] at (C) {$C$}; \\node[right] at (D) {$D$};\n\\draw[red,thick] (0.39,0.20)--(0.68,0.30)--(0.65,0.45)--(0.43,0.48)--cycle;\n\\node[red] at (0.30,0.70) {triangle};\n\\begin{scope}[xshift=4.1cm]\n\\coordinate (A) at (0,0); \\coordinate (B) at (2.7,0); \\coordinate (C) at (1.35,2.2); \\coordinate (D) at (1.45,0.95);\n\\draw (A)--(B)--(C)--cycle; \\draw (A)--(D)--(B); \\draw (C)--(D);\n\\node[below left] at (A) {$A$}; \\node[below right] at (B) {$B$}; \\node[above] at (C) {$C$}; \\node[right] at (D) {$D$};\n\\draw[red,thick] (0.72,0.14)--(1.98,0.14)--(2.03,0.29)--(0.68,0.30)--cycle;\n\\node[red] at (1.35,0.62) {quadrilateral};\n\\end{scope}\n\\end{tikzpicture}\n~~~\n\nThe picture is only a schematic of the boundary intersection pattern. The definition is the stated proper embedding and matching condition; no proof below relies on the drawing.",
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "not-applicable"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Joel Hass, Jeffrey C. Lagarias, and Nicholas Pippenger, The Computational Complexity of Knot and Link Problems, Journal of the ACM 46 (1999)",
+              "url": "https://www.math.ucdavis.edu/~hass/Research/Papers/Complexity/hlp.pdf",
+              "locator": "§5, Haken normal coordinates; §6, matching equations and fundamental-solution bounds."
+            },
+            {
+              "title": "Jeff Erickson, Normal Surfaces and Knots, Computational Topology lecture notes (2009)",
+              "url": "https://jeffe.cs.illinois.edu/teaching/comptop/2009/notes/normal-surfaces.pdf",
+              "locator": "§§14.1–14.3, normal disks, matching equations, normal surfaces and fundamental solutions."
+            }
+          ]
+        },
+        "strategy": "not-applicable"
+      },
+      {
+        "id": "def-finite-triangulated-compact-surface",
+        "kind": "definition",
+        "title": "Finite triangulations of compact PL surfaces",
+        "deps": [
+          "def-simplicial-subcomplex-star-closure-and-link",
+          "def-simplicial-euler-characteristic"
+        ],
+        "dependency_level": 0,
+        "justified_by": [],
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "not-applicable"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "C. P. Rourke and B. J. Sanderson, Introduction to Piecewise-Linear Topology",
+              "url": "https://webhomes.maths.ed.ac.uk/~v1ranick/papers/rsplx.pdf",
+              "locator": "§§1.8 and 2.1–2.14, PL manifolds, finite simplicial complexes, links and triangulations."
+            }
+          ]
+        },
+        "strategy": "not-applicable",
+        "statement": "A **finite triangulation of a compact PL surface** is a finite two-dimensional simplicial complex $K$ in which each edge is incident to one or two triangles and the link of each vertex is homeomorphic to a circle or a closed interval. Its realization $|K|$ is the surface; its boundary is the subcomplex formed by edges incident to one triangle and their vertices. If $V,E,F$ are the numbers of vertices, edges and triangles, its simplicial Euler characteristic is $\\chi(K)=V-E+F$."
+      },
+      {
+        "id": "def-pl-embedding-and-subpolyhedron",
+        "kind": "definition",
+        "title": "PL embeddings and subpolyhedra",
+        "deps": [
+          "def-simplicial-subcomplex-star-closure-and-link"
+        ],
+        "dependency_level": 0,
+        "justified_by": [],
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "not-applicable"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "C. P. Rourke and B. J. Sanderson, Introduction to Piecewise-Linear Topology",
+              "url": "https://webhomes.maths.ed.ac.uk/~v1ranick/papers/rsplx.pdf",
+              "locator": "§§1.4, 1.7, PL maps and embeddings; §2.11–2.14, triangulations and common subdivisions, web text lines 177–229 and 482–514."
+            }
+          ]
+        },
+        "strategy": "not-applicable",
+        "statement": "Let $P$ and $Q$ be compact piecewise-linear polyhedra. A **piecewise-linear map** $f:P\\to Q$ is a map that is simplicial after suitable finite subdivisions of triangulations of $P$ and $Q$. A **subpolyhedron** $A$ of $Q$ is a subset represented by the realization of a subcomplex in some finite linear triangulation of $Q$. A map $f:P\\to Q$ is a **piecewise-linear embedding** if it is piecewise-linear, its image $f(P)$ is a subpolyhedron of $Q$, and $f:P\\to f(P)$ is a piecewise-linear homeomorphism. A finite simplicial triangulation of a closed piecewise-linear $n$-manifold is **combinatorial** if the link of every $k$-simplex is a piecewise-linear sphere of dimension $n-k-1$. Thus in a closed combinatorial $3$-manifold every triangular face has link $S^0$ and is incident to exactly two tetrahedra."
+      },
+      {
+        "id": "lem-pl-embedded-polyhedron-admits-compatible-subcomplex-triangulation",
+        "kind": "lemma",
+        "title": "A PL embedded polyhedron becomes a subcomplex after subdivision",
+        "deps": [
+          "def-pl-embedding-and-subpolyhedron",
+          "def-simplicial-subcomplex-star-closure-and-link",
+          "lem-two-finite-linear-subdivisions-have-a-common-simplicial-refinement"
+        ],
+        "dependency_level": 1,
+        "justified_by": [],
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-generated"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "C. P. Rourke and B. J. Sanderson, Introduction to Piecewise-Linear Topology",
+              "url": "https://webhomes.maths.ed.ac.uk/~v1ranick/papers/rsplx.pdf",
+              "locator": "§2.11–2.14, triangulations, common subdivisions and simplicialization of PL maps, web text lines 482–514."
+            }
+          ]
+        },
+        "strategy": "direct",
+        "statement": "Let $Q$ be a compact piecewise-linear polyhedron with a fixed finite linear triangulation $T$. If $f:P\\to Q$ is a piecewise-linear embedding of a compact piecewise-linear polyhedron, then some finite subdivision $T'$ of $T$ contains $f(P)$ as the realization of a subcomplex."
+      },
+      {
+        "id": "lem-knot-exterior-homology-and-longitude-via-mayer-vietoris",
+        "kind": "lemma",
+        "title": "Choice-free homology and longitude computation for a supplied knot tube",
+        "deps": [
+          "def-oriented-link-in-s-three-and-ambient-isotopy",
+          "thm-mayer-vietoris-sequence-in-singular-homology",
+          "cor-homology-of-spheres",
+          "thm-cellular-homology-computes-singular-homology",
+          "def-cellular-homology",
+          "thm-cellular-boundary-is-the-incidence-degree-matrix",
+          "thm-homotopy-equivalences-induce-isomorphisms-on-singular-homology",
+          "thm-short-exact-two-open-singular-chain-mayer-vietoris-sequence"
+        ],
+        "dependency_level": 0,
+        "justified_by": [],
+        "statement": "Let $K:S^1\\to S^3$ be a smooth oriented embedding and suppose a product tubular embedding $\\Phi:S^1\\times D^2_{2\\epsilon}\\to S^3$ is supplied, where $D^2_r=\\{z\\in\\mathbb R^2:|z|\\le r\\}$. Define $N=\\Phi(S^1\\times D^2_\\epsilon)$, $E=S^3\\setminus\\operatorname{int}N$, $T=\\partial E$, and let $i:T\\hookrightarrow E$ be inclusion. Fix $s_0\\in S^1$ and $z_0\\in\\partial D^2_\\epsilon$. Let $\\mu=\\Phi(\\{s_0\\}\\times\\partial D^2_\\epsilon)$ be the fibre meridian and let $\\sigma:S^1\\to T$ be the product section $s\\mapsto\\Phi(s,z_0)$. Then $H_1(E;\\mathbb Z)$ is infinite cyclic generated by $i_*[\\mu]$. The kernel of $i_*:H_1(T;\\mathbb Z)\\to H_1(E;\\mathbb Z)$ has a unique generator $[\\lambda]$ whose image under the product projection $H_1(T;\\mathbb Z)\\to H_1(S^1;\\mathbb Z)$ is $1$, and $([\\mu],[\\lambda])$ is a basis of $H_1(T;\\mathbb Z)$. The proof uses no choice axiom beyond the supplied tube.",
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-generated"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Joel Hass, Jeffrey C. Lagarias, and Nicholas Pippenger, The Computational Complexity of Knot and Link Problems, Journal of the ACM 46 (1999)",
+              "url": "https://www.math.ucdavis.edu/~hass/Research/Papers/Complexity/hlp.pdf",
+              "locator": "§§4–8; complete relevant passages on knot exteriors, normal coordinates, finite bounds, triangulations and unknot searches."
+            },
+            {
+              "title": "Jeff Erickson, Normal Surfaces and Knots, Computational Topology lecture notes (2009)",
+              "url": "https://jeffe.cs.illinois.edu/teaching/comptop/2009/notes/normal-surfaces.pdf",
+              "locator": "§§14.1–14.4, complete six-page notes on normal disks, matching, normal surfaces and knots."
+            }
+          ]
+        },
+        "strategy": "direct"
+      },
+      {
+        "id": "lem-essential-simple-curve-on-torus-is-primitive",
+        "kind": "lemma",
+        "title": "Essential simple curves on a torus are primitive",
+        "deps": [],
+        "dependency_level": 0,
+        "justified_by": [],
+        "statement": "Let $T=S^1\\times S^1$ be the standard oriented product torus. If $C\\subset T$ is an embedded piecewise-linear simple closed curve that is not null-homotopic, then its class $[C]\\in H_1(T;\\mathbb Z)$ is nonzero and primitive, meaning that it is not $k x$ for any $x\\in H_1(T;\\mathbb Z)$ and integer $|k|>1$.",
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-generated"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Joel Hass, Jeffrey C. Lagarias, and Nicholas Pippenger, The Computational Complexity of Knot and Link Problems, Journal of the ACM 46 (1999)",
+              "url": "https://www.math.ucdavis.edu/~hass/Research/Papers/Complexity/hlp.pdf",
+              "locator": "§§4–8; complete relevant passages on knot exteriors, normal coordinates, finite bounds, triangulations and unknot searches."
+            },
+            {
+              "title": "Jeff Erickson, Normal Surfaces and Knots, Computational Topology lecture notes (2009)",
+              "url": "https://jeffe.cs.illinois.edu/teaching/comptop/2009/notes/normal-surfaces.pdf",
+              "locator": "§§14.1–14.4, complete six-page notes on normal disks, matching, normal surfaces and knots."
+            }
+          ]
+        },
+        "strategy": "direct"
+      },
+      {
+        "id": "lem-no-closed-nonorientable-pl-surface-in-s-three",
+        "kind": "lemma",
+        "title": "No closed nonorientable piecewise-linear surface embeds in the three-sphere",
+        "deps": [
+          "def-oriented-link-in-s-three-and-ambient-isotopy",
+          "def-pl-embedding-and-subpolyhedron",
+          "lem-pl-embedded-polyhedron-admits-compatible-subcomplex-triangulation",
+          "cor-homology-of-spheres",
+          "thm-cellular-homology-computes-singular-homology",
+          "def-cellular-homology",
+          "thm-cellular-boundary-is-the-incidence-degree-matrix",
+          "def-r-orientation-of-a-topological-manifold",
+          "def-oriented-cellular-chain-group",
+          "def-induced-boundary-orientation",
+          "lem-the-cellular-boundary-squares-to-zero"
+        ],
+        "dependency_level": 2,
+        "justified_by": [],
+        "statement": "No closed nonorientable piecewise-linear surface embeds in the standard oriented piecewise-linear three-sphere $S^3$.",
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-generated"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Joel Hass, Jeffrey C. Lagarias, and Nicholas Pippenger, The Computational Complexity of Knot and Link Problems, Journal of the ACM 46 (1999)",
+              "url": "https://www.math.ucdavis.edu/~hass/Research/Papers/Complexity/hlp.pdf",
+              "locator": "§§4–8; complete relevant passages on knot exteriors, normal coordinates, finite bounds, triangulations and unknot searches."
+            },
+            {
+              "title": "Jeff Erickson, Normal Surfaces and Knots, Computational Topology lecture notes (2009)",
+              "url": "https://jeffe.cs.illinois.edu/teaching/comptop/2009/notes/normal-surfaces.pdf",
+              "locator": "§§14.1–14.4, complete six-page notes on normal disks, matching, normal surfaces and knots."
+            },
+            {
+              "title": "C. P. Rourke and B. J. Sanderson, Introduction to Piecewise-Linear Topology",
+              "url": "https://webhomes.maths.ed.ac.uk/~v1ranick/papers/rsplx.pdf",
+              "locator": "§1.7, subpolyhedra and PL embeddings; §2.12, compatible subdivisions."
+            }
+          ]
+        },
+        "strategy": "direct"
+      },
+      {
+        "id": "lem-normal-coordinate-matching-equations-and-finite-bounds",
+        "kind": "lemma",
+        "title": "Matching equations and finite bounds for normal coordinates",
+        "deps": [
+          "def-normal-surface-coordinate-box"
+        ],
+        "dependency_level": 1,
+        "justified_by": [],
+        "statement": "Let $T$ be a finite tetrahedral triangulation of a compact piecewise-linear $3$-manifold with $t\\ge1$ tetrahedra. A nonzero nonnegative integer vector in $\\mathbb Z^{7t}$ is the normal-coordinate vector of a normal surface exactly when it satisfies every face-matching equation and at most one quadrilateral type is nonzero in each tetrahedron. Every primitive integer generator of an extreme ray of the Haken cone has each coordinate at most $2^{7t-1}$. Every fundamental normal-surface vector has each coordinate at most $t\\,2^{7t+2}$.",
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-generated"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Joel Hass, Jeffrey C. Lagarias, and Nicholas Pippenger, The Computational Complexity of Knot and Link Problems, Journal of the ACM 46 (1999)",
+              "url": "https://www.math.ucdavis.edu/~hass/Research/Papers/Complexity/hlp.pdf",
+              "locator": "§§4–8; complete relevant passages on normal coordinates, finite bounds, triangulations and unknot searches."
+            },
+            {
+              "title": "Jeff Erickson, Normal Surfaces and Knots, Computational Topology lecture notes (2009)",
+              "url": "https://jeffe.cs.illinois.edu/teaching/comptop/2009/notes/normal-surfaces.pdf",
+              "locator": "§§14.1–14.4, complete six-page notes on normal disks, matching, normal surfaces and knots."
+            }
+          ]
+        },
+        "strategy": "direct"
+      },
+      {
+        "id": "lem-fundamental-normal-surfaces-are-connected",
+        "kind": "lemma",
+        "title": "Fundamental normal surfaces are connected",
+        "deps": [
+          "def-normal-surface-coordinate-box"
+        ],
+        "dependency_level": 1,
+        "justified_by": [],
+        "statement": "Every nonempty fundamental normal surface in a finite tetrahedral triangulation of a compact piecewise-linear $3$-manifold is connected.",
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-generated"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Joel Hass, Jeffrey C. Lagarias, and Nicholas Pippenger, The Computational Complexity of Knot and Link Problems, Journal of the ACM 46 (1999)",
+              "url": "https://www.math.ucdavis.edu/~hass/Research/Papers/Complexity/hlp.pdf",
+              "locator": "§§4–8; complete relevant passages on normal coordinates, finite bounds, triangulations and unknot searches."
+            },
+            {
+              "title": "Jeff Erickson, Normal Surfaces and Knots, Computational Topology lecture notes (2009)",
+              "url": "https://jeffe.cs.illinois.edu/teaching/comptop/2009/notes/normal-surfaces.pdf",
+              "locator": "§§14.1–14.4, complete six-page notes on normal disks, matching, normal surfaces and knots."
+            }
+          ]
+        },
+        "strategy": "direct"
+      },
+      {
+        "id": "lem-connected-normal-surface-chi-one-is-disk",
+        "kind": "lemma",
+        "title": "A connected triangulated surface with Euler characteristic one and boundary is a disk",
+        "deps": [
+          "def-finite-triangulated-compact-surface",
+          "def-simplicial-euler-characteristic"
+        ],
+        "dependency_level": 1,
+        "justified_by": [],
+        "statement": "Let $S=|K|$ be a connected compact surface with nonempty boundary, where $K$ is a finite two-dimensional simplicial complex, each edge lies in one or two triangles, and each vertex link is a circle or interval. If its simplicial Euler characteristic is $\\chi(K)=1$, then $S$ is homeomorphic to a closed disk.",
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-generated"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Joel Hass, Jeffrey C. Lagarias, and Nicholas Pippenger, The Computational Complexity of Knot and Link Problems, Journal of the ACM 46 (1999)",
+              "url": "https://www.math.ucdavis.edu/~hass/Research/Papers/Complexity/hlp.pdf",
+              "locator": "§§4–8; complete relevant passages on knot exteriors, normal coordinates, finite bounds, triangulations and unknot searches."
+            },
+            {
+              "title": "Jeff Erickson, Normal Surfaces and Knots, Computational Topology lecture notes (2009)",
+              "url": "https://jeffe.cs.illinois.edu/teaching/comptop/2009/notes/normal-surfaces.pdf",
+              "locator": "§§14.1–14.4, complete six-page notes on normal disks, matching, normal surfaces and knots."
+            }
+          ]
+        },
+        "strategy": "direct"
+      },
+      {
+        "id": "thm-haken-normal-essential-disk-existence",
+        "kind": "theorem",
+        "title": "Haken normal essential-disk existence theorem",
+        "deps": [
+          "def-normal-surface-coordinate-box"
+        ],
+        "dependency_level": 1,
+        "justified_by": [],
+        "statement": "Let $M$ be a compact triangulated piecewise-linear $3$-manifold with nonempty boundary and with no embedded projective plane. If $M$ contains a properly embedded disk whose boundary is not null-homotopic in $\\partial M$, then $M$ contains such a disk that is a fundamental normal surface.",
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "not-supplied"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Joel Hass, Jeffrey C. Lagarias, and Nicholas Pippenger, The Computational Complexity of Knot and Link Problems, Journal of the ACM 46 (1999)",
+              "url": "https://www.math.ucdavis.edu/~hass/Research/Papers/Complexity/hlp.pdf",
+              "locator": "§5, Theorem 5.4, printed p.12/web lines 502–506; the source states the theorem and directs readers to earlier proofs."
+            },
+            {
+              "title": "Jeff Erickson, Normal Surfaces and Knots, Computational Topology lecture notes (2009)",
+              "url": "https://jeffe.cs.illinois.edu/teaching/comptop/2009/notes/normal-surfaces.pdf",
+              "locator": "§§14.1–14.4, complete six-page note; it cites rather than proves Haken essential-surface completeness."
+            }
+          ]
+        },
+        "strategy": "not-supplied"
+      },
+      {
+        "id": "thm-jaco-tollefson-normal-essential-disk-vertex-existence",
+        "kind": "theorem",
+        "title": "Jaco–Tollefson normal essential-disk vertex theorem",
+        "deps": [
+          "def-normal-surface-coordinate-box"
+        ],
+        "dependency_level": 1,
+        "justified_by": [],
+        "statement": "Let $M$ be a compact triangulated piecewise-linear $3$-manifold with nonempty boundary. If $M$ contains a properly embedded disk whose boundary is not null-homotopic in $\\partial M$, then $M$ contains such a disk whose primitive normal-coordinate vector lies on an extreme ray of the Haken cone.",
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "not-supplied"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Joel Hass, Jeffrey C. Lagarias, and Nicholas Pippenger, The Computational Complexity of Knot and Link Problems, Journal of the ACM 46 (1999)",
+              "url": "https://www.math.ucdavis.edu/~hass/Research/Papers/Complexity/hlp.pdf",
+              "locator": "§5, Theorem 5.4, printed p.12/web lines 502–506; the source states the theorem and directs readers to earlier proofs."
+            },
+            {
+              "title": "Jeff Erickson, Normal Surfaces and Knots, Computational Topology lecture notes (2009)",
+              "url": "https://jeffe.cs.illinois.edu/teaching/comptop/2009/notes/normal-surfaces.pdf",
+              "locator": "§§14.1–14.4, complete six-page note; it cites rather than proves Haken essential-surface completeness."
+            }
+          ]
+        },
+        "strategy": "not-supplied"
+      },
+      {
+        "id": "lem-essential-disk-boundary-is-longitude",
+        "kind": "lemma",
+        "title": "An essential disk in a knot exterior has longitude boundary",
+        "deps": [
+          "lem-knot-exterior-homology-and-longitude-via-mayer-vietoris",
+          "lem-essential-simple-curve-on-torus-is-primitive"
+        ],
+        "dependency_level": 1,
+        "justified_by": [],
+        "statement": "Let $E$ be the compact exterior of a smooth knot with supplied product boundary torus $T=S^1\\times S^1$, fibre meridian $\\mu$, and unique degree-one zero-homology longitude class $[\\lambda]$ from the product data. Let $D\\subset E$ be a properly embedded piecewise-linear disk, meaning an embedded copy of the closed disk with $D\\cap T=\\partial D$. If $\\partial D$ is not null-homotopic in $T$, then $[\\partial D]=[\\lambda]$ or $-[\\lambda]$ in $H_1(T;\\mathbb Z)$, and its mod-two intersection number with $\\mu$ is $1$.",
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-generated"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Joel Hass, Jeffrey C. Lagarias, and Nicholas Pippenger, The Computational Complexity of Knot and Link Problems, Journal of the ACM 46 (1999)",
+              "url": "https://www.math.ucdavis.edu/~hass/Research/Papers/Complexity/hlp.pdf",
+              "locator": "§§4–6, peripheral homology, disk criteria and normal-surface disk tests."
+            },
+            {
+              "title": "Jeff Erickson, Normal Surfaces and Knots, Computational Topology lecture notes (2009)",
+              "url": "https://jeffe.cs.illinois.edu/teaching/comptop/2009/notes/normal-surfaces.pdf",
+              "locator": "§§14.1–14.4, complete six-page note on normal surfaces and knot disks."
+            }
+          ]
+        },
+        "strategy": "direct"
+      },
+      {
+        "id": "lem-normal-disk-candidate-check-characterization",
+        "kind": "lemma",
+        "title": "Finite normal-coordinate tests characterize essential disk candidates",
+        "deps": [
+          "def-normal-surface-coordinate-box",
+          "lem-normal-coordinate-matching-equations-and-finite-bounds",
+          "lem-fundamental-normal-surfaces-are-connected",
+          "lem-connected-normal-surface-chi-one-is-disk",
+          "lem-essential-disk-boundary-is-longitude"
+        ],
+        "dependency_level": 2,
+        "justified_by": [],
+        "statement": "Let $E$ be a triangulated compact exterior of a smooth knot with peripheral torus $T$ and a marked simple fibre meridian $\\mu$ in the boundary triangulation. For an admissible normal-coordinate vector $v$ and its associated normal surface $S$, the following tests hold exactly when $S$ is a connected properly embedded disk with non-null-homotopic boundary in $T$: (i) $S$ is connected; (ii) $\\partial S\\ne\\varnothing$; (iii) $\\chi(S)=1$; and (iv) $\\partial S$ has odd mod-two intersection with $\\mu$. If $v$ is fundamental, connectedness follows from fundamentalness.",
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-generated"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Joel Hass, Jeffrey C. Lagarias, and Nicholas Pippenger, The Computational Complexity of Knot and Link Problems, Journal of the ACM 46 (1999)",
+              "url": "https://www.math.ucdavis.edu/~hass/Research/Papers/Complexity/hlp.pdf",
+              "locator": "§§4–6, peripheral homology, disk criteria and normal-surface disk tests."
+            },
+            {
+              "title": "Jeff Erickson, Normal Surfaces and Knots, Computational Topology lecture notes (2009)",
+              "url": "https://jeffe.cs.illinois.edu/teaching/comptop/2009/notes/normal-surfaces.pdf",
+              "locator": "§§14.1–14.4, complete six-page note on normal surfaces and knot disks."
+            }
+          ]
+        },
+        "strategy": "direct"
+      },
+      {
+        "id": "lem-smooth-to-pl-knot-exterior-ambient-isotopy",
+        "kind": "lemma",
+        "title": "Smooth-to-piecewise-linear knot exterior approximation",
+        "deps": [
+          "def-oriented-link-in-s-three-and-ambient-isotopy",
+          "def-knot-exterior",
+          "def-knot-meridian-and-preferred-longitude",
+          "def-countable-choice",
+          "thm-isotopy-extension",
+          "def-regular-oriented-link-diagram",
+          "def-planar-diagram-gauss-and-dowker-codes"
+        ],
+        "dependency_level": 2,
+        "justified_by": [],
+        "statement": "Assume countable choice. Let $K:S^1\\to S^3$ be a smooth oriented knot with a supplied product tubular embedding $\\Phi:S^1\\times D^2_{2\\epsilon}\\to S^3$. There is a polygonal knot $P$ inside this tube and a smooth rounding $K'$ of $P$ such that $K'$ is smoothly ambient isotopic to $K$ by an isotopy supported in the tube. If $K$ is supplied with a finite regular projection diagram $D$, the polygonal approximation and rounding can be chosen to have the same crossing code as $D$. A homeomorphism supported in the larger tube carries $P$ to $K'$, preserves the boundary torus of the radius-$\\epsilon$ tube, and sends each marked fibre meridian to itself up to orientation. Conversely, every polygonal knot $P$ with a finite product regular neighborhood can be rounded in pairwise disjoint vertex balls to a smooth knot $P^\\sharp$; a homeomorphism supported in those balls carries its compact exterior and marked meridian to those of $P^\\sharp$. If a regular projection diagram is supplied, the rounding balls can be chosen away from crossing charts, so the crossing code is unchanged. These clauses compare smooth knot type through smooth knots and polygonal exterior models through homeomorphisms; they do not treat a nonsmooth polygonal curve as a smooth isotopy slice.",
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-generated"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Joel Hass, Jeffrey C. Lagarias, and Nicholas Pippenger, The Computational Complexity of Knot and Link Problems, Journal of the ACM 46 (1999)",
+              "url": "https://www.math.ucdavis.edu/~hass/Research/Papers/Complexity/hlp.pdf",
+              "locator": "§§4–8; complete relevant passages on knot exteriors, normal coordinates, finite bounds, triangulations and unknot searches."
+            },
+            {
+              "title": "Jeff Erickson, Normal Surfaces and Knots, Computational Topology lecture notes (2009)",
+              "url": "https://jeffe.cs.illinois.edu/teaching/comptop/2009/notes/normal-surfaces.pdf",
+              "locator": "§§14.1–14.4, complete six-page notes on normal disks, matching, normal surfaces and knots."
+            }
+          ]
+        },
+        "strategy": "direct"
+      },
+      {
+        "id": "lem-meridian-disk-criterion-for-unknot-exterior",
+        "kind": "lemma",
+        "title": "Meridian-disk criterion for unknot recognition",
+        "deps": [
+          "def-oriented-link-in-s-three-and-ambient-isotopy",
+          "def-knot-exterior",
+          "def-knot-meridian-and-preferred-longitude",
+          "lem-essential-disk-boundary-is-longitude",
+          "def-countable-choice",
+          "lem-smooth-to-pl-knot-exterior-ambient-isotopy"
+        ],
+        "dependency_level": 3,
+        "justified_by": [],
+        "statement": "Assume countable choice. Let $K:S^1\\to S^3$ be a smooth oriented knot with a supplied product tubular neighborhood, and let $E_K$ be its compact exterior with peripheral torus $T_K$, fibre meridian $\\mu$, and the unique degree-one generator $[\\lambda]$ of the kernel of $H_1(T_K;\\mathbb Z)\\to H_1(E_K;\\mathbb Z)$ supplied by the product-tube Mayer–Vietoris calculation. Then $K$ is ambient isotopic in the smooth category to the standard unknot if and only if $E_K$ contains a properly embedded piecewise-linear disk $D$ whose boundary is not null-homotopic in $T_K$. Every such disk has $[\\partial D]=[\\lambda]$ or $-[\\lambda]$ and has odd mod-two intersection with the original marked meridian $\\mu$.",
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "not-supplied"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Joel Hass, Jeffrey C. Lagarias, and Nicholas Pippenger, The Computational Complexity of Knot and Link Problems, Journal of the ACM 46 (1999)",
+              "url": "https://www.math.ucdavis.edu/~hass/Research/Papers/Complexity/hlp.pdf",
+              "locator": "§4, Lemmas 4.1–4.2, printed pp.8–9/web lines 357–383; Lemma 4.1’s disk-to-unknot proof is only one sentence."
+            },
+            {
+              "title": "Jeff Erickson, Normal Surfaces and Knots, Computational Topology lecture notes (2009)",
+              "url": "https://jeffe.cs.illinois.edu/teaching/comptop/2009/notes/normal-surfaces.pdf",
+              "locator": "§14.2, printed pp.3–4; the disk criterion is stated but the reverse implication is not proved."
+            }
+          ]
+        },
+        "strategy": "not-supplied"
+      },
+      {
+        "id": "lem-normal-vertex-disk-certificate-verification",
+        "kind": "lemma",
+        "title": "Polynomial verification of a primitive normal vertex-disk certificate",
+        "deps": [
+          "def-normal-surface-coordinate-box",
+          "lem-normal-coordinate-matching-equations-and-finite-bounds",
+          "lem-fundamental-normal-surfaces-are-connected",
+          "lem-normal-disk-candidate-check-characterization"
+        ],
+        "dependency_level": 3,
+        "justified_by": [],
+        "statement": "Let $T$ be a good triangulation of a knot exterior with $t$ tetrahedra and a marked meridian path in its triangulated boundary torus. A certificate consists of a nonnegative integer vector $v$ with $7t$ binary-encoded coordinates, a set of active matching and zero-coordinate constraints, a nonzero $(7t-1)$-minor witnessing their rank, and the marked boundary data. A deterministic verifier can check the certificate in time polynomial in the certificate bit length. Acceptance verifies that $v$ is a primitive admissible extreme-ray vector of the Haken cone and that its associated normal surface is a properly embedded disk with non-null-homotopic boundary. The verifier uses arithmetic on the compressed coordinates and does not expand the normal surface into its potentially exponentially many normal disks.",
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-generated"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Joel Hass, Jeffrey C. Lagarias, and Nicholas Pippenger, The Computational Complexity of Knot and Link Problems, Journal of the ACM 46 (1999)",
+              "url": "https://www.math.ucdavis.edu/~hass/Research/Papers/Complexity/hlp.pdf",
+              "locator": "§§4–8; complete relevant passages on knot exteriors, normal coordinates, finite bounds, triangulations and unknot searches."
+            },
+            {
+              "title": "Jeff Erickson, Normal Surfaces and Knots, Computational Topology lecture notes (2009)",
+              "url": "https://jeffe.cs.illinois.edu/teaching/comptop/2009/notes/normal-surfaces.pdf",
+              "locator": "§§14.1–14.4, complete six-page notes on normal disks, matching, normal surfaces and knots."
+            }
+          ]
+        },
+        "strategy": "direct"
+      },
+      {
+        "id": "lem-good-linear-size-exterior-triangulation-from-diagram",
+        "kind": "lemma",
+        "title": "Linear-size good exterior triangulation from a planar knot code",
+        "deps": [
+          "def-planar-diagram-gauss-and-dowker-codes",
+          "lem-planar-diagram-code-realizability-and-face-validation",
+          "alg-planar-code-validation-and-diagram-reconstruction",
+          "thm-planar-code-validation-and-diagram-reconstruction-procedure-properties"
+        ],
+        "dependency_level": 5,
+        "justified_by": [],
+        "statement": "For every valid connected one-component oriented planar knot code with $n$ crossings together with a specified polygonal realization $P$ whose regular projection has that code, there is an explicit finite combinatorial construction of a triangulated $S^3$ containing that same $P$ as a subcomplex. An abstract valid code can first be realized by the stated reconstruction procedure and then used as $P$. A **good exterior triangulation** is the triangulation inherited on the complement of the interior of a regular neighborhood made from one fixed ball around each vertex of $P$ and one fixed tube block along each edge, with its boundary torus triangulated and a meridian path marked. The construction gives a good exterior triangulation with at most $C(n+1)$ tetrahedra for one universal constant $C$, and the marked meridian is a path of at most $C(n+1)$ boundary edges. At $n=0$ the construction uses a fixed solid-torus exterior triangulation.\n\nA local crossing is lifted by separating the over- and under-strands in the interval direction; the schematic below records only the projected crossing, with the continuous strand passing over the gapped strand.\n\n~~~tikz\n\\begin{tikzpicture}[scale=1.15]\n\\draw[very thick] (-1,-1)--(1,1);\n\\draw[white,line width=7pt] (-1,1)--(1,-1);\n\\draw[thick] (-1,1)--(-0.18,0.18);\n\\draw[thick] (0.18,-0.18)--(1,-1);\n\\node at (0.62,0.78) {over};\n\\node at (-0.70,0.76) {under};\n\\end{tikzpicture}\n~~~\n\nThe picture records only the planar local incidence. The proof constructs disjoint arcs in a three-dimensional crossing block and does not infer embeddedness from the drawing.",
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-generated"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Joel Hass, Jeffrey C. Lagarias, and Nicholas Pippenger, The Computational Complexity of Knot and Link Problems, Journal of the ACM 46 (1999)",
+              "url": "https://www.math.ucdavis.edu/~hass/Research/Papers/Complexity/hlp.pdf",
+              "locator": "§7, complete construction and linear-size triangulation estimates, printed pp.17–20/web lines 757–879."
+            },
+            {
+              "title": "Jeff Erickson, Normal Surfaces and Knots, Computational Topology lecture notes (2009)",
+              "url": "https://jeffe.cs.illinois.edu/teaching/comptop/2009/notes/normal-surfaces.pdf",
+              "locator": "§14.4, complete knot and exterior-triangulation overview, printed pp.5–6."
+            }
+          ]
+        },
+        "strategy": "direct"
+      },
+      {
+        "id": "thm-smooth-knot-has-compatible-pl-exterior-model",
+        "kind": "theorem",
+        "title": "Smooth knots have compatible piecewise-linear exterior models",
+        "deps": [
+          "def-oriented-link-in-s-three-and-ambient-isotopy",
+          "def-knot-exterior",
+          "def-knot-meridian-and-preferred-longitude",
+          "lem-smooth-to-pl-knot-exterior-ambient-isotopy",
+          "lem-good-linear-size-exterior-triangulation-from-diagram",
+          "def-regular-oriented-link-diagram",
+          "def-planar-diagram-gauss-and-dowker-codes"
+        ],
+        "dependency_level": 6,
+        "justified_by": [],
+        "statement": "Assume countable choice. Let $K$ be a smooth oriented knot with a finite regular projection diagram $D$ having $n$ crossings and a supplied product tube. There is a polygonal knot $P$ inside that tube with the same crossing code as $D$ and a smooth rounding $K^\\sharp$ of $P$ such that $K^\\sharp$ is smoothly ambient isotopic to $K$. The compact exterior of this same $P$ has a good triangulation with at most $C(n+1)$ tetrahedra and a marked path for the original meridian with at most $C(n+1)$ boundary edges, for one universal constant $C$. The peripheral-preserving exterior homeomorphism transfers this model to $K^\\sharp$.",
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-generated"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Joel Hass, Jeffrey C. Lagarias, and Nicholas Pippenger, The Computational Complexity of Knot and Link Problems, Journal of the ACM 46 (1999)",
+              "url": "https://www.math.ucdavis.edu/~hass/Research/Papers/Complexity/hlp.pdf",
+              "locator": "§7, complete diagram-to-exterior triangulation construction and linear-size estimates, printed pp.17–20/web lines 757–879."
+            },
+            {
+              "title": "Jeff Erickson, Normal Surfaces and Knots, Computational Topology lecture notes (2009)",
+              "url": "https://jeffe.cs.illinois.edu/teaching/comptop/2009/notes/normal-surfaces.pdf",
+              "locator": "§14.4, complete knot and exterior-triangulation overview, printed pp.5–6."
+            }
+          ]
+        },
+        "strategy": "direct"
+      },
+      {
+        "id": "alg-haken-jaco-tollefson-unknot-recognition",
+        "kind": "algorithm",
+        "title": "Haken–Jaco–Tollefson normal-surface unknot search",
+        "deps": [
+          "def-planar-diagram-gauss-and-dowker-codes",
+          "alg-planar-code-validation-and-diagram-reconstruction",
+          "thm-planar-code-validation-and-diagram-reconstruction-procedure-properties",
+          "def-normal-surface-coordinate-box",
+          "lem-normal-coordinate-matching-equations-and-finite-bounds",
+          "lem-normal-disk-candidate-check-characterization",
+          "lem-fundamental-normal-surfaces-are-connected",
+          "lem-good-linear-size-exterior-triangulation-from-diagram"
+        ],
+        "dependency_level": 6,
+        "justified_by": [],
+        "statement": "**Input:** A finite tagged Gauss code, signed Dowker–Thistlethwaite code, or oriented planar-diagram code in the code conventions of the planar-code definition, and a mode, either **Haken** or **JT**.\n\n**Output:** The first validation error with its witness; **not-a-knot** for a valid code with more than one component; **disk-certificate** with a normal-coordinate vector and its finite witness data; or **no-candidate** after the selected search is exhausted.\n\n**Procedure:**\n\n1. Run the planar-code validation procedure. Return its first invalid result if validation fails. If the validated code represents more than one component, return **not-a-knot**.\n2. Let $n$ be its crossing count. Construct the good triangulated exterior $E$ with $t\\le C(n+1)$ tetrahedra and the marked original meridian path.\n3. In Haken mode, enumerate all vectors $v\\in\\mathbb Z^{7t}$ with $0\\le v_i\\le t2^{7t+2}$ in lexicographic order. Retain a vector only if it satisfies all matching equations and quadrilateral restrictions and is fundamental. Fundamentalness supplies connectedness. Compute nonempty-boundary, Euler-characteristic, and mod-two meridian-intersection data from the compressed coordinates, without expanding the surface. Return **disk-certificate** at the first vector passing these tests; return **no-candidate** after the finite box is exhausted.\n4. In JT mode, let $A$ be the integer matching matrix and put $m=7t$. Enumerate all subsets $Z\\subseteq\\{1,\\ldots,m\\}$ in lexicographic order. For each $Z$, append the equations $v_i=0$ for $i\\in Z$ to $Av=0$. If the combined matrix has rank $m-1$ and its one-dimensional kernel contains a nonzero nonnegative vector, compute the unique relatively prime nonnegative integer generator $v$ of that ray. Require that its positive-coordinate support be exactly the complement of $Z$; this visits each ray once, at its exact zero-coordinate support. Discard vectors that violate the quadrilateral restriction. A primitive generator on an extreme ray is fundamental, so its surface is connected. Compute nonempty-boundary, Euler-characteristic, and mod-two meridian-intersection data from the compressed coordinates, without expanding the surface. Return **disk-certificate** at the first passing vector; return **no-candidate** after all subsets have been processed.\n\nThe candidate tests use the boundary arcs and Euler-characteristic data computed from the compressed normal coordinates. No correctness or complexity assertion is part of this algorithm definition.",
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "not-applicable"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Joel Hass, Jeffrey C. Lagarias, and Nicholas Pippenger, The Computational Complexity of Knot and Link Problems, Journal of the ACM 46 (1999)",
+              "url": "https://www.math.ucdavis.edu/~hass/Research/Papers/Complexity/hlp.pdf",
+              "locator": "§§4–8 and §10, complete passages on normal-surface algorithms, finite bounds, triangulations and certificate analysis."
+            },
+            {
+              "title": "Jeff Erickson, Normal Surfaces and Knots, Computational Topology lecture notes (2009)",
+              "url": "https://jeffe.cs.illinois.edu/teaching/comptop/2009/notes/normal-surfaces.pdf",
+              "locator": "§§14.1–14.4, complete six-page note on normal disks, matching and unknot recognition."
+            }
+          ]
+        },
+        "strategy": "not-applicable"
+      },
+      {
+        "id": "thm-haken-jaco-tollefson-unknot-recognition-procedure-properties",
+        "kind": "theorem",
+        "title": "Finite procedure properties of the Haken–Jaco–Tollefson search",
+        "deps": [
+          "alg-haken-jaco-tollefson-unknot-recognition"
+        ],
+        "dependency_level": 7,
+        "justified_by": [],
+        "statement": "For every finite input code and either selected mode, the Haken–Jaco–Tollefson procedure terminates. It returns the prescribed first validation error for an invalid code, returns **not-a-knot** for a valid multi-component code, and for a valid one-component knot code returns either a finite normal-coordinate disk-candidate certificate or **no-candidate** after exhaustive search.",
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-generated"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Joel Hass, Jeffrey C. Lagarias, and Nicholas Pippenger, The Computational Complexity of Knot and Link Problems, Journal of the ACM 46 (1999)",
+              "url": "https://www.math.ucdavis.edu/~hass/Research/Papers/Complexity/hlp.pdf",
+              "locator": "§§4–8 and §10, complete passages on normal-surface algorithms, finite bounds, triangulations and certificate analysis."
+            },
+            {
+              "title": "Jeff Erickson, Normal Surfaces and Knots, Computational Topology lecture notes (2009)",
+              "url": "https://jeffe.cs.illinois.edu/teaching/comptop/2009/notes/normal-surfaces.pdf",
+              "locator": "§§14.1–14.4, complete six-page note on normal disks, matching and unknot recognition."
+            }
+          ]
+        },
+        "strategy": "direct"
+      },
+      {
+        "id": "lem-haken-search-acceptance-is-an-essential-normal-disk",
+        "kind": "lemma",
+        "title": "Haken-search acceptance supplies an essential normal disk",
+        "deps": [
+          "alg-haken-jaco-tollefson-unknot-recognition",
+          "lem-normal-disk-candidate-check-characterization",
+          "lem-fundamental-normal-surfaces-are-connected"
+        ],
+        "dependency_level": 7,
+        "justified_by": [],
+        "statement": "Whenever the Haken branch of the Haken–Jaco–Tollefson search returns a disk-certificate, the associated normal surface is a properly embedded disk with non-null-homotopic boundary in the triangulated knot exterior.",
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-generated"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Joel Hass, Jeffrey C. Lagarias, and Nicholas Pippenger, The Computational Complexity of Knot and Link Problems, Journal of the ACM 46 (1999)",
+              "url": "https://www.math.ucdavis.edu/~hass/Research/Papers/Complexity/hlp.pdf",
+              "locator": "§§4–8 and §10, complete passages on normal-surface algorithms, finite bounds, triangulations and certificate analysis."
+            },
+            {
+              "title": "Jeff Erickson, Normal Surfaces and Knots, Computational Topology lecture notes (2009)",
+              "url": "https://jeffe.cs.illinois.edu/teaching/comptop/2009/notes/normal-surfaces.pdf",
+              "locator": "§§14.1–14.4, complete six-page note on normal disks, matching and unknot recognition."
+            }
+          ]
+        },
+        "strategy": "direct"
+      },
+      {
+        "id": "lem-jt-search-acceptance-is-an-essential-normal-disk",
+        "kind": "lemma",
+        "title": "Jaco–Tollefson-search acceptance supplies an essential normal disk",
+        "deps": [
+          "alg-haken-jaco-tollefson-unknot-recognition",
+          "lem-normal-disk-candidate-check-characterization",
+          "lem-fundamental-normal-surfaces-are-connected"
+        ],
+        "dependency_level": 7,
+        "justified_by": [],
+        "statement": "Whenever the JT branch of the Haken–Jaco–Tollefson search returns a disk-certificate, its primitive vertex normal surface is a properly embedded disk with non-null-homotopic boundary in the triangulated knot exterior.",
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-generated"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Joel Hass, Jeffrey C. Lagarias, and Nicholas Pippenger, The Computational Complexity of Knot and Link Problems, Journal of the ACM 46 (1999)",
+              "url": "https://www.math.ucdavis.edu/~hass/Research/Papers/Complexity/hlp.pdf",
+              "locator": "§§4–8 and §10, complete passages on normal-surface algorithms, finite bounds, triangulations and certificate analysis."
+            },
+            {
+              "title": "Jeff Erickson, Normal Surfaces and Knots, Computational Topology lecture notes (2009)",
+              "url": "https://jeffe.cs.illinois.edu/teaching/comptop/2009/notes/normal-surfaces.pdf",
+              "locator": "§§14.1–14.4, complete six-page note on normal disks, matching and unknot recognition."
+            }
+          ]
+        },
+        "strategy": "direct"
+      },
+      {
+        "id": "thm-haken-finite-box-search-correctness",
+        "kind": "theorem",
+        "title": "Correctness of the Haken finite-box disk search",
+        "deps": [
+          "alg-haken-jaco-tollefson-unknot-recognition",
+          "lem-normal-coordinate-matching-equations-and-finite-bounds",
+          "lem-fundamental-normal-surfaces-are-connected",
+          "thm-haken-normal-essential-disk-existence",
+          "lem-normal-disk-candidate-check-characterization",
+          "lem-no-closed-nonorientable-pl-surface-in-s-three",
+          "lem-good-linear-size-exterior-triangulation-from-diagram"
+        ],
+        "dependency_level": 7,
+        "justified_by": [],
+        "statement": "For a valid one-component knot code, the Haken finite-box search accepts if and only if the triangulated exterior contains a properly embedded disk with non-null-homotopic boundary. On acceptance it returns a normal-coordinate vector for such a disk; after exhaustive rejection, no such disk exists.",
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-generated"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Joel Hass, Jeffrey C. Lagarias, and Nicholas Pippenger, The Computational Complexity of Knot and Link Problems, Journal of the ACM 46 (1999)",
+              "url": "https://www.math.ucdavis.edu/~hass/Research/Papers/Complexity/hlp.pdf",
+              "locator": "§§5–8, theorem statements, finite normal-coordinate bounds, triangulation and search complexity."
+            },
+            {
+              "title": "Jeff Erickson, Normal Surfaces and Knots, Computational Topology lecture notes (2009)",
+              "url": "https://jeffe.cs.illinois.edu/teaching/comptop/2009/notes/normal-surfaces.pdf",
+              "locator": "§§14.1–14.4, complete six-page note; independent normal-surface search treatment."
+            }
+          ]
+        },
+        "strategy": "direct"
+      },
+      {
+        "id": "thm-jaco-tollefson-vertex-search-correctness",
+        "kind": "theorem",
+        "title": "Correctness and finite bounds of the Jaco–Tollefson vertex search",
+        "deps": [
+          "alg-haken-jaco-tollefson-unknot-recognition",
+          "lem-normal-coordinate-matching-equations-and-finite-bounds",
+          "thm-jaco-tollefson-normal-essential-disk-vertex-existence",
+          "lem-normal-disk-candidate-check-characterization"
+        ],
+        "dependency_level": 7,
+        "justified_by": [],
+        "statement": "For a valid one-component knot code, the JT primitive extreme-ray search accepts if and only if the triangulated exterior contains a properly embedded disk with non-null-homotopic boundary. It examines at most $2^{7t}$ support subsets for a $t$-tetrahedron exterior, each candidate coordinate has $O(t)$ bits, and its sequential Turing space is $O(t^2\\log(t+2))$ bits.",
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-generated"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Joel Hass, Jeffrey C. Lagarias, and Nicholas Pippenger, The Computational Complexity of Knot and Link Problems, Journal of the ACM 46 (1999)",
+              "url": "https://www.math.ucdavis.edu/~hass/Research/Papers/Complexity/hlp.pdf",
+              "locator": "§§5–8, theorem statements, finite normal-coordinate bounds, triangulation and search complexity."
+            },
+            {
+              "title": "Jeff Erickson, Normal Surfaces and Knots, Computational Topology lecture notes (2009)",
+              "url": "https://jeffe.cs.illinois.edu/teaching/comptop/2009/notes/normal-surfaces.pdf",
+              "locator": "§§14.1–14.4, complete six-page note; independent normal-surface search treatment."
+            }
+          ]
+        },
+        "strategy": "direct"
+      },
+      {
+        "id": "thm-normal-surface-unknot-algorithm-terminates-and-is-correct",
+        "kind": "theorem",
+        "title": "Termination, correctness, and bounds of normal-surface unknot recognition",
+        "deps": [
+          "alg-haken-jaco-tollefson-unknot-recognition",
+          "thm-haken-jaco-tollefson-unknot-recognition-procedure-properties",
+          "thm-haken-finite-box-search-correctness",
+          "thm-jaco-tollefson-vertex-search-correctness",
+          "lem-meridian-disk-criterion-for-unknot-exterior",
+          "lem-good-linear-size-exterior-triangulation-from-diagram",
+          "thm-smooth-knot-has-compatible-pl-exterior-model",
+          "lem-normal-coordinate-matching-equations-and-finite-bounds"
+        ],
+        "dependency_level": 8,
+        "justified_by": [],
+        "statement": "Assume countable choice. For every valid one-component knot code with $n$ crossings, both the Haken and JT normal-surface searches terminate and decide whether the smooth knot represented by the code is ambient isotopic to the standard unknot. The Haken search uses $2^{O(n^2)}$ Turing time and $O(n^2\\log(n+2))$ Turing space. The JT primitive-vertex search uses $2^{O(n)}$ Turing time and the same space bound. The zero-crossing case is handled by a fixed finite construction. No polynomial-time claim is made.",
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-generated"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Joel Hass, Jeffrey C. Lagarias, and Nicholas Pippenger, The Computational Complexity of Knot and Link Problems, Journal of the ACM 46 (1999)",
+              "url": "https://www.math.ucdavis.edu/~hass/Research/Papers/Complexity/hlp.pdf",
+              "locator": "§§4–8 and §10, complete disk criterion, normal-surface searches, triangulation bounds and certificate analysis."
+            },
+            {
+              "title": "Jeff Erickson, Normal Surfaces and Knots, Computational Topology lecture notes (2009)",
+              "url": "https://jeffe.cs.illinois.edu/teaching/comptop/2009/notes/normal-surfaces.pdf",
+              "locator": "§§14.1–14.4, complete six-page note on normal surfaces and knot recognition."
+            }
+          ]
+        },
+        "strategy": "direct"
+      },
+      {
+        "id": "thm-unknot-recognition-has-np-certificate",
+        "kind": "theorem",
+        "title": "Unknot recognition has a polynomial-bit normal-surface certificate",
+        "deps": [
+          "alg-haken-jaco-tollefson-unknot-recognition",
+          "lem-normal-vertex-disk-certificate-verification",
+          "thm-jaco-tollefson-normal-essential-disk-vertex-existence",
+          "lem-meridian-disk-criterion-for-unknot-exterior",
+          "lem-good-linear-size-exterior-triangulation-from-diagram",
+          "lem-normal-coordinate-matching-equations-and-finite-bounds",
+          "thm-smooth-knot-has-compatible-pl-exterior-model"
+        ],
+        "dependency_level": 7,
+        "justified_by": [],
+        "statement": "Assume countable choice. For a valid finite $n$-crossing one-component knot code $D$, let $T_D$ be the fixed deterministic good exterior triangulation with $t\\le C(n+1)$ tetrahedra and the marked original meridian path, recomputed from $D$ by the stated finite construction. The smooth knot represented by $D$ is the unknot if and only if it has a certificate consisting of a nonnegative $7t$-coordinate normal vector $v$, active matching and zero-coordinate constraints, and a nonzero $(7t-1)$-minor witnessing their rank, all relative to $T_D$. A deterministic verifier reconstructs $T_D$ and its meridian path from $D$ and checks the certificate in time polynomial in its bit length, without expanding the represented normal surface.",
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-generated"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Joel Hass, Jeffrey C. Lagarias, and Nicholas Pippenger, The Computational Complexity of Knot and Link Problems, Journal of the ACM 46 (1999)",
+              "url": "https://www.math.ucdavis.edu/~hass/Research/Papers/Complexity/hlp.pdf",
+              "locator": "§§4–8 and §10, complete disk criterion, normal-surface searches, triangulation bounds and certificate analysis."
+            },
+            {
+              "title": "Jeff Erickson, Normal Surfaces and Knots, Computational Topology lecture notes (2009)",
+              "url": "https://jeffe.cs.illinois.edu/teaching/comptop/2009/notes/normal-surfaces.pdf",
+              "locator": "§§14.1–14.4, complete six-page note on normal surfaces and knot recognition."
+            }
+          ]
+        },
+        "strategy": "direct"
+      }
+    ]
+  },
+  {
+    "order": 3205,
+    "id": "normal-surface-unknot-recognition-examples",
+    "kind": "B",
+    "category": "knot-theory",
+    "title": "Normal-surface unknot recognition — Examples and Counterexamples",
+    "companion": "normal-surface-unknot-recognition",
+    "requires": [
+      "normal-surface-unknot-recognition"
+    ],
+    "items": [
+      {
+        "id": "ex-knot-kt-49-worked-cases",
+        "kind": "example",
+        "title": "Worked case: a normal disk in the zero-crossing unknot exterior",
+        "deps": [
+          "def-normal-surface-coordinate-box",
+          "lem-good-linear-size-exterior-triangulation-from-diagram"
+        ],
+        "dependency_level": 6,
+        "justified_by": [],
+        "statement": "For the crossingless oriented unknot code, triangulate its solid-torus exterior $D^2\\times S^1$ by triangulating $D^2$ as one triangle with vertices $a_0,a_1,a_2$ and $S^1$ as the three-edge cycle $b_0b_1b_2b_0$. In the prism over $b_0b_1$, write $a_i^0=(a_i,b_0)$ and $a_i^1=(a_i,b_1)$ and use the tetrahedra\n$$T_1=[a_0^0,a_1^0,a_2^0,a_2^1],\\qquad T_2=[a_0^0,a_1^0,a_1^1,a_2^1],\\qquad T_3=[a_0^0,a_0^1,a_1^1,a_2^1].$$\nThe properly embedded normal disk $D^2\\times\\{s_*}$ at the midpoint $s_*$ of $b_0b_1$ meets $T_1$ in the triangle cutting off $a_2^1$, $T_2$ in the quadrilateral separating $\\{a_0^0,a_1^0\\}$ from $\\{a_1^1,a_2^1\\}$, and $T_3$ in the triangle cutting off $a_0^0$; every other normal coordinate is zero. It is connected, has nonempty boundary and Euler characteristic one, and its boundary meets the marked original meridian $\\mu=\\{a_0\\}\\times S^1$ once mod two.\n\n~~~tikz\n\\begin{tikzpicture}[scale=1]\n\\coordinate (A0) at (0,0); \\coordinate (A1) at (2,0); \\coordinate (A2) at (1,1.5);\n\\coordinate (B0) at (0.6,0.7); \\coordinate (B1) at (2.6,0.7); \\coordinate (B2) at (1.6,2.2);\n\\draw (A0)--(A1)--(A2)--cycle; \\draw (B0)--(B1)--(B2)--cycle;\n\\draw (A0)--(B0) (A1)--(B1) (A2)--(B2);\n\\draw[dashed] (A0)--(B1) (A0)--(B2) (A1)--(B2);\n\\coordinate (M0) at (0.3,0.35); \\coordinate (M1) at (2.3,0.35); \\coordinate (M2) at (1.3,1.85);\n\\draw[red,very thick] (M0)--(M1)--(M2)--cycle;\n\\node[below left] at (A0) {$a_0^0$}; \\node[below right] at (A1) {$a_1^0$}; \\node[left] at (A2) {$a_2^0$};\n\\node[left] at (B0) {$a_0^1$}; \\node[right] at (B1) {$a_1^1$}; \\node[above] at (B2) {$a_2^1$};\n\\node[red] at (1.35,0.8) {$D^2\\times\\{s_*\\}$};\n\\end{tikzpicture}\n~~~\n\nThe dashed edges indicate the staircase prism subdivision specified by $T_1,T_2,T_3$; the red section is the geometric disk whose intersections with those tetrahedra give the stated triangle–quadrilateral–triangle vector. The formula for the tetrahedra, not the schematic projection, fixes the exact triangulation.",
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-generated"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Joel Hass, Jeffrey C. Lagarias, and Nicholas Pippenger, The Computational Complexity of Knot and Link Problems, Journal of the ACM 46 (1999)",
+              "url": "https://www.math.ucdavis.edu/~hass/Research/Papers/Complexity/hlp.pdf",
+              "locator": "§§4–7; the unknot exterior, normal-surface disk tests and triangulation convention."
+            },
+            {
+              "title": "Jeff Erickson, Normal Surfaces and Knots, Computational Topology lecture notes (2009)",
+              "url": "https://jeffe.cs.illinois.edu/teaching/comptop/2009/notes/normal-surfaces.pdf",
+              "locator": "§§14.1–14.4, complete six-page note on normal disks and knot exteriors."
+            }
+          ]
+        },
+        "strategy": "direct"
+      },
+      {
+        "id": "cex-knot-kt-49-boundary-case",
+        "kind": "counterexample",
+        "title": "A boundary-parallel disk fails the meridian test",
+        "deps": [
+          "def-normal-surface-coordinate-box",
+          "lem-normal-disk-candidate-check-characterization"
+        ],
+        "dependency_level": 3,
+        "justified_by": [],
+        "statement": "Let $E$ be any finite simplicially triangulated knot exterior with boundary torus $T$ and marked meridian $\\mu$. For a boundary vertex $v$, its normal link is a properly embedded boundary-parallel disk: its boundary is the link of $v$ in $T$, a contractible simple closed curve. The link is connected, has nonempty boundary and Euler characteristic one, but its boundary has even mod-two intersection with $\\mu$, so the normal-surface filter rejects this candidate. Rejecting this one boundary-parallel disk does not determine whether the knot is nontrivial.",
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-generated"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Joel Hass, Jeffrey C. Lagarias, and Nicholas Pippenger, The Computational Complexity of Knot and Link Problems, Journal of the ACM 46 (1999)",
+              "url": "https://www.math.ucdavis.edu/~hass/Research/Papers/Complexity/hlp.pdf",
+              "locator": "§§4–7; the unknot exterior, normal-surface disk tests and triangulation convention."
+            },
+            {
+              "title": "Jeff Erickson, Normal Surfaces and Knots, Computational Topology lecture notes (2009)",
+              "url": "https://jeffe.cs.illinois.edu/teaching/comptop/2009/notes/normal-surfaces.pdf",
+              "locator": "§§14.1–14.4, complete six-page note on normal disks and knot exteriors."
+            }
+          ]
+        },
+        "strategy": "direct"
+      }
+    ]
+  }
+]

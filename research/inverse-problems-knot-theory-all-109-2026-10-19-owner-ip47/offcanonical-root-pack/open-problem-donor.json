@@ -1,0 +1,55 @@
+{
+  "id": "op-ip-finite-sample-generalization-of-neural-inverse-maps",
+  "path": "items/op-ip-finite-sample-generalization-of-neural-inverse-maps.md",
+  "raw_sha256": "929e07d4c8dd624d945c5e4e5423c6df2c6ace310bf1623d12ff065bb7bf696c",
+  "formulation_sha256": "eb124b71decc911c30d504fe8d1fc651839d00070310b85839ec4335d6c6f1c1",
+  "formulation_native_byte_preserved": true,
+  "formulation": "\nFix the continuum EIT data set $\\mathcal Z=\\{(\\kappa_\\gamma+\\eta,\\gamma):\\gamma\\in X_d(R),\\ \\eta\\in K_\\delta\\}$ in $\\mathcal H\\times\\mathcal Y$, where $\\mathcal H=L^2(\\partial\\Omega\\times\\partial\\Omega)$ is the input space and $\\mathcal Y=L^2(\\Omega)$ is the target space. Assume $\\mathcal Z$ is nonempty and compact, and set $X=\\{x\\in\\mathcal H:(x,y)\\in\\mathcal Z\\text{ for some }y\\in\\mathcal Y\\}$. Fix a smooth globally Lipschitz nonpolynomial activation and the generalized-FNO architecture on the boundary manifold. For integers $s\\ge1$ and $B>0$, let $\\mathcal F_{s,B}\\subset C(X,\\mathcal Y)$ be the restrictions to $X$ of generalized FNOs with depth, channel width, Fourier cutoff and number of trainable scalar parameters at most $s$, every trainable scalar coefficient bounded in absolute value by $B$, and coordinate bias functions restricted to Fourier modes of cutoff at most $s$, where $C(X,\\mathcal Y)$ denotes continuous maps with the supremum norm. Consider only $s,B$ for which $\\mathcal F_{s,B}$ is nonempty and $\\sup_{\\Psi\\in\\mathcal F_{s,B},\\,x\\in X}\\|\\Psi(x)\\|_{\\mathcal Y}<\\infty$. Give $\\mathcal F_{s,B}$ the Borel sigma-algebra induced by this norm. For $z=(x,y)\\in\\mathcal Z$ and $\\Psi\\in\\mathcal F_{s,B}$, define $\\ell(z,\\Psi)=\\|\\Psi(x)-y\\|_{\\mathcal Y}^2$. For a Borel probability law $P$ on $\\mathcal Z$, put $R_P(\\Psi)=\\mathbb E_{Z\\sim P}\\ell(Z,\\Psi)$ and $\\widehat R_N(\\Psi)=N^{-1}\\sum_{i=1}^N\\ell(Z_i,\\Psi)$ for iid $Z_i\\sim P$. Determine the minimax excess-risk behavior\n$$\\mathfrak R_N(s,B):=\\inf_{\\widehat\\Psi_N}\\sup_{P\\in\\mathcal P(\\mathcal Z)}\\mathbb E_{P^N}\\left[R_P(\\widehat\\Psi_N)-\\inf_{\\Psi\\in\\mathcal F_{s,B}}R_P(\\Psi)\\right],$$\nwhere $\\mathcal P(\\mathcal Z)$ is the set of Borel probability laws on $\\mathcal Z$ and the infimum is over Borel learners $\\widehat\\Psi_N:\\mathcal Z^N\\to\\mathcal F_{s,B}$. Characterize growth regimes $s=s_N$, $B=B_N$ in which estimation and continuum approximation errors can be balanced while retaining the deterministic noise term $C_\\star\\omega_\\star(\\delta)$.\n",
+  "status_note": "\nThe question asks for a quantitative minimax characterization for this particular noisy EIT joint data set and bounded architecture. It does not assert that finite-sample learning theory for neural operators is absent. Kovachki\u2013Lanthaler\u2013Mhaskar already study continuum-FNO metric entropy and empirical-risk learning for operator approximation classes with a specified algebraic relation between model size and approximation error. Grohs\u2013Lanthaler\u2013Trautner prove sampling limitations for specified ReLU approximation classes and input measures. Their target families, activation hypotheses, sampling models and risks differ from the all-joint-laws excess-risk expression above; their bounds are not silently transferred to this EIT class.\n\nThere is also an established elementary estimation baseline. If a uniformly bounded model class has a finite uniform $\\epsilon$-net of size $m$, empirical square-loss minimization over that finite list is a Borel learner, and its expected excess risk is at most $2A\\sqrt{\\log(2m)/(2N)}+2(C+D)\\epsilon$, uniformly over all joint laws, where $C$ bounds model outputs, $D$ bounds targets and $A=(C+D)^2$. Thus deriving some finite-sample upper bound is not the unresolved claim. With fixed finite scalar parametrizations, sufficiently slow budget growth can also be obtained qualitatively by a diagonal choice of compact model classes and finite nets; this gives no efficient quantitative rate. The remaining requested analysis is matching upper and lower behavior for the specified EIT geometry and quantitative approximation versus the budgets $(s,B)$, which the continuum existence theorem alone does not provide. The deterministic reconstruction term remains $C_\\star\\omega_\\star(\\delta)$, with the corrected kernel modulus involving $\\sqrt\\delta$; its contribution to square risk is handled by squaring the reconstruction bound.\n\nThe nonempty compact support, Borel model-class convention, nonempty learner range and uniform output bound make the displayed risks finite and the infimum over Borel learners nonempty. A model-entropy argument additionally holds fixed all nonlearned geometric chart maps and uses a genuine finite scalar parametrization; arbitrary variation of such maps cannot be hidden in a parameter count. This source comparison, updated 19 October 2026, delimits the registered research question. It is not a certification that no matching result exists anywhere in the literature, and no generalization theorem is inferred from the EIT paper's finite numerical experiments.\n",
+  "dedicated_formulation_cases": [
+    {
+      "case": "empty",
+      "analysis": "The question explicitly assumes Z nonempty and compact and restricts to nonempty model classes; a constant Borel learner then exists.",
+      "anchor_section": "Open problem / Source-status note"
+    },
+    {
+      "case": "zero",
+      "analysis": "N is a positive sample count; delta=0 is allowed and removes the deterministic modulus contribution. Square-risk bounds require squaring the reconstruction estimate.",
+      "anchor_section": "Open problem / Source-status note"
+    },
+    {
+      "case": "one",
+      "analysis": "s>=1 is explicit; a singleton finite net has a Borel empirical minimizer, but does not itself identify a sharp minimax law.",
+      "anchor_section": "Open problem / Source-status note"
+    },
+    {
+      "case": "degenerate",
+      "analysis": "All Borel joint laws on fixed Z are permitted, including atomic laws. Fixed geometric chart maps cannot vary invisibly inside the finite scalar parameter budget.",
+      "anchor_section": "Open problem / Source-status note"
+    },
+    {
+      "case": "endpoints",
+      "analysis": "B>0 and nonempty bounded model range are required; no N=0 risk formula or B=0 class claim is included.",
+      "anchor_section": "Open problem / Source-status note"
+    },
+    {
+      "case": "nonempty-choice",
+      "analysis": "A fixed element of the assumed nonempty model range defines a constant Borel learner; finite-net ERM chooses the smallest minimizing index, avoiding a measurable-selection gap.",
+      "anchor_section": "Open problem / Source-status note"
+    },
+    {
+      "case": "iff-forward",
+      "analysis": "No iff assertion or proved minimax rate is made; the forward direction label is inapplicable.",
+      "anchor_section": "Open problem / Source-status note"
+    },
+    {
+      "case": "iff-reverse",
+      "analysis": "No converse characterization is asserted; the reverse direction label is inapplicable.",
+      "anchor_section": "Open problem / Source-status note"
+    }
+  ],
+  "source_status": "Existing continuum FNO entropy/ERM and operator sampling results are acknowledged. A full elementary finite-net excess-risk baseline and qualitative growth construction are proved offcanon. No global novelty certificate is asserted. The registered request is quantitative matching minimax/budget behavior for this actual noisy EIT joint set.",
+  "local_baseline_proof": "research/inverse-problems-knot-theory-all-109-2026-10-19-owner-ip47/finite-sample-status-review.md",
+  "provenance_proposal": "statement: ai-altered, as root already adjudicated; proof: not-applicable. No source header write by this author.",
+  "no_proof_worksheet": true
+}

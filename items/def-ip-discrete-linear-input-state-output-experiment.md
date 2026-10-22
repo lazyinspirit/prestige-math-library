@@ -46,10 +46,14 @@ No probability law is assigned to the errors. A numerical or discretization
 error that changes the forward map is distinct from this additive observation
 error.
 
-For an impulse-response experiment with zero initial state, first input
-$u_0=v\in\mathbb R^m$, and later inputs zero, the **Markov parameters** are
+For the fixed matrices $A,B,C$, the **Markov parameters** are
 $$M_k:=CA^kB\in M_{p\times m}(\mathbb R)\qquad(k\ge0),$$
-so the output one sample after the impulse is $y_{k+1}=M_kv$. Matrix powers
+interpreted using the infinite-horizon impulse experiment: extend the same
+state and output equations to all $k\ge0$, with zero initial state,
+$u_0=v\in\mathbb R^m$, and $u_k=0$ for $k\ge1$. Its output at sample $k+1$
+is $y_{k+1}=M_kv$ for every $k\ge0$. The horizon-$q$ restriction records this
+identity only for $0\le k<q-1$; when $q=1$, it records only $y_0=0$ and has
+no input samples. Matrix powers
 use $A^0=I_d$ and $A^{k+1}=A^kA$. If $d=0$, the state space consists of its
 single zero vector and the matrices have the corresponding empty shapes.
 

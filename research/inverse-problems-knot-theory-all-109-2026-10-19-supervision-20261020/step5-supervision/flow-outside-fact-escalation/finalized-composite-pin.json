@@ -1,0 +1,88 @@
+{
+  "version": 1,
+  "kind": "reviewed-final-composite-facts-hook-pin",
+  "status": "reviewed-final-PASS",
+  "facts_first_review": {
+    "path": "research/inverse-problems-knot-theory-all-109-2026-10-19-supervision-20261020/step5-supervision/flow-outside-fact-escalation/bridge-code-review-first.json",
+    "sha256": "9b87dfddb97dadb672c3a849a3d86e2617c7508860f1a05193aa7435e95c424a"
+  },
+  "facts_first_snapshot": {
+    "path": "research/inverse-problems-knot-theory-all-109-2026-10-19-supervision-20261020/step5-supervision/flow-outside-fact-escalation/bridge-implementation/shared-shadow-workflow-candidate.mjs",
+    "sha256": "04b5f7b281710081dd16d44824afe0d03d0b0b8e03dab2061c1c809bb29f2497"
+  },
+  "final_freeze": {
+    "path": "research/inverse-problems-knot-theory-all-109-2026-10-19-supervision-20261020/step5-supervision/pnp-classification-protocol-FINAL/freeze.json",
+    "sha256": "b98eee345b0f268814bab7fc6f2485ea4c028ee62a4d155fb175ad5895c3abcd"
+  },
+  "final_workflow": {
+    "path": "research/inverse-problems-knot-theory-all-109-2026-10-19-supervision-20261020/step5-supervision/pnp-classification-protocol-FINAL/candidate/tools/step5-workflow.mjs",
+    "sha256": "ed269f22d2139957f04729e4aae5b069c8a87d8cb228d8b771295a3214ff1c64"
+  },
+  "final_review": {
+    "path": "research/inverse-problems-knot-theory-all-109-2026-10-19-supervision-20261020/step5-supervision/pnp-classification-protocol-FINAL/independent-SECOND-final-review.json",
+    "sha256": "9cdec6f0386f0d8a042342007931eaf8f73f480fcf31274c3c222888b446b342"
+  },
+  "facts_owned_regions": [
+    {
+      "first_start_line": 26,
+      "first_end_line": 26,
+      "sha256": "61f02dea709678b3357357766bf4e3944bd6478c88f69ca2db942707087ab5a0",
+      "literal": "import {loadOwnerFactAlertRepairs,isOwnerFactAlertRepairs,ownerFactAlertRepairPath} from './step5-owner-fact-alert-repairs.mjs';\n"
+    },
+    {
+      "first_start_line": 1145,
+      "first_end_line": 1145,
+      "sha256": "669d9b8590389f7a1b41c592a74971b97d77426619f76128934340014b25a528",
+      "literal": "export function validateReports(pack,reports,now,{root=null,ownerSupplement=null,currentRepairs=null,operationalSupplement=null,supplierRepairs=null,publishedMaintenance=null,reclassification=null,factAlertRepairs=null,classificationMigration=null}={}) {\n"
+    },
+    {
+      "first_start_line": 1164,
+      "first_end_line": 1169,
+      "sha256": "acbce756b1e227e8654d9cfe0372c513212fb71adbe5dd7fb190a44bf5dc339c",
+      "literal": "  requireValue(!factAlertRepairs||(root&&isOwnerFactAlertRepairs(factAlertRepairs)&&factAlertRepairs.pack_sha256===digest(pack)),'unvalidated Facts-only outside-alert repair');\n  const ownerReviews=new Map(),ownerDecisions=new Map();\n  for(const row of [...(ownerSupplement?.reviews??[]),...(currentRepairs?.reviews??[]),...(factAlertRepairs?.reviews??[])]){\n    requireValue(!reclassification||row.id!==reclassification.original_id,'root review cannot replace historical u21 review');\n    requireValue(!ownerReviews.has(row.id)||digest(ownerReviews.get(row.id))===digest(row),'conflicting coexisting current root reviews');ownerReviews.set(row.id,row);\n  }\n"
+    },
+    {
+      "first_start_line": 1410,
+      "first_end_line": 1411,
+      "sha256": "c0f68ff9656943100c1004377856bddbdba1c49010228f214511212ac2a31435",
+      "literal": "  const factPath=ownerFactAlertRepairPath(root,run);\n  const factAlertRepairs=phase==='repeat'&&round===1&&existsSync(factPath)?loadOwnerFactAlertRepairs(root,pack,reports,current,items,read(factPath),{matchesReview:review=>reviewContexts(items).matches(review,current)}):null;\n"
+    },
+    {
+      "first_start_line": 1421,
+      "first_end_line": 1421,
+      "sha256": "1bfec6da62e1f2bdee1ddafc189a3c76ea6d6650ed926d78c1c2a266282c7558",
+      "literal": "  const result=validateReports(pack,reports,reported,{root,ownerSupplement,currentRepairs,operationalSupplement,supplierRepairs,publishedMaintenance,reclassification,factAlertRepairs,classificationMigration});\n"
+    },
+    {
+      "first_start_line": 1429,
+      "first_end_line": 1429,
+      "sha256": "a636c8efa69fca001794cff81d8f6f742611d86bc22e91047ddb101fe561cc74",
+      "literal": "  if(factAlertRepairs)for(const [path,hash]of Object.entries(factAlertRepairs.evidence)){requireValue(!evidence[path]||evidence[path]===hash,'Facts-only repair evidence collision');evidence[path]=hash;}\n"
+    },
+    {
+      "first_start_line": 1564,
+      "first_end_line": 1569,
+      "sha256": "05062df1a4dfbc466f3981992829b9dbef4c2e11fa28adb0e9f2d7b578c4acd8",
+      "literal": "  if(factAlertRepairs){\n    receipt.owner_fact_alert_repairs={path:factAlertRepairs.path,id:factAlertRepairs.id,native_origin:factAlertRepairs.native_origin,consumer_checks:factAlertRepairs.consumer_checks,root_interface_changes:[],native_review_credit_granted:false};\n    receipt.root_fact_alert_reviews=factAlertRepairs.reviews;\n    receipt.owner_fact_alert_current_review_targets=[...factAlertRepairs.ids];\n    receipt.reviews=receipt.reviews.filter(review=>!factAlertRepairs.ids.has(review.id));\n  }\n"
+    },
+    {
+      "first_start_line": 2296,
+      "first_end_line": 2296,
+      "sha256": "d646b5161099dba3915811964bb50b9e9bd286abc67f68a2b1f10002159fbe03",
+      "literal": "  const targets=[...new Set([...scope.targets,...(concerns?.entries??[]).map(row=>row.id),...(scopeFindings?.entries??[]).map(row=>row.id),...(result.metadata_history_current_review_targets??[]),...(result.original_slot_current_review_targets??[]),...(result.owner_fact_alert_current_review_targets??[]),...(result.pnp_classification_current_review_targets??[])])];\n"
+    },
+    {
+      "first_start_line": 2311,
+      "first_end_line": 2311,
+      "sha256": "716da81b636c092684e2851743185895d62d7d03c6979341cb444780948aa05e",
+      "literal": "  if(result.owner_fact_alert_current_review_targets){pack.owner_fact_alert_current_review_targets=[...result.owner_fact_alert_current_review_targets];pack.owner_fact_alert_repairs=result.owner_fact_alert_repairs;}\n"
+    },
+    {
+      "first_start_line": 2475,
+      "first_end_line": 2476,
+      "sha256": "58afa09a182be4a1703666897185b14b7009358b8f0b702eb87895f279195d8e",
+      "literal": "  for(const id of sourceResult?.owner_fact_alert_current_review_targets??[])\n    requireValue(result.reviews.some(row=>row.id===id&&row.post_sha256===current[id]),`missing current native Facts-only outside-alert review: ${id}`);\n"
+    }
+  ],
+  "reading_limit": "Exact byte equality of ten Facts-owned workflow regions only; no independent review of PnP. Final composite must have its own genuine PASS before root application. Original Facts FIRST artifacts remain immutable."
+}

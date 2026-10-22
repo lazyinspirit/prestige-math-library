@@ -18,6 +18,11 @@ axiom_use: "The local calculations are choice-free; only the crossing-sign suppl
 provenance:
   statement: literature-derived
   proof: ai-altered
+verification:
+  judge:
+    model: "gpt-6-luna"
+    verdict: pass
+    date: 2026-10-22
 sources:
   references:
     - title: "Louis H. Kauffman, An Invariant of Regular Isotopy, §§III and VI, printed pp. 430–432 and 466–469"

@@ -11,6 +11,10 @@ justified_by: []
 proof_strategy: direct
 verification:
   precheck: pass
+  judge:
+    model: "gpt-6-luna"
+    verdict: pass
+    date: 2026-10-22
 axiom_use: No choice axiom is used; all distributions are finite-dimensional and explicit.
 provenance:
   statement: ai-generated

@@ -1,0 +1,1742 @@
+{
+  "version": 1,
+  "scope": [
+    "lem-ip-index-source-elements-are-minimum-norm",
+    "lem-ip-spectral-interpolation-for-power-source-balls",
+    "thm-ip-deterministic-minimax-lower-bound-on-source-balls",
+    "thm-ip-source-ball-modulus-of-continuity",
+    "ex-ip-polynomial-singular-decay-source-balls",
+    "ex-ip-exponential-singular-decay-source-balls"
+  ],
+  "contracts": {
+    "lem-ip-index-source-elements-are-minimum-norm": {
+      "citations": [
+        {
+          "fact": "A1",
+          "source": "def-countable-choice",
+          "source_section": "Definition",
+          "quote": "The **Axiom of Countable Choice**, written $\\mathrm{AC}_\\omega$, is the following\nstatement.\n\n> For every family $(X_n)_{n \\in \\mathbb{N}}$ of nonempty sets indexed by\n> $\\mathbb{N}$ there is a function $f$ with domain $\\mathbb{N}$ such that\n> $f(n) \\in X_n$ for every $n \\in \\mathbb{N}$.\n\nEquivalently, in the vocabulary of Choice function: every at most\ncountable family of nonempty sets has a choice function.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F1",
+          "source": "thm-singular-value-decomposition-for-compact-operators",
+          "source_section": "Statement",
+          "quote": "Assume the Axiom of Countable Choice ([[def-countable-choice]]). Let $H$ and\n$K$ be real or complex Hilbert spaces ([[def-hilbert-space]]), let\n$T\\in\\mathcal B(H,K)$ be a compact operator\n([[def-compact-linear-operator]]), let $|T|$ and the singular values $s_n(T)$ be\nas in the absolute-value definition\n([[def-absolute-value-and-singular-values-of-a-compact-operator]]). Let\n$J=\\{1,2,3,\\ldots\\}$ when $\\operatorname{ran}T$ is infinite-dimensional. When\n$\\operatorname{ran}T$ is finite-dimensional, put\n$r:=\\dim\\operatorname{ran}T\\in\\mathbb N$ ([[def-dimension]]) and let\n$J=\\{1,\\dots,r\\}$, interpreted as $\\varnothing$ when $r=0$. Thus $J$ indexes\nexactly the positive singular values counted with multiplicity, which we write\nas $(s_j)_{j\\in J}$ in nonincreasing order. Then:\n\n1. there are orthonormal families $(e_j)_{j\\in J}$ in $(\\ker T)^\\perp$ and\n   $(f_j)_{j\\in J}$ in $\\overline{\\operatorname{ran}T}$, indexed by exactly $J$,\n   with $|T|e_j=s_je_j$ and $f_j=s_j^{-1}Te_j$ for every $j\\in J$;\n2. for every $x\\in H$ the series converges in norm and\n   $$Tx=\\sum_{j\\in J}s_j\\langle x,e_j\\rangle f_j,$$\n   and its finite partial sums\n   $T_n:=\\sum_{j\\le n}s_j\\langle\\cdot,e_j\\rangle f_j$ satisfy\n   $\\|T-T_n\\|\\le s_{n+1}$ for every $n$ with $n+1\\in J$ (and $T_n=T$ for\n   $n\\ge r$ when $r<+\\infty$);\n3. the linear map $U$ defined on the span of $\\{e_j:j\\in J\\}$ by $Ue_j:=f_j$,\n   extended by continuity to $(\\ker T)^\\perp$ and by zero on $\\ker T$, is a\n   **partial isometry** with\n   $$T=U|T|,\\qquad U^*U=P_{(\\ker T)^\\perp},\\qquad U^*U\\text{ is the orthogonal projection onto }(\\ker T)^\\perp,$$\n   and $UU^*$ the orthogonal projection onto $\\overline{\\operatorname{ran}T}$;\n4. the zero-padded sequence $(s_n(T))_{n\\ge1}$ is *not* used to index the\n   orthonormal systems: the systems carry exactly the index set $J$ of the\n   positive singular values, and the terms $s_n(T)=0$ beyond the rank in the\n   finite-rank case are numerical padding only.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "def-ip-index-source-ball",
+          "source_section": "Definition",
+          "quote": "Assume Countable Choice. Let $X$ and $Y$ be real or complex Hilbert spaces over the same scalar field and let $K:X\\to Y$ be compact. Write $\\kappa:=\\|K\\|$, $S:=K^*K$, and $|K|:=S^{1/2}$, and let $\\Lambda_K$ be zero together with the positive eigenvalues of $|K|$. An admissible spectral index is a bounded function $\\psi:\\Lambda_K\\to[0,\\infty)$ with $\\psi(0)=0$. Define $\\psi(|K|)$ by the compact spectral multiplier of $S$ with scalar function $t\\mapsto\\psi(\\sqrt t)$. For $\\rho>0$ define $X_{\\psi,\\rho}(K):=\\{\\psi(|K|)w:w\\in X,\\ \\|w\\|_X\\le\\rho\\}$. For $\\nu>0$, $\\psi_\\nu(t)=t^\\nu$ defines the power source ball $X_{\\nu,\\rho}(K)$. If $\\kappa>0$ and $q>0$, define the logarithmic spectral-index candidate by $\\psi_{\\log,q}(0)=0$ and $\\psi_{\\log,q}(t)=(1+\\log(\\kappa/t))^{-q}$ for positive $t\\in\\Lambda_K$; when it is bounded, it defines $X_{\\log,q,\\rho}(K)$.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "def-compact-spectral-filter-and-qualification",
+          "source_section": "Definition",
+          "quote": "Assume Countable Choice. Let $X,Y$ be real or complex Hilbert spaces and let\n$A:X\\to Y$ be compact and bounded. Put $S=A^*A$. By\n[[lem-compact-gram-operator-is-positive-and-has-kernel]], $S$ is compact,\npositive, and self-adjoint, with $\\ker S=\\ker A$. Let $\\Sigma$ be the set of\nnonzero eigenvalues of $S$ and $P_t$ the orthogonal projection onto the\neigenspace of $t\\in\\Sigma$; let $P_0$ be the orthogonal projection onto\n$\\ker S$. The compact spectral multiplier of a bounded scalar function\n$q:\\{0\\}\\cup\\Sigma\\to\\mathbb F$ is\n$$q(S)x:=q(0)P_0x+\\sum_{t\\in\\Sigma}q(t)P_tx,$$\nwhere the finite-subset net converges in norm by\n[[lem-compact-spectral-multiplier-is-well-defined]]. For $\\nu>0$, define\n$S^\\nu$ by the multiplier $q_\\nu(0)=0$ and $q_\\nu(t)=t^\\nu$ for $t>0$.\nThis multiplier is bounded: if $t\\in\\Sigma$ and $u\\in E_t$ is a unit vector,\nthen $0<t=\\|Su\\|\\le\\|S\\|$, so $|q_\\nu(t)|\\le\\|S\\|^\\nu$.\n\nFor $\\lambda>0$, the Tikhonov filter and residual filter are\n$$g_\\lambda(t)=\\frac1{t+\\lambda},\\qquad r_\\lambda(t)=1-tg_\\lambda(t)=\\frac{\\lambda}{t+\\lambda}.$$\nThe Tikhonov solution for data $y_\\delta\\in Y$ is\n$$x_\\lambda^\\delta=g_\\lambda(S)A^*y_\\delta =(A^*A+\\lambda I_X)^{-1}A^*y_\\delta.$$\nIndeed, the spectral decomposition gives $S+\\lambda I_X$ the multiplier\n$t+\\lambda$ on each $E_t$ and $\\lambda$ on $\\ker S$, so $g_\\lambda(S)$ is\nits inverse, whose existence is also supplied by\n[[lem-hilbert-tikhonov-normal-operator-invertible]].\nThe source condition of order $\\nu>0$ and radius $R\\ge0$ means that\n$x^\\dagger=S^\\nu w$ for some $w\\in X$ with $\\|w\\|\\le R$. A family of\nfilters $g_\\alpha$ with residual filters $r_\\alpha(t)=1-tg_\\alpha(t)$ has\nqualification at least $p>0$ when, for each $0<\\nu\\le p$, some finite\nconstant $C_\\nu\\ge0$ satisfies\n$$t^\\nu|r_\\alpha(t)|\\le C_\\nu\\alpha^\\nu \\quad\\text{for every }\\alpha>0\\text{ and }t\\in\\Sigma.$$\nWhen $\\Sigma=\\varnothing$, this condition is vacuous.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "def-hilbert-space",
+          "source_section": "Definition",
+          "quote": "A **real Hilbert space** is a real inner-product space $H$ whose induced-length metric is complete: every Cauchy sequence in $H$ for the norm $\\|v\\|=\\sqrt{\\langle v,v\\rangle}$ converges to a point of $H$. A **complex Hilbert space** is a complex inner-product space with the same completeness property, so that a Hilbert space is exactly a real or complex inner-product space that is a Banach space for its induced norm (Banach space).\n\n**The completion convention is the Cauchy-sequence one.**\nBanach space defines completeness by convergence of Cauchy sequences, and this page keeps that convention throughout. It is weaker than $\\sigma$-completeness \u2014 the assertion that every decreasing sequence of nonempty closed subsets with diameters tending to zero has a nonempty intersection. The two agree in ZFC, but Blackadar, Farah and Karagila note that the closest-point theorem on a $\\sigma$-complete inner-product space is provable in ZF, whereas the Cauchy-complete form used below consumes the Axiom of Countable Choice; nothing here silently imports the stronger notion.",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "def-real-and-complex-inner-product-space",
+          "source_section": "Definition",
+          "quote": "Let $\\mathbb F$ be $\\mathbb R$ or $\\mathbb C$, with **conjugation** $z\\mapsto\\overline z$\nthe identity on $\\mathbb R$ and complex conjugation on $\\mathbb C$\n(Real and imaginary parts, complex conjugation, and modulus). A **real** or\n**complex inner-product space** is an $\\mathbb F$-vector space $V$ together with\nan inner product $\\langle\\cdot,\\cdot\\rangle:V\\times V\\to\\mathbb F$ in the sense\nof Real and complex inner product spaces, with the inner product linear in the first argument: for all $u,v,w\\in V$ and $a,b\\in\\mathbb F$,\n\n$$\\langle au+bv,w\\rangle=a\\langle u,w\\rangle+b\\langle v,w\\rangle,\\qquad \\langle u,v\\rangle=\\overline{\\langle v,u\\rangle},\\qquad \\langle v,v\\rangle\\ge0,\\quad \\langle v,v\\rangle=0\\iff v=0 .$$\n\n**Conjugate-linearity in the second argument.** Conjugate symmetry together with\nlinearity in the first argument gives, for all $w\\in V$,\n\n$$\\langle w,au+bv\\rangle=\\overline{\\langle au+bv,w\\rangle}=\\overline{a\\langle u,w\\rangle+b\\langle v,w\\rangle}=\\overline a\\,\\langle w,u\\rangle+\\overline b\\,\\langle w,v\\rangle .$$\n\n**Induced length.** The **induced length**, or inner-product norm, of $v$ is\n\n$$\\|v\\|:=\\sqrt{\\langle v,v\\rangle},$$\n\nwhich is exactly the published The norm $\\lVert v\\rVert=\\sqrt{\\langle v,v\\rangle}$ induced by a real or complex inner product: positive definiteness\nmakes $\\langle v,v\\rangle$ a nonnegative real with a unique nonnegative square\nroot, so that $\\|v\\|\\ge0$, $\\|v\\|=0$ exactly for $v=0$, and\n$\\langle v,v\\rangle=\\|v\\|^2$.\n\n**The convention on this page.** Every inner-product space below is real or\ncomplex in this sense, the pairing is linear in the first argument and\nconjugate-linear in the second, and $\\|v\\|$ always denotes the induced length.\nIn the real case conjugation is the identity and $|z|$ is the absolute value of\n$\\mathbb R$; in the complex case they are complex conjugation and the complex\nmodulus. All statements below are therefore written once and read in either\nscalar field.",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "def-orthogonality-and-orthogonal-complement",
+          "source_section": "Definition",
+          "quote": "Let $V$ be a real or complex inner-product space. Vectors $x,y\\in V$ are\n**orthogonal**, written $x\\perp y$, when\n\n$$\\langle x,y\\rangle=0 .$$\n\nFor a subset $S\\subseteq V$ the **orthogonal complement** of $S$ is\n\n$$S^\\perp:=\\{\\,v\\in V : \\langle v,s\\rangle=0 \\text{ for every } s\\in S\\,\\}.$$\n\n**Orthogonality is symmetric.** If $\\langle x,y\\rangle=0$, then\n$\\langle y,x\\rangle=\\overline{\\langle x,y\\rangle}=0$, so $x\\perp y$ exactly\nwhen $y\\perp x$; in particular the condition defining $S^\\perp$ is symmetric in\nits two arguments.\n\n**$S^\\perp$ is a linear subspace.** Let $s\\in S$ and scalars $a,b$; then\n$\\langle 0,s\\rangle=0$, and if $u,v\\in S^\\perp$ then\n$\\langle au+bv,s\\rangle=a\\langle u,s\\rangle+b\\langle v,s\\rangle=0$ by linearity\nin the first argument, so $au+bv\\in S^\\perp$. Thus $S^\\perp$ is a linear\nsubspace of $V$ ([[def-linear-subspace]]) for every subset $S$, whether or not\n$S$ is a subspace. Moreover $0\\in S^\\perp$ always, and $v\\in V$ lies in\n$\\{0\\}^\\perp$ for every $v$, so $\\{0\\}^\\perp=V$.\n\n**Monotonicity.** If $S\\subseteq T\\subseteq V$, then every vector orthogonal to\nall of $T$ is orthogonal to all of $S$, so $T^\\perp\\subseteq S^\\perp$.\n\n**Nontriviality of orthogonality.** By positive definiteness\n$\\langle v,v\\rangle=\\|v\\|^2=0$ exactly for $v=0$ ([[cor-inner-product-induces-a-norm]]),\nso a vector orthogonal to itself is zero, and $\\{0\\}^\\perp=V$, $V^\\perp=\\{0\\}$.",
+          "uses": [
+            "2.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "By [F1], write $w=w_0+\\sum_j w_jv_j$ in norm, with $w_0\\in N(K)$ and the $v_j$ an orthonormal basis of $N(K)^\\perp$. The compact spectral multiplier in [F2] gives $x=\\psi(|K|)w=\\psi(0)w_0+\\sum_j\\psi(s_j)w_jv_j=\\sum_j\\psi(s_j)w_jv_j$. This norm-convergent sum is a limit of finite linear combinations of the $v_j$, so [F1] places $x$ in their closed span $N(K)^\\perp$; if the positive singular set is empty, the sum and closed span are both zero. Thus $x\\perp N(K)$.",
+          "step": "1.1",
+          "inputs": [
+            "given",
+            "A1",
+            "F1",
+            "F2",
+            "construct"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "If $Kz=Kx$, then $n:=z-x\\in N(K)$. By step 1.1, $x\\perp n$, so [F3] gives $\\|z\\|^2=\\|x+n\\|^2=\\|x\\|^2+\\|n\\|^2\\ge\\|x\\|^2$, with equality only when $n=0$, that is, $z=x$. Thus $x$ is the unique minimum-norm solution.",
+          "step": "2.1",
+          "inputs": [
+            "given",
+            "step 1.1",
+            "F3",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "finite_smoke": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "Step 1.1 handles an empty positive singular set and gives x=0."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Step 1.1 uses psi(0)=0 to remove the kernel component."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Step 1.1 applies to a singleton positive singular system."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Step 1.1 explicitly treats the zero positive-singular-value case."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Step 2.1 reaches equality only when n=0, which forces z=x."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Step 1.1 uses the Countable-Choice SVD to expand w."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "Membership in the stated index-source range implies orthogonality to the operator kernel and therefore minimum norm in the solution class. It is not an iff characterization of that source range.",
+          "template_review": {
+            "upheld": true,
+            "by": "/root",
+            "reason": "Membership in the stated index-source range implies orthogonality to the operator kernel and therefore minimum norm in the solution class. It is not an iff characterization of that source range.",
+            "item_sha256": "9493e6527d2fb82223ccabcf8995849f18bdda64ab160c12b5a85763fd52cf25",
+            "row_sha256": "47fe21656edad7cb5a015d0c8e12d3d1fc9f1ae8e8fbed30a00e7b32dee9ac25",
+            "role": "root-adopted actual delegated owner-focused FIRST; not native Alpha",
+            "delegated_reviewer": "/root/floer_duality_repair",
+            "delegated_review_sources": [
+              {
+                "file": "research/inverse-problems-knot-theory-all-109-2026-10-19-supervision-20261020/step2-supervision/battery1-boundary/lane-1/proposal.json",
+                "field": "rows",
+                "index": 367
+              }
+            ],
+            "root_adoption_record": "research/inverse-problems-knot-theory-all-109-2026-10-19-supervision-20261020/step2-supervision/battery1-boundary/lane-1/root-final-adoption.json"
+          }
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "A minimum-norm solution need not be asserted to lie in this particular index-source class. The lemma gives only the source-to-minimum-norm implication under psi(0)=0.",
+          "template_review": {
+            "upheld": true,
+            "by": "/root",
+            "reason": "A minimum-norm solution need not be asserted to lie in this particular index-source class. The lemma gives only the source-to-minimum-norm implication under psi(0)=0.",
+            "item_sha256": "9493e6527d2fb82223ccabcf8995849f18bdda64ab160c12b5a85763fd52cf25",
+            "row_sha256": "b132760c60b2e6140fe644c6e65c6fdce7a1f57d6dffd0c961f104e8bd541025",
+            "role": "root-adopted actual delegated owner-focused FIRST; not native Alpha",
+            "delegated_reviewer": "/root/floer_duality_repair",
+            "delegated_review_sources": [
+              {
+                "file": "research/inverse-problems-knot-theory-all-109-2026-10-19-supervision-20261020/step2-supervision/battery1-boundary/lane-1/proposal.json",
+                "field": "rows",
+                "index": 368
+              }
+            ],
+            "root_adoption_record": "research/inverse-problems-knot-theory-all-109-2026-10-19-supervision-20261020/step2-supervision/battery1-boundary/lane-1/root-final-adoption.json"
+          }
+        }
+      ],
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "alpha-batch-3",
+        "notes": "Independently checked Proof 1.1\u20132.1 against current compact SVD (including its proof), spectral multiplier Definition, Countable Choice and inner-product interfaces. Bounded psi kills the kernel and its norm-convergent positive-singular expansion lies in N(K)^perp; Pythagoras proves uniqueness. Empty positive spectrum, K=0, finite rank, w=0 and real/complex conventions are sound. Reader closed-span clarification is accepted; current raw bytes equal post-reader hash. No diagram or statement interruption; no new defect."
+      }
+    },
+    "lem-ip-spectral-interpolation-for-power-source-balls": {
+      "citations": [
+        {
+          "fact": "A1",
+          "source": "def-countable-choice",
+          "source_section": "Definition",
+          "quote": "The **Axiom of Countable Choice**, written $\\mathrm{AC}_\\omega$, is the following\nstatement.\n\n> For every family $(X_n)_{n \\in \\mathbb{N}}$ of nonempty sets indexed by\n> $\\mathbb{N}$ there is a function $f$ with domain $\\mathbb{N}$ such that\n> $f(n) \\in X_n$ for every $n \\in \\mathbb{N}$.\n\nEquivalently, in the vocabulary of Choice function: every at most\ncountable family of nonempty sets has a choice function.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F1",
+          "source": "thm-singular-value-decomposition-for-compact-operators",
+          "source_section": "Statement",
+          "quote": "Assume the Axiom of Countable Choice ([[def-countable-choice]]). Let $H$ and\n$K$ be real or complex Hilbert spaces ([[def-hilbert-space]]), let\n$T\\in\\mathcal B(H,K)$ be a compact operator\n([[def-compact-linear-operator]]), let $|T|$ and the singular values $s_n(T)$ be\nas in the absolute-value definition\n([[def-absolute-value-and-singular-values-of-a-compact-operator]]). Let\n$J=\\{1,2,3,\\ldots\\}$ when $\\operatorname{ran}T$ is infinite-dimensional. When\n$\\operatorname{ran}T$ is finite-dimensional, put\n$r:=\\dim\\operatorname{ran}T\\in\\mathbb N$ ([[def-dimension]]) and let\n$J=\\{1,\\dots,r\\}$, interpreted as $\\varnothing$ when $r=0$. Thus $J$ indexes\nexactly the positive singular values counted with multiplicity, which we write\nas $(s_j)_{j\\in J}$ in nonincreasing order. Then:\n\n1. there are orthonormal families $(e_j)_{j\\in J}$ in $(\\ker T)^\\perp$ and\n   $(f_j)_{j\\in J}$ in $\\overline{\\operatorname{ran}T}$, indexed by exactly $J$,\n   with $|T|e_j=s_je_j$ and $f_j=s_j^{-1}Te_j$ for every $j\\in J$;\n2. for every $x\\in H$ the series converges in norm and\n   $$Tx=\\sum_{j\\in J}s_j\\langle x,e_j\\rangle f_j,$$\n   and its finite partial sums\n   $T_n:=\\sum_{j\\le n}s_j\\langle\\cdot,e_j\\rangle f_j$ satisfy\n   $\\|T-T_n\\|\\le s_{n+1}$ for every $n$ with $n+1\\in J$ (and $T_n=T$ for\n   $n\\ge r$ when $r<+\\infty$);\n3. the linear map $U$ defined on the span of $\\{e_j:j\\in J\\}$ by $Ue_j:=f_j$,\n   extended by continuity to $(\\ker T)^\\perp$ and by zero on $\\ker T$, is a\n   **partial isometry** with\n   $$T=U|T|,\\qquad U^*U=P_{(\\ker T)^\\perp},\\qquad U^*U\\text{ is the orthogonal projection onto }(\\ker T)^\\perp,$$\n   and $UU^*$ the orthogonal projection onto $\\overline{\\operatorname{ran}T}$;\n4. the zero-padded sequence $(s_n(T))_{n\\ge1}$ is *not* used to index the\n   orthonormal systems: the systems carry exactly the index set $J$ of the\n   positive singular values, and the terms $s_n(T)=0$ beyond the rank in the\n   finite-rank case are numerical padding only.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "def-ip-power-source-set",
+          "source_section": "Definition",
+          "quote": "Assume Countable Choice. Let $K:X\\to Y$ be compact between real or complex Hilbert spaces over the same scalar field and let $\\nu,\\rho>0$. The power source ball is $X_{\\nu,\\rho}(K):=\\{|K|^\\nu w:w\\in X,\\ \\|w\\|_X\\le\\rho\\}$, where $|K|^\\nu=(K^*K)^{\\nu/2}$ is defined by compact spectral calculus. It lies in $N(K)^\\perp$ and consists of minimum-norm representatives of the exact data $Kx$. In the convention $S=K^*K$ this is the source condition $x=S^{\\nu/2}w$.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "def-compact-spectral-filter-and-qualification",
+          "source_section": "Definition",
+          "quote": "Assume Countable Choice. Let $X,Y$ be real or complex Hilbert spaces and let\n$A:X\\to Y$ be compact and bounded. Put $S=A^*A$. By\n[[lem-compact-gram-operator-is-positive-and-has-kernel]], $S$ is compact,\npositive, and self-adjoint, with $\\ker S=\\ker A$. Let $\\Sigma$ be the set of\nnonzero eigenvalues of $S$ and $P_t$ the orthogonal projection onto the\neigenspace of $t\\in\\Sigma$; let $P_0$ be the orthogonal projection onto\n$\\ker S$. The compact spectral multiplier of a bounded scalar function\n$q:\\{0\\}\\cup\\Sigma\\to\\mathbb F$ is\n$$q(S)x:=q(0)P_0x+\\sum_{t\\in\\Sigma}q(t)P_tx,$$\nwhere the finite-subset net converges in norm by\n[[lem-compact-spectral-multiplier-is-well-defined]]. For $\\nu>0$, define\n$S^\\nu$ by the multiplier $q_\\nu(0)=0$ and $q_\\nu(t)=t^\\nu$ for $t>0$.\nThis multiplier is bounded: if $t\\in\\Sigma$ and $u\\in E_t$ is a unit vector,\nthen $0<t=\\|Su\\|\\le\\|S\\|$, so $|q_\\nu(t)|\\le\\|S\\|^\\nu$.\n\nFor $\\lambda>0$, the Tikhonov filter and residual filter are\n$$g_\\lambda(t)=\\frac1{t+\\lambda},\\qquad r_\\lambda(t)=1-tg_\\lambda(t)=\\frac{\\lambda}{t+\\lambda}.$$\nThe Tikhonov solution for data $y_\\delta\\in Y$ is\n$$x_\\lambda^\\delta=g_\\lambda(S)A^*y_\\delta =(A^*A+\\lambda I_X)^{-1}A^*y_\\delta.$$\nIndeed, the spectral decomposition gives $S+\\lambda I_X$ the multiplier\n$t+\\lambda$ on each $E_t$ and $\\lambda$ on $\\ker S$, so $g_\\lambda(S)$ is\nits inverse, whose existence is also supplied by\n[[lem-hilbert-tikhonov-normal-operator-invertible]].\nThe source condition of order $\\nu>0$ and radius $R\\ge0$ means that\n$x^\\dagger=S^\\nu w$ for some $w\\in X$ with $\\|w\\|\\le R$. A family of\nfilters $g_\\alpha$ with residual filters $r_\\alpha(t)=1-tg_\\alpha(t)$ has\nqualification at least $p>0$ when, for each $0<\\nu\\le p$, some finite\nconstant $C_\\nu\\ge0$ satisfies\n$$t^\\nu|r_\\alpha(t)|\\le C_\\nu\\alpha^\\nu \\quad\\text{for every }\\alpha>0\\text{ and }t\\in\\Sigma.$$\nWhen $\\Sigma=\\varnothing$, this condition is vacuous.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "def-natural-logarithm",
+          "source_section": "Definition",
+          "quote": "For $x>0$, define $\\log x$ to be the unique real $y$ such that $\\exp(y)=x$. This is well-defined because The exponential is a continuous bijection from $\\mathbb{R}$ onto $(0,\\infty)$ states that $\\exp:\\mathbb R\\to(0,\\infty)$ is a bijection.\n\nThus $\\log:(0,\\infty)\\to\\mathbb R$ is the inverse function of $\\exp$. In particular, $\\log(\\exp y)=y$ for every $y\\in\\mathbb R$ and $\\exp(\\log x)=x$ for every $x>0$.",
+          "uses": [
+            "1.2"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "thm-natural-logarithm-laws",
+          "source_section": "Statement",
+          "quote": "The function $\\log:(0,\\infty)\\to\\mathbb R$ is continuous and strictly increasing, is onto $\\mathbb R$, and satisfies, for $x,y>0$,\n$$\\log(xy)=\\log x+\\log y,\\qquad \\log(x/y)=\\log x-\\log y,\\qquad \\log(1/x)=-\\log x.$$\nAlso $\\log 1=0$.",
+          "uses": [
+            "1.2"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "def-real-power",
+          "source_section": "Definition",
+          "quote": "For $a>0$ and $x\\in\\mathbb R$, define\n$$a^x:=\\exp(x\\log a).$$\nFor the supplementary zero-base convention, define $0^x:=0$ when $x>0$.\n\nThe expressions $0^0$ and $0^x$ for $x<0$ are left undefined. Negative bases are not assigned arbitrary real powers.",
+          "uses": [
+            "1.2"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "def-real-exponential-function-and-e",
+          "source_section": "Definition",
+          "quote": "For $x\\in\\mathbb R$, define\n$$\\exp(x):=\\sum_{n=0}^{\\infty}\\frac{x^n}{\\iota(n!)}, \\qquad e:=\\exp(1),$$\nprovided by the all-real convergence proved in The exponential series converges absolutely for every real argument. Here $n!\\in\\mathbb N$ is the factorial of The factorial $n!$ and the falling factorial $n^{\\underline{k}}$, defined by recursion in $\\mathbb{N}$, $\\iota(n!)$ is its nonzero real image (The canonical natural $\\iota(n) = n \\cdot 1_F$ of a field, Canonical naturals are positive and strictly increasing), and powers and series are those of Integer powers $a^m$ and Series, partial sums, convergence and the sum, divergence, and the tail series.\n\nThis is a real power series centred at $0$ (A real power series about a centre, its interval of convergence, and its radius in $[0,+\\infty]$). No logarithm, irrational power, or differential equation enters the definition.",
+          "uses": [
+            "1.2"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "cor-exponential-reciprocal-and-positivity",
+          "source_section": "Statement",
+          "quote": "For every real $x$, $\\exp(x)>0$ and\n$$\\exp(-x)=\\frac1{\\exp(x)}.$$",
+          "uses": [
+            "1.2"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "thm-real-power-continuity-and-derivatives",
+          "source_section": "Statement",
+          "quote": "For $a>0$, the function $x\\mapsto a^x$ is continuous on $\\mathbb R$ and\n$$(a^x)'=a^x\\log a.$$\nFor $\\alpha\\in\\mathbb R$, the function $x\\mapsto x^\\alpha$ is continuous and differentiable on $(0,\\infty)$, with\n$$(x^\\alpha)'=\\alpha x^{\\alpha-1}.$$",
+          "uses": [
+            "1.2"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "thm-real-power-laws",
+          "source_section": "Statement",
+          "quote": "For $a,b>0$ and $r,s\\in\\mathbb R$,\n$$a^{r+s}=a^ra^s,\\qquad (ab)^r=a^rb^r,\\qquad (a/b)^r=a^r/b^r,\\qquad (a^r)^s=a^{rs}.$$",
+          "uses": [
+            "1.2"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "cor-mean-value-theorem",
+          "source_section": "Statement",
+          "quote": "Let $a, b \\in \\mathbb{R}$ with $a < b$ and let $f : [a,b] \\to \\mathbb{R}$ be\ncontinuous on $[a,b]$ (Continuity of $f : A \\to \\mathbb{R}$ at a point of $A$ and on $A$: the $\\varepsilon$-$\\delta$ condition, its agreement with $\\lim_{x \\to c} f(x) = f(c)$ at a limit point, and continuity at an isolated point, Intervals of $\\mathbb{R}$: the nine order-convex forms, nondegeneracy, and length) and\ndifferentiable at every point of $(a,b)$ as a function on $[a,b]$\n(The derivative $f'(c) = \\lim_{x \\to c} \\frac{f(x) - f(c)}{x - c}$ of $f : A \\to \\mathbb{R}$ at a point $c \\in A$ that is a limit point of $A$, and differentiability on a set). Then there is $c \\in (a,b)$ with\n\n$$f(b) - f(a) \\;=\\; f'(c)\\,(b - a) .$$\n\nEquivalently, since $b - a \\ne 0$, there is $c \\in (a,b)$ at which\n$f'(c) = \\bigl(f(b)-f(a)\\bigr)/(b-a)$: the derivative somewhere inside equals\nthe average rate of change across the whole interval.\n\n**Continuity on the closed interval cannot be dropped.** Differentiability at\nevery point of $(a,b)$ alone does not suffice: a function on $[0,1]$,\ndifferentiable at every point of $(0,1)$ with derivative constantly $1$, for\nwhich no $c$ works, is exhibited later on this page as a false statement, and\nthe companion page works the same witness out in full.",
+          "uses": [
+            "1.2"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "lem-of-inverse-positive",
+          "source_section": "Statement",
+          "quote": "Let $F$ be an ordered field (Ordered field) with positive cone $P$, and\nlet $a, b \\in F$.\n\n1. If $a > 0$ then $a^{-1} > 0$.\n2. If $0 < a < b$ then $0 < b^{-1} < a^{-1}$.",
+          "uses": [
+            "1.2"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "argument-1.1",
+          "claim": "Let $J$ index the positive singular values in [F1]. Write $w=w_0+\\sum_{j\\in J}w_jv_j$ in norm, with $w_0\\in N(K)$. By [F2]\u2013[F3], $x=\\sum_{j\\in J}s_j^\\nu w_jv_j$ and $Kx=\\sum_{j\\in J}s_j^{\\nu+1}w_ju_j$, with norm-convergent expansions. For each finite $F\\subseteq J$, orthonormality gives the squared norms of the partial sums as the sums of squared coefficients; taking limits by continuity of the norm gives $\\|x\\|_X^2=\\sum_{j\\in J}c_j$ and $\\|Kx\\|_Y^2=\\sum_{j\\in J}a_j$. The same finite-sum identity and $w_0\\perp v_j$ give $\\|w\\|_X^2=\\|w_0\\|_X^2+\\sum_{j\\in J}b_j\\ge\\sum_{j\\in J}b_j$, where $c_j=s_j^{2\\nu}|w_j|^2$, $a_j=s_j^{2\\nu+2}|w_j|^2$, and $b_j=|w_j|^2$.",
+          "step": "1.1",
+          "inputs": [
+            "given",
+            "A1",
+            "F1",
+            "F2",
+            "F3",
+            "construct"
+          ]
+        },
+        {
+          "id": "argument-1.2",
+          "claim": "Put $\\theta=\\nu/(\\nu+1)\\in(0,1)$. For a finite $F\\subseteq J$, set $A_F=\\sum_{j\\in F}a_j$, $B_F=\\sum_{j\\in F}b_j$, and $C_F=\\sum_{j\\in F}c_j$. If $A_F=0$ or $B_F=0$, then every $w_j$ with $j\\in F$ is zero because $s_j>0$, so $C_F=0$. Otherwise, for $j\\in F$ put $p_j=a_j/A_F$ and $q_j=b_j/B_F$. The scalar inequality $t^\\theta\\le\\theta t+1-\\theta$ holds for $t\\ge0$: for $t>0$ set $g(t)=\\theta t+1-\\theta-t^\\theta$. By [F4], $g'(t)=\\theta(1-t^{\\theta-1})$. If $0<t<1$, strict increase of $u\\mapsto u^{1-\\theta}$ gives $t^{1-\\theta}<1^{1-\\theta}=1$; by [F4] and inverse order this implies $t^{\\theta-1}>1$ and $g'(t)<0$. If $t>1$, the inequalities reverse and $g'(t)>0$. The mean value theorem then gives $g(t)\\ge g(1)=0$ for every $t>0$, while $g(0)=1-\\theta>0$. If $q_j>0$, apply the scalar inequality to $t=p_j/q_j$ to obtain $p_j^\\theta q_j^{1-\\theta}\\le\\theta p_j+(1-\\theta)q_j$; if $q_j=0$, the same inequality is immediate. Since $c_j=a_j^\\theta b_j^{1-\\theta}$, summing and using $\\sum p_j=\\sum q_j=1$ gives $C_F\\le A_F^\\theta B_F^{1-\\theta}$.",
+          "step": "1.2",
+          "inputs": [
+            "given",
+            "F4",
+            "algebra"
+          ]
+        },
+        {
+          "id": "argument-2.1",
+          "claim": "Exhaust $J$ by its first $n$ indices when $J$ is infinite, and take $F=J$ when it is finite; if $J$ is empty, all three sums in step 1.1 are zero. Passing to the limit in step 1.2 gives $\\|x\\|_X^2\\le\\|Kx\\|_Y^{2\\theta}\\|w\\|_X^{2(1-\\theta)}$. Taking nonnegative square roots and substituting $\\theta=\\nu/(\\nu+1)$ proves the claimed inequality.",
+          "step": "2.1",
+          "inputs": [
+            "given",
+            "step 1.1",
+            "step 1.2",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "finite_smoke": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "Step 2.1 states all sums vanish when J is empty."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Step 1.2 handles A_F=0 or B_F=0 before normalization."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Step 1.2 includes a finite set F with one singular direction."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Step 2.1 handles the zero-rank case J empty."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Step 1.2 handles zero-sum endpoints before defining p_j and q_j."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Step 1.1 uses the Countable-Choice singular system and its norm-convergent expansion."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The source representation gives the norm interpolation inequality; no converse representation or sharp-rate equivalence is asserted. There is no separate iff-forward obligation beyond this asserted scope.",
+          "template_review": {
+            "upheld": true,
+            "by": "/root",
+            "reason": "The source representation gives the norm interpolation inequality; no converse representation or sharp-rate equivalence is asserted. There is no separate iff-forward obligation beyond this asserted scope.",
+            "item_sha256": "1e800c57e490273a9c1e90550fc40745cda6293bf435ba7915bcda661643cbb6",
+            "row_sha256": "cb78f5625fbd3667f8c81d22393959bc2771ecbd4a321de1ce4c385801e74133",
+            "role": "root-adopted actual delegated owner-focused FIRST; not native Alpha",
+            "delegated_reviewer": "/root/flyping_composite",
+            "delegated_review_sources": [
+              {
+                "file": "research/inverse-problems-knot-theory-all-109-2026-10-19-supervision-20261020/step2-supervision/battery1-boundary/lane-3/proposal.json",
+                "field": "rows",
+                "index": 369
+              }
+            ],
+            "root_adoption_record": "research/inverse-problems-knot-theory-all-109-2026-10-19-supervision-20261020/step2-supervision/battery1-boundary/lane-3/root-final-adoption.json"
+          }
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The source representation gives the norm interpolation inequality; no converse representation or sharp-rate equivalence is asserted. In particular, no reverse classification implication is part of this item.",
+          "template_review": {
+            "upheld": true,
+            "by": "/root",
+            "reason": "The source representation gives the norm interpolation inequality; no converse representation or sharp-rate equivalence is asserted. In particular, no reverse classification implication is part of this item.",
+            "item_sha256": "1e800c57e490273a9c1e90550fc40745cda6293bf435ba7915bcda661643cbb6",
+            "row_sha256": "edebb67db1665be5dfa7436126b057169e3daf54f10b53d7758b8d58f193f7fa",
+            "role": "root-adopted actual delegated owner-focused FIRST; not native Alpha",
+            "delegated_reviewer": "/root/flyping_composite",
+            "delegated_review_sources": [
+              {
+                "file": "research/inverse-problems-knot-theory-all-109-2026-10-19-supervision-20261020/step2-supervision/battery1-boundary/lane-3/proposal.json",
+                "field": "rows",
+                "index": 370
+              }
+            ],
+            "root_adoption_record": "research/inverse-problems-knot-theory-all-109-2026-10-19-supervision-20261020/step2-supervision/battery1-boundary/lane-3/root-final-adoption.json"
+          }
+        }
+      ],
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "alpha-batch-3",
+        "notes": "Proof 1.1\u20132.1 independently checked: compact SVD expansions preserve the kernel, scalar Young inequality follows from derivative signs for theta in (0,1), normalized finite sums yield C<=A^theta B^(1-theta), and nonnegative partial sums give the limit. Checked vanishing A/B, empty/finite/infinite J, w=0 and K=0; all exponents at zero are positive. Current power convention is |K|^nu=(K*K)^(nu/2). Scalar derivative, inverse-order and power-law interfaces checked. No defect or diagram."
+      }
+    },
+    "thm-ip-deterministic-minimax-lower-bound-on-source-balls": {
+      "citations": [
+        {
+          "fact": "A1",
+          "source": "def-countable-choice",
+          "source_section": "Definition",
+          "quote": "The **Axiom of Countable Choice**, written $\\mathrm{AC}_\\omega$, is the following\nstatement.\n\n> For every family $(X_n)_{n \\in \\mathbb{N}}$ of nonempty sets indexed by\n> $\\mathbb{N}$ there is a function $f$ with domain $\\mathbb{N}$ such that\n> $f(n) \\in X_n$ for every $n \\in \\mathbb{N}$.\n\nEquivalently, in the vocabulary of Choice function: every at most\ncountable family of nonempty sets has a choice function.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F1",
+          "source": "def-ip-power-source-set",
+          "source_section": "Definition",
+          "quote": "Assume Countable Choice. Let $K:X\\to Y$ be compact between real or complex Hilbert spaces over the same scalar field and let $\\nu,\\rho>0$. The power source ball is $X_{\\nu,\\rho}(K):=\\{|K|^\\nu w:w\\in X,\\ \\|w\\|_X\\le\\rho\\}$, where $|K|^\\nu=(K^*K)^{\\nu/2}$ is defined by compact spectral calculus. It lies in $N(K)^\\perp$ and consists of minimum-norm representatives of the exact data $Kx$. In the convention $S=K^*K$ this is the source condition $x=S^{\\nu/2}w$.",
+          "uses": [
+            "1.1",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "def-ip-centered-modulus-of-continuity",
+          "source_section": "Definition",
+          "quote": "For a compact operator $K:X\\to Y$ between real or complex Hilbert spaces over the same scalar field, write $N(K):=\\{x\\in X:Kx=0\\}$. For a set $M$ with $0\\in M\\subseteq N(K)^\\perp$ and $\\delta\\ge0$, define $\\varepsilon_K(M,\\delta):=\\sup\\{\\|x\\|_X:x\\in M,\\ \\|Kx\\|_Y\\le\\delta\\}\\in[0,+\\infty]$.",
+          "uses": [
+            "1.1",
+            "2.1",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "lem-ip-index-source-elements-are-minimum-norm",
+          "source_section": "Statement",
+          "quote": "Assume Countable Choice. Let $K:X\\to Y$ be compact between real or complex Hilbert spaces over the same scalar field, let $\\psi$ be a bounded nonnegative spectral index with $\\psi(0)=0$, and let $x=\\psi(|K|)w$ for some $w\\in X$. Then $x\\in N(K)^\\perp$; consequently, among all $z\\in X$ satisfying $Kz=Kx$, $x$ is the unique vector of minimum norm.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "def-hilbert-space",
+          "source_section": "Definition",
+          "quote": "A **real Hilbert space** is a real inner-product space $H$ whose induced-length metric is complete: every Cauchy sequence in $H$ for the norm $\\|v\\|=\\sqrt{\\langle v,v\\rangle}$ converges to a point of $H$. A **complex Hilbert space** is a complex inner-product space with the same completeness property, so that a Hilbert space is exactly a real or complex inner-product space that is a Banach space for its induced norm (Banach space).\n\n**The completion convention is the Cauchy-sequence one.**\nBanach space defines completeness by convergence of Cauchy sequences, and this page keeps that convention throughout. It is weaker than $\\sigma$-completeness \u2014 the assertion that every decreasing sequence of nonempty closed subsets with diameters tending to zero has a nonempty intersection. The two agree in ZFC, but Blackadar, Farah and Karagila note that the closest-point theorem on a $\\sigma$-complete inner-product space is provable in ZF, whereas the Cauchy-complete form used below consumes the Axiom of Countable Choice; nothing here silently imports the stronger notion.",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "cor-inner-product-induces-a-norm",
+          "source_section": "Statement",
+          "quote": "Let $V$ be a real or complex inner-product space with induced length $\\|v\\|=\\sqrt{\\langle v,v\\rangle}$. Then $\\|v\\|\\ge0$ with $\\|v\\|=0$ exactly for $v=0$, $\\|\\lambda v\\|=|\\lambda|\\,\\|v\\|$ for every scalar $\\lambda$, and $\\|u+v\\|\\le\\|u\\|+\\|v\\|$; hence $\\|\\cdot\\|$ is a norm on $V$, read over $\\mathbb R$ by [[def-norm-and-normed-space]] and over $\\mathbb C$ by [[def-complex-norm-and-complex-normed-space]].",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "argument-1.1",
+          "claim": "The class $X_{\\nu,\\rho}(K)$ contains $0$ by taking $w=0$ in [F1]. It is symmetric: if $x=|K|^\\nu w$ with $\\|w\\|_X\\le\\rho$, then $-x=|K|^\\nu(-w)$ with $\\|-w\\|_X\\le\\rho$. It is convex: for $x_i=|K|^\\nu w_i$ with $\\|w_i\\|_X\\le\\rho$ and $0\\le t\\le1$, $tx_1+(1-t)x_2=|K|^\\nu(tw_1+(1-t)w_2)$, while the triangle inequality gives $\\|tw_1+(1-t)w_2\\|_X\\le t\\rho+(1-t)\\rho=\\rho$. By [F3], this class is contained in $N(K)^\\perp$, so [F2] applies.",
+          "step": "1.1",
+          "inputs": [
+            "given",
+            "A1",
+            "F1",
+            "F2",
+            "F3",
+            "F4",
+            "choose",
+            "algebra"
+          ]
+        },
+        {
+          "id": "argument-2.1",
+          "claim": "Let $x\\in X_{\\nu,\\rho}(K)$ satisfy $\\|Kx\\|_Y\\le\\delta$. The two admissible truths $x$ and $-x$ with noises $-Kx$ and $Kx$ both produce the same observed datum $0$. Their reconstruction errors are $\\|A(0)-x\\|_X$ and $\\|A(0)+x\\|_X$, and the triangle inequality yields $2\\|x\\|_X=\\|(A(0)+x)-(A(0)-x)\\|_X\\le\\|A(0)+x\\|_X+\\|A(0)-x\\|_X$. Hence the larger error is at least $\\|x\\|_X$, so taking the supremum over all such $x$ gives $E_\\delta(A)\\ge\\varepsilon_K(X_{\\nu,\\rho}(K),\\delta)$. Taking the infimum over $A$ preserves this lower bound.",
+          "step": "2.1",
+          "inputs": [
+            "given",
+            "step 1.1",
+            "F2",
+            "F4",
+            "algebra"
+          ]
+        },
+        {
+          "id": "argument-3.1",
+          "claim": "If $x_1,x_2\\in X_{\\nu,\\rho}(K)$ and $\\|K(x_1-x_2)\\|_Y\\le2\\delta$, then $z=(x_1-x_2)/2$ lies in the class by symmetry and convexity from step 1.1 and satisfies $\\|Kz\\|_Y\\le\\delta$; thus $\\|x_1-x_2\\|_X=2\\|z\\|_X\\le2\\varepsilon_K(X_{\\nu,\\rho}(K),\\delta)$. Conversely, for every $z$ in the centered-modulus set, the pair $(z,-z)$ lies in the source ball and has $\\|K(z-(-z))\\|_Y=2\\|Kz\\|_Y\\le2\\delta$, so the two-truth supremum is at least $2\\varepsilon_K(X_{\\nu,\\rho}(K),\\delta)$. Taking suprema proves the claimed factor of two.",
+          "step": "3.1",
+          "inputs": [
+            "given",
+            "step 1.1",
+            "F1",
+            "F2",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "finite_smoke": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "Step 1.1 shows the source ball contains 0, so the class is nonempty."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Step 2.1 gives the zero lower bound when the feasible truth is x=0."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Step 3.1 covers one positive singular direction and proves the factor two."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "The Statement permits K=0; Step 1.1 and the minimum-norm fact force its source class to {0}."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Step 2.1 remains valid at delta=0."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Step 1.1 uses only the defined source ball and makes no new representative choice."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "Every deterministic reconstruction on a power source ball has error at least its centered modulus, and the two-truth modulus is twice that modulus. This is the stated implication/computation under its hypotheses; a forward biconditional direction is not separately asserted.",
+          "template_review": {
+            "upheld": true,
+            "by": "/root",
+            "reason": "Every deterministic reconstruction on a power source ball has error at least its centered modulus, and the two-truth modulus is twice that modulus. This is the stated implication/computation under its hypotheses; a forward biconditional direction is not separately asserted.",
+            "item_sha256": "30382ee5c2ac002fa28ec7ae0bf1dd5d560cda11e1f0d287d60dc89918144c43",
+            "row_sha256": "463ed075bd0c927302ea9e599d86b004ff7401485a129bbd9dd3b05022a3d3d8",
+            "role": "root-adopted actual delegated owner-focused FIRST; not native Alpha",
+            "delegated_reviewer": "/root/top_pair_complement",
+            "delegated_review_sources": [
+              {
+                "file": "research/inverse-problems-knot-theory-all-109-2026-10-19-supervision-20261020/step2-supervision/battery1-boundary/lane-9/proposal.json",
+                "field": "rows",
+                "index": 375
+              }
+            ],
+            "root_adoption_record": "research/inverse-problems-knot-theory-all-109-2026-10-19-supervision-20261020/step2-supervision/battery1-boundary/lane-9/root-final-adoption.json"
+          }
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "Every deterministic reconstruction on a power source ball has error at least its centered modulus, and the two-truth modulus is twice that modulus. This is the stated implication/computation under its hypotheses; a converse characterization of those hypotheses is not separately asserted.",
+          "template_review": {
+            "upheld": true,
+            "by": "/root",
+            "reason": "Every deterministic reconstruction on a power source ball has error at least its centered modulus, and the two-truth modulus is twice that modulus. This is the stated implication/computation under its hypotheses; a converse characterization of those hypotheses is not separately asserted.",
+            "item_sha256": "30382ee5c2ac002fa28ec7ae0bf1dd5d560cda11e1f0d287d60dc89918144c43",
+            "row_sha256": "a8e46b497cf2536aceb8bd1ce6e7d8065abffcd17e73430ffd902298b1816e14",
+            "role": "root-adopted actual delegated owner-focused FIRST; not native Alpha",
+            "delegated_reviewer": "/root/top_pair_complement",
+            "delegated_review_sources": [
+              {
+                "file": "research/inverse-problems-knot-theory-all-109-2026-10-19-supervision-20261020/step2-supervision/battery1-boundary/lane-9/proposal.json",
+                "field": "rows",
+                "index": 376
+              }
+            ],
+            "root_adoption_record": "research/inverse-problems-knot-theory-all-109-2026-10-19-supervision-20261020/step2-supervision/battery1-boundary/lane-9/root-final-adoption.json"
+          }
+        }
+      ],
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "alpha-batch-3",
+        "notes": "Proof 1.1\u20133.1 independently checked with current power-ball and centered-modulus definitions, minimum-norm supplier and norm axioms. Symmetry/convexity hold by linearity; truths +/-x with opposite noise yield datum zero for every deterministic A, with no linearity assumption. Triangle inequality and suprema prove lower bound; half-differences and pairs (z,-z) prove both directions of exact factor two. Checked delta=0, K=0, nonempty feasible set and absence of simultaneous choice. No defect or diagram."
+      }
+    },
+    "thm-ip-source-ball-modulus-of-continuity": {
+      "citations": [
+        {
+          "fact": "A1",
+          "source": "def-countable-choice",
+          "source_section": "Definition",
+          "quote": "The **Axiom of Countable Choice**, written $\\mathrm{AC}_\\omega$, is the following\nstatement.\n\n> For every family $(X_n)_{n \\in \\mathbb{N}}$ of nonempty sets indexed by\n> $\\mathbb{N}$ there is a function $f$ with domain $\\mathbb{N}$ such that\n> $f(n) \\in X_n$ for every $n \\in \\mathbb{N}$.\n\nEquivalently, in the vocabulary of Choice function: every at most\ncountable family of nonempty sets has a choice function.",
+          "uses": [
+            "1.2",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F1",
+          "source": "def-ip-power-source-set",
+          "source_section": "Definition",
+          "quote": "Assume Countable Choice. Let $K:X\\to Y$ be compact between real or complex Hilbert spaces over the same scalar field and let $\\nu,\\rho>0$. The power source ball is $X_{\\nu,\\rho}(K):=\\{|K|^\\nu w:w\\in X,\\ \\|w\\|_X\\le\\rho\\}$, where $|K|^\\nu=(K^*K)^{\\nu/2}$ is defined by compact spectral calculus. It lies in $N(K)^\\perp$ and consists of minimum-norm representatives of the exact data $Kx$. In the convention $S=K^*K$ this is the source condition $x=S^{\\nu/2}w$.",
+          "uses": [
+            "1.2",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "def-ip-centered-modulus-of-continuity",
+          "source_section": "Definition",
+          "quote": "For a compact operator $K:X\\to Y$ between real or complex Hilbert spaces over the same scalar field, write $N(K):=\\{x\\in X:Kx=0\\}$. For a set $M$ with $0\\in M\\subseteq N(K)^\\perp$ and $\\delta\\ge0$, define $\\varepsilon_K(M,\\delta):=\\sup\\{\\|x\\|_X:x\\in M,\\ \\|Kx\\|_Y\\le\\delta\\}\\in[0,+\\infty]$.",
+          "uses": [
+            "1.1",
+            "1.2",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "lem-ip-index-source-elements-are-minimum-norm",
+          "source_section": "Statement",
+          "quote": "Assume Countable Choice. Let $K:X\\to Y$ be compact between real or complex Hilbert spaces over the same scalar field, let $\\psi$ be a bounded nonnegative spectral index with $\\psi(0)=0$, and let $x=\\psi(|K|)w$ for some $w\\in X$. Then $x\\in N(K)^\\perp$; consequently, among all $z\\in X$ satisfying $Kz=Kx$, $x$ is the unique vector of minimum norm.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "lem-ip-spectral-interpolation-for-power-source-balls",
+          "source_section": "Statement",
+          "quote": "Assume Countable Choice. Let $K:X\\to Y$ be compact between real or complex Hilbert spaces over the same scalar field, let $\\nu>0$ and $w\\in X$, and put $x=|K|^\\nu w$. Then $\\|x\\|_X\\le\\|Kx\\|_Y^{\\nu/(\\nu+1)}\\|w\\|_X^{1/(\\nu+1)}$.",
+          "uses": [
+            "1.2"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "thm-singular-value-decomposition-for-compact-operators",
+          "source_section": "Statement",
+          "quote": "Assume the Axiom of Countable Choice ([[def-countable-choice]]). Let $H$ and\n$K$ be real or complex Hilbert spaces ([[def-hilbert-space]]), let\n$T\\in\\mathcal B(H,K)$ be a compact operator\n([[def-compact-linear-operator]]), let $|T|$ and the singular values $s_n(T)$ be\nas in the absolute-value definition\n([[def-absolute-value-and-singular-values-of-a-compact-operator]]). Let\n$J=\\{1,2,3,\\ldots\\}$ when $\\operatorname{ran}T$ is infinite-dimensional. When\n$\\operatorname{ran}T$ is finite-dimensional, put\n$r:=\\dim\\operatorname{ran}T\\in\\mathbb N$ ([[def-dimension]]) and let\n$J=\\{1,\\dots,r\\}$, interpreted as $\\varnothing$ when $r=0$. Thus $J$ indexes\nexactly the positive singular values counted with multiplicity, which we write\nas $(s_j)_{j\\in J}$ in nonincreasing order. Then:\n\n1. there are orthonormal families $(e_j)_{j\\in J}$ in $(\\ker T)^\\perp$ and\n   $(f_j)_{j\\in J}$ in $\\overline{\\operatorname{ran}T}$, indexed by exactly $J$,\n   with $|T|e_j=s_je_j$ and $f_j=s_j^{-1}Te_j$ for every $j\\in J$;\n2. for every $x\\in H$ the series converges in norm and\n   $$Tx=\\sum_{j\\in J}s_j\\langle x,e_j\\rangle f_j,$$\n   and its finite partial sums\n   $T_n:=\\sum_{j\\le n}s_j\\langle\\cdot,e_j\\rangle f_j$ satisfy\n   $\\|T-T_n\\|\\le s_{n+1}$ for every $n$ with $n+1\\in J$ (and $T_n=T$ for\n   $n\\ge r$ when $r<+\\infty$);\n3. the linear map $U$ defined on the span of $\\{e_j:j\\in J\\}$ by $Ue_j:=f_j$,\n   extended by continuity to $(\\ker T)^\\perp$ and by zero on $\\ker T$, is a\n   **partial isometry** with\n   $$T=U|T|,\\qquad U^*U=P_{(\\ker T)^\\perp},\\qquad U^*U\\text{ is the orthogonal projection onto }(\\ker T)^\\perp,$$\n   and $UU^*$ the orthogonal projection onto $\\overline{\\operatorname{ran}T}$;\n4. the zero-padded sequence $(s_n(T))_{n\\ge1}$ is *not* used to index the\n   orthonormal systems: the systems carry exactly the index set $J$ of the\n   positive singular values, and the terms $s_n(T)=0$ beyond the rank in the\n   finite-rank case are numerical padding only.",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "def-absolute-value-and-singular-values-of-a-compact-operator",
+          "source_section": "Definition",
+          "quote": "Assume the Axiom of Countable Choice ([[def-countable-choice]]). Let $H$ and\n$K$ be real or complex Hilbert spaces ([[def-hilbert-space]]) and let\n$T\\in\\mathcal B(H,K)$ be a compact operator ([[def-compact-linear-operator]],\n[[def-bounded-linear-operator]]), with Hilbert adjoint $T^*\\in\\mathcal B(K,H)$\n([[def-hilbert-space-adjoint]], [[thm-hilbert-adjoint-properties]]).\n\n**The absolute value.** The operator $T^*T\\in\\mathcal B(H)$ is compact, since it\nis the composite of the compact $T$ with the bounded $T^*$\n([[lem-compositions-with-a-compact-operator-are-compact]]); it is self-adjoint,\nbecause $(T^*T)^*=T^*T^{**}=T^*T$ ([[thm-hilbert-adjoint-properties]]); and it\nis positive, because\n$$\\langle T^*Tx,x\\rangle=\\langle Tx,Tx\\rangle=\\|Tx\\|^{2}\\ge0$$\nfor every $x\\in H$ ([[def-self-adjoint-positive-unitary-and-normal-operator]]).\nThe **absolute value** of $T$ is the unique compact self-adjoint positive\noperator\n$$|T|:=(T^*T)^{1/2}$$\nwith $|T|^{2}=T^*T$, whose existence and uniqueness are the preceding square-root\nlemma ([[lem-positive-square-root-of-a-compact-positive-operator]]). It satisfies\n$$\\||T|x\\|^{2}=\\langle|T|^{2}x,x\\rangle=\\langle T^*Tx,x\\rangle=\\|Tx\\|^{2}\\qquad(x\\in H),$$\nso in particular $\\bigl\\||T|\\bigr\\|=\\|T\\|$ ([[def-operator-norm]]) and\n$\\ker|T|=\\ker T$, since $\\||T|x\\|=\\|Tx\\|$ for every $x$.\n\n**The singular values.** By the spectral theorem for $|T|$\n([[thm-spectral-theorem-for-compact-self-adjoint-operators]]) the nonzero\neigenvalues of $|T|$ form a finite or countably infinite set of positive reals,\neach with finite multiplicity, and for every real $\\varepsilon>0$ only finitely\nmany of them exceed $\\varepsilon$; positivity rules out negative eigenvalues and\n$0$ already corresponds to the kernel. The **multiset of positive singular\nvalues of $T$** is the multiset of positive eigenvalues of $|T|$, counted with\nmultiplicity ([[def-eigenvalue-eigenvector-eigenspace-and-spectrum]]).\n\n**The ordered singular-value sequence.** The **distinct** positive singular\nvalues are listed with positive labels in *decreasing* order $\\mu_1>\\mu_2>\\cdots$ as follows:\nif the multiset of positive eigenvalues is empty (equivalently $|T|=0$,\nequivalently $T=0$), the list is empty; otherwise $\\mu_1:=\\max\\{\\lambda>0:\\lambda$\nis an eigenvalue of $|T|\\}$, a maximum and not merely a supremum, because a\nsupremum value not attained would be an accumulation point different from $0$;\nhaving chosen $\\mu_1,\\dots,\\mu_k$, put $\\mu_{k+1}:=\\max\\{\\lambda>0:\\lambda$ is an\neigenvalue of $|T|$ and $\\lambda<\\mu_k\\}$ whenever that set is nonempty, and stop\notherwise. Each step is legitimate by the finiteness-above-thresholds property\nabove, and an infinite list satisfies $\\mu_k\\to0$ (otherwise its decreasing\nlimit would be a nonzero accumulation point). Writing $d_k$ for the multiplicity\nof $\\mu_k$ (a positive integer), the **zero-padded singular-value sequence** is\n$$s_1\\ge s_2\\ge s_3\\ge\\cdots$$\nwhere $s_1=\\cdots=s_{d_1}=\\mu_1$, $s_{d_1+1}=\\cdots=s_{d_1+d_2}=\\mu_2$, and so\non; if the multiset is finite with total multiplicity $r=d_1+\\cdots+d_m$, one\nsets $s_n:=0$ for every $n>r$, and if $T=0$ one sets $s_n:=0$ for every\n$n\\ge1$. The number $s_n$ is written $s_n(T)$ and called the $n$-th **singular\nvalue** of $T$.\n\n**Zero-based domain and positive labels.** Set $s_0(T):=\\|T\\|=s_1(T)$.\nThus the numerical sequence is the function $n\\mapsto s_n(T)$ on all of\n$\\mathbb N$, including zero. The positive-labelled tail $(s_{m+1}(T))_{m\\in\\mathbb N}$\nis the multiplicity-counting list constructed above. The auxiliary initial\nvalue $s_0$ is not an additional entry of the eigenvalue multiset, does not index\na singular vector, and is excluded from multiplicity counts and singular-value\nsums, which use $n\\ge1$. The full sequence satisfies\n$s_0\\ge s_1\\ge s_2\\ge\\cdots$ and tends to zero. This preserves the page's\npositive rank labels while giving convergence statements a zero-based domain.\n\n**Rank and the finiteness of the list.** The map $\\Phi:\\operatorname{ran}|T|\\to\\operatorname{ran}T$\ngiven by $\\Phi(|T|x):=Tx$ is well defined and linear, because $|T|x=|T|x'$ forces\n$x-x'\\in\\ker|T|=\\ker T$ and hence $Tx=Tx'$; it is injective, because $Tx=0$ gives\n$x\\in\\ker T=\\ker|T|$ and $|T|x=0$; it is surjective onto $\\operatorname{ran}T$\nbecause $T=\\Phi\\circ|T|$; and it is isometric, $\\|Tx\\|=\\||T|x\\|$. Hence\n$\\operatorname{ran}T$ is finite-dimensional if and only if\n$\\operatorname{ran}|T|$ is finite-dimensional; in that case the linear\nbijection $\\Phi$ gives\n$\\dim\\operatorname{ran}T=\\dim\\operatorname{ran}|T|$\n([[def-dimension]]). Consequently, whenever $T$ has finite rank, the positive\nsingular values with multiplicity number exactly\n$\\dim\\operatorname{ran}T$, the rank of $T$, and all later $s_n$ vanish, so the\nsequence is **zero-padded**. If $T$ does not have finite rank, the multiset of\npositive singular values is infinite and countable\n([[def-countable]]) and $s_n>0$ for every $n$, with $s_n\\downarrow0$; in\nparticular finite rank of $T$ is characterised by the eventual vanishing $s_n=0$ for all sufficiently large\n$n$, and conversely such eventual vanishing forces finite rank. The sequence $(s_n)$ is numerical data only: no orthonormal system is\nselected here, and the zero padding is *not* an indexing of any family of\nvectors. The unordered multiset determines $(s_n)$ uniquely, so $(s_n)$ is well\ndefined, and $s_1(T)=\\||T|\\|=\\|T\\|$.",
+          "uses": [
+            "2.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "argument-1.1",
+          "claim": "If $\\delta=0$ and $x$ belongs to the centered-modulus set, then $Kx=0$. By [F3], $x\\in N(K)^\\perp$ as well, so $x=0$ and $\\varepsilon_K(X_{\\nu,\\rho}(K),0)=0$. If $K=0$, [F3] likewise forces every member of the power source ball to be zero, so the asserted bound holds with no positive singular direction.",
+          "step": "1.1",
+          "inputs": [
+            "given",
+            "F2",
+            "F3",
+            "algebra"
+          ]
+        },
+        {
+          "id": "argument-1.2",
+          "claim": "Suppose $\\delta>0$ and let $x$ be any element of the centered-modulus set. By [F1], choose $w\\in X$ with $x=|K|^\\nu w$ and $\\|w\\|_X\\le\\rho$. Applying [F4] and using $\\|Kx\\|_Y\\le\\delta$ gives $\\|x\\|_X\\le\\delta^{\\nu/(\\nu+1)}\\rho^{1/(\\nu+1)}$; taking the supremum over the centered-modulus set proves the bound.",
+          "step": "1.2",
+          "inputs": [
+            "given",
+            "A1",
+            "F1",
+            "F2",
+            "F4",
+            "choose"
+          ]
+        },
+        {
+          "id": "argument-2.1",
+          "claim": "Fix a positive singular value $s_j$ and its unit right singular vector $v_j$ from [F5]. Set $w_j=\\rho v_j$ and $x_j=|K|^\\nu w_j=\\rho s_j^\\nu v_j$. Then $\\|Kx_j\\|_Y=\\rho s_j^{\\nu+1}=\\delta_j$ and $\\|x_j\\|_X=\\rho s_j^\\nu=\\delta_j^{\\nu/(\\nu+1)}\\rho^{1/(\\nu+1)}$. Thus $x_j$ is feasible in the centered-modulus supremum at $\\delta_j$ and attains the upper bound from step 1.2. If there are infinitely many positive singular values, compactness gives $s_j\\to0$ and hence $\\delta_j\\to0$; finite positive rank gives only the stated finite list, while $K=0$ was handled in step 1.1.",
+          "step": "2.1",
+          "inputs": [
+            "given",
+            "A1",
+            "step 1.1",
+            "step 1.2",
+            "F1",
+            "F2",
+            "F5",
+            "construct",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "finite_smoke": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "Step 1.1 gives the zero source ball when K=0; the feasible set contains 0."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Step 1.1 proves the modulus is zero at delta=0."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Step 2.1 gives equality using one positive singular direction."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Step 1.1 treats K=0 separately, with no positive singular direction."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Steps 1.1 and 1.2 cover delta=0 and delta>0."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Step 2.1 uses the Countable-Choice SVD to select a right singular vector."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "Compact-operator source balls have the Holder modulus bound, with equality at singular radii and explicit zero cases. The bound and selected equality witnesses are not an iff characterization of membership in the source ball.",
+          "template_review": {
+            "upheld": true,
+            "by": "/root",
+            "reason": "The bound and selected equality witnesses are not an iff characterization of membership in the source ball.",
+            "item_sha256": "955e9003adad03d94d7ca940dd4383c1378ceb424e3adeae84e823252ed8f433",
+            "row_sha256": "b954f61cf0df2317bfc8af70cb7093d4ce5d7faefcdfd3b6098ba195d2f6b515",
+            "role": "root-adopted actual delegated owner-focused FIRST; not native Alpha",
+            "delegated_reviewer": "/root/top_local_homeomorphism_deformation",
+            "delegated_review_sources": [
+              {
+                "file": "research/inverse-problems-knot-theory-all-109-2026-10-19-supervision-20261020/step2-supervision/battery1-boundary/lane-7/proposal.json",
+                "field": "rows",
+                "index": 377
+              }
+            ],
+            "root_adoption_record": "research/inverse-problems-knot-theory-all-109-2026-10-19-supervision-20261020/step2-supervision/battery1-boundary/lane-7/root-final-adoption.json"
+          }
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "Compact-operator source balls have the Holder modulus bound, with equality at singular radii and explicit zero cases. Equality at one radius is not claimed to determine the operator or source exponent.",
+          "template_review": {
+            "upheld": true,
+            "by": "/root",
+            "reason": "Equality at one radius is not claimed to determine the operator or source exponent.",
+            "item_sha256": "955e9003adad03d94d7ca940dd4383c1378ceb424e3adeae84e823252ed8f433",
+            "row_sha256": "5b5a56366e4e981a28c161e76090429998c4a881c31b5f69cc2ab3d8af6225dc",
+            "role": "root-adopted actual delegated owner-focused FIRST; not native Alpha",
+            "delegated_reviewer": "/root/top_local_homeomorphism_deformation",
+            "delegated_review_sources": [
+              {
+                "file": "research/inverse-problems-knot-theory-all-109-2026-10-19-supervision-20261020/step2-supervision/battery1-boundary/lane-7/proposal.json",
+                "field": "rows",
+                "index": 378
+              }
+            ],
+            "root_adoption_record": "research/inverse-problems-knot-theory-all-109-2026-10-19-supervision-20261020/step2-supervision/battery1-boundary/lane-7/root-final-adoption.json"
+          }
+        }
+      ],
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "alpha-batch-3",
+        "notes": "Proof 1.1\u20132.1 independently checked against completed interpolation and minimum-norm suppliers and positive-singular-value definition/SVD. Zero noise gives intersection of kernel and orthogonal complement equal zero. For positive noise interpolation yields the supremum bound. Unit singular vectors with w=rho*v attain equality exactly at rho*s^(nu+1). Only infinite positive rank yields the stated null sequence; finite rank/zero operator have their explicit qualifications. Nonempty feasible set and positive exponents checked; no defect or diagram."
+      }
+    },
+    "ex-ip-polynomial-singular-decay-source-balls": {
+      "citations": [
+        {
+          "fact": "A1",
+          "source": "def-countable-choice",
+          "source_section": "Definition",
+          "quote": "The **Axiom of Countable Choice**, written $\\mathrm{AC}_\\omega$, is the following\nstatement.\n\n> For every family $(X_n)_{n \\in \\mathbb{N}}$ of nonempty sets indexed by\n> $\\mathbb{N}$ there is a function $f$ with domain $\\mathbb{N}$ such that\n> $f(n) \\in X_n$ for every $n \\in \\mathbb{N}$.\n\nEquivalently, in the vocabulary of Choice function: every at most\ncountable family of nonempty sets has a choice function.",
+          "uses": [
+            "1.2",
+            "2.1",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F1",
+          "source": "def-square-summable-family-on-an-arbitrary-index-set",
+          "source_section": "Definition",
+          "quote": "Throughout, $\\mathbb F$ is $\\mathbb R$ or $\\mathbb C$ and families are indexed by\nan arbitrary set $I$, with no enumeration or countability assumed. Finite real lists use [[def-finite-sum]], and sums over finite subsets use [[def-finite-sum-in-a-commutative-monoid]] in the additive monoid of the scalar field. Disjoint splitting is [[lem-finite-sum-reindexing-and-fubini]], and scalar modulus estimates use [[lem-complex-conjugation-and-modulus-laws]]; all suprema and infima of real sets below are\ntaken in the complete ordered field $\\mathbb R$\n([[def-complete-ordered-field]]) or in $[0,+\\infty]\\subseteq\\overline{\\mathbb R}$\n([[def-extended-reals]], [[lem-extended-reals-complete]]).\n\n**Sums of nonnegative families.** Let $(c_i)_{i\\in I}$ be a family of\nnonnegative reals and let $\\operatorname{Fin}(I)$ be the set of finite subsets of\n$I$, ordered by inclusion. Define\n\n$$\\sum_{i\\in I}c_i:=\\sup\\Bigl\\{\\sum_{i\\in F}c_i \\;:\\; F\\in\\operatorname{Fin}(I)\\Bigr\\}\\in[0,+\\infty] .$$\n\nThe set of finite subsums is nonempty, since $\\varnothing$ contributes the empty\nsum $0$, so the supremum exists in $[0,+\\infty]$; it is a real number exactly\nwhen the finite subsums are bounded above in $\\mathbb R$, and $+\\infty$\notherwise. For finite $I$ the finite subsum at $I$ is the largest of all finite\nsubsums, because all terms are nonnegative, so the definition agrees with the\nfinite sum; in particular $\\sum_{i\\in I}c_i=0$ when every $c_i$ is $0$, and\n$I=\\varnothing$ gives the empty sum $0$.\n\n**Splitting identity and small tails.** Fix a finite $F\\subseteq I$. Every\nfinite $G\\subseteq I$ splits as the disjoint union $(G\\cap F)\\cup(G\\setminus F)$,\nso $\\sum_{i\\in G}c_i=\\sum_{i\\in G\\cap F}c_i+\\sum_{i\\in G\\setminus F}c_i\\le\\sum_{i\\in F}c_i+\\sum_{i\\in I\\setminus F}c_i$;\nconversely the finite $G$ with $F\\subseteq G$ satisfy\n$\\sum_{i\\in G}c_i=\\sum_{i\\in F}c_i+\\sum_{i\\in G\\setminus F}c_i$. Taking suprema,\nwith the constant $\\sum_{i\\in F}c_i$ passing through the supremum,\n\n$$\\sum_{i\\in I}c_i=\\sum_{i\\in F}c_i+\\sum_{i\\in I\\setminus F}c_i . \\qquad (1)$$\n\nConsequently, if $S:=\\sum_{i\\in I}c_i$ is finite, then for every real\n$\\varepsilon>0$ there is a finite $F\\subseteq I$ with\n$\\sum_{i\\in I\\setminus F}c_i<\\varepsilon$: the finite subsums form a nonempty\nbounded-above set with supremum $S$, so by the epsilon characterisation of the\nsupremum ([[lem-sup-epsilon]]) some finite $F$ has\n$S-\\varepsilon<\\sum_{i\\in F}c_i$, and (1) gives\n$\\sum_{i\\in I\\setminus F}c_i=S-\\sum_{i\\in F}c_i<\\varepsilon$. Such an $F$ is\ncalled a **tail-control set** for $\\varepsilon$.\n\n**Sums of scalar families.** Now let $(a_i)_{i\\in I}$ be a family in $\\mathbb F$\nand put $s_F:=\\sum_{i\\in F}a_i$ for finite $F\\subseteq I$. The set\n$\\operatorname{Fin}(I)$ with inclusion is a directed preorder: it is nonempty and\n$F\\cup G$ is a common upper bound of $F$ and $G$\n([[def-directed-set-and-net]]). Hence $(s_F)_{F\\in\\operatorname{Fin}(I)}$ is a\nnet in $\\mathbb F$, the **finite-subset net** of the family, and the family is\n**summable** when this net converges\n([[def-net-convergence-and-cluster-point]]). The scalar metric is the usual real metric or [[def-complex-metric-convergence-and-continuity]]. These metric spaces are Hausdorff by [[thm-metric-hausdorff-separation]]. A net in $\\mathbb F$ has at most one limit\n([[thm-hausdorff-iff-net-limits-are-unique]]), so for a summable family the\nlimit is unique and we write $\\sum_{i\\in I}a_i:=\\lim_F s_F$ for it. The family is\n**absolutely summable** when $\\sum_{i\\in I}|a_i|<+\\infty$ in the sense above.\n\n**Every absolutely summable family is summable, in ZF.** Assume\n$S:=\\sum_{i\\in I}|a_i|$ is finite and put $S_F:=\\sum_{i\\in F}|a_i|$ for finite\n$F$. For finite $F,G\\subseteq I$ the triangle inequality for finite sums and the\nfact that a finite subsum is at most the whole nonnegative sum give\n\n$$|s_F-s_G|\\le\\sum_{i\\in F\\triangle G}|a_i|\\le S-S_{F\\cap G} . \\qquad (2)$$\n\nNow fix a real $\\varepsilon>0$, let $F_0$ be a tail-control set for\n$\\varepsilon$, and let $F,G\\supseteq F_0$ be finite. Then $F\\cap G\\supseteq F_0$,\nso $S-S_{F\\cap G}\\le S-S_{F_0}<\\varepsilon$ and (2) gives\n$|s_F-s_G|<\\varepsilon$.\n\nFirst suppose $\\mathbb F=\\mathbb R$. For each finite $F$ define\n$A_F:=\\inf\\{s_G : G\\supseteq F\\}$ and $B_F:=\\sup\\{s_G : G\\supseteq F\\}$ over\nfinite $G$. Both are real numbers, because $|s_G|\\le S_G\\le S$, so the two sets\nare nonempty and bounded, and $A_F\\le B_F$. If $H\\supseteq F$ then\n$A_H\\ge A_F$ and $B_H\\le B_F$. Let $L:=\\sup_FA_F$ and $U:=\\inf_FB_F$.\nSince $A_F\\le s_{F\\cup H}\\le B_H$ for all finite $F,H$, we get $L\\le U$.\nMoreover, the preceding estimate holds for every pair $F,G\\supseteq F_0$;\ntaking the supremum over $F$ and the infimum over $G$ gives\n$B_{F_0}-A_{F_0}\\le\\varepsilon$. Hence\n$0\\le U-L\\le B_{F_0}-A_{F_0}\\le\\varepsilon$ for every $\\varepsilon>0$, so\n$L=U=:s$. If $F\\supseteq F_0$, then both $s_F$ and $s$ lie in\n$[A_{F_0},B_{F_0}]$, and therefore $|s_F-s|\\le\\varepsilon$.\n\nIf $\\mathbb F=\\mathbb C$, apply the real argument just proved to the families\n$(\\operatorname{Re}a_i)$ and $(\\operatorname{Im}a_i)$. They are absolutely\nsummable because $|\\operatorname{Re}a_i|,|\\operatorname{Im}a_i|\\le|a_i|$.\nTheir finite-subset nets converge to real numbers $r$ and $t$, respectively,\nso $s_F\\to r+it$ in $\\mathbb C$. Thus every absolutely summable real or complex\nfamily is summable. **No choice principle is used**: the construction uses only\ntwo-sided suprema in $\\mathbb R$.\n\n**Linearity and absolute value.** If $(a_i)$ and $(b_i)$ are absolutely\nsummable and $\\lambda\\in\\mathbb F$, then so are $(a_i+b_i)$ and\n$(\\lambda a_i)$, and\n\n$$\\sum_{i\\in I}(a_i+b_i)=\\sum_{i\\in I}a_i+\\sum_{i\\in I}b_i,\\qquad \\sum_{i\\in I}\\lambda a_i=\\lambda\\sum_{i\\in I}a_i,\\qquad \\Bigl|\\sum_{i\\in I}a_i\\Bigr|\\le\\sum_{i\\in I}|a_i| ,$$\n\nbecause the corresponding identities hold for every finite subsum, both sides\nare limits of the corresponding finite-subset nets, and addition, scalar\nmultiplication and the modulus are continuous. The splitting identity (1)\nlikewise passes to absolutely summable scalar families:\n$\\sum_{i\\in I}a_i=\\sum_{i\\in F}a_i+\\sum_{i\\in I\\setminus F}a_i$ for every finite\n$F$, because finite subsums over sets containing $F$ converge to the left-hand\nside and equal the finite sum over $F$ plus the finite subsum of the tail, whose\nnet converges to the tail sum.\n\n**The finite-dimensional Cauchy-Schwarz inequality.** Let $(u_k)_{0\\le k<m}$ and $(v_k)_{0\\le k<m}$ be scalar lists, for $m\\in\\mathbb N$ and let $t\\in\\mathbb R$. Every term of\n$\\sum_{k<m}(|u_k|-t|v_k|)^2$ is nonnegative, so for all real $t$\n\n$$0\\le\\sum_{k<m}|u_k|^2-2t\\sum_{k<m}|u_k||v_k|+t^2\\sum_{k<m}|v_k|^2 .$$\n\nIf $\\sum_{k<m}|v_k|^2>0$, substituting\n$t=\\bigl(\\sum_{k<m}|u_k||v_k|\\bigr)/\\bigl(\\sum_{k<m}|v_k|^2\\bigr)$ gives\n$\\bigl(\\sum_{k<m}|u_k||v_k|\\bigr)^2\\le\\bigl(\\sum_{k<m}|u_k|^2\\bigr)\\bigl(\\sum_{k<m}|v_k|^2\\bigr)$;\nif $\\sum_{k<m}|v_k|^2=0$ then every $v_k=0$ and both sides are $0$. In either case\n$\\sum_{k<m}|u_k||v_k|\\le\\bigl(\\sum_{k<m}|u_k|^2\\bigr)^{1/2}\\bigl(\\sum_{k<m}|v_k|^2\\bigr)^{1/2}$\nafter taking square roots, and applying the modulus inequality for finite sums\nto $u_k\\overline{v_k}$ also gives\n\n$$\\Bigl|\\sum_{k<m}u_k\\overline{v_k}\\Bigr|\\le\\Bigl(\\sum_{k<m}|u_k|^2\\Bigr)^{1/2}\\Bigl(\\sum_{k<m}|v_k|^2\\Bigr)^{1/2} . \\qquad (3)$$\n\n**The space $\\ell^2(I)$.** For a family $a=(a_i)_{i\\in I}$ in $\\mathbb F$ define\n$Q(a):=\\sum_{i\\in I}|a_i|^2$. If $Q(a)$ is finite, set $\\|a\\|_2:=\\sqrt{Q(a)}$, using the nonnegative real square root of [[thm-of-square-roots]]; if $Q(a)=+\\infty$, set $\\|a\\|_2:=+\\infty$. This is a case definition, not exponentiation of an extended real. Let\n\n$$\\ell^2(I,\\mathbb F):=\\{\\,a=(a_i)_{i\\in I} : \\|a\\|_2<+\\infty\\,\\}.$$\n\nThe set $\\ell^2(I,\\mathbb F)$ is a vector space over $\\mathbb F$: it contains the\nzero family, is closed under scalar multiplication because\n$\\|\\lambda a\\|_2=|\\lambda|\\,\\|a\\|_2$, and is closed under addition because (3)\napplied to finite subsums gives $\\|a+b\\|_2\\le\\|a\\|_2+\\|b\\|_2<+\\infty$. The same\ninequality is the triangle inequality for $\\|\\cdot\\|_2$, which is moreover\nnonnegative, vanishes only for the zero family (an arbitrary sum of nonnegative\nterms with supremum $0$ has every term $0$) and satisfies\n$\\|\\lambda a\\|_2=|\\lambda|\\,\\|a\\|_2$; thus $\\|\\cdot\\|_2$ is a norm on\n$\\ell^2(I,\\mathbb F)$. Finally the **pairing**\n$\\langle a,b\\rangle:=\\sum_{i\\in I}a_i\\overline{b_i}$ is well defined on\n$\\ell^2(I,\\mathbb F)\\times\\ell^2(I,\\mathbb F)$, because\n$|a_i\\overline{b_i}|=|a_i||b_i|$ has finite nonnegative sum by (3); it is linear\nin the first variable, conjugate symmetric, positive definite, and satisfies\n$\\langle a,a\\rangle=\\|a\\|_2^2$, all by the corresponding finite identities and\nthe linearity of the sum. Consequently $\\ell^2(I,\\mathbb F)$ is an inner-product\nspace, and $e_i\\in\\ell^2(I,\\mathbb F)$ denotes the family that is $1$ at $i$ and\n$0$ elsewhere. **Nothing here asserts that $\\ell^2(I,\\mathbb F)$ is complete**;\nthat follows later, from an orthonormal basis of a Hilbert space.",
+          "uses": [
+            "1.2",
+            "2.1",
+            "3.1",
+            "4.1"
+          ]
+        },
+        {
+          "fact": "F1",
+          "source": "lem-square-summable-sequences-form-a-hilbert-space",
+          "source_section": "Statement",
+          "quote": "The real sequence space\n$$\\ell^2(\\mathbb N,\\mathbb R)=\\left\\{x=(x_n):\\sum_{n\\in\\mathbb N}|x_n|^2<\\infty\\right\\},$$\nwith its canonical inner product and norm from\n[[def-square-summable-family-on-an-arbitrary-index-set]], is complete and\ntherefore is a real Hilbert space.",
+          "uses": [
+            "1.2",
+            "2.1",
+            "3.1",
+            "4.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "thm-cauchy-schwarz-in-an-inner-product-space",
+          "source_section": "Statement",
+          "quote": "For all vectors $x,y$ in a real or complex inner-product space,\n\n$$|\\langle x,y\\rangle|\\le\\|x\\|\\,\\|y\\| ,$$\n\nwith equality if and only if $x$ and $y$ are linearly dependent.",
+          "uses": [
+            "1.2",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "def-operator-norm",
+          "source_section": "Definition",
+          "quote": "Let $X$ and $Y$ be normed spaces over the same scalar field, and let\n$T:X\\to Y$ be bounded in the sense of [[def-bounded-linear-operator]]. The\n**operator norm** of $T$ is\n\n$$\\|T\\| := \\sup\\{\\|Tx\\| : x \\in X,\\ \\|x\\| \\le 1\\}.$$\n\nThe set on the right contains $0$ and every bound $C$ for $T$ bounds it\nabove. Thus its finite real supremum exists by the proved least-upper-bound\nproperty of the library's real field ([[cor-cauchy-reals-lub-complete]]).\nIn particular every number strictly below the supremum is exceeded by a\nmember of this set; otherwise it would be a smaller upper bound. No choice\nprinciple is used for this assertion.\n\nThe same number is the least bound of $T$:\n\n$$\\|T\\| = \\inf\\{C \\ge 0 : \\|Tx\\| \\le C\\|x\\| \\text{ for all } x \\in X\\}.$$\n\nIf $X \\ne \\{0\\}$, positive homogeneity also gives\n\n$$\\|T\\| = \\sup\\{\\|Tx\\| : \\|x\\| = 1\\}.$$\n\nWhen $X = \\{0\\}$, the unit sphere is empty and the unit-ball supremum is $0$,\nso $\\|T\\| = 0$.",
+          "uses": [
+            "1.2",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "def-hilbert-space-adjoint",
+          "source_section": "Definition",
+          "quote": "Assume the Axiom of Countable Choice. Let $H$ and $K$ be real or complex Hilbert spaces and let $T\\in\\mathcal B(H,K)$ be a bounded linear operator ([[def-bounded-linear-operator]], [[def-space-of-bounded-linear-operators]]). For fixed $y\\in K$ the map\n\n$$x\\longmapsto\\langle Tx,y\\rangle_K$$\n\nis a bounded linear functional on $H$: it is linear in $x$ because $T$ is linear and the pairing is linear in its first argument, and $|\\langle Tx,y\\rangle_K|\\le\\|Tx\\|\\,\\|y\\|\\le\\|T\\|\\,\\|x\\|\\,\\|y\\|$ by Cauchy\u2013Schwarz and the operator-norm inequality ([[thm-cauchy-schwarz-in-an-inner-product-space]], [[def-operator-norm]]). By Riesz representation ([[thm-riesz-representation-for-hilbert-space]]) there is therefore a unique vector $T^*y\\in H$ with\n\n$$\\langle Tx,y\\rangle_K=\\langle x,T^*y\\rangle_H\\qquad\\text{for every }x\\in H .$$\n\nThe **Hilbert adjoint** of $T$ is the map\n\n$$T^*:K\\longrightarrow H,\\qquad y\\longmapsto T^*y .$$\n\nIt is the unique map $K\\to H$ satisfying the displayed identity, since two such maps have $\\langle x,(T^*_1-T^*_2)y\\rangle=0$ for all $x$ and hence $(T^*_1-T^*_2)y=0$ by positive definiteness.\n\n**The dictionary with the Banach transpose.** Write $R_H:H\\to H^*$ and $R_K:K\\to K^*$ for the Riesz maps $R_H(x)=\\langle\\,\\cdot\\,,x\\rangle_H$ and $R_K(y)=\\langle\\,\\cdot\\,,y\\rangle_K$, and let $T'\\in\\mathcal B(K^*,H^*)$ be the transpose of $T$, $(T'g)(x)=g(Tx)$ ([[def-transpose-of-a-bounded-operator]]). Then for all $y\\in K$ and $x\\in H$,\n\n$$\\bigl(R_H(T^*y)\\bigr)(x)=\\langle x,T^*y\\rangle_H=\\langle Tx,y\\rangle_K=(R_Ky)(Tx)=\\bigl(T'(R_Ky)\\bigr)(x),$$\n\nso $R_H\\,T^*=T'\\,R_K$. The Hilbert adjoint is thus the Banach transpose conjugated by the Riesz identifications of $H$ and $K$ with their duals; it is a different operator from $T'$ whenever the Riesz maps are conjugate-linear.",
+          "uses": [
+            "1.2"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "thm-hilbert-adjoint-properties",
+          "source_section": "Statement",
+          "quote": "Assume the Axiom of Countable Choice. Let $H,K,L$ be real or complex Hilbert spaces and let $R,S\\in\\mathcal B(H,K)$ and $T\\in\\mathcal B(K,L)$ be bounded linear operators. Then the Hilbert adjoints satisfy:\n\n1. $(aR+bS)^*=\\overline a\\,R^*+\\overline b\\,S^*$ for scalars $a,b$, and the adjoint of an operator is unique;\n2. $(TS)^*=S^*T^*$;\n3. $T^{**}=T$ and $\\|T^*\\|=\\|T\\|$;\n4. $\\|T^*T\\|=\\|T\\|^2$.",
+          "uses": [
+            "1.2"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "def-self-adjoint-positive-unitary-and-normal-operator",
+          "source_section": "Definition",
+          "quote": "Assume the Axiom of Countable Choice, and let $H$ be a real or complex Hilbert space with $T\\in\\mathcal B(H)$ a bounded linear operator and $T^*$ its Hilbert adjoint ([[def-hilbert-space-adjoint]], [[def-space-of-bounded-linear-operators]]).\n\n- $T$ is **self-adjoint** when $T^*=T$;\n- $T$ is **positive** when $\\langle Tx,x\\rangle$ is a real number in $[0,+\\infty)$ for every $x\\in H$;\n- $T$ is **unitary** when $T^*T=TT^*=I$, the identity operator;\n- $T$ is **normal** when $T^*T=TT^*$.\n\nThe definitions are read over either scalar field with the same inner product. **Two immediate consequences.** Every self-adjoint operator is normal, because $T^*T=T^2=TT^*$ when $T^*=T$. Every unitary operator is normal, because its defining identity says exactly that $T^*T$ and $TT^*$ are both the identity. Positivity is a condition on the *values* of the quadratic form and therefore forces those values to be real, which for a complex Hilbert space does not follow from boundedness alone; a positive operator on a complex Hilbert space is in fact self-adjoint, but that is proved later and is not assumed here.\n\n**Consistency of the vocabulary.** The identity operator is self-adjoint, positive and unitary, and the zero operator is self-adjoint and positive; on the one-dimensional Hilbert space $\\mathbb C$ the operator $\\lambda I$ is self-adjoint exactly when $\\lambda$ is real, unitary exactly when $|\\lambda|=1$, and normal for every scalar $\\lambda$.",
+          "uses": [
+            "1.2"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "lem-finite-rank-operators-are-compact",
+          "source_section": "Statement",
+          "quote": "Let $X$ and $Y$ be normed spaces over the same scalar field and let\n$T:X\\to Y$ be a bounded linear operator\n([[def-bounded-linear-operator]]) whose range $T(X)$ admits an ordered basis of\nfinite length ([[def-linear-basis]]). Then $T$ is compact\n([[def-compact-linear-operator]]).",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "thm-norm-limit-of-compact-operators-is-compact",
+          "source_section": "Statement",
+          "quote": "Assume the Axiom of Countable Choice ([[def-countable-choice]]). Let $X$ be a\nnormed space, let $Y$ be a Banach space ([[def-banach-space]]), and let\n$T_n:X\\to Y$, $n\\in\\mathbb N$, be compact operators\n([[def-compact-linear-operator]]) with $\\|T_n-T\\|\\to0$ for a bounded linear\noperator $T:X\\to Y$ ([[def-bounded-linear-operator]],\n[[def-operator-norm]], [[def-metric-convergence]]). Then $T$ is compact.",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "lem-positive-square-root-of-a-compact-positive-operator",
+          "source_section": "Statement",
+          "quote": "Assume the Axiom of Countable Choice ([[def-countable-choice]]). Let $H$ be a\nreal or complex Hilbert space ([[def-hilbert-space]]) and let\n$T\\in\\mathcal B(H)$ be a compact self-adjoint positive operator\n([[def-compact-linear-operator]],\n[[def-self-adjoint-positive-unitary-and-normal-operator]],\n[[def-bounded-linear-operator]]), so that $\\langle Tx,x\\rangle$ is a\nnonnegative real for every $x$. Then there is a compact self-adjoint positive\noperator $S\\in\\mathcal B(H)$ with $S^{2}=T$, and it is unique: if\n$R\\in\\mathcal B(H)$ is compact and positive\n([[def-self-adjoint-positive-unitary-and-normal-operator]]) with $R^{2}=T$,\nthen $R=S$. The root acts by multiplication by $\\sqrt\\lambda$ on each positive\neigenspace $E_\\lambda(T)=\\ker(T-\\lambda I)$, $\\lambda>0$, and by zero on\n$\\ker T$; in particular $S$ is the operator denoted $\\sqrt T$ or $T^{1/2}$.",
+          "uses": [
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "def-compact-spectral-filter-and-qualification",
+          "source_section": "Definition",
+          "quote": "Assume Countable Choice. Let $X,Y$ be real or complex Hilbert spaces and let\n$A:X\\to Y$ be compact and bounded. Put $S=A^*A$. By\n[[lem-compact-gram-operator-is-positive-and-has-kernel]], $S$ is compact,\npositive, and self-adjoint, with $\\ker S=\\ker A$. Let $\\Sigma$ be the set of\nnonzero eigenvalues of $S$ and $P_t$ the orthogonal projection onto the\neigenspace of $t\\in\\Sigma$; let $P_0$ be the orthogonal projection onto\n$\\ker S$. The compact spectral multiplier of a bounded scalar function\n$q:\\{0\\}\\cup\\Sigma\\to\\mathbb F$ is\n$$q(S)x:=q(0)P_0x+\\sum_{t\\in\\Sigma}q(t)P_tx,$$\nwhere the finite-subset net converges in norm by\n[[lem-compact-spectral-multiplier-is-well-defined]]. For $\\nu>0$, define\n$S^\\nu$ by the multiplier $q_\\nu(0)=0$ and $q_\\nu(t)=t^\\nu$ for $t>0$.\nThis multiplier is bounded: if $t\\in\\Sigma$ and $u\\in E_t$ is a unit vector,\nthen $0<t=\\|Su\\|\\le\\|S\\|$, so $|q_\\nu(t)|\\le\\|S\\|^\\nu$.\n\nFor $\\lambda>0$, the Tikhonov filter and residual filter are\n$$g_\\lambda(t)=\\frac1{t+\\lambda},\\qquad r_\\lambda(t)=1-tg_\\lambda(t)=\\frac{\\lambda}{t+\\lambda}.$$\nThe Tikhonov solution for data $y_\\delta\\in Y$ is\n$$x_\\lambda^\\delta=g_\\lambda(S)A^*y_\\delta =(A^*A+\\lambda I_X)^{-1}A^*y_\\delta.$$\nIndeed, the spectral decomposition gives $S+\\lambda I_X$ the multiplier\n$t+\\lambda$ on each $E_t$ and $\\lambda$ on $\\ker S$, so $g_\\lambda(S)$ is\nits inverse, whose existence is also supplied by\n[[lem-hilbert-tikhonov-normal-operator-invertible]].\nThe source condition of order $\\nu>0$ and radius $R\\ge0$ means that\n$x^\\dagger=S^\\nu w$ for some $w\\in X$ with $\\|w\\|\\le R$. A family of\nfilters $g_\\alpha$ with residual filters $r_\\alpha(t)=1-tg_\\alpha(t)$ has\nqualification at least $p>0$ when, for each $0<\\nu\\le p$, some finite\nconstant $C_\\nu\\ge0$ satisfies\n$$t^\\nu|r_\\alpha(t)|\\le C_\\nu\\alpha^\\nu \\quad\\text{for every }\\alpha>0\\text{ and }t\\in\\Sigma.$$\nWhen $\\Sigma=\\varnothing$, this condition is vacuous.",
+          "uses": [
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F6",
+          "source": "def-ip-index-source-ball",
+          "source_section": "Definition",
+          "quote": "Assume Countable Choice. Let $X$ and $Y$ be real or complex Hilbert spaces over the same scalar field and let $K:X\\to Y$ be compact. Write $\\kappa:=\\|K\\|$, $S:=K^*K$, and $|K|:=S^{1/2}$, and let $\\Lambda_K$ be zero together with the positive eigenvalues of $|K|$. An admissible spectral index is a bounded function $\\psi:\\Lambda_K\\to[0,\\infty)$ with $\\psi(0)=0$. Define $\\psi(|K|)$ by the compact spectral multiplier of $S$ with scalar function $t\\mapsto\\psi(\\sqrt t)$. For $\\rho>0$ define $X_{\\psi,\\rho}(K):=\\{\\psi(|K|)w:w\\in X,\\ \\|w\\|_X\\le\\rho\\}$. For $\\nu>0$, $\\psi_\\nu(t)=t^\\nu$ defines the power source ball $X_{\\nu,\\rho}(K)$. If $\\kappa>0$ and $q>0$, define the logarithmic spectral-index candidate by $\\psi_{\\log,q}(0)=0$ and $\\psi_{\\log,q}(t)=(1+\\log(\\kappa/t))^{-q}$ for positive $t\\in\\Lambda_K$; when it is bounded, it defines $X_{\\log,q,\\rho}(K)$.",
+          "uses": [
+            "1.1",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F6",
+          "source": "def-ip-power-source-set",
+          "source_section": "Definition",
+          "quote": "Assume Countable Choice. Let $K:X\\to Y$ be compact between real or complex Hilbert spaces over the same scalar field and let $\\nu,\\rho>0$. The power source ball is $X_{\\nu,\\rho}(K):=\\{|K|^\\nu w:w\\in X,\\ \\|w\\|_X\\le\\rho\\}$, where $|K|^\\nu=(K^*K)^{\\nu/2}$ is defined by compact spectral calculus. It lies in $N(K)^\\perp$ and consists of minimum-norm representatives of the exact data $Kx$. In the convention $S=K^*K$ this is the source condition $x=S^{\\nu/2}w$.",
+          "uses": [
+            "1.1",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F7",
+          "source": "thm-ip-source-ball-modulus-of-continuity",
+          "source_section": "Statement",
+          "quote": "Assume Countable Choice. Let $K:X\\to Y$ be compact between real or complex Hilbert spaces over the same scalar field and $\\nu,\\rho>0$. For every $\\delta\\ge0$, $\\varepsilon_K(X_{\\nu,\\rho}(K),\\delta)\\le\\delta^{\\nu/(\\nu+1)}\\rho^{1/(\\nu+1)}$. For every positive singular value $s_j$ with right singular vector $v_j$, equality holds at $\\delta_j=\\rho s_j^{\\nu+1}$, witnessed by $x_j=\\rho s_j^\\nu v_j$. If $K$ has infinite rank, these $\\delta_j$ form a null sequence; if $K$ has finite positive rank, equality is asserted only at its finitely many positive singular values; if $K=0$, the source ball and modulus are $\\{0\\}$ and $0$.",
+          "uses": [
+            "4.1"
+          ]
+        },
+        {
+          "fact": "F8",
+          "source": "def-natural-logarithm",
+          "source_section": "Definition",
+          "quote": "For $x>0$, define $\\log x$ to be the unique real $y$ such that $\\exp(y)=x$. This is well-defined because The exponential is a continuous bijection from $\\mathbb{R}$ onto $(0,\\infty)$ states that $\\exp:\\mathbb R\\to(0,\\infty)$ is a bijection.\n\nThus $\\log:(0,\\infty)\\to\\mathbb R$ is the inverse function of $\\exp$. In particular, $\\log(\\exp y)=y$ for every $y\\in\\mathbb R$ and $\\exp(\\log x)=x$ for every $x>0$.",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F8",
+          "source": "thm-natural-logarithm-laws",
+          "source_section": "Statement",
+          "quote": "The function $\\log:(0,\\infty)\\to\\mathbb R$ is continuous and strictly increasing, is onto $\\mathbb R$, and satisfies, for $x,y>0$,\n$$\\log(xy)=\\log x+\\log y,\\qquad \\log(x/y)=\\log x-\\log y,\\qquad \\log(1/x)=-\\log x.$$\nAlso $\\log 1=0$.",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F8",
+          "source": "def-real-power",
+          "source_section": "Definition",
+          "quote": "For $a>0$ and $x\\in\\mathbb R$, define\n$$a^x:=\\exp(x\\log a).$$\nFor the supplementary zero-base convention, define $0^x:=0$ when $x>0$.\n\nThe expressions $0^0$ and $0^x$ for $x<0$ are left undefined. Negative bases are not assigned arbitrary real powers.",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F8",
+          "source": "def-real-exponential-function-and-e",
+          "source_section": "Definition",
+          "quote": "For $x\\in\\mathbb R$, define\n$$\\exp(x):=\\sum_{n=0}^{\\infty}\\frac{x^n}{\\iota(n!)}, \\qquad e:=\\exp(1),$$\nprovided by the all-real convergence proved in The exponential series converges absolutely for every real argument. Here $n!\\in\\mathbb N$ is the factorial of The factorial $n!$ and the falling factorial $n^{\\underline{k}}$, defined by recursion in $\\mathbb{N}$, $\\iota(n!)$ is its nonzero real image (The canonical natural $\\iota(n) = n \\cdot 1_F$ of a field, Canonical naturals are positive and strictly increasing), and powers and series are those of Integer powers $a^m$ and Series, partial sums, convergence and the sum, divergence, and the tail series.\n\nThis is a real power series centred at $0$ (A real power series about a centre, its interval of convergence, and its radius in $[0,+\\infty]$). No logarithm, irrational power, or differential equation enters the definition.",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F8",
+          "source": "cor-exponential-reciprocal-and-positivity",
+          "source_section": "Statement",
+          "quote": "For every real $x$, $\\exp(x)>0$ and\n$$\\exp(-x)=\\frac1{\\exp(x)}.$$",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F8",
+          "source": "thm-real-power-continuity-and-derivatives",
+          "source_section": "Statement",
+          "quote": "For $a>0$, the function $x\\mapsto a^x$ is continuous on $\\mathbb R$ and\n$$(a^x)'=a^x\\log a.$$\nFor $\\alpha\\in\\mathbb R$, the function $x\\mapsto x^\\alpha$ is continuous and differentiable on $(0,\\infty)$, with\n$$(x^\\alpha)'=\\alpha x^{\\alpha-1}.$$",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F8",
+          "source": "cor-mean-value-theorem",
+          "source_section": "Statement",
+          "quote": "Let $a, b \\in \\mathbb{R}$ with $a < b$ and let $f : [a,b] \\to \\mathbb{R}$ be\ncontinuous on $[a,b]$ (Continuity of $f : A \\to \\mathbb{R}$ at a point of $A$ and on $A$: the $\\varepsilon$-$\\delta$ condition, its agreement with $\\lim_{x \\to c} f(x) = f(c)$ at a limit point, and continuity at an isolated point, Intervals of $\\mathbb{R}$: the nine order-convex forms, nondegeneracy, and length) and\ndifferentiable at every point of $(a,b)$ as a function on $[a,b]$\n(The derivative $f'(c) = \\lim_{x \\to c} \\frac{f(x) - f(c)}{x - c}$ of $f : A \\to \\mathbb{R}$ at a point $c \\in A$ that is a limit point of $A$, and differentiability on a set). Then there is $c \\in (a,b)$ with\n\n$$f(b) - f(a) \\;=\\; f'(c)\\,(b - a) .$$\n\nEquivalently, since $b - a \\ne 0$, there is $c \\in (a,b)$ at which\n$f'(c) = \\bigl(f(b)-f(a)\\bigr)/(b-a)$: the derivative somewhere inside equals\nthe average rate of change across the whole interval.\n\n**Continuity on the closed interval cannot be dropped.** Differentiability at\nevery point of $(a,b)$ alone does not suffice: a function on $[0,1]$,\ndifferentiable at every point of $(0,1)$ with derivative constantly $1$, for\nwhich no $c$ works, is exhibited later on this page as a false statement, and\nthe companion page works the same witness out in full.",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F8",
+          "source": "thm-real-power-laws",
+          "source_section": "Statement",
+          "quote": "For $a,b>0$ and $r,s\\in\\mathbb R$,\n$$a^{r+s}=a^ra^s,\\qquad (ab)^r=a^rb^r,\\qquad (a/b)^r=a^r/b^r,\\qquad (a^r)^s=a^{rs}.$$",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F8",
+          "source": "cor-archimedean-reciprocal",
+          "source_section": "Statement",
+          "quote": "Let $F$ be a complete ordered field (Complete ordered field (least-upper-bound property)) and let\n$\\varepsilon \\in F$ with $\\varepsilon > 0$. Then there is a natural number\n$n \\ge 1$ such that\n\n$$\\frac{1}{n \\cdot 1_F} < \\varepsilon ,$$\n\nwhere $n \\cdot 1_F$ is the canonical natural of $F$ (Every complete ordered field is Archimedean) and\n$1/(n \\cdot 1_F)$ is its multiplicative inverse (Field). As is standard\nwe abbreviate $n \\cdot 1_F$ to $n$ and write the conclusion $1/n < \\varepsilon$.\n\nThis is the **reciprocal form** of the Archimedean property.\nEvery complete ordered field is Archimedean on its own delivers only the assertion that the canonical\nnaturals are cofinal, $x < n \\cdot 1_F$; the form actually used in analysis, that\nthe reciprocals of the naturals get below every positive bound, is the statement\nabove, and it is recorded separately so that no proof has to reconstruct the\ninversion step in passing.",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F8",
+          "source": "lem-of-inverse-positive",
+          "source_section": "Statement",
+          "quote": "Let $F$ be an ordered field (Ordered field) with positive cone $P$, and\nlet $a, b \\in F$.\n\n1. If $a > 0$ then $a^{-1} > 0$.\n2. If $0 < a < b$ then $0 < b^{-1} < a^{-1}$.",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F8",
+          "source": "def-complete-ordered-real-field",
+          "source_section": "Definition",
+          "quote": "A **Dedekind-complete ordered field** is a commutative field $\\mathbb R$ with\nidentity $1>0$, a total order compatible with addition and multiplication, and\nthe least-upper-bound axiom: every nonempty subset of $\\mathbb R$ that is\nbounded above has a least upper bound in $\\mathbb R$. Throughout this batch,\nall real variables, intervals, limits, derivatives and integrals are taken in\nsuch a field. The integers and rationals are interpreted in their usual\nembedded copies. For $x\\in\\mathbb R$, define $|x|=x$ when $x\\ge0$ and\n$|x|=-x$ when $x<0$.",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "For $0<t\\le1$, $1/t\\ge1$, so [F8] gives $\\log(1/t)\\ge\\log1=0$. Thus $1+\\log(1/t)\\ge1$; since $q>0$, the positive power of this base is at least $1$, and its reciprocal $\\psi_q(t)$ lies in $(0,1]$. Together with $\\psi_q(0)=0$, this verifies that the logarithmic index is bounded and is admissible under [F6].",
+          "step": "1.1",
+          "inputs": [
+            "given",
+            "F6",
+            "F8",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-1-2",
+          "claim": "The bijection $Ux=(x_{n+1})_{n\\in\\mathbb N}$ from $\\ell^2(I,\\mathbb R)$ to $\\ell^2(\\mathbb N,\\mathbb R)$ preserves the coordinate inner product, so [F1] transfers completeness to $\\ell^2(I,\\mathbb R)$. For $x=(x_j)\\in\\ell^2(I)$, $\\|K_ax\\|_2^2=\\sum_{j\\in I} j^{-2a}|x_j|^2\\le\\|x\\|_2^2$, so $K_a$ is a well-defined bounded linear map with $\\|K_a\\|\\le1$; $K_ae_1=e_1$ gives $\\|K_a\\|\\ge1$. For $x,y\\in\\ell^2(I)$, [F2] makes $\\sum_{j\\in I} j^{-a}x_jy_j$ absolutely convergent, and the coordinate inner product gives $\\langle K_ax,y\\rangle=\\sum_{j\\in I} j^{-a}x_jy_j=\\langle x,K_ay\\rangle$. Uniqueness of the adjoint in [F3] yields $K_a^*=K_a$, and $\\langle K_ax,x\\rangle=\\sum_{j\\in I}j^{-a}|x_j|^2\\ge0$, so $K_a$ is positive.",
+          "step": "1.2",
+          "inputs": [
+            "given",
+            "A1",
+            "F1",
+            "F2",
+            "F3",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "For $N\\ge1$ define $(K_{a,N}x)_j=j^{-a}x_j$ for $j\\le N$ and $0$ for $j>N$. The coordinate estimate from step 1.2 gives $\\|K_{a,N}x\\|_2\\le\\|x\\|_2$, so $K_{a,N}$ is bounded; since each $j^{-a}>0$ for $j\\le N$, its range is exactly $\\operatorname{span}\\{e_1,\\ldots,e_N\\}$, so [F4] makes it compact. For every $x$, $\\|(K_a-K_{a,N})x\\|_2^2=\\sum_{j>N}j^{-2a}|x_j|^2\\le(N+1)^{-2a}\\|x\\|_2^2$, with equality at $x=e_{N+1}$; therefore $\\|K_a-K_{a,N}\\|=(N+1)^{-a}$. Given $\\varepsilon>0$, [F8] supplies a threshold $N$ with $1/j<\\varepsilon^{1/a}$ for all $j\\ge N+1$; monotonicity of $t\\mapsto t^a$ gives $(N+1)^{-a}<\\varepsilon$. Thus $K_{a,N}\\to K_a$ in norm, and [F4] makes $K_a$ compact. Each diagonal coefficient is positive, so $K_ax=0$ forces every $x_j=0$ and $K_a$ is injective.",
+          "step": "2.1",
+          "inputs": [
+            "given",
+            "A1",
+            "step 1.2",
+            "F1",
+            "F2",
+            "F4",
+            "F8",
+            "algebra",
+            "choose"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "claim": "Since $K_a$ is compact, self-adjoint and positive by steps 1.2\u20132.1, $K_a$ is the unique positive square root of $K_a^*K_a=K_a^2$; [F5] therefore gives $|K_a|=K_a$. Each $e_j$ is an eigenvector of $|K_a|$ with eigenvalue $j^{-a}$. Applying the compact spectral multiplier [F5] coordinatewise yields $(|K_a|^\\nu w)_j=j^{-a\\nu}w_j$ and $(\\psi_q(|K_a|)w)_j=\\psi_q(j^{-a})w_j=(1+a\\log j)^{-q}w_j$, proving the stated power and logarithmic coordinates.",
+          "step": "3.1",
+          "inputs": [
+            "given",
+            "A1",
+            "step 1.2",
+            "step 2.1",
+            "F1",
+            "F5",
+            "F6",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-4-1",
+          "claim": "For each $j\\ge1$ take $w^{(j)}=\\rho e_j$ and $x^{(j)}=|K_a|^\\nu w^{(j)}=\\rho j^{-a\\nu}e_j$. Then $\\|K_ax^{(j)}\\|_2=\\rho j^{-a(\\nu+1)}=\\delta_j$ and $\\|x^{(j)}\\|_2=\\rho j^{-a\\nu}=\\delta_j^{\\nu/(\\nu+1)}\\rho^{1/(\\nu+1)}$. This feasible source-ball element attains the universal upper bound from [F7], so equality holds at $\\delta_j$.",
+          "step": "4.1",
+          "inputs": [
+            "given",
+            "step 3.1",
+            "F1",
+            "F7",
+            "construct",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "finite_smoke": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The Example fixes I=N\\{0}={1,2,...} and an infinite diagonal operator, so its positive singular set is not empty."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Step 1.1 defines psi_q(0)=0 at the zero spectral value."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Step 4.1 includes j=1 and the first singular direction."
+        },
+        {
+          "case": "degenerate",
+          "status": "not_applicable",
+          "reason": "The Example assumes a>0 and has positive diagonal entries, so K_a is injective and infinite rank."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Steps 1.1 and 4.1 check t=1 and j=1, the upper spectral endpoint."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Steps 1.2, 2.1, and 3.1 use Countable Choice for adjoints, compact norm limits, and spectral roots."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The compact injective diagonal j^-a operator has explicit power/log source weights and modulus equality at the specified discrete delta_j only. This is the stated implication/computation under its hypotheses; a forward biconditional direction is not separately asserted.",
+          "template_review": {
+            "upheld": true,
+            "by": "/root",
+            "reason": "The compact injective diagonal j^-a operator has explicit power/log source weights and modulus equality at the specified discrete delta_j only. This is the stated implication/computation under its hypotheses; a forward biconditional direction is not separately asserted.",
+            "item_sha256": "cbd7b5cadcd04e1c9f8e603e83575427fa2ab75dc61c67e065580b838e0f4d70",
+            "row_sha256": "6bc3e09fe3c8c07f60c68d0b699ab7ca1387d75805ccc37b8020436caa1c876c",
+            "role": "root-adopted actual delegated owner-focused FIRST; not native Alpha",
+            "delegated_reviewer": "/root/top_pair_complement",
+            "delegated_review_sources": [
+              {
+                "file": "research/inverse-problems-knot-theory-all-109-2026-10-19-supervision-20261020/step2-supervision/battery1-boundary/lane-9/proposal.json",
+                "field": "rows",
+                "index": 359
+              }
+            ],
+            "root_adoption_record": "research/inverse-problems-knot-theory-all-109-2026-10-19-supervision-20261020/step2-supervision/battery1-boundary/lane-9/root-final-adoption.json"
+          }
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The compact injective diagonal j^-a operator has explicit power/log source weights and modulus equality at the specified discrete delta_j only. This is the stated implication/computation under its hypotheses; a converse characterization of those hypotheses is not separately asserted.",
+          "template_review": {
+            "upheld": true,
+            "by": "/root",
+            "reason": "The compact injective diagonal j^-a operator has explicit power/log source weights and modulus equality at the specified discrete delta_j only. This is the stated implication/computation under its hypotheses; a converse characterization of those hypotheses is not separately asserted.",
+            "item_sha256": "cbd7b5cadcd04e1c9f8e603e83575427fa2ab75dc61c67e065580b838e0f4d70",
+            "row_sha256": "27e3a4b0492486f8ea000066ad366ac69a9df5d67a412cce01a9e846c2fbc09d",
+            "role": "root-adopted actual delegated owner-focused FIRST; not native Alpha",
+            "delegated_reviewer": "/root/top_pair_complement",
+            "delegated_review_sources": [
+              {
+                "file": "research/inverse-problems-knot-theory-all-109-2026-10-19-supervision-20261020/step2-supervision/battery1-boundary/lane-9/proposal.json",
+                "field": "rows",
+                "index": 360
+              }
+            ],
+            "root_adoption_record": "research/inverse-problems-knot-theory-all-109-2026-10-19-supervision-20261020/step2-supervision/battery1-boundary/lane-9/root-final-adoption.json"
+          }
+        }
+      ],
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "alpha-batch-3",
+        "notes": "Verification 1.1\u20134.1 independently checked. a,nu,q,rho are positive; log index is bounded by one on (0,1] and zero at zero. Diagonal coefficients j^(-a) are positive, decrease to zero and equal one at j=1. Boundedness, self-adjoint positivity and injectivity follow coordinatewise; finite truncation range is exactly the ordered coordinate span, and tail norm (N+1)^(-a) tends to zero by the checked reciprocal Archimedean/power facts. Compact square-root uniqueness gives |K_a|=K_a and multiplier coordinates j^(-a*nu), (1+a*log j)^(-q). The rho*e_j witness proves equality only at the stated radii. Countable Choice uses are expressly recorded in A1. Reader logarithm and truncation-range clarifications are sound, current bytes equal post-reader hash. No defect or diagram."
+      }
+    },
+    "ex-ip-exponential-singular-decay-source-balls": {
+      "citations": [
+        {
+          "fact": "A1",
+          "source": "def-countable-choice",
+          "source_section": "Definition",
+          "quote": "The **Axiom of Countable Choice**, written $\\mathrm{AC}_\\omega$, is the following\nstatement.\n\n> For every family $(X_n)_{n \\in \\mathbb{N}}$ of nonempty sets indexed by\n> $\\mathbb{N}$ there is a function $f$ with domain $\\mathbb{N}$ such that\n> $f(n) \\in X_n$ for every $n \\in \\mathbb{N}$.\n\nEquivalently, in the vocabulary of Choice function: every at most\ncountable family of nonempty sets has a choice function.",
+          "uses": [
+            "1.1",
+            "1.2",
+            "2.1",
+            "3.1",
+            "4.1"
+          ]
+        },
+        {
+          "fact": "F1",
+          "source": "def-square-summable-family-on-an-arbitrary-index-set",
+          "source_section": "Definition",
+          "quote": "Throughout, $\\mathbb F$ is $\\mathbb R$ or $\\mathbb C$ and families are indexed by\nan arbitrary set $I$, with no enumeration or countability assumed. Finite real lists use [[def-finite-sum]], and sums over finite subsets use [[def-finite-sum-in-a-commutative-monoid]] in the additive monoid of the scalar field. Disjoint splitting is [[lem-finite-sum-reindexing-and-fubini]], and scalar modulus estimates use [[lem-complex-conjugation-and-modulus-laws]]; all suprema and infima of real sets below are\ntaken in the complete ordered field $\\mathbb R$\n([[def-complete-ordered-field]]) or in $[0,+\\infty]\\subseteq\\overline{\\mathbb R}$\n([[def-extended-reals]], [[lem-extended-reals-complete]]).\n\n**Sums of nonnegative families.** Let $(c_i)_{i\\in I}$ be a family of\nnonnegative reals and let $\\operatorname{Fin}(I)$ be the set of finite subsets of\n$I$, ordered by inclusion. Define\n\n$$\\sum_{i\\in I}c_i:=\\sup\\Bigl\\{\\sum_{i\\in F}c_i \\;:\\; F\\in\\operatorname{Fin}(I)\\Bigr\\}\\in[0,+\\infty] .$$\n\nThe set of finite subsums is nonempty, since $\\varnothing$ contributes the empty\nsum $0$, so the supremum exists in $[0,+\\infty]$; it is a real number exactly\nwhen the finite subsums are bounded above in $\\mathbb R$, and $+\\infty$\notherwise. For finite $I$ the finite subsum at $I$ is the largest of all finite\nsubsums, because all terms are nonnegative, so the definition agrees with the\nfinite sum; in particular $\\sum_{i\\in I}c_i=0$ when every $c_i$ is $0$, and\n$I=\\varnothing$ gives the empty sum $0$.\n\n**Splitting identity and small tails.** Fix a finite $F\\subseteq I$. Every\nfinite $G\\subseteq I$ splits as the disjoint union $(G\\cap F)\\cup(G\\setminus F)$,\nso $\\sum_{i\\in G}c_i=\\sum_{i\\in G\\cap F}c_i+\\sum_{i\\in G\\setminus F}c_i\\le\\sum_{i\\in F}c_i+\\sum_{i\\in I\\setminus F}c_i$;\nconversely the finite $G$ with $F\\subseteq G$ satisfy\n$\\sum_{i\\in G}c_i=\\sum_{i\\in F}c_i+\\sum_{i\\in G\\setminus F}c_i$. Taking suprema,\nwith the constant $\\sum_{i\\in F}c_i$ passing through the supremum,\n\n$$\\sum_{i\\in I}c_i=\\sum_{i\\in F}c_i+\\sum_{i\\in I\\setminus F}c_i . \\qquad (1)$$\n\nConsequently, if $S:=\\sum_{i\\in I}c_i$ is finite, then for every real\n$\\varepsilon>0$ there is a finite $F\\subseteq I$ with\n$\\sum_{i\\in I\\setminus F}c_i<\\varepsilon$: the finite subsums form a nonempty\nbounded-above set with supremum $S$, so by the epsilon characterisation of the\nsupremum ([[lem-sup-epsilon]]) some finite $F$ has\n$S-\\varepsilon<\\sum_{i\\in F}c_i$, and (1) gives\n$\\sum_{i\\in I\\setminus F}c_i=S-\\sum_{i\\in F}c_i<\\varepsilon$. Such an $F$ is\ncalled a **tail-control set** for $\\varepsilon$.\n\n**Sums of scalar families.** Now let $(a_i)_{i\\in I}$ be a family in $\\mathbb F$\nand put $s_F:=\\sum_{i\\in F}a_i$ for finite $F\\subseteq I$. The set\n$\\operatorname{Fin}(I)$ with inclusion is a directed preorder: it is nonempty and\n$F\\cup G$ is a common upper bound of $F$ and $G$\n([[def-directed-set-and-net]]). Hence $(s_F)_{F\\in\\operatorname{Fin}(I)}$ is a\nnet in $\\mathbb F$, the **finite-subset net** of the family, and the family is\n**summable** when this net converges\n([[def-net-convergence-and-cluster-point]]). The scalar metric is the usual real metric or [[def-complex-metric-convergence-and-continuity]]. These metric spaces are Hausdorff by [[thm-metric-hausdorff-separation]]. A net in $\\mathbb F$ has at most one limit\n([[thm-hausdorff-iff-net-limits-are-unique]]), so for a summable family the\nlimit is unique and we write $\\sum_{i\\in I}a_i:=\\lim_F s_F$ for it. The family is\n**absolutely summable** when $\\sum_{i\\in I}|a_i|<+\\infty$ in the sense above.\n\n**Every absolutely summable family is summable, in ZF.** Assume\n$S:=\\sum_{i\\in I}|a_i|$ is finite and put $S_F:=\\sum_{i\\in F}|a_i|$ for finite\n$F$. For finite $F,G\\subseteq I$ the triangle inequality for finite sums and the\nfact that a finite subsum is at most the whole nonnegative sum give\n\n$$|s_F-s_G|\\le\\sum_{i\\in F\\triangle G}|a_i|\\le S-S_{F\\cap G} . \\qquad (2)$$\n\nNow fix a real $\\varepsilon>0$, let $F_0$ be a tail-control set for\n$\\varepsilon$, and let $F,G\\supseteq F_0$ be finite. Then $F\\cap G\\supseteq F_0$,\nso $S-S_{F\\cap G}\\le S-S_{F_0}<\\varepsilon$ and (2) gives\n$|s_F-s_G|<\\varepsilon$.\n\nFirst suppose $\\mathbb F=\\mathbb R$. For each finite $F$ define\n$A_F:=\\inf\\{s_G : G\\supseteq F\\}$ and $B_F:=\\sup\\{s_G : G\\supseteq F\\}$ over\nfinite $G$. Both are real numbers, because $|s_G|\\le S_G\\le S$, so the two sets\nare nonempty and bounded, and $A_F\\le B_F$. If $H\\supseteq F$ then\n$A_H\\ge A_F$ and $B_H\\le B_F$. Let $L:=\\sup_FA_F$ and $U:=\\inf_FB_F$.\nSince $A_F\\le s_{F\\cup H}\\le B_H$ for all finite $F,H$, we get $L\\le U$.\nMoreover, the preceding estimate holds for every pair $F,G\\supseteq F_0$;\ntaking the supremum over $F$ and the infimum over $G$ gives\n$B_{F_0}-A_{F_0}\\le\\varepsilon$. Hence\n$0\\le U-L\\le B_{F_0}-A_{F_0}\\le\\varepsilon$ for every $\\varepsilon>0$, so\n$L=U=:s$. If $F\\supseteq F_0$, then both $s_F$ and $s$ lie in\n$[A_{F_0},B_{F_0}]$, and therefore $|s_F-s|\\le\\varepsilon$.\n\nIf $\\mathbb F=\\mathbb C$, apply the real argument just proved to the families\n$(\\operatorname{Re}a_i)$ and $(\\operatorname{Im}a_i)$. They are absolutely\nsummable because $|\\operatorname{Re}a_i|,|\\operatorname{Im}a_i|\\le|a_i|$.\nTheir finite-subset nets converge to real numbers $r$ and $t$, respectively,\nso $s_F\\to r+it$ in $\\mathbb C$. Thus every absolutely summable real or complex\nfamily is summable. **No choice principle is used**: the construction uses only\ntwo-sided suprema in $\\mathbb R$.\n\n**Linearity and absolute value.** If $(a_i)$ and $(b_i)$ are absolutely\nsummable and $\\lambda\\in\\mathbb F$, then so are $(a_i+b_i)$ and\n$(\\lambda a_i)$, and\n\n$$\\sum_{i\\in I}(a_i+b_i)=\\sum_{i\\in I}a_i+\\sum_{i\\in I}b_i,\\qquad \\sum_{i\\in I}\\lambda a_i=\\lambda\\sum_{i\\in I}a_i,\\qquad \\Bigl|\\sum_{i\\in I}a_i\\Bigr|\\le\\sum_{i\\in I}|a_i| ,$$\n\nbecause the corresponding identities hold for every finite subsum, both sides\nare limits of the corresponding finite-subset nets, and addition, scalar\nmultiplication and the modulus are continuous. The splitting identity (1)\nlikewise passes to absolutely summable scalar families:\n$\\sum_{i\\in I}a_i=\\sum_{i\\in F}a_i+\\sum_{i\\in I\\setminus F}a_i$ for every finite\n$F$, because finite subsums over sets containing $F$ converge to the left-hand\nside and equal the finite sum over $F$ plus the finite subsum of the tail, whose\nnet converges to the tail sum.\n\n**The finite-dimensional Cauchy-Schwarz inequality.** Let $(u_k)_{0\\le k<m}$ and $(v_k)_{0\\le k<m}$ be scalar lists, for $m\\in\\mathbb N$ and let $t\\in\\mathbb R$. Every term of\n$\\sum_{k<m}(|u_k|-t|v_k|)^2$ is nonnegative, so for all real $t$\n\n$$0\\le\\sum_{k<m}|u_k|^2-2t\\sum_{k<m}|u_k||v_k|+t^2\\sum_{k<m}|v_k|^2 .$$\n\nIf $\\sum_{k<m}|v_k|^2>0$, substituting\n$t=\\bigl(\\sum_{k<m}|u_k||v_k|\\bigr)/\\bigl(\\sum_{k<m}|v_k|^2\\bigr)$ gives\n$\\bigl(\\sum_{k<m}|u_k||v_k|\\bigr)^2\\le\\bigl(\\sum_{k<m}|u_k|^2\\bigr)\\bigl(\\sum_{k<m}|v_k|^2\\bigr)$;\nif $\\sum_{k<m}|v_k|^2=0$ then every $v_k=0$ and both sides are $0$. In either case\n$\\sum_{k<m}|u_k||v_k|\\le\\bigl(\\sum_{k<m}|u_k|^2\\bigr)^{1/2}\\bigl(\\sum_{k<m}|v_k|^2\\bigr)^{1/2}$\nafter taking square roots, and applying the modulus inequality for finite sums\nto $u_k\\overline{v_k}$ also gives\n\n$$\\Bigl|\\sum_{k<m}u_k\\overline{v_k}\\Bigr|\\le\\Bigl(\\sum_{k<m}|u_k|^2\\Bigr)^{1/2}\\Bigl(\\sum_{k<m}|v_k|^2\\Bigr)^{1/2} . \\qquad (3)$$\n\n**The space $\\ell^2(I)$.** For a family $a=(a_i)_{i\\in I}$ in $\\mathbb F$ define\n$Q(a):=\\sum_{i\\in I}|a_i|^2$. If $Q(a)$ is finite, set $\\|a\\|_2:=\\sqrt{Q(a)}$, using the nonnegative real square root of [[thm-of-square-roots]]; if $Q(a)=+\\infty$, set $\\|a\\|_2:=+\\infty$. This is a case definition, not exponentiation of an extended real. Let\n\n$$\\ell^2(I,\\mathbb F):=\\{\\,a=(a_i)_{i\\in I} : \\|a\\|_2<+\\infty\\,\\}.$$\n\nThe set $\\ell^2(I,\\mathbb F)$ is a vector space over $\\mathbb F$: it contains the\nzero family, is closed under scalar multiplication because\n$\\|\\lambda a\\|_2=|\\lambda|\\,\\|a\\|_2$, and is closed under addition because (3)\napplied to finite subsums gives $\\|a+b\\|_2\\le\\|a\\|_2+\\|b\\|_2<+\\infty$. The same\ninequality is the triangle inequality for $\\|\\cdot\\|_2$, which is moreover\nnonnegative, vanishes only for the zero family (an arbitrary sum of nonnegative\nterms with supremum $0$ has every term $0$) and satisfies\n$\\|\\lambda a\\|_2=|\\lambda|\\,\\|a\\|_2$; thus $\\|\\cdot\\|_2$ is a norm on\n$\\ell^2(I,\\mathbb F)$. Finally the **pairing**\n$\\langle a,b\\rangle:=\\sum_{i\\in I}a_i\\overline{b_i}$ is well defined on\n$\\ell^2(I,\\mathbb F)\\times\\ell^2(I,\\mathbb F)$, because\n$|a_i\\overline{b_i}|=|a_i||b_i|$ has finite nonnegative sum by (3); it is linear\nin the first variable, conjugate symmetric, positive definite, and satisfies\n$\\langle a,a\\rangle=\\|a\\|_2^2$, all by the corresponding finite identities and\nthe linearity of the sum. Consequently $\\ell^2(I,\\mathbb F)$ is an inner-product\nspace, and $e_i\\in\\ell^2(I,\\mathbb F)$ denotes the family that is $1$ at $i$ and\n$0$ elsewhere. **Nothing here asserts that $\\ell^2(I,\\mathbb F)$ is complete**;\nthat follows later, from an orthonormal basis of a Hilbert space.",
+          "uses": [
+            "1.2",
+            "2.1",
+            "3.1",
+            "4.1",
+            "5.1"
+          ]
+        },
+        {
+          "fact": "F1",
+          "source": "lem-square-summable-sequences-form-a-hilbert-space",
+          "source_section": "Statement",
+          "quote": "The real sequence space\n$$\\ell^2(\\mathbb N,\\mathbb R)=\\left\\{x=(x_n):\\sum_{n\\in\\mathbb N}|x_n|^2<\\infty\\right\\},$$\nwith its canonical inner product and norm from\n[[def-square-summable-family-on-an-arbitrary-index-set]], is complete and\ntherefore is a real Hilbert space.",
+          "uses": [
+            "1.2",
+            "2.1",
+            "3.1",
+            "4.1",
+            "5.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "thm-cauchy-schwarz-in-an-inner-product-space",
+          "source_section": "Statement",
+          "quote": "For all vectors $x,y$ in a real or complex inner-product space,\n\n$$|\\langle x,y\\rangle|\\le\\|x\\|\\,\\|y\\| ,$$\n\nwith equality if and only if $x$ and $y$ are linearly dependent.",
+          "uses": [
+            "1.2",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "def-operator-norm",
+          "source_section": "Definition",
+          "quote": "Let $X$ and $Y$ be normed spaces over the same scalar field, and let\n$T:X\\to Y$ be bounded in the sense of [[def-bounded-linear-operator]]. The\n**operator norm** of $T$ is\n\n$$\\|T\\| := \\sup\\{\\|Tx\\| : x \\in X,\\ \\|x\\| \\le 1\\}.$$\n\nThe set on the right contains $0$ and every bound $C$ for $T$ bounds it\nabove. Thus its finite real supremum exists by the proved least-upper-bound\nproperty of the library's real field ([[cor-cauchy-reals-lub-complete]]).\nIn particular every number strictly below the supremum is exceeded by a\nmember of this set; otherwise it would be a smaller upper bound. No choice\nprinciple is used for this assertion.\n\nThe same number is the least bound of $T$:\n\n$$\\|T\\| = \\inf\\{C \\ge 0 : \\|Tx\\| \\le C\\|x\\| \\text{ for all } x \\in X\\}.$$\n\nIf $X \\ne \\{0\\}$, positive homogeneity also gives\n\n$$\\|T\\| = \\sup\\{\\|Tx\\| : \\|x\\| = 1\\}.$$\n\nWhen $X = \\{0\\}$, the unit sphere is empty and the unit-ball supremum is $0$,\nso $\\|T\\| = 0$.",
+          "uses": [
+            "1.2",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "def-hilbert-space-adjoint",
+          "source_section": "Definition",
+          "quote": "Assume the Axiom of Countable Choice. Let $H$ and $K$ be real or complex Hilbert spaces and let $T\\in\\mathcal B(H,K)$ be a bounded linear operator ([[def-bounded-linear-operator]], [[def-space-of-bounded-linear-operators]]). For fixed $y\\in K$ the map\n\n$$x\\longmapsto\\langle Tx,y\\rangle_K$$\n\nis a bounded linear functional on $H$: it is linear in $x$ because $T$ is linear and the pairing is linear in its first argument, and $|\\langle Tx,y\\rangle_K|\\le\\|Tx\\|\\,\\|y\\|\\le\\|T\\|\\,\\|x\\|\\,\\|y\\|$ by Cauchy\u2013Schwarz and the operator-norm inequality ([[thm-cauchy-schwarz-in-an-inner-product-space]], [[def-operator-norm]]). By Riesz representation ([[thm-riesz-representation-for-hilbert-space]]) there is therefore a unique vector $T^*y\\in H$ with\n\n$$\\langle Tx,y\\rangle_K=\\langle x,T^*y\\rangle_H\\qquad\\text{for every }x\\in H .$$\n\nThe **Hilbert adjoint** of $T$ is the map\n\n$$T^*:K\\longrightarrow H,\\qquad y\\longmapsto T^*y .$$\n\nIt is the unique map $K\\to H$ satisfying the displayed identity, since two such maps have $\\langle x,(T^*_1-T^*_2)y\\rangle=0$ for all $x$ and hence $(T^*_1-T^*_2)y=0$ by positive definiteness.\n\n**The dictionary with the Banach transpose.** Write $R_H:H\\to H^*$ and $R_K:K\\to K^*$ for the Riesz maps $R_H(x)=\\langle\\,\\cdot\\,,x\\rangle_H$ and $R_K(y)=\\langle\\,\\cdot\\,,y\\rangle_K$, and let $T'\\in\\mathcal B(K^*,H^*)$ be the transpose of $T$, $(T'g)(x)=g(Tx)$ ([[def-transpose-of-a-bounded-operator]]). Then for all $y\\in K$ and $x\\in H$,\n\n$$\\bigl(R_H(T^*y)\\bigr)(x)=\\langle x,T^*y\\rangle_H=\\langle Tx,y\\rangle_K=(R_Ky)(Tx)=\\bigl(T'(R_Ky)\\bigr)(x),$$\n\nso $R_H\\,T^*=T'\\,R_K$. The Hilbert adjoint is thus the Banach transpose conjugated by the Riesz identifications of $H$ and $K$ with their duals; it is a different operator from $T'$ whenever the Riesz maps are conjugate-linear.",
+          "uses": [
+            "1.2"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "thm-hilbert-adjoint-properties",
+          "source_section": "Statement",
+          "quote": "Assume the Axiom of Countable Choice. Let $H,K,L$ be real or complex Hilbert spaces and let $R,S\\in\\mathcal B(H,K)$ and $T\\in\\mathcal B(K,L)$ be bounded linear operators. Then the Hilbert adjoints satisfy:\n\n1. $(aR+bS)^*=\\overline a\\,R^*+\\overline b\\,S^*$ for scalars $a,b$, and the adjoint of an operator is unique;\n2. $(TS)^*=S^*T^*$;\n3. $T^{**}=T$ and $\\|T^*\\|=\\|T\\|$;\n4. $\\|T^*T\\|=\\|T\\|^2$.",
+          "uses": [
+            "1.2"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "def-self-adjoint-positive-unitary-and-normal-operator",
+          "source_section": "Definition",
+          "quote": "Assume the Axiom of Countable Choice, and let $H$ be a real or complex Hilbert space with $T\\in\\mathcal B(H)$ a bounded linear operator and $T^*$ its Hilbert adjoint ([[def-hilbert-space-adjoint]], [[def-space-of-bounded-linear-operators]]).\n\n- $T$ is **self-adjoint** when $T^*=T$;\n- $T$ is **positive** when $\\langle Tx,x\\rangle$ is a real number in $[0,+\\infty)$ for every $x\\in H$;\n- $T$ is **unitary** when $T^*T=TT^*=I$, the identity operator;\n- $T$ is **normal** when $T^*T=TT^*$.\n\nThe definitions are read over either scalar field with the same inner product. **Two immediate consequences.** Every self-adjoint operator is normal, because $T^*T=T^2=TT^*$ when $T^*=T$. Every unitary operator is normal, because its defining identity says exactly that $T^*T$ and $TT^*$ are both the identity. Positivity is a condition on the *values* of the quadratic form and therefore forces those values to be real, which for a complex Hilbert space does not follow from boundedness alone; a positive operator on a complex Hilbert space is in fact self-adjoint, but that is proved later and is not assumed here.\n\n**Consistency of the vocabulary.** The identity operator is self-adjoint, positive and unitary, and the zero operator is self-adjoint and positive; on the one-dimensional Hilbert space $\\mathbb C$ the operator $\\lambda I$ is self-adjoint exactly when $\\lambda$ is real, unitary exactly when $|\\lambda|=1$, and normal for every scalar $\\lambda$.",
+          "uses": [
+            "1.2"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "lem-finite-rank-operators-are-compact",
+          "source_section": "Statement",
+          "quote": "Let $X$ and $Y$ be normed spaces over the same scalar field and let\n$T:X\\to Y$ be a bounded linear operator\n([[def-bounded-linear-operator]]) whose range $T(X)$ admits an ordered basis of\nfinite length ([[def-linear-basis]]). Then $T$ is compact\n([[def-compact-linear-operator]]).",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "thm-norm-limit-of-compact-operators-is-compact",
+          "source_section": "Statement",
+          "quote": "Assume the Axiom of Countable Choice ([[def-countable-choice]]). Let $X$ be a\nnormed space, let $Y$ be a Banach space ([[def-banach-space]]), and let\n$T_n:X\\to Y$, $n\\in\\mathbb N$, be compact operators\n([[def-compact-linear-operator]]) with $\\|T_n-T\\|\\to0$ for a bounded linear\noperator $T:X\\to Y$ ([[def-bounded-linear-operator]],\n[[def-operator-norm]], [[def-metric-convergence]]). Then $T$ is compact.",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "lem-positive-square-root-of-a-compact-positive-operator",
+          "source_section": "Statement",
+          "quote": "Assume the Axiom of Countable Choice ([[def-countable-choice]]). Let $H$ be a\nreal or complex Hilbert space ([[def-hilbert-space]]) and let\n$T\\in\\mathcal B(H)$ be a compact self-adjoint positive operator\n([[def-compact-linear-operator]],\n[[def-self-adjoint-positive-unitary-and-normal-operator]],\n[[def-bounded-linear-operator]]), so that $\\langle Tx,x\\rangle$ is a\nnonnegative real for every $x$. Then there is a compact self-adjoint positive\noperator $S\\in\\mathcal B(H)$ with $S^{2}=T$, and it is unique: if\n$R\\in\\mathcal B(H)$ is compact and positive\n([[def-self-adjoint-positive-unitary-and-normal-operator]]) with $R^{2}=T$,\nthen $R=S$. The root acts by multiplication by $\\sqrt\\lambda$ on each positive\neigenspace $E_\\lambda(T)=\\ker(T-\\lambda I)$, $\\lambda>0$, and by zero on\n$\\ker T$; in particular $S$ is the operator denoted $\\sqrt T$ or $T^{1/2}$.",
+          "uses": [
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "def-compact-spectral-filter-and-qualification",
+          "source_section": "Definition",
+          "quote": "Assume Countable Choice. Let $X,Y$ be real or complex Hilbert spaces and let\n$A:X\\to Y$ be compact and bounded. Put $S=A^*A$. By\n[[lem-compact-gram-operator-is-positive-and-has-kernel]], $S$ is compact,\npositive, and self-adjoint, with $\\ker S=\\ker A$. Let $\\Sigma$ be the set of\nnonzero eigenvalues of $S$ and $P_t$ the orthogonal projection onto the\neigenspace of $t\\in\\Sigma$; let $P_0$ be the orthogonal projection onto\n$\\ker S$. The compact spectral multiplier of a bounded scalar function\n$q:\\{0\\}\\cup\\Sigma\\to\\mathbb F$ is\n$$q(S)x:=q(0)P_0x+\\sum_{t\\in\\Sigma}q(t)P_tx,$$\nwhere the finite-subset net converges in norm by\n[[lem-compact-spectral-multiplier-is-well-defined]]. For $\\nu>0$, define\n$S^\\nu$ by the multiplier $q_\\nu(0)=0$ and $q_\\nu(t)=t^\\nu$ for $t>0$.\nThis multiplier is bounded: if $t\\in\\Sigma$ and $u\\in E_t$ is a unit vector,\nthen $0<t=\\|Su\\|\\le\\|S\\|$, so $|q_\\nu(t)|\\le\\|S\\|^\\nu$.\n\nFor $\\lambda>0$, the Tikhonov filter and residual filter are\n$$g_\\lambda(t)=\\frac1{t+\\lambda},\\qquad r_\\lambda(t)=1-tg_\\lambda(t)=\\frac{\\lambda}{t+\\lambda}.$$\nThe Tikhonov solution for data $y_\\delta\\in Y$ is\n$$x_\\lambda^\\delta=g_\\lambda(S)A^*y_\\delta =(A^*A+\\lambda I_X)^{-1}A^*y_\\delta.$$\nIndeed, the spectral decomposition gives $S+\\lambda I_X$ the multiplier\n$t+\\lambda$ on each $E_t$ and $\\lambda$ on $\\ker S$, so $g_\\lambda(S)$ is\nits inverse, whose existence is also supplied by\n[[lem-hilbert-tikhonov-normal-operator-invertible]].\nThe source condition of order $\\nu>0$ and radius $R\\ge0$ means that\n$x^\\dagger=S^\\nu w$ for some $w\\in X$ with $\\|w\\|\\le R$. A family of\nfilters $g_\\alpha$ with residual filters $r_\\alpha(t)=1-tg_\\alpha(t)$ has\nqualification at least $p>0$ when, for each $0<\\nu\\le p$, some finite\nconstant $C_\\nu\\ge0$ satisfies\n$$t^\\nu|r_\\alpha(t)|\\le C_\\nu\\alpha^\\nu \\quad\\text{for every }\\alpha>0\\text{ and }t\\in\\Sigma.$$\nWhen $\\Sigma=\\varnothing$, this condition is vacuous.",
+          "uses": [
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F6",
+          "source": "def-ip-index-source-ball",
+          "source_section": "Definition",
+          "quote": "Assume Countable Choice. Let $X$ and $Y$ be real or complex Hilbert spaces over the same scalar field and let $K:X\\to Y$ be compact. Write $\\kappa:=\\|K\\|$, $S:=K^*K$, and $|K|:=S^{1/2}$, and let $\\Lambda_K$ be zero together with the positive eigenvalues of $|K|$. An admissible spectral index is a bounded function $\\psi:\\Lambda_K\\to[0,\\infty)$ with $\\psi(0)=0$. Define $\\psi(|K|)$ by the compact spectral multiplier of $S$ with scalar function $t\\mapsto\\psi(\\sqrt t)$. For $\\rho>0$ define $X_{\\psi,\\rho}(K):=\\{\\psi(|K|)w:w\\in X,\\ \\|w\\|_X\\le\\rho\\}$. For $\\nu>0$, $\\psi_\\nu(t)=t^\\nu$ defines the power source ball $X_{\\nu,\\rho}(K)$. If $\\kappa>0$ and $q>0$, define the logarithmic spectral-index candidate by $\\psi_{\\log,q}(0)=0$ and $\\psi_{\\log,q}(t)=(1+\\log(\\kappa/t))^{-q}$ for positive $t\\in\\Lambda_K$; when it is bounded, it defines $X_{\\log,q,\\rho}(K)$.",
+          "uses": [
+            "1.1",
+            "3.1",
+            "5.1"
+          ]
+        },
+        {
+          "fact": "F6",
+          "source": "def-ip-power-source-set",
+          "source_section": "Definition",
+          "quote": "Assume Countable Choice. Let $K:X\\to Y$ be compact between real or complex Hilbert spaces over the same scalar field and let $\\nu,\\rho>0$. The power source ball is $X_{\\nu,\\rho}(K):=\\{|K|^\\nu w:w\\in X,\\ \\|w\\|_X\\le\\rho\\}$, where $|K|^\\nu=(K^*K)^{\\nu/2}$ is defined by compact spectral calculus. It lies in $N(K)^\\perp$ and consists of minimum-norm representatives of the exact data $Kx$. In the convention $S=K^*K$ this is the source condition $x=S^{\\nu/2}w$.",
+          "uses": [
+            "1.1",
+            "3.1",
+            "5.1"
+          ]
+        },
+        {
+          "fact": "F7",
+          "source": "def-ip-centered-modulus-of-continuity",
+          "source_section": "Definition",
+          "quote": "For a compact operator $K:X\\to Y$ between real or complex Hilbert spaces over the same scalar field, write $N(K):=\\{x\\in X:Kx=0\\}$. For a set $M$ with $0\\in M\\subseteq N(K)^\\perp$ and $\\delta\\ge0$, define $\\varepsilon_K(M,\\delta):=\\sup\\{\\|x\\|_X:x\\in M,\\ \\|Kx\\|_Y\\le\\delta\\}\\in[0,+\\infty]$.",
+          "uses": [
+            "4.1",
+            "5.1"
+          ]
+        },
+        {
+          "fact": "F7",
+          "source": "thm-ip-source-ball-modulus-of-continuity",
+          "source_section": "Statement",
+          "quote": "Assume Countable Choice. Let $K:X\\to Y$ be compact between real or complex Hilbert spaces over the same scalar field and $\\nu,\\rho>0$. For every $\\delta\\ge0$, $\\varepsilon_K(X_{\\nu,\\rho}(K),\\delta)\\le\\delta^{\\nu/(\\nu+1)}\\rho^{1/(\\nu+1)}$. For every positive singular value $s_j$ with right singular vector $v_j$, equality holds at $\\delta_j=\\rho s_j^{\\nu+1}$, witnessed by $x_j=\\rho s_j^\\nu v_j$. If $K$ has infinite rank, these $\\delta_j$ form a null sequence; if $K$ has finite positive rank, equality is asserted only at its finitely many positive singular values; if $K=0$, the source ball and modulus are $\\{0\\}$ and $0$.",
+          "uses": [
+            "4.1",
+            "5.1"
+          ]
+        },
+        {
+          "fact": "F8",
+          "source": "def-natural-logarithm",
+          "source_section": "Definition",
+          "quote": "For $x>0$, define $\\log x$ to be the unique real $y$ such that $\\exp(y)=x$. This is well-defined because The exponential is a continuous bijection from $\\mathbb{R}$ onto $(0,\\infty)$ states that $\\exp:\\mathbb R\\to(0,\\infty)$ is a bijection.\n\nThus $\\log:(0,\\infty)\\to\\mathbb R$ is the inverse function of $\\exp$. In particular, $\\log(\\exp y)=y$ for every $y\\in\\mathbb R$ and $\\exp(\\log x)=x$ for every $x>0$.",
+          "uses": [
+            "1.1",
+            "2.1",
+            "3.1",
+            "5.1"
+          ]
+        },
+        {
+          "fact": "F8",
+          "source": "thm-natural-logarithm-laws",
+          "source_section": "Statement",
+          "quote": "The function $\\log:(0,\\infty)\\to\\mathbb R$ is continuous and strictly increasing, is onto $\\mathbb R$, and satisfies, for $x,y>0$,\n$$\\log(xy)=\\log x+\\log y,\\qquad \\log(x/y)=\\log x-\\log y,\\qquad \\log(1/x)=-\\log x.$$\nAlso $\\log 1=0$.",
+          "uses": [
+            "1.1",
+            "2.1",
+            "3.1",
+            "5.1"
+          ]
+        },
+        {
+          "fact": "F8",
+          "source": "def-real-power",
+          "source_section": "Definition",
+          "quote": "For $a>0$ and $x\\in\\mathbb R$, define\n$$a^x:=\\exp(x\\log a).$$\nFor the supplementary zero-base convention, define $0^x:=0$ when $x>0$.\n\nThe expressions $0^0$ and $0^x$ for $x<0$ are left undefined. Negative bases are not assigned arbitrary real powers.",
+          "uses": [
+            "1.1",
+            "2.1",
+            "3.1",
+            "5.1"
+          ]
+        },
+        {
+          "fact": "F8",
+          "source": "def-real-exponential-function-and-e",
+          "source_section": "Definition",
+          "quote": "For $x\\in\\mathbb R$, define\n$$\\exp(x):=\\sum_{n=0}^{\\infty}\\frac{x^n}{\\iota(n!)}, \\qquad e:=\\exp(1),$$\nprovided by the all-real convergence proved in The exponential series converges absolutely for every real argument. Here $n!\\in\\mathbb N$ is the factorial of The factorial $n!$ and the falling factorial $n^{\\underline{k}}$, defined by recursion in $\\mathbb{N}$, $\\iota(n!)$ is its nonzero real image (The canonical natural $\\iota(n) = n \\cdot 1_F$ of a field, Canonical naturals are positive and strictly increasing), and powers and series are those of Integer powers $a^m$ and Series, partial sums, convergence and the sum, divergence, and the tail series.\n\nThis is a real power series centred at $0$ (A real power series about a centre, its interval of convergence, and its radius in $[0,+\\infty]$). No logarithm, irrational power, or differential equation enters the definition.",
+          "uses": [
+            "1.1",
+            "2.1",
+            "3.1",
+            "5.1"
+          ]
+        },
+        {
+          "fact": "F8",
+          "source": "cor-exponential-reciprocal-and-positivity",
+          "source_section": "Statement",
+          "quote": "For every real $x$, $\\exp(x)>0$ and\n$$\\exp(-x)=\\frac1{\\exp(x)}.$$",
+          "uses": [
+            "1.1",
+            "2.1",
+            "3.1",
+            "5.1"
+          ]
+        },
+        {
+          "fact": "F8",
+          "source": "thm-real-power-continuity-and-derivatives",
+          "source_section": "Statement",
+          "quote": "For $a>0$, the function $x\\mapsto a^x$ is continuous on $\\mathbb R$ and\n$$(a^x)'=a^x\\log a.$$\nFor $\\alpha\\in\\mathbb R$, the function $x\\mapsto x^\\alpha$ is continuous and differentiable on $(0,\\infty)$, with\n$$(x^\\alpha)'=\\alpha x^{\\alpha-1}.$$",
+          "uses": [
+            "1.1",
+            "2.1",
+            "3.1",
+            "5.1"
+          ]
+        },
+        {
+          "fact": "F8",
+          "source": "cor-mean-value-theorem",
+          "source_section": "Statement",
+          "quote": "Let $a, b \\in \\mathbb{R}$ with $a < b$ and let $f : [a,b] \\to \\mathbb{R}$ be\ncontinuous on $[a,b]$ (Continuity of $f : A \\to \\mathbb{R}$ at a point of $A$ and on $A$: the $\\varepsilon$-$\\delta$ condition, its agreement with $\\lim_{x \\to c} f(x) = f(c)$ at a limit point, and continuity at an isolated point, Intervals of $\\mathbb{R}$: the nine order-convex forms, nondegeneracy, and length) and\ndifferentiable at every point of $(a,b)$ as a function on $[a,b]$\n(The derivative $f'(c) = \\lim_{x \\to c} \\frac{f(x) - f(c)}{x - c}$ of $f : A \\to \\mathbb{R}$ at a point $c \\in A$ that is a limit point of $A$, and differentiability on a set). Then there is $c \\in (a,b)$ with\n\n$$f(b) - f(a) \\;=\\; f'(c)\\,(b - a) .$$\n\nEquivalently, since $b - a \\ne 0$, there is $c \\in (a,b)$ at which\n$f'(c) = \\bigl(f(b)-f(a)\\bigr)/(b-a)$: the derivative somewhere inside equals\nthe average rate of change across the whole interval.\n\n**Continuity on the closed interval cannot be dropped.** Differentiability at\nevery point of $(a,b)$ alone does not suffice: a function on $[0,1]$,\ndifferentiable at every point of $(0,1)$ with derivative constantly $1$, for\nwhich no $c$ works, is exhibited later on this page as a false statement, and\nthe companion page works the same witness out in full.",
+          "uses": [
+            "1.1",
+            "2.1",
+            "3.1",
+            "5.1"
+          ]
+        },
+        {
+          "fact": "F8",
+          "source": "thm-real-power-laws",
+          "source_section": "Statement",
+          "quote": "For $a,b>0$ and $r,s\\in\\mathbb R$,\n$$a^{r+s}=a^ra^s,\\qquad (ab)^r=a^rb^r,\\qquad (a/b)^r=a^r/b^r,\\qquad (a^r)^s=a^{rs}.$$",
+          "uses": [
+            "1.1",
+            "2.1",
+            "3.1",
+            "5.1"
+          ]
+        },
+        {
+          "fact": "F8",
+          "source": "thm-of-archimedean",
+          "source_section": "Statement",
+          "quote": "Every complete ordered field $F$ (Complete ordered field (least-upper-bound property)) is Archimedean:\nfor every $x \\in F$ there is a natural number $n \\ge 1$ with $x < n \\cdot 1_F$,\nwhere $n \\cdot 1_F$ is the canonical natural of the ordered field $F$\n(Ordered field). Equivalently, the canonical naturals are cofinal in $F$.",
+          "uses": [
+            "1.1",
+            "2.1",
+            "3.1",
+            "5.1"
+          ]
+        },
+        {
+          "fact": "F8",
+          "source": "def-complete-ordered-real-field",
+          "source_section": "Definition",
+          "quote": "A **Dedekind-complete ordered field** is a commutative field $\\mathbb R$ with\nidentity $1>0$, a total order compatible with addition and multiplication, and\nthe least-upper-bound axiom: every nonempty subset of $\\mathbb R$ that is\nbounded above has a least upper bound in $\\mathbb R$. Throughout this batch,\nall real variables, intervals, limits, derivatives and integrals are taken in\nsuch a field. The integers and rationals are interpreted in their usual\nembedded copies. For $x\\in\\mathbb R$, define $|x|=x$ when $x\\ge0$ and\n$|x|=-x$ when $x<0$.",
+          "uses": [
+            "1.1",
+            "2.1",
+            "3.1",
+            "5.1"
+          ]
+        },
+        {
+          "fact": "F9",
+          "source": "thm-exponential-limits-and-range",
+          "source_section": "Statement",
+          "quote": "$$\\exp(x)\\to+\\infty\\quad(x\\to+\\infty),\\qquad \\exp(x)\\to0\\quad(x\\to-\\infty),$$\nand the range of $\\exp$ is contained in $(0,\\infty)$ and is unbounded above with infimum $0$.",
+          "uses": [
+            "2.1",
+            "5.1"
+          ]
+        },
+        {
+          "fact": "F10",
+          "source": "def-real-exponential-function-and-e",
+          "source_section": "Definition",
+          "quote": "For $x\\in\\mathbb R$, define\n$$\\exp(x):=\\sum_{n=0}^{\\infty}\\frac{x^n}{\\iota(n!)}, \\qquad e:=\\exp(1),$$\nprovided by the all-real convergence proved in The exponential series converges absolutely for every real argument. Here $n!\\in\\mathbb N$ is the factorial of The factorial $n!$ and the falling factorial $n^{\\underline{k}}$, defined by recursion in $\\mathbb{N}$, $\\iota(n!)$ is its nonzero real image (The canonical natural $\\iota(n) = n \\cdot 1_F$ of a field, Canonical naturals are positive and strictly increasing), and powers and series are those of Integer powers $a^m$ and Series, partial sums, convergence and the sum, divergence, and the tail series.\n\nThis is a real power series centred at $0$ (A real power series about a centre, its interval of convergence, and its radius in $[0,+\\infty]$). No logarithm, irrational power, or differential equation enters the definition.",
+          "uses": [
+            "1.2",
+            "2.1",
+            "5.1"
+          ]
+        },
+        {
+          "fact": "F10",
+          "source": "thm-exponential-addition-formula",
+          "source_section": "Statement",
+          "quote": "For all real $x,y$,\n$$\\exp(x+y)=\\exp(x)\\exp(y).$$",
+          "uses": [
+            "1.2",
+            "2.1",
+            "5.1"
+          ]
+        },
+        {
+          "fact": "F10",
+          "source": "cor-exponential-reciprocal-and-positivity",
+          "source_section": "Statement",
+          "quote": "For every real $x$, $\\exp(x)>0$ and\n$$\\exp(-x)=\\frac1{\\exp(x)}.$$",
+          "uses": [
+            "1.2",
+            "2.1",
+            "5.1"
+          ]
+        },
+        {
+          "fact": "F10",
+          "source": "thm-exponential-is-strictly-increasing",
+          "source_section": "Statement",
+          "quote": "The exponential function is continuous and strictly increasing on $\\mathbb R$.",
+          "uses": [
+            "1.2",
+            "2.1",
+            "5.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "For $0<t\\le1$, [F8] gives $\\log(1/t)\\ge0$, so $1+\\log(1/t)\\ge1$; since $q>0$, $(1+\\log(1/t))^q\\ge1$ and $\\psi_q(t)\\le1$. Together with $\\psi_q(0)=0$, this verifies that the logarithmic index is bounded and admissible under [F6].",
+          "step": "1.1",
+          "inputs": [
+            "given",
+            "A1",
+            "F6",
+            "F8",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-1-2",
+          "claim": "The bijection $Ux=(x_{n+1})_{n\\in\\mathbb N}$ from $\\ell^2(I,\\mathbb R)$ to $\\ell^2(\\mathbb N,\\mathbb R)$ preserves the coordinate inner product, so [F1] transfers completeness to $\\ell^2(I,\\mathbb R)$. Since $\\gamma_j\\ge0$, strict increase of the exponential [F10] gives $0<\\exp(-\\gamma_j)\\le1$. Thus for $x=(x_j)\\in\\ell^2(I)$, $\\|K_\\gamma x\\|_2^2=\\sum_{j\\in I}\\exp(-2\\gamma_j)|x_j|^2\\le\\|x\\|_2^2$, so $K_\\gamma$ is bounded with $\\|K_\\gamma\\|\\le1$; $K_\\gamma e_1=e_1$ gives $\\|K_\\gamma\\|=1$. For $x,y\\in\\ell^2(I)$, [F2] makes $\\sum_{j\\in I}\\exp(-\\gamma_j)x_jy_j$ absolutely convergent, and the coordinate inner product gives $\\langle K_\\gamma x,y\\rangle=\\sum_{j\\in I}\\exp(-\\gamma_j)x_jy_j=\\langle x,K_\\gamma y\\rangle$. By uniqueness in [F3], $K_\\gamma^*=K_\\gamma$; moreover $\\langle K_\\gamma x,x\\rangle=\\sum_{j\\in I}\\exp(-\\gamma_j)|x_j|^2\\ge0$, so $K_\\gamma$ is positive.",
+          "step": "1.2",
+          "inputs": [
+            "given",
+            "A1",
+            "F1",
+            "F2",
+            "F3",
+            "F10",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "Since $\\gamma_j\\to\\infty$, [F9] gives $s_j=\\exp(-\\gamma_j)\\to0$. For $N\\ge1$, truncate $K_\\gamma$ by $(K_{\\gamma,N}x)_j=s_jx_j$ for $j\\le N$ and $0$ for $j>N$. By step 1.2, $K_{\\gamma,N}$ is bounded; since each $s_j>0$ for $j\\le N$, its range is exactly $\\operatorname{span}\\{e_1,\\ldots,e_N\\}$, so [F4] makes it compact. Since $s_j$ decreases to $0$, $\\|K_\\gamma-K_{\\gamma,N}\\|=\\sup_{j>N}s_j=s_{N+1}\\to0$; [F4] then makes $K_\\gamma$ compact, and positivity of each $s_j$ makes it injective. The choices $\\gamma_j=j-1$ and $\\gamma_j=j(j-1)/2$ are strictly increasing from $0$ to infinity; for the second, $\\gamma_j\\ge j-1$ for $j\\ge2$ and [F8] makes the natural numbers cofinal. Its gaps are $\\gamma_{j+1}-\\gamma_j=j$, so [F10] gives $s_{j+1}/s_j=\\exp(-\\gamma_{j+1})/\\exp(-\\gamma_j)=\\exp(-j)\\to0$ by [F8]\u2013[F9].",
+          "step": "2.1",
+          "inputs": [
+            "given",
+            "A1",
+            "step 1.2",
+            "F1",
+            "F2",
+            "F4",
+            "F8",
+            "F9",
+            "F10",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "claim": "By steps 1.2 and 2.1, $K_\\gamma$ is compact, self-adjoint, and positive, and $K_\\gamma^*K_\\gamma=K_\\gamma^2$. Thus $K_\\gamma$ is itself a compact positive square root of $K_\\gamma^*K_\\gamma$, so uniqueness in [F5] gives $|K_\\gamma|=K_\\gamma$. Hence each coordinate vector has singular value $s_j=\\exp(-\\gamma_j)$; [F5] gives $(|K_\\gamma|^\\nu w)_j=\\exp(-\\nu\\gamma_j)w_j$ and $(\\psi_q(|K_\\gamma|)w)_j=(1+\\log(1/s_j))^{-q}w_j=(1+\\gamma_j)^{-q}w_j$.",
+          "step": "3.1",
+          "inputs": [
+            "given",
+            "A1",
+            "step 1.2",
+            "step 2.1",
+            "F1",
+            "F5",
+            "F6",
+            "F8",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-4-1",
+          "claim": "For each $j$, take $w^{(j)}=\\rho e_j$ and $x^{(j)}=|K_\\gamma|^\\nu w^{(j)}=\\rho s_j^\\nu e_j$ by step 3.1. Then $\\|K_\\gamma x^{(j)}\\|_2=\\rho s_j^{\\nu+1}$ and $\\|x^{(j)}\\|_2=\\rho s_j^\\nu=(\\rho s_j^{\\nu+1})^{\\nu/(\\nu+1)}\\rho^{1/(\\nu+1)}$, so [F7] gives equality at that noise radius.",
+          "step": "4.1",
+          "inputs": [
+            "given",
+            "A1",
+            "step 3.1",
+            "F1",
+            "F7",
+            "construct",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-5-1",
+          "claim": "Take $\\gamma_j=j(j-1)/2$, write $r_j=s_{j+1}/s_j=\\exp(-j)$, and set $\\delta_j^\\star=\\rho(s_js_{j+1})^{(\\nu+1)/2}$. For any $x=|K_\\gamma|^\\nu w$ with $\\|w\\|_2\\le\\rho$ and $\\|K_\\gamma x\\|_2\\le\\delta_j^\\star$, step 3.1 gives $x_k=s_k^\\nu w_k$ and $(K_\\gamma x)_k=s_k^{\\nu+1}w_k$. Since $s_k\\ge s_j$ for $k\\le j$, $\\sum_{k\\le j}|x_k|^2\\le s_j^{-2}\\sum_{k\\le j}|(K_\\gamma x)_k|^2\\le(\\delta_j^\\star)^2/s_j^2$; since $s_k\\le s_{j+1}$ for $k>j$, $\\sum_{k>j}|x_k|^2\\le s_{j+1}^{2\\nu}\\sum_{k>j}|w_k|^2\\le\\rho^2s_{j+1}^{2\\nu}$. Thus $\\|x\\|_2^2\\le(\\delta_j^\\star)^2/s_j^2+\\rho^2s_{j+1}^{2\\nu}$. With $M_j=(\\delta_j^\\star)^{\\nu/(\\nu+1)}\\rho^{1/(\\nu+1)}=\\rho(s_js_{j+1})^{\\nu/2}$, this gives $\\|x\\|_2^2/M_j^2\\le r_j+r_j^\\nu$. By [F8], $r_j^\\nu=\\exp(-\\nu j)\\to0$ by [F9], since $\\nu>0$ and the natural numbers are cofinal; likewise $r_j=\\exp(-j)\\to0$. Taking the supremum over such feasible $x$ using [F7] gives $\\varepsilon_{K_\\gamma}(X_{\\nu,\\rho}(K_\\gamma),\\delta_j^\\star)/M_j\\le\\sqrt{r_j+r_j^\\nu}\\to0$. By step 2.1, $\\gamma_j\\to\\infty$; [F8] and the real-power definition give $\\delta_j^\\star=\\rho\\exp(-\\tfrac{\\nu+1}{2}(\\gamma_j+\\gamma_{j+1}))\\to0$ by [F9]. Therefore, for every $c>0$ and $\\delta_0>0$, some $j$ has $\\delta_j^\\star<\\delta_0$ and $\\varepsilon_{K_\\gamma}(X_{\\nu,\\rho}(K_\\gamma),\\delta_j^\\star)<cM_j$, ruling out a positive constant lower bound by the power scale at every sufficiently small noise radius.",
+          "step": "5.1",
+          "inputs": [
+            "given",
+            "step 2.1",
+            "step 3.1",
+            "F1",
+            "F6",
+            "F7",
+            "F8",
+            "F9",
+            "F10",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "finite_smoke": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The Example fixes I=N\\{0}={1,2,...} and strictly positive diagonal coefficients, so its positive singular set is not empty."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Step 1.1 defines psi_q(0)=0 at the zero spectral value."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Step 4.1 includes the first singular direction and equality radius."
+        },
+        {
+          "case": "degenerate",
+          "status": "not_applicable",
+          "reason": "The hypotheses make gamma strictly increasing and every exp(-gamma_j) positive, so K_gamma is injective with infinite rank."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Steps 1.1 and 2.1 check t=1 and gamma_1=0, the upper spectral endpoint."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Steps 1.2, 2.1, and 3.1 use Countable Choice for adjoints, compact norm limits, and spectral roots."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The coordinate formulas and gap subsequence prove failure of a uniform lower rate; the example asserts no converse characterization of spectral gaps by that failure. There is no separate iff-forward obligation beyond this asserted scope.",
+          "template_review": {
+            "upheld": true,
+            "by": "/root",
+            "reason": "The coordinate formulas and gap subsequence prove failure of a uniform lower rate; the example asserts no converse characterization of spectral gaps by that failure. There is no separate iff-forward obligation beyond this asserted scope.",
+            "item_sha256": "641c919c3b7176481d2e8f87f181c4ff132cc8da1ad83023bf01db4d1eb31244",
+            "row_sha256": "242f59f0d5081f66a136b858fb7b7650a1565d3d51d1e1dfa3895f9557574eac",
+            "role": "root-adopted actual delegated owner-focused FIRST; not native Alpha",
+            "delegated_reviewer": "/root/flyping_composite",
+            "delegated_review_sources": [
+              {
+                "file": "research/inverse-problems-knot-theory-all-109-2026-10-19-supervision-20261020/step2-supervision/battery1-boundary/lane-3/proposal.json",
+                "field": "rows",
+                "index": 359
+              }
+            ],
+            "root_adoption_record": "research/inverse-problems-knot-theory-all-109-2026-10-19-supervision-20261020/step2-supervision/battery1-boundary/lane-3/root-final-adoption.json"
+          }
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The coordinate formulas and gap subsequence prove failure of a uniform lower rate; the example asserts no converse characterization of spectral gaps by that failure. In particular, no reverse classification implication is part of this item.",
+          "template_review": {
+            "upheld": true,
+            "by": "/root",
+            "reason": "The coordinate formulas and gap subsequence prove failure of a uniform lower rate; the example asserts no converse characterization of spectral gaps by that failure. In particular, no reverse classification implication is part of this item.",
+            "item_sha256": "641c919c3b7176481d2e8f87f181c4ff132cc8da1ad83023bf01db4d1eb31244",
+            "row_sha256": "92e3e90956b6ea4bafa2f8dd98a7c37909b8acaa6f9c59b460135913a3f59dce",
+            "role": "root-adopted actual delegated owner-focused FIRST; not native Alpha",
+            "delegated_reviewer": "/root/flyping_composite",
+            "delegated_review_sources": [
+              {
+                "file": "research/inverse-problems-knot-theory-all-109-2026-10-19-supervision-20261020/step2-supervision/battery1-boundary/lane-3/proposal.json",
+                "field": "rows",
+                "index": 360
+              }
+            ],
+            "root_adoption_record": "research/inverse-problems-knot-theory-all-109-2026-10-19-supervision-20261020/step2-supervision/battery1-boundary/lane-3/root-final-adoption.json"
+          }
+        }
+      ],
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "alpha-batch-3",
+        "notes": "Verification 1.1\u20135.1 independently checked. Positive decreasing diagonal gives norm one at e1, self-adjoint positivity, injectivity and compactness via exact finite-dimensional truncation ranges and tail norm s_(N+1). Current square-root and multiplier interfaces give both source coordinate formulas; log index lies in [0,1], including zero and spectral endpoint one. Countable Choice is explicitly recorded in A1 for norm limits/adjoints/roots. Singular-direction witness attains the previously reviewed bound. For triangular gamma, gap ratio exp(-j) tends to zero; splitting at j gives ||x||^2<=delta^2/s_j^2+rho^2*s_(j+1)^(2nu). Dividing by M_j^2 gives exactly r_j+r_j^nu. Both this expression and delta_j* tend to zero, proving the quantified failure of a uniform lower bound. Reader logarithm and truncation-range clarifications are sound, current bytes equal post-reader hash. No defect, iff claim, empty spectrum or diagram."
+      }
+    }
+  }
+}

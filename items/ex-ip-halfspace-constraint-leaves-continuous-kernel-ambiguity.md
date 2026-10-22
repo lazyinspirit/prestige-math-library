@@ -1,4 +1,9 @@
 ---
+verification:
+  judge:
+    model: "gpt-6-luna"
+    verdict: pass
+    date: 2026-10-22
 id: ex-ip-halfspace-constraint-leaves-continuous-kernel-ambiguity
 kind: example
 title: A half-space constraint leaves a continuous kernel ambiguity

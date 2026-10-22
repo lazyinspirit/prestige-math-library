@@ -1,0 +1,308 @@
+[
+  {
+    "order": 3050,
+    "id": "variational-source-conditions-and-bregman-rates",
+    "kind": "A",
+    "category": "inverse-problems",
+    "title": "Bregman distances and variational source rates",
+    "companion": "variational-source-conditions-and-bregman-rates-examples",
+    "requires": [
+      "nonlinear-inverse-problems-and-tangential-cone-conditions",
+      "nonlinear-tikhonov-existence-and-stability",
+      "proximal-gradient-and-accelerated-composite-optimization"
+    ],
+    "items": [
+      {
+        "id": "def-ip-banach-convex-subgradient-and-dual-pairing",
+        "kind": "definition",
+        "title": "Banach-space convex subgradients and dual pairings",
+        "deps": [
+          "def-banach-space",
+          "def-dual-space-of-a-normed-space",
+          "def-convex-and-strictly-convex-functionals-on-a-banach-space",
+          "def-proper-coercive-and-weakly-lower-semicontinuous-functional"
+        ],
+        "dependency_level": 0,
+        "justified_by": [],
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "not-applicable"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Barbara Kaltenbacher, Convergence rates under a range invariance condition with application to electrical impedance tomography, §1, notation and convex analysis tools",
+              "url": "https://arxiv.org/pdf/2403.18704"
+            },
+            {
+              "title": "Jonathan M. Borwein and Jon D. Vanderwerff, Convex Functions: Constructions, Characterizations and Counterexamples, §§4.1 and 4.4",
+              "url": "https://carmamaths.org/jon/Preprints/Books/CUP/cup-final.pdf"
+            }
+          ]
+        },
+        "statement": "Let $X$ be a real Banach space and let $X^*$ be its continuous real dual. The dual pairing is evaluation, written $\\langle \\xi,x\\rangle_{X^*,X}:=\\xi(x)$ for $\\xi\\in X^*$ and $x\\in X$. Let $R:X\\to(-\\infty,+\\infty]$ be a proper convex functional: $R$ never takes the value $-\\infty$, its effective domain $\\operatorname{dom}R:=\\{x\\in X:R(x)<+\\infty\\}$ is nonempty, and $R((1-t)x+tz)\\le (1-t)R(x)+tR(z)$ for $x,z\\in X$ and $t\\in[0,1]$, with $0\\cdot(+\\infty):=0$ for this convex-combination formula. For $x\\in\\operatorname{dom}R$, its subdifferential is\n\n$$\\partial R(x):=\\{\\xi\\in X^*:R(z)\\ge R(x)+\\langle\\xi,z-x\\rangle_{X^*,X}\\text{ for every }z\\in X\\}.$$\n\nAn element of $\\partial R(x)$ is a subgradient of $R$ at $x$. Set $\\partial R(x):=\\varnothing$ when $x\\notin\\operatorname{dom}R$. The subdifferential may be empty at a point of $\\operatorname{dom}R$; no nonemptiness assertion is part of this definition."
+      },
+      {
+        "id": "lem-ip-index-function-young-conjugate-bound",
+        "kind": "lemma",
+        "title": "A conjugate bound for residual and Bregman errors",
+        "deps": [],
+        "dependency_level": 0,
+        "justified_by": [],
+        "proof_strategy": "direct",
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Barbara Kaltenbacher, Convergence rates under a range invariance condition with application to electrical impedance tomography, Lemma 2",
+              "url": "https://arxiv.org/pdf/2403.18704"
+            },
+            {
+              "title": "Frederic Weidling, Variational Source Conditions and Conditional Stability Estimates for Inverse Problems in PDEs, Theorem 2.20",
+              "url": "https://univerlag.uni-goettingen.de/bitstream/handle/3/isbn-978-3-86395-411-6/weidling.pdf?sequence=1"
+            }
+          ]
+        },
+        "statement": "Let $\\psi:[0,\\infty)\\to[0,\\infty)$ be continuous, nondecreasing, concave, and satisfy $\\psi(0)=0$. Extend $g=-\\psi$ to $\\mathbb R$ by $g(s)=+\\infty$ for $s<0$, and define $H(q):=g^*(-q)=\\sup_{s\\ge0}(\\psi(s)-qs)$ for $q>0$, assuming the displayed suprema below are finite. For $c_1,c_2,C_3,\\alpha>0$ and $d,r,e\\ge0$, if\n\n$$c_1r+c_2\\alpha e\\le d+\\alpha\\psi(C_3r),$$\n\nthen\n\n$$e\\le\\frac1{c_2}\\left(\\frac d\\alpha+H\\!\\left(\\frac{c_1}{C_3\\alpha}\\right)\\right),\\qquad r\\le\\frac2{c_1}\\left(d+\\alpha H\\!\\left(\\frac{c_1}{2C_3\\alpha}\\right)\\right).$$"
+      },
+      {
+        "id": "lem-ip-banach-fenchel-duality-for-regularization",
+        "kind": "lemma",
+        "title": "Fenchel–Young equality for a Banach regularizer",
+        "deps": [
+          "def-ip-banach-convex-subgradient-and-dual-pairing"
+        ],
+        "dependency_level": 1,
+        "justified_by": [],
+        "proof_strategy": "direct",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-generated"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Jonathan M. Borwein and Jon D. Vanderwerff, Convex Functions: Constructions, Characterizations and Counterexamples, Proposition 4.4.1(a)",
+              "url": "https://carmamaths.org/jon/Preprints/Books/CUP/cup-final.pdf"
+            }
+          ]
+        },
+        "statement": "Let $X$ be a real Banach space, let $R:X\\to(-\\infty,+\\infty]$ be proper and convex, and define its Fenchel conjugate $R^*:X^*\\to(-\\infty,+\\infty]$ by $R^*(\\xi):=\\sup_{z\\in X}(\\langle\\xi,z\\rangle_{X^*,X}-R(z))$. For every $x\\in\\operatorname{dom}R$ and $\\xi\\in X^*$, the Fenchel–Young inequality and its equality characterization are\n\n$$R(x)+R^*(\\xi)\\ge\\langle\\xi,x\\rangle_{X^*,X},\\qquad R(x)+R^*(\\xi)=\\langle\\xi,x\\rangle_{X^*,X}\\ \\Longleftrightarrow\\ \\xi\\in\\partial R(x).$$"
+      },
+      {
+        "id": "def-ip-bregman-distance",
+        "kind": "definition",
+        "title": "Bregman distances for convex regularizers",
+        "deps": [
+          "def-ip-banach-convex-subgradient-and-dual-pairing",
+          "lem-ip-banach-fenchel-duality-for-regularization"
+        ],
+        "dependency_level": 2,
+        "justified_by": [],
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "not-applicable"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Barbara Kaltenbacher, Convergence rates under a range invariance condition with application to electrical impedance tomography, equation (1.25)",
+              "url": "https://arxiv.org/pdf/2403.18704"
+            },
+            {
+              "title": "Frederic Weidling, Variational Source Conditions and Conditional Stability Estimates for Inverse Problems in PDEs, Chapter 2",
+              "url": "https://univerlag.uni-goettingen.de/bitstream/handle/3/isbn-978-3-86395-411-6/weidling.pdf?sequence=1"
+            }
+          ]
+        },
+        "statement": "Let $X$ be a real Banach space, let $R:X\\to(-\\infty,+\\infty]$ be proper and convex, choose $x^\\dagger\\in\\operatorname{dom}R$, and choose $\\xi^\\dagger\\in\\partial R(x^\\dagger)$. For $x\\in\\operatorname{dom}R$, the **Bregman distance** generated by $\\xi^\\dagger$ from the reference point $x^\\dagger$ to $x$ is\n\n$$D_R^{\\xi^\\dagger}(x,x^\\dagger):=R(x)-R(x^\\dagger)-\\langle\\xi^\\dagger,x-x^\\dagger\\rangle_{X^*,X}.$$\n\nThe subgradient inequality makes this quantity nonnegative, and $D_R^{\\xi^\\dagger}(x^\\dagger,x^\\dagger)=0$. The definition fixes the orientation: the first argument is the comparison point and the second is the reference point carrying the chosen subgradient."
+      },
+      {
+        "id": "def-ip-variational-source-condition",
+        "kind": "definition",
+        "title": "Variational source conditions on a regularizer sublevel",
+        "deps": [
+          "def-ip-banach-convex-subgradient-and-dual-pairing",
+          "def-ip-bregman-distance"
+        ],
+        "dependency_level": 3,
+        "justified_by": [],
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "not-applicable"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Christian Clason, Regularization of Inverse Problems, equation (10.17)",
+              "url": "https://imsc.uni-graz.at/clason/preprints/InverseNotes.pdf"
+            },
+            {
+              "title": "Frederic Weidling, Variational Source Conditions and Conditional Stability Estimates for Inverse Problems in PDEs, equations (2.22) and (2.26)",
+              "url": "https://univerlag.uni-goettingen.de/bitstream/handle/3/isbn-978-3-86395-411-6/weidling.pdf?sequence=1"
+            },
+            {
+              "title": "Barbara Kaltenbacher, Convergence rates under a range invariance condition with application to electrical impedance tomography, equations (1.28)–(1.31)",
+              "url": "https://arxiv.org/pdf/2403.18704"
+            }
+          ]
+        },
+        "statement": "Let $X,Y$ be real Banach spaces, let $F:D(F)\\subseteq X\\to Y$, let $x^\\dagger\\in D(F)$ with exact datum $y=F(x^\\dagger)$, and let $R:X\\to(-\\infty,+\\infty]$ be proper and convex with $x^\\dagger\\in\\operatorname{dom}R$. Fix $\\xi^\\dagger\\in\\partial R(x^\\dagger)$, an exponent $1\\le p<\\infty$, a continuous nondecreasing concave function $\\psi:[0,\\infty)\\to[0,\\infty)$ with $\\psi(0)=0$ and $\\psi(t)>0$ for $t>0$, a coefficient $0\\le\\beta<1$, and a level $R_0\\ge R(x^\\dagger)$. The **variational source condition** with these data holds on the named regularizer sublevel $L_{R_0}:=\\{x\\in D(F):R(x)\\le R_0\\}$ when\n\n$$-\\langle\\xi^\\dagger,x-x^\\dagger\\rangle_{X^*,X}\\le\\beta D_R^{\\xi^\\dagger}(x,x^\\dagger)+\\psi\\!\\left(\\|F(x)-F(x^\\dagger)\\|_Y^p\\right)\\qquad(x\\in L_{R_0}).$$\n\nThe condition is an assumption on the selected subgradient and the stated sublevel; it makes no assertion that a subgradient exists at every point or that a regularized minimizer exists."
+      },
+      {
+        "id": "thm-ip-vsc-nonlinear-regularization-rate",
+        "kind": "theorem",
+        "title": "Variational source conditions yield nonlinear regularization rates",
+        "deps": [
+          "def-ip-banach-convex-subgradient-and-dual-pairing",
+          "lem-ip-index-function-young-conjugate-bound",
+          "def-ip-bregman-distance",
+          "def-ip-variational-source-condition",
+          "def-ip-nonlinear-forward-map",
+          "def-ip-x0-minimum-norm-solution",
+          "def-ip-nonlinear-tikhonov-functional",
+          "def-norm-and-normed-space",
+          "def-real-and-complex-inner-product-space",
+          "thm-cauchy-schwarz-in-an-inner-product-space"
+        ],
+        "dependency_level": 4,
+        "justified_by": [],
+        "proof_strategy": "direct",
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Christian Clason, Regularization of Inverse Problems, Theorem 10.7",
+              "url": "https://imsc.uni-graz.at/clason/preprints/InverseNotes.pdf"
+            },
+            {
+              "title": "Frederic Weidling, Variational Source Conditions and Conditional Stability Estimates for Inverse Problems in PDEs, Theorem 2.20",
+              "url": "https://univerlag.uni-goettingen.de/bitstream/handle/3/isbn-978-3-86395-411-6/weidling.pdf?sequence=1"
+            },
+            {
+              "title": "Barbara Kaltenbacher, Convergence rates under a range invariance condition with application to electrical impedance tomography, Lemma 2 and Theorem 3",
+              "url": "https://arxiv.org/pdf/2403.18704"
+            }
+          ]
+        },
+        "statement": "Let $X,Y$ be real Banach spaces, $D(F)\\subseteq X$, and $F:D(F)\\to Y$. Let $R:X\\to(-\\infty,+\\infty]$ be proper and convex, let $x^\\dagger\\in D(F)\\cap\\operatorname{dom}R$, set $y=F(x^\\dagger)$, and choose $\\xi^\\dagger\\in\\partial R(x^\\dagger)$. Fix $1\\le p<\\infty$, $0\\le\\beta<1$, and a level $R_0>R(x^\\dagger)$. Let $\\psi:[0,\\infty)\\to[0,\\infty)$ be continuous, nondecreasing and concave, with $\\psi(0)=0$ and $\\psi(t)>0$ for $t>0$, and assume the variational source inequality\n\n$$-\\langle\\xi^\\dagger,x-x^\\dagger\\rangle_{X^*,X}\\le\\beta D_R^{\\xi^\\dagger}(x,x^\\dagger)+\\psi\\!\\left(\\|F(x)-F(x^\\dagger)\\|_Y^p\\right)\\qquad\\left(x\\in L_{R_0}:=\\{x\\in D(F):R(x)\\le R_0\\}\\right),$$\n\nwhere $D_R^{\\xi^\\dagger}(x,x^\\dagger):=R(x)-R(x^\\dagger)-\\langle\\xi^\\dagger,x-x^\\dagger\\rangle_{X^*,X}$. Extend $-\\psi$ by $+\\infty$ on negative arguments and write $H(q):=(-\\psi)^*(-q)=\\sup_{s\\ge0}(\\psi(s)-qs)$; assume $H(q)$ is finite for sufficiently large $q$ and $H(q)\\to0$ as $q\\to\\infty$. For sufficiently small noise levels $\\delta>0$ and data $y^\\delta\\in Y$ with $\\|y^\\delta-y\\|_Y\\le\\delta$, define $J_\\alpha^\\delta(x):=p^{-1}\\|F(x)-y^\\delta\\|_Y^p+\\alpha R(x)$. Suppose $\\alpha=\\alpha(\\delta)>0$ tends to zero, $0\\le\\varepsilon_\\delta\\le C_\\varepsilon\\delta^p$, and $x_\\alpha^{\\delta,\\varepsilon}\\in D(F)$ is an $\\varepsilon_\\delta$-minimizer, meaning $J_\\alpha^\\delta(x_\\alpha^{\\delta,\\varepsilon})\\le\\inf_{z\\in D(F)}J_\\alpha^\\delta(z)+\\varepsilon_\\delta$. Set $c_p:=2^{1-p}/p$ and $\\rho_\\delta:=H(c_p/\\alpha(\\delta))$. Assume that for constants $c_-,c_+,C_H>0$ independent of $\\delta$,\n\n$$c_-\\delta^p\\le\\alpha(\\delta)\\rho_\\delta\\le c_+\\delta^p,\\qquad H(c_p/(2\\alpha(\\delta)))\\le C_H\\rho_\\delta$$\n\nfor all sufficiently small $\\delta$. Then for all sufficiently small $\\delta$, $x_\\alpha^{\\delta,\\varepsilon}\\in L_{R_0}$ and\n\n$$D_R^{\\xi^\\dagger}(x_\\alpha^{\\delta,\\varepsilon},x^\\dagger)=O(\\rho_\\delta),\\qquad \\|F(x_\\alpha^{\\delta,\\varepsilon})-y^\\delta\\|_Y=O(\\delta).$$\n\nIf, in addition, $\\psi(C_0\\delta^p)=O(\\rho_\\delta)$ for a fixed $C_0$ such that $T_\\delta:=\\|F(x_\\alpha^{\\delta,\\varepsilon})-F(x^\\dagger)\\|_Y^p\\le C_0\\delta^p$ for all sufficiently small $\\delta$, then $|R(x_\\alpha^{\\delta,\\varepsilon})-R(x^\\dagger)|=O(\\rho_\\delta)$. If also $D_R^{\\xi^\\dagger}(x,x^\\dagger)\\ge c_R\\|x-x^\\dagger\\|_X^s$ on $L_{R_0}$ for constants $c_R,s>0$, then $\\|x_\\alpha^{\\delta,\\varepsilon}-x^\\dagger\\|_X^s=O(\\rho_\\delta)$.\n\nIn the Hilbert special case, set $p=2$ and suppose $X,Y$ are real Hilbert spaces, $F:U\\to Y$ has the real open-domain interface of a nonlinear forward map, $x^\\dagger$ is an $x_0$-minimum-norm exact solution, $R(x)=\\frac12\\|x-x_0\\|_X^2$, and the source inequality on a regularizer sublevel contained in $U$ is\n\n$$\\langle x^\\dagger-x_0,x^\\dagger-x\\rangle_X\\le\\beta_1\\frac12\\|x-x^\\dagger\\|_X^2+\\beta_2\\|F(x)-F(x^\\dagger)\\|_Y$$\n\nwith $0\\le\\beta_1<1$ and $\\beta_2\\ge0$. For exact global minimizers of the nonlinear Tikhonov functional with $\\alpha(\\delta)\\asymp\\delta$, the theorem gives $\\|x_{\\alpha(\\delta)}^\\delta-x^\\dagger\\|_X=O(\\sqrt\\delta)$ and $\\|F(x_{\\alpha(\\delta)}^\\delta)-y^\\delta\\|_Y=O(\\delta)$. The assertion is conditional on such a global minimizer being supplied; it does not assert existence or cover local numerical minima."
+      }
+    ]
+  },
+  {
+    "order": 3051,
+    "id": "variational-source-conditions-and-bregman-rates-examples",
+    "kind": "B",
+    "category": "inverse-problems",
+    "title": "Bregman distances and variational source rates — Examples and Counterexamples",
+    "companion": "variational-source-conditions-and-bregman-rates",
+    "requires": [
+      "variational-source-conditions-and-bregman-rates"
+    ],
+    "items": [
+      {
+        "id": "cex-ip-vsc-unit-coefficient-does-not-control-bregman-error",
+        "kind": "counterexample",
+        "title": "A unit VSC coefficient need not force Bregman convergence",
+        "deps": [
+          "def-ip-banach-convex-subgradient-and-dual-pairing",
+          "def-ip-bregman-distance",
+          "def-ip-variational-source-condition"
+        ],
+        "dependency_level": 4,
+        "justified_by": [],
+        "proof_strategy": "direct",
+        "provenance": {
+          "statement": "ai-generated",
+          "proof": "ai-generated"
+        },
+        "generation": {
+          "role": "counterexample"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Frederic Weidling, Variational Source Conditions and Conditional Stability Estimates for Inverse Problems in PDEs, Theorem 2.20 and equation (2.26)",
+              "url": "https://univerlag.uni-goettingen.de/bitstream/handle/3/isbn-978-3-86395-411-6/weidling.pdf?sequence=1"
+            }
+          ]
+        },
+        "statement": "For $X=Y=\\mathbb R$ with the usual norm and pairing, $D(F)=\\mathbb R$, $F(x)=0$, $R(x)=\\max\\{0,-x\\}$, $x^\\dagger=0$, $y=0$, $\\xi^\\dagger=-1\\in\\partial R(0)$, $R_0=1$, $p=2$, and $\\psi(t)=\\sqrt t$, the boundary source inequality with coefficient $\\beta_1=1$\n\n$$-\\xi^\\dagger(x-x^\\dagger)\\le D_R^{\\xi^\\dagger}(x,x^\\dagger)+\\psi\\!\\left(|F(x)-F(x^\\dagger)|^2\\right)\\qquad(R(x)\\le R_0),$$\n\nholds for every $x$ with $R(x)\\le R_0$, where $D_R^{\\xi^\\dagger}(x,0):=R(x)-R(0)-\\xi^\\dagger x$. For every $\\delta\\in(0,1]$, set $y^\\delta=0$, $\\alpha(\\delta)=\\delta$, and $J_\\delta(x):=\\frac12|F(x)-y^\\delta|^2+\\alpha(\\delta)R(x)$. A global minimizer means a point $x_\\delta$ with $J_\\delta(x_\\delta)\\le J_\\delta(z)$ for every $z\\in\\mathbb R$. The false claim is that every family of such global minimizers satisfies $D_R^{\\xi^\\dagger}(x_\\delta,0)=O(\\delta)$ as $\\delta\\downarrow0$, meaning $D_R^{\\xi^\\dagger}(x_\\delta,0)\\le C\\delta$ for some fixed $C$ and all sufficiently small $\\delta>0$."
+      },
+      {
+        "id": "ex-ip-power-index-bregman-rate",
+        "kind": "example",
+        "title": "Power index functions give polynomial Bregman rates",
+        "deps": [
+          "lem-ip-index-function-young-conjugate-bound",
+          "def-ip-bregman-distance",
+          "def-ip-variational-source-condition",
+          "thm-ip-vsc-nonlinear-regularization-rate"
+        ],
+        "dependency_level": 5,
+        "justified_by": [],
+        "proof_strategy": "direct",
+        "provenance": {
+          "statement": "ai-generated",
+          "proof": "ai-generated"
+        },
+        "generation": {
+          "role": "example"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Frederic Weidling, Variational Source Conditions and Conditional Stability Estimates for Inverse Problems in PDEs, equation (2.25a)",
+              "url": "https://univerlag.uni-goettingen.de/bitstream/handle/3/isbn-978-3-86395-411-6/weidling.pdf?sequence=1"
+            },
+            {
+              "title": "Barbara Kaltenbacher, Convergence rates under a range invariance condition with application to electrical impedance tomography, equation (1.32a)",
+              "url": "https://arxiv.org/pdf/2403.18704"
+            }
+          ]
+        },
+        "statement": "Let $X,Y$ be real Banach spaces, $D(F)\\subseteq X$, $F:D(F)\\to Y$, and let $R:X\\to(-\\infty,+\\infty]$ be proper and convex. Fix $x^\\dagger\\in D(F)\\cap\\operatorname{dom}R$, $y=F(x^\\dagger)$, $\\xi^\\dagger\\in\\partial R(x^\\dagger)$, $1\\le p<\\infty$, $A>0$, $0<\\mu<1$, $0\\le\\beta<1$, and $R_0>R(x^\\dagger)$. Write $D_R^{\\xi^\\dagger}(x,x^\\dagger):=R(x)-R(x^\\dagger)-\\langle\\xi^\\dagger,x-x^\\dagger\\rangle_{X^*,X}$, and suppose\n\n$$-\\langle\\xi^\\dagger,x-x^\\dagger\\rangle_{X^*,X}\\le\\beta D_R^{\\xi^\\dagger}(x,x^\\dagger)+A\\|F(x)-F(x^\\dagger)\\|_Y^{p\\mu}\\qquad(x\\in D(F),\\ R(x)\\le R_0).$$\n\nFor data $y^\\delta$ with $\\|y^\\delta-y\\|_Y\\le\\delta$, suppose $0\\le\\varepsilon_\\delta\\le C_\\varepsilon\\delta^p$ and $x_\\alpha^{\\delta,\\varepsilon}\\in D(F)$ satisfies $J_\\alpha^\\delta(x_\\alpha^{\\delta,\\varepsilon})\\le\\inf_{z\\in D(F)}J_\\alpha^\\delta(z)+\\varepsilon_\\delta$, where $J_\\alpha^\\delta(x):=p^{-1}\\|F(x)-y^\\delta\\|_Y^p+\\alpha R(x)$. Set $c_p=2^{1-p}/p$, $H(q):=\\sup_{s\\ge0}(As^\\mu-qs)$, and choose $\\alpha(\\delta)\\asymp\\delta^{p(1-\\mu)}$. Then $H(c_p/\\alpha)\\asymp\\delta^{p\\mu}$ and $\\alpha H(c_p/\\alpha)\\asymp\\delta^p$. The fixed-scale conjugate and penalty-index conditions hold. Hence $D_R^{\\xi^\\dagger}(x_\\alpha^{\\delta,\\varepsilon},x^\\dagger)=O(\\delta^{p\\mu})$ and $\\|F(x_\\alpha^{\\delta,\\varepsilon})-y^\\delta\\|_Y=O(\\delta)$; if $D_R^{\\xi^\\dagger}(x,x^\\dagger)\\ge c_R\\|x-x^\\dagger\\|_X^s$ on $L_{R_0}$ for constants $c_R,s>0$, then $\\|x_\\alpha^{\\delta,\\varepsilon}-x^\\dagger\\|_X=O(\\delta^{p\\mu/s})$."
+      },
+      {
+        "id": "ex-ip-logarithmic-index-bregman-rate",
+        "kind": "example",
+        "title": "Logarithmic index functions give log-rate Bregman convergence",
+        "deps": [
+          "lem-ip-index-function-young-conjugate-bound",
+          "def-ip-bregman-distance",
+          "def-ip-variational-source-condition",
+          "thm-ip-vsc-nonlinear-regularization-rate"
+        ],
+        "dependency_level": 5,
+        "justified_by": [],
+        "proof_strategy": "direct",
+        "provenance": {
+          "statement": "ai-generated",
+          "proof": "ai-generated"
+        },
+        "generation": {
+          "role": "example"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Frederic Weidling, Variational Source Conditions and Conditional Stability Estimates for Inverse Problems in PDEs, equation (2.25b)",
+              "url": "https://univerlag.uni-goettingen.de/bitstream/handle/3/isbn-978-3-86395-411-6/weidling.pdf?sequence=1"
+            },
+            {
+              "title": "Barbara Kaltenbacher, Convergence rates under a range invariance condition with application to electrical impedance tomography, equations (1.31)–(1.32b)",
+              "url": "https://arxiv.org/pdf/2403.18704"
+            }
+          ]
+        },
+        "statement": "Let $X,Y$ be real Banach spaces, $D(F)\\subseteq X$, $F:D(F)\\to Y$, and let $R:X\\to(-\\infty,+\\infty]$ be proper and convex. Choose $x^\\dagger\\in D(F)\\cap\\operatorname{dom}R$, set $y=F(x^\\dagger)$, and choose $\\xi^\\dagger\\in\\partial R(x^\\dagger)$. Fix $1\\le p<\\infty$, $\\nu>0$, $0<t_0<e^{-(\\nu+1)}$, $0\\le\\beta<1$, and $R_0>R(x^\\dagger)$. Define $\\psi(0)=0$, $\\psi(t)=(-\\log t)^{-\\nu}$ for $0<t<t_0$, and $\\psi(t)=(-\\log t_0)^{-\\nu}$ for $t\\ge t_0$. Suppose\n\n$$-\\langle\\xi^\\dagger,x-x^\\dagger\\rangle_{X^*,X}\\le\\beta D_R^{\\xi^\\dagger}(x,x^\\dagger)+\\psi\\!\\left(\\|F(x)-F(x^\\dagger)\\|_Y^p\\right)\\qquad\\left(x\\in L_{R_0}:=\\{x\\in D(F):R(x)\\le R_0\\}\\right),$$\n\nwhere $D_R^{\\xi^\\dagger}(x,x^\\dagger):=R(x)-R(x^\\dagger)-\\langle\\xi^\\dagger,x-x^\\dagger\\rangle_{X^*,X}$. For data $y^\\delta\\in Y$ with $\\|y^\\delta-y\\|_Y\\le\\delta$, let $0\\le\\varepsilon_\\delta\\le C_\\varepsilon\\delta^p$ and suppose $x_\\alpha^{\\delta,\\varepsilon}\\in D(F)$ satisfies\n\n$$J_\\alpha^\\delta(x_\\alpha^{\\delta,\\varepsilon})\\le\\inf_{z\\in D(F)}J_\\alpha^\\delta(z)+\\varepsilon_\\delta,\\qquad J_\\alpha^\\delta(x):=p^{-1}\\|F(x)-y^\\delta\\|_Y^p+\\alpha R(x).$$\n\nChoose $\\alpha(\\delta)=\\delta^p(\\log(1/\\delta))^\\nu$ for sufficiently small $0<\\delta<1$, and write $c_p=2^{1-p}/p$. For $H(q):=\\sup_{s\\ge0}(\\psi(s)-qs)$, one has $H(q)\\sim(\\log q)^{-\\nu}$ as $q\\to\\infty$, so $\\rho_\\delta:=H(c_p/\\alpha(\\delta))\\asymp(\\log(1/\\delta))^{-\\nu}$ and $\\alpha(\\delta)\\rho_\\delta\\asymp\\delta^p$. The variational source rate theorem therefore gives\n\n$$D_R^{\\xi^\\dagger}(x_\\alpha^{\\delta,\\varepsilon},x^\\dagger)=O((\\log(1/\\delta))^{-\\nu}),\\qquad \\|F(x_\\alpha^{\\delta,\\varepsilon})-y^\\delta\\|_Y=O(\\delta),\\qquad |R(x_\\alpha^{\\delta,\\varepsilon})-R(x^\\dagger)|=O((\\log(1/\\delta))^{-\\nu}).$$\n\nIf also $D_R^{\\xi^\\dagger}(x,x^\\dagger)\\ge c_R\\|x-x^\\dagger\\|_X^s$ on $L_{R_0}$ for constants $c_R,s>0$, then $\\|x_\\alpha^{\\delta,\\varepsilon}-x^\\dagger\\|_X=O((\\log(1/\\delta))^{-\\nu/s})$. The parameter coupling here is derived from $\\alpha H(c_p/\\alpha)\\asymp\\delta^p$."
+      }
+    ]
+  }
+]

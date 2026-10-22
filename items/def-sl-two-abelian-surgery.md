@@ -26,7 +26,7 @@ sources:
       url: https://arxiv.org/pdf/2405.19197v2
     - title: Steven Sivek and Raphael Zentner, SU(2)-cyclic surgeries and the
         pillowcase, §1
-      url: https://arxiv.org/pdf/2103.12651v2
+      url: https://arxiv.org/pdf/1710.01957v2
 ---
 
 ## Definition
@@ -39,4 +39,4 @@ Assume full AC. Let $K\subset S^3$ be a smooth oriented knot, let $p,q\in\mathbb
 
 [Baldwin and Sivek, §§1 and 2.2](https://arxiv.org/pdf/2405.19197v2)
 
-[Sivek and Zentner, §1](https://arxiv.org/pdf/2103.12651v2)
+[Sivek and Zentner, §1](https://arxiv.org/pdf/1710.01957v2)

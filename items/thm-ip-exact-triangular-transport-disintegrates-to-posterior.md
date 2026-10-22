@@ -27,6 +27,11 @@ axiom_use: The Axiom of Choice is required by the standard-Borel disintegration 
 provenance:
   statement: literature-derived
   proof: ai-altered
+verification:
+  judge:
+    model: "gpt-6-luna"
+    verdict: pass
+    date: 2026-10-22
 sources:
   references:
     - title: "Rick Durrett, Probability: Theory and Examples, 5th ed."

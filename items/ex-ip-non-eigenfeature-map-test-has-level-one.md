@@ -17,6 +17,11 @@ provenance:
   proof: ai-generated
 generation:
   role: example
+verification:
+  judge:
+    model: "gpt-6-luna"
+    verdict: pass
+    date: 2026-10-22
 sources:
   references:
     - title: "Kretschmann and Werner, Maximum a posteriori testing in statistical inverse problems, Theorem 2.6"

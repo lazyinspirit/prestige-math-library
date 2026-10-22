@@ -1,0 +1,3658 @@
+PDF PAGE 1
+Minimax Operator Learning for Holomorphic Maps between
+Hilbert Spaces
+Ly Duc Hoang∗, Sven Wang†, Jakob Zech‡
+October 7, 2026
+Abstract
+We consider the problem of learning nonlinear operators G0 : X →Y from finitely many noisy
+observations. While finite-regularity classes such as Lipschitz- or Ck-operators suffer from the curse
+of sample complexity (i.e. algebraic sample complexity is impossible), algebraic convergence rates can
+be obtained for holomorphic operators. In this paper we study information-theoretic minimax rates
+for estimating holomorphic operators. We provide algebraic upper and lower bounds of the metric
+entropy of holomorphy classes (matching up to an arbitrarily small loss in the exponent) as well
+as statistical minimax lower bounds in both the random-design and a Gaussian white noise model.
+For the mean squared error, our novel lower bounds match our upper bounds (up to an arbitrarily
+small loss in the exponent) and coincide with the convergence rates obtained previously for related
+holomorphy classes [55]. Finally, we apply the theory to the parameter-to-solution map and the
+parameter-to-quantity-of-interest map arising from the elliptic Darcy flow equation.
+Keywords: operator learning, holomorphic operators, minimax estimation, metric entropy, polyno-
+mial chaos expansions, parametric partial differential equations
+1
+Introduction
+Learning nonlinear maps between function spaces is a central problem in modern scientific computing,
+uncertainty quantification and operator learning [37, 43, 6, 46, 53, 39].
+A canonical example is the
+parameter-to-solution map of a partial differential equation (PDE), mapping a spatially varying coeffi-
+cient, a forcing term or a domain parametrization to the corresponding PDE solution. From a statistical
+viewpoint, the central objective is to find methods and quantify the performance in recovering such an
+a priori unknown operator from finitely many noisy observations.
+Let X and Y be separable Hilbert spaces and let
+G0 : X →Y
+be some unknown nonlinear operator. A first natural observation model consists of independent input-
+output pairs (Xi, Yi)n
+i=1, where
+Xi
+i.i.d.
+∼γ,
+Yi = G0(Xi) + σεi,
+i = 1, . . . , n,
+(1.1)
+γ is some probability measure on X, σ > 0 is some scalar and (εi)n
+i=1 are independent Gaussian white
+noise processes indexed by Y. For X = Rd and Y = R, this reduces to the classical random-design non-
+parametric regression problem. (Statistical) Operator Learning may therefore be viewed as an infinite-
+dimensional analogue of classical nonparametric regression [55].
+A fundamental difficulty here is that both the input and the output function spaces might be infinite-
+dimensional. Classical finite-dimensional, finite-regularity assumptions in general lead to the curse of
+dimensionality, in the sense that the corresponding deterministic approximation rates and statistical
+estimation rates are dimension-dependent and deteriorate exponentially with the dimension d. If the
+input and output are infinite-dimensional, even with anisotropic dependence in the input coordinates
+and stronger regularity assumptions in the output space, broad classes of Lipschitz, or finite-regularity
+∗Department of Mathematics, Humboldt University of Berlin, Germany. Email: ly.duc.hoang@hu-berlin.de
+†Department of Mathematics, ´Ecole Polytechnique F´ed´erale de Lausanne, Switzerland. Email: sven.wang@epfl.ch
+‡Institute for Mathematics, Heidelberg University, Germany. Email: jakob.zech@uni-heidelberg.de
+1
+arXiv:2610.07295v1  [math.ST]  5 Oct 2026
+
+PDF PAGE 2
+2
+1
+Introduction
+operators suffer from the curse of parametric complexity in approximation and the curse of sample
+complexity in statistical estimation [42, 3], leading to rates which decay only logarithmically in the
+sample size n. This raises the following natural question:
+Which structural assumptions on an operator are sufficiently strong to break the curse of
+sample/parametric complexity, while being large enough to contain relevant parameter-to-
+solution operators arising in the context of PDEs?
+One possible such structure is to consider maps which depend analytically/holomorphically on their
+input parameters. Several works in approximation theory and uncertainty quantification have shown that
+the parameter-to-solution map of many parametric PDEs admits holomorphic extensions with respect to
+their anisotropically weighted input coordinates [14, 15, 13, 16, 22, 23, 26]. These works have in common
+that the holomorphic dependence implies the sparsity of the corresponding polynomial chaos expansions
+of the holomorphic map and leads to algebraic approximation rates despite both the input and output
+being infinite-dimensional.
+The goal of this paper is to establish analogous statistical results as well as to provide minimax lower
+bounds, complementing the upper bounds derived in [55].
+1.1
+Main Results
+A Gaussian white noise model.
+In addition to the random-design model, we consider a Gaussian
+white noise experiment. White noise models play a central role in classical nonparametric statistics,
+because they are often mathematically and functional-analytically convenient ”continuum limit”, see for
+example [21, Section 6.1.1] or [8, 56] for its relation to the random design model. Writing
+H = L2(X, Y, γ)
+for the space of square-integrable, Bochner-measurable, Y-valued operators, we generalize this observa-
+tion model to general separable Hilbert spaces by observing the Gaussian process
+Y(n)
+G0 (G) = ⟨G0, G⟩H + σ
+√nWH(G),
+G ∈H,
+where WH denotes a Gaussian white noise process on H. We refer to this as the operator white noise
+model or if H is just an arbitrary, separable Hilbert space, by the generalised white noise model. The
+Hilbert-space structure makes likelihood calculations and projection methods mathematically tractable.
+For a more precise mathematical formulation, we refer to Section 4.
+Metric entropy of classes of holomorphic operators
+Following the classical notion of metric
+entropy due to Kolmogorov and Tikhomirov [35], we will first quantify the size of the class of holomorphic
+operators through its metric entropy [35] with respect to the L2(X, Y, γ)-norm and with respect to the
+supremum norm. We show that, despite infinite-dimensional inputs and outputs, the metric entropy only
+scales algebraically with ε →0. For the L2-case, the effective complexity is determined by the parameter
+κ2 = min{s −1/2, t}.
+Up to an arbitrarily small loss in the exponent, the metric entropy then scales like ε−1/κ2. Analogously,
+for the supremum loss, the effective complexity is determined by the parameter
+κ∞= min{s −1, t}
+and the metric entropy scales like ε−1/κ∞.
+The same combinations of input and output regularity parameters s and t appear in the exponent of
+the L2- and L∞- approximation rates for neural and spectral operator surrogates [24]. More details can
+be found in Section 3.
+Minimax Lower Bounds for Operator Learning of Holomorphic Maps
+The class of holo-
+morphic operators allows for sparse approximation in the polynomial chaos expansion [14, 15, 11]. The
+summability of the coefficients yields coefficient bounds and algebraic N-term approximation rates, which
+are used in the proof of the upper bounds of the metric entropy and to control the bias of the statistical
+projection estimators based on the polynomial chaos expansion. Balancing this against the stochastic
+error arising from the observation noise yields the upper bound for the statistical estimation rates.
+
+PDF PAGE 3
+3
+1
+Introduction
+The statistical lower bounds rely on information-theoretic arguments (see Yang and Barron [62] and
+also [60, 21]). In both observation models, the Kullback-Leibler divergence between the two observation
+laws corresponding to two operators G, G′ ∈L2(X, Y, γ) is directly controlled by
+KL(PG, PG′) =
+n
+2σ2 ∥G −G′∥2
+L2(X,Y,γ).
+We study classes of holomorphic operators Hs,t between Hilbert spaces, where s > 1 describes the
+polynomial decay in the input coordinates, while t > 0 quantifies the decay in the output space. The
+precise definition of Hs,t is given in Section 2. Following the standard methods for statistical lower
+bounds, we combine the L2-metric entropy bounds with the construction of suitable packings in Hs,t
+with respect to the L2- or L∞-metric.
+This leads to the main statistical result of this paper regarding the minimax lower bounds in both
+the random design model and the operator white noise model. Note that corresponding upper bounds
+in the random design model have recently been proven in [55]. We denote by
+Hs,t
+lin := G ∈Hs,t : G is affine
+the subset of (affine) linear operators in Hs,t. It turns out that the lower bounds already hold over this
+smaller class. In particular, the resulting rates match the algebraic L2- minimax lower bounds up to an
+arbitrarily small loss in the exponent.
+Theorem 1.1 (Informal: Minimax Operator Learning upper and lower bounds). Let s > 1, t > 0 and
+σ > 0, and fix τ > 0. Set κ2 := min{s −1/2, t}. In both the operator white noise model (4.1) and the
+random-design white noise model (1.1), the squared L2-minimax risk over Hs,t satisfies
+n−
+2κ2
+2κ2+1 −τ ≲inf
+b
+Gn
+sup
+G0∈Hs,t
+lin
+EG0[| bGn −G0|2
+L2(γ,Y)] ≤inf
+b
+Gn
+sup
+G0∈Hs,t EG0[∥bGn −G0∥2
+L2(γ,Y)] ≲n−
+2κ2
+2κ2+1 +τ.
+(1.2)
+The implicit constants are independent of n. Here and below, the infimum is taken over all measurable
+maps bGn with respect to the data.
+For the L∞-loss, we obtain the following lower and upper bounds on the minimax risk.
+Setting
+κ∞:= min{s −1, t}, we have
+n−
+κ∞
+2κ2+1 −τ ≲inf
+b
+Gn
+sup
+G0∈Hs,t
+lin
+EG0[| bGn −G0|∞,Y] ≤inf
+b
+Gn
+sup
+G0∈Hs,t EG0
+h
+∥bGn −G0∥∞,Y
+i
+≲n−
+κ∞
+2κ∞+3 +τ.
+(1.3)
+For more details, consult Section 4 and 5.
+As an illustrative example, we consider the parameter-to-solution map of the elliptic Darcy flow
+equation, see Section 6 for details. It is well-known that the solution depends holomorphically on the
+conductivity coefficient [14, 15, 24]. We determine the corresponding regularity parameter s > 1 for the
+input, and the output regularity parameter t > 0, which determine the L2 and L∞-rates. Combined with
+Theorem 1.1, this shows that the L2-rate is minimax optimal over the associated class of holomorphic
+operators Hs,t. Furthermore, we prove minimax lower bounds for quantities of interest (QoIs), specifically
+for real-valued, linear functionals of the solution. Note that the algebraic rates obtained in the present
+infinite-dimensional setting contrast classical results for finite-dimensional nonparametric regression of
+holomorphic functions [31].
+1.2
+Related Literature
+Approximation Theory for Operator Learning and Parametric Partial Differential Equa-
+tions
+Recent successful applications of deep learning methods in the sciences have motivated the de-
+velopment of neural network architectures which are able to approximate solutions of partial differential
+equations (PDEs). Popular examples include for example the Deep Ritz method [63], the Deep Galerkin
+method [58] and physics-informed neural networks [54]. While these methods approximate individual
+solutions of a PDE, operator learning seeks to approximate maps between infinite-dimensional spaces,
+with a particular focus on parameter-to-solution maps of parametric PDEs. Neural-network based sur-
+rogates are commonly referred to as neural operators[37], with prominent examples including Fourier
+neural operators (FNOs) [43], Graph Neural Operators [44], DeepONet [46] and PCANet [6, 25]. Uni-
+versal approximation results have been established for several such neural operator architectures [19, 41,
+36, 37].
+
+PDF PAGE 4
+4
+1
+Introduction
+For broad classes of Lipschitz or finitely Fr´echet differentiable operators, quantitative approximation
+rates suffer from the curse of parametric complexity [40, 42]. Finding classes of operators for which this
+curse can be circumvented, remains a central challenge in Operator Learning. One possible solution to
+this problem arises from the approximation theory of parametric PDEs. For broad classes of operator
+equations, the parameter-to-solution maps admit holomorphic extensions with respect to the countably
+many expansion coefficients of the parameter. Examples include linear and nonlinear elliptic equations
+[14, 15, 11], parabolic equations [27], and PDEs on parametrized domains [32, 16, 26, 23]. The holomor-
+phic dependence of the solution on the parameters implies the sparsity of the corresponding generalized
+polynomial chaos expansions and dimension-independent N-term approximation rates. Building on this
+approximation theory, Schwab and Zech [57] studied neural network approximation of holomorphic maps
+and Herrmann, Schwab, and Zech [24] established a unified framework for neural and spectral operator
+surrogates with algebraic expression-rate bounds with respect to the L2 and L∞- norm. Related ap-
+proximation results on Gaussian spaces are based on Wiener–Hermite polynomials, with holomorphic
+extensions to complex strips [20, 47, 48].
+Statistical Learning Theory in Operator Learning
+In the noise-free setting, several works have
+studied the sample complexity of recovering operators from finitely many exact observations. Going back
+to earlier work by Mhaskar and Hahm [49] on the nonlinear n-width of Lipschitz operators with respect to
+L2, these results have been generalized to general classes of Lipschitz or finite-regularity operators,[38, 2].
+Therein, the authors show the prevalence of a curse of sample complexity for these classes, which states
+that the reconstruction of such operators with algebraic sample complexity is in general impossible.
+The statistical learning theory for operator learning with noisy observations has received less atten-
+tion. For the estimation of linear operator from noisy samples, statistical errors have been studied in
+[28] and lower bounds were studied in [10]. For nonparametric regression of Lipschitz operators from
+noisy data, Liu et al. [45] were able to prove generalization bounds for neural-network based estimators.
+For Banach space valued holomorphic operators and noisy observations, Adcock, Dexter, and Moraga
+Scheuermann [1] and Adcock et al. [4] derive upper and lower bounds for the approximation in L2.
+Results on minimax lower bounds for the nonparametric estimation of nonlinear operators have been
+sparser. Adcock, Maier, and Parhi [3] derived statistical lower bounds for Lipschitz operators in fixed- and
+random-design observation model, which were however only tight for exponentially decaying eigenvalues
+of the design measure. In particular, they show that algebraic rates cannot be achieved for such classes of
+operators. By contrast, Reinhardt, Wang, and Zech [55] established algebraic, statistical upper bounds
+for empirical risk minimizers over classes of so-called FrameNets if the operator is holomorphic.
+A recent survey by Brugiapaglia, Franco, and Nelsen [9] highlighted the open question of sharp lower
+bounds for operator learning under statistical observation noise and ask whether the rates by Reinhardt,
+Wang, and Zech [55] are minimax-optimal. Our results address this open question both in the random-
+design white noise model, with our lower bounds matching the upper bounds up to an arbitrarily small
+loss in the exponent. Furthermore, we establish the same minimax rates in the generalized Gaussian white
+noise model, which are attained by certain projection estimators based on the generalized polynomial
+chaos expansion.
+1.3
+Notation
+Throughout the text, set N = {1, 2, 3, . . . } and N0 = N ∪{0} and let R and C denote the real numbers
+and the complex numbers respectively.
+For a family of parametrized probability distributions {Pθ :
+θ ∈Θ} indexed by some parameter set Θ, we denote the expectation under Pθ by Eθ. For two real
+sequences (an)n∈N and (bn)n∈N, we write an ≲bn (respectively an ≳bn), if there exists a constant C > 0
+independent of n, such that an ≤Cbn (respectively an ≥Cbn) for all n ∈N. If both an ≲bn and
+an ≳bn, we write an ≃bn.
+For a pseudo-metric space (S, d) and T ⊂S and ε > 0, we denote the ε-covering number of T by
+N(ε, T, d) := inf
+n
+n ∈N : T ⊆
+n
+[
+i=1
+Bε(xi)
+o
+,
+(1.4)
+where Bε(xi) := {x ∈S : d(xi, x) ≤ε} and xi ∈S for all i. Similarly, M(ε, T, d) denotes the ε-packing
+number, i.e. the maximal cardinality of a subset of T whose distinct elements have pairwise distance
+greater than ε. For any ε > 0, the packing and covering numbers satisfy the elementary inequalities
+M(2ε, T, d) ≤N(ε, T, d) ≤M(ε, T, d).
+
+PDF PAGE 5
+5
+2
+A Class of Holomorphic Maps Between Hilbert Spaces
+The input and output space are denoted by X and Y respectively, and are assumed to be separable
+Hilbert spaces with inner products ⟨·, ·⟩X and ⟨·, ·⟩Y. For 1 ≤p < ∞and γ some probability measure on
+X, Lp(X, Y, γ) denotes the Bochner-space of p-integrable maps
+Lp(X, Y, γ) =
+(
+G : X →Y Bochner-measurable : ∥G∥Lp(X,Y,γ) :=
+Z
+X
+∥G(x)∥p
+Y dγ(x)
+1/p
+< ∞
+)
+.
+For a subset D ⊂X and p = ∞, we define
+L∞(D, Y) =
+
+G : D →Y : ∥G∥∞,D := sup
+x∈D
+∥G(x)∥Y < ∞
+
+.
+If D and X are clear from the context, we shorten the notation of the corresponding norms to ∥·∥Lp(γ,Y)
+and ∥· ∥∞,Y. Since we will consider classes of functionals as well, we write ∥· ∥Lp(γ) and ∥· ∥∞if Y = R.
+The space of real-valued, p-summable sequences is denoted by ℓp(N). Lastly, the complexification of a
+real Banach space (B, ∥· ∥B) is denoted by BC [52].
+2
+A Class of Holomorphic Maps Between Hilbert Spaces
+2.1
+Definition of Hs,t
+For ϱ > 1, let
+Eϱ =
+z + z−1
+2
+: z ∈C, 1 ≤|z| ≤ϱ
+
+⊂C
+denote the (closed) Bernstein ellipse with parameter ϱ. For a sequence ϱ ∈(1, ∞)N, we write
+E∞
+ϱ =
+∞×
+j=1
+Eϱj
+for the corresponding tensorized Bernstein poly-ellipse.
+Fix Riesz bases Ψ = (ψj)j∈N of X and Φ = (ϕj)j∈N of Y, with the dual (biorthogonal) bases
+eΨ = ( eψj)j∈N and eΦ = (eϕj)j∈N, respectively.
+Throughout this paper, let w = (wj)j∈N satisfy wj ≃1/j. For s > 1, define
+σs : Q →X,
+σs(c) =
+∞
+X
+j=1
+cjj−sψj,
+Q = [−1, 1]N.
+(2.1)
+This parametrizes the input through a weighted expansion with respect to the Riesz basis Ψ = (ψj)j∈N
+and by controlling the decay of the corresponding coefficients.
+For all s, t ≥0, define the scales of Hilbert spaces
+X s := {x ∈X : ∥x∥2
+X s :=
+∞
+X
+j=1
+|⟨x, eψj⟩X |2j2s < ∞}
+and
+Yt := {y ∈Y : ∥y∥2
+Yt :=
+∞
+X
+j=1
+|⟨y, eϕj⟩Y|2j2t < ∞},
+(2.2)
+which are separable Hilbert spaces. We denote their complexifications by X s
+C and Yt
+C respectively. We
+also define
+Xℓ1 = {x ∈X : ∥x∥Xℓ1 :=
+∞
+X
+j=1
+|⟨x, eψj⟩| < ∞}.
+(2.3)
+and denote its complexification by Xℓ1,C.
+By definition, X s and Yt are isomorphic to the weighted sequence spaces
+ℓ2
+s(N) =
+
+
+c ∈ℓ2(N) : ∥c∥2
+ℓ2
+s :=
+∞
+X
+j=1
+|cj|2j2s < ∞
+
+
+
+and
+
+PDF PAGE 6
+6
+2
+A Class of Holomorphic Maps Between Hilbert Spaces
+ℓ2
+t(N) =
+
+
+c ∈ℓ2(N) : ∥c∥2
+ℓ2
+t :=
+∞
+X
+j=1
+|cj|2j2t < ∞
+
+
+.
+For any r ≥0 and 1 ≤q < ∞, define
+ℓq
+−r(N) = {c = (cj)j∈N ∈RN : ∥c∥q
+ℓq
+−r :=
+∞
+X
+j=1
+|cj|qj−rq < ∞}.
+and we denote its complexification by ℓq
+−r(N, C) and abbreviate it to ℓq
+−r, if it is clear from the context.
+For s > 1,
+sup
+c∈Q
+∥c∥ℓ1
+−s ≤
+∞
+X
+j=1
+j−s < ∞,
+and therefore Q ⊂ℓ1
+−s(N).
+To allow for parameterizations σs beyond Q, we extend it to the weighted sequence space ℓ1
+−s(N).
+The proof of the following lemma can be found in Appendix A.2.
+Lemma 2.1. Let s > 1. The map eσs : ℓ1
+−s(N) →Xℓ1 with eσs(c) := P∞
+j=1 cjj−sψj, is a linear bijection,
+and satisfies
+∥eσs(c)∥Xℓ1 = ∥c∥ℓ1
+−s,
+c ∈ℓ1
+−s(N).
+Moreover,
+∥eσs(c)∥X ≤DΨ∥c∥ℓ1
+−s
+and eσs is a continuous extension of σs : Q →X. Analogous statements hold for the corresponding
+complexified spaces.
+By abuse of notation, we again denote this extension by σs.
+We consider two natural classes of
+holomorphic maps. The first class consists of holomorphic operators, following [55, Assumption 2], for
+which both the input and output spaces are infinite-dimensional Hilbert spaces. The second class consists
+of scalar-valued holomorphic functionals for which only the input space is infinite-dimensional.
+Consider two complex Hilbert spaces XC, YC, and an open set OC ⊂XC.
+We say that a map
+G : OC →YC is holomorphic, if it is complex Fr´echet differentiable; see, e.g., [50, Theorem 13.16] for a
+discussion of equivalent definitions.
+The next definition introduces the set of holomorphic operators that we investigate in the following. It
+is similar, but slightly less restrictive (i.e. larger) than the classes considered in [64, 24, 55]. In particular,
+it is essentially a version of the “(b, ε)-holomorphy” assumption [11]. Specifically, contrary to [24, 55]
+we assume boundedness not on the set OC, but only on the smaller set DC occurring in the following
+definition:
+Definition 2.2 (Class of holomorphic operators). Let s > 1, t > 0 and L > 0. Let XC, YC be complex
+Hilbert spaces and Q := [−1, 1]N. Fix a Riesz basis Ψ = (ψj)j∈N ⊂X and let σs be as in (2.1). Let
+σs(Q) ⊂DC ⊂OC ⊂XC be nested subsets of XC containing σs(Q), such that OC is open in XC, and
+DC ⊂(Xℓ1)C is open and bounded in the topology of (Xℓ1)C. Then we denote by Hs,t(OC, DC, YC, L) the
+set of all operators G : σs(Q) →Y with extensions to G : OC →YC such that
+(i) G is holomorphic on OC and
+(ii) supz∈DC ∥G(z)∥Yt
+C ≤L < ∞.
+If OC, DC and XC are fixed and clear from the context, we denote this set by Hs,t(L; YC).
+Remark 2.3. The proofs in [24, 55] only use boundedness on DC as required in Definition 2.2, rather than
+on OC as assumed [24, 55]. Hence the upper bounds derived in these papers carry over straightforward to
+this weaker assumption. In the present paper, where we wish to derive lower bounds matching the upper
+bounds, it is crucial to work with a possibly minimal assumption, which explains the introduction of DC.
+Showing optimal rates for the class assuming boundedness on OC constitutes an open question.
+If YC is finite-dimensional, all norms are equivalent. In particular, the Yt
+C-norm is equivalent to the
+YC-norm. Therefore, we can replace the uniform boundedness condition in Definition 2.2 simply by the
+uniform boundedness with respect to the YC-norm, formally corresponding to the case t = 0.
+
+PDF PAGE 7
+7
+2
+A Class of Holomorphic Maps Between Hilbert Spaces
+Definition 2.4 (Holomorphic functionals). Let s, L, XC, Q, σs, OC and DC be as in Definition 2.2.
+We denote the set of functionals g : σs(Q) →R with holomorphic extensions g : OC →C such that
+supz∈DC |g(z)| ≤L < ∞by Hs(OC, DC, C, L).
+If OC and DC are clear from the context, we write
+Hs(L; C).
+Remark 2.5. By Lemma 2.1, the map σs : ℓ1
+−s(N)C →Xℓ1,C is continuous and thus σ−1
+s (DC) is an open
+and bounded subset of ℓ1
+−s(N)C. Furthermore, Q is compact in the topology of ℓ1
+−s. Since Q ⊂σ−1
+s (DC),
+it holds that
+r∗:= dist(Q, ∂σ−1
+s (DC)) > 0
+with the distance measured with respect to ℓ1
+−s. As a consequence, for every r ∈(0, r∗),
+{z ∈ℓ1
+−s(N)C : dist(z, Q) < r} ⊂σ−1
+s (DC) ⊂σ−1
+s (OC).
+To consider analytic extension domains in the sequence space CN, one needs to ensure that the corre-
+sponding tensorized Bernstein ellipses E∞
+ϱ
+do not become too large. For every z ∈E∞
+ϱ , one can choose a
+c ∈Q such that
+|zj −cj| ≤ϱj −1,
+j ∈N.
+This follows for example from [64, Lemma B.2.4.]. Thus, for every z ∈E∞
+ϱ ,
+dist(z, Q) ≤
+∞
+X
+j=1
+(ρj −1)j−s.
+It is thus sufficient to impose the admissibility condition
+∞
+X
+j=1
+(ϱj −1)j−s < r
+for some r ∈(0, r∗) to ensure that E∞
+ϱ ⊂σ−1
+s (DC). This leads to the condition in Lemma 2.6, commonly
+known as the (b, r)-admissibility condition [15] with bj = j−s.
+The following lemma is a special case of [64, Lemma 2.2.7] with bj = j−s, adapted to the current
+problem setting.
+Lemma 2.6. Let s > 1, t > 0 and L > 0. Let XC, YC be complex separable Hilbert spaces, let OC ⊂XC
+be open and let G ∈Hs,t(L; YC). Define F = G ◦σs : Q →Y. Then, there exists an r > 0, depending
+only on DC and σs, independent of G, such that the following statements hold:
+(i) F is continuous on Q.
+(ii) For every admissible sequence ϱ = (ϱj)j∈N ∈(1, ∞)N satisfying
+∞
+X
+j=1
+j−s(ϱj −1) < r,
+(2.4)
+the map F admits a separately analytic1 extension to E∞
+ϱ =×j∈N Eϱj.
+(iii) The extension F : Ss,r →YC with
+Ss,r =
+[
+{ϱ:ϱ is admissible}
+E∞
+ϱ
+(2.5)
+is well-defined and satisfies supz∈Ss,r ∥F(z)∥Yt
+C ≤L.
+Proposition 2.7. Let s > 1 and let Ss,r be defined as in (2.5). For every r > 0, the set Ss,r is an open
+and bounded subset of ℓ1
+−s(N)C. Moreover, there exist r′, er > 0 such that r′ < er and
+Q ⊂Ss,r′ ⊂σ−1
+s (DC) ⊂Ss,r”
+1i.e. analytic for any finite selection (zi)i∈I of variables with I ⊂N and |I| < ∞
+
+PDF PAGE 8
+8
+2
+A Class of Holomorphic Maps Between Hilbert Spaces
+The proof of this proposition is given in Appendix A.3.
+This previous construction allows us to freely switch between two equivalent parametrizations of the
+input parameter, either in the coefficient representation of c ∈Q or in the Hilbert-space representation
+of a = σs(c) ∈X. For this reason, we impose the following assumption on the distribution of the design
+measure γ.
+Assumption 2.8. Let s > 1 and let σs be defined with respect to a fixed Riesz basis Ψ ⊂X. Let
+π =
+∞
+O
+j=1
+Unif([−1, 1])
+be the product uniform probability measure on Q = [−1, 1]N and assume that γ is a probability measure
+on X defined by the push-forward γ := (σs)#π.
+Since σs : Q →σs(Q) is bijective, the composition with σs defines an isometric isomorphism
+U : L2(σs(Q), Y, γ) →L2(Q, Y, π)
+(2.6)
+with UG = G ◦σs and inverse U −1F = F ◦σ−1
+s . Indeed, by a change of measure,
+∥UG∥2
+L2(Q,Y,π) =
+Z
+Q
+∥G(σs(c))∥2
+Y dπ(c) =
+Z
+σs(Q)
+∥G(x)∥2
+Y dγ(x) = ∥G∥2
+L2(γ,Y).
+In particular, supp(γ) = σs(Q) and since Q is compact in ℓ1
+−s(N) and σs is continuous, supp(γ) is
+compact in X.
+As we will see in Section 2.2 and Section 4, Hs,t(L; Y) is the appropriate class of holomorphic
+operators both from an approximation-theoretic and statistical viewpoint. The parameter s > 1 encodes
+the anisotropic dependence on the input variables and the compactness of σs(Q) in X. The parameter
+t > 0 imposes additional regularity in the output space of the holomorphic operator. Such regularity
+conditions are common in the context of parametric PDEs.
+Since Yt embeds compactly into Y, the operator class is pointwise relatively compact. Together with
+the equicontinuity, which follows from the holomorphy assumption, this yields relative compactness in
+the relevant Bochner-space topology by the Arzel`a-Ascoli theorem, see Appendix A.1 for more details.
+This compactness is essential for information-theoretic arguments based on packing and covering
+numbers. Without such compactness in the input and output space, uniformly consistent statistical
+estimation becomes impossible. This follows for example from [33, Theorem 5.7], see also [30, 29] for the
+original statement.
+2.2
+Approximation Rates
+We next recall quantitative polynomial approximation rates for the class Hs,t(L; YC) from [24, 55]. The
+sparsity of the Legendre polynomial chaos expansion is implied by the holomorpy established in Lemma
+2.6. Such results were first proven by Cohen, Devore, and Schwab [15].
+Denote by (Lj)j∈N the L2([−1, 1])-normalized Legendre polynomials with L0 = 1, which are an
+orthonormal basis of L2([−1, 1]). It is well-known, that
+sup
+x∈[−1,1]
+|Lj(x)| ≤
+p
+1 + 2j
+∀j ∈N0.
+(2.7)
+Let F be the set of finitely supported multi-indices
+F = {ν = (νj)j∈N0 ∈NN
+0 : |supp ν| < ∞},
+with supp ν = {j : νj ̸= 0}. For c ∈Q = [−1, 1]N and ν ∈F, define the tensorized Legendre polynomials
+by
+Lν(c) :=
+∞
+Y
+j=1
+Lνj(cj).
+(2.8)
+Then (Lν)ν∈F is an orthonormal basis of L2(Q, π). For ν ∈F, define
+wν =
+∞
+Y
+j=1
+(1 + 2νj).
+(2.9)
+
+PDF PAGE 9
+9
+2
+A Class of Holomorphic Maps Between Hilbert Spaces
+Define the L∞([−1, 1])-normalized Legendre polynomials (Pj)j∈N and normalize by the upper bound
+(2.7), i.e Pj = Lj/(√1 + 2j). The tensorized version (Pν)ν∈F are therefore defined by Pν = w−1/2
+ν
+Lν.
+By the isometric isomorphism L2(X, γ) ∼= L2(Q, π), one may equivalently expand with respect to
+(Lν)ν∈F in L2(Q, π) or with respect to Lν ◦σ−1
+s
+in L2(supp(γ), γ). In particular, we will see that by the
+holomorphy of G ∈Hs,t(L; YC) ⊂L∞(supp(γ), Y) ⊂L2(γ, Y), the map F = G ◦σs : Q →Y admits a
+unique expansion in L2(Q, Y, π) by
+F(c) =
+X
+ν∈F
+gνLν =
+X
+ν∈F
+g∞
+ν Pν.
+For each ν ∈F, define the Y-valued Legendre coefficient
+gν =
+Z
+Q
+Lν(c)F(c) dπ(c) =
+Z
+σs(Q)
+Lν(σ−1
+s (x))G(x) dγ(x),
+g∞
+ν = w1/2
+ν
+gν.
+(2.10)
+and with respect to the Riesz basis Φ = (ϕj)j∈N of Y,
+gν,j =
+Z
+Q
+Lν(c)F(c) dπ(c), eϕj
+
+Y
+=
+Z
+Q
+Lν(c)
+D
+F(c), eϕj
+E
+Y dπ(c)
+(2.11)
+Then
+F(c) =
+X
+ν∈F
+gνLν(c) =
+∞
+X
+j=1
+X
+ν∈F
+gν,jLν(c)ϕj
+=
+X
+ν∈F
+g∞
+ν Pν(c) =
+∞
+X
+j=1
+X
+ν∈F
+g∞
+ν,jPν(c)ϕj
+and
+G(x) =
+X
+ν∈F
+gνLν(σ−1
+s (x)) =
+∞
+X
+j=1
+X
+ν∈F
+gν,jLν(σ−1
+s (x))ϕj
+(2.12)
+=
+X
+ν∈F
+g∞
+ν Pν(σ−1
+s (x)) =
+∞
+X
+j=1
+X
+ν∈F
+g∞
+ν,jPν(σ−1
+s (x))ϕj.
+(2.13)
+The following result is a version of [24, Theorem 5] or [55, Theorem 54] which themselves are refor-
+mulations of [64, Theorem 2.2.10].
+Theorem 2.9. Let s > 1, t > 0, L > 0, t′ ∈[0, t), and fix ϑ > 0 and p ∈(1/s, 1). Let Assumption
+2.8 hold. Let XC, YC, OC, DC and Ψ = (ψj)j∈N ⊂X as in Definition 2.2. Then there exist a constant
+C > 0 and a non-negative sequence (aν)ν∈F ∈ℓp(F) such that for all G ∈Hs,t(OC, DC, YC, L)
+(i) For each ν ∈F, the Legendre coefficients gν satisfy
+wϑ
+ν ∥gν∥Yt′
+C ≤Caν.
+(2.14)
+(ii) There exists an enumeration (νi)i∈N, such that (aνi)i∈N is monotonically decreasing and the set
+ΛN := {νi : i ≤N} ⊂F is downward closed 2.
+(iii) The expansion
+G(σs(c)) =
+X
+ν∈F
+gνLν(c)
+holds in Yt′ for all c ∈Q with absolute and uniform convergence.
+From the ℓp(F)-summability of (aν)ν∈F, one can derive best N-term approximation rates and a priori
+downward closed index sets ΛN that can be chosen independently of a specific G. We will use these index
+sets below to construct approximation of the operator G, as well as projection estimators in Section 5.
+Indeed, for the enumeration (νi)i∈N in item (ii) of Theorem 2.9,
+aνi ≲i−1/p.
+2A set Λ ⊂F is called downward closed, if v ∈Λ is implied by µ ∈Λ and ν ≤µ (element-wise)
+
+PDF PAGE 10
+10
+2
+A Class of Holomorphic Maps Between Hilbert Spaces
+Applying Stechkin’s Lemma [59] then yields the L2-approximation rate N −(1/p−1/2) and L∞-approximation
+rate N −(1/p−1).
+To be more precise, fix N ∈N and let ΛN be an index set of cardinality N. Define (gν)ν∈F as in
+(2.10) and assume that Y = R. The truncation of the expansion (2.12) corresponding to the index set
+ΛN is defined as
+gN(x) :=
+X
+ν∈ΛN
+gνLν(σ−1
+s (x)) =
+X
+ν∈Λ∞
+N
+g∞
+ν Pν(σ−1
+s (x)),
+(2.15)
+where x ∈supp(γ). For holomorphic functionals, this yields the following approximation result [15, 11,
+13].
+Theorem 2.10 (Rates of approximation for holomorphic functionals). Let s > 1, L > 0, and let XC,
+OC, DC and Ψ = (ψj)j∈N ⊂X as in Definition 2.2. Fix δ > 0 and let γ be as in Assumption 2.8. Then
+there exist constants C2, C∞> 0 such that, for every N ∈N, there exists a downward closed index set
+ΛN of cardinality N, and for every g0 ∈Hs(OC, DC, C, L) it holds
+∥g0 −gN∥L2(γ) ≤C2N −(s−1/2)+δ
+(2.16)
+and
+∥g0 −gN∥∞≤C∞N −(s−1)+δ.
+(2.17)
+For Y-valued operators, we combine the polynomial approximation with a truncation in the output
+Riesz basis Φ of Y. Recall that (gν,j)ν∈F,j∈N denotes the corresponding Legendre coefficients in the
+generalized polynomial chaos expansion of any element G ∈L2(γ, Y) by
+G(x) =
+∞
+X
+j=1
+X
+ν∈F
+gν,jLν(σ−1
+s (x))ϕj,
+x ∈supp(γ).
+To truncate this expansion, we allow the truncation of the inner sum to also depend on j, i.e.
+to
+consider index sets of the form (ΛN,j)j≤N ⊂F as in [24]. For index sets (ΛN,j)j≤N, (Λ∞
+N,j)j≤N ⊂F and
+x ∈supp(γ), we define
+GN(x) =
+N
+X
+j=1
+X
+ν∈ΛN,j
+gν,jLν(σ−1
+s (x))ϕj
+(2.18)
+and
+G∞
+N (x) =
+N
+X
+j=1
+X
+ν∈Λ∞
+N,j
+g∞
+ν,jPν(σ−1
+s (x))ϕj.
+(2.19)
+Combined with the weighted summability results for the Legendre coefficients from Theorem 2.9,
+bounds may be reformulated into a bound for the Legendre coefficients gν,j. This yields the following
+approximation result which can be found in [24, Theorem 6]: More precisely, [24, Theorem 6] gives a
+convergence rate in terms of a neural network approximation. Since the proof reapproximates a Legendre
+expansion with neural networks, the resulting error bound also holds for the Legendre expansion.
+Theorem 2.11. Let s > 1, t > 0, L > 0 and let XC, YC, OC, DC and Ψ = (ψj)j∈N ⊂X as in
+Definition 2.2 . Additionally, let G0 ∈Hs,t(L; YC) and suppose that Assumption 2.8 holds. For every
+δ > 0, there exist constants C2, C∞> 0 (depending on s, t, L, but independent of G0) such that, for
+every N ∈N, there are downward closed sets (ΛN,j)j≤N and (Λ∞
+N,j)j≤N satisfying P∞
+j=1 |ΛN,j| ≤N and
+P∞
+j=1 |Λ∞
+N,j| ≤N. For these index sets, it holds that
+∥GN −G0∥L2(γ,Y) ≤C2N −min{s−1/2,t}+δ
+and
+∥G∞
+N −G0∥∞,Y ≤C∞N −min{s−1,t}+δ.
+
+PDF PAGE 11
+11
+3
+Metric Entropy Upper and Lower Bounds
+3
+Metric Entropy Upper and Lower Bounds
+We first establish quantitative metric entropy estimates for the class of holomorphic functionals Hs(L; C)
+and the class of holomorphic operators Hs,t(L; YC), in both the corresponding L2- and L∞-losses. The
+upper bounds will follow from the polynomial approximation results and the Legendre coefficient esti-
+mates of Section 2.2, whereas the lower bounds are obtained from the construction of explicit packings
+of the corresponding classes.
+The relative compactness of Hs,t(L; YC) with respect to L∞(supp(γ), Y) and L2(γ, Y) is proved in
+Theorem A.1 and ensures that the metric entropy is finite. Although the metric entropy estimates in
+Proposition 3.1, Proposition 3.2, Proposition 3.3 and Proposition 3.4 are of independent interest, they
+will be used to derive the minimax lower bounds in Section 4.2, 4.3 and 4.4.
+3.1
+Metric Entropy Upper Bounds
+We begin with the L2 metric entropy upper bounds. The construction of the covering is performed in
+two steps. First, we truncate the Y-valued Legendre polynomial chaos expansion using an a priori chosen
+index set ΛN, such that the squared L2-error is at most ε2/2. We then cover each of the N coefficients
+with balls of radii ε1, . . . , εN. By Theorem 2.9, we have explicit quantitative control of the size of each
+of the coefficients. Since the tensorized Legendre polynomials form an orthonormal basis, the resulting
+L2-error from discretizing the coefficients is bounded by PN
+i=1 ε2
+i . Any choice of ε1, . . . , εN such that
+this sum is upper bounded by ε2/2 then produces an ε-covering. Optimizing these εi yields the stated
+L2 entropy bounds.
+Proposition 3.1 (L2-metric entropy upper bounds). Let s > 1, t > 0 and L > 0.
+Suppose that
+Assumption 2.8 holds. Then, for every τ > 0 and all sufficiently small ε > 0 (cf. (1.4))
+log N(ε, Hs(L; C), ∥· ∥L2(γ)) ≲ε−
+1
+s−1/2 −τ.
+Moreover, setting κ2 = min{s −1/2, t}, we have
+log N(ε, Hs,t(L; YC), ∥· ∥L2(γ,Y)) ≲ε−1
+κ2 −τ.
+The implicit constants are independent of ε, but may depend on parameters s, t, L, Ψ, OC and DC which
+determine Hs(L; C) and Hs,t(L; YC).
+Proof. We split the proof of the proposition into two parts, first proving the upper bounds for the class
+of holomorphic functionals Hs(L, C) and then for the class of holomorphic operators Hs,t(L, YC).
+Metric entropy upper bounds for Hs(L; C).
+Let δ > 0 be sufficiently small and set s′ = s −δ < s,
+such that
+1
+s′−1/2 ≤
+1
+s−1/2 +τ. Let g ∈Hs(L; , C) and let gν denote its scalar-valued Legendre coefficients
+which are defined as in (2.10). By Theorem 2.9, there exists a constant C > 0 and an enumeration
+(νi)i∈N, both independent of g ∈Hs(L; , C), such that |gνi| ≤Ci−s′ for all i ∈N. For the index set
+ΛN = {ν1, . . . , νN} ⊂F, Theorem 2.10 and Parseval’s identity imply
+g −
+X
+ν∈ΛN
+gνLν ◦(σs)−1
+
+2
+L2(X,γ)
+=
+g ◦σs −
+X
+ν∈ΛN
+gνLν
+
+2
+L2(Q,π)
+=
+X
+ν /∈ΛN
+g2
+ν ≤C2N −(2s′−1),
+(3.1)
+where we used (2.6) in the first equality. Choose N ≍ε−
+2
+2s′−1 such that the last expression is smaller
+than ε2/2. It remains to discretize the coefficients {gνi : i = 1, . . . , N}. For i = 1, . . . , N, cover the
+interval [−Ci−s′, Ci−s′] by intervals of length εi > 0, with the corresponding covering number satisfying
+Ni := N(εi, [−Ci−s′, Ci−s′], | · |) ≲
+ 
+i−s′
+εi
+!
+.
+(3.2)
+Since the Legendre polynomials Lν ◦σ−1
+s
+are orthonormal in L2(X, γ), it suffices to require that
+N
+X
+i=1
+ε2
+i ≤ε2
+2 .
+
+PDF PAGE 12
+12
+3
+Metric Entropy Upper and Lower Bounds
+Up to constants, minimizing the upper bound of the cardinality QN
+i=1 Ni of the covering is equivalent to
+minimizing the sum of the logarithms, subject to the given constraint on the εi, i.e.
+min
+ε1,...,εN
+N
+X
+i=1
+log
+  
+i−s′
+εi
+!!
+,
+s.t.
+N
+X
+i=1
+ε2
+i ≤ε2
+2 .
+The resulting minimization problem is solved for εi = ε/
+√
+2N. For each i = 1, . . . , N, let Ci := {gνi,ji :
+ji = 1, . . . , Ni} be an εi-net for the i-th coefficient. Hence, for each g ∈Hs(L; C) and for each i =
+1, . . . , N, there exist a gνi,ji ∈Ci, such that with (3.2)
+g −
+N
+X
+i=1
+gνi,jiLν ◦(σs)−1
+
+2
+L2(γ)
+≤
+N
+X
+i=1
+ε2
+i +
+X
+ν /∈ΛN
+g2
+ν ≤ε2.
+By the choice of N, it holds that ε/
+√
+N ≍N −s′ and i−s′/εi ≍(N/i)s′.
+Applying the elementary
+inequality PN
+j=1 log(j) ≥N log(N) −N, (which follows from Stirling’s approximation),
+log N(ε, Hs(L; C), ∥· ∥L2(γ)) ≤
+N
+X
+i=1
+log(Ni)
+(3.3)
+≲
+N
+X
+i=1
+
+log
+ N
+i
+s′! 
+≤s′
+N log(N) −
+N
+X
+i=1
+log(i)
+
+≲N
+(3.4)
+≲ε−
+1
+s−1/2 −τ,
+which proves the metric entropy upper bound for Hs(L; C).
+Metric entropy upper bounds for Hs,t(L; YC).
+The idea for the construction of the covering is the
+same as in the scalar-valued case, so we only describe the differences in the proof to the first case here.
+Fix τ > 0 and choose δ > 0 sufficiently small and set s′ = s −δ and t′ = t −δ so that s′ > 1, t′ > 0 and
+1
+min{s′ −1/2, t′} ≤
+1
+min{s −1/2, t} + τ.
+By Theorem 2.9, after enumerating (νi)i∈N, there exists a constant C > 0 and Y-valued Legendre
+coefficients gν satisfying
+∥gνi∥Yt′ ≤Ci−s′.
+As for the holomorphic functionals, we truncate the Legendre polynomial chaos expansion after N terms
+and choose N ≍ε−
+2
+2s′−1 such that the squared L2 truncation error is smaller than ε2/2.
+For each
+i = 1, . . . , N, define Bs′,t′,i = {y ∈Y, ∥y∥Yt′ ≤Ci−s′}, which are balls in Yt′ of radius Ci−s′. Since balls
+in Yt′ are ellipsoids with respect to the ∥· ∥Y-norm, for which the metric entropy is known [35],
+log(Ni) := log N(εi, Bs′,t′,i, ∥· ∥Y) ≍
+ 
+i−s′
+εi
+!1/t′
+.
+(3.5)
+As in the scalar-valued case, it suffices that we require PN
+i=1 ε2
+i ≤ε2/2. Let Ci = {gνi,ji : ji = 1, . . . Ni}
+denote a minimal ε-covering of Bs′,t′,i and set
+C =
+( N
+X
+i=1
+gνi,jiLνi ◦σ−1
+s
+: ji = 1, . . . , Ni
+)
+.
+Then
+|C| ≤
+N
+Y
+i=1
+Ni.
+(3.6)
+
+PDF PAGE 13
+13
+3
+Metric Entropy Upper and Lower Bounds
+For each i = 1, . . . , N, there exists a specific ki ∈{1, . . . , Ni}, such that ∥gνi −gνi,ki∥Y ≤εi. By the
+orthonormality of (Lν ◦σ−1
+s )ν∈F in L2(γ) and since L2(γ, Y) ≃L2(γ) ⊗Y, it holds that
+G −
+N
+X
+i=1
+gνi,kiLνi ◦σ−1
+s
+
+2
+L2(γ,Y)
+≤
+X
+ν̸∈ΛN
+∥gν∥2
+Y +
+N
+X
+i=1
+ε2
+i ≤ε2.
+Minimizing the right-hand side of (3.6) is equivalent to the minimization problem
+min
+ε1,...,εN
+N
+X
+i=1
+ 
+i−s′
+εi
+!1/t′
+,
+s.t.
+N
+X
+i=1
+ε2
+i ≤ε2
+2 .
+(3.7)
+Set
+SN :=
+N
+X
+i=1
+i−
+2s′
+1+2t′ .
+Using Lagrange-multipliers and applying Lemma B.1, with α = s′ and β = t′, the minimization problem
+is solved by
+εi = εi−
+s′
+1+2t′
+√2SN
+.
+Plugging the optimal choice of εi into (3.7) (see also Lemma B.1) and using N ≍ε−
+2
+2s′−1 yields
+N
+X
+i=1
+ 
+i−s′
+εi
+!1/t′
+=
+ √
+2
+ε
+!1/t′
+S
+1+2t′
+2t′
+N
+.
+By integral comparison,
+SN ≲
+
+
+
+
+
+N 1−
+2α
+1+2β
+2α < 1 + 2β
+log(N)
+2α = 1 + 2β
+1
+2α > 1 + 2β
+,
+and it follows that the metric entropy upper bound satisfies
+log N(ε, Hs,t(L; YC), ∥· ∥L2(γ,Y)) ≤log(|C|) ≤
+N
+X
+i=1
+log(Ni) ≲ε−1
+κ2 −τ.
+The proof of the L∞-metric entropy bounds follows the same truncate-then-discretize strategy as in
+the L2-case, with two main differences. Firstly, we use an expansion w.r.t. the L∞-normalized Legendre
+polynomials Pν with Legendre coefficients g∞
+ν
+∈Y, such that the corresponding N-term truncation
+converges with rate by s −1. Secondly, we use the fact that ∥Pν∥∞≤1 and the triangle inequality for
+the discretization error for the Legendre coefficients instead of the orthonormality of (Lν ◦σ−1
+s )ν∈F in
+L2(γ) and Parseval’s identity. Apart from these differences, the construction of the covering and the
+optimization of the upper-bounds follows essentially the same steps as the L2-case. The details of the
+proof can be found in Appendix B.2.
+Proposition 3.2 (L∞-metric entropy upper bounds). Let s > 1, t > 0 and L > 0 and let τ > 0 be
+arbitrarily small. Then
+log N (ε, Hs(L; C), ∥· ∥∞) ≲ε−
+1
+s−1 −τ.
+Moreover, setting κ∞= min{s −1, t}, we have
+log N
+ ε, Hs,t(L; YC), ∥· ∥∞,Y
+
+≲ε−
+1
+κ∞−τ.
+3.2
+Metric Entropy Lower Bounds
+We next derive matching lower bounds by constructing explicit packings of the classes of holomorphic
+functionals and holomorphic operators. Importantly, we will work with a class of maps restricted to
+(affine) linear operators.
+It turns out that this class already suffices to match corresponding upper
+
+PDF PAGE 14
+14
+3
+Metric Entropy Upper and Lower Bounds
+bounds. To formalize this, set
+Hs,t
+lin(OC, DC, YC, L) := {G ∈Hs,t(OC, DC, YC, L) : G is affine linear},
+and analogous to Definitions 2.2 and 2.4, we also use the shorter notations
+Hs,t
+lin(L; YC),
+Hs
+lin(L; C),
+where the latter space corresponds to the linear operators with YC = C (analogous to Definition 2.4).
+Proposition 3.3 (L2-metric entropy lower bounds). Let s > 1, t > 0 and L > 0 and fix N ∈N. Let γ
+be as in Assumption 2.8. Then, for all sufficiently small ε > 0,
+log N(ε, Hs(L; C), ∥· ∥L2(γ)) ≥log N(ε, Hs
+lin(L; C), ∥· ∥L2(γ)) ≳ε−
+1
+s−1/2 .
+(3.8)
+Moreover, setting κ2 = min{s −1/2, t}, we have
+log N(ε, Hs,t(L; YC), ∥· ∥L2(γ)) ≥log N(ε, Hs,t
+lin(L; YC), ∥· ∥L2(γ,Y)) ≳ε−1
+κ2 .
+(3.9)
+The implicit constants are independent of ε.
+Proof. We use a similar combinatorial argument for both the class of holomorphic functionals and the
+class of holomorphic operators. Based on the Varshamov–Gilbert lemma, see [60, Lemma 2.9] or [21,
+Example 3.1.4], for every N ∈N, there exists a set Ω⊂{−1, 1}N with |Ω| ≥3N/4, such that for any
+ω, ω′ ∈Ω, the Hamming distance satisfies
+ρ(ω, ω′) :=
+N
+X
+i=1
+1{ωi̸=ω′
+i} ≥N
+8 .
+Metric entropy lower bounds for Hs
+lin(L; C)
+For ω ∈Ω, define
+gω(z) := δ
+N
+X
+i=1
+ωi ⟨z, eψi⟩X ,
+z ∈OC,
+where δ > 0 is some fixed constant which is chosen later. Clearly, gω is a continuous linear functional
+and hence holomorphic on OC. To show that gω ∈Hs
+lin(L; C), we need to show that gω is uniformly
+bounded on DC. Since DC is bounded in (Xℓ1)C,
+R := sup
+z∈DC
+∥z∥Xℓ1 < ∞,
+and therefore
+sup
+z∈DC
+|gω(z)| ≤δ sup
+z∈DC
+N
+X
+i=1
+⟨z, eψi⟩X
+ ≤δR.
+Choosing δ < L/R ensures that gω ∈Hs
+lin(L; C) for any ω ∈Ωand N ∈N. By (2.1),
+gω(σs(c)) = δ
+N
+X
+i=1
+ωii−sci,
+c ∈Q.
+For any ω, ω′ ∈Ωwith ω ̸= ω′, and since by Assumption 2.8, it holds that γ = (σs)#π,
+∥gω −gω′∥2
+L2(γ) = δ2∥gω ◦σs −gω′ ◦σs∥L2(π)
+= δ2
+3
+N
+X
+i=1
+i−2s(ωi −ω′
+i)2
+≥δ2
+3 N −2s
+N
+X
+i=1
+(ωi −ω′
+i)2
+(3.10)
+= 4δ2
+3 N −2sρ(ω, ω′)
+≥δ2
+6 N 1−2s.
+
+PDF PAGE 15
+15
+3
+Metric Entropy Upper and Lower Bounds
+Here, we used that
+Z
+Q
+c2
+i dπ(c) = 1
+2
+Z 1
+−1
+c2
+i dci = 1
+3
+in the second equality. Consequently, choosing N ≍ε−1/(s−1/2) such that the last display equals ε2
+yields a packing in Hs(L; C) and proves the lower bound (3.8).
+Metric entropy lower bounds for Hs,t
+lin(L; C).
+Recall that κ2 = min{s−1/2, t} and that Φ = (ϕj)j∈N
+is a Riesz basis of Y with Riesz constants DΦ > dΦ > 0.
+Suppose first that s −1/2 ≤t, in which case κ2 = s −1/2. Note that dΦ ≤∥ϕ1∥Y = ∥ϕ1∥Yt ≤DΦ.
+For ω ∈Ω, define Gω : XC →YC by
+Gω(z) := δ
+N
+X
+i=1
+ωi⟨z, eψi⟩X ϕ1.
+As in the scalar-valued case, Gω is holomorphic and we can bound
+sup
+z∈DC
+∥Gω(z)∥Yt ≤δRDΦ.
+Choosing δ < L/RDΦ ensures that Gω ∈Hs,t
+lin(L; YC). Furthermore, for ω, ω′ ∈Ω,
+Gω(z) −Gω′(z) = (gω(z) −gω′(z))ϕ1,
+and thus, using L2(γ, Y) ≃L2(γ) ⊗Y, the lower Riesz bound and (3.10)
+∥Gω −Gω′∥2
+L2(γ,Y) = ∥gω −gω′∥2
+L2(γ)∥ϕ1∥2
+Y ≥d2
+Φδ2
+6
+N 1−2s.
+Setting N ≍ε−1/(s−1/2) such that last display is equal to ε2, yields the desired metric entropy lower
+bound for s −1/2 ≤t.
+If s −1/2 > t, it holds that κ2 = t. Given ω ∈Ω, define the constant operator Gω : XC →YC by
+Gω(z) = δN −t−1/2
+N
+X
+j=1
+ωjϕj,
+which is holomorphic, and by the definition of the Yt-norm,
+sup
+z∈DC
+∥Gω(z)∥2
+Yt = δ2N −2t−1
+
+N
+X
+j=1
+ωjϕj
+
+2
+Yt
+≤δ2D2
+ΦN −2t−1
+N
+X
+j=1
+j2t
+≤δ2D2
+ΦN −2t−1
+ 
+1 +
+Z N
+1
+x2t dx
+!
+≤δ2D2
+Φ,
+where we used an integral comparison bound in the second inequality. Choosing δ < L/(DΦ) ensures
+that Gω ∈Hs,t
+lin(L; YC). Let ω, ω′ ∈Ωwith ω ̸= ω′. Since γ is a probability measure and Gω is constant
+in its input arguments,
+∥Gω −Gω′∥2
+L2(γ,Y) = δ2N −2t−1
+
+N
+X
+j=1
+(ωj −ω′
+j)ϕj
+
+2
+Y
+≥d2
+Φδ2N −2t−1
+N
+X
+j=1
+(ωj −ω′
+j)2
+= 4d2
+Φδ2ρ(ω, ω′)
+≥d2
+Φδ2
+2
+N −2t.
+
+PDF PAGE 16
+16
+4
+Information-Theoretic Lower Bounds
+Choosing N ≍ε−1/t such that last display is equal to ε2, (3.9) follows.
+The L∞-metric entropy lower bounds are obtained from the same packing arguments as for the L2-
+metric entropy lower bound, with the difference that the separation is measured with respect to the
+supremum norm. We again distinguish the two cases in which either the input regularity or the output
+regularity determine the exponent κ∞= min{s−1, t}. The exponent coincides (up to an arbitrarily small
+difference) with the exponent which appears in both the L∞-metric entropy upper bounds of Proposition
+3.2 and the L∞approximation rate of Theorem 2.11.
+The proof of the following proposition can be found in Appendix B.3.
+Proposition 3.4 (L∞-metric entropy lower bounds). Let s > 1, t > 0 and L > 0, and suppose that
+Assumption 2.8 holds. Then, for all sufficiently small ε > 0,
+log N (ε, Hs(L; C), ∥· ∥∞) ≥log N (ε, Hs
+lin(L; C), ∥· ∥∞) ≳ε−
+1
+s−1 .
+(3.11)
+Furthermore, setting κ∞= min{s −1, t}, it holds that
+log N
+ ε, Hs,t(L; YC), ∥· ∥∞,Y
+
+≥log N
+ ε, Hs,t
+lin(L; YC), ∥· ∥∞,Y
+
+≳ε−
+1
+κ∞.
+(3.12)
+The implicit constants are independent of ε.
+4
+Information-Theoretic Lower Bounds
+In the previous section, we derived upper and lower bounds on the metric entropy of the scalar-valued
+class Hs(L; C) and the Hilbert space-valued class Hs,t(L; YC). We now combine these metric entropy
+estimates with information-theoretic arguments to derive minimax lower bounds in both the operator
+white noise model, formally given by
+Y(n)
+G0 = G0 + σ
+√nWH,
+(4.1)
+and the random design white noise model
+Yi = G0(Xi) + σεi,
+σ > 0, i = 1, . . . , n.
+To lower bound the minimax risk, one first reduces the estimation problem to a multiple hypotheses
+testing problem, whose error will be bounded from below via information-theoretic arguments. Let M
+be a parameter class, possibly infinite-dimensional, equipped with the semi-metric d, let f ∈M and Pf
+the corresponding observation law. The general proof uses the following two main steps:
+(i) Choose a 2δ-packing {f1, . . . , fM} ⊆M with respect to d and write Pj = Pfj. Let J be uniformly
+distributed on {1, . . . , M} and conditionally on J = j, let Z ∼Pj. Denote the mixture distribution
+by P :=
+1
+M
+PM
+j=1 Pj. Then the mutual information between Z and J is given by [61, Ch. 15.3.1]
+I(Z, J) = 1
+M
+M
+X
+j=1
+KL(Pj, P).
+The standard reduction from estimation to testing, followed by Fano’s inequality [61, Proposition
+15.12], yields
+inf
+b
+f
+sup
+f∈M
+Ef[d(f, bf)] ≥δ
+
+1 −I(Z, J) + log 2
+log M
+
+.
+(4.2)
+The construction of such packings will be obtained directly from the metric entropy lower bounds
+established in Section 3.
+(ii) We upper-bound the mutual information using the Yang–Barron method [62] (used here in the
+form of [61, Lemma 15.21]). Let NKL(ε, M) denote the ε-covering number of {Pf : f ∈M} with
+respect to the square root of the Kullback–Leibler divergence. Then
+I(Z, J) ≤inf
+ε>0(ε2 + log NKL(ε, M)).
+(4.3)
+
+PDF PAGE 17
+17
+4
+Information-Theoretic Lower Bounds
+For the generalized Gaussian white noise model, the relationship between the Kullback-Leibler divergence
+and the H-norm is recalled in Section 4.1. This allows us to control the KL-covering numbers directly
+by the metric entropy estimates derived in Section 3.
+For Y-valued operators, we set M = Hs,t(L; YC), H = L2(γ, Y) and d is the metric corresponding to
+the norm ∥· ∥L2(γ,Y) or ∥· ∥∞,Y. For scalar-valued functionals, we set M = Hs(L; C), H = L2(γ) and d
+is the metric corresponding to the norm ∥· ∥L2(γ) or ∥· ∥∞.
+4.1
+Generalized Gaussian White Noise Models
+We consider the following two observation models. First, following Reinhardt, Wang, and Zech [55], we
+study the random design white noise model
+Yi = G0(Xi) + σεi,
+(4.4)
+with i.i.d. Xi ∼γ and i.i.d. Y-white noise processes εi. Motivated by the classical Gaussian white noise
+model [21] on L2([−1, 1]), we consider an infinite-dimensional analogue on a general Hilbert space H.
+It is well known that on any separable Hilbert space H, one may define an isonormal or Gaussian
+white noise process WH which is centered with the covariance E[WH(h)WH(g)] = ⟨h, g⟩H for all h, g ∈H.
+Such a process always exists on a Hilbert space, as it can easily be proven that for any orthonormal basis
+(ej)j∈N ⊂H and a sequence of i.i.d. standard normal (ξj)j∈N, the mapping
+h 7→
+∞
+X
+j=1
+ξj⟨ej, h⟩
+constitutes a white noise [18, Theorem 2.12]. This allows us to define generalized Gaussian white noise
+models on any Hilbert space H.
+Definition 4.1 (Generalized Gaussian white noise models). Let H be a separable Hilbert space, h ∈H
+and σ > 0. Let WH be a white noise on H. We say that Y(n)
+h
+arises from a generalized Gaussian white
+noise model on H and formally write
+Y(n)
+h
+= h + σ
+√nWH.
+Observing the stochastic process Y(n)
+h
+simultaneously for the whole orthonormal basis (ej)j∈N of H
+gives rise to the equivalent Gaussian Sequence Space Model
+Yk = ⟨h, ek⟩H + σ
+√nξk,
+k ∈N
+where ξk = WH(ek) ∼N(0, ∥ek∥2
+H) = N(0, 1).
+Since any separable Hilbert space H is isometrically isomorphic to ℓ2(N), observing the generalized
+Gaussian white noise model on H is always equivalent to observing the Gaussian sequence space model on
+ℓ2(N) in the sense that the Le Cam-distance between the two experiments is zero, see also [21, Theorem
+1.2.1].
+While the asymptotic equivalence (in the sense of Le Cam) between the random design and
+the white noise model was shown for the finite-dimensional case, it is not clear whether the same holds
+random design white noise model (4.4) and the generalized Gaussian white noise model on H = L2(γ, Y).
+The generalized Gaussian white noise model and the Gaussian sequence space model are especially
+convenient for likelihood calculations, since the Radon-Nikodym derivative between the appearing Gaus-
+sian measures is explicit by the Cameron-Martin formula, see [7, Corollary 2.4.3] for the general result.
+For H =ℓ2(N), this result can also be directly deduced from Kakutani’s theorem [34, Theorem 1], see
+also [21, Proposition 6.1.4].
+Consequently, for h, h′ ∈H, denoting by P Y
+h and P Y
+h′ the corresponding observation laws, it holds
+that
+KL(P Y
+h,n, P Y
+h′,n) =
+n
+2σ2 ∥h −h′∥2
+H.
+(4.5)
+4.2
+Minimax Lower Bounds for Holomorphic Functionals in the Generalized
+White Noise Model
+We now translate the metric entropy estimates of the Section 3 into minimax lower bounds for Hs(L; C)
+and Hs,t(L; YC). In order to apply Fano’s inequality for the L2 or L∞loss, we will need the corresponding
+
+PDF PAGE 18
+18
+4
+Information-Theoretic Lower Bounds
+metric entropy lower bounds in Proposition 3.3 and Proposition 3.4. The Yang-Barron method then
+requires us to control the Kullback-Leibler divergence of the corresponding observation laws. In the
+generalized white noise model for H = L2(X, Y, γ), this is determined by the squared L2-distance, which
+is why we will need the L2- metric entropy upper bounds of Proposition 3.1. This is summarized in the
+following Lemma, which is based on the results by Yang and Barron [62].
+Lemma 4.2 (Minimax lower bounds based on metric entropy). Let M ⊂H, where H is a separable
+Hilbert space, and suppose that the observation laws satisfy
+KL(Pf, Pg) =
+n
+2σ2 ∥f −g∥2
+H,
+f, g ∈H.
+(4.6)
+Let d be a semi-metric on M. Suppose that, for some α, β > 0 and all sufficiently small ε, δ > 0,
+log N(ε, M, ∥· ∥H) ≲ε−α
+and
+log N(δ, M, d) ≳δ−β.
+Then, for all sufficiently large n,
+inf
+b
+f
+sup
+f∈M
+Ef[d( bf, f)] ≳
+ n
+σ2
+−
+α
+β(α+2) .
+Proof. Let J be uniformly distributed over a finite 2δ-packing of M in the metric d. By Fano’s inequality,
+inf
+b
+f
+sup
+f∈M
+Ef[d( bf, f)] ≥δ
+
+1 −I(Z; J) + log 2
+log M(2δ, M, d)
+
+.
+By the Yang–Barron method [62] in the form of (4.3), and (4.6),
+I(Z; J) ≤inf
+ε>0
+(
+ε2 + log N
+ √
+2σε
+√n , M, ∥· ∥H
+!)
+≲inf
+u>0
+
+u2 +
+√n
+σu
+α
+≲
+ n
+σ2
+α/(α+2)
+.
+Choosing δ ≍
+  n
+σ2
+−α/(β(α+2)) with a sufficiently small implicit constant makes the logarithm of the
+packing number a sufficiently large multiple of the mutual information. Fano’s inequality then gives the
+claimed bound.
+Theorem 4.3. Let s > 1, L > 0 and σ > 0. Suppose that Assumption 2.8 holds. Set η := s −1/2 and
+ξ := s −1. Then for every τ > 0, the minimax risk in the generalized white noise model on H = L2(γ)
+satisfies
+inf
+bgn
+sup
+g0∈Hs(L;C)
+Eg0
+
+∥bgn −g0∥L2(γ)
+
+≳n−
+η
+2η+1 −τ = n−s−1/2
+2s
+−τ.
+Moreover,
+inf
+bg
+sup
+g0∈Hs(L;C)
+Eg0 [∥bg −g0∥∞] ≳n−
+ξ
+2η+1 −τ = n−s−1
+2s −τ.
+Proof. By (4.5), the observation laws for the generalized Gaussian white noise model on H = L2(γ)
+satisfy the condition (4.6) of Lemma 4.2. Fix τ > 0 and let δ > 0 be arbitrarily small. By Proposition
+3.1,
+log N
+ ε, Hs(L; C), ∥· ∥L2(γ)
+
+≲ε−1
+η −δ.
+For the L2-loss, by Proposition 3.3, we have
+log N
+ ε, Hs(L; C), ∥· ∥L2(γ)
+
+≳ε−1
+η .
+By an application of Lemma 4.2 with α = 1/η + δ and β = 1/η, the rate exponent is
+−
+α
+β(α + 2) = −
+(1 + δη)η
+(1 + 2η + δη) ≥−
+η
+1 + 2η −τ
+
+PDF PAGE 19
+19
+5
+Upper Bounds for Projection Estimators
+for sufficiently small δ > 0. For the L∞-loss, Proposition 3.4 yields
+log N(ε, Hs(L; C), ∥· ∥∞) ≳ε−1/ξ
+Applying Lemma 4.2 with α = 1/η + δ and β = 1/ξ yields the second claim.
+4.3
+Minimax Lower Bounds for Holomorphic Operators in the Generalized
+White Noise Setting
+The lower bounds for the class of holomorphic operators Hs,t(L; YC) follow from analogous argument as
+in Section 4.2.
+Theorem 4.4. Let s > 1, t > 0, L > 0, and σ > 0.
+Suppose that Assumption 2.8 holds.
+Set
+κ2 := min{s −1/2, t} and κ∞:= min{s −1, t}. Then, for any arbitrarily small τ > 0,
+inf
+b
+Gn
+sup
+G0∈Hs,t(L;YC)
+EG0[∥bGn −G0∥L2(γ,Y)] ≳n−
+κ2
+2κ2+1 −τ.
+Furthermore,
+inf
+b
+Gn
+sup
+G0∈Hs,t(L;YC)
+EG0[∥bGn −G0∥∞,Y] ≳n−
+κ∞
+2κ2+1 −τ
+for κ∞= min{s −1, t} and arbitrarily small τ > 0.
+Proof. By (4.5), the generalized white noise model on H = L2(γ, Y) satisfties the condition (4.6) of
+Lemma 4.2. Fix δ > 0 arbitrarily small. By Proposition 3.1,
+log N
+ ε, Hs,t(L; YC), ∥· ∥L2(γ,Y)
+
+≲ε−1
+κ2 −δ.
+For the L2-loss, Proposition 3.3 gives a metric entropy lower bound of order ε−1/κ2. Applying Lemma 4.2
+with α = 1/κ2 +δ and β = 1/κ2 yields the lower bound n−κ2/(2κ2+1)−τ. For the L∞-loss, Proposition 3.4
+yields a metric entropy lower bound of order ε−1/κ∞. Applying Lemma 4.2 again with α = 1/κ2 + δ and
+β = 1/κ∞yields n−κ∞/(2κ2+1)−τ. Since δ > 0 may be chosen arbitrarily small, so may τ > 0.
+4.4
+Minimax Lower Bounds in the Random Design White Noise Setting
+Because for any G, G′ ∈L2(γ, Y) the Kullback–Leibler divergence between the corresponding observation
+laws in the random design white noise model (4.4) coincides with that in the generalized Gaussian white
+noise model (4.1), the lower bounds established in Theorem 4.3 and Theorem 4.4 also hold for the random
+design white noise model. The full proof can be found in Appendix C.1.
+Theorem 4.5. Assume that the observations arise from the random design white noise model (4.4). Let
+s > 1, t > 0 and L > 0, and let Assumption 2.8 hold. Then the same lower bound for the minimax risk
+over Hs,t(L; YC) hold with respect to the L2(γ, Y)-loss and the L∞(supp(γ), Y)-loss as in Theorem 4.4.
+For Y = R, the corresponding minimax lower bounds of Theorem 4.3 for Hs(L; C) hold with respect to
+the L2(γ) and the L∞(supp(γ))-loss.
+5
+Upper Bounds for Projection Estimators
+The approximation rates derived in Section
+2.2 yield corresponding algebraic rates for the statistical
+estimation problem.
+In this section, we construct spectral projection estimators in the generalized
+Gaussian white noise model based on truncations of generalized polynomial chaos expansion. We prove
+that they achieve the same rates as those which were obtained by empirical risk minimizers in [55], nearly
+matching the lower bounds in L2-risk.
+Definition 5.1. Let H be a separable Hilbert space, I some countable index set and let (hk)k∈I ⊂H be
+a Riesz basis of H with lower and upper Riesz constants dH, DH and dual basis (ehk)k∈I ⊂H. Assume
+that Y(n)
+h
+arises from a generalized Gaussian white noise model on H in the sense of Definition 4.1. For
+any N ∈N and any index set ΛN ⊂I, define the projection
+hN =
+X
+i∈ΛN
+⟨h,ehi⟩Hhi
+
+PDF PAGE 20
+20
+5
+Upper Bounds for Projection Estimators
+and the projection estimator
+bhN :=
+X
+i∈ΛN
+Y(n)
+h (ehi)hi
+for all h ∈H, and if the dependence of N ∈N on n ∈N is clear, we write bhn = bhN(n).
+Given uniform, quantitative rates for the approximation error ∥h −hN∥, this yields the following
+upper bound for the estimation error.
+Theorem 5.2 (Upper Bounds for Projection Estimators). Let Y(n)
+h
+arise from a generalized Gaussian
+white noise model on a separable Hilbert space H, and let (hi)i∈N ⊂H be a Riesz basis of H with lower
+and upper Riesz constants dH, DH and dual Riesz basis (ehj)j∈N. Let J ⊂H. Assume that for every
+N ≥2, there exists an index set ΛN of cardinality N (independent of h ∈J ), such that
+sup
+h∈J
+∥h −hN∥2
+H ≤CN −ξ log(N)ζ
+(5.1)
+for some C > 0, ξ > 0 and ζ ∈R. Then the projection estimator bhN satisfies
+sup
+h∈J
+Eh
+h −bhN
+
+2
+H
+
+≤CN −ξ log(N)ζ + D2
+H
+d2
+H
+σ2
+n N.
+Moreover, choosing
+N ≃n1/(ξ+1) log(n)ζ/(ξ+1)
+yields
+sup
+h∈J
+Eh
+h −bhn
+
+2
+H
+
+≲n−ξ/(ξ+1) log(n)ζ/(ξ+1).
+(5.2)
+Proof. Since E[bhN] = hN, it holds that
+Eh
+bhN −h
+
+2
+H
+
+=
+h −E[bhN]
+
+2
+H + Eh
+h
+∥bhN −Eh[bhN]∥2
+H
+i
+(5.3)
+= ∥h −hN∥2
+H + σ2
+n Eh
+
+
+
+X
+i∈ΛN
+WH(ehi)hi
+
+2
+H
+
+.
+By the upper Riesz bound for (hi)i∈N,
+
+X
+i∈ΛN
+WH(ehi)hi
+
+2
+H
+≤D2
+H
+X
+i∈ΛN
+(WH(ehi))2,
+and furthermore, since 1/dH is an upper Riesz bound for (ehi)i∈N,
+E[WH(ehi)2] = ∥ehi∥2
+H ≤1
+d2
+H
+.
+Therefore,
+Eh
+
+
+
+X
+i∈ΛN
+WH(ehi)hi
+
+2
+H
+
+≤D2
+H
+d2
+H
+N.
+(5.4)
+If (hi)i∈N is an orthonormal basis, dH = DH = 1 and the inequality is an equality. Combining this
+estimate with the approximation bound (5.1) proves the first claim. Balancing both terms in (5.3) gives
+N ≍n1/(ξ+1) log(n)ζ/(ξ+1) and yields (5.2) after substitution back into (5.3).
+We first consider the scalar-valued class of holomorphic functionals Hs(L; C). Let n ∈N be fixed, let
+N(n) ∈N and ΛN ⊂F be a finite set of multi-indices. Corresponding to the (noise-free) projection gN
+(see (2.15) ), define the projection estimator
+bgn :=
+X
+ν∈ΛN
+Y(n)
+g0
+ Lν ◦σ−1
+s
+
+Lν ◦σ−1
+s
+= gN + σ
+√n
+X
+ν∈ΛN
+WL2(γ)(Lν ◦σ−1
+s )Lν ◦σ−1
+s .
+(5.5)
+
+PDF PAGE 21
+21
+5
+Upper Bounds for Projection Estimators
+Note that, by definition of the white noise, WL2(γ)(Lν ◦σ−1
+s ) ∼N(0, 1), since ∥Lν ◦σ−1
+s ∥2
+L2(γ) =
+∥Lν∥2
+L2(Q,π) = 1.
+Theorem 5.3 (Statistical upper bounds for holomorphic functionals). Let s > 1, L > 0, σ > 0 and
+g0 ∈Hs(L; C). Let γ be as in Assumption 2.8. Assume that Y(n)
+g0
+arises from the generalized Gaussian
+white noise model on L2(γ). Set η = s −1/2 and ξ = s −1. Then, for every δ > 0 and N ∈N, there
+exists a downward closed index set ΛN, independent of g0, and a constant C2 > 0 (depending only on δ,
+s and L) such that
+sup
+g0∈Hs(L;C)
+Eg0[∥bgN −g0∥2
+L2(γ)] ≤C2N −2η+δ + σ2
+n N.
+(5.6)
+In particular, choosing N ≃n1/(2η−δ+1), we obtain, for every τ > 0,
+sup
+g0∈Hs(L;C)
+Eg0[∥bgn −g0∥2
+L2(γ)] ≲n−
+2η
+2η+1 +τ.
+Similarly, for every δ > 0, there exists a downward closed index set ΛN and a constant C∞> 0, such
+that
+sup
+g0∈Hs(L;C)
+Eg0[∥bgn −g0∥∞] ≤C∞N −ξ+δ +
+√
+2σ
+√nπ N 3/2.
+(5.7)
+Choosing N ≃n1/(2ξ−2δ+3) yields, for every τ > 0,
+sup
+g0∈Hs(L;C)
+Eg0[∥bgn −g0∥∞] ≲n−
+ξ
+2ξ+3 +τ = n−s−1
+2s+1 +τ.
+Proof. For the L2-bound (5.6) , Theorem 2.10 shows that there exists a downward closed ΛN and a
+constant C2 > 0, independent of g0, such that
+sup
+g0∈Hs(L;C)
+∥g0 −gN∥2
+L2(γ) ≤C2N −2η+δ.
+Since (Lν ◦σ−1
+s ) is an orthonormal basis of H = L2(γ), we may apply Theorem 5.2 with dH = DH = 1
+to the projection estimator bgN, which yields (5.6). The two terms are balanced for N ≍n1/(2η−δ+1).
+Choosing δ > 0 sufficiently small and substituting back into (5.6) yields the claimed upper bound on the
+L2-rate.
+For the L∞-bound, Theorem 2.10 shows that there exists a downward closed set ΛN and a constant
+C∞> 0, such that
+sup
+g0∈Hs(L;C)
+∥g0 −gN∥∞≤C∞N −ξ+δ.
+By the triangle inequality,
+Eg0 [∥bgN −g0∥∞] ≤∥gN −g0∥∞+ Eg0 [∥ˆgN −gN∥∞] .
+Let ξν := WL2(γ)(Lν ◦σ−1
+s ). Since (Lν ◦σ−1
+s )ν∈F is orthonormal in L2(γ), the ξν are i.i.d. standard
+normal variables. The second term can be controlled by
+Eg0 [∥ˆgN −gN∥∞] ≤
+σ
+√nEG0
+
+
+
+X
+ν∈ΛN
+ξν(Lν ◦σ−1
+s )
+
+∞
+
+
+≤
+σ
+√n
+X
+ν∈ΛN
+∥Lν∥∞E[|ξν|]
+≤
+√
+2σ
+√nπ
+X
+ν∈ΛN
+w1/2
+ν
+,
+where we used the triangle inequality and that E|ξν| =
+p
+2/π . Lastly, by the Cauchy-Schwarz inequality
+and [12, Lemma 3.1],
+X
+ν∈ΛN
+w1/2
+ν
+≤|ΛN|1/2
+ X
+ν∈ΛN
+wν
+!1/2
+≤|ΛN|3/2 = N 3/2,
+which proves (5.7). Both terms are balanced for N ≍n1/(2ξ−2δ+3) and choosing δ > 0 sufficiently small
+
+PDF PAGE 22
+22
+5
+Upper Bounds for Projection Estimators
+yields the claimed bound on the L∞-rate.
+Next, we consider the class of Y-valued, holomorphic operators Hs,t(L; YC).
+Let Φ = (ϕj)j∈N
+be a Riesz basis of Y with dual basis eΦ = (eϕj)j∈N.
+Let n ∈N be fixed, let N(n) ∈N and let
+(ΛN,j)j≤N, (Λ∞
+N,j)j≤N ⊂F be two families of finite sets of multi-indices. For x ∈σs(Q), define
+bGN(x) :=
+∞
+X
+j=1
+X
+ν∈ΛN,j
+Y(n)
+G0 ([Lν ◦σ−1
+s ] ⊗eϕj)Lν(σ−1
+s (x))ϕj
+(5.8)
+and
+bG∞
+N (x) :=
+∞
+X
+j=1
+X
+ν∈Λ∞
+N,j
+Y(n)
+G0 ([Lν ◦σ−1
+s ] ⊗eϕj)Lν(σ−1
+s (x))ϕj.
+(5.9)
+If the dependence of N ∈N on n ∈N is clear, we write bGn = bGN(n) and bG∞
+n = bG∞
+N(n).
+Theorem 5.4. Let s > 1, t > 0, L > 0 and σ > 0, let G0 ∈Hs,t(L; YC) and let γ be as in Assumption
+2.8.
+Assume that Y(n)
+G0 arises from the generalized Gaussian white noise model on L2(γ, Y) and set
+κ2 = min{s −1/2, t} and κ∞= min{s −1, t}. Then, for every δ > 0 and N ∈N, there exist a constant
+C2 > 0 and downward closed sets (ΛN,j)j∈N, independent of G0 and satisfying P∞
+j=1 |ΛN,j| ≤N, such
+that
+sup
+G0∈Hs,t(L;YC)
+EG0
+h
+∥bGN −G0∥2
+L2(γ,Y)
+i
+≤C2N −2κ2+δ + D2
+Φ
+d2
+Φ
+σ2
+n N.
+(5.10)
+Choosing N ≃n1/(2κ2−δ+1), we obtain for every τ > 0, that
+sup
+G0∈Hs,t(L;YC)
+EG0[∥bGn −G0∥2
+L2(γ,Y)] ≲n−
+2κ2
+2κ2+1 +τ.
+Similarly, there exist a constant C∞> 0 and downward closed sets (Λ∞
+N,j)j∈N, independent of G0,
+satisfying P∞
+j=1 |Λ∞
+N,j| ≤N, such that
+EG0
+h
+∥bG∞
+N −G0∥∞,Y
+i
+≲C∞N −κ∞+δ + DΦ
+dΦ
+σ
+√nN 3/2.
+(5.11)
+In particular, choosing N ≃n1/(2κ∞−2δ+3) yields for every τ > 0, that
+sup
+G0∈Hs,t(L;YC)
+EG0[∥bG∞
+n −G0∥∞,Y] ≲n−
+κ∞
+2κ∞+3 +τ.
+Proof. Since (Lν ◦σ−1
+s )ν∈F is an orthonormal basis of L2(γ) and (ϕj)j∈N is a Riesz basis of Y, ((Lν ◦
+σ−1
+s ) ⊗ϕj) is a Riesz basis of H = L2(γ, Y) ≃L2(γ) ⊗Y, with lower and upper Riesz constant dΦ, DΦ.
+By Theorem 2.11, there exists a constant C2 > 0 and downward closed sets (ΛN,j)j≤N which satisfy
+P∞
+j=1 |ΛN,j| ≤N, and such that
+sup
+G0∈Hs,t(L;YC)
+∥GN −G0∥2
+L2(γ,Y) ≤C2N −2κ2+δ.
+Applying Theorem 5.2 to the projection estimator bGN proves (5.10).
+Both terms are balanced for
+N ≃n1/(2κ∞−2δ+3) and choosing δ > 0 sufficiently small yields the claimed L2-upper bound the statistical
+convergence rate.
+For the L∞-bound, Theorem 2.11 implies that there exists a constant C∞> 0 and downward closed
+sets (Λ∞
+N,j)j≤N which satisfy P∞
+j=1 |Λ∞
+N,j| ≤N, and such that
+sup
+G0∈Hs,t(L;YC)
+∥eGN −G0∥∞,Y ≤C∞N −κ∞+δ.
+Define
+Zν,j = WL2(γ,Y)((Lν ◦σ−1
+s ) ⊗eϕj),
+which by definition of Gaussian white noise has distribution Zν,j ∼N(0, ∥eϕj∥2
+Y) and thus E[|Zν,j|] =
+p
+2/π∥eϕj∥Y. By the triangle inequality,
+EG0[∥ˆG∞
+N −G0∥∞,Y] ≤∥eGN −G0∥∞,Y + EG0[∥bG∞
+N −eGN∥∞,Y].
+
+PDF PAGE 23
+23
+6
+Application to Parametric Elliptic PDEs
+and by [12, Lemma 3.1] and again the triangle inequality
+E[∥bG∞
+N −eGN∥∞,Y] =
+σ
+√nEG0
+
+
+
+∞
+X
+j=1
+X
+ν∈Λ∞
+N,j
+Zν,j(Lν ◦σ−1
+s ) ⊗ϕj
+
+∞,Y
+
+
+≤
+√
+2σ
+√nπ
+∞
+X
+j=1
+X
+ν∈Λ∞
+N,j
+∥Lν∥∞∥eϕj∥Y∥ϕj∥Y
+≤
+√
+2σ
+√nπ
+DΦ
+dΦ
+∞
+X
+j=1
+X
+ν∈Λ∞
+N,j
+w1/2
+ν
+≤
+√
+2σ
+√nπ
+DΦ
+dΦ
+∞
+X
+j=1
+|Λ∞
+N,j|3/2
+≤
+√
+2σ
+√nπ
+DΦ
+dΦ
+(
+∞
+X
+j=1
+|Λ∞
+N,j|)3/2
+≤
+√
+2σ
+√nπ
+DΦ
+dΦ
+N 3/2.
+Balancing both terms and choosing δ > 0 sufficiently small completes the proof.
+Remark 5.5. The same L2- upper bounds were obtained in the random design white noise model (4.4) in
+[55, Theorem 3.15] for empirical risk minimizers over classes of neural operator architectures with ReLU
+activations, called Sparse FrameNets. As shown in Section 4, these L2 upper bounds are matched (up
+to an arbitrarily small loss in the exponent) by the lower bound and the estimators thus nearly achieve
+the minimax-optimal rate over the class of operators Hs,t(L; YC). Establishing sharp L∞-upper bounds
+would require sharper control of the stochastic error term arising from the noisy observations.
+6
+Application to Parametric Elliptic PDEs
+To give a concrete example, we recall and continue the discussion of the standard parametric elliptic
+PDE on the torus from [24, Section 7.1]. Let d ∈N and denote by Td the d-dimensional torus. We
+consider the second order PDE
+−∇· (a∇u) = f
+on
+Td.
+Here f ∈C∞(Td) with
+R
+Td f = 0, and a ∈L∞(Td) is a complex-valued diffusion coefficient whose real
+part is uniformly bounded from below by a positive constant. Standard elliptic PDE theory implies the
+existence of a unique solution u ∈H1(Td) such that
+R
+Td u = 0, which we denote in the following by
+G0(a), i.e. G0 : a 7→u is the solution operator. If we assume additional regularity on f, such as f ∈C∞,
+then a shift theorem holds, and higher regularity in a transfers to higher regularity of the solution G(a),
+as we explain next.
+With a suitable choice of (Fourier) basis on the torus, and fixing s0, t0 ≥0, one can show that the
+function spaces in (2.2) correspond to
+X := Hs0(Td),
+Y := Ht0(Td),
+X s = Hs0+sd(Td),
+Yt = Ht0+td(Td).
+Let d ≥2, α > 3d
+2 and t0 ∈[0, 1]. Fix τ > 0 and τ1 ∈(0, α −3d/2), δ > 0 all arbitrarily small, and set
+s0 =
+(
+α −d −τ1
+if α ∈( 3d
+2 , 2d + t0 −1]
+α+t0−1
+2
+if α > 2d + t0 −1,
+s = α −s0
+d
+,
+t = 1 + s0 −d/2 −t0
+d
+−δ.
+Well-known holomorphy of the solution operator [14, 15] together with classical PDE regularity theory
+[5] then allow to show [24, Proposition 3, Step 1]
+G0 ∈Hs,t(L; YC),
+for some L > 0 and suitable sets OC and DC in Definition 2.2 (constraining the real part of the diffusion
+coefficients in particular to remain uniformly positive). The design measure γ is in the following as in
+
+PDF PAGE 24
+24
+6
+Application to Parametric Elliptic PDEs
+Assumption 2.8, shifted by some uniformly positive ¯a ∈L∞(Td), such that its support lies in OC. For
+complete definitions and statements, see [24, Section 7.1].
+Let us now explain our results in this context.
+L2-estimation
+: First, in the generalized white noise model from Section 4.1 and for the L2-loss,
+according to Theorem 5.4, the projection estimator bGn (5.8) from Section 5 satisfies
+EG0
+
+∥bGn −G0∥2
+L2(γ,Y)
+
+≲n−
+2κ2
+2κ2+1 +τ
+(6.1a)
+with
+κ2 = min{s −1/2, t} ≥
+(
+α+1−t0
+d
+−3
+2
+if α ∈( 3d
+2 , 2d + t0 −1],
+α+1−t0
+2d
+−1
+2
+if α > 2d + t0 −1,
+−τ1
+d −δ.
+(6.1b)
+Second, if we want to recover the PDE solution operator among all holomorphic operators in Hs,t(L; YC),
+Theorem 4.4 gives the lower bound
+inf
+b
+Gn
+sup
+G∈Hs,t(L;YC)
+EG
+
+∥bGn −G∥2
+L2(γ,Y)
+
+≳n−
+2κ2
+2κ2+1 −τ.
+Importantly, this matches the upper bound (6.1) up to (the arbitrarily small) τ > 0. We also note that
+this is the same convergence rate obtained in [55, Theorem 3.15] for empirical risk minimization over a
+class of neural network based operators3. Hence, improving this rate would require exploiting structure
+beyond holomorphy in the sense of membership in Hs,t (see Definition 2.2).
+L∞-estimation:
+Next, we consider estimation with respect to the L∞-loss, in which case the approx-
+imation exponent is κ∞= min{s −1, t}, see [24, Proposition 3, Step 2]. To optimize the exponent, we
+choose s0 differently here to maximize the convergence rate. More precisely, choose
+s0 =
+(
+d
+2 + τ1
+if α ∈( 3d
+2 , 2d + t0 −1]
+α+t0−1
+2
+if α > 2d + t0 −1,
+s = α −s0
+d
+,
+t = 1 + s0 −d/2 −t0
+d
+−δ
+(6.2)
+as in [24, Proposition 3]. The holomorphy result [24, Proposition 3, Step 1] again implies that
+G0 ∈Hs,t(L; YC)
+for suitable choices of L > 0, OC and DC. In the generalized white noise model, Theorem 5.4 yields, for
+the projection estimator bG∞
+n from (5.9),
+EG0
+h
+∥bG∞
+n −G0∥∞,Y
+i
+≲n−
+κ∞
+2κ∞+3 +τ
+with
+κ∞≥
+(
+α
+d −3
+2
+if α ∈
+  3d
+2 , 3d
+2 + 1 −t0
+
+α+1−t0
+2d
+−3
+4
+if α > 3d
+2 + 1 −t0
+−τ1
+d −δ.
+In contrast to the L2-case, the resulting upper bound does not in general match the information-theoretic
+lower bound over Hs,t(L; YC). Writing
+eκ2 = min{s −1/2, t},
+with the choice of s0, s and t as in (6.2), Theorem 4.4 yields the lower bound
+inf
+ˆ
+Gn
+sup
+G∈Hs,t(L;YC)
+EG
+h
+∥bGn −G∥∞,Y
+i
+≳n−
+κ∞
+2eκ2+1 −τ
+over Hs,t(L; YC).
+Scalar quantities-of-interest:
+Finally, we apply the same framework to scalar quantities-of-interest
+of the PDE solution. Let O ∈Y′ be a bounded, linear observation operator with ∥O∥Y′ = 1 and define
+g0 = O ◦G0. Since O is bounded and linear, G0 ∈Hs,t(L; YC) implies g0 ∈Hs(L′, C) for some L′ > 0.
+3The choice of s0 in [55, Theorem 4.2] was not optimal for the case α ≤2d + 1 −t0. The choice here leads to the same
+rate in [55, Theorem 4.2].
+
+PDF PAGE 25
+25
+7
+Conclusion and Further Directions
+Choose
+s0 = d
+2 + τ1,
+s = α −s0
+d
+= α
+d −1
+2 −τ1
+d
+and set
+η = s −1
+2 = α
+d −1 −τ1
+d ,
+ξ = s −1 = α
+d −3
+2 −τ1
+d .
+In the generalized Gaussian white noise model on L2(γ), Theorem 5.3 implies that the projection esti-
+mator (5.5) satisfies
+Eg0∥bgn −g0∥L2(γ) ≲n−
+η
+2η+1 +τ.
+(6.3)
+and if we want to recover g0 among all holomorphic functionals Hs(L′; C), Theorem 4.3 yields the lower
+bound
+inf
+bgn
+sup
+g∈Hs(L′;C)
+Eg∥bgn −g∥L2(γ) ≳n−
+η
+2η+1 −τ.
+Again, as for the Hilbert-space-valued case, this matches the upper bound (6.3) up to (an arbitrarily
+small) τ > 0. For the L∞-norm, Theorem 5.3 yields that the projection estimator bgn satisfies
+Eg0∥bgn −g0∥∞≲n−
+ξ
+2ξ+3 +τ
+with the lower bound
+inf
+bgn
+sup
+g∈Hs(L′;C)
+Eg∥bgn −g∥∞≳n−
+ξ
+2η+1 −τ
+over Hs(L′; C).
+7
+Conclusion and Further Directions
+In this paper, we derived information-theoretic lower bounds for the sample complexity for estimating
+holomorphic functionals g0 : X →R and operators G0 : X →Y under the random design white noise
+model and the operator white noise model. In the latter model, the projection-type estimators developed
+in this paper attain L2-convergence rates that match, up to an arbitrarily small loss in the exponent, the
+corresponding lower bounds over a class of holomorphic operators. In the random-design setting, these
+algebraic convergence rates were previously established by Reinhardt, Wang, and Zech [55] for empirical
+risk minimizers over classes of Sparse FrameNets for a related class of holomorphic operators.
+Therefore, our results establish algebraic minimax rates for the estimation of holomorphic operators in
+the presence of observation noise, which complements earlier lower bounds and optimal recovery results
+for operator learning of holomorphic maps without observation noise, as well as recent information-
+theoretic lower bounds for noisy operator learning of Lipschitz and H¨older operators.
+In particular, this resolves, for the class of holomorphic operators, the open question highlighted by
+Brugiapaglia, Franco, and Nelsen [9], whether the rates obtained in [55] are minimax optimal.
+We also demonstrated the applicability of our results by considering examples of coefficient-to-solution
+maps as well as coefficient-to-quantity-of-interest maps arising from linear elliptic partial differential
+equations.
+We note that the holomorphy assumption is well-established for a wide array of models
+including general elliptic PDEs [11, 14, 15], parabolic PDEs [27], Maxwell’s equations [32], the Calderon
+projector [23], the Helmholtz equation [26] and Navier-Stokes-equations [16]. Several questions remain
+open. It would be natural to extend the minimax theory of this paper to fixed-design regression, since
+sparse-grid collocation methods are known to achieve comparable L∞- approximation rates, and to other
+Lp-type losses for p ̸= 2 and p ̸= ∞. Another possible direction is to investigate whether the asymptotic
+equivalence in the sense of Le Cam holds for the random design white noise model and the generalized
+Gaussian white noise model. Finally, proving lower bounds for holomorphic maps on Gaussian spaces
+would be of particular interest. In that setting, the relevant expansions are based on Wiener-Hermite
+polynomials, and the corresponding complex extension domains are complex strips. First results on the
+approximation theory of such operators have recently been obtained in [20, 47, 48].
+Acknowledgements and AI disclosure
+LDH, SW and JZ gratefully acknowledge support from the German Research Foundation (DFG) within
+the Priority Programme SPP 2298, Theoretical Foundations of Deep Learning (project number 543965776).
+
+PDF PAGE 26
+26
+A
+Proofs from Section 2
+LDH additionally acknowledges support by the German Research Foundation (DFG) under Germany’s
+Excellence Strategy – The Berlin Mathematics Research Center MATH+ (EXC-2046/2, project ID:
+390685689), as well as support by a doctoral scholarship from the German Academic Scholarship Foun-
+dation (Studienstiftung des deutschen Volkes).
+During the preparation of this manuscript, ChatGPT 5.6 was used for proofreading. The authors
+independently verified all final mathematical arguments and reported results and take full responsibility
+for the manuscript.
+A
+Proofs from Section 2
+A.1
+Compactness
+Proposition A.1. The class Hs,t(L; YC) is relatively compact in L∞(supp(γ), Y) and, consequently, in
+L2(γ, Y).
+Proof. Since supp(γ) = σs(Q) and γ is a probability measure, we can bound
+∥G∥L2(γ,Y) ≤∥G∥∞,Y
+for all G ∈L∞(supp(γ), Y). It thus suffices to prove relative compactness of Hs,t(L; YC) in C(σs(Q), Y).
+By the Arzela-Ascoli Theorem [51, Theorem 47.1], we need to show that Hs,t(L; YC) is equicontinuous and
+pointwise relatively compact, i.e. for each x ∈supp(γ), the Y-closure of the set {G(x) : G ∈Hs,t(L; YC)}
+is compact in Y.
+Note that by Definition 2.2, for any x ∈σs(Q) ⊂DC, it holds that ∥G(x)∥Yt ≤L and is thus
+contained in a ball of radius L of Yt. Since the embedding Yt ,→Y is compact, Hs,t(L; YC) is pointwise
+relatively compact. To show that Hs,t(L; YC) is equicontinuous, let x0 ∈σs(Q) and h ∈Xℓ1 and r > 0
+small enough such that ∥h∥Xℓ1 = 1 and B
+Xℓ1
+r
+(x0) ⊂DC. By Cauchy’s integral formula, it holds that for
+any ξ ∈BC
+r/2(0) and any G ∈Hs,t(L; YC), we have
+∥G(x0 + ξh) −G(x0)∥Y ≤1
+2π
+Z
+|ζ|=r
+∥G(x0 + ζh)∥Y
+
+1
+ζ −ξ −1
+ζ
+
+dζ
+≤1
+2π 2πr
+sup
+ξ∈∂BCr (0)
+∥G(x0 + ζh)∥Yt |ξ|
+|ζ −ξ||ζ|
+≤L
+r |ξ| = L
+r ∥ξh∥Xℓ1,
+where we have bound the norm of the integral by the integral of the norm in the first line and used the
+embedding Yt →Y in the second line. Since L is independent of G and ξ, the statement follows.
+A.2
+Proof of Lemma 2.1
+For c ∈ℓ1
+−s(N), the upper Riesz bound implies that ∥ψj∥X ≤DΨ for every j ∈N. Therefore,
+
+∞
+X
+j=1
+cjj−sψj
+
+X
+≤
+∞
+X
+j=1
+|cj|j−s∥ψj∥X ≤DΨ∥c∥ℓ1
+−s(N).
+and thus ∥eσs(c)∥X ≤DΨ∥c∥ℓ1
+−s. By the biorthogonality of Ψ and eΨ,
+∥eσs(c)∥Xℓ1 =
+∞
+X
+j=1
+|⟨eσs(c), eψj⟩| =
+∞
+X
+j=1
+|cj|j−s = ∥c∥ℓ1
+−s(N).
+Conversely, if x ∈Xℓ1, set cj = js⟨x, eψj⟩X . Then
+∥c∥ℓ1
+−s =
+∞
+X
+k=1
+|⟨x, eψk⟩X | = ∥x∥Xℓ1 < ∞,
+
+PDF PAGE 27
+27
+A
+Proofs from Section 2
+and
+eσs(c) =
+∞
+X
+k=1
+⟨x, eψk⟩X ψk = x.
+Thus, eσs maps ℓ1
+−s bijectively onto Xℓ1. The complex case follows identically.
+A.3
+Proof of Proposition 2.7
+Fix s > 1 and r > 0. Recall that a sequence ϱ = (ϱj)j∈N is called r-admissible, if
+∞
+X
+j=1
+(ϱj −1)j−s < r
+and that we define
+Ss,r =
+[
+ϱ is r-admissible
+E∞
+ϱ .
+For z ∈C, define ϱ∗(z) := inf{ϱ > 1 : z ∈Eϱ} and set ϱ∗(z) = 1 for z ∈[−1, 1]. Furthermore, set
+R∗: ℓ1
+−s(N) →(0, ∞),
+R∗(z) =
+∞
+X
+j=1
+(ϱ∗(zj) −1)j−s.
+R∗is continuous.
+The map ϱ∗: C →[1, ∞) is continuous. Furthermore, for z ̸∈[−1, 1], ϱ∗(z) =
+|z +
+√
+z2 −1| > 1, which yields the bound ϱ∗(z)−1 ≤2|z|. Consequently, for every z ∈ℓ1
+−s(N)C, it holds
+that
+R∗(z) ≤2
+∞
+X
+j=1
+|zj|j−s = 2∥z∥ℓ1
+−s,
+(A.1)
+and R is well-defined.
+Let ε > 0 and fix z ∈ℓ1
+−s. Choose N ∈N large enough such that
+X
+j>N
+|zj|j−s < ε/16.
+Set M = 1 + maxj∈{1,...,N} |zj|. Since ϱ∗is continuous, it is uniformly continuous on the compact disk
+B
+C
+M(0). Therefore, there exists a η > 0, such that |z′ −z”| < η implies that
+|ϱ∗(z′) −ϱ∗(z”)| <
+ε
+2 PN
+j=1 j−s
+for all z′, z” ∈B
+C
+M(0). Now choose δ = min{ε/8, ηN −s, N −s}. If ∥ez −z∥ℓ1
+−s < δ, then for all j ∈
+{1, . . . , N}, it holds that
+|zj −˜zj| ≤js∥z −˜z∥ℓ1
+−s ≤N sδ ≤min{1, η}.
+By an application of the triangle inequality, it holds that
+|R∗(z) −R∗(ez)| ≤
+N
+X
+j=1
+|ϱ∗(zj) −ϱ∗(ezj)|j−s +
+X
+j>N
+|ϱ∗(zj) −ϱ∗(ezj)|j−s
+To upper bound the first term, note that ˜zj ∈B
+C
+M(0) and therefore
+N
+X
+j=1
+|ϱ∗(zj) −ϱ∗(ezj)|j−s < ε
+2.
+For the second term, note that
+∞
+X
+j=N+1
+|ϱ∗(zj) −ϱ∗(ezj)|j−s ≤2
+∞
+X
+j=N+1
+(|zj| + |ezj|)j−s
+
+PDF PAGE 28
+28
+A
+Proofs from Section 2
+≤4
+∞
+X
+j=N+1
+|zj|j−s + 2∥z −ez∥ℓ1
+−s
+= ε
+2
+The continuity of R follows.
+Characterizing Ss,r by {z ∈ℓ1
+−s(N) : R∗(z) < r}.
+If z ∈Ss,r, there exists an r-admissible sequence
+ϱ = (ϱj)j∈N, such that z ∈E∞
+ϱ . Then there exists a (cj)j∈N ∈[−1, 1]N, such that |zj −cj| < ϱj −1 for
+all j ∈N and
+∞
+X
+j=1
+|zj|j−s ≤
+∞
+X
+j=1
+|cj|j−s +
+∞
+X
+j=1
+|zj −cj|j−s
+≤
+∞
+X
+j=1
+j−s +
+∞
+X
+j=1
+(ϱj −1)j−s
+< ∞.
+This shows that Ss,r ⊂ℓ1
+−s(N)C. Since the Bernstein-ellipses are closed, zj ∈Eϱj if and only if ϱ∗(zj) ≤ϱj.
+Therefore,
+R∗(z) ≤
+∞
+X
+j=1
+(ϱj −1)j−s < r.
+Conversely, let z ∈ℓ1
+−s(N)C and suppose that R∗(z) < r. We can choose a sequence (εj)j∈N ∈(0, ∞)N,
+such that
+∞
+X
+j=1
+εjj−s < r −R∗(z)
+and set ϱj := ϱ∗(zj) + εj. Then zj ∈Eϱj for all j ∈N, and
+∞
+X
+j=1
+(ϱj −1)j−s = R∗(z) +
+∞
+X
+j=1
+εjj−s < r
+which implies that z ∈Ss,r.
+Ss,r is open and bounded in ℓ1
+−s(N)C
+Since R∗is continuous and Ss,r = R−1((0, r)), it must be
+open as the pre-image of an open set. If z ∈Ss,r, there exists an admissible sequence ϱ such that z ∈E∞
+ϱ
+and hence
+∥z∥ℓ1
+−s ≤
+∞
+X
+j=1
+ρjj−s
+∞
+X
+j=1
+j−s + r
+which is finite, proving that Ss,r is bounded.
+Lemma A.2. Let Q, DC and OC as in Definition 2.2, such that
+σs(Q) ⊂DC ⊂OC.
+Then there exist 0 < r < r′, such that Q ⊂Ss,r ⊂σ−1
+s (DC) ⊂Ss,r′.
+Proof. By Lemma 2.1, σs : ℓ1
+−s(N)C →Xℓ1,C is continuous, and thus σ−1
+s (DC) is open in ℓ1
+−s(N)C.
+Moreover, Q ⊂σ−1
+s (DC) and Q is compact in ℓ1
+−s(N)C. Therefore,
+r∗:= dist(Q, ∂σ−1
+s (DC)) = inf{∥x −y∥: x ∈Q, y ∈∂σ−1
+s (DC)} > 0.
+Choose r ∈(0, r∗). For z ∈Ss,r, it holds that
+dist(z, Q) ≤R∗(z) < r
+which proves that z ∈σ−1
+s (DC). By definition, it also holds that Q ⊂Ss,r. For the last inclusion,
+note that σs is an isometric isomorphism between ℓ1
+−s and Xℓ1. Since DC is bounded in Xℓ1,C, so must
+σ−1
+s (DC) be in ℓ1
+−s(N, C), i.e. there exists a M > 0, such that
+∥z∥ℓ1
+−s ≤M,
+for all z ∈σ−1
+s (DC).
+
+PDF PAGE 29
+29
+B
+Proofs from Section 3
+By (A.1), it holds that
+R∗(z) ≤2∥z∥ℓ1
+−s ≤2M.
+Choosing r′ = 2M + 1 yields that R∗(z) < r′ and implies that σ−1
+s (DC) ⊂Ss,r′, which proves the
+claim.
+B
+Proofs from Section 3
+B.1
+Proof of Proposition 3.1
+The following lemma is used to optimize the upper bound for the L2 metric entropy of Hs,t(L; C) in
+Proposition 3.1.
+Lemma B.1. Let α > 1, β > 0, N ∈N and ε > 0. Consider the constrained optimization problem
+min
+ε1,...,εN>0
+N
+X
+i=1
+i−α
+εi
+1/β
+,
+subject to
+N
+X
+i=1
+ε2
+i ≤ε2
+2
+(B.1)
+The unique minimizer is
+εi =
+εi−
+α
+1+2β
+√
+2(PN
+i=1 i−
+2α
+1+2β )1/2 ,
+i = 1, . . . , N.
+(B.2)
+at which the objective equals
+ √
+2
+ε
+!1/β  N
+X
+i=1
+i−
+2α
+1+2β
+! 1+2β
+2β
+.
+(B.3)
+Particularly, if N ≍ε−1/(α−1/2) and κ := min{α −1
+2, β}, then for every τ > 0 and all sufficiently small
+ε > 0,
+N
+X
+i=1
+i−α
+εi
+1/β
+≲ε−1
+κ −τ.
+(B.4)
+Proof. The objective is strictly convex for ε1, . . . , εN > 0 and strictly decreasing in each εi. Hence, at
+the minimizer, PN
+i=1 ε2
+i = ε2/2 and the unique minimizer is characterized by the Lagrange multipliers.
+Consider
+f(ε1, . . . , εN, λ) =
+N
+X
+i=1
+i−α
+εi
+1/β
++ λ
+ N
+X
+i=1
+ε2
+i −ε2
+2
+!
+.
+For each i = 1, . . . , N, solving
+∂f
+∂εi = 0 is equivalent to −1
+β i−α
+β ε
+−1
+β −1
+i
++ 2λεi = 0. Solving for εi yields
+the choice
+εi = Cβi−
+α
+1+2β ,
+Cβ :=
+ 1
+2λβ
+
+β
+1+2β
+.
+(B.5)
+Now set SN := PN
+i=1 i−
+2α
+1+2β . Substituting (B.5) in the constraint PN
+i=1 ε2
+i = ε2/2, yields C2
+βSN = ε2/2
+and thus Cβ = ε/√2SN. Substituting Cβ back into (B.5) proves (B.2). The objective at the minimizer
+is thus given by
+f(ε1, . . . , εN, λ) = C−1/β
+β
+N
+X
+i=1
+i−
+2α
+1+2β
+=
+ √
+2
+ε
+!1/β
+S
+1+2β
+2β
+N
+,
+
+PDF PAGE 30
+30
+B
+Proofs from Section 3
+which proves (B.3). It remains to estimate SN in terms of ε. By integral comparison,
+SN ≲
+
+
+
+
+
+N 1−
+2α
+1+2β
+2α < 1 + 2β
+log(N)
+2α = 1 + 2β
+1
+2α > 1 + 2β
+Assume now that N ∼ε−1/(α−1/2). If α −1/2 > β, then SN ≲1 and we get the upper bound ε−1/β. If
+α −1/2 < β, then we get the upper bound
+ε−1
+β N
+1+2β−2α
+2β
+≍ε−
+1
+α−1/2 .
+Lastly, if α −1/2 = β, then we get the upper bound
+ε−1
+β (log(N))
+1+2β−2α
+2β
+≍ε−
+1
+α−1/2 .
+Since N is polynomial in ε−1, for every τ > 0, we can bound the logarithmic factor by ε−τ for all
+sufficiently small ε > 0. Combining the three cases yields (B.4).
+B.2
+Proof of Proposition 3.2
+Similar to Appendix B.1, the following Lemma is used to optimize the upper bound for the L∞-metric
+entropy upper bounds for Hs,t(L; YC).
+Lemma B.2. Let α > 1, β > 0, N ∈N, and ε > 0. Consider the constrained optimization problem
+min
+ε1,...,εN
+X i−α
+εi
+1/β
+,
+subject to
+N
+X
+i=1
+εi ≤ε
+2.
+(B.6)
+Its unique minimizer is
+εi =
+εi−
+α
+1+β
+2(PN
+i=1 i−
+α
+1+β )
+.
+(B.7)
+At this minimizer, the objective equals
+2
+ε
+1/β  N
+X
+i=1
+i−
+α
+1+β
+! 1+β
+β
+.
+(B.8)
+Particularly, if N ≍ε−1/(α−1) and set κ∞= min{α −1, β}. Then for every τ > 0, and all sufficiently
+small ε > 0,
+N
+X
+i=1
+i−α
+εi
+1/β
+≲ε−
+1
+κ∞−τ
+(B.9)
+Proof. The proof is analogous to the proof of Lemma B.1, with the same objective function but a
+different constraint PN
+i=1 εi ≤ε/2. As in the proof of Lemma B.1, the objective is strictly convex and
+strictly decreasing in each εi > 0. Hence the constraint is an equality at the unique minimizer. The
+corresponding Lagrangian is
+f(ε1, . . . , εN, δ) =
+N
+X
+i=1
+i−α
+εi
+1/β
++ λ
+ N
+X
+i=1
+εi −ε
+2
+!
+,
+and solving for the stationary points is equivalent to −1
+β i−α
+β ε
+−1
+β −1
+i
++ λ = 0. The solution is
+εi = Cβi−
+α
+1+β ,
+Cβ :=
+ 1
+λβ
+
+β
+1+β
+(B.10)
+Now set SN := PN
+i=1 i−
+α
+1+β . Substituting (B.10) into the constraint PN
+i=1 εi = ε/2 yields Cβ =
+ε
+2SN .
+Substituting this back into (B.10) proves (B.7). The corresponding objective is then given by
+f(ε1, . . . , εN, λ) =
+2
+ε
+ 1
+β
+S
+1+β
+β
+N
+
+PDF PAGE 31
+31
+B
+Proofs from Section 3
+from which (B.8) follows.
+Lastly, we estimate SN in terms of ε. As in the proof of Lemma B.1, an integral comparison bound
+yields
+SN ≲
+
+
+
+
+
+N 1−
+α
+1+β
+α −1 < β
+log(N)
+α = 1 + β
+1
+α −1 > β
+Assuming N ∼ε−1/(α−1) and arguing similarly as in the corresponding cases of Lemma B.1, we obtain
+2
+ε
+1/β
+S
+1+β
+β
+N
+≲
+
+
+
+
+
+ε−
+1
+α−1
+α −1 < β
+ε−1
+β −τ
+α −1 = β
+ε−1
+β
+α −1 > β
+for any τ > 0 and sufficiently small ε > 0. The claimed bound (B.9) follows.
+Proof of Proposition 3.2. We first consider the class of holomorphic functionals Hs(L; C). Fix τ > 0,
+let δ > 0 be sufficiently small such that s′ = s −δ > 1 and such that 1/(s′ −1) ≤1/(s −1) + τ. Let
+g ∈Hs(L; C) and g∞
+ν
+be the corresponding Legendre coefficients in the expansion w.r.t. (Pν)ν∈F. As in
+the proof of Proposition 3.1, by Theorem 2.9 there exists an enumeration (νi)i∈N and a constant C > 0,
+both independent of g, such that
+|g∞
+νi | ≤Ci−s′.
+By Theorem 2.10,
+g −
+N
+X
+i=1
+g∞
+νi Pνi ◦σ−1
+s
+
+∞
+≲N −(s′−1).
+We can therefore choose N ≍ε−1/(s′−1), such that the error is at most ε/2. It remains to discretize
+the coefficients g∞
+νi for i = 1, . . . , N. Covering [−Ci−s′, Ci−s′] by intervals of length εi again yields the
+covering numbers
+Ni := N(εi, [−Ci−s′, Ci−s′], | · |) ≲
+ 
+i−s′
+εi
+!
+.
+Let Ci = {g∞
+νi,ji : ji = 1, . . . , Ni} denote the minimal εi-covering of [−Ci−s′, Ci−s′].
+Assume that
+PN
+i=1 εi ≤ε. Then for every i = 1, . . . , N, there exists a ki ∈{1, . . . , Ni}, such that |g∞
+νi −g∞
+νi,ki| ≤εi
+and
+g −
+N
+X
+i=1
+g∞
+νi,kiPνi
+
+∞
+≤ε
+2 +
+N
+X
+i=1
+|g∞
+νi −g∞
+νi,ki| ≤ε.
+A short calculation shows that εi = ε/2N is an optimal choice to optimize the metric entropy upper
+bound
+log N(ε, Hs(L; C), ∥· ∥∞) ≲
+N
+X
+i=1
+log
+ 
+1 + C i−s′N
+ε
+!
+≲N
+≲ε−1/(s′−1)
+≤ε−1/(s−1)−τ,
+where we followed almost the same calculations as in (3.3).
+Let us now consider Hs,t(L; YC). Let τ > 0, δ > 0 and s′ = s −δ and N be chosen as in the first part
+of the proof. Additionally, let t′ = t −δ. Fix G ∈Hs,t(L; YC). Again, by Theorem 2.9, there exists an
+enumeration (νi)i∈N and a constant C > 0, such that the Y-valued Legendre coefficients g∞
+νi satisfy
+∥g∞
+νi ∥Yt′ ≤Ci−s′.
+As in the proof of Proposition 3.1, we know that Bs′,t′,i = {y ∈Y : ∥y∥Yt′ ≤Ci−s′} has the εi-metric
+
+PDF PAGE 32
+32
+B
+Proofs from Section 3
+entropy
+log(Ni) := log N(εi, Bs′,t′,i, ∥· ∥Y) ≍
+ 
+i−s′
+εi
+!1/t′
+As in the scalar-valued case, we assume that PN
+i=1 εi ≤ε/2. If Ci = {g∞
+νi,ji : ji = 1, . . . , Ni} denotes
+the minimal εi-covering of Bs′,t′,i, then for all i = 1, . . . , N, there exists a ki ∈{1, . . . , Ni}, such that
+∥g∞
+νi −g∞
+νi,ki∥Y ≤εi and thus
+G −
+N
+X
+i=1
+gνi,kiPνi ◦σ−1
+s
+
+∞,Y
+=
+sup
+x∈supp(γ)
+G(x) −
+N
+X
+i=1
+gνiPνi(σ−1
+s (x))
+
+Y
+≤ε
+2 +
+N
+X
+i=1
+∥g∞
+νi −g∞
+νi,ki∥Y ≤ε,
+where we used that ∥Pν∥∞≤1 and the triangle inequality.
+The constrained optimization problem
+min
+ε1,...,εN
+N
+X
+i=1
+log(Ni),
+subject to
+N
+X
+i=1
+εi ≤ε
+2,
+is solved in Lemma B.2 with α = s′ and β = t′ for
+εi =
+εi−
+s′
+1+t′
+2(PN
+j=1 j−
+s′
+1+t′ )
+.
+with the resulting L∞metric entropy upper bound
+log N(ε, Hs,t(L; YC), ∥· ∥∞,Y) ≤ε−
+1
+min{s′−1,t′} ≤ε−
+1
+κ∞−τ,
+which finishes the proof.
+B.3
+Proof of Proposition 3.4
+We use the same packings as in the proof of Proposition 3.3 with |Ω| ≥3N/4 and
+N
+X
+i=1
+(ωi −ω′
+i)2 ≥N
+8 ,
+for all ω, ω′ ∈Ωwith ω ̸= ω′. For the class of holomorphic functionals, recall the functionals gω : XC →C,
+defined by
+gω(z) = δ
+N
+X
+i=1
+ωi⟨z, eψi⟩X ,
+and that for c ∈Q
+gω(σs(c)) = δ
+N
+X
+i=1
+ωii−sci.
+In the proof of Proposition 3.3, we have already verified that gω ∈Hs
+lin(L; C) for sufficiently small
+δ > 0. Let ω, ω′ ∈Ωwith ω ̸= ω′. Since supp(γ) = σs(Q),
+∥gω −gω′∥∞= sup
+c∈Q
+|gω(σs(c)) −gω′(σs(c))|
+= δ sup
+c∈Q
+
+N
+X
+i=1
+(ωi −ω′
+i)i−sci
+
+= δ
+N
+X
+i=1
+|ωi −ω′
+i|i−s
+≥δN −s
+N
+X
+i=1
+|ωi −ω′
+i|
+≥δ
+8N −(s−1).
+
+PDF PAGE 33
+33
+C
+Proofs from Section 4
+Here, we used that for (a1, . . . , aN) ∈RN and c = (c1, . . . , cN) ∈[−1, 1]N, | PN
+i=1 aici| is maximised
+exactly when ci = sgn(ai). Choosing N ≍ε−1/(s−1) such that last display is equal to ε, proves (3.11).
+Let us now consider the class of holomorphic operators Hs,t
+lin(L; YC) and set κ∞= min{s −1, t}. For
+s −1 ≤t, κ∞= s −1, and we again define Gω : X →Y with
+Gω(z) = gω(z)ϕ1.
+As in Proposition 3.3 , Gω ∈Hs,t
+lin(L; YC) for sufficiently small δ > 0. Additionally,
+∥Gω −Gω′∥∞,Y = ∥ϕ1∥Y∥gω −gω′∥∞≥dΦ
+8 N −(s−1).
+Choosing N ≍ε−1/(s−1) such that the last term is equal to ε yields the lower bound (3.12) in the first
+case. If s −1 > t, we instead use the constant operators Gω : XC →YC with
+Gω(z) = δN −t−1/2
+N
+X
+j=1
+ωjϕj,
+for which we know that Gω ∈Hs,t
+lin(L; YC). Let ω, ω′ ∈Ωand ω ̸= ω′. Then, since they are constant in
+their input variable,
+∥Gω −Gω′∥2
+∞,Y = δ2N −2t−1
+
+N
+X
+j=1
+(ωj −ω′
+j)ϕj
+
+Y
+≥δ2d2
+ΦN −2t−1
+N
+X
+j=1
+(ωj −ω′
+j)2
+≥δ2d2
+Φ
+8
+N −2t.
+Choosing N ≍ε−1/t such that the last display is equal to ε2, proves the metric entropy lower bound
+(3.12) in the second case.
+C
+Proofs from Section 4
+C.1
+Proof of Theorem 4.5
+It suffices to prove that the KL-divergence between two observation laws PG, PG′ is given by
+KL(PG, PG′) =
+n
+2σ2 ∥G −G′∥2
+L2(γ,Y).
+Note that the law of Yi = G(xi)+ε, which is denoted by PG, can be conditioned on the law of the design
+points xi, in the sense that dPG(x, Y ) = dPG(Y |x)dγ(x). By the chain rule for the KL-divergence [17,
+Theorem 2.5.3]
+KL(PG, PG′) =
+Z
+X×Y
+log
+ dPG(x, Y )
+dPG′(x, Y )
+
+dPG(x, Y )
+=
+Z
+X
+Z
+Y
+log
+ dPG(Y |x)dγ(x)
+dPG′(Y |x)dγ(x)
+
+dPG(Y |x)dγ(x)
+=
+Z
+X
+Z
+Y
+log
+ dPG(Y |x)
+dPG′(Y |x)
+
+dPG(Y |x)
+
+dγ(x)
+=
+n
+2σ2
+Z
+X
+∥G(x) −G′(x)∥2
+Y dγ(x)
+=
+n
+2σ2 ∥G −G′∥2
+L2(γ,Y),
+where we used that the conditional law PG′(·|x) is a Gaussian, with isonormal covariance structure on
+Y. The rest of the proof is the same as in Theorem 4.4 and Theorem 4.3.
+
+PDF PAGE 34
+34
+REFERENCES
+References
+[1]
+Ben Adcock, Nick Dexter, and Sebastian Moraga Scheuermann. “Optimal deep learning of holomor-
+phic operators between Banach spaces”. In: Advances in Neural Information Processing Systems
+37 (2024), pp. 27725–27789.
+[2]
+Ben Adcock, Michael Griebel, and Gregor Maier. “The Sample Complexity of Learning Lipschitz
+Operators with respect to Gaussian Measures”. In: arXiv preprint arXiv:2410.23440 (2024).
+[3]
+Ben Adcock, Gregor Maier, and Rahul Parhi. “Towards Sharp Minimax Risk Bounds for Operator
+Learning”. In: arXiv preprint arXiv:2512.17805 (2025).
+[4]
+Ben Adcock et al. “Near-optimal learning of Banach-valued, high-dimensional functions via deep
+neural networks”. In: Neural Networks 181 (2025), p. 106761.
+[5]
+S. Agmon, A. Douglis, and L. Nirenberg. “Estimates near the boundary for solutions of elliptic
+partial differential equations satisfying general boundary conditions. II”. In: Comm. Pure Appl.
+Math. 17 (1964), pp. 35–92. issn: 0010-3640,1097-0312. doi: 10.1002/cpa.3160170104. url:
+https://doi.org/10.1002/cpa.3160170104.
+[6]
+Kaushik Bhattacharya et al. “Model reduction and neural networks for parametric PDEs”. In: The
+SMAI journal of computational mathematics 7 (2021), pp. 121–157.
+[7]
+Vladimir Igorevich Bogachev. Gaussian measures. 62. American Mathematical Soc., 1998.
+[8]
+Lawrence D Brown and Mark G Low. “Asymptotic equivalence of nonparametric regression and
+white noise”. In: The Annals of Statistics 24.6 (1996), pp. 2384–2398.
+[9]
+Simone Brugiapaglia, Nicola Rares Franco, and Nicholas H Nelsen. “A short tour of operator
+learning theory: Convergence rates, statistical limits, and open questions”. In: arXiv preprint
+arXiv:2603.00819 (2026).
+[10]
+Ga¨elle Chagny, Anouar Meynaoui, and Angelina Roche. “Adaptive nonparametric estimation in
+the functional linear model with functional output”. In: Electronic Journal of Statistics 19.1 (2025),
+pp. 2990–3039.
+[11]
+Abdellah Chkifa, Albert Cohen, and Christoph Schwab. “Breaking the curse of dimensionality in
+sparse polynomial approximation of parametric PDEs”. In: Journal de Math´ematiques Pures et
+Appliqu´ees 103.2 (2015). Publisher: Elsevier, pp. 400–428. issn: 0021-7824.
+[12]
+Abdellah Chkifa et al. “Discrete least squares polynomial approximation with random evaluations-
+application to parametric and stochastic elliptic PDEs”. In: ESAIM: Mathematical Modelling and
+Numerical Analysis 49.3 (2015), pp. 815–837.
+[13]
+Albert Cohen and Ronald DeVore. “Approximation of high-dimensional parametric PDEs”. In:
+Acta Numerica 24 (2015), pp. 1–159.
+[14]
+Albert Cohen, Ronald DeVore, and Christoph Schwab. “Convergence rates of best N-term Galerkin
+approximations for a class of elliptic sPDEs”. In: Foundations of Computational Mathematics 10.6
+(2010). Publisher: Springer, pp. 615–646. issn: 1615-3375.
+[15]
+Albert Cohen, Ronald Devore, and Christoph Schwab. “Analytic regularity and polynomial approx-
+imation of parametric and stochastic elliptic PDE’s”. In: Analysis and Applications 9.01 (2011).
+Publisher: World Scientific, pp. 11–47. issn: 0219-5305.
+[16]
+Albert Cohen, Christoph Schwab, and Jakob Zech. “Shape holomorphy of the stationary Navier–
+Stokes equations”. In: SIAM Journal on Mathematical Analysis 50.2 (2018), pp. 1720–1752.
+[17]
+Thomas M Cover and Joy A Thomas. Elements of information theory. Vol. 2. wiley New York,
+1991.
+[18]
+Giuseppe Da Prato and Jerzy Zabczyk. Stochastic Equations in Infinite Dimensions. Vol. 152.
+Cambridge University Press, 2014.
+[19]
+Beichuan Deng et al. “Convergence rate of DeepONets for learning operators arising from advection-
+diffusion equations”. In: arXiv preprint arXiv:2102.10621 (2021).
+[20]
+Dinh D˜ung et al. Analyticity and sparsity in uncertainty quantification for PDEs with Gaussian
+random field inputs. Vol. 2334. Springer, 2023.
+[21]
+Evarist Gin´e and Richard Nickl. Mathematical foundations of infinite-dimensional statistical mod-
+els. Cambridge university press, 2021. isbn: 1-009-02278-4.
+[22]
+Helmut Harbrecht, Michael Peters, and Markus Siebenmorgen. “Analysis of the domain mapping
+method for elliptic diffusion problems on random domains”. In: Numerische Mathematik 134.4
+(2016), pp. 823–856.
+[23]
+Fernando Henr´ıquez and Christoph Schwab. “Shape holomorphy of the Calder´on projector for the
+Laplacian in R 2”. In: Integral Equations and Operator Theory 93.4 (2021), p. 43.
+
+PDF PAGE 35
+35
+REFERENCES
+[24]
+Lukas Herrmann, Christoph Schwab, and Jakob Zech. “Neural and spectral operator surrogates:
+unified construction and expression rate bounds”. In: Advances in Computational Mathematics
+50.4 (2024). Publisher: Springer, p. 72. issn: 1019-7168.
+[25]
+Jan S Hesthaven and Stefano Ubbiali. “Non-intrusive reduced order modeling of nonlinear problems
+using neural networks”. In: Journal of Computational Physics 363 (2018), pp. 55–78.
+[26]
+Ralf Hiptmair et al. “Large deformation shape uncertainty quantification in acoustic scattering”.
+In: Advances in Computational Mathematics 44.5 (2018), pp. 1475–1518.
+[27]
+Viet Ha Hoang and Christoph Schwab. “Sparse tensor Galerkin discretization of parametric and
+random parabolic PDEs—analytic regularity and generalized polynomial chaos approximation”.
+In: SIAM Journal on Mathematical Analysis 45.5 (2013), pp. 3050–3083.
+[28]
+Maarten V de Hoop et al. “Convergence rates for learning linear operators from noisy data”. In:
+SIAM/ASA Journal on Uncertainty Quantification 11.2 (2023), pp. 480–513.
+[29]
+I Ibragimov and R Khasminskii. “Some estimation problems in infinite dimensional Gaussian white
+noise”. In: Festschrift for Lucien Le Cam: Research Papers in Probability and Statistics. Springer,
+1997, pp. 259–274.
+[30]
+Il’dar Abdullovich Ibragimov and Rafail Zalmanovich Khas’ minskii. “On the estimation of an
+infinite-dimensional parameter in Gaussian white noise”. In: Doklady Akademii Nauk. Vol. 236. 5.
+Russian Academy of Sciences. 1977, pp. 1053–1055.
+[31]
+Ildar Ibragimov. “On estimation of analytic functions”. In: Studia Scientiarum Mathematicarum
+Hungarica 34.1-3 (1998), pp. 191–210.
+[32]
+Carlos Jerez-Hanckes, Christoph Schwab, and Jakob Zech. “Electromagnetic wave scattering by
+random surfaces: Shape holomorphy”. In: Mathematical Models and Methods in Applied Sciences
+27.12 (2017), pp. 2229–2259.
+[33]
+Iain M. Johnstone. “Gaussian Estimation: Sequence and Wavelet Models”. Draft version. 2019.
+[34]
+Shizuo Kakutani. “On equivalence of infinite product measures”. In: Annals of Mathematics 49.1
+(1948), pp. 214–224.
+[35]
+Andrey N. Kolmogorov and Vladimir M. Tikhomirov. “ε-Entropy and ε-Capacity of Sets in Func-
+tional Spaces””. In: Uspekhi Mat. Nauk 14.2 (1959), pp. 3–86.
+[36]
+Nikola Kovachki, Samuel Lanthaler, and Siddhartha Mishra. “On universal approximation and
+error bounds for Fourier neural operators”. In: Journal of Machine Learning Research 22.290
+(2021), pp. 1–76.
+[37]
+Nikola Kovachki et al. “Neural operator: Learning maps between function spaces with applications
+to pdes”. In: Journal of Machine Learning Research 24.89 (2023), pp. 1–97.
+[38]
+Nikola B Kovachki, Samuel Lanthaler, and Hrushikesh Mhaskar. “Data complexity estimates for
+operator learning”. In: arXiv preprint arXiv:2405.15992 (2024).
+[39]
+Nikola B Kovachki, Samuel Lanthaler, and Andrew M Stuart. “Operator learning: Algorithms and
+analysis”. In: Handbook of Numerical Analysis 25 (2024), pp. 419–467.
+[40]
+Samuel Lanthaler. “Operator learning with PCA-Net: upper and lower complexity bounds”. In:
+Journal of Machine Learning Research 24.318 (2023), pp. 1–67.
+[41]
+Samuel Lanthaler, Siddhartha Mishra, and George E Karniadakis. “Error estimates for deeponets:
+A deep learning framework in infinite dimensions”. In: Transactions of Mathematics and its Ap-
+plications 6.1 (2022), tnac001.
+[42]
+Samuel Lanthaler and Andrew M. Stuart. The Parametric Complexity of Operator Learning. en.
+arXiv:2306.15924 [cs]. Mar. 2025. doi: 10.48550/arXiv.2306.15924. url: http://arxiv.org/
+abs/2306.15924 (visited on 04/24/2025).
+[43]
+Zongyi Li et al. “Fourier neural operator for parametric partial differential equations”. In: arXiv
+preprint arXiv:2010.08895 (2020).
+[44]
+Zongyi Li et al. “Multipole graph neural operator for parametric partial differential equations”. In:
+Advances in neural information processing systems 33 (2020), pp. 6755–6766.
+[45]
+Hao Liu et al. “Deep nonparametric estimation of operators between infinite dimensional spaces”.
+In: Journal of Machine Learning Research 25.24 (2024), pp. 1–67.
+[46]
+Lu Lu et al. “Learning nonlinear operators via DeepONet based on the universal approximation
+theorem of operators”. In: Nature machine intelligence 3.3 (2021), pp. 218–229.
+[47]
+Carlo Marcati, Christoph Schwab, and Jakob Zech. “Sparsity for infinite-parametric holomorphic
+functions on Gaussian Spaces”. In: SIAM Journal on Mathematical Analysis 58.3 (2026), pp. 3210–
+3237.
+[48]
+Carlo Marcati et al. “Neural and Spectral Operator Surrogates on Gaussian Spaces”. In: arXiv
+preprint arXiv:2607.08492 (2026).
+
+PDF PAGE 36
+36
+REFERENCES
+[49]
+Hrushikesh Narhar Mhaskar and Nahmwoo Hahm. “Neural networks for functional approximation
+and system identification”. In: Neural Computation 9.1 (1997), pp. 143–159.
+[50]
+Jorge Mujica. Complex analysis in Banach spaces : holomorphic functions and domains of holo-
+morphy in finite and infinite dimensions. North Holland mathematics studies 120. North-Holland,
+1986. isbn: 0444878866.
+[51]
+James Munkres. Topology. eng. Second edition. Pearson, 2000. isbn: 978-0-13-181629-9.
+[52]
+Gustavo A Mu˜noz, Yannis Sarantopoulos, and Andrew Tonge. “Complexifications of real Banach
+spaces, polynomials and multilinear maps”. In: Studia Math 134.1 (1999), pp. 1–33.
+[53]
+Nicholas H Nelsen and Andrew M Stuart. “Operator learning using random features: A tool for
+scientific computing”. In: SIAM Review 66.3 (2024), pp. 535–571.
+[54]
+Maziar Raissi, Paris Perdikaris, and George E Karniadakis. “Physics-informed neural networks:
+A deep learning framework for solving forward and inverse problems involving nonlinear partial
+differential equations”. In: Journal of Computational physics 378 (2019), pp. 686–707.
+[55]
+Niklas Reinhardt, Sven Wang, and Jakob Zech. “Statistical learning theory for neural operators”.
+In: Journal of Machine Learning Research 27.102 (2026), pp. 1–82.
+[56]
+Markus Reiss. “Asymptotic Equivalence for Nonparametric Regression with Multivariate and Ran-
+dom Design”. In: Annals of statistics 36.4 (2008), pp. 1957–1982. issn: 0090-5364.
+[57]
+Christoph Schwab and Jakob Zech. “Deep learning in high dimension: Neural network expression
+rates for generalized polynomial chaos expansions in UQ”. In: Analysis and Applications 17.01
+(2019). Publisher: World Scientific, pp. 19–55. issn: 0219-5305.
+[58]
+Justin Sirignano and Konstantinos Spiliopoulos. “DGM: A deep learning algorithm for solving
+partial differential equations”. In: Journal of computational physics 375 (2018), pp. 1339–1364.
+[59]
+Sergei Borisovich Stechkin. “On absolute convergence of orthogonal series. I”. In: Matematicheskii
+Sbornik 71.1 (1951), pp. 225–232.
+[60]
+Alexandre B. Tsybakov. Introduction to Nonparametric Estimation. 1st. Springer Publishing Com-
+pany, Incorporated, 2008. isbn: 0-387-79051-9.
+[61]
+Martin J Wainwright. High-dimensional statistics: A non-asymptotic viewpoint. Vol. 48. Cambridge
+university press, 2019.
+[62]
+Yuhong Yang and Andrew Barron. “Information-theoretic determination of minimax rates of con-
+vergence”. In: Annals of Statistics (1999), pp. 1564–1599.
+[63]
+Bing Yu et al. “The deep Ritz method: a deep learning-based numerical algorithm for solving
+variational problems”. In: Communications in Mathematics and Statistics 6.1 (2018), pp. 1–12.
+[64]
+Jakob Zech. Sparse-grid approximation of high-dimensional parametric PDEs. ETH Zurich, 2018.
+isbn: 3-906916-55-3.

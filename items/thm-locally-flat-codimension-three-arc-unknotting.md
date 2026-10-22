@@ -37,7 +37,7 @@ Let $M=S^3\times[0,1]$. Let $\alpha:[0,1]\to M$ be a locally flat proper embeddi
 
 [F1] A locally flat proper parametrized arc in the standard product, smooth near its source endpoints, admits a relative ambient topological isotopy to a smooth parametrized arc, fixed near the two boundary levels. Its finite-chart proof uses explicitly presented controlled smooth embedding classes and inverse-controlled back-and-forth limits, without a choice axiom. [[lem-locally-flat-collared-arcs-admit-relative-ambient-smoothing]]
 
-[F2] A smooth proper collared arc in this product is ambiently smoothly isotopic, fixed near the boundary levels, to the vertical arc. With the standard source parametrization near the endpoints, its terminal parametrization is the standard one. [[lem-smooth-collared-arcs-in-the-four-dimensional-product-are-unknotted]]
+[F2] A smooth proper arc in this product with endpoints $(p,0),(p,1)$ and image equal to the vertical arc on endpoint product collars is ambiently smoothly isotopic, fixed near the boundary levels, to that vertical arc. With the standard source parametrization near the endpoints, its terminal parametrization is the standard one. [[lem-smooth-collared-arcs-in-the-four-dimensional-product-are-unknotted]]
 
 ## Proof
 

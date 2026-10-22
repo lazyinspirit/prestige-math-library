@@ -34,7 +34,7 @@ sources:
 
 ## Example
 
-Assume AC. Let $\theta\sim N_2(0,C)$ with $C=\operatorname{diag}(1,0)$, so its support is the first coordinate axis. With unit-variance Gaussian noise, compare the one-coordinate measurements $A_\perp=(0,1)$ and $A_\parallel=(1,0)$. Their expected information gains are $0$ and $\frac12\log 2$, respectively. The log-determinant formula remains defined although $C$ is singular.
+Assume AC. Let $\theta\sim N_2(0,C)$ with $C=\operatorname{diag}(1,0)$, so its support is the first coordinate axis. Let $\eta\sim N(0,1)$ be independent of $\theta$ and compare the one-coordinate experiments $Y=A\theta+\eta$ for $A_\perp=(0,1)$ and $A_\parallel=(1,0)$. Their expected information gains are $0$ and $\frac12\log 2$, respectively. The log-determinant formula remains defined although $C$ is singular.
 
 ## Example references
 
@@ -44,13 +44,13 @@ Assume AC. Let $\theta\sim N_2(0,C)$ with $C=\operatorname{diag}(1,0)$, so its s
 
 ## Facts & Assumptions
 
-**Given:** AC, $C=\operatorname{diag}(1,0)$, unit observation noise, and the two row operators in the Example.
+**Given:** AC, $\theta\sim N_2(0,C)$ with $C=\operatorname{diag}(1,0)$, $Y=A\theta+\eta$ with independent $\eta\sim N(0,1)$, and the two row operators in the Example.
 
 [A1] AC is inherited from the finite Gaussian and EIG/KL interfaces. [[def-axiom-of-choice]]
 
 [F1] The support of $N_n(m,C)$ is $m+\operatorname{Ran}(C)$, including singular $C$. [[lem-ip-singular-gaussian-support-and-pseudoinverse]]
 
-[F2] The linear-Gaussian EIG formula applies to every positive-semidefinite $C$ and positive-definite noise covariance. [[thm-ip-linear-gaussian-information-gain-logdet]]
+[F2] For independent $\theta\sim N_n(m_0,C)$ and $\eta\sim N_m(0,\Gamma)$ with $C\succeq0$ and $\Gamma\succ0$, the linear-Gaussian EIG formula applies to $Y=A\theta+\eta$, including singular $C$. [[thm-ip-linear-gaussian-information-gain-logdet]]
 
 [F3] The natural logarithm is strictly increasing and $\log1=0$. [[thm-natural-logarithm-laws]]
 

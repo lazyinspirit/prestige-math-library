@@ -1,4 +1,9 @@
 ---
+verification:
+  judge:
+    model: "gpt-6-luna"
+    verdict: pass
+    date: 2026-10-22
 id: ex-ip-partial-observation-range-invariance-without-tcc
 kind: example
 title: Range invariance can hold when the tangential cone condition fails

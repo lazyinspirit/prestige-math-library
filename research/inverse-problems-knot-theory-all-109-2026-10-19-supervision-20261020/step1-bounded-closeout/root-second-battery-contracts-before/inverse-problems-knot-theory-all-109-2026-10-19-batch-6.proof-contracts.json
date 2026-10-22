@@ -1,0 +1,545 @@
+{
+  "version": 1,
+  "scope": [
+    "def-ip-composite-double-regularization",
+    "thm-ip-double-discrepancy-conditional-convergence",
+    "ex-ip-composite-linear-inversion-commuting-diagonal",
+    "cex-ip-composite-pseudoinverse-factorization-fails",
+    "op-ip-optimal-composite-discrepancy-rate"
+  ],
+  "contracts": {
+    "def-ip-composite-double-regularization": {
+      "citations": [],
+      "derivations": [],
+      "routine_steps": [],
+      "finite_checks": [],
+      "finite_smoke": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The definition specifies spaces and maps and asserts no behavior for an empty operator domain."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "The definition allows F or G to be the zero map and still defines the typed composite estimator; it asserts no convergence or pseudoinverse identity."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "The definition is well-typed for one-dimensional spaces; the intermediate space remains Y and the estimator output remains in X."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "No injectivity, surjectivity, or closed-range condition is part of the definition."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "The definition asserts no parameter limit or endpoint convergence."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "The definition takes given maps and filters and asserts no existence-by-choice result."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The definition states no equivalence."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The definition states no equivalence."
+        }
+      ]
+    },
+    "thm-ip-double-discrepancy-conditional-convergence": {
+      "citations": [
+        {
+          "fact": "A1",
+          "source": "def-countable-choice",
+          "source_section": "Definition",
+          "quote": "The **Axiom of Countable Choice**, written $\\mathrm{AC}_\\omega$, is the following statement.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F1",
+          "source": "def-ip-composite-double-regularization",
+          "source_section": "Definition",
+          "quote": "Let $X,Y,Z$ be real or complex Hilbert spaces over one scalar field, let $F:X\\to Y$ and $G:Y\\to Z$ be compact linear maps, and set $A:=G\\circ F:X\\to Z$. For spectral regularization families $R^G_\\alpha:Z\\to Y$ for $G^\\dagger$ and $R^F_\\gamma:Y\\to X$ for $F^\\dagger$, and a parameter rule $(\\alpha,\\gamma):(0,\\infty)\\times Z\\to(0,\\infty)^2$, define $T_\\delta(z^\\delta):=R^F_{\\gamma(\\delta,z^\\delta)}(R^G_{\\alpha(\\delta,z^\\delta)}z^\\delta)$ for $z^\\delta\\in Z$. The order is fixed by the factorization: first regularize $G$, then $F$; no general identity $A^\\dagger=F^\\dagger G^\\dagger$ is part of this definition.",
+          "uses": [
+            "1.1",
+            "2.2",
+            "4.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "def-ip-compact-linear-inverse-model",
+          "source_section": "Definition",
+          "quote": "the exact datum is $y=Kx^\\dagger\\in Y$. Given an exact datum $y\\in Y$, solving this inverse problem means finding a parameter $x\\in X$ such that $Kx=y$.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "def-ip-power-source-set",
+          "source_section": "Definition",
+          "quote": "The power source ball is $X_{\\nu,\\rho}(K):=\\{|K|^\\nu w:w\\in X,\\ \\|w\\|_X\\le\\rho\\}$, where $|K|^\\nu=(K^*K)^{\\nu/2}$ is defined by compact spectral calculus. It lies in $N(K)^\\perp$ and consists of minimum-norm representatives of the exact data $Kx$.",
+          "uses": [
+            "1.1",
+            "2.1",
+            "2.2",
+            "2.3"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "def-ip-unbounded-hilbert-moore-penrose-inverse",
+          "source_section": "Definition",
+          "quote": "Thus $K^\\dagger y$ is the unique minimum-norm solution of $Kx=r$, and the orthogonal-range component is mapped to zero.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "thm-singular-value-decomposition-for-compact-operators",
+          "source_section": "Statement",
+          "quote": "with $|T|e_j=s_je_j$ and $f_j=s_j^{-1}Te_j$ for every $j\\in J$",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F6",
+          "source": "def-hilbert-space-adjoint",
+          "source_section": "Definition",
+          "quote": "\\langle Tx,y\\rangle_K=\\langle x,T^*y\\rangle_H\\qquad\\text{for every }x\\in H .",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F7",
+          "source": "def-compact-spectral-filter-and-qualification",
+          "source_section": "Definition",
+          "quote": "A family of filters $g_\\alpha$ with residual filters $r_\\alpha(t)=1-tg_\\alpha(t)$ has qualification at least $p>0$",
+          "uses": [
+            "2.1",
+            "3.1",
+            "2.2",
+            "2.3"
+          ]
+        },
+        {
+          "fact": "F8",
+          "source": "lem-ip-spectral-interpolation-for-power-source-balls",
+          "source_section": "Statement",
+          "quote": "Then $\\|x\\|_X\\le\\|Kx\\|_Y^{\\nu/(\\nu+1)}\\|w\\|_X^{1/(\\nu+1)}$.",
+          "uses": [
+            "2.1",
+            "2.2"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "The common singular system makes A=GF have singular values a_j=lambda_j mu_j and right/left vectors x_j,z_j. The source expansion yields x^dagger=sum a_j^nu w_j x_j and z=sum a_j^(nu+1)w_j z_j. The minimum-norm convention gives A^dagger z=x^dagger, G^dagger z=Fx^dagger, and F^dagger G^dagger z=x^dagger. The intermediate truth y^dagger=Fx^dagger is a G power-source element with witness v_j=lambda_j^(nu+1)w_j and norm at most rho.",
+          "step": "1.1",
+          "inputs": [
+            "given",
+            "A1",
+            "F1",
+            "F2",
+            "F3",
+            "F4",
+            "F5",
+            "F6",
+            "algebra",
+            "construct"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "For e_G=R^G_alpha z-y^dagger, the residual representation is e_G=-|G|^nu p^G_alpha(G*G)v. Hence its source witness norm is at most S_G rho. The first discrepancy inequality and the noise bound give ||G e_G|| <= (tau_G+S_G)delta; interpolation yields an exact-data first-stage error of order rho^(1/(nu+1))delta^(nu/(nu+1)).",
+          "step": "2.1",
+          "inputs": [
+            "given",
+            "step 1.1",
+            "F3",
+            "F7",
+            "F8",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-2",
+          "claim": "The exact composite bias e_A=x^dagger-R_F_gamma R_G_alpha z has source witness (I-R_F R_G A)w with norm at most (1+C_F C_G)rho. Its forward residual is decomposed into the data perturbation, first discrepancy residual, second discrepancy residual, and the bounded composite transfer on the perturbation, giving ||Ae_A|| <= (1+tau_G+tau_F+C_F C_G)delta. Interpolation gives the first term in the claimed bound.",
+          "step": "2.2",
+          "inputs": [
+            "given",
+            "step 1.1",
+            "F1",
+            "F3",
+            "F7",
+            "F8",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-3",
+          "claim": "The second residual operator q_gamma has exact-data multiplier -p_F_gamma(lambda_j^2)(1-p_G_alpha(mu_j^2)) and noise operator norm at most S_F C_G. The previous second-stage residual, qualification at nu+1, and geometric spacing lower-bound gamma_l; the first-grid case uses z nonzero. Thus ||R_F_gamma_l|| is O(rho^(1/(nu+1))delta^(-1/(nu+1)).",
+          "step": "2.3",
+          "inputs": [
+            "given",
+            "step 1.1",
+            "F3",
+            "F7",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "claim": "The previous first-stage grid point has residual above tau_G delta. Comparing it with exact data costs at most S_G delta, and qualification at nu+1 bounds the exact residual by D_G(nu+1)rho alpha_prev^((nu+1)/2). Geometric spacing lower-bounds alpha_k, so the noise amplification ||R_G_alpha(zdelta-z)|| is O(rho^(1/(nu+1))delta^(nu/(nu+1)); the first-grid case follows because alpha_1 is fixed. This gives the noisy first-stage error bound.",
+          "step": "3.1",
+          "inputs": [
+            "given",
+            "step 2.1",
+            "F7",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-4-1",
+          "claim": "Split the final error into the exact composite bias and the outer regularizer applied to the two-stage noise effect. The exact-data and noisy first-stage errors are bounded by steps 2.1 and 3.1; the outer norm is bounded by step 2.3 and the exact composite bias by step 2.2. Multiplication gives the two displayed radius/noise terms; since nu>1, both delta exponents are positive.",
+          "step": "4.1",
+          "inputs": [
+            "given",
+            "step 2.1",
+            "step 3.1",
+            "step 2.2",
+            "step 2.3",
+            "F1",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "finite_checks": [],
+      "finite_smoke": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The theorem assumes nonzero exact data z and a positive common singular system, so the empty-index operator is excluded."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "The statement explicitly assumes nonzero exact data z; it makes no assertion for zero data, where the stopping-index hypotheses may fail."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "The statement allows a finite common singular system with one positive index; steps 1.1–4.1 are coefficientwise and conditional on both selected indices."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "The statement permits kernel directions, requires a minimum-norm source element and nonzero data, and therefore excludes the zero composite operator."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "The statement includes nu=nu0-1 and requires nu>1; the excluded endpoint nu=1 would make the second delta exponent zero."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "The statement assumes Countable Choice and makes existence of both parameter indices explicit rather than deriving a hidden selection."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The result is a conditional convergence estimate, not an equivalence."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The result is a conditional convergence estimate, not an equivalence."
+        }
+      ]
+    },
+    "ex-ip-composite-linear-inversion-commuting-diagonal": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-ip-composite-double-regularization",
+          "source_section": "Definition",
+          "quote": "Let $X,Y,Z$ be real or complex Hilbert spaces over one scalar field, let $F:X\\to Y$ and $G:Y\\to Z$ be compact linear maps, and set $A:=G\\circ F:X\\to Z$. For spectral regularization families $R^G_\\alpha:Z\\to Y$ for $G^\\dagger$ and $R^F_\\gamma:Y\\to X$ for $F^\\dagger$, and a parameter rule $(\\alpha,\\gamma):(0,\\infty)\\times Z\\to(0,\\infty)^2$, define $T_\\delta(z^\\delta):=R^F_{\\gamma(\\delta,z^\\delta)}(R^G_{\\alpha(\\delta,z^\\delta)}z^\\delta)$ for $z^\\delta\\in Z$. The order is fixed by the factorization: first regularize $G$, then $F$; no general identity $A^\\dagger=F^\\dagger G^\\dagger$ is part of this definition.",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "def-compact-spectral-filter-and-qualification",
+          "source_section": "Definition",
+          "quote": "$$x_\\lambda^\\delta=g_\\lambda(S)A^*y_\\delta =(A^*A+\\lambda I_X)^{-1}A^*y_\\delta.$$",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "def-moore-penrose-pseudoinverse",
+          "source_section": "Definition",
+          "quote": "A matrix $B\\in M_{n\\times m}(\\mathbb F)$ is a **Moore--Penrose pseudoinverse** of $A$ when $$ABA=A,\\qquad BAB=B,$$ and the two square products are self-adjoint: $$ (AB)^*=AB,\\qquad (BA)^*=BA. $$",
+          "uses": [
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "thm-moore-penrose-pseudoinverse-exists-and-is-unique",
+          "source_section": "Statement",
+          "quote": "there exists a unique matrix $A^+\\in M_{n\\times m}(\\mathbb F)$ satisfying the four Penrose equations",
+          "uses": [
+            "3.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "From G*G=diag(9,16) and F*F=diag(4,1), the Tikhonov maps are diag(3/(9+alpha),4/(16+alpha)) and diag(2/(4+gamma),1/(1+gamma)).",
+          "step": "1.1",
+          "inputs": [
+            "given",
+            "F2",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "Multiplying the two diagonal maps in the prescribed order gives A=diag(6,4) and the stated composite estimator coefficients.",
+          "step": "2.1",
+          "inputs": [
+            "given",
+            "F1",
+            "step 1.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "claim": "The estimator coefficients converge to 1/6 and 1/4. Since A is invertible, AA^-1=A^-1A=I, so A^-1 satisfies all four Penrose equations and is A^+ by uniqueness; the same argument for F and G yields A^+=F^+G^+.",
+          "step": "3.1",
+          "inputs": [
+            "given",
+            "step 2.1",
+            "F3",
+            "F4",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "finite_checks": [
+        {
+          "case": "F=diag(2,1), G=diag(3,4)",
+          "calculation": "A=diag(6,4); R_G_alpha=diag(3/(9+alpha),4/(16+alpha)); R_F_gamma=diag(2/(4+gamma),1/(1+gamma)).",
+          "result": "The composite tends exactly to A^-1=diag(1/6,1/4)=F^+G^+."
+        }
+      ],
+      "finite_smoke": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The example uses nonempty two-dimensional spaces."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Step 2.1 is a linear matrix identity and therefore also holds for z=0."
+        },
+        {
+          "case": "one",
+          "status": "not_applicable",
+          "reason": "The example is specifically a two-coordinate diagonal factorization."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "The example uses invertible F, G and A, so it covers the nonsingular commuting boundary case."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Example verification step 3.1 computes the coordinatewise limit as alpha and gamma decrease to zero."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "The computation is finite-dimensional and uses no choice principle."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The example asserts no equivalence."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The example asserts no equivalence."
+        }
+      ]
+    },
+    "cex-ip-composite-pseudoinverse-factorization-fails": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-ip-composite-double-regularization",
+          "source_section": "Definition",
+          "quote": "set $A:=G\\circ F:X\\to Z$.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "def-moore-penrose-pseudoinverse",
+          "source_section": "Definition",
+          "quote": "A matrix $B\\in M_{n\\times m}(\\mathbb F)$ is a **Moore--Penrose pseudoinverse** of $A$ when $$ABA=A,\\qquad BAB=B,$$ and the two square products are self-adjoint: $$ (AB)^*=AB,\\qquad (BA)^*=BA. $$",
+          "uses": [
+            "2.1",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "thm-moore-penrose-pseudoinverse-exists-and-is-unique",
+          "source_section": "Statement",
+          "quote": "there exists a unique matrix $A^+\\in M_{n\\times m}(\\mathbb F)$ satisfying the four Penrose equations",
+          "uses": [
+            "2.1",
+            "3.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "Direct multiplication gives FG=(1/2)[[1,1],[0,0]] and GF=A=(1/2)[[1,0],[1,0]], so F and G do not commute. Each is nonzero with one-dimensional image and rank one.",
+          "step": "1.1",
+          "inputs": [
+            "given",
+            "F1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "For B=[[1,1],[0,0]], AB=G and BA=F. Since F and G are self-adjoint idempotents, ABA=A, BAB=B, and both AB and BA are self-adjoint; the uniqueness theorem gives A^+=B.",
+          "step": "2.1",
+          "inputs": [
+            "given",
+            "step 1.1",
+            "F2",
+            "F3",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "claim": "F and G themselves are self-adjoint idempotents, hence each is its own Moore–Penrose pseudoinverse. Their product F^+G^+=FG=B/2 differs from A^+=B, refuting the universal identity.",
+          "step": "3.1",
+          "inputs": [
+            "given",
+            "step 2.1",
+            "F2",
+            "F3",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "finite_checks": [
+        {
+          "case": "rank-one projections on R^2",
+          "calculation": "A=GF=(1/2)[[1,0],[1,0]], B=[[1,1],[0,0]], AB=G, and BA=F.",
+          "result": "A^+=B while F^+G^+=FG=B/2, so the product identity fails."
+        }
+      ],
+      "finite_smoke": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The counterexample uses nonempty two-dimensional Hilbert spaces."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "The counterexample uses nonzero rank-one projections; the zero-operator boundary is not needed for its universal refutation."
+        },
+        {
+          "case": "one",
+          "status": "not_applicable",
+          "reason": "The witness is explicitly two-dimensional."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "The counterexample uses rank-one factors in dimension two, so both are rank deficient and noncommuting."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "The finite algebraic counterexample has no limiting parameter."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "All calculations are finite-dimensional and choice-free."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The false statement is universal but not an equivalence."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The false statement is universal but not an equivalence."
+        }
+      ]
+    },
+    "op-ip-optimal-composite-discrepancy-rate": {
+      "open_problem_review": {
+        "formulation": {
+          "verdict": "pass",
+          "evidence": "The formulation fixes compact common-singular-system factors, the compatible minimum-norm factorization, source ball, filter qualification, two first-crossing residual rules, nonzero exact data, defined stopping indices, and the deterministic worst-case target exponent."
+        },
+        "status": {
+          "verdict": "pass",
+          "evidence": "Brandt–Horn v1 conclusion §4 (printed p. 17) explicitly leaves DDP rate optimality open; targeted title/arXiv-id searches through 2026-10-19 found no later resolution. The source radius typo is corrected in the local theorem and does not settle the open delta-exponent question."
+        },
+        "sources": {
+          "verdict": "pass",
+          "evidence": "The full 22-page Brandt–Horn preprint, including Theorem 6 proof and conclusion, and Clason's full lecture notes §§5.1–5.2 were inspected; the latter supports single-stage components only, not an independent composite result."
+        }
+      }
+    }
+  }
+}

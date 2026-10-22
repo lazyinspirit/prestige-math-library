@@ -1,0 +1,148 @@
+{
+  "run": "inverse-problems-knot-theory-all-109-2026-10-19",
+  "phase": "repeat",
+  "round": 1,
+  "unit": "19",
+  "input_sha256": "2977e83be17ed702b0dea9a73b8fc44b265bd72b9fdf4934a89063f5b6e65967",
+  "decisions": [
+    {
+      "id": "def-ip-small-ball-map-estimator",
+      "model": "gpt-6.1-sol",
+      "context_sha256": "2e6051c517e2a656de61d000c9c96bbaf73e43a9f6dfa82131bc039b7e857d43",
+      "outcome": "confirmed_fatal",
+      "defect_type": "logic",
+      "reason": "The unqualified Banach space permits complex scalars, but the stated bilinear covariance formula is valid on the continuous real dual. For independent X,Y with N(0,1) laws, Z=X+iY has E[Z^2]=1-1+2i E[XY]=0; hence every complex-linear functional ell(z)=az gives C ell=0. This incorrectly collapses the Cameron–Martin space of a nondegenerate two-dimensional Gaussian. Repaired the Gaussian branch by explicitly using the underlying real Banach space and continuous real dual; its covariance sends a Re+b Im to a+ib. Restriction preserves the norm metric, completeness, separability, Borel sets and balls, so it preserves the complex case and the unrestricted strong-MAP convention. The real covariance supplier now applies, including degenerate laws.",
+      "uncertain": false,
+      "source_urls": [
+        "https://arxiv.org/pdf/1303.4795",
+        "https://www.hairer.org/notes/SPDEs_Course.pdf"
+      ],
+      "familiar": true
+    }
+  ],
+  "reviews": [
+    {
+      "id": "def-ip-small-ball-map-estimator",
+      "disposition": "repaired",
+      "post_sha256": "faf801a6d626f3404da2d5ec7a36bcc70ae3de4a2f8a7ed4f73aa0e15f49391d",
+      "review_context_sha256": "8bf6f4df28e8947841f765ac6dd89eaff5cb61edc810eb51e0e6c219b3851be6",
+      "reason": "Reviewed the full Definition, covariance/RKHS supplier and its well-definedness proof, and the realification lemma with its proof. The Gaussian branch now uses the continuous real dual even for a complex parameter space, so m(C ell) is a real positive-semidefinite covariance form and ker C is its nullspace; the completed map is injective under the stated AC assumption. Restriction of scalars preserves all norm-ball probabilities. Closed-ball measurability, positive supremum by a countable dense cover, the zero-space case, eventual positivity in relative comparisons, and the distinction from global strong MAP remain valid. The existing missing-dependency concern was already repaired in the assigned input. Added the realification dependency and manifest mirror and retained historical contract notes. All four direct consumers remain sound; no independent review of this repair is claimed.",
+      "uncertain": false,
+      "source_urls": [
+        "https://arxiv.org/pdf/1303.4795",
+        "https://www.hairer.org/notes/SPDEs_Course.pdf"
+      ],
+      "familiar": true
+    }
+  ],
+  "created_items": [],
+  "downstream": [
+    "thm-ip-gaussian-small-ball-map-functional",
+    "ex-ip-finite-dimensional-small-ball-map-equals-density-mode",
+    "cex-ip-infinite-dimensional-pointwise-density-fallacy",
+    "ex-ip-map-differs-from-posterior-mean"
+  ],
+  "ledger_updates": [
+    {
+      "ledger": "canonical-defect-ledger",
+      "action": "record-fixed-finding",
+      "id": "def-ip-small-ball-map-estimator",
+      "severity": "fatal",
+      "location": "statement",
+      "subclass": "missing-hypothesis",
+      "defect_type": "logic",
+      "disposition": "fixed",
+      "reason": "The unqualified Banach space permits complex scalars, but the stated bilinear covariance formula is valid on the continuous real dual. For independent X,Y with N(0,1) laws, Z=X+iY has E[Z^2]=1-1+2i E[XY]=0; hence every complex-linear functional ell(z)=az gives C ell=0. This incorrectly collapses the Cameron–Martin space of a nondegenerate two-dimensional Gaussian. Repaired the Gaussian branch by explicitly using the underlying real Banach space and continuous real dual; its covariance sends a Re+b Im to a+ib. Restriction preserves the norm metric, completeness, separability, Borel sets and balls, so it preserves the complex case and the unrestricted strong-MAP convention. The real covariance supplier now applies, including degenerate laws.",
+      "evidence_paths": [
+        "items/def-ip-small-ball-map-estimator.md#Definition",
+        "items/def-banach-gaussian-covariance-operator-and-rkhs.md#Definition",
+        "items/thm-banach-gaussian-covariance-rkhs-is-well-defined.md#Proof",
+        "items/lem-complex-norm-realification-is-a-real-norm.md#Statement"
+      ],
+      "uncertain": false,
+      "source_urls": [
+        "https://arxiv.org/pdf/1303.4795",
+        "https://www.hairer.org/notes/SPDEs_Course.pdf"
+      ],
+      "familiar": true
+    }
+  ],
+  "gate_resolutions": [],
+  "repair_notes": {
+    "changed_paths": [
+      "items/def-ip-small-ball-map-estimator.md",
+      "research/inverse-problems-knot-theory-all-109-2026-10-19-batch-19.pages.json",
+      "research/inverse-problems-knot-theory-all-109-2026-10-19-batch-19.proof-contracts.json"
+    ],
+    "before_guard_sha256": "6533fc82f6ab5e7cd5dac0d590a58cc3ef22113b8cc23a331963c188d9355f97",
+    "interface_comparison": "The Definition now explicitly realifies a complex B in the Gaussian branch, specifies continuous real functionals, and calls the prior Borel Gaussian. All existing norm-ball, supremum, positivity and pairwise-limit clauses remain verbatim. A direct dependency/reference to the existing realification lemma was added; no new item is needed. The manifest mirrors this Definition and dependency exactly.",
+    "contract_and_pages": "Appended a current step5_repeat_review to the assigned contract risk_review, retaining the earlier notes as historical. Updated only the assigned manifest row. Shared edits used the acquired step5-shared-write lock, reread current carriers, passed the focused contract check, and released the lock. The home page is frontmatter-only with compact-v1 and unchanged inventory; no page edit is needed.",
+    "consumer_examination": [
+      {
+        "id": "thm-ip-gaussian-small-ball-map-functional",
+        "path": "items/thm-ip-gaussian-small-ball-map-functional.md",
+        "affected_use": "Statement: \"Let $B$ be a real separable Banach space\"; [F8] and Proof 3.1 identify minimizers using the Cameron–Martin ratio-mode definition.",
+        "disposition": "unaffected",
+        "reason": "Its explicit real-space assumption supplies exactly the corrected convention. The covariance nullspace N equals ker C by the well-definedness supplier, and its positive fixed-center posterior ball ratios already satisfy the definition. No consumer Statement or Definition changes."
+      },
+      {
+        "id": "ex-ip-finite-dimensional-small-ball-map-equals-density-mode",
+        "path": "items/ex-ip-finite-dimensional-small-ball-map-equals-density-mode.md",
+        "affected_use": "Example: \"$B=D=\\mathbb R^d$\"; [F3] and Verification 2.1 use the strong small-ball MAP ratio to the supremum over all centers.",
+        "disposition": "unaffected",
+        "reason": "The example uses the unchanged strong-MAP branch on real Euclidean space. Its Gaussian centering argument still makes every positive-radius ball probability largest at the posterior mean; the real-dual convention changes none of these probabilities."
+      },
+      {
+        "id": "cex-ip-infinite-dimensional-pointwise-density-fallacy",
+        "path": "items/cex-ip-infinite-dimensional-pointwise-density-fallacy.md",
+        "affected_use": "Statement references: \"small-ball MAP comparisons use posterior ball probabilities and do not require pointwise density values\"; the counterexample is on real ell^2.",
+        "disposition": "unaffected",
+        "reason": "This contextual reference invokes the unchanged density-free ball comparison, not a complex covariance construction. Its nonexistence proof uses disjoint translated real ell^2 balls and a countable dense cover. The Step-4 local-finiteness concern is already resolved by current step 1.2."
+      },
+      {
+        "id": "ex-ip-map-differs-from-posterior-mean",
+        "path": "items/ex-ip-map-differs-from-posterior-mean.md",
+        "affected_use": "[F2] defines the strong-MAP supremum ratio; Verification 3.1 and 4.1 use it for the posterior density on [0,1] in the real line.",
+        "disposition": "unaffected",
+        "reason": "The unchanged strong-MAP definition applies to its real uniform-prior model. The bounds m_r(x)<=2r q_max and m_r(2/3)/(2r)->q_max still establish the claimed mode and distinguish the mean; no Gaussian relative-mode branch is used."
+      }
+    ],
+    "published_ledger": "No proposed published-consumer ledger update: all four direct item consumers are draft frozen-frontier items and remain sound. No outside or published consumer repair is required. Step-4 outside-context presentation alerts remain separately routed and were not repaired or accepted here.",
+    "source_reading_limits": "Consulted Dashti et al., Definition 3.1 and Theorem 3.2 with its proof: these use open balls and an attained maximizing center; this carrier intentionally retains its explicitly defined closed balls and supremum. Consulted Hairer Section 4.2, Definition 4.26 and Remark 4.28 for covariance-induced real Hilbert geometry. Read the complete local covariance/RKHS well-definedness proof and the complete local norm-realification proof. No independent review of this repair or whole-source reading is claimed.",
+    "diagram_review": "No TikZ/tikzcd or other diagram occurs in the assigned definition; no diagram is required for these scalar-field and ratio conventions.",
+    "checks": [
+      {
+        "command": "node tools/tsx-run.mjs tools/precheck.mts items/def-ip-small-ball-map-estimator.md --json",
+        "exit_code": 0,
+        "result": "1 file; 0 checked phase proofs; 0 failures; definition is not-applicable."
+      },
+      {
+        "command": "node tools/rendercheck.mjs items/def-ip-small-ball-map-estimator.md --json",
+        "exit_code": 0,
+        "result": "1 item checked; errors=[]; warnings=[]."
+      },
+      {
+        "command": "node tools/proof-contract.mjs research/inverse-problems-knot-theory-all-109-2026-10-19-batch-19.proof-contracts.json --items def-ip-small-ball-map-estimator --strict --json",
+        "exit_code": 0,
+        "result": "Assigned item checked; ok=true; errors=[]; warnings=[]; passed again after the contract update."
+      },
+      {
+        "command": "node tools/proof-layout.mjs items/def-ip-small-ball-map-estimator.md",
+        "exit_code": 0,
+        "result": "1 items, 0 steps, 0 defects; run after final item edit."
+      },
+      {
+        "command": "python3 focused manifest/Definition and frontier-consumer assertions",
+        "exit_code": 0,
+        "result": "Manifest Definition and added dependency agree with current item; all four consumer IDs belong to frozen frontier."
+      },
+      {
+        "command": "node tools/step5-workflow.mjs review-contexts --run inverse-problems-knot-theory-all-109-2026-10-19 --items def-ip-small-ball-map-estimator",
+        "exit_code": 0,
+        "result": "Returned post_sha256 and review_context_sha256 copied exactly into the review. No supplier was edited after this completed mathematical review."
+      }
+    ],
+    "remaining_obligations": [],
+    "handoff": "Assigned repair is complete with no mathematical uncertainty. Independent rejudgment, any native frontier consumer-owner work and central certification remain engine duties; no judges, stamps, certificates or round transitions were written."
+  }
+}

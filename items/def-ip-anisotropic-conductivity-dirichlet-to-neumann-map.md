@@ -16,6 +16,7 @@ deps:
   - lem-ac-supplies-countable-and-dependent-choice-for-banach-integration
   - def-countable-choice
   - lem-ip-euclidean-trace-quotient-is-h12
+  - def-ip-sobolev-spaces-on-compact-riemannian-domain
 justified_by:
   - lem-ip-anisotropic-conductivity-map-wellposedness
 provenance:
@@ -33,7 +34,7 @@ sources:
 
 ## Definition
 
-Assume the Axiom of Choice and Countable Choice. Let $n\ge2$ and let $\Omega\subset\mathbb R^n$ be a bounded connected open set with smooth boundary. Write $H^1(\Omega)=W^{1,2}(\Omega;\mathbb R)$ and let $H_0^1(\Omega)$ be the $H^1$-closure of $C_c^\infty(\Omega;\mathbb R)$. Define the boundary trace-data space $\mathcal B_\Omega:=H^1(\Omega)/H_0^1(\Omega)$ with quotient norm; the trace-quotient lemma identifies this quotient with the fixed-atlas $H^{1/2}(\partial\Omega)$ boundary data convention of the scalar conductivity map. Let $\gamma\in C^\infty(\overline\Omega;\operatorname{Sym}_n(\mathbb R))$ be uniformly positive definite, so some $0<c\le C<\infty$ satisfy $c|\xi|^2\le \xi^T\gamma(x)\xi\le C|\xi|^2$ for all $x\in\overline\Omega$ and $\xi\in\mathbb R^n$. For $f=[U]\in\mathcal B_\Omega$, a weak solution with boundary datum $f$ is a class $u_{\gamma,f}\in H^1(\Omega)$ with $[u_{\gamma,f}]=f$ and
+Assume the Axiom of Choice and Countable Choice. Let $n\ge2$ and let $\Omega\subset\mathbb R^n$ be a bounded connected open set with smooth boundary. Write $H^1(\Omega)=W^{1,2}(\Omega;\mathbb R)$ and let $H_0^1(\Omega)$ be the $H^1$-closure of $C_c^\infty(\Omega;\mathbb R)$. Define the boundary trace-data space $\mathcal B_\Omega:=H^1(\Omega)/H_0^1(\Omega)$ with quotient norm. If $\Omega\ne\varnothing$, its boundary is nonempty, and the trace-quotient lemma identifies this quotient with the fixed-atlas $H^{1/2}(\partial\Omega)$ boundary data convention of the scalar conductivity map. If $\Omega=\varnothing$, then $H^1(\Omega)=H_0^1(\Omega)=\{0\}$ and the fixed-atlas empty-boundary convention $H^{1/2}(\varnothing)=\{0\}$ gives the identification directly. Let $\gamma\in C^\infty(\overline\Omega;\operatorname{Sym}_n(\mathbb R))$ be uniformly positive definite, so some $0<c\le C<\infty$ satisfy $c|\xi|^2\le \xi^T\gamma(x)\xi\le C|\xi|^2$ for all $x\in\overline\Omega$ and $\xi\in\mathbb R^n$. For $f=[U]\in\mathcal B_\Omega$, a weak solution with boundary datum $f$ is a class $u_{\gamma,f}\in H^1(\Omega)$ with $[u_{\gamma,f}]=f$ and
 
 $$\int_\Omega \gamma\nabla u_{\gamma,f}\cdot\nabla\varphi\,dx=0\qquad(\varphi\in H_0^1(\Omega)).$$
 
@@ -50,6 +51,8 @@ where $V_h\in H^1(\Omega)$ is any representative of $h$. The local anisotropic c
 [[def-wkp-zero-as-a-sobolev-closure|Zero-boundary Sobolev space as a norm closure]]
 
 [[lem-ip-euclidean-trace-quotient-is-h12|Euclidean trace quotient and fixed-atlas H1/2 boundary data]]
+
+[[def-ip-sobolev-spaces-on-compact-riemannian-domain|Fixed-atlas Sobolev spaces and the empty-boundary convention]]
 
 [[def-ip-conductivity-dirichlet-to-neumann-map|Scalar conductivity Dirichlet-to-Neumann map]]
 

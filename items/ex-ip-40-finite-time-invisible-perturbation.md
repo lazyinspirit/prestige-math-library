@@ -36,7 +36,7 @@ proof_strategy: combine finite propagation, the Green identity, and separation b
 
 ## Example
 
-Let $(M,g)$ be a compact, connected, nonempty smooth Riemannian manifold with nonempty smooth boundary, let $T>0$, and let $q_1,q_2\in C^\infty(M;\mathbb R)$ be time independent. Put $Q_0=\operatorname{supp}(q_1-q_2)$, the closure of the set on which $q_1-q_2$ is nonzero, and suppose $Q_0\ne\varnothing$ and $d_g(Q_0,\partial M)>T/2$, where $d_g$ is the intrinsic Riemannian distance. For every smooth Dirichlet input $h\in C_c^\infty((0,T)\times\partial M)$, the full time-dependent forward Dirichlet-to-Neumann maps satisfy
+Assume Countable Choice. Let $(M,g)$ be a compact, connected, nonempty smooth Riemannian manifold with nonempty smooth boundary, let $T>0$, and let $q_1,q_2\in C^\infty(M;\mathbb R)$ be time independent. Put $Q_0=\operatorname{supp}(q_1-q_2)$, the closure of the set on which $q_1-q_2$ is nonzero, and suppose $Q_0\ne\varnothing$ and $d_g(Q_0,\partial M)>T/2$, where $d_g$ is the intrinsic Riemannian distance. For every smooth Dirichlet input $h\in C_c^\infty((0,T)\times\partial M)$, the full time-dependent forward Dirichlet-to-Neumann maps satisfy
 $$\Lambda_{q_1}^+h=\Lambda_{q_2}^+h\quad\text{in }L^2((0,T)\times\partial M,dS_gdt).$$
 Thus a perturbation supported farther than half the observation time from the boundary cannot be detected by boundary measurements made before time $T$.
 

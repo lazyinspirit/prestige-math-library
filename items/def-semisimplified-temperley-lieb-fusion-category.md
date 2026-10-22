@@ -19,6 +19,11 @@ axiom_use: "Choice-free: the quotient, finite additive envelope, and idempotent 
 provenance:
   statement: literature-derived
   proof: not-applicable
+verification:
+  judge:
+    model: "gpt-6-luna"
+    verdict: pass
+    date: 2026-10-22
 sources:
   references:
     - title: "C. Blanchet, N. Habegger, G. Masbaum, and P. Vogel, Topological Quantum Field Theories Derived from the Kauffman Bracket, Topology 34 (1995), §§3–4"

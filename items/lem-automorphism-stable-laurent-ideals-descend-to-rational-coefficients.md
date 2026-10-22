@@ -15,6 +15,11 @@ axiom_use: Full AC is inherited only through the fixed-field theorem. Finite row
 provenance:
   statement: ai-altered
   proof: ai-generated
+verification:
+  judge:
+    model: "gpt-6-luna"
+    verdict: pass
+    date: 2026-10-22
 sources:
   references:
     - title: Cooper, Culler, Gillet, Long and Shalen, Plane Curves Associated to

@@ -22,6 +22,10 @@ provenance:
   proof: ai-altered
 verification:
   precheck: n/a
+  judge:
+    model: "gpt-6-luna"
+    verdict: pass
+    date: 2026-10-22
 sources:
   references:
   - title: Stavros Garoufalidis and Peter Teichner, On Knots with Trivial Alexander

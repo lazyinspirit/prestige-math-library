@@ -26,6 +26,10 @@ sources:
       locator: "Section 3.3, oriented meridian convention, pp. 29-30"
 verification:
   precheck: n/a
+  judge:
+    model: "gpt-6-luna"
+    verdict: pass
+    date: 2026-10-22
 ---
 
 ## Definition

@@ -1,0 +1,2483 @@
+PAGE 1
+A Distributionally Robust Framework for Learned
+Reconstructions in Inverse Problems
+Floor van Maarschalkerwaart∗
+Subhadip Mukherjee†
+Christoph Brune∗
+Marcello Carioni∗
+June 30, 2026
+Abstract
+Learned reconstruction operators for inverse problems are typically trained under a fixed noise
+model, and generalize poorly when the distribution during testing differs from the one assumed
+during training. Distributionally robust optimization (DRO) addresses this by optimizing against
+the worst-case distribution within a prescribed ambiguity set, but standard Wasserstein DRO per-
+turbs the full joint distribution uniformly, which can be overly conservative and ignores the physics
+of the measurement process. We develop a structured DRO framework in which the ambiguity
+set is restricted to structured perturbations aligned with the data-acquisition process. This allows
+us to learn data-driven reconstruction operators that remain robust to distributional shifts. By
+constraining perturbations to subsets such as P(Y |X), our framework models uncertainty in the
+forward operator and noise model more faithfully, accommodating any noise model expressible as
+a stochastic forward operator. We establish strong duality for this general formulation and derive
+explicit finite-dimensional dual representations for perturbations in the joint, marginal, and con-
+ditional distributions. A central result is an explicit worst-case risk bound that induces Tikhonov
+regularization on the Lipschitz constant of the reconstruction operator, and is less conservative
+relative to standard DRO for well-posed problems.
+Numerical experiments on deblurring and
+sinogram-to-CT reconstruction demonstrate improved robustness, stability, and interpretability
+over standard DRO and MSE baselines. In the linear setting, the learned operator becomes ef-
+fectively low-rank, truncating at the intrinsic dimension of the data and recovering a data-driven
+analogue of truncated-SVD regularization.
+Keywords.
+inverse problems, distributionally robust optimization, optimal transport, duality,
+data-driven methods
+1
+Introduction
+Inverse problems aim to recover an unknown signal from indirect, noisy measurements.
+They are
+central to imaging, from deblurring to computed tomography, and are typically ill-posed. Learned
+reconstructions have become a popular tool, but they are usually trained under a fixed assumption on
+the noise model. More broadly, in many estimation and reconstruction problems, the data-generating
+distribution is often only partially known, and solutions optimized for an assumed model may be
+unstable when the true distribution differs. Distributionally robust optimization (DRO) addresses this
+by seeking solutions that perform well against all probability measures in a prescribed ambiguity set
+around the empirical distribution. Given an estimated in-sample distribution µ∗, one learns a decision
+rule or reconstruction operator G ∈G by solving the min–max problem:
+min
+G∈G
+max
+µ∈BD,ε(µ∗)
+Z
+S
+ℓ(s, G) dµ(s),
+(1)
+where ℓ: S × G →[0, ∞) is a measurable loss function and BD,ε(µ∗) is the ε-ball of perturbations
+around µ∗∈P(S) with respect to a discrepancy D : P(S)×P(S) →R. By optimizing against the worst
+∗University of Twente, Enschede, the Netherlands ({f.vanmaarschalkerwaart, c.brune, m.c.carioni}@utwente.nl.
+†IIT Kharagpur, Kharagpur, India (smukherjee@ece.iitkgp.ac.in).
+1
+arXiv:2606.30230v1  [math.OC]  29 Jun 2026
+
+PAGE 2
+y = Hx
+µX
+µY
+perturb µY |X (µX fixed)
+perturb µX|Y (µY fixed)
+X (input / parameter)
+Y
+(measurement)
+Figure 1: Structured perturbations in the product space X × Y .
+Fixing the X-marginal confines
+the Y |X adversary to vertical transport; fixing the Y -marginal gives horizontal X|Y transport. In
+contrast, standard DRO perturbs the full joint distribution (gray oval).
+case within the ambiguity set rather than the average (the observed data distribution), DRO provides
+robustness against noise and model misspecification and offers generalization to out-of-distribution
+data.
+A common choice for the ambiguity set is a Wasserstein ball.
+The Wasserstein distance W :
+P(S) × P(S) →[0, ∞) [59], defined through optimal transport, captures discrepancies in both the
+support and mass of probability measures and carries an intuitive geometric interpretation as the
+minimal transport cost between two distributions. Unlike ϕ-divergences such as the KL divergence, it
+is well-defined for any pair of measures and does not require overlapping support, making it suitable
+when data lie on low-dimensional manifolds. Moreover, it captures the geometry and relative positions
+of the supports of the distributions, which is not the case for other measures such as integral probability
+metrics (IPMs). Formally, given a cost c : S × S →[0, ∞] the Wasserstein distance is defined as
+W(µ1, µ2) :=
+inf
+π∈Π(µ1,µ2)
+Z
+S×S
+c(s, r) dπ(s, r),
+where Π(µ1, µ2) denotes the set of transport plans with marginals µ1 and µ2. The entropically reg-
+ularized version known as the Sinkhorn distance [17, 49] enables efficient computation and is used in
+our numerical experiments.
+We adopt a Bayesian interpretation of the data-measurement process: given an input x ∈X, the
+observation y is a Y -valued random variable distributed according to a conditional law µY |X=x : X →
+P(Y ) whose mean is given by a forward operator H : X →Y ,
+y ∼µY |X=x,
+E[ y|x ] = Hx.
+(2)
+The conditional law µY |X=x encodes the noise model: the additive formulation y = Hx + η with
+zero-mean noise η corresponds to µY |X=x = Law(Hx + η), while Poisson and other noise models arise
+from other choices of µY |X=x (see Example 2.1). Together with a prior µX ∈P(X), the conditional
+law induces a joint distribution µ ∈P(X × Y ).
+The task of recovering x from noisy observations is often ill-posed: the operator H may be ill-
+conditioned or non-injective, and small data perturbations can produce large reconstruction errors.
+Standard approaches address this through variational regularization or Bayesian formulations. The
+former minimizes L(x, y)+R(x) where L : X×Y →R is a data fidelity term and R : X →[0, ∞] encodes
+prior knowledge, with Tikhonov regularization R(x) = ∥Tx∥2
+2 as a canonical example.
+Bayesian
+2
+
+PAGE 3
+Distributionally Robust
+Optimization
+inf
+G
+sup
+µ∈Bε(µ∗)
+Z
+ℓ(s, G) dµ
+µ∗
+ε
+Bε(µ∗) ⊆P(S)
+the data law µ ∈P(X × Y )
+is itself uncertain
+worst-case risk
+induces regularization
+strong duality
+Inverse Problems
+min
+x
+L(x, y) + λ R(x)
+X
+Y
+x
+y
+H
+H†
+regularization for ill-posedness
+Bayesian / distributional view
+Structured DRO
+(this work)
+µ∗
+Bε(µ∗)
+K ⊆P(X × Y )
+admissible set
+Bε(µ∗) ∩K
+factorize the data law
+µ = µX ⊗µY |X
+learn G ≈H†
+adaptive regularization
+for inverse problems
+robustness ↔regularization
+shared object: µ ∈P(X × Y )
+K bridges approaches
+Figure 2: Schematic positioning Structured DRO (center) between distributionally robust optimization
+(left) and inverse problems (right). DRO optimizes against the worst case over an ambiguity ball
+Bε(µ∗), inducing regularization made explicit through strong duality. Inverse problems stabilize a
+reconstruction H† of an ill-posed forward operator H by adding a regularizer R to the data-fidelity
+term. Structured DRO bridges the two: the data law factorizes as µ = µX ⊗µY |X, and restricting
+the worst-case distribution to a structured set K ⊆P(X × Y ) yields the admissible set Bε(µ∗) ∩K,
+over which a reconstruction operator G ≈H† is learned with regularization adapted to the inverse
+problem. The legend (bottom) illustrates the three threads connecting the viewpoints.
+formulation targets the posterior of x given y [19].
+While classical regularization mitigates noise
+amplification, it does not distinguish between different sources of uncertainty.
+Likewise, standard
+Wasserstein DRO treats all perturbations uniformly by perturbing the full joint distribution µ ∈
+P(X×Y ), which may be unnecessarily conservative and may not reflect the physics of the measurement
+process. From a learning perspective, the goal is not merely to reconstruct a single signal x, but to
+learn a reconstruction operator G : Y →X that generalizes across measurements and remains stable
+under uncertainty in the data-generating process.
+We build Structured DRO, a novel distributionally robust optimization framework that allows
+for structured perturbations within a given subset K ⊆P(X × Y ), recovering perturbations of the
+marginal, conditional, and joint distributions as special cases.
+This is precisely where DRO and
+inverse problems meet, c.f. Figure 2. The data-generating law factorizes as µ = µX ⊗µY |X=x into a
+prior over inputs and a conditional measurement likelihood, representing physically distinct sources of
+uncertainty: the input distribution on one hand, and the forward operator together with measurement
+noise on the other.
+Choosing K in accordance with this factorization lets the adversary perturb
+each component separately rather than treating the joint as a whole. In particular, fixing µX and
+perturbing only µY |X=x isolates uncertainty in the measurement model P(Y |X), naturally aligning
+the framework with the physics of the inverse problem, as illustrated in Figure 1. The central object
+is a learned reconstruction operator G ∈G (linear or a neural network) trained to minimize worst-
+case reconstruction risk over all admissible perturbations.
+Our earlier work [58] is a special case,
+corresponding to a K that fixes µX and restricts µY |X=x to Gaussian models with mean Hx and
+unknown variance.
+We establish strong duality for this general formulation on general parameter and data spaces, ex-
+tending results of Blanchet and Murthy [12] and Blanchet et al. [9] to structured perturbation sets, and
+for each perturbation space considered (joint, marginal, and conditional), we derive finite-dimensional
+dual representations that make the resulting DRO problems interpretable and tractable and offer a
+3
+
+PAGE 4
+clear link to regularization. For each perturbation space, we further obtain explicit upper bounds on
+the worst-case risk. For perturbations in P(Y |X), the bound features a Tikhonov-type regulariza-
+tion term penalizing the Lipschitz constant of the reconstruction operator, manifesting concretely in
+the linear setting as truncated-SVD regularization, with the learned inverse truncating at the intrin-
+sic dimension of the data. Restricting perturbations to P(Y |X) is less conservative than standard
+Wasserstein DRO, with the gap widening as the problem becomes more well-posed. Finally, we use
+the conditional Sinkhorn distance as a tractable approximation of the structured framework and fol-
+low [60] to apply our framework to inverse problems, including linear differentiation, deblurring, and
+sinogram-to-CT reconstruction, as well as to a robust forward simulator, demonstrating that the frame-
+work extends beyond the inverse setting. Across all experiments, structured DRO achieves improved
+robustness, stability, and interpretability, and can outperform baselines across a range of practically
+relevant scenarios.
+Main contributions
+The main contributions of this paper are the following.
+1. We propose a novel DRO framework for learning robust reconstruction operators under structured
+uncertainty in inverse problems and prove strong duality for general structured perturbation sets,
+extending the results of Blanchet and Murthy [12] and Blanchet et al. [9] beyond linear regression
+to general parameter and data spaces and constrained ambiguity sets.
+2. We derive finite-dimensional dual formulations and worst-case risk bounds for perturbations in
+the joint, marginal, and conditional distributions.
+For perturbations in P(Y |X), the bound
+induces Tikhonov-type regularization on the Lipschitz constant of the reconstruction operator.
+In the linear setting, this recovers truncated-SVD regularization at the intrinsic dimension of the
+data.
+3. We apply the framework to specific inverse problems and demonstrate improved robustness,
+stability, and interpretability over baselines on differentiation, deblurring, a robust forward sim-
+ulator, and sinogram-to-CT reconstruction.
+Organization of the paper
+Section 2 introduces the framework and its application to inverse
+problems. Sections 3 and 4 contain the theoretical contributions: strong duality and explicit dual
+formulations for structured perturbation sets, followed by explicit worst-case risk bounds and their
+connections to known duality results and classical regularization. Section 5 is a theoretical validation
+study comparing different DRO formulations for fixed, hand-crafted inverses across inverse problems of
+increasing ill-posedness, illustrating the bounds of Section 4. Section 6 forms the main empirical part,
+solving the DRO problem for learned reconstruction maps via a tractable entropic approximation of
+the conditional Wasserstein distance and applying the framework to inverse problems, including image
+reconstruction tasks.
+1.1
+Related Work
+The literature on DRO has expanded in recent years [51].
+Much of this work focuses on optimal
+transport distances [12, 21, 41], though different metrics remain relevant [10, 29, 60, 64]. Bayesian for-
+mulations of DRO have also been investigated [44, 62], and DRO has been proven useful for data-driven
+approaches [34]. In particular, Wasserstein DRO has been shown to induce implicit regularization, con-
+necting worst-case risk minimization to regularized estimators [9, 11, 36, 53]. Entropic regularization
+further enables efficient computation of Wasserstein distances [17, 49].
+While classical DRO perturbs the full joint distribution, recent work has explored structured ambi-
+guity sets that exploit problem-specific geometry [37] or conditional structures [16]. These approaches
+can reduce conservatism by distinguishing between different sources of uncertainty. However, existing
+methods rarely account for the conditional structure inherent in inverse problems, where the forward
+operator and measurement noise define distinct components of uncertainty. The difference between our
+approach and that of [16] lies in what is being perturbed: there, robustness is taken over an uncertainty
+set of realizations of the perturbation vector, learned from data and conditioned on observed covari-
+ates, so the formulation is “deep data-driven” robust rather than distributionally robust. We instead
+perturb the data-generating measure itself and impose conditional structure by fixing the X-marginal
+while allowing perturbations only in the conditional law P(Y |X).
+4
+
+PAGE 5
+In the context of inverse problems, regularization and Bayesian formulations remain the standard
+for stabilizing ill-posed reconstructions [7], while data-driven methods increasingly integrate machine
+learning [5, 25, 42, 46]. These range from purely learned reconstruction maps [1, 30, 63] to learned
+regularizers [23, 24, 32, 35] and plug-and-play schemes that substitute a denoiser for the proximal
+step [48, 55], with Bayesian and generative formulations used to quantify reconstruction uncertainty
+[6, 45]. Comparative and convergence-oriented studies of learned regularizers [28, 43] and a survey of
+diffusion-based approaches [18] give broader overviews.
+Optimal transport-based methods are gaining popularity in this setting [14].
+The Wasserstein
+distance itself finds applications in various aspects of inverse problems, serving as a regularization
+term [13], appearing in a projection-based method [26], or as a loss function [2], and it underlies
+adversarial regularizers [39] as well as OT-based generative models [4, 22, 47]. More recently, flow
+matching has been used to build solvers for inverse problems [40, 50].
+Our structured DRO framework explicitly models uncertainty in the different components of the
+measurement process, extending standard DRO to general data spaces and incorporating the possi-
+ble ill-posedness and non-linearity of an inverse problem, while exploiting their properties through
+structured perturbation sets and providing dual formulations yielding interpretable regularization.
+2
+Structured Distributionally Robust Optimization
+This section introduces our framework for structured distributionally robust optimization. We begin
+by specifying the admissible perturbations through an S-parametrized family of sets Ks ⊂P(S). The
+set Ks contains all perturbations of the empirical distribution µ∗∈P(S) that can be chosen by the
+adversary in (1). Note that since Ks depends explicitly on s, the adversary can choose perturbations
+depending on the input s. In the rest of the paper, a ∗denotes that we assume the measure is fixed.
+More concretely, we characterize admissible perturbations of µ∗obtained through the action of
+µ∗-measurable kernels πS|S : S →P(S) such that πS|S=s ∈Ks for µ∗-a.e. s ∈S as
+π[µ∗](A) :=
+Z
+πS|S=s(A) dµ∗(s)
+A ⊂S Borel set.
+With a slight abuse of notation, we will denote such measurable kernels by πS|S : S →Ks; however, we
+warn the reader that they should be intended to map to Ks for µ∗-a.e. s ∈S. Note that π[µ∗] ∈P(S)
+is simply the second marginal of the joint distribution µ∗⊗πS|S=s.
+We now consider family of admissible kernels πS|S whose action lies within an ε-ball around µ∗,
+that is the set
+ΩK,c,ε :=
+n
+πS|S : S →Ks,
+Z
+S
+Z
+S
+c(s, r) dπS|S=s(r) dµ∗(s) ≤ε
+o
+.
+Note that if Ks = P(S), then ΩK,c,ε is simply the ε-Wasserstein ball around µ∗. However, in the
+case of more restrictive choices on Ks, this is no longer the case. Our focus is on distributionally
+robust optimization problems defined by such type of perturbations. Given a parameter space G and
+a measurable loss function ℓ: S × G →[0, ∞), the structured Wasserstein-DRO (W-DRO) problem is
+formulated as follows.
+Definition 2.1. The structured W-DRO problem is
+inf
+G∈G
+sup
+πS|S∈ΩK,c,ε
+Z
+S
+Z
+S
+ℓ(r, G) dπ[µ∗](r)
+or equivalently
+inf
+G∈G
+sup
+πS|S∈ΩK,c,ε
+Z
+S
+Z
+S
+ℓ(r, G) dπS|S=s(r) dµ∗(s).
+(3)
+2.1
+Structured DRO Applied to Inverse Problems
+In the context of inverse problems, where the sample space is S = X ×Y (we will often write s = (x, y)
+to indicate an element of S), the choice of admissible perturbations Ks ⊂P(X × Y ) should reflect the
+5
+
+PAGE 6
+type of robustness we aim to enforce in the solution. This makes the choice of Ks inherently problem-
+dependent. We adopt a Bayesian interpretation of the inverse problem, where the data acquisition
+process induces a joint distribution µ ∈P(X × Y ) over the parameter and measurement spaces. From
+this perspective, the goal is to identify worst-case posterior distributions with respect to different
+classes of perturbations Ks.
+Throughout, µ denotes a probability measure on X × Y while µX, µY are its marginals and
+conditional law µY |X : X →P(Y ), while π is reserved for couplings and perturbation kernels on the
+sample space S × S that transport such measures.
+We distinguish four main types of perturbations:
+1. X-perturbations: These perturb the distribution of the inputs. For example, via transforma-
+tions, shifts, or frequency modifications. Here,
+K(x,y) ⊂{µX ⊗µ∗
+Y |X : µX ∈P(X)}
+where µ∗
+Y |X is an estimated posterior and can be chosen, for example, as µ∗
+Y |X=u = δHu. Note
+that in this case K(x,y) is independent of the input (x, y).
+2. Y -perturbations: These model changes in the distribution of the measurements, effectively
+perturbing the observed data. In this case,
+K(x,y) ⊂{µY ⊗µ∗
+X|Y : µY ∈P(Y )}
+where µ∗
+X|Y is a given estimated likelihood such as for example µ∗
+X|Y =v = δH†v where H† denotes
+some pseudo-inverse of H. Note that also in this case K(x,y) is independent on the input (x, y).
+3. Y |X-perturbations: These describe perturbations in the conditional distribution Y |X, which
+are particularly relevant for inverse problems as it mimics the data acquisition process. It can
+include different types of noise present in the measurements as well as other types of model
+imperfections, such as an imperfect forward model. A key example is additive noise in measure-
+ments as in (2). The admissible set is defined as all joint distributions whose marginal over X
+matches a given reference. In particular,
+K(x,y) ⊂{δx ⊗µY |X : µY |X ∈P(Y )}.
+Note that if equality holds above, then the set of admissible perturbations reduces to the set of
+µ ∈P(S) with marginal µ∗
+X. Moreover, in this case, the set K(x,y) depends on x. It fixes x by
+allowing only perturbations in the conditional law µY |X=x.
+4. X|Y -perturbations: Similar to the previous class, but instead focused on the inverse conditional
+process X|Y . The admissible set here consists of
+K(x,y) ⊂{δy ⊗µX|Y : µX|Y ∈P(X)}.
+In this work, we focus on Y|X-perturbations, due to their particular relevance in modeling
+measurement noise. As an example, consider an inverse problem with a general noisy forward operator
+y = Hδx where Hδ : X →Y incorporates the uncertainty of the measurements.
+Different noise
+models correspond to different choices of Hδ, and in the structured DRO framework, that leads to a
+corresponding set of joint distributions
+Ks =
+n
+δx ⊗µHδ
+Y |X : Hδ ∈H
+o
+,
+where H denotes the class of admissible stochastic forward operators and µHδ
+Y |X ∈P(Y ) is the condi-
+tional distribution of v given u, defined by µHδ
+Y |X=x = Law(Hδx) with Law(Z) denoting the probability
+distribution of a random variable Z. Note that, for any ϕ ∈C(S) and πS|S ∈Ks it holds that
+π[µ∗](φ) =
+Z
+ϕ(u, v) dµHδ
+Y |X=u(v) dδx(u) dµ∗(x, y) =
+Z
+ϕ(x, v) dµHδ
+Y |X=x(v) dµ∗
+X(x)
+6
+
+PAGE 7
+where µ∗
+X is the first marginal of µ∗, implying thus that π[µ∗] = µ∗
+X ⊗µHδ
+Y |X. Therefore admissible
+perturbations are the ones that keep µ∗
+X fixed and perturb each measurement y ∈Y given x ∈X as
+µHδ
+Y |X=x. As a consequence, as we will discuss in Section 4.2, the W-DRO problem (3) searches for
+ambiguities in a conditional Wasserstein ball [15].
+The set Ks accommodates any noise model expressible via a stochastic forward operator Hδ,
+allowing robust reconstructions under a wide range of uncertainties.
+Example 2.1. Noise models in inverse problems can be formulated in the structured DRO framework
+as follows.
+(a) Additive Gaussian noise. The forward operator is Hδx = Hx + δ with δ ∼N(0, Σ) and
+Σ ≻0, so the conditional distribution is µHδ
+Y |X=x(y) = Law(Hx + δ)(y) = N(Hx, Σ)(y). We
+recover this model with Ks = {δx ⊗N(Hx, Σ) : Σ ⪯M1} for 0 ≺M1.
+(b) Poisson noise. Poisson noise models photon-counting errors, with applications in low-dose CT
+and other photon-limited imaging. The noisy operator is Hδx ∼
+1
+I0 Pois(I0Hx) for Hx ≥0,
+where I0 > 0 is the photon count. The conditional distribution is then µHδ
+Y |X=x =
+1
+I0 Pois(I0Hx),
+and Ks = {δx ⊗1
+I0 Pois(I0Hx) : I0 ≤M2} with M2 > 0.
+One can already note that the sets Ks in the noise models defined before are neither convex nor weak*
+closed. Even if not relevant for the primal problem, this will be relevant for the next section, where
+strong duality is established under such assumptions. To resolve such an issue, it is enough to consider
+the weak*-closed convex envelope of Ks.
+3
+Duality Theory for Structured DRO
+The inner worst-case term in a DRO problem maximizes the expected loss over the entire ambiguity
+set, an infinite-dimensional family of probability measures, and cannot be computed directly. Under
+suitable assumptions, strong duality rewrites this supremum over measures as a finite-dimensional
+minimization over a dual variable, reducing the min-max problem to a minimization. The resulting dual
+representation also reveals the structure of the worst-case risk and makes the link between robustness
+and regularization explicit, which we develop in the following sections, and is essential for solving (3).
+Defining
+I(πS|S, G) :=
+Z
+S
+Z
+S
+ℓ(r, G) dπS|S=s(r) dµ∗(s),
+the primal problem (3) can be thus rewritten as
+IΩK,c,ε(G) :=
+sup
+πS|S∈ΩK,c,ε
+I(πS|S, G).
+For the dual formulation, define
+∆G,ℓ,c :=
+n
+(λ, h) : λ ∈R+, h ∈C(S × S),
+Z
+S
+Z
+S
+h(s, r) dπS|S=s(r) dµ∗(s)
+≥
+Z
+S
+Z
+S
+ℓ(r, G) −λc(s, r)
+
+dπS|S=s(r) dµ∗(s)
+∀πS|S : S →Ks
+o
+.
+We first prove the following weak duality result.
+Proposition 3.1 (Weak duality). Assume S is a compact, Polish space, c : S × S →R+ is non-
+negative, continuous, and such that c(s, r) = 0 if and only if s = r, and ℓ(·, G) is continuous. Then
+IΩK,c,ε(G) ≤
+inf
+(λ,h)∈∆G,ℓ,c λε +
+sup
+πS|S:S→Ks
+Z
+S
+Z
+S
+h(s, r)dπS|S=s(r)dµ∗(s).
+7
+
+PAGE 8
+Proof. For any πS|S ∈ΩK,c,ε and (λ, h) ∈∆G,ℓ,c we have
+λε +
+Z
+S
+Z
+S
+h(s, r)dπS|S=s(r)dµ∗(s) ≥λε +
+Z
+S
+Z
+S
+ℓ(r, G) −λc(s, r)dπS|S=s(r)dµ∗(s)
+=
+Z
+S
+Z
+S
+ℓ(r, G)dπS|S=s(r)dµ∗(s) + λ
+
+ε −
+Z
+S
+Z
+S
+c(s, r)dπS|S=s(r)dµ∗(s)
+
+≥
+Z
+S
+Z
+S
+ℓ(r, G)dπS|S=s(r)dµ∗(s) = I(πS|S, G).
+Taking first the supremum with respect to πS|S ∈ΩK,c,ε and then the infimum over (λ, h) ∈∆G,ℓ,c,
+we conclude that
+IΩK,c,ε(G) =
+sup
+πS|S∈ΩK,c,ε
+I(πS|S, G) ≤
+inf
+(λ,h)∈∆G,ℓ,c λε +
+sup
+πS|S∈ΩK,c,ε
+Z
+S
+Z
+S
+h(s, r)dπS|S=s(r)dµ∗(s)
+≤
+inf
+(λ,h)∈∆G,ℓ,c λε +
+sup
+πS|S:S→Ks
+Z
+S
+Z
+S
+h(s, r)dπS|S=s(r)dµ∗(s)
+which is the claimed bound.
+We are now ready to state the strong duality result. For the proof, we refer the reader to Appendix
+B.1.
+Theorem 3.1 (Strong duality). Assume S is a compact, Polish space, c : S × S →R+ is non-
+negative, continuous, and such that c(s, r) = 0 if and only if s = r, and ℓ(·, G) is continuous. Assume
+additionally that Ks is non-empty, weakly* closed and convex for µ∗−a.e. s ∈S. Then if ΩK,c,ε is
+also non-empty it holds that
+IΩK,c,ε(G) =
+inf
+(λ,h)∈∆G,ℓ,c λε +
+sup
+πS|S:S→Ks
+Z
+S×S
+h(s, r)dπS|S=s(r)dµ∗(s).
+Remark 3.1. We already mentioned here that the strong duality result is true also for non-compact
+S, lower semicontinuous cost and upper semicontinuous losses ℓ(·, G), by following the same proof
+strategy of [12]. However, in order to keep the paper concise, we prefer to cover in detail only the case
+of compact S and continuous c and ℓ.
+♢
+3.1
+Dual Problems for Inverse Problems with Targeted Perturbations
+In this section, we specialize the results obtained in the previous section to perturbations that are
+relevant for inverse problems reconstructions. In particular, we derive explicit formulas in case the
+perturbations are in X × Y , Y |X, and X. We start with perturbations in the joint space; the proof is
+straightforward and can be found in Appendix B.2.
+Theorem 3.2 (Strong duality for perturbations in P(S)). Let Ks = P(S) for every s, and suppose
+all assumptions in Theorem 3.1 hold. Then
+IΩK,c,ε(G) = inf
+λ≥0 λε +
+Z
+S
+ϕλ,G(s)dµ∗(s),
+where
+ϕλ,G(x, y) :=
+sup
+(u,v)∈S
+ℓ(u, v, G) −λc((x, y), (u, v)).
+When Ks = P(S), the structured DRO problem reduces to the standard DRO problem, and the
+dual representation above recovers the standard DRO strong duality reformulation established by
+Blanchet and Murthy [12, Theorem 1b]. The statement is a direct specialization of Theorem 3.1 to
+Ks = P(S): since P(S) contains all Dirac measures on S, the supremum over kernels πS|S=s : S →Ks
+in the general dual collapses to the pointwise supremum over S appearing in ϕλ,G, and the argument
+is straightforward. In the inverse problems setting S := X × Y , this corresponds to perturbations in
+the joint probability space of X and Y .
+We now consider perturbations only on the conditional distribution P(Y |X), and we derive a
+finite-dimensional dual in this case. We refer to this model as P(Y |X)-DRO.
+8
+
+PAGE 9
+Theorem 3.3 (Strong duality for perturbations in P(Y |X)). Let K(x,y) = {µ = δx ⊗µY |X=x, µY |X ∈
+P(Y |X)} where P(Y |X) denotes the set of Markov kernels X →P(Y ), and suppose all assumptions
+in Theorem 3.1 hold. Then
+IΩK,c,ε(G) = inf
+λ≥0 λε +
+Z
+S
+ϕλ,G(x, y)dµ∗(x, y),
+where
+ϕλ,G(x, y) := sup
+v∈Y
+ℓ(x, v, G) −λc((x, y), (x, v)).
+Proof. We first prove the inequality ≤. Writing s = (x, y) and r = (u, v), note that
+{(λ, h) : λ ∈R+, h(x, y, u, v) = ϕλ,G(x, y)} ⊆∆G,ℓ,c.
+Therefore, it holds that
+IΩK,c,ε(G) =
+inf
+(λ,h)∈∆G,ℓ,c λε +
+sup
+πS|S:S→Ks
+Z
+S×S
+h(r, s)dπS|S=s(r)dµ∗(s)
+≤inf
+λ≥0 λε +
+sup
+πS|S:S→Ks
+Z
+S
+ϕλ,G(x, y)dµ∗(x, y)
+= inf
+λ≥0 λε +
+Z
+S
+ϕλ,G(x, y)dµ∗(x, y)
+as we wanted to prove. Now, we prove the opposite inequality. Note that, for every (λ, h) ∈∆G,ℓ,c we
+have
+Z
+h(s, r) dπS|S=s(r)dµ∗(s) ≥
+Z
+ℓ(r, G) −λc(s, r) dπS|S=s(r)dµ∗(s),
+∀πS|S : S →Ks.
+where in this case K(x,y) = {µ = δx ⊗µY |X=x, µY |X ∈P(Y |X)}. Using this, we obtain that
+inf
+(λ,h)∈∆G,ℓ,c λε +
+sup
+πS|S:S→Ks
+Z
+S
+Z
+X
+Z
+Y
+h(x, y, u, v) dπS|S=s(r)dµ∗(s)
+≥
+inf
+(λ,h)∈∆G,ℓ,c λε +
+sup
+πS|S:S→Ks
+Z
+S
+Z
+X
+Z
+Y
+ℓ(r, g) −λc(s, r)dπS|S=s(r)dµ∗(s).
+Now, let us note that
+{(x, y) 7→δx ⊗δφ(x,y,u) : φ : S × X →Y measurable} ⊂{πS|S : S →Ks}.
+Therefore, continuing the previous estimate, we get that
+inf
+(λ,h)∈∆G,ℓ,c λε +
+sup
+φ:S×X→Y
+Z
+S
+Z
+X
+Z
+Y
+h(x, y, u, v) dπS|S=s(r)dµ∗(s)
+≥
+inf
+(λ,h)∈∆G,ℓ,c λε +
+sup
+φ:S×X→Y
+Z
+S
+ℓ(x, φ(s, x), G) −λc(s, x, φ(s, x))dµ∗(x, y)
+=
+inf
+(λ,h)∈∆G,ℓ,c λε +
+Z
+S
+sup
+φ:S×X→Y
+[ℓ(x, φ(s, x), G) −λc(s, x, φ(s, x))]dµ∗(x, y)
+=
+inf
+(λ,h)∈∆G,ℓ,c λε +
+Z
+S
+sup
+v∈Y
+[ℓ(x, v, G) −λc(x, y, x, v)]dµ∗(x, y)
+as we wanted to prove. Note that the first equality above is a consequence of the measurable selection
+principle (see, for example, [52, Theorem 3A]), since the loss is continuous.
+Theorem 3.4 (Strong duality for perturbations in P(X)). Let K(x,y) = {µX ⊗µ∗
+Y |X=x : µX ∈P(X)}
+and suppose all assumptions in Theorem 3.1 hold. Then
+IΩK,c,ε(G) = inf
+λ≥0 λε +
+Z
+S
+ϕλ,G(x, y)dµ∗(x, y),
+where
+ϕλ,G(x, y) := sup
+u∈X
+Z
+Y
+ℓ(u, v, G) −λc((x, y), (u, v)) dµ∗
+Y |X=u(v)
+
+.
+9
+
+PAGE 10
+The proof is given in Appendix B.3. The argument mirrors that of Theorem 3.3, the one difference
+being that the dependence of µ∗
+Y |X=u on u ∈X prevents the supremum from being taken inside the
+integral.
+One might hope to obtain explicit expressions for the dual potentials h for any arbitrary admissible
+set Ks. However, the proofs in Theorems 3.2, 3.3, and 3.4, rely on the assumption that K is convex
+and contains the relevant Dirac measures, either on X, Y , or on X × Y . Since the convex envelope of
+the set of Dirac measures {δx : x ∈X} is already the entire probability space P(X), any Ks satisfying
+these requirements must be large enough to include P(X) (or P(Y ) or P(X × Y ), depending on the
+perturbation set).
+4
+Explicit Dual Representations and Connections to Regular-
+ization
+The dual formulations in the previous section are not yet explicit enough to be interpretable or to
+reveal connections to classical regularization.
+We now derive explicit upper bounds on the worst-
+case risk for each perturbation space, assuming a quadratic loss and cost with a Lipschitz inverse
+operator. Throughout this section let S := X × Y with X = Rn and Y = Rm, let G = Lip(Y ; X)
+with Lipschitz constant LG, and define the loss ℓ(x, y, G) := ∥G(y) −x∥2
+2 and joint transportation cost
+cX×Y ((x, y), (u, v)) := ∥(u, v) −(x, y)∥2
+2 (see Remark 3.1 for a note on the compactness of S). The
+bounds connect to Tikhonov-type regularization and, for structured perturbation sets, reveal how the
+perturbation class shapes the data-fidelity and regularization terms.
+4.1
+Perturbations in P(X × Y )
+The result below provides an explicit upper bound for the worst-case risk under Wasserstein pertur-
+bations when all joint distributions are admissible (i.e., Ks = P(S)). We will refer to this model as
+joint DRO, but note that the dual in Theorem 3.2 recovered the standard DRO formulation.
+Theorem 4.1 (Explicit form for perturbations in P(S)). In addition to the assumptions in Theo-
+rem 3.1, take Ks = P(S) for every s ∈S. Then
+inf
+G∈G IΩK,c,ε(G) ≤inf
+G∈G
+ sZ
+S
+∥G(y) −x∥2
+2 dµ∗(x, y) +
+q
+ε(1 + L2
+G)
+!2
+.
+Proof. First, apply Theorems 3.1 and 3.2 to obtain:
+IΩK,c,ε(G) = inf
+λ≥0 λε +
+Z
+S
+ϕλ,G(x, y) dµ∗(x, y),
+(4)
+where
+ϕλ,G(x, y) =
+sup
+(u,v)∈S
+
+∥G(v) −u∥2 −λ(∥(u −x, v −y)∥2)
+
+.
+Write r := G(y) −x and (∆u, ∆v) = (u −x, v −y). By the triangle inequality, Lipschitz condition,
+and Cauchy-Schwarz,
+∥G(v) −u∥2 = ∥r + (G(v) −G(y)) −∆u∥2
+≤∥r∥2 + LG∥∆v∥2 + ∥∆u∥2 ≤∥r∥2 +
+q
+1 + L2
+G · ∥(∆u, ∆v)∥2.
+Writing t := ∥(∆u, ∆v)∥2 ≥0 and L := 1 + L2
+G, the supremum is bounded by supt≥0((∥r∥2 +
+√
+L t)2 −
+λt2), which is finite for λ > L and gives
+ϕλ,G(x, y) ≤∥r∥2
+2 +
+L
+λ −L∥r∥2
+2 =
+λ
+λ −L∥r∥2
+2.
+(5)
+Substituting (5) into (4) with R :=
+R
+S ∥G(y) −x∥2
+2 dµ∗gives IΩK,c,ε(G) ≤infλ>L λε +
+λ
+λ−LR. The
+first-order condition yields the minimizer λ∗= L+
+p
+LR/ε, and substituting it back gives IΩK,c,ε(G) ≤
+√
+R +
+p
+ε(1 + L2
+G)
+2
+. Taking the infimum over G on both sides yields the result.
+10
+
+PAGE 11
+4.2
+Perturbations in P(Y |X)
+We now find an explicit form for perturbations that affect only the conditional distribution of the
+measurement variable Y given the input X.
+Theorem 4.2 (Explicit form for perturbations in P(Y |X)). Under the assumptions of Theorem 3.3,
+inf
+G∈GIΩK,c,ε(G) ≤inf
+G∈G
+ sZ
+S
+∥G(y) −x∥2
+2 dµ∗(x, y) + LG
+√ε
+!2
+.
+Proof. For our choices of loss and cost, the dual representation of IΩK,c,ε(G) is
+IΩK,c,ε(G) = inf
+λ≥0 λε +
+Z
+S
+ϕλ,G(x, y)dµ∗(x, y),
+(6)
+where
+ϕλ,G(x, y) = sup
+v∈Y
+(∥G(v) −x∥2 −λ∥y −v∥2)
+by Theorems 3.1 and 3.3. Introduce the variable change ∆:= v −y and r := G(y) −x. Let δ∆:=
+G(v) −G(y), so that ∥δ∆∥≤LG∥∆∥by the Lipschitz condition. Then
+∥G(v) −x∥2 = ∥r + δ∆∥2 = ∥r∥2 + 2rT δ∆+ ∥δ∆∥2.
+Since ∥δ∆∥2 ≤L2
+G∥∆∥2, we bound the supremum over v by optimizing over δ∆∈Rn and ∆∈Y
+subject to ∥δ∆∥≤LG∥∆∥, which gives
+sup
+∆∈Y, ∥δ∆∥≤LG∥∆∥
+
+∥r∥2 + 2rTδ∆+ ∥δ∆∥2 −λ∥∆∥2	
+.
+Substituting δ∆= LG∆· ˆn for the optimal unit direction ˆn = r/∥r∥and maximizing the resulting
+concave quadratic in ∥∆∥, the supremum is finite for λ > L2
+G and yields
+ϕλ,G(x, y) ≤∥r∥2 +
+L2
+G
+λ −L2
+G
+∥r∥2 .
+(7)
+Substituting (7) into (6) and writing R :=
+R
+S ∥G(y) −x∥2 dµ∗gives
+IΩK,c,ε(G) ≤inf
+λ>L2
+G
+λε + R +
+L2
+G
+λ −L2
+G
+R.
+(8)
+The first-order condition ε = L2
+GR/(λ −L2
+G)2 gives the minimizer λ∗= L2
+G + LG
+√
+R/√ε, and substi-
+tuting it into (8) yields IΩK,c,ε(G) ≤(
+√
+R + LG
+√ε)2. Taking the infimum over G on both sides yields
+the stated result.
+In the bound of Theorem 4.2, we recognize a data-fidelity term together with a Tikhonov-type
+penalty: it penalizes reconstructions with a large Lipschitz constant LG, and scales with the Wasser-
+stein radius ε. Thus, it suppresses the directions along which the inverse most amplifies noise. For a
+linear inverse G, this would correspond to penalizing its largest singular value.
+Comparing with the joint bound of Theorem 4.1, restricting perturbations to P(Y |X) replaces the
+factor
+p
+1 + L2
+G by LG. This removes the unit contribution that, in the joint case, corresponds to
+the adversary’s freedom to transport mass in the X-direction. Fixing the X-marginal suppresses this
+component of the penalty. When LG ≫1 and the bounds use the same cost and loss functions, the
+two bounds will converge. Otherwise, the P(Y |X) bound will lie below the joint one.
+The same form arises in [9], who enforce the conditional structure in a different manner. Instead
+of restricting the admissible set, they keep Ks = P(S) and instead modify the transportation cost to
+cY |X((x, y), (u, v)) =
+(
+∥y −v∥2
+2,
+if x = u,
+∞,
+else.
+(9)
+which assigns infinite cost to transport that perturbs the input, thus allowing perturbations only in the
+measurement space. The two formulations impose the same constraint in different ways. Our method
+11
+
+PAGE 12
+imposes it at the level of the ambiguity set, removing the inadmissible measures from Ks, while [9]
+imposes it at the level of the cost, keeping these measures in Ks but making them infeasible. Repeating
+the proof of Theorem 4.1 with the cost (9) in place of cX×Y yields the same bound as in Theorem 4.2.
+Thus, the two formulations recover the same explicit upper bound on the worst-case risk. Reducing
+X and Y to Rn and R and assuming G to be linear, turns the inequalities in the proof into equalities
+and recovers the exact estimator of [9], an L2-regularized form of the mean-squared-error estimator.
+Replacing the squared norm by an Lp-cost generalizes this to Lq regularization with q ∈(1, ∞] and
+1/p + 1/q = 1.
+In this sense ,our structured framework contains the standard Wasserstein DRO
+formulation as the special case Ks = P(S) with a conditional norm-based cost.
+This observation is not surprising. For P(Y |X) perturbations, it is easy to check that our ambiguity
+set simply constrains perturbations in the ε-ball of the conditional Wasserstein distance between µ∗
+X ⊗
+µ∗
+Y |X and µ∗
+X ⊗µY |X [15]. On the same line, the corollary below shows that the cost (9) induces a
+conditional Wasserstein distance, which clarifies in what sense it enforces the conditional constraint.
+Corollary 4.2.1. Let the cost function cY |X be defined as above and X ⊂Rn and Y ⊂Rm to be
+compact sets. Then the corresponding Wasserstein distance on X × Y coincides with the conditional
+Wasserstein distance
+Wcond(µ∗, µ) :=
+Z
+X
+W(µ∗
+Y |X=x, µY |X=x)dµ∗
+X(x)
+with cost cY (y, v) := ∥y −v∥2
+2. More precisely, defining WcY |X(µ∗, µ) as the Wasserstein distance with
+cost cY |X we have:
+i) WcY |X(µ∗, µ) < ∞if and only if µ∗
+X = µX;
+ii) in this case, WcY |X(µ∗, µ) = Wcond(µ∗, µ).
+The proof can be found in Appendix C.
+By part (i), a finite transport cost forces µX = µ∗
+X, so the infinite-cost in [9] fixes the X-marginal
+in the same way that we do directly through Ks. By part (ii), the resulting distance is the conditional
+Wasserstein distance Wcond, which compares the conditionals µY |X for each x separately and averages
+over the fixed input distribution.
+The two formulations thus fix the same marginal and give the
+same explicit upper bound, but use different distances on the admissible conditional distributions.
+We remind the reader that for any µ∗, µ ∈P(X × Y ) with a common X-marginal it holds that
+W(µ∗
+X×Y , µX×Y ) ≤Wcond(µ∗
+X×Y , µX×Y ), where the inequality can be strict [15].
+4.3
+Perturbations in P(X) and P(X|Y )
+We consider perturbations in P(X) by considering K(x,y) = {µ = µX ⊗µ∗
+Y |X, µX ∈P(X)}.
+By Theorems 3.1 and 3.4, the dual potential takes the form ϕλ,G(x, y) = supu∈X
+R
+Y ℓ(u, v, G) −
+λc((x, y), (u, v)) dµ∗
+Y |X=u(v). Unlike the P(Y |X) setting, both the loss and the measure µ∗
+Y |X depend
+on u, so the supremum does not reduce to a concave quadratic in a single variable. Consequently,
+no tractable closed form for IΩK,c,ε appears obtainable without additional assumptions on the family
+{µ∗
+Y |X=u}u∈X.
+Since no closed form is available for P(X)-perturbations, one could instead consider perturbations
+in P(X|Y ) by considering the ambiguity set K(x,y) = {µ = δy ⊗µX|Y =y, µX|Y ∈P(X|Y )}. By
+Theorems 3.1 and 3.3, the dual potential is ϕλ,G(x, y) = supu∈X{∥G(y) −u∥2 −λ∥x −u∥2}.
+In
+contrast to the P(X) case, fixing the Y -marginal keeps y and G(y) fixed inside the supremum, leaving
+no integral over a conditional, so it reduces to a concave quadratic in u for λ > 1. Since the perturbed
+variable is now directly present in the loss rather than through G, the argument of Theorem 4.2 carries
+over with LG replaced by 1, yielding
+inf
+G∈G IΩK,c,ε(G) ≤inf
+G∈G
+ sZ
+S
+∥G(y) −x∥2 dµ∗+ √ε
+!2
+.
+The bound mirrors Theorem 4.2 but the regularization term carries no factor of LG yielding a weaker,
+structurally uniform penalty.
+12
+
+PAGE 13
+Figure 3: Percentage gap between the joint and P(Y |X)-DRO bounds as the Lipschitz constant LG of
+the fixed inverse grows, for the diagonal operator (left) and the backward heat equation (right). The
+gap is largest at small LG and closes monotonically, since the P(Y |X) bound replaces
+p
+1 + L2
+G by
+LG. The two problems start at nearly the same LG but different gaps (27.6% vs. 3.9%) because the
+heat-equation inverse has nonzero fidelity F, which enters only the denominator.
+5
+Comparison of DRO Methods
+We validate the findings of Section 4.2 on two inverse problems of increasing ill-posedness. For each
+we fix an approximate inverse G and study how the joint DRO bound (Theorem 4.1) and the P(Y |X)
+bound (Theorem 4.2) behave as the Lipschitz constant LG grows:
+joint:
+
+F +
+q
+ε(1 + L2
+G)
+2
+,
+P(Y |X) :
+
+F + LG
+√ε
+2
+,
+where F =
+qR
+∥G(y) −x∥2 dµ∗is the shared fidelity term, so that the two bounds differ only in the
+regularization.
+5.1
+Problem Setup
+In both experiments we draw Nx = 500 samples for x and, for each x, Nu = 150 samples of u, all drawn
+from a dataset of 5000 points generated by µ∗
+X = N(¯x, σ2
+XI) with σX = 0.1 and ¯x(t) = sin(3πt) on the
+grid of each problem. Measurements are noiseless, y = H(x) with H : R100 →R100, so that F reflects
+only the misfit between G and the true inverse, isolating the effect of LG. We set ε = 1.0 and compare
+the bounds through gap(%) = 100 · (√joint −
+p
+P(Y |X))/√joint = 100 · √ε
+p
+1 + L2
+G −LG
+
+/(F +
+p
+ε(1 + L2
+G)), which we study not by varying LG directly but through a parameter controlling each
+problem’s ill-posedness.
+The diagonal operator (Hx)k = σkxk, σk = (1 + k)−p, k = 0, . . . , 99, has polynomially decaying
+singular values and exact inverse G(y) = y/σk. The reconstruction is then perfect, so F = 0, and
+LG = maxk σ−1
+k
+= 100p. We sweep p ∈[0.01, 1]. The backward heat equation on t ∈[−1, 1] at diffusion
+time Tdiff = 0.05 has a forward operator
+(Hx)(tk) = (x ∗K)(tk) ∆t,
+K(t) =
+1
+2√πTdiff
+exp
+
+−
+t2
+4Tdiff
+
+,
+and the signal is sampled on a uniform grid of 100 points. The approximate inverse is the Tikhonov-
+regularized Fourier deconvolution G(y) = F−1 ˆK ˆy/(| ˆK|2 + α)
+
+, α = 5 × 10−4, as approximate inverse.
+Here the regularization makes G inexact, so F > 0 even without noise, and LG =
+1
+2√α. We sweep
+α ∈[10−5, 10−1].
+5.2
+Results
+Figure 3 shows the gap for both problems. It is largest at small LG and closes monotonically as LG
+grows, since the P(Y |X) bound replaces
+p
+1 + L2
+G by LG. The diagonal operator starts at 27.6%
+13
+
+PAGE 14
+and the heat equation at 3.9%, even though both begin at nearly the same LG (1.05 and 1.21). The
+difference comes from the fidelity F, which is only present in the denominator: the exact diagonal
+inverse has F = 0 and attains the maximal gap at that LG, whereas the heat-equation inverse has a
+large F that dilutes the same absolute regularization difference. The extra conservatism of joint DRO
+is thus due entirely to the +1 in
+p
+1 + L2
+G, significant only when LG is small. Once LG is large, both
+terms are dominated by LG
+√ε and the bounds nearly coincide. Since LG
+√ε ≤
+p
+ε(1 + L2
+G) for every
+LG, P(Y |X)-DRO is never larger than joint DRO and strictly smaller at finite LG, most noticeably
+for well-posed problems. For severely ill-posed problems or large reconstruction error, it adds little.
+6
+Applications to Inverse Problems
+In this section, we show examples of implementations of the framework across inverse problems of
+increasing ill-posedness, as well as a robust approximation/simulator of an operator to demonstrate
+the flexibility of the framework beyond inverse problems.
+All examples consider perturbations in
+P(Y |X), except the robust simulator, which perturbs P(X|Y ). In all experiments, out-of-distribution
+performance is evaluated by testing on distributional shifts unseen during training. An additional
+example validating robustness in P(X × Y ) is provided in Appendix A. The code will be available
+upon publication.
+6.1
+Computational Framework
+In this subsection, we describe the framework used to implement structured DRO for inverse problems.
+6.1.1
+Model
+To address computational challenges and improve optimization properties, we consider the entropy-
+regularized Wasserstein distance W δ [17, 49] (also known as the Sinkhorn distance) defined as
+W δ(µ1, µ2) :=
+inf
+π∈Π(µ1,µ2)
+Z
+S×S
+c(s, r) + δ log
+dπ
+dη
+
+dπ(s, r)
+where δ > 0 is a regularization parameter, µ1, µ2 ∈P(S) and η ∈P(S ×S) a chosen reference measure
+such that η = η1 ⊗η2 and µ1 ≪η1, µ2 ≪η2.
+We approximate the structured P(Y |X)-DRO objective by the conditional Sinkhorn DRO of [60].
+Concretely, we use the Sinkhorn distance with cost c = cY |X defined in (9). As outlined in Section
+4.2, this is equivalent to a Sinkhorn regularization of the P(Y |X)-DRO.
+We choose the reference measure η(s, r) = µ∗(s) ⊗ηS|S=s(r) so that the primal problem becomes
+Ωc,ε,δ :=
+n
+πS|S=s ∈P(S) for µ∗-a.e s ∈S :
+Z
+S
+Z
+S
+cY |X(s, r) + δ log
+dπS|S=s
+dηS|S=s
+
+dπS|S=s(r)dµ∗(s) ≤ε
+o
+and
+I(πS|S, G) :=
+Z
+S
+Z
+S
+ℓ(r, G) dπS|S=s(r)dµ∗(s),
+I = min
+G∈G
+min
+πS|S∈Ωc,ε,δ I(πS|S, G).
+The loss is given by the mean squared error between the target and the predicted reconstruction, i.e.
+ℓ(x, y; G) = ∥x −G(y)∥2
+2.
+We further specify the reference measure as ηS|S=(x,y)(u, v) = µ∗
+X(u) ⊗ηY |X=x(v) with ηY |X=x a
+Lebesgue measure. By [60], this reduces to the dual formulation
+I = inf
+G∈G inf
+λ≥0 λˆε
++ λδ
+Z
+S
+log
+Z
+X
+Z
+Y
+exp
+∥u −G(v)∥2
+2
+λδ
+
+dN(Hx, δ2I)(v) dµ∗
+X(u)
+
+dµ∗(x, y)
+(10)
+with ˆε = ε + δ
+R
+log
+R
+exp(−c(s, r)/δ) dηS|S=s(r)dµ∗(s) an adjusted Wasserstein radius.
+14
+
+PAGE 15
+6.1.2
+Algorithm
+We follow [60] to compute the Sinkhorn DRO objective, with the optimal λ determined via bisection
+search.
+At each candidate λ, the corresponding optimal G is obtained using a Biased Stochastic
+Mirror Descent (BSMD) algorithm with gradient updates approximated by a stochastic gradient (SG)
+estimator.
+The bisection interval is updated by comparing objective values at the midpoint and
+boundaries, and terminates once the interval width falls below a pre-specified tolerance.
+6.1.3
+Experimental Setup
+Throughout, training data consists of noise-free paired samples (xi, yi) ∈X ×Y generated via a known
+forward operator H as yi = Hxi. The models are trained using Adam and an initial learning rate γ.
+During bisection optimization, the learning rate remains constant. The final model is trained using a
+scheduler with linear warmup from 0.1γ to γ over the first few epochs, followed by cosine annealing to
+10−6.
+We compare against two baselines. For experiments with linear parameterizations, the baseline
+is a Tikhonov-regularized pseudo-inverse Tα = (HT H + αLT L)−1HT , where L is the first-difference
+matrix and α > 0 is selected by minimizing the root mean square error (RMSE) on a validation set.
+For nonlinear parameterizations, the baseline uses the same architecture as our method (multilayer
+perceptron (MLP) or UNet, depending on the experiment) but is trained with an MSE loss on noisy
+paired data yi = Hxi + noise, with noise distributions varying per problem.
+Performance is evaluated on a test set with increasing noise levels using the RMSE. We further
+quantify model stability by measuring sensitivity of the output to small input perturbations: for a
+given measurement y, stability is calculated as
+1
+D
+PD
+i=1 ∥f(y + δyi) −f(y)∥2/∥δyi∥2, δyi ∼N(0, δ2I),
+where f is the reconstruction model, D is the number of perturbation directions, and δ controls the
+perturbation magnitude. A lower value indicates a more stable model, i.e., one whose output changes
+little under small input perturbations.
+To assess interpretability, we use saliency maps [54], which measure the local sensitivity of a
+model’s output to its input.
+For a trained model G and a data pair (x, y), the saliency map is
+S(y) = |∇y Loss(G(y), x)|, where each entry Si(y) quantifies the effect of a small change in yi on the
+prediction.
+All experiments are evaluated over 20 independent trials in which a random subset of test samples
+is drawn, and the RMSE and stability metrics are computed.
+We report the mean and standard
+deviation across trials, with shaded regions indicating ±2 standard deviations. For the CT experiment,
+50 samples are drawn per trial from the 750 test samples. For MNIST, 200 samples are drawn from
+5000.
+6.2
+Differentiation
+As forward operator H we adopt the cumulative integral (Hx)(tk) = Pk
+m=0 x(tm) ∆t with ∆t =
+1
+T −1,
+and generate the input as a truncated random Fourier sine series x(t) = PM
+k=1 ck sin(2πkt) with i.i.d.
+coefficients ck ∼N(0, 1), where M is the number of sine modes (the higher, the more ill-posed).
+Sampling x on a uniform grid of size T yields x ∈RT and H : RT →RT , a discrete cumulative sum.
+We use M = 5 and 10 modes, feature length T = 64, and N = 1000 samples, and parameterize the
+inverse g as a matrix.
+For the DRO formulation, we set the entropic regularization parameter to δ = 0.01 and the
+Wasserstein-radius to ε = 0.1, with a constant learning rate of γ = 10−3 and bisection bounds [0.1, 104]
+for λ.
+Figure 4 shows the performance of the two DRO inverses against the Tikhonov baselines.
+All
+methods perform comparably in low-noise regimes, but the Tikhonov RMSE increases rapidly with
+noise, while the DRO inverse remains stable, as reflected in the stability plot.
+The left panel of Figure 5 shows that the singular values of the DRO inverse drop sharply after
+the k-th largest singular value, which coincides with the number of modes. The right panel confirms
+that truncating beyond this rank does not further reduce the RMSE. This is the effect of the Lipschitz
+penalty in Theorem 4.2: the DRO objective penalizes the directions that most amplify worst-case
+perturbations, and since the data lives on a M-dimensional subspace, those are exactly the directions
+15
+
+PAGE 16
+Figure 4: Differentiation: reconstruction metrics of the DRO inverse compared to the Tikhonov baseline
+at M = 5 and M = 10 modes. Left: RMSE versus noise level. Right: stability metric versus noise
+level, where a lower value means the output is less sensitive to small input perturbations. Solid lines
+show the mean over trials and shaded bands ±2 standard deviations.
+Figure 5: Spectral analysis of DRO and Tikhonov inverses. Left: singular values. Right: RMSE under
+rank-k truncation.
+beyond rank M. The learned inverse therefore recovers the intrinsic dimension of the data, arriving
+at a data-driven analogue of truncated-SVD regularization.
+6.3
+Deblurring MNIST
+The input images x ∈R28×28 are drawn from the MNIST dataset [20]. As forward operator H :
+L2(R2) →L2(R2), we consider a convolution of an image x(s, t) with a Gaussian kernel K:
+Hx = (x ∗Kk,σ)(s, t) =
+Z
+R2 x(s −τ, t −ρ)Kk,σ(τ, ρ) dτ dρ,
+where Kk,σ(τ, ρ) =
+1
+2πσ2 exp
+
+−τ 2 + ρ2
+2σ2
+
+.
+We discretize this using torch.nn.functional.conv2d with same padding and a k×k kernel Kdiscrete ∈
+Rk×k, giving Hdiscrete : R28×28 →R28×28.
+We set σ2 = 1 and k = 5, and parameterize the inverse as a UNet of depth 2 with 64 base channels.
+For the DRO formulation, we set δ = 0.05 and ε = 1.0 with learning rate γ = 10−3, bisection bounds
+16
+
+PAGE 17
+Figure 6: MNIST reconstructions (left) and saliency maps (right) under increasing Gaussian noise.
+Reconstruction columns (left to right): ground truth, noisy measurement, DRO-UNet, MSE-UNet.
+Rows correspond to increasing noise level (top to bottom). Higher saliency intensities indicate the
+input pixels the model is most sensitive to during reconstruction.
+Figure 7: MNIST reconstruction metrics under increasing Gaussian noise with panels and shaded
+bands as in Figure 4.
+[10−2, 10] and tolerance 0.05.
+The SG estimator uses 5 samples per iteration during training and
+6 during validation. The DRO-UNet is trained on noise-free data while the MSE-UNet is trained
+on corrupted measurements yi = Hxi + η, η ∼N(0, 0.152). We use 25000 training pairs, 5000 for
+validation, and 5000 for testing, with λ selected via bisection on the validation DRO objective.
+Figures 6 and 7 show results for Gaussian noise. The DRO-UNets produce better reconstructions
+at higher noise levels than the MSE-UNet. The saliency maps show that the DRO model focuses on
+edges and strokes of the digit while ignoring the background, whereas the MSE-UNet shows diffuse,
+unstructured sensitivity without a consistent pattern, suggesting that the DRO objective encourages
+the model to focus on relevant features rather than noise. The DRO-UNets are more stable than the
+MSE-UNet in both noise settings.
+Without retraining, we apply the same model to measurements corrupted with Poisson noise. Given
+a noise level parameter σ ∈[0.01, 1], measurements are generated as y = Pois(α·Hx)/α, with α = 1/σ,
+so that larger σ corresponds to stronger noise while the mean is preserved. Figures 8 and 9 show that
+the DRO model generalizes across both noise levels and noise families, while the MSE baseline degrades
+more sharply.
+17
+
+PAGE 18
+Figure 8: MNIST reconstructions and saliency under increasing Poisson noise. Reconstruction columns
+(left to right): ground truth, noisy measurement, DRO-UNet, MSE-UNet. Higher saliency intensities
+indicate the input pixels the model is most sensitive to during reconstruction
+Figure 9: MNIST reconstruction metrics under increasing Poisson noise with panels and shaded bands
+as in Figure 4.
+6.3.1
+Robustness to Misspecified Forward Models
+To test robustness to misspecified forward operators (simulating equipment or settings mismatch at
+test time), we evaluate the trained model from Section 6.3 on kernels not seen during training. In
+addition to various perturbed isotropic Gaussian kernels, which we denote as Kk,σ, we test the 2D
+anisotropic Gaussian kernel KA and motion blur kernel KM:
+KA(s, r) =
+1
+2πσsσr
+exp
+
+−s2
+2σ2s
+−r2
+2σ2r
+
+,
+KM(s, r) = 1
+L1[−L/2,L/2](s)δ(r),
+where L > 0 is the blur length and δ is the Dirac delta. Motion blur introduces null frequencies in
+the kernel [61], making the problem more severely ill-posed. We evaluate on isotropic kernels K7,2 and
+K9,3, anisotropic kernel KA with k = 7, σs = 5, σr = 0.5, and motion blur kernel KM with L = 9.
+Figures 10 and 11 show reconstruction performance across the five kernels. The DRO-UNet con-
+sistently outperforms the MSE-UNet in both RMSE and stability. The saliency maps show the same
+edge-focused pattern.
+18
+
+PAGE 19
+Figure 10: MNIST reconstructions and saliency maps for different blurring kernels. Reconstruction
+columns (left to right): ground truth, measurement, DRO-UNet, MSE-UNet. Rows are the five test
+kernels (training kernel, followed by two isotropic kernels, anisotropic, and motion blur).
+Higher
+saliency intensities indicate the input pixels the model is most sensitive to during reconstruction
+Figure 11: MNIST reconstruction metrics across the five test kernels of Figure 10. Left: RMSE. Right:
+stability metric (lower is more stable).
+6.3.2
+Behavior under Extreme Ambiguity Radii
+To isolate the effect of the Wasserstein radius without the implicit robustness of a UNet, we replace
+the UNet with an MLP of 4 layers, 512 hidden units, and dropout rate 0.2, using the same setup as the
+previous section. We test two extreme radii: ε = 10−6 with bisection bounds [103, 106] and tolerance
+10, and ε = 103 with bounds [10−5, 10] and tolerance 10−6.
+Figures 12 and 13 illustrate the expected trade-off. The small-radius DRO-MLP performs better
+in low-noise regimes, where the empirical distribution closely approximates the truth and the tight
+ambiguity set makes the DRO objective behave similarly to empirical risk minimization, nearly coin-
+ciding with the MSE-MLP. The large-radius DRO-MLP outperforms at higher noise levels, as a larger
+radius allows the adversary to model stronger distributional shifts, trading fidelity for robustness.
+This is visible in the reconstructions, where the small-radius reconstruction is more faithful at low
+noise while the large-radius reconstruction is more smoothed but remains more faithful as noise grows.
+Small radii prioritize accuracy under the empirical distribution while large radii prioritize stability
+under worst-case perturbations, so that the ambiguity radius acts as an interpretable control over the
+accuracy-robustness trade-off. This is once more confirmed by the stability metric: both DRO-MLPs
+are more stable than the MSE-MLP across the entire noise range, with the large-radius model the
+more stable of the two.
+19
+
+PAGE 20
+Figure 12: MNIST reconstructions for extreme radii. Columns (left to right): ground truth, noisy
+measurement, DRO-MLP small radius, DRO-MLP large radius, MSE-MLP.
+Figure 13: MNIST reconstruction metrics under increasing Gaussian noise for extreme radii with
+panels and shaded bands as in Figure 4.
+6.4
+Deblurring CIFAR-10
+We take the exact same setting as the MNIST deblurring experiment, with RGB images x ∈R3×32×32
+drawn from CIFAR-10 [33] and a Unet with 3 input channels and depth 3. This experiment tests
+whether the framework scales to more complex natural image structure with higher inter-class vari-
+ability than MNIST.
+Figures 14 and 15 largely mirror the MNIST findings. The DRO-UNet again achieves lower RMSE
+and better stability across all noise levels, with saliency maps showing the same pattern of structured,
+edge-focused sensitivity compared to the diffuse sensitivity of the MSE-UNet. The difference between
+the two models is most clearly visible at higher noise levels. While the reconstructions look similar
+in the low-noise regime, the MSE-UNet begins to introduce artifacts and hallucinations as the noise
+grows, whereas the DRO-UNet continues to return a coherent, denoised and deblurred image. This is
+reflected in the RMSE curve: both models start at a comparable value for low noise, but the RMSE
+of the MSE-UNet grows steeply while that of the DRO-UNet increases gradually, so that the gap
+between them widens with the noise level. The stability metric also shows a clear separation. The
+DRO-UNet has a stability ratio that stays low and grows slightly while the MSE-UNet is significantly
+more sensitive to input perturbations.
+20
+
+PAGE 21
+Figure 14: CIFAR-10 reconstructions and saliency under increasing Gaussian noise. Reconstruction
+columns (left to right): ground truth, noisy measurement, DRO-UNet, MSE-UNet. Higher saliency
+intensities indicate the input pixels the model is most sensitive to during reconstruction
+Figure 15: CIFAR-10 reconstruction metrics under increasing Gaussian noise with panels and shaded
+bands as in Figure 4.
+6.5
+Robust Simulator
+The previous sections studied robustness from the perspective of the inverse map, emphasizing stability
+under perturbations in Y |X.
+The robust simulator shifts focus to the forward operator H itself,
+learning a forward mapping stable under perturbations in X. Learning a map for simulation has also
+been explored through invertible generative models that represent the joint distribution of inputs and
+measurements and can be run in either the forward or inverse direction [57]. In a blurring setting,
+a naive simulator propagates input noise through H, producing a blurred, noisy output. A robust
+simulator instead suppresses off-distribution artifacts before applying H, effectively learning a map of
+the form Hrobust(x) ≈(H ◦D)(x), where D is an implicit projection onto the data manifold. Potential
+applications include synthetic data generation and learned forward modeling.
+The setup follows previous sections, with the key difference being the prediction direction that
+results in a different loss.
+We consider c = cX|Y defined analogous to (9), the reference measure
+ηS|S=(x,y)(u, v) = ηX(u) ⊗µ∗
+Y |X=x(v) with ηX a Lebesgue measure, and the loss ℓ(x, y; G) = ∥y −
+G(x)∥2
+2, where G is the learned robust approximation of H. This setting reflects perturbations in X|Y
+(see Section 2.1) with a forward loss.
+21
+
+PAGE 22
+Figure 16: MNIST robust simulator: simulated measurements and saliency maps under increasing
+input noise. Simulation columns (left to right): ground truth, noisy ground truth, DRO-UNet applied
+to noisy ground truth, MSE-UNet. Rows correspond to increasing noise levels (top to bottom). Higher
+saliency intensities indicate the input pixels the model is most sensitive to during reconstruction. Here,
+the model learns the forward map.
+Figure 17: MNIST robust simulation metrics under increasing Gaussian noise with panels and shaded
+bands as in Figure 4.
+We find the dual formulation
+I = inf
+G∈G inf
+λ≥0 λˆε + λδ
+Z
+S
+log
+Z
+X
+Z
+Y
+exp
+∥v −G(x)∥2
+2
+λδ
+
+dµ∗
+Y |X=x(v) dN(x, δ2I)(u)
+
+dµ∗(x, y).
+Compared with (10), the roles of u and v are exchanged, and the Gaussian is centered at x rather
+than Hx.
+Figures 16 and 17 show a clear distinction between the two models.
+The DRO-UNet
+produces outputs closely resembling a blurred but noise-reduced version of the ground truth, while the
+MSE-UNet struggles more to remove noise and propagates artifacts to its predictions.
+6.6
+CT Reconstruction
+Computed tomography reconstructs a cross-sectional image of an object from X-ray projections taken
+at many angles, and is often used in medical and industrial imaging. We consider CT reconstruction
+from sinogram measurements using the 2DeteCT dataset [31], preprocessed via the LION library [8].
+The forward operator H : R1024×1024 →R3600×956 is the discretized cone-beam Radon transform, map-
+ping a cross-sectional image to a sinogram over 3600 projection angles with 956 detector pixels. This
+is a severely ill-posed problem in which small sinogram perturbations can produce large reconstruction
+22
+
+PAGE 23
+Figure 18: 2DeteCT CT reconstruction metrics as the photon count I0 increases, with panels and
+shaded bands as in Figure 4. Lower I0 means higher noise.
+artifacts. Reducing the radiation dose lowers the photon count and amplifies this ill-posedness, making
+robust low-dose reconstruction a real-world problem.
+Raw sinograms are preprocessed via flat-dark field correction and a negative log transform to
+convert intensity measurements into line integrals. The UNet input is a filtered backprojection (FBP)
+reconstruction of the preprocessed sinogram, computed using tomosipo [27] and astra [56] with the
+scanner’s cone-beam geometry, followed by normalization. The inverse is parameterized by a UNet
+with 16 base channels.
+Perturbed inputs for the DRO objective are obtained by adding Gaussian noise of standard devia-
+tion δ to the flat-dark corrected sinogram before the negative log transform and FBP reconstruction.
+The DRO-UNet is trained on noise-free FBP reconstructions. The MSE-UNet is trained on FBP recon-
+structions from Poisson-corrupted sinograms, simulated by scaling by photon count I0 = 103, drawing
+from the Poisson distribution, rescaling by I−1
+0 , and applying the negative log transform and FBP. The
+same procedure is used at test time. The photon count I0 reflects the number of photons reaching the
+detector per measurement, with a lower count corresponding to a lower radiation dose and a noisier
+signal due to the reduced number of detected counts. This Poisson corruption corresponds to the
+noise model in Example 2.1(b), with the photon count I0 playing the role of the intensity parameter:
+decreasing I0 increases noise.
+For the DRO formulation, we set δ = 0.002 and ε = 0.1, with λ determined via bisection over
+[1, 100] with tolerance 1.0 evaluated on a 10% training subsample for efficiency. We use a learning rate
+γ = 3 × 10−4, batch size 3, and the SG estimator with 4 samples per iteration. We use 3500 training
+samples, 750 for validation, and 750 for testing.
+Figure 19 shows reconstruction results for decreasing photon counts from high-dose (I0 = 103) to
+low-dose (I0 = 3×101). At high photon counts, both models perform comparably, closely matching the
+ground truth. As I0 decreases, the MSE-UNet degrades significantly with noise artifacts and structural
+loss, while the DRO-UNet maintains considerably better image quality. The saliency maps in Figure 19
+show that the DRO-UNet focuses on structurally meaningful regions such as shape boundaries, while
+the MSE-UNet shows increasingly diffuse and unstructured sensitivity as noise increases, and while
+focusing on diagonal noise artifacts, the DRO-UNet ignores.
+The maps visualizing the difference
+between the reconstruction and the ground truth (GT) corroborate this: DRO-UNet errors remain
+spatially concentrated and small, whereas MSE-UNet errors spread across the entire image at low I0.
+Figure 18 reflects this trend quantitatively, where the DRO-UNet consistently achieves lower RMSE
+with the gap widening at low I0. The stability curves are more nuanced: the MSE-UNet seems more
+stable than the DRO-UNet, likely because it maps all inputs to a similar blurred output, giving
+artificially low sensitivity to perturbations.
+23
+
+PAGE 24
+(a) Reconstructions
+(b) Saliency
+(c) Absolute difference w.r.t. ground truth
+Figure 19: 2DeteCT CT reconstructions, saliency, and difference at photon counts from high-dose
+(I0 = 103, top row) to low-dose (I0 = 30, bottom row). Reconstruction columns (left to right): ground
+truth, sinogram, FBP input, DRO-UNet, MSE-UNet. Higher saliency intensities indicate the input
+pixels the model is most sensitive to during reconstruction.
+24
+
+PAGE 25
+7
+Conclusion
+We introduced structured DRO, a distributionally robust optimization framework for inverse problems
+in which adversarial perturbations are constrained to a structured subset Ks ⊆P(X ×Y ) aligned with
+the data-acquisition process. We established strong duality for general Ks and derived explicit finite-
+dimensional dual representations for perturbations in the joint, marginal, and conditional distributions.
+For perturbations in P(Y |X), the explicit bound yields a Tikhonov-type regularization term on the
+Lipschitz constant of the reconstruction operator. Numerical comparison with joint DRO showed that
+the structured bound is less conservative for well-posed problems, with the decomposition into fidelity
+and regularization contributions making the source of conservatism in each method interpretable. In
+the linear case, this regularization is visible spectrally in the numerical experiments: the learned inverse
+truncates at the intrinsic dimension of the data and recovers a data-driven version of truncated-SVD
+regularization. Learned reconstruction experiments on differentiation, deblurring, and sinogram-to-
+CT reconstruction further demonstrated improved robustness, interpretability, and stability over MSE
+baselines, with out-of-distribution performance consistently improving over standard DRO and MSE
+baselines as noise levels increase.
+On the computational side, more faithful approximations of the structured Wasserstein constraint
+beyond the combination of the conditional Wasserstein distance and the Sinkhorn distance used here
+require further investigation. A natural theoretical extension concerns operator learning: rather than
+assuming a fixed forward operator H, one can parameterize H by a neural operator and ask for a
+reconstruction operator G that is robust to uncertainty in the learned forward model. The framework
+already accommodates stochastic forward operators via the robust simulator of Section 6.5, making it
+suited to this setting. The framework also connects naturally to generative modeling: the conditional
+Wasserstein distance of Corollary 4.2.1 is used in the objective in Bayesian OT flow matching [15],
+suggesting that a flow trained under a structured DRO objective would yield a learned distribution that
+is robust to structured perturbations. Finally, extending the framework to dynamic inverse problems
+where the data distribution µt evolves over time leads to a min-max problem over flows of measures
+rather than static distributions, connecting naturally to Wasserstein gradient flows.
+Acknowledgments
+M.C.’s research is supported by the NWO-Vidi grant SPARGO: Exploring and Exploiting the Geo-
+metric Landscape of Infinite-Dimensional Sparse Optimization (Grant Number VI.Vidi.243.200). C.B.
+acknowledges financial support from EU EFRO OPoost (No. OOST-00103).
+References
+[1] J. Adler and O. Oktem, Learned Primal-Dual Reconstruction, IEEE Transactions on Medical
+Imaging, 37 (2018), pp. 1322–1332, https://doi.org/10.1109/TMI.2018.2799231.
+[2] J. Adler, A. Ringh, O. ¨Oktem, and J. Karlsson, Learning to solve inverse problems using
+Wasserstein loss, 2017, https://arxiv.org/abs/1710.10898.
+[3] C. D. Aliprantis and K. C. Border, Infinite Dimensional Analysis: A Hitchhiker’s Guide,
+Springer, 2006.
+[4] M. Arjovsky, S. Chintala, and L. Bottou, Wasserstein Generative Adversarial Networks,
+in Proceedings of the 34th International Conference on Machine Learning, PMLR, July 2017,
+pp. 214–223.
+[5] S. Arridge, P. Maass, C.-B. Sch¨onlieb, and O. ¨Oktem, Solving inverse problems us-
+ing data-driven models, Acta Numerica, 28 (2019), pp. 1–174, https://doi.org/10.1017/
+S0962492919000059.
+[6] R. Barbano, C. Zhang, S. Arridge, and B. Jin, Quantifying Model Uncertainty in Inverse
+Problems via Bayesian Deep Gradient Descent, in 2020 25th International Conference on Pattern
+Recognition (ICPR), Jan. 2021, pp. 1392–1399, https://doi.org/10.1109/ICPR48806.2021.
+9412521.
+25
+
+PAGE 26
+[7] M. Benning and M. Burger, Modern regularization methods for inverse problems, Acta Nu-
+merica, 27 (2018), pp. 1–111, https://doi.org/10.1017/S0962492918000016.
+[8] A. Biguri, LION GitHub repository. https://github.com/CambridgeCIA/LION, 2026.
+[9] J. Blanchet, Y. Kang, and K. Murthy, Robust Wasserstein profile inference and applications
+to machine learning, Journal of Applied Probability, 56 (2019), pp. 830–857, https://doi.org/
+10.1017/jpr.2019.49.
+[10] J. Blanchet, D. Kuhn, J. Li, and B. Taskesen, Unifying Distributionally Robust Optimiza-
+tion via Optimal Transport Theory, Dec. 2025, https://doi.org/10.48550/arXiv.2308.05414,
+https://arxiv.org/abs/2308.05414.
+[11] J. Blanchet, J. Li, S. Lin, and X. Zhang, Distributionally Robust Optimization and Robust
+Statistics, Statistical Science, 40 (2025), https://doi.org/10.1214/24-STS955.
+[12] J. Blanchet and K. Murthy, Quantifying Distributional Model Risk via Optimal Transport,
+Mathematics of Operations Research, 44 (2019), pp. 565–600, https://doi.org/10.1287/moor.
+2018.0936.
+[13] K. Bredies, M. Carioni, S. Fanzon, and F. Romero, A generalized conditional gra-
+dient method for dynamic inverse problems with optimal transport regularization, Founda-
+tions of Computational Mathematics, 23 (2023), pp. 833–898, https://doi.org/10.1007/
+s10208-022-09561-z, https://arxiv.org/abs/2012.11706.
+[14] M. Carioni, S. Mukherjee, H. Ye Tan, and J. Tang, Unsupervised approaches based on
+optimal transport and convex analysis for inverse problems in imaging, in Data-Driven Models in
+Inverse Problems, 2025, pp. 107–162.
+[15] J. Chemseddine, P. Hagemann, G. Steidl, and C. Wald, Conditional Wasserstein distances
+with applications in Bayesian OT flow matching, Journal of Machine Learning Research, 26 (2025),
+pp. 1–47.
+[16] A. R. Chenreddy, N. Bandi, and E. Delage, Data-Driven Conditional Robust Optimization,
+Advances in Neural Information Processing Systems, 35 (2022), pp. 9525–9537.
+[17] M. Cuturi, Sinkhorn distances: Lightspeed computation of optimal transport, in Proceedings of
+the 26th International Conference on Neural Information Processing Systems - Volume 2, Red
+Hook, NY, USA, 2013, Curran Associates Inc., pp. 2292–2300.
+[18] G. Daras, H. Chung, C.-H. Lai, Y. Mitsufuji, J. C. Ye, P. Milanfar, A. G. Dimakis,
+and M. Delbracio, A Survey on Diffusion Models for Inverse Problems, Sept. 2024, https:
+//doi.org/10.48550/arXiv.2410.00083, https://arxiv.org/abs/2410.00083.
+[19] M. Dashti and A. M. Stuart, The Bayesian Approach to Inverse Problems, in Handbook
+of Uncertainty Quantification, Springer, Cham, 2017, pp. 311–428, https://doi.org/10.1007/
+978-3-319-12385-1_7.
+[20] L. Deng, The MNIST Database of Handwritten Digit Images for Machine Learning Research
+[Best of the Web], IEEE Signal Processing Magazine, 29 (2012), pp. 141–142, https://doi.org/
+10.1109/MSP.2012.2211477.
+[21] R. Gao and A. Kleywegt, Distributionally Robust Stochastic Optimization with Wasserstein
+Distance, Mathematics of Operations Research, 48 (2023), pp. 603–655, https://doi.org/10.
+1287/moor.2022.1275.
+[22] A. Genevay, G. Peyre, and M. Cuturi, Learning Generative Models with Sinkhorn Diver-
+gences, in Proceedings of the Twenty-First International Conference on Artificial Intelligence and
+Statistics, PMLR, Mar. 2018, pp. 1608–1617.
+[23] A. Goujon, S. Neumayer, P. Bohra, S. Ducotterd, and M. Unser, A Neural-Network-
+Based Convex Regularizer for Inverse Problems, IEEE Transactions on Computational Imaging,
+9 (2023), pp. 781–795, https://doi.org/10.1109/TCI.2023.3306100.
+26
+
+PAGE 27
+[24] A. Habring and M. Holler, Neural-network-based regularization methods for inverse problems
+in imaging, GAMM-Mitteilungen, 47 (2024), p. e202470004, https://doi.org/10.1002/gamm.
+202470004.
+[25] A. Hauptmann, S. Mukherjee, C.-B. Sch¨onlieb, and F. Sherry, Convergent Regulariza-
+tion in Inverse Problems and Linear Plug-and-Play Denoisers, Foundations of Computational
+Mathematics, 25 (2025), pp. 1087–1120, https://doi.org/10.1007/s10208-024-09654-x.
+[26] H. Heaton, S. W. Fung, A. T. Lin, S. Osher, and W. Yin, Wasserstein-Based Projections
+with Applications to Inverse Problems, SIAM Journal on Mathematics of Data Science, 4 (2022),
+pp. 581–603, https://doi.org/10.1137/20M1376790.
+[27] A. Hendriksen, D. Schut, W. J. Palenstijn, N. Vigan`o, J. Kim, D. Pelt, T. van
+Leeuwen, and K. J. Batenburg, Tomosipo: Fast, Flexible, and Convenient 3D Tomography for
+Complex Scanning Geometries in Python, Optics Express, (2021), https://doi.org/10.1364/
+oe.439909.
+[28] J. Hertrich, H. S. Wong, A. Denker, S. Ducotterd, Z. Fang, M. Haltmeier,
+Z. Kereta, E. Kobler, O. Leong, M. S. Salehi, C.-B. Sch¨onlieb, J. Schwab, Z. Shu-
+maylov, J. Sulam, G. S. Wache, M. Zach, Y. Zhang, M. J. Ehrhardt, and S. Neu-
+mayer, Learning Regularization Functionals for Inverse Problems: A Comparative Study, in Med-
+ical Imaging Meets EurIPS: MedEurIPS 2025, Oct. 2025.
+[29] Z. Hu and J. Hong, Kullback-Leibler divergence constrained distributionally robust optimization,
+Available at Optimization Online, 2012.
+[30] K. H. Jin, M. T. McCann, E. Froustey, and M. Unser, Deep Convolutional Neural Network
+for Inverse Problems in Imaging, IEEE Transactions on Image Processing, 26 (2017), pp. 4509–
+4522, https://doi.org/10.1109/TIP.2017.2713099.
+[31] M. B. Kiss, S. B. Coban, K. J. Batenburg, T. van Leeuwen, and F. Lucka, 2DeteCT - A
+large 2D expandable, trainable, experimental Computed Tomography dataset for machine learning,
+Scientific Data, 10 (2023), p. 576, https://doi.org/10.1038/s41597-023-02484-6.
+[32] E. Kobler, A. Effland, K. Kunisch, and T. Pock, Total Deep Variation for Linear In-
+verse Problems, in Proceedings of the IEEE/CVF Conference on Computer Vision and Pattern
+Recognition, 2020, pp. 7549–7558.
+[33] A. Krizhevsky and G. Hinton, Learning Multiple Layers of Features from Tiny Images, tech.
+report, University of Toronto, Toronto, Ontario, 2009.
+[34] D. Kuhn, P. M. Esfahani, V. A. Nguyen, and S. Shafieezadeh-Abadeh, Wasserstein Dis-
+tributionally Robust Optimization: Theory and Applications in Machine Learning, in Operations
+Research & Management Science in the Age of Analytics, Informs, Oct. 2019, pp. 130–166.
+[35] H. Li, J. Schwab, S. Antholzer, and M. Haltmeier, NETT: Solving inverse problems
+with deep neural networks, Inverse Problems, 36 (2020), p. 065005, https://doi.org/10.1088/
+1361-6420/ab6d57.
+[36] J. Li, S. Lin, J. Blanchet, and V. A. Nguyen, Tikhonov Regularization is Optimal Transport
+Robust under Martingale Constraints, in Advances in Neural Information Processing Systems,
+2022.
+[37] J. Liu, T. Wang, P. Cui, and H. Namkoong, On the Need for a Language Describing Dis-
+tribution Shifts: Illustrations on Tabular Datasets, Advances in Neural Information Processing
+Systems, 36 (2023), pp. 51371–51408.
+[38] D. G. Luenberger, Optimization by Vector Space Methods, John Wiley & Sons, Jan. 1997.
+[39] S. Lunz, O. ¨Oktem, and C.-B. Sch¨onlieb, Adversarial regularizers in inverse problems, in
+Advances in Neural Information Processing Systems, vol. 31, Curran Associates, Inc., 2018.
+27
+
+PAGE 28
+[40] S. Martin, A. Gagneux, P. Hagemann, and G. Steidl, PnP-flow: Plug-and-play im-
+age restoration with flow matching, in International Conference on Learning Representations,
+vol. 2025, 2025, pp. 45466–45492.
+[41] P. Mohajerin Esfahani and D. Kuhn, Data-driven distributionally robust optimization us-
+ing the Wasserstein metric: Performance guarantees and tractable reformulations, Mathematical
+Programming, 171 (2018), pp. 115–166, https://doi.org/10.1007/s10107-017-1172-1.
+[42] S. Mukherjee, M. Carioni, O. ¨Oktem, and C.-B. Sch¨onlieb, End-to-end reconstruction
+meets data-driven regularization for inverse problems, in Proceedings of the 35th International
+Conference on Neural Information Processing Systems, NIPS ’21, Red Hook, NY, USA, Dec.
+2021, Curran Associates Inc., pp. 21413–21425.
+[43] S. Mukherjee, A. Hauptmann, O. ¨Oktem, M. Pereyra, and C.-B. Sch¨onlieb, Learned
+Reconstruction Methods With Convergence Guarantees: A survey of concepts and applications,
+IEEE Signal Processing Magazine, 40 (2023), pp. 164–182, https://doi.org/10.1109/MSP.
+2022.3207451.
+[44] V. A. Nguyen, S. Shafieezadeh-Abadeh, D. Kuhn, and P. Mohajerin Esfahani,
+Bridging Bayesian and Minimax Mean Square Error Estimation via Wasserstein Distribution-
+ally Robust Optimization, Mathematics of Operations Research, 48 (2023), pp. 1–37, https:
+//doi.org/10.1287/moor.2021.1176.
+[45] A. Oliviero-Durmus, Y. Janati, E. Moulines, M. Pereyra, and S. Reich, Generative
+modelling meets Bayesian inference: A new paradigm for inverse problems, Philosophical trans-
+actions. Series A, Mathematical, physical, and engineering sciences, 383 (2025), p. 20240334,
+https://doi.org/10.1098/rsta.2024.0334.
+[46] G. Ongie, A. Jalal, C. A. Metzler, R. G. Baraniuk, A. G. Dimakis, and R. Willett,
+Deep Learning Techniques for Inverse Problems in Imaging, IEEE Journal on Selected Areas in
+Information Theory, 1 (2020), pp. 39–56, https://doi.org/10.1109/JSAIT.2020.2991563.
+[47] G. Patrini, R. van den Berg, P. Forr´e, M. Carioni, S. Bhargav, M. Welling, T. Ge-
+newein, and F. Nielsen, Sinkhorn AutoEncoders, in Proceedings of The 35th Uncertainty in
+Artificial Intelligence Conference, PMLR, Aug. 2020, pp. 733–743.
+[48] J.-C. Pesquet, A. Repetti, M. Terris, and Y. Wiaux, Learning maximally mono-
+tone operators for image recovery, SIAM Journal on Imaging Sciences, 14 (2021), pp. 1206–
+1237,
+https://doi.org/10.1137/20M1387961,
+https://arxiv.org/abs/https://doi.org/
+10.1137/20M1387961.
+[49] G. Peyr´e and M. Cuturi, Computational Optimal Transport with Applications to Data Sci-
+ences, Foundations and Trends in Machine Learning, 11 (2019), pp. 355–607, https://doi.org/
+10.1561/2200000073.
+[50] M. Pourya, B. E. Rawas, and M. Unser, Flower: A Flow-Matching Solver for Inverse Prob-
+lems, Feb. 2026, https://doi.org/10.48550/arXiv.2509.26287, https://arxiv.org/abs/
+2509.26287.
+[51] H. Rahimian and S. Mehrotra, Distributionally Robust Optimization: A Review, (2019),
+https://doi.org/10.48550/arXiv.1908.05659.
+[52] R. T. Rockafellar, Integral functionals, normal integrands and measurable selections, in Non-
+linear Operators and the Calculus of Variations, Berlin, Heidelberg, 1976, Springer, pp. 157–207,
+https://doi.org/10.1007/BFb0079944.
+[53] S. Shafieezadeh-Abadeh, D. Kuhn, and P. M. Esfahani, Regularization via Mass Trans-
+portation, Journal of Machine Learning Research, 20 (2019).
+[54] K. Simonyan, A. Vedaldi, and A. Zisserman, Deep Inside Convolutional Networks: Visual-
+ising Image Classification Models and Saliency Maps, Dec. 2013, https://doi.org/10.48550/
+arXiv.1312.6034.
+28
+
+PAGE 29
+[55] Y. Sun, B. Wohlberg, and U. S. Kamilov, An Online Plug-and-Play Algorithm for Regular-
+ized Image Reconstruction, IEEE Transactions on Computational Imaging, 5 (2019), pp. 395–408,
+https://doi.org/10.1109/TCI.2019.2893568.
+[56] W. van Aarle, W. J. Palenstijn, J. De Beenhouwer, T. Altantzis, S. Bals, K. J.
+Batenburg, and J. Sijbers, The ASTRA Toolbox: A platform for advanced algorithm devel-
+opment in electron tomography, Ultramicroscopy, 157 (2015), pp. 35–47, https://doi.org/10.
+1016/j.ultramic.2015.05.002.
+[57] T. van Leeuwen, C. Brune, and M. Carioni, An invertible generative model for forward and
+inverse problems, Sept. 2025, https://doi.org/10.48550/arXiv.2509.03910, https://arxiv.
+org/abs/2509.03910.
+[58] F. van Maarschalkerwaart, S. Mukherjee, M. S. Landman, C. Brune, and M. Car-
+ioni, Perturbation-Aware Distributionally Robust Optimization for Inverse Problems, in Scale
+Space and Variational Methods in Computer Vision, Cham, 2025, Springer Nature Switzerland,
+pp. 109–122.
+[59] C. Villani, Optimal Transport, vol. 338 of Grundlehren Der Mathematischen Wissenschaften,
+Springer, Berlin, Heidelberg, 2009, https://doi.org/10.1007/978-3-540-71050-9.
+[60] J. Wang, R. Gao, and Y. Xie, Sinkhorn Distributionally Robust Optimization, Operations
+Research, 74 (2026), pp. 1581–1603, https://doi.org/10.1287/opre.2023.0294.
+[61] W. Wang and C. Su, An optimization method for motion blur image restoration and ringing
+suppression via texture mapping, ISA Transactions, 131 (2022), pp. 650–661, https://doi.org/
+10.1016/j.isatra.2022.05.005.
+[62] X. Zhang, J. Blanchet, Y. Marzouk, V. Nguyen, and S. Wang, Distributionally robust
+Gaussian process regression and Bayesian inverse problems, The Annals of Applied Probability,
+35 (2025), https://doi.org/10.1214/24-AAP2141.
+[63] B. Zhu, J. Z. Liu, S. F. Cauley, B. R. Rosen, and M. S. Rosen, Image reconstruction
+by domain-transform manifold learning, Nature, 555 (2018), pp. 487–492, https://doi.org/10.
+1038/nature25988.
+[64] J.-J. Zhu, W. Jitkrittum, M. Diehl, and B. Sch¨olkopf, Kernel Distributionally Robust
+Optimization: Generalized Duality Theorem and Stochastic Approximation, in Proceedings of The
+24th International Conference on Artificial Intelligence and Statistics, PMLR, Mar. 2021, pp. 280–
+288.
+A
+Robustness in P(X × Y ) (MNIST)
+To validate the framework under joint perturbations in P(X × Y ), we repeat the MNIST deblur-
+ring experiment from Section 6.3 with a reference measure that perturbs both the input and the
+measurement simultaneously. Specifically, we replace the reference measure with ηS|S=(x,y)(u, v) =
+ηX(u) ⊗ηY |X=x(v) with ηY |X=x and ηX Lebesgue measures, so that the worst-case adversary is now
+free to transport mass in both the X- and Y -directions. All other hyperparameters are kept identical
+to Section 6.3. The resulting dual objective is
+I = inf
+G∈G inf
+λ≥0 λˆε + λδ
+Z
+S
+log
+Z
+Y
+Z
+X
+exp
+∥u −G(v)∥2
+2
+λδ
+
+dN(x, δ2I)(u) dN(Hx, δ2I)(v) dµ∗(x, y).
+Figures 20 and 21 compare the P(Y |X) and P(X ×Y ) DRO-UNets. The joint DRO model achieves
+slightly better RMSE than its conditional counterpart at low noise, but degrades slightly faster as noise
+increases, reflecting the additional conservatism introduced by allowing the adversary to perturb the
+input distribution as well. These differences however are very small but might be larger when using for
+example an MLP with less implicit robustness. In any case, the results are in line with the expected
+ordering from Section 5.
+29
+
+PAGE 30
+Figure 20: MNIST reconstructions and saliency under increasing Gaussian noise. Comparison of ro-
+bustness in X ×Y and Y |X. Reconstruction columns (left to right): ground truth, noisy measurement,
+P(X × Y )-DRO-UNet, P(Y |X)-DRO-UNet. Higher saliency intensities indicate the input pixels the
+model is most sensitive to during reconstruction.
+Figure 21: MNIST reconstruction metrics. Comparison of robustness in X × Y and Y |X.
+B
+Proofs for strong duality in Section 3
+B.1
+General strong duality
+This section details the proof for Theorem 3.1. The strategy of the proof follows the one in [12]. First
+off, we need to define certain sets and functionals and introduce some lemmas, all in preparation for the
+application of the Fenchel Duality Theorem [38, p. 201]. Let C := C(S × S) represent the vector space
+of continuous functions equipped with the supremum norm, and recognize its dual C∗= M(S × S),
+the space of finite signed Borel measures on S equipped with the total variation norm.
+For simplicity, we recall that the primal problem is
+I :=
+sup
+πS|S∈ΩK,c,ε
+I(πS|S, G)
+with the notatons given in Section 3. Moreover, we define the dual form as J, such that
+J(λ, h) := λε +
+sup
+πS|S:S→Ks
+Z
+S×S
+h(s, r) dπS|S=s(r)dµ∗(s),
+J :=
+inf
+(λ,h)∈∆G,ℓ,c J(λ, h),
+30
+
+PAGE 31
+where we remind the reader that
+∆G,ℓ,c :=
+
+(λ, h) : h ∈C, λ ≥0,
+Z
+S
+Z
+S
+h(s, r)dπS|S=s(r)dµ∗(s)
+≥
+Z
+S
+Z
+S
+ℓ(r, G) −λc(s, r)dπS|S=s(r)dµ∗(s)
+∀πS|S : S →Ks
+
+.
+Define the convex set of functions
+B :=
+
+g ∈C :
+Z
+S
+Z
+S
+g(s, r)dπS|S=s(r)dµ∗(s)
+(11)
+≥
+Z
+S
+Z
+S
+ℓ(r, G)dπS|S=s(r)dµ∗(s), ∀πS|S : S →Ks
+
+.
+Define also the functional Θ : C →R as
+Θ(g) :=
+inf
+(λ,h)∈D(g)
+(
+λε +
+sup
+πS|S:S→Ks
+Z
+S
+Z
+S
+h(s, r)dπS|S=s(r)dµ∗(s)
+)
+,
+with
+D(g) :=
+
+(λ, h) : h ∈C, λ ≥0,
+Z
+S
+Z
+S
+g(s, r)dπS|S=s(r)dµ∗(s)
+=
+Z
+S
+Z
+S
+h(s, r) + λc(s, r)dπS|S=s(r)dµ∗(s), ∀πS|S : S →Ks
+
+.
+In the following lemma we verify that Θ is convex.
+Lemma B.1. The function Θ : C →R is convex.
+Proof. To show Θ is convex, first note that J is convex. We can then rewrite
+Θ(g) =
+inf
+(λ,h)∈D(g) J(λ, h).
+Let g1, g2 ∈C and g = tg1 + (1 −t)g2 for t ∈(0, 1). Let ε > 0 be an arbitrary positive number and
+(λ1, h1) ∈D(g1) and (λ2, h2) ∈D(g2) such that
+Θ(g1) ≥J(λ1, h1) −ε,
+Θ(g2) ≥J(λ2, h2) −ε.
+Now consider
+Θ(tg1 + (1 −t)g2) =
+inf
+(λ,h)∈D(tg1+(1−t)g2) J(λ, h).
+Note that
+(λ3, h3) := t(λ1, h1) + (1 −t)(λ2, h2) ∈D(tg1 + (1 −t)g2).
+Therefore, by convexity of J,
+J(λ3, h3) ≤tJ(λ1, h1) + (1 −t)J(λ2, h2)
+and thus
+Θ(tg1 + (1 −t)g2) =
+inf
+(λ,h)∈D(tg1+(1−t)g2) J(λ, h) ≤J(λ3, h3)
+≤tJ(λ1, h1) + (1 −t)J(λ2, h2) ≤tΘ(g1) + (1 −t)Θ(g2) + 2ε.
+Since ε is arbitrary the convexity of Θ follows.
+Lemma B.2. Let S be a compact Polish space, and assume c : S × S →R+ is non-negative lower
+semi-continuous such that c(s, r) = 0 if and only if s = r and ℓis continuous. Define B as in (11).
+Then, B has non-empty interior.
+31
+
+PAGE 32
+Proof. Since S is compact and ℓis continuous, there exists
+M := sup
+r∈S
+ℓ(r, G) < +∞.
+Define k(s, r) := M + 1 for (s, r) ∈S × S. Then k ∈C(S × S). Moreover, for every πS|S : S →Ks it
+holds that
+Z
+S×S
+k(s, r) dπS|S=s(r)dµ∗(s) = M + 1 ≥
+Z
+S×S
+ℓ(r, G) dπS|S=s(r)dµ∗(s),
+and therefore k ∈B. We claim that k ∈int(B). Indeed, let η ∈C(S × S) be such that
+∥η −k∥∞< 1
+2.
+Then, for every (s, r) ∈S × S,
+η(s, r) ≥k(s, r) −1
+2 = M + 1
+2 ≥ℓ(r),
+so that η ∈B and thus k ∈int(B).
+Lemma B.3. The set ΩK defined as
+ΩK = {πS|S ⊗µ∗: πS|S=s ∈Ks}
+is weak* closed.
+Proof. Consider a sequence µn = πn
+S|S ⊗µ∗such that µn →µ weakly*. Note that by weak* continuity
+of the projection, the first marginal of µ is µ∗. Therefore, we can disintegrate µ as µ = πS|S ⊗µ∗for
+some πS|S : S →P(S). It remains to prove that then πS|S=s ∈Ks for µ∗-a.e. s ∈S.
+Define the support function of Ks as σKs : C(S) →R with
+σKs(φ) = sup
+ν∈Ks
+Z
+φdν
+and note that since Ks is convex and weak* closed it holds [3, Theorem 7.51]
+Ks =
+
+µ ∈P(S) :
+Z
+S
+φ dµ ≤σKs(φ) for every φ ∈C(S)
+
+.
+Therefore since πn
+S|S=s ∈Ks for µ∗-a.e. s ∈S it also holds that for almost every s ∈S we have that
+R
+S φ(r)dπn
+S|S=s(r) ≤σKs(φ) for every φ ∈C(S). This implies, by passing to the limit for n →+∞
+that for all non-negative η ∈C(S) and for all φ ∈C(S) it holds that
+Z
+S
+η(s)
+Z
+S
+φ(r) dπS|S=s(r) −σKs(φ)
+
+dµ∗(s) ≤0
+In particular, for all φ ∈C(S)
+Z
+S
+φ(r) dπS|S=s(r) ≤σKs(φ)
+(12)
+for µ∗−a.e. s ∈S. Since C(S) is separable (S is supposed to be a compact Polish space) we can choose
+a countable dense subset of C(S) denoted by (φi)i∈I and define by Ai a set such that µ∗(Ai) = 1 and
+(12) holds for φ = φi. Considering A = T
+i Ai we thus have that µ∗(A) = 1 and for every s ∈A
+Z
+S
+φi(r) dπS|S=s(r) ≤σKs(φi)
+for every i ∈I. Since (φi) is dense in C(S), by a standard density argument we can conclude that for
+all s ∈A it holds that
+Z
+S
+φ(r) dπS|S=s(r) ≤σKs(φ)
+for every φ ∈C(S), implying that πS|S=s ∈Ks for µ∗-a.e. s ∈S.
+32
+
+PAGE 33
+Lemma B.4. Let S be a compact Polish space, ℓ: S →R continuous and B defined as in (11). If µ
+is not a positive measure, then
+inf
+g∈B
+Z
+S
+Z
+S
+g(s, r) dµ = −∞
+Proof. Suppose that µ is not a positive measure.
+Then, there exists g ∈C such that g ≥0 and
+R
+gdµ < 0. Define then gn = ng + supr∈S ℓ(r, G) and note that gn ∈B for every n and
+lim
+n→+∞
+Z
+S
+Z
+S
+gn(s, r)dµ =
+lim
+n→+∞
+Z
+S
+Z
+S
+ng + sup
+r∈S
+ℓ(r, G)dµ
+=
+lim
+n→+∞n
+Z
+S
+Z
+S
+gdµ + sup
+r∈S
+ℓ(r, G)µ(S) = −∞
+as we wanted to prove.
+We are now ready to prove Theorem 3.1.
+Proof of Theorem 3.1
+Proof. Note first that due to the definition of B, D(g) and Θ given above it holds that
+J ≤
+inf
+g∈C
+(λ,h)∈D(g)
+
+J(λ, h) :
+Z
+S×S
+h(s, r) + λc(s, r) dπS|S=s(r)dµ∗(s)
+≥
+Z
+S×S
+ℓ(r, G) dπS|S=s(r)dµ∗(s), ∀πS|S : S →Ks
+
+= inf
+g∈B Θ(g).
+(13)
+Next, we aim to identify the conjugate functional Θ∗. To evaluate Θ∗, note that for every µ ∈
+M+(S × S)
+Θ∗(µ) = sup
+g∈C
+ ZZ
+gdµ −Θ(g)
+
+= sup
+g∈C
+ ZZ
+gdµ −
+inf
+(λ,h)∈D(g)
+
+λε +
+sup
+πS|S:S→Ks
+ZZ
+h dπS|S=sdµ∗
+
+=
+sup
+g∈C
+(λ,h)∈D(g)
+ ZZ
+gdµ −
+
+λε +
+sup
+πS|S:S→Ks
+ZZ
+g −λc, dπS|S=sdµ∗
+
+≥
+sup
+g∈C
+(λ,h)∈D(g)
+ ZZ
+gdµ −
+
+λε +
+sup
+πS|S:S→Ks
+ZZ
+gdπS|S=sdµ∗
++
+sup
+πS|S:S→Ks
+ZZ
+−λcdπS|Sdµ∗
+
+=
+sup
+g∈C
+(λ,h)∈D(g)
+ ZZ
+gdµ −
+sup
+πS|S:S→Ks
+ZZ
+gdπS|S=sdµ∗−λε
+(14)
++
+inf
+πS|S:S→Ks
+ZZ
+λcdπS|S=sdµ∗
+
+Suppose that µ(S × S) ̸= 1. Define gn = (µ(S × S) −1)n ∈C for every n. Then
+lim
+n→+∞
+ZZ
+gndµ −
+sup
+πS|S:S→Ks
+ZZ
+gndπS|S=sdµ∗=
+lim
+n→+∞n(µ(S × S) −1)2 = +∞
+implying that Θ∗(µ) = ∞in case µ /∈P(S × S). Suppose now then µ ∈P(S × S). Consider the set
+ΩK = {µ∗⊗πS|S : πS|S : S →Ks} and note that this is convex and weak* closed by Lemma B.3.
+33
+
+PAGE 34
+Suppose that µ /∈ΩK. Then, by Hahn-Banach separation theorem it holds that there exists g ∈C
+such that
+Z
+gdµ > 0
+and
+Z
+gdν ≤0
+∀ν ∈ΩK.
+(15)
+Define gn(s, r) = ng(s, r). Then using (15) it holds that
+lim
+n
+ZZ
+gndµ −
+sup
+πS|S:S→Ks
+ZZ
+gndπS|S=sdµ∗≥lim
+n n
+Z
+g(s, r)dµ(s, r) = +∞.
+Therefore, using the previous limit in combination with (14) we obtain that Θ∗(µ) = +∞whenever
+µ /∈ΩK. Let now µ = µ∗⊗πS|S ∈ΩK Then
+Θ∗(µ) = sup
+g∈C
+ ZZ
+gdµ −
+inf
+(λ,h)∈D(g)
+
+λε +
+sup
+πS|S:S→Ks
+ZZ
+h dπS|S=sdµ∗
+
+=
+sup
+g∈C
+(λ,h)∈D(g)
+ ZZ
+gdπS|S=sdµ∗−λε −
+sup
+πS|S:S→Ks
+ZZ
+h dπS|S=sdµ∗
+
+=
+sup
+g∈C
+(λ,h)∈D(g)
+ ZZ
+h + λcdπS|S=sdµ∗−λε −
+sup
+πS|S:S→Ks
+ZZ
+h dπS|S=sdµ∗
+
+=
+sup
+g∈C
+(λ,h)∈D(g)
+
+λ
+ ZZ
+c dµ −ε
+
++
+ZZ
+hdπS|S=sdµ∗−
+sup
+πS|S:S→Ks
+ZZ
+h dπS|S=sdµ∗
+
+=
+
+
+
+0
+if
+ZZ
+c dπS|S=sdµ∗≤ε,
+∞
+else.
+So in particular for µ ∈M+(S × S) then
+Θ∗(µ) =
+
+
+
+0
+if µ = πS|S ⊗µ∗for πS|S : S →Ks and
+ZZ
+c dπS|S=sdµ∗≤ε,
+∞
+else.
+By Fenchel duality (see e.g. [38, Theorem 1, Page 201]), thanks to Lemma B.2, it holds that
+inf
+g∈B Θ(g) = sup
+µ∈C∗−Θ∗(µ) + inf
+g∈B
+Z
+g dµ.
+Now note that if µ = µ∗⊗µS|S and ℓis continuous it holds that
+inf
+g∈B
+ZZ
+g dµS|S=sdµ∗=
+ZZ
+ℓdµS|S=sdµ∗.
+Therefore by applying the previous computations and Lemma B.4 we deduce that
+inf
+g∈B Θ(g) =
+sup
+µS|S∈ΩK,c,ε
+ZZ
+ℓdµS|S=s(r)dµ∗(s) = IΩK,c,ε(G)
+as we wanted to prove. Therefore from (13) it follows that
+J ≤I.
+Due to weak duality proven in Proposition 3.1 we had J ≥I, therefore J = I and we have strong
+duality.
+34
+
+PAGE 35
+B.2
+Proof of Theorem 3.2
+Proof. Define
+ϕλ,G(x, y) :=
+sup
+(u,v)∈S
+(ℓ(u, v, G) −λc((x, y), (u, v))).
+Writing s = (x, y) and r = (u, v), observe that
+{(λ, h) : λ ∈R+, h(x, y, u, v) = ϕλ,G(x, y)} ⊆∆G,ℓ,c
+and therefore
+inf
+(λ,h)∈∆G,ℓ,c λε +
+sup
+πS|S:S→Ks
+Z
+S×S
+h(s, r)dπS|S=s(r)dµ∗(s) ≤inf
+λ≥0 λε +
+Z
+S
+ϕλ,G(s)dµ∗(s).
+For the reverse inequality, note that for every (λ, h) ∈∆G,ℓ,c we have
+Z
+S×S
+h(s, r) dπS|S=s(r)dµ∗(s) ≥
+Z
+S×S
+ℓ(r, G) −λc(s, r) dπS|S=s(r)dµ∗(s).
+Hence, noticing that for the choice of Ks = P(S) it holds that
+{δφ(s) ⊗µ∗: φ : S →S measurable} ⊂{πS|S : S →Ks}
+we have that
+inf
+(λ,h)∈∆G,ℓ,c λε +
+sup
+πS|S:S→Ks
+Z
+S×S
+h(s, r)dπS|S=s(r)dµ∗(s)
+≥inf
+λ≥0 λε + sup
+φ:S→S
+Z
+S
+ℓ(φ(s), G) −λc(s, φ(s))dµ∗(s)
+= inf
+λ≥0 λε +
+Z
+S
+sup
+φ:S→S
+ℓ(φ(s), G) −λc(s, φ(s))dµ∗(s)
+= inf
+λ≥0 λε +
+Z
+S
+ϕλ,G(x, y)dµ∗(x, y).
+as we wanted to prove, where in the first equality we used [52, Theorem 3A].
+B.3
+Proof of Theorem 3.4
+Proof. Define
+ϕλ,G(x, y) := sup
+u∈X
+Z
+Y
+ℓ(u, v, G) −λc((x, y), (u, v)) dµ∗
+Y |X=u(v)
+
+.
+Since K(x,y) = K = {µX ⊗µ∗
+Y |X : µX ∈P(X)} we have that for every πS|S : S →Ks
+Z
+S
+ϕλ,G(x, y) dπS|S=s(x, y) dµ∗(x, y) =
+Z
+S
+ϕλ,G(x, y) dµ∗(x, y)
+=
+Z
+S
+sup
+u∈X
+Z
+Y
+ℓ(u, v, G) −λc((x, y), (u, v)) dµ∗
+Y |X=u(v)
+
+dµ∗(x, y)
+≥
+Z
+S
+Z
+X
+Z
+Y
+ℓ(u, v, G) −λc((x, y), (u, v)) dµ∗
+Y |X=u(v)dµX(u) dµ∗(x, y)
+=
+Z
+S
+ℓ(u, v, G) −λc((x, y), (u, v))dπS|S=s(x, y) dµ∗(x, y)
+so that
+{(λ, h) : h(x, y, u, v) = ϕλ,G(x, y)} ⊆∆G,ℓ,c.
+35
+
+PAGE 36
+Therefore
+inf
+(λ,h)∈∆G,ℓ,cλε +
+sup
+πS|S:S→Ks
+Z
+S×S
+h(s, r) dπS|S=s(r)dµ∗(s)
+≤
+inf
+(λ,h)∈∆G,ℓ,c λε +
+Z
+S
+ϕλ,G(x, y)dµ∗(x, y).
+For the opposite inequality, for all (λ, h) ∈∆G,ℓ,c we have
+Z
+h(s, r) dπS|S=s(r)dµ∗(s) ≥
+Z
+ℓ(r, G) −λc(s, r) dπS|S=s(r)dµ∗(s),
+∀πS|S : S →Ks.
+Hence noticing that
+{δφ(x,y) ⊗µ∗
+Y |X : φ : S →X} ⊂{πS|S : S →Ks}
+it holds that
+inf
+(λ,h)∈∆G,ℓ,c λε +
+sup
+πS|S:S→Ks
+Z
+S×S
+h(s, r)dπS|S=s(r)dµ∗(s)
+≥inf
+λ≥0 λε +
+sup
+µX∈P (X)
+Z
+S
+Z
+S
+ℓ(u, v, G) −λc((x, y), (u, v))dµY |X=u(v)dµX(u)dµ∗(x, y)
+≥inf
+λ≥0 λε +
+sup
+φ:S→X
+Z
+S
+Z
+Y
+ℓ(u, v, G) −λc((x, y), (φ(x, y), v))dµY |X=φ(x,y)(v)dµ∗(x, y)
+= λε +
+sup
+φ:S→X
+Z
+Y
+ℓ(u, v, G) −λc((x, y), (φ(x, y), v))dµY |X=φ(x,y)(v)dµ∗(x, y)
+= λε +
+Z
+S
+sup
+u∈X
+Z
+Y
+ℓ(u, v, G) −λc((x, y), (u, v))dµY |X=u(v)dµ∗(x, y)
+as we wanted to prove, where in the first equality we used [52, Theorem 3A].
+C
+Proof of Corollary 4.2.1
+Proof. We first show (i). By definition of the cost cY |X, any transport plan π with finite cost must
+be supported on the set {(x, y, u, v) : x = u}. Thus its marginals on X must coincide, which implies
+µ∗
+X = µX. Conversely, if µ∗
+X = µX and since X, Y are compact admissible plans with finite cost exist.
+Assume in the rest of the proof that µ∗
+X = µX.
+We now prove the inequality
+Wcond(µ∗, µ) ≥WcY |X(µ∗, µ).
+In the following, we will write πx to mean π(Y ×Y )|X=x and δx to mean δX|X=x for readability. For
+each x ∈X, let πx be an optimal transport plan between µ∗
+Y |X=x and µY |X=x. Define a coupling π
+on (X × Y )2 by π(x, y, u, v) := µ∗
+X(x) ⊗[πx(y, v)δx(u)]. By construction, π has marginals µ∗and µ
+and is thus admissible. Using the definition of cY |X, we obtain
+Z
+(X×Y )2 cY |X((x, y), (u, v)) dπ((x, y), (u, v)) =
+Z
+X
+Z
+Y ×Y
+cY (y, v) dπx(y, v) dµ∗
+X(x)
+= Wcond(µ∗, µ)
+where cY (y, v) := ∥y −v∥2 is the cost function only on Y . Taking the infimum over all admissible
+plans yields the desired inequality.
+For the reverse inequality, let π be an optimal transport plan for WcY |X. Since finite cost requires
+x = u, the plan π is concentrated on {x = u}. Disintegrating π with respect to x, we may write
+π(x, y, u, v) = µ∗
+X(x) ⊗[πx(y, v)δx(u)], where for µ∗
+X-a.e. x, πx is a coupling of µ∗
+Y |X=x and µY |X=x.
+Then,
+36
+
+PAGE 37
+Z
+(X×Y )2 cY |X((x, y), (u, v)) dπ((x, y), (u, v)) =
+Z
+X
+Z
+Y ×Y
+cY (y, v) dπx(y, v) dµ∗
+X(x)
+≥Wcond(µ∗, µ)
+thus proving the claim.
+37

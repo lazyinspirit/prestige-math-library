@@ -22,7 +22,7 @@ deps:
 justified_by: []
 aliases: []
 proof_strategy: direct
-axiom_use: "Full AC is inherited only through the solid-torus skein-basis interface; the finite root and fusion calculations themselves are choice-free."
+axiom_use: "Full AC is inherited through the solid-torus skein-basis interface, the state-space surgery and universal-construction inputs used in F6, and the weighted-bordism and pairing interfaces. The finite root and fusion calculations themselves are choice-free."
 provenance:
   statement: ai-generated
   proof: literature-derived

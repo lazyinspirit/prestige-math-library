@@ -1,0 +1,15 @@
+# Batch 9: repair 1
+
+Run: inverse-problems-knot-theory-all-109-2026-10-19
+Batch: 9
+Round: 1
+Read the complete assigned A/B pages and items, approved scope and actual supplier claims/proofs. Review the whole batch before reporting.
+Pages: minimax-estimation-over-inverse-source-classes, minimax-estimation-over-inverse-source-classes-examples
+Items: lem-ip-univariate-gaussian-projection-minimax-comparison, lem-ip-power-source-class-as-statistical-ellipsoid, thm-ip-general-source-minimax-comparison, cor-ip-mild-and-severe-estimation-rates, ex-ip-sobolev-minimax-rates, ex-ip-analytic-minimax-rates, ex-ip-power-source-minimax-rates
+Consolidated findings: [{"id":"lem-ip-univariate-gaussian-projection-minimax-comparison","type":"prerequisite","reason":"Steps 1.3–1.4 use strict increase and positivity of exp, which the listed facts do not state. Steps 1.1, 1.3 and 2.1 also use whole-line Lebesgue substitutions and limit passages, while the cited substitution result covers compact Riemann integrals. Add or prove the required exponential facts and justify the full-line Lebesgue calculations."},{"id":"thm-ip-general-source-minimax-comparison","type":"local","reason":"Step 1.4 uses n! ≥ 6·3^(n−3), with strictness, without proving it; add the short induction needed for e < 11/4. In step 2.1, specify the first gap before a later saturated index so the mass transfer demonstrably lengthens the initial saturated segment."}]
+Authorized source files: ["items/lem-ip-univariate-gaussian-projection-minimax-comparison.md","items/lem-ip-power-source-class-as-statistical-ellipsoid.md","items/thm-ip-general-source-minimax-comparison.md","items/cor-ip-mild-and-severe-estimation-rates.md","items/ex-ip-sobolev-minimax-rates.md","items/ex-ip-analytic-minimax-rates.md","items/ex-ip-power-source-minimax-rates.md","library/inverse-problems/minimax-estimation-over-inverse-source-classes.md","library/inverse-problems/minimax-estimation-over-inverse-source-classes-examples.md"]. Edit these assigned source files directly. Resolve prerequisite gaps locally on the same page where possible.
+Repair suppliers before their affected consumers; pair dispatch has no prerequisite-completion requirement. Preserve sound approved claims and avoid Statement/Definition changes when possible. If a public interface changes, the same repairer owns all affected direct/indirect consumer checks and authorized repairs.
+Your duties are review, repair and escalation only. Do not hash, recertify, reconcile dependency levels, maintain manifests/coverage/contracts/ledgers, or run formatting/gate batteries. The owner orchestrator handles that work.
+Return only the result schema with prepared reviewed_items/reviewed_pages, verdict, concise findings and consumer_checks. Do not edit reports or engine state.
+Escalate to the owner if the final second review remains unsatisfied, or a significant prerequisite gap cannot be resolved locally on the same page. Otherwise use the single local repair and final review.
+Previous repair consumers: [].

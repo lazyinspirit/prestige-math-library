@@ -12,6 +12,10 @@ justified_by: []
 proof_strategy: direct
 verification:
   precheck: pass
+  judge:
+    model: "gpt-6-luna"
+    verdict: pass
+    date: 2026-10-22
 axiom_use: No choice axiom is used; the scalar example is explicit.
 provenance:
   statement: ai-generated

@@ -20,6 +20,11 @@ proof_strategy: direct
 provenance:
   statement: literature-derived
   proof: ai-altered
+verification:
+  judge:
+    model: "gpt-6-luna"
+    verdict: pass
+    date: 2026-10-22
 sources:
   references:
     - title: "Anthony Conway, Burau Maps and Twisted Alexander Polynomials, §§2.4 and 3.1"

@@ -1,0 +1,19 @@
+# Locally flat Seifert-hypersurface obligation
+
+The original full locally flat Statement is retained in the canonical item. No topological hypersurface proof has been completed here.
+
+The smoothness of the complement supplies a genuine first construction, but not the required closure. For the capped locally flat oriented surface Sigma in the interior of the standard four-ball, its complement in the ambient four-sphere is an open subset of a smooth manifold. Alexander duality gives its integral meridian homomorphism H1 to Z. The universal-coefficient theorem and the de Rham comparison give a closed smooth one-form whose periods on loops equal that homomorphism. The exponential of its path integral is a well-defined smooth circle-valued map: two paths differ by a loop of integral period, and a local primitive proves smoothness. It has degree one on each positive meridian and hence is onto. A regular fiber is an oriented embedded smooth three-manifold in the complement. Its smooth coorientation supplies a bicollar there.
+
+One can also make the map constant outside the four-ball. On the outer region, which is a product of a three-sphere with an interval, the closed form has a single-valued primitive because that region is simply connected. Subtract the differential of a cutoff times that primitive. The modified form has the same periods and vanishes on the outside end. Choosing a regular value different from the outside constant gives a fiber contained inside the ball, away from the capped surface.
+
+The missing step is not a regular-value argument on this open smooth complement. It is proving that a suitable fiber closes at Sigma as a compact locally flat three-manifold with the prescribed product charts and prescribed positive push-off. Smooth or C0 approximation of an angular map on the complement does not guarantee this closure. An arbitrary regular fiber could have complicated topology accumulating on the surface. Neither compactness nor an ambient bicollar along the surface follows from the period calculation.
+
+Freedman–Quinn's full scanned book was retrieved at the URL and hash recorded in `source-texts/freedman-quinn-source-reading.json`. The following passages were actually inspected visually:
+
+- Printed p.137: “A locally flat submanifold of a 4-manifold has a normal bundle, which is unique up to ambient isotopy.” The following paragraph gives the relative version matching a prescribed bundle near a closed subset.
+- Printed p.138: “The proof given basically comes from Quinn [4], and deduces the result, from the analogous theorem in dimensions 5 and the controlled h-cobordism theorem.” Printed p.139 applies their controlled theorem 7.2C.
+- Printed p.151, Theorem 9.5A: proper topological submanifolds can be made transverse by an isotopy relative to an already transverse closed region. The proof separates low-dimensional cases from the difficult two-dimensional case.
+- Printed pp.157–159: the three-dimensional/codimension-one case uses normal-bundle uniqueness, the sum-stable smoothing theorem 8.7C, a smooth handlebody, and handle cancellations. Printed p.159 then derives map transversality from submanifold transversality by the graph-embedding construction.
+- Printed pp.114–116, Theorem 8.1A(1): smoothing a homeomorphism near a one-dimensional complex is also proved using a five-dimensional smoothing theorem and controlled h-cobordism. This would provide an arc-smoothing route for batch74, but its proof is not an elementary smooth transversality argument.
+
+These are established source theorems, not accepted local suppliers. Merely citing them would violate the library's local-proof requirement. A complete source repair must either author the necessary special relative normal-bundle and transverse-fiber theorem, including their actual prerequisites, or give a different complete construction. No ambient-complement smoothing shortcut has yet supplied that theorem.

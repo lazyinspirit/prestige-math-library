@@ -32,7 +32,7 @@ verification:
 
 ## Definition
 
-Let $D$ be a nonempty finite regular oriented link diagram: a projection of a finite union of oriented circles with finitely many transverse double points, no triple points, and one overpassing branch specified at each double point. Let $c(D)$ be its number of crossings and $m(D)$ its number of components. An arc is a connected strand segment cut at each undercrossing; each component with no undercrossings contributes one closed arc. Write $a(D)$ for the number of arcs. If $q(D)$ components have no undercrossings, then $a(D)=c(D)+q(D)$ and $0\le q(D)\le m(D)$.
+Let $D$ be a nonempty finite regular oriented link diagram: a smooth immersion of a finite union of oriented circles into the plane with finitely many transverse double points, no triple points, and one overpassing branch specified at each double point. Let $c(D)$ be its number of crossings and $m(D)$ its number of components. An arc is a connected strand segment cut at each undercrossing; each component with no undercrossings contributes one closed arc. Write $a(D)$ for the number of arcs. If $q(D)$ components have no undercrossings, then $a(D)=c(D)+q(D)$ and $0\le q(D)\le m(D)$.
 
 A supplied finite code for $D$ has code length $L$, the total number of bits in that literal code, including its tags, signs, labels, and separators. The length depends on the chosen encoding. In particular, for one of the tagged Gauss, signed Dowker–Thistlethwaite, or oriented planar-diagram formats, $L$ is the bit length of the supplied valid code in that format. The procedures in this page take typed mathematical diagrams or valid codes as stated; no string parser or malformed-code behavior is included in any operation count.
 

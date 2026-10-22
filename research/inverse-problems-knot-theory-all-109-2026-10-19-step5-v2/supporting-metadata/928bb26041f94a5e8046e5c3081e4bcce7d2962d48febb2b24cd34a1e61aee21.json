@@ -1,0 +1,318 @@
+[
+  {
+    "order": 3014,
+    "id": "minimax-estimation-over-inverse-source-classes",
+    "kind": "A",
+    "category": "inverse-problems",
+    "title": "Minimax estimation over inverse source classes",
+    "companion": "minimax-estimation-over-inverse-source-classes-examples",
+    "requires": [
+      "deterministic-source-conditions-and-optimal-recovery",
+      "gaussian-sequence-models-and-risk-decomposition",
+      "minimax-lower-bounds-and-information-theoretic-methods"
+    ],
+    "items": [
+      {
+        "id": "lem-ip-univariate-gaussian-projection-minimax-comparison",
+        "kind": "lemma",
+        "title": "A one-coordinate projection risk bound",
+        "statement": "Assume Countable Choice. Let $r\\ge0$ and $\\tau>0$. In the one-dimensional Gaussian location experiment with parameter $\\theta\\in[-r,r]$, action space $\\mathbb R$, observation density\n$$p_{\\theta,\\tau}(y)=\\frac{1}{\\tau\\sqrt{2\\pi}}\\exp\\!\\left(-\\frac{(y-\\theta)^2}{2\\tau^2}\\right)$$\nwith respect to Lebesgue measure, and squared-error loss, let $M(r,\\tau)$ be the minimax expected risk over all measurable deterministic or randomized estimators. Put $b=\\min\\{r,\\tau\\}$ and take the prior assigning mass $1/2$ to each of $-b$ and $b$. The better of the estimators $y\\mapsto0$ and $y\\mapsto y$ has worst-case risk $T(r,\\tau)=\\min\\{r^2,\\tau^2\\}$, and this prior has Bayes risk at least $T(r,\\tau)/\\sqrt{2e}$, so $M(r,\\tau)\\ge T(r,\\tau)/\\sqrt{2e}$.",
+        "strategy": "Use the equal two-point prior at the interval endpoints, compute its posterior variance exactly, lower-bound the resulting Gaussian integral, and compare with the risk of the two projection estimators.",
+        "deps": [
+          "def-countable-choice",
+          "def-ip-gaussian-sequence-inverse-model",
+          "def-ip-isonormal-white-noise-experiment",
+          "def-statistical-experiment",
+          "def-measurable-space",
+          "def-borel-sigma-algebra",
+          "def-lebesgue-measure-and-the-lebesgue-sigma-algebra",
+          "thm-borel-sets-are-lebesgue-measurable",
+          "prop-closure-properties-of-measurable-functions-used-by-the-integral",
+          "def-bayes-and-minimax-risk",
+          "def-loss-function-and-risk",
+          "def-randomized-procedure-as-a-markov-kernel",
+          "thm-gaussian-integral",
+          "def-mixed-improper-integral",
+          "thm-substitution-for-improper-integrals",
+          "thm-nonnegative-improper-riemann-integral-agrees-with-the-lebesgue-integral-on-a-half-line",
+          "thm-c-one-change-of-variables-for-nonnegative-lebesgue-measurable-functions",
+          "thm-lebesgue-measure-of-a-box-of-every-kind",
+          "cor-integral-over-a-null-set-vanishes",
+          "cor-additivity-of-the-nonnegative-lebesgue-integral",
+          "def-hyperbolic-functions",
+          "thm-hyperbolic-identities-and-derivatives",
+          "def-real-exponential-function-and-e",
+          "thm-exponential-addition-formula",
+          "cor-exponential-reciprocal-and-positivity",
+          "thm-exponential-is-strictly-increasing",
+          "thm-derivative-of-exponential",
+          "thm-chain-rule",
+          "thm-algebra-of-derivatives",
+          "cor-mean-value-theorem",
+          "prop-order-and-scalar-rules-for-the-nonnegative-integral",
+          "thm-continuous-preimages-of-borel-sets-are-borel"
+        ],
+        "dependency_level": 3,
+        "proof_strategy": "direct",
+        "sources": {
+          "references": [
+            {
+              "title": "Iain M. Johnstone, Gaussian estimation: Sequence and wavelet models, 2011 draft, §2.3, equations (2.26)–(2.30), and §4.6, Theorem 4.17 proof, printed pp. 29–30 and 111–113",
+              "url": "https://mathweb.ucsd.edu/~jbradic/math281a/Johnstone.pdf"
+            },
+            {
+              "title": "Litao Ding and Peter Mathé, Minimax rates for statistical inverse problems under general source conditions, §2, equations (12)–(13), PDF pp. 3–4",
+              "url": "https://arxiv.org/pdf/1707.01706v2"
+            }
+          ]
+        },
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "axiom_use": "Countable Choice is assumed for Lebesgue affine change of variables and the improper-Riemann-to-Lebesgue bridge, and is also inherited through the Gaussian sequence model; the scalar prior calculation uses no additional choice.",
+        "justified_by": []
+      },
+      {
+        "id": "lem-ip-power-source-class-as-statistical-ellipsoid",
+        "kind": "lemma",
+        "title": "Power source balls are weighted statistical ellipsoids",
+        "statement": "Assume Countable Choice and let $K:X\\to Y$ be a compact operator of infinite rank between real Hilbert spaces, with positive singular values $s_1\\ge s_2\\ge\\cdots\\downarrow0$. For every $\\nu,\\rho>0$, the coefficient sequences of the minimum-norm power source ball\n$$X_{\\nu,\\rho}(K)=\\{|K|^\\nu w:w\\in X,\\ \\|w\\|_X\\le\\rho\\}$$\nare exactly\n$$\\left\\{\\theta\\in\\ell^2(\\mathbb N,\\mathbb R):\\sum_{j\\ge1}s_j^{-2\\nu}\\theta_j^2\\le\\rho^2\\right\\}.$$\nThus its ellipsoid weights are $a_j=s_j^{-\\nu}$, a positive nondecreasing sequence.",
+        "strategy": "Expand the spectral power in the fixed right singular basis for one inclusion, then construct a source vector from the weighted-square-summable coefficients for the reverse inclusion.",
+        "deps": [
+          "def-ip-gaussian-sequence-inverse-model",
+          "def-ip-statistical-ellipsoid-class",
+          "def-ip-power-source-set",
+          "lem-ip-index-source-elements-are-minimum-norm",
+          "def-compact-spectral-filter-and-qualification",
+          "thm-singular-value-decomposition-for-compact-operators",
+          "def-countable-choice",
+          "def-real-power",
+          "thm-real-power-laws",
+          "thm-real-power-continuity-and-derivatives",
+          "cor-mean-value-theorem"
+        ],
+        "dependency_level": 5,
+        "proof_strategy": "direct",
+        "sources": {
+          "references": [
+            {
+              "title": "Litao Ding and Peter Mathé, Minimax rates for statistical inverse problems under general source conditions, Definition 2, equations (5)–(6), PDF p. 2",
+              "url": "https://arxiv.org/pdf/1707.01706v2"
+            }
+          ]
+        },
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "axiom_use": "Countable Choice is inherited through the compact singular system and the source-class definition; the coefficient comparison and converse construction use no additional choice.",
+        "justified_by": []
+      },
+      {
+        "id": "thm-ip-general-source-minimax-comparison",
+        "kind": "theorem",
+        "title": "Cutoff risk and minimax RMS error over statistical ellipsoids",
+        "statement": "Assume Countable Choice. Fix $\\epsilon>0$, $Q\\ge0$, a nonincreasing sequence $s_j>0$ with $s_j\\to0$, and a nondecreasing sequence $a_j>0$. Observe $Z_j=\\theta_j+\\epsilon s_j^{-1}\\xi_j$ for $j\\ge1$, where the $\\xi_j$ are independent standard normal variables, and let the unknown parameter range over\n$$\\Theta_a(Q)=\\left\\{\\theta\\in\\ell^2(\\mathbb N,\\mathbb R):\\sum_{j\\ge1}a_j^2\\theta_j^2\\le Q^2\\right\\}.$$\nLet $R_*(\\epsilon)$ be the square root of the minimax expected squared $\\ell^2$ error over all measurable deterministic or randomized estimators from the product Borel data space to $\\ell^2$, and put\n$$R_{\\rm cut}(\\epsilon)=\\left[\\inf_{D\\in\\mathbb N_0}\\left\\{\\frac{Q^2}{a_{D+1}^2}+\\epsilon^2\\sum_{j=1}^{D}s_j^{-2}\\right\\}\\right]^{1/2},\\qquad\\mathbb N_0=\\{0,1,2,\\ldots\\}.$$\nThen $R_*(\\epsilon)\\le R_{\\rm cut}(\\epsilon)\\le2.2R_*(\\epsilon)$.",
+        "strategy": "The exact cutoff-risk formula gives the upper bound. For the lower bound, maximize the coordinatewise box-risk functional under the ellipsoid budget, choose its saturated coordinates as a prefix, bound a cutoff risk by twice this maximum, and use a finite product of endpoint priors with the one-coordinate lemma.",
+        "deps": [
+          "def-ip-gaussian-sequence-inverse-model",
+          "def-ip-statistical-ellipsoid-class",
+          "alg-ip-svd-truncated-estimator",
+          "thm-ip-truncated-estimator-exact-risk",
+          "lem-ip-univariate-gaussian-projection-minimax-comparison",
+          "def-bayes-and-minimax-risk",
+          "def-loss-function-and-risk",
+          "def-randomized-procedure-as-a-markov-kernel",
+          "def-countable-choice",
+          "def-real-exponential-function-and-e",
+          "def-factorial-and-falling-factorial",
+          "def-canonical-natural",
+          "lem-of-naturals-positive",
+          "thm-induction-principle",
+          "def-integer-power",
+          "lem-power-laws",
+          "lem-limit-preserves-order",
+          "thm-geometric-series",
+          "lem-finite-measure-uniqueness-on-a-pi-system",
+          "thm-euclidean-heine-borel-pseudocompactness-and-extreme-values",
+          "thm-continuous-preimages-of-borel-sets-are-borel"
+        ],
+        "dependency_level": 5,
+        "proof_strategy": "direct",
+        "sources": {
+          "references": [
+            {
+              "title": "Litao Ding and Peter Mathé, Minimax rates for statistical inverse problems under general source conditions, §1, equations (3)–(9), and the complete proof in §2, PDF pp. 1–5",
+              "url": "https://arxiv.org/pdf/1707.01706v2"
+            },
+            {
+              "title": "Iain M. Johnstone, Gaussian estimation: Sequence and wavelet models, 2011 draft, §§4.3–4.6, printed pp. 104–113",
+              "url": "https://mathweb.ucsd.edu/~jbradic/math281a/Johnstone.pdf"
+            }
+          ]
+        },
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "axiom_use": "Countable Choice is inherited through the inverse sequence model and the exact-risk supplier. The finite endpoint prior and the lower-bound calculation use no additional choice.",
+        "justified_by": []
+      },
+      {
+        "id": "cor-ip-mild-and-severe-estimation-rates",
+        "kind": "corollary",
+        "title": "Polynomial and exponential minimax estimation rates",
+        "statement": "Assume Countable Choice, $Q>0$, and $p,\\kappa>0$. As $\\epsilon\\downarrow0$, the minimax RMS error over $\\Theta_a(Q)$ has the following order-sharp rates: if $s_j\\asymp j^{-p}$ and $a_j\\asymp j^\\kappa$, then $R_*(\\epsilon)\\asymp\\epsilon^{\\kappa/(\\kappa+p+1/2)}$; if $s_j\\asymp e^{-pj}$ and $a_j\\asymp j^\\kappa$, then $R_*(\\epsilon)\\asymp[\\log(1/\\epsilon)]^{-\\kappa}$; if $s_j\\asymp j^{-p}$ and $a_j\\asymp e^{\\kappa j}$, then $R_*(\\epsilon)\\asymp\\epsilon[\\log(1/\\epsilon)]^{p+1/2}$; and if $s_j\\asymp e^{-pj}$ and $a_j\\asymp e^{\\kappa j}$, then $R_*(\\epsilon)\\asymp\\epsilon^{\\kappa/(p+\\kappa)}$. Here $u_j\\asymp v_j$ as $j\\to\\infty$ or $f(\\epsilon)\\asymp g(\\epsilon)$ as $\\epsilon\\downarrow0$ means the ratio is bounded above and below by positive constants on the indicated tail; the constants may depend on $Q,p,\\kappa$ and the axis comparison constants.",
+        "strategy": "Estimate the cutoff bias and cumulative variance in each polynomial or exponential regime, choose an integer cutoff at their order-balance, prove the matching lower bound by splitting cutoffs below and above that threshold, and transfer the result by the minimax comparison theorem.",
+        "deps": [
+          "def-ip-gaussian-sequence-inverse-model",
+          "def-ip-statistical-ellipsoid-class",
+          "thm-ip-truncated-estimator-exact-risk",
+          "thm-ip-general-source-minimax-comparison",
+          "def-countable-choice",
+          "def-natural-logarithm",
+          "thm-natural-logarithm-laws",
+          "def-real-exponential-function-and-e",
+          "def-real-power",
+          "thm-real-power-laws",
+          "thm-real-power-continuity-and-derivatives",
+          "cor-mean-value-theorem",
+          "thm-geometric-series",
+          "thm-exponential-beats-every-polynomial",
+          "thm-exponential-is-strictly-increasing"
+        ],
+        "dependency_level": 6,
+        "proof_strategy": "direct",
+        "sources": {
+          "references": [
+            {
+              "title": "Litao Ding and Peter Mathé, Minimax rates for statistical inverse problems under general source conditions, §3 and Table 1, PDF pp. 5–6",
+              "url": "https://arxiv.org/pdf/1707.01706v2"
+            },
+            {
+              "title": "Iain M. Johnstone, Gaussian estimation: Sequence and wavelet models, 2011 draft, §4.5, Proposition 4.16, and §4.6, Theorem 4.17 proof, printed pp. 109–113",
+              "url": "https://mathweb.ucsd.edu/~jbradic/math281a/Johnstone.pdf"
+            }
+          ]
+        },
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "axiom_use": "Countable Choice is inherited through the Gaussian sequence model and the minimax comparison theorem; the cutoff balances are choice-free.",
+        "justified_by": []
+      }
+    ]
+  },
+  {
+    "order": 3015,
+    "id": "minimax-estimation-over-inverse-source-classes-examples",
+    "kind": "B",
+    "category": "inverse-problems",
+    "title": "Minimax estimation over inverse source classes — Examples",
+    "companion": "minimax-estimation-over-inverse-source-classes",
+    "requires": [
+      "minimax-estimation-over-inverse-source-classes"
+    ],
+    "items": [
+      {
+        "id": "ex-ip-sobolev-minimax-rates",
+        "kind": "example",
+        "title": "Sobolev ellipsoid rates in polynomial and exponential spectra",
+        "statement": "Assume Countable Choice, take $Q>0$ and Sobolev-type weights $a_j\\asymp j$ in the Gaussian sequence inverse model. If the singular values satisfy $s_j\\asymp j^{-1}$, the minimax RMS error is of order $\\epsilon^{2/5}$ as $\\epsilon\\downarrow0$; if instead $s_j\\asymp e^{-j}$, it is of order $[\\log(1/\\epsilon)]^{-1}$. The comparison constants may depend on the fixed ellipsoid and axis constants.",
+        "strategy": "Substitute p=kappa=1 into the polynomial-weight rows of the minimax-rate corollary and simplify the exponents.",
+        "deps": [
+          "cor-ip-mild-and-severe-estimation-rates",
+          "def-ip-gaussian-sequence-inverse-model",
+          "def-ip-statistical-ellipsoid-class",
+          "def-countable-choice"
+        ],
+        "dependency_level": 7,
+        "proof_strategy": "direct",
+        "sources": {
+          "references": [
+            {
+              "title": "Litao Ding and Peter Mathé, Minimax rates for statistical inverse problems under general source conditions, §3 and Table 1, PDF pp. 5–6",
+              "url": "https://arxiv.org/pdf/1707.01706v2"
+            }
+          ]
+        },
+        "provenance": {
+          "statement": "ai-generated",
+          "proof": "ai-generated"
+        },
+        "generation": {
+          "role": "example"
+        },
+        "axiom_use": "Countable Choice is inherited through the Gaussian sequence model; both parameter substitutions are choice-free.",
+        "justified_by": []
+      },
+      {
+        "id": "ex-ip-analytic-minimax-rates",
+        "kind": "example",
+        "title": "Analytic ellipsoid rates in polynomial and exponential spectra",
+        "statement": "Assume Countable Choice, take $Q>0$ and analytic-type weights $a_j\\asymp e^j$ in the Gaussian sequence inverse model. If the singular values satisfy $s_j\\asymp j^{-1}$, the minimax RMS error is of order $\\epsilon[\\log(1/\\epsilon)]^{3/2}$ as $\\epsilon\\downarrow0$; if instead $s_j\\asymp e^{-j}$, it is of order $\\epsilon^{1/2}$. The comparison constants may depend on the fixed ellipsoid and axis constants.",
+        "strategy": "Substitute p=kappa=1 into the analytic-weight rows of the minimax-rate corollary and simplify the exponents.",
+        "deps": [
+          "cor-ip-mild-and-severe-estimation-rates",
+          "def-ip-gaussian-sequence-inverse-model",
+          "def-ip-statistical-ellipsoid-class",
+          "def-countable-choice"
+        ],
+        "dependency_level": 7,
+        "proof_strategy": "direct",
+        "sources": {
+          "references": [
+            {
+              "title": "Litao Ding and Peter Mathé, Minimax rates for statistical inverse problems under general source conditions, §3 and Table 1, PDF pp. 5–6",
+              "url": "https://arxiv.org/pdf/1707.01706v2"
+            }
+          ]
+        },
+        "provenance": {
+          "statement": "ai-generated",
+          "proof": "ai-generated"
+        },
+        "generation": {
+          "role": "example"
+        },
+        "axiom_use": "Countable Choice is inherited through the Gaussian sequence model; both parameter substitutions are choice-free.",
+        "justified_by": []
+      },
+      {
+        "id": "ex-ip-power-source-minimax-rates",
+        "kind": "example",
+        "title": "First-order power-source rates in polynomial and exponential spectra",
+        "statement": "Assume Countable Choice. Let $X$ and $Y$ be real Hilbert spaces, let $K:X\\to Y$ be a compact operator of infinite rank, and write $s_1\\ge s_2\\ge\\cdots>0$, $s_j\\to0$, for its positive singular values. Set $Q=\\rho>0$ and $\\nu=1$. Over the minimum-norm power source ball $X_{1,\\rho}(K)$ in the Gaussian sequence inverse model associated with this singular system, if $s_j\\asymp j^{-1}$ then the minimax RMS error is of order $\\epsilon^{2/5}$; if $s_j\\asymp e^{-j}$ then it is of order $\\epsilon^{1/2}$ as $\\epsilon\\downarrow0$. The constants may depend on $\\rho$ and the fixed singular-value comparison constants.",
+        "strategy": "Identify the source ball with the ellipsoid having weights a_j=s_j^{-1}, then apply the polynomial/polynomial and exponential/exponential rows of the minimax-rate corollary.",
+        "deps": [
+          "cor-ip-mild-and-severe-estimation-rates",
+          "lem-ip-power-source-class-as-statistical-ellipsoid",
+          "def-ip-power-source-set",
+          "def-ip-gaussian-sequence-inverse-model",
+          "def-countable-choice"
+        ],
+        "dependency_level": 7,
+        "proof_strategy": "direct",
+        "sources": {
+          "references": [
+            {
+              "title": "Litao Ding and Peter Mathé, Minimax rates for statistical inverse problems under general source conditions, Definition 2 and §3, Table 1, PDF pp. 2 and 5–6",
+              "url": "https://arxiv.org/pdf/1707.01706v2"
+            }
+          ]
+        },
+        "provenance": {
+          "statement": "ai-generated",
+          "proof": "ai-generated"
+        },
+        "generation": {
+          "role": "example"
+        },
+        "axiom_use": "Countable Choice is inherited through the source-class and sequence-model definitions; the rate specialization is choice-free.",
+        "justified_by": []
+      }
+    ]
+  }
+]

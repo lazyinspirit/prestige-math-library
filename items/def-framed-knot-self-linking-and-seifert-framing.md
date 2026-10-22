@@ -69,9 +69,9 @@ integer is assigned before choosing a reference.
 
 The **self-linking number** of a framed knot $(K,[s])$ is the linking number
 of $K$ with a sufficiently small push-off along $s$, oriented parallel to $K$.
-The push-off and its integer are independent of the representative section,
-small radius, and normalized tubular chart by the preceding well-definedness
-result.
+The push-off depends on the representative section, small radius, and normalized
+tubular chart, but its linking integer is independent of these choices by the
+preceding well-definedness result.
 
 If a compact oriented surface $\Sigma$ is supplied with boundary $K$, its
 **Seifert framing relative to $\Sigma$** is the homotopy class of the inward

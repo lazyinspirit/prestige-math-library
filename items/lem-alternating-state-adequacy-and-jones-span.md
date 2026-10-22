@@ -33,7 +33,7 @@ sources:
 
 ## Statement
 
-Assume full AC and let $D$ be a connected reduced alternating diagram with $c$ crossings. At every crossing, changing one smoothing from the all-$A$ state or from the all-$B$ state merges two distinct state circles; these are A- and B-adequacy. The Kauffman bracket has $A$-span $4c$. If $D$ represents a knot $K$, then the library Jones polynomial has $t$-span $c$, and every $c'$-crossing diagram of $K$ has $t$-span at most $c'$ under the convention $t=A^{-4}$. The span of a nonzero Laurent polynomial is its largest exponent minus its smallest exponent.
+Assume full AC and let $D$ be a nonempty connected reduced alternating diagram with $c$ crossings. At every crossing, changing one smoothing from the all-$A$ state or from the all-$B$ state merges two distinct state circles; these are A- and B-adequacy. The Kauffman bracket has $A$-span $4c$. If $D$ represents a knot $K$, then the library Jones polynomial has $t$-span $c$, and every $c'$-crossing diagram of $K$ has $t$-span at most $c'$ under the convention $t=A^{-4}$. The span of a nonzero Laurent polynomial is its largest exponent minus its smallest exponent.
 
 ## Statement references
 
@@ -45,17 +45,18 @@ Assume full AC and let $D$ be a connected reduced alternating diagram with $c$ c
 
 ## Facts & Assumptions
 
-**Given:** Full AC and a connected reduced alternating diagram $D$ with $c$ crossings.
+**Given:** Full AC and a nonempty connected reduced alternating diagram $D$ with $c$ crossings.
 
 [F1] In a reduced alternating diagram, successive crossing visits along each component switch over-under, and no complementary region has a crossing more than once on its boundary ([[def-reduced-alternating-link-diagram]]).
 
-[F2] For a connected reduced alternating diagram, each one-crossing change from either extreme state merges distinct circles, both extreme coefficients are nonzero, and the bracket span is $4c$; for any connected diagram its bracket span is at most $4c$ ([[lem-connected-diagram-bracket-span-bound-and-alternating-equality]]).
+[F2] For a nonempty connected reduced alternating diagram, each one-crossing change from either extreme state merges distinct circles, both extreme coefficients are nonzero, and the bracket span is $4c$; for any nonempty connected diagram its bracket span is at most $4c$ ([[lem-connected-diagram-bracket-span-bound-and-alternating-equality]]).
 
 [F3] Under full AC, the library Jones polynomial satisfies $V_K(t)=f_K(t^{-1/4})$, where $f_D(A)=(-A^3)^{-\operatorname{wr}(D)}\langle D\rangle$ and $t=A^{-4}$ ([[thm-bracket-state-sum-matches-library-jones-specialization]]).
 
 [A1] The Axiom of Choice supplies a choice function for every family of nonempty sets ([[def-axiom-of-choice]]).
 
 ## Proof
+
 1.1 By [F1], the input is a connected reduced alternating diagram, so the finite state-merging conclusion in [F2] applies. It establishes both A-adequacy and B-adequacy without invoking the separate Jones axiom branch, and gives $\operatorname{span}_A\langle D\rangle=4c$. [given, F1, F2]
 
 2.1 Suppose $D$ represents a knot $K$. Let $E$ be any $c'$-crossing diagram of the same knot, with its component oriented to represent the chosen orientation of $K$. The projection of a one-component diagram is connected because it is the continuous image of a circle; thus [F2] gives $\operatorname{span}_A\langle E\rangle\le4c'$. Multiplication by the writhe-normalizing monomial $(-A^3)^{-\operatorname{wr}(E)}$ shifts all exponents equally and does not change span. By [A1] and [F3], substituting $t=A^{-4}$ divides the exponent span by $4$, so $\operatorname{span}_t V_K(t)\le c'$. Applying this to $D$ and using step 1.1 gives $\operatorname{span}_tV_K(t)=c$. [A1, F2, F3, step 1.1, given, algebra] ∎

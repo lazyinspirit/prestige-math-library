@@ -36,6 +36,10 @@ sources:
       locator: "§4.3, subsection 'How well do PnPDP methods handle out-of-distribution sources?', PDF p. 10, for selected out-of-prior results; Appendix C, 'Robustness to prior mismatch,' PDF pp. 28–29, for the preliminary Figure 8 comparison. These empirical contexts do not establish a universal risk bound."
 verification:
   precheck: n/a
+  judge:
+    model: "gpt-6-luna"
+    verdict: pass
+    date: 2026-10-22
 axiom_use: "No choice axiom is required; the joint evaluation laws and randomized kernels are supplied as inputs."
 ---
 

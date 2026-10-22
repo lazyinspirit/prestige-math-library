@@ -50,8 +50,8 @@ Assume Countable Choice, take $Q>0$ and analytic-type weights $a_j\asymp e^j$ in
 
 ## Verification
 
-1.1 In the polynomial regime, $p=\kappa=1$, so the third formula of [F1] is $\epsilon[\log(1/\epsilon)]^{1+1/2}=\epsilon[\log(1/\epsilon)]^{3/2}$. [given, F1, algebra]
+1.1 In the polynomial regime, $p=\kappa=1$, so the first formula of [F1] is $\epsilon[\log(1/\epsilon)]^{1+1/2}=\epsilon[\log(1/\epsilon)]^{3/2}$. [given, F1, algebra]
 
-1.2 In the exponential regime, the fourth formula of [F1] has exponent $\kappa/(p+\kappa)=1/2$, giving $\epsilon^{1/2}$. [given, F1, algebra]
+1.2 In the exponential regime, the second formula of [F1] has exponent $\kappa/(p+\kappa)=1/2$, giving $\epsilon^{1/2}$. [given, F1, algebra]
 
 2.1 By [A1], the Gaussian sequence model is interpreted with its stated Countable Choice prerequisite. The two substitutions give exactly the two stated RMS orders; $Q$ and the asymptotic comparison constants affect only the multiplicative bounds. [A1, step 1.1, step 1.2, F2, algebra] ∎

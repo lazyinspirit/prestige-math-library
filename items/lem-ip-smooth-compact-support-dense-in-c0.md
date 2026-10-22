@@ -8,7 +8,6 @@ deps:
   - def-compact-support-c-c-and-c-zero-on-an-lch-space
   - lem-smooth-bump-between-concentric-euclidean-balls
   - thm-heine-borel-rn
-  - thm-dominated-convergence
 proof_strategy: direct
 provenance:
   statement: literature-derived
@@ -35,16 +34,14 @@ For every open set $\Omega\subseteq\mathbb R^n$, the space $C_c^\infty(\Omega)$ 
 
 **Given:** An open set $\Omega\subseteq\mathbb R^n$ and a continuous function on $\Omega$ that vanishes at infinity.
 
-[F1] Closed bounded subsets of $\mathbb R^n$ are compact. ([[thm-heine-borel-rn]])
+[F1] For $n\ge1$, closed bounded subsets of $\mathbb R^n$ are compact. ([[thm-heine-borel-rn]])
 
-[F2] A smooth bump can be chosen equal to one on an inner ball and supported in a larger ball. ([[lem-smooth-bump-between-concentric-euclidean-balls]])
-
-[F3] Dominated convergence holds on Lebesgue measure spaces without a choice assumption. ([[thm-dominated-convergence]])
+[F2] For $n\ge1$, a smooth bump can be chosen equal to one on an inner ball and supported in a larger ball. ([[lem-smooth-bump-between-concentric-euclidean-balls]])
 
 ## Proof
 
 **Given:** The open set $\Omega$ and $f\in C_0(\Omega)$.
 
-1.1 Let $f\in C_0(\Omega)$ and $\varepsilon>0$. The set $K:=\{x\in\Omega:|f(x)|\ge\varepsilon/3\}$ is compact by the definition of vanishing at infinity. If $K=\varnothing$, the zero function approximates $f$ within $\varepsilon/3$. Otherwise cover $K$ by finitely many inner balls whose doubled closed balls lie in $\Omega$, using compactness [F1]. Choose the corresponding bumps from [F2] and combine them as $\chi:=1-\prod_j(1-\chi_j)$. Then $\chi\in C_c^\infty(\Omega)$ and $\chi=1$ on $K$, so $\|f-\chi f\|_\infty\le\varepsilon/3$. [F1, F2, given, choose, construct]
+1.1 If $\Omega=\varnothing$, the zero function suffices. If $n=0$ and $\Omega\ne\varnothing$, then its singleton supports every function and every function is smooth, so take the approximant $f$ itself. Assume $n\ge1$. Let $f\in C_0(\Omega)$ and $\varepsilon>0$. The set $K:=\{x\in\Omega:|f(x)|\ge\varepsilon/3\}$ is compact by the definition of vanishing at infinity. If $K=\varnothing$, the zero function approximates $f$ within $\varepsilon/3$. Otherwise cover $K$ by finitely many inner balls whose doubled closed balls lie in $\Omega$, using compactness [F1]. Choose the corresponding bumps from [F2] and combine them as $\chi:=1-\prod_j(1-\chi_j)$. Then $\chi\in C_c^\infty(\Omega)$ and $\chi=1$ on $K$, so $\|f-\chi f\|_\infty\le\varepsilon/3$. [F1, F2, given, choose, construct]
 
-2.1 Extend $g:=\chi f$ by zero to $\mathbb R^n$. It is continuous and compactly supported, hence uniformly continuous. Fix a nonnegative smooth bump from [F2], normalize its integral to one, and rescale it as $\rho_\delta(x)=\delta^{-n}\rho(x/\delta)$. Then $$\|g*\rho_\delta-g\|_\infty\le\sup_{|h|\le\delta,\ x\in\mathbb R^n}|g(x-h)-g(x)|\to0.$$ To verify smoothness directly, for every multi-index $\alpha$ set $$G_\alpha(x):=\int_{\mathbb R^n}g(y)\,\partial^\alpha\rho_\delta(x-y)\,dy.$$ On each compact neighborhood of $x$, these integrands and their coordinate difference quotients are dominated by $C|g|\mathbf1_K$ for a common compact set $K$ and finite constant $C$, since the kernel derivatives have compact support and are bounded. Dominated convergence [F3] gives continuity of each $G_\alpha$ and $\partial_jG_\alpha=G_{\alpha+e_j}$ for every coordinate $j$. Induction on $|\alpha|$ therefore gives $g*\rho_\delta=G_0\in C^\infty(\mathbb R^n)$. For sufficiently small $\delta$, its support remains in $\Omega$ because $\operatorname{supp}g$ is compactly contained there. Taking the uniform error below $2\varepsilon/3$ and restricting to $\Omega$ gives an element of $C_c^\infty(\Omega)$ within $\varepsilon$ of $f$. [F2, F3, step 1.1, given, construct] ∎
+2.1 Put $g=\chi f$ and $L=\operatorname{supp}g\Subset\Omega$. If $L=\varnothing$, take the zero approximant. Otherwise, for each $x\in L$, continuity gives $r_x>0$ such that $\overline B(x,2r_x)\subset\Omega$ and $|g(y)-g(x)|<\varepsilon/3$ on $B(x,2r_x)$. Finitely many inner balls $B(x_j,r_j)$ cover $L$. By [F2], let $\psi_j$ be nonnegative smooth bumps equal to one on those inner balls and supported in their doubled balls. The sum $s=\sum_j\psi_j$ is positive on a neighborhood of $L$. Repeating the finite cutoff construction of step 1.1 inside the open set $\{s>0\}$ gives $\zeta\in C_c^\infty(\{s>0\})$ with $0\le\zeta\le1$ and $\zeta=1$ on $L$. Define $a=\zeta\,s^{-1}\sum_j g(x_j)\psi_j$ on $\{s>0\}$ and extend it by zero. Its compact support lies in $\Omega$, and the extension is smooth because $\operatorname{supp}\zeta\Subset\{s>0\}$. Where $s>0$, the weighted average differs from $g(y)$ by at most $\varepsilon/3$, since each nonzero weight has $|g(x_j)-g(y)|<\varepsilon/3$. Also $\zeta g=g$ everywhere, because $\zeta=1$ on $\operatorname{supp}g$. Therefore $\|a-g\|_\infty\le\varepsilon/3$, and step 1.1 gives $\|a-f\|_\infty\le2\varepsilon/3<\varepsilon$. This uses only finitely many balls, bumps and sampled values, with no integration or infinite selection. [F1, F2, step 1.1, choose, construct, algebra] ∎

@@ -43,7 +43,7 @@ Let $D$ be a finite regular oriented diagram of a link with $c$ components, and 
 
 ### Local crossing convention
 
-For the proof’s local convention, the four segment ends are numbered clockwise, and sectors $(1,2)$ and $(3,4)$ are black. The textual endpoint and arrow rules in step 2.1 determine all labels; the drawing is illustrative and is not used in the proof.
+For the proof’s local convention, the four segment ends are numbered clockwise, and sectors $(1,2)$ and $(3,4)$ are black. The textual endpoint and arrow rules in step 1.2 determine all labels; the drawing is illustrative and is not used in the proof.
 
 ```tikz
 \begin{tikzpicture}[scale=1.1]
@@ -85,7 +85,7 @@ For the proof’s local convention, the four segment ends are numbered clockwise
 
 [F2] The even Khovanov procedure assigns the integral Frobenius algebra to each state and the signed saddle maps to its edges ([[alg-khovanov-chain-complex-from-diagram]]).
 
-[F3] The integral cube differential squares to zero, and it is the degree-preserving part of the Lee differential ([[lem-khovanov-cube-differential-squares-to-zero]]).
+[F3] The integral Khovanov cube differential squares to zero ([[lem-khovanov-cube-differential-squares-to-zero]]). Its identification with the quantum-degree-preserving part of the Lee differential is checked directly in step 1.1 below using [F1] and [F2].
 
 [F4] A finite filtration on each chain object yields a spectral sequence whose limiting page is the associated graded of homology ([[thm-bounded-filtered-complex-spectral-sequence-abuts-to-filtered-homology]]).
 

@@ -1,0 +1,58 @@
+---
+id: lem-torus-curves-same-primitive-class-isotopic-kt18-local
+kind: lemma
+title: "Essential torus curves with the same primitive class are isotopic"
+status: draft
+origin: pipeline
+pipeline_run: inverse-problems-knot-theory-all-109-2026-10-19
+dependency_level: 0
+deps:
+  - thm-cellular-homology-computes-singular-homology
+justified_by: []
+aliases: []
+proof_strategy: direct
+axiom_use: "Choice-free: the square cellulation, finite transverse intersection reduction, and annulus construction require only finite choices."
+provenance:
+  statement: literature-derived
+  proof: ai-altered
+sources:
+  references:
+    - title: "Allen Hatcher, Algebraic Topology"
+      url: "https://pi.math.cornell.edu/~hatcher/AT/ATch2.pdf"
+      locator: "§2.2, Example 2.36, the square cell structure and H₁ of a torus"
+    - title: "Allen Hatcher, Notes on Basic 3-Manifold Topology"
+      url: "https://pi.math.cornell.edu/~hatcher/3M/3M.pdf"
+      locator: "Chapter 1, torus-decomposition conventions"
+---
+
+## Statement
+
+Let $T$ be a torus. Every essential smoothly embedded simple closed curve $c\subset T$ represents a primitive element of $H_1(T;\mathbb Z)$. If $c,d\subset T$ are essential smoothly embedded simple closed curves with $[c]=\pm[d]$, then they are ambient isotopic in $T$ and cobound an annulus.
+
+## Statement references
+
+[Allen Hatcher, *Algebraic Topology*, §2.2, Example 2.36](https://pi.math.cornell.edu/~hatcher/AT/ATch2.pdf)
+
+[Allen Hatcher, *Notes on Basic 3-Manifold Topology*](https://pi.math.cornell.edu/~hatcher/3M/3M.pdf)
+
+## Facts & Assumptions
+
+**Given:** A torus $T$ and essential embedded simple closed curves $c,d$ whose homology classes agree up to sign.
+
+[F1] [[thm-cellular-homology-computes-singular-homology]] identifies the homology of the square CW structure on $T$ with singular homology.
+
+## Proof
+
+1.1 Give $T=\mathbb R^2/\mathbb Z^2$ its square CW structure with one $0$-cell, two coordinate $1$-cells $a,b$, and one $2$-cell attached by $aba^{-1}b^{-1}$. The cellular boundary of each $1$-cell is zero, and the attaching word has zero exponent sum in both $a$ and $b$, so the $2$-cell boundary is also zero. By [F1], $H_1(T;\mathbb Z)\cong\mathbb Z^2$ with the coordinate loops as basis; algebraic intersection of classes $(p,q)$ and $(r,s)$ is $ps-qr$. [F1, given, algebra]
+
+2.1 The square model of $T$ has $\pi_1(T)=\langle a,b\mid aba^{-1}b^{-1}\rangle\cong\mathbb Z^2$, whose abelianization is the $H_1(T;\mathbb Z)$ computed in step 1.1. If $c$ separated $T$, it would be the oriented boundary of one side and hence represent zero in $H_1$, contradicting that its essential loop is nontrivial in $\pi_1(T)$. Thus cutting along $c$ gives a connected orientable surface with two boundary circles and Euler characteristic zero. The compact-surface formula $\chi=2-2g-b$ gives genus $g=0$; hence the cut surface is an annulus. Choose an arc in that annulus joining its two boundary circles; regluing closes it to a loop meeting $c$ once. By the intersection form in step 1.1, its algebraic intersection with $c$ is $\pm1$, so $[c]$ is primitive. [given, F1, step 1.1, construct, algebra]
+
+3.1 Identify $T$ with $\mathbb R^2/\mathbb Z^2$ and write the common primitive class as $(p,q)$. Bézout's identity supplies integers $r,s$ with $ps-qr=1$ after possibly reversing one curve. The linear map with columns $(p,q)$ and $(r,s)$ is in $\operatorname{SL}(2,\mathbb Z)$ and induces a diffeomorphism of the torus, so it suffices to consider the class $(1,0)$. [given, step 1.1, step 2.1, algebra, construct]
+
+4.1 Put $c$ and $d$ in transverse position; compactness makes their intersection set finite. Their classes agree up to sign, so the determinant intersection form of step 1.1 gives algebraic intersection zero. After step 3.1, both represent $(1,0)$. In the universal cover $\mathbb R^2$, lifts of either curve are proper lines with both ends parallel to $(1,0)$, and deck translates of one curve's lifts are disjoint. If the curves meet, the signed intersection sum zero supplies intersections of both signs; the two lines then have a bounded complementary disk bounded by one subarc from each line. Among such disks choose one with the fewest interior intersections, and among ties one whose projection has least width in the complementary deck direction. Any lifted arc entering its interior would cut off a disk with fewer intersections; any translate meeting its interior would give a disk of smaller width. Thus its interior misses every lift and translate, and it projects injectively to an embedded bigon on $T$. Isotoping one curve across that bigon removes exactly two intersections and creates none. Repetition terminates because the original number of intersections is finite, so $c$ and $d$ become disjoint. [given, step 1.1, step 3.1, algebra, construct]
+
+5.1 Cutting $T$ along $c$ gives a connected annulus by step 2.1. The disjoint curve $d$ is essential in this annulus because its class on the torus is $(1,0)$; it is parallel to the annulus core and consequently cobounds a subannulus with $c$. Sliding across that annulus gives the required ambient isotopy. [given, step 2.1, step 3.1, step 4.1, construct] ∎
+
+## Proof references
+
+[Allen Hatcher, *Algebraic Topology*, §2.2](https://pi.math.cornell.edu/~hatcher/AT/ATch2.pdf)

@@ -18,7 +18,7 @@ sources:
   references:
     - title: "Maarten V. de Hoop, Nikola B. Kovachki, Matti Lassas and Nicholas H. Nelsen, Extension and neural operator approximation of the electrical impedance tomography inverse map"
       url: "https://arxiv.org/pdf/2511.20361"
-      locator: "§5, finite random conductivity samples and the stated limitation of the uniform BV class, printed pp. 25–28."
+      locator: "§5, finite random conductivity samples and the stated limitation of the uniform BV class, printed pp. 37–38."
     - title: "Gláucio Terra, Introduction to Geometric Measure Theory — Lecture Notes, version 1.6"
       url: "https://www.ime.usp.br/~glaucio/mat6704/textos/GMTLecureNotes.pdf"
       locator: "§7.1, Definition 7.12, Proposition 7.16, Lemma 7.17 and Theorem 7.18 with complete proof, printed pp. 233–238: Gauss–Green and perimeter measure for Lipschitz domains."

@@ -1,0 +1,44 @@
+---
+id: def-knot-exterior
+kind: definition
+title: "Knot exterior"
+status: draft
+origin: pipeline
+pipeline_run: inverse-problems-knot-theory-all-109-2026-10-19
+dependency_level: 0
+deps:
+  - def-oriented-link-in-s-three-and-ambient-isotopy
+  - def-normal-and-conormal-bundles-of-an-embedded-submanifold
+  - def-tubular-neighbourhood-of-an-embedded-submanifold
+  - def-countable-choice
+justified_by: []
+aliases: []
+proof_strategy: not-applicable
+provenance:
+  statement: literature-derived
+  proof: not-applicable
+sources:
+  references:
+    - title: "Alessia Cattabriga and Stefano Francaviglia, Knot Theory and Applications: Lecture Notes"
+      url: "https://poisson.phc.dm.unipi.it/~camponovo/libri/knot.pdf"
+      locator: "Section 4.1, compact exterior convention"
+    - title: "Allen Hatcher, Algebraic Topology"
+      url: "https://pi.math.cornell.edu/~hatcher/AT/ATch3.pdf"
+      locator: "Theorem 3.44 and Corollary 3.45, pp. 254-256"
+verification:
+  precheck: n/a
+---
+
+## Definition
+
+Assume countable choice, as required for the smooth normal-bundle structure in the tubular-neighbourhood interface. Let $K:S^1\to S^3$ be a smooth oriented knot, let $\nu(K)=TS^3|_K/TK$ be its quotient normal bundle, and let $\Phi:\Omega\to S^3$ be a tubular-neighbourhood map from an open neighbourhood $\Omega$ of the zero section in $\nu(K)$ that restricts to the inclusion of $K$. Choose a radius $\epsilon>0$ whose closed disk subbundle $D_\epsilon\nu(K)$ is contained in $\Omega$, and set $N(K)=\Phi(D_\epsilon\nu(K))$. The **exterior** of this chosen tube is
+$$
+E_K:=S^3\setminus\operatorname{int}_{S^3}N(K).
+$$
+Retain its boundary $T_K:=\partial E_K=\partial N(K)$, orient $E_K$ by restriction of the fixed orientation of $S^3$, and orient $T_K$ as the boundary of $E_K$. The choice of tubular map and radius is part of the input to this definition.
+
+## Definition references
+
+[Cattabriga and Francaviglia, §4.1](https://poisson.phc.dm.unipi.it/~camponovo/libri/knot.pdf)
+
+[Hatcher, Theorem 3.44 and Corollary 3.45](https://pi.math.cornell.edu/~hatcher/AT/ATch3.pdf)

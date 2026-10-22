@@ -13,6 +13,10 @@ provenance:
   proof: not-applicable
 verification:
   precheck: n/a
+  judge:
+    model: "gpt-6-luna"
+    verdict: pass
+    date: 2026-10-22
 sources:
   references:
     - title: "R. Cáceres, N. Duffield, J. Horowitz, and D. Towsley, Multicast-Based Inference of Network-Internal Loss Characteristics, IEEE Transactions on Information Theory 45 (1999), 2462–2480"

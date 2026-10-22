@@ -50,11 +50,12 @@ Consequently $\sigma_s(x)_1=\|x_{S^c}\|_1$, so the best $s$-term tail error is a
 
 [F1] [[def-ip-best-s-term-l1-error]]: $\sigma_s(x)_1=\min\{\|x_{U^c}\|_1:U\subseteq[n],\ |U|\le s\}$.
 
-[F2] [[def-p-norms-on-rn]]: $\|x_U\|_1=\sum_{j\in U}|x_j|$, and $\|x\|_1=\|x_U\|_1+\|x_{U^c}\|_1$ for every $U\subseteq[n]$.
+[F2] [[def-p-norms-on-rn]]: $\|v\|_1=\sum_{j=1}^n|v_j|$ for $v\in\mathbb R^n$, using the stated coordinate relabeling. In particular, for the zero-extended restriction $x_U$, the summand is $|x_j|$ on $U$ and zero elsewhere.
 
-[F3] [[lem-finite-sum-laws]]: finite sums preserve termwise inequalities and addition splits a finite sum over disjoint parts.
+[F3] [[lem-finite-sum-laws]], clauses 1, 3 and 4: finite sums are additive for two sequences on the same index range, split at a contiguous index cut, and preserve termwise inequalities; sums of nonnegative terms are nonnegative.
 
 ## Proof
-1.1 If $T=\varnothing$, its retained mass is zero and is no larger than the nonnegative sum on $S$. Otherwise write the ranks of the elements of $T$ in increasing order as $r_1<\cdots<r_k$, where $k=|T|\le s$. Then $r_\ell\ge\ell$, so the specified ordering gives $|x_{j_{r_\ell}}|\le|x_{j_\ell}|$ for each $\ell$. Summing these inequalities and adding the remaining nonnegative terms among the first $s$ coordinates yields $\|x_T\|_1\le\|x_S\|_1$. [given, F2, F3, algebra]
 
-2.1 Since $T$ and $S$ each partition the full coordinate set into retained and omitted coordinates, [F2] gives $\|x_{T^c}\|_1=\|x\|_1-\|x_T\|_1$ and $\|x_{S^c}\|_1=\|x\|_1-\|x_S\|_1$. Step 1.1 therefore implies $\|x_{S^c}\|_1\le\|x_{T^c}\|_1$. Applying this inequality to every admissible $T$, while $S$ itself is admissible, shows that the finite minimum in [F1] equals $\|x_{S^c}\|_1$. [F1, F2, step 1.1, algebra] ∎
+1.1 If $T=\varnothing$, its retained mass is zero and is no larger than the nonnegative sum on $S$. Otherwise write the ranks of the elements of $T$ in increasing order as $r_1<\cdots<r_k$, where $k=|T|\le s$. Then $r_\ell\ge\ell$, so the specified ordering gives $|x_{j_{r_\ell}}|\le|x_{j_\ell}|$ for each $\ell$. The coordinate sum in [F2] may be reordered by successive adjacent swaps, each preserving the sum by associativity and commutativity of real addition; zero terms may be omitted. Thus $\|x_T\|_1=\sum_{\ell=1}^k|x_{j_{r_\ell}}|\le\sum_{\ell=1}^k|x_{j_\ell}|\le\sum_{\ell=1}^s|x_{j_\ell}|=\|x_S\|_1$, using termwise monotonicity and then the contiguous split at $k$ with a nonnegative remainder. [given, F2, F3, algebra]
+
+2.1 For every $U\subseteq[n]$ and $j\in[n]$, the zero-extended restrictions satisfy $|x_j|=|(x_U)_j|+|(x_{U^c})_j|$. Summing over the original full coordinate range and applying [F2] and the same-range additivity in [F3] gives $\|x\|_1=\|x_U\|_1+\|x_{U^c}\|_1$. Taking $U=T$ and $U=S$ and subtracting the retained masses, step 1.1 implies $\|x_{S^c}\|_1\le\|x_{T^c}\|_1$. Applying this inequality to every admissible $T$, while $S$ itself is admissible, shows that the finite minimum in [F1] equals $\|x_{S^c}\|_1$. [F1, F2, F3, step 1.1, algebra] ∎

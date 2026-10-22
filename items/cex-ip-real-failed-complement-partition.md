@@ -30,7 +30,7 @@ sources:
 
 ## Statement refuted
 
-In $\mathbb R^2$ with $u\cdot v=u_1v_1+u_2v_2$, take the real measurement family $\Phi=(a_1,a_2)$ with $a_1=(1,0)$ and $a_2=(0,1)$, and define its intensity data by $I_\Phi(x)=((a_1\cdot x)^2,(a_2\cdot x)^2)$. The partition $S=\{1\}$ has neither side spanning $\mathbb R^2$. The signals $x=(1,1)$ and $z=(-1,1)$ satisfy neither $z=x$ nor $z=-x$, but $I_\Phi(x)=I_\Phi(z)$.
+In $\mathbb R^2$ with $u\cdot v=u_0v_0+u_1v_1$, take the real measurement family $\Phi=(a_1,a_2)$ with $a_1=(1,0)$ and $a_2=(0,1)$, and define its intensity data by $I_\Phi(x)=((a_1\cdot x)^2,(a_2\cdot x)^2)$. The partition $S=\{1\}$ has neither side spanning $\mathbb R^2$. The signals $x=(1,1)$ and $z=(-1,1)$ satisfy neither $z=x$ nor $z=-x$, but $I_\Phi(x)=I_\Phi(z)$.
 
 ## Statement references
 
@@ -57,6 +57,7 @@ In $\mathbb R^2$ with $u\cdot v=u_1v_1+u_2v_2$, take the real measurement family
 [F4] [[def-linear-combination-and-span]], [[def-linear-subspace]]: each span is the smallest linear subspace containing its measurement vectors; in particular, coordinate axes are subspaces and spans are closed under scalar multiplication.
 
 ## Counterexample
+
 
 
 1.1 Let $E_1=\{(t,0):t\in\mathbb R\}$ and $E_2=\{(0,t):t\in\mathbb R\}$; coordinatewise addition and scalar multiplication show these are subspaces. Since $a_1\in E_1$, minimality of the span gives $\operatorname{span}\{a_1\}\subseteq E_1$, while every $(t,0)=t a_1$ belongs to the span because it is a subspace containing $a_1$. Thus $\operatorname{span}(\Phi_{\{1\}})=E_1$. The same two inclusions for $a_2$ give $\operatorname{span}(\Phi_{\{2\}})=E_2$. Both are proper subspaces of $\mathbb R^2$, so [F2] says the complement property fails. [given, F2, F4, algebra]

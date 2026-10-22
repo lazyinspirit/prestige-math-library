@@ -1,0 +1,1095 @@
+PDF PAGE 1
+J. Appl. Math. Comput. (2018) 57:261–278
+https://doi.org/10.1007/s12190-017-1105-4
+ORIGINAL RESEARCH
+The Neumann problem on ellipsoids
+Sheldon Axler1
+· Peter J. Shin2
+Received: 3 December 2016 / Published online: 27 April 2017
+© Korean Society for Computational and Applied Mathematics 2017
+Abstract The Neumann problem on an ellipsoid in Rn asks for a function harmonic
+inside the ellipsoid whose normal derivative is some speciﬁed function on the ellipsoid.
+We solve this problem when the speciﬁed function on the ellipsoid is a normalized
+polynomial (a polynomial divided by the norm of the normal vector arising from the
+deﬁnition of the ellipsoid). Speciﬁcally, we give a necessary and sufﬁcient condition
+for a solution to exist, and we show that if a solution exists then it is a polynomial
+whose degree is at most the degree of the polynomial giving the speciﬁed function.
+Furthermore, we give an algorithm for computing this solution. We also solve the
+corresponding generalized Neumann problem and give an algorithm for computing
+its solution.
+Keywords Neumann problem · Ellipsoid · Harmonic function
+Mathematics Subject Classiﬁcation Primary 31B05 · 31B20
+1 Introduction
+Fix a positive integer n ≥2 and positive numbers β1, . . . , βn. Let q be the function
+deﬁned on Rn by
+B Sheldon Axler
+axler@sfsu.edu
+Peter J. Shin
+peter.shin@ucsf.edu
+1
+Department of Mathematics, San Francisco State University, San Francisco, CA 94132, USA
+2
+Department of Radiology and Biomedical Imaging, University of California, San Francisco,
+San Francisco, CA 94158, USA
+123
+
+PDF PAGE 2
+262
+S. Axler, P. J. Shin
+q(x) = q(x1, . . . , xn) = β1x12 + · · · + βnxn2.
+Let E be deﬁned by
+E = {x ∈Rn : q(x) < 1}.
+Thus the boundary of E, denoted ∂E, is the ellipsoid deﬁned by
+∂E = {x ∈Rn : q(x) = 1},
+and the closure of E, denoted ¯E, is deﬁned by ¯E = {x ∈Rn : q(x) ≤1}.
+Let n(x) be the outward-pointing unit normal on ∂E at x ∈∂E. Thus
+n(x) =
+∇q(x)
+∥∇q(x)∥,
+where
+(∇q)(x) = 2(β1x1, . . . , βnxn).
+The outward-pointing normal derivative at x ∈∂E of a smooth function h on ¯E,
+denoted (Dnh)(x), is given by the formula
+Dnh = ∇h · n = ∇h ·
+∇q
+∥∇q∥,
+where each of the functions above should be evaluated at x ∈∂E.
+The Neumann problem on the ellipsoid ∂E asks the following: given a function u
+on ∂E, ﬁnd a function h harmonic on ¯E such that Dnh = u on ∂E.
+In this paper, we will solve the Neumann problem on the ellipsoid ∂E when u
+has the form
+f
+∥∇q∥, where f is a polynomial on Rn. Speciﬁcally, we will give a
+necessary and sufﬁcient condition for this Neumann problem to have a solution, and
+when a solution exists we will show that it is a polynomial on Rn with degree at most
+the degree of f (Theorem 2.2). Then we will give an algorithm for computing this
+solution (see Sect. 4). This algorithm has been implemented in software, producing
+some beautiful examples (see Sect. 5). We also solve the corresponding generalized
+Neumann problem, which instead of asking for h to be harmonic asks for the Laplacian
+of h to be some speciﬁed polynomial (still with Dnh = u on ∂E).
+These results and an efﬁcient algorithm for computing the solution to the Neumann
+problem with polynomial functions were known in the special case when the ellipsoid
+∂E is a sphere (see [4]). However, the results on the sphere do not translate to ellipsoids
+because the composition of a harmonic function with the natural linear map from Rn
+to Rn that takes a sphere to an ellipsoid is usually not a harmonic function.
+The standard Dirichlet problem is closely related to the Neumann problem. On the
+sphere, the solution to the Dirichlet problem for polynomials leads to the solution to the
+Neumann problem for polynomials (see [4]). An algorithm for computing the solution
+123
+
+PDF PAGE 3
+The Neumann problem on ellipsoids
+263
+to the Dirichlet problem for polynomials on ellipsoids was presented in [3]. However,
+unlike the case of the sphere, the solution to the Dirichlet problem on ellipsoids does
+not seem to lead to a solution to the Neumann problem on ellipsoids.
+One of the authors of this paper works in a Department of Radiology and Biomedical
+Imaging, which is an unusual afﬁliation for an author of a paper in a mathematics
+journal. The interesting mathematical questions answered in this paper arose from
+work in his lab with magnetic resonance imaging (MRI) scanners, a widely used
+tool in medical diagnostics. Section 6 explains this connection between MRI and the
+Neumann problem on ellipsoids.
+For previous work related to the questions discussed in this paper, see [6,7], and [8].
+Both [7] and [8] take place in the context of R2, where the special connection between
+harmonic functions and analytic functions (every real-valued harmonic function on a
+simply-connected region in R2 is the real part of some analytic function) provides a
+powerful tool that is not available in Rn for n > 2. The extensive theory of ellipsoidal
+harmonics in R3 as developed in [6] provides tools that can be used to prove Theorem
+2.2 in the case when n = 3. However, we do not see how those tools lead to an efﬁcient
+algorithm for computation such as the one presented in Sect. 4 of this paper.
+2 Normal derivatives of polynomials on ellipsoids
+The next proposition is well known, but we include it here for completeness. This
+proposition will show that the solution to our Neumann problem, if it exists, is unique
+except possibly for the addition of a constant function.
+Let dV denote the usual volume measure on Rn and let d A denote the usual surface
+area measure on ∂E.
+Proposition 2.1 Suppose h is harmonic on ¯E and ∇h · ∇q = 0 on ∂E. Then h is a
+constant function.
+Proof Green’s First Identity states that
+
+E
+(uh + ∇u · ∇h) dV =
+
+∂E
+uDnh d A,
+where u and h are smooth on ¯E, and  = ∇2 is the Laplace operator. Take u = h in
+the equation above. We have h = 0 (because h is harmonic) and Dnh = 0 (because
+∇h · ∇q = 0). Thus the equation above becomes
+
+E
+|∇h|2 dV = 0.
+Hence ∇h = 0 on E, which implies that h is a constant function.
+⊓⊔
+The hypothesis in Proposition 2.1 that h is harmonic cannot be relaxed to the
+hypothesis that h is a polynomial. For example, take n = 2 and q(x1, x2) = x12 +x22.
+Let
+h(x) = x14 + 2x12x22 + x24 −2x12 −2x22.
+123
+
+PDF PAGE 4
+264
+S. Axler, P. J. Shin
+Then (∇q)(x) = (2x1, 2x2) and
+(∇h)(x) = (4x13 + 4x1x22 −4x1, 4x12x2 + 4x23 −4x2).
+Thus
+(∇h)(x) · (∇q)(x) = 8x14 + 8x12x22 −8x12 + 8x12x22 + 8x24 −4x22
+= 8(x12 + x22)2 −8(x12 + x22).
+On ∂E, both terms in parentheses above equal 1. Thus ∇h · ∇q = 0 on ∂E even
+though h is not a constant function.
+For m a nonnegative integer, let Pm denote the vector space of polynomials (with
+real coefﬁcients) of degree at most m on Rn. Let Hm denote the subspace of Pm
+consisting of harmonic polynomials of degree at most m on Rn. Let Pm|∂E denote the
+vector space of restrictions to ∂E of functions in Pm.
+A multi-index α = (α1, . . . , αn) is an n-tuple of nonnegative integers. We deﬁne
+|α| by the equation
+|α| = α1 + · · · + αn.
+For x = (x1, . . . , xn) ∈Rn, we let xα denote the monomial x1α1 . . . xnαn, which has
+degree |α|. For m a nonnegative integer, Pm is obviously the span of {xα : |α| ≤m}.
+The next theorem gives a necessary and sufﬁcient condition for a solution to our
+Neumann problem on an ellipsoid to exist. The implications (b) ⇒(c) and (c) ⇒(a)
+in the theorem below are easy. The depth in this result is the implication (a) ⇒(b).
+The proof given below that (a) implies (b) is an existence proof, provided by the
+magic of linear algebra. The proof provides no hint as to how to compute the harmonic
+polynomial h satisfying (b) given a polynomial f satisfying (a). In Sect. 4, we will
+provide an algorithm for doing this computation.
+Theorem 2.2 Suppose f is a polynomial on Rn. Then the following are equivalent:
+(a)
+
+∂E
+f
+∥∇q∥d A = 0.
+(b) There exists a harmonic polynomial h on Rn with deg h ≤deg f such that
+∇h · ∇q = f on ∂E.
+(c) There exists a harmonic function h on ¯E such that
+Dnh =
+f
+∥∇q∥on ∂E.
+Proof First suppose that (b) holds. Because Dnh = ∇h ·
+∇q
+∥∇q∥, we see that (c) holds.
+Thus (b) implies (c).
+123
+
+PDF PAGE 5
+The Neumann problem on ellipsoids
+265
+Now suppose that (c) holds. Green’s Second Identity states that if g and h are
+smooth functions on ¯E, then
+
+E
+(gh −hg) dV =
+
+∂E
+(gDnh −hDng) d A.
+In the equation above, take g = 1; thus g = 0 and Dng = 0. Our function h provided
+by (c) is harmonic, and thus h = 0. Hence the equation above becomes
+0 =
+
+∂E
+Dnh d A
+=
+
+∂E
+f
+∥∇q∥d A
+which completes the proof that (c) implies (a).
+To prove that (a) implies (b), now suppose that (a) holds. Let m = deg f . Deﬁne
+linear maps T : Hm →Pm|∂E and U : Hm →Pm|∂E by
+T (h) = (∇h · ∇q)|∂E
+and U(h) = h|∂E.
+Taking a partial derivative reduces the degree of a polynomial by 1, and then taking
+the dot product with ∇q = (2β1x1, . . . , 2βnxn) increases the degree back by 1 (unless
+h is a constant function). Thus deg(∇h · ∇q) = deg h for all nonconstant functions
+h ∈Hm. In other words, T really does map Hm into Pm|∂E.
+Proposition 2.1 tells us that null T , the null space of T , is the set of constant
+functions. Thus dim null T = 1. A wonderful theorem that appears in every linear
+algebra book states that for a linear map, the dimension of the domain equals the
+dimension of the range plus the dimension of the null space. Thus
+dim range T = (dim Hm) −1.
+(2.1)
+If h ∈Hm and h|∂E = 0 then the maximum principle for harmonic functions
+implies that h = 0 (for example, see 1.9 in [2]). Thus U is injective.
+The range of U is all of Pm|∂E because the Dirichlet problem with polynomial
+data for ellipsoids has polynomial solutions without increasing the degree; see, for
+example, Fishers’s Decomposition Theorem (2.2 in [3]) or Theorem 1 in [5].
+Because U is both injective and surjective, we can conclude that
+dim Hm = dim Pm|∂E.
+(2.2)
+Deﬁne a linear functional ϕ : Pm|∂E →R by
+ϕ(g) =
+
+∂E
+g
+∥∇q∥d A.
+123
+
+PDF PAGE 6
+266
+S. Axler, P. J. Shin
+Because ϕ is a nonzero linear functional, we have
+dim null ϕ = (dim Pm|∂E) −1
+(2.3)
+We have already proved that (b) ⇒(c) ⇒(a). In particular, (b) ⇒(a), which implies
+that
+range T ⊂null ϕ.
+Now (2.1), (2.2), and (2.3) imply that the two subspaces above have the same dimen-
+sion. Thus we have
+range T = null ϕ.
+(2.4)
+Our hypothesis (a) implies that f |∂E ∈null ϕ. Thus (2.4) implies that f ∈range T .
+Hence there exists h ∈Hm such that ∇h · ∇q = f on ∂E. In other words, (b) holds,
+completing the proof that (a) implies (b).
+⊓⊔
+The generalized Neumann problem for an ellipsoid asks the following: Given poly-
+nomials f and g on Rn, ﬁnd a polynomial h on Rn such that Dnh =
+f
+∥∇q∥on ∂E and
+h = g. If g = 0, then this generalized Neumann problem asks for h to be harmonic,
+and thus it is then the Neumann problem we have already discussed.
+Our solution to the generalized Neumann problem will require the following lemma,
+which is well known. A proof of the lemma below can be obtained by considering the
+linear map u →u from Pm+2 to Pm; the null space of this map is Hm+2; counting
+dimensions of the various spaces (use Proposition 5.8 in [2]) shows that this map
+is onto Pm. However, the proof just outlined gives no hint as to how to calculate u
+(which is not unique) given g in the lemma below. Thus we present a constructive proof
+because our algorithm for solving the generalized Neumann problem will require a
+way to compute an antiLaplacian of a polynomial.
+Lemma 2.3 Suppose g is a polynomial on Rn. Then there exists a polynomial u on
+Rn such that deg u = 2 + deg g and u = g.
+Proof It sufﬁces to consider the case where g is a monomial. Thus suppose that
+g(x) = xα for some multi-index α.
+It is easy to see that
+
+
+x12xα
+(α1 + 1)(α1 + 2)
+
+= xα +
+n
+
+k=2
+(αk −1)αk
+(α1 + 1)(α1 + 2)
+x12xα
+xk2 .
+(2.5)
+The coefﬁcient
+(αk−1)αk
+(α1+1)(α1+2) equals 0 if αk = 1 or αk = 0; thus the expression on the
+right is a polynomial even though it looks more like a rational function.
+The equation above reduces the problem of ﬁnding an antiLaplacian of xα to the
+problem of ﬁnding an antiLaplacian of each term in the summation on the right side of
+(2.5). In other words, we have a new set of antiLaplacian problems, where the original
+α1 has been replaced by α1 + 2 and an αk ≥2 has been replaced by αk −2. Iterating
+123
+
+PDF PAGE 7
+The Neumann problem on ellipsoids
+267
+this process, we eventually reduce the problem to computing an antiLaplacian of xα
+to the special case where αk ∈{0, 1} for each k ≥2. In that case, (2.5) shows that
+x12xα
+(α1+1)(α1+2) is an antiLaplacian of xα, completing the proof.
+⊓⊔
+For example, the algorithm provided by the proof above quickly ﬁnds that an anti-
+Laplacian of the degree 14 monomial x19x23x32 is the degree 16 polynomial
+2x115x2 −35x113x23 −105x113x2x32 + 2730x111x23x32
+300300
+.
+The special case of the next result when g = 0 is just Theorem 2.2. We cannot
+eliminate Theorem 2.2 and just prove the theorem below because the proof of the
+theorem below requires Theorem 2.2.
+Unlike the proof of Theorem 2.2, the proof below provides an algorithm for comput-
+ing the solution to generalized Neumann problems, provided that we can compute the
+solution to the regular Neumann problem (which we will show how to do in Sect. 4).
+Theorem 2.4 Suppose f and g are polynomials on Rn. Then the following are equiv-
+alent:
+(a)
+
+∂E
+f
+∥∇q∥d A =
+
+E g dV .
+(b) There exists a polynomial h on Rn with deg h ≤max{deg f, 2+deg g} such that
+h = g and ∇h · ∇q = f on ∂E.
+(c) There exists a smooth function h on ¯E such that
+h = g and Dnh =
+f
+∥∇q∥on ∂E.
+Proof First suppose that (b) holds. Because Dnh = ∇h ·
+∇q
+∥∇q∥, we see that (c) holds.
+Thus (b) implies (c).
+Now suppose that (c) holds. Green’s Second Identity states that if u and h are
+smooth functions on ¯E, then
+
+E
+(uh −hu) dV =
+
+∂E
+(uDnh −hDnu) d A.
+In the equation above, take u = 1; thus u = 0 and Dnu = 0. Our function h provided
+by (c) satisﬁes the equation h = g. Hence the equation above becomes
+
+E
+g dV =
+
+∂E
+Dnh d A
+=
+
+∂E
+f
+∥∇q∥d A,
+which completes the proof that (c) implies (a).
+123
+
+PDF PAGE 8
+268
+S. Axler, P. J. Shin
+To prove that (a) implies (b), now suppose that (a) holds. Let u be a polynomial
+on Rn with deg u = 2 + deg g and u = g; the existence of this antiLaplacian u is
+guaranteed by Lemma 2.3.
+Now
+
+∂E
+∇u · ∇q
+∥∇q∥
+d A =
+
+∂E
+Dnu d A
+=
+
+E
+u dV
+=
+
+E
+g dV
+=
+
+∂E
+f
+∥∇q∥d A,
+where the second equality comes from Green’s Second Identity (take one of the func-
+tions to equal 1) and the last equality comes from the assumption in (a).
+We now use the implication (a) ⇒(b) in Theorem 2.2 with f in Theorem 2.2
+replaced by f −∇u · ∇q, which is valid because the equation above tells us that
+
+∂E
+f −∇u·∇q
+∥∇q∥
+d A = 0. The degree of f −∇u · ∇q is at most max{deg f, 2 + deg g}.
+Thus Theorem 2.2 implies that there exists a harmonic polynomial p with degree at
+most max{deg f, 2 + deg g} such that
+∇p · ∇q = f −∇u · ∇q on ∂E.
+Let h = u + p. Then deg h ≤max{deg f, 2 + deg g} and
+h = u + p = g + 0 = g.
+Furthermore,
+∇h · ∇q = ∇u · ∇q + ∇p · ∇q = ∇u · ∇q + ( f −∇u · ∇q) = f on ∂E,
+completing the proof that (a) implies (b).
+⊓⊔
+3 Computing surface area integrals on an ellipsoid
+We now turn to the question of computing
+
+∂E
+f
+∥∇q∥d A(x) for a polynomial f on
+Rn. This question is of interest because Theorem 2.2 tells us that
+f
+∥∇q∥is the normal
+derivative on ∂E of some harmonic polynomial on Rn if and only if this integral equals
+0. Also, Proposition 3.1 below is used by the software described in Sect. 5.
+Each polynomial f on Rn can be written in the form f = 
+α cαxα for some choice
+of constants {cα}. Hence we concentrate on computing
+
+∂E
+xα
+∥∇q(x)∥d A(x).
+123
+
+PDF PAGE 9
+The Neumann problem on ellipsoids
+269
+The double factorial will appear in our next result. If m is an odd positive integer,
+then the double factorial of m, denoted m!!, is the product of the positive odd integers
+less than or equal to m. In other words,
+m!! = 1 · 3 · 5 · · · · · m.
+For convenience, we deﬁne (−1)!! = 1.
+Let B denote the open unit ball in Rn; thus
+B = {x ∈Rn : ∥x∥< 1}.
+The volume of B is denoted by vol(B). Thus vol(B) = 4
+3π if n = 3; the formula for
+other values of n is derived, for example, in Appendix A of [2].
+If at least one of the nonnegative integers α1, . . . , αn is odd, then it is easy to see
+that
+
+∂E
+xα
+∥∇q(x)∥d A(x) = 0. Thus the next result only considers the case where each
+α j is even.
+Let β = (β1, . . . , βn). Because ∇q = 2(β1x1, . . . , βnxn), we have the equation
+∇xα · ∇q = 2(α · β)xα,
+(3.1)
+which will be used in the proof below and in the next section.
+Proposition 3.1 Supposeα = (α1, . . . , αn)isann-tupleofnonnegativeevenintegers.
+Then
+
+∂E
+xα
+∥∇q(x)∥d A(x) =
+n vol(B)
+2
+	n
+j=1 β j α j+1 · (α1 −1)!! · · · (αn −1)!!
+n(n + 2) · · · (n + |α| −2).
+Proof First we consider the case where |α| > 0. We have
+
+∂E
+xα
+∥∇q(x)∥d A(x) =
+
+∂E
+∇xα · ∇q
+2(α · β)∥∇q(x)∥d A(x)
+=
+1
+2(α · β)
+
+∂E
+Dnxα d A(x)
+=
+1
+2(α · β)
+
+E
+(xα) dV (x),
+where the last equality follows from Green’s Second Identity. Evaluating the Laplacian
+(xα) we thus have
+
+∂E
+xα
+∥∇q(x)∥d A(x) =
+1
+2(α · β)
+
+E
+n
+
+j=1
+α j(α j −1) xα
+x j 2 dV (x)
+=
+1
+2(α · β)
+	n
+j=1 β j α j+1
+n
+
+j=1
+α j(α j −1)β j
+
+B
+xα
+x j 2 dV (x),
+123
+
+PDF PAGE 10
+270
+S. Axler, P. J. Shin
+where the last equation comes from a standard change of variables to change the
+integral from E to the ball B.
+Because
+
+B f (x) dV (x) =
+ 1
+0 rn−1 
+∂B f (rx) d A(x) dr for every continuous
+function f on B (see, for example, Exercise 6 in Chapter 8 of [9]), the equation
+above can be rewritten as
+
+∂E
+xα
+∥∇q(x)∥d A(x)
+=
+1
+2(α · β)
+	n
+j=1 β j α j+1(n + |α| −2)
+n
+
+j=1
+α j(α j −1)β j
+
+∂B
+xα
+x j 2 d A(x).
+Using the formula for integrating a monomial over the unit sphere ∂B (see Section 3
+of Hermann Weyl’s paper [10]), this becomes
+
+∂E
+xα
+∥∇q(x)∥d A(x)
+=
+n vol(B)
+2(α · β)
+	n
+j=1 β j α j+1(n + |α| −2)
+n
+
+j=1
+α jβ j
+(α1 −1)!! · · · (αn −1)!!
+n(n + 2) · · · (n + |α| −4)
+=
+n vol(B)
+2
+	n
+j=1 β j α j+1 · (α1 −1)!! · · · (αn −1)!!
+n(n + 2) · · · (n + |α| −2),
+completing the proof in the case where |α| > 0.
+Now suppose |α| = 0. In other words, we want to compute
+
+∂E
+1
+∥∇q(x)∥d A(x).
+The constant function 1 cannot be written in the form ∇f · ∇q for any polynomial
+f , and hence the technique used above when |α| > 0 will not work. However, 1 =
+β1x12 + · · · + βnxn2 on ∂E. Thus
+
+∂E
+1
+∥∇q(x)∥d A(x) =
+
+∂E
+β1x12 + · · · + βnxn2
+∥∇q(x)∥
+d A(x)
+=
+n
+
+k=1
+βk
+
+∂E
+xk2
+∥∇q(x)∥d A(x)
+=
+
+k=1
+βk
+n vol(B)
+2βk
+	n
+j=1 β j
+· 1
+n
+=
+n vol(B)
+2
+	n
+j=1 β j
+,
+where the third equality above comes from the formula we have already proved in the
+case when |α| > 0. The formula above is the desired result when |α| = 0 because in
+this case we interpret the empty product n(n + 2) . . . (n + |α| −2) to be 1.
+⊓⊔
+123
+
+PDF PAGE 11
+The Neumann problem on ellipsoids
+271
+4 An algorithm for solving the Neumann problem
+In this section, we present an algorithm that solves our Neumann problem. More
+speciﬁcally, for a given polynomial f satisfying condition (a) of Theorem 2.2, our
+algorithm ﬁnds the unique harmonic polynomial h such that ∇h · ∇q = f on ∂E and
+h(0) = 0.
+Let P0 denote the vector space of polynomials g on Rn such that g(0) = 0. To
+develop the algorithm, we deﬁne the linear map S : P0 →P0 by
+S(g) = ∇g · ∇q.
+Each polynomial g ∈P0 can be written as a ﬁnite linear combination of monomials
+g =
+
+0<|α|
+cαxα
+for some constants {cα} (where all but ﬁnitely many of the cα equal 0). From (3.1) we
+have
+S
+⎛
+⎝
+0<|α|
+cαxα
+⎞
+⎠=
+
+0<|α|
+2(α · β)cαxα.
+The equation above shows that S is a one-to-one mapping of P0 onto itself and has
+an inverse
+S−1
+⎛
+⎝
+0<|α|
+cαxα
+⎞
+⎠=
+
+0<|α|
+cα
+2(α · β)xα.
+(4.1)
+Furthermore, deg g = deg S(g) = deg S−1(g) for each g ∈P0.
+Suppose g = 
+|α|≤m cαxα ∈Pm . Then qg ∈P0. Let δ j denote the multi-index
+whose jth-coordinate equals 1 and all other coordinates equal 0. We will need the
+following formula for our algorithm:
+S−1(qg) = S−1
+⎛
+⎝
+n
+
+j=1
+β j x j 2 
+|α|≤m
+cαxα
+⎞
+⎠
+= S−1
+⎛
+⎝
+|α|≤m
+n
+
+j=1
+β jcαxα+2δ j
+⎞
+⎠
+=
+
+|α|≤m
+n
+
+j=1
+β jcα
+2
+
+(α + 2δ j) · β
+xα+2δ j
+=
+
+|α|≤m
+n
+
+j=1
+β jcα
+2(α · β) + 4β j
+xα+2δ j .
+(4.2)
+123
+
+PDF PAGE 12
+272
+S. Axler, P. J. Shin
+Now we are ready to develop the algorithm that solves our Neumann problem on
+ellipsoids. Suppose f ∈Pm+2 and
+
+∂E
+f
+∥∇q∥d A = 0. Theorem 2.2 implies that there
+exists a harmonic polynomial h ∈Hm+2 with h(0) = 0 such that ∇h ·∇q = f on ∂E.
+Thus ∇h · ∇q −f is a polynomial that equals 0 on ∂E, which implies (see Lemma
+2.9 of [3]) that there exists a polynomial g ∈Pm such that
+f = ∇h · ∇q + (q −1)g.
+(4.3)
+We need an algorithm to calculate h given f and q. Our plan of attack is to ﬁrst
+calculate the polynomial g in the equation above. We will do this by transforming the
+equation above to take the harmonic polynomial h temporarily out of the calculation.
+After ﬁnding g, we will go back to the equation above to calculate h.
+Let fk and gk be polynomials that are homogeneous of degree k such that f =
+m+2
+k=0 fk and g = m
+k=0 gk. Writing
+f = ∇h · ∇q + qg −g,
+we immediately see from (4.3) that g0 = −f0. If we subtract the constant terms f0
+and −g0 from each side of the equation above, then we are left with polynomials in
+P0. We can then apply S−1 to get
+S−1( f −f0) = S−1(∇h · ∇q) + S−1(qg) −S−1(g −g0)
+= h + S−1(qg) −S−1(g −g0).
+(4.4)
+The equation above, along with the explicit formulas (4.1) and (4.2) for S−1, show
+that we can calculate h once we know g.
+To make the problem more tractable, we break each polynomial in (4.4) into its
+homogeneous components to obtain
+S−1
+m+2
+
+k=1
+fk
+
+=
+m+2
+
+k=1
+hk + S−1
+
+q
+m
+
+k=0
+gk
+
+−S−1
+ m
+
+k=1
+gk
+
+,
+where each hk is harmonic (see page 75 of [2]). Since S−1 is linear and preserves the
+degree of polynomials, we can further break the equation above into homogeneous
+equations by degree and obtain the following system of equations:
+123
+
+PDF PAGE 13
+The Neumann problem on ellipsoids
+273
+m + 2 :
+S−1( fm+2)
+= hm+2 + S−1(qgm)
+m + 1 :
+S−1( fm+1)
+= hm+1 + S−1(qgm−1)
+m :
+S−1( fm) + S−1(gm)
+= hm + S−1(qgm−2)
+m −1 :
+S−1( fm−1) + S−1(gm−1)
+= hm−1 + S−1(qgm−3)
+...
+(4.5)
+3 :
+S−1( f3) + S−1(g3)
+= h3 + S−1(qg1)
+2 :
+S−1( f2) + S−1(g2)
+= h2 + S−1(qg0)
+1 :
+S−1( f1) + S−1(g1)
+= h1
+0 :
+f0 + g0
+= 0
+Here, each fk and q are known and we need to compute hm+2, . . . , h1 and gm, . . . , g0.
+The ﬁrst thing to note is that even and odd degree equations are decoupled from
+one another (a typical equation above involves fk, gk, and gk−2). Hence, the problem
+at hand can be decomposed into two smaller sub-problems each exclusively involving
+either even or odd degree polynomials.
+Additionally, if for convenience we set
+S−1(gm+2) = S−1(gm+1) = S−1(qg−1) = 0,
+(4.6)
+then all the equations above have the same form
+k + 2 :
+S−1( fk+2) + S−1(gk+2) = hk+2 + S−1(qgk).
+(4.7)
+Our strategy is to start from the highest degree equation and solve the system sequen-
+tiallydowntolowerdegreeequations.Morespeciﬁcally,wewillsolvetheﬁrstequation
+to ﬁnd gm, which we pass down to the left-hand-side of the mth stage equation to ﬁnd
+gm−2 in the right-hand-side and so on. We apply the same process to ﬁnd gm−1 and
+its successors. Hence, if we know how to solve (4.7), we can repetitively apply it to
+solve the system in (4.5) and calculate all gk for k = 0, . . . , m. Once we have g, we
+plug it back into (4.4) to ﬁnd h.
+For convenience, deﬁne
+rk = S−1( fk) + S−1(gk).
+(4.8)
+Then, (4.7) can be written as
+rk+2 = hk+2 + S−1(qgk).
+Write gk = 
+|α|=k cαxαas a sum of monomials of degree k with unknown coefﬁcients
+{cα}. Now apply the Laplacian operator to both sides of the equation above to take
+the harmonic polynomial hk+2 out of the calculation:
+123
+
+PDF PAGE 14
+274
+S. Axler, P. J. Shin
+(rk+2) = 
+
+S−1(qgk)
+
+= 
+⎛
+⎝
+|α|=k
+n
+
+j=1
+β jcα
+2(α · β) + 4β j
+xα+2δ j
+⎞
+⎠
+=
+
+|α|=k
+n
+
+j=1
+β jcα
+2(α · β) + 4β j
+(xα+2δ j )
+=
+
+|α|=k
+n
+
+j=1
+β jcα
+2(α · β) + 4β j
+ n
+
+l=1
+αl(αl −1)xα+2δ j−2δl + (4α j + 2)xα
+
+,
+(4.9)
+where the second equality comes from (4.2). Note that the constants cα are the only
+unknowns on the right side of the above equation. Once we ﬁnd all these coefﬁcients,
+we will know gk.
+Begin by considering the cases where k = m or k = m −1. In those cases, (4.8)
+and (4.6) imply that rk+2 = S−1( fk+2) and thus the left side of (4.9) is known.
+Hence we can solve for the {cα} corresponding to gm and gm−1 (as discussed in the
+next paragraph). Now that gm and gm−1 are known, we can consider the cases where
+k = m −2 or k = m −3. In those cases, (4.8) shows that rm and rm−1 are known, and
+hence the left side of (4.9) is again known; thus we can solve for the {cα} corresponding
+to gm−2 and gm−3 (as discussed in the next paragraph). This process can be continued,
+solving for gm, gm−1, gm−2, . . . , g1, g0 and thus solving for g.
+All that remains is to discuss how to solve (4.9) for the {cα} in the case where
+we know the left side of (4.9). Both sides of (4.9) are homogeneous polynomials of
+degree k. Thus by comparing the coefﬁcients of monomials xα (|α| = k) on each side
+of the equation, we get a system of linear equations, which can be solved by Gaussian
+elimination for the {cα} (a solution is guaranteed to exist by Theorem 2.2).
+The aforementioned system of linear equations with unknowns {cα} can be broken
+down into several smaller systems of linear equations by partitioning the multi-indices
+{α : |α| = k} into groups that have the same parities—two multi-indices α and γ
+are grouped together if αi = γi (mod 2) for each i = 1, . . . , n. Solving these several
+smaller systems of equations instead of the one large system results in signiﬁcant
+computational savings, as discussed in [3] in connection with solving the Dirichlet
+problem on ellipsoids.
+The algorithm discussed in this section has been implemented in software, with
+results that can be veriﬁed to be correct. The next section provides examples that were
+calculated using the algorithm discussed here.
+5 Examples
+The results and algorithms in this paper have been incorporated into a new version of
+the HFT Mathematica package for symbolic manipulation of harmonic functions. This
+software is available without charge from the websites listed at [1]. The neumann
+123
+
+PDF PAGE 15
+The Neumann problem on ellipsoids
+275
+section of the Computing with Harmonic Functions documentation available at [1] is
+particularly relevant to this paper.
+As an example of the Neumann problem on an ellipsoid in R3, we start with the
+function x14x22 on the ellipsoid {x ∈R3 : 3x12 + x22 + 2x32 = 1}. This function
+does not satisfy the necessary condition (a) of Theorem 2.2, but we can easily adjust
+it by adding an appropriate constant. Speciﬁcally, Proposition 3.1 can be used to
+show that for the ellipsoid under consideration, x14x22 −
+1
+315 satisﬁes condition (a)
+of Theorem 2.2 (the HFT Mathematica package can perform this calculation using its
+integrateEllipsoidArea function). Then the neumann function in the HFT
+Mathematica package, which uses the algorithm described in Sect. 4 of this paper,
+produces the following result.
+Example 5.1 Suppose f (x1, x2, x3) = x14x22 −
+1
+315 and
+q(x) = 3x12 + x22 + 2x32.
+Then the degree 6 polynomial h on R3 deﬁned by
+h(x1, x2, x3) = (3491640x14x32 −2454945x16 + 33332535x14x22 −4145028x14
+−26323635x12x24 + 3517260x12x34 + 30392244x12x22
+−42053400x12x22x32 −5522076x12x32 + 1437395x12
++ 1477725x26 −424560x36 −4317208x24 + 2851140x22x34
++ 1668512x34 + 2056969x22 + 4157760x24x32 −4488996x22x32
+−3494364x32)/2701782720
+is harmonic on R3 and ∇h · ∇q = f on the ellipsoid {x ∈R3 : q(x) = 1}.
+A striking feature of the example above (and of similar examples on ellipsoids that
+are not spheres) is the presence of large integers in the solution even though the input
+data contains only small integers.
+To verify that the function h in Example 5.1 really has the claimed properties, ﬁrst
+compute the Laplacian of h (use a computer unless you like arithmetic), getting 0 (thus
+h is harmonic, as claimed).
+The next step in the veriﬁcation of Example 5.1 is to have a computer ﬁnd the dot
+product of the gradient of h and the gradient of q [which is (6x1, 2x2, 4x3)], getting
+a messy degree 6 polynomial on R3. This messy degree 6 polynomial is supposed to
+equal x14x22−1
+315 on{x ∈R3 : q(x) = 1}.Thussubtract x14x22−1
+315 fromthismessy
+degree 6 polynomial, getting a different messy degree 6 polynomial that is supposed
+to equal 0 on {x ∈R3 : q(x) = 1}. Now ask your symbolic processing program to
+factor this polynomial, and then note that q(x) −1 is a factor. Thus the polynomial
+equals 0 on {x ∈R3 : q(x) = 1}, completing the veriﬁcation that ∇h · ∇q = f
+on {x ∈R3 : q(x) = 1}. This veriﬁcation provides a satisfying reassurance that the
+algorithm described in Sect. 4 works as expected.
+The Mathematica version of the Computing with Harmonic Functions documen-
+tation available at [1] is a live Mathematica notebook that can be modiﬁed by the
+123
+
+PDF PAGE 16
+276
+S. Axler, P. J. Shin
+user to provide additional examples (see the neumann section) and to carry out the
+veriﬁcation procedure described in the two paragraphs above.
+Having veriﬁed that the function h in Example 5.1 has the claimed properties, we
+can note that h also satisﬁes the equation h(0, 0, 0) = 0. Proposition 2.1 tells us that the
+polynomial h in Example 5.1 is the unique harmonic function such that h(0, 0, 0) = 0
+and ∇h · ∇q = f on {x ∈R3 : q(x) = 1}. Thus the large integers that appear in
+Example 5.1 do not arise from a nonoptimal solution of this Neumann problem—this
+behavior is intrinsic to the Neumann problem on ellipsoids.
+The next example presents a generalized Neumann problem on the ellipsoid
+{x ∈R3 : 5x12+3x22+2x32 = 1}. The input functions for this generalized Neumann
+problem, x13x22x3 and 4x23, satisfy condition (a) of Theorem 2.4 because both inte-
+grals in condition (a) of Theorem 2.4 equal 0 (by symmetry, because each integrand
+has as a factor a coordinate of x raised to an odd power).
+Example 5.2 Suppose f (x1, x2, x3) = x13x22x3, g(x1, x2, x3) = 4x23 and
+q(x) = 5x12 + 3x22 + 2x32.
+Then the degree 6 polynomial h on R3 deﬁned by
+h(x1, x2, x3) = 11033x13x22x3
+806086
+−4355x15x3
+3224344 −4825x14x2
+66518
+−97x13x33
+1612172
+−94163x13x3
+812534688 + 34955x12x23
+199554
+−6005x12x2x32
+66518
++ 457865x12x2
+5687289
++ 716x1x35
+2015215 −5437x1x22x33
+1612172
+−235273x1x33
+406267344 −16629x1x24x3
+3224344
++ 564709x1x22x3
+270844896
++ 1505411x1x3
+5687742816 + 17278x25
+99777
+−1049x2x34
+33259
+−1660991x23
+34123734 + 18593x23x32
+199554
++ 745261x2x32
+11374578
+−1621829x2
+34123734
+satisﬁes the conditions h = g on R3 and ∇h · ∇q = f on {x ∈R3 : q(x) = 1}.
+The result above is computed by using the procedure outlined by the proof of
+Theorem 2.4 (which also requires the algorithm discussed in Sect. 4).
+A striking feature of the solution in Example 5.2 is that even though the input data
+contains only single-digit integers, the output includes a ten-digit integer and multiple
+nine-digit integers. Again, Proposition 2.1 implies that the polynomial h given in
+Example 5.2 is the unique function h with h(0, 0, 0) = 0 that solves this generalized
+Neumann problem.
+For veriﬁcation that the solution in Example 5.2 is correct, see the neumann section
+of the Computing with Harmonic Functions documentation at [1].
+For simplicity and clarity, we have considered in this paper only ellipsoids centered
+at the origin. However, the algorithm discussed in the previous section can be modiﬁed
+to handle ellipsoids centered at arbitrary points in Rn (for such ellipsoids deﬁned by
+a quadratic expression q, the gradient ∇q becomes slightly more complicated than
+123
+
+PDF PAGE 17
+The Neumann problem on ellipsoids
+277
+considered here). The software at [1] extends the algorithm discussed in this paper so
+that it can also handle ellipsoids not centered at the origin.
+6 Magnetic resonance imaging
+MRI(magneticresonanceimaging)isadiagnostictoolthatusestime-varyingmagnetic
+ﬁelds to produce images of anatomical structures inside the human body. The laws of
+physics, however, tell us that such magnetic ﬁelds will generate electric ﬁelds that can
+cause pain and nerve stimulation in patients undergoing imaging exams. Therefore, it
+is of interest to estimate the level of electric ﬁelds induced inside the imaging subject.
+The Maxwell-Faraday equation in differential form is written as
+∇× E (x, y, z, t) = −∂B (x, y, z, t)
+∂t
+,
+which states that an applied time-varying magnetic ﬁeld B will induce a spatially-
+varying electric ﬁeld E. In handling both vector ﬁelds, it is convenient to write them
+in terms of potentials:
+B = ∇× A
+(6.1)
+and
+E = −∇V −∂A
+∂t ,
+(6.2)
+where A is the vector magnetic potential and V is the scalar electric potential.
+The applied magnetic ﬁeld B is determined by the imaging requirements such
+as spatial coverage and image resolution, and can be represented as a polynomial
+function of the spatial coordinates. From that we can specify the magnetic potential
+A in a polynomial form that satisﬁes (6.1) together with the additional constraint
+∇· A = 0,
+(6.3)
+which is referred to as specifying the magnetic potential using the Coulomb gauge. In
+order to calculate the E-ﬁeld from (6.2), we also need to obtain V , the scalar electric
+potential.
+In MRI applications, we can assume that we are working in a quasistatic regime,
+which leads to the following condition:
+∇· E = 0.
+(6.4)
+From this, we achieve a boundary condition that the outward normal component of
+the E-ﬁeld on the imaging subject’s surface is zero:
+E · n = 0.
+(6.5)
+We can now derive our working equation that we use to ﬁnd V . Once we know what
+V is, then it is trivial to calculate E from (6.2).
+123
+
+PDF PAGE 18
+278
+S. Axler, P. J. Shin
+Taking the divergence of both sides of (6.2) we have
+∇· E = −V −∂(∇· A)
+∂t
+= −V
+= 0,
+where the second equality comes from (6.3) and the third from (6.4). Hence the electric
+potential V satisﬁes the Laplace equation:
+V = 0.
+From (6.2) and (6.5), we also have a boundary condition for V on the surface:
+∇V · n = −∂A
+∂t · n.
+Modeling human body parts such as the torso or head as an ellipsoid (models based
+upon spheres have not been sufﬁciently accurate), the problem of calculating the
+induced electric ﬁeld inside the body boils down to solving the Neumann problem on
+ellipsoids given polynomial boundary data, as discussed in this paper.
+Acknowledgements Peter J. Shin was supported by National Institutes of Health Grant Number P41-
+EB013598.
+References
+1. Axler, S.: HFT mathematica package and its documention. In: Computing with Harmonic Functions,
+Version 11, Released 1 November 2016. Available at http://www.axler.net/HFT_Math.html and https://
+www.researchgate.net/publication/283776912
+2. Axler, S., Bourdon, P., Wade, R.: Harmonic Function Theory, 2nd edn. Springer, New York (2001)
+3. Axler, S., Gorkin, Pamela, Voss, K.: The Dirichlet problem on quadratic surfaces. Math. Comput. 73,
+637–651 (2004)
+4. Axler, S., Ramey, W.: Harmonic polynomials and Dirichlet-type problems. Proc. Am. Math. Soc. 123,
+3765–3773 (1995)
+5. Baker, J.A.: The Dirichlet problem for ellipsoids. Am. Math. Mon. 106, 829–834 (1999)
+6. Dassios, G.: Ellipsoidal Harmonics: Theory and Applications. Cambridge University Press, Cambridge
+(2012)
+7. Genev, V.N.: Solution of the Neumann problem by the method of harmonic polynomials in a simply
+connected domain bounded by a smooth contour. (Russian). Godishnik na Visshite Uchebni Zave-
+deniya. Prilozhna Matematika 19, 95–106 (1983)
+8. Pérez, R.C., Kravchenko, V.V., Vázquez, R.R.: Solution of boundary and eigenvalue problems for
+second-order elliptic operators in the plane using pseudoanalytic formal powers. Math. Methods Appl.
+Sci. 34, 455–468 (2011)
+9. Rudin, W.: Real & Complex Analysis, 3rd edn. McGraw-Hill, New York (1987)
+10. Weyl, H.: On the volume of tubes. Am. J. Math. 61, 461–472 (1939)
+123

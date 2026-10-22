@@ -25,6 +25,11 @@ provenance:
   statement: literature-derived
   proof: ai-generated
 proof_strategy: direct
+verification:
+  judge:
+    model: "gpt-6-luna"
+    verdict: pass
+    date: 2026-10-22
 sources:
   references:
     - title: "Venkataswaran P. Krishnan and Eric Todd Quinto, Microlocal Analysis in Tomography"

@@ -1,0 +1,3 @@
+# New first review scope
+
+Review the copied NEW relative-cell domination consumer only. It assumes actual sorted whole-source products, the entire collared incoming base A, and tracked background/product homotopy. Those are not asserted to have been manufactured here. No old accepted source, normal-form, H_i, or product body is reopened. This is a new first review history; if needed there is one focused correction/final cycle. In particular inspect actual maps and gluing, whole-domain coverage, index dimension bound, raw image/track control, and compatibility with prescribed product background. The compact finite-polyhedron alternative is excluded and is not a supplier.

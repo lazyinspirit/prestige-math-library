@@ -1,0 +1,471 @@
+[
+  {
+    "order": 3190,
+    "id": "khovanov-homology-detects-the-unknot",
+    "kind": "A",
+    "category": "knot-theory",
+    "title": "Khovanov homology detects the unknot",
+    "companion": "khovanov-homology-detects-the-unknot-examples",
+    "requires": [
+      "knot-exteriors-and-peripheral-systems",
+      "khovanov-homology-and-jones-categorification"
+    ],
+    "items": [
+      {
+        "id": "def-mirror-of-a-classical-knot",
+        "kind": "definition",
+        "title": "Mirror of a classical knot",
+        "deps": [],
+        "dependency_level": 0,
+        "statement": "Fix the orientation-reversing involution $r:S^3\\to S^3$ given by reflection across a fixed equatorial two-sphere containing a chosen standard unknot $U$. For a smooth knot $K\\subset S^3$, its mirror is $\\overline K:=r(K)$, with the orientation transported by $r$. On a diagram this reflects the projection and interchanges the over- and under-crossing data. Since $r^2=\\mathrm{id}$ and $r(U)=U$, mirroring twice returns $K$, and $K$ is the unknot exactly when $\\overline K$ is.",
+        "strategy": "not-applicable",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "not-applicable"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "P. B. Kronheimer and T. S. Mrowka, Khovanov homology is an unknot-detector, §§1.1 and 8.6–8.7",
+              "url": "https://people.math.harvard.edu/~kronheim/khovanov-unknot.pdf"
+            },
+            {
+              "title": "Hongjian Yang, An Overview of Floer Homologies, §5.7",
+              "url": "https://web.stanford.edu/~cm5/286.pdf"
+            }
+          ]
+        }
+      },
+      {
+        "id": "lem-essential-curves-on-torus-with-same-primitive-class-are-isotopic",
+        "kind": "lemma",
+        "title": "Essential torus curves with the same primitive class are isotopic",
+        "deps": [],
+        "dependency_level": 0,
+        "statement": "Let $T=\\mathbb R^2/\\mathbb Z^2$ be oriented by $dx\\wedge dy$, and identify $H_1(T;\\mathbb Z)$ with $\\mathbb Z^2$ in the standard basis, so the algebraic intersection of classes $v,w$ is $\\det(v,w)$. Let $\\gamma_0,\\gamma_1\\subset T$ be smooth embedded circles that are not null-homotopic. Orient them so that their homology classes agree, and suppose their common class $v\\in H_1(T;\\mathbb Z)$ is primitive, meaning it is not an integer multiple $m u$ with $|m|>1$. Then $\\gamma_0$ and $\\gamma_1$ are isotopic through embedded circles in $T$.",
+        "strategy": "direct",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-generated"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Alessia Cattabriga and Stefano Francaviglia, Knot Theory and Applications: Lecture Notes, §4.4 and §5.1.1",
+              "url": "https://poisson.phc.dm.unipi.it/~camponovo/libri/knot.pdf",
+              "locator": "§4.4, Lemma 4.4.1 and Exercise 4.4.2; §5.1.1, printed p. 27, uniqueness up to isotopy of a simple closed curve of fixed primitive coordinates on a torus."
+            }
+          ]
+        },
+        "proof_strategy": "direct",
+        "axiom_use": "The proof uses only finite surface topology and is choice-free."
+      },
+      {
+        "id": "def-singular-instanton-knot-and-sutured-closure-data",
+        "kind": "definition",
+        "title": "Singular instanton knot and sutured closure data",
+        "deps": [
+          "def-knot-exterior",
+          "def-knot-meridian-and-preferred-longitude",
+          "def-stiefel-whitney-classes-from-the-projective-bundle-relation"
+        ],
+        "dependency_level": 2,
+        "statement": "Let $K\\subset S^3$ be a smooth knot with a marked point $x$ and a preferred nonzero normal vector $v$ at $x$. Choose a small disk $D$ normal to $K$ at $x$, let $L=\\partial D$, and let $\\omega$ be the radius of $D$ from $x$ to a point of $L$. Then $K^\\natural:=K\\cup L$ is the based earring link. Choose disjoint closed tubular neighborhoods $N(K)$ and $N(L)$ of its two components, set $X=S^3\\setminus\\operatorname{int}(N(K)\\cup N(L))$, and truncate the endpoints of $\\omega$ at $\\partial X$ to obtain $[\\omega]\\in H_1(X,\\partial X;\\mathbb Z/2)$.\n\nHere $PU(2)=U(2)/U(1)\\cong SO(3)$; a principal $PU(2)$ bundle $P\\to X$ is equivalently an oriented real 3-plane bundle, and $w_2(P)\\in H^2(X;\\mathbb Z/2)$ denotes its second Stiefel–Whitney class. Poincaré–Lefschetz duality for the oriented compact 3-manifold $X$ with boundary is the isomorphism $PD:H_1(X,\\partial X;\\mathbb Z/2)\\to H^2(X;\\mathbb Z/2)$. Include a bundle $P$ with $w_2(P)=PD([\\omega])$ in the singular bundle data.\n\nIn a local meridional angular coordinate $\\theta$, an $SU(2)$ lift of the singular connection has the standard model $A_0+\\frac14\\begin{pmatrix}i&0\\\\0&-i\\end{pmatrix}d\\theta$, where $A_0$ is smooth in an $O(2)$ reduction. Parallel transport (holonomy) around either meridian is conjugate in $SU(2)$ to $\\operatorname{diag}(i,-i)$; its image has order two in $PU(2)$. Define $I^\\natural(K;\\mathbb Z)$ to be the singular instanton Floer homology $I^\\omega(S^3,K^\\natural;P)$ associated to these data whenever its analytic complex and independence of auxiliary choices have been established. Those analytic and invariance results are separate theorem obligations.\n\nFor the sutured version, let $E_K$ be the compact knot exterior and put two oppositely oriented meridional sutures $\\gamma$ on its boundary torus. Choose a connected oriented annulus $T$, attach $[-1,1]\\times T$ along the annular sutured region, and glue the two resulting boundary surfaces by a diffeomorphism fixing a chosen point from $T$. The result is a closed oriented 3-manifold $\\bar Y$ with a distinguished torus $\\bar R$; the fixed point determines a standard circle meeting $\\bar R$ once. Choose a line bundle $w\\to\\bar Y$ whose first Chern class is Poincaré dual to that circle, so $\\langle c_1(w),[\\bar R]\\rangle$ is odd. Let $I_*(\\bar Y,w;\\mathbb Q)$ denote the closed instanton Floer group with rational coefficients, when its analytic construction is available. For a homology class $z$ of dimension $0$ or $2$ in $\\bar Y$, let $\\mu(z)$ denote the standard instanton Floer operator associated to $z$; the point and surface operators commute and have degrees $4$ and $-2$, respectively. If $y\\in\\bar R$, define the closure group $KHI_{\\bar Y,\\bar R,w}(K;\\mathbb Q)$ by\n$$\nKHI_{\\bar Y,\\bar R,w}(K;\\mathbb Q)\n:=\\{a\\in I_*(\\bar Y,w;\\mathbb Q):\\mu(\\bar R)a=0,\\ \\mu(y)a=2a\\}.\n$$\nThis is the simultaneous eigenspace with eigenvalues $(0,2)$ specified by the instanton closure convention. Independence of the closure is asserted only after the separate sutured-instanton theorem is proved.",
+        "strategy": "not-applicable",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "not-applicable"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Allen Hatcher, Algebraic Topology, Theorem 3.43",
+              "url": "https://pi.math.cornell.edu/~hatcher/AT/ATch3.pdf",
+              "locator": "Theorem 3.43, printed pp. 253–254: compact oriented manifolds with boundary, with A=empty and B=the full boundary."
+            },
+            {
+              "title": "P. B. Kronheimer and T. S. Mrowka, Khovanov homology is an unknot-detector, §§2.1–2.4, 4.2–4.4, and 8.7",
+              "url": "https://people.math.harvard.edu/~kronheim/khovanov-unknot.pdf"
+            },
+            {
+              "title": "P. B. Kronheimer and T. S. Mrowka, Knots, sutures and excision, §§7.1–7.6",
+              "url": "https://arxiv.org/pdf/0807.4891"
+            },
+            {
+              "title": "P. B. Kronheimer and T. S. Mrowka, Knots, three-manifolds and instantons, §§4.3 and 5.1–5.2",
+              "url": "https://math.pku.edu.cn/puremath/docs/2018-10/20181010175415114589.pdf"
+            }
+          ]
+        },
+        "justified_by": [
+          "thm-sutured-instanton-khi-rank-detects-unknot"
+        ]
+      },
+      {
+        "id": "def-instanton-knot-homology-and-canonical-class",
+        "kind": "definition",
+        "title": "Instanton knot homology and its canonical class",
+        "deps": [
+          "def-knot-exterior",
+          "def-knot-meridian-and-preferred-longitude",
+          "def-singular-instanton-knot-and-sutured-closure-data"
+        ],
+        "dependency_level": 3,
+        "statement": "For a based smooth knot $K\\subset S^3$ with the earring and admissible singular-bundle data above, let $C^\\natural(K;\\mathbb Z)$ be the integral singular-instanton cochain complex: its generators are regular critical points of the perturbed Chern–Simons functional on the corresponding singular configuration space, and its degree-one differential counts oriented zero-dimensional moduli spaces of finite-energy anti-self-dual trajectories. Define $I^\\natural(K;\\mathbb Z):=H^*(C^\\natural(K;\\mathbb Z))$ whenever the analytic construction and independence of choices have been established. Write $I^\\natural(K;\\mathbb Q):=I^\\natural(K;\\mathbb Z)\\otimes_{\\mathbb Z}\\mathbb Q$.",
+        "strategy": "not-applicable",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "not-applicable"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "P. B. Kronheimer and T. S. Mrowka, Khovanov homology is an unknot-detector, §§1.1–1.2, 2–4, and 8.7",
+              "url": "https://people.math.harvard.edu/~kronheim/khovanov-unknot.pdf"
+            },
+            {
+              "title": "P. B. Kronheimer and T. S. Mrowka, Knots, three-manifolds and instantons, §5.1",
+              "url": "https://math.pku.edu.cn/puremath/docs/2018-10/20181010175415114589.pdf"
+            },
+            {
+              "title": "Hongjian Yang, An Overview of Floer Homologies, §§5.5–5.7",
+              "url": "https://web.stanford.edu/~cm5/286.pdf"
+            }
+          ]
+        },
+        "justified_by": [
+          "lem-instanton-knot-complex-asd-analytic-foundations"
+        ]
+      },
+      {
+        "id": "lem-knot-exterior-is-irreducible",
+        "kind": "lemma",
+        "title": "A smooth knot exterior is irreducible",
+        "deps": [
+          "def-knot-exterior",
+          "def-countable-choice",
+          "thm-smooth-schoenflies-for-embedded-two-sphere-in-s-three"
+        ],
+        "dependency_level": 3,
+        "statement": "Assume countable choice. Let $K\\subset S^3$ be a smooth knot with a chosen closed tubular neighborhood $N(K)$, and let $E_K=S^3\\setminus\\operatorname{int}N(K)$. Every smoothly embedded two-sphere in the interior of $E_K$ bounds a smoothly embedded closed three-ball contained in $E_K$.",
+        "strategy": "direct",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-generated"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Allen Hatcher, Notes on Basic 3-Manifold Topology, Chapter 1, Theorem 1.1",
+              "url": "https://pi.math.cornell.edu/~hatcher/3M/3M.pdf"
+            }
+          ]
+        },
+        "proof_strategy": "direct",
+        "axiom_use": "Assumes countable choice only through the current draft smooth Schoenflies supplier."
+      },
+      {
+        "id": "lem-nontrivial-knot-exterior-boundary-incompressible",
+        "kind": "lemma",
+        "title": "The boundary of a nontrivial knot exterior is incompressible",
+        "deps": [
+          "def-knot-exterior",
+          "def-knot-meridian-and-preferred-longitude",
+          "thm-knot-exterior-homology-and-longitude",
+          "lem-essential-curves-on-torus-with-same-primitive-class-are-isotopic",
+          "def-axiom-of-choice",
+          "def-countable-choice"
+        ],
+        "dependency_level": 4,
+        "statement": "Assume the Axiom of Choice. Let $K\\subset S^3$ be a smooth knot that is not ambient isotopic to the standard unknot, let $E_K$ be its chosen compact exterior, and let $T_K=\\partial E_K$. There is no properly embedded disk $D\\subset E_K$ whose boundary is a simple closed curve in $T_K$ that is not null-homotopic in $T_K$.",
+        "strategy": "direct",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Alessia Cattabriga and Stefano Francaviglia, Knot Theory and Applications: Lecture Notes, §4.4",
+              "url": "https://poisson.phc.dm.unipi.it/~camponovo/libri/knot.pdf",
+              "locator": "§4.4, Lemma 4.4.1, Exercise 4.4.2, and Theorem 4.4.8."
+            },
+            {
+              "title": "P. B. Kronheimer and T. S. Mrowka, Knots, sutures and excision, §4.3",
+              "url": "https://arxiv.org/pdf/0807.4891"
+            }
+          ]
+        },
+        "proof_strategy": "direct",
+        "axiom_use": "Assumes full AC through the knot-exterior homology supplier; the torus-slope and annulus arguments are choice-free."
+      },
+      {
+        "id": "lem-instanton-knot-complex-asd-analytic-foundations",
+        "kind": "lemma",
+        "title": "Analytic foundations for the singular instanton knot complex",
+        "deps": [
+          "def-knot-exterior",
+          "def-knot-meridian-and-preferred-longitude",
+          "def-instanton-knot-homology-and-canonical-class",
+          "def-singular-instanton-knot-and-sutured-closure-data",
+          "def-axiom-of-choice",
+          "def-countable-choice"
+        ],
+        "dependency_level": 4,
+        "statement": "Assume full AC and fix a smooth based knot $K\\subset S^3$ with the earring and admissible singular bundle data of the preceding definitions. For regular perturbation data, the perturbed Chern–Simons critical points and finite-energy singular anti-self-dual trajectories define a finite free cochain complex $C^\\natural(K;\\mathbb Z)$ with differential $d$ satisfying $d^2=0$. Its homology is independent of the chosen regular metric and perturbation up to the declared overall sign and is invariant under isotopy of the based knot data.",
+        "strategy": "not-applicable",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "not-supplied"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "P. B. Kronheimer and T. S. Mrowka, Khovanov homology is an unknot-detector, §§2–4",
+              "url": "https://people.math.harvard.edu/~kronheim/khovanov-unknot.pdf"
+            },
+            {
+              "title": "P. B. Kronheimer and T. S. Mrowka, Knot homology groups from instantons, §§2.1–2.2 and 3.3–3.8",
+              "url": "https://people.math.harvard.edu/~kronheim/yaft.pdf"
+            },
+            {
+              "title": "Hongjian Yang, An Overview of Floer Homologies, §5.7",
+              "url": "https://web.stanford.edu/~cm5/286.pdf"
+            }
+          ]
+        }
+      },
+      {
+        "id": "lem-kh-to-instanton-resolution-spectral-sequence",
+        "kind": "lemma",
+        "title": "Filtered instanton complex from the cube of knot resolutions",
+        "deps": [
+          "def-instanton-knot-homology-and-canonical-class",
+          "def-singular-instanton-knot-and-sutured-closure-data",
+          "lem-instanton-knot-complex-asd-analytic-foundations",
+          "def-khovanov-frobenius-algebra-and-cube-of-resolutions",
+          "def-reduced-khovanov-cohomology-of-a-knot",
+          "lem-khovanov-cube-differential-squares-to-zero",
+          "thm-bounded-filtered-complex-spectral-sequence-abuts-to-filtered-homology",
+          "def-axiom-of-choice",
+          "def-countable-choice"
+        ],
+        "dependency_level": 5,
+        "statement": "Assume full AC. Let $D$ be a finite based diagram of a smooth knot $K\\subset S^3$ with ordered crossings $c_1<\\cdots<c_n$. The singular instanton resolution complex admits a finite filtration whose first page, with its first differential, is isomorphic to the reduced Khovanov cube of the reflected based diagram $\\overline D$. Its spectral sequence converges to $I^\\natural(K;\\mathbb Z)$. The cube sign at the edge changing $c_j$ is $(-1)^{\\sum_{i<j}v_i}$, and the edge operation is multiplication for a merge or comultiplication for a split. Thus its $E_2$ page is the reduced integral Khovanov cohomology of $\\overline D$. The claim includes coherent instanton orientations and the unlink group and saddle-map identifications; it asserts no diagram-invariance of intermediate pages.",
+        "strategy": "not-applicable",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "not-supplied"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "P. B. Kronheimer and T. S. Mrowka, Khovanov homology is an unknot-detector, §§6–8.7",
+              "url": "https://people.math.harvard.edu/~kronheim/khovanov-unknot.pdf"
+            },
+            {
+              "title": "P. B. Kronheimer and T. S. Mrowka, Knot homology groups from instantons, §1.2 and §§3.3–3.7",
+              "url": "https://people.math.harvard.edu/~kronheim/yaft.pdf"
+            },
+            {
+              "title": "Hongjian Yang, An Overview of Floer Homologies, §5.7",
+              "url": "https://web.stanford.edu/~cm5/286.pdf"
+            }
+          ]
+        },
+        "axiom_use": "The finite filtration and its algebraic rank argument are choice-free; the singular-instanton construction inherits the declared AC branch."
+      },
+      {
+        "id": "thm-sutured-instanton-khi-rank-detects-unknot",
+        "kind": "theorem",
+        "title": "Sutured instanton knot homology detects the unknot",
+        "deps": [
+          "def-knot-exterior",
+          "def-knot-meridian-and-preferred-longitude",
+          "thm-knot-exterior-homology-and-longitude",
+          "lem-knot-exterior-is-irreducible",
+          "lem-nontrivial-knot-exterior-boundary-incompressible",
+          "def-instanton-knot-homology-and-canonical-class",
+          "def-singular-instanton-knot-and-sutured-closure-data",
+          "lem-instanton-knot-complex-asd-analytic-foundations",
+          "def-axiom-of-choice",
+          "def-countable-choice"
+        ],
+        "dependency_level": 5,
+        "statement": "Assume full AC. For every smooth knot $K\\subset S^3$, the rational sutured instanton knot homology $KHI(K;\\mathbb Q)$ is finite-dimensional and has dimension at least one; it has dimension one if and only if $K$ is the unknot. Moreover, excision gives an isomorphism $I^\\natural(K;\\mathbb Q)\\cong KHI(K;\\mathbb Q)$.",
+        "strategy": "not-applicable",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "not-supplied"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "P. B. Kronheimer and T. S. Mrowka, Knots, sutures and excision, §§7.5–7.6",
+              "url": "https://arxiv.org/pdf/0807.4891"
+            },
+            {
+              "title": "P. B. Kronheimer and T. S. Mrowka, Knots, three-manifolds and instantons, §§4.3 and 5.1",
+              "url": "https://math.pku.edu.cn/puremath/docs/2018-10/20181010175415114589.pdf"
+            },
+            {
+              "title": "P. B. Kronheimer and T. S. Mrowka, Khovanov homology is an unknot-detector, §§1.1–1.2 and 5.4",
+              "url": "https://people.math.harvard.edu/~kronheim/khovanov-unknot.pdf"
+            }
+          ]
+        },
+        "axiom_use": "Assumes the declared AC branch through singular instanton, excision, and knot-exterior homology suppliers."
+      },
+      {
+        "id": "thm-khovanov-to-instanton-spectral-sequence",
+        "kind": "theorem",
+        "title": "Reduced Khovanov cohomology feeds the singular instanton spectral sequence",
+        "deps": [
+          "def-mirror-of-a-classical-knot",
+          "def-reduced-khovanov-cohomology-of-a-knot",
+          "thm-reduced-khovanov-basepoint-and-reidemeister-invariance",
+          "lem-kh-to-instanton-resolution-spectral-sequence",
+          "def-axiom-of-choice",
+          "def-countable-choice"
+        ],
+        "dependency_level": 8,
+        "statement": "Assume full AC. For every smooth knot $K\\subset S^3$, there is a finite spectral sequence of abelian groups whose $E_2$ page, after forgetting the Khovanov bigrading, is $\\widetilde{Kh}(\\overline K;\\mathbb Z)$ and which converges to $I^\\natural(K;\\mathbb Z)$. The intermediate pages are not asserted to be knot invariants.",
+        "strategy": "direct",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "P. B. Kronheimer and T. S. Mrowka, Khovanov homology is an unknot-detector, Proposition 1.2 and Theorem 8.12",
+              "url": "https://people.math.harvard.edu/~kronheim/khovanov-unknot.pdf"
+            },
+            {
+              "title": "P. B. Kronheimer and T. S. Mrowka, Knots, three-manifolds and instantons, Theorem 5.3",
+              "url": "https://math.pku.edu.cn/puremath/docs/2018-10/20181010175415114589.pdf"
+            },
+            {
+              "title": "Hongjian Yang, An Overview of Floer Homologies, §5.7",
+              "url": "https://web.stanford.edu/~cm5/286.pdf"
+            }
+          ]
+        },
+        "proof_strategy": "direct",
+        "axiom_use": "Assumes ACω through reduced Khovanov diagram and basepoint invariance; the finite filtration argument is choice-free, and the instanton construction carries the separately declared AC branch."
+      },
+      {
+        "id": "thm-kronheimer-mrowka-reduced-khovanov-detects-unknot",
+        "kind": "theorem",
+        "title": "Reduced Khovanov cohomology detects the unknot",
+        "deps": [
+          "def-mirror-of-a-classical-knot",
+          "def-reduced-khovanov-cohomology-of-a-knot",
+          "thm-reduced-khovanov-basepoint-and-reidemeister-invariance",
+          "thm-khovanov-to-instanton-spectral-sequence",
+          "thm-sutured-instanton-khi-rank-detects-unknot",
+          "def-axiom-of-choice",
+          "def-countable-choice"
+        ],
+        "dependency_level": 9,
+        "statement": "Assume full AC. Let $K\\subset S^3$ be a smooth knot. The total normalized integral reduced Khovanov cohomology is isomorphic to $\\mathbb Z$ concentrated in bidegree $(0,0)$ if and only if $K$ is the unknot.",
+        "strategy": "direct",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "P. B. Kronheimer and T. S. Mrowka, Khovanov homology is an unknot-detector, Theorem 1.1, Corollary 1.3, and Theorem 8.12",
+              "url": "https://people.math.harvard.edu/~kronheim/khovanov-unknot.pdf"
+            },
+            {
+              "title": "P. B. Kronheimer and T. S. Mrowka, Knots, three-manifolds and instantons, Corollary 5.4",
+              "url": "https://math.pku.edu.cn/puremath/docs/2018-10/20181010175415114589.pdf"
+            },
+            {
+              "title": "Hongjian Yang, An Overview of Floer Homologies, §5.7",
+              "url": "https://web.stanford.edu/~cm5/286.pdf"
+            }
+          ]
+        },
+        "proof_strategy": "direct",
+        "axiom_use": "Assumes full AC through the instanton and exterior suppliers, and ACω through reduced Khovanov diagram invariance. The finite rank inequalities and unknot cube computation are choice-free."
+      }
+    ],
+    "examples": []
+  },
+  {
+    "order": 3191,
+    "id": "khovanov-homology-detects-the-unknot-examples",
+    "kind": "B",
+    "category": "knot-theory",
+    "title": "Khovanov homology detects the unknot — Examples and Counterexamples",
+    "companion": "khovanov-homology-detects-the-unknot",
+    "requires": [
+      "khovanov-homology-detects-the-unknot"
+    ],
+    "items": [
+      {
+        "id": "cex-knot-kt-44-boundary-case",
+        "kind": "counterexample",
+        "title": "A graded Euler characteristic does not determine total rank",
+        "deps": [],
+        "dependency_level": 0,
+        "statement": "The false assertion is that a finite bigraded cochain complex over $\\mathbb Q$ is determined in total dimension by its graded Euler characteristic $\\sum_{i,j}(-1)^i\\dim_{\\mathbb Q}H^{i,j}q^j$.",
+        "strategy": "direct",
+        "provenance": {
+          "statement": "ai-generated",
+          "proof": "ai-generated"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Ciprian Manolescu, From Knots to Four-Manifolds, §2",
+              "url": "https://web.stanford.edu/~cm5/knots4m.pdf"
+            }
+          ]
+        },
+        "proof_strategy": "direct",
+        "axiom_use": "The finite-dimensional vector-space calculation is choice-free."
+      },
+      {
+        "id": "ex-knot-kt-44-worked-cases",
+        "kind": "example",
+        "title": "Reduced Khovanov ranks of the unknot and the three-crossing two-braid",
+        "deps": [
+          "def-khovanov-frobenius-algebra-and-cube-of-resolutions",
+          "alg-khovanov-chain-complex-from-diagram",
+          "lem-khovanov-cube-differential-squares-to-zero",
+          "def-reduced-khovanov-cohomology-of-a-knot"
+        ],
+        "dependency_level": 5,
+        "statement": "For the crossingless based unknot diagram, the reduced integral cohomology is $\\mathbb Z$ in cohomological degree $0$. For the based closure of the three-crossing negative two-strand braid, with the basepoint on a closure arc and cohomological degree $i=|v|-3$, the reduced integral cohomology is $\\mathbb Z$ in degrees $-3,-1,0$ and zero in degree $-2$. In particular, these two specified diagrams have total reduced ranks $1$ and $3$, respectively.\n\nThe braid diagram below shows the closure convention: the two outer arcs join corresponding top and bottom endpoints, the braid strands are oriented downward, the two closure arcs are traversed from bottom to top, the three crossings are negative, and the dot marks the basepoint. The top-to-bottom braid word is $\\sigma_1^{-3}$, with $\\sigma_1^{-1}$ drawn as the left incoming strand passing over the right incoming strand.\n\n```tikz\n\\begin{tikzpicture}[scale=0.78, every node/.style={font=\\small}]\n  % Three negative crossings; the left incoming strand is the overstrand.\n  \\draw[thick] (0.45,3) -- (0.10,2.61);\n  \\draw[thick] (0.10,2.39) -- (-0.45,2);\n  \\draw[thick] (-0.45,3) -- (0.45,2);\n  \\draw[thick] (0.45,2) -- (0.10,1.61);\n  \\draw[thick] (0.10,1.39) -- (-0.45,1);\n  \\draw[thick] (-0.45,2) -- (0.45,1);\n  \\draw[thick] (0.45,1) -- (0.10,0.61);\n  \\draw[thick] (0.10,0.39) -- (-0.45,0);\n  \\draw[thick] (-0.45,1) -- (0.45,0);\n  % Closure arcs.\n  \\draw[thick,->] (-0.45,0) .. controls (-1.05,-0.25) and (-1.05,3.25) .. (-0.45,3);\n  \\draw[thick,->] (0.45,0) .. controls (1.05,-0.25) and (1.05,3.25) .. (0.45,3);\n  \\fill (-0.88,1.25) circle (2pt);\n  \\node[left] at (-0.88,1.25) {$p$};\n\\end{tikzpicture}\n```\n\nThe crossing convention in this drawing is explanatory only; the verification computes the resolution cube and does not infer any differential or homology from the picture.",
+        "strategy": "direct",
+        "provenance": {
+          "statement": "ai-generated",
+          "proof": "ai-generated"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "P. B. Kronheimer and T. S. Mrowka, Khovanov homology is an unknot-detector, §§1 and 8.6–8.7",
+              "url": "https://people.math.harvard.edu/~kronheim/khovanov-unknot.pdf"
+            },
+            {
+              "title": "Hongjian Yang, An Overview of Floer Homologies, §5.7",
+              "url": "https://web.stanford.edu/~cm5/286.pdf"
+            }
+          ]
+        },
+        "proof_strategy": "direct",
+        "axiom_use": "Both finite cube calculations are choice-free. The example computes the specified based diagrams and does not use the unresolved knot-invariance or instanton-detection suppliers."
+      }
+    ],
+    "examples": [
+      "cex-knot-kt-44-boundary-case",
+      "ex-knot-kt-44-worked-cases"
+    ]
+  }
+]

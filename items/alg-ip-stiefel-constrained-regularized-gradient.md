@@ -31,6 +31,10 @@ sources:
       locator: "§§3.8 and 7.3: embedded-manifold gradients, Stiefel tangent/projection formulas, and the polar retraction."
 verification:
   precheck: n/a
+  judge:
+    model: "gpt-6-luna"
+    verdict: pass
+    date: 2026-10-22
 ---
 
 ## Definition

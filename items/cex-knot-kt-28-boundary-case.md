@@ -1,7 +1,7 @@
 ---
 id: cex-knot-kt-28-boundary-case
 kind: counterexample
-title: "The right-handed trefoil is not ribbon"
+title: "Under full AC, the right-handed trefoil is not ribbon"
 status: draft
 origin: pipeline
 pipeline_run: inverse-problems-knot-theory-all-109-2026-10-19

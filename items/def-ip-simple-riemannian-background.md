@@ -25,6 +25,10 @@ sources:
       locator: "Chapter 3, Definition 3.8.1 and Theorem 3.8.2, printed pp. 102–103: the standard compact connected simple-manifold convention."
 verification:
   precheck: n/a
+  judge:
+    model: "gpt-6-luna"
+    verdict: pass
+    date: 2026-10-22
 ---
 
 ## Definition

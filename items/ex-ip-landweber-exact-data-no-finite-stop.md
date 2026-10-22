@@ -1,4 +1,9 @@
 ---
+verification:
+  judge:
+    model: "gpt-6-luna"
+    verdict: pass
+    date: 2026-10-22
 id: ex-ip-landweber-exact-data-no-finite-stop
 kind: example
 title: Exact data can converge without a finite discrepancy stop

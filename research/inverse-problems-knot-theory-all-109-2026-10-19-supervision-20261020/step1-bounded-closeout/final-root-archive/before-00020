@@ -1,0 +1,46 @@
+---
+id: lem-ip-smooth-compact-support-dense-in-c0
+kind: lemma
+title: Smooth compactly supported functions are dense in C0 on an open Euclidean set
+status: draft
+origin: pipeline
+deps:
+  - def-compact-support-c-c-and-c-zero-on-an-lch-space
+  - lem-smooth-bump-between-concentric-euclidean-balls
+  - thm-heine-borel-rn
+proof_strategy: direct
+provenance:
+  statement: literature-derived
+  proof: ai-altered
+sources:
+  references:
+    - title: "Gláucio Terra, Introduction to Geometric Measure Theory — Lecture Notes, version 1.6"
+      url: "https://www.ime.usp.br/~glaucio/mat6704/textos/GMTLecureNotes.pdf"
+pipeline_run: inverse-problems-knot-theory-all-109-2026-10-19
+---
+
+## Statement
+
+For every open set $\Omega\subseteq\mathbb R^n$, the space $C_c^\infty(\Omega)$ is dense in $C_0(\Omega)$ in the uniform norm.
+
+## Statement references
+
+[[def-compact-support-c-c-and-c-zero-on-an-lch-space|C-zero functions vanish at infinity, and C-c functions have compact support.]]
+
+[[lem-smooth-bump-between-concentric-euclidean-balls|Smooth cutoffs exist between nested concentric balls.]]
+
+## Facts & Assumptions
+
+**Given:** An open set $\Omega\subseteq\mathbb R^n$ and a continuous function on $\Omega$ that vanishes at infinity.
+
+[F1] Closed bounded subsets of $\mathbb R^n$ are compact. ([[thm-heine-borel-rn]])
+
+[F2] A smooth bump can be chosen equal to one on an inner ball and supported in a larger ball. ([[lem-smooth-bump-between-concentric-euclidean-balls]])
+
+## Proof
+
+**Given:** The open set $\Omega$ and $f\in C_0(\Omega)$.
+
+1.1 Let $f\in C_0(\Omega)$ and $\varepsilon>0$. The set $K:=\{x\in\Omega:|f(x)|\ge\varepsilon/3\}$ is compact by the definition of vanishing at infinity. If $K=\varnothing$, the zero function approximates $f$ within $\varepsilon/3$. Otherwise cover $K$ by finitely many inner balls whose doubled closed balls lie in $\Omega$, using compactness [F1]. Choose the corresponding bumps from [F2] and combine them as $\chi:=1-\prod_j(1-\chi_j)$. Then $\chi\in C_c^\infty(\Omega)$ and $\chi=1$ on $K$, so $\|f-\chi f\|_\infty\le\varepsilon/3$. [F1, F2, given, choose, construct]
+
+2.1 Extend $g:=\chi f$ by zero to $\mathbb R^n$. It is continuous and compactly supported, hence uniformly continuous. Fix a nonnegative smooth bump from [F2], normalize its integral to one, and rescale it as $\rho_\delta(x)=\delta^{-n}\rho(x/\delta)$. Then $g*\rho_\delta\in C_c^\infty(\mathbb R^n)$ and $$\|g*\rho_\delta-g\|_\infty\le\sup_{|h|\le\delta,\ x\in\mathbb R^n}|g(x-h)-g(x)|\to0.$$ For sufficiently small $\delta$, its support remains in $\Omega$ because $\operatorname{supp}g$ is compactly contained there. Taking the uniform error below $2\varepsilon/3$ and restricting to $\Omega$ gives an element of $C_c^\infty(\Omega)$ within $\varepsilon$ of $f$. [F2, step 1.1, given, construct] ∎

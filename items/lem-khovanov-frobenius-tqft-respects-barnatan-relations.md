@@ -16,6 +16,11 @@ axiom_use: "No choice principle is used; the verification consists of finitely m
 provenance:
   statement: literature-derived
   proof: ai-altered
+verification:
+  judge:
+    model: "gpt-6-luna"
+    verdict: pass
+    date: 2026-10-22
 sources:
   references:
     - title: "Dror Bar-Natan, Khovanov's homology for tangles and cobordisms, Proposition 7.2"

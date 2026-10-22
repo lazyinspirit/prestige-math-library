@@ -14,6 +14,11 @@ axiom_use: "These are finite local diagram and crossing-ball conventions; no cho
 provenance:
   statement: literature-derived
   proof: ai-altered
+verification:
+  judge:
+    model: "gpt-6-luna"
+    verdict: pass
+    date: 2026-10-22
 sources:
   references:
     - title: "Thomas Kindred, A geometric proof of the flyping theorem, §2.2 (Definitions 2.9–2.11) and §§3.1–3.2, arXiv:2008.06490v3"

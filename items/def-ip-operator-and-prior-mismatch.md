@@ -37,6 +37,10 @@ sources:
       locator: "Full 29-page paper; scope caution from §§4.3–5 and Appendix C"
 verification:
   precheck: n/a
+  judge:
+    model: "gpt-6-luna"
+    verdict: pass
+    date: 2026-10-22
 ---
 
 ## Definition

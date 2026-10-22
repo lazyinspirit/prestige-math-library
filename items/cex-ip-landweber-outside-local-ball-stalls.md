@@ -1,4 +1,9 @@
 ---
+verification:
+  judge:
+    model: "gpt-6-luna"
+    verdict: pass
+    date: 2026-10-22
 id: cex-ip-landweber-outside-local-ball-stalls
 kind: counterexample
 title: Exact-data Landweber can stall without a local tangential-cone condition

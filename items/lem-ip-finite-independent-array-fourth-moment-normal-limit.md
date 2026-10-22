@@ -21,6 +21,11 @@ provenance:
   statement: ai-altered
   proof: ai-generated
 axiom_use: Countable Choice is used through the stated scalar Lebesgue change-of-variables supplier. All products and replacements within a row are finite. A standard-normal probability law is supplied, so no stronger-choice normalization or general central-limit supplier is invoked.
+verification:
+  judge:
+    model: "gpt-6-luna"
+    verdict: pass
+    date: 2026-10-22
 sources:
   references:
     - title: "Rick Durrett, Probability: Theory and Examples, Version 5 (11 January 2019), section 3.4.2"

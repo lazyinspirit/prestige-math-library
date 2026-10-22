@@ -22,6 +22,10 @@ provenance:
   proof: not-applicable
 verification:
   precheck: n/a
+  judge:
+    model: "gpt-6-luna"
+    verdict: pass
+    date: 2026-10-22
 sources:
   references:
     - title: "Arunima Ray, Slice Knots and Knot Concordance, Winter Braids Lecture Notes 8"

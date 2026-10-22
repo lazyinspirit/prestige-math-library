@@ -17,6 +17,11 @@ axiom_use: "Assumes full AC for the explicitly imported Freedman TOP realization
 provenance:
   statement: literature-derived
   proof: ai-altered
+verification:
+  judge:
+    model: "gpt-6-luna"
+    verdict: pass
+    date: 2026-10-22
 sources:
   references:
     - title: Michael H. Freedman, The topology of four-dimensional manifolds

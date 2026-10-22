@@ -1,4 +1,9 @@
 ---
+verification:
+  judge:
+    model: "gpt-6-luna"
+    verdict: pass
+    date: 2026-10-22
 id: ex-ip-posterior-mean-outside-nonconvex-signal-class
 kind: example
 title: A posterior mean can lie outside a nonconvex signal class

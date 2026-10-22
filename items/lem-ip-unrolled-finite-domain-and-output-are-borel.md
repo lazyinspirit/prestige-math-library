@@ -18,6 +18,11 @@ axiom_use: "No choice axiom is used; the proof is finite induction over explicit
 provenance:
   statement: ai-altered
   proof: ai-altered
+verification:
+  judge:
+    model: "gpt-6-luna"
+    verdict: pass
+    date: 2026-10-22
 sources:
   references:
     - title: "Terence Tao, An Introduction to Measure Theory, preliminary full-text book"

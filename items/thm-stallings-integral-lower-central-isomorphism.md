@@ -50,17 +50,17 @@ group-extension homology sequence supplier.
 
 [F1] For every group extension $1\to N\to G\to Q\to1$, the exact sequence
 $H_2(G)\to H_2(Q)\to N/[G,N]\to H_1(G)\to H_1(Q)\to0$ is natural in maps of
-extensions. [[thm-five-term-homology-sequence-for-group-extensions]]
+extensions, including its transgression (the supplier proves this naturality using maps of classifying-space fibrations). [[thm-five-term-homology-sequence-for-group-extensions]]
 
 [L1] AC implies DC by choosing one successor at each stage of a serial relation. [[def-dependent-choice]]
 
-[F2] In the bar complex, degree one has generators $[x]$ and degree-two boundaries $[y]-[xy]+[x]$, so $H_1(X;\mathbb Z)\cong X/[X,X]$. [[lem-diagonal-bar-coinvariants-compute-group-homology]]
+[F2] Under DC with supplied projective-resolution data, the bar complex computes group homology. In the bar complex, degree one has generators $[x]$ and degree-two boundaries $[y]-[xy]+[x]$, so $H_1(X;\mathbb Z)\cong X/[X,X]$. [[lem-diagonal-bar-coinvariants-compute-group-homology]]
 
 ## Proof
 
 **Given:** The group map and hypotheses above.
 
-1.1 By [A1] and [L1], the DC condition of the bar-homology supplier in [F2] holds. The case $n=1$ is the map between two trivial quotients. For $n=2$, the induced map $A/\Gamma_2A\to B/\Gamma_2B$ is exactly the assumed isomorphism on $H_1$ by [F2]. These are the base cases. [A1, L1, F2, given]
+1.1 Supply the resolution convention for [F2] by taking, for every module over each relevant group ring, the free module on its underlying set, augmented $[m]\mapsto m$, and repeating this construction on successive kernels. These surjections give an exact free resolution. By [A1] and [L1], DC also holds. The case $n=1$ is the map between two trivial quotients. For $n=2$, the bar degree-one calculation in [F2] identifies $A/\Gamma_2A\to B/\Gamma_2B$ with the assumed isomorphism on $H_1$. These are the base cases. [A1, L1, F2, given, construct]
 
 1.2 Fix $n\ge2$ and assume $A/\Gamma_nA\to B/\Gamma_nB$ is an isomorphism. Apply [F1] to the extensions $1\to\Gamma_nA\to A\to A/\Gamma_nA\to1$ and $1\to\Gamma_nB\to B\to B/\Gamma_nB\to1$. Since $\Gamma_nX\subseteq[X,X]$ for $n\ge2$, the maps $H_1(X)\to H_1(X/\Gamma_nX)$ are isomorphisms. Exactness therefore makes the transgression $H_2(X/\Gamma_nX)\to\Gamma_nX/[X,\Gamma_nX]$ onto, with kernel the image of $H_2(X)$. By definition $[X,\Gamma_nX]=\Gamma_{n+1}X$. [A1, F1, F2, given, algebra]
 

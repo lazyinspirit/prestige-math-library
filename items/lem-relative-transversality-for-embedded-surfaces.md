@@ -21,6 +21,11 @@ proof_strategy: direct
 provenance:
   statement: literature-derived
   proof: ai-altered
+verification:
+  judge:
+    model: "gpt-6-luna"
+    verdict: pass
+    date: 2026-10-22
 sources:
   references:
     - title: "Marco Gualtieri, Topology I: Smooth Manifolds, Part 10 and cumulative notes"

@@ -763,7 +763,7 @@
       "derivations": [
         {
           "id": "step-1-1",
-          "claim": "Apply [F1] and list the finitely many crossings of the resulting projection. Around each crossing choose a closed disk meeting the image in exactly two transverse arcs, with all such disks pairwise disjoint. Subdivide the remaining compact arcs into finitely many subarcs contained in planar coordinate disks where each arc is a graph over a line interval and where nonincident pieces are separated. Compactness and finiteness give a positive minimum for the separations between the disjoint pieces.",
+          "claim": "A smooth embedded circle has empty interior in $S^3$: in every submanifold chart it is a coordinate line, which contains no open three-dimensional ball. Choose $p\\in S^3\\setminus K$. Choose an orientation-preserving rotation $R\\in SO(4)$ carrying $p$ to the fixed point at infinity; a rotation path from the identity to $R$ restricts to an ambient isotopy of $S^3$. Thus $R(K)$ misses infinity, and stereographic coordinates regard it as a compact smooth oriented knot in $\\mathbb R^3$. Apply [F1] to this representative and list the finitely many crossings of the resulting projection. Around each crossing choose a closed disk meeting the image in exactly two transverse arcs, with all such disks pairwise disjoint. Subdivide the remaining compact arcs into finitely many subarcs contained in planar coordinate disks where each arc is a graph over a line interval and where nonincident pieces are separated. Compactness and finiteness give a positive minimum for the separations between the disjoint pieces.",
           "step": "1.1",
           "inputs": [
             "A1",
@@ -904,9 +904,17 @@
       "unresolved_obligations": [],
       "risk_review": {
         "status": "complete",
-        "reviewer": "alpha-batch-107",
-        "notes": "Read all three steps and current finite-planar-code, regular-diagram, regular-projection, oriented-link and isotopy-extension statements. Finite graph neighborhoods and positive separation permit rational approximation; corrected the unsupported instruction to choose rational points on arbitrary smooth germs by rational transverse straight diameters and sector-wise joining. Crossing cyclic order, branch pairings and over/under inequalities survive; zero crossings gives a rational polygonal circle. AC_omega is retained for the regular projection and compact-circle isotopy extension. No Statement, dependency or provenance change; bibliography finding refuter:107:4 is false positive."
-      }
+        "reviewer": "step5-v2-initial-r1-u107",
+        "notes": "F1 claimed an S³ point-removal conclusion absent from its R³ supplier. Step 1.1 now chooses a point outside the embedded circle and uses an SO(4) rotation path to move that point to infinity before applying the regular-projection lemma. Rational approximation retains separated graph charts, transverse crossing sectors, orientations and crossing heights, and isotopy extension preserves the knot class. The Statement is unchanged; no consumer propagation is triggered.",
+        "independent_review_of_own_repair": false
+      },
+      "risk_review_history": [
+        {
+          "status": "complete",
+          "reviewer": "alpha-batch-107",
+          "notes": "Read all three steps and current finite-planar-code, regular-diagram, regular-projection, oriented-link and isotopy-extension statements. Finite graph neighborhoods and positive separation permit rational approximation; corrected the unsupported instruction to choose rational points on arbitrary smooth germs by rational transverse straight diameters and sector-wise joining. Crossing cyclic order, branch pairings and over/under inequalities survive; zero crossings gives a rational polygonal circle. AC_omega is retained for the regular projection and compact-circle isotopy extension. No Statement, dependency or provenance change; bibliography finding refuter:107:4 is false positive."
+        }
+      ]
     },
     "thm-descending-diagram-unknotting-sequence-procedure-properties": {
       "risk": "medium",
@@ -928,6 +936,7 @@
           "source_section": "Definition",
           "quote": "Input a valid finite planar code for one regular oriented knot diagram and a basepoint in the interior of an edge, away from every crossing and bend. Traverse the oriented code once starting at the basepoint. At each crossing, consider the first branch reached by this traversal. If that branch is under, record the crossing and exchange its over/under label; otherwise leave the crossing unchanged. Return the finite list of recorded crossing changes and the updated planar code. For a code with no crossings, return the empty list and the unchanged code. The input is the valid finite code defined for an oriented knot diagram; this procedure has no invalid-input branch.",
           "uses": [
+            "1.1",
             "2.1"
           ]
         }
@@ -935,11 +944,13 @@
       "derivations": [
         {
           "id": "step-1-1",
-          "claim": "The code has finitely many edges and crossing records by [F1]. Following its coherent half-edge pairings from the basepoint returns to the starting edge after finitely many incidences, so the traversal terminates. It visits each crossing record once at first encounter, giving exactly $c$ processing operations.",
+          "claim": "The polygonal drawing has finitely many bends. If the basepoint is a bend in the geometric interior of its edge, choose a short forward segment within that edge containing no crossing or other bend and move the basepoint into its interior. The adjusted point satisfies the algorithm's input condition. Moving the point within the same oriented edge crosses no crossing vertex, so it changes neither the cyclic order of crossing encounters nor the first branch reached at any crossing. Thus the adjustment leaves the crossing-change list and updated code independent of its choice. The code has finitely many edges and crossing records by [F1]. Following its coherent half-edge pairings from the basepoint returns to the starting edge after finitely many incidences, so the traversal terminates. It visits each crossing record once at first encounter, giving exactly $c$ processing operations.",
           "step": "1.1",
           "inputs": [
             "F1",
+            "F2",
             "given",
+            "construct",
             "algebra"
           ]
         },
@@ -1066,9 +1077,17 @@
       "unresolved_obligations": [],
       "risk_review": {
         "status": "complete",
-        "reviewer": "batch-107 author local audit",
-        "notes": "Step-to-fact mapping and local algebra/geometric cases were checked by the author; independent review and native gates remain separate."
-      }
+        "reviewer": "step5-v2-initial-r1-u107",
+        "notes": "The polygonal path of an edge can have a geometric bend in its interior; the algorithm expressly excludes such a basepoint. The repair retains every original basepoint by moving a bend basepoint a short distance forward within the same edge before the call. No crossing is passed, so crossing encounter order, the output labels and the crossing-change list are unchanged by this adjustment. Finiteness gives a nonbend choice and termination, including zero crossings.",
+        "independent_review_of_own_repair": false
+      },
+      "risk_review_history": [
+        {
+          "status": "complete",
+          "reviewer": "batch-107 author local audit",
+          "notes": "Step-to-fact mapping and local algebra/geometric cases were checked by the author; independent review and native gates remain separate."
+        }
+      ]
     },
     "thm-descending-diagram-is-unknot": {
       "risk": "medium",
@@ -1468,9 +1487,17 @@
       "unresolved_obligations": [],
       "risk_review": {
         "status": "complete",
-        "reviewer": "alpha-batch-107",
-        "notes": "Read every step and actual Seifert-algorithm, termination, embedded-band surface and positive-push pairing definitions/statements, plus full-AC=>AC_omega. Same oriented smoothing gives the same graph, with one band differing by one full twist. A spanning tree excluding a nonbridge edge leaves exactly one fundamental basis cycle using that edge; all other cycles and push-offs miss the twisting ball. Mixed linking entries stay fixed and exactly its self-linking changes by one. A bridge edge is absent from every graph cycle; zero-dimensional H1 gives empty matrices. Full AC retained from Seifert-pairing convention. No mathematical defect found. Bibliography finding refuter:107:5 is false positive."
-      }
+        "reviewer": "step5-v2-initial-r1-u107",
+        "notes": "The stated diagram domain omitted the one-component hypothesis required by the Seifert algorithm, embedded-surface supplier and knot Seifert-pairing definition. The Statement now explicitly says knot diagrams, matching the existing Given and intended knot-only contract. The unchanged common-graph proof chooses fundamental cycles avoiding the changed band except for one cycle; a full twist alters only that cycle’s diagonal pairing by ±1. This is a domain/citation defect rather than an invalid rank-one calculation.",
+        "independent_review_of_own_repair": false
+      },
+      "risk_review_history": [
+        {
+          "status": "complete",
+          "reviewer": "alpha-batch-107",
+          "notes": "Read every step and actual Seifert-algorithm, termination, embedded-band surface and positive-push pairing definitions/statements, plus full-AC=>AC_omega. Same oriented smoothing gives the same graph, with one band differing by one full twist. A spanning tree excluding a nonbridge edge leaves exactly one fundamental basis cycle using that edge; all other cycles and push-offs miss the twisting ball. Mixed linking entries stay fixed and exactly its self-linking changes by one. A bridge edge is absent from every graph cycle; zero-dimensional H1 gives empty matrices. Full AC retained from Seifert-pairing convention. No mathematical defect found. Bibliography finding refuter:107:5 is false positive."
+        }
+      ]
     },
     "thm-every-knot-has-unknotting-sequence": {
       "risk": "medium",
@@ -1877,50 +1904,34 @@
     },
     "lem-bridge-sphere-normalization": {
       "risk": "high",
-      "kind": "incomplete-or-escalated",
+      "kind": "proof",
       "citations": [
         {
-          "fact": "F1",
+          "fact": "F2",
           "source": "lem-knot-exterior-is-irreducible",
           "source_section": "Statement",
           "quote": "Assume countable choice. Let $K\\subset S^3$ be a smooth knot with a chosen closed tubular neighborhood $N(K)$, and let $E_K=S^3\\setminus\\operatorname{int}N(K)$. Every smoothly embedded two-sphere in the interior of $E_K$ bounds a smoothly embedded closed three-ball contained in $E_K$.",
           "uses": [
-            "1.2",
-            "5.1"
-          ]
-        },
-        {
-          "fact": "F2",
-          "source": "thm-smooth-schoenflies-for-embedded-two-sphere-in-s-three",
-          "source_section": "Statement",
-          "quote": "Assume countable choice. Let $S\\subset S^3$ be the image of a smooth embedding of the standard $S^2$. There is a smooth ambient isotopy $H_t:S^3\\to S^3$, with $H_0=\\operatorname{id}$, such that $H_1(S)$ is the standard equatorial sphere $E$. In particular $S^3\\setminus S$ has exactly two components. Their closures $B_+$ and $B_-$ are smoothly embedded standard closed $3$-balls with common boundary $S$. If $D_+$ and $D_-$ denote the standard closed hemispheres bounded by $E$, the labels can be chosen so that the restrictions $H_1:B_\\pm\\to D_\\pm$ are diffeomorphisms with the same boundary restriction $H_1|_S:S\\to E$. Thus the ball identifications are compatible on their boundary and on a common two-sided collar of that boundary.",
-          "uses": [
-            "4.1",
-            "5.1"
+            "1.1",
+            "2.1"
           ]
         },
         {
           "fact": "F3",
-          "source": "lem-choice-free-smooth-parametrized-ball-windows-and-disk-absorption",
-          "source_section": "Statement",
-          "quote": "For $n=2,3$, a given smooth ball embedding $e:D^n\\to N$ into a connected boundaryless smooth $n$-manifold is isotopic through embeddings to a small coordinate round ball, and that embedding isotopy extends ambiently with compact support. For a parametrized smooth $n$-ball $B$ and a parametrized smooth boundary $(n-1)$-disk $W$, the pair $(B,W)$ is diffeomorphic to the standard ball with a hemispherical window. The diffeomorphism can retain the specified window parameter, using stereographic parameters on the standard hemisphere and allowing the necessary orientation of that parameter. No choice axiom is assumed.\n\nConsequently, attaching a parametrized smooth $n$-ball to a smooth $n$-manifold along such a window does not change its diffeomorphism type, provided an attaching collar and corner rounding are supplied. The resulting diffeomorphism is supported in the added ball and an arbitrarily small receiving collar. The inverse assertion holds for removing a ball that meets the boundary in exactly one such window with the supplied collar charts. In dimension two the windows are intervals.",
-          "uses": [
-            "1.1",
-            "1.2",
-            "3.1",
-            "3.2",
-            "8.1"
-          ]
-        },
-        {
-          "fact": "F4",
           "source": "thm-isotopy-extension",
           "source_section": "Statement",
           "quote": "Assume $\\mathrm{AC}_\\omega$.\n\n1. **Compact main case.** Let $M$ be a compact smooth manifold, possibly with boundary, let $N$ be a smooth manifold without boundary, let $F:M\\times I\\to N$ be a smooth isotopy of embeddings that is constant near the ends of $I$, and let $W$ be an open neighbourhood of $F(M\\times I)$ in $N$. Then there is an ambient isotopy $H:N\\times I\\to N$ with $H_0=\\mathrm{id}_N$, every $H_t$ a diffeomorphism, $H_t\\circ F_0=F_t$ for all $t\\in I$, $H_t=\\mathrm{id}_N$ outside $W$ for every $t$, and $H_t$ stationary near the ends; if $F$ is constant near the ends with parameter $\\varepsilon$, then $H_t=\\mathrm{id}_N$ for $t\\le\\varepsilon/2$ and $H_t=H_1$ for $t\\ge1-\\varepsilon/2$.\n2. **Relative form.** Let $N$ be boundaryless, $U\\subseteq N$ open, $A\\subseteq U$ compact, and let $F:U\\times I\\to N$ be a smooth isotopy of embeddings whose track image is open in $N\\times I$. Then there is a compactly supported ambient isotopy $H$ of $N$ with $H_t\\circ F_0=F_t$ on a neighbourhood of $A$ for every $t$.\n3. **Boundary stratum.** If $N$ has boundary and $F(M\\times I)\\subseteq\\partial N$, then the ambient isotopy of clause 1 can be chosen with every $H_t$ carrying $\\partial N$ onto itself; if $F(M\\times I)\\subseteq N\\setminus\\partial N$, it can be chosen compactly supported in $N\\setminus\\partial N$.\n4. **General isotopies.** For the same compact source (possibly with boundary) and boundaryless target as in clause 1, every smooth isotopy extends with support in a compact subset of any prescribed neighbourhood $W$ of $F(M\\times I)$. The endpoint-constancy hypothesis and the stationary-end conclusion are both omitted; all other conclusions of clause 1 hold.",
           "uses": [
-            "1.2",
-            "3.1",
-            "8.1"
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "lem-choice-free-smooth-parametrized-ball-windows-and-disk-absorption",
+          "source_section": "Statement",
+          "quote": "For $n=2,3$, a given smooth ball embedding $e:D^n\\to N$ into a connected boundaryless smooth $n$-manifold is isotopic through embeddings to a small coordinate round ball, and that embedding isotopy extends ambiently with compact support. For a parametrized smooth $n$-ball $B$ and a parametrized smooth boundary $(n-1)$-disk $W$, the pair $(B,W)$ is diffeomorphic to the standard ball with a hemispherical window. The diffeomorphism can retain the specified window parameter, using stereographic parameters on the standard hemisphere and allowing the necessary orientation of that parameter. No choice axiom is assumed.\n\nConsequently, attaching a parametrized smooth $n$-ball to a smooth $n$-manifold along such a window does not change its diffeomorphism type, provided an attaching collar and corner rounding are supplied. The resulting diffeomorphism is supported in the added ball and an arbitrarily small receiving collar. The inverse assertion holds for removing a ball that meets the boundary in exactly one such window with the supplied collar charts. In dimension two the windows are intervals.",
+          "uses": [
+            "2.1"
           ]
         },
         {
@@ -1929,8 +1940,7 @@
           "source_section": "Statement",
           "quote": "Assume the Axiom of Countable Choice. Let $K$ be a smooth oriented knot in $S^3$, and let $S\\subset S^3$ be a smoothly embedded sphere transverse to $K$ in exactly two points. Cutting along $S$ gives two properly embedded arcs; cap each arc by an orientation-compatible simple arc on $S$, pushed slightly into the corresponding boundary collar to obtain oriented knots $K_1$ and $K_2$. Then the oriented isotopy class of $K$ is the connected sum $K_1\\#K_2$.",
           "uses": [
-            "1.2",
-            "7.1"
+            "3.1"
           ]
         },
         {
@@ -1939,137 +1949,146 @@
           "source_section": "Statement",
           "quote": "Assume the Axiom of Countable Choice. For two smooth oriented knots, changing either representative by oriented ambient isotopy, changing the sufficiently small coordinate ball and trivial subarc used for either knot, or changing the positive local frame used to identify that ball with the standard oriented ball does not change the oriented ambient-isotopy class of the connected-sum knot, when the boundary gluing map is the fixed standard orientation-reversing map from the definition.",
           "uses": [
-            "1.2",
-            "7.1"
+            "3.1"
           ]
         }
       ],
       "derivations": [
         {
           "id": "step-1-1",
-          "claim": "Write $B_+,B_-$ for the fixed bridge balls, $D_i^\\pm$ for their spanning disks, and $T_\\pm=P\\cap B_\\pm$. Arrange finite transverse intersections, with $P\\cap S\\cap K=\\varnothing$, and take the knot tube sufficiently small and adapted to these intersections. A product neighborhood of each $D_i^\\pm$ identifies a neighborhood of its bridge with the usual boundary-parallel ball-arc. Cutting $B_\\pm\\setminus\\operatorname{int}N(K)$ along the disks $D_i^\\pm\\setminus\\operatorname{int}N(K)$ gives a ball: successively slide each bridge along its displayed disk into a boundary collar, and remove its displayed half-tube; each cut opens that collar tunnel. These moves use disjoint same-side disk neighborhoods. In particular this is a *complete* meridian-disk system, not merely a collection of compressing disks. Throughout the proof the knot and $S$ themselves stay fixed; a puncture of $P$ is allowed to travel along the fixed knot.",
+          "claim": "The annulus $A$ is incompressible: a compression would have boundary essential in $A$ and nullhomotopic in $E$, contrary to the assumed injection. The stated prohibition of disks is precisely boundary-incompressibility. A knot is a nonsplit link, and [F2] supplies irreducibility for the disk-exchange isotopies in the imported result. Hence the $m=2$ case of [F1] applies to this specified $P$ and the fixed bridge sphere $S$. Its conclusion and final puncture redistribution give the one-circle form with one puncture in each bridge ball, rather than merely the existence of an unrelated decomposing sphere.",
           "step": "1.1",
           "inputs": [
             "given",
-            "F3",
-            "construct"
-          ]
-        },
-        {
-          "id": "step-1-2",
-          "claim": "First remove compressions of $T_\\pm\\setminus\\operatorname{int}N(K)$ in its bridge exterior. A compressing circle is nullhomotopic in $E$, hence in $A$ by the assumed injection; in an annulus it bounds a disk $E_0\\subset A$. This disk must cross $S$, since otherwise the proposed compression was inessential on the relevant $T_\\pm\\setminus N(K)$. The compression disk and $E_0$ form a sphere in $E$ after rounding. Its ball from [F1] has no other part of $A$ inside: $A\\setminus E_0$ is connected and reaches $\\partial E$, whereas the ball is in the interior. Push $E_0$ across this ball to a parallel copy of the compression disk. This is an isotopy of $P$ supported off $K$, removes all the intersection circles lying inside $E_0$, and creates none. Thus each such operation strictly reduces $|P\\cap S|$. After finitely many operations both punctured $T_\\pm$ are incompressible. The same preparation can be repeated after a later pass. These are isotopies of the given sphere, so its oriented factors are preserved.",
-          "step": "1.2",
-          "inputs": [
-            "given",
             "F1",
-            "F3",
-            "F4",
-            "F5",
-            "construct"
+            "F2"
           ]
         },
         {
           "id": "step-2-1",
-          "claim": "Fix one side, temporarily written $B,T,\\mathcal D$. Remove circle components of $T\\cap\\mathcal D$ by disk exchange: a circle innermost on a spanning disk bounds a disk on the punctured $T$ by its incompressibility; take one innermost among the disk-bounding circles on $T$. Its interior contains no intersection arcs, since those have endpoints on $\\partial T$ or $K$, and contains no intersection circles by this choice. Replace the disk of the spanning disk bounded by that circle by a nearby copy of this disk on $T$. The replacement is embedded, misses every other spanning disk, keeps the bridge boundary arc fixed and reduces the total number of circles. Repeat finitely. Intersection arcs now have either one endpoint on $K$ and one on the disk's foot in $S$ (type I), or both endpoints on the foot (type II). An arc with both endpoints on $K$ would join the two punctures of $A$: choose the subdisk next to the segment of the bridge between those endpoints. It has no other intersection arcs, since that segment has no further punctures and its interior foot-free subdisk cannot contain an arc ending on $S$. After deleting circles, its part in $E$ would be a boundary compression along a spanning arc of $A$, contrary to hypothesis. This also shows $P\\cap S\\ne\\varnothing$: if it were empty, after circle removal the two punctures would have to be joined by just such an arc. Thus every component of either unpunctured planar $T_\\pm$ has nonempty boundary.",
+          "claim": "To realize that finite disk-move sequence smoothly, keep the initial smooth knot and bridge sphere fixed and round the finitely many arcs and disk seams at each stage. The moves in the source proof are disk exchange, pushing a surface band across a spanning subdisk, and replacing a spanning subdisk by a parallel surface disk. Each has a disk-product neighborhood: on a band push, move its interval coordinate using a bump function stationary near the retained boundary intervals; on disk replacement, take a small normal parallel copy and round the joining seam. A puncture slide uses the same product at a bridge endpoint and has velocity tangent to the fixed knot. Disk exchange across a sphere uses the knot-free ball from [F2], with its collars retained by [F4]. Choose these neighborhoods sufficiently small to avoid the other same-side disks and all nonincident pieces; there are only finitely many compact pieces at each stage. These operations are smooth versions of the prescribed moves, with the same incidences. Extend their embedding isotopies by [F3]. Thus the PL input yields smooth spheres meeting the fixed knot twice and smooth disjoint spanning-disk systems for the fixed bridge pair.",
           "step": "2.1",
           "inputs": [
-            "given",
-            "step 1.1",
-            "step 1.2",
-            "construct"
-          ]
-        },
-        {
-          "id": "step-2-2",
-          "claim": "Here are the three disk moves, including their supports. For an arc innermost next to a disk's foot, let $\\Delta$ be its cut-off subdisk containing no other intersection arcs. A neighborhood of $\\Delta$, with collars on its boundary intervals, is a standard disk times an interval. Pushing the surface band across $\\Delta$ and a little through $S$ is a smooth embedding isotopy: in these coordinates translate the band in the interval direction, with a bump zero at the ends of the retained intervals, and round the two moving corners. The support can avoid the other same-side spanning disks. For a type-I arc this slides its puncture along the bridge through the adjacent endpoint on $S$; the velocity along $K$ is tangent to $K$, so the isotopy extends preserving $K$ setwise. It removes this puncture from the treated side and does not change the homeomorphism type of the **unpunctured** $T$. Call this move I. For a type-II arc essential in unpunctured $T$, the same band push cuts $T$ along that arc; call this move II. Both remove their chosen intersection arc and create no new intersections with the treated disk system. Their punctured-surface operations are boundary cuts. All isotopies can be stationary at their time endpoints and extended using [F4].",
-          "step": "3.1",
-          "inputs": [
-            "given",
+            "F1",
+            "F2",
             "F3",
             "F4",
-            "step 2.1",
-            "construct"
-          ]
-        },
-        {
-          "id": "step-2-3",
-          "claim": "The remaining move changes a spanning disk, not $P$. Suppose a type-II arc $\\gamma$ cuts off a disk $E_0$ from $T\\setminus N(K)$ with no other intersection arcs in its interior. On its spanning disk, retain the component of the cut along $\\gamma$ containing the bridge, and replace the other component by a nearby copy of $E_0$. The union along $\\gamma$ is a disk: two disks glued along one boundary interval. Its new foot is the old retained foot together with $\\partial E_0\\setminus\\gamma$, pushed a little on $S$. Push its interior off $T$ on the retained disk's side and round the seam. Since $E_0$ has no punctures or other intersection arcs, the replacement misses $K$ except on its original bridge, is disjoint from all other same-side spanning disks, and deletes $\\gamma$ and any intersections on the discarded part without adding any. This move III is valid even when $\\gamma$ is not innermost on its spanning disk. In particular it is a disk replacement, not an unproved assertion that two disks in a knotted region are isotopic.",
-          "step": "3.2",
-          "inputs": [
-            "given",
-            "F3",
-            "step 2.1",
+            "step 1.1",
             "construct"
           ]
         },
         {
           "id": "step-3-1",
-          "claim": "If the treated disk system is still met, one of these moves is available. Here is the finite innermost argument for the only obstructed case. If neither I nor II is available, every arc innermost next to a foot is type II and cuts off a disk $E_0$ of the unpunctured surface $T$. Choose one such arc $\\gamma$ and its foot-adjacent disk $\\Delta$. If $E_0$ has no punctures, take an innermost subdisk of $E_0$ cut off by intersection arcs; it is empty and gives III. Otherwise a puncture of $E_0$ starts a type-I arc. The disk $Q=E_0\\cup\\Delta$, rounded at $\\gamma$, is a proper disk in the bridge ball. It separates it into two balls: cap by either boundary disk on $\\partial B$ and apply [F2], retaining the actual collars. Call the side away from the bridge on the spanning disk of $\\gamma$ the inside. Follow the type-I arc's spanning disk from its puncture towards its foot. If this arc were foot-innermost, I would be available. The arcs between it and the foot therefore contain an innermost type-II arc on the inside. Its disk cut off on $T$ is also on the inside: $T$ misses the interior of $\\Delta$, and its only portion on $Q$ is $E_0$, so an arc or cut-off disk cannot leave the inside without crossing $E_0$ or $\\Delta$; if it lies on $E_0$, use its subdisk there and push its collar inward. Its own foot-adjacent disk together with that cut-off disk now cuts off an inside ball contained in the previous one. The bridge-containing side is again discarded. This is a strict descent in the finite set of intersection arcs contained on or inside these disks: the previous delimiting arc is outside the next inside ball. Repeat if its cut-off disk has a puncture. A strict descent cannot continue indefinitely. It ends with a puncture-free disk, and an innermost subdisk in it is the empty disk required for III. This proves availability without assuming an arbitrary boundary compression has the required foot.",
-          "step": "4.1",
-          "inputs": [
-            "F2",
-            "step 2.1",
-            "step 3.1",
-            "step 3.2",
-            "construct"
-          ]
-        },
-        {
-          "id": "step-3-2",
-          "claim": "Perform available moves on this one side. Each deletes at least one arc of the treated system, and creates none there, so this inner process is finite. If necessary remove circles as in step 2.1. The punctured surface remains incompressible after a move I or II. To verify the usual boundary-cut assertion here, reverse its band in the empty disk-product neighborhood of step 3.1. Put a proposed compression disk transverse to the band cocore and remove its outermost intersections in that product; a surviving essential compression would give a compression of the old surface. If its boundary bounds a disk on the old surface, that disk is disjoint from the cut arc: a proper arc cannot enter the interior of a disk bounded by a disjoint interior circle without crossing that circle. It is therefore also a disk on the cut surface. Any sphere produced in removing the outermost intersections bounds a ball, since a bridge exterior cut from a ball along trivial-arc tubes is a handlebody; its sphere bounds a ball on the side not meeting the boundary by the same [F2] argument as in [F1]. Thus it cannot supply an exceptional compression. Move III does not change the surface. At termination $T$ misses both $K$ and the complete disk system. It lies in the cut-open ball of step 1.1 and is a union of disks: for a nondisk planar component an innermost boundary curve on that ball's sphere gives, by a small boundary-collar push, a compression, contrary to incompressibility.",
-          "step": "5.1",
+          "claim": "In the final configuration of [F1], every spanning-disk intersection arc has exactly one puncture endpoint and one endpoint on $P\\cap S$. Each puncture lies on exactly one spanning disk in its bridge ball, so there are exactly two such arcs. There are no circle components or other arcs by the imported normal form. Small foot perturbations make their circle endpoints distinct, preserving every incidence. All changes of $P$ were isotopies preserving the knot setwise, so [F5] preserves the specified oriented factors. This proves the stated normal form, including opposite-side punctures.",
+          "step": "3.1",
           "inputs": [
             "F1",
-            "F2",
+            "F5",
             "step 1.1",
             "step 2.1",
-            "step 3.1",
-            "step 3.2",
-            "step 4.1",
-            "construct"
-          ]
-        },
-        {
-          "id": "step-4-1",
-          "claim": "We give the strict count rather than infer it from the number of punctured boundary curves. For an unpunctured planar surface with $b$ boundary curves and $c$ components, set $z$ equal to its number of nondisk components. Moves I and III do not change this surface's topology. Every move II cuts an essential proper arc. A nonseparating such cut reduces the total $\\sum(b_j-1)=b-c$ by one; a separating cut leaves this total unchanged and creates no disk, since the arc was essential. At the end this total is zero, so there were exactly $b-c$ nonseparating cuts. Each creates at most one new disk; initially there were $c-z$ disks. Hence the number $d$ of final disks satisfies $d\\le(c-z)+(b-c)=b-z$. Their boundaries are precisely the *new* circles $P\\cap S$. If the treated side had a nondisk component, $z\\ge1$, and a complete pass strictly decreases the number of circles from $b$ to $d$. This is the planar hierarchy count used here. Punctures do not occur in $b$.",
-          "step": "6.1",
-          "inputs": [
-            "step 3.1",
-            "step 3.2",
-            "step 5.1",
-            "algebra"
-          ]
-        },
-        {
-          "id": "step-4-2",
-          "claim": "Repeat the compression cleanup of step 1.2 and then a complete pass on either side that has a nondisk component. Cleanup and every such pass strictly decrease the positive integer $|P\\cap S|$, so the outer process is finite. At its end every component of both $T_+$ and $T_-$ is a disk. The dual graph of the circles cutting the sphere $P$ is connected; every vertex is now a disk and has degree one, so that graph has just one edge. Consequently $P\\cap S$ is exactly one circle. Each operation on $P$ was an embedding isotopy through spheres meeting $K$ in exactly two points, preserving $K$ setwise; each other operation changed only a spanning disk. The specified oriented factors are therefore still the same by [F5].",
-          "step": "7.1",
-          "inputs": [
-            "F5",
-            "step 1.2",
-            "step 2.1",
-            "step 6.1",
-            "algebra"
-          ]
-        },
-        {
-          "id": "step-5-1",
-          "claim": "Each $T_\\pm$ is now a single disk. Apply I and III on the upper side until it has no punctures or disk intersections; II is unavailable on a disk. The two punctures then lie in the lower disk. Apply I and III below only until one of its punctures has passed to the upper disk. There is now one puncture in each disk, and the intersection circle has not changed. In a disk a nonempty finite family of type-II chords cuts off at least two outermost disks; at least one of those contains no puncture. Choose an innermost empty subdisk if further intersection arcs lie in it and apply III. Repeating removes all type-II arcs, without changing $P$ or either puncture. Circles have already been removed. Each remaining puncture is on exactly one spanning disk on its own side, and a type-I arc has just one puncture endpoint. There are therefore exactly two type-I arcs in total. Their other endpoints are on $P\\cap S$, away from $K$, and can be taken distinct by a small foot perturbation on $S$. Thus their union consists of two disjoint embedded arcs, as asserted. All choices and all moves after the stated smooth suppliers were finite.",
-          "step": "8.1",
-          "inputs": [
-            "F3",
-            "F4",
-            "step 2.1",
-            "step 3.1",
-            "step 3.2",
-            "step 4.1",
-            "step 7.1",
             "construct"
           ]
         }
       ],
       "routine_steps": [],
       "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "Statement and proof step 1.1 supply one intersection circle, rather than an empty intersection."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "The input Statement has exactly two punctures; step 1.1 excludes the zero-circle case by the imported normal form."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Step 1.1 retains the imported final puncture redistribution; there is one circle and one puncture in each bridge ball."
+        },
+        {
+          "case": "degenerate",
+          "status": "not_applicable",
+          "reason": "Both connected-sum factors must be nontrivial and the decomposing annulus must satisfy both stated essentiality hypotheses; compressible/inessential-annulus inputs are not covered."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Step 3.1 counts two puncture-to-circle arcs, one at each puncture; small foot perturbations make the other endpoints distinct."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Countable choice is retained for exterior irreducibility and smooth isotopy extension in steps 1.1 and 2.1; the imported move sequence is finite."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "This is a normalization existence statement for an already supplied essential decomposing sphere, not an iff recognition of connected sums."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The conclusion of one circle/two arcs is not asserted to imply the two original annulus-essentiality hypotheses or factor nontriviality."
+        }
+      ],
+      "finite_checks": [],
+      "axiom_uses": [
+        {
+          "axiom": "ACω",
+          "use": "Exterior irreducibility in F2 and smooth compact-source isotopy extension in F3; all remaining moves and selections in the imported finite sequence are finite."
+        }
+      ],
+      "proof_status": "complete-relative-to-external-input",
+      "unresolved_supplier_checks": [],
+      "unresolved_obligations": [],
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "step5-v2-initial-r1-u107",
+        "notes": "The original step 4.1 did not establish a bridge-free separating disk, so its nesting and termination argument was unsupported. The repair explicitly imports Negami–Okita Lemma 3-3, m=2, under CLAUDE §12, checks essential-annulus and nonsplit hypotheses, and explains smooth disk-product realizations. Opposite-side punctures are now stated. This is source-backed repair, not independent verification of the imported innermost-arc proof.",
+        "independent_review_of_own_repair": false
+      },
+      "proof_status_evidence": "step5-v2-initial-r1-u107: current F1 explicitly imports Negami–Okita Lemma 3-3 (m=2) under CLAUDE §12. The previous local innermost-arc reconstruction is withdrawn; no independent proof of the imported theorem or new certification is claimed.",
+      "owner_metadata_note": {
+        "accepted_scope": "whole source at its literal hypotheses",
+        "accepted_scope_evidence": [
+          "research/inverse-problems-knot-theory-all-109-2026-10-19-math-resolution-map.json"
+        ],
+        "source_boundary": {
+          "sources": {
+            "references": [
+              {
+                "title": "Seiya Negami and Kazuo Okita, The Splittability and Triviality of 3-Bridge Links",
+                "url": "https://www.researchgate.net/publication/243080042_The_splittability_and_triviality_of_3-bridge_links",
+                "locator": "§3, Lemma 3-3 and its proof, printed pp. 259–262; the m=2 case"
+              },
+              {
+                "title": "William Jaco, Lectures on Three-Manifold Topology",
+                "url": "https://www.maths.gla.ac.uk/~mpowell/Lectures-3-mfld-topology_Jaco.pdf",
+                "locator": "Chapter II, Lemma II.8, printed p. 22, planar-surface hierarchy disk count"
+              }
+            ]
+          },
+          "provenance": {
+            "statement": "literature-derived",
+            "proof": "ai-altered"
+          },
+          "axiom_use": null,
+          "import_fields": {},
+          "declared_source_remarks": null
+        },
+        "historical_preimage": "research/inverse-problems-knot-theory-all-109-2026-10-19-supervision-20261020/step1-bounded-closeout/contract-final-before/research/inverse-problems-knot-theory-all-109-2026-10-19-batch-107.proof-contracts.json",
+        "new_math_acceptance": false
+      },
+      "risk_review_history": [
+        {
+          "status": "complete",
+          "reviewer": "alpha-batch-107",
+          "notes": "Read all ten steps, all nine current prerequisite statements, and complete Negami–Okita Lemma 3-3 proof pp.259–262 including m=2 terminal case. Checked fixed knot/bridge sphere, moving punctures, complete meridian disk systems, incompressibility from pi1 injection, disk exchanges and type-I/II/III supports; the finite inside-disk descent supplies an available move. Boundary cuts preserve incompressibility via the reversed empty band. For unpunctured planar surfaces, b-c drops only on nonseparating essential cuts; at most one disk per such cut and no disk from separating essential cuts gives d<=b-z. Thus a nondisk pass strictly decreases the circle count, and a connected dual graph with disk vertices has one edge. Final moves place one puncture in each disk and remove all type-II arcs. AC_omega is retained exactly for smooth extension, Schoenflies and exterior irreducibility. No defect found; no Jaco full-text reading claimed (PDF scanned/unavailable through browser). Its planar count is proved here. Refuter:107:10 is a later-bibliography false positive."
+        }
+      ],
+      "historical_boundaries": [
         {
           "case": "empty",
           "status": "checked",
@@ -2247,64 +2266,16 @@
           }
         }
       ],
-      "finite_checks": [],
-      "axiom_uses": [
+      "external_inputs": [
         {
-          "axiom": "as stated",
-          "use": "hypothesis retained; proof incomplete"
+          "fact": "F1",
+          "title": "Negami–Okita, Lemma 3-3",
+          "url": "https://www.researchgate.net/publication/243080042_The_splittability_and_triviality_of_3-bridge_links",
+          "locator": "Printed pp.259–262, statement and complete proof; m=2 final paragraph",
+          "hypotheses": "Nonsplit link, fixed bridge sphere and spanning disks, incompressible and boundary-incompressible twice-punctured sphere",
+          "reading_limits": "Complete cited lemma read; finite PL normalization is imported. The innermost-arc availability proof is not independently reconstructed; Jaco is not separately invoked."
         }
-      ],
-      "proof_status": "not-supplied",
-      "unresolved_supplier_checks": [
-        {
-          "supplier": "Negami–Okita bridge-disk normalization route",
-          "items": [
-            "lem-bridge-sphere-normalization",
-            "thm-schubert-bridge-connected-sum"
-          ],
-          "required": "Complete the isotopy/outermost-arc reductions, bridge-count preservation, and essential-annulus hypotheses."
-        }
-      ],
-      "unresolved_obligations": [
-        "Complete the isotopy/outermost-arc reductions, bridge-count preservation, and essential-annulus hypotheses."
-      ],
-      "risk_review": {
-        "status": "complete",
-        "reviewer": "alpha-batch-107",
-        "notes": "Read all ten steps, all nine current prerequisite statements, and complete Negami–Okita Lemma 3-3 proof pp.259–262 including m=2 terminal case. Checked fixed knot/bridge sphere, moving punctures, complete meridian disk systems, incompressibility from pi1 injection, disk exchanges and type-I/II/III supports; the finite inside-disk descent supplies an available move. Boundary cuts preserve incompressibility via the reversed empty band. For unpunctured planar surfaces, b-c drops only on nonseparating essential cuts; at most one disk per such cut and no disk from separating essential cuts gives d<=b-z. Thus a nondisk pass strictly decreases the circle count, and a connected dual graph with disk vertices has one edge. Final moves place one puncture in each disk and remove all type-II arcs. AC_omega is retained exactly for smooth extension, Schoenflies and exterior irreducibility. No defect found; no Jaco full-text reading claimed (PDF scanned/unavailable through browser). Its planar count is proved here. Refuter:107:10 is a later-bibliography false positive."
-      },
-      "proof_status_evidence": "Historical metadata hold superseded at the exact accepted whole-original scope cited in owner_metadata_note; established imported dependencies remain explicit; no new proof review or native readiness credit.",
-      "owner_metadata_note": {
-        "accepted_scope": "whole source at its literal hypotheses",
-        "accepted_scope_evidence": [
-          "research/inverse-problems-knot-theory-all-109-2026-10-19-math-resolution-map.json"
-        ],
-        "source_boundary": {
-          "sources": {
-            "references": [
-              {
-                "title": "Seiya Negami and Kazuo Okita, The Splittability and Triviality of 3-Bridge Links",
-                "url": "https://www.researchgate.net/publication/243080042_The_splittability_and_triviality_of_3-bridge_links",
-                "locator": "§3, Lemma 3-3 and its proof, printed pp. 259–262; the m=2 case"
-              },
-              {
-                "title": "William Jaco, Lectures on Three-Manifold Topology",
-                "url": "https://www.maths.gla.ac.uk/~mpowell/Lectures-3-mfld-topology_Jaco.pdf",
-                "locator": "Chapter II, Lemma II.8, printed p. 22, planar-surface hierarchy disk count"
-              }
-            ]
-          },
-          "provenance": {
-            "statement": "literature-derived",
-            "proof": "ai-altered"
-          },
-          "axiom_use": null,
-          "import_fields": {},
-          "declared_source_remarks": null
-        },
-        "historical_preimage": "research/inverse-problems-knot-theory-all-109-2026-10-19-supervision-20261020/step1-bounded-closeout/contract-final-before/research/inverse-problems-knot-theory-all-109-2026-10-19-batch-107.proof-contracts.json",
-        "new_math_acceptance": false
-      }
+      ]
     },
     "thm-bridge-one-is-unknot": {
       "risk": "medium",
@@ -2499,6 +2470,15 @@
           ]
         },
         {
+          "fact": "F1",
+          "source": "thm-descending-diagram-unknotting-sequence-procedure-properties",
+          "source_section": "Statement",
+          "quote": "For every admissible finite planar code of a regular oriented knot diagram and every basepoint in the interior of an edge, move the basepoint slightly forward along that same edge to a point away from bends if necessary, and then call the descending-diagram procedure. It terminates, visits each crossing record once, and returns a finite updated code and a crossing-change list with at most one entry per crossing. The updated code is admissible and its first-encounter branch at each crossing is the overpassing branch. The output code and crossing-change list are independent of this basepoint adjustment within the edge. No claim about efficient minimization of $u(K)$ is made.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
           "fact": "F2",
           "source": "thm-descending-diagram-is-unknot",
           "source_section": "Statement",
@@ -2520,7 +2500,7 @@
       "derivations": [
         {
           "id": "step-1-1",
-          "claim": "Apply [F1] to $D$. Since $D$ has $c(D)$ crossing records, the algorithm terminates after that finite scan and returns at most $c(D)$ crossing changes.",
+          "claim": "Make the basepoint adjustment in [F1] if necessary, then apply the procedure to $D$. Since $D$ has $c(D)$ crossing records, the algorithm terminates after that finite scan and returns at most $c(D)$ crossing changes.",
           "step": "1.1",
           "inputs": [
             "A1",
@@ -2681,13 +2661,21 @@
       "unresolved_obligations": [],
       "risk_review": {
         "status": "complete",
-        "reviewer": "batch-107 author local audit",
-        "notes": "Step-to-fact mapping and local algebra/geometric cases were checked by the author; independent review and native gates remain separate."
-      }
+        "reviewer": "step5-v2-initial-r1-u107",
+        "notes": "The rationality objection is false: admissibility already includes a rational polygonal certificate and changing over/under labels preserves it. A separate domain defect was confirmed during this review: a geometric bend can lie inside a polygonal edge while the algorithm excludes bend basepoints. The repair uses the corrected traversal-properties theorem to move such a basepoint within its edge before the call, retaining every original input and the same crossing list. The descending output and finite c(D) bound then follow with all hypotheses met.",
+        "independent_review_of_own_repair": false
+      },
+      "risk_review_history": [
+        {
+          "status": "complete",
+          "reviewer": "batch-107 author local audit",
+          "notes": "Step-to-fact mapping and local algebra/geometric cases were checked by the author; independent review and native gates remain separate."
+        }
+      ]
     },
     "thm-schubert-bridge-connected-sum": {
       "risk": "high",
-      "kind": "incomplete-or-escalated",
+      "kind": "proof",
       "citations": [
         {
           "fact": "A1",
@@ -2729,7 +2717,7 @@
           "fact": "F2",
           "source": "def-knot-connected-sum-and-prime-knot",
           "source_section": "Definition",
-          "quote": "Fix a coordinate orientation-reversing reflection $r:S^3\\to S^3$ for the mirror convention. Let $K$ and $J$ be smooth oriented knots in the standard oriented three-sphere. A connected-sum datum consists of one smoothly embedded closed three-ball around a short subarc of $K$ and one around a short subarc of $J$, each meeting its knot in a single trivial properly embedded arc, together with the fixed standard orientation-reversing boundary identification of the two standard oriented ball boundaries that joins the oriented arcs into one circle. Choose this standard map once in the standard two-ball model so that it commutes with $r$ and an orientation-preserving half-turn interchanging the two balls preserves the joining convention. Here a trivial arc is an embedded interval in a ball that is carried by an orientation-preserving diffeomorphism of ball-arc pairs to a straight diameter. Remove the interiors of the two balls and glue the remaining boundary spheres using this fixed identification; the resulting oriented knot in the standard oriented three-sphere is a connected sum of $K$ and $J$, denoted $K\\#J$ for the specified datum.\n\nThe **standard unknot** is the oriented unit circle in a fixed coordinate two-plane of $S^3\\subset\\mathbb R^4$. A knot is **nontrivial** if it is not ambient isotopic through orientation-preserving diffeomorphisms of $S^3$ to the standard unknot. A nontrivial knot is **prime** if it has no connected-sum presentation whose two summand knots are both nontrivial.",
+          "quote": "Fix a coordinate orientation-reversing reflection $r:S^3\\to S^3$ for the mirror convention. Let $K$ and $J$ be smooth oriented knots in the standard oriented three-sphere. A connected-sum datum consists of one smoothly embedded closed three-ball around a short subarc of $K$ and one around a short subarc of $J$, each meeting its knot in a single trivial properly embedded arc, together with the fixed standard orientation-reversing boundary identification of the two standard oriented ball boundaries that joins the oriented arcs into one circle. Choose this standard map once in the standard two-ball model so that it commutes with $r$ and an orientation-preserving half-turn interchanging the two balls preserves the joining convention. Here a trivial arc is an embedded interval in a ball that is carried by an orientation-preserving diffeomorphism of ball-arc pairs to a straight diameter. Remove the interiors of the two balls and glue the remaining boundary spheres using this fixed identification; the resulting oriented knot in the standard oriented three-sphere is a connected sum of $K$ and $J$, denoted $K\\#J$ for the specified datum.\n\nThe **standard unknot** is the counterclockwise circle $U=\\{(x_1,x_2,0)\\in\\mathbb R^3:x_1^2+x_2^2=1\\}\\subset S^3=\\mathbb R^3\\cup\\{\\infty\\}$. Under inverse stereographic projection $x\\mapsto(2x/(1+\\lVert x\\rVert^2),(\\lVert x\\rVert^2-1)/(1+\\lVert x\\rVert^2))$, this is the unit circle in the first coordinate two-plane of the unit sphere in $\\mathbb R^4$. A knot is **nontrivial** if it is not ambient isotopic through orientation-preserving diffeomorphisms of $S^3$ to the standard unknot. A nontrivial knot is **prime** if it has no connected-sum presentation whose two summand knots are both nontrivial.",
           "uses": [
             "2.2",
             "3.1"
@@ -2739,7 +2727,7 @@
           "fact": "F3",
           "source": "lem-bridge-sphere-normalization",
           "source_section": "Statement",
-          "quote": "Assume the Axiom of Countable Choice. Let $K=K_1\\#K_2$ be a smooth oriented connected sum with both factors nontrivial. Let $S$ be a regular level sphere giving a bridge position: $S$ divides $S^3$ into two balls, and in each ball the knot is a finite collection of properly embedded arcs, each of which cobounds an embedded disk with an arc on $S$; the disks in each ball are pairwise disjoint. Let $P$ be a smooth decomposing sphere meeting $K$ transversely in two points and cutting it into the given two oriented factors. Put $E=S^3\\setminus\\operatorname{int}N(K)$ and let $A=P\\setminus\\operatorname{int}N(K)$ be the resulting annulus, where $N(K)$ is a small closed tubular neighborhood. Assume the inclusion-induced map $\\pi_1(A)\\to\\pi_1(E)$ is injective and that there is no embedded disk in $E$, with interior disjoint from $A\\cup\\partial E$, whose boundary is the union of a properly embedded arc in $A$ that does not cobound a disk in $A$ with a subarc of $\\partial A$ and an arc in $\\partial E$. Then, after isotoping $P$ through spheres meeting $K$ twice and changing only the bridge-spanning disk systems for the fixed pair $(K,S)$, one can arrange that $P\\cap S$ is exactly one simple closed curve and that the union of the upper and lower bridge-spanning disks meets $P$ in exactly two arcs, each joining one point of $P\\cap K$ to a point of $P\\cap S$.",
+          "quote": "Assume the Axiom of Countable Choice. Let $K=K_1\\#K_2$ be a smooth oriented connected sum with both factors nontrivial. Let $S$ be a regular level sphere giving a bridge position: $S$ divides $S^3$ into two balls, and in each ball the knot is a finite collection of properly embedded arcs, each of which cobounds an embedded disk with an arc on $S$; the disks in each ball are pairwise disjoint. Let $P$ be a smooth decomposing sphere meeting $K$ transversely in two points and cutting it into the given two oriented factors. Put $E=S^3\\setminus\\operatorname{int}N(K)$ and let $A=P\\setminus\\operatorname{int}N(K)$ be the resulting annulus, where $N(K)$ is a small closed tubular neighborhood. Assume the inclusion-induced map $\\pi_1(A)\\to\\pi_1(E)$ is injective and that there is no embedded disk in $E$, with interior disjoint from $A\\cup\\partial E$, whose boundary is the union of a properly embedded arc in $A$ that does not cobound a disk in $A$ with a subarc of $\\partial A$ and an arc in $\\partial E$. Then, after isotoping $P$ through spheres meeting $K$ twice and changing only the bridge-spanning disk systems for the fixed pair $(K,S)$, one can arrange that $P\\cap S$ is exactly one simple closed curve and that the union of the upper and lower bridge-spanning disks meets $P$ in exactly two arcs, each joining one point of $P\\cap K$ to a point of $P\\cap S$. The two points of $P\\cap K$ lie in opposite bridge balls.",
           "uses": [
             "3.2",
             "4.1",
@@ -2857,7 +2845,7 @@
           ]
         },
         {
-          "id": "step-1-2",
+          "id": "step-2-1",
           "claim": "Choose bridge representatives realizing $b(K)$ and $b(J)$, which is possible by [F1] and step 1.1. Each comes with its bridge sphere and disjoint upper and lower bridge-spanning disks.",
           "step": "2.1",
           "inputs": [
@@ -2868,7 +2856,7 @@
           ]
         },
         {
-          "id": "step-3-1",
+          "id": "step-2-2",
           "claim": "If either factor is the unknot, [F8] gives equality immediately. Suppose therefore both are nontrivial. Choose a bridge sphere $S$ of $L=K\\#J$ with $b=b(L)$ upper arcs, by step 1.1. Transport the connected-sum construction's two-puncture sphere through the representative isotopy; this gives a smooth sphere $P$ cutting $L$ into the specified factors. Choose a sufficiently small product tube adapted to its two transverse punctures and form $A=P\\setminus\\operatorname{int}N(L)$. The annulus core is a positive or negative meridian in the tube: both its boundary components bound the normal disks $P\\cap N(L)$ and its core is homotopic within $A$ to either boundary. By [F4], composing $\\pi_1(A)=\\mathbb Z\\to\\pi_1(E_L)$ with abelianization sends its generator to $\\pm1\\in\\mathbb Z$. The inclusion is therefore injective.",
           "step": "2.2",
           "inputs": [
@@ -2881,7 +2869,7 @@
           ]
         },
         {
-          "id": "step-2-1",
+          "id": "step-3-1",
           "claim": "Choose one point of each knot on its bridge sphere where an upper bridge arc and a lower bridge arc meet. Take product-coordinate balls around the two points so each ball meets the sphere in a disk, the knot in one short arc crossing that disk once, and each of the two incident bridge-spanning disks in a half-disk. Remove the ball interiors and glue the punctured spheres by the connected-sum map from [F2]. The two selected upper bridge arcs join into one proper upper arc, and the two selected lower bridge arcs join into one proper lower arc. The new upper spanning disk is the union of the two punctured upper disks and the gluing rectangle; two disks joined along one boundary interval form a disk. The same construction gives the lower spanning disk. Every unselected bridge arc and disk remains unchanged and disjoint from these disks. Thus the connected-sum position has $b(K)+b(J)-1$ upper arcs, so $b(K\\#J)\\le b(K)+b(J)-1$.",
           "step": "3.1",
           "inputs": [
@@ -2907,7 +2895,7 @@
         },
         {
           "id": "step-4-1",
-          "claim": "In the resulting normal form $P\\cap S=C$ is one circle disjoint from $L$. The two disks $P_\\pm=P\\cap B_\\pm$ each contain one puncture. Indeed the two disk-intersection arcs of [F3] have their puncture endpoints one on each side, as in that lemma's final normalization. Each $P_\\pm$ is a proper disk cutting its bridge ball into two balls: cap it by either of the two disks on $\\partial B_\\pm$ bounded by its rim, round, and apply [F6]; the side not containing the exterior of $B_\\pm$ is the required ball. Their collars give compatible markings. Let $S_1,S_2$ be the disks on $S$ bounded by $C$, labelled by the two sides of $P$, and put $r_i=|L\\cap S_i|$. Then $r_1+r_2=2b$. In each original bridge ball exactly one bridge arc crosses $P_\\pm$: it is the arc carrying its unique puncture. Its two endpoints on $S$ lie on opposite sides of $C$, because the bridge crosses that separating disk once. Every other bridge arc is wholly on one side. Consequently $r_i$ is odd.",
+          "claim": "In the resulting normal form $P\\cap S=C$ is one circle disjoint from $L$. The two disks $P_\\pm=P\\cap B_\\pm$ each contain one puncture. This is the opposite-side puncture conclusion in the Statement of [F3], rather than an inference from the existence of two arcs alone. Each $P_\\pm$ is a proper disk cutting its bridge ball into two balls: cap it by either of the two disks on $\\partial B_\\pm$ bounded by its rim, round, and apply [F6]; the side not containing the exterior of $B_\\pm$ is the required ball. Their collars give compatible markings. Let $S_1,S_2$ be the disks on $S$ bounded by $C$, labelled by the two sides of $P$, and put $r_i=|L\\cap S_i|$. Then $r_1+r_2=2b$. In each original bridge ball exactly one bridge arc crosses $P_\\pm$: it is the arc carrying its unique puncture. Its two endpoints on $S$ lie on opposite sides of $C$, because the bridge crosses that separating disk once. Every other bridge arc is wholly on one side. Consequently $r_i$ is odd.",
           "step": "4.1",
           "inputs": [
             "F3",
@@ -2918,7 +2906,7 @@
           ]
         },
         {
-          "id": "step-4-2",
+          "id": "step-5-1",
           "claim": "Cap each of the two cut ball-arcs of $L$ by a boundary arc on $P$ running from the upper puncture to the lower puncture and crossing $C$ once, chosen as the two type-I traces joined by an arc of $C$ between their distinct foot endpoints, then rounded slightly in the collar of $C$ so that it crosses $C$ transversely just once. Push the two caps into their respective boundary collars. On each side this cap is a trivial ball-arc meeting the capped bridge sphere $S_i\\cup$(cap disk) once. Its upper and lower portions extend the severed bridge arcs. Every uncut bridge disk remains in its original region. Each of the two cut bridge disks is cut along its one trace into two disks; on each side join its disk piece to the narrow cap strip. This is a disk attached along one boundary interval, so gives a spanning disk for the extended upper or lower arc. Choose the cap strips in disjoint small quadrant collars of the traces; other disks miss them, and on a given side all disk pieces were originally disjoint. Thus these are simultaneous disjoint spanning-disk systems. The upper and lower ambient pieces are balls: attach the cap half-balls along the displayed windows on $P_\\pm$ and use [F6]. We have therefore constructed actual bridge spheres for the two specified oriented factors, not merely diagrams with a proposed number of bridges. Each has $r_i+1$ knot endpoints on its sphere, the extra endpoint being the single crossing of the cap. It follows that their upper arc counts are $n_i=(r_i+1)/2$, and $n_1+n_2=b+1$. Cap orientation is chosen to close the original oriented arc, so [F8] identifies the factors with $K,J$, up to their harmless interchange.",
           "step": "5.1",
           "inputs": [
@@ -2931,7 +2919,7 @@
           ]
         },
         {
-          "id": "step-5-1",
+          "id": "step-6-1",
           "claim": "Step 1.1 applied to the two factor bridge spheres gives $b(K)\\le n_1$ and $b(J)\\le n_2$. Hence $b(K)+b(J)-1\\le n_1+n_2-1=b=b(K\\#J)$. Together with step 3.1 and the unknot case in step 2.2, this proves the formula for every pair of smooth oriented knots in the Statement. The constructions use finitely many extrema, disks, cuts and collars; their smooth extension and Schoenflies uses are precisely the stated countable-choice suppliers.",
           "step": "6.1",
           "inputs": [
@@ -3026,28 +3014,19 @@
       "axiom_uses": [
         {
           "axiom": "ACω",
-          "use": "hypothesis retained; proof incomplete"
+          "use": "The stated smooth Schoenflies, irreducibility, isotopy-extension and normalization suppliers; bridge counts and disk gluings are finite."
         }
       ],
-      "proof_status": "partial-local-upper-bound",
-      "unresolved_supplier_checks": [
-        {
-          "supplier": "lem-bridge-sphere-normalization",
-          "items": [
-            "thm-schubert-bridge-connected-sum"
-          ],
-          "required": "Prove the normalized bridge-disk lower bound for arbitrary minimal bridge positions."
-        }
-      ],
-      "unresolved_obligations": [
-        "Prove the normalized bridge-disk lower bound for arbitrary minimal bridge positions."
-      ],
+      "proof_status": "complete-local-proof-relative-to-normalization",
+      "unresolved_supplier_checks": [],
+      "unresolved_obligations": [],
       "risk_review": {
         "status": "complete",
-        "reviewer": "alpha-batch-107",
-        "notes": "Independently read all eight steps and all fourteen actual prerequisite statements, normalization proof and Negami–Okita Lemma 3-3 through Proposition 3-5 (pp.259–263). Also read Schultens Definition 1 and Theorem 1 proof for comparison, without substituting it for the local argument. The native parity objection double-counts L intersect S: the upper arcs ALONE partition this endpoint set. If m_i is the number of uncut upper arcs on side i, then r_i=2m_i+1. Lower arc endpoints give a second partition of the SAME set, not additional points. Thus n_i=(r_i+1)/2 is integral and n1+n2=b+1. Checked meridional H1 injection, boundary-parallel annulus giving an unknot factor, disjoint disk pieces/cap strips and window half-balls in factor construction; upper gluing removes one bridge, lower construction proves the opposite inequality. Unknot factors handled by identity and b(U)=1; orientations and AC_omega remain. Schematic is correctly local upper-bound gluing, independent of lower-bound proof. Reader:107:1 and refuter:107:1 are false positives, with no mathematical edit warranted; refuter:107:11 is a permitted bibliography."
+        "reviewer": "step5-v2-initial-r1-u107",
+        "notes": "The former supplier Statement guaranteed two puncture-to-circle arcs but omitted the opposite-side condition invoked in step 4.1; that condition is now explicit in the repaired supplier. F3 and step 4.1 cite it directly. Exactly one bridge crosses the separating disk in each ball, making both r_i odd; the capped factor bridge counts then sum to b+1. The upper gluing gives the reverse inequality and the unknot identity covers trivial factors. The diagram now shows four distinct remaining bridge endpoints and the joined disks.",
+        "independent_review_of_own_repair": false
       },
-      "proof_status_evidence": "Historical metadata hold superseded at the exact accepted whole-original scope cited in owner_metadata_note; established imported dependencies remain explicit; no new proof review or native readiness credit.",
+      "proof_status_evidence": "step5-v2-initial-r1-u107: current proof checks the normalization hypotheses and uses the explicit opposite-side conclusion. Normalization is an external input. This repair self-check supplies no independent acceptance or certification.",
       "owner_metadata_note": {
         "accepted_scope": "whole source at its literal hypotheses",
         "accepted_scope_evidence": [
@@ -3078,7 +3057,14 @@
         },
         "historical_preimage": "research/inverse-problems-knot-theory-all-109-2026-10-19-supervision-20261020/step1-bounded-closeout/contract-final-before/research/inverse-problems-knot-theory-all-109-2026-10-19-batch-107.proof-contracts.json",
         "new_math_acceptance": false
-      }
+      },
+      "risk_review_history": [
+        {
+          "status": "complete",
+          "reviewer": "alpha-batch-107",
+          "notes": "Independently read all eight steps and all fourteen actual prerequisite statements, normalization proof and Negami–Okita Lemma 3-3 through Proposition 3-5 (pp.259–263). Also read Schultens Definition 1 and Theorem 1 proof for comparison, without substituting it for the local argument. The native parity objection double-counts L intersect S: the upper arcs ALONE partition this endpoint set. If m_i is the number of uncut upper arcs on side i, then r_i=2m_i+1. Lower arc endpoints give a second partition of the SAME set, not additional points. Thus n_i=(r_i+1)/2 is integral and n1+n2=b+1. Checked meridional H1 injection, boundary-parallel annulus giving an unknot factor, disjoint disk pieces/cap strips and window half-balls in factor construction; upper gluing removes one bridge, lower construction proves the opposite inequality. Unknot factors handled by identity and b(U)=1; orientations and AC_omega remain. Schematic is correctly local upper-bound gluing, independent of lower-bound proof. Reader:107:1 and refuter:107:1 are false positives, with no mathematical edit warranted; refuter:107:11 is a permitted bibliography."
+        }
+      ]
     },
     "thm-unknotting-number-at-least-half-levine-tristram-signature": {
       "risk": "high",
@@ -3115,7 +3101,7 @@
           "fact": "F2",
           "source": "lem-seifert-matrices-differ-rank-one-under-crossing-change",
           "source_section": "Statement",
-          "quote": "Assume the full Axiom of Choice. Let $D_+$ and $D_-$ be finite regular oriented diagrams that agree outside one crossing neighborhood and differ inside it by switching which branch is over. Let $V_+$ and $V_-$ be the Seifert matrices obtained from their oriented disk-and-band surfaces. There are corresponding integral bases in which either $V_+=V_-$ or $V_+-V_-=\\pm vv^T$ for some integral column vector $v$. In particular, $\\operatorname{rank}(V_+-V_-)\\le1$.",
+          "quote": "Assume the full Axiom of Choice. Let $D_+$ and $D_-$ be finite regular oriented knot diagrams that agree outside one crossing neighborhood and differ inside it by switching which branch is over. Let $V_+$ and $V_-$ be the Seifert matrices obtained from their oriented disk-and-band surfaces. There are corresponding integral bases in which either $V_+=V_-$ or $V_+-V_-=\\pm vv^T$ for some integral column vector $v$. In particular, $\\operatorname{rank}(V_+-V_-)\\le1$.",
           "uses": [
             "2.1"
           ]
@@ -3133,7 +3119,7 @@
           "fact": "F4",
           "source": "def-levine-tristram-hermitian-form-and-signature",
           "source_section": "Definition",
-          "quote": "Assume full AC. Let $K$ be a smooth oriented knot in the oriented standard $3$-sphere, let $F$ be a connected compact smooth oriented surface with oriented boundary $K$, let $V$ be the matrix of the Seifert pairing $V_{ij}=\\operatorname{lk}(a_i^+,a_j)$ in an ordered integral basis, and let $\\omega\\in S^1\\setminus\\{1\\}$. Define the **Levine–Tristram Hermitian matrix** by\n$$H_\\omega(V)=(1-\\omega)V+(1-\\bar\\omega)V^T.$$\nIt is Hermitian because $V$ is real and $\\bar\\omega=\\omega^{-1}$. Its signature is the number of positive eigenvalues minus the number of negative eigenvalues, both counted with multiplicity and with zero eigenvalues omitted. When $\\Delta_K(\\omega)\\ne0$, define $\\sigma_\\omega(K)$ to be this signature. At a root $\\omega_0\\ne1$ of $\\Delta_K$, define $\\sigma_{\\omega_0}(K)$ to be the arithmetic mean of the two one-sided limits of $\\sigma_{e^{i\\theta}}(K)$ as $\\theta$ approaches an argument of $\\omega_0$ from below and above. The invariance and one-sided-existence lemmas justify treating these values as independent of the chosen surface and basis.",
+          "quote": "Assume full AC. Let $K$ be a smooth oriented knot in the oriented standard $3$-sphere, let $F\\subset S^3$ be a connected compact smooth oriented embedded surface with oriented boundary $K$, let $V$ be the matrix of the Seifert pairing $V_{ij}=\\operatorname{lk}(a_i^+,a_j)$ in an ordered integral basis, and let $\\omega\\in S^1\\setminus\\{1\\}$. Define the **Levine–Tristram Hermitian matrix** by\n$$H_\\omega(V)=(1-\\omega)V+(1-\\bar\\omega)V^T.$$\nIt is Hermitian because $V$ is real and $\\bar\\omega=\\omega^{-1}$. Its signature is the number of positive eigenvalues minus the number of negative eigenvalues, both counted with multiplicity and with zero eigenvalues omitted. When $\\Delta_K(\\omega)\\ne0$, define $\\sigma_\\omega(K)$ to be this signature. At a root $\\omega_0\\ne1$ of $\\Delta_K$, define $\\sigma_{\\omega_0}(K)$ to be the arithmetic mean of the two one-sided limits of $\\sigma_{e^{i\\theta}}(K)$ as $\\theta$ approaches an argument of $\\omega_0$ from below and above. The invariance and one-sided-existence lemmas justify treating these values as independent of the chosen surface and basis.",
           "uses": [
             "1.1",
             "2.1",
@@ -3955,7 +3941,7 @@
           "fact": "F3",
           "source": "alg-knot-wirtinger-presentation-from-code",
           "source_section": "Definition",
-          "quote": "The input is a finite record $D$ and a designated starting under-arc $a_0$ of one oriented knot. First check that the vertex, edge, and segment lists are finite; that every vertex, bend, and point on an edge polyline has rational coordinates; and that each polyline has the prescribed incident endpoints. Before geometric tests, delete consecutive repeated coordinates from each polyline; reject an edge with no positive-length segment or a crossing with a zero-length incident ray. Check that every crossing has four incident half-edges, a recorded cyclic order and a pairing into alternating opposite branches, and one designated over-branch; every other vertex must be a valence-two bend. Check that edge orientations agree at bends and continue coherently through each paired branch, and that following these pairings and bends traces one oriented circle. If $a_0$ is not one of the resulting under-arcs, or any structural check fails, return invalid-input.\n\nFor every unordered pair of line segments, compute the determinant of their rational direction vectors. If it is nonzero, solve the two-coordinate intersection equations over $\\mathbb{Q}$ and check whether the solution lies on both closed segments. If the determinant is zero, test collinearity and overlap by exact rational determinant and endpoint-order comparisons. Reject every self-intersection, every positive-length overlap, and every intersection except a shared declared bend or crossing vertex with the recorded incidence. At each crossing, sort the four nonzero incident rays by half-plane and exact determinant comparisons; reject the input if two rays have the same direction, if this geometric cyclic order disagrees with the recorded order, or if the paired branches do not alternate. These checks are finite.\n\nAfter validation, traverse the oriented knot once from $a_0$, label the maximal under-arcs $a_1,\\ldots,a_m$, and introduce one symbol $x_i$ for the positive meridian of each $a_i$. At each crossing, let the outgoing over-half-edge be the ray in the direction of the oriented over-tangent. In the verified counterclockwise cyclic order, the under-half-edge immediately following it is the target side $a_t$; the other under-half-edge is the source side $a_s$. Read the over-arc $a_o$ and append exactly the relator $x_o^{-1}x_sx_ox_t^{-1}$. This rule uses the positive in-plane normal, which points counterclockwise from the oriented over-tangent, and does not depend on the under-strand direction. The orientation of each positive meridian is fixed by requiring the oriented knot tangent followed by its normal-disk orientation to give the ambient orientation. Once a complement basepoint and basing paths to the meridians are fixed, interpret $x_i$ as the corresponding based positive meridian. Return the finite group presentation with generators $x_1,\\ldots,x_m$ and one relator per crossing.",
+          "quote": "The input is a finite record $D$ and a designated starting under-arc $a_0$ of one oriented knot. First check that the vertex, edge, and segment lists are finite; that every vertex, bend, and point on an edge polyline has rational coordinates; and that each polyline has the prescribed incident endpoints. Before geometric tests, delete consecutive repeated coordinates from each polyline; reject an edge with no positive-length segment or a crossing with a zero-length incident ray. Check that every crossing has four incident half-edges, a recorded cyclic order and a pairing into alternating opposite branches, and one designated over-branch; every other vertex must be a valence-two bend. Check that edge orientations agree at bends and continue coherently through each paired branch, and that following these pairings and bends traces one oriented circle. If $a_0$ is not one of the resulting under-arcs, or any structural check fails, return invalid-input.\n\nFor every unordered pair of line segments, compute the determinant of their rational direction vectors. If it is nonzero, solve the two-coordinate intersection equations over $\\mathbb{Q}$ and check whether the solution lies on both closed segments. If the determinant is zero, test collinearity and overlap by exact rational determinant and endpoint-order comparisons. Reject every positive-length overlap. Allow a singleton intersection only at the common endpoint of consecutive segments in one edge polyline, or at a shared declared bend or crossing vertex with the recorded endpoint incidences. Reject all other intersections, including all other self-intersections. At each crossing, sort the four nonzero incident rays by half-plane and exact determinant comparisons; reject the input if two rays have the same direction, if this geometric cyclic order disagrees with the recorded order, or if the paired branches do not alternate. These checks are finite.\n\nAfter validation, traverse the oriented knot once from $a_0$, label the maximal under-arcs $a_1,\\ldots,a_m$, and introduce one symbol $x_i$ for the positive meridian of each $a_i$. At each crossing, let the outgoing over-half-edge be the ray in the direction of the oriented over-tangent. In the verified counterclockwise cyclic order, the under-half-edge immediately following it is the target side $a_t$; the other under-half-edge is the source side $a_s$. Read the over-arc $a_o$ and append exactly the relator $x_o^{-1}x_sx_ox_t^{-1}$. This rule uses the positive in-plane normal, which points counterclockwise from the oriented over-tangent, and does not depend on the under-strand direction. The orientation of each positive meridian is fixed by requiring the oriented knot tangent followed by its normal-disk orientation to give the ambient orientation. Use the diagram's common upper-collar access paths to base all meridians at one point in that collar. If the chosen complement basepoint lies elsewhere, prepend the same path from it to the collar basepoint to every access path. Interpret $x_i$ as the resulting based positive meridian. Return the finite group presentation with generators $x_1,\\ldots,x_m$ and one relator per crossing.",
           "uses": [
             "1.1",
             "2.1",

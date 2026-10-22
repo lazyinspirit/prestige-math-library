@@ -13,6 +13,11 @@ axiom_use: The argument is finite matrix algebra over the fixed algebraically
 provenance:
   statement: ai-altered
   proof: ai-generated
+verification:
+  judge:
+    model: "gpt-6-luna"
+    verdict: pass
+    date: 2026-10-22
 sources:
   references:
     - title: Baldwin and Sivek, Torus knots, the A-polynomial, and SL(2,C)

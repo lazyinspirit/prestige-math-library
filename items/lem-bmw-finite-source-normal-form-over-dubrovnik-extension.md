@@ -15,6 +15,11 @@ axiom_use: "Choice-free: transport of an explicitly indexed finite module basis 
 provenance:
   statement: literature-derived
   proof: ai-altered
+verification:
+  judge:
+    model: "gpt-6-luna"
+    verdict: pass
+    date: 2026-10-22
 sources:
   references:
     - title: "Goodman and Hauschild, Affine Birman–Wenzl–Murakami Algebras and Tangles in the Solid Torus, §§5.4–5.5"

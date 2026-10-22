@@ -19,6 +19,11 @@ axiom_use: "Choice-free. The finite torus strips and the primitive marked-ball p
 provenance:
   statement: literature-derived
   proof: ai-altered
+verification:
+  judge:
+    model: "gpt-6-luna"
+    verdict: pass
+    date: 2026-10-22
 sources:
   references:
     - title: "Allen Hatcher, Notes on Basic 3-Manifold Topology"

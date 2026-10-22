@@ -1,0 +1,70 @@
+VALID ORACLE AND BOTH ORIGINAL RATE UPPER BOUNDS FOR THE UNCHANGED PAIRWISE SELECTOR
+
+Notation: M=mmax, k=m*, b_m=||E xhat_m-x||, R_m=b_m^2+v_m, epsilon_m=xhat_m-E xhat_m. Use exactly the current ordered nonnegative spectral filters, geometric variance grid, oracle, beta,gamma>0, and pairwise quantile selector. All sums below are finite except deterministic diagonal covariance expansions. No joint quantile replaces a pairwise quantile.
+
+1. Elementary Gaussian bounds, requiring only the stated independent normal coordinates.
+For G=sum_j sqrt(a_j)Z_j e_j, a_j>=0, v=sum a_j<infinity, u=sup a_j, independent standard normals, one has
+E||G||^2=v; E||G||^4=v^2+2sum a_j^2<=3v^2;
+P(||G||>sqrt(v)+sqrt(2u t))<=exp(-t), t>0.
+Proof: first use finite partial sums Q_n=sum_{j<=n}a_jZ_j^2. For 0<s<1/(2u), independence and the scalar Gaussian integral give
+log E exp[s(Q_n-EQ_n)]=sum_j[-s a_j-(1/2)log(1-2s a_j)]<=s^2 sum_j a_j^2/(1-2us).
+Indeed -log(1-z)-z<=z^2/[2(1-z)]. Chernoff optimization yields P(Q_n>v_n+2sqrt(w_n t)+2ut)<=e^-t, where w_n=sum a_j^2. For example choose s=sqrt(t)/(sqrt(w_n)+2u sqrt(t)); the claimed exponent is -t. Degenerate w_n=0 is immediate. Monotone convergence of Q_n (and of Q_n^2) gives the fourth moment and the infinite quadratic tail, with w<=uv. Since v+2sqrt(uvt)+2ut<=(sqrt(v)+sqrt(2ut))^2, the norm-tail assertion follows. All random variables are already supplied coordinates; neither an uncountable Gaussian process nor a Lipschitz Gaussian concentration theorem is used.
+Consequently every pairwise noise quantile Q_ab(t)=sigma z_ab(t) satisfies Q_ab(t)<=sqrt(v_ab)+sqrt(2u_ab t). Nonnegative ordered coordinates give v_ab<=v_b and u_ab<=u_b for a<b.
+
+2. Explicit finite oracle.
+Define D_k=0 if k=0, and otherwise
+D_k=(1+beta)sqrt(v_k)+sqrt(4(1+gamma)u_k log(v_k/v0)).
+If k=M, define P_k=A_k=B_k=0. Otherwise define for k<m<=M
+p_m=min{1,(M-m+1)(v0/v_m)^{2(1+gamma)}};
+P_k=min{1,(M-k)(v0/v_{k+1})^{2(1+gamma)}};
+A_k=sqrt(3)sum_{m=k+1}^M v_m sqrt(p_m);
+B_k=2sqrt(3)R_k(v0/v_k)^{1+gamma} sum_{m=k+1}^M sqrt(M-m+1)(v_k/v_m)^gamma.
+Then the following fully finite inequality holds:
+E||xhat_mhat-x||^2 <= (sqrt(R_k)+D_k)^2 + min{(b_k sqrt(P_k)+sqrt(A_k))^2, B_k}.                    (V1)
+In particular, with
+ delta=1/[2(1+gamma)],
+ K(theta1,gamma)=theta1/(theta1-1)+1/(1-theta1^{-gamma}),
+ W_M=v0 M^delta for M>=1 and W_0=0,
+one has
+ A_k<=sqrt(3)K W_M,
+ B_k<= [2sqrt(3)sqrt(M)/(theta1^gamma-1)](v0/v_k)^{1+gamma}R_k,
+and the simpler rate-friendly bound
+ E||xhat_mhat-x||^2 <=(sqrt(R_k)+D_k)^2+2b_k^2+2sqrt(3)K W_M.             (V2)
+When M=0, k=0, the exact bound is E||xhat_mhat-x||^2=R0. When k=0 and M>0, D0=0; the first term in (V1) and (V2) is R0, not an artificial positive threshold term. When k=M there is no late-selection term. All expressions v0/v_k are positive by hypothesis.
+
+Proof of (V1): If mhat<=k, acceptance of mhat gives ||xhat_mhat-xhat_k||<=eta_mhat,k when mhat<k, and zero otherwise. For m<k, x_m=2(1+gamma)log(v_{m+1}/v0)<=2(1+gamma)log(v_k/v0). The Gaussian bound above therefore gives eta_mk<=D_k. Triangle inequality in L2 gives the early-selection contribution at most (sqrt(R_k)+D_k)^2. If k=0 this argument has identically zero difference.
+For m>k, event {mhat=m} implies rejection of m-1. Since m-1>=k, the oracle bias bound and triangle inequality imply that each rejecting comparison with index ell>=m has ||G_{m-1,ell}||>Q_{m-1,ell}(x_{m-1}). Union bound therefore gives P(mhat=m)<=p_m. Likewise P(mhat>k)<=P_k. The quantile upper-tail inequality is valid by the definition; these finite nonzero pair differences have continuous norm laws. Gaussian fourth moment and Cauchy--Schwarz give
+E[||epsilon_m||^2 1_{mhat=m}]<=sqrt(3)v_m sqrt(p_m).
+Thus late selected noise has second moment at most A_k. Ordered residuals imply b_m<=b_k, so late selected bias has L2 norm at most b_k sqrt(P_k). Minkowski gives the first late alternative in (V1).
+Alternatively, ||epsilon_m+b_m(vector)||^2<=2||epsilon_m||^2+2b_k^2, and P(mhat=m)<=sqrt(p_m), so late risk<=2sqrt(3)sum_{m>k}(v_m+b_k^2)sqrt(p_m). Since v_m>=v_k, v_m+b_k^2<=(v_m/v_k)R_k. Dropping the min in p_m yields exactly B_k.
+For the W_M estimate, put w=v0 M^delta and f(v)=v min{1,sqrt(M)(v0/v)^{1+gamma}}. Then f(v)=v for v<=w and f(v)=w^{1+gamma}v^{-gamma} for v>w. Geometric growth gives sum_{v_m<=w}v_m<=theta1 w/(theta1-1), and sum_{v_m>w}v_m^{-gamma}<=w^{-gamma}/(1-theta1^{-gamma}). Hence sum f(v_m)<=Kw. The B_k simplification uses sqrt(M-m+1)<=sqrt(M), v_m/v_k>=theta1^{m-k}. Finally (a+b)^2<=2a^2+2b^2 proves (V2).
+
+3. Independent rate argument.
+Assume all actual source/filter qualifications and surrogate hypotheses of the current item. Let s=sigma^2 ->0, fixed alpha0, fixed beta,gamma,theta1,theta2. Then v0=s V(alpha0) with fixed positive V(alpha0), and M<=1+log(1/v0)/log(theta1)=O(log(1/s)). Let L=log(1/s). All constants below are uniform over x in the fixed source ball. Qualification gives b_m^2<=C phi(alpha_m)^2. The surrogate integral/filter bounds give v_m<=C s S(alpha_m)/alpha_m (a proof is included below).
+
+Choose continuous t=t_s ->0 and r=r_s by phi(t)^2 asymp s S(t)/t asymp r; the explicit choices in section 4 have r->0 and r/s->infinity. Let j be the first candidate with v_j>=r. For small s, v0<r<1, so 1<=j<=M and r<=v_j<=theta2 r. In either rate regime, the function h(t)=S(t)/t is comparable to a monotone regularly varying function of index less than zero. The inequalities r<=v_j<=C s h(alpha_j) and r asymp s h(t) imply alpha_j<=C' t. Thus qualification gives b_j^2<=C'' r. This conclusion uses only the given ordered grid and two-sided surrogate asymptotics, not any unproved density of the alpha grid.
+Put c_beta=beta^2(sqrt(theta1)-1)^2>0. Choose a fixed integer J>=0 with theta1^J>=C''/c_beta. For sufficiently small s, theta2^{J+1}r<1, so ell=j+J<M and v_ell<=theta2^{J+1}r. Monotone bias gives b_ell^2<=C''r<=c_beta v_ell.
+For ell<=a<b, b_ab<=b_a<=b_ell, and also b_a^2<=c_beta v_a; reverse triangle in the Hilbert space of noise coefficients gives
+v_ab >=(sqrt(v_b)-sqrt(v_a))^2 >=(sqrt(theta1)-1)^2 v_a.
+Hence b_ab^2<=beta^2 v_ab and ell is in the defining oracle set: k=m*<=ell. If k<ell, its oracle property gives E||xhat_k-xhat_ell||^2<= (1+beta^2)v_kell<=(1+beta^2)v_ell. Therefore R_k<=2(1+beta^2)v_ell+2R_ell<=Cr. The case k=ell is immediate. In particular v_k<=Cr and log(v_k/v0)<=CL.
+By 0<=lambda q_alpha(lambda)<=1 and alpha q_alpha(lambda)<=Cq', one has u_k<=Cq' s/alpha_k.
+
+Mild case: S(alpha) asymp alpha^{-1/a}, a>1, and the actual lower variance hypothesis gives v_k>=c s alpha_k^{-1-1/a}. Since v_k<=Cr and r asymp s t^{-1-1/a}, inversion gives alpha_k>=c't. Thus u_k log(v_k/v0)<=C s L/t=o(r), because L t^{1/a}->0. Consequently D_k^2<=C(v_k+u_k log(v_k/v0))<=Cr. This also covers k=0, where D0=0.
+
+Severe case: S(alpha) asymp (log(1/alpha))^p, p=1/vartheta>=2, and v_k>=c s alpha_k^{-1}(log(1/alpha_k))^{p-1}. Write H=log(1/t) asymp L. If alpha_k>=t, trivially alpha_k>=t/H for small s. If alpha_k<t, then log(1/alpha_k)>=H, and v_k<=Cr<=C s t^{-1}H^p gives
+ c s alpha_k^{-1} H^{p-1}<=C s t^{-1}H^p,
+ so alpha_k>=c't/H.
+Thus u_k log(v_k/v0)<=C s H L/t<=C s H^2/t<=C s H^p/t asymp Cr, exactly because p>=2 (vartheta<=1/2). Again D_k^2<=Cr.
+
+For every specified fixed smoothness pair, s L^delta=o(r) (positive polynomial separation when nu>0; exponential versus logarithmic separation when nu=0,tau>0). Therefore W_M=O(s L^delta)=o(r). Applying (V2), R_k<=Cr, b_k^2<=Cr and D_k^2<=Cr proves sup_source E||xhat_mhat-x||^2<=Cr in both regimes. This is a rate upper bound; no additional adaptive-minimax optimality claim is asserted.
+
+4. Explicit balances, including logarithmic smoothness.
+Mild: D=2nu+1+1/a, t=s^{1/D}L^{2tau/D},
+ r=s^{2nu/D} L^{-2tau(1+1/a)/D}.
+Then log(1/t) asymp L, phi(t)^2 asymp r, and s t^{-1-1/a} asymp r. This is exactly the displayed mild rate.
+Severe: p=1/vartheta, D=2nu+1, t=s^{1/D}L^{(2tau+p)/D},
+ r=s^{2nu/D}L^{(2nu p-2tau)/D}.
+Then log(1/t) asymp L, phi(t)^2 asymp r, and s t^{-1}(log(1/t))^p asymp r. This is exactly the displayed severe rate. For nu=0,tau>0 both formulas give r=L^{-2tau}. For nu>0, arbitrary real tau is permitted subject to the existing index, convexity, qualification assumptions. Lambda1<=e^-1 can remain exactly as in the current rate statement.
+
+5. Short proof of upper variance from the actual surrogate assumption.
+The filter bounds give lambda q_alpha(lambda)^2<=min{Cq'/alpha, (Cq')^2 lambda/alpha^2} up to replacing Cq' by max(Cq',1). Split lambda>=alpha and lambda<alpha: the first contribution is <=C Sigma(alpha)/alpha and the second <=C alpha^{-2}sum_{lambda_j<alpha}lambda_j. Their sum is <=C alpha^{-2}int_0^alpha Sigma(t)dt (since the integral equals alpha Sigma(alpha)+sum_{lambda_j<alpha}lambda_j). The assumed integral bound therefore gives V(alpha)<=C S(alpha)/alpha. This uses only summation/integration of nonnegative terms and the actual candidate-wise assumption.

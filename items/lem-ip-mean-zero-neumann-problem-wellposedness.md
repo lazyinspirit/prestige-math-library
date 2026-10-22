@@ -20,6 +20,11 @@ proof_strategy: direct
 provenance:
   statement: literature-derived
   proof: ai-altered
+verification:
+  judge:
+    model: "gpt-6-luna"
+    verdict: pass
+    date: 2026-10-22
 sources:
   references:
     - title: "Luca Rondi, On the regularization of the inverse conductivity problem with discontinuous conductivities"

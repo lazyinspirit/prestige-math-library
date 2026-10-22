@@ -1,0 +1,406 @@
+{
+  "version": 1,
+  "scope": [
+    "thm-ip-kernel-directions-preclude-unrestricted-recovery",
+    "ex-ip-01-scope-and-boundary-cases"
+  ],
+  "contracts": {
+    "thm-ip-kernel-directions-preclude-unrestricted-recovery": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-ip-forward-map-and-solution-classes",
+          "source_section": "Definition",
+          "quote": "Let $(X,d_X)$ and $(Y,d_Y)$ be metric spaces, called the **parameter space** and the **data space**. Let $U\\subseteq X$ be a nonempty set of **admissible truths**, and let $F:U\\to Y$ be a **forward map**. For $x\\in U$, the datum $F(x)$ is its exact observation. For $y\\in Y$, define the exact solution set\n\n$$S_F(y):=\\{x\\in U:F(x)=y\\}.$$\n\nThe datum $y$ is exactly solvable on $U$ when $S_F(y)\\ne\\varnothing$.\n\nLet $\\sim$ be an equivalence relation on $U$, meaning it is reflexive, symmetric, and transitive; truths equivalent under $\\sim$ represent the same recovery target. A **metric solution-class space** for $(U,\\sim)$ consists of a metric space $(Q,d_Q)$ and a function $q:U\\to Q$ whose image is all of $Q$ and such that $q(x)=q(x')$ if and only if $x\\sim x'$. The loss between two target classes is their metric distance $d_Q$. Exact recovery of the truth itself is the special case $Q=U$, $q(x)=x$, and $d_Q=d_X$ restricted to $U$.",
+          "uses": [
+            "1.2"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "def-ip-identifiability-and-stability-modulus",
+          "source_section": "Definition",
+          "quote": "Use metric spaces $(X,d_X)$ and $(Y,d_Y)$, a nonempty admissible truth class $U\\subseteq X$, a forward map $F:U\\to Y$, and a metric solution-class space $(Q,d_Q)$ with class map $q:U\\to Q$ as follows: $q$ has image all of $Q$, and $q(x)=q(x')$ exactly when $x$ and $x'$ are equivalent for recovery. The library's metric axioms imply nonnegative metric values.\n\nThe forward map $F$ is **identifiable modulo the recovery equivalence on $U$** if\n\n$$x,x'\\in U\\text{ and }F(x)=F(x')\\quad\\Longrightarrow\\quad q(x)=q(x').$$\n\nIt is nonidentifiable modulo that equivalence if some two admissible truths have equal data and distinct target classes.\n\nA **deterministic data-only estimator** is a function $\\widehat q:Y\\to Q$. It is exact on $U$ if $\\widehat q(F(x))=q(x)$ for every $x\\in U$. The diagram below commutes exactly under this condition; it states the defining equality of functions and is not a proof device.\n\n```tikzcd\nU \\arrow[r,\"F\"] \\arrow[dr,\"q\"'] & Y \\arrow[d,\"\\widehat q\"] \\\\\n& Q\n```\n\nA **uniform stability modulus on $U$** is a nondecreasing function $\\omega:[0,\\infty)\\to[0,\\infty)$, with $\\omega(0)=0$ and $\\lim_{t\\downarrow0}\\omega(t)=0$, such that\n\n$$d_Q(q(x),q(x'))\\le\\omega\\bigl(d_Y(F(x),F(x'))\\bigr)\\qquad(x,x'\\in U).$$\n\nIdentifiability concerns equality of exact data; the modulus is a separate quantitative bound for all truth pairs. The estimator definition specifies no regularization procedure or convergence guarantee.",
+          "uses": [
+            "1.1",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "def-metric-space",
+          "source_section": "Definition",
+          "quote": "Throughout, $\\mathbb{R}$ is the complete ordered field\n(Complete ordered field (least-upper-bound property), Ordered field) constructed in this\nlibrary (The real numbers) and carrying its order (Order on the reals).\n\nLet $X$ be a set. A **metric** on $X$ is a function\n$d : X \\times X \\to \\mathbb{R}$ such that for all $x, y, z \\in X$:\n\n- **(M1) Separation.** $d(x,y) = 0$ if and only if $x = y$.\n- **(M2) Symmetry.** $d(x,y) = d(y,x)$.\n- **(M3) Triangle inequality.** $d(x,z) \\le d(x,y) + d(y,z)$.\n\nA **metric space** is a pair $(X,d)$ consisting of a set $X$ and a metric $d$ on\nit. The elements of $X$ are its **points** and $d(x,y)$ is the **distance** from\n$x$ to $y$. When only one metric is in play we write $X$ for $(X,d)$; when\nseveral are, the metric is always named.\n\n**The values of a metric are real numbers.** The codomain is $\\mathbb{R}$, so\n$d(x,y)$ is an honest element of the complete ordered field and every\ninequality above is an inequality there. No infinite value is permitted;\nWhich metric axiom list this library uses, the live naming fork between semimetric and pseudometric, and why extended metrics are not treated here records why extended metrics are not treated in\nthis library.\n\n**Nonnegativity is deliberately absent from the axiom list.** Many texts add a\nfourth axiom $d(x,y) \\ge 0$. It is redundant: (M1), (M2) and (M3) already force\nit, as Nonnegativity of a metric is a consequence of the other axioms, not an axiom proves. Nothing below assumes it before that\nlemma is available.\n\n**Pseudometric.** A **pseudometric** on $X$ is a function\n$p : X \\times X \\to \\mathbb{R}$ satisfying (M2), (M3) and the weakening\n\n- **(M1') Reflexivity.** $p(x,x) = 0$ for every $x \\in X$\n\nof (M1). A pseudometric may therefore assign distance $0$ to two distinct\npoints. Every metric is a pseudometric, and a pseudometric is a metric exactly\nwhen $p(x,y) = 0$ forces $x = y$.\n\n**Ultrametric.** An **ultrametric** on $X$ is a metric $d$ that in addition\nsatisfies\n\n- **(M3') Strong triangle inequality.** $d(x,z) \\le \\max\\{d(x,y), d(y,z)\\}$\n\nfor all $x, y, z \\in X$, where the maximum is that of a two-element subset of\n$\\mathbb{R}$, which exists and is one of the two elements\n(Maximum and minimum of a set, Every nonempty finite set of reals has a maximum and a minimum). An **ultrametric space** is a pair\n$(X,d)$ with $d$ an ultrametric.",
+          "uses": [
+            "1.2",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "lem-metric-nonnegativity",
+          "source_section": "Statement",
+          "quote": "Let $X$ be a set and let $p : X \\times X \\to \\mathbb{R}$ satisfy the reflexivity\naxiom (M1') $p(x,x) = 0$ and the symmetry axiom (M2) $p(x,y) = p(y,x)$ of\nMetric space: $d(x,y) = 0$ iff $x = y$, symmetry, and the triangle inequality; pseudometric and ultrametric. Then:\n\n1. If $p$ satisfies the triangle inequality (M3), then $p(x,y) \\ge 0$ for all\n   $x, y \\in X$.\n2. If $p$ satisfies the strong triangle inequality (M3'), then\n   $p(x,y) \\ge 0$ for all $x, y \\in X$.\n\nIn particular every metric, every pseudometric and every ultrametric\n(Metric space: $d(x,y) = 0$ iff $x = y$, symmetry, and the triangle inequality; pseudometric and ultrametric) takes only nonnegative values. Nonnegativity is therefore\na theorem about the axiom list this library uses, not a fourth axiom, and no\nstatement on this page needs to assume it separately.",
+          "uses": [
+            "2.1",
+            "3.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "single-output-at-the-common-datum",
+          "claim": "Put $z:=\\widehat q(y)\\in Q$. Since the estimator is a function evaluated at the single datum $y$, this is the same estimate for both truths.",
+          "step": "1.1",
+          "inputs": [
+            "given",
+            "F2"
+          ]
+        },
+        {
+          "id": "target-metric-triangle",
+          "claim": "By the triangle inequality for $d_Q$,\n$$d_Q(q(x_0),q(x_1))\\le d_Q(q(x_0),z)+d_Q(z,q(x_1)).$$",
+          "step": "1.2",
+          "inputs": [
+            "F1",
+            "F3"
+          ]
+        },
+        {
+          "id": "half-separation-bound",
+          "claim": "Let $M$ be the maximum of the two losses in the statement. Both losses are nonnegative by [F4] and each summand in step 1.2 is at most $M$, so $d_Q(q(x_0),q(x_1))\\le2M$ and $M\\ge\\tfrac12d_Q(q(x_0),q(x_1))$.",
+          "step": "2.1",
+          "inputs": [
+            "step 1.2",
+            "F4",
+            "algebra"
+          ]
+        },
+        {
+          "id": "exact-nonidentifiability-consequence",
+          "claim": "If $F(x_0)=F(x_1)$ and their target classes differ, metric separation and nonnegativity give $d_Q(q(x_0),q(x_1))>0$; choosing $y=F(x_0)$ and $\\delta=0$ satisfies the hypotheses, so step 2.1 rules out exact recovery of both. For a shared noisy datum the same estimator output from step 1.1 yields the same bound.",
+          "step": "3.1",
+          "inputs": [
+            "given",
+            "F2",
+            "F3",
+            "F4",
+            "step 1.1",
+            "step 2.1"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The theorem requires two truths in the nonempty admissible class; an empty class supplies no such pair."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Step 2.1 also gives the trivial zero lower bound when the two target classes coincide."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Step 2.1 is valid when the target separation is exactly one and yields a lower bound of one half."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Step 2.1 permits either error to equal the maximum; no strict triangle inequality or uniqueness of the estimator output is assumed."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Step 3.1 checks the zero-noise endpoint by taking y equal to the common exact datum and delta equal to zero."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Step 1.1 uses only the given estimator and datum; no representative is selected and no choice axiom is used."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The statement is a one-way quantitative lower bound and contains no forward direction of an equivalence."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The statement is a one-way quantitative lower bound and contains no reverse direction of an equivalence."
+        }
+      ]
+    },
+    "ex-ip-01-scope-and-boundary-cases": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-euclidean-inner-product",
+          "source_section": "Definition",
+          "quote": "Let $n \\in \\mathbb{N}$. A natural number is a von Neumann natural, that is a set,\nand $n = \\{0, 1, \\dots, n-1\\}$ (The natural numbers $\\mathbb{N}$ (von Neumann),\nOn $\\mathbb{N}$ the order is membership: $m < n \\iff m \\in n$), so\n\n$$\\mathbb{R}^{n} \\;=\\; \\{\\, x \\;:\\; x \\text{ is a function } n \\to \\mathbb{R} \\,\\}$$\n\nis the function space of The vector space $F^{X}$ of all functions $X \\to F$ with pointwise operations, and $F^{n}$ as the case $X = n = \\{0, 1, \\dots, n-1\\}$ at $F = \\mathbb{R}$ and $X = n$,\na vector space over $\\mathbb{R}$ under the pointwise operations\n(Vector space over a field). We write $x_k := x(k)$ for $k < n$, and two elements of\n$\\mathbb{R}^{n}$ are equal exactly when they agree at every $k < n$. This is the\nsame set that $\\mathbb{R}^n$ as the set of functions $n \\to \\mathbb{R}$, and $d_1$, $d_2$, $d_\\infty$ are metrics on it calls $\\mathbb{R}^{n}$.\n\nThe **Euclidean inner product** of $x, y \\in \\mathbb{R}^{n}$ is the real number\n\n$$\\langle x, y\\rangle \\;:=\\; \\sum_{k<n} x_k\\,y_k ,$$\n\nthe finite sum of Finite sums and finite products, by recursion applied to the list $k \\mapsto x_k y_k$\n(extended by $0$ beyond $n$, as every finite list in this library is). The\n**Euclidean norm** of $x$ is\n\n$$\\lVert x\\rVert_2 \\;:=\\; \\sqrt{\\langle x, x\\rangle},$$\n\nwhich is defined because $\\langle x,x\\rangle = \\sum_{k<n} x_k^{2} \\ge 0$ (a sum\nof nonnegative terms, Laws of finite sums and finite products clause 4 and\nSquares of nonzero elements are positive, the case $x_k = 0$ giving $x_k^2 = 0$ by\nInteger powers $a^m$) and every nonnegative real has a unique nonnegative square\nroot (Square roots exist: a unique $\\sqrt{a} \\ge 0$ with $(\\sqrt{a})^2 = a$; the positives are $\\{x^2 : x \\neq 0\\}$).\n\n### Both are defined for every $n$, including $n = 0$\n\nAt $n = 0$ the set $\\mathbb{R}^{0}$ has exactly one element, the empty function,\nand it is the zero vector space (The standard list $e : n \\to F^{n}$ with $e_i(i) = 1_F$ and $e_i(j) = 0_F$ for $j \\ne i$ is an ordered basis of $F^{n}$; hence $\\dim_F F^{n} = n$, and $F^{0}$ is the zero space with basis $\\varnothing$ and dimension $0$ clause 5); the sum\nabove is the empty sum, so $\\langle x,y\\rangle = 0$ and $\\lVert x\\rVert_2 = 0$.\n**This is the first place on this page where the two index regimes diverge, and\nthe divergence is deliberate.** The published metrics $d_1$, $d_2$, $d_\\infty$ of\n$\\mathbb{R}^n$ as the set of functions $n \\to \\mathbb{R}$, and $d_1$, $d_2$, $d_\\infty$ are metrics on it are defined only for $n \\ge 1$, because $d_\\infty$ would\notherwise be a maximum over the empty index set; the algebra above needs no such\nrestriction. The boundary in this page runs between the algebra and the metric,\nnot where a reader would guess, and Conventions of this page, the standing $n \\ge 1$ hypothesis, and what is taken up elsewhere in the reading order lists\nexactly which items inherit $n \\ge 1$.\n\n### The algebra of the inner product\n\nFor all $x, y, z \\in \\mathbb{R}^{n}$ and $\\lambda \\in \\mathbb{R}$:\n\n1. **Symmetry.** $\\langle x,y\\rangle = \\langle y,x\\rangle$, since $x_ky_k = y_kx_k$\n   termwise.\n2. **Additivity in the first argument.**\n   $\\langle x + y, z\\rangle = \\langle x,z\\rangle + \\langle y,z\\rangle$: the list\n   $k \\mapsto (x_k+y_k)z_k$ is the termwise sum of $k \\mapsto x_kz_k$ and\n   $k \\mapsto y_kz_k$, so Laws of finite sums and finite products clause 1 applies.\n3. **Homogeneity in the first argument.**\n   $\\langle \\lambda x, y\\rangle = \\lambda\\langle x,y\\rangle$, by\n   Laws of finite sums and finite products clause 2.\n4. **Bilinearity.** Clauses 2 and 3 together with symmetry give the same two laws\n   in the second argument.\n5. **Positive definiteness.** $\\langle x,x\\rangle \\ge 0$, and\n   $\\langle x,x\\rangle = 0$ if and only if $x = 0$. Indeed a vanishing sum of\n   nonnegative terms has every term $0$ (Laws of finite sums and finite products clause 4), so\n   $x_k^{2} = 0$ for every $k < n$, and a nonzero real has a positive square\n   (Squares of nonzero elements are positive), whence $x_k = 0$ for every $k < n$ and $x = 0$.\n6. **Agreement with the published Euclidean metric.** For $n \\ge 1$ and\n   $x, y \\in \\mathbb{R}^{n}$,\n   $\\lVert x - y\\rVert_2 = \\sqrt{\\sum_{k<n}(x_k-y_k)^{2}} = d_2(x,y)$, the two\n   sides being the same expression ($\\mathbb{R}^n$ as the set of functions $n \\to \\mathbb{R}$, and $d_1$, $d_2$, $d_\\infty$ are metrics on it). In particular\n   $\\lVert x\\rVert_2 = d_2(x, 0)$.\n\nThat $\\lVert\\cdot\\rVert_2$ is a norm in the sense of A norm on a real vector space, the induced metric, and the dictionary with the metric axioms\nis proved in Cauchy-Schwarz $\\lvert\\langle x,y\\rangle\\rvert \\le \\lVert x\\rVert_2\\lVert y\\rVert_2$ with its equality case, the triangle inequality for $\\lVert\\cdot\\rVert_2$, the parallelogram law and polarisation, where the triangle\ninequality is obtained from the Cauchy-Schwarz inequality; it is not assumed\nhere.",
+          "uses": [
+            "1.2",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "def-linear-map",
+          "source_section": "Definition",
+          "quote": "Let $V$ and $W$ be vector spaces over the same field $F$. A function\n$T:V\\to W$ is **linear** when\n\n$$T(au+bv)=aT(u)+bT(v)$$\n\nfor all $a,b\\in F$ and $u,v\\in V$. Such a function is a **linear map**, or\n**linear transformation**.",
+          "uses": [
+            "1.2",
+            "1.3"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "lem-metrics-on-rn",
+          "source_section": "Statement",
+          "quote": "Let $n \\in \\mathbb{N}$ with $n \\ge 1$. A von Neumann natural is the set of its\npredecessors, $n = \\{0, 1, \\dots, n-1\\}$ ([[def-natural-numbers]]), so it can be\nused directly as an index set. Define\n\n$$\\mathbb{R}^n := \\{\\, x : x \\text{ is a function } n \\to \\mathbb{R} \\,\\},$$\n\nand write $x_k$ for $x(k)$, $k < n$. Two elements of $\\mathbb{R}^n$ are equal\nexactly when they agree at every $k < n$, functions being equal when they have\nthe same values. For $x, y \\in \\mathbb{R}^n$ put\n\n$$d_1(x,y) := \\sum_{k<n} |x_k - y_k|, \\qquad d_2(x,y) := \\sqrt{\\ \\sum_{k<n} (x_k - y_k)^2\\ }, \\qquad d_\\infty(x,y) := \\max\\{\\, |x_k - y_k| : k < n \\,\\}.$$\n\nAll three are well defined: the finite sums are those of [[def-finite-sum]]; the\nsum of squares is nonnegative ([[lem-finite-sum-laws]], [[lem-of-square-positive]])\nso it has a unique nonnegative square root ([[thm-of-square-roots]]); and\n$\\{|x_k - y_k| : k < n\\}$ is a nonempty finite subset of $\\mathbb{R}$, because\n$n \\ge 1$, so it has a maximum ([[lem-finite-set-has-max]], [[def-max-min]]).\n\n**Then $d_1$, $d_2$ and $d_\\infty$ are metrics on $\\mathbb{R}^n$**\n([[def-metric-space]]).\n\n**Why $n \\ge 1$.** For $n = 0$ the set $\\mathbb{R}^0$ has exactly one element,\nthe empty function, and $d_1$ and $d_2$ are the empty sum $0$ and its root; but\n$d_\\infty$ would be the maximum of the empty set, which does not exist. The\nhypothesis $n \\ge 1$ is therefore not decoration, and it is carried by every\nstatement about $d_\\infty$ in this library.",
+          "uses": [
+            "1.1",
+            "2.1",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "def-ip-forward-map-and-solution-classes",
+          "source_section": "Definition",
+          "quote": "Let $(X,d_X)$ and $(Y,d_Y)$ be metric spaces, called the **parameter space** and the **data space**. Let $U\\subseteq X$ be a nonempty set of **admissible truths**, and let $F:U\\to Y$ be a **forward map**. For $x\\in U$, the datum $F(x)$ is its exact observation. For $y\\in Y$, define the exact solution set\n\n$$S_F(y):=\\{x\\in U:F(x)=y\\}.$$\n\nThe datum $y$ is exactly solvable on $U$ when $S_F(y)\\ne\\varnothing$.\n\nLet $\\sim$ be an equivalence relation on $U$, meaning it is reflexive, symmetric, and transitive; truths equivalent under $\\sim$ represent the same recovery target. A **metric solution-class space** for $(U,\\sim)$ consists of a metric space $(Q,d_Q)$ and a function $q:U\\to Q$ whose image is all of $Q$ and such that $q(x)=q(x')$ if and only if $x\\sim x'$. The loss between two target classes is their metric distance $d_Q$. Exact recovery of the truth itself is the special case $Q=U$, $q(x)=x$, and $d_Q=d_X$ restricted to $U$.",
+          "uses": [
+            "2.1",
+            "2.2",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "def-ip-identifiability-and-stability-modulus",
+          "source_section": "Definition",
+          "quote": "Use metric spaces $(X,d_X)$ and $(Y,d_Y)$, a nonempty admissible truth class $U\\subseteq X$, a forward map $F:U\\to Y$, and a metric solution-class space $(Q,d_Q)$ with class map $q:U\\to Q$ as follows: $q$ has image all of $Q$, and $q(x)=q(x')$ exactly when $x$ and $x'$ are equivalent for recovery. The library's metric axioms imply nonnegative metric values.\n\nThe forward map $F$ is **identifiable modulo the recovery equivalence on $U$** if\n\n$$x,x'\\in U\\text{ and }F(x)=F(x')\\quad\\Longrightarrow\\quad q(x)=q(x').$$\n\nIt is nonidentifiable modulo that equivalence if some two admissible truths have equal data and distinct target classes.\n\nA **deterministic data-only estimator** is a function $\\widehat q:Y\\to Q$. It is exact on $U$ if $\\widehat q(F(x))=q(x)$ for every $x\\in U$. The diagram below commutes exactly under this condition; it states the defining equality of functions and is not a proof device.\n\n```tikzcd\nU \\arrow[r,\"F\"] \\arrow[dr,\"q\"'] & Y \\arrow[d,\"\\widehat q\"] \\\\\n& Q\n```\n\nA **uniform stability modulus on $U$** is a nondecreasing function $\\omega:[0,\\infty)\\to[0,\\infty)$, with $\\omega(0)=0$ and $\\lim_{t\\downarrow0}\\omega(t)=0$, such that\n\n$$d_Q(q(x),q(x'))\\le\\omega\\bigl(d_Y(F(x),F(x'))\\bigr)\\qquad(x,x'\\in U).$$\n\nIdentifiability concerns equality of exact data; the modulus is a separate quantitative bound for all truth pairs. The estimator definition specifies no regularization procedure or convergence guarantee.",
+          "uses": [
+            "1.4",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F6",
+          "source": "thm-ip-kernel-directions-preclude-unrestricted-recovery",
+          "source_section": "Statement",
+          "quote": "Let $(X,d_X)$, $(Y,d_Y)$, and $(Q,d_Q)$ be metric spaces, let $U\\subseteq X$ be a nonempty admissible truth class, let $F:U\\to Y$ be a forward map, and let $q:U\\to Q$ assign each truth its target class. Let $x_0,x_1\\in U$, let $\\delta\\ge0$, and suppose a single datum $y\\in Y$ satisfies\n\n$$d_Y(y,F(x_0))\\le\\delta\\quad\\text{and}\\quad d_Y(y,F(x_1))\\le\\delta.$$\n\nFor every deterministic data-only estimator, meaning every function $\\widehat q:Y\\to Q$, the two target-class losses at that datum satisfy\n\n$$\\max\\{d_Q(\\widehat q(y),q(x_0)),d_Q(\\widehat q(y),q(x_1))\\}\\ge\\frac12d_Q(q(x_0),q(x_1)).$$\n\nIn particular, if $F(x_0)=F(x_1)$ but $q(x_0)\\ne q(x_1)$, no data-only estimator exactly recovers both truths. The quantitative bound also holds whenever the radius-$\\delta$ data balls around the two forward data share the observed datum $y$.",
+          "uses": [
+            "2.1",
+            "2.2"
+          ]
+        },
+        {
+          "fact": "F7",
+          "source": "lem-square-summable-sequences-form-a-hilbert-space",
+          "source_section": "Statement",
+          "quote": "The real sequence space\n$$\\ell^2(\\mathbb N,\\mathbb R)=\\left\\{x=(x_n):\\sum_{n\\in\\mathbb N}|x_n|^2<\\infty\\right\\},$$\nwith its canonical inner product and norm from\n[[def-square-summable-family-on-an-arbitrary-index-set]], is complete and\ntherefore is a real Hilbert space.",
+          "uses": [
+            "1.1",
+            "1.3",
+            "1.4",
+            "2.2"
+          ]
+        },
+        {
+          "fact": "F8",
+          "source": "def-square-summable-family-on-an-arbitrary-index-set",
+          "source_section": "Definition",
+          "quote": "Throughout, $\\mathbb F$ is $\\mathbb R$ or $\\mathbb C$ and families are indexed by\nan arbitrary set $I$, with no enumeration or countability assumed. Finite real lists use [[def-finite-sum]], and sums over finite subsets use [[def-finite-sum-in-a-commutative-monoid]] in the additive monoid of the scalar field. Disjoint splitting is [[lem-finite-sum-reindexing-and-fubini]], and scalar modulus estimates use [[lem-complex-conjugation-and-modulus-laws]]; all suprema and infima of real sets below are\ntaken in the complete ordered field $\\mathbb R$\n([[def-complete-ordered-field]]) or in $[0,+\\infty]\\subseteq\\overline{\\mathbb R}$\n([[def-extended-reals]], [[lem-extended-reals-complete]]).\n\n**Sums of nonnegative families.** Let $(c_i)_{i\\in I}$ be a family of\nnonnegative reals and let $\\operatorname{Fin}(I)$ be the set of finite subsets of\n$I$, ordered by inclusion. Define\n\n$$\\sum_{i\\in I}c_i:=\\sup\\Bigl\\{\\sum_{i\\in F}c_i \\;:\\; F\\in\\operatorname{Fin}(I)\\Bigr\\}\\in[0,+\\infty] .$$\n\nThe set of finite subsums is nonempty, since $\\varnothing$ contributes the empty\nsum $0$, so the supremum exists in $[0,+\\infty]$; it is a real number exactly\nwhen the finite subsums are bounded above in $\\mathbb R$, and $+\\infty$\notherwise. For finite $I$ the finite subsum at $I$ is the largest of all finite\nsubsums, because all terms are nonnegative, so the definition agrees with the\nfinite sum; in particular $\\sum_{i\\in I}c_i=0$ when every $c_i$ is $0$, and\n$I=\\varnothing$ gives the empty sum $0$.\n\n**Splitting identity and small tails.** Fix a finite $F\\subseteq I$. Every\nfinite $G\\subseteq I$ splits as the disjoint union $(G\\cap F)\\cup(G\\setminus F)$,\nso $\\sum_{i\\in G}c_i=\\sum_{i\\in G\\cap F}c_i+\\sum_{i\\in G\\setminus F}c_i\\le\\sum_{i\\in F}c_i+\\sum_{i\\in I\\setminus F}c_i$;\nconversely the finite $G$ with $F\\subseteq G$ satisfy\n$\\sum_{i\\in G}c_i=\\sum_{i\\in F}c_i+\\sum_{i\\in G\\setminus F}c_i$. Taking suprema,\nwith the constant $\\sum_{i\\in F}c_i$ passing through the supremum,\n\n$$\\sum_{i\\in I}c_i=\\sum_{i\\in F}c_i+\\sum_{i\\in I\\setminus F}c_i . \\qquad (1)$$\n\nConsequently, if $S:=\\sum_{i\\in I}c_i$ is finite, then for every real\n$\\varepsilon>0$ there is a finite $F\\subseteq I$ with\n$\\sum_{i\\in I\\setminus F}c_i<\\varepsilon$: the finite subsums form a nonempty\nbounded-above set with supremum $S$, so by the epsilon characterisation of the\nsupremum ([[lem-sup-epsilon]]) some finite $F$ has\n$S-\\varepsilon<\\sum_{i\\in F}c_i$, and (1) gives\n$\\sum_{i\\in I\\setminus F}c_i=S-\\sum_{i\\in F}c_i<\\varepsilon$. Such an $F$ is\ncalled a **tail-control set** for $\\varepsilon$.\n\n**Sums of scalar families.** Now let $(a_i)_{i\\in I}$ be a family in $\\mathbb F$\nand put $s_F:=\\sum_{i\\in F}a_i$ for finite $F\\subseteq I$. The set\n$\\operatorname{Fin}(I)$ with inclusion is a directed preorder: it is nonempty and\n$F\\cup G$ is a common upper bound of $F$ and $G$\n([[def-directed-set-and-net]]). Hence $(s_F)_{F\\in\\operatorname{Fin}(I)}$ is a\nnet in $\\mathbb F$, the **finite-subset net** of the family, and the family is\n**summable** when this net converges\n([[def-net-convergence-and-cluster-point]]). The scalar metric is the usual real metric or [[def-complex-metric-convergence-and-continuity]]. These metric spaces are Hausdorff by [[thm-metric-hausdorff-separation]]. A net in $\\mathbb F$ has at most one limit\n([[thm-hausdorff-iff-net-limits-are-unique]]), so for a summable family the\nlimit is unique and we write $\\sum_{i\\in I}a_i:=\\lim_F s_F$ for it. The family is\n**absolutely summable** when $\\sum_{i\\in I}|a_i|<+\\infty$ in the sense above.\n\n**Every absolutely summable family is summable, in ZF.** Assume\n$S:=\\sum_{i\\in I}|a_i|$ is finite and put $S_F:=\\sum_{i\\in F}|a_i|$ for finite\n$F$. For finite $F,G\\subseteq I$ the triangle inequality for finite sums and the\nfact that a finite subsum is at most the whole nonnegative sum give\n\n$$|s_F-s_G|\\le\\sum_{i\\in F\\triangle G}|a_i|\\le S-S_{F\\cap G} . \\qquad (2)$$\n\nNow fix a real $\\varepsilon>0$, let $F_0$ be a tail-control set for\n$\\varepsilon$, and let $F,G\\supseteq F_0$ be finite. Then $F\\cap G\\supseteq F_0$,\nso $S-S_{F\\cap G}\\le S-S_{F_0}<\\varepsilon$ and (2) gives\n$|s_F-s_G|<\\varepsilon$.\n\nFirst suppose $\\mathbb F=\\mathbb R$. For each finite $F$ define\n$A_F:=\\inf\\{s_G : G\\supseteq F\\}$ and $B_F:=\\sup\\{s_G : G\\supseteq F\\}$ over\nfinite $G$. Both are real numbers, because $|s_G|\\le S_G\\le S$, so the two sets\nare nonempty and bounded, and $A_F\\le B_F$. If $H\\supseteq F$ then\n$A_H\\ge A_F$ and $B_H\\le B_F$. Let $L:=\\sup_FA_F$ and $U:=\\inf_FB_F$.\nSince $A_F\\le s_{F\\cup H}\\le B_H$ for all finite $F,H$, we get $L\\le U$.\nMoreover, the preceding estimate holds for every pair $F,G\\supseteq F_0$;\ntaking the supremum over $F$ and the infimum over $G$ gives\n$B_{F_0}-A_{F_0}\\le\\varepsilon$. Hence\n$0\\le U-L\\le B_{F_0}-A_{F_0}\\le\\varepsilon$ for every $\\varepsilon>0$, so\n$L=U=:s$. If $F\\supseteq F_0$, then both $s_F$ and $s$ lie in\n$[A_{F_0},B_{F_0}]$, and therefore $|s_F-s|\\le\\varepsilon$.\n\nIf $\\mathbb F=\\mathbb C$, apply the real argument just proved to the families\n$(\\operatorname{Re}a_i)$ and $(\\operatorname{Im}a_i)$. They are absolutely\nsummable because $|\\operatorname{Re}a_i|,|\\operatorname{Im}a_i|\\le|a_i|$.\nTheir finite-subset nets converge to real numbers $r$ and $t$, respectively,\nso $s_F\\to r+it$ in $\\mathbb C$. Thus every absolutely summable real or complex\nfamily is summable. **No choice principle is used**: the construction uses only\ntwo-sided suprema in $\\mathbb R$.\n\n**Linearity and absolute value.** If $(a_i)$ and $(b_i)$ are absolutely\nsummable and $\\lambda\\in\\mathbb F$, then so are $(a_i+b_i)$ and\n$(\\lambda a_i)$, and\n\n$$\\sum_{i\\in I}(a_i+b_i)=\\sum_{i\\in I}a_i+\\sum_{i\\in I}b_i,\\qquad \\sum_{i\\in I}\\lambda a_i=\\lambda\\sum_{i\\in I}a_i,\\qquad \\Bigl|\\sum_{i\\in I}a_i\\Bigr|\\le\\sum_{i\\in I}|a_i| ,$$\n\nbecause the corresponding identities hold for every finite subsum, both sides\nare limits of the corresponding finite-subset nets, and addition, scalar\nmultiplication and the modulus are continuous. The splitting identity (1)\nlikewise passes to absolutely summable scalar families:\n$\\sum_{i\\in I}a_i=\\sum_{i\\in F}a_i+\\sum_{i\\in I\\setminus F}a_i$ for every finite\n$F$, because finite subsums over sets containing $F$ converge to the left-hand\nside and equal the finite sum over $F$ plus the finite subsum of the tail, whose\nnet converges to the tail sum.\n\n**The finite-dimensional Cauchy-Schwarz inequality.** Let $(u_k)_{0\\le k<m}$ and $(v_k)_{0\\le k<m}$ be scalar lists, for $m\\in\\mathbb N$ and let $t\\in\\mathbb R$. Every term of\n$\\sum_{k<m}(|u_k|-t|v_k|)^2$ is nonnegative, so for all real $t$\n\n$$0\\le\\sum_{k<m}|u_k|^2-2t\\sum_{k<m}|u_k||v_k|+t^2\\sum_{k<m}|v_k|^2 .$$\n\nIf $\\sum_{k<m}|v_k|^2>0$, substituting\n$t=\\bigl(\\sum_{k<m}|u_k||v_k|\\bigr)/\\bigl(\\sum_{k<m}|v_k|^2\\bigr)$ gives\n$\\bigl(\\sum_{k<m}|u_k||v_k|\\bigr)^2\\le\\bigl(\\sum_{k<m}|u_k|^2\\bigr)\\bigl(\\sum_{k<m}|v_k|^2\\bigr)$;\nif $\\sum_{k<m}|v_k|^2=0$ then every $v_k=0$ and both sides are $0$. In either case\n$\\sum_{k<m}|u_k||v_k|\\le\\bigl(\\sum_{k<m}|u_k|^2\\bigr)^{1/2}\\bigl(\\sum_{k<m}|v_k|^2\\bigr)^{1/2}$\nafter taking square roots, and applying the modulus inequality for finite sums\nto $u_k\\overline{v_k}$ also gives\n\n$$\\Bigl|\\sum_{k<m}u_k\\overline{v_k}\\Bigr|\\le\\Bigl(\\sum_{k<m}|u_k|^2\\Bigr)^{1/2}\\Bigl(\\sum_{k<m}|v_k|^2\\Bigr)^{1/2} . \\qquad (3)$$\n\n**The space $\\ell^2(I)$.** For a family $a=(a_i)_{i\\in I}$ in $\\mathbb F$ define\n$Q(a):=\\sum_{i\\in I}|a_i|^2$. If $Q(a)$ is finite, set $\\|a\\|_2:=\\sqrt{Q(a)}$, using the nonnegative real square root of [[thm-of-square-roots]]; if $Q(a)=+\\infty$, set $\\|a\\|_2:=+\\infty$. This is a case definition, not exponentiation of an extended real. Let\n\n$$\\ell^2(I,\\mathbb F):=\\{\\,a=(a_i)_{i\\in I} : \\|a\\|_2<+\\infty\\,\\}.$$\n\nThe set $\\ell^2(I,\\mathbb F)$ is a vector space over $\\mathbb F$: it contains the\nzero family, is closed under scalar multiplication because\n$\\|\\lambda a\\|_2=|\\lambda|\\,\\|a\\|_2$, and is closed under addition because (3)\napplied to finite subsums gives $\\|a+b\\|_2\\le\\|a\\|_2+\\|b\\|_2<+\\infty$. The same\ninequality is the triangle inequality for $\\|\\cdot\\|_2$, which is moreover\nnonnegative, vanishes only for the zero family (an arbitrary sum of nonnegative\nterms with supremum $0$ has every term $0$) and satisfies\n$\\|\\lambda a\\|_2=|\\lambda|\\,\\|a\\|_2$; thus $\\|\\cdot\\|_2$ is a norm on\n$\\ell^2(I,\\mathbb F)$. Finally the **pairing**\n$\\langle a,b\\rangle:=\\sum_{i\\in I}a_i\\overline{b_i}$ is well defined on\n$\\ell^2(I,\\mathbb F)\\times\\ell^2(I,\\mathbb F)$, because\n$|a_i\\overline{b_i}|=|a_i||b_i|$ has finite nonnegative sum by (3); it is linear\nin the first variable, conjugate symmetric, positive definite, and satisfies\n$\\langle a,a\\rangle=\\|a\\|_2^2$, all by the corresponding finite identities and\nthe linearity of the sum. Consequently $\\ell^2(I,\\mathbb F)$ is an inner-product\nspace, and $e_i\\in\\ell^2(I,\\mathbb F)$ denotes the family that is $1$ at $i$ and\n$0$ elsewhere. **Nothing here asserts that $\\ell^2(I,\\mathbb F)$ is complete**;\nthat follows later, from an orthonormal basis of a Hilbert space.",
+          "uses": [
+            "1.3"
+          ],
+          "reviewed": {
+            "upheld": true,
+            "by": "step5-v2-gate-r1-u1",
+            "reason": "The source explicitly defines the sum of any nonnegative family as the supremum of finite subsums. Its separate binary vector-space operation discussion restricts no index set; step 1.3 applies that definition to a nonnegative countable family."
+          }
+        },
+        {
+          "fact": "F9",
+          "source": "def-square-summable-family-on-an-arbitrary-index-set",
+          "source_section": "Definition",
+          "quote": "Throughout, $\\mathbb F$ is $\\mathbb R$ or $\\mathbb C$ and families are indexed by\nan arbitrary set $I$, with no enumeration or countability assumed. Finite real lists use [[def-finite-sum]], and sums over finite subsets use [[def-finite-sum-in-a-commutative-monoid]] in the additive monoid of the scalar field. Disjoint splitting is [[lem-finite-sum-reindexing-and-fubini]], and scalar modulus estimates use [[lem-complex-conjugation-and-modulus-laws]]; all suprema and infima of real sets below are\ntaken in the complete ordered field $\\mathbb R$\n([[def-complete-ordered-field]]) or in $[0,+\\infty]\\subseteq\\overline{\\mathbb R}$\n([[def-extended-reals]], [[lem-extended-reals-complete]]).\n\n**Sums of nonnegative families.** Let $(c_i)_{i\\in I}$ be a family of\nnonnegative reals and let $\\operatorname{Fin}(I)$ be the set of finite subsets of\n$I$, ordered by inclusion. Define\n\n$$\\sum_{i\\in I}c_i:=\\sup\\Bigl\\{\\sum_{i\\in F}c_i \\;:\\; F\\in\\operatorname{Fin}(I)\\Bigr\\}\\in[0,+\\infty] .$$\n\nThe set of finite subsums is nonempty, since $\\varnothing$ contributes the empty\nsum $0$, so the supremum exists in $[0,+\\infty]$; it is a real number exactly\nwhen the finite subsums are bounded above in $\\mathbb R$, and $+\\infty$\notherwise. For finite $I$ the finite subsum at $I$ is the largest of all finite\nsubsums, because all terms are nonnegative, so the definition agrees with the\nfinite sum; in particular $\\sum_{i\\in I}c_i=0$ when every $c_i$ is $0$, and\n$I=\\varnothing$ gives the empty sum $0$.\n\n**Splitting identity and small tails.** Fix a finite $F\\subseteq I$. Every\nfinite $G\\subseteq I$ splits as the disjoint union $(G\\cap F)\\cup(G\\setminus F)$,\nso $\\sum_{i\\in G}c_i=\\sum_{i\\in G\\cap F}c_i+\\sum_{i\\in G\\setminus F}c_i\\le\\sum_{i\\in F}c_i+\\sum_{i\\in I\\setminus F}c_i$;\nconversely the finite $G$ with $F\\subseteq G$ satisfy\n$\\sum_{i\\in G}c_i=\\sum_{i\\in F}c_i+\\sum_{i\\in G\\setminus F}c_i$. Taking suprema,\nwith the constant $\\sum_{i\\in F}c_i$ passing through the supremum,\n\n$$\\sum_{i\\in I}c_i=\\sum_{i\\in F}c_i+\\sum_{i\\in I\\setminus F}c_i . \\qquad (1)$$\n\nConsequently, if $S:=\\sum_{i\\in I}c_i$ is finite, then for every real\n$\\varepsilon>0$ there is a finite $F\\subseteq I$ with\n$\\sum_{i\\in I\\setminus F}c_i<\\varepsilon$: the finite subsums form a nonempty\nbounded-above set with supremum $S$, so by the epsilon characterisation of the\nsupremum ([[lem-sup-epsilon]]) some finite $F$ has\n$S-\\varepsilon<\\sum_{i\\in F}c_i$, and (1) gives\n$\\sum_{i\\in I\\setminus F}c_i=S-\\sum_{i\\in F}c_i<\\varepsilon$. Such an $F$ is\ncalled a **tail-control set** for $\\varepsilon$.\n\n**Sums of scalar families.** Now let $(a_i)_{i\\in I}$ be a family in $\\mathbb F$\nand put $s_F:=\\sum_{i\\in F}a_i$ for finite $F\\subseteq I$. The set\n$\\operatorname{Fin}(I)$ with inclusion is a directed preorder: it is nonempty and\n$F\\cup G$ is a common upper bound of $F$ and $G$\n([[def-directed-set-and-net]]). Hence $(s_F)_{F\\in\\operatorname{Fin}(I)}$ is a\nnet in $\\mathbb F$, the **finite-subset net** of the family, and the family is\n**summable** when this net converges\n([[def-net-convergence-and-cluster-point]]). The scalar metric is the usual real metric or [[def-complex-metric-convergence-and-continuity]]. These metric spaces are Hausdorff by [[thm-metric-hausdorff-separation]]. A net in $\\mathbb F$ has at most one limit\n([[thm-hausdorff-iff-net-limits-are-unique]]), so for a summable family the\nlimit is unique and we write $\\sum_{i\\in I}a_i:=\\lim_F s_F$ for it. The family is\n**absolutely summable** when $\\sum_{i\\in I}|a_i|<+\\infty$ in the sense above.\n\n**Every absolutely summable family is summable, in ZF.** Assume\n$S:=\\sum_{i\\in I}|a_i|$ is finite and put $S_F:=\\sum_{i\\in F}|a_i|$ for finite\n$F$. For finite $F,G\\subseteq I$ the triangle inequality for finite sums and the\nfact that a finite subsum is at most the whole nonnegative sum give\n\n$$|s_F-s_G|\\le\\sum_{i\\in F\\triangle G}|a_i|\\le S-S_{F\\cap G} . \\qquad (2)$$\n\nNow fix a real $\\varepsilon>0$, let $F_0$ be a tail-control set for\n$\\varepsilon$, and let $F,G\\supseteq F_0$ be finite. Then $F\\cap G\\supseteq F_0$,\nso $S-S_{F\\cap G}\\le S-S_{F_0}<\\varepsilon$ and (2) gives\n$|s_F-s_G|<\\varepsilon$.\n\nFirst suppose $\\mathbb F=\\mathbb R$. For each finite $F$ define\n$A_F:=\\inf\\{s_G : G\\supseteq F\\}$ and $B_F:=\\sup\\{s_G : G\\supseteq F\\}$ over\nfinite $G$. Both are real numbers, because $|s_G|\\le S_G\\le S$, so the two sets\nare nonempty and bounded, and $A_F\\le B_F$. If $H\\supseteq F$ then\n$A_H\\ge A_F$ and $B_H\\le B_F$. Let $L:=\\sup_FA_F$ and $U:=\\inf_FB_F$.\nSince $A_F\\le s_{F\\cup H}\\le B_H$ for all finite $F,H$, we get $L\\le U$.\nMoreover, the preceding estimate holds for every pair $F,G\\supseteq F_0$;\ntaking the supremum over $F$ and the infimum over $G$ gives\n$B_{F_0}-A_{F_0}\\le\\varepsilon$. Hence\n$0\\le U-L\\le B_{F_0}-A_{F_0}\\le\\varepsilon$ for every $\\varepsilon>0$, so\n$L=U=:s$. If $F\\supseteq F_0$, then both $s_F$ and $s$ lie in\n$[A_{F_0},B_{F_0}]$, and therefore $|s_F-s|\\le\\varepsilon$.\n\nIf $\\mathbb F=\\mathbb C$, apply the real argument just proved to the families\n$(\\operatorname{Re}a_i)$ and $(\\operatorname{Im}a_i)$. They are absolutely\nsummable because $|\\operatorname{Re}a_i|,|\\operatorname{Im}a_i|\\le|a_i|$.\nTheir finite-subset nets converge to real numbers $r$ and $t$, respectively,\nso $s_F\\to r+it$ in $\\mathbb C$. Thus every absolutely summable real or complex\nfamily is summable. **No choice principle is used**: the construction uses only\ntwo-sided suprema in $\\mathbb R$.\n\n**Linearity and absolute value.** If $(a_i)$ and $(b_i)$ are absolutely\nsummable and $\\lambda\\in\\mathbb F$, then so are $(a_i+b_i)$ and\n$(\\lambda a_i)$, and\n\n$$\\sum_{i\\in I}(a_i+b_i)=\\sum_{i\\in I}a_i+\\sum_{i\\in I}b_i,\\qquad \\sum_{i\\in I}\\lambda a_i=\\lambda\\sum_{i\\in I}a_i,\\qquad \\Bigl|\\sum_{i\\in I}a_i\\Bigr|\\le\\sum_{i\\in I}|a_i| ,$$\n\nbecause the corresponding identities hold for every finite subsum, both sides\nare limits of the corresponding finite-subset nets, and addition, scalar\nmultiplication and the modulus are continuous. The splitting identity (1)\nlikewise passes to absolutely summable scalar families:\n$\\sum_{i\\in I}a_i=\\sum_{i\\in F}a_i+\\sum_{i\\in I\\setminus F}a_i$ for every finite\n$F$, because finite subsums over sets containing $F$ converge to the left-hand\nside and equal the finite sum over $F$ plus the finite subsum of the tail, whose\nnet converges to the tail sum.\n\n**The finite-dimensional Cauchy-Schwarz inequality.** Let $(u_k)_{0\\le k<m}$ and $(v_k)_{0\\le k<m}$ be scalar lists, for $m\\in\\mathbb N$ and let $t\\in\\mathbb R$. Every term of\n$\\sum_{k<m}(|u_k|-t|v_k|)^2$ is nonnegative, so for all real $t$\n\n$$0\\le\\sum_{k<m}|u_k|^2-2t\\sum_{k<m}|u_k||v_k|+t^2\\sum_{k<m}|v_k|^2 .$$\n\nIf $\\sum_{k<m}|v_k|^2>0$, substituting\n$t=\\bigl(\\sum_{k<m}|u_k||v_k|\\bigr)/\\bigl(\\sum_{k<m}|v_k|^2\\bigr)$ gives\n$\\bigl(\\sum_{k<m}|u_k||v_k|\\bigr)^2\\le\\bigl(\\sum_{k<m}|u_k|^2\\bigr)\\bigl(\\sum_{k<m}|v_k|^2\\bigr)$;\nif $\\sum_{k<m}|v_k|^2=0$ then every $v_k=0$ and both sides are $0$. In either case\n$\\sum_{k<m}|u_k||v_k|\\le\\bigl(\\sum_{k<m}|u_k|^2\\bigr)^{1/2}\\bigl(\\sum_{k<m}|v_k|^2\\bigr)^{1/2}$\nafter taking square roots, and applying the modulus inequality for finite sums\nto $u_k\\overline{v_k}$ also gives\n\n$$\\Bigl|\\sum_{k<m}u_k\\overline{v_k}\\Bigr|\\le\\Bigl(\\sum_{k<m}|u_k|^2\\Bigr)^{1/2}\\Bigl(\\sum_{k<m}|v_k|^2\\Bigr)^{1/2} . \\qquad (3)$$\n\n**The space $\\ell^2(I)$.** For a family $a=(a_i)_{i\\in I}$ in $\\mathbb F$ define\n$Q(a):=\\sum_{i\\in I}|a_i|^2$. If $Q(a)$ is finite, set $\\|a\\|_2:=\\sqrt{Q(a)}$, using the nonnegative real square root of [[thm-of-square-roots]]; if $Q(a)=+\\infty$, set $\\|a\\|_2:=+\\infty$. This is a case definition, not exponentiation of an extended real. Let\n\n$$\\ell^2(I,\\mathbb F):=\\{\\,a=(a_i)_{i\\in I} : \\|a\\|_2<+\\infty\\,\\}.$$\n\nThe set $\\ell^2(I,\\mathbb F)$ is a vector space over $\\mathbb F$: it contains the\nzero family, is closed under scalar multiplication because\n$\\|\\lambda a\\|_2=|\\lambda|\\,\\|a\\|_2$, and is closed under addition because (3)\napplied to finite subsums gives $\\|a+b\\|_2\\le\\|a\\|_2+\\|b\\|_2<+\\infty$. The same\ninequality is the triangle inequality for $\\|\\cdot\\|_2$, which is moreover\nnonnegative, vanishes only for the zero family (an arbitrary sum of nonnegative\nterms with supremum $0$ has every term $0$) and satisfies\n$\\|\\lambda a\\|_2=|\\lambda|\\,\\|a\\|_2$; thus $\\|\\cdot\\|_2$ is a norm on\n$\\ell^2(I,\\mathbb F)$. Finally the **pairing**\n$\\langle a,b\\rangle:=\\sum_{i\\in I}a_i\\overline{b_i}$ is well defined on\n$\\ell^2(I,\\mathbb F)\\times\\ell^2(I,\\mathbb F)$, because\n$|a_i\\overline{b_i}|=|a_i||b_i|$ has finite nonnegative sum by (3); it is linear\nin the first variable, conjugate symmetric, positive definite, and satisfies\n$\\langle a,a\\rangle=\\|a\\|_2^2$, all by the corresponding finite identities and\nthe linearity of the sum. Consequently $\\ell^2(I,\\mathbb F)$ is an inner-product\nspace, and $e_i\\in\\ell^2(I,\\mathbb F)$ denotes the family that is $1$ at $i$ and\n$0$ elsewhere. **Nothing here asserts that $\\ell^2(I,\\mathbb F)$ is complete**;\nthat follows later, from an orthonormal basis of a Hilbert space.",
+          "uses": [
+            "1.4",
+            "2.2"
+          ],
+          "reviewed": {
+            "upheld": true,
+            "by": "step5-v2-gate-r1-u1",
+            "reason": "The source explicitly defines e_i as the family equal to one at i and zero elsewhere. Specializing its arbitrary index set to the stated zero-based natural numbers gives exactly this fact; binary addition is not an arity restriction on the family."
+          }
+        },
+        {
+          "fact": "F10",
+          "source": "def-hilbert-space",
+          "source_section": "Definition",
+          "quote": "A **real Hilbert space** is a real inner-product space $H$ whose induced-length metric is complete: every Cauchy sequence in $H$ for the norm $\\|v\\|=\\sqrt{\\langle v,v\\rangle}$ converges to a point of $H$. A **complex Hilbert space** is a complex inner-product space with the same completeness property, so that a Hilbert space is exactly a real or complex inner-product space that is a Banach space for its induced norm (Banach space).\n\n**The completion convention is the Cauchy-sequence one.**\nBanach space defines completeness by convergence of Cauchy sequences, and this page keeps that convention throughout. It is weaker than $\\sigma$-completeness — the assertion that every decreasing sequence of nonempty closed subsets with diameters tending to zero has a nonempty intersection. The two agree in ZFC, but Blackadar, Farah and Karagila note that the closest-point theorem on a $\\sigma$-complete inner-product space is provable in ZF, whereas the Cauchy-complete form used below consumes the Axiom of Countable Choice; nothing here silently imports the stronger notion.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F11",
+          "source": "lem-geometric-sequence-null",
+          "source_section": "Statement",
+          "quote": "Let $r \\in \\mathbb{R}$ and let $r^k$ be the integer power (Integer powers $a^m$).\n\n1. If $|r| < 1$ then $(r^k)$ is **null**, that is $r^k \\to 0$\n   (Limits and Cauchy sequences of reals).\n2. If $|r| > 1$ then $(|r|^k)$ **diverges to $+\\infty$**\n   (Divergence to $+\\infty$ and to $-\\infty$).\n\nClaim 2 is stated for $|r|^k$ and not for $r^k$ on purpose: for $r < -1$ the\nterms $r^k$ alternate in sign and are unbounded, so they neither converge nor\ndiverge to $+\\infty$; what is true of them is the statement about their absolute\nvalues.\n\nBoth claims come from Bernoulli's inequality (Bernoulli's inequality $(1+x)^n \\ge 1 + nx$) and\nthe Archimedean property. Nothing here needs the least-upper-bound property\nexcept through Every complete ordered field is Archimedean and For every $\\varepsilon > 0$ in a complete ordered field there is a natural $n \\ge 1$ with $1/n < \\varepsilon$.",
+          "uses": [
+            "1.4"
+          ]
+        },
+        {
+          "fact": "F12",
+          "source": "lem-power-monotone",
+          "source_section": "Statement",
+          "quote": "Let $\\mathbb{R}$ be an ordered field (Ordered field), let\n$a, b \\in \\mathbb{R}$ and let $n \\in \\mathbb{N}$, with powers as in\nInteger powers $a^m$.\n\n1. **Signs.** If $a \\ge 0$ then $a^n \\ge 0$, and if $a > 0$ then $a^n > 0$.\n2. **Strict monotonicity in the base.** If $0 \\le a < b$ and $n \\ge 1$ then $a^n < b^n$. Consequently, for $a, b \\ge 0$ and $n \\ge 1$: $a < b \\iff a^n < b^n$ and $a \\le b \\iff a^n \\le b^n$, and $x \\mapsto x^n$ is injective on $\\{x \\in \\mathbb{R} : x \\ge 0\\}$.\n3. **Comparison with the base.** If $a \\ge 1$ and $n \\ge 1$ then $a^n \\ge a \\ge 1$; if $a > 1$ and $n \\ge 1$ then $a^n \\ge a > 1$; and if $0 \\le a \\le 1$ then $a^n \\le 1$.\n4. **Monotonicity in the exponent.** If $a > 1$ then $a^m < a^n$ whenever $m < n$ in $\\mathbb{N}$; if $a = 1$ then $a^n = 1$ for all $n$; and if $0 < a < 1$ then $a^m > a^n$ whenever $m < n$.",
+          "uses": [
+            "1.3",
+            "1.4"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "model-metrics",
+          "claim": "The $d_1$ formulas on $\\mathbb R^1$ and $\\mathbb R^2$ are metrics by [F3]. The real $\\ell^2$ space is a Hilbert space by [F7] and [F10], so its canonical norm metric is $d_2(x,z):=\\|x-z\\|_2$. These are the metrics used in the three models.",
+          "step": "1.1",
+          "inputs": [
+            "F3",
+            "F7",
+            "F10"
+          ]
+        },
+        {
+          "id": "projection-kernel",
+          "claim": "The coordinate projection $A(a,b)=(a)$ is linear by coordinatewise addition and scalar multiplication, so $A(a,b)=(0)$ exactly when $a=0$; hence $\\ker A=\\{(0,t):t\\in\\mathbb R\\}$ and $(0,1)\\ne(0,0)$ lies in its kernel.",
+          "step": "1.2",
+          "inputs": [
+            "F1",
+            "F2"
+          ]
+        },
+        {
+          "id": "diagonal-well-definedness",
+          "claim": "For every $x\\in\\ell^2$ and finite $E\\subseteq\\mathbb N$, [F12] gives $\\sum_{n\\in E}|(Dx)_n|^2=\\sum_{n\\in E}(1/2)^{2n}|x_n|^2\\le\\sum_{n\\in E}|x_n|^2\\le\\|x\\|_2^2$. Taking the supremum over finite $E$ by [F8] shows $\\sum_n|(Dx)_n|^2\\le\\|x\\|_2^2<\\infty$, hence $Dx\\in\\ell^2$ by [F7]. For real scalars $a,b$ and sequences $x,z$, each coordinate satisfies $(D(ax+bz))_n=(1/2)^n(ax_n+bz_n)=a(Dx)_n+b(Dz)_n$; equality of all coordinates gives $D(ax+bz)=aDx+bDz$, so $D$ is linear by [F2].",
+          "step": "1.3",
+          "inputs": [
+            "F2",
+            "F7",
+            "F8",
+            "F12",
+            "algebra"
+          ]
+        },
+        {
+          "id": "diagonal-injectivity-and-instability",
+          "claim": "Since every coefficient $(1/2)^n$ is positive by [F12], $Dx=0$ implies $x_n=0$ for every $n$, so $D$ is injective. For each $n$, $De_n=(1/2)^n e_n$ and hence $\\|De_n\\|_2=(1/2)^n\\to0$ by [F11], while $\\|e_n\\|_2=1$ by [F7, F9]. At $n=0$ the coefficient is $1$, so the first coordinate is unchanged; the decay is as $n\\to\\infty$. If a uniform stability modulus $\\omega$ existed, [F5] applied to $0,e_n$ would give $1\\le\\omega((1/2)^n)$ for all $n$; but the modulus limit supplies $\\eta>0$ with $0<t<\\eta\\Rightarrow\\omega(t)<1/2$, and [F11] supplies $n$ with $0<(1/2)^n<\\eta$, a contradiction.",
+          "step": "1.4",
+          "inputs": [
+            "F5",
+            "F7",
+            "F9",
+            "F11",
+            "F12",
+            "algebra"
+          ]
+        },
+        {
+          "id": "finite-ambiguity-bound",
+          "claim": "We have $A(x_0)=A(x_1)=(0)$ and $d_1(x_0,x_1)=|0-0|+|0-1|=1$. Applying the two-truth theorem with $y=(0)$ and $\\delta=0$ gives maximum loss at least $1/2$ for every estimator.",
+          "step": "2.1",
+          "inputs": [
+            "F3",
+            "F4",
+            "F6",
+            "step 1.2",
+            "algebra"
+          ]
+        },
+        {
+          "id": "diagonal-noisy-recovery-bound",
+          "claim": "For each $n$, $d_2(0,D(0))=0\\le(1/2)^n$ and $d_2(0,D(e_n))=(1/2)^n$. The target truths have distance $d_2(0,e_n)=1$, so the two-truth theorem at common datum $y=0$ and radius $\\delta=(1/2)^n$ gives maximum estimator loss at least $1/2$.",
+          "step": "2.2",
+          "inputs": [
+            "F4",
+            "F6",
+            "F7",
+            "F9",
+            "step 1.4",
+            "algebra"
+          ]
+        },
+        {
+          "id": "constrained-stable-inverse",
+          "claim": "On $U_0$, $A(a,0)=(a)$, so equality of data implies equality of truths. For $a,b\\in\\mathbb R$, $d_1((a,0),(b,0))=|a-b|=d_1((a),(b))=d_Y(A(a,0),A(b,0))$; therefore the inverse $\\widehat q((a))=(a,0)$ is isometric, and $\\omega(t)=t$ satisfies the modulus conditions in [F5]. This is only a claim about the specified restricted class.",
+          "step": "3.1",
+          "inputs": [
+            "F1",
+            "F3",
+            "F4",
+            "F5",
+            "step 1.2",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "Step 1.1 records the metric models; the sequence space and constrained class each contain zero."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Step 2.1 checks the exact-data radius delta=0 at a pair with equal data and positive separation."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Step 1.4 checks the n=0 coefficient, which is exactly one, while the geometric decay concerns n tending to infinity."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Step 3.1 checks the degenerate constrained truth class that removes the displayed kernel direction and leaves an isometric inverse."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Steps 2.1 and 2.2 check respectively zero noise and the positive radii (1/2)^n for every coordinate."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Steps 1.2–2.2 construct each truth, coordinate vector, and datum explicitly; the finite-supremum argument uses no choice axiom."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The example proves specific implications and bounds; it asserts no if-and-only-if characterization."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The example proves specific implications and bounds; it asserts no if-and-only-if characterization."
+        }
+      ],
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "alpha-batch-1",
+        "date": "2026-10-21",
+        "notes": "Independently reviewed the complete current Example, F1–F12, Verification 1.1–3.1, all eleven direct dependencies and the metric/nonnegativity suppliers of the two-truth theorem. Reader-1 and refute-1 report no findings; current source, manifest and pre-enrichment contract hashes match both frozen snapshots. Step 1.1 uses n=1,2, satisfying the positive-dimension metric hypothesis, and the real canonical ell2 norm with Cauchy-sequence completeness. The completeness supplier constructs unique coordinate limits, bounds finite subsums, and proves norm convergence without choice. Step 1.2 gives the projection kernel by coordinate equality. Step 1.3 bounds every finite subsum of |Dx| squared by ||x|| squared; the supremum definition proves well-definedness, and coordinate algebra proves linearity. Step 1.4 uses strictly positive coefficients, including coefficient 1 at n=0; their geometric decay and unit vectors contradict the right limit at zero of any proposed modulus. No surjectivity or bounded inverse on all data is asserted for D. Steps 2.1–2.2 meet the two-truth theorem's common-datum hypotheses: separation 1, radius 0 for A, and positive radius 2^(-n) for D. The theorem follows from the target triangle inequality and symmetry at one estimator output and applies to every total deterministic estimator. Step 3.1 explicitly inverts A on U0 onto R1, preserves d1, and supplies omega(t)=t, including t=0. All classes contain zero; finite empty subsums are zero; no choice, compactness, regularization, or statistical premise is used. The defining triangle diagram in the stability supplier correctly expresses q=qhat composed with F; no diagram is needed for this example's proof. All statement links follow complete statements in reference sections. Checked source context only: Clason v2 Chapter 3 opening, printed p.15, and Chapter 4 opening/Definition 4.1, printed p.30; van Leeuwen–Brune Lecture 1 sections 1.2 and 1.3.2; Daras et al. v1 section 1.2, physical PDF page 4. These contextual citations supply no unproved premise; the example calculations are local. No defect, repair, escalation, or affected outside consumer found. Detailed evidence and reading limits: research/inverse-problems-knot-theory-all-109-2026-10-19-alpha-batch-1-3a.md."
+      }
+    }
+  }
+}

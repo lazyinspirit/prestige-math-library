@@ -50,7 +50,7 @@ component $i$ and $\widehat\eta_i(s)>-1$ at every other parameter.
 
 [F1] A regular oriented diagram has a fixed planar projection which is an immersion with finitely many transverse double points and records which branch is over at each point. [[def-regular-oriented-link-diagram]]
 
-[F2] A smooth isotopy of a compact embedded link in a boundaryless smooth $3$-manifold extends to an ambient isotopy under countable choice. [[lem-a-smooth-isotopy-of-compact-embedded-submanifolds-extends-to-an-ambient-isotopy]], [[def-countable-choice]]
+[F2] A smooth isotopy of a compact embedded link in a boundaryless smooth $3$-manifold, constant near both ends of the time interval, extends to an ambient isotopy supported in any prescribed open neighborhood of its track under countable choice. [[lem-a-smooth-isotopy-of-compact-embedded-submanifolds-extends-to-an-ambient-isotopy]], [[def-countable-choice]]
 
 ## Proof
 

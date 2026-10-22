@@ -1,0 +1,197 @@
+[
+  {
+    "order": 3062,
+    "id": "sparse-recovery-and-nullspace-certificates",
+    "kind": "A",
+    "category": "inverse-problems",
+    "title": "Sparse recovery and nullspace certificates",
+    "companion": "sparse-recovery-and-nullspace-certificates-examples",
+    "requires": [
+      "inverse-problems-identifiability-and-stability",
+      "linear-operators-pseudoinverses-and-picard-criteria",
+      "proximal-gradient-and-accelerated-composite-optimization"
+    ],
+    "items": [
+      {
+        "id": "def-ip-nullspace-property",
+        "kind": "definition",
+        "title": "The strict nullspace property",
+        "deps": [
+          "def-matrix-space",
+          "def-matrix-product-and-identity-matrix",
+          "def-p-norms-on-rn"
+        ],
+        "statement": "Let m,n∈N with m,n≥1 and A∈M_{m×n}(R)=R^{m×n}. Put [m]={1,…,m} and [n]={1,…,n}. The library indexes vector coordinates and matrix columns by n={0,…,n−1} and matrix rows by m={0,…,m−1}; relabel by j↦j−1, writing u_j=u(j−1), A_ij=A(i−1,j−1), and (Au)_i=Σ_{j=1}^n A_ij u_j. Set ker A={h∈R^n:Ah=0}. For h∈R^n and S⊆[n], h_S is h on S and zero elsewhere; S^c is the complement in [n]. Define ||u||_1=Σ_{j=1}^n|u_j|, the library's p=1 norm under this relabeling. For s∈N with 1≤s≤n, A satisfies the strict nullspace property of order s when ||h_S||_1<||h_{S^c}||_1 for every nonzero h∈ker A and every S⊆[n] with |S|≤s. This condition concerns exact kernel vectors only and contains no measurement-residual term.",
+        "sources": {
+          "references": [
+            {
+              "title": "Simon Foucart and Holger Rauhut, A Mathematical Introduction to Compressive Sensing, §4.1, Definition 4.1, pp. 78–79",
+              "url": "https://www.mat.uniroma2.it/~speleers/cime2024/material/book_rauhut.pdf"
+            },
+            {
+              "title": "Afonso S. Bandeira, Ten Lectures and Forty-Two Open Problems in the Mathematics of Data Science, §6.3, pp. 93–94",
+              "url": "https://www.ocw.mit.edu/courses/18-s096-topics-in-mathematics-of-data-science-fall-2015/5f0f7205d1cf274e80d77345a7edbf2a_MIT18_S096F15_TenLec.pdf"
+            }
+          ]
+        },
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "not-applicable"
+        },
+        "dependency_level": 0
+      },
+      {
+        "id": "thm-ip-basis-pursuit-exact-recovery-under-nsp",
+        "kind": "theorem",
+        "title": "Exact basis-pursuit recovery under the strict nullspace property",
+        "deps": [
+          "def-ip-nullspace-property",
+          "def-p-norms-on-rn",
+          "def-norm-and-normed-space",
+          "lem-p-norms-are-norms-and-induce-the-published-metrics",
+          "lem-finite-sum-laws"
+        ],
+        "statement": "Let m,n,s∈N with m,n≥1 and 1≤s≤n, and let A∈R^{m×n} satisfy the strict nullspace property of order s. Use one-based coordinates j=1,…,n, with coordinate j identified with the library's coordinate j−1. If x†∈R^n has at most s nonzero coordinates, then x† is the unique minimizer of Σ_{j=1}^n|z_j| over all z∈R^n satisfying Az=Ax†. This is a noiseless exact-data result and makes no exact-recovery or support-recovery assertion for noisy observations.",
+        "sources": {
+          "references": [
+            {
+              "title": "Simon Foucart and Holger Rauhut, A Mathematical Introduction to Compressive Sensing, §4.1, Theorems 4.4–4.5, pp. 79–80",
+              "url": "https://www.mat.uniroma2.it/~speleers/cime2024/material/book_rauhut.pdf"
+            },
+            {
+              "title": "Afonso S. Bandeira, Ten Lectures and Forty-Two Open Problems in the Mathematics of Data Science, §6.3, pp. 93–94",
+              "url": "https://www.ocw.mit.edu/courses/18-s096-topics-in-mathematics-of-data-science-fall-2015/5f0f7205d1cf274e80d77345a7edbf2a_MIT18_S096F15_TenLec.pdf"
+            }
+          ]
+        },
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-generated"
+        },
+        "dependency_level": 1,
+        "proof_strategy": "direct"
+      },
+      {
+        "id": "lem-ip-nullspace-property-stability-cone",
+        "kind": "lemma",
+        "title": "A uniform stability margin for the nullspace cone",
+        "deps": [
+          "def-ip-nullspace-property",
+          "def-p-norms-on-rn",
+          "def-euclidean-inner-product",
+          "def-norm-and-normed-space",
+          "lem-p-norms-are-norms-and-induce-the-published-metrics",
+          "lem-every-norm-on-rn-is-continuous-for-the-euclidean-metric",
+          "lem-finite-sum-laws",
+          "lem-finite-set-has-max",
+          "lem-of-square-monotone",
+          "thm-cauchy-schwarz-and-the-euclidean-norm",
+          "thm-euclidean-heine-borel-pseudocompactness-and-extreme-values"
+        ],
+        "statement": "Let m,n,s∈N with m,n≥1 and 1≤s≤n, and let A∈R^{m×n}. Use one-based coordinates j=1,…,n, with coordinate j identified with the library's coordinate j−1. Assume Σ_{j∈S}|h_j|<Σ_{j∉S}|h_j| for every nonzero h∈R^n with Ah=0 and every S⊆{1,…,n} of size at most s. Then a single ρ∈(0,1) satisfies Σ_{j∈S}|h_j|≤ρΣ_{j∉S}|h_j| for every h∈R^n with Ah=0 and every such S. The estimate is only on the exact kernel; it gives no bound for Ah≠0.",
+        "sources": {
+          "references": [
+            {
+              "title": "Simon Foucart and Holger Rauhut, A Mathematical Introduction to Compressive Sensing, §4.2, Definition 4.11 and Remark 4.16, pp. 83–84",
+              "url": "https://www.mat.uniroma2.it/~speleers/cime2024/material/book_rauhut.pdf"
+            }
+          ]
+        },
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-generated"
+        },
+        "dependency_level": 1,
+        "proof_strategy": "direct"
+      }
+    ]
+  },
+  {
+    "order": 3063,
+    "id": "sparse-recovery-and-nullspace-certificates-examples",
+    "kind": "B",
+    "category": "inverse-problems",
+    "title": "Sparse recovery and nullspace certificates — Examples and Counterexamples",
+    "companion": "sparse-recovery-and-nullspace-certificates",
+    "requires": [
+      "sparse-recovery-and-nullspace-certificates"
+    ],
+    "items": [
+      {
+        "id": "ex-ip-failed-nsp-two-column-nonunique-basis-pursuit",
+        "kind": "example",
+        "title": "A two-column matrix where basis pursuit is not unique",
+        "deps": [
+          "def-ip-nullspace-property",
+          "def-p-norms-on-rn",
+          "lem-of-triangle-inequality"
+        ],
+        "statement": "For A=[1,1]∈M_{1×2}(R) and s=1, h=(1,−1) lies in ker A and strict NSP fails for S={1}, since both head and tail ℓ1 norms equal 1. Under the exact datum 1, every feasible z satisfies z_1+z_2=1, and the objective |z_1|+|z_2| has minimum 1 attained by distinct vectors (1,0) and (0,1).",
+        "sources": {
+          "references": []
+        },
+        "provenance": {
+          "statement": "ai-generated",
+          "proof": "ai-generated"
+        },
+        "generation": {
+          "role": "example"
+        },
+        "dependency_level": 1,
+        "proof_strategy": "direct"
+      },
+      {
+        "id": "ex-ip-nontrivial-order-one-nsp-matrix",
+        "kind": "example",
+        "title": "A nontrivial three-column matrix with the nullspace property",
+        "deps": [
+          "def-ip-nullspace-property",
+          "def-p-norms-on-rn",
+          "lem-p-norms-are-norms-and-induce-the-published-metrics",
+          "thm-ip-basis-pursuit-exact-recovery-under-nsp"
+        ],
+        "statement": "For A=[[1,−1,0],[1,0,1]]∈M_{2×3}(R) and s=1, ker A={λ(1,1,−1):λ∈R}; A satisfies strict NSP of order 1, and each x†∈R^3 with at most one nonzero coordinate uniquely minimizes Σ_{j=1}^3|z_j| subject to Az=Ax†.",
+        "sources": {
+          "references": []
+        },
+        "provenance": {
+          "statement": "ai-generated",
+          "proof": "ai-generated"
+        },
+        "generation": {
+          "role": "example"
+        },
+        "dependency_level": 2,
+        "proof_strategy": "direct"
+      },
+      {
+        "id": "ex-ip-gaussian-identity-design-minimax-lower-bound",
+        "kind": "example",
+        "title": "Identity design: noiseless recovery and a noisy minimax lower bound",
+        "deps": [
+          "def-axiom-of-choice",
+          "def-matrix-product-and-identity-matrix",
+          "def-ip-nullspace-property",
+          "def-p-norms-on-rn",
+          "lem-p-norms-are-norms-and-induce-the-published-metrics",
+          "thm-gaussian-sparse-sequence-minimax-lower-bound",
+          "thm-ip-basis-pursuit-exact-recovery-under-nsp",
+          "lem-finite-sum-laws"
+        ],
+        "statement": "Assume the Axiom of Choice. Let n,d,s∈N with n≥1, d≥2, 1≤s≤d/2, and σ>0. Use one-based coordinates j=1,…,d corresponding to library coordinate j−1. Put Θ_{s,d}={θ∈R^d: at most s coordinates are nonzero} and let I_d be the d×d identity matrix. For θ∈Θ_{s,d}, observe independent Y_j∼N((I_dθ)_j,σ²/n). The zero kernel gives noiseless strict-NSP recovery of each θ; in the noisy model every Borel estimator T:R^d→R^d has worst-case squared-ℓ2 risk at least σ²s log(ed/s)/(200000n).",
+        "sources": {
+          "references": []
+        },
+        "provenance": {
+          "statement": "ai-generated",
+          "proof": "ai-generated"
+        },
+        "generation": {
+          "role": "example"
+        },
+        "dependency_level": 2,
+        "proof_strategy": "direct"
+      }
+    ]
+  }
+]

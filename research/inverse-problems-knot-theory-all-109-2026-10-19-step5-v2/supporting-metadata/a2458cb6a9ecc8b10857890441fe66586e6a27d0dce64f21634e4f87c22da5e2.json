@@ -1,0 +1,253 @@
+[
+  {
+    "order": 3088,
+    "id": "learned-reconstruction-targets-and-risk",
+    "kind": "A",
+    "category": "inverse-problems",
+    "title": "Learned reconstruction targets and risk",
+    "companion": "learned-reconstruction-targets-and-risk-examples",
+    "requires": [
+      "inverse-problems-identifiability-and-stability",
+      "bayesian-inverse-likelihoods-and-posterior-propriety",
+      "posterior-contraction-in-gaussian-sequence-inversion",
+      "losses-risk-and-decision-rules",
+      "conditional-distributions-and-regular-conditional-probability",
+      "posterior-prediction-and-bayesian-decision"
+    ],
+    "items": [
+      {
+        "id": "prop-ip-posterior-mean-is-square-loss-optimal",
+        "kind": "proposition",
+        "title": "The posterior mean is the unique squared-loss Bayes action in a Hilbert target",
+        "deps": [
+          "def-measurable-space",
+          "def-product-sigma-algebra-and-finite-product-sigma-algebras",
+          "def-measure-kernel-and-probability-kernel",
+          "def-hilbert-space",
+          "def-separable-space",
+          "def-real-and-complex-inner-product-space",
+          "thm-cauchy-schwarz-in-an-inner-product-space",
+          "def-orthonormal-family-complete-orthonormal-system-and-hilbert-basis",
+          "thm-product-of-countable",
+          "def-axiom-of-choice",
+          "def-countable-choice",
+          "thm-parseval-equivalences-for-a-complete-orthonormal-family",
+          "def-conditional-expectation-given-a-sigma-algebra",
+          "thm-conditional-expectation-is-the-l2-orthogonal-projection",
+          "thm-measurability-of-integration-against-a-kernel",
+          "thm-monotone-convergence-for-the-integral",
+          "def-posterior-risk-and-bayes-action",
+          "def-conditional-law-given-a-random-element",
+          "thm-conditional-integration-through-a-regular-conditional-law",
+          "lem-conditional-expectation-is-unique-almost-surely"
+        ],
+        "dependency_level": 0,
+        "justified_by": [],
+        "forward_refs": [],
+        "proof_strategy": "direct",
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Ryan Martin, Lecture Notes on Advanced Statistical Theory, §5.3.1, PDF pp. 104–105",
+              "url": "https://homepages.math.uic.edu/~rgmartin/Teaching/Stat511/Notes/511notes.pdf",
+              "locator": "Example 5.4 gives scalar posterior risk under squared error as a quadratic in the action and identifies its posterior-mean minimizer when expectations exist; the local proof extends the argument coordinatewise to a Hilbert target."
+            },
+            {
+              "title": "Giannis Daras et al., A Survey on Diffusion Models for Inverse Problems, arXiv:2410.00083v1",
+              "url": "https://arxiv.org/pdf/2410.00083v1",
+              "locator": "Lemma A.1, PDF p. 25, proves a finite-dimensional conditional-mean/MMSE identity by expanding the square and conditioning the residual; it is supporting context only, while the Hilbert-target result is proved locally."
+            },
+            {
+              "title": "Masoumeh Dashti and Andrew M. Stuart, The Bayesian Approach to Inverse Problems, arXiv:1302.6989v4",
+              "url": "https://arxiv.org/pdf/1302.6989v4",
+              "locator": "§3.2, Theorem 3.4 and proof, for an inverse posterior as a data-indexed conditional law; §4.1, Theorem 4.3 and proof, for posterior propriety and data-version hypotheses. Context only: the Hilbert-risk proof assumes a probability kernel directly and does not import this source proof."
+            }
+          ]
+        },
+        "axiom_use": "Assume AC. It is used by the scalar L2 projection supplier; it also supplies the Countable Choice hypothesis of Parseval. The basis is supplied as part of the statement, and the remaining coordinate, kernel, and summation arguments require no additional choice axiom.",
+        "statement": "Assume the Axiom of Choice. Let $(\\mathsf Y,\\mathcal Y)$ be a measurable data space, let $H$ be a separable real Hilbert space, and fix a complete orthonormal basis $(e_j)_{j\\in J}$, where $J$ is either finite with its supplied ordering or $J=\\mathbb N$. A complex Hilbert signal space is included by viewing it as a real Hilbert space with inner product the real part of its complex inner product and supplying a real orthonormal basis. Let $\\Pi$ be a probability kernel from $\\mathsf Y$ to $H$ with its norm Borel sigma-algebra. Define\n$$D_2:=\\left\\{y\\in\\mathsf Y:\\int_H\\|h\\|_H^2\\,\\Pi_y(dh)<\\infty\\right\\}.$$\nFor every $y\\in D_2$ and $j\\in J$, define\n$$m_j(y):=\\int_H\\langle h,e_j\\rangle_H\\,\\Pi_y(dh),\\qquad \\mu(y):=\\sum_{j\\in J}m_j(y)e_j,$$\nwhere the last sum is the norm limit of its finite partial sums. Then $D_2\\in\\mathcal Y$, the sum defining $\\mu(y)$ exists for every $y\\in D_2$, and $\\mu:D_2\\to H$ is measurable. For every $y\\in D_2$ and every action $a\\in H$,\n$$\\int_H\\|h-a\\|_H^2\\,\\Pi_y(dh)=\\int_H\\|h-\\mu(y)\\|_H^2\\,\\Pi_y(dh)+\\|a-\\mu(y)\\|_H^2.$$\nThus $\\mu(y)$ is the unique finite-risk action minimizing posterior squared-error risk over all of $H$, and it is a measurable Bayes action rule on $D_2$. The minimization is over the full Hilbert space: the mean need not belong to a nonconvex admissible signal subset, and no perceptual-representativeness claim is made. For a probability space $(\\Omega,\\mathcal F,P)$, let $Y:\\Omega\\to(\\mathsf Y,\\mathcal Y)$ and $T:\\Omega\\to H$ be measurable random elements with $E\\|T\\|_H^2<\\infty$. If the same $\\Pi$ is a supplied regular conditional law of $T$ given $Y$, write $P_Y(B)=P(Y\\in B)$ for the law of $Y$. Then $D_2$ has full $P_Y$-measure. Extend $\\mu$ by zero to a measurable map $\\bar\\mu:\\mathsf Y\\to H$; the coordinates of $\\bar\\mu(Y)$ are versions of $E[\\langle T,e_j\\rangle_H\\mid\\sigma(Y)]$, and $\\bar\\mu(Y)$ is square-integrable. Any square-integrable $H$-valued random variable whose basis coordinates are versions of those same conditional expectations equals $\\bar\\mu(Y)$ almost surely. The RCD's values on $P_Y$-null data sets remain version choices.\n\nFor this measurability assertion, equip $D_2$ with the trace sigma-algebra $\\mathcal Y|_{D_2}:=\\{A\\cap D_2:A\\in\\mathcal Y\\}$ inherited from $(\\mathsf Y,\\mathcal Y)$."
+      },
+      {
+        "id": "def-ip-learned-reconstruction-estimator",
+        "kind": "definition",
+        "title": "Learned inverse estimators and reconstruction targets",
+        "deps": [
+          "def-ip-forward-map-and-solution-classes",
+          "def-ip-identifiability-and-stability-modulus",
+          "def-ip-misfit-evidence-and-posterior-law",
+          "def-hilbert-space",
+          "def-measurable-space",
+          "def-probability-measure",
+          "def-measurable-function-between-measurable-spaces",
+          "def-measure-kernel-and-probability-kernel",
+          "def-product-sigma-algebra-and-finite-product-sigma-algebras"
+        ],
+        "dependency_level": 3,
+        "justified_by": [],
+        "forward_refs": [],
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "not-applicable"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Gregory Ongie, Ajil Jalal, Christopher A. Metzler, Richard G. Baraniuk, Alexandros G. Dimakis, and Rebecca Willett, Deep Learning Techniques for Inverse Problems in Imaging, arXiv:2005.06001v1",
+              "url": "https://arxiv.org/pdf/2005.06001v1",
+              "locator": "§3.1 and §4.1, PDF pp. 6–11, for matched training pairs, direct reconstruction maps, and finite unrolled updates; §4.2.1, PDF pp. 11–13, for denoisers and learned generative priors."
+            },
+            {
+              "title": "Giannis Daras et al., A Survey on Diffusion Models for Inverse Problems, arXiv:2410.00083v1",
+              "url": "https://arxiv.org/pdf/2410.00083v1",
+              "locator": "§1.2 and §§2.4.2–2.4.3, PDF pp. 4 and 8, distinguish point reconstruction, score fields, conditional-score updates, and posterior sampling. The survey reports method-specific scope and does not establish generic sampler correctness."
+            },
+            {
+              "title": "Masoumeh Dashti and Andrew M. Stuart, The Bayesian Approach to Inverse Problems, arXiv:1302.6989v4",
+              "url": "https://arxiv.org/pdf/1302.6989v4",
+              "locator": "§3.2, Theorem 3.4 and proof, for a supplied data-indexed posterior kernel and its evidence/version conventions; §4.1, Theorem 4.3, for posterior well-posedness under stated potential hypotheses."
+            }
+          ]
+        },
+        "axiom_use": "No choice axiom is required; all fitting laws, maps, and probability kernels are supplied as inputs.",
+        "statement": "Let $(X,d_X)$ and $(Y,d_Y)$ be metric parameter and data spaces, let $U\\subseteq X$ be a nonempty admissible truth class, let $F:U\\to Y$ be a forward map, and let $(Q,d_Q)$ be a metric target space. All metric spaces in this definition carry their Borel sigma-algebras. Give $U$ the subspace Borel sigma-algebra $\\mathcal B(U):=\\{U\\cap A:A\\in\\mathcal B(X)\\}$, and assume that $q:U\\to Q$ is measurable from $(U,\\mathcal B(U))$ to $(Q,\\mathcal B(Q))$. The target $q(x)$ is the recovery object assigned to truth $x$; $Q$ may be the parameter space itself or a quotient solution-class space. A **point reconstruction rule** is a Borel map $g:Y\\to Q$, and its output at data $y$ is $g(y)$. A **learned point estimator** is such a map $\\widehat q_\\phi$ with a fitted parameter $\\phi$ in a specified parameter set. A complete training description names the probability law $P_{\\rm fit}$ of all variables used to fit $\\phi$; those variables may be paired or unpaired. A complete test description names a probability law $P_{\\rm test}$ for evaluation pairs $(Y,q(X))$. No equality between fitting and test laws is assumed.\n\nA finite **unrolled learned update** consists of an integer $K\\geq1$, a Borel initialization $u_0:Y\\to Q$, and maps $T_{\\phi,k}:Q\\times Y\\to Q$ measurable from $(Q\\times Y,\\mathcal B(Q)\\otimes\\mathcal B(Y))$ to $(Q,\\mathcal B(Q))$ for $0\\leq k<K$, with $u_{k+1}(y)=T_{\\phi,k}(u_k(y),y)$. Here the layer domain uses the product sigma-algebra, not an assumed identification with the Borel sigma-algebra of the product topology. Its output $u_K:Y\\to Q$ is a point reconstruction rule: if $u_k$ is Borel, the preimage of a measurable rectangle $A\\times C$ under $y\\mapsto(u_k(y),y)$ is $u_k^{-1}(A)\\cap C$, so this pairing is product-measurable; composing it with $T_{\\phi,k}$ and applying finite induction proves that every $u_k$ is Borel. An **amortized inverse map** is a learned point estimator applied to multiple data inputs after a single fit; this term adds a reuse convention, not an accuracy guarantee.\n\nFor a real Hilbert signal space $H$, a **denoiser** is a Borel map $D_\\phi:H\\to H$ trained under a specified signal-corruption law and used to transform a corrupted signal into a signal estimate or an update. A denoiser is the exact minimum mean-square error map only when it equals the conditional mean for the specified signal and corruption laws. A **learned prior** is a supplied Borel probability measure $\\rho_\\phi$ on $H$; one construction is the pushforward law $\\rho_\\phi(A)=\\nu(G_\\phi^{-1}(A))$ for $A\\in\\mathcal B(H)$, where $\\nu$ is a specified probability measure on a measurable source space $(Z,\\mathcal Z)$ and $G_\\phi:(Z,\\mathcal Z)\\to(H,\\mathcal B(H))$ is measurable. The law or generator alone is not a data-to-target estimator.\n\nFor a finite horizon $T>0$, a specified parameter set $\\Phi$, and $\\phi\\in\\Phi$, a **score field model** in a finite-dimensional signal space $\\mathbb R^d$ is a Borel map $s_\\phi:[0,T]\\times\\mathbb R^d\\to\\mathbb R^d$ intended to approximate the target field $s^*(t,x)=\\nabla_x\\log p_t(x)$ for a specified family $(p_t)_{t\\in[0,T]}$ of positive continuously differentiable probability densities for which $s^*$ is jointly Borel. Its complete description names a probability law $P_{\\rm fit}$ for all variables used to fit $\\phi$ and a probability law $P_{\\rm test}$ on $[0,T]\\times\\mathbb R^d$ for evaluation inputs $(t,x)$; the target on those inputs is $s^*(t,x)$. These laws need not agree, and no approximation guarantee under either law is implied. A score field is not itself a posterior law, posterior sample, or point reconstruction rule. A **posterior sampler** is a probability kernel $S:Y\\to Q$; relative to a supplied posterior target kernel $\\Pi_y$, it is exact on a data domain $D$ when $S_y=\\Pi_y$ as probability measures for every $y\\in D$. A draw from $S_y$ is random; obtaining a point estimate from it requires an additional summary rule. The name “learned” by itself asserts no exact recovery, stability, convergence, calibration, or train-to-test guarantee."
+      },
+      {
+        "id": "def-ip-inverse-risk-under-train-and-test-laws",
+        "kind": "definition",
+        "title": "Inverse reconstruction risk under train and test laws",
+        "deps": [
+          "def-ip-forward-map-and-solution-classes",
+          "def-ip-identifiability-and-stability-modulus",
+          "def-ip-learned-reconstruction-estimator",
+          "def-measurable-space",
+          "def-product-sigma-algebra-and-finite-product-sigma-algebras",
+          "def-probability-measure",
+          "def-measurable-function-between-measurable-spaces",
+          "def-measure-kernel-and-probability-kernel",
+          "thm-measurability-of-integration-against-a-kernel",
+          "def-loss-function-and-risk"
+        ],
+        "dependency_level": 4,
+        "justified_by": [],
+        "forward_refs": [],
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "not-applicable"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Ryan Martin, Lecture Notes on Advanced Statistical Theory, §5.3.1, PDF pp. 104–105",
+              "url": "https://homepages.math.uic.edu/~rgmartin/Teaching/Stat511/Notes/511notes.pdf",
+              "locator": "Definition 5.3 and Example 5.4: Bayes risk is average risk under a law, posterior risk is a conditional-data integral, and scalar squared-error posterior risk is minimized by the posterior mean when the expectations exist."
+            },
+            {
+              "title": "Peter Hoff, Statistical Decision Problems, §§4.1–4.2, PDF pp. 7–8",
+              "url": "https://www2.stat.duke.edu/~pdh10/Teaching/581/LectureNotes/intro.pdf",
+              "locator": "The decision problem specifies the parameter, action space, loss, measurable decision rule and its risk as expected loss under the observation law."
+            },
+            {
+              "title": "Hongkai Zheng et al., InverseBench: Benchmarking Plug-and-Play Diffusion Priors for Inverse Problems in Physical Sciences, ICLR 2025",
+              "url": "https://proceedings.iclr.cc/paper_files/paper/2025/file/e297068f5ec7f483a017948715b591fb-Paper-Conference.pdf",
+              "locator": "§5 and Appendix C, PDF pp. 10 and 28–29, report selected empirical behavior under out-of-distribution sources and prior mismatch; these experiments imply no universal risk bound."
+            }
+          ]
+        },
+        "axiom_use": "No choice axiom is required; the joint evaluation laws and randomized kernels are supplied as inputs.",
+        "statement": "Let $(\\mathsf Y,\\mathcal Y)$ and $(Q,\\mathcal Q)$ be measurable data and target spaces, with $\\mathcal Q$ the Borel sigma-algebra of the target metric space. Let $P$ be a probability measure on the product space $(\\mathsf Y\\times Q,\\mathcal Y\\otimes\\mathcal Q)$, and let $\\ell:Q\\times Q\\to[0,+\\infty]$ be product-measurable, where $\\ell(t,a)$ is the loss for target $t$ and action $a$. For a point reconstruction rule $g:(\\mathsf Y,\\mathcal Y)\\to(Q,\\mathcal Q)$ measurable with respect to the stated sigma-algebras, its risk under $P$ is the extended nonnegative integral\n$$R_P(g):=\\int_{\\mathsf Y\\times Q}\\ell(t,g(y))\\,P(dy,dt).$$\nFor a randomized reconstruction rule given by a probability kernel $K$ from $\\mathsf Y$ to $Q$, define\n$$R_P(K):=\\int_{\\mathsf Y\\times Q}\\!\\left(\\int_Q\\ell(t,a)\\,K(y,da)\\right)P(dy,dt).$$\nThe inner integral is measurable in $(y,t)$ by kernel integration; a deterministic rule is the special case $K_y=\\delta_{g(y)}$. When $P_{\\rm train}$ and $P_{\\rm test}$ are specified joint laws on the same input-target space, the corresponding training-law risk and test-law risk are $R_{P_{\\rm train}}(K)$ and $R_{P_{\\rm test}}(K)$. Either value may be $+\\infty$. This definition imposes no inequality between the two risks: any such comparison requires an additional assumption relating the joint laws or the rule's behavior under them."
+      }
+    ]
+  },
+  {
+    "order": 3089,
+    "id": "learned-reconstruction-targets-and-risk-examples",
+    "kind": "B",
+    "category": "inverse-problems",
+    "title": "Learned reconstruction targets and risk — Examples and Counterexamples",
+    "companion": "learned-reconstruction-targets-and-risk",
+    "requires": [
+      "learned-reconstruction-targets-and-risk"
+    ],
+    "items": [
+      {
+        "id": "ex-ip-posterior-mean-outside-nonconvex-signal-class",
+        "kind": "example",
+        "title": "A posterior mean can lie outside a nonconvex signal class",
+        "deps": [
+          "def-ip-forward-map-and-solution-classes",
+          "def-ip-learned-reconstruction-estimator",
+          "def-ip-inverse-risk-under-train-and-test-laws",
+          "prop-ip-posterior-mean-is-square-loss-optimal",
+          "def-conditional-law-given-a-random-element",
+          "def-axiom-of-choice"
+        ],
+        "dependency_level": 5,
+        "justified_by": [],
+        "forward_refs": [],
+        "proof_strategy": "direct",
+        "provenance": {
+          "statement": "ai-generated",
+          "proof": "ai-generated"
+        },
+        "generation": {
+          "role": "example"
+        },
+        "axiom_use": "AC is inherited only through the general posterior-mean proposition; the finite posterior and risk calculations are choice-free.",
+        "statement": "Assume the Axiom of Choice. Let the admissible signal set be $S=\\{-1,1\\}\\subset\\mathbb R$, which is nonconvex because it omits the midpoint $0$, let the target be the signal itself, and let the data space consist of one point $Y=\\{0\\}$. Use the constant forward map $F(t)=0$ and the prior assigning probability $1/2$ to each signal. The posterior law at the sole datum is therefore $\\Pi_0=\\tfrac12\\delta_{-1}+\\tfrac12\\delta_1$. Under squared loss on the full action space $\\mathbb R$, the posterior mean is $0$, which is outside $S$; its posterior risk at action $a$ is $1+a^2$, so its unique unconstrained minimum is $1$ at $a=0$. If actions are restricted to $S$, both admissible actions have risk $2$. The proposition concerns the full Hilbert action space and does not assert that the posterior mean is an admissible signal."
+      },
+      {
+        "id": "ex-ip-train-test-prior-shift-changes-risk",
+        "kind": "example",
+        "title": "A train/test prior shift changes reconstruction risk",
+        "deps": [
+          "def-ip-forward-map-and-solution-classes",
+          "def-ip-learned-reconstruction-estimator",
+          "def-ip-inverse-risk-under-train-and-test-laws"
+        ],
+        "dependency_level": 5,
+        "justified_by": [],
+        "forward_refs": [],
+        "proof_strategy": "direct",
+        "provenance": {
+          "statement": "ai-generated",
+          "proof": "ai-generated"
+        },
+        "generation": {
+          "role": "example"
+        },
+        "axiom_use": "No choice axiom is used; the two laws and the deterministic forward map are explicit finite objects.",
+        "statement": "Let the truth space and target space both be $U=Q=\\{0,1\\}\\subset\\mathbb R$, let the target map be the identity, let the data space be $Y=\\{0\\}$, and let the deterministic forward map be $F(t)=0$ for both truths. Use squared loss $\\ell(t,a)=(t-a)^2$ and the point reconstruction rule $g(0)=0$. Let the training prior be $\\pi_{\\rm train}=\\delta_0$ and the test prior be $\\pi_{\\rm test}=\\delta_1$. The resulting joint laws of data and target are $P_{\\rm train}=\\delta_{(0,0)}$ and $P_{\\rm test}=\\delta_{(0,1)}$. The input marginal is the same in both laws, but $R_{P_{\\rm train}}(g)=0$ and $R_{P_{\\rm test}}(g)=1$; equality of input marginals alone does not bound target-risk change under prior shift."
+      },
+      {
+        "id": "ex-ip-calibrated-posterior-sample",
+        "kind": "example",
+        "title": "An exact posterior sample need not minimize point risk",
+        "deps": [
+          "def-ip-forward-map-and-solution-classes",
+          "def-ip-learned-reconstruction-estimator",
+          "def-ip-inverse-risk-under-train-and-test-laws",
+          "prop-ip-posterior-mean-is-square-loss-optimal",
+          "def-conditional-law-given-a-random-element",
+          "def-axiom-of-choice"
+        ],
+        "dependency_level": 5,
+        "justified_by": [],
+        "forward_refs": [],
+        "proof_strategy": "direct",
+        "provenance": {
+          "statement": "ai-generated",
+          "proof": "ai-generated"
+        },
+        "generation": {
+          "role": "example"
+        },
+        "axiom_use": "AC is inherited only through the general posterior-mean proposition; the finite probability law and calculations are choice-free.",
+        "statement": "Assume the Axiom of Choice. Let $T$ take values $-1$ and $1$ with equal probabilities, let $Y=0$ deterministically, and use the squared-error loss on $\\mathbb R$. The posterior is $\\Pi_0=\\tfrac12\\delta_{-1}+\\tfrac12\\delta_1$. Given $Y=0$, draw $\\widetilde T$ independently of $T$ from $\\Pi_0$. Here **exact posterior calibration** means $\\mathcal L(\\widetilde T\\mid Y=0)=\\Pi_0$, which holds because the sampler kernel is $S_0=\\Pi_0$. The posterior mean action $0$ has posterior risk $1$, while the expected squared error between the true posterior draw and the independent posterior sample is $2$. Thus even an exactly calibrated posterior sample is not the Bayes-optimal point action and is not itself the posterior mean."
+      }
+    ]
+  }
+]

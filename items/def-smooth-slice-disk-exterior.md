@@ -27,7 +27,7 @@ sources:
 
 ## Definition
 
-Assume AC. Let $D\subset B^4$ be a smooth proper disk with boundary $K\subset S^3$. Choose a closed tubular neighborhood $N(D)\cong D^2\times D^2$ meeting $S^3$ in $\partial D\times D^2$, and let $X_D$ be the closure of $B^4\setminus\operatorname{int}N(D)$, with corners rounded. The positive meridian is the oriented circle $\{x\}\times\partial D^2$ in the overlap $D^2\times S^1$, oriented by the ambient and disk orientations.
+Assume AC. Let $D\subset B^4$ be a smooth proper disk. Give $B^4$ its standard orientation, choose an orientation of $D$, and give $K=\partial D\subset S^3$ the induced boundary orientation. Choose a closed tubular neighborhood $N(D)\cong D^2\times D^2$ meeting $S^3$ in $\partial D\times D^2$, and let $X_D$ be the closure of $B^4\setminus\operatorname{int}N(D)$, with corners rounded. The positive meridian is the oriented circle $\{x\}\times\partial D^2$ in the overlap $D^2\times S^1$, oriented by the ambient and disk orientations.
 
 ## Definition references
 

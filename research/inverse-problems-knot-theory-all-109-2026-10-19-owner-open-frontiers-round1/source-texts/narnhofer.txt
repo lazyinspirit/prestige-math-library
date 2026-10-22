@@ -1,0 +1,2000 @@
+PAGE 1
+Posterior-Variance-Based Error Quantification for Inverse
+Problems in Imaging
+Dominik Narnhofer ∗
+Andreas Habring †
+Martin Holler‡
+Thomas Pock†
+August 1, 2024
+Abstract
+In this work, a method for obtaining pixel-wise error bounds in Bayesian regularization
+of inverse imaging problems is introduced. The proposed method employs estimates of the
+posterior variance together with techniques from conformal prediction in order to obtain coverage
+guarantees for the error bounds, without making any assumption on the underlying data
+distribution. It is generally applicable to Bayesian regularization approaches, independent, e.g.,
+of the concrete choice of the prior. Furthermore, the coverage guarantees can also be obtained
+in case only approximate sampling from the posterior is possible. With this in particular, the
+proposed framework is able to incorporate any learned prior in a black-box manner. Guaranteed
+coverage without assumptions on the underlying distributions is only achievable since the
+magnitude of the error bounds is, in general, unknown in advance. Nevertheless, experiments
+with multiple regularization approaches presented in the paper confirm that in practice, the
+obtained error bounds are rather tight. For realizing the numerical experiments, also a novel
+primal-dual Langevin algorithm for sampling from non-smooth distributions is introduced in
+this work.
+Key words. Bayesian imaging, conformal prediction, uncertainty quantification, error control, learned priors,
+inverse problems
+MSC codes. 68U10 · 62F15 · 65C40 · 65C60 · 65J22
+1
+Introduction
+In this work, we provide a generally applicable method for solving inverse problems, and for obtaining
+statistical bounds on the error of the prediction. The bounds are proven to hold in probability
+via methods of conformal prediction [49], without making a-priori assumptions on the underlying
+distributions and by only using a finite data set.
+In inverse problems, the goal is to recover the true source signal x ∈X from a corrupted
+observation z ∈Z obtained from the so-called measurement or forward operator F : X →Z
+z = F(x) + ν,
+(1.1)
+∗Institute for Computer Graphic and Vision, Graz University of Technology. (dominik.narnhofer@icg.tugraz.at,
+pock@icg.tugraz.at, https://www.icg.tugraz.at/).
+†Institute of Mathematics and Scientific Computing, University of Graz.
+(andreas.habring@uni-graz.at,
+martin.holler@uni-graz.at, https://mathematik.uni-graz.at/en/institute/research-areas/mathds/).
+1
+arXiv:2212.12499v2  [cs.CV]  31 Jul 2024
+
+PAGE 2
+where ν denotes the measurement noise. Since in most applications of interest the forward operator F
+is not invertible or at least severly ill-conditioned, (1.1) is not well-posed in general. In a probabilistic
+framework, x, z, and ν are replaced by the random variables X, Z, and N and, consequently, (1.1)
+is modelled by a common distribution p(x, z). In this setting, solving the inverse problem amounts
+to estimating the random variable X based on an observation of Z, which is frequently done by
+invoking the posterior distribution computed using Bayes theorem
+p(x|z) = p(z|x)p(x)
+p(z)
+(1.2)
+respectively its negative logarithm
+−log(p(x|z)) = −log(p(z|x)) −log(p(x)) + const.
+While a model for the data likelihood p(z|x) is easily found if the noise distribution is fixed, a lot
+of research has gone into modelling the prior distribution p(x), see Section 2.1. The present work,
+however, is directed at a different aim: Given any (approximate) model of the prior distribution,
+and a resulting method to obtain point estimates, we want to obtain error bounds with coverage
+guarantees for the point estimate that hold true even if the model of the prior distribution and/or
+the method to obtain point estimates are not 100% accurate.
+To explain our approach, let us assume for simplicity X = R. Given a prediction ˆx(Z) for X and an
+i.i.d. sample (Xi, Zi)m
+i=1, we want to obtain a method for predicting quantiles ˆSq = ˆsq((Xi, Zi)m
+i=1, Z)
+of the squared error S = s(X, Z) = (X −ˆx(Z))2 satisfying
+P[S ≤ˆSq] ≥q
+(1.3)
+where q ∈(0, 1) can be defined arbitrarily by the user. Here, the probability is computed over
+(Xi, Zi)m
+i=1 and (X, Z), and (1.3) shall be satisfied without assumptions on the underlying distribu-
+tions. Our approach to obtain the quantiles ˆSq builds on the relation between error and posterior
+variance. More precisely, given an estimator ˆt(z) ≈Var[X|Z = z], ˆT = ˆt(Z) for the posterior
+variance, we first approximate the distribution of the (S, ˆT) on the sample (Xi, Zi)m
+i=1, where we
+split the range of ˆT into different bins τk = [tk, tk+1) for k = 1, 2, . . . For each bin τk, we then set
+ˆSτk
+q
+to be an approximation of the q-quantile of {Si | ˆt(Zi) ∈τk}. For this, we make use of conformal
+prediction techniques to ensure coverage (see [49] for the original work that motivated this part of
+our approach). In other words, ˆSτk
+q
+is an estimate of the q-quantile of S| ˆT ∈τk based on a finite
+sample. For a new data point Z, the estimated q-quantile ˆSq such that (1.3) holds is then obtained as
+ˆSq = ˆSτk, where k is such that ˆt(Z) ∈τk. With this, our method acts as a regression from posterior
+variance to the squared error, where the regression is carried out pointwise on different variance bins
+(thus it is non-linear). Our coverage guarantees hold independently of the true distribution of (X, Z)
+and even in the case that both ˆx(Z) and ˆt(Z) are sub-optimal estimators (in fact, they can even be
+arbitrary). The reason why this is possible is because we make no guarantees on the magnitude of
+the error bounds (i.e., on the size of the interval of uncertainty). Naturally, the error bounds will be
+smaller, the better the prior p(x) and the estimators ˆx(Z) and ˆt(Z). While our coverage guarantees
+hold in any case, it can only be observed after carrying out our method on a new datum, if the error
+bounds obtained for this datum are sufficiently small for practical use. Our experiments show that
+this is the case with different, reasonable priors.
+For the estimation of statistical quantities, such as the posterior variance or the expected posterior,
+we rely on Langevin based Markov chain Monte Carlo sampling [30], where we introduce a novel
+2
+
+PAGE 3
+variation of the Langevin algorithm applicable to non-smooth log-distributions. The contributions
+of our work can be summarized as follows.
+Contributions
+• We propose a novel method for error estimation for inverse problems in imaging. Based on
+a finite i.i.d. sample we estimate quantiles of the reconstruction error conditioned on an
+estimate of the posterior variance.
+• Coverage of the estimated quantiles is proven without making assumptions on the underlying
+distributions and by only invoking a finite data set by means of conformal prediction.
+• Numerical experiments supporting our claims are conducted on multiple inverse problems
+as well as with different regularization methods. In particular we show that the error
+guarantees are satisfied in practice and provide additional empirical evidence demonstrating
+the strong relation between posterior variance and error.
+• Within our numerical experiments, we propose a new approach for posterior sampling in
+the presence of a non-smooth convex functional based on the primal-dual algorithm.
+• Furthermore, a novel method for evaluation of Langevin-like algorithms by means of a
+Markov Random Field is presented.
+2
+Related Works
+2.1
+Regularization and Posterior Sampling
+As the framework for solving inverse problems is well-established, most research nowadays revolves
+around the choice of the prior respectively regularizer p(x) in (1.2). Two categories can be distin-
+guished: In the past hand-crafted priors with certain assumptions on regularity such as sparsity [51,
+53, 11, 14, 9] were commonly the preferred choice, while nowadays the field of inverse problems is
+mainly dominated by data driven approaches that either directly learn an inverse mapping [22, 32,
+25] or attempt to learn a suitable prior. The latter is frequently done by means of unrolling [21,
+26, 2] or as in recent works by the use of generative approaches [8, 41, 56, 20]. Priors, rather than
+penalty functionals, are of particular interest, since they offer the possibility of sampling due to
+their access to the posterior [30]. Although the sampling method itself is subject to ongoing research
+[16, 43, 46], Langevin algorithms for Markov chain Monte Carlo sampling [47, 17, 18] are widely
+used either for inference [30] or also in training [61, 56].
+2.2
+Uncertainty Quantification
+Uncertainty quantification is the task of quantifying the certainty or confidence of a prediction.
+Note, however, that there is a conceptual difference between uncertainty and prediction error since
+a very confident prediction can still be erroneous. While in the literature it has, e.g., been proposed
+to use the posterior variance as a measure of uncertainty [61], a link to the reconstruction error
+is rarely found in existing works. It is precisely this link between uncertainty and error that we
+investigate in this work. Most works about uncertainty quantification in the literature either utilize
+Bayesian neural networks or posterior sampling using Markov chain Monte Carlo methods. In [7]
+3
+
+PAGE 4
+an algorithm for learning a distribution over the weights of a neural network is proposed. In [23,
+39] the authors use Bayesian neural networks to investigate different types of uncertainty (aleatoric
+vs epistemic) and in [45] the authors use hypothesis tests in a Bayesian framework to quantify the
+probability of the presence of certain structures in an image reconstruction. For a review of Bayesian
+uncertainty quantification of deep learning methods see [1]. In [19] it is shown that dropout training
+in deep neural networks is equivalent to approximate Bayesian inference in deep Gaussian processes
+yielding tools to model uncertainty. In [54] Markov chain dropout is used for deep learning in MRI
+reconstruction to investigate uncertainty and the authors also qualitatively relate the uncertainty to
+the reconstruction error. In [44] the authors sample from the posterior using Monte Carlo sampling
+and modelling the gradient of the log prior distribution by a denoising auto encoder. In [37] the
+authors propose to learn the reverse noise process in the context of MRI reconstruction allowing for
+sampling from the posterior. Closely related to our approach, in [61] the authors propose posterior
+sampling using Langevin dynamics combined with a generative prior to estimate the posterior
+variance.
+2.3
+Conformal Prediction
+The proposed work also builds on ideas of conformal prediction and risk control, methods of obtaining
+distribution free confidence bounds for model predictions based on a finite training sample. Risk
+control describes methods, where an i.i.d. data set is used to bound the expected loss. The procedure
+builds on concentration inequalities, such as Hoeffding’s inequality, which allow to bound an expected
+value based on a finite sample mean [3, 5, 38, 4, 6]. On the other hand, in conformal prediction,
+introduced in [59, 55], experience on a data set is used to estimate quantiles and/or confidence
+regions for a random variable, typically under the assumption of exchangeability of the sample [58,
+33, 34, 35, 52, 49]. The present work can, indeed, be put into this framework: If the proposed method
+outputs a point prediction ˆx and an upper bound for the squared error ˆsq, then [ˆx −
+p
+ˆsq, ˆx +
+p
+ˆsq]
+is a q confidence interval for the ground truth. In terms of applications, our work is related most
+closely to [5] where the authors propose a method predicting per-pixel confidence intervals for image
+regression. Contrary to our work, however, the authors guarantee a bounded expected rate of
+wrongly predicted pixel intervals in an image using risk control based on concentration inequalities.
+In the present work we bound the error probability for each pixel individually. From a theoretic
+viewpoint, our work is in the same spirit as [49]. There authors use conformal prediction to calibrate
+confidence intervals obtained by quantile regression. Distinct from both of the mentioned works we
+do not assume a given method for interval predictions, but only require access to a point predictor.
+Using data to estimate the distribution of this method’s error, we implicitly obtain a set predictor.
+Moreover, we account for heteroscedasticity by conditioning the conformal prediction procedure on
+the given observation.
+3
+Theoretical Results
+In this section we first explain the proposed method in an abstract setting before elaborating on the
+application in imaging.
+4
+
+PAGE 5
+3.1
+Preliminaries
+We denote random variables as upper case letters and deterministic quantities or realizations of
+random variables as lower case letters. Random variables obtained as functions of other random
+variables are consequently denoted as the upper case letter of the function, e.g., we denote the
+posterior variance as T = t(Z) with the function t(z) = Var[X | Z = z] evaluated at the random
+variable Z. Moreover, approximations/estimators are denoted with a hat, e.g., the estimator of the
+posterior variance t is denoted as ˆt and analogously for the random variables T, ˆT. Independence
+of two random variables X, Y is denoted as X
+|=
+Y . For a real valued random variable Y with
+cumulative distribution function F(y) = P[Y ≤y], we denote for q ∈(0, 1) the q-quantile as
+yq = inf{y ∈R | F(y) ≥q}.
+Further for i.i.d. random variables Y1, . . . , Yn, we define the empirical quantile ˆYq as the quantile of
+the empirical distribution function ˆF(y) = 1
+n
+Pn
+i=1 1Yi≤y,
+ˆYq = inf{y ∈R | ˆF(y) ≥q}
+which can be computed explicitly as ˆYq = Y(⌈qn⌉) with Y(k) being the k-th smallest value in Y1, . . . , Yn.
+We present a slight modification of a key result from conformal prediction, which can be found in
+different versions in [59, 33, 58, 49]. In particular, the presented proofs are a generalization of [49,
+Lemmas 1, 2, Appendix] where we additionally allow for a random sample size.
+Lemma 3.1. Let Y1, Y2, . . . , YN+1 real valued random variables with N ∈N a random sample size.
+Assume that Y1, Y2, . . . , YN+1 are i.i.d. with respect to the probability measure P[ . | N = n] for
+every n ∈N, n ≥1. Then for any q ∈(0, 1) and n ≥1,
+P[YN+1 ≤ˆYq | N = n] ≥q
+where ˆYq = Y(⌈(N+1)q⌉) is the empirical q-quantile of Y1, Y2, . . . , YN+1.
+Remark 3.2. The sample size is set to N + 1 instead of N in order to enable a consistent notation
+for later results where the first N random variables will be the estimation data and the (N + 1)-th
+sample a new data point.
+Proof. By definition of the empirical quantile it is always true that
+q ≤ˆF( ˆYq).
+As a consequence we find for fixed n ≥1
+q ≤E[ ˆF( ˆYq) | N = n] =E[
+1
+N + 1
+N+1
+X
+i=1
+1Yi≤ˆYq | N = n] = E[
+1
+n + 1
+n+1
+X
+i=1
+1Yi≤ˆYq | N = n]
+=
+1
+n + 1
+n+1
+X
+i=1
+P[Yi ≤ˆYq | N = n] = P[Yn+1 ≤ˆYq | N = n]
+=P[YN+1 ≤ˆYq | N = n].
+(3.1)
+5
+
+PAGE 6
+In the preceding Lemma we have proven the intuitive assertion that the empirical quantile of
+Y1, . . . YN+1 has guaranteed coverage for any of the Yi. In the subsequent result, on the other hand,
+we conclude, that by correcting the quantile by a factor (1 + 1
+N ) coverage is also guaranteed for a
+new unseen i.i.d random variable.
+Lemma 3.3. Let Y1, Y2, . . . , YN, Y be real valued random variables with N ∈N random such that
+Y1, Y2, . . . , YN, Y are i.i.d. with respect to the probability measure P[ . | N = n] for every n ∈N,
+n ≥1. Assume additionally that (1 + 1
+n)q ≤1, then
+P[Y ≤ˆY(1+ 1
+N )q | N = n] ≥q
+where now ˆY(1+ 1
+N )q = Y(⌈(N+1)q⌉) is the empirical quantile of Y1, Y2, . . . , YN. We call ˆY(1+ 1
+N )q the
+conformalized q-quantile.
+Proof. Let us denote YN+1 = Y and Y(k,m) the k-th largest value in Y1, . . . , Ym. Note that for k
+such that 1 ≤k ≤n, Yn+1 ≤Y(k,n) if and only if Yn+1 ≤Y(k,n+1). Thus, since by assumption
+⌈(n + 1)q⌉≤n,
+P[YN+1 ≤Y(⌈(N+1)q⌉,N) | N = n] = P[YN+1 ≤Y(⌈(N+1)q⌉,N+1) | N = n]
+(3.2)
+The result follows by applying Lemma 3.1 to the right-hand side of the equation.
+3.2
+The Proposed Method
+Let us assume for now that the signal space X = R. Let (Xi, Zi)m
+i=1 ⊂X × Z be an i.i.d. sample
+and (X, Z) ∼(Xi, Zi). Further, let ˆx : Z →X be a prediction function for the ground truth X,
+e.g., ˆx(z) ≈E[X | Z = z], an approximation of the expected posterior. Define the squared error of
+the prediction S = s(X, Z) = (ˆx(Z) −X)2 and accordingly Si = s(Xi, Zi). A naive approach to
+obtain guaranteed error bounds would be to simply apply Lemma 3.3 to the random variables Si, S.
+Note, however, that this would yield an error bound which is independent of the given observation
+Z. In particular for heteroscedastic data this will result in inefficient error estimates. While in
+[49] the authors propose to account for heteroscedasticity by applying Lemma 3.3 to an interval
+predictor which incorporates heteroscedasticity already, we propose a different approach, namely
+integrating information about Z in the form of conditional probabilities. Denote an approximation
+of the posterior variance as ˆt(z) ≈Var[X|Z = z], ˆT = ˆt(Z) and ˆTi = ˆt(Zi). Ideally, we would apply
+Lemma 3.3 to the random variable S| ˆT = τ for any fixed value of τ ∈R yielding guarantees on
+the error for any fixed value of the approximated variance. This way we would make use of all
+the information contained in ˆT. But since the estimation of a quantile of the random variable S
+conditioned on any point-value of ˆT is unfeasible in practice, where only a finite amount of data
+is available, a relaxation is needed. This is achieved by partitioning [0, ∞) into disjoint intervals
+τk = [tk, tk+1), k = 0, 1, 2, . . . , and, for any given interval τk, considering the error conditioned on
+ˆT ∈τk. To realize this, for any given interval τk, first define the estimated conditional error quantile
+ˆSτk
+q
+:= (1 +
+1
+Nτk
+)q −empirical quantile of {Si | ˆTi ∈τk}.
+(3.3)
+where Nτk = |{Si | ˆTi ∈τk}|. In the case that (1 + Nτk)q > Nτk, we set ˆSτk
+q
+to be the essential
+supremum of the random variable S. Given a new observation Z, the final method can then be
+described as follows:
+6
+
+PAGE 7
+1. Compute ˆx(Z) and ˆt(Z).
+2. Pick τk, such that ˆt(Z) ∈τk.
+3. Compute the error quantile estimator ˆSq as ˆSτk
+q .
+Remark 3.4. The following results do not rely on exact knowledge of the posterior expectation or
+variance, which is why we already introduced ˆX and ˆT as approximations above. As a matter of
+fact, Proposition 3.5 and Corollary 3.7 below are entirely independent of the particular choices of
+the functions ˆx(z) and ˆt(z). In particular, all results remain true despite using heuristics within the
+computations of the approximations of posterior expectation and variance, such as the choice of
+the thinning parameter explained in Remark 4.1 below. While the theory is not affected by the
+choices of ˆx and ˆt, the tightness, and thus quality, of the error estimates will crucially depend on the
+predictive capability of ˆT with respect to the error S. Our choice is motivated by the high similarity
+between the squared error to the expected posterior (X −E[X | Z])2 and the posterior variance
+Var[X | Z] = E[(X −E[X | Z])2] | Z], which is, in fact, the conditional expectation of the former.
+As a direct consequence of Lemma 3.3, we obtain the following coverage guarantee.
+Proposition 3.5. Let (Xi, Zi)m
+i=1 ⊂X × Z and (X, Z) ∈X × Z be i.i.d. Let S = s(X, Z) =
+(X −ˆx(Z))2 and ˆT = ˆt(Z) and assume that S is bounded from above almost surely. Assume further
+that P[ ˆT ∈τk] > 0, then the estimated conditional error quantile satisfies
+P[S ≤ˆSτk
+q
+| ˆT ∈τk] ≥q
+Proof. Fix τk and let (Sij)
+Nτk
+j=1 be the set of all Si for which ˆTi ∈τk. That is,
+i1 = min{1 ≤i ≤m | ˆTi ∈τk},
+ij+1 = min{ij < i ≤m | ˆTi ∈τk}.
+(3.4)
+In a sequence (Si, ˆTi)i>m, of i.i.d. copies of (S, ˆT) let SiNτk +1 be defined as the next sample with
+variance ˆT ∈τk in this sequence, i.e.,
+iNτk +1 = min{m < i | ˆTi ∈τk}.
+Note that by the Borel-Cantelli Lemma, iNτk +1 < ∞a.s., since P[ ˆT ∈τk] > 0. For the distributions
+of these random variables we find for any n ≥1, j ≤n and s ∈R by the law of total probability
+P[Sij ≤s | Nτk = n] =
+m
+X
+l=1
+P[Sij ≤s | ij = l, Nτk = n] P[ij = l | Nτk = n]
+=
+m
+X
+l=1
+P[Sl ≤s | ˆTi ∈τk for i = l and for (n −1) different i ∈{1, . . . , m} \ {l}]
+P[ij = l | Nτk = n]
+=
+m
+X
+l=1
+P[Sl ≤s | ˆTl ∈τk] P[ij = l | Nτk = n]
+=
+m
+X
+l=1
+P[S ≤s | ˆT ∈τk] P[ij = l | Nτk = n]
+= P[S ≤s | ˆT ∈τk]
+(3.5)
+7
+
+PAGE 8
+and the same result can be obtained for j = n + 1 via an analogous computation. Further we can
+deduce independence as follows. Let s1, . . . , sn+1 ∈R,
+P[∀j = 1, 2, . . . , n + 1 : Sij ≤sj | Nτk = n]
+=
+X
+l1<l2<···<ln≤m<ln+1
+P[∀j : Sij ≤sj | ∀j : ij = lj, Nτk = n] P[∀j : ij = lj, | Nτk = n]
+=
+X
+l1<l2<···<ln≤m<ln+1
+P[∀j : Slj ≤sj | ˆTi ∈τk ⇔i ∈{l1, . . . , ln}] P[∀j : ij = lj | Nτk = n]
+=
+X
+l1<l2<···<ln≤m<ln+1
+P[∀j : Slj ≤sj | ∀j : ˆTlj ∈τk] P[∀j : ij = lj | Nτk = n]
+=
+X
+l1<l2<···<ln≤m<ln+1
+P[∀j : Sj ≤sj | ∀j : ˆTj ∈τk] P[∀j : ij = lj | Nτk = n]
+= P[∀j : Sj ≤sj | ∀j : ˆTj ∈τk] =
+n+1
+Y
+j=1
+P[Sj ≤sj | ˆTj ∈τk] =
+n+1
+Y
+j=1
+P[Sij ≤sj | Nτk = n]
+(3.6)
+where the last step follows from (3.5). Thus, we can apply Lemma 3.3 to (Sij)
+Nτk
+j=1, SiNτk +1 and find
+for (1 + n)q < n
+q ≤P[SiNτk +1 ≤ˆSτk
+q
+| Nτk = n]
+=
+X
+l>m
+P[SiNτk +1 ≤ˆSτk
+q
+| iNτk +1 = l, Nτk = n] P[iNτk +1 = l | Nτk = n]
+=
+X
+l>m
+P[Sl ≤ˆSτk
+q
+| iNτk +1 = l, Nτk = n] P[iNτk +1 = l | Nτk = n]
+=
+X
+l>m
+P[S ≤ˆSτk
+q
+| ˆT ∈τk, Nτk = n] P[iNτk +1 = l | Nτk = n]
+= P[S ≤ˆSτk
+q
+| ˆT ∈τk, Nτk = n].
+(3.7)
+In the case that (1 + n)q ≥n (in particular n = 0), we find
+q ≤1 = P[S ≤ˆSτk
+q
+| ˆT ∈τk, Nτk = n]
+as well by definition of ˆSτk as the essential supremum of S. As a result, the law of total probability
+yields
+P[S ≤ˆSτk
+q
+| ˆT ∈τk] =
+∞
+X
+n=0
+P[S ≤ˆSτk
+q
+| ˆT ∈τk, Nτk = n]
+|
+{z
+}
+≥q
+P[Nτk = n | ˆT ∈τk] ≥q.
+(3.8)
+Remark 3.6. Assuming S to be bounded a.s. in Proposition 3.5 is only necessary for the definition
+of ˆSτk
+q
+in the case that (1 + Nτk)q > Nτk as the essential supremum of S. This condition is trivially
+satisfied for the application in imaging where a pixel’s color or gray scale value is in [0, 1] or [0, 255].
+8
+
+PAGE 9
+We conclude coverage without the conditioning on a specific τk.
+Corollary 3.7. With the conditions of Proposition 3.5, define ˆSq = ˆSτk
+q
+where τk is such that
+ˆT ∈τk, then
+P[S ≤ˆSq] ≥q
+Proof. Applying Proposition 3.5 and the law of total probability we can compute
+P[S ≤ˆSq] =
+∞
+X
+k=0
+P[S ≤ˆSq | ˆT ∈τk] P[ ˆT ∈τk]
+=
+∞
+X
+k=0
+P[S ≤ˆSτk
+q
+| ˆT ∈τk] P[ ˆT ∈τk] ≥
+∞
+X
+k=0
+q P[ ˆT ∈τk] = q.
+3.3
+Application to Bayesian Imaging
+In the previous section we introduced the proposed method for estimating the prediction error in a
+general setting. In this section we explain the specific application to inverse problems in imaging.
+In order to apply our method to high dimensional image data, we model the samples Xi as the
+gray scale values of individual image pixels and Zi as the given observation of the image. That is,
+our method is applied to each image pixel separately. The method consists of two parts. First for a
+given a sample (xi, zi)i, we compute (si, ˆti) and afterwards, for new data z, ˆt(z) is computed and,
+for τk such that ˆt(z) ∈τk, the empirical quantile ˆsτk
+q
+is determined. The procedure is depicted in
+Algorithm 3.1.
+Algorithm 3.1 Error estimation.
+Input: Observation z, random sample (xi, zi)m
+i=1, variance bins (τk)k, confidence level q ∈(0, 1).
+Output: Point prediction ˆx, error estimate ˆsq.
+1: for i = 1, 2, . . . , m do
+2:
+ˆxi = ˆx(zi)
+3:
+ˆti = ˆt(zi)
+4:
+si = (ˆxi −xi)2
+5: end for
+6: ˆx = ˆx(z)
+7: ˆt = ˆt(z)
+8: Pick bin τk with ˆt ∈τk.
+9: nτk =
+
+i
+ ˆti ∈τk
+	
+10: Compute ˆsq according to (3.3).
+3.4
+Toy example in 1D
+Let us consider a toy example with known, continuous probability distributions. In this case we
+can work with exact quantiles instead of empirical estimates using conformal prediction.Let X
+9
+
+PAGE 10
+Figure 3.1: Left: Joint distribution p(x, z) with marginal distributions p(x), p(z) and posterior
+distributions p(x|z). Right: Posterior expectation E[X|Z = z] and posterior variance t = Var[X|Z =
+z] as functions of z as well as the conditional distribution of the error p(s|t) for specific instances of
+t. As in later usage, posterior variance and error are already presented in logarithmic scaling.
+be a uni-variate mixture of Gaussian distributions. More precisely, define the density of X as
+p(x) = PK
+k=1 αkN(ck, σ2
+xk) with αk > 0 and PK
+k=1 αk = 1 and let Z = X + N, with N ∼N(0, σ2
+z).
+The joint density of (X, Z) reads as
+p(x, z) =
+K
+X
+k=1
+αkN(µk, Σk),
+(3.9)
+with
+µk =
+ck
+ck
+
+,
+Σk =
+σ2
+xk
+σ2
+xk
+σ2
+xk
+σ2
+xk + σ2
+z
+
+,
+and is visualized in Fig. 3.1 for (c1, c2, c3) = (−1, 0, 1), σ2
+xk = 0.052, αk = 1
+3 for all k and σ2
+z = 0.32.
+There we show the joint distribution of (X, Z) as well as the corresponding marginal distributions.
+We additionally plot the resulting posterior distribution for observations of z = 0.55 and z = 0.0,
+the posterior expected value, and the posterior variance as well as the error. The latter two are
+presented in logarithmic scale. In this toy example we can explicitly compute the joint distribution
+of error and variance (S, T) using a change of variables. The result can be found in Fig. 3.2, where
+on the left we plot the joint distribution and on the right the cumulative conditional distribution
+with respect to S, (s, t) 7→P[S ≤s|T = t] is shown. The dashed line indicates the 0.9 quantile of the
+10
+
+PAGE 11
+conditional error distribution. An application of the proposed method in this ideal scenario reads as
+follows: Given an observation Z = z, compute the point prediction ˆx(z) and posterior variance t(z).
+Then in Fig. 3.2 the 0.9 quantile of the error is obtained as the value of s where the dashed quantile
+line intersects the vertical line at t = t(z). While this example is mathematically well-behaved, in
+imaging applications, neither are statistics of the posterior distribution mathematically tractable,
+nor do we have access to an unlimited amount of data. The former forces us to make use of sampling
+techniques while the latter demands the use of conformal prediction in order to retain theoretical
+guarantees. In Fig. 3.3 we illustrate the conformal prediction strategy for the toy example. We
+estimate the distribution empirically from 2 · 106 synthetically generated samples. In the right figure
+we added the exact conditional quantiles as well as the estimation based on conformal prediction,
+demonstrating the accuracy of the approximation.
+Figure 3.2: Joint log-distribution log p(s, t) (left) and cumulative conditional distribution over error
+(right). The gray dashed line indicates the conditional 0.9 quantile.
+Figure 3.3: Empirical joint log-distribution log p(s, t) (left) and empirical cumulative conditional
+distribution over error (right). The dashed gray line indicates the exact conditional 0.9 quantile of
+the distribution, the red lines indicates the respective estimated conformalized quantile.
+11
+
+PAGE 12
+4
+Algorithms for the Computation of Posterior Expectation
+and Variance
+Within our methods we need to compute approximations of posterior expectation and variance.
+For the typical models of image distributions, an analytical computation is not feasible. Hence, we
+are forced to compute statistics based on samples. In the following we introduce algorithms for
+sampling from distributions π(x) from the exponential family π(x) ∝exp (−E(x)), on Rd, d ≥1
+with a potential (or energy) E(x). In particular in the case of posterior sampling from a Bayesian
+model
+E(x) = −log(p(z|x)) −log(p(x)) = −log(p(x|z)) + const.
+which is equal to the log-posterior up to an unknown normalization constant. The presented
+algorithms yield samples (xk)K
+k=1 from to the distribution π(x) = −log(p(x|z)) based on the
+observation z. Using this samples, as point prediction and variance approximation we will use the
+sample mean and sample variance, respectively, i.e.,
+ˆx(z) = 1
+K
+K
+X
+k=1
+xk,
+ˆt(z) = 1
+K
+K
+X
+k=1
+(xk −ˆx(z))2.
+(4.1)
+After dealing with differentiable energies in Section 4.1, in Section 4.2, we propose a novel sampling
+method called unadjusted Langevin primal-dual algorithm (ULPDA), which combines Langevin
+dynamics with a primal-dual algorithm. Further, in Section 4.3, we introduce Belief Propagation
+(BP) on Markov random fields (MRF) which is later used as a comparison benchmark for the
+Langevin algorithm.
+4.1
+Langevin Algorithms for Differentiable Energies
+Assume that the energy E(x) is differentiable with Lipschitz continuous gradient, i.e., there exists a
+constant L ≥0 such that
+∥∇E(x) −∇E(y)∥2 ≤L∥x −y∥2,
+for all x, y ∈Rd. Langevin based sampling algorithms are discretizations of the over-damped
+Langevin diffusion equation [36, 47],
+dXt = −∇E(Xt) +
+√
+2dBt,
+(4.2)
+where dBt is a d-dimensional Brownian motion. The stationary distribution of (Xt)t is the distribution
+π itself [47]. The striking advantage of the Langevin diffusion equation over classical density-based
+sampling algorithms is that only information about gradients is required and, hence, no normalization
+constant is needed, that is, it is sufficient to have knowledge of the distribution π up to a multiplicative
+scalar factor. Intuitively, in (4.2) a gradient ascent towards a mode of π is performed but the
+declination injected by the Brownian motion ensures that generated samples cover the entire space
+exactly with density π(x). The scaling factor
+√
+2 balances the deterministic force induced by the
+gradient of the log distribution and the stochastic force induced by the Brownian motion.
+For a numerical simulation of the stochastic Langevin diffusion equation, the simplest approach
+is the Euler-Maruyama discretization [24] which is rooted in the classical forward-Euler method.
+This yields an iterative algorithm, known as the Unadjusted Langevin algorithm, which essentially
+resembles a gradient descent on the energy E(x) combined with noise (ULA) [18], see Algorithm 4.1,
+12
+
+PAGE 13
+Algorithm 4.1 Unadjusted Langevin Algorithm (ULA)
+Input: Initial values x0 ∈Rd, and step sizes τk > 0.
+Output: Sequence {xk}k≥0.
+1: for k = 0, . . . , K −1 do
+2:
+xk+1 = xk −τk∇E(xk) + √2τkξk
+3: end for
+where ξk ∼N(0, Idd) is i.i.d. from a d-dimensional Gaussian distribution. It has been shown that
+the Markov chain {xk}k≥0 generated by the ULA converges to a stationary distribution πτ(x) and
+the target distribution π(x) is obtained for τk →0 and P
+k τk = ∞[28, 29]. Conversely, for τk > 0,
+the stationary distribution of {xk}k≥0 contains some sort of bias and hence remains unadjusted. By
+the inclusion of an additional Metropolis test, the ULA can be turned into the Metropolis adjusted
+Langevin algorithm (MALA) [48], whose stationary distribution is π, even in case that τk remains
+strictly bounded away from 0.
+4.2
+Primal-Dual Langevin Algorithm for Non-differentiable Energies
+We will now investigate the case of a non-differentiable potential with the aim of developing a
+Langevin based sampling algorithm which is also applicable, e.g., for potentials such as those
+incorporating TV-regularization, see Section 5.1. A remedy making ULA applicable nonetheless is
+smoothing the potential E(x), either by directly replacing any non-smooth function by a smooth
+approximation or by considering other model-based smoothness approaches such as the Moreau
+envelope [18], whose gradient can be computed efficiently whenever the proximal map can be
+computed efficiently. However, we propose a different approach. Let us consider the general case of
+an energy of the form E : Rd →R,
+E(x) = sup
+p∈Rd′⟨Dx, p⟩+ g(x) −f ∗(p).
+(4.3)
+with D : Rd →Rd′ a linear operator with operator norm L = ∥D∥, f, g proper, convex, and
+lower-semicontinuous and f ∗the convex conjugate of f. Potentials of this type can be efficiently
+minimized by first-order primal-dual algorithms [11]. Interestingly, the flexibility of the step size
+condition in the primal-dual algorithm opens up the possibility to turn the primal-dual algorithm
+into a primal algorithm (τk →0, σk →∞), minimizing a particular Moreau-envelope of the primal
+problem, or into a dual algorithm (τk →∞, σk →0), maximizing a particular Moreau-envelope of
+the dual problem. Therefore, it is quite natural to propose an Unadjusted Langevin Primal-Dual
+Algorithm (ULPDA), which is a primal-dual algorithm with small primal step size and the Gaussian
+noise injected into the primal variable. The algorithm is summarized in Algorithm 4.2.
+Remark 4.1.
+• Consecutive iterates (xk, xk+1) from Langevin algorithms are not independent in general,
+which is why it is recommended to compute the approximations in (4.1) based on the sample
+(xkH)k, instead of (xk)k, where H ∈N, H >> 1 defines the number of skipped samples in
+order to obtain a thinned version of the Markov chain. For sufficiently large H, it can be
+assumed that after thinning (xkH, xkH+H) are approximately i.i.d. This, however, leads to
+13
+
+PAGE 14
+Algorithm 4.2 Unadjusted Langevin Primal-Dual Algorithm (ULPDA)
+Input: Initial values x0 ∈Rd, p0 ∈Rd′, and step sizes σkτkL2 ≤1, θk ∈[0, 1], L = ∥D∥
+Output: Sequence {xk}k≥0.
+1: for k = 0, . . . , K −1 do
+2:
+
+
+
+
+
+
+
+¯pk
+= pk + θk(pk −pk−1),
+xk+1
+= proxτkg(xk −τkD∗¯pk) + √2τkξk,
+pk+1
+= proxσkf ∗(pk + σkDxk+1).
+(4.4)
+3: end for
+a vast increase of computational effort. Throughout our experiments we set the thinning
+length to H = 1. As explained in Remark 3.4 the theoretical guarantees are not affected by
+heuristics in this part of the method. Moreover, an empirical justification of this choice can
+be found in Appendix D, where we show that the effect of thinning regarding the desired
+statistical quantities is negligible.
+• In order to reduce memory consumption, in practice ˆx and ˆt are computed from the sample
+according to Welford’s algorithm [60].
+4.3
+Belief Propagation
+Conversely to the sampling based methods introduced in the previous sections, Belief Propagation
+(BP) [42, 57] is a sampling free algorithm for computing marginals of a given discrete multivariate
+distribution. The method is designed for graphical models and, in particular, we consider the
+application to Markov random fields (MRF) [31]. Let G = (V, E) be a graph with nodes V and
+edges E, where in the case of imaging each node ν ∈V corresponds to an image pixel, and edges
+(ν, ν′) ∈E ⊆V2 define a neighborhood system of pixels. In a MRF we are given a random vector
+X corresponding to the graph G, consisting of discrete random variables Xν for ν ∈V which take
+values in a label set L = {l1, ..., lL}. The Markov property is encoded in the model by requiring
+that for I, J ⊂V not intersecting or adjacent, XI
+|=
+XJ|XV\(I∪J), that is, XI independent of XJ
+conditioned on XV\(I∪J). Using BP, the marginal distributions
+P[Xν = xν] =
+X
+x′∈L|V|:
+x′
+ν=xν
+P[X = x′].
+can be computed efficiently with results being exact in case of tree-like graphs and highly accurate
+approximations otherwise. In turn the pixel-wise posterior expectation ˆx and variance ˆt are computed
+as
+ˆxν =
+X
+xν∈L
+xνP[Xν = xν],
+ˆtν =
+X
+xν∈L
+(xν −ˆxν)2P[Xν = xν],
+Due to its high accuracy, the result of the BP algorithm can be used as a benchmark for the sampling
+based methods.
+14
+
+PAGE 15
+1k
+20k
+40k
+60k
+80k
+100k
+120k
+140k
+iterations
+10−3
+10−2
+MD(ˆxBP, ˆxLVk)
+TVH
+τ =1e-05
+τ =3e-05
+τ =5e-05
+τ =8e-05
+∆
+2k
+20k
+40k
+60k
+80k
+100k
+120k
+140k
+iterations
+10−3
+2 × 10−3
+3 × 10−3
+4 × 10−3
+MD(
+pˆtBP,
+q
+ˆtLVk)
+TVH
+τ =1e-05
+τ =3e-05
+τ =5e-05
+τ =8e-05
+∆
+Figure 4.1: Mean absolute difference of MMSE and posterior variance estimated using ULPDA for
+different values of τ and ULA with Huber TV (TVh) compared to BP as function of the number of
+samples with discretization threshold ∆=
+1
+1024.
+5
+Numerical experiments
+In this section, we present numerical results of various experiments with the proposed method,
+verifying our theoretical predictions. The source code to reproduce basic experiments can be found on
+[40]. Throughout the experiments, we compute the error quantiles ˆsq of the reconstruction according
+to Algorithm 3.1 in different settings. In our first experiment, presented in Section 5.1, we consider
+total variation based image denoising where we also present a comparison of the ULPDA results
+to the highly accurate BP results. Afterwards we replace the total variation regularization with a
+fields of experts [50] regularizer in Section 5.2 and with total deep variation [26] in Section 5.3. In
+Section 5.4 we consider the inverse problem of accelerated magnetic resonance imaging showing the
+flexibility of our approach with respect to the forward operator of the inverse problem. In Section 5.5
+we compare the proposed method to the one from [5]. While the theory and the algorithms were
+presented for X being one-dimensional, we consider high-dimensional image data in the following.
+This is done by applying our methods to each pixel separately, that is, the error quantile for an
+image is computed for each pixel separately based on the approximate posterior variance of this
+pixel’s gray scale value. Doing so, each image sample provides as many samples of the relation
+between posterior variance and error as its number of pixels. However, strictly speaking, only one of
+these pixel-wise samples could be used in the quantile estimation, since different pixels of the same
+image are not independent in general. Our empirical investigation of this effect, see Appendix B,
+however, has shown that using all pixels of a single image has a negligible effect on the obtained
+coverage in practice. For this reason, we use all pixels of each image sample in the subsequent
+experiments, and refer to Appendix B for further details.
+To evaluate our method quantitatively, we use two different metrics, the coverage and the
+magnitude of the estimated quantiles, where the former is a verification of the theoretical results as
+well as a measure for tightness of the quantiles and the latter a measure of the quality of the estimate.
+We define the coverage as the rate of correct predictions where the true reconstruction error is
+smaller or equal than the estimated quantile. Precisely, for an image with true error s ∈RM×N and
+15
+
+PAGE 16
+predicted pixel-wise quantile ˆsq ∈RM×N, the coverage is defined as
+coverage = |{(i, j) | si,j ≤(ˆsq)i,j}|
+NM
+.
+and for a data set containing multiple images we compute the mean of the coverage over all test
+images. The best method is the one yielding the smallest estimated quantiles satisfying the prescribed
+coverage.
+For our experiment we use gray scale images with values in [0, 1] from the BSDS training set
+corrupted with zero mean Gaussian noise with σ = 15/255. For the estimation of the distribution of
+(S, ˆT) 400 images are used and we evaluate our method on a test set of 68 unseen images, referred
+to as BSDS 68 in the following.
+ˆxBP
+ˆxLV
+|ˆxBP −ˆxLV |
+ˆtBP
+ˆtLV
+|ˆtBP −ˆtLV |
+Figure 5.1: Comparison of ULPDA-sampling results and BP reconstruction results for denoising
+with σ = 15/255. The ULPDA reconstructions were obtained for a primal step size of τ = 5e−5 and
+50k iterations (8e−4
+3.5e−2, 0
+0.01/1e−3 for MMSE and variance difference
+respectively).
+5.1
+TV-ℓ2 Denoising
+In denoising the aim is to recover an unknown noise-free image x ∈RM×N from a noisy observation
+z ∈RM×N, where the relationship between x and z is described by the following linear forward
+model
+z = x + ν,
+where each noisy pixel νi,j is independently sampled from a Gaussian distribution with zero mean
+and variance σ2. Based on the forward model and the i.i.d. Gaussian assumption, the likelihood is
+simply given by the Gaussian distribution
+p(z|x) ∝exp
+
+−1
+2σ2 ∥x −z∥2
+2
+
+.
+In this particular experiment, as in [10, 51], we assume a prior 1 based on the total variation,
+p(x) ∝exp
+
+−TV(x)
+λ
+
+,
+1Note that due to the lack of coercivity of TV(x) its associated prior is not well defined. However, by combining
+the prior with the likelihood function, the posterior is well-defined.
+16
+
+PAGE 17
+where λ plays the role of a variance parameter of the prior. Combining the likelihood with the prior,
+the negative log-posterior respectively the variational model is given by
+−log(p(x|z)) =
+1
+2σ2 ∥x −z∥2
+2 + 1
+λ TV(x) + const,
+(5.1)
+where we recall that an additive constant term is irrelevant for sampling via Langevin algorithms
+as only evaluations of the gradient of −log(p(x|z)) are used. In what follows, we consider the
+anisotropic total variation
+TV(x) =
+X
+i,j
+|xi+1,j −xi,j| + |xi,j+1 −xi,j| = ∥Dx∥1,
+where D : RM×N →RM×N×2 is a suitable finite differences operator, defined by
+(Dx)i,j,1 =
+(
+xi+1,j −xi,j
+if 1 ≤i < M,
+0
+else,
+(Dx)i,j,2 =
+(
+xi,j+1 −xi,j
+if 1 ≤j < N,
+0
+else.
+(5.2)
+See for example [12] for further information. The anisotropic total variation is chosen in order to
+render the problem amenable for the BP algorithm presented in Section 4.3. While we make use
+of the novel ULPDA, Algorithm 4.2, for the error estimation, in the following paragraph we first
+confirm functionality and estimate hyperparameters of this novel algorithm by a comparison to the
+highly accurate results obtained with BP.
+Figure 5.2: TV-ℓ2 Denoising σ = 15/255. The left figure shows the joint log density of error S and
+estimated variance ˆT, while the right figure shows the conditional cumulative distribution for the
+error. The black line indicates the conformalized 0.9 quantile.
+A Comparison of ULPDA and Belief Propagation
+For BP to be applicable we have to
+discretize the TV denoising problem. Thus, we replace the continuous gray scale label space [0, 1] by
+the discretization lk = k/L, k = 0, ..., L. The node set V = {(i, j) | i = 1, . . . , M, j = 1, . . . , N} is
+17
+
+PAGE 18
+the set of all image pixels and the edge set E the set of 4-nearest neighbors on the pixel grid. In
+particular, in this setting the the log posterior probability factors nicely
+−log P(X = x|Z = z) = −log P(Z = z|X = x) −log P(X = x) + const.
+=
+X
+ν∈V
+gν(xν) +
+X
+(ν,ν′)∈E
+fν,ν′(xν, x′
+ν) + const,
+(5.3)
+where gν : L →R are unary terms representing the data likelihood and the pairwise terms
+fν,ν′ : L2 →R correspond to the prior. These are defined as
+gν(xν) =
+1
+2σ2 (xν −zν)2,
+fν,ν′(xν, x′
+ν) = 1
+λ|xν −x′
+ν|.
+In the following experiment we set the number of labels to L = 1024 and use the Sweep Belief
+Propagation algorithm with 10 iterations to obtain the respective results.
+In Fig. 4.1, for a
+noisy observation z with σ = 15/255, on the left side we show the mean absolute difference
+MD(ˆxBP , ˆxLV,k) =
+1
+MN
+P
+i,j |ˆxLV,k,ij −ˆxBP,ij| of the MMSE computed with BP (ˆxBP ) to the one
+computed with ULPDA (ˆxLV,k) for different values of τ in dependence on the number of samples K
+of ULPDA. On the right hand side we compare the posterior variances ˆtBP and ˆtLV,k in the same
+manner. Additionally, we compare with the results of a smooth approximation of the total variation
+by Huber TV [12] where we use the ULA scheme Algorithm 4.1 for sampling. As Fig. 4.1 indicates,
+the UPDLA results converge faster for primal step sizes of τ > 1e−5. Based in this results, for
+subsequent experiments with UPDLA, a primal step size τ = 5e−5 and K = 50.000 iterations is
+used since this yields a good tradeoff between approximation accuracy and computational cost. For
+the task of denoising, we further found that no burn in phase is necessary since a steady state is
+acquired within a few iterations. The qualitative visual comparison between the BP and ULPDA
+results for the favoured hyperparameters, depicted in Fig. 5.1, show that no visual deviation can be
+observed between ˆxLV and ˆxBP . The same holds for the estimated posterior variances ˆtLV and ˆtBP .
+A visualization of the pixel marginals obtained with the two methods can be found in Fig. E.1.
+Results for Error Estimation
+In Section 5.1 we show the resulting estimated distribution of
+(S, ˆT) obtained from posterior sampling with ULPDA. Exemplary reconstruction results alongside
+the pixelwise estimated quantile are shown in Fig. 5.3. The quantitative results for this experiment
+can be found in Table 5.2.
+5.2
+Fields-of-Experts-ℓ2 Denoising
+In this section we consider the task of denoising again, but replace the total variation regularization
+by a more complex, non-convex data driven prior, the so-called Fields of Experts (FoE) [50] which
+reads as p(x) ∝exp
+
+−F oE(x)
+λ
+
+with
+FoE(x) =
+C
+X
+c=1
+M
+X
+i=1
+N
+X
+j=1
+ϕc((kc ∗x)i,j),
+C ∈N experts of the form ϕc(t) = αc log(1 + t2
+i ) with αc and 2D convolution kernels kc being the
+trainable parameters of the method. The respective negative log-posterior reads as
+−log(p(x|z)) =
+1
+2σ2 ∥x −z∥2
+2 + 1
+λFoE(x) + const.
+(5.4)
+18
+
+PAGE 19
+ground truth x
+observation z
+reconstruction ˆxLV
+true error s
+predicted quantile ˆs0.9
+Figure 5.3: TV-ℓ2 Denoising. Reconstruction results for samples from the BSDS dataset and a noise
+level of σ = 15/255. From left to right: ground truth image x, observation z, reconstruction ˆxLV ,
+true error s, and predicted 0.9 quantile ˆs0.9 (0
+0.02).
+Since the described prior is non-convex, the ULPDA algorithm is not applicable. However, sampling
+from the posterior is still possible using the ULA algorithm described algorithm 4.1
+The FoE prior used for this experiment was trained on the BSDS dataset in a bi-level optimization
+scheme as presented in [13]. The ULA algorithm is performed with 50k iterations. A step size of
+τ = 1e−4 and a regularization parameter of λ = 0.125 were determined empirically. As before we
+use 400 images from the BSDS data set to estimate the distribution of (S, ˆT) and evaluate on a
+test set of 68 unseen images. The estimated error-variance distribution can be found in Section 5.2.
+Qualitative results are shown in Fig. 5.5 and quantitative results in Table 5.2 again.
+5.3
+Total Deep Variation-ℓ2 Denoising
+The last experiment in the additive Gaussian denosing setting is performed using the Total Deep
+Variation (TDV) [26] regularizer. As in the previous experiment, this regularizer is a non-convex
+data driven prior, however, orders of magnitude more powerful in terms of its approximation
+capability due to the greater amount of trainable parameters. Formally, the prior is defined as
+19
+
+PAGE 20
+Figure 5.4: FoE-ℓ2 Denoising σ = 15/255. The left figure shows the joint log density of error S and
+estimated variance ˆT, while the right figure shows the conditional cumulative distribution for the
+error. The black line indicates the conformalized 0.9 quantile.
+p(x) ∝exp
+
+−T DV (x)
+λ
+
+with
+TDV (x) =
+M
+X
+i=1
+N
+X
+j=1
+Ψ(x)i,j,
+where Ψ : RM×N →RM×N is a U-Net inspired convolutional neural network. We refer the reader
+to [26] for a more detailed description of the TDV. As in the prevoius experiment, we use the ULA
+for sampling. Values of τ = 1e−3, λ =
+1
+5.7 and β = 150 have empirically proven to yield satisfactory
+results. Note that the natural choice of β =
+1
+σ2 was neglected, since β was subject to optimization
+in the training of the TDV and must therefore be chosen accordingly. As before, we use 50k samples
+of the respective Langevin algorithm. The data setup is the same as in the previous experiment.
+The estimated error-variance distribution is shown in Section 5.3, qualitative results in Fig. 5.7, and
+quantitative ones again in Table 5.2.
+5.4
+MRI Reconstruction
+We now consider an inverse problem with a non-trivial forward operator and reuse the same TDV as in
+the previous section as a prior. The aim of accelerated MRI reconstruction is to recover an image x ∈
+RM×N from a complex-valued observation z ∈CM×N representing the undersampled k-space data.
+The relation of image and k-space data is given by the linear operator A : CM×N →CM×N composed
+of the two-dimensional discrete Fourier transform F : CM×N →CM×N and an undersampling
+operator M : CM×N →CM×N, together with additive measurement noise ν, formally expressed as
+z = Ax + ν = MFx + ν.
+(5.5)
+Since the gradient step on the negative log-likelihood can be efficiently solved as proximal mapping,
+we use a proximal version of the ULA namely P-ULA [43] in this experiment. The proximal map of
+the negative log-likelihood reads as
+proxτkD(˜x) = real(F−1((Id + τkβM ∗M)−1(F ˜x + τkβM ∗z))).
+20
+
+PAGE 21
+ground truth x
+observation z
+reconstruction ˆxLV
+true error s
+predicted quantile ˆs0.9
+Figure 5.5: FoE-ℓ2 Denoising. Reconstruction results for samples from the BSDS dataset and a noise
+level of σ = 15/255. From left to right: ground truth image x, corrupted image z, reconstruction ˆxLV
+, true error s, and predicted 0.9 quantile ˆs0.9 (0
+0.02).
+Note that the TDV used in this setup is identical to the one used in the previous section and is
+therefore not specifically trained for the purpose of accelerated MRI reconstruction. In contrast to
+the denoising experiments, the choice of the data-likelihood weighting is not clear, due to the linear
+operator. As in [39] we use a high value for the weighting parameter β = 1e7 which almost leads to
+a projection on the acquired k-space lines due to the proximal map. The regularization parameter
+was set to a value of λ =
+1
+15. Another difference to the denoising experiments is that we conduct a
+burn in phase of 500 iterations to acquire a steady state in this setup. We used 420 central sclices
+from the fastmri knee multicoil training dataset [25] with CORPD contrast to generate real valued
+groundtruth images from the root-sum-of-squares solution, which is further used to estimate the
+distribution of (S, ˆT). Evaluation was performed on a test set of 100 images from the respective
+validation dataset. The estimated joint distribution of error and variance is shown in Section 5.4,
+qualitative results of the method in Fig. 5.9, and quantitative ones in Table 5.3.
+5.5
+Comparison to the State of the Art
+In this section we compare the proposed method to an existing method for error estimation in
+imaging. While there are several methods available for uncertainty quantification, a fair comparison
+21
+
+PAGE 22
+Figure 5.6: TDV-ℓ2 Denoising σ = 15/255. The left figure shows the joint log density of error S and
+estimated variance ˆT, while the right figure shows the conditional cumulative distribution for the
+error. The black line indicates the conformalized 0.9 quantile.
+can only be made to other methods also estimating the prediction error.
+The Comparison Method
+Given a heuristic algorithm predicting pixel wise confidence intervals,
+in [5] the authors propose a method of calibrating said algorithm in order to obtain guaranteed
+coverage. More precisely, assume we are given a heuristic predictor T : Z →R3×N×M, T (z) =
+(ˆl(z), ˆx(z), ˆu(z)), where ˆx is a point estimate of the ground truth image and ˆl, ˆu denoting lower and
+upper bounds of the heuristic pixel-wise confidence intervals, satisfying ˆli,j(z) < ˆxi,j(z) < ˆui,j(z) for
+all pixels (i, j). Define a scaled interval predictor for λ > 0 as Tλ : Z →R3×N×M,
+Tλ(z) = (ˆlλ(z), ˆx(z), ˆuλ(z)),
+ˆlλ(z) = ˆx(z) + λ(ˆl(z) −ˆx(z)),
+ˆuλ(z) = ˆx(z) + λ(ˆu(z) −ˆx(z)).
+(5.6)
+Using a calibration data set (Xi, Zi)i∈Ical, the parameter Λ = λ((Xi, Zi)i∈Ical) is chosen to ensure
+P
+"
+E
+
+1
+NM |{(i, j) | Xi,j ∈[lΛ(Z)i,j, uΛ(Z)i,j]}|
+ (Xi, Zi)i∈Ical
+
+|
+{z
+}
+expected coverage conditioned on calibration data
+≥1 −α
+#
+≥1 −δ
+(5.7)
+for α, δ ∈(0, 1) defined arbitrarily by the user. That is, the method from [5] ensures a bounded
+expected coverage on a new sample in probability over the calibration data. Two main differences to
+the proposed method are i) that in [5] a method yielding a point estimate, a lower and an upper
+interval bound is needed already before the calibration, whereas for the proposed method a prior
+on the image data is sufficient, and ii) while the proposed method yields a direct probability on
+the coverage, in (5.7) we obtain nesting of coverage and expectation. The benefit of the result in
+(5.7) is that it allows for a prediction over the entire image, which comes at the cost of not knowing
+which pixels are the ones not correctly covered.
+22
+
+PAGE 23
+ground truth x
+observation z
+reconstruction ˆxLV
+error s
+predicted quantile ˆs0.9
+Figure 5.7: TDV-ℓ2 Denoising. Reconstruction results for samples from the BSDS dataset and a noise
+level of σ = 15/255. From left to right: ground truth image x, corrupted image z, reconstruction ˆxLV
+, true error s, and predicted 0.9 quantile ˆs0.9 (0
+0.02).
+Experimental Setup
+For the comparison we consider again TV-ℓ2 denoising as in Section 5.1.
+We apply the method from (5.7) with the heuristic interval predictor defined via
+ˆl(z) = ˆx(z) −
+q
+ˆt(z),
+ˆu(z) = ˆx(z) +
+q
+ˆt(z).
+(5.8)
+with ˆt(z) the estimated posterior variance. While in (5.7) the authors present several different
+trained methods yielding heuristic interval predictors we decided to use (5.8) since we think it allows
+for a reasonable comparison, focused on the calibration of the predictor ensuring coverage and rather
+than on the performance of the heuristic. Moreover, since the heuristic estimator would need to be
+trained on a distinct data set, additional sources of volatility with respect to the performance would
+be introduced via the training process. In order to obtain results comparable to our method, for
+the q-quantile we pick α, δ performing a grid search minimizing the average estimated interval size
+while requiring that (1 −α)(1 −δ) = q which is the most sensible choice according (5.7) in order to
+obtain a coverage of approximately q over all image pixels. The coverage results can be found in
+Table 5.1 with a box plot comparing the interval sizes to the proposed method in Section 5.5. In
+this case the interval size of the proposed method is computed as 2
+p
+ˆsq, twice the estimated error,
+and the interval size of [5] as ˆuλ −ˆlλ.
+23
+
+PAGE 24
+Figure 5.8: TDV-ℓ2 4-fold MRI reconstruction. The left figure shows the joint log density of error S
+and estimated variance ˆT, while the right figure shows the conditional cumulative distribution for
+the error. The black line indicates the conformalized 0.9 quantile.
+Table 5.1: Quantitative comparison of the proposed method and [5] for BSDS 68 test data and the
+task of denoising with TV-ℓ2. Average coverage for different quantiles.
+Coverage
+Discrepancy to quantile in %
+Quantile
+Reference
+Ours
+Reference
+Ours
+0.85
+0.8973
+0.8444
+4.73
+0.6
+0.90
+0.9406
+0.8951
+4.06
+0.49
+0.95
+0.9805
+0.9465
+3.05
+0.35
+5.6
+Evaluation of the Numerical Experiments
+In this section, we evaluate and discuss the results of the performed experiments. For this, we stress
+that the aim of the proposed work is not to obtain highly accurate reconstructions of the unknown
+ground truth, but rather to obtain tight bounds of the reconstruction error satisfying the desired
+coverage. First of all, note that quantitatively in all experiments coverage is obtained accurately,
+as can be seen in Table 5.2 and 5.3. The slight deviation from the predicted coverage despite the
+theoretical results only requiring a finite data set can be explained since, while our method only
+relies on a finite data set, the evaluation of probabilites, indeed, requires an infinite amount of data
+in order to be exact. Coverage, however, is guaranteed by the theoretical results for all methods
+anyway. Differences in performance should, thus, be measured rather in terms of the magnitude
+of the predicted error quantiles. In Section 5.6 we therefore show box plots of the estimated error
+quantiles for our denosing experiments. We can observe that all methods yield practically useful
+error estimates with magnitudes of the order 10−3 to 10−2 for images with gray scale values in [0, 1].
+Over all values of q, we can clearly note that the TDV prior yields the tightest estimates, followed by
+the FoE prior and lastly the TV prior. This trend is not surprising, as TDV is the most complex of
+the three models and TV clearly the simplest one. Let us focus now on a qualitative analysis of the
+results. In Sections 5.1 to 5.4 we find that for all conducted experiments, the cumulative distribution
+of the reconstruction error conditioned on the posterior variance is mostly monotonically increasing,
+empirically supporting the predictive capability of the posterior variance for the error. Exceptions
+24
+
+PAGE 25
+ground truth x
+zero ﬁlling z
+reconstruction ˆxLV
+true error s
+predicted quantile ˆs0.9
+Figure 5.9: MRI reconstruction results for CORPD data and R = 4. From left to right: ground
+truth image x, zero filling z, reconstruction ˆxLV , true error s, and predicted 0.9 quantile
+ˆs0.9 (0
+0.06)
+of monotonicity are observed only for extreme values of the variance in the form of oscillations and
+are most likely caused by a lack of data in these regions. Throughout all experiments, we observe
+that the estimated error quantiles structurally resemble the true reconstruction errors, see Figs. 5.3,
+5.5, 5.7 and 5.9. In general, errors are concentrated at image edges which can be expected as most
+priors, especially TV type, penalize precisely image edges. The main differences between different
+priors are found in the heatmaps’ sharpness around edges and overall smoothness and are a result
+of locality of the respective prior. The TV prior acts only on three neighbouring pixels resulting
+in sharp edges with the disadvantage of yielding noisy estimates with non-trivial error quantiles
+also in constant regions of the image, see Fig. 5.3. The FoE prior yields smoother error estimates
+where noise is only visible slightly in constant regions, Fig. 5.5. Again the best results are obtained
+with TDV, Fig. 5.7, where error estimates are practically zero in constant regions of the image while
+still providing more detailed estimates than FoE (see the details of the castle) at the cost of some
+oversmoothing, see for instance the predicted error at the bush in the lower image. Furthermore, the
+reconstruction in the second row of Fig. 5.7 shows a pixel wit a high error which was not detected
+by our method, which can be explained by the fact that we only guarantee a 90% chance of a
+respective error being below the estimated quantile. The overall tendency of TDV yielding the
+best and FoE the second best results is also reflected in Table 5.2 in the respective values of the
+mutual information of S and ˆT, which is a quantitative measure for the predictive capabilities of ˆT
+wrt. S, see Appendix C. We observe a significant increase from TV to FoE and a further, smaller
+increase to TDV. For the sake of completeness we also added the PSNR and SSIM values in the
+tables. Regarding a comparison to the state of the art, our method outperforms the one proposed in
+[5] in terms of interval sizes as shown in Section 5.5. Among all considered quantiles, the interval
+25
+
+PAGE 26
+0.85
+0.85
+0.9
+0.9
+0.95
+0.95
+Quantile
+0.05
+0.10
+0.15
+0.20
+Interval Size
+Reference
+Ours
+Figure 5.10: Box plots of the estimated interval size on test data for different values of q. Comparison
+of the proposed method and the reference [5]. Each individual box shows the respective estimated
+interval size, with the box representing the inter quantile range and the orange bar being the median.
+sizes with the proposed method tend to be statistically smaller with tighter coverage as shown
+in Table 5.1. It should, however, be mentioned that the method from [5] might yield improved
+results using a more sophisticated heuristic interval predictor as explained in Section 5.5. Moreover,
+coverage on a per pixel base cannot be prescribed for the method in [5] and the applied choice of
+α, δ from (5.7) satisfying (1 −α)(1 −δ) = q might not be optimal.
+Table 5.2: Quantitative Results for different regularization approaches for denoising with σ = 15/255
+on the BSDS 68 dataset. Left: PSNR, SSIM, and mutual information (Appendix C) of (S; T) for
+different experiments. Right: Coverage for different estimated quantiles and experiments.
+Method
+Metric
+PSNR
+SSIM
+I(S;T)
+Method
+Quantile
+0.85
+0.9
+0.95
+0.99
+Corrupted
+24.78
+0.5820
+-
+TV-ℓ2
+29.34
+0.7913
+0.1231
+TV-ℓ2
+0.8444
+0.8951
+0.9465
+0.9888
+FoE-ℓ2
+30.29
+0.8370
+0.1609
+FoE-ℓ2
+0.8447
+0.8948
+0.9459
+0.9883
+TDV-ℓ2
+30.79
+0.8484
+0.1650
+TDV-ℓ2
+0.8527
+0.9023
+0.9516
+0.9906
+Table 5.3: Quantitative Results for 4-fold accelerated MRI reconstruction with the TDV on the
+fastmri validation dataset.
+Method
+Metric
+PSNR
+SSIM
+I(S;T)
+Method
+Quantile
+0.85
+0.9
+0.95
+0.99
+Corrupted
+10.66
+0.0145
+-
+TDV-ℓ2
+34.79
+0.8812
+0.1554
+TDV-ℓ2
+0.8461
+0.8966
+0.9478
+0.9895
+6
+Conclusions
+In this work we propose a general framework for error estimation for inverse problems in imaging
+that is flexible with respect to the forward operator as well as the chosen reconstruction approach
+as long as posterior sampling is possible. Given any point estimate for the inverse problem and an
+26
+
+PAGE 27
+0.85
+0.85
+0.85
+0.9
+0.9
+0.9
+0.95
+0.95
+0.95
+0.99
+0.99
+0.99
+Quantile
+−3.5
+−3.0
+−2.5
+−2.0
+−1.5
+log10 Error s
+TV-ℓ2
+FoE-ℓ2
+TDV-ℓ2
+Figure 5.11: Box plots of the estimated error quantiles for denoising on test data for different values
+of q and different priors. Each individual box shows the respective distribution of errors, with the
+box representing the inter quantile range and the orange bar being the median.
+i.i.d. sample, the method enables to estimate pixel-wise quantiles of the reconstruction error for an
+unseen sample. Coverage of the estimated error quantiles is guaranteed without assumptions on the
+underlying distributions. In various experiments we show that the proposed method works accurately
+for different regularization approaches as well as inverse problems. Accurate knowledge about possible
+reconstruction errors might be especially important for critical tasks such as medical imaging where
+medical experts base the patients treatment on reconstructed images and therefore have an option
+to revise diagnoses based on structures that clearly show a high error potential. In future work
+the mutual information I(S; T) between posterior variance and error might become an interesting
+metric to quantify the predictive capability of the posterior variance for the reconstruction error of
+a specific method. Furthermore future approaches could consider a different choice of statistical
+entities, such as substituting the MMSE by the median and the variance by the median absolute
+deviation and canonically the mean squared error by the mean absolute difference.
+Limitations
+From a theoretical point of view, the presented results guarantee the desired coverage
+for each pixel individually. However, they do not directly carry over to an assertion regarding
+coverage of all pixels in an image. In order to circumvent this issue, in [5] the authors bound the
+expected value of the rate of correctly covered pixels in an image using methods of risk control. A
+side effect of this approach, however, is that it is unknown which pixels are correctly covered and
+which are not. Requiring all pixels of an image to be covered correctly, on the other hand, was
+observed to lead to inefficient quantile estimates in our experiments, which is why we decided to use
+the pixel wise approach. Moreover, from a practical point of view the amount of data is a limiting
+factor. For numerical experiments we used all pixels of an image for estimation despite the fact that
+in this setting, the sample might not be i.i.d. While theoretically not favourable, this heuristic did
+not show to be disadvantageous in empirical experiments.
+27
+
+PAGE 28
+A
+Analytical Computation of p(s, t) for the 1D example
+Let X ∈X be a random vector with density pX and Y = f(X) with a diffeomorphism f : X →Y.
+Then via a change of variables the density of Y is computed as
+pY (y) = pX(f −1(y))| det(Df −1(y))|
+where Df −1 denotes the Jacobian of f −1. The computation can be generalized also in the case that
+f is not injective. Assume X = X1 ˙S . . . ˙SXn and f, f(x) = gi(x) if x ∈Xi with gi : Xi →g(Xi) ⊂Y
+a diffeomorphism for all i. That is, f might not be injective, but it is possible to partition its domain
+into subsets, such that f is injective on each subset. In this case we find
+P[f(X) ∈A] =
+Z
+f −1(A)
+pX(x) dx
+=
+n
+X
+i=1
+Z
+f −1(A)∩Xi
+pX(x) dx
+=
+n
+X
+i=1
+Z
+A∩gi(Xi)
+pX(g−1
+i
+(y))| det(Dg−1
+i
+(y))| dy.
+(A.1)
+Thus, we find
+pY (y) =
+X
+i: g−1
+i
+({y})̸=∅
+pX(g−1
+i
+(y)) | det(Dg−1
+i
+(y))|
+In the setting at hand, the random vector X is (X, Z) and the transformation f reads as
+E[X|Z = z] =
+Z
+xp(x|z) dx,
+f1(x, z) = s(x, z) = (x −E[X|Z = z])2,
+f2(x, z) = t(z) =
+Z
+(y −E[X|Z = z])2p(y|z) dy.
+The practical implementation of this procedure is illustrated in Fig. A.1. For given (s′, t′), we first
+compute all values of (x, z), such that f(x, z) = (s′, t′), that is f −1({(s′, t′)}). In practice this is
+done by intersecting the corresponding level sets. For instance in the bottom, center plot in Fig. A.1
+the green lines denote the level set Ls = {(x, z) | s(x, z) = −1.75}, and the blue lines the level
+set Lt = {(x, z) | t(x, z) = −1}. Locally at every element (x, z) ∈Ls ∩Lt, f is invertible and
+we need the value of the determinant of its local inverse in order to compute p(S,T )(s′, t′). So let
+(x′, z′) ∈Ls ∩Lt. The inverse z(t) is difficult to compute and we thus linearly approximate it locally
+as
+ˆz(t) = z0 + (t1 −t0)z1 −z0
+t1 −t0
+(A.2)
+for t ∈[t0, t1] and zi = zi(ti). Afterwards, from f1(x, z) = s(x, z) = (x −E[X | Z = z])2 we locally
+approximate x(s, t) by
+ˆx(s, t) = E[X | Z = ˆz(t)] ± √s
+(A.3)
+28
+
+PAGE 29
+with either +√s if x′ > E[X | Z = z′] or −√s otherwise. This immediately yields for the local
+inverse
+det
+ 
+∂x(s,t)
+∂s
+∂x(s,t)
+∂t
+∂z(s,t)
+∂s
+∂z(s,t)
+∂t
+! ≈
+
+1
+2√s
+z1 −z0
+t1 −t0
+ .
+Finally, the density p(S,T )(s′, t′) is computed a
+p(S,T )(s′, t′) =
+X
+(x′,z′)∈Ls∩Lt
+p(X,Z)(x′, z′)
+
+1
+2
+√
+s′
+z1 −z0
+t1 −t0
+
+with zi, ti always chosen according to z′.
+Figure A.1: Illustration of the methodology for analytically calculating the distribution p(s, t). Step
+1: Find level sets of (s, t). Step 2: Find pre-image of (s, t) and evaluate density. Step 3: Locally
+approximate inverse transformation, multiply the density with with the Jacobi determinant before
+summation.
+29
+
+PAGE 30
+B
+Statistical Independence of Neighbouring Pixels
+Estimating the distribution of a random variable from a finite sample in general requires the sample
+to be i.i.d. Thus, in order to compute the distribution of (S, ˆT) in theory we are not allowed to
+use the data of all pixels of an image, since i) neighbouring pixels are in general not independent
+of each other and ii) if the prior or the forward operator acts globally, then two samples X1, X2
+corresponding to two pixels of the same image will have the same observation Z1 = Z2, namely the
+entire corrupted image. A remedy would be to consider each pixel position separately, that is, in
+order to estimate the reconstruction error of pixel (i, j), we would only use exactly pixel (i, j) of each
+image of the given sample. This approach, however, comprises a limitation for the approximation
+accuracy especially if the available amount of data is small. Fortunately, empirical evidence suggests
+that using all pixels of an image to compute a single joint density does not negatively impact the
+results. To show this we compare the results obtained from estimating the empirical distributions of
+(S, ˆT) and quantiles for each pixel position separately with the ones obtained from a joint estimation
+for TV-ℓ2 denoising. The setting at hand is identical to the experiment described in Section 5.1
+except for the change of data which is required since this experiment needs to be performed with
+a vast amount of data. We use 256 × 256 center crops of 35k Imagenet samples [15] for this
+experiment. Then, in Table B.1, we compare the obtained coverage from using the pixel-separate
+estimation with the one from using one empirical distribution estimated from all pixels jointly for
+our method. Discrepancies of the obtained coverage are of the order of hundredths of a percent
+and, thus, negligible. Therefore, we decided to use all pixels of each image for the estimation of the
+empirical distribution for our experiments. Qualitative examples of reconstructed Imagenet samples
+can be seen in Fig. E.4.
+Table B.1: Quantitative comparison of pixel joint and separate estimation of the error-variance
+distribution for 256x256 Imagenet test data. Average coverage for different quantiles.
+Pixel separate
+Pixel joint
+Quantile
+coverage
+coverage
+discrepancy in %
+0.85
+0.8512
+0.8504
+0.08
+0.90
+0.9007
+0.9029
+0.22
+0.95
+0.9499
+0.9492
+0.07
+0.99
+0.9878
+0.9875
+0.03
+C
+Mutual Information of s and t
+The mutual information provides a means of quantifying the dependence of two random variables.
+More specifically, it quantifies how much information about one random variable is gained by
+observing the other one. The mutual information I of S and ˆT is defined as
+I(S; ˆT) =
+Z Z
+p(s, ˆt) log
+ p(s, ˆt)
+p(s) p(ˆt)
+
+ds dˆt.
+In our case, it can be interpreted as the reduction in uncertainty about the error S observing the
+variance T and can easily be computed by numerical integration using the estimated joint density
+30
+
+PAGE 31
+p(s, ˆt). Note that due to the mutual information being invariant under any smooth and uniquely
+invertible transformation of the variables [27], we can directly compute it in log-space.
+D
+Effect of Thinning
+Thinning is usually used in Markov Chain based sampling processes to eliminate the statistical
+dependence of consecutive samples. To be precise, approximating, e.g., the MMSE from a sample
+requires said sample to be i.i.d. Consecutive iterates of the Langevin algorithm are, however, not
+independent by nature. Given the output sequence (xk)k of a Langevin algorithm, sufficiently far
+apart samples xk, xk+H for large enough H can be considered independent, which is why it is in
+general recommended to use (xkH)k for further computations. This, however, requires an increase
+of anyway high computational costs caused by sampling in high dimensions. Thus, we investigate
+the actual empirical impact of thinning in the following, with the aim of justifying to use H = 1 in
+our experiments. We compute the MMSE and posterior variance for different values of the thinning
+parameter H fot TV-ℓ2 denoising. The mean absolute difference to the results obtained via the
+BP algorithm from Section 4.3 over the number of samples used for the estimation can be seen in
+Appendix D, top row. One can observe that, indeed, any thinning accelerates convergence with
+respect to the number of samples. A given number of samples, however, requires the H-fold number
+of iterations of the Langevin algorithm if a thinning of H is used. Hence, in the second and third
+row, we plot the deviations over the corresponding Langevin iterations and do not find a clear
+empirical advantage of thinning. For a thinning of H = 5 or H = 10, the curves are identical, for a
+thinning of H = 100, convergence is even slowed down. For the sake of computation time, therefore,
+we decided to use H = 1 in our experiments.
+E
+Additional Qualitative Plots for Denoising and MRI Re-
+construction Experiments
+In the following we show some more qualitative results obtained with the presented experiments.
+In Fig. E.1 we show a qualitative comparison between the pixel marginals obtained with ULPDA
+sampling and the BP algorithm. In Fig. E.4 we show denoising results for Imagenet data from the
+experiment described in Appendix B, Fig. E.3 shows additional results for denoising from BSDS
+data and in Fig. E.2 additional MRI reconstruction results are depicted.
+References
+[1]
+M. Abdar, F. Pourpanah, S. Hussain, D. Rezazadegan, L. Liu, M. Ghavamzadeh, P. Fieguth, X.
+Cao, A. Khosravi, U. R. Acharya, et al. “A review of uncertainty quantification in deep learning:
+Techniques, applications and challenges”. In: Information Fusion 76 (2021), pp. 243–297.
+[2]
+H. K. Aggarwal, M. P. Mani, and M. Jacob. “MoDL: Model-based deep learning architecture
+for inverse problems”. In: IEEE transactions on medical imaging 38.2 (2018), pp. 394–405.
+[3]
+A. N. Angelopoulos, S. Bates, E. J. Candès, M. I. Jordan, and L. Lei. “Learn then test:
+Calibrating predictive algorithms to achieve risk control”. In: arXiv preprint arXiv:2110.01052
+(2021).
+31
+
+PAGE 32
+[4]
+A. N. Angelopoulos, S. Bates, A. Fisch, L. Lei, and T. Schuster. “Conformal Risk Control”.
+In: arXiv preprint arXiv:2208.02814 (2022).
+[5]
+A. N. Angelopoulos, A. P. Kohli, S. Bates, M. Jordan, J. Malik, T. Alshaabi, S. Upadhyayula,
+and Y. Romano. “Image-to-image regression with distribution-free uncertainty quantification
+and applications in imaging”. In: International Conference on Machine Learning. PMLR. 2022,
+pp. 717–730.
+[6]
+S. Bates, A. Angelopoulos, L. Lei, J. Malik, and M. Jordan. “Distribution-free, risk-controlling
+prediction sets”. In: Journal of the ACM (JACM) 68.6 (2021), pp. 1–34.
+[7]
+C. Blundell, J. Cornebise, K. Kavukcuoglu, and D. Wierstra. “Weight uncertainty in neural
+network”. In: International conference on machine learning. PMLR. 2015, pp. 1613–1622.
+[8]
+A. Bora, A. Jalal, E. Price, and A. G. Dimakis. “Compressed sensing using generative models”.
+In: International Conference on Machine Learning. PMLR. 2017, pp. 537–546.
+[9]
+K. Bredies and M. Holler. “Higher-order total variation approaches and generalisations”. In:
+Inverse Problems. Topical Review 36.12 (2020), p. 123001.
+[10]
+A. Chambolle and P.-L. Lions. “Image recovery via total variation minimization and related
+problems”. In: Numerische Mathematik 76.2 (1997), pp. 167–188.
+[11]
+A. Chambolle and T. Pock. “A first-order primal-dual algorithm for convex problems with
+applications to imaging”. In: Journal of mathematical imaging and vision 40.1 (2011), pp. 120–
+145.
+[12]
+A. Chambolle and T. Pock. “An introduction to continuous optimization for imaging”. In:
+Acta Numerica 25 (2016), pp. 161–319.
+[13]
+Y. Chen, R. Ranftl, and T. Pock. “Insights into analysis operator learning: From patch-based
+sparse models to higher order MRFs”. In: IEEE Transactions on Image Processing 23.3 (2014),
+pp. 1060–1072.
+[14]
+I. Daubechies, M. Defrise, and C. De Mol. “An iterative thresholding algorithm for linear inverse
+problems with a sparsity constraint”. In: Communications on Pure and Applied Mathematics: A
+Journal Issued by the Courant Institute of Mathematical Sciences 57.11 (2004), pp. 1413–1457.
+[15]
+J. Deng, W. Dong, R. Socher, L.-J. Li, K. Li, and L. Fei-Fei. “Imagenet: A large-scale
+hierarchical image database”. In: 2009 IEEE conference on computer vision and pattern
+recognition. Ieee. 2009, pp. 248–255.
+[16]
+T. Dockhorn, A. Vahdat, and K. Kreis. “Score-based generative modeling with critically-
+damped langevin diffusion”. In: arXiv preprint arXiv:2112.07068 (2021).
+[17]
+A. Durmus and E. Moulines. “High-dimensional Bayesian inference via the unadjusted Langevin
+algorithm”. In: Bernoulli 25.4A (2019), pp. 2854–2882.
+[18]
+A. Durmus, E. Moulines, and M. Pereyra. “Efficient bayesian computation by proximal markov
+chain monte carlo: when langevin meets moreau”. In: SIAM Journal on Imaging Sciences 11.1
+(2018), pp. 473–506.
+[19]
+Y. Gal and Z. Ghahramani. “Dropout as a bayesian approximation: Representing model
+uncertainty in deep learning”. In: international conference on machine learning. PMLR. 2016,
+pp. 1050–1059.
+[20]
+A. Habring and M. Holler. “A generative variational model for inverse problems in imaging”.
+In: SIAM Journal on Mathematics of Data Science 4.1 (2022), pp. 306–335.
+32
+
+PAGE 33
+[21]
+K. Hammernik, T. Klatzer, E. Kobler, M. P. Recht, D. K. Sodickson, T. Pock, and F. Knoll.
+“Learning a variational network for reconstruction of accelerated MRI data”. In: Magnetic
+resonance in medicine 79.6 (2018), pp. 3055–3071.
+[22]
+V. Jain and S. Seung. “Natural image denoising with convolutional networks”. In: Advances
+in neural information processing systems 21 (2008).
+[23]
+A. Kendall and Y. Gal. “What uncertainties do we need in bayesian deep learning for computer
+vision?” In: Advances in neural information processing systems 30 (2017).
+[24]
+P. Kloeden and E. Platen. Numerical Solution of Stochastic Differential Equations. Stochastic
+Modelling and Applied Probability. Springer Berlin Heidelberg, 2013. isbn: 9783662126165.
+[25]
+F. Knoll, J. Zbontar, A. Sriram, M. J. Muckley, M. Bruno, A. Defazio, M. Parente, K. J. Geras,
+J. Katsnelson, H. Chandarana, Z. Zhang, M. Drozdzalv, A. Romero, M. Rabbat, P. Vincent,
+J. Pinkerton, D. Wang, N. Yakubova, E. Owens, C. Zitnick, M. P. Recht, D. K. Sodickson,
+and Y. W. Lui. “fastMRI: A Publicly Available Raw k-Space and DICOM Dataset of Knee
+Images for Accelerated MR Image Reconstruction Using Machine Learning”. In: Radiology:
+Artificial Intelligence 2.1 (2020), e190007.
+[26]
+E. Kobler, A. Effland, K. Kunisch, and T. Pock. “Total deep variation: A stable regulariza-
+tion method for inverse problems”. In: IEEE transactions on pattern analysis and machine
+intelligence (2021).
+[27]
+A. Kraskov, H. Stögbauer, and P. Grassberger. “Estimating mutual information”. In: Physical
+review E 69.6 (2004), p. 066138.
+[28]
+D. Lamberton and G. Pages. “Recursive computation of the invariant distribution of a diffusion”.
+In: Bernoulli (2002), pp. 367–405.
+[29]
+D. Lamberton and G. Pages. “Recursive computation of the invariant distribution of a diffusion:
+the case of a weakly mean reverting drift”. In: Stochastics and dynamics 3.04 (2003), pp. 435–
+451.
+[30]
+R. Laumont, V. D. Bortoli, A. Almansa, J. Delon, A. Durmus, and M. Pereyra. “Bayesian
+imaging using Plug & Play priors: when Langevin meets Tweedie”. In: SIAM Journal on
+Imaging Sciences 15.2 (2022), pp. 701–737.
+[31]
+S. L. Lauritzen. Graphical Models. Oxford University Press, 1996. isbn: 0-19-852219-3.
+[32]
+C. Ledig, L. Theis, F. Huszár, J. Caballero, A. Cunningham, A. Acosta, A. Aitken, A. Tejani,
+J. Totz, Z. Wang, et al. “Photo-realistic single image super-resolution using a generative
+adversarial network”. In: Proceedings of the IEEE conference on computer vision and pattern
+recognition. 2017, pp. 4681–4690.
+[33]
+J. Lei, M. G’Sell, A. Rinaldo, R. J. Tibshirani, and L. Wasserman. “Distribution-free predictive
+inference for regression”. In: Journal of the American Statistical Association 113.523 (2018),
+pp. 1094–1111.
+[34]
+J. Lei, A. Rinaldo, and L. Wasserman. “A conformal prediction approach to explore functional
+data”. In: Annals of Mathematics and Artificial Intelligence 74.1 (2015), pp. 29–43.
+[35]
+J. Lei, J. Robins, and L. Wasserman. “Distribution-free prediction sets”. In: Journal of the
+American Statistical Association 108.501 (2013), pp. 278–287.
+33
+
+PAGE 34
+[36]
+D. S. Lemons and A. Gythiel. “Paul Langevin’s 1908 paper “On the Theory of Brownian
+Motion” [“Sur la théorie du mouvement brownien,” C. R. Acad. Sci. (Paris) 146, 530–533
+(1908)]”. In: American Journal of Physics 65.11 (1997), pp. 1079–1081.
+[37]
+G. Luo, M. Heide, and M. Uecker. “MRI Reconstruction via Data Driven Markov Chain with
+Joint Uncertainty Estimation”. In: arXiv preprint arXiv:2202.01479 (2022).
+[38]
+D. Medarametla and E. Candès. “Distribution-free conditional median inference”. In: Electronic
+Journal of Statistics 15.2 (2021), pp. 4625–4658.
+[39]
+D. Narnhofer, A. Effland, E. Kobler, K. Hammernik, F. Knoll, and T. Pock. “Bayesian
+uncertainty estimation of learned variational MRI reconstruction”. In: IEEE Transactions on
+Medical Imaging 41.2 (2021), pp. 279–291.
+[40]
+D. Narnhofer, A. Habring, M. Holler, and T. Pock. Source code to reproduce the results
+of "Posterior-Variance-Based Error Quantification for Inverse Problems in Imaging" at
+https://github.com/domv7.
+[41]
+D. Narnhofer, K. Hammernik, F. Knoll, and T. Pock. “Inverse GANs for accelerated MRI
+reconstruction”. In: Wavelets and Sparsity XVIII. Vol. 11138. SPIE. 2019, pp. 381–392.
+[42]
+J. Pearl. “Reverend Bayes on inference engines: A distributed hierarchical approach”. In:
+Proceedings AAAI Natinal Conference on AI. Pittsburgh, PA, 1982, pp. 133–136.
+[43]
+M. Pereyra. “Proximal markov chain monte carlo algorithms”. In: Statistics and Computing
+26.4 (2016), pp. 745–760.
+[44]
+Z. Ramzi, B. Rémy, F. Lanusse, J.-L. Starck, and P. Ciuciu. “Denoising score-matching for
+uncertainty quantification in inverse problems”. In: arXiv preprint arXiv:2011.08698 (2020).
+[45]
+A. Repetti, M. Pereyra, and Y. Wiaux. “Scalable Bayesian uncertainty quantification in
+imaging inverse problems via convex optimization”. In: SIAM Journal on Imaging Sciences
+12.1 (2019), pp. 87–118.
+[46]
+C. P. Robert, G. Casella, and G. Casella. Monte Carlo statistical methods. Vol. 2. Springer,
+1999.
+[47]
+G. O. Roberts and R. L. Tweedie. “Exponential convergence of Langevin distributions and
+their discrete approximations”. In: Bernoulli (1996), pp. 341–363.
+[48]
+G. O. Roberts and R. L. Tweedie. “Exponential convergence of Langevin distributions and
+their discrete approximations”. In: Bernoulli 2.4 (1996), pp. 341–363.
+[49]
+Y. Romano, E. Patterson, and E. Candes. “Conformalized quantile regression”. In: Advances
+in neural information processing systems 32 (2019).
+[50]
+S. Roth and M. J. Black. “Fields of experts”. In: International Journal of Computer Vision
+82.2 (2009), pp. 205–229.
+[51]
+L. I. Rudin, S. Osher, and E. Fatemi. “Nonlinear total variation based noise removal algorithms”.
+In: Physica D: nonlinear phenomena 60.1-4 (1992), pp. 259–268.
+[52]
+M. Sadinle, J. Lei, and L. Wasserman. “Least ambiguous set-valued classifiers with bounded
+error levels”. In: Journal of the American Statistical Association 114.525 (2019), pp. 223–234.
+[53]
+S. Sardy, P. Tseng, and A. Bruce. “Robust wavelet denoising”. In: IEEE Transactions on
+Signal Processing 49.6 (2001), pp. 1146–1152.
+34
+
+PAGE 35
+[54]
+J. Schlemper, D. C. Castro, W. Bai, C. Qin, O. Oktay, J. Duan, A. N. Price, J. Hajnal, and D.
+Rueckert. “Bayesian deep learning for accelerated MR image reconstruction”. In: International
+Workshop on Machine Learning for Medical Image Reconstruction. Springer. 2018, pp. 64–71.
+[55]
+G. Shafer and V. Vovk. “A Tutorial on Conformal Prediction”. In: Journal of Machine Learning
+Research 9.3 (2008).
+[56]
+Y. Song and S. Ermon. “Generative modeling by estimating gradients of the data distribution”.
+In: Advances in Neural Information Processing Systems 32 (2019).
+[57]
+M. F. Tappen and F. W. T. “Comparison of graph cuts with belief propagation for stereo,
+using identical MRF parameters”. In: Proceedings Ninth IEEE International Conference on
+Computer Vision. 2003, 900–906 vol.2.
+[58]
+R. J. Tibshirani, R. Foygel Barber, E. Candes, and A. Ramdas. “Conformal prediction under
+covariate shift”. In: Advances in neural information processing systems 32 (2019).
+[59]
+V. Vovk, A. Gammerman, and G. Shafer. Algorithmic learning in a random world. Springer
+Science & Business Media, 2005.
+[60]
+B. P. Welford. “Note on a Method for Calculating Corrected Sums of Squares and Products”.
+In: Technometrics 4.3 (1962), pp. 419–420.
+[61]
+M. Zach, E. Kobler, and T. Pock. “Computed Tomography Reconstruction using Generative
+Energy-Based Priors”. In: arXiv preprint arXiv:2203.12658 (2022).
+35
+
+PAGE 36
+1k
+20k
+40k
+60k
+80k
+100k
+120k
+140k
+samples
+10−3
+MD(ˆxBP, ˆxLVk)
+H =1
+H =5
+H =10
+H =100
+∆
+1k
+20k
+40k
+60k
+80k
+100k
+120k
+140k
+samples
+10−3
+2 × 10−3
+3 × 10−3
+MD(
+pˆtBP,
+q
+ˆtLVk)
+H =1
+H =5
+H =10
+H =100
+∆
+1k
+2,000k
+4,000k
+6,000k
+8,000k
+10,000k
+12,000k
+14,000k
+iterations
+10−3
+MD(ˆxBP, ˆxLVk)
+H =1
+H =5
+H =10
+H =100
+∆
+1k
+2,000k
+4,000k
+6,000k
+8,000k
+10,000k
+12,000k
+14,000k
+iterations
+10−3
+2 × 10−3
+3 × 10−3
+MD(
+pˆtBP,
+q
+ˆtLVk)
+H =1
+H =5
+H =10
+H =100
+∆
+1k
+10k
+100k
+1,000k
+10,000k
+iterations
+10−3
+MD(ˆxBP, ˆxLVk)
+H =1
+H =5
+H =10
+H =100
+∆
+1k
+10k
+100k
+1,000k
+10,000k
+iterations
+10−3
+2 × 10−3
+3 × 10−3
+MD(
+pˆtBP,
+q
+ˆtLVk)
+H =1
+H =5
+H =10
+H =100
+∆
+Figure D.1: The effect of thinning is shown over samples (first row) for deviation of MMSE ˆx
+respectively posterior variance ˆt from Langevin to BP. Bottom two rows show the effect over
+iterations respectively iterations in logarithmic representation. The discretization threshold is set to
+∆=
+1
+1024.
+36
+
+PAGE 37
+Figure E.1: Visualization of pixel marginals (left and right) for highlighted lines and the associated
+MMSE (middle). The upper row shows BP results, the lower row shows ULPDA results.
+Figure E.2:
+MRI reconstruction with TDV prior.
+Various samples from fastmri dataset.
+Columns showing from left to right: reconstruction ˆx, corrupted image z, ground truth im-
+age y, true error s, predicted 0.9 quantile ˆs0.9 (0
+0.06), estimated posterior variance ˆt
+(2.5e−4
+5.6e−4) and pixelwise succes (white if error below quantile, black if above).
+37
+
+PAGE 38
+TDV
+FoE
+TV
+TDV
+FoE
+TV
+TDV
+FoE
+TV
+Figure E.3: Denoising. Various samples from BSDS68 for different priors. Columns showing from
+left to right: reconstruction ˆx, corrupted image z, ground truth image x, true error s, predicted 0.9
+quantile ˆs0.9 (0
+0.03), estimated posterior variance ˆt and pixelwise succes (white if error
+below quantile, black if above). Note that for the sake of contrast we omit colorbars for the variance
+plots in this figure.
+38
+
+PAGE 39
+Figure E.4: TV-ℓ2 Denoising for various samples from Imagenet. From left to right: ground truth
+x, observation z, reconstruction ˆx, true error s, predicted quantile ˆs0.9 of the joint and pixelwise
+approach as described in Appendix B. 0
+0.035
+39

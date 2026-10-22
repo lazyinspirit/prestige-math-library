@@ -1,0 +1,391 @@
+{
+  "version": 1,
+  "scope": [
+    "lem-alternating-bubble-word-side-parity",
+    "lem-bubble-disk-pieces-satisfy-the-sphere-euler-count",
+    "lem-single-saddle-bubble-word-forces-an-opposite-repeat"
+  ],
+  "contracts": {
+    "lem-alternating-bubble-word-side-parity": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-reduced-alternating-link-diagram",
+          "source_section": "Definition",
+          "quote": "A regular link diagram is **connected** when its underlying projection graph is connected. It is **alternating** when successive crossing visits along each component switch between overpasses and underpasses. It is **reduced** when no complementary region of the projection sphere has a crossing more than once on its boundary. A connected alternating diagram that is reduced is a **reduced alternating link diagram**.",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "lem-connected-regular-link-diagram-has-checkerboard-coloring",
+          "source_section": "Statement",
+          "quote": "Let $P\\subset S^2$ be the finite connected 4-valent graph underlying a regular link projection. Its complementary regions have exactly two colorings with two colors such that regions sharing an edge have different colors.",
+          "uses": [
+            "1.1",
+            "2.1",
+            "4.1",
+            "5.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "lem-explicit-quadrilateral-saddle-foliation-of-a-crossing-ball",
+          "source_section": "Statement",
+          "quote": "Let $C=\\{(x,y,z):x^2+y^2+z^2\\le1\\}$, with upper overpass $A_+=\\{y=0,x^2+z^2=1,z\\ge0\\}$ and lower underpass $A_-=\\{x=0,y^2+z^2=1,z\\le0\\}$. For every compact $K\\subset C\\setminus(A_+\\cup A_-)$ there are $0<a<b<1$ and $0<\\varepsilon<1/4$ such that, on a neighborhood of $C$, the smooth function\n$$q(x,y,z)=\\frac{z+x^2-y^2}{d(z)},\\qquad d(z)=1+\\sqrt{z^2+\\varepsilon^2}-\\varepsilon-z^2$$\nhas these properties:\n\n1. $K\\subset\\{|q|<a\\}$, $q\\ge1$ on $A_+$ and $q\\le-1$ on $A_-$.\n2. For each $|h|\\le b$, $D_h=C\\cap q^{-1}(h)$ is a smooth proper disk transverse to $\\partial C$. Projection to the $(x,y)$-plane identifies it with a smooth star-shaped disk. Its boundary meets $z=0$ in exactly four points, one in each open quadrant; its intersections with each open hemisphere are two arcs. The disks are disjoint and strictly ordered by height above every common projected point.\n3. On $C\\cap\\{|q|\\le b\\}$ there is a smooth vector field $V$ tangent to the levels of $q$, with $(V_x,V_y)=(x,y)$, zero exactly on the vertical axis, and pointing strictly outward on $\\partial C\\cap\\{|q|\\le b\\}$. Consequently radial dilation in these level coordinates is compatible with the boundary of the crossing ball.\n\nThis supplies the local foliation and vector field, not an ambient positioning theorem for a surface.",
+          "uses": [
+            "3.1",
+            "5.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "def-flype-crossing-ball-and-alternating-tangle-data",
+          "source_section": "Definition",
+          "quote": "A **2-tangle diagram** is a regular diagram in a disk of two properly embedded tangle arcs and possibly finitely many closed tangle components, with four specified endpoints on the disk boundary; the arcs and circles are disjoint in the represented 3-ball, while their projections may have crossings. A **flyping circle** is a simple closed curve in the projection sphere whose intersection with the diagram consists of exactly three points, exactly one of which is a crossing; the circle is transverse to both branches at that crossing and to the diagram at the other two points. A small annular neighborhood of this circle has two complementary tangle disks. A **flype** fixes the tangle in one disk, interchanges which pair of strands crosses in the annular neighborhood, and turns over the tangle in the other disk: its projected tangle is reflected and all its over-under crossing data are reversed. This turnover is a half-turn in three-dimensional space about an axis in the projection sphere. Component orientations are transported by this motion, and the exterior diagram is fixed. The move with the opposite choice of fixed disk is also allowed; a disk containing no crossings is allowed. A flype whose fixed tangle has no crossings is called an **entire flype**. Diagrams are drawn on the oriented projection sphere; a **sphere planar isotopy** is an orientation-preserving smooth isotopy of that sphere carrying the decorated diagram. A plane diagram is obtained by choosing a point of the sphere outside the projection and deleting it. At each crossing of a link diagram, a **crossing ball** is a small 3-ball in which the overpass lies on the upper hemisphere and the underpass lies on the lower hemisphere, with the rest of the link outside that ball. Replacing all crossing disks by upper hemispheres or by lower hemispheres gives the shifted projection spheres $S_+$ and $S_-$. A **saddle disk** in a crossing ball is a properly embedded disk whose boundary meets each of the two hemispheres in two arcs and whose interior passes across the equatorial crossing disk. For a closed embedded surface transverse to the link and to $S_+$ and $S_-$, each component $C$ of its intersection with either shifted sphere has a **bubble word**: read once around $C$, recording $P$ each time it crosses the link and $S$ each time it passes through a crossing ball along a saddle disk. The surface is in **bubble standard position** if every such word is nonempty and no word records the same crossing ball more than once. A **Conway sphere** is an embedded sphere meeting the link transversely in four points; it is in crossing-ball standard position when its intersection with the crossing balls consists of saddle disks and its shifted-sphere intersection curves satisfy the bubble-standard conditions.\n\nThe turnover convention is the one in Kindred's Definition 2.9 and Figure 1. In particular, an entire flype permits viewing the whole diagram from the opposite side of the sphere, as in his Definition 2.11. Closed components inside a tangle disk are carried along with its arcs.",
+          "uses": [
+            "4.1",
+            "5.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "step": "1.1",
+          "claim": "Fix the checkerboard coloring in [F2], with black represented by $1$ and white by $0$. At each crossing choose positively oriented coordinates $(x,y)$ with overpass horizontal and underpass vertical. Let $\\epsilon_v$ be the color of its northeast sector; the southwest sector has the same color, and the other two have color $1-\\epsilon_v$. Relative to an outward-pointing over half-edge, its left face has color $\\epsilon_v$: this is northeast for $+x$ and southwest for $-x$. Relative to an outward-pointing under half-edge, the left face has color $1-\\epsilon_v$: this is northwest for $+y$ and southeast for $-y$. This is the complete four-half-edge table.",
+          "inputs": [
+            "given",
+            "F1",
+            "F2",
+            "construct"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "step": "2.1",
+          "claim": "Along a projection edge joining crossings $v,w$, the left-face colors relative to the outward directions at the two ends are opposite, since those directions are opposite along that edge. By alternation [F1], one end is an over half-edge and the other an under half-edge. The table in step 1.1 therefore gives $\\epsilon_v=\\epsilon_w$. Connectedness of the projection implies one common value $\\epsilon$ for all crossings, including loop edges, whose endpoint equality is automatic.",
+          "inputs": [
+            "given",
+            "step 1.1",
+            "F1",
+            "F2",
+            "construct"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "step": "3.1",
+          "claim": "Collapse each upper hemisphere homeomorphically onto its equatorial disk by vertical projection, leaving the rest of the projection sphere fixed. The image of $C$ is still a simple circle. For a positive-$y$ saddle arc traversed left to right, the initial sector is northwest, of color $1-\\epsilon$, and the overpass is on the right of the oriented arc. Reversing this traversal starts in northeast, of color $\\epsilon$, and puts the overpass on the left. For the negative-$y$ arc traversed left to right, the initial sector is southwest, of color $\\epsilon$, and the overpass is on the left; reversing it starts in southeast, of color $1-\\epsilon$, and puts the overpass on the right. By [F3] each projected arc crosses just the under branch, once. Thus in all four cases the colors immediately before and after the bubble visit are $\\epsilon+1+\\delta_i$ and $\\epsilon+\\delta_i$, modulo two. The side of the overpass in this local table is its side relative to the whole circle: there is no other arc of that circle in the hemisphere, so the connected overpass can be joined to that local side without crossing $C$.",
+          "inputs": [
+            "step 1.1",
+            "step 2.1",
+            "F3",
+            "construct"
+          ]
+        },
+        {
+          "id": "step-4-1",
+          "step": "4.1",
+          "claim": "Between successive bubble visits the circle lies on the unchanged projection face and crosses diagram edges exactly at the $k$ punctures, so its region color changes $k$ times by [F2]. Its color before the next visit is therefore $\\epsilon+\\delta_i+k$. By step 3.1 it is also $\\epsilon+1+\\delta_{i+1}$. Equating these gives $\\delta_{i+1}=\\delta_i+k+1$ modulo two. This means opposite overpass sides for even $k$ and the same side for odd $k$, exactly as asserted.",
+          "inputs": [
+            "step 3.1",
+            "F2",
+            "F4",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-5-1",
+          "step": "5.1",
+          "claim": "Each puncture changes projected region color once, and each saddle visit changes it once by step 3.1. A complete traversal returns to its starting region, so the total number of letters is even. This argument also covers no saddle visits; for one visit the cyclic formula in step 4.1 says that its puncture count is odd. Finally the coordinate reflection in [F3] interchanges upper and lower hemispheres and their over-under roles, and the same four-sector argument applies. All computations are finite and use no choice principle.",
+          "inputs": [
+            "step 3.1",
+            "step 4.1",
+            "F2",
+            "F3",
+            "F4"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The supplied diagram circle or sphere is nonempty."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Step 5.1 covers no saddle visits."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Step 5.1 covers one saddle visit."
+        },
+        {
+          "case": "degenerate",
+          "status": "not_applicable",
+          "reason": "Embedded quadrilateral model disks and transverse intersections exclude degeneracy."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Step 3.1 checks all four traversal choices at equatorial corners."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "The construction is finite and choice-free as stated; step 1.1 uses only the supplied finite data."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "No equivalence is asserted."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "No equivalence is asserted."
+        }
+      ],
+      "axioms": [],
+      "finite_checks": [],
+      "finite_smoke": [],
+      "risk_review": {
+        "status": "owner-review-pending",
+        "notes": "Actual local table or cell count supplied; Figure7(b,c) is not asserted by this bundle."
+      },
+      "proof_status": "complete-local-proof",
+      "proof_status_evidence": "Literal numbered claims, exact current supplier quotes and successful scoped checks.",
+      "unresolved_suppliers": [],
+      "unresolved_assumptions": []
+    },
+    "lem-bubble-disk-pieces-satisfy-the-sphere-euler-count": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "thm-euler-poincare-formula-for-finite-cw-complexes",
+          "source_section": "Statement",
+          "quote": "For a finite CW complex, $\\chi(X)=\\sum_n(-1)^n\\operatorname{rank}H_n(X;\\mathbb Z)$.",
+          "uses": [
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "cor-homology-of-spheres",
+          "source_section": "Statement",
+          "quote": "For $n\\ge1$, $\\widetilde H_k(S^n;G)$ is $G$ for $k=n$ and $0$ otherwise.\nFor $S^0$, $\\widetilde H_0(S^0;G)\\cong G$ and all other reduced groups vanish.\nThus $H_0(S^n;G)\\cong G$ for $n\\ge1$, whereas\n$H_0(S^0;G)\\cong G\\oplus G$.",
+          "uses": [
+            "3.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "step": "1.1",
+          "claim": "Use the saddle boundaries and the common-face arcs as a finite graph on $T$. The saddle corners give $4s$ vertices. There are $4s$ hemisphere edges, one for each saddle boundary arc. At each corner the stated three-sector chart has exactly one further edge in the common projection face, so these further nonclosed arcs have $4s$ endpoints and give $2s$ edges. There can also be $z$ whole common-face circles with no saddle corner. Put one auxiliary vertex and one loop edge on each. This gives $4s+z$ vertices and $6s+z$ edges. A link puncture may be left in the interior of an edge; subdividing at it adds one vertex and one edge and changes no alternating count.",
+          "inputs": [
+            "given",
+            "construct"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "step": "2.1",
+          "claim": "The complementary open cells are precisely the $u+\\ell+s$ supplied disk interiors. Their characteristic maps are the supplied disk parametrizations, with the finite boundary arcs attached to the graph just counted. This is a finite CW structure on $T$: the boundary maps have finite image in the one-skeleton, and the quotient of finitely many compact cells onto the supplied Hausdorff surface has its usual topology. Therefore its alternating cell count is $(4s+z)-(6s+z)+(u+\\ell+s)=u+\\ell-s$. This includes $s=0$, where the auxiliary circle vertices provide the one-skeleton.",
+          "inputs": [
+            "given",
+            "step 1.1",
+            "construct",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "step": "3.1",
+          "claim": "By [F1] and [F2] the same alternating count is $1+1=2$. Thus $u+\\ell-s=2$, and $u=\\ell=1$ forces $s=0$. The optional puncture subdivisions cancel as shown in step 1.1.",
+          "inputs": [
+            "step 1.1",
+            "step 2.1",
+            "F1",
+            "F2",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The supplied diagram circle or sphere is nonempty."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Steps 1.1\u20133.1 cover zero saddles using auxiliary vertices on common-face circles."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Step 3.1 includes one piece per open side and forces zero saddles."
+        },
+        {
+          "case": "degenerate",
+          "status": "not_applicable",
+          "reason": "Embedded quadrilateral model disks and transverse intersections exclude degeneracy."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Step 1.1 counts every corner and both ends of every common-face arc."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "The construction is finite and choice-free as stated; step 1.1 uses only the supplied finite data."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "No equivalence is asserted."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "No equivalence is asserted."
+        }
+      ],
+      "axioms": [],
+      "finite_checks": [],
+      "finite_smoke": [],
+      "risk_review": {
+        "status": "owner-review-pending",
+        "notes": "Actual local table or cell count supplied; Figure7(b,c) is not asserted by this bundle."
+      },
+      "proof_status": "complete-local-proof",
+      "proof_status_evidence": "Literal numbered claims, exact current supplier quotes and successful scoped checks.",
+      "unresolved_suppliers": [],
+      "unresolved_assumptions": []
+    },
+    "lem-single-saddle-bubble-word-forces-an-opposite-repeat": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-flype-crossing-ball-and-alternating-tangle-data",
+          "source_section": "Definition",
+          "quote": "A **2-tangle diagram** is a regular diagram in a disk of two properly embedded tangle arcs and possibly finitely many closed tangle components, with four specified endpoints on the disk boundary; the arcs and circles are disjoint in the represented 3-ball, while their projections may have crossings. A **flyping circle** is a simple closed curve in the projection sphere whose intersection with the diagram consists of exactly three points, exactly one of which is a crossing; the circle is transverse to both branches at that crossing and to the diagram at the other two points. A small annular neighborhood of this circle has two complementary tangle disks. A **flype** fixes the tangle in one disk, interchanges which pair of strands crosses in the annular neighborhood, and turns over the tangle in the other disk: its projected tangle is reflected and all its over-under crossing data are reversed. This turnover is a half-turn in three-dimensional space about an axis in the projection sphere. Component orientations are transported by this motion, and the exterior diagram is fixed. The move with the opposite choice of fixed disk is also allowed; a disk containing no crossings is allowed. A flype whose fixed tangle has no crossings is called an **entire flype**. Diagrams are drawn on the oriented projection sphere; a **sphere planar isotopy** is an orientation-preserving smooth isotopy of that sphere carrying the decorated diagram. A plane diagram is obtained by choosing a point of the sphere outside the projection and deleting it. At each crossing of a link diagram, a **crossing ball** is a small 3-ball in which the overpass lies on the upper hemisphere and the underpass lies on the lower hemisphere, with the rest of the link outside that ball. Replacing all crossing disks by upper hemispheres or by lower hemispheres gives the shifted projection spheres $S_+$ and $S_-$. A **saddle disk** in a crossing ball is a properly embedded disk whose boundary meets each of the two hemispheres in two arcs and whose interior passes across the equatorial crossing disk. For a closed embedded surface transverse to the link and to $S_+$ and $S_-$, each component $C$ of its intersection with either shifted sphere has a **bubble word**: read once around $C$, recording $P$ each time it crosses the link and $S$ each time it passes through a crossing ball along a saddle disk. The surface is in **bubble standard position** if every such word is nonempty and no word records the same crossing ball more than once. A **Conway sphere** is an embedded sphere meeting the link transversely in four points; it is in crossing-ball standard position when its intersection with the crossing balls consists of saddle disks and its shifted-sphere intersection curves satisfy the bubble-standard conditions.\n\nThe turnover convention is the one in Kindred's Definition 2.9 and Figure 1. In particular, an entire flype permits viewing the whole diagram from the opposite side of the sphere, as in his Definition 2.11. Closed components inside a tangle disk are carried along with its arcs.",
+          "uses": [
+            "1.1",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "lem-explicit-quadrilateral-saddle-foliation-of-a-crossing-ball",
+          "source_section": "Statement",
+          "quote": "Let $C=\\{(x,y,z):x^2+y^2+z^2\\le1\\}$, with upper overpass $A_+=\\{y=0,x^2+z^2=1,z\\ge0\\}$ and lower underpass $A_-=\\{x=0,y^2+z^2=1,z\\le0\\}$. For every compact $K\\subset C\\setminus(A_+\\cup A_-)$ there are $0<a<b<1$ and $0<\\varepsilon<1/4$ such that, on a neighborhood of $C$, the smooth function\n$$q(x,y,z)=\\frac{z+x^2-y^2}{d(z)},\\qquad d(z)=1+\\sqrt{z^2+\\varepsilon^2}-\\varepsilon-z^2$$\nhas these properties:\n\n1. $K\\subset\\{|q|<a\\}$, $q\\ge1$ on $A_+$ and $q\\le-1$ on $A_-$.\n2. For each $|h|\\le b$, $D_h=C\\cap q^{-1}(h)$ is a smooth proper disk transverse to $\\partial C$. Projection to the $(x,y)$-plane identifies it with a smooth star-shaped disk. Its boundary meets $z=0$ in exactly four points, one in each open quadrant; its intersections with each open hemisphere are two arcs. The disks are disjoint and strictly ordered by height above every common projected point.\n3. On $C\\cap\\{|q|\\le b\\}$ there is a smooth vector field $V$ tangent to the levels of $q$, with $(V_x,V_y)=(x,y)$, zero exactly on the vertical axis, and pointing strictly outward on $\\partial C\\cap\\{|q|\\le b\\}$. Consequently radial dilation in these level coordinates is compatible with the boundary of the crossing ball.\n\nThis supplies the local foliation and vector field, not an ambient positioning theorem for a surface.",
+          "uses": [
+            "1.1",
+            "2.1",
+            "3.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "step": "1.1",
+          "claim": "Write $\\sigma$ for the visited saddle. Its chosen upper arc joins, for example, the northwest and northeast corners; the other case is reflected. Removing the interior of this arc from the upper intersection circle leaves a path $\\gamma$ joining those two corners which traverses no crossing ball, because the word has only one $S$ by [F1]. It lies entirely in the common projection face, apart from its endpoints. Punctures on it do not change that path.",
+          "inputs": [
+            "given",
+            "F1",
+            "F2",
+            "construct"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "step": "2.1",
+          "claim": "The same path $\\gamma$ is part of the lower intersection, since the two shifted spheres agree outside the crossing balls. At its northeast endpoint the lower intersection continues along the northeast-to-southeast arc of $\\sigma$; at its northwest endpoint it continues along the northwest-to-southwest arc. These are distinct lower arcs in the same crossing ball by [F2]. Both belong to the one lower intersection component containing the connected path $\\gamma$. Hence that component repeats the crossing ball.",
+          "inputs": [
+            "step 1.1",
+            "F2",
+            "construct"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "step": "3.1",
+          "claim": "Reflection exchanges the two shifted spheres and gives the opposite conclusion. In bubble standard position the repeat in step 2.1 is forbidden by [F1], so no word with one $S$ occurs. This is exactly the stated $P^iS$ exclusion, for every puncture count including zero.",
+          "inputs": [
+            "step 2.1",
+            "F1",
+            "F2"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The supplied diagram circle or sphere is nonempty."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Step 3.1 includes zero punctures."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Steps 1.1\u20132.1 explicitly trace one saddle visit."
+        },
+        {
+          "case": "degenerate",
+          "status": "not_applicable",
+          "reason": "Embedded quadrilateral model disks and transverse intersections exclude degeneracy."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Step 2.1 traces the two different lower arcs at the two endpoints of gamma."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "The construction is finite and choice-free as stated; step 1.1 uses only the supplied finite data."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "No equivalence is asserted."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "No equivalence is asserted."
+        }
+      ],
+      "axioms": [],
+      "finite_checks": [],
+      "finite_smoke": [],
+      "risk_review": {
+        "status": "owner-review-pending",
+        "notes": "Actual local table or cell count supplied; Figure7(b,c) is not asserted by this bundle."
+      },
+      "proof_status": "complete-local-proof",
+      "proof_status_evidence": "Literal numbered claims, exact current supplier quotes and successful scoped checks.",
+      "unresolved_suppliers": [],
+      "unresolved_assumptions": []
+    }
+  }
+}

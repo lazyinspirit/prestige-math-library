@@ -7,6 +7,7 @@ origin: pipeline
 pipeline_run: inverse-problems-knot-theory-all-109-2026-10-19
 dependency_level: 4
 deps:
+  - def-countable-choice
   - lem-double-branched-cover-of-an-oriented-link-well-defined
   - def-hat-heegaard-floer-complex-of-a-closed-three-manifold
   - lem-os-disk-and-polygon-analytic-foundations
@@ -15,7 +16,7 @@ proof_strategy: direct
 axiom_use: "Uses the ACω analytic branch of Heegaard Floer theory; the unlink topology computation itself is choice-free."
 provenance:
   statement: literature-derived
-  proof: literature-derived
+  proof: ai-altered
 sources:
   references:
     - title: "Ozsváth and Szabó, On the Heegaard Floer homology of branched double-covers, Propositions 6.1 and 6.2"
@@ -26,7 +27,7 @@ sources:
 
 ## Statement
 
-For every integer $k\ge1$, let $U_k\subset S^3$ be a $k$-component planar unlink with an arbitrary orientation on each component, and choose a basepoint $p$ on any one component. Its double branched cover is $\#^{\,k-1}(S^2\times S^1)$, with $\Sigma(U_1)=S^3$. Over $\mathbb F_2$, the hat Floer group of this cover is identified with the exterior algebra on a $(k-1)$-dimensional vector space, hence has rank $2^{k-1}$. Under these identifications, the cobordism maps for saddle cobordisms between neighboring unlink resolutions, with $p$ carried outside the saddle disk, are the multiplication and comultiplication maps of the two-dimensional Frobenius algebra $\mathbb F_2[X]/(X^2)$ after reduction at the marked component. The identification includes the marked-circle cases and fixes the basis conventions needed to compare the first surgery differential with the reduced Khovanov cube.
+Assume the $\mathrm{AC}_\omega$ Heegaard Floer analytic package. For every integer $k\ge1$, let $U_k\subset S^3$ be a $k$-component planar unlink with an arbitrary orientation on each component, and choose a basepoint $p$ on any one component. Its double branched cover is $\#^{\,k-1}(S^2\times S^1)$, with $\Sigma(U_1)=S^3$. Over $\mathbb F_2$, the hat Floer group of this cover is identified with the exterior algebra on a $(k-1)$-dimensional vector space, hence has rank $2^{k-1}$. Under these identifications, the cobordism maps for saddle cobordisms between neighboring unlink resolutions, with $p$ carried outside the saddle disk, are the multiplication and comultiplication maps of the two-dimensional Frobenius algebra $\mathbb F_2[X]/(X^2)$ after reduction at the marked component. The identification includes the marked-circle cases and fixes the basis conventions needed to compare the first surgery differential with the reduced Khovanov cube.
 
 ## Statement references
 
@@ -42,9 +43,9 @@ For every integer $k\ge1$, let $U_k\subset S^3$ be a $k$-component planar unlink
 
 ## Facts & Assumptions
 
-**Given:** A planar unlink $U_k\subset S^3$ with $k\ge1$, arbitrary component orientations, a basepoint on one component, and the saddle cobordisms between its neighboring resolutions with the basepoint carried outside each saddle disk.
+**Given:** The $\mathrm{AC}_\omega$ Heegaard Floer analytic package and a planar unlink $U_k\subset S^3$ with $k\ge1$, arbitrary component orientations, a basepoint on one component, and the saddle cobordisms between its neighboring resolutions with the basepoint carried outside each saddle disk.
 
-[F1] The double branched cover and its orientation are defined and well-defined up to oriented diffeomorphism ([[lem-double-branched-cover-of-an-oriented-link-well-defined]]).
+[F1] The generic meridian-character construction and local branch convention are recorded in [[lem-double-branched-cover-of-an-oriented-link-well-defined]], whose general existence and isotopy-invariance theorem assumes AC. For the planar unlinks here, step 1.1 constructs the required oriented smooth double cover directly by finitely many sheet gluings in the local square-coordinate model. Only that explicit finite realization and local convention are used below; the general AC-dependent existence/classification conclusion is not invoked.
 
 [F2] The group is defined by the closed-manifold disk-count complex ([[def-hat-heegaard-floer-complex-of-a-closed-three-manifold]]).
 
@@ -56,9 +57,10 @@ For every integer $k\ge1$, let $U_k\subset S^3$ be a $k$-component planar unlink
 
 ## Proof
 
-1.1 The topology assertion has a direct finite construction. Put the planar $k$-component unlink, $k\ge1$, in its standard $k$-bridge position: the upper and lower balls each contain $k$ boundary-parallel arcs with the same noncrossing matching of their $2k$ endpoints. Choose their disjoint bridge disks. Cutting either ball along those disks trivializes the branch construction. Its double cover is two balls joined by $k$ one-handles; the first joins the two zero-handles, and each remaining handle adds one genus. Thus it is a genus-$k-1$ handlebody. The two bridge matchings and disk systems agree in the projection sphere, so the cover of the unlink is the double of this handlebody with matching meridian disks. Doubling each of its $k-1$ co-core disks gives disjoint nonseparating two-spheres. Cutting them removes those one-handles and leaves a sphere with paired ball holes; regluing the pairs gives $\#^{k-1}(S^2\times S^1)$. For $k=1$ it is the double of a ball, hence $S^3$. This finite cut-and-glue construction uses the actual local branched-cover convention of [F1], and no Floer map. [F1, given, construct, construct]
 
-1.2 Here is the complete finite algebra to which the external Floer map computation in step2.1 is applied. Order the unmarked circles of a based $k$-circle state, and assign to them generators $x_c$. The reduced state space is $\Lambda_{\mathbb F_2}\langle x_c\rangle$: the basis monomial on a subset labels those circles by $X$, the others by $1$, and the marked circle by the quotient label $1$. Exterior multiplication is commutative over $\mathbb F_2$ and each $x_c^2=0$. Thus this state space has dimension $2^{k-1}$, once an actual Floer vertex identification with it is supplied. This is a computation of the required state algebra, not yet of $\widehat{HF}$. [given, algebra]
+1.1 The topology assertion has a direct finite construction. Put the planar $k$-component unlink, $k\ge1$, in its standard $k$-bridge position: the upper and lower balls each contain $k$ boundary-parallel arcs with the same noncrossing matching of their $2k$ endpoints. Choose their disjoint bridge disks. Cutting either ball along those disks trivializes the branch construction. Its double cover is two balls joined by $k$ one-handles; the first joins the two zero-handles, and each remaining handle adds one genus. Thus it is a genus-$k-1$ handlebody. The two bridge matchings and disk systems agree in the projection sphere, so the cover of the unlink is the double of this handlebody with matching meridian disks. Doubling each of its $k-1$ co-core disks gives disjoint nonseparating two-spheres. Cutting them removes those one-handles and leaves a sphere with paired ball holes; regluing the pairs gives $\#^{k-1}(S^2\times S^1)$. For $k=1$ it is the double of a ball, hence $S^3$. The cover is constructed by crosswise gluing two labeled copies of the cut balls along the finitely many bridge disks, using $(s,z)\mapsto(s,z^2)$ along the branch arcs and the matching endpoint charts. These charts give its orientation and smooth structure directly. Thus this is a finite realization of the local branch convention in [F1], without invoking the generic AC-dependent covering classification or any Floer map. [F1, given, construct, construct]
+
+1.2 Here is the complete finite algebra to which the external Floer map computation [F4]–[F5], applied below is applied. Order the unmarked circles of a based $k$-circle state, and assign to them generators $x_c$. The reduced state space is $\Lambda_{\mathbb F_2}\langle x_c\rangle$: the basis monomial on a subset labels those circles by $X$, the others by $1$, and the marked circle by the quotient label $1$. Exterior multiplication is commutative over $\mathbb F_2$ and each $x_c^2=0$. Thus this state space has dimension $2^{k-1}$, once an actual Floer vertex identification with it is supplied. This is a computation of the required state algebra, not yet of $\widehat{HF}$. [given, algebra]
 
 2.1 Write $A=\mathbb F_2[X]/(X^2)$. For an unmarked merge the required map is $m(1,1)=1$, $m(1,X)=m(X,1)=X$, $m(X,X)=0$. For an unmarked split it is $\Delta(1)=1\otimes X+X\otimes1$, $\Delta(X)=X\otimes X$. If a marked circle merges with an unmarked one, reducing the output kills $X$ on the marked factor, so $1\otimes1\mapsto1$ and $1\otimes X\mapsto0$. If a marked circle splits, reduce the child containing the original point: $\Delta(1)$ then becomes $1_{\rm marked}\otimes X_{\rm new}$ (with factors exchanged when necessary). Hence marked split creates the unmarked label $X$, not $1$. All untouched factors are carried identically. These are literal quotient calculations and include both marked cases. [step 1.2, algebra]
 
@@ -67,4 +69,3 @@ For every integer $k\ge1$, let $U_k\subset S^3$ be a $k$-component planar unlink
 4.1 Apply [F4] to the actual cover constructed in step1.1. Its rank-one exterior module gives the rank $2^{k-1}$, with generators represented by the arc lifts specified in [F5]. That same input supplies the actual Floer triangle maps and their common state bases. Under these bases the quotient/wedge operations of [F4], [F5] are precisely the four finite reduced tables proved in steps 1.2, 2.1, 3.1. In particular $[\gamma_0]=0$ kills the unwanted marked-circle factor and forces marked split to create the new $X$ label. [F4, F5, step 1.1, step 1.2, step 2.1, step 3.1]
 
 5.1 The vertex and map computations in the preceding step are externally imported, not inferred from analytic regularity [F3] or from a chosen common-top transfer. The topology and quotient algebra remain the local finite arguments above. All coefficients are $\mathbb F_2$, so no integral sign or instanton-saddle formula is used. The actual finite diagram has finitely many states and edges, with the analytic data in the stated AComega branch. This proves the full fixed-resolution Floer TQFT assertion with its compatible marked bases. [F1, F2, F3, F4, F5, step 4.1] ∎
-

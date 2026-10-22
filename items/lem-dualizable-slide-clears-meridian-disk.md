@@ -24,7 +24,7 @@ sources:
       locator: "Theorem 3.1 proof, §3, arXiv v1 PDF p. 4, finite slides removing intersections with $D_R$"
     - title: "Jennifer Hom, Getting a handle on the Conway knot"
       url: "https://arxiv.org/pdf/2107.09171"
-      locator: "§3, dualizable-link cancellation argument"
+      locator: "§§5–6, handle and shared-trace background; the disk-clearing slide construction is in Piccirillo's Theorem 3.1 proof"
 ---
 
 ## Statement
@@ -39,7 +39,7 @@ circle for $G$ is disjoint from $D_R$.
 
 [Piccirillo, Theorem 3.1 proof](https://arxiv.org/pdf/1808.02923)
 
-[Hom, §3](https://arxiv.org/pdf/2107.09171)
+[Hom, §§5–6, handle and shared-trace background](https://arxiv.org/pdf/2107.09171)
 
 ## Facts & Assumptions
 
@@ -47,7 +47,7 @@ circle for $G$ is disjoint from $D_R$.
 
 [A1] Countable choice, written $\mathrm{AC}_\omega$, is [[def-countable-choice]].
 
-[F1] [[def-dualizable-handle-link]]: both $B\cup R$ and $G\cup R$ are meridional pairs, and the components carry the specified zero framings.
+[F1] [[def-dualizable-handle-link]]: both $B\cup R$ and $G\cup R$ are meridional pairs; $B$ and $G$ are zero-framed $2$-handle attaching circles, while $R$ is dotted and represents a $1$-handle.
 
 [F2] [[def-handle-slide-of-one-k-handle-over-another]]: a slide of $G$ over $B$ replaces its attaching circle by a band sum with a signed framed parallel copy of $B$.
 

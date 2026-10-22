@@ -39,7 +39,7 @@ This representative depends only on the almost-everywhere class of $E$. The cano
 
 [[def-ip-spatial-bv-and-distributional-tv|Spatial BV and finite perimeter are defined on almost-everywhere classes.]]
 
-[[def-ip-boundary-tv-conventions|Bounded-domain level sets use zero extension geometrically, while Dirichlet and Neumann TV retain distinct perimeter conventions.]]
+[[def-ip-boundary-tv-conventions|Zero extension and the distinct Dirichlet and Neumann total-variation conventions.]]
 
 [[def-metric-space|The Hausdorff distance uses the Euclidean metric on $\mathbb R^2$.]]
 

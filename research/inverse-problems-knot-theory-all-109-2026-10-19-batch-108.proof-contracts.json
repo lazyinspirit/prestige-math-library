@@ -403,7 +403,7 @@
           "quote": "The **Axiom of Choice** (AC) is the following statement.\n\n> Every family of nonempty sets has a choice function\n> (Choice function).\n\nWritten out: for every set $\\mathcal{F}$ all of whose members are nonempty,\nthere exists a function $g$ with domain $\\mathcal{F}$ satisfying $g(S) \\in S$ for\nall $S \\in \\mathcal{F}$.\n\nAn equivalent formulation is that a product of nonempty sets is nonempty: if\n$X_i \\ne \\emptyset$ for every $i \\in I$, then $\\prod_{i \\in I} X_i \\ne \\emptyset$.\nHere $\\prod_{i \\in I} X_i$ is the set of functions $f$ with domain $I$ such that\n$f(i) \\in X_i$ for every $i \\in I$; when a family of nonempty sets is indexed by\nitself, such an $f$ is precisely a choice function for it.",
           "uses": [
             "1.1",
-            "3.1"
+            "2.1"
           ]
         },
         {
@@ -412,7 +412,8 @@
           "source_section": "Definition",
           "quote": "Let $X$ be a set and let $R \\subseteq X \\times X$ be a binary relation on $X$.\nCall $R$ **entire on $X$** when\n\n$$\\text{for every } x \\in X \\text{ there is } y \\in X \\text{ with } x \\mathbin{R} y .$$\n\nThe **Axiom of Dependent Choice**, written $\\mathrm{DC}$, is the following\nstatement.\n\n> For every nonempty set $X$, every relation $R$ entire on $X$, and every\n> $a \\in X$, there is a function $x : \\mathbb{N} \\to X$ (A function is a relation $f$ with $(a,b) \\in f$ and $(a,c) \\in f$ implying $b = c$; $f : A \\to B$, the value $f(a)$, domain and codomain,\n> The natural numbers $\\mathbb{N}$ (von Neumann)) with\n> $$x_0 = a \\qquad \\text{and} \\qquad x_n \\mathbin{R} x_{n+1} \\ \\text{ for every } n \\in \\mathbb{N}.$$\n\nHere a sequence in $X$ means a function from $\\mathbb{N}$ to $X$, not necessarily\na real-valued sequence. As everywhere in this library $\\mathbb{N}$ contains $0$, and the sequence is\nindexed from $0$; the term $x_0$ is the prescribed starting point $a$ and every\nlater term is related to its predecessor.\n\n**What DC adds to what came before.** Choice function and\nThe Axiom of Choice select one element from each member of a family that is\nfixed in advance, and The Axiom of Countable Choice ($\\mathrm{AC}_\\omega$) does the same for a family indexed\nby $\\mathbb{N}$. In both, the family is given before any selection is made. DC is\nthe principle needed when the $n$-th set to select from is not known until the\nfirst $n$ selections have been made: here the admissible values of $x_{n+1}$ are\nexactly the $R$-successors of $x_n$, so the family being chosen from is built\nalong the choosing. Thus the displayed recursion is directly an instance of\nDC; it is not itself an application of the fixed-family formulation of\ncountable choice. This observation concerns the input to the two axioms and\nmakes no claim about a nonimplication between them.\n\n**The starting point may be dropped.** The formally weaker statement obtained by\ndeleting the clause $x_0 = a$ — for every nonempty $X$ and every entire $R$ there\nis a sequence with $x_n \\mathbin{R} x_{n+1}$ for all $n$ — is an immediate\nconsequence of the form above, since $X$ is nonempty and any of its elements may\nbe taken as $a$. Conversely, assume the start-free form, and fix $X$, $R$ and $a$ as above. Let $P$ be the set of all functions $p:k\\to X$ with nonzero $k\\in\\mathbb N$, $p(0)=a$, and $p(i)\\mathbin R p(i+1)$ whenever $i+1<k$. It is a set by Separation inside $\\mathcal P(\\mathbb N\\times X)$ (The power set $\\mathcal{P}(x) = \\{\\, z : z \\subseteq x \\,\\}$, The Cartesian product $A \\times B := \\{\\, z \\in \\mathcal{P}(\\mathcal{P}(A \\cup B)) : \\exists a \\in A\\ \\exists b \\in B\\ z = (a,b) \\,\\}$, The Axiom Schema of Separation: for each formula $\\varphi$, $\\forall \\bar p\\,\\forall x\\,\\exists y\\,\\forall z\\,(z \\in y \\leftrightarrow (z \\in x \\wedge \\varphi(z,\\bar p)))$); a natural is the set of its predecessors (On $\\mathbb{N}$ the order is membership: $m < n \\iff m \\in n$). The singleton path $\\{(0,a)\\}$ lies in $P$.\n\nOn $P$ let $p\\mathbin S q$ mean that $q$ extends $p$ by exactly one new last entry. This relation is entire: for one particular $p:k\\to X$, write $k=j+1$ (Every nonzero natural number is a successor); an $R$-successor $y$ of $p(j)$ exists, and $q=p\\cup\\{(k,y)\\}$ is the required extension. This is existential instantiation for that path, not a simultaneous choice of successors. Start-free DC now supplies a sequence $(p_n)$ with $p_n\\mathbin S p_{n+1}$; its first path need not be the singleton path, but every path in $P$ already starts at $a$.\n\nTheir graphs are nested. By induction (The principle of mathematical induction), $p_n$ has at least $n+1$ entries: the initial path is nonempty, and every step adds one entry. Hence $x=\\bigcup_{n\\in\\mathbb N}p_n$ is a function with domain $\\mathbb N$ and values in $X$. Indeed, nestedness makes all common values agree, every natural index eventually lies in a path, and no path has indices outside $\\mathbb N$. Each path starts at $a$, so $x(0)=a$; for any $i$, a sufficiently long path contains both $i$ and $i+1$, giving $x(i)\\mathbin R x(i+1)$. Replacement and Union form this union of the sequence of graphs. Thus the start-free and prescribed-start forms are equivalent in ZF. Every use below retains the prescribed-start convention.\n\n**$R$ need not be an order and the terms need not be distinct.** What DC delivers\nis a sequence, that is a function $\\mathbb{N} \\to X$, not a chain in the\norder-theoretic sense (Chain in a poset). The relation may be symmetric, and the\nsequence may repeat a value or be constant; all that is asserted is\n$x_n \\mathbin{R} x_{n+1}$ at every index.",
           "uses": [
-            "3.1"
+            "1.1",
+            "2.1"
           ]
         },
         {
@@ -422,7 +423,8 @@
           "quote": "Assume AC. For a discrete group $G$, Milnor's $BG$ is connected and\n\n$$ \\pi_1(BG)\\cong G,\\qquad \\pi_n(BG)=0\\quad(n>1). $$\n\nConsequently any connected CW model of $BG$ is an Eilenberg--Mac Lane space $K(G,1)$.",
           "uses": [
             "1.1",
-            "2.1"
+            "2.1",
+            "2.2"
           ]
         },
         {
@@ -431,7 +433,7 @@
           "source_section": "Statement",
           "quote": "For a based Serre fibration $p:(E,e_0)\\to(B,b_0)$ with fiber $F=p^{-1}(b_0)$, the sequence\n$$\\cdots\\to\\pi_n(F)\\xrightarrow{i_*}\\pi_n(E)\\xrightarrow{p_*}\\pi_n(B)\\xrightarrow{\\partial_p}\\pi_{n-1}(F)\\to\\cdots\\to\\pi_1(B)\\xrightarrow{\\partial_p}\\pi_0(F)\\xrightarrow{i_*}\\pi_0(E)\\xrightarrow{p_*}\\pi_0(B)$$\nis exact wherever there is an incoming and outgoing arrow. Basepoints are $e_0,b_0$ as appropriate. Exactness means incoming image equals the inverse image of the distinguished element. Arrows are homomorphisms where both group structures are defined; the component terms are pointed sets. The last arrow is onto precisely when $p(E)$ meets every path component of $B$.\n\nThere is a right action of $\\pi_1(B,b_0)$ on $\\pi_0(F)$: $[e]\\cdot[\\gamma]$ is the endpoint component of a lift of $\\gamma$ starting at $e$, with loop products traversed left-to-right. Its orbits are precisely the fibers of $i_*:\\pi_0(F)\\to\\pi_0(E)$, and the stabilizer of $[e_0]$ is $p_*\\pi_1(E,e_0)$. Our boundary convention gives $\\partial_p[\\gamma]=[e_0]\\cdot[\\gamma]^{-1}$. These assertions require no AC.",
           "uses": [
-            "2.1"
+            "2.2"
           ]
         },
         {
@@ -458,7 +460,7 @@
           "source_section": "Statement",
           "quote": "For every path-connected topological space $X$ and $x_0\\in X$, the Hurewicz map\n$$h:\\pi_1(X,x_0)\\longrightarrow H_1(X;\\mathbb Z)$$\nis surjective and has kernel $[\\pi_1(X,x_0),\\pi_1(X,x_0)]$. Hence it induces a natural isomorphism\n$$\\pi_1(X,x_0)^{\\mathrm{ab}}\\cong H_1(X;\\mathbb Z).$$\nThe proof is choice-free and requires no CW, separation, local path-connectivity or local simple-connectivity assumption.",
           "uses": [
-            "2.1"
+            "2.2"
           ]
         },
         {
@@ -468,7 +470,7 @@
           "quote": "Assume AC. Every group $G$ has a connected CW model $K(G,1)$. For every abelian group $A$ and every $n\\geq2$, there is a connected CW model $K(A,n)$. If two models carry identifications with the same group, they are homotopy equivalent by maps inducing the prescribed identification (with the usual basepoint transport in degree one).",
           "uses": [
             "1.1",
-            "3.1"
+            "2.1"
           ]
         },
         {
@@ -478,7 +480,7 @@
           "quote": "Assume DC and the supplied projective-resolution convention for derived group homology. For every left $G$-module $M$, $H_n(G;M)$ is naturally the homology of $C_n(G;M)=(\\overline B_n(G)\\otimes_{\\mathbb Z}M)_G$, with diagonal left action and alternating vertex-deletion differential. Equivalently it is computed by $\\overline B^{\\rm right}(G)\\otimes_{\\mathbb ZG}M$, where $b\\cdot g=g^{-1}b$.",
           "uses": [
             "1.1",
-            "3.1"
+            "2.1"
           ]
         },
         {
@@ -488,45 +490,59 @@
           "quote": "Let $X$ be a set and let $R \\subseteq X \\times X$ be a binary relation on $X$.\nCall $R$ **entire on $X$** when\n\n$$\\text{for every } x \\in X \\text{ there is } y \\in X \\text{ with } x \\mathbin{R} y .$$\n\nThe **Axiom of Dependent Choice**, written $\\mathrm{DC}$, is the following\nstatement.\n\n> For every nonempty set $X$, every relation $R$ entire on $X$, and every\n> $a \\in X$, there is a function $x : \\mathbb{N} \\to X$ (A function is a relation $f$ with $(a,b) \\in f$ and $(a,c) \\in f$ implying $b = c$; $f : A \\to B$, the value $f(a)$, domain and codomain,\n> The natural numbers $\\mathbb{N}$ (von Neumann)) with\n> $$x_0 = a \\qquad \\text{and} \\qquad x_n \\mathbin{R} x_{n+1} \\ \\text{ for every } n \\in \\mathbb{N}.$$\n\nHere a sequence in $X$ means a function from $\\mathbb{N}$ to $X$, not necessarily\na real-valued sequence. As everywhere in this library $\\mathbb{N}$ contains $0$, and the sequence is\nindexed from $0$; the term $x_0$ is the prescribed starting point $a$ and every\nlater term is related to its predecessor.\n\n**What DC adds to what came before.** Choice function and\nThe Axiom of Choice select one element from each member of a family that is\nfixed in advance, and The Axiom of Countable Choice ($\\mathrm{AC}_\\omega$) does the same for a family indexed\nby $\\mathbb{N}$. In both, the family is given before any selection is made. DC is\nthe principle needed when the $n$-th set to select from is not known until the\nfirst $n$ selections have been made: here the admissible values of $x_{n+1}$ are\nexactly the $R$-successors of $x_n$, so the family being chosen from is built\nalong the choosing. Thus the displayed recursion is directly an instance of\nDC; it is not itself an application of the fixed-family formulation of\ncountable choice. This observation concerns the input to the two axioms and\nmakes no claim about a nonimplication between them.\n\n**The starting point may be dropped.** The formally weaker statement obtained by\ndeleting the clause $x_0 = a$ — for every nonempty $X$ and every entire $R$ there\nis a sequence with $x_n \\mathbin{R} x_{n+1}$ for all $n$ — is an immediate\nconsequence of the form above, since $X$ is nonempty and any of its elements may\nbe taken as $a$. Conversely, assume the start-free form, and fix $X$, $R$ and $a$ as above. Let $P$ be the set of all functions $p:k\\to X$ with nonzero $k\\in\\mathbb N$, $p(0)=a$, and $p(i)\\mathbin R p(i+1)$ whenever $i+1<k$. It is a set by Separation inside $\\mathcal P(\\mathbb N\\times X)$ (The power set $\\mathcal{P}(x) = \\{\\, z : z \\subseteq x \\,\\}$, The Cartesian product $A \\times B := \\{\\, z \\in \\mathcal{P}(\\mathcal{P}(A \\cup B)) : \\exists a \\in A\\ \\exists b \\in B\\ z = (a,b) \\,\\}$, The Axiom Schema of Separation: for each formula $\\varphi$, $\\forall \\bar p\\,\\forall x\\,\\exists y\\,\\forall z\\,(z \\in y \\leftrightarrow (z \\in x \\wedge \\varphi(z,\\bar p)))$); a natural is the set of its predecessors (On $\\mathbb{N}$ the order is membership: $m < n \\iff m \\in n$). The singleton path $\\{(0,a)\\}$ lies in $P$.\n\nOn $P$ let $p\\mathbin S q$ mean that $q$ extends $p$ by exactly one new last entry. This relation is entire: for one particular $p:k\\to X$, write $k=j+1$ (Every nonzero natural number is a successor); an $R$-successor $y$ of $p(j)$ exists, and $q=p\\cup\\{(k,y)\\}$ is the required extension. This is existential instantiation for that path, not a simultaneous choice of successors. Start-free DC now supplies a sequence $(p_n)$ with $p_n\\mathbin S p_{n+1}$; its first path need not be the singleton path, but every path in $P$ already starts at $a$.\n\nTheir graphs are nested. By induction (The principle of mathematical induction), $p_n$ has at least $n+1$ entries: the initial path is nonempty, and every step adds one entry. Hence $x=\\bigcup_{n\\in\\mathbb N}p_n$ is a function with domain $\\mathbb N$ and values in $X$. Indeed, nestedness makes all common values agree, every natural index eventually lies in a path, and no path has indices outside $\\mathbb N$. Each path starts at $a$, so $x(0)=a$; for any $i$, a sufficiently long path contains both $i$ and $i+1$, giving $x(i)\\mathbin R x(i+1)$. Replacement and Union form this union of the sequence of graphs. Thus the start-free and prescribed-start forms are equivalent in ZF. Every use below retains the prescribed-start convention.\n\n**$R$ need not be an order and the terms need not be distinct.** What DC delivers\nis a sequence, that is a function $\\mathbb{N} \\to X$, not a chain in the\norder-theoretic sense (Chain in a poset). The relation may be symmetric, and the\nsequence may repeat a value or be constant; all that is asserted is\n$x_n \\mathbin{R} x_{n+1}$ at every index.",
           "uses": [
             "1.1",
-            "3.1"
+            "2.1"
           ]
         }
       ],
       "derivations": [
         {
           "id": "step-1-1",
-          "claim": "By [F1, F5], choose a connected CW classifying-space model $BG$. Define a based map on the one-skeleton of $X$ sending its loops to loops in $BG$ that represent the same elements of $G$. Each two-cell attaching loop then maps to the identity in $\\pi_1(BG)$, so its map extends over the disk. For every cell of dimension at least three, its attaching sphere extends because the corresponding higher homotopy group of $BG$ vanishes. AC supplies the simultaneous cellwise extensions. The resulting based map $c:X\\to BG$ induces the identity on $\\pi_1$.",
+          "claim": "Fix the arbitrary map $c$ in the statement, rather than selecting a special classifying map. By [F1], its target is a connected CW $K(G,1)$, so $\\pi_2(BG)=0$ and $\\pi_1(c)$ is an isomorphism. For the derived-homology comparison in [F5], supply resolutions explicitly: over $\\mathbb ZG$, take the free module on the underlying set of a module $M$, map its basis element $[m]$ to $m$, and repeat the same free-module construction on each successive kernel. The augmentations are onto and each image is the preceding kernel, so this is an exact free, hence projective, resolution for every $M$. This specified construction supplies the resolution convention; [A1] and [L1] supply DC.",
           "step": "1.1",
           "inputs": [
             "A1",
+            "L1",
             "F1",
+            "F5",
             "given",
-            "construct",
-            "F5"
-          ]
-        },
-        {
-          "id": "step-1-2",
-          "claim": "Replace $c$ by its mapping-path Serre fibration $p:E\\to BG$. The total space $E$ is homotopy equivalent to $X$. The homotopy long exact sequence [F2] shows that the fiber $F$ is path-connected and has $\\pi_1(F)=\\ker(\\pi_1(c))=1$. Hence $H_1(F;\\mathbb Z)=0$ by [F4].",
-          "step": "2.1",
-          "inputs": [
-            "F1",
-            "F2",
-            "step 1.1",
-            "algebra",
-            "F4"
+            "construct"
           ]
         },
         {
           "id": "step-2-1",
-          "claim": "By [A1] and [L1], the DC hypothesis in [F5] holds, so $H_2(BG;\\mathbb Z)=H_2(G;\\mathbb Z)$. Apply [F3] to $F\\to E\\to BG$. Its five-term sequence has consecutive terms $$H_2(E;\\mathbb Z)\\longrightarrow H_2(BG;\\mathbb Z) \\longrightarrow H_0(BG;H_1(F;\\mathbb Z)).$$ The last group is zero by step 2.1. Exactness therefore makes the first map surjective. Under the homotopy equivalence $E\\simeq X$, this first map is $c_*$, proving the assertion.",
-          "step": "3.1",
+          "claim": "Apply the external comparison [F6] to this CW model $BG$. With $T$ its universal cover, put $P_*=C_*^{\\mathrm{cell}}(T)$. Choosing an oriented lift of each cell, permitted by AC, exhibits $P_*$ as free over $\\mathbb ZG$. Contractibility makes its augmentation exact. Thus $P_*$ is a supplied resolution of the trivial left module; its comparison with the resolution in step 1.1 identifies the same derived group homology. Projection to $BG$ identifies $\\mathbb Z\\otimes_{\\mathbb ZG}P_*$ with $C_*^{\\mathrm{cell}}(BG)$, including their differentials. Taking homology, and using cellular-to-singular homology comparison as in [F6], gives $H_n(G;\\mathbb Z)\\cong H_n(BG;\\mathbb Z)$.",
+          "step": "2.1",
           "inputs": [
             "A1",
             "L1",
-            "F3",
+            "F1",
             "F5",
+            "F6",
+            "step 1.1",
+            "construct",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-2",
+          "claim": "Replace this prescribed $c$ by its mapping-path Serre fibration $p:E\\to BG$, with $E\\simeq X$ and $p$ corresponding to $c$. In [F2], the action on fiber components is transitive because $E$ is connected, and the component of the based fiber point has stabilizer all of $\\pi_1(BG)$ because $\\pi_1(c)$ is onto. Thus the fiber $F$ is path-connected. Since $\\pi_2(BG)=0$ and $\\pi_1(c)$ is injective, the same exact sequence gives $\\pi_1(F)=1$. Hence $H_1(F;\\mathbb Z)=0$ by [F4].",
+          "step": "2.2",
+          "inputs": [
+            "F1",
+            "F2",
+            "F4",
+            "step 1.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "claim": "Apply [F3] to $F\\to E\\to BG$. Since $F$ is path-connected, its $H_0$ local system is canonically the constant system $\\mathbb Z$. The five-term sequence therefore has consecutive terms $$H_2(E;\\mathbb Z)\\longrightarrow H_2(BG;\\mathbb Z) \\longrightarrow H_0(BG;\\mathcal H_1(F;\\mathbb Z)).$$ The last group is zero by step 2.2. Exactness makes the first map, the edge homomorphism $p_*$, surjective. Under $E\\simeq X$ this map is $c_*$, and step 2.1 identifies its target with $H_2(G;\\mathbb Z)$, proving the assertion.",
+          "step": "3.1",
+          "inputs": [
+            "F3",
             "step 2.1",
+            "step 2.2",
             "algebra"
           ]
         }
@@ -732,20 +748,26 @@
             "F5"
           ],
           "uses": [
-            "2.1",
-            "1.1"
+            "1.1",
+            "2.1"
           ],
           "declared_in_statement_or_facts": true
         }
       ],
       "proof_status": "complete-local-proof",
-      "proof_status_evidence": "The numbered local argument is authored; this records readiness work only and does not constitute independent approval.",
+      "proof_status_evidence": "The local fibration and five-term argument uses the explicitly imported Brown universal-cover/cellular comparison in F6 and step 2.1. This is repair authorship, not independent approval.",
       "unresolved_supplier_checks": [],
       "unresolved_obligations": [],
       "risk_review": {
         "status": "complete",
         "reviewer": "alpha-batch-108",
         "notes": "Reviewed every step and the classifying-space, fibration homotopy sequence, Serre, five-term, Hurewicz and bar-homology interfaces. For the given pi_1-isomorphism c, pi_2(BG)=0 and the component action imply connected simply connected homotopy fiber; H_1(F)=0 annihilates E2_0,1 and forces the H2 edge epimorphism. The construction in 1.1 may be applied to the prescribed c; no special classifying-map choice affects the argument. AC implies the declared DC. No reader/refuter finding targets this carrier."
+      },
+      "step5_repair_notes": {
+        "report": "research/inverse-problems-knot-theory-all-109-2026-10-19-step5-v2/step5-v2-repeat-r1-u108.json",
+        "review_scope": "Assigned mathematical repair review; not independent review of the new repair.",
+        "reason": "Confirmed missing topological comparison: F5 previously attributed H_*(BG)=H_*(G) to an algebraic bar lemma. F5 now states only the actual algebraic conclusion. F6 explicitly imports Brown Section 1, printed pages 4–5 and 7, and step 2.1 explains the free universal-cover cellular resolution and quotient differential. AC chooses cell lifts and implies DC; the resolution convention remains supplied. The connected simply connected mapping-path fiber has H1=0, so the Serre five-term edge p_* is onto for the arbitrary prescribed c. Statement and dependencies unchanged; no downstream interface event. Brown Section 1 relevant construction and comparison passages actually consulted; no whole-source or independent-repair acceptance claimed.",
+        "integration": "Assigned entry reread and regenerated from the final item under the confirmed step5-v2-repeat-r1-u108 shared-write lock; source quotes and four derivations checked by strict focused proof-contract validation. All other contract entries preserved."
       }
     },
     "thm-five-term-homology-sequence-for-group-extensions": {
@@ -776,7 +798,8 @@
           "quote": "Assume the Axiom of Choice. For every short exact sequence of discrete groups\n$$1\\longrightarrow N\\longrightarrow G\\longrightarrow Q\\longrightarrow 1,$$\nthe homological Serre spectral sequence of the induced map of classifying spaces\nhas\n$$E^2_{p,q}\\cong H_p\\!\\left(Q;H_q(N;\\mathbb Z)\\right) \\quad\\Longrightarrow\\quad H_{p+q}(G;\\mathbb Z).$$\nHere $H_p(Q;M)$ denotes homology of $BQ$ with the local coefficient system\ndetermined by the left $Q$-module $M$, and group homology uses the bar\nclassifying spaces. The coefficient group $H_q(N;\\mathbb Z)$ has the $Q$-action\ninduced by conjugation by lifts in $G$, and convergence is strong with the\nfinite Serre filtration in each total degree.",
           "uses": [
             "1.1",
-            "1.2"
+            "1.2",
+            "2.1"
           ]
         },
         {
@@ -785,7 +808,8 @@
           "source_section": "Statement",
           "quote": "Let $E^r_{p,q}$ be a homological spectral sequence in an abelian category, first quadrant from page $2$, with specified finite abutment to $H_n$ and increasing filtration normalized by $F_{-1}H_n=0$, $F_nH_n=H_n$ for $n\\ge0$. There is an exact sequence\n$$H_2\\longrightarrow E^2_{2,0}\\xrightarrow{d^2}E^2_{0,1}\\longrightarrow H_1\\longrightarrow E^2_{1,0}\\longrightarrow0.$$\nThe maps adjacent to homology are the edge maps. No initial injectivity of $H_2\\to E^2_{2,0}$ is asserted.",
           "uses": [
-            "1.1"
+            "1.1",
+            "2.1"
           ]
         },
         {
@@ -797,19 +821,38 @@
             "1.1",
             "1.2"
           ]
+        },
+        {
+          "fact": "F4",
+          "source": "thm-homological-serre-spectral-sequence",
+          "source_section": "Statement",
+          "quote": "Let $p:E\\to B$ be a Serre fibration over a path-connected CW complex and\nlet $R$ be a commutative unital ring. The skeletal filtration gives a\nchoice-free natural first-quadrant homological spectral sequence\n$$E^2_{a,b}\\cong H_a\\bigl(B;\\mathcal H_b(p;R)\\bigr), \\qquad d_r:E^r_{a,b}\\longrightarrow E^r_{a-r,b+r-1},$$\nstrongly converging to $H_{a+b}(E;R)$ with the finite image filtration\n$$F_aH_n(E;R)=\\operatorname{im}\\bigl(H_n(E_a;R)\\to H_n(E;R)\\bigr), \\qquad 0=F_{-1}H_n\\subseteq\\cdots\\subseteq F_nH_n=H_n(E;R).$$\nIts stable terms have the specified natural identifications\n$$E^\\infty_{a,n-a}\\cong F_aH_n(E;R)/F_{a-1}H_n(E;R).$$\nIf $B$ is simply connected, transport between two fiber stalks is independent\nof the path class, so after choosing one fiber identification the local\nsystem is constant. The displayed spectral sequence then has\n$E^2_{a,b}\\cong H_a(B;H_b(F;R))$.\n\nThe chain filtration itself is not asserted to be degreewise finite. Strong\nconvergence follows from the argument below, not from the theorem for\ndegreewise finite filtered chain complexes.",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "lem-classifying-maps-are-natural-under-group-homomorphisms",
+          "source_section": "Statement",
+          "quote": "Assume AC. Let $f:(X,x_0)\\to(Y,y_0)$ be a based map of path-connected CW\ncomplexes, let $G=\\pi_1(X,x_0)$ and $H=\\pi_1(Y,y_0)$, and put\n$\\phi=f_*:G\\to H$. Let $c_X:X\\to BG$ and $c_Y:Y\\to BH$ be based classifying\nmaps inducing the identity on the identified fundamental groups. There is a\nbased map $B\\phi:BG\\to BH$ inducing $\\phi$, and\n$$\nB\\phi\\circ c_X\\simeq c_Y\\circ f\n$$\nby a based homotopy. Consequently the induced maps on singular homology commute.",
+          "uses": [
+            "2.1"
+          ]
         }
       ],
       "derivations": [
         {
           "id": "step-1-1",
-          "claim": "By [A1] and [L1], the DC condition of [F3] holds. Apply [F2] to the spectral sequence in [F1]. Since $H_0(N;\\mathbb Z)=\\mathbb Z$ with trivial $Q$-action, its terms identify as $E^2_{2,0}=H_2(Q;\\mathbb Z)$, $E^2_{0,1}=H_0(Q;H_1(N;\\mathbb Z))$, $H_1=H_1(G;\\mathbb Z)$, and $E^2_{1,0}=H_1(Q;\\mathbb Z)$. This gives an exact sequence with $H_0(Q;H_1(N;\\mathbb Z))$ in the middle.",
+          "claim": "Supply the resolution convention needed by [F3] as follows. For each relevant group $K$ and left $\\mathbb ZK$-module $M$, take the free module on the underlying set of $M$, augment $[m]\\mapsto m$, and repeat on each successive kernel. Each augmentation is onto its kernel target, so the resulting complex is an exact free, hence projective, resolution, specified uniformly in $M$. By [A1] and [L1], DC also holds. Apply [F2] to [F1]. Since $H_0(N;\\mathbb Z)=\\mathbb Z$ with trivial $Q$-action, its terms are $E^2_{2,0}=H_2(Q;\\mathbb Z)$, $E^2_{0,1}=H_0(Q;H_1(N;\\mathbb Z))$, $H_1=H_1(G;\\mathbb Z)$, and $E^2_{1,0}=H_1(Q;\\mathbb Z)$. This gives an exact sequence with the coinvariant group in the middle.",
           "step": "1.1",
           "inputs": [
             "A1",
             "L1",
             "F1",
             "F2",
-            "F3"
+            "F3",
+            "construct"
           ]
         },
         {
@@ -825,9 +868,13 @@
         },
         {
           "id": "step-2-1",
-          "claim": "Substituting this natural identification in the exact sequence from step 1.1 gives the displayed five-term sequence. The identification commutes with the map induced by any homomorphism of group extensions, since it is defined by the meridian-class map $n\\mapsto[n]$ and the conjugation action.",
+          "claim": "Substituting the identification of step 1.2 into step 1.1 gives the displayed sequence. To check naturality, take a homomorphism of extensions. The bar classifying-space maps give a commuting square from $BG\\to BQ$ to $BG^{\\prime}\\to BQ^{\\prime}$; mapping-path replacement gives a map of their fibrations. Its fiber map induces the specified homomorphism $N\\to N^{\\prime}$ on fundamental groups. Under the fiber identifications with $BN,BN^{\\prime}$ in [F1], [F5] identifies its homology map with that induced by $N\\to N^{\\prime}$. By [F4], the map of spectral sequences commutes with $d^2$, all edge maps, and the abutment filtration. The five-term splice in [F2] uses only these maps and the natural subquotient identifications, so its squares commute. Finally, step 1.2 sends each $n$ to its class in the coinvariants, hence commutes with the homomorphism on $N$ and its conjugation action. This proves naturality of the displayed sequence, including the transgression.",
           "step": "2.1",
           "inputs": [
+            "F1",
+            "F2",
+            "F4",
+            "F5",
             "step 1.1",
             "step 1.2",
             "algebra"
@@ -1047,6 +1094,11 @@
         "status": "complete",
         "reviewer": "alpha-batch-108",
         "notes": "Read all three steps with LHS, first-quadrant five-term and bar-model supplier statements. E2_0,1 is the Q-coinvariant quotient of N_ab; [N,N] is contained in [G,N], and the lift-conjugacy relations generate precisely [G,N]/[N,N]. Thus the middle term and natural maps have the stated direction; there is no asserted initial injectivity. Checked McCleary Theorem 8bis.14 and proof, printed p343 (PDF p15), including the coinvariant identification. AC=>DC is explicit."
+      },
+      "step5_repair_notes": {
+        "report": "research/inverse-problems-knot-theory-all-109-2026-10-19-step5-v2/step5-v2-initial-r1-u108.json",
+        "review_scope": "Assigned item repair review; not independent review of the new repair.",
+        "reason": "F3 omitted its supplied-resolution premise, although the LHS supplier already uses bar group homology. The repair explicitly supplies free resolutions on successive kernels and discharges DC from AC, so the H1 bar computation is licensed. The N-coinvariant relations are exactly [G,N]/[N,N]. Also added and proved naturality of the complete sequence using functorial bar classifying spaces, mapping-path fibrations, and the natural Serre spectral sequence; this supplies the assigned Stallings consumer without weakening exactness."
       }
     },
     "thm-stallings-integral-lower-central-isomorphism": {
@@ -1066,7 +1118,7 @@
           "fact": "F1",
           "source": "thm-five-term-homology-sequence-for-group-extensions",
           "source_section": "Statement",
-          "quote": "Assume AC. For every group extension\n$$1\\longrightarrow N\\longrightarrow G\\longrightarrow Q\\longrightarrow 1,$$\nthe maps induced by inclusion, quotient, and transgression form an exact sequence\n$$H_2(G;\\mathbb Z)\\longrightarrow H_2(Q;\\mathbb Z) \\longrightarrow N/[G,N]\\longrightarrow H_1(G;\\mathbb Z) \\longrightarrow H_1(Q;\\mathbb Z)\\longrightarrow 0.$$\nHere $[G,N]$ is the normal subgroup generated by the commutators\n$gng^{-1}n^{-1}$ with $g\\in G$ and $n\\in N$.",
+          "quote": "Assume AC. For every group extension\n$$1\\longrightarrow N\\longrightarrow G\\longrightarrow Q\\longrightarrow 1,$$\nthe maps induced by inclusion, quotient, and transgression form an exact sequence\n$$H_2(G;\\mathbb Z)\\longrightarrow H_2(Q;\\mathbb Z) \\longrightarrow N/[G,N]\\longrightarrow H_1(G;\\mathbb Z) \\longrightarrow H_1(Q;\\mathbb Z)\\longrightarrow 0.$$\nHere $[G,N]$ is the normal subgroup generated by the commutators\n$gng^{-1}n^{-1}$ with $g\\in G$ and $n\\in N$. The sequence is natural under homomorphisms of short exact sequences, including its transgression.",
           "uses": [
             "1.2",
             "2.1",
@@ -1096,13 +1148,14 @@
       "derivations": [
         {
           "id": "step-1-1",
-          "claim": "By [A1] and [L1], the DC condition of the bar-homology supplier in [F2] holds. The case $n=1$ is the map between two trivial quotients. For $n=2$, the induced map $A/\\Gamma_2A\\to B/\\Gamma_2B$ is exactly the assumed isomorphism on $H_1$ by [F2]. These are the base cases.",
+          "claim": "Supply the resolution convention for [F2] by taking, for every module over each relevant group ring, the free module on its underlying set, augmented $[m]\\mapsto m$, and repeating this construction on successive kernels. These surjections give an exact free resolution. By [A1] and [L1], DC also holds. The case $n=1$ is the map between two trivial quotients. For $n=2$, the bar degree-one calculation in [F2] identifies $A/\\Gamma_2A\\to B/\\Gamma_2B$ with the assumed isomorphism on $H_1$. These are the base cases.",
           "step": "1.1",
           "inputs": [
             "A1",
             "L1",
             "F2",
-            "given"
+            "given",
+            "construct"
           ]
         },
         {
@@ -1118,7 +1171,7 @@
           ]
         },
         {
-          "id": "step-1-3",
+          "id": "step-2-1",
           "claim": "Naturality of [F1] makes the map $H_2(A/\\Gamma_nA)\\to H_2(B/\\Gamma_nB)$ compatible with the two transgressions. It is an isomorphism because the quotient-group map is an isomorphism by the induction hypothesis. The epimorphism $H_2(A)\\to H_2(B)$ makes the image of $H_2(A)$ in $H_2(A/\\Gamma_nA)$ map onto the image of $H_2(B)$ in $H_2(B/\\Gamma_nB)$. The induced map on the two cokernels is consequently an isomorphism. By step 1.2 and exactness, those cokernels are $\\Gamma_nA/\\Gamma_{n+1}A$ and $\\Gamma_nB/\\Gamma_{n+1}B$.",
           "step": "2.1",
           "inputs": [
@@ -1128,7 +1181,7 @@
           ]
         },
         {
-          "id": "step-2-1",
+          "id": "step-3-1",
           "claim": "The inclusions and quotient maps give exact central extensions $$1\\to\\Gamma_nX/\\Gamma_{n+1}X\\to X/\\Gamma_{n+1}X\\to X/\\Gamma_nX\\to1, \\qquad X=A,B,$$ because $[X,\\Gamma_nX]=\\Gamma_{n+1}X$. The maps on the kernel and quotient terms are isomorphisms by step 2.1 and the induction hypothesis. The middle map is injective: an element in its kernel projects to the identity in the quotient, hence lies in the kernel term, where injectivity holds. It is surjective: for a target element, lift its quotient class through the quotient isomorphism and then correct the chosen middle lift by a kernel element using the kernel isomorphism. Thus $A/\\Gamma_{n+1}A\\to B/\\Gamma_{n+1}B$ is an isomorphism.",
           "step": "3.1",
           "inputs": [
@@ -1138,7 +1191,7 @@
           ]
         },
         {
-          "id": "step-2-2",
+          "id": "step-4-1",
           "claim": "Steps 1.1 and 3.1 prove by induction the isomorphism for every finite $n$. Apart from the inherited AC used to obtain the homology sequence [F1], the induction uses only exactness and a single element lift at a time; no additional choice principle is used.",
           "step": "4.1",
           "inputs": [
@@ -1339,7 +1392,7 @@
           "uses": [
             "1.1",
             "1.2",
-            "2.2"
+            "4.1"
           ],
           "declared_in_statement_or_facts": true
         },
@@ -1363,6 +1416,11 @@
         "status": "complete",
         "reviewer": "alpha-batch-108",
         "notes": "Read every step against the five-term natural sequence and bar H1 statements. n=1 is trivial, n=2 abelianization; for n>=2 the H1 quotient map is an isomorphism, so transgression is surjective. The H2 epimorphism maps the two image subgroups onto one another inside the isomorphic quotient H2 groups, yielding an isomorphism on cokernels. Elementwise kernel/quotient chase lifts this to the next central extension with no additional AC. McCleary Theorem 8bis.16 and complete finite induction proof, printed p344, agree. No limit-completion theorem is silently used."
+      },
+      "step5_repair_notes": {
+        "report": "research/inverse-problems-knot-theory-all-109-2026-10-19-step5-v2/step5-v2-initial-r1-u108.json",
+        "review_scope": "Assigned item repair review; not independent review of the new repair.",
+        "reason": "Original F1 claimed naturality although the cited Statement supplied only exactness; the compatibility of the transgressions is indispensable in 2.1. The lower-level five-term supplier has now been strengthened and proved natural, and F1 explicitly cites that compatibility. Also supplied the resolution convention for the bar H1 calculation. The induction identifies the kernel layers as cokernels, uses the H2 epimorphism to identify their images under the quotient H2 isomorphism, and lifts elements in the resulting central extensions. Stallings Statement unchanged."
       }
     },
     "def-lower-central-series-and-magnus-expansion-for-links": {
@@ -1615,7 +1673,7 @@
           ]
         },
         {
-          "id": "step-1-2",
+          "id": "step-2-1",
           "claim": "At every projected double point, the overpassing parameter is not an underpassing parameter: regularity excludes triple points, so the two source parameters at that double point have distinct over/under roles. Hence the new height difference between the over and under branches is strictly positive. Let $\\eta_i$ be the original height function and choose a smooth $\\varphi:[0,1]\\to[0,1]$ equal to $0$ near $0$ and $1$ near $1$. The family $$F_t(i,s)=\\bigl(\\gamma_i(s),(1-\\varphi(t))\\eta_i(s)+\\varphi(t)\\widehat\\eta_i(s)\\bigr)$$ is smooth and stationary near both endpoints. At each crossing its over-minus- under height is a convex combination of two positive numbers, so it remains positive. Since [F1] lists all projected multiple points, each $F_t$ is injective; its projection remains an immersion, so each compact-source map is a smooth embedding.",
           "step": "2.1",
           "inputs": [
@@ -1627,7 +1685,7 @@
           ]
         },
         {
-          "id": "step-2-1",
+          "id": "step-3-1",
           "claim": "The track of the isotopy in step 2.1 is compact, so choose an open ball containing it and apply [F2] with that ball as the support neighborhood. The resulting ambient isotopy of $\\mathbb R^3$ has compact support and therefore extends by the identity at $\\infty$ to an ambient isotopy of $S^3$. It carries the original link to $\\widehat L$ and fixes the planar projection and over/under data throughout, because every slice of $F$ has those same data. This proves the stated normalized realization.",
           "step": "3.1",
           "inputs": [
@@ -1829,8 +1887,8 @@
           ],
           "uses": [
             "1.1",
-            "1.2",
-            "2.1"
+            "2.1",
+            "3.1"
           ],
           "declared_in_statement_or_facts": true
         }
@@ -1838,7 +1896,12 @@
       "proof_status": "complete-local-proof",
       "proof_status_evidence": "The numbered local argument is authored; this records readiness work only and does not constitute independent approval.",
       "unresolved_supplier_checks": [],
-      "unresolved_obligations": []
+      "unresolved_obligations": [],
+      "step5_repair_notes": {
+        "report": "research/inverse-problems-knot-theory-all-109-2026-10-19-step5-v2/step5-v2-initial-r1-u108.json",
+        "review_scope": "Assigned item repair review; not independent review of the new repair.",
+        "reason": "F2 omitted the stationary-near-both-endpoints hypothesis of the cited extension lemma. The repair restores that hypothesis and its support conclusion. Original 2.1 already constructs a smooth cutoff phi constant near 0 and 1, preserves every strict crossing height difference, and keeps the projection immersive; 3.1 therefore applies the corrected F2 to a compact track in a ball. No mathematical claim or consumer interface changes."
+      }
     },
     "lem-simply-connected-hypersurface-complement-adds-free-generator": {
       "citations": [
@@ -2091,7 +2154,7 @@
       "derivations": [
         {
           "id": "step-1-1",
-          "claim": "In any filtered associative ring, write $U=1+a$ and $V=1+b$ with $a\\in\\mathfrak m^p$ and $b\\in\\mathfrak m^q$. Since $U,V$ are units, $$ [U,V]-1=(UV-VU)U^{-1}V^{-1}=(ab-ba)U^{-1}V^{-1}. $$ By [F1], $ab-ba\\in\\mathfrak m^{p+q}$, and multiplication by units preserves this two-sided ideal. Therefore $[U,V]\\in1+\\mathfrak m^{p+q}$. Applying this to $U=E(u)$ and $V=E(v)$ proves the first claim.",
+          "claim": "In any filtered associative ring, write $U=1+a$ and $V=1+b$ with $a\\in\\mathfrak m^p$ and $b\\in\\mathfrak m^q$. Since $U,V$ are units, $$ [U,V]-1=(UV-VU)U^{-1}V^{-1}=(ab-ba)U^{-1}V^{-1}. $$ By [F1], $ab-ba\\in\\mathfrak m^{p+q}$, and multiplication by units preserves this two-sided ideal. Therefore $[U,V]\\in1+\\mathfrak m^{p+q}$. This is a ring calculation conditional on the two degree bounds; no lower-central inclusion is assumed here.",
           "step": "1.1",
           "inputs": [
             "F1",
@@ -2100,7 +2163,7 @@
         },
         {
           "id": "step-2-1",
-          "claim": "Every free generator and its inverse map to a series with constant term $1$, so [F1] gives $E(\\Gamma_1F_r)=E(F_r)\\subseteq1+\\mathfrak m$. Assume $E(\\Gamma_qF_r)\\subseteq1+\\mathfrak m^q$. Each generator $[u,v]$ of $\\Gamma_{q+1}F_r=[F_r,\\Gamma_qF_r]$ has $u\\in F_r$ and $v\\in\\Gamma_qF_r$, so step 1.1 puts its image in $1+\\mathfrak m^{q+1}$. Products and inverses of elements in $1+\\mathfrak m^{q+1}$ remain in that subgroup; hence the inclusion holds for all of $\\Gamma_{q+1}F_r$. Induction proves it for every $q$.",
+          "claim": "By [F1], $E(\\Gamma_1F_r)=E(F_r)\\subseteq1+\\mathfrak m$. Assume $E(\\Gamma_qF_r)\\subseteq1+\\mathfrak m^q$. For a generator $[u,v]$ of $\\Gamma_{q+1}F_r=[F_r,\\Gamma_qF_r]$, [F1] gives $E(u)-1\\in\\mathfrak m$ and the induction hypothesis gives $E(v)-1\\in\\mathfrak m^q$. The ring calculation in step 1.1 therefore puts its image in $1+\\mathfrak m^{q+1}$. Products and inverses remain in that subgroup: their images modulo the two-sided ideal $\\mathfrak m^{q+1}$ are all $1$. Thus $E(\\Gamma_{q+1}F_r)\\subseteq1+\\mathfrak m^{q+1}$, and induction proves the inclusion for every $q$. Now for arbitrary $u\\in\\Gamma_pF_r$ and $v\\in\\Gamma_qF_r$, the established inclusions give both hypotheses of step 1.1, which yields $E([u,v])\\in1+\\mathfrak m^{p+q}$.",
           "step": "2.1",
           "inputs": [
             "F1",
@@ -2309,6 +2372,11 @@
         "status": "complete",
         "reviewer": "alpha-batch-108",
         "notes": "Read all three steps with the full formal-series Definition. Identity [U,V]-1=(ab-ba)U^-1 V^-1 holds in the stated commutator convention; the two-sided filtration gives degree p+q. Induction from E(F) subset 1+m then proves the lower-central inclusions needed to apply that identity to u and v, even though the proof announces this application before recording the induction. Products/inverses preserve each 1+m^q, and Gamma_(d+1) vanishes in R_d, including d=0. The extra proof Given is harmless. No reader/refuter defect targets this carrier."
+      },
+      "step5_repair_notes": {
+        "report": "research/inverse-problems-knot-theory-all-109-2026-10-19-step5-v2/step5-v2-initial-r1-u108.json",
+        "review_scope": "Assigned item repair review; not independent review of the new repair.",
+        "reason": "The ring commutator identity in 1.1 is correct, but its first application to Gamma_p and Gamma_q words preceded the degree bounds it needed. The repair keeps 1.1 conditional, proves E(Gamma_q) subset 1+m^q by induction using only p=1 and the previous layer, then applies that proved inclusion to both general inputs. The factorization through Gamma_(d+1), including d=0, follows by multiplicativity. No statement or dependency changes."
       }
     },
     "thm-link-wirtinger-presentation-correctness": {
@@ -2583,7 +2651,7 @@
       "derivations": [
         {
           "id": "step-1-1",
-          "claim": "Construct $B\\phi$ on the one-skeleton of $BG$ by sending each based loop representing $g\\in G$ to a based loop representing $\\phi(g)\\in H$. Every two-cell attaching loop represents the identity in $G$, so its image represents the identity in $H$ and extends over the two-cell. For a cell of dimension $k\\geq3$, the attaching map is a sphere map into $BH$ and extends over the disk because $\\pi_{k-1}(BH)=0$ by [F1]. AC chooses the extensions over the set of cells. This gives a based map inducing $\\phi$.",
+          "claim": "Take CW structures with the basepoints as vertices and choose a maximal tree $T$ in the connected one-skeleton of $BG$, using [A1]. Send all vertices and $T$ to the basepoint of $BH$. For each oriented edge $e$ outside $T$, the tree paths to its endpoints turn $e$ into a based loop; send $e$ to a loop representing its image under $\\phi$. These loops generate $\\pi_1(BG)$, and each two-cell attaching loop maps to the identity because $\\phi$ is a homomorphism on $G$. Thus the map extends over the two-cells. For a cell of dimension $k\\geq3$, its attaching sphere extends because $\\pi_{k-1}(BH)=0$ by [F1]. AC chooses the tree, loop representatives, and cell extensions. The weak topology of the CW structure makes these compatible cellwise maps continuous, giving the required based map $B\\phi$.",
           "step": "1.1",
           "inputs": [
             "A1",
@@ -2594,8 +2662,8 @@
           ]
         },
         {
-          "id": "step-1-2",
-          "claim": "The maps $B\\phi\\circ c_X$ and $c_Y\\circ f$ induce the same homomorphism $\\phi$ on fundamental groups. On the vertices choose based paths joining their values, and on each one-cell fill the resulting boundary loop; that loop is null because the two induced fundamental-group maps agree. Inductively, the obstruction to extending the homotopy across each $k$-cell is a map $S^k\\to BH$, and it is null for $k\\geq2$ by [F1]. AC supplies the cell extensions. Hence the maps are based homotopic.",
+          "id": "step-2-1",
+          "claim": "Write $a=B\\phi\\circ c_X$ and $b=c_Y\\circ f$, so $a_*=b_*=\\phi$. Choose a maximal tree in $X^{(1)}$ rooted at $x_0$, and let $\\alpha_v$ be its path from $x_0$ to each vertex $v$. Choose the vertex track from $a(v)$ to $b(v)$ to be $a(\\alpha_v)^{-1}b(\\alpha_v)$, with the track at $x_0$ constant. For an edge $e:v\\to w$, the boundary of its homotopy square, conjugated by $a(\\alpha_v)$, represents $a_*[\\alpha_ve\\alpha_w^{-1}]\\,b_*[\\alpha_ve\\alpha_w^{-1}]^{-1}=1$. Hence every such square fills. For each $k$-cell with $k\\geq2$, the boundary of its homotopy prism is a sphere $S^k\\to BH$, which fills because $\\pi_k(BH)=0$ by [F1]. AC chooses the fillings and the CW weak topology assembles them into a continuous homotopy fixed at $x_0$. Thus $a\\simeq b$ by a based homotopy.",
           "step": "2.1",
           "inputs": [
             "A1",
@@ -2606,7 +2674,7 @@
           ]
         },
         {
-          "id": "step-2-1",
+          "id": "step-3-1",
           "claim": "By [F3], the homotopy of step 2.1 gives $(B\\phi)_*\\circ(c_X)_*=(c_Y)_*\\circ f_*$. This is the asserted naturality, including degree two.",
           "step": "3.1",
           "inputs": [
@@ -2804,7 +2872,7 @@
           ],
           "uses": [
             "1.1",
-            "1.2"
+            "2.1"
           ],
           "declared_in_statement_or_facts": true
         }
@@ -2817,6 +2885,11 @@
         "status": "complete",
         "reviewer": "alpha-batch-108",
         "notes": "Reviewed every step: cellular construction into a K(H,1), null 2-cell attaching loops, vanishing higher obstructions, and homology naturality. Vertex paths can be chosen along a maximal tree, so equality of based pi_1 maps fills the 1-cell boundaries. AC covers simultaneous cell choices. Read the four declared supplier interfaces; no extra connectivity or degree-two assumption is used. No reader/refuter finding targets this carrier."
+      },
+      "step5_repair_notes": {
+        "report": "research/inverse-problems-knot-theory-all-109-2026-10-19-step5-v2/step5-v2-initial-r1-u108.json",
+        "review_scope": "Assigned item repair review; not independent review of the new repair.",
+        "reason": "Original 2.1 allowed arbitrary vertex tracks, whose edge boundaries need not be null even for constant maps on an interval. The repair uses tracks a(alpha_v)^(-1)b(alpha_v) on a rooted maximal tree, so each boundary compares images of the same based loop. The K(H,1) higher groups fill the remaining prisms, with AC choosing fillings. Bphi is now constructed with its own tree. Statement and page interface are unchanged."
       }
     },
     "thm-string-link-nilpotent-peripheral-identifications": {
@@ -4244,9 +4317,9 @@
           "quote": "The **Axiom of Choice** (AC) is the following statement.\n\n> Every family of nonempty sets has a choice function\n> (Choice function).\n\nWritten out: for every set $\\mathcal{F}$ all of whose members are nonempty,\nthere exists a function $g$ with domain $\\mathcal{F}$ satisfying $g(S) \\in S$ for\nall $S \\in \\mathcal{F}$.\n\nAn equivalent formulation is that a product of nonempty sets is nonempty: if\n$X_i \\ne \\emptyset$ for every $i \\in I$, then $\\prod_{i \\in I} X_i \\ne \\emptyset$.\nHere $\\prod_{i \\in I} X_i$ is the set of functions $f$ with domain $I$ such that\n$f(i) \\in X_i$ for every $i \\in I$; when a family of nonempty sets is indexed by\nitself, such an $f$ is precisely a choice function for it.",
           "uses": [
             "1.1",
+            "1.2",
             "2.1",
-            "3.1",
-            "4.1"
+            "3.1"
           ]
         },
         {
@@ -4273,8 +4346,8 @@
           "source_section": "Statement",
           "quote": "Assume AC. Let $L$ be a nonempty labeled oriented link in $S^3$, let\n$I=(i_1,\\ldots,i_k,j)$ have length at least two, and let $b,b'$ be any two\nbased meridian-longitude word systems used in the preceding definition. Then\nthe based residue candidates $\\bar\\mu_L^b(I)$ and $\\bar\\mu_L^{b'}(I)$ agree\nunder the canonical identification of their residue groups. If $L$ and $L'$ are\nrelated by a finite sequence of self-crossing changes, the same residue is\npreserved whenever the entries of $I$ are pairwise distinct. No invariance for\nrepeated-index sequences under self-crossing changes is asserted.",
           "uses": [
-            "3.1",
-            "4.1"
+            "1.2",
+            "3.1"
           ]
         },
         {
@@ -4283,16 +4356,16 @@
           "source_section": "Definition",
           "quote": "Work in the smooth category ([[def-smooth-manifold]]). Fix once and for all the\nthree-sphere as the one-point compactification\n\n$$S^3:=\\mathbb R^3\\cup\\{\\infty\\}$$\n\nof Euclidean three-space, carrying its standard smooth structure, and fix the\nstandard orientation of $S^3$: the orientation induced by the standard\norientation of $\\mathbb R^3$ under the one-point compactification, so that the\ncharts of the standard atlas away from $\\infty$ are orientation-preserving and\nthe orientation is that of a connected oriented $3$-manifold in the sense of\n[[def-oriented-smooth-manifold-and-oriented-chart]]. For $r>0$ write\n$\\overline B_r:=\\{x\\in\\mathbb R^3:\\lVert x\\rVert_2\\le r\\}$, the closed ball of\n[[def-euclidean-spheres-and-closed-balls]] with the following restriction convention. Smoothness on a closed ball means\nlocal extension to a smooth map on an open neighborhood in Euclidean space;\nsmoothness on $M\\times I$, for a smooth manifold $M$ without boundary, means\nlocal extension across $t=0,1$ in $M\\times\\mathbb R$. Thus these closed domains\nare not asserted to be manifolds without boundary in the cited definition.\n\n**Links.** The **standard oriented circle** is the circle\n$S^1=\\mathbb R/\\mathbb Z$ with its standard counterclockwise orientation,\nregarded as a smooth $1$-manifold; a\n**finite disjoint union of oriented circles** is a smooth manifold\n$C=S^1\\sqcup\\dots\\sqcup S^1$ ($k$ summands, $k\\in\\mathbb N$)\ndiffeomorphic to the disjoint union of $k$ standard oriented circles. An\n**oriented link** (with $k$ components) is a smooth embedding\n\n$$L\\colon C\\longrightarrow S^3$$\n\nof such a disjoint union in the sense of [[def-smooth-embedding]]. So $L$ is\ninjective, is an immersion, and is a homeomorphism onto its image with the\nsubspace topology, and its image $L(C)$ is a finite disjoint union of smoothly\nembedded circles. Thus every link considered here is finite and tame: the\nsmoothness of $L$ is exactly the standing convention, and no polygonal or other\ntame model is used. The **components** of $L$ are the images of the individual\nsummands, and the number of components is $k$.\n\n**Ambient isotopy.** Let $I=[0,1]$. An **ambient isotopy** of $S^3$ is a smooth\nmap\n\n$$H\\colon S^3\\times I\\longrightarrow S^3$$\n\nsuch that $H_0=\\mathrm{id}_{S^3}$, each $H_t\\colon S^3\\to S^3$,\n$H_t(x):=H(x,t)$, is a diffeomorphism ([[def-diffeomorphism-and-local-diffeomorphism-of-manifolds]]),\nand each $H_t$ is orientation-preserving with respect to the fixed orientation.\nThe last clause is in fact automatic: $t\\mapsto H_t$ is continuous in the\n$C^\\infty$ topology of the diffeomorphism group, the orientation sign is locally\nconstant in $t$, and $H_0=\\mathrm{id}$ is orientation-preserving, so it is kept\nonly for emphasis.\n\n**Equivalence of links.** Two oriented links $L_0\\colon C_0\\to S^3$ and\n$L_1\\colon C_1\\to S^3$ are **equivalent** (written $L_0\\sim L_1$), or\n**ambient isotopic**, when there are an ambient isotopy $H$ and an orientation-preserving diffeomorphism $f:C_0\\to C_1$ with\n$H_1\\circ L_0=L_1\\circ f$. Thus parametrizations and component labels are\nirrelevant, while the induced orientation of each image component is preserved. The relation is an equivalence relation on links:\nit is reflexive with $H=\\mathrm{id}$, transitive by composing isotopies, and\nsymmetric because a smooth family of diffeomorphisms has a smooth family of\ninverses. An equivalence class is an **(oriented) link type**.\n\n**Moving off $\\infty$.** Because the definition of equivalence allows the\nisotopy to move a link through $\\infty$, the standard practice of this page is\nto first apply an ambient isotopy that carries a given link into the open ball,\nand only then to project; every projection and every Reidemeister move below is\nread after moving the link off $\\infty$ into $\\mathbb R^3$ in this way. The\norientation-preserving clause in the definition of ambient isotopy is exactly\nwhat the oriented Reidemeister moves and the oriented closure construction must\nrespect. The unoriented theory uses the same ambient isotopies but forgets\nthe orientations of the link components.\n\n**Links in the three-sphere versus links in $\\mathbb R^3$.** A link contained in\n$\\mathbb R^3\\subset S^3$ is a link in $S^3$; conversely every link may be\nassumed after isotopy to lie in $\\mathbb R^3$, by choosing a point outside the compact one-dimensional image and moving that\npoint to $\\infty$ by a smooth rotation of the standard sphere. When comparing\nlinks already in $\\mathbb R^3$, assuming the Axiom of Countable Choice,\nan isotopy can also be arranged to avoid $\\infty$ throughout; the track-avoidance argument is given in\n[[thm-oriented-reidemeister-equivalence-theorem]].",
           "uses": [
-            "3.1"
+            "1.2"
           ]
         },
         {
           "fact": "F3",
           "source": "def-based-string-link-and-labeled-link-peripheral-system",
           "source_section": "Definition",
-          "quote": "Let $D^2$ be the oriented closed disk and give $C=D^2\\times[0,1]$ the product orientation. An $r$-component string link is an ordered family of pairwise disjoint smooth proper embeddings $\\tau_i:[0,1]\\to C$, for $1\\le i\\le r$, with fixed distinct endpoints $\\tau_i(0)=(p_i,0)$ and $\\tau_i(1)=(p_i,1)$ and fixed product collars at the endpoints. Orient each interval from bottom to top. The exterior $X_\\tau$ is obtained by removing the relative interiors of chosen pairwise disjoint product tubes around the intervals. The bottom and top punctured disks $P_-$ and $P_+$ are the copies of $D^2$ with the interiors of the endpoint tube disks removed.\n\nChoose a basepoint on the outer boundary of $P_-$, a path in the side boundary of $C$ to the corresponding top basepoint, and basing paths from these points to the component meridians. Each end inclusion, with the chosen connecting path for the top end, induces a based homomorphism $\\iota_\\pm:\\pi_1(P_\\pm)\\to\\pi_1(X_\\tau)$. For each string component choose a parallel path on its tube boundary from the bottom endpoint to the top endpoint, and choose access paths that close it to a based loop using the fixed side connector. The resulting element of $\\pi_1(X_\\tau)$ is its based string-link longitude; the parallel and access paths are part of the peripheral datum. The positively oriented boundaries of the endpoint tube disks are the designated meridian loops. Stacking two string links means rescaling them into the lower and upper halves of $C$ and identifying their matching endpoint collars; closure joins each top endpoint to the matching bottom endpoint outside $C$ and retains the component labels.\n\nFor a nonempty labeled oriented link $L=K_1\\cup\\cdots\\cup K_r$ in the oriented three-sphere, choose pairwise disjoint closed product tubes $N(K_i)$, put $E_L=S^3\\setminus\\operatorname{int}\\bigl(\\bigcup_iN(K_i)\\bigr)$, and write $T_i=\\partial N(K_i)$. A positive meridian $\\mu_i$ is the oriented boundary of a normal disk, with the disk orientation fixed by the rule that the oriented tangent of $K_i$ followed by the disk orientation gives the ambient orientation. A degree-one parallel is a simple closed curve on $T_i$ whose projection to $K_i$ has degree $+1$. A based longitude is the class of such a parallel transported to the common basepoint by a specified path. When the positive meridians form a basis of $H_1(E_L;\\mathbb Z)$, the self-meridian coordinate of a longitude is its coefficient on $[\\mu_i]$. A preferred zero-self-meridian longitude is a chosen degree-one parallel whose self-meridian coordinate is zero. The choice, when it exists, is part of the peripheral datum; this definition asserts neither existence nor uniqueness. Changing a common basing path conjugates the peripheral group elements simultaneously.",
+          "quote": "Let $D^2$ be the oriented closed disk and give $C=D^2\\times[0,1]$ the product orientation. An $r$-component string link is an ordered family of pairwise disjoint smooth proper embeddings $\\tau_i:[0,1]\\to C$, for $1\\le i\\le r$, with fixed distinct endpoints $\\tau_i(0)=(p_i,0)$ and $\\tau_i(1)=(p_i,1)$ and fixed product collars at the endpoints. Orient each interval from bottom to top. The exterior $X_\\tau$ is obtained by removing the relative interiors of chosen pairwise disjoint product tubes around the intervals. The bottom and top punctured disks $P_-$ and $P_+$ are the copies of $D^2$ with the interiors of the endpoint tube disks removed.\n\nChoose a basepoint on the outer boundary of $P_-$, a path in the side boundary of $C$ to the corresponding top basepoint, and basing paths from these points to the component meridians. Each end inclusion, with the chosen connecting path for the top end, induces a based homomorphism $\\iota_\\pm:\\pi_1(P_\\pm)\\to\\pi_1(X_\\tau)$. For each string component choose a parallel path on its tube boundary from the bottom endpoint to the top endpoint, and choose access paths that close it to a based loop using the fixed side connector. The resulting element of $\\pi_1(X_\\tau)$ is its based string-link longitude; the parallel and access paths are part of the peripheral datum. The positively oriented boundaries of the endpoint tube disks are the designated meridian loops. Stacking two string links means rescaling them into the lower and upper halves of $C$ and identifying their matching endpoint collars. For closure, fix once and for all a standard zero-framed unknotted embedding $\\Psi:D^2\\times(\\mathbb R/2\\mathbb Z)\\hookrightarrow S^3$, and identify $C$ with $\\Psi(D^2\\times[0,1])$. Adjoin to each strand the fixed product arc $\\Psi(\\{p_i\\}\\times[1,2])$, oriented from its top endpoint to its bottom endpoint. These disjoint outside arcs, with the fixed endpoint collars, define the closure and retain the component labels; arbitrary knotted or braided replacement arcs are not allowed.\n\nFor a nonempty labeled oriented link $L=K_1\\cup\\cdots\\cup K_r$ in the oriented three-sphere, choose pairwise disjoint closed product tubes $N(K_i)$, put $E_L=S^3\\setminus\\operatorname{int}\\bigl(\\bigcup_iN(K_i)\\bigr)$, and write $T_i=\\partial N(K_i)$. A positive meridian $\\mu_i$ is the oriented boundary of a normal disk, with the disk orientation fixed by the rule that the oriented tangent of $K_i$ followed by the disk orientation gives the ambient orientation. A degree-one parallel is a simple closed curve on $T_i$ whose projection to $K_i$ has degree $+1$. A based longitude is the class of such a parallel transported to the common basepoint by a specified path. When the positive meridians form a basis of $H_1(E_L;\\mathbb Z)$, the self-meridian coordinate of a longitude is its coefficient on $[\\mu_i]$. A preferred zero-self-meridian longitude is a chosen degree-one parallel whose self-meridian coordinate is zero. The choice, when it exists, is part of the peripheral datum; this definition asserts neither existence nor uniqueness. Changing a common basing path conjugates the peripheral group elements simultaneously.",
           "uses": [
-            "3.1"
+            "1.2"
           ]
         },
         {
@@ -4366,8 +4439,18 @@
           ]
         },
         {
+          "id": "step-1-2",
+          "claim": "Under [A1], an ambient isotopy of closed links induces the peripheral correspondence in [F3]. Applying that correspondence to the based word-lift data gives the transported based residue candidate. The first assertion of [F2] proves independence of every meridian basing and finite longitude-word lift, with exactly equal lower-coefficient ideals. Applying it to the transported word data proves that the two closed-link residues agree in the same residue group.",
+          "step": "1.2",
+          "inputs": [
+            "A1",
+            "F2",
+            "F3"
+          ]
+        },
+        {
           "id": "step-2-1",
-          "claim": "Restricting $H_1$ gives a based homeomorphism of string-link exteriors that transports the selected tubes, positive meridians, parallels, and access paths. It fixes the endpoint basepoints and side connector, so the two end inclusions commute with the induced based group isomorphisms. By [F1], the longitude has a unique preimage in each finite bottom-end quotient; naturality carries that preimage to the corresponding class for the isotopic string link. The Magnus expansion is the same homomorphism on the transported meridian symbols, so every integer coefficient agrees.",
+          "claim": "In the string-link case, take the target peripheral datum to be the transported datum required in the statement. Restricting $H_1$ gives a based homeomorphism of string-link exteriors that transports the selected tubes, positive meridians, parallels, and access paths. It fixes the endpoint basepoints and side connector, so the two end inclusions commute with the induced based group isomorphisms. By [F1], the longitude has a unique preimage in each finite bottom-end quotient; naturality carries that preimage to the corresponding class for the isotopic string link. The Magnus expansion is the same homomorphism on the transported meridian symbols, so every integer coefficient agrees.",
           "step": "2.1",
           "inputs": [
             "A1",
@@ -4378,23 +4461,12 @@
         },
         {
           "id": "step-3-1",
-          "claim": "Under [A1], an ambient isotopy of closed links induces the peripheral correspondence in [F3]. Applying that correspondence to the based word-lift data gives the transported based residue candidate. The first assertion of [F2] proves independence of every meridian basing and finite longitude-word lift, with exactly equal lower-coefficient ideals. Applying it to the transported word data proves that the two closed-link residues agree in the same residue group.",
+          "claim": "Under [A1], a link-homotopy is generated by ambient isotopies and self-crossing changes. For pairwise-distinct indices, ambient isotopy is handled by step 1.2 and each self-crossing change is the second assertion of [F2]. Each move identifies the lower-coefficient ideals by [F2]; composing these finitely many equalities proves the asserted residue equality. No repeated-index conclusion is drawn.",
           "step": "3.1",
           "inputs": [
             "A1",
             "F2",
-            "F3",
-            "step 2.1"
-          ]
-        },
-        {
-          "id": "step-4-1",
-          "claim": "Under [A1], a link-homotopy is generated by ambient isotopies and self-crossing changes. For pairwise-distinct indices, ambient isotopy is handled by step 3.1 and each self-crossing change is the second assertion of [F2]. Each move identifies the lower-coefficient ideals by [F2]; composing these finitely many equalities proves the asserted residue equality. No repeated-index conclusion is drawn.",
-          "step": "4.1",
-          "inputs": [
-            "A1",
-            "F2",
-            "step 3.1"
+            "step 1.2"
           ]
         }
       ],
@@ -4451,6 +4523,7 @@
           ],
           "uses": [
             "1.1",
+            "1.2",
             "2.1",
             "3.1"
           ],
@@ -4467,6 +4540,11 @@
         "status": "complete",
         "reviewer": "alpha-batch-108",
         "notes": "Read every step and actual vector-extension, cutoff and global-evolution statements. The time-track of the compact-source closed link is a proper embedded graph in R×S3 after stationary time extension. Its velocity extends under CC; a compact support cutoff inside the cylinder preserves the prescribed velocity and fixes boundary collars, basepoint and connector. Evolution uniqueness transports based peripheral data, so string coefficients use the same unique bottom quotient class and symbol expansion. Closed residues use the independently checked basing lemma with identical lower ideals. Finite isotopies/self-crossing changes preserve distinct-index residues; repeated-index link-homotopy is expressly excluded. AC supplies each stated CC use. No finding targets this source except touched contract enrichment."
+      },
+      "step5_repair_notes": {
+        "report": "research/inverse-problems-knot-theory-all-109-2026-10-19-step5-v2/step5-v2-initial-r1-u108.json",
+        "review_scope": "Assigned item repair review; not independent review of the new repair.",
+        "reason": "Endpoint collars alone do not fix independently chosen longitude accesses or parallels. Conjugating a longitude with a nonzero linear Magnus term by another meridian can change degree-two coefficients, and changing a parallel winding can change degree one. The repaired Statement requires transport of the full based peripheral datum by the relative ambient extension, exactly as Proof 2.1 already needed. The relative extension fixes the boundary basepoints and connector, hence the end quotient maps commute and unique longitude preimages have equal expansions. Closed-link basing independence and distinct-index self-crossing invariance use the separate supplied lemma and remain unchanged. Adopted the precheck canonical phase order: closed-link isotopy is step 1.2, the independent string-link conclusion is 2.1, and the final link-homotopy step is 3.1."
       }
     },
     "alg-truncated-milnor-invariants-from-based-diagram": {
@@ -4683,6 +4761,11 @@
         "status": "complete",
         "reviewer": "alpha-batch-108",
         "notes": "Read the complete defining procedure and its actual crossing/longitude, finite-quotient, coefficient and ring prerequisites. It is an algorithm with explicit r>=1,N>=2, mode, reference/access word certificates, curl transport, finite degree passes and invalid-input output. The polynomial augmentation ideal is explicitly redeclared locally, so its truncated polynomial ring is well-typed and canonically matches the corrected formal-series quotient. d=1 gives no degree pass and identity inverse substitution; arbitrary-choice outputs include independent longitude conjugation and inverse root change. All calls and loops are finite, and no unsupported complexity bound is made. Correctness is separate. Positive-r reader edit is sound; no other procedure edit."
+      },
+      "step5_repair_notes": {
+        "report": "research/inverse-problems-knot-theory-all-109-2026-10-19-step5-v2/step5-v2-initial-r1-u108.json",
+        "review_scope": "Assigned item repair review; not independent review of the new repair.",
+        "reason": "The diagram definition uses edges between all crossings, whereas the recursion updates only at underpasses. Without a strand convention or overpass copying, a later edge can retain stale data. The repair explicitly joins edges through every overcrossing into maximal Wirtinger arcs, identifies their compatible meridian symbols, and substitutes that identification into all finite certificates before the existing curl and degree passes. Each nonroot arc is then reached once from its predecessor underpass; overpasses preserve its series. The input scope, arbitrary access and winding corrections, and outputs are preserved."
       }
     },
     "thm-truncated-milnor-computation-terminates-and-is-correct": {
@@ -4711,9 +4794,10 @@
           "fact": "F1",
           "source": "alg-truncated-milnor-invariants-from-based-diagram",
           "source_section": "Definition",
-          "quote": "Assume AC. The input is either (a) a based $r$-component string-link diagram\nwith its endpoint collars and product-tube parallels equal to the diagram's\nblackboard push-offs, or (b) a based finite regular\ndiagram of a closed $r$-component labeled oriented link with chosen product\ntubes, one initial strand on each component, and a common basepoint and access\npaths. In either mode require $r\\geq1$. The finite input records its compatible common-upper-collar reference accesses. In the compatible branch the actual accesses are these, up to a common base-path change, and the parallels are the blackboard parallels already specified. In the arbitrary-choice branch it additionally records finite words in the compatible strand meridians for each access difference $g_e$, the parallel endpoint differences $h_{0,j},h_{1,j}$, and its relative meridian winding $k_j$. These are word certificates for the chosen paths, part of the supplied based-word data; no evaluation of an unencoded smooth path is claimed. In closed-link mode the preferred longitude uses its own recorded access $h_j$, which may differ from the initial-meridian access $g_j$. Arbitrary parallels are allowed in this branch, with the recorded $k_j$. The input also includes a maximum index length $N\\geq2$. The output is\nthe integer coefficients $\\mu_\\tau(I)$ in string-link mode, or the based\ncoefficients $\\mu_L^b(I)$, their lower indeterminacy data $\\Delta_I^b$, and\nresidues $\\bar\\mu_L^b(I)$ in closed-link mode, for every index sequence $I$\nwith $2\\leq |I|\\leq N$.\n\nSet $d=N-1$ and work in the truncated noncommutative ring\n$$R_d=\\mathbb Z\\langle X_1,\\ldots,X_r\\rangle/\\mathfrak m^{d+1},$$\nwhere $\\mathfrak m$ is the ideal generated by the letters. Carry out the\nfollowing finite procedure.\n\n1. Verify the finite crossing, orientation, over/under, and component data. If\n   a closed-link component has no underpassing point, choose a crossing-free\n   disk meeting only a short arc of that component and avoiding its chosen\n   initial meridian point. Insert a small type-I curl there by the supported\n   disk isotopy and record the resulting based diagram. Transport the\n   basepoint, meridian circles, access paths, product tubes, parallels, and all\n   supplied access, endpoint, and longitude word certificates through this\n   isotopy. Before the curl, the component is one cyclic strand; the new\n   underpass cuts it into one interval strand containing the chosen initial\n   point. Identify that interval's reference meridian symbol with the\n   transported old symbol. Every other strand is carried bijectively by the\n   isotopy, with its reference symbol identified in the same way. In the finite\n   certificates, apply this symbol substitution to every word; no unencoded\n   path evaluation or additional certificate is required. Give every\n   resulting strand $a$ the component label $j(a)$.\n\n2. First compute in the compatible reference root symbols $x_j$, irrespective of the actual access choices. For every strand $a$, initialize its meridian series by\n   $Y_a^{(1)}=1+X_{j(a)}$. For each degree $\\ell=2,\\ldots,d$, copy every\n   $Y_a^{(\\ell-1)}$ into the constant and lower-degree part of\n   $Y_a^{(\\ell)}$, with new degree-$\\ell$ terms initially zero, and reset each\n   chosen root strand to $1+X_j$. Then do one pass over each component in its\n   oriented order. In closed-link mode start at the chosen initial strand and\n   omit the final undercrossing back to that strand; in string-link mode start\n   at the bottom endpoint and use every undercrossing through to the top\n   endpoint. At an undercrossing with over-strand $o$ and source and target\n   under-arcs $s,t$, use the already available $Y_o^{(\\ell-1)}$ and the\n   current $Y_s^{(\\ell)}$ to set\n   $$Y_t^{(\\ell)}=\\operatorname{trunc}_{\\ell}\\bigl((Y_o^{(\\ell-1)})^{-1} Y_s^{(\\ell)}Y_o^{(\\ell-1)}\\bigr)$$\n   when the traversal is source-to-target, and set\n   $$Y_s^{(\\ell)}=\\operatorname{trunc}_{\\ell}\\bigl(Y_o^{(\\ell-1)} Y_t^{(\\ell)}(Y_o^{(\\ell-1)})^{-1}\\bigr)$$\n   when it is target-to-source. Here $\\operatorname{trunc}_{\\ell}$ discards\n   monomials of degree greater than $\\ell$, and every inverse is the finite\n   geometric series in the nilpotent ideal of $R_d$.\n\n3. For each component $j$, traverse its undercrossings in order and form\n   $W_j=\\prod_c (Y_{o(c)}^{(d)})^{\\epsilon_c}$, where the factors are in\n   traversal order and $\\epsilon_c=+1$ for source-to-target and $-1$ for\n   target-to-source. In string-link mode set $\\Lambda_j=W_j$. In closed-link\n   mode set\n   $$\\Lambda_j=(1+X_j)^{-\\operatorname{wr}_j(D)}W_j,$$\n   where $\\operatorname{wr}_j(D)$ is the sum of the determinant signs at\n   self-crossings of component $j$.\n\n4. In the arbitrary-choice branch first use the strand-symbol identification of step 1, then evaluate each supplied transport word by the strand series from step 2. Write $G_e$ for the resulting unit series, and $H_{0,j},H_{1,j}$ for the endpoint transport series. In string-link mode replace the compatible $\\Lambda_j=W_j$ by\n   $$H_{0,j}(1+X_j)^{k_j}W_jH_{1,j}^{-1}.$$\n   In closed-link mode replace the compatible preferred series by\n   $$H_j(1+X_j)^{-\\operatorname{wr}_j(D)}W_jH_j^{-1},$$\n   where $H_j=H_{0,j}=H_{1,j}$ is the actual longitude access difference, independently of the initial-meridian difference $G_j$. The arbitrary parallel winding cancels in the preferred correction. All powers and inverses are finite truncated operations. To express this result in the actual component-meridian symbols, form\n   $$G_j(1+X_j)G_j^{-1}=1+X_j+R_j(X),\\qquad \\deg R_j\\ge2.$$\n   With new letters $V_j$, initialize $Z_j^{(1)}=V_j$ and iterate\n   $$Z_j^{(s+1)}=\\operatorname{trunc}_d\\bigl(V_j-R_j(Z^{(s)})\\bigr),\\qquad 1\\le s<d.$$\n   Substitute $X_j=Z_j^{(d)}(V)$ in the corrected longitude series. This is its expansion in the chosen actual meridians. For the compatible branch this step is the identity. Rename the final letters $V_j$ as $X_j$.\n\n5. For every $I=(i_1,\\ldots,i_k,j)$ with $1\\leq k\\leq d$, read the coefficient\n   of $X_{i_1}\\cdots X_{i_k}$ in $\\Lambda_j$. In string-link mode return this\n   integer. In closed-link mode, also compute the gcd of the coefficients for\n   all proper subsequences of cyclic permutations of $I$ of lengths at least\n   two, with empty gcd equal to zero, and return the corresponding residue\n   class.\n\nAll scans, including the supplied transport words and the $d-1$ inverse-substitution iterations, are over finite crossing, strand, degree, and index sets. The\nprocedure makes no polynomial-time claim. If a finite-input validation fails,\nreturn `invalid-input`.",
+          "quote": "Assume AC. The input is either (a) a based $r$-component string-link diagram\nwith its endpoint collars and product-tube parallels equal to the diagram's\nblackboard push-offs, or (b) a based finite regular\ndiagram of a closed $r$-component labeled oriented link with chosen product\ntubes, one initial strand on each component, and a common basepoint and access\npaths. In either mode require $r\\geq1$. The finite input records its compatible common-upper-collar reference accesses. In the compatible branch the actual accesses are these, up to a common base-path change, and the parallels are the blackboard parallels already specified. In the arbitrary-choice branch it additionally records finite words in the compatible strand meridians for each access difference $g_e$, the parallel endpoint differences $h_{0,j},h_{1,j}$, and its relative meridian winding $k_j$. These are word certificates for the chosen paths, part of the supplied based-word data; no evaluation of an unencoded smooth path is claimed. In closed-link mode the preferred longitude uses its own recorded access $h_j$, which may differ from the initial-meridian access $g_j$. Arbitrary parallels are allowed in this branch, with the recorded $k_j$. The input also includes a maximum index length $N\\geq2$. The output is\nthe integer coefficients $\\mu_\\tau(I)$ in string-link mode, or the based\ncoefficients $\\mu_L^b(I)$, their lower indeterminacy data $\\Delta_I^b$, and\nresidues $\\bar\\mu_L^b(I)$ in closed-link mode, for every index sequence $I$\nwith $2\\leq |I|\\leq N$.\n\nThroughout this procedure, a **strand** means a maximal Wirtinger arc between successive underpassing points, or between an endpoint and the nearest underpassing point in string-link mode. Obtain these arcs by joining the diagram edges straight through every overcrossing. A closed component without underpasses has one cyclic strand; a string component without underpasses has one endpoint-to-endpoint strand. Before step 1, identify all compatible edge-meridian symbols on each such arc with its one strand symbol, and make this substitution in every supplied word certificate. Record the chosen initial point on its resulting strand. All series in step 2 are assigned to these arcs, so crossing an overpass retains the same meridian series.\n\nSet $d=N-1$ and work in the truncated noncommutative ring\n$$R_d=\\mathbb Z\\langle X_1,\\ldots,X_r\\rangle/\\mathfrak m^{d+1},$$\nwhere $\\mathfrak m$ is the ideal generated by the letters. Carry out the\nfollowing finite procedure.\n\n1. Verify the finite crossing, orientation, over/under, and component data. If\n   a closed-link component has no underpassing point, choose a crossing-free\n   disk meeting only a short arc of that component and avoiding its chosen\n   initial meridian point. Insert a small type-I curl there by the supported\n   disk isotopy and record the resulting based diagram. Transport the\n   basepoint, meridian circles, access paths, product tubes, parallels, and all\n   supplied access, endpoint, and longitude word certificates through this\n   isotopy. Before the curl, the component is one cyclic strand; the new\n   underpass cuts it into one interval strand containing the chosen initial\n   point. Identify that interval's reference meridian symbol with the\n   transported old symbol. Every other strand is carried bijectively by the\n   isotopy, with its reference symbol identified in the same way. In the finite\n   certificates, apply this symbol substitution to every word; no unencoded\n   path evaluation or additional certificate is required. Give every\n   resulting strand $a$ the component label $j(a)$.\n\n2. First compute in the compatible reference root symbols $x_j$, irrespective of the actual access choices. For every strand $a$, initialize its meridian series by\n   $Y_a^{(1)}=1+X_{j(a)}$. For each degree $\\ell=2,\\ldots,d$, copy every\n   $Y_a^{(\\ell-1)}$ into the constant and lower-degree part of\n   $Y_a^{(\\ell)}$, with new degree-$\\ell$ terms initially zero, and reset each\n   chosen root strand to $1+X_j$. Then do one pass over each component in its\n   oriented order. In closed-link mode start at the chosen initial strand and\n   omit the final undercrossing back to that strand; in string-link mode start\n   at the bottom endpoint and use every undercrossing through to the top\n   endpoint. At an undercrossing with over-strand $o$ and source and target\n   under-arcs $s,t$, use the already available $Y_o^{(\\ell-1)}$ and the\n   current $Y_s^{(\\ell)}$ to set\n   $$Y_t^{(\\ell)}=\\operatorname{trunc}_{\\ell}\\bigl((Y_o^{(\\ell-1)})^{-1} Y_s^{(\\ell)}Y_o^{(\\ell-1)}\\bigr)$$\n   when the traversal is source-to-target, and set\n   $$Y_s^{(\\ell)}=\\operatorname{trunc}_{\\ell}\\bigl(Y_o^{(\\ell-1)} Y_t^{(\\ell)}(Y_o^{(\\ell-1)})^{-1}\\bigr)$$\n   when it is target-to-source. Here $\\operatorname{trunc}_{\\ell}$ discards\n   monomials of degree greater than $\\ell$, and every inverse is the finite\n   geometric series in the nilpotent ideal of $R_d$.\n\n3. For each component $j$, traverse its undercrossings in order and form\n   $W_j=\\prod_c (Y_{o(c)}^{(d)})^{\\epsilon_c}$, where the factors are in\n   traversal order and $\\epsilon_c=+1$ for source-to-target and $-1$ for\n   target-to-source. In string-link mode set $\\Lambda_j=W_j$. In closed-link\n   mode set\n   $$\\Lambda_j=(1+X_j)^{-\\operatorname{wr}_j(D)}W_j,$$\n   where $\\operatorname{wr}_j(D)$ is the sum of the determinant signs at\n   self-crossings of component $j$.\n\n4. In the arbitrary-choice branch first use the strand-symbol identification of step 1, then evaluate each supplied transport word by the strand series from step 2. Write $G_e$ for the resulting unit series, and $H_{0,j},H_{1,j}$ for the endpoint transport series. In string-link mode replace the compatible $\\Lambda_j=W_j$ by\n   $$H_{0,j}(1+X_j)^{k_j}W_jH_{1,j}^{-1}.$$\n   In closed-link mode replace the compatible preferred series by\n   $$H_j(1+X_j)^{-\\operatorname{wr}_j(D)}W_jH_j^{-1},$$\n   where $H_j=H_{0,j}=H_{1,j}$ is the actual longitude access difference, independently of the initial-meridian difference $G_j$. The arbitrary parallel winding cancels in the preferred correction. All powers and inverses are finite truncated operations. To express this result in the actual component-meridian symbols, form\n   $$G_j(1+X_j)G_j^{-1}=1+X_j+R_j(X),\\qquad \\deg R_j\\ge2.$$\n   With new letters $V_j$, initialize $Z_j^{(1)}=V_j$ and iterate\n   $$Z_j^{(s+1)}=\\operatorname{trunc}_d\\bigl(V_j-R_j(Z^{(s)})\\bigr),\\qquad 1\\le s<d.$$\n   Substitute $X_j=Z_j^{(d)}(V)$ in the corrected longitude series. This is its expansion in the chosen actual meridians. For the compatible branch this step is the identity. Rename the final letters $V_j$ as $X_j$.\n\n5. For every $I=(i_1,\\ldots,i_k,j)$ with $1\\leq k\\leq d$, read the coefficient\n   of $X_{i_1}\\cdots X_{i_k}$ in $\\Lambda_j$. In string-link mode return this\n   integer. In closed-link mode, also compute the gcd of the coefficients for\n   all proper subsequences of cyclic permutations of $I$ of lengths at least\n   two, with empty gcd equal to zero, and return the corresponding residue\n   class.\n\nAll scans, including the supplied transport words and the $d-1$ inverse-substitution iterations, are over finite crossing, strand, degree, and index sets. The\nprocedure makes no polynomial-time claim. If a finite-input validation fails,\nreturn `invalid-input`.",
           "uses": [
             "1.1",
+            "1.2",
             "6.1"
           ]
         },
@@ -4754,6 +4838,8 @@
           "quote": "Let $L=K_1\\cup\\cdots\\cup K_r$ be a nonempty labeled oriented link in $S^3$,\nlet $G=\\pi_1(E_L)$, and choose one based positive meridian $m_i\\in G$ for each\ncomponent. For every integer $q\\geq1$, the homomorphism from the free group\n$F_r=\\langle x_1,\\ldots,x_r\\rangle$ defined by $x_i\\mapsto m_i$ induces a\nsurjection\n$$F_r\\longrightarrow G/\\Gamma_qG.$$",
           "uses": [
             "1.2",
+            "2.1",
+            "3.1",
             "4.1",
             "5.1"
           ]
@@ -4765,6 +4851,8 @@
           "quote": "Assume AC. Let $\\tau$ be an $r$-component based string link with $r\\geq1$,\nexterior $X_\\tau$, and endpoint punctured disks $P_-,P_+$. Use compatible jointly transported stem accesses for the positive\nendpoint meridians to identify $\\pi_1(P_-)$ and $\\pi_1(P_+)$ with the free\ngroup $F_r=\\langle x_1,\\ldots,x_r\\rangle$, and let\n$\\iota_\\pm:\\pi_1(P_\\pm)\\to\\pi_1(X_\\tau)$ be the based end homomorphisms,\nincluding the chosen top connecting path. For every integer $q\\geq1$, each\ninduced map\n$$\\iota_{\\pm,q}:F_r/\\Gamma_qF_r\\longrightarrow \\pi_1(X_\\tau)/\\Gamma_q\\pi_1(X_\\tau)$$\nis an isomorphism. Their composite\n$\\iota_{-,q}^{-1}\\iota_{+,q}$ is the based nilpotent comparison of the labeled\ntop and bottom peripheral systems.\n\nArbitrary independently based positive endpoint meridians are retained as well: the map from the free symbol group $F_r$ sending $x_i$ to that chosen meridian need not identify the full fundamental group, but its composites with the end maps still induce the displayed isomorphisms on every finite lower-central quotient. Their inverse/composite is the comparison for those exact choices, and the conjugating access differences are part of the data.",
           "uses": [
             "1.2",
+            "2.1",
+            "3.1",
             "4.1",
             "5.1"
           ]
@@ -4775,6 +4863,7 @@
           "source_section": "Statement",
           "quote": "Let $F_r$ be the free group and $E$ the Magnus expansion from the preceding\ndefinition, with augmentation ideal $\\mathfrak m$. If\n$u\\in\\Gamma_pF_r$ and $v\\in\\Gamma_qF_r$ for $p,q\\ge1$, then\n$$\nE([u,v])\\in 1+\\mathfrak m^{p+q}.\n$$\nConsequently $E(\\Gamma_qF_r)\\subseteq1+\\mathfrak m^q$ for every $q\\ge1$.\nIn particular, reduction of $E$ modulo $\\mathfrak m^{d+1}$ factors through\n$F_r/\\Gamma_{d+1}F_r$ and its coefficients through degree $d$ are independent\nof the representative word.",
           "uses": [
+            "2.1",
             "4.1",
             "5.1"
           ]
@@ -4787,6 +4876,15 @@
           "uses": [
             "5.1",
             "6.1"
+          ]
+        },
+        {
+          "fact": "F7",
+          "source": "def-lower-central-series-and-magnus-expansion-for-links",
+          "source_section": "Definition",
+          "quote": "For any group $G$, define its lower-central series by $\\Gamma_1G=G$ and\n$\\Gamma_{q+1}G=[G,\\Gamma_qG]$, where $[G,H]$ is the subgroup generated by\n$ghg^{-1}h^{-1}$ for $g\\in G$ and $h\\in H$. For $r\\ge1$, let\n$F_r=\\langle x_1,\\ldots,x_r\\rangle$ be the free group on the formal meridian\nsymbols $x_i$, with the free-group convention of its stated generators.\n\nLet $\\mathcal A_r=\\mathbb Z\\langle\\!\\langle X_1,\\ldots,X_r\\rangle\\!\\rangle$\nbe the ring of formal integer sums $\\sum_w a_wX_w$ over all finite words $w$\nin the letters $X_i$, with multiplication given by concatenation of words.\nThis is the degree-complete ring for the word-length filtration; a series with\ninvertible constant coefficient is a unit, with inverse determined recursively\ndegree by degree.\nFilter it by total degree (word length), and let $\\mathfrak m$ be the ideal of\nseries with zero constant term.\nThe Magnus expansion is the group homomorphism\n$$E:F_r\\longrightarrow \\mathbb Z\\langle\\!\\langle X_1,\\ldots,X_r\\rangle\\!\\rangle^\\times, \\qquad E(x_i)=1+X_i.$$\nIt sends $x_i^{-1}$ to $(1+X_i)^{-1}=\\sum_{k\\ge0}(-1)^kX_i^k$. For an\ninteger $d\\ge0$, calculations through degree $d$ use the truncated ring\n$R_d=\\mathcal A_r/\\mathfrak m^{d+1}$. As a\n$\\mathbb Z$-module it has the finite monomial basis of words of length at most\n$d$. In $R_d$, the inverse of $1+A$ for $A\\in\\mathfrak m$ is the finite sum\n$1-A+A^2-\\cdots+(-A)^d$.\n\nFor a based string link, $x_1,\\ldots,x_r$ may be used as formal symbols\ncorresponding to the positive bottom-end meridians. No freeness or\nlower-central quotient isomorphism is asserted here; those properties require\nseparate proofs.",
+          "uses": [
+            "2.1"
           ]
         }
       ],
@@ -4804,9 +4902,10 @@
         },
         {
           "id": "step-1-2",
-          "claim": "At degree one, every arc meridian on component $j$ maps to $1+X_j$: conjugate meridians have the same abelianization, and the component meridians are the chosen basis in the free source. This is exactly the initialization $Y_a^{(1)}$. If step 1 inserts a curl, the original underpass-free component had one cyclic strand and the new curl cuts it into one interval strand. The supported isotopy transports its initial meridian, paths, and supplied words to that strand; all other strand symbols are transported bijectively. Thus every existing certificate used by the algorithm is interpreted in the post-curl reference system, including the case with no original underpass.",
+          "claim": "Use the algorithm's maximal Wirtinger arcs: all consecutive diagram edges through an overpass have one reference meridian and one series. The preliminary symbol substitution therefore preserves every compatible certificate word. At degree one every meridian on component $j$ is conjugate to its root meridian, so its expansion in root symbols is $1+X_j$. This is the initialization $Y_a^{(1)}$. If step 1 inserts a curl, the original underpass-free component had one cyclic arc and the new underpass cuts it into one interval arc. The supported isotopy transports its root, accesses, and all supplied words to that arc; every other arc is transported with the same symbol. Thus the post-curl certificates encode the same based data.",
           "step": "1.2",
           "inputs": [
+            "F1",
             "F2",
             "F4",
             "given",
@@ -4815,10 +4914,13 @@
         },
         {
           "id": "step-2-1",
-          "claim": "Assume the series $Y_a^{(\\ell-1)}$ correctly represent every strand meridian through degree $\\ell-1$, and that $Y_s^{(\\ell)}$ represents the source meridian through degree $\\ell$. At a source-to-target crossing the group relation is $m_t=m_o^{-1}m_sm_o$; at a target-to-source crossing it is $m_s=m_om_tm_o^{-1}$ by [F2]. In a conjugation $Y_o^{-1}Y_sY_o$, replacing the over-series by another series with the same terms through degree $\\ell-1$ changes the product only in degree at least $\\ell+1$: the degree-$\\ell$ discrepancy in $Y_o$ commutes with the constant term $1$ and first meets a positive-degree term of $Y_s$ in degree $\\ell+1$. The two update formulas therefore give the correct target meridian through degree $\\ell$. Induction over the finite spanning paths and then over $\\ell=2,\\ldots,d$ proves every assigned strand series is correct through degree $d$.",
+          "claim": "Induct on $\\ell$, starting from step 1.2. Choose free words for the preceding arc approximations, representing the true compatible meridians modulo $\\Gamma_\\ell G$. Start each component at its root word $x_j$, and follow its maximal arcs. At a nonclosing underpass, conjugate the current incoming word by the preceding over-word, with the sign prescribed by [F2]. Replacing the true over-meridian by a word congruent modulo $\\Gamma_\\ell G$ changes its conjugation of a meridian only modulo $[G,\\Gamma_\\ell G]=\\Gamma_{\\ell+1}G$, by [F7]. Induction along the traversal therefore makes every new arc word a lift of its true meridian modulo $\\Gamma_{\\ell+1}G$. Its expansion through degree $\\ell$ uses the over-word only through degree $\\ell-1$: a discrepancy of degree $\\ell$ commutes with the constant term of the conjugated series and first contributes in degree $\\ell+1$. Thus its expansion is exactly the algorithm's update. The lower degrees agree with the preceding pass by the same argument one degree lower. This proves that the output arc series are expansions of explicit compatible lift words, correct in $G/\\Gamma_{d+1}G$. In string-link mode [F4] identifies those lifts uniquely in $F_r/\\Gamma_{d+1}F_r$; in closed-link mode only the selected lift words are asserted, without assigning a Magnus expansion to an arbitrary element of the closed-link group. No global string-link presentation is needed.",
           "step": "2.1",
           "inputs": [
             "F2",
+            "F4",
+            "F5",
+            "F7",
             "step 1.2",
             "algebra",
             "induction"
@@ -4826,10 +4928,11 @@
         },
         {
           "id": "step-3-1",
-          "claim": "By [F3], multiplying the ordered over-meridian factors gives the based string-link longitude or the closed-link blackboard parallel with its self-writhe correction. The arc-series just established make $\\Lambda_j$ its Magnus expansion through degree $d$.",
+          "claim": "By [F3], the ordered over-meridian product is the based string-link longitude or the closed blackboard parallel. In closed-link mode, the initial-meridian power removes its self-writhe. Substituting the arc lift words of step 2.1 gives explicit longitude lift words in $G/\\Gamma_{d+1}G$; multiplicativity makes $\\Lambda_j$ exactly their expansions through degree $d$. In string-link mode these are the unique bottom-end quotient classes by [F4].",
           "step": "3.1",
           "inputs": [
             "F3",
+            "F4",
             "step 2.1"
           ]
         },
@@ -5028,7 +5131,7 @@
           ],
           "uses": [
             "1.1",
-            "3.2"
+            "5.1"
           ],
           "declared_in_statement_or_facts": true
         }
@@ -5041,6 +5144,11 @@
         "status": "complete",
         "reviewer": "alpha-batch-108",
         "notes": "Read all seven steps against the actual full procedure and all cited group/ring/peripheral suppliers. Finite crossings, degrees, transport certificates and subsequences guarantee termination, including d=1 with no update loop. Root resets plus finite spanning traversals construct the selected lifts; an over-series degree-l discrepancy first enters a conjugation at degree l+1, justifying use of the preceding pass. Ordered longitude factors and self-writhe correction match the peripheral word. Independent root changes have identity linear term; inverse substitution improves by one degree and d-1 iterations give the unique inverse through d, agreeing with the arbitrary-basing finite-quotient theorem applied to a trivial string link. Closed outputs use specifically the algorithm-selected lifts, not arbitrary prescribed integer representatives. Gcd operations exactly match those selected finite data. Curl transport and r>=1 hypotheses are explicit."
+      },
+      "step5_repair_notes": {
+        "report": "research/inverse-problems-knot-theory-all-109-2026-10-19-step5-v2/step5-v2-initial-r1-u108.json",
+        "review_scope": "Assigned item repair review; not independent review of the new repair.",
+        "reason": "Original F2 overstated the closed-link presentation theorem as if it covered string links. The proof needs only the local conjugacy lemma, whose Statement explicitly covers both modes, so F2 now separates those scopes and disclaims a string-link presentation input. Reviewed the repaired algorithm interface: arcs are merged through overpasses before certificate substitution. Proof 2.1 now tracks explicit free lift words modulo each lower-central layer, distinguishing closed-link selected lifts from the unique string-link quotient classes. Transport corrections, inverse variable substitution, coefficient indexing and finite gcd computations remain valid; Statement unchanged."
       }
     },
     "lem-link-diagram-upper-region-free-meridians": {
@@ -5104,7 +5212,7 @@
           "fact": "F5",
           "source": "def-based-string-link-and-labeled-link-peripheral-system",
           "source_section": "Definition",
-          "quote": "Let $D^2$ be the oriented closed disk and give $C=D^2\\times[0,1]$ the product orientation. An $r$-component string link is an ordered family of pairwise disjoint smooth proper embeddings $\\tau_i:[0,1]\\to C$, for $1\\le i\\le r$, with fixed distinct endpoints $\\tau_i(0)=(p_i,0)$ and $\\tau_i(1)=(p_i,1)$ and fixed product collars at the endpoints. Orient each interval from bottom to top. The exterior $X_\\tau$ is obtained by removing the relative interiors of chosen pairwise disjoint product tubes around the intervals. The bottom and top punctured disks $P_-$ and $P_+$ are the copies of $D^2$ with the interiors of the endpoint tube disks removed.\n\nChoose a basepoint on the outer boundary of $P_-$, a path in the side boundary of $C$ to the corresponding top basepoint, and basing paths from these points to the component meridians. Each end inclusion, with the chosen connecting path for the top end, induces a based homomorphism $\\iota_\\pm:\\pi_1(P_\\pm)\\to\\pi_1(X_\\tau)$. For each string component choose a parallel path on its tube boundary from the bottom endpoint to the top endpoint, and choose access paths that close it to a based loop using the fixed side connector. The resulting element of $\\pi_1(X_\\tau)$ is its based string-link longitude; the parallel and access paths are part of the peripheral datum. The positively oriented boundaries of the endpoint tube disks are the designated meridian loops. Stacking two string links means rescaling them into the lower and upper halves of $C$ and identifying their matching endpoint collars; closure joins each top endpoint to the matching bottom endpoint outside $C$ and retains the component labels.\n\nFor a nonempty labeled oriented link $L=K_1\\cup\\cdots\\cup K_r$ in the oriented three-sphere, choose pairwise disjoint closed product tubes $N(K_i)$, put $E_L=S^3\\setminus\\operatorname{int}\\bigl(\\bigcup_iN(K_i)\\bigr)$, and write $T_i=\\partial N(K_i)$. A positive meridian $\\mu_i$ is the oriented boundary of a normal disk, with the disk orientation fixed by the rule that the oriented tangent of $K_i$ followed by the disk orientation gives the ambient orientation. A degree-one parallel is a simple closed curve on $T_i$ whose projection to $K_i$ has degree $+1$. A based longitude is the class of such a parallel transported to the common basepoint by a specified path. When the positive meridians form a basis of $H_1(E_L;\\mathbb Z)$, the self-meridian coordinate of a longitude is its coefficient on $[\\mu_i]$. A preferred zero-self-meridian longitude is a chosen degree-one parallel whose self-meridian coordinate is zero. The choice, when it exists, is part of the peripheral datum; this definition asserts neither existence nor uniqueness. Changing a common basing path conjugates the peripheral group elements simultaneously.",
+          "quote": "Let $D^2$ be the oriented closed disk and give $C=D^2\\times[0,1]$ the product orientation. An $r$-component string link is an ordered family of pairwise disjoint smooth proper embeddings $\\tau_i:[0,1]\\to C$, for $1\\le i\\le r$, with fixed distinct endpoints $\\tau_i(0)=(p_i,0)$ and $\\tau_i(1)=(p_i,1)$ and fixed product collars at the endpoints. Orient each interval from bottom to top. The exterior $X_\\tau$ is obtained by removing the relative interiors of chosen pairwise disjoint product tubes around the intervals. The bottom and top punctured disks $P_-$ and $P_+$ are the copies of $D^2$ with the interiors of the endpoint tube disks removed.\n\nChoose a basepoint on the outer boundary of $P_-$, a path in the side boundary of $C$ to the corresponding top basepoint, and basing paths from these points to the component meridians. Each end inclusion, with the chosen connecting path for the top end, induces a based homomorphism $\\iota_\\pm:\\pi_1(P_\\pm)\\to\\pi_1(X_\\tau)$. For each string component choose a parallel path on its tube boundary from the bottom endpoint to the top endpoint, and choose access paths that close it to a based loop using the fixed side connector. The resulting element of $\\pi_1(X_\\tau)$ is its based string-link longitude; the parallel and access paths are part of the peripheral datum. The positively oriented boundaries of the endpoint tube disks are the designated meridian loops. Stacking two string links means rescaling them into the lower and upper halves of $C$ and identifying their matching endpoint collars. For closure, fix once and for all a standard zero-framed unknotted embedding $\\Psi:D^2\\times(\\mathbb R/2\\mathbb Z)\\hookrightarrow S^3$, and identify $C$ with $\\Psi(D^2\\times[0,1])$. Adjoin to each strand the fixed product arc $\\Psi(\\{p_i\\}\\times[1,2])$, oriented from its top endpoint to its bottom endpoint. These disjoint outside arcs, with the fixed endpoint collars, define the closure and retain the component labels; arbitrary knotted or braided replacement arcs are not allowed.\n\nFor a nonempty labeled oriented link $L=K_1\\cup\\cdots\\cup K_r$ in the oriented three-sphere, choose pairwise disjoint closed product tubes $N(K_i)$, put $E_L=S^3\\setminus\\operatorname{int}\\bigl(\\bigcup_iN(K_i)\\bigr)$, and write $T_i=\\partial N(K_i)$. A positive meridian $\\mu_i$ is the oriented boundary of a normal disk, with the disk orientation fixed by the rule that the oriented tangent of $K_i$ followed by the disk orientation gives the ambient orientation. A degree-one parallel is a simple closed curve on $T_i$ whose projection to $K_i$ has degree $+1$. A based longitude is the class of such a parallel transported to the common basepoint by a specified path. When the positive meridians form a basis of $H_1(E_L;\\mathbb Z)$, the self-meridian coordinate of a longitude is its coefficient on $[\\mu_i]$. A preferred zero-self-meridian longitude is a chosen degree-one parallel whose self-meridian coordinate is zero. The choice, when it exists, is part of the peripheral datum; this definition asserts neither existence nor uniqueness. Changing a common basing path conjugates the peripheral group elements simultaneously.",
           "uses": [
             "4.1"
           ]
@@ -5636,7 +5744,7 @@
           "fact": "F2",
           "source": "def-based-string-link-and-labeled-link-peripheral-system",
           "source_section": "Definition",
-          "quote": "Let $D^2$ be the oriented closed disk and give $C=D^2\\times[0,1]$ the product orientation. An $r$-component string link is an ordered family of pairwise disjoint smooth proper embeddings $\\tau_i:[0,1]\\to C$, for $1\\le i\\le r$, with fixed distinct endpoints $\\tau_i(0)=(p_i,0)$ and $\\tau_i(1)=(p_i,1)$ and fixed product collars at the endpoints. Orient each interval from bottom to top. The exterior $X_\\tau$ is obtained by removing the relative interiors of chosen pairwise disjoint product tubes around the intervals. The bottom and top punctured disks $P_-$ and $P_+$ are the copies of $D^2$ with the interiors of the endpoint tube disks removed.\n\nChoose a basepoint on the outer boundary of $P_-$, a path in the side boundary of $C$ to the corresponding top basepoint, and basing paths from these points to the component meridians. Each end inclusion, with the chosen connecting path for the top end, induces a based homomorphism $\\iota_\\pm:\\pi_1(P_\\pm)\\to\\pi_1(X_\\tau)$. For each string component choose a parallel path on its tube boundary from the bottom endpoint to the top endpoint, and choose access paths that close it to a based loop using the fixed side connector. The resulting element of $\\pi_1(X_\\tau)$ is its based string-link longitude; the parallel and access paths are part of the peripheral datum. The positively oriented boundaries of the endpoint tube disks are the designated meridian loops. Stacking two string links means rescaling them into the lower and upper halves of $C$ and identifying their matching endpoint collars; closure joins each top endpoint to the matching bottom endpoint outside $C$ and retains the component labels.\n\nFor a nonempty labeled oriented link $L=K_1\\cup\\cdots\\cup K_r$ in the oriented three-sphere, choose pairwise disjoint closed product tubes $N(K_i)$, put $E_L=S^3\\setminus\\operatorname{int}\\bigl(\\bigcup_iN(K_i)\\bigr)$, and write $T_i=\\partial N(K_i)$. A positive meridian $\\mu_i$ is the oriented boundary of a normal disk, with the disk orientation fixed by the rule that the oriented tangent of $K_i$ followed by the disk orientation gives the ambient orientation. A degree-one parallel is a simple closed curve on $T_i$ whose projection to $K_i$ has degree $+1$. A based longitude is the class of such a parallel transported to the common basepoint by a specified path. When the positive meridians form a basis of $H_1(E_L;\\mathbb Z)$, the self-meridian coordinate of a longitude is its coefficient on $[\\mu_i]$. A preferred zero-self-meridian longitude is a chosen degree-one parallel whose self-meridian coordinate is zero. The choice, when it exists, is part of the peripheral datum; this definition asserts neither existence nor uniqueness. Changing a common basing path conjugates the peripheral group elements simultaneously.",
+          "quote": "Let $D^2$ be the oriented closed disk and give $C=D^2\\times[0,1]$ the product orientation. An $r$-component string link is an ordered family of pairwise disjoint smooth proper embeddings $\\tau_i:[0,1]\\to C$, for $1\\le i\\le r$, with fixed distinct endpoints $\\tau_i(0)=(p_i,0)$ and $\\tau_i(1)=(p_i,1)$ and fixed product collars at the endpoints. Orient each interval from bottom to top. The exterior $X_\\tau$ is obtained by removing the relative interiors of chosen pairwise disjoint product tubes around the intervals. The bottom and top punctured disks $P_-$ and $P_+$ are the copies of $D^2$ with the interiors of the endpoint tube disks removed.\n\nChoose a basepoint on the outer boundary of $P_-$, a path in the side boundary of $C$ to the corresponding top basepoint, and basing paths from these points to the component meridians. Each end inclusion, with the chosen connecting path for the top end, induces a based homomorphism $\\iota_\\pm:\\pi_1(P_\\pm)\\to\\pi_1(X_\\tau)$. For each string component choose a parallel path on its tube boundary from the bottom endpoint to the top endpoint, and choose access paths that close it to a based loop using the fixed side connector. The resulting element of $\\pi_1(X_\\tau)$ is its based string-link longitude; the parallel and access paths are part of the peripheral datum. The positively oriented boundaries of the endpoint tube disks are the designated meridian loops. Stacking two string links means rescaling them into the lower and upper halves of $C$ and identifying their matching endpoint collars. For closure, fix once and for all a standard zero-framed unknotted embedding $\\Psi:D^2\\times(\\mathbb R/2\\mathbb Z)\\hookrightarrow S^3$, and identify $C$ with $\\Psi(D^2\\times[0,1])$. Adjoin to each strand the fixed product arc $\\Psi(\\{p_i\\}\\times[1,2])$, oriented from its top endpoint to its bottom endpoint. These disjoint outside arcs, with the fixed endpoint collars, define the closure and retain the component labels; arbitrary knotted or braided replacement arcs are not allowed.\n\nFor a nonempty labeled oriented link $L=K_1\\cup\\cdots\\cup K_r$ in the oriented three-sphere, choose pairwise disjoint closed product tubes $N(K_i)$, put $E_L=S^3\\setminus\\operatorname{int}\\bigl(\\bigcup_iN(K_i)\\bigr)$, and write $T_i=\\partial N(K_i)$. A positive meridian $\\mu_i$ is the oriented boundary of a normal disk, with the disk orientation fixed by the rule that the oriented tangent of $K_i$ followed by the disk orientation gives the ambient orientation. A degree-one parallel is a simple closed curve on $T_i$ whose projection to $K_i$ has degree $+1$. A based longitude is the class of such a parallel transported to the common basepoint by a specified path. When the positive meridians form a basis of $H_1(E_L;\\mathbb Z)$, the self-meridian coordinate of a longitude is its coefficient on $[\\mu_i]$. A preferred zero-self-meridian longitude is a chosen degree-one parallel whose self-meridian coordinate is zero. The choice, when it exists, is part of the peripheral datum; this definition asserts neither existence nor uniqueness. Changing a common basing path conjugates the peripheral group elements simultaneously.",
           "uses": [
             "1.1",
             "2.1"
@@ -5646,7 +5754,7 @@
           "fact": "F3",
           "source": "thm-milnor-invariants-isotopy-and-link-homotopy-scope",
           "source_section": "Statement",
-          "quote": "Assume AC. Every integer Milnor coefficient of a based string link is invariant\nunder smooth isotopy through string links fixing the endpoint collars. For\nclosed labeled oriented links, the residue candidate $\\bar\\mu_L(I)$ is invariant\nunder ambient isotopy. A link-homotopy is a finite sequence of ambient isotopies\nand local crossing changes in which the two branches at every crossing change\nbelong to the same component. Under link-homotopy, $\\bar\\mu_L(I)$ is invariant\nwhen the entries of $I$ are pairwise distinct. No invariance for repeated-index\nsequences under link-homotopy is asserted.",
+          "quote": "Assume AC. Every integer Milnor coefficient of a based string link is invariant\nunder smooth isotopy through string links fixing the endpoint collars, with the selected tubes, parallels, meridians, and access paths transported by a relative ambient extension of that isotopy. For\nclosed labeled oriented links, the residue candidate $\\bar\\mu_L(I)$ is invariant\nunder ambient isotopy. A link-homotopy is a finite sequence of ambient isotopies\nand local crossing changes in which the two branches at every crossing change\nbelong to the same component. Under link-homotopy, $\\bar\\mu_L(I)$ is invariant\nwhen the entries of $I$ are pairwise distinct. No invariance for repeated-index\nsequences under link-homotopy is asserted.",
           "uses": [
             "2.1"
           ]

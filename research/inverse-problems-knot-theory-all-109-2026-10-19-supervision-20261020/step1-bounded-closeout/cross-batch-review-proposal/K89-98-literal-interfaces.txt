@@ -1,0 +1,607 @@
+# K89-98 literal interfaces; NO PROOFS
+Edges 52; consumers 32; suppliers 25
+
+SUPPLIER alg-khovanov-chain-complex-from-diagram
+**Input:** a nonempty finite regular oriented link diagram $D$ and a total order $c_1<\cdots<c_n$ on its crossing set. A diagram object is supplied as mathematical input; this procedure does not parse a serialized string.
+
+**Output:** the normalized bigraded Khovanov cochain module $C^{i,j}(D)$ and its candidate differential $d:C^{i,j}(D)\to C^{i+1,j}(D)$, constructed by the following finite instructions.
+
+1. Enumerate every state $v:C(D)\to\{0,1\}$ once. Form the crossingless resolution by using the A-smoothing at $v(c)=0$ and the B-smoothing at $v(c)=1$.
+2. For each state, create one tensor factor of the integral Frobenius algebra for each resolution circle and place the resulting tensor product in cohomological degree $|v|-n_-$ and quantum degree $|v|+n_+-2n_-+\sum\deg(a)$ for its circle labels $a$.
+3. For each state and each crossing $c_j$ with $v(c_j)=0$, create the edge to $v+e_j$. Apply multiplication if that smoothing change merges two circles, comultiplication if it splits one circle, the identity on other tensor factors, and the sign $(-1)^{\sum_{i<j}v(c_i)}$. Sum the edge maps out of every state to obtain $d$.
+4. Return the finite direct sum of the state modules with these degrees and maps. The square-zero property is the separate local lemma named by `justified_by`.
+
+SUPPLIER def-colored-framed-knot-evaluation-from-ribbon-category
+Assume the Axiom of Countable Choice. Let $\mathcal C$ be a ribbon category with chosen left duals and tensor unit $\mathbf 1$. A **finite oriented framed link colored in $\mathcal C$** is a finite disjoint union $L$ of oriented smoothly embedded circles in $S^3$, a homotopy class of nowhere-zero normal vector field on each component, and an assignment of an object of $\mathcal C$ to each component. A framed colored isotopy carries orientations, framings, and component colors. If $F_{\mathcal C}$ is the ribbon-tangle evaluation functor, define
+$$\operatorname{RT}_{\mathcal C}(L):=F_{\mathcal C}(L)\in\operatorname{End}_{\mathcal C}(\mathbf 1).$$
+This value depends only on the framed colored isotopy class. It is not automatically a field scalar; if $\mathcal C$ is $k$-linear and $\operatorname{End}_{\mathcal C}(\mathbf 1)=k$, it is a scalar in $k$. The empty link is assigned $1_{\mathbf 1}$.
+
+SUPPLIER def-coprime-torus-knot
+Assume the Axiom of Countable Choice. Identify the standard oriented three-sphere with $S^3=\{(z_1,z_2)\in\mathbb C^2:|z_1|^2+|z_2|^2=1\}$ and choose $0<r<1$. The standard unknotted Heegaard torus is $T_r=\{|z_1|=r,\ |z_2|=\sqrt{1-r^2}\}$; its two sides are solid tori. In the angular coordinates $(u,v)\in(\mathbb R/\mathbb Z)^2$ given by $(u,v)\mapsto(r e^{2\pi i u},\sqrt{1-r^2}e^{2\pi i v})$, let $\alpha$ and $\beta$ be the first and second coordinate classes in $H_1(T_r;\mathbb Z)$. For coprime nonzero integers $p,q$, the **oriented torus knot** $T(p,q)$ is the image of $s\mapsto(r e^{2\pi i p s},\sqrt{1-r^2}e^{2\pi i q s})$, for $s\in\mathbb R/\mathbb Z$, oriented by increasing $s$; it represents the primitive slope $p\alpha+q\beta$. The mirror convention is the reflection $(z_1,z_2)\mapsto(z_1,\overline{z_2})$, which sends $T(p,q)$ to $T(p,-q)$ with image orientation, and reversing the knot orientation gives $T(-p,-q)$. For nonzero $p,q$ with $d=\gcd(|p|,|q|)>1$, the corresponding torus link is the union of $d$ disjoint parallel copies of the primitive slope $(p/d,q/d)$; it is not a single embedded curve of class $p\alpha+q\beta$. The exterior is $E_K=S^3\setminus\operatorname{int}N(K)$ for a chosen closed tubular neighborhood. A positive meridian is the oriented boundary of a normal disk, and a preferred longitude is a degree-one class on $\partial E_K$ whose image in $H_1(E_K;\mathbb Z)$ is zero; this definition alone asserts neither existence nor uniqueness.
+
+SUPPLIER def-finite-volume-hyperbolic-knot-exterior
+For a smooth knot $K$ with chosen compact exterior $E_K$ and boundary torus $T_K$, a finite-volume hyperbolic knot exterior structure is a complete Riemannian metric of constant sectional curvature $-1$ on $\operatorname{int}(E_K)$ with finite volume and exactly one cusp whose torus cross-section is isotopic in $\operatorname{int}(E_K)$ to a parallel copy of $T_K$. The definition asserts no existence.
+
+SUPPLIER def-generic-movie-of-an-oriented-knot-cobordism
+Assume countable choice. Let $K_0,K_1\subset S^3$ be smooth oriented knots. A smooth oriented knot cobordism from $K_0$ to $K_1$ is a compact smooth properly embedded oriented surface $\Sigma\subset S^3\times[0,1]$ whose boundary is $(-K_0\times\{0\})\sqcup(K_1\times\{1\})$, with product collars at both ends. A **generic movie** for $\Sigma$ is obtained by choosing a generic projection of the slices $S^3\times\{t\}$ to the plane and a Morse height function on $\Sigma$, then recording the oriented link diagram at each regular level. Intermediate regular levels may be links with any finite number of components. After choosing the projection and height generically, the finitely many exceptional levels are isolated and distinct: between them the diagrams change by planar isotopy or one oriented Reidemeister move, and at them the surface height has one nondegenerate minimum (a birth), one nondegenerate maximum (a death), or one index-one critical point (a saddle band move). A movie includes its ordered list of frames and these elementary changes; no claim that two movies of the same cobordism are equivalent is part of this definition.
+
+SUPPLIER def-kauffman-bracket-smoothing-and-loop-value
+Let $A$ be an indeterminate and let $\mathbb Z[A^{\pm1}]$ be the Laurent
+polynomial ring in $A$. A **nonempty unoriented regular link diagram** is the
+finite planar projection and over/under data of a regular oriented link diagram
+after its strand arrows are forgotten. Its finite crossing set is denoted
+$C(D)$, and at least one closed component is required. The empty link diagram is
+outside this definition.
+
+At a crossing use the following local chart: the over-strand runs from the
+southwest endpoint to the northeast endpoint and is drawn continuously over the
+under-strand, which runs from northwest to southeast with a gap at the
+intersection. Horizontal-right followed by vertical-up is the positive
+orientation of this displayed chart. In this chart the **A-smoothing** joins the
+two left endpoints and joins the two right endpoints; the **B-smoothing** joins
+the two top endpoints and joins the two bottom endpoints. These labels are
+attached to this displayed chart and are transported by orientation-preserving
+changes of local coordinates. Thus turning right from an entering underpassing
+half-strand gives the A-smoothing.
+
+```tikz
+\begin{tikzpicture}[scale=0.72, line cap=round, line join=round]
+  \begin{scope}
+    \draw[thick] (-1,1)--(-0.14,0.14);
+    \draw[thick] (0.14,-0.14)--(1,-1);
+    \draw[very thick] (-1,-1)--(1,1);
+    \node at (0,-1.45) {crossing};
+  \end{scope}
+  \begin{scope}[xshift=3.4cm]
+    \draw[thick] (-1,1) .. controls (-0.45,0.35) and (-0.45,-0.35) .. (-1,-1);
+    \draw[thick] (1,1) .. controls (0.45,0.35) and (0.45,-0.35) .. (1,-1);
+    \node at (0,-1.45) {$A$-smoothing, weight $A$};
+  \end{scope}
+  \begin{scope}[xshift=6.8cm]
+    \draw[thick] (-1,1) .. controls (-0.35,0.45) and (0.35,0.45) .. (1,1);
+    \draw[thick] (-1,-1) .. controls (-0.35,-0.45) and (0.35,-0.45) .. (1,-1);
+    \node at (0,-1.45) {$B$-smoothing, weight $A^{-1}$};
+  \end{scope}
+\end{tikzpicture}
+```
+
+For a state $S:C(D)\to\{A,B\}$, let $a(S)$ and $b(S)$ be the numbers of
+A- and B-smoothings, and let $|S|$ be the number of closed circles in the
+crossingless diagram obtained by performing all smoothings. Set
+$$\delta:=-A^2-A^{-2}$$
+and define the **Kauffman bracket** of $D$ by
+$$\langle D\rangle:=\sum_{S:C(D)\to\{A,B\}} A^{a(S)-b(S)}\delta^{|S|-1}\in\mathbb Z[A^{\pm1}].$$
+Because $D$ is nonempty, every complete smoothing has $|S|\ge1$, so the loop
+exponent is nonnegative. A crossingless $k$-component unlink with $k\ge1$ has
+bracket $\delta^{k-1}$.
+
+SUPPLIER def-khovanov-frobenius-algebra-and-cube-of-resolutions
+Let $D$ be a nonempty finite regular oriented link diagram in an oriented $3$-sphere, with finite crossing set $C(D)$. Fix a unit viewing normal $n$ and orient the projection plane $P$ so $(u,v)$ is positive exactly when $(n,u,v)$ is positive in the ambient $3$-space. At a crossing $c$, define its sign as the sign of $\det_P(v_{\rm over},v_{\rm under})$, where the two nonzero projected tangent vectors follow the oriented over- and under-strands. Let $n_+$ and $n_-$ be the numbers of positive and negative crossings.
+
+Set $\mathcal A=\mathbb Z[X]/(X^2)$, with $\deg(1)=1$ and $\deg(X)=-1$. Its unit, multiplication, counit, and comultiplication are
+$$
+\eta(1)=1,\qquad m(1\otimes1)=1,\quad m(1\otimes X)=m(X\otimes1)=X,\quad m(X\otimes X)=0,
+$$
+$$
+\epsilon(1)=0,\quad\epsilon(X)=1,\qquad \Delta(1)=1\otimes X+X\otimes1,\quad\Delta(X)=X\otimes X.
+$$
+Thus $m$ and $\Delta$ have quantum degree $-1$, while $\eta$ and $\epsilon$ have degree $+1$.
+
+Choose a total order $c_1<\cdots<c_n$ on $C(D)$. A resolution state is a function $v:C(D)\to\{0,1\}$; at $v(c)=0$ use the A-smoothing and at $v(c)=1$ use the B-smoothing from the Kauffman source chart. Write $|v|=\sum_c v(c)$, let $D_v$ be the crossingless resolution, and let $k(v)$ be its number of circles. Assign the state module $\mathcal A^{\otimes k(v)}$. For an edge $v\to v+e_j$ changing crossing $c_j$ from $0$ to $1$, use $m$ if the local smoothing merges two circles and $\Delta$ if it splits one circle, tensored with the identity on all other factors, and multiply this map by $(-1)^{\sum_{i<j}v(c_i)}$. The resulting direct sum has cohomological degree
+$$i(v)=|v|-n_-$$
+and the generator with circle labels $1$ or $X$ has quantum degree
+$$j(v)=|v|+n_+-2n_-+\sum_{\text{circle labels }a}\deg(a).$$
+This defines the normalized integral Khovanov cube and its candidate degree-zero cochain differential; the assertion that the differential squares to zero is a separate lemma.
+
+The Frobenius identity that controls a merge-split face is represented by the two equal composites below. The diagram records the maps only; the proof verifies the equality on the basis $\{1,X\}^{\otimes2}$ and does not rely on the drawing.
+
+```tikzcd
+\mathcal A\otimes\mathcal A \arrow[r,"m"] \arrow[d,"\Delta\otimes\mathrm{id}"'] & \mathcal A \arrow[d,"\Delta"] \\
+\mathcal A\otimes\mathcal A\otimes\mathcal A \arrow[r,"\mathrm{id}\otimes m"'] & \mathcal A\otimes\mathcal A
+```
+
+SUPPLIER def-knot-exterior
+Assume countable choice, as required for the smooth normal-bundle structure in the tubular-neighbourhood interface. Let $K:S^1\to S^3$ be a smooth oriented knot, let $\nu(K)=TS^3|_K/TK$ be its quotient normal bundle, and let $\Phi:\Omega\to S^3$ be a tubular-neighbourhood map from an open neighbourhood $\Omega$ of the zero section in $\nu(K)$ that restricts to the inclusion of $K$. Choose a radius $\epsilon>0$ whose closed disk subbundle $D_\epsilon\nu(K)$ is contained in $\Omega$, and set $N(K)=\Phi(D_\epsilon\nu(K))$. The **exterior** of this chosen tube is
+$$
+E_K:=S^3\setminus\operatorname{int}_{S^3}N(K).
+$$
+Retain its boundary $T_K:=\partial E_K=\partial N(K)$, orient $E_K$ by restriction of the fixed orientation of $S^3$, and orient $T_K$ as the boundary of $E_K$. The choice of tubular map and radius is part of the input to this definition.
+
+SUPPLIER def-knot-floer-filtration-and-tau
+Let $K$ be a smooth oriented knot in the standard oriented three-sphere. Let $F$ be a compact connected oriented Seifert surface with boundary $K$, and let $\mathcal H=(\Sigma,\boldsymbol\alpha,\boldsymbol\beta,w,z)$ be an admissible doubly pointed Heegaard diagram representing $(K,F)$. The associated one-pointed hat chain complex $\widehat{CF}(\mathcal H)$ is the finite-dimensional chain complex over $\mathbb F_2$ obtained from the minus complex by setting its basepoint variable to zero; its differential counts index-one disks with zero multiplicity at $w$. Assume for this specified data that the differential is nonincreasing in the Alexander filtration, that the absolute Alexander formula below takes integer values, and that $H(\widehat{CF}(\mathcal H))\cong\mathbb F_2$. Give a generator $\mathbf x$ its absolute Alexander filtration
+$$A_F(\mathbf x)=\frac12\left\langle c_1(\mathfrak s_{w,z}(\mathbf x)),[\widehat F]\right\rangle,$$
+where $\mathfrak s_{w,z}(\mathbf x)$ is the homology class of the nowhere-vanishing vector field assigned to $\mathbf x$ by the pointed Morse construction, with its prescribed boundary data near the two basepoints; $c_1$ is the first Chern class of the oriented plane field perpendicular to that vector field. To form the zero-framed surgery, remove a tubular neighborhood of $K$ and glue in a solid torus whose meridian is the longitude induced by $F$. The surface $\widehat F$ is obtained by deleting a boundary collar of $F$ and capping its longitude by the meridian disk of that solid torus. This is the standard integer normalization, with the one-generator diagram of the standard unknot at filtration zero. The subcomplex $F_s\widehat{CF}(\mathcal H)$ is spanned by generators of Alexander filtration at most $s$.
+
+More generally, a finite integer-filtered chain complex is a finite-dimensional chain complex $C$ over $\mathbb F_2$ with subcomplexes $F_sC$ such that $F_sC=0$ for all sufficiently small integers $s$ and $F_sC=C$ for all sufficiently large integers $s$. If $H(C)\cong\mathbb F_2$, define
+$$\tau(C):=\min\{s\in\mathbb Z:\operatorname{im}(H(F_sC)\longrightarrow H(C))\ne0\}.$$
+For the fixed diagram and surface above, write $\tau_{\mathcal H,F}(K)=\tau(\widehat{CF}(\mathcal H),F_*\widehat{CF}(\mathcal H))$. Once diagram and surface independence is proved, their common value is the knot invariant $\tau(K)$. Until that comparison is proved, $\tau_{\mathcal H,F}(K)$ denotes only the value for the specified data.
+
+SUPPLIER def-knot-meridian-and-preferred-longitude
+Assume countable choice as in the chosen tubular-neighbourhood data. Let $K$ be a smooth oriented knot with chosen exterior $E_K$ and boundary torus $T_K=\partial E_K$, and let $p:T_K\to K$ be the projection of the chosen normal-disk tube. Orient each normal disk so that its positive tangent direction followed by its oriented normal basis agrees with the orientation of $S^3$. A **meridian** $\mu$ is the oriented boundary of one such normal disk. A **degree-one parallel curve** is a simple closed curve $\lambda$ in $T_K$ for which $p|_\lambda:\lambda\to K$ has degree $+1$. A **preferred longitude** is a degree-one parallel curve satisfying $i_*[\lambda]=0$ in $H_1(E_K;\mathbb Z)$, where $i:T_K\hookrightarrow E_K$ is inclusion. This is a condition on a curve; this definition alone asserts neither existence nor uniqueness. Reversing the orientation of $K$ reverses the orientations of both $\mu$ and any degree-one parallel curve. If a subgroup $P\le\pi_1(E_K,x)$ is specified using a path from $x$ to $T_K$, record it only up to replacing it by $gPg^{-1}$ for $g\in\pi_1(E_K,x)$.
+
+SUPPLIER def-locally-flat-proper-surface-and-concordance-collars
+Let $X$ be a four-dimensional manifold with boundary and let $W$ be a compact surface with boundary. An embedding $e:(W,\partial W)\to(X,\partial X)$ is proper when $e^{-1}(\partial X)=\partial W$. It is locally flat at an interior point of $W$ when there are neighborhoods of the point and its image and a homeomorphism of pairs from those neighborhoods to $(\mathbb R^4,\mathbb R^2)$, with the standard linear plane $\mathbb R^2\subset\mathbb R^4$. It is locally flat at a boundary point when there are such neighborhoods and a homeomorphism of pairs to $(\mathbb R^4_+,\mathbb R^2_+)$, where $\mathbb R^4_+=\{x_4\geq0\}$ and $\mathbb R^2_+=\{x_2=x_3=0,\ x_4\geq0\}$; the line $\partial\mathbb R^2_+$ lies in $\partial\mathbb R^4_+$. A collar of a boundary circle of $W$ is an embedding of that circle times $[0,\varepsilon)$ into $W$ that is the identity on the circle at parameter $0$; a concordance collar is required to agree with the corresponding product collar of the ambient end. A smooth proper surface has the analogous smooth charts and collars, which are also topological locally flat charts.
+
+SUPPLIER def-quantum-sl2-fundamental-ribbon-module
+Let $\omega$ be an indeterminate, set $A=\omega^{-2}$, and put $k'=\mathbb Q(\omega)$, $q_K=A^2$, and $q_L=A^{-2}$. Work over the scalar extension to $k'$ of the library Hopf algebra at $q_L$; $U_{q_K}$ in Korinman's convention is identified by $q_L=q_K^{-1}$ and $K_L=K_K^{-1}$. Use its generic two-dimensional module $V$ over $k'$ with ordered basis $(v_+,v_-)$ and generator matrices
+$$E=\begin{pmatrix}0&1\\0&0\end{pmatrix},\qquad F=\begin{pmatrix}0&0\\1&0\end{pmatrix},\qquad K_K=\begin{pmatrix}q_K&0\\0&q_K^{-1}\end{pmatrix}.$$
+Equivalently, for the library parameter $q_L=q_K^{-1}$ use $K_L=K_K^{-1}=\operatorname{diag}(q_L,q_L^{-1})$ and the library coproduct convention $\Delta(E)=E\otimes K_L^{-1}+1\otimes E$, $\Delta(F)=F\otimes1+K_L\otimes F$. This parameter and Cartan-generator conversion is part of the definition; the two $q$ symbols are not identified.
+
+The object $V$ is absolutely simple in the $k'$-linear representation category.
+
+Equip $V$ with the Kauffman-bracket half-ribbon structure. The half-ribbon operator $\Omega$ is specified by
+$$C:=\operatorname{Mat}_{(v_+,v_-)}(\Omega^{-1})=\begin{pmatrix}0&\omega\\-\omega^5&0\end{pmatrix},$$
+and its associated twist is $\theta_V=\Omega^2=-A^3\operatorname{id}_V$. In the ordered basis $(v_+\otimes v_+,v_+\otimes v_-,v_-\otimes v_+,v_-\otimes v_-)$, the positive braiding is
+$$c_{V,V}=\begin{pmatrix}A&0&0&0\\0&0&A^{-1}&0\\0&A^{-1}&A-A^{-3}&0\\0&0&0&A\end{pmatrix}.$$
+Its ribbon quantum dimension is $\delta=-A^2-A^{-2}$. The half-ribbon and universal $R$-matrix are those of the topological half-ribbon representation category; the selected ribbon element is the Kauffman-bracket one, not the usual $U_q(\mathfrak{sl}_2)$ ribbon element.
+
+Let $v_+^*,v_-^*$ be the ordinary dual basis. The left-dual action on $V^*$ is the contragredient action $(x\cdot f)(v)=f(S(x)v)$ for the antipode $S$ of the stated library Hopf convention. Identify the displayed copy of $V$ with this left dual $V^\vee$ by $v_+\mapsto v_-^*$ and $v_-\mapsto -A^{-2}v_+^*$. In this identification the evaluation and coevaluation maps are
+$$B(v_+\otimes v_-)=1,\quad B(v_-\otimes v_+)=-A^{-2},\quad B(v_+\otimes v_+)=B(v_-\otimes v_-)=0,$$
+$$U(1)=-A^2v_+\otimes v_-+v_-\otimes v_+.$$
+These are the explicit duality maps used in the closure trace.
+
+The positive Artin generator is drawn with braid height increasing upward; the left input strand ends on the right, and the right input strand passes over it:
+
+```tikz
+\begin{tikzpicture}[baseline=(current bounding box.center),scale=.8]
+  \draw[->] (0,-1) -- (.46,-.08);
+  \draw[->] (.54,.08) -- (1,1);
+  \draw[->] (1,-1) .. controls (.72,-.5) and (.28,.5) .. (0,1);
+  \node at (-.2,-1) {$i$};
+  \node at (1.2,-1) {$i+1$};
+\end{tikzpicture}
+```
+
+The uninterrupted strand in the drawing is the overpassing strand. This is the crossing convention for the displayed matrix; the proof below uses its matrix entries and the half-ribbon source formulas, not the drawing.
+
+SUPPLIER def-reduced-khovanov-cohomology-of-a-knot
+Let $(D,p)$ be a finite regular oriented diagram of a knot with a basepoint $p$ away from the crossings, and let $C(D)$ be its normalized integral Khovanov cochain complex. At each resolution state, let $X_p$ act by multiplication by $X$ on the tensor factor for the circle containing $p$, and by the identity on every other circle factor. The basepoint action is the direct sum of these statewise maps. Define the reduced cochain complex by
+$$\widetilde C(D,p):=C(D)/\operatorname{im}(X_p),$$
+with the same cohomological grading and with reduced quantum degree $\widetilde j=j-1$ for the class represented by a state whose basepoint circle is labelled $1$. Its cohomology is the reduced integral Khovanov cohomology $\widetilde{Kh}^{i,\widetilde j}(D,p)$. The unknot is normalized so that its reduced group lies in bidegree $(0,0)$.
+
+Equivalently, cut the based knot at $p$ to a one-interval tangle. Put $M=\mathbb Z$ in quantum degree $0$ with $X\cdot1=0$. A resolution with $k$ closed circles and the distinguished interval is assigned $\mathcal A^{\otimes k}\otimes M$. An edge that merges a circle into the interval uses $m_M(1\otimes1)=1$ and $m_M(X\otimes1)=0$; an edge that splits the interval uses $\Delta_M(1)=X\otimes1$, where the circle factor is written first and the interval factor second. Edges not meeting the interval use $m$ or $\Delta$. This based tangle cube is the quotient complex above, with the stated quantum shift.
+
+SUPPLIER lem-khovanov-cube-differential-squares-to-zero
+Let $D$ be a finite regular oriented link diagram, order its crossings as $c_1<\cdots<c_n$, and form the direct sum of state modules $\mathcal A^{\otimes k(v)}$ over all functions $v:C(D)\to\{0,1\}$. Here $\mathcal A=\mathbb Z[X]/(X^2)$, each crossing is changed from its A-smoothing at $0$ to its B-smoothing at $1$, and the edge map is the multiplication $m$ for a merge or comultiplication $\Delta$ for a split, multiplied by $(-1)^{\sum_{i<j}v(c_i)}$ on the edge at $c_j$. Then the sum $d$ of all edge maps satisfies $d^2=0$.
+
+SUPPLIER lem-lee-cobordism-filtration-genus-bound
+Assume the Axiom of Countable Choice. Let $S\subset S^3\times[0,1]$ be a connected compact oriented smoothly properly embedded surface of genus $g$, with product collars and oriented boundary $(-K_0\times\{0\})\sqcup(K_1\times\{1\})$ for oriented knots $K_0,K_1$ in the standard three-sphere. A **finite movie** for $S$ is a finite ordered sequence of regular-level link diagrams whose changes are planar isotopies, oriented Reidemeister moves, births, saddles or deaths. Such a movie defines a map on rational Lee homology that preserves the induced decreasing filtration with degree $\chi(S)=-2g$. The map is an isomorphism; consequently
+$$
+|s(K_1)-s(K_0)|\le 2g.
+$$
+
+SUPPLIER lem-lee-filtered-spectral-sequence-and-two-orientation-classes
+Let $D$ be a finite regular oriented diagram of a link with $c$ components, and form its rational Lee cochain complex using the normalized crossing cube and decreasing quantum filtration. The associated bounded spectral sequence has the rational Khovanov cohomology of $D$ on its homology page and converges to the associated graded of Lee homology with its induced filtration. For each of the $2^c$ orientations $o$ of the link, the oriented resolution and the parity-of-nesting label rule define a canonical Lee cycle $s_o$; these cycles represent a basis of Lee homology. In that rule, a Seifert circle contributes $1$ when counterclockwise and $0$ when clockwise. For a knot, the two canonical classes $s_o,s_{\bar o}$ have equal least filtration level, while $s_o+s_{\bar o}$ and $s_o-s_{\bar o}$ are nonzero classes in the two distinct quantum-degree congruence summands modulo $4$.
+
+
+### Local crossing convention
+
+For the proof’s local convention, the four segment ends are numbered clockwise, and sectors $(1,2)$ and $(3,4)$ are black. The textual endpoint and arrow rules in step 2.1 determine all labels; the drawing is illustrative and is not used in the proof.
+
+```tikz
+\begin{tikzpicture}[scale=1.1]
+  \fill[black!18] (0,0) -- (0.72,0) arc (0:90:0.72) -- cycle;
+  \fill[black!18] (0,0) -- (-0.72,0) arc (180:270:0.72) -- cycle;
+  \node at (0.48,0.48) {$B$};
+  \node at (-0.48,-0.48) {$B$};
+  \draw[line width=5pt] (-0.8,0) -- (0.8,0);
+  \draw[white,line width=5pt] (-0.2,0) -- (0.2,0);
+  \draw[line width=1pt] (-0.8,0) -- (-0.2,0);
+  \draw[line width=1pt] (0.2,0) -- (0.8,0);
+  \draw[line width=1pt] (0,0.8) -- (0,-0.8);
+  \node[above] at (0,0.82) {$1$};
+  \node[right] at (0.82,0) {$2$};
+  \node[below] at (0,-0.82) {$3$};
+  \node[left] at (-0.82,0) {$4$};
+\end{tikzpicture}
+```
+
+SUPPLIER lem-meridian-preserving-torus-homeomorphism-extends-over-solid-torus
+Let $V=D^2\times S^1$ and $V'=D^2\times S^1$ be solid tori, with meridian curves $\mu=\partial D^2\times\{1\}$ and $\mu'=\partial D^2\times\{1\}$. Suppose $h:\partial V\to\partial V'$ is a homeomorphism and there is an isotopy $H_t:\partial V'\to\partial V'$ through homeomorphisms, with $H_0=\mathrm{id}$, such that $H_1(h(\mu))=\mu'$. Then $h$ extends to a homeomorphism $\overline h:V\to V'$. The extension may be chosen to carry the product core $\{0\}\times S^1$ onto the product core of $V'$, and has the same orientation sign as $h$ with respect to the boundary orientations.
+
+SUPPLIER lem-puncturing-smooth-four-ball-surfaces-gives-genus-preserving-knot-cobordisms
+Assume countable choice. Let $F\subset B^4\subset\mathbb R^4$ be a compact connected oriented smoothly properly embedded surface of genus $g$, with its supplied smooth boundary collar and oriented boundary the knot $K\subset S^3$. There is an orientation-preserving ambient diffeomorphism $\Psi:B^4\to B^4$ equal to the identity on a neighborhood of the outer boundary, and $0<\varepsilon<1$, such that $\Psi(F)\cap B^4_\varepsilon$ is exactly a flat two-disk in a plane through $0$. The surface $\Psi(F)\setminus\operatorname{int}B^4_\varepsilon$, in the explicitly round shell $B^4\setminus\operatorname{int}B^4_\varepsilon\cong S^3\times[0,1]$, is a connected smooth oriented knot cobordism between $K$ and a standard unknot, with genus $g$ and Euler characteristic $-2g$. Both boundary components have product collars in a shell identification fixing $K$ and the inner sphere. The ambient diffeomorphism $\Psi$ fixes a sufficiently small restriction of the supplied outer collar; the shell coordinates may be adjusted there to make that surface collar a product. No assertion about the complement of an arbitrary embedded four-ball is used.
+
+SUPPLIER lem-quantum-sl2-ribbon-trace-matches-hecke-and-bracket
+Assume the Axiom of Countable Choice. Let $A$ be an indeterminate, $q_K=A^2$, $q_L=A^{-2}$, and $\delta=-A^2-A^{-2}$. Use the fundamental module, positive crossing, duality maps, and twist fixed in the preceding definition. For every $n\ge1$ and $\beta\in B_n$, let $t_n(\beta)$ be the categorical ribbon trace of its blackboard-framed closure and let $w(\beta)$ be its exponent sum. With $t=A^{-4}$ and $z_0=-1/(t+1)$, the exact identities are
+$$t_n(\beta)=\delta\langle\widehat\beta\rangle=\delta^n(-A)^{w(\beta)}\operatorname{tr}_n(\pi_n(\beta))\big|_{v=t,\ z=z_0},$$
+$$(-A^3)^{-w(\beta)}t_n(\beta)=\delta(-A^3)^{-w(\beta)}\langle\widehat\beta\rangle.$$
+Here $\operatorname{tr}_n$ is the normalized type-A Hecke Markov trace with braid generator sent to $T_i$, and $\langle\widehat\beta\rangle$ is the Kauffman bracket in the fixed crossing chart. The second identity is a value-by-value normalization formula; it does not by itself assert a Jones-polynomial specialization.
+
+SUPPLIER thm-bracket-state-sum-matches-library-jones-specialization
+Assume the Axiom of Choice. Let $A$ and $t$ be formal variables and $K$ a
+nonempty oriented link. At each crossing of a regular diagram $D$ use the
+source chart with over-strand southwest-to-northeast: A joins left and right
+endpoints with coefficient $A$, and B joins top and bottom endpoints with
+coefficient $A^{-1}$. A state $S:C(D)\to\{A,B\}$ assigns one smoothing at every
+crossing; let $a(S)$ and $b(S)$ count these choices and $|S|$ count the
+resulting circles. Fix a unit viewing normal $n$ and orient the projection
+plane $P$ so $(u,v)$ is positive exactly when $(n,u,v)$ is positive in the
+ambient oriented $3$-sphere. Define
+$$\operatorname{sgn}(c)=\operatorname{sgn}\det_P(v_{\rm over},v_{\rm under}), \qquad \operatorname{wr}(D)=\sum_c\operatorname{sgn}(c),$$
+$$f_K(A)=(-A^3)^{-\operatorname{wr}(D)} \sum_{S:C(D)\to\{A,B\}}A^{a(S)-b(S)}(-A^2-A^{-2})^{|S|-1}.$$
+For an $n$-strand braid $\beta$ whose oriented closure is $K$, let
+$e:B_n\to\mathbb Z$ be the homomorphism $e(\sigma_i)=1$, where $\sigma_i$
+is the positive geometric Artin half twist. Let $H(n)$ be the type-A Hecke
+algebra with generators $T_i$, quadratic relation $T_i^2=(v-1)T_i+v$, braid
+relations, and distant commutation, and let $\pi_n(\sigma_i)=T_i$. Its
+normalized Markov trace $\operatorname{tr}_n$ satisfies
+$\operatorname{tr}_n(1)=1$, cyclicity, tower restriction, and
+$\operatorname{tr}_{n+1}(xT_n)=z\operatorname{tr}_n(x)$. Define the library
+Jones value by
+$$V_K(t)=s^{e(\beta)}\left(-\frac{s^2+1}{s}\right)^{n-1} \operatorname{tr}_n(\pi_n(\beta))\Big|_{v=s^2,\,z=-1/(s^2+1),\,t=s^2},$$
+where $s=t^{1/2}$. With $A=t^{-1/4}$, these values satisfy
+$$V_K(t)=f_K(t^{-1/4}).$$
+
+SUPPLIER thm-knot-exterior-homology-and-longitude
+Assume the Axiom of Choice. Let $K:S^1\to S^3$ be a smooth oriented embedding and write its quotient normal bundle as $\nu_K=K^*TS^3/dK(TS^1)$. Choose an orientation-preserving trivialization $\nu_K\cong S^1\times\mathbb R^2$ and a tubular map $\Phi:\Omega\to S^3$, meaning a smooth embedding from an open neighbourhood $\Omega\subseteq\nu_K$ of the zero section onto an open neighbourhood of $K(S^1)$ with $\Phi(s,0)=K(s)$, such that in these product coordinates $\Omega$ contains $S^1\times D^2_{2\epsilon}$ for some $\epsilon>0$. Here $D^2_r=\{z\in\mathbb R^2:\|z\|\le r\}$. Set $N(K)=\Phi(S^1\times D^2_\epsilon)$, $E_K=S^3\setminus\operatorname{int}N(K)$, $T_K=\partial E_K$, and let $i:T_K\hookrightarrow E_K$ be inclusion, $p:T_K\to S^1$ the product projection, and $\mu$ the positive boundary of a normal disk, using the normal-plane orientation determined by the orientations of $K$ and $S^3$. A class is primitive if it is not $m$ times another class for any integer $|m|>1$. Then $H_1(E_K;\mathbb Z)\cong\mathbb Z$ is generated by $[\mu]$. The kernel of $i_*:H_1(T_K;\mathbb Z)\to H_1(E_K;\mathbb Z)$ is a primitive rank-one direct summand generated by a unique class $[\lambda]$ with $p_*[\lambda]=1\in H_1(S^1;\mathbb Z)$. It has a simple closed representative, is the preferred longitude, and $([\mu],[\lambda])$ is a basis of $H_1(T_K;\mathbb Z)$.
+
+SUPPLIER thm-rasmussen-s-bounds-smooth-four-ball-genus
+Assume the Axiom of Countable Choice. For every smooth oriented knot $K$ in the standard oriented three-sphere,
+$$
+|s(K)|\le 2g_4^{\mathrm{sm}}(K),
+$$
+where $g_4^{\mathrm{sm}}(K)$ is the minimum genus of a connected compact orientable smooth properly embedded surface in the standard four-ball with oriented boundary $K$.
+
+SUPPLIER thm-reduced-khovanov-basepoint-and-reidemeister-invariance
+Assume the Axiom of Countable Choice. Let $K$ be an oriented knot and let $(D,p)$ and $(D',p')$ be finite regular oriented diagrams of $K$ with basepoints away from all crossings. Then the reduced integral groups $\widetilde{Kh}^{i,\widetilde j}(D,p)$ and $\widetilde{Kh}^{i,\widetilde j}(D',p')$ are isomorphic for every $(i,\widetilde j)$. In particular, they are invariant under Reidemeister moves supported away from the basepoint and under transport of the basepoint along the knot.
+
+SUPPLIER thm-twist-correction-removes-framing
+Assume the Axiom of Choice. Let $k$ be a field and let $\mathcal C$ be a $k$-linear ribbon category with $k$-bilinear tensor product and $\operatorname{End}_{\mathcal C}(\mathbf1)=k$. Let $X$ be absolutely simple, so its twist is $\theta_X=\lambda\operatorname{id}_X$ for a unique $\lambda\in k^\times$. For $n\ge1$ and $\beta\in B_n$, let $t_n(\beta)$ be the value of the blackboard-framed $X$-colored closure and let $w(\beta)$ be the exponent sum, with positive Artin generator and positive stabilization conventions fixed as in the supplied ribbon-trace formulas. Then
+$$J_X(\widehat\beta):=\lambda^{-w(\beta)}t_n(\beta)$$
+depends only on the oriented unframed link type of $\widehat\beta$ when every component has color $X$. This statement makes no normalization by the categorical dimension.
+
+SUPPLIER thm-valid-code-reconstructs-the-declared-link-diagram
+Assume the Axiom of Countable Choice. For every valid connected one-component
+oriented code with a selected outer face, the reconstruction procedure
+produces a regular oriented diagram representing that code. Any two such
+diagrams with the same code differ only by crossing and edge relabeling and
+are planar isotopic. The normalized planar-diagram code of a diagram with $c$
+crossings appears among the candidates enumerated at bound $c$. This statement
+concerns diagrams and their finite codes; it does not identify distinct codes
+that may represent the same knot type. The finite realization and enumeration
+claims are choice-free; $\mathrm{AC}_\omega$ is assumed only for the smooth
+ambient-isotopy uniqueness clause.
+
+CONSUMER alg-khovanov-chain-complex-from-diagram
+Supplier edges: def-kauffman-bracket-smoothing-and-loop-value
+Literal claim:
+**Input:** a nonempty finite regular oriented link diagram $D$ and a total order $c_1<\cdots<c_n$ on its crossing set. A diagram object is supplied as mathematical input; this procedure does not parse a serialized string.
+
+**Output:** the normalized bigraded Khovanov cochain module $C^{i,j}(D)$ and its candidate differential $d:C^{i,j}(D)\to C^{i+1,j}(D)$, constructed by the following finite instructions.
+
+1. Enumerate every state $v:C(D)\to\{0,1\}$ once. Form the crossingless resolution by using the A-smoothing at $v(c)=0$ and the B-smoothing at $v(c)=1$.
+2. For each state, create one tensor factor of the integral Frobenius algebra for each resolution circle and place the resulting tensor product in cohomological degree $|v|-n_-$ and quantum degree $|v|+n_+-2n_-+\sum\deg(a)$ for its circle labels $a$.
+3. For each state and each crossing $c_j$ with $v(c_j)=0$, create the edge to $v+e_j$. Apply multiplication if that smoothing change merges two circles, comultiplication if it splits one circle, the identity on other tensor factors, and the sign $(-1)^{\sum_{i<j}v(c_i)}$. Sum the edge maps out of every state to obtain $d$.
+4. Return the finite direct sum of the state modules with these degrees and maps. The square-zero property is the separate local lemma named by `justified_by`.
+Relevant declared Facts:
+(No named supplier use in literal Facts; declared-context edge only at this scope.)
+
+CONSUMER cex-knot-kt-38-boundary-case
+Supplier edges: def-knot-floer-filtration-and-tau
+Literal claim:
+
+Relevant declared Facts:
+**Given:** $\mathrm{AC}_\omega$, the universal identity and the knot $D_+(T_{2,3},2)$.
+
+CONSUMER cex-knot-kt-41-boundary-case
+Supplier edges: lem-lee-cobordism-filtration-genus-bound, thm-rasmussen-s-bounds-smooth-four-ball-genus
+Literal claim:
+
+Relevant declared Facts:
+**Given:** The Axiom of Countable Choice, the universal implication, and the specified Whitehead double with the source's positive-clasp and two-twist conventions.
+
+[L2] [[thm-rasmussen-s-bounds-smooth-four-ball-genus]] states $|s(K)|\le2g_4^{\mathrm{sm}}(K)$, for an actual smooth spanning surface.
+
+[L3] [[lem-lee-cobordism-filtration-genus-bound]] is the exact supplier required by [L2]; its hypothesis is a smoothly properly embedded surface in $S^3\times[0,1]$ with product collars, not an abstract oriented surface with knot labels.
+
+CONSUMER def-decorated-link-cobordism-and-floer-target
+Supplier edges: def-locally-flat-proper-surface-and-concordance-collars
+Literal claim:
+Let $Y_0,Y_1$ be closed smooth oriented three-manifolds, let $W$ be a compact smooth oriented four-manifold with boundary $-Y_0\sqcup Y_1$, where $-Y_0$ has the reversed orientation, and let $K_i\subset Y_i$ be images of smooth oriented embeddings of the circle. Every component of $Y_i$ is required to meet $K_i$; the boundary parametrizations and compatible product collars are part of the data. A **decorated knot cobordism** from $(Y_0,K_0)$ to $(Y_1,K_1)$ is a properly embedded smooth oriented surface $\Sigma\subset W$ with boundary $(-K_0)\sqcup K_1$, together with one $w$-basepoint and one $z$-basepoint on each end knot and a compact properly embedded one-manifold $\mathcal A\subset\Sigma$, which may have arc and closed-circle components. Every component of $W$ meets $\Sigma$, and every component of $\Sigma$ meets $\mathcal A$. The full dividing set $\mathcal A$ decomposes $\Sigma$ into subsurfaces $\Sigma_w,\Sigma_z$, with each $w$-basepoint in the closure of $\Sigma_w$, each $z$-basepoint in the closure of $\Sigma_z$, and $\mathcal A$ meeting the boundary transversely away from the marked points. Every component of $K_i\setminus\mathcal A$ contains exactly one of the two marked points; in particular each boundary knot meets the dividing set in two points, separating its $w$- and $z$-intervals. The basepoint labels, dividing set, two regions and their two-color assignment are part of the data.
+
+For an end pair $(Y,K)$, a doubly pointed Heegaard diagram consists of a closed genus-$g$ oriented surface $S$, two $g$-tuples $\boldsymbol\alpha,\boldsymbol\beta$ of pairwise disjoint simple closed curves giving a Heegaard splitting of $Y$, and points $w,z$ in the complement of those curves such that arcs in the two handlebodies from $w$ to $z$ form $K$. Each intersection point $\mathbf x\in\mathbb T_{\boldsymbol\alpha}\cap\mathbb T_{\boldsymbol\beta}$ determines a Spin-c structure $\mathfrak s_w(\mathbf x)$ on $Y$ from the homology class of the nonvanishing gradient vector field specified by $\mathbf x$ and $w$. For $\mathfrak t\in\operatorname{Spin}^c(Y)$, let $CFL^-_{UV}(Y,K,\mathfrak t)$ be generated over $R=\mathbb F_2[U,V]$ by those intersection points with $\mathfrak s_w(\mathbf x)=\mathfrak t$. A periodic domain is an integral two-chain in the regions of $S\setminus(\boldsymbol\alpha\cup\boldsymbol\beta)$ whose boundary is an integral sum of the attaching curves; its capped homology class in $Y$ is denoted $[P]$, and $n_w(P)$ is its multiplicity at $w$. Restrict to diagrams strongly admissible for $\mathfrak t$: there is a generator $\mathbf x$ with $\mathfrak s_w(\mathbf x)=\mathfrak t$, and for every nonzero periodic domain $P$ with $n_w(P)=0$ and $\langle c_1(\mathfrak t),[P]\rangle=2N\ge0$, some region of $P$ has multiplicity strictly greater than $N$. Here $c_1(\mathfrak t)$ is the first Chern class of its determinant line bundle. The symmetric product $\operatorname{Sym}^g(S)$ is the quotient of $S^g$ by permutations of the factors. The associated product tori $\mathbb T_{\boldsymbol\alpha},\mathbb T_{\boldsymbol\beta}\subset\operatorname{Sym}^g(S)$ determine the differential on each Spin-c summand by
+$$
+\partial \mathbf x=\sum_{\mathbf y}\ \sum_{\substack{\phi\in\pi_2(\mathbf x,\mathbf y)\\ \mu(\phi)=1}} \#_2\bigl(\mathcal M(\phi)/\mathbb R\bigr)\,U^{n_w(\phi)}V^{n_z(\phi)}\mathbf y.
+$$
+Here $\pi_2(\mathbf x,\mathbf y)$ is the set of homotopy classes of Whitney disks, $\mu$ is the Maslov index, $\mathcal M(\phi)/\mathbb R$ is the moduli space of index-one disks modulo translation for chosen generic almost-complex data, $n_w,n_z$ are their local multiplicities at the marked points, and $\#_2$ is the finite count modulo two. This is the two-variable specialization of the colored link Floer complex. Its curvature vanishes: for a knot with one $w$- and one $z$-basepoint the curvature formula is $UV+VU=0$ in $\mathbb F_2[U,V]$, so $\partial^2=0$. The complex has the two-coordinate filtration induced by the $w$- and $z$-multiplicities.
+
+For a chosen $\mathfrak s\in\operatorname{Spin}^c(W)$, the Floer map indexed by $\mathfrak s$ has the complexes for $(Y_0,K_0,\mathfrak s|_{Y_0})$ and $(Y_1,K_1,\mathfrak s|_{Y_1})$ as source and target; $\operatorname{Spin}^c(W)$ denotes the set of Spin-c structures on $W$. The following local schematic shows the two regions separated by dividing arcs; it records decoration data and does not represent the cobordism map.
+
+```tikz
+\begin{tikzpicture}
+  \draw (0,0) rectangle (5,2);
+  \draw (2.5,0) -- (2.5,2);
+  \node at (1.25,1) {$\Sigma_w$};
+  \node at (3.75,1) {$\Sigma_z$};
+  \node[below] at (0,0) {$w_0$};
+  \node[below] at (5,0) {$z_0$};
+  \node[above] at (0,2) {$w_1$};
+  \node[above] at (5,2) {$z_1$};
+  \node[above] at (2.5,2) {$\mathcal A$};
+\end{tikzpicture}
+```
+Relevant declared Facts:
+(No named supplier use in literal Facts; declared-context edge only at this scope.)
+
+CONSUMER def-epsilon-from-filtered-knot-floer-complex
+Supplier edges: def-knot-floer-filtration-and-tau
+Literal claim:
+Work over $\mathbb F_2=\mathbb Z/2\mathbb Z$. Let $K\subset S^3$ be a smooth oriented knot and let $C=\mathrm{CFK}^{\infty}(K)$ be its finitely generated free $\mathbb F_2[U,U^{-1}]$ chain complex with Maslov grading $M$ and bifiltration coordinates $(i,j)$. Multiplication by $U$ lowers each filtration coordinate by one and lowers $M$ by two; the differential lowers $M$ by one and does not increase either filtration. The total homology is $\mathbb F_2[U,U^{-1}]$ with its generator normalized in Maslov grading zero.
+
+For a filtration region $R$, write $C\{R\}$ for the corresponding subquotient of the bifiltered complex; in particular $C\{i=0\}$ is the vertical complex, $C\{j=s\}$ is the horizontal complex at Alexander level $s$, and $C\{i=0,j\le s\}$ is the subcomplex of the vertical complex at levels at most $s$. Define
+$$ \tau(C)=\min\{s\in\mathbb Z: H_*(C\{i=0,j\le s\})\longrightarrow H_*(C\{i=0\})\text{ is nonzero} \}. $$
+For each integer $s$, let $F_s$ be the homology map induced by the chain map from $C\{i=0\}$ to $C\{\min(i,j-s)=0\}$ obtained by quotienting by $C\{i=0,j<s\}$ and then including the quotient. Let $G_s$ be the homology map from $C\{\max(i,j-s)=0\}$ to $C\{i=0\}$ obtained by quotienting by $C\{i<0,j=s\}$ and then including. The epsilon invariant is
+$$ \epsilon(C)=\begin{cases} 1,&F_{\tau(C)}=0,\\ -1,&G_{\tau(C)}=0,\\ 0,&F_{\tau(C)}\ne0\text{ and }G_{\tau(C)}\ne0. \end{cases} $$
+Here zero and nonzero refer to the induced homology maps. This definition fixes the sign convention; invariance under stable equivalence is a separate claim.
+Relevant declared Facts:
+**Given:** A finitely generated bifiltered knot Floer complex $C$ with the grading, filtration, and rank-one vertical homology conventions stated above.
+
+[A1] [[def-knot-floer-filtration-and-tau]]: the current supplier defines the threshold for a specified normalized filtered hat complex and explicitly defers diagram/surface independence. It does not state the exact CFK∞ subquotient equivalence used here; that interface remains to be reconciled.
+
+CONSUMER def-instanton-knot-homology-and-canonical-class
+Supplier edges: def-knot-exterior, def-knot-meridian-and-preferred-longitude
+Literal claim:
+Assume full AC. For a based smooth knot $K\subset S^3$ with the earring and admissible singular-bundle data above, let $C^\natural(K;\mathbb Z)$ be the integral singular-instanton cochain complex: its generators are regular critical points of the perturbed Chern–Simons functional on the corresponding singular configuration space, and its degree-one differential counts oriented zero-dimensional moduli spaces of trajectories for the perturbed singular anti-self-dual equation. Here finite energy is the flow energy $2\int_{\mathbb R}\|\partial_tB\|_2^2dt$ in temporal gauge, equivalently the perturbed topological energy of the relative trajectory class, rather than unrenormalized curvature energy over the infinite cylinder. The grading is relative modulo four, and the differential has degree one. Define $I^\natural(K;\mathbb Z):=H^*(C^\natural(K;\mathbb Z))$ using the analytic construction and independence of choices established in [[lem-instanton-knot-complex-asd-analytic-foundations]]. Write $I^\natural(K;\mathbb Q):=I^\natural(K;\mathbb Z)\otimes_{\mathbb Z}\mathbb Q$. The invariant class specified here is the isomorphism class of this group with its relative grading; the continuation identifications retain the declared overall sign ambiguity.
+Relevant declared Facts:
+(No named supplier use in literal Facts; declared-context edge only at this scope.)
+
+CONSUMER def-khovanov-cobordism-map-up-to-sign
+Supplier edges: def-generic-movie-of-an-oriented-knot-cobordism
+Literal claim:
+Assume countable choice and fix a generic movie $M$ of a smooth oriented surface cobordism $\Sigma$ from an oriented link $L_0$ to an oriented link $L_1$. For each regular frame $D$, let $Kh(D)$ be the normalized integral Khovanov homology group. The empty frame has the one-term complex $\mathbb Z$ in both gradings zero, using the empty resolution and the zero-fold tensor product. Associate to a birth the unit map $\eta:\mathbb Z\to\mathcal A$, $\eta(1)=1$; associate to a death the counit $\epsilon:\mathcal A\to\mathbb Z$, $\epsilon(1)=0,\epsilon(X)=1$; and associate to a saddle the multiplication $m:\mathcal A\otimes\mathcal A\to\mathcal A$ when two resolution circles merge, or the comultiplication $\Delta:\mathcal A\to\mathcal A\otimes\mathcal A$ when one splits. Each local map is tensored with the identity on unaffected circles. Associate to planar isotopy the induced identification of the cube complexes. For Reidemeister moves, use the following fixed Bar-Natan constructions: the kink retractions $F_+=v-\Delta$, $G_+=e$, $F_-=u$, $G_-=w-m$; the two inverse-crossing strong retractions with degree-zero inclusion $(1,ut)^T$ and projection $(1,-se)$, with their specified reverse-order cube signs; and the third-move equivalences obtained by the explicit source- or target-cone retractions onto the common six-point residual complex. Here $u,e$ are circle birth/death, $v,w$ are punctured-torus birth/death, and the saddle letters denote the actual local bands in these constructions. Use their specified inverses for the reversed moves. Insert these formal surface matrices into the fixed planar outside of the diagram, then apply the integral Frobenius cobordism functor. Normalize a state $v$ to cochain degree $|v|-n_-$ and quantum shift $|v|+n_+-2n_-$. Fix the local coordinate identifications and orientation cases once, with the Koszul crossing-order correction $(-1)^{v(a)v(b)}$ when crossings $a,b$ are interchanged. These local maps are chosen once; composing them with an arbitrary automorphism of a complex is not an allowed change of representative. Compose the induced maps on homology in movie order and denote the result by $Kh(M):Kh(L_0)\to Kh(L_1)$, considered modulo multiplication by $-1$. This definition fixes a movie; independence from changing the movie is not included in the definition.
+Relevant declared Facts:
+(No named supplier use in literal Facts; declared-context edge only at this scope.)
+
+CONSUMER def-normalized-colored-jones-sequence
+Supplier edges: def-colored-framed-knot-evaluation-from-ribbon-category, def-quantum-sl2-fundamental-ribbon-module, thm-twist-correction-removes-framing
+Literal claim:
+Let $A$ be an indeterminate, put $q=A^4$, $q_K=A^2$, and $q_L=A^{-2}=q_K^{-1}$, and work over $F=\mathbb Q(A)$. An oriented knot in $S^3$ means a smooth embedded circle with an orientation, considered up to orientation-preserving ambient isotopy. For an integer $r$, put
+$$[r]=\frac{q_K^r-q_K^{-r}}{q_K-q_K^{-1}},\qquad [m]!=\prod_{r=1}^{m}[r]\quad(m\ge1),\qquad [0]!=1.$$
+For each $N\ge1$, put $q_N=\exp(2\pi i/N)$.
+For each integer $N\ge1$, let $V_N$ have basis $v_0,\ldots,v_{N-1}$ and define the $U_{q_L}(\mathfrak{sl}_2)$ action in the library coproduct convention by
+$$K_Lv_j=q_L^{N-1-2j}v_j,\qquad Ev_j=[N-j]v_{j-1},\qquad Fv_j=[j+1]v_{j+1},$$
+where $v_{-1}=v_N=0$. In the universal $R$-matrix formula use $q_K$ and $H v_j=(N-1-2j)v_j$; on $V_N\otimes V_N$ its action is the finite sum
+$$\mathcal R_N=q_K^{H\otimes H/2}\sum_{r=0}^{N-1}q_K^{r(r-1)/2}\frac{(q_K-q_K^{-1})^r}{[r]!}\,E^r\otimes F^r,$$
+and the positive crossing is $c_N=P\mathcal R_N$, where $P(x\otimes y)=y\otimes x$. This is an irreducible module of dimension $N$. Equip these matrices with the Kauffman-bracket half-ribbon data: the twist matrix is the scalar $\theta_N=\lambda_N I$ with $\lambda_N=(-1)^{N-1}A^{N^2-1}$, and the matrix $G_N=(-1)^{N-1}\operatorname{diag}(A^{2(N-1-2j)})_{j=0}^{N-1}$ is the pivotal comparison used in the closure trace. The resulting generic quantum dimension is
+$$d_N=\operatorname{Tr}(G_N)=(-1)^{N-1}\frac{A^{2N}-A^{-2N}}{A^2-A^{-2}}.$$
+Use the contragredient left-dual action $(x\cdot f)(v)=f(S(x)v)$ on $V_N^*$, with evaluation $\operatorname{ev}(f\otimes v)=f(v)$ and coevaluation $1\mapsto\sum_{j=0}^{N-1}v_j\otimes v_j^*$. The ambient category is the $F$-linear category generated by the modules $V_N$ for all $N\ge1$ under finite tensor products, contragredient duals, finite direct sums and images of module-idempotents, whose morphisms are module homomorphisms, and whose tensor-product action is induced by the stated Hopf coproduct; its tensor unit is $F$ with the trivial action, so its tensor-unit endomorphism ring is $F$. These matrix data satisfy the ribbon-category axioms: braiding and inverse braiding, both duality snakes, monoidal pivotal comparison, balancing and dual compatibility of twist. Assume the Axiom of Choice and Countable Choice for the framed-tangle and Markov constructions. An oriented knot $K\subset S^3$ presented as the closure of an $n$-strand braid $\beta$ has generic normalized value
+$$J_N^{\mathrm{gen}}(K;q)=\lambda_N^{-w(\beta)}\frac{\operatorname{Tr}(G_N^{\otimes n}\rho_N(\beta))}{d_N}\in F,$$
+where, for a word $\beta=\sigma_{i_1}^{\varepsilon_1}\cdots\sigma_{i_m}^{\varepsilon_m}$ with $\varepsilon_j\in\{1,-1\}$, $w(\beta):=\sum_{j=1}^m\varepsilon_j$, and $\rho_N(\beta)$ is obtained by replacing each positive braid generator by $c_N$ on the corresponding adjacent tensor factors and each inverse generator by $c_N^{-1}$, then composing in word order. This quotient is an integral Laurent polynomial in $A^4$. Define the **normalized colored Jones sequence** by the unique $J_N(K;q)\in\mathbb Z[q,q^{-1}]$ satisfying $J_N(K;A^4)=J_N^{\mathrm{gen}}(K;A^4)$. Its root value $J_N(K;q_N)$ is obtained by substituting into this Laurent polynomial. The variable transport to the ordinary Jones convention is $t=q^{-1}=A^{-4}$.
+Relevant declared Facts:
+**Given:** An integer $N\ge1$, the Axiom of Choice and Countable Choice, the generic module and matrices from the Definition, an oriented knot $K$, and a braid word $\beta$ whose closure represents $K$.
+
+[F4] For an absolutely simple color with scalar twist $\lambda I$, the generic framed trace corrected by $\lambda^{-w(\beta)}$ is invariant under oriented unframed Markov equivalence, under the stated Axiom of Choice ([[thm-twist-correction-removes-framing]]).
+
+[F5] The framed colored-link value is the ribbon-tangle evaluation in $\operatorname{End}_{\mathcal C}(\mathbf1)$, and a closed braid is evaluated by the pivotal trace of its braid action ([[def-colored-framed-knot-evaluation-from-ribbon-category]]).
+
+CONSUMER def-upsilon-function-from-filtered-complex
+Supplier edges: def-knot-floer-filtration-and-tau
+Literal claim:
+Let $K\subset S^3$ be a smooth oriented knot and $C=\mathrm{CFK}^{\infty}(K)$ a finitely generated free $\mathbb F_2[U,U^{-1}]$ complex. Choose a finite homogeneous basis $\{x_r\}$, with $M(x_r)$ and Alexander filtration $A(x_r)$. The translate $U^k x_r$ has Maslov grading $M(x_r)-2k$ and filtration coordinates $(i,j)=(-k,A(x_r)-k)$. The total homology is $\mathbb F_2[U,U^{-1}]$; use the standard normalization in which its Maslov-zero tower generator first appears at algebraic filtration level $i=0$, and denote it by $\xi_K$.
+
+For $t\in[0,2]$ and a nonzero finite chain $z$, define
+$$ F_t(U^k x_r)=(1-t/2)(-k)+(t/2)(A(x_r)-k),\qquad F_t(z)=\max\{F_t(U^k x_r):U^k x_r\text{ has nonzero coefficient in }z\}. $$
+Let $\mathcal Z_0(C)$ be the set of Maslov-zero cycles representing $\xi_K$. Set
+$$ \nu_t(C)=\min_{z\in\mathcal Z_0(C)}F_t(z),\qquad \Upsilon_K(t)=-2\nu_t(C). $$
+The minimum is over cycles representing the normalized homology generator, not over individual basis terms. For comparison, let $C^-(K)$ be the $\mathbb F_2[U]$-span of the chosen basis and form its $t$-modified complex over the ring $\mathcal R$ of formal sums $\sum_{\alpha\in S}c_\alpha v^\alpha$ whose support $S\subset[0,\infty)$ is well-ordered (every nonempty subset of $S$ has a least element). The coefficient extension uses $U=v^2$. In the extended Laurent complex, $v$ lowers both filtration coordinates by $1/2$ and Maslov grading by one, so a diagonal $U$-translation lowers the extended $t$-grading by two. On arbitrary homogeneous Laurent terms this grading is $M-t(j-i)$; the formula $M-tA$ below is specified on the chosen generators at $i=0$. A homogeneous generator $x$ has $t$-grading $M(x)-tA(x)$, extended by $\operatorname{gr}_t(v^\alpha x)=\operatorname{gr}_t(x)-\alpha$. If a term $U^k y$ occurs in $\partial x$, its $t$-modified differential coefficient is $v^{\operatorname{gr}_t(y)-\operatorname{gr}_t(x)+1}$; thus for $\partial x=\sum_y c_{xy}U^{(M(y)-M(x)+1)/2}y$, define $\partial_t x=\sum_y c_{xy}v^{\operatorname{gr}_t(y)-\operatorname{gr}_t(x)+1}y$. This differential lowers $t$-grading by one. The comparison between its non-torsion tower grading and the finite cycle minimum is the separate filtered tower-splitting claim.
+Relevant declared Facts:
+**Given:** A finitely generated free bifiltered knot Floer complex $C$ whose total homology has a normalized Maslov-zero generator, as stated in the definition.
+
+[A1] [[def-knot-floer-filtration-and-tau]]: the current supplier defines a diagram-specific hat threshold but explicitly defers diagram/surface independence; the exact normalized CFK∞ model and filtration-coordinate comparison remain unresolved.
+
+CONSUMER ex-knot-kt-36-worked-cases
+Supplier edges: lem-quantum-sl2-ribbon-trace-matches-hecke-and-bracket, thm-bracket-state-sum-matches-library-jones-specialization
+Literal claim:
+
+Relevant declared Facts:
+**Given:** The admissible generic color matrices, their normalization from the preceding definition, and the positive two-strand braid $\sigma_1^3$; for the general fundamental-color identity, assume the Axiom of Choice and Countable Choice.
+
+[F2] For the fundamental ribbon color and any blackboard-framed braid closure, the ribbon trace satisfies $t_n(\beta)=\delta\langle\widehat\beta\rangle$, with $\delta=-A^2-A^{-2}$ and twist scalar $-A^3$; this statement assumes Countable Choice ([[lem-quantum-sl2-ribbon-trace-matches-hecke-and-bracket]]).
+
+[F3] Under the Axiom of Choice, the library Jones polynomial satisfies $V_K(t)=f_K(t^{-1/4})$, where $f_K$ is the writhe-normalized Kauffman bracket and $t=A^{-4}$ ([[thm-bracket-state-sum-matches-library-jones-specialization]]).
+
+CONSUMER ex-knot-kt-38-worked-cases
+Supplier edges: def-knot-floer-filtration-and-tau
+Literal claim:
+
+Relevant declared Facts:
+**Given:** $\mathrm{AC}_\omega$, the crossingless unknot, the standard positive trefoil diagram, and the stated Whitehead-double twist convention.
+
+CONSUMER ex-knot-kt-42-worked-cases
+Supplier edges: def-knot-floer-filtration-and-tau
+Literal claim:
+
+Relevant declared Facts:
+**Given:** The displayed staircase complex, the epsilon map convention, and the Upsilon cycle-minimax definition.
+
+[A2] [[def-knot-floer-filtration-and-tau]]: the current tau threshold is defined for specified Heegaard data; its identification with the filtered complex used in this example is conditional on the unresolved model comparison.
+
+CONSUMER ex-knot-kt-44-worked-cases
+Supplier edges: alg-khovanov-chain-complex-from-diagram, def-khovanov-frobenius-algebra-and-cube-of-resolutions, def-reduced-khovanov-cohomology-of-a-knot, lem-khovanov-cube-differential-squares-to-zero
+Literal claim:
+
+Relevant declared Facts:
+**Given:** The crossingless based unknot and the based closure diagram of $\sigma_1^{-3}$ described above.
+
+[F1] The unreduced circle algebra is $\mathcal A=\mathbb Z[X]/(X^2)$ with basis $1,X$, multiplication $m$, and comultiplication $\Delta(1)=1\otimes X+X\otimes1$, $\Delta(X)=X\otimes X$; its edge maps carry the ordered-cube signs $(-1)^{\sum_{i<j}v_i}$ ([[def-khovanov-frobenius-algebra-and-cube-of-resolutions]], Definition).
+
+[F2] For a diagram with $n_-$ negative crossings, a state $v$ lies in cohomological degree $|v|-n_-$, and an edge from $v$ to $v+e_j$ uses $m$ for a merge and $\Delta$ for a split, with that cube sign ([[alg-khovanov-chain-complex-from-diagram]], Definition).
+
+[F3] In the reduced quotient the based circle factor is $M=\mathbb Z\{1\}$ with $X\cdot1=0$; an unbased circle retains the factor $\mathcal A$ ([[def-reduced-khovanov-cohomology-of-a-knot]], Definition).
+
+[F4] The signed cube maps form a cochain complex ([[lem-khovanov-cube-differential-squares-to-zero]], Statement).
+
+CONSUMER lem-barnatan-carter-saito-movie-moves-up-to-sign
+Supplier edges: def-generic-movie-of-an-oriented-knot-cobordism
+Literal claim:
+Assume countable choice. For each Carter–Saito movie move, the two movie segments have the same incoming and outgoing oriented link diagrams and represent isotopic portions of an oriented surface cobordism relative to their boundary collars. The induced maps on the integral even Khovanov homology groups of those diagrams differ by multiplication by a single overall sign. The same conclusion holds when two disjoint critical points of the height function are interchanged.
+Relevant declared Facts:
+**Given:** Countable choice and either one of the fifteen Euclidean local movie relations in a fixed planar outside, or an interchange of two disjoint surface-height critical events. Work first in the additive formal surface category and apply the closed-surface functor only after inserting the outside.
+
+CONSUMER lem-colored-jones-generic-quotient-is-laurent
+Supplier edges: def-colored-framed-knot-evaluation-from-ribbon-category
+Literal claim:
+Assume the Axiom of Choice and Countable Choice. For every integer $N\ge1$ and every finite braid word $\beta$ on $b\ge1$ strands whose closure is a knot, the normalized generic quotient
+$$\lambda_N^{-w(\beta)}\frac{\operatorname{Tr}(G_N^{\otimes b}\rho_N(\beta))}{d_N}$$
+belongs to $\mathbb Z[A^4,A^{-4}]$. Consequently there is a unique $J_N(K;q)\in\mathbb Z[q,q^{-1}]$ whose substitution $q=A^4$ equals that quotient. It is independent of the braid representative, has $J_N(\bigcirc;q)=1$, and agrees with the normalized colored Jones convention of Murakami’s explicit matrix definition in the variable $q$. Its value at every nonzero complex $q$, in particular $q_N=e^{2\pi i/N}$, means evaluation of this Laurent polynomial; it never means division by the specialized quantum dimension.
+Relevant declared Facts:
+**Given:** Integers $N\ge1$, $b\ge1$, the knot-closing braid word $\beta$, and the two choice assumptions.
+
+[F3] Under Countable Choice a colored framed tangle is evaluated by its ribbon matrices; compositions, tensor products and closures agree with their corresponding contractions ([[def-colored-framed-knot-evaluation-from-ribbon-category]], [[thm-a-ribbon-object-defines-a-unique-framed-tangle-evaluation-functor]], [[lem-ribbon-trace-equals-the-framed-closure-evaluation]]). Absolute simplicity says that every color endomorphism is a scalar ([[def-absolutely-simple-object]]).
+
+CONSUMER lem-epsilon-stable-equivalence-and-not-a-homomorphism
+Supplier edges: def-coprime-torus-knot, def-knot-floer-filtration-and-tau, thm-valid-code-reconstructs-the-declared-link-diagram
+Literal claim:
+Let $K$ and $J$ be smooth oriented knots, and use the epsilon sign convention from the preceding definition. If their knot Floer complexes are stably filtered equivalent, meaning that there are totally acyclic bifiltered complexes $A$ and $B$ with $\mathrm{CFK}^{\infty}(K)\oplus A$ filtered-chain-homotopy equivalent to $\mathrm{CFK}^{\infty}(J)\oplus B$, then $\epsilon(K)=\epsilon(J)$. The acyclic summands here need not be acyclic after taking either associated-graded filtration.
+
+The invariant satisfies $\epsilon(-K)=-\epsilon(K)$, $\epsilon(K)=0\Rightarrow\tau(K)=0$, and the tensor rules
+$$ \epsilon(K)=\epsilon(J)\Rightarrow\epsilon(K\#J)=\epsilon(K),\qquad \epsilon(K)=0\Rightarrow\epsilon(K\#J)=\epsilon(J). $$
+The converse of $\epsilon(K)=0\Rightarrow\tau(K)=0$ fails: the knot $T_{2,5}\#-T_{4,5}\#T_{2,3;2,5}$ has $\tau=0$ and $\epsilon=1$, where $T_{p,q}$ is the positive $(p,q)$ torus knot and $T_{2,3;2,5}$ is the $(2,5)$ cable of the right-handed trefoil with longitudinal winding two. Epsilon is not an integer-valued homomorphism on the smooth concordance group: the right-handed trefoil has $\epsilon=1$ and its connected sum with itself also has $\epsilon=1$, not $2$.
+Relevant declared Facts:
+**Given:** The actual normalized finite free Maslov-graded bifiltered complexes of the knots, with the supplied geometric tensor and duality identifications. Every newly used finite operation below is over $\mathbb F_2$.
+
+[F6] [[thm-valid-code-reconstructs-the-declared-link-diagram]] identifies oriented decorated diagrams with the same signed rotation/strand code. [[def-coprime-torus-knot]] fixes the positive Clifford-torus convention. The previously admitted positive trefoil five-grid with $O=[4,3,2,1,0]$, $X=[2,1,0,4,3]$ and writhe $+3$ is reused as geometric input; its admission is not checked again here.
+
+CONSUMER lem-instanton-knot-complex-asd-analytic-foundations
+Supplier edges: def-knot-exterior, def-knot-meridian-and-preferred-longitude
+Literal claim:
+Assume full AC and fix a smooth based knot $K\subset S^3$ with the earring and admissible singular bundle data of the preceding definitions. For regular perturbation data, the perturbed Chern–Simons critical points and finite-energy singular anti-self-dual trajectories define a finite free cochain complex $C^\natural(K;\mathbb Z)$ with differential $d$ satisfying $d^2=0$. Its homology is independent of the chosen regular metric and perturbation up to the declared overall sign and is invariant under isotopy of the based knot data.
+Relevant declared Facts:
+(No named supplier use in literal Facts; declared-context edge only at this scope.)
+
+CONSUMER lem-kh-to-instanton-resolution-spectral-sequence
+Supplier edges: def-khovanov-frobenius-algebra-and-cube-of-resolutions, def-reduced-khovanov-cohomology-of-a-knot, lem-khovanov-cube-differential-squares-to-zero
+Literal claim:
+Assume full AC. Let $D$ be a finite based diagram of a smooth knot $K\subset S^3$ with ordered crossings $c_1<\cdots<c_n$. The singular instanton resolution complex admits a finite filtration whose first page, with its first differential, is isomorphic to the reduced Khovanov cube of the reflected based diagram $\overline D$. Its spectral sequence converges to $I^\natural(K;\mathbb Z)$. The cube sign at the edge changing $c_j$ is $(-1)^{\sum_{i<j}v_i}$, and the edge operation is multiplication for a merge or comultiplication for a split. Thus its $E_2$ page is the reduced integral Khovanov cohomology of $\overline D$. The claim includes coherent instanton orientations and the unlink group and saddle-map identifications; it asserts no diagram-invariance of intermediate pages.
+Relevant declared Facts:
+[F5] The reduced Frobenius cube convention is [[def-khovanov-frobenius-algebra-and-cube-of-resolutions]] and [[def-reduced-khovanov-cohomology-of-a-knot]]. Its signed differential is checked in [[lem-khovanov-cube-differential-squares-to-zero]]. The finite-filtration spectral sequence is [[thm-bounded-filtered-complex-spectral-sequence-abuts-to-filtered-homology]].
+
+CONSUMER lem-knot-floer-duality-and-filtration-swap
+Supplier edges: def-knot-floer-filtration-and-tau
+Literal claim:
+Let $K\subset S^3$ be a smooth oriented knot and let $C(K)=\mathrm{CFK}^{\infty}(K)$ be its normalized bifiltered complex over $\mathbb F_2[U,U^{-1}]$. The complex of the reverse mirror $-K$ is filtered-chain-homotopy equivalent to the dual complex $C(K)^*=\operatorname{Hom}_{\mathbb F_2[U,U^{-1}]}(C(K),\mathbb F_2[U,U^{-1}])$, with dual differential $d\phi(x)=\phi(\partial x)$ and dual basis elements at negated bifiltration coordinates. There is also a Maslov-graded filtered-chain-homotopy equivalence from $C(K)$ to the complex obtained by exchanging the algebraic and Alexander filtrations. These are distinct symmetries: duality negates both filtration coordinates, while conjugation exchanges them.
+Relevant declared Facts:
+**Given:** The smooth oriented knot, its normalized complex, and the ACω disk-count branch stated in the frontmatter. All coefficient modules below use $\mathbb F_2$.
+
+CONSUMER lem-knot-kt41-whitehead-double-values
+Supplier edges: lem-khovanov-cube-differential-squares-to-zero, lem-lee-cobordism-filtration-genus-bound, lem-lee-filtered-spectral-sequence-and-two-orientation-classes, thm-rasmussen-s-bounds-smooth-four-ball-genus
+Literal claim:
+Assume the Axiom of Countable Choice. Let $D_+(T_{2,3},2)$ be the positive-clasped Whitehead double of the right-handed trefoil with two full twists in the clasp, using the twist convention of Hedden and Ording. The normalized knot Floer threshold and Rasmussen invariant satisfy
+$$\tau(D_+(T_{2,3},2))=0,\qquad s(D_+(T_{2,3},2))=2.$$
+Relevant declared Facts:
+**Given:** The Axiom of Countable Choice, the specified positive-clasped two-twisted Whitehead double, and the source's twist convention.
+
+[L2] [[thm-rasmussen-s-bounds-smooth-four-ball-genus]] states the smooth genus bound used in the source to choose the value $s=2$ from the Khovanov calculation's alternatives, for actual embedded smooth surfaces; the bound alone does not compute the finite Khovanov groups, whose calculation is now supplied by [F3].
+
+[L3] [[lem-lee-cobordism-filtration-genus-bound]] is the exact Lee-cobordism input required by [L2]; its smooth surface is required to be properly embedded in $S^3\times[0,1]$ with product collars.
+
+CONSUMER lem-smooth-link-cobordisms-admit-finite-generic-movies
+Supplier edges: def-locally-flat-proper-surface-and-concordance-collars
+Literal claim:
+Assume countable choice. Let $S\subset S^3\times[0,1]$ be a compact smooth properly embedded oriented surface, with product collars and boundary the finite oriented links $-L_0$ and $L_1$ in the two ends. Components of $S$ and either boundary link may be empty. After an ambient isotopy fixed on smaller prescribed end collars, $S$ has a finite movie consisting of planar isotopies, oriented Reidemeister moves R1, R2 and R3, births, oriented saddle band moves, and deaths. All exceptional times are distinct. The movie's actual smoothly embedded trace is ambient isotopic to the given $S$ relative to those collars, with its boundary orientations and parametrizations retained. Prescribed regular endpoint diagrams may be retained. This is movie existence; it asserts no equivalence theorem for two movies.
+Relevant declared Facts:
+**Given:** Countable choice, the compact collared smooth surface $S$, and any prescribed regular endpoint diagrams.
+
+CONSUMER op-kashaev-volume-conjecture-for-hyperbolic-knots
+Supplier edges: def-finite-volume-hyperbolic-knot-exterior
+Literal claim:
+
+Relevant declared Facts:
+(No named supplier use in literal Facts; declared-context edge only at this scope.)
+
+CONSUMER thm-carter-saito-movie-move-equivalence
+Supplier edges: def-generic-movie-of-an-oriented-knot-cobordism
+Literal claim:
+Assume countable choice. Let $\Sigma_0,\Sigma_1\subset S^3\times[0,1]$ be compact smooth properly embedded oriented surfaces from fixed oriented knots $K_0$ to $K_1$, with the same boundary parametrizations and product collars. Suppose their generic movies represent ambient isotopic cobordisms by an isotopy fixed on those collars. Then one movie can be changed to the other by a finite sequence of the fifteen Carter–Saito movie moves, sweep-around moves, and interchanges of two disjoint elementary movie events (including disjoint critical points of the surface-height function). A sweep-around moves a closing arc of a one-interval tangle over the tangle to its other side and back underneath, or reverses that movie; geometrically it is a local sheet passage through the missing vertical arc in a spatial chart $S^3\setminus\{\infty\}$. Every intermediate movie represents a generic surface cobordism with the same fixed boundary data.
+Relevant declared Facts:
+**Given:** Countable choice, the two fixed-boundary generic movies and the stated ambient isotopy of their oriented traced cobordisms in $S^3\times I$.
+
+[F1] [[def-generic-movie-of-an-oriented-knot-cobordism]] supplies traced movies, their actual orientations, parametrized boundary and product collars.
+
+CONSUMER thm-colored-jones-finite-evaluation
+Supplier edges: def-colored-framed-knot-evaluation-from-ribbon-category, thm-twist-correction-removes-framing
+Literal claim:
+Assume the Axiom of Choice and the prescribed generic matrix ribbon data for the $N$-dimensional color, where $N\ge1$. For every finite braid word $\beta$ on $n\ge1$ strands whose closure is a knot, the algorithm performs finitely many exact operations, including exactly one crossing-matrix update per letter and one finite pivotal-trace contraction, and returns the generic normalized value $J_N^{\mathrm{gen}}(\widehat\beta;q)$. If two such braid words close to the same oriented unframed knot, their returned generic values agree. The unique Laurent representative belongs to $\mathbb Z[q,q^{-1}]$, and its evaluation at any nonzero complex $q$ is defined, including at $q_N=e^{2\pi i/N}$.
+Relevant declared Facts:
+**Given:** The Axiom of Choice, an integer $N\ge1$, the prescribed generic matrix ribbon data, a finite braid word $\beta$ of length $m$ on $n\ge1$ strands, and a knot closure.
+
+[F4] For an absolutely simple color with scalar twist $\lambda I$, the corrected framed trace $\lambda^{-w(\beta)}t_n(\beta)$ is invariant under conjugation and both Markov stabilizations when the Axiom of Choice is assumed ([[thm-twist-correction-removes-framing]]).
+
+[F5] The framed ribbon-tangle evaluator is defined under Countable Choice ([[def-colored-framed-knot-evaluation-from-ribbon-category]]).
+
+CONSUMER thm-epsilon-upsilon-are-concordance-homomorphism-data
+Supplier edges: def-knot-floer-filtration-and-tau
+Literal claim:
+Let $\mathcal C_{\mathrm{sm}}$ be the smooth knot concordance group, with addition induced by oriented connected sum and inverse represented by reverse mirror. The function $\epsilon: \mathcal C_{\mathrm{sm}}\to\{-1,0,1\}$ is well-defined and concordance-invariant, but it is not a homomorphism to $\mathbb Z$. The map
+$$ \Upsilon:\mathcal C_{\mathrm{sm}}\longrightarrow \mathrm{PL}([0,2],\mathbb R),\qquad [K]\longmapsto\Upsilon_K, $$
+is a group homomorphism, where $\mathrm{PL}([0,2],\mathbb R)$ is the abelian group of continuous piecewise-linear real-valued functions under pointwise addition. For every representative $K$ and $0\le t\le1$, its value satisfies $|\Upsilon_K(t)|\le t\,g_4^{\mathrm{sm}}(K)$.
+Relevant declared Facts:
+**Given:** The smooth concordance group, the epsilon invariant, the Upsilon function, and the smooth four-ball genus with the conventions stated above.
+
+CONSUMER thm-gordon-luecke-knot-complement-determines-knot
+Supplier edges: lem-meridian-preserving-torus-homeomorphism-extends-over-solid-torus
+Literal claim:
+Assume the Axiom of Choice. Let $K,K'\subset S^3$ be smooth knots with chosen compact exteriors $E_K,E_{K'}$, and let $h:E_K\to E_{K'}$ be a homeomorphism. Exactly one of $K,K'$ cannot be the unknot. If both are unknotted, they are ambiently equivalent, but this particular $h$ need not preserve their knot-meridian slopes. If both are nontrivial, $h(\mu_K)$ is carried to $\mu_{K'}$ by an isotopy through homeomorphisms of the boundary torus, and $h$ extends across their tubular solid tori to a homeomorphism of pairs $(S^3,K)\to(S^3,K')$; that extension preserves ambient orientation when $h$ preserves orientation and reverses it when $h$ reverses orientation.
+Relevant declared Facts:
+**Given:** Full AC, two smooth knots in $S^3$, chosen compact exteriors, and a homeomorphism between those exteriors.
+
+[F3] A boundary homeomorphism of solid tori whose image meridian is ambiently isotopic to the target meridian extends over the solid tori carrying core to core and with the same orientation sign. [[lem-meridian-preserving-torus-homeomorphism-extends-over-solid-torus]]
+
+CONSUMER thm-grid-upsilon-equals-oss-upsilon
+Supplier edges: def-knot-floer-filtration-and-tau
+Literal claim:
+Let $G$ be any $n\times n$ grid diagram representing a smooth oriented knot $K\subset S^3$. Form the diagonal grid complex by setting every marking variable $U_i$ equal to a single variable $U$, and define $\Upsilon_G(t)$ by the t-modified non-torsion grading on that complex for $0\le t\le1$, extended by $\Upsilon_G(t)=\Upsilon_G(2-t)$ for $1<t\le2$. Then for every $t\in[0,2]$,
+$$ \Upsilon_G(t)=\Upsilon_K(t), $$
+where $\Upsilon_K$ is the finite cycle-minimax invariant defined from $\mathrm{CFK}^{\infty}(K)$. In this statement the quotient with all $U_i$ identified carries the factor $W^{\otimes(n-1)}$, where $W$ has generators in Maslov/Alexander bidegrees $(0,0)$ and $(-1,-1)$; this factor is retained in the proof and is not counted as an improvement to the grid-state complexity bound.
+Relevant declared Facts:
+**Given:** A knot grid $G$ with grid number $n$, its full filtered grid complex, the diagonal quotient, and the two Upsilon conventions just defined.
+
+CONSUMER thm-khovanov-to-instanton-spectral-sequence
+Supplier edges: def-reduced-khovanov-cohomology-of-a-knot, thm-reduced-khovanov-basepoint-and-reidemeister-invariance
+Literal claim:
+Assume full AC. For every smooth knot $K\subset S^3$, there is a finite spectral sequence of abelian groups whose $E_2$ page, after forgetting the Khovanov bigrading, is $\widetilde{Kh}(\overline K;\mathbb Z)$ and which converges to $I^\natural(K;\mathbb Z)$. The intermediate pages are not asserted to be knot invariants.
+Relevant declared Facts:
+**Given:** Full AC, a smooth knot $K\subset S^3$, and any finite based regular diagram $D$ of $K$.
+
+[F2] Under AC$_\omega$, the reduced integral groups of based diagrams of the same oriented knot are isomorphic, and transport of the basepoint along the knot preserves the groups ([[thm-reduced-khovanov-basepoint-and-reidemeister-invariance]], Statement).
+
+CONSUMER thm-smooth-concordance-implies-stable-filtered-knot-floer-equivalence
+Supplier edges: def-knot-floer-filtration-and-tau
+Literal claim:
+Let $K,J\subset S^3$ be smooth oriented knots that cobound a smooth properly embedded annulus in $S^3\times[0,1]$. Then there are finite-rank free $\mathbb F_2[U,U^{-1}]$ bifiltered chain complexes $A$ and $B$ with zero total homology such that
+$$ \mathrm{CFK}^{\infty}(K)\oplus A\simeq\mathrm{CFK}^{\infty}(J)\oplus B, $$
+where $\simeq$ denotes a Maslov-graded chain homotopy equivalence whose maps and chain homotopies do not increase either filtration. The complexes $A$ and $B$ are acyclic after the filtrations are forgotten; they need not be acyclic in either associated-graded complex.
+Relevant declared Facts:
+**Given:** A smooth annulus concordance from $K$ to $J$, the filtered connected-sum tensor convention, and the normalized knot Floer complex of each boundary knot.
+
+CONSUMER thm-sutured-instanton-khi-rank-detects-unknot
+Supplier edges: def-knot-exterior, def-knot-meridian-and-preferred-longitude, thm-knot-exterior-homology-and-longitude
+Literal claim:
+Assume full AC. For every smooth knot $K\subset S^3$, the rational sutured instanton knot homology $KHI(K;\mathbb Q)$ is finite-dimensional and has dimension at least one; it has dimension one if and only if $K$ is the unknot. Moreover, excision gives an isomorphism $I^\natural(K;\mathbb Q)\cong KHI(K;\mathbb Q)$.
+Relevant declared Facts:
+**Given:** Full AC, a smooth classical knot $K\subset S^3$, its two oppositely oriented meridional sutures, and the chosen admissible closure from the preceding definition. Remaining established gauge-theoretic inputs below are explicitly imported under the run-specific permission in CLAUDE.md §12, not claimed as locally reconstructed proofs.
+
+CONSUMER thm-tau-is-concordance-invariant-and-four-ball-genus-bound
+Supplier edges: lem-puncturing-smooth-four-ball-surfaces-gives-genus-preserving-knot-cobordisms
+Literal claim:
+Assume the Axiom of Countable Choice. For every smooth oriented knot $K$ in the standard oriented three-sphere, the common normalized filtered knot Floer threshold $\tau(K)$ is independent of the admissible diagram and is invariant under smooth concordance. For all smooth oriented knots $K,J$, it satisfies
+$$\tau(K\#J)=\tau(K)+\tau(J).$$
+If $g_4^{\mathrm{sm}}(K)$ is the minimum genus of a smooth compact connected oriented properly embedded surface in the four-ball with boundary $K$, then
+$$|\tau(K)|\le g_4^{\mathrm{sm}}(K).$$
+Relevant declared Facts:
+**Given:** The Axiom of Countable Choice, smooth oriented knots, and the standard normalized filtered knot Floer models.
+
+[F3] [[lem-puncturing-smooth-four-ball-surfaces-gives-genus-preserving-knot-cobordisms]] moves an interior point of a smooth properly embedded genus-$g$ four-ball surface to zero, flattens it near zero by supported ambient isotopies, and removes a sufficiently small actual round ball. The explicitly concentric shell is $S^3\times[0,1]$ and the residual surface is a connected genus-$g$ smooth cobordism with product collars between its boundary knot and a standard unknot. It fixes a sufficiently small restriction of the supplied outer collar, not an arbitrary entire collar.
+
+CONSUMER thm-upsilon-additivity-mirror-and-genus-bound
+Supplier edges: def-knot-floer-filtration-and-tau
+Literal claim:
+For every smooth oriented knot $K\subset S^3$, the function $\Upsilon_K:[0,2]\to\mathbb R$ defined by the finite cycle minimax is continuous and piecewise linear with finitely many breakpoints, satisfies $\Upsilon_K(0)=0$ and $\Upsilon_K(t)=\Upsilon_K(2-t)$, and has right derivative $\Upsilon'_K(0+)=-\tau(K)$. For smooth oriented knots $K,J$ and $t\in[0,2]$,
+$$ \Upsilon_{K\#J}(t)=\Upsilon_K(t)+\Upsilon_J(t),\qquad \Upsilon_{-K}(t)=-\Upsilon_K(t), $$
+where $-K$ is the reverse mirror, the inverse under connected sum in the smooth concordance group. If $g_4^{\mathrm{sm}}(K)$ is the minimum genus of a smooth properly embedded compact connected oriented surface in the four-ball with boundary $K$, then
+$$ |\Upsilon_K(t)|\le t\,g_4^{\mathrm{sm}}(K)\qquad(0\le t\le1). $$
+Relevant declared Facts:
+**Given:** A smooth oriented knot Floer complex with its finite bifiltered basis, normalized Maslov-zero total-homology generator, and the $F_t$ cycle-minimax convention.
+
+[F6] The supplied normalized doubly pointed polynomial complex $B=C\{i\le0\}$ has quotient $B/UB$ equal to the ordinary normalized hat model, whose total homology is $\mathbb F_2$ in degree zero. The differential retains every positive $z$ multiplicity as filtration. These are the accepted marked-variable/analytic knot interfaces, not arbitrary-link or cobordism assertions. [[def-knot-floer-filtration-and-tau]], [[thm-grid-homology-independent-of-grid-and-equals-knot-floer]], [[lem-heegaard-floer-holomorphic-disk-regularity-compactness-gluing]]

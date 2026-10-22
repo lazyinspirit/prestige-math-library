@@ -1,0 +1,403 @@
+[
+  {
+    "order": 3064,
+    "id": "compressed-sensing-with-noise-and-model-selection",
+    "kind": "A",
+    "category": "inverse-problems",
+    "title": "Stable compressed sensing with noise",
+    "companion": "compressed-sensing-with-noise-and-model-selection-examples",
+    "requires": [
+      "sparse-recovery-and-nullspace-certificates",
+      "operator-splitting-admm-and-primal-dual-methods"
+    ],
+    "items": [
+      {
+        "id": "lem-ip-bpdn-dual-certificates",
+        "kind": "lemma",
+        "title": "Primal and infeasibility certificates for basis pursuit denoising",
+        "deps": [
+          "def-p-norms-on-rn",
+          "def-euclidean-inner-product",
+          "def-adjoint-of-a-linear-map-between-inner-product-spaces",
+          "thm-adjoint-exists-and-is-unique-in-finite-dimension",
+          "thm-cauchy-schwarz-and-the-euclidean-norm",
+          "def-fenchel-conjugate-on-finite-dimensional-euclidean-space",
+          "lem-finite-sum-laws",
+          "lem-p-norms-are-norms-and-induce-the-published-metrics"
+        ],
+        "dependency_level": 0,
+        "statement": "Let $m,n\\in\\mathbb N$ with $m,n\\ge1$, let $A\\in\\mathbb R^{m\\times n}$ act by matrix multiplication in the standard finite coordinate bases, with row and column labels $1$ through their dimensions corresponding to library coordinates $0$ through one less, let $y\\in\\mathbb R^m$, and let $\\epsilon\\ge0$. Define $g:\\mathbb R^m\\to\\{0,+\\infty\\}$ by $g(u)=0$ when $\\|u-y\\|_2\\le\\epsilon$ and $g(u)=+\\infty$ otherwise. For $p\\in\\mathbb R^m$, define $g^*(p):=\\sup_{u\\in\\mathbb R^m}\\{\\langle p,u\\rangle-g(u)\\}$. Then\n$$g^*(p)=\\langle p,y\\rangle+\\epsilon\\|p\\|_2\\qquad(p\\in\\mathbb R^m).$$\nLet $A^*:\\mathbb R^m\\to\\mathbb R^n$ be the Euclidean adjoint, characterized by $\\langle A^*p,z\\rangle=\\langle p,Az\\rangle$ for all $p,z$. If $x\\in\\mathbb R^n$ satisfies $\\|Ax-y\\|_2\\le\\epsilon$ and a vector $p\\in\\mathbb R^m$ satisfies $\\|A^*p\\|_\\infty\\le1$ and\n$$\\|x\\|_1=-\\langle p,y\\rangle-\\epsilon\\|p\\|_2,$$\nthen $x$ minimizes $\\|z\\|_1$ over that residual ball. If instead $p\\ne0$, $A^*p=0$, and $|\\langle p,y\\rangle|>\\epsilon\\|p\\|_2$, then the residual ball is disjoint from the range of $A$.",
+        "sources": {
+          "scraped": [],
+          "references": [
+            {
+              "title": "Antonin Chambolle and Thomas Pock, A First-Order Primal-Dual Algorithm for Convex Problems with Applications to Imaging, §2",
+              "url": "https://optimization-online.org/wp-content/uploads/2010/06/2646.pdf"
+            },
+            {
+              "title": "Simon Foucart and Holger Rauhut, A Mathematical Introduction to Compressive Sensing, §4.3",
+              "url": "https://www.mat.uniroma2.it/~speleers/cime2024/material/book_rauhut.pdf"
+            }
+          ]
+        },
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-generated"
+        },
+        "proof_strategy": "direct"
+      },
+      {
+        "id": "lem-ip-bpdn-objectives-proper-closed-convex",
+        "kind": "lemma",
+        "title": "The basis-pursuit denoising objective and residual indicator are proper closed convex",
+        "deps": [
+          "def-p-norms-on-rn",
+          "lem-p-norms-are-norms-and-induce-the-published-metrics",
+          "lem-every-norm-on-rn-is-continuous-for-the-euclidean-metric",
+          "def-euclidean-inner-product",
+          "def-proper-closed-convex-function-on-rn",
+          "def-convex-and-strictly-convex-functionals-on-a-banach-space",
+          "def-convex-subset-of-euclidean-space",
+          "def-indicator-function-of-closed-convex-set",
+          "def-canonical-natural",
+          "lem-of-naturals-positive",
+          "lem-finite-sum-laws",
+          "lem-of-square-monotone"
+        ],
+        "dependency_level": 0,
+        "statement": "Let $m,n\\in\\mathbb N$ with $m,n\\ge1$, let $y\\in\\mathbb R^m$, and let $\\epsilon\\ge0$. Define $f:\\mathbb R^n\\to\\mathbb R$ by $f(x)=\\|x\\|_1$, and define $g:\\mathbb R^m\\to(-\\infty,+\\infty]$ by $g(u)=0$ when $\\|u-y\\|_2\\le\\epsilon$ and $g(u)=+\\infty$ otherwise. Then $f$ and $g$ are proper (finite somewhere), closed (their epigraphs are closed), and convex (they satisfy the extended-real convex-combination inequality) on their respective finite-dimensional Euclidean spaces.",
+        "sources": {
+          "scraped": [],
+          "references": [
+            {
+              "title": "Antonin Chambolle and Thomas Pock, A First-Order Primal-Dual Algorithm for Convex Problems with Applications to Imaging, §2",
+              "url": "https://optimization-online.org/wp-content/uploads/2010/06/2646.pdf"
+            }
+          ]
+        },
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-generated"
+        },
+        "proof_strategy": "direct"
+      },
+      {
+        "id": "def-ip-best-s-term-l1-error",
+        "kind": "definition",
+        "title": "Best s-term ℓ1 approximation error",
+        "deps": [
+          "def-ip-nullspace-property",
+          "def-p-norms-on-rn",
+          "def-max-min",
+          "lem-finite-set-has-max"
+        ],
+        "dependency_level": 1,
+        "statement": "Let $n,s\\in\\mathbb N$ with $n\\ge1$ and $1\\le s\\le n$, and let $x\\in\\mathbb R^n$. Use one-based labels $[n]=\\{1,\\ldots,n\\}$, identifying label $j$ with library coordinate $j-1$. For $T\\subseteq[n]$, let $x_{T^c}$ retain the coordinates outside $T$ and vanish on $T$, where $T^c=[n]\\setminus T$. Define the best $s$-term $\\ell^1$ approximation error by\n$$\\sigma_s(x)_1:=\\min\\{\\|x_{T^c}\\|_1:T\\subseteq[n],\\ |T|\\le s\\}.$$\nThe indexing family is finite and nonempty, so the displayed minimum exists and is attained.",
+        "sources": {
+          "scraped": [],
+          "references": [
+            {
+              "title": "Simon Foucart and Holger Rauhut, A Mathematical Introduction to Compressive Sensing, §2.1 Definition 2.2 and §4.3",
+              "url": "https://www.mat.uniroma2.it/~speleers/cime2024/material/book_rauhut.pdf"
+            },
+            {
+              "title": "Shahar Mendelson, Holger Rauhut, and Rachel Ward, Improved Bounds for Sparse Recovery from Subsampled Random Convolutions, §2.1",
+              "url": "https://www.mathc.rwth-aachen.de/~rauhut/files/circulant-independent.pdf"
+            }
+          ]
+        },
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "not-applicable"
+        }
+      },
+      {
+        "id": "def-ip-robust-nullspace-property",
+        "kind": "definition",
+        "title": "The ℓ2 robust nullspace property",
+        "deps": [
+          "def-ip-nullspace-property",
+          "def-p-norms-on-rn",
+          "def-canonical-natural",
+          "lem-of-naturals-positive"
+        ],
+        "dependency_level": 1,
+        "statement": "Let $m,n,s\\in\\mathbb N$ with $m,n\\ge1$ and $1\\le s\\le n$, let $A\\in\\mathbb R^{m\\times n}$, and let $0<\\rho<1$ and $\\tau>0$. In real scalar expressions, a natural number denotes its canonical real image. Use one-based coordinate labels $[n]=\\{1,\\ldots,n\\}$, identifying coordinate label $j$ with library coordinate $j-1$. For $h\\in\\mathbb R^n$ and $S\\subseteq[n]$, let $h_S$ agree with $h$ on $S$ and vanish on $S^c=[n]\\setminus S$. The matrix $A$ satisfies the **$\\ell^2$ robust nullspace property of order $s$ with constants $(\\rho,\\tau)$** if\n$$\\|h_S\\|_2\\le \\frac{\\rho}{\\sqrt{s}}\\|h_{S^c}\\|_1+\\tau\\|Ah\\|_2$$\nfor every $h\\in\\mathbb R^n$ and every $S\\subseteq[n]$ with $|S|\\le s$. This condition applies to all vectors, including vectors with $Ah\\ne0$.",
+        "sources": {
+          "scraped": [],
+          "references": [
+            {
+              "title": "Shahar Mendelson, Holger Rauhut, and Rachel Ward, Improved Bounds for Sparse Recovery from Subsampled Random Convolutions, §2.1 Definition 2.1",
+              "url": "https://www.mathc.rwth-aachen.de/~rauhut/files/circulant-independent.pdf"
+            },
+            {
+              "title": "Simon Foucart and Holger Rauhut, A Mathematical Introduction to Compressive Sensing, §4.3",
+              "url": "https://www.mat.uniroma2.it/~speleers/cime2024/material/book_rauhut.pdf"
+            }
+          ]
+        },
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "not-applicable"
+        }
+      },
+      {
+        "id": "lem-ip-bpdn-minimizer-exists",
+        "kind": "lemma",
+        "title": "A feasible finite-dimensional BPDN problem attains its minimum",
+        "deps": [
+          "def-ip-nullspace-property",
+          "def-p-norms-on-rn",
+          "lem-p-norms-are-norms-and-induce-the-published-metrics",
+          "lem-every-norm-on-rn-is-continuous-for-the-euclidean-metric",
+          "thm-cauchy-schwarz-and-the-euclidean-norm",
+          "lem-finite-sum-laws",
+          "lem-of-square-monotone",
+          "def-canonical-natural",
+          "lem-of-naturals-positive",
+          "thm-euclidean-heine-borel-pseudocompactness-and-extreme-values"
+        ],
+        "dependency_level": 1,
+        "statement": "Let $m,n\\in\\mathbb N$ with $m,n\\ge1$, let $A\\in\\mathbb R^{m\\times n}$ act in the standard finite coordinate bases, with labels $j=1,\\ldots,n$ corresponding to library coordinates $j-1$, $y\\in\\mathbb R^m$, and $\\epsilon\\ge0$. If\n$$F:=\\{z\\in\\mathbb R^n:\\|Az-y\\|_2\\le\\epsilon\\}$$\nis nonempty, then $z\\mapsto\\|z\\|_1$ attains a minimum on $F$.",
+        "sources": {
+          "scraped": [],
+          "references": [
+            {
+              "title": "Simon Foucart and Holger Rauhut, A Mathematical Introduction to Compressive Sensing, §4.3",
+              "url": "https://www.mat.uniroma2.it/~speleers/cime2024/material/book_rauhut.pdf"
+            }
+          ]
+        },
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-generated"
+        },
+        "proof_strategy": "direct"
+      },
+      {
+        "id": "lem-ip-robust-nsp-block-tail-estimate",
+        "kind": "lemma",
+        "title": "A block-tail estimate for the largest coordinates",
+        "deps": [
+          "def-ip-nullspace-property",
+          "def-p-norms-on-rn",
+          "def-canonical-natural",
+          "lem-of-naturals-positive",
+          "lem-p-norms-are-norms-and-induce-the-published-metrics",
+          "lem-finite-sum-laws",
+          "lem-of-square-monotone"
+        ],
+        "dependency_level": 1,
+        "statement": "Let $n,s\\in\\mathbb N$ with $n\\ge1$ and $1\\le s\\le n$, and let $h\\in\\mathbb R^n$ use one-based coordinate labels $[n]=\\{1,\\ldots,n\\}$, with label $j$ corresponding to library coordinate $j-1$. In real scalar expressions, a natural number denotes its canonical real image. Order the coordinates by decreasing $|h_j|$, breaking ties by increasing $j$. Let $S$ consist of the first $s$ indices, and partition $S^c$ in this same order into consecutive nonempty blocks $T_1,\\ldots,T_q$ of size $s$, with only the last block possibly smaller; if $S^c=\\varnothing$, take $q=0$. Then\n$$\\|h_{S^c}\\|_2\\le \\|h_S\\|_2+\\frac{\\|h_{S^c}\\|_1}{\\sqrt{s}}.$$",
+        "sources": {
+          "scraped": [],
+          "references": [
+            {
+              "title": "Simon Foucart and Holger Rauhut, A Mathematical Introduction to Compressive Sensing, §4.3 proof of Theorem 4.25",
+              "url": "https://www.mat.uniroma2.it/~speleers/cime2024/material/book_rauhut.pdf"
+            },
+            {
+              "title": "Shahar Mendelson, Holger Rauhut, and Rachel Ward, Improved Bounds for Sparse Recovery from Subsampled Random Convolutions, §2.1",
+              "url": "https://www.mathc.rwth-aachen.de/~rauhut/files/circulant-independent.pdf"
+            }
+          ]
+        },
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-generated"
+        },
+        "proof_strategy": "direct"
+      },
+      {
+        "id": "alg-ip-basis-pursuit-denoising",
+        "kind": "algorithm",
+        "title": "Certified basis-pursuit denoising by primal-dual hybrid gradient",
+        "deps": [
+          "def-p-norms-on-rn",
+          "def-euclidean-inner-product",
+          "def-adjoint-of-a-linear-map-between-inner-product-spaces",
+          "thm-adjoint-exists-and-is-unique-in-finite-dimension",
+          "def-proper-closed-convex-function-on-rn",
+          "def-fenchel-conjugate-on-finite-dimensional-euclidean-space",
+          "lem-fenchel-conjugate-is-proper-closed-convex",
+          "def-induced-matrix-p-norm",
+          "def-proximal-mapping",
+          "thm-proximal-operator-existence-resolvent-firm-nonexpansive",
+          "alg-pdhg-primal-dual-hybrid-gradient",
+          "lem-ip-bpdn-minimizer-exists",
+          "lem-ip-bpdn-dual-certificates",
+          "lem-ip-bpdn-objectives-proper-closed-convex"
+        ],
+        "dependency_level": 2,
+        "statement": "Inputs are integers $m,n\\ge1$, a matrix $A\\in\\mathbb R^{m\\times n}$ in the standard finite coordinate bases, a vector $y\\in\\mathbb R^m$, a radius $\\epsilon\\ge0$, positive real step sizes $\\alpha,\\beta$, an initial primal-dual state $x^0\\in\\mathbb R^n$, $p^0\\in\\mathbb R^m$, a nonnegative integer sweep cap $N$, positive integer proximal-call caps $C_f,C_{g^*}$, and deterministic finite solver programs with Boolean certificate checkers for the two proximal calls. Each solver/checker record must be complete and well-formed. Admissible solver/checker pairs satisfy the soundness condition that an accepted output is an exact minimizer of its stated proximal subproblem; this is an input assumption, not a finite proof search performed by the procedure.\n\nSet $f(x)=\\|x\\|_1$ and $g(u)=0$ when $\\|u-y\\|_2\\le\\epsilon$, with $g(u)=+\\infty$ otherwise. Define the Fenchel conjugate by $g^*(p)=\\sup_{u\\in\\mathbb R^m}(\\langle p,u\\rangle-g(u))$. For a proper closed convex function $q$ and $t>0$, $\\operatorname{prox}_{tq}(v)$ denotes the unique minimizer of $q(w)+\\|w-v\\|_2^2/(2t)$. Let $A^*$ be the Euclidean adjoint and let $\\|A\\|_2=\\sup_{\\|v\\|_2\\le1}\\|Av\\|_2$. The target is\n$$\\min_{z\\in\\mathbb R^n}\\|z\\|_1\\quad\\text{subject to}\\quad\\|Az-y\\|_2\\le\\epsilon.$$\n\nReturn **invalid-input** if dimensions or vectors do not match, if $\\epsilon<0$, if $N$ is not a nonnegative integer, if either proximal cap is not a positive integer, if either step size is nonpositive, if either solver/checker record is missing or malformed, or if the exact strict check $\\alpha\\beta\\|A\\|_2^2<1$ fails. For admissible inputs initialize $\\bar x^0=x^0$ and perform the exact primal-dual hybrid-gradient recurrence for at most $N$ sweeps:\n$$p^{k+1}=\\operatorname{prox}_{\\beta g^*}(p^k+\\beta A\\bar x^k),\\qquad x^{k+1}=\\operatorname{prox}_{\\alpha f}(x^k-\\alpha A^*p^{k+1}),\\qquad \\bar x^{k+1}=2x^{k+1}-x^k.$$\nUse the supplied solver/checker pairs and caps for the corresponding proximal calls. Propagate any **invalid-input**, **prox-call-failed**, or **prox-cap-exhausted** status and the state returned by the primal-dual procedure. If all $N$ sweeps complete, let $(x,p)$ be the final primal-dual state and perform these exact tests in order:\n\n- If $p\\ne0$, $A^*p=0$, and $|\\langle p,y\\rangle|>\\epsilon\\|p\\|_2$, return **infeasible**.\n- Otherwise, if $\\|Ax-y\\|_2\\le\\epsilon$, $\\|A^*p\\|_\\infty\\le1$, and $\\|x\\|_1=-\\langle p,y\\rangle-\\epsilon\\|p\\|_2$, return **success** with $x$.\n- If neither certificate passes, return **budget-exhausted** with the final state.\n\nFor $N=0$, test the initial state. The certificate tests use exact real comparisons. The procedure makes no guarantee that a finite run finds a certificate and makes no convergence or finite-termination claim.",
+        "sources": {
+          "scraped": [],
+          "references": [
+            {
+              "title": "Antonin Chambolle and Thomas Pock, A First-Order Primal-Dual Algorithm for Convex Problems with Applications to Imaging, §§2–3.1",
+              "url": "https://optimization-online.org/wp-content/uploads/2010/06/2646.pdf"
+            },
+            {
+              "title": "Simon Foucart and Holger Rauhut, A Mathematical Introduction to Compressive Sensing, §4.3",
+              "url": "https://www.mat.uniroma2.it/~speleers/cime2024/material/book_rauhut.pdf"
+            }
+          ]
+        },
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-generated"
+        },
+        "proof_strategy": "direct"
+      },
+      {
+        "id": "lem-ip-best-s-term-l1-sparse-vector-formulation",
+        "kind": "lemma",
+        "title": "The coordinate-tail and sparse-vector formulations of best s-term error agree",
+        "deps": [
+          "def-ip-best-s-term-l1-error",
+          "def-p-norms-on-rn",
+          "lem-finite-sum-laws"
+        ],
+        "dependency_level": 2,
+        "statement": "Let $n,s\\in\\mathbb N$ with $n\\ge1$ and $1\\le s\\le n$, and let $x\\in\\mathbb R^n$ use the one-based labels $[n]=\\{1,\\ldots,n\\}$, with label $j$ corresponding to library coordinate $j-1$. For $T\\subseteq[n]$, $x_{T^c}$ agrees with $x$ off $T$ and is zero on $T$. Define $\\sigma_s(x)_1:=\\min\\{\\|x_{T^c}\\|_1:T\\subseteq[n],\\ |T|\\le s\\}$. Define $\\operatorname{supp}(z):=\\{j\\in[n]:z_j\\ne0\\}$ using the one-based labels $[n]=\\{1,\\ldots,n\\}$, with label $j$ corresponding to library coordinate $j-1$. Then\n$$\\sigma_s(x)_1=\\min\\{\\|x-z\\|_1:z\\in\\mathbb R^n,\\ |\\operatorname{supp}(z)|\\le s\\},$$\nand this sparse-vector minimum is attained.",
+        "sources": {
+          "scraped": [],
+          "references": [
+            {
+              "title": "Simon Foucart and Holger Rauhut, A Mathematical Introduction to Compressive Sensing, §2.1 Definition 2.2",
+              "url": "https://www.mat.uniroma2.it/~speleers/cime2024/material/book_rauhut.pdf"
+            },
+            {
+              "title": "Shahar Mendelson, Holger Rauhut, and Rachel Ward, Improved Bounds for Sparse Recovery from Subsampled Random Convolutions, §2.1",
+              "url": "https://www.mathc.rwth-aachen.de/~rauhut/files/circulant-independent.pdf"
+            }
+          ]
+        },
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-generated"
+        },
+        "proof_strategy": "direct"
+      },
+      {
+        "id": "lem-ip-largest-s-coordinates-attain-best-s-term-l1-error",
+        "kind": "lemma",
+        "title": "The largest coordinates attain the best s-term ℓ1 error",
+        "deps": [
+          "def-ip-best-s-term-l1-error",
+          "def-p-norms-on-rn",
+          "lem-finite-sum-laws"
+        ],
+        "dependency_level": 2,
+        "statement": "Let $n,s\\in\\mathbb N$ with $n\\ge1$ and $1\\le s\\le n$, and let $x\\in\\mathbb R^n$ use the one-based coordinate labels $[n]=\\{1,\\ldots,n\\}$, with label $j$ corresponding to library coordinate $j-1$. Order the coordinates by decreasing $|x_j|$, breaking ties by increasing $j$, and let $S$ be the first $s$ indices. For every $U\\subseteq[n]$, let $x_U$ agree with $x$ on $U$ and vanish on $U^c$. Then for every $T\\subseteq[n]$ with $|T|\\le s$,\n$$\\|x_T\\|_1\\le\\|x_S\\|_1\\quad\\text{and}\\quad\\|x_{S^c}\\|_1\\le\\|x_{T^c}\\|_1.$$\nConsequently $\\sigma_s(x)_1=\\|x_{S^c}\\|_1$, so the best $s$-term tail error is attained by retaining the first $s$ coordinates in the specified order.",
+        "sources": {
+          "scraped": [],
+          "references": [
+            {
+              "title": "Simon Foucart and Holger Rauhut, A Mathematical Introduction to Compressive Sensing, §2.1 Definition 2.2",
+              "url": "https://www.mat.uniroma2.it/~speleers/cime2024/material/book_rauhut.pdf"
+            },
+            {
+              "title": "Shahar Mendelson, Holger Rauhut, and Rachel Ward, Improved Bounds for Sparse Recovery from Subsampled Random Convolutions, §2.1",
+              "url": "https://www.mathc.rwth-aachen.de/~rauhut/files/circulant-independent.pdf"
+            }
+          ]
+        },
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-generated"
+        },
+        "proof_strategy": "direct"
+      },
+      {
+        "id": "thm-ip-robust-nsp-noisy-recovery-bound",
+        "kind": "theorem",
+        "title": "Robust nullspace property gives stable noisy recovery",
+        "deps": [
+          "def-ip-robust-nullspace-property",
+          "def-ip-best-s-term-l1-error",
+          "lem-ip-best-s-term-l1-sparse-vector-formulation",
+          "lem-ip-largest-s-coordinates-attain-best-s-term-l1-error",
+          "lem-ip-robust-nsp-block-tail-estimate",
+          "lem-ip-bpdn-minimizer-exists",
+          "alg-ip-basis-pursuit-denoising",
+          "lem-ip-bpdn-dual-certificates",
+          "def-p-norms-on-rn",
+          "lem-p-norms-are-norms-and-induce-the-published-metrics",
+          "thm-cauchy-schwarz-and-the-euclidean-norm",
+          "lem-finite-sum-laws",
+          "def-canonical-natural",
+          "lem-of-naturals-positive"
+        ],
+        "dependency_level": 3,
+        "statement": "Let $m,n,s\\in\\mathbb N$ with $m,n\\ge1$ and $1\\le s\\le n$. Use one-based coordinate labels $[n]=\\{1,\\ldots,n\\}$, with label $j$ corresponding to library coordinate $j-1$, and interpret natural numbers in real scalar expressions as their canonical real images. Let $A\\in\\mathbb R^{m\\times n}$ and suppose that for some $0<\\rho<1$ and $\\tau>0$,\n$$\\|h_S\\|_2\\le\\frac{\\rho}{\\sqrt{s}}\\|h_{S^c}\\|_1+\\tau\\|Ah\\|_2$$\nfor every $h\\in\\mathbb R^n$ and every $S\\subseteq[n]$ with $|S|\\le s$, where for any vector $v\\in\\mathbb R^n$, $v_S$ agrees with $v$ on $S$ and vanishes on $S^c=[n]\\setminus S$. Let $x^\\dagger\\in\\mathbb R^n$, $\\epsilon\\ge0$, and $e\\in\\mathbb R^m$ satisfy $y=Ax^\\dagger+e$ and $\\|e\\|_2\\le\\epsilon$. Define\n$$\\sigma_s(x^\\dagger)_1:=\\min\\{\\|x^\\dagger_{T^c}\\|_1:T\\subseteq[n],\\ |T|\\le s\\}.$$\nThe indexing family is finite and nonempty, so this minimum is attained; it also equals the minimum of $\\|x^\\dagger-z\\|_1$ over vectors $z$ with at most $s$ nonzero coordinates. Then the basis-pursuit denoising problem\n$$\\min_{z\\in\\mathbb R^n}\\|z\\|_1\\quad\\text{subject to}\\quad\\|Az-y\\|_2\\le\\epsilon$$\nhas a minimizer. Every minimizer $\\widehat x$ satisfies\n$$\\|\\widehat x-x^\\dagger\\|_2\\le C_1\\frac{\\sigma_s(x^\\dagger)_1}{\\sqrt{s}}+C_2\\epsilon,\\qquad \\|\\widehat x-x^\\dagger\\|_1\\le C_3\\sigma_s(x^\\dagger)_1+C_4\\sqrt{s}\\,\\epsilon,$$\nwhere\n$$C_1=\\frac{2(1+2\\rho)}{1-\\rho},\\quad C_2=\\frac{6\\tau}{1-\\rho},\\quad C_3=\\frac{2(1+\\rho)}{1-\\rho},\\quad C_4=\\frac{4\\tau}{1-\\rho}.$$\nIf the certified finite basis-pursuit denoising procedure returns **success**, its returned vector is a minimizer and satisfies these same bounds. Only reconstruction error is bounded; the theorem asserts neither uniqueness nor support recovery.",
+        "sources": {
+          "scraped": [],
+          "references": [
+            {
+              "title": "Simon Foucart and Holger Rauhut, A Mathematical Introduction to Compressive Sensing, §4.3, Theorem 4.22",
+              "url": "https://www.mat.uniroma2.it/~speleers/cime2024/material/book_rauhut.pdf"
+            },
+            {
+              "title": "Shahar Mendelson, Holger Rauhut, and Rachel Ward, Improved Bounds for Sparse Recovery from Subsampled Random Convolutions, §2.1, Theorem 2.2",
+              "url": "https://www.mathc.rwth-aachen.de/~rauhut/files/circulant-independent.pdf"
+            }
+          ]
+        },
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-generated"
+        },
+        "proof_strategy": "direct"
+      }
+    ]
+  },
+  {
+    "order": 3065,
+    "id": "compressed-sensing-with-noise-and-model-selection-examples",
+    "kind": "B",
+    "category": "inverse-problems",
+    "title": "Stable compressed sensing with noise — Examples and Counterexamples",
+    "companion": "compressed-sensing-with-noise-and-model-selection",
+    "requires": [
+      "compressed-sensing-with-noise-and-model-selection"
+    ],
+    "items": [
+      {
+        "id": "ex-ip-34-scope-and-boundary-cases",
+        "kind": "example",
+        "title": "Bounded noise, compressible truth, and a large nullspace component",
+        "deps": [
+          "def-ip-robust-nullspace-property",
+          "def-ip-best-s-term-l1-error",
+          "lem-ip-largest-s-coordinates-attain-best-s-term-l1-error",
+          "alg-ip-basis-pursuit-denoising",
+          "thm-ip-robust-nsp-noisy-recovery-bound",
+          "def-p-norms-on-rn",
+          "thm-cauchy-schwarz-and-the-euclidean-norm",
+          "lem-finite-sum-laws"
+        ],
+        "dependency_level": 4,
+        "statement": "In the first two cases take $A=I_2:\\mathbb R^2\\to\\mathbb R^2$, $s=1$, $\\rho=\\tfrac12$, and $\\tau=1$. This matrix satisfies the robust nullspace property for every vector: for each $S\\subseteq\\{1,2\\}$ with $|S|\\le1$, $\\|h_S\\|_2\\le\\|h\\|_2=\\|Ah\\|_2$, while the other term on the right side of the robust inequality is nonnegative.\n\n1. **Bounded noise.** Let $x^\\dagger=(1,0)$, $e=(0,\\tfrac1{10})$, $y=(1,\\tfrac1{10})$, and $\\epsilon=\\tfrac1{10}$. The truth is feasible, the noise bound is attained, and $\\sigma_1(x^\\dagger)_1=0$. Every minimizer therefore obeys the recovery bounds with $C_1=8$, $C_2=12$, $C_3=6$, and $C_4=8$.\n\n2. **Compressible truth.** Let $x^\\dagger=(1,\\tfrac15)$, $e=(0,\\tfrac1{100})$, $y=(1,\\tfrac{21}{100})$, and $\\epsilon=\\tfrac1{100}$. The truth is feasible and $\\sigma_1(x^\\dagger)_1=\\tfrac15$. Every minimizer obeys the same constants and hence\n$$\\|\\widehat x-x^\\dagger\\|_2\\le\\tfrac{43}{25},\\qquad \\|\\widehat x-x^\\dagger\\|_1\\le\\tfrac{32}{25}.$$\n\n3. **A large nullspace component outside the theorem's hypothesis.** Let $A_0:\\mathbb R^2\\to\\mathbb R$ be $A_0(z_1,z_2)=z_1$, take $s=1$, $x^\\dagger=(0,M)$ for any $M>0$, $e=0$, $\\epsilon=0$, and $y=0$. The only minimum-$\\ell^1$ feasible vector is $\\widehat x=(0,0)$, so $\\|\\widehat x-x^\\dagger\\|_2=M$ while $\\sigma_1(x^\\dagger)_1=0$. The robust nullspace property fails for $A_0$, witnessed by $h=(0,1)$ and $S=\\{2\\}$; this case is outside the theorem and shows why its matrix hypothesis cannot be omitted.",
+        "sources": {
+          "scraped": [],
+          "references": [
+            {
+              "title": "Simon Foucart and Holger Rauhut, A Mathematical Introduction to Compressive Sensing, §4.3",
+              "url": "https://www.mat.uniroma2.it/~speleers/cime2024/material/book_rauhut.pdf"
+            },
+            {
+              "title": "Shahar Mendelson, Holger Rauhut, and Rachel Ward, Improved Bounds for Sparse Recovery from Subsampled Random Convolutions, §2.1",
+              "url": "https://www.mathc.rwth-aachen.de/~rauhut/files/circulant-independent.pdf"
+            }
+          ]
+        },
+        "provenance": {
+          "statement": "ai-generated",
+          "proof": "ai-generated"
+        },
+        "proof_strategy": "direct"
+      }
+    ]
+  }
+]

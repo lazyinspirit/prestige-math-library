@@ -20,6 +20,11 @@ proof_strategy: direct
 provenance:
   statement: literature-derived
   proof: ai-altered
+verification:
+  judge:
+    model: "gpt-6-luna"
+    verdict: pass
+    date: 2026-10-22
 sources:
   references:
     - title: "Sheldon Axler and Peter J. Shin, The Neumann problem on ellipsoids, Proposition 2.1, Theorem 2.2, Lemma 2.3 and Theorem 2.4, pp.263–268"

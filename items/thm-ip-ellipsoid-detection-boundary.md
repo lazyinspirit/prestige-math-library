@@ -61,13 +61,14 @@ $$r_\varepsilon^2=A\frac{J_1}{J_2},\qquad u_\varepsilon^2=\left(\frac{r_\varepsi
 
 [F3] [[lem-ip-gaussian-product-mixture-testing-bound]]: for a finite-support feasible $v$, its symmetric sign mixture has total-variation distance at most $\tfrac12\sqrt{\exp(u(v)^2)-1}$ from the null; consequently it gives the displayed minimax lower bounds.
 
-[F4] [[def-ip-isonormal-white-noise-experiment]] and [[lem-standard-normal-fourth-moment]]: the noise coordinates are independent standard normals with even density, first and third moments zero, and second and fourth moments $1$ and $3$.
+[F4] [[def-ip-isonormal-white-noise-experiment]] supplies independent standard-normal coordinates with normalized density $\varphi(t)=(2\pi)^{-1/2}e^{-t^2/2}$ and covariance one. We use the scalar calculation of [[lem-standard-normal-fourth-moment]] with this supplied law, rather than invoke its AC-based law construction: $\varphi\prime(t)=-t\varphi(t)$, so integration by parts on $[-R,R]$ gives $\int t^2\varphi=[-t\varphi]_{-R}^R+\int\varphi$ and $\int t^4\varphi=[-t^3\varphi]_{-R}^R+3\int t^2\varphi$. The polynomial-Gaussian boundary terms vanish as $R\to\infty$; the nonnegative integrals increase to their full integrals. Supplied normalization therefore gives second and fourth moments $1$ and $3$; symmetry gives first and third moments zero. This supplied-law calculation uses no additional choice.
 
 [F5] [[thm-chebyshev-markov-inequality-for-the-integral]]: Chebyshev's inequality bounds a tail probability by the variance divided by the squared deviation.
 
 [A1] [[def-countable-choice]]: Countable Choice is the assumption of the upstream Gaussian sequence model.
 
 ## Proof
+
 
 1.1 The profile has finite support by the assumption on $S$. Its weights satisfy $2\sum_jw_{\varepsilon,j}^2=1$, so $\sum_jw_{\varepsilon,j}^2=1/2$. Under a parameter $\eta$, write $\mu_j=\eta_j/\varepsilon$; then $Y_j/\varepsilon=\xi_j+\mu_j$. Independence and [F4] give $$m_\eta:=\mathbb E_\eta T_\varepsilon=\sum_jw_{\varepsilon,j}\mu_j^2,\qquad \operatorname{Var}_\eta(T_\varepsilon)=1+4\sum_jw_{\varepsilon,j}^2\mu_j^2\le1+4w_{\varepsilon,0}m_\eta.$$ In particular, under the null the statistic has mean zero and variance one. [A1, F1, F2, F4, algebra]
 

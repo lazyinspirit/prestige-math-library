@@ -1,0 +1,901 @@
+{
+  "version": 1,
+  "scope": [
+    "lem-poincare-homology-sphere-is-nontrivial-integral-homology-sphere",
+    "def-balanced-taut-sutured-manifold-and-product-region",
+    "def-sutured-floer-chain-complex",
+    "def-knot-relative-spinc-structure",
+    "def-top-alexander-grading-of-knot-floer-homology",
+    "thm-knot-floer-detects-seifert-genus",
+    "lem-ni-holomorphic-disk-and-jsj-analytic-inputs",
+    "lem-ni-fiberedness-sutured-floer-and-gabai-inputs",
+    "thm-fibered-knot-has-rank-one-top-knot-floer-homology",
+    "thm-rank-one-top-knot-floer-detects-fiberedness",
+    "ex-knot-kt-43-worked-cases",
+    "cex-knot-kt-43-boundary-case"
+  ],
+  "contracts": {
+    "lem-poincare-homology-sphere-is-nontrivial-integral-homology-sphere": {
+      "authoring_status": "ready",
+      "risk": "medium",
+      "kind": "lemma",
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "thm-higher-dimensional-spheres-are-simply-connected",
+          "source_section": "Statement",
+          "quote": "For every natural number $n\\ge2$, the unit sphere $S^n\\subseteq\\mathbb R^{n+1}$ is simply connected",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "def-universal-covering-space",
+          "source_section": "Definition",
+          "quote": "A **universal covering space** of $B$ is a covering map $p:\\widetilde B\\to B$ whose total space $\\widetilde B$ is simply connected",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "thm-deck-group-of-a-universal-cover-is-the-fundamental-group",
+          "source_section": "Statement",
+          "quote": "For a path-connected, locally path-connected, semilocally simply connected base $B$, the deck group of a universal cover is isomorphic to $\\pi_1(B,b_0)$.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "prop-the-first-hurewicz-map-in-degree-one-is-abelianization",
+          "source_section": "Statement",
+          "quote": "Hence it induces a natural isomorphism $$\\pi_1(X,x_0)^{\\mathrm{ab}}\\cong H_1(X;\\mathbb Z).$$",
+          "uses": [
+            "1.2"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "thm-poincare-duality-for-oriented-topological-manifolds",
+          "source_section": "Statement",
+          "quote": "Assume AC. Let $M$ be an $R$-oriented boundaryless $n$-manifold, with $R$ commutative unital; manifolds are Hausdorff and second countable here. Then cap with the compatible compact orientation classes gives isomorphisms $$D_M:H_c^p(M;R)\\xrightarrow{\\sim}H_{n-p}(M;R)$$ for every integer $p",
+          "uses": [
+            "2.2"
+          ]
+        },
+        {
+          "fact": "F6",
+          "source": "thm-universal-coefficient-theorem-for-cohomology-over-a-pid",
+          "source_section": "Statement",
+          "quote": "Assume the Axiom of Choice. Let $R$ be a PID, $C$ a chain complex of free $R$-modules, and $G$ an $R$-module. Then naturally $$0\\to\\operatorname{Ext}^1_R(H_{n-1}C,G)\\to H^n\\operatorname{Hom}_R(C,G)\\xrightarrow{\\operatorname{ev}_n}\\operatorname{Hom}_R(H_nC,G)\\to0$$ is exact.",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "A1",
+          "source": "def-axiom-of-choice",
+          "source_section": "Definition",
+          "quote": "Every family of nonempty sets has a choice function",
+          "uses": [
+            "2.1",
+            "2.2"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "universal-cover",
+          "claim": "The quotient has nontrivial fundamental group I*.",
+          "step": "1.1",
+          "inputs": [
+            "given",
+            "F1",
+            "F2",
+            "F3"
+          ]
+        },
+        {
+          "id": "perfectness",
+          "claim": "The abelianization of I* is zero and hence H1(P)=0.",
+          "step": "1.2",
+          "inputs": [
+            "given",
+            "F4",
+            "algebra"
+          ]
+        },
+        {
+          "id": "cohomology",
+          "claim": "AC and UCT give H1(P;Z)=0.",
+          "step": "2.1",
+          "inputs": [
+            "given",
+            "A1",
+            "F6",
+            "step 1.2",
+            "algebra"
+          ]
+        },
+        {
+          "id": "homology",
+          "claim": "PD computes all homology groups of P as those of S3.",
+          "step": "2.2",
+          "inputs": [
+            "A1",
+            "F5",
+            "given",
+            "step 1.1",
+            "step 1.2",
+            "step 2.1"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The given quotient P=S3/I* is nonempty, so no empty quotient is in the statement."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Steps 1.2, 2.1, and 2.2 compute H1(P)=H2(P)=0 and all homology groups."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "The statement gives |I*|=120 and step 1.1 proves pi1(P) is nontrivial."
+        },
+        {
+          "case": "degenerate",
+          "status": "not_applicable",
+          "reason": "The given action is free and orientation-preserving; no nonfree action is claimed."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "P is a closed manifold and the statement has no boundary endpoints."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "A1 and the Given hypothesis state AC; steps 2.1 and 2.2 name its UCT and Poincare-duality uses."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The statement is a direct computation, not an iff claim."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The statement is a direct computation, not an iff claim."
+        }
+      ]
+    },
+    "cex-knot-kt-43-boundary-case": {
+      "authoring_status": "ready",
+      "risk": "medium",
+      "kind": "counterexample",
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "lem-poincare-homology-sphere-is-nontrivial-integral-homology-sphere",
+          "source_section": "Statement",
+          "quote": "Then $H_*(P;\\mathbb Z)\\cong H_*(S^3;\\mathbb Z)$ and $\\pi_1(P)\\cong I^*$ is nontrivial.",
+          "uses": [
+            "1.1",
+            "2.2"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "thm-mayer-vietoris-sequence-in-singular-homology",
+          "source_section": "Statement",
+          "quote": "For an open cover $X=U\\cup V$, the sequence $$\\cdots\\to H_n(U\\cap V;G)\\to H_n(U;G)\\oplus H_n(V;G)\\to H_n(X;G)\\xrightarrow{\\delta}H_{n-1}(U\\cap V;G)\\to\\cdots$$ is exact",
+          "uses": [
+            "1.1",
+            "1.2",
+            "2.1",
+            "2.2"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "thm-alexander-duality-for-compact-locally-contractible-subsets-of-a-sphere",
+          "source_section": "Statement",
+          "quote": "Assume AC. Fix the usual orientation of $S^n$. If $K$ is a nonempty proper compact weakly locally contractible subspace of $S^n$ and $R$ is a commutative unital ring, there are isomorphisms $$\\widetilde H_i(S^n\\setminus K;R)\\cong\\widetilde H^{n-i-1}(K;R)$$ for every integer $i$.",
+          "uses": [
+            "1.1",
+            "2.1",
+            "2.2"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "cor-homology-of-spheres",
+          "source_section": "Statement",
+          "quote": "For $n\\ge1$, $\\widetilde H_k(S^n;G)$ is $G$ for $k=n$ and $0$ otherwise.",
+          "uses": [
+            "1.1",
+            "2.1",
+            "2.2"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "thm-universal-coefficient-theorem-for-cohomology-over-a-pid",
+          "source_section": "Statement",
+          "quote": "Assume the Axiom of Choice. Let $R$ be a PID, $C$ a chain complex of free $R$-modules, and $G$ an $R$-module.",
+          "uses": [
+            "1.1",
+            "2.1",
+            "2.2"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "thm-poincare-duality-for-oriented-topological-manifolds",
+          "source_section": "Statement",
+          "quote": "Assume AC. Let $M$ be an $R$-oriented boundaryless $n$-manifold, with $R$ commutative unital; manifolds are Hausdorff and second countable here. Then cap with the compatible compact orientation classes gives isomorphisms $$D_M:H_c^p(M;R)\\xrightarrow{\\sim}H_{n-p}(M;R)$$ for every integer $p",
+          "uses": [
+            "1.2"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "thm-universal-coefficient-theorem-for-cohomology-over-a-pid",
+          "source_section": "Statement",
+          "quote": "Assume the Axiom of Choice. Let $R$ be a PID, $C$ a chain complex of free $R$-modules, and $G$ an $R$-module.",
+          "uses": [
+            "1.2"
+          ]
+        },
+        {
+          "fact": "A1",
+          "source": "def-axiom-of-choice",
+          "source_section": "Definition",
+          "quote": "Every family of nonempty sets has a choice function",
+          "uses": [
+            "1.2"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "punctured-summands",
+          "claim": "Each punctured Poincare summand is connected and has zero first homology.",
+          "step": "1.1",
+          "inputs": [
+            "given",
+            "F1",
+            "F2",
+            "F3",
+            "algebra"
+          ]
+        },
+        {
+          "id": "homology-sum",
+          "claim": "The connected sum Y is an integral homology sphere.",
+          "step": "1.2",
+          "inputs": [
+            "A1",
+            "F2",
+            "F4",
+            "given",
+            "step 1.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "unknot-exterior-homology",
+          "claim": "The unknot exterior piece A has first homology Z.",
+          "step": "2.1",
+          "inputs": [
+            "F2",
+            "F3",
+            "given",
+            "algebra"
+          ]
+        },
+        {
+          "id": "nonbounding-sphere",
+          "claim": "Neither side of S is a 3-ball in the complement.",
+          "step": "2.2",
+          "inputs": [
+            "F1",
+            "F2",
+            "F3",
+            "step 2.1",
+            "given",
+            "algebra"
+          ]
+        },
+        {
+          "id": "refutation",
+          "claim": "S witnesses reducibility and falsifies the universal assertion.",
+          "step": "2.3",
+          "inputs": [
+            "step 1.2",
+            "step 2.2"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The Given data include a standard round unknot U, so the counterexample is not empty."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Steps 1.1–1.2 establish H1(Y)=H2(Y)=0 and H0(Y)=H3(Y)=Z; step 2.1 computes H1(A)=Z."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "The statement and Given data specify one standard round circle U as the knot."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "The Given data make U round and S disjoint from U; step 2.1 supplies the collar cover and verifies the complement-side calculation."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "U is a closed knot and S is a closed sphere; neither has endpoints."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "A1 and the Given hypothesis explicitly assume AC; step 1.2 uses it for the PD/UCT supplier."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The refuted assertion is universal, not an iff claim."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The refuted assertion is universal, not an iff claim."
+        }
+      ]
+    },
+    "def-balanced-taut-sutured-manifold-and-product-region": {
+      "authoring_status": "ready",
+      "risk": "low",
+      "kind": "definition",
+      "citations": [],
+      "derivations": [],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The definition fixes sutures, balance, tautness, product regions, horizontal surfaces and the characteristic-product-region hypotheses. empty is not independently checked here."
+        },
+        {
+          "case": "zero",
+          "status": "not_applicable",
+          "reason": "The definition fixes sutures, balance, tautness, product regions, horizontal surfaces and the characteristic-product-region hypotheses. zero is not independently checked here."
+        },
+        {
+          "case": "one",
+          "status": "not_applicable",
+          "reason": "The definition fixes sutures, balance, tautness, product regions, horizontal surfaces and the characteristic-product-region hypotheses. one is not independently checked here."
+        },
+        {
+          "case": "degenerate",
+          "status": "not_applicable",
+          "reason": "The definition fixes sutures, balance, tautness, product regions, horizontal surfaces and the characteristic-product-region hypotheses. degenerate is not independently checked here."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "The definition fixes sutures, balance, tautness, product regions, horizontal surfaces and the characteristic-product-region hypotheses. endpoints is not independently checked here."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "The definition fixes sutures, balance, tautness, product regions, horizontal surfaces and the characteristic-product-region hypotheses. nonempty-choice is not independently checked here."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The definition fixes sutures, balance, tautness, product regions, horizontal surfaces and the characteristic-product-region hypotheses. iff-forward is not independently checked here."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The definition fixes sutures, balance, tautness, product regions, horizontal surfaces and the characteristic-product-region hypotheses. iff-reverse is not independently checked here."
+        }
+      ]
+    },
+    "def-sutured-floer-chain-complex": {
+      "authoring_status": "ready",
+      "risk": "low",
+      "kind": "definition",
+      "citations": [],
+      "derivations": [],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The definition handles d=0 explicitly and states when the homology notation is used. empty is not independently checked here."
+        },
+        {
+          "case": "zero",
+          "status": "not_applicable",
+          "reason": "The definition handles d=0 explicitly and states when the homology notation is used. zero is not independently checked here."
+        },
+        {
+          "case": "one",
+          "status": "not_applicable",
+          "reason": "The definition handles d=0 explicitly and states when the homology notation is used. one is not independently checked here."
+        },
+        {
+          "case": "degenerate",
+          "status": "not_applicable",
+          "reason": "The definition handles d=0 explicitly and states when the homology notation is used. degenerate is not independently checked here."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "The definition handles d=0 explicitly and states when the homology notation is used. endpoints is not independently checked here."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "The definition handles d=0 explicitly and states when the homology notation is used. nonempty-choice is not independently checked here."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The definition handles d=0 explicitly and states when the homology notation is used. iff-forward is not independently checked here."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The definition handles d=0 explicitly and states when the homology notation is used. iff-reverse is not independently checked here."
+        }
+      ]
+    },
+    "def-knot-relative-spinc-structure": {
+      "authoring_status": "ready",
+      "risk": "low",
+      "kind": "definition",
+      "citations": [],
+      "derivations": [],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The definition fixes the vector-field and relative Chern-class convention; independence of auxiliary choices is explicitly deferred. empty is not independently checked here."
+        },
+        {
+          "case": "zero",
+          "status": "not_applicable",
+          "reason": "The definition fixes the vector-field and relative Chern-class convention; independence of auxiliary choices is explicitly deferred. zero is not independently checked here."
+        },
+        {
+          "case": "one",
+          "status": "not_applicable",
+          "reason": "The definition fixes the vector-field and relative Chern-class convention; independence of auxiliary choices is explicitly deferred. one is not independently checked here."
+        },
+        {
+          "case": "degenerate",
+          "status": "not_applicable",
+          "reason": "The definition fixes the vector-field and relative Chern-class convention; independence of auxiliary choices is explicitly deferred. degenerate is not independently checked here."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "The definition fixes the vector-field and relative Chern-class convention; independence of auxiliary choices is explicitly deferred. endpoints is not independently checked here."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "The definition fixes the vector-field and relative Chern-class convention; independence of auxiliary choices is explicitly deferred. nonempty-choice is not independently checked here."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The definition fixes the vector-field and relative Chern-class convention; independence of auxiliary choices is explicitly deferred. iff-forward is not independently checked here."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The definition fixes the vector-field and relative Chern-class convention; independence of auxiliary choices is explicitly deferred. iff-reverse is not independently checked here."
+        }
+      ]
+    },
+    "def-top-alexander-grading-of-knot-floer-homology": {
+      "authoring_status": "ready",
+      "risk": "low",
+      "kind": "definition",
+      "citations": [],
+      "derivations": [],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The definition fixes the integral sutured grading; diagram invariance and coefficient comparison are explicitly deferred. empty is not independently checked here."
+        },
+        {
+          "case": "zero",
+          "status": "not_applicable",
+          "reason": "The definition fixes the integral sutured grading; diagram invariance and coefficient comparison are explicitly deferred. zero is not independently checked here."
+        },
+        {
+          "case": "one",
+          "status": "not_applicable",
+          "reason": "The definition fixes the integral sutured grading; diagram invariance and coefficient comparison are explicitly deferred. one is not independently checked here."
+        },
+        {
+          "case": "degenerate",
+          "status": "not_applicable",
+          "reason": "The definition fixes the integral sutured grading; diagram invariance and coefficient comparison are explicitly deferred. degenerate is not independently checked here."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "The definition fixes the integral sutured grading; diagram invariance and coefficient comparison are explicitly deferred. endpoints is not independently checked here."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "The definition fixes the integral sutured grading; diagram invariance and coefficient comparison are explicitly deferred. nonempty-choice is not independently checked here."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The definition fixes the integral sutured grading; diagram invariance and coefficient comparison are explicitly deferred. iff-forward is not independently checked here."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The definition fixes the integral sutured grading; diagram invariance and coefficient comparison are explicitly deferred. iff-reverse is not independently checked here."
+        }
+      ]
+    },
+    "thm-knot-floer-detects-seifert-genus": {
+      "authoring_status": "escalated",
+      "risk": "high",
+      "kind": "theorem",
+      "citations": [],
+      "derivations": [],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "No complete proof is supplied; this boundary case is unverified and remains part of the escalation. empty is not independently checked here."
+        },
+        {
+          "case": "zero",
+          "status": "not_applicable",
+          "reason": "No complete proof is supplied; this boundary case is unverified and remains part of the escalation. zero is not independently checked here."
+        },
+        {
+          "case": "one",
+          "status": "not_applicable",
+          "reason": "No complete proof is supplied; this boundary case is unverified and remains part of the escalation. one is not independently checked here."
+        },
+        {
+          "case": "degenerate",
+          "status": "not_applicable",
+          "reason": "No complete proof is supplied; this boundary case is unverified and remains part of the escalation. degenerate is not independently checked here."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "No complete proof is supplied; this boundary case is unverified and remains part of the escalation. endpoints is not independently checked here."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "No complete proof is supplied; this boundary case is unverified and remains part of the escalation. nonempty-choice is not independently checked here."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "No complete proof is supplied; this boundary case is unverified and remains part of the escalation. iff-forward is not independently checked here."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "No complete proof is supplied; this boundary case is unverified and remains part of the escalation. iff-reverse is not independently checked here."
+        }
+      ],
+      "unresolved_obligations": [
+        "Supply a complete integral-coefficient genus-detection proof with all analytic, taut-sutured nonvanishing, and HFK/SFH comparison inputs.",
+        "Resolve the axiom-strength gap: the statement assumes AC_omega but the local PD/UCT proof branch requires full AC.",
+        "Do not use the batch-92 mod-two grid comparison as proof of the integral claim."
+      ]
+    },
+    "lem-ni-holomorphic-disk-and-jsj-analytic-inputs": {
+      "authoring_status": "escalated",
+      "risk": "high",
+      "kind": "lemma",
+      "citations": [],
+      "derivations": [],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "No complete proof is supplied; this boundary case is unverified and remains part of the escalation. empty is not independently checked here."
+        },
+        {
+          "case": "zero",
+          "status": "not_applicable",
+          "reason": "No complete proof is supplied; this boundary case is unverified and remains part of the escalation. zero is not independently checked here."
+        },
+        {
+          "case": "one",
+          "status": "not_applicable",
+          "reason": "No complete proof is supplied; this boundary case is unverified and remains part of the escalation. one is not independently checked here."
+        },
+        {
+          "case": "degenerate",
+          "status": "not_applicable",
+          "reason": "No complete proof is supplied; this boundary case is unverified and remains part of the escalation. degenerate is not independently checked here."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "No complete proof is supplied; this boundary case is unverified and remains part of the escalation. endpoints is not independently checked here."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "No complete proof is supplied; this boundary case is unverified and remains part of the escalation. nonempty-choice is not independently checked here."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "No complete proof is supplied; this boundary case is unverified and remains part of the escalation. iff-forward is not independently checked here."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "No complete proof is supplied; this boundary case is unverified and remains part of the escalation. iff-reverse is not independently checked here."
+        }
+      ],
+      "unresolved_obligations": [
+        "Supply the integral signed sutured disk-count compactness, regularity, gluing, orientation, and surface-decomposition proof.",
+        "The planned thm-jsj-decomposition-of-knot-exteriors carrier is absent; its batch-71 manifest statement only covers knots in S3, while this lemma quantifies over general closed oriented Y.",
+        "The planned satellite-pattern definition is S3-specific and does not cover a knot in arbitrary Y.",
+        "Resolve full-AC use in the planned JSJ proof against the AC-free theorem statement."
+      ]
+    },
+    "lem-ni-fiberedness-sutured-floer-and-gabai-inputs": {
+      "authoring_status": "escalated",
+      "risk": "high",
+      "kind": "lemma",
+      "citations": [],
+      "derivations": [],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "No complete proof is supplied; this boundary case is unverified and remains part of the escalation. empty is not independently checked here."
+        },
+        {
+          "case": "zero",
+          "status": "not_applicable",
+          "reason": "No complete proof is supplied; this boundary case is unverified and remains part of the escalation. zero is not independently checked here."
+        },
+        {
+          "case": "one",
+          "status": "not_applicable",
+          "reason": "No complete proof is supplied; this boundary case is unverified and remains part of the escalation. one is not independently checked here."
+        },
+        {
+          "case": "degenerate",
+          "status": "not_applicable",
+          "reason": "No complete proof is supplied; this boundary case is unverified and remains part of the escalation. degenerate is not independently checked here."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "No complete proof is supplied; this boundary case is unverified and remains part of the escalation. endpoints is not independently checked here."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "No complete proof is supplied; this boundary case is unverified and remains part of the escalation. nonempty-choice is not independently checked here."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "No complete proof is supplied; this boundary case is unverified and remains part of the escalation. iff-forward is not independently checked here."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "No complete proof is supplied; this boundary case is unverified and remains part of the escalation. iff-reverse is not independently checked here."
+        }
+      ],
+      "unresolved_obligations": [
+        "Supply complete proofs of the homology-product reduction, horizontal and product-annulus decompositions, characteristic-region argument, and Gabai input.",
+        "Supply a general-Y JSJ supplier with exact hypotheses; the only planned batch-71 JSJ statement is for knots in S3 and its carrier is absent.",
+        "Resolve full-AC use in the proof route against the AC-free statement."
+      ]
+    },
+    "thm-fibered-knot-has-rank-one-top-knot-floer-homology": {
+      "authoring_status": "escalated",
+      "risk": "high",
+      "kind": "theorem",
+      "citations": [],
+      "derivations": [],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "No complete proof is supplied; this boundary case is unverified and remains part of the escalation. empty is not independently checked here."
+        },
+        {
+          "case": "zero",
+          "status": "not_applicable",
+          "reason": "No complete proof is supplied; this boundary case is unverified and remains part of the escalation. zero is not independently checked here."
+        },
+        {
+          "case": "one",
+          "status": "not_applicable",
+          "reason": "No complete proof is supplied; this boundary case is unverified and remains part of the escalation. one is not independently checked here."
+        },
+        {
+          "case": "degenerate",
+          "status": "not_applicable",
+          "reason": "No complete proof is supplied; this boundary case is unverified and remains part of the escalation. degenerate is not independently checked here."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "No complete proof is supplied; this boundary case is unverified and remains part of the escalation. endpoints is not independently checked here."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "No complete proof is supplied; this boundary case is unverified and remains part of the escalation. nonempty-choice is not independently checked here."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "No complete proof is supplied; this boundary case is unverified and remains part of the escalation. iff-forward is not independently checked here."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "No complete proof is supplied; this boundary case is unverified and remains part of the escalation. iff-reverse is not independently checked here."
+        }
+      ],
+      "unresolved_obligations": [
+        "Supply a complete product-sutured Floer computation and integral top-HFK identification, including the signed analytic chain model."
+      ]
+    },
+    "thm-rank-one-top-knot-floer-detects-fiberedness": {
+      "authoring_status": "escalated",
+      "risk": "high",
+      "kind": "theorem",
+      "citations": [],
+      "derivations": [],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "No complete proof is supplied; this boundary case is unverified and remains part of the escalation. empty is not independently checked here."
+        },
+        {
+          "case": "zero",
+          "status": "not_applicable",
+          "reason": "No complete proof is supplied; this boundary case is unverified and remains part of the escalation. zero is not independently checked here."
+        },
+        {
+          "case": "one",
+          "status": "not_applicable",
+          "reason": "No complete proof is supplied; this boundary case is unverified and remains part of the escalation. one is not independently checked here."
+        },
+        {
+          "case": "degenerate",
+          "status": "not_applicable",
+          "reason": "No complete proof is supplied; this boundary case is unverified and remains part of the escalation. degenerate is not independently checked here."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "No complete proof is supplied; this boundary case is unverified and remains part of the escalation. endpoints is not independently checked here."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "No complete proof is supplied; this boundary case is unverified and remains part of the escalation. nonempty-choice is not independently checked here."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "No complete proof is supplied; this boundary case is unverified and remains part of the escalation. iff-forward is not independently checked here."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "No complete proof is supplied; this boundary case is unverified and remains part of the escalation. iff-reverse is not independently checked here."
+        }
+      ],
+      "unresolved_obligations": [
+        "Supply the complete Ni proof, including general-Y JSJ/characteristic-region inputs, analytic decomposition maps, and Gabai argument.",
+        "The planned JSJ interface is S3-only and is absent as an authored item body; it does not meet the theorem’s general-Y scope.",
+        "Resolve full-AC use in the proof dependencies against the AC-free theorem statement."
+      ]
+    },
+    "ex-knot-kt-43-worked-cases": {
+      "authoring_status": "escalated",
+      "risk": "high",
+      "kind": "example",
+      "citations": [],
+      "derivations": [],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "No complete proof is supplied; this boundary case is unverified and remains part of the escalation. empty is not independently checked here."
+        },
+        {
+          "case": "zero",
+          "status": "not_applicable",
+          "reason": "No complete proof is supplied; this boundary case is unverified and remains part of the escalation. zero is not independently checked here."
+        },
+        {
+          "case": "one",
+          "status": "not_applicable",
+          "reason": "No complete proof is supplied; this boundary case is unverified and remains part of the escalation. one is not independently checked here."
+        },
+        {
+          "case": "degenerate",
+          "status": "not_applicable",
+          "reason": "No complete proof is supplied; this boundary case is unverified and remains part of the escalation. degenerate is not independently checked here."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "No complete proof is supplied; this boundary case is unverified and remains part of the escalation. endpoints is not independently checked here."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "No complete proof is supplied; this boundary case is unverified and remains part of the escalation. nonempty-choice is not independently checked here."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "No complete proof is supplied; this boundary case is unverified and remains part of the escalation. iff-forward is not independently checked here."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "No complete proof is supplied; this boundary case is unverified and remains part of the escalation. iff-reverse is not independently checked here."
+        }
+      ],
+      "unresolved_obligations": [
+        "Supply the explicit trefoil and 5_2 integral HFK calculations and complete fibered/nonfibered arguments.",
+        "Trefoil use of rank-one detection requires an irreducible-exterior input; its current supplier is draft and its Schoenflies supplier remains a draft prerequisite."
+      ]
+    }
+  }
+}

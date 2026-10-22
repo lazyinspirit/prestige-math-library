@@ -11,6 +11,7 @@ deps:
   - def-ip-calderon-admissible-conductivity-class
   - def-ip-spatial-bv-and-distributional-tv
   - def-translation-of-a-function-on-rn
+  - thm-lebesgue-outer-measure-and-measurability-are-translation-invariant
   - lem-ip-bv-extension-and-translation
 proof_strategy: direct
 provenance:
@@ -42,7 +43,7 @@ The outer supremum is taken in $[0,\infty]$, with $\sup\varnothing=0$. The exten
 
 [[lem-ip-bv-extension-and-translation|The zero-extension variation bound and full-space translation inequality.]]
 
-[[def-translation-of-a-function-on-rn|The translation operator on almost-everywhere function classes.]]
+[[def-translation-of-a-function-on-rn|Pointwise translation and its sign convention.]]
 
 ## Facts & Assumptions
 
@@ -52,7 +53,7 @@ The outer supremum is taken in $[0,\infty]$, with $\sup\varnothing=0$. The exten
 
 [F2] If $u\in BV(\Omega)$ on a bounded Lipschitz domain, then its zero extension lies in $BV(\mathbb R^2)$ with $\|\widetilde u\|_1+TV(\widetilde u;\mathbb R^2)\le C_\Omega(\|u\|_1+TV(u;\Omega))$, and $\|v(\cdot+h)-v\|_1\le |h|TV(v;\mathbb R^2)$ for $v\in BV(\mathbb R^2)$. ([[lem-ip-bv-extension-and-translation]])
 
-[F3] Translation preserves almost-everywhere classes and constants. ([[def-translation-of-a-function-on-rn]])
+[F3] Translation is defined pointwise by $\tau_h v(x)=v(x-h)$. Translates of Lebesgue measurable sets are measurable and have the same measure; in particular a translate of a null set is null. ([[def-translation-of-a-function-on-rn]], [[thm-lebesgue-outer-measure-and-measurability-are-translation-invariant]])
 
 [A1] Countable Choice is assumed for the BV extension and translation supplier. ([[def-countable-choice]])
 
@@ -62,7 +63,7 @@ The outer supremum is taken in $[0,\infty]$, with $\sup\varnothing=0$. The exten
 
 1.1 Set $u:=\gamma-1$ on $\Omega$. Since constants have zero distributional derivative, [F1] gives $u\in BV(\Omega)$, $TV(u;\Omega)=TV(\gamma;\Omega)\le R$, and $\|u\|_{L^1(\Omega)}\le |\Omega|(M+1)$. The smooth bounded domain $\Omega$ is Lipschitz, so [F2] applies. [F1, F2, given, algebra]
 
-2.1 By the zero-extension part of [F2], $\widetilde u\in BV(\mathbb R^2)$ and $$TV(\widetilde u;\mathbb R^2)\le C_\Omega\bigl(|\Omega|(M+1)+R\bigr)=:V_0.$$ Since $\gamma_e=1+\widetilde u$, [F3] gives $\|\gamma_e(\cdot+h)-\gamma_e\|_1=\|\widetilde u(\cdot+h)-\widetilde u\|_1\le V_0|h|$. Thus the first inequality holds with $C_1=V_0$. [A1, F2, F3, step 1.1, algebra]
+2.1 By the zero-extension part of [F2], $\widetilde u\in BV(\mathbb R^2)$ and $$TV(\widetilde u;\mathbb R^2)\le C_\Omega\bigl(|\Omega|(M+1)+R\bigr)=:V_0.$$ If two representatives differ only on a null set $N$, their values at $x+h$ differ only on $N-h$, which is null by [F3]. Translated classes are therefore well-defined. Choosing $\gamma_e=1+\widetilde u$ pointwise, constants cancel in the difference; the resulting class identity holds for every choice of representatives. Thus $\|\gamma_e(\cdot+h)-\gamma_e\|_1=\|\widetilde u(\cdot+h)-\widetilde u\|_1\le V_0|h|$. Thus the first inequality holds with $C_1=V_0$. [A1, F2, F3, step 1.1, algebra]
 
 3.1 The bound $m\le\gamma\le M$ inside $\Omega$ and the background value $1$ outside show $|\gamma_e|\le B$ almost everywhere; hence $|\gamma_e(\cdot+h)-\gamma_e|\le2B$ almost everywhere. Applying [F3] and step 2.1 yields $$\|\gamma_e(\cdot+h)-\gamma_e\|_p^p\le(2B)^{p-1}V_0|h|.$$ Taking $p$-th roots and then the supremum over $|h|\le t$ gives the second inequality with $C_p=((2B)^{p-1}V_0)^{1/p}$. The bound is uniform in $\gamma$, so taking the outer supremum proves the claim when $X_2(R)$ is nonempty; when it is empty, the stated convention gives zero. At $t=0$ both sides vanish. [F1, F3, step 2.1, algebra] ∎
 

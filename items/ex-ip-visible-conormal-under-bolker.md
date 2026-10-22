@@ -95,7 +95,7 @@ The line has normal $\theta$, so its conormal covectors are scalar multiples of 
 
 ```tikz
 \begin{tikzpicture}[scale=1.0]
-  \draw[->] (-0.4,0) -- (4.0,0) node[right] {$\theta^\perp$};
+  \draw[->] (0.4,0) -- (-2.0,0) node[left] {$\theta^\perp$};
   \draw[->] (0,-0.4) -- (0,3.0) node[above] {$\theta$};
   \draw[thick,blue] (-0.3,1.2) -- (3.4,1.2) node[right] {$x\cdot\theta=s$};
   \fill (2.0,1.2) circle (0.06) node[below right] {$x$};

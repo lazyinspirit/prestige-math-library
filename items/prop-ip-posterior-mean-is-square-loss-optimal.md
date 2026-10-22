@@ -48,6 +48,10 @@ sources:
       locator: "§3.2, Theorem 3.4 and proof, for an inverse posterior as a data-indexed conditional law; §4.1, Theorem 4.3 and proof, for posterior propriety and data-version hypotheses. Context only: the Hilbert-risk proof assumes a probability kernel directly and does not import this source proof."
 verification:
   precheck: pass
+  judge:
+    model: "gpt-6-luna"
+    verdict: pass
+    date: 2026-10-22
 ---
 
 ## Statement

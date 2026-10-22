@@ -38,6 +38,11 @@ axiom_use: Countable Choice is used through the supplied Parseval theorem and to
 provenance:
   statement: literature-derived
   proof: ai-altered
+verification:
+  judge:
+    model: "gpt-6-luna"
+    verdict: pass
+    date: 2026-10-22
 sources:
   references:
     - title: "Gerald Teschl, Topics in Real and Functional Analysis, §2.1, Theorems 2.3–2.4"

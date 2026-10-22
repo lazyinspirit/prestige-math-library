@@ -15,6 +15,10 @@ provenance:
   proof: not-applicable
 verification:
   precheck: n/a
+  judge:
+    model: "gpt-6-luna"
+    verdict: pass
+    date: 2026-10-22
 axiom_use: A proper posterior kernel and the sampling laws are supplied; this definition introduces no existence or choice principle.
 sources:
   references:

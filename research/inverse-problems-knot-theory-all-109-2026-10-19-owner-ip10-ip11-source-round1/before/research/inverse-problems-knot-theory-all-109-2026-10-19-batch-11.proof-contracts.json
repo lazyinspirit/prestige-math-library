@@ -1,0 +1,950 @@
+{
+  "version": 1,
+  "level": "inverse-problems-knot-theory-all-109-2026-10-19-batch-11",
+  "scope": [
+    "def-ip-ordered-filter-grid-and-source-index",
+    "lem-ip-solit-filter-risk-decomposition-and-monotone-bias",
+    "alg-ip-solit-parameter-choice",
+    "thm-ip-solit-oracle-risk-and-rate",
+    "ex-ip-solit-antiderivative",
+    "ex-ip-solit-satellite-gradiometry",
+    "ex-ip-solit-periodic-heat-equation"
+  ],
+  "contracts": {
+    "def-ip-ordered-filter-grid-and-source-index": {
+      "citations": [],
+      "derivations": [],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The definition assumes infinite rank, so its positive singular index set is not empty."
+        },
+        {
+          "case": "zero",
+          "status": "not_applicable",
+          "reason": "The definition assumes positive noise and gives no zero-noise experiment."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Definition: the top positive eigenvalue is included with multiplicity."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Definition: geometric variance growth requires a positive first variance so all consecutive ratios are defined."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Definition: zero is an accumulation point of the filter parameter set and the finite candidate endpoint is defined by v_m>=1."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Definition: Countable Choice is explicit for the fixed countable singular system."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The item states no biconditional."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The item states no biconditional."
+        }
+      ],
+      "finite_checks": [],
+      "axioms_used": [
+        "Countable Choice supplies the fixed countable singular system; the variance bounds are conditional on that basis."
+      ]
+    },
+    "lem-ip-solit-filter-risk-decomposition-and-monotone-bias": {
+      "citations": [
+        {
+          "fact": "A1",
+          "source": "def-countable-choice",
+          "source_section": "Definition",
+          "quote": "For every family $(X_n)_{n \\in \\mathbb{N}}$ of nonempty sets indexed by",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F1",
+          "source": "def-ip-gaussian-sequence-inverse-model",
+          "source_section": "Definition",
+          "quote": "Hence the normalized coordinates satisfy $Z_j=\\theta_j+\\epsilon s_j^{-1}\\xi_j,\\qquad j\\in\\mathbb N.$",
+          "uses": [
+            "1.1",
+            "2.1",
+            "2.2"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "thm-singular-value-decomposition-for-compact-operators",
+          "source_section": "Statement",
+          "quote": "with $|T|e_j=s_je_j$ and $f_j=s_j^{-1}Te_j$ for every $j\\in J$;",
+          "uses": [
+            "1.1",
+            "2.1",
+            "2.2",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "def-ip-ordered-filter-grid-and-source-index",
+          "source_section": "Definition",
+          "quote": "0\\le\\alpha q_\\alpha(x)\\le C_q',\\qquad 0\\le xq_\\alpha(x)\\le1,",
+          "uses": [
+            "1.1",
+            "2.1",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "def-ip-isonormal-white-noise-experiment",
+          "source_section": "Definition",
+          "quote": "for every finite orthonormal tuple $(e_1,\\ldots,e_m)$ the variables $Z(e_1),\\ldots,Z(e_m)$ are independent",
+          "uses": [
+            "1.1",
+            "2.2",
+            "3.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "lem-ip-solit-filter-risk-decomposition-and-monotone-bias-step-1-1",
+          "step": "1.1",
+          "claim": "The filtered mean coefficients are square summable, the filtered noise has finite trace variance, and the finite singular sums converge in L2 to a measurable X-valued estimator.",
+          "inputs": [
+            "given",
+            "A1",
+            "F1",
+            "F2",
+            "F3",
+            "F4",
+            "algebra"
+          ]
+        },
+        {
+          "id": "lem-ip-solit-filter-risk-decomposition-and-monotone-bias-step-2-1",
+          "step": "2.1",
+          "claim": "Pointwise ordering of the residuals proves monotone bias and the bound on the difference of estimator means.",
+          "inputs": [
+            "F1",
+            "F2",
+            "F3",
+            "step 1.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "lem-ip-solit-filter-risk-decomposition-and-monotone-bias-step-2-2",
+          "step": "2.2",
+          "claim": "Orthogonality and centered unit-variance noise give the exact bias-squared plus trace-variance risk identity.",
+          "inputs": [
+            "given",
+            "F1",
+            "F2",
+            "F4",
+            "step 1.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "lem-ip-solit-filter-risk-decomposition-and-monotone-bias-step-3-1",
+          "step": "3.1",
+          "claim": "The centered pairwise noise variance is the stated sum and is bounded by the finer candidate variance.",
+          "inputs": [
+            "F2",
+            "F3",
+            "F4",
+            "step 1.1",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "Statement: the pairwise claim is only asserted for m1<m2, so no pair variance is asserted for an empty pair set."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Step 2.2: the exact risk identity handles the zero truth and reduces to the one-coordinate squared bias plus variance."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Step 2.2: the exact risk identity handles the zero truth and reduces to the one-coordinate squared bias plus variance."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Step 1.1: if a filter coefficient vanishes at a coordinate, its noise variance and estimate contribution there are both zero."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Statement: candidates are positive; Step 1.1 establishes finite variance for each candidate."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Statement and Step 1.1: Countable Choice supplies the fixed countable basis; no further choice is made."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The item states no biconditional."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The item states no biconditional."
+        }
+      ],
+      "finite_checks": [
+        {
+          "name": "single-coordinate risk and pair variance",
+          "method": "substitute one singular coordinate into the proved sums",
+          "input": {
+            "singular_value": "s>0",
+            "filter_values": "q1<=q2",
+            "truth_coordinate": "theta",
+            "noise": "sigma>0"
+          },
+          "calculation": "Risk is (1-s^2 q_m(s^2))^2 theta^2+sigma^2 s^2 q_m(s^2)^2; pair variance is sigma^2 s^2(q2-q1)^2, bounded by sigma^2 s^2 q2^2.",
+          "expected": {
+            "risk": "(1-s^2 q_m(s^2))^2 theta^2+sigma^2 s^2 q_m(s^2)^2",
+            "pair_variance": "sigma^2 s^2(q2-q1)^2 <= sigma^2 s^2 q2^2"
+          }
+        }
+      ],
+      "axioms_used": [
+        "Countable Choice supplies the fixed compact singular system; after the basis is supplied, the series and risk calculations use no further choice."
+      ]
+    },
+    "alg-ip-solit-parameter-choice": {
+      "citations": [],
+      "derivations": [],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "Definition: at m_max there are no finer indices, so its acceptance condition is vacuous."
+        },
+        {
+          "case": "zero",
+          "status": "not_applicable",
+          "reason": "Definition: the selector is stated for sigma>0."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Definition: with two candidates, the first is tested against the second and the last is vacuously accepted."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Definition: the upper-quantile infimum is zero for a degenerate centered difference, so the threshold remains defined."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Definition: the finite search includes m_max and returns the smallest accepted index."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Definition: the accepted set is nonempty because m_max is accepted; selecting its least index uses finite order only."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The item states no biconditional."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The item states no biconditional."
+        }
+      ],
+      "finite_checks": [
+        {
+          "name": "two-candidate selector",
+          "method": "direct evaluation of the finite acceptance rule",
+          "input": {
+            "candidate_indices": [
+              0,
+              1
+            ],
+            "pair": "(0,1)"
+          },
+          "calculation": "Index 0 is accepted exactly when its sole comparison passes; index 1 has no finer comparison and is accepted.",
+          "expected": {
+            "output": "0 if the comparison passes, otherwise 1"
+          }
+        }
+      ],
+      "axioms_used": [
+        "Countable Choice is inherited through the fixed SVD coordinates; the finite selector search and minimum-index choice use no additional choice."
+      ]
+    },
+    "thm-ip-solit-oracle-risk-and-rate": {
+      "risk": "high",
+      "authoring_status": "escalated",
+      "citations": [],
+      "derivations": [],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "No complete proof is supplied for thm-ip-solit-oracle-risk-and-rate; this case remains unverified and the item stays escalated."
+        },
+        {
+          "case": "zero",
+          "status": "not_applicable",
+          "reason": "No complete proof is supplied for thm-ip-solit-oracle-risk-and-rate; this case remains unverified and the item stays escalated."
+        },
+        {
+          "case": "one",
+          "status": "not_applicable",
+          "reason": "No complete proof is supplied for thm-ip-solit-oracle-risk-and-rate; this case remains unverified and the item stays escalated."
+        },
+        {
+          "case": "degenerate",
+          "status": "not_applicable",
+          "reason": "No complete proof is supplied for thm-ip-solit-oracle-risk-and-rate; this case remains unverified and the item stays escalated."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "No complete proof is supplied for thm-ip-solit-oracle-risk-and-rate; this case remains unverified and the item stays escalated."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "No complete proof is supplied for thm-ip-solit-oracle-risk-and-rate; this case remains unverified and the item stays escalated."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The item states no biconditional."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The item states no biconditional."
+        }
+      ],
+      "finite_checks": [],
+      "axioms_used": [
+        "Countable Choice is inherited through the fixed compact SVD and coefficient identification; no additional choice is used by the stated estimator or finite selector."
+      ],
+      "unresolved_obligations": [
+        "Supply a complete proof of the Gaussian maximal-risk/selector step in the expected-risk oracle inequality, including the exact threshold calibration and union/multiplicity bound.",
+        "Li\u2013Werner Theorem 3.4 invokes Theorem B.1 and Proposition B.2 in the 2019 supplement; the available 2015 preprint has a related but differently calibrated theorem and is not an exact supplier."
+      ],
+      "proof_status_evidence": "No local Proof section is supplied. The statement and its hypotheses remain complete; the item is escalated."
+    },
+    "ex-ip-solit-antiderivative": {
+      "citations": [
+        {
+          "fact": "A1",
+          "source": "def-countable-choice",
+          "source_section": "Definition",
+          "quote": "For every family $(X_n)_{n \\in \\mathbb{N}}$ of nonempty sets indexed by",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F1",
+          "source": "def-the-one-dimensional-torus-and-normalized-haar-integral",
+          "source_section": "Definition",
+          "quote": "**The torus.** Let $q:\\mathbb R\\to\\mathbb T:=\\mathbb R/\\mathbb Z$ be the canonical projection",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "thm-trigonometric-system-is-complete-in-l-two-of-the-torus",
+          "source_section": "Statement",
+          "quote": "The characters $(e_k)_{k\\in\\mathbb Z}$ form an orthonormal basis of the complex Hilbert space $L^2(\\mathbb T;\\mathbb C)$",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "def-ip-gaussian-sequence-inverse-model",
+          "source_section": "Definition",
+          "quote": "Hence the normalized coordinates satisfy $Z_j=\\theta_j+\\epsilon s_j^{-1}\\xi_j,\\qquad j\\in\\mathbb N.$",
+          "uses": [
+            "4.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "def-ip-ordered-filter-grid-and-source-index",
+          "source_section": "Definition",
+          "quote": "0\\le\\alpha q_\\alpha(x)\\le C_q',\\qquad 0\\le xq_\\alpha(x)\\le1, $$ and $q_\\alpha(x)\\le q_{\\widetilde\\alpha}(x)$ whenever $\\widetilde\\alpha<\\alpha$, for every $x\\in[0,\\lambda_1]$.",
+          "uses": [
+            "1.3",
+            "3.1",
+            "4.1"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "alg-ip-solit-parameter-choice",
+          "source_section": "Definition",
+          "quote": "For each candidate index $m$, the regularized estimator $\\widehat x_m$ is the $L^2$ limit of its finite singular-coordinate sums",
+          "uses": [
+            "4.1"
+          ]
+        },
+        {
+          "fact": "F6",
+          "source": "lem-ip-solit-filter-risk-decomposition-and-monotone-bias",
+          "source_section": "Statement",
+          "quote": "Then $\\widehat x_m$ is a measurable $X$-valued random element with finite second moment",
+          "uses": [
+            "4.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "ex-ip-solit-antiderivative-step-1-1",
+          "step": "1.1",
+          "claim": "The normalized sine functions form a complete orthonormal basis by odd periodic extension and trigonometric completeness.",
+          "inputs": [
+            "given",
+            "A1",
+            "F1",
+            "F2",
+            "construct",
+            "algebra"
+          ]
+        },
+        {
+          "id": "ex-ip-solit-antiderivative-step-1-2",
+          "step": "1.2",
+          "claim": "The Green-kernel formula solves the weak Dirichlet equation and uniqueness follows because a distribution with second derivative zero is affine.",
+          "inputs": [
+            "given",
+            "construct",
+            "algebra"
+          ]
+        },
+        {
+          "id": "ex-ip-solit-antiderivative-step-2-1",
+          "step": "2.1",
+          "claim": "The sine basis diagonalizes the Green operator with positive singular values; finite-rank truncations prove compactness and the p-series proves Hilbert-Schmidt membership.",
+          "inputs": [
+            "F2",
+            "step 1.1",
+            "step 1.2",
+            "algebra"
+          ]
+        },
+        {
+          "id": "ex-ip-solit-antiderivative-step-1-3",
+          "step": "1.3",
+          "claim": "The Tikhonov family is nonnegative, satisfies both ordered-filter bounds and is monotone in the regularization parameter.",
+          "inputs": [
+            "F4",
+            "algebra"
+          ]
+        },
+        {
+          "id": "ex-ip-solit-antiderivative-step-3-1",
+          "step": "3.1",
+          "claim": "The Tikhonov variance is continuous, strictly decreasing with limits infinity and zero, so continuous exact-ratio candidate grids exist.",
+          "inputs": [
+            "F4",
+            "step 1.3",
+            "step 2.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "ex-ip-solit-antiderivative-step-4-1",
+          "step": "4.1",
+          "claim": "Direct integration and matching derivatives verify the exact truth coordinates and datum, after which the Gaussian sequence, filter, selector and estimator moment hypotheses apply.",
+          "inputs": [
+            "given",
+            "F3",
+            "F4",
+            "F5",
+            "F6",
+            "step 1.2",
+            "step 1.3",
+            "step 2.1",
+            "step 3.1",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The sine singular system is infinite because the Dirichlet inverse has infinite rank."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Step 1.1 verifies that the truth has zero constant Fourier coefficient; the model omits that coordinate."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Step 2.1 and the finite check evaluate the first sine singular coordinate."
+        },
+        {
+          "case": "degenerate",
+          "status": "not_applicable",
+          "reason": "The example assumes positive noise and a nonzero triangular truth."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Step 1.2 verifies the Dirichlet endpoint values; Step 4.1 checks the interior join."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Step 1.1 cites A1 and fixes the countable Fourier coordinates."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The item states no biconditional."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The item states no biconditional."
+        }
+      ],
+      "finite_checks": [
+        {
+          "name": "first two Dirichlet sine coordinates",
+          "method": "direct integration and singular-value substitution",
+          "input": {
+            "j": [
+              1,
+              2
+            ]
+          },
+          "calculation": "At j=1, the truth coefficient is 2 sqrt(2)/pi^2 and the datum coefficient is 2 sqrt(2)/pi^4; at j=2 both coefficients vanish.",
+          "expected": {
+            "j1_truth": "2 sqrt(2)/pi^2",
+            "j1_datum": "2 sqrt(2)/pi^4",
+            "j2": "0"
+          }
+        }
+      ],
+      "axioms_used": [
+        "Countable Choice is inherited from the fixed sine and compact singular bases; Green-kernel differentiation, coordinate integration and series estimates use no further choice."
+      ]
+    },
+    "ex-ip-solit-satellite-gradiometry": {
+      "citations": [
+        {
+          "fact": "A1",
+          "source": "def-countable-choice",
+          "source_section": "Definition",
+          "quote": "For every family $(X_n)_{n \\in \\mathbb{N}}$ of nonempty sets indexed by",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F1",
+          "source": "thm-trigonometric-system-is-complete-in-l-two-of-the-torus",
+          "source_section": "Statement",
+          "quote": "The characters $(e_k)_{k\\in\\mathbb Z}$ form an orthonormal basis of the complex Hilbert space $L^2(\\mathbb T;\\mathbb C)$",
+          "uses": [
+            "1.1",
+            "1.3",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "def-ip-ordered-filter-grid-and-source-index",
+          "source_section": "Definition",
+          "quote": "For $\\sigma>0$, a decreasing candidate sequence $(\\alpha_m)_{m\\in\\mathbb N_0}$ in $\\mathcal A$ has **geometric variance growth**",
+          "uses": [
+            "1.4",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "def-ip-gaussian-sequence-inverse-model",
+          "source_section": "Definition",
+          "quote": "Hence the normalized coordinates satisfy $Z_j=\\theta_j+\\epsilon s_j^{-1}\\xi_j,\\qquad j\\in\\mathbb N.$",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "alg-ip-solit-parameter-choice",
+          "source_section": "Definition",
+          "quote": "Accept an index $m_1$ exactly when $\\|\\widehat x_{m_1}-\\widehat x_{m_2}\\|_X\\le\\eta_{m_1,m_2}$ for every $m_2$ with $m_1<m_2\\le m_{\\max}$",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "lem-ip-solit-filter-risk-decomposition-and-monotone-bias",
+          "source_section": "Statement",
+          "quote": "Then $\\widehat x_m$ is a measurable $X$-valued random element with finite second moment",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F6",
+          "source": "def-ip-ordered-filter-grid-and-source-index",
+          "source_section": "Definition",
+          "quote": "0\\le\\alpha q_\\alpha(x)\\le C_q',\\qquad 0\\le xq_\\alpha(x)\\le1, $$ and $q_\\alpha(x)\\le q_{\\widetilde\\alpha}(x)$ whenever $\\widetilde\\alpha<\\alpha$, for every $x\\in[0,\\lambda_1]$.",
+          "uses": [
+            "1.4",
+            "2.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "ex-ip-solit-satellite-gradiometry-step-1-1",
+          "step": "1.1",
+          "claim": "The truth has zero mean, so it belongs to the mean-zero cosine-sine coefficient model.",
+          "inputs": [
+            "given",
+            "A1",
+            "F1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "ex-ip-solit-satellite-gradiometry-step-1-2",
+          "step": "1.2",
+          "claim": "Positive exponentially decaying multipliers give an injective Hilbert-Schmidt operator and finite-rank truncations converge in operator norm.",
+          "inputs": [
+            "given",
+            "algebra"
+          ]
+        },
+        {
+          "id": "ex-ip-solit-satellite-gradiometry-step-1-3",
+          "step": "1.3",
+          "claim": "Diagonal action gives the double eigenvalues n^2(n+1)^2 R^{-2n-4}, an exponential spectrum with exponent one.",
+          "inputs": [
+            "given",
+            "F1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "ex-ip-solit-satellite-gradiometry-step-1-4",
+          "step": "1.4",
+          "claim": "Uniform summable domination, strict monotonicity and endpoint limits of the Tikhonov variance yield a recursively chosen exact-ratio grid.",
+          "inputs": [
+            "given",
+            "F2",
+            "F6",
+            "step 1.2",
+            "algebra"
+          ]
+        },
+        {
+          "id": "ex-ip-solit-satellite-gradiometry-step-2-1",
+          "step": "2.1",
+          "claim": "The verified operator, Gaussian experiment, candidate grid and estimator moments make the example an admissible selector input, without a rate claim.",
+          "inputs": [
+            "given",
+            "F1",
+            "F2",
+            "F3",
+            "F4",
+            "F5",
+            "F6",
+            "step 1.2",
+            "step 1.4"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "Step 1.1 verifies the omitted zero-frequency coefficient is exactly zero."
+        },
+        {
+          "case": "zero",
+          "status": "not_applicable",
+          "reason": "The example assumes sigma>0 and makes no zero-noise claim."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Step 2.1 and the finite check substitute frequencies n=1 and n=2."
+        },
+        {
+          "case": "degenerate",
+          "status": "not_applicable",
+          "reason": "The truth is nonzero and the operator is injective for R>1."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Steps 1.2 and 1.4 verify multiplier decay and the Tikhonov variance limits at zero and infinity."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Step 1.1 cites A1 for the fixed countable Fourier coordinates."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The item states no biconditional."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The item states no biconditional."
+        }
+      ],
+      "finite_checks": [
+        {
+          "name": "first two satellite frequencies",
+          "method": "substitute n=1,2 into t_n, lambda_n and the Tikhonov variance",
+          "input": {
+            "R": "R>1",
+            "n": [
+              1,
+              2
+            ]
+          },
+          "calculation": "t1=2R^-3, t2=6R^-4, lambda1=4R^-6 and lambda2=36R^-8; both first Tikhonov variance terms are finite positive functions of alpha>0.",
+          "expected": {
+            "t1": "2R^-3",
+            "t2": "6R^-4",
+            "lambda1": "4R^-6",
+            "lambda2": "36R^-8"
+          }
+        }
+      ],
+      "axioms_used": [
+        "Countable Choice is inherited from the fixed Fourier and singular-system coordinates; the multiplier, compactness and variance-grid calculations use no further choice."
+      ]
+    },
+    "ex-ip-solit-periodic-heat-equation": {
+      "citations": [
+        {
+          "fact": "A1",
+          "source": "def-countable-choice",
+          "source_section": "Definition",
+          "quote": "For every family $(X_n)_{n \\in \\mathbb{N}}$ of nonempty sets indexed by",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F1",
+          "source": "thm-trigonometric-system-is-complete-in-l-two-of-the-torus",
+          "source_section": "Statement",
+          "quote": "The characters $(e_k)_{k\\in\\mathbb Z}$ form an orthonormal basis of the complex Hilbert space $L^2(\\mathbb T;\\mathbb C)$",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "def-ip-ordered-filter-grid-and-source-index",
+          "source_section": "Definition",
+          "quote": "For $\\sigma>0$, a decreasing candidate sequence $(\\alpha_m)_{m\\in\\mathbb N_0}$ in $\\mathcal A$ has **geometric variance growth**",
+          "uses": [
+            "1.3",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "def-ip-gaussian-sequence-inverse-model",
+          "source_section": "Definition",
+          "quote": "Hence the normalized coordinates satisfy $Z_j=\\theta_j+\\epsilon s_j^{-1}\\xi_j,\\qquad j\\in\\mathbb N.$",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "alg-ip-solit-parameter-choice",
+          "source_section": "Definition",
+          "quote": "Accept an index $m_1$ exactly when $\\|\\widehat x_{m_1}-\\widehat x_{m_2}\\|_X\\le\\eta_{m_1,m_2}$ for every $m_2$ with $m_1<m_2\\le m_{\\max}$",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "lem-ip-solit-filter-risk-decomposition-and-monotone-bias",
+          "source_section": "Statement",
+          "quote": "Then $\\widehat x_m$ is a measurable $X$-valued random element with finite second moment",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F6",
+          "source": "def-ip-ordered-filter-grid-and-source-index",
+          "source_section": "Definition",
+          "quote": "0\\le\\alpha q_\\alpha(x)\\le C_q',\\qquad 0\\le xq_\\alpha(x)\\le1, $$ and $q_\\alpha(x)\\le q_{\\widetilde\\alpha}(x)$ whenever $\\widetilde\\alpha<\\alpha$, for every $x\\in[0,\\lambda_1]$.",
+          "uses": [
+            "2.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "ex-ip-solit-periodic-heat-equation-step-1-1",
+          "step": "1.1",
+          "claim": "Fourier diagonalization of the periodic heat equation gives the stated constant and positive-frequency multipliers.",
+          "inputs": [
+            "given",
+            "A1",
+            "F1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "ex-ip-solit-periodic-heat-equation-step-1-2",
+          "step": "1.2",
+          "claim": "The multipliers are positive and square summable, so the operator is injective, compact and Hilbert-Schmidt with the displayed squared spectrum.",
+          "inputs": [
+            "given",
+            "algebra"
+          ]
+        },
+        {
+          "id": "ex-ip-solit-periodic-heat-equation-step-1-3",
+          "step": "1.3",
+          "claim": "The final spectral-cutoff variance term forces the consecutive ratio to diverge, so no finite upper grid ratio exists.",
+          "inputs": [
+            "F2",
+            "algebra"
+          ]
+        },
+        {
+          "id": "ex-ip-solit-periodic-heat-equation-step-2-1",
+          "step": "2.1",
+          "claim": "The Tikhonov variance is continuous and strictly decreasing with limits infinity and zero, so the intermediate value theorem constructs an exact fixed-ratio grid.",
+          "inputs": [
+            "given",
+            "F2",
+            "F3",
+            "F4",
+            "F5",
+            "F6",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "Statement: the real periodic coefficient space includes the constant coordinate and all positive frequencies."
+        },
+        {
+          "case": "zero",
+          "status": "not_applicable",
+          "reason": "The example assumes positive heat time and positive noise, and makes no zero-noise claim."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Step 1.2 and the finite check compute the constant and first-frequency eigenvalues."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Step 1.2: every multiplier is positive, including the constant coordinate, so the operator is injective."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Step 2.1 establishes both Tikhonov variance limits needed for the candidate grid."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Step 1.1 cites A1 for the fixed countable Fourier coordinates."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The item states no biconditional."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The item states no biconditional."
+        }
+      ],
+      "finite_checks": [
+        {
+          "name": "heat modes zero through two",
+          "method": "substitute frequencies into the heat multipliers and cutoff variance",
+          "input": {
+            "time": "tbar>0",
+            "n": [
+              0,
+              1,
+              2
+            ]
+          },
+          "calculation": "Squared eigenvalues are 1, e^-2tbar (twice), and e^-8tbar (twice); V1=1+2e^(2tbar), V2=1+2e^(2tbar)+2e^(8tbar).",
+          "expected": {
+            "lambda0": "1",
+            "lambda1": "e^-2tbar",
+            "lambda2": "e^-8tbar",
+            "V1": "1+2e^(2tbar)",
+            "V2": "1+2e^(2tbar)+2e^(8tbar)"
+          }
+        }
+      ],
+      "axioms_used": [
+        "Countable Choice is inherited from the fixed Fourier and singular-system coordinates; the multiplier and variance-grid calculations use no further choice."
+      ]
+    }
+  }
+}

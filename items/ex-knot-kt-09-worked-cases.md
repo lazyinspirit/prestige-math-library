@@ -26,6 +26,11 @@ proof_strategy: direct
 provenance:
   statement: ai-altered
   proof: ai-altered
+verification:
+  judge:
+    model: "gpt-6-luna"
+    verdict: pass
+    date: 2026-10-22
 sources:
   references:
     - title: "Thomas Cochran, Classical Isotopy Invariants of Links and 3-Manifolds, slides 4–5"

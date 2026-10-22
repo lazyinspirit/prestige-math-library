@@ -31,6 +31,11 @@ axiom_use: >-
 provenance:
   statement: ai-altered
   proof: ai-altered
+verification:
+  judge:
+    model: "gpt-6-luna"
+    verdict: pass
+    date: 2026-10-22
 sources:
   references:
     - title: "Stephen Boyd and Lieven Vandenberghe, Convex Optimization, §3.1.5"

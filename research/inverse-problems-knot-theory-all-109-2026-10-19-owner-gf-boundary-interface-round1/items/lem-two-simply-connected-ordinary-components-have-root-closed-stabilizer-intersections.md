@@ -1,0 +1,59 @@
+---
+id: lem-two-simply-connected-ordinary-components-have-root-closed-stabilizer-intersections
+kind: lemma
+title: Two simply connected ordinary components have root-closed stabilizer intersections
+status: draft
+origin: pipeline
+pipeline_run: inverse-problems-knot-theory-all-109-2026-10-19
+deps:
+  - def-axiom-of-choice
+  - thm-riemann-mapping-theorem
+  - thm-disc-automorphisms-are-rotated-blaschke-factors
+  - lem-jordan-schoenflies-extension-for-plane-curves
+  - lem-local-thin-components-of-torsion-free-kleinian-quotients
+justified_by: []
+proof_strategy: direct
+axiom_use: AC is inherited from the actual Riemann-mapping, Jordan-extension and discrete-group suppliers; the component-orbit and graph arguments are finite.
+provenance:
+  statement: ai-altered
+  proof: ai-generated
+sources:
+  references:
+    - title: Curtis T. McMullen, Iteration on Teichmuller space
+      url: https://people.math.harvard.edu/~ctm/papers/home/text/papers/iter/iter.pdf
+      locator: Section3.1, the actual component-stabilizer and boundary-model setting. The cyclic-root proof is supplied locally, not imported from a source assertion.
+---
+
+## Statement
+
+Assume AC. Let $\Gamma\le\mathrm{PSL}_2(\mathbb C)$ be discrete and torsion-free. Let $D,E$ be two distinct simply connected components of its ordinary set, and let $H=\operatorname{Stab}_\Gamma(D)$ and $K=\operatorname{Stab}_\Gamma(E)$. For every $\gamma\in K$ and every nonzero integer $m$,
+
+$$\gamma^m\in H\quad\Longrightarrow\quad\gamma\in H.$$
+
+Thus the actual subgroup $H\cap K$ is root-closed inside $K$. This is a statement about the supplied two component stabilizers, not about an arbitrary subgroup of $\Gamma$ or about root closure of $H$ in all of $\Gamma$.
+
+There is also a one-component parabolic version: if $D$ is a simply connected ordinary component, $\gamma\in\Gamma$ is parabolic and $\gamma^mD=D$ for a nonzero integer $m$, then $\gamma D=D$, without requiring a second preserved component.
+
+## Facts & Assumptions
+
+**Given:** The actual ordinary components and their full stabilizers, and the displayed power relation. No marking map, abstract subgroup identification, geometric finiteness or quasidisk hypothesis is supplied or inferred.
+
+[F1] Ordinary components are permuted by $\Gamma$ and have free properly discontinuous torsion-free actions of their stabilizers. The Möbius classification and elliptic exclusion for such groups are in [[lem-local-thin-components-of-torsion-free-kleinian-quotients]]: a nonidentity element is loxodromic or parabolic. Its nonzero powers have the same fixed points and type. A loxodromic normalized to $z\mapsto az$, $|a|>1$, has iterates tending uniformly to zero and infinity on compact sets avoiding those fixed points; a parabolic normalized to $z\mapsto z+1$ has both integer directions tending uniformly to infinity on compact sets.
+
+[F2] A simply connected ordinary component has a disk uniformizer by [[thm-riemann-mapping-theorem]], after putting a point of its complement at infinity; the complement contains other ordinary points when two components are given. For the one-component parabolic case, the plane and sphere exceptions are handled directly in step 1.1. In every remaining simply connected case the component has at least two complementary points and the same disk-uniformization argument applies. Disk automorphisms are Möbius by [[thm-disc-automorphisms-are-rotated-blaschke-factors]]. A fixed-point-free nonidentity disk automorphism is either hyperbolic, preserving its hyperbolic axis, or parabolic, preserving every horocycle about its fixed point. In either case it preserves a proper line parametrized by the real numbers and acts on that line as an orientation-preserving translation with one compact fundamental segment.
+
+[F3] A Jordan curve on the sphere separates it into two disks and admits a sphere homeomorphism to a round circle, by [[lem-jordan-schoenflies-extension-for-plane-curves]]. The same extension supplies a prescribed boundary homeomorphism between closed Jordan disks: first use Jordan extensions to identify them with closed round disks, and extend the remaining circle homeomorphism radially by $r\zeta\mapsto r f(\zeta)$. In particular a crosscut of a closed Jordan disk joining two distinct boundary points divides it into two closed Jordan disks, since the crosscut joined to either boundary interval is a Jordan curve; the boundary extensions paste to straighten that crosscut relative to the original disk boundary.
+
+[A1] Full choice is [[def-axiom-of-choice]].
+
+## Proof
+
+1.1 Replace $\gamma$ by its inverse if necessary to make the power exponent positive. If $\gamma=1$ the claim holds. Otherwise [F1] leaves only its loxodromic and parabolic types. Since $\gamma^mD=D$, there is a least positive integer $k$ with $\gamma^kD=D$; division with remainder shows $k$ divides $m$, and the distinct orbit components are $D_i=\gamma^iD$, $0\le i<k$. If $D=S^2$, it is preserved by every map. If $D=S^2\setminus\{q\}$, the power relation makes $\gamma^m q=q$. For a parabolic $\gamma$, its nonzero powers have exactly its own fixed point, so $\gamma q=q$ and $\gamma D=D$. Neither exceptional component can occur together with a distinct open component $E$, so these observations settle all exceptions relevant here. In the remaining cases [F2] supplies the disk uniformizer of $D$. The action of $\gamma^k$ there has no interior fixed point, since its sphere action is free on the ordinary set. Choose its invariant proper line: an axis in the hyperbolic case, or a horocycle in the parabolic case. Let $B_0\subset D$ be its image and put $B_i=\gamma^iB_0$. Then $\gamma^kB_0=B_0$, so $\gamma$ permutes these $k$ disjoint proper lines in exactly the same cyclic order as the components $D_i$. Each is the union of translates of one compact fundamental arc under $\gamma^k$. No assertion that the disk and sphere types agree is needed. [F1, F2, A1, given, construct, algebra]
+
+2.1 Suppose first that $\gamma$ is loxodromic, and label its repelling and attracting points $p_-,p_+$. They lie outside all the ordinary components in question, being fixed points of nonidentity elements. On the compact fundamental arc of $B_0$, the positive and negative iterates of $\gamma^k$ converge uniformly to $p_+$ and $p_-$ by [F1]. Thus each $B_i$ extends to a Jordan arc $\overline B_i=B_i\cup\{p_-,p_+\}$ with these two distinct endpoints: the extension of the proper-line parametrization to a closed interval is continuous and injective, hence is a homeomorphism onto its image. Because $\gamma E=E$, choose a $\gamma$-invariant disk axis or horocycle in $E$ as in [F2]. Its image likewise closes to a Jordan arc $\overline A$ from $p_-$ to $p_+$. This arc is setwise fixed by $\gamma$, and its open part is disjoint from every $B_i$. Distinct $B_i$ have disjoint interiors because they lie in distinct ordinary components. We have a finite theta graph with vertices $p_-,p_+$ and edges $\overline A,\overline B_0,\ldots,\overline B_{k-1}$. [F1, F2, step 1.1, construct, algebra]
+
+2.2 Suppose next that $\gamma$ is parabolic; this branch does not use $E$. Normalize its unique fixed point to infinity and $\gamma(z)=z+1$. By step 1.1 every $B_i$ is the union of translates of a compact arc under $z\mapsto z+k$. It is therefore a proper line contained in one fixed horizontal strip, and its parametrization has real coordinate tending to minus infinity and plus infinity at its two ends. Choose a common $M$ so all $B_i$ lie in $|\operatorname{Im}z|<M$. Each $B_i$ separates the plane into an upper region $U_i$ containing $\{\operatorname{Im}z>M\}$ and a lower region $V_i$ containing $\{\operatorname{Im}z<-M\}$. To check that these are different regions, compactify the proper line by infinity and use Jordan separation. If an upper-to-lower path avoided the line, take a rectangle containing that path, with horizontal edges above and below the strip. The real-coordinate limits of the line supply a crosscut from its left edge to its right edge: take the first hitting of the right edge and the last hitting of the left edge before it. The intervening arc stays inside the rectangle and separates its top and bottom by [F3]. Extend the proposed path within the upper and lower half-planes to those horizontal edges; it would have to cross that crosscut, a contradiction. This proves the asserted upper/lower distinction, even when the line is not a graph over its real coordinate. [F1, F3, step 1.1, construct, algebra]
+
+3.1 Here the needed finite graph order is a consequence of [F3], not an unproved regularity assumption at the ideal endpoints. Any two edges form a Jordan circle. Straighten that circle by [F3]; its two complementary regions are Jordan disks, with the two vertices on their boundaries. Every other edge lies in one of these regions and is a crosscut joining those same distinct vertices. Straighten it relative to that region's boundary by the explicit boundary extensions in [F3]. It divides that region into two Jordan disks. Repeating finitely many times gives a homeomorphism of the sphere taking the whole graph to finitely many standard meridian arcs from one pole to the other. Consequently its edges have a cyclic order at the first vertex, with the reverse compatible order at the second. This order is independent of the successive straightening: one can take a small Jordan disk about the first vertex meeting every standard edge once; two such transverse boundaries yield the same order because disjoint connecting arcs in their annular region cannot cross. Transporting back defines the same intrinsic order in the original embedded graph. An orientation-preserving sphere homeomorphism fixing both vertices preserves this cyclic order, since it takes any such disk and its oriented boundary to another such disk and oriented boundary. Therefore $\gamma$ preserves the finite cyclic order of all the edges. It fixes the edge $\overline A$, so its permutation of the remaining finite cyclically ordered edges must be the identity: starting immediately after that fixed edge, successive edges are determined uniquely by their order. In particular $\gamma\overline B_0=\overline B_0$, hence $\gamma B_0=B_0$. This gives a point in $D\cap\gamma D$, forcing equality of these ordinary components. Thus $k=1$ in the loxodromic case. [F3, step 1.1, step 2.1, construct, algebra]
+
+4.1 These finitely many lines have a strict linear north-to-south order. Indeed for $i\ne j$, the connected line $B_j$ is contained entirely in $U_i$ or entirely in $V_i$. If $B_j\subset U_i$, then $V_i\subset V_j$: the connected set $V_i$ misses $B_j$ and contains the lower half-plane. A point of $B_i$ can be approached from $V_i$ along a path avoiding $B_j$, using the Jordan disk parametrization of [F3], so $B_i\subset V_j$ as well. Hence $V_i$ is properly contained in $V_j$. In the other case the reverse strict inclusion holds. Thus the $V_i$ form a strictly nested finite family, which gives a linear order; transitivity is just transitivity of inclusion. Translation by one preserves the upper and lower half-planes and sends each $B_i$ to $B_{i+1}$, with indices modulo $k$. It therefore preserves that finite linear order, and must fix each member. Once again $\gamma B_0=B_0$ forces $\gamma D=D$. This proves the one-component parabolic conclusion and completes the two-component conclusion for every possible nonidentity $\gamma$. In particular if a primitive element of the actual spot group $K$ has a nonzero power in the actual intersection $H\cap K$, it already lies in that intersection. Applying this to an analytic spot requires that these really are the stated ordinary-component stabilizers; no such geometric identification is inferred from an abstract pair homotopy equivalence. [F3, step 1.1, step 2.2, construct, algebra] ∎

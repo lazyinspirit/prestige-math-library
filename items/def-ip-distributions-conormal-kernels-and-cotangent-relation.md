@@ -44,14 +44,14 @@ For a smooth submersion $p:Y\to M$, define the pullback $p^*u$ by transposing fi
 $$
 \langle p^*u,\psi(x,v)|dx\,dv|\rangle =\left\langle u,\left(\int\psi(x,v)|dv|\right)|dx|\right\rangle.
 $$
-The absolute density quotient gives the fiber density in other submersion coordinates. For a distributional density $V$ on $Y$, meaning a continuous functional on compactly supported smooth scalar functions, define its support by the same largest-vanishing-open-set rule. If $q:Y\to M$ is proper on $\operatorname{supp}V$, then for a test function $\varphi$ on $M$ the set $q^{-1}(\operatorname{supp}\varphi)\cap\operatorname{supp}V$ is compact. Choose a smooth compact cutoff $\beta$ equal to one near this set and define the pushforward by
+The absolute density quotient gives the fiber density in other submersion coordinates. For a distributional density $V$ on $Y$, meaning a continuous functional on compactly supported smooth scalar functions, define its support by the same largest-vanishing-open-set rule. If $q:Y\to M$ is smooth and proper on $\operatorname{supp}V$, then for a test function $\varphi$ on $M$ the set $q^{-1}(\operatorname{supp}\varphi)\cap\operatorname{supp}V$ is compact. Choose a smooth compact cutoff $\beta$ equal to one near this set and define the pushforward by
 $$
 \langle q_*V,\varphi\rangle=\langle V,\beta(\varphi\circ q)\rangle.
 $$
 The support property makes this independent of $\beta$; the cutoff is needed because $\varphi\circ q$ need not be compactly supported on all of $Y$.
 A smooth density $\mu$ times a distribution $u$ in the test-density convention is the distributional density $\mu u$ defined by $\langle\mu u,\varphi\rangle=\langle u,\varphi\mu\rangle$.
 
-Let $Z\subseteq G\times X$ be an embedded submanifold whose two projections are submersions. For a smooth density $\omega_Z$ on $Z$, its incidence delta kernel is the distributional density
+Let $G,X$ be smooth manifolds and $Z\subseteq G\times X$ an embedded submanifold whose two projections are submersions. For a smooth density $\omega_Z$ on $Z$, assume ambient local finiteness: $\int_{Z\cap Q}|\omega_Z|<\infty$ for every compact $Q\subseteq G\times X$. This holds, in particular, when $Z$ is closed in $G\times X$. Its incidence delta kernel is the distributional density
 $$
 \langle K_Z,\Phi\rangle=\int_Z\Phi|_Z\,\omega_Z.
 $$
@@ -59,7 +59,7 @@ In coordinates $(g,x)=(u,t)$ with $Z=\{t=0\}$, this is the delta distribution in
 $$
 N^*Z=\{(z,\zeta)\in T^*(G\times X):z\in Z,\ \zeta|_{T_zZ}=0\}, \qquad C_Z=\{(g,\eta;x,\xi):(g,x;\eta,-\xi)\in N^*Z\setminus0\}.
 $$
-Here $N^*Z\setminus0$ removes the zero covector, and the minus sign is the distribution-kernel convention for an operator from $X$ to $G$. Since both projections are submersions, every nonzero conormal in this relation has both $\eta\ne0$ and $\xi\ne0$. An analytic incidence kernel means that $Z$, its local defining maps, and the coefficients of $\omega_Z$ are real analytic. This definition covers the incidence kernels used below; it does not assert a general Fourier-integral-operator calculus.
+Here $N^*Z\setminus0$ removes the zero covector, and the minus sign is the distribution-kernel convention for an operator from $X$ to $G$. Since both projections are submersions, every nonzero conormal in this relation has both $\eta\ne0$ and $\xi\ne0$. For the analytic terminology, equip $G$ and $X$ with fixed real-analytic atlases compatible with their smooth structures: chart transitions and their inverses have locally convergent real power series. An analytic incidence kernel additionally requires that $Z$ admit real-analytic local defining submersions in these product charts and that $\omega_Z$ have real-analytic coefficients in the induced analytic charts on $Z$. This definition covers the incidence kernels used below; it does not assert a general Fourier-integral-operator calculus.
 
 ## Definition references
 
@@ -95,7 +95,7 @@ Here $N^*Z\setminus0$ removes the zero covector, and the minus sign is the distr
 
 ## Facts & Assumptions
 
-**Given:** A smooth manifold $M$, a submersion $p:Y\to M$, an embedded incidence submanifold $Z\subseteq G\times X$ whose two projections are submersions, and a smooth density on $Z$.
+**Given:** A smooth manifold $M$, a submersion $p:Y\to M$, an embedded incidence submanifold $Z\subseteq G\times X$ whose two projections are submersions, and a smooth density on $Z$ satisfying ambient local finiteness. The analytic clause uses the fixed compatible real-analytic structures specified above.
 
 [F1] [[def-test-function-space-d-of-an-open-set]]: test functions are compactly supported smooth functions.
 
@@ -121,17 +121,21 @@ Here $N^*Z\setminus0$ removes the zero covector, and the minus sign is the distr
 
 [F12] [[lem-smooth-bump-between-concentric-euclidean-balls]]: nested coordinate balls admit smooth cutoffs equal to one on the smaller ball and supported in the larger ball.
 
+[F13] [[def-real-analytic-germ-in-several-variables]]: real-analytic scalar and finite-vector germs are represented by locally absolutely convergent real power series.
+
 ## Proof
 
 **Given:** The data in the definition.
 
 1.1 In submersion coordinates $(x,v)$, a compactly supported test density on $Y$ is $\psi(x,v)|dx\,dv|$. Its fiber integral is $\widetilde\psi(x)=\int\psi(x,v)|dv|$. The integrand has compact support, so differentiation under the integral gives a smooth function; its support lies in the compact projection of $\operatorname{supp}\psi$. Thus $\widetilde\psi(x)|dx|$ is a test density and transposing this operation defines $p^*u$. [given, F1, F2, F3, F5, F11, algebra]
 
-1.2 If $q$ is proper on $\operatorname{supp}V$ and $K$ is compact in $M$, then $Q_K=q^{-1}(K)\cap\operatorname{supp}V$ is compact. Choose one smooth cutoff $\beta_K$ equal to one near $Q_K$. For every test function $\varphi$ supported in $K$, define $\langle q_*V,\varphi\rangle=\langle V,\beta_K(\varphi\circ q)\rangle$. If another cutoff is used, the difference of the two test functions vanishes on a neighborhood of $\operatorname{supp}V$: it vanishes near $Q_K$ because both cutoffs equal one there, and away from $Q_K$ either $V$ vanishes or $\varphi\circ q=0$. Hence [F4] gives the same pairing. The chain and product rules bound every fixed-support seminorm of $\beta_K(\varphi\circ q)$ by finitely many fixed-support seminorms of $\varphi$, so continuity of $V$ proves continuity of $q_*V$. A finite cover by coordinate balls and [F12] supplies $\beta_K$. Multiplication by a smooth density is defined by the stated transpose formula, so the typed pushforward is well-defined. [F1, F2, F4, F5, F7, F8, F12, given, algebra]
+1.2 If $q$ is smooth and proper on $\operatorname{supp}V$ and $K$ is compact in $M$, then $Q_K=q^{-1}(K)\cap\operatorname{supp}V$ is compact. Choose one smooth cutoff $\beta_K$ equal to one near $Q_K$. For every test function $\varphi$ supported in $K$, smoothness of $q$ makes $\beta_K(\varphi\circ q)$ smooth with support in the fixed compact set $\operatorname{supp}\beta_K$, so define $\langle q_*V,\varphi\rangle=\langle V,\beta_K(\varphi\circ q)\rangle$. If another cutoff is used, the difference of the two test functions vanishes on a neighborhood of $\operatorname{supp}V$: it vanishes near $Q_K$ because both cutoffs equal one there, and at every point of $\operatorname{supp}V\setminus Q_K$, continuity of $q$ gives a neighborhood mapped outside the closed set $K$, where $\varphi\circ q=0$. Hence [F4] gives the same pairing; choosing a common cutoff for the union of two compact test supports also proves linearity. The chain and product rules bound every fixed-support seminorm of $\beta_K(\varphi\circ q)$ by finitely many fixed-support seminorms of $\varphi$, so continuity of $V$ proves continuity of $q_*V$. A finite cover by coordinate balls and [F12] supplies $\beta_K$. Multiplication by a smooth density is defined by the stated transpose formula, so the typed pushforward is well-defined. [F1, F2, F4, F5, F7, F8, F12, given, algebra]
 
-1.3 In coordinates where $Z=\{t=0\}$, the incidence functional is integration of the restricted test function against $\omega_Z$. Under a change of coordinates on $Z$, the coefficient of $\omega_Z$ transforms by the absolute tangential Jacobian [F5]. Thus the functional is independent of the defining chart. [F5, F7, F8, given]
+1.3 For tests supported in a fixed compact $Q\subseteq G\times X$, ambient local finiteness gives $|\langle K_Z,\Phi\rangle|\le\sup_Q|\Phi|\int_{Z\cap Q}|\omega_Z|$. Thus the integral is finite and continuous in the fixed-support test topology. If $Z$ is closed, $Z\cap Q$ is compact in $Z$, and finitely many relatively compact charts bound this integral for every smooth density. In coordinates where $Z=\{t=0\}$, the functional is integration of the restricted test function against $\omega_Z$. Under a change of coordinates on $Z$, the coefficient transforms by the absolute tangential Jacobian [F5], so the functional is independent of the defining chart. [F2, F5, F7, F8, given]
 
 1.4 A covector annihilating $T_zZ$ transforms by the inverse transpose rule [F6], so $N^*Z$ and $C_Z$ are coordinate independent. If a conormal has the form $(\eta,0)$, it annihilates the image of $d\pi_G:T_{(g,x)}Z\to T_gG$, which is all of $T_gG$ because $\pi_G$ is a submersion; therefore $\eta=0$. Applying the same argument to $\pi_X$ shows that $(0,\xi)$ can only be zero. [F6, F11, given, algebra]
+
+1.5 The analytic conditions are relative to the fixed atlases. On overlaps of induced analytic charts on $Z$, the nonzero coordinate Jacobian has locally constant sign, so its absolute value is analytic. The density transition rule therefore preserves analyticity of its coefficient. The defining submersions and analytic chart changes specify the same analytic embedded submanifold, while the underlying smooth distribution operations are unchanged. [F5, F13, given, algebra]
 
 2.1 On overlapping submersion charts, the full absolute Jacobian factors into the base Jacobian and the fiber-density quotient. The fiber integral therefore transforms as a base density. This proves that the transposed functional in step 1.1 is chart independent. [F5, F7, F8, F11, algebra, step 1.1]
 

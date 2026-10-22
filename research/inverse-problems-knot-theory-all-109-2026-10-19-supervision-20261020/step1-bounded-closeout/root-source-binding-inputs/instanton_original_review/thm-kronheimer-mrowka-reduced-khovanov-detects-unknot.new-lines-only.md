@@ -1,0 +1,6 @@
+<!-- new lines at canonical 62 -->
+[A2] For every knot $J$, $I^\natural(J;\mathbb Q)\cong KHI(J;\mathbb Q)$ and $\dim_{\mathbb Q}KHI(J;\mathbb Q)\ge1$, with equality exactly for the unknot ([[thm-sutured-instanton-khi-rank-detects-unknot]], Statement). The supplier now records the needed ordinary surface, closure/excision and genus/nonvanishing results as explicitly published external inputs under the run-specific permission, retaining its local singular and unknot calculations. This does not pretend that the analytic complex or integral cube alone proves rank detection.
+
+<!-- new lines at canonical 82 -->
+The rank argument is complete relative to the explicitly labelled supplier interfaces [A1]–[A3]. The accepted integral resolution construction supplies [A1]; its proof is reused without rereading or revalidating it. The rank detector [A2] now supplies its precise published ordinary-surface, closure/excision and genus/nonvanishing inputs under the expanded run-specific permission; this is a source-qualified use, not a claim of local reconstruction of those inputs. With [A1]–[A3], the finite localization/rank argument proves the unchanged Statement. It uses no distinguished instanton vector and gives no workflow-readiness conclusion.
+

@@ -1,0 +1,5 @@
+# Touch snapshots
+
+`touchlog.mjs snap` retains whole-corpus semantics unless `--step6-run RUN` is supplied. The final Step 6 endpoint selects exactly the current run manifests plus that run's existing version-1 published claims. It preserves case-sensitive item IDs and accepts the canonical mathematical kind prefixes with ASCII letters and digits in nonempty hyphen-separated segments, as specified by SCHEMA.md. The Step 6 readiness tree applies the same item grammar. This changes neither source identity, scope membership, migration ownership, nor review credit. Foreign claims, malformed names, missing selected files and empty scope remain blocking.
+
+Historical snapshots and seeded repairs remain intact. A label remains a key: `--idempotent` reuses it only when both mathematical and public-interface hash maps match exactly, without rewriting the ledger. Changed bytes under an existing label still reject. The narrower final endpoint never rewrites an earlier whole-corpus baseline or invents a zero-touch history.

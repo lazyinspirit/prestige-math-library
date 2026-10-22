@@ -1,0 +1,19 @@
+# Independent FIRST review: finite standard-cover isotopy
+
+Verdict: **PASS at the written bounded scope.** No focused mathematical repair is required. This is the first review of the new frozen input, not a review of an accepted supplier or a cobordism-invariance theorem.
+
+## Input and permitted dependencies
+
+Reviewed the actual complete `root-first-review-inputs/finite-standard-cover-isotopy-first-review.md`. Consulted only the exact contract headings of the two retained compact-product local-contractibility constructions: `renewed-compact-product-local-contractibility/construction.md`, “Exact new contract”, and `renewed-higher-compact-product-local-contractibility/construction.md`, “Statement”. These include every ball/torus split in dimensions four/five and each fixed finite higher dimension, the zero-ball and zero-torus cases, and a forward uniform-displacement premise with boundary fixed. Period rescaling is legitimate. No accepted proof body, currency, hash, native binding, or gate was checked.
+
+## Actual argument checked
+
+1. Identity on the abelian fundamental group yields an equivariant universal lift. The inverse lift with matching basepoint proves it is a homeomorphism. Periodicity gives a finite bound on the displacement on one compact fundamental domain. Conjugation by real dilation yields the stated standard-cover lift and its forward torus bound.
+2. On each boundary component the displacement is a constant integer vector. The sphere boundary is connected for s≥2. For s=1 the constants need not agree: the affine shear has an explicit inverse, fixes both boundary components at its endpoint after composition, and retains the stated bound even though it is evaluated at the output ball coordinate. A boundary-relative homotopy forces the two constants to agree; one deck normalization then makes them zero. No unearned relative conclusion is used.
+3. The finite Alexander compression is a genuine homeomorphism for every positive radius, including across the interface, with the displayed inverse. Joint continuity holds on the compact positive-radius interval. It requires no radius-zero limit. Ball displacement is at most twice the final radius, while the torus bound survives unchanged. The resulting map satisfies the retained boundary-fixed local-contractibility contract. Concatenation gives exactly the asserted isotopy, with the stated relative/nonrelative distinction. Both degenerate factor cases and arbitrary compatible metrics are covered.
+4. The circle-product normalization exists from the displayed increasing lifts. To make the implicit reversal/inversion completely explicit, if φ_t is the path φ→id written there, put P_u=id_B×φ_(1−u)^(-1)×id. Then P_0=id, P_1 has circle factor φ^(-1), and P_u h is an isotopy to a boundary-fixed map. On the multiplication-D cover this path lifts explicitly using Ψ_u=Φ_(1−u)^(-1) and circle coordinate [z]↦[Ψ_u(Dz)/D]. Consequently the eventual chosen lift of the original h is isotopic to the lift of the normalized map; the circle extension does not merely prove a result about a different homeomorphism. This is a direct finite construction from the written data. Writing this formula in a future packaging edit would be a nonblocking clarification, not a new mathematical prerequisite.
+5. Choices outside the adopted local-contractibility supplier are finite; no full Choice or infinite dependent construction is introduced. The relative-homotopy hypothesis remains explicit.
+
+## Limits of this verdict
+
+This proves the stated finite standard-cover isotopy calculation, including the orientation-preserving circle-product boundary extension. It does not prove preservation of a cut-cobordism invariant, an E2 product statement, invertibility, or the existence of a product for every sufficiently large cover of an unrelated original cobordism. No such assertion was used in the review. One first pass has been used; no repair/final cycle was needed.

@@ -22,6 +22,11 @@ provenance:
   statement: literature-derived
   proof: ai-altered
 axiom_use: The Axiom of Choice is inherited from the Gaussian posterior construction; Countable Choice is used by the shifted-operator and Hilbert-space interfaces. The null-direction scaling argument uses no further choice.
+verification:
+  judge:
+    model: "gpt-6-luna"
+    verdict: pass
+    date: 2026-10-22
 sources:
   references:
     - title: "Remo Kretschmann and Frank Werner, Maximum a posteriori testing in statistical inverse problems, Theorem 2.6 and its proof"

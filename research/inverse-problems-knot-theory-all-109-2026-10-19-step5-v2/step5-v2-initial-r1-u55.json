@@ -1,0 +1,268 @@
+{
+  "run": "inverse-problems-knot-theory-all-109-2026-10-19",
+  "phase": "initial",
+  "round": 1,
+  "unit": "55",
+  "input_sha256": "c872603b0f7c95c42125928ec1ced19e672caec5508e4ce625685b74e981d23d",
+  "decisions": [
+    {
+      "id": "def-ip-discrete-linear-input-state-output-experiment",
+      "model": "gpt-6-luna",
+      "context_sha256": "5394cc38f008ebfcb75a5a0a645f4ecd151688e5cbd737a8d72946f1abea5268",
+      "outcome": "confirmed_fatal",
+      "defect_type": "logic",
+      "reason": "The finite experiment defines neither u0 at q=1 nor y_{k+1} when k+1>=q, so its unqualified impulse-output assertion refers to undefined data. Repaired by explicitly defining the infinite-horizon impulse experiment and specifying its finite restriction, preserving M_k=CA^kB for all k>=0.",
+      "uncertain": false,
+      "source_urls": [
+        "https://ocw.mit.edu/courses/6-241j-dynamic-systems-and-control-spring-2011/760782bd5ceefacb37bf8719dc23dfcb_MIT6_241JS11_chap25.pdf"
+      ],
+      "familiar": true
+    },
+    {
+      "id": "alg-ip-exact-block-hankel-realization",
+      "model": "gpt-6-luna",
+      "context_sha256": "9d0ec66c8ae1d2b11fc1a1fce444bd337b4b6f2142fbbd23df4bec2be3c12bf6",
+      "outcome": "false_positive",
+      "reason": "The proposed matrices do give Ahat=0 and Chat Ahat Bhat=0, but success is the specified completion status of a procedure, not an assertion that arbitrary rank-d H0 data admit a d-state realization. The actual owning contract explicitly disclaims arbitrary-data consistency. Recovery is a separate theorem assuming M_k=CA^kB for a d-state system and rank O_q=rank R_q=d. The witness violates that hypothesis: at d=1, B and C are a row and column, so CAB=a CB=a M0 cannot equal the proposed M1. The page makes no additional unconditional claim. No algorithm edit is warranted.",
+      "uncertain": false,
+      "source_urls": [
+        "https://ocw.mit.edu/courses/6-241j-dynamic-systems-and-control-spring-2011/760782bd5ceefacb37bf8719dc23dfcb_MIT6_241JS11_chap25.pdf"
+      ],
+      "familiar": true
+    }
+  ],
+  "reviews": [
+    {
+      "id": "def-ip-discrete-linear-input-state-output-experiment",
+      "disposition": "repaired",
+      "post_sha256": "22dbeabeb260bb47c00dd78c5e54a53186e5dc6cbd146807890fffb3930ea548",
+      "review_context_sha256": "06d93cdc11223dfa80b8ed5c6772f44044b6e47855f427e3376dcbcf48a91534",
+      "reason": "Reviewed the recurrence, all three supplier interfaces, dimensions and empty shapes. In the explicitly extended zero-state impulse experiment x_{k+1}=A^k Bv, hence y_{k+1}=M_kv. Only k<q-1 is sampled in a finite horizon; q=1 has only y0=0, and d=0 gives zero outputs. The finite-data, deterministic-error and no-choice conventions are preserved. Owning claim and citation mirrors were synchronized. This is the repairer review, not independent acceptance.",
+      "uncertain": false,
+      "source_urls": [
+        "https://ocw.mit.edu/courses/6-241j-dynamic-systems-and-control-spring-2011/760782bd5ceefacb37bf8719dc23dfcb_MIT6_241JS11_chap25.pdf"
+      ],
+      "familiar": true
+    },
+    {
+      "id": "alg-ip-exact-block-hankel-realization",
+      "disposition": "unaffected",
+      "post_sha256": "9c17402bcc0c576801df37fce79674a52f2fc75c815686c17cc98901f55fa290",
+      "review_context_sha256": "bded159eb283d87a5a6e03dc45bd96e7bae2158c6ac03a8151496268e43760f7",
+      "reason": "Reviewed every procedure branch, all six actual supplier interfaces, the owning contract and page, and the complete conditional recovery argument. H0 and H1 have shape qp by qm; exact rank-d factors and Penrose inverses yield Ahat of shape d by d, Bhat d by m and Chat p by d. For d=0 the empty operations are defined, including when H1 is nonzero. No universal input-consistency claim is made. Under the recovery theorem hypotheses, H0=O_q R_q, H1=O_q A R_q, and the common-image change of basis gives the three asserted similarity identities. Its zero-state impulse use remains valid under the repaired supplier. No item or own contract change was made.",
+      "uncertain": false,
+      "source_urls": [
+        "https://ocw.mit.edu/courses/6-241j-dynamic-systems-and-control-spring-2011/760782bd5ceefacb37bf8719dc23dfcb_MIT6_241JS11_chap25.pdf"
+      ],
+      "familiar": true
+    }
+  ],
+  "created_items": [],
+  "downstream": [
+    "alg-ip-exact-block-hankel-realization",
+    "thm-ip-finite-observability-identifies-initial-state",
+    "thm-ip-state-similarity-preserves-input-output-data",
+    "thm-ip-hankel-realization-recovers-controllable-observable-system",
+    "cex-ip-continuous-time-frequency-aliasing",
+    "ex-ip-similar-state-space-realizations-same-data",
+    "ex-ip-unobservable-state-mode",
+    "ex-ip-small-hankel-singular-value-amplifies-realization-perturbation"
+  ],
+  "ledger_updates": [
+    {
+      "ledger": "canonical-defect-ledger",
+      "action": "record-fixed-finding",
+      "id": "def-ip-discrete-linear-input-state-output-experiment",
+      "severity": "fatal",
+      "defect_type": "logic",
+      "location": "Definition, impulse-response paragraph",
+      "reason": "The finite experiment defines neither u0 at q=1 nor y_{k+1} when k+1>=q, so its unqualified impulse-output assertion refers to undefined data. Repaired by explicitly defining the infinite-horizon impulse experiment and specifying its finite restriction, preserving M_k=CA^kB for all k>=0.",
+      "repair": "Defined the infinite-horizon impulse recurrence and the finite restriction without changing M_k=CA^kB or the original finite experiment.",
+      "post_sha256": "22dbeabeb260bb47c00dd78c5e54a53186e5dc6cbd146807890fffb3930ea548",
+      "uncertain": false,
+      "source_urls": [
+        "https://ocw.mit.edu/courses/6-241j-dynamic-systems-and-control-spring-2011/760782bd5ceefacb37bf8719dc23dfcb_MIT6_241JS11_chap25.pdf"
+      ],
+      "familiar": true
+    },
+    {
+      "ledger": "canonical-defect-ledger",
+      "action": "record-false-positive",
+      "id": "alg-ip-exact-block-hankel-realization",
+      "reason": "The proposed matrices do give Ahat=0 and Chat Ahat Bhat=0, but success is the specified completion status of a procedure, not an assertion that arbitrary rank-d H0 data admit a d-state realization. The actual owning contract explicitly disclaims arbitrary-data consistency. Recovery is a separate theorem assuming M_k=CA^kB for a d-state system and rank O_q=rank R_q=d. The witness violates that hypothesis: at d=1, B and C are a row and column, so CAB=a CB=a M0 cannot equal the proposed M1. The page makes no additional unconditional claim. No algorithm edit is warranted.",
+      "uncertain": false,
+      "source_urls": [
+        "https://ocw.mit.edu/courses/6-241j-dynamic-systems-and-control-spring-2011/760782bd5ceefacb37bf8719dc23dfcb_MIT6_241JS11_chap25.pdf"
+      ],
+      "familiar": true
+    },
+    {
+      "ledger": "published-consumer-ledger",
+      "action": "record-no-published-impact",
+      "id": "def-ip-discrete-linear-input-state-output-experiment",
+      "consumers": [],
+      "reason": "Both assigned items and all eight direct consumers are draft members of the frozen frontier. No direct outside or published consumer was found; no published item or audit status was changed.",
+      "uncertain": false,
+      "source_urls": [
+        "https://ocw.mit.edu/courses/6-241j-dynamic-systems-and-control-spring-2011/760782bd5ceefacb37bf8719dc23dfcb_MIT6_241JS11_chap25.pdf"
+      ],
+      "familiar": true
+    }
+  ],
+  "gate_resolutions": [],
+  "repair_notes": {
+    "status": "assigned_repair_complete",
+    "definition_interface": "Finite horizon unchanged; universal Markov response belongs to the separately defined infinite-horizon recurrence.",
+    "source_reading": "Consulted MIT Chapter 25 PDF p.5 equations (25.10)-(25.12), and pp.7-8 Theorem 25.3 complete proof. Its H_{k+1}=CA^kB corresponds to this run's M_k with D=0. No Stanford source reading is claimed.",
+    "dependencies": [
+      "def-matrix-space",
+      "def-matrix-product-and-identity-matrix",
+      "prop-standard-coordinate-inner-products"
+    ],
+    "checks": [
+      "Strict proof-contract validation passed for both assigned items and seven proof-bearing direct consumers: zero errors, zero warnings.",
+      "node tools/tsx-run.mjs tools/precheck.mts --json on both assigned items: exit 0, two not-applicable, zero proofs checked, zero failures.",
+      "node tools/rendercheck.mjs --json on both assigned items and both owning pages: exit 0, four checked, zero errors, zero warnings.",
+      "node tools/proof-layout.mjs items/def-ip-discrete-linear-input-state-output-experiment.md after the final item edit: exit 0, one item, zero proof steps, zero defects.",
+      "git diff --check on the changed item and its two owning metadata files: exit 0."
+    ],
+    "unresolved_obligations": [],
+    "next_action": "Controller-owned collection and ordinary frontier consumer routing, certification and rejudgment remain owed; no judges or gates were launched.",
+    "repair_complete": true,
+    "algorithm_counterexample": {
+      "q": 1,
+      "d": 1,
+      "p": 2,
+      "m": 2,
+      "M0": "diag(1,0)",
+      "M1": "diag(0,1)",
+      "valid_calculation": "Ohat=e1 and Rhat=e1^T give Ahat=e1^T M1 e1=0; simultaneous SVD sign changes leave this result unchanged.",
+      "scope": "This disproves unconditional realization, which the actual definition and contract do not assert. No numerical test or generic correctness proof is claimed."
+    },
+    "interface_changes": [
+      {
+        "id": "def-ip-discrete-linear-input-state-output-experiment",
+        "section": "Definition",
+        "old_clause": "For an impulse-response experiment with zero initial state, first input u0=v, and later inputs zero ... y_{k+1}=M_k v.",
+        "new_clause": "Separately define the infinite-horizon zero-state impulse recurrence; its horizon-q restriction observes that identity only for 0<=k<q-1.",
+        "preserved": "M_k=CA^kB for all k>=0; fixed finite input/output horizon, deterministic errors, zero-dimensional convention and dependency list."
+      }
+    ],
+    "consumer_examination": [
+      {
+        "supplier": "def-ip-discrete-linear-input-state-output-experiment",
+        "id": "alg-ip-exact-block-hankel-realization",
+        "path": "items/alg-ip-exact-block-hankel-realization.md",
+        "location": "Definition input and Definition references",
+        "affected_use": "Markov matrices M_0,...,M_{2q-1}; Markov parameter convention M_k=CA^kB",
+        "disposition": "unchanged_sound",
+        "reason": "All Markov matrices retain their algebraic definition for every index. The procedure assumes no finite experiment supplies these matrices from only q samples. Its entire Definition is unchanged.",
+        "route": "frontier-owner",
+        "statement_or_definition_changed": false
+      },
+      {
+        "supplier": "def-ip-discrete-linear-input-state-output-experiment",
+        "id": "thm-ip-finite-observability-identifies-initial-state",
+        "path": "items/thm-ip-finite-observability-identifies-initial-state.md",
+        "location": "Facts F1 and Proof 1.1",
+        "affected_use": "states obey x_{k+1}=Ax_k+Bu_k, outputs obey y_k=Cx_k",
+        "disposition": "unchanged_sound",
+        "reason": "Only transitions k<q-1 and outputs k<q occur in the finite induction. Those clauses are unchanged, including the empty sum and no-input case q=1.",
+        "route": "frontier-owner",
+        "statement_or_definition_changed": false
+      },
+      {
+        "supplier": "def-ip-discrete-linear-input-state-output-experiment",
+        "id": "thm-ip-state-similarity-preserves-input-output-data",
+        "path": "items/thm-ip-state-similarity-preserves-input-output-data.md",
+        "location": "Facts F1 and Proof 1.1, 2.1",
+        "affected_use": "the state and output equations are x_{k+1}=Ax_k+Bu_k and y_k=Cx_k at the stated samples",
+        "disposition": "unchanged_sound",
+        "reason": "The finite induction still uses exactly k<q-1. The theorem quantifies over every finite horizon, which supports later impulse identities at any fixed index by taking a sufficiently long horizon. Its coordinate square has both paths T^{-1}Ax and remains correct.",
+        "route": "frontier-owner",
+        "statement_or_definition_changed": false
+      },
+      {
+        "supplier": "def-ip-discrete-linear-input-state-output-experiment",
+        "id": "thm-ip-hankel-realization-recovers-controllable-observable-system",
+        "path": "items/thm-ip-hankel-realization-recovers-controllable-observable-system.md",
+        "location": "Facts F1; Proof 1.1, 1.2 and 6.1",
+        "affected_use": "the Markov parameter with index k is M_k=CA^kB, and the impulse output at sample k+1 is M_kv",
+        "disposition": "unchanged_sound",
+        "reason": "The Hankel factorization uses only unchanged products CA^kB. Step 6.1 applies similarity at every finite horizon; for each k choose horizon at least k+2, so the extended impulse output and all-index realization conclusion follow. No additional hypothesis or consumer repair is needed.",
+        "route": "frontier-owner",
+        "statement_or_definition_changed": false
+      },
+      {
+        "supplier": "def-ip-discrete-linear-input-state-output-experiment",
+        "id": "cex-ip-continuous-time-frequency-aliasing",
+        "path": "items/cex-ip-continuous-time-frequency-aliasing.md",
+        "location": "Facts F1 and Counterexample 1.1",
+        "affected_use": "sample k is observed at time kh for a fixed interval h>0",
+        "disposition": "unchanged_sound",
+        "reason": "The sampling-time convention is unchanged. The example compares cos(0)=cos(2pi k) for each k, equivalently every finite sampled horizon; no finite impulse data are used.",
+        "route": "frontier-owner",
+        "statement_or_definition_changed": false
+      },
+      {
+        "supplier": "def-ip-discrete-linear-input-state-output-experiment",
+        "id": "ex-ip-similar-state-space-realizations-same-data",
+        "path": "items/ex-ip-similar-state-space-realizations-same-data.md",
+        "location": "Facts F1 and Verification 2.1",
+        "affected_use": "states obey x_{k+1}=Ax_k+Bu_k and outputs obey y_k=Cx_k",
+        "disposition": "unchanged_sound",
+        "reason": "The unchanged finite recurrence and similarity theorem give equal outputs on every finite horizon for arbitrary common inputs. The new impulse extension imposes no restriction on those experiments.",
+        "route": "frontier-owner",
+        "statement_or_definition_changed": false
+      },
+      {
+        "supplier": "def-ip-discrete-linear-input-state-output-experiment",
+        "id": "ex-ip-unobservable-state-mode",
+        "path": "items/ex-ip-unobservable-state-mode.md",
+        "location": "Facts F1 and Verification 1.1",
+        "affected_use": "the state evolves by x_{k+1}=Ax_k+Bu_k and each exact output is y_k=Cx_k",
+        "disposition": "unchanged_sound",
+        "reason": "The unchanged finite recurrence gives zero output difference since CA^k e2=0. Its arbitrary-horizon argument and rank-one observability calculation remain valid at q=1 and all larger q.",
+        "route": "frontier-owner",
+        "statement_or_definition_changed": false
+      },
+      {
+        "supplier": "def-ip-discrete-linear-input-state-output-experiment",
+        "id": "ex-ip-small-hankel-singular-value-amplifies-realization-perturbation",
+        "path": "items/ex-ip-small-hankel-singular-value-amplifies-realization-perturbation.md",
+        "location": "Facts F1 and Verification 1.1, 1.2",
+        "affected_use": "M_k=CA^kB for scalar real state-space systems",
+        "disposition": "unchanged_sound",
+        "reason": "The Markov formulas M0=epsilon and M1=0 or sqrt(epsilon) are unchanged. Here q=1 is the Hankel block size; neither case asserts that a one-output-sample experiment observes M0 or M1. Both scalar systems satisfy the separate recovery theorem.",
+        "route": "frontier-owner",
+        "statement_or_definition_changed": false
+      }
+    ],
+    "page_examination": [
+      {
+        "path": "library/inverse-problems/dynamic-data-identifiability-and-system-realization.md",
+        "affected_use": "Inventory placement of the definition and algorithm, with no mathematical summary body.",
+        "disposition": "unchanged_sound",
+        "reason": "Both assigned items retain their IDs, kinds, dependencies and finite system conventions; the page remains frontmatter only with page_layout: compact-v1."
+      },
+      {
+        "path": "library/inverse-problems/dynamic-data-identifiability-and-system-realization-examples.md",
+        "affected_use": "Companion inventory and requires edge to the owning theory page.",
+        "disposition": "unchanged_sound",
+        "reason": "All listed example interfaces remain sound under the supplier clarification; the page has no prose body and retains compact-v1."
+      }
+    ],
+    "outside_consumers": "Current item/library search found no direct dependency/reference consumer outside the frozen frontier. No maintenance edit is required by this interface change. Existing outside published-supplier presentation alerts in the Step-4 digest were not edited or independently re-adjudicated.",
+    "diagram_review": "Neither assigned item has a TikZ/tikzcd diagram, and no diagram is needed to specify either procedure. The direct similarity consumer has a correct commutative square expressing T^{-1}A=Ahat T^{-1}; its proof is independent of that square.",
+    "modified_files": [
+      "items/def-ip-discrete-linear-input-state-output-experiment.md",
+      "research/inverse-problems-knot-theory-all-109-2026-10-19-batch-55.pages.json",
+      "research/inverse-problems-knot-theory-all-109-2026-10-19-batch-55.proof-contracts.json",
+      "research/inverse-problems-knot-theory-all-109-2026-10-19-step5-v2/step5-v2-initial-r1-u55.json"
+    ]
+  },
+  "supporting_evidence": {
+    "research/inverse-problems-knot-theory-all-109-2026-10-19-batch-55.pages.json": "e6d2f529b564f08face3f0fe9045a2f42472e7b8f07f9c9f4192c721b578cf9e",
+    "research/inverse-problems-knot-theory-all-109-2026-10-19-batch-55.proof-contracts.json": "6146994fb81217fd4d4f2ad20e01fb9691ea5e77c05a5976a3f86336d75eaeaf"
+  }
+}

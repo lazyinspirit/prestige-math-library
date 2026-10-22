@@ -28,6 +28,11 @@ axiom_use: Full AC is used only for the library Jones specialization and the
 provenance:
   statement: literature-derived
   proof: ai-altered
+verification:
+  judge:
+    model: "gpt-6-luna"
+    verdict: pass
+    date: 2026-10-22
 sources:
   references:
     - title: Danny Calegari, Introduction to Knot Theory, §5.2, printed pp. 44–45

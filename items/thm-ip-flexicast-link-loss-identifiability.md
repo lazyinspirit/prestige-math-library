@@ -19,10 +19,10 @@ sources:
   references:
     - title: "B. Xi, G. Michailidis, and V. N. Nair, Estimating Network Loss Rates Using Active Tomography, Journal of the American Statistical Association 101 (2006), 1430–1448"
       url: "https://www.stat.purdue.edu/~xbw/research/xi_tomo_jasa1206.pdf"
-      locator: "§3.2 Proposition 1 and Appendix A.1, PDF pp. 4 and 15–17 (printed pp. 1434 and 1445–1447)"
+      locator: "§3.2 Proposition 1 and Appendix A.1, PDF pp. 5 and 16–17 (printed pp. 1434 and 1445–1446)"
     - title: "E. Lawrence, G. Michailidis, and V. N. Nair, Statistical Inverse Problems in Active Network Tomography, IMS Lecture Notes–Monograph Series 54 (2007), 24–44"
       url: "https://arxiv.org/pdf/0708.1079"
-      locator: "§3.1, PDF pp. 4–5 (printed pp. 28–29), reported split/coverage criterion and its exact model scope"
+      locator: "§3.1, PDF pp. 5–6 (printed pp. 28–29), reported split/coverage criterion and its exact model scope"
 ---
 
 ## Statement
@@ -52,6 +52,7 @@ Let $T=(V,E)$ and $\mathcal C=((C_d,N_d))_{d=1}^D$ be a finite-tree multicast lo
 [F3] [[def-identifiability-of-an-estimand]]: The identity target on the parameter set is identifiable exactly when equality of sampling laws implies equality of the parameter vectors, equivalently when the parameter-to-law map is injective.
 
 ## Proof
+
 
 1.1 For each vertex $v$, put $q_v=\prod_{e\in P(o,v)}p_e$, with $q_o=1$. Because $N_d\ge1$, the repeated-probe law for design $d$ has one-probe marginal $P_{p,d}$; conversely, equality of all one-probe laws gives equality of $\mathsf L(p)$. For each covered leaf $r$, the marginal success probability read from any design containing $r$ is $m_r=\Pr_p(Y_r=1)=q_r$. Thus equality of experiment laws determines every $q_r$ when all receivers are covered. [given, F1, F2, algebra]
 

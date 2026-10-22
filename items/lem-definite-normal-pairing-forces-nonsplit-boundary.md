@@ -17,6 +17,11 @@ axiom_use: "Choice-free: the surface has a supplied finite disk-and-band present
 provenance:
   statement: ai-altered
   proof: ai-altered
+verification:
+  judge:
+    model: "gpt-6-luna"
+    verdict: pass
+    date: 2026-10-22
 sources:
   references:
     - title: "Joshua E. Greene, Alternating links and definite surfaces, §§2–3 and §5, especially Corollary 3.2 and Lemma 3.3"

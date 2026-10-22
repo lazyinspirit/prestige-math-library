@@ -45,8 +45,11 @@ sources:
 `word` is empty if $\ell=0$ or is exactly $\ell$ comma-separated tokens of
 the form `i+` or `i-`, with `i` a canonical decimal natural number. There is
 no whitespace or trailing character. The output is either the rejection symbol
-`REJECT` or an element of the coefficient extension $T$ with $a=\rho$ and
-$d=\delta$.
+`REJECT` or an element of the converted coefficient ring
+$$T_K=\mathbb Z[i,A^{\pm1},Z,d^{\pm1},q^{\pm1}]/(i^2+1,\ Z(d-1)+A+A^{-1},\ q-q^{-1}-iZ).$$
+Steps 2–5 use the Dubrovnik coefficient extension $T$, with $a=\rho$ and
+$d=\delta$; Step 6 uses the ring homomorphism
+$$\varphi:T\longrightarrow T_K,\qquad (a,z,d,q)\longmapsto(-iA,iZ,d,q).$$
 
 1. **Parse and validate.** If the input is not in the stated syntax, if
    $\ell$ is not the number of letter tokens, if $n=0$, or if any token index
@@ -80,16 +83,28 @@ $d=\delta$.
 4. **Build generator matrices by skein reduction.** For every signed generator
    $g_i^{\pm1}$, form its left-multiplication matrix in the ordered basis
    $\{T_\mu\}$. The column at $T_\mu$ is computed by reducing
-   $g_i^{\pm1}T_\mu$. In each current diagram, orient open strands from the smaller to the larger endpoint
-   label and order them by their initial endpoints. Order closed components by
-   their least segment labels. In each closed component, start by traversing its
-   least-labelled segment from its designated initial endpoint to its terminal
-   endpoint; then follow the unique continuation of that component, traversing
-   later segments in whichever direction reaches the next endpoint. At a crossing
-   continue along the same strand, and after a smoothing continue along the
-   prescribed pairing. Retain segment labels and their designated endpoints
-   through switches and smoothings. This gives a deterministic traversal even
-   when segment orientations do not join coherently around a closed component.
+   $g_i^{\pm1}T_\mu$. For each initial reducer input (a matrix column here or a
+   closed trace diagram in Step 5), first fix pairwise disjoint rational crossing
+   boxes, each meeting only its two crossing branches, in four boundary ports,
+   and containing no polygonal vertex. Choose the first admissible finite tuple
+   in the length-then-lexicographic rational coding order of Step 3. Make the
+   boxes small enough that every component contains a segment portion outside
+   the boxes. Subdivide all polygonal segments at their box-boundary ports.
+   Give the portions outside the boxes fresh distinct labels in their finite
+   diagram-code order; designate the lexicographically smaller coordinate
+   endpoint of each portion as its initial endpoint. Retain these portions,
+   labels, and endpoints throughout that reduction tree. Inside each box record
+   either the original crossing pairing or one of its two smoothing pairings;
+   switches change only over/under data, and smoothings change only this pairing.
+   In each current diagram, orient open strands from the smaller to the larger
+   boundary endpoint label and order them by their initial endpoints. Order
+   closed components by their least portion labels. Start each closed component
+   along its least-labelled portion from its designated initial endpoint to its
+   other endpoint, then follow its unique continuation. Inside a crossing box
+   follow its current pairing. No portion is split or relabelled by a switch or
+   smoothing, and every resulting component contains a labelled portion. This
+   determines the traversal even when the designated directions of successive
+   portions disagree.
    Traverse the open strands followed by the closed components in this order,
    and select the first crossing whose first encountered branch is under. Let $R(D)$ denote the
    coordinate vector of the current tangle expression in the matching basis.
@@ -129,8 +144,10 @@ $d=\delta$.
    Set
    $$t_\mu=d^{-n}P(\widehat{T_\mu}),\qquad \tau_n(b_\beta)=t^{\mathsf T}v_\beta.$$
 
-6. **Return**
-   $$-(-1)^c a^{-w}d^{n-1}\tau_n(b_\beta).$$
+6. **Convert parameters and return.** Substitute $a=-iA$ and $z=iZ$ in
+   the expression $d^{n-1}\tau_n(b_\beta)$ computed in Step 5, leaving $d,q$
+   fixed and interpreting all coefficients in $T_K$. Return
+   $$-i^w(-1)^c A^{-w}\varphi\!\left(d^{n-1}\tau_n(b_\beta)\right).$$
 
 ## Definition references
 

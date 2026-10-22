@@ -83,9 +83,11 @@ the two braid strands.
 
 1.1 For $D_T$, [F1] gives the three equations $2a-b-c=0$, $2b-c-a=0$, and $2c-a-b=0$. Modulo $3$, each left-hand side equals $2(a+b+c)$, so the system is equivalent to $a+b+c=0$. Choose $a,b$ freely and set $c=-a-b$; there are $3^2=9$ solutions. Exactly the three choices $a=b=c$ are constant, leaving six nonconstant colorings. [F1, given, algebra]
 
+1.2 On $\mathbb F_3$ set $x*y=2y-x$. This is a finite quandle: $x*x=x$, each right translation $R_y(x)=2y-x$ satisfies $R_y^2=\mathrm{id}$, and $(x*y)*z=x-2y+2z=(x*z)*(y*z)$. At a crossing with source $u$, target $v$, and overarc $o$, its quandle equation $x_v=x_u*x_o=2x_o-x_u$ is equivalent to the Fox equation $2x_o-x_u-x_v=0$ in [F1]. This equation is symmetric in the two underarc colors, so their order does not matter. Thus Fox $3$-colorings are exactly colorings by this three-element quandle on every regular oriented diagram. [F1, F3, algebra]
+
 2.1 By [F2], these nine solutions are exactly the outputs of the Fox algorithm. The one-arc diagram $D_U$ has no crossing equations, so its single arc receives any of the three colors and it has three colorings. [F2, given, step 1.1]
 
-3.1 The Reidemeister coloring theorem [F3] applies under [A1], so the counts just computed depend only on the represented knot types. The trefoil and unknot therefore have Fox $3$-coloring counts $9$ and $3$, respectively; the invariant distinguishes them, without making a completeness claim. [A1, F3, step 1.1, step 2.1] ∎
+3.1 By step 1.2 the Reidemeister coloring theorem [F3] applies to the Fox coloring sets under [A1], so the counts just computed depend only on the represented knot types. The trefoil and unknot therefore have Fox $3$-coloring counts $9$ and $3$, respectively; the invariant distinguishes them, without making a completeness claim. [A1, F3, step 1.1, step 2.1, step 1.2] ∎
 
 ## Sources
 

@@ -8,7 +8,7 @@ pipeline_run: inverse-problems-knot-theory-all-109-2026-10-19
 dependency_level: 5
 deps:
   - lem-ip-tweedie-mmse-jacobian-and-prox-potential
-  - def-ip-pnp-ista-with-denoiser
+  - alg-ip-pnp-ista-with-denoiser
   - lem-l-smoothness-descent-inequality
   - def-lipschitz-holder-contraction
   - def-euclidean-inner-product
@@ -45,7 +45,7 @@ from any $x_0\in\mathbb R^n$. Then $x_t\in X_\sigma$ and $f(x_t)$ is finite for 
 
 [[lem-ip-tweedie-mmse-jacobian-and-prox-potential]]
 
-[[def-ip-pnp-ista-with-denoiser]]
+[[alg-ip-pnp-ista-with-denoiser]]
 
 [[lem-l-smoothness-descent-inequality]]
 
@@ -55,7 +55,7 @@ from any $x_0\in\mathbb R^n$. Then $x_t\in X_\sigma$ and $f(x_t)$ is finite for 
 
 [F1] [[lem-ip-tweedie-mmse-jacobian-and-prox-potential]]: $D_\sigma$ maps $\mathbb R^n$ into the open set $X_\sigma$, $h_{\sigma,\gamma}$ is smooth on $X_\sigma$ and $+\infty$ off it, and $D_\sigma(z)$ is the unique global minimizer of $\frac12\|x-z\|_2^2+\gamma h_{\sigma,\gamma}(x)$.
 
-[F2] [[def-ip-pnp-ista-with-denoiser]]: a PnP-ISTA update takes $z_t=x_{t-1}-\gamma\nabla g(x_{t-1})$ and sets $x_t=\widetilde D_\sigma(z_t)$.
+[F2] [[alg-ip-pnp-ista-with-denoiser]]: a PnP-ISTA update takes $z_t=x_{t-1}-\gamma\nabla g(x_{t-1})$ and sets $x_t=\widetilde D_\sigma(z_t)$.
 
 [F3] [[lem-l-smoothness-descent-inequality]]: if $g$ is $C^1$ with $L$-Lipschitz gradient, then $g(y)\le g(x)+\langle\nabla g(x),y-x\rangle+\frac L2\|y-x\|_2^2$ for all $x,y$.
 

@@ -15,6 +15,10 @@ justified_by: []
 dependency_level: 1
 verification:
   precheck: n/a
+  judge:
+    model: "gpt-6-luna"
+    verdict: pass
+    date: 2026-10-22
 sources:
   references:
     - title: W. B. R. Lickorish, An Introduction to Knot Theory, Chapter 8, Theorems 8.5–8.6

@@ -1,0 +1,255 @@
+{
+  "version": 1,
+  "scope": [
+    "lem-finite-triangulated-surface-tangent-field-index-sum",
+    "lem-clean-incidence-cover-strip-index-and-corner-comparison"
+  ],
+  "contracts": {
+    "lem-finite-triangulated-surface-tangent-field-index-sum": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-euler-characteristic-of-a-finite-cw-complex",
+          "source_section": "Definition",
+          "quote": "If $X$ has finitely many cells and $c_n(X)$ is its number of $n$-cells, define $\\chi(X)=\\sum_n(-1)^nc_n(X)$. The sum is finite by hypothesis.",
+          "uses": [
+            "4.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1.1",
+          "step": "1.1",
+          "claim": "**The needed elementary degree facts.** A nonzero vector loop in $\\mathbb R^2$ has a winding obtained by finitely subdividing its parameter interval until each normalized image lies in an open semicircle, lifting the argument there by arctangent, and matching successive lifts. The final change is an integer multiple of $2\\pi$. Products add winding, and a homotopy preserves it: subdivide the compact parameter square finely enough that pointwise ratios on neighboring parameter slices lie in the semicircle about one, where the ratio has a single argument and contributes zero winding. A nonzero vector map on a polygon minus finitely many interior round disks consequently has outer winding equal to the sum on positive hole circles. To prove this excision directly, use a finite fine square grid such that the map on each intersected square has an argument. Move lines to avoid the finitely many circle tangencies and circle-grid vertices. The polygon edges, circle arcs and grid segments form a finite graph; the argument change along each component boundary inside one square is zero by telescoping. All interior segments cancel, leaving exactly the outer and negatively oriented inner boundaries. A zero index computed on two nested coordinate circles is the same by this argument. A positive coordinate change does not alter it: its derivative is a positive invertible real matrix over a disk, so its restriction to the boundary can be contracted to a constant matrix by radial contraction in that disk. A constant positive matrix is joined to the identity by real Gram\u2013Schmidt, positive diagonal rescaling and a rotation. Acting by this homotopy on a nonzero vector loop preserves its winding. The same reasoning compares a circle in one coordinate with a small simple image circle in another, by the annular region or by the coordinate isotopy after shrinking; this isotopy follows from the derivative at the center and the uniform first-derivative estimate on a sufficiently small disk.",
+          "inputs": [
+            "given",
+            "construct",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2.1",
+          "step": "2.1",
+          "claim": "**One face, with the exact corner term.** For a face $D$, pull back $v$ by the derivative of its supplied triangle parametrization. It is a vector field on a Euclidean triangle, nonzero on its boundary, whose winding there is the sum of its zero indices by the finite excision in step 1.1. A smooth oriented orthonormal frame on this face exists by Gram\u2013Schmidt on the parametrization frame. The two frames differ by a positive matrix over the whole disk, so step 1.1 shows the winding is unchanged. Let $T$ be the positive unit tangent on each face edge and let $\\alpha_c\\in(0,\\pi)$ be its interior metric angle at a corner. Complete the tangent loop there by the exterior rotation $\\delta_c=\\pi-\\alpha_c$. This tangent loop has winding one: in the parametrization frame the reference triangle tangent makes one positive turn, and the derivative matrix, defined over the whole disk, cannot change its winding by step 1.1. Along a smooth edge let $\\Delta_e\\arg(v/T)$ denote the argument change of the nonzero complex ratio, using the metric and orientation to identify vectors in one tangent plane. It is independent of an initial lift. At a corner the field $v$ is continuous while the completed tangent rotates by $\\delta_c$, so the ratio has change $-\\delta_c$. Thus the face zero sum is $1+(\\sum_{e\\subset\\partial D}\\Delta_e\\arg(v/T)-\\sum_c(\\pi-\\alpha_c))/(2\\pi)$. This derivation specifies the corner contribution rather than assuming a turning or curvature formula for arbitrary curves.",
+          "inputs": [
+            "step 1.1",
+            "construct",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-3.1",
+          "step": "3.1",
+          "claim": "**Cancel the edges and count the vertex sectors.** Sum the formula in step 2.1 over the $F$ faces. On a common interior edge the two positive boundary tangents are negatives of each other, so their ratios $v/T$ differ by the constant factor $-1$; they are traversed in opposite directions and their argument changes cancel. On a boundary edge $v$ is a positive multiple of its positive unit tangent, so the ratio has argument zero and contributes zero. At an interior vertex the triangular sectors fill the full tangent plane, so their angles sum to $2\\pi$. At a boundary vertex they fill the tangent half-plane, so they sum to $\\pi$. Writing $V_i,V_b$ for the counts, the corner sum is $3\\pi F-2\\pi V_i-\\pi V_b$. Every zero is in exactly one face interior. Hence the total zero index is $F-(3\\pi F-2\\pi V_i-\\pi V_b)/(2\\pi)=V_i+V_b/2-F/2$.",
+          "inputs": [
+            "step 2.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-4.1",
+          "step": "4.1",
+          "claim": "**The Euler count.** Every triangle has three edges; each interior edge has two incident triangles and each boundary edge has one. Thus $3F=2E_i+E_b$. Every boundary component is a subdivided circle, giving $E_b=V_b$, including the empty boundary case. Therefore $2E=3F+V_b$ and $V-E+F=V_i+V_b/2-F/2$. Combine this with step 3.1 and [F1] to obtain the asserted index sum. All faces, cuts, zeros, fibers and argument subdivisions used in this proof are finite; neither a global surface classification nor a stronger-choice field perturbation theorem was used.",
+          "inputs": [
+            "F1",
+            "step 3.1",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "Statement and proof cover empty boundary or empty zero sets by empty sums; the incidence statement requires positive degree and m at least one."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Statement and proof: Statement includes a field with no zeros; the proof forces its finite Euler count to vanish."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Statement and proof: Statement and one-face proof use winding one for the positively oriented reference triangle tangent."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Statement and proof: Statement requires nonsingular smooth triangle parametrizations and zeros away from edges; it does not assert general triangulation or field existence."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Statement and proof: The boundary field is positive tangent; cancellation of boundary edge ratios and interval vertex links is explicit."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Statement and proof: Statement has no choice hypothesis; all cells, zeros, argument partitions and matrix homotopies are finite."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "Statement is an index calculation, not a biconditional."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "Statement is an index calculation, not a biconditional."
+        }
+      ]
+    },
+    "lem-clean-incidence-cover-strip-index-and-corner-comparison": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "lem-relative-strip-maslov-determinant-excision-and-local-models",
+          "source_section": "Statement",
+          "quote": "Assume Countable Choice. Consider an actual smooth complex rank-$m$ strip bundle, totally real horizontal boundary subbundles, specified end frames identifying these subbundles with $\\mathbb R^m,i\\mathbb R^m$, and a smooth real first-order operator with Cauchy\u2013Riemann symbol and exact expression $\\partial_s+i\\partial_t$ in those frames outside a compact set. Its index means the real Fredholm index before source translation, on fixed-end $H^{q+1}\\to H^q$ spaces, for an integer $q\\ge0$.\n\nTake a compact strip rectangle $Q$ containing the nonconstant part. Complete the horizontal boundary subbundles to a totally real loop along $\\partial Q$ using the vertical end caps\n$$L_\\pm(t)=\\tau_\\pm e^{i\\pi\\rho(t)/2}\\mathbb R^m,$$\nwhere $\\rho:[0,1]\\to[0,1]$ is smooth, zero near zero, one near one, and increases from zero to one. The boundary orientation is that induced by $ds\\wedge dt$. In any smooth global complex frame on $Q$, a local real basis $v_1,\\ldots,v_m$ of this loop defines\n$$\\zeta=\\frac{(\\det_{\\mathbb C}(v_1,\\ldots,v_m))^2}{|\\det_{\\mathbb C}(v_1,\\ldots,v_m)|^2}\\in S^1.$$\nThese local expressions agree on overlaps. Its integer winding $M$ is independent of real bases, global complex frame, sufficiently large rectangle, and cap cutoff $\\rho$, and\n$$\\operatorname{ind}_{\\mathbb R}P=M.$$\nThe equality also holds with smooth two-sided weights below the end spectral gap $\\pi/2$. This specifies actual caps and signs, rather than defining an unexplained topological index.\n\nThe following finite-dimensional excision and model calculations hold with the same squared determinant convention.\n\n* Direct sums add $M$. Gluing two such strip problems with matching product end frames and operators exactly constant near the cut adds their actual real indices. This is a statement about the glued linear boundary problem.\n* On a rectangle with finitely many disjoint round interior disks removed, suppose a continuous totally real subbundle in a trivial complex bundle is defined on the remaining compact surface. Then the determinant winding along the outer boundary is the sum of its windings along the positively counterclockwise hole circles. It suffices that the bundle be smooth near the boundary circles; for a smooth bundle the local windings can be computed by the following models.\n* For the symmetric-coordinate map $q(z_1,z_2)=(z_1+z_2,z_1z_2)$, transport the two real lines generated by the same nonzero constant $v\\in\\mathbb C$ along $z_1=-\\sqrt w,z_2=\\sqrt w$, $w$ traversing a small counterclockwise circle. Their image under $dq$ has squared determinant winding $+1$. More generally an order-$r$ source-cover model consisting of the $r$ roots of $w$, with the same constant source vector on each sheet and elementary symmetric target coordinates, has winding $r-1$.\n* A scalar target map $f(z)=z^{r+1}$, on a sheet unbranched over the parameter disk, sends a nonzero constant real direction to a line of squared phase winding $2r$ along a positive source circle.\n* For two graph branches $(z,Az),(z,Bz)$ in $\\mathbb C\\times\\mathbb C$, with $A,B:\\mathbb R^2\\to\\mathbb R^2$ real linear invertible and $A-B$ invertible, choose source directions $A^{-1}v,B^{-1}v$ for a fixed nonzero $v\\in\\mathbb C$. Push their target directions to the symmetric coordinates of $Az,Bz$. The resulting two-plane has squared determinant winding $2\\operatorname{sign}\\det_{\\mathbb R}(A-B)$. This sign equals the oriented intersection sign of the two graph sheets, both oriented by their $z$ coordinate and the product oriented by base then target.\n* A scalar source direction winding $k$ on an otherwise nonsingular sheet contributes $2k$ to the squared determinant winding. Extra fixed nonzero product directions change none of these local contributions.\n\nThese assertions do not identify the domain Euler measure or corner multiplicities of an arbitrary Whitney class. In particular, no representativity theorem, collapsed-tube calculation, corner rounding formula, or branched-cover Euler identity is included.",
+          "uses": [
+            "1.1",
+            "2.1",
+            "3.1",
+            "3.2",
+            "4.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "lem-finite-sector-cover-euler-measure-and-boundary-ramification",
+          "source_section": "Statement",
+          "quote": "The following assertions concern explicit finite surface and covering data and require no choice principle. Euler characteristic means the alternating finite cell count in the given cellulations.\n\nFirst, let $p:T\\to F$ be a degree-$d$ proper topological branched covering between compact surfaces with boundary, with finitely many interior branch points. At an interior point it has the oriented local model $z\\mapsto z^{r_x}$, and on the boundary it is a local homeomorphism of half-disk neighborhoods. Assume a finite triangulation of $F$ is given, with branch values as vertices, no triangle containing two branch-value vertices, and with each closed triangle containing a branch value restricted near that vertex to a single sector in its local coordinate. Then its lifted finite cell count satisfies\n$$\\chi(T)=d\\chi(F)-\\sum_{x\\in\\operatorname{int}T}(r_x-1).$$\nIn particular a degree-$m$ such covering of a disk satisfies $\\chi(T)=m-\\sum_x(r_x-1)$. Disconnected source surfaces are allowed.\n\nNow let $S$ be a compact oriented surface with a finite embedded graph $H$ containing its boundary. Cutting along $H$ gives finitely many compact cornered surfaces $P_a$ with circular boundary components, each with a given finite cellulation extending the graph subdivision on its boundary. Let finitely many compact cornered target regions $F_b$ also have given finite cellulations and corner angles $0<\\alpha<2\\pi$, and put\n$$e(F_b)=\\chi(F_b)-\\sum_{c\\text{ a corner of }F_b}\\frac{\\pi-\\alpha_c}{2\\pi}.$$\nSuppose every $P_a$ is equipped with a degree-$d_a$ proper topological branched cover of one $F_{b(a)}$, unramified on its boundary in the topological half-disk sense. Its interior branch points have local models and adapted target triangulations as in the preceding paragraph. Every target corner has exactly $d_a$ boundary preimages counted over all components of that cover; their assigned image-sector angles are the corresponding target angle. The cellulation used on each $P_a$ is the lifted one from that target triangulation, with finite edge and face subdivisions allowed; its boundary subdivision agrees with $H$. These covers agree to give the stated finite cut-cover data on $S$. All corners of the cut pieces and all graph vertices are included in the subdivisions, with extra smooth boundary vertices permitted and assigned angle $\\pi$.\n\nDefine the image domain multiplicity $n_b=\\sum_{a:b(a)=b}d_a$ and $e(D)=\\sum_b n_be(F_b)$. At a graph vertex $v$, let $A_v$ be the sum of the image-sector angles of the incident cut-piece corners, counting occurrences even if two belong to the same piece. Let $R_{\\mathrm{face}}$ be the sum of the interior ramification defects of all the piece covers. Then\n$$e(D)=\\chi(S)+R_{\\mathrm{face}}+\\sum_{v\\in H\\setminus\\partial S}\\left(\\frac{A_v}{2\\pi}-1\\right)+\\sum_{v\\in\\partial S}\\left(\\frac{A_v}{2\\pi}-\\frac12\\right).$$\nHere interior graph vertices have circular links and boundary graph vertices have interval links; no isolated graph vertices are allowed, and every boundary circle has a vertex. Only the finite data just specified are needed for this identity.\n\nConsequently, suppose that interior graph vertices have total angles $A_v=2\\pi r_v$, ordinary boundary graph vertices have $A_v=\\pi r_v$, with positive integers $r_v$, and the remaining marked boundary corners have angles $A_c=\\pi/2$ or $3\\pi/2$. Write $c_{90},c_{270}$ for their numbers,\n$$e(S)=\\chi(S)-\\frac{c_{90}}4+\\frac{c_{270}}4,\\quad R_{\\mathrm{int}}=R_{\\mathrm{face}}+\\sum_{v\\in H\\setminus\\partial S}(r_v-1),\\quad R_{\\mathrm{bdry}}=\\sum_{v\\in\\partial S\\text{ ordinary}}(r_v-1).$$\nThen\n$$e(S)=e(D)-R_{\\mathrm{int}}-\\frac12R_{\\mathrm{bdry}}.$$\nThus a simple interior branch contributes one and a simple boundary branch contributes one half; an unramified $90$-degree corner contributes $-1/4$ and a $270$-degree corner contributes $+1/4$ to Euler measure. For a target region with only right and reflex right corners, $e(F_b)=\\chi(F_b)-c_{90}(F_b)/4+c_{270}(F_b)/4$.\n\nThe hypotheses include the actual finite covering and angle data. This result does not assert that an arbitrary Whitney class has such a cut-cover representative, or identify its determinant winding or its source end-corner corrections. It makes no genus-classification or multipointed sphere-normalization assertion.",
+          "uses": [
+            "4.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "lem-finite-triangulated-surface-tangent-field-index-sum",
+          "source_section": "Statement",
+          "quote": "Let $S$ be a compact oriented smooth surface with smooth boundary and a supplied finite smooth triangulation. This means finite face-to-face triangular disks with circular interior vertex links and interval boundary vertex links; each face has an orientation-preserving parametrization by a closed Euclidean triangle whose derivative is nonsingular and smooth on a neighborhood of that triangle in a surface chart. Let $v$ be a supplied smooth tangent field on $S$, with finitely many isolated interior zeros, none on the triangulation's vertices or edges. Suppose $v$ is a positive multiple of the positively oriented tangent along every boundary component. The boundary may be empty.\n\nAt each zero $p$, define $\\operatorname{ind}_p(v)$ as the winding of the nonzero coordinate vector $v$ along a sufficiently small positively oriented coordinate circle around $p$. This integer is independent of the positively oriented coordinate and of the small circle. Then, with $V,E,F$ the given finite triangulation counts,\n$$\\sum_{p:v(p)=0}\\operatorname{ind}_p(v)=V-E+F=\\chi(S).$$\nThere is no choice assumption. The assertion is conditional on the supplied smooth triangulation and field; it does not claim a triangulation or generic field exists in a more general category.",
+          "uses": [
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "lem-product-integrable-generator-neighborhoods-and-relative-tame-extension",
+          "source_section": "Statement",
+          "quote": "Assume Countable Choice. Let $\\Sigma$ be a closed oriented smooth surface with positive area form $\\eta$ and an orientation-compatible complex structure $j$. Use its smooth complex symmetric product $X=\\operatorname{Sym}^m\\Sigma$, $m\\ge1$, and the descended product symplectic form $\\omega$ off the diagonal. Let $\\alpha_1,\\ldots,\\alpha_m$ be disjoint embedded circles, and likewise $\\beta_1,\\ldots,\\beta_m$, with every alpha-beta intersection transverse. Let $T_\\alpha,T_\\beta\\subset X$ be their product tori. Fix finitely many points $p$ of $\\Sigma$ away from all these circles and the associated divisors $E_p=\\{p\\}+\\operatorname{Sym}^{m-1}\\Sigma$.\n\nThe intersection $K=T_\\alpha\\cap T_\\beta$ is finite and disjoint from the diagonal and all $E_p$. There exist pairwise disjoint neighborhoods $U_x$ of its points, with closures disjoint from those protected sets, and smooth coordinate charts $q_x$ centered at $x$ taking $T_\\alpha,T_\\beta$ to $\\mathbb R^m,i\\mathbb R^m$. There is a smooth almost complex structure $J_*$ on $X$ equal to $\\operatorname{Sym}^m(j)$ near the diagonal and all $E_p$, taming $\\omega$ elsewhere, and exactly $i$ in each $q_x$ chart near $x$.\n\nMore generally any smooth family $J_t$ with the first two properties can be modified inside the $U_x$, retaining its values outside them and near all protected sets, to have those exact product-integrable values on smaller neighborhoods for every $t$. The constant path $J_*$ therefore provides a genuine admissible geometric choice with the local hypotheses needed for product-integrable end asymptotics. No regularity or moduli count is asserted for that path.",
+          "uses": [
+            "1.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1.1",
+          "step": "1.1",
+          "claim": "**Compare complex structures without assuming a new Fredholm theorem.** Put $J_0=\\operatorname{Sym}^m(j)$. Off the diagonal it is compatible with the descended product form. Use [F4] there to contract the given tame $J$ to $J_0$; on the protected neighborhood where $J=J_0$ the Cayley coefficient is zero, so the interpolation extends smoothly across it. Every product torus tangent plane remains totally real because it is Lagrangian and every interpolated structure is tame: $a,J_ra$ cannot both lie in a Lagrangian plane for $a\\ne0$, since that would give $\\omega(a,J_ra)=0$. The end caps are fixed products of real lines in the specified surface charts, hence also Lagrangian and totally real throughout. The squared determinant winding is constant in this interpolation. To justify a common continuous frame rather than assume it, take a finite complex-chart cover of the pullback complex bundle on the disk times the parameter interval and embed its fibers in a fixed $\\mathbb C^N$ by a finite partition of unity. In local image columns $V$ the projection is $Q=V(V^*V)^{-1}V^*$, so it is continuous. Choose a star-shaped parametrization of this compact base and use uniform continuity to select an integer $N_0$ with $\\|Q(x_{j+1})-Q(x_j)\\|<1/2$ for the radial points $x_j=x_0+j(x-x_0)/N_0$, for every $x$. The restriction of $Q(x_{j+1})$ from the image of $Q(x_j)$ is injective, hence bijective onto its equal-dimensional image: its distance from the input vector is less than half that vector's norm. The finite product $Q(x_{N_0})\\cdots Q(x_1)$ applied to a fixed basis of the image at $x_0$ therefore gives a continuous complex frame. No differentiability of the compactified map at the two punctures is needed. In that frame the squared determinant boundary phase is a continuous homotopy, so its winding is constant by finite argument lifts. Thus [F1] computes the actual index using the standard symmetric-product complex structure as well. No Fredholm assertion for an interpolated end operator is required.",
+          "inputs": [
+            "F1",
+            "F4",
+            "construct",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2.1",
+          "step": "2.1",
+          "claim": "**Rounding compares boundary loops in actual bundles.** The modification from $u$ to $u'$ is confined to the stated generator product charts. Compare the maps there by straight interpolation in small convex coordinate neighborhoods, keeping their common outside values fixed. On the retained alpha/beta boundary arcs these coordinates are real/imaginary axes, so this interpolation preserves the required torus boundary. Use the fixed coordinate product-line caps during this comparison. Those planes are Lagrangian for the product area form at every point of the chart, and hence remain totally real for the structures used in step 1.1. The pullback complex bundle over this map homotopy has a continuous frame by the finite projection construction in step 1.1. Consequently its cap-completed squared determinant loops form a continuous homotopy and retain the winding of the original actual operator. This argument also permits shortening the far ends within the chart before making the corner comparison. For $u'$ the branch points are interior, so over its boundary $f'$ is unramified and all sheet values are distinct, by the embedded incidence hypothesis and the small supported rounding. The product of the images under $dg'$ of the nonzero positive tangent lines on the source boundary is therefore a well-defined totally real plane loop $L'$: in the off-diagonal product coordinates it is a product of nonzero real lines. Ordering sheets only changes a real determinant sign and disappears after squaring.",
+          "inputs": [
+            "F1",
+            "step 1.1",
+            "given",
+            "construct",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-3.1",
+          "step": "3.1",
+          "claim": "**Extend the pushed field and compute its only defects.** Away from the finitely many distinct images of the branches and field zeros, push the lines spanned by $v$ through $dg'$ on the sheets of $f'$. Distinct sheets have distinct target points by embeddedness, and every pushed vector is nonzero there, so they define a continuous totally real plane field over the punctured disk. Apply finite excision from [F1]. Near a source-cover branch, $g'$ is regular and orientation preserving; its first derivative is a positive real matrix. Shrinking the source disk makes its higher-order remainder uniformly small compared with that derivative on its boundary. A homotopy of positive invertible real matrices to the identity, together with this small-remainder homotopy, preserves sheet separation and nonzero tangent vectors on that boundary. Hence the branch winding is the source-cover value $r-1$ in [F1]. Near a target branch the base projection is regular, and the positive local power model sends a nonzero source vector to a direction of winding equal to its ramification defect, so its squared contribution is twice that defect. At a zero of $v$ both projections are orientation-preserving local diffeomorphisms; they preserve its local vector winding, giving twice its index. A field nonzero near a branch can be deformed to a constant in a small oriented chart because its directions there lie in a single open semicircle; this introduces no extra defect. No other punctures are present by hypothesis. Thus $M(L')=R_f+2R_g+2\\sum\\operatorname{ind}(v)$. Apply [F3] and the supplied rounding cell equality to get $M(L')=R_f+2R_g+2\\chi(S)$.",
+          "inputs": [
+            "F1",
+            "F3",
+            "step 2.1",
+            "construct",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-3.2",
+          "step": "3.2",
+          "claim": "**Compute each end-corner correction with the actual orientation.** Use the positive generator surface coordinates, alpha the real axis and beta the imaginary axis. In this local comparison each factor is a real line in an oriented surface tangent plane. One may interpolate its orientation-compatible complex structure to the constant coordinate $i$, keeping all these lines totally real. The finite-frame homotopy argument of step 1.1 shows the closed comparison winding is unchanged. Thus actual line-angle changes may be computed in these coordinates even if the global background complex structure is not constant there. The standard cap on the left is traversed from beta to alpha and has lifted line angle change $-\\pi/2$; the right cap is traversed from alpha to beta and has change $+\\pi/2$. By the explicit rounding hypothesis, the pushed source tangent on a rounded acute corner turns $\\pi-\\pi/2=+\\pi/2$, and on a rounded reflex corner turns $\\pi-3\\pi/2=-\\pi/2$. For clarity these are actual lifted changes, not just endpoint line angles modulo $\\pi$; the stipulated rounding follows the boundary orientation and takes the short exterior turn. The difference of squared-phase windings is the difference of these line-angle changes divided by $\\pi$. It is therefore $-1$ at an acute left corner, zero at a reflex left or acute right corner, and $+1$ at a reflex right corner. There are exactly $m$ left corners. Consequently the sum is $-m+c_{270}$, proving $M(L)-M(L')=-m+c_{270}$. This scalar computation is unchanged by changing the orientation-positive complex coordinate, since its derivative over the local disk acts through a homotopy of positive real matrices; winding of the closed comparison loop is preserved. The product generator factors add these comparisons, while all other boundary portions of $L$ and $L'$ coincide.",
+          "inputs": [
+            "F1",
+            "step 2.1",
+            "algebra",
+            "step 1.1"
+          ]
+        },
+        {
+          "id": "step-4.1",
+          "step": "4.1",
+          "claim": "**Eliminate branch counts and retain the full remaining obligation.** Since $c_{90}+c_{270}=2m$, [F2] gives $R_f=m-\\chi(S)$ and $R_g=e(D)-\\chi(S)+m/2-c_{270}/2$. Substitute them in step 3.1 and add the correction of step 3.2: $M(L)=(m-\\chi(S))+2(e(D)-\\chi(S)+m/2-c_{270}/2)+2\\chi(S)-m+c_{270}=m-\\chi(S)+2e(D)$. By the complex-structure and rounding comparisons and [F1] this is precisely the actual real Fredholm index, with its stated higher Sobolev and weighted versions before translation. The argument has used each supplied incidence, cell, field and rounding hypothesis explicitly. In particular the further equality involving $n_{\\mathbf x},n_{\\mathbf y}$ and the existence of the clean presentation for arbitrary relevant classes are not conclusions of this lemma.",
+          "inputs": [
+            "F1",
+            "F2",
+            "step 1.1",
+            "step 2.1",
+            "step 3.1",
+            "step 3.2",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "Statement and proof cover empty boundary or empty zero sets by empty sums; the incidence statement requires positive degree and m at least one."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Statement and proof: Statement does not assume nonzero Fredholm index; the final branch elimination permits zero result."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Statement and proof: Statement includes degree m=1, where source cover defect is zero and scalar corner comparison remains exact."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Statement and proof: Statement explicitly excludes simultaneous branches, nodes, collapsed tubes and constant projection components through its clean local-diffeomorphism conditions; no arbitrary Whitney representation is inferred."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Statement and proof: The corner paragraph computes left/right acute/reflex corrections separately and yields minus m plus c270."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Statement and proof: Statement supplies cover, rounding, adapted field and triangulation; proof imports only CC strip results and finite constructions."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "Statement is an index calculation, not a biconditional."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "Statement is an index calculation, not a biconditional."
+        }
+      ]
+    }
+  }
+}

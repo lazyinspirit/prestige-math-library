@@ -54,7 +54,7 @@ Assume the Axiom of Countable Choice. Every smooth oriented knot in $S^3$ admits
 **Given:** The knot $K$ and AC$_\omega$.
 
 
-1.1 Apply [F1] to choose an admissible finite code for a regular diagram of a representative of $K$, and choose a basepoint in the interior of one edge. There is such an edge because a one-component code has at least one edge, including in the crossing-free case. [A1, F1, given, choose]
+1.1 Apply [F1] to choose an admissible finite code for a regular diagram of a representative of $K$, and choose a basepoint in the interior of one edge away from every crossing and geometric bend. There is such a point: a one-component code has at least one nondegenerate polygonal edge segment, including in the crossing-free case, and only finitely many crossings and bends are forbidden. Choose an interior point of such a segment outside that finite set. [A1, F1, given, choose]
 
 2.1 Apply [F2] to that finite code. The algorithm terminates after the finite crossing records are scanned and produces a finite crossing-change list; after those changes, each crossing is first encountered as an overpass. [F2, step 1.1, algebra]
 

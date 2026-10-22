@@ -1,0 +1,197 @@
+{
+  "run": "inverse-problems-knot-theory-all-109-2026-10-19",
+  "review_number": 5,
+  "review_type": "original-step4-keep-true-concern-confirmation-read-only",
+  "cycle": 1,
+  "written_at_utc": "2026-10-21T18:09:19.331153+00:00",
+  "git_head_observed": "82f4d9d17d24ccc19d8eff0063e54187cfd65b4a",
+  "native_stage_observed": "5.1-adjudicate from state.json; writers may remain active; no paused/drained claim",
+  "scope": "Exactly six assigned original concerns. Research-only proposals; no canonical content, metadata, hashes, certificates, gates, ledgers or native coverage changed. Root must revalidate current bytes/context at actual paused/drained hold.",
+  "cases": [
+    {
+      "batch": "9",
+      "concern_index": 0,
+      "id": "thm-ip-general-source-minimax-comparison",
+      "original_concern": "Proof 3.2 says that parameter independence of the action kernel implies 'conditioning on its action does not alter the posterior established in step 2.2.' This needs 'conditional on the observed data': an action alone can convey information about the parameter. The intended argument follows immediately by fixing the data and averaging the posterior squared-loss decomposition over the action kernel.",
+      "source_path": "items/thm-ip-general-source-minimax-comparison.md",
+      "observed_raw_sha256": "89cc1fcd6c66545c712f9d755df6849161ae2ad32de5febe76e47683ae56a49a",
+      "packet_raw_sha256_matches": true,
+      "current_capture_equal": true,
+      "classification": "confirmed_defect",
+      "keep_true": true,
+      "proposals": [
+        {
+          "source_excerpt": "The randomized rule is a parameter-independent kernel from the data by [F6], so conditioning on its action does not alter the posterior established in step 2.2. For each active coordinate, the conditional squared error is its posterior variance plus a nonnegative squared displacement from the posterior mean.",
+          "proposed_replacement": "For fixed observed data, the randomized rule draws its action from the parameter-independent kernel in [F6]; thus additionally conditioning on that action leaves the posterior from step 2.2 unchanged. For each active coordinate, conditional on the data and action, squared error averaged over this posterior is its posterior variance plus a nonnegative squared displacement from the posterior mean. Averaging over the action kernel and then over the data preserves the posterior-variance lower bound.",
+          "unique_literal_occurrences": 1,
+          "applied": false
+        }
+      ],
+      "statement_or_definition_delta": false,
+      "metadata_only": false,
+      "reason": "Literal conditioning-on-action claim omits conditioning on data and is false in general: even a deterministic action equal to an observed coordinate conveys information about the parameter. The intended fixed-data decomposition is correct; the replacement supplies its missing qualification without changing the theorem, priors, constant, or randomized-estimator scope.",
+      "actual_supplier_use": "def-randomized-procedure-as-a-markov-kernel Definition supplies K(z,da), independent of parameter at fixed z. lem-ip-univariate-gaussian-projection-minimax-comparison Statement and Proof 1.2 supply the scalar prior variance bound and explicitly average fixed-data loss over the kernel; current theorem 2.2 supplies full-data factorized posterior."
+    },
+    {
+      "batch": "9",
+      "concern_index": 1,
+      "id": "ex-ip-analytic-minimax-rates",
+      "original_concern": "Verification 1.1 and 1.2 refer to the 'third formula of [F1]' and 'fourth formula of [F1]', but this item's F1 contains only two formulas. Those ordinals identify the cases in the source corollary, rather than the locally stated fact.",
+      "source_path": "items/ex-ip-analytic-minimax-rates.md",
+      "observed_raw_sha256": "f2eeaef50961042eb99d90fc17daca3efb29ab7f0fae39bf32a3268ef11f3a23",
+      "packet_raw_sha256_matches": true,
+      "current_capture_equal": true,
+      "classification": "confirmed_defect",
+      "keep_true": true,
+      "proposals": [
+        {
+          "source_excerpt": "the third formula of [F1]",
+          "proposed_replacement": "the first formula of [F1]",
+          "unique_literal_occurrences": 1,
+          "applied": false
+        },
+        {
+          "source_excerpt": "the fourth formula of [F1]",
+          "proposed_replacement": "the second formula of [F1]",
+          "unique_literal_occurrences": 1,
+          "applied": false
+        }
+      ],
+      "statement_or_definition_delta": false,
+      "metadata_only": false,
+      "reason": "F1 locally has precisely two formulas; third and fourth have no local referent. Their values and the source corollary cases are correct. Repair the erroneous internal references, preserving both rates and hypotheses.",
+      "actual_supplier_use": "cor-ip-mild-and-severe-estimation-rates Statement cases three/four and Proof 2.3/2.4; local F1 extracts exactly those two cases."
+    },
+    {
+      "batch": "9",
+      "concern_index": 2,
+      "id": "ex-ip-power-source-minimax-rates",
+      "original_concern": "Verification 1.2 invokes the 'fourth formula of [F2]', but this item's F2 contains only two formulas. The intended exponential/exponential formula is correctly stated there and is the fourth case of the source corollary.",
+      "source_path": "items/ex-ip-power-source-minimax-rates.md",
+      "observed_raw_sha256": "9b7da84ef29c78937f43c4a4d278e6243bc9fe6c498b30ff5a590e8205d7412c",
+      "packet_raw_sha256_matches": true,
+      "current_capture_equal": true,
+      "classification": "confirmed_defect",
+      "keep_true": true,
+      "proposals": [
+        {
+          "source_excerpt": "the fourth formula of [F2]",
+          "proposed_replacement": "the second formula of [F2]",
+          "unique_literal_occurrences": 1,
+          "applied": false
+        }
+      ],
+      "statement_or_definition_delta": false,
+      "metadata_only": false,
+      "reason": "F2 locally has precisely two formulas. The fourth source-corollary case is the second local F2 formula. This is a required correction to the explicit internal reference; the calculation and rate are sound.",
+      "actual_supplier_use": "cor-ip-mild-and-severe-estimation-rates Statement case four, Proof 2.4; local F2 second formula. Local F1 supplies axes s_j^{-1} at nu=1."
+    },
+    {
+      "batch": "103",
+      "concern_index": 0,
+      "id": "alg-reidemeister-move-neighbors-from-code",
+      "original_concern": "The finite comparison rules say to 'enumerate all finite choices of local edge intervals and crossing subrecords' and 'test that the codes agree outside the chosen disk boundary'. They do not specify finite representatives for interval endpoints or the combinatorial test that the selected boundary bounds an admissible move disk with no additional diagram inside. The intended finite plane-map test is reconstructible, but it is an unstated subprocedure on which termination and completeness in theorem steps 1.1 and 2.1 depend, including the crossingless-circle case.",
+      "source_path": "items/alg-reidemeister-move-neighbors-from-code.md",
+      "observed_raw_sha256": "7d6bb4bd789e92c1ff882b0c3bc27d446e603a1446422c0a868e942c53de30d4",
+      "packet_raw_sha256_matches": true,
+      "current_capture_equal": true,
+      "classification": "confirmed_defect",
+      "keep_true": true,
+      "proposals": [
+        {
+          "source_excerpt": "**Finite comparison rules:** Two normalized codes represent the same code class when some bijection of their finite crossing labels and edge labels carries all dart incidences, crossing rotations, orientations, signs, component cycles, and outer-face data of one code to the other. To test whether two codes differ by one move, enumerate all finite choices of local edge intervals and crossing subrecords of sizes allowed by R1, R2, or R3; test that the codes agree outside the chosen disk boundary and that the two local records are one of the standard orientation/sign variants of that move. The local-site test uses the exact variants in the oriented Reidemeister-move definition.",
+          "proposed_replacement": "**Finite comparison rules:** Two normalized codes represent the same code class when some bijection of their finite crossing labels and edge labels carries all dart incidences, crossing rotations, orientations, signs, component cycles, and outer-face data of one code to the other. For a move-site test use the finite spherical cellulation returned by reconstruction and mark a point at infinity in its distinguished outer face. For the crossingless circle, insert one auxiliary degree-two vertex and use its two complementary face disks; this vertex is suppressed in all comparisons.\n\nFor each of $m=2,4,6$, enumerate every distribution of $m$ distinct cut points among diagram edges and every linear order of the points on each edge. Use one representative of each order (for example equally spaced interior points); their numerical positions are immaterial. In each face disk enumerate noncrossing pairings of all boundary occurrences of these cut points by interior arcs. In the distinguished face also record which complementary region contains the marked point at infinity. Glue the face arcs at the cut points and retain only choices forming a single simple closed curve. Cutting the finite cellulation along these arcs and flooding across incident cell pieces identifies the two sides; select the side not containing infinity. This is the candidate closed move disk. Its entire diagram intersection, including every vertex, edge segment and possible closed component inside it, must be isomorphic relative to its cyclically ordered boundary points to one side of a standard R1, R2 or R3 template with the chosen orientation/sign variant. In particular no additional diagram portion is permitted inside the disk. All tests are finite incidence and cyclic-order comparisons. The same construction is performed for the other code, requiring the opposite side of the same template and an isomorphism of the outside records fixing the ordered boundary points, all decorations and the infinity region. Store the cut orders, face pairings, selected regions, template variant and outside isomorphism as the certificate.\n\nThere are finitely many cut distributions, orders, face pairings and region choices. Every move disk has two, four or six transverse boundary intersections, avoids crossing vertices, and cuts each face into disjoint arcs; it therefore has a representative among these choices. Moving cut points along an edge and face arcs within a face disk changes neither the inside tangle nor the outside code class. Thus the test includes every admissible move disk, including move creation from the crossingless circle, and accepts only genuine disk-supported template replacements. The local templates and their exact orientation/sign variants are those in the oriented Reidemeister-move definition.",
+          "unique_literal_occurrences": 1,
+          "applied": false
+        }
+      ],
+      "statement_or_definition_delta": true,
+      "metadata_only": false,
+      "reason": "The procedure asserts a finite local test but leaves its endpoint representatives and empty embedded disk decision undefined. These are essential executable subprocedures for both soundness and completeness, not a change of mathematical goal. Neither the supplied validator nor the move definition contains the missing test.",
+      "actual_supplier_use": "alg-planar-code-validation-and-diagram-reconstruction Output and steps 2,8,9 provide the finite sphere cellulation and distinguished plane face. def-planar-diagram-gauss-and-dowker-codes provides dart/face data and crossingless orientation. def-oriented-reidemeister-moves supplies disk-supported R1/R2/R3 templates and finite variants. alg-enumerate-diagrams-up-to-crossing-bound provides all candidate codes through c+2. None supplies endpoint/disk enumeration.",
+      "definition_delta_kind": "Complete an existing finite subprocedure; unchanged input/output domain and unchanged exact planar-isotopy-or-one-oriented-Reidemeister-move predicate."
+    },
+    {
+      "batch": "103",
+      "concern_index": 1,
+      "id": "alg-breadth-first-reidemeister-search",
+      "original_concern": "Step 4 canonicalizes a returned neighbor E but stores only (C, \u03bc), where \u03bc certifies the move to the original representative E. Path reconstruction then uses canonical representatives. The finite relabeling carrying E to its canonical representative should be retained or explicitly incorporated into the certificate interpretation so the returned path has checkable certificates between its displayed representatives.",
+      "source_path": "items/alg-breadth-first-reidemeister-search.md",
+      "observed_raw_sha256": "21293066d7ceacf033e3c44809a5d85ab0d9f87d11001f68a1076a7b3f4e9681",
+      "packet_raw_sha256_matches": true,
+      "current_capture_equal": true,
+      "classification": "sound_optional_clarification",
+      "keep_true": false,
+      "proposals": [],
+      "statement_or_definition_delta": false,
+      "metadata_only": false,
+      "reason": "The explicit Output promises a sequence of code classes, not a certificate between particular displayed labeled representatives. E and canon(E) are the same code class by the Definition final paragraph and step 1, so mu already certifies the asserted adjacent classes. Finite relabeling is recomputable from E/canonicalization and the source neighbor convention admits relabeling certificates. Retaining its successful bijection would improve implementation convenience, but the original concern imposes a stronger representative-level output contract than this algorithm states.",
+      "actual_supplier_use": "alg-reidemeister-move-neighbors-from-code Output supplies E and mu; breadth-first Definition Output and final paragraph explicitly take code classes modulo finite label bijections. thm-reidemeister-enumeration-is-only-a-semidecision uses paths of these classes in Proof 2.1,3.1,3.2."
+    },
+    {
+      "batch": "86",
+      "concern_index": 1,
+      "id": "def-quantum-sl2-fundamental-ribbon-module",
+      "original_concern": "Proof 1.4 concludes 'The closed loop is B(U(1))=... Thus these maps give ... quantum dimension.' The left-duality snakes alone do not identify B with the ribbon-induced opposite cap used in the pivotal closure. Here the missing check is elementary: the published evaluator's formula gives that cap as B c_{V,V}(\u03b8_V\u22971), and the supplied matrices give B c_{V,V}(\u2212A\u00b3I\u22971)=B. This establishes the claimed dimension, but the identification is unstated and is subsequently used by the ribbon/bracket lemma.",
+      "source_path": "items/def-quantum-sl2-fundamental-ribbon-module.md",
+      "observed_raw_sha256": "1ee2bcb2fbf0404546a1ed9dd12cd979c16b8a0e7092ffae69a88959fbfe83bd",
+      "packet_raw_sha256_matches": true,
+      "current_capture_equal": true,
+      "classification": "sound_optional_clarification",
+      "keep_true": false,
+      "proposals": [],
+      "statement_or_definition_delta": false,
+      "metadata_only": false,
+      "reason": "The asserted ribbon dimension is already an explicit external input in F5, rather than inferred only from the snake identities. The omitted compatibility check is valid directly: Bc=(0,-A^{-3},A^{-5},0)=-A^{-3}B, hence Bc(-A^3 I tensor 1)=B. The published local evaluator Proof 4.1 gives the opposite cap as d c(theta tensor 1), so with this equality its closure is exactly BU=delta. Making that short check explicit would explain the stated closure maps, but no incorrect dimension or missing established supplier is exposed by this concern.",
+      "actual_supplier_use": "Current definition F5 imports the precise quantum dimension from Korinman section 2.1. thm-a-ribbon-object-defines-a-unique-framed-tangle-evaluation-functor Proof 4.1 supplies d\u2032=d c(theta tensor 1). lem-ribbon-trace-equals-the-framed-closure-evaluation Proof 1.1/2.1 uses that opposite cap. lem-quantum-sl2-ribbon-trace-matches-hecke-and-bracket F2 and Proof 1.1/2.1 use BU and the resulting closure value; the displayed matrices verify their identification without changing any definition."
+    }
+  ],
+  "consumer_check": {
+    "changed_definition_id": "alg-reidemeister-move-neighbors-from-code",
+    "scope_method": "Dependency frontmatter closure intersected with exact current all109 batch pages manifests; original frozen step5-v2/frontier.json IDs retained as scope context. Metadata graph only, not whole-source reading.",
+    "consumers": [
+      "alg-breadth-first-reidemeister-search",
+      "cex-knot-kt-48-boundary-case",
+      "thm-reidemeister-enumeration-is-only-a-semidecision"
+    ],
+    "current_frontier_count": 1472,
+    "frozen_original_count": 1472,
+    "frozen_original_affected_consumers": [
+      "alg-breadth-first-reidemeister-search",
+      "cex-knot-kt-48-boundary-case",
+      "thm-reidemeister-enumeration-is-only-a-semidecision"
+    ],
+    "uniform_check": "The proposed finite site subprocedure accepts exactly the existing same-class or one oriented R1/R2/R3 relation, with the same crossing-count bound, orientation/sign variants, and domains. Each consumer dependency therefore receives exactly its previous mathematical predicate. No consumer claim, hypothesis, conditional branch, or resolved supplier changes. The semidecision theorem was fully read: its steps 1.1 and 2.1 now obtain the missing finite-site justification directly; F1 and remaining proof stay verbatim. Breadth-first search was fully read and uses the same finite neighbor list. The remaining current/frozen consumer cex-knot-kt-48-boundary-case was also fully read: F2 and Counterexample 2.1 require only finite completed layers and the unchanged crossing-count bound; its explicit R1 path remains admitted. No consumer repair is needed. This is a focused interface check, not an independent whole-proof or foundation audit.",
+    "consumer_repairs": []
+  },
+  "reading_limits": {
+    "full_target_items": [
+      "items/thm-ip-general-source-minimax-comparison.md",
+      "items/ex-ip-analytic-minimax-rates.md",
+      "items/ex-ip-power-source-minimax-rates.md",
+      "items/alg-reidemeister-move-neighbors-from-code.md",
+      "items/alg-breadth-first-reidemeister-search.md",
+      "items/def-quantum-sl2-fundamental-ribbon-module.md"
+    ],
+    "full_local_supplier_context": [
+      "items/def-randomized-procedure-as-a-markov-kernel.md",
+      "items/lem-ip-univariate-gaussian-projection-minimax-comparison.md",
+      "items/cor-ip-mild-and-severe-estimation-rates.md",
+      "items/def-planar-diagram-gauss-and-dowker-codes.md",
+      "items/alg-planar-code-validation-and-diagram-reconstruction.md",
+      "items/alg-enumerate-diagrams-up-to-crossing-bound.md",
+      "items/def-oriented-reidemeister-moves.md",
+      "items/thm-reidemeister-enumeration-is-only-a-semidecision.md",
+      "items/def-twist-and-ribbon-structure.md",
+      "items/def-left-dual-and-right-dual-object.md",
+      "items/thm-a-ribbon-object-defines-a-unique-framed-tangle-evaluation-functor.md",
+      "items/def-ribbon-evaluation-of-an-x-colored-closed-braid.md",
+      "items/lem-ribbon-trace-equals-the-framed-closure-evaluation.md",
+      "items/lem-quantum-sl2-ribbon-trace-matches-hecke-and-bracket.md",
+      "items/cex-knot-kt-48-boundary-case.md"
+    ],
+    "external_fulltexts_read_this_review": [],
+    "boundary": "CLAUDE rule 12 retained: existing external inputs remain externally attributed. No new claim to source reading, reconstructed external proof, bibliography audit or supplier-closure certification.",
+    "uncertainty": "Finite disk proposal is a mathematical subprocedure description, not implemented code. Its face pairing enumeration must distinguish repeated boundary occurrences and the infinity region as stated. Root must review exact proposal and live consumers after native writers drain."
+  }
+}

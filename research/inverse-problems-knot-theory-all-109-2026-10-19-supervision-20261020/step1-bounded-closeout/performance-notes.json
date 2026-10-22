@@ -1,0 +1,37 @@
+{
+  "version": 1,
+  "run": "inverse-problems-knot-theory-all-109-2026-10-19",
+  "status": "future-maintenance-only; implementation deferred by root",
+  "root_control_observation": "Root reports retry consumed2026-10-20T19:55:31Z, zero lanes rearmed; all109 successful author receipts preserved.",
+  "diagnosis": {
+    "source_locations": [
+      "tools/autopilot/stages/mathlib.mts:121\u2013144",
+      "tools/autopilot/src/executor.mts:507\u2013515",
+      "tools/autopilot/src/executor.mts:606\u2013609",
+      "tools/autopilot/src/executor.mts:1444\u20131461",
+      "tools/autopilot/src/executor.mts:751\u2013775"
+    ],
+    "cause": "Each batch artifact call re-stats retained inputs and all39039 item carriers to detect aliases.109 units incur approximately4.25 million global carrier stats per status pass; currentStage, armed-pause checks and due snapshots repeat status passes. Controls are consumed first at the next tick boundary, so synchronous scans delay control responsiveness.",
+    "qualification": "Static call-path/count analysis plus process/event observations; no profiler, benchmark, gate, item hashing or proof inspection performed."
+  },
+  "candidate": {
+    "design": "Optional bulk-artifact hook for stageStatus/unitsComplete: capture a full item-and-relevant-run-input stamp, check all covered units against one fresh scaffold snapshot, then repeat the stamp before completion credit. Any mutation/error invalidates caches and withholds all requested unit completion. Single-unit/preflight checks remain fresh.",
+    "invalidation": "Full sorted carrier names plus mtimeNs/ctimeNs/size retain detection of alias additions/removals/reassignment, canonical replacement, body/dependency edits, missing supplier creation, manifest/coverage/readiness changes. A final fence rejects edits made during the pass.",
+    "avoid": [
+      "TTL-only memoization",
+      "directory-mtime-only invalidation",
+      "fs.watch-only correctness",
+      "closure-only alias scans",
+      "completion credit from an unfenced shared snapshot"
+    ],
+    "expected_cost": "Constant number of full scans per artifact pass rather than one per unit; no measured speedup claimed.",
+    "tests_if_later_authorized": [
+      "Retain existing scaffold-cache tests for all cache invalidation cases.",
+      "Add multi-unit pass mutation tests, including unrelated alias creation/deletion and same-length body edits with restored mtime.",
+      "Add readiness/manifest mutation during a pass and ensure whole-pass rejection.",
+      "Keep default-stage/single-unit behavior, coverage and writer/refresh guards unchanged.",
+      "Count full alias scans to ensure bound independent of requested unit count."
+    ]
+  },
+  "actions_taken": "Research note only. No engine code edits, new tests, controller restart/kill, state changes, native controls or gates."
+}

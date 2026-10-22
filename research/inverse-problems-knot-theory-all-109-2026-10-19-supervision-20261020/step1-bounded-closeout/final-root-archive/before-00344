@@ -1,0 +1,103 @@
+[
+  {
+    "order": 3006,
+    "id": "parameter-choice-and-bakushinskii-veto",
+    "kind": "A",
+    "category": "inverse-problems",
+    "title": "Parameter rules and the noise-free veto",
+    "companion": "parameter-choice-and-bakushinskii-veto-examples",
+    "requires": [
+      "linear-operators-pseudoinverses-and-picard-criteria",
+      "deterministic-source-conditions-and-optimal-recovery",
+      "spectral-regularization-and-parameter-choice"
+    ],
+    "items": [
+      {
+        "id": "def-ip-noise-level-free-parameter-rule",
+        "kind": "definition",
+        "title": "Noise-level-free parameter-choice rule",
+        "statement": "Fix a compact Hilbert inverse model $K:X\\to Y$ and a family of reconstruction maps $(R_\\alpha)_{\\alpha>0}$, with each $R_\\alpha:Y\\to X$, both held fixed. A deterministic parameter-choice rule is a function $\\alpha:Y\\to(0,\\infty)$. It is **noise-level-free** (also called **heuristic**) when the value $\\alpha(z)$ for an observed datum $z\\in Y$ uses only $K$, the fixed family, and $z$; it does not take the exact datum or a noise bound $\\delta$ as input. Here $\\delta\\ge0$ is a valid noise bound for $z$ and an exact datum $y$ when $\\|z-y\\|_Y\\le\\delta$. The resulting reconstruction is $R_{\\alpha(z)}z$.",
+        "deps": [
+          "def-ip-compact-linear-inverse-model"
+        ],
+        "dependency_level": 2
+      },
+      {
+        "id": "thm-ip-bakushinskii-veto",
+        "kind": "theorem",
+        "title": "Bakushinskii veto for discontinuous pseudoinverses",
+        "statement": "Assume Countable Choice. Let $K:X\\to Y$ be a compact linear operator between real or complex Hilbert spaces over one scalar field, with Hilbert-space Moore–Penrose inverse $K^\\dagger:D(K^\\dagger)\\to X$. Suppose $K^\\dagger$ is discontinuous on $D(K^\\dagger)$ with its norm inherited from $Y$. Let $(R_\\alpha)_{\\alpha>0}$ be maps $Y\\to X$ such that $R_\\alpha y\\to K^\\dagger y$ for every $y\\in D(K^\\dagger)$ as $\\alpha\\downarrow0$, and let $\\alpha:Y\\to(0,\\infty)$ be a deterministic noise-level-free rule. For each exact datum $y\\in D(K^\\dagger)$ and $\\delta>0$, set $E_y(\\delta):=\\sup\\{\\|R_{\\alpha(z)}z-K^\\dagger y\\|_X:z\\in Y,\\ \\|z-y\\|_Y\\le\\delta\\}$. If $E_y(\\delta)\\to0$ as $\\delta\\downarrow0$ for every $y\\in D(K^\\dagger)$, then $K^\\dagger$ is continuous on $D(K^\\dagger).$ Thus, when $K^\\dagger$ is discontinuous, no such noise-level-free rule yields worst-case convergence over each exact datum's full admissible error balls. The limit is required separately for each exact datum, not uniformly over $y$. This veto does not exclude convergence on restricted solution or error classes, stochastic noise models, or finite-dimensional problems.",
+        "deps": [
+          "def-countable-choice",
+          "def-ip-compact-linear-inverse-model",
+          "def-ip-noise-level-free-parameter-rule",
+          "def-ip-unbounded-hilbert-moore-penrose-inverse"
+        ],
+        "dependency_level": 3
+      }
+    ]
+  },
+  {
+    "order": 3007,
+    "id": "parameter-choice-and-bakushinskii-veto-examples",
+    "kind": "B",
+    "category": "inverse-problems",
+    "title": "Parameter rules and the noise-free veto — Examples and Counterexamples",
+    "companion": "parameter-choice-and-bakushinskii-veto",
+    "requires": [
+      "parameter-choice-and-bakushinskii-veto"
+    ],
+    "items": [
+      {
+        "id": "cex-ip-noise-underestimation-truncated-svd",
+        "kind": "counterexample",
+        "title": "Noise underestimation defeats a truncated singular-value rule",
+        "statement": "**False claim.** Let $X=Y=\\ell^2(\\mathbb N,\\mathbb R)$ with standard basis $(e_j)_{j\\ge1}$, let $Kx=(x_j/j)_{j\\ge1}$, and for $\\alpha>0$ define $R_\\alpha z=\\sum_{k=1}^{\\lfloor1/\\alpha\\rfloor}kz_ke_k$, with the empty sum used when the upper limit is $0$. Define the data-only noise proxy by $\\widehat\\delta(0)=1$ and $\\widehat\\delta(z)=\\min\\{1,\\|z\\|_2^2\\}$ for $z\\ne0$, and set $\\alpha(z)=\\widehat\\delta(z)$. The false claim is that this compact operator, pointwise regularizing family, and deterministic noise-level-free rule satisfy, for every exact datum $y\\in D(K^\\dagger)$, $\\lim_{\\delta\\downarrow0}\\sup\\{\\|R_{\\alpha(z)}z-K^\\dagger y\\|_2:z\\in\\ell^2(\\mathbb N,\\mathbb R),\\ \\|z-y\\|_2\\le\\delta\\}=0$.",
+        "deps": [
+          "def-banach-space",
+          "def-bounded-linear-operator",
+          "def-compact-linear-operator",
+          "def-countable-choice",
+          "def-ip-compact-linear-inverse-model",
+          "def-ip-noise-level-free-parameter-rule",
+          "def-ip-unbounded-hilbert-moore-penrose-inverse",
+          "def-linear-basis",
+          "def-linear-map",
+          "def-operator-norm",
+          "def-square-summable-family-on-an-arbitrary-index-set",
+          "lem-finite-rank-operators-are-compact",
+          "lem-square-summable-sequences-form-a-hilbert-space",
+          "thm-norm-limit-of-compact-operators-is-compact"
+        ],
+        "dependency_level": 3
+      },
+      {
+        "id": "ex-ip-stable-restricted-class-bakushinskii",
+        "kind": "example",
+        "title": "Conditional stability on a power-source class",
+        "statement": "Assume Countable Choice. Let $K:X\\to Y$ be a compact operator of infinite rank between real or complex Hilbert spaces over one scalar field. Let $(s_j,v_j,u_j)_{j\\ge1}$ be a positive singular system with $s_j>0$, $s_j\\to0$, $\\|v_j\\|_X=\\|u_j\\|_Y=1$, and $Kv_j=s_ju_j$. For $\\rho>0$ let $M_\\rho=X_{1,\\rho}(K)=\\{|K|w:w\\in X,\\ \\|w\\|_X\\le\\rho\\}$ and define $\\varepsilon_K(M_\\rho,\\delta)=\\sup\\{\\|x\\|_X:x\\in M_\\rho,\\ \\|Kx\\|_Y\\le\\delta\\}$. Then $\\varepsilon_K(M_\\rho,\\delta)\\le\\sqrt{\\rho\\delta}$ for every $\\delta\\ge0$, with equality at $\\delta_j=\\rho s_j^2$ for each $j$, witnessed by $x_j=\\rho s_jv_j$. Although $K^\\dagger$ is discontinuous on its full domain, this modulus tends to zero on the restricted source class $M_\\rho$; this conditional stability makes no claim of universal noise-level-free convergence.",
+        "deps": [
+          "def-countable-choice",
+          "def-ip-centered-modulus-of-continuity",
+          "def-ip-compact-linear-inverse-model",
+          "def-ip-power-source-set",
+          "def-ip-unbounded-hilbert-moore-penrose-inverse",
+          "thm-ip-bakushinskii-veto",
+          "thm-ip-source-ball-modulus-of-continuity",
+          "thm-singular-value-decomposition-for-compact-operators"
+        ],
+        "dependency_level": 7
+      },
+      {
+        "id": "ex-ip-discrete-grid-l-curve-parameter-choice",
+        "kind": "example",
+        "title": "A finite-grid L-curve selects an interior parameter",
+        "statement": "Take $A=I_2\\in\\mathbb R^{2\\times2}$, $b=e_1$, and the strictly increasing grid $1/9<1<9$. Apply the discrete maximum-curvature L-curve selector to this input. The Tikhonov solution at $\\lambda$ is $x_\\lambda=(1+\\lambda)^{-1}e_1$, so all three residual and solution norms are positive and the selector returns the middle grid value $\\lambda=1$. This finite-grid data-driven choice is made without a noise-level input, and it carries no universal optimality claim. The matrix is finite-dimensional, so the discontinuity hypothesis of the Bakushinskii veto is absent.",
+        "deps": [
+          "alg-discrete-l-curve-parameter-choice"
+        ],
+        "dependency_level": 0
+      }
+    ]
+  }
+]

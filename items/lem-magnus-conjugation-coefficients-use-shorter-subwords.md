@@ -1,7 +1,7 @@
 ---
 id: lem-magnus-conjugation-coefficients-use-shorter-subwords
 kind: lemma
-title: "Conjugating a longitude changes only lower-order Magnus coefficients"
+title: "Magnus coefficient changes under longitude conjugation depend on lower-order coefficients"
 status: draft
 origin: pipeline
 pipeline_run: inverse-problems-knot-theory-all-109-2026-10-19

@@ -4,7 +4,7 @@ title: Credible sets and frequentist coverage
 status: draft
 items:
   - def-ip-credible-set-and-frequency-coverage
-  - op-ip-honest-coverage-over-ill-posed-truth-classes
+  - ex-ip-exact-adaptive-credible-coverage-by-posterior-null-deletion
 examples: []
 requires:
   - statistical-inverse-experiments-and-white-noise

@@ -129,7 +129,7 @@ estimate.
 
 1.1 Since $|f|\le M$, [F2] applies to $\mu$ and $\nu$; [F1] fixes the event-supremum convention, so it yields the stated total-variation expectation bound. [given, F1, F2]
 
-1.2 The successive scalar references in [F3] have signed adjacent differences whose sum is $\mu_\star(f)-\bar f_{b,N}$. Apply [F6] to this finite reference chain to obtain $|\mu_\star(f)-\bar f_{b,N}|\le\mathcal B_f$. [given, F3, F6, algebra]
+1.2 The successive scalar references in [F3] have signed adjacent differences whose sum is $\bar f_{b,N}-\mu_\star(f)$. Apply [F6] to this finite reference chain to obtain $|\mu_\star(f)-\bar f_{b,N}|\le\mathcal B_f$. [given, F3, F6, algebra]
 
 1.3 For the stationary branch, set $Y_j=f(X_{b+j})-\pi_K(f)$. By [F4], each $Y_j$ has mean zero and $\mathbb E[Y_iY_j]=\gamma_{|i-j|}$. Expanding the finite square gives $\mathbb E[(N^{-1}\sum_{j=1}^N Y_j)^2]=N^{-2}(N\gamma_0+2\sum_{k=1}^{N-1}(N-k)\gamma_k)$: there are $N$ diagonal terms, and for each lag $k$ there are $N-k$ off-diagonal pairs, each counted twice. [A1, F4, F5, given, algebra]
 

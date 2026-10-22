@@ -22,6 +22,11 @@ axiom_use: "Assumes AC_omega for countable generic-regularity choices across the
 provenance:
   statement: literature-derived
   proof: ai-altered
+verification:
+  judge:
+    model: "gpt-6-luna"
+    verdict: pass
+    date: 2026-10-22
 sources:
   references:
     - title: "Ian Zemke, Link cobordisms and functoriality in link Floer homology, §§3 and 5–9"

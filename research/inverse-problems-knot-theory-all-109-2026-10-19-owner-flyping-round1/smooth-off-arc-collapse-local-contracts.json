@@ -1,0 +1,135 @@
+{
+  "version": 1,
+  "scope": [
+    "lem-smooth-arc-collapse-can-be-smooth-away-from-the-collapsed-arc"
+  ],
+  "contracts": {
+    "lem-smooth-arc-collapse-can-be-smooth-away-from-the-collapsed-arc": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "lem-collapsing-a-smooth-embedded-arc-preserves-the-three-sphere",
+          "source_section": "Statement",
+          "quote": "Let $\\alpha:[-1,1]\\hookrightarrow S^3$ be a smooth embedding with nonvanishing derivative, smooth in boundary charts at both endpoints, and let $U$ be an open neighborhood of its image $A$. Then there is a continuous surjection $q:S^3\\to S^3$, fixed on $S^3\\setminus U$, whose only non-singleton fiber is $A$. In particular the quotient space $S^3/A$, obtained by identifying exactly the points of $A$ to one point, is homeomorphic to $S^3$.\n\nMoreover there is a continuous family $Q:S^3\\times[0,1]\\to S^3$ with $Q_0=\\operatorname{id}$ and $Q_1=q$, fixed on $S^3\\setminus U$, such that every $Q_t$ for $0\\le t<1$ is a homeomorphism. Every closed parameter interval $[0,t_0]$ with $t_0<1$ therefore gives an ambient topological isotopy. The assertion concerns a topological quotient; it does not assert that the terminal map is a diffeomorphism or that an arbitrary surface containing the arc becomes a surface after collapse.",
+          "uses": [
+            "1.1",
+            "2.1",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "thm-euclidean-inverse-function-theorem",
+          "source_section": "Statement",
+          "quote": "Let $n\\ge1$, let $U\\subseteq\\mathbb R^n$ be open, let $f:U\\to\\mathbb R^n$ be\n$C^1$, and let $a\\in U$.  If $Df(a)$ is invertible, then there are open sets\n$V,W\\subseteq\\mathbb R^n$ with $a\\in V\\subseteq U$ and $f(a)\\in W$ such that\n$f|_V:V\\to W$ is bijective.  Its inverse $g:W\\to V$ is $C^1$, and\n\n$$Dg(y)=Df(g(y))^{-1}\\qquad(y\\in W).$$\n\nThus $f$ is a local diffeomorphism at $a$.",
+          "uses": [
+            "3.1",
+            "4.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "step": "1.1",
+          "claim": "Choose the straight-arc chart and a strictly interior outer ellipsoid $E_\\varepsilon$ by [F1]. Choose a smooth nondecreasing cutoff $\\chi:[0,\\varepsilon]\\to[0,1]$ equal to zero for $\\rho\\le\\varepsilon/3$ and one for $\\rho\\ge2\\varepsilon/3$. Such a function is obtained by integrating and normalizing a fixed nonnegative smooth bump supported between those two values. Set $a=1/(2\\varepsilon)$ and $f(\\rho)=(1-\\chi(\\rho))a\\rho+\\chi(\\rho)\\sqrt{1+\\rho^2}$. For $0<\\rho\\le\\varepsilon$, one has $a\\rho\\le1/2<\\sqrt{1+\\rho^2}$. Consequently $f'(\\rho)=(1-\\chi)a+\\chi\\rho/\\sqrt{1+\\rho^2}+\\chi'(\\sqrt{1+\\rho^2}-a\\rho)>0$. The function equals $a\\rho$ near zero and $\\sqrt{1+\\rho^2}$ near the outer boundary.",
+          "inputs": [
+            "given",
+            "F1",
+            "construct",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "step": "2.1",
+          "claim": "For a point off $A$ in $E_\\varepsilon$, use its unique parameter $\\rho$ from [F1] and define $q(x,y,z)=(f(\\rho)x/\\sqrt{1+\\rho^2},y,z)$. Set $q(A)=0$. On each source ellipsoid boundary this is an invertible linear map onto the ellipsoid with semiaxes $f(\\rho),\\rho,\\rho$. Since $f$ and $\\rho$ strictly increase, those target ellipsoids are strictly nested. They fill the outer ellipsoid minus its center: for any nonzero target point $(X,Y,Z)$ therein, the expression $X^2/f(\\rho)^2+(Y^2+Z^2)/\\rho^2$ is strictly decreasing in positive $\\rho$, tends to infinity at zero, and is at most one at $\\varepsilon$. Its unique value one recovers $\\rho$, and then the linear level map gives the unique preimage. Thus the only nonsingleton fiber is $A$, and the map is onto the outer ellipsoid.",
+          "inputs": [
+            "step 1.1",
+            "F1",
+            "construct",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "step": "3.1",
+          "claim": "Continuity away from $A$ follows from the smooth level formula; alternatively the source level equation has nonzero $\\rho$ derivative at every positive level and [F2] applies. At $A$, convergence of source points implies $\\rho\\to0$, by the displayed level formula in [F1], while their images satisfy $|X|\\le f(\\rho)$ and $Y^2+Z^2\\le\\rho^2$, hence converge to zero. The map is therefore continuous everywhere. Since $f(\\rho)=\\sqrt{1+\\rho^2}$ near the outer boundary, it equals the identity on a whole collar there. Extend it by the identity outside $E_\\varepsilon$. It is a global continuous surjection with exactly the asserted fibers and support.",
+          "inputs": [
+            "step 1.1",
+            "step 2.1",
+            "F1",
+            "F2",
+            "construct"
+          ]
+        },
+        {
+          "id": "step-4-1",
+          "step": "4.1",
+          "claim": "The inverse on the punctured target is smooth: its recovered $\\rho$ is the local root in step 2.1, whose derivative is $-2X^2f'/f^3-2(Y^2+Z^2)/\\rho^3<0$. Apply [F2] and then the smooth inverse linear level formula. The source map is likewise smooth off $A$ by step 3.1. These maps agree smoothly with the identity on the boundary collar, so give a diffeomorphism of the two punctured ambient manifolds. Finally, for $\\rho\\le\\varepsilon/3$ the target semiaxes are exactly $a\\rho,\\rho,\\rho$, so a fixed diagonal rescaling turns all those small target levels into concentric round spheres. This proves the additional explicit clause, with no limiting differentiability asserted at the collapsed arc.",
+          "inputs": [
+            "step 1.1",
+            "step 2.1",
+            "step 3.1",
+            "F2",
+            "construct"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "A supplied smooth embedded arc is nonempty."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Step 3.1 proves continuity at rho=0 using the explicit bounds on target coordinates; no differentiability at the collapsed arc is claimed."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Step 2.1 gives exactly one nonsingleton fiber and singleton fibers at all nonzero target points."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Step 4.1 has a strictly negative inverse-level derivative at every nonzero target point, including points on the target coordinate axis."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Step 3.1 includes both arc endpoints in the same continuity argument; the formula is exactly the identity in an outer boundary collar."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "The Statement is choice-free; Step 1.1 uses a supplied finite straight-arc chart and a fixed scalar bump, with no countable selections."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "No equivalence is asserted."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "No converse is asserted."
+        }
+      ],
+      "axioms": [],
+      "finite_checks": [],
+      "finite_smoke": [],
+      "risk_review": {
+        "status": "owner-review-pending",
+        "notes": "Strictly nested target ellipsoids and the explicit inverse root prove smoothness off the entire arc. No smoothness at the collapsed arc is asserted. The source carrier and its choice-free interface remain frozen."
+      },
+      "proof_status": "complete-local-proof",
+      "proof_status_evidence": "Four actual local proof rows and scoped final checks; independent mathematical review and canonical readiness remain pending.",
+      "unresolved_suppliers": [],
+      "unresolved_assumptions": []
+    }
+  }
+}

@@ -27,7 +27,7 @@ sources:
 
 ## Statement
 
-Assume Countable Choice and let $\epsilon\ge0$. In the Gaussian sequence inverse model with positive singular numbers $(s_j)_{j\in\mathbb N}$, let $Q\ge0$ and let $(a_j)_{j\in\mathbb N}$ be positive and nondecreasing. For each $\theta\in\Theta_a(Q)$, define the squared sequence risk of the cutoff estimator at $D\in\mathbb N_0$ by
+Assume Countable Choice and let $\epsilon\ge0$. In the Gaussian sequence inverse model with positive singular numbers $(s_j)_{j\in\mathbb N_{>0}}$, let $Q\ge0$ and let $(a_j)_{j\in\mathbb N_{>0}}$ be positive and nondecreasing. For each $\theta\in\Theta_a(Q)$, define the squared sequence risk of the cutoff estimator at $D\in\mathbb N_0$ by
 $$R_\theta(D):=\mathbb E_\theta\!\left[\|\widehat\theta_D(Z)-\theta\|_{\ell^2}^2\right].$$
 Then its exact worst-case squared sequence risk is
 $$\sup_{\theta\in\Theta_a(Q)}R_\theta(D)=\frac{Q^2}{a_{D+1}^2}+\epsilon^2\sum_{j=1}^{D}s_j^{-2},$$

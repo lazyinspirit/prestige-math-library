@@ -18,6 +18,11 @@ provenance:
   statement: literature-derived
   proof: ai-altered
 axiom_use: Countable Choice is inherited from the Hilbert adjoint and Riesz representation interfaces. The range characterization itself uses no further choice.
+verification:
+  judge:
+    model: "gpt-6-luna"
+    verdict: pass
+    date: 2026-10-22
 sources:
   references:
     - title: "Remo Kretschmann and Frank Werner, Maximum a posteriori testing in statistical inverse problems, §1.1 and §1.2"

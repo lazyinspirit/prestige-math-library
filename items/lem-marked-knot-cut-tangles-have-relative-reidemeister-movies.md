@@ -19,6 +19,11 @@ axiom_use: "ACω is used in isotopy extension and the relative finite-jet transv
 provenance:
   statement: literature-derived
   proof: ai-altered
+verification:
+  judge:
+    model: "gpt-6-luna"
+    verdict: pass
+    date: 2026-10-22
 sources:
   references:
     - title: "Khovanov, A categorification of the Jones polynomial, §8.3, printed p. 49, and §8.4, printed pp. 50–51"

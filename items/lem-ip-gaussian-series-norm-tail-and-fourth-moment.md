@@ -21,6 +21,11 @@ axiom_use: Countable Choice is assumed; the independent normal coordinates are
   given, and the proof uses only their finite-dimensional densities and
   countable monotone limits, with no construction of a new product measure or
   arbitrary-index choice.
+verification:
+  judge:
+    model: "gpt-6-luna"
+    verdict: pass
+    date: 2026-10-22
 sources:
   references:
     - title: Vladimir Spokoiny and Niklas Willrich, Bootstrap tuning in ordered model

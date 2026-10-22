@@ -20,7 +20,7 @@ sources:
   references:
     - title: "Nikolai Saveliev, Lectures on the Topology of 3-Manifolds"
       url: "https://poisson.phc.dm.unipi.it/~camponovo/libri/3mani.pdf"
-      locator: "Lemma 2.2 and proof, Lecture 2 §2.2, printed pp. 33–34"
+      locator: "Lemma 2.2 and proof, Lecture 2 §2.2, printed pp. 34–35"
 ---
 
 ## Statement
@@ -50,6 +50,7 @@ Assume $\mathrm{AC}_\omega$. Let $M=H_-\cup_\varphi H_+$ be a Heegaard splitting
 [A1] $\mathrm{AC}_\omega$ is the countable-choice hypothesis [[def-countable-choice]] used for the tubular and collar data.
 
 ## Proof
+
 
 1.1 Push $c$ a small distance into $H_-$ to obtain an embedded knot $K$ and choose a closed tubular neighbourhood $N(K)$ disjoint from $\Sigma$. The collar between $c$ and the boundary of $N(K)$ is an embedded annulus $A$; its parallel boundary curve on $\partial N(K)$ is $\lambda_A$. Choose the product coordinates on $N(K)$ so that the meridian $\mu$ bounds a normal disk. [given, F2, A1, construct]
 

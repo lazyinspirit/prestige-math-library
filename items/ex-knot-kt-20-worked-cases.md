@@ -31,7 +31,7 @@ sources:
     - title: Kathleen L. Petersen, A-polynomials of a family of two-bridge knots,
         §§3–4 and §7.2
       url: https://nyjm.albany.edu/j/2015/21-39v.pdf
-    - title: Léo Bénard, François Florens, and Adrien Rodau, A slope invariant and the
+    - title: Léo Bénard, Vincent Florens, and Adrien Rodau, A slope invariant and the
         A-polynomial of knots, Example 3.20 and §4.1
       url: https://arxiv.org/pdf/2103.14151
     - title: D. Cooper, M. Culler, H. Gillet, D. D. Long, and P. B. Shalen, Plane
@@ -71,15 +71,13 @@ and the ordinary A-polynomial is $(L-1)\widetilde A_K(M,L)$, up to a Laurent uni
 
 [F4] The concrete two-meridian presentation and preferred longitude are proved in [[lem-figure-eight-two-meridian-presentation-and-preferred-longitude-word]]. A reducible representation is upper triangular with equal diagonal characters on $u,v$, and this explicit longitude has exponent sum zero. Hence its longitude eigenvalue is one. Conversely $u=v=\operatorname{diag}(M,M^{-1})$ realizes $(M,1)$ for every $M\ne0$.
 
-[F5] The full proof of [[lem-figure-eight-character-and-longitude-traces]] gives every irreducible representation its matrices $A=\left(\begin{smallmatrix}M&1\\0&M^{-1}\end{smallmatrix}\right)$, $B=\left(\begin{smallmatrix}M&0\\t&M^{-1}\end{smallmatrix}\right)$ and exact relation $F=t^2+(M^2+M^{-2}-3)t-(M^2+M^{-2}-3)=0$. Conversely $F=0,t\ne0$ gives an actual irreducible representation, including $M=\pm1$.
-
 ## Verification
 
 1.1 Put $x=M+M^{-1}$. By [F1] and [F2], $L+L^{-1}=x^4-5x^2+2$. Since $x^2=M^2+2+M^{-2}$ and $x^4=M^4+4M^2+6+4M^{-2}+M^{-4}$, the right side is $M^4-M^2-2-M^{-2}+M^{-4}$. Multiplying by the unit $M^4L$ gives $$Q(M,L)=M^4L^2+(-M^8+M^6+2M^4+M^2-1)L+M^4=0.$$ Thus every eigenvalue pair from an irreducible representation lies on this explicit Laurent curve. [F1, F2, construct, algebra]
 
 2.1 **Irreducibility is checked by an exact factorization.** Put $X=M^2$ and $B(X)=-X^4+X^3+2X^2+X-1$. As a quadratic in $L$, $Q=X^2L^2+B(X)L+X^2$ has discriminant $$B(X)^2-4X^4=(X-1)^2(X+1)^2(X^2+X+1)(X^2-3X+1).$$ This follows by factoring $B-2X^2=-(X-1)^2(X^2+X+1)$ and $B+2X^2=-(X+1)^2(X^2-3X+1)$. A root $r$ of $X^2-3X+1$ is nonzero, is simple, and is neither $1,-1$ nor a root of $X^2+X+1$: subtracting the two quadratics at a common root would give $4r=0$. Each square root $M$ of $r$ is consequently a simple zero of the discriminant after substitution $X=M^2$, since $2M\ne0$. Thus the discriminant is not a square in $\mathbb C(M)$. The quadratic $Q$ is irreducible over $\mathbb C(M)$, and [F3] gives its irreducibility in the Laurent polynomial ring; its nonzero constant term excludes an inverted $L$ factor. [F3, step 1.1, construct, algebra]
 
-2.2 **There are actual representations with infinitely many meridian values.** For every $M\ne0$ except the finitely many solutions of $M^2+M^{-2}-3=0$, the monic quadratic $F$ of [F5] has a complex root $t$ and neither root is zero. Hence [F5] gives an actual irreducible representation with meridian eigenvalue $M$. The preferred longitude commutes with the meridian, so the meridian eigenline $\mathbb C(1,0)$ in that matrix model is also a longitude eigenline whenever $M\ne\pm1$; discard these additional two values. Thus for infinitely many distinct $M$ there is an actual eigenvalue pair $(M,L)$ in the irreducible locus. These pairs satisfy $Q=0$ by step 1.1. No global eigenvalue-image completeness theorem is assumed here. [F2, F5, step 1.1, construct, algebra]
+2.2 **There are actual representations with infinitely many meridian values.** Use the presentation $\langle u,v\mid vw=wu\rangle$, $w=uv^{-1}u^{-1}v$, from [F4]. For $M\ne0$, put $a=M^2+M^{-2}-3$, $F=t^2+at-a$ and $$A=\begin{pmatrix}M&1\\0&M^{-1}\end{pmatrix},\qquad B=\begin{pmatrix}M&0\\t&M^{-1}\end{pmatrix},\qquad W=AB^{-1}A^{-1}B.$$ Both matrices have determinant one. Multiplication gives $$BW-WA=\begin{pmatrix}0&-F\\tF&0\end{pmatrix},$$ so each root of $F=0$ defines an actual representation with $\rho(u)=A$, $\rho(v)=B$. Exclude $M=\pm1$ and the finitely many solutions of $a=0$. The monic quadratic $F$ has a complex root $t$, and $F(0)=-a\ne0$ makes $t\ne0$. Write $d=M-M^{-1}\ne0$. The only eigenlines of $A$ are $\mathbb C(1,0)$ and $\mathbb C(1,-d)$. The first is not $B$-invariant since $t\ne0$; the second is $B$-invariant exactly when $t=-d^2$. Since $d^2=a+1$, substitution gives $F(-d^2)=1$, excluding that case. Thus the representation is irreducible. Commutation with $A$ makes the preferred longitude preserve its $M$-eigenline, producing an eigenvalue pair $(M,L)$. Infinitely many distinct $M$ remain, and their pairs satisfy $Q=0$ by step 1.1. No normal-form converse or image-completeness theorem is assumed. [F2, F4, step 1.1, construct, algebra]
 
 3.1 **The exact curve vanishing ideal follows by polynomial Euclid.** Suppose a Laurent polynomial $P(M,L)$ vanishes on all those irreducible eigenvalue pairs. If $Q$ does not divide $P$ in $\mathbb C(M)[L^{\pm1}]$, step 2.1 makes their gcd one. The finite Euclidean algorithm gives a Bezout identity there. Clearing its finitely many nonzero denominators in $M$, while retaining the already allowed Laurent powers of $L$, gives Laurent coefficients $U,V$ and a nonzero Laurent polynomial $h(M)$ with $UP+VQ=h(M)$. Step 2.2 would make $h(M)$ vanish at infinitely many nonzero meridian values, impossible for a nonzero one-variable Laurent polynomial. Therefore $Q$ divides $P$. Its primitive irreducible Laurent equation from step 2.1 and [F3] then divides $P$ in $\mathbb C[M^{\pm1},L^{\pm1}]$ itself. The converse is step 1.1. Hence the vanishing ideal of the full irreducible peripheral eigenvalue locus is exactly $(Q)$, and its reduced closure is the whole $Q$ curve. This includes any exceptional central or parabolic pairs, since they too satisfy step 1.1, while the dense family already forces this ideal. [F3, step 1.1, step 2.1, step 2.2, construct, algebra]
 
@@ -102,7 +100,7 @@ The braid box records the word $\sigma_1\sigma_2^{-1}\sigma_1\sigma_2^{-1}$ whos
   \draw (0,4)--(1,3);
   % Second crossing: negative sigma_2, with the right strand over.
   \draw (0,3)--(0,2);
-  \draw (1,3)--(1.58,2.58) (1.42,2.42)--(2,2);
+  \draw (1,3)--(1.42,2.58) (1.58,2.42)--(2,2);
   \draw (2,3)--(1,2);
   % Third crossing: positive sigma_1.
   \draw (1,2)--(0.58,1.58) (0.42,1.42)--(0,1);
@@ -110,7 +108,7 @@ The braid box records the word $\sigma_1\sigma_2^{-1}\sigma_1\sigma_2^{-1}$ whos
   \draw (0,2)--(1,1);
   % Fourth crossing: negative sigma_2.
   \draw (0,1)--(0,0);
-  \draw (1,1)--(1.58,0.58) (1.42,0.42)--(2,0);
+  \draw (1,1)--(1.42,0.58) (1.58,0.42)--(2,0);
   \draw (2,1)--(1,0);
   \node[below] at (1.5,-0.35) {three braid strands; matching endpoints are closed outside the box};
 \end{tikzpicture}

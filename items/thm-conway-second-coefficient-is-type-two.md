@@ -79,7 +79,7 @@ The two possible degree-two chord patterns are shown below. The first has altern
 
 [F5] [[def-oriented-crossing-sign-writhe-and-blackboard-framing]]: a positive crossing has sign $+1$ under the determinant convention, and the positive Artin half twist has that sign.
 
-[F6] **Discharged existence input.** [[def-conway-polynomial]] now supplies the actual unique $\mathbb Z[z]$-valued oriented ambient-link invariant by its explicitly external Lickorish Seifert-determinant and skein theorem (Chapter 8, Theorems 8.5–8.6, printed pp. 82–83) and CDM ambient-link/skein interpretation, followed by the finite polynomial/uniqueness argument. Thus the Conway function in the Given is an actual available object, not an unresolved well-definedness premise. The finite coefficient/chord/trefoil arguments below are retained unchanged; no general rationality assertion for the Kontsevich coefficients is used.
+[F6] [[def-conway-polynomial]]: its Definition records the skein interface and explicitly separates the existence-and-uniqueness obligation. That obligation is discharged in the supplier's Proof, step 3.1, using its labelled external input and finite uniqueness argument; it is not a conclusion of the Definition alone. The theorem here is conditional on the Conway skein invariant specified in the Given, and its coefficient arguments use only [F1].
 
 ## Proof
 

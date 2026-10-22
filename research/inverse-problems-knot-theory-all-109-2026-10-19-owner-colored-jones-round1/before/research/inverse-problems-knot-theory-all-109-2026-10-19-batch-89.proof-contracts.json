@@ -1,0 +1,850 @@
+{
+  "version": 1,
+  "scope": [
+    "cex-knot-kt-36-boundary-case",
+    "def-normalized-colored-jones-sequence",
+    "alg-colored-jones-from-ribbon-evaluation",
+    "ex-knot-kt-36-worked-cases",
+    "thm-colored-jones-finite-evaluation",
+    "op-kashaev-volume-conjecture-for-hyperbolic-knots"
+  ],
+  "contracts": {
+    "cex-knot-kt-36-boundary-case": {
+      "citations": [],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "step": "1.1",
+          "claim": "Define $a_{N_0}=\\exp(VN_0/(2\\pi))$ and $a_N=1$ for every $N\\ge1$ with $N\\ne N_0$. Each term is positive, and $(2\\pi/N_0)\\log(a_{N_0})=(2\\pi/N_0)(VN_0/(2\\pi))=V$.",
+          "inputs": [
+            "given",
+            "F1",
+            "construct",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "step": "2.1",
+          "claim": "For every $N>N_0$, $a_N=1$, so $(2\\pi/N)\\log(a_N)=0$. The sequence of normalized logarithms is therefore eventually zero and has limit $0\\ne V$. This contradicts the asserted conclusion.",
+          "inputs": [
+            "F1",
+            "step 1.1",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "The counterexample defines a positive term at every integer N≥1 and no empty sequence domain; see step 1.1."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "The target is constrained by V>0, and the constructed tail value is 0; see step 2.1."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "The construction works at N₀=1 without changing either step 1.1 or step 2.1."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "For any fixed finite N₀, the single exceptional positive term and constant tail are defined; see steps 1.1 and 2.1."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "The sequence claim has no interval endpoints or endpoint-value hypotheses."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "The counterexample uses an explicit exponential and constant values, with no choice principle; see step 1.1."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The item states no if-and-only-if equivalence, so this implication direction has no boundary case."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The item states no if-and-only-if equivalence, so this implication direction has no boundary case."
+        }
+      ],
+      "finite_checks": [
+        {
+          "name": "N₀=1 witness",
+          "method": "exact logarithm evaluation",
+          "input": {
+            "N0": 1,
+            "V": 1
+          },
+          "calculation": "Set a_1=exp(1/(2π)) and a_N=1 for N>1; then (2π)log(a_1)=1 and every tail normalized logarithm is 0.",
+          "expected": {
+            "premise_value": 1,
+            "limit": 0
+          }
+        }
+      ]
+    },
+    "def-normalized-colored-jones-sequence": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-drinfeld-jimbo-quantized-enveloping-algebra",
+          "source_section": "Definition",
+          "quote": "$$K_hE_i-q^{\\langle\\alpha_i,h\\rangle}E_iK_h,\\qquad K_hF_i-q^{-\\langle\\alpha_i,h\\rangle}F_iK_h\\qquad(h\\in P^{\\vee},\\ i\\in I);$$\n\n$$E_iF_j-F_jE_i-\\delta_{ij}\\frac{K_i-K_i^{-1}}{q_i-q_i^{-1}}\\qquad(i,j\\in I);$$",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "thm-the-drinfeld-jimbo-formulas-define-a-hopf-algebra",
+          "source_section": "Statement",
+          "quote": "$$\\Delta(K_h)=K_h\\otimes K_h,\\quad \\Delta(E_i)=E_i\\otimes K_i^{-1}+1\\otimes E_i,\\quad \\Delta(F_i)=F_i\\otimes1+K_i\\otimes F_i,\\quad \\varepsilon(K_h)=1,\\quad\\varepsilon(E_i)=\\varepsilon(F_i)=0.$$",
+          "uses": [
+            "1.4"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "def-braiding",
+          "source_section": "Definition",
+          "quote": "Let $(\\mathcal C,\\otimes,\\mathbf 1,\\alpha,\\lambda,\\rho)$ be a monoidal\ncategory ([[def-monoidal-category]]).\n\nA **braiding** on $\\mathcal C$ is a natural isomorphism\n\n$$c_{X,Y}:X\\otimes Y\\longrightarrow Y\\otimes X$$\n\nnatural in both variables ([[def-natural-isomorphism]]) such that, for all\nobjects $X,Y,Z$,\n\n$$\\alpha_{Y,Z,X}\\circ c_{X,Y\\otimes Z}\\circ\\alpha_{X,Y,Z}=(1_Y\\otimes c_{X,Z})\\circ\\alpha_{Y,X,Z}\\circ(c_{X,Y}\\otimes1_Z),$$\n\nand\n\n$$\\alpha_{Z,X,Y}^{-1}\\circ c_{X\\otimes Y,Z}\\circ\\alpha_{X,Y,Z}^{-1}=(c_{X,Z}\\otimes1_Y)\\circ\\alpha_{X,Z,Y}^{-1}\\circ(1_X\\otimes c_{Y,Z}).$$\n\nThese are the two **hexagon identities**. The invertibility of each\n$c_{X,Y}$ is part of the data, not a consequence of the hexagons.",
+          "uses": [
+            "1.4"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "def-left-dual-and-right-dual-object",
+          "source_section": "Definition",
+          "quote": "A **left dual** of $X$ is an object $X^\\vee$ together with morphisms",
+          "uses": [
+            "1.4"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "def-twist-and-ribbon-structure",
+          "source_section": "Definition",
+          "quote": "Let $\\mathcal C$ be a braided rigid monoidal category with braiding $c$, and\nfix left duals $X^\\vee$ for all objects together with the dual-morphism\noperation of [[def-the-dual-of-a-morphism]].\n\nA **twist** on $\\mathcal C$ is a natural automorphism\n$\\theta\\in\\operatorname{Aut}(\\operatorname{id}_{\\mathcal C})$ such that\n\n$$\\theta_{X\\otimes Y}=(\\theta_X\\otimes\\theta_Y)\\circ c_{Y,X}\\circ c_{X,Y}$$\n\nfor all objects $X,Y$ and $\\theta_{\\mathbf 1}=1_{\\mathbf 1}$.\n\nA **ribbon structure** is a twist satisfying the dual-compatibility condition\n\n$$(\\theta_X)^\\vee=\\theta_{X^\\vee}.$$",
+          "uses": [
+            "1.4"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "thm-twist-correction-removes-framing",
+          "source_section": "Statement",
+          "quote": "Assume the Axiom of Choice. Let $k$ be a field and let $\\mathcal C$ be a $k$-linear ribbon category with $k$-bilinear tensor product and $\\operatorname{End}_{\\mathcal C}(\\mathbf1)=k$. Let $X$ be absolutely simple, so its twist is $\\theta_X=\\lambda\\operatorname{id}_X$ for a unique $\\lambda\\in k^\\times$. For $n\\ge1$ and $\\beta\\in B_n$, let $t_n(\\beta)$ be the value of the blackboard-framed $X$-colored closure and let $w(\\beta)$ be the exponent sum, with positive Artin generator and positive stabilization conventions fixed as in the supplied ribbon-trace formulas. Then\n$$J_X(\\widehat\\beta):=\\lambda^{-w(\\beta)}t_n(\\beta)$$\ndepends only on the oriented unframed link type of $\\widehat\\beta$ when every component has color $X$. This statement makes no normalization by the categorical dimension.",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "def-colored-framed-knot-evaluation-from-ribbon-category",
+          "source_section": "Definition",
+          "quote": "Assume the Axiom of Countable Choice. Let $\\mathcal C$ be a ribbon category with chosen left duals and tensor unit $\\mathbf 1$. A **finite oriented framed link colored in $\\mathcal C$** is a finite disjoint union $L$ of oriented smoothly embedded circles in $S^3$, a homotopy class of nowhere-zero normal vector field on each component, and an assignment of an object of $\\mathcal C$ to each component. A framed colored isotopy carries orientations, framings, and component colors. If $F_{\\mathcal C}$ is the ribbon-tangle evaluation functor, define\n$$\\operatorname{RT}_{\\mathcal C}(L):=F_{\\mathcal C}(L)\\in\\operatorname{End}_{\\mathcal C}(\\mathbf 1).$$\nThis value depends only on the framed colored isotopy class. It is not automatically a field scalar; if $\\mathcal C$ is $k$-linear and $\\operatorname{End}_{\\mathcal C}(\\mathbf 1)=k$, it is a scalar in $k$. The empty link is assigned $1_{\\mathbf 1}$.",
+          "uses": [
+            "1.4",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F6",
+          "source": "def-absolutely-simple-object",
+          "source_section": "Definition",
+          "quote": "An object $X$ of $\\mathcal C$ is **absolutely simple** when the $k$-algebra\n$\\operatorname{End}_{\\mathcal C}(X)$ is one-dimensional over $k$, that is,",
+          "uses": [
+            "1.2",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "A2",
+          "source": "def-axiom-of-choice",
+          "source_section": "Definition",
+          "quote": "The **Axiom of Choice** (AC) is the following statement.",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "A3",
+          "source": "def-countable-choice",
+          "source_section": "Definition",
+          "quote": "The **Axiom of Countable Choice**, written $\\mathrm{AC}_\\omega$, is the following\nstatement.",
+          "uses": [
+            "2.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "step": "1.1",
+          "claim": "The diagonal weights give $K_L E K_L^{-1}v_j=q_L^2Ev_j$ and $K_L F K_L^{-1}v_j=q_L^{-2}Fv_j$. For the commutator, $EFv_j-FEv_j=([j+1][N-j-1]-[N-j][j])v_j=[N-1-2j]v_j$; the last equality follows by expanding the two quantum-number products over $q_K-q_K^{-1}$. Since $[r]_{q_K}=[r]_{q_L}$, this is $(K_L-K_L^{-1})(q_L-q_L^{-1})^{-1}v_j$. The generators therefore satisfy the defining $\\mathfrak{sl}_2$ relations.",
+          "inputs": [
+            "F1",
+            "given",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-1-2",
+          "step": "1.2",
+          "claim": "The eigenvalues $q_L^{N-1-2j}$ of $K_L$ are pairwise distinct in $F$. Any module endomorphism is therefore diagonal in the given basis; commuting with $E$, whose successive coefficients $[N-j]$ are nonzero in $F$, forces all diagonal entries to be equal. Thus $\\operatorname{End}_{U_{q_L}(\\mathfrak{sl}_2)}(V_N)=F I$ and the color is absolutely simple by [F6].",
+          "inputs": [
+            "F6",
+            "given",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-1-3",
+          "step": "1.3",
+          "claim": "If $N=1$, $V_N$ is one-dimensional and irreducible. For $N>1$, let $W$ be a nonzero submodule and choose $x=\\sum_j c_jv_j\\in W$ nonzero. The eigenvalues of $K_L$ are distinct, so the polynomial spectral projection for any $j$ with $c_j\\ne0$ maps $x$ to $c_jv_j$; hence $v_j\\in W$. Repeated application of $E$ gives $v_0\\in W$, since every coefficient $[N-k]$ encountered is nonzero. Repeated application of $F$ to $v_0$ gives each $v_k$ because the coefficients $[k]$ are nonzero. Thus $W=V_N$, proving irreducibility.",
+          "inputs": [
+            "given",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-1-4",
+          "step": "1.4",
+          "claim": "The displayed sum for $d_N$ is a geometric sum, so $d_N=(-1)^{N-1}[N]$. Its numerator $A^{2N}-A^{-2N}$ is a nonzero Laurent polynomial and its denominator $A^2-A^{-2}$ is nonzero in $F$; hence the generic normalization is defined. The Hopf coproduct [F2] supplies the tensor-power action used in $\\rho_N(\\beta)$. By the braiding, dual, and ribbon axioms [F3] and admissibility [A1], these matrices define the framed evaluation, whose value is the pivotal trace by [F5].",
+          "inputs": [
+            "A1",
+            "F2",
+            "F3",
+            "F5",
+            "given",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "step": "2.1",
+          "claim": "By [F4], [A1], and [A2], $\\lambda_N^{-w(\\beta)}t_N(\\beta)$ is unchanged by every conjugation and Markov stabilization, since $V_N$ is absolutely simple and its specified twist scalar is nonzero. Countable choice [A3] supplies the evaluator's hypothesis. Dividing by the fixed nonzero $d_N$ preserves that equality, so the displayed generic value is independent of the braid representative.",
+          "inputs": [
+            "A1",
+            "A2",
+            "A3",
+            "F4",
+            "F6",
+            "step 1.2",
+            "step 1.4",
+            "given"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "step": "3.1",
+          "claim": "The unknot is represented by the one-strand identity braid, whose exponent sum is zero and whose pivotal trace is $\\operatorname{Tr}(G_N)=d_N$. Hence $J_N^{\\mathrm{gen}}(\\bigcirc;q)=1$. For $N\\ge2$, at $q_N=e^{2\\pi i/N}$ choose $A_N=e^{\\pi i/(2N)}$; then $A_N^4=q_N$ and $A_N^2-A_N^{-2}\\ne0$, while $A_N^{2N}-A_N^{-2N}=e^{\\pi i}-e^{-\\pi i}=0$. Thus $d_N(q_N)=0$: the generic quotient cannot be evaluated there by dividing by $d_N$.",
+          "inputs": [
+            "A1",
+            "F5",
+            "step 1.4",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "Step 3.1 verifies the one-strand identity-braid unknot normalization."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "The Definition restricts N to N≥1; no zero-dimensional color is admitted."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Steps 1.3 and 3.1 explicitly handle N=1."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Step 3.1 shows d_N(q_N)=0 for N≥2 and excludes direct root division; the generic field denominator is nonzero in step 1.4."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "The Definition concerns closed knots and closures of braids, with no open tangle endpoints."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "The Definition separately assumes AC and ACω; step 2.1 uses AC for Markov moves and ACω for the framed evaluator."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The item states no if-and-only-if equivalence, so this implication direction has no boundary case."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The item states no if-and-only-if equivalence, so this implication direction has no boundary case."
+        }
+      ],
+      "finite_checks": [
+        {
+          "name": "one-dimensional color",
+          "method": "direct formula substitution",
+          "input": {
+            "N": 1
+          },
+          "calculation": "E=F=0, G_1=1, λ_1=d_1=1, and the universal-R sum has only r=0.",
+          "expected": {
+            "qdim": 1,
+            "unknot_value": 1
+          }
+        },
+        {
+          "name": "vanishing quantum dimension at q₂",
+          "method": "exact root substitution",
+          "input": {
+            "N": 2,
+            "A": "exp(πi/4)"
+          },
+          "calculation": "A⁴=−1=q₂ and d₂=−A²−A⁻²=−i−(−i)=0 while A²−A⁻²=2i≠0.",
+          "expected": {
+            "d2_at_q2": 0,
+            "direct_root_division": "undefined"
+          }
+        }
+      ]
+    },
+    "alg-colored-jones-from-ribbon-evaluation": {
+      "citations": [],
+      "derivations": [],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "The Definition excludes n=0 and permits a one-strand empty word, whose closure is one component."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "The Definition requires N≥1 and rejects a zero denominator in the coefficient field."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "The Definition handles N=1 with the single r=0 R-sum term, so the finite construction still terminates."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "The Definition rejects malformed words and inadmissible ribbon data before matrix evaluation."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "The Definition specifies bottom-to-top same-position closure and requires one component."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "The Definition uses finite encoded operations; ribbon identities are explicit input hypotheses, not inferred."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The item states no if-and-only-if equivalence, so this implication direction has no boundary case."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The item states no if-and-only-if equivalence, so this implication direction has no boundary case."
+        }
+      ],
+      "finite_checks": [
+        {
+          "name": "three-letter braid word",
+          "method": "operation-count audit",
+          "input": {
+            "N": 2,
+            "n": 2,
+            "word": "σ₁³"
+          },
+          "calculation": "The universal-R sum has two terms; the evaluator performs three crossing updates and one finite trace contraction, then computes w=3 and divides by nonzero d₂ in Q(A).",
+          "expected": {
+            "updates": 3,
+            "trace_contractions": 1,
+            "root_substitution": false
+          }
+        }
+      ]
+    },
+    "ex-knot-kt-36-worked-cases": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-normalized-colored-jones-sequence",
+          "source_section": "Definition",
+          "quote": "Let $A$ be an indeterminate, put $q=A^4$, $q_K=A^2$, and $q_L=A^{-2}=q_K^{-1}$, and work over $F=\\mathbb Q(A)$. An oriented knot in $S^3$ means a smooth embedded circle with an orientation, considered up to orientation-preserving ambient isotopy. For an integer $r$, put\n$$[r]=\\frac{q_K^r-q_K^{-r}}{q_K-q_K^{-1}},\\qquad [m]!=\\prod_{r=1}^{m}[r]\\quad(m\\ge1),\\qquad [0]!=1.$$\nFor each $N\\ge1$, put $q_N=\\exp(2\\pi i/N)$.\nFor each integer $N\\ge1$, let $V_N$ have basis $v_0,\\ldots,v_{N-1}$ and define the $U_{q_L}(\\mathfrak{sl}_2)$ action in the library coproduct convention by\n$$K_Lv_j=q_L^{N-1-2j}v_j,\\qquad Ev_j=[N-j]v_{j-1},\\qquad Fv_j=[j+1]v_{j+1},$$\nwhere $v_{-1}=v_N=0$. In the universal $R$-matrix formula use $q_K$ and $H v_j=(N-1-2j)v_j$; on $V_N\\otimes V_N$ its action is the finite sum\n$$\\mathcal R_N=q_K^{H\\otimes H/2}\\sum_{r=0}^{N-1}q_K^{r(r-1)/2}\\frac{(q_K-q_K^{-1})^r}{[r]!}\\,E^r\\otimes F^r,$$\nand the positive crossing is $c_N=P\\mathcal R_N$, where $P(x\\otimes y)=y\\otimes x$. This is an irreducible module of dimension $N$. Equip these matrices with the Kauffman-bracket half-ribbon data: the twist matrix is the scalar $\\theta_N=\\lambda_N I$ with $\\lambda_N=(-1)^{N-1}A^{N^2-1}$, and the matrix $G_N=(-1)^{N-1}\\operatorname{diag}(A^{2(N-1-2j)})_{j=0}^{N-1}$ is the pivotal comparison used in the closure trace. The resulting generic quantum dimension is\n$$d_N=\\operatorname{Tr}(G_N)=(-1)^{N-1}\\frac{A^{2N}-A^{-2N}}{A^2-A^{-2}}.$$\nUse the contragredient left-dual action $(x\\cdot f)(v)=f(S(x)v)$ on $V_N^*$, with evaluation $\\operatorname{ev}(f\\otimes v)=f(v)$ and coevaluation $1\\mapsto\\sum_{j=0}^{N-1}v_j\\otimes v_j^*$. The ambient category is the $F$-linear category whose objects are finite-dimensional $U_{q_L}(\\mathfrak{sl}_2)$-modules, whose morphisms are module homomorphisms, and whose tensor-product action is induced by the stated Hopf coproduct; its tensor unit is $F$ with the trivial action, so its tensor-unit endomorphism ring is $F$. The stipulated matrix data are **admissible** when their braiding, inverse braiding, duality maps, pivotal comparison, and twist satisfy the ribbon-category axioms. Assume the Axiom of Choice and Countable Choice for the framed-tangle and Markov constructions. For such data, an oriented knot $K\\subset S^3$ presented as the closure of an $n$-strand braid $\\beta$ has generic normalized value\n$$J_N^{\\mathrm{gen}}(K;q)=\\lambda_N^{-w(\\beta)}\\frac{\\operatorname{Tr}(G_N^{\\otimes n}\\rho_N(\\beta))}{d_N}\\in F,$$\nwhere, for a word $\\beta=\\sigma_{i_1}^{\\varepsilon_1}\\cdots\\sigma_{i_m}^{\\varepsilon_m}$ with $\\varepsilon_j\\in\\{1,-1\\}$, $w(\\beta):=\\sum_{j=1}^m\\varepsilon_j$, and $\\rho_N(\\beta)$ is obtained by replacing each positive braid generator by $c_N$ on the corresponding adjacent tensor factors and each inverse generator by $c_N^{-1}$, then composing in word order. The variable transport to the ordinary Jones convention is $t=q^{-1}=A^{-4}$.",
+          "uses": [
+            "1.1",
+            "1.2",
+            "2.1",
+            "2.2"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "lem-quantum-sl2-ribbon-trace-matches-hecke-and-bracket",
+          "source_section": "Statement",
+          "quote": "Assume the Axiom of Countable Choice. Let $A$ be an indeterminate, $q_K=A^2$, $q_L=A^{-2}$, and $\\delta=-A^2-A^{-2}$. Use the fundamental module, positive crossing, duality maps, and twist fixed in the preceding definition. For every $n\\ge1$ and $\\beta\\in B_n$, let $t_n(\\beta)$ be the categorical ribbon trace of its blackboard-framed closure and let $w(\\beta)$ be its exponent sum. With $t=A^{-4}$ and $z_0=-1/(t+1)$, the exact identities are\n$$t_n(\\beta)=\\delta\\langle\\widehat\\beta\\rangle=\\delta^n(-A)^{w(\\beta)}\\operatorname{tr}_n(\\pi_n(\\beta))\\big|_{v=t,\\ z=z_0},$$\n$$(-A^3)^{-w(\\beta)}t_n(\\beta)=\\delta(-A^3)^{-w(\\beta)}\\langle\\widehat\\beta\\rangle.$$\nHere $\\operatorname{tr}_n$ is the normalized type-A Hecke Markov trace with braid generator sent to $T_i$, and $\\langle\\widehat\\beta\\rangle$ is the Kauffman bracket in the fixed crossing chart. The second identity is a value-by-value normalization formula; it does not by itself assert a Jones-polynomial specialization.",
+          "uses": [
+            "2.2",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "thm-bracket-state-sum-matches-library-jones-specialization",
+          "source_section": "Statement",
+          "quote": "Assume the Axiom of Choice. Let $A$ and $t$ be formal variables and $K$ a\nnonempty oriented link. At each crossing of a regular diagram $D$ use the\nsource chart with over-strand southwest-to-northeast: A joins left and right\nendpoints with coefficient $A$, and B joins top and bottom endpoints with\ncoefficient $A^{-1}$. A state $S:C(D)\\to\\{A,B\\}$ assigns one smoothing at every\ncrossing; let $a(S)$ and $b(S)$ count these choices and $|S|$ count the\nresulting circles. Fix a unit viewing normal $n$ and orient the projection\nplane $P$ so $(u,v)$ is positive exactly when $(n,u,v)$ is positive in the\nambient oriented $3$-sphere. Define\n$$\\operatorname{sgn}(c)=\\operatorname{sgn}\\det_P(v_{\\rm over},v_{\\rm under}), \\qquad \\operatorname{wr}(D)=\\sum_c\\operatorname{sgn}(c),$$\n$$f_K(A)=(-A^3)^{-\\operatorname{wr}(D)} \\sum_{S:C(D)\\to\\{A,B\\}}A^{a(S)-b(S)}(-A^2-A^{-2})^{|S|-1}.$$\nFor an $n$-strand braid $\\beta$ whose oriented closure is $K$, let\n$e:B_n\\to\\mathbb Z$ be the homomorphism $e(\\sigma_i)=1$, where $\\sigma_i$\nis the positive geometric Artin half twist. Let $H(n)$ be the type-A Hecke\nalgebra with generators $T_i$, quadratic relation $T_i^2=(v-1)T_i+v$, braid\nrelations, and distant commutation, and let $\\pi_n(\\sigma_i)=T_i$. Its\nnormalized Markov trace $\\operatorname{tr}_n$ satisfies\n$\\operatorname{tr}_n(1)=1$, cyclicity, tower restriction, and\n$\\operatorname{tr}_{n+1}(xT_n)=z\\operatorname{tr}_n(x)$. Define the library\nJones value by\n$$V_K(t)=s^{e(\\beta)}\\left(-\\frac{s^2+1}{s}\\right)^{n-1} \\operatorname{tr}_n(\\pi_n(\\beta))\\Big|_{v=s^2,\\,z=-1/(s^2+1),\\,t=s^2},$$\nwhere $s=t^{1/2}$. With $A=t^{-1/4}$, these values satisfy\n$$V_K(t)=f_K(t^{-1/4}).$$",
+          "uses": [
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "def-braid-group-by-the-artin-presentation",
+          "source_section": "Definition",
+          "quote": "For $n\\ge2$, the **braid group** $B_n$ is the group with generators\n$\\sigma_1,\\dots,\\sigma_{n-1}$ and relations",
+          "uses": [
+            "1.3"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "thm-the-artin-presentation-is-complete-for-geometric-braids",
+          "source_section": "Statement",
+          "quote": "Assume AC. For every $n\\ge1$ the published surjection\n$\\varphi_n\\colon B_n^{\\mathrm{Artin}}\\to B_n^{\\mathrm{geom}}$ of\n[[prop-the-artin-presentation-surjects-onto-geometric-braids]] is an\nisomorphism. Equivalently, every word in\n$\\sigma_1^{\\pm1},\\dots,\\sigma_{n-1}^{\\pm1}$ whose geometric braid is trivial is\nequivalent to the empty word using only the two Artin relations and free\ninsertions and deletions of adjacent inverse pairs, so that the Artin\npresentation of [[def-braid-group-by-the-artin-presentation]] is a presentation\nof the geometric braid group.",
+          "uses": [
+            "1.3"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "def-closure-of-a-geometric-braid",
+          "source_section": "Definition",
+          "quote": "**The standard axis and fixed framing.** In\n$S^3=\\{(z,w)\\in\\mathbb C^2:|z|^2+|w|^2=1\\}$, as in\n[[def-euclidean-spheres-and-closed-balls]], set\n$$A=\\{(0,w):|w|=1\\},\\qquad P_\\theta=\\{(z,w)\\in S^3:z\\ne0,\\ \\arg z=\\theta\\}.$$\nFix the following particular diffeomorphism, including its disk framing:\n$$\\varphi([(x,t)])=  \\bigl(\\sqrt{1-|x|^2}\\,e^{2\\pi it},x\\bigr):  V\\longrightarrow S^3\\setminus A.$$\nIts inverse has disk coordinate $x=w$ and circle coordinate\n$[t]=[\\arg z/(2\\pi)]$. Every $P_\\theta$ is consequently an open disk.\nThe **raw topological oriented closure** is\n$$\\widehat\\beta_{\\mathrm{top}}=\\varphi(\\operatorname{cl}(\\beta)).$$\nThis explicit $\\varphi$ is part of the construction; the definition\ndoes not allow an arbitrary page-preserving change of framing.",
+          "uses": [
+            "1.3"
+          ]
+        },
+        {
+          "fact": "F6",
+          "source": "def-oriented-crossing-sign-writhe-and-blackboard-framing",
+          "source_section": "Definition",
+          "quote": "This convention makes the positive geometric Artin half twist positive. In\nthe braid chart $(x,y,t)$ with ambient orientation $(x,y,t)$, view along $+y$;\nthe induced positive orientation of the $(x,t)$ projection plane is the ordered\nbasis $(\\partial_t,\\partial_x)$. For the positive half twist, label $i$ moves\nfrom $x=-h$ to $x=h$ below the midpoint, while label $i+1$ moves from $x=h$ to\n$x=-h$ above it, with $h>0$. Thus the over and under projected tangent vectors\nin coordinates $(t,x)$ are $(1,-2h)$ and $(1,2h)$, whose determinant is\n$4h>0$.",
+          "uses": [
+            "1.3"
+          ]
+        },
+        {
+          "fact": "F7",
+          "source": "def-elementary-geometric-half-twist",
+          "source_section": "Definition",
+          "quote": "**The opposite motion is the group inverse.** For a braid $\\beta$ the reversed\nbraid $\\overline\\beta_j(t)=z_{\\pi(\\beta)^{-1}(j)}(1-t)$ represents\n$[\\beta]^{-1}$ in the group $G_n$\n([[thm-geometric-braids-form-a-group]]). For $\\beta=\\sigma_i$ one computes\n$\\overline{\\sigma_i}=\\sigma_i^{-}$: reversing the height and relabelling by the\ntransposition of $i$ and $i+1$ sends $\\rho(t)=m_i+(\\rho_1,\\rho_2)$ to the\nmotion with relative path $-\\rho(1-t)$, which is the reflected path\n$\\rho^-$ traversed from $t=0$ to $t=1$. Hence",
+          "uses": [
+            "1.3"
+          ]
+        },
+        {
+          "fact": "F8",
+          "source": "def-exponent-sum-of-a-braid",
+          "source_section": "Definition",
+          "quote": "Let $n\\ge1$ and let $B_n=\\langle\\sigma_1,\\dots,\\sigma_{n-1}\\mid\\text{Artin\nrelators}\\rangle$ be the braid group of the Artin presentation\n([[def-braid-group-by-the-artin-presentation]]); recall that $B_0$ and $B_1$\nare trivial. The **exponent sum** is the unique homomorphism",
+          "uses": [
+            "1.3"
+          ]
+        },
+        {
+          "fact": "F9",
+          "source": "thm-alexanders-closed-braid-theorem",
+          "source_section": "Statement",
+          "quote": "Assume the Axiom of Choice. Every oriented link $L\\subset\\mathbb R^3\\subset S^3$\nis equivalent to the oriented closure $\\widehat\\beta$ of a geometric braid\n$\\beta$ on some number $n\\ge0$ of strands, with $n\\ge1$ when $L$ is nonempty.",
+          "uses": [
+            "2.2"
+          ]
+        },
+        {
+          "fact": "A1",
+          "source": "def-axiom-of-choice",
+          "source_section": "Definition",
+          "quote": "The **Axiom of Choice** (AC) is the following statement.",
+          "uses": [
+            "1.3",
+            "2.2",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "A2",
+          "source": "def-countable-choice",
+          "source_section": "Definition",
+          "quote": "The **Axiom of Countable Choice**, written $\\mathrm{AC}_\\omega$, is the following\nstatement.",
+          "uses": [
+            "2.2",
+            "3.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "step": "1.1",
+          "claim": "For $N=1$, the basis has one vector, $E=F=0$, $K_L=1$, $c_1=G_1=1$, $d_1=\\lambda_1=1$. Every braid generator therefore acts as $1$, and the normalized value of every such knot closure is $1$. For the unknot at any $N$, the one-strand identity braid has $w=0$ and trace $\\operatorname{Tr}(G_N)=d_N$, so its normalized value is also $1$.",
+          "inputs": [
+            "F1",
+            "given",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-1-2",
+          "step": "1.2",
+          "claim": "The strand permutation of $\\sigma_1^3$ is $(12)^3=(12)$, so its two endpoints are interchanged; pairing each bottom endpoint with the top endpoint in the same position therefore produces one component. At $N=2$, the only nonzero terms of $\\mathcal R_2$ are $r=0,1$. On the ordered basis $(v_+v_+,v_+v_-,v_-v_+,v_-v_-)$ they give $c_2=\\begin{pmatrix}A&0&0&0\\\\0&0&A^{-1}&0\\\\0&A^{-1}&A-A^{-3}&0\\\\0&0&0&A\\end{pmatrix}$ and $G_2\\otimes G_2=\\operatorname{diag}(A^4,1,1,A^{-4})$. The middle block $B=\\begin{pmatrix}0&A^{-1}\\\\A^{-1}&A-A^{-3}\\end{pmatrix}$ satisfies $\\operatorname{tr}(B^3)=A^3-A^{-9}$ by direct multiplication; the other two diagonal entries of $c_2^3$ are $A^3$, hence $\\operatorname{Tr}((G_2\\otimes G_2)c_2^3)=A^7+A^3+A^{-1}-A^{-9}$. Here $w(\\sigma_1^3)=3$, $\\lambda_2=-A^3$, and $d_2=-A^2-A^{-2}$.",
+          "inputs": [
+            "F1",
+            "given",
+            "construct",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-1-3",
+          "step": "1.3",
+          "claim": "Write a braid word as $\\beta=\\prod_{j=1}^m\\sigma_{i_j}^{\\varepsilon_j}$ with $\\varepsilon_j\\in\\{1,-1\\}$, using [F4] under [A1]. Each letter gives one crossing in the braid box. The closure pairs endpoints as prescribed by [F5]; in the diagram convention fixed in the Example, the joining arcs are routed outside the rectangular braid box without added crossings. A positive letter contributes $+1$ to writhe by [F6]. For a negative letter the opposite half twist [F7] exchanges the over- and under-strands; the determinant in the crossing-sign definition changes sign when its two vectors are exchanged, so that crossing contributes $-1$. Thus $\\operatorname{wr}(\\widehat\\beta)=\\sum_j\\varepsilon_j=w(\\beta)$ by [F8].",
+          "inputs": [
+            "A1",
+            "F4",
+            "F5",
+            "F6",
+            "F7",
+            "F8",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "step": "2.1",
+          "claim": "Substitution into [F1] using step 1.2 yields $J_2^{\\mathrm{gen}}(T;q)=\\frac{A^{-9}(A^7+A^3+A^{-1}-A^{-9})}{A^2+A^{-2}}=A^{-4}+A^{-12}-A^{-16}=t+t^3-t^4$, where $t=A^{-4}=q^{-1}$.",
+          "inputs": [
+            "F1",
+            "step 1.2",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-2",
+          "step": "2.2",
+          "claim": "Given an oriented knot $K\\subset\\mathbb R^3\\subset S^3$, choose a braid closure $\\widehat\\beta$ representing it by [F9]. By [F2], the fundamental-color ribbon trace is $\\delta$ times the raw bracket and the twist is $-A^3$. Since $d_2=\\delta$, formula [F1] gives $J_2^{\\mathrm{gen}}(K;q)=(-A^3)^{-w(\\beta)}\\langle\\widehat\\beta\\rangle$. By step 1.3 this is the writhe-normalized bracket $f_K(A)$. The use of [F9] requires [A1], and the framed trace in [F2] requires [A2].",
+          "inputs": [
+            "A1",
+            "A2",
+            "F1",
+            "F2",
+            "F9",
+            "step 1.3",
+            "given",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "step": "3.1",
+          "claim": "The bracket/Jones theorem [F3] now gives $f_K(A)=V_K(t)$ at $t=A^{-4}=q^{-1}$. Its hypothesis uses AC [A1], while the ribbon-trace identification in [F2] uses ACω [A2], already supplied in step 2.2; the proof keeps those axiom branches separate. Therefore $J_2^{\\mathrm{gen}}(K;q)=V_K(q^{-1})$.",
+          "inputs": [
+            "A1",
+            "A2",
+            "F2",
+            "F3",
+            "step 2.2",
+            "given"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "Step 1.1 handles the one-strand identity-braid unknot for every N≥1."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "The Example uses N≥1 throughout and has no N=0 color."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Step 1.1 evaluates the one-dimensional color exactly."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Step 1.2 verifies the closure has one component and computes the N=2 matrix; step 2.1 divides only by the nonzero generic denominator."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "The Example closes the braid by same-position endpoint pairing and checks the resulting permutation cycle in step 1.2."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "The Verification keeps the fixed finite calculations in steps 1.1, 1.2, 2.1 choice-free; steps 2.2 and 3.1 use AC and ACω for the general identity."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The item states no if-and-only-if equivalence, so this implication direction has no boundary case."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The item states no if-and-only-if equivalence, so this implication direction has no boundary case."
+        }
+      ],
+      "finite_checks": [
+        {
+          "name": "N=2, σ₁³",
+          "method": "exact 4×4 matrix calculation",
+          "input": {
+            "A": "indeterminate",
+            "matrix_order": [
+              "v₊v₊",
+              "v₊v₋",
+              "v₋v₊",
+              "v₋v₋"
+            ]
+          },
+          "calculation": "The middle block B has tr(B³)=A³−A⁻⁹; the pivotal trace is A⁷+A³+A⁻¹−A⁻⁹. Multiplication by λ₂⁻³ and division by d₂ gives A⁻⁴+A⁻¹²−A⁻¹⁶.",
+          "expected": {
+            "generic_value": "t+t^3−t^4",
+            "t": "A^−4"
+          }
+        }
+      ]
+    },
+    "thm-colored-jones-finite-evaluation": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "alg-colored-jones-from-ribbon-evaluation",
+          "source_section": "Definition",
+          "quote": "Input an integer $N\\ge1$, an integer $n\\ge1$, a finite word $\\beta=\\sigma_{i_1}^{\\epsilon_1}\\cdots\\sigma_{i_m}^{\\epsilon_m}$ with $\\epsilon_j\\in\\{1,-1\\}$ and $1\\le i_j<n$, whose closure joins each bottom endpoint to the top endpoint in the same position outside the braid cylinder and has one component, and the admissible generic matrix ribbon data for the color $V_N$ defined above in this pair. The coefficient field is $F=\\mathbb Q(A)$, whose elements are encoded as exact rational functions and whose field operations, equality test, and inversion of a nonzero element terminate. The output is the generic rational value $J_N^{\\mathrm{gen}}(\\widehat\\beta;A^4)\\in F$. The procedure is:",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "thm-ribbon-evaluation-from-colored-braid-word-procedure-properties",
+          "source_section": "Statement",
+          "quote": "For every valid input of the colored-braid evaluation algorithm, where the braid word has $m$ letters and the total tensor-product dimension is $D$, the procedure terminates after exactly $m$ crossing-matrix updates and one finite pivotal-trace contraction. It returns the ribbon-category evaluation of that framed colored braid closure in the given matrix realization. The stated bound concerns the number of matrix updates; each update is a finite exact matrix multiplication over the effective field.",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "def-normalized-colored-jones-sequence",
+          "source_section": "Definition",
+          "quote": "Let $A$ be an indeterminate, put $q=A^4$, $q_K=A^2$, and $q_L=A^{-2}=q_K^{-1}$, and work over $F=\\mathbb Q(A)$. An oriented knot in $S^3$ means a smooth embedded circle with an orientation, considered up to orientation-preserving ambient isotopy. For an integer $r$, put\n$$[r]=\\frac{q_K^r-q_K^{-r}}{q_K-q_K^{-1}},\\qquad [m]!=\\prod_{r=1}^{m}[r]\\quad(m\\ge1),\\qquad [0]!=1.$$\nFor each $N\\ge1$, put $q_N=\\exp(2\\pi i/N)$.\nFor each integer $N\\ge1$, let $V_N$ have basis $v_0,\\ldots,v_{N-1}$ and define the $U_{q_L}(\\mathfrak{sl}_2)$ action in the library coproduct convention by\n$$K_Lv_j=q_L^{N-1-2j}v_j,\\qquad Ev_j=[N-j]v_{j-1},\\qquad Fv_j=[j+1]v_{j+1},$$\nwhere $v_{-1}=v_N=0$. In the universal $R$-matrix formula use $q_K$ and $H v_j=(N-1-2j)v_j$; on $V_N\\otimes V_N$ its action is the finite sum\n$$\\mathcal R_N=q_K^{H\\otimes H/2}\\sum_{r=0}^{N-1}q_K^{r(r-1)/2}\\frac{(q_K-q_K^{-1})^r}{[r]!}\\,E^r\\otimes F^r,$$\nand the positive crossing is $c_N=P\\mathcal R_N$, where $P(x\\otimes y)=y\\otimes x$. This is an irreducible module of dimension $N$. Equip these matrices with the Kauffman-bracket half-ribbon data: the twist matrix is the scalar $\\theta_N=\\lambda_N I$ with $\\lambda_N=(-1)^{N-1}A^{N^2-1}$, and the matrix $G_N=(-1)^{N-1}\\operatorname{diag}(A^{2(N-1-2j)})_{j=0}^{N-1}$ is the pivotal comparison used in the closure trace. The resulting generic quantum dimension is\n$$d_N=\\operatorname{Tr}(G_N)=(-1)^{N-1}\\frac{A^{2N}-A^{-2N}}{A^2-A^{-2}}.$$\nUse the contragredient left-dual action $(x\\cdot f)(v)=f(S(x)v)$ on $V_N^*$, with evaluation $\\operatorname{ev}(f\\otimes v)=f(v)$ and coevaluation $1\\mapsto\\sum_{j=0}^{N-1}v_j\\otimes v_j^*$. The ambient category is the $F$-linear category whose objects are finite-dimensional $U_{q_L}(\\mathfrak{sl}_2)$-modules, whose morphisms are module homomorphisms, and whose tensor-product action is induced by the stated Hopf coproduct; its tensor unit is $F$ with the trivial action, so its tensor-unit endomorphism ring is $F$. The stipulated matrix data are **admissible** when their braiding, inverse braiding, duality maps, pivotal comparison, and twist satisfy the ribbon-category axioms. Assume the Axiom of Choice and Countable Choice for the framed-tangle and Markov constructions. For such data, an oriented knot $K\\subset S^3$ presented as the closure of an $n$-strand braid $\\beta$ has generic normalized value\n$$J_N^{\\mathrm{gen}}(K;q)=\\lambda_N^{-w(\\beta)}\\frac{\\operatorname{Tr}(G_N^{\\otimes n}\\rho_N(\\beta))}{d_N}\\in F,$$\nwhere, for a word $\\beta=\\sigma_{i_1}^{\\varepsilon_1}\\cdots\\sigma_{i_m}^{\\varepsilon_m}$ with $\\varepsilon_j\\in\\{1,-1\\}$, $w(\\beta):=\\sum_{j=1}^m\\varepsilon_j$, and $\\rho_N(\\beta)$ is obtained by replacing each positive braid generator by $c_N$ on the corresponding adjacent tensor factors and each inverse generator by $c_N^{-1}$, then composing in word order. The variable transport to the ordinary Jones convention is $t=q^{-1}=A^{-4}$.",
+          "uses": [
+            "1.1",
+            "2.1",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "thm-twist-correction-removes-framing",
+          "source_section": "Statement",
+          "quote": "Assume the Axiom of Choice. Let $k$ be a field and let $\\mathcal C$ be a $k$-linear ribbon category with $k$-bilinear tensor product and $\\operatorname{End}_{\\mathcal C}(\\mathbf1)=k$. Let $X$ be absolutely simple, so its twist is $\\theta_X=\\lambda\\operatorname{id}_X$ for a unique $\\lambda\\in k^\\times$. For $n\\ge1$ and $\\beta\\in B_n$, let $t_n(\\beta)$ be the value of the blackboard-framed $X$-colored closure and let $w(\\beta)$ be the exponent sum, with positive Artin generator and positive stabilization conventions fixed as in the supplied ribbon-trace formulas. Then\n$$J_X(\\widehat\\beta):=\\lambda^{-w(\\beta)}t_n(\\beta)$$\ndepends only on the oriented unframed link type of $\\widehat\\beta$ when every component has color $X$. This statement makes no normalization by the categorical dimension.",
+          "uses": [
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "def-colored-framed-knot-evaluation-from-ribbon-category",
+          "source_section": "Definition",
+          "quote": "Assume the Axiom of Countable Choice. Let $\\mathcal C$ be a ribbon category with chosen left duals and tensor unit $\\mathbf 1$. A **finite oriented framed link colored in $\\mathcal C$** is a finite disjoint union $L$ of oriented smoothly embedded circles in $S^3$, a homotopy class of nowhere-zero normal vector field on each component, and an assignment of an object of $\\mathcal C$ to each component. A framed colored isotopy carries orientations, framings, and component colors. If $F_{\\mathcal C}$ is the ribbon-tangle evaluation functor, define\n$$\\operatorname{RT}_{\\mathcal C}(L):=F_{\\mathcal C}(L)\\in\\operatorname{End}_{\\mathcal C}(\\mathbf 1).$$\nThis value depends only on the framed colored isotopy class. It is not automatically a field scalar; if $\\mathcal C$ is $k$-linear and $\\operatorname{End}_{\\mathcal C}(\\mathbf 1)=k$, it is a scalar in $k$. The empty link is assigned $1_{\\mathbf 1}$.",
+          "uses": [
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F6",
+          "source": "thm-choice-implies-dependent-implies-countable-choice",
+          "source_section": "Statement",
+          "quote": "In ZF,\n\n$$\\mathrm{AC}\\Longrightarrow\\mathrm{DC}\\Longrightarrow\\mathrm{AC}_\\omega\\Longrightarrow\\mathrm{AC}_{\\omega,\\mathrm{fin}}\\Longrightarrow\\mathrm{AC}_{\\omega,2},\\qquad \\mathrm{AC}\\Longrightarrow\\mathrm{AC}_2.$$\n\nDC here includes a prescribed initial point.",
+          "uses": [
+            "3.1"
+          ]
+        },
+        {
+          "fact": "A1",
+          "source": "def-axiom-of-choice",
+          "source_section": "Definition",
+          "quote": "The **Axiom of Choice** (AC) is the following statement.",
+          "uses": [
+            "3.1"
+          ]
+        },
+        {
+          "fact": "A2",
+          "source": "def-countable-choice",
+          "source_section": "Definition",
+          "quote": "The **Axiom of Countable Choice**, written $\\mathrm{AC}_\\omega$, is the following\nstatement.",
+          "uses": [
+            "3.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "step": "1.1",
+          "claim": "The universal-$R$ sum used for $c_N$ has only the terms $0\\le r<N$, since $E^N=F^N=0$ on the displayed $N$-dimensional module. The braid word has finitely many letters, and [F2] performs exactly one matrix update per letter followed by one finite trace contraction. All remaining arithmetic is addition, multiplication, equality testing, and inversion of the nonzero generic scalar $d_N$ in $\\mathbb Q(A)$, so every operation terminates.",
+          "inputs": [
+            "F1",
+            "F2",
+            "F3",
+            "given",
+            "construct"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "step": "2.1",
+          "claim": "By [F2], the evaluator returns $t_N(\\beta)$, the pivotal trace of the framed colored closure. The last step in [F1] multiplies this value by $\\lambda_N^{-w(\\beta)}$ and divides by $d_N$, exactly the formula in [F3]. Hence the returned value is $J_N^{\\mathrm{gen}}(\\widehat\\beta;q)$.",
+          "inputs": [
+            "F1",
+            "F2",
+            "F3",
+            "step 1.1",
+            "given"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "step": "3.1",
+          "claim": "If $\\beta$ and $\\beta'$ close to the same oriented unframed knot, Markov's theorem under [A1] relates them by finitely many conjugations, stabilizations, and destabilizations. The scalar-twist theorem [F4] preserves $\\lambda_N^{-w}t_N$ under each move; both braids use the same nonzero $d_N$, so division by $d_N$ preserves equality. The abstract framed evaluation used to identify the matrix trace is defined under Countable Choice [F5], which follows from [A1] by [F6] and has the meaning in [A2]. Thus the algorithm outputs agree without adding an axiom beyond AC.",
+          "inputs": [
+            "A1",
+            "A2",
+            "F3",
+            "F4",
+            "F5",
+            "F6",
+            "step 2.1",
+            "given"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "Step 1.1 allows a finite word of length m=0; n remains at least 1."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "The Statement requires N≥1 and the generic definition supplies d_N≠0 in Q(A)."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "The N=1 color is included by the Definition and the finite-operation argument in step 1.1."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "The Statement requires admissible matrix data and a knot closure, excluding malformed or color-inconsistent inputs."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "The Statement requires one-component knot closures; the evaluator checks the color-preserving closure condition."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Step 3.1 uses AC for Markov classification and derives ACω for the evaluator from the exact theorem and definition hypotheses."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The item states no if-and-only-if equivalence, so this implication direction has no boundary case."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The item states no if-and-only-if equivalence, so this implication direction has no boundary case."
+        }
+      ],
+      "finite_checks": [
+        {
+          "name": "length-three fixed braid",
+          "method": "procedure count from theorem hypotheses",
+          "input": {
+            "length": 3,
+            "total_dimension": 4
+          },
+          "calculation": "The evaluator makes exactly three crossing-matrix updates and one finite pivotal-trace contraction; each is a finite exact operation.",
+          "expected": {
+            "updates": 3,
+            "trace_contractions": 1,
+            "terminates": true
+          }
+        }
+      ]
+    },
+    "op-kashaev-volume-conjecture-for-hyperbolic-knots": {
+      "open_problem_review": {
+        "formulation": {
+          "verdict": "pass",
+          "evidence": "The Statement fixes q_N=exp(2πi/N), uses the normalized N-dimensional Laurent polynomial, states eventual nonvanishing before the real logarithm, and separates the complex-volume refinement."
+        },
+        "status": {
+          "verdict": "pass",
+          "evidence": "The status paragraph is dated 2026-10-19 and distinguishes the fixed-color general-knot problem from Aistleitner–Borda’s low-crossing status and Kakuta’s varying-color deformed figure-eight regime."
+        },
+        "sources": {
+          "verdict": "pass",
+          "evidence": "Full text was inspected for Murakami–Murakami Theorem 4.9 and §5, Murakami §3.1, Aistleitner–Borda §1, Kakuta version 3 §1, and Habiro’s introduction and integrality sections; source coverage records each result disposition."
+        }
+      }
+    }
+  }
+}

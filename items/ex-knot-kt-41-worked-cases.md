@@ -78,8 +78,8 @@ The braid schematic is the closure of the positive two-strand braid $\sigma_1^3$
   \draw[->] (-1,0) .. controls (-2.0,0.25) and (-2.0,2.75) .. (-1,3);
   \draw[->] (1,0) .. controls (2.0,0.25) and (2.0,2.75) .. (1,3);
   \foreach \y in {3,2,1} {
-    \draw[thick,->] (1,\y)--(-1,{\y-1});
-    \draw[thick,->,preaction={draw=white,line width=4pt}] (-1,\y)--(1,{\y-1});
+    \draw[thick,->] (-1,\y)--(1,{\y-1});
+    \draw[thick,->,preaction={draw=white,line width=4pt}] (1,\y)--(-1,{\y-1});
   }
   \node at (0,-0.38) {$\widehat{\sigma_1^3}=T_{2,3}$};
 \end{tikzpicture}

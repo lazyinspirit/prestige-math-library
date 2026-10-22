@@ -1,4 +1,9 @@
 ---
+verification:
+  judge:
+    model: "gpt-6-luna"
+    verdict: pass
+    date: 2026-10-22
 id: ex-ip-relaxed-variable-requires-penalty
 kind: example
 title: An added variable is not identifiable without a penalty

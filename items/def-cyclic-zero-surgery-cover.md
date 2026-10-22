@@ -9,6 +9,8 @@ dependency_level: 5
 deps:
   - def-cyclic-branched-cover-of-a-knot
   - def-knot-meridian-and-preferred-longitude
+  - thm-knot-exterior-homology-and-longitude
+  - thm-seifert-van-kampen
   - def-axiom-of-choice
 justified_by: []
 aliases: []
@@ -26,7 +28,7 @@ sources:
 ---
 ## Definition
 
-Assume AC. Let $K$ be a smooth oriented knot and $q\ge2$. Let $S^3_0(K)$ be zero-framed Dehn surgery on $K$, filling its exterior along the preferred longitude. Let $M_{0,q}$ be the connected $q$-fold cyclic cover classified by the meridian map to $\mathbb Z/q$, and let $\widetilde\mu$ denote the lift of the meridian direction in the filled cover.
+Assume AC. Let $K$ be a smooth oriented knot and $q\ge2$. Let $S^3_0(K)$ be zero-framed Dehn surgery on $K$, filling its exterior along the preferred longitude. The exterior meridian-coordinate map to $\mathbb Z/q$ sends the preferred longitude to zero and therefore extends across this filling. Let $M_{0,q}$ be the connected $q$-fold cyclic cover classified by its kernel, and let $\widetilde\mu$ denote the closed lift of $\mu^q$, where $\mu$ is the positive meridian of $K$.
 
 ## Definition references
 
@@ -35,5 +37,9 @@ Assume AC. Let $K$ be a smooth oriented knot and $q\ge2$. Let $S^3_0(K)$ be zero
 [[def-knot-meridian-and-preferred-longitude|The preferred longitude used for zero surgery]]
 
 [Charles Livingston and Swatee Naik, *Introduction to Knot Concordance*, §7.5.3, p. 139](https://chuck-livingston.github.io/math/Concordance_Book.pdf)
+
+[[thm-knot-exterior-homology-and-longitude|Existence and uniqueness of the preferred longitude class and the meridian-coordinate map]]
+
+[[thm-seifert-van-kampen|Extension of the meridian-coordinate map across longitude filling]]
 
 [[def-axiom-of-choice|Axiom of Choice]]

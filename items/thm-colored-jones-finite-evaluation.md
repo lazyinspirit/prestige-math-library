@@ -18,9 +18,9 @@ deps:
   - thm-choice-implies-dependent-implies-countable-choice
 justified_by: []
 proof_strategy: direct
-axiom_use: The Axiom of Choice supplies Markov's theorem and implies countable
-  choice; countable choice is also the exact hypothesis of the framed
-  ribbon-tangle evaluator.
+axiom_use: The Axiom of Choice is the hypothesis of the scalar-twist invariant
+  theorem and implies countable choice, the exact hypothesis of the framed
+  ribbon-tangle evaluator; the fixed-braid matrix arithmetic is finite.
 provenance:
   statement: literature-derived
   proof: ai-altered
@@ -55,13 +55,13 @@ Assume the Axiom of Choice and the prescribed generic matrix ribbon data for the
 
 **Given:** The Axiom of Choice, an integer $N\ge1$, the prescribed generic matrix ribbon data, a finite braid word $\beta$ of length $m$ on $n\ge1$ strands, and a knot closure.
 
-[F1] The procedure forms the positive and inverse crossing matrices, calls the finite matrix ribbon evaluator, computes the exponent sum, and returns $\lambda_N^{-w(\beta)}t_N(\beta)/d_N$ over the exact field $\mathbb Q(A)$ ([[alg-colored-jones-from-ribbon-evaluation]]).
+[F1] The procedure forms the positive and inverse crossing matrices and $J_W=G_N^{\otimes n}$ on $W=V_N^{\otimes n}$, calls the finite matrix ribbon evaluator with this pivotal matrix, computes the exponent sum, and returns $\lambda_N^{-w(\beta)}t_N(\beta)/d_N$ over the exact field $\mathbb Q(A)$ ([[alg-colored-jones-from-ribbon-evaluation]]).
 
 [F2] For valid finite-dimensional matrix data over an effective field and a color-preserving braid word of length $m$, the ribbon evaluator makes exactly $m$ crossing-matrix updates and one finite pivotal-trace contraction and returns the framed colored-braid value ([[thm-ribbon-evaluation-from-colored-braid-word-procedure-properties]]).
 
-[F3] In the generic definition, $d_N\ne0$ in $\mathbb Q(A)$, $\lambda_N\ne0$, and $J_N^{\mathrm{gen}}=\lambda_N^{-w(\beta)}t_N(\beta)/d_N$ ([[def-normalized-colored-jones-sequence]]).
+[F3] The generic data lie in an $F$-linear ribbon category with $\operatorname{End}(\mathbf1)=F$, where $F=\mathbb Q(A)$; $V_N$ is absolutely simple with twist $\lambda_N I$, $d_N\ne0$, $\lambda_N\ne0$, and $J_N^{\mathrm{gen}}=\lambda_N^{-w(\beta)}t_N(\beta)/d_N$ ([[def-normalized-colored-jones-sequence]]).
 
-[F4] For an absolutely simple color with scalar twist $\lambda I$, the corrected framed trace $\lambda^{-w(\beta)}t_n(\beta)$ is invariant under conjugation and both Markov stabilizations when the Axiom of Choice is assumed ([[thm-twist-correction-removes-framing]]).
+[F4] Under the Axiom of Choice, in a $k$-linear ribbon category with $k$-bilinear tensor product and $\operatorname{End}(\mathbf1)=k$, an absolutely simple color with scalar twist $\lambda I$ gives a corrected framed trace $\lambda^{-w(\beta)}t_n(\beta)$ depending only on the oriented unframed link type when all components have that color ([[thm-twist-correction-removes-framing]]).
 
 [F5] The framed ribbon-tangle evaluator is defined under Countable Choice ([[def-colored-framed-knot-evaluation-from-ribbon-category]]).
 
@@ -79,8 +79,8 @@ Assume the Axiom of Choice and the prescribed generic matrix ribbon data for the
 
 **Given:** The hypotheses in the Statement and [A1].
 
-1.1 The universal-$R$ sum used for $c_N$ has only the terms $0\le r<N$, since $E^N=F^N=0$ on the displayed $N$-dimensional module. The braid word has finitely many letters, and [F2] performs exactly one matrix update per letter followed by one finite trace contraction. All remaining arithmetic is addition, multiplication, equality testing, and inversion of the nonzero generic scalar $d_N$ in $\mathbb Q(A)$, so every operation terminates. [F1, F2, F3, given, construct]
+1.1 The universal-$R$ sum used for $c_N$ has only the terms $0\le r<N$, since $E^N=F^N=0$ on the displayed $N$-dimensional module. The invertible crossing matrix has finite size, so its inverse is computable by finite Gaussian elimination over $\mathbb Q(A)$; forming $J_W=G_N^{\otimes n}$ also takes finitely many field operations. The braid word has finitely many letters, and [F2] performs exactly one matrix update per letter followed by one finite trace contraction. The remaining normalization uses finite arithmetic and integer powers of the nonzero generic scalars $d_N$ and $\lambda_N$ in the effective field $\mathbb Q(A)$, so every operation terminates. [F1, F2, F3, given, construct]
 
 2.1 By [F2], the evaluator returns $t_N(\beta)$, the pivotal trace of the framed colored closure. The last step in [F1] multiplies this value by $\lambda_N^{-w(\beta)}$ and divides by $d_N$, exactly the formula in [F3]. Hence the returned value is $J_N^{\mathrm{gen}}(\widehat\beta;q)$. [F1, F2, F3, step 1.1, given]
 
-3.1 If $\beta$ and $\beta'$ close to the same oriented unframed knot, Markov's theorem under [A1] relates them by finitely many conjugations, stabilizations, and destabilizations. The scalar-twist theorem [F4] preserves $\lambda_N^{-w}t_N$ under each move; both braids use the same nonzero $d_N$, so division by $d_N$ preserves equality. The abstract framed evaluation used to identify the matrix trace is defined under Countable Choice [F5], which follows from [A1] by [F6] and has the meaning in [A2]. Thus the algorithm outputs agree without adding an axiom beyond AC. Finally [F7] proves that their unique common representative is an integral Laurent polynomial, whose substitution at a nonzero complex number has no vanishing denominator. [A1, A2, F3, F4, F5, F6, F7, step 2.1, given] ∎
+3.1 Countable Choice, with the meaning in [A2], follows from [A1] by [F6], so the framed evaluator's hypothesis [F5] is satisfied. By [F3], the prescribed category and color satisfy every hypothesis of [F4], including absolute simplicity and the scalar twist. Hence if $\beta$ and $\beta'$ close to the same oriented unframed knot, [F4] directly gives equality of their corrected framed traces $\lambda_N^{-w}t_N$. Dividing by the same nonzero $d_N$ and applying step 2.1 proves equality of the algorithm outputs. Finally [F7] gives their unique common representative in $\mathbb Z[q,q^{-1}]$. Substituting any nonzero complex $q$ into its finite Laurent sum is defined, including at $q_N$, without division by a specialized quantum dimension. [A1, A2, F3, F4, F5, F6, F7, step 2.1, given] ∎

@@ -36,6 +36,11 @@ axiom_use: Full AC is inherited through the exterior/character-quotient branch
 provenance:
   statement: literature-derived
   proof: ai-generated
+verification:
+  judge:
+    model: "gpt-6-luna"
+    verdict: pass
+    date: 2026-10-22
 sources:
   references:
     - title: D. Cooper, M. Culler, H. Gillet, D. D. Long, and P. B. Shalen, Plane

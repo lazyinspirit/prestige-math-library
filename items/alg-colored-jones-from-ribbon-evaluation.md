@@ -32,7 +32,7 @@ Input an integer $N\ge1$, an integer $n\ge1$, a finite word $\beta=\sigma_{i_1}^
 
 1. Form the positive crossing matrix $c_N=P\mathcal R_N$ from the finite universal-$R$ sum in the color definition. The sum terminates at $r=N-1$ because $E^N=F^N=0$; its inverse is available because $c_N$ is the braiding in the proved ribbon data.
 
-2. Invoke the finite colored-braid matrix evaluator with strand count $n$, the word $\beta$ in composition order, the constant color tuple $(V_N,\ldots,V_N)$, the positive matrix $c_N$, its inverse, and the pivotal matrix $G_N$. Record its exact output $t=\operatorname{Tr}(G_N^{\otimes n}\rho_N(\beta))$.
+2. Form the $N^n\times N^n$ pivotal matrix $J_W=G_N^{\otimes n}$ on $W=V_N^{\otimes n}$ by finite tensor products; the prescribed pivotal comparison is monoidal. Invoke the finite colored-braid matrix evaluator with strand count $n$, the word $\beta$ in composition order, the constant color tuple $(V_N,\ldots,V_N)$, the positive matrix $c_N$, its inverse, and $J_W$, using the prescribed duality and twist data. Record its exact output $t=\operatorname{Tr}(J_W\rho_N(\beta))$.
 
 3. Compute the exponent sum $w(\beta)=\sum \varepsilon$ and the generic quantum dimension $d_N$.
 

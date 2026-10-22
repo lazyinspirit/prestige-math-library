@@ -1,4 +1,9 @@
 ---
+verification:
+  judge:
+    model: "gpt-6-luna"
+    verdict: pass
+    date: 2026-10-22
 id: ex-ip-pde-inadmissible-state-rejected-before-solve
 kind: example
 title: A negative finite-difference PDE state is rejected before solving

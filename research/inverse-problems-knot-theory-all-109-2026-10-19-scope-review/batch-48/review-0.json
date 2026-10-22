@@ -1,0 +1,98 @@
+{
+  "version": 1,
+  "run": "inverse-problems-knot-theory-all-109-2026-10-19",
+  "batch": "48",
+  "round": 0,
+  "reviewed_items": [
+    "lem-ip-unrolled-finite-domain-and-output-are-borel",
+    "def-ip-unrolled-regularization-architecture",
+    "prop-ip-finite-unrolling-does-not-imply-regularization-convergence",
+    "ex-ip-truncated-landweber-versus-learned-unrolling",
+    "cex-ip-finite-training-fit-fails-under-operator-shift"
+  ],
+  "reviewed_pages": [
+    "unrolled-inverse-solvers-and-generalization",
+    "unrolled-inverse-solvers-and-generalization-examples"
+  ],
+  "decision": "repair",
+  "reason": "The complete batch, approved design, current A/B pages, direct supplier claims and relevant proofs were reviewed. The Borel induction, proximal hypotheses, Landweber scalar calculation, and shifted-risk counterexample are sound. One local repair round should address the AD prerequisite gaps and the counterexample Remark; the necessary Borel helper is justified support for the approved claims.",
+  "findings": [
+    {
+      "id": "def-ip-unrolled-regularization-architecture",
+      "type": "prerequisite",
+      "reason": "The AD clause allows independent layer maps B_{theta_k} and step parameters tau_k, but alg-differentiate-finite-fixed-point-iteration specifies the same G and theta at every step. The definition gives no construction connecting varying layers to that procedure. Add a finite-graph construction and the general forward-mode suppliers alg-forward-mode-automatic-differentiation and thm-forward-mode-computes-directional-derivative; handle piecewise primitives on a fixed strict branch."
+    },
+    {
+      "id": "prop-ip-finite-unrolling-does-not-imply-regularization-convergence",
+      "type": "prerequisite",
+      "reason": "The derivative claim and proof step 1.3 treat the AD procedure's Definition as a correctness proof. The separate thm-forward-mode-computes-directional-derivative proves correctness for a finite C1 graph on a fixed strict branch, but is not among this item's deps or cited facts. Use that result for the AD claim and state strict-branch admissibility for piecewise primitives. The explicit scalar recurrence calculation in step 2.2 is sound."
+    },
+    {
+      "id": "cex-ip-finite-training-fit-fails-under-operator-shift",
+      "type": "local",
+      "reason": "The Remark says both the black-hole digit inputs and nine-cell inverse-scattering cases showed bias toward prior features. InverseBench Figure 5 identifies both cases, but §4.3 explicitly describes the black-hole ring-feature bias for 5(a), then presents 5(b) as a case where methods recover effectively when the source is close to the prior. Revise the Remark to match that qualification. [InverseBench v2, Figure 5 and §4.3](https://arxiv.org/html/2503.11043v2)"
+    },
+    {
+      "id": "published-measurability-suppliers",
+      "type": "outside-batch",
+      "reason": "The same Golse PDF URL is labeled as Hunter's Measure Theory in def-measurable-function-between-measurable-spaces, def-product-sigma-algebra-and-finite-product-sigma-algebras, and thm-composition-with-borel-functions-preserves-measurability. Its title page identifies François Golse's Mean-Field Limits in Statistical Dynamics, and p. 32 Theorem 3.3 is a lower bound for E-epsilon. This is a published-source metadata issue, not a gap in the locally checked definitions or composition proof; owner reconciliation is outside this batch. [Golse PDF, title page and p. 32](https://metaphor.ethz.ch/x/2022/fs/401-4820-22L/notes/Mean-Field_Limits_in_Statistical_Dynamics_Golse.pdf)"
+    }
+  ],
+  "consumer_checks": [
+    {
+      "id": "prop-ip-finite-unrolling-does-not-imply-regularization-convergence",
+      "decision": "repair",
+      "reason": "The derivative claim is affected by the architecture AD interface and needs the separate finite-graph correctness result."
+    },
+    {
+      "id": "ex-ip-truncated-landweber-versus-learned-unrolling",
+      "decision": "accept",
+      "reason": "Its supplier use is limited to the finite map and scalar Landweber recurrence; it makes no AD claim."
+    },
+    {
+      "id": "cex-ip-finite-training-fit-fails-under-operator-shift",
+      "decision": "accept",
+      "reason": "Its one-step architecture and risk calculations are unaffected by the AD interface; its Remark has a separate local repair finding."
+    },
+    {
+      "id": "unrolled-inverse-solvers-and-generalization-examples",
+      "decision": "accept",
+      "reason": "The page only requires the A page and has no derivative claim."
+    },
+    {
+      "id": "open-frontiers-in-learned-inverse-problems",
+      "decision": "accept",
+      "reason": "Page-level prerequisite only; no item-level use of the AD interface was found."
+    },
+    {
+      "id": "inverse-problem-benchmarking-and-shift",
+      "decision": "accept",
+      "reason": "Page-level prerequisite only; no item-level use of the AD interface was found."
+    },
+    {
+      "id": "score-diffusion-inverse-solvers",
+      "decision": "accept",
+      "reason": "Page-level prerequisite only; no item-level use of the AD interface was found."
+    },
+    {
+      "id": "open-frontiers-in-learned-inverse-problems-examples",
+      "decision": "accept",
+      "reason": "Its companion page requires the A page; no item-level use of the AD interface was found."
+    },
+    {
+      "id": "inverse-problem-benchmarking-and-shift-examples",
+      "decision": "accept",
+      "reason": "Its companion page requires the A page; no item-level use of the AD interface was found."
+    },
+    {
+      "id": "score-diffusion-inverse-solvers-examples",
+      "decision": "accept",
+      "reason": "Its companion page requires the A page; no item-level use of the AD interface was found."
+    },
+    {
+      "id": "lem-ip-unrolled-finite-domain-and-output-are-borel",
+      "decision": "accept",
+      "reason": "Its Borel induction uses the published supplier claims correctly; the source metadata issue is separate and nonblocking for that proof."
+    }
+  ]
+}

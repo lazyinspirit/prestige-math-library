@@ -29,6 +29,10 @@ sources:
       url: "https://epub.oeaw.ac.at/0xc1aa5576_0x003dd6da.pdf"
 verification:
   precheck: n/a
+  judge:
+    model: "gpt-6-luna"
+    verdict: pass
+    date: 2026-10-22
 ---
 
 ## Definition

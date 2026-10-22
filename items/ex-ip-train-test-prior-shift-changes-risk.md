@@ -1,4 +1,9 @@
 ---
+verification:
+  judge:
+    model: "gpt-6-luna"
+    verdict: pass
+    date: 2026-10-22
 id: ex-ip-train-test-prior-shift-changes-risk
 kind: example
 title: A train/test prior shift changes reconstruction risk

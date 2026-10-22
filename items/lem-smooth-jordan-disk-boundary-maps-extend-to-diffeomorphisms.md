@@ -18,6 +18,11 @@ proof_strategy: direct
 provenance:
   statement: ai-altered
   proof: ai-generated
+verification:
+  judge:
+    model: "gpt-6-luna"
+    verdict: pass
+    date: 2026-10-22
 sources:
   references:
     - title: C. T. C. Wall, Differential Topology, Theorem 2.4.2 and Sections 2.6–2.7

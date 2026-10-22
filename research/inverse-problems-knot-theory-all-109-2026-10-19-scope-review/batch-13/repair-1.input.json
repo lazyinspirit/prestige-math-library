@@ -1,0 +1,111 @@
+{
+  "phase": "repair",
+  "round": 1,
+  "role": "scope-repairer",
+  "label": "scope-repair-13-1",
+  "inventory": {
+    "pages": [
+      "network-tomography-and-experiment-design",
+      "network-tomography-and-experiment-design-examples"
+    ],
+    "items": [
+      "def-ip-tree-probing-experiment",
+      "def-ip-network-tomography-design-criterion",
+      "alg-ip-link-loss-em",
+      "thm-ip-flexicast-link-loss-identifiability",
+      "ex-ip-independent-normal-delays-have-nonidentifiable-link-means",
+      "ex-ip-unicast-product-nonidentifiability-and-multicast-recovery"
+    ],
+    "pairs": [
+      "network-tomography-and-experiment-design"
+    ]
+  },
+  "simple_loop": true,
+  "write_files": [
+    "items/def-ip-tree-probing-experiment.md",
+    "items/def-ip-network-tomography-design-criterion.md",
+    "items/alg-ip-link-loss-em.md",
+    "items/thm-ip-flexicast-link-loss-identifiability.md",
+    "items/ex-ip-independent-normal-delays-have-nonidentifiable-link-means.md",
+    "items/ex-ip-unicast-product-nonidentifiability-and-multicast-recovery.md",
+    "library/inverse-problems/network-tomography-and-experiment-design.md",
+    "library/inverse-problems/network-tomography-and-experiment-design-examples.md"
+  ],
+  "write_batches": [
+    "13"
+  ],
+  "consumer_scope": [
+    {
+      "id": "alg-ip-link-loss-em",
+      "path": [
+        "def-ip-tree-probing-experiment",
+        "alg-ip-link-loss-em"
+      ],
+      "paths": [
+        [
+          "def-ip-tree-probing-experiment",
+          "alg-ip-link-loss-em"
+        ]
+      ]
+    },
+    {
+      "id": "def-ip-network-tomography-design-criterion",
+      "path": [
+        "def-ip-tree-probing-experiment",
+        "def-ip-network-tomography-design-criterion"
+      ],
+      "paths": [
+        [
+          "def-ip-tree-probing-experiment",
+          "def-ip-network-tomography-design-criterion"
+        ]
+      ]
+    },
+    {
+      "id": "ex-ip-unicast-product-nonidentifiability-and-multicast-recovery",
+      "path": [
+        "def-ip-tree-probing-experiment",
+        "ex-ip-unicast-product-nonidentifiability-and-multicast-recovery"
+      ],
+      "paths": [
+        [
+          "def-ip-tree-probing-experiment",
+          "ex-ip-unicast-product-nonidentifiability-and-multicast-recovery"
+        ]
+      ]
+    },
+    {
+      "id": "thm-ip-flexicast-link-loss-identifiability",
+      "path": [
+        "def-ip-tree-probing-experiment",
+        "thm-ip-flexicast-link-loss-identifiability"
+      ],
+      "paths": [
+        [
+          "def-ip-tree-probing-experiment",
+          "thm-ip-flexicast-link-loss-identifiability"
+        ],
+        [
+          "def-ip-network-tomography-design-criterion",
+          "thm-ip-flexicast-link-loss-identifiability"
+        ]
+      ]
+    }
+  ],
+  "before_interfaces": {
+    "def-ip-tree-probing-experiment": [
+      "## Definition\n\nA finite rooted directed tree $T=(V,E)$ has root $o$, with all edges directed away from $o$, and a nonempty set $R$ of leaves other than $o$. Every nonroot internal vertex has at least two children. For a vertex $v$, its children are the vertices joined to $v$ by an outgoing edge; $P(o,v)$ is the unique edge set on the path from $o$ to $v$. The root may have any finite number of children.\n\nA finite probe design is a nonempty finite family $\\mathcal C=((C_d,N_d))_{d=1}^D$, where each receiver set $C_d$ is a nonempty subset of $R$ and each probe count $N_d$ is a positive integer. A singleton receiver set is a unicast scheme; a receiver set of size at least two is a multicast scheme. Its used edge set is $E_d=\\bigcup_{r\\in C_d}P(o,r)$.\n\nFor a link-success parameter vector $p=(p_e)_{e\\in E}\\in(0,1)^E$, each design $d$ and probe $j\\in\\{1,\\ldots,N_d\\}$ has mutually independent link-success variables $X_{e,d,j}\\in\\{0,1\\}$ for $e\\in E_d$, with $\\Pr_p(X_{e,d,j}=1)=p_e$. The same $p_e$ applies in every design and probe (temporal homogeneity). The observed receiver indicator is\n$$\nY_{r,d,j}=\\prod_{e\\in P(o,r)}X_{e,d,j}\\qquad(r\\in C_d).\n$$\n\nFor $y\\in\\{0,1\\}^{C_d}$ let\n$$\n\\Omega_{d,y}=\\left\\{x\\in\\{0,1\\}^{E_d}: y_r=\\prod_{e\\in P(o,r)}x_e\\text{ for every }r\\in C_d\\right\\},\\qquad w_{p,d}(x)=\\prod_{e\\in E_d}p_e^{x_e}(1-p_e)^{1-x_e}.\n$$\nThe one-probe outcome law is\n$$\nP_{p,d}(y)=\\sum_{x\\in\\Omega_{d,y}}w_{p,d}(x).\n$$\nThese probabilities sum to one because the sets $\\Omega_{d,y}$ partition the finite link-state space and $\\sum_{x\\in\\{0,1\\}^{E_d}}w_{p,d}(x)=\\prod_{e\\in E_d}(p_e+(1-p_e))=1$. The complete experiment observes $N_d$ independent outcomes with law $P_{p,d}$ for each design, independently across designs. If the data are summarized by counts, $n_{d,y}\\in\\mathbb N_0$ is the number of probes in design $d$ with outcome $y$, and $\\sum_y n_{d,y}=N_d$.\n\nThis is a finite statistical experiment: its parameter space is $(0,1)^E$ and its sampling law is the finite product of the stated receiver-outcome laws."
+    ],
+    "def-ip-network-tomography-design-criterion": [
+      "## Definition\n\nFor a finite-tree probe design $\\mathcal C=((C_d,N_d))_{d=1}^D$, a receiver $r\\in R$ is **covered** if $r\\in C_d$ for some $d$. For a nonroot internal vertex $v$, a design $C_d$ **splits** $v$ if there are distinct children $c,c'$ of $v$ and receivers $r,s\\in C_d$ such that $r$ lies in the subtree rooted at $c$ and $s$ lies in the subtree rooted at $c'$. The design satisfies the **split/coverage condition** if every receiver is covered and every nonroot internal vertex is split by at least one design."
+    ],
+    "alg-ip-link-loss-em": [
+      "## Definition\n\n**Inputs.** Use a finite-tree multicast loss experiment with observed counts $n_{d,y}$, where $n_{d,y}\\in\\mathbb N_0$, $\\sum_{y\\in\\{0,1\\}^{C_d}}n_{d,y}=N_d$, and $p_e$ is the success probability for edge $e$. Supply an initial vector $p^{(0)}\\in(0,1)^E$, a likelihood tolerance $\\tau\\ge0$, and an iteration cap $M\\in\\mathbb N_{>0}$. The data are admissible only when every pattern with positive count has $\\Omega_{d,y}\\ne\\varnothing$ and every link is traversed by at least one probe, that is,\n$$\nN_e:=\\sum_{d:e\\in E_d}N_d>0\\qquad(e\\in E).\n$$\n\nFor a current vector $p$, set $Z_{d,y}(p):=P_{p,d}(y)=\\sum_{x\\in\\Omega_{d,y}}w_{p,d}(x)$. When $Z_{d,y}(p)>0$ define\n$$\nm_{e,d,y}(p):=\\frac{\\sum_{x\\in\\Omega_{d,y}}x_e w_{p,d}(x)}{Z_{d,y}(p)}\\qquad(e\\in E_d).\n$$\nThe observed log likelihood is\n$$\n\\ell(p):=\\sum_{d=1}^D\\sum_{y:n_{d,y}>0}n_{d,y}\\log Z_{d,y}(p),\n$$\nwith $\\ell(p)=-\\infty$ if any positive-count pattern has zero probability.\n\n**Output.** Return the finite iterate list and one status: `invalid-input`, `zero-likelihood-current`, `zero-likelihood-candidate`, `likelihood-tolerance-met`, or `iteration-cap-reached`.\n\n**Procedure.**\n\n1. Validate the count constraints, pattern feasibility, interior initial vector, nonnegative tolerance, positive iteration cap, and $N_e>0$ for each link. If any check fails, return the initial vector and status `invalid-input`.\n\n2. Initialize the list with $p^{(0)}$. At each current iterate $p^{(t)}$, compute $Z_{d,y}(p^{(t)})$ for every positive-count pattern. If any is zero, return the last valid iterate with status `zero-likelihood-current`.\n\n3. For each link $e$, compute its expected number of latent successes\n$$\n\\widehat S_e^{(t)}=\\sum_{d:e\\in E_d}\\sum_{y:n_{d,y}>0}n_{d,y}m_{e,d,y}(p^{(t)}).\n$$\nSet\n$$\np_e^{(t+1)}=\\widehat S_e^{(t)}/N_e\\qquad(e\\in E).\n$$\nThis finite sum is the E-step conditional expectation of the complete-data success count; the displayed ratio is the M-step update instruction. Coordinates equal to $0$ or $1$ are allowed after an update.\n\n4. Compute $\\ell(p^{(t+1)})$. If any positive-count pattern has zero probability, return the last valid iterate $p^{(t)}$ with status `zero-likelihood-candidate`. Otherwise append $p^{(t+1)}$. If $|\\ell(p^{(t+1)})-\\ell(p^{(t)})|\\le\\tau$, return the list with status `likelihood-tolerance-met`. If not, continue from $p^{(t+1)}$ until $M$ updates have been made, then return the list with status `iteration-cap-reached`.\n\nAll state sums are finite, and the finite link-state conditional probabilities are calculated directly; the generic measure-space/KL branch of the EM procedure is not invoked. The status records only the stopping rule that fired; it asserts neither parameter convergence nor a global optimum."
+    ],
+    "thm-ip-flexicast-link-loss-identifiability": [
+      "## Statement\n\nLet $T=(V,E)$ and $\\mathcal C=((C_d,N_d))_{d=1}^D$ be a finite-tree multicast loss experiment with parameter space $(0,1)^E$, independent link successes, and the same link probabilities in every probe. Let $\\mathsf L(p):=\\bigotimes_{d=1}^D P_{p,d}^{\\otimes N_d}$ be the full repeated-probe sampling law determined by the one-probe outcome laws $P_{p,d}$. Then $\\mathsf L$ is injective if and only if $\\mathcal C$ satisfies the split/coverage condition."
+    ],
+    "ex-ip-independent-normal-delays-have-nonidentifiable-link-means": [],
+    "ex-ip-unicast-product-nonidentifiability-and-multicast-recovery": []
+  }
+}

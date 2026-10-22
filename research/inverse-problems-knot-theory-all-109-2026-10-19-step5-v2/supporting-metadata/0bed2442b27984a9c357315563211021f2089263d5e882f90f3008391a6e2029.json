@@ -1,0 +1,445 @@
+[
+  {
+    "order": 3150,
+    "id": "skein-modules-for-links-in-three-manifolds",
+    "kind": "A",
+    "category": "knot-theory",
+    "title": "Skein modules for links in 3-manifolds",
+    "companion": "skein-modules-for-links-in-three-manifolds-examples",
+    "requires": [
+      "kauffman-bracket-state-sum-and-jones-polynomial"
+    ],
+    "items": [
+      {
+        "id": "lem-framed-link-diagram-calculus",
+        "kind": "lemma",
+        "title": "Framed link diagrams and local Reidemeister moves in plane products",
+        "deps": [
+          "def-countable-choice",
+          "def-oriented-link-in-s-three-and-ambient-isotopy",
+          "def-regular-oriented-link-diagram",
+          "def-oriented-reidemeister-moves",
+          "def-planar-isotopy-of-link-diagrams",
+          "thm-oriented-reidemeister-equivalence-theorem",
+          "lem-every-oriented-link-admits-a-regular-projection",
+          "lem-a-smooth-isotopy-of-links-can-be-put-in-general-position",
+          "lem-a-generic-isotopy-of-links-has-only-reidemeister-singular-times",
+          "thm-parametric-transversality",
+          "thm-transverse-preimage-theorem",
+          "def-kauffman-bracket-smoothing-and-loop-value"
+        ],
+        "dependency_level": 1,
+        "statement": "Assume the Axiom of Countable Choice. Let $\\mathcal A$ be a compact smooth\nplanar annulus and set\n$X=\\operatorname{int}(\\mathcal A)\\times(-1,1)\n=\\operatorname{int}(\\mathcal A\\times[-1,1])$, the interior of a solid torus.\nA regular annular diagram is a finite immersed union of circles in\n$\\operatorname{int}(\\mathcal A)$ with only finitely many transverse double\npoints, no triple points, and over/under data from the interval coordinate.\nThe **blackboard framing** is the normal strip lying in the annulus. A specified\nframing differs from it on each component by an integer full-twist correction,\nmeasured by the winding number of its normal direction relative to the\nblackboard normal. Count the correction positively for an A-type full twist,\nwhose local curl has A-smoothing equal to the straight strip with one\ncontractible circle; count the opposite B-type twist negatively. Every framed\nlink in $X$ admits a regular annular diagram. The correction may be recorded\nas signed full-twist marks on diagram arcs; its total is additive when arcs\nare concatenated.\n\nIf two framed links in $X$ are ambient isotopic through links in $X$, their\nregular annular diagrams are related by finitely many annular planar isotopies\nand local oriented Reidemeister I, II, and III moves in disks contained in\n$\\operatorname{int}(\\mathcal A)$. Reidemeister II and III and planar isotopy\npreserve the blackboard framing; an A-type or B-type Reidemeister I move\nchanges it by one corresponding full twist, so the correction integer changes\nby the opposite twist. For framed links in $S^3$, every link also admits a\nregular planar diagram, and any two diagrams of ambient-isotopic framed links\nare related by a finite planar-isotopy/Reidemeister sequence with the same\nframing-correction rule.",
+        "strategy": "Put link and isotopy projections in general position; use the local cusp, tangency, and triple-event models, then track the blackboard framing through each move.",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Józef H. Przytycki, Fundamentals of Kauffman Bracket Skein Modules, arXiv:math/9809113 (1998), §3, Lemma 3.5 and Proposition 3.6",
+              "url": "https://arxiv.org/pdf/math/9809113"
+            },
+            {
+              "title": "Hoel Queffelec, Reidemeister's theorem using transversality, arXiv:2406.18203v1 (2024), §§2–3.6",
+              "url": "https://arxiv.org/pdf/2406.18203v1"
+            }
+          ]
+        },
+        "justified_by": [],
+        "proof_strategy": "direct",
+        "axiom_use": "Assumes ACω only for the cited generic-position and oriented Reidemeister results. Finite-jet perturbations, local framing tracking, and the skein calculations are choice-free."
+      },
+      {
+        "id": "def-kauffman-bracket-skein-module-of-a-three-manifold",
+        "kind": "definition",
+        "title": "Kauffman bracket skein module of a three-manifold",
+        "deps": [
+          "def-kauffman-bracket-smoothing-and-loop-value"
+        ],
+        "dependency_level": 1,
+        "statement": "Let $M$ be a smooth oriented $3$-manifold, and put\n$R=\\mathbb Z[A^{\\pm1}]$ and $\\delta=-A^2-A^{-2}$. A **framed unoriented\nlink in $M$** is a finite disjoint union of smoothly embedded annuli\n$S^1\\times[-1,1]$ in the interior of $M$, considered up to ambient isotopy\nthrough such framed annuli; the empty union is allowed. Let\n$\\mathcal L_{\\mathrm{fr}}(M)$ be the set of these isotopy classes and let\n$\\mathcal F_R(M)$ be the free $R$-module with basis\n$\\mathcal L_{\\mathrm{fr}}(M)$.\n\nFor the local crossing relation, choose an orientation-preserving chart from a\nclosed $3$-ball in $M$ to a standard ball in $\\mathbb R^3$, and project to the\nfirst two coordinates. In the displayed chart the over-strand runs from the\nsouthwest endpoint to the northeast endpoint, and the under-strand runs from\nthe northwest endpoint to the southeast endpoint. The $A$-smoothing pairs the\ntwo left endpoints and the two right endpoints, and the $B$-smoothing pairs\nthe two top endpoints and the two bottom endpoints. All three local tangles,\nincluding the crossing strands, carry the blackboard framing of the displayed\nprojection, with no additional framing twists. Their framed strips coincide\nin a collar of the four endpoints.\n\n```tikz\n\\begin{tikzpicture}[scale=0.62,line cap=round,line join=round]\n  \\begin{scope}\n    \\draw[thick] (-1,1)--(-0.14,0.14);\n    \\draw[thick] (0.14,-0.14)--(1,-1);\n    \\draw[very thick] (-1,-1)--(1,1);\n    \\node at (0,-1.38) {crossing};\n  \\end{scope}\n  \\begin{scope}[xshift=3.0cm]\n    \\draw[thick] (-1,1) .. controls (-0.45,0.35) and (-0.45,-0.35) .. (-1,-1);\n    \\draw[thick] (1,1) .. controls (0.45,0.35) and (0.45,-0.35) .. (1,-1);\n    \\node at (0,-1.38) {$A$-smoothing, weight $A$};\n  \\end{scope}\n  \\begin{scope}[xshift=6.0cm]\n    \\draw[thick] (-1,1) .. controls (-0.35,0.45) and (0.35,0.45) .. (1,1);\n    \\draw[thick] (-1,-1) .. controls (-0.35,-0.45) and (0.35,-0.45) .. (1,-1);\n    \\node at (0,-1.38) {$B$-smoothing, weight $A^{-1}$};\n  \\end{scope}\n\\end{tikzpicture}\n```\n\nFor each such local triple, the three framed links agree outside the chart.\nLet $\\mathcal R_A(M)$ be the submodule of $\\mathcal F_R(M)$ generated by\n$[L_\\times]-A[L_A]-A^{-1}[L_B]$ for all crossing triples, and by\n$[L\\sqcup O]-\\delta[L]$ for every framed link $L$, where $O$ is a\nzero-framed trivial circle bounding a disk in a ball disjoint from $L$. The\n**Kauffman bracket skein module** of $M$ is\n$$\n\\mathcal K_A(M):=\\mathcal F_R(M)/\\mathcal R_A(M).\n$$\nThe relations are imposed on framed link classes; no unframed type-I\nidentification is added.",
+        "strategy": "Defines the free module and the submodule generated by the two local bracket relations using the KT-29 crossing convention.",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "not-applicable"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Józef H. Przytycki, Fundamentals of Kauffman Bracket Skein Modules, arXiv:math/9809113 (1998), §2, Definition 2.1",
+              "url": "https://arxiv.org/pdf/math/9809113"
+            },
+            {
+              "title": "Sean Pohorence, 3-manifold Invariants and TQFTs (January 2016), §3.1, Definition 3.1.1, pp. 11–12",
+              "url": "https://categorified.net/RTinvariants/Jan29-Feb3.pdf"
+            },
+            {
+              "title": "Thang T. Q. Lê, The Colored Jones Polynomial and the AJ Conjecture, §6.1, printed p. 30",
+              "url": "https://letu.math.gatech.edu/Papers/Lectures_Luminy_2014_new.pdf"
+            }
+          ]
+        },
+        "justified_by": [],
+        "proof_strategy": "not-applicable",
+        "axiom_use": "Choice-free: the free module is the finitely supported formal R-linear combinations of a set of framed-link isotopy classes, and the quotient is by the explicitly generated relation submodule."
+      },
+      {
+        "id": "lem-kauffman-bracket-module-framing-twist-factor",
+        "kind": "lemma",
+        "title": "Full framing twists in the Kauffman bracket skein module",
+        "deps": [
+          "def-kauffman-bracket-skein-module-of-a-three-manifold",
+          "def-kauffman-bracket-smoothing-and-loop-value"
+        ],
+        "dependency_level": 2,
+        "statement": "Let $M$ be a smooth oriented $3$-manifold and let $L$ be a framed unoriented\nlink in its interior with a specified component. A positive full framing twist is the local blackboard\ncurl whose $A$-smoothing is the straight strip with one additional\nzero-framed trivial circle; a negative full framing twist is the curl whose\n$B$-smoothing is the straight strip with one additional zero-framed trivial\ncircle. Write $L^+$ and $L^-$ for the links obtained by inserting these twists\non one component. With $R=\\mathbb Z[A^{\\pm1}]$ and\n$\\delta=-A^2-A^{-2}$, the module classes satisfy\n$$\n[L^+]=-A^3[L],\\qquad [L^-]=-A^{-3}[L].\n$$",
+        "strategy": "Resolve the positive and negative blackboard curls and use the trivial-circle relation with δ=−A²−A⁻².",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Józef H. Przytycki, Fundamentals of Kauffman Bracket Skein Modules, arXiv:math/9809113 (1998), §2, framing relation following Definition 2.1",
+              "url": "https://arxiv.org/pdf/math/9809113"
+            },
+            {
+              "title": "Thang T. Q. Lê, The Colored Jones Polynomial and the AJ Conjecture, §6.1",
+              "url": "https://letu.math.gatech.edu/Papers/Lectures_Luminy_2014_new.pdf"
+            }
+          ]
+        },
+        "justified_by": [],
+        "proof_strategy": "direct",
+        "axiom_use": "Choice-free: both twist factors follow from one local skein expansion and the trivial-circle relation."
+      },
+      {
+        "id": "lem-general-3manifold-skein-quotient-isotopy-and-gluing",
+        "kind": "lemma",
+        "title": "Functoriality and boundary-collar action for the three-manifold skein quotient",
+        "deps": [
+          "def-kauffman-bracket-skein-module-of-a-three-manifold",
+          "def-kauffman-bracket-smoothing-and-loop-value"
+        ],
+        "dependency_level": 2,
+        "statement": "Let $M$ and $N$ be smooth oriented $3$-manifolds, and let\n$f:M\\to N$ be an orientation-preserving diffeomorphism. Then\n$[L]\\mapsto[f(L)]$ induces an $R$-module isomorphism\n$f_*:\\mathcal K_A(M)\\to\\mathcal K_A(N)$. These maps respect identity\ndiffeomorphisms and composition.\n\nLet $\\Sigma$ be a compact oriented surface with a specified product collar\n$\\iota:\\Sigma\\times[0,1]\\hookrightarrow M$ whose lower face lies in\n$\\partial M$. Give $\\Sigma\\times[0,1]$ the orientation pulled back from $M$\nby $\\iota$; the skein module and stacking product below use this orientation.\nThe stacking product on\n$\\mathcal K_A(\\Sigma\\times[0,1])$ and collar gluing define a unital left\naction on $\\mathcal K_A(M)$: a closed framed link in the surface product is\nplaced in a sufficiently thin outer subcollar and united with a framed link\nin the interior of $M$. The action is independent of the thin-collar width,\nassociative, and natural under orientation-preserving diffeomorphisms that\nrespect the specified collars. Only closed framed links are glued; no relative\nboundary endpoints are part of this action.",
+        "strategy": "Push each local relation through the diffeomorphism or collar embedding, then verify inverse, composition, unit, and associativity from the corresponding geometric operations.",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Józef H. Przytycki, Fundamentals of Kauffman Bracket Skein Modules, arXiv:math/9809113 (1998), §2, Proposition 2.2(i)",
+              "url": "https://arxiv.org/pdf/math/9809113"
+            },
+            {
+              "title": "Sean Pohorence, 3-manifold Invariants and TQFTs (January 2016), §§1.2 and 3.1",
+              "url": "https://categorified.net/RTinvariants/Jan29-Feb3.pdf"
+            },
+            {
+              "title": "Thang T. Q. Lê, The Colored Jones Polynomial and the AJ Conjecture, §6.1, printed pp. 30–31",
+              "url": "https://letu.math.gatech.edu/Papers/Lectures_Luminy_2014_new.pdf"
+            }
+          ]
+        },
+        "justified_by": [],
+        "proof_strategy": "direct",
+        "axiom_use": "Choice-free: a diffeomorphism, collar embedding, and gluing operation act canonically on link representatives and carry each displayed local relation to the same relation."
+      },
+      {
+        "id": "lem-kauffman-bracket-evaluation-is-invariant-for-framed-links-in-s-three",
+        "kind": "lemma",
+        "title": "Kauffman bracket evaluation of framed links in the three-sphere",
+        "deps": [
+          "def-countable-choice",
+          "def-kauffman-bracket-skein-module-of-a-three-manifold",
+          "def-kauffman-bracket-smoothing-and-loop-value",
+          "lem-framed-link-diagram-calculus",
+          "lem-kauffman-bracket-r2-r3-identities"
+        ],
+        "dependency_level": 2,
+        "statement": "Assume the Axiom of Countable Choice and let $R=\\mathbb Z[A^{\\pm1}]$ and\n$\\delta=-A^2-A^{-2}$. For a nonempty framed unoriented link $L$ in $S^3$,\nchoose a regular planar diagram $D$ of its core. Let $m_j\\in\\mathbb Z$ be\nthe full-twist correction on the $j$th component from the blackboard framing\nof $D$ to the specified framing of $L$, counting an A-type twist positively\nand its inverse negatively as in the framed diagram calculus, and put\n$m=\\sum_jm_j$. For a state\n$S$ of $D$, let $a(S)$ and $b(S)$ be its numbers of A- and B-smoothings and\n$|S|$ its number of resulting circles. The assignment\n$$E(\\varnothing)=1,\\qquad E(L)=\\delta(-A^3)^m\\sum_{S}A^{a(S)-b(S)}\\delta^{|S|-1}$$\nis independent of the diagram and twist corrections and extends\n$R$-linearly to a map $E:\\mathcal K_A(S^3)\\to R$ satisfying\n$E([\\varnothing])=1$.",
+        "strategy": "Use framed Reidemeister moves to prove diagram independence; partition states at a crossing and add a trivial circle to verify the two skein relations.",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Józef H. Przytycki, Fundamentals of Kauffman Bracket Skein Modules, arXiv:math/9809113 (1998), §2, Theorem 2.3(a)",
+              "url": "https://arxiv.org/pdf/math/9809113"
+            },
+            {
+              "title": "Sean Pohorence, 3-manifold Invariants and TQFTs (January 2016), §3.1, pp. 11–12",
+              "url": "https://categorified.net/RTinvariants/Jan29-Feb3.pdf"
+            },
+            {
+              "title": "Thang T. Q. Lê, The Colored Jones Polynomial and the AJ Conjecture, §6.2, Example 6.4, printed p. 30",
+              "url": "https://letu.math.gatech.edu/Papers/Lectures_Luminy_2014_new.pdf"
+            }
+          ]
+        },
+        "justified_by": [],
+        "proof_strategy": "direct",
+        "axiom_use": "Assumes ACω only through framed diagram equivalence; state expansion and module-relation checks are choice-free."
+      },
+      {
+        "id": "lem-annular-kauffman-bracket-state-expansion",
+        "kind": "lemma",
+        "title": "Annular state expansion for the Kauffman bracket skein module",
+        "deps": [
+          "def-axiom-of-choice",
+          "def-countable-choice",
+          "thm-choice-implies-dependent-implies-countable-choice",
+          "lem-two-disjoint-circles-in-s-two-cobound-an-annulus",
+          "def-kauffman-bracket-skein-module-of-a-three-manifold",
+          "def-kauffman-bracket-smoothing-and-loop-value",
+          "lem-framed-link-diagram-calculus",
+          "lem-kauffman-bracket-r2-r3-identities"
+        ],
+        "dependency_level": 2,
+        "statement": "Assume the Axiom of Choice. Let $\\mathcal A$ be a planar annulus\nand identify the solid torus with $\\mathcal A\\times[-1,1]$. Let\n$R=\\mathbb Z[A^{\\pm1}]$, $\\delta=-A^2-A^{-2}$, and let $z$ be a formal\npolynomial variable. For a regular annular diagram $D$, a state $S$ smooths\nevery crossing. Let $a(S)$ and $b(S)$ count its A- and B-smoothings, let\n$u(S)$ count the resulting circles that bound disks in $\\mathcal A$, and let\n$e(S)$ count the resulting circles that do not bound disks in $\\mathcal A$;\ncall a circle that does not bound a disk essential.\nIf $m$ is the total full-twist correction from the blackboard framing to the\nspecified framing, counting an A-type twist positively and its inverse\nnegatively as in the framed diagram calculus, set\n$$\n\\Psi(D,m)=(-A^3)^m\\sum_S A^{a(S)-b(S)}\\delta^{u(S)}z^{e(S)}.\n$$\nThis value is independent of the regular annular diagram and twist correction\nof the framed link and induces an $R$-linear map\n$$\n\\Psi:\\mathcal K_A(\\mathcal A\\times[-1,1])\\longrightarrow R[z].\n$$\nFor the empty link, the empty diagram has its unique empty state and the\nformula gives $\\Psi(\\varnothing)=1$.\n\nThe diagram below shows one essential core curve and one contractible circle\nin an annular state; every smoothed component is classified by these two\ntypes.\n\n```tikz\n\\begin{tikzpicture}[scale=0.75,line cap=round]\n  \\draw[thick] (0,0) circle (1.6);\n  \\draw[thick] (0,0) circle (0.65);\n  \\draw[very thick] (0,0) circle (1.05);\n  \\draw[very thick] (1.30,0) circle (0.16);\n  \\node at (0,1.05) [above] {$z$};\n  \\node at (1.45,0.25) [right] {$\\bigcirc$};\n  \\node at (0,-1.95) {essential core and contractible circle};\n\\end{tikzpicture}\n```",
+        "strategy": "Resolve each crossing, evaluate contractible circles by δ and essential annular circles by z, then verify move, framing, crossing, and trivial-circle compatibility.",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Józef H. Przytycki, Fundamentals of Kauffman Bracket Skein Modules, arXiv:math/9809113 (1998), §3, Lemmas 3.3 and 3.5",
+              "url": "https://arxiv.org/pdf/math/9809113"
+            },
+            {
+              "title": "Sean Pohorence, 3-manifold Invariants and TQFTs (January 2016), §3.1, pp. 11–12",
+              "url": "https://categorified.net/RTinvariants/Jan29-Feb3.pdf"
+            },
+            {
+              "title": "Thang T. Q. Lê, The Colored Jones Polynomial and the AJ Conjecture, §6.1, Proposition 6.2, and §6.2, Example 6.5, printed pp. 30–31",
+              "url": "https://letu.math.gatech.edu/Papers/Lectures_Luminy_2014_new.pdf"
+            }
+          ]
+        },
+        "justified_by": [],
+        "proof_strategy": "direct",
+        "axiom_use": "Assumes full AC for the annular state-circle classification and ACω through the annular framed-diagram calculus; the state expansion and local Temperley–Lieb calculations add no choice."
+      },
+      {
+        "id": "thm-skein-module-of-s-three-is-rank-one",
+        "kind": "theorem",
+        "title": "The Kauffman bracket skein module of S³ is rank one",
+        "deps": [
+          "def-countable-choice",
+          "def-kauffman-bracket-skein-module-of-a-three-manifold",
+          "lem-framed-link-diagram-calculus",
+          "lem-kauffman-bracket-module-framing-twist-factor",
+          "lem-kauffman-bracket-evaluation-is-invariant-for-framed-links-in-s-three"
+        ],
+        "dependency_level": 3,
+        "statement": "Assume the Axiom of Countable Choice and let $R=\\mathbb Z[A^{\\pm1}]$ and\n$\\delta=-A^2-A^{-2}$. The Kauffman bracket skein module\n$\\mathcal K_A(S^3)$ is freely generated as an $R$-module by the empty link.\nIn particular, a zero-framed trivial circle represents\n$\\delta[\\varnothing]$.",
+        "strategy": "Resolve every crossing to a finite combination of unlinks for spanning, and use the framed bracket evaluation with empty value one to prove the empty class is nonzero and independent.",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Józef H. Przytycki, Fundamentals of Kauffman Bracket Skein Modules, arXiv:math/9809113 (1998), §2, Theorem 2.3(a)",
+              "url": "https://arxiv.org/pdf/math/9809113"
+            },
+            {
+              "title": "Sean Pohorence, 3-manifold Invariants and TQFTs (January 2016), §3.1, pp. 11–12",
+              "url": "https://categorified.net/RTinvariants/Jan29-Feb3.pdf"
+            },
+            {
+              "title": "Thang T. Q. Lê, The Colored Jones Polynomial and the AJ Conjecture, §6.2, Example 6.4, printed p. 30",
+              "url": "https://letu.math.gatech.edu/Papers/Lectures_Luminy_2014_new.pdf"
+            }
+          ]
+        },
+        "justified_by": [],
+        "proof_strategy": "direct",
+        "axiom_use": "Assumes ACω only through the framed-diagram existence and equivalence supplier. State resolution, framing reduction, and the module argument are choice-free."
+      },
+      {
+        "id": "thm-skein-module-of-solid-torus-has-core-multicurve-basis",
+        "kind": "theorem",
+        "title": "The solid-torus skein module has a core-multicurve basis",
+        "deps": [
+          "def-axiom-of-choice",
+          "def-countable-choice",
+          "thm-choice-implies-dependent-implies-countable-choice",
+          "def-kauffman-bracket-skein-module-of-a-three-manifold",
+          "lem-framed-link-diagram-calculus",
+          "lem-kauffman-bracket-module-framing-twist-factor",
+          "lem-annular-kauffman-bracket-state-expansion"
+        ],
+        "dependency_level": 3,
+        "statement": "Assume the Axiom of Choice and let $R=\\mathbb Z[A^{\\pm1}]$. Identify\nthe solid torus with $\\mathcal A\\times[-1,1]$, where $\\mathcal A$ is a planar\nannulus. A simple closed curve is called essential if it does not bound a disk\nin $\\mathcal A$. Every framed link in this product admits a regular annular\ndiagram and an integer framing correction from its blackboard framing. Let\n$z$ be one blackboard-framed annular core curve, and for $n\\geq1$ let $z^n$\ndenote $n$ parallel copies of that curve, with $z^0$ the empty link. In the polynomial\nring $R[z]$, $z$ is also the formal variable sent to the core class $[z]$.\nThen the classes $[z^n]$, $n\\geq0$, form an $R$-basis of\n$\\mathcal K_A(\\mathcal A\\times[-1,1])$. Equivalently, the map\n$J:R[z]\\to\\mathcal K_A(\\mathcal A\\times[-1,1])$ sending $z^n$ to $[z^n]$ is\nan $R$-module isomorphism.",
+        "strategy": "Use the annular state expansion as a two-sided inverse to the map from polynomial monomials to parallel core multicurves; crossing resolution gives spanning and the polynomial monomials give independence.",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Józef H. Przytycki, Fundamentals of Kauffman Bracket Skein Modules, arXiv:math/9809113 (1998), §3, Theorem 3.1 and proof",
+              "url": "https://arxiv.org/pdf/math/9809113"
+            },
+            {
+              "title": "Sean Pohorence, 3-manifold Invariants and TQFTs (January 2016), §3.1, pp. 11–12",
+              "url": "https://categorified.net/RTinvariants/Jan29-Feb3.pdf"
+            },
+            {
+              "title": "Thang T. Q. Lê, The Colored Jones Polynomial and the AJ Conjecture, §6.1, Proposition 6.2, and §6.2, Example 6.5, printed pp. 30–31",
+              "url": "https://letu.math.gatech.edu/Papers/Lectures_Luminy_2014_new.pdf"
+            }
+          ]
+        },
+        "justified_by": [],
+        "proof_strategy": "direct",
+        "axiom_use": "Assumes full AC through the annular state-circle classification; ACω enters through framed diagram existence. The state-map inverse and module argument add no choice."
+      },
+      {
+        "id": "lem-skein-module-isomorphism-respects-framings-and-boundary",
+        "kind": "lemma",
+        "title": "Framing transport and compatible collar actions under oriented diffeomorphisms",
+        "deps": [
+          "def-axiom-of-choice",
+          "def-countable-choice",
+          "thm-choice-implies-dependent-implies-countable-choice",
+          "def-kauffman-bracket-skein-module-of-a-three-manifold",
+          "def-kauffman-bracket-smoothing-and-loop-value",
+          "lem-general-3manifold-skein-quotient-isotopy-and-gluing",
+          "lem-kauffman-bracket-module-framing-twist-factor",
+          "thm-skein-module-of-s-three-is-rank-one",
+          "thm-skein-module-of-solid-torus-has-core-multicurve-basis"
+        ],
+        "dependency_level": 4,
+        "statement": "Assume the Axiom of Choice. An orientation-preserving diffeomorphism\nbetween smooth oriented $3$-manifolds transports the full framing of every\nlink and induces an isomorphism of their Kauffman bracket skein modules. If\nthe diffeomorphism carries a specified product collar of a compact oriented\nboundary surface productwise to another specified collar, the induced\nisomorphism intertwines the two closed-link collar actions. A positive or\nnegative full framing twist on one link component multiplies its class by\n$-A^3$ or $-A^{-3}$, respectively. In $\\mathcal K_A(S^3)$, a positive twist\nof a zero-framed trivial circle changes its class from\n$\\delta[\\varnothing]$ to $-A^3\\delta[\\varnothing]$, with\n$\\delta[\\varnothing]\\ne -A^3\\delta[\\varnothing]$. In the solid-torus\nmodule, a positive twist of the blackboard-framed core changes $[z]$ to\n$-A^3[z]$, with $[z]\\ne -A^3[z]$.",
+        "strategy": "Combine functoriality and collar gluing with the local framing-twist calculation, then use the S³ and solid-torus bases to verify that the stated framing changes are nontrivial.",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Józef H. Przytycki, Fundamentals of Kauffman Bracket Skein Modules, arXiv:math/9809113 (1998), §2, Proposition 2.2(i), and §3, Theorem 3.1",
+              "url": "https://arxiv.org/pdf/math/9809113"
+            },
+            {
+              "title": "Sean Pohorence, 3-manifold Invariants and TQFTs (January 2016), §3.1, pp. 11–12",
+              "url": "https://categorified.net/RTinvariants/Jan29-Feb3.pdf"
+            },
+            {
+              "title": "Thang T. Q. Lê, The Colored Jones Polynomial and the AJ Conjecture, §6.1, printed pp. 30–31",
+              "url": "https://letu.math.gatech.edu/Papers/Lectures_Luminy_2014_new.pdf"
+            }
+          ]
+        },
+        "justified_by": [],
+        "proof_strategy": "direct",
+        "axiom_use": "The quotient functor, collar action, and twist scalar are choice-free. Full AC supplies the solid-torus basis; its countable consequence supplies the S3 basis."
+      }
+    ]
+  },
+  {
+    "order": 3151,
+    "id": "skein-modules-for-links-in-three-manifolds-examples",
+    "kind": "B",
+    "category": "knot-theory",
+    "title": "Skein modules for links in 3-manifolds — Examples and Counterexamples",
+    "companion": "skein-modules-for-links-in-three-manifolds",
+    "requires": [
+      "skein-modules-for-links-in-three-manifolds"
+    ],
+    "items": [
+      {
+        "id": "cex-knot-kt-31-boundary-case",
+        "kind": "counterexample",
+        "title": "Forgetting framing identifies distinct skein classes",
+        "deps": [
+          "def-axiom-of-choice",
+          "def-countable-choice",
+          "thm-choice-implies-dependent-implies-countable-choice",
+          "def-kauffman-bracket-skein-module-of-a-three-manifold",
+          "lem-skein-module-isomorphism-respects-framings-and-boundary",
+          "thm-skein-module-of-s-three-is-rank-one",
+          "thm-skein-module-of-solid-torus-has-core-multicurve-basis"
+        ],
+        "dependency_level": 5,
+        "statement": "Assume the Axiom of Choice and let $R=\\mathbb Z[A^{\\pm1}]$. The\nassertion that the Kauffman bracket skein module can be formed from unframed\nlink-isotopy classes without changing its classes is false. In $S^3$, a\nzero-framed trivial circle and the same circle with one positive full framing\ntwist have distinct skein classes. In a solid torus, a zero-framed core and\nthe same core with one positive full framing twist also have distinct skein\nclasses. In each pair the underlying unframed embedded link is identical.",
+        "strategy": "Use the framing-twist scalar and the free S³ and solid-torus basis descriptions to exhibit two unequal classes in each manifold.",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Józef H. Przytycki, Fundamentals of Kauffman Bracket Skein Modules, arXiv:math/9809113 (1998), §2, framing relation and Theorem 2.3(a)",
+              "url": "https://arxiv.org/pdf/math/9809113"
+            },
+            {
+              "title": "Sean Pohorence, 3-manifold Invariants and TQFTs (January 2016), §3.1, pp. 11–12",
+              "url": "https://categorified.net/RTinvariants/Jan29-Feb3.pdf"
+            }
+          ]
+        },
+        "justified_by": [],
+        "proof_strategy": "direct",
+        "axiom_use": "Assumes full AC for the solid-torus basis and its countable consequence for the S3 basis."
+      },
+      {
+        "id": "ex-knot-kt-31-worked-cases",
+        "kind": "example",
+        "title": "The empty link, trivial circle, and annular core multicurves",
+        "deps": [
+          "def-axiom-of-choice",
+          "def-countable-choice",
+          "thm-choice-implies-dependent-implies-countable-choice",
+          "def-kauffman-bracket-skein-module-of-a-three-manifold",
+          "lem-general-3manifold-skein-quotient-isotopy-and-gluing",
+          "lem-skein-module-isomorphism-respects-framings-and-boundary",
+          "thm-skein-module-of-s-three-is-rank-one",
+          "thm-skein-module-of-solid-torus-has-core-multicurve-basis"
+        ],
+        "dependency_level": 5,
+        "statement": "Assume the Axiom of Choice and let $R=\\mathbb Z[A^{\\pm1}]$ and\n$\\delta=-A^2-A^{-2}$. In $\\mathcal K_A(S^3)$, a zero-framed trivial circle\nequals $\\delta$ times the empty-link generator. In the solid-torus module,\none and two parallel blackboard-framed core curves have classes $[z]$ and\n$[z^2]$, which are distinct basis elements. If an annulus is specified as a boundary\nsubsurface of the solid torus with a product collar, its closed-link skein\nmodule acts on the solid-torus module by gluing framed links into that collar.\nThe schematic shows the one-core and two-core representatives; every curve\nbetween the annulus boundary circles carries its blackboard framing.\n\n```tikz\n\\begin{tikzpicture}[scale=0.78,line cap=round]\n  \\begin{scope}\n    \\draw[thin] (0,0) circle (1.45);\n    \\draw[thin] (0,0) circle (0.45);\n    \\draw[very thick] (0,0) circle (0.95);\n\n\\node at (0,-1.85) {one core: $z$};\n  \\end{scope}\n  \\begin{scope}[xshift=4.2cm]\n    \\draw[thin] (0,0) circle (1.45);\n    \\draw[thin] (0,0) circle (0.45);\n    \\draw[very thick] (0,0) circle (0.75);\n    \\draw[very thick] (0,0) circle (1.12);\n\n\\node at (0,-1.85) {two cores: $z^2$};\n  \\end{scope}\n\\end{tikzpicture}\n```",
+        "strategy": "Evaluate the trivial circle by its defining relation, distinguish z and z² by the core-multicurve basis, and identify the collar action by the gluing construction.",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Józef H. Przytycki, Fundamentals of Kauffman Bracket Skein Modules, arXiv:math/9809113 (1998), §2, Theorem 2.3(a), and §3, Theorem 3.1",
+              "url": "https://arxiv.org/pdf/math/9809113"
+            },
+            {
+              "title": "Sean Pohorence, 3-manifold Invariants and TQFTs (January 2016), §3.1, pp. 11–12",
+              "url": "https://categorified.net/RTinvariants/Jan29-Feb3.pdf"
+            },
+            {
+              "title": "Thang T. Q. Lê, The Colored Jones Polynomial and the AJ Conjecture, §6.1–§6.2, printed pp. 30–31",
+              "url": "https://letu.math.gatech.edu/Papers/Lectures_Luminy_2014_new.pdf"
+            }
+          ]
+        },
+        "justified_by": [],
+        "proof_strategy": "direct",
+        "axiom_use": "Assumes full AC for the solid-torus basis and its countable consequence for the S3 basis; the local trivial-circle relation and collar gluing construction are choice-free."
+      }
+    ]
+  }
+]

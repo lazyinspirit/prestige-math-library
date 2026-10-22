@@ -1,0 +1,340 @@
+[
+  {
+    "order": 3082,
+    "id": "inverse-scattering-and-born-linearization",
+    "kind": "A",
+    "category": "inverse-problems",
+    "title": "Fixed-frequency inverse scattering and Born linearization",
+    "companion": "inverse-scattering-and-born-linearization-examples",
+    "requires": [
+      "inverse-problems-identifiability-and-stability",
+      "linear-operators-pseudoinverses-and-picard-criteria",
+      "volume-integral-scattering-and-partial-wave-error"
+    ],
+    "items": [
+      {
+        "id": "def-ip-fixed-frequency-far-field-data",
+        "kind": "definition",
+        "title": "Fixed-frequency far-field data on the small-norm volume branch",
+        "deps": [
+          "def-countable-choice",
+          "def-essential-supremum-with-respect-to-a-measure",
+          "def-euclidean-inner-product",
+          "def-fourier-transform-on-l-one-of-rn",
+          "def-l-p-space-as-a-quotient-by-null-functions",
+          "def-metric-bounded-diameter",
+          "def-operator-norm",
+          "def-volume-integral-scattering-model",
+          "lem-volume-far-field-map-is-bounded",
+          "lem-volume-integral-operator-well-defined-and-bounded",
+          "thm-volume-integral-scattering-born-neumann-error"
+        ],
+        "dependency_level": 0,
+        "justified_by": [
+          "lem-ip-small-contrast-scattering-map-well-defined"
+        ],
+        "proof_strategy": "not-applicable",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "not-applicable"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Fioralba Cakoni, David Colton, and Houssem Haddar, Inverse Scattering Theory and Transmission Eigenvalues, CBMS 88",
+              "url": "https://sites.math.rutgers.edu/~fc292/CCH-Book-Final.pdf",
+              "locator": "Chapter 1, §1.2, printed pp. 7–12: outgoing Helmholtz model, Lippmann–Schwinger equation, far-field pattern, and first Born formula; §1.2.2, pp. 18–19, nonlinear far-field map"
+            },
+            {
+              "title": "Otmar Scherzer and Leonidas Mindrinos, Inverse Problems: Lecture Notes, University of Vienna, Sommersemester 2015",
+              "url": "https://www.csc.univie.ac.at/files/InverseProblems_SS15/InverseProblems_full.pdf",
+              "locator": "Chapter 5, §5.2.6, printed pp. 79–82: contrast convention, volume potential, and Lippmann–Schwinger equation"
+            },
+            {
+              "title": "Semyon Dyatlov, MIT 18.155 Lecture Notes: Distributions, Elliptic Regularity, and Applications to PDEs",
+              "url": "https://math.mit.edu/~dyatlov/18.155/155-notes.pdf",
+              "locator": "§11.1.1, Definition 11.1, printed p. 119: L1 Fourier transform; rescale the frequency by 2π to match the library convention"
+            }
+          ]
+        },
+        "axiom_use": "Countable Choice is assumed through the L2 volume model and its Neumann-series existence result. No full Axiom of Choice is used.",
+        "statement": "Assume Countable Choice. Let $D\\subset\\mathbb R^3$ be a bounded Lebesgue-measurable set with $0<M:=|D|<\\infty$, and let $k>0$. Write $S^2:=\\{v\\in\\mathbb R^3:|v|=1\\}$ and $C_D:=\\sqrt{M\\,\\operatorname{diam}(D)/(4\\pi)}$. For $q\\in L^\\infty(D;\\mathbb C)$, extended by zero off $D$, set $G_k(z):=e^{ik|z|}/(4\\pi|z|)$ for $z\\ne0$ and $G_k(0):=0$, and let\n$$K_{q,k}v(x):=\\int_D G_k(x-y)q(y)v(y)\\,dy,\\qquad \\rho_k(q):=\\|K_{q,k}\\|_{L^2(D)\\to L^2(D)}.$$\nThe **small-norm contrast class** is\n$$\\mathcal U_{D,k}:=\\{q\\in L^\\infty(D;\\mathbb C):\\rho_k(q)<1\\}.$$\nFor $d\\in S^2$, put $f_{k,d}(x):=e^{ikd\\cdot x}$ on $D$. For $q\\in\\mathcal U_{D,k}$, let $u_{q,k,d}\\in L^2(D;\\mathbb C)$ denote the unique solution of $u=f_{k,d}+K_{q,k}u$. For $q\\in\\mathcal U_{D,k}$, define the exact far-field data family by\n$$\\mathcal S_k(q)(\\theta,d):=\\frac1{4\\pi}\\int_D e^{-ik\\theta\\cdot y}q(y)u_{q,k,d}(y)\\,dy,\\qquad (\\theta,d)\\in S^2\\times S^2.$$\n\nFor $h\\in L^\\infty(D;\\mathbb C)$, define its first Born data by\n$$\\mathcal B_k h(\\theta,d):=\\frac1{4\\pi}\\int_D e^{-ik\\theta\\cdot y}h(y)e^{ikd\\cdot y}\\,dy=\\frac1{4\\pi}\\widehat{h_0}\\!\\left(\\frac{k}{2\\pi}(\\theta-d)\\right),$$\nwhere $h_0$ is the zero extension of $h$ to $\\mathbb R^3$ and $\\widehat g(\\xi):=\\int_{\\mathbb R^3}g(y)e^{-2\\pi i y\\cdot\\xi}\\,dy$ for $g\\in L^1(\\mathbb R^3;\\mathbb C)$. No uniqueness or stability outside $\\mathcal U_{D,k}$ is asserted."
+      },
+      {
+        "id": "lem-ip-small-contrast-scattering-map-well-defined",
+        "kind": "lemma",
+        "title": "Well-definedness of the small-norm fixed-frequency scattering map",
+        "deps": [
+          "cor-complex-exponential-cartesian-form-modulus-and-eulers-identity",
+          "def-countable-choice",
+          "def-fourier-transform-on-l-one-of-rn",
+          "def-ip-fixed-frequency-far-field-data",
+          "def-volume-integral-scattering-model",
+          "lem-volume-far-field-map-is-bounded",
+          "lem-volume-integral-operator-well-defined-and-bounded",
+          "lem-l-one-fourier-transform-is-well-defined",
+          "prop-essential-supremum-is-attained-as-the-least-essential-bound",
+          "thm-complex-l-two-inner-product-is-well-defined-and-cauchy-schwarz",
+          "thm-volume-integral-scattering-born-neumann-error"
+        ],
+        "dependency_level": 1,
+        "justified_by": [],
+        "proof_strategy": "direct",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-generated"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Fioralba Cakoni, David Colton, and Houssem Haddar, Inverse Scattering Theory and Transmission Eigenvalues, CBMS 88",
+              "url": "https://sites.math.rutgers.edu/~fc292/CCH-Book-Final.pdf",
+              "locator": "Chapter 1, §1.2, printed pp. 7–12: Lippmann–Schwinger equation and far-field integral"
+            },
+            {
+              "title": "Otmar Scherzer and Leonidas Mindrinos, Inverse Problems: Lecture Notes, University of Vienna, Sommersemester 2015",
+              "url": "https://www.csc.univie.ac.at/files/InverseProblems_SS15/InverseProblems_full.pdf",
+              "locator": "Chapter 5, §5.2.6, printed pp. 79–82: volume potential and scattering equation"
+            }
+          ]
+        },
+        "axiom_use": "Countable Choice is used through the volume model, complex L2 interfaces, and Neumann-series theorem. No full Axiom of Choice is used.",
+        "statement": "Assume Countable Choice and the hypotheses and notation of the definition of fixed-frequency far-field data. For each $q\\in\\mathcal U_{D,k}$ there is an $\\varepsilon>0$ such that $\\|q'-q\\|_\\infty<\\varepsilon$ implies $q'\\in\\mathcal U_{D,k}$; in particular this metric neighborhood condition holds at zero. For every $q\\in\\mathcal U_{D,k}$ and every $d,\\theta\\in S^2$, the solution $u_{q,k,d}$ exists uniquely in $L^2(D;\\mathbb C)$, the integrals defining $\\mathcal S_k(q)(\\theta,d)$ and $\\mathcal B_kq(\\theta,d)$ are absolutely convergent and independent of representatives, and $\\mathcal S_k(q)(\\cdot,d)$ is continuous. If $R_0>\\sup_{y\\in D}|y|$ and $r\\ge2R_0$, then\n$$\\sup_{\\theta\\in S^2}\\left|r e^{-ikr}V_k u_{q,k,d}(r\\theta)-\\mathcal S_k(q)(\\theta,d)\\right|\\le\\frac{2R_0+|k|R_0^2}{4\\pi r}\\|q\\|_\\infty\\sqrt M\\,\\|u_{q,k,d}\\|_2.$$\nThus $\\mathcal S_k(q)(\\cdot,d)$ is the uniform outgoing far-field amplitude in the stated convention."
+      },
+      {
+        "id": "lem-ip-born-linearization-of-the-scattering-map",
+        "kind": "lemma",
+        "title": "The first Born data are the Fréchet linearization at zero contrast",
+        "deps": [
+          "cor-complex-exponential-cartesian-form-modulus-and-eulers-identity",
+          "def-banach-space",
+          "def-countable-choice",
+          "def-frechet-derivative-between-banach-spaces",
+          "def-fourier-transform-on-l-one-of-rn",
+          "def-ip-fixed-frequency-far-field-data",
+          "lem-complex-norm-realification-is-a-real-norm",
+          "lem-ip-small-contrast-scattering-map-well-defined",
+          "lem-volume-integral-operator-well-defined-and-bounded",
+          "prop-essential-supremum-is-attained-as-the-least-essential-bound",
+          "thm-complex-lp-completeness-and-almost-everywhere-subsequences",
+          "thm-complex-l-two-inner-product-is-well-defined-and-cauchy-schwarz",
+          "thm-volume-integral-scattering-born-neumann-error"
+        ],
+        "dependency_level": 2,
+        "justified_by": [],
+        "proof_strategy": "direct",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Fioralba Cakoni, David Colton, and Houssem Haddar, Inverse Scattering Theory and Transmission Eigenvalues, CBMS 88",
+              "url": "https://sites.math.rutgers.edu/~fc292/CCH-Book-Final.pdf",
+              "locator": "Chapter 1, §1.2, printed pp. 10–11, first Born far-field formula; §1.2.2, pp. 18–19, Fréchet derivative statement"
+            },
+            {
+              "title": "Otmar Scherzer and Leonidas Mindrinos, Inverse Problems: Lecture Notes, University of Vienna, Sommersemester 2015",
+              "url": "https://www.csc.univie.ac.at/files/InverseProblems_SS15/InverseProblems_full.pdf",
+              "locator": "Chapter 5, §5.2.6, printed pp. 79–82, volume equation and outgoing far-field convention"
+            },
+            {
+              "title": "Semyon Dyatlov, MIT 18.155 Lecture Notes: Distributions, Elliptic Regularity, and Applications to PDEs",
+              "url": "https://math.mit.edu/~dyatlov/18.155/155-notes.pdf",
+              "locator": "§11.1.1, Definition 11.1, printed p. 119; frequency rescaling matches the library 2π convention"
+            }
+          ]
+        },
+        "axiom_use": "Countable Choice is used through L-infinity completeness, the volume model, and the Neumann-series theorem. No full Axiom of Choice is used.",
+        "statement": "Assume Countable Choice and the hypotheses and notation of the fixed-frequency far-field definition. For $q\\in\\mathcal U_{D,k}$ put $\\rho=\\rho_k(q)$. Uniformly over all incident and observation directions,\n$$\\sup_{\\theta,d\\in S^2}\\left|\\mathcal S_k(q)(\\theta,d)-\\mathcal B_kq(\\theta,d)\\right|\\le\\frac{M}{4\\pi}\\|q\\|_\\infty\\frac{\\rho}{1-\\rho}.$$\nWhenever $C_D\\|q\\|_\\infty<1$, this implies\n$$\\sup_{\\theta,d\\in S^2}\\left|\\mathcal S_k(q)(\\theta,d)-\\mathcal B_kq(\\theta,d)\\right|\\le\\frac{M C_D}{4\\pi}\\frac{\\|q\\|_\\infty^2}{1-C_D\\|q\\|_\\infty}.$$\nFor each fixed $(\\theta,d)$, the scalar map $q\\mapsto\\mathcal S_k(q)(\\theta,d)$ on the open domain $\\mathcal U_{D,k}$, with $L^\\infty(D;\\mathbb C)$ and $\\mathbb C$ viewed as real Banach spaces, is Fréchet differentiable at $q=0$ and has derivative $h\\mapsto\\mathcal B_kh(\\theta,d)$. The remainder bound is uniform in $(\\theta,d)$; it asserts no nonlinear uniqueness or stability result."
+      },
+      {
+        "id": "alg-ip-regularized-born-reconstruction",
+        "kind": "algorithm",
+        "title": "One-pass filtered reconstruction from finite Born data",
+        "deps": [
+          "def-countable-choice",
+          "def-fourier-transform-on-l-one-of-rn",
+          "def-ip-fixed-frequency-far-field-data",
+          "def-truncated-singular-value-pseudoinverse-at-a-declared-threshold",
+          "lem-ip-born-linearization-of-the-scattering-map",
+          "thm-ip-picard-range-criterion-for-compact-operators"
+        ],
+        "dependency_level": 3,
+        "justified_by": [],
+        "proof_strategy": "not-applicable",
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "not-applicable"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Fioralba Cakoni, David Colton, and Houssem Haddar, Inverse Scattering Theory and Transmission Eigenvalues, CBMS 88",
+              "url": "https://sites.math.rutgers.edu/~fc292/CCH-Book-Final.pdf",
+              "locator": "Chapter 1, §1.2, printed pp. 10–11: Fourier form of the first Born far-field pattern; §1.2.2, pp. 18–20: nonlinear far-field map and its local derivative"
+            },
+            {
+              "title": "Otmar Scherzer and Leonidas Mindrinos, Inverse Problems: Lecture Notes, University of Vienna, Sommersemester 2015",
+              "url": "https://www.csc.univie.ac.at/files/InverseProblems_SS15/InverseProblems_full.pdf",
+              "locator": "Chapter 5, §5.2.6, printed pp. 79–82: inhomogeneous-medium volume equation and outgoing convention"
+            },
+            {
+              "title": "Semyon Dyatlov, MIT 18.155 Lecture Notes: Distributions, Elliptic Regularity, and Applications to PDEs",
+              "url": "https://math.mit.edu/~dyatlov/18.155/155-notes.pdf",
+              "locator": "§11.1.1, Definition 11.1, printed p. 119; rescale the source frequency by 2π"
+            }
+          ]
+        },
+        "axiom_use": "Countable Choice is inherited from the fixed-frequency data definition, the Born-linearization lemma, and the contextual infinite-dimensional Picard theorem. Given the declared matrix and reduced SVD, the finite filter and residual instructions use no additional choice principle.",
+        "statement": "**Inputs and admissible conditions.** Fix the domain $D$, wavenumber $k>0$, and library Fourier convention from the fixed-frequency data definition. Give nonempty finite lists of incident directions $d_1,\\ldots,d_s\\in S^2$ and observation directions $\\theta_1,\\ldots,\\theta_r\\in S^2$. Give a finite measurable partition $D=\\bigsqcup_{n=1}^N E_n$ with $|E_n|>0$, complex Born-data samples $y=(y_{ba})\\in\\mathbb C^{rs}$, a discrepancy threshold $\\delta\\ge0$, and an iteration budget $B\\in\\mathbb N_0:=\\{0,1,2,\\ldots\\}$. The sample frequency for pair $(\\theta_b,d_a)$ is $\\xi_{ba}:=k(\\theta_b-d_a)/(2\\pi)$. The declared finite discrete Born Fourier matrix $F\\in\\mathbb C^{rs\\times N}$ has entries\n$$F_{(b,a),n}:=\\frac1{4\\pi}\\int_{E_n}e^{-2\\pi i x\\cdot\\xi_{ba}}\\,dx.$$\nFor a piecewise-constant contrast $q_c:=\\sum_{n=1}^N c_n1_{E_n}$, its sampled first Born data vector is exactly $Fc$.\nThe input also declares a reduced singular-value decomposition\n$$Fc=\\sum_{j=1}^{p}\\sigma_j\\langle c,v_j\\rangle u_j\\qquad(c\\in\\mathbb C^N),$$\nwhere $p=\\operatorname{rank}F$, the positive singular values $\\sigma_j$ have orthonormal right vectors $v_j$ and orthonormal left vectors $u_j$, and the empty sum is used when $F=0$. Give a scalar filter $g:[0,\\infty)\\to\\mathbb C$ whose values at the $\\sigma_j$ are finite and with $g(0)=0$. The threshold filter $g_\\tau(\\sigma)=1/\\sigma$ for $\\sigma>\\tau$ and $g_\\tau(\\sigma)=0$ for $0\\le\\sigma\\le\\tau$ is the truncated singular-value pseudoinverse at threshold $\\tau\\ge0$.\n\n**Instructions and outputs.**\n\n1. If $B=0$, return no estimate, no residual, and status **budget-exhausted**, with zero filter applications.\n2. If $B\\ge1$, form the coefficient estimate\n   $$\\widehat c:=\\sum_{j:\\sigma_j>0}g(\\sigma_j)\\langle y,u_j\\rangle v_j,$$\n   where $\\langle z,w\\rangle=\\sum_\\ell z_\\ell\\overline{w_\\ell}$ is linear in its first argument. Return the piecewise-constant reconstruction $\\widehat q:=\\sum_{n=1}^{N}\\widehat c_n1_{E_n}$ after exactly one filter application.\n3. Compute the finite data residual $R:=\\|F\\widehat c-y\\|_2$, where $\\|z\\|_2=(\\sum_\\ell|z_\\ell|^2)^{1/2}$. Return status **discrepancy** when $R\\le\\delta$, and **residual-above-threshold** when $R>\\delta$; in either case also return $\\widehat q$, $R$, and the application count $1$.\n\nThis procedure only defines one filtered finite-dimensional Born reconstruction and a residual status. The residual is not an exact-range test for an infinite-dimensional compact forward operator and does not establish a nonlinear solution, identifiability, stability, convergence, or correctness of the reconstructed contrast."
+      }
+    ]
+  },
+  {
+    "order": 3083,
+    "id": "inverse-scattering-and-born-linearization-examples",
+    "kind": "B",
+    "category": "inverse-problems",
+    "title": "Fixed-frequency inverse scattering and Born linearization — Examples and Counterexamples",
+    "companion": "inverse-scattering-and-born-linearization",
+    "requires": [
+      "inverse-scattering-and-born-linearization"
+    ],
+    "items": [
+      {
+        "id": "ex-ip-outside-neumann-norm-ball",
+        "kind": "example",
+        "title": "A compactly supported contrast with volume-operator norm greater than two",
+        "deps": [
+          "cor-complex-exponential-cartesian-form-modulus-and-eulers-identity",
+          "cor-vector-valued-ftc-and-lipschitz-bound",
+          "def-countable-choice",
+          "def-euclidean-inner-product",
+          "def-ip-fixed-frequency-far-field-data",
+          "def-operator-norm",
+          "def-pi-via-first-positive-cosine-zero",
+          "def-volume-integral-scattering-model",
+          "lem-volume-integral-operator-well-defined-and-bounded",
+          "thm-complex-exponential-is-entire-with-derivative-itself",
+          "thm-complex-l-two-inner-product-is-well-defined-and-cauchy-schwarz",
+          "thm-lebesgue-measure-of-a-box-of-every-kind"
+        ],
+        "dependency_level": 1,
+        "proof_strategy": "direct",
+        "provenance": {
+          "statement": "ai-generated",
+          "proof": "ai-generated"
+        },
+        "generation": {
+          "role": "example"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Fioralba Cakoni, David Colton, and Houssem Haddar, Inverse Scattering Theory and Transmission Eigenvalues, CBMS 88",
+              "url": "https://sites.math.rutgers.edu/~fc292/CCH-Book-Final.pdf",
+              "locator": "Chapter 1, §1.2, printed pp. 7–12: outgoing Helmholtz volume equation and contrast convention"
+            },
+            {
+              "title": "Otmar Scherzer and Leonidas Mindrinos, Inverse Problems: Lecture Notes, University of Vienna, Sommersemester 2015",
+              "url": "https://www.csc.univie.ac.at/files/InverseProblems_SS15/InverseProblems_full.pdf",
+              "locator": "Chapter 5, §5.2.6, printed pp. 79–82: inhomogeneous-medium volume equation"
+            }
+          ]
+        },
+        "axiom_use": "Countable Choice is inherited from the volume model, box-measure theorem, and complex L2 operator theorem. The norm lower bound itself uses no full Axiom of Choice.",
+        "statement": "Assume Countable Choice. At wavenumber $k=1$, let $D=[0,1/4]^3$ and let the contrast be the constant $q(y)=512\\pi$ on $D$, extended by zero outside. In the outgoing volume model, the associated operator satisfies $\\|K_{q,1}\\|_{L^2(D)\\to L^2(D)}>2$. Thus this contrast lies outside the small-norm domain used for the Born linearization. This example makes no claim that the exact scattering equation has no solution or is nonunique."
+      },
+      {
+        "id": "ex-ip-small-volume-contrast-in-born-regime",
+        "kind": "example",
+        "title": "A unit contrast on a small cube lies in the Born regime",
+        "deps": [
+          "def-countable-choice",
+          "def-euclidean-inner-product",
+          "def-ip-fixed-frequency-far-field-data",
+          "def-pi-via-first-positive-cosine-zero",
+          "def-volume-integral-scattering-model",
+          "lem-ip-born-linearization-of-the-scattering-map",
+          "lem-volume-integral-operator-well-defined-and-bounded",
+          "thm-lebesgue-measure-of-a-box-of-every-kind",
+          "thm-nth-roots-exist",
+          "thm-volume-integral-scattering-born-neumann-error"
+        ],
+        "dependency_level": 3,
+        "proof_strategy": "direct",
+        "provenance": {
+          "statement": "ai-generated",
+          "proof": "ai-generated"
+        },
+        "generation": {
+          "role": "example"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Fioralba Cakoni, David Colton, and Houssem Haddar, Inverse Scattering Theory and Transmission Eigenvalues, CBMS 88",
+              "url": "https://sites.math.rutgers.edu/~fc292/CCH-Book-Final.pdf",
+              "locator": "Chapter 1, §1.2, printed pp. 10–11: Born far-field expression"
+            },
+            {
+              "title": "Otmar Scherzer and Leonidas Mindrinos, Inverse Problems: Lecture Notes, University of Vienna, Sommersemester 2015",
+              "url": "https://www.csc.univie.ac.at/files/InverseProblems_SS15/InverseProblems_full.pdf",
+              "locator": "Chapter 5, §5.2.6, printed pp. 79–82: outgoing volume equation"
+            }
+          ]
+        },
+        "axiom_use": "Countable Choice is inherited from the box-measure, volume-operator, and Born-tail suppliers. No full Axiom of Choice is used.",
+        "statement": "Assume Countable Choice. Let $\\ell>0$ be the unique real satisfying $\\ell^4=\\pi/(2\\sqrt3)$, take $D=[0,\\ell]^3$, $k=1$, and the unit contrast $q=1_D$. Then $C_D=1/(2\\sqrt2)<1$, so $\\rho_1(q)<1$ and the exact far-field data lie on the small-norm Born branch. Uniformly over all incident and observation directions, the first Born amplitude error is at most $\\ell^3/(4\\pi(2\\sqrt2-1))$."
+      },
+      {
+        "id": "ex-ip-limited-aperture-born-data-have-a-nontrivial-kernel",
+        "kind": "example",
+        "title": "Finite limited-aperture Born samples miss a nonzero contrast",
+        "deps": [
+          "def-countable-choice",
+          "def-fourier-transform-on-l-one-of-rn",
+          "def-ip-fixed-frequency-far-field-data",
+          "alg-ip-regularized-born-reconstruction",
+          "lem-ip-born-linearization-of-the-scattering-map",
+          "lem-volume-integral-operator-well-defined-and-bounded",
+          "thm-dimension-of-a-linear-subspace",
+          "thm-lebesgue-measure-of-a-box-of-every-kind",
+          "thm-rank-nullity"
+        ],
+        "dependency_level": 4,
+        "proof_strategy": "direct",
+        "provenance": {
+          "statement": "ai-generated",
+          "proof": "ai-generated"
+        },
+        "generation": {
+          "role": "example"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Fioralba Cakoni, David Colton, and Houssem Haddar, Inverse Scattering Theory and Transmission Eigenvalues, CBMS 88",
+              "url": "https://sites.math.rutgers.edu/~fc292/CCH-Book-Final.pdf",
+              "locator": "Chapter 1, §1.2, printed pp. 10–11: Fourier sampling in the first Born formula; §1.2.2, pp. 18–20: scope of the nonlinear far-field map"
+            },
+            {
+              "title": "Otmar Scherzer and Leonidas Mindrinos, Inverse Problems: Lecture Notes, University of Vienna, Sommersemester 2015",
+              "url": "https://www.csc.univie.ac.at/files/InverseProblems_SS15/InverseProblems_full.pdf",
+              "locator": "Chapter 5, §5.2.6, printed pp. 79–82: volume-scattering model and outgoing convention"
+            },
+            {
+              "title": "Semyon Dyatlov, MIT 18.155 Lecture Notes: Distributions, Elliptic Regularity, and Applications to PDEs",
+              "url": "https://math.mit.edu/~dyatlov/18.155/155-notes.pdf",
+              "locator": "§11.1.1, Definition 11.1, printed p. 119: L1 Fourier-transform convention"
+            }
+          ]
+        },
+        "axiom_use": "Countable Choice is inherited from the box-measure, fixed-frequency volume, and Born suppliers. The finite-dimensional nullspace construction uses no choice principle.",
+        "statement": "Assume Countable Choice. Let $D=[0,1]^3$, $k>0$, and let $r,s\\ge1$. Take nonempty finite lists $\\theta_1,\\ldots,\\theta_r\\in\\Gamma_{\\mathrm{obs}}$ and $d_1,\\ldots,d_s\\in\\Gamma_{\\mathrm{inc}}$, where $\\Gamma_{\\mathrm{obs}},\\Gamma_{\\mathrm{inc}}\\subsetneq S^2$ are proper direction sets. Put $m:=rs$ and $N:=m+1$. Use the partition\n$$E_n=[(n-1)/N,n/N)\\times[0,1]^2\\quad(1\\le n<N),\\qquad E_N=[(N-1)/N,1]\\times[0,1]^2$$\nand give the regularized Born algorithm these direction lists and this partition. The finite linearized Born data map has a nonzero piecewise-constant contrast in its kernel. Consequently, for zero sampled Born data, any admissible filter, any discrepancy threshold $\\delta\\ge0$, and any positive budget $B\\ge1$ make the one-pass reconstruction return the zero estimate with discrepancy status, even though a nonzero contrast gives the same finite Born samples. This is a statement about the finite linearized model only; it does not assert equality of exact nonlinear scattering data."
+      }
+    ]
+  }
+]

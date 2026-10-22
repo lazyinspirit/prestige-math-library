@@ -1,7 +1,7 @@
 ---
 id: ex-ip-cfm-low-imh-acceptance-with-accurate-means
 kind: example
-title: Accurate posterior means with low independent-MH acceptance
+title: Posterior summaries close to DRAM with low independent-MH acceptance
 status: draft
 origin: pipeline
 pipeline_run: inverse-problems-knot-theory-all-109-2026-10-19

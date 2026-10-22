@@ -32,7 +32,7 @@ sources:
 
 Assume Countable Choice.
 
-For a relative satellite radius $R>1$, identify the mean-zero real Fourier coefficients of a function on the unit circle with $X=\ell^2(\mathbb N;\mathbb R^2)$, where the two coordinates at frequency $n$ are its normalized cosine and sine coefficients, and give this space the canonical inner product $\langle(a_n,b_n),(c_n,d_n)\rangle=\sum_{n\ge1}(a_nc_n+b_nd_n)$. Interleaving the coordinates identifies it isometrically with real $\ell^2(\mathbb N)$, so $X$ is a real Hilbert space. In these coordinates define the 2D satellite-gradiometry operator by
+For a relative satellite radius $R>1$, identify the mean-zero real Fourier coefficients of a function on the unit circle with $X=\ell^2(\mathbb N_{>0};\mathbb R^2)$, where the two coordinates at frequency $n$ are its normalized cosine and sine coefficients, and give this space the canonical inner product $\langle(a_n,b_n),(c_n,d_n)\rangle=\sum_{n\ge1}(a_nc_n+b_nd_n)$. Interleaving with scalar coordinates $z_{2n-1}=a_n$ and $z_{2n}=b_n$ identifies it isometrically with real $\ell^2(\mathbb N_{>0})$, so $X$ is a real Hilbert space. In these coordinates define the 2D satellite-gradiometry operator by
 $$
 (T_R(a_n,b_n))_{n\ge1}=(t_n a_n,t_n b_n)_{n\ge1},\qquad t_n=n(n+1)R^{-n-2}.
 $$
@@ -66,11 +66,11 @@ This is the Fourier-coordinate map for recovering the mean-zero gravitational po
 
 [F6] [[def-ip-ordered-filter-grid-and-source-index]]: An ordered filter is nonnegative, satisfies $0\le\alpha q_\alpha(t)\le C_q'$ and $0\le tq_\alpha(t)\le1$, and increases pointwise as $\alpha$ decreases.
 
-[F7] [[lem-square-summable-sequences-form-a-hilbert-space]]: Real $\ell^2(\mathbb N)$ with its canonical inner product is complete.
+[F7] [[lem-square-summable-sequences-form-a-hilbert-space]]: Real $\ell^2(\mathbb N)$ with its canonical inner product is complete. The shift $z\mapsto(z_{k+1})_{k\ge0}$ is an isometric bijection from $\ell^2(\mathbb N_{>0})$ to that space.
 
 ## Verification
 
-1.1 Interleaving $(a_n,b_n)_{n\ge1}$ as $(a_1,b_1,a_2,b_2,\ldots)$ is a linear isometry onto real $\ell^2(\mathbb N)$, so [F7] gives the stated real Hilbert structure. The integral of $f^\dagger$ over $[-\pi,\pi]$ is $\pi^2-\pi^2=0$, so its constant Fourier coefficient vanishes and its real Fourier coefficient sequence lies in the stated mean-zero coefficient space. The real cosine and sine modes are orthonormal because they are the real and imaginary parts of the orthonormal character basis in [F1]. [given, A1, F1, F7, algebra]
+1.1 Interleaving $(a_n,b_n)_{n\ge1}$ as $(a_1,b_1,a_2,b_2,\ldots)$ is a linear isometry onto real $\ell^2(\mathbb N_{>0})$, so [F7] gives the stated real Hilbert structure. In angular coordinates with normalized Haar measure $dx/(2\pi)$, write the characters as $e_n(x)=e^{inx}$ and use $C_n=(e_n+e_{-n})/\sqrt2=\sqrt2\cos(nx)$ and $S_n=(e_n-e_{-n})/(i\sqrt2)=\sqrt2\sin(nx)$ for $n\ge1$. Their orthonormality follows from character orthonormality in [F1]. They are complete in mean-zero real $L^2$: a real mean-zero function orthogonal to all $C_n,S_n$ is orthogonal to every character, hence is zero by [F1]. Thus their coefficient map identifies this function space isometrically with $X$. The bounded truth belongs to $L^2$, and its integral over $[-\pi,\pi]$ is $\pi^2-\pi^2=0$, so its constant Fourier coefficient vanishes and its normalized real Fourier coefficient sequence lies in $X$. [given, A1, F1, F7, algebra]
 
 1.2 For every $n\ge1$, $t_n>0$ and $t_n\to0$ exponentially since $R>1$. The ratio of consecutive squared multipliers is $((n+1)/n)^2((n+2)/(n+1))^2R^{-2}$, which tends to $R^{-2}<1$; choose $\rho$ strictly between $R^{-2}$ and $1$, then the ratio is at most $\rho$ for all sufficiently large $n$. Thus $\sum_{n\ge1}2t_n^2<\infty$. The operator is injective because all its diagonal multipliers are positive. Its truncation to frequencies $n\le N$ is finite rank and the operator-norm error is $\sup_{n>N}t_n\to0$, so $T_R$ is compact and Hilbert–Schmidt. [given, algebra]
 

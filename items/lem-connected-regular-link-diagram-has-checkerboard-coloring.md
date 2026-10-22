@@ -15,6 +15,11 @@ axiom_use: "The finite mod-two path-parity construction is choice-free."
 provenance:
   statement: literature-derived
   proof: ai-altered
+verification:
+  judge:
+    model: "gpt-6-luna"
+    verdict: pass
+    date: 2026-10-22
 sources:
   references:
     - title: "Danny Calegari, Introduction to Knot Theory, §5.2, printed pp. 44–45"

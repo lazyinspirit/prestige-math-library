@@ -1,0 +1,18 @@
+--- helper-before-composite-pin
++++ apply-root-fact-repair.mjs
+@@ -13,7 +13,14 @@
+ const review=read(join(base,'bridge-code-review-first.json')),implementation=read(join(base,'bridge-implementation/report.json')),pins=read(join(base,'root-application-input-pins.json')),patch=read(join(base,'guarded-patch.json'));
+ need(review.verdict==='PASS','independent Facts bridge review must PASS');
+ for(const [p,h]of Object.entries(review.code_bindings))need(sha(readFileSync(join(root,p)))===h,'reviewed module/test/docs changed: '+p);
+-need(sha(readFileSync(join(root,'tools/step5-workflow.mjs')))===implementation.shadow_workflow.raw_sha256,'root must first review and install exact combined shadow integration; no live code installation is performed here');
++const composite=read(join(base,'finalized-composite-pin.json'));
++const pinned=ref=>{need(ref&&typeof ref.path==='string'&&sha(readFileSync(join(root,ref.path)))===ref.sha256,'final composite evidence pin changed');return readFileSync(join(root,ref.path),'utf8');};
++need(composite.status==='reviewed-final-PASS','genuine final composite review is still required');
++const firstReview=JSON.parse(pinned(composite.facts_first_review)),firstSnapshot=pinned(composite.facts_first_snapshot),finalFreeze=JSON.parse(pinned(composite.final_freeze)),finalWorkflow=pinned(composite.final_workflow),finalReview=JSON.parse(pinned(composite.final_review));
++need(firstReview.verdict==='PASS'&&firstReview.shadow_integration.sha256===composite.facts_first_snapshot.sha256&&firstReview.shadow_integration.sha256===implementation.shadow_workflow.raw_sha256,'Facts FIRST acceptance changed');
++need(finalReview.verdict==='PASS'&&finalReview.accepted===true&&finalReview.freeze.path===composite.final_freeze.path&&finalReview.freeze.sha256===composite.final_freeze.sha256&&finalReview.candidate_bindings.some(row=>row.path==='tools/step5-workflow.mjs'&&row.sha256===composite.final_workflow.sha256)&&finalFreeze.files.some(row=>row.path==='tools/step5-workflow.mjs'&&row.after_sha256===composite.final_workflow.sha256),'final composite lacks independent PASS/frozen workflow');
++need(composite.facts_owned_regions.length===10&&composite.facts_owned_regions.every(region=>sha(Buffer.from(region.literal))===region.sha256&&firstSnapshot.split(region.literal).length===2&&finalWorkflow.split(region.literal).length===2),'accepted Facts hooks changed in final composite');
++need(sha(readFileSync(join(root,'tools/step5-workflow.mjs')))===composite.final_workflow.sha256,'root must first install exact independently reviewed FINAL composite; no live installation is performed here');
+ need(sha(readFileSync(join(base,'guarded-patch.json')))===pins.guarded_patch_sha256&&sha(readFileSync(join(base,'focused-review.json')))===pins.focused_review_sha256,'math research proposal changed');
+ for(const [p,h]of Object.entries(pins.sources_before_application))need(sha(readFileSync(join(root,p)))===h,'source differs from root reading/input pins: '+p);
+ const {loadOwnerFactAlertRepairs,ownerFactAlertRepairPath,FACT_ALERT_OLD,FACT_ALERT_NEW}=await import(pathToFileURL(join(root,'tools/step5-owner-fact-alert-repairs.mjs')));

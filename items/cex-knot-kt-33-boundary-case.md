@@ -9,16 +9,18 @@ dependency_level: 2
 deps:
   - def-colored-framed-knot-evaluation-from-ribbon-category
   - def-ribbon-evaluation-of-an-x-colored-closed-braid
+  - lem-ribbon-trace-equals-the-framed-closure-evaluation
   - thm-twist-correction-removes-framing
   - thm-markovs-closed-braid-equivalence-theorem
   - def-axiom-of-choice
+  - thm-choice-implies-dependent-implies-countable-choice
   - def-braiding
   - def-twist-and-ribbon-structure
   - def-left-dual-and-right-dual-object
   - thm-a-braided-rigid-category-has-a-drinfeld-morphism
 justified_by: []
 proof_strategy: direct
-axiom_use: "Assumes AC only to use the general Markov classification; the two trace calculations are finite and choice-free."
+axiom_use: "AC supplies countable choice for the trace/closure comparison and is assumed by Markov classification; the two trace calculations are finite and choice-free."
 provenance:
   statement: ai-altered
   proof: ai-altered
@@ -39,6 +41,8 @@ Assume the Axiom of Choice. The counterexample uses the following category: obje
 [[thm-twist-correction-removes-framing|The scalar-twist theorem and its absolute-simplicity hypothesis]]
 
 [[def-ribbon-evaluation-of-an-x-colored-closed-braid|Ribbon trace on a closed braid]]
+
+[[lem-ribbon-trace-equals-the-framed-closure-evaluation|Equality of the trace and framed-closure value]]
 
 [[def-left-dual-and-right-dual-object|Standard vector-space duality]]
 
@@ -68,6 +72,8 @@ Assume the Axiom of Choice. The counterexample uses the following category: obje
 
 [F8] The ribbon-induced pivotal comparison $j=u\theta$ is monoidal, with $j_{U\otimes W}=d_{U,W}(j_U\otimes j_W)$ ([[def-ribbon-evaluation-of-an-x-colored-closed-braid]]).
 
+[F9] Under countable choice, the algebraic ribbon trace equals the blackboard-framed closure evaluation for any color $X$, without a simplicity or scalar-twist hypothesis ([[lem-ribbon-trace-equals-the-framed-closure-evaluation]]). AC implies countable choice ([[thm-choice-implies-dependent-implies-countable-choice]]).
+
 [A1] The Axiom of Choice is assumed ([[def-axiom-of-choice]]).
 
 ## Counterexample
@@ -76,4 +82,4 @@ Assume the Axiom of Choice. The counterexample uses the following category: obje
 
 2.1 Take $X=\mathbb Q e_+\oplus\mathbb Q e_-$ with $S_X=\operatorname{diag}(1,-1)$. It is decomposable and its twist is invertible but nonscalar. For the identity $e\in B_1$, [F1] gives $t_1(e)=\operatorname{Tr}(S_X)=1+(-1)=0$. For $\sigma_1\in B_2$, the braid action is the flip $P$. By [F8], under the canonical vector-space double-dual comparison, $j_{X\otimes X}$ has matrix $S_X\otimes S_X$, so the trace of $(S_X\otimes S_X)P$ is $2$: the basis tensors $e_+\otimes e_+$ and $e_-\otimes e_-$ contribute diagonal entries $1$, while the two mixed basis tensors are exchanged and contribute no diagonal entries. [F1, F2, F8, step 1.1, algebra]
 
-3.1 The braid $\sigma_1$ is the positive Markov stabilization of the identity braid in $B_1$, so [F3] says their oriented unframed closures are equivalent. Their exponent sums are $w(e)=0$ and $w(\sigma_1)=1$. For any proposed $\lambda\in\mathbb Q^\times$, the corrected values are $0$ and $2\lambda^{-1}$, which are unequal because $2\ne0$ and $\lambda$ is invertible. This contradicts the false claim. The counterexample has precisely the missing hypothesis identified by [F2]: its invertible twist is not scalar on the decomposable color. [F2, F3, step 2.1, A1, algebra] ∎
+3.1 By [A1] and [F9], countable choice holds and the traces in step 2.1 are the actual blackboard-framed closure values; the comparison applies to this nonsimple color. The braid $\sigma_1$ is the positive Markov stabilization of the identity braid in $B_1$, so [F3] says their oriented unframed closures are equivalent. Their exponent sums are $w(e)=0$ and $w(\sigma_1)=1$. For any proposed $\lambda\in\mathbb Q^\times$, the corrected values are $0$ and $2\lambda^{-1}$, which are unequal because $2\ne0$ and $\lambda$ is invertible. Thus these framed evaluations admit no scalar writhe correction giving an unframed invariant. The counterexample has precisely the missing hypothesis identified by [F2]: its invertible twist is not scalar on the decomposable color. [F2, F3, F9, step 2.1, A1, algebra] ∎

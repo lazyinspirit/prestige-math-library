@@ -42,7 +42,7 @@ Assume full AC. The false statement is: “For every $\omega\in S^1\setminus\{1\
 
 **Given:** Full AC, the positive trefoil matrix $V_T=\begin{pmatrix}-1&0\\-1&-1\end{pmatrix}$, and a primitive sixth root $\omega=e^{i\pi/3}$.
 
-[A1] Full AC supplies the positive-push Seifert matrix and signature conventions. [[def-axiom-of-choice]], [[def-levine-tristram-hermitian-form-and-signature]]
+[A1] Full AC is the ambient choice-function axiom. The signature and root-average conventions are specified separately by the form definition; the trefoil matrix is supplied by [F1]. [[def-axiom-of-choice]], [[def-levine-tristram-hermitian-form-and-signature]]
 
 [F1] $V_T$ is the positive-push trefoil matrix and its Alexander polynomial is $1-t+t^2$. [[ex-knot-kt-07-worked-cases]]
 

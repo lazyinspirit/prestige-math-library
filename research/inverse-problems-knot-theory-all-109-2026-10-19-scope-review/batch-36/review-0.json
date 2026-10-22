@@ -1,0 +1,225 @@
+{
+  "version": 1,
+  "run": "inverse-problems-knot-theory-all-109-2026-10-19",
+  "batch": "36",
+  "round": 0,
+  "reviewed_items": [
+    "def-ip-2d-radon-transform",
+    "thm-ip-fourier-slice-identity",
+    "thm-ip-radon-normal-operator",
+    "alg-ip-filtered-backprojection-complete-data",
+    "ex-ip-smooth-radial-phantom",
+    "ex-ip-point-source-distributional-limit",
+    "ex-ip-discretized-complete-data-backprojection"
+  ],
+  "reviewed_pages": [
+    "radon-transform-and-fourier-slice-reconstruction",
+    "radon-transform-and-fourier-slice-reconstruction-examples"
+  ],
+  "decision": "repair",
+  "reason": "The complete assigned inventory, approved IP-36 design, and actual suppliers were reviewed. Three defects can be repaired locally in one repair pass. The Definition correction's current direct and indirect consumers were traced; their uses remain valid, and no outside repair is required.",
+  "findings": [
+    {
+      "id": "def-ip-2d-radon-transform",
+      "type": "local",
+      "reason": "The Definition assigns |D_s| to any h with integrable Fourier transform, then asserts absolute convergence. Integrability of hat(h) alone does not ensure |sigma|·hat(h)(sigma) is integrable, and the stated Fourier-transform domain is C_c^infty. Make the filter input class explicit so the transform is defined by the stated convention and the displayed integral converges absolutely; existing |D_s| uses are on Rf for compactly supported smooth f."
+    },
+    {
+      "id": "thm-ip-fourier-slice-identity",
+      "type": "prerequisite",
+      "reason": "Step 2.1 applies the Riemann–Fubini supplier, whose statement is real-valued, directly to a complex integrand. The proof also uses hat(Rf) without establishing Rf is in the Definition's C_c^infty Fourier-transform domain. Locally establish smoothness and compact support of the line data, then apply Fubini separately to real and imaginary parts."
+    },
+    {
+      "id": "ex-ip-discretized-complete-data-backprojection",
+      "type": "local",
+      "reason": "The finite output is denoted f_tilde_h, but h is never defined; detector spacing Delta s = 1 is not identified with h. Define h or use an un-subscripted output notation consistently."
+    }
+  ],
+  "consumer_checks": [
+    {
+      "id": "thm-ip-fourier-slice-identity",
+      "decision": "repair",
+      "reason": "Its compact-support transform use remains valid; the separate proof-use repair is recorded above."
+    },
+    {
+      "id": "thm-ip-radon-normal-operator",
+      "decision": "accept",
+      "reason": "Its filter is applied to Rf with compactly supported smooth input; the proof establishes this data class, so it satisfies the clarified filter domain."
+    },
+    {
+      "id": "alg-ip-filtered-backprojection-complete-data",
+      "decision": "accept",
+      "reason": "Its admissible input is g = Rf for compactly supported smooth f, within the clarified filter domain."
+    },
+    {
+      "id": "ex-ip-smooth-radial-phantom",
+      "decision": "accept",
+      "reason": "Uses only the line-integral definition and its convention, unchanged by the filter-domain clarification."
+    },
+    {
+      "id": "ex-ip-point-source-distributional-limit",
+      "decision": "accept",
+      "reason": "Uses only the line-integral definition and its convention, unchanged by the filter-domain clarification."
+    },
+    {
+      "id": "ex-ip-discretized-complete-data-backprojection",
+      "decision": "repair",
+      "reason": "The finite DFT calculation remains within scope; its undefined f_tilde_h notation needs the local repair recorded above."
+    },
+    {
+      "id": "def-ip-schwartz-radon-transform",
+      "decision": "accept",
+      "reason": "Uses the line-normal convention and compact-support agreement, not the ramp-filter domain."
+    },
+    {
+      "id": "def-ip-visible-covector-for-limited-angle-data",
+      "decision": "accept",
+      "reason": "Uses line geometry and the Fourier-wedge convention, not the ramp-filter domain."
+    },
+    {
+      "id": "ex-ip-analytic-missing-angle-covector",
+      "decision": "accept",
+      "reason": "Uses the line-normal convention and incidence geometry; neither depends on the ramp-filter domain."
+    },
+    {
+      "id": "lem-ip-compact-support-fourier-laplace-is-entire",
+      "decision": "accept",
+      "reason": "Uses the compact-support Fourier convention only; the clarified filter domain does not affect it."
+    },
+    {
+      "id": "ex-ip-visible-conormal-under-bolker",
+      "decision": "accept",
+      "reason": "Uses the line-normal convention and incidence relation, not the ramp-filter domain."
+    },
+    {
+      "id": "lem-ip-schwartz-radon-well-defined",
+      "decision": "accept",
+      "reason": "Uses the separate Schwartz line-integral definition; it does not apply |D_s|."
+    },
+    {
+      "id": "lem-ip-limited-angle-radon-data-is-l2-on-compact-support",
+      "decision": "accept",
+      "reason": "Uses the Schwartz line-integral definition and an L2 estimate, not the ramp-filter domain."
+    },
+    {
+      "id": "lem-ip-fourier-slice-identity-on-schwartz",
+      "decision": "accept",
+      "reason": "Uses the separate Schwartz Radon and Fourier conventions; it does not apply |D_s|."
+    },
+    {
+      "id": "prop-ip-limited-angle-data-no-holder-stability",
+      "decision": "accept",
+      "reason": "Uses line-integral data and limited-angle geometry, not the ramp-filter domain."
+    },
+    {
+      "id": "ex-ip-invisible-wedge-null-function",
+      "decision": "accept",
+      "reason": "Uses Schwartz line data and the Fourier-slice identity, not the ramp-filter domain."
+    },
+    {
+      "id": "prop-ip-limited-angle-fourier-visibility",
+      "decision": "accept",
+      "reason": "Uses line-data Fourier-slice identities and the visible wedge, not the ramp-filter domain."
+    },
+    {
+      "id": "cor-ip-limited-angle-compact-support-uniqueness",
+      "decision": "accept",
+      "reason": "Uses the compact-support Fourier-slice identity and analytic continuation, not the ramp-filter domain."
+    },
+    {
+      "id": "ex-ip-compact-support-limited-angle-uniqueness",
+      "decision": "accept",
+      "reason": "Uses compact-support line data and uniqueness, not the ramp-filter domain."
+    },
+    {
+      "id": "ex-ip-high-frequency-limited-angle-instability",
+      "decision": "accept",
+      "reason": "Uses limited-angle line geometry and stability estimates, not the ramp-filter domain."
+    },
+    {
+      "id": "op-ip-stable-limited-angle-reconstruction",
+      "decision": "accept",
+      "reason": "Its open-problem formulation uses limited-angle line data, not the ramp-filter domain."
+    },
+    {
+      "id": "radon-transform-and-fourier-slice-reconstruction-examples",
+      "decision": "accept",
+      "reason": "Its inventoried examples use the line convention and a finite DFT calculation; no claim requires the broader filter domain."
+    },
+    {
+      "id": "limited-angle-tomography-and-invisible-singularities",
+      "decision": "accept",
+      "reason": "Its page interface and inventory use line geometry, Fourier-slice, and limited-angle results; no claim uses the broader filter domain."
+    },
+    {
+      "id": "limited-angle-tomography-and-invisible-singularities-examples",
+      "decision": "accept",
+      "reason": "Its examples consume limited-angle results and do not use the ramp-filter domain."
+    },
+    {
+      "id": "geodesic-x-ray-transforms-on-simple-manifolds",
+      "decision": "accept",
+      "reason": "Its page-level prerequisite use is contextual; its inventory does not use the ramp-filter domain."
+    },
+    {
+      "id": "geodesic-x-ray-transforms-on-simple-manifolds-examples",
+      "decision": "accept",
+      "reason": "Its examples consume geodesic X-ray results and do not use the ramp-filter domain."
+    },
+    {
+      "id": "analytic-double-fibration-and-bolker-visibility",
+      "decision": "accept",
+      "reason": "Its page-level prerequisite use is contextual; its inventory uses incidence and visibility conventions, not the ramp-filter domain."
+    },
+    {
+      "id": "analytic-double-fibration-and-bolker-visibility-examples",
+      "decision": "accept",
+      "reason": "Its examples use line incidence and Bolker results, not the ramp-filter domain."
+    },
+    {
+      "id": "inverse-wave-problems-and-finite-time-observability",
+      "decision": "accept",
+      "reason": "Its page chain imports geodesic X-ray context; its inventory does not use the ramp-filter domain."
+    },
+    {
+      "id": "inverse-wave-problems-and-finite-time-observability-examples",
+      "decision": "accept",
+      "reason": "Its examples consume inverse-wave results and do not use the ramp-filter domain."
+    },
+    {
+      "id": "calderon-problem-and-cgo-uniqueness",
+      "decision": "accept",
+      "reason": "Its page chain imports geodesic X-ray context; its inventory does not use the ramp-filter domain."
+    },
+    {
+      "id": "calderon-problem-and-cgo-uniqueness-examples",
+      "decision": "accept",
+      "reason": "Its examples consume Calderon results and do not use the ramp-filter domain."
+    },
+    {
+      "id": "anisotropic-calderon-gauge-and-open-uniqueness",
+      "decision": "accept",
+      "reason": "Its page chain imports Calderon context; its inventory does not use the ramp-filter domain."
+    },
+    {
+      "id": "anisotropic-calderon-gauge-and-open-uniqueness-examples",
+      "decision": "accept",
+      "reason": "Its examples consume anisotropic Calderon results and do not use the ramp-filter domain."
+    },
+    {
+      "id": "eit-logarithmic-stability-and-conductivity-classes",
+      "decision": "accept",
+      "reason": "Its page chain imports Calderon context; its inventory does not use the ramp-filter domain."
+    },
+    {
+      "id": "eit-logarithmic-stability-and-conductivity-classes-examples",
+      "decision": "accept",
+      "reason": "Its examples consume EIT results and do not use the ramp-filter domain."
+    },
+    {
+      "id": "neural-operator-eit-inverse-map",
+      "decision": "accept",
+      "reason": "Its page chain imports EIT context; its inventory does not use the ramp-filter domain."
+    }
+  ]
+}

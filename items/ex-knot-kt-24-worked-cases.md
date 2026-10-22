@@ -79,7 +79,7 @@ Assume AC. For the square knot $K=T\#T^\dagger$, where $T$ is the positive trefo
 
 [F6] In a finite nonsingular linking form, an isotropic subgroup of square-root order is a metabolizer. [[def-finite-linking-form-and-metabolizer]]
 
-[F7] The oriented torsion linking pairing is computed by the signed bounding-chain expression $(C\cdot y)/n\bmod\mathbb Z$. [[def-bounding-chain-torsion-linking-pairing]]
+[F7] For integral $1$-cycles $a,b$ representing the two torsion classes and an integral $2$-chain $C$ with $\partial C=na$, $n>0$, the oriented torsion linking pairing is $(C\cdot b)/n\bmod\mathbb Z$, with $C$ transverse to $b$. [[def-bounding-chain-torsion-linking-pairing]]
 
 [F8] A finite-order character is a homomorphism to $\mathbb Q/\mathbb Z$, with order measured in the character group. [[def-finite-order-character-of-a-branched-cover]]
 

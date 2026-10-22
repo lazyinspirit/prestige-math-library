@@ -1,0 +1,428 @@
+[
+  {
+    "order": 3100,
+    "id": "open-frontiers-in-learned-inverse-problems",
+    "kind": "A",
+    "category": "inverse-problems",
+    "title": "Open frontiers in calibrated and robust learned inversion",
+    "companion": "open-frontiers-in-learned-inverse-problems-examples",
+    "requires": [
+      "learned-reconstruction-targets-and-risk",
+      "neural-operator-eit-inverse-map",
+      "unrolled-inverse-solvers-and-generalization",
+      "plug-and-play-mmse-regularization",
+      "score-diffusion-inverse-solvers",
+      "inverse-problem-benchmarking-and-shift",
+      "statistical-inverse-model-misspecification",
+      "losses-risk-and-decision-rules"
+    ],
+    "items": [
+      {
+        "id": "op-ip-calibration-under-score-and-solver-error",
+        "kind": "open-problem",
+        "title": "Coverage error under score, forward-solver, and finite-time error",
+        "statement": "Fix integers $d,n\\ge1$, parameters $p,s,a,R,\\sigma>0$, a credibility error $\\gamma\\in(0,1)$, and a continuous schedule $\\beta:[0,T]\\to(0,\\infty)$ with $T>0$. Let\n$$\\Theta_s(R)=\\left\\{\\theta\\in\\mathbb R^d:\\sum_{j=1}^d j^{2s}\\theta_j^2\\le R^2\\right\\},\\qquad A_p=\\operatorname{diag}(1^{-p},2^{-p},\\ldots,d^{-p}).$$\nObserve $Y_i=A_p\\theta+\\varepsilon_i$, $1\\le i\\le n$, with independent $\\varepsilon_i\\sim N(0,\\sigma^2 I_d)$. Use the proper Gaussian prior $\\Pi_0=N(0,\\operatorname{diag}(j^{-1-2a})_{j=1}^d)$, and let $\\Pi_n(\\cdot\\mid Y)$ be its exact posterior under the stated forward operator and noise law. Let $m_n(Y)$ be the posterior mean and let $r_{n,\\gamma}(Y)$ be the unique radius for which the Euclidean ball\n$$C_{n,\\gamma}(Y)=\\{u\\in\\mathbb R^d:\\|u-m_n(Y)\\|_2\\le r_{n,\\gamma}(Y)\\}$$\nhas posterior probability $1-\\gamma$. Define the exact frequentist coverage $c_{n,\\gamma}(\\theta)=P_{n,\\theta}\\{\\theta\\in C_{n,\\gamma}(Y)\\}$ and its baseline error $\\delta^0_{n,\\gamma}=\\sup_{\\theta\\in\\Theta_s(R)}|c_{n,\\gamma}(\\theta)-(1-\\gamma)|$.\n\nFor a deterministic numerical matrix $\\widehat A_n\\in\\mathbb R^{d\\times d}$ with $\\delta_A\\ge0$ and $\\|\\widehat A_n-A_p\\|_{\\mathrm{op}}\\le\\delta_A$, let $\\widehat\\Pi_n(\\cdot\\mid Y)$ be the Gaussian posterior formed with $\\widehat A_n$ and the same prior and noise variance. Write $\\widehat p_{n,t}^Y$ for the density obtained by applying the forward variance-preserving diffusion $dX_t=-\\tfrac12\\beta(t)X_t\\,dt+\\sqrt{\\beta(t)}\\,dW_t$ to $X_0\\sim\\widehat\\Pi_n(\\cdot\\mid Y)$, and set $\\widehat s_{n,t}^Y=\\nabla\\log\\widehat p_{n,t}^Y$. A jointly Borel learned score field $s_{n,t}^Y$ is required to satisfy\n$$\\sup_{\\theta\\in\\Theta_s(R)}E_{Y\\sim P_{n,\\theta}}\\left[\\frac1T\\int_0^T\\int_{\\mathbb R^d}\\|s_{n,t}^Y(x)-\\widehat s_{n,t}^Y(x)\\|_2^2\\widehat p_{n,t}^Y(x)\\,dx\\,dt\\right]\\le\\varepsilon_s^2.$$\nFor $h=T/K$, define the reverse-time Euler chain by $Z_0\\sim\\widehat p_{n,T}^Y$ and, for $k=0,\\ldots,K-1$,\n$$Z_{k+1}=Z_k+h\\left[\\tfrac12\\beta(T-kh)Z_k+\\beta(T-kh)s_{n,T-kh}^Y(Z_k)\\right]+\\sqrt{h\\beta(T-kh)}\\,\\zeta_k,$$\nwhere the $\\zeta_k$ are independent $N(0,I_d)$ vectors independent of $Z_0$ and the observations. Draw $M$ independent copies of this chain conditionally on $Y$ and denote their terminal values by $X^{(1)},\\ldots,X^{(M)}$. Let $\\bar X=M^{-1}\\sum_iX^{(i)}$, let $\\widehat r$ be the empirical $1-\\gamma$ quantile of $\\{\\|X^{(i)}-\\bar X\\|_2\\}_{i=1}^M$ (the smallest order statistic whose empirical cumulative mass is at least $1-\\gamma$), and put $\\widehat C_{n,K,M}(Y)=\\{u:\\|u-\\bar X\\|_2\\le\\widehat r\\}$. Suppose the exact credible-ball boundary satisfies the uniform margin condition\n$$\\sup_{\\theta\\in\\Theta_s(R)}P_{n,\\theta}\\left(\\left|\\|\\theta-m_n(Y)\\|_2-r_{n,\\gamma}(Y)\\right|\\le u\\right)\\le C_{\\mathrm{ac}}u^\\kappa\\quad(0<u\\le u_0)$$\nfor fixed $C_{\\mathrm{ac}},u_0>0$ and $\\kappa>0$. Determine whether a minimax-sharp nonasymptotic function $\\Phi$ exists uniformly over all such score fields and, if it does, find it as a function of $d,n,p,s,a,R,\\sigma,T,\\gamma,C_{\\mathrm{ac}},u_0,\\kappa,\\delta_A,\\varepsilon_s,K^{-1}$, and $M^{-1/2}$ such that\n$$\\sup_{\\theta\\in\\Theta_s(R)}\\left|P_{n,\\theta,\\mathrm{sampler}}\\{\\theta\\in\\widehat C_{n,K,M}(Y)\\}-(1-\\gamma)\\right|\\le\\delta^0_{n,\\gamma}+\\Phi,$$\nwith matching lower bounds that identify when $\\Phi\\to0$. The probability includes observation noise and sampler randomness. The target concerns the additional coverage error introduced by the approximate forward operator, learned score, finite reverse discretization, and finite posterior sample; it does not assume that the exact Bayesian credible ball is already calibrated on every truth class.",
+        "deps": [],
+        "justified_by": [],
+        "dependency_level": 0,
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "not-applicable"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "B. T. Knapik, A. W. van der Vaart, and J. H. van Zanten, Bayesian inverse problems with Gaussian priors, Annals of Statistics 39 (2011)",
+              "url": "https://arxiv.org/pdf/1103.2692",
+              "locator": "§§1–4, especially Theorem 4.2: exact Gaussian posterior credible balls and truth/prior-dependent frequentist coverage in the Gaussian sequence inverse model."
+            },
+            {
+              "title": "B. Szabó, A. W. van der Vaart, and J. H. van Zanten, Frequentist coverage of adaptive nonparametric Bayesian credible sets, Annals of Statistics 43 (2015)",
+              "url": "https://arxiv.org/pdf/1310.4489v5",
+              "locator": "§§1 and 3: Theorem 3.1 gives a constructed truth for which empirical-Bayes credible-set coverage tends to zero along a subsequence; Theorem 3.6 gives coverage over polished-tail truths; Theorem 3.9 controls credible-set radius on self-similar classes."
+            },
+            {
+              "title": "Evarist Giné and Richard Nickl, Mathematical Foundations of Infinite-Dimensional Statistical Models, Cambridge University Press (2016)",
+              "url": "https://www.statslab.cam.ac.uk/~rn289/Site/__files/FULLPDF.pdf",
+              "locator": "§6.4 and §8.3: honest confidence sets, adaptation constraints, and self-similarity restrictions."
+            },
+            {
+              "title": "Dominik Narnhofer, Andreas Habring, Martin Holler, and Thomas Pock, Posterior-Variance-Based Error Quantification for Inverse Problems in Imaging, SIAM Journal on Imaging Sciences 17 (2024)",
+              "url": "https://arxiv.org/pdf/2212.12499v2",
+              "locator": "§§1–3, especially Proposition 3.5: finite-sample conformal error-quantile coverage with approximate point estimates and variance estimates; this is not coverage of a Bayesian posterior credible ball."
+            }
+          ]
+        },
+        "axiom_use": "No choice axiom is used in the finite-dimensional model; the Gaussian laws and numerical procedure are specified inputs.",
+        "forward_refs": [
+          "ex-ip-integrated-score-error-misses-euler-grid-times"
+        ]
+      },
+      {
+        "id": "op-ip-neural-operator-sample-complexity-for-inverse-maps",
+        "kind": "open-problem",
+        "title": "Joint sample and mesh rates for neural inverse maps",
+        "statement": "Let $\\mathbb T=\\mathbb R/(2\\pi\\mathbb Z)$ carry normalized Lebesgue measure and fix the real orthonormal Fourier basis\n$$\\phi_1(x)=1,\\qquad \\phi_{2k}(x)=\\sqrt2\\cos(kx),\\qquad \\phi_{2k+1}(x)=\\sqrt2\\sin(kx)\\quad(k\\ge1).$$\nUse this basis to identify the real Hilbert space $\\ell^2=\\ell^2(\\mathbb N_{>0};\\mathbb R)$, where $\\mathbb N_{>0}=\\{1,2,\\ldots\\}$, with $L^2(\\mathbb T;\\mathbb R)$. Fix integers $N,m\\ge1$ and parameters $s,p,R,\\sigma>0$, and define\n$$\\Theta_s(R)=\\left\\{\\theta\\in\\ell^2:\\sum_{j\\ge1}j^{2s}\\theta_j^2\\le R^2\\right\\},\\qquad (A_p\\theta)_j=j^{-p}\\theta_j,\\qquad \\mathcal X_p(R)=A_p\\Theta_s(R).$$\nThe inverse map $G^\\dagger:\\mathcal X_p(R)\\to\\ell^2$ is $G^\\dagger(A_p\\theta)=\\theta$. For $m\\ge1$, let $P_m$ retain the first $m$ Fourier coefficients and let $I_m:\\mathbb R^m\\to\\ell^2$ append zero coordinates.\n\nFix a globally Lipschitz nonpolynomial function $\\sigma_0:\\mathbb R\\to\\mathbb R$, called the activation. For $x\\in\\mathbb R^m$, form the scalar input field $\\bar u_0(x;z)=\\sum_{j=1}^m x_j\\phi_j(z)$. A pointwise affine lift $u_0(x;z)=V_{\\mathrm{in}}\\bar u_0(x;z)+b_{\\mathrm{in}}$, with $V_{\\mathrm{in}}\\in\\mathbb R^{c_0}$ and $b_{\\mathrm{in}}\\in\\mathbb R^{c_0}$, creates $c_0$ channels. For fields $u_\\ell(z)\\in\\mathbb R^{c_\\ell}$ with positive integer channel counts $c_\\ell$, apply an integer number $D\\ge1$ of layers indexed by $\\ell=0,\\ldots,D-1$:\n$$u_{\\ell+1}(z)=\\sigma_0\\!\\left(W_\\ell u_\\ell(z)+b_\\ell+(\\mathcal K_\\ell u_\\ell)(z)\\right).$$\nHere $\\sigma_0$ acts coordinatewise, $W_\\ell\\in\\mathbb R^{c_{\\ell+1}\\times c_\\ell}$ and $b_\\ell\\in\\mathbb R^{c_{\\ell+1}}$ are pointwise channel weights, and $\\mathcal K_\\ell$ is a Fourier multiplier meaning $\\widehat{(\\mathcal K_\\ell u)}(k)=R_{\\ell,k}\\widehat u(k)$, where $\\widehat u(k)=(2\\pi)^{-1}\\int_0^{2\\pi}u(z)e^{-ikz}\\,dz$ is computed componentwise, with matrices $R_{\\ell,k}\\in\\mathbb C^{c_{\\ell+1}\\times c_\\ell}$ satisfying $R_{\\ell,-k}=\\overline{R_{\\ell,k}}$ and $R_{\\ell,k}=0$ for $|k|>q$ for some integer cutoff $q\\ge0$. A pointwise affine output map $v(x;z)=a_{\\mathrm{out}}^\\top u_D(z)+b_{\\mathrm{out}}$ gives a real scalar field, and the network output is $\\Psi_m(x)=(\\langle v(x;\\cdot),\\phi_j\\rangle_{L^2})_{j=1}^m$. Let $\\mathcal F_{S,B}^{(m)}$ be the union of these maps over architectures whose depth, channel counts, Fourier cutoff, and number of real scalar parameters are each at most the integer $S\\ge1$, with every trainable parameter bounded in absolute value by $B>0$. A parameter array used at mesh size $m$ is the same array at every other mesh size. For fixed $S$, there are finitely many allowed architecture indices; equip their disjoint union of bounded real parameter boxes with its Borel structure.\n\nWrite $\\mathcal P(K)$ for the Borel probability laws on a Borel set $K$. For a Borel probability law $\\mu$ on $\\Theta_s(R)$, draw independent training truths $\\theta_i\\sim\\mu$ and observations\n$$X_{i,m}=P_mA_p\\theta_i+\\eta_{i,m},\\qquad Y_{i,m}=P_m\\theta_i,\\qquad \\eta_{i,m}\\sim N(0,\\sigma^2m^{-1}I_m),\\quad i=1,\\ldots,N,$$\nwith all noises independent, and write $D_{N,m}=((X_{i,m},Y_{i,m}))_{i=1}^N$. A selector is Borel into the finite disjoint union of architecture indices and their bounded parameter boxes, and its realized map minimizes the empirical loss. For each $N,m,S,B$ with $\\mathcal F_{S,B}^{(m)}\\ne\\varnothing$, assume there is at least one such selector $\\tau$ that, from $D_{N,m}$, returns a minimizer of\n$$\\frac1N\\sum_{i=1}^N\\|\\Psi(X_{i,m})-Y_{i,m}\\|_2^2$$\nover $\\Psi\\in\\mathcal F_{S,B}^{(m)}$; let $\\mathcal T_{N,m}(S,B)$ be the set of all such selectors, and set it to $\\varnothing$ when $\\mathcal F_{S,B}^{(m)}=\\varnothing$. At test time, draw an independent $\\theta\\sim\\mu$ and $\\eta_m\\sim N(0,\\sigma^2m^{-1}I_m)$, and define\n$$\\mathfrak R^{\\mathrm{ERM}}_{N,m}(S,B)=\\inf_{\\tau\\in\\mathcal T_{N,m}(S,B)}\\sup_{\\mu\\in\\mathcal P(\\Theta_s(R))}E\\left\\|I_m\\tau(D_{N,m})(P_mA_p\\theta+\\eta_m)-\\theta\\right\\|_{\\ell^2}^2.$$\nUse the convention $\\inf\\varnothing=+\\infty$, so an empty architecture class has infinite ERM risk. Also define $\\mathfrak R^{\\mathrm{all}}_{N,m}$ by the same infimum over all Borel predictors from $(D_{N,m},X_m)$ to $\\mathbb R^m$, with $X_m=P_mA_p\\theta+\\eta_m$. Determine matching minimax upper and lower rates for $\\mathfrak R^{\\mathrm{ERM}}_{N,m}(S,B)$ jointly in $N,m,S,B,p,s,R,\\sigma$. In particular, characterize the joint growth regimes of $m=m_N$ and $S=S_N$ that separate statistical estimation, neural-operator approximation, and continuum truncation error, and determine when the bounded shared-parameter Fourier architecture attains the unrestricted rate $\\mathfrak R^{\\mathrm{all}}_{N,m}$.",
+        "deps": [],
+        "justified_by": [],
+        "dependency_level": 0,
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "not-applicable"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Niklas Reinhardt, Sven Wang, and Jakob Zech, Statistical Learning Theory for Neural Operators, Journal of Machine Learning Research 27 (2026)",
+              "url": "https://www.jmlr.org/papers/volume27/25-0543/25-0543.pdf",
+              "locator": "Theorems 5–6, §3, and Appendix B: entropy-controlled ERM rates for function-valued regression and FrameNet under compactness, noise, random-design, and holomorphy hypotheses."
+            },
+            {
+              "title": "Maarten V. de Hoop, Nikola B. Kovachki, Matti Lassas, and Nicholas H. Nelsen, Extension and neural operator approximation of the electrical impedance tomography inverse map (2025)",
+              "url": "https://arxiv.org/pdf/2511.20361",
+              "locator": "Theorem 4.8 and §5: continuum uniform approximation on a compact EIT data set, separated from finite training, network-size, and mesh-rate guarantees."
+            },
+            {
+              "title": "Guillaume Bal, Introduction to Inverse Problems, E6901 Lecture Notes for 2011 course, full 132-page text",
+              "url": "https://www.stat.uchicago.edu/~guillaumebal/COURSES/E6901/LectureNotesIP.pdf",
+              "locator": "§1.1, PDF pp. 3–4, and §§8.2–8.3, PDF pp. 91–97: forward operators, noise, priors, regularization, data misfit, and computational limits; no neural-operator sample-rate theorem is imported."
+            },
+            {
+              "title": "Nikola Kovachki et al., Neural Operator: Learning Maps Between Function Spaces With Applications to PDEs, Journal of Machine Learning Research 24 (2023)",
+              "url": "https://www.jmlr.org/papers/volume24/21-1524/21-1524.pdf",
+              "locator": "§1.1 and §4.4: parameter sharing, discretization invariance, Fourier neural-operator layers, and continuum approximation; these statements give no finite-sample inverse-risk rate."
+            }
+          ]
+        },
+        "axiom_use": "No choice axiom is used; all classes, sampling laws, discretizations, and risks are specified.",
+        "forward_refs": [
+          "ex-ip-coordinate-free-fno-inverse-risk-obstruction"
+        ]
+      }
+    ]
+  },
+  {
+    "order": 3101,
+    "id": "open-frontiers-in-learned-inverse-problems-examples",
+    "kind": "B",
+    "category": "inverse-problems",
+    "title": "Open frontiers in calibrated and robust learned inversion — Examples and Counterexamples",
+    "companion": "open-frontiers-in-learned-inverse-problems",
+    "requires": [
+      "open-frontiers-in-learned-inverse-problems"
+    ],
+    "items": [
+      {
+        "id": "ex-ip-score-coverage-baseline-gaussian-sequence",
+        "kind": "example",
+        "title": "Exact Gaussian credible-ball coverage with a score-error budget of zero",
+        "statement": "Let $n\\ge1$, $\\sigma,\\tau>0$, and $0<\\gamma<1$. Given a scalar truth $\\theta\\in\\mathbb R$, observe independent $Y_i\\sim N(\\theta,\\sigma^2)$, $i=1,\\ldots,n$, and use the proper prior $\\theta\\sim N(0,\\tau^2)$. Write $\\bar Y=n^{-1}\\sum_iY_i$, $v_n=(\\tau^{-2}+n\\sigma^{-2})^{-1}$, $a_n=v_n n\\sigma^{-2}$, and $z_\\gamma=\\Phi^{-1}(1-\\gamma/2)$, where $\\Phi$ is the standard normal cumulative distribution function. The exact posterior is $N(a_n\\bar Y,v_n)$ and its central $(1-\\gamma)$ credible interval is $C_n(\\bar Y)=[a_n\\bar Y-z_\\gamma\\sqrt{v_n},a_n\\bar Y+z_\\gamma\\sqrt{v_n}]$. Its frequentist coverage at truth $\\theta$ is\n$$P_\\theta\\{\\theta\\in C_n(\\bar Y)\\}=\\Phi\\!\\left(\\frac{z_\\gamma\\sqrt{v_n}+(1-a_n)\\theta}{a_n\\sigma/\\sqrt n}\\right)-\\Phi\\!\\left(\\frac{-z_\\gamma\\sqrt{v_n}+(1-a_n)\\theta}{a_n\\sigma/\\sqrt n}\\right).$$",
+        "deps": [],
+        "justified_by": [],
+        "dependency_level": 0,
+        "proof_strategy": "direct",
+        "provenance": {
+          "statement": "ai-generated",
+          "proof": "ai-generated"
+        },
+        "generation": {
+          "role": "example"
+        },
+        "axiom_use": "No choice axiom is used; all distributions are finite-dimensional and explicit."
+      },
+      {
+        "id": "ex-ip-score-coverage-unbounded-truth-prior-bias",
+        "kind": "example",
+        "title": "A proper Gaussian prior gives nonuniform finite-sample coverage on an unbounded truth class",
+        "statement": "Fix $n\\ge1$, $\\sigma,\\tau>0$, and $0<\\gamma<1$. Observe independent $Y_i\\sim N(\\theta,\\sigma^2)$ under truth $\\theta\\in\\mathbb R$ and use prior $N(0,\\tau^2)$. Let $v_n=(\\tau^{-2}+n\\sigma^{-2})^{-1}$, $a_n=v_n n\\sigma^{-2}$, and $z_\\gamma=\\Phi^{-1}(1-\\gamma/2)$, where $\\Phi$ is the standard normal cumulative distribution function. The exact posterior credible interval is $[a_n\\bar Y-z_\\gamma\\sqrt{v_n},a_n\\bar Y+z_\\gamma\\sqrt{v_n}]$. Since $0<a_n<1$, its repeated-sampling coverage at fixed $n$ tends to zero as $|\\theta|\\to\\infty$, despite exact posterior computation and exact sampling.",
+        "deps": [],
+        "justified_by": [],
+        "dependency_level": 0,
+        "proof_strategy": "direct",
+        "provenance": {
+          "statement": "ai-generated",
+          "proof": "ai-generated"
+        },
+        "generation": {
+          "role": "example"
+        },
+        "axiom_use": "No choice axiom is used; the scalar Gaussian model and limits are explicit."
+      },
+      {
+        "id": "ex-ip-operator-shift-stable-scalar-risk",
+        "kind": "example",
+        "title": "A scalar inverse with a conditioning-dependent shift modulus",
+        "statement": "Fix $R,a_0,\\sigma>0$ and $0\\le\\rho_A<a_0/2$. The working inverse is $g(y)=y/a_0$. Under a test operator $a=a_0+\\delta$ with $|\\delta|\\le\\rho_A$, the observation is $Y=a\\theta+\\varepsilon$ for $\\theta\\in[-R,R]$ and independent $\\varepsilon\\sim N(0,\\sigma^2)$. For any two truth laws $\\mu_0,\\mu$ on $[-R,R]$, define $W_1(\\mu,\\mu_0)$ as the infimum of $E|\\Theta-\\Theta_0|$ over their couplings. The risk is\n$$R_{\\mu,\\delta}(g)=E_{\\theta\\sim\\mu,\\varepsilon}|g((a_0+\\delta)\\theta+\\varepsilon)-\\theta|^2=\\frac{\\delta^2}{a_0^2}E_\\mu\\theta^2+\\frac{\\sigma^2}{a_0^2},$$\nand it satisfies $R_{\\mu,\\delta}(g)\\le(\\rho_A^2R^2+\\sigma^2)/a_0^2$ and\n$$|R_{\\mu,\\delta}(g)-R_{\\mu_0,\\delta}(g)|\\le\\frac{2\\delta^2R}{a_0^2}W_1(\\mu,\\mu_0).$$",
+        "deps": [],
+        "justified_by": [],
+        "dependency_level": 0,
+        "proof_strategy": "direct",
+        "provenance": {
+          "statement": "ai-generated",
+          "proof": "ai-generated"
+        },
+        "generation": {
+          "role": "example"
+        },
+        "axiom_use": "No choice axiom is used; the scalar laws and couplings are explicit."
+      },
+      {
+        "id": "ex-ip-operator-shift-vanishing-singular-value",
+        "kind": "example",
+        "title": "Small absolute operator error does not give a uniform inverse bound without conditioning",
+        "statement": "Fix a truth bound $R>0$. For every absolute operator-shift radius $\\rho_A>0$, take the working scalar operator $A_0=\\rho_A/2$, the true operator $A=0$, the noiseless datum $Y=A\\theta$ at truth $\\theta=R$, and the working inverse $g(y)=y/A_0$. Then $|A-A_0|=\\rho_A/2\\le\\rho_A$ but $|g(Y)-\\theta|^2=R^2$. Thus no recovery modulus tending to zero with the absolute operator error can hold uniformly when the baseline inverse conditioning is allowed to vanish.",
+        "deps": [],
+        "justified_by": [],
+        "dependency_level": 0,
+        "proof_strategy": "direct",
+        "provenance": {
+          "statement": "ai-generated",
+          "proof": "ai-generated"
+        },
+        "generation": {
+          "role": "example"
+        },
+        "axiom_use": "No choice axiom is used; the scalar example is explicit."
+      },
+      {
+        "id": "ex-ip-diffusion-two-mode-finite-sample-weights",
+        "kind": "example",
+        "title": "Exact iid samples estimate two-mode posterior weights",
+        "statement": "Let $b>0$, $0<w<1$, and let the two-mode posterior be $\\pi_w=w\\delta_{-b}+(1-w)\\delta_b$ on $\\mathbb R$. From $M\\ge1$ independent exact posterior draws $X_1,\\ldots,X_M$, define $\\widehat w=M^{-1}\\sum_i\\mathbf 1\\{X_i=-b\\}$ and $\\widehat\\pi_M=\\widehat w\\delta_{-b}+(1-\\widehat w)\\delta_b$. The one-Wasserstein error and the probability that at least one posterior mode is absent from the sample are\n$$W_1(\\widehat\\pi_M,\\pi_w)=2b|\\widehat w-w|,\\qquad P\\{\\widehat w\\in\\{0,1\\}\\}=(1-w)^M+w^M,$$\nand $E W_1(\\widehat\\pi_M,\\pi_w)\\le2b\\sqrt{w(1-w)/M}$.",
+        "deps": [],
+        "justified_by": [],
+        "dependency_level": 0,
+        "proof_strategy": "direct",
+        "provenance": {
+          "statement": "ai-generated",
+          "proof": "ai-generated"
+        },
+        "generation": {
+          "role": "example"
+        },
+        "axiom_use": "No choice axiom is used; the two-point law and finite sample are explicit."
+      },
+      {
+        "id": "ex-ip-diffusion-finite-budget-misses-rare-mode",
+        "kind": "example",
+        "title": "No fixed sample budget uniformly protects arbitrarily rare modes",
+        "statement": "For the two-mode posterior $\\pi_w=w\\delta_{-b}+(1-w)\\delta_b$ with $b>0$ and $0<w<1/2$, $M\\ge1$ independent exact draws miss the rare mode $-b$ with probability $(1-w)^M$. For any fixed $M$, this probability tends to one as $w\\downarrow0$. If instead $w\\in[w_{\\min},1-w_{\\min}]$ with $0<w_{\\min}\\le1/2$, then the probability of missing either mode is at most $2(1-w_{\\min})^M$, so $M\\ge\\log(2/\\alpha)/[-\\log(1-w_{\\min})]$ suffices to make it at most $\\alpha\\in(0,1)$.",
+        "deps": [],
+        "justified_by": [],
+        "dependency_level": 0,
+        "proof_strategy": "direct",
+        "provenance": {
+          "statement": "ai-generated",
+          "proof": "ai-generated"
+        },
+        "generation": {
+          "role": "example"
+        },
+        "axiom_use": "No choice axiom is used; the binomial sampling calculation is finite."
+      },
+      {
+        "id": "ex-ip-neural-inverse-mesh-truncation-modulus",
+        "kind": "example",
+        "title": "A diagonal inverse has an explicit Fourier truncation error",
+        "statement": "Write $\\ell^2=\\ell^2(\\mathbb N_{>0};\\mathbb R)$, where $\\mathbb N_{>0}=\\{1,2,\\ldots\\}$, so all sequence coordinates below have positive indices.\nLet $p,s,R>0$, let $m\\ge1$ be an integer, let $\\theta\\in\\ell^2$ satisfy $\\sum_{j\\ge1}j^{2s}\\theta_j^2\\le R^2$, and let $(A_p\\theta)_j=j^{-p}\\theta_j$. Given data $y=A_p\\theta+\\eta$ with $\\|\\eta\\|_{\\ell^2}\\le\\delta$, the mesh-$m$ truncated inverse is $g_m(y)=(j^py_j)_{j\\le m}$ with zero output coordinates for $j>m$. It satisfies the continuum error bound\n$$\\|g_m(y)-\\theta\\|_{\\ell^2}\\le m^p\\delta+R(m+1)^{-s}.$$\nThis separates measurement-noise amplification from the mesh truncation tail; it makes no statistical or neural-operator claim.",
+        "deps": [],
+        "justified_by": [],
+        "dependency_level": 0,
+        "proof_strategy": "direct",
+        "provenance": {
+          "statement": "ai-generated",
+          "proof": "ai-generated"
+        },
+        "generation": {
+          "role": "example"
+        },
+        "axiom_use": "No choice axiom is used; the truncation and norm estimates are explicit."
+      },
+      {
+        "id": "ex-ip-neural-inverse-finite-samples-need-class-control",
+        "kind": "example",
+        "title": "Finite samples cannot identify every Lipschitz function uniformly",
+        "statement": "Let $N\\ge1$ and let $x_1,\\ldots,x_N\\in[0,1]$ be arbitrary training inputs. For every deterministic learning rule that returns a prediction function $g:[0,1]\\to\\mathbb R$ from the observed pairs $(x_i,f(x_i))$, there are two $1$-Lipschitz functions $f_0,f_1:[0,1]\\to\\mathbb R$ agreeing with each other and taking the common value $0$ at every training input but satisfying\n$$\\|f_1-f_0\\|_{\\infty}\\ge\\frac{1}{2(N+1)}.$$\nConsequently, at the midpoint of a largest sample-free interval, the returned prediction function $g$ has absolute prediction error at least $1/(4(N+1))$ for at least one of these two indistinguishable target functions.",
+        "deps": [],
+        "justified_by": [],
+        "dependency_level": 0,
+        "proof_strategy": "direct",
+        "provenance": {
+          "statement": "ai-generated",
+          "proof": "ai-generated"
+        },
+        "generation": {
+          "role": "example"
+        },
+        "axiom_use": "No choice axiom is used; the construction uses finitely many sample points."
+      },
+      {
+        "id": "ex-ip-integrated-score-error-misses-euler-grid-times",
+        "kind": "example",
+        "title": "Integrated score error can miss every Euler evaluation",
+        "deps": [],
+        "justified_by": [],
+        "provenance": {
+          "statement": "ai-generated",
+          "proof": "ai-generated"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "B. T. Knapik, A. W. van der Vaart, and J. H. van Zanten, Bayesian inverse problems with Gaussian priors, Annals of Statistics 39 (2011)",
+              "url": "https://arxiv.org/pdf/1103.2692",
+              "locator": "§§1–4, especially Theorem 4.2: exact Gaussian posterior credible balls and truth/prior-dependent frequentist coverage in the Gaussian sequence inverse model."
+            },
+            {
+              "title": "B. Szabó, A. W. van der Vaart, and J. H. van Zanten, Frequentist coverage of adaptive nonparametric Bayesian credible sets, Annals of Statistics 43 (2015)",
+              "url": "https://arxiv.org/pdf/1310.4489v5",
+              "locator": "§§1 and 3: Theorem 3.1 gives a constructed truth for which empirical-Bayes credible-set coverage tends to zero along a subsequence; Theorem 3.6 gives coverage over polished-tail truths; Theorem 3.9 controls credible-set radius on self-similar classes."
+            },
+            {
+              "title": "Evarist Giné and Richard Nickl, Mathematical Foundations of Infinite-Dimensional Statistical Models, Cambridge University Press (2016)",
+              "url": "https://www.statslab.cam.ac.uk/~rn289/Site/__files/FULLPDF.pdf",
+              "locator": "§6.4 and §8.3: honest confidence sets, adaptation constraints, and self-similarity restrictions."
+            },
+            {
+              "title": "Dominik Narnhofer, Andreas Habring, Martin Holler, and Thomas Pock, Posterior-Variance-Based Error Quantification for Inverse Problems in Imaging, SIAM Journal on Imaging Sciences 17 (2024)",
+              "url": "https://arxiv.org/pdf/2212.12499v2",
+              "locator": "§§1–3, especially Proposition 3.5: finite-sample conformal error-quantile coverage with approximate point estimates and variance estimates; this is not coverage of a Bayesian posterior credible ball."
+            }
+          ]
+        },
+        "statement": "In the finite-dimensional Gaussian credible-ball question reproduced below, choose $d=n=1$, $R=1$, $\\sigma=1$, $T=1$, $\\beta(t)=1$, and $\\gamma=1/4$, with arbitrary positive $p,s,a$. Take the numerical operator equal to the true operator, so $\\delta_A=0$. For every integer $K\\ge1$ there is a jointly Borel finite score field with integrated score error exactly zero, whose Euler terminal law is $N(1,K^{-1})$ for every observation. With $M=K$ independent terminal draws, the resulting empirical ball has frequentist coverage tending to zero at truth $\\theta=0$, although the stated uniform boundary-margin condition holds with exponent $\\kappa=1$. The exact credible-ball baseline satisfies $\\delta^0_{1,1/4}<3/4$. Consequently no bound in that question can have $\\Phi\\to0$ uniformly over its original score class as $(\\delta_A,\\varepsilon_s,K^{-1},M^{-1/2})\\to(0,0,0,0)$. The original formulation is retained verbatim under Original question.",
+        "proof_strategy": "direct",
+        "dependency_level": 0,
+        "forward_refs": [],
+        "generation": {
+          "role": "example"
+        },
+        "axiom_use": "No additional choice axiom is used; the laws, finite predictors and explicit constructions are supplied."
+      },
+      {
+        "id": "ex-ip-robust-ellipsoid-minimax-shift-rate",
+        "kind": "example",
+        "title": "Worst-law ellipsoid recovery has no training-size rate",
+        "deps": [],
+        "justified_by": [],
+        "provenance": {
+          "statement": "ai-generated",
+          "proof": "ai-generated"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Floor van Maarschalkerwaart, Subhadip Mukherjee, Christoph Brune, and Marcello Carioni, A Distributionally Robust Framework for Learned Reconstructions in Inverse Problems (2026)",
+              "url": "https://arxiv.org/pdf/2606.30230v1",
+              "locator": "Theorem 4.2 and its complete proof: explicit worst-case squared-risk bound for conditional measurement-law perturbations with a fixed truth marginal; §4.3 discusses truth-marginal perturbations."
+            },
+            {
+              "title": "Hongkai Zheng et al., InverseBench: Benchmarking Plug-and-Play Diffusion Priors for Inverse Problems in Physical Sciences, ICLR 2025",
+              "url": "https://proceedings.iclr.cc/paper_files/paper/2025/file/e297068f5ec7f483a017948715b591fb-Paper-Conference.pdf",
+              "locator": "Full 29-page proceedings paper, §§4.3–5 and Appendix C: selected empirical prior-shift and out-of-distribution behaviors; no uniform recovery modulus is proved."
+            },
+            {
+              "title": "Guillaume Bal, Introduction to Inverse Problems, E6901 Lecture Notes, full 132-page text",
+              "url": "https://www.stat.uchicago.edu/~guillaumebal/COURSES/E6901/LectureNotesIP.pdf",
+              "locator": "§1.1 and §§8.2–8.3, PDF pp. 3–4 and 91–97: forward models, noise, prior assumptions, regularization, Bayesian inverse problems, and computational limits."
+            }
+          ]
+        },
+        "statement": "For the robust minimax value $\\mathfrak R_N(\\rho_X,\\rho_A)$ in the original question reproduced below, fix $p,s>0$, $R,\\sigma>0$, $N\\ge1$, $\\rho_X\\ge0$ and $0\\le\\rho_A<1/2$. Put\n$$Q_{p,s}(R,\\sigma)=R^2\\min\\left\\{1,(\\sigma/R)^{4s/(2s+2p+1)}\\right\\}.$$\nThere is $c_{p,s}>0$, depending only on $p,s$, such that\n$$c_{p,s}\\bigl(Q_{p,s}(R,\\sigma)+R^2\\rho_A^2\\bigr)\\le\\mathfrak R_N(\\rho_X,\\rho_A)\\le\\min\\left\\{R^2,2Q_{p,s}(R,\\sigma)+R^2\\rho_A^2\\right\\}.$$\nThese bounds hold for every training size and truth-law shift radius. For fixed positive $p,s,R$, along any sequence of the remaining parameters the risk tends to zero if and only if both $\\sigma\\to0$ and $\\rho_A\\to0$. In particular, increasing $N$ with fixed positive noise does not force the worst-law risk to zero. The original question, including both distinct shift classes, is retained verbatim under Original question.",
+        "proof_strategy": "direct",
+        "dependency_level": 0,
+        "forward_refs": [],
+        "generation": {
+          "role": "example"
+        },
+        "axiom_use": "No additional choice axiom is used; the laws, finite predictors and explicit constructions are supplied."
+      },
+      {
+        "id": "ex-ip-ideal-score-error-allows-unbounded-euler-wasserstein",
+        "kind": "example",
+        "title": "Ideal-marginal score error allows unbounded finite-Euler Wasserstein error",
+        "deps": [],
+        "justified_by": [],
+        "provenance": {
+          "statement": "ai-generated",
+          "proof": "ai-generated"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Benjamin A. Burns and Sara Fridovich-Keil, When, why, and how do diffusion posterior samplers fail? A finite-sample lens (2026)",
+              "url": "https://arxiv.org/pdf/2605.30330v1",
+              "locator": "§4.1 and §5–6, with Appendix C proofs: empirical-prior posterior laws at positive diffusion times and observed mode-weight/mode-missing failures of moment-matching score-guidance methods."
+            },
+            {
+              "title": "Giannis Daras et al., A Survey on Diffusion Models for Inverse Problems (2024)",
+              "url": "https://arxiv.org/pdf/2410.00083v1",
+              "locator": "§§2.4 and 3.3–3.4: posterior score guidance, finite reverse updates, and method-specific exactness caveats."
+            },
+            {
+              "title": "Jan Blechschmidt, Oliver G. Ernst, Moritz Poguntke, and Björn Sprungk, Flow Matching for Fast Posterior Sampling in Bayesian Inverse Problems (2026)",
+              "url": "https://arxiv.org/pdf/2610.02377v1",
+              "locator": "§§3.3–3.4 and §5: Metropolized correction and computable a-posteriori TV/KL diagnostics for flow-matching posteriors, together with stated accuracy limits."
+            },
+            {
+              "title": "Simon J. D. Prince, Understanding Deep Learning, Chapter 18: Diffusion Models (2026), complete course notes",
+              "url": "https://csci4052u.science.ontariotechu.ca/generative_models/chapter_18_diffusion_models/notes.html",
+              "locator": "Chapter 18, sections on the reverse process, training and sampling algorithms, and faster sampling."
+            }
+          ]
+        },
+        "statement": "For the separated-mixture question reproduced below, there are admissible fixed one-dimensional parameters with $L=2$, fixed positive score-error allowance $\\varepsilon_s$, and every fixed integer $J\\ge2$, for which the supremum of the displayed expected fidelity loss over the original finite-valued Borel score class is $+\\infty$, for every finite $M\\ge1$. Each individual field in the construction has a finite-first-moment Euler chain and obeys the required score bound at every time. Thus the original ideal-marginal $L^2$ hypothesis supplies no finite uniform bound for the requested loss, however large the fixed budget $JM$ is. The original question is retained verbatim under Original question.",
+        "proof_strategy": "direct",
+        "dependency_level": 0,
+        "forward_refs": [],
+        "generation": {
+          "role": "example"
+        },
+        "axiom_use": "No additional choice axiom is used; the laws, finite predictors and explicit constructions are supplied."
+      },
+      {
+        "id": "ex-ip-coordinate-free-fno-inverse-risk-obstruction",
+        "kind": "example",
+        "title": "Coordinate-free Fourier inverse maps have an odd-mesh risk floor",
+        "deps": [],
+        "justified_by": [],
+        "provenance": {
+          "statement": "ai-generated",
+          "proof": "ai-generated"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Niklas Reinhardt, Sven Wang, and Jakob Zech, Statistical Learning Theory for Neural Operators, Journal of Machine Learning Research 27 (2026)",
+              "url": "https://www.jmlr.org/papers/volume27/25-0543/25-0543.pdf",
+              "locator": "Theorems 5–6, §3, and Appendix B: entropy-controlled ERM rates for function-valued regression and FrameNet under compactness, noise, random-design, and holomorphy hypotheses."
+            },
+            {
+              "title": "Maarten V. de Hoop, Nikola B. Kovachki, Matti Lassas, and Nicholas H. Nelsen, Extension and neural operator approximation of the electrical impedance tomography inverse map (2025)",
+              "url": "https://arxiv.org/pdf/2511.20361",
+              "locator": "Theorem 4.8 and §5: continuum uniform approximation on a compact EIT data set, separated from finite training, network-size, and mesh-rate guarantees."
+            },
+            {
+              "title": "Guillaume Bal, Introduction to Inverse Problems, E6901 Lecture Notes for 2011 course, full 132-page text",
+              "url": "https://www.stat.uchicago.edu/~guillaumebal/COURSES/E6901/LectureNotesIP.pdf",
+              "locator": "§1.1, PDF pp. 3–4, and §§8.2–8.3, PDF pp. 91–97: forward operators, noise, priors, regularization, data misfit, and computational limits; no neural-operator sample-rate theorem is imported."
+            },
+            {
+              "title": "Nikola Kovachki et al., Neural Operator: Learning Maps Between Function Spaces With Applications to PDEs, Journal of Machine Learning Research 24 (2023)",
+              "url": "https://www.jmlr.org/papers/volume24/21-1524/21-1524.pdf",
+              "locator": "§1.1 and §4.4: parameter sharing, discretization invariance, Fourier neural-operator layers, and continuum approximation; these statements give no finite-sample inverse-risk rate."
+            }
+          ]
+        },
+        "statement": "Consider the complete original Fourier architecture and diagonal inverse question reproduced below. For every odd integer $m\\ge3$, every $N\\ge1$, and every admissible bounded parameter class with a measurable empirical minimizer, its risk satisfies\n$$\\mathfrak R^{\\mathrm{ERM}}_{N,m}(S,B)\\ge\\frac{R^2(3^p-2^p)^2}{4\\,3^{2(p+s)}}>0.$$\nThe same bound holds for every measurable learner whose realized predictor belongs to the stated coordinate-free Fourier class, whether or not it minimizes empirical risk. On the other hand, the unrestricted risk tends to zero as $m\\to\\infty$ for fixed $p,s,R,\\sigma>0$, independently of $N$. Thus no growth of $N,S,B$ can make this original architecture attain the vanishing unrestricted risk along an odd-mesh subsequence. This is a partial resolution: no complete joint bounded-class rate, or corresponding fixed positive even-mesh floor, is asserted. The original question is retained under Original question with explicit positive coordinate indices and empty-class conventions.",
+        "proof_strategy": "direct",
+        "dependency_level": 0,
+        "forward_refs": [],
+        "generation": {
+          "role": "example"
+        },
+        "axiom_use": "No additional choice axiom is used; the laws, finite predictors and explicit constructions are supplied."
+      }
+    ]
+  }
+]

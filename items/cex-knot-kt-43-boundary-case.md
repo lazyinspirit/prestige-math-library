@@ -33,6 +33,10 @@ sources:
       locator: "Printed p.2; the exact irreducible-complement hypothesis"
 verification:
   precheck: pass
+  judge:
+    model: "gpt-6-luna"
+    verdict: pass
+    date: 2026-10-22
 ---
 
 ## Statement refuted

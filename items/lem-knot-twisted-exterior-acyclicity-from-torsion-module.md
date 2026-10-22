@@ -1,7 +1,7 @@
 ---
 id: lem-knot-twisted-exterior-acyclicity-from-torsion-module
 kind: lemma
-title: "Torsion first homology makes the exterior spine complex acyclic"
+title: "Torsion first homology makes the localized exterior spine complex acyclic"
 status: draft
 origin: pipeline
 pipeline_run: inverse-problems-knot-theory-all-109-2026-10-19

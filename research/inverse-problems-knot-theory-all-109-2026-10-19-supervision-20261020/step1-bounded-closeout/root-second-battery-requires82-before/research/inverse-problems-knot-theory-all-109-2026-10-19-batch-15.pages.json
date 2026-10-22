@@ -1,0 +1,329 @@
+[
+  {
+    "order": 3026,
+    "id": "function-space-priors-and-random-regularity",
+    "kind": "A",
+    "category": "inverse-problems",
+    "title": "Function-space priors and sample regularity",
+    "companion": "function-space-priors-and-random-regularity-examples",
+    "requires": [
+      "inverse-problems-identifiability-and-stability",
+      "gaussian-process-support-and-concentration"
+    ],
+    "items": [
+      {
+        "id": "lem-ip-weighted-coefficient-spaces-are-hilbert",
+        "kind": "lemma",
+        "title": "Weighted coefficient spaces form a Hilbert scale",
+        "statement": "Assume countable choice. Let $H_0$ be a separable real Hilbert space with a complete orthonormal basis indexed by the disjoint union of a finite set $I_*$ and the level indices $(\\ell,k)$ with $\\ell\\ge0$ and $0\\le k<2^\\ell$. Write the basis vectors as $(e_i)_{i\\in I_*}$ and $(e_{\\ell k})$. For $r\\ge0$, define\n$$H_r:=\\left\\{x\\in H_0:\\sum_{i\\in I_*}|\\langle x,e_i\\rangle_{H_0}|^2+\\sum_{\\ell\\ge0}2^{2r\\ell}\\sum_{k<2^\\ell}|\\langle x,e_{\\ell k}\\rangle_{H_0}|^2<\\infty\\right\\},$$\nwith inner product given by the corresponding weighted coefficient sum and norm squared\n$$\\|x\\|_{H_r}^2:=\\sum_{i\\in I_*}|\\langle x,e_i\\rangle_{H_0}|^2+\\sum_{\\ell\\ge0}2^{2r\\ell}\\sum_{k<2^\\ell}|\\langle x,e_{\\ell k}\\rangle_{H_0}|^2.$$\nThen $H_r$ is a separable real Hilbert space. Its displayed basis is complete and orthogonal in $H_r$, with squared basis norms $1$ on the finite family and $2^{2r\\ell}$ on level $\\ell$, and the inclusion $H_r\\hookrightarrow H_0$ is continuous with operator norm at most $1$.",
+        "proof_strategy": "direct",
+        "axiom_use": "Countable choice is assumed only through the published square-summable orthogonal-series and Parseval results used to identify coefficient norms and reconstruct vectors from their coordinates.",
+        "deps": [
+          "def-countable-choice",
+          "def-hilbert-space",
+          "def-separable-space",
+          "def-orthonormal-family-complete-orthonormal-system-and-hilbert-basis",
+          "def-square-summable-family-on-an-arbitrary-index-set",
+          "lem-square-summable-sequences-form-a-hilbert-space",
+          "lem-square-summable-orthogonal-families-have-norm-convergent-finite-sums",
+          "thm-parseval-equivalences-for-a-complete-orthonormal-family"
+        ],
+        "justified_by": [],
+        "forward_refs": [],
+        "dependency_level": 0,
+        "sources": {
+          "references": [
+            {
+              "title": "E. Giné and R. Nickl, Mathematical Foundations of Infinite-Dimensional Statistical Models (Cambridge University Press, 2016)",
+              "url": "https://www.statslab.cam.ac.uk/~nickl/Site/__files/FULLPDF.pdf",
+              "locator": "§4.2, orthonormal wavelet bases; §§4.3.4–4.3.5, coefficient norms for Besov spaces."
+            },
+            {
+              "title": "M. Dashti and A. M. Stuart, The Bayesian Approach to Inverse Problems (arXiv:1302.6989)",
+              "url": "https://arxiv.org/pdf/1302.6989",
+              "locator": "§2.3, coefficient summability in Besov-prior regularity."
+            }
+          ]
+        },
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-altered"
+        }
+      },
+      {
+        "id": "lem-ip-coordinate-vectors-form-a-basis-of-ell-two",
+        "kind": "lemma",
+        "title": "Coordinate vectors form the Hilbert basis of real ell-two",
+        "statement": "Let $H=\\ell^2(\\mathbb N,\\mathbb R)$ with its canonical real inner product, and for each $j\\in\\mathbb N$ let $e_j$ be the sequence whose $j$th coordinate is $1$ and whose other coordinates are $0$. Then $(e_j)_{j\\in\\mathbb N}$ is a complete orthonormal basis of $H$. For every $x=(x_j)\\in H$, the truncations $\\sum_{j=1}^N x_je_j$ converge in $H$ to $x$, and $\\|x\\|_2^2=\\sum_{j\\in\\mathbb N}|x_j|^2$.",
+        "proof_strategy": "direct",
+        "axiom_use": "No choice axiom is used; coordinate truncations converge by the finite-tail property in the definition of square summability.",
+        "deps": [
+          "def-square-summable-family-on-an-arbitrary-index-set",
+          "def-orthonormal-family-complete-orthonormal-system-and-hilbert-basis",
+          "lem-square-summable-sequences-form-a-hilbert-space"
+        ],
+        "justified_by": [],
+        "forward_refs": [],
+        "dependency_level": 0,
+        "sources": {
+          "references": [
+            {
+              "title": "M. Dashti and A. M. Stuart, The Bayesian Approach to Inverse Problems (arXiv:1302.6989)",
+              "url": "https://arxiv.org/pdf/1302.6989",
+              "locator": "§2.3, the periodic wavelet coefficient model and its finite-coordinate truncations."
+            },
+            {
+              "title": "E. Giné and R. Nickl, Mathematical Foundations of Infinite-Dimensional Statistical Models (Cambridge University Press, 2016)",
+              "url": "https://www.statslab.cam.ac.uk/~nickl/Site/__files/FULLPDF.pdf",
+              "locator": "§4.2, orthonormal wavelet bases and finite coefficient truncations."
+            }
+          ]
+        },
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-altered"
+        }
+      },
+      {
+        "id": "def-ip-prior-on-a-forward-domain",
+        "kind": "definition",
+        "title": "A Borel prior concentrated on a forward-map domain",
+        "statement": "Let $X$ be a specified real separable Banach or Hilbert parameter space with metric $d_X(x,x')=\\|x-x'\\|_X$ and its norm topology. Let $(Y,d_Y)$ be a metric data space equipped with a sigma-algebra $\\Sigma_Y$, let $U\\subseteq X$ be a nonempty admissible truth set, and let $F:U\\to Y$ be a forward map. Choose a Borel set $D\\in\\mathcal B(X)$ with $D\\subseteq U$ such that the restriction $G:=F|_D:D\\to Y$ is measurable for the trace Borel sigma-algebra $\\mathcal B(D):=\\{D\\cap A:A\\in\\mathcal B(X)\\}$. A prior on this forward domain is a Borel probability measure $\\mu$ on $X$ such that $\\mu(D)=1$. Its restriction $\\mu|_D$, defined by $\\mu|_D(A)=\\mu(A)$ for $A\\in\\mathcal B(D)$, is then a probability measure on $D$, and the induced data law is $G_\\#(\\mu|_D)$, defined by $G_\\#(\\mu|_D)(E)=(\\mu|_D)(G^{-1}(E))$ for $E\\in\\Sigma_Y$. A Borel probability on $X$ with $\\mu(D)<1$ is not a prior on this declared forward domain.",
+        "deps": [
+          "def-ip-forward-map-and-solution-classes",
+          "def-separable-space",
+          "def-banach-space",
+          "def-hilbert-space",
+          "def-polish-space",
+          "def-borel-sigma-algebra",
+          "def-measurable-space",
+          "def-probability-measure",
+          "def-borel-probability-law-on-a-polish-space",
+          "def-measurable-function-between-measurable-spaces"
+        ],
+        "justified_by": [],
+        "forward_refs": [],
+        "dependency_level": 1,
+        "sources": {
+          "references": [
+            {
+              "title": "M. Dashti and A. M. Stuart, The Bayesian Approach to Inverse Problems (arXiv:1302.6989)",
+              "url": "https://arxiv.org/pdf/1302.6989",
+              "locator": "§1.3, equation (1.8), parameter domain X'⊆X on which G is defined; §3.2, prior on a separable Banach parameter space."
+            },
+            {
+              "title": "E. Giné and R. Nickl, Mathematical Foundations of Infinite-Dimensional Statistical Models (Cambridge University Press, 2016)",
+              "url": "https://www.statslab.cam.ac.uk/~nickl/Site/__files/FULLPDF.pdf",
+              "locator": "§1.1.2 and §6.1.1, infinite-dimensional parameter spaces and Gaussian models."
+            }
+          ]
+        },
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "not-applicable"
+        }
+      },
+      {
+        "id": "lem-ip-gaussian-series-prior-regularity",
+        "kind": "lemma",
+        "title": "Weighted Hilbert Gaussian series and prior regularity",
+        "statement": "Let $H_0$ and $H_1$ be separable real Hilbert spaces with a continuous inclusion $H_1\\hookrightarrow H_0$. Let $(e_j)_{j\\ge1}$ be an orthonormal basis of $H_0$ that is a complete orthogonal basis of $H_1$, write $w_j=\\|e_j\\|_{H_1}^2>0$, and set $f_j=e_j/\\sqrt{w_j}$, so $(f_j)_{j\\ge1}$ is an orthonormal basis of $H_1$. Let $(\\xi_j)_{j\\ge1}$ be independent real random variables on one probability space with $\\mathbb E\\xi_j=0$ and $\\mathbb E\\xi_j^2=1$, and let $\\lambda_j\\ge0$ satisfy $\\sum_{j\\ge1}\\lambda_jw_j<\\infty$. Then\n$$S_N=\\sum_{j=1}^N\\sqrt{\\lambda_j}\\,\\xi_j e_j$$\nconverges almost surely in $H_1$ and in $L^2(\\Omega;H_1)$ to an $H_1$-valued Borel-measurable random element $S$, with\n$$\\mathbb E\\|S\\|_{H_1}^2=\\sum_{j\\ge1}\\lambda_jw_j.$$\nThese norm-convergence conclusions use no choice axiom beyond the supplied probability space and variables. For the following Gaussian conclusions, assume in addition that each $\\xi_j$ has the standard normal law $N(0,1)$. Under the Axiom of Choice and countable choice, $S$ is a centered Borel Gaussian random element in $H_1$. Its covariance map $C:H_1^*\\to H_1$, transported to $H_1$ by the Hilbert-space Riesz identification, is diagonal in the basis $(f_j)_{j\\ge1}$ with eigenvalues $\\lambda_jw_j$, and these eigenvalues are summable. If $D$ is a Borel forward-map domain in $H_1$ and $\\mathbb P(S\\in D)=1$, then the law of $S$ is a prior on $D$. Under the Axiom of Choice there is $a>0$ such that\n$$\\mathbb E\\exp\\!\\bigl(a\\|S\\|_{H_1}^2\\bigr)<\\infty.$$",
+        "proof_strategy": "direct",
+        "axiom_use": "The almost-sure and L² convergence proof is choice-free once the probability space and independent centered unit-variance variables are supplied. Countable choice is used through the published square-summable scalar Gaussian-series law and Hilbert-space Riesz representation for the Gaussian and covariance branches. The library's Borel Gaussian, covariance, and Fernique interfaces require AC; Fernique is used only for the exponential-moment conclusion.",
+        "deps": [
+          "def-ip-prior-on-a-forward-domain",
+          "def-hilbert-space",
+          "def-separable-space",
+          "def-borel-gaussian-random-element-on-a-separable-banach-space",
+          "lem-density-normal-laws-and-square-summable-gaussian-series",
+          "def-countable-choice",
+          "def-axiom-of-choice",
+          "thm-riesz-representation-for-hilbert-space",
+          "thm-monotone-convergence-for-the-integral",
+          "def-banach-gaussian-covariance-operator-and-rkhs",
+          "thm-banach-gaussian-covariance-rkhs-is-well-defined",
+          "thm-fernique-integrability-for-separable-banach-gaussian-law",
+          "thm-bounded-linear-maps-commute-with-bochner-integration"
+        ],
+        "justified_by": [],
+        "forward_refs": [],
+        "dependency_level": 2,
+        "sources": {
+          "references": [
+            {
+              "title": "M. Dashti and A. M. Stuart, The Bayesian Approach to Inverse Problems (arXiv:1302.6989)",
+              "url": "https://arxiv.org/pdf/1302.6989",
+              "locator": "§2.4, Theorem 2.4 and complete proof of Hilbert Gaussian series convergence; Remarks 2.5 and Theorem 2.6."
+            },
+            {
+              "title": "E. Giné and R. Nickl, Mathematical Foundations of Infinite-Dimensional Statistical Models (Cambridge University Press, 2016)",
+              "url": "https://www.statslab.cam.ac.uk/~nickl/Site/__files/FULLPDF.pdf",
+              "locator": "§4.2, orthonormal wavelet bases; §§4.3.4–4.3.5, Besov coefficient characterizations; §4.4.1, random Gaussian wavelet series."
+            }
+          ]
+        },
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        }
+      }
+    ]
+  },
+  {
+    "order": 3027,
+    "id": "function-space-priors-and-random-regularity-examples",
+    "kind": "B",
+    "category": "inverse-problems",
+    "title": "Function-space priors and sample regularity — Examples and Counterexamples",
+    "companion": "function-space-priors-and-random-regularity",
+    "requires": [
+      "function-space-priors-and-random-regularity"
+    ],
+    "items": [
+      {
+        "id": "ex-ip-prior-misses-uniform-ellipticity-domain",
+        "kind": "example",
+        "title": "A Gaussian coefficient prior that misses uniform ellipticity",
+        "strategy": "direct",
+        "axiom_use": "AC is required by the library's standard-normal law definition; the positive-mass and full-measure failure calculation itself is choice-free.",
+        "statement": "Assume AC. Let parameter and data spaces be $X=Y=\\mathbb R$ with their Borel sigma-algebras, let the admissible truth set be $U=\\mathbb R$, and let $F:U\\to Y$ be the identity map. Regard $\\theta\\in\\mathbb R$ as the constant coefficient field $a_\\theta(x)=\\theta$ on $[0,1]$. Let $D=[1,2]\\subseteq U$ be the uniformly elliptic class with lower bound $1$ and upper bound $2$, meaning $1\\le a_\\theta(x)\\le2$ for every $x\\in[0,1]$; the restricted map $G=F|_D$ is measurable. Give $X$ the standard normal law $\\mu=N(0,1)$. Since $\\mu((-\\infty,1))>0$, $\\mu(D)<1$; consequently $\\mu$ is a Gaussian probability on the parameter space but is not a prior on this forward-map domain.",
+        "deps": [
+          "def-ip-forward-map-and-solution-classes",
+          "def-ip-prior-on-a-forward-domain",
+          "def-standard-normal-and-normal-laws",
+          "def-axiom-of-choice",
+          "def-measurable-function-between-measurable-spaces",
+          "def-borel-sigma-algebra",
+          "def-probability-measure",
+          "prop-measure-monotonicity"
+        ],
+        "justified_by": [],
+        "forward_refs": [],
+        "dependency_level": 2,
+        "sources": {
+          "references": [
+            {
+              "title": "M. Dashti and A. M. Stuart, The Bayesian Approach to Inverse Problems (arXiv:1302.6989)",
+              "url": "https://arxiv.org/pdf/1302.6989",
+              "locator": "§1.3, positivity constraint and restricted forward-map domain; §3.4, elliptic inverse problem with a prior."
+            },
+            {
+              "title": "E. Giné and R. Nickl, Mathematical Foundations of Infinite-Dimensional Statistical Models (Cambridge University Press, 2016)",
+              "url": "https://www.statslab.cam.ac.uk/~nickl/Site/__files/FULLPDF.pdf",
+              "locator": "§1.1.2, indirect observations on restricted parameter spaces."
+            }
+          ]
+        },
+        "provenance": {
+          "statement": "ai-generated",
+          "proof": "ai-altered"
+        },
+        "generation": {
+          "role": "example"
+        },
+        "proof_strategy": "direct"
+      },
+      {
+        "id": "ex-ip-trace-class-gaussian-has-full-support",
+        "kind": "example",
+        "title": "A trace-class Gaussian with full support and a proper Cameron–Martin space",
+        "strategy": "direct",
+        "axiom_use": "AC and countable choice are assumed for the Gaussian-series law, covariance/RKHS construction, tightness, and support theorem. The coordinate-basis and weighted RKHS calculations use no further choice.",
+        "statement": "Assume the Axiom of Choice and countable choice. In $H=\\ell^2$, define $e_j$ to be the sequence with value $1$ at coordinate $j$ and $0$ at every other coordinate. Let $\\xi_j$ be independent $N(0,1)$ variables and set\n$$W=\\sum_{j\\ge1}j^{-1}\\xi_j e_j.$$\nTake the parameter and data spaces both to be $H$ with their Borel sigma-algebras, the admissible truth set and forward domain to be $U=D=H$, and the forward map to be the identity. The law $\\mu$ of $W$ is a centered Borel Gaussian prior on $D$. Its covariance is diagonal with positive eigenvalues $j^{-2}$, whose finite sum $\\sum_{j\\ge1}j^{-2}$ makes it trace class, meaning that the sum of these nonnegative eigenvalues is finite. Its covariance reproducing-kernel Hilbert space is the dense proper subspace of $H$\n$$\\left\\{x\\in\\ell^2:\\sum_{j\\ge1}j^2x_j^2<\\infty\\right\\},$$\nwhich is not all of $H$. The topological support of $\\mu$, defined as the set of points every open neighborhood of which has positive $\\mu$-measure, is all of $H$.",
+        "deps": [
+          "def-ip-forward-map-and-solution-classes",
+          "lem-ip-gaussian-series-prior-regularity",
+          "def-ip-prior-on-a-forward-domain",
+          "def-banach-gaussian-covariance-operator-and-rkhs",
+          "thm-banach-gaussian-covariance-rkhs-is-well-defined",
+          "thm-bounded-linear-maps-commute-with-bochner-integration",
+          "thm-support-of-banach-gaussian-is-closure-of-rkhs",
+          "thm-every-borel-probability-on-a-polish-space-is-tight",
+          "lem-square-summable-sequences-form-a-hilbert-space",
+          "lem-ip-coordinate-vectors-form-a-basis-of-ell-two",
+          "def-separable-space",
+          "def-polish-space",
+          "thm-riesz-representation-for-hilbert-space",
+          "def-axiom-of-choice",
+          "def-countable-choice"
+        ],
+        "justified_by": [],
+        "forward_refs": [],
+        "dependency_level": 3,
+        "sources": {
+          "references": [
+            {
+              "title": "M. Dashti and A. M. Stuart, The Bayesian Approach to Inverse Problems (arXiv:1302.6989)",
+              "url": "https://arxiv.org/pdf/1302.6989",
+              "locator": "§2.4, Theorem 2.4, Remarks 2.5, and the Karhunen–Loève covariance convention."
+            },
+            {
+              "title": "E. Giné and R. Nickl, Mathematical Foundations of Infinite-Dimensional Statistical Models (Cambridge University Press, 2016)",
+              "url": "https://www.statslab.cam.ac.uk/~nickl/Site/__files/FULLPDF.pdf",
+              "locator": "§2.6, reproducing-kernel Hilbert spaces of Gaussian laws."
+            }
+          ]
+        },
+        "provenance": {
+          "statement": "ai-generated",
+          "proof": "ai-altered"
+        },
+        "generation": {
+          "role": "example"
+        },
+        "proof_strategy": "direct"
+      },
+      {
+        "id": "ex-ip-gaussian-series-at-besov-threshold",
+        "kind": "example",
+        "title": "A Gaussian wavelet series at the Besov threshold",
+        "strategy": "direct",
+        "axiom_use": "AC is required by the library's standard-normal and Borel Gaussian interfaces. Countable choice is used through the L² and weighted-coefficient Hilbert-space results, the Gaussian-series law, and Borel measurability of the square map. The IID strong-law threshold divergence uses no further choice.",
+        "statement": "Assume AC and countable choice. Fix $s>0$ and a periodic $S$-regular orthonormal wavelet basis of $L^2([0,1])$ consisting of a finite family of coarsest scaling functions $(\\varphi_i)_{i\\in I_*}$ and detail wavelets $(\\psi_{\\ell k})_{\\ell\\ge0,\\,0\\le k<2^\\ell}$, where $I_*$ is finite and $S>s$. Let $\\xi_i$ and $\\xi_{\\ell k}$, over all these indices, be independent $N(0,1)$ variables. For $0\\le r\\le s$, define $B^r_{2,2}([0,1])$ to be the set of $f\\in L^2([0,1])$ with finite coefficient norm\n$$\\|f\\|_{B^r_{2,2}}^2=\\sum_{i\\in I_*}|\\langle f,\\varphi_i\\rangle|^2+\\sum_{\\ell\\ge0}2^{2\\ell r}\\sum_{k<2^\\ell}|\\langle f,\\psi_{\\ell k}\\rangle|^2.$$\nTake parameter and data spaces $X=Y=L^2([0,1])$ with their Borel sigma-algebras, the admissible truth set and forward domain $U=D=X$, and the forward map $F=\\mathrm{id}_X$. Set the coarsest scaling coefficients to zero and define\n$$W=\\sum_{\\ell\\ge0}\\sum_{k<2^\\ell}2^{-\\ell(s+1/2)}\\xi_{\\ell k}\\psi_{\\ell k}.$$\nThe law of $W$ is a centered Borel Gaussian prior on $D$. For each fixed $0\\le r<s$, $W$ belongs to $B^r_{2,2}([0,1])$ almost surely, but $W$ does not belong to the threshold space $B^s_{2,2}([0,1])$ almost surely.",
+        "deps": [
+          "def-ip-forward-map-and-solution-classes",
+          "lem-ip-gaussian-series-prior-regularity",
+          "lem-ip-weighted-coefficient-spaces-are-hilbert",
+          "def-ip-prior-on-a-forward-domain",
+          "def-borel-gaussian-random-element-on-a-separable-banach-space",
+          "def-standard-normal-and-normal-laws",
+          "def-axiom-of-choice",
+          "def-countable-choice",
+          "lem-l-two-with-the-integral-pairing-is-a-hilbert-space",
+          "lem-standard-normal-fourth-moment",
+          "cor-iid-finite-variance-strong-law",
+          "def-identically-distributed-and-iid-random-variables",
+          "lem-measurable-functions-preserve-independence",
+          "cor-continuous-functions-are-borel-measurable",
+          "def-orthonormal-family-complete-orthonormal-system-and-hilbert-basis",
+          "def-separable-space"
+        ],
+        "justified_by": [],
+        "forward_refs": [],
+        "dependency_level": 3,
+        "sources": {
+          "references": [
+            {
+              "title": "M. Dashti and A. M. Stuart, The Bayesian Approach to Inverse Problems (arXiv:1302.6989)",
+              "url": "https://arxiv.org/pdf/1302.6989",
+              "locator": "§2.3, Theorem 2.2 and complete proof of Besov-prior regularity threshold; §2.4, Gaussian series convergence."
+            },
+            {
+              "title": "E. Giné and R. Nickl, Mathematical Foundations of Infinite-Dimensional Statistical Models (Cambridge University Press, 2016)",
+              "url": "https://www.statslab.cam.ac.uk/~nickl/Site/__files/FULLPDF.pdf",
+              "locator": "§4.2, periodic orthonormal wavelet bases; §§4.3.4–4.3.5, Besov coefficient conventions; §4.4.1, random Gaussian wavelet series."
+            }
+          ]
+        },
+        "provenance": {
+          "statement": "ai-generated",
+          "proof": "ai-altered"
+        },
+        "generation": {
+          "role": "example"
+        },
+        "proof_strategy": "direct"
+      }
+    ]
+  }
+]

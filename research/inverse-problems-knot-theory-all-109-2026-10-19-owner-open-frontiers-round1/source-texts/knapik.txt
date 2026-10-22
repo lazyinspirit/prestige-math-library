@@ -1,0 +1,2176 @@
+PAGE 1
+arXiv:1103.2692v2  [math.ST]  23 Feb 2012
+The Annals of Statistics
+2011, Vol. 39, No. 5, 2626–2657
+DOI: 10.1214/11-AOS920
+c
+⃝Institute of Mathematical Statistics, 2011
+BAYESIAN INVERSE PROBLEMS WITH GAUSSIAN PRIORS
+By B. T. Knapik1, A. W. van der Vaart and J. H. van Zanten
+VU University Amsterdam, VU University Amsterdam and
+Eindhoven University of Technology
+The posterior distribution in a nonparametric inverse problem is
+shown to contract to the true parameter at a rate that depends on the
+smoothness of the parameter, and the smoothness and scale of the
+prior. Correct combinations of these characteristics lead to the mini-
+max rate. The frequentist coverage of credible sets is shown to depend
+on the combination of prior and true parameter, with smoother priors
+leading to zero coverage and rougher priors to conservative coverage.
+In the latter case credible sets are of the correct order of magnitude.
+The results are numerically illustrated by the problem of recovering
+a function from observation of a noisy version of its primitive.
+1. Introduction.
+In this paper we study a Bayesian approach to estimat-
+ing a parameter µ from an observation Y following the model
+Y = Kµ + 1
+√nZ.
+(1.1)
+The unknown parameter µ is an element of a separable Hilbert space H1, and
+is mapped into another Hilbert space H2 by a known, injective, continuous
+linear operator K :H1 →H2. The image Kµ is perturbed by unobserved,
+scaled Gaussian white noise Z. There are many special examples of this
+inﬁnite-dimensional regression model, which can also be viewed as an ide-
+alized version of other statistical models, including density estimation. The
+inverse problem of estimating µ has been studied by both statisticians and
+numerical mathematicians (see, e.g., [3, 6, 8, 24, 26, 33] for reviews), but
+rarely from a theoretical Bayesian perspective; exceptions are [7] and [11].
+The Bayesian approach to (1.1) consists of putting a prior on the pa-
+rameter µ, and computing the posterior distribution. We study Gaussian
+Received March 2011; revised August 2011.
+1Supported in part by the Netherlands Organization for Scientiﬁc Research NWO.
+AMS 2000 subject classiﬁcations. Primary 62G05, 62G15; secondary 62G20.
+Key words and phrases. Credible set, posterior distribution, Gaussian prior, rate of con-
+traction.
+This is an electronic reprint of the original article published by the
+Institute of Mathematical Statistics in The Annals of Statistics,
+2011, Vol. 39, No. 5, 2626–2657. This reprint diﬀers from the original in
+pagination and typographic detail.
+1
+
+PAGE 2
+2
+B. T. KNAPIK, A. W. VAN DER VAART AND J. H. VAN ZANTEN
+priors, which are conjugate to the model, so that the posterior distribution
+is also Gaussian and easy to derive. Our interest is in studying the proper-
+ties of this posterior distribution, under the “frequentist” assumption that
+the data Y has been generated according to the model (1.1) with a given
+“true” parameter µ0. We investigate whether and at what rate the posterior
+distributions contract to µ0 as n →∞(as in [15]), but have as main interest
+the performance of credible sets for measuring the uncertainty about the
+parameter.
+A Bayesian credible set is deﬁned as a central region in the posterior
+distribution of speciﬁed posterior probability, for instance, 95%. As a conse-
+quence of the Bernstein–von Mises theorem credible sets for smooth ﬁnite-
+dimensional parametric models are asymptotically equivalent to conﬁdence
+regions based on the maximum likelihood estimator (see, e.g., [31], Chap-
+ter 10), under mild conditions on the prior. Thus, “Bayesian uncertainty”
+is equivalent to “frequentist uncertainty” in these cases, at least for large n.
+However, there is no corresponding Bernstein–von Mises theorem in non-
+parametric Bayesian inference, as noted in [12]. The performance of Bayesian
+credible sets in these situations has received little attention, although in
+practice such sets are typically provided as indicators of uncertainty, for
+instance, based on the spread of the output of a (converged) MCMC run.
+The paper [7] did tackle this issue and came to the alarming conclusion
+that Bayesian credible sets have frequentist coverage zero. If this were true,
+many data analysts would (justiﬁably) distrust the spread in the posterior
+distribution as a measure of uncertainty. For other results see [4, 13, 14]
+and [18].
+The model considered in [7] is equivalent to our model (1.1), and a good
+starting point for studying these issues. More precisely, the conclusion of [7]
+is that for almost every parameter µ0 from the prior the coverage of a cred-
+ible set (of any level) is 0. In the present paper we show that this is only
+part of the story, and, taken by itself, the conclusion is misleading. The cov-
+erage depends on the true parameter µ0 and the prior together, and it can
+be understood in terms of a bias-variance trade-oﬀ, much as the coverage
+of frequentist nonparametric procedures. A nonparametric procedure that
+oversmoothes the truth (too big a bandwidth in a frequentist procedure, or
+a prior that puts too much weight on “smooth” parameters) will be biased,
+and a conﬁdence or credible region based on such a procedure will be both
+too concentrated and wrongly located, giving zero coverage. On the other
+hand, undersmoothing does work (to a certain extent), also in the Bayesian
+setup, as we show below. In this light we reinterpret the conclusion of [7]
+to be valid only in the oversmoothed case (notwithstanding a conjecture
+to the contrary in the Introduction of this paper; see page 905, answer to
+objection 4). In the undersmoothed case credible regions are conservative in
+general, with coverage tending to 1. The good news is that typically they
+
+PAGE 3
+BAYESIAN INVERSE PROBLEMS WITH GAUSSIAN PRIORS
+3
+are of the correct order of magnitude, so that they do give a reasonable idea
+of the uncertainty in the estimate.
+Of course, whether a prior under- or oversmoothes depends on the regu-
+larity of the true parameter. In practice, we may not want to consider this
+known, and adapt the prior smoothness to the data. In this paper we do
+consider the eﬀect of changing the “length scale” of a prior, but do not
+study data-dependent length scales. The eﬀect of setting the latter by, for
+example, an empirical or full Bayes method will require further study.
+Credible sets are by deﬁnition “central regions” in the posterior distri-
+bution. Because the posterior distribution is a random probability measure
+on the Hilbert space H1, a “central ball” is a natural shape of such a set,
+but it has the disadvantage that it is diﬃcult to visualize. If the Hilbert
+space is a function space, then credible bands are more natural. These cor-
+respond to simultaneous credible intervals for the function at a point, and
+can be obtained from the (marginal) posterior distributions of a set of lin-
+ear functionals. Besides the full posterior distribution, we therefore study
+its marginals for linear functionals. The same issue of the dependence of
+coverage on under- and oversmoothing arises, except that “very smooth”
+linear functionals cancel the inverse nature of the problem, and do allow
+a Bernstein–von Mises theorem for a large set of priors. Unfortunately point
+evaluations are usually not smooth in this sense.
+Thus, we study two aspects of inverse problems—recovering the full pa-
+rameter µ (Section 4) and recovering linear functionals (Section 5). We ob-
+tain the rate of contraction of the posterior distribution in both settings, in
+its dependence on parameters of the prior. Furthermore, and most impor-
+tantly, we study the “frequentist” coverage of credible regions for µ in both
+settings, for the same set of priors. In the next section we give a more precise
+statement of the problem, and in Section 3 we describe the priors that we
+consider and derive the corresponding posterior distributions. In Section 6
+we illustrate the results by simulations and pictures in the particular exam-
+ple that K is the Volterra operator. Technical proofs are placed in Sections 7
+and 8 at the end of the paper.
+Throughout the paper ⟨·,·⟩1 and ∥· ∥1, and ⟨·,·⟩2 and ∥· ∥2 denote the
+inner products and norms of the Hilbert spaces H1 and H2. The adjoint of
+an operator A between two Hilbert spaces is denoted by AT . The Sobolev
+space Sβ with its norm ∥· ∥β is deﬁned in (2.2). For two sequences (an)
+and (bn) of numbers an ≍bn means that |an/bn| is bounded away from zero
+and inﬁnity as n →∞, and an ≲bn means that an/bn is bounded.
+2. Detailed description of the problem.
+The noise process Z in (1.1)
+is the standard normal or iso-Gaussian process for the Hilbert space H2.
+Because this is not realizable as a random element in H2, the model (1.1) is
+
+PAGE 4
+4
+B. T. KNAPIK, A. W. VAN DER VAART AND J. H. VAN ZANTEN
+interpreted in process form (as in [3]). The iso-Gaussian process is the zero-
+mean Gaussian process Z = (Zh :h ∈H2) with covariance function EZhZh′ =
+⟨h,h′⟩2, and the measurement equation (1.1) is interpreted in that we observe
+a Gaussian process Y = (Yh :h ∈H2) with mean and covariance functions
+EYh = ⟨Kµ,h⟩2,
+cov(Yh,Yh′) = 1
+n⟨h,h′⟩2.
+(2.1)
+Suﬃciency considerations show that it is statistically equivalent to observe
+the subprocess (Yhi :i ∈N), for any orthonormal basis h1,h2,... of H2.
+If the operator K is compact, then the spectral decomposition of the self-
+adjoint operator KTK :H1 →H1 provides a convenient basis. In the compact
+case the operator KT K possesses countably many positive eigenvalues κ2
+i
+and there is a corresponding orthonormal basis (ei) of H1 of eigenfunctions
+(hence, KT Kei = κ2
+i ei for i ∈N; see, e.g., [23]). The sequence (fi) deﬁned by
+Kei = κifi forms an orthonormal “conjugate” basis of the range of K in H2.
+An element µ ∈H1 can be identiﬁed with its sequence (µi) of coordinates
+relative to the eigenbasis (ei), and its image Kµ = P
+i µiKei = P
+i µiκifi
+can be identiﬁed with its coordinates (µiκi) relative to the conjugate ba-
+sis (fi). If we write Yi for Yfi, then (2.1) shows that Y1,Y2,... are indepen-
+dent Gaussian variables with means EYi = µiκi and variance 1/n. Therefore,
+a concrete equivalent description of the statistical problem is to recover the
+sequence (µi) from independent observations Y1,Y2,... with N(µiκi,1/n)-
+distributions.
+In the following we do not require K to be compact, but we do assume
+the existence of an orthonormal basis of eigenfunctions of KT K. The main
+additional example we then cover is the white noise model, in which K is
+the identity operator. The description of the problem remains the same.
+If κi →0, this problem is ill-posed, and the recovery of µ from Y an
+inverse problem. The ill-posedness can be quantiﬁed by the speed of decay
+κi ↓0. Although the tools are more widely applicable, we limit ourselves to
+the mildly ill-posed problem (in the terminology of [6]) and assume that the
+decay is polynomial: for some p ≥0,
+κi ≍i−p.
+Estimation of µ is harder if the decay is faster (i.e., p is larger).
+The diﬃculty of estimation may be measured by the minimax risks over
+the scale of Sobolev spaces relative to the orthonormal basis (ei) of eigen-
+functions of KTK. For β > 0 deﬁne
+∥µ∥β =
+v
+u
+u
+t
+∞
+X
+i=1
+µ2
+i i2β
+if µ =
+∞
+X
+i=1
+µiei.
+(2.2)
+Then the Sobolev space of order β is Sβ = {µ ∈H1 :∥µ∥β < ∞}. The min-
+imax rate of estimation over the unit ball of this space relative to the loss
+
+PAGE 5
+BAYESIAN INVERSE PROBLEMS WITH GAUSSIAN PRIORS
+5
+∥t −µ∥1 of an estimate t for µ is n−β/(1+2β+2p). This rate is attained by var-
+ious “regularization” methods, such as generalized Tikhonov and Moore–
+Penrose regularization [1, 3, 6, 16, 19]. The Bayesian approach is closely
+connected to these methods: in Section 3 the posterior mean is shown to be
+a regularized estimator.
+Besides recovery of the full parameter µ, we consider estimating linear
+functionals Lµ. The minimax rate for such functionals over Sobolev balls
+depends on L as well as on the parameter of the Sobolev space. Decay of
+the coeﬃcients of L in the eigenbasis may alleviate the level of ill-posedness,
+with rapid decay even bringing the functional in the domain of “regular”
+n−1/2-rate estimation.
+3. Prior and posterior distributions.
+We assume a mean-zero Gaussian
+prior for the parameter µ. In the next three paragraphs we recall some
+essential facts on Gaussian distributions on Hilbert spaces.
+A Gaussian distribution N(ν,Λ) on the Borel sets of the Hilbert space H1
+is characterized by a mean ν, which can be any element of H1, and a co-
+variance operator Λ:H1 →H1, which is a nonnegative-deﬁnite, self-adjoint,
+linear operator of trace class: a compact operator with eigenvalues (λi) that
+are summable P∞
+i=1 λi < ∞(see, e.g., [25], pages 18–20). A random ele-
+ment G in H1 is N(ν,Λ)-distributed if and only if the stochastic process
+(⟨G,h⟩1 :h ∈H1) is a Gaussian process with mean and covariance functions
+E⟨G,h⟩1 = ⟨ν,h⟩1,
+cov(⟨G,h⟩1,⟨G,h′⟩1) = ⟨h,Λh′⟩1.
+(3.1)
+The coeﬃcients Gi = ⟨G,ϕi⟩1 of G relative to an orthonormal eigenbasis (ϕi)
+of Λ are independent, univariate Gaussians with means the coordinates (νi)
+of the mean vector ν and variances the eigenvalues λi.
+The iso-Gaussian process Z in (1.1) may be thought of as a N(0,I)-
+distributed Gaussian element, for I the identity operator (on H2), but as I
+is not of trace class, this distribution is not realizable as a proper random
+element in H2. Similarly, the data Y in (1.1) can be described as having
+a N(Kµ,n−1I)-distribution.
+For a stochastic process W = (Wh :h ∈H2) and a continuous, linear opera-
+tor A:H2 →H1, we deﬁne the transformation AW as the stochastic process
+with coordinates (AW)h = WAT h, for h ∈H1. If the process W arises as
+Wh = ⟨W,h⟩2 from a random element W in the Hilbert space H2, then this
+deﬁnition is consistent with identifying the random element AW in H1 with
+the process (⟨AW,h⟩1 :h ∈H1), as in (3.1) with G = AW. Furthermore, if A
+is a Hilbert–Schmidt operator (i.e., AAT is of trace class), and W = Z is
+the iso-Gaussian process, then the process AW can be realized as a random
+variable in H1 with a N(0,AAT )-distribution.
+In the Bayesian setup the prior, which we take N(0,Λ), is the marginal
+distribution of µ, and the noise Z in (1.1) is considered independent of µ.
+
+PAGE 6
+6
+B. T. KNAPIK, A. W. VAN DER VAART AND J. H. VAN ZANTEN
+The joint distribution of (Y,µ) is then also Gaussian, and so is the condi-
+tional distribution of µ given Y , the posterior distribution of µ. In general,
+one must be a bit careful with manipulating possibly “improper” Gaussian
+distributions (see [20]), but in our situation the posterior is a proper Gaus-
+sian conditional distribution on H1.
+Proposition 3.1 (Full posterior).
+If µ is N(0,Λ)-distributed and Y
+given µ is N(Kµ,n−1I)-distributed, then the conditional distribution of µ
+given Y is Gaussian N(AY,Sn) on H1, where
+Sn = Λ −A(n−1I + KΛKT)AT ,
+(3.2)
+and A:H2 →H2 is the continuous linear operator
+A = Λ1/2
+ 1
+nI + Λ1/2KT KΛ1/2
+−1
+Λ1/2KT = ΛKT
+ 1
+nI + KΛKT
+−1
+.
+(3.3)
+The posterior distribution is proper (i.e., Sn has ﬁnite trace) and equivalent
+(in the sense of absolute continuity) to the prior.
+Proof.
+Identity (3.3) is a special case of the identity (I + BBT)−1B =
+B(I +BT B)−1, which is valid for any compact, linear operator B :H1 →H2.
+That Sn is of trace class is a consequence of the fact that it is bounded
+above by Λ (i.e., Λ −Sn is nonnegative deﬁnite), which is of trace class by
+assumption.
+The operator Λ1/2KT KΛ1/2 :H1 →H1 has trace bounded by ∥KT K∥tr(Λ)
+and hence is of trace class. It follows that the variable Λ1/2KTZ can be de-
+ﬁned as a random element in the Hilbert space H1, and so can AY , for A
+given by the ﬁrst expression in (3.3). The joint distribution of (Y,µ) is Gaus-
+sian with zero mean and covariance operator
+
+n−1I + KΛKT
+KΛ
+ΛKT
+Λ
+
+.
+Using this with the second form of A in (3.3), we can check that the cross co-
+variance operator of the variables µ−AY and Y (the latter viewed as a Gaus-
+sian stochastic process in RH2) vanishes and, hence, these variables are in-
+dependent. Thus, the two terms in the decomposition µ = (µ −AY ) + AY
+are conditionally independent and degenerate given Y , respectively. The
+distribution of µ −AY is zero-mean Gaussian with covariance operator
+Cov(µ−AY ) = Cov(µ)−Cov(AY ), by the independence of µ−AY and AY .
+This gives the form of the posterior distribution.
+The ﬁnal assertion may be proved by explicitly comparing the Gaussian
+prior and posterior. Easier is to note that it suﬃces to show that the model
+consisting of all N(Kµ,n−1I)-distributions is dominated. In that case the
+
+PAGE 7
+BAYESIAN INVERSE PROBLEMS WITH GAUSSIAN PRIORS
+7
+posterior can be obtained using Bayes’ rule, which reveals the normalized
+likelihood as a density relative to the (in fact, any) prior. To prove dom-
+ination, we may consider equivalently the distributions N∞
+i=1 N(κiµi,n−1)
+on R∞of the suﬃcient statistic (Yi) deﬁned as the coordinates of Y rela-
+tive to the conjugate spectral basis. These distributions, for (µi) ∈ℓ2, are
+equivalent to the distribution N∞
+i=1 N(0,n−1), as can be seen with the help
+of Kakutani’s theorem, the aﬃnity being exp(−P
+i κ2
+i µ2
+i /8) > 0. (This ar-
+gument actually proves the well-known fact that the Gaussian shift experi-
+ment obtained by translating the standard normal distribution on R∞over
+its RKHS ℓ2 is dominated.)
+□
+In the remainder of the paper we study the asymptotic behavior of the
+posterior distribution, under the assumption that Y = Kµ0 + n−1/2Z for
+a ﬁxed µ0 ∈H1. The posterior is characterized by its center AY , the pos-
+terior mean, and its spread, the posterior covariance operator Sn. The ﬁrst
+depends on the data, but the second is deterministic. From a frequentist-
+Bayes perspective both are important: one would like the posterior mean to
+give a good estimate for µ0, and the spread to give a good indication of the
+uncertainty in this estimate.
+The posterior mean is a regularization, of the Tikhonov type, of the naive
+estimator K−1Y . It can also be characterized as a penalized least squares
+estimator (see [21, 27]): it minimizes the functional
+µ 7→∥Y −Kµ∥2
+2 + 1
+n∥Λ−1/2µ∥2
+1.
+The penalty ∥Λ−1/2µ∥1 is interpreted as ∞if µ is not in the range of Λ1/2.
+Because this range is precisely the reproducing kernel Hilbert space (RKHS)
+of the prior (cf. [32]), with ∥Λ−1/2µ∥1 as the RKHS-norm of µ, the posterior
+mean also ﬁts into the general regularization framework using RKHS-norms
+(see [22]). In any case the posterior mean is a well-studied point estimator in
+the literature on inverse problems. In this paper we add a Bayesian interpre-
+tation to it, and are (more) concerned with the full posterior distribution.
+Next consider the posterior distribution of a linear functional Lµ of the
+parameter. We are not only interested in continuous, linear functionals Lµ =
+⟨µ,l⟩1, for some given l ∈H1, but also in certain discontinuous functionals,
+such as point evaluation in a Hilbert space of functions. The latter entail
+some technicalities. We consider measurable linear functionals relative to
+the prior N(0,Λ), deﬁned in [25], pages 27–29, as Borel measurable maps
+L:H1 →R that are linear on a measurable linear subspace H1 ⊂H1 such
+that N(0,Λ)(H1) = 1. This deﬁnition is exactly right to make the marginal
+posterior Gaussian.
+Proposition 3.2 (Marginal posterior).
+If µ is N(0,Λ)-distributed and Y
+given µ is N(Kµ,n−1I)-distributed, then the conditional distribution of Lµ
+
+PAGE 8
+8
+B. T. KNAPIK, A. W. VAN DER VAART AND J. H. VAN ZANTEN
+given Y for a N(0,Λ)-measurable linear functional L:H1 →R is a Gaussian
+distribution N(LAY,s2
+n) on R, where
+s2
+n = (LΛ1/2)(LΛ1/2)T −LA(n−1I + KΛKT )(LA)T ,
+(3.4)
+and A:H2 →H2 is the continuous linear operator deﬁned in (3.3).
+Proof.
+As in the proof of Proposition 3.1, the ﬁrst term in the de-
+composition Lµ = L(µ −AY ) + LAY is independent of Y . Therefore, the
+posterior distribution is the marginal distribution of L(µ −AY ) shifted by
+LAY . It suﬃces to show that this marginal distribution is N(0,s2
+n).
+By Theorem 1 on page 28 in [25], there exists a sequence of continuous
+linear maps Lm :H1 →R such that Lmh →Lh for all h in a set with proba-
+bility one under the prior Π = N(0,Λ). This implies that LmΛ1/2h →LΛ1/2h
+for every h ∈H1. Indeed, if V = {h ∈H1 :Lmh →Lh} and g /∈V , then
+V1 := V + g and V are disjoint measurable, aﬃne subspaces of H1, where
+Π(V ) = 1. The range of Λ1/2 is the RKHS of Π and, hence, if g is in this
+range, then Π(V1) > 0, as Π shifted over an element from its RKHS is equiv-
+alent to Π. But then V and V1 are not disjoint.
+Therefore, from the ﬁrst deﬁnition of A in (3.3) we see that LmA →LA,
+and, hence, Lm(µ −AY ) →L(µ −AY ), almost surely. As Lm is continu-
+ous, the variable Lm(µ −AY ) is normally distributed with mean zero and
+variance LmSmLT
+m = (LmΛ1/2)(LmΛ1/2)T −LmA(n−1I + KΛKT)(LmA)T ,
+for Sn given by (3.2). The desired result follows upon taking the limit as
+m →∞.
+□
+As shown in the preceding proof, N(0,Λ)-measurable linear functionals L
+automatically have the further property that LΛ1/2 :H1 →R is a continuous
+linear map. This shows that LA and the adjoint operators (LΛ1/2)T and
+(LA)T are well deﬁned, so that the formula for s2
+n makes sense. If L is
+a continuous linear operator, one can also write these adjoints in terms
+of the adjoint LT of L, and express s2
+n in the covariance operator Sn of
+Proposition 3.1 as s2
+n = LSnLT . This is exactly as expected.
+In the remainder of the paper we study the full posterior distribution
+N(AY,Sn), and its marginals N(LAY,s2
+n). We are particularly interested in
+the inﬂuence of the prior on the performance of the posterior distribution
+for various true parameters µ0. We study this in the following setting.
+Assumption 3.1.
+The operators KT K and Λ have the same eigenfunc-
+tions (ei), with eigenvalues (κ2
+i ) and (λi), satisfying
+λi = τ 2
+ni−1−2α,
+C−1i−p ≤κi ≤Ci−p
+(3.5)
+for some α > 0, p ≥0, C ≥1 and τn > 0 such that nτ 2
+n →∞. Furthermore,
+the true parameter µ0 belongs to Sβ for some β > 0: that is, its coordi-
+nates (µ0,i) relative to (ei) satisfy P∞
+i=1 µ2
+0,ii2β < ∞.
+
+PAGE 9
+BAYESIAN INVERSE PROBLEMS WITH GAUSSIAN PRIORS
+9
+The setting of Assumption 3.1 is a Bayesian extension of the mildly ill-
+posed inverse problem (cf. [6]). We refer to the parameter β as the “regu-
+larity” of the true parameter µ0. In the special case that H1 is a function
+space and (ei) its Fourier basis, this parameter gives smoothness of µ0 in
+the classical Sobolev sense. Because the coeﬃcients (µi) of the prior pa-
+rameter µ are normally N(0,λi)-distributed, under Assumption 3.1 we have
+EP
+i i2α′µ2
+i = τ 2
+n
+P
+i i2α′λi < ∞if and only if α′ < α. Thus, α is “almost”
+the smoothness of the parameters generated by the prior. This smoothness
+is modiﬁed by the scaling factor τn. Although this leaves the relative sizes
+of the coeﬃcients µi, and hence the qualitative smoothness of the prior, in-
+variant, we shall see that scaling can completely alter the performance of
+the Bayesian procedure. Rates τn ↓0 increase, and rates τn ↑∞decrease the
+regularity.
+4. Recovering the full parameter.
+We denote by Πn(·|Y ) the posterior
+distribution N(AY,Sn), derived in Proposition 3.1. Our ﬁrst theorem shows
+that it contracts as n →∞to the true parameter at a rate εn that depends
+on all four parameters α,β,τn,p of the (Bayesian) inverse problem.
+Theorem 4.1 (Contraction).
+If µ0, (λi), (κi) and (τn) are as in As-
+sumption 3.1, then Eµ0Πn(µ:∥µ−µ0∥1 ≥Mnεn|Y ) →0, for every Mn →∞,
+where
+εn = (nτ 2
+n)−β/(1+2α+2p)∧1 + τn(nτ 2
+n)−α/(1+2α+2p).
+(4.1)
+The rate is uniform over µ0 in balls in Sβ. In particular:
+(i) If τn ≡1, then εn = n−(α∧β)/(1+2α+2p).
+(ii) If β ≤1+2α+2p and τn ≍n(α−β)/(1+2β+2p), then εn = n−β/(1+2β+2p).
+(iii) If β > 1 + 2α + 2p, then εn ≫n−β/(1+2β+2p), for every scaling τn.
+The minimax rate of convergence over a Sobolev ball Sβ is of the order
+n−β/(1+2β+2p) (see [6]). By (i) of the theorem the posterior contraction rate
+is the same if the regularity of the prior is chosen to match the regularity of
+the truth (α = β) and the scale τn is ﬁxed. Alternatively, the optimal rate
+is also attained by appropriately scaling (τn ≍n(α−β)/(1+2β+2p), determined
+by balancing the two terms in εn) a prior that is regular enough (β ≤1 +
+2α + 2p). In all other cases (no scaling and α ̸= β, or any scaling combined
+with a rough prior β > 1 + 2α + 2p), the contraction rate is slower than the
+minimax rate.
+That “correct” speciﬁcation of the prior gives the optimal rate is com-
+forting to the true Bayesian. Perhaps the main message of the theorem is
+that even if the prior mismatches the truth, it may be scalable to give the
+optimal rate. Here, similar as found by [29] in a diﬀerent setting, a smooth
+
+PAGE 10
+10
+B. T. KNAPIK, A. W. VAN DER VAART AND J. H. VAN ZANTEN
+prior can be scaled to make it “rougher” to any degree, but a rough prior
+can be “smoothed” relatively little (namely, from α to any β ≤1+ 2α + 2p).
+It will be of interest to investigate a full or empirical Bayesian approach to
+set the scaling parameter.
+Bayesian inference takes the spread in the posterior distribution as an
+expression of uncertainty. This practice is not validated by (fast) contrac-
+tion of the posterior. Instead we consider the frequentist coverage of credible
+sets. As the posterior distribution is Gaussian, it is natural to center a cred-
+ible region at the posterior mean. Diﬀerent shapes of such a set could be
+considered. The natural counterpart of the preceding theorem is to consider
+balls. In the next section we also consider bands. (Alternatively, one might
+consider ellipsoids, depending on geometry of the support of the posterior.)
+Because the posterior spread Sn is deterministic, the radius is the only
+degree of freedom when we choose a ball, and we ﬁx it by the desired “credi-
+bility level” 1−γ ∈(0,1). A credible ball centered at the posterior mean AY
+takes the form, where B(r) denotes a ball of radius r around 0,
+AY + B(rn,γ) := {µ ∈H1 :∥µ −AY ∥1 < rn,γ},
+(4.2)
+where the radius rn,γ is determined so that
+Πn(AY + B(rn,γ)|Y ) = 1 −γ.
+(4.3)
+Because the posterior spread Sn is not dependent on the data, neither is the
+radius rn,γ. The frequentist coverage or conﬁdence of the set (4.2) is
+Pµ0(µ0 ∈AY + B(rn,γ)),
+(4.4)
+where under the probability measure Pµ0 the variable Y follows (1.1) with
+µ = µ0. We shall consider the coverage as n →∞for ﬁxed µ0, uniformly in
+Sobolev balls, and also along sequences µn
+0 that change with n.
+The following theorem shows that the relation of the coverage to the
+credibility level 1 −γ is mediated by all parameters of the problem. For
+further insight, the credible region is also compared to the “correct” fre-
+quentist conﬁdence ball AY + B(˜rn,γ), which has radius ˜rn,γ chosen so that
+the probability in (4.4) with rn,γ replaced by ˜rn,γ is equal to 1 −γ.
+Theorem 4.2 (Credibility).
+Let µ0, (λi), (κi), and τn be as in As-
+sumption 3.1, and set ˜β = β ∧(1 + 2α + 2p). The asymptotic coverage of the
+credible region (4.2) is:
+(i) 1, uniformly in µ0 with ∥µ0∥β ≤1, if τn ≫n(α−˜β)/(1+2˜β+2p); in this
+case ˜rn,γ ≍rn,γ.
+(ii) 1, for every ﬁxed µ0 ∈Sβ, if β < 1+2α+2p and τn ≍n(α−˜β)/(1+2˜β+2p);
+c, along some µn
+0 with supn∥µn
+0∥β < ∞, if τn ≍n(α−˜β)/(1+2˜β+2p) (any c ∈
+[0,1)).
+(iii) 0, along some µn
+0 with supn∥µn
+0∥β < ∞, if τn ≪n(α−˜β)/(1+2˜β+2p).
+
+PAGE 11
+BAYESIAN INVERSE PROBLEMS WITH GAUSSIAN PRIORS
+11
+If τn ≡1, then the cases (i), (ii) and (iii) arise if α < β, α = β and α > β,
+respectively. In case (iii) the sequence µn
+0 can then be chosen ﬁxed.
+The theorem is easiest to interpret in the situation without scaling (τn ≡1).
+Then oversmoothing the prior [case (iii): α > β] has disastrous consequences
+for the coverage of the credible sets, whereas undersmoothing [case (i): α < β]
+leads to conservative conﬁdence sets. Choosing a prior of correct regularity
+[case (ii): α = β] gives mixed results.
+Inspection of the proofs shows that the lack of coverage in case of over-
+smoothing arises from a bias in the positioning of the posterior mean com-
+bined with a posterior spread that is smaller even than in the optimal case.
+In other words, the posterior is oﬀmark, but believes it is very right. The
+message is that (too) smooth priors should be avoided; they lead to overcon-
+ﬁdent posteriors, which reﬂect the prior information rather than the data,
+even if the amount of information in the data increases indeﬁnitely.
+Under- and correct smoothing give very conservative conﬁdence regions
+(coverage equal to 1). However, (i) and (ii) also show that the credible ball
+has the same order of magnitude as a correct conﬁdence ball (1 ≥˜rn,γ/
+rn,γ ≫0), so that the spread in the posterior does give the correct order
+of uncertainty. This at ﬁrst sight surprising phenomenon is caused by the
+fact that the posterior distribution concentrates near the boundary of a ball
+around its mean, and is not spread over the inside of the ball. The cover-
+age is 1, because this sphere is larger than the corresponding sphere of the
+frequentist distribution of AY , even though the two radii are of the same
+order.
+By Theorem 4.1 the optimal contraction rate is obtained (only) by a prior
+of the correct smoothness. Combining the two theorems leads to the con-
+clusion that priors that slightly undersmooth the truth might be preferable.
+They attain a nearly optimal rate of contraction and the spread of their
+posterior gives a reasonable sense of uncertainty.
+Scaling of the prior modiﬁes these conclusions. The optimal scaling τn ≍
+n(α−β)/(1+2α+2p) found in Theorem 4.1, possible if β < 1+2α+2p, is covered
+in case (ii). This rescaling leads to a balancing of square bias, variance and
+spread, and to credible regions of the correct order of magnitude, although
+the precise (uniform) coverage can be any number in [0,1). Alternatively,
+bigger rescaling rates are covered in case (i) and lead to coverage 1. The
+optimal or slightly bigger rescaling rate seems the most sensible. It would
+be interesting to extend these results to data-dependent scaling.
+5. Recovering linear functionals of the parameter.
+We denote by Πn(µ:
+Lµ ∈·|Y ) the posterior distribution of the linear functional L, as described
+in Proposition 3.2. A continuous, linear functional L:H1 →R can be iden-
+tiﬁed with an inner product Lµ = ⟨µ,l⟩1, for some l ∈H1, and hence with
+a sequence (li) in ℓ2 giving its coordinates in the eigenbasis (ei).
+
+PAGE 12
+12
+B. T. KNAPIK, A. W. VAN DER VAART AND J. H. VAN ZANTEN
+As shown in the proof of Proposition 3.2, for L in the larger class of
+N(0,Λ)-measurable linear functionals, the functional LΛ1/2 is a continu-
+ous linear map on H1 and hence can be identiﬁed with an element of H1.
+For such a functional L we deﬁne a sequence (li) by li = (LΛ1/2)i/√λi,
+for ((LΛ1/2)i) the coordinates of LΛ1/2 in the eigenbasis. The assumption
+that L is a N(0,Λ)-measurable linear functional implies that P
+i l2
+i λi < ∞,
+but (li) need not be contained in ℓ2; if (li) ∈ℓ2, then L is continuous and
+the deﬁnition of (li) agrees with the deﬁnition in the preceding paragraph.
+We measure the smoothness of the functional L by the size of the coeﬃ-
+cients li, as i →∞. First we assume that the sequence is in Sq, for some q.
+Theorem 5.1 (Contraction).
+If µ0, (λi), (κi) and (τn) are as in As-
+sumption 3.1 and the representer (li) of the N(0,Λ)-measurable linear func-
+tional L is contained in Sq for q ≥−β, then Eµ0Πn(µ:|Lµ −Lµ0| ≥
+Mnεn|Y ) →0, for every sequence Mn →∞, where
+εn = (nτ 2
+n)−(β+q)/(1+2α+2p)∧1 + τn(nτ 2
+n)−(1/2+α+q)/(1+2α+2p)∧(1/2).
+The rate is uniform over µ0 in balls in Sβ. In particular:
+(i) If τn ≡1, then εn = n−(β∧(1/2+α)+q)/(1+2α+2p) ∨n−1/2.
+(ii) If q ≤p and β + q ≤1 + 2α + 2p and τn ≍n(1/2+α−β)/(2β+2p), then
+εn = n−(β+q)/(2β+2p).
+(iii) If q ≤p and β + q > 1+ 2α + 2p, then εn ≫n−(β+q)/(2β+2p) for every
+scaling τn.
+(iv) If q ≥p and τn ≳n(1/2+α−˜β+p−q)/(2˜β+2q), where ˜β = β ∧(1 + 2α +
+2p −q), then εn = n−1/2.
+If q ≥p, then the smoothness of the functional L cancels the ill-posedness
+of the operator K, and estimating Lµ becomes a “regular” problem with
+an n−1/2 rate of convergence. Without scaling the prior (τn ≡1), the pos-
+terior contracts at this rate [see (i) or (iv)] if the prior is not too smooth
+(α ≤β −1/2+ q −p). With scaling, the rate is also attained, with any prior,
+provided the scaling parameter τn does not tend to zero too fast [see (iv)].
+Inspection of the proof shows that too smooth priors or too small scale
+creates a bias that slows the rate.
+If q < p, where we take q the “biggest” value such that (li) ∈Sq, esti-
+mating Lµ is still an inverse problem. The minimax rate over a ball in the
+Sobolev space Sβ is known to be bounded above by n−(β+q)/(2β+2p) (see
+[8, 9, 16]).
+This rate is attained without scaling [see (i): τn ≡1] if and only if the prior
+smoothness α is equal to the true smoothness β minus 1/2 (α + 1/2 = β).
+An intuitive explanation for this apparent mismatch of prior and truth is
+that regularity of the parameter in the Sobolev scale (µ0 ∈Sβ) is not the
+
+PAGE 13
+BAYESIAN INVERSE PROBLEMS WITH GAUSSIAN PRIORS
+13
+appropriate type of regularity for estimating a linear functional Lµ. For
+instance, the diﬃculty of estimating a function at a point is determined by
+the regularity in a neighborhood of the point, whereas the Sobolev scale
+measures global regularity over the domain. The fact that a Sobolev space
+of order β embeds continuously in a H¨older space of regularity β −1/2 might
+give a quantitative explanation of the “loss” in smoothness by 1/2 in the
+special case that the eigenbasis is the Fourier basis. In our Bayesian context
+we draw the conclusion that the prior must be adapted to the inference
+problem if we want to obtain the optimal frequentist rate: for estimating
+the global parameter, a good prior must match the truth (α = β), but for
+estimating a linear functional a good prior must consider a Sobolev truth of
+order β as having regularity α = β −1/2.
+If the prior smoothness α is not β −1/2, then the minimax rate may still
+be attained by scaling the prior. As in the global problem, this is possible
+only if the prior is not too rough [β +q ≤1+2α+2p, cases (ii) and (iii)]. The
+optimal scaling when this is possible [case (ii)] is the same as the optimal
+scaling for the global problem [Theorem 4.1(ii)] after decreasing β by 1/2.
+So the “loss in regularity” persists in the scaling rate. Heuristically this
+seems to imply that a simple data-based procedure to set the scaling, such
+as empirical or hierarchical Bayes, cannot attain simultaneous optimality in
+both the global and local senses.
+In the application of the preceding theorem, the functional L, and hence
+the sequence (li), will be given. Naturally, we apply the theorem with q equal
+to the largest value such that (li) ∈Sq. Unfortunately, this lacks precision
+for the sequences (li) that decrease exactly at some polynomial order: a se-
+quence li ≍i−q−1/2 is in Sq′ for every q′ < q, but not in Sq. In the following
+theorem we consider these sequences, and the slightly more general ones
+such that |li| ≤i−q−1/2S(i), for some slowly varying sequence S(i). Recall
+that S :[0,∞) →R is slowly varying if S(tx)/S(t) →1 as t →∞, for every
+x > 0. [For these sequences (li) ∈Sq′ for every q′ < q, (li) /∈Sq′ for q′ > q,
+and (li) ∈Sq if and only if P
+i S2(i)/i < ∞.]
+Theorem 5.2 (Contraction).
+If µ0, (λi), (κi) and (τn) are as in As-
+sumption 3.1 and the representer (li) of the N(0,Λ)-measurable linear func-
+tional L satisﬁes |li| ≤i−q−1/2S(i) for a slowly varying function S and
+q > −β, then the result of Theorem 5.1 is valid with
+εn = (nτ 2
+n)−(β+q)/(1+2α+2p)∧1γn + τn(nτ 2
+n)−(1/2+α+q)/(1+2α+2p)∧(1/2)δn,
+(5.1)
+where, for ρn = (nτ 2
+n)1/(1+2α+2p),
+γ2
+n =
+
+
+
+
+
+
+
+
+
+S2(ρn),
+if β + q < 1 + 2α + 2p,
+X
+i≤ρn
+S2(i)
+i
+,
+if β + q = 1 + 2α + 2p,
+1,
+if β + q > 1 + 2α + 2p,
+
+PAGE 14
+14
+B. T. KNAPIK, A. W. VAN DER VAART AND J. H. VAN ZANTEN
+δ2
+n =
+
+
+
+
+
+
+
+
+
+S2(ρn),
+if q < p,
+X
+i≤ρn
+S2(i)
+i
+,
+if q = p,
+1,
+if q > p.
+This has the same consequences as in Theorem 5.1, up to the addition of
+slowly varying terms.
+Because the posterior distribution for the linear functional Lµ is the one-
+dimensional normal distribution N(LAY,s2
+n), the natural credible interval
+for Lµ has endpoints LAY ± zγ/2sn, for zγ the (lower) standard normal
+γ-quantile. The coverage of this interval is
+Pµ0(LAY + zγ/2sn ≤Lµ0 ≤LAY −zγ/2sn),
+where Y follows (1.1) with µ = µ0. To obtain precise results concerning cov-
+erage, we assume that (li) behaves polynomially up to a slowly varying term,
+ﬁrst in the situation q < p that estimating Lµ is an inverse problem. Let ˜τn
+be the (optimal) scaling τn that equates the two terms in the right-hand
+side of (5.1). This satisﬁes ˜τn ≍n(1/2+α−˜β)/(2˜β+2p)ηn, for a slowly varying
+factor ηn, where ˜β = β ∧(1 + 2α + 2p −q).
+Theorem 5.3 (Credibility).
+Let µ0, (λi), (κi) and (τn) be as in Assump-
+tion 3.1, and let |li| = i−q−1/2S(i) for q < p and a slowly varying function S.
+Then the asymptotic coverage of the interval LAY ± zγ/2sn is:
+(i) in (1 −γ,1), uniformly in µ0 such that ∥µ0∥β ≤1 if τn ≫˜τn.
+(ii) in (1 −γ,1), for every µ0 ∈Sβ, if τn ≍˜τn and β + q < 1 + 2α + 2p;
+in (0,c), along some µn
+0 with supn ∥µn
+0∥β < ∞if τn ≍˜τn [any c ∈(0,1)].
+(iii) 0 along some µn
+0 with supn ∥µn
+0∥β < ∞if τn ≪˜τn.
+In case (iii) the sequence µn
+0 can be taken a ﬁxed element µ0 in Sβ if τn ≲
+n−δ˜τn for some δ > 0.
+Furthermore, if τn ≡1, then the coverage takes the form as in (i), (ii)
+and (iii) if α < β −1/2, α = β −1/2, and α > β −1/2, respectively, where
+in case (iii) the sequence µn
+0 can be taken a ﬁxed element.
+Similarly, as in the nonparametric problem, oversmoothing leads to cov-
+erage 0, while undersmoothing gives conservative intervals. Without scaling
+the cut-oﬀfor under- or oversmoothing is at α = β −1/2; with scaling the
+cut-oﬀfor the scaling rate is at the optimal rate ˜τn.
+The conservativeness in the case of undersmoothing is less extreme for
+functionals than for the full parameter, as the coverage is strictly between the
+credibility level 1−γ and 1. The general message is the same: oversmoothing
+
+PAGE 15
+BAYESIAN INVERSE PROBLEMS WITH GAUSSIAN PRIORS
+15
+is disastrous for the interpretation of credible band, whereas undersmoothing
+gives bands that at least have the correct order of magnitude, in the sense
+that their width is of the same order as the variance of the posterior mean
+(see the proof). Too much undersmoothing is also undesirable, as it leads to
+very wide conﬁdence bands, and may cause that P
+i l2
+i λi is no longer ﬁnite
+(see measurability property).
+The results (i) and (ii) are the same for every q < p, even if τn ≡1. Closer
+inspection would reveal that for a given µ0 the exact coverage depends on q
+[and S(i)] in a complicated way.
+If q ≥p, then the smoothness of the functional L compensates the lack
+of smoothness of K−1, and estimating Lµ is not a true inverse problem.
+This drastically changes the performance of credible intervals. Although
+oversmoothing again destroys their coverage, credible intervals are exact
+conﬁdence sets if the prior is not too smooth. We formulate this in terms of
+a Bernstein–von Mises theorem.
+The Bernstein–von Mises theorem for parametric models asserts that the
+posterior distribution approaches a normal distribution centered at an eﬃ-
+cient estimator of the parameter and with variance equal to its asymptotic
+variance. It is the ultimate link between Bayesian and frequentist procedures.
+There is no version of this theorem for inﬁnite-dimensional parameters [12],
+but the theorem may hold for “smooth” ﬁnite-dimensional projections, such
+as the linear functional Lµ (see [5]).
+In the present situation the posterior distribution of Lµ is already normal
+by the normality of the model and the prior: it is a N(LAY,s2
+n)-distribution
+by Proposition 3.2. To speak of a Bernstein–von Mises theorem, we also
+require the following:
+(i) That the (root of the) spread sn of the posterior distribution is
+asymptotically equivalent to the standard deviation tn of the centering vari-
+able LAY .
+(ii) That the sequence (LAY −Lµ0)/tn tends in distribution to a stan-
+dard normal distribution.
+(iii) That the centering LAY is an asymptotically eﬃcient estimator
+of Lµ.
+We shall show that (i) happens if and only if the functional L cancels the ill-
+posedness of the operator K, that is, if q ≥p in Theorem 5.2. Interestingly,
+the rate of convergence tn must be n−1/2 up to a slowly varying factor in this
+case, but it could be strictly slower than n−1/2 by a slowly varying factor
+increasing to inﬁnity.
+Because LAY is normally distributed by the normality of the model,
+assertion (ii) is equivalent to saying that its bias tends to zero faster than tn.
+This happens provided the prior does not oversmooth the truth too much.
+
+PAGE 16
+16
+B. T. KNAPIK, A. W. VAN DER VAART AND J. H. VAN ZANTEN
+For very smooth functionals (q > p) there is some extra “space” in the cut-
+oﬀfor the smoothness, which (if the prior is not scaled: τn ≡1) is at α = β −
+1/2+ q −p, rather than at α = β −1/2 as for the (global) inverse estimating
+problem. Thus, the prior may be considerably smoother than the truth if
+the functional is very smooth.
+Let ∥· ∥denote the total variation norm between measures. Say that l ∈
+Rq if |li| = i−q−1/2S(i) for a slowly varying function S. Write
+Bn = sup
+∥µ∥β≲1
+|LAKµ −Lµ|
+for the maximal bias of LAY over a ball in the Sobolev space Sβ. Finally,
+let ˜τn be the (optimal) scaling τn in that it equates the two terms in the
+right-hand side of (5.1).
+Theorem 5.4 (Bernstein–von Mises).
+Let µ0, (λi), and (κi) be as in
+Assumption 3.1, and let l be the representer of the N(0,Λ)-measurable linear
+functional L:
+(i) If l ∈Sp, then sn/tn →1; in this case nt2
+n →P
+i l2
+i /κ2
+i . If l ∈Rq,
+then sn/tn →1 if and only if q ≥p; in this case n 7→nt2
+n is slowly varying.
+(ii) If l ∈Sq for q ≥p, then Bn = o(tn) if either τn ≫n(α+1/2−β)/(2β+2q)
+or (τn ≡1 and α < β −1/2 + q −p). If l ∈Rq for q ≥p, then Bn = o(tn)
+if (τn ≫˜τn) or (τn ≡1 and α < β −1/2 + q −p) or (q = p, τn ≡1 and
+α = β −1/2 + q −p) or [q > p, τn ≡1 and α = β −1/2 + q −p and S(i) →0
+as i →∞].
+(iii) If l ∈Sp or l ∈Rp and Bn = o(tn), then Eµ0∥Πn(Lµ ∈·|Y )−N(LAY ,
+t2
+n)∥→0 and (LAY −Lµ0)/tn converges under µ0 in distribution to a stan-
+dard normal distribution, uniformly in ∥µ0∥β ≲1. If l ∈Sp, then this is also
+true with LAY and t2
+n replaced by P
+i Yili/κi and its variance n−1 P
+i l2
+i /κ2
+i .
+In both cases (iii), the asymptotic coverage of the credible interval LAY ±
+zγ/2sn is 1 −γ, uniformly in ∥µ0∥β ≲1. Finally, if the conditions under (ii)
+fail, then there exists µn
+0 with supn ∥µn
+0∥β < ∞along which the coverage
+tends to an arbitrarily low value.
+The observation Y in (1.1) can be viewed as a reduction by suﬃciency
+of a random sample of size n from the distribution N(Kµ,I). Therefore,
+the model ﬁts in the framework of i.i.d. observations, and “asymptotic ef-
+ﬁciency” can be deﬁned in the sense of semiparametric models discussed
+in, for example, [2, 30] and [31]. Because the model is shift-equivariant, it
+suﬃces to consider local eﬃciency at µ0 = 0. The one-dimensional submod-
+els N(K(th),I) on the sample space RH2, for t ∈R and a ﬁxed “direction”
+h ∈H1, have likelihood ratios
+log dN(tKh,I)
+dN(0,I)
+(Y ) = tYKh −1
+2t2∥Kh∥2
+2.
+
+PAGE 17
+BAYESIAN INVERSE PROBLEMS WITH GAUSSIAN PRIORS
+17
+Thus, their score function at t = 0 is the (Kh)th coordinate of a single obser-
+vation Y = (Yh :h ∈H2), the score operator is the map ˜K :H1 →L2(N(0,I))
+given by ˜Kh(Y ) = YKh, and the tangent space is the range of ˜K. [We denote
+the score operator by the same symbol K as in (1.1); if the observation Y
+were realizable in H2, and not just in the bigger sample space RH2, then YKh
+would correspond to ⟨Y,Kh⟩2 and, hence, the score would be exactly Kh for
+the operator in (1.1) after identifying H2 and its dual space.] The adjoint of
+the score operator restricted to the closure of the tangent space is the oper-
+ator ˜KT : ˜KH1 ⊂L2(N(0,I)) →H1 that satisﬁes ˜KT (Yg) = KT g, where KT
+on the right is the adjoint of K :H1 →H2. The functional Lµ = ⟨l,µ⟩1 has
+derivative l. Therefore, by [28] asymptotically regular sequences of estima-
+tors exist, and the local asymptotic minimax bound for estimating Lµ is
+ﬁnite, if and only if l is contained in the range of KT . Furthermore, the
+variance bound is ∥m∥2
+2 for m ∈H2 such that KTm = l.
+In our situation the range of KT is Sp, and if l ∈Sp, then by Theo-
+rem 5.4(iii) the variance of the posterior is asymptotically equivalent to
+the variance bound and its centering can be taken equal to the estima-
+tor n−1 P
+i Yili/κi, which attains this variance bound. Thus, the theorem
+gives a semiparametric Bernstein–von Mises theorem, satisfying every of (i),
+(ii), (iii) in this case. If only l ∈Rp and not l ∈Sp, the theorem still gives
+a Bernstein–von Mises type theorem, but the rate of convergence is slower
+than n−1/2, and the standard eﬃciency theory does not apply.
+6. Example—Volterra operator.
+The classical Volterra operator K:L2[0,
+1] →L2[0,1] and its adjoint KT are given by
+Kµ(x) =
+Z x
+0
+µ(s)ds,
+KTµ(x) =
+Z 1
+x
+µ(s)ds.
+The resulting problem (1.1) can also be written in “signal in white noise”
+form
+as
+follows:
+observe
+the
+process
+(Yt :t ∈[0,1])
+given
+by
+Yt =
+R t
+0
+R s
+0 µ(u)duds + n−1/2Wt, for a Brownian motion W.
+The eigenvalues, eigenfunctions of KT K and conjugate basis are given by
+(see [17]), for i = 1,2,...,
+κ2
+i =
+1
+(i −1/2)2π2 ,
+ei(x) =
+√
+2cos((i −1/2)πx),
+fi(x) =
+√
+2sin((i −1/2)πx).
+The (fi) are the eigenfunctions of KKT , relative to the same eigenvalues,
+and Kei = κifi and KTfi = κiei, for every i ∈N.
+To illustrate our results with simulated data, we start by choosing a true
+function µ0, which we expand as µ0 = P
+i µ0,iei on the basis (ei). The data
+
+PAGE 18
+18
+B. T. KNAPIK, A. W. VAN DER VAART AND J. H. VAN ZANTEN
+are the function
+Y = Kµ0 + 1
+√nZ =
+X
+i
+µ0,iκifi + 1
+√nZ.
+It can be generated relative to the conjugate basis (fi) as a sequence of in-
+dependent Gaussian random variables Y1,Y2,... with Yi ∼N(µ0,iκi,n−1/2).
+The posterior distribution of µ is Gaussian with mean AY and covariance
+operator Sn, given in Proposition 3.1. Under Assumption 3.1 it can be rep-
+resented in terms of the coordinates (µi) of µ relative to the basis (ei) as
+(conditionally) independent Gaussian variables µ1,µ2,... with
+µi|Y ∼N
+ nλiκiYi
+1 + nλiκ2
+i
+,
+λi
+1 + nλiκ2
+i
+
+.
+The (marginal) posterior distribution for the function µ at a point x is
+obtained by expanding µ(x) = P
+i µiei(x), and applying the framework of
+linear functionals Lµ = P
+i liµi with li = ei(x). This shows that
+µ(x)|Y ∼N
+X
+i
+nλiκiYiei(x)
+1 + nλiκ2
+i
+,
+X
+i
+λiei(x)2
+1 + nλiκ2
+i
+
+.
+We obtained (marginal) posterior credible bands by computing for every x
+a central 95% interval in the normal distribution on the right-hand side.
+Figure 1 illustrates these bands for n = 1,000. In every one of the 10
+panels in the ﬁgure the black curve represents the function µ0, deﬁned by
+the coeﬃcients i−3/2 sin(i) relative to ei (β = 1). The 10 panels represent 10
+independent realizations of the data, yielding 10 diﬀerent realizations of the
+posterior mean (the red curves) and the posterior credible bands (the green
+curves). In the left ﬁve panels the prior is given by λi = i−2α−1 with α = 1,
+whereas in the right panels the prior corresponds to α = 5. Each of the 10
+panels also shows 20 realizations from the posterior distribution.
+Clearly, the posterior mean is not estimating the true curve very well,
+even for n = 1,000. This is mostly caused by the intrinsic diﬃculty of the
+inverse problem: better estimation requires bigger sample size. A comparison
+of the left and right panels shows that the rough prior (α = 1) is aware of the
+diﬃculty: it produces credible bands that in (almost) all cases contain the
+true curve. On the other hand, the smooth prior (α = 5) is overconﬁdent;
+the spread of the posterior distribution poorly reﬂects the imprecision of
+estimation.
+Specifying a prior that is too smooth relative to the true curve yields
+a posterior distribution which gives both a bad reconstruction and a mis-
+guided sense of uncertainty. Our theoretical results show that the inaccurate
+quantiﬁcation of estimation error remains even as n →∞.
+The reconstruction, by the posterior mean or any other posterior quan-
+tiles, will eventually converge to the true curve. However, speciﬁcation of
+a too smooth prior will slow down this convergence signiﬁcantly. This is
+
+PAGE 19
+BAYESIAN INVERSE PROBLEMS WITH GAUSSIAN PRIORS
+19
+Fig. 1.
+Realizations of the posterior mean (red) and (marginal) posterior credible bands
+(green), and 20 draws from the posterior (dashed curves). In all ten panels n = 1,000 and
+β = 1. Left 5 panels: α = 1; right 5 panels: α = 5. True curve (black) given by coeﬃcients
+µ0,i = i−3/2 sin(i).
+illustrated in Figure 2. Every one of its 10 panels is similarly constructed
+as before, but now with n = 1,000 and n = 108 for the ﬁve panels on the
+left-hand and right-hand side, respectively, and with α = 1/2,1,2,3,5 for
+the ﬁve panels from top to bottom. At ﬁrst sight α = 1 seems better (see the
+left column in Figure 2), but leads to zero coverage because of the mismatch
+close to the bump (see the right column), while α = 1/2 captures the bump.
+For n = 108 the posterior for this optimal prior has collapsed onto the true
+curve, whereas the smooth posterior for α = 5 still has major diﬃculty in re-
+covering the bump in the true curve (even though it “thinks” it has captured
+the correct curve, the bands having collapsed to a single curve in the ﬁgure).
+
+PAGE 20
+20
+B. T. KNAPIK, A. W. VAN DER VAART AND J. H. VAN ZANTEN
+Fig. 2.
+Realizations of the posterior mean (red) and (marginal) posterior credible bands
+(green), and 20 draws from the posterior (dashed curves). In all ten panels β = 1. Left 5
+panels: n = 1,000 and α = 0.5,1,2,3,5 (top to bottom); right 5 panels: n = 108 and
+α = 0.5,1,2,3,5 (top to bottom). True curve (black) given by coeﬃcients µ0,i = i−3/2 sin(i).
+7. Proofs.
+7.1. Proof of Theorem 4.1.
+The second moment of a Gaussian distribu-
+tion on H1 is equal to the square norm of its mean plus the trace of its co-
+variance operator. Because the posterior is Gaussian N(AY,Sn), it follows
+that
+Z
+∥µ −µ0∥2
+1 dΠn(µ|Y ) = ∥AY −µ0∥2
+1 + tr(Sn).
+
+PAGE 21
+BAYESIAN INVERSE PROBLEMS WITH GAUSSIAN PRIORS
+21
+By Markov’s inequality, the left-hand side is an upper bound to M2
+nε2
+nΠn(µ:
+∥µ −µ0∥1 ≥Mnεn|Y ). Therefore, it suﬃces to show that the expectation
+under µ0 of the right-hand side of the display is bounded by a multiple of ε2
+n.
+The expectation of the ﬁrst term is the mean square error of the posterior
+mean AY , and can be written as the sum ∥AKµ0 −µ0∥2
+1 +n−1 tr(AAT ) of its
+square bias and “variance.” The second term tr(Sn) is deterministic. Under
+Assumption 3.1 the three quantities can be expressed in the coeﬃcients
+relative to the eigenbasis (ei) as
+∥AKµ0 −µ0∥2
+1 =
+X
+i
+µ2
+0,i
+(1 + nλiκ2
+i )2 ≍
+X
+i
+µ2
+0,i
+(1 + nτ 2ni−1−2α−2p)2 ,
+(7.1)
+1
+n tr(AAT ) =
+X
+i
+nλ2
+i κ2
+i
+(1 + nλiκ2
+i )2 ≍
+X
+i
+nτ 4
+ni−2−4α−2p
+(1 + nτ 2ni−1−2α−2p)2 ,
+(7.2)
+tr(Sn) =
+X
+i
+λi
+1 + nλiκ2
+i
+≍
+X
+i
+τ 2
+ni−1−2α
+1 + nτ 2ni−1−2α−2p .
+(7.3)
+By Lemma 8.1 (applied with q = β, t = 0, u = 1 + 2α + 2p, v = 2 and
+N = nτ 2
+n), the ﬁrst can be bounded by ∥µ0∥2
+β(nτ 2
+n)−(2β)/(1+2α+2p)∧2, which
+accounts for the ﬁrst term in the deﬁnition of εn. By Lemma 8.2 [applied
+with S(i) = 1, q = −1/2, t = 2 + 4α + 2p, u = 1 + 2α + 2p, v = 2, and
+N = nτ 2
+n], and again Lemma 8.2 [applied with S(i) = 1, q = −1/2, t = 1+2α,
+u = 1 + 2α + 2p, v = 1 and N = nτ 2
+n], both the second and third expressions
+are of the order the square of the second term in the deﬁnition of εn.
+The consequences (i) and (ii) follow by veriﬁcation after substitution of τn
+as given. To prove consequence (iii), we note that the two terms in the
+deﬁnition of εn are decreasing and increasing in τn, respectively. Therefore,
+the maximum of these two terms is minimized with respect to τn by equating
+the two terms. This minimum (assumed at τn = n−(1+α+2p)/(3+4α+6p)) is
+much bigger than n−β/(1+2β+2p) if β > 1 + 2α + 2p.
+7.2. Proof of Theorem 5.1.
+By Proposition 3.2 the posterior distribution
+is N(LAY,s2
+n), and, hence, similarly as in the proof of Theorem 4.1, it suﬃces
+to show that
+Eµ0|LAY −Lµ0|2 + s2
+n = |LAKµ0 −Lµ0|2 + 1
+n∥LA∥2
+1 + s2
+n
+is bounded above by a multiple of ε2
+n. Under Assumption 3.1 the expressions
+on the right can be written
+LAKµ0 −Lµ0 = −
+X
+i
+liµ0,i
+1 + nλiκ2
+i
+≲
+X
+i
+|liµ0,i|
+1 + nτ 2ni−1−2α−2p ,
+(7.4)
+
+PAGE 22
+22
+B. T. KNAPIK, A. W. VAN DER VAART AND J. H. VAN ZANTEN
+t2
+n := 1
+n∥LA∥2
+1 =
+X
+i
+l2
+i nλ2
+i κ2
+i
+(1 + nλiκ2
+i )2
+(7.5)
+≍nτ 4
+n
+X
+i
+l2
+i i−2−4α−2p
+(1 + nτ 2ni−1−2α−2p)2 ,
+s2
+n =
+X
+i
+l2
+i λi
+1 + nλiκ2
+i
+≍τ 2
+n
+X
+i
+l2
+i i−1−2α
+1 + nτ 2ni−1−2α−2p .
+(7.6)
+By the Cauchy–Schwarz inequality the square of the bias (7.4) satisﬁes
+|LAKµ0 −Lµ0|2 ≲∥µ0∥2
+β
+X
+i
+l2
+i i−2β
+(1 + nτ 2ni−1−2α−2p)2 .
+(7.7)
+By Lemma 8.1 (applied with q = q,t = 2β,u = 1 + 2α + 2p,v = 2 and N =
+nτ 2
+n) the right-hand side of this display can be further bounded by ∥µ0∥2
+β∥l∥2
+q
+times the square of the ﬁrst term in the sum of two terms that deﬁnes εn.
+By Lemma 8.1 (applied with q = q,t = 2+4α+2p,u = 1+2α+2p,v = 2 and
+N = nτ 2
+n) and again Lemma 8.1 (applied with q = q,t = 1+ 2α,u = 1+ 2α +
+2p,v = 1 and N = nτ 2
+n), the right-hand sides of (7.5) and (7.6) are bounded
+above by ∥l∥2
+q times the square of the second term in the deﬁnition of εn.
+Consequences (i)–(iv) follow by substitution, and, in the case of (iii),
+optimization over τn.
+7.3. Proof of Theorem 5.2.
+This follows the same lines as the proof of
+Theorem 5.1, except that we use Lemma 8.2 (with q =q,t=2β, u=1+2α+2p,
+v =2 and N =nτ 2
+n) and Lemma 8.2 (with q =q,t=2+4α+2p,u=1+2α+2p,
+v = 2 and N = nτ 2
+n) and again Lemma 8.2 (with q = q,t = 1 + 2α,u =
+1 + 2α + 2p, v = 1 and N = nτ 2
+n) to bound the three terms (7.5)–(7.7).
+7.4. Proof of Theorem 4.2.
+Because the posterior distribution is N(AY,
+Sn), by Proposition 3.1, the radius rn,γ in (4.3) satisﬁes P(Un < r2
+n,γ) = 1−γ,
+for Un a random variable distributed as the square norm of an N(0,Sn)-
+variable. Under (1.1) the variable AY is N(AKµ0,n−1AAT )-distributed,
+and, thus, the coverage (4.4) can be written as
+P(∥Wn + AKµ0 −µ0∥1 ≤rn,γ)
+(7.8)
+for Wn possessing a N(0,n−1AAT )-distribution. For ease of notation let
+Vn = ∥Wn∥2
+1.
+The variables Un and Vn can be represented as Un = P
+i si,nZ2
+i and Vn =
+P
+i ti,nZ2
+i , for Z1,Z2,... independent standard normal variables, and si,n
+and ti,n the eigenvalues of Sn and n−1AAT , respectively, which satisfy
+si,n =
+λi
+1 + nλiκ2
+i
+≍
+τ 2
+ni−2α−1
+1 + nτ 2ni−2α−2p−1 ,
+
+PAGE 23
+BAYESIAN INVERSE PROBLEMS WITH GAUSSIAN PRIORS
+23
+ti,n =
+nλ2
+i κ2
+i
+(1 + nλiκ2
+i )2 ≍
+nτ 4
+ni−4α−2p−2
+(1 + nτ 2ni−2α−2p−1)2 ,
+si,n −ti,n =
+λi
+(1 + nλiκ2
+i )2 ≍
+τ 2
+ni−2α−1
+(1 + nτ 2ni−2α−2p−1)2 .
+Therefore, by Lemma 8.2 (applied with S ≡1 and q = −1/2; always the ﬁrst
+case),
+EUn =
+X
+i
+si,n ≍τ 2
+n(nτ 2
+n)−2α/(1+2α+2p),
+EVn =
+X
+i
+ti,n ≍τ 2
+n(nτ 2
+n)−2α/(1+2α+2p),
+E(Un −Vn) =
+X
+i
+(si,n −ti,n) ≍τ 2
+n(nτ 2
+n)−2α/(1+2α+2p),
+varUn = 2
+X
+i
+s2
+i,n ≍τ 4
+n(nτ 2
+n)−(1+4α)/(1+2α+2p),
+varVn = 2
+X
+i
+t2
+i,n ≍τ 4
+n(nτ 2
+n)−(1+4α)/(1+2α+2p).
+We conclude that the standard deviations of Un and Vn are negligible rela-
+tive to their means, and also relative to the diﬀerence E(Un −Vn) of their
+means. Because Un ≥Vn, we conclude that the distributions of Un and Vn
+are asymptotically completely separated: P(Vn ≤vn ≤Un) →1 for some vn
+[e.g., vn = E(Un + Vn)/2]. The numbers r2
+n,γ are 1 −γ-quantiles of Un, and,
+hence, P(Vn ≤r2
+n,γ(1 + o(1))) →1. Furthermore, it follows that
+r2
+n,γ ≍τ 2
+n(nτ 2
+n)−2α/(1+2α+2p) ≍EUn ≍EVn.
+The square norm of the bias AKµ0 −µ0 is given in (7.1), where it was noted
+that
+Bn :=
+sup
+∥µ0∥β≲1
+∥AKµ0 −µ0∥1 ≍(nτ 2
+n)−β/(1+2α+2p)∧1.
+The bias Bn is decreasing in τn, whereas EUn and varUn are increasing.
+The scaling rate ˜τn ≍n(α−˜β)/(1+2˜β+2p) balances the square bias B2
+n with the
+variance EVn of the posterior mean, and hence with r2
+n,γ.
+Case (i). In this case Bn ≪rn,γ. Hence, P(∥Wn + AKµ0 −µ0∥1 ≤rn,γ) ≥
+P(∥Wn∥1 ≤rn,γ −Bn) = P(Vn ≤r2
+n,γ(1 + o(1))) →1, uniformly in the set
+of µ0 in the supremum deﬁning Bn.
+Case (iii). In this case Bn ≫rn,γ. Hence, P(∥Wn +AKµn
+0 −µn
+0∥1 ≤rn,γ) ≤
+P(∥Wn∥1 ≥Bn −rn,γ) →0 for any sequence µn
+0 (nearly) attaining the supre-
+mum in the deﬁnition of Bn. If τn ≡1, then Bn and rn,γ are both powers
+
+PAGE 24
+24
+B. T. KNAPIK, A. W. VAN DER VAART AND J. H. VAN ZANTEN
+of 1/n and, hence, Bn ≫rn,γ implies that Bn ≳rn,γnδ, for some δ > 0. The
+preceding argument then applies for a ﬁxed µ0 of the form µ0,i ≍i−1/2−β−ε,
+for small ε > 0, that gives a bias that is much closer than nδ to Bn.
+Case (ii). In this case Bn ≍rn,γ. If β < 1 + 2α + 2p, then by the second
+assertion (ﬁrst case) of Lemma 8.1 the bias ∥AKµ0 −µ0∥1 at a ﬁxed µ0 is
+of strictly smaller order than the supremum Bn. The argument of (i) shows
+that the asymptotic coverage then tends to 1.
+Finally, we prove the existence of a sequence µn
+0 along which the coverage
+is a given c ∈[0,1). The coverage (7.8) with µ0 replaced by µn
+0 tends to c if,
+for bn = AKµn
+0 −µn
+0 and zc a standard normal quantile,
+∥Wn + bn∥2
+1 −E∥Wn + bn∥2
+1
+sd∥Wn + bn∥2
+1
+⇝N(0,1),
+(7.9)
+r2
+n,γ −E∥Wn + bn∥2
+1
+sd∥Wn + bn∥2
+1
+→zc.
+(7.10)
+Because Wn is mean-zero Gaussian, we have E∥Wn +bn∥2
+1 = E∥Wn∥2
+1 +∥bn∥2
+1
+and var∥Wn + bn∥2
+1 = var∥Wn∥2
+1 + 4var⟨Wn,bn⟩1. Here ∥Wn∥2
+1 = Vn and the
+distribution of ⟨Wn,bn⟩1 is zero-mean Gaussian with variance ⟨bn,n−1AAT bn⟩1.
+With ti,n the eigenvalues of n−1AAT , display (7.10) can be translated in the
+coeﬃcients (bn,i) of bn relative to the eigenbasis, as
+r2
+n,γ −EVn −P
+i b2
+n,i
+q
+varVn + 4P
+i ti,nb2
+n,i
+→zc.
+(7.11)
+We choose (bn,i) diﬀerently in the cases that β ≤1 + 2α + 2p and β ≥1 +
+2α + 2p, respectively. In both cases the sequence has exactly one nonzero
+coordinate. We denote this coordinate by bn,in, and set, for numbers dn to
+be determined,
+b2
+n,in = r2
+n,γ −EVn −dn sdVn.
+Because r2
+n,γ, EVn and r2
+n,γ −EVn are of the same order of magnitude,
+and sdVn is of strictly smaller order, for bounded or slowly diverging dn the
+right-hand side of the preceding display is equivalent to (r2
+n,γ −EVn)(1 +
+o(1)). Consequently, the left-hand side of (7.11) is equivalent to
+dn sdVn
+q
+varVn + 4tin,n(r2n,γ −EVn)(1 + o(1))
+.
+The remainder of the argument is diﬀerent in the two cases.
+Case β ≤1 + 2α + 2p. We choose in ≍(nτ 2
+n)1/(1+2α+2p). It can be veri-
+ﬁed that tin,n(r2
+n,γ −EVn)/varVn ≍1. Therefore, for c ∈[0,1], there exists
+a bounded or slowly diverging sequence dn such that the preceding display
+tends to zc.
+
+PAGE 25
+BAYESIAN INVERSE PROBLEMS WITH GAUSSIAN PRIORS
+25
+The bias bn results from a parameter µn
+0 such that bn,i = (1+nλiκ2
+i )−1(µn
+0)i,
+for every i. Thus, µn
+0 also has exactly one nonzero coordinate, and this is
+proportional to the corresponding coordinate of bn, by the deﬁnition of in.
+It follows that
+i2β
+n (µn
+0)2
+in ≍i2β
+n b2
+n,in ≲i2β
+n (r2
+n,γ −EVn) ≍1
+by the deﬁnition of τn. It follows that ∥µn
+0∥β ≲1.
+Case β ≥1 + 2α + 2p. We choose in = 1. In this case τn →0 and it can be
+veriﬁed that tin,n(r2
+n,γ −EVn)/varVn →0. Also,
+(µn
+0)2
+1 ≍(1 + nτ 2
+n)2b2
+n,1 ≲(1 + nτ 2
+n)2EVn.
+This is O(1), because τn is chosen so that EVn is of the same order as the
+square bias B2
+n, which is (nτ 2
+n)−2 in this case.
+It remains to prove the asymptotic normality (7.9). We can write
+∥Wn + bn∥2
+1 −E∥Wn + bn∥2
+1 =
+X
+i
+ti,n(Z2
+i −1) + 2bn,in
+p
+tin,nZin.
+The second term is normal by construction. The ﬁrst term has variance
+2P
+i t2
+i,n. With some eﬀort it can be seen that
+sup
+i
+t2
+i,n
+P
+i t2
+i,n
+→0.
+Therefore, by a slight adaptation of the Lindeberg–Feller theorem (to inﬁnite
+sums), we have that P
+i ti,n(Z2
+i −1) divided by its standard deviation tends
+in distribution to the standard normal distribution. Furthermore, the pre-
+ceding display shows that this conclusion does not change if the inth term
+is left out from the inﬁnite sum. Thus, the two terms converge jointly to
+asymptotically independent standard normal variables, if scaled separately
+by their standard deviations. Then their scaled sum is also asymptotically
+standard normally distributed.
+7.5. Proof of Theorem 5.3.
+Under (1.1) the variable LAY is N(LAKµ0,
+t2
+n)-distributed, for t2
+n given in (7.5). It follows that the coverage can be
+written, with W a standard normal variable,
+P(|Wtn + LAKµ0 −Lµ0| ≤−snzγ/2).
+(7.12)
+The bias LAKµ0 −Lµ0 and posterior spread s2
+n are expressed as a series
+in (7.4) and (7.6).
+In the proof of Theorem 5.2 sn and tn were seen to have the same order
+of magnitude, given by the second term in εn given in (5.1), with a slowly
+varying term δn as given in the theorem,
+sn ≍tn ≍τn(nτ 2
+n)−(1/2+α+q)/(1+2α+2p)δn.
+(7.13)
+
+PAGE 26
+26
+B. T. KNAPIK, A. W. VAN DER VAART AND J. H. VAN ZANTEN
+Furthermore, tn ≤sn for every n, as every term in the inﬁnite series (7.5) is
+nλiκ2
+i /(1 + nλiκ2
+i ) ≤1 times the corresponding term in (7.6).
+Because W is centered, the coverage (7.12) is largest if the bias LAKµ0 −
+Lµ0 is zero. It is then at least 1−γ, because tn ≤sn; remains strictly smaller
+than 1, because tn ≍sn; and tends to exactly 1 −γ iﬀsn/tn →1. By The-
+orem 5.4(i) the latter is impossible if q < p. The analysis for nonzero µ0
+depends strongly on the size of the bias relative to tn.
+The supremum of the bias satisﬁes, for γn the slowly varying term given
+in Theorem 5.2,
+Bn :=
+sup
+∥µ0∥β≲1
+|LAKµ0 −Lµ0| ≍(nτ 2
+n)−((β+q)/(1+2α+2p))∧1γn.
+(7.14)
+That the left-hand side of (7.14) is smaller than the right-hand side was
+already shown in the proof of Theorem 5.2, with the help of Lemma 8.2. That
+this upper bound is sharp follows by considering the sequence µn
+0 deﬁned
+by, with ˜Bn the right-hand side of the preceding display,
+µn
+0,i = 1
+˜Bn
+i−2βli
+1 + nτ 2ni−1−2α−2p .
+[This is the sequence that gives equality in the application of the Cauchy–
+Schwarz inequality to derive (7.7).] Using Lemma 8.2, it can be seen that
+∥µn
+0∥β ≲1 and that the bias at µn
+0 is of the order ˜Bn.
+By Lemma 8.3, the bias at a ﬁxed µ0 ∈Sβ is of strictly smaller order than
+the supremum Bn if β + q < 1 + 2α + 2p.
+The maximal bias Bn is a decreasing function of the scaling parameter τn,
+while the standard deviation tn and root-spread sn increase with τn. The
+scaling rate ˜τn in the statement of the theorem balances Bn with sn ≍tn.
+Case (i). If τn ≫˜τn, then Bn ≪tn. Hence, the bias LAKµ0 −Lµ0 in (7.12)
+is negligible relative to tn ≍sn, uniformly in ∥µ0∥β ≲1, and the coverage is
+asymptotic to P(|Wtn| ≤−snzγ/2), which is asymptotically strictly between
+1 −γ and 1.
+Case (iii). If τn ≪˜τn, then Bn ≫tn. If bn = LAKµn
+0 −Lµn
+0 is the bias at
+a sequence µn
+0 that (nearly) attains the supremum in the deﬁnition of Bn,
+then the coverage at µn
+0 satisﬁes P(|Wtn + bn| ≤−snzγ/2) ≤P(|Wtn| ≥
+bn −sn|zγ/2|) →0, as bn ≍Bn ≫sn. By the same argument, the coverage
+also tends to zero for a ﬁxed µ0 in Sβ with bias bn = LAKµ0 −Lµ0 ≫tn.
+For this we choose µ0,i = i−βiqli ˜S(i) for a slowly varying function such that
+P
+i S2(i) ˜S2(i)/i < ∞. The latter condition ensures that ∥µ0∥β < ∞. By an-
+other application of Lemma 8.2, the bias at µ0 is of the order [cf. (7.4)]
+X
+i
+liµ0,i
+1 + nτ 2ni−1−2α−2p =
+X
+i
+(li ˜S1/2(i))2i−β+q
+1 + nτ 2ni−1−2α−2p ≍(nτ 2
+n)−(β+q)/(1+2α+2p)∧1˜γn,
+
+PAGE 27
+BAYESIAN INVERSE PROBLEMS WITH GAUSSIAN PRIORS
+27
+where, for ρn = (nτ 2
+n)1/(1+2α+2p),
+˜γ2
+n =
+
+
+
+
+
+
+
+
+
+S2(ρn) ˜S(ρn),
+if β + q < 1 + 2α + 2p,
+X
+i≤ρn
+S2(i) ˜S(i)
+i
+,
+if β + q = 1 + 2α + 2p,
+1,
+if β + q > 1 + 2α + 2p.
+Therefore, the bias at µ0 has the same form as the maximal bias Bn; the
+diﬀerence is in the slowly varying factor ˜γn. If τn ≤˜τnn−δ, then Bn ≳tnnδ′
+for some δ′ > 0 and, hence, bn ≍Bn˜γn/γn ≫tn.
+Case (ii). If τn ≍˜τn, then Bn ≍tn. If bn = LAKµn
+0 −Lµn
+0 is again the bias
+at a sequence µn
+0 that nearly assumes the supremum in the deﬁnition of Bn,
+we have that P(|Wtn + dbn| ≤−snzγ/2) ≤P(|Wtn| ≥dbn −sn|zγ/2|) attains
+an arbitrarily small value if d is chosen suﬃciently large. This is the coverage
+at the sequence dµn
+0, which is bounded in Sβ. On the other hand, the bias
+at a ﬁxed µ0 ∈Sβ is of strictly smaller order than the supremum Bn, and,
+hence, the coverage at a ﬁxed µ0 is as in case (i).
+If the scaling rate is ﬁxed to τn ≡1, then it can be checked from (7.13)
+and (7.14) that Bn ≪tn, Bn ≍tn and Bn ≫tn in the three cases α < β−1/2,
+α = β −1/2 and α > β −1/2, respectively. In the ﬁrst and third cases the
+maximal bias and the spread diﬀer by more than a polynomial term nδ; in
+the second case it must be noted that the slowly varying terms γn and δn are
+equal [to S(ρn)]. It follows that the preceding analysis (i), (ii), (iii) extends
+to this situation.
+7.6. Proof of Theorem 5.4.
+(i). The two quantities sn and tn are given as
+series in (7.6) and (7.5). Every term in the series (7.5) is nλiκ2
+i /(1+nλiκ2
+i ) ≤
+1 times the corresponding term in the series (7.6). Therefore, sn/tn →1 if
+and only if the series are determined by the terms for which these numbers
+are “close to” 1, that is, nλiκ2
+i is large. More precisely, we show below that
+sn/tn →1 if and only if, for every c > 0,
+X
+nλiκ2
+i ≤c
+l2
+i λi
+1 + nλiκ2
+i
+= o
+X
+i
+l2
+i λi
+1 + nλiκ2
+i
+
+.
+(7.15)
+If l ∈Sp, then the series on the left is as in Lemma 8.1 with q = p, u =
+1 + 2α + 2p, v = 1, N = nτ 2
+n and t = 1 + 2α. Hence, (t + 2q)/u ≥v, and the
+display follows from the ﬁnal assertion of the lemma. If li = i−q−1/2S(i) for
+a slowly varying function S, then the series is as in Lemma 8.2, with the
+same parameters, and by the last statement of the lemma the display is true
+if and only if (t + 2q)/u ≥v, that is, q ≥p.
+To prove that (7.15) holds iﬀsn/tn →1, write s2
+n = An + Bn, for An
+and Bn the sums over the terms in (7.6) with nλiκ2
+i > c and nλiκ2
+i ≤c,
+
+PAGE 28
+28
+B. T. KNAPIK, A. W. VAN DER VAART AND J. H. VAN ZANTEN
+respectively, and, similarly, t2
+n = Cn + Dn. Then
+Dn
+Bn
+≤
+c
+1 + c ≤Cn
+An
+≤1.
+It follows that
+t2
+n
+s2n
+= Cn + Dn
+An + Bn
+= Cn/An + (Dn/Bn)(Bn/An)
+1 + Bn/An
+≤1 + c/(1 + c)(Bn/An)
+1 + Bn/An
+.
+Because x 7→(1+rx)/(1+x) is strictly decreasing from 1 at x = 0 to r < 1 at
+x = ∞(if 0 < r < 1), the right-hand side of the equation is asymptotically 1
+if and only if Bn/An →0, and otherwise its liminf is strictly smaller. Thus,
+tn/sn →1 implies that Bn/An →0. Second,
+t2
+n
+s2n
+≥
+Cn
+An + Bn
+=
+Cn/An
+1 + Bn/An
+≥c/(1 + c)
+1 + Bn/An
+.
+It follows that liminf t2
+n/s2
+n ≥c/(1 + c) if Bn/An →0. This being true for
+every c > 0 implies that tn/sn →1.
+(i) Second assertion. If l ∈Sp, then we apply Lemma 8.1 with q = p, t =
+1+2α, u = 1+2α+2p, v = 1 and N = nτ 2
+n to see that s2
+n ≍τ 2
+n(nτ 2
+n)−v = n−1.
+Furthermore, the second assertion of the lemma with (uv −t)/2 = p shows
+that ns2
+n →∥l∥2
+p = P
+i l2
+i /κ2
+i in the case that κi = i−p. The proof can be
+extended to cover the slightly more general sequence (κi) in Assumption 3.1.
+If l ∈Rq, then we apply Lemma 8.2 with q = p, t = 1+2α, u = 1+2α+2p,
+v = 1 and N = nτ 2
+n to see that s2
+n ≍n−1 P
+i≤N1/u S2(i)/i.
+(ii) If l ∈Sq, then the bias is bounded above in (7.7), and in the proof
+of Theorem 5.1 its supremum Bn over ∥µ0∥β ≲1 is seen to be bounded by
+(nτ 2
+n)−(β+q)/(1+2α+2p)∧1, the ﬁrst term in the deﬁnition of εn in the statement
+of this theorem. This upper bound is o(n−1/2) iﬀthe stated conditions hold.
+[Here we use that S2(N) ≪P
+i≤N S2(i)/i as N →∞, as noted in the proof
+of Lemma 8.2.]
+The supremum of the bias Bn in the case that l ∈Rq is given in (7.14). It
+was already seen to be o(tn) if τ ≫˜τn in the proof of case (i) of Theorem 5.3.
+If τn = 1, we have that Bn ≍n−(β+q)/(1+2α+2p)∧1γn, for γn the slowly varying
+factor given in the statement of Theorem 5.2. Furthermore, we have sn ≍
+tn ≍n−1/2δn, for δn the slowly varying factor in the same statement. Under
+the present conditions, δn ≍1 if q > p and δ2
+n ≍P
+i≤ρn S2(i)/i if q = p. We
+can now verify that Bn = o(tn) if and only if the conditions as stated hold.
+(iii) The total variation distance between two Gaussian distributions with
+the same expectation and standard deviations sn and tn tends to zero if
+and only if sn/tn →1. Similarly, the total distance between two Gaussians
+with the same standard deviation sn and means µn and νn tends to zero
+
+PAGE 29
+BAYESIAN INVERSE PROBLEMS WITH GAUSSIAN PRIORS
+29
+if and only if µn −νn = o(sn). Therefore, it suﬃces to show that (LAY −
+P
+i Yili/κi)/sn →0 if l ∈Sp. Because the bias was already seen to be o(tn)
+and sn ≍n−1/2 if l ∈Sp, it suﬃces to show that LAZ −P
+i Zili/κi →0.
+Under Assumption 3.1 this diﬀerence is equal to
+X
+i
+κiλiliZi
+n−1 + κ2
+i λi
+−
+X
+i
+Zi
+li
+κi
+=
+X
+i
+Zili
+κi
+
+1
+1 + nκ2
+i λi
+
+.
+If P
+i l2
+i /κ2
+i < ∞, then the variance of this expression is seen to tend to zero
+by dominated convergence.
+The ﬁnal assertion of the theorem follows along the lines of the proof of
+Theorem 5.3.
+8. Technical lemmas.
+Lemma 8.1.
+For any q ≥0, t ≥−2q, u > 0 and v ≥0, as N →∞,
+sup
+∥ξ∥q≤1
+X
+i
+ξ2
+i i−t
+(1 + Ni−u)v ≍N −((t+2q)/u)∧v.
+Moreover, for every ﬁxed ξ ∈Sq, as N →∞,
+N ((t+2q)/u)∧v X
+i
+ξ2
+i i−t
+(1 + Ni−u)v →
+0,
+if (t + 2q)/u < v,
+∥ξ∥2
+(uv−t)/2,
+if (t + 2q)/u ≥v.
+The last assertion remains true if the sum is limited to the terms i ≤cN 1/u,
+for any c > 0.
+Proof.
+In the range i ≤N 1/u we have Ni−u ≤1+Ni−u ≤2Ni−u, while
+1 ≤1 + Ni−u ≤2 in the range i > N 1/u. Thus, deleting either the ﬁrst or
+second term, we obtain
+X
+i≤N1/u
+ξ2
+i i−t
+(1 + Ni−u)v ≍
+X
+i≤N1/u
+ξ2
+i i2q iuv−t−2q
+N v
+≤∥ξ∥2
+qN −((t+2q)/u)∧v,
+X
+i>N1/u
+ξ2
+i i−t
+(1 + Ni−u)v ≍
+X
+i>N1/u
+ξ2
+i i2qi−t−2q ≤N −(t+2q)/u
+X
+i>N1/u
+ξ2
+i i2q.
+The inequality in the ﬁrst line follows by bounding i in iuv−t−2q by N 1/u if
+uv −t −2q > 0, and by 1 otherwise. This proves the upper bound for the
+supremum.
+The lower bound follows by considering the two sequences (ξi) given by
+ξi = i−q for i ∼N 1/u and ξi = 0 otherwise (showing that the supremum is
+bigger than N −(t+2q)/u), and given by ξ1 = 1 and ξi = 0 otherwise (showing
+that the supremum is bigger than N −v).
+
+PAGE 30
+30
+B. T. KNAPIK, A. W. VAN DER VAART AND J. H. VAN ZANTEN
+The second line of the preceding display shows that the sum over the terms
+i > N 1/u is o(N −(t+2q)/u). Furthermore, the ﬁrst line can be multiplied by
+N (t+2q)/u to obtain
+N (t+2q)/u
+X
+i≤N1/u
+ξ2
+i i−t
+(1 + Ni−u)v ≍
+X
+i≤N1/u
+ξ2
+i i2q
+
+i
+N 1/u
+uv−t−2q
+.
+If (t + 2q)/u < v, then uv −t −2q > 0 and this tends to zero by dominated
+convergence. Also,
+N v X
+i
+ξ2
+i i−t
+(1 + Ni−u)v =
+X
+i
+ξ2
+i iuv−t
+
+Ni−u
+1 + Ni−u
+v
+.
+If (t + 2q)/u ≥v, then q ≥(uv −t)/2 and, hence, ξ ∈S(uv−t)/2, and the
+right-hand side tends to P
+i ξ2
+i iuv−t by dominated convergence.
+The ﬁnal assertion needs to be proved only in the case that (t+2q)/u ≥v,
+as in the other case the whole sum tends to 0. The sum over the terms i >
+N 1/u was seen to be always o(N −(t+2q)/u), which is o(N −v) if (t+2q)/u ≥v.
+The ﬁnal assertion for c = 1 follows, because the sum over the terms i ≤N 1/u
+was seen to have the exact order N −v (if ξ ̸= 0). For general c the proof is
+analogous, or follows by scaling N.
+□
+Lemma 8.2.
+For any t,v ≥0, u > 0, and (ξi) such that |ξi| = i−q−1/2S(i)
+for q > −t/2 and a slowly varying function S :(0,∞) →(0,∞), as N →∞,
+X
+i
+ξ2
+i i−t
+(1 + Ni−u)v ≍
+
+
+
+
+
+
+
+
+
+N −(t+2q)/uS2(N 1/u),
+if (t + 2q)/u < v,
+N −v
+X
+i≤N1/u
+S2(i)/i,
+if (t + 2q)/u = v,
+N −v,
+if (t + 2q)/u > v.
+Moreover, for every c > 0, the sum on the left is asymptotically equivalent to
+the same sum restricted to the terms i ≤cN 1/u if and only if (t + 2q)/u ≥v.
+Proof.
+As in the proof of the preceding lemma, we split the inﬁnite
+series in the sum over the terms i ≤N 1/u and i > N 1/u. For the ﬁrst part of
+the series
+X
+i≤N1/u
+ξ2
+i i−t
+(1 + Ni−u)v ≍
+X
+i≤N1/u
+S(i)2 iuv−t−2q−1
+N v
+.
+If uv −t −2q > 0 [i.e., (t + 2q)/u < v], the right-hand side is of the order
+N −(t+2q)/uS2(N 1/u), by Theorem 1(b) on page 281 in [10], while if uv −
+t −2q < 0, it is of the order N −v by Lemma on page 280 in [10]. Finally, if
+uv −t−2q = 0, then the right-hand side is identical to N −v P
+i≤N1/u S2(i)/i.
+
+PAGE 31
+BAYESIAN INVERSE PROBLEMS WITH GAUSSIAN PRIORS
+31
+The other part of the inﬁnite series satisﬁes, by Theorem 1(a) on page 281
+in [10],
+X
+i>N1/u
+ξ2
+i i−t
+(1 + Ni−u)v ≍
+X
+i>N1/u
+S(i)2i−t−2q−1 ≍N −(t+2q)/uS2(N 1/u).
+This is never bigger than the contribution of the ﬁrst part of the sum, and
+of equal order if (t + 2q)/u < v. If (t + 2q)/u > v, then the leading polyno-
+mial term is strictly smaller than N −v. If (t + 2q)/u = v, then the leading
+term is equal to N −v, but the slowly varying part satisﬁes S2(N 1/u) ≪
+P
+i≤N1/u S2(i)/i, by Theorem 1(b) on page 281 in [10]. Therefore, in both
+cases the preceding display is negligible relative to the ﬁrst part of the sum.
+This proves the ﬁnal assertion of the lemma for c = 1. The proof for general
+c > 0 is analogous.
+□
+By the Cauchy–Schwarz inequality, for any µ ∈St/2,
+
+X
+i
+ξiµi
+1 + Ni−u
+
+2
+≤∥µ∥2
+t/2
+X
+i
+ξ2
+i i−t
+(1 + Ni−u)2 .
+The preceding lemma gives the exact order of the right-hand side. The appli-
+cation of the Cauchy–Schwarz inequality is sharp, in that there is equality
+for some µ ∈St/2. However, this µ depends on N. For ﬁxed µ ∈St/2 the
+left-hand side is strictly smaller than the right-hand side.
+Lemma 8.3.
+For any t,u ≥0, µ ∈St/2 and (ξi) such that |ξi| =
+i−q−1/2S(i) for 0 < t + 2q < 2u and a slowly varying function S :(0,∞) →
+(0,∞), as N →∞,
+X
+i
+|ξiµi|
+1 + Ni−u ≪N −(t+2q)/(2u)S(N 1/u).
+Proof.
+We split the series in two parts, and bound the denominator
+1 + Ni−u by Ni−u or 1. By the Cauchy–Schwarz inequality, for any r > 0,
+
+X
+i≤N1/u
+|ξiµi|
+Ni−u
+
+2
+≤1
+N 2
+X
+i≤N1/u
+S2(i)ir
+i
+X
+i≤N1/u
+µ2
+i i2u−2q−r
+≍1
+N 2 S2(N 1/u)N r/u
+×
+X
+i≤N1/u
+µ2
+i it
+
+i
+N 1/u
+2u−2q−r−t
+N (2u−2q−r−t)/u,
+
+X
+i>N1/u
+|ξiµi|
+1
+
+2
+≤
+X
+i>N1/u
+S2(i)
+i
+i−2q
+X
+i>N1/u
+µ2
+i ≍S2(N 1/u)N −2q/u
+X
+i>N1/u
+µ2
+i .
+
+PAGE 32
+32
+B. T. KNAPIK, A. W. VAN DER VAART AND J. H. VAN ZANTEN
+The terms in the remaining series in the right-hand side of the ﬁrst inequality
+are bounded by µ2
+i it and tend to zero pointwise as N →∞if 2u−2q−r−t >
+0. If t + 2q < 2u, then there exists r > 0 such that the latter is true, and for
+this r the sum tends to zero by the dominated convergence theorem. The
+other terms collect to N −(t+2q)/(u)S2(N 1/u). The sum in the right-hand side
+of the second inequality is bounded by P
+i>N1/u µ2
+i itN −t/u = o(N −t/u).
+□
+REFERENCES
+[1] Bertero, M. (1986). Regularization methods for linear inverse problems. In In-
+verse Problems (Montecatini Terme, 1986). Lecture Notes in Math. 1225 52–112.
+Springer, Berlin. MR0885511
+[2] Bickel, P. J., Klaassen, C. A. J., Ritov, Y. and Wellner, J. A. (1993). Eﬃ-
+cient and Adaptive Estimation for Semiparametric Models. Johns Hopkins Univ.
+Press, Baltimore, MD. MR1245941
+[3] Bissantz, N., Hohage, T., Munk, A. and Ruymgaart, F. (2007). Convergence
+rates of general regularization methods for statistical inverse problems and ap-
+plications. SIAM J. Numer. Anal. 45 2610–2636 (electronic). MR2361904
+[4] Bontemps, D. (2011). Bernstein–von Mises theorems for Gaussian regression with
+increasing number of regressors. Ann. Statist. 39 2557–2584.
+[5] Castillo,
+I.
+(2011).
+A
+semiparametric
+Bernstein–von
+Mises
+theorem
+for
+Gaussian
+process
+priors.
+Probab.
+Theory
+Related
+Fields.
+To
+appear.
+DOI:10.1007/s00440-010-0316-5.
+[6] Cavalier, L. (2008). Nonparametric statistical inverse problems. Inverse Problems
+24 034004, 19. MR2421941
+[7] Cox, D. D. (1993). An analysis of Bayesian inference for nonparametric regression.
+Ann. Statist. 21 903–923. MR1232525
+[8] Donoho, D. L. (1994). Statistical estimation and optimal recovery. Ann. Statist. 22
+238–270. MR1272082
+[9] Donoho, D. L. and Low, M. G. (1992). Renormalization exponents and optimal
+pointwise rates of convergence. Ann. Statist. 20 944–970. MR1165601
+[10] Feller, W. (1971). An Introduction to Probability Theory and Its Applications. Vol.
+II, 2nd ed. Wiley, New York. MR0270403
+[11] Florens, J. and Simoni, A. (2011). Regularizing priors for linear inverse problems.
+Preprint.
+[12] Freedman,
+D.
+(1999).
+On
+the
+Bernstein–von
+Mises
+theorem
+with
+inﬁnite-
+dimensional parameters. Ann. Statist. 27 1119–1140. MR1740119
+[13] Ghosal, S. (1999). Asymptotic normality of posterior distributions in high-
+dimensional linear models. Bernoulli 5 315–331. MR1681701
+[14] Ghosal, S. (2000). Asymptotic normality of posterior distributions for exponential
+families when the number of parameters tends to inﬁnity. J. Multivariate Anal.
+74 49–68. MR1790613
+[15] Ghosal, S., Ghosh, J. K. and van der Vaart, A. W. (2000). Convergence rates
+of posterior distributions. Ann. Statist. 28 500–531. MR1790007
+[16] Goldenshluger, A. and Pereverzev, S. V. (2003). On adaptive inverse estimation
+of linear functionals in Hilbert scales. Bernoulli 9 783–807. MR2047686
+[17] Halmos, P. R. (1967). A Hilbert Space Problem Book. Van Nostrand, Princeton.
+MR0208368
+[18] Leahu, H. (2011). On the Bernstein–von Mises phenomenon in the Gaussian white
+noise model. Electron. J. Stat. 5 373–404.
+
+PAGE 33
+BAYESIAN INVERSE PROBLEMS WITH GAUSSIAN PRIORS
+33
+[19] Mair, B. A. and Ruymgaart, F. H. (1996). Statistical inverse estimation in Hilbert
+scales. SIAM J. Appl. Math. 56 1424–1444. MR1409127
+[20] Mandelbaum, A. (1984). Linear estimators and measurable linear transformations
+on a Hilbert space. Z. Wahrsch. Verw. Gebiete 65 385–397. MR0731228
+[21] Math´e, P. and Pereverzev, S. V. (2006). Regularization of some linear ill-posed
+problems with discretized random noisy data. Math. Comp. 75 1913–1929 (elec-
+tronic). MR2240642
+[22] Nashed, M. Z. and Wahba, G. (1974). Generalized inverses in reproducing kernel
+spaces: An approach to regularization of linear operator equations. SIAM J.
+Math. Anal. 5 974–987. MR0358405
+[23] Rudin, W. (1991). Functional Analysis, 2nd ed. McGraw-Hill, New York. MR1157815
+[24] Ruymgaart, F. H. (1993). A uniﬁed approach to inversion problems in statistics.
+Math. Methods Statist. 2 130–146. MR1257980
+[25] Skorohod, A. V. (1974). Integration in Hilbert Space. Ergebnisse der Mathematik
+und Ihrer Grenzgebiete 79. Springer, New York. Translated from the Russian by
+Kenneth Wickwire. MR0466482
+[26] Stuart, A. M. (2010). Inverse problems: A Bayesian perspective. Acta Numer. 19
+451–559. MR2652785
+[27] Tikhonov, A. N. and Arsenin, V. Y. (1977). Solutions of Ill-posed Problems.
+V. H. Winston and Sons, Washington, DC. Translated from the Russian, Preface
+by translation editor Fritz John, Scripta Series in Mathematics. MR0455365
+[28] van der Vaart, A. (1991). On diﬀerentiable functionals. Ann. Statist. 19 178–204.
+MR1091845
+[29] van der Vaart, A. and van Zanten, H. (2007). Bayesian inference with rescaled
+Gaussian process priors. Electron. J. Stat. 1 433–448 (electronic). MR2357712
+[30] van der Vaart, A. W. (1988). Statistical Estimation in Large Parameter Spaces.
+CWI Tract 44. Stichting Mathematisch Centrum Centrum voor Wiskunde en
+Informatica, Amsterdam. MR0927725
+[31] van der Vaart, A. W. (1998). Asymptotic Statistics. Cambridge Series in Sta-
+tistical and Probabilistic Mathematics 3. Cambridge Univ. Press, Cambridge.
+MR1652247
+[32] van der Vaart, A. W. and van Zanten, J. H. (2008). Reproducing kernel Hilbert
+spaces of Gaussian priors. In Pushing the Limits of Contemporary Statistics:
+Contributions in Honor of Jayanta K. Ghosh. Inst. Math. Stat. Collect. 3 200–
+222. IMS, Beachwood, OH. MR2459226
+[33] van Rooij, A. C. M. and Ruymgaart, F. H. (2001). Abstract inverse estimation
+with application to deconvolution on locally compact abelian groups. Ann. Inst.
+Statist. Math. 53 781–798. MR1880812
+B. T. Knapik
+A. W. van der Vaart
+Department of Mathematics
+Faculty of Sciences
+VU University Amsterdam
+De Boelelaan 1081a
+1081 HV Amsterdam
+The Netherlands
+E-mail: b.t.knapik@vu.nl
+aad@cs.vu.nl
+J. H. van Zanten
+Department of Mathematics
+Eindhoven University of Technology
+Eindhoven
+The Netherlands
+E-mail: j.h.v.zanten@tue.nl

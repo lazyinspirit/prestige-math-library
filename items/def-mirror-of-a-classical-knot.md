@@ -11,6 +11,11 @@ justified_by: []
 provenance:
   statement: literature-derived
   proof: not-applicable
+verification:
+  judge:
+    model: "gpt-6-luna"
+    verdict: pass
+    date: 2026-10-22
 sources:
   references:
     - title: "P. B. Kronheimer and T. S. Mrowka, Khovanov homology is an unknot-detector, §§1.1 and 8.6–8.7"

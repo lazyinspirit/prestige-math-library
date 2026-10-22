@@ -1,0 +1,158 @@
+{
+  "run": "inverse-problems-knot-theory-all-109-2026-10-19",
+  "phase": "initial",
+  "round": 1,
+  "unit": "54",
+  "input_sha256": "c872603b0f7c95c42125928ec1ced19e672caec5508e4ce625685b74e981d23d",
+  "decisions": [
+    {
+      "id": "ex-ip-eig-repeated-correlated-noise",
+      "model": "gpt-6-luna",
+      "context_sha256": "9538879f4a03bbf6c45227d6d2da31faab24ad68e62fcd7621d30de0dbb35a3b",
+      "outcome": "confirmed_fatal",
+      "defect_type": "logic",
+      "reason": "The original Example gives only a noise covariance, while F1 and step 2.1 require an additive independent Gaussian experiment. At rho=0, take independent standard normals T,Z1,Z2, theta=T, eta=(T/2+sqrt(3)Z1/2,Z2), and Y=(T,T)+eta. Although Cov(eta)=I2, the effective independent-noise model has loading (3/2,1) and residual covariance diag(3/4,1), so EIG=log(5)/2, contradicting log(3)/2. Added the full independent Gaussian model and corrected F1; the intended determinant formula is preserved.",
+      "uncertain": false,
+      "source_urls": [],
+      "familiar": true
+    },
+    {
+      "id": "ex-ip-eig-singular-prior-support",
+      "model": "gpt-6-luna",
+      "context_sha256": "e507f5d2623af2527e291374dd79ae8089eadf08e3e8fd9a9ef7161f27cae0c2",
+      "outcome": "confirmed_fatal",
+      "defect_type": "logic",
+      "reason": "The Example and F2 omit noise independence, making the asserted EIGs false for admissible parameter-dependent unit Gaussian noise. For independent standard normals T,Z, set theta=(T,0) and eta=T/2+sqrt(3)Z/2. Then Y=A_perp theta+eta has EIG=log(4/3)/2 and Y=A_parallel theta+eta has EIG=log(4)/2, from independent residual variance 3/4 and signal coefficients 1/2 and 3/2. Specified eta~N(0,1) independent of theta and Y=A theta+eta, and repaired F2.",
+      "uncertain": false,
+      "source_urls": [],
+      "familiar": true
+    }
+  ],
+  "reviews": [
+    {
+      "id": "ex-ip-eig-repeated-correlated-noise",
+      "disposition": "repaired",
+      "post_sha256": "e33a8a7ef91ba32b4423af9174d28142ca37dc5ef901e0454ea7a37f55a651f6",
+      "review_context_sha256": "8ddf2dacf4ee61bb4cd5e512a2062f01d17b84c04a8e781b79c97f57b8597c92",
+      "reason": "Checked the complete logdet supplier proof against the repaired additive independent Gaussian model. The noise eigenvalues 1+rho and 1-rho are positive on the stated open interval. Cov(Y) has diagonal 2 and off-diagonal 1+rho, and its determinant ratio is (3+rho)/(1+rho). Substitution gives 7/3 and 3, ordered by strict log monotonicity. AC and singular-prior allowance match the supplier. Corrected the missing punctuation and contract AC use to step 2.1; no new prerequisite or diagram is needed.",
+      "uncertain": false,
+      "source_urls": [],
+      "familiar": true
+    },
+    {
+      "id": "ex-ip-eig-singular-prior-support",
+      "disposition": "repaired",
+      "post_sha256": "01a4d20e05c02ef4e8b7b9657bb72b422422cfc61f17d70081d1301ba45cfb3d",
+      "review_context_sha256": "a9bb5e3f42b26e033d94fbf3e3752e5862a718e9b3af31cb1cb475dce39f8c21",
+      "reason": "Read the complete singular-support supplier argument and checked Ran(diag(1,0)) is the first coordinate axis. The repaired model meets all logdet hypotheses, including independence, positive scalar noise variance and permitted singular C. Direct products A_perp C A_perp^T=0 and A_parallel C A_parallel^T=1 yield 0 and log(2)/2, with strict positivity from log monotonicity. No state covariance inverse or ambient state density is used. Corrected the contract AC use from nonexistent 1.2 to 2.1.",
+      "uncertain": false,
+      "source_urls": [],
+      "familiar": true
+    }
+  ],
+  "created_items": [],
+  "downstream": [],
+  "ledger_updates": [
+    {
+      "ledger": "canonical-defect-ledger",
+      "action": "record-fixed-finding",
+      "id": "ex-ip-eig-repeated-correlated-noise",
+      "severity": "fatal",
+      "defect_type": "logic",
+      "location": "Example; Facts F1; Verification 2.1",
+      "status": "fixed",
+      "reason": "Missing additive independent Gaussian model allowed EIG=log(5)/2 at rho=0 despite the claimed log(3)/2. The Example and Given now specify theta-independent eta~N2(0,Gamma_rho), and F1 states the supplier hypotheses."
+    },
+    {
+      "ledger": "canonical-defect-ledger",
+      "action": "record-fixed-finding",
+      "id": "ex-ip-eig-singular-prior-support",
+      "severity": "fatal",
+      "defect_type": "logic",
+      "location": "Example; Facts F2; Verification 2.1",
+      "status": "fixed",
+      "reason": "Unit Gaussian noise may depend on theta and give positive information even in the null measurement direction. Added the independent additive standard-normal model to Example and Given, and restored independence in the theorem restatement F2."
+    }
+  ],
+  "gate_resolutions": [],
+  "repair_notes": [
+    {
+      "id": "ex-ip-eig-repeated-correlated-noise",
+      "claim": "Independent Gaussian repeated-observation model; EIG=log(1+2/(1+rho))/2 for -1<rho<1.",
+      "evidence_paths": [
+        "items/thm-ip-linear-gaussian-information-gain-logdet.md: Statement and complete Proof",
+        "items/def-ip-expected-information-gain.md: Definition",
+        "items/thm-natural-logarithm-laws.md: Statement"
+      ],
+      "dependencies": [
+        "thm-ip-linear-gaussian-information-gain-logdet",
+        "thm-natural-logarithm-laws",
+        "def-axiom-of-choice"
+      ],
+      "interface_comparison": "Changed Example and fact/Given wording; no original Statement or Definition section exists or changed, so no propagation event under the assigned rule. Searching items/ and library/ found no item consumers; only the unchanged owning examples-page inventory lists this ID.",
+      "metadata": "Updated only this item mirror in batch-54.pages.json and this item contract citations/derivations plus its stale AC step reference, under the shared-write lock. Historical boundary/risk review records are preserved.",
+      "checks": [
+        {
+          "command": "node tools/proof-contract.mjs research/inverse-problems-knot-theory-all-109-2026-10-19-batch-54.proof-contracts.json --strict --items ex-ip-eig-repeated-correlated-noise --json",
+          "exit_code": 0,
+          "result": "ok:true; no errors or warnings"
+        }
+      ],
+      "unresolved_obligations": [],
+      "next_action": "Completed assigned repair; ordinary engine-owned certification and current independent rejudgment remain owed."
+    },
+    {
+      "id": "ex-ip-eig-singular-prior-support",
+      "claim": "Independent standard-normal additive noise; singular prior C=diag(1,0), support first axis, coordinate-design EIGs 0 and log(2)/2.",
+      "evidence_paths": [
+        "items/lem-ip-singular-gaussian-support-and-pseudoinverse.md: Statement and complete Proof",
+        "items/thm-ip-linear-gaussian-information-gain-logdet.md: Statement and complete Proof",
+        "items/thm-natural-logarithm-laws.md: Statement"
+      ],
+      "dependencies": [
+        "lem-ip-singular-gaussian-support-and-pseudoinverse",
+        "thm-ip-linear-gaussian-information-gain-logdet",
+        "thm-natural-logarithm-laws",
+        "def-axiom-of-choice"
+      ],
+      "interface_comparison": "Changed Example and Given/F2; no original Statement or Definition section exists or changed. A literal search of items/ and library/ found no item consumers and only the unchanged owning examples-page placement. No downstream item or maintenance repair is necessary.",
+      "metadata": "Updated only this item statement mirror in batch-54.pages.json and its contract AC step references under the shared-write lock. Regeneration preserved the citation and derivation content; historical risk/boundary reviews were not rewritten.",
+      "checks": [
+        {
+          "command": "node tools/proof-contract.mjs research/inverse-problems-knot-theory-all-109-2026-10-19-batch-54.proof-contracts.json --strict --items ex-ip-eig-singular-prior-support --json",
+          "exit_code": 0,
+          "result": "ok:true; no errors or warnings"
+        }
+      ],
+      "unresolved_obligations": [],
+      "next_action": "Completed assigned repair; ordinary engine-owned certification and current independent rejudgment remain owed."
+    },
+    {
+      "scope": "both assigned examples",
+      "checks": [
+        {
+          "command": "node tools/tsx-run.mjs tools/precheck.mts items/ex-ip-eig-repeated-correlated-noise.md items/ex-ip-eig-singular-prior-support.md --json",
+          "exit_code": 0,
+          "result": "2 checked proofs, 0 failed; both pass."
+        },
+        {
+          "command": "node tools/rendercheck.mjs items/ex-ip-eig-repeated-correlated-noise.md items/ex-ip-eig-singular-prior-support.md --json",
+          "exit_code": 0,
+          "result": "2 checked items; no errors or warnings."
+        },
+        {
+          "command": "node tools/proof-layout.mjs items/ex-ip-eig-repeated-correlated-noise.md items/ex-ip-eig-singular-prior-support.md",
+          "exit_code": 0,
+          "result": "2 items, 6 steps, 0 defects."
+        },
+        {
+          "command": "git diff --check -- items/ex-ip-eig-repeated-correlated-noise.md items/ex-ip-eig-singular-prior-support.md research/inverse-problems-knot-theory-all-109-2026-10-19-batch-54.pages.json research/inverse-problems-knot-theory-all-109-2026-10-19-batch-54.proof-contracts.json",
+          "exit_code": 0,
+          "result": "No whitespace errors."
+        }
+      ],
+      "limitations": "External references remain preserved; no external source was consulted or claimed as read. Mathematics is familiar finite Gaussian probability and matrix algebra. Both items are draft; there is no assigned published-ledger repair. No TikZ/tikzcd occurs or is required. No judge, stamp, certificate, round transition or independent acceptance was written.",
+      "operational_history": "Direct node invocation of precheck.mts failed because Node requires the tsx launcher; the correct scoped launcher passed. An attempted rendercheck --help invocation was stopped with exit 130 before any result; the explicit two-item invocation then passed. These exploratory commands confer no check coverage."
+    }
+  ]
+}

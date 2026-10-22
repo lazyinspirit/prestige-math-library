@@ -54,7 +54,7 @@ $$
 
 [F1] A finite oriented link in $S^3$ is compact and locally contractible; Alexander duality identifies the first homology of its complement with $\mathbb Z^n$, with the positive meridians as coordinate generators. [[def-oriented-link-in-s-three-and-ambient-isotopy]], [[thm-alexander-duality-for-compact-locally-contractible-subsets-of-a-sphere]]
 
-[F2] The open complement of a nonempty smooth link is connected and deformation retracts onto its compact exterior. [[lem-the-complement-of-an-oriented-link-is-a-connected-smooth-three-manifold]]
+[F2] The open complement of a nonempty smooth link is connected. [[lem-the-complement-of-an-oriented-link-is-a-connected-smooth-three-manifold]]
 
 [F3] The positive meridians use the total-linking normalization: each positive component meridian maps to $1$ under the sum of the Alexander-duality component coordinates. [[def-one-variable-alexander-module-of-an-oriented-link]]
 
@@ -64,7 +64,7 @@ $$
 
 **Given:** The data and boundary-torus intersection convention in the Statement. Write $X=S^3\setminus\operatorname{int}N(J)$ for the compact exterior and use $[\mu_1],\ldots,[\mu_n]$ as its meridian-coordinate basis.
 
-1.1 Radial motion in each punctured normal disk gives a deformation retraction from $S^3\setminus J$ to $X$. By [F1], Alexander duality identifies $H_1(S^3\setminus J;\mathbb Z)$ with $\widetilde H^1(J;\mathbb Z)=\bigoplus_iH^1(J_i;\mathbb Z)\cong\mathbb Z^n$. The inclusion of the compact exterior induces the same homology isomorphism by the retraction in [F2]. Thus $H_1(X;\mathbb Z)\cong\mathbb Z^n$. [A1, F1, F2, given, construct]
+1.1 In each chosen tubular neighborhood, normalize the normal-disk radius to one and set $H_t(s,v)=(s,((1-t)+t/|v|)v)$ for $0<|v|\le1$ and $0\le t\le1$. Its radius is $(1-t)|v|+t$, so this homotopy stays off $J$, fixes the disk boundary, and glues to the identity on $X$. It is a strong deformation retraction from $S^3\setminus J$ onto $X$; in particular $X$ is connected by [F2]. By [F1], Alexander duality identifies $H_1(S^3\setminus J;\mathbb Z)$ with $\widetilde H^1(J;\mathbb Z)=\bigoplus_iH^1(J_i;\mathbb Z)\cong\mathbb Z^n$. The locally constructed retraction makes the inclusion of $X$ a homotopy equivalence and hence a homology isomorphism. Thus $H_1(X;\mathbb Z)\cong\mathbb Z^n$. [A1, F1, F2, given, construct]
 
 2.1 The boundary of a small positive normal disk to $J_i$ maps to the $i$-th Alexander-duality coordinate generator: it meets $J_i$ once positively and misses every other component. Hence $[\mu_1],\ldots,[\mu_n]$ are the coordinate basis, with the positive orientation normalized as in [F3]. The $i$-th coordinate of $[\lambda_i]$ is zero by its zero self-linking convention, and for $j\ne i$ its $j$-th coordinate is the defined linking number $\operatorname{lk}_{S^3}(J_i,J_j)$. Therefore $[\delta_i]=[\lambda_i+f_i\mu_i]=\sum_jA_{ij}[\mu_j]$. [F3, step 1.1, given, construct]
 

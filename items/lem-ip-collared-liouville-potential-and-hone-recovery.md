@@ -8,6 +8,10 @@ pipeline_run: inverse-problems-knot-theory-all-109-2026-10-19
 deps:
   - def-countable-choice
   - thm-plancherel
+  - thm-fourier-transform-is-a-topological-automorphism-of-tempered-distributions
+  - thm-fourier-transform-agrees-with-l-one-and-plancherel-transforms
+  - thm-fourier-differentiation-and-multiplication-identities-on-tempered-distributions
+  - thm-tonelli-theorem-for-sigma-finite-product-spaces
   - lem-ip-collared-sobolev-besov-source-functional-cutoff
   - lem-compact-support-zero-extension-in-wkp
   - def-mollifier-family-generated-by-a-unit-mass-smooth-bump
@@ -46,9 +50,9 @@ with the same dependence. In particular the right side may be replaced by $C\|q_
 
 **Given:** The choice assumption and collared positive conductivities, Sobolev exponent, and uniform norm bounds in the Statement.
 
-[F1] Whole-space Fourier transformation is unitary and gives the weighted Sobolev pairing. [[thm-plancherel]]
+[F1] Whole-space Fourier transformation is unitary on $L^2$. [[thm-plancherel]] Its distributional extension, agreement with Plancherel and derivative rule are given by [[thm-fourier-transform-is-a-topological-automorphism-of-tempered-distributions]], [[thm-fourier-transform-agrees-with-l-one-and-plancherel-transforms]], and [[thm-fourier-differentiation-and-multiplication-identities-on-tempered-distributions]]. We use their angular-frequency form: $\widehat f(\xi)=(2\pi)^{-3/2}(\mathcal F_{2\pi}f)(\xi/(2\pi))$, so $\widehat{D^\alpha f}=(i\xi)^\alpha\widehat f$. Weighted Sobolev pairings then follow by Fourier Cauchy–Schwarz.
 
-[F2] The intrinsic top-order difference integral is a constant multiple of the Fourier fractional derivative norm; collared zero extension and whole-space Fourier norms obey the stated comparisons. [[lem-ip-collared-sobolev-besov-source-functional-cutoff]]
+[F2] The intrinsic and Fourier norm conventions are specified in [[lem-ip-collared-sobolev-besov-source-functional-cutoff]]. The fractional norm identity needed here is proved in step 2.1 below, rather than imported as a conclusion of that lemma.
 
 [F3] A Sobolev function supported in a compact subset of an open set extends by zero with all weak derivatives through the stated integer order. [[lem-compact-support-zero-extension-in-wkp]]
 
@@ -56,13 +60,15 @@ with the same dependence. In particular the right side may be replaced by $C\|q_
 
 [F5] Mollification commutes with weak derivatives on the whole space, and approximate identities converge in finite $L^2$. [[lem-mollification-commutes-with-weak-derivatives-in-the-interior]], [[thm-l-one-approximate-identities-converge-in-l-p]]
 
+[F6] Tonelli's theorem interchanges the nonnegative measurable fractional-difference integrals below. [[thm-tonelli-theorem-for-sigma-finite-product-spaces]]
+
 [A1] Countable Choice is used at the Fourier interfaces. [[def-countable-choice]]
 
 ## Proof
 
 1.1 Weighted Fourier Cauchy–Schwarz gives $\|a\|_\infty+\|\nabla a\|_\infty\le C_s\|a\|_{H^s}$ because $\int(1+|\xi|^2)^{-s}(1+|\xi|)^2d\xi<\infty$ for $s>5/2$. The Fourier integrals for $a$ and its first derivatives converge absolutely and are continuous by dominated convergence, so these bounds hold for a $C^1$ representative. We shall also use $\|fg\|_{H^b}\le C\|f\|_{H^r}\|g\|_{H^b}$ when $r>3/2$ and $0\le b\le r$. Here is a direct justification: split Fourier space into dyadic annuli, use $\|f_j\|_\infty\le C2^{3j/2}\|f_j\|_2$ for low-high products, and $\|Q_j(f_kg_k)\|_2\le C2^{3j/2}\|f_k\|_2\|g_k\|_2$ when comparable high shells $k$ produce a shell $j\le k+C$. The low-high sum is bounded by $\|f\|_{H^r}\|g\|_{H^b}$ since $r>3/2$. For high-low products, sum the low $g$ blocks with bound $C2^{j(3/2-b)}\|g\|_{H^b}$ if $b<3/2$, a square-root logarithmic factor if $b=3/2$, or $C\|g\|_{H^b}$ if $b>3/2$; the excess $r-3/2>0$ makes the resulting geometric sum converge. For high-high products, weighted summation over $k\ge j-C$ has geometric kernel $2^{-(k-j)(r+b)}$ and excess factor $2^{j(3/2-r)}$; Cauchy–Schwarz for the input shell sequences completes the bound. The estimates are first proved for Fourier truncations and then passed to their norm limits. [A1, F1, given, algebra]
 
-2.1 For $0<\theta<1$, multiplication by a bounded $C^1$ function $h$ is bounded on $H^\theta$. Indeed $|h(x)f(x)-h(y)f(y)|^2\le2\|h\|_\infty^2|f(x)-f(y)|^2+2|f(y)|^2|h(x)-h(y)|^2$. In the last term use $|h(x)-h(y)|\le\min\{2\|h\|_\infty,\|\nabla h\|_\infty|x-y|\}$; integrating the kernel $|x-y|^{-3-2\theta}$ near and far from the diagonal gives a finite constant times $\|f\|_2^2$. Apply [F2] to get the Fourier Sobolev bound. For $\theta=0$ this is just the $L^2$ multiplier bound. [F1, F2, step 1.1, algebra]
+2.1 For $f\in L^2$ and $0<\theta<1$, Plancherel and [F6] give $\int_{\mathbb R^3}\int_{\mathbb R^3}|f(x+h)-f(x)|^2|h|^{-3-2\theta}dx\,dh=\int_{\mathbb R^3}|\widehat f(\xi)|^2\int_{\mathbb R^3}|e^{i\xi\cdot h}-1|^2|h|^{-3-2\theta}dh\,d\xi$. The translation formula follows by substitution on Schwartz functions and then $L^2$ density. Rotation and dilation make the inner integral $c_\theta|\xi|^{2\theta}$, where $0<c_\theta<\infty$ because $|e^{iu}-1|\le\min\{2,|u|\}$. Adding $\|f\|_2^2$ proves equivalence with the Fourier $H^\theta$ norm. Applying this identity to the weak derivatives of order $k$ and using [F1] proves the analogous whole-space intrinsic/Fourier comparison at order $k+\theta$; at integer orders use the derivative rule alone. For $0<\theta<1$, multiplication by a bounded $C^1$ function $h$ is bounded on $H^\theta$. Indeed $|h(x)f(x)-h(y)f(y)|^2\le2\|h\|_\infty^2|f(x)-f(y)|^2+2|f(y)|^2|h(x)-h(y)|^2$. In the last term use $|h(x)-h(y)|\le\min\{2\|h\|_\infty,\|\nabla h\|_\infty|x-y|\}$; integrating the kernel $|x-y|^{-3-2\theta}$ near and far from the diagonal gives a finite constant times $\|f\|_2^2$. Apply the identity just proved to get the Fourier Sobolev bound. For $\theta=0$ this is just the $L^2$ multiplier bound. [F1, F2, F6, step 1.1, algebra]
 
 3.1 If $F$ is any smooth scalar function on a neighborhood of $[m,M]$, then $F(1+a)-F(1)$ belongs to $H^s$ with a uniform bound over this class. To verify the fractional highest derivative directly, write $s=k+\theta$ with $k=2$ or $3$ and $0\le\theta<1$. For $k=2$, the chain rule gives terms $F'(\sigma)D^2a$ and $F''(\sigma)Da\,Da$. The first term is in $H^\theta$ by step 2.1, since $F'(\sigma)$ is bounded $C^1$ uniformly; for the second, $Da\in H^{s-1}$ with $s-1>3/2$, so the algebra bound in step 1.1 and then step 2.1 apply. For $k=3$, the terms are $F'(\sigma)D^3a$, $F''(\sigma)D^2a\,Da$, and $F'''(\sigma)(Da)^3$. Here $Da\in H^{s-1}$ is a multiplier on $H^{s-2}$ by step 1.1, so $D^2a\,Da\in H^{s-2}\subset H^\theta$; the remaining products follow from the same algebra and step 2.1. Lower derivatives have the corresponding easier estimates; the function itself has an $L^2$ bound by the mean value theorem and vanishes wherever $a=0$. These calculations may first be made for smooth approximations: convolve $a$ with a nonnegative mollifier, which preserves $m\le1+a\le M$ and uniform $H^s$ and $C^1$ bounds, and then use convergence in lower Sobolev orders and weak compactness in the Hilbert $H^s$ space to identify the asserted weak derivatives and bound. A bounded sequence in this separable Fourier Hilbert space has a weakly convergent subsequence by diagonal convergence of its countable Fourier coordinates and the norm bound; hence only Countable Choice is used. [F1, F2, step 1.1, step 2.1, algebra]
 

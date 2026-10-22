@@ -24,6 +24,11 @@ provenance:
   statement: literature-derived
   proof: ai-altered
 axiom_use: Countable choice is used only for the Borel H(delta)-valued white-noise realization through the cited supplier lemma. The coefficient laws, mean-square reconstruction and cylinder-experiment equivalence use no choice principle once the process and indexed basis are supplied; the reconstruction indices are least natural numbers.
+verification:
+  judge:
+    model: "gpt-6-luna"
+    verdict: pass
+    date: 2026-10-22
 sources:
   references:
     - title: "Kretschmann and Werner, Maximum a posteriori testing in statistical inverse problems, §1.1, PDF pp. 1–2"

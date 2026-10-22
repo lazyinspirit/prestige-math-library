@@ -25,6 +25,11 @@ proof_strategy: direct
 provenance:
   statement: ai-altered
   proof: ai-altered
+verification:
+  judge:
+    model: "gpt-6-luna"
+    verdict: pass
+    date: 2026-10-22
 sources:
   references:
     - title: "The Stacks Project, Section 15.8 (Tag 07Z6), Fitting ideals"

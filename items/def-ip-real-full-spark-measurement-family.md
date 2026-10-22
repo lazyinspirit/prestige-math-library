@@ -23,6 +23,10 @@ sources:
       url: "https://arxiv.org/pdf/math/0412411"
 verification:
   precheck: n/a
+  judge:
+    model: "gpt-6-luna"
+    verdict: pass
+    date: 2026-10-22
 ---
 
 ## Definition

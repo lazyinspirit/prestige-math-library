@@ -1,0 +1,83 @@
+---
+id: thm-grid-commutation-stabilization-invariance-proof
+kind: theorem
+title: "Commutation and stabilization invariance of grid complexes"
+status: draft
+origin: pipeline
+pipeline_run: inverse-problems-knot-theory-all-109-2026-10-19
+deps:
+  - def-grid-diagram-for-an-oriented-knot
+  - alg-grid-knot-floer-complex
+  - lem-grid-rectangle-boundary-square-zero-and-filtration
+  - lem-grid-rectangle-differential-squares-to-zero
+  - lem-grid-marking-variables-chain-homotopic
+  - lem-grid-filtered-pentagon-hexagon-equivalences
+  - lem-grid-filtered-destabilization-domain-map
+  - lem-grid-destabilization-filtered-equivalence
+  - lem-grid-changing-chosen-variable-action
+  - lem-pointed-basepoint-cone-and-variable-collapse
+dependency_level: 6
+justified_by: []
+aliases: []
+proof_strategy: direct
+provenance:
+  statement: literature-derived
+  proof: ai-altered
+sources:
+  references:
+    - title: "Peter S. Ozsvath, Andras I. Stipsicz, and Zoltan Szabo, Grid Homology for Knots and Links, Chapters 5 and 13"
+      url: "https://web.math.princeton.edu/~petero/GridHomologyBook.pdf"
+      locator: "Commutation maps and homotopies, printed pp.91–99; stabilization and filtered invariance, printed pp.99–110 and 252–268"
+    - title: "Ciprian Manolescu, Peter Ozsvath, and Sucharit Sarkar, A combinatorial description of knot Floer homology, §§1–2"
+      url: "https://arxiv.org/pdf/math/0607691"
+      locator: "Grid-complex comparison route and the explicit boundary of the analytic proof"
+---
+
+## Statement
+
+Let $G$ and $G'$ be one-component grid diagrams related by one of the following local moves. A cyclic permutation changes the planar cut of the toroidal grid by moving the first row or column to the last. A row commutation exchanges consecutive rows whose closed horizontal marking intervals are disjoint or strictly nested; a column commutation uses the same condition on vertical marking intervals. A stabilization replaces a marked cell by a two-by-two block with the original marking type in two opposite cells and the other type in a third cell, leaves the fourth cell empty, and inserts one row and one column, relocating the old companion markings so each new row and column has one mark of each type. Any of the four empty corners is allowed, and destabilization is the inverse move. Regard each full filtered minus complex returned by the grid-complex algorithm as a complex over $\mathbb F_2[U]$ by letting $U$ act as one chosen marking variable $U_i$, retaining the other independent variables. The resulting complexes are filtered chain homotopy equivalent over $\mathbb F_2[U]$, with equivalences preserving the Maslov grading and Alexander filtration. For each move, finite grid-domain counts give filtered chain maps in both directions and filtered chain homotopies from both composites to the identity. For a stabilization, its multivariable target is first compared with the cone of $U_{n+1}+U_i$ on the polynomial extension of the original complex. After instead taking the simultaneous ordinary quotient $U_1=\cdots=U_n=U$, a stabilization contributes a zero-map cone, equivalently an extra zero-differential factor $V$; those fully collapsed complexes are compared with this factor retained. Under commutation the tilde homologies are isomorphic; under a stabilization from grid number $n$ to $n+1$, the tilde homology changes by tensoring with the two-dimensional bigraded vector space $V$ with one generator in bidegree $(0,0)$ and one in bidegree $(-1,-1)$.
+
+## Statement references
+
+[[def-grid-diagram-for-an-oriented-knot|Grid moves, states, and rectangle conventions]]
+
+[[alg-grid-knot-floer-complex|Full filtered and tilde grid complexes]]
+
+[[lem-grid-marking-variables-chain-homotopic|Identification of marking-variable actions]]
+
+[Ozsvath, Stipsicz, and Szabo, *Grid Homology for Knots and Links*, Chapters 5 and 13](https://web.math.princeton.edu/~petero/GridHomologyBook.pdf)
+
+[Manolescu, Ozsvath, and Sarkar, “A combinatorial description of knot Floer homology,” §§1–2](https://arxiv.org/pdf/math/0607691)
+
+
+## Facts & Assumptions
+
+**Given:** The two one-component grids and the single grid move in the statement. All polynomial variables initially remain independent and are matched by their individual markings.
+
+[F1] [[lem-grid-filtered-pentagon-hexagon-equivalences]] gives the weighted pentagon maps, hexagon inverse homotopies, and their filtered, associated-graded, and tilde versions for commutations and switches.
+
+[F2] [[lem-grid-filtered-destabilization-domain-map]] defines the filtered incoming-domain map for a southwest $X$ stabilization and proves its chain-map and grading identities by all domain cases.
+
+[F3] [[lem-grid-destabilization-filtered-equivalence]] supplies an explicit inverse and both homotopies for that map by a finite cone-contraction formula, and derives its retained-variable and tilde comparisons.
+
+[F4] [[lem-grid-changing-chosen-variable-action]] gives explicit filtered equivalences and inverse homotopies for changing the chosen variable action along the knot's single cycle.
+
+[F5] [[lem-pointed-basepoint-cone-and-variable-collapse]] proves that a cone of the new variable plus an old one retracts onto the smaller complex over the old-variable ring, while its simultaneous ordinary collapse is a zero-map cone and contributes $V$.
+
+## Proof
+
+1.1 A cyclic permutation is a change of fundamental cut on the same grid torus. It identifies states, rectangles, and marking monomials bijectively. The finite pair-count gradings also agree under this change. To check this directly for a column cut, use the signed set $P=\mathbf x-\mathbb O$ in $M_O=I(P,P)+1$. The wrapping column contains one state point of sign $+1$ and one $O$ of sign $-1$. Only their comparisons with nonwrapping points change. At an integer state height the signed number of all points below is zero, and at the height of a marking in row $r$ it is one, since the states have heights $0,\ldots,n-1$ and the markings have one height in each open row. Thus the signed difference of the below/above counts for either wrapping point, excluding itself, is one. Multiplying by the two signs and adding gives zero; the comparisons between the two wrapping points cancel from this sum and do not change. Hence $I(P,P)$ is unchanged. Apply the same count to $\mathbf x-\mathbb X$, and interchange coordinates for a row cut. Both Maslov functions and the Alexander formula are unchanged. The torus-identification map is therefore a filtered chain isomorphism, with inverse the opposite cut change and zero inverse homotopies. [given, construct, algebra]
+
+1.2 For a commutation, use the maps and homotopies in [F1]. Their weights retain every $O$ variable separately, and their filtration drop is the number of $X$ in the polygon. Thus they are filtered equivalences over the full ring; restricting the ring action to any chosen marking variable preserves these identities. Their associated-graded maps retain precisely polygons avoiding $X$. Setting the variables to zero gives the tilde equivalence. The identical conclusion holds for the switches used below. [F1, given]
+
+1.3 For a southwest $X$ stabilization, [F2] supplies the map to the cone of $U_1+U_2$ on the polynomial extension of the smaller complex. By [F3], it has a finite matrix inverse and both filtered inverse homotopies. Compose with the explicit retraction in [F5]. Its inclusion, divided-difference homotopy, and evaluation are linear over every old variable, so the resulting equivalence and homotopies are over any chosen retained old-variable action. If either grid uses another chosen variable, including the newly inserted one, first or last compose with the chosen-variable equivalences of [F4]. Hence the assertion holds for arbitrary choices of the single variable action, without setting any independent variable equal to another. [F2, F3, F4, F5, construct]
+
+2.1 The other local stabilization types reduce to this one using the following finite operations. An $O$ stabilization introduces a vertical segment joining marks in consecutive rows. Commute this short segment horizontally toward the next $X$ endpoint; while passing another vertical segment, its length-one interval is either disjoint or nested, since no marking height lies strictly between its two endpoints. At a shared endpoint level the exchange is a switch. Stop at the next $X$, where deleting that short segment is an $X$ destabilization back to the original grid. Tracking the empty corner gives the pairs $O{:}NE$ with $X{:}SW$, $O{:}SE$ with $X{:}NW$, $O{:}NW$ with $X{:}SE$, and $O{:}SW$ with $X{:}NE$. Among the four $X$ types, exchanging the two new adjacent rows moves the empty corner across a horizontal side, and exchanging the two new adjacent columns moves it across a vertical side; these are switches because the central opposite-type marking shares a column or row with the adjacent same-type marking. One or two such switches carry any empty corner to the southwest corner. These operations concern only the added row, added column, and their endpoint segments; after deleting them the original row and column orders are unchanged. Thus every stabilization is a southwest $X$ stabilization followed by finitely many commutations, switches, and cut changes. [given, step 1.1, construct]
+
+3.1 Compose the equivalences for that finite sequence, using step 1.2 for commutations and switches and step 1.3 for its sole stabilization. Explicit inverse homotopies compose: for equivalences $f_1,f_2$ with inverses $g_1,g_2$ and homotopies $g_i f_i+1=dH_i+H_id$, a homotopy for $g_1g_2f_2f_1+1$ is $H_1+g_1H_2f_1$. The counterpart on the other complex has the analogous formula. Every summand remains filtered and has degree $+1$. Reversing the roles of the two grids proves the destabilization assertion as well. All map formulas are finite sums of composable grid-domain counts and the explicit polynomial formulas in [F3]–[F5]. [F1, F3, F4, F5, step 1.1, step 1.2, step 1.3, step 2.1, construct, algebra]
+
+4.1 The full polynomial equivalence with the stabilization cone in step 1.3 can also be tensored with the simultaneous ordinary coefficient quotient. Its cross map $U_1+U_2$ becomes zero, so [F5] identifies the quotient cone with the collapsed smaller complex tensored with $V$. The first summand's grading and filtration shift is $(-1,-1)$, giving exactly the displayed bidegrees. Taking the associated-graded equivalence first and then setting every variable to zero gives the same direct sum for tilde homology. Commutation and switches preserve tilde homology by step 1.2, and cut changes do by step 1.1. These comparisons prove the tilde and collapsed assertions for every stabilization type. [F1, F3, F5, step 1.1, step 1.2, step 1.3, step 2.1, step 3.1, algebra] ∎
+
+## Remarks
+
+[[thm-grid-moves-generate-oriented-knot-isotopy]] addresses the separate global fact that these local moves connect any two grids of an oriented knot. The proof here constructs the equivalences for each specified local move.

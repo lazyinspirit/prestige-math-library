@@ -1,0 +1,1998 @@
+{
+  "version": 1,
+  "scope": [
+    "lem-compact-knot-has-choice-free-tube",
+    "lem-wirtinger-crossing-ball-cover",
+    "lem-wirtinger-local-meridian-conjugacy",
+    "lem-knot-group-infinity-collar",
+    "alg-knot-wirtinger-presentation-from-code",
+    "thm-knot-wirtinger-presentation-correctness",
+    "ex-knot-kt-01-worked-cases",
+    "cex-knot-kt-01-boundary-case",
+    "lem-explicit-unknot-and-figure-eight-oriented-wirtinger-codes"
+  ],
+  "contracts": {
+    "lem-compact-knot-has-choice-free-tube": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-normal-addition-map-for-a-euclidean-submanifold",
+          "source_section": "Definition",
+          "quote": "Let $S\\subseteq\\mathbb R^m$ be an embedded smooth submanifold. Using the\nEuclidean inner product, define its **orthogonal normal bundle** by\n$$ N^\\perp S:=\\{(p,v)\\in S\\times\\mathbb R^m:v\\perp T_pS\\}. $$\nLocal slice charts and orthogonal projection onto $T_pS$ give this set its\nstandard smooth rank-$(m-\\dim S)$ vector-bundle structure. The **normal\naddition map** is\n$$ E:N^\\perp S\\to\\mathbb R^m,\\qquad E(p,v):=p+v. $$\nIt restricts on the zero section to the inclusion $S\\hookrightarrow\\mathbb R^m$\nand is the basic model map used to build Euclidean tubular neighbourhoods.",
+          "uses": [
+            "3.1",
+            "4.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "lem-normal-addition-is-a-local-diffeomorphism-along-the-zero-section",
+          "source_section": "Statement",
+          "quote": "Let $S\\subseteq\\mathbb R^m$ be an embedded smooth submanifold, and let\n$E:N^\\perp S\\to\\mathbb R^m$ be its normal addition map. For every $p\\in S$ the\ndifferential\n$$ dE_{(p,0)}:T_{(p,0)}(N^\\perp S)\\to T_p\\mathbb R^m\\cong\\mathbb R^m $$\nis an isomorphism. Consequently, $E$ is a local diffeomorphism at every point\nof the zero section.",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "thm-lebesgue-number-lemma",
+          "source_section": "Statement",
+          "quote": "Let $(X,d)$ be a compact metric space ([[def-metric-compactness]],\n[[def-metric-space]]) and let $\\mathcal{U}$ be an open cover of $X$. Then there\nis a real $\\delta > 0$, a **Lebesgue number** for $\\mathcal{U}$, such that every\nnonempty $A \\subseteq X$ with $\\operatorname{diam}(A) < \\delta$\n([[def-metric-bounded-diameter]]) satisfies $A \\subseteq U$ for some\n$U \\in \\mathcal{U}$.\n\nDiameters of nonempty subsets of $X$ are defined because a compact space is\nbounded ([[thm-compact-subset-is-closed-and-bounded]]) and a subset of a bounded\nset is bounded. No choice principle is used.",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "def-retraction-and-deformation-retract",
+          "source_section": "Definition",
+          "quote": "Let $A\\subseteq X$ carry the subspace topology, and let $i:A\\hookrightarrow X$ be the inclusion ([[def-subspace-topology-top]]).\n\nA continuous map $r:X\\to A$ is a **retraction of $X$ onto $A$** if\n\n$$r\\circ i=\\operatorname{id}_A,$$\n\nequivalently, if $r(a)=a$ for every $a\\in A$. When such an $r$ exists, $A$ is a **retract** of $X$.\n\nThe subspace $A$ is a **deformation retract** of $X$ if there are a retraction $r:X\\to A$ and a homotopy\n\n$$H:\\operatorname{id}_X\\simeq_A i\\circ r.$$\n\nThus $H(x,0)=x$, $H(x,1)=i(r(x))$, and $H(a,t)=a$ for all $a\\in A$ and $t\\in I$ ([[def-homotopy-relative-and-path-homotopy]]). The pair $(r,H)$ is a **deformation retraction**.\n\nSome sources call the pointwise-fixed condition a *strong deformation retract*. In this library the word *deformation retract* always includes it.",
+          "uses": [
+            "4.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "For each $p\\in K$, [F2] supplies a local inverse neighborhood for $E$. Form the set of all tuples consisting of a local trivialization, an open base set $O$ containing its center, and a radius $r>0$ such that $O\\times\\{v:\\|v\\|<r\\}$ lies in that injectivity neighborhood. These base sets cover $K$. Compactness gives finitely many such tuples whose base sets $O_i$ cover $K$; their recorded radii have a positive finite minimum $r_0$. The tuples are collected as a set of all witnesses and only a finite subfamily is extracted, so no point-indexed choice is used.",
+          "step": "1.1",
+          "inputs": [
+            "given",
+            "F2",
+            "choose"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "Apply [F3] to the finite cover $\\{O_i\\}$ of the metric space $K$, obtaining $\\delta>0$. Choose $0<\\varepsilon<\\min\\{r_0,\\delta/3\\}$. If $E(p,v)=E(q,w)$ with $\\|v\\|,\\|w\\|<\\varepsilon$, then $\\|p-q\\|=\\|w-v\\|<2\\varepsilon<\\delta$. Thus $\\{p,q\\}$ lies in one $O_i$, and both $(p,v)$ and $(q,w)$ lie in the same recorded neighborhood where $E$ is injective; hence $(p,v)=(q,w)$. Every point of the radius-$\\varepsilon$ tube also lies in one of those local-diffeomorphism neighborhoods, so the restriction is an injective local diffeomorphism.",
+          "step": "2.1",
+          "inputs": [
+            "F2",
+            "F3",
+            "step 1.1",
+            "choose",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "claim": "An injective local diffeomorphism is open and has smooth local inverses that agree on overlaps. Therefore $E$ is a diffeomorphism onto its open image $N_\\varepsilon$, which contains $K$ by [F1].",
+          "step": "3.1",
+          "inputs": [
+            "F1",
+            "step 2.1"
+          ]
+        },
+        {
+          "id": "step-4-1",
+          "claim": "For $x=E(p,v)\\in N_\\varepsilon\\setminus K$, define $$H_t(x)=E\\!\\left(p,\\frac{(1-t)\\|v\\|+t\\varepsilon}{\\|v\\|}v\\right),\\qquad 0\\le t\\le1,$$ and set $H_t(x)=x$ for $x\\notin N_\\varepsilon$. The normal coordinates are unique by step 3.1, and the formula approaches the identity at $\\|v\\|=\\varepsilon$, so these clauses paste continuously. It fixes the exterior pointwise and at $t=1$ sends every point in the punctured tube to its radius-$\\varepsilon$ boundary. Thus it is a deformation retraction of $\\mathbb R^3\\setminus K$ onto $\\mathbb R^3\\setminus N_\\varepsilon$. Only finitely many local neighborhoods and a finite minimum were used.",
+          "step": "4.1",
+          "inputs": [
+            "F1",
+            "F4",
+            "step 3.1",
+            "construct"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The hypothesis is a compact embedded circle, so no empty submanifold is included."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Step 4.1 has H_0 equal to the identity and explicitly excludes the zero normal vector from the radial formula."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Step 1.1 treats one compact circle and uses a finite cover of that circle."
+        },
+        {
+          "case": "degenerate",
+          "status": "not_applicable",
+          "reason": "The input is a smooth embedded circle with a defined normal bundle; singular or degenerate embeddings are excluded."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Step 4.1 checks continuity where the radial coordinate reaches epsilon and on the exterior boundary."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Step 1.1 forms the set of all local witnesses and extracts a finite subcover; it makes no point-indexed choice."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The item asserts no equivalence statement."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The item asserts no equivalence statement."
+        }
+      ],
+      "finite_checks": [],
+      "axiom_uses": [],
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "alpha-batch-56",
+        "notes": "Independent review: finite subcover of all inverse-chart witnesses avoids indexed choice; Lebesgue number and 2 epsilon bound give injectivity. Strict epsilon margin also provides coordinates beyond the closed epsilon tube, making radial endpoint pasting valid; zero vector excluded, exterior fixed. F1 normal addition, F2 zero-section inverse theorem, F3 compact Lebesgue number and F4 strong deformation retraction checked against their current statements. No reader or refuter finding on this item."
+      }
+    },
+    "lem-wirtinger-crossing-ball-cover": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-knot-planar-code",
+          "source_section": "Definition",
+          "quote": "Work with smooth oriented knots in the standard oriented three-sphere; a knot is a one-component oriented link. A **finite planar code for an oriented knot diagram** consists of finite vertex and edge sets, incidence data, a cyclic order of the four half-edges at every crossing vertex, a pairing of opposite half-edges into the two local branches, an orientation of each edge, and a choice of which branch is over at each crossing. Every other vertex is a bend vertex of valence two. The code includes a finite plane-drawing certificate: rational coordinates for the vertices and bends, and a finite polygonal path for every edge. The certificate must realize the incidences and cyclic orders, have no edge self-intersection, and have pairwise disjoint edge interiors except at the specified bend and crossing vertices; at a crossing the two branches must be transverse. These conditions are checked by finitely many exact segment-intersection tests. Edge orientations must join coherently across each paired branch and each bend vertex, and following the edges through the crossing pairings and the degree-two bend vertices must give one oriented circle. Thus an admissible code represents a connected regular oriented diagram of a single knot. If there are no crossing vertices, the code is one oriented polygonal circle and has one arc. Smooth each bend in a small disk disjoint from all crossings and other edges; the resulting smooth diagram has the same crossing data.\n\nAn **under-arc** is a maximal portion of the oriented circle between consecutive points where the knot passes under at a crossing; the over branch is not cut. With no crossings the entire circle is the unique under-arc. A **positive meridian** of an oriented branch is the oriented boundary of a small normal disk, with disk orientation chosen so that the oriented tangent to the branch followed by the disk orientation agrees with the ambient orientation of $S^3$. Planarity, incidence, orientation consistency, one-component tracing and the over/under data are input validity conditions; a procedure receiving an invalid finite record must report invalid input rather than repair it. The code stores no algebraic crossing sign: the oriented plane and the direction of the over branch determine which incident under branch is on its left and which is on its right.",
+          "uses": [
+            "1.1",
+            "1.2",
+            "2.1",
+            "2.2"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "lem-compact-knot-has-choice-free-tube",
+          "source_section": "Statement",
+          "quote": "Let $K\\subset\\mathbb R^3$ be the image of a compact smooth embedded circle, and let $E:N^\\perp K\\to\\mathbb R^3$ be the Euclidean normal-addition map $E(p,v)=p+v$. There is a real $\\varepsilon>0$ such that $E$ restricts to a diffeomorphism from $\\{(p,v):\\|v\\|<\\varepsilon\\}$ onto an open neighborhood $N_\\varepsilon$ of $K$. Moreover, $\\mathbb R^3\\setminus K$ strongly deformation retracts onto $\\mathbb R^3\\setminus N_\\varepsilon$ by pushing each nonzero normal vector radially to length $\\varepsilon$. The construction uses only a finite cover of the compact circle and no choice axiom.",
+          "uses": [
+            "1.2",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "lem-cw-homotopy-equivalence-inclusions-are-strong-deformation-retracts",
+          "source_section": "Statement",
+          "quote": "If $A\\subset X$ is a CW subcomplex and its inclusion is a homotopy equivalence, then $X$ strongly deformation retracts onto $A$. Moreover, if $(Y,B)$ is a CW pair and $u_0,u_1:B\\to Z$ are homotopic, then the adjunction spaces $Z\\cup_{u_0}Y$ and $Z\\cup_{u_1}Y$ are homotopy equivalent relative to their common subspace $Z$.",
+          "uses": [
+            "5.1",
+            "7.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "lem-cw-quotients-and-collapse-of-a-contractible-subcomplex",
+          "source_section": "Statement",
+          "quote": "Let $(X,A)$ be a CW pair with $A\\ne\\varnothing$ and supplied characteristic maps. The ordinary quotient $X/A$ is a CW complex, with one vertex $*$ replacing $A$ and one cell of the same dimension for every cell of $X\\setminus A$.\n\nIf $A$ admits a contraction $H:A\\times I\\to A$, $H(-,0)=\\mathrm{id}_A$, $H(-,1)=a\\in A$, then the quotient map $q:X\\to X/A$ is a homotopy equivalence and a weak homotopy equivalence. If $H(a,t)=a$ for every $t$, the constructed inverse and inverse homotopies are based at $a$ and $*$. No choice principle is required; a contraction is one witness, not a family of selected contractions.",
+          "uses": [
+            "7.1"
+          ]
+        },
+        {
+          "fact": "F6",
+          "source": "thm-polygonal-jordan-curve",
+          "source_section": "Statement",
+          "quote": "If $P\\subseteq\\mathbb R^2$ is a polygon, then $\\mathbb R^2\\setminus P$ has exactly two regions, one bounded and one unbounded, and\n\n$$\\operatorname{Fr}(U)=P$$\n\nfor each of them. Regions and frontiers are from [[def-plane-region-and-frontier]]. The proof uses the finite simple edge cycle of [[def-polygonal-arc-and-polygon]] and polygonal crossing parity from [[lem-polygonal-crossing-parity-is-locally-constant]].",
+          "uses": [
+            "2.2"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "thm-fundamental-group-of-finite-wedge-of-circles",
+          "source_section": "Statement",
+          "quote": "Let $Q=\\mathbb R/\\mathbb Z$ be pointed at $[0]$, and for $r\\in\\mathbb N$ put\n\n$$W_r:=\\bigvee_{j<r}(Q,[0]).$$\n\nThen $\\pi_1(W_r,w)$ is the free group on the $r$ standard loops, one traversing each circle summand once. In particular it has rank $r$ ([[def-rank-of-a-finite-rank-free-group]]). For $r=0$, $W_0$ is a point and the basis is empty.",
+          "uses": [
+            "5.1",
+            "7.1"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "thm-higher-dimensional-spheres-are-simply-connected",
+          "source_section": "Statement",
+          "quote": "For every natural number $n\\ge2$, the unit sphere $S^n\\subseteq\\mathbb R^{n+1}$ is simply connected ([[def-simply-connected]]).",
+          "uses": [
+            "5.1",
+            "7.1"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "thm-seifert-van-kampen",
+          "source_section": "Statement",
+          "quote": "Let $X=U\\cup V$, where $U$ and $V$ are open path-connected subsets of $X$, let $U\\cap V$ be path-connected, and fix $x_0\\in U\\cap V$. For the inclusion-induced maps in the diagram\n\n$$\\pi_1(U,x_0)\\longleftarrow\\pi_1(U\\cap V,x_0)\\longrightarrow\\pi_1(V,x_0),$$\n\nthe group $\\pi_1(X,x_0)$, together with the two inclusion-induced homomorphisms, is a pushout ([[def-pushout-of-group-homomorphisms]]). Equivalently, the canonical homomorphism from any pushout $P$ of the displayed diagram to $\\pi_1(X,x_0)$ is an isomorphism. No injectivity of either map from the overlap group is assumed.",
+          "uses": [
+            "5.1",
+            "7.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "Cut out disjoint small underpass intervals, one in each crossing box. The remaining projected arcs are embedded and pairwise disjoint: an interior double point would have an underpassing preimage, which has been removed. Put these arcs at height $1$, their ends in the plane $z=0$, and join each pair of ends of a removed underpass below that plane. This normalization preserves the complement pair. Indeed, inside a crossing box the two branches retain a strict height inequality while their heights interpolate; away from these boxes projection is injective and vertical interpolation cannot introduce intersections. A change of height $d(q)$ on a strand extends to a local ambient map $(q,z)\\mapsto(q,z+\\chi(z)d(q))$, subdividing the interpolation so that $1+\\chi'(z)d(q)>0$. Finitely many disjoint strip charts, smooth cutoffs and parameter subdivisions suffice. Planar bends can likewise be straightened in their disjoint strip charts. All these maps are the identity in a common high collar.",
+          "step": "1.1",
+          "inputs": [
+            "given",
+            "F1",
+            "construct"
+          ]
+        },
+        {
+          "id": "step-1-2",
+          "claim": "For $c=0$, first compare the actual smooth knot with a polygon, rather than identifying embeddings merely from the code. Its projection is a smooth embedded circle $\\gamma$, so the knot is $(\\gamma(s),g(s))$. Apply the finite compact-tube construction [F2] to the flat curve $(\\gamma(s),0)$: the planar slice of its normal tube is an injective strip $\\Psi(s,r)=\\gamma(s)+r n(s)$, with $n$ the positive unit planar normal. In this strip the ambient map $(\\Psi(s,r),z)\\mapsto(\\Psi(s,r),z-t\\chi(r)g(s))$, with $\\chi(0)=1$ and $\\chi$ zero near the strip boundary, is a homeomorphism for each $t$ (it is a translation on every vertical fibre), and is the identity outside the strip. It flattens the actual knot. Uniform continuity of the tangent and the finite tube bounds then give a sufficiently fine inscribed polygon: each chord stays in the strip and its projection to the circle is strictly increasing, since its tangent has positive scalar product with the nearby oriented circle tangents. The polygonal projection has one full turn, so it is bijective, and the polygon is the normal graph $r=f(s)$. Choose the subdivision so $\\|f\\|_\\infty\\|\\chi'\\|_\\infty<1$. The fibre maps $r\\mapsto r+t\\chi(r)f(s)$ are strictly increasing homeomorphisms fixing the strip boundary; extended by the identity, they give an ambient planar isotopy carrying $\\gamma$ to this polygon. Its product with the identity in $z$ is an ambient three-dimensional isotopy. All subdivisions and bounds use a finite cover and one sufficiently large subdivision number. This relates the actual embedding to the polygon without any later diagram-code supplier.",
+          "step": "1.2",
+          "inputs": [
+            "F1",
+            "F2",
+            "construct"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "Here is a precise convenient tunnel model for the normalized knot. In each crossing box choose a small convex polygonal footprint $F_i$ and a convex lower cap $C_i=\\{(q,z):q\\in F_i,\\ h_i(q)\\le z\\le0\\},$ where $h_i$ is piecewise linear, negative inside $F_i$ and zero on its boundary. Take the lower arc to be the two straight segments from its two interior top-face endpoints to one interior point of $C_i$. This replacement of the underpass is realized by vertical interpolation of its negative graph, fixing its endpoints. Each $C_i$ is a product neighborhood of that arc: radial coordinates from the interior vertex identify $C_i$ with a ball; on its boundary send two disjoint disks around the endpoints of a diameter to small disks around the two top endpoints, and extend radially. Such a boundary map is constructed by joining the disk centers by simple polygonal arcs, taking rectangular strips around those arcs, and using affine maps on a finite common triangulation; outside the strips it is the identity. Thus it identifies a standard cylinder core with the two-segment arc and its two end disks with the designated exits. Attach product tubes along the disjoint upper arcs to those exits. The resulting neighborhood $N_*$ has one cap and one upper tube per underpass, joined in the same single cycle as $K$. The disk fibers on the caps and tubes use the specified exit-disk maps as transition maps, so they fit along the finite cyclic core to give a disk bundle over the circle; this verifies the tube structure rather than assuming an arbitrary regular neighborhood. Corners and the core bends can be rounded inside disjoint smaller charts; retain the polygonal cap boundary, which is only used topologically.",
+          "step": "2.1",
+          "inputs": [
+            "F1",
+            "step 1.1",
+            "construct"
+          ]
+        },
+        {
+          "id": "step-2-2",
+          "claim": "The polygon's bounded side is supplied by [F6]. Triangulate it by diagonals: at a convex vertex use its neighbor triangle if it contains no other vertex; otherwise join it to a vertex in that triangle farthest from the opposite side. The smaller open triangle contains no intervening vertex, so the diagonal is internal; induction on the vertex count yields a finite triangulation. A leaf of its triangle-adjacency tree is an ear $uvw$, with ear tip $v$ and base $uw$. Remove any collinear vertices before this step. Put $q$ in the interior of $uw$. Choose $z_+=q+(1+\\eta)(v-q)$ and $z_-=q-\\epsilon(v-q)$, with small positive $\\eta,\\epsilon$, so the convex quadrilateral $Q=(u,z_+,w,z_-)$ meets the rest of the polygon only at $u,w$. Such bounds exist because the closed ear has no other polygon points, nonadjacent edges have positive separation, and the two remaining incident edges have a positive angle away from the ear; finite determinant and distance comparisons select the bounds. Both $v$ and $q$ are interior to $Q$. Triangulate $Q$ by the fan from $v$. On each fan triangle map its apex $v$ to $v_t=(1-t)v+tq$, fix its two boundary vertices, and interpolate affinely. Since $Q$ is convex and $v_t$ is always interior, the image triangles are a nondegenerate fan partition of the same quadrilateral. The resulting map is therefore injective, surjective and piecewise linear, fixes the whole boundary, and extends by the identity to an ambient plane isotopy. At $t=1$ it sends the two ear edges $uv,vw$ onto $uq,qw$, while fixing all other polygon edges. This is an ambient straightening, not a collapse of a triangle to its base. Inductively remove the ears until a triangle remains. From an interior point of that triangle its boundary has a continuous positive radial-distance function $R(\\theta)$; the plane homeomorphism multiplying each ray's radius by $1/R(\\theta)$ sends it to a round circle. The products of these plane maps with the identity in $z$ identify the actual knot complement with the round-circle complement.",
+          "step": "2.2",
+          "inputs": [
+            "F1",
+            "F6",
+            "step 1.2",
+            "construct"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "claim": "For $c>0$, transport the rounded product disk-bundle neighborhood $N_*$ of step 2.1 back through the ambient normalization in step 1.1 and use it as $N(K)$. In each disk fiber of this tube write the normalized radial coordinate as $r\\in[0,1]$. The homotopy $r\\mapsto(1-s)r+s$ fixes the fiber boundary and sends every nonzero fiber point to that boundary at $s=1$; extend it by the identity outside the tube. The formulas agree continuously at $r=1$ and fix the target pointwise, so they give a strong deformation retraction of $\\mathbb R^3\\setminus K$ onto $E_K$. For $c=0$, the same radial formula in the Euclidean normal coordinates of [F2] gives the stated retraction.",
+          "step": "3.1",
+          "inputs": [
+            "F2",
+            "step 1.1",
+            "step 2.1",
+            "construct"
+          ]
+        },
+        {
+          "id": "step-4-1",
+          "claim": "Take a large ball $B_R$ containing $N_*$. Outside it, the homotopy $x\\mapsto((1-s)+sR/|x|)x$, with the interior fixed, retracts the exterior to its truncation $X$ in $B_R$. Its outer sphere is retained. Write $A=X\\cap\\{z\\ge0\\}$. Below the plane, the exterior is exactly $B=\\{(q,z):-\\sqrt{R^2-|q|^2}\\le z\\le h(q)\\},$ where $h=h_i$ on $F_i$ and is zero elsewhere; enlarge $R$ so every cap lies above the lower hemisphere. The top plates of the caps belong to $A$ as tube-boundary faces, except for the two exits occupied by upper tubes. Thus $X=A\\cup B$ and $A\\cap B$ is the equatorial disk with the interiors of the $F_i$ removed. On $B$ use $(q,z)\\mapsto(q,(1-s)z+s h(q))$ and on $A$ the identity. These maps agree on the overlap, remain in the indicated vertical intervals, and paste continuously because the two sets are closed in $X$. They fix their target $Y_*=A\\cup\\bigcup_i D_i,\\qquad D_i=\\{(q,h_i(q)):q\\in F_i\\},$ pointwise. This proves the global strong deformation retraction, including the lower region and infinity.",
+          "step": "4.1",
+          "inputs": [
+            "step 2.1",
+            "step 3.1",
+            "construct"
+          ]
+        },
+        {
+          "id": "step-5-1",
+          "claim": "The upper region $A$ is a ball with the neighborhoods of $c$ disjoint boundary-parallel arcs removed. The parallelism disks are the vertical curtains beneath their disjoint projected arcs. Their strip neighborhoods are disjoint. Cutting these strips off the upper half-ball leaves a ball with finitely many boundary indentations: flatten each indentation in its rectangular strip coordinate, fixing the other faces. The strip containing an arc is a ball with a straight diameter tube removed. In cylindrical coordinates this last space is $S^1\\times\\{(r,z):r\\ge\\epsilon,\\ r^2+z^2\\le1\\},$ whose second factor is a convex disk. Hence $A$ is a boundary connected sum of $c$ solid tori, glued through specified disks to the remaining ball. For an actual bouquet spine, cut each solid torus across a meridian disk and absorb its remaining ball into the central ball. The result is a central ball with $c$ product one-handles. Join the centers of the $2c$ attaching disks to an interior point by disjoint star arms in that ball; after flattening the finitely many boundary disks, these are radial arms from their centers to the central point. Add the one-handle core intervals. The resulting embedded graph is a bouquet of $c$ circles, since every vertex other than the central one has degree two. To specify the CW structure for the relative contraction, use a finite polyhedral ball model for the central ball. Triangulate its boundary so that each attaching disk is a subcomplex and its center is a vertex, then cone that boundary triangulation to one interior vertex. Each radial star arm is an edge of this cone triangulation. The union $C$ of the attaching disks and these star edges is a finite CW subcomplex. It is contractible by contracting each disk to its center and then the star to the interior vertex. The central ball $B_0$ and $C$ are both nonempty and contractible, so the inclusion $C\\hookrightarrow B_0$ is a homotopy equivalence. By [F3], $B_0$ strongly deformation retracts onto $C$, fixing $C$ pointwise; HEP alone is not being used to assert a contraction. Next contract every attaching disk linearly to its center, and contract the transverse disk factor of each product one-handle by the same linear factor. These formulas agree on the end disks and fix the star edges and handle cores, so they paste to a strong deformation retraction onto the stated bouquet. For each drilled arc, orient its graph loop to represent the based positive meridian. In an oriented normal-disk chart along the oriented knot tangent, choose the disk orientation so that tangent followed by disk orientation agrees with the ambient orientation, and traverse the disk boundary in its induced positive direction. In the complement product $S^1\\times D^2$ of the drilled tube, this boundary is the $S^1$ factor; contracting the disk factor and using the retained collar access path carries it to the corresponding bouquet loop. Thus the chosen generator is the positive meridian, not its inverse. Each such loop crosses precisely its own curtain once. Consequently [F5] identifies these positively oriented meridians as the free basis, rather than merely normal generators.",
+          "step": "5.1",
+          "inputs": [
+            "F3",
+            "F5",
+            "step 1.1",
+            "step 4.1",
+            "construct"
+          ]
+        },
+        {
+          "id": "step-6-1",
+          "claim": "Fix disk coordinates $\\phi_i:\\overline D^2\\to D_i$ and constants $0<r_0<r_1<1$. In $Y_*$ set $V_i=\\phi_i(\\{|v|<r_1\\})$ and let $U$ be the complement of the union of the closed disks $\\phi_i(\\{|v|\\le r_0\\})$. These sets are relative-open: the cap interiors have their ordinary disk topology, their closures away from their boundary are disjoint from $A$, and the omitted closed disks are closed in $Y_*$. They cover because $r_0<r_1$. Each $V_i$ is an open disk, different $V_i$ are disjoint, and their overlaps with $U$ are exactly the annuli $r_0<|v|<r_1$. On each outer collar, increasing its radius by $r\\mapsto(1-s)r+s$ retracts $U$ to $A$, fixing $A$. Step 5.1 supplies its meridian basis. Transfer these sets and the composed homotopies back through the finite normalizations in steps 1.1, 2.1 and 3.1. They give the stated subspace and cover in the original exterior.",
+          "step": "6.1",
+          "inputs": [
+            "step 4.1",
+            "step 5.1",
+            "construct",
+            "step 1.1",
+            "step 2.1",
+            "step 3.1"
+          ]
+        },
+        {
+          "id": "step-7-1",
+          "claim": "For the resulting round circle use $S^3\\subset\\mathbb C^2$, $K=\\{z_1=0\\}$, and infinity $p=(1,0)$. Choose the angular coordinate so that increasing $t$ gives the positively oriented meridian (replace $t$ by $-t$ if the carried knot orientation requires it). The map $(w,e^{it})\\longmapsto(\\sqrt{1-|w|^2}e^{it},w)$ identifies $S^3\\setminus K$ with $D^\\circ\\times S^1$, and $p$ with $(0,1)$. Choose a center-preserving homeomorphism from $D^\\circ$ to $(-1,1)^2$. For $q\\in(-1,1)^2$, put $r=\\|q\\|_\\infty$ and define $$c(q)=\\begin{cases}q,&r\\le\\tfrac12,\\\\[2pt]q/(2r),&r>\\tfrac12.\\end{cases}$$ The homotopy $C_s(q)=(1-s)q+sc(q)$ stays in the open square, fixes $[-\\tfrac12,\\tfrac12]^2$, and preserves $q=0$. Therefore $(q,z)\\mapsto(C_s(q),z)$ is a strong deformation retraction of $(D^\\circ\\times S^1)\\setminus\\{(0,1)\\}$ onto $([-1/2,1/2]^2\\times S^1)\\setminus\\{(0,1)\\}$: when $z=1$, every point in the punctured fiber has $q\\ne0$, and $C_s(q)$ is a positive scalar multiple of $q$, so the homotopy never reaches the puncture. Rescaling the square gives $([-1,1]^2\\times S^1)\\setminus\\{(0,1)\\}$. Write $S^1=[-1,1]/(-1\\sim1)$ with the puncture at circle coordinate $0$. For $v\\in[-1,1]^3\\setminus\\{0\\}$, the homotopy $$H_s(v)=\\left(1-s+\\frac{s}{\\|v\\|_\\infty}\\right)v$$ retracts onto the cube boundary, fixes both identified end faces pointwise, and therefore descends to the product quotient. Its image $X_0$ is a finite CW complex: the lateral faces form the torus $T=\\partial[-1,1]^2\\times S^1$, and the two square end faces become one disk $D^2$ attached along $\\ell=\\partial[-1,1]^2\\times\\{1\\}$. Give $T$ its product CW structure with $\\ell$ as a subcomplex; then $D^2$ is a contractible CW subcomplex of $X_0$. By [F4], collapsing it is a homotopy equivalence, and the quotient is $T$ with $\\ell$ collapsed. Cutting $T$ along $\\ell$ gives a cylinder; after the two boundary copies of $\\ell$ are collapsed to their common point, the quotient is a sphere with its two poles identified. To identify its homotopy type explicitly, let $Z$ be $S^2$ with an interval attached at its two distinct poles. Give $Z$ the finite CW structure in which the interval is a 1-cell and its endpoints are 0-cells, so the interval is a contractible subcomplex. Collapsing it identifies the poles, so [F4] makes $Z$ homotopy equivalent to the sphere-with-poles-identified quotient. The two endpoint maps of the interval into $S^2$ are homotopic along a fixed path; choose this path to be the $e^{it}$ meridian cut at $t=0$. By the attaching-map clause of [F3], $Z$ is homotopy equivalent to the adjunction space with both endpoints attached at one pole, namely $S^2\\vee S^1$, and the new circle is the retained positive meridian. For this wedge with wedge point $w$, choose $q\\in S^2\\setminus\\{w\\}$ and $r\\in S^1\\setminus\\{w\\}$, and set $$A=S^1\\cup(S^2\\setminus\\{q\\}),\\qquad B'=(S^1\\setminus\\{r\\})\\cup S^2.$$ These are open in the wedge topology and cover $S^1\\vee S^2$. The first deformation retracts to $S^1$, the second to $S^2$, so both are path-connected; their overlap $(S^1\\setminus\\{r\\})\\cup(S^2\\setminus\\{q\\})$ is nonempty and contracts to $w$ by contracting each punctured summand to $w$. Thus the sets and overlap satisfy the path-connected open-cover hypotheses of van Kampen [F5], which gives $\\pi_1(S^1\\vee S^2,w)\\cong\\pi_1(S^1,w)*\\pi_1(S^2,w)\\cong\\mathbb Z*1\\cong\\mathbb Z$, generated by the positive meridian circle. Finally step 3.1 gives the asserted retraction onto $E_K$ in both cases.",
+          "step": "7.1",
+          "inputs": [
+            "F3",
+            "F4",
+            "F5",
+            "step 1.2",
+            "step 2.2",
+            "step 3.1",
+            "construct"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The Statement fixes a smooth oriented knot, which is nonempty; the empty-link exterior is not in its scope."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Steps 1.2 and 2.2 identify the actual smooth crossing-free embedding with a polygon and then a round circle by ambient homeomorphisms; step 7.1 proves the Euclidean S1 wedge S2 homotopy type rather than a false circle retraction."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "For c=1 the one cap in step 2.1, genus-one upper handlebody in step 5.1 and single annular overlap in step 6.1 give the asserted one-underarc case."
+        },
+        {
+          "case": "degenerate",
+          "status": "not_applicable",
+          "reason": "The Statement requires a regular transverse diagram; tangential crossings and nonembedded knot inputs are excluded."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Step 3.1 fixes the outer tube boundary, step 4.1 checks the endpoint values of the pasted vertical/radial homotopies, and step 6.1 fixes cap boundaries; the ambient ear map in step 2.2 remains injective even at its final time."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Steps 1.1, 1.2, 2.1, 2.2 and 3.1 use finite chart, separation and subdivision bounds; no choice axiom or later batch102 reconstruction supplier is used."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The Statement supplies a cover and homotopy type, not an iff characterization."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "No reverse implication from an arbitrary such cover to knot recognition is claimed."
+        }
+      ],
+      "finite_checks": [
+        {
+          "name": "injective-ear-fan-endpoint-example",
+          "method": "manual exact finite/symbolic calculation",
+          "anchor_steps": [
+            "2.2"
+          ],
+          "calculation": "Use Q vertices (-1,0),(0,2),(1,0),(0,-1), moving fan apex (0,1) linearly to (0,0). Every fan determinant is linear in time and has the same nonzero sign at both endpoints.",
+          "result": {
+            "(0, 1)": [
+              -1,
+              -1,
+              -2,
+              -2
+            ],
+            "(0, 0)": [
+              -2,
+              -2,
+              -1,
+              -1
+            ]
+          },
+          "scope_limit": "Corroborates this fixed example only; the general assertion is established by the anchored local proof. No finite-smoke execution or native gate credit claimed.",
+          "assertion": "The polygon's bounded side is supplied by"
+        }
+      ],
+      "axiom_uses": [],
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "alpha-batch-56",
+        "notes": "Independently checked all nine steps: vertical normalization preserves height ordering; cap product exits and upper tubes make the chosen disk bundle, avoiding an arbitrary-tube comparison. Lower vertical collapse retains the outer sphere. Upper drilled boundary-parallel arcs give the central-ball/one-handle CW spine, with actual homotopy-equivalence SDR rather than HEP alone. Relative-open disk/annulus cover meets van Kampen hypotheses. Zero-crossing case uses flat-strip polygon isotopy, ear straightening, then punctured solid-torus CW quotient S1 wedge S2; retained positive meridian and all radial endpoints checked. Current supplier statements read; Charbonneau sections 2–3 corroborate attachments, not the stronger local SDR assertions. Reader repairs sound; no refuter finding here. Alpha additionally removed irrelevant F4 (CW collapse) from radial step 3.1 and added its actual normalization prerequisite step 1.1; current precheck passes. Contract mappings regenerated after the correction."
+      },
+      "proof_status": "complete-local-proof",
+      "proof_status_evidence": "Current rows 1.1–7.1 construct the finite cap/tube and upper-region model, use the constructed disk-bundle exterior for c>0, and prove the separate zero-crossing S1 wedge S2 model. Earlier owner-resolution evidence remains historical; this records no native author completion, independent review, or gate credit.",
+      "unresolved_supplier_checks": [],
+      "unresolved_obligations": [],
+      "finite_smoke": [],
+      "owner_resolution_evidence": {
+        "reviewer": "/root/knot_wirtinger_rack_repair",
+        "repair_report": "research/inverse-problems-knot-theory-all-109-2026-10-19-owner-knot-repair-round2/repair-report.json",
+        "attribution": "Focused delegated proof repair/current reading; native author/dispatch history remains unchanged.",
+        "native_execution_coverage_adopted": false
+      }
+    },
+    "lem-wirtinger-local-meridian-conjugacy": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "lem-wirtinger-crossing-ball-cover",
+          "source_section": "Statement",
+          "quote": "Let $K\\subset\\mathbb R^3$ be a smooth oriented knot with a regular diagram represented by a valid finite planar code, and let $c$ be its number of crossings. For $c>0$, choose the closed tubular disk-bundle neighborhood $N(K)$ formed from one product cap about each underpass and one product tube along each intervening upper arc, attached in the cyclic order of the knot and rounded in disjoint charts. Put $E_K=\\mathbb R^3\\setminus\\operatorname{int}N(K)$. There is a subspace $Y\\subset E_K$, fixed pointwise by a strong deformation retraction of $E_K$, with a finite relative-open cover\n$$Y=U\\cup V_1\\cup\\cdots\\cup V_c.$$\nThe space $U$ deformation retracts to a wedge of $c$ circles. With a common basepoint in the collar above the diagram and access paths in that collar extended into the arc charts, the positive under-arc meridians are its free basis. Each $V_i$ is contractible, $U\\cap V_i$ is an open annulus around the $i$-th crossing attachment, and distinct $V_i$ are disjoint. Thus $V_i$ meets $U$ and any previously attached crossing pieces precisely in $U\\cap V_i$.\n\nFor $c=0$, choose a sufficiently small Euclidean normal tube and let $E_K$ be its exterior. The Euclidean complement has homotopy type $S^1\\vee S^2$, with the circle represented by the positive meridian. In particular its fundamental group is infinite cyclic; the extra sphere at infinity must not be discarded. In both cases the punctured chosen disk-bundle tube retracts radially to its boundary, giving a strong deformation retraction $\\mathbb R^3\\setminus K\\to E_K$. These constructions require only finitely many charts and no choice axiom.",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "def-based-loops-and-fundamental-group",
+          "source_section": "Definition",
+          "quote": "Let $X$ be a topological space and let $x_0\\in X$. A **based loop at $x_0$**\nis a path $\\alpha:I\\to X$ with $\\alpha(0)=x_0=\\alpha(1)$\n([[def-path-connected]]). Two based loops are equivalent when they are\npath-homotopic relative to the endpoints. This is an equivalence relation by\n[[cor-homotopy-relative-and-path-homotopy-are-equivalence-relations]].\n\nThe **fundamental group set** of $X$ at $x_0$ is\n\n$$\\pi_1(X,x_0):=\\{\\,[\\alpha]:\\alpha\\text{ is a based loop at }x_0\\,\\}.$$\n\nFor composable paths, write\n\n$$(\\alpha*\\beta)(s):=\\begin{cases}\\alpha(2s),&0\\leq s\\leq\\tfrac12,\\\\ \\beta(2s-1),&\\tfrac12\\leq s\\leq1.\\end{cases}$$\n\nThe finite closed-pasting argument already carried out in\n[[def-path-connected]] shows that this is a path. The multiplication proposed\non loop classes is\n\n$$[\\alpha][\\beta]:=[\\alpha*\\beta].$$\n\n**Order convention.** The product $[\\alpha][\\beta]$ traverses $\\alpha$ first\nand $\\beta$ second. Every product on this page uses this convention.\n\nThe constant loop at $x_0$ is denoted $c_{x_0}$, and the reversed loop is\n$\\bar\\alpha(s):=\\alpha(1-s)$. The next theorem proves that multiplication is\nindependent of representatives and that $[c_{x_0}]$ and $[\\bar\\alpha]$ are the\nidentity and inverse required by the group axioms.",
+          "uses": [
+            "1.1",
+            "2.1",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "thm-fundamental-group-laws",
+          "source_section": "Statement",
+          "quote": "For every pointed topological space $(X,x_0)$, the product\n\n$$[\\alpha][\\beta]=[\\alpha*\\beta]$$\n\nis well defined and makes $\\pi_1(X,x_0)$ a group. Its identity is the class of\nthe constant loop $c_{x_0}$, and $[\\alpha]^{-1}=[\\bar\\alpha]$.",
+          "uses": [
+            "1.1",
+            "2.1",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "thm-seifert-van-kampen",
+          "source_section": "Statement",
+          "quote": "Let $X=U\\cup V$, where $U$ and $V$ are open path-connected subsets of $X$, let $U\\cap V$ be path-connected, and fix $x_0\\in U\\cap V$. For the inclusion-induced maps in the diagram\n\n$$\\pi_1(U,x_0)\\longleftarrow\\pi_1(U\\cap V,x_0)\\longrightarrow\\pi_1(V,x_0),$$\n\nthe group $\\pi_1(X,x_0)$, together with the two inclusion-induced homomorphisms, is a pushout ([[def-pushout-of-group-homomorphisms]]). Equivalently, the canonical homomorphism from any pushout $P$ of the displayed diagram to $\\pi_1(X,x_0)$ is an isomorphism. No injectivity of either map from the overlap group is assumed.",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "thm-group-pushout-as-an-amalgamated-quotient",
+          "source_section": "Statement",
+          "quote": "For homomorphisms $f:K\\to G$ and $h:K\\to H$, let $N$ be the normal closure in $G\\ast H$ of $$\\{j_G(f(k))j_H(h(k))^{-1}:k\\in K\\}.$$ Then $(G\\ast H)/N$, with the induced factor maps $j_G$ and $j_H$, is a pushout of $f$ and $h$.",
+          "uses": [
+            "2.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "Take ambient coordinates $(x,y,z)$ with overstrand tangent $+\\partial_x$, viewing normal $+\\partial_z$, and positive projection basis $(\\partial_x,\\partial_y)$. Source has $y<0$ and target $y>0$, with the understrand below the overstrand. Parameterize the under-core from source to target by $u$, whether or not this agrees with the knot orientation. Choose its product tube $\\Phi(u,v)$ so that the oriented knot tangent followed by the ordered normal frame is ambient-positive; take the first normal-frame vector toward the positive-$z$ side of the understrand and the second to complete that orientation. Thus increasing angle from $\\theta_0=0$ gives the positive meridian even when $u$ runs opposite to the knot orientation. Choose a small positive radius $r$. The path used here is the push-off $\\beta(u)=\\Phi(u,r(\\cos\\theta_0,\\sin\\theta_0))$, from source to target; it never lies on the knot core. The two meridian loops are the boundaries $\\mu_u(\\tau)=\\Phi(u,r(\\cos(\\theta_0+2\\pi\\tau),\\sin(\\theta_0+2\\pi\\tau)))$, based at the endpoints of $\\beta$. For exterior paths take $r$ at least the removed tube radius; shrink that radius first if necessary. Choose the product tube disjoint from the overstrand and other arc pieces, and $r$ smaller than the crossing-chart separation bounds. Choose upper-collar paths $\\alpha_s,\\alpha_t$ to these actual boundary points. In the normal $(y,z)$ plane of the overstrand, their concatenation $\\alpha_s\\beta\\alpha_t^{-1}$ follows a small perturbation of the polygon $(0,H),(-d,-h),(d,-h),(0,H)$, which has positive signed area. The polygon and a sufficiently small surrounding strip avoid the origin; the chosen radius makes the perturbation lie in that strip, so its winding is still $+1$. For explicit complement control, straighten the local under-core to $x=0,z=-h$ in the product chart and take its upper push-off at $z=-h+r$. The access triangle is then entirely above $z=-h$, while the over-core projects to the origin. Radial interpolation of its positive polar-distance function to a sufficiently small circle about the origin stays inside that triangle minus the origin, hence above the under-core as well. Retain the positive-radius angular access in the under-tube until reaching these straightened paths. Thus the resulting homotopy is to one counterclockwise over-meridian and avoids both strands throughout. Thus all paths and homotopies lie in the complement, the loop represents $m_o$, and $\\alpha_t\\simeq m_o^{-1}\\alpha_s\\beta$ rel endpoints there.",
+          "step": "1.1",
+          "inputs": [
+            "given",
+            "F1",
+            "F2",
+            "construct"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "The positive-radius cylinder $(u,\\tau)\\mapsto\\Phi(u,r(\\cos(\\theta_0+2\\pi\\tau),\\sin(\\theta_0+2\\pi\\tau)))$ transports the boundary meridians, with its basepoint edge equal to $\\beta$. Its image misses the knot core and, by the separated tube choice, the overstrand and every other arc. Reading the boundary of this cylinder gives $\\beta\\mu_t\\beta^{-1}\\simeq\\mu_s$ in the complement; its disk orientation is transported continuously even when the source-to-target direction opposes the knot orientation. Therefore $[\\alpha_t\\mu_t\\alpha_t^{-1}]=m_o^{-1}[\\alpha_s\\beta\\mu_t\\beta^{-1}\\alpha_s^{-1}]m_o=m_o^{-1}m_sm_o$. Equivalently the annular-core word $m_o^{-1}m_sm_om_t^{-1}$ bounds the cap of [F1], consistently with [F3]. Reversing the understrand orientation inverts both its meridians, so inversion gives the same side-based equation, rather than a switch of the conjugating direction.",
+          "step": "2.1",
+          "inputs": [
+            "F1",
+            "F2",
+            "F3",
+            "step 1.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "claim": "The under-tangent follows $n_o$ exactly when incoming is source and outgoing is target, giving the first incoming/outgoing equation. Otherwise solve the same equation for $m_s$ to obtain the second. A reversed meridian is the inverse loop by [F2]. If a common access path $\\alpha$ is replaced by $\\lambda\\alpha$, the class $[\\alpha\\mu\\alpha^{-1}]$ becomes $[\\lambda][\\alpha\\mu\\alpha^{-1}][\\lambda]^{-1}$; this holds for each of the three meridians. These observations prove all remaining assertions.",
+          "step": "3.1",
+          "inputs": [
+            "F2",
+            "step 2.1",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The Statement fixes one actual crossing chart; an empty crossing set supplies no such input."
+        },
+        {
+          "case": "zero",
+          "status": "not_applicable",
+          "reason": "A zero-crossing diagram has no local crossing relation; its group is handled by the separate cover and correctness items."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Steps 1.1 and 2.1 trace one crossing with an actual positive-radius push-off and its boundary-meridian transport cylinder."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Step 1.1 chooses radius r>0 and finite separation from both strands, and step 2.1 keeps the whole cylinder at that radius; the removed core r=0 is never used as a path."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Step 1.1 ends beta at the actual chosen meridian basepoints, and step 2.1 reads the boundary of the cylinder to obtain the relative-endpoint transport homotopy."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "The product frame, positive radius and two upper access paths in step 1.1 are fixed finite data; step 3.1 proves simultaneous basing conjugation without a family of choices."
+        },
+        {
+          "case": "iff-forward",
+          "status": "checked",
+          "evidence": "Step 2.1 gives the source-to-target equation m_t=m_o^-1 m_s m_o and the normal-following incoming/outgoing form."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "checked",
+          "evidence": "Step 3.1 solves the same equation for m_s to obtain the opposite incoming/outgoing form, without changing the side-based convention."
+        }
+      ],
+      "finite_checks": [
+        {
+          "name": "upper-push-off-positive-winding-sign",
+          "method": "manual exact finite/symbolic calculation",
+          "anchor_steps": [
+            "1.1",
+            "2.1"
+          ],
+          "calculation": "With H=2,d=h=1,r=1/4, the upper push-off triangle (0,2),(-1,-3/4),(1,-3/4) has signed area11/4>0, lies above the under-core z=-1, and surrounds the over-origin.",
+          "result": "Positive over-meridian orientation; fixed r=1/4 never touches the removed under-core.",
+          "scope_limit": "Corroborates this fixed example only; the general assertion is established by the anchored local proof. No finite-smoke execution or native gate credit claimed.",
+          "assertion": "Take ambient coordinates $(x,y,z)$ with overstrand tangent $+\\partial_x$, viewing normal $+\\partial_z$, and positive projection basis $(\\partial_x,\\partial_y)$. Source has $y<0$ and target $y>0$, with the understrand below the overstrand. C"
+        }
+      ],
+      "axiom_uses": [],
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "alpha-batch-56",
+        "notes": "Checked first-traverse-first loop convention and ambient orientation (x,y,z): over +x gives positively oriented (y,z) normal disk. Triangle (0,H),(-d,-h),(d,-h) has positive area and its contraction avoids both strands when push-off is above the under-core. Cylinder has positive meridians regardless of under-parameter orientation; alpha_t = m_o inverse alpha_s beta gives target = m_o inverse source m_o. Inverting both under-meridians preserves this equation. Common-access conjugation and reversed incoming/outgoing cases checked. TikZ over-arrow northeast, under-arrow northwest, source southeast/target northwest agree with positive normal. Current suppliers read and Charbonneau section 3 checked with its conventions."
+      },
+      "proof_status": "complete-local-proof",
+      "proof_status_evidence": "Steps1.1–3.1 give complement-valued positive-radius transport and cylinder homotopy, the positive winding sign and exact side/incoming-outgoing/basing identities. This records the current owner repair, not native author completion, independent review or gate credit.",
+      "unresolved_supplier_checks": [],
+      "unresolved_obligations": [],
+      "finite_smoke": [],
+      "owner_resolution_evidence": {
+        "reviewer": "/root/knot_wirtinger_rack_repair",
+        "repair_report": "research/inverse-problems-knot-theory-all-109-2026-10-19-owner-knot-repair-round2/repair-report.json",
+        "attribution": "Focused delegated proof repair/current reading; native author/dispatch history remains unchanged.",
+        "native_execution_coverage_adopted": false
+      }
+    },
+    "lem-knot-group-infinity-collar": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "lem-wirtinger-crossing-ball-cover",
+          "source_section": "Statement",
+          "quote": "Let $K\\subset\\mathbb R^3$ be a smooth oriented knot with a regular diagram represented by a valid finite planar code, and let $c$ be its number of crossings. For $c>0$, choose the closed tubular disk-bundle neighborhood $N(K)$ formed from one product cap about each underpass and one product tube along each intervening upper arc, attached in the cyclic order of the knot and rounded in disjoint charts. Put $E_K=\\mathbb R^3\\setminus\\operatorname{int}N(K)$. There is a subspace $Y\\subset E_K$, fixed pointwise by a strong deformation retraction of $E_K$, with a finite relative-open cover\n$$Y=U\\cup V_1\\cup\\cdots\\cup V_c.$$\nThe space $U$ deformation retracts to a wedge of $c$ circles. With a common basepoint in the collar above the diagram and access paths in that collar extended into the arc charts, the positive under-arc meridians are its free basis. Each $V_i$ is contractible, $U\\cap V_i$ is an open annulus around the $i$-th crossing attachment, and distinct $V_i$ are disjoint. Thus $V_i$ meets $U$ and any previously attached crossing pieces precisely in $U\\cap V_i$.\n\nFor $c=0$, choose a sufficiently small Euclidean normal tube and let $E_K$ be its exterior. The Euclidean complement has homotopy type $S^1\\vee S^2$, with the circle represented by the positive meridian. In particular its fundamental group is infinite cyclic; the extra sphere at infinity must not be discarded. In both cases the punctured chosen disk-bundle tube retracts radially to its boundary, giving a strong deformation retraction $\\mathbb R^3\\setminus K\\to E_K$. These constructions require only finitely many charts and no choice axiom.",
+          "uses": []
+        },
+        {
+          "fact": "F2",
+          "source": "thm-higher-dimensional-spheres-are-simply-connected",
+          "source_section": "Statement",
+          "quote": "For every natural number $n\\ge2$, the unit sphere $S^n\\subseteq\\mathbb R^{n+1}$ is simply connected ([[def-simply-connected]]).",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "def-simply-connected",
+          "source_section": "Definition",
+          "quote": "A topological space $X$ is **simply connected** when it is nonempty and\npath-connected ([[def-path-connected]]) and, for every $x_0\\in X$, the group\n$\\pi_1(X,x_0)$ has exactly one element.\n\nRequiring every basepoint avoids presuming a change-of-basepoint theorem. For a\npath-connected space that later theorem shows that checking one basepoint is\nequivalent, but no such result is needed for this definition. The empty space\nis path-connected under the published convention, but it is not simply\nconnected here because nonemptiness is explicit.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "thm-seifert-van-kampen",
+          "source_section": "Statement",
+          "quote": "Let $X=U\\cup V$, where $U$ and $V$ are open path-connected subsets of $X$, let $U\\cap V$ be path-connected, and fix $x_0\\in U\\cap V$. For the inclusion-induced maps in the diagram\n\n$$\\pi_1(U,x_0)\\longleftarrow\\pi_1(U\\cap V,x_0)\\longrightarrow\\pi_1(V,x_0),$$\n\nthe group $\\pi_1(X,x_0)$, together with the two inclusion-induced homomorphisms, is a pushout ([[def-pushout-of-group-homomorphisms]]). Equivalently, the canonical homomorphism from any pushout $P$ of the displayed diagram to $\\pi_1(X,x_0)$ is an isomorphism. No injectivity of either map from the overlap group is assumed.",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "cor-seifert-van-kampen-simply-connected-overlap",
+          "source_section": "Statement",
+          "quote": "Under the hypotheses of [[thm-seifert-van-kampen]], if $U\\cap V$ is simply connected, then the inclusion-induced homomorphisms give an isomorphism\n\n$$\\pi_1(U,x_0)*\\pi_1(V,x_0)\\cong\\pi_1(X,x_0).$$",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F6",
+          "source": "def-induced-homomorphism-on-fundamental-groups",
+          "source_section": "Definition",
+          "quote": "Let $f:X\\to Y$ be continuous and let $x_0\\in X$. Composition sends a loop\n$\\alpha$ at $x_0$ to the loop $f\\circ\\alpha$ at $f(x_0)$. Using the loop\nclasses and fundamental group of [[def-based-loops-and-fundamental-group]],\nthe proposed\n**induced homomorphism** is\n\n$$f_*:\\pi_1(X,x_0)\\longrightarrow\\pi_1(Y,f(x_0)),\\qquad f_*([\\alpha]):=[f\\circ\\alpha].$$\n\nThe next theorem proves that this value is independent of the representative,\nthat it is a group homomorphism in the sense of [[def-group-homomorphism]], and\nthat induced maps respect identities, composition and homotopies that fix the\nbasepoint.",
+          "uses": [
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F7",
+          "source": "thm-induced-fundamental-group-map-functoriality",
+          "source_section": "Statement",
+          "quote": "Let $f:(X,x_0)\\to(Y,y_0)$ be a continuous map with $f(x_0)=y_0$. Then\n\n$$f_*([\\alpha])=[f\\circ\\alpha]$$\n\nis a well-defined group homomorphism. For pointed continuous maps,\n\n$$\\operatorname{id}_*=\\operatorname{id},\\qquad (g\\circ f)_*=g_*\\circ f_*.$$\n\nIf $f_0,f_1:(X,x_0)\\to(Y,y_0)$ are homotopic through a homotopy that keeps\n$x_0$ at $y_0$, then $(f_0)_*=(f_1)_*$.",
+          "uses": [
+            "1.1",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F8",
+          "source": "thm-fundamental-group-laws",
+          "source_section": "Statement",
+          "quote": "For every pointed topological space $(X,x_0)$, the product\n\n$$[\\alpha][\\beta]=[\\alpha*\\beta]$$\n\nis well defined and makes $\\pi_1(X,x_0)$ a group. Its identity is the class of\nthe constant loop $c_{x_0}$, and $[\\alpha]^{-1}=[\\bar\\alpha]$.",
+          "uses": [
+            "1.1",
+            "3.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "Since $K$ is compact, choose $R>0$ with $K$ and $b$ in the open ball $D=B_R(0)$. Put $U=S^3\\setminus(K\\cup\\{\\infty\\})=\\mathbb R^3\\setminus K$ and $V=S^3\\setminus\\overline D$. Then $V$ is an open ball about infinity, disjoint from $K$, and $U\\cap V=V\\setminus\\{\\infty\\}$. First verify that $U$ is path-connected without assuming a diagram code. Parameterize the smooth embedded circle by $k:S^1\\to K$. For $p\\in U$, the cone $$C_p=\\{p+t(k(s)-p):s\\in S^1,\\ t\\ge1\\}$$ has three-dimensional outer volume zero: on each of finitely many smooth coordinate intervals of $S^1$ and each bounded interval $1\\le t\\le n$, the defining map is Lipschitz on a compact rectangle; subdividing into $O(N^2)$ squares of side $1/N$ covers its image by balls of radius $O(1/N)$, whose total three-dimensional volume is $O(1/N)$. Thus each truncated image has outer volume zero. For each $n$, the finite chart and derivative bounds give an explicit cover volume $A_n/N$ after mesh size $1/N$; choosing $N_n>2^{n+2}A_n/\\epsilon$ makes the $n$th truncated images of both cones have total cover volume below $\\epsilon 2^{-n-1}$. These formula-defined mesh sizes give a cover of $C_p\\cup C_q$ with total volume below $\\epsilon$ for every $\\epsilon>0$, so the union has outer volume zero without a choice of covers. An open ball contains a cube of positive volume, so choose $r$ in an open ball outside $C_p\\cup C_q$. If the segment $[p,r]$ met $K$ at $k(s)$, then $r=p+t(k(s)-p)$ for some $t\\ge1$, contrary to $r\\notin C_p$; similarly $[q,r]$ misses $K$. The broken line from $p$ to $r$ to $q$ lies in $U$. Under inversion $J(x)=x/\\|x\\|^2$, extended by $J(\\infty)=0$, the set $V$ is the open ball of radius $1/R$ about $0$. The radial homotopy $y\\mapsto(1-t)y$ contracts it to $0$, so it is nonempty and path-connected. Since this ball is convex, every based loop contracts to its own basepoint by the straight-line homotopy inside the ball; [F3] therefore makes $V$ simply connected. The same inversion identifies $U\\cap V$ with $0<\\|y\\|<1/R$. Fix $\\rho=1/(2R)$; the puncture-preserving radial homotopy $$y\\longmapsto\\left((1-t)+t\\frac{\\rho}{\\|y\\|}\\right)y$$ is a strong deformation retraction of this punctured ball onto the sphere $S^2_\\rho$. The punctured ball is path-connected. Choose $y_0\\in S^2_\\rho$, let $i:S^2_\\rho\\hookrightarrow U\\cap V$ be inclusion, and let $r$ be the radial retraction. Since the radial deformation fixes $S^2_\\rho$ pointwise, [F7] and functoriality make $i_*$ and $r_*$ inverse isomorphisms at $y_0$. By [F2], $\\pi_1(S^2_\\rho,y_0)$ is trivial. For any other basepoint $y$ in the punctured ball, choose a path $\\gamma$ from $y$ to $y_0$ and use $[\\alpha]\\mapsto[\\bar\\gamma*\\alpha*\\gamma]$. Concatenation and reparameterization preserve endpoint-fixed homotopies, so this is a well-defined homomorphism. The inverse uses $\\bar\\gamma$; the inserted pairs $\\gamma*\\bar\\gamma$ and $\\bar\\gamma*\\gamma$ contract by the piecewise retracing homotopy, so the homomorphism is an isomorphism. Thus every basepoint group of the overlap is trivial; its nonemptiness and path-connectedness with [F3] make $U\\cap V$ simply connected.",
+          "step": "1.1",
+          "inputs": [
+            "given",
+            "F2",
+            "F3",
+            "F7",
+            "F8",
+            "choose",
+            "construct"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "Choose $b_0\\in U\\cap V$. The open sets $U,V$ cover $S^3\\setminus K$; [F4] applies by the path-connectedness in step 1.1. Since $V$ and $U\\cap V$ are simply connected by step 1.1, the special case [F5] shows that inclusion induces an isomorphism $\\pi_1(U,b_0)\\to\\pi_1(S^3\\setminus K,b_0)$.",
+          "step": "2.1",
+          "inputs": [
+            "F4",
+            "F5",
+            "step 1.1"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "claim": "The inclusion induces the based map by [F6]. Choose a path $\\gamma$ in $U$ from $b$ to $b_0$, which exists by step 1.1. The formula $[\\alpha]\\mapsto[\\bar\\gamma*\\alpha*\\gamma]$ defines isomorphisms between the fundamental groups at these basepoints by the concatenation and retracing argument in step 1.1. Using the same path in $S^3\\setminus K$ makes the square with inclusion commute, since postcomposing the concatenated path gives the same loop. Thus the inclusion map at $b$ is conjugate by isomorphisms to the isomorphism at $b_0$.",
+          "step": "3.1",
+          "inputs": [
+            "F6",
+            "F7",
+            "F8",
+            "step 1.1",
+            "step 2.1",
+            "construct"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The Statement fixes a compact smooth knot and a basepoint in its complement; it does not concern an empty knot or an empty overlap."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Step 1.1 uses path-connectedness from the repaired supplier, including its zero-crossing S1 wedge S2 case; steps 2.1 and 3.1 still apply without any crossings."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Step 1.1 removes exactly the single point at infinity from the open three-ball, giving the S2 times interval overlap."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Step 3.1 handles a given basepoint outside the chosen overlap by its basepoint-change path; it is not assumed to lie in the infinity collar."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Step 3.1 fixes the path endpoints b and b0 and uses the commuting basepoint-change square for the inclusion."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Steps 1.1 and 2.1 choose one finite containing ball and one overlap basepoint; step 3.1 uses one path witness, with no arbitrary indexed family."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The claim is that a particular inclusion induces an isomorphism, not an iff characterization."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The inverse follows from the van Kampen pushout; no separate reverse implication is claimed."
+        }
+      ],
+      "finite_checks": [],
+      "axiom_uses": [],
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "alpha-batch-56",
+        "notes": "Checked unqualified smooth-knot hypothesis: explicit Lipschitz cone-cover volume argument provides path connectivity without requiring a code or countable choice. Inversion gives contractible infinity ball and punctured-ball overlap; sphere radial SDR is pointed at the chosen sphere point. Explicit concatenation/retracing gives basepoint change and commutation with inclusion, using laws rather than misquoting a basepoint theorem. Open-cover hypotheses and all basepoints checked. Simply-connected-overlap corollary yields free product with trivial factor, hence inclusion isomorphism. Reader repair accepted; no refuter finding."
+      },
+      "proof_status": "complete-local-proof",
+      "proof_status_evidence": "Current rows 1.1–3.1 prove path-connectedness by explicit cone avoidance, the simply connected infinity overlap by radial deformation and based-loop conjugation, and the van Kampen inclusion. Earlier focused repair evidence remains historical; this records no independent review or native gate credit.",
+      "unresolved_supplier_checks": [],
+      "unresolved_obligations": [],
+      "finite_smoke": [],
+      "owner_resolution_evidence": {
+        "reviewer": "/root/knot_wirtinger_rack_repair",
+        "repair_report": "research/inverse-problems-knot-theory-all-109-2026-10-19-owner-knot-repair-round2/repair-report.json",
+        "attribution": "Focused delegated proof repair/current reading; native author/dispatch history remains unchanged.",
+        "native_execution_coverage_adopted": false
+      }
+    },
+    "alg-knot-wirtinger-presentation-from-code": {
+      "citations": [],
+      "derivations": [],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The Definition accepts a designated under-arc of one oriented knot; the empty link has no such input."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "The crossing-free knot has one maximal under-arc and no crossing relators under the stated traversal convention. The current item is a Definition, so old references to proof1.1/2.1 are stale and should be removed.",
+          "template_review": {
+            "upheld": true,
+            "by": "/root",
+            "reason": "The crossing-free knot has one maximal under-arc and no crossing relators under the stated traversal convention. The current item is a Definition, so old references to proof1.1/2.1 are stale and should be removed.",
+            "item_sha256": "cf5fe96ffccf656a2c46852da250375690a1a09b7198f8f0ab674d45058bae1a",
+            "row_sha256": "b02b6557abad9daa445a31d45adc19aa918e053b7a6ac24073326e378a68e5cd",
+            "role": "root-adopted actual delegated owner-focused FIRST; not native Alpha",
+            "delegated_reviewer": "/root/floer_duality_repair",
+            "delegated_review_sources": [
+              {
+                "file": "research/inverse-problems-knot-theory-all-109-2026-10-19-supervision-20261020/step2-supervision/battery1-boundary/lane-1/proposal.json",
+                "field": "rows",
+                "index": 306
+              }
+            ],
+            "root_adoption_record": "research/inverse-problems-knot-theory-all-109-2026-10-19-supervision-20261020/step2-supervision/battery1-boundary/lane-1/root-final-adoption.json"
+          }
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "When there is one maximal under-arc, the returned presentation has its one generator. A crossing can repeat that label in its relator; the Definition appends a relator per crossing, not per distinct triple of labels.",
+          "template_review": {
+            "upheld": true,
+            "by": "/root",
+            "reason": "When there is one maximal under-arc, the returned presentation has its one generator. A crossing can repeat that label in its relator; the Definition appends a relator per crossing, not per distinct triple of labels.",
+            "item_sha256": "cf5fe96ffccf656a2c46852da250375690a1a09b7198f8f0ab674d45058bae1a",
+            "row_sha256": "d74feb90956702f2dd632a8057d3359d84f59eebbc1d5d18e24138d902d4b4c3",
+            "role": "root-adopted actual delegated owner-focused FIRST; not native Alpha",
+            "delegated_reviewer": "/root/floer_duality_repair",
+            "delegated_review_sources": [
+              {
+                "file": "research/inverse-problems-knot-theory-all-109-2026-10-19-supervision-20261020/step2-supervision/battery1-boundary/lane-1/proposal.json",
+                "field": "rows",
+                "index": 307
+              }
+            ],
+            "root_adoption_record": "research/inverse-problems-knot-theory-all-109-2026-10-19-supervision-20261020/step2-supervision/battery1-boundary/lane-1/root-final-adoption.json"
+          }
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "The Definition explicitly tests incidence, branch pairing, segment overlap, transverse recorded crossings and unrecorded intersections. Invalid data return invalid-input; no nonexistent proof1.1 is needed for that instruction.",
+          "template_review": {
+            "upheld": true,
+            "by": "/root",
+            "reason": "The Definition explicitly tests incidence, branch pairing, segment overlap, transverse recorded crossings and unrecorded intersections. Invalid data return invalid-input; no nonexistent proof1.1 is needed for that instruction.",
+            "item_sha256": "cf5fe96ffccf656a2c46852da250375690a1a09b7198f8f0ab674d45058bae1a",
+            "row_sha256": "d25702dedf5dcf7f6a9f2eb5a819be7f2ef886fe439d0632eb189b3f804c0c83",
+            "role": "root-adopted actual delegated owner-focused FIRST; not native Alpha",
+            "delegated_reviewer": "/root/floer_duality_repair",
+            "delegated_review_sources": [
+              {
+                "file": "research/inverse-problems-knot-theory-all-109-2026-10-19-supervision-20261020/step2-supervision/battery1-boundary/lane-1/proposal.json",
+                "field": "rows",
+                "index": 308
+              }
+            ],
+            "root_adoption_record": "research/inverse-problems-knot-theory-all-109-2026-10-19-supervision-20261020/step2-supervision/battery1-boundary/lane-1/root-final-adoption.json"
+          }
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "The input is a closed knot code with paired half-edges; open strand endpoints are rejected by the Definition, not a boundary parameter of the procedure."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "The designated arc is supplied and traversal orders the finite oriented code. The relator is then read from its local normal convention; there is no indexed family of arbitrary nonempty choices and no current proof2.1. [Owner-focused FIRST reviewed location: Complete displayed Definition/claim and its actual boundary clauses; this source has no numbered Proof/Verification section. Definition only: finite validation, oriented traversal and crossing-relator instructions (no numbered Proof). Supplier Statements only where explicitly indicated; no accepted supplier-body audit.]",
+          "template_review": {
+            "upheld": true,
+            "by": "/root",
+            "reason": "The designated arc is supplied and traversal orders the finite oriented code. The relator is then read from its local normal convention; there is no indexed family of arbitrary nonempty choices and no current proof2.1.",
+            "item_sha256": "cf5fe96ffccf656a2c46852da250375690a1a09b7198f8f0ab674d45058bae1a",
+            "row_sha256": "b689225f7f5522e14e35af2e07e86350d7413ac2a07c549091c2cc489f720d01",
+            "role": "root-adopted actual delegated owner-focused FIRST; not native Alpha",
+            "delegated_reviewer": "/root/floer_duality_repair",
+            "delegated_review_sources": [
+              {
+                "file": "research/inverse-problems-knot-theory-all-109-2026-10-19-supervision-20261020/step2-supervision/battery1-boundary/lane-1/proposal.json",
+                "field": "rows",
+                "index": 309
+              }
+            ],
+            "root_adoption_record": "research/inverse-problems-knot-theory-all-109-2026-10-19-supervision-20261020/step2-supervision/battery1-boundary/lane-1/root-final-adoption.json"
+          }
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "This algorithm specifies output and local construction, not an iff theorem."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "This algorithm has no converse implication; presentation correctness is proved by the separate theorem."
+        }
+      ],
+      "finite_checks": [
+        {
+          "name": "crossing-free-one-generator-output",
+          "method": "manual exact finite/symbolic calculation",
+          "anchor_steps": [
+            "1.1",
+            "2.1"
+          ],
+          "calculation": "One under-arc and zero crossing records give one generator and no relators. A one-arc curl gives x^-1 x x x^-1, freely reducing to the identity.",
+          "result": "<x|> in both cases",
+          "scope_limit": "Corroborates this fixed example only; the general assertion is established by the anchored local proof. No finite-smoke execution or native gate credit claimed.",
+          "assertion": "Every validation pass and the oriented traversal operate on finite vertex, edge, and half-edge sets. Coherent opposite-half-edge pairing makes the traversal return to its starting arc after finitely many steps; the explicit one-component ch"
+        }
+      ],
+      "axiom_uses": [],
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "/root/knot_wirtinger_rack_repair",
+        "notes": "Historical focused repair review predates the explicit rational-coordinate, cyclic-order, and starting-arc validation. It does not independently review or accept the reader-modified Definition. Native review and gates remain owed."
+      },
+      "proof_status": "complete-local-proof",
+      "proof_status_evidence": "Steps1.1–2.1 establish finite validation/traversal and the actual positive-normal source/target relator; the correctness theorem proves the meridian-group identification. This records the current owner repair, not native author completion, independent review or gate credit.",
+      "unresolved_supplier_checks": [],
+      "unresolved_obligations": [],
+      "finite_smoke": [],
+      "owner_resolution_evidence": {
+        "reviewer": "/root/knot_wirtinger_rack_repair",
+        "repair_report": "research/inverse-problems-knot-theory-all-109-2026-10-19-owner-knot-repair-round2/repair-report.json",
+        "attribution": "Focused delegated proof repair/current reading; native author/dispatch history remains unchanged.",
+        "native_execution_coverage_adopted": false
+      },
+      "owner_metadata_note": {
+        "algorithm_proof_phase_reconciliation": {
+          "kind": "root-final-based-algorithm-proof-phase-reconciliation",
+          "prepared_by": "/root/instanton_original_review",
+          "adoption": "Proposed metadata for root integration after writer drain; this proposal is not a new root or native acceptance.",
+          "basis": "research/inverse-problems-knot-theory-all-109-2026-10-19-supervision-20261020/step2-supervision/batch56/root-final-adoption.json",
+          "root_final_scope": "Actual native successful but collector-invalid repair retains original report/counters. FIRST checked repaired termination/property placement, crossing-cover zero-case and finiteCW contraction, infinity collar, actual diagram transitions and all prepared affected uses.",
+          "current_algorithm": "Pure procedure; its Definition validates finite rational geometry, geometric/recorded cyclic-order agreement with transverse alternating branches, and the designated starting under-arc, then traverses and emits one positive-normal relator per crossing. No numbered Proof remains.",
+          "historical_contract_archive": "research/inverse-problems-knot-theory-all-109-2026-10-19-supervision-20261020/step2-supervision/root-contract-prep/algorithm-migration/batch-56-full-contract-before.json",
+          "historical_numbered_row_dispositions": [
+            {
+              "old_step": "1.1",
+              "destination_rows": [
+                {
+                  "id": "thm-knot-wirtinger-presentation-correctness",
+                  "steps": [
+                    "1.1"
+                  ],
+                  "content": "Explicit finite incidence and rational segment tests, cyclic finite traversal, finite crossing pass and returned finite presentation; includes crossing-free one-generator case."
+                }
+              ]
+            },
+            {
+              "old_step": "2.1",
+              "destination_rows": [
+                {
+                  "id": "thm-knot-wirtinger-presentation-correctness",
+                  "steps": [
+                    "1.1",
+                    "2.1",
+                    "3.1"
+                  ],
+                  "content": "Exactly one positive-normal source/target conjugacy relator per crossing, actual local meridian relation, quotient normal closure and based-meridian assignment."
+                }
+              ]
+            }
+          ],
+          "destination_proofs_retained": true,
+          "obligations_deleted": false,
+          "boundary_risk_history": "All old boundary, finite-check, risk, axiom, status, resolution-history and other nonmirror fields are retained verbatim. Their historical step references must be read through this migration map; no fresh boundary/risk review is fabricated.",
+          "legacy_proof_status": "Existing proof_status/proof_status_evidence are retained as historical records, not a claim that the algorithm still has a proof phase; actual source provenance is proof:not-applicable. Root owns any later status normalization.",
+          "new_math_acceptance": false,
+          "native_history_or_counters_changed": false
+        }
+      }
+    },
+    "thm-knot-wirtinger-presentation-correctness": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "lem-wirtinger-crossing-ball-cover",
+          "source_section": "Statement",
+          "quote": "Let $K\\subset\\mathbb R^3$ be a smooth oriented knot with a regular diagram represented by a valid finite planar code, and let $c$ be its number of crossings. For $c>0$, choose the closed tubular disk-bundle neighborhood $N(K)$ formed from one product cap about each underpass and one product tube along each intervening upper arc, attached in the cyclic order of the knot and rounded in disjoint charts. Put $E_K=\\mathbb R^3\\setminus\\operatorname{int}N(K)$. There is a subspace $Y\\subset E_K$, fixed pointwise by a strong deformation retraction of $E_K$, with a finite relative-open cover\n$$Y=U\\cup V_1\\cup\\cdots\\cup V_c.$$\nThe space $U$ deformation retracts to a wedge of $c$ circles. With a common basepoint in the collar above the diagram and access paths in that collar extended into the arc charts, the positive under-arc meridians are its free basis. Each $V_i$ is contractible, $U\\cap V_i$ is an open annulus around the $i$-th crossing attachment, and distinct $V_i$ are disjoint. Thus $V_i$ meets $U$ and any previously attached crossing pieces precisely in $U\\cap V_i$.\n\nFor $c=0$, choose a sufficiently small Euclidean normal tube and let $E_K$ be its exterior. The Euclidean complement has homotopy type $S^1\\vee S^2$, with the circle represented by the positive meridian. In particular its fundamental group is infinite cyclic; the extra sphere at infinity must not be discarded. In both cases the punctured chosen disk-bundle tube retracts radially to its boundary, giving a strong deformation retraction $\\mathbb R^3\\setminus K\\to E_K$. These constructions require only finitely many charts and no choice axiom.",
+          "uses": [
+            "1.1",
+            "2.1",
+            "4.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "lem-wirtinger-local-meridian-conjugacy",
+          "source_section": "Statement",
+          "quote": "Orient the projection plane by the viewing normal and the ambient orientation. At an oriented crossing let $o$ be the over-arc, and let $n_o$ be its positive in-plane normal: the ordered pair consisting of the over-tangent and $n_o$ is positive. Call the under-side from which $n_o$ points the source $s$, and the side toward which it points the target $t$. A positive meridian is the oriented boundary of a small normal disk whose orientation, preceded by the oriented knot tangent, is the ambient orientation. With the common upper-collar basing paths, the based positive meridians satisfy\n$$m_t=m_o^{-1}m_s m_o.$$\nThis side-based equation is independent of the direction of the understrand. In an oriented chart with over-tangent rightward, the target is the upper side $L$ and source the lower side $R$, so equivalently $m_R=m_o m_Lm_o^{-1}$. In incoming/outgoing notation, the outgoing under-meridian is $m_o^{-1}m_{\\rm in}m_o$ if the under-tangent points along $n_o$, and is $m_om_{\\rm in}m_o^{-1}$ otherwise. Reversing a chosen meridian loop inverts its class. Changing every common access path by the same based loop conjugates all three classes simultaneously.",
+          "uses": [
+            "2.1",
+            "5.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "thm-seifert-van-kampen",
+          "source_section": "Statement",
+          "quote": "Let $X=U\\cup V$, where $U$ and $V$ are open path-connected subsets of $X$, let $U\\cap V$ be path-connected, and fix $x_0\\in U\\cap V$. For the inclusion-induced maps in the diagram\n\n$$\\pi_1(U,x_0)\\longleftarrow\\pi_1(U\\cap V,x_0)\\longrightarrow\\pi_1(V,x_0),$$\n\nthe group $\\pi_1(X,x_0)$, together with the two inclusion-induced homomorphisms, is a pushout ([[def-pushout-of-group-homomorphisms]]). Equivalently, the canonical homomorphism from any pushout $P$ of the displayed diagram to $\\pi_1(X,x_0)$ is an isomorphism. No injectivity of either map from the overlap group is assumed.",
+          "uses": [
+            "2.1",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "thm-group-pushout-as-an-amalgamated-quotient",
+          "source_section": "Statement",
+          "quote": "For homomorphisms $f:K\\to G$ and $h:K\\to H$, let $N$ be the normal closure in $G\\ast H$ of $$\\{j_G(f(k))j_H(h(k))^{-1}:k\\in K\\}.$$ Then $(G\\ast H)/N$, with the induced factor maps $j_G$ and $j_H$, is a pushout of $f$ and $h$.",
+          "uses": [
+            "2.1",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "thm-fundamental-group-of-finite-wedge-of-circles",
+          "source_section": "Statement",
+          "quote": "Let $Q=\\mathbb R/\\mathbb Z$ be pointed at $[0]$, and for $r\\in\\mathbb N$ put\n\n$$W_r:=\\bigvee_{j<r}(Q,[0]).$$\n\nThen $\\pi_1(W_r,w)$ is the free group on the $r$ standard loops, one traversing each circle summand once. In particular it has rank $r$ ([[def-rank-of-a-finite-rank-free-group]]). For $r=0$, $W_0$ is a point and the basis is empty.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F6",
+          "source": "def-free-group",
+          "source_section": "Definition",
+          "quote": "A **free group on a set $X$** is a group $F(X)$ together with a map\n$i:X\\to F(X)$ such that, for every group $G$ and every function $u:X\\to G$,\nthere is a unique group homomorphism $\\widehat u:F(X)\\to G$ satisfying\n\n$$\\widehat u\\circ i=u.$$\n\nThe reduced-word construction supplies such a group; the construction and its\nuniversal property are established in [[thm-reduced-words-form-the-free-group]].\nWhen no ambiguity arises, $x\\in X$ is identified with its image $i(x)$.",
+          "uses": [
+            "1.1",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F7",
+          "source": "def-group-presentation",
+          "source_section": "Definition",
+          "quote": "Let $F(X)$ be a free group and let $R\\subseteq F(X)$ be a set of words, called\n**relations**. The group with presentation\n\n$$\\langle X\\mid R\\rangle:=F(X)/\\langle\\!\\langle R\\rangle\\!\\rangle_{F(X)}$$\n\nis the quotient by the normal closure of $R$. The members of $X$ are its\n**generators**. In this quotient, every relation in $R$ becomes the identity,\nas do all consequences forced by normality.",
+          "uses": [
+            "1.1",
+            "3.1",
+            "6.1"
+          ]
+        },
+        {
+          "fact": "F8",
+          "source": "thm-quotient-group-universal-property",
+          "source_section": "Statement",
+          "quote": "A homomorphism that kills a normal subgroup factors uniquely through the quotient group.\n\nIf $N\\mathrel{\\trianglelefteq}G$, $f:G\\to H$ is a homomorphism, and\n$N\\subseteq\\ker f$, then there is a unique homomorphism $\\bar f:G/N\\to H$\nsuch that $\\bar f(gN)=f(g)$ and $f=\\bar f\\circ\\pi$.",
+          "uses": [
+            "1.1",
+            "3.1",
+            "6.1"
+          ]
+        },
+        {
+          "fact": "F9",
+          "source": "lem-knot-group-infinity-collar",
+          "source_section": "Statement",
+          "quote": "Let $K\\subset\\mathbb R^3$ be a compact smooth knot and let $b\\in\\mathbb R^3\\setminus K$. The inclusion $\\mathbb R^3\\setminus K\\hookrightarrow S^3\\setminus K$ induces an isomorphism\n$$\\pi_1(\\mathbb R^3\\setminus K,b)\\xrightarrow{\\ \\cong\\ }\\pi_1(S^3\\setminus K,b).$$",
+          "uses": [
+            "4.1"
+          ]
+        },
+        {
+          "fact": "F10",
+          "source": "alg-knot-wirtinger-presentation-from-code",
+          "source_section": "Definition",
+          "quote": "The input is a finite record $D$ and a designated starting under-arc $a_0$ of one oriented knot. First check that the vertex, edge, and segment lists are finite; that every vertex, bend, and point on an edge polyline has rational coordinates; and that each polyline has the prescribed incident endpoints. Before geometric tests, delete consecutive repeated coordinates from each polyline; reject an edge with no positive-length segment or a crossing with a zero-length incident ray. Check that every crossing has four incident half-edges, a recorded cyclic order and a pairing into alternating opposite branches, and one designated over-branch; every other vertex must be a valence-two bend. Check that edge orientations agree at bends and continue coherently through each paired branch, and that following these pairings and bends traces one oriented circle. If $a_0$ is not one of the resulting under-arcs, or any structural check fails, return invalid-input.\n\nFor every unordered pair of line segments, compute the determinant of their rational direction vectors. If it is nonzero, solve the two-coordinate intersection equations over $\\mathbb{Q}$ and check whether the solution lies on both closed segments. If the determinant is zero, test collinearity and overlap by exact rational determinant and endpoint-order comparisons. Reject every self-intersection, every positive-length overlap, and every intersection except a shared declared bend or crossing vertex with the recorded incidence. At each crossing, sort the four nonzero incident rays by half-plane and exact determinant comparisons; reject the input if two rays have the same direction, if this geometric cyclic order disagrees with the recorded order, or if the paired branches do not alternate. These checks are finite.\n\nAfter validation, traverse the oriented knot once from $a_0$, label the maximal under-arcs $a_1,\\ldots,a_m$, and introduce one symbol $x_i$ for the positive meridian of each $a_i$. At each crossing, let the outgoing over-half-edge be the ray in the direction of the oriented over-tangent. In the verified counterclockwise cyclic order, the under-half-edge immediately following it is the target side $a_t$; the other under-half-edge is the source side $a_s$. Read the over-arc $a_o$ and append exactly the relator $x_o^{-1}x_sx_ox_t^{-1}$. This rule uses the positive in-plane normal, which points counterclockwise from the oriented over-tangent, and does not depend on the under-strand direction. The orientation of each positive meridian is fixed by requiring the oriented knot tangent followed by its normal-disk orientation to give the ambient orientation. Use the diagram's common upper-collar access paths to base all meridians at one point in that collar. If the chosen complement basepoint lies elsewhere, prepend the same path from it to the collar basepoint to every access path. Interpret $x_i$ as the resulting based positive meridian. Return the finite group presentation with generators $x_1,\\ldots,x_m$ and one relator per crossing.",
+          "uses": [
+            "1.1",
+            "6.1"
+          ]
+        },
+        {
+          "fact": "F11",
+          "source": "thm-fundamental-group-of-the-circle",
+          "source_section": "Statement",
+          "quote": "$\\operatorname{Deg}:\\pi_1(\\mathbb R/\\mathbb Z,[0])\\to(\\mathbb Z,+)$ is an isomorphism. Its inverse is\n\n$$n\\longmapsto[\\omega_n].$$",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F12",
+          "source": "thm-fundamental-group-laws",
+          "source_section": "Statement",
+          "quote": "For every pointed topological space $(X,x_0)$, the product\n\n$$[\\alpha][\\beta]=[\\alpha*\\beta]$$\n\nis well defined and makes $\\pi_1(X,x_0)$ a group. Its identity is the class of\nthe constant loop $c_{x_0}$, and $[\\alpha]^{-1}=[\\bar\\alpha]$.",
+          "uses": [
+            "2.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "The input code has finite vertex, edge, segment and crossing lists, so the rational-coordinate, incidence, cyclic-order and starting-arc checks are finite. Each pairwise segment test uses terminating rational determinant, intersection and endpoint-order operations. A failed validation returns invalid-input. If validation succeeds, the one-component tracing follows the finite cyclic list of edges and paired half-edges from $a_0$, returns to $a_0$ after finitely many steps, and labels each maximal under-arc once. The crossing pass then visits the finite crossing list once, reads each source and target from its verified cyclic order, appends exactly the corresponding positive-meridian relator, and returns the finite presentation. Thus the procedure terminates with one generator per under-arc and one relator per crossing, as claimed. If $c=0$, the explicit punctured-product model in [F1] gives its fundamental group as infinite cyclic on the positive meridian (the sphere factor is simply connected), while [F6]–[F8] identify the returned one-generator empty-relator presentation with the same free cyclic group. If $c>0$, [F1] and [F5] give the free meridian basis for the meridian region.",
+          "step": "1.1",
+          "inputs": [
+            "F1",
+            "F5",
+            "F6",
+            "F7",
+            "F8",
+            "F10",
+            "F11",
+            "given",
+            "construct",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "Assume $c>0$ and order the crossings $v_1,\\ldots,v_c$. Let $b_*$ be the common collar basepoint in $U$, and let $X_0=U$ and $X_i=U\\cup V_1\\cup\\cdots\\cup V_i$. For each $i$, the relative-open cover $X_i=X_{i-1}\\cup V_i$ has intersection $A_i=U\\cap V_i$, the annulus specified in [F1]. Choose $q_i$ on its core and use the supplied collar access path $\\gamma_i$ in $U$ from $b_*$ to $q_i$. Concatenation and reparameterization make $[\\alpha]\\mapsto[\\bar\\gamma_i*\\alpha*\\gamma_i]$ a well-defined homomorphism from loops based at $b_*$ to loops based at $q_i$. Its inverse uses $\\bar\\gamma_i$, since the inserted path-reversal pairs contract by the piecewise retracing homotopy. The same concatenation formula commutes with inclusion. Apply [F3] at $q_i$: since $V_i$ is contractible, [F4] identifies $\\pi_1(X_i,q_i)$ with $\\pi_1(X_{i-1},q_i)$ modulo the normal closure of the annular-core image. Compute that image in $\\pi_1(U,b_*)$, before attaching any crossing piece. In the cap model of [F1], push its boundary to the top plate at $z=0$; deleting the two exit disks makes this plate a disk with two holes. Let $\\mu_s,\\mu_t$ be the exit meridians, and let $\\eta$ run from their basepoints across the plate between the exits, below the over-arc. The oriented knot enters one exit and leaves the other, so their positive meridians have opposite planar orientations. Cutting the two-holed plate along access arcs reads its outer boundary, up to orientation and basing conjugacy, as $\\mu_s\\eta\\mu_t^{-1}\\eta^{-1}$. All these paths lie in $A\\subset U$. For the common collar paths $\\alpha_s,\\alpha_t$, the loop $\\alpha_s\\eta\\alpha_t^{-1}$ represents $m_o$ in $U$: in the over-normal $(y,z)$ plane it runs from the high collar down the source side, across below the over-arc, and back up the target side, winding once positively. Its straightening to the over-meridian stays above the plate and avoids both exit tubes and the over-tube. This is the same local path calculation as [F2], performed entirely in the upper region, without using an attached cap. Therefore the outer-boundary image is, up to conjugacy and inversion, $m_s m_o m_t^{-1}m_o^{-1}=m_o(m_o^{-1}m_s m_o m_t^{-1})m_o^{-1}$. Its normal closure is exactly that of the constructor's relator, whether or not the understrand orientation follows the source-to-target direction. This computes the attaching word in the free group, rather than inferring it from an equation in the final complement. Distinct $V_i$ are disjoint, so these are precisely the intersections at every stage. Repeating over the finite crossing list kills exactly the normal closure of the constructor's relators.",
+          "step": "2.1",
+          "inputs": [
+            "F1",
+            "F2",
+            "F3",
+            "F4",
+            "F12",
+            "step 1.1",
+            "construct",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "claim": "By [F6] and [F7], the quotient in step 2.1 is the returned presentation group; [F8] identifies the quotient map with the homomorphism sending each symbol to its positive meridian. It is an isomorphism onto the group of the covered exterior by the pushout construction.",
+          "step": "3.1",
+          "inputs": [
+            "F3",
+            "F4",
+            "F6",
+            "F7",
+            "F8",
+            "step 2.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-4-1",
+          "claim": "For $c=0$, step 1.1 already identifies the returned cyclic presentation with the Euclidean complement group on the positive meridian. For $c>0$, step 3.1 identifies the presentation with the covered exterior group, and the compact-tube retraction identifies that group with $\\pi_1(\\mathbb R^3\\setminus K)$. In both cases [F9] then gives the isomorphism to $\\pi_1(S^3\\setminus K)$, with exactly the stated positive-meridian assignment.",
+          "step": "4.1",
+          "inputs": [
+            "F1",
+            "F9",
+            "step 1.1",
+            "step 3.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-5-1",
+          "claim": "By [F2], replacing the common basing path conjugates every generator image by the same element. Simultaneous conjugation is an inner automorphism of the target group, so the resulting presentation group remains isomorphic to $\\pi_1(S^3\\setminus K)$.",
+          "step": "5.1",
+          "inputs": [
+            "F2",
+            "step 4.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-6-1",
+          "claim": "Changing the designated start arc reindexes the same finite list of under-arcs. The induced bijection of generator symbols carries each crossing's over/under labels, and therefore each constructor relator, to the corresponding relator in the new indexing. It extends to an isomorphism of the free groups and carries one relator normal closure onto the other; [F7] and [F8] give an isomorphism of the presented quotients.",
+          "step": "6.1",
+          "inputs": [
+            "F7",
+            "F8",
+            "F10",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The Statement requires a valid one-component knot code and designated under-arc; empty-link or empty-arc data are not admissible."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Step 1.1 uses the repaired S1 wedge S2 Euclidean model to identify the zero-crossing meridian group; step 4.1 explicitly routes that branch to the S3 group."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Step 1.1 covers the one-arc presentation directly; for a one-crossing code step 2.1 adds its single annular-core relation."
+        },
+        {
+          "case": "degenerate",
+          "status": "not_applicable",
+          "reason": "The constructor theorem assumes a valid regular code; malformed incidence and tangential crossings are rejected by the algorithm Definition rather than included as claimed knot presentations."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Step 5.1 preserves the based endpoints while changing the common access loop by simultaneous conjugation; step 6.1 checks reindexing when the designated start arc changes."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Steps 1.1 and 2.1 use the finite supplied cover and relators, and step 6.1 a finite generator bijection; no choice axiom beyond the actual choice-free geometric supplier is introduced."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The theorem asserts the specific meridian map is an isomorphism, not an iff characterization."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "It makes no converse claim that arbitrary presentations classify or reconstruct knots."
+        }
+      ],
+      "finite_checks": [
+        {
+          "name": "zero-crossing-output-and-meridian-check",
+          "method": "manual exact finite/symbolic calculation",
+          "anchor_steps": [
+            "1.1",
+            "4.1",
+            "6.1"
+          ],
+          "calculation": "The zero-crossing code returns one generator, zero relators; the repaired zero-case model has meridian group Z, and the only possible start-arc reindexing is the identity.",
+          "result": "The actual meridian map identifies <x|> with Z; the sphere factor contributes no extra pi1 generator.",
+          "scope_limit": "Corroborates this fixed example only; the general assertion is established by the anchored local proof. No finite-smoke execution or native gate credit claimed.",
+          "assertion": "By"
+        }
+      ],
+      "axiom_uses": [],
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "alpha-batch-56",
+        "notes": "Reviewed finite validation including zero-length rejection, exact rational intersections, structural cyclic orders and one oriented component. At a corner, geometric alternating cyclic order supplies source/target without an undefined crossing tangent determinant. For valid codes traversal emits one generator per maximal under-arc; c=0 emits one generator, no relators. Correctness proof rebases at each annular overlap, applies van Kampen to path-connected relative-open pieces and kills precisely each relator normal closure. Access conjugation, arbitrary complement basepoint, zero-crossing sphere retention, infinity inclusion, and cyclic relabeling checked against actual supplier statements. No additional choice principle or prerequisite cycle. Reader repairs accepted."
+      },
+      "proof_status": "complete-local-proof",
+      "proof_status_evidence": "Steps1.1–6.1 now handle the S1 wedge S2 zero branch, positive crossing attachments, actual meridian map, infinity inclusion, common basing conjugation and designated-start reindexing. This records the current owner repair, not native author completion, independent review or gate credit.",
+      "unresolved_supplier_checks": [],
+      "unresolved_obligations": [],
+      "finite_smoke": [],
+      "owner_resolution_evidence": {
+        "reviewer": "/root/knot_wirtinger_rack_repair",
+        "repair_report": "research/inverse-problems-knot-theory-all-109-2026-10-19-owner-knot-repair-round2/repair-report.json",
+        "attribution": "Focused delegated proof repair/current reading; native author/dispatch history remains unchanged.",
+        "native_execution_coverage_adopted": false
+      }
+    },
+    "ex-knot-kt-01-worked-cases": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "alg-knot-wirtinger-presentation-from-code",
+          "source_section": "Definition",
+          "quote": "The input is a finite record $D$ and a designated starting under-arc $a_0$ of one oriented knot. First check that the vertex, edge, and segment lists are finite; that every vertex, bend, and point on an edge polyline has rational coordinates; and that each polyline has the prescribed incident endpoints. Before geometric tests, delete consecutive repeated coordinates from each polyline; reject an edge with no positive-length segment or a crossing with a zero-length incident ray. Check that every crossing has four incident half-edges, a recorded cyclic order and a pairing into alternating opposite branches, and one designated over-branch; every other vertex must be a valence-two bend. Check that edge orientations agree at bends and continue coherently through each paired branch, and that following these pairings and bends traces one oriented circle. If $a_0$ is not one of the resulting under-arcs, or any structural check fails, return invalid-input.\n\nFor every unordered pair of line segments, compute the determinant of their rational direction vectors. If it is nonzero, solve the two-coordinate intersection equations over $\\mathbb{Q}$ and check whether the solution lies on both closed segments. If the determinant is zero, test collinearity and overlap by exact rational determinant and endpoint-order comparisons. Reject every self-intersection, every positive-length overlap, and every intersection except a shared declared bend or crossing vertex with the recorded incidence. At each crossing, sort the four nonzero incident rays by half-plane and exact determinant comparisons; reject the input if two rays have the same direction, if this geometric cyclic order disagrees with the recorded order, or if the paired branches do not alternate. These checks are finite.\n\nAfter validation, traverse the oriented knot once from $a_0$, label the maximal under-arcs $a_1,\\ldots,a_m$, and introduce one symbol $x_i$ for the positive meridian of each $a_i$. At each crossing, let the outgoing over-half-edge be the ray in the direction of the oriented over-tangent. In the verified counterclockwise cyclic order, the under-half-edge immediately following it is the target side $a_t$; the other under-half-edge is the source side $a_s$. Read the over-arc $a_o$ and append exactly the relator $x_o^{-1}x_sx_ox_t^{-1}$. This rule uses the positive in-plane normal, which points counterclockwise from the oriented over-tangent, and does not depend on the under-strand direction. The orientation of each positive meridian is fixed by requiring the oriented knot tangent followed by its normal-disk orientation to give the ambient orientation. Once a complement basepoint and basing paths to the meridians are fixed, interpret $x_i$ as the corresponding based positive meridian. Return the finite group presentation with generators $x_1,\\ldots,x_m$ and one relator per crossing.",
+          "uses": [
+            "1.1",
+            "1.2",
+            "1.3"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "lem-wirtinger-local-meridian-conjugacy",
+          "source_section": "Statement",
+          "quote": "Orient the projection plane by the viewing normal and the ambient orientation. At an oriented crossing let $o$ be the over-arc, and let $n_o$ be its positive in-plane normal: the ordered pair consisting of the over-tangent and $n_o$ is positive. Call the under-side from which $n_o$ points the source $s$, and the side toward which it points the target $t$. A positive meridian is the oriented boundary of a small normal disk whose orientation, preceded by the oriented knot tangent, is the ambient orientation. With the common upper-collar basing paths, the based positive meridians satisfy\n$$m_t=m_o^{-1}m_s m_o.$$\nThis side-based equation is independent of the direction of the understrand. In an oriented chart with over-tangent rightward, the target is the upper side $L$ and source the lower side $R$, so equivalently $m_R=m_o m_Lm_o^{-1}$. In incoming/outgoing notation, the outgoing under-meridian is $m_o^{-1}m_{\\rm in}m_o$ if the under-tangent points along $n_o$, and is $m_om_{\\rm in}m_o^{-1}$ otherwise. Reversing a chosen meridian loop inverts its class. Changing every common access path by the same based loop conjugates all three classes simultaneously.",
+          "uses": [
+            "1.2",
+            "1.3"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "thm-knot-wirtinger-presentation-correctness",
+          "source_section": "Statement",
+          "quote": "Let $K\\subset S^3$ be a smooth oriented knot, let $D$ be a valid finite planar code for a regular diagram of $K$, choose a basepoint $b$ in the complement, and designate a starting under-arc. The finite procedure $\\mathsf{Wirtinger}(D,a_0)$ terminates and returns a presentation with one positive-meridian generator for each under-arc and one crossing conjugacy relator for each crossing. For the based meridians determined by the diagram's common upper-collar paths from $b$, the homomorphism from the presented group to $\\pi_1(S^3\\setminus K,b)$ that sends each generator to its corresponding based positive meridian is an isomorphism. Changing the designated starting under-arc only relabels the same finite cyclic arc set and gives an isomorphic presentation. If all basing paths are changed by prepending the same based loop, every generator image is conjugated by the same element, so the isomorphism type is unchanged.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "def-group-presentation",
+          "source_section": "Definition",
+          "quote": "Let $F(X)$ be a free group and let $R\\subseteq F(X)$ be a set of words, called\n**relations**. The group with presentation\n\n$$\\langle X\\mid R\\rangle:=F(X)/\\langle\\!\\langle R\\rangle\\!\\rangle_{F(X)}$$\n\nis the quotient by the normal closure of $R$. The members of $X$ are its\n**generators**. In this quotient, every relation in $R$ becomes the identity,\nas do all consequences forced by normality.",
+          "uses": [
+            "1.1",
+            "1.2",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "def-free-group",
+          "source_section": "Definition",
+          "quote": "A **free group on a set $X$** is a group $F(X)$ together with a map\n$i:X\\to F(X)$ such that, for every group $G$ and every function $u:X\\to G$,\nthere is a unique group homomorphism $\\widehat u:F(X)\\to G$ satisfying\n\n$$\\widehat u\\circ i=u.$$\n\nThe reduced-word construction supplies such a group; the construction and its\nuniversal property are established in [[thm-reduced-words-form-the-free-group]].\nWhen no ambiguity arises, $x\\in X$ is identified with its image $i(x)$.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F6",
+          "source": "thm-quotient-group-universal-property",
+          "source_section": "Statement",
+          "quote": "A homomorphism that kills a normal subgroup factors uniquely through the quotient group.\n\nIf $N\\mathrel{\\trianglelefteq}G$, $f:G\\to H$ is a homomorphism, and\n$N\\subseteq\\ker f$, then there is a unique homomorphism $\\bar f:G/N\\to H$\nsuch that $\\bar f(gN)=f(g)$ and $f=\\bar f\\circ\\pi$.",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F7",
+          "source": "lem-explicit-unknot-and-figure-eight-oriented-wirtinger-codes",
+          "source_section": "Statement",
+          "quote": "There are the following explicit valid finite planar codes, with the standard right/up orientation of the plane and positive based meridians using compatible common upper-collar access paths.\n\nThe counterclockwise square with vertices $(0,0),(1,0),(1,1),(0,1)$ is a crossing-free unknot code. It has one under-arc and gives $\\pi_1(S^3\\setminus U)=\\langle x\\mid\\ \\rangle\\cong\\mathbb Z$, with $x$ the positive meridian.\n\nAn oriented figure-eight code has crossings $C_1,C_2,C_3,C_4$. The letters $O,U$ mean over and under, and $i,o$ mean incoming and outgoing. Its integer plane-drawing certificate is\n\n| $r$ | $C_r$ | $rOi$ | $rOo$ | $rUi$ | $rUo$ |\n|---|---|---|---|---|---|\n| $1$ | $(-423,0)$ | $(-627,102)$ | $(-363,-30)$ | $(-363,30)$ | $(-627,-102)$ |\n| $2$ | $(0,-9)$ | $(-33,-6)$ | $(99,-18)$ | $(-99,-18)$ | $(33,-6)$ |\n| $3$ | $(0,9)$ | $(33,6)$ | $(-99,18)$ | $(99,18)$ | $(-33,6)$ |\n| $4$ | $(423,0)$ | $(627,-102)$ | $(363,30)$ | $(363,-30)$ | $(627,102)$ |\n\nThe complete cyclic visit list is $$1O,\\ 2U,\\ 3O,\\ 1U,\\ 4O,\\ 3U,\\ 2O,\\ 4U.$$ For every successive pair $rB,sD$ in this list, including the last-to-first pair, use the three straight segments of the route $C_r\\to rBo\\to sDi\\to C_s$. At each crossing pair $rOi$ with $rOo$, and $rUi$ with $rUo$; the first pair is over. Smooth the degree-two bends in disjoint small disks. The cyclic orders at crossings are the counterclockwise lists $(rOo,rUi,rOi,rUo)$ for $r=1,4$ and $(rOo,rUo,rOi,rUi)$ for $r=2,3$.\n\nLabel the under-arcs $x_1:U4\\to U2$, $x_2:U2\\to U1$, $x_3:U1\\to U3$, $x_4:U3\\to U4$. In each oriented over-branch chart, let $L$ denote its left under-side (target of the positive in-plane normal), and $R$ its right under-side (source). The exact crossing table is\n\n| crossing | over | $L$ (target) | $R$ (source) | under traversal | $\\operatorname{sign}\\det(\\text{over},\\text{under})$ |\n|---|---|---|---|---|---|\n| $R_1$ | $x_1$ | $x_2$ | $x_3$ | target to source | $-1$ |\n| $R_2$ | $x_4$ | $x_2$ | $x_1$ | source to target | $+1$ |\n| $R_3$ | $x_2$ | $x_4$ | $x_3$ | source to target | $+1$ |\n| $R_4$ | $x_3$ | $x_4$ | $x_1$ | target to source | $-1$ |\n\nThus its actual positive-meridian presentation is $$\\pi_1(S^3\\setminus 4_1)=\\langle x_1,x_2,x_3,x_4\\mid x_1x_2=x_3x_1,\\ x_1x_4=x_4x_2,\\ x_3x_2=x_2x_4,\\ x_3x_4=x_1x_3\\rangle.$$ The last relation follows from the first three. Starting on $x_1$, the underpasses occur at $R_2,R_1,R_3,R_4$, and the self-writhe is zero. All drawing data, validations and algebra in this statement are finite and use no choice axiom.",
+          "uses": [
+            "1.3"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "The crossing-free code has one under-arc and no crossing relators, so [F1] gives $\\langle x\\mid\\ \\rangle$. This is the free group on one generator, isomorphic to $(\\mathbb Z,+)$ by exponent sum using [F5]; [F3] identifies it with the unknot group.",
+          "step": "1.1",
+          "inputs": [
+            "given",
+            "F1",
+            "F3",
+            "F4",
+            "F5",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-1-2",
+          "claim": "The trefoil panels give the crossing triples $(b,c,a)$, $(c,a,b)$, and $(a,b,c)$. Applying [F2] gives the three crossing relations in the statement. The crossing with overarc $a$ gives $c=aba^{-1}$. Substituting this into $a=bcb^{-1}$ gives $a=bab a^{-1}b^{-1}$. Right multiplication by $ba$ yields $aba=bab$. Under that braid relation, $cac^{-1}=a b a b^{-1}a^{-1}=b$, so the third crossing equation follows from the first two. Thus eliminating $c$ gives exactly $\\langle a,b\\mid aba=bab\\rangle$.",
+          "step": "1.2",
+          "inputs": [
+            "given",
+            "F1",
+            "F2",
+            "F4",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-1-3",
+          "claim": "By [F7], these local charts belong to the explicit figure-eight code, rather than merely prescribing four abstract crossing relations. Each panel is an oriented local crossing chart. In every panel [F2] gives $x_ox_L=x_Rx_o$. The side triples $(o,L,R)$ are $(x_1,x_2,x_3)$, $(x_4,x_2,x_1)$, $(x_2,x_4,x_3)$, and $(x_3,x_4,x_1)$. Substitution, and reversal of the written equality when needed, gives exactly the four equations in the statement. The under-arrow direction does not select a different conjugation rule.",
+          "step": "1.3",
+          "inputs": [
+            "given",
+            "F1",
+            "F2",
+            "F7",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "In $S_3$, the two words $(12)(23)(12)$ and $(23)(12)(23)$ both equal $(13)$, so the assignment respects the trefoil relation. The transpositions $(12)$ and $(23)$ generate all six permutations $e,(12),(23),(12)(23),(23)(12),(13)$, hence the homomorphism is surjective by [F4] and [F6]. Since $S_3$ is nonabelian, this group is nonabelian.",
+          "step": "2.1",
+          "inputs": [
+            "step 1.2",
+            "F4",
+            "F6",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "claim": "From $R_3$, left multiplication by $x_1$ gives $x_1x_3x_2=x_1x_2x_4$. Applying $R_1$ to the right side gives $x_3x_1x_4$, and $R_2$ then gives $x_3x_4x_2$. Right cancellation of $x_2$ yields $x_1x_3=x_3x_4$, which is $R_4$.",
+          "step": "3.1",
+          "inputs": [
+            "step 1.3",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The Example specifies nonempty unknot, trefoil and figure-eight codes, not the empty link."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Step 1.1 computes the crossing-free unknot presentation and its cyclic group."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Step 1.1 checks the one-generator empty-relator case directly."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Step 3.1 verifies the redundant fourth figure-eight relation from the other three; step 1.3 checks all four fixed-side charts without switching on understrand orientation."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "These are closed diagrams; the displayed chart ends are local strand continuations, not open-knot inputs."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "The finite presentation substitutions in steps 1.2 and 3.1 and the explicit S3 images in step 2.1 make no selection from an infinite family."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The Example states computed presentations, not a logical iff assertion."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "No converse presentation-classification result is asserted; the S3 quotient only proves nonabelianness."
+        }
+      ],
+      "finite_checks": [
+        {
+          "name": "adjacent-transposition-S3-quotient",
+          "method": "manual exact finite/symbolic calculation",
+          "anchor_steps": [
+            "2.1"
+          ],
+          "calculation": "Compose (12)(23)(12) and (23)(12)(23) right-to-left; both are (13); the two generators produce all six permutations.",
+          "result": {
+            "a": [
+              2,
+              1,
+              3
+            ],
+            "b": [
+              1,
+              3,
+              2
+            ],
+            "aba": [
+              3,
+              2,
+              1
+            ],
+            "bab": [
+              3,
+              2,
+              1
+            ],
+            "all_generated": [
+              [
+                1,
+                2,
+                3
+              ],
+              [
+                1,
+                3,
+                2
+              ],
+              [
+                2,
+                1,
+                3
+              ],
+              [
+                2,
+                3,
+                1
+              ],
+              [
+                3,
+                1,
+                2
+              ],
+              [
+                3,
+                2,
+                1
+              ]
+            ]
+          },
+          "scope_limit": "Corroborates this fixed example only; the general assertion is established by the anchored local proof. No finite-smoke execution or native gate credit claimed.",
+          "assertion": "In $S_3$, the two words $(12)(23)(12)$ and $(23)(12)(23)$ both equal $(13)$, so the assignment respects the trefoil relation. The transpositions $(12)$ and $(23)$ generate all six permutations $e,(12),(23),(12)(23),(23)(12),(13)$, hence the"
+        },
+        {
+          "name": "figure-eight-fourth-relator-elimination",
+          "method": "manual exact finite/symbolic calculation",
+          "anchor_steps": [
+            "1.3",
+            "3.1"
+          ],
+          "calculation": "The proof gives x1x3x2=x1x2x4=x3x1x4=x3x4x2; cancel right x2.",
+          "result": "R4 follows from R1,R2,R3; a finite symbolic equality chain, not a finite quotient search.",
+          "scope_limit": "Corroborates this fixed example only; the general assertion is established by the anchored local proof. No finite-smoke execution or native gate credit claimed.",
+          "assertion": "Each figure-eight panel is an oriented local crossing chart. In every panel"
+        }
+      ],
+      "axiom_uses": [],
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "alpha-batch-56",
+        "notes": "Checked unknot cyclic identification, all three trefoil crossing triples and elimination c=aba^-1, S3 quotient (both braid words equal (13)), and redundant figure-eight R4 by left multiplication and right cancellation. Four visible figure-eight TikZ panels have over labels x1,x4,x2,x3, targets x2,x2,x4,x4 and sources x3,x1,x3,x1, with under directions matching the transition cycle. Corrected stale R3 source comment; visible mathematics unchanged. Added explicit-code lemma as F7/dependency to justify the globally realized figure-eight diagram and not infer knot type merely from four local charts; proof 1.3 now invokes its independently checked integer drawing. Existing Example claim retained. Supplier-first dependency level is now 6, with manifest synchronized. Reader comment repair retained and amended; no external consumer claim changes."
+      },
+      "proof_status": "complete-local-proof",
+      "proof_status_evidence": "Steps1.1–3.1 compute unknot, trefoil and figure-eight relations with the fixed positive-normal convention, S3 quotient and redundant-relator verification. This records the current owner repair, not native author completion, independent review or gate credit.",
+      "unresolved_supplier_checks": [],
+      "unresolved_obligations": [],
+      "finite_smoke": [],
+      "owner_resolution_evidence": {
+        "reviewer": "/root/knot_wirtinger_rack_repair",
+        "repair_report": "research/inverse-problems-knot-theory-all-109-2026-10-19-owner-knot-repair-round2/repair-report.json",
+        "attribution": "Focused delegated proof repair/current reading; native author/dispatch history remains unchanged.",
+        "native_execution_coverage_adopted": false
+      }
+    },
+    "cex-knot-kt-01-boundary-case": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "alg-knot-wirtinger-presentation-from-code",
+          "source_section": "Definition",
+          "quote": "The input is a finite record $D$ and a designated starting under-arc $a_0$ of one oriented knot. First check that the vertex, edge, and segment lists are finite; that every vertex, bend, and point on an edge polyline has rational coordinates; and that each polyline has the prescribed incident endpoints. Before geometric tests, delete consecutive repeated coordinates from each polyline; reject an edge with no positive-length segment or a crossing with a zero-length incident ray. Check that every crossing has four incident half-edges, a recorded cyclic order and a pairing into alternating opposite branches, and one designated over-branch; every other vertex must be a valence-two bend. Check that edge orientations agree at bends and continue coherently through each paired branch, and that following these pairings and bends traces one oriented circle. If $a_0$ is not one of the resulting under-arcs, or any structural check fails, return invalid-input.\n\nFor every unordered pair of line segments, compute the determinant of their rational direction vectors. If it is nonzero, solve the two-coordinate intersection equations over $\\mathbb{Q}$ and check whether the solution lies on both closed segments. If the determinant is zero, test collinearity and overlap by exact rational determinant and endpoint-order comparisons. Reject every self-intersection, every positive-length overlap, and every intersection except a shared declared bend or crossing vertex with the recorded incidence. At each crossing, sort the four nonzero incident rays by half-plane and exact determinant comparisons; reject the input if two rays have the same direction, if this geometric cyclic order disagrees with the recorded order, or if the paired branches do not alternate. These checks are finite.\n\nAfter validation, traverse the oriented knot once from $a_0$, label the maximal under-arcs $a_1,\\ldots,a_m$, and introduce one symbol $x_i$ for the positive meridian of each $a_i$. At each crossing, let the outgoing over-half-edge be the ray in the direction of the oriented over-tangent. In the verified counterclockwise cyclic order, the under-half-edge immediately following it is the target side $a_t$; the other under-half-edge is the source side $a_s$. Read the over-arc $a_o$ and append exactly the relator $x_o^{-1}x_sx_ox_t^{-1}$. This rule uses the positive in-plane normal, which points counterclockwise from the oriented over-tangent, and does not depend on the under-strand direction. The orientation of each positive meridian is fixed by requiring the oriented knot tangent followed by its normal-disk orientation to give the ambient orientation. Use the diagram's common upper-collar access paths to base all meridians at one point in that collar. If the chosen complement basepoint lies elsewhere, prepend the same path from it to the collar basepoint to every access path. Interpret $x_i$ as the resulting based positive meridian. Return the finite group presentation with generators $x_1,\\ldots,x_m$ and one relator per crossing.",
+          "uses": [
+            "1.1",
+            "1.2"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "lem-wirtinger-local-meridian-conjugacy",
+          "source_section": "Statement",
+          "quote": "Orient the projection plane by the viewing normal and the ambient orientation. At an oriented crossing let $o$ be the over-arc, and let $n_o$ be its positive in-plane normal: the ordered pair consisting of the over-tangent and $n_o$ is positive. Call the under-side from which $n_o$ points the source $s$, and the side toward which it points the target $t$. A positive meridian is the oriented boundary of a small normal disk whose orientation, preceded by the oriented knot tangent, is the ambient orientation. With the common upper-collar basing paths, the based positive meridians satisfy\n$$m_t=m_o^{-1}m_s m_o.$$\nThis side-based equation is independent of the direction of the understrand. In an oriented chart with over-tangent rightward, the target is the upper side $L$ and source the lower side $R$, so equivalently $m_R=m_o m_Lm_o^{-1}$. In incoming/outgoing notation, the outgoing under-meridian is $m_o^{-1}m_{\\rm in}m_o$ if the under-tangent points along $n_o$, and is $m_om_{\\rm in}m_o^{-1}$ otherwise. Reversing a chosen meridian loop inverts its class. Changing every common access path by the same based loop conjugates all three classes simultaneously.",
+          "uses": [
+            "1.2"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "thm-knot-wirtinger-presentation-correctness",
+          "source_section": "Statement",
+          "quote": "Let $K\\subset S^3$ be a smooth oriented knot, let $D$ be a valid finite planar code for a regular diagram of $K$, choose a basepoint $b$ in the complement, and designate a starting under-arc. The finite procedure $\\mathsf{Wirtinger}(D,a_0)$ terminates and returns a presentation with one positive-meridian generator for each under-arc and one crossing conjugacy relator for each crossing. For the based meridians determined by the diagram's common upper-collar paths from $b$, the homomorphism from the presented group to $\\pi_1(S^3\\setminus K,b)$ that sends each generator to its corresponding based positive meridian is an isomorphism. Changing the designated starting under-arc only relabels the same finite cyclic arc set and gives an isomorphic presentation. If all basing paths are changed by prepending the same based loop, every generator image is conjugated by the same element, so the isomorphism type is unchanged.",
+          "uses": [
+            "1.1",
+            "1.2"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "def-group-presentation",
+          "source_section": "Definition",
+          "quote": "Let $F(X)$ be a free group and let $R\\subseteq F(X)$ be a set of words, called\n**relations**. The group with presentation\n\n$$\\langle X\\mid R\\rangle:=F(X)/\\langle\\!\\langle R\\rangle\\!\\rangle_{F(X)}$$\n\nis the quotient by the normal closure of $R$. The members of $X$ are its\n**generators**. In this quotient, every relation in $R$ becomes the identity,\nas do all consequences forced by normality.",
+          "uses": [
+            "1.1",
+            "1.2",
+            "2.2"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "def-free-group",
+          "source_section": "Definition",
+          "quote": "A **free group on a set $X$** is a group $F(X)$ together with a map\n$i:X\\to F(X)$ such that, for every group $G$ and every function $u:X\\to G$,\nthere is a unique group homomorphism $\\widehat u:F(X)\\to G$ satisfying\n\n$$\\widehat u\\circ i=u.$$\n\nThe reduced-word construction supplies such a group; the construction and its\nuniversal property are established in [[thm-reduced-words-form-the-free-group]].\nWhen no ambiguity arises, $x\\in X$ is identified with its image $i(x)$.",
+          "uses": [
+            "1.1",
+            "2.2"
+          ]
+        },
+        {
+          "fact": "F6",
+          "source": "thm-quotient-group-universal-property",
+          "source_section": "Statement",
+          "quote": "A homomorphism that kills a normal subgroup factors uniquely through the quotient group.\n\nIf $N\\mathrel{\\trianglelefteq}G$, $f:G\\to H$ is a homomorphism, and\n$N\\subseteq\\ker f$, then there is a unique homomorphism $\\bar f:G/N\\to H$\nsuch that $\\bar f(gN)=f(g)$ and $f=\\bar f\\circ\\pi$.",
+          "uses": [
+            "2.2"
+          ]
+        },
+        {
+          "fact": "F7",
+          "source": "def-commutator-and-commutator-subgroup",
+          "source_section": "Definition",
+          "quote": "Let $G$ be a group. For $g,h\\in G$, their **commutator** is\n\n$$[g,h]:=ghg^{-1}h^{-1}.$$\n\nThis convention is fixed throughout; some sources use its inverse. By the\ninverse laws of [[lem-group-inverse-laws]], one has\n$[g,h]^{-1}=hgh^{-1}g^{-1}=[h,g]$.\n\nThe **commutator subgroup**, or **derived subgroup**, is the subgroup generated\nby all commutators:\n\n$$[G,G]:=\\langle\\{[g,h]:g,h\\in G\\}\\rangle.$$\n\nThe generated subgroup notation is that of [[def-generated-subgroup]].",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F8",
+          "source": "thm-derived-subgroup-is-characteristic-and-abelianization-is-universal",
+          "source_section": "Statement",
+          "quote": "For every group $G$, the derived subgroup $G'=[G,G]$ is characteristic, hence normal. The quotient $G^{\\mathrm{ab}}:=G/G'$ is abelian and has the following universal property: for every homomorphism $f:G\\to A$ into an abelian group, there is a unique homomorphism $\\bar f:G^{\\mathrm{ab}}\\to A$ with $f=\\bar f\\circ q$, where $q:G\\to G/G'$ is the quotient map.",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F9",
+          "source": "def-oriented-link-in-s-three-and-ambient-isotopy",
+          "source_section": "Definition",
+          "quote": "Work in the smooth category ([[def-smooth-manifold]]). Fix once and for all the\nthree-sphere as the one-point compactification\n\n$$S^3:=\\mathbb R^3\\cup\\{\\infty\\}$$\n\nof Euclidean three-space, carrying its standard smooth structure, and fix the\nstandard orientation of $S^3$: the orientation induced by the standard\norientation of $\\mathbb R^3$ under the one-point compactification, so that the\ncharts of the standard atlas away from $\\infty$ are orientation-preserving and\nthe orientation is that of a connected oriented $3$-manifold in the sense of\n[[def-oriented-smooth-manifold-and-oriented-chart]]. For $r>0$ write\n$\\overline B_r:=\\{x\\in\\mathbb R^3:\\lVert x\\rVert_2\\le r\\}$, the closed ball of\n[[def-euclidean-spheres-and-closed-balls]] with the following restriction convention. Smoothness on a closed ball means\nlocal extension to a smooth map on an open neighborhood in Euclidean space;\nsmoothness on $M\\times I$, for a smooth manifold $M$ without boundary, means\nlocal extension across $t=0,1$ in $M\\times\\mathbb R$. Thus these closed domains\nare not asserted to be manifolds without boundary in the cited definition.\n\n**Links.** The **standard oriented circle** is the circle\n$S^1=\\mathbb R/\\mathbb Z$ with its standard counterclockwise orientation,\nregarded as a smooth $1$-manifold; a\n**finite disjoint union of oriented circles** is a smooth manifold\n$C=S^1\\sqcup\\dots\\sqcup S^1$ ($k$ summands, $k\\in\\mathbb N$)\ndiffeomorphic to the disjoint union of $k$ standard oriented circles. An\n**oriented link** (with $k$ components) is a smooth embedding\n\n$$L\\colon C\\longrightarrow S^3$$\n\nof such a disjoint union in the sense of [[def-smooth-embedding]]. So $L$ is\ninjective, is an immersion, and is a homeomorphism onto its image with the\nsubspace topology, and its image $L(C)$ is a finite disjoint union of smoothly\nembedded circles. Thus every link considered here is finite and tame: the\nsmoothness of $L$ is exactly the standing convention, and no polygonal or other\ntame model is used. The **components** of $L$ are the images of the individual\nsummands, and the number of components is $k$.\n\n**Ambient isotopy.** Let $I=[0,1]$. An **ambient isotopy** of $S^3$ is a smooth\nmap\n\n$$H\\colon S^3\\times I\\longrightarrow S^3$$\n\nsuch that $H_0=\\mathrm{id}_{S^3}$, each $H_t\\colon S^3\\to S^3$,\n$H_t(x):=H(x,t)$, is a diffeomorphism ([[def-diffeomorphism-and-local-diffeomorphism-of-manifolds]]),\nand each $H_t$ is orientation-preserving with respect to the fixed orientation.\nThe last clause is in fact automatic: $t\\mapsto H_t$ is continuous in the\n$C^\\infty$ topology of the diffeomorphism group, the orientation sign is locally\nconstant in $t$, and $H_0=\\mathrm{id}$ is orientation-preserving, so it is kept\nonly for emphasis.\n\n**Equivalence of links.** Two oriented links $L_0\\colon C_0\\to S^3$ and\n$L_1\\colon C_1\\to S^3$ are **equivalent** (written $L_0\\sim L_1$), or\n**ambient isotopic**, when there are an ambient isotopy $H$ and an orientation-preserving diffeomorphism $f:C_0\\to C_1$ with\n$H_1\\circ L_0=L_1\\circ f$. Thus parametrizations and component labels are\nirrelevant, while the induced orientation of each image component is preserved. The relation is an equivalence relation on links:\nit is reflexive with $H=\\mathrm{id}$, transitive by composing isotopies, and\nsymmetric because a smooth family of diffeomorphisms has a smooth family of\ninverses. An equivalence class is an **(oriented) link type**.\n\n**Moving off $\\infty$.** Because the definition of equivalence allows the\nisotopy to move a link through $\\infty$, the standard practice of this page is\nto first apply an ambient isotopy that carries a given link into the open ball,\nand only then to project; every projection and every Reidemeister move below is\nread after moving the link off $\\infty$ into $\\mathbb R^3$ in this way. The\norientation-preserving clause in the definition of ambient isotopy is exactly\nwhat the oriented Reidemeister moves and the oriented closure construction must\nrespect. The unoriented theory uses the same ambient isotopies but forgets\nthe orientations of the link components.\n\n**Links in the three-sphere versus links in $\\mathbb R^3$.** A link contained in\n$\\mathbb R^3\\subset S^3$ is a link in $S^3$; conversely every link may be\nassumed after isotopy to lie in $\\mathbb R^3$, by choosing a point outside the compact one-dimensional image and moving that\npoint to $\\infty$ by a smooth rotation of the standard sphere. When comparing\nlinks already in $\\mathbb R^3$, assuming the Axiom of Countable Choice,\nan isotopy can also be arranged to avoid $\\infty$ throughout; the track-avoidance argument is given in\n[[thm-oriented-reidemeister-equivalence-theorem]].",
+          "uses": [
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F10",
+          "source": "def-induced-homomorphism-on-fundamental-groups",
+          "source_section": "Definition",
+          "quote": "Let $f:X\\to Y$ be continuous and let $x_0\\in X$. Composition sends a loop\n$\\alpha$ at $x_0$ to the loop $f\\circ\\alpha$ at $f(x_0)$. Using the loop\nclasses and fundamental group of [[def-based-loops-and-fundamental-group]],\nthe proposed\n**induced homomorphism** is\n\n$$f_*:\\pi_1(X,x_0)\\longrightarrow\\pi_1(Y,f(x_0)),\\qquad f_*([\\alpha]):=[f\\circ\\alpha].$$\n\nThe next theorem proves that this value is independent of the representative,\nthat it is a group homomorphism in the sense of [[def-group-homomorphism]], and\nthat induced maps respect identities, composition and homotopies that fix the\nbasepoint.",
+          "uses": [
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F11",
+          "source": "thm-induced-fundamental-group-map-functoriality",
+          "source_section": "Statement",
+          "quote": "Let $f:(X,x_0)\\to(Y,y_0)$ be a continuous map with $f(x_0)=y_0$. Then\n\n$$f_*([\\alpha])=[f\\circ\\alpha]$$\n\nis a well-defined group homomorphism. For pointed continuous maps,\n\n$$\\operatorname{id}_*=\\operatorname{id},\\qquad (g\\circ f)_*=g_*\\circ f_*.$$\n\nIf $f_0,f_1:(X,x_0)\\to(Y,y_0)$ are homotopic through a homotopy that keeps\n$x_0$ at $y_0$, then $(f_0)_*=(f_1)_*$.",
+          "uses": [
+            "3.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "By [F1] and [F3], the crossing-free unknot group is $\\langle x\\mid\\ \\rangle$, the free group on one generator. By [F5] it is isomorphic to $\\mathbb Z$. All commutators in $\\mathbb Z$ are trivial by [F7], so $[\\mathbb Z,\\mathbb Z]=1$ and [F8] identifies its abelianization with $\\mathbb Z$.",
+          "step": "1.1",
+          "inputs": [
+            "given",
+            "F1",
+            "F3",
+            "F4",
+            "F5",
+            "F7",
+            "F8",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-1-2",
+          "claim": "A valid rational code for the displayed trefoil uses the two diagonals from $(\\pm1,3-j)$ to $(\\mp1,2-j)$ for $j=0,1,2$, subdivided at their crossing $(0,5/2-j)$, with the right-starting branch over and both diagonals oriented downward. Close the left endpoints by $(-1,0)\\to(-2,0)\\to(-2,3)\\to(-1,3)$ and the right endpoints by the reflected route. Each strip has just its one transverse crossing, distinct strip interiors and the two exterior closure routes are disjoint, and the three swaps trace one circle. Thus these integer and half-integer vertices give admissible input for [F1]; rounding the bends gives the displayed diagram. The trefoil's displayed crossing triples and [F2] give $b=cac^{-1}$, $a=bcb^{-1}$, and $c=aba^{-1}$. Substituting the last into the second yields $a=bab a^{-1}b^{-1}$; right multiplication by $ba$ gives $aba=bab$. Under this relation, $cac^{-1}=a b a b^{-1}a^{-1}=b$, so the first equation follows. Thus eliminating $c$ gives $\\langle a,b\\mid aba=bab\\rangle$, and [F3] identifies it with $G_T$.",
+          "step": "1.2",
+          "inputs": [
+            "given",
+            "F1",
+            "F2",
+            "F3",
+            "F4",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "In the abelian quotient of [F8], written additively, $aba=bab$ gives $2[a]+[b]=[a]+2[b]$, hence $[a]=[b]$ and the abelianization is generated by $[a]$. The map $G_T\\to\\mathbb Z$ sending $a,b$ to $1$ respects the relator and is surjective; by [F8] it factors through the abelianization. The map $\\mathbb Z\\to G_T^{\\mathrm{ab}}$ sending $1$ to $[a]$ is inverse, so $G_T^{\\mathrm{ab}}\\cong\\mathbb Z$.",
+          "step": "2.1",
+          "inputs": [
+            "F8",
+            "step 1.2",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-2",
+          "claim": "The map $a\\mapsto(12)$, $b\\mapsto(23)$ respects $aba=bab$, since both sides equal $(13)$. Its image contains two adjacent transpositions and hence all six elements of $S_3$, so it is surjective by [F4] and [F6]. Since $S_3$ is nonabelian, $G_T$ is nonabelian; every quotient of the cyclic group $\\mathbb Z$ is cyclic, so $G_T\\not\\cong\\mathbb Z\\cong G_U$.",
+          "step": "2.2",
+          "inputs": [
+            "F4",
+            "F5",
+            "F6",
+            "step 1.2",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "claim": "If $U$ and $T$ were ambient isotopic, [F9] would give a homeomorphism of their complements; [F10] and [F11] would induce a fundamental-group isomorphism. Step 2.2 rules this out. Their abelianizations nevertheless agree by steps 1.1 and 2.1, proving the stated counterexample.",
+          "step": "3.1",
+          "inputs": [
+            "F9",
+            "F10",
+            "F11",
+            "step 1.1",
+            "step 2.1",
+            "step 2.2"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The Counterexample specifies the nonempty unknot and trefoil, not the empty link."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Step 1.1 gives the zero-crossing unknot presentation with no relators and cyclic group."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Step 1.1 identifies the free group on the single unknot generator with Z."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Steps 2.1 and 2.2 check the information-loss case: the trefoil abelianization is Z even though its S3 quotient is nonabelian."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "The two examples are closed knots; no open-endpoint or interval-limit assertion occurs."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Step 2.2 specifies the two transposition images and their finite generated set explicitly; the example requires no family of arbitrary choices."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The item refutes one proposed classification implication, rather than asserting a biconditional."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The converse of the refuted implication is not a claim of this Counterexample."
+        }
+      ],
+      "finite_checks": [
+        {
+          "name": "adjacent-transposition-S3-quotient",
+          "method": "manual exact finite/symbolic calculation",
+          "anchor_steps": [
+            "2.2"
+          ],
+          "calculation": "Compose (12)(23)(12) and (23)(12)(23) right-to-left; both are (13); the two generators produce all six permutations.",
+          "result": {
+            "a": [
+              2,
+              1,
+              3
+            ],
+            "b": [
+              1,
+              3,
+              2
+            ],
+            "aba": [
+              3,
+              2,
+              1
+            ],
+            "bab": [
+              3,
+              2,
+              1
+            ],
+            "all_generated": [
+              [
+                1,
+                2,
+                3
+              ],
+              [
+                1,
+                3,
+                2
+              ],
+              [
+                2,
+                1,
+                3
+              ],
+              [
+                2,
+                3,
+                1
+              ],
+              [
+                3,
+                1,
+                2
+              ],
+              [
+                3,
+                2,
+                1
+              ]
+            ]
+          },
+          "scope_limit": "Corroborates this fixed example only; the general assertion is established by the anchored local proof. No finite-smoke execution or native gate credit claimed.",
+          "assertion": "The map $a\\mapsto(12)$, $b\\mapsto(23)$ respects $aba=bab$, since both sides equal $(13)$. Its image contains two adjacent transpositions and hence all six elements of $S_3$, so it is surjective by"
+        },
+        {
+          "name": "trefoil-abelianization-scalar-relation",
+          "method": "manual exact finite/symbolic calculation",
+          "anchor_steps": [
+            "2.1"
+          ],
+          "calculation": "The single abelian relation is 2[a]+[b]=[a]+2[b], giving [a]=[b]; both images 1 satisfy it.",
+          "result": "Z on the shared generator",
+          "scope_limit": "Corroborates this fixed example only; the general assertion is established by the anchored local proof. No finite-smoke execution or native gate credit claimed.",
+          "assertion": "In the abelianization, written additively by"
+        }
+      ],
+      "axiom_uses": [],
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "alpha-batch-56",
+        "notes": "Independently traced all three oriented trefoil crossings in the closed two-strand braid: over/target/source triples (b,c,a),(c,a,b),(a,b,c). Eliminating c yields aba=bab; the first relation follows by substitution and cancellation. In abelianization a=b, with exponent-sum map inverse to 1 -> [a], proving Z with no extra torsion. Two adjacent transpositions satisfy the braid relation and generate nonabelian S3, so the trefoil group is nonabelian while the unknot group is cyclic. Ambient isotopy gives a complement homeomorphism and group isomorphism by the actual induced-map suppliers. Refuter finding confirmed nonfatal: prior steps already prove the claims; changed 3.1 citations from 2.1 to 2.2 and nonexistent 1.3 to 2.1. Diagram arrows, gaps and labels checked in the stated projection convention; no Statement change."
+      },
+      "proof_status": "complete-local-proof",
+      "proof_status_evidence": "Steps1.1–3.1 compute both groups, identical Z abelianizations, the nonabelian S3 quotient and resulting non-isotopy. This records the current owner repair, not native author completion, independent review or gate credit.",
+      "unresolved_supplier_checks": [],
+      "unresolved_obligations": [],
+      "finite_smoke": [],
+      "owner_resolution_evidence": {
+        "reviewer": "/root/knot_wirtinger_rack_repair",
+        "repair_report": "research/inverse-problems-knot-theory-all-109-2026-10-19-owner-knot-repair-round2/repair-report.json",
+        "attribution": "Focused delegated proof repair/current reading; native author/dispatch history remains unchanged.",
+        "native_execution_coverage_adopted": false
+      }
+    },
+    "lem-explicit-unknot-and-figure-eight-oriented-wirtinger-codes": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-knot-planar-code",
+          "source_section": "Definition",
+          "quote": "Work with smooth oriented knots in the standard oriented three-sphere; a knot is a one-component oriented link. A **finite planar code for an oriented knot diagram** consists of finite vertex and edge sets, incidence data, a cyclic order of the four half-edges at every crossing vertex, a pairing of opposite half-edges into the two local branches, an orientation of each edge, and a choice of which branch is over at each crossing. Every other vertex is a bend vertex of valence two. The code includes a finite plane-drawing certificate: rational coordinates for the vertices and bends, and a finite polygonal path for every edge. The certificate must realize the incidences and cyclic orders, have no edge self-intersection, and have pairwise disjoint edge interiors except at the specified bend and crossing vertices; at a crossing the two branches must be transverse. These conditions are checked by finitely many exact segment-intersection tests. Edge orientations must join coherently across each paired branch and each bend vertex, and following the edges through the crossing pairings and the degree-two bend vertices must give one oriented circle. Thus an admissible code represents a connected regular oriented diagram of a single knot. If there are no crossing vertices, the code is one oriented polygonal circle and has one arc. Smooth each bend in a small disk disjoint from all crossings and other edges; the resulting smooth diagram has the same crossing data.\n\nAn **under-arc** is a maximal portion of the oriented circle between consecutive points where the knot passes under at a crossing; the over branch is not cut. With no crossings the entire circle is the unique under-arc. A **positive meridian** of an oriented branch is the oriented boundary of a small normal disk, with disk orientation chosen so that the oriented tangent to the branch followed by the disk orientation agrees with the ambient orientation of $S^3$. Planarity, incidence, orientation consistency, one-component tracing and the over/under data are input validity conditions; a procedure receiving an invalid finite record must report invalid input rather than repair it. The code stores no algebraic crossing sign: the oriented plane and the direction of the over branch determine which incident under branch is on its left and which is on its right.",
+          "uses": [
+            "1.1",
+            "5.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "alg-knot-wirtinger-presentation-from-code",
+          "source_section": "Definition",
+          "quote": "The input is a finite record $D$ and a designated starting under-arc $a_0$ of one oriented knot. First check that the vertex, edge, and segment lists are finite; that every vertex, bend, and point on an edge polyline has rational coordinates; and that each polyline has the prescribed incident endpoints. Before geometric tests, delete consecutive repeated coordinates from each polyline; reject an edge with no positive-length segment or a crossing with a zero-length incident ray. Check that every crossing has four incident half-edges, a recorded cyclic order and a pairing into alternating opposite branches, and one designated over-branch; every other vertex must be a valence-two bend. Check that edge orientations agree at bends and continue coherently through each paired branch, and that following these pairings and bends traces one oriented circle. If $a_0$ is not one of the resulting under-arcs, or any structural check fails, return invalid-input.\n\nFor every unordered pair of line segments, compute the determinant of their rational direction vectors. If it is nonzero, solve the two-coordinate intersection equations over $\\mathbb{Q}$ and check whether the solution lies on both closed segments. If the determinant is zero, test collinearity and overlap by exact rational determinant and endpoint-order comparisons. Reject every self-intersection, every positive-length overlap, and every intersection except a shared declared bend or crossing vertex with the recorded incidence. At each crossing, sort the four nonzero incident rays by half-plane and exact determinant comparisons; reject the input if two rays have the same direction, if this geometric cyclic order disagrees with the recorded order, or if the paired branches do not alternate. These checks are finite.\n\nAfter validation, traverse the oriented knot once from $a_0$, label the maximal under-arcs $a_1,\\ldots,a_m$, and introduce one symbol $x_i$ for the positive meridian of each $a_i$. At each crossing, let the outgoing over-half-edge be the ray in the direction of the oriented over-tangent. In the verified counterclockwise cyclic order, the under-half-edge immediately following it is the target side $a_t$; the other under-half-edge is the source side $a_s$. Read the over-arc $a_o$ and append exactly the relator $x_o^{-1}x_sx_ox_t^{-1}$. This rule uses the positive in-plane normal, which points counterclockwise from the oriented over-tangent, and does not depend on the under-strand direction. The orientation of each positive meridian is fixed by requiring the oriented knot tangent followed by its normal-disk orientation to give the ambient orientation. Use the diagram's common upper-collar access paths to base all meridians at one point in that collar. If the chosen complement basepoint lies elsewhere, prepend the same path from it to the collar basepoint to every access path. Interpret $x_i$ as the resulting based positive meridian. Return the finite group presentation with generators $x_1,\\ldots,x_m$ and one relator per crossing.",
+          "uses": [
+            "3.1",
+            "5.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "lem-wirtinger-local-meridian-conjugacy",
+          "source_section": "Statement",
+          "quote": "Orient the projection plane by the viewing normal and the ambient orientation. At an oriented crossing let $o$ be the over-arc, and let $n_o$ be its positive in-plane normal: the ordered pair consisting of the over-tangent and $n_o$ is positive. Call the under-side from which $n_o$ points the source $s$, and the side toward which it points the target $t$. A positive meridian is the oriented boundary of a small normal disk whose orientation, preceded by the oriented knot tangent, is the ambient orientation. With the common upper-collar basing paths, the based positive meridians satisfy\n$$m_t=m_o^{-1}m_s m_o.$$\nThis side-based equation is independent of the direction of the understrand. In an oriented chart with over-tangent rightward, the target is the upper side $L$ and source the lower side $R$, so equivalently $m_R=m_o m_Lm_o^{-1}$. In incoming/outgoing notation, the outgoing under-meridian is $m_o^{-1}m_{\\rm in}m_o$ if the under-tangent points along $n_o$, and is $m_om_{\\rm in}m_o^{-1}$ otherwise. Reversing a chosen meridian loop inverts its class. Changing every common access path by the same based loop conjugates all three classes simultaneously.",
+          "uses": [
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "thm-knot-wirtinger-presentation-correctness",
+          "source_section": "Statement",
+          "quote": "Let $K\\subset S^3$ be a smooth oriented knot, let $D$ be a valid finite planar code for a regular diagram of $K$, choose a basepoint $b$ in the complement, and designate a starting under-arc. The finite procedure $\\mathsf{Wirtinger}(D,a_0)$ terminates and returns a presentation with one positive-meridian generator for each under-arc and one crossing conjugacy relator for each crossing. For the based meridians determined by the diagram's common upper-collar paths from $b$, the homomorphism from the presented group to $\\pi_1(S^3\\setminus K,b)$ that sends each generator to its corresponding based positive meridian is an isomorphism. Changing the designated starting under-arc only relabels the same finite cyclic arc set and gives an isomorphic presentation. If all basing paths are changed by prepending the same based loop, every generator image is conjugated by the same element, so the isomorphism type is unchanged.",
+          "uses": [
+            "3.1",
+            "5.1"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "def-free-group",
+          "source_section": "Definition",
+          "quote": "A **free group on a set $X$** is a group $F(X)$ together with a map\n$i:X\\to F(X)$ such that, for every group $G$ and every function $u:X\\to G$,\nthere is a unique group homomorphism $\\widehat u:F(X)\\to G$ satisfying\n\n$$\\widehat u\\circ i=u.$$\n\nThe reduced-word construction supplies such a group; the construction and its\nuniversal property are established in [[thm-reduced-words-form-the-free-group]].\nWhen no ambiguity arises, $x\\in X$ is identified with its image $i(x)$.",
+          "uses": [
+            "4.1",
+            "5.1"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "def-group-presentation",
+          "source_section": "Definition",
+          "quote": "Let $F(X)$ be a free group and let $R\\subseteq F(X)$ be a set of words, called\n**relations**. The group with presentation\n\n$$\\langle X\\mid R\\rangle:=F(X)/\\langle\\!\\langle R\\rangle\\!\\rangle_{F(X)}$$\n\nis the quotient by the normal closure of $R$. The members of $X$ are its\n**generators**. In this quotient, every relation in $R$ becomes the identity,\nas do all consequences forced by normality.",
+          "uses": [
+            "4.1",
+            "5.1"
+          ]
+        },
+        {
+          "fact": "F6",
+          "source": "thm-simple-polygon-admits-a-triangulation",
+          "source_section": "Statement",
+          "quote": "Every simple polygon admits a triangulation.",
+          "uses": [
+            "2.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "The eight stated routes give 24 segments, 16 degree-two ports and four crossing vertices. Here is an exact reproducible intersection test for the displayed integers. For segments $a+tu,b+sv$, with $u=a'-a,v=b'-b$ and $\\Delta=\\det(u,v)\\ne0$, their intersection parameters are $$t=\\det(b-a,v)/\\Delta,\\qquad s=\\det(b-a,u)/\\Delta.$$ Retain the intersection just when $0\\le t,s\\le1$. If $\\Delta=0$, the test $\\det(b-a,u)=0$ detects collinearity, and comparison of the two closed endpoint intervals in either nonconstant coordinate detects overlap. Applying these formulas to the table gives 276 unordered segment pairs: precisely 40 meet, each solely at its common declared endpoint, and the other 236 are disjoint. The 40 consist of one pair at each of the 16 ports and six pairs at each of the four crossing centers. No pair overlaps in positive length. At each center the $Oi,C,Oo$ and $Ui,C,Uo$ triples are collinear with the center strictly between the ports. The determinants of the full oriented over/under vectors are respectively $-69696,3168,3168,-69696$, so those are transverse opposite pairs with exactly the stated cyclic orders. The cyclic visit list uses every branch once, and following the paired branches gives that single list, not several circles. Hence every validity condition in [F1] holds. Finitely many nonincident compact segments have positive distance, so sufficiently small disjoint bend disks introduce no new crossing; over/under height separation in the crossing disks realizes the smooth knot.",
+          "step": "1.1",
+          "inputs": [
+            "F1",
+            "given",
+            "construct",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "The geometric figure-eight admission can be checked without inferring knot type from a group presentation. Draw the downward three-strand braid with successive crossings $\\sigma_1,\\sigma_2^{-1},\\sigma_1,\\sigma_2^{-1}$, where a positive generator has its left strand over, and close corresponding endpoints outside the braid rectangle without additional crossings. Number its successive crossings $1,2,4,3$. Following its first top strand through the closure gives exactly $1O,2U,3O,1U,4O,3U,2O,4U$. In right/up plane coordinates its positive-generator over and under tangents point respectively down-right and down-left, giving negative determinant; the negative generator reverses that sign. Thus the four labeled determinants are $-,+,+,-$. Together with the visit list these determine precisely the cyclic orders in the statement. For an additional check, the six face boundary cycles, listing each departure port and then taking the next counterclockwise port after traversing its edge, are $$(1Oo,2Oo,4Oi),\\ (1Ui,3Uo,2Ui),\\ (1Oi,4Oo,3Oo),\\ (1Uo,4Uo),\\ (2Uo,3Ui,4Ui),\\ (2Oi,3Oi).$$ These are the same two bigons and four triangular faces of that closed braid drawing; the table merely subdivides its eight edges at their ports. To see that this comparison concerns embeddings, take small crossing disks and narrow edge rectangles in each drawing. The identical cyclic orders identify these neighborhoods respecting over/under pairs. The six face boundaries are simple polygonal circles. Their disk coordinates can be obtained by the elementary finite polygon construction: use the vertical-slab convex-cell triangulation of [F6] and peel boundary triangles to identify the filled polygon with a disk. At each peeling step a triangle with one boundary edge and interior opposite vertex leaves a disk; if all vertices of the remaining triangulation are on its boundary, the dual is a finite tree and a leaf triangle has two boundary edges. Reversing these elementary triangle attachments gives disk coordinates with the prescribed boundary parametrization. Matching the resulting boundary circle coordinates extends over the disk by $(r,z)\\mapsto(r,h(z))$. Applying this to each paired face extends the neighborhood identification over every face; the exterior is treated as a disk on the sphere. After rounding, this is the same regular spherical diagram, and choosing the same outer face gives the planar diagram. The closed braid just described is the standard two-clasp four-crossing figure-eight diagram (equivalently its usual alternating closed-three-braid description). This verifies admission by the full embedded diagram, not solely its under-arc relators.",
+          "step": "2.1",
+          "inputs": [
+            "F6",
+            "given",
+            "step 1.1",
+            "construct",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "claim": "Cutting the oriented visit circle at its four $U$ visits gives the four claimed under-arcs. The intervening $O$ visits put $O1$ on $x_1$, $O3$ on $x_2$, $O4$ on $x_3$, and $O2$ on $x_4$. For a direct side check, let $o_r=rOo-rOi$. The values of $\\det(o_r,rUi-C_r)$ are $15840,-2376,-2376,15840$; those of $\\det(o_r,rUo-C_r)$ are $-53856,792,792,-53856$. Positive values are the left side. This proves every entry of the crossing table, including which underpass follows the positive normal. By [F2] and [F3], $x_o^{-1}x_Rx_ox_L^{-1}=1$ is equivalently $x_ox_L=x_Rx_o$. Substitution of the four rows gives exactly $R_1,R_2,R_3,R_4$ as displayed. By [F4] these are the actual complement group and positive meridians. Starting at $x_1$ the underpasses are $R_2,R_1,R_3,R_4$ and the corresponding crossing signs sum to $1-1+1-1=0$.",
+          "step": "3.1",
+          "inputs": [
+            "F2",
+            "F3",
+            "F4",
+            "step 1.1",
+            "step 2.1",
+            "construct",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-4-1",
+          "claim": "In the group with the first three relators, left-multiply $R_3$ by $x_1$ and then use $R_1$ and $R_2$ to obtain $$x_1x_3x_2=x_1x_2x_4=x_3x_1x_4=x_3x_4x_2.$$ Right cancellation gives $x_1x_3=x_3x_4$, which is precisely $R_4$. Conversely imposing all four imposes the first three, so [F5] gives inverse identity-on-generator quotient maps. Thus deletion of the fourth relator changes neither the group nor the meridian assignment.",
+          "step": "4.1",
+          "inputs": [
+            "F5",
+            "step 3.1",
+            "construct",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-5-1",
+          "claim": "The square is a simple crossing-free polygon with coherent counterclockwise orientation and one component, so it is a valid code with a single under-arc and no crossing scan. Rounding it gives the ordinary planar unknot. By [F2] and [F4] its complement group is $\\langle x\\mid\\ \\rangle$. Define the homomorphism from this free group to $\\mathbb Z$ by $x\\mapsto1$, using [F5], and the homomorphism back by $n\\mapsto x^n$. Their composites fix the generator and all integers, respectively, and are identities; the first claim also follows from uniqueness in [F5]. This proves the asserted infinite cyclic group on the positive meridian without imposing any nonexistent crossing relator.",
+          "step": "5.1",
+          "inputs": [
+            "F1",
+            "F2",
+            "F4",
+            "F5",
+            "given",
+            "construct",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "Proof, step 5.1: zero crossings produce one under-arc and the empty relator list; not an empty knot."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Proof, step 3.1 and5.1: zero writhe is the actual signed sum; the zero-relator unknot is retained."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Proof, step 1.1/5.1: one oriented component is explicitly traced in both certificates."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Proof, step 1.1: determinant-zero segment pairs use exact collinearity/interval tests; no positive-length overlap is accepted."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Proof, step 1.1: closed-segment endpoints are admitted only when declared; all40 such pairs and236 disjoint pairs checked."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Proof, step 1.1–5.1: explicit finite coordinates, routes, labels and finite algebra; the free one-generator map uses its universal property, no global selection."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "Concrete diagram/presentation provider, not an iff characterization."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "Concrete diagram/presentation provider, not an iff characterization."
+        }
+      ],
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "alpha-batch-56",
+        "notes": "Independently recomputed all 276 rational segment pairs: 40 shared-endpoint intersections, 236 disjoint, no overlap. Full over/under determinants -69696,3168,3168,-69696; incoming side determinants 15840,-2376,-2376,15840 and outgoing -53856,792,792,-53856 agree exactly. Traced closed braid sigma1 sigma2^-1 sigma1 sigma2^-1 and obtained 1O,2U,3O,1U,4O,3U,2O,4U. Matching oriented rotation system/face boundaries establishes the diagram, not just its group. Four side triples yield the written relators; R4 follows by the displayed multiply/substitute/cancel argument. Square gives one positive meridian with no relation. Current finite-polygon triangulation supplier and free/presentation interfaces read. Friedl Lemma 5.8 p74 checked as context; its different labeling is not substituted for the integer certificate. No AC or unresolved refuter finding."
+      }
+    }
+  }
+}

@@ -12,6 +12,11 @@ proof_strategy: direct
 provenance:
   statement: literature-derived
   proof: ai-altered
+verification:
+  judge:
+    model: "gpt-6-luna"
+    verdict: pass
+    date: 2026-10-22
 sources:
   references:
     - title: "Sam Nelson, Link invariants from finite racks, §§2.1 and 3, arXiv:0808.0029v3, pp. 2–7"

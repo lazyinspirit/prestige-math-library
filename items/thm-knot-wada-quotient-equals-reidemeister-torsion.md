@@ -33,6 +33,10 @@ sources:
       locator: "Complete lecture notes; torsion under basis changes and simple homotopy."
 verification:
   precheck: n/a
+  judge:
+    model: "gpt-6-luna"
+    verdict: pass
+    date: 2026-10-22
 ---
 
 ## Statement

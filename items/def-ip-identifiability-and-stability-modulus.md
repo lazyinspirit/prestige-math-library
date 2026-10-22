@@ -24,6 +24,10 @@ sources:
       url: "https://tristanvanleeuwen.github.io/IP_and_Im_Lectures/what_is.html"
 verification:
   precheck: n/a
+  judge:
+    model: "gpt-6-luna"
+    verdict: pass
+    date: 2026-10-22
 ---
 
 ## Definition

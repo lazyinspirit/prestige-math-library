@@ -1,0 +1,59 @@
+# Literature-supported plan after the proof-authoring pause
+
+This is a source/interface plan, not new proof-detail authoring and not a claim that held inputs have been proved. All existing freezes and review histories remain unchanged. The just-authored relative-cell consumer is preserved in `relative-cell-domination-review1-inputs/` without an adoption claim.
+
+## Actual reading for this plan
+
+I reread all six pages of Quinn, *A controlled-topology proof of the product structure theorem* (September 2006), including the full proof and references, from the acquired primary text. I visually reread FQ printed pp137–141 (PDF143–147), the complete statement and proof of 9.3A up to the separately stated 9.3B lemma. I visually reread FQ printed118–119 (PDF124–125), including the exact 8.3B statement and the relative obstruction paragraph. I reread primary Quinn *Ends of maps I* printed282–285 (PDF9–12), printed309 (PDF36), and printed314–320 (PDF41–47). No accepted provider proof body was checked.
+
+Primary paths:
+
+- Quinn 2006: `research/inverse-problems-knot-theory-all-109-2026-10-19-owner-top74-marked-disk-working-proof/quinn-product-structure-primary.{pdf,txt}` (repository-relative primary source).
+- FQ: `../renewed-annular-end/sources/fq-pdf-143.png` through `fq-pdf-147.png`; structures discussion `fq-pdf-124.png`, `fq-pdf-125.png`.
+- Ends I: `../renewed-controlled-h-cobordism/sources/quinn-I-pdf-NNN.{txt,png}` with printed page = PDF page +273.
+
+## Published dependency order
+
+1. **Relative infinitesimal input before geometry.** FQ p119 first states that a reduction already given on an open U yields a relative lifting problem, and only afterwards invokes 8.3B to integrate a stable tangent lift. Quinn 2006 p1 likewise separates stable microbundle reductions/stable structures from the geometrically difficult product theorem. Thus actual relative O-lift → actual relative stable smooth atlas is a separate first step. Stable normal vector coordinates alone do not establish a compatible tangent reduction.
+
+2. **Apply end completion only to an already DIFF/PL source.** Quinn 2006 p3, §3.1 starts with an actual M-manifold M and a homeomorphism θ:M→N×R. It invokes controlled end completion because the literal end is tame and has trivial local fundamental groups over N. The constructed manifold completion is proper over N×(−∞,∞], restricts EXACTLY to θ on the interior, and has an actual manifold boundary at infinity. The text explicitly says its handlebody proof takes place in DIFF/PL and needs no TOP handlebody theorem. The target N is allowed to be TOP.
+
+3. **Boundary CE map, then ordinary CE approximation.** Same page: the infinity-boundary map is cellular because the interior is a homeomorphism. It is then approximated by a homeomorphism, producing the desired M-structure on N. Quinn p4 explicitly says the cited cellular approximation theorems do not depend on product structure. For actual atlas EXISTENCE the required output is one close homeomorphism. Quinn's stronger one-parameter family and the subsequent §3.2 concordance construction are not needed for our finite existence consumer.
+
+4. **Finite desuspension.** Quinn p3 reduction (2) treats one R factor and iterates. Our finite desuspension consumer is the same existence route, with compact product-box/radial re-expansion to keep the next stage a whole literal R end. At stage j the actual source dimension is 5+j and the CE target dimension is 4+j. Matrix finite-head dimension is a different quantity and remains arbitrarily finite. No use of 5D TOP controlled h-cobordism is made while constructing the atlas.
+
+5. **Only then apply the 5D normal-bundle comparison argument.** FQ pp138–139 first obtains the high-dimensional vector tube, defines W, and constructs the control map p. Its p139 smoothing paragraph is explicitly inserted because 7.2C requires a category satisfying the immersion lemma: a neighborhood of the zero section is first smoothed and 7.2C is then applied in DIFF. FQ p140 constructs R0,R1 by composing pushes in the two different coordinates; pp140–141 reparameterize radius to make the punctured comparison an arbitrarily thin h-cobordism. Hence applying 7.2C to manufacture the initial smooth source is circular. The already reviewed clipping/radial-control contract belongs after the atlas, except for its purely TOP homotopy information used to pose the lifting problem.
+
+## Minimal end-completion input versus our reconstruction machinery
+
+The theorem input is NOT an independently supplied whole-end strong H_i or a globally sorted handle presentation. Ends I relative end theorem 2.1, p282, takes an already DIFF/PL source of dimension ≥6, locally compact locally 1-connected metric target, a given completion on the relative part, tameness/onto/0-LC/locally constant π on the operating region, and Wh(π×Z^r)=0 for all finite r. For the literal product source these end conditions have direct provenance from θ. The initial completion over protected smooth product regions is also literal.
+
+The intermediate H_i are genuine *outputs* of the approximate end theorem, not new external hypotheses. Definition2.2, p282, only requires a small homotopy of N−W2 into its frontier IN the larger reserved N−W1, relative the frontier (and the corresponding controlled-target localized version). A strong deformation of the entire unreserved U_i at every basepoint is stronger than this statement and should not be promoted into a minimal global theorem input.
+
+Ends I 2.8, pp284–285 chooses summable ε_i, then thin-h-cobordism tolerances δ_i and connectivity tolerances γ_i. Approximate completions are constructed successively by2.5 using finite tame structures supplied by5.5. The resulting consecutive slabs satisfy thin h-cobordism hypotheses; their products assemble into the actual proper completion. Our accepted strong-H_i slab helper is a sufficient implementation when its actual data exist, but the published argument permits the buffered/local approximate-completion version. It is therefore appropriate to audit whether insisting on global H_i has introduced avoidable work.
+
+Source control is supplied internally at exactly two locations: 6.1, p309 begins with small handles AND collar, obtained from an arbitrary handlebody by subdivision and small isotopies making attachment to lower-dimensional handles; its details are explicitly omitted there. Section7.3, p317 uses a small handlebody of (U_i−int U_(i+1), frontier U_i) to turn lower-skeleton deformations into finitely many actual cell disks. Section7.4, p319 applies geometric connectivity to obtain an actual two-index n−3/n−2 handlebody; p320 realizes projection stabilization and removes kernel handles. Its final n-connectivity/Hurewicz conclusion yields the approximate completion. Thus actual whole-source small handles/controlled collar and finite source-dimensional cells are real internal geometric obligations. But a new global color-wall construction, or a global sort of an unrelated ordered decomposition, is one attempted reconstruction of the omitted classical step, not an additional mathematical hypothesis of end completion.
+
+## Existing contract map and remaining actual bindings
+
+- Concrete larger boundaryless comparison M0 and its finite marked core/sector transport: root-accepted stable owner's comparison-tube localization, conditional on actual stable f and actual core Q_C. This avoids claiming W is a disk bundle or finite-core retract. Actual Q_C/O-nullconcordances remain held with floer owner.
+- Actual relative stable atlas from an actual marked O-lift: `root-relative-stable-smoothing-adoption.json`, frozen; it produces some finite k. No unstabilized conclusion.
+- Initial literal-product frontiers and actual low-dimensional reference paths/disks: adopted key `literal_frontier_instance` in `../root-1505-prerequisite-adoptions.json`. It generates U_j^2/A_j^2 before any global index sorting.
+- Local higher-connectivity, same-frontier normalization, framed Whitney and projection tools: adopted conditional local contracts recorded by `../renewed-relative-smoothing-independent-review/final-local-verdict.md`. Actual source packets/witness instances still required.
+- Small whole-source ordered handles: source owner adopted at its precise ordered scope. Its new physical color-wall/index-sorting construction remains a held attempted realization of Ends I6.1's omitted preliminary step, not part of the theorem input.
+- Relative finite cell domination and whole-end H_i: the accepted H_i constructor is sufficient but actual source-dimensional model/witness inputs remain unbound. New frozen cell consumer is unreviewed. The finite-polyhedron retract alternative has no ≤n dimension bound and cannot silently supply this input.
+- Arbitrarily finite controlled algebra/reference transfer and actual raw/channel/dual realization: controlled owner's adopted contracts. Initial θ lifts cannot be reused freely in modified slabs; actual post-operation witness binding remains necessary.
+- Two-sided actual slab product: controlled owner's adopted conditional integration. It consumes actual tracked collar/whole products, actual source arcs, actual operated channels and Whitney resources. No initial smoothness is manufactured there.
+- Proper completed-end map → CE boundary map: accepted local interface. Stronger Cauchy-limit-only cellularity is not used.
+- Absolute ordinary CE approximation and relative localization: carrier owner, absolute theorem still held; finite UV-lifting and compact L4/L5 pieces adopted, higher L/recognition assembly being coordinated. Its independence from product structure must be retained as Quinn p4 requires.
+- Finite ordinary atlas transfer/desuspension: root-accepted `root-finite-desuspension-consumer-acceptance.json`; it remains conditional on the preceding actual inputs. All literal bases M0×R^(j−1) are boundaryless, so the m5 boundary-homeomorphism condition is vacuous in this application. Restrict to actual W only after realizing the M0 atlas.
+
+## Choice and scope discipline
+
+Annular consumers retain Countable Choice. Finite stage induction and countably many prescribed tolerances do not import full AC. Quinn/FQ do not state weak-choice foundations, so citation alone does not certify their constructions at ACω. Every local supplier actually consumed on that branch still needs its stated choice scope. Disk consumers permit full AC. No theorem statement is weakened to avoid a missing input.
+
+Pending root consolidation, no further proof-detail filling is proposed. The immediate planning decision is whether to finish the narrowly identified classical small-handle/collar step within the published2.5→2.8 scheme, using buffered approximate completions rather than a stronger whole-end formulation, or to supply that classical step from a fully proved retained exact contract. Neither route permits treating a still-held atlas, O-lift, or CE recognition theorem as already obtained.
+
+## CE owner's coordinated minimal route
+
+Carrier reports from its full primary read: Siebenmann p271 states ordinary approximation, pp283–284 globalize it; the required local recognition in AppendixI p288 is ordinary homotopy type S^(m−1)×R plus 1-LC at infinity, not a proper homotopy equivalence. The stronger convenient statement at p279 should not generate an unnecessary proper-HE obligation. Its locations are MainLemma p275, E1 p279/AppendixI pp288–289, E2 AppendixII pp289–292, and E3 p282. For this completion application the source of the CE map is already DIFF; the complement used for E3 inherits that DIFF structure, potentially removing the general-TOP source PL-extension import. This is the CE owner's source-based proposed specialization, not a claim that its remaining recognition/expansion proof has passed. Ordinary approximation plus already supplied exact-germ localization is enough; no parametric CE theorem is required.

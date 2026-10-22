@@ -1126,8 +1126,8 @@
       ],
       "derivations": [
         {
-          "id": "step-1.1",
-          "claim": "Let $z$ be any vector with $|\\operatorname{supp}(z)|\\le s$, and put $T=\\operatorname{supp}(z)$. For every $j\\in T^c$, $z_j=0$, so $|x_j-z_j|=|x_j|$. The terms over $T$ are nonnegative; splitting the finite sum by [F2,F3] gives $\\|x-z\\|_1=\\sum_{j\\in T}|x_j-z_j|+\\sum_{j\\in T^c}|x_j|\\ge\\|x_{T^c}\\|_1\\ge\\sigma_s(x)_1,$ where the final inequality follows from [F1] because $|T|\\le s$. Thus every admissible sparse vector has error at least $\\sigma_s(x)_1$.",
+          "id": "step-1-1",
+          "claim": "Let $z$ be any vector with $|\\operatorname{supp}(z)|\\le s$, and put $T=\\operatorname{supp}(z)$. For every $j\\in T^c$, $z_j=0$, so $|x_j-z_j|=|(x_{T^c})_j|$. For every $j\\in T$, $|(x_{T^c})_j|=0\\le|x_j-z_j|$. Thus [F2,F3], applied in the original coordinate order, give $\\|x-z\\|_1=\\sum_{j=1}^n|x_j-z_j|\\ge\\sum_{j=1}^n|(x_{T^c})_j|=\\|x_{T^c}\\|_1\\ge\\sigma_s(x)_1$, where the final inequality follows from [F1] because $|T|\\le s$. Thus every admissible sparse vector has error at least $\\sigma_s(x)_1$.",
           "step": "1.1",
           "inputs": [
             "given",
@@ -1138,7 +1138,7 @@
           ]
         },
         {
-          "id": "step-2.1",
+          "id": "step-2-1",
           "claim": "By [F1], choose a minimizing set $T_0\\subseteq[n]$ with $|T_0|\\le s$. Define $z_0=(x_{T_0})$, equal to $x$ on $T_0$ and zero on $T_0^c$. Define $z_0$ coordinatewise by $(z_0)_j=x_j$ for $j\\in T_0$ and $(z_0)_j=0$ otherwise. Then $\\operatorname{supp}(z_0)\\subseteq T_0$, so it is admissible, and direct coordinate summation gives $\\|x-z_0\\|_1=\\|x_{T_0^c}\\|_1=\\sigma_s(x)_1.$ Together with step 1.1 this proves equality and attainment. The proof chooses one witness from a finite nonempty set and uses no choice axiom.",
           "step": "2.1",
           "inputs": [
@@ -1156,7 +1156,7 @@
         {
           "case": "empty",
           "status": "checked",
-          "evidence": "Step 1.1 treats empty support T explicitly; step 2.1 permits T0 to be empty."
+          "evidence": "Step 1.1 includes empty support T: every coordinate then belongs to T^c, so the termwise comparison is equality. Step 2.1 permits T0 to be empty."
         },
         {
           "case": "zero",
@@ -1171,7 +1171,7 @@
         {
           "case": "degenerate",
           "status": "checked",
-          "evidence": "The case |supp(z)|=0 is included by the empty-set branch in step 1.1."
+          "evidence": "When supp(z) is empty, z=0 and the full-coordinate comparison in step 1.1 remains valid without any nonempty-support assumption."
         },
         {
           "case": "endpoints",
@@ -1262,14 +1262,15 @@
           "source_section": "Statement",
           "quote": "Let $a, b, c : \\mathbb{N} \\to \\mathbb{R}$ be sequences of reals, let\n$\\lambda \\in \\mathbb{R}$, and let $m, n \\in \\mathbb{N}$, with finite sums and\nfinite products as in Finite sums and finite products, by recursion. Then:\n\n1. **Additivity.** $\\displaystyle\\sum_{k<n}(a_k + b_k) = \\sum_{k<n} a_k + \\sum_{k<n} b_k$.\n2. **Scaling.** $\\displaystyle\\sum_{k<n} \\lambda a_k = \\lambda \\sum_{k<n} a_k$; in particular $\\displaystyle\\sum_{k<n} \\lambda = n\\lambda$, where $n$ denotes the canonical field image $n\\cdot1_{\\mathbb{R}}$ of the natural n (The unique embedding of ℚ into an ordered field, Canonical naturals are positive and strictly increasing).\n3. **Splitting.** If $m \\le n$ then $\\displaystyle\\sum_{k<n} a_k = \\sum_{k<m} a_k + \\sum_{k=m}^{n-1} a_k$, and $\\displaystyle\\prod_{k<n} a_k = \\Big(\\prod_{k<m} a_k\\Big)\\Big(\\prod_{k=m}^{n-1} a_k\\Big)$.\n4. **Monotonicity.** If $a_k \\le b_k$ for all $k < n$ then $\\displaystyle\\sum_{k<n} a_k \\le \\sum_{k<n} b_k$. In particular, if $a_k \\ge 0$ for all $k < n$ then $\\sum_{k<n} a_k \\ge 0$, every single term satisfies $a_j \\le \\sum_{k<n} a_k$ for $j < n$, and $\\sum_{k<n} a_k = 0$ forces $a_k = 0$ for every $k < n$.\n5. **Telescoping.** $\\displaystyle\\sum_{k<n}\\big(c_{k+1} - c_k\\big) = c_n - c_0$.\n6. **Products.** $\\displaystyle\\prod_{k<n}(a_k b_k) = \\Big(\\prod_{k<n} a_k\\Big)\\Big(\\prod_{k<n} b_k\\Big)$; if $a_k \\ge 0$ for all $k < n$ then $\\prod_{k<n} a_k \\ge 0$, and if $a_k > 0$ for all $k < n$ then $\\prod_{k<n} a_k > 0$.",
           "uses": [
-            "1.1"
+            "1.1",
+            "2.1"
           ]
         }
       ],
       "derivations": [
         {
-          "id": "step-1.1",
-          "claim": "If $T=\\varnothing$, its retained mass is zero and is no larger than the nonnegative sum on $S$. Otherwise write the ranks of the elements of $T$ in increasing order as $r_1<\\cdots<r_k$, where $k=|T|\\le s$. Then $r_\\ell\\ge\\ell$, so the specified ordering gives $|x_{j_{r_\\ell}}|\\le|x_{j_\\ell}|$ for each $\\ell$. Summing these inequalities and adding the remaining nonnegative terms among the first $s$ coordinates yields $\\|x_T\\|_1\\le\\|x_S\\|_1$.",
+          "id": "step-1-1",
+          "claim": "If $T=\\varnothing$, its retained mass is zero and is no larger than the nonnegative sum on $S$. Otherwise write the ranks of the elements of $T$ in increasing order as $r_1<\\cdots<r_k$, where $k=|T|\\le s$. Then $r_\\ell\\ge\\ell$, so the specified ordering gives $|x_{j_{r_\\ell}}|\\le|x_{j_\\ell}|$ for each $\\ell$. The coordinate sum in [F2] may be reordered by successive adjacent swaps, each preserving the sum by associativity and commutativity of real addition; zero terms may be omitted. Thus $\\|x_T\\|_1=\\sum_{\\ell=1}^k|x_{j_{r_\\ell}}|\\le\\sum_{\\ell=1}^k|x_{j_\\ell}|\\le\\sum_{\\ell=1}^s|x_{j_\\ell}|=\\|x_S\\|_1$, using termwise monotonicity and then the contiguous split at $k$ with a nonnegative remainder.",
           "step": "1.1",
           "inputs": [
             "given",
@@ -1279,12 +1280,13 @@
           ]
         },
         {
-          "id": "step-2.1",
-          "claim": "Since $T$ and $S$ each partition the full coordinate set into retained and omitted coordinates, [F2] gives $\\|x_{T^c}\\|_1=\\|x\\|_1-\\|x_T\\|_1$ and $\\|x_{S^c}\\|_1=\\|x\\|_1-\\|x_S\\|_1$. Step 1.1 therefore implies $\\|x_{S^c}\\|_1\\le\\|x_{T^c}\\|_1$. Applying this inequality to every admissible $T$, while $S$ itself is admissible, shows that the finite minimum in [F1] equals $\\|x_{S^c}\\|_1$.",
+          "id": "step-2-1",
+          "claim": "For every $U\\subseteq[n]$ and $j\\in[n]$, the zero-extended restrictions satisfy $|x_j|=|(x_U)_j|+|(x_{U^c})_j|$. Summing over the original full coordinate range and applying [F2] and the same-range additivity in [F3] gives $\\|x\\|_1=\\|x_U\\|_1+\\|x_{U^c}\\|_1$. Taking $U=T$ and $U=S$ and subtracting the retained masses, step 1.1 implies $\\|x_{S^c}\\|_1\\le\\|x_{T^c}\\|_1$. Applying this inequality to every admissible $T$, while $S$ itself is admissible, shows that the finite minimum in [F1] equals $\\|x_{S^c}\\|_1$.",
           "step": "2.1",
           "inputs": [
             "F1",
             "F2",
+            "F3",
             "step 1.1",
             "algebra"
           ]

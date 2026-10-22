@@ -29,6 +29,10 @@ sources:
       locator: "§1, definition of a framed link and its surgery trace, printed pp. 35–36"
 verification:
   precheck: n/a
+  judge:
+    model: "gpt-6-luna"
+    verdict: pass
+    date: 2026-10-22
 ---
 
 ## Definition
