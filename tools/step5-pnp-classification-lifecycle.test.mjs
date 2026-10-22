@@ -3,6 +3,7 @@ import assert from 'node:assert/strict';
 import {readFileSync,writeFileSync,mkdirSync,rmSync} from 'node:fs';
 import {join,dirname} from 'node:path';
 import {execFileSync} from 'node:child_process';
+import {collect as dependencyLedger} from './frontier-dependency-ledger.mjs';
 import {runScope} from './step6-lib.mjs';
 import {scopedReadinessTree} from './step6-scoped-tree.mjs';
 import {preflightStep6} from './step6-commit.mjs';
@@ -52,6 +53,18 @@ test('composed originalslot lifecycle preserves original1472/109/344/331/36/679 
   put(root,review,{accepted:true,reviewer_identity:'/root/independent',current_review_granted:false,native_execution_coverage_adopted:false,before_source_sha256:sha(before),after_source_sha256:sha(after),carrier_bindings:carriers.map(c=>({path:c.path,before_sha256:sha(readFileSync(join(root,c.before_file),'utf8')),after_sha256:sha(readFileSync(join(root,c.current_file),'utf8'))}))});
   const request={version:1,kind:'owner-pnp-classification-migration',run,owner_identity:'/root',repairer_identity:'/root',original_id:old,current_id:current,batch:'49',home_page:home,current_review_granted:false,native_execution_coverage_adopted:false,historical_only:true,original_outcome:'confirmed_nonfatal',entry,carriers,root_math_review:math,independent_review:review,consumer_ids:consumers};put(root,'research/pnp-request.json',request);
   const historical=readFileSync(join(root,d,'certification-impact-initial-1.json'),'utf8');rmSync(join(root,`items/${old}.md`));put(root,`items/${current}.md`,after);for(const c of carriers)put(root,c.path,readFileSync(join(root,c.current_file),'utf8'));recordPnpClassificationMigration(root,run,'research/pnp-request.json');
+  // Both genuine identity receipts compose in the dependency-ledger view.
+  const supplier='ex-original-slot-fixture-1000',ledger49=`research/${run}-batch-49.cross-batch-dependencies.json`,ledger21=`research/${run}-batch-21.cross-batch-dependencies.json`;
+  put(root,`research/${run}-batch-46.pages.json`,[{id:'fixture-supplier-page',items:[{id:supplier}]}]);
+  const pages49=get(root,`research/${run}-batch-49.pages.json`);pages49[0].items.find(r=>r.id===current).deps=[supplier];put(root,`research/${run}-batch-49.pages.json`,pages49);
+  const oldRow={kind:'item',consumer:old,supplier,status:'verified',evidence:'Original Step1 interface observation only; no current review credit.'},opRow={...oldRow,consumer:'op-ip-honest-coverage-over-ill-posed-truth-classes'};
+  put(root,ledger49,[oldRow]);put(root,ledger21,[opRow]);const ledgerBefore=readFileSync(join(root,ledger49),'utf8'),data=dependencyLedger(root,run),currentEdge=data.edges.find(r=>r.consumer===current&&r.supplier===supplier);
+  assert.deepEqual(currentEdge.reviews,[]);assert.equal(data.historical_reviews.length,2);assert.ok(data.historical_reviews.every(r=>r.current_review_credit===false));assert.ok(data.historical_reviews.find(r=>r.consumer===old).classification_migration_receipt.endsWith('pnp-classification-migration.json'));assert.ok(data.historical_reviews.find(r=>r.consumer===opRow.consumer).reclassification_receipt.endsWith('original-slot-reclassification.json'));assert.equal(readFileSync(join(root,ledger49),'utf8'),ledgerBefore);
+  for(const rows of [[oldRow,oldRow],[{...oldRow,status:'accepted'}],[{...oldRow,kind:'page'}],[{...oldRow,supplier:opRow.consumer}]]){put(root,ledger49,rows);assert.throws(()=>dependencyLedger(root,run));}put(root,ledger49,[oldRow]);
+  put(root,`research/${run}-batch-46.cross-batch-dependencies.json`,[oldRow]);assert.throws(()=>dependencyLedger(root,run),/ownership/);rmSync(join(root,`research/${run}-batch-46.cross-batch-dependencies.json`));
+  const migrationPath=`${d}/pnp-classification-migration.json`,migrationBytes=readFileSync(join(root,migrationPath),'utf8');put(root,migrationPath,'{}');assert.throws(()=>dependencyLedger(root,run));put(root,migrationPath,migrationBytes);
+  // Only an explicit new current-ID finding can review the current edge.
+  put(root,ledger49,[oldRow,{...oldRow,consumer:current,status:'open',evidence:'Separate current edge finding; actual interface review still owed in this fixture.'}]);assert.deepEqual(dependencyLedger(root,run).edges.find(r=>r.consumer===current&&r.supplier===supplier).reviews.map(r=>r.status),['open']);put(root,ledger49,[oldRow]);
   assert.equal(projectedOriginalIds(root,run,f.frontier.ids).length,1472);assert.equal(licensedPnpReplacement(root,run,old,current,prior),false);
   const result=collect(root,run,'repeat',1);assert.equal(result.decisions.length,36);assert.equal(result.decisions.find(r=>r.id===old).outcome,'confirmed_nonfatal');assert.equal(result.reviews.some(r=>r.id===old||r.id===current),false);assert.equal(result.historical_pnp_classification_reviews[0].post_sha256,report.reviews[0].post_sha256);
   assert.equal(Object.hasOwn(result.evidence,merged),false,'new collections freeze global support');

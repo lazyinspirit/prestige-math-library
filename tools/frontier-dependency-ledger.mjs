@@ -5,11 +5,13 @@ import { resolve, join, relative } from 'node:path';
 import { pathToFileURL } from 'node:url';
 import { split, yaml } from './pathway-lib.mjs';
 import { loadOriginalSlotReclassification } from './step5-original-slot-reclassification.mjs';
+import { loadPnpClassificationMigration } from './step5-pnp-classification-migration.mjs';
 
 export function collect(root, run) {
   if (!/^[a-zA-Z0-9_-]+$/.test(run)) throw new Error('Invalid run name');
   const research = join(root, 'research');
   const replacement = loadOriginalSlotReclassification(root, run, { current: true });
+  const classification = loadPnpClassificationMigration(root, run, { current: true });
   const read = path => JSON.parse(readFileSync(path, 'utf8'));
   const homes = new Map(), records = [], batches = [];
   const names = readdirSync(research).filter(name => name.startsWith(`${run}-batch-`)
@@ -71,10 +73,12 @@ export function collect(root, run) {
     for (const row of input) {
       // Preserve the old row as historical evidence, with no current edge
       // credit. A fresh review must name the new canonical consumer/supplier.
-      const historical = replacement && row.kind === 'item'
-        && [row.consumer, row.supplier].includes(replacement.original_id);
-      const consumerHome = historical && row.consumer === replacement.original_id
-        ? homes.get(`item:${replacement.current_id}`) : homes.get(`${row.kind}:${row.consumer}`);
+      const migrations = row.kind === 'item' ? [replacement, classification].filter(history =>
+        history && [row.consumer, row.supplier].includes(history.original_id)) : [];
+      if (migrations.length > 1) throw new Error(`${file}: ambiguous historical migration review`);
+      const historical = migrations[0];
+      const consumerHome = historical && row.consumer === historical.original_id
+        ? homes.get(`item:${historical.current_id}`) : homes.get(`${row.kind}:${row.consumer}`);
       if (!['item', 'page'].includes(row.kind) || !['open', 'verified', 'removed'].includes(row.status)
         || !String(row.evidence ?? '').trim() || consumerHome !== batch)
         throw new Error(`${file}: invalid review or consumer ownership`);
@@ -82,8 +86,10 @@ export function collect(root, run) {
       if (seen.has(key)) throw new Error(`${file}: duplicate consumer/supplier review`);
       seen.add(key);
       if (historical) { historical_reviews.push({ ...row, file, current_review_credit: false,
-        original_id: replacement.original_id, current_id: replacement.current_id,
-        reclassification_receipt: relative(root, replacement.path).replaceAll('\\', '/') }); continue; }
+        original_id: historical.original_id, current_id: historical.current_id,
+        ...(historical === classification
+          ? { classification_migration_receipt: relative(root, historical.path).replaceAll('\\', '/') }
+          : { reclassification_receipt: relative(root, historical.path).replaceAll('\\', '/') }) }); continue; }
       const target = add(row);
       if (!target) { orphaned_reviews.push({ ...row, file }); continue; }
       target.reviews.push({ status: row.status, evidence: row.evidence, file });
