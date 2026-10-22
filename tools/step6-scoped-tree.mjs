@@ -83,7 +83,9 @@ export function scopedReadinessTree(run, root, { scope = runScope(run, root), in
     return rows;
   });
   const manifestItems = manifestPages.flatMap(page => (page.items ?? []).map(item => typeof item === 'string' ? item : item.id));
-  if (!manifestItems.length || manifestItems.some(id => !/^[a-z]+-[a-z0-9]+(?:-[a-z0-9]+)*$/.test(id ?? '')))
+  const manifestItemId = physics ? /^[a-z]+-[a-z0-9]+(?:-[a-z0-9]+)*$/
+    : /^(?:alg|def|lem|thm|prop|cor|ex|cex|fs|rem|op)-[A-Za-z0-9]+(?:-[A-Za-z0-9]+)*$/;
+  if (!manifestItems.length || manifestItems.some(id => !manifestItemId.test(id ?? '')))
     throw new Error(`cannot seal readiness: ${run} has no valid populated manifest scope`);
   // Seal both promised and currently manifested subjects; disagreement is a
   // native scope gate failure, never grounds for silently dropping either set.

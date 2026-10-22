@@ -68,7 +68,7 @@ const selectedFiles = () => {
     if (claim.version !== 1 || claim.run !== scopedRun) die('foreign or invalid published touch claim');
     ids.add(claim.id);
   }
-  if (!ids.size || [...ids].some(id => !/^[a-z][a-z0-9-]*$/.test(id ?? '')))
+  if (!ids.size || [...ids].some(id => !/^(?:alg|def|lem|thm|prop|cor|ex|cex|fs|rem|op)-[A-Za-z0-9]+(?:-[A-Za-z0-9]+)*$/.test(id ?? '')))
     die('empty or invalid final touch scope');
   return [...ids].sort().map(id => id + '.md');
 };

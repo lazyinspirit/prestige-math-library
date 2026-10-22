@@ -89,3 +89,19 @@ test('ordinary foreign JSON retains scoped record projection', t => {
   const before = f.tree(); assert.ok(before.protected_tree_projections.includes(file));
   update('after'); assert.equal(f.tree().protected_tree_sha256, before.protected_tree_sha256);
 });
+
+test('readiness manifest identities preserve both canonical mixed-case segments and case-distinct sources',t=>{
+ const f=fixture(t),ids=['lem-amenable-D-R-l2-dimension-estimate','lem-hat-CF-genus-one-lens-space-order-three-rank-three','lem-case-X','lem-case-x'];
+ for(const id of ids)f.put(`items/${id}.md`,`---\nid: ${id}\n---\n## Statement\nExact ${id}.\n`);
+ f.json('research/demo-batch-1.pages.json',[{id:'page',items:ids}]);
+ const result=f.tree({scope:{items:ids.map(id=>({id})),pages:[{id:'page',file:'library/category/page.md'}],pathwayFiles:[]}});
+ for(const id of ids)assert.ok(result.protected_tree_paths.includes(`items/${id}.md`));
+ assert.notEqual(result.protected_tree_rows.find(row=>row.startsWith('items/lem-case-X.md\0')),result.protected_tree_rows.find(row=>row.startsWith('items/lem-case-x.md\0')));
+});
+for(const id of ['Lem-name','xyz-name','lem-','lem--name','lem-name-','lem-name_part','lem-name.part','lem-name/part','lem-name space','../lem-name','lem-é'])test(`readiness rejects malformed manifest identity ${id}`,t=>{
+ const f=fixture(t);f.json('research/demo-batch-1.pages.json',[{id:'page',items:[id]}]);assert.throws(f.tree,/no valid populated manifest scope/);
+});
+
+test('mathematical grammar alignment leaves the shared physics grammar unchanged',t=>{
+ const f=fixture(t),id='eq-energy';f.json('research/math-imports.json',{version:1,source_root:'fixture',files:[]});f.put(`items/${id}.md`,`---\nid: ${id}\n---\nEnergy.\n`);f.json('research/demo-batch-1.pages.json',[{id:'page',items:[id]}]);const scope={items:[{id}],pages:[{id:'page',file:'library/category/page.md'}],pathwayFiles:[]};assert.doesNotThrow(()=>f.tree({scope,physics:true}));assert.throws(()=>f.tree({scope}),/no valid populated manifest scope/);f.json('research/demo-batch-1.pages.json',[{id:'page',items:['eq-Energy']}]);assert.throws(()=>f.tree({scope,physics:true}),/no valid populated manifest scope/);
+});
