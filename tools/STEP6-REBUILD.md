@@ -375,3 +375,10 @@ receipts and all existing raw evidence remain sealed and owned as before. True
 still traverse strictly, even when the same path also occurs in an inventory.
 Malformed receipts or genuine JSON sources still fail; no parse-error fallback
 or operational symlink source acceptance is introduced.
+
+Proof-layout receipt scope uses the mathematical item grammar from SCHEMA.md:
+known lowercase kind prefixes and case-sensitive ASCII alphanumeric segments.
+Existing mixed-case IDs remain exact filenames and manifest identities; no
+normalization, alias inference, or scope widening occurs. All ownership,
+manifest/page agreement, input/dependency fingerprints and coverage checks remain
+required. The independent physics receipt helper is unchanged.

@@ -34,7 +34,7 @@ export function proofLayoutScope(run, root = REPO) {
   }
   const currentIds = new Set(scope.items.map(item => item.id));
   const canonical = id => {
-    if (typeof id !== 'string' || !/^[a-z][a-z0-9-]*$/.test(id)) throw Error(`proof-layout: invalid item ID ${id}`);
+    if (typeof id !== 'string' || !/^(?:alg|def|lem|thm|prop|cor|ex|cex|fs|rem|op)-[A-Za-z0-9]+(?:-[A-Za-z0-9]+)*$/.test(id)) throw Error(`proof-layout: invalid item ID ${id}`);
     if (currentIds.has(id)) return id;
     const candidates = owners.get(id);
     if (candidates?.size && existsSync(join(root, `items/${id}.md`))) throw Error(`proof-layout: alias ${id} collides with a real item file`);
