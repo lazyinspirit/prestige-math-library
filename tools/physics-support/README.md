@@ -27,3 +27,13 @@ validly dropped sources and diagnostic fields: `historical_*`, `checks`,
 failed retrieval records do not reactivate old source URLs. Active source and
 citation fields remain visible, including dead URLs that still require checking;
 noncoverage traversal is unchanged. Collection never edits the coverage history.
+
+`validate-plan.mjs` resolves missing prerequisite declarations only through
+authenticated published imports. A snapshot without an `order` field supplies
+no numeric reading-order claim; `imported-plan-pages.mjs` preserves that absence
+instead of inventing zero. Numeric prerequisite comparisons require known order
+at both endpoints. Explicit imported zero, other explicit imported orders and
+canonical plan/frontier ordering retain their checks. Unknown-order imports stay
+in prerequisite resolution and closure, item/page cycle checks, and supplier
+identity, publication, classification and immutable-pin verification. This
+changes no import bytes or authored frontier scope.

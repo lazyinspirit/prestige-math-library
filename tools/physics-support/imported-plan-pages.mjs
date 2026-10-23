@@ -55,9 +55,9 @@ export function importedPlanPage(root, id, receipt, copies = []) {
   for (const field of ['requires', 'prerequisites'])
     if (!Array.isArray(page[field] ?? []) || (page[field] ?? []).some(id => typeof id !== 'string' || !slug.test(id))) fail(`invalid ${field}`);
   if (page.order !== undefined && !Number.isFinite(page.order)) fail('invalid explicit order');
-  // Published P declarations already use zero when no reading order is stored.
-  // Keep any actual explicit order; later prerequisites must still fail.
+  // A published snapshot without order supplies no numeric ordering claim.
+  // Preserve absence separately from explicit zero; graph checks still apply.
   return { id, kind: 'P', category: pin.path.split('/')[1], library: 'mathematics',
-    order: page.order ?? 0, requires: [...new Set([...(page.requires ?? []), ...(page.prerequisites ?? [])])], items: [],
+    order: page.order, requires: [...new Set([...(page.requires ?? []), ...(page.prerequisites ?? [])])], items: [],
     importedKind: page.kind === 'B' || id.endsWith('-examples') ? 'B' : 'A' };
 }
