@@ -87,3 +87,22 @@ this filename remain immutable. No other research file, source, manifest, native
 result, receipt or history gains this allowance. Owner snapshots bind the writer
 and reconstruction helper code; all ordinary planning and apply gates still run.
 The checker reads native history and never edits the diagnostic, archives or state.
+
+Supplemental native verdict format corrections remain Root-owned sidecars at
+`research/RUN-append-N-drift-format-clarification.json`; native reports/results
+and applied receipts stay unchanged. Besides the original bare-verdict shape,
+a row may explicitly use `format: imported-order-annotation`. Every `added_edges`
+entry then records `{target, order: null, reported_order: NUMBER}`. The reported
+number must match its exact native verdict annotation; the targets must equal
+all actual added edges in the authenticated applied manifest archive. Each target
+must resolve through immutable published import authentication, be absent from
+the canonical plan, and have no stored order. A known imported numeric order
+(including zero) or canonical declaration cannot use this correction.
+
+This shape changes only those numeric annotations to `order unspecified` in the
+separately attributed in-memory drift view, retaining the native verdict's
+explanation. It does not certify a foreign catalogue number as a physics order.
+Existing report/result/receipt/section/archive hash bindings, Root reasons,
+current retained edges, import identity/publication/pins, ordinary known-order,
+reading-order and buildability checks remain required. Native owner snapshots
+already bind the sidecar, helper and authenticated import inputs.

@@ -429,12 +429,12 @@ test('native-looking receipts without completed engine dispatch or actual prompt
  }
 });
 
-function clarifiedFixture(t: any, omitMention = false) {
+function clarifiedFixture(t: any, omitMention = false, numericOrders = false, duplicateAnnotation = false) {
     const f = fixture(t), targets = Array.from({ length: 9 }, (_, i) => 'foreign-' + i);
     const receipt: any = { version: 1, source_root: join(f.repo, 'originals'), files: [] };
     for (const [i, id] of targets.entries()) {
         const path = `library/math/${id}.md`;
-        const body = `---\npage: ${id}\nstatus: published\nlibrary: mathematics\n${i < 4 ? '' : 'order: 0\n'}items: [def-${id}]\nexamples: []\nrequires: []\n---\nPublished prerequisite.\n`;
+        const body = `---\npage: ${id}\nstatus: published\nlibrary: mathematics\n${numericOrders || i < 4 ? '' : 'order: 0\n'}items: [def-${id}]\nexamples: []\nrequires: []\n---\nPublished prerequisite.\n`;
         f.save(path, body); receipt.files.push({ path, sha256: driftHash(body) });
     }
     f.save('research/math-imports.json', receipt);
@@ -442,7 +442,7 @@ function clarifiedFixture(t: any, omitMention = false) {
     plan.pages.find((p: any) => p.id === 'new-a').requires.push(...targets);
     f.save('research/plan-spec.json', plan); f.review(e);
     const mentioned = omitMention ? targets.slice(1) : targets;
-    f.save(e.report, f.read(e.report).toString().replace('VERDICT: no-drift', `Added existing supplier edges: ${mentioned.map(id => '\`' + id + '\`').join(', ')}.\nVERDICT: drift-applied`));
+    f.save(e.report, f.read(e.report).toString().replace('VERDICT: no-drift', `Added existing supplier edges: ${mentioned.map(id => '\`' + id + '\`').join(', ')}.\nVERDICT: drift-applied${numericOrders ? ' — added ' + targets.map((id, i) => (duplicateAnnotation && i === 1 ? targets[0] : id) + ' (order ' + (1000 + i) + ')').join(', ') + '; exact definition inputs were missing.' : ''}`));
     f.native(e); applyAppendReview(f.repo, 'demo', 1, { invoke: f.invoke });
     const appliedPath = `${e.archive}/review-applied.json`, manifest = 'research/demo-batch-56.pages.json', archive = 'research/applied-manifest-56.json';
     f.save(archive, f.read(manifest).toString());
@@ -452,7 +452,8 @@ function clarifiedFixture(t: any, omitMention = false) {
         report: { path: e.report, sha256: driftHash(raw) }, native_result: { path: 'research/demo-dispatch/alpha-drift-review-append-1.result.json', sha256: driftHash(f.read('research/demo-dispatch/alpha-drift-review-append-1.result.json')) },
         applied_receipt: { path: appliedPath, sha256: driftHash(f.read(appliedPath)) }, clarifications: [{ page: 'new-a', verdict: 'drift-applied', section_sha256: driftHash(raw.slice(start, end)),
             reason: 'Root independently checked every explicitly reported added edge; this clarifies bare verdict formatting without altering native observations.', applied_manifest: { path: archive, sha256: driftHash(f.read(archive)) },
-            added_edges: targets.map((target, i) => ({ target, order: i < 4 ? null : 0 })) }] };
+            ...(numericOrders ? {format:'imported-order-annotation'} : {}),
+            added_edges: targets.map((target, i) => ({ target, order: numericOrders || i < 4 ? null : 0, ...(numericOrders ? {reported_order:1000+i} : {}) })) }] };
     f.save(path, clarification);
     const check = () => spawnSync(process.execPath, [new URL('../../physics-support/drift-review-check.mjs', import.meta.url).pathname, '--run', 'demo'], { cwd: f.repo, encoding: 'utf8', env: { ...process.env, PHYSICS_REPO: f.repo } });
     return { ...f, e, targets, path, clarification, manifest, archive, appliedPath, check };
@@ -688,4 +689,36 @@ test('diagnostic exception rejects invented failures, changed archives, wrong sc
     f.save('items/def-old-1-0.md', 'A changed scientific source.');
     f.review(e);
     assert.throws(() => checkAppendReview(f.repo, 'demo', 1), /prior item changed: items/);
+});
+
+test('Root clarifies numeric foreign catalogue annotations only for authenticated unknown-order imports, keeping native bytes and ordinary gates', t => {
+    const f = clarifiedFixture(t, false, true), raw = f.read(f.e.report), result = f.read('research/demo-dispatch/alpha-drift-review-append-1.result.json'), applied = f.read(f.appliedPath);
+    rmSync(join(f.repo, f.path));
+    const failed = f.check(); assert.notEqual(failed.status, 0); assert.match(failed.stderr + failed.stdout, /drift-check-order-detail/);
+    f.save(f.path, f.clarification);
+    const view = appendDriftView(f.repo, 'demo');
+    assert.ok(view.text.includes('foreign-0 (order unspecified)'));
+    assert.ok(view.text.includes('; exact definition inputs were missing.'));
+    const checked = f.check(); assert.equal(checked.status, 0, checked.stdout + checked.stderr);
+    assert.deepEqual(f.read(f.e.report), raw); assert.deepEqual(f.read(f.appliedPath), applied);
+    assert.deepEqual(f.read('research/demo-dispatch/alpha-drift-review-append-1.result.json'), result);
+    assert.ok(view.inputs.includes('library/math/foreign-0.md'));
+});
+test('numeric annotation clarification rejects wrong reported numbers, duplicates, unknown mode and actual known or canonical orders', t => {
+    const duplicateReport = clarifiedFixture(t, false, true, true);
+    assert.throws(() => appendDriftView(duplicateReport.repo, 'demo'), /every original numeric order annotation/);
+    for (const mode of ['reported', 'missing-reported', 'duplicate', 'unknown-mode', 'explicit-zero', 'explicit-later', 'canonical']) {
+        const f = clarifiedFixture(t, false, true), c = f.clarification.clarifications[0];
+        if (mode === 'reported') c.added_edges[0].reported_order++;
+        if (mode === 'missing-reported') delete c.added_edges[0].reported_order;
+        if (mode === 'duplicate') c.added_edges[1] = c.added_edges[0];
+        if (mode === 'unknown-mode') c.format = 'accept-all-orders';
+        if (mode.startsWith('explicit-')) {
+            const path = 'library/math/foreign-0.md', body = f.read(path).toString().replace('status: published', 'status: published\norder: ' + (mode === 'explicit-zero' ? 0 : 1000));
+            f.save(path, body); const receipt = JSON.parse(f.read('research/math-imports.json').toString()); receipt.files[0].sha256 = driftHash(body); f.save('research/math-imports.json', receipt);
+        }
+        if (mode === 'canonical') { const plan = JSON.parse(f.read('research/plan-spec.json').toString()); plan.pages.push({id:'foreign-0',kind:'P',order:0,requires:[],items:[]}); f.save('research/plan-spec.json',plan); }
+        f.save(f.path, f.clarification);
+        assert.throws(() => appendDriftView(f.repo, 'demo'), /clarification|annotation/, mode);
+    }
 });

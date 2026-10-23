@@ -193,8 +193,18 @@ function clarifiedAppendView(root, run, entry, review, appliedPath) {
         seen.add(row.page);
         const end = heads[index + 1]?.index ?? review.text.length;
         const section = review.text.slice(head.index, end);
-        if (row.section_sha256 !== appendHash(section) || !/^VERDICT:[ \t]*drift-applied[ \t]*$/m.test(section))
-            fail('clarification requires exact original bare drift-applied section');
+        const orderAnnotation = row.format === 'imported-order-annotation';
+        if (row.format !== undefined && !orderAnnotation) fail('unknown supplemental clarification format');
+        const verdicts = [...section.matchAll(/^VERDICT:[ \t]*drift-applied\b[^\r\n]*$/gm)];
+        if (row.section_sha256 !== appendHash(section) || verdicts.length !== 1
+            || (!orderAnnotation && !/^VERDICT:[ \t]*drift-applied[ \t]*$/.test(verdicts[0][0])))
+            fail('clarification requires exact original drift-applied section and format');
+        const annotations = orderAnnotation ? [...verdicts[0][0].matchAll(/`?([a-z0-9][a-z0-9-]*)`?\s*\(order\s*([0-9.]+)\)/g)] : [];
+        if (orderAnnotation && (annotations.length !== row.added_edges.length
+            || new Set(annotations.map(match => match[1])).size !== annotations.length
+            || annotations.some(([, target, order]) => row.added_edges.filter(edge => edge.target === target
+                && Number.isFinite(edge.reported_order) && edge.reported_order === Number(order)).length !== 1)))
+            fail('clarification must bind exactly every original numeric order annotation');
         const archived = appendJSON(boundAppendFile(root, row.applied_manifest));
         const ownership = entry.newOwnership.find(p => p.id === row.page);
         const manifestPath = `research/${run}-batch-${ownership?.batch}.pages.json`;
@@ -217,13 +227,18 @@ function clarifiedAppendView(root, run, entry, review, appliedPath) {
                 fail('clarified added edge missing from current plan/manifest');
             const resolved = resolveDriftTarget(root, edge.target, pages), order = resolved.page.order;
             inputs.push(...resolved.inputs);
+            if (orderAnnotation && (!resolved.imported || order !== undefined || edge.order !== null))
+                fail('order annotation clarification requires authenticated imported absent order');
             if (edge.order !== (order === undefined && resolved.imported ? null : order)
                 || (edge.order !== null && (!Number.isFinite(edge.order) || edge.order < 0 || edge.order >= current.order)))
                 fail('clarified order contradicts actual known prerequisite order');
             return '`' + edge.target + '` (order ' + (edge.order === null ? 'unspecified' : edge.order) + ')';
         }).join(', ');
-        replacements.push({ start: head.index, end, section: section.replace(/^VERDICT:[ \t]*drift-applied[ \t]*$/m,
-            `<!-- Root format clarification: ${path}; raw native section unchanged -->\nVERDICT: drift-applied — ${detail}`) });
+        const clarifiedVerdict = orderAnnotation ? verdicts[0][0].replace(
+            /(`?[a-z0-9][a-z0-9-]*`?\s*\(order\s*)[0-9.]+(\))/g, '$1unspecified$2')
+            : `VERDICT: drift-applied — ${detail}`;
+        replacements.push({ start: head.index, end, section: section.replace(verdicts[0][0],
+            `<!-- Root format clarification: ${path}; raw native section unchanged -->\n${clarifiedVerdict}`) });
     }
     let text = review.text;
     for (const row of replacements.sort((a, b) => b.start - a.start)) text = text.slice(0, row.start) + row.section + text.slice(row.end);
