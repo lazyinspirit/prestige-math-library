@@ -2,7 +2,7 @@
 id: def-fd-incompressible-euler-model
 kind: definition
 title: Incompressible inviscid Euler model with pressure multiplier
-status: draft
+status: published
 origin: pipeline
 domain: physics
 library: physics
@@ -34,6 +34,12 @@ sources:
       locator: Course notes, nodes 62–64 and 102.
 verification:
   precheck: pending
+  verified:
+    model: gpt-6.1-sol
+    verdict: pass
+    date: 2026-10-23
+    scope: Completed native delegated item review and certified repair closure; exact evidence and source-reading limits retained in research/fluid-dynamics-all-47-2026-10-23-publication.json.
+    delegated_by: owner
 ---
 
 ## Definition

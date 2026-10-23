@@ -2,7 +2,7 @@
 id: def-fd-mini-fluid-interface
 kind: definition
 title: "Smooth MINI observation interface"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: fluid-dynamics-all-47-2026-10-23
 domain: mathematics
@@ -37,10 +37,12 @@ sources:
       locator: "§8.4.2 and §8.6.1, printed pp. 470–471 and 487–488: the two-dimensional MINI P1-bubble/P1 stability and stationary Stokes error context; no time-dependent pressure-observation estimate is imported."
 verification:
   precheck: n/a
-  judge:
-    model: "gpt-6-luna"
+  verified:
+    model: gpt-6.1-sol
     verdict: pass
     date: 2026-10-23
+    scope: Completed native delegated item review and certified repair closure; exact evidence and source-reading limits retained in research/fluid-dynamics-all-47-2026-10-23-publication.json.
+    delegated_by: owner
 ---
 
 ## Definition

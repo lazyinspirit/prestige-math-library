@@ -1,7 +1,7 @@
 ---
 page: fd-c02
 title: Turbulent averaging and open closure questions
-status: draft
+status: published
 library: physics
 requires:
   - fd-c01

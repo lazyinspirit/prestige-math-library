@@ -2,7 +2,7 @@
 id: lem-fd-real-trigonometric-derivatives
 kind: lemma
 title: "Derivative identities for the real restrictions of complex sine and cosine"
-status: draft
+status: published
 origin: pipeline
 domain: mathematics
 library: mathematics
@@ -29,6 +29,12 @@ sources:
       url: "https://zr9558.com/wp-content/uploads/2013/11/complex_analysis-stein-shakarchi.pdf"
 verification:
   precheck: pending
+  verified:
+    model: gpt-6.1-sol
+    verdict: pass
+    date: 2026-10-23
+    scope: Completed native delegated item review and certified repair closure; exact evidence and source-reading limits retained in research/fluid-dynamics-all-47-2026-10-23-publication.json.
+    delegated_by: owner
 ---
 
 ## Statement

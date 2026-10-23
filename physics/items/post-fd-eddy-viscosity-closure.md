@@ -2,7 +2,7 @@
 id: post-fd-eddy-viscosity-closure
 kind: postulate
 title: Isotropic eddy viscosity and unresolved energy model
-status: draft
+status: published
 origin: pipeline
 domain: physics
 library: physics
@@ -39,6 +39,10 @@ sources:
       locator: "§§3.6–3.8, printed pp. 9–11"
 verification:
   precheck: pass
+  sources_checked:
+    date: 2026-10-23
+    scope: Completed native formulation/status, source-evidence and applicability review; exact evidence and reading limits in research/fluid-dynamics-all-47-2026-10-23-publication.json. No new retrieval, measurement or solution is claimed.
+    by: owner-authorized native reviewers (gpt-6.1-sol)
 ---
 ## Postulate
 

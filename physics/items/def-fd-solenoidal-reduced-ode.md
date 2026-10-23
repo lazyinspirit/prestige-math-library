@@ -2,7 +2,7 @@
 id: def-fd-solenoidal-reduced-ode
 kind: definition
 title: Finite solenoidal Galerkin coefficient dynamics
-status: draft
+status: published
 origin: pipeline
 domain: mathematics
 library: mathematics
@@ -15,10 +15,12 @@ provenance:
   statement: ai-altered
   proof: not-applicable
 verification:
-  judge:
-    model: "gpt-6-luna"
+  verified:
+    model: gpt-6.1-sol
     verdict: pass
     date: 2026-10-23
+    scope: Completed native delegated item review and certified repair closure; exact evidence and source-reading limits retained in research/fluid-dynamics-all-47-2026-10-23-publication.json.
+    delegated_by: owner
 sources:
   references:
     - title: "Emil Wiedemann, Lecture Notes: Navier-Stokes Equations, edited by Jack Skipper, Universität Ulm, Winter 2018/19"

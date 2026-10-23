@@ -1,7 +1,7 @@
 ---
 page: fd-st02-examples
 title: Fluid observable uncertainty and numerical bias budgets — Examples
-status: draft
+status: published
 library: mathematics
 requires:
   - fd-st02

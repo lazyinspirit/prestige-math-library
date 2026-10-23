@@ -1,7 +1,7 @@
 ---
 page: fd-k01
 title: Nonnegative kinetic density and moment domain
-status: draft
+status: published
 library: mathematics
 requires:
   - product-measures-and-the-fubini-tonelli-theorems

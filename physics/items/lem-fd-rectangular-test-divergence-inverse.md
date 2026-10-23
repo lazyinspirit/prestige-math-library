@@ -2,7 +2,7 @@
 id: lem-fd-rectangular-test-divergence-inverse
 kind: lemma
 title: "Rectangular continuous divergence inverse on mean-zero tests"
-status: draft
+status: published
 origin: pipeline
 domain: mathematics
 library: mathematics
@@ -24,6 +24,12 @@ provenance:
   proof: ai-altered
 verification:
   precheck: pending
+  verified:
+    model: gpt-6.1-sol
+    verdict: pass
+    date: 2026-10-23
+    scope: Completed native delegated item review and certified repair closure; exact evidence and source-reading limits retained in research/fluid-dynamics-all-47-2026-10-23-publication.json.
+    delegated_by: owner
 sources:
   references:
     - title: "Martin Vohralík, A posteriori error estimates for efficiency and error control in numerical simulations, Course NM497 lecture notes (2010–2011)"

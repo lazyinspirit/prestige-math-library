@@ -2,7 +2,7 @@
 id: pthm-fd-wall-mechanical-power-balance
 kind: physics-theorem
 title: "Mechanical power balance under adopted wall laws"
-status: draft
+status: published
 origin: pipeline
 domain: physics
 library: physics
@@ -60,6 +60,12 @@ sources:
         (2.5) / Proposition 2.1, PDF pp. 1–5."
 verification:
   precheck: pending
+  verified:
+    model: gpt-6.1-sol
+    verdict: pass
+    date: 2026-10-23
+    scope: Completed native delegated item review and certified repair closure; exact evidence and source-reading limits retained in research/fluid-dynamics-all-47-2026-10-23-publication.json.
+    delegated_by: owner
 ---
 
 ## Statement

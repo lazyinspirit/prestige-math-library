@@ -1,7 +1,7 @@
 ---
 page: fd-ples01
 title: Adopted turbulent closures and dissipativity
-status: draft
+status: published
 library: physics
 items:
   - post-fd-eddy-viscosity-closure

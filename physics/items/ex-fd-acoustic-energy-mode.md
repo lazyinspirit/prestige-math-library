@@ -2,7 +2,7 @@
 id: ex-fd-acoustic-energy-mode
 kind: example
 title: "A longitudinal acoustic mode with constant transverse flow conserves weighted energy"
-status: draft
+status: published
 origin: pipeline
 domain: mathematics
 library: mathematics
@@ -28,6 +28,12 @@ sources:
       locator: "PDF pp. 150–153; the example is an exact mode of the linear tangent system, with its normalized-torus calculation given here."
 verification:
   precheck: pass
+  verified:
+    model: gpt-6.1-sol
+    verdict: pass
+    date: 2026-10-23
+    scope: Completed native delegated item review and certified repair closure; exact evidence and source-reading limits retained in research/fluid-dynamics-all-47-2026-10-23-publication.json.
+    delegated_by: owner
 ---
 
 ## Example

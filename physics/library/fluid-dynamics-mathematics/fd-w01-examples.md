@@ -1,7 +1,7 @@
 ---
 page: fd-w01-examples
 title: Periodic solenoidal Fourier spaces — Examples
-status: draft
+status: published
 library: mathematics
 companion: fd-w01
 requires:

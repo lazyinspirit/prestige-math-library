@@ -2,7 +2,7 @@
 id: post-fd-weak-balances
 kind: postulate
 title: "Integrable weak continuum balance and entropy adoption"
-status: draft
+status: published
 origin: pipeline
 domain: physics
 library: physics
@@ -23,10 +23,10 @@ provenance:
   statement: ai-altered
   proof: not-applicable
 verification:
-  judge:
-    model: "gpt-6-luna"
-    verdict: pass
+  sources_checked:
     date: 2026-10-23
+    scope: Completed native formulation/status, source-evidence and applicability review; exact evidence and reading limits in research/fluid-dynamics-all-47-2026-10-23-publication.json. No new retrieval, measurement or solution is claimed.
+    by: owner-authorized native reviewers (gpt-6.1-sol)
 sources:
   references:
     - title: "Joseph M. Powers, Lecture Notes on Intermediate Fluid Mechanics"

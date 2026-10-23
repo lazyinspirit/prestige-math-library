@@ -1,7 +1,7 @@
 ---
 page: fd-k01-examples
 title: Nonnegative kinetic density and moment domain — Examples
-status: draft
+status: published
 library: mathematics
 requires:
   - fd-k01

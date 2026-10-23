@@ -2,7 +2,7 @@
 id: pthm-fd-creeping-lipschitz-pressure
 kind: physics-theorem
 title: "Creeping continuum pressure and bounded observations"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: fluid-dynamics-all-47-2026-10-23
 domain: physics
@@ -52,10 +52,12 @@ sources:
       locator: "§§4.2.1–4.2.3 and §8.2.1: mixed Hilbert-space stability and Stokes pressure gauge context."
 verification:
   precheck: pending
-  judge:
-    model: "gpt-6-luna"
+  verified:
+    model: gpt-6.1-sol
     verdict: pass
     date: 2026-10-23
+    scope: Completed native delegated item review and certified repair closure; exact evidence and source-reading limits retained in research/fluid-dynamics-all-47-2026-10-23-publication.json.
+    delegated_by: owner
 ---
 
 ## Statement

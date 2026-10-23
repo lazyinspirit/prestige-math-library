@@ -1,7 +1,7 @@
 ---
 page: fd-n02
 title: Incompressible numerical observable and pressure errors
-status: draft
+status: published
 library: mathematics
 items:
   - def-fd-mini-fluid-interface

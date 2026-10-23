@@ -2,7 +2,7 @@
 id: lem-fd-profile-affine-coordinate-isometry
 kind: lemma
 title: Affine normalization isometry for profile coordinates
-status: draft
+status: published
 origin: pipeline
 pipeline_run: fluid-dynamics-all-47-2026-10-23
 dependency_level: 0
@@ -26,10 +26,12 @@ sources:
       url: "https://people.math.osu.edu/costin.9/6211-2018/C.pdf"
 verification:
   precheck: pending
-  judge:
-    model: "gpt-6-luna"
+  verified:
+    model: gpt-6.1-sol
     verdict: pass
     date: 2026-10-23
+    scope: Completed native delegated item review and certified repair closure; exact evidence and source-reading limits retained in research/fluid-dynamics-all-47-2026-10-23-publication.json.
+    delegated_by: owner
 ---
 
 ## Statement

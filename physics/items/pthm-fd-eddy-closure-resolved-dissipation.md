@@ -2,7 +2,7 @@
 id: pthm-fd-eddy-closure-resolved-dissipation
 kind: physics-theorem
 title: Resolved dissipation of adopted eddy viscosity
-status: draft
+status: published
 origin: pipeline
 domain: physics
 library: physics
@@ -45,6 +45,12 @@ sources:
       locator: "§§3.6–3.8, printed pp. 9–11"
 verification:
   precheck: pass
+  verified:
+    model: gpt-6.1-sol
+    verdict: pass
+    date: 2026-10-23
+    scope: Completed native delegated item review and certified repair closure; exact evidence and source-reading limits retained in research/fluid-dynamics-all-47-2026-10-23-publication.json.
+    delegated_by: owner
 ---
 ## Statement
 

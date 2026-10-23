@@ -1,7 +1,7 @@
 ---
 page: fd-x03-examples
 title: "Stokes residual estimates, Couette stability and linear vortex-sheet modes — Examples"
-status: draft
+status: published
 library: mathematics
 companion: fd-x03
 requires:

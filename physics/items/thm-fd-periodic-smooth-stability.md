@@ -2,7 +2,7 @@
 id: thm-fd-periodic-smooth-stability
 kind: theorem
 title: "Smooth incompressible and symmetric-system stability"
-status: draft
+status: published
 origin: pipeline
 domain: mathematics
 library: mathematics
@@ -43,6 +43,12 @@ sources:
       url: "https://davidtong.org/pdfs/teaching/fluid-mechanics/fluids2.pdf"
 verification:
   precheck: pass
+  verified:
+    model: gpt-6.1-sol
+    verdict: pass
+    date: 2026-10-23
+    scope: Completed native delegated item review and certified repair closure; exact evidence and source-reading limits retained in research/fluid-dynamics-all-47-2026-10-23-publication.json.
+    delegated_by: owner
 ---
 
 ## Statement

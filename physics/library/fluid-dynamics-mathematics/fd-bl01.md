@@ -1,7 +1,7 @@
 ---
 page: fd-bl01
 title: Wall-defect estimates and capillary-wave energy
-status: draft
+status: published
 library: mathematics
 requires:
   - fd-l01

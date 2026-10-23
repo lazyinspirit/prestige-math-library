@@ -2,7 +2,7 @@
 id: rem-fd-fluid-sobol-interface
 title: Sobol sensitivity and observable-error interface
 kind: remark
-status: draft
+status: published
 origin: pipeline
 pipeline_run: fluid-dynamics-all-47-2026-10-23
 dependency_level: 0
@@ -34,6 +34,12 @@ provenance:
   proof: ai-generated
 verification:
   precheck: pending
+  verified:
+    model: gpt-6.1-sol
+    verdict: pass
+    date: 2026-10-23
+    scope: Completed native delegated item review and certified repair closure; exact evidence and source-reading limits retained in research/fluid-dynamics-all-47-2026-10-23-publication.json.
+    delegated_by: owner
 sources:
   references:
     - title: "Art B. Owen, Variance Components and Generalized Sobol' Indices, arXiv:1205.1774, §§2–2.1"

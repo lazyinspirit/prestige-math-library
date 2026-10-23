@@ -2,7 +2,7 @@
 id: lem-fd-periodic-integration-by-parts
 kind: lemma
 title: Periodic integration by parts on a flat torus
-status: draft
+status: published
 origin: pipeline
 domain: mathematics
 library: mathematics
@@ -19,10 +19,12 @@ provenance:
 proof_strategy: direct
 verification:
   precheck: pending
-  judge:
-    model: "gpt-6-luna"
+  verified:
+    model: gpt-6.1-sol
     verdict: pass
     date: 2026-10-23
+    scope: Completed native delegated item review and certified repair closure; exact evidence and source-reading limits retained in research/fluid-dynamics-all-47-2026-10-23-publication.json.
+    delegated_by: owner
 sources:
   references:
     - title: "Stefanos Georgiadis, Energy identity for the incompressible Cahn–Hilliard/Navier–Stokes system with non-degenerate mobility"

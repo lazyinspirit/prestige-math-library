@@ -2,7 +2,7 @@
 id: ex-fd-reynolds-stress-sign-and-units
 kind: example
 title: Covariance versus effective Reynolds stress
-status: draft
+status: published
 origin: pipeline
 domain: physics
 library: physics
@@ -23,10 +23,12 @@ provenance:
   statement: ai-altered
   proof: ai-generated
 verification:
-  judge:
-    model: "gpt-6-luna"
+  verified:
+    model: gpt-6.1-sol
     verdict: pass
     date: 2026-10-23
+    scope: Completed native delegated item review and certified repair closure; exact evidence and source-reading limits retained in research/fluid-dynamics-all-47-2026-10-23-publication.json.
+    delegated_by: owner
 sources:
   references:
     - title: "Glenn Flierl and Raffaele Ferrari, MIT OpenCourseWare 12.820, Turbulence in the Ocean and Atmosphere, Chapter 3 (Spring 2006 lecture notes)"

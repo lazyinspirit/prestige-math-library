@@ -1,7 +1,7 @@
 ---
 page: fd-c02-examples
 title: Turbulent averaging and open closure questions — Examples
-status: draft
+status: published
 library: physics
 requires:
   - fd-c02

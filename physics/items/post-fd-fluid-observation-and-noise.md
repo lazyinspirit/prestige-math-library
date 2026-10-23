@@ -2,7 +2,7 @@
 id: post-fd-fluid-observation-and-noise
 kind: postulate
 title: Finite-modal fluid observation and noise model
-status: draft
+status: published
 origin: pipeline
 pipeline_run: fluid-dynamics-all-47-2026-10-23
 dependency_level: 2
@@ -49,10 +49,10 @@ sources:
       locator: "Chapter 4 §§4.1–4.3, printed pp. 51–61: probabilistic state-space models, recursive Bayesian filtering, and the linear-Gaussian Kalman filter."
 verification:
   precheck: n/a
-  judge:
-    model: "gpt-6-luna"
-    verdict: pass
+  sources_checked:
     date: 2026-10-23
+    scope: Completed native formulation/status, source-evidence and applicability review; exact evidence and reading limits in research/fluid-dynamics-all-47-2026-10-23-publication.json. No new retrieval, measurement or solution is claimed.
+    by: owner-authorized native reviewers (gpt-6.1-sol)
 ---
 
 ## Postulate

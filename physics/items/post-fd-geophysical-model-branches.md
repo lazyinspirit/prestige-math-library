@@ -2,7 +2,7 @@
 id: post-fd-geophysical-model-branches
 kind: postulate
 title: Geophysical approximation branches
-status: draft
+status: published
 origin: pipeline
 domain: physics
 library: physics
@@ -31,6 +31,10 @@ sources:
       url: "https://wwwf.imperial.ac.uk/~pberloff/gfd_lectures.pdf"
 verification:
   precheck: pending
+  sources_checked:
+    date: 2026-10-23
+    scope: Completed native formulation/status, source-evidence and applicability review; exact evidence and reading limits in research/fluid-dynamics-all-47-2026-10-23-publication.json. No new retrieval, measurement or solution is claimed.
+    by: owner-authorized native reviewers (gpt-6.1-sol)
 ---
 
 ## Postulate

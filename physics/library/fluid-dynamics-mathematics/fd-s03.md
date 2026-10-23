@@ -1,7 +1,7 @@
 ---
 page: fd-s03
 title: Periodic smooth incompressible energy identity
-status: draft
+status: published
 library: mathematics
 companion: fd-s03-examples
 requires:

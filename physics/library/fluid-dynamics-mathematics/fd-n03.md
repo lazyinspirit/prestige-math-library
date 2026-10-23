@@ -1,7 +1,7 @@
 ---
 page: fd-n03
 title: "Compressible numerical conservation and admissibility"
-status: draft
+status: published
 library: mathematics
 requires:
   - conservative-finite-volume-weak-limits

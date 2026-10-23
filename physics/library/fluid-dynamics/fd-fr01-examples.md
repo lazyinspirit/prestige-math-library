@@ -1,7 +1,7 @@
 ---
 page: fd-fr01-examples
 title: Research frontier status and calibrated model evidence — Examples
-status: draft
+status: published
 library: physics
 requires:
   - fd-fr01

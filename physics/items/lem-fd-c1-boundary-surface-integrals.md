@@ -2,7 +2,7 @@
 id: lem-fd-c1-boundary-surface-integrals
 kind: lemma
 title: Finite continuous surface integrals on compact C1 boundaries
-status: draft
+status: published
 origin: pipeline
 pipeline_run: fluid-dynamics-all-47-2026-10-23
 domain: mathematics
@@ -55,6 +55,12 @@ sources:
         coordinates and finite patch gluing."
 verification:
   precheck: pending
+  verified:
+    model: gpt-6.1-sol
+    verdict: pass
+    date: 2026-10-23
+    scope: Completed native delegated item review and certified repair closure; exact evidence and source-reading limits retained in research/fluid-dynamics-all-47-2026-10-23-publication.json.
+    delegated_by: owner
 ---
 
 ## Statement

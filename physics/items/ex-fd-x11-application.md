@@ -2,7 +2,7 @@
 id: ex-fd-x11-application
 kind: example
 title: Linear vortex-sheet growing modes — worked interpretation
-status: draft
+status: published
 origin: pipeline
 domain: mathematics
 library: mathematics
@@ -15,10 +15,12 @@ generation:
   role: example
 verification:
   precheck: pass
-  judge:
-    model: "gpt-6-luna"
+  verified:
+    model: gpt-6.1-sol
     verdict: pass
     date: 2026-10-23
+    scope: Completed native delegated item review and certified repair closure; exact evidence and source-reading limits retained in research/fluid-dynamics-all-47-2026-10-23-publication.json.
+    delegated_by: owner
 deps:
   - thm-fd-x11
 dependency_roles:

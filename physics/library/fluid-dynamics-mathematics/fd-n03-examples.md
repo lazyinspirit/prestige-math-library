@@ -1,7 +1,7 @@
 ---
 page: fd-n03-examples
 title: "Compressible numerical conservation and admissibility — Examples"
-status: draft
+status: published
 library: mathematics
 requires:
   - fd-n03

@@ -2,7 +2,7 @@
 id: lem-fd-no-slip-lsix
 kind: lemma
 title: Elementary zero-boundary L6 and L4 interpolation
-status: draft
+status: published
 origin: pipeline
 domain: mathematics
 library: mathematics
@@ -27,6 +27,12 @@ provenance:
   proof: ai-altered
 verification:
   precheck: pass
+  verified:
+    model: gpt-6.1-sol
+    verdict: pass
+    date: 2026-10-23
+    scope: Completed native delegated item review and certified repair closure; exact evidence and source-reading limits retained in research/fluid-dynamics-all-47-2026-10-23-publication.json.
+    delegated_by: owner
 sources:
   references:
     - title: "L. C. Berselli and S. Spirito, On the Existence of Leray–Hopf Weak Solutions to the Navier–Stokes Equations, Fluids 6(1), 42 (2021)"

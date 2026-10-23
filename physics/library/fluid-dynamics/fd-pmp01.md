@@ -1,7 +1,7 @@
 ---
 page: fd-pmp01
 title: Physical phase-field model adoption
-status: draft
+status: published
 library: physics
 requires:
   - fd-f01

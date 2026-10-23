@@ -2,7 +2,7 @@
 id: def-fd-real-trigonometric-functions
 kind: definition
 title: "Real sine and cosine as real restrictions of complex trigonometric functions"
-status: draft
+status: published
 origin: pipeline
 domain: mathematics
 library: mathematics
@@ -32,10 +32,12 @@ sources:
       url: "https://zr9558.com/wp-content/uploads/2013/11/complex_analysis-stein-shakarchi.pdf"
 verification:
   precheck: pending
-  judge:
-    model: "gpt-6-luna"
+  verified:
+    model: gpt-6.1-sol
     verdict: pass
     date: 2026-10-23
+    scope: Completed native delegated item review and certified repair closure; exact evidence and source-reading limits retained in research/fluid-dynamics-all-47-2026-10-23-publication.json.
+    delegated_by: owner
 ---
 
 ## Definition

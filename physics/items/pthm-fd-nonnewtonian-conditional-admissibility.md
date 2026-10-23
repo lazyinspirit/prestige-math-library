@@ -2,7 +2,7 @@
 id: pthm-fd-nonnewtonian-conditional-admissibility
 kind: physics-theorem
 title: "Conditional admissibility of the specified non-Newtonian branches"
-status: draft
+status: published
 origin: pipeline
 domain: physics
 library: physics
@@ -42,6 +42,12 @@ sources:
       url: "https://davidtong.org/pdfs/teaching/fluid-mechanics/fluids1.pdf"
 verification:
   precheck: pending
+  verified:
+    model: gpt-6.1-sol
+    verdict: pass
+    date: 2026-10-23
+    scope: Completed native delegated item review and certified repair closure; exact evidence and source-reading limits retained in research/fluid-dynamics-all-47-2026-10-23-publication.json.
+    delegated_by: owner
 ---
 
 ## Statement

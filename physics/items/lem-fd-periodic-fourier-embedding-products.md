@@ -2,7 +2,7 @@
 id: lem-fd-periodic-fourier-embedding-products
 kind: lemma
 title: "Periodic Fourier embeddings and products"
-status: draft
+status: published
 origin: pipeline
 domain: mathematics
 library: mathematics
@@ -20,6 +20,12 @@ provenance:
   proof: ai-altered
 verification:
   precheck: pending
+  verified:
+    model: gpt-6.1-sol
+    verdict: pass
+    date: 2026-10-23
+    scope: Completed native delegated item review and certified repair closure; exact evidence and source-reading limits retained in research/fluid-dynamics-all-47-2026-10-23-publication.json.
+    delegated_by: owner
 sources:
   references:
     - title: "Erick Schulz, Introduction to the Navier–Stokes Equations, McGill MATH 595 notes (2014)"

@@ -2,7 +2,7 @@
 id: ex-fd-x06-formal-verification
 kind: example
 title: "Exterior sphere Stokes solution, force and uniqueness — formal worked field"
-status: draft
+status: published
 origin: pipeline
 domain: mathematics
 library: mathematics
@@ -22,6 +22,12 @@ dependency_roles:
 scope: "The theorem's explicit exterior Stokes field for a unit sphere and unit far-field velocity along the z-axis, including its formal stress resultant and applicable decay-class uniqueness."
 verification:
   precheck: pass
+  verified:
+    model: gpt-6.1-sol
+    verdict: pass
+    date: 2026-10-23
+    scope: Completed native delegated item review and certified repair closure; exact evidence and source-reading limits retained in research/fluid-dynamics-all-47-2026-10-23-publication.json.
+    delegated_by: owner
 ---
 
 ## Example

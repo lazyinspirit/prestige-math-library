@@ -1,7 +1,7 @@
 ---
 page: fd-da01-examples
 title: Assimilation and finite inverse identifiability — Examples
-status: draft
+status: published
 library: mathematics
 requires:
   - fd-da01

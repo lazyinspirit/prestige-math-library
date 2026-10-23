@@ -1,7 +1,7 @@
 ---
 page: fd-pg01-examples
 title: Geophysical approximation assumptions — Examples
-status: draft
+status: published
 library: physics
 items: []
 examples:

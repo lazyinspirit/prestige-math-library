@@ -1,7 +1,7 @@
 ---
 page: fd-st02
 title: Fluid observable uncertainty and numerical bias budgets
-status: draft
+status: published
 library: mathematics
 requires:
   - fd-st01

@@ -1,7 +1,7 @@
 ---
 page: fd-mf03
 title: "Linear isotropic symmetric stress classification"
-status: draft
+status: published
 library: mathematics
 items:
   - lem-fd-isotropic-linear-classification

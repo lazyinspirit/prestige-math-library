@@ -2,7 +2,7 @@
 id: def-fd-rotating-stratified-shallow-equations
 kind: definition
 title: Rotating stratified and shallow-water equation families
-status: draft
+status: published
 origin: pipeline
 domain: mathematics
 library: mathematics
@@ -36,6 +36,12 @@ sources:
       url: "https://ocw.mit.edu/courses/12-802-wave-motion-in-the-ocean-and-the-atmosphere-spring-2008/b480aaaa3a6dff999df6d5007b5b73f6_MIT12_802S08_lec12.pdf"
 verification:
   precheck: pending
+  verified:
+    model: gpt-6.1-sol
+    verdict: pass
+    date: 2026-10-23
+    scope: Completed native delegated item review and certified repair closure; exact evidence and source-reading limits retained in research/fluid-dynamics-all-47-2026-10-23-publication.json.
+    delegated_by: owner
 ---
 
 ## Definition

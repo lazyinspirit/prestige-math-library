@@ -1,7 +1,7 @@
 ---
 page: fd-mf04
 title: Generalized Newtonian, Bingham and conformation model equations
-status: draft
+status: published
 library: mathematics
 items:
   - def-fd-nonnewtonian-laws

@@ -1,7 +1,7 @@
 ---
 page: fd-f02-examples
 title: Specified wall, thermal, periodic and initial data — Examples
-status: draft
+status: published
 library: physics
 requires:
   - fd-f02

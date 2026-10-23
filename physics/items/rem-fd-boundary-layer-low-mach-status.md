@@ -2,7 +2,7 @@
 id: rem-fd-boundary-layer-low-mach-status
 kind: remark
 title: "Boundary inviscid and nonlinear low-Mach limits require separate estimates"
-status: draft
+status: published
 origin: pipeline
 domain: mathematics
 library: mathematics
@@ -35,6 +35,12 @@ sources:
       locator: "Linear sound-wave tangent system and longitudinal mode; no finite-amplitude convergence estimate is asserted here."
 verification:
   precheck: pass
+  verified:
+    model: gpt-6.1-sol
+    verdict: pass
+    date: 2026-10-23
+    scope: Completed native delegated item review and certified repair closure; exact evidence and source-reading limits retained in research/fluid-dynamics-all-47-2026-10-23-publication.json.
+    delegated_by: owner
 ---
 
 ## Remark

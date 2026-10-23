@@ -1,7 +1,7 @@
 ---
 page: fd-les01-examples
 title: Filtered stresses and energy transfer — Examples
-status: draft
+status: published
 library: mathematics
 items: []
 examples:

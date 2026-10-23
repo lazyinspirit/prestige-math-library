@@ -1,7 +1,7 @@
 ---
 page: fd-f01
 title: Classical frames, primitive quantities and SI units
-status: draft
+status: published
 library: physics
 items:
   - def-fd-quantity-and-frame-conventions

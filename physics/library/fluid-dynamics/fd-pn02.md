@@ -1,7 +1,7 @@
 ---
 page: fd-pn02
 title: Physical interpretation of shock-capturing calculations
-status: draft
+status: published
 library: physics
 requires:
   - fd-f02

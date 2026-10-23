@@ -2,7 +2,7 @@
 id: post-fd-local-equilibrium
 kind: postulate
 title: "Local simple-fluid equilibrium and Gibbs closure"
-status: draft
+status: published
 origin: pipeline
 domain: physics
 library: physics
@@ -34,10 +34,10 @@ sources:
       locator: "§§6.1.1 and 6.1.4, printed pp. 221–226"
 verification:
   precheck: pending
-  judge:
-    model: "gpt-6-luna"
-    verdict: pass
+  sources_checked:
     date: 2026-10-23
+    scope: Completed native formulation/status, source-evidence and applicability review; exact evidence and reading limits in research/fluid-dynamics-all-47-2026-10-23-publication.json. No new retrieval, measurement or solution is claimed.
+    by: owner-authorized native reviewers (gpt-6.1-sol)
 ---
 
 ## Postulate

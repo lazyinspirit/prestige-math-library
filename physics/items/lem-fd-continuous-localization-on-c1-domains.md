@@ -2,7 +2,7 @@
 id: lem-fd-continuous-localization-on-c1-domains
 kind: lemma
 title: Continuous residuals localize on C1 domains
-status: draft
+status: published
 origin: pipeline
 domain: mathematics
 library: physics
@@ -21,10 +21,12 @@ provenance:
 proof_strategy: direct
 verification:
   precheck: pending
-  judge:
-    model: "gpt-6-luna"
+  verified:
+    model: gpt-6.1-sol
     verdict: pass
     date: 2026-10-23
+    scope: Completed native delegated item review and certified repair closure; exact evidence and source-reading limits retained in research/fluid-dynamics-all-47-2026-10-23-publication.json.
+    delegated_by: owner
 sources:
   references:
     - title: Jiří Lebl, Basic Analysis II, §10.5 Jordan measurable sets

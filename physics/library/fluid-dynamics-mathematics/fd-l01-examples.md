@@ -1,7 +1,7 @@
 ---
 page: fd-l01-examples
 title: "Residual and distribution-shift surrogate certificates — Examples"
-status: draft
+status: published
 library: mathematics
 requires:
   - fd-l01

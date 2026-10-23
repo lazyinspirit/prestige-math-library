@@ -1,7 +1,7 @@
 ---
 page: fd-bl01-examples
 title: Wall-defect estimates and capillary-wave energy — Examples
-status: draft
+status: published
 library: mathematics
 requires:
   - fd-bl01

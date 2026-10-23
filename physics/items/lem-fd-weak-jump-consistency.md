@@ -2,7 +2,7 @@
 id: lem-fd-weak-jump-consistency
 kind: lemma
 title: Smooth weak equivalence and moving jump residual
-status: draft
+status: published
 origin: pipeline
 proof_strategy: direct
 domain: mathematics
@@ -29,6 +29,12 @@ sources:
       locator: "Part VII, §24.4.2, Theorem 24.4, printed pp. 181–182."
 verification:
   precheck: pass
+  verified:
+    model: gpt-6.1-sol
+    verdict: pass
+    date: 2026-10-23
+    scope: Completed native delegated item review and certified repair closure; exact evidence and source-reading limits retained in research/fluid-dynamics-all-47-2026-10-23-publication.json.
+    delegated_by: owner
 physical_scope: null
 empirical_premises: []
 ---

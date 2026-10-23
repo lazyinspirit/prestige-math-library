@@ -1,7 +1,7 @@
 ---
 page: fd-px02
 title: Exact viscous and inviscid flows — conditional physical predictions
-status: draft
+status: published
 library: physics
 items:
   - pthm-fd-px04-prediction

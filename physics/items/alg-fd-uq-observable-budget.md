@@ -2,7 +2,7 @@
 id: alg-fd-uq-observable-budget
 title: Failure-aware fluid UQ callback and certified sampling budget
 kind: algorithm
-status: draft
+status: published
 origin: pipeline
 pipeline_run: fluid-dynamics-all-47-2026-10-23
 dependency_level: 4
@@ -22,10 +22,12 @@ provenance:
   proof: not-applicable
 verification:
   precheck: pending
-  judge:
-    model: "gpt-6-luna"
+  verified:
+    model: gpt-6.1-sol
     verdict: pass
     date: 2026-10-23
+    scope: Completed native delegated item review and certified repair closure; exact evidence and source-reading limits retained in research/fluid-dynamics-all-47-2026-10-23-publication.json.
+    delegated_by: owner
 sources:
   references:
     - title: "Art B. Owen, Monte Carlo Theory, Methods and Examples, Chapter 2,

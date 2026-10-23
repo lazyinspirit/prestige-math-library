@@ -2,7 +2,7 @@
 id: ex-fd-x05-formal-verification
 kind: example
 title: "Vortex topology and global-Bernoulli counterexamples — formal worked fields"
-status: draft
+status: published
 origin: pipeline
 domain: mathematics
 library: mathematics
@@ -22,6 +22,12 @@ dependency_roles:
 scope: "Concrete punctured-axis vortex and whole-space solid rotation demonstrating nonzero circulation, absence of a global potential, and Bernoulli values varying between circular streamlines. No equation-of-state assumption."
 verification:
   precheck: pass
+  verified:
+    model: gpt-6.1-sol
+    verdict: pass
+    date: 2026-10-23
+    scope: Completed native delegated item review and certified repair closure; exact evidence and source-reading limits retained in research/fluid-dynamics-all-47-2026-10-23-publication.json.
+    delegated_by: owner
 ---
 
 ## Example

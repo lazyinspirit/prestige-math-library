@@ -2,7 +2,7 @@
 id: thm-fd-x11
 kind: theorem
 title: Linear vortex-sheet growing modes
-status: draft
+status: published
 origin: pipeline
 domain: mathematics
 library: mathematics
@@ -18,6 +18,12 @@ dependency_roles:
 scope: "Equal-density harmonic linear interface model with no gravity or surface tension; for k>0, a nonzero horizontal velocity jump gives a real exponentially growing mode. The periodic-interface Sobolev calculation is linear only; no nonlinear transition claim."
 verification:
   precheck: pass
+  verified:
+    model: gpt-6.1-sol
+    verdict: pass
+    date: 2026-10-23
+    scope: Completed native delegated item review and certified repair closure; exact evidence and source-reading limits retained in research/fluid-dynamics-all-47-2026-10-23-publication.json.
+    delegated_by: owner
 sources:
   references:
     - title: "David Tong, Fluid Mechanics lecture notes, Chapter 4: Instabilities"

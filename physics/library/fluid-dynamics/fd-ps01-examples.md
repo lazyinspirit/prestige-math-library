@@ -1,7 +1,7 @@
 ---
 page: fd-ps01-examples
 title: Local periodic incompressible model evolution — Examples
-status: draft
+status: published
 category: fluid-dynamics
 library: physics
 items: []

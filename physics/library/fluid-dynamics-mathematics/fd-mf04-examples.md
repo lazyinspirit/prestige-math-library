@@ -1,7 +1,7 @@
 ---
 page: fd-mf04-examples
 title: Generalized Newtonian, Bingham and conformation model equations — Examples
-status: draft
+status: published
 library: mathematics
 items: []
 examples:

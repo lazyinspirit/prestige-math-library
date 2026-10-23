@@ -1,7 +1,7 @@
 ---
 page: fd-pbl01-examples
 title: Wall and free-surface physical qualifications — Examples
-status: draft
+status: published
 library: physics
 requires:
   - fd-pbl01

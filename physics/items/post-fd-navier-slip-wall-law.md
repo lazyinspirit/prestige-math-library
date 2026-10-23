@@ -2,7 +2,7 @@
 id: post-fd-navier-slip-wall-law
 kind: postulate
 title: "Adopted Navier friction law for a stationary wall"
-status: draft
+status: published
 origin: pipeline
 domain: physics
 library: physics
@@ -27,10 +27,10 @@ sources:
       locator: "arXiv:0901.0147v1, §1 equations (1.1), (1.3)–(1.4), and §2 equation (2.5) / Proposition 2.1, PDF pp. 1–5. The paper uses slip length ζ>0 and density-normalized viscosity; with σ=−pI+2ηD the friction coefficient here is β=η/ζ."
 verification:
   precheck: pending
-  judge:
-    model: "gpt-6-luna"
-    verdict: pass
+  sources_checked:
     date: 2026-10-23
+    scope: Completed native formulation/status, source-evidence and applicability review; exact evidence and reading limits in research/fluid-dynamics-all-47-2026-10-23-publication.json. No new retrieval, measurement or solution is claimed.
+    by: owner-authorized native reviewers (gpt-6.1-sol)
 physics_review:
   formulation:
     verdict: pass

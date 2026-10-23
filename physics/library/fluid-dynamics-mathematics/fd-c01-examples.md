@@ -1,7 +1,7 @@
 ---
 page: fd-c01-examples
 title: Finite weighted ensemble and covariance — Examples
-status: draft
+status: published
 library: mathematics
 requires:
   - fd-c01

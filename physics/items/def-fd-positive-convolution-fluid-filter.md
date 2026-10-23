@@ -2,7 +2,7 @@
 id: def-fd-positive-convolution-fluid-filter
 kind: definition
 title: Positive periodic convolution filter and subfilter stress
-status: draft
+status: published
 origin: pipeline
 domain: mathematics
 dependency_level: 1
@@ -18,10 +18,12 @@ provenance:
   statement: ai-altered
   proof: not-applicable
 verification:
-  judge:
-    model: "gpt-6-luna"
+  verified:
+    model: gpt-6.1-sol
     verdict: pass
     date: 2026-10-23
+    scope: Completed native delegated item review and certified repair closure; exact evidence and source-reading limits retained in research/fluid-dynamics-all-47-2026-10-23-publication.json.
+    delegated_by: owner
 sources:
   references:
     - title: "University of Washington, ME 544, Large-Eddy Simulation lecture notes, 8 May 2018"

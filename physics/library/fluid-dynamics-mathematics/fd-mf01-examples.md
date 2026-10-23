@@ -1,7 +1,7 @@
 ---
 page: fd-mf01-examples
 title: Smooth material configurations and Eulerian fields — Examples
-status: draft
+status: published
 library: mathematics
 requires:
   - fd-mf01

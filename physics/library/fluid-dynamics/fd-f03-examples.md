@@ -1,7 +1,7 @@
 ---
 page: fd-f03-examples
 title: Newtonian stress and Fourier conductive closure — Examples
-status: draft
+status: published
 library: physics
 items: []
 examples:

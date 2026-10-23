@@ -2,7 +2,7 @@
 id: def-fd-incompressible-newtonian-model
 kind: definition
 title: "Constant-density incompressible Newtonian model"
-status: draft
+status: published
 origin: pipeline
 domain: physics
 library: physics
@@ -35,6 +35,12 @@ sources:
       locator: "§6.5.3, printed pp. 244–245"
 verification:
   precheck: pending
+  verified:
+    model: gpt-6.1-sol
+    verdict: pass
+    date: 2026-10-23
+    scope: Completed native delegated item review and certified repair closure; exact evidence and source-reading limits retained in research/fluid-dynamics-all-47-2026-10-23-publication.json.
+    delegated_by: owner
 ---
 
 ## Definition

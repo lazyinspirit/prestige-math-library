@@ -1,7 +1,7 @@
 ---
 page: fd-pda01-examples
 title: Measurement and assimilation model adoption — Examples
-status: draft
+status: published
 library: physics
 requires:
   - fd-pda01

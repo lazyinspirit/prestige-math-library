@@ -1,7 +1,7 @@
 ---
 page: fd-x02-examples
 title: "Plane and pipe Couette–Poiseuille verification — Examples"
-status: draft
+status: published
 library: mathematics
 companion: fd-x02
 requires:

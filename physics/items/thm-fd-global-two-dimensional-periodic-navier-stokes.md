@@ -2,7 +2,7 @@
 id: thm-fd-global-two-dimensional-periodic-navier-stokes
 kind: theorem
 title: "Global smooth two-dimensional periodic Navier–Stokes"
-status: draft
+status: published
 origin: pipeline
 domain: mathematics
 library: mathematics
@@ -41,6 +41,12 @@ sources:
       locator: "PDF pp. 99–101, equations (3.1)–(3.4), for the energy and vorticity identities in their strong 3D context; the global conclusion here is proved only in 2D."
 verification:
   precheck: pass
+  verified:
+    model: gpt-6.1-sol
+    verdict: pass
+    date: 2026-10-23
+    scope: Completed native delegated item review and certified repair closure; exact evidence and source-reading limits retained in research/fluid-dynamics-all-47-2026-10-23-publication.json.
+    delegated_by: owner
 ---
 
 ## Statement

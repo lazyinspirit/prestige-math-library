@@ -2,7 +2,7 @@
 id: prop-fd-linear-fluid-filter-interface
 kind: proposition
 title: Exact filtering for the declared linear Gaussian model
-status: draft
+status: published
 origin: pipeline
 pipeline_run: fluid-dynamics-all-47-2026-10-23
 dependency_level: 1
@@ -24,10 +24,12 @@ provenance:
   statement: literature-derived
   proof: ai-altered
 verification:
-  judge:
-    model: "gpt-6-luna"
+  verified:
+    model: gpt-6.1-sol
     verdict: pass
     date: 2026-10-23
+    scope: Completed native delegated item review and certified repair closure; exact evidence and source-reading limits retained in research/fluid-dynamics-all-47-2026-10-23-publication.json.
+    delegated_by: owner
 sources:
   references:
     - title: "K. J. H. Law, A. M. Stuart, and K. C. Zygalakis, Data Assimilation: A Mathematical Introduction, Chapter 4 §4.1"

@@ -1,7 +1,7 @@
 ---
 page: fd-pn01-examples
 title: Conditional continuum interpretation of mixed CFD — Examples
-status: draft
+status: published
 library: physics
 requires:
   - fd-pn01

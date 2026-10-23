@@ -1,7 +1,7 @@
 ---
 page: fd-f04-examples
 title: Restricted non-Newtonian constitutive examples — Examples
-status: draft
+status: published
 library: physics
 items: []
 examples:

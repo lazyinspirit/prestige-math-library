@@ -2,7 +2,7 @@
 id: thm-fd-x06
 kind: theorem
 title: "Exterior sphere Stokes solution, force and decay-class uniqueness"
-status: draft
+status: published
 origin: pipeline
 domain: mathematics
 library: mathematics
@@ -36,6 +36,12 @@ sources:
       locator: "§§3.4.1–3.4.2, printed pp. 82–85, creeping flow around a sphere and drag; the local proof makes the far-field class and uniqueness argument explicit."
 verification:
   precheck: pass
+  verified:
+    model: gpt-6.1-sol
+    verdict: pass
+    date: 2026-10-23
+    scope: Completed native delegated item review and certified repair closure; exact evidence and source-reading limits retained in research/fluid-dynamics-all-47-2026-10-23-publication.json.
+    delegated_by: owner
 ---
 
 ## Statement

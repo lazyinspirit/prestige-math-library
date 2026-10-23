@@ -2,7 +2,7 @@
 id: def-fd-forced-incompressible-newtonian-model
 kind: definition
 title: "Forced constant-density incompressible Newtonian model"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: fluid-dynamics-all-47-2026-10-23
 domain: physics
@@ -35,6 +35,12 @@ sources:
       locator: "§5.4.1, printed pp. 173–174; stress/strain-rate relation and no-slip plate setup."
 verification:
   precheck: n/a
+  verified:
+    model: gpt-6.1-sol
+    verdict: pass
+    date: 2026-10-23
+    scope: Completed native delegated item review and certified repair closure; exact evidence and source-reading limits retained in research/fluid-dynamics-all-47-2026-10-23-publication.json.
+    delegated_by: owner
 ---
 
 ## Definition

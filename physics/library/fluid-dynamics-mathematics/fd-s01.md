@@ -1,7 +1,7 @@
 ---
 page: fd-s01
 title: "Periodic fluid Fourier Sobolev spaces"
-status: draft
+status: published
 library: mathematics
 requires:
   - countability-and-uncountability

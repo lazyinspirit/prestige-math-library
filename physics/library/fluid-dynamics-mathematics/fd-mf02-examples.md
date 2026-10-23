@@ -1,7 +1,7 @@
 ---
 page: fd-mf02-examples
 title: Locally integrable conservative weak and initial forms — Examples
-status: draft
+status: published
 library: mathematics
 requires:
   - fd-mf02

@@ -2,7 +2,7 @@
 id: thm-fd-x13
 kind: theorem
 title: "Exterior potential sphere and zero ideal force"
-status: draft
+status: published
 origin: pipeline
 domain: mathematics
 library: mathematics
@@ -36,6 +36,12 @@ sources:
       locator: "§§2.3.2–2.3.3, printed pp. 35–42, potential flow and sphere-flow context; the local proof verifies the field, slip condition and resultant directly."
 verification:
   precheck: pass
+  verified:
+    model: gpt-6.1-sol
+    verdict: pass
+    date: 2026-10-23
+    scope: Completed native delegated item review and certified repair closure; exact evidence and source-reading limits retained in research/fluid-dynamics-all-47-2026-10-23-publication.json.
+    delegated_by: owner
 ---
 
 ## Statement

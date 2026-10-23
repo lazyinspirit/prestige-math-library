@@ -1,7 +1,7 @@
 ---
 page: fd-mf02
 title: Locally integrable conservative weak and initial forms
-status: draft
+status: published
 library: mathematics
 requires:
   - euclidean-surface-measure-divergence-and-green-identities

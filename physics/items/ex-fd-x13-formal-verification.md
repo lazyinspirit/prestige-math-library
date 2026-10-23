@@ -2,7 +2,7 @@
 id: ex-fd-x13-formal-verification
 kind: example
 title: "Exterior potential sphere and zero ideal force — formal worked field"
-status: draft
+status: published
 origin: pipeline
 domain: mathematics
 library: mathematics
@@ -22,6 +22,12 @@ dependency_roles:
 scope: "Concrete unit-sphere potential-flow field with far-field velocity along the x-axis, tangent slip on the surface, and zero pressure-only formal resultant."
 verification:
   precheck: pass
+  verified:
+    model: gpt-6.1-sol
+    verdict: pass
+    date: 2026-10-23
+    scope: Completed native delegated item review and certified repair closure; exact evidence and source-reading limits retained in research/fluid-dynamics-all-47-2026-10-23-publication.json.
+    delegated_by: owner
 ---
 
 ## Example

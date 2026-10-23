@@ -2,7 +2,7 @@
 id: ex-fd-two-mode-one-sensor
 kind: example
 title: One sensor cannot identify two independent coefficients
-status: draft
+status: published
 origin: pipeline
 pipeline_run: fluid-dynamics-all-47-2026-10-23
 dependency_level: 2
@@ -19,10 +19,12 @@ provenance:
   statement: ai-generated
   proof: ai-generated
 verification:
-  judge:
-    model: "gpt-6-luna"
+  verified:
+    model: gpt-6.1-sol
     verdict: pass
     date: 2026-10-23
+    scope: Completed native delegated item review and certified repair closure; exact evidence and source-reading limits retained in research/fluid-dynamics-all-47-2026-10-23-publication.json.
+    delegated_by: owner
 sources:
   references:
     - title: "Sheldon Axler, Linear Algebra Done Right, fourth edition, §7E"

@@ -2,7 +2,7 @@
 id: thm-fd-x09
 kind: theorem
 title: "Barotropic Kelvin and Bernoulli with exact hypotheses"
-status: draft
+status: published
 origin: pipeline
 domain: mathematics
 library: mathematics
@@ -28,6 +28,12 @@ sources:
       locator: "§§2.2.1–2.2.2, printed pp. 22–27, Kelvin circulation and barotropic vorticity context; full material-loop differentiation is supplied locally."
 verification:
   precheck: pass
+  verified:
+    model: gpt-6.1-sol
+    verdict: pass
+    date: 2026-10-23
+    scope: Completed native delegated item review and certified repair closure; exact evidence and source-reading limits retained in research/fluid-dynamics-all-47-2026-10-23-publication.json.
+    delegated_by: owner
 ---
 
 ## Statement

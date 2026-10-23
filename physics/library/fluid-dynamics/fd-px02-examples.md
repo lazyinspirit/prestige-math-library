@@ -1,7 +1,7 @@
 ---
 page: fd-px02-examples
 title: Exact viscous and inviscid flows — worked examples
-status: draft
+status: published
 library: physics
 items: []
 examples:

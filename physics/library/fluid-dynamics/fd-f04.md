@@ -1,7 +1,7 @@
 ---
 page: fd-f04
 title: Restricted non-Newtonian constitutive examples
-status: draft
+status: published
 library: physics
 items:
   - def-fd-adopted-nonnewtonian-models

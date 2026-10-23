@@ -2,7 +2,7 @@
 id: rem-fd-general-viscous-wall-ivp-gaps
 kind: remark
 title: "Scope limits for general wall and viscous initial-value problems"
-status: draft
+status: published
 origin: pipeline
 domain: mathematics
 dependency_level: 4
@@ -32,6 +32,12 @@ sources:
       url: "https://www.cmls.polytechnique.fr/perso/golse/Surveys/FGHdBookEvEq.pdf"
 verification:
   precheck: pending
+  verified:
+    model: gpt-6.1-sol
+    verdict: pass
+    date: 2026-10-23
+    scope: Completed native delegated item review and certified repair closure; exact evidence and source-reading limits retained in research/fluid-dynamics-all-47-2026-10-23-publication.json.
+    delegated_by: owner
 ---
 
 ## Remark

@@ -1,7 +1,7 @@
 ---
 page: fd-px03
 title: Bounded-domain Stokes residual estimate — conditional physical prediction
-status: draft
+status: published
 library: physics
 companion: fd-px03-examples
 requires:

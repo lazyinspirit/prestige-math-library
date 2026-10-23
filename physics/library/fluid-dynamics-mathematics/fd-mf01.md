@@ -1,7 +1,7 @@
 ---
 page: fd-mf01
 title: Smooth material configurations and Eulerian fields
-status: draft
+status: published
 library: mathematics
 requires:
   - fubini-and-change-of-variables

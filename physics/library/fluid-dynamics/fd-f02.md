@@ -1,7 +1,7 @@
 ---
 page: fd-f02
 title: Specified wall, thermal, periodic and initial data
-status: draft
+status: published
 library: physics
 requires:
   - fd-f01

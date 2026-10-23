@@ -2,7 +2,7 @@
 id: def-fd-diffuse-interface-equations
 kind: definition
 title: Periodic Cahn–Hilliard incompressible flow system
-status: draft
+status: published
 origin: pipeline
 domain: mathematics
 library: mathematics
@@ -16,10 +16,12 @@ provenance:
   proof: not-applicable
 verification:
   precheck: n/a
-  judge:
-    model: "gpt-6-luna"
+  verified:
+    model: gpt-6.1-sol
     verdict: pass
     date: 2026-10-23
+    scope: Completed native delegated item review and certified repair closure; exact evidence and source-reading limits retained in research/fluid-dynamics-all-47-2026-10-23-publication.json.
+    delegated_by: owner
 sources:
   references:
     - title: "J. Tinsley Oden, Lecture Notes, Fall 2016, Chapter 11: Phase-Field Models"

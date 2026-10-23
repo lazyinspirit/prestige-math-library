@@ -2,7 +2,7 @@
 id: rem-fd-global-regularity-open
 kind: remark
 title: "Current public status of the three-dimensional Navier–Stokes problem"
-status: draft
+status: published
 origin: pipeline
 domain: mathematics
 library: mathematics
@@ -27,6 +27,12 @@ sources:
       locator: "Dated 2026-09-11; CMI says the announced result has apparently settled the problem and that evaluation is deliberately unhurried."
 verification:
   precheck: pass
+  verified:
+    model: gpt-6.1-sol
+    verdict: pass
+    date: 2026-10-23
+    scope: Completed native delegated item review and certified repair closure; exact evidence and source-reading limits retained in research/fluid-dynamics-all-47-2026-10-23-publication.json.
+    delegated_by: owner
 ---
 
 ## Remark

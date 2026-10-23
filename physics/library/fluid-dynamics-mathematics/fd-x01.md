@@ -1,7 +1,7 @@
 ---
 page: fd-x01
 title: Formal parameterized fluid systems and observables
-status: draft
+status: published
 library: mathematics
 requires:
   - the-divergence-theorem-and-classical-stokes

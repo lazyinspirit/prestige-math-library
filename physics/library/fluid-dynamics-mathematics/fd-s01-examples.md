@@ -1,7 +1,7 @@
 ---
 page: fd-s01-examples
 title: "Periodic fluid Fourier Sobolev spaces — Examples"
-status: draft
+status: published
 library: mathematics
 requires:
   - fd-s01

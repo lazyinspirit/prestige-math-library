@@ -2,7 +2,7 @@
 id: ex-fd-x04-formal-verification
 kind: example
 title: "Plane and pipe Couette–Poiseuille verification — formal worked fields"
-status: draft
+status: published
 origin: pipeline
 domain: mathematics
 library: mathematics
@@ -22,6 +22,12 @@ dependency_roles:
 scope: "Exact parameter substitutions for the theorem's infinite plane channel and full-disk regular circular pipe; calculated fluxes and channel shear components. No finite-entrance interpretation."
 verification:
   precheck: pass
+  verified:
+    model: gpt-6.1-sol
+    verdict: pass
+    date: 2026-10-23
+    scope: Completed native delegated item review and certified repair closure; exact evidence and source-reading limits retained in research/fluid-dynamics-all-47-2026-10-23-publication.json.
+    delegated_by: owner
 ---
 
 ## Example

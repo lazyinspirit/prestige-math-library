@@ -1,7 +1,7 @@
 ---
 page: fd-pmp01-examples
 title: Physical phase-field model adoption — Examples
-status: draft
+status: published
 library: physics
 requires:
   - fd-pmp01

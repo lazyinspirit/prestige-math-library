@@ -1,7 +1,7 @@
 ---
 page: fd-w02-examples
 title: Periodic incompressible Newtonian idealization — Examples
-status: draft
+status: published
 library: physics
 companion: fd-w02
 requires:

@@ -2,7 +2,7 @@
 id: def-fd-x00
 kind: definition
 title: "Formal parameterized fluid systems and observables"
-status: draft
+status: published
 origin: pipeline
 domain: mathematics
 library: mathematics
@@ -40,6 +40,12 @@ sources:
       url: "https://warwick.ac.uk/fac/sci/masdoc/people/studentpages/students2012/lindley/fluid_dynamics/fluidssupport6_2015.pdf"
 verification:
   precheck: pending
+  verified:
+    model: gpt-6.1-sol
+    verdict: pass
+    date: 2026-10-23
+    scope: Completed native delegated item review and certified repair closure; exact evidence and source-reading limits retained in research/fluid-dynamics-all-47-2026-10-23-publication.json.
+    delegated_by: owner
 ---
 
 ## Definition

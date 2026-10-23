@@ -2,7 +2,7 @@
 id: rem-fd-fluid-enkf-scope
 kind: remark
 title: EnKF large-ensemble scope and nonlinear limits
-status: draft
+status: published
 origin: pipeline
 pipeline_run: fluid-dynamics-all-47-2026-10-23
 dependency_level: 2
@@ -26,10 +26,12 @@ provenance:
   statement: literature-derived
   proof: not-applicable
 verification:
-  judge:
-    model: "gpt-6-luna"
+  verified:
+    model: gpt-6.1-sol
     verdict: pass
     date: 2026-10-23
+    scope: Completed native delegated item review and certified repair closure; exact evidence and source-reading limits retained in research/fluid-dynamics-all-47-2026-10-23-publication.json.
+    delegated_by: owner
 sources:
   references:
     - title: "K. J. H. Law, A. M. Stuart, and K. C. Zygalakis, Data Assimilation: A

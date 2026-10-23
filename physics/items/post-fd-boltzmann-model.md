@@ -2,7 +2,7 @@
 id: post-fd-boltzmann-model
 kind: postulate
 title: Single-species elastic Boltzmann model
-status: draft
+status: published
 origin: pipeline
 domain: physics
 library: physics
@@ -39,10 +39,10 @@ sources:
         the one-sided closure adopted here.
 verification:
   precheck: pending
-  judge:
-    model: "gpt-6-luna"
-    verdict: pass
+  sources_checked:
     date: 2026-10-23
+    scope: Completed native formulation/status, source-evidence and applicability review; exact evidence and reading limits in research/fluid-dynamics-all-47-2026-10-23-publication.json. No new retrieval, measurement or solution is claimed.
+    by: owner-authorized native reviewers (gpt-6.1-sol)
 ---
 
 ## Postulate

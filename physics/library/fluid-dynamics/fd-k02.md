@@ -1,7 +1,7 @@
 ---
 page: fd-k02
 title: Single-species elastic Boltzmann model
-status: draft
+status: published
 library: physics
 requires:
   - fd-k01

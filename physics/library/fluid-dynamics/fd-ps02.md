@@ -1,7 +1,7 @@
 ---
 page: fd-ps02
 title: Mechanical power balance under adopted wall laws
-status: draft
+status: published
 library: physics
 requires:
   - fd-f02

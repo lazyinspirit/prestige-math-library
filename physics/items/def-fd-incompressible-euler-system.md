@@ -2,7 +2,7 @@
 id: def-fd-incompressible-euler-system
 kind: definition
 title: "Formal constant-density incompressible Euler system"
-status: draft
+status: published
 origin: pipeline
 domain: mathematics
 library: mathematics
@@ -25,6 +25,13 @@ sources:
     - title: "David Tong, Fluid Mechanics lecture notes, Chapter 1: Introduction and Inviscid Flows"
       url: "https://davidtong.org/pdfs/teaching/fluid-mechanics/fluids1.pdf"
       locator: "§§2.3.2–2.3.3, printed pp. 35–42, irrotational incompressible flow and ideal pressure; this item states only the formal mathematical system."
+verification:
+  verified:
+    model: gpt-6.1-sol
+    verdict: pass
+    date: 2026-10-23
+    scope: Completed native delegated item review and certified repair closure; exact evidence and source-reading limits retained in research/fluid-dynamics-all-47-2026-10-23-publication.json.
+    delegated_by: owner
 ---
 
 ## Definition

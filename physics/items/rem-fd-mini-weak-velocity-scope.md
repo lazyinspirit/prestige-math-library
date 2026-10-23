@@ -2,7 +2,7 @@
 id: rem-fd-mini-weak-velocity-scope
 kind: remark
 title: "Weak velocity limits do not supply the smooth pressure-observation estimate"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: fluid-dynamics-all-47-2026-10-23
 domain: mathematics
@@ -40,10 +40,12 @@ sources:
       locator: "§§8.4.2 and 8.6.1, printed pp. 470–471 and 487–488: MINI stability and stationary Stokes context only; not a pressure-regularity claim for weak evolution limits."
 verification:
   precheck: pass
-  judge:
-    model: "gpt-6-luna"
+  verified:
+    model: gpt-6.1-sol
     verdict: pass
     date: 2026-10-23
+    scope: Completed native delegated item review and certified repair closure; exact evidence and source-reading limits retained in research/fluid-dynamics-all-47-2026-10-23-publication.json.
+    delegated_by: owner
 ---
 
 ## Remark

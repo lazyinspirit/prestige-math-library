@@ -2,7 +2,7 @@
 id: thm-fd-stratified-linear-energy
 kind: theorem
 title: Positive linear stratified energy and diffusion
-status: draft
+status: published
 origin: pipeline
 domain: mathematics
 library: mathematics
@@ -35,6 +35,12 @@ sources:
       url: "https://empslocal.ex.ac.uk/people/staff/gv219/ecmm719/lecnotes18w.pdf"
 verification:
   precheck: pending
+  verified:
+    model: gpt-6.1-sol
+    verdict: pass
+    date: 2026-10-23
+    scope: Completed native delegated item review and certified repair closure; exact evidence and source-reading limits retained in research/fluid-dynamics-all-47-2026-10-23-publication.json.
+    delegated_by: owner
 ---
 
 ## Statement

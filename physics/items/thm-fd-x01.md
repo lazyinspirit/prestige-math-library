@@ -2,7 +2,7 @@
 id: thm-fd-x01
 kind: theorem
 title: "Exact Reynolds and Mach nondimensionalization"
-status: draft
+status: published
 origin: pipeline
 domain: mathematics
 library: mathematics
@@ -29,6 +29,12 @@ sources:
       url: "https://ocw.mit.edu/courses/16-01-unified-engineering-i-ii-iii-iv-fall-2005-spring-2006/b4ddec4a7d0be7ec3814a10dc891d5ef_f5.pdf"
 verification:
   precheck: pending
+  verified:
+    model: gpt-6.1-sol
+    verdict: pass
+    date: 2026-10-23
+    scope: Completed native delegated item review and certified repair closure; exact evidence and source-reading limits retained in research/fluid-dynamics-all-47-2026-10-23-publication.json.
+    delegated_by: owner
 ---
 
 ## Statement

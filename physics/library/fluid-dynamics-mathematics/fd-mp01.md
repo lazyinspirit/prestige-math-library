@@ -1,7 +1,7 @@
 ---
 page: fd-mp01
 title: "Diffuse-interface coupling and energy"
-status: draft
+status: published
 library: mathematics
 requires:
   - fd-x01

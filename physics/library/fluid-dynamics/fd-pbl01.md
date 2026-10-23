@@ -1,7 +1,7 @@
 ---
 page: fd-pbl01
 title: Wall and free-surface physical qualifications
-status: draft
+status: published
 library: physics
 requires:
   - fd-bl01

@@ -1,7 +1,7 @@
 ---
 page: fd-ples01-examples
 title: Adopted turbulent closures and dissipativity — Examples
-status: draft
+status: published
 library: physics
 items: []
 examples:

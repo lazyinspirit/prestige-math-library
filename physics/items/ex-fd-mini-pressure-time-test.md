@@ -2,7 +2,7 @@
 id: ex-fd-mini-pressure-time-test
 kind: example
 title: "A mean-zero square pressure time test"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: fluid-dynamics-all-47-2026-10-23
 domain: mathematics
@@ -34,10 +34,12 @@ sources:
       locator: "§§8.4.2 and 8.6.1, printed pp. 470–471 and 487–488: MINI finite-element context; this example uses the local accumulated-pressure estimate."
 verification:
   precheck: pass
-  judge:
-    model: "gpt-6-luna"
+  verified:
+    model: gpt-6.1-sol
     verdict: pass
     date: 2026-10-23
+    scope: Completed native delegated item review and certified repair closure; exact evidence and source-reading limits retained in research/fluid-dynamics-all-47-2026-10-23-publication.json.
+    delegated_by: owner
 ---
 
 ## Example

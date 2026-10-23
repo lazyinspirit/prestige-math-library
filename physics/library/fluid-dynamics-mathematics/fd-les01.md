@@ -1,7 +1,7 @@
 ---
 page: fd-les01
 title: Filtered stresses and energy transfer
-status: draft
+status: published
 library: mathematics
 items:
   - def-fd-positive-convolution-fluid-filter

@@ -1,7 +1,7 @@
 ---
 page: fd-st01
 title: Random fields and dependent fluid statistics
-status: draft
+status: published
 library: mathematics
 requires:
   - banach-valued-integration-and-the-radon-nikodym-property

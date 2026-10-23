@@ -1,7 +1,7 @@
 ---
 page: fd-ps02-examples
 title: Mechanical power balance under adopted wall laws — Examples
-status: draft
+status: published
 library: physics
 requires:
   - fd-ps02

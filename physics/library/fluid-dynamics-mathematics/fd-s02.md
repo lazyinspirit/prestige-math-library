@@ -1,7 +1,7 @@
 ---
 page: fd-s02
 title: Local smooth periodic Euler and Navier–Stokes
-status: draft
+status: published
 library: mathematics
 companion: fd-s02-examples
 requires:

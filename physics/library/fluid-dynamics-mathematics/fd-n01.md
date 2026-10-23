@@ -1,7 +1,7 @@
 ---
 page: fd-n01
 title: "Lipschitz Stokes pressure and bounded sensors"
-status: draft
+status: published
 library: mathematics
 requires:
   - mixed-finite-elements-and-stokes-stability

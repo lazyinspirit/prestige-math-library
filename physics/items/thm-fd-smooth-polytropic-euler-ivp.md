@@ -2,7 +2,7 @@
 id: thm-fd-smooth-polytropic-euler-ivp
 kind: theorem
 title: "Local smooth positive-density polytropic Euler"
-status: draft
+status: published
 origin: pipeline
 domain: mathematics
 dependency_level: 3
@@ -43,6 +43,12 @@ sources:
       url: "https://web.math.ucsb.edu/~sideris/pdffiles/EulerCMP.pdf"
 verification:
   precheck: pass
+  verified:
+    model: gpt-6.1-sol
+    verdict: pass
+    date: 2026-10-23
+    scope: Completed native delegated item review and certified repair closure; exact evidence and source-reading limits retained in research/fluid-dynamics-all-47-2026-10-23-publication.json.
+    delegated_by: owner
 ---
 
 ## Statement

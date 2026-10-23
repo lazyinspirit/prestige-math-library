@@ -1,7 +1,7 @@
 ---
 page: fd-pn02-examples
 title: "Physical interpretation of shock-capturing calculations — Examples"
-status: draft
+status: published
 library: physics
 requires:
   - fd-pn02

@@ -1,7 +1,7 @@
 ---
 page: fd-px01
 title: Exact Reynolds and Mach nondimensionalization — conditional physical prediction
-status: draft
+status: published
 library: physics
 requires:
   - fd-f02

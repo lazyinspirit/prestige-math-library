@@ -2,7 +2,7 @@
 id: thm-fd-x07
 kind: theorem
 title: Bounded-domain Stokes residual estimate
-status: draft
+status: published
 origin: pipeline
 domain: mathematics
 library: mathematics
@@ -24,6 +24,12 @@ dependency_roles:
 scope: "Given smooth Stokes-difference fields, zero trace and an explicit Poincare bound, the residual controls the L2 velocity and gradient; the periodic channel has the direct bound C=h. The result asserts no solution existence, exterior-domain estimate, or Reynolds-number-only error. The bounded-domain divergence step assumes AC_omega."
 verification:
   precheck: pass
+  verified:
+    model: gpt-6.1-sol
+    verdict: pass
+    date: 2026-10-23
+    scope: Completed native delegated item review and certified repair closure; exact evidence and source-reading limits retained in research/fluid-dynamics-all-47-2026-10-23-publication.json.
+    delegated_by: owner
 sources:
   references:
     - title: "Jean-Luc Guermond, M602 Fall 2024, Volume 1, Part I, Chapter 3: Energy method and applications"

@@ -2,7 +2,7 @@
 id: ex-fd-x09-formal-verification
 kind: example
 title: "Barotropic Kelvin and Bernoulli with exact hypotheses — formal worked solution"
-status: draft
+status: published
 origin: pipeline
 domain: mathematics
 library: mathematics
@@ -22,6 +22,12 @@ dependency_roles:
 scope: "A smooth uniform barotropic Euler solution and explicitly advected closed loop, verifying the constant Bernoulli value and conserved circulation under the theorem's hypotheses."
 verification:
   precheck: pass
+  verified:
+    model: gpt-6.1-sol
+    verdict: pass
+    date: 2026-10-23
+    scope: Completed native delegated item review and certified repair closure; exact evidence and source-reading limits retained in research/fluid-dynamics-all-47-2026-10-23-publication.json.
+    delegated_by: owner
 ---
 
 ## Example

@@ -2,7 +2,7 @@
 id: cex-fd-vacuum-velocity-determination
 kind: counterexample
 title: "Conservative momentum alone does not fix vacuum velocity"
-status: draft
+status: published
 origin: pipeline
 domain: physics
 library: physics
@@ -23,10 +23,12 @@ provenance:
 generation:
   role: counterexample
 verification:
-  judge:
-    model: "gpt-6-luna"
+  verified:
+    model: gpt-6.1-sol
     verdict: pass
     date: 2026-10-23
+    scope: Completed native delegated item review and certified repair closure; exact evidence and source-reading limits retained in research/fluid-dynamics-all-47-2026-10-23-publication.json.
+    delegated_by: owner
 ---
 
 ## Statement refuted

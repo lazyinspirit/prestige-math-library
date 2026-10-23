@@ -2,7 +2,7 @@
 id: thm-fd-x05
 kind: theorem
 title: "Vortex topology and global-Bernoulli counterexamples"
-status: draft
+status: published
 origin: pipeline
 domain: mathematics
 library: mathematics
@@ -27,6 +27,12 @@ sources:
       locator: "§2.2.1, printed pp. 22–26, vorticity and the punctured-plane line vortex; §2.4.1, printed pp. 42–45, circulation around a cylinder."
 verification:
   precheck: pass
+  verified:
+    model: gpt-6.1-sol
+    verdict: pass
+    date: 2026-10-23
+    scope: Completed native delegated item review and certified repair closure; exact evidence and source-reading limits retained in research/fluid-dynamics-all-47-2026-10-23-publication.json.
+    delegated_by: owner
 ---
 
 ## Statement

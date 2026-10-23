@@ -2,7 +2,7 @@
 id: prop-fd-sensor-long-run-clt
 kind: proposition
 title: Long-run central limit theorem for a dependent velocity sensor
-status: draft
+status: published
 origin: pipeline
 domain: mathematics
 library: mathematics
@@ -68,10 +68,12 @@ sources:
       locator: Sections 4.8.1–4.9, printed pp. 132–135.
 verification:
   precheck: pending
-  judge:
-    model: "gpt-6-luna"
+  verified:
+    model: gpt-6.1-sol
     verdict: pass
     date: 2026-10-23
+    scope: Completed native delegated item review and certified repair closure; exact evidence and source-reading limits retained in research/fluid-dynamics-all-47-2026-10-23-publication.json.
+    delegated_by: owner
 ---
 
 ## Statement

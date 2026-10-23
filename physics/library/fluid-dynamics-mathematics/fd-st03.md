@@ -1,7 +1,7 @@
 ---
 page: fd-st03
 title: Dependent profile resampling and observation inference
-status: draft
+status: published
 library: mathematics
 requires:
   - block-bootstrap-for-dependent-data

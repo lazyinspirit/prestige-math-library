@@ -1,7 +1,7 @@
 ---
 page: fd-pg01
 title: Geophysical approximation assumptions
-status: draft
+status: published
 library: physics
 items:
   - post-fd-geophysical-model-branches

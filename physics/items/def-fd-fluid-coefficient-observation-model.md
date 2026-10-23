@@ -2,7 +2,7 @@
 id: def-fd-fluid-coefficient-observation-model
 kind: definition
 title: Finite coefficient observation and innovation interface
-status: draft
+status: published
 origin: pipeline
 pipeline_run: fluid-dynamics-all-47-2026-10-23
 dependency_level: 0
@@ -23,10 +23,12 @@ provenance:
   statement: literature-derived
   proof: not-applicable
 verification:
-  judge:
-    model: "gpt-6-luna"
+  verified:
+    model: gpt-6.1-sol
     verdict: pass
     date: 2026-10-23
+    scope: Completed native delegated item review and certified repair closure; exact evidence and source-reading limits retained in research/fluid-dynamics-all-47-2026-10-23-publication.json.
+    delegated_by: owner
 sources:
   references:
     - title: "K. J. H. Law, A. M. Stuart, and K. C. Zygalakis, Data Assimilation: A Mathematical Introduction, Chapter 2 §§2.1 and 2.4; Chapter 4 §§4.1 and 4.2.3"

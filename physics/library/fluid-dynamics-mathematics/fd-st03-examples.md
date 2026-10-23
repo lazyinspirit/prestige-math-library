@@ -1,7 +1,7 @@
 ---
 page: fd-st03-examples
 title: Dependent profile resampling and observation inference — Examples
-status: draft
+status: published
 library: mathematics
 requires:
   - fd-st03

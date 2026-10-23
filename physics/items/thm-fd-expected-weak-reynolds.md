@@ -2,7 +2,7 @@
 id: thm-fd-expected-weak-reynolds
 kind: theorem
 title: Expected weak Reynolds decomposition and conditional mean equation
-status: draft
+status: published
 origin: pipeline
 domain: mathematics
 library: mathematics
@@ -59,10 +59,12 @@ sources:
       locator: Section 6.3.1, PDF pp. 117–120; Reynolds terminology only.
 verification:
   precheck: pending
-  judge:
-    model: "gpt-6-luna"
+  verified:
+    model: gpt-6.1-sol
     verdict: pass
     date: 2026-10-23
+    scope: Completed native delegated item review and certified repair closure; exact evidence and source-reading limits retained in research/fluid-dynamics-all-47-2026-10-23-publication.json.
+    delegated_by: owner
 ---
 
 ## Statement

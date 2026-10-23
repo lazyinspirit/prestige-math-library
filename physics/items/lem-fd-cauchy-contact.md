@@ -2,7 +2,7 @@
 id: lem-fd-cauchy-contact
 kind: lemma
 title: Linear traction from shrinking local contact balance
-status: draft
+status: published
 origin: pipeline
 proof_strategy: direct
 domain: mathematics
@@ -33,10 +33,12 @@ sources:
       locator: "Chapter 4 §4.1, printed pp. 26–27."
 verification:
   precheck: pass
-  judge:
-    model: "gpt-6-luna"
+  verified:
+    model: gpt-6.1-sol
     verdict: pass
     date: 2026-10-23
+    scope: Completed native delegated item review and certified repair closure; exact evidence and source-reading limits retained in research/fluid-dynamics-all-47-2026-10-23-publication.json.
+    delegated_by: owner
 physical_scope: null
 empirical_premises: []
 ---

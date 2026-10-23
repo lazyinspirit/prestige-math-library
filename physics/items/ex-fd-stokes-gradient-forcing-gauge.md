@@ -2,7 +2,7 @@
 id: ex-fd-stokes-gradient-forcing-gauge
 kind: example
 title: "A gradient load observed through Stokes pressure"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: fluid-dynamics-all-47-2026-10-23
 domain: mathematics
@@ -39,10 +39,12 @@ sources:
       locator: "§§4.2.1–4.2.3 and §8.2.1, Example 4.2.2, pp. 225–229, 233–234, and 462–463: weak Stokes solvability and pressure modulo constants."
 verification:
   precheck: pending
-  judge:
-    model: "gpt-6-luna"
+  verified:
+    model: gpt-6.1-sol
     verdict: pass
     date: 2026-10-23
+    scope: Completed native delegated item review and certified repair closure; exact evidence and source-reading limits retained in research/fluid-dynamics-all-47-2026-10-23-publication.json.
+    delegated_by: owner
 ---
 
 ## Example

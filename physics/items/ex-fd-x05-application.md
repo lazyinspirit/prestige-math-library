@@ -2,7 +2,7 @@
 id: ex-fd-x05-application
 kind: example
 title: Vortex topology and global-Bernoulli counterexamples — worked interpretation
-status: draft
+status: published
 origin: pipeline
 domain: physics
 library: physics
@@ -27,6 +27,12 @@ sources:
       locator: §6.4, printed pp. 120–123.
 verification:
   precheck: pending
+  verified:
+    model: gpt-6.1-sol
+    verdict: pass
+    date: 2026-10-23
+    scope: Completed native delegated item review and certified repair closure; exact evidence and source-reading limits retained in research/fluid-dynamics-all-47-2026-10-23-publication.json.
+    delegated_by: owner
 ---
 
 ## Example

@@ -1,7 +1,7 @@
 ---
 page: fd-g01-examples
 title: Rotating stratified and shallow-water mathematical models — Examples
-status: draft
+status: published
 library: mathematics
 requires:
   - fd-g01

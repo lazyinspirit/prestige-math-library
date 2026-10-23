@@ -1,7 +1,7 @@
 ---
 page: fd-ps01
 title: Local periodic incompressible model evolution
-status: draft
+status: published
 category: fluid-dynamics
 library: physics
 items:

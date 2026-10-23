@@ -1,7 +1,7 @@
 ---
 page: fd-n02-examples
 title: Incompressible numerical observable and pressure errors — Examples
-status: draft
+status: published
 library: mathematics
 items: []
 examples:

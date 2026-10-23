@@ -2,7 +2,7 @@
 id: rem-fd-thermal-coupling
 kind: remark
 title: Thermomechanical coupling requires additional assumptions
-status: draft
+status: published
 origin: pipeline
 domain: physics
 library: physics
@@ -39,6 +39,13 @@ sources:
       url: "https://www.mdpi.com/2311-5521/6/1/42/pdf"
       locator: "§1, printed pp. 1–3, which formulates the incompressible model at
         constant temperature and density."
+verification:
+  verified:
+    model: gpt-6.1-sol
+    verdict: pass
+    date: 2026-10-23
+    scope: Completed native delegated item review and certified repair closure; exact evidence and source-reading limits retained in research/fluid-dynamics-all-47-2026-10-23-publication.json.
+    delegated_by: owner
 ---
 
 ## Remark

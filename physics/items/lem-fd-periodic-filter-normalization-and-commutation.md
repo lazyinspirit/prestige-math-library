@@ -2,7 +2,7 @@
 id: lem-fd-periodic-filter-normalization-and-commutation
 kind: lemma
 title: Normalization, periodization, and derivative commutation for the positive fluid filter
-status: draft
+status: published
 origin: pipeline
 domain: mathematics
 dependency_level: 2
@@ -44,6 +44,13 @@ sources:
       url: "https://courses.washington.edu/mengr544/handouts/hd-les.pdf"
     - title: "Gregory L. Eyink, The ‘Multifractal Model’ of Turbulence and A Priori Estimates in Large-Eddy Simulation, I. Subgrid Flux and Locality of Energy Transfer, arXiv:chao-dyn/9602018v1"
       url: "https://arxiv.org/pdf/chao-dyn/9602018"
+verification:
+  verified:
+    model: gpt-6.1-sol
+    verdict: pass
+    date: 2026-10-23
+    scope: Completed native delegated item review and certified repair closure; exact evidence and source-reading limits retained in research/fluid-dynamics-all-47-2026-10-23-publication.json.
+    delegated_by: owner
 ---
 ## Statement
 

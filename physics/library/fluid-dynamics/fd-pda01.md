@@ -1,7 +1,7 @@
 ---
 page: fd-pda01
 title: Measurement and assimilation model adoption
-status: draft
+status: published
 library: physics
 requires:
   - fd-da01

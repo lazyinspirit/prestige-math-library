@@ -2,7 +2,7 @@
 id: lem-fd-sensor-pairing-is-well-defined
 kind: lemma
 title: The L2 velocity sensor is well-defined
-status: draft
+status: published
 origin: pipeline
 domain: mathematics
 library: mathematics
@@ -43,10 +43,12 @@ sources:
       locator: Section 1.7, Theorem 1.7.21 and proof, printed pp. 204–206.
 verification:
   precheck: pending
-  judge:
-    model: "gpt-6-luna"
+  verified:
+    model: gpt-6.1-sol
     verdict: pass
     date: 2026-10-23
+    scope: Completed native delegated item review and certified repair closure; exact evidence and source-reading limits retained in research/fluid-dynamics-all-47-2026-10-23-publication.json.
+    delegated_by: owner
 ---
 
 ## Statement

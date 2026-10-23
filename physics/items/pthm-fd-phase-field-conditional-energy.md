@@ -2,7 +2,7 @@
 id: pthm-fd-phase-field-conditional-energy
 kind: physics-theorem
 title: Conditional phase-field free-energy dissipation
-status: draft
+status: published
 origin: pipeline
 domain: physics
 library: physics
@@ -26,10 +26,12 @@ provenance:
 proof_strategy: direct
 verification:
   precheck: pass
-  judge:
-    model: "gpt-6-luna"
+  verified:
+    model: gpt-6.1-sol
     verdict: pass
     date: 2026-10-23
+    scope: Completed native delegated item review and certified repair closure; exact evidence and source-reading limits retained in research/fluid-dynamics-all-47-2026-10-23-publication.json.
+    delegated_by: owner
 empirical_premises: []
 sources:
   references:

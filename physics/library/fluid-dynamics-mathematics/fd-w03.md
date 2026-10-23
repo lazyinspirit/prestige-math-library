@@ -1,7 +1,7 @@
 ---
 page: fd-w03
 title: Distributional systems and entropy flux pairs
-status: draft
+status: published
 library: mathematics
 companion: fd-w03-examples
 requires:

@@ -2,7 +2,7 @@
 id: def-fd-phase-field-dimensionalization
 kind: definition
 title: SI dimensionalization of the periodic diffuse-interface model
-status: draft
+status: published
 origin: pipeline
 domain: physics
 library: physics
@@ -21,10 +21,12 @@ provenance:
   proof: not-applicable
 verification:
   precheck: n/a
-  judge:
-    model: "gpt-6-luna"
+  verified:
+    model: gpt-6.1-sol
     verdict: pass
     date: 2026-10-23
+    scope: Completed native delegated item review and certified repair closure; exact evidence and source-reading limits retained in research/fluid-dynamics-all-47-2026-10-23-publication.json.
+    delegated_by: owner
 sources:
   references:
     - title: "J. Tinsley Oden, Lecture Notes, Fall 2016, Chapter 11: Phase-Field Models"

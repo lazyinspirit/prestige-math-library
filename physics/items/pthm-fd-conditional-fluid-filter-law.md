@@ -2,7 +2,7 @@
 id: pthm-fd-conditional-fluid-filter-law
 kind: physics-theorem
 title: Exact conditional law for the finite-modal fluid filter
-status: draft
+status: published
 origin: pipeline
 pipeline_run: fluid-dynamics-all-47-2026-10-23
 dependency_level: 3
@@ -54,6 +54,12 @@ sources:
       locator: "Chapter 4 §§4.1–4.3, printed pp. 51–61, state-space models, Bayesian filtering equations, and the Kalman filter."
 verification:
   precheck: pending
+  verified:
+    model: gpt-6.1-sol
+    verdict: pass
+    date: 2026-10-23
+    scope: Completed native delegated item review and certified repair closure; exact evidence and source-reading limits retained in research/fluid-dynamics-all-47-2026-10-23-publication.json.
+    delegated_by: owner
 ---
 
 ## Statement

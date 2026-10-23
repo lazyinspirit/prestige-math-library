@@ -1,7 +1,7 @@
 ---
 page: fd-l01
 title: "Residual and distribution-shift surrogate certificates"
-status: draft
+status: published
 library: mathematics
 requires:
   - fd-s01

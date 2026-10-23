@@ -1,7 +1,7 @@
 ---
 page: fd-f03
 title: Newtonian stress and Fourier conductive closure
-status: draft
+status: published
 library: physics
 items:
   - post-fd-newtonian-fourier

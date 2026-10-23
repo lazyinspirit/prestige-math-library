@@ -2,7 +2,7 @@
 id: def-fd-physical-kinetic-observables
 kind: definition
 title: Kinetic number, mass and thermal observables
-status: draft
+status: published
 origin: pipeline
 domain: physics
 library: physics
@@ -31,6 +31,12 @@ sources:
       locator: "Sections 2.4.1–2.4.2, printed pp. 35–42; number density, mass density, mean velocity, pressure tensor, and ideal-fluid moments."
 verification:
   precheck: pending
+  verified:
+    model: gpt-6.1-sol
+    verdict: pass
+    date: 2026-10-23
+    scope: Completed native delegated item review and certified repair closure; exact evidence and source-reading limits retained in research/fluid-dynamics-all-47-2026-10-23-publication.json.
+    delegated_by: owner
 ---
 
 ## Definition

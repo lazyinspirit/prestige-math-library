@@ -1,7 +1,7 @@
 ---
 page: fd-mf03-examples
 title: "Linear isotropic symmetric stress classification — Examples"
-status: draft
+status: published
 library: mathematics
 items: []
 examples:

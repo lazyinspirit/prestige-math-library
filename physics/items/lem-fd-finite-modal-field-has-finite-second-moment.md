@@ -2,7 +2,7 @@
 id: lem-fd-finite-modal-field-has-finite-second-moment
 kind: lemma
 title: Finite modal velocity fields inherit finite second moments
-status: draft
+status: published
 origin: pipeline
 pipeline_run: fluid-dynamics-all-47-2026-10-23
 dependency_level: 1
@@ -48,10 +48,12 @@ sources:
       locator: "Exercise 1.4.38, printed pp. 103–104, poses the pushforward-measure integral identity; Theorem 1.4.44, printed pp. 107–108, and its proof give monotone convergence. The pushforward identity is proved locally here."
 verification:
   precheck: pending
-  judge:
-    model: "gpt-6-luna"
+  verified:
+    model: gpt-6.1-sol
     verdict: pass
     date: 2026-10-23
+    scope: Completed native delegated item review and certified repair closure; exact evidence and source-reading limits retained in research/fluid-dynamics-all-47-2026-10-23-publication.json.
+    delegated_by: owner
 ---
 
 ## Statement

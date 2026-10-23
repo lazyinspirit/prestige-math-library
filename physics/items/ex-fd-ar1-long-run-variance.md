@@ -2,7 +2,7 @@
 id: ex-fd-ar1-long-run-variance
 kind: example
 title: A Gaussian AR(1) sensor and its long-run variance
-status: draft
+status: published
 origin: pipeline
 domain: mathematics
 library: mathematics
@@ -50,10 +50,12 @@ sources:
       locator: Section 4.1, Theorem 9 and Corollaries 1–5, PDF pp. 9–12; general MCMC CLT context only, with the AR(1) calculation derived locally.
 verification:
   precheck: pending
-  judge:
-    model: "gpt-6-luna"
+  verified:
+    model: gpt-6.1-sol
     verdict: pass
     date: 2026-10-23
+    scope: Completed native delegated item review and certified repair closure; exact evidence and source-reading limits retained in research/fluid-dynamics-all-47-2026-10-23-publication.json.
+    delegated_by: owner
 ---
 
 ## Example

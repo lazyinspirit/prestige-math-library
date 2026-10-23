@@ -1,7 +1,7 @@
 ---
 page: fd-px01-examples
 title: Exact Reynolds and Mach nondimensionalization — conditional physical prediction — Examples
-status: draft
+status: published
 library: physics
 requires:
   - fd-px01

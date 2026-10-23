@@ -2,7 +2,7 @@
 id: ex-fd-capillary-zero-tension-limit
 kind: example
 title: "Capillary dispersion reduces to gravity waves"
-status: draft
+status: published
 origin: pipeline
 domain: mathematics
 library: mathematics
@@ -27,10 +27,12 @@ sources:
   references: []
 verification:
   precheck: pending
-  judge:
-    model: "gpt-6-luna"
+  verified:
+    model: gpt-6.1-sol
     verdict: pass
     date: 2026-10-23
+    scope: Completed native delegated item review and certified repair closure; exact evidence and source-reading limits retained in research/fluid-dynamics-all-47-2026-10-23-publication.json.
+    delegated_by: owner
 ---
 
 ## Example

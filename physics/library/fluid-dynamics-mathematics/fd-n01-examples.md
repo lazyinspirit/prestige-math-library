@@ -1,7 +1,7 @@
 ---
 page: fd-n01-examples
 title: "Lipschitz Stokes pressure and bounded sensors — Examples"
-status: draft
+status: published
 library: mathematics
 requires:
   - fd-n01

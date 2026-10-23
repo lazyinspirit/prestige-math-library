@@ -1,7 +1,7 @@
 ---
 page: fd-mp01-examples
 title: "Diffuse-interface coupling and energy — Examples"
-status: draft
+status: published
 library: mathematics
 requires:
   - fd-mp01

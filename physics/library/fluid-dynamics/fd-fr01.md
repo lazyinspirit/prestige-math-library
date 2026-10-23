@@ -1,7 +1,7 @@
 ---
 page: fd-fr01
 title: Research frontier status and calibrated model evidence
-status: draft
+status: published
 library: physics
 requires: []
 items:

@@ -2,7 +2,7 @@
 id: ex-fd-x09-application
 kind: example
 title: Barotropic Kelvin and Bernoulli with exact hypotheses — worked interpretation
-status: draft
+status: published
 origin: pipeline
 domain: physics
 library: physics
@@ -28,6 +28,12 @@ sources:
         chapter does not treat the barotropic/compressible result used here.
 verification:
   precheck: pending
+  verified:
+    model: gpt-6.1-sol
+    verdict: pass
+    date: 2026-10-23
+    scope: Completed native delegated item review and certified repair closure; exact evidence and source-reading limits retained in research/fluid-dynamics-all-47-2026-10-23-publication.json.
+    delegated_by: owner
 ---
 
 ## Example

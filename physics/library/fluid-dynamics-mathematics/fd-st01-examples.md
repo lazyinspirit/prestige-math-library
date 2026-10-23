@@ -1,7 +1,7 @@
 ---
 page: fd-st01-examples
 title: Random fields and dependent fluid statistics — Examples
-status: draft
+status: published
 library: mathematics
 requires:
   - fd-st01

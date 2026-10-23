@@ -2,7 +2,7 @@
 id: thm-fd-x08
 kind: theorem
 title: "Exact viscous diffusion layer and material-circulation decay"
-status: draft
+status: published
 origin: pipeline
 domain: mathematics
 library: mathematics
@@ -28,6 +28,12 @@ sources:
       locator: "Complete four-page solution, setup and square-root viscous-diffusion scale; it does not supply the exact erfc profile, which is derived here."
 verification:
   precheck: pass
+  verified:
+    model: gpt-6.1-sol
+    verdict: pass
+    date: 2026-10-23
+    scope: Completed native delegated item review and certified repair closure; exact evidence and source-reading limits retained in research/fluid-dynamics-all-47-2026-10-23-publication.json.
+    delegated_by: owner
 ---
 
 ## Statement

@@ -1,7 +1,7 @@
 ---
 page: fd-rom01
 title: Solenoidal reduced dynamics
-status: draft
+status: published
 library: mathematics
 requires:
   - fd-s01

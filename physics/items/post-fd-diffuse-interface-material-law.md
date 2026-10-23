@@ -2,7 +2,7 @@
 id: post-fd-diffuse-interface-material-law
 kind: postulate
 title: Adopted diffuse free energy, mobility and capillary stress
-status: draft
+status: published
 origin: pipeline
 domain: physics
 library: physics
@@ -26,10 +26,10 @@ provenance:
   proof: not-applicable
 verification:
   precheck: pass
-  judge:
-    model: "gpt-6-luna"
-    verdict: pass
+  sources_checked:
     date: 2026-10-23
+    scope: Completed native formulation/status, source-evidence and applicability review; exact evidence and reading limits in research/fluid-dynamics-all-47-2026-10-23-publication.json. No new retrieval, measurement or solution is claimed.
+    by: owner-authorized native reviewers (gpt-6.1-sol)
 sources:
   references:
     - title: "J. Tinsley Oden, Lecture Notes, Fall 2016, Chapter 11: Phase-Field Models"

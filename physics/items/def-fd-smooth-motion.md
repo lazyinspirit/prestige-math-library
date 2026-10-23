@@ -2,7 +2,7 @@
 id: def-fd-smooth-motion
 kind: definition
 title: "Smooth material configurations and Eulerian fields"
-status: draft
+status: published
 origin: pipeline
 domain: mathematics
 library: mathematics
@@ -25,10 +25,12 @@ sources:
   scraped: []
 verification:
   precheck: n/a
-  judge:
-    model: "gpt-6-luna"
+  verified:
+    model: gpt-6.1-sol
     verdict: pass
     date: 2026-10-23
+    scope: Completed native delegated item review and certified repair closure; exact evidence and source-reading limits retained in research/fluid-dynamics-all-47-2026-10-23-publication.json.
+    delegated_by: owner
 physical_scope: null
 empirical_premises: []
 ---

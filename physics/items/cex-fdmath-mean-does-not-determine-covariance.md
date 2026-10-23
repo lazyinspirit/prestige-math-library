@@ -2,7 +2,7 @@
 id: cex-fdmath-mean-does-not-determine-covariance
 kind: counterexample
 title: Equal means with unequal Reynolds covariance
-status: draft
+status: published
 origin: pipeline
 domain: mathematics
 library: mathematics
@@ -23,10 +23,12 @@ sources:
       url: "https://www.ocw.mit.edu/courses/12-820-turbulence-in-the-ocean-and-atmosphere-spring-2006/a3ea9a7900aee9c9ebaf444ab2d92c1a_ch3.pdf"
 verification:
   precheck: pass
-  judge:
-    model: "gpt-6-luna"
+  verified:
+    model: gpt-6.1-sol
     verdict: pass
     date: 2026-10-23
+    scope: Completed native delegated item review and certified repair closure; exact evidence and source-reading limits retained in research/fluid-dynamics-all-47-2026-10-23-publication.json.
+    delegated_by: owner
 ---
 
 ## Statement refuted

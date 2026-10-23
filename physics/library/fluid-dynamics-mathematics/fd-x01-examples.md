@@ -1,7 +1,7 @@
 ---
 page: fd-x01-examples
 title: Formal parameterized fluid systems and observables — Examples
-status: draft
+status: published
 library: mathematics
 requires:
   - fd-x01

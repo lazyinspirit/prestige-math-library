@@ -2,7 +2,7 @@
 id: post-fd-creeping-force-balance
 kind: postulate
 title: Alternative restricted creeping-flow force balance
-status: draft
+status: published
 origin: pipeline
 domain: physics
 library: physics
@@ -29,10 +29,10 @@ sources:
     locator: §§6.5.1–6.5.3, printed pp. 242–245.
 verification:
   precheck: pending
-  judge:
-    model: "gpt-6-luna"
-    verdict: pass
+  sources_checked:
     date: 2026-10-23
+    scope: Completed native formulation/status, source-evidence and applicability review; exact evidence and reading limits in research/fluid-dynamics-all-47-2026-10-23-publication.json. No new retrieval, measurement or solution is claimed.
+    by: owner-authorized native reviewers (gpt-6.1-sol)
 ---
 
 ## Postulate

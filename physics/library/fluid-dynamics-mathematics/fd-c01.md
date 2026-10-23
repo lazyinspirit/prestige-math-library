@@ -1,7 +1,7 @@
 ---
 page: fd-c01
 title: Finite weighted ensemble and covariance
-status: draft
+status: published
 library: mathematics
 requires: []
 items:

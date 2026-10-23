@@ -2,7 +2,7 @@
 id: lem-fd-moving-control-volume-transport
 kind: lemma
 title: Transport across a moving control boundary
-status: draft
+status: published
 origin: pipeline
 proof_strategy: direct
 domain: mathematics
@@ -22,10 +22,12 @@ provenance:
   statement: literature-derived
   proof: ai-generated
 verification:
-  judge:
-    model: "gpt-6-luna"
+  verified:
+    model: gpt-6.1-sol
     verdict: pass
     date: 2026-10-23
+    scope: Completed native delegated item review and certified repair closure; exact evidence and source-reading limits retained in research/fluid-dynamics-all-47-2026-10-23-publication.json.
+    delegated_by: owner
 sources:
   references:
     - title: "Joseph M. Powers, Lecture Notes on Intermediate Fluid Mechanics"

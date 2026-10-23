@@ -2,7 +2,7 @@
 id: ex-fd-unseen-input-shift
 kind: example
 title: Unseen input invalidates a training-law guarantee
-status: draft
+status: published
 origin: pipeline
 pipeline_run: fluid-dynamics-all-47-2026-10-23
 dependency_level: 4
@@ -24,10 +24,12 @@ provenance:
   proof: ai-generated
 verification:
   precheck: pending
-  judge:
-    model: "gpt-6-luna"
+  verified:
+    model: gpt-6.1-sol
     verdict: pass
     date: 2026-10-23
+    scope: Completed native delegated item review and certified repair closure; exact evidence and source-reading limits retained in research/fluid-dynamics-all-47-2026-10-23-publication.json.
+    delegated_by: owner
 sources:
   references:
     - title: "Masashi Sugiyama, Matthias Krauledat, and Klaus-Robert Müller, Covariate Shift Adaptation by Importance Weighted Cross Validation"

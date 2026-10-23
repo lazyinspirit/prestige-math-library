@@ -2,7 +2,7 @@
 id: prop-fd-finite-observation-identifiability
 kind: proposition
 title: Whitened observation identifiability and stability
-status: draft
+status: published
 origin: pipeline
 pipeline_run: fluid-dynamics-all-47-2026-10-23
 dependency_level: 1
@@ -21,10 +21,12 @@ provenance:
   statement: literature-derived
   proof: ai-altered
 verification:
-  judge:
-    model: "gpt-6-luna"
+  verified:
+    model: gpt-6.1-sol
     verdict: pass
     date: 2026-10-23
+    scope: Completed native delegated item review and certified repair closure; exact evidence and source-reading limits retained in research/fluid-dynamics-all-47-2026-10-23-publication.json.
+    delegated_by: owner
 sources:
   references:
     - title: "Sheldon Axler, Linear Algebra Done Right, fourth edition, §7E"

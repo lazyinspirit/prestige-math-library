@@ -1,7 +1,7 @@
 ---
 page: fd-g01
 title: Rotating stratified and shallow-water mathematical models
-status: draft
+status: published
 library: mathematics
 requires:
   - fd-x01

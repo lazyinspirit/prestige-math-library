@@ -2,7 +2,7 @@
 id: ex-fdmath-negative-bulk-residual
 kind: example
 title: "A negative bulk coefficient yields a negative quadratic residual"
-status: draft
+status: published
 origin: pipeline
 domain: mathematics
 library: mathematics
@@ -27,6 +27,12 @@ sources:
       url: "https://web.mit.edu/abeyaratne/Volumes/RCA_Vol_II.pdf"
 verification:
   precheck: pass
+  verified:
+    model: gpt-6.1-sol
+    verdict: pass
+    date: 2026-10-23
+    scope: Completed native delegated item review and certified repair closure; exact evidence and source-reading limits retained in research/fluid-dynamics-all-47-2026-10-23-publication.json.
+    delegated_by: owner
 ---
 
 ## Example

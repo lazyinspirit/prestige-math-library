@@ -2,7 +2,7 @@
 id: def-fd-wall-defect-capillary-models
 kind: definition
 title: "Common-wall residual and capillary boundary model"
-status: draft
+status: published
 origin: pipeline
 domain: mathematics
 library: mathematics
@@ -30,6 +30,12 @@ sources:
       url: "https://edu.itp.phys.ethz.ch/fs14/MechOfCont/lec23.pdf"
 verification:
   precheck: pending
+  verified:
+    model: gpt-6.1-sol
+    verdict: pass
+    date: 2026-10-23
+    scope: Completed native delegated item review and certified repair closure; exact evidence and source-reading limits retained in research/fluid-dynamics-all-47-2026-10-23-publication.json.
+    delegated_by: owner
 ---
 
 ## Definition

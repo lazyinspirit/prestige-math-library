@@ -2,7 +2,7 @@
 id: post-fd-ideal-gas-numerical-model
 kind: postulate
 title: "Calorically perfect ideal-gas Euler model for numerical states"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: fluid-dynamics-all-47-2026-10-23
 domain: physics
@@ -40,10 +40,10 @@ sources:
       locator: "Complete 70-page chapter; §§4.4.1–4.4.4, printed pp. 144–151; §4.6.1 shock and entropy discussion."
 verification:
   precheck: pass
-  judge:
-    model: "gpt-6-luna"
-    verdict: pass
+  sources_checked:
     date: 2026-10-23
+    scope: Completed native formulation/status, source-evidence and applicability review; exact evidence and reading limits in research/fluid-dynamics-all-47-2026-10-23-publication.json. No new retrieval, measurement or solution is claimed.
+    by: owner-authorized native reviewers (gpt-6.1-sol)
 ---
 
 ## Postulate

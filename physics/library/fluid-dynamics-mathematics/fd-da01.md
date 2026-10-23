@@ -1,7 +1,7 @@
 ---
 page: fd-da01
 title: Assimilation and finite inverse identifiability
-status: draft
+status: published
 library: mathematics
 requires:
   - data-assimilation-variational-and-ensemble-methods

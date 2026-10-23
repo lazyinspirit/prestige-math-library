@@ -2,7 +2,7 @@
 id: thm-fd-filtered-covariance-energy
 kind: theorem
 title: Exact filtered covariance and resolved-energy balance
-status: draft
+status: published
 origin: pipeline
 domain: mathematics
 dependency_level: 3
@@ -45,10 +45,12 @@ provenance:
   statement: ai-altered
   proof: ai-altered
 verification:
-  judge:
-    model: "gpt-6-luna"
+  verified:
+    model: gpt-6.1-sol
     verdict: pass
     date: 2026-10-23
+    scope: Completed native delegated item review and certified repair closure; exact evidence and source-reading limits retained in research/fluid-dynamics-all-47-2026-10-23-publication.json.
+    delegated_by: owner
 sources:
   references:
     - title: "University of Washington, ME 544, Large-Eddy Simulation lecture notes, 8 May 2018"

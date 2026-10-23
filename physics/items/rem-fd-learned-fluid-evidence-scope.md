@@ -2,7 +2,7 @@
 id: rem-fd-learned-fluid-evidence-scope
 kind: remark
 title: Evidence scope for calibrated and learned fluid models
-status: draft
+status: published
 origin: pipeline
 pipeline_run: fluid-dynamics-all-47-2026-10-23
 dependency_level: 0
@@ -28,10 +28,12 @@ sources:
       locator: "Complete 33-page lecture PDF inspected; slides 10, 15–22, and 26–29, especially purpose-specific model validity, verification versus physical validation, uncertainty, and the distinction between benchmarking and realism."
 verification:
   precheck: pending
-  judge:
-    model: "gpt-6-luna"
+  verified:
+    model: gpt-6.1-sol
     verdict: pass
     date: 2026-10-23
+    scope: Completed native delegated item review and certified repair closure; exact evidence and source-reading limits retained in research/fluid-dynamics-all-47-2026-10-23-publication.json.
+    delegated_by: owner
 ---
 
 ## Remark

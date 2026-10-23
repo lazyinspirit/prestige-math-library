@@ -2,7 +2,7 @@
 id: pthm-fd-conditional-positive-euler-update
 kind: physics-theorem
 title: "Positive first-order compressible model update"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: fluid-dynamics-all-47-2026-10-23
 domain: physics
@@ -33,10 +33,12 @@ sources:
       locator: "Complete online chapter; HLLE solver and Euler positivity sections, approximately lines 229–324."
 verification:
   precheck: pass
-  judge:
-    model: "gpt-6-luna"
+  verified:
+    model: gpt-6.1-sol
     verdict: pass
     date: 2026-10-23
+    scope: Completed native delegated item review and certified repair closure; exact evidence and source-reading limits retained in research/fluid-dynamics-all-47-2026-10-23-publication.json.
+    delegated_by: owner
 ---
 
 ## Statement

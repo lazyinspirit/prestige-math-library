@@ -1,7 +1,7 @@
 ---
 page: fd-pn01
 title: Conditional continuum interpretation of mixed CFD
-status: draft
+status: published
 library: physics
 requires:
   - fd-f02

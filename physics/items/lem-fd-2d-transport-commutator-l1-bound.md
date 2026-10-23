@@ -2,7 +2,7 @@
 id: lem-fd-2d-transport-commutator-l1-bound
 kind: lemma
 title: "Two-dimensional transport commutator bound by the Fourier l1 gradient sum"
-status: draft
+status: published
 origin: pipeline
 domain: mathematics
 library: mathematics
@@ -32,6 +32,12 @@ sources:
       locator: "PDF pp. 45–51; the precise commutator estimate below is proved from its Fourier coefficient formula."
 verification:
   precheck: pass
+  verified:
+    model: gpt-6.1-sol
+    verdict: pass
+    date: 2026-10-23
+    scope: Completed native delegated item review and certified repair closure; exact evidence and source-reading limits retained in research/fluid-dynamics-all-47-2026-10-23-publication.json.
+    delegated_by: owner
 ---
 
 ## Statement

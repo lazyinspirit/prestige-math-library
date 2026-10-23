@@ -1,7 +1,7 @@
 ---
 page: fd-rom01-examples
 title: Solenoidal reduced dynamics — Examples
-status: draft
+status: published
 library: mathematics
 requires:
   - fd-rom01

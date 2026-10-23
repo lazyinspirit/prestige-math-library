@@ -2,7 +2,7 @@
 id: post-fd-capillary-linear-free-surface
 kind: postulate
 title: Linear capillary free-surface model
-status: draft
+status: published
 origin: pipeline
 domain: physics
 library: physics
@@ -69,10 +69,10 @@ sources:
         capillary-gravity dispersion relation."
 verification:
   precheck: pass
-  judge:
-    model: "gpt-6-luna"
-    verdict: pass
+  sources_checked:
     date: 2026-10-23
+    scope: Completed native formulation/status, source-evidence and applicability review; exact evidence and reading limits in research/fluid-dynamics-all-47-2026-10-23-publication.json. No new retrieval, measurement or solution is claimed.
+    by: owner-authorized native reviewers (gpt-6.1-sol)
 ---
 
 ## Postulate

@@ -2,7 +2,7 @@
 id: thm-fd-stokes-load-observable-stability
 kind: theorem
 title: "Lipschitz stability of bounded Stokes pressure observations"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: fluid-dynamics-all-47-2026-10-23
 domain: mathematics
@@ -33,10 +33,12 @@ sources:
       locator: "§§4.2.1–4.2.3, Example 4.2.2, and §8.2.1, pp. 225–229, 233–234, and 462–463: mixed Hilbert-space stability and the Stokes pressure gauge."
 verification:
   precheck: pending
-  judge:
-    model: "gpt-6-luna"
+  verified:
+    model: gpt-6.1-sol
     verdict: pass
     date: 2026-10-23
+    scope: Completed native delegated item review and certified repair closure; exact evidence and source-reading limits retained in research/fluid-dynamics-all-47-2026-10-23-publication.json.
+    delegated_by: owner
 ---
 
 ## Statement

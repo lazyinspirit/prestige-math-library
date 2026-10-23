@@ -1,7 +1,7 @@
 ---
 page: fd-k02-examples
 title: Single-species elastic Boltzmann model — Examples
-status: draft
+status: published
 library: physics
 requires:
   - fd-k02

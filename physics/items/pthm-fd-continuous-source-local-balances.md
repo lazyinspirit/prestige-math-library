@@ -2,7 +2,7 @@
 id: pthm-fd-continuous-source-local-balances
 kind: physics-theorem
 title: Local smooth balances with continuous body sources
-status: draft
+status: published
 origin: pipeline
 proof_strategy: direct
 domain: physics
@@ -41,6 +41,13 @@ sources:
     - title: "Chiang C. Mei, MIT OpenCourseWare Lecture Notes on Fluid Dynamics"
       url: "https://www.ocw.mit.edu/courses/1-63-advanced-fluid-dynamics-of-the-environment-fall-2002/20946c507055a595c44422b3616a83da_41energy.pdf"
       locator: "§4.1, complete 3-page energy derivation."
+verification:
+  verified:
+    model: gpt-6.1-sol
+    verdict: pass
+    date: 2026-10-23
+    scope: Completed native delegated item review and certified repair closure; exact evidence and source-reading limits retained in research/fluid-dynamics-all-47-2026-10-23-publication.json.
+    delegated_by: owner
 ---
 
 ## Statement
