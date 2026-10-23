@@ -3,30 +3,20 @@ name: abstract-algebra
 title: Abstract Algebra
 status: published
 ---
+Abstract algebra develops structures defined by operations and the maps that preserve
+them. Its group sequence moves from subgroups, cosets, quotients and homomorphisms to
+actions, products, presentations, finite-group structure and solvability. Ring topics
+include ideals, quotient rings, divisibility, Euclidean and principal ideal domains,
+polynomial rings and localization. Field theory covers algebraic extensions, finite
+fields, splitting fields, separability, algebraic closures, cyclotomic extensions and
+Galois correspondence. Modules and exact sequences lead to tensor products, chain
+conditions, semisimplicity and canonical forms; the collection also develops
+finite-group characters and induced representations.
 
-The number systems built earlier in the library each proved the same handful of
-facts separately, and abstract algebra is what those facts have in common.
-Groups come first: subgroups, cosets and Lagrange's theorem, normality, quotient
-groups and the isomorphism theorems, cyclic groups and direct products. Actions
-turn a group into symmetries of a set, with the orbit-stabiliser relation,
-Cayley's theorem, the symmetric groups, the sign homomorphism and the simplicity
-of the alternating group in degree at least five; free groups, presentations,
-free products and amalgamation go the other way. The finite abelian groups are
-classified, composition series and Jordan-Holder break a finite group into
-simple pieces, and solvability is the case where those pieces are abelian. Rings
-follow, with ideals and quotients, Euclidean domains, principal ideal domains
-and unique factorisation, polynomial rings, the field of fractions and
-localisation. Field extensions bring the complex numbers in as a quotient of a
-polynomial ring, splitting fields, degree in towers, finite fields, symmetric
-polynomials, algebraic closure and separability. Modules, exact sequences,
-tensor products, chain conditions and Wedderburn-Artin close the collection,
-alongside semidirect products, automorphism groups, Sylow theory and nilpotent
-groups.
-
-The number theory track reserves the cyclic, finite abelian, splitting-field and
-polynomial material. Commutative algebra continues directly from the rings,
-ideals, localisation, module and exact-sequence pages. Homological algebra
-starts from the modules and exact sequences. Algebraic geometry needs the
-polynomial rings and ideals. Complex analysis takes the complex numbers as
-constructed here, and differential geometry reserves the tensor product of
-modules.
+Some topics draw on Linear Algebra, Lie Theory and Functional Analysis, while others use
+results from Number Theory and Real Analysis. Algebraic structures and representation
+methods from this collection serve later work in Commutative Algebra, Algebraic
+Geometry, Representation Theory of Groups, Symmetric Groups and Symmetric Functions, and
+Coxeter Groups. Their results also recur in Combinatorics, Complex Analysis, Topology,
+Quantum Computing and related subjects, where groups, rings, fields and modules provide
+essential algebraic tools.

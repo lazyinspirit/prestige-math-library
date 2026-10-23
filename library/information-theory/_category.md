@@ -3,27 +3,6 @@ title: Information Theory
 status: draft
 ---
 
-Information theory studies quantitative limits on representing, transmitting,
-compressing, protecting, and extracting information from random objects. This
-draft track begins with finite probability laws, entropy, relative entropy,
-mutual information, and their measurable-space extensions. It then develops
-lossless source coding, independent and stationary ergodic sources, lossy
-compression and rate distortion, memoryless channels and their coding limits,
-finite-blocklength bounds, finite quantization and trellis/Viterbi algorithms, multiuser networks, secrecy, and quantum Shannon
-theory.
+The Information Theory pages quantify limits on representing, compressing, transmitting, and protecting information. They develop entropy, relative entropy, divergences, mutual information, and measurable-space conditioning, then treat prefix coding, the asymptotic equipartition property, stationary sources, types, and finite-blocklength bounds. Lossy coding and rate distortion lead into quantization and source–channel separation. Channel pages cover discrete memoryless, Gaussian, cost-constrained, feedback, relay, interference, and multiuser settings, distinguishing capacity results from bounds. The collection also treats secrecy and privacy, finite-state trellises and Viterbi decoding, and quantum information measures, capacities, entanglement assistance, key distribution, and source compression. Examples accompany many of the main results.
 
-The track states every alphabet, sigma-algebra, probability law, channel
-kernel, support convention, logarithm base, error criterion, cost constraint,
-distortion measure, and regularity hypothesis at the point of use. Finite
-alphabet identities are kept separate from general measurable-space claims.
-Operational theorems distinguish achievability from converse and specify
-average or maximal error, block length, rate, and limiting regime. Network
-results distinguish exact capacity regions from inner and outer bounds; source
-and channel separation is stated only under proved hypotheses. Quantum pages
-reuse the repository's finite-dimensional state and channel interfaces and
-state support and trace conditions explicitly.
-
-Pages remain research proposals until their local definitions, intermediate
-lemmas, proofs, algorithms, and actual prerequisite closures have been checked.
-Existing published library items are reused only within their stated scope.
-Source reading and citations provide provenance, not proof acceptance.
+Real Analysis, Linear Algebra, Quantum Computing, Quantum Algorithms, Probability, Set Theory, and Measure Theory supply tools for entropy, coding, and quantum results. Statistical Models and Experiments, Bayesian Computational Statistics, and Functional Analysis contribute statistical and operator methods. Representation Learning and Generative Models uses these information measures on finite distributions in its learning results.

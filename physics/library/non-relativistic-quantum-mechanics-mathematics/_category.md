@@ -5,19 +5,6 @@ status: published
 library: mathematics
 ---
 
-The mathematical prerequisites and supporting suppliers for the
-non-relativistic quantum mechanics collection: the completed tensor product of
-Hilbert spaces and its bounded maps, permutation sectors, the L² product
-unitary, density operators and scalar spectral probability, partial traces and
-Schmidt decompositions, trace-class machinery and its cyclicity, effects and
-instruments with their Kraus families and dilations, the compatible-measurement
-joint projection-valued measure, uncertainty and sampling inequalities, and the
-exact free-Gaussian and complex-Gaussian analytic layer. Items here are
-mathematics: they carry `domain: mathematics`, depend only on mathematical
-suppliers, and are excluded from physical conclusions by themselves. Their
-physical consumers are the non-relativistic quantum mechanics pages, which use
-them as stated mathematical premises under the physics schema's dependency
-roles and add their own postulates, interpretations, instruments and empirical
-qualifications. No physical postulate, observation or empirical claim is
-asserted on this page, and the companion example page remains mathematics as
-well.
+These pages develop mathematical structures used by non-relativistic quantum models: Hilbert and completed tensor products, density operators, spectral probabilities, permutation sectors, instruments and measurement compatibility; operator domains and dynamics; oscillator and Coulomb analysis; scattering; Fock and Gaussian systems; symmetry representations; magnetic, adiabatic, Floquet, and Bloch-band constructions; and certified spectral computation. Results retain their functional-analytic, measure, regularity, and operator-domain hypotheses. They are statements about specified spaces and operators, not physical postulates or empirical conclusions. Companion examples work through finite operators, modes, and symmetry cases under the same hypotheses.
+
+Functional and real analysis, measure theory, PDE, linear algebra, differential geometry, representation theory, and Non-relativistic Classical Mechanics Mathematics provide prerequisites. Non-relativistic Quantum Mechanics uses the category’s main state and operator results. Quantum Statistical Mechanics and Quantum Field Theory mathematics also use its composition, Fock, orbital, and spectral constructions; Thermodynamics and Einstein–Maxwell mathematics use selected statistical and orbital results; Thermodynamics and General Relativity mathematics uses its angular-momentum calculations.

@@ -3,9 +3,21 @@ name: numerical-differential-equations-and-stochastic-dynamics
 title: Numerical Differential Equations and Stochastic Dynamics
 status: published
 ---
+These pages develop numerical time evolution for ordinary, delay and fractional differential
+equations, differential-algebraic systems, boundary-value problems, and hybrid or
+constrained dynamics. They analyze consistency, stability, and error for Runge–Kutta and
+multistep methods, stiff and implicit or exponential integrators, splitting and geometric
+methods, adaptive and collocation schemes, continuation, event location, and
+parallel-in-time solvers. The stochastic material covers Euler–Maruyama and Milstein
+convergence, adaptive Brownian paths, stable SDE and Langevin schemes, reaction jumps,
+tau-leaping, finite-state generators, and population-balance models. The analyses
+distinguish local defects, global convergence, finite-precision effects, and sampling error.
 
-This collection studies the numerical evolution of deterministic and stochastic systems. It connects local consistency, stability and global error with practical time integration, boundary-value solvers, constrained dynamics and stochastic simulation. Euler–Maruyama construction and convergence provide the starting point for stochastic differential equations, alongside Milstein methods, adaptive Brownian coupling and schemes for superlinear drift. Deterministic topics include Runge–Kutta and multistep methods, stiff and implicit integration, splitting, geometric integration and event location. Population balances, jump processes and finite-state evolution supply further applications.
-
-Each method specifies its input class, arithmetic or random-draw model, regularity, time horizon and error claim. Exact-arithmetic identities remain separate from finite-precision stability; continuous well-posedness remains separate from discrete convergence; estimator values remain separate from certified error; and sampling variability remains separate from solver, approximation and model bias. Existing analysis and probability results supply their established hypotheses. A small residual or an observed rate does not establish convergence without the matching argument.
-
-Executable methods state finite budgets, stopping rules and failure statuses. Termination and computational cost are distinct from convergence and accuracy. Geometric integration retains the domain of every intermediate drift or kick, while stochastic error bounds retain their filtration, moment and coefficient assumptions. Mathematical designs motivated by physics remain separate from the physical modeling assumptions of their applications.
+Real Analysis, Probability, Measure Theory, Linear Algebra, and Functional Analysis provide
+convergence, stochastic, and operator foundations; Numerical Linear Algebra and
+Approximation contributes verified-evaluation tools. Runge–Kutta error recurrences support
+solvers in Numerical Optimization Inverse Problems and Uncertainty Quantification and
+Numerical Pdes and Spatial Discretization, while Euler–Maruyama and Brownian coupling
+support Bayesian Computational Statistics. These results also appear in Inverse Problems and
+Representation Learning and Generative Models, including projection and continuous-flow
+analyses.
