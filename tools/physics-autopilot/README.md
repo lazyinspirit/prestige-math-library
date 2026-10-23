@@ -111,3 +111,27 @@ stored order. Known orders remain exact and earlier; the ordinary drift and
 full plan/cycle/buildability gates remain required. Later authoring inventories
 and additional prerequisites are not frozen by the historical manifest archive.
 Future supplemental tasks require same-line edge/move detail directly.
+
+A later append uses the same paused, stopped, fully drained, unclosed Step-1
+boundary and requires every prior supplemental Alpha/apply stage to have
+completed its native gates. The original blocked-section overlay remains bound
+to its first authenticated frontier and archived inputs; all prior genuine
+supplemental reports, results, prompts, application receipts and live obligations
+are authenticated separately. A second generation never recasts the original
+Alpha as covering the expanded frontier. Current authored files may change
+legitimately before preparation; every current prior manifest/item/task/native
+artifact is then preserved through the next application. Historical input copies
+remain immutable, while later ordinary authoring is not frozen by old snapshots.
+
+With an existing owner overlay, generation 2 requires a fresh actual Root
+`historical-scoped-planning-dispositions` review of the drained current planning
+context. Its usual owner/ledger/prior-plan/source bindings remain required; it
+also carries `generation: 2`, `prior_registry_sha256`, and
+`prior_frontier_sha256`. The latter hashes compact JSON of the existing manifests
+in numeric batch order, each represented exactly as `{path,sha256}` with the raw
+file digest. Its historical-current-input list may reuse only the first review's
+explicit distinctions; it cannot silently reclassify another live obligation.
+Use immutable prior-plan/source/scaffold evidence, rather than binding a canonical
+file whose new-row prerequisite/order edits the fresh Alpha is allowed to make.
+The new generation still receives fresh Luna-max Alpha/apply stages and ordinary
+new Beta authoring; completed prior units and every later full gate stay intact.

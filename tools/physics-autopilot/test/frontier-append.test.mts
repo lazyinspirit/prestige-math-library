@@ -41,7 +41,7 @@ function fixture(t: any, newPairCount = 3) {
     save('research/plan-spec.json', { pages: [...oldPages, ...fresh] });
     save('research/demo-scope-ledger.json', { run: 'demo', baseline_commit: 'original-commit', allow_in_run_dependencies: true, pages: ledger });
     save('research/demo-covers.json', { 'beta-batch-1': ['1'], 'historical-reader': ['55'] });
-    save('research/demo-dispatch/beta-batch-55.result.json', { run: 'demo', label: 'batch-55', ok: true });
+    save('research/demo-dispatch/beta-batch-55.result.json', { run: 'demo', role: 'beta', label: 'batch-55', covers: ['55'], attempt: 1, ok: true });
     save('research/source-dossier.md', 'Actual source-bound design and local proof obligations; not an authored or accepted result.');
     save('research/demo-alpha-step1-drift.md', oldPages.filter(p => p.kind === 'A').map(p => `### ${p.id}\nVERDICT: no-drift\n`).join('\n'));
     const original = { run: 'demo', role: 'alpha', label: 'drift-review', covers: ['drift'], ok: true, attempt: 1 };
@@ -56,7 +56,7 @@ function fixture(t: any, newPairCount = 3) {
             save('research/demo-scope-ledger.json', { run: 'demo', baseline_commit: 'original-commit', allow_in_run_dependencies: true, pages });
         }
         else if (args[0].endsWith('run-tasks.mjs')) {
-            for (let n = 1; n <= 55 + newPairCount; n++)
+            for (let n = 1; n <= readdirSync(dir).filter(n => /^demo-batch-\d+\.pages\.json$/.test(n)).length; n++)
                 save(`research/demo-beta-${n}.task.md`, 'Generated task ' + n);
         }
         else if (args[0].endsWith('batch-dependency-levels.mjs'))
@@ -69,12 +69,13 @@ function fixture(t: any, newPairCount = 3) {
         save(entry.report, entry.pairs.map((id: string) => `### ${id}\n\nThe actual exact source hypotheses and missing local proof obligations were inspected for this new page.\n\nVERDICT: no-drift\n`).join('\n'));
     };
     const native = (entry: any, changes: any = {}) => {
-        const prompt=join(repo,'research/demo-dispatch/alpha-drift-review-append-1.attempt-1.prompt.md');
-        const r = { run: 'demo', role: 'alpha', label: 'drift-review-append-1', covers: ['append-1'], ok: true, attempt: 1, exit_code: 0, started_at: AT, ended_at: AT, prompt, ...changes };
-        for (const n of ['alpha-drift-review-append-1.result.json', 'alpha-drift-review-append-1.attempt-1.result.json']) save('research/demo-dispatch/' + n, r);
-        save('research/demo-dispatch/alpha-drift-review-append-1.attempt-1.prompt.md',read(entry.task).toString());
+        const number = entry.number, label = `drift-review-append-${number}`;
+        const prompt=join(repo,`research/demo-dispatch/alpha-${label}.attempt-1.prompt.md`);
+        const r = { run: 'demo', role: 'alpha', label, covers: [`append-${number}`], ok: true, attempt: 1, exit_code: 0, started_at: AT, ended_at: AT, prompt, ...changes };
+        for (const n of [`alpha-${label}.result.json`, `alpha-${label}.attempt-1.result.json`]) save('research/demo-dispatch/' + n, r);
+        save(`research/demo-dispatch/alpha-${label}.attempt-1.prompt.md`,read(entry.task).toString());
         const current=JSON.parse(read('.physics-autopilot/demo/state.json').toString());
-        current.dispatches['1-append-drift-1:drift-review-append-1']={stage:'1-append-drift-1',role:'alpha',label:r.label,covers:r.covers,attempts:r.attempt,lastExitOk:true,startedAt:AT,endedAt:AT};
+        current.dispatches[`1-append-drift-${number}:${label}`]={stage:`1-append-drift-${number}`,role:'alpha',label:r.label,covers:r.covers,attempts:r.attempt,lastExitOk:true,startedAt:AT,endedAt:AT};
         save('.physics-autopilot/demo/state.json',current);
     };
     return { repo, stateDir, save, read, state, options, invoke, review, native };
@@ -256,7 +257,7 @@ test('old root blocked-section overlay binds its original scope; native composit
     f.save('research/demo-alpha-step1-drift.md', f.read('research/demo-alpha-step1-drift.md').toString().replace('VERDICT: no-drift', 'VERDICT: drift-blocked — exact original missing prerequisite, owner resolution needed.'));
     const receipt = driftOwnerResolutionTemplate(f.repo, 'demo');
     receipt.inputs['research/source-dossier.md'] = driftHash(f.read('research/source-dossier.md'));
-    Object.assign(receipt.resolutions[0], { decision: 'resolved', reason: 'Root inspected the precise original prerequisite and retained the original scope and conditional inputs.', evidence: ['research/source-dossier.md'] });
+    for (const row of receipt.resolutions) Object.assign(row, { decision: 'resolved', reason: 'Root inspected the precise original prerequisite and retained the original scope and conditional inputs.', evidence: ['research/source-dossier.md'] });
     f.save('research/demo-drift-owner-resolutions.json', receipt);
     const baseReceipt = f.read('research/demo-drift-owner-resolutions.json');
     f.save('research/plan-spec.json', current.toString());
@@ -310,16 +311,17 @@ test('blocked supplemental review requires separate source-bound Root dispositio
     f.save('research/demo-append-1-drift-owner-resolutions.json', { ...owner, resolutions: [] });
     assert.throws(() => appendDriftView(f.repo, 'demo'));
 });
-function ownerBase(f: any, withCurrent = false) {
+function ownerBase(f: any, withCurrent = false, count = 1) {
     const prior = f.read('research/prior-plan.json'), current = f.read('research/plan-spec.json');
     f.save('research/plan-spec.json', prior.toString());
-    f.save('research/demo-alpha-step1-drift.md', f.read('research/demo-alpha-step1-drift.md').toString().replace('VERDICT: no-drift', 'VERDICT: drift-blocked — missing original prerequisite requires owner review.'));
+    let remaining = count;
+    f.save('research/demo-alpha-step1-drift.md', f.read('research/demo-alpha-step1-drift.md').toString().replace(/VERDICT: no-drift/g, text => remaining-- > 0 ? 'VERDICT: drift-blocked — missing original prerequisite requires owner review.' : text));
     f.save('research/live-current.md', 'An expressly live obligation.');
     const receipt = driftOwnerResolutionTemplate(f.repo, 'demo');
     const evidence = ['research/source-dossier.md', 'research/demo-batch-55.pages.json', 'research/plan-spec.json', 'research/live-current.md'];
     for (const path of evidence)
         receipt.inputs[path] = driftHash(f.read(path));
-    Object.assign(receipt.resolutions[0], { decision: 'resolved', reason: 'Root freshly reviewed the exact current 55-pair original prerequisites and scientific scope before extension.', evidence: ['research/source-dossier.md'], ...(withCurrent ? { current_inputs: { 'research/plan-spec.json': receipt.inputs['research/plan-spec.json'], 'research/live-current.md': receipt.inputs['research/live-current.md'] } } : {}) });
+    for (const row of receipt.resolutions) Object.assign(row, { decision: 'resolved', reason: 'Root freshly reviewed the exact current 55-pair original prerequisites and scientific scope before extension.', evidence: ['research/source-dossier.md'], ...(withCurrent ? { current_inputs: { 'research/plan-spec.json': receipt.inputs['research/plan-spec.json'], 'research/live-current.md': receipt.inputs['research/live-current.md'] } } : {}) });
     f.save('research/demo-drift-owner-resolutions.json', receipt);
     f.save('research/plan-spec.json', current.toString());
     return receipt;
@@ -493,4 +495,128 @@ test('clarification rejects wrong owner, unknown/dropped targets, invented order
     }
     const unmentioned = clarifiedFixture(t, true);
     assert.throws(() => appendDriftView(unmentioned.repo, 'demo'), /unmentioned/);
+});
+
+function secondGeneration(t: any, withOwner = true) {
+    const f = fixture(t, 7), owner = withOwner ? ownerBase(f, true, 4) : null;
+    const baseReview = 'research/base-disposition-review.json';
+    if (owner) f.save(baseReview, { version: 1, run: 'demo', reviewer: '/root', kind: 'historical-scoped-planning-dispositions', owner_resolution_sha256: owner ? driftHash(f.read('research/demo-drift-owner-resolutions.json')) : null, scope_ledger_sha256: driftHash(f.read('research/demo-scope-ledger.json')), prior_plan_sha256: driftHash(f.read('research/prior-plan.json')), pages: owner?.resolutions.map((r: any) => r.page) ?? [], reason: 'Root distinguishes exact original 55-pair planning dispositions from the seven new prerequisite subjects; full native authoring remains required.', historical_current_inputs: ['research/plan-spec.json'], evidence: [{ path: 'research/source-dossier.md', sha256: driftHash(f.read('research/source-dossier.md')) }] });
+    const first = appendFrontier({ ...f.options, ...(owner ? {baseDispositionReview:baseReview} : {}) });
+    f.review(first); f.native(first); applyAppendReview(f.repo, 'demo', 1, { invoke: f.invoke });
+    const state = JSON.parse(f.read('.physics-autopilot/demo/state.json').toString());
+    for (const kind of ['drift', 'apply']) state.stages[`1-append-${kind}-1`] = { enteredAt: AT, doneAt: AT, gatesPassedAt: AT, fixRounds: 0 };
+    state.dispatches['1-append-apply-1:drift-append-apply-1'] = { stage: '1-append-apply-1', role: 'tool', label: 'drift-append-apply-1', covers: ['append-1'], attempts: 1, startedAt: AT, endedAt: AT, lastExitOk: true };
+    f.save('.physics-autopilot/demo/state.json', state);
+    for (let batch = 1; batch <= 62; batch++) if (!existsSync(join(f.repo, `research/demo-dispatch/beta-batch-${batch}.result.json`))) f.save(`research/demo-dispatch/beta-batch-${batch}.result.json`, { run: 'demo', role: 'beta', label: `batch-${batch}`, covers: [String(batch)], ok: true, attempt: 1 });
+    f.save('research/demo-dispatch/tool-drift-append-apply-1.result.json', { run: 'demo', role: 'tool', label: 'drift-append-apply-1', ok: true, covers: ['append-1'], attempt: 1 });
+    // Legitimate old and first-supplement authoring BEFORE the next drained boundary.
+    f.save('items/def-old-55-0.md', f.read('items/def-old-55-0.md').toString() + '\nCurrent source after legitimate first-generation authoring.\n');
+    const old = JSON.parse(f.read('research/demo-batch-55.pages.json').toString()); old[0].items[0].statement = 'A legitimate current repaired old claim.'; f.save('research/demo-batch-55.pages.json', old);
+    for (let b = 56; b <= 62; b++) {
+        const rows = JSON.parse(f.read(`research/demo-batch-${b}.pages.json`).toString());
+        for (const page of rows) { page.items = [{ id: 'def-authored-' + page.id, kind: 'definition', domain: 'mathematics', statement: 'Current independently authored declaration.', deps: [] }]; f.save('items/' + page.items[0].id + '.md', `---\nid: ${page.items[0].id}\nkind: definition\ndomain: mathematics\nstatus: draft\ndeps: []\n---\n## Definition\nCurrent authored prerequisite.\n`); }
+        f.save(`research/demo-batch-${b}.pages.json`, rows);
+    }
+    // Completed processes retain actual deliverables; escalated fixture rows do
+    // not pretend that authoring coverage is independent mathematical acceptance.
+    for (let batch = 1; batch <= 62; batch++) {
+        const rows = JSON.parse(f.read(`research/demo-batch-${batch}.pages.json`).toString());
+        f.save(`research/demo-batch-${batch}.coverage.json`, { pages: [] });
+        f.save(`research/demo-batch-${batch}.proof-contracts.json`, {});
+        for (const page of rows) {
+            f.save(`library/math/${page.id}.md`, `---\npage: ${page.id}\nstatus: draft\nitems: ${JSON.stringify(page.items.map((i: any) => i.id))}\n---\n`);
+            for (const item of page.items) {
+                if (!existsSync(join(f.repo, 'items/' + item.id + '.md'))) f.save('items/' + item.id + '.md', `---\nid: ${item.id}\nkind: definition\ndomain: mathematics\nstatus: draft\ndeps: []\n---\n## Definition\nCurrent authored source.\n`);
+                f.save(`research/demo-step1-${item.id}.json`, { version: 1, run: 'demo', item: item.id, decision: 'escalated', owner: false, reason: 'Fixture author process completed; scientific review remains separate.', dependencies: [] });
+            }
+        }
+    }
+    const current = JSON.parse(f.read('research/plan-spec.json').toString());
+    f.save('research/prior-plan-2.json', current);
+    const pairs = Array.from({ length: 5 }, (_, i) => 'analytic-' + i);
+    for (const [index, id] of pairs.entries()) for (const kind of ['A', 'B']) current.pages.push({ id: kind === 'A' ? id : id + '-examples', title: id, kind, category: 'math', library: 'mathematics', companion: kind === 'A' ? id + '-examples' : id, order: 102.9 + index / 100, requires: kind === 'A' ? ['new-a'] : [id], items: [{ id: 'def-' + id + (kind === 'B' ? '-example' : ''), kind: 'definition', domain: 'mathematics', statement: 'Exact new analytic declaration awaiting complete native authoring.', deps: [] }] });
+    f.save('research/plan-spec.json', current);
+    f.save('research/second-source-dossier.md', 'Actual new analytic prerequisite source and scope review; it is not accepted native authoring.');
+    const reviewPath = 'research/second-planning-disposition-review.json';
+    const priorFrontier = Array.from({ length: 62 }, (_, i) => { const path = `research/demo-batch-${i + 1}.pages.json`; return { path, sha256: driftHash(f.read(path)) }; });
+    const review = { version: 1, run: 'demo', generation: 2, prior_frontier_sha256: driftHash(JSON.stringify(priorFrontier)), prior_registry_sha256: driftHash(f.read('research/demo-frontier-appends.json')), reviewer: '/root', kind: 'historical-scoped-planning-dispositions', owner_resolution_sha256: owner ? driftHash(f.read('research/demo-drift-owner-resolutions.json')) : null, scope_ledger_sha256: driftHash(f.read('research/demo-scope-ledger.json')), prior_plan_sha256: driftHash(f.read('research/prior-plan-2.json')), pages: owner?.resolutions.map((r: any) => r.page) ?? [], reason: 'Root reviewed the exact current 62-pair context and five new analytic declarations; original 55 and prior seven Alpha coverage remain separately historical.', historical_current_inputs: ['research/plan-spec.json'], evidence: [{ path: 'research/second-source-dossier.md', sha256: driftHash(f.read('research/second-source-dossier.md')) }] };
+    f.save(reviewPath, review);
+    return { ...f, first, owner, reviewPath, review2: review, options2: { ...f.options, pairs, priorPlan: 'research/prior-plan-2.json', sourceEvidence: ['research/second-source-dossier.md'], baseDispositionReview: owner ? reviewPath : undefined } };
+}
+test('62 -> 67 authenticates original four historical dispositions and first seven native reviews while preserving current 62 bytes', async t => {
+    const f = secondGeneration(t);
+    const paths = [...Array.from({ length: 62 }, (_, i) => `research/demo-batch-${i + 1}.pages.json`), ...Array.from({ length: 62 }, (_, i) => `research/demo-beta-${i + 1}.task.md`), ...readdirSync(join(f.repo, 'items')).map(n => 'items/' + n), ...readdirSync(join(f.repo, 'research/demo-dispatch')).map(n => 'research/demo-dispatch/' + n), f.first.report, f.first.task, `${f.first.archive}/review-applied.json`, 'research/demo-drift-owner-resolutions.json'];
+    const before = paths.map(path => [path, f.read(path)] as const), state = f.read('.physics-autopilot/demo/state.json');
+    const second = appendFrontier(f.options2);
+    assert.deepEqual(second.batches, ['63', '64', '65', '66', '67']);
+    assert.equal(second.baseResolution, null, 'original overlay is not rebound to62');
+    assert.ok(second.priorReviewInputs.some((r: any) => r.path === f.first.report));
+    assert.ok(second.priorReviewInputs.some((r: any) => r.path === 'research/live-current.md'));
+    assert.deepEqual(f.read('.physics-autopilot/demo/state.json'), state);
+    assert.equal(appendBaseContext(f.repo, 'demo').frontier.length, 110);
+    assert.equal(validateDriftOwnerResolutions(f.repo, 'demo').resolved.size, 4);
+    assert.ok(f.read(second.task).toString().includes('the 10 new canonical plan rows'));
+    f.review(second);
+    assert.throws(() => applyAppendReview(f.repo, 'demo', 2, { invoke: f.invoke }), /ENOENT/);
+    f.native(second); const nativeState = f.read('.physics-autopilot/demo/state.json');
+    applyAppendReview(f.repo, 'demo', 2, { invoke: f.invoke });
+    assert.deepEqual(f.read('.physics-autopilot/demo/state.json'), nativeState);
+    for (const [path, bytes] of before) assert.deepEqual(f.read(path), bytes, path);
+    assert.equal([...appendDriftView(f.repo, 'demo').text.matchAll(/^### /gm)].length, 67);
+    const graph = JSON.parse(f.read('research/demo-batch-dependency-levels.json').toString()); assert.equal(graph.batches.length, 67); assert.deepEqual(graph.batches.find((b: any) => b.batch === '3').requires, ['2']);
+    const mod = await import('../stages/mathlib.mts'); const ctx: any = { repo: f.repo, run: 'demo', dispatchDir: join(f.repo, 'research/demo-dispatch'), config: { stateDir: f.stateDir }, doctor: true };
+    const stages = mod.stagesForRun(ctx); assert.equal(stages.find((s: any) => s.id === '1-append-drift-2').modelProfile, 'gpt-6-luna-max'); assert.deepEqual(stages.find((s: any) => s.id === '1-scaffold').units(ctx).slice(-5), ['63', '64', '65', '66', '67']);
+    const { State, statePath } = await import('../src/state.mts'), { Executor } = await import('../src/executor.mts');
+    // Remove second fixture-native receipts to inspect real saved prefix selection.
+    const secondResult = f.read('research/demo-dispatch/alpha-drift-review-append-2.result.json');
+    rmSync(join(f.repo, 'research/demo-dispatch/alpha-drift-review-append-2.result.json'));
+    const native = new State(statePath(f.stateDir)).init('demo');
+    const executor = new Executor({ config: { ...ctx.config, repo: f.repo, run: 'demo', dispatchDir: ctx.dispatchDir, coversMap: {}, concurrency: 20, globalConcurrency: 20 } as any, stages: stages.filter((s: any) => s.id !== '1-baseline'), state: native, adapter: {} as any, reporter: { notify() {}, write() {} } as any });
+    assert.equal(executor.currentStage().stage?.id, '1-append-drift-2');
+    const scaffold = stages.find((s: any) => s.id === '1-scaffold');
+    const covered = executor.unitsComplete(scaffold);
+    assert.equal(covered.size, 62);
+    for (let batch = 1; batch <= 62; batch++) assert.ok(covered.has(String(batch)));
+    for (let batch = 63; batch <= 67; batch++) assert.ok(!covered.has(String(batch)));
+    f.save('research/demo-dispatch/alpha-drift-review-append-2.result.json', secondResult.toString());
+    f.save('items/def-old-55-0.md', f.read('items/def-old-55-0.md').toString() + '\nLegitimate later source authoring after second application.\n');
+    assert.doesNotThrow(() => appendDriftView(f.repo, 'demo'));
+});
+test('second generation rejects stale previous evidence, live obligations, incomplete native prefix and missing current Root review', t => {
+    for (const mode of ['archive', 'report', 'coverage', 'result', 'applied', 'prompt', 'live', 'stage', 'owner', 'registry', 'frontier', 'review-missing', 'reclassification', 'plan', 'writer', 'controller', 'unpaused', 'later']) {
+        const f = secondGeneration(t);
+        if (mode === 'archive') f.save(f.first.baseResolution.inputPaths['research/demo-batch-55.pages.json'].path, 'Changed archived bytes');
+        if (mode === 'report') f.save(f.first.report, f.read(f.first.report).toString() + 'Changed prior native report.');
+        if (mode === 'result') f.save('research/demo-dispatch/alpha-drift-review-append-1.result.json', '{}');
+        if (mode === 'coverage') f.save(f.first.report, f.read(f.first.report).toString().split('### new-g')[0]);
+        if (mode === 'applied') { const path = `${f.first.archive}/review-applied.json`, row = JSON.parse(f.read(path).toString()); row.reportSha256 = '0'.repeat(64); f.save(path, row); }
+        if (mode === 'prompt') f.save('research/demo-dispatch/alpha-drift-review-append-1.attempt-1.prompt.md', 'Changed native prompt.');
+        if (mode === 'live') f.save('research/live-current.md', 'Changed expressly live evidence.');
+        if (mode === 'stage') { const s = JSON.parse(f.read('.physics-autopilot/demo/state.json').toString()); s.stages['1-append-apply-1'].gatesPassedAt = null; f.save('.physics-autopilot/demo/state.json', s); }
+        if (mode === 'owner' || mode === 'registry' || mode === 'frontier') f.save(f.reviewPath, { ...f.review2, ...(mode === 'owner' ? { reviewer: 'alpha' } : mode === 'frontier' ? { prior_frontier_sha256: '0'.repeat(64) } : { prior_registry_sha256: '0'.repeat(64) }) });
+        if (mode === 'reclassification') f.save(f.reviewPath, { ...f.review2, historical_current_inputs: [...f.review2.historical_current_inputs, 'research/live-current.md'] });
+        if (mode === 'plan') { const plan = JSON.parse(f.read('research/plan-spec.json').toString()); plan.pages[0].requires = ['old-2']; f.save('research/plan-spec.json', plan); }
+        if (mode === 'review-missing') delete f.options2.baseDispositionReview;
+        if (mode === 'writer') f.options2.scan = () => ({ controller: [], preflight: [], writer: [123] });
+        if (mode === 'controller') f.save('.physics-autopilot/demo/.controller.lock', { pid: process.pid });
+        if (mode === 'later') f.save('.physics-autopilot/demo/state.json', { ...f.state, stage: '2-scope-review' });
+        if (mode === 'unpaused') { const s = JSON.parse(f.read('.physics-autopilot/demo/state.json').toString()); s.paused = false; f.save('.physics-autopilot/demo/state.json', s); }
+        assert.throws(() => appendFrontier(f.options2), undefined, mode);
+        assert.equal(existsSync(join(f.repo, 'research/demo-batch-63.pages.json')), false);
+    }
+});
+test('second transaction freezes current authored source, manifest and explicit live inputs only through its application', t => {
+    for (const target of ['items/def-old-55-0.md', 'items/def-authored-new-a.md', 'research/demo-batch-55.pages.json', 'research/demo-batch-62.pages.json', 'research/live-current.md']) {
+        const f = secondGeneration(t), second = appendFrontier(f.options2); f.review(second); f.native(second);
+        f.save(target, f.read(target).toString() + '\nUnauthorized concurrent change.\n');
+        assert.throws(() => applyAppendReview(f.repo, 'demo', 2, { invoke: f.invoke }), undefined, target);
+    }
+});
+
+test('a later append without original blocked sections preserves an absent overlay instead of inventing owner coverage', t => {
+    const f = secondGeneration(t, false), second = appendFrontier(f.options2);
+    assert.ok(second.priorReviewInputs.some((r: any) => r.path === 'research/demo-drift-owner-resolutions.json' && r.sha256 === null));
+    f.review(second); f.native(second); applyAppendReview(f.repo, 'demo', 2, { invoke: f.invoke });
+    assert.equal([...appendDriftView(f.repo, 'demo').text.matchAll(/^### /gm)].length, 67);
+    assert.equal(existsSync(join(f.repo, 'research/demo-drift-owner-resolutions.json')), false);
 });

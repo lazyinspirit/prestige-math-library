@@ -101,7 +101,11 @@ function noOldPlanChanges(root: string, entry: any) {
         fail('canonical plan changed outside appended pages; no global sync is authorized');
 }
 function oldManifestsUnchanged(root: string, entry: any) {
-    for (const ref of [...entry.protectedItems ?? [], ...entry.protectedResearch ?? [], ...entry.protectedNative ?? []]) {
+    for (const ref of [...entry.protectedItems ?? [], ...entry.protectedResearch ?? [], ...entry.protectedNative ?? [], ...entry.priorReviewInputs ?? []]) {
+        if (ref.sha256 === null) {
+            if (existsSync(join(root,ref.path))) fail(`previously absent review input appeared: ${ref.path}`);
+            continue;
+        }
         if (ref.archive)
             boundAppendFile(root, ref.archive);
         if (hash(bytes(join(root, ref.path))) !== ref.sha256)
@@ -124,7 +128,7 @@ export function appendFrontier({ repo, run, stateDir, pairs, priorPlan, sourceEv
     if (!safe.test(run) || !Array.isArray(pairs) || !pairs.length || pairs.some((p: string) => !safe.test(p)) || new Set(pairs).size !== pairs.length)
         fail('safe unique explicit pairs required');
     assertNoAppendTransaction(stateDir);
-    inactive(repo, run, stateDir, scan);
+    const initialState = inactive(repo, run, stateDir, scan);
     const names = manifestFiles(repo, run), old = names.map(n => ({ path: `research/${n}`, bytes: bytes(join(repo, 'research', n)), pages: read(join(repo, 'research', n)) }));
     if (!old.length || names.some((n, i) => !n.endsWith(`-batch-${i + 1}.pages.json`)) || old.some(m => !Array.isArray(m.pages) || m.pages.length !== 2))
         fail('contiguous existing one-pair manifests required');
@@ -135,6 +139,10 @@ export function appendFrontier({ repo, run, stateDir, pairs, priorPlan, sourceEv
     const registry = appendRegistry(repo, run), number = registry.appends.length + 1;
     if (registry.appends.some((e: any) => !existsSync(join(repo, e.archive, 'review-applied.json'))))
         fail('prior supplemental review not applied');
+    for (const e of registry.appends) for (const kind of ['drift','apply']) {
+        const stage = initialState.stages?.[`1-append-${kind}-${e.number}`];
+        if (!stage?.doneAt || !stage.gatesPassedAt) fail('prior supplemental native stages not closed');
+    }
     const spec = loadPlan(repo), by = new Map(spec.pages.map((p: any) => [p.id, p])), newPages: string[] = [];
     for (const id of pairs) {
         const a: any = by.get(id), b: any = a && by.get(a.companion);
@@ -169,11 +177,14 @@ export function appendFrontier({ repo, run, stateDir, pairs, priorPlan, sourceEv
     const identity = (rows: any[]) => rows.map(({ id, kind, batch }: any) => ({ id, kind, batch: String(batch) })).sort((a, b) => a.id.localeCompare(b.id));
     if (ledger.run !== run || JSON.stringify(identity(ledger.pages)) !== JSON.stringify(identity(old.flatMap((m, i) => m.pages.map((p: any) => ({ ...p, batch: i + 1 }))))))
         fail('scope ledger differs from current ownership');
-    validateDriftOwnerResolutionsBeforeAppend(repo, run, priorPlan, newPages);
+    const priorReview: any = validateDriftOwnerResolutionsBeforeAppend(repo, run, priorPlan, newPages);
     const ownerRel = `research/${run}-drift-owner-resolutions.json`;
     const baseOwner = existsSync(join(repo, ownerRel)) ? read(join(repo, ownerRel)) : null;
     const currentKeys = [...new Set(baseOwner?.resolutions.flatMap((r: any) => Object.keys(r.current_inputs ?? {})) ?? [])];
-    let historicalCurrentInputs: string[] = [];
+    const inheritedHistorical: string[] = registry.appends[0]?.baseResolution?.historicalCurrentInputs ?? [];
+    let historicalCurrentInputs: string[] = [...inheritedHistorical];
+    if (registry.appends.length && baseOwner && !baseDispositionReview)
+        fail('fresh Root planning-disposition review of the current prior frontier required');
     const dispositionEvidence: any[] = [];
     const boundEvidencePaths = new Set<string>([...sourceEvidence, ...(baseDispositionReview ? [baseDispositionReview] : []), ...Object.keys(baseOwner?.inputs ?? {}), ...currentKeys]);
     if (baseDispositionReview) {
@@ -185,12 +196,17 @@ export function appendFrontier({ repo, run, stateDir, pairs, priorPlan, sourceEv
             || !Array.isArray(review.historical_current_inputs) || review.historical_current_inputs.some((p: string) => !p.startsWith('research/') || p === 'research/math-imports.json' || p.includes('-original-maintenance') || !currentKeys.includes(p))
             || !Array.isArray(review.evidence) || !review.evidence.length)
             fail('invalid actual Root planning-disposition review');
+        if (registry.appends.length && (review.generation !== number
+            || review.prior_frontier_sha256 !== hash(JSON.stringify(old.map(m => ({path:m.path,sha256:hash(m.bytes)}))))
+            || review.prior_registry_sha256 !== hash(bytes(join(repo, `research/${run}-frontier-appends.json`)))
+            || review.historical_current_inputs.some((p: string) => !inheritedHistorical.includes(p))))
+            fail('current generation planning review must bind prior registry without reclassifying old live obligations');
         for (const ref of review.evidence) {
             boundAppendFile(repo, ref);
             dispositionEvidence.push(ref);
             boundEvidencePaths.add(ref.path);
         }
-        historicalCurrentInputs = review.historical_current_inputs;
+        historicalCurrentInputs = [...new Set([...inheritedHistorical, ...review.historical_current_inputs])];
     }
     if (currentKeys.includes('research/plan-spec.json') && !historicalCurrentInputs.includes('research/plan-spec.json'))
         fail('live plan obligation needs genuine Root historical planning-disposition review before extension');
@@ -244,10 +260,10 @@ export function appendFrontier({ repo, run, stateDir, pairs, priorPlan, sourceEv
             ref.archive = reference(copy);
         }
         const ownerPath = `research/${run}-drift-owner-resolutions.json`;
-        if (existsSync(join(repo, ownerPath)) && read(join(repo, ownerPath)).plan_sha256 !== hash(bytes(priorPlanPath)))
+        if (!registry.appends.length && existsSync(join(repo, ownerPath)) && read(join(repo, ownerPath)).plan_sha256 !== hash(bytes(priorPlanPath)))
             fail('prior plan must authenticate original blocked-section owner resolution');
         let baseResolution = null;
-        if (baseOwner) {
+        if (baseOwner && !registry.appends.length) {
             mkdirSync(join(repo, archive, 'owner-inputs'));
             const inputPaths: any = {};
             for (const [input, expected] of Object.entries(baseOwner.inputs)) {
@@ -263,10 +279,26 @@ export function appendFrontier({ repo, run, stateDir, pairs, priorPlan, sourceEv
             }
             baseResolution = { receipt: archived(ownerPath), inputPaths, historicalCurrentInputs, review: baseDispositionReview ? reference(baseDispositionReview) : null };
         }
-        const fixedInputs = [reference(report), reference(result), reference(attempt), reference(basePlan), archived(ledgerPath), ...sourceEvidence.map(reference), ...dispositionEvidence, ...(baseDispositionReview ? [reference(baseDispositionReview)] : []), ...(existsSync(join(repo, ownerPath)) ? [reference(ownerPath)] : [])];
+        // Freeze actual prior review inputs only for this transaction; archive
+        // their authenticated bytes without relabelling old reviews as new scope.
+        const priorReviewInputs: any[] = [];
+        if (priorReview.priorInputs?.length) {
+            mkdirSync(join(repo, archive, 'prior-review-inputs'));
+            for (const path of priorReview.priorInputs) {
+                if (path === `research/${run}-frontier-appends.json`) continue;
+                if (!/^(research|items|library)\//.test(path) || path.split('/').includes('..')) fail('unsafe prior review input');
+                if (!existsSync(join(repo,path))) { priorReviewInputs.push({path,sha256:null}); continue; }
+                if (realpathSync(join(repo,path)) !== resolve(repo,path)) fail('unsafe prior review input');
+                regular(join(repo,path));
+                const ref = reference(path), copy = `${archive}/prior-review-inputs/${ref.sha256}-${path.split('/').pop()}`;
+                writeFileSync(join(repo,copy),bytes(join(repo,path)));
+                priorReviewInputs.push({...ref,archive:reference(copy)});
+            }
+        }
+        const fixedInputs = [reference(report), reference(result), reference(attempt), reference(basePlan), archived(ledgerPath), ...priorReviewInputs.filter(ref => ref.archive).map(ref => ref.archive), ...sourceEvidence.map(reference), ...dispositionEvidence, ...(baseDispositionReview ? [reference(baseDispositionReview)] : []), ...(existsSync(join(repo, ownerPath)) ? [reference(ownerPath)] : [])];
         const newOwnership = groups.flatMap((group: any, i: number) => group.flatMap((id: string) => [id, (by.get(id) as any).companion].map(page => ({ id: page, kind: page === id ? 'A' : 'B', batch: String(first + i) }))));
         const entry: any = { number, run, newOwnership, stateDir: relative(repo, stateDir), at: now().toISOString(), archive, pairs, newPages, batches: groups.map((_: any, i: number) => String(first + i)),
-            priorPairs, oldManifests, baseResolution, protectedItems, protectedResearch, protectedNative, newDeclarations: spec.pages.filter((p: any) => newPages.includes(p.id)), basePlan: reference(basePlan), baseLedger: archived(ledgerPath), fixedInputs,
+            priorPairs, oldManifests, baseResolution, priorReviewInputs, priorViewSha256: priorReview.priorViewSha256 ?? null, protectedItems, protectedResearch, protectedNative, newDeclarations: spec.pages.filter((p: any) => newPages.includes(p.id)), basePlan: reference(basePlan), baseLedger: archived(ledgerPath), fixedInputs,
             report: `research/${run}-alpha-step1-append-${number}-drift.md`, task: `research/${run}-alpha-step1-append-${number}-drift.task.md`,
             evidence: `research/${run}-append-${number}-drift-evidence.json`, stateBeforeSha256: stateHash };
         writeFileSync(join(repo, archive, 'prepared.json'), JSON.stringify(entry, null, 2) + '\n');

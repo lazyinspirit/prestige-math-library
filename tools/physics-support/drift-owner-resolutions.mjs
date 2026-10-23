@@ -3,7 +3,7 @@ import { existsSync, readFileSync, readdirSync, realpathSync } from 'node:fs';
 import { resolve, join, relative, isAbsolute } from 'node:path';
 import { createHash } from 'node:crypto';
 import { pathToFileURL } from 'node:url';
-import { appendBaseContext } from './frontier-append-evidence.mjs';
+import { appendBaseContext, appendDriftView } from './frontier-append-evidence.mjs';
 
 export const driftHash = bytes => createHash('sha256').update(bytes).digest('hex');
 const readJSON = file => JSON.parse(readFileSync(file, 'utf8'));
@@ -128,6 +128,14 @@ export function validateDriftOwnerResolutions(root, run) {
 export function validateDriftOwnerResolutionsBeforeAppend(root,run,priorPlan,newPages) {
   const specPath=safePath(root,priorPlan),prior=readJSON(specPath),current=readJSON(join(root,'research/plan-spec.json'));
   if(JSON.stringify(prior)!==JSON.stringify({...current,pages:current.pages.filter(p=>!newPages.includes(p.id))}))fail('unrelated append plan change');
+  const historical = appendBaseContext(root,run);
+  if (historical) {
+    // Original native coverage remains the original frontier. Authenticate every
+    // completed supplemental review separately; current live obligations survive.
+    const checked = checkOwnerResolutions(root,run,historical);
+    const view = appendDriftView(root,run);
+    return {...checked,priorInputs:[...new Set([...checked.inputs,...view.inputs])],priorViewSha256:driftHash(view.text)};
+  }
   return checkOwnerResolutions(root,run,{frontier:frontier(root,run),specPath,preparing:true,inputPaths:{'research/plan-spec.json':priorPlan}});
 }
 if (process.argv[1] && import.meta.url === pathToFileURL(realpathSync(resolve(process.argv[1]))).href) {
