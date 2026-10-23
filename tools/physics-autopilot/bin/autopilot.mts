@@ -32,6 +32,7 @@ import { makeExecAdapter } from '../src/adapters/exec.mts';
 import { writeCommand } from '../src/control.mts';
 import { waves, nextBuildableSet, packBatches, writeManifests, driftEvidence, unsatisfiableEdges } from '../src/frontier.mts';
 import { MAX_RUN_PAIRS } from '../src/capacity.mjs';
+import { appendFrontier, assertNoAppendTransaction } from '../src/frontier-append.mts';
 import { doctor } from '../src/doctor.mts';
 import { writeBatchDependencyLevels } from '../../physics-support/batch-dependency-levels.mjs';
 import { formatProblems } from '../src/spec.mts';
@@ -317,6 +318,14 @@ switch (cmd) {
     const { spawnSync } = await import('node:child_process');
     const run = opt('run') ?? die('--run is required');
     const pairsArg = opt('pairs');
+    if (has('append')) {
+      if (has('force') || has('allow-unbuildable') || (opt('cap') && Number(opt('cap')) !== 1)) die('append refuses force, unbuildable waiver or repacking');
+      if (!pairsArg || ['next','wave1'].includes(pairsArg)) die('append requires explicit new A-page IDs');
+      const entry = appendFrontier({repo,run,stateDir:loadConfig().stateDir,pairs:pairsArg.split(',').map((id:string)=>id.trim()),
+        priorPlan:opt('prior-plan')??die('--prior-plan is required'),baseDispositionReview:opt('base-disposition-review'),sourceEvidence:(opt('source-evidence')??'').split(',').filter(Boolean),evidence:driftEvidence,buildability:unsatisfiableEdges});
+      console.log(`Physics native append ${entry.number}: batches ${entry.batches.join(', ')}; original history unchanged. Resume for fresh supplemental Alpha review.`);
+      break;
+    }
     const freshStatementRun = isFreshStatementRun(repo, run, stateDir);
     let pages;
     if (pairsArg === 'next') {
@@ -476,6 +485,7 @@ switch (cmd) {
   }
 
   case 'start': {
+    assertNoAppendTransaction(loadConfig().stateDir);
     const run = opt('run');
     // Validate BEFORE detaching. A spec defect found by the detached child is a
     // blocker in a log nobody is reading yet; found here it is a message on the

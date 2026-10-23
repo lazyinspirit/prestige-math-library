@@ -129,6 +129,14 @@ a nonempty explicit item selection; a bare invocation checks the whole library.
 before loading renderers or collecting content. Pass explicit item/page paths
 to keep a render check within the current scope.
 
+The physics `fwdcheck` plan-order check permits a B page to require its own A
+page at the same finite numeric order only when the canonical plan names unique,
+reciprocal A/B companions with the same category and library. An A-to-B
+requirement, shared or duplicate companion identity, unrelated equal-order
+prerequisite, or later prerequisite remains an error. This matches the canonical
+pair representation without changing item forward-reference, spine, or cycle
+checks. Use `--items-file` for the actual nonempty frontier selection.
+
 ## Owner-requested Step-1 author continuation
 
 An operationally successful author process can leave actual inventory or authored
@@ -160,6 +168,78 @@ continuation for the same unit is refused, and an unresolved result escalates to
 the owner. Closed stages cannot be reopened by this command. The CLI only writes a
 control request; upgrading controller code and supervising restart/resume remain
 owner operations.
+
+## Guarded prerequisite append during Step 1
+
+An explicitly owner-approved prerequisite extension may append pairs while the
+original Step 1 remains unclosed. Stop the controller after pausing new dispatch
+and draining **all** native/adopted writers. Every later step must be unstarted.
+Archive the prior canonical plan before registering only the new reciprocal A/B
+rows, with complete proposed item declarations and actual source/design dossiers.
+Do not transcribe the old frontier from a stale plan or repack its batch IDs.
+
+The physics native planner supports an explicit append transaction:
+
+```bash
+node tools/tsx-run.mjs tools/physics-autopilot/bin/autopilot.mts plan --append \
+  --run RUN --state-dir .physics-autopilot/RUN --pairs NEW_A,NEW_B,NEW_C \
+  --prior-plan research/EXACT_PRIOR_PLAN.json \
+  --source-evidence research/EXACT_DESIGN.json,research/EXACT_SOURCE_DOSSIER.md \
+  --base-disposition-review research/EXACT_ROOT_PLANNING_DISPOSITION_REVIEW.json
+```
+
+This does not write native state or acceptance. It validates the paused/drained
+boundary, pair cap, exact ownership, new-scope buildability, and plan projection;
+archives original manifests, source/task/history bytes and review inputs; appends
+fresh batch IDs; and regenerates the scope ledger, covers, planning groups,
+new tasks and last valid dependency graph. Existing manifest/item/task bytes and
+native drift report/results remain unchanged. An active or interrupted append
+lock blocks another preparation and controller start. Both observed native
+controller lock names (`.controller.lock` and `controller.lock`) are checked.
+The exact read-only `RUN-supervision-checkpoint.json` may advance during review;
+if explicitly bound as source or owner evidence it remains immutable. No other
+run-file preservation rule changes. Failed preparation restores its generated
+files and retains a failure archive for inspection.
+
+Original blocked-section owner dispositions must first be genuinely rechecked
+against current original-frontier evidence. Stale input hashes fail before any
+append mutation. The archive then authenticates historical inputs, so later
+legitimate authoring does not retroactively alter that review. Explicit
+`current_inputs` remain live obligations. Reclassifying a research planning input
+as historical requires a separate actual Root review, never a mechanical hash
+refresh. The optional `--base-disposition-review` file has version 1, `run`,
+`reviewer: /root`, `kind: historical-scoped-planning-dispositions`, exact
+`owner_resolution_sha256`, `scope_ledger_sha256`, `prior_plan_sha256`, the original
+resolved `pages`, a substantive `reason`, the explicitly reclassified
+`historical_current_inputs` subset, and nonempty `{path, sha256}` source evidence.
+It is required when extending a plan recorded as an explicitly current obligation.
+Mathematical source obligations cannot be reclassified by this planning route.
+
+On the owner's guarded restart, two native internal stages precede ordinary
+scaffolding: `1-append-drift-N` dispatches a fresh physics Luna-max Alpha for
+exactly the new A pages, and `1-append-apply-N` applies that review only to the
+new batch metadata. Original units and completed stage history are retained.
+Both joins require ordinary owner formatting/metadata receipts for exactly the
+new proposed declarations; original items remain context. This avoids requiring
+a missing consumer proof before planning its prerequisites. The source and
+low-homotopy dossiers are review inputs, not accepted authored proofs.
+
+The fresh report is `research/RUN-alpha-step1-append-N-drift.md`; its genuine
+current/immutable-attempt native results must match before application. The
+report may correct only new-row prerequisite/order fields and cannot drop or
+rewrite proposed item scopes. A blocked supplemental review stays a hold unless
+Root supplies a separate source-bound
+`research/RUN-append-N-drift-owner-resolutions.json` tied to that actual new
+report/result and its exact blocked sections. It grants no old-report rewrite
+or fabricated native coverage. The ordinary drift gate reads an authenticated,
+separately attributed composite view; it never modifies the original report.
+
+After application, the new batches still require complete ordinary authoring,
+readiness, independent review and all later gate batteries. Any missing original
+consumer carrier or newly needed consumer edge is a separately preserved,
+explicitly authorized repair; append itself never changes an old batch. Do not
+use ordinary `drift-apply`, a global plan sync, `plan --force`, or hand-written
+native state to implement this extension.
 
 ## Cross-batch dependency inputs
 

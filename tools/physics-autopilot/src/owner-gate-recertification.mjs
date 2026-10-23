@@ -4,6 +4,7 @@ import { existsSync, readFileSync, readdirSync, mkdirSync, writeFileSync, rename
 import { basename, dirname, join, resolve } from 'node:path';
 import { createHash, randomUUID } from 'node:crypto';
 import { validateDriftOwnerResolutions } from '../../physics-support/drift-owner-resolutions.mjs';
+import { appendRegistry, appendDriftView } from '../../physics-support/frontier-append-evidence.mjs';
 import { frontierGateScope } from '../../physics-support/frontier-gate-scope.mjs';
 import { markdownFiles, readItem } from '../../physics-support/physics-content.mjs';
 import { originalMaintenancePath } from '../../physics-support/original-maintenance.mjs';
@@ -33,7 +34,8 @@ function filesBelow(dir) {
  * Absent pre-author carriers are represented by their manifest claim, never by
  * an invented proof. Prerequisite carriers are context, not additional subjects. */
 export function gateReviewSnapshot(ctx, gates, stages) {
-  const planOnly = stages.every(id => /^(?:0-|1-drift(?:-apply)?$)/.test(id));
+  const appendOnly = stages.length > 0 && stages.every(id => /^1-append-(?:drift|apply)-\d+$/.test(id));
+  const planOnly = appendOnly || stages.every(id => /^(?:0-|1-drift(?:-apply)?$)/.test(id));
   const scope = frontierGateScope(ctx, { requireItemFiles: false, allowEmptyItems: planOnly });
   // Union only actual native selectors. A descriptor without an explicit
   // adapter scope uses the current manifests; explicit frozen IDs survive
@@ -46,6 +48,22 @@ export function gateReviewSnapshot(ctx, gates, stages) {
   const manifests = readdirSync(research).filter(name => new RegExp(`^${ctx.run}-batch-\\d+\\.pages\\.json$`).test(name)).sort();
   const pages = manifests.flatMap(name => readJSON(join(research, name)));
   const planned = new Map(pages.flatMap(page => page.items).map(item => [item.id, item]));
+  let appendPages = null;
+  if (appendOnly) {
+    const generations = new Set(stages.map(id => Number(id.match(/-(\d+)$/)[1])));
+    appendPages = new Set(appendRegistry(ctx.repo, ctx.run).appends.filter(e => generations.has(e.number)).flatMap(e => e.newPages));
+    if (!appendPages.size) throw Error('Unknown append planning scope');
+    const declared = readJSON(join(research, 'plan-spec.json')).pages.filter(p => appendPages.has(p.id));
+    for (const page of declared) for (const item of page.items ?? []) {
+      if (!item?.id || !Array.isArray(item.deps) || !item.kind || !item.statement?.trim()) throw Error('Malformed appended planned declaration');
+      if (!planned.has(item.id)) planned.set(item.id, item);
+    }
+    const declaredIds = new Set(declared.flatMap(p => p.items.map(i => i.id)));
+    if (!scope.items.size || ![...scope.items].every(id => declaredIds.has(id))) throw Error('Append owner subjects must equal the new declared inventory');
+    if (scope.items.size !== declaredIds.size) throw Error('Incomplete append owner subjects');
+    scope.pages = appendPages;
+    scope.pageFiles = scope.pageFiles.filter(path => [...appendPages].some(id => path.endsWith('/' + id + '.md')));
+  }
   const carriers = markdownFiles(join(ctx.repo, 'items')).map(file => {
     try { return readItem(file); }
     catch (error) { return { id: basename(file, '.md'), file, frontmatterError: error.message }; }
@@ -139,7 +157,7 @@ export function gateReviewSnapshot(ctx, gates, stages) {
     // Bind both the canonical page and its actual relevant import/original.
     return matches;
   };
-  for (const page of pages) {
+  for (const page of pages.filter(page => !appendPages || appendPages.has(page.id))) {
     bind(join(ctx.repo, 'library', page.category, '_category.md'));
     for (const prerequisite of page.requires ?? []) {
       const matches = prerequisitePaths(prerequisite);
@@ -212,6 +230,23 @@ export function gateReviewSnapshot(ctx, gates, stages) {
   if (toolNames.has('drift-review-check.mjs')) {
     implicit.push(`${ctx.run}-scope-ledger.json`, `${ctx.run}-alpha-step1-drift.md`);
     for (const input of validateDriftOwnerResolutions(ctx.repo, ctx.run).inputs) bindNativePath(input);
+    for (const input of appendDriftView(ctx.repo, ctx.run).inputs) bindNativePath(input);
+  }
+  if (appendOnly) {
+    bindNativePath(`research/${ctx.run}-frontier-appends.json`);
+    for(const path of ['tools/physics-autopilot/src/frontier-append.mts','tools/physics-autopilot/bin/frontier-append.mts','tools/physics-support/frontier-append-evidence.mjs','tools/physics-support/drift-owner-resolutions.mjs','tools/physics-autopilot/src/owner-gate-recertification.mjs'])bindNativePath(path);
+    for(const suffix of ['batch-dependency-levels.json','scope-ledger.json','covers.json','alpha-groups.json'])bindNativePath(`research/${ctx.run}-${suffix}`);
+    for (const entry of appendRegistry(ctx.repo, ctx.run).appends) {
+      for (const ref of entry.fixedInputs) bindNativePath(ref.path);
+      for (const suffix of ['prepared.json','committed.json','new-pages.json']) bindNativePath(`${entry.archive}/${suffix}`);
+      bindNativePath(entry.report); bindNativePath(entry.task); bindNativePath(entry.evidence);
+      const resolution=`research/${ctx.run}-append-${entry.number}-drift-owner-resolutions.json`;
+      bindNativePath(resolution);
+      if(existsSync(join(ctx.repo,resolution)))for(const input of Object.keys(readJSON(join(ctx.repo,resolution)).inputs??{}))bindNativePath(input);
+      const result = `research/${ctx.run}-dispatch/alpha-drift-review-append-${entry.number}.result.json`;
+      bindNativePath(result);
+      if (existsSync(join(ctx.repo,result))) { const row=readJSON(join(ctx.repo,result)); bindNativePath(result.replace('.result.json',`.attempt-${row.attempt}.result.json`)); bindNativePath(result.replace('.result.json',`.attempt-${row.attempt}.prompt.md`)); }
+    }
   }
   if (toolNames.has('frontier-dependency-ledger.mjs')) for (const name of manifests) implicit.push(name.replace('.pages.json', '.cross-batch-dependencies.json'));
   if (toolNames.has('step3-decisions.mjs')) {

@@ -80,3 +80,11 @@ It applies only inside the authenticated supersession chain; ordinary open and
 deferred handling and all source, consumer, premise and receipt checks remain
 required. Acceptance covers the exact owned consumer use, while outside
 maintenance stays deferred and its original history remains intact.
+
+The physics planner also supports `plan --append` at an explicitly paused,
+stopped and fully drained, unclosed Step-1 boundary. It preserves old batches and
+native history, dispatches a fresh Luna-max supplemental Alpha, and applies only
+new batch metadata. Its source-bound historical owner dispositions, nonempty
+new-declaration recertification, archive/lock guards and exact command are in
+`physics/WORKFLOW.md` under “Guarded prerequisite append during Step 1”. The
+mathematics engine and its append implementation remain separate.

@@ -29,6 +29,7 @@ import { alphabeticLabel } from '../../alpha-group-assignment.mjs';
 import { scopedGateOutput } from '../src/repair-evidence.mts';
 import { batchInput, loopState, collectBatch, accepted, loopPattern, batchPlans, engineRepairEligible, repairCohort } from '../../physics-support/batch-scope-review.mjs';
 import { holdStep1 } from './step1-hold.mts';
+import { appendStages } from '../src/frontier-append.mts';
 import { yaml } from '../../physics-support/pathway-lib.mjs';
 import { originalJudgeLineup } from '../../physics-support/original-judge-lineup.mjs';
 import { prepareFinalIfChanged } from '../../physics-support/step6-finalize.mjs';
@@ -1644,6 +1645,6 @@ export const workflowRevision = 'physics-six-step-v1-construction-scope';
 export const stagesForRun = (ctx: any) => {
   assertFreshStep6State(ctx, { physics: true });
   // No prose obligation means no author stage; the final pathway gate remains.
-  return stages.filter(stage => stage.id !== '6-pathway-author-v3' || step6PathwayOwed(ctx).length > 0);
+  return appendStages(stages.filter(stage => stage.id !== '6-pathway-author-v3' || step6PathwayOwed(ctx).length > 0), ctx);
 };
 export default { stages, stagesForRun, batches, alphaGroups, workflowRevision };

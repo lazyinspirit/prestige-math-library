@@ -6,6 +6,7 @@ import { readFileSync, existsSync, readdirSync } from 'node:fs';
 import { join } from 'node:path';
 import { pageBuildability } from './buildability.mjs';
 import { validateDriftOwnerResolutions } from './drift-owner-resolutions.mjs';
+import { appendDriftView } from './frontier-append-evidence.mjs';
 
 const argv = process.argv.slice(2);
 const opt = (n) => { const i = argv.indexOf(`--${n}`); return i >= 0 && argv[i + 1] ? argv[i + 1] : null; };
@@ -36,7 +37,8 @@ if (!existsSync(reportPath)) {
   console.error(`ERROR drift-check-no-report: ${reportPath} — the drift review has not run`);
   process.exit(1);
 }
-const text = readFileSync(reportPath, 'utf8');
+const driftView = appendDriftView(process.cwd(), run);
+const text = driftView.text;
 
 // A minted/rescoped pair enters the run only *after* this Alpha review has
 // completed. Requiring it to have its own report section turns a successful
@@ -100,7 +102,7 @@ const owedPages = ledgerPages
 
 const errors = [];
 let ownerResolved = new Set();
-try { ownerResolved = validateDriftOwnerResolutions(process.cwd(), run).resolved; }
+try { ownerResolved = validateDriftOwnerResolutions(process.cwd(), run).resolved; for (const page of driftView.resolved) ownerResolved.add(page); }
 catch (error) { errors.push(error.message); }
 let applied = 0;
 let edgesChecked = 0;
