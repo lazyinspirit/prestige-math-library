@@ -255,7 +255,7 @@ export function gateReviewSnapshot(ctx, gates, stages) {
   }
   if (appendOnly) {
     bindNativePath(`research/${ctx.run}-frontier-appends.json`);
-    for(const path of ['tools/physics-autopilot/src/frontier-append.mts','tools/physics-autopilot/bin/frontier-append.mts','tools/physics-support/frontier-append-evidence.mjs','tools/physics-support/imported-plan-pages.mjs','tools/physics-support/drift-owner-resolutions.mjs','tools/physics-autopilot/src/owner-gate-recertification.mjs'])bindNativePath(path);
+    for(const path of ['tools/physics-autopilot/src/frontier-append.mts','tools/physics-autopilot/src/step1-hold-evidence.mjs','tools/physics-autopilot/stages/step1-hold.mts','tools/physics-autopilot/bin/frontier-append.mts','tools/physics-support/frontier-append-evidence.mjs','tools/physics-support/imported-plan-pages.mjs','tools/physics-support/drift-owner-resolutions.mjs','tools/physics-autopilot/src/owner-gate-recertification.mjs'])bindNativePath(path);
     for(const suffix of ['batch-dependency-levels.json','scope-ledger.json','covers.json','alpha-groups.json'])bindNativePath(`research/${ctx.run}-${suffix}`);
     for (const entry of appendRegistry(ctx.repo, ctx.run).appends) {
       for (const ref of entry.fixedInputs) bindNativePath(ref.path);

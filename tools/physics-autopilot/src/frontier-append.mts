@@ -5,6 +5,7 @@ import { spawnSync } from 'node:child_process';
 import { packBatches, writeManifests, loadPlan } from '../../physics-support/plan-manifests.mjs';
 import { appendRegistry, appendReview, appendHash as hash, appendJSON as read, appendPath, boundAppendFile } from '../../physics-support/frontier-append-evidence.mjs';
 import { validateDriftOwnerResolutionsBeforeAppend } from '../../physics-support/drift-owner-resolutions.mjs';
+import { authenticateAppendHold } from './step1-hold-evidence.mjs';
 import { MAX_RUN_PAIRS } from './capacity.mjs';
 import type { Stage } from './types.mts';
 export { appendRegistry };
@@ -108,8 +109,10 @@ function oldManifestsUnchanged(root: string, entry: any) {
         }
         if (ref.archive)
             boundAppendFile(root, ref.archive);
-        if (hash(bytes(join(root, ref.path))) !== ref.sha256)
-            fail(`prior item changed: ${ref.path}`);
+        if (hash(bytes(join(root, ref.path))) !== ref.sha256) {
+            if (ref.path === `research/${entry.run}-step1-blockers.json`) authenticateAppendHold(root, entry, ref);
+            else fail(`prior item changed: ${ref.path}`);
+        }
     }
     for (const row of entry.oldManifests) {
         boundAppendFile(root, row.archive);

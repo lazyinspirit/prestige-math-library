@@ -4,6 +4,7 @@ import { mkdtempSync, mkdirSync, writeFileSync, readFileSync, readdirSync, exist
 import { join } from 'node:path';
 import { tmpdir } from 'node:os';
 import { appendFrontier, applyAppendReview, checkAppendReview, appendStages, assertNoAppendTransaction, scanAppendProcesses } from '../src/frontier-append.mts';
+import { step1HoldPacket, authenticateAppendHold } from '../src/step1-hold-evidence.mjs';
 import { appendDriftView, appendBaseContext } from '../../physics-support/frontier-append-evidence.mjs';
 import { writeBatchDependencyLevels } from '../../physics-support/batch-dependency-levels.mjs';
 import { gateReviewSnapshot } from '../src/owner-gate-recertification.mjs';
@@ -619,4 +620,72 @@ test('a later append without original blocked sections preserves an absent overl
     f.review(second); f.native(second); applyAppendReview(f.repo, 'demo', 2, { invoke: f.invoke });
     assert.equal([...appendDriftView(f.repo, 'demo').text.matchAll(/^### /gm)].length, 67);
     assert.equal(existsSync(join(f.repo, 'research/demo-drift-owner-resolutions.json')), false);
+});
+
+function nativeHold(f: any, e: any, deduplicated = false) {
+    const stage = `1-append-drift-${e.number}`, path = 'research/demo-step1-blockers.json';
+    const at = '2026-10-23T00:00:02.001Z';
+    const failure = { id: 'append-planned-physics', code: 1, output: 'original changed\n', ok: false, why: 'original changed' };
+    const message = `stage ${stage}: owner repair and recertification required; repair every rejected item, refresh all certifications invalidated by the repair, then retry the gate before transition — Step 1 held; resolve ${path}`;
+    const events = [
+        ...(deduplicated ? [{ at: '2026-10-23T00:00:00.100Z', type: 'owner-escalation', message }] : []),
+        { at: '2026-10-23T00:00:01.000Z', type: 'gates', message: `${stage}: running 2 gate(s)` },
+        { at: '2026-10-23T00:00:01.500Z', type: 'gate', ...failure },
+        { at: '2026-10-23T00:00:01.501Z', type: 'blocked', stage, gate: failure.id, message: `stage ${stage}: gate ${failure.id} failed — ${failure.why}` },
+        { at: '2026-10-23T00:00:02.000Z', type: 'gate-advisory', id: 'topology', code: 0, output: 'passed', ok: true, why: 'exit 0' },
+        ...(!deduplicated ? [{ at: '2026-10-23T00:00:02.002Z', type: 'owner-escalation', message }] : []),
+        { at: '2026-10-23T00:00:02.030Z', type: 'report', stage, running: 0 },
+    ];
+    const packet = step1HoldPacket('demo', stage, at, failure);
+    const writeEvents = (rows: any[]) => f.save('.physics-autopilot/demo/events.jsonl', rows.map(row => JSON.stringify(row)).join('\n') + '\n');
+    f.save(path, packet); writeEvents(events);
+    return { path, packet, events, writeEvents, ref: e.protectedResearch.find((r: any) => r.path === path) };
+}
+test('native held diagnostic advances with exact historical evidence while prior bytes and all scientific/native records stay archived', t => {
+    for (const deduplicated of [false, true]) {
+        const f = fixture(t), path = 'research/demo-step1-blockers.json';
+        f.save(path, 'Prior native diagnostic\n');
+        const e = appendFrontier(f.options), h = nativeHold(f, e, deduplicated);
+        const archived = f.read(h.ref.archive.path), state = f.read('.physics-autopilot/demo/state.json');
+        assert.equal(authenticateAppendHold(f.repo, e, h.ref), true);
+        f.review(e); checkAppendReview(f.repo, 'demo', 1); f.native(e);
+        const beforeApply = f.read('.physics-autopilot/demo/state.json');
+        applyAppendReview(f.repo, 'demo', 1, { invoke: f.invoke });
+        assert.deepEqual(f.read(h.ref.archive.path), archived);
+        assert.equal(f.read(path).toString(), h.packet);
+        assert.deepEqual(f.read('.physics-autopilot/demo/state.json'), beforeApply);
+        assert.notDeepEqual(state, beforeApply); // only the fixture's genuine native dispatch changed it.
+    }
+});
+test('diagnostic exception rejects invented failures, changed archives, wrong scope and missing native hold provenance', t => {
+    const f = fixture(t), path = 'research/demo-step1-blockers.json'; f.save(path, 'Prior diagnostic\n');
+    const e = appendFrontier(f.options), h = nativeHold(f, e);
+    const original = f.read(h.ref.archive.path);
+    for (const mutate of [
+        (rows: any[]) => rows.filter(row => row.type !== 'owner-escalation'),
+        (rows: any[]) => rows.filter(row => row.type !== 'blocked'),
+        (rows: any[]) => rows.filter(row => row.type !== 'gates'),
+        (rows: any[]) => rows.filter(row => row.type !== 'report'),
+        (rows: any[]) => rows.map(row => row.type === 'gate' ? { ...row, ok: true } : row),
+        (rows: any[]) => rows.map(row => row.type === 'gate' ? { ...row, output: 'different actual result' } : row),
+        (rows: any[]) => rows.map(row => row.type === 'report' ? { ...row, stage: '1-append-drift-2' } : row),
+        (rows: any[]) => rows.map(row => row.type === 'report' ? { ...row, at: '2026-10-23T00:01:00.000Z' } : row),
+    ]) {
+        h.writeEvents(mutate(h.events));
+        assert.throws(() => authenticateAppendHold(f.repo, e, h.ref), /native Step 1 hold diagnostic/);
+    }
+    h.writeEvents(h.events);
+    const packet = JSON.parse(h.packet);
+    for (const change of [{ run: 'other' }, { stage: '1-append-drift-2' }, { action: 'waive all gates' }, { at: AT }, { failures: [] }]) {
+        f.save(path, { ...packet, ...change });
+        assert.throws(() => authenticateAppendHold(f.repo, e, h.ref), /native Step 1 hold diagnostic/);
+    }
+    f.save(path, h.packet); f.save(h.ref.archive.path, 'tampered archive');
+    assert.throws(() => authenticateAppendHold(f.repo, e, h.ref), /archive changed/);
+    f.save(h.ref.archive.path, original.toString());
+    assert.throws(() => authenticateAppendHold(f.repo, { ...e, fixedInputs: [...e.fixedInputs, { path }] }, h.ref), /unbound derived/);
+    assert.throws(() => authenticateAppendHold(f.repo, { ...e, priorReviewInputs: [{ path }] }, h.ref), /unbound derived/);
+    f.save('items/def-old-1-0.md', 'A changed scientific source.');
+    f.review(e);
+    assert.throws(() => checkAppendReview(f.repo, 'demo', 1), /prior item changed: items/);
 });

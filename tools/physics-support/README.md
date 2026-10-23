@@ -69,3 +69,20 @@ The route permits only the explicit repair/precheck verification successor, not
 new audit/judge claims. Native owner snapshots bind the authority's presence,
 all declared evidence and helper code so edits invalidate prior receipts. All
 ordinary identity, publication, source, scientific and native gates still apply.
+
+During a guarded append, the exact `research/RUN-step1-blockers.json` native
+hold diagnostic may advance without restoring its archived preimage.
+`step1-hold-evidence.mjs` shares the writer's serialization and reconstructs the
+packet from the historical current-generation gate battery: exact failed gate
+results, matching failure block, genuine same-stage owner escalation and native
+idle completion report. Later holds reuse the original escalation because the
+engine deduplicates owner blocks. The packet timestamp must fall at that battery's
+completion (within one second of its last gate and idle report); absent, ambiguous,
+truncated or contradictory evidence fails closed. This is a historical diagnostic,
+not a recomputation of gates whose cause has since been repaired.
+
+The archived prior packet remains hash-bound. Explicit source/review bindings at
+this filename remain immutable. No other research file, source, manifest, native
+result, receipt or history gains this allowance. Owner snapshots bind the writer
+and reconstruction helper code; all ordinary planning and apply gates still run.
+The checker reads native history and never edits the diagnostic, archives or state.
