@@ -290,7 +290,7 @@ export function appendFrontier({ repo, run, stateDir, pairs, priorPlan, sourceEv
             `Read ${entry.evidence}, ${sourceEvidence.join(', ')}, and research/${run}-owner-authoring-direction.md if present.`,
             `Read the exact new canonical item declarations and all source hypotheses. Review prerequisites, not proof acceptance.`,
             `Write ${entry.report}: exactly one ### PAGE_ID section with substantive evidence and one VERDICT: no-drift, drift-applied, drift-reordered or drift-blocked per assigned A page.`,
-            `Write only that report and prerequisite/order corrections to the six new canonical plan rows. Preserve all supplied item declarations and their exact scope. Never edit original reports/results, prior manifests, source carriers, receipts or existing page metadata. No mint, rescope or scope narrowing.`,
+            `Write only that report and prerequisite/order corrections to the ${newPages.length} new canonical plan rows. Preserve all supplied item declarations and their exact scope. Never edit original reports/results, prior manifests, source carriers, receipts or existing page metadata. No mint, rescope or scope narrowing.`,
             `Run node tools/tsx-run.mjs tools/physics-autopilot/bin/frontier-append.mts check-review --run ${run} --generation ${number}.`,
             `Run node tools/physics-support/validate-plan.mjs research/plan-spec.json --pages-file ${archive}/new-pages.json.`,
             `The engine applies only new batch metadata. All new pages/items still need full ordinary native authoring, reviews and gates.`, ''

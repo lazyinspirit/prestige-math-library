@@ -132,7 +132,7 @@ export function appendReview(root, run, number, { requireNative = false } = {}) 
     return { entry, text };
 }
 // The old blocked-section overlay authenticates its original 55-page frontier
-// and plan, while the ordinary current drift check still checks the full 58.
+// and plan, while the ordinary current drift check checks the complete extended frontier.
 export function appendBaseContext(root, run) {
     const entries = appendRegistry(root, run).appends;
     if (!entries.length)
