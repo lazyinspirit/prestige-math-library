@@ -154,3 +154,11 @@ literally identical. All legacy source/provenance/scope/consumer guards remain.
 See [the V2 protocol](original-presentation-maintenance.md) for the precise
 classification and review fields. This changes neither category handling nor
 immutable imports, authority or native readiness.
+
+The original-successor wrapper recognizes exactly the authenticated confirmed
+finding statuses `repaired` and `repaired-and-visually-verified` as completed
+repairs. The latter records the upstream reviewer's visual-review claim; physics
+does not infer a fresh visual audit from it. Pending, visual-only, arbitrary or
+unconfirmed findings fail. Exact native receipt/adjudication hashes, publication
+lineage, ownership, checks, deltas, Root scientific reviews and current consumer
+bindings remain required. This changes no legacy presentation extraction rule.

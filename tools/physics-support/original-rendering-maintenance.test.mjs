@@ -12,7 +12,7 @@ import { itemHashGuard } from '../item-hash.mjs';
 import { gateReviewSnapshot } from '../physics-autopilot/src/owner-gate-recertification.mjs';
 const sha = bytes => createHash('sha256').update(bytes).digest('hex');
 // All receipts here are synthetic test fixtures; they confer no real review.
-function fixture(t, { mode = 'technique', authored = false, presentationVersion = 1, definition = false, factLabel = String.raw`Evaluation at a point has kernel $(x_1-a_1, \ldots, x_n-a_n)$` } = {}) {
+function fixture(t, { mode = 'technique', authored = false, presentationVersion = 1, definition = false, findingStatus = 'repaired', findingVerdict = 'confirmed', factLabel = String.raw`Evaluation at a point has kernel $(x_1-a_1, \ldots, x_n-a_n)$` } = {}) {
   const base = mkdtempSync(join(tmpdir(), 'original-rendering-'));
   t.after(() => rmSync(base, { recursive: true, force: true }));
   const root = join(base, 'physics'), source = join(base, 'math'), run = 'demo', id = definition ? 'def-supplier' : 'thm-supplier';
@@ -46,7 +46,7 @@ function fixture(t, { mode = 'technique', authored = false, presentationVersion 
   const beforePath = `research/source-repair/before/${id}.md`, adjudicationPath = `research/source-repair/adjudication/${id}.json`;
   save(source, beforePath, before);
   const adjudication = { id, changed: true, mathematical_meaning_preserved: true, proof_independent: true, diagram_mathematics_corrected: false,
-    findings: [{ verdict: 'confirmed', status: 'repaired', reason: 'Synthetic recorded rendering finding for isolated structural tests only.' }] };
+    findings: [{ verdict: findingVerdict, status: findingStatus, reason: 'Synthetic recorded rendering finding for isolated structural tests only.' }] };
   save(source, adjudicationPath, adjudication);
   const check = tool => ({ command: ['node', tool === 'precheck' ? 'tools/precheck.mts' : 'tools/rendercheck.mjs', `items/${id}.md`, ...(definition && tool === 'precheck' ? ['--json'] : [])], exit_code: 0,
     output: tool === 'precheck' ? definition ? JSON.stringify({summary:{files:1,checked:0,failed:0},results:[{file:`items/${id}.md`,item_id:id,status:'not-applicable'}]}) : `PASS items/${id}.md\n1 checked, 0 failing` : 'OK — 1 file(s)', checked_at: '2026-10-23T00:00:01Z', content_sha256: content });
@@ -276,4 +276,20 @@ test('native planning snapshot binds the V2 extractor bytes as an input',t=>{
   assert.equal(a.inputs.find(i=>i.path===join(f.root,tool)).sha256,f.hashFile(tool));
   f.save(f.root,tool,'Synthetic V2 helper bytes B.');
   assert.notEqual(gateReviewSnapshot(ctx,gates,['1-drift']).sha256,a.sha256);
+});
+
+// Exact authenticated completion vocabulary, never a substring or a visual-audit waiver.
+for (const findingStatus of ['repaired', 'repaired-and-visually-verified']) test(`authenticated completed finding status ${findingStatus} retains all source guards`, t => {
+  const f = fixture(t, { findingStatus, authored: true, presentationVersion: 2 });
+  f.seal(); assert.ok(f.verify() > 0);
+  f.entry.presentation_reviews[0].delta_sha256 = '0'.repeat(64); f.seal();
+  assert.throws(() => f.verify(), /unreviewed V2 delta/);
+});
+test('unfinished, arbitrary, visual-only or unconfirmed findings are not completed repairs', t => {
+  for (const findingStatus of ['pending', 'confirmed', 'visually-verified', 'not-repaired', 'repaired-but-pending', '', null]) {
+    const f = fixture(t, { findingStatus }); f.seal();
+    assert.throws(() => f.verify(), /main adjudication\/layout evidence/, String(findingStatus));
+  }
+  const f = fixture(t, { findingStatus: 'repaired-and-visually-verified', findingVerdict: 'unconfirmed' }); f.seal();
+  assert.throws(() => f.verify(), /main adjudication\/layout evidence/);
 });
