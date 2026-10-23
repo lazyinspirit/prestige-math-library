@@ -1,7 +1,7 @@
 // This boundary certifies formatting and metadata only; native content gates
 // retain their mathematical and physical review responsibilities.
 import { existsSync, readFileSync, readdirSync, mkdirSync, writeFileSync, renameSync } from 'node:fs';
-import { basename, dirname, join, resolve } from 'node:path';
+import { basename, dirname, join, resolve, relative } from 'node:path';
 import { createHash, randomUUID } from 'node:crypto';
 import { validateDriftOwnerResolutions } from '../../physics-support/drift-owner-resolutions.mjs';
 import { appendRegistry, appendDriftView } from '../../physics-support/frontier-append-evidence.mjs';
@@ -9,6 +9,7 @@ import { frontierGateScope } from '../../physics-support/frontier-gate-scope.mjs
 import { markdownFiles, readItem } from '../../physics-support/physics-content.mjs';
 import { originalMaintenancePath } from '../../physics-support/original-maintenance.mjs';
 import { originalImportPath } from '../../physics-support/physics-imports.mjs';
+import { importedPlanPage } from '../../physics-support/imported-plan-pages.mjs';
 import { scanProofFiles } from '../../physics-support/proof-layout.mjs';
 import { runPages, dependencyLevels } from '../../physics-support/item-dependency-levels.mjs';
 import { registerStateDirectory, validatePrepared } from '../../step6-prepared.mjs';
@@ -149,6 +150,16 @@ export function gateReviewSnapshot(ctx, gates, stages) {
     // distinct page bodies or an unpinned extra remain ambiguous.
     const canonical = declared[0]?.category && join(ctx.repo, 'library', declared[0].category, `${prerequisite}.md`);
     if (!canonical || !matches.includes(canonical)) throw Error(`Ambiguous prerequisite page ${prerequisite}`);
+    if (importReceipt.files.some(row => join(ctx.repo, row.path) === canonical)) {
+      // The canonical location may itself be the immutable import, with an
+      // identical regular HEAD-tracked historical placement beside it. Reuse
+      // the same strict pin/identity/publication/placement rule as plan gates.
+      const copies = matches.map(path => relative(join(ctx.repo, 'library'), path).split('\\').join('/'));
+      if (!importedPlanPage(ctx.repo, prerequisite, importReceipt, copies))
+        throw Error(`Ambiguous prerequisite page ${prerequisite}`);
+      bind(join(ctx.repo, 'tools/physics-support/imported-plan-pages.mjs'));
+      return matches;
+    }
     const expected = digest(readFileSync(canonical));
     for (const path of matches) if (path !== canonical) {
       const pin = importReceipt.files.find(row => join(ctx.repo, row.path) === path);

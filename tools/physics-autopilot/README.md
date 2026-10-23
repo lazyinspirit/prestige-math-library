@@ -88,3 +88,11 @@ new batch metadata. Its source-bound historical owner dispositions, nonempty
 new-declaration recertification, archive/lock guards and exact command are in
 `physics/WORKFLOW.md` under “Guarded prerequisite append during Step 1”. The
 mathematics engine and its append implementation remain separate.
+
+Owner formatting/metadata snapshots accept a canonical pinned mathematical
+prerequisite beside one identical regular HEAD-tracked historical placement
+through the same authenticated `importedPlanPage` rule as the plan validator.
+The snapshot binds both local placements and the relevant current original.
+Untracked, staged-only, changed, symlinked or ambiguous carriers remain blocked,
+as do invalid identity, publication, classification and immutable pins. This
+recognizes source placement only and grants no proof acceptance.
