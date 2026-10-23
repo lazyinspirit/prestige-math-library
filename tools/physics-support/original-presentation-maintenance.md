@@ -35,6 +35,12 @@ V2 module bytes, so changing the extractor invalidates a cached owner receipt.
   deltas requiring individual reviews. Definitions retain Proof and protected
   Well-definedness/Well-formedness suffixes, apart from represented section
   separators; no well-definedness argument may be silently rewritten.
+- A literal terminal old `\qed` may become `∎` only on the actual final
+  numbered Proof step. The entire preceding step text, including exact support
+  tags and mathematics, must be byte-identical; only the marker separator and
+  trailing whitespace may differ. This emits a `proof-terminal-qed` delta with
+  full step bytes and exact marker/suffix fields, requiring the same individual
+  Root delta review. Other macros, nonterminal changes and marker deletion fail.
 - Existing extra sections retain their exact bytes. The only new section is
   final Remarks containing an explicit complete `tikz` or `tikzcd` fence. Its
   mathematical exposition requires an actual derived-exposition review. If

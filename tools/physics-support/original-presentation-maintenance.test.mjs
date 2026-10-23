@@ -91,3 +91,25 @@ test('existing Remarks cannot be rewritten and new Remarks must contain the expl
   assert.throws(()=>originalPresentationChanges(Buffer.from(f.before),Buffer.from(f.after.replace('fixed mathematical','different'))),/preserved Remarks/);
   const g=fixture();assert.throws(()=>originalPresentationChanges(Buffer.from(g.before),Buffer.from(g.after+'\n## Remarks\nJust a new claim.\n')),/TikZ/);
 });
+
+test('literal terminal old QED macro becomes explicit reviewed final-step delta',()=>{
+  const f=fixture(),before=f.before.replace('[F1, given]\n','[F1, given] \\qed \n'),after=f.after.replace('[F1, given]\n','[F1, given] ∎\n');
+  const r=reviewed(before,after);assert.equal(r.changes.deltas.length,1);const d=r.changes.deltas[0];assert.equal(d.kind,'proof-terminal-qed');assert.equal(d.terminal_qed.before_marker,'\\qed');assert.equal(d.terminal_qed.after_marker,'∎');assert.equal(d.terminal_qed.before_suffix,' \\qed \n');assert.ok(r.validate());
+  r.entry.presentation_reviews=[];assert.throws(r.validate,/delta reviews/);
+});
+test('terminal QED shape cannot mask proof math or support changes',()=>{
+  const f=fixture(),before=f.before.replace('[F1, given]\n','[F1, given] \\qed\n'),after=f.after.replace('[F1, given]\n','[F1, given] ∎\n');
+  for(const changed of [after.replace('The identity follows.','The identity is false.'),after.replace('[F1, given]','[F2, given]')])assert.throws(()=>originalPresentationChanges(Buffer.from(before),Buffer.from(changed)),/terminal QED repair changed proof text/);
+});
+test('terminal QED does not admit new hypotheses or interfaces',()=>{
+  const f=fixture(),before=f.before.replace('[F1, given]\n','[F1, given] \\qed\n'),after=f.after.replace('[F1, given]\n','[F1, given] ∎\n');
+  for(const changed of [after.replace('**Given:** The object.','**Given:** An extra hypothesis.'),after.replace('The given object is','A stronger object is')])assert.throws(()=>originalPresentationChanges(Buffer.from(before),Buffer.from(changed)),/scientific/);
+});
+test('nonterminal QED repair and arbitrary old macro markers fail',()=>{
+  const f=fixture();
+  for(const marker of ['\\qedsymbol','\\square','\\foo','\\\\qed']){const before=f.before.replace('[F1, given]\n',`[F1, given] ${marker}\n`),after=f.after.replace('[F1, given]\n','[F1, given] ∎\n');assert.throws(()=>originalPresentationChanges(Buffer.from(before),Buffer.from(after)),/support|terminal QED/);}
+  const before=f.before.replace('[F1, given]\n','[F1, given] \\qed\n\n2.1 A final independent step. [F1]\n'),after=f.after.replace('[F1, given]\n','[F1, given] ∎\n\n2.1 A final independent step. [F1]\n');assert.throws(()=>originalPresentationChanges(Buffer.from(before),Buffer.from(after)),/support/);
+});
+test('new terminal QED requires literal final Unicode square, not deletion or arbitrary new macro',()=>{
+ const f=fixture(),before=f.before.replace('[F1, given]\n','[F1, given] \\qed\n');for(const marker of ['', '\\qedsymbol','\\square','∎ extra']){const after=f.after.replace('[F1, given]\n',`[F1, given] ${marker}\n`);assert.throws(()=>originalPresentationChanges(Buffer.from(before),Buffer.from(after)),/support/);}
+});

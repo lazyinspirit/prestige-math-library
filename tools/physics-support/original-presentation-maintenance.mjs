@@ -115,8 +115,18 @@ function proofChange(before, after, deltas) {
   const steps = [];
   for (let i = 0; i < a.steps.length; i++) if (a.steps[i].text !== b.steps[i].text) {
     const x = a.steps[i], y = b.steps[i], support = text => /\[([^\]\n]+)\](?:[ \t]*∎)?[ \t\r\n]*$/.exec(text)?.[1];
-    if (support(x.text) === undefined || support(x.text) !== support(y.text)) fail('changed proof support labels');
-    const delta = { id: `Proof:step:${x.label}`, kind: trim(x.text) === trim(y.text) ? 'separator-spacing' : 'proof-step-presentation', section: 'Proof', label: x.label, before: x.text, after: y.text };
+    let qed = null, oldSupport = support(x.text);
+    if (oldSupport === undefined && i === a.steps.length - 1) {
+      const oldMarker = /[ \t]+\\qed([ \t\r\n]*)$/.exec(x.text), nextMarker = /[ \t]+∎([ \t\r\n]*)$/.exec(y.text);
+      if (oldMarker && nextMarker) {
+        const oldBody = x.text.slice(0, oldMarker.index), nextBody = y.text.slice(0, nextMarker.index);
+        if (oldBody !== nextBody) fail('terminal QED repair changed proof text');
+        oldSupport = support(oldBody);
+        qed = { before_marker: '\\qed', after_marker: '∎', before_suffix: oldMarker[0], after_suffix: nextMarker[0] };
+      }
+    }
+    if (oldSupport === undefined || oldSupport !== support(y.text)) fail('changed proof support labels');
+    const delta = { id: `Proof:step:${x.label}`, kind: qed ? 'proof-terminal-qed' : trim(x.text) === trim(y.text) ? 'separator-spacing' : 'proof-step-presentation', section: 'Proof', label: x.label, before: x.text, after: y.text, ...(qed ? { terminal_qed: qed } : {}) };
     steps.push({ label: x.label, before: x.text, after: y.text, kind: delta.kind }); deltas.push(delta);
   }
   return { technique, steps };
