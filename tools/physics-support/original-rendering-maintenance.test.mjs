@@ -26,7 +26,8 @@ function fixture(t, { mode = 'technique', authored = false } = {}) {
   if (mode === 'technique') after = after.replace('**Proof technique:** direct on $A$.', '**Proof technique:** direct on A.');
   if (mode === 'title') after = after.replace('title: A theorem on R^n', () => "title: 'A theorem on $\\mathbb R^n$'");
   if (mode === 'step') after = after.replace('1.1 Reflexivity gives $A=A$. [L1]', '1.1 The identity map on the given object has equal domain and codomain; reflexivity gives $A=A$. [L1]');
-  if (mode === 'remarks' || mode === 'step') after += '\n## Remarks\n\nThe following square displays the identity maps used in the unchanged argument.\n\n```tikzcd\nA \\arrow[r] \\arrow[d] & A \\arrow[d] \\\\\nA \\arrow[r] & A\n```\n';
+  if (mode === 'remarks' || mode === 'remarks-tikz' || mode === 'step') after += '\n## Remarks\n\nThe following square displays the identity maps used in the unchanged argument.\n\n```tikzcd\nA \\arrow[r] \\arrow[d] & A \\arrow[d] \\\\\nA \\arrow[r] & A\n```\n';
+  if (mode === 'remarks-tikz') after = after.replace(/```tikzcd[\s\S]*?```/, '```tikz\n\\begin{tikzpicture}\n\\node (A) {A};\n\\end{tikzpicture}\n```');
   save(source, `items/${id}.md`, after);
   const content = itemHashGuard(after), claim = { version: 1, run: 'source-repair', group: 'g', id, pre_sha256: itemHashGuard(before), claimed_at: '2026-10-23T00:00:00Z' };
   const claimLine = JSON.stringify(claim) + '\n', block = `\n${id}: exact fixture repair ${content}.\n`, marker = 'rendering:' + id;
@@ -80,7 +81,7 @@ function fixture(t, { mode = 'technique', authored = false } = {}) {
   const verify = options => verifyMathematicsImports(root, authored ? { run, ...options } : { planning: true, proposedPages: pages, maintenanceRun: run, maintenanceSelector: selector, ...options });
   return { root, source, run, id, before, after, repair, repairPath, adjudicationPath, beforePath, entry, review, pages, declarations, selector, evidence, ownership, ledger, seal, save, hashFile, verify };
 }
-for (const mode of ['technique', 'title', 'remarks', 'step']) test(`exact ${mode} successor accepts 21 planned absent carriers and preserves local pins`, t => {
+for (const mode of ['technique', 'title', 'remarks', 'remarks-tikz', 'step']) test(`exact ${mode} successor accepts 21 planned absent carriers and preserves local pins`, t => {
   const f = fixture(t, { mode }), local = readFileSync(join(f.root, `items/${f.id}.md`)), pin = readFileSync(join(f.root, 'research/math-imports.json'));
   assert.throws(() => f.verify(), /mathematics import changed/); f.seal(); assert.ok(f.verify() > 0);
   assert.deepEqual(readFileSync(join(f.root, `items/${f.id}.md`)), local); assert.deepEqual(readFileSync(join(f.root, 'research/math-imports.json')), pin);
@@ -157,4 +158,15 @@ test('native planning snapshots bind review presence, exact evidence and actual 
   assert.ok(!snapshot.inputs.some(i => i.path === join(f.source, 'research/published-consumer-supplier-ledger.md')));
   assert.ok(!snapshot.inputs.some(i => i.path === join(f.source, 'research/source-repair-step3-published-claims.jsonl')));
   f.save(f.root, f.evidence, 'Changed actual Root review.'); assert.notEqual(gateReviewSnapshot(ctx, gates, ['1-drift']).sha256, snapshot.sha256);
+});
+
+test('added Remarks requires a complete standalone tikz or tikzcd fence, never an inline or misleading language token', t => {
+  const f = fixture(t, { mode: 'remarks-tikz' });
+  assert.ok(originalRenderingChanges(Buffer.from(f.before), Buffer.from(f.after)).remarks);
+  for (const edit of [
+    s => s.replace('```tikz\n', '```tikzpicture\n'),
+    s => s.replace('```tikz\n', 'Text ```tikz\n'),
+    s => s.replace(/\n```\n$/, '\n'),
+    s => s.replace('```tikz\n', '```javascript\n'),
+  ]) assert.throws(() => originalRenderingChanges(Buffer.from(f.before), Buffer.from(edit(f.after))), /unsupported added remarks/);
 });

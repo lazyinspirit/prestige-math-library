@@ -61,7 +61,8 @@ retain their original behavior.
 
 Statements, Facts, premises, dependencies, status and scientific metadata remain
 exact. Supported title markup, proof-technique, numbered-step and added final
-Remarks differences must be individually enumerated as exact before/after
+Remarks differences containing a complete standalone `tikz` or `tikzcd` fence
+must be individually enumerated as exact before/after
 values, tied to real source repair evidence and genuinely reviewed by Root.
 Every substantive numbered-step rewrite needs its own equivalence reason;
 there is no generic renderer normalization or automatic acceptance of a stamp.

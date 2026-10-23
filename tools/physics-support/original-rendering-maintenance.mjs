@@ -66,7 +66,7 @@ export function originalRenderingChanges(beforeBytes, afterBytes) {
   }
   if (a.Remarks !== undefined && a.Remarks !== b.Remarks) fail('existing remarks change');
   const remarks = a.Remarks === b.Remarks ? null : { before: a.Remarks ?? null, after: b.Remarks };
-  if (remarks && (a.Remarks !== undefined || !b.Remarks?.includes('```tikzcd\n'))) fail('unsupported added remarks');
+  if (remarks && (a.Remarks !== undefined || !/^```(?:tikz|tikzcd)\r?\n[\s\S]+?^```[ \t]*\r?$/m.test(b.Remarks ?? ''))) fail('unsupported added remarks');
   return { verification, title, technique, steps, remarks };
 }
 export function originalRenderingMaintenancePath(root, run, selector = null) {
