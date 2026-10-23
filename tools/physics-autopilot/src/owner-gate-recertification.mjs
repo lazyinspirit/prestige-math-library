@@ -245,12 +245,19 @@ export function gateReviewSnapshot(ctx, gates, stages) {
   }
   if (appendOnly) {
     bindNativePath(`research/${ctx.run}-frontier-appends.json`);
-    for(const path of ['tools/physics-autopilot/src/frontier-append.mts','tools/physics-autopilot/bin/frontier-append.mts','tools/physics-support/frontier-append-evidence.mjs','tools/physics-support/drift-owner-resolutions.mjs','tools/physics-autopilot/src/owner-gate-recertification.mjs'])bindNativePath(path);
+    for(const path of ['tools/physics-autopilot/src/frontier-append.mts','tools/physics-autopilot/bin/frontier-append.mts','tools/physics-support/frontier-append-evidence.mjs','tools/physics-support/imported-plan-pages.mjs','tools/physics-support/drift-owner-resolutions.mjs','tools/physics-autopilot/src/owner-gate-recertification.mjs'])bindNativePath(path);
     for(const suffix of ['batch-dependency-levels.json','scope-ledger.json','covers.json','alpha-groups.json'])bindNativePath(`research/${ctx.run}-${suffix}`);
     for (const entry of appendRegistry(ctx.repo, ctx.run).appends) {
       for (const ref of entry.fixedInputs) bindNativePath(ref.path);
       for (const suffix of ['prepared.json','committed.json','new-pages.json']) bindNativePath(`${entry.archive}/${suffix}`);
       bindNativePath(entry.report); bindNativePath(entry.task); bindNativePath(entry.evidence);
+      const clarification = `research/${ctx.run}-append-${entry.number}-drift-format-clarification.json`;
+      bindNativePath(clarification);
+      if (existsSync(join(ctx.repo, clarification))) {
+        const receipt = readJSON(join(ctx.repo, clarification));
+        for (const ref of [receipt.report, receipt.native_result, receipt.applied_receipt, ...(receipt.clarifications ?? []).map(row => row.applied_manifest)])
+          if (ref?.path) bindNativePath(ref.path);
+      }
       const resolution=`research/${ctx.run}-append-${entry.number}-drift-owner-resolutions.json`;
       bindNativePath(resolution);
       if(existsSync(join(ctx.repo,resolution)))for(const input of Object.keys(readJSON(join(ctx.repo,resolution)).inputs??{}))bindNativePath(input);

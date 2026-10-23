@@ -2,6 +2,8 @@
 import { existsSync, readFileSync, readdirSync, lstatSync, realpathSync } from 'node:fs';
 import { join, resolve, relative, isAbsolute } from 'node:path';
 import { createHash } from 'node:crypto';
+import { importedPlanPage } from './imported-plan-pages.mjs';
+import { markdownFiles } from './physics-content.mjs';
 export const appendHash = bytes => createHash('sha256').update(bytes).digest('hex');
 const fail = why => { throw Error(`physics frontier append: ${why}`); };
 export const appendJSON = path => JSON.parse(readFileSync(path, 'utf8'));
@@ -156,6 +158,77 @@ export function appendBaseContext(root, run) {
     return { inputPaths, historicalCurrentInputs: first.baseResolution?.historicalCurrentInputs ?? [], frontier: appendJSON(boundAppendFile(root, first.baseLedger)).pages.map(({ id, kind, batch }) => ({ id, kind, batch: String(batch) })).sort((a, b) => a.id.localeCompare(b.id)),
         specPath: boundAppendFile(root, first.basePlan) };
 }
+// Resolve only explicitly named drift targets; this never extends authored scope.
+export function resolveDriftTarget(root, id, pages) {
+    if (pages.has(id)) return { page: pages.get(id), imported: false, inputs: [] };
+    const receiptPath = 'research/math-imports.json';
+    const receipt = appendJSON(join(root, receiptPath));
+    const copies = markdownFiles(join(root, 'library')).filter(p => p.endsWith(`/${id}.md`))
+        .map(p => relative(join(root, 'library'), p).split('\\').join('/'));
+    const page = importedPlanPage(root, id, receipt, copies);
+    if (!page) fail(`unresolved named drift target: ${id}`);
+    return { page, imported: true, inputs: [receiptPath, ...copies.map(p => 'library/' + p)] };
+}
+function clarifiedAppendView(root, run, entry, review, appliedPath) {
+    const path = `research/${run}-append-${entry.number}-drift-format-clarification.json`;
+    if (!existsSync(join(root, path))) return { text: review.text, inputs: [] };
+    const receipt = appendJSON(appendPath(root, path));
+    if (receipt.version !== 1 || receipt.run !== run || receipt.generation !== entry.number
+        || receipt.authorizing_owner !== '/root' || receipt.kind !== 'supplemental-verdict-format-clarification'
+        || receipt.report?.path !== entry.report || receipt.report?.sha256 !== appendHash(review.text)
+        || receipt.native_result?.path !== review.native.path || receipt.native_result?.sha256 !== review.native.sha256
+        || receipt.applied_receipt?.path !== appliedPath || !Array.isArray(receipt.clarifications) || !receipt.clarifications.length)
+        fail('invalid supplemental format clarification authority');
+    for (const ref of [receipt.report, receipt.native_result, receipt.applied_receipt]) boundAppendFile(root, ref);
+    const applied = appendJSON(join(root, appliedPath));
+    const spec = appendJSON(join(root, 'research/plan-spec.json'));
+    const pages = new Map(spec.pages.map(p => [p.id, p]));
+    const heads = [...review.text.matchAll(/^###\s+`?([a-z0-9]+(?:-[a-z0-9]+)*)`?\s*$/gm)];
+    const replacements = [], seen = new Set(), inputs = [path, receipt.applied_receipt.path];
+    for (const row of receipt.clarifications) {
+        const index = heads.findIndex(h => h[1] === row.page), head = heads[index];
+        if (!head || seen.has(row.page) || !entry.pairs.includes(row.page) || row.verdict !== 'drift-applied'
+            || typeof row.reason !== 'string' || row.reason.trim().length < 40 || !Array.isArray(row.added_edges) || !row.added_edges.length)
+            fail('invalid scoped supplemental format clarification');
+        seen.add(row.page);
+        const end = heads[index + 1]?.index ?? review.text.length;
+        const section = review.text.slice(head.index, end);
+        if (row.section_sha256 !== appendHash(section) || !/^VERDICT:[ \t]*drift-applied[ \t]*$/m.test(section))
+            fail('clarification requires exact original bare drift-applied section');
+        const archived = appendJSON(boundAppendFile(root, row.applied_manifest));
+        const ownership = entry.newOwnership.find(p => p.id === row.page);
+        const manifestPath = `research/${run}-batch-${ownership?.batch}.pages.json`;
+        const recorded = applied.newManifests?.find(p => p.path === manifestPath);
+        if (!recorded || row.applied_manifest.sha256 !== recorded.sha256 || !Array.isArray(archived))
+            fail('clarification archive is not the actual applied manifest');
+        inputs.push(row.applied_manifest.path);
+        const atApply = archived.filter(p => p.id === row.page);
+        const before = entry.newDeclarations.filter(p => p.id === row.page);
+        const live = appendJSON(join(root, manifestPath)).filter(p => p.id === row.page);
+        if (atApply.length !== 1 || before.length !== 1 || live.length !== 1) fail('ambiguous clarified page identity');
+        const added = (atApply[0].requires ?? []).filter(id => !(before[0].requires ?? []).includes(id));
+        const targets = row.added_edges.map(e => e.target);
+        if (new Set(targets).size !== targets.length || JSON.stringify([...targets].sort()) !== JSON.stringify([...added].sort()))
+            fail('clarification must name exactly the actual applied added edges');
+        const detail = row.added_edges.map(edge => {
+            if (!section.includes('`' + edge.target + '`')) fail('clarified target is unmentioned in original section');
+            const current = pages.get(row.page);
+            if (!(current?.requires ?? []).includes(edge.target) || !(live[0].requires ?? []).includes(edge.target))
+                fail('clarified added edge missing from current plan/manifest');
+            const resolved = resolveDriftTarget(root, edge.target, pages), order = resolved.page.order;
+            inputs.push(...resolved.inputs);
+            if (edge.order !== (order === undefined && resolved.imported ? null : order)
+                || (edge.order !== null && (!Number.isFinite(edge.order) || edge.order < 0 || edge.order >= current.order)))
+                fail('clarified order contradicts actual known prerequisite order');
+            return '`' + edge.target + '` (order ' + (edge.order === null ? 'unspecified' : edge.order) + ')';
+        }).join(', ');
+        replacements.push({ start: head.index, end, section: section.replace(/^VERDICT:[ \t]*drift-applied[ \t]*$/m,
+            `<!-- Root format clarification: ${path}; raw native section unchanged -->\nVERDICT: drift-applied — ${detail}`) });
+    }
+    let text = review.text;
+    for (const row of replacements.sort((a, b) => b.start - a.start)) text = text.slice(0, row.start) + row.section + text.slice(row.end);
+    return { text, inputs };
+}
 export function appendDriftView(root, run) {
     const path = `research/${run}-alpha-step1-drift.md`;
     let text = readFileSync(join(root, path), 'utf8');
@@ -171,7 +244,9 @@ export function appendDriftView(root, run) {
         if (applied.reportSha256 !== appendHash(review.text) || applied.nativeSha256 !== review.native.sha256 || applied.promptSha256 !== appendHash(readFileSync(join(root,review.prompt))))
             fail('applied review currency changed');
         resolved.push(...review.resolved);
-        text += `\n\n<!-- separately attributed native supplemental review ${entry.number} -->\n${review.text}`;
+        const clarified = clarifiedAppendView(root, run, entry, review, appliedPath);
+        text += `\n\n<!-- separately attributed native supplemental review ${entry.number} -->\n${clarified.text}`;
+        inputs.push(...clarified.inputs);
         inputs.push(appliedPath, entry.report, review.native.path, review.attempt, review.prompt, `research/${run}-frontier-appends.json`, `${entry.archive}/prepared.json`, `${entry.archive}/committed.json`, ...entry.fixedInputs.map(r => r.path), ...review.ownerInputs, ...Object.values(entry.baseResolution?.inputPaths ?? {}).map(r => r.path));
     }
     return { text, inputs: [...new Set(inputs)], resolved };

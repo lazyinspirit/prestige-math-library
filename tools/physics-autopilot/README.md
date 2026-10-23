@@ -96,3 +96,18 @@ The snapshot binds both local placements and the relevant current original.
 Untracked, staged-only, changed, symlinked or ambiguous carriers remain blocked,
 as do invalid identity, publication, classification and immutable pins. This
 recognizes source placement only and grants no proof acceptance.
+
+An immutable successful supplemental drift report with a bare `drift-applied`
+line may receive a Root-authored format clarification at
+`research/RUN-append-N-drift-format-clarification.json`. The typed receipt binds
+the original report, native result, applied receipt, exact raw section, and an
+archived applied manifest whose hash matches the native application receipt.
+It names exactly the added-edge delta against prepared declarations; every
+target must be explicitly mentioned in the original section and remain in the
+current plan and manifest. Only that bare verdict line is translated in the
+attributed in-memory view; no native artifact is rewritten. Nullable edge order
+means `(order unspecified)` only for an authenticated published import lacking
+stored order. Known orders remain exact and earlier; the ordinary drift and
+full plan/cycle/buildability gates remain required. Later authoring inventories
+and additional prerequisites are not frozen by the historical manifest archive.
+Future supplemental tasks require same-line edge/move detail directly.
