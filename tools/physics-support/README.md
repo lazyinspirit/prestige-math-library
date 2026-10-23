@@ -156,8 +156,10 @@ classification and review fields. This changes neither category handling nor
 immutable imports, authority or native readiness.
 
 The original-successor wrapper recognizes exactly the authenticated confirmed
-finding statuses `repaired` and `repaired-and-visually-verified` as completed
-repairs. The latter records the upstream reviewer's visual-review claim; physics
+finding statuses `repaired`, `repaired-and-visually-verified` and `resolved` as
+completed repairs. These are exact completion values on confirmed findings in
+fully authenticated finalized native repair records; substring matches fail.
+The visual spelling records the upstream reviewer's visual-review claim; physics
 does not infer a fresh visual audit from it. Pending, visual-only, arbitrary or
 unconfirmed findings fail. Exact native receipt/adjudication hashes, publication
 lineage, ownership, checks, deltas, Root scientific reviews and current consumer

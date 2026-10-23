@@ -195,7 +195,7 @@ export function originalRenderingMaintenance(root, run, { receipt, scope, planni
     const adjudication = JSON.parse(sourceEvidence(native.adjudication_file, native.adjudication_sha256));
     const check = native.proof_layout;
     if (adjudication.id !== id || adjudication.changed !== true || adjudication.mathematical_meaning_preserved !== true
-        || !adjudication.findings?.some(f => f.verdict === 'confirmed' && ['repaired', 'repaired-and-visually-verified'].includes(f.status))
+        || !adjudication.findings?.some(f => f.verdict === 'confirmed' && ['repaired', 'repaired-and-visually-verified', 'resolved'].includes(f.status))
         || check?.exit_code !== 0 || check.content_sha256 !== native.content_sha256 || !Array.isArray(check.command)
         || !check.command.includes(`items/${id}.md`) || !check.command.includes('tools/proof-layout.mjs')
         || !/^proof-layout: 1 items, \d+ steps, 0 defects(?:\s|$)/m.test(check.output ?? '') || !Number.isFinite(Date.parse(check.checked_at))

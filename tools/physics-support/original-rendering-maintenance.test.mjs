@@ -279,14 +279,14 @@ test('native planning snapshot binds the V2 extractor bytes as an input',t=>{
 });
 
 // Exact authenticated completion vocabulary, never a substring or a visual-audit waiver.
-for (const findingStatus of ['repaired', 'repaired-and-visually-verified']) test(`authenticated completed finding status ${findingStatus} retains all source guards`, t => {
+for (const findingStatus of ['repaired', 'repaired-and-visually-verified', 'resolved']) test(`authenticated completed finding status ${findingStatus} retains all source guards`, t => {
   const f = fixture(t, { findingStatus, authored: true, presentationVersion: 2 });
   f.seal(); assert.ok(f.verify() > 0);
   f.entry.presentation_reviews[0].delta_sha256 = '0'.repeat(64); f.seal();
   assert.throws(() => f.verify(), /unreviewed V2 delta/);
 });
 test('unfinished, arbitrary, visual-only or unconfirmed findings are not completed repairs', t => {
-  for (const findingStatus of ['pending', 'confirmed', 'visually-verified', 'not-repaired', 'repaired-but-pending', '', null]) {
+  for (const findingStatus of ['pending', 'confirmed', 'visually-verified', 'not-repaired', 'repaired-but-pending', 'unresolved', 'resolved-but-pending', '', null]) {
     const f = fixture(t, { findingStatus }); f.seal();
     assert.throws(() => f.verify(), /main adjudication\/layout evidence/, String(findingStatus));
   }
