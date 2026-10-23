@@ -225,7 +225,7 @@ export function gateReviewSnapshot(ctx, gates, stages) {
   };
   for (const gate of battery) for (const arg of [...gate.argv, ...gate.needs]) bindNativePath(arg);
   for (const gate of battery) if (gate.argv.some(arg => typeof arg === 'string' && arg.endsWith('/physics-check.mjs'))) {
-    for (const tool of ['original-rendering-maintenance.mjs','physics-imports.mjs','physics-check.mjs']) bindNativePath('tools/physics-support/' + tool);
+    for (const tool of ['original-rendering-maintenance.mjs','original-presentation-maintenance.mjs','physics-imports.mjs','physics-check.mjs']) bindNativePath('tools/physics-support/' + tool);
     const authority = gate.argv.indexOf('--maintenance-run'), selector = gate.argv.indexOf('--pages-file');
     if (authority >= 0) {
       if (gate.argv[authority + 1] !== ctx.run || selector < 0) throw Error('Invalid native maintenance planning authority');

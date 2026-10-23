@@ -59,8 +59,8 @@ Planning approval cannot stand in for the stricter authored authority. Standalon
 unscoped import checks and the existing Definition-reference maintenance route
 retain their original behavior.
 
-Statements, Facts, premises, dependencies, status and scientific metadata remain
-exact. Supported title markup, proof-technique, numbered-step and added final
+In the legacy V1 route, Statements, Facts, premises, dependencies, status and
+scientific metadata remain exact. Supported title markup, proof-technique, numbered-step and added final
 Remarks differences containing a complete standalone `tikz` or `tikzcd` fence
 must be individually enumerated as exact before/after
 values, tied to real source repair evidence and genuinely reviewed by Root.
@@ -131,3 +131,26 @@ qualification text, must be byte-identical. Root must supply the matching
 reason, reading_limits}`. This is no general whitespace, end-marker or source
 heading normalization. Every existing finalized main repair, adjudication,
 recorded check, exact delta, scientific and consumer-review guard still applies.
+
+Original `_category.md` overview prose already uses a bounded classification
+projection in `physics-imports.mjs`: every LOCAL category byte remains strictly
+pinned, while each relevant CURRENT original source category must exist, retain
+the pinned library (default mathematics), and have mathematical domain (default
+mathematics). That branch continues before original raw-body hash comparison.
+An original category overview rewrite is therefore raw catalogue drift, not an
+item-rendering successor or an authority blocker by itself. Item/page originals
+and changed local category snapshots retain their ordinary strict checks.
+Preparation reports must distinguish projected category prose from original
+item byte blockers; do not invent category item-repair receipts or a new waiver.
+
+
+The opt-in item `presentation_version: 2` route is implemented separately by
+[`original-presentation-maintenance.mjs`](original-presentation-maintenance.mjs).
+It extracts exact title pairs, target-preserving interface/Fact labels, narrowly
+reviewed quotation-marker deletions, protected definitions, preserved extra
+sections and derived final TikZ exposition. Every delta needs its own exact
+source/evidence-bound scientific review; raw changes cannot be falsely called
+literally identical. All legacy source/provenance/scope/consumer guards remain.
+See [the V2 protocol](original-presentation-maintenance.md) for the precise
+classification and review fields. This changes neither category handling nor
+immutable imports, authority or native readiness.

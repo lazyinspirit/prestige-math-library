@@ -7,17 +7,19 @@ import { createHash } from 'node:crypto';
 import { spawnSync } from 'node:child_process';
 import { importMathematics, verifyMathematicsImports } from './physics-imports.mjs';
 import { originalRenderingMaintenancePath, originalRenderingChanges } from './original-rendering-maintenance.mjs';
+import { originalPresentationChanges } from './original-presentation-maintenance.mjs';
 import { itemHashGuard } from '../item-hash.mjs';
 import { gateReviewSnapshot } from '../physics-autopilot/src/owner-gate-recertification.mjs';
 const sha = bytes => createHash('sha256').update(bytes).digest('hex');
 // All receipts here are synthetic test fixtures; they confer no real review.
-function fixture(t, { mode = 'technique', authored = false, factLabel = String.raw`Evaluation at a point has kernel $(x_1-a_1, \ldots, x_n-a_n)$` } = {}) {
+function fixture(t, { mode = 'technique', authored = false, presentationVersion = 1, definition = false, factLabel = String.raw`Evaluation at a point has kernel $(x_1-a_1, \ldots, x_n-a_n)$` } = {}) {
   const base = mkdtempSync(join(tmpdir(), 'original-rendering-'));
   t.after(() => rmSync(base, { recursive: true, force: true }));
-  const root = join(base, 'physics'), source = join(base, 'math'), run = 'demo', id = 'thm-supplier';
+  const root = join(base, 'physics'), source = join(base, 'math'), run = 'demo', id = definition ? 'def-supplier' : 'thm-supplier';
   for (const dir of [root, source]) for (const sub of ['items', 'library/math', 'research']) mkdirSync(join(dir, sub), { recursive: true });
   const save = (base, path, value) => { mkdirSync(resolve(base, path, '..'), { recursive: true }); writeFileSync(resolve(base, path), typeof value === 'string' || Buffer.isBuffer(value) ? value : JSON.stringify(value, null, 2) + '\n'); };
-  let before = `---\nid: ${id}\nkind: theorem\ntitle: A theorem on R^n\nstatus: published\ndeps: []\naliases: [supplier-alias]\nprovenance: {statement: literature-derived, proof: ai-altered}\nverification:\n  precheck: pass\n  audited: 2026-09-30\n---\n\n## Statement\n\nFor the given object, $A=A$.\n\n## Facts & Assumptions\n\n[L1] Equality is reflexive. [given]\n\n## Proof\n\n**Proof technique:** direct on $A$.\n\n1.1 Reflexivity gives $A=A$. [L1]\n`;
+  let before = `---\nid: ${id}\nkind: ${definition ? 'definition' : 'theorem'}\ntitle: A theorem on R^n\nstatus: published\ndeps: []\naliases: [supplier-alias]\nprovenance: {statement: literature-derived, proof: ai-altered}\nverification:\n  precheck: pass\n  audited: 2026-09-30\n---\n\n## Statement\n\nFor the given object, $A=A$.\n\n## Facts & Assumptions\n\n[L1] Equality is reflexive. [given]\n\n## Proof\n\n**Proof technique:** direct on $A$.\n\n1.1 Reflexivity gives $A=A$. [L1]\n`;
+  if (definition) before = before.replace('## Statement', '## Definition').replace(/\n## Facts & Assumptions[\s\S]*$/, '\n');
   if (mode === 'fact-label') {
     before = before.replace('deps: []', 'deps: [lem-title-target]').replace('[L1] Equality is reflexive. [given]', '[L1] Equality is reflexive. [given]\n\n[F2] The evaluation kernel is maximal ([[lem-title-target]]).');
     before += '\n## Sources\n\nExact unchanged source section.\n';
@@ -28,7 +30,7 @@ function fixture(t, { mode = 'technique', authored = false, factLabel = String.r
   save(source, 'library/math/supplier.md', `---\npage: supplier\nstatus: published\nitems: [${id}${mode === 'fact-label' ? ', lem-title-target' : ''}]\n---\n`);
   importMathematics(root, source);
   const repairPath = `research/source-repair/receipts/${id}.json`;
-  let after = before.replace(/verification:\n(?:  [^\n]*\n)*/, '').replace('---\n', `---\nverification:\n  repair: ${repairPath}\n  precheck: pass\n`);
+  let after = before.replace(/verification:\n(?:  [^\n]*\n)*/, '').replace('---\n', `---\nverification:\n  repair: ${repairPath}\n  precheck: ${definition ? 'n/a' : 'pass'}\n`);
   if (mode === 'technique') after = after.replace('**Proof technique:** direct on $A$.', '**Proof technique:** direct on A.');
   if (mode === 'title') after = after.replace('title: A theorem on R^n', () => "title: 'A theorem on $\\mathbb R^n$'");
   if (mode === 'step') after = after.replace('1.1 Reflexivity gives $A=A$. [L1]', '1.1 The identity map on the given object has equal domain and codomain; reflexivity gives $A=A$. [L1]');
@@ -46,11 +48,11 @@ function fixture(t, { mode = 'technique', authored = false, factLabel = String.r
   const adjudication = { id, changed: true, mathematical_meaning_preserved: true, proof_independent: true, diagram_mathematics_corrected: false,
     findings: [{ verdict: 'confirmed', status: 'repaired', reason: 'Synthetic recorded rendering finding for isolated structural tests only.' }] };
   save(source, adjudicationPath, adjudication);
-  const check = tool => ({ command: ['node', tool === 'precheck' ? 'tools/precheck.mts' : 'tools/rendercheck.mjs', `items/${id}.md`], exit_code: 0,
-    output: tool === 'precheck' ? `PASS items/${id}.md\n1 checked, 0 failing` : 'OK — 1 file(s)', checked_at: '2026-10-23T00:00:01Z', content_sha256: content });
+  const check = tool => ({ command: ['node', tool === 'precheck' ? 'tools/precheck.mts' : 'tools/rendercheck.mjs', `items/${id}.md`, ...(definition && tool === 'precheck' ? ['--json'] : [])], exit_code: 0,
+    output: tool === 'precheck' ? definition ? JSON.stringify({summary:{files:1,checked:0,failed:0},results:[{file:`items/${id}.md`,item_id:id,status:'not-applicable'}]}) : `PASS items/${id}.md\n1 checked, 0 failing` : 'OK — 1 file(s)', checked_at: '2026-10-23T00:00:01Z', content_sha256: content });
   const repair = { version: 1, kind: 'recorded-local-published-repair', id, run: 'source-repair', group: 'g', correction: 'Exact synthetic rendering presentation correction.', content_sha256: content,
     before_file: beforePath, before_raw_sha256: sha(before), pre_sha256: itemHashGuard(before), recorded_at: '2026-10-23T00:00:03Z', ledger_marker: marker, ledger_sha256: sha(block),
-    local_checks: { precheck: check('precheck'), rendercheck: check('rendercheck') }, proof_layout: { command: ['node', 'tools/proof-layout.mjs', `items/${id}.md`], exit_code: 0, output: 'proof-layout: 1 items, 1 steps, 0 defects', checked_at: '2026-10-23T00:00:02Z', content_sha256: content },
+    local_checks: { precheck: check('precheck'), rendercheck: check('rendercheck') }, proof_layout: { command: ['node', 'tools/proof-layout.mjs', `items/${id}.md`], exit_code: 0, output: `proof-layout: 1 items, ${definition ? 0 : 1} steps, 0 defects`, checked_at: '2026-10-23T00:00:02Z', content_sha256: content },
     adjudication_file: adjudicationPath, adjudication_sha256: sha(readFileSync(join(source, adjudicationPath))) };
   save(source, repairPath, repair);
   const pages = [];
@@ -65,7 +67,7 @@ function fixture(t, { mode = 'technique', authored = false, factLabel = String.r
   save(root, evidence, 'Root fixture review of exact scientific hypotheses, proof presentation equivalence and every actual declared consumer use. No real scientific approval is issued by this test.');
   save(root, ownership, claimLine); save(root, ledger, block);
   const hashFile = path => sha(readFileSync(resolve(root, path)));
-  const changes = originalRenderingChanges(Buffer.from(before), Buffer.from(after));
+  const changes = presentationVersion === 2 ? originalPresentationChanges(Buffer.from(before), Buffer.from(after)) : originalRenderingChanges(Buffer.from(before), Buffer.from(after));
   const scope = authored ? { kind: 'authored-frontier', frontier: Object.fromEntries(Array.from({ length: 7 }, (_, i) => { const path = `research/demo-batch-${i + 1}.pages.json`; return [path, hashFile(path)]; })) }
     : { kind: 'proposed-pages', selector: { path: selector, sha256: hashFile(selector) }, plan: { path: 'research/plan-spec.json', sha256: hashFile('research/plan-spec.json') }, pages: pages.map(p => p.id), declarations_sha256: sha(JSON.stringify(pages)) };
   const entry = { path: `items/${id}.md`, pinned_sha256: sha(before), original_path: join(source, `items/${id}.md`), original_sha256: sha(after), repair_receipt: { path: join(source, repairPath), sha256: hashFile(join(source, repairPath)) },
@@ -75,7 +77,7 @@ function fixture(t, { mode = 'technique', authored = false, factLabel = String.r
     proof_step_reviews: Object.fromEntries(changes.steps.filter(s => s.kind === 'equivalent-presentation').map(s => [s.label, 'Root fixture checks this exact numbered-step rewrite, its unchanged maps and support labels, and its equivalence without any new premise or result.'])),
     evidence: [{ path: evidence, sha256: hashFile(evidence) }], consumers: declarations.map(d => ({ id: d.id, decision: 'unaffected', declaration_sha256: sha(JSON.stringify(d)), source_sha256: authored ? hashFile(`items/${d.id}.md`) : null,
       reason: authored ? 'Root fixture reads this current authored consumer and exact declared use; the supplier presentation change does not alter its hypothesis or argument.' : 'Root fixture reads this nonempty planned declaration and supplier interface; absent source/proof is explicitly not claimed authored or reviewed.' })) };
-  if (mode === 'fact-label') entry.fact_reference_reviews = entry.changes.fact_reference_labels.map(delta => ({
+  if (mode === 'fact-label' && presentationVersion !== 2) entry.fact_reference_reviews = entry.changes.fact_reference_labels.map(delta => ({
     fact_label: delta.fact_label, reference_index: delta.reference_index, target: delta.target,
     pinned_target: {path:'items/lem-title-target.md',sha256:hashFile('items/lem-title-target.md'),title:'Evaluation at a point has kernel (x_1-a_1, ..., x_n-a_n)'},
     reason:'Root fixture reviews this exact added reference display label against the pinned target title, with the same kernel assertion and target; this is no scientific acceptance.',
@@ -84,6 +86,15 @@ function fixture(t, { mode = 'technique', authored = false, factLabel = String.r
   if (mode === 'terminal-heading') entry.terminal_source_heading_review = {kind:'terminal-source-heading',step_label:'1.1',
     reason:'Root fixture reviews this exact final-step end-marker and glued source heading presentation repair; all proof argument and entire source qualification text remain identical.',
     reading_limits:'Only this exact terminal heading presentation is fixture-reviewed, without new source retrieval, proof acceptance, additional premises or authored consumer coverage.'};
+  if (presentationVersion === 2) {
+    entry.presentation_version = 2;
+    Object.assign(entry.scientific_review, changes.review_classification);
+    entry.presentation_reviews = changes.deltas.map(delta => ({delta_id:delta.id,delta_sha256:sha(JSON.stringify(delta)),
+      reason:'Root synthetic fixture explicitly reviews this exact before/after title, interface, Fact or derived exposition pair; no real mathematical approval is granted by a fixture.',
+      reading_limits:'Only this exact synthetic delta and declared fixture use are reviewed; no real paper reading, source approval, imported publication or native permission is claimed.',
+      evidence:[{path:evidence,sha256:hashFile(evidence)}],
+      ...(delta.target ? {pinned_target:{path:`items/${delta.target}.md`,sha256:hashFile(`items/${delta.target}.md`)}} : {})}));
+  }
   const review = { version: 1, kind: 'root-reviewed-original-rendering-successors', run, reviewer: '/root', native_review: false,
     reason: 'Root fixture individually reviews the exact source successor and its consumer consequences; immutable imports remain authoritative local snapshots and all native duties remain.', import_receipt_sha256: hashFile('research/math-imports.json'), scope, entries: [entry], inputs: {} };
   function seal() {
@@ -92,6 +103,7 @@ function fixture(t, { mode = 'technique', authored = false, factLabel = String.r
       [entry.path]: entry.pinned_sha256, [entry.original_path]: entry.original_sha256, [entry.repair_receipt.path]: entry.repair_receipt.sha256,
       [join(source, beforePath)]: sha(before), [join(source, adjudicationPath)]: repair.adjudication_sha256,
       ...Object.fromEntries((entry.fact_reference_reviews ?? []).map(r => [r.pinned_target.path, r.pinned_target.sha256])),
+      ...Object.fromEntries((entry.presentation_reviews ?? []).filter(r=>r.pinned_target).map(r=>[r.pinned_target.path,r.pinned_target.sha256])),
       [ownership]: entry.ownership_evidence.sha256, [ledger]: entry.ledger_evidence.sha256, [evidence]: entry.evidence[0].sha256,
       ...(authored ? Object.fromEntries(entry.consumers.map(c => [`items/${c.id}.md`, c.source_sha256])) : {}) };
     save(root, originalRenderingMaintenancePath(root, run, authored ? null : selector), review);
@@ -236,4 +248,32 @@ test('terminal source heading repair rejects any other marker, heading, proof, s
     if(kind==='short-reason')g.entry.terminal_source_heading_review.reason='stamp';
     g.seal();assert.throws(()=>g.verify(),/terminal source heading review/);
   }
+});
+
+// V2 remains opt-in through the same authenticated source, scope and consumer guards.
+for (const options of [{mode:'title'}, {mode:'remarks'}, {mode:'fact-label'}, {mode:'step'}, {mode:'title',definition:true}, {mode:'remarks',definition:true}]) test(`V2 authenticated ${options.mode} successor${options.definition?' definition':''} preserves pins`,t=>{
+  const f=fixture(t,{...options,presentationVersion:2,authored:true}),pin=readFileSync(join(f.root,`items/${f.id}.md`)),receipt=readFileSync(join(f.root,'research/math-imports.json'));
+  f.seal();assert.ok(f.verify()>0);assert.deepEqual(readFileSync(join(f.root,`items/${f.id}.md`)),pin);assert.deepEqual(readFileSync(join(f.root,'research/math-imports.json')),receipt);
+  const bad=f.entry.presentation_reviews[0];bad.delta_sha256='0'.repeat(64);f.seal();assert.throws(()=>f.verify(),/unreviewed V2 delta/);
+});
+test('V2 cannot bypass authenticated original repairs, consumer hashes or owner tool bindings',t=>{
+  for(const mode of ['consumer','claim','evidence','protocol','definition-precheck']){
+    const f=fixture(t,{mode:'title',presentationVersion:2,authored:true,definition:mode==='definition-precheck'});f.seal();assert.ok(f.verify()>0);
+    if(mode==='consumer') f.save(f.root,`items/${f.declarations[0].id}.md`,readFileSync(join(f.root,`items/${f.declarations[0].id}.md`),'utf8')+'\nChanged unreviewed authored consumer.\n');
+    if(mode==='claim') f.save(f.source,'research/source-repair-step3-published-claims.jsonl','');
+    if(mode==='evidence') f.save(f.root,f.evidence,'Changed unbound review.');
+    if(mode==='protocol'){f.entry.presentation_version=3;f.seal();}
+    if(mode==='definition-precheck') f.save(f.source,`items/${f.id}.md`,f.after.replace('precheck: n/a','precheck: pass'));
+    assert.throws(()=>f.verify(),/changed input|authentication|unsupported presentation|mathematics import changed/i);
+  }
+});
+
+test('native planning snapshot binds the V2 extractor bytes as an input',t=>{
+  const f=fixture(t),tool='tools/physics-support/original-presentation-maintenance.mjs';
+  f.save(f.root,tool,'Synthetic V2 helper bytes A.');
+  const ctx={repo:f.root,run:f.run},gates=[{id:'planned',argv:['node','tools/physics-support/physics-check.mjs','--plan','research/plan-spec.json','--pages-file',f.selector,'--maintenance-run',f.run]}];
+  f.seal();const a=gateReviewSnapshot(ctx,gates,['1-drift']);
+  assert.equal(a.inputs.find(i=>i.path===join(f.root,tool)).sha256,f.hashFile(tool));
+  f.save(f.root,tool,'Synthetic V2 helper bytes B.');
+  assert.notEqual(gateReviewSnapshot(ctx,gates,['1-drift']).sha256,a.sha256);
 });
