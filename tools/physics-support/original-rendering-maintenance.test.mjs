@@ -11,15 +11,21 @@ import { itemHashGuard } from '../item-hash.mjs';
 import { gateReviewSnapshot } from '../physics-autopilot/src/owner-gate-recertification.mjs';
 const sha = bytes => createHash('sha256').update(bytes).digest('hex');
 // All receipts here are synthetic test fixtures; they confer no real review.
-function fixture(t, { mode = 'technique', authored = false } = {}) {
+function fixture(t, { mode = 'technique', authored = false, factLabel = String.raw`Evaluation at a point has kernel $(x_1-a_1, \ldots, x_n-a_n)$` } = {}) {
   const base = mkdtempSync(join(tmpdir(), 'original-rendering-'));
   t.after(() => rmSync(base, { recursive: true, force: true }));
   const root = join(base, 'physics'), source = join(base, 'math'), run = 'demo', id = 'thm-supplier';
   for (const dir of [root, source]) for (const sub of ['items', 'library/math', 'research']) mkdirSync(join(dir, sub), { recursive: true });
   const save = (base, path, value) => { mkdirSync(resolve(base, path, '..'), { recursive: true }); writeFileSync(resolve(base, path), typeof value === 'string' || Buffer.isBuffer(value) ? value : JSON.stringify(value, null, 2) + '\n'); };
-  const before = `---\nid: ${id}\nkind: theorem\ntitle: A theorem on R^n\nstatus: published\ndeps: []\naliases: [supplier-alias]\nprovenance: {statement: literature-derived, proof: ai-altered}\nverification:\n  precheck: pass\n  audited: 2026-09-30\n---\n\n## Statement\n\nFor the given object, $A=A$.\n\n## Facts & Assumptions\n\n[L1] Equality is reflexive. [given]\n\n## Proof\n\n**Proof technique:** direct on $A$.\n\n1.1 Reflexivity gives $A=A$. [L1]\n`;
+  let before = `---\nid: ${id}\nkind: theorem\ntitle: A theorem on R^n\nstatus: published\ndeps: []\naliases: [supplier-alias]\nprovenance: {statement: literature-derived, proof: ai-altered}\nverification:\n  precheck: pass\n  audited: 2026-09-30\n---\n\n## Statement\n\nFor the given object, $A=A$.\n\n## Facts & Assumptions\n\n[L1] Equality is reflexive. [given]\n\n## Proof\n\n**Proof technique:** direct on $A$.\n\n1.1 Reflexivity gives $A=A$. [L1]\n`;
+  if (mode === 'fact-label') {
+    before = before.replace('deps: []', 'deps: [lem-title-target]').replace('[L1] Equality is reflexive. [given]', '[L1] Equality is reflexive. [given]\n\n[F2] The evaluation kernel is maximal ([[lem-title-target]]).');
+    before += '\n## Sources\n\nExact unchanged source section.\n';
+    save(source, 'items/lem-title-target.md', '---\nid: lem-title-target\nkind: lemma\nstatus: published\ndeps: []\ntitle: "Evaluation at a point has kernel (x_1-a_1, ..., x_n-a_n)"\n---\n\n## Statement\nExact fixed evaluation-kernel supplier.\n');
+  }
+  if (mode === 'terminal-heading') before = before.replace('1.1 Reflexivity gives $A=A$. [L1]\n', '1.1 Reflexivity gives $A=A$. [L1] $\\square$ ## Source qualification\n\nExact unchanged source qualification.\n');
   save(source, `items/${id}.md`, before);
-  save(source, 'library/math/supplier.md', `---\npage: supplier\nstatus: published\nitems: [${id}]\n---\n`);
+  save(source, 'library/math/supplier.md', `---\npage: supplier\nstatus: published\nitems: [${id}${mode === 'fact-label' ? ', lem-title-target' : ''}]\n---\n`);
   importMathematics(root, source);
   const repairPath = `research/source-repair/receipts/${id}.json`;
   let after = before.replace(/verification:\n(?:  [^\n]*\n)*/, '').replace('---\n', `---\nverification:\n  repair: ${repairPath}\n  precheck: pass\n`);
@@ -28,6 +34,8 @@ function fixture(t, { mode = 'technique', authored = false } = {}) {
   if (mode === 'step') after = after.replace('1.1 Reflexivity gives $A=A$. [L1]', '1.1 The identity map on the given object has equal domain and codomain; reflexivity gives $A=A$. [L1]');
   if (mode === 'remarks' || mode === 'remarks-tikz' || mode === 'step') after += '\n## Remarks\n\nThe following square displays the identity maps used in the unchanged argument.\n\n```tikzcd\nA \\arrow[r] \\arrow[d] & A \\arrow[d] \\\\\nA \\arrow[r] & A\n```\n';
   if (mode === 'remarks-tikz') after = after.replace(/```tikzcd[\s\S]*?```/, '```tikz\n\\begin{tikzpicture}\n\\node (A) {A};\n\\end{tikzpicture}\n```');
+  if (mode === 'fact-label') after = after.replace('[[lem-title-target]]', `[[lem-title-target|${factLabel}]]`);
+  if (mode === 'terminal-heading') after = after.replace('$\\square$ ## Source qualification\n', '∎\n\n## Source qualification\n');
   save(source, `items/${id}.md`, after);
   const content = itemHashGuard(after), claim = { version: 1, run: 'source-repair', group: 'g', id, pre_sha256: itemHashGuard(before), claimed_at: '2026-10-23T00:00:00Z' };
   const claimLine = JSON.stringify(claim) + '\n', block = `\n${id}: exact fixture repair ${content}.\n`, marker = 'rendering:' + id;
@@ -62,11 +70,20 @@ function fixture(t, { mode = 'technique', authored = false } = {}) {
     : { kind: 'proposed-pages', selector: { path: selector, sha256: hashFile(selector) }, plan: { path: 'research/plan-spec.json', sha256: hashFile('research/plan-spec.json') }, pages: pages.map(p => p.id), declarations_sha256: sha(JSON.stringify(pages)) };
   const entry = { path: `items/${id}.md`, pinned_sha256: sha(before), original_path: join(source, `items/${id}.md`), original_sha256: sha(after), repair_receipt: { path: join(source, repairPath), sha256: hashFile(join(source, repairPath)) },
     ownership_evidence: { path: ownership, sha256: hashFile(ownership) }, ledger_evidence: { path: ledger, sha256: hashFile(ledger) }, changes,
-    scientific_review: { statements: 'identical', facts: 'identical', hypotheses: 'identical', proof: 'equivalent-presentation', new_premises: false, new_results: false,
+    scientific_review: { statements: 'identical', facts: mode === 'fact-label' ? 'reference-labels-only' : 'identical', hypotheses: 'identical', proof: 'equivalent-presentation', new_premises: false, new_results: false,
       reason: 'Root fixture independently checks the exact listed source deltas and unchanged logical assumptions and result; this is not a general normalization or audit.', reading_limits: 'Only exact presentation deltas and declared consumer interfaces are fixture-reviewed; no full proof audit, reading coverage or native acceptance is inferred.' },
     proof_step_reviews: Object.fromEntries(changes.steps.filter(s => s.kind === 'equivalent-presentation').map(s => [s.label, 'Root fixture checks this exact numbered-step rewrite, its unchanged maps and support labels, and its equivalence without any new premise or result.'])),
     evidence: [{ path: evidence, sha256: hashFile(evidence) }], consumers: declarations.map(d => ({ id: d.id, decision: 'unaffected', declaration_sha256: sha(JSON.stringify(d)), source_sha256: authored ? hashFile(`items/${d.id}.md`) : null,
       reason: authored ? 'Root fixture reads this current authored consumer and exact declared use; the supplier presentation change does not alter its hypothesis or argument.' : 'Root fixture reads this nonempty planned declaration and supplier interface; absent source/proof is explicitly not claimed authored or reviewed.' })) };
+  if (mode === 'fact-label') entry.fact_reference_reviews = entry.changes.fact_reference_labels.map(delta => ({
+    fact_label: delta.fact_label, reference_index: delta.reference_index, target: delta.target,
+    pinned_target: {path:'items/lem-title-target.md',sha256:hashFile('items/lem-title-target.md'),title:'Evaluation at a point has kernel (x_1-a_1, ..., x_n-a_n)'},
+    reason:'Root fixture reviews this exact added reference display label against the pinned target title, with the same kernel assertion and target; this is no scientific acceptance.',
+    reading_limits:'Only this exact presentation mapping and unchanged Fact assertion are fixture-reviewed; no full proof reading or independent source acceptance is claimed.',
+  }));
+  if (mode === 'terminal-heading') entry.terminal_source_heading_review = {kind:'terminal-source-heading',step_label:'1.1',
+    reason:'Root fixture reviews this exact final-step end-marker and glued source heading presentation repair; all proof argument and entire source qualification text remain identical.',
+    reading_limits:'Only this exact terminal heading presentation is fixture-reviewed, without new source retrieval, proof acceptance, additional premises or authored consumer coverage.'};
   const review = { version: 1, kind: 'root-reviewed-original-rendering-successors', run, reviewer: '/root', native_review: false,
     reason: 'Root fixture individually reviews the exact source successor and its consumer consequences; immutable imports remain authoritative local snapshots and all native duties remain.', import_receipt_sha256: hashFile('research/math-imports.json'), scope, entries: [entry], inputs: {} };
   function seal() {
@@ -74,6 +91,7 @@ function fixture(t, { mode = 'technique', authored = false } = {}) {
       ...(authored ? scope.frontier : { [selector]: scope.selector.sha256, 'research/plan-spec.json': scope.plan.sha256 }),
       [entry.path]: entry.pinned_sha256, [entry.original_path]: entry.original_sha256, [entry.repair_receipt.path]: entry.repair_receipt.sha256,
       [join(source, beforePath)]: sha(before), [join(source, adjudicationPath)]: repair.adjudication_sha256,
+      ...Object.fromEntries((entry.fact_reference_reviews ?? []).map(r => [r.pinned_target.path, r.pinned_target.sha256])),
       [ownership]: entry.ownership_evidence.sha256, [ledger]: entry.ledger_evidence.sha256, [evidence]: entry.evidence[0].sha256,
       ...(authored ? Object.fromEntries(entry.consumers.map(c => [`items/${c.id}.md`, c.source_sha256])) : {}) };
     save(root, originalRenderingMaintenancePath(root, run, authored ? null : selector), review);
@@ -81,7 +99,7 @@ function fixture(t, { mode = 'technique', authored = false } = {}) {
   const verify = options => verifyMathematicsImports(root, authored ? { run, ...options } : { planning: true, proposedPages: pages, maintenanceRun: run, maintenanceSelector: selector, ...options });
   return { root, source, run, id, before, after, repair, repairPath, adjudicationPath, beforePath, entry, review, pages, declarations, selector, evidence, ownership, ledger, seal, save, hashFile, verify };
 }
-for (const mode of ['technique', 'title', 'remarks', 'remarks-tikz', 'step']) test(`exact ${mode} successor accepts 21 planned absent carriers and preserves local pins`, t => {
+for (const mode of ['technique', 'title', 'remarks', 'remarks-tikz', 'step', 'fact-label', 'terminal-heading']) test(`exact ${mode} successor accepts 21 planned absent carriers and preserves local pins`, t => {
   const f = fixture(t, { mode }), local = readFileSync(join(f.root, `items/${f.id}.md`)), pin = readFileSync(join(f.root, 'research/math-imports.json'));
   assert.throws(() => f.verify(), /mathematics import changed/); f.seal(); assert.ok(f.verify() > 0);
   assert.deepEqual(readFileSync(join(f.root, `items/${f.id}.md`)), local); assert.deepEqual(readFileSync(join(f.root, 'research/math-imports.json')), pin);
@@ -169,4 +187,53 @@ test('added Remarks requires a complete standalone tikz or tikzcd fence, never a
     s => s.replace(/\n```\n$/, '\n'),
     s => s.replace('```tikz\n', '```javascript\n'),
   ]) assert.throws(() => originalRenderingChanges(Buffer.from(f.before), Buffer.from(edit(f.after))), /unsupported added remarks/);
+});
+
+test('Fact label successor keeps surrounding premises, ordered targets and unchanged Sources exact', t => {
+  const f = fixture(t, {mode:'fact-label'});
+  for (const edit of [
+    s => s.replace('The evaluation kernel is maximal', 'The evaluation kernel is prime'),
+    s => s.replace('[[lem-title-target|', '[[lem-different-target|'),
+    s => s.replace('[F2] The evaluation', '[F3] The evaluation'),
+    s => s.replace('Exact unchanged source section.', 'A changed source.'),
+    s => s.replace('## Sources', '## Unsupported'),
+  ]) assert.throws(() => originalRenderingChanges(Buffer.from(f.before),Buffer.from(edit(f.after))), /Fact|source|section/);
+  const labeledBefore=f.before.replace('[[lem-title-target]]','[[lem-title-target|Existing label]]');
+  assert.throws(() => originalRenderingChanges(Buffer.from(labeledBefore),Buffer.from(f.after)),/reference-label/);
+});
+test('Fact label review rejects missing review, false identical-facts claim, changed target binding or unapproved label transformations', t => {
+  for (const mode of ['missing','facts-enum','target','title','hash','reason','reading','input']) {
+    const f=fixture(t,{mode:'fact-label'}), review=f.entry.fact_reference_reviews[0];
+    if(mode==='missing')f.entry.fact_reference_reviews=[];
+    if(mode==='facts-enum')f.entry.scientific_review.facts='identical';
+    if(mode==='target')review.target='lem-different-target';
+    if(mode==='title')review.pinned_target.title+=' changed';
+    if(mode==='hash')review.pinned_target.sha256='0'.repeat(64);
+    if(mode==='reason')review.reason='stamp';
+    if(mode==='reading')review.reading_limits='none';
+    f.seal();
+    if(mode==='input'){delete f.review.inputs['items/lem-title-target.md'];f.save(f.root,originalRenderingMaintenancePath(f.root,f.run,f.selector),f.review);}
+    assert.throws(()=>f.verify(),/original rendering successor|mathematics import changed/i,mode);
+  }
+});
+
+test('even fully authenticated Root fixture evidence cannot permit any extra Fact label normalization', t => {
+  const label=String.raw`Evaluation at a point has kernel $(x_1-a_1, \ldots, x_n-a_n)$`;
+  for(const invalid of [label.replace('x_1-a_1','x_2-a_2'),label.replace('Evaluation',String.raw`\mathrm{Evaluation}`),label.replace('$',''),label.replace(', ', ',  '),label.replace(String.raw`\ldots`,String.raw`\\ldots`)]) {
+    const f=fixture(t,{mode:'fact-label',factLabel:invalid}); f.seal();
+    assert.throws(()=>f.verify(),/Fact label|unpaired math/,invalid);
+  }
+});
+
+test('terminal source heading repair rejects any other marker, heading, proof, source or movement changes', t => {
+  const f=fixture(t,{mode:'terminal-heading'});
+  for(const edit of [s=>s.replace('∎','QED'),s=>s.replace('∎\n\n','∎\n'),s=>s.replace('Source qualification','Sources'),s=>s.replace('Reflexivity gives','An added premise gives'),s=>s.replace('Exact unchanged source qualification.','Changed source qualification.')])
+    assert.throws(()=>originalRenderingChanges(Buffer.from(f.before),Buffer.from(edit(f.after))),/terminal source heading/);
+  for(const kind of ['missing','wrong-step','short-reason']) {
+    const g=fixture(t,{mode:'terminal-heading'});
+    if(kind==='missing')delete g.entry.terminal_source_heading_review;
+    if(kind==='wrong-step')g.entry.terminal_source_heading_review.step_label='2.1';
+    if(kind==='short-reason')g.entry.terminal_source_heading_review.reason='stamp';
+    g.seal();assert.throws(()=>g.verify(),/terminal source heading review/);
+  }
 });

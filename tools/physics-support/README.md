@@ -106,3 +106,28 @@ Existing report/result/receipt/section/archive hash bindings, Root reasons,
 current retained edges, import identity/publication/pins, ordinary known-order,
 reading-order and buildability checks remain required. Native owner snapshots
 already bind the sidecar, helper and authenticated import inputs.
+
+An original successor may add a display label to an unlabeled Fact reference
+only with an explicit per-Fact Root review. `changes.fact_reference_labels`
+enumerates the exact Fact label, ordered reference index, unchanged target ID,
+before/after reference bytes and new label. Surrounding Fact bytes and the full
+ordered target sequence remain exact. `scientific_review.facts` must truthfully
+be `reference-labels-only` for this case (`identical` otherwise).
+`fact_reference_reviews` binds each corresponding Fact/index/target to its
+immutable `pinned_target: {path, sha256, title}`, plus substantive Root reason
+and reading limits. The added label must equal that exact pinned title after
+only removing paired inline `$` delimiters and replacing literal `\ldots` by
+`...`; no unescaping, whitespace or other title normalization is permitted.
+Existing display labels cannot be rewritten through this route. The pinned
+target is an additional bound owner-snapshot input. An unchanged final
+`## Sources` section may be preserved; any source-byte delta is rejected.
+
+A separate `changes.terminal_source_heading` records the exact old/new suffix
+and final proof-step label for the narrow repair `$\square$ ## Source
+qualification` followed by a newline to `∎`, a blank line and the standalone
+`## Source qualification` heading. The entire remaining body, including source
+qualification text, must be byte-identical. Root must supply the matching
+`terminal_source_heading_review: {kind: terminal-source-heading, step_label,
+reason, reading_limits}`. This is no general whitespace, end-marker or source
+heading normalization. Every existing finalized main repair, adjudication,
+recorded check, exact delta, scientific and consumer-review guard still applies.
